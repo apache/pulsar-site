@@ -39,33 +39,44 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      # - name: Tune Runner VM
-      #   uses: ./.github/actions/tune-runner-vm
+      - name: Tune Runner VM
+        uses: ./.github/actions/tune-runner-vm
 
-      # - name: Cache local Maven repository
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       ~/.m2/repository/*/*/*
-      #       !~/.m2/repository/org/apache/pulsar
-      #     key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
-      #       ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
-      #       ${{ runner.os }}-m2-dependencies-core-modules-
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.m2/repository/*/*/*
+            !~/.m2/repository/org/apache/pulsar
+          key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
+            ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
+            ${{ runner.os }}-m2-dependencies-core-modules-
 
-      # - name: Set up JDK 11
-      #   uses: actions/setup-java@v2
-      #   with:
-      #     distribution: 'temurin'
-      #     java-version: 11
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 11
 
-      # - name: clean disk
-      #   run: |
-      #     sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-      #     sudo apt clean
-      #     docker rmi $(docker images -q) -f
-      #     df -h
+      - name: Clean disk
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo apt clean
+          docker rmi $(docker images -q) -f
+          df -h
+
+      - name: Build Pulsar and Generate swagger json file
+        env:
+          GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
+          CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
+        run: |
+          cd ../
+          git clone https://github.com/apache/pulsar.git
+          cd pulsar
+          mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+          mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
       # - name: run install by skip tests
       #   run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
@@ -73,18 +84,15 @@ jobs:
       # - name: generate swagger json file
       #   run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
-      - name: publish
+      - name: Publish
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
-          ls -l
-          echo "clone pulsar..."
-          cd ../
-          git clone https://github.com/apache/pulsar.git
-          ls -l
           pwd
+          ls -l
           echo "testing..."
+
           # export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
           # echo "Copying swagger json file ..."
           # mkdir -p site2/website-next/static/swagger/master/
