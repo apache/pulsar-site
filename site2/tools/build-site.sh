@@ -91,7 +91,7 @@ EOF
 
 set -x -e
 
-export NODE_OPTIONS="--max-old-space-size=4096" #increase to 4GB, default is 512MB
+export NODE_OPTIONS="--max-old-space-size=8192" #increase to 8GB, default is 512MB
 ${ROOT_DIR}/site2/tools/generate-api-docs.sh
 cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 
