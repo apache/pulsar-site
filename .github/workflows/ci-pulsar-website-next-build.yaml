@@ -67,22 +67,23 @@ jobs:
           docker rmi $(docker images -q) -f
           df -h
 
-      - name: Build Pulsar and Generate swagger json file
+      - name: Clone Pulsar
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
           cd ../
           git clone https://github.com/apache/pulsar.git
-          cd pulsar
+
+      - name: Run install by skip tests
+        run: |
+          cd ../pulsar 
           mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+
+      - name: Generate swagger json file
+        run: |
+          cd ../pulsar 
           mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
-
-      # - name: run install by skip tests
-      #   run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
-
-      # - name: generate swagger json file
-      #   run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
       - name: Publish
         env:
@@ -93,10 +94,13 @@ jobs:
           ls -l
           echo "testing..."
 
-          # export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
-          # echo "Copying swagger json file ..."
-          # mkdir -p site2/website-next/static/swagger/master/
-          # cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
+          export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
+          echo "Copying swagger json file ..."
+          mkdir -p site2/website-next/static/swagger/master/
+          cp ../pulsar/pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
+
+          ls -l site2/website-next/static/swagger
+
           # echo "Copied swagger json file."
           # echo "Building Website"
           # # Build the new website
