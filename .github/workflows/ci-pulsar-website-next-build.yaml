@@ -89,11 +89,13 @@ jobs:
       # - name: Generate swagger json file
       #   run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
-      # - name: Publish
-      #   env:
-      #     GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
-      #     CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
-      #   run: |
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
+          CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
+        run: |
+          echo "TOKEN: "$GH_TOKEN
+          echo "CROWDIN: "$CROWDIN_DOCUSAURUS_API_KEY
       #     export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
       #     echo "Copying swagger json file ..."
       #     mkdir -p site2/website-next/static/swagger/master/
