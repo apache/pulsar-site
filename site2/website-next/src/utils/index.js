@@ -4,9 +4,10 @@ featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
 
 const versions = require("../../versions.json");
 const restApiVersions = require("../../static/swagger/restApiVersions.json");
-const latestStableVersion = versions[0];
 
 const siteConfig = require(`../../docusaurus.config.js`);
+
+export const latestStableVersion = versions[0];
 
 export function imgUrl(img) {
   return siteConfig.baseUrl + "img/" + img;

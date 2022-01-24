@@ -25,7 +25,12 @@ import Logo from "@theme/Logo";
 import IconMenu from "@theme/IconMenu";
 import IconClose from "@theme/IconClose";
 import styles from "./styles.module.css"; // retrocompatible with v1
-import { setVersion, getVersion, getApiVersion } from "../../utils/index.js";
+import {
+  latestStableVersion,
+  setVersion,
+  getVersion,
+  getApiVersion,
+} from "../../utils/index.js";
 
 const DefaultNavItemPosition = "right";
 
