@@ -2,7 +2,7 @@ const React = require("react");
 import Layout from "@theme/Layout";
 import { setVersion, getVersion, getApiVersion } from "../utils/index.js";
 
-function parseVersion() {
+function parseVersion(pathName) {
   let swagger = "swagger";
   if (pathName.indexOf("functions") > -1) {
     swagger = "swaggerfunctions";
@@ -31,17 +31,18 @@ function parseVersion() {
 }
 class RestApi extends React.Component {
   componentDidMount() {
-    let [version, apiversion] = parseVersion();
+    let pathName = window.location.pathname;
 
-    var pathName = window.location.pathname;
-    var params = window.location.search;
+    let [version, apiversion] = parseVersion(pathName);
+
+    let params = window.location.search;
     params = params.replace("?", "");
     const paramsList = params.split("&");
     if (paramsList && paramsList.length > 0) {
       version = "master";
       apiversion = "";
-      for (var i in paramsList) {
-        var param = paramsList[i].split("=");
+      for (let i; in paramsList) {
+        let param = paramsList[i].split("=");
         if (param[0] === "version") {
           version = param[1];
         }
