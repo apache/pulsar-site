@@ -2,6 +2,10 @@ const users = require(`../../data/users.js`);
 const featuredUsers = users.filter((x) => x.hasOwnProperty("featured"));
 featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
 
+const versions = require("../../versions.json");
+const restApiVersions = require("../../static/swagger/restApiVersions.json");
+const latestStableVersion = versions[0];
+
 const siteConfig = require(`../../docusaurus.config.js`);
 
 export function imgUrl(img) {
@@ -32,4 +36,26 @@ export function getCache() {
     return null;
   }
   return windowGlobal.localStorage;
+}
+
+export function setVersion(version) {
+  getCache().setItem("version", version == "next" ? "master" : version);
+}
+
+export function getVersion() {
+  if (!getCache()) {
+    return latestStableVersion;
+  }
+  return getCache().getItem("version") || latestStableVersion;
+}
+
+export function getApiVersion(anchor) {
+  let version = getVersion();
+  let apiVersion = "";
+  if (restApiVersions[version][0]["fileName"].indexOf(anchor) == 0) {
+    apiVersion = restApiVersions[version][0]["version"];
+  } else {
+    apiVersion = restApiVersions[version][1]["version"];
+  }
+  return apiVersion;
 }

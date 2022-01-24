@@ -25,34 +25,9 @@ import Logo from "@theme/Logo";
 import IconMenu from "@theme/IconMenu";
 import IconClose from "@theme/IconClose";
 import styles from "./styles.module.css"; // retrocompatible with v1
-import { docUrl, getCache } from "../../utils/index.js";
+import { setVersion, getVersion, getApiVersion } from "../../utils/index.js";
 
 const DefaultNavItemPosition = "right";
-const versions = require("../../../versions.json");
-const restApiVersions = require("../../../static/swagger/restApiVersions.json");
-const latestStableVersion = versions[0];
-
-function setVersion(version) {
-  getCache().setItem("version", version == "next" ? "master" : version);
-}
-
-function getVersion() {
-  if (!getCache()) {
-    return latestStableVersion;
-  }
-  return getCache().getItem("version") || latestStableVersion;
-}
-
-function getApiVersion(anchor) {
-  let version = getVersion();
-  let apiVersion = "";
-  if (restApiVersions[version][0]["fileName"].indexOf(anchor) == 0) {
-    apiVersion = restApiVersions[version][0]["version"];
-  } else {
-    apiVersion = restApiVersions[version][1]["version"];
-  }
-  return apiVersion;
-}
 
 function getLauguage() {
   return "";
@@ -244,7 +219,14 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }) {
                 });
               }
               return (
-                <NavbarItem mobile {...item} onClick={toggleSidebar} key={i} />
+                <NavbarItem
+                  mobile
+                  {...item}
+                  onClick={(item) => {
+                    toggleSidebar(item);
+                  }}
+                  key={i}
+                />
               );
             })}
           </ul>
@@ -334,19 +316,20 @@ function Navbar() {
                 }
                 return {
                   ...e,
-                  link:
-                    e.to +
-                    "?version=" +
-                    getVersion() +
-                    "&apiversion=" +
-                    getApiVersion(param),
+                  link: e.to,
+                  // +
+                  // "?version=" +
+                  // getVersion() +
+                  // "&apiversion=" +
+                  // getApiVersion(param),
                 };
               });
             } else if (item.label == "CLI") {
               item.items = item.items.map((e) => {
                 return {
                   ...e,
-                  link: e.to + "?version=" + getVersion(),
+                  link: e.to,
+                  // + "?version=" + getVersion(),
                 };
               });
             } else if (item.label == "Community") {
