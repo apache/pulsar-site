@@ -38,8 +38,8 @@ class RestApi extends React.Component {
     params = params.replace("?", "");
     const paramsList = params.split("&");
     if (paramsList && paramsList.length > 0) {
-      var version = "master";
-      var apiversion = "";
+      version = "master";
+      apiversion = "";
       for (var i in paramsList) {
         var param = paramsList[i].split("=");
         if (param[0] === "version") {
