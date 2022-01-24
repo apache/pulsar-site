@@ -74,36 +74,29 @@ jobs:
         run: |
           cd ../
           git clone https://github.com/apache/pulsar.git
+          rm -rf pulsar/site2
+          mv pulsar/* pulsar-site/
+          ls -l pulsar-site
 
       - name: Run install by skip tests
-        run: |
-          cd ../pulsar 
-          mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
-
+        run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+          
       - name: Generate swagger json file
-        run: |
-          cd ../pulsar 
-          mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
+        run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
-          pwd
-          ls -l
-          echo "testing..."
-
           export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
           echo "Copying swagger json file ..."
           mkdir -p site2/website-next/static/swagger/master/
-          cp ../pulsar/pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
+          cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
+          echo "Copied swagger json file."
+          echo "Building Website"
+          # Build the new website
+          site2/tools/docker-build-site.sh next
 
-          ls -l site2/website-next/static/swagger
-
-          # echo "Copied swagger json file."
-          # echo "Building Website"
-          # # Build the new website
-          # site2/tools/docker-build-site.sh next
           # # Script was initially made for travis
           # bash -e site2/tools/publish-website.sh next
