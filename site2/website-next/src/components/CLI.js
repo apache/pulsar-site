@@ -51,11 +51,7 @@ class CLI extends React.Component {
     } else {
       version = parseInt(versions[0]) + "." + parseInt(versions[1]) + ".0";
       window.location.href =
-        "http://pulsar.apache.org/tools/" +
-        clientModule +
-        "/" +
-        version +
-        "-SNAPSHOT";
+        "/tools/" + clientModule + "/" + version + "-SNAPSHOT";
     }
   }
 
