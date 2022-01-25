@@ -14,12 +14,21 @@ export function imgUrl(img) {
 }
 
 export function docUrl(doc, language, version) {
+  if (version == "" || version == "next") {
+    return (
+      siteConfig.baseUrl +
+      "docs/" +
+      (language ? language + "/" : "") +
+      (version ? version + "/" : "") +
+      (doc ? doc : "")
+    );
+  }
   return (
-    siteConfig.baseUrl +
-    "docs/" +
-    (language ? language + "/" : "") +
+    siteConfig.customFields.oldUrl +
+    "/docs/" +
+    (language ? language + "/" : "en/") +
     (version ? version + "/" : "") +
-    (doc ? doc : "")
+    (doc ? doc : "standalone/")
   );
 }
 

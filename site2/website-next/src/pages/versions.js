@@ -3,8 +3,7 @@ import Layout from "@theme/Layout";
 import VersionsTable from "../components/VersionsTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
-import { docUrl } from "../utils/index";
-const versions = require("../../versions.json");
+const versions = require("../../versions.full.json");
 const oldversions = require("../../oldversions.json");
 
 export default function DenseTable() {

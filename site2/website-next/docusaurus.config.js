@@ -101,6 +101,7 @@ module.exports = {
   projectName: "pulsar",
   customFields: {
     githubUrl,
+    oldUrl,
   },
   // i18n: {
   //   defaultLocale: "en",
