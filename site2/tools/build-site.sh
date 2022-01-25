@@ -102,7 +102,7 @@ if [ -n "$NEXT" ]; then
   node ./scripts/split-swagger-by-version.js
   yarn build
 else
-  crowdin
+  # crowdin
   yarn build
   node ./scripts/replace.js
   node ./scripts/split-swagger-by-version.js
