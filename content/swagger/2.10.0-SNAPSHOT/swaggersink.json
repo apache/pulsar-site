@@ -213,13 +213,13 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "A JSON value presenting config payload of a Pulsar Sink. All available configuration options are:\n- **classname**\n   The class name of a Pulsar Sink if archive is file-url-path (file://)\n- **sourceSubscriptionName**\n   Pulsar source subscription name if user wants a specific\n   subscription-name for input-topic consumer\n- **inputs**\n   The input topic or topics of a Pulsar Sink (specified as a JSON array)\n- **topicsPattern**\n   TopicsPattern to consume from list of topics under a namespace that    match the pattern. [input] and [topicsPattern] are mutually    exclusive. Add SerDe class name for a pattern in customSerdeInputs    (supported for java fun only)- **topicToSerdeClassName**\n   The map of input topics to SerDe class names (specified as a JSON object)\n- **topicToSchemaType**\n   The map of input topics to Schema types or class names (specified as a JSON object)\n- **inputSpecs**\n   The map of input topics to its consumer configuration, each configuration has schema of    {\"schemaType\": \"type-x\", \"serdeClassName\": \"name-x\", \"isRegexPattern\": true, \"receiverQueueSize\": 5}\n- **configs**\n   The map of configs (specified as a JSON object)\n- **secrets**\n   a map of secretName(aka how the secret is going to be \n   accessed in the function via context) to an object that \n   encapsulates how the secret is fetched by the underlying \n   secrets provider. The type of an value here can be found by the \n   SecretProviderConfigurator.getSecretObjectType() method. (specified as a JSON object)\n- **parallelism**\n   The parallelism factor of a Pulsar Sink (i.e. the number of a Pulsar Sink instances to run \n- **processingGuarantees**\n   The processing guarantees (aka delivery semantics) applied to the Pulsar Sink. Possible Values: \"ATLEAST_ONCE\", \"ATMOST_ONCE\", \"EFFECTIVELY_ONCE\"\n- **retainOrdering**\n   Boolean denotes whether the Pulsar Sink consumes and processes messages in order\n- **resources**\n   {\"cpu\": 1, \"ram\": 2, \"disk\": 3} The CPU (in cores), RAM (in bytes) and disk (in bytes) that needs to be allocated per Pulsar Sink instance (applicable only to Docker runtime)\n- **autoAck**\n   Boolean denotes whether or not the framework will automatically acknowledge messages\n- **timeoutMs**\n   Long denotes the message timeout in milliseconds\n- **cleanupSubscription**\n   Boolean denotes whether the subscriptions the functions created/used should be deleted when the functions is deleted\n- **runtimeFlags**\n   Any flags that you want to pass to the runtime as a single string\n",
+          "description" : "You can submit a sink (in any languages that you are familiar with) to a Pulsar cluster. Follow the steps below.\n1. Create a JSON object using some of the following parameters.\nA JSON value presenting config payload of a Pulsar Sink. All available configuration options are:\n- **classname**\n   The class name of a Pulsar Sink if archive is file-url-path (file://)\n- **sourceSubscriptionName**\n   Pulsar source subscription name if user wants a specific\n   subscription-name for input-topic consumer\n- **inputs**\n   The input topic or topics of a Pulsar Sink (specified as a JSON array)\n- **topicsPattern**\n   TopicsPattern to consume from list of topics under a namespace that    match the pattern. [input] and [topicsPattern] are mutually    exclusive. Add SerDe class name for a pattern in customSerdeInputs    (supported for java fun only)- **topicToSerdeClassName**\n   The map of input topics to SerDe class names (specified as a JSON object)\n- **topicToSchemaType**\n   The map of input topics to Schema types or class names (specified as a JSON object)\n- **inputSpecs**\n   The map of input topics to its consumer configuration, each configuration has schema of    {\"schemaType\": \"type-x\", \"serdeClassName\": \"name-x\", \"isRegexPattern\": true, \"receiverQueueSize\": 5}\n- **configs**\n   The map of configs (specified as a JSON object)\n- **secrets**\n   a map of secretName(aka how the secret is going to be \n   accessed in the function via context) to an object that \n   encapsulates how the secret is fetched by the underlying \n   secrets provider. The type of an value here can be found by the \n   SecretProviderConfigurator.getSecretObjectType() method. (specified as a JSON object)\n- **parallelism**\n   The parallelism factor of a Pulsar Sink (i.e. the number of a Pulsar Sink instances to run \n- **processingGuarantees**\n   The processing guarantees (aka delivery semantics) applied to the Pulsar Sink. Possible Values: \"ATLEAST_ONCE\", \"ATMOST_ONCE\", \"EFFECTIVELY_ONCE\"\n- **retainOrdering**\n   Boolean denotes whether the Pulsar Sink consumes and processes messages in order\n- **resources**\n   {\"cpu\": 1, \"ram\": 2, \"disk\": 3} The CPU (in cores), RAM (in bytes) and disk (in bytes) that needs to be allocated per Pulsar Sink instance (applicable only to Docker runtime)\n- **autoAck**\n   Boolean denotes whether or not the framework will automatically acknowledge messages\n- **timeoutMs**\n   Long denotes the message timeout in milliseconds\n- **cleanupSubscription**\n   Boolean denotes whether the subscriptions the functions created/used should be deleted when the functions is deleted\n- **runtimeFlags**\n   Any flags that you want to pass to the runtime as a single string\n2. Encapsulate the JSON object to a multipart object.",
           "required" : false,
           "schema" : {
             "$ref" : "#/definitions/SinkConfig"
           },
           "x-examples" : {
-            "application/json" : "{\n\t\"classname\": \"org.example.MySinkTest\",\n\t\"inputs\": [\"persistent://public/default/sink-input\"],\n\t\"processingGuarantees\": \"EFFECTIVELY_ONCE\",\n\t\"parallelism\": 10\n}"
+            "text/plain" : "Example \n\n 1. Create a JSON object. \n\n{\n\t\"classname\": \"org.example.MySinkTest\",\n\t\"inputs\": [\"persistent://public/default/sink-input\"],\n\t\"processingGuarantees\": \"EFFECTIVELY_ONCE\",\n\t\"parallelism\": \"10\"\n}\n\n\n2. Encapsulate the JSON object to a multipart object (in Python).\n\nfrom requests_toolbelt.multipart.encoder import MultipartEncoder \nmp_encoder = MultipartEncoder( \n\t[('sinkConfig', (None, json.dumps(config), 'application/json'))])"
           }
         } ],
         "responses" : {
@@ -810,11 +810,11 @@
             "$ref" : "#/definitions/X509Certificate"
           }
         },
-        "peerAddress" : {
-          "$ref" : "#/definitions/SocketAddress"
-        },
         "httpAuthType" : {
           "type" : "string"
+        },
+        "peerAddress" : {
+          "$ref" : "#/definitions/SocketAddress"
         },
         "commandData" : {
           "type" : "string"
@@ -887,15 +887,15 @@
     "CompletableFuture" : {
       "type" : "object",
       "properties" : {
+        "done" : {
+          "type" : "boolean"
+        },
         "cancelled" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "done" : {
-          "type" : "boolean"
         },
         "completedExceptionally" : {
           "type" : "boolean"
@@ -905,6 +905,9 @@
     "CompletableFutureClusterData" : {
       "type" : "object",
       "properties" : {
+        "done" : {
+          "type" : "boolean"
+        },
         "cancelled" : {
           "type" : "boolean"
         },
@@ -912,8 +915,23 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "completedExceptionally" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "CompletableFutureVoid" : {
+      "type" : "object",
+      "properties" : {
         "done" : {
           "type" : "boolean"
+        },
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "numberOfDependents" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "completedExceptionally" : {
           "type" : "boolean"
@@ -1044,10 +1062,10 @@
         "symbol" : {
           "type" : "string"
         },
-        "displayName" : {
+        "numericCodeAsString" : {
           "type" : "string"
         },
-        "numericCodeAsString" : {
+        "displayName" : {
           "type" : "string"
         }
       }
@@ -1062,11 +1080,11 @@
         "numberFormat" : {
           "$ref" : "#/definitions/NumberFormat"
         },
-        "timeZone" : {
-          "$ref" : "#/definitions/TimeZone"
-        },
         "lenient" : {
           "type" : "boolean"
+        },
+        "timeZone" : {
+          "$ref" : "#/definitions/TimeZone"
         }
       }
     },
@@ -1314,17 +1332,17 @@
         "formatName" : {
           "type" : "string"
         },
-        "characterEscapes" : {
-          "$ref" : "#/definitions/CharacterEscapes"
-        },
-        "rootValueSeparator" : {
-          "type" : "string"
-        },
         "inputDecorator" : {
           "$ref" : "#/definitions/InputDecorator"
         },
         "outputDecorator" : {
           "$ref" : "#/definitions/OutputDecorator"
+        },
+        "rootValueSeparator" : {
+          "type" : "string"
+        },
+        "characterEscapes" : {
+          "$ref" : "#/definitions/CharacterEscapes"
         }
       }
     },
@@ -1407,14 +1425,22 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "text" : {
+          "type" : "string"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
             "type" : "string"
           }
         },
-        "text" : {
-          "type" : "string"
+        "longValue" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "shortValue" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "booleanValue" : {
           "type" : "boolean"
@@ -1430,14 +1456,6 @@
         "floatValue" : {
           "type" : "number",
           "format" : "float"
-        },
-        "longValue" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "shortValue" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "closed" : {
           "type" : "boolean"
@@ -1560,24 +1578,17 @@
     "JsonSerializerObject" : {
       "type" : "object",
       "properties" : {
-        "delegatee" : {
-          "$ref" : "#/definitions/JsonSerializerObject"
-        },
         "unwrappingSerializer" : {
           "type" : "boolean"
+        },
+        "delegatee" : {
+          "$ref" : "#/definitions/JsonSerializerObject"
         }
       }
     },
     "JsonStreamContext" : {
       "type" : "object",
       "properties" : {
-        "typeDesc" : {
-          "type" : "string"
-        },
-        "currentIndex" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "currentName" : {
           "type" : "string"
         },
@@ -1585,6 +1596,13 @@
           "type" : "object"
         },
         "entryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "typeDesc" : {
+          "type" : "string"
+        },
+        "currentIndex" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -1602,9 +1620,6 @@
     "Locale" : {
       "type" : "object",
       "properties" : {
-        "displayName" : {
-          "type" : "string"
-        },
         "script" : {
           "type" : "string"
         },
@@ -1651,6 +1666,9 @@
           "type" : "string"
         },
         "displayVariant" : {
+          "type" : "string"
+        },
+        "displayName" : {
           "type" : "string"
         },
         "language" : {
@@ -1887,10 +1905,10 @@
     "PublicKey" : {
       "type" : "object",
       "properties" : {
-        "format" : {
+        "algorithm" : {
           "type" : "string"
         },
-        "algorithm" : {
+        "format" : {
           "type" : "string"
         },
         "encoded" : {
@@ -2227,9 +2245,6 @@
     "TimeZone" : {
       "type" : "object",
       "properties" : {
-        "displayName" : {
-          "type" : "string"
-        },
         "id" : {
           "type" : "string"
         },
@@ -2240,6 +2255,9 @@
         "rawOffset" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "displayName" : {
+          "type" : "string"
         }
       }
     },
@@ -2321,31 +2339,9 @@
         "issuerX500Principal" : {
           "$ref" : "#/definitions/X500Principal"
         },
-        "issuerDN" : {
-          "$ref" : "#/definitions/Principal"
-        },
-        "subjectDN" : {
-          "$ref" : "#/definitions/Principal"
-        },
         "version" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "serialNumber" : {
-          "type" : "integer"
-        },
-        "tbscertificate" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string",
-            "format" : "byte"
-          }
-        },
-        "extendedKeyUsage" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
         },
         "sigAlgName" : {
           "type" : "string"
@@ -2404,6 +2400,28 @@
             }
           }
         },
+        "issuerDN" : {
+          "$ref" : "#/definitions/Principal"
+        },
+        "subjectDN" : {
+          "$ref" : "#/definitions/Principal"
+        },
+        "serialNumber" : {
+          "type" : "integer"
+        },
+        "tbscertificate" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
+        "extendedKeyUsage" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
         "signature" : {
           "type" : "array",
           "items" : {
@@ -2415,14 +2433,14 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "criticalExtensionOIDs" : {
+        "nonCriticalExtensionOIDs" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
             "type" : "string"
           }
         },
-        "nonCriticalExtensionOIDs" : {
+        "criticalExtensionOIDs" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {

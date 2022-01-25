@@ -225,13 +225,13 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "A JSON value presenting configuration payload of a Pulsar Source. An example of the expected functions can be found here.\n- **classname**\n  The class name of a Pulsar Source if archive is file-url-path (file://).\n- **topicName**\n  The Pulsar topic to which data is sent.\n- **serdeClassName**\n  The SerDe classname for the Pulsar Source.\n- **schemaType**\n  The schema type (either a builtin schema like 'avro', 'json', etc.. or    custom Schema class name to be used to encode messages emitted from the Pulsar Source\n- **configs**\n  Source config key/values\n- **secrets**\n  This is a map of secretName(that is how the secret is going to be accessed in the function via context) to an object that  encapsulates how the secret is fetched by the underlying secrets provider. The type of an value here can be found by the  SecretProviderConfigurator.getSecretObjectType() method. \n- **parallelism**\n  The parallelism factor of a Pulsar Source (i.e. the number of a Pulsar Source instances to run).\n- **processingGuarantees**\n  The processing guarantees (aka delivery semantics) applied to the Pulsar Source.    Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]\n- **resources**\n  The size of the system resources allowed by the Pulsar Source runtime. The resources include: cpu, ram, disk.\n- **archive**\n  The path to the NAR archive for the Pulsar Source. It also supports url-path   [http/https/file (file protocol assumes that file already exists on worker host)]   from which worker can download the package.\n- **runtimeFlags**\n  Any flags that you want to pass to the runtime.\n",
+          "description" : "You can submit a source (in any languages that you are familiar with) to a Pulsar cluster. Follow the steps below.\n1. Create a JSON object using some of the following parameters.\nA JSON value presenting configuration payload of a Pulsar Source. An example of the expected functions can be found here.\n- **classname**\n  The class name of a Pulsar Source if archive is file-url-path (file://).\n- **topicName**\n  The Pulsar topic to which data is sent.\n- **serdeClassName**\n  The SerDe classname for the Pulsar Source.\n- **schemaType**\n  The schema type (either a builtin schema like 'avro', 'json', etc.. or    custom Schema class name to be used to encode messages emitted from the Pulsar Source\n- **configs**\n  Source config key/values\n- **secrets**\n  This is a map of secretName(that is how the secret is going to be accessed in the function via context) to an object that  encapsulates how the secret is fetched by the underlying secrets provider. The type of an value here can be found by the  SecretProviderConfigurator.getSecretObjectType() method. \n- **parallelism**\n  The parallelism factor of a Pulsar Source (i.e. the number of a Pulsar Source instances to run).\n- **processingGuarantees**\n  The processing guarantees (aka delivery semantics) applied to the Pulsar Source.    Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]\n- **resources**\n  The size of the system resources allowed by the Pulsar Source runtime. The resources include: cpu, ram, disk.\n- **archive**\n  The path to the NAR archive for the Pulsar Source. It also supports url-path   [http/https/file (file protocol assumes that file already exists on worker host)]   from which worker can download the package.\n- **runtimeFlags**\n  Any flags that you want to pass to the runtime.\n2. Encapsulate the JSON object to a multipart object.",
           "required" : false,
           "schema" : {
             "$ref" : "#/definitions/SourceConfig"
           },
           "x-examples" : {
-            "application/json" : "{\n  \"tenant\": public\n  \"namespace\": default\n  \"name\": pulsar-io-mysql\n  \"className\": TestSourceMysql\n  \"topicName\": pulsar-io-mysql\n  \"parallelism\": 1\n  \"archive\": /connectors/pulsar-io-mysql-0.0.1.nar\n  \"schemaType\": avro\n}"
+            "text/plain" : "Example \n\n1. Create a JSON object. \n\n{\n\t\"tenant\": \"public\",\n\t\"namespace\": \"default\",\n\t\"name\": \"pulsar-io-mysql\",\n\t\"className\": \"TestSourceMysql\",\n\t\"topicName\": \"pulsar-io-mysql\",\n\t\"parallelism\": \"1\",\n\t\"archive\": \"/connectors/pulsar-io-mysql-0.0.1.nar\",\n\t\"schemaType\": \"avro\"\n}\n\n\n2. Encapsulate the JSON object to a multipart object (in Python). \n\nfrom requests_toolbelt.multipart.encoder import MultipartEncoder \nmp_encoder = MultipartEncoder( \n\t[('sourceConfig', (None, json.dumps(config), 'application/json'))])"
           }
         } ],
         "responses" : {
@@ -813,11 +813,11 @@
             "$ref" : "#/definitions/X509Certificate"
           }
         },
-        "peerAddress" : {
-          "$ref" : "#/definitions/SocketAddress"
-        },
         "httpAuthType" : {
           "type" : "string"
+        },
+        "peerAddress" : {
+          "$ref" : "#/definitions/SocketAddress"
         },
         "commandData" : {
           "type" : "string"
@@ -904,15 +904,15 @@
     "CompletableFuture" : {
       "type" : "object",
       "properties" : {
+        "done" : {
+          "type" : "boolean"
+        },
         "cancelled" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "done" : {
-          "type" : "boolean"
         },
         "completedExceptionally" : {
           "type" : "boolean"
@@ -922,6 +922,9 @@
     "CompletableFutureClusterData" : {
       "type" : "object",
       "properties" : {
+        "done" : {
+          "type" : "boolean"
+        },
         "cancelled" : {
           "type" : "boolean"
         },
@@ -929,8 +932,23 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "completedExceptionally" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "CompletableFutureVoid" : {
+      "type" : "object",
+      "properties" : {
         "done" : {
           "type" : "boolean"
+        },
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "numberOfDependents" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "completedExceptionally" : {
           "type" : "boolean"
@@ -1025,10 +1043,10 @@
         "symbol" : {
           "type" : "string"
         },
-        "displayName" : {
+        "numericCodeAsString" : {
           "type" : "string"
         },
-        "numericCodeAsString" : {
+        "displayName" : {
           "type" : "string"
         }
       }
@@ -1043,11 +1061,11 @@
         "numberFormat" : {
           "$ref" : "#/definitions/NumberFormat"
         },
-        "timeZone" : {
-          "$ref" : "#/definitions/TimeZone"
-        },
         "lenient" : {
           "type" : "boolean"
+        },
+        "timeZone" : {
+          "$ref" : "#/definitions/TimeZone"
         }
       }
     },
@@ -1295,17 +1313,17 @@
         "formatName" : {
           "type" : "string"
         },
-        "characterEscapes" : {
-          "$ref" : "#/definitions/CharacterEscapes"
-        },
-        "rootValueSeparator" : {
-          "type" : "string"
-        },
         "inputDecorator" : {
           "$ref" : "#/definitions/InputDecorator"
         },
         "outputDecorator" : {
           "$ref" : "#/definitions/OutputDecorator"
+        },
+        "rootValueSeparator" : {
+          "type" : "string"
+        },
+        "characterEscapes" : {
+          "$ref" : "#/definitions/CharacterEscapes"
         }
       }
     },
@@ -1388,14 +1406,22 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "text" : {
+          "type" : "string"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
             "type" : "string"
           }
         },
-        "text" : {
-          "type" : "string"
+        "longValue" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "shortValue" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "booleanValue" : {
           "type" : "boolean"
@@ -1411,14 +1437,6 @@
         "floatValue" : {
           "type" : "number",
           "format" : "float"
-        },
-        "longValue" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "shortValue" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "closed" : {
           "type" : "boolean"
@@ -1541,24 +1559,17 @@
     "JsonSerializerObject" : {
       "type" : "object",
       "properties" : {
-        "delegatee" : {
-          "$ref" : "#/definitions/JsonSerializerObject"
-        },
         "unwrappingSerializer" : {
           "type" : "boolean"
+        },
+        "delegatee" : {
+          "$ref" : "#/definitions/JsonSerializerObject"
         }
       }
     },
     "JsonStreamContext" : {
       "type" : "object",
       "properties" : {
-        "typeDesc" : {
-          "type" : "string"
-        },
-        "currentIndex" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "currentName" : {
           "type" : "string"
         },
@@ -1566,6 +1577,13 @@
           "type" : "object"
         },
         "entryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "typeDesc" : {
+          "type" : "string"
+        },
+        "currentIndex" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -1583,9 +1601,6 @@
     "Locale" : {
       "type" : "object",
       "properties" : {
-        "displayName" : {
-          "type" : "string"
-        },
         "script" : {
           "type" : "string"
         },
@@ -1632,6 +1647,9 @@
           "type" : "string"
         },
         "displayVariant" : {
+          "type" : "string"
+        },
+        "displayName" : {
           "type" : "string"
         },
         "language" : {
@@ -1890,10 +1908,10 @@
     "PublicKey" : {
       "type" : "object",
       "properties" : {
-        "format" : {
+        "algorithm" : {
           "type" : "string"
         },
-        "algorithm" : {
+        "format" : {
           "type" : "string"
         },
         "encoded" : {
@@ -2184,9 +2202,6 @@
     "TimeZone" : {
       "type" : "object",
       "properties" : {
-        "displayName" : {
-          "type" : "string"
-        },
         "id" : {
           "type" : "string"
         },
@@ -2197,6 +2212,9 @@
         "rawOffset" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "displayName" : {
+          "type" : "string"
         }
       }
     },
@@ -2278,31 +2296,9 @@
         "issuerX500Principal" : {
           "$ref" : "#/definitions/X500Principal"
         },
-        "issuerDN" : {
-          "$ref" : "#/definitions/Principal"
-        },
-        "subjectDN" : {
-          "$ref" : "#/definitions/Principal"
-        },
         "version" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "serialNumber" : {
-          "type" : "integer"
-        },
-        "tbscertificate" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string",
-            "format" : "byte"
-          }
-        },
-        "extendedKeyUsage" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
         },
         "sigAlgName" : {
           "type" : "string"
@@ -2361,6 +2357,28 @@
             }
           }
         },
+        "issuerDN" : {
+          "$ref" : "#/definitions/Principal"
+        },
+        "subjectDN" : {
+          "$ref" : "#/definitions/Principal"
+        },
+        "serialNumber" : {
+          "type" : "integer"
+        },
+        "tbscertificate" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
+        "extendedKeyUsage" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
         "signature" : {
           "type" : "array",
           "items" : {
@@ -2372,14 +2390,14 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "criticalExtensionOIDs" : {
+        "nonCriticalExtensionOIDs" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
             "type" : "string"
           }
         },
-        "nonCriticalExtensionOIDs" : {
+        "criticalExtensionOIDs" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
