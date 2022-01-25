@@ -3,6 +3,7 @@
 
 const linkifyRegex = require("./plugins/remark-linkify-regex");
 
+const oldUrl = "https://pulsar.apache.org";
 const url = "https://pulsar.apache.org";
 const javadocUrl = url + "/api";
 const restApiUrl = url + "/admin-rest-api";
@@ -252,125 +253,121 @@ module.exports = {
           ],
         },
         {
+          label: "Previous Versions",
+          to: "docs",
+          position: "right",
+          items: [
+            {
+              label: "2.9.1",
+              to: "docs",
+            },
+            {
+              label: "2.9.0",
+              href: oldUrl + "/docs/en/2.9.0/standalone/",
+            },
+            // {
+            //   label: "2.8.2",
+            //   href: oldUrl + "/docs/en/2.8.2/standalone/",
+            // },
+            // {
+            //   label: "2.8.1",
+            //   href: oldUrl + "/docs/en/2.8.1/standalone/",
+            // },
+            {
+              label: "2.8.0",
+              href: oldUrl + "/docs/en/2.8.0/standalone/",
+            },
+            // {
+            //   label: "2.7.3",
+            //   href: oldUrl + "/docs/en/2.7.3/standalone/",
+            // },
+            // {
+            //   label: "2.7.2",
+            //   href: oldUrl + "/docs/en/2.7.2/standalone/",
+            // },
+            // {
+            //   label: "2.7.1",
+            //   href: oldUrl + "/docs/en/2.7.1/standalone/",
+            // },
+            {
+              label: "2.7.0",
+              href: oldUrl + "/docs/en/2.7.0/standalone/",
+            },
+            // {
+            //   label: "2.6.4",
+            //   href: oldUrl + "/docs/en/2.6.4/standalone/",
+            // },
+            // {
+            //   label: "2.6.3",
+            //   href: oldUrl + "/docs/en/2.6.3/standalone/",
+            // },
+            // {
+            //   label: "2.6.2",
+            //   href: oldUrl + "/docs/en/2.6.2/standalone/",
+            // },
+            // {
+            //   label: "2.6.1",
+            //   href: oldUrl + "/docs/en/2.6.1/standalone/",
+            // },
+            // {
+            //   label: "2.6.0",
+            //   href: oldUrl + "/docs/en/2.6.0/standalone/",
+            // },
+            // {
+            //   label: "2.5.2",
+            //   href: oldUrl + "/docs/en/2.5.2/standalone/",
+            // },
+            // {
+            //   label: "2.5.1",
+            //   href: oldUrl + "/docs/en/2.5.1/standalone/",
+            // },
+            // {
+            //   label: "2.5.0",
+            //   href: oldUrl + "/docs/en/2.5.0/standalone/",
+            // },
+            // {
+            //   label: "2.4.2",
+            //   href: oldUrl + "/docs/en/2.4.2/standalone/",
+            // },
+            // {
+            //   label: "2.4.1",
+            //   href: oldUrl + "/docs/en/2.4.1/standalone/",
+            // },
+            // {
+            //   label: "2.4.0",
+            //   href: oldUrl + "/docs/en/2.4.0/standalone/",
+            // },
+            // {
+            //   label: "2.3.2",
+            //   href: oldUrl + "/docs/en/2.3.2/standalone/",
+            // },
+            // {
+            //   label: "2.3.1",
+            //   href: oldUrl + "/docs/en/2.3.1/standalone/",
+            // },
+            // {
+            //   label: "2.3.0",
+            //   href: oldUrl + "/docs/en/2.3.0/standalone/",
+            // },
+            // {
+            //   label: "2.2.1",
+            //   href: oldUrl + "/docs/en/2.2.1/standalone/",
+            // },
+            // {
+            //   label: "2.2.0",
+            //   href: oldUrl + "/docs/en/2.2.0/standalone/",
+            // },
+            // {
+            //   label: "2.1.1-incubating",
+            //   href: oldUrl + "/docs/2.1.1-incubating/",
+            // },
+          ],
+        },
+        {
           href: "https://github.com/apache/pulsar",
           label: "GitHub",
           position: "right",
         },
-        // {
-        //   type: "localeDropdown",
-        //   position: "left",
-        // },
-        // {
-        //   label: "Version",
-        //   to: "docs",
-        //   position: "right",
-        //   items: [
-        //     {
-        //       label: "2.9.1",
-        //       to: "docs/2.9.1/",
-        //     },
-        //     {
-        //       label: "2.9.0",
-        //       to: "docs/2.9.0/",
-        //     },
-        //     {
-        //       label: "2.8.2",
-        //       to: "docs/2.8.2/",
-        //     },
-        //     {
-        //       label: "2.8.1",
-        //       to: "docs/2.8.1/",
-        //     },
-        //     {
-        //       label: "2.8.0",
-        //       to: "docs/2.8.0/",
-        //     },
-        //     {
-        //       label: "2.7.3",
-        //       to: "docs/2.7.3/",
-        //     },
-        //     {
-        //       label: "2.7.2",
-        //       to: "docs/2.7.2/",
-        //     },
-        //     {
-        //       label: "2.7.1",
-        //       to: "docs/2.7.1/",
-        //     },
-        //     {
-        //       label: "2.7.0",
-        //       to: "docs/2.7.0/",
-        //     },
-        //     {
-        //       label: "2.6.4",
-        //       to: "docs/2.6.4/",
-        //     },
-        //     {
-        //       label: "2.6.3",
-        //       to: "docs/2.6.3/",
-        //     },
-        //     {
-        //       label: "2.6.2",
-        //       to: "docs/2.6.2/",
-        //     },
-        //     {
-        //       label: "2.6.1",
-        //       to: "docs/2.6.1/",
-        //     },
-        //     {
-        //       label: "2.6.0",
-        //       to: "docs/2.6.0/",
-        //     },
-        //     {
-        //       label: "2.5.2",
-        //       to: "docs/2.5.2/",
-        //     },
-        //     {
-        //       label: "2.5.1",
-        //       to: "docs/2.5.1/",
-        //     },
-        //     {
-        //       label: "2.5.0",
-        //       to: "docs/2.5.0/",
-        //     },
-        //     {
-        //       label: "2.4.2",
-        //       to: "docs/2.4.2/",
-        //     },
-        //     {
-        //       label: "2.4.1",
-        //       to: "docs/2.4.1/",
-        //     },
-        //     {
-        //       label: "2.4.0",
-        //       to: "docs/2.4.0/",
-        //     },
-        //     {
-        //       label: "2.3.2",
-        //       to: "docs/2.3.2/",
-        //     },
-        //     {
-        //       label: "2.3.1",
-        //       to: "docs/2.3.1/",
-        //     },
-        //     {
-        //       label: "2.3.0",
-        //       to: "docs/2.3.0/",
-        //     },
-        //     {
-        //       label: "2.2.1",
-        //       to: "docs/2.2.1/",
-        //     },
-        //     {
-        //       label: "2.2.0",
-        //       to: "docs/2.2.0/",
-        //     },
-        //     {
-        //       label: "2.1.1-incubating",
-        //       to: "docs/2.1.1-incubating/",
-        //     },
-        //   ],
-        // },
       ],
     },
     // scripts: [
