@@ -38,13 +38,13 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - run: |
-        git diff --name-only ${{ github.event.before }}..${{ github.event.after }}
-        echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
-        echo "github env..."
-        echo $GITHUB_ENV
-        echo "change files..."
-        echo $CHANGED_FILES
+        run: |
+          git diff --name-only ${{ github.event.before }}..${{ github.event.after }}
+          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+          echo "github env..."
+          echo $GITHUB_ENV
+          echo "change files..."
+          echo $CHANGED_FILES
 
       # - name: Get changed files
       #   id: changed-files
