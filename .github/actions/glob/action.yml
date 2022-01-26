@@ -1,0 +1,61 @@
+name: Glob match
+description: Search for files matching glob patterns.
+author: tj-actions
+inputs:
+  token:
+    description: The GitHub token used to create an authenticated client
+    default: ${{ github.token }}
+    required: false
+  files:
+    description: 'File patterns'
+    required: true
+  files-separator:
+    description: 'Separator used to split the files input'
+    default: "\\n"
+    required: false
+  follow-symbolic-links:
+    description: 'Indicates whether to follow symbolic links'
+    default: "true"
+    required: false
+  separator:
+    description: 'Separator used for the paths output.'
+    required: false
+    default: " "
+  strip-top-level-dir:
+    description: 'Strip the `$GITHUB_WORKSPACE` from the paths output'
+    required: false
+    default: "true"
+
+outputs:
+  paths:
+    description: "List of filtered paths using the specified patterns and separator"
+    value: ${{ steps.glob.outputs.paths }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get matching files
+      uses: actions/github-script@v5
+      id: glob
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const path = require("path");
+         
+          const { GITHUB_ACTION_PATH } = process.env
+          const ACTION_PATH = path.join(GITHUB_ACTION_PATH, "main.js")
+          
+          const main = require(ACTION_PATH)
+          await main({ core, glob })
+      env:
+          GITHUB_ACTION_PATH: ${{ github.action_path }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          INPUT_FILES: ${{ inputs.files }}
+          INPUT_FILES_SEPARATOR: ${{ inputs.files-separator }}
+          INPUT_FOLLOW_SYMBOLIC_LINKS: ${{ inputs.follow-symbolic-links }}
+          INPUT_SEPARATOR: ${{ inputs.separator }}
+          INPUT_STRIP_TOP_LEVEL_DIR: ${{ inputs.strip-top-level-dir }}
+
+branding:
+  icon: filter
+  color: white
