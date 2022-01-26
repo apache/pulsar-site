@@ -33,18 +33,6 @@ inputs:
   path:
     description: 'Specify a relative path under $GITHUB_WORKSPACE to locate the repository'
     required: false
-  files-separator:
-    description: 'Separator used to split the files input'
-    default: " "
-    required: false
-  follow-symbolic-links:
-    description: 'Indicates whether to follow symbolic links'
-    default: "true"
-    required: false
-  strip-top-level-dir:
-    description: 'Strip the `$GITHUB_WORKSPACE` from the paths output'
-    required: false
-    default: "true"
 
 outputs:
   added_files:
@@ -107,9 +95,6 @@ outputs:
   other_deleted_files:
     description: Return list of deleted files not listed in the files input.
     value: ${{ steps.changed-files.outputs.other_deleted_files }}
-  paths:
-    description: "List of filtered paths using the specified patterns and separator"
-    value: ${{ steps.glob.outputs.paths }}
 
 runs:
   using: 'composite'
@@ -136,50 +121,29 @@ runs:
         # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
         INPUT_FILES: ${{ inputs.files }}
         INPUT_FILES_FROM_SOURCE_FILE: ${{ inputs.files_from_source_file }}
-    # - name: Glob match
-    #   uses: .github/actions/glob
-    #   id: glob
-    #   with:
-    #     files: ${{ steps.source-input-files.outputs.files }}
-    #     files-separator: " "
-    #     separator: "|"
-    - name: Get matching files
-      uses: actions/github-script@v5
+    - name: Glob match
+      uses: ./.github/actions/glob
       id: glob
       with:
-        github-token: ${{ inputs.token }}
-        script: |
-          const path = require("path");
-         
-          const { GITHUB_ACTION_PATH } = process.env
-          const ACTION_PATH = path.join(GITHUB_ACTION_PATH, "main.js")
-          
-          const main = require(ACTION_PATH)
-          await main({ core, glob })
+        files: ${{ steps.source-input-files.outputs.files }}
+        files-separator: " "
+        separator: "|"
+    - run: |
+        bash $GITHUB_ACTION_PATH/entrypoint.sh
+      id: changed-files
+      shell: bash
       env:
-          GITHUB_ACTION_PATH: ${{ github.action_path }}
-          GITHUB_WORKSPACE: ${{ github.workspace }}
-          INPUT_FILES: ${{ inputs.files }}
-          INPUT_FILES_SEPARATOR: ${{ inputs.files-separator }}
-          INPUT_FOLLOW_SYMBOLIC_LINKS: ${{ inputs.follow-symbolic-links }}
-          INPUT_SEPARATOR: ${{ inputs.separator }}
-          INPUT_STRIP_TOP_LEVEL_DIR: ${{ inputs.strip-top-level-dir }}
-      - run: |
-          bash $GITHUB_ACTION_PATH/entrypoint.sh
-        id: changed-files
-        shell: bash
-        env:
-          GITHUB_SERVER_URL: ${{ github.server_url }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_BASE_REF: ${{ github.base_ref }}
-          # INPUT_<VARIABLE_NAME> is not available in Composite run steps
-          # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
-          INPUT_SHA: ${{ inputs.sha }}
-          INPUT_BASE_SHA: ${{ steps.base-sha.outputs.base_sha }}
-          INPUT_TOKEN: ${{ inputs.token }}
-          INPUT_FILES_PATTERN: ${{ steps.glob.outputs.paths }}
-          INPUT_SEPARATOR: ${{ inputs.separator }}
-          INPUT_PATH: ${{ inputs.path }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_BASE_REF: ${{ github.base_ref }}
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
+        INPUT_SHA: ${{ inputs.sha }}
+        INPUT_BASE_SHA: ${{ steps.base-sha.outputs.base_sha }}
+        INPUT_TOKEN: ${{ inputs.token }}
+        INPUT_FILES_PATTERN: ${{ steps.glob.outputs.paths }}
+        INPUT_SEPARATOR: ${{ inputs.separator }}
+        INPUT_PATH: ${{ inputs.path }}
 
 branding:
   icon: file-text
