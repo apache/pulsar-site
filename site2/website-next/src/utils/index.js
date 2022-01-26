@@ -14,22 +14,22 @@ export function imgUrl(img) {
 }
 
 export function docUrl(doc, language, version) {
-  if (version == "" || version == "next") {
-    return (
-      siteConfig.baseUrl +
-      "docs/" +
-      (language ? language + "/" : "") +
-      (version ? version + "/" : "") +
-      (doc ? doc : "")
-    );
-  }
+  // if (version == "" || version == "next") {
   return (
-    siteConfig.customFields.oldUrl +
-    "/docs/" +
-    (language ? language + "/" : "en/") +
+    siteConfig.baseUrl +
+    "docs/" +
+    (language ? language + "/" : "") +
     (version ? version + "/" : "") +
-    (doc ? doc : "standalone/")
+    (doc ? doc : "")
   );
+  // }
+  // return (
+  //   siteConfig.customFields.oldUrl +
+  //   "/docs/" +
+  //   (language ? language + "/" : "en/") +
+  //   (version ? version + "/" : "") +
+  //   (doc ? doc : "standalone/")
+  // );
 }
 
 export function pageUrl(page, language) {

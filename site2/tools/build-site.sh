@@ -99,8 +99,10 @@ yarn
 
 if [ -n "$NEXT" ]; then
   node scripts/replace.js
-  node ./scripts/split-swagger-by-version.js
-  yarn build
+  node scripts/split-swagger-by-version.js
+  # Because there are too many versions of the document, the memory overflows during the full build. 
+  # The split-version-build script is used to build in different versions, and finally the build results are merged.
+  bash scripts/split-version-build.sh
 else
   # crowdin
   yarn build
