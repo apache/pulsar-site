@@ -41,9 +41,7 @@ jobs:
       - name: Get changed files
         run: |
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }}
-          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
-          echo "github env..."
-          echo $GITHUB_ENV
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})
           echo "change files..."
           echo $CHANGED_FILES
 
