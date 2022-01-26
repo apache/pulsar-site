@@ -22,6 +22,11 @@ while read version; do
     fi
 done <scripts/.versions
 
+echo "latest version begin build..."
+echo "[\"${latest}\"]" >versions.json
+yarn build
+echo "latest version build done..."
+
 while read version; do
     if [[ $@ == *website-next/versioned_docs/version-$version* ]]
     then
