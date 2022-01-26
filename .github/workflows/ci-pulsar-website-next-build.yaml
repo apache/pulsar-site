@@ -50,13 +50,14 @@ jobs:
 
       - name: Get changed files
         uses: ./.github/actions/changed-files
+        id: changed-files
         with:
           token: ${{ secrets.PULSARBOT_TOKEN }}
 
       - name: List all modified files
         run: |
-          echo ${{ steps.changed-files.outputs.all_modified_files }}
-          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+          echo ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+          for file in ${{ steps.changed-files.outputs.all_changed_and_modified_files }}; do
             echo "$file was modified"
           done
 
