@@ -1,0 +1,150 @@
+name: Changed files
+description: Get all changed files for push and pull request events.
+author: tj-actions
+
+inputs:
+  token:
+    description: 'Github token'
+    required: true
+    default: ${{ github.token }}
+  separator:
+    description: 'Split character for array output'
+    required: true
+    default: " "
+  files_from_source_file:
+    description: 'Source file to populate the files input'
+    required: false
+    default: ""
+  files:
+    description: 'Check for changes using only this list of files (Defaults to the entire repo)'
+    required: false
+    default: ""
+  sha:
+    description: 'Specify a current commit SHA used for comparing changes'
+    required: true
+    default: ${{ github.sha }}
+  base_sha:
+    description: 'Specify a base commit SHA on used for comparing changes'
+    required: false
+  since_last_remote_commit:
+    description: 'Use the last commit on the remote branch as the base_sha for push event.'
+    required: false
+    default: 'false'
+  path:
+    description: 'Specify a relative path under $GITHUB_WORKSPACE to locate the repository'
+    required: false
+
+outputs:
+  added_files:
+    description: List of added files.
+    value: ${{ steps.changed-files.outputs.added_files }}
+  copied_files:
+    description: List of copied files.
+    value: ${{ steps.changed-files.outputs.copied_files }}
+  deleted_files:
+    description: List of deleted files.
+    value: ${{ steps.changed-files.outputs.deleted_files }}
+  modified_files:
+    description: List of modified files.
+    value: ${{ steps.changed-files.outputs.modified_files }}
+  renamed_files:
+    description: List of renamed files.
+    value: ${{ steps.changed-files.outputs.renamed_files }}
+  type_changed_files:
+    description: List of files that had type changes.
+    value: ${{ steps.changed-files.outputs.type_changed_files }}
+  unmerged_files:
+    description: List of unmerged files.
+    value: ${{ steps.changed-files.outputs.unmerged_files }}
+  unknown_files:
+    description: List of unknown files.
+    value: ${{ steps.changed-files.outputs.unknown_files }}
+  all_changed_and_modified_files:
+    description: List of all changed files.
+    value: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+  all_changed_files:
+    description: List of all copied, modified, and added files.
+    value: ${{ steps.changed-files.outputs.all_changed_files }}
+  any_changed:
+    description: Return true only when any files provided using the files input have changed.
+    value: ${{ steps.changed-files.outputs.any_changed }}
+  only_changed:
+    description: Return true when all files provided using the files input have changed.
+    value: ${{ steps.changed-files.outputs.only_changed }}
+  other_changed_files:
+    description: Return list of changed files not listed in the files input.
+    value: ${{ steps.changed-files.outputs.other_changed_files }}
+  all_modified_files:
+    description: List of all copied, modified, added and deleted files.
+    value: ${{ steps.changed-files.outputs.all_modified_files }}
+  any_modified:
+    description: Return true only when any files provided using the files input have been modified.
+    value: ${{ steps.changed-files.outputs.any_modified }}
+  only_modified:
+    description: Return true when all files provided using the files input have been modified.
+    value: ${{ steps.changed-files.outputs.only_modified }}
+  other_modified_files:
+    description: Return list of modified files not listed in the files input.
+    value: ${{ steps.changed-files.outputs.other_modified_files }}
+  any_deleted:
+    description: Return true only when any files provided using the files input have been deleted.
+    value: ${{ steps.changed-files.outputs.any_deleted }}
+  only_deleted:
+    description: Return true when all files provided using the files input have been deleted.
+    value: ${{ steps.changed-files.outputs.only_deleted }}
+  other_deleted_files:
+    description: Return list of deleted files not listed in the files input.
+    value: ${{ steps.changed-files.outputs.other_deleted_files }}
+
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        # "Set base sha..."
+        if [[ -n "${{ inputs.base_sha }}" ]]; then
+          echo "::set-output name=base_sha::${{ inputs.base_sha }}"
+        elif [[ "${{ inputs.since_last_remote_commit }}" == "true" ]]; then
+          if [[ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+            echo "::set-output name=base_sha::${{ github.event.before }}"
+          else
+            echo "::set-output name=base_sha::${{ github.sha }}"
+          fi
+        fi
+      id: base-sha
+      shell: bash
+    - run: |
+        bash $GITHUB_ACTION_PATH/sourcefiles.sh
+      id: source-input-files
+      shell: bash
+      env:
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_FILES_FROM_SOURCE_FILE: ${{ inputs.files_from_source_file }}
+    - name: Glob match
+      uses: tj-actions/glob@v3.3
+      id: glob
+      with:
+        files: ${{ steps.source-input-files.outputs.files }}
+        files-separator: " "
+        separator: "|"
+    - run: |
+        bash $GITHUB_ACTION_PATH/entrypoint.sh
+      id: changed-files
+      shell: bash
+      env:
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_BASE_REF: ${{ github.base_ref }}
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
+        INPUT_SHA: ${{ inputs.sha }}
+        INPUT_BASE_SHA: ${{ steps.base-sha.outputs.base_sha }}
+        INPUT_TOKEN: ${{ inputs.token }}
+        INPUT_FILES_PATTERN: ${{ steps.glob.outputs.paths }}
+        INPUT_SEPARATOR: ${{ inputs.separator }}
+        INPUT_PATH: ${{ inputs.path }}
+
+branding:
+  icon: file-text
+  color: white

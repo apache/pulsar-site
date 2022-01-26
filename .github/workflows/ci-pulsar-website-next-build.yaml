@@ -38,25 +38,24 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: Get changed files
-        run: |
-          git diff --name-only ${{ github.event.before }}..${{ github.event.after }}
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})
-          echo "change files..."
-          echo $CHANGED_FILES
-
       # - name: Get changed files
-      #   id: changed-files
-      #   uses: tj-actions/changed-files@v11.9
-      #   with:
-      #     token: ${{ secrets.PULSARBOT_TOKEN }}
-
-      # - name: List all modified files
       #   run: |
-      #     echo ${{ steps.changed-files.outputs.all_modified_files }}
-      #     for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
-      #       echo "$file was modified"
-      #     done
+      #     git diff --name-only ${{ github.event.before }}..${{ github.event.after }}
+      #     CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})
+      #     echo "change files..."
+      #     echo $CHANGED_FILES
+
+      - name: Get changed files
+        uses: ./.github/actions/changed-files
+        with:
+          token: ${{ secrets.PULSARBOT_TOKEN }}
+
+      - name: List all modified files
+        run: |
+          echo ${{ steps.changed-files.outputs.all_modified_files }}
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "$file was modified"
+          done
 
 
       # - name: Tune Runner VM
