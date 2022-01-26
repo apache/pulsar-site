@@ -207,19 +207,20 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }) {
                   }
                   return {
                     ...e,
-                    link:
-                      e.to +
-                      "?version=" +
-                      getVersion() +
-                      "&apiversion=" +
-                      getApiVersion(param),
+                    link: e.to,
+                    // +
+                    // "?version=" +
+                    // getVersion() +
+                    // "&apiversion=" +
+                    // getApiVersion(param),
                   };
                 });
               } else if (item.label == "CLI") {
                 item.items = item.items.map((e) => {
                   return {
                     ...e,
-                    link: e.to + "?version=" + getVersion(),
+                    link: e.to,
+                    // + "?version=" + getVersion(),
                   };
                 });
               }
@@ -352,9 +353,24 @@ function Navbar() {
           })}
         </div>
         <div className="navbar__items navbar__items--right">
-          {rightItems.map((item, i) => (
-            <NavbarItem {...item} key={i} />
-          ))}
+          {rightItems.map((item, i) => {
+            if (item.label == "Previous Versions") {
+              item.items = item.items.map((e) => {
+                return {
+                  ...e,
+                  onClick: () => {
+                    if (/(\d\.)+/.test(e.to)) {
+                      let version = e.to.substring(5, e.to.length - 1);
+                      setVersion(version);
+                    } else {
+                      setVersion(latestStableVersion);
+                    }
+                  },
+                };
+              });
+            }
+            return <NavbarItem {...item} key={i} />;
+          })}
           {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}
