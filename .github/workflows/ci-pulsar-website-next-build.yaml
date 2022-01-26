@@ -39,6 +39,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: List all modified files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "$file was modified"
+          done
+
       - name: Tune Runner VM
         uses: ./.github/actions/tune-runner-vm
 
@@ -96,7 +102,7 @@ jobs:
           echo "Copied swagger json file."
           echo "Building Website"
           # Build the new website
-          site2/tools/docker-build-site.sh next
+          site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_modified_files }}
 
           # # Script was initially made for travis
           bash -e site2/tools/publish-website.sh next
