@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Setting up a local standalone cluster · Apache Pulsar</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="为了在本地开发和测试，你可以在本机以独立模式运行Pulsar。 独立模式包含 Pulsar broker、必须的 Zookeeper 和 BookKeeper 组件，它们运行在一个单独的 Java 虚拟机（JVM）进程之中。"/><meta name="docsearch:version" content="2.3.1"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Setting up a local standalone cluster · Apache Pulsar"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pulsar.incubator.apache.org/"/><meta property="og:description" content="为了在本地开发和测试，你可以在本机以独立模式运行Pulsar。 独立模式包含 Pulsar broker、必须的 Zookeeper 和 BookKeeper 组件，它们运行在一个单独的 Java 虚拟机（JVM）进程之中。"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pulsar.incubator.apache.org/img/pulsar.svg"/><link rel="shortcut icon" href="/img/pulsar.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pulsar.incubator.apache.org/blog/atom.xml" title="Apache Pulsar Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pulsar.incubator.apache.org/blog/feed.xml" title="Apache Pulsar Blog RSS Feed"/><script>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Setting up a local standalone cluster · Apache Pulsar</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="为了在本地开发和测试，你可以在本机以独立模式运行Pulsar。 独立模式包含 Pulsar broker、必须的 Zookeeper 和 BookKeeper 组件，它们运行在一个单独的 Java 虚拟机（JVM）进程之中。"/><meta name="docsearch:version" content="2.3.1"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Setting up a local standalone cluster · Apache Pulsar"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pulsar.apache.org/"/><meta property="og:description" content="为了在本地开发和测试，你可以在本机以独立模式运行Pulsar。 独立模式包含 Pulsar broker、必须的 Zookeeper 和 BookKeeper 组件，它们运行在一个单独的 Java 虚拟机（JVM）进程之中。"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pulsar.apache.org/img/pulsar.svg"/><link rel="shortcut icon" href="/img/pulsar.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pulsar.apache.org/blog/atom.xml" title="Apache Pulsar Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pulsar.apache.org/blog/feed.xml" title="Apache Pulsar Blog RSS Feed"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -87,17 +87,17 @@
 <ul>
 <li><p>通过单击下面的链接并从 Apache 镜像下载该版本:</p>
 <ul>
-<li><a href="https://archive.apache.org/dist/pulsar/pulsar-2.8.1/apache-pulsar-2.8.1-bin.tar.gz" download>Pulsar 2.8.1 binary release</a></li>
+<li><a href="https://archive.apache.org/dist/pulsar/pulsar-2.9.1/apache-pulsar-2.9.1-bin.tar.gz" download>Pulsar 2.9.1 binary release</a></li>
 </ul></li>
 <li><p>Pulsar <a href="/download">下载页面</a></p></li>
 <li><p>Pulsar <a href="https://github.com/apache/pulsar/releases/latest">发布页面</a></p></li>
 <li><p>使用 <a href="https://www.gnu.org/software/wget">wget</a>：</p></li>
 </ul>
-<pre><code class="hljs css language-shell"><span class="hljs-meta">  $</span><span class="bash"> wget https://archive.apache.org/dist/pulsar/pulsar-2.8.1/apache-pulsar-2.8.1-bin.tar.gz</span>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">  $</span><span class="bash"> wget https://archive.apache.org/dist/pulsar/pulsar-2.9.1/apache-pulsar-2.9.1-bin.tar.gz</span>
 </code></pre>
 <p>Once the tarball is downloaded, untar it and <code>cd</code> into the resulting directory:</p>
-<pre><code class="hljs css language-bash">$ tar xvfz apache-pulsar-2.8.1-bin.tar.gz
-$ <span class="hljs-built_in">cd</span> apache-pulsar-2.8.1
+<pre><code class="hljs css language-bash">$ tar xvfz apache-pulsar-2.9.1-bin.tar.gz
+$ <span class="hljs-built_in">cd</span> apache-pulsar-2.9.1
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="软件包包含的内容"></a><a href="#软件包包含的内容" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>软件包包含的内容:</h3>
 <p>Pulsar 二进制包包含下列目录:</p>
@@ -129,27 +129,27 @@ $ <span class="hljs-built_in">cd</span> apache-pulsar-2.8.1
 <ul>
 <li><p>通过单击下面的链接并从 Apache 镜像下载该版本:</p>
 <ul>
-<li><a href="https://archive.apache.org/dist/pulsar/pulsar-2.8.1/connectors" download>Pulsar IO Connectors 2.8.1 release</a></li>
+<li><a href="https://archive.apache.org/dist/pulsar/pulsar-2.9.1/connectors" download>Pulsar IO Connectors 2.9.1 release</a></li>
 </ul></li>
 <li><p>Pulsar <a href="/download">下载页面</a></p></li>
 <li><p>Pulsar <a href="https://github.com/apache/pulsar/releases/latest">发布页面</a></p></li>
 <li><p>使用 <a href="https://www.gnu.org/software/wget">wget</a>：</p></li>
 </ul>
-<pre><code class="hljs css language-shell"><span class="hljs-meta">  $</span><span class="bash"> wget https://archive.apache.org/dist/pulsar/pulsar-2.8.1/connectors/{connector}-2.8.1.nar</span>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">  $</span><span class="bash"> wget https://archive.apache.org/dist/pulsar/pulsar-2.9.1/connectors/{connector}-2.9.1.nar</span>
 </code></pre>
 <p>Once the nar file is downloaded, copy the file to directory <code>connectors</code> in the pulsar directory,
-for example, if the connector file <code>pulsar-io-aerospike-2.8.1.nar</code> is downloaded:</p>
+for example, if the connector file <code>pulsar-io-aerospike-2.9.1.nar</code> is downloaded:</p>
 <pre><code class="hljs css language-bash">$ mkdir connectors
-$ mv pulsar-io-aerospike-2.8.1.nar connectors
+$ mv pulsar-io-aerospike-2.9.1.nar connectors
 
 $ ls connectors
-pulsar-io-aerospike-2.8.1.nar
+pulsar-io-aerospike-2.9.1.nar
 ...
 </code></pre>
 <blockquote>
 <h4><a class="anchor" aria-hidden="true" id="注意"></a><a href="#注意" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>注意</h4>
 <p>如果你在裸机集群中运行 Pulsar，你需要确保 <code>connectors</code> 解压到所有 broker 的 pulsar 目录中（若你将 Pulsar functions 运行在单独的 worker 集群中，则将其解压到每一个运行 function 的pulsar 目录中）。</p>
-<p>如果你是<a href="/docs/zh-CN/2.3.1/standalone-docker">在Docker中运行Pulsar</a> 或者 通过Docker镜像部署的Puslar(比如:<a href="/docs/zh-CN/2.3.1/deploy-kubernetes">K8S</a> 或者 <a href="/docs/zh-CN/2.3.1/deploy-dcos">DCOS</a>), 你可以使用<code>apachepulsar/pulsar-all</code> 镜像，而不是<code>apachepulsar/pulsar</code>. <code>apachepulsar/pulsar-all</code> 镜像已经捆绑了<a href="/docs/zh-CN/2.3.1/io-overview#working-with-connectors">所有内置 connector</a>。</p>
+<p>如果你是<a href="/docs/zh-CN/2.3.1/standalone-docker">在Docker中运行Pulsar</a> 或者 通过Docker镜像部署的Puslar(比如:<a href="/docs/zh-CN/2.3.1/deploy-kubernetes">K8S</a> 或者 <a href="deploy-dcos.md">DCOS</a>), 你可以使用<code>apachepulsar/pulsar-all</code> 镜像，而不是<code>apachepulsar/pulsar</code>. <code>apachepulsar/pulsar-all</code> 镜像已经捆绑了<a href="/docs/zh-CN/2.3.1/io-overview#working-with-connectors">所有内置 connector</a>。</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="安装分层存储卸载程序可选"></a><a href="#安装分层存储卸载程序可选" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>安装分层存储卸载程序(可选)</h2>
 <blockquote>
@@ -159,31 +159,31 @@ pulsar-io-aerospike-2.8.1.nar
 <ul>
 <li><p>通过单击下面的链接并从 Apache 镜像下载该版本:</p>
 <ul>
-<li><a href="https://archive.apache.org/dist/pulsar/pulsar-2.8.1/apache-pulsar-offloaders-2.8.1-bin.tar.gz" download>Pulsar 分层存储下载器 2.8.1 版本</a></li>
+<li><a href="https://archive.apache.org/dist/pulsar/pulsar-2.9.1/apache-pulsar-offloaders-2.9.1-bin.tar.gz" download>Pulsar 分层存储下载器 2.9.1 版本</a></li>
 </ul></li>
 <li><p>Pulsar <a href="/download">下载页面</a></p></li>
 <li><p>Pulsar <a href="https://github.com/apache/pulsar/releases/latest">发布页面</a></p></li>
 <li><p>使用 <a href="https://www.gnu.org/software/wget">wget</a>：</p></li>
 </ul>
-<pre><code class="hljs css language-shell"><span class="hljs-meta">  $</span><span class="bash"> wget https://archive.apache.org/dist/pulsar/pulsar-2.8.1/apache-pulsar-offloaders-2.8.1-bin.tar.gz</span>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">  $</span><span class="bash"> wget https://archive.apache.org/dist/pulsar/pulsar-2.9.1/apache-pulsar-offloaders-2.9.1-bin.tar.gz</span>
 </code></pre>
 <p>Once the tarball is downloaded, in the pulsar directory, untar the offloaders package and copy the offloaders as <code>offloaders</code>
 in the pulsar directory:</p>
-<pre><code class="hljs css language-bash">$ tar xvfz apache-pulsar-offloaders-2.8.1-bin.tar.gz
+<pre><code class="hljs css language-bash">$ tar xvfz apache-pulsar-offloaders-2.9.1-bin.tar.gz
 
-// you will find a directory named `apache-pulsar-offloaders-2.8.1` <span class="hljs-keyword">in</span> the pulsar directory
+// you will find a directory named `apache-pulsar-offloaders-2.9.1` <span class="hljs-keyword">in</span> the pulsar directory
 // <span class="hljs-keyword">then</span> copy the offloaders
 
-$ mv apache-pulsar-offloaders-2.8.1/offloaders offloaders
+$ mv apache-pulsar-offloaders-2.9.1/offloaders offloaders
 
 $ ls offloaders
-tiered-storage-jcloud-2.8.1.nar
+tiered-storage-jcloud-2.9.1.nar
 </code></pre>
 <p>有关如何配置分层存储功能的更多详细信息，参考<a href="/docs/zh-CN/2.3.1/cookbooks-tiered-storage">分层存储手册</a>。</p>
 <blockquote>
 <h4><a class="anchor" aria-hidden="true" id="注意-1"></a><a href="#注意-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>注意</h4>
 <p>If you are running Pulsar in a bare metal cluster, you need to make sure <code>offloaders</code> tarball is unzipped in every broker's pulsar directory</p>
-<p>如果你是<a href="/docs/zh-CN/2.3.1/standalone-docker">在Docker中运行Pulsar</a> 或者 通过Docker镜像部署的Puslar(比如:<a href="/docs/zh-CN/2.3.1/deploy-kubernetes">K8S</a> 或者 <a href="/docs/zh-CN/2.3.1/deploy-dcos">DCOS</a>), 你可以使用<code>apachepulsar/pulsar-all</code> 镜像，而不是<code>apachepulsar/pulsar</code>. <code>apachepulsar/pulsar-all</code> image has already bundled tiered storage offloaders.</p>
+<p>如果你是<a href="/docs/zh-CN/2.3.1/standalone-docker">在Docker中运行Pulsar</a> 或者 通过Docker镜像部署的Puslar(比如:<a href="/docs/zh-CN/2.3.1/deploy-kubernetes">K8S</a> 或者 <a href="deploy-dcos.md">DCOS</a>), 你可以使用<code>apachepulsar/pulsar-all</code> 镜像，而不是<code>apachepulsar/pulsar</code>. <code>apachepulsar/pulsar-all</code> image has already bundled tiered storage offloaders.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="启动集群"></a><a href="#启动集群" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>启动集群</h3>
 <p>一旦你在本地下载了最新的发行版，就可以使用 bin目录下的 <a href="/docs/zh-CN/2.3.1/reference-cli-tools#pulsar"><code>pulsar</code></a> 命令启动一个本地集群了，并且指定你需要运行在独立模式下:</p>
@@ -247,7 +247,7 @@ Result result = client.createProducer(<span class="hljs-string">"my-topic"</span
     <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/2.3.1/pulsar-2.0"><span class="arrow-prev">← </span><span>Pulsar-2.0</span></a><a class="docs-next button" href="/docs/zh-CN/2.3.1/standalone-docker"><span>在 Docker 中运行 Pulsar</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#手动运行-pulsar">手动运行 Pulsar</a><ul class="toc-headings"><li><a href="#系统要求">系统要求</a></li><li><a href="#安装-pulsar">安装 Pulsar</a></li><li><a href="#软件包包含的内容">软件包包含的内容:</a></li><li><a href="#安装内置连接器可选">安装内置连接器(可选)</a></li></ul></li><li><a href="#安装分层存储卸载程序可选">安装分层存储卸载程序(可选)</a><ul class="toc-headings"><li><a href="#启动集群">启动集群</a></li></ul></li><li><a href="#run-pulsar-standalone-in-docker">Run Pulsar Standalone in Docker</a></li><li><a href="#测试集群">测试集群</a></li><li><a href="#在本地使用pulsar客户端">在本地使用Pulsar客户端</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2021 The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</section><span><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/2.3.1/pulsar-2.0"><span class="arrow-prev">← </span><span>Pulsar-2.0</span></a><a class="docs-next button" href="/docs/zh-CN/2.3.1/standalone-docker"><span>在 Docker 中运行 Pulsar</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#手动运行-pulsar">手动运行 Pulsar</a><ul class="toc-headings"><li><a href="#系统要求">系统要求</a></li><li><a href="#安装-pulsar">安装 Pulsar</a></li><li><a href="#软件包包含的内容">软件包包含的内容:</a></li><li><a href="#安装内置连接器可选">安装内置连接器(可选)</a></li></ul></li><li><a href="#安装分层存储卸载程序可选">安装分层存储卸载程序(可选)</a><ul class="toc-headings"><li><a href="#启动集群">启动集群</a></li></ul></li><li><a href="#run-pulsar-standalone-in-docker">Run Pulsar Standalone in Docker</a></li><li><a href="#测试集群">测试集群</a></li><li><a href="#在本地使用pulsar客户端">在本地使用Pulsar客户端</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2022 The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</section><span><script>
       const community = document.querySelector("a[href='#community']").parentNode;
       const communityMenu =
         '<li>' +

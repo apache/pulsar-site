@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Pulsar Perf · Apache Pulsar</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Pulsar Perf is a built-in performance test tool for Apache Pulsar. You can use the Pulsar Perf to test message writing or reading performance. 更多性能优化细节，请参阅 [这里](https://streamnative.io/en/blog/tech/2021-01-14-pulsar-architecture-performance-tuning)。"/><meta name="docsearch:version" content="2.8.0"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Pulsar Perf · Apache Pulsar"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pulsar.incubator.apache.org/"/><meta property="og:description" content="The Pulsar Perf is a built-in performance test tool for Apache Pulsar. You can use the Pulsar Perf to test message writing or reading performance. 更多性能优化细节，请参阅 [这里](https://streamnative.io/en/blog/tech/2021-01-14-pulsar-architecture-performance-tuning)。"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pulsar.incubator.apache.org/img/pulsar.svg"/><link rel="shortcut icon" href="/img/pulsar.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pulsar.incubator.apache.org/blog/atom.xml" title="Apache Pulsar Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pulsar.incubator.apache.org/blog/feed.xml" title="Apache Pulsar Blog RSS Feed"/><script>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Pulsar Perf · Apache Pulsar</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Pulsar Perf is a built-in performance test tool for Apache Pulsar. You can use the Pulsar Perf to test message writing or reading performance. 更多性能优化细节，请参阅 [这里](https://streamnative.io/en/blog/tech/2021-01-14-pulsar-architecture-performance-tuning)。"/><meta name="docsearch:version" content="2.8.0"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Pulsar Perf · Apache Pulsar"/><meta property="og:type" content="website"/><meta property="og:url" content="https://pulsar.apache.org/"/><meta property="og:description" content="The Pulsar Perf is a built-in performance test tool for Apache Pulsar. You can use the Pulsar Perf to test message writing or reading performance. 更多性能优化细节，请参阅 [这里](https://streamnative.io/en/blog/tech/2021-01-14-pulsar-architecture-performance-tuning)。"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://pulsar.apache.org/img/pulsar.svg"/><link rel="shortcut icon" href="/img/pulsar.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://pulsar.apache.org/blog/atom.xml" title="Apache Pulsar Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://pulsar.apache.org/blog/feed.xml" title="Apache Pulsar Blog RSS Feed"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -102,16 +102,16 @@
 <tr><th>选项</th><th>说明</th><th>默认值</th></tr>
 </thead>
 <tbody>
-<tr><td>access-mode</td><td>Set the producer access mode. Valid values are <code>Shared</code>, <code>Exclusive</code> and <code>WaitForExclusive</code>.</td><td>Shared（共享）</td></tr>
-<tr><td>admin-url</td><td>Set the Pulsar admin URL.</td><td>N/A</td></tr>
+<tr><td>access-mode</td><td>设置生产者访问模式。 有效值是 <code>Shared</code>, <code>Exclusive</code> 和 <code>WaitForExclusive</code>.</td><td>Shared（共享）</td></tr>
+<tr><td>admin-url</td><td>设置 Pulsar admin URL。</td><td>N/A</td></tr>
 <tr><td>auth-params</td><td>设置认证参数，格式由认证插件类中<code>configure</code>方法的实现决定的，如&quot;key1:val1,key2:val2&quot; 或 &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}&quot;。</td><td>N/A</td></tr>
 <tr><td>auth_plugin</td><td>设置认证插件类名</td><td>N/A</td></tr>
-<tr><td>listener-name</td><td>Set the listener name for the broker.</td><td>N/A</td></tr>
+<tr><td>listener-name</td><td>为broker指定监听器名称。</td><td>N/A</td></tr>
 <tr><td>batch-max-bytes</td><td>设置每个批消息的最大字节数</td><td>4194304</td></tr>
 <tr><td>batch-max-messages</td><td>设置每个批消息的最大消息数</td><td>1000</td></tr>
 <tr><td>batch-time-window</td><td>设置每批消息的窗口大小</td><td>1 ms</td></tr>
-<tr><td>busy-wait</td><td>Enable or disable Busy-Wait on the Pulsar client.</td><td>false</td></tr>
-<tr><td>chunking</td><td>Configure whether to split the message and publish in chunks if message size is larger than allowed max size.</td><td>false</td></tr>
+<tr><td>busy-wait</td><td>在 Pulsar 客户端启用或禁用 Busy-Wait.</td><td>false</td></tr>
+<tr><td>chunking</td><td>配置如果消息尺寸大于允许的最大尺寸，是否分割消息并在区块中发布。</td><td>false</td></tr>
 <tr><td>compression</td><td>指定消息载荷（ payload）的压缩格式</td><td>N/A</td></tr>
 <tr><td>conf-file</td><td>设置配置文件</td><td>N/A</td></tr>
 <tr><td>delay</td><td>给消息标记延迟时间</td><td>0s</td></tr>
@@ -175,10 +175,10 @@
 <tr><td>acks-delay-millis</td><td>设置确认分组的延迟时间，以毫秒为单位</td><td>100 ms</td></tr>
 <tr><td>auth-params</td><td>设置认证参数，格式由认证插件类中<code>configure</code>方法的实现决定的，如&quot;key1:val1,key2:val2&quot; 或 &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}&quot;。</td><td>N/A</td></tr>
 <tr><td>auth_plugin</td><td>设置认证插件类名</td><td>N/A</td></tr>
-<tr><td>auto_ack_chunk_q_full</td><td>Configure whether to automatically ack for the oldest message in receiver queue if the queue is full.</td><td>false</td></tr>
-<tr><td>listener-name</td><td>Set the listener name for the broker.</td><td>N/A</td></tr>
+<tr><td>auto_ack_chunk_q_full</td><td>配置如果队列满时，是否自动确认接收器队列中最旧的消息。</td><td>false</td></tr>
+<tr><td>listener-name</td><td>为broker指定监听器名称。</td><td>N/A</td></tr>
 <tr><td>batch-index-ack</td><td>开启或禁用批量索引确认</td><td>false</td></tr>
-<tr><td>busy-wait</td><td>Enable or disable Busy-Wait on the Pulsar client.</td><td>false</td></tr>
+<tr><td>busy-wait</td><td>在 Pulsar 客户端启用或禁用 Busy-Wait.</td><td>false</td></tr>
 <tr><td>conf-file</td><td>设置配置文件</td><td>N/A</td></tr>
 <tr><td>encryption-key-name</td><td>设置用于加密有效载荷的公钥名称</td><td>N/A</td></tr>
 <tr><td>encryption-key-value-file</td><td>设置包含用于加密有效载荷的公钥文件</td><td>N/A</td></tr>
@@ -234,7 +234,7 @@
 <li><p>可通过 HdrHistogram Plotter 的图形化界面检查测试结果，如图所示：</p>
 <p><img src="/docs/assets/perf-produce.png" alt=""></p></li>
 </ol>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/2.8.0/security-bouncy-castle"><span class="arrow-prev">← </span><span>Bouncy Castle Providers</span></a><a class="docs-next button" href="/docs/zh-CN/2.8.0/client-libraries"><span>概述</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#produce-messages">Produce messages</a><ul class="toc-headings"><li><a href="#configuration-options-for-pulsar-perf-produce">Configuration options for <code>pulsar-perf produce</code></a></li></ul></li><li><a href="#consume-messages">Consume messages</a><ul class="toc-headings"><li><a href="#configuration-options-for-pulsar-perf-consume">Configuration options for <code>pulsar-perf consume</code></a></li></ul></li><li><a href="#configurations">Configurations</a></li><li><a href="#hdrhistogram-plotter">HdrHistogram Plotter</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2021 The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</section><span><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/2.8.0/security-bouncy-castle"><span class="arrow-prev">← </span><span>Bouncy Castle Providers</span></a><a class="docs-next button" href="/docs/zh-CN/2.8.0/client-libraries"><span>概述</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#produce-messages">Produce messages</a><ul class="toc-headings"><li><a href="#configuration-options-for-pulsar-perf-produce">Configuration options for <code>pulsar-perf produce</code></a></li></ul></li><li><a href="#consume-messages">Consume messages</a><ul class="toc-headings"><li><a href="#configuration-options-for-pulsar-perf-consume">Configuration options for <code>pulsar-perf consume</code></a></li></ul></li><li><a href="#configurations">Configurations</a></li><li><a href="#hdrhistogram-plotter">HdrHistogram Plotter</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2022 The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</section><span><script>
       const community = document.querySelector("a[href='#community']").parentNode;
       const communityMenu =
         '<li>' +
