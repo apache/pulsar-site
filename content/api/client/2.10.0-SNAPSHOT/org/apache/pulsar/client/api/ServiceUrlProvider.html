@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var data = {"i0":18,"i1":6,"i2":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -122,10 +122,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Superinterfaces:</dt>
+<dd><code>java.lang.AutoCloseable</code></dd>
+</dl>
 <hr>
 <pre><a href="../../common/classification/InterfaceAudience.Public.html" title="annotation in org.apache.pulsar.common.classification">@Public</a>
 <a href="../../common/classification/InterfaceStability.Stable.html" title="annotation in org.apache.pulsar.common.classification">@Stable</a>
-public interface <span class="typeNameLabel">ServiceUrlProvider</span></pre>
+public interface <span class="typeNameLabel">ServiceUrlProvider</span>
+extends java.lang.AutoCloseable</pre>
 <div class="block">The provider to provide the service url.
 
  <p>This allows applications to retrieve the service URL from an external configuration provider and,
@@ -146,20 +151,27 @@ public interface <span class="typeNameLabel">ServiceUrlProvider</span></pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>default void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#close()">close</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Close the resource that the provider allocated.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getServiceUrl()">getServiceUrl</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the current service URL the Pulsar client should connect to.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initialize(org.apache.pulsar.client.api.PulsarClient)">initialize</a></span>&#8203;(<a href="PulsarClient.html" title="interface in org.apache.pulsar.client.api">PulsarClient</a>&nbsp;client)</code></th>
 <td class="colLast">
@@ -203,7 +215,7 @@ public interface <span class="typeNameLabel">ServiceUrlProvider</span></pre>
 <a id="getServiceUrl()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getServiceUrl</h4>
 <pre class="methodSignature">java.lang.String&nbsp;getServiceUrl()</pre>
@@ -211,6 +223,20 @@ public interface <span class="typeNameLabel">ServiceUrlProvider</span></pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the pulsar service url.</dd>
+</dl>
+</li>
+</ul>
+<a id="close()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>close</h4>
+<pre class="methodSignature">default&nbsp;void&nbsp;close()</pre>
+<div class="block">Close the resource that the provider allocated.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>close</code>&nbsp;in interface&nbsp;<code>java.lang.AutoCloseable</code></dd>
 </dl>
 </li>
 </ul>

@@ -418,7 +418,7 @@
     "/brokers/configuration/{configName}" : {
       "delete" : {
         "tags" : [ "brokers" ],
-        "summary" : "Delete dynamic serviceconfiguration into zk only. This operation requires Pulsar super-user privileges.",
+        "summary" : "Delete dynamic ServiceConfiguration into metadata only. This operation requires Pulsar super-user privileges.",
         "description" : "",
         "operationId" : "deleteDynamicConfiguration",
         "produces" : [ "application/json" ],
@@ -484,9 +484,9 @@
     "/brokers/health" : {
       "get" : {
         "tags" : [ "brokers" ],
-        "summary" : "Run a healthcheck against the broker",
+        "summary" : "Run a healthCheck against the broker",
         "description" : "",
-        "operationId" : "healthcheck",
+        "operationId" : "healthCheck",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "topicVersion",
@@ -570,6 +570,40 @@
           },
           "500" : {
             "description" : "Broker is not ready"
+          }
+        }
+      }
+    },
+    "/brokers/shutdown" : {
+      "post" : {
+        "tags" : [ "brokers" ],
+        "summary" : "Shutdown broker gracefully.",
+        "description" : "",
+        "operationId" : "shutDownBrokerGracefully",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "maxConcurrentUnloadPerSec",
+          "in" : "query",
+          "description" : "if the value absent(value=0) means no concurrent limitation.",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "forcedTerminateTopic",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Execute shutdown command successfully"
+          },
+          "403" : {
+            "description" : "You don't have admin permission to update service-configuration"
+          },
+          "500" : {
+            "description" : "Internal server error"
           }
         }
       }
@@ -6038,6 +6072,12 @@
           "description" : "Specify the namespace",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "bundle",
+          "in" : "query",
+          "description" : "Specify the bundle name",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -6575,7 +6615,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -6810,7 +6851,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -7027,7 +7069,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -7338,7 +7381,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -7482,7 +7526,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -7718,7 +7763,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -8132,7 +8178,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -8620,7 +8667,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -8953,7 +9001,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -9104,7 +9153,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -9255,7 +9305,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -9492,12 +9543,6 @@
           "default" : false
         } ],
         "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/OffloadProcessStatus"
-            }
-          },
           "307" : {
             "description" : "Current broker doesn't serve the namespace of this topic"
           },
@@ -9616,7 +9661,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -9982,6 +10028,7 @@
         "summary" : "Create a partitioned topic.",
         "description" : "It needs to be called before creating a producer on a partitioned topic.",
         "operationId" : "createPartitionedTopic",
+        "consumes" : [ "application/vnd.partitioned-topic-metadata+json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "tenant",
@@ -10004,12 +10051,10 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "The number of partitions for the topic",
+          "description" : "The metadata for the topic",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32",
-            "default" : 0
+            "$ref" : "#/definitions/PartitionedTopicMetadata"
           }
         }, {
           "name" : "createLocalTopicOnly",
@@ -10023,19 +10068,19 @@
             "description" : "Current broker doesn't serve the namespace of this topic"
           },
           "401" : {
-            "description" : "Don't have permission to manage resources on this tenant"
+            "description" : "Don't have permission to administrate resources on this tenant"
           },
           "403" : {
             "description" : "Don't have admin permission"
           },
           "404" : {
-            "description" : "The tenant/namespace does not exist"
+            "description" : "Tenant does not exist"
           },
           "406" : {
             "description" : "The number of partitions should be more than 0 and less than or equal to maxNumPartitionsPerPartitionedTopic"
           },
           "409" : {
-            "description" : "Partitioned topic already exists"
+            "description" : "Partitioned topic already exist"
           },
           "412" : {
             "description" : "Failed Reason : Name is invalid or Namespace does not have any clusters configured"
@@ -10325,7 +10370,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -10653,7 +10699,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -10815,7 +10862,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -10983,7 +11031,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -11122,6 +11171,171 @@
         }
       }
     },
+    "/non-persistent/{tenant}/{namespace}/{topic}/schemaCompatibilityStrategy" : {
+      "get" : {
+        "tags" : [ "non-persistent topic" ],
+        "summary" : "Get schema compatibility strategy on a topic",
+        "description" : "",
+        "operationId" : "getSchemaCompatibilityStrategy",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "tenant",
+          "in" : "path",
+          "description" : "Specify the tenant",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "Specify the cluster",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Specify topic name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "applied",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "authoritative",
+          "in" : "query",
+          "description" : "Is authentication required to perform this operation",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        } ],
+        "responses" : {
+          "307" : {
+            "description" : "Current broker doesn't serve the namespace of this topic"
+          },
+          "403" : {
+            "description" : "Don't have admin permission"
+          },
+          "404" : {
+            "description" : "Topic does not exist"
+          },
+          "405" : {
+            "description" : "Operation not allowed on persistent topic"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "non-persistent topic" ],
+        "summary" : "Set schema compatibility strategy on a topic",
+        "description" : "",
+        "operationId" : "setSchemaCompatibilityStrategy",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "tenant",
+          "in" : "path",
+          "description" : "Specify the tenant",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "Specify the namespace",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Specify topic name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "authoritative",
+          "in" : "query",
+          "description" : "Is authentication required to perform this operation",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Strategy used to check the compatibility of new schema",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "307" : {
+            "description" : "Current broker doesn't serve the namespace of this topic"
+          },
+          "403" : {
+            "description" : "Don't have admin permission"
+          },
+          "404" : {
+            "description" : "Topic does not exist"
+          },
+          "405" : {
+            "description" : "Operation not allowed on persistent topic"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "non-persistent topic" ],
+        "summary" : "Remove schema compatibility strategy on a topic",
+        "description" : "",
+        "operationId" : "removeSchemaCompatibilityStrategy",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "tenant",
+          "in" : "path",
+          "description" : "Specify the tenant",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "Specify the namespace",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Specify topic name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "authoritative",
+          "in" : "query",
+          "description" : "Is authentication required to perform this operation",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Strategy used to check the compatibility of new schema",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "307" : {
+            "description" : "Current broker doesn't serve the namespace of this topic"
+          },
+          "403" : {
+            "description" : "Don't have admin permission"
+          },
+          "404" : {
+            "description" : "Topic does not exist"
+          },
+          "405" : {
+            "description" : "Operation not allowed on persistent topic"
+          }
+        }
+      }
+    },
     "/non-persistent/{tenant}/{namespace}/{topic}/stats" : {
       "get" : {
         "tags" : [ "non-persistent topic" ],
@@ -11230,7 +11444,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -12192,7 +12407,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -12798,6 +13014,12 @@
           "description" : "Specify the namespace",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "bundle",
+          "in" : "query",
+          "description" : "Specify the bundle name",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -13275,7 +13497,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -13510,7 +13733,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -13727,7 +13951,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -14038,7 +14263,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -14182,7 +14408,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -14418,7 +14645,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -14835,7 +15063,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -15323,7 +15552,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -15656,7 +15886,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -15807,7 +16038,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -15958,7 +16190,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -16195,12 +16428,6 @@
           "default" : false
         } ],
         "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/OffloadProcessStatus"
-            }
-          },
           "307" : {
             "description" : "Current broker doesn't serve the namespace of this topic"
           },
@@ -16319,7 +16546,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -16685,6 +16913,7 @@
         "summary" : "Create a partitioned topic.",
         "description" : "It needs to be called before creating a producer on a partitioned topic.",
         "operationId" : "createPartitionedTopic",
+        "consumes" : [ "application/vnd.partitioned-topic-metadata+json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "tenant",
@@ -16707,12 +16936,10 @@
         }, {
           "in" : "body",
           "name" : "body",
-          "description" : "The number of partitions for the topic",
+          "description" : "The metadata for the topic",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32",
-            "default" : 0
+            "$ref" : "#/definitions/PartitionedTopicMetadata"
           }
         }, {
           "name" : "createLocalTopicOnly",
@@ -17028,7 +17255,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -17356,7 +17584,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -17518,7 +17747,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -17686,7 +17916,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "authoritative",
           "in" : "query",
@@ -17825,6 +18056,171 @@
         }
       }
     },
+    "/persistent/{tenant}/{namespace}/{topic}/schemaCompatibilityStrategy" : {
+      "get" : {
+        "tags" : [ "persistent topic" ],
+        "summary" : "Get schema compatibility strategy on a topic",
+        "description" : "",
+        "operationId" : "getSchemaCompatibilityStrategy",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "tenant",
+          "in" : "path",
+          "description" : "Specify the tenant",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "Specify the cluster",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Specify topic name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "applied",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "authoritative",
+          "in" : "query",
+          "description" : "Is authentication required to perform this operation",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        } ],
+        "responses" : {
+          "307" : {
+            "description" : "Current broker doesn't serve the namespace of this topic"
+          },
+          "403" : {
+            "description" : "Don't have admin permission"
+          },
+          "404" : {
+            "description" : "Topic does not exist"
+          },
+          "405" : {
+            "description" : "Operation not allowed on persistent topic"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "persistent topic" ],
+        "summary" : "Set schema compatibility strategy on a topic",
+        "description" : "",
+        "operationId" : "setSchemaCompatibilityStrategy",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "tenant",
+          "in" : "path",
+          "description" : "Specify the tenant",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "Specify the namespace",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Specify topic name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "authoritative",
+          "in" : "query",
+          "description" : "Is authentication required to perform this operation",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Strategy used to check the compatibility of new schema",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "307" : {
+            "description" : "Current broker doesn't serve the namespace of this topic"
+          },
+          "403" : {
+            "description" : "Don't have admin permission"
+          },
+          "404" : {
+            "description" : "Topic does not exist"
+          },
+          "405" : {
+            "description" : "Operation not allowed on persistent topic"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "persistent topic" ],
+        "summary" : "Remove schema compatibility strategy on a topic",
+        "description" : "",
+        "operationId" : "removeSchemaCompatibilityStrategy",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "tenant",
+          "in" : "path",
+          "description" : "Specify the tenant",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "Specify the namespace",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Specify topic name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "authoritative",
+          "in" : "query",
+          "description" : "Is authentication required to perform this operation",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Strategy used to check the compatibility of new schema",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "307" : {
+            "description" : "Current broker doesn't serve the namespace of this topic"
+          },
+          "403" : {
+            "description" : "Don't have admin permission"
+          },
+          "404" : {
+            "description" : "Topic does not exist"
+          },
+          "405" : {
+            "description" : "Operation not allowed on persistent topic"
+          }
+        }
+      }
+    },
     "/persistent/{tenant}/{namespace}/{topic}/stats" : {
       "get" : {
         "tags" : [ "persistent topic" ],
@@ -17936,7 +18332,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -18898,7 +19295,8 @@
           "name" : "applied",
           "in" : "query",
           "required" : false,
-          "type" : "boolean"
+          "type" : "boolean",
+          "default" : false
         }, {
           "name" : "isGlobal",
           "in" : "query",
@@ -20804,11 +21202,11 @@
             "$ref" : "#/definitions/X509Certificate"
           }
         },
-        "httpAuthType" : {
-          "type" : "string"
-        },
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
+        },
+        "httpAuthType" : {
+          "type" : "string"
         },
         "commandData" : {
           "type" : "string"
@@ -20841,15 +21239,15 @@
     "AutoTopicCreationOverride" : {
       "type" : "object",
       "properties" : {
-        "topicType" : {
-          "type" : "string"
-        },
         "defaultNumPartitions" : {
           "type" : "integer",
           "format" : "int32"
         },
         "allowAutoTopicCreation" : {
           "type" : "boolean"
+        },
+        "topicType" : {
+          "type" : "string"
         }
       }
     },
@@ -20880,16 +21278,16 @@
         "name" : {
           "type" : "string"
         },
+        "maxLineLength" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
         "paddingChar" : {
           "type" : "string"
         },
         "paddingByte" : {
           "type" : "string",
           "format" : "byte"
-        },
-        "maxLineLength" : {
-          "type" : "integer",
-          "format" : "int32"
         }
       }
     },
@@ -21109,19 +21507,19 @@
     "CompactionStats" : {
       "type" : "object",
       "properties" : {
-        "lastCompactionSucceedTimestamp" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "lastCompactionFailedTimestamp" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "lastCompactionDurationTimeInMills" : {
           "type" : "integer",
           "format" : "int64"
         },
         "lastCompactionRemovedEventCount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "lastCompactionSucceedTimestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "lastCompactionFailedTimestamp" : {
           "type" : "integer",
           "format" : "int64"
         }
@@ -21130,12 +21528,12 @@
     "CompletableFuture" : {
       "type" : "object",
       "properties" : {
-        "done" : {
-          "type" : "boolean"
-        },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "done" : {
+          "type" : "boolean"
         },
         "cancelled" : {
           "type" : "boolean"
@@ -21148,12 +21546,12 @@
     "CompletableFutureClusterData" : {
       "type" : "object",
       "properties" : {
-        "done" : {
-          "type" : "boolean"
-        },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "done" : {
+          "type" : "boolean"
         },
         "cancelled" : {
           "type" : "boolean"
@@ -21166,12 +21564,12 @@
     "CompletableFuturePartitionedTopicMetadata" : {
       "type" : "object",
       "properties" : {
-        "done" : {
-          "type" : "boolean"
-        },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "done" : {
+          "type" : "boolean"
         },
         "cancelled" : {
           "type" : "boolean"
@@ -21184,12 +21582,12 @@
     "CompletableFutureVoid" : {
       "type" : "object",
       "properties" : {
-        "done" : {
-          "type" : "boolean"
-        },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "done" : {
+          "type" : "boolean"
         },
         "cancelled" : {
           "type" : "boolean"
@@ -21234,11 +21632,15 @@
             "type" : "string"
           }
         },
-        "msgRateOut" : {
+        "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
         },
-        "msgThroughputOut" : {
+        "msgRateRedeliver" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "chunkedMessageRate" : {
           "type" : "number",
           "format" : "double"
         },
@@ -21249,14 +21651,6 @@
         "msgOutCounter" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "msgRateRedeliver" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "chunkedMessageRate" : {
-          "type" : "number",
-          "format" : "double"
         },
         "unackedMessages" : {
           "type" : "integer",
@@ -21298,6 +21692,10 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "msgRateOut" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -21318,13 +21716,13 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "symbol" : {
+        "displayName" : {
           "type" : "string"
         },
         "numericCodeAsString" : {
           "type" : "string"
         },
-        "displayName" : {
+        "symbol" : {
           "type" : "string"
         }
       }
@@ -21624,19 +22022,19 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "userMetrics" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "number",
-            "format" : "double"
-          }
-        },
         "oneMin" : {
           "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "userMetrics" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "number",
+            "format" : "double"
+          }
         },
         "receivedTotal" : {
           "type" : "integer",
@@ -21952,9 +22350,6 @@
         "characterEscapes" : {
           "$ref" : "#/definitions/CharacterEscapes"
         },
-        "currentValue" : {
-          "type" : "object"
-        },
         "highestEscapedChar" : {
           "type" : "integer",
           "format" : "int32"
@@ -21976,6 +22371,9 @@
         "formatFeatures" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "currentValue" : {
+          "type" : "object"
         }
       }
     },
@@ -22013,6 +22411,9 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "closed" : {
+          "type" : "boolean"
+        },
         "text" : {
           "type" : "string"
         },
@@ -22045,8 +22446,8 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "closed" : {
-          "type" : "boolean"
+        "objectId" : {
+          "type" : "object"
         },
         "intValue" : {
           "type" : "integer",
@@ -22067,12 +22468,6 @@
         },
         "currentName" : {
           "type" : "string"
-        },
-        "inputSource" : {
-          "type" : "object"
-        },
-        "currentValue" : {
-          "type" : "object"
         },
         "tokenLocation" : {
           "$ref" : "#/definitions/JsonLocation"
@@ -22150,7 +22545,10 @@
         "valueAsString" : {
           "type" : "string"
         },
-        "objectId" : {
+        "inputSource" : {
+          "type" : "object"
+        },
+        "currentValue" : {
           "type" : "object"
         }
       }
@@ -22483,11 +22881,21 @@
           "type" : "number",
           "format" : "double"
         },
-        "msgThroughputIn" : {
+        "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
         },
-        "msgThroughputOut" : {
+        "lastUpdate" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "cpu" : {
+          "$ref" : "#/definitions/ResourceUsage"
+        },
+        "directMemory" : {
+          "$ref" : "#/definitions/ResourceUsage"
+        },
+        "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
         },
@@ -22496,9 +22904,6 @@
         },
         "overLoaded" : {
           "type" : "boolean"
-        },
-        "loadReportType" : {
-          "type" : "string"
         },
         "bandwidthIn" : {
           "$ref" : "#/definitions/ResourceUsage"
@@ -22509,21 +22914,17 @@
         "memory" : {
           "$ref" : "#/definitions/ResourceUsage"
         },
-        "cpu" : {
-          "$ref" : "#/definitions/ResourceUsage"
-        },
-        "directMemory" : {
-          "$ref" : "#/definitions/ResourceUsage"
-        },
-        "lastUpdate" : {
-          "type" : "integer",
-          "format" : "int64"
+        "loadReportType" : {
+          "type" : "string"
         }
       }
     },
     "Locale" : {
       "type" : "object",
       "properties" : {
+        "displayName" : {
+          "type" : "string"
+        },
         "script" : {
           "type" : "string"
         },
@@ -22573,9 +22974,6 @@
           "type" : "string"
         },
         "language" : {
-          "type" : "string"
-        },
-        "displayName" : {
           "type" : "string"
         }
       }
@@ -22790,22 +23188,18 @@
             "type" : "string"
           }
         },
-        "producerName" : {
-          "type" : "string"
-        },
-        "msgRateIn" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
         },
-        "averageMsgSize" : {
+        "chunkedMessageRate" : {
           "type" : "number",
           "format" : "double"
         },
-        "chunkedMessageRate" : {
+        "producerName" : {
+          "type" : "string"
+        },
+        "averageMsgSize" : {
           "type" : "number",
           "format" : "double"
         },
@@ -22822,6 +23216,13 @@
         "producerId" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "supportsPartialProducer" : {
+          "type" : "boolean"
+        },
+        "msgRateIn" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -22832,26 +23233,26 @@
           "type" : "number",
           "format" : "double"
         },
-        "connected" : {
-          "type" : "boolean"
-        },
-        "msgRateIn" : {
+        "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
+        },
+        "connected" : {
+          "type" : "boolean"
         },
         "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
         },
-        "msgRateOut" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "msgThroughputOut" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "msgRateExpired" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "msgRateIn" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "msgRateOut" : {
           "type" : "number",
           "format" : "double"
         },
@@ -22887,45 +23288,13 @@
         "type" : {
           "type" : "string"
         },
-        "replicated" : {
-          "type" : "boolean"
-        },
-        "durable" : {
-          "type" : "boolean"
-        },
-        "nonContiguousDeletedMessagesRangesSerializedSize" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "msgRateOut" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
         },
-        "bytesOutCounter" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "msgOutCounter" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "backlogSize" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "nonContiguousDeletedMessagesRanges" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "consumers" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ConsumerStats"
-          }
         },
         "msgBacklog" : {
           "type" : "integer",
@@ -22949,6 +23318,28 @@
         },
         "blockedSubscriptionOnUnackedMsgs" : {
           "type" : "boolean"
+        },
+        "replicated" : {
+          "type" : "boolean"
+        },
+        "durable" : {
+          "type" : "boolean"
+        },
+        "bytesOutCounter" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "msgOutCounter" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "nonContiguousDeletedMessagesRanges" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "nonContiguousDeletedMessagesRangesSerializedSize" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "msgDelayed" : {
           "type" : "integer",
@@ -23006,6 +23397,16 @@
           "additionalProperties" : {
             "type" : "string"
           }
+        },
+        "msgRateOut" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "consumers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ConsumerStats"
+          }
         }
       }
     },
@@ -23017,10 +23418,6 @@
           "additionalProperties" : {
             "$ref" : "#/definitions/NonPersistentSubscriptionStats"
           }
-        },
-        "msgDropRate" : {
-          "type" : "number",
-          "format" : "double"
         },
         "publishers" : {
           "type" : "array",
@@ -23034,35 +23431,21 @@
             "$ref" : "#/definitions/NonPersistentReplicatorStats"
           }
         },
-        "msgRateIn" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "deduplicationStatus" : {
-          "type" : "string"
-        },
-        "topicEpoch" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "nonContiguousDeletedMessagesRangesSerializedSize" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "compaction" : {
-          "$ref" : "#/definitions/CompactionStats"
-        },
-        "msgThroughputIn" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "msgRateOut" : {
+        "msgDropRate" : {
           "type" : "number",
           "format" : "double"
         },
         "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
+        },
+        "msgThroughputIn" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "backlogSize" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "bytesInCounter" : {
           "type" : "integer",
@@ -23091,10 +23474,6 @@
           "type" : "integer",
           "format" : "int64"
         },
-        "backlogSize" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "earliestMsgPublishTimeInBacklogs" : {
           "type" : "integer",
           "format" : "int64"
@@ -23107,9 +23486,31 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "deduplicationStatus" : {
+          "type" : "string"
+        },
+        "topicEpoch" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
         "nonContiguousDeletedMessagesRanges" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "nonContiguousDeletedMessagesRangesSerializedSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "compaction" : {
+          "$ref" : "#/definitions/CompactionStats"
+        },
+        "msgRateIn" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "msgRateOut" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -23214,14 +23615,6 @@
     "OffloadPolicies" : {
       "type" : "object",
       "properties" : {
-        "managedLedgerOffloadThresholdInBytes" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "managedLedgerOffloadDeletionLagInMillis" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "managedLedgerOffloadDriver" : {
           "type" : "string"
         },
@@ -23232,6 +23625,14 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "managedLedgerOffloadThresholdInBytes" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "managedLedgerOffloadDeletionLagInMillis" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
         "managedLedgerOffloadPrefetchRounds" : {
           "type" : "integer",
           "format" : "int32"
@@ -23239,15 +23640,9 @@
         "s3ManagedLedgerOffloadRegion" : {
           "type" : "string"
         },
-        "fileSystemURI" : {
-          "type" : "string"
-        },
         "managedLedgerOffloadedReadPriority" : {
           "type" : "string",
           "enum" : [ "BOOKKEEPER_FIRST", "TIERED_STORAGE_FIRST" ]
-        },
-        "s3ManagedLedgerOffloadBucket" : {
-          "type" : "string"
         },
         "s3ManagedLedgerOffloadServiceEndpoint" : {
           "type" : "string"
@@ -23255,6 +23650,12 @@
         "s3ManagedLedgerOffloadMaxBlockSizeInBytes" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "fileSystemURI" : {
+          "type" : "string"
+        },
+        "s3ManagedLedgerOffloadBucket" : {
+          "type" : "string"
         },
         "s3ManagedLedgerOffloadReadBufferSizeInBytes" : {
           "type" : "integer",
@@ -23420,21 +23821,6 @@
         }
       }
     },
-    "OffloadProcessStatus" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "enum" : [ "NOT_RUN", "RUNNING", "SUCCESS", "ERROR" ]
-        },
-        "lastError" : {
-          "type" : "string"
-        },
-        "firstUnoffloadedMessage" : {
-          "$ref" : "#/definitions/MessageId"
-        }
-      }
-    },
     "OutputDecorator" : {
       "type" : "object"
     },
@@ -23446,21 +23832,6 @@
       "properties" : {
         "name" : {
           "type" : "string"
-        },
-        "annotations" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Annotation"
-          }
-        },
-        "declaredAnnotations" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Annotation"
-          }
-        },
-        "sealed" : {
-          "type" : "boolean"
         },
         "specificationTitle" : {
           "type" : "string"
@@ -23479,6 +23850,21 @@
         },
         "implementationVendor" : {
           "type" : "string"
+        },
+        "annotations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Annotation"
+          }
+        },
+        "declaredAnnotations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Annotation"
+          }
+        },
+        "sealed" : {
+          "type" : "boolean"
         }
       }
     },
@@ -24046,10 +24432,10 @@
     "PublicKey" : {
       "type" : "object",
       "properties" : {
-        "format" : {
+        "algorithm" : {
           "type" : "string"
         },
-        "algorithm" : {
+        "format" : {
           "type" : "string"
         },
         "encoded" : {
@@ -24086,22 +24472,18 @@
             "type" : "string"
           }
         },
-        "producerName" : {
-          "type" : "string"
-        },
-        "msgRateIn" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
         },
-        "averageMsgSize" : {
+        "chunkedMessageRate" : {
           "type" : "number",
           "format" : "double"
         },
-        "chunkedMessageRate" : {
+        "producerName" : {
+          "type" : "string"
+        },
+        "averageMsgSize" : {
           "type" : "number",
           "format" : "double"
         },
@@ -24118,6 +24500,13 @@
         "producerId" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "supportsPartialProducer" : {
+          "type" : "boolean"
+        },
+        "msgRateIn" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -24132,26 +24521,26 @@
     "ReplicatorStats" : {
       "type" : "object",
       "properties" : {
-        "connected" : {
-          "type" : "boolean"
-        },
-        "msgRateIn" : {
+        "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
+        },
+        "connected" : {
+          "type" : "boolean"
         },
         "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
         },
-        "msgRateOut" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "msgThroughputOut" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "msgRateExpired" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "msgRateIn" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "msgRateOut" : {
           "type" : "number",
           "format" : "double"
         },
@@ -24395,6 +24784,9 @@
     "SerializerProvider" : {
       "type" : "object",
       "properties" : {
+        "generator" : {
+          "$ref" : "#/definitions/JsonGenerator"
+        },
         "locale" : {
           "$ref" : "#/definitions/Locale"
         },
@@ -24409,9 +24801,6 @@
         },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
-        },
-        "generator" : {
-          "$ref" : "#/definitions/JsonGenerator"
         },
         "defaultNullValueSerializer" : {
           "$ref" : "#/definitions/JsonSerializerObject"
@@ -24517,45 +24906,13 @@
         "type" : {
           "type" : "string"
         },
-        "replicated" : {
-          "type" : "boolean"
-        },
-        "durable" : {
-          "type" : "boolean"
-        },
-        "nonContiguousDeletedMessagesRangesSerializedSize" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "msgRateOut" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
         },
-        "bytesOutCounter" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "msgOutCounter" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "backlogSize" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "nonContiguousDeletedMessagesRanges" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "consumers" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ConsumerStats"
-          }
         },
         "msgBacklog" : {
           "type" : "integer",
@@ -24579,6 +24936,28 @@
         },
         "blockedSubscriptionOnUnackedMsgs" : {
           "type" : "boolean"
+        },
+        "replicated" : {
+          "type" : "boolean"
+        },
+        "durable" : {
+          "type" : "boolean"
+        },
+        "bytesOutCounter" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "msgOutCounter" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "nonContiguousDeletedMessagesRanges" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "nonContiguousDeletedMessagesRangesSerializedSize" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "msgDelayed" : {
           "type" : "integer",
@@ -24635,6 +25014,16 @@
           "type" : "object",
           "additionalProperties" : {
             "type" : "string"
+          }
+        },
+        "msgRateOut" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "consumers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ConsumerStats"
           }
         }
       }
@@ -24698,7 +25087,7 @@
     "TimeZone" : {
       "type" : "object",
       "properties" : {
-        "id" : {
+        "displayName" : {
           "type" : "string"
         },
         "dstsavings" : {
@@ -24709,7 +25098,7 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "displayName" : {
+        "id" : {
           "type" : "string"
         }
       }
@@ -24717,41 +25106,23 @@
     "TopicStats" : {
       "type" : "object",
       "properties" : {
-        "subscriptions" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "$ref" : "#/definitions/SubscriptionStats"
-          }
-        },
-        "msgRateIn" : {
+        "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
-        },
-        "deduplicationStatus" : {
-          "type" : "string"
-        },
-        "topicEpoch" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "nonContiguousDeletedMessagesRangesSerializedSize" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "compaction" : {
-          "$ref" : "#/definitions/CompactionStats"
         },
         "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
         },
-        "msgRateOut" : {
-          "type" : "number",
-          "format" : "double"
+        "backlogSize" : {
+          "type" : "integer",
+          "format" : "int64"
         },
-        "msgThroughputOut" : {
-          "type" : "number",
-          "format" : "double"
+        "subscriptions" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/SubscriptionStats"
+          }
         },
         "bytesInCounter" : {
           "type" : "integer",
@@ -24780,10 +25151,6 @@
           "type" : "integer",
           "format" : "int64"
         },
-        "backlogSize" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "earliestMsgPublishTimeInBacklogs" : {
           "type" : "integer",
           "format" : "int64"
@@ -24808,9 +25175,31 @@
             "$ref" : "#/definitions/ReplicatorStats"
           }
         },
+        "deduplicationStatus" : {
+          "type" : "string"
+        },
+        "topicEpoch" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
         "nonContiguousDeletedMessagesRanges" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "nonContiguousDeletedMessagesRangesSerializedSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "compaction" : {
+          "$ref" : "#/definitions/CompactionStats"
+        },
+        "msgRateIn" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "msgRateOut" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -24894,6 +25283,21 @@
         },
         "configurationStoreServers" : {
           "type" : "string"
+        },
+        "configurationMetadataStoreUrl" : {
+          "type" : "string"
+        },
+        "metadataStoreSessionTimeoutMillis" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "metadataStoreOperationTimeoutSeconds" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "metadataStoreCacheExpirySeconds" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "zooKeeperSessionTimeoutMillis" : {
           "type" : "integer",
@@ -25219,14 +25623,14 @@
         "initialized" : {
           "type" : "boolean"
         },
-        "workers" : {
-          "$ref" : "#/definitions/WorkersWorkerService"
+        "workerConfig" : {
+          "$ref" : "#/definitions/WorkerConfig"
         },
         "functionsV2" : {
           "$ref" : "#/definitions/FunctionsV2WorkerService"
         },
-        "workerConfig" : {
-          "$ref" : "#/definitions/WorkerConfig"
+        "workers" : {
+          "$ref" : "#/definitions/WorkersWorkerService"
         },
         "functions" : {
           "$ref" : "#/definitions/FunctionsWorkerService"
@@ -25269,28 +25673,17 @@
         "issuerX500Principal" : {
           "$ref" : "#/definitions/X500Principal"
         },
-        "version" : {
-          "type" : "integer",
-          "format" : "int32"
+        "issuerDN" : {
+          "$ref" : "#/definitions/Principal"
         },
-        "serialNumber" : {
-          "type" : "integer"
-        },
-        "tbscertificate" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string",
-            "format" : "byte"
-          }
-        },
-        "extendedKeyUsage" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
+        "subjectDN" : {
+          "$ref" : "#/definitions/Principal"
         },
         "sigAlgName" : {
           "type" : "string"
+        },
+        "serialNumber" : {
+          "type" : "integer"
         },
         "notBefore" : {
           "type" : "string",
@@ -25299,6 +25692,13 @@
         "notAfter" : {
           "type" : "string",
           "format" : "date-time"
+        },
+        "tbscertificate" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
         },
         "sigAlgOID" : {
           "type" : "string"
@@ -25322,11 +25722,32 @@
             "type" : "boolean"
           }
         },
+        "extendedKeyUsage" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "version" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
         "keyUsage" : {
           "type" : "array",
           "items" : {
             "type" : "boolean"
           }
+        },
+        "signature" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
+        "basicConstraints" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "subjectAlternativeNames" : {
           "type" : "array",
@@ -25346,31 +25767,14 @@
             }
           }
         },
-        "signature" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string",
-            "format" : "byte"
-          }
-        },
-        "basicConstraints" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "issuerDN" : {
-          "$ref" : "#/definitions/Principal"
-        },
-        "subjectDN" : {
-          "$ref" : "#/definitions/Principal"
-        },
-        "criticalExtensionOIDs" : {
+        "nonCriticalExtensionOIDs" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
             "type" : "string"
           }
         },
-        "nonCriticalExtensionOIDs" : {
+        "criticalExtensionOIDs" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
