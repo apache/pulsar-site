@@ -7,6 +7,25 @@ function _log(msg) {
   }
 }
 
+function _logMissing(version, docsId, pathname) {
+  if (!pathname) {
+    let log = "{}";
+    let logdir = path.join(__dirname, "../log");
+    let logpath = path.join(__dirname, "../log", version + ".missing");
+    if (!fs.existsSync(logdir)) {
+      fs.mkdirSync(logdir);
+    }
+    if (fs.existsSync(logpath)) {
+      log = fs.readFileSync(logpath, "utf8");
+    }
+    log = JSON.parse(log);
+    log[docsId] = pathname ? pathname : "";
+    fs.writeFileSync(path.join(logpath), JSON.stringify(log));
+
+    _log("[" + version + ":" + docsId + "]not fund and fix missing fail");
+  }
+}
+
 const _search = (dir, version, docsId, reg) => {
   let pathname = path.join(dir, docsId + ".md");
   if (fs.existsSync(pathname)) {
@@ -54,6 +73,7 @@ const find = (version, docsId) => {
     version == "next" ? nextReg : vReg
   );
   if (pathname || version == "next") {
+    _logMissing(version, docsId, pathname);
     return pathname;
   }
 
@@ -77,24 +97,7 @@ const find = (version, docsId) => {
       }
     }
   }
-
-  let log = "{}";
-  let logdir = path.join(__dirname, "../log");
-  let logpath = path.join(__dirname, "../log", version + ".missing");
-  if (!fs.existsSync(logdir)) {
-    fs.mkdirSync(logdir);
-  }
-  if (fs.existsSync(logpath)) {
-    log = fs.readFileSync(logpath, "utf8");
-  }
-  log = JSON.parse(log);
-  log[docsId] = pathname ? pathname : "";
-  fs.writeFileSync(path.join(logpath), JSON.stringify(log));
-
-  if (!pathname) {
-    _log("[" + version + ":" + docsId + "]not fund and fix missing fail");
-  }
-
+  _logMissing(version, docsId, pathname);
   return pathname;
 };
 
@@ -102,5 +105,6 @@ module.exports = find;
 
 //Test
 if (typeof require !== "undefined" && require.main === module) {
-  find("2.6.0", "adaptors-kafka");
+  // find("2.6.0", "adaptors-kafka");
+  find("next", "deploy-dcos");
 }

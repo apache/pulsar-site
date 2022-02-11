@@ -3,6 +3,12 @@ const path = require("path");
 const _ = require("lodash");
 const migrateDocs = require("./migrate-docs");
 
+function _log(msg) {
+  if (typeof require !== "undefined" && require.main === module) {
+    console.log(msg);
+  }
+}
+
 const migrate = (version, category) => {
   let version_full = "version-" + version;
   let src = "../../website/versioned_docs/" + version_full;
@@ -105,10 +111,13 @@ const migrate = (version, category) => {
   }
   fs.writeFileSync(new_sidebar_file, JSON.stringify(new_sidebar, null, 2));
 
+  console.log("     [" + version + ":" + category + "]migrate...");
   for (let docsId of sidebar) {
-    migrateDocs(version, docsId);
+    migrateDocs(version, category, docsId);
   }
 };
+
+module.exports = migrate;
 
 //Test
 if (typeof require !== "undefined" && require.main === module) {

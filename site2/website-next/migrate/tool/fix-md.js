@@ -14,7 +14,7 @@ function fix(data, version) {
   data = fixTipNote(data);
   data = fixTipNoteInList(data);
   data = fixCode(data);
-
+  console.log('....')
   data = data
     .replace(reg, "id: ")
     .replace("id: deploy-docs", "id: deploy-dcos")
