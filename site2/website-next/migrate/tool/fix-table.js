@@ -61,11 +61,11 @@ function fix(data) {
   return content;
 }
 
-function test() {
-  let data = fs.readFileSync(path.join(__dirname, "../bak/txn-how.md"), "utf8");
-  data = fix(data);
-  fs.writeFileSync(path.join(__dirname, "../bak/txn-how-fixed.md"), data);
-}
+// function test() {
+//   let data = fs.readFileSync(path.join(__dirname, "../bak/txn-how.md"), "utf8");
+//   data = fix(data);
+//   fs.writeFileSync(path.join(__dirname, "../bak/txn-how-fixed.md"), data);
+// }
 
 // test();
 
