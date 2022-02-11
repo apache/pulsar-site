@@ -30,7 +30,6 @@ module.exports = (data) => {
       prefix +
       "```" +
       "\n";
-    console.log(_match);
     nData = nData.replace(_match, newCodeBlock);
   }
   return nData
