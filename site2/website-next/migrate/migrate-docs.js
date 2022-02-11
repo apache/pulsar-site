@@ -10,7 +10,7 @@ function _log(msg) {
   }
 }
 
-function migrate(version, chapter, docsId) {
+function migrate(version, chapter, docsId, cb) {
   let dest = "../../website-next/versioned_docs/version-" + version;
   if (version == "next") {
     dest = "../../website-next/docs";
@@ -24,6 +24,7 @@ function migrate(version, chapter, docsId) {
     let data = fs.readFileSync(mdpath, "utf8");
     data = fixMd(data, version);
     fs.writeFileSync(dest, data);
+    cb && cb(docsId);
   } else {
     console.log(
       "         [" +

@@ -51,3 +51,7 @@ function fix(data, version) {
 }
 
 module.exports = fix;
+
+//Test
+if (typeof require !== "undefined" && require.main === module) {
+}

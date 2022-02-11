@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
+const leftMd = require("./tool/left-md");
+const fixMd = require("./tool/fix-md");
 const migrateChapter = require("./migrate-chapter");
 
 function _log(msg) {
@@ -32,9 +34,20 @@ const migrate = (version) => {
 
   const _key = version == "next" ? "docs" : version_full + "-docs";
   let chapterList = _.keys(sidebar[_key]);
-  console.log("[" + version + "]migrate...");
+
+  let migratedList = [];
   for (let chapter of chapterList) {
-    migrateChapter(version, chapter);
+    migrateChapter(version, chapter, (docsId) => {
+      migratedList.push(docsId);
+    });
+  }
+  let leftMdList = leftMd(version, migratedList);
+  for (let mdfile of leftMdList) {
+    console.log(
+      "     [" + version + ":left:" + path.basename(mdfile) + "]migrate..."
+    );
+    let data = fixMd(fs.readFileSync(mdfile, "utf8"));
+    fs.writeFileSync(path.join(dest, path.basename(mdfile)), data);
   }
 };
 

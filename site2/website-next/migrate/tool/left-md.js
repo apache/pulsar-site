@@ -21,12 +21,15 @@ const left = (version, migratedList) => {
   let docsList = fs.readdirSync(src);
   for (let filename of docsList) {
     let pathname = path.join(src, filename);
+    if (fs.statSync(pathname).isDirectory()) {
+      continue;
+    }
     let data = fs.readFileSync(pathname, "utf8");
     let id = "";
     if (vReg.test(data)) {
       id = vReg.exec(data)[3];
     } else if (nextReg.test(data)) {
-      id = vReg.exec(data)[1];
+      id = nextReg.exec(data)[1];
     }
     if (migratedList.includes(id)) {
       continue;

@@ -9,7 +9,7 @@ function _log(msg) {
   }
 }
 
-const migrate = (version, category) => {
+const migrate = (version, category, cb) => {
   let version_full = "version-" + version;
   let src = "../../website/versioned_docs/" + version_full;
   let dest = "../../website-next/versioned_docs/" + version_full;
@@ -113,7 +113,7 @@ const migrate = (version, category) => {
 
   console.log("     [" + version + ":" + category + "]migrate...");
   for (let docsId of sidebar) {
-    migrateDocs(version, category, docsId);
+    migrateDocs(version, category, docsId, cb);
   }
 };
 
