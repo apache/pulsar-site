@@ -8,7 +8,7 @@ You can use the Pulsar C# client (DotPulsar) to create Pulsar producers and cons
 
 ## Installation
 
-You can install the Pulsar C# client library either through the dotnet CLI or through the Visual Studio. This section describes how to install the Pulsar C# client library through the dotnet CLI. For information about how to install the Pulsar C# client library through the Visual Studio , see [here](https://docs.microsoft.com/en-us/visualstudio/mac/nuget-walkthrough?view=vsmac-2019).
+You can install the Pulsar C# client library either through the dotnet CLI or through the Visual Studio. This section describes how to install the Pulsar C# client library through the dotnet CLI. For information about how to install the Pulsar C# client library through the Visual Studio, see [here](https://docs.microsoft.com/en-us/visualstudio/mac/nuget-walkthrough?view=vsmac-2019).
 
 ### Prerequisites
 
@@ -49,7 +49,7 @@ To install the Pulsar C# client library, following these steps:
        ```xml
        
        <ItemGroup>
-         <PackageReference Include="DotPulsar" Version="0.11.0" />
+         <PackageReference Include="DotPulsar" Version="2.0.1" />
        </ItemGroup>
        
        ```
@@ -63,6 +63,8 @@ This section describes some configuration examples for the Pulsar C# client.
 This example shows how to create a Pulsar C# client connected to localhost.
 
 ```c#
+
+using DotPulsar;
 
 var client = PulsarClient.Builder().Build();
 
@@ -83,7 +85,10 @@ This section describes how to create a producer.
 
   ```c#
   
-  var producer = client.NewProducer()
+  using DotPulsar;
+  using DotPulsar.Extensions;
+
+  var producer = client.NewProducer())
                        .Topic("persistent://public/default/mytopic")
                        .Create();
   
@@ -93,7 +98,9 @@ This section describes how to create a producer.
 
   ```c#
   
-  var options = new ProducerOptions("persistent://public/default/mytopic");
+  using DotPulsar;
+
+  var options = new ProducerOptions<byte[]>("persistent://public/default/mytopic", Schema.ByteArray);
   var producer = client.CreateProducer(options);
   
   ```
@@ -106,6 +113,9 @@ This section describes how to create a consumer.
 
   ```c#
   
+  using DotPulsar;
+  using DotPulsar.Extensions;
+
   var consumer = client.NewConsumer()
                        .SubscriptionName("MySubscription")
                        .Topic("persistent://public/default/mytopic")
@@ -117,7 +127,9 @@ This section describes how to create a consumer.
 
   ```c#
   
-  var options = new ConsumerOptions("MySubscription", "persistent://public/default/mytopic");
+  using DotPulsar;
+
+  var options = new ConsumerOptions<byte[]>("MySubscription", "persistent://public/default/mytopic", Schema.ByteArray);
   var consumer = client.CreateConsumer(options);
   
   ```
@@ -130,6 +142,9 @@ This section describes how to create a reader.
 
   ```c#
   
+  using DotPulsar;
+  using DotPulsar.Extensions;
+
   var reader = client.NewReader()
                      .StartMessageId(MessageId.Earliest)
                      .Topic("persistent://public/default/mytopic")
@@ -141,7 +156,9 @@ This section describes how to create a reader.
 
   ```c#
   
-  var options = new ReaderOptions(MessageId.Earliest, "persistent://public/default/mytopic");
+  using DotPulsar;
+
+  var options = new ReaderOptions<byte[]>(MessageId.Earliest, "persistent://public/default/mytopic", Schema.ByteArray);
   var reader = client.CreateReader(options);
   
   ```
@@ -158,6 +175,8 @@ The Pulsar C# client supports four kinds of encryption policies:
 This example shows how to set the `EnforceUnencrypted` encryption policy.
 
 ```c#
+
+using DotPulsar;
 
 var client = PulsarClient.Builder()
                          .ConnectionSecurity(EncryptionPolicy.EnforceEncrypted)
@@ -183,6 +202,9 @@ If you have followed [Authentication using TLS](security-tls-authentication), yo
 
    ```c#
    
+   using System.Security.Cryptography.X509Certificates;
+   using DotPulsar;
+
    var clientCertificate = new X509Certificate2("admin.pfx");
    var client = PulsarClient.Builder()
                             .AuthenticateUsingClientCertificate(clientCertificate)
@@ -211,7 +233,6 @@ await producer.Send(data);
 
   ```c#
   
-  var data = Encoding.UTF8.GetBytes("Hello World");
   var messageId = await producer.NewMessage()
                                 .Property("SomeKey", "SomeValue")
                                 .Send(data);
@@ -312,6 +333,7 @@ The following table lists states available for the producer.
 | Connected | All is well. |
 | Disconnected | The connection is lost and attempts are being made to reconnect. |
 | Faulted | An unrecoverable error has occurred. |
+| PartiallyConnected | Some of the sub-producers are disconnected. |
 
 This example shows how to monitor the producer state.
 
@@ -323,7 +345,7 @@ private static async ValueTask Monitor(IProducer producer, CancellationToken can
 
     while (!cancellationToken.IsCancellationRequested)
     {
-        state = await producer.StateChangedFrom(state, cancellationToken);
+        state = (await producer.StateChangedFrom(state, cancellationToken)).ProducerState;
 
         var stateMessage = state switch
         {
@@ -331,6 +353,7 @@ private static async ValueTask Monitor(IProducer producer, CancellationToken can
             ProducerState.Disconnected => $"The producer is disconnected",
             ProducerState.Closed => $"The producer has closed",
             ProducerState.Faulted => $"The producer has faulted",
+            ProducerState.PartiallyConnected => $"The producer is partially connected.",
             _ => $"The producer has an unknown state '{state}'"
         };
 
@@ -355,6 +378,7 @@ The following table lists states available for the consumer.
 | Disconnected | The connection is lost and attempts are being made to reconnect. |
 | Faulted | An unrecoverable error has occurred. |
 | ReachedEndOfTopic | No more messages are delivered. |
+| Unsubscribed | The consumer has unsubscribed. |
 
 This example shows how to monitor the consumer state.
 
@@ -366,7 +390,7 @@ private static async ValueTask Monitor(IConsumer consumer, CancellationToken can
 
     while (!cancellationToken.IsCancellationRequested)
     {
-        state = await consumer.StateChangedFrom(state, cancellationToken);
+        state = (await consumer.StateChangedFrom(state, cancellationToken)).ConsumerState;
 
         var stateMessage = state switch
         {
@@ -376,6 +400,7 @@ private static async ValueTask Monitor(IConsumer consumer, CancellationToken can
             ConsumerState.Closed => "The consumer has closed",
             ConsumerState.ReachedEndOfTopic => "The consumer has reached end of topic",
             ConsumerState.Faulted => "The consumer has faulted",
+            ConsumerState.Unsubscribed => "The consumer is unsubscribed.",
             _ => $"The consumer has an unknown state '{state}'"
         };
 
@@ -410,7 +435,7 @@ private static async ValueTask Monitor(IReader reader, CancellationToken cancell
 
     while (!cancellationToken.IsCancellationRequested)
     {
-        state = await reader.StateChangedFrom(state, cancellationToken);
+        state = (await reader.StateChangedFrom(state, cancellationToken)).ReaderState;
 
         var stateMessage = state switch
         {

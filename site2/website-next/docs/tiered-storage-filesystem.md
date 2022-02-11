@@ -93,10 +93,9 @@ Besides, you can also configure the filesystem offloader to run it automatically
 
 You can configure the filesystem offloader driver in the `broker.conf` or `standalone.conf` configuration file.
 
-<Tabs
+<Tabs 
   defaultValue="HDFS"
   values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>
-
 <TabItem value="HDFS">
 
 - **Required** configurations are as below.
@@ -108,6 +107,7 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
   `offloadersDirectory` | Offloader directory | offloaders
   `fileSystemProfilePath` | Hadoop profile path. The configuration file is stored in the Hadoop profile path. It contains various settings for Hadoop performance tuning. | ../conf/filesystem_offload_core_site.xml
 
+
 - **Optional** configurations are as below.
 
   Parameter| Description | Example value
@@ -118,8 +118,7 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 </TabItem>
 <TabItem value="NFS">
 
-- **Required** configurations are as below.
-  
+- **Required** configurations are as below. 
   Parameter | Description | Example value
   |---|---|---
   `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive. | filesystem
@@ -265,7 +264,6 @@ This section provides step-by-step instructions on how to use the filesystem off
 <Tabs 
   defaultValue="HDFS"
   values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>
-
 <TabItem value="HDFS">
 
 To move data from Pulsar to HDFS, follow these steps.

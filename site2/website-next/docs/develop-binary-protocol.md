@@ -43,7 +43,7 @@ Payload commands have this basic structure:
 | `totalSize`                        | Required  | The size of the frame, counting everything that comes after it (in bytes)                   | 4               |
 | `commandSize`                      | Required  | The size of the protobuf-serialized command                                                 | 4               |
 | `message`                          | Required  | The protobuf message serialized in a raw binary format (rather than in protobuf format)     |                 |
-| `magicNumberOfBrokerEntryMetadata` | Optional  | A 2-byte byte array (`0x0e02`) identifying the broker entry metadata   <br /> **Note**: `magicNumberOfBrokerEntryMetadata`, `brokerEntryMetadataSize`, and `brokerEntryMetadata` should be used **together**.                     | 2               |
+| `magicNumberOfBrokerEntryMetadata` | Optional  | A 2-byte byte array (`0x0e02`) identifying the broker entry metadata   <br /> **Note**: `magicNumberOfBrokerEntryMetadata` , `brokerEntryMetadataSize`, and `brokerEntryMetadata` should be used **together**.                     | 2               |
 | `brokerEntryMetadataSize`          | Optional  | The size of the broker entry metadata                                                       | 4               |
 | `brokerEntryMetadata`              | Optional  | The broker entry metadata stored as a binary protobuf message                               |                 |
 | `magicNumber`                      | Required  | A 2-byte byte array (`0x0e01`) identifying the current format                               | 2               |
@@ -61,6 +61,14 @@ It is created by the broker when the message arrived at the broker and passed wi
 |:-------------------|:----------------|:------------------------------------------------------------------------------------------------------------------------------|
 | `broker_timestamp` | Optional        | The timestamp when a message arrived at the broker (`id est` as the number of milliseconds since January 1st, 1970 in UTC)      |
 | `index`            | Optional        | The index of the message. It is assigned by the broker.
+
+If you want to use broker entry metadata for **brokers**, configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md#broker) parameter in the `broker.conf` file.
+
+If you want to use broker entry metadata for **consumers**:
+
+1. Use the client protocol version [18 or later](https://github.com/apache/pulsar/blob/ca37e67211feda4f7e0984e6414e707f1c1dfd07/pulsar-common/src/main/proto/PulsarApi.proto#L259).
+   
+2. Configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md#broker) parameter and set the [`enableExposingBrokerEntryMetadataToClient`](reference-configuration.md#broker) parameter to `true` in the `broker.conf` file.
 
 ## Message metadata
 

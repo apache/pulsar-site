@@ -304,9 +304,9 @@ function Navbar() {
               setVersion(latestStableVersion);
             }}
           />
-          {/* <a className="font-bold underline mr-4 -ml-4" href="/versions/">
+          <a className="font-bold underline mr-4 -ml-4" href="/versions/">
             {getVersion() == "master" ? "next" : getVersion()}
-          </a> */}
+          </a>
           {leftItems.map((item, i) => {
             if (item.label == "REST APIs") {
               item.items = item.items.map((e) => {

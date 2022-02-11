@@ -119,21 +119,30 @@ Here is an example of using the File source connecter.
    
    ```
 
-6. Start the File source connector.
+6. Copy it to the `connectors` folder, then restart the container.
+
+   ```bash
+   
+   $ docker cp pulsar-io-file-{version}.nar pulsar-standalone:/pulsar/connectors/  
+   $ docker restart pulsar-standalone
+   
+   ```
+
+7. Start the File source connector.
 
    ```bash
    
    $ docker exec -it pulsar-standalone /bin/bash
 
    $ ./bin/pulsar-admin sources localrun \
-   --archive /pulsar/pulsar-io-file-{version}.nar \
+   --archive /pulsar/connectors/pulsar-io-file-{version}.nar \
    --name file-test \
    --destination-topic-name  pulsar-file-test \
    --source-config-file /pulsar/file-connector.yaml
    
    ```
 
-7. Start a consumer.
+8. Start a consumer.
 
    ```bash
    
@@ -141,7 +150,7 @@ Here is an example of using the File source connecter.
    
    ```
 
-8. Write the message to the file _test.txt_.
+9. Write the message to the file _test.txt_.
 
    ```bash
    
@@ -158,4 +167,3 @@ Here is an example of using the File source connecter.
    
    ```
 
-   

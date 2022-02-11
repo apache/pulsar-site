@@ -287,6 +287,8 @@ You can check the following statistics of a given non-partitioned topic.
 
   -   **storageSize**: The sum of the ledgers' storage size for this topic. The space used to store the messages for the topic.
 
+  -   **earliestMsgPublishTimeInBacklogs**: The publish time of the earliest message in the backlog (ms).
+
   -   **bytesInCounter**: Total bytes published to the topic.
 
   -   **msgInCounter**: Total messages published to the topic.
@@ -321,7 +323,7 @@ You can check the following statistics of a given non-partitioned topic.
 
       -   **averageMsgSize**: The average message size in bytes from this publisher within the last interval.
 
-      -   **chunkedMessageRate**: The total rate of chunked messages published by this publisher. The totoal rate of 
+      -   **chunkedMessageRate**: The total rate of chunked messages published by this publisher.
 
       -   **producerId**: The internal identifier for this producer on this topic.
 
@@ -366,6 +368,8 @@ You can check the following statistics of a given non-partitioned topic.
           -   **chunkedMessageRate**: Chunked message dispatch rate.
 
           -   **backlogSize**: Size of backlog for this subscription (in bytes).
+          
+          -   **earliestMsgPublishTimeInBacklog**: The publish time of the earliest message in the backlog for the subscription (ms).
 
           -   **msgBacklogNoDelayed**: Number of messages in the subscription backlog that do not contain the delay messages.
 
@@ -478,6 +482,7 @@ The following is an example of a topic status.
   "msgChunkPublished" : false,
   "storageSize" : 504,
   "backlogSize" : 0,
+  "earliestMsgPublishTimeInBacklogs": 0,
   "offloadedStorageSize" : 0,
   "publishers" : [ {
     "accessMode" : "Shared",
@@ -503,6 +508,7 @@ The following is an example of a topic status.
       "chunkedMessageRate" : 0,
       "msgBacklog" : 0,
       "backlogSize" : 0,
+      "earliestMsgPublishTimeInBacklog": 0,
       "msgBacklogNoDelayed" : 0,
       "blockedSubscriptionOnUnackedMsgs" : false,
       "msgDelayed" : 0,
@@ -1065,6 +1071,52 @@ admin.lookup().lookupDestination(topic);
 
 </Tabs>
 
+### Lookup of partitioned topic
+
+You can locate the broker URL of each partitioned topic which is serving the given topic in the following ways.
+
+<Tabs 
+  defaultValue="pulsar-admin"
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"Java","value":"Java"}]}>
+<TabItem value="pulsar-admin">
+
+```shell
+
+$ pulsar-admin topics partitioned-lookup \
+  persistent://test-tenant/ns1/my-topic \
+
+  "persistent://test-tenant/ns1/my-topic-partition-0   pulsar://localhost:6650"
+  "persistent://test-tenant/ns1/my-topic-partition-1   pulsar://localhost:6650"
+  "persistent://test-tenant/ns1/my-topic-partition-2   pulsar://localhost:6650"
+  "persistent://test-tenant/ns1/my-topic-partition-3   pulsar://localhost:6650"
+
+```
+
+</TabItem>
+<TabItem value="Java">
+
+```java
+
+String topic = "persistent://my-tenant/my-namespace/my-topic";
+admin.lookup().lookupPartitionedTopic(topic);
+
+```
+
+Lookup the partitioned topics sorted by broker URL
+
+```shell
+
+$ pulsar-admin topics partitioned-lookup \
+  persistent://test-tenant/ns1/my-topic --sort-by-broker \
+
+  "pulsar://localhost:6650   [persistent://test-tenant/ns1/my-topic-partition-0, persistent://test-tenant/ns1/my-topic-partition-1, persistent://test-tenant/ns1/my-topic-partition-2, persistent://test-tenant/ns1/my-topic-partition-3]"
+
+```
+
+</TabItem>
+
+</Tabs>
+
 ### Get bundle
 
 You can check the range of the bundle which contains given topic in the following ways.
@@ -1177,9 +1229,9 @@ admin.topics().getLastMessage(topic);
 
 You can get the backlog size of a single partition topic or a non-partitioned topic with a given message ID (in bytes).
 
-<Tabs
-defaultValue="pulsar-admin"
-values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+<Tabs 
+  defaultValue="pulsar-admin"
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 ```shell
@@ -1613,7 +1665,7 @@ You can get the list of partitioned topics under a given namespace in the follow
 
 ```shell
 
-$ pulsar-admin list-partitioned-topics list tenant/namespace
+$ pulsar-admin topics list-partitioned-topics tenant/namespace
 persistent://tenant/namespace/topic1
 persistent://tenant/namespace/topic2
 
