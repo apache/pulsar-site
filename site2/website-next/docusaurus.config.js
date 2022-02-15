@@ -12,7 +12,6 @@ const sourceApiUrl = url + "/source-rest-api";
 const sinkApiUrl = url + "/sink-rest-api";
 const packagesApiUrl = url + "/packages-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
-const websiteGithubUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
 
 const injectLinkParse = ([, prefix, , name, path]) => {
@@ -395,7 +394,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: `${websiteGithubUrl}/edit/master/site2/website-next`,
+          editUrl: `${githubUrl}/edit/master/site2/website-next`,
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
@@ -410,7 +409,7 @@ module.exports = {
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: `${websiteGithubUrl}/edit/master/site2/website-next`,
+          editUrl: `${githubUrl}/edit/master/site2/website-next`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
