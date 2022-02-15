@@ -21,8 +21,8 @@ name: CI - Pulsar Website-Next build
 on:
   push:
     branches: [docs-sync]
-  # schedule:
-  #   - cron: '0 */6 * * *'
+  schedule:
+    - cron: '0 */6 * * *'
 
 env:
   MAVEN_OPTS: -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3
@@ -34,10 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      # - name: checkout
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: main
       - name: Docs sync from repo apache/pulsar 
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
@@ -46,9 +42,12 @@ jobs:
           git clone -b main "https://$GH_TOKEN@github.com/apache/pulsar-site.git" pulsar-site
           echo "pulsar-site clone done."
           git clone https://github.com/apache/pulsar.git pulsar
+          echo "pulsar clone done."
 
           cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
           cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
+
+          echo "docs override done."
 
           cd pulsar 
           PULSAR_COMMIT_ID=$(git rev-parse --short HEAD)
@@ -63,7 +62,6 @@ jobs:
 
           git remote -v
 
-          echo "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
-          # git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
+          git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
 
-          # echo "Docs Sync Done."
+          echo "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
