@@ -34,22 +34,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          ref: main
-
-      - name: Clone Pulsar
+      # - name: checkout
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: main
+      - name: Docs sync from repo apache/pulsar 
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
-          cd ../
-          git clone https://github.com/apache/pulsar.git
-          cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
-          cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
-          cd pulsar-site
+          git clone "https://$GH_TOKEN@github.com/apache/pulsar-site.git" .
           git status
+          # git clone https://github.com/apache/pulsar.git
+          # cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
+          # cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
+          # cd pulsar-site
+          # git status
           # rm -rf pulsar/.git
           # rm -rf pulsar/site2
           # mv pulsar/* pulsar-site/
