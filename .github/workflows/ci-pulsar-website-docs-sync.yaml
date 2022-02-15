@@ -30,7 +30,7 @@ env:
 jobs:
   build-website:
     if: ${{ github.repository == 'apache/pulsar-site' }}
-    name: Build and publish pulsar website-next
+    name: Docs sync from repo apache/pulsar 
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
@@ -45,13 +45,24 @@ jobs:
         run: |
           git clone -b main "https://$GH_TOKEN@github.com/apache/pulsar-site.git" pulsar-site
           git clone https://github.com/apache/pulsar.git pulsar
+
           cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
           cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
-          cd pulsar-site
-          git status
-          REVISION=$(git rev-parse --short HEAD)
+
+          cd pulsar 
+          PULSAR_COMMIT_ID=$(git rev-parse --short HEAD)
+
+          cd ../pulsar-site
+
           git add -A .
           git status
-          git diff-index --quiet HEAD
-          # || (git commit -m "Updated site at revision $REVISION" && git push -q origin main)
-          echo "Docs Sync Done."
+
+          git config user.name "Pulsar Site Updater"
+          git config user.email "dev@pulsar.apache.org"
+
+          git remote -v
+
+          echo "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
+          # git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
+
+          # echo "Docs Sync Done."
