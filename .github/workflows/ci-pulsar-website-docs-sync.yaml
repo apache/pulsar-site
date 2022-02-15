@@ -44,12 +44,12 @@ jobs:
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
           git clone -b main "https://$GH_TOKEN@github.com/apache/pulsar-site.git" .
+          ls -l
+          git clone https://github.com/apache/pulsar.git
+          ls -l
+          cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
+          cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
           git status
-          # git clone https://github.com/apache/pulsar.git
-          # cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
-          # cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
-          # cd pulsar-site
-          # git status
           # rm -rf pulsar/.git
           # rm -rf pulsar/site2
           # mv pulsar/* pulsar-site/
