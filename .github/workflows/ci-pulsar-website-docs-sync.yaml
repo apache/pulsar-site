@@ -44,14 +44,14 @@ jobs:
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
           git clone -b main "https://$GH_TOKEN@github.com/apache/pulsar-site.git" pulsar-site
-          ls -l
-          # git clone https://github.com/apache/pulsar.git pulsar
-          # ls -l
-          # cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
-          # cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
+          git clone https://github.com/apache/pulsar.git pulsar
+          cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
+          cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
           cd pulsar-site
-          ls -l
           git status
-          # rm -rf pulsar/.git
-          # rm -rf pulsar/site2
-          # mv pulsar/* pulsar-site/
+          REVISION=$(git rev-parse --short HEAD)
+          git add -A .
+          git status
+          git diff-index --quiet HEAD
+          # || (git commit -m "Updated site at revision $REVISION" && git push -q origin main)
+          echo "Docs Sync Done."
