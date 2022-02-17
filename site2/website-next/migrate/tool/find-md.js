@@ -3,12 +3,6 @@ const path = require("path");
 const CONST = require("../const");
 const { old, next } = CONST;
 
-function _log(msg) {
-  if (typeof require !== "undefined" && require.main === module) {
-    console.log(msg);
-  }
-}
-
 function _logMissing(version, docsId, pathname) {
   if (!pathname) {
     let log = "{}";
@@ -24,7 +18,13 @@ function _logMissing(version, docsId, pathname) {
     log[docsId] = pathname ? pathname : "";
     fs.writeFileSync(path.join(logpath), JSON.stringify(log));
 
-    _log("[" + version + ":" + docsId + "]not fund and fix missing fail");
+    console.log(
+      "         ######[" +
+        version +
+        ":" +
+        docsId +
+        "]not fund and fix missing fail"
+    );
   }
 }
 
@@ -33,7 +33,9 @@ const _search = (dir, version, docsId, reg) => {
   if (fs.existsSync(pathname)) {
     let data = fs.readFileSync(pathname, "utf8");
     if (reg.test(data)) {
-      _log("[" + version + ":" + docsId + "]fund: " + pathname);
+      console.log(
+        "         ******[" + version + ":" + docsId + "]fund: " + pathname
+      );
       return pathname;
     }
   }
@@ -48,10 +50,13 @@ const _search = (dir, version, docsId, reg) => {
     }
     let data = fs.readFileSync(pathname, "utf8");
     if (reg.test(data)) {
-      _log("[" + version + ":" + docsId + "]fund: " + pathname);
+      console.log("         [" + version + ":" + docsId + "]fund: " + pathname);
       return pathname;
     }
   }
+  console.log(
+    "         ######[" + version + ":" + docsId + "]not fund in: " + dir
+  );
   return null;
 };
 
@@ -80,7 +85,13 @@ const find = (version, docsId) => {
   }
 
   if (!pathname) {
-    _log("[" + version + ":" + docsId + "]not fund, will auto fix missing");
+    console.log(
+      "         ######[" +
+        version +
+        ":" +
+        docsId +
+        "]not fund, will auto fix missing"
+    );
     pathname = _search(nextDir, version, docsId, nextReg);
     if (!pathname) {
       let vDocsDirList = fs.readdirSync(vDocsDir);

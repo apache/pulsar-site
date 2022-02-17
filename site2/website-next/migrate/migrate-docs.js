@@ -6,12 +6,6 @@ const findMd = require("./tool/find-md");
 const CONST = require("./const");
 const { old, next } = CONST;
 
-function _log(msg) {
-  if (typeof require !== "undefined" && require.main === module) {
-    console.log(msg);
-  }
-}
-
 function migrate(version, chapter, docsId, cb) {
   let dest = `../../${next.baseDir}/versioned_docs/version-` + version;
   if (version == "next") {
@@ -21,7 +15,15 @@ function migrate(version, chapter, docsId, cb) {
   let mdpath = findMd(version, docsId);
   if (mdpath) {
     console.log(
-      "         [" + version + ":" + chapter + ":" + docsId + "]migrate..."
+      "         [" +
+        version +
+        ":" +
+        chapter +
+        ":" +
+        docsId +
+        "] from " +
+        mdpath +
+        " migrate..."
     );
     let data = fs.readFileSync(mdpath, "utf8");
     data = fixMd(data, version);
@@ -35,7 +37,9 @@ function migrate(version, chapter, docsId, cb) {
         chapter +
         ":" +
         docsId +
-        "] was not fund, skip..."
+        "] from " +
+        mdpath +
+        " was not fund, skip..."
     );
   }
 }
@@ -45,6 +49,6 @@ module.exports = migrate;
 //Test
 if (typeof require !== "undefined" && require.main === module) {
   // migrate("next", "Deployment", "deploy-dcos");
-  migrate("next", "Security", "security-tls-keystore");
+  migrate("2.9.1", "Development", "develop-schema");
   // migrate("2.8.0", "", "adaptors-kafka");
 }

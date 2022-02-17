@@ -6,7 +6,8 @@ const fixTipNoteInList = require("./fix-tip-note-in-list");
 const fixJSX = require("./fix-jsx");
 
 function fix(data, version) {
-  let reg = new RegExp("id:\\s*version-" + version + "-(incubating-)?");
+  // let reg = new RegExp("id:\\s*version-" + version + "-(incubating-)?");
+  let reg = new RegExp("id:\\s*version-(\\d\\.?)+-(incubating-)?");
   data = fixTable(data);
   data = fixTab(data);
   data = data.replace(/(<TabItem.*)\n(.*{@inject:\s*.+?})/g, "$1\n\n$2");
