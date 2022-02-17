@@ -65,7 +65,6 @@ export default function Home() {
           <a href="https://www.apache.org/licenses">
             Apache License, version 2.0
           </a>
-          .
         </p>
       </div>
     </Layout>
