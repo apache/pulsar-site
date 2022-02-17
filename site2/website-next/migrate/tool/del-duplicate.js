@@ -17,10 +17,11 @@ module.exports = (dest, version) => {
     duplicateMap[id] = duplicateMap[id] || [];
     duplicateMap[id].push(pathname);
   }
+  console.log(duplicateMap);
   for (let [key, duplicateFiles] of Object.entries(duplicateMap)) {
     if (duplicateFiles.length > 1) {
       for (let file of duplicateFiles) {
-        if (key + "" != path.basename(file)) {
+        if (key + ".md" != path.basename(file)) {
           console.log(
             "     [" + version + ":duplicate:" + key + "]del " + file
           );
