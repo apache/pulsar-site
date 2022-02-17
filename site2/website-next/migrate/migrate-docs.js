@@ -42,6 +42,7 @@ function migrate(version, chapter, docsId, cb) {
         " was not fund, skip..."
     );
   }
+  return mdpath;
 }
 
 module.exports = migrate;

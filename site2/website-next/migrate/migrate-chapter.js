@@ -43,6 +43,16 @@ const migrate = (version, category, cb) => {
     return;
   }
 
+  console.log("     [" + version + ":" + category + "]migrate...");
+  let existsSidebar = [];
+  for (let docsId of sidebar) {
+    let mdpath = migrateDocs(version, category, docsId, cb);
+    if (mdpath) {
+      existsSidebar.push(docsId);
+    }
+  }
+  sidebar = existsSidebar;
+
   let new_sidebar_file = "";
   let new_sidebar = {};
 
@@ -117,11 +127,6 @@ const migrate = (version, category, cb) => {
     }
   }
   fs.writeFileSync(new_sidebar_file, JSON.stringify(new_sidebar, null, 2));
-
-  console.log("     [" + version + ":" + category + "]migrate...");
-  for (let docsId of sidebar) {
-    migrateDocs(version, category, docsId, cb);
-  }
 };
 
 module.exports = migrate;

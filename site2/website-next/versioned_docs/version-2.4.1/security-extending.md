@@ -2,7 +2,6 @@
 id: security-extending
 title: Extending Authentication and Authorization in Pulsar
 sidebar_label: "Extending"
-original_id: security-extending
 ---
 
 Pulsar provides a way to use custom authentication and authorization mechanisms.

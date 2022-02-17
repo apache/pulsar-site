@@ -2,7 +2,6 @@
 id: administration-zk-bk
 title: ZooKeeper and BookKeeper administration
 sidebar_label: "ZooKeeper and BookKeeper"
-original_id: administration-zk-bk
 ---
 
 Pulsar relies on two external systems for essential tasks:
