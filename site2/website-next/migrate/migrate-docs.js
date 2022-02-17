@@ -3,6 +3,7 @@ const path = require("path");
 const _ = require("lodash");
 const fixMd = require("./tool/fix-md");
 const findMd = require("./tool/find-md");
+import { old, next } from "./const";
 
 function _log(msg) {
   if (typeof require !== "undefined" && require.main === module) {
@@ -11,9 +12,9 @@ function _log(msg) {
 }
 
 function migrate(version, chapter, docsId, cb) {
-  let dest = "../../website-next/versioned_docs/version-" + version;
+  let dest = `../../${next.baseDir}/versioned_docs/version-` + version;
   if (version == "next") {
-    dest = "../../website-next/docs";
+    dest = "../../" + next.docsDir;
   }
   dest = path.join(__dirname, dest, docsId + ".md");
   let mdpath = findMd(version, docsId);

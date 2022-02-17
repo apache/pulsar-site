@@ -4,6 +4,7 @@ const _ = require("lodash");
 const leftMd = require("./tool/left-md");
 const fixMd = require("./tool/fix-md");
 const migrateChapter = require("./migrate-chapter");
+import { old, next } from "./const";
 
 function _log(msg) {
   if (typeof require !== "undefined" && require.main === module) {
@@ -13,21 +14,21 @@ function _log(msg) {
 
 const migrate = (version) => {
   let version_full = "version-" + version;
-  let src = "../../website/versioned_docs/" + version_full;
-  let dest = "../../website-next/versioned_docs/" + version_full;
+  let src = `../../${old.baseDir}/versioned_docs/` + version_full;
+  let dest = `../../${next.baseDir}/versioned_docs/` + version_full;
   if (version == "next") {
-    src = "../../docs";
-    dest = "../../website-next/docs";
+    src = "../../" + old.docsDir;
+    dest = "../../" + next.docsDir;
   }
   src = path.join(__dirname, src);
   dest = path.join(__dirname, dest);
 
   let sidebar_file = path.join(
     __dirname,
-    "../../website/versioned_sidebars/" + version_full + "-sidebars.json"
+    `../../${old.baseDir}/versioned_sidebars/` + version_full + "-sidebars.json"
   );
   if (version == "next") {
-    sidebar_file = path.join(__dirname, "../../website/sidebars.json");
+    sidebar_file = path.join(__dirname, `../../${old.baseDir}/sidebars.json`);
   }
   let sidebar = fs.readFileSync(sidebar_file, "utf8");
   sidebar = JSON.parse(sidebar);

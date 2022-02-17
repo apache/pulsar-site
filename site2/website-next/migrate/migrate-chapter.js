@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 const migrateDocs = require("./migrate-docs");
+import { old, next } from "./const";
 
 function _log(msg) {
   if (typeof require !== "undefined" && require.main === module) {
@@ -11,21 +12,21 @@ function _log(msg) {
 
 const migrate = (version, category, cb) => {
   let version_full = "version-" + version;
-  let src = "../../website/versioned_docs/" + version_full;
-  let dest = "../../website-next/versioned_docs/" + version_full;
+  let src = `../../${old.baseDir}/versioned_docs/` + version_full;
+  let dest = `../../${next.baseDir}/versioned_docs/` + version_full;
   if (version == "next") {
-    src = "../../docs";
-    dest = "../../website-next/docs";
+    src = "../../" + old.docsDir;
+    dest = "../../" + next.docsDir;
   }
   src = path.join(__dirname, src);
   dest = path.join(__dirname, dest);
 
   let sidebar_file = path.join(
     __dirname,
-    "../../website/versioned_sidebars/" + version_full + "-sidebars.json"
+    `../../${old.baseDir}/versioned_sidebars/` + version_full + "-sidebars.json"
   );
   if (version == "next") {
-    sidebar_file = path.join(__dirname, "../../website/sidebars.json");
+    sidebar_file = path.join(__dirname, `../../${old.baseDir}/sidebars.json`);
   }
   let sidebar = fs.readFileSync(sidebar_file, "utf8");
   sidebar = JSON.parse(sidebar);
@@ -45,7 +46,10 @@ const migrate = (version, category, cb) => {
   let new_sidebar = {};
 
   if (version == "next") {
-    new_sidebar_file = path.join(__dirname, "../../website-next/sidebars.json");
+    new_sidebar_file = path.join(
+      __dirname,
+      `../../${next.baseDir}/sidebars.json`
+    );
     try {
       new_sidebar = fs.readFileSync(new_sidebar_file, "utf8");
       new_sidebar = JSON.parse(new_sidebar);
@@ -68,7 +72,9 @@ const migrate = (version, category, cb) => {
   } else {
     new_sidebar_file = path.join(
       __dirname,
-      "../../website-next/versioned_sidebars/" + version_full + "-sidebars.json"
+      `../../${next.baseDir}/versioned_sidebars/` +
+        version_full +
+        "-sidebars.json"
     );
     try {
       new_sidebar = fs.readFileSync(new_sidebar_file, "utf8");

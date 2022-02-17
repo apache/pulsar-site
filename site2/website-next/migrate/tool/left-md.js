@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+import { old, next } from "../const";
 
 function _log(msg) {
   if (typeof require !== "undefined" && require.main === module) {
@@ -13,9 +14,9 @@ const left = (version, migratedList) => {
   let list = [];
 
   let version_full = "version-" + version;
-  let src = "../../../website/versioned_docs/" + version_full;
+  let src = `../../../${old.baseDir}/versioned_docs/` + version_full;
   if (version == "next") {
-    src = "../../../docs";
+    src = "../../../" + old.docsDir;
   }
   src = path.join(__dirname, src);
   let docsList = fs.readdirSync(src);
