@@ -2,7 +2,6 @@
 id: schema-manage
 title: Manage schema
 sidebar_label: "Manage schema"
-original_id: schema-manage
 ---
 
 import Tabs from '@theme/Tabs';

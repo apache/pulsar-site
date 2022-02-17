@@ -2,7 +2,6 @@
 id: io-use
 title: How to use Pulsar connectors
 sidebar_label: "Use"
-original_id: io-use
 ---
 
 import Tabs from '@theme/Tabs';

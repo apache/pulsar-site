@@ -2,7 +2,6 @@
 id: helm-prepare
 title: Prepare Kubernetes resources
 sidebar_label: "Prepare"
-original_id: helm-prepare
 ---
 
 For a fully functional Pulsar cluster, you need a few resources before deploying the Apache Pulsar Helm chart. The following provides instructions to prepare the Kubernetes cluster before deploying the Pulsar Helm chart.
@@ -11,23 +10,14 @@ For a fully functional Pulsar cluster, you need a few resources before deploying
   - [Manual cluster creation](#manual-cluster-creation)
   - [Scripted cluster creation](#scripted-cluster-creation)
   - [Create cluster with local SSDs](#create-cluster-with-local-ssds)
-- [Next Steps](#next-steps)
 
 ## Google Kubernetes Engine
 
 To get started easier, a script is provided to create the cluster automatically. Alternatively, a cluster can be created manually as well.
 
-- [Google Kubernetes Engine](#google-kubernetes-engine)
-  - [Manual cluster creation](#manual-cluster-creation)
-  - [Scripted cluster creation](#scripted-cluster-creation)
-  - [Create cluster with local SSDs](#create-cluster-with-local-ssds)
-- [Next Steps](#next-steps)
-
 ### Manual cluster creation
 
 To provision a Kubernetes cluster manually, follow the [GKE instructions](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster).
-
-Alternatively, you can use the [instructions](#scripted-cluster-creation) below to provision a GKE cluster as needed.
 
 ### Scripted cluster creation
 
@@ -87,6 +77,3 @@ PROJECT=<gcloud project id> USE_LOCAL_SSD=true LOCAL_SSD_COUNT=<local-ssd-count>
 
 ```
 
-## Next Steps
-
-Continue with the [installation of the chart](helm-deploy) once you have the cluster up and running.

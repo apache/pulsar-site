@@ -61,8 +61,11 @@ const _search = (dir, version, docsId, reg) => {
 };
 
 const find = (version, docsId) => {
-  let vReg = new RegExp("id:\\s*version-(\\d\\.?)+-(incubating-)?" + docsId);
-  let nextReg = new RegExp("id:\\s*" + docsId);
+  let vReg = new RegExp(
+    "^id:\\s*version-(\\d\\.?)+-(incubating-)?" + docsId + "\\s*$",
+    "m"
+  );
+  let nextReg = new RegExp("^id:\\s*" + docsId + "\\s*$", "m");
 
   let version_full = "version-" + version;
   let src = `../../../${old.baseDir}/versioned_docs/` + version_full;

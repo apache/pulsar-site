@@ -2,7 +2,6 @@
 id: administration-stats
 title: Pulsar stats
 sidebar_label: "Pulsar statistics"
-original_id: administration-stats
 ---
 
 ## Partitioned topics

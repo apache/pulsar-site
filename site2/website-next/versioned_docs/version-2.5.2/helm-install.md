@@ -1,8 +1,7 @@
 ---
 id: helm-install
 title: Install Apache Pulsar using Helm
-sidebar_label: "Install"
-original_id: helm-install
+sidebar_label: "Install "
 ---
 
 Install Apache Pulsar on Kubernetes with the official Pulsar Helm chart.
@@ -24,12 +23,6 @@ Before deploying Pulsar, you need to prepare your environment.
 Install [`helm`](helm-tools.md) and [`kubectl`](helm-tools) on your computer.
 
 ## Cloud cluster preparation
-
-:::note
-
-Kubernetes 1.14 or higher is required.
-
-:::
 
 To create and connect to the Kubernetes cluster, follow the instructions:
 

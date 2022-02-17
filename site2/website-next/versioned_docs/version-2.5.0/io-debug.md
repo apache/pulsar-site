@@ -2,7 +2,6 @@
 id: io-debug
 title: How to debug Pulsar connectors
 sidebar_label: "Debug"
-original_id: io-debug
 ---
 This guide explains how to debug connectors in localrun or cluster mode and gives a debugging checklist.
 To better demonstrate how to debug Pulsar connectors, here takes a Mongo sink connector as an example.   
@@ -43,11 +42,11 @@ To better demonstrate how to debug Pulsar connectors, here takes a Mongo sink co
    ```bash
    
    configs:
-   mongoUri: "mongodb://pulsar-mongo:27017"
-   database: "pulsar"
-   collection: "messages"
-   batchSize: 2
-   batchTimeMs: 500
+     mongoUri: "mongodb://pulsar-mongo:27017"
+     database: "pulsar"
+     collection: "messages"
+     batchSize: 2
+     batchTimeMs: 500
    
    ```
 
@@ -77,7 +76,7 @@ For more information about the `localrun` command, see [`localrun`](reference-co
 ```bash
 
 ./bin/pulsar-admin sinks localrun \
---archive pulsar-io-mongo-2.4.0.nar \ 
+--archive connectors/pulsar-io-mongo-@pulsar:version@.nar \ 
 --tenant public --namespace default \
 --inputs test-mongo \
 --name pulsar-mongo-sink \

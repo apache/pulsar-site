@@ -2,7 +2,6 @@
 id: functions-worker
 title: Deploy and manage functions worker
 sidebar_label: "Setup: Pulsar Functions Worker"
-original_id: functions-worker
 ---
 Before using Pulsar Functions, you need to learn how to set up Pulsar Functions worker and how to [configure Functions runtime](functions-runtime).  
 
@@ -149,6 +148,27 @@ If authentication is enabled for your broker cluster, you *should* configure the
 
 - `clientAuthenticationPlugin`
 - `clientAuthenticationParameters`
+
+#### Customize Java runtime options
+
+If you want to pass additional arguments to the JVM command line to every process started by a function worker,
+you can configure the `additionalJavaRuntimeArguments` parameter.
+
+```
+
+additionalJavaRuntimeArguments: ['-XX:+ExitOnOutOfMemoryError','-Dfoo=bar']
+
+```
+
+This is very useful in case you want to:
+- add JMV flags, like `-XX:+ExitOnOutOfMemoryError`
+- pass custom system properties, like `-Dlog4j2.formatMsgNoLookups`
+
+:::note
+
+This feature applies only to Process and Kubernetes runtimes.
+
+:::
 
 #### Security settings
 

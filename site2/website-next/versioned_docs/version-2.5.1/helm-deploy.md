@@ -2,7 +2,6 @@
 id: helm-deploy
 title: Deploy Pulsar cluster using Helm
 sidebar_label: "Deployment"
-original_id: helm-deploy
 ---
 
 Before running `helm install`, you need to decide how to run Pulsar.
@@ -389,7 +388,7 @@ Once you have finished the following three things, you can install a Helm releas
 - Install dependent charts.
 - Prepare the Helm release.
 
-In this example, we name our Helm release `pulsar`.
+In this example, the Helm release is named `pulsar`.
 
 ```bash
 

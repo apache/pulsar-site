@@ -2,7 +2,6 @@
 id: admin-api-brokers
 title: Managing Brokers
 sidebar_label: "Brokers"
-original_id: admin-api-brokers
 ---
 
 import Tabs from '@theme/Tabs';
@@ -13,7 +12,7 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](https://pulsar.apache.org/tools/pulsar-admin/).
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](https://pulsar.apache.org/tools/pulsar-admin/).
 > 
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 > 
@@ -26,9 +25,9 @@ Pulsar brokers consist of two components:
 
 [Brokers](reference-terminology.md#broker) can be managed via:
 
-* The [`brokers`](reference-pulsar-admin.md#brokers) command of the [`pulsar-admin`](reference-pulsar-admin) tool
+* The `brokers` command of the [`pulsar-admin`](https://pulsar.apache.org/tools/pulsar-admin/) tool
 * The `/admin/v2/brokers` endpoint of the admin {@inject: rest:REST:/} API
-* The `brokers` method of the {@inject: javadoc:PulsarAdmin:/admin/org/apache/pulsar/client/admin/PulsarAdmin.html} object in the [Java API](client-libraries-java)
+* The `brokers` method of the `PulsarAdmin` object in the [Java API](client-libraries-java)
 
 In addition to being configurable when you start them up, brokers can also be [dynamically configured](#dynamic-broker-configuration).
 

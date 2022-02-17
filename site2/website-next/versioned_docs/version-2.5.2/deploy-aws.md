@@ -2,7 +2,6 @@
 id: deploy-aws
 title: Deploying a Pulsar cluster on AWS using Terraform and Ansible
 sidebar_label: "Amazon Web Services"
-original_id: deploy-aws
 ---
 
 > For instructions on deploying a single Pulsar cluster manually rather than using Terraform and Ansible, see [Deploying a Pulsar cluster on bare metal](deploy-bare-metal.md). For instructions on manually deploying a multi-cluster Pulsar instance, see [Deploying a Pulsar instance on bare metal](deploy-bare-metal-multi-cluster).
@@ -148,7 +147,7 @@ Variable name | Description | Default
 When you run the Ansible playbook, the following AWS resources are used:
 
 * 9 total [Elastic Compute Cloud](https://aws.amazon.com/ec2) (EC2) instances running the [ami-9fa343e7](https://access.redhat.com/articles/3135091) Amazon Machine Image (AMI), which runs [Red Hat Enterprise Linux (RHEL) 7.4](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/7.4_release_notes/index). By default, that includes:
-  * 3 small VMs for ZooKeeper ([t2.small](https://www.ec2instances.info/?selected=t2.small) instances)
+  * 3 small VMs for ZooKeeper ([t3.small](https://www.ec2instances.info/?selected=t3.small) instances)
   * 3 larger VMs for BookKeeper [bookies](reference-terminology.md#bookie) ([i3.xlarge](https://www.ec2instances.info/?selected=i3.xlarge) instances)
   * 2 larger VMs for Pulsar [brokers](reference-terminology.md#broker) ([c5.2xlarge](https://www.ec2instances.info/?selected=c5.2xlarge) instances)
   * 1 larger VMs for Pulsar [proxy](reference-terminology.md#proxy) ([c5.2xlarge](https://www.ec2instances.info/?selected=c5.2xlarge) instances)

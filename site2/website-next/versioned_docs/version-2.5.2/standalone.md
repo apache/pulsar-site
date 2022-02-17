@@ -3,17 +3,16 @@ slug: /
 id: standalone
 title: Set up a standalone Pulsar locally
 sidebar_label: "Run Pulsar locally"
-original_id: standalone
 ---
 
 For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode includes a Pulsar broker, the necessary ZooKeeper and BookKeeper components running inside of a single Java Virtual Machine (JVM) process.
 
-> #### Pulsar in production? 
+> **Pulsar in production?**  
 > If you're looking to run a full production Pulsar installation, see the [Deploying a Pulsar instance](deploy-bare-metal) guide.
 
 ## Install Pulsar standalone
 
-This tutorial guides you through every step of the installation process.
+This tutorial guides you through every step of installing Pulsar locally.
 
 ### System requirements
 
@@ -67,6 +66,7 @@ Directory | Contains
 `bin` | Pulsar's command-line tools, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](https://pulsar.apache.org/tools/pulsar-admin/).
 `conf` | Configuration files for Pulsar, including [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more.
 `examples` | A Java JAR file containing [Pulsar Functions](functions-overview) example.
+`instances` | Artifacts created for [Pulsar Functions](functions-overview).
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files used by Pulsar.
 `licenses` | License files, in the`.txt` form, for various components of the Pulsar [codebase](https://github.com/apache/pulsar).
 
@@ -75,7 +75,6 @@ These directories are created once you begin running Pulsar.
 Directory | Contains
 :---------|:--------
 `data` | The data storage directory used by ZooKeeper and BookKeeper.
-`instances` | Artifacts created for [Pulsar Functions](functions-overview).
 `logs` | Logs created by the installation.
 
 :::tip
@@ -122,10 +121,8 @@ pulsar-io-aerospike-@pulsar:version@.nar
 
 :::note
 
-* If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker
-(or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
-* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)),
-you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all builtin connectors](io-overview.md#working-with-connectors).
+* If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker (or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
+* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes) or DC/OS, you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all builtin connectors](io-overview.md#working-with-connectors).
 
 :::
 
@@ -133,8 +130,8 @@ you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pul
 
 :::tip
 
-Since `2.2.0` release, Pulsar releases a separate binary distribution, containing the tiered storage offloaders.
-To enable tiered storage feature, follow the instructions below; otherwise skip this section.
+- Since `2.2.0` release, Pulsar releases a separate binary distribution, containing the tiered storage offloaders.
+- To enable tiered storage feature, follow the instructions below; otherwise skip this section.
 
 :::
 
@@ -176,8 +173,7 @@ For more information on how to configure tiered storage, see [Tiered storage coo
 :::note
 
 * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's pulsar directory.
-* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)),
-you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
+* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes) or DC/OS), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
 
 :::
 
@@ -195,9 +191,9 @@ If you have started Pulsar successfully, you will see `INFO`-level log messages 
 
 ```bash
 
-2017-06-01 14:46:29,192 - INFO  - [main:WebSocketService@95] - Configuration Store cache started
-2017-06-01 14:46:29,192 - INFO  - [main:AuthenticationService@61] - Authentication is disabled
-2017-06-01 14:46:29,192 - INFO  - [main:WebSocketService@108] - Pulsar WebSocket Service started
+21:59:29.327 [DLM-/stream/storage-OrderedScheduler-3-0] INFO  org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerImpl - Successfully started storage container (0).
+21:59:34.576 [main] INFO  org.apache.pulsar.broker.authentication.AuthenticationService - Authentication is disabled
+21:59:34.576 [main] INFO  org.apache.pulsar.websocket.WebSocketService - Pulsar WebSocket Service started
 
 ```
 
@@ -207,7 +203,7 @@ If you have started Pulsar successfully, you will see `INFO`-level log messages 
 
 :::
 
-You can also run the service as a background process using the `pulsar-daemon start standalone` command. For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
+You can also run the service as a background process using the `bin/pulsar-daemon start standalone` command. For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
 > 
 > * By default, there is no encryption, authentication, or authorization configured. Apache Pulsar can be accessed from remote server without any authorization. Please do check [Security Overview](security-overview) document to secure your deployment.
 >
@@ -231,7 +227,7 @@ If the message has been successfully consumed, you will see a confirmation like 
 
 ```
 
-09:56:55.566 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.MultiTopicsConsumerImpl - [TopicsConsumerFakeTopicNamee2df9] [first-subscription] Success subscribe new topic my-topic in topics consumer, partitions: 4, allTopicPartitionsNumber: 4
+22:17:16.781 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully consumed
 
 ```
 
@@ -255,7 +251,7 @@ If the message has been successfully published to the topic, you will see a conf
 
 ```
 
-13:09:39.356 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
+22:21:08.693 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
 
 ```
 
@@ -265,7 +261,7 @@ Press `Ctrl+C` to stop a local standalone Pulsar.
 
 :::tip
 
-If the service runs as a background process using the `pulsar-daemon start standalone` command, then use the `pulsar-daemon stop standalone`  command to stop the service.
+If the service runs as a background process using the `bin/pulsar-daemon start standalone` command, then use the `bin/pulsar-daemon stop standalone`  command to stop the service.
 For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
 
 :::

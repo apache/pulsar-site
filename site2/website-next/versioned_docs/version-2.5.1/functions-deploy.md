@@ -2,7 +2,6 @@
 id: functions-deploy
 title: Deploy Pulsar Functions
 sidebar_label: "How-to: Deploy"
-original_id: functions-deploy
 ---
 
 ## Requirements
@@ -10,7 +9,7 @@ original_id: functions-deploy
 To deploy and manage Pulsar Functions, you need to have a Pulsar cluster running. There are several options for this:
 
 * You can run a [standalone cluster](getting-started-standalone) locally on your own machine.
-* You can deploy a Pulsar cluster on [Kubernetes](deploy-kubernetes.md), [Amazon Web Services](deploy-aws.md), [bare metal](deploy-bare-metal.md), [DC/OS](deploy-dcos), and more.
+* You can deploy a Pulsar cluster on [Kubernetes](deploy-kubernetes.md), [Amazon Web Services](deploy-aws.md), [bare metal](deploy-bare-metal), DC/OS, and more.
 
 If you run a non-[standalone](reference-terminology.md#standalone) cluster, you need to obtain the service URL for the cluster. How you obtain the service URL depends on how you deploy your Pulsar cluster.
 
@@ -194,7 +193,7 @@ packagesManagementLedgerRootPath=/ledgers
 
 With Package management service enabled, you can upload your function packages by [upload a package](admin-api-packages.md#upload-a-package) to the service and get the [package URL](admin-api-packages.md#package-url).
 
-When you have a ready to use package URL, you can create the function with package URL by setting `--jar`, `--py`, or `--go` to the package URL with `pulsar-admin functions create`.
+When you have a ready to use package URL, you can create the function with package URL by setting `--jar`, `--py`, or `--go` to the package URL with `pulsar-admin functions create`. 
 
 ## Trigger Pulsar Functions
 

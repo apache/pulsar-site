@@ -2,7 +2,6 @@
 id: security-overview
 title: Pulsar security overview
 sidebar_label: "Overview"
-original_id: security-overview
 ---
 
 As the central message bus for a business, Apache Pulsar is frequently used for storing mission-critical data. Therefore, enabling security features in Pulsar is crucial.
