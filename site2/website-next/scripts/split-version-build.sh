@@ -28,8 +28,8 @@ yarn build
 echo "latest version build done..."
 
 while read version; do
-    if [[ $@ == *website-next/versioned_docs/version-$version* ]]; then
-        mv build-$version/* build/docs
-        rm -rf build-$version
-    fi
+    # if [[ $@ == *website-next/versioned_docs/version-$version* ]]; then
+    mv build-$version/* build/docs
+    rm -rf build-$version
+    # fi
 done <scripts/.versions
