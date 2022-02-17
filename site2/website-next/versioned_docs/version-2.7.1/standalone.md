@@ -8,12 +8,12 @@ original_id: standalone
 
 For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode includes a Pulsar broker, the necessary ZooKeeper and BookKeeper components running inside of a single Java Virtual Machine (JVM) process.
 
-> **Pulsar in production?**  
+> #### Pulsar in production? 
 > If you're looking to run a full production Pulsar installation, see the [Deploying a Pulsar instance](deploy-bare-metal) guide.
 
 ## Install Pulsar standalone
 
-This tutorial guides you through every step of installing Pulsar locally.
+This tutorial guides you through every step of the installation process.
 
 ### System requirements
 
@@ -22,12 +22,6 @@ Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**.
 :::tip
 
 By default, Pulsar allocates 2G JVM heap memory to start. It can be changed in `conf/pulsar_env.sh` file under `PULSAR_MEM`. This is extra options passed into JVM. 
-
-:::
-
-:::note
-
-Broker is only supported on 64-bit JVM.
 
 :::
 
@@ -122,8 +116,10 @@ pulsar-io-aerospike-@pulsar:version@.nar
 
 :::note
 
-* If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker (or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
-* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all builtin connectors](io-overview.md#working-with-connectors).
+* If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker
+(or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
+* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)),
+you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all builtin connectors](io-overview.md#working-with-connectors).
 
 :::
 
@@ -131,8 +127,8 @@ pulsar-io-aerospike-@pulsar:version@.nar
 
 :::tip
 
-- Since `2.2.0` release, Pulsar releases a separate binary distribution, containing the tiered storage offloaders.
-- To enable tiered storage feature, follow the instructions below; otherwise skip this section.
+Since `2.2.0` release, Pulsar releases a separate binary distribution, containing the tiered storage offloaders.
+To enable tiered storage feature, follow the instructions below; otherwise skip this section.
 
 :::
 
@@ -174,7 +170,8 @@ For more information on how to configure tiered storage, see [Tiered storage coo
 :::note
 
 * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's pulsar directory.
-* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
+* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)),
+you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
 
 :::
 
@@ -192,9 +189,9 @@ If you have started Pulsar successfully, you will see `INFO`-level log messages 
 
 ```bash
 
-21:59:29.327 [DLM-/stream/storage-OrderedScheduler-3-0] INFO  org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerImpl - Successfully started storage container (0).
-21:59:34.576 [main] INFO  org.apache.pulsar.broker.authentication.AuthenticationService - Authentication is disabled
-21:59:34.576 [main] INFO  org.apache.pulsar.websocket.WebSocketService - Pulsar WebSocket Service started
+2017-06-01 14:46:29,192 - INFO  - [main:WebSocketService@95] - Configuration Store cache started
+2017-06-01 14:46:29,192 - INFO  - [main:AuthenticationService@61] - Authentication is disabled
+2017-06-01 14:46:29,192 - INFO  - [main:WebSocketService@108] - Pulsar WebSocket Service started
 
 ```
 
@@ -228,7 +225,7 @@ If the message has been successfully consumed, you will see a confirmation like 
 
 ```
 
-22:17:16.781 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully consumed
+09:56:55.566 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.MultiTopicsConsumerImpl - [TopicsConsumerFakeTopicNamee2df9] [first-subscription] Success subscribe new topic my-topic in topics consumer, partitions: 4, allTopicPartitionsNumber: 4
 
 ```
 
@@ -252,7 +249,7 @@ If the message has been successfully published to the topic, you will see a conf
 
 ```
 
-22:21:08.693 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
+13:09:39.356 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
 
 ```
 

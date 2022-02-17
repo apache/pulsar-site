@@ -1,179 +1,272 @@
 ---
-id: standalone-docker
-title: Set up a standalone Pulsar in Docker
-sidebar_label: "Run Pulsar in Docker"
-original_id: standalone-docker
+slug: /
+id: standalone
+title: Set up a standalone Pulsar locally
+sidebar_label: "Run Pulsar locally"
+original_id: standalone
 ---
 
-For local development and testing, you can run Pulsar in standalone
-mode on your own machine within a Docker container.
+For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode includes a Pulsar broker, the necessary ZooKeeper and BookKeeper components running inside of a single Java Virtual Machine (JVM) process.
 
-If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition)
-and follow the instructions for your OS.
+> #### Pulsar in production? 
+> If you're looking to run a full production Pulsar installation, see the [Deploying a Pulsar instance](deploy-bare-metal) guide.
 
-## Start Pulsar in Docker
+## Install Pulsar standalone
 
-* For MacOS, Linux, and Windows:
+This tutorial guides you through every step of the installation process.
+
+### System requirements
+
+Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK 8 or later versions.
+
+:::tip
+
+By default, Pulsar allocates 2G JVM heap memory to start. It can be changed in `conf/pulsar_env.sh` file under `PULSAR_MEM`. This is extra options passed into JVM. 
+
+:::
+
+:::note
+
+Broker is only supported on 64-bit JVM.
+
+:::
+
+### Install Pulsar using binary release
+
+To get started with Pulsar, download a binary tarball release in one of the following ways:
+
+* download from the Apache mirror (<a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>)
+
+* download from the Pulsar [downloads page](pulsar:download_page_url)  
+  
+* download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
+  
+* use [wget](https://www.gnu.org/software/wget):
 
   ```shell
   
-  $ docker run -it \
-  -p 6650:6650 \
-  -p 8080:8080 \
-  --mount source=pulsardata,target=/pulsar/data \
-  --mount source=pulsarconf,target=/pulsar/conf \
-  apachepulsar/pulsar:@pulsar:version@ \
-  bin/pulsar standalone
+  $ wget pulsar:binary_release_url
   
   ```
 
-A few things to note about this command:
- * The data, metadata, and configuration are persisted on Docker volumes in order to not start "fresh" every 
-time the container is restarted. For details on the volumes you can use `docker volume inspect <sourcename>`
- * For Docker on Windows make sure to configure it to use Linux containers
+After you download the tarball, untar it and use the `cd` command to navigate to the resulting directory:
 
-If you start Pulsar successfully, you will see `INFO`-level log messages like this:
+```bash
+
+$ tar xvfz apache-pulsar-@pulsar:version@-bin.tar.gz
+$ cd apache-pulsar-@pulsar:version@
 
 ```
 
-2017-08-09 22:34:04,030 - INFO  - [main:WebService@213] - Web Service started at http://127.0.0.1:8080
-2017-08-09 22:34:04,038 - INFO  - [main:PulsarService@335] - messaging service is ready, bootstrap service on port=8080, broker url=pulsar://127.0.0.1:6650, cluster=standalone, configs=org.apache.pulsar.broker.ServiceConfiguration@4db60246
+#### What your package contains
+
+The Pulsar binary package initially contains the following directories:
+
+Directory | Contains
+:---------|:--------
+`bin` | Pulsar's command-line tools, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](https://pulsar.apache.org/tools/pulsar-admin/).
+`conf` | Configuration files for Pulsar, including [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more.
+`examples` | A Java JAR file containing [Pulsar Functions](functions-overview) example.
+`lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files used by Pulsar.
+`licenses` | License files, in the`.txt` form, for various components of the Pulsar [codebase](https://github.com/apache/pulsar).
+
+These directories are created once you begin running Pulsar.
+
+Directory | Contains
+:---------|:--------
+`data` | The data storage directory used by ZooKeeper and BookKeeper.
+`instances` | Artifacts created for [Pulsar Functions](functions-overview).
+`logs` | Logs created by the installation.
+
+:::tip
+
+If you want to use builtin connectors and tiered storage offloaders, you can install them according to the following instructions：
+* [Install builtin connectors (optional)](#install-builtin-connectors-optional)
+* [Install tiered storage offloaders (optional)](#install-tiered-storage-offloaders-optional)
+Otherwise, skip this step and perform the next step [Start Pulsar standalone](#start-pulsar-standalone). Pulsar can be successfully installed without installing bulitin connectors and tiered storage offloaders.
+
+:::
+
+### Install builtin connectors (optional)
+
+Since `2.1.0-incubating` release, Pulsar releases a separate binary distribution, containing all the `builtin` connectors.
+To enable those `builtin` connectors, you can download the connectors tarball release in one of the following ways:
+
+* download from the Apache mirror <a href="pulsar:connector_release_url" download>Pulsar IO Connectors @pulsar:version@ release</a>
+
+* download from the Pulsar [downloads page](pulsar:download_page_url)
+
+* download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
+
+* use [wget](https://www.gnu.org/software/wget):
+
+  ```shell
+  
+  $ wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
+  
+  ```
+
+After you download the nar file, copy the file to the `connectors` directory in the pulsar directory. 
+For example, if you download the `pulsar-io-aerospike-@pulsar:version@.nar` connector file, enter the following commands:
+
+```bash
+
+$ mkdir connectors
+$ mv pulsar-io-aerospike-@pulsar:version@.nar connectors
+
+$ ls connectors
+pulsar-io-aerospike-@pulsar:version@.nar
 ...
+
+```
+
+:::note
+
+* If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker
+(or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
+* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)),
+you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all builtin connectors](io-overview.md#working-with-connectors).
+
+:::
+
+### Install tiered storage offloaders (optional)
+
+:::tip
+
+Since `2.2.0` release, Pulsar releases a separate binary distribution, containing the tiered storage offloaders.
+To enable tiered storage feature, follow the instructions below; otherwise skip this section.
+
+:::
+
+To get started with [tiered storage offloaders](concepts-tiered-storage), you need to download the offloaders tarball release on every broker node in one of the following ways:
+
+* download from the Apache mirror <a href="pulsar:offloader_release_url" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
+
+* download from the Pulsar [downloads page](pulsar:download_page_url)
+
+* download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
+
+* use [wget](https://www.gnu.org/software/wget):
+
+  ```shell
+  
+  $ wget pulsar:offloader_release_url
+  
+  ```
+
+After you download the tarball, untar the offloaders package and copy the offloaders as `offloaders`
+in the pulsar directory:
+
+```bash
+
+$ tar xvfz apache-pulsar-offloaders-@pulsar:version@-bin.tar.gz
+
+// you will find a directory named `apache-pulsar-offloaders-@pulsar:version@` in the pulsar directory
+// then copy the offloaders
+
+$ mv apache-pulsar-offloaders-@pulsar:version@/offloaders offloaders
+
+$ ls offloaders
+tiered-storage-jcloud-@pulsar:version@.nar
+
+```
+
+For more information on how to configure tiered storage, see [Tiered storage cookbook](cookbooks-tiered-storage).
+
+:::note
+
+* If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's pulsar directory.
+* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DCOS](deploy-dcos)),
+you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
+
+:::
+
+## Start Pulsar standalone
+
+Once you have an up-to-date local copy of the release, you can start a local cluster using the [`pulsar`](reference-cli-tools.md#pulsar) command, which is stored in the `bin` directory, and specifying that you want to start Pulsar in standalone mode.
+
+```bash
+
+$ bin/pulsar standalone
+
+```
+
+If you have started Pulsar successfully, you will see `INFO`-level log messages like this:
+
+```bash
+
+2017-06-01 14:46:29,192 - INFO  - [main:WebSocketService@95] - Configuration Store cache started
+2017-06-01 14:46:29,192 - INFO  - [main:AuthenticationService@61] - Authentication is disabled
+2017-06-01 14:46:29,192 - INFO  - [main:WebSocketService@108] - Pulsar WebSocket Service started
 
 ```
 
 :::tip
 
-When you start a local standalone cluster, a `public/default`
+* The service is running on your terminal, which is under your direct control. If you need to run other commands, open a new terminal window.  
 
 :::
 
-namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces.
-For more information, see [Topics](concepts-messaging.md#topics).
+You can also run the service as a background process using the `pulsar-daemon start standalone` command. For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
+> 
+> * By default, there is no encryption, authentication, or authorization configured. Apache Pulsar can be accessed from remote server without any authorization. Please do check [Security Overview](security-overview) document to secure your deployment.
+>
+> * When you start a local standalone cluster, a `public/default` [namespace](concepts-messaging.md#namespaces) is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
-## Use Pulsar in Docker
+## Use Pulsar standalone
 
-Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python) 
-and [C++](client-libraries-cpp). If you're running a local standalone cluster, you can
-use one of these root URLs to interact with your cluster:
-
-* `pulsar://localhost:6650`
-* `http://localhost:8080`
-
-The following example will guide you get started with Pulsar quickly by using the [Python](client-libraries-python)
-client API.
-
-Install the Pulsar Python client library directly from [PyPI](https://pypi.org/project/pulsar-client/):
-
-```shell
-
-$ pip install pulsar-client
-
-```
+Pulsar provides a CLI tool called [`pulsar-client`](reference-cli-tools.md#pulsar-client). The pulsar-client tool enables you to consume and produce messages to a Pulsar topic in a running cluster. 
 
 ### Consume a message
 
-Create a consumer and subscribe to the topic:
+The following command consumes a message with the subscription name `first-subscription` to the `my-topic` topic:
 
-```python
+```bash
 
-import pulsar
-
-client = pulsar.Client('pulsar://localhost:6650')
-consumer = client.subscribe('my-topic',
-                            subscription_name='my-sub')
-
-while True:
-    msg = consumer.receive()
-    print("Received message: '%s'" % msg.data())
-    consumer.acknowledge(msg)
-
-client.close()
+$ bin/pulsar-client consume my-topic -s "first-subscription"
 
 ```
+
+If the message has been successfully consumed, you will see a confirmation like the following in the `pulsar-client` logs:
+
+```
+
+09:56:55.566 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.MultiTopicsConsumerImpl - [TopicsConsumerFakeTopicNamee2df9] [first-subscription] Success subscribe new topic my-topic in topics consumer, partitions: 4, allTopicPartitionsNumber: 4
+
+```
+
+:::tip
+
+As you have noticed that we do not explicitly create the `my-topic` topic, to which we consume the message. When you consume a message to a topic that does not yet exist, Pulsar creates that topic for you automatically. Producing a message to a topic that does not exist will automatically create that topic for you as well.
+
+:::
 
 ### Produce a message
 
-Now start a producer to send some test messages:
+The following command produces a message saying `hello-pulsar` to the `my-topic` topic:
 
-```python
+```bash
 
-import pulsar
-
-client = pulsar.Client('pulsar://localhost:6650')
-producer = client.create_producer('my-topic')
-
-for i in range(10):
-    producer.send(('hello-pulsar-%d' % i).encode('utf-8'))
-
-client.close()
+$ bin/pulsar-client produce my-topic --messages "hello-pulsar"
 
 ```
 
-## Get the topic statistics
-
-In Pulsar, you can use REST, Java, or command-line tools to control every aspect of the system.
-For details on APIs, refer to [Admin API Overview](admin-api-overview).
-
-In the simplest example, you can use curl to probe the stats for a particular topic:
-
-```shell
-
-$ curl http://localhost:8080/admin/v2/persistent/public/default/my-topic/stats | python -m json.tool
+If the message has been successfully published to the topic, you will see a confirmation like the following in the `pulsar-client` logs:
 
 ```
 
-The output is something like this:
-
-```json
-
-{
-  "averageMsgSize": 0.0,
-  "msgRateIn": 0.0,
-  "msgRateOut": 0.0,
-  "msgThroughputIn": 0.0,
-  "msgThroughputOut": 0.0,
-  "publishers": [
-    {
-      "address": "/172.17.0.1:35048",
-      "averageMsgSize": 0.0,
-      "clientVersion": "1.19.0-incubating",
-      "connectedSince": "2017-08-09 20:59:34.621+0000",
-      "msgRateIn": 0.0,
-      "msgThroughputIn": 0.0,
-      "producerId": 0,
-      "producerName": "standalone-0-1"
-    }
-  ],
-  "replication": {},
-  "storageSize": 16,
-  "subscriptions": {
-    "my-sub": {
-      "blockedSubscriptionOnUnackedMsgs": false,
-      "consumers": [
-        {
-          "address": "/172.17.0.1:35064",
-          "availablePermits": 996,
-          "blockedConsumerOnUnackedMsgs": false,
-          "clientVersion": "1.19.0-incubating",
-          "connectedSince": "2017-08-09 21:05:39.222+0000",
-          "consumerName": "166111",
-          "msgRateOut": 0.0,
-          "msgRateRedeliver": 0.0,
-          "msgThroughputOut": 0.0,
-          "unackedMessages": 0
-        }
-      ],
-      "msgBacklog": 0,
-      "msgRateExpired": 0.0,
-      "msgRateOut": 0.0,
-      "msgRateRedeliver": 0.0,
-      "msgThroughputOut": 0.0,
-      "type": "Exclusive",
-      "unackedMessages": 0
-    }
-  }
-}
+13:09:39.356 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
 
 ```
+
+## Stop Pulsar standalone
+
+Press `Ctrl+C` to stop a local standalone Pulsar.
+
+:::tip
+
+If the service runs as a background process using the `pulsar-daemon start standalone` command, then use the `pulsar-daemon stop standalone`  command to stop the service.
+For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
+
+:::
 
