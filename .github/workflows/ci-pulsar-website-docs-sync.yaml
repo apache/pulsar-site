@@ -21,8 +21,8 @@ name: CI - Pulsar Website Docs Sync from apache/pulsar
 on:
   push:
     branches: [docs-sync]
-  # schedule:
-  #   - cron: '0 */6 * * *'
+  schedule:
+    - cron: '0 */6 * * *'
 
 jobs:
   build-website:
@@ -41,8 +41,11 @@ jobs:
           git clone -b master --depth 1 https://github.com/apache/pulsar.git pulsar
           echo "pulsar clone done."
 
-          cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
-          cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
+          cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
+          cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website-next/versioned_docs
+          cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website-next/versioned_sidebars
+          cp -r pulsar/site2/website/sidebars.json pulsar-site/site2/website-next/sidebars.json
+          cp -r pulsar/site2/website/versions.json pulsar-site/site2/website-next/versions-full.json
 
           echo "docs override done."
 
