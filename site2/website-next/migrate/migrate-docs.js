@@ -11,6 +11,7 @@ function migrate(version, chapter, docsId, cb) {
   if (version == "next") {
     dest = "../../" + next.docsDir;
   }
+  let destDir = path.join(__dirname, dest);
   dest = path.join(__dirname, dest, docsId + ".md");
   let mdpath = findMd(version, docsId);
   if (mdpath) {
@@ -27,6 +28,9 @@ function migrate(version, chapter, docsId, cb) {
     );
     let data = fs.readFileSync(mdpath, "utf8");
     data = fixMd(data, version);
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir);
+    }
     fs.writeFileSync(dest, data);
     cb && cb(docsId);
   } else {

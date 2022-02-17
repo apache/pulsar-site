@@ -50,7 +50,7 @@ const _search = (dir, version, docsId, reg) => {
     }
     let data = fs.readFileSync(pathname, "utf8");
     if (reg.test(data)) {
-      console.log("         [" + version + ":" + docsId + "]fund: " + pathname);
+      console.log("         ******[" + version + ":" + docsId + "]fund: " + pathname);
       return pathname;
     }
   }
