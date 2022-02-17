@@ -69,7 +69,7 @@ jobs:
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
         run: |
           cd ../
-          git clone https://github.com/apache/pulsar.git
+          git clone -b master --depth 1 https://github.com/apache/pulsar.git
           rm -rf pulsar/.git
           rm -rf pulsar/site2
           mv pulsar/* pulsar-site/
