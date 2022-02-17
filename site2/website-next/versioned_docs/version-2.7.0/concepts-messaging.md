@@ -70,7 +70,7 @@ When you enable chunking, read the following instructions.
 - Chunking is only supported for persisted topics.
 - Chunking is only supported for the exclusive and failover subscription types.
 
-When chunking is enabled (`chunkingEnabled=true`), if the message size is greater than the allowed maximum publish-payload size, the producer splits the original message into chunked messages and publishes them with chunked metadata to the broker separately and in order. At the broker side, the chunked messages are stored in the managed-ledger in the same way as that of ordinary messages. The only difference is that the consumer needs to buffer the chunked messages and combines them into the real message when all chunked messages have been collected. The chunked messages in the managed-ledger can be interwoven with ordinary messages. If producer fails to publish all the chunks of a message, the consumer can expire incomplete chunks if consumer fail to receive all chunks in expire time. By default, the expire time is set to one hour.
+When chunking is enabled (`chunkingEnabled=true`), if the message size is greater than the allowed maximum publish-payload size, the producer splits the original message into chunked messages and publishes them with chunked metadata to the broker separately and in order. At the broker side, the chunked messages are stored in the managed-ledger in the same way as that of ordinary messages. The only difference is that the consumer needs to buffer the chunked messages and combines them into the real message when all chunked messages have been collected. The chunked messages in the managed-ledger can be interwoven with ordinary messages. If producer fails to publish all the chunks of a message, the consumer can expire incomplete chunks if consumer fail to receive all chunks in expire time. By default, the expire time is set to one minute.
 
 The consumer consumes the chunked messages and buffers them until the consumer receives all the chunks of a message. And then the consumer stitches chunked messages together and places them into the receiver-queue. Clients consume messages from the receiver-queue. Once the consumer consumes the entire large message and acknowledges it, the consumer internally sends acknowledgement of all the chunk messages associated to that large message. You can set the `maxPendingChuckedMessage` parameter on the consumer. When the threshold is reached, the consumer drops the unchunked messages by silently acknowledging them or asking the broker to redeliver them later by marking them unacknowledged.
 
@@ -272,10 +272,10 @@ A subscription is a named configuration rule that determines how messages are de
 > * If you want to achieve "message queuing" among consumers, share the same subscription name among multiple consumers(shared, failover, key_shared).
 > * If you want to achieve both effects simultaneously, combine exclusive subscription type with other subscription types for consumers.
 
-### Consumerless Subscriptions and Their Corresponding Types
+### Subscription types
 When a subscription has no consumers, its subscription type is undefined. The type of a subscription is defined when a consumer connects to it, and the type can be changed by restarting all consumers with a different configuration.
 
-### Exclusive
+#### Exclusive
 
 In *exclusive* type, only a single consumer is allowed to attach to the subscription. If multiple consumers subscribe to a topic using the same subscription, an error occurs.
 
@@ -285,7 +285,7 @@ In the diagram below, only **Consumer A-0** is allowed to consume messages.
 
 ![Exclusive subscriptions](/assets/pulsar-exclusive-subscriptions.png)
 
-### Failover
+#### Failover
 
 In *Failover* type, multiple consumers can attach to the same subscription. A master consumer is picked for non-partitioned topic or each partition of partitioned topic and receives messages. When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
 
@@ -297,32 +297,91 @@ In the diagram below, **Consumer-B-0** is the master consumer while **Consumer-B
 
 ![Failover subscriptions](/assets/pulsar-failover-subscriptions.png)
 
-### Shared
+#### Shared
 
 In *shared* or *round robin* mode, multiple consumers can attach to the same subscription. Messages are delivered in a round robin distribution across consumers, and any given message is delivered to only one consumer. When a consumer disconnects, all the messages that were sent to it and not acknowledged will be rescheduled for sending to the remaining consumers.
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-> **Limitations of shared mode**
-> When using shared mode, be aware that:
+> **Limitations of shared type**
+> When using Shared type, be aware that:
 > * Message ordering is not guaranteed.
-> * You cannot use cumulative acknowledgment with shared mode.
+> * You cannot use cumulative acknowledgment with Shared type.
 
 ![Shared subscriptions](/assets/pulsar-shared-subscriptions.png)
 
-### Key_Shared
+#### Key_Shared
 
-In *Key_Shared* mode, multiple consumers can attach to the same subscription. Messages are delivered in a distribution across consumers and message with same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer. When a consumer connected or disconnected will cause served consumer change for some key of message.
+In *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in a distribution across consumers and message with same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer. When a consumer connected or disconnected will cause served consumer change for some key of message.
 
-> **Limitations of Key_Shared mode**
-> When you use Key_Shared mode, be aware that:
+> **Limitations of Key_Shared type**
+> When you use Key_Shared type, be aware that:
 > * You need to specify a key or orderingKey for messages.
-> * You cannot use cumulative acknowledgment with Key_Shared mode.
+> * You cannot use cumulative acknowledgment with Key_Shared type.
 > * Your producers should disable batching or use a key-based batch builder.
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.png)
 
 **You can disable Key_Shared subscription in the `broker.config` file.**
+
+### Subscription modes
+
+#### What is a subscription mode
+
+The subscription mode indicates the cursor type. 
+
+- When a subscription is created, an associated cursor is created to record the last consumed position. 
+- When a consumer of the subscription restarts, it can continue consuming from the last message it consumes.
+
+Subscription mode | Description | Note
+|---|---|---
+`Durable`|The cursor is durable, which retains messages and persists the current position. <br /><br />If a broker restarts from a failure, it can recover the cursor from the persistent storage (BookKeeper), so that messages can continue to be consumed from the last consumed position.|`Durable` is the **default** subscription mode.
+`NonDurable`|The cursor is non-durable. <br /><br />Once a broker stops, the cursor is lost and can never be recovered, so that messages **can not** continue to be consumed from the last consumed position.|Reader’s subscription mode is `NonDurable` in nature and it does not prevent data in a topic from being deleted. Reader’s subscription mode **can not** be changed. 
+
+A [subscription](#concepts-messaging.md/#subscriptions) can have one or more consumers. When a consumer subscribes to a topic, it must specify the subscription name. A durable subscription and a non-durable subscription can have the same name, they are independent of each other. If a consumer specifies a subscription which does not exist before, the subscription is automatically created.
+
+#### When to use
+
+By default, messages of a topic without any durable subscriptions are marked as deleted. If you want to prevent the messages being marked as deleted, you can create a durable subscription for this topic. In this case, only acknowledged messages are marked as deleted. For more information, see [message retention and expiry](cookbooks-retention-expiry).
+
+#### How to use
+
+After a consumer is created, the default subscription mode of the consumer is `Durable`. You can change the subscription mode to `NonDurable` by making changes to the consumer’s configuration.
+
+<Tabs 
+  defaultValue="Durable"
+  values={[{"label":"Durable","value":"Durable"},{"label":"Non-durable","value":"Non-durable"}]}>
+
+<TabItem value="Durable">
+
+```java
+
+        Consumer<byte[]> consumer = pulsarClient.newConsumer()
+                .topic("my-topic")
+                .subscriptionName("my-sub")
+                .subscriptionMode(SubscriptionMode.Durable)
+                .subscribe();
+
+```
+
+</TabItem>
+<TabItem value="Non-durable">
+
+```java
+
+        Consumer<byte[]> consumer = pulsarClient.newConsumer()
+                .topic("my-topic")
+                .subscriptionName("my-sub")
+                .subscriptionMode(SubscriptionMode.NonDurable)
+                .subscribe();
+
+```
+
+</TabItem>
+
+</Tabs>
+
+For how to create, check, or delete a durable subscription, see [manage subscriptions](admin-api-topics.md/#manage-subscriptions).
 
 ## Multi-topic subscriptions
 
