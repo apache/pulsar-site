@@ -2,7 +2,6 @@
 id: functions-overview
 title: Pulsar Functions overview
 sidebar_label: "Overview"
-original_id: functions-overview
 ---
 
 **Pulsar Functions** are lightweight compute processes that

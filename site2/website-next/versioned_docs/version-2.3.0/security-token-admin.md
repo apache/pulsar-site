@@ -2,7 +2,6 @@
 id: security-token-admin
 title: Token authentication admin
 sidebar_label: "Token authentication admin"
-original_id: security-token-admin
 ---
 
 ## Token Authentication Overview

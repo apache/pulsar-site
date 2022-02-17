@@ -2,10 +2,9 @@
 id: administration-proxy
 title: Pulsar proxy
 sidebar_label: "Pulsar proxy"
-original_id: administration-proxy
 ---
 
-Pulsar proxy is an optional gateway. Pulsar proxy is used when direction connections between clients and Pulsar brokers are either infeasible or undesirable. For example, when you run Pulsar in a cloud environment or on [Kubernetes](https://kubernetes.io) or an analogous platform, you can run Pulsar proxy.
+Pulsar proxy is an optional gateway. Pulsar proxy is used when direct connections between clients and Pulsar brokers are either infeasible or undesirable. For example, when you run Pulsar in a cloud environment or on [Kubernetes](https://kubernetes.io) or an analogous platform, you can run Pulsar proxy.
 
 ## Configure the proxy
 

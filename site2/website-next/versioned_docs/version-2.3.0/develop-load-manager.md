@@ -2,7 +2,6 @@
 id: develop-load-manager
 title: Modular load manager
 sidebar_label: "Modular load manager"
-original_id: develop-load-manager
 ---
 
 The *modular load manager*, implemented in  [`ModularLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/ModularLoadManagerImpl.java), is a flexible alternative to the previously implemented load manager, [`SimpleLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/SimpleLoadManagerImpl.java), which attempts to simplify how load is managed while also providing abstractions so that complex load management strategies may be implemented.

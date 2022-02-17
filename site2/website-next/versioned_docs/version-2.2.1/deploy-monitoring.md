@@ -2,7 +2,6 @@
 id: deploy-monitoring
 title: Monitor
 sidebar_label: "Monitor"
-original_id: deploy-monitoring
 ---
 
 You can use different ways to monitor a Pulsar cluster, exposing both metrics related to the usage of topics and the overall health of the individual components of the cluster.
@@ -127,17 +126,7 @@ The per-topic dashboard instructions are available at [Pulsar manager](administr
 
 You can use grafana to create dashboard driven by the data that is stored in Prometheus.
 
-When you deploy Pulsar on Kubernetes, a `pulsar-grafana` Docker image is enabled by default. You can use the docker image with the principal dashboards.
-
-Enter the command below to use the dashboard manually:
-
-```shell
-
-docker run -p3000:3000 \
-        -e PROMETHEUS_URL=http://$PROMETHEUS_HOST:9090/ \
-        apachepulsar/pulsar-grafana:latest
-
-```
+When you deploy Pulsar on Kubernetes with the Pulsar Helm Chart, a `pulsar-grafana` Docker image is enabled by default. You can use the docker image with the principal dashboards.
 
 The following are some Grafana dashboards examples:
 

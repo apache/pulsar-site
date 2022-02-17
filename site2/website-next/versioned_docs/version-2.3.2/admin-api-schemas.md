@@ -1,5 +1,5 @@
 ---
-id: version-2.3.0-incubating-admin-api-schemas
+id: admin-api-schemas
 title: Managing Schemas
 sidebar_label: "Schemas"
 original_id: admin-api-schemas

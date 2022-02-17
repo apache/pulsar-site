@@ -7,7 +7,7 @@ original_id: administration-dashboard
 
 :::note
 
-Pulsar dashboard is deprecated. If you want to manage and monitor the stats of your topics, use [Pulsar Manager](administration-pulsar-manager). 
+Pulsar dashboard is deprecated. We recommend you use [Pulsar Manager](administration-pulsar-manager) to manage and monitor the stats of your topics. 
 
 :::
 
@@ -53,17 +53,17 @@ $ docker run -p 80:80 \
 ```
 
  
-You need to specify only one service URL for a Pulsar cluster. Internally, the collector figures out all the existing clusters and the brokers from where it needs to pull the metrics. If you connect the dashboard to Pulsar running in standalone mode, the URL is `http://<broker-ip>:8080` by default. `<broker-ip>` is the ip address or hostname of the machine running Pulsar standalone. The ip address or hostname should be accessible from the docker instance running dashboard.
+You need to specify only one service URL for a Pulsar cluster. Internally, the collector figures out all the existing clusters and the brokers from where it needs to pull the metrics. If you connect the dashboard to Pulsar running in standalone mode, the URL is `http://<broker-ip>:8080` by default. `<broker-ip>` is the IP address or hostname of the machine that runs Pulsar standalone. The IP address or hostname should be accessible from the running dashboard in the docker instance.
 
-Once the Docker container runs, the web dashboard is accessible via `localhost` or whichever host that Docker uses.
+Once the Docker container starts, the web dashboard is accessible via `localhost` or whichever host that Docker uses.
 
-> The `SERVICE_URL` that the dashboard uses needs to be reachable from inside the Docker container
+> The `SERVICE_URL` that the dashboard uses needs to be reachable from inside the Docker container.
 
 If the Pulsar service runs in standalone mode in `localhost`, the `SERVICE_URL` has to
-be the IP of the machine.
+be the IP address of the machine.
 
 Similarly, given the Pulsar standalone advertises itself with localhost by default, you need to
-explicitly set the advertise address to the host IP. For example:
+explicitly set the advertise address to the host IP address. For example:
 
 ```shell
 
