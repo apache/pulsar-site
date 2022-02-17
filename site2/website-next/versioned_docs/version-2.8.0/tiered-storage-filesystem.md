@@ -94,13 +94,12 @@ Besides, you can also configure the filesystem offloader to run it automatically
 
 You can configure the filesystem offloader driver in the `broker.conf` or `standalone.conf` configuration file.
 
+<Tabs 
+  defaultValue="HDFS"
+  values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>
+<TabItem value="HDFS">
+
 - **Required** configurations are as below.
-
-  <Tabs 
-    defaultValue="HDFS"
-    values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>    
-
-  <TabItem value="HDFS">
 
   Parameter | Description | Example value
   |---|---|---
@@ -109,18 +108,23 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
   `offloadersDirectory` | Offloader directory | offloaders
   `fileSystemProfilePath` | Hadoop profile path. The configuration file is stored in the Hadoop profile path. It contains various settings for Hadoop performance tuning. | ../conf/filesystem_offload_core_site.xml
 
-  </TabItem>
-  <TabItem value="NFS">
+- **Optional** configurations are as below.
 
+  Parameter| Description | Example value
+  |---|---|---
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|2
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|5000
+
+</TabItem>
+<TabItem value="NFS">
+
+- **Required** configurations are as below.
+  
   Parameter | Description | Example value
   |---|---|---
   `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive. | filesystem
   `offloadersDirectory` | Offloader directory | offloaders
   `fileSystemProfilePath` | NFS profile path. The configuration file is stored in the NFS profile path. It contains various settings for performance tuning. | ../conf/filesystem_offload_core_site.xml
-
-  </TabItem>
-
-  </Tabs>
 
 - **Optional** configurations are as below.
 
@@ -128,6 +132,10 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
   |---|---|---
   `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|2
   `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|5000
+
+</TabItem>
+
+</Tabs>
 
 ### Run filesystem offloader automatically
 
@@ -257,7 +265,6 @@ This section provides step-by-step instructions on how to use the filesystem off
 <Tabs 
   defaultValue="HDFS"
   values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>
-
 <TabItem value="HDFS">
 
 To move data from Pulsar to HDFS, follow these steps.
