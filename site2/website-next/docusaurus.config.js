@@ -121,6 +121,7 @@ module.exports = {
           position: "left",
           label: "Docs",
         },
+        { to: "/versions", label: "Versions", position: "left" },
         { to: "/download", label: "Download", position: "left" },
         {
           type: "doc",
