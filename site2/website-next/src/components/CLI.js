@@ -53,9 +53,9 @@ class CLI extends React.Component {
       majorVersion === 1
     ) {
       if (version === latestVersion) {
-        window.location.href = "/docs/en" + referenceLink;
+        window.location.href = "/docs" + referenceLink;
       } else {
-        window.location.href = "/docs/en/" + version + referenceLink;
+        window.location.href = "/docs/" + version + referenceLink;
       }
     } else {
       version = parseInt(versions[0]) + "." + parseInt(versions[1]) + ".0";
