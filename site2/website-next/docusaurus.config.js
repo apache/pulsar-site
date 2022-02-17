@@ -365,6 +365,11 @@ module.exports = {
           ],
         },
         {
+          href: "https://pulsar.staged.apache.org/",
+          label: "Old Website",
+          position: "right",
+        },
+        {
           href: "https://github.com/apache/pulsar",
           label: "GitHub",
           position: "right",
@@ -422,6 +427,29 @@ module.exports = {
       "@docusaurus/plugin-client-redirects",
       {
         fromExtensions: ["md"],
+        // redirects: [
+        //   // /docs/oldDoc -> /docs/newDoc
+        //   {
+        //     to: "/docs/newDoc",
+        //     from: "/docs/oldDoc",
+        //   },
+        //   // Redirect from multiple old paths to the new path
+        //   {
+        //     to: "/docs/newDoc2",
+        //     from: ["/docs/oldDocFrom2019", "/docs/legacyDocFrom2016"],
+        //   },
+        // ],
+        // createRedirects(existingPath) {
+        //   if (existingPath.includes("/standalone/")) {
+        //     return [
+        //       existingPath.replace("/en/", "/").replace("/standalone/", "/"),
+        //     ];
+        //   }
+        //   if (existingPath.includes("/en/")) {
+        //     return [existingPath.replace("/en/", "/")];
+        //   }
+        //   return undefined;
+        // },
       },
     ],
     "./postcss-tailwind-loader",
