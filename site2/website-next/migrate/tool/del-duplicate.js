@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = (dest) => {
+module.exports = (dest, version) => {
   let duplicateMap = {};
   let allDocs = fs.readdirSync(dest);
   for (let filename of allDocs) {
@@ -21,6 +21,9 @@ module.exports = (dest) => {
     if (duplicateFiles.length > 1) {
       for (let file of duplicateFiles) {
         if (key + "" != path.basename(file)) {
+          console.log(
+            "     [" + version + ":duplicate:" + key + "]del " + file
+          );
           fs.unlinkSync(file);
         }
       }

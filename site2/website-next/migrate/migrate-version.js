@@ -52,7 +52,7 @@ const migrate = (version) => {
     let data = fixMd(fs.readFileSync(mdfile, "utf8"));
     fs.writeFileSync(path.join(dest, path.basename(mdfile)), data);
   }
-  delDuplicate(dest);
+  delDuplicate(dest, version);
 };
 
 module.exports = migrate;
