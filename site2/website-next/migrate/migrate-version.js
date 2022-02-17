@@ -4,7 +4,8 @@ const _ = require("lodash");
 const leftMd = require("./tool/left-md");
 const fixMd = require("./tool/fix-md");
 const migrateChapter = require("./migrate-chapter");
-import { old, next } from "./const";
+const CONST = require("./const");
+const { old, next } = CONST;
 
 function _log(msg) {
   if (typeof require !== "undefined" && require.main === module) {
@@ -56,6 +57,6 @@ module.exports = migrate;
 
 //Test
 if (typeof require !== "undefined" && require.main === module) {
-  migrate("next");
-  //   migrate("2.8.0");
+  const args = process.argv.slice(2);
+  migrate(args[0]);
 }

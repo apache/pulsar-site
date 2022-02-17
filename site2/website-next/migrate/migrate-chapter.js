@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 const migrateDocs = require("./migrate-docs");
-import { old, next } from "./const";
+const CONST = require("./const");
+const { old, next } = CONST;
 
 function _log(msg) {
   if (typeof require !== "undefined" && require.main === module) {
