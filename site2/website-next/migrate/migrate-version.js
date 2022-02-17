@@ -51,6 +51,32 @@ const migrate = (version) => {
     let data = fixMd(fs.readFileSync(mdfile, "utf8"));
     fs.writeFileSync(path.join(dest, path.basename(mdfile)), data);
   }
+  //delete duplicate documents with same id
+  let duplicateMap = {};
+  let allDocs = fs.readdirSync(dest);
+  for (let filename of allDocs) {
+    let pathname = path.join(dest, filename);
+    if (fs.statSync(pathname).isDirectory()) {
+      continue;
+    }
+    if (!pathname.endsWith(".md")) {
+      continue;
+    }
+    let data = fs.readFileSync(pathname, "utf8");
+    let id = /id:\s*(.*)/.exec(data)[1];
+    if (id + ".md" == path.basename(pathname)) {
+      continue;
+    }
+    duplicateMap[id] = duplicateMap[id] || [];
+    duplicateMap[id].push(pathname);
+  }
+  console.log(duplicateMap);
+  for (let [key, duplicateFiles] of Object.entries(duplicateMap)) {
+    for (let file of duplicateFiles) {
+      // fs.unlinkSync(file);
+      console.log(file);
+    }
+  }
 };
 
 module.exports = migrate;
