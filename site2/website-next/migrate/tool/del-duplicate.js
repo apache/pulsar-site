@@ -17,7 +17,6 @@ module.exports = (dest, version) => {
     duplicateMap[id] = duplicateMap[id] || [];
     duplicateMap[id].push(pathname);
   }
-  console.log(duplicateMap);
   for (let [key, duplicateFiles] of Object.entries(duplicateMap)) {
     if (duplicateFiles.length > 1) {
       for (let file of duplicateFiles) {
