@@ -5,8 +5,10 @@ sidebar_label: "Geo-replication"
 original_id: administration-geo
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 *Geo-replication* is the replication of persistently stored message data across multiple clusters of a Pulsar instance.
@@ -181,6 +183,7 @@ producer.newMessage()
 
 You can check topic-specific statistics for geo-replication topics using one of the following methods.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"}]}>
@@ -202,6 +205,7 @@ $ bin/pulsar-admin topics stats persistent://my-tenant/my-namespace/my-topic
 </TabItem>
 
 </Tabs>
+````
 
 Each cluster reports its own local stats, including the incoming and outgoing replication rates and backlogs.
 

@@ -5,8 +5,10 @@ sidebar_label: "Packages"
 original_id: admin-api-packages
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -84,6 +86,7 @@ You can use the package management with command line tools, REST API and Java cl
 ### Upload a package
 You can upload a package to the package management service in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -122,10 +125,12 @@ Upload a package to the package management service asynchronously.
 </TabItem>
 
 </Tabs>
+````
 
 ### Download a package
 You can download a package to the package management service in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -164,9 +169,11 @@ Download a package to the package management service asynchronously.
 </TabItem>
 
 </Tabs>
+````
 
 ### List all versions of a package
 You can get a list of all versions of a package in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -205,9 +212,11 @@ List all versions of a package asynchronously.
 </TabItem>
 
 </Tabs>
+````
 
 ### List all the specified type packages under a namespace
 You can get a list of all the packages with the given type in a namespace in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -246,10 +255,12 @@ List all the packages with the given type in a namespace asynchronously.
 </TabItem>
 
 </Tabs>
+````
 
 ### Get the metadata of a package
 You can get the metadata of a package in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -288,9 +299,11 @@ Get the metadata of a package asynchronously.
 </TabItem>
 
 </Tabs>
+````
 
 ### Update the metadata of a package
 You can update the metadata of a package in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -329,10 +342,12 @@ Update a package metadata information asynchronously.
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete a specified package
 You can delete a specified package with its package name in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -373,3 +388,4 @@ Delete a specified package asynchronously.
 </TabItem>
 
 </Tabs>
+````

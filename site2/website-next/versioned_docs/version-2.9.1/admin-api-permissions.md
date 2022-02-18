@@ -5,8 +5,10 @@ sidebar_label: "Permissions"
 original_id: admin-api-permissions
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -26,6 +28,7 @@ Permissions in Pulsar are managed at the [namespace](reference-terminology.md#na
 
 You can grant permissions to specific roles for lists of operations such as `produce` and `consume`.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -97,11 +100,13 @@ admin.namespaces().grantPermissionOnNamespace(namespace, role, getAuthActions(ac
 </TabItem>
 
 </Tabs>
+````
 
 ## Get permissions
 
 You can see which permissions have been granted to which roles in a namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -138,11 +143,13 @@ admin.namespaces().getPermissions(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ## Revoke permissions
 
 You can revoke permissions from specific roles, which means that those roles will no longer have access to the specified namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -174,3 +181,4 @@ admin.namespaces().revokePermissionsOnNamespace(namespace, role);
 </TabItem>
 
 </Tabs>
+````

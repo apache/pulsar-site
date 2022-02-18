@@ -5,8 +5,10 @@ sidebar_label: "Understand schema"
 original_id: schema-understand
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 This chapter explains the basic concepts of Pulsar schema, focuses on the topics of particular importance, and provides additional background.
@@ -140,6 +142,7 @@ Pulsar provides the following methods to encode a key/value pair in messages：
 
 You can choose the encoding type when constructing the key/value schema.
 
+````mdx-code-block
 <Tabs 
   defaultValue="INLINE"
   values={[{"label":"INLINE","value":"INLINE"},{"label":"SEPARATED","value":"SEPARATED"}]}>
@@ -229,6 +232,7 @@ This example shows how to construct a key/value schema and then use it to produc
 </TabItem>
 
 </Tabs>
+````
 
 #### struct
 
@@ -253,6 +257,7 @@ Pulsar provides the following methods to use the `struct` schema:
 
 * `SchemaDefinition`
 
+````mdx-code-block
 <Tabs 
   defaultValue="static"
   values={[{"label":"static","value":"static"},{"label":"generic","value":"generic"},{"label":"SchemaDefinition","value":"SchemaDefinition"}]}>
@@ -372,6 +377,7 @@ You can define the `schemaDefinition` to generate a `struct` schema.
 </TabItem>
 
 </Tabs>
+````
 
 ### Auto Schema
 

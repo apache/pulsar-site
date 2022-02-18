@@ -5,8 +5,10 @@ sidebar_label: "How-to: Develop"
 original_id: functions-develop
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 You learn how to develop Pulsar Functions with different APIs for Java, Python and Go.
@@ -21,6 +23,7 @@ Pulsar Function SDK for Java/Python/Go | Pulsar-specific libraries that provide 
 
 The language-native function, which adds an exclamation point to all incoming strings and publishes the resulting string to a topic, has no external dependencies. The following example is language-native function.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
@@ -71,8 +74,10 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 </TabItem>
 
 </Tabs>
+````
 
 The following example uses Pulsar Functions SDK.
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -142,6 +147,7 @@ For complete code, see [here](https://github.com/apache/pulsar/blob/77cf09eafa4f
 </TabItem>
 
 </Tabs>
+````
 
 ## Schema registry
 Pulsar has a built-in schema registry and is bundled with popular schema types, such as Avro, JSON and Protobuf. Pulsar Functions can leverage the existing schema information from input topics and derive the input type. The schema registry applies for output topic as well.
@@ -149,6 +155,7 @@ Pulsar has a built-in schema registry and is bundled with popular schema types, 
 ## SerDe
 SerDe stands for **Ser**ialization and **De**serialization. Pulsar Functions uses SerDe when publishing data to and consuming data from Pulsar topics. How SerDe works by default depends on the language you use for a particular function.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -219,10 +226,12 @@ Currently, the feature is not available in Go.
 </TabItem>
 
 </Tabs>
+````
 
 ### Example
 Imagine that you're writing Pulsar Functions that are processing tweet objects, you can refer to the following example of `Tweet` class.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
@@ -324,6 +333,7 @@ For complete code, see [here](https://github.com/apache/pulsar/blob/master/pulsa
 </TabItem>
 
 </Tabs>
+````
 
 In both languages, however, you can write custom SerDe logic for more complex, application-specific types.
 
@@ -347,6 +357,7 @@ Java, Python and Go SDKs provide access to a **context object** that can be used
 * A function to ack the message being processed (if auto-ack is disabled).
 * (Java) get Pulsar admin client.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -574,6 +585,7 @@ For complete code, see [here](https://github.com/apache/pulsar/blob/77cf09eafa4f
 </TabItem>
 
 </Tabs>
+````
 
 ### User config
 When you run or update Pulsar Functions created using SDK, you can pass arbitrary key/values to them with the command line with the `--user-config` flag. Key/values must be specified as JSON. The following function creation command passes a user configured key/value to a function.
@@ -587,6 +599,7 @@ $ bin/pulsar-admin functions create \
 
 ```
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -731,9 +744,11 @@ func contextFunc(ctx context.Context) {
 </TabItem>
 
 </Tabs>
+````
 
 ### Logger
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -1052,11 +1067,13 @@ Additionally, you can specify the function log level through the broker XML file
 </TabItem>
 
 </Tabs>
+````
 
 ### Pulsar admin
 
 Pulsar Functions using the Java SDK has access to the Pulsar admin client, which allows the Pulsar admin client to manage API calls to current Pulsar clusters or external clusters (if `external-pulsars` is provided).
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"}]}>
@@ -1111,6 +1128,7 @@ $ bin/pulsar-admin functions localrun \
 </TabItem>
 
 </Tabs>
+````
 
 ## Metrics
 
@@ -1136,6 +1154,7 @@ You can monitor Pulsar Functions that have been deployed with the following meth
 
 Here are examples of how to customize metrics for Java and Python functions.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -1191,6 +1210,7 @@ Currently, the feature is not available in Go.
 </TabItem>
 
 </Tabs>
+````
 
 ## Security
 
@@ -1205,6 +1225,7 @@ Pulsar Functions can support the following providers:
 
 At the same time, Pulsar Functions provides two interfaces, **SecretsProvider** and **SecretsProviderConfigurator**, allowing users to customize secret provider.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
@@ -1265,6 +1286,7 @@ Currently, the feature is not available in Go.
 </TabItem>
 
 </Tabs>
+````
 
 ## State storage
 Pulsar Functions use [Apache BookKeeper](https://bookkeeper.apache.org) as a state storage interface. Pulsar installation, including the local standalone installation, includes deployment of BookKeeper bookies.
@@ -1283,6 +1305,7 @@ State storage is not available in Go.
 
 ### API
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
@@ -1497,6 +1520,7 @@ Counters and binary values share the same keyspace, so this deletes either type.
 </TabItem>
 
 </Tabs>
+````
 
 ### Query State
 
@@ -1520,6 +1544,7 @@ If `--watch` is specified, the CLI will watch the value of the provided `state-k
 
 ### Example
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
@@ -1572,3 +1597,4 @@ The logic of this `WordCount` function is pretty simple and straightforward:
 </TabItem>
 
 </Tabs>
+````

@@ -5,8 +5,10 @@ sidebar_label: "Manage schema"
 original_id: schema-manage
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 This guide demonstrates the ways to manage schemas:
@@ -166,6 +168,7 @@ To manage schemas, you can use one of the following methods.
 
 To upload (register) a new schema for a topic, you can use one of the following methods.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -287,11 +290,13 @@ admin.createSchema("my-tenant/my-ns/my-topic", payload);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get a schema (latest)
 
 To get the latest schema for a topic, you can use one of the following methods. 
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -377,11 +382,13 @@ SchemaInfo si = admin.getSchema("my-tenant/my-ns/my-topic");
 </TabItem>
 
 </Tabs>
+````
 
 ### Get a schema (specific)
 
 To get a specific version of a schema, you can use one of the following methods.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -456,11 +463,13 @@ SchemaInfo si = admin.getSchema("my-tenant/my-ns/my-topic", 1L);
 </TabItem>
 
 </Tabs>
+````
 
 ### Extract a schema
 
 To provide a schema via a topic, you can use the following method.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"}]}>
@@ -478,6 +487,7 @@ $ pulsar-admin schemas extract --classname <class-name> --jar <jar-path> --type 
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete a schema
 
@@ -489,6 +499,7 @@ In any case, the **delete** action deletes **all versions** of a schema register
 
 :::
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -546,6 +557,7 @@ admin.deleteSchema("my-tenant/my-ns/my-topic");
 </TabItem>
 
 </Tabs>
+````
 
 ## Custom schema storage
 

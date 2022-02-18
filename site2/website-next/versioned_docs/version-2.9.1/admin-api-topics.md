@@ -5,8 +5,10 @@ sidebar_label: "Topics"
 original_id: admin-api-topics
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -49,6 +51,7 @@ Take {@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getLi
 
 You can get the list of topics under a given namespace in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -79,11 +82,13 @@ admin.topics().getList(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Grant permission
 
 You can grant permissions on a client role to perform specific actions on a given topic in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -117,11 +122,13 @@ admin.topics().grantPermission(topic, role, actions);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get permission
 
 You can fetch permission in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -159,10 +166,12 @@ admin.topics().getPermissions(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Revoke permission
 
 You can revoke a permission granted on a client role in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -202,11 +211,13 @@ admin.topics().revokePermissions(topic, role);
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete topic
 
 You can delete a topic in the following ways. You cannot delete a topic if any active subscription or producers is connected to the topic.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -237,10 +248,12 @@ admin.topics().delete(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Unload topic
 
 You can unload a topic in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -271,6 +284,7 @@ admin.topics().unload(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get stats
 
@@ -554,6 +568,7 @@ The following is an example of a topic status.
 
 To get the status of a topic, you can use the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -584,6 +599,7 @@ admin.topics().getStats(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get internal stats
 
@@ -732,6 +748,7 @@ The following is an example of the detailed statistics of a topic.
 ```
 
 To get the internal status of a topic, you can use the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -762,10 +779,12 @@ admin.topics().getInternalStats(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Peek messages
 
 You can peek a number of messages for a specific subscription of a given topic in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -803,11 +822,13 @@ admin.topics().peekMessages(topic, subName, numMessages);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get message by ID
 
 You can fetch the message with the given ledger ID and entry ID in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -841,11 +862,13 @@ admin.topics().getMessageById(topic, ledgerId, entryId);
 </TabItem>
 
 </Tabs>
+````
 
 ### Examine messages
 
 You can examine a specific message on a topic by position relative to the earliest or the latest message.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -877,11 +900,13 @@ admin.topics().examineMessage(topic, "latest", 1);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get message ID 
 
 You can get message ID published at or just after the given datetime.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -914,12 +939,14 @@ admin.topics().getMessageIdByTimestamp(topic, timestamp);
 </TabItem>
 
 </Tabs>
+````
 
 
 ### Skip messages
 
 You can skip a number of messages for a specific subscription of a given topic in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -953,11 +980,13 @@ admin.topics().skipMessages(topic, subName, numMessages);
 </TabItem>
 
 </Tabs>
+````
 
 ### Skip all messages
 
 You can skip all the old messages for a specific subscription of a given topic.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -990,11 +1019,13 @@ admin.topics().skipAllMessages(topic, subName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Reset cursor
 
 You can reset a subscription cursor position back to the position which is recorded X minutes before. It essentially calculates time and position of cursor at X minutes before and resets it at that position. You can reset the cursor in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1028,11 +1059,13 @@ admin.topics().skipAllMessages(topic, subName, timestamp);
 </TabItem>
 
 </Tabs>
+````
 
 ### Lookup of topic
 
 You can locate the broker URL which is serving the given topic in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1065,11 +1098,13 @@ admin.lookup().lookupDestination(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get bundle
 
 You can check the range of the bundle which contains given topic in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1102,11 +1137,13 @@ admin.lookup().getBundleRange(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get subscriptions
 
 You can check all subscription names for a given topic in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1139,11 +1176,13 @@ admin.topics().getSubscriptions(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Unsubscribe
 
 When a subscription does not process messages any more, you can unsubscribe it in the following ways. 
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1176,11 +1215,13 @@ admin.topics().deleteSubscription(topic, subscriptionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Last Message Id
 
 You can get the last committed message ID for a persistent topic. It is available since 2.3.0 release.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1210,6 +1251,7 @@ admin.topics().getLastMessage(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ## Manage non-partitioned topics
 You can use Pulsar [admin API](admin-api-overview) to create, delete and check status of non-partitioned topics.
@@ -1222,6 +1264,7 @@ By default, 60 seconds after creation, topics are considered inactive and delete
 For more information about the two parameters, see [here](reference-configuration.md#broker).
 
 You can create non-partitioned topics in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1260,9 +1303,11 @@ admin.topics().createNonPartitionedTopic(topicName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete
 You can delete non-partitioned topics in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1292,10 +1337,12 @@ admin.topics().delete(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### List
 
 You can get the list of topics under a given namespace in the following ways.  
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1326,6 +1373,7 @@ admin.topics().getList(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Stats
 
@@ -1367,6 +1415,7 @@ You can check the current statistics of a given topic. The following is an examp
 ```
 
 You can check the current statistics of a given topic and its connected producers and consumers in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1397,6 +1446,7 @@ admin.topics().getStats(topic, false /* is precise backlog */);
 </TabItem>
 
 </Tabs>
+````
 
 ## Manage partitioned topics
 You can use Pulsar [admin API](admin-api-overview) to create, update, delete and check status of partitioned topics.
@@ -1410,6 +1460,7 @@ By default, 60 seconds after creation, topics are considered inactive and delete
 For more information about the two parameters, see [here](reference-configuration.md#broker).
 
 You can create partitioned topics in the following ways.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1451,11 +1502,13 @@ admin.topics().createPartitionedTopic(topicName, numPartitions);
 </TabItem>
 
 </Tabs>
+````
 
 ### Create missed partitions
 
 When topic auto-creation is disabled, and you have a partitioned topic without any partitions, you can use the [`create-missed-partitions`](reference-pulsar-admin.md#create-missed-partitions) command to create partitions for the topic.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1488,6 +1541,7 @@ admin.topics().createMissedPartitions(topicName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get metadata
 
@@ -1497,6 +1551,7 @@ Field | Description
 :-----|:-------
 `partitions` | The number of partitions into which the topic is divided.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1532,6 +1587,7 @@ admin.topics().getPartitionedTopicMetadata(topicName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Update
 
@@ -1539,6 +1595,7 @@ You can update the number of partitions for an existing partitioned topic *if* t
 
 Producers and consumers can find the newly created partitions automatically.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1571,10 +1628,12 @@ admin.topics().updatePartitionedTopic(topic, numPartitions);
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete
 You can delete partitioned topics with the [`delete-partitioned-topic`](reference-pulsar-admin.md#delete-partitioned-topic) command, REST API and Java. 
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1604,9 +1663,11 @@ admin.topics().delete(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### List
 You can get the list of topics under a given namespace in the following ways.  
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1637,6 +1698,7 @@ admin.topics().getList(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Stats
 
@@ -1701,6 +1763,7 @@ Note that in the subscription JSON object, `chuckedMessageRate` is deprecated. P
 
 You can check the current statistics of a given partitioned topic and its connected producers and consumers in the following ways. 
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1731,6 +1794,7 @@ admin.topics().getPartitionedStats(topic, true /* per partition */, false /* is 
 </TabItem>
 
 </Tabs>
+````
 
 ### Internal stats
 
@@ -1777,6 +1841,7 @@ You can check the detailed statistics of a topic. The following is an example. F
 
 You can get the internal stats for the partitioned topic in the following ways.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1806,11 +1871,13 @@ admin.topics().getInternalStats(topic);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get backlog size
 
 You can get backlog size of a single topic partition or a nonpartitioned topic given a message ID (in bytes).
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1843,6 +1910,7 @@ admin.topics().getBacklogSizeByMessageId(topic, messageId);
 </TabItem>
 
 </Tabs>
+````
 
 ## Publish to partitioned topics
 
