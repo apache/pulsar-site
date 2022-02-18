@@ -4,8 +4,10 @@ title: Pulsar Encryption
 sidebar_label: "End-to-End Encryption"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 Applications can use Pulsar encryption to encrypt messages at the producer side and decrypt messages at the consumer side. You can use the public and private key pair that the application configures to perform encryption. Only the consumers with a valid key can decrypt the encrypted messages.
@@ -47,6 +49,7 @@ openssl ec -in test_ecdsa_privkey.pem -pubout -outform pem -out test_ecdsa_pubke
 
 5. Configure a `CryptoKeyReader` to a producer, consumer or reader. 
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"},{"label":"Node.JS","value":"Node.JS"}]}>
@@ -200,9 +203,11 @@ await client.close();
 </TabItem>
 
 </Tabs>
+````
 
 6. Below is an example of a **customized** `CryptoKeyReader` implementation.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"},{"label":"Node.JS","value":"Node.JS"}]}>
@@ -287,6 +292,7 @@ Currently, **customized** `CryptoKeyReader` implementation is not supported in N
 </TabItem>
 
 </Tabs>
+````
 
 ## Key rotation
 Pulsar generates a new AES data key every 4 hours or after publishing a certain number of messages. A producer fetches the asymmetric public key every 4 hours by calling CryptoKeyReader.getPublicKey() to retrieve the latest version.

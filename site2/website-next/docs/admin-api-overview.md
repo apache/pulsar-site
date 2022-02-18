@@ -4,8 +4,10 @@ title: Pulsar admin interface
 sidebar_label: "Overview"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 The Pulsar admin interface enables you to manage all important entities in a Pulsar instance, such as tenants, topics, and namespaces.
@@ -42,6 +44,7 @@ You can interact with the admin interface via:
 
 Each of the three admin interfaces (the `pulsar-admin` CLI tool, the {@inject: rest:REST:/} API, and the [Java admin API](/api/admin)) requires some special setup if you have enabled authentication in your Pulsar instance.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -112,6 +115,7 @@ PulsarAdmin admin = PulsarAdmin.builder()
 </TabItem>
 
 </Tabs>
+````
 
 ## How to define Pulsar resource names when running Pulsar in Kubernetes
 If you run Pulsar Functions or connectors on Kubernetes, you need to follow Kubernetes naming convention to define the names of your Pulsar resources, whichever admin interface you use.

@@ -4,8 +4,10 @@ title: Managing Brokers
 sidebar_label: "Brokers"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -39,6 +41,7 @@ In addition to being configurable when you start them up, brokers can also be [d
 
 Fetch all available active brokers that are serving traffic.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -73,11 +76,13 @@ admin.brokers().getActiveBrokers(clusterName)
 </TabItem>
 
 </Tabs>
+````
 
 ### Get the information of the leader broker
 
 Fetch the information of the leader broker, for example, the service url.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -114,11 +119,13 @@ For the detail of the code above, see [here](https://github.com/apache/pulsar/bl
 </TabItem>
 
 </Tabs>
+````
 
 #### list of namespaces owned by a given broker
 
 It finds all namespaces which are owned and served by a given broker.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -160,6 +167,7 @@ admin.brokers().getOwnedNamespaces(cluster,brokerUrl);
 </TabItem>
 
 </Tabs>
+````
 
 ### Dynamic broker configuration
 
@@ -172,6 +180,7 @@ But since all broker configuration in Pulsar is stored in ZooKeeper, configurati
 
 ### Update dynamic configuration
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -202,10 +211,12 @@ admin.brokers().updateDynamicConfiguration(configName, configValue);
 </TabItem>
 
 </Tabs>
+````
 
 ### List updated values
 
 Fetch a list of all potentially updatable configuration parameters.
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -235,11 +246,13 @@ admin.brokers().getDynamicConfigurationNames();
 </TabItem>
 
 </Tabs>
+````
 
 ### List all
 
 Fetch a list of all parameters that have been dynamically updated.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -269,3 +282,4 @@ admin.brokers().getAllDynamicConfigurations();
 </TabItem>
 
 </Tabs>
+````

@@ -4,8 +4,10 @@ title: How to develop Pulsar connectors
 sidebar_label: "Develop"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 This guide describes how to develop Pulsar connectors to move data
@@ -384,6 +386,7 @@ Pulsar connectors enable you to move data in and out of Pulsar easily. It is imp
 
 Here is an example of how to customize metrics for a Java connector.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"}]}>
@@ -414,3 +417,4 @@ public class TestMetricSink implements Sink<String> {
 </TabItem>
 
 </Tabs>
+````

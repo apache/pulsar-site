@@ -4,8 +4,10 @@ title: Pulsar connector overview
 sidebar_label: "Overview"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 Messaging systems are most powerful when you can easily use them with external systems like databases and other messaging systems.
@@ -70,6 +72,7 @@ When creating a connector, you can set the processing guarantee with the followi
 
 Here takes **Admin CLI** as an example. For more information about **REST API** or **JAVA Admin API**, see [here](io-use.md#create). 
 
+````mdx-code-block
 <Tabs 
   defaultValue="Source"
   values={[{"label":"Source","value":"Source"},{"label":"Sink","value":"Sink"}]}>
@@ -102,6 +105,7 @@ For more information about the options of `pulsar-admin sinks create`, see [here
 </TabItem>
 
 </Tabs>
+````
 
 ### Update 
 
@@ -115,6 +119,7 @@ After creating a connector, you can update the processing guarantee with the fol
   
 Here takes **Admin CLI** as an example. For more information about **REST API** or **JAVA Admin API**, see [here](io-use.md#create). 
 
+````mdx-code-block
 <Tabs 
   defaultValue="Source"
   values={[{"label":"Source","value":"Source"},{"label":"Sink","value":"Sink"}]}>
@@ -147,6 +152,7 @@ For more information about the options of `pulsar-admin sinks update`, see [here
 </TabItem>
 
 </Tabs>
+````
 
 
 ## Work with connector

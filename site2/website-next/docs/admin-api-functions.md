@@ -4,8 +4,10 @@ title: Manage Functions
 sidebar_label: "Functions"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -40,6 +42,7 @@ You can perform the following operations on functions.
 
 You can create a Pulsar function in cluster mode (deploy it on a Pulsar cluster) using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -91,11 +94,13 @@ admin.functions().createFunction(functionConfig, fileName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Update a function
 
 You can update a Pulsar function that has been deployed to a Pulsar cluster using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST Admin API","value":"REST Admin API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -142,11 +147,13 @@ admin.functions().updateFunction(functionConfig, userCodeFile, updateOptions);
 </TabItem>
 
 </Tabs>
+````
 
 ### Start an instance of a function
 
 You can start a stopped function instance with `instance-id` using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -181,11 +188,13 @@ admin.functions().startFunction(tenant, namespace, functionName, Integer.parseIn
 </TabItem>
 
 </Tabs>
+````
 
 ### Start all instances of a function
 
 You can start all stopped function instances using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -221,11 +230,13 @@ admin.functions().startFunction(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Stop an instance of a function
 
 You can stop a function instance with `instance-id` using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -262,11 +273,13 @@ admin.functions().stopFunction(tenant, namespace, functionName, Integer.parseInt
 </TabItem>
 
 </Tabs>
+````
 
 ### Stop all instances of a function
 
 You can stop all function instances using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -302,11 +315,13 @@ admin.functions().stopFunction(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Restart an instance of a function
 
 Restart a function instance with `instance-id` using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -343,11 +358,13 @@ admin.functions().restartFunction(tenant, namespace, functionName, Integer.parse
 </TabItem>
 
 </Tabs>
+````
 
 ### Restart all instances of a function
 
 You can restart all function instances using Admin CLI, REST API or Java admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -383,11 +400,13 @@ admin.functions().restartFunction(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### List all functions
 
 You can list all Pulsar functions running under a specific tenant and namespace using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -422,11 +441,13 @@ admin.functions().getFunctions(tenant, namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete a function
 
 You can delete a Pulsar function that is running on a Pulsar cluster using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -462,11 +483,13 @@ admin.functions().deleteFunction(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get info about a function
 
 You can get information about a Pulsar function currently running in cluster mode using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -502,10 +525,12 @@ admin.functions().getFunction(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get status of an instance of a function
 
 You can get the current status of a Pulsar function instance with `instance-id` using Admin CLI, REST API or Java Admin API.
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -542,11 +567,13 @@ admin.functions().getFunctionStatus(tenant, namespace, functionName, Integer.par
 </TabItem>
 
 </Tabs>
+````
 
 ### Get status of all instances of a function
 
 You can get the current status of a Pulsar function instance using Admin CLI, REST API or Java Admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -582,10 +609,12 @@ admin.functions().getFunctionStatus(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get stats of an instance of a function
 
 You can get the current stats of a Pulsar Function instance with `instance-id` using Admin CLI, REST API or Java admin API.
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -622,11 +651,13 @@ admin.functions().getFunctionStats(tenant, namespace, functionName, Integer.pars
 </TabItem>
 
 </Tabs>
+````
 
 ### Get stats of all instances of a function
 
 You can get the current stats of a Pulsar function using Admin CLI, REST API or Java admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -662,11 +693,13 @@ admin.functions().getFunctionStats(tenant, namespace, functionName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Trigger a function
 
 You can trigger a specified Pulsar function with a supplied value using Admin CLI, REST API or Java admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -705,11 +738,13 @@ admin.functions().triggerFunction(tenant, namespace, functionName, topic, trigge
 </TabItem>
 
 </Tabs>
+````
 
 ### Put state associated with a function
 
 You can put the state associated with a Pulsar function using Admin CLI, REST API or Java admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
@@ -748,11 +783,13 @@ admin.functions().putFunctionState(tenant, namespace, functionName, stateRepr);
 </TabItem>
 
 </Tabs>
+````
 
 ### Fetch state associated with a function
 
 You can fetch the current state associated with a Pulsar function using Admin CLI, REST API or Java admin API.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin CLI","value":"Java Admin CLI"}]}>
@@ -789,3 +826,4 @@ admin.functions().getFunctionState(tenant, namespace, functionName, key);
 </TabItem>
 
 </Tabs>
+````

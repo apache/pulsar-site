@@ -4,8 +4,10 @@ title: Client authentication using tokens based on JSON Web Tokens
 sidebar_label: "Authentication using JWT"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 ## Token authentication overview
@@ -58,6 +60,7 @@ authParams=file:///path/to/token/file
 
 You can use tokens to authenticate the following Pulsar clients.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"},{"label":"C++","value":"C++"},{"label":"C#","value":"C#"}]}>
@@ -167,6 +170,7 @@ var client = PulsarClient.Builder()
 </TabItem>
 
 </Tabs>
+````
 
 ## Enable token authentication 
 

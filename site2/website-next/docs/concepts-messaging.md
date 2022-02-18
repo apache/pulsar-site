@@ -4,8 +4,10 @@ title: Messaging
 sidebar_label: "Messaging"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) pattern (often abbreviated to pub-sub). In this pattern, [producers](#producers) publish messages to [topics](#topics); [consumers](#consumers) [subscribe](#subscription-types) to those topics, process incoming messages, and send [acknowledgements](#acknowledgement) to the broker when processing is finished.
@@ -474,6 +476,7 @@ The key-based batching aims at resolving the above-mentioned issues. This batchi
 
 Below are examples of enabling the key-based batching under the Key_Shared subscription type, with `client` being the Pulsar client that you created.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
@@ -512,6 +515,7 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </TabItem>
 
 </Tabs>
+````
 
 > **Limitations of Key_Shared type**  
 > When you use Key_Shared type, be aware that:
@@ -543,6 +547,7 @@ By default, messages of a topic without any durable subscriptions are marked as 
 
 After a consumer is created, the default subscription mode of the consumer is `Durable`. You can change the subscription mode to `NonDurable` by making changes to the consumer’s configuration.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Durable"
   values={[{"label":"Durable","value":"Durable"},{"label":"Non-durable","value":"Non-durable"}]}>
@@ -575,6 +580,7 @@ After a consumer is created, the default subscription mode of the consumer is `D
 </TabItem>
 
 </Tabs>
+````
 
 For how to create, check, or delete a durable subscription, see [manage subscriptions](admin-api-topics.md/#manage-subscriptions).
 

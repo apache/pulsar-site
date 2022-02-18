@@ -4,8 +4,10 @@ title: Managing Tenants
 sidebar_label: "Tenants"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -29,6 +31,7 @@ Tenants, like namespaces, can be managed using the [admin API](admin-api-overvie
 
 You can list all of the tenants associated with an [instance](reference-terminology.md#instance).
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -61,11 +64,13 @@ admin.tenants().getTenants();
 </TabItem>
 
 </Tabs>
+````
 
 ### Create
 
 You can create a new tenant.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -112,11 +117,13 @@ admin.tenants().createTenant(tenantName, tenantInfo);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get configuration
 
 You can fetch the [configuration](reference-configuration) for an existing tenant at any time.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -157,11 +164,13 @@ admin.tenants().getTenantInfo(tenantName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete
 
 Tenants can be deleted from a Pulsar [instance](reference-terminology.md#instance).
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -192,11 +201,13 @@ admin.Tenants().deleteTenant(tenantName);
 </TabItem>
 
 </Tabs>
+````
 
 ### Update
 
 You can update a tenant's configuration.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
@@ -227,3 +238,4 @@ admin.tenants().updateTenant(tenantName, tenantInfo);
 </TabItem>
 
 </Tabs>
+````

@@ -9,7 +9,7 @@ if [ -n "$CONTAINER_ID" ]
 then
     docker exec -it $CONTAINER_NAME nginx -s reload
 else
-    docker run --name $CONTAINER_NAME -d -p 80:80 -v $ROOT_DIR/site2/website-next/build:/usr/share/nginx/html nginx
+    docker run --name $CONTAINER_NAME -d -p 80:80 -v $ROOT_DIR/site2/website-next/build:/usr/share/nginx/html nginx:1.18.0-alpine
 fi
 
 

@@ -4,8 +4,10 @@ title: Use filesystem offloader with Pulsar
 sidebar_label: "Filesystem offloader"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 This chapter guides you through every step of installing and configuring the filesystem offloader and using it with Pulsar.
@@ -93,6 +95,7 @@ Besides, you can also configure the filesystem offloader to run it automatically
 
 You can configure the filesystem offloader driver in the `broker.conf` or `standalone.conf` configuration file.
 
+````mdx-code-block
 <Tabs 
   defaultValue="HDFS"
   values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>
@@ -135,6 +138,7 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 </TabItem>
 
 </Tabs>
+````
 
 ### Run filesystem offloader automatically
 
@@ -261,6 +265,7 @@ To manually trigger the filesystem offloader via CLI tools, you need to specify 
 
 This section provides step-by-step instructions on how to use the filesystem offloader to move data from Pulsar to Hadoop Distributed File System (HDFS) or Network File system (NFS).
 
+````mdx-code-block
 <Tabs 
   defaultValue="HDFS"
   values={[{"label":"HDFS","value":"HDFS"},{"label":"NFS","value":"NFS"}]}>
@@ -458,6 +463,7 @@ As indicated in the [configuration](#configuration) section, you need to configu
 </TabItem>
 
 </Tabs>
+````
 
 ### Step 4: Offload data from BookKeeper to filesystem
 

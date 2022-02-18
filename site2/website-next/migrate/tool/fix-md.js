@@ -47,8 +47,8 @@ function fix(data, version) {
     .replace(/\s?style=".*?"/g, "")
     .replace(/\]\(assets\//g, "](/assets/");
 
-  return data;
-  // return fixJSX(data);
+  // return data;
+  return fixJSX(data);
 }
 
 module.exports = fix;

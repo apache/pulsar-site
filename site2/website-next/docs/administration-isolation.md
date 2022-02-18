@@ -4,8 +4,10 @@ title: Pulsar isolation
 sidebar_label: "Pulsar isolation"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 In an organization, a Pulsar instance provides services to multiple teams. When organizing the resources across multiple teams, you want to make a suitable isolation plan to avoid the resource competition between different teams and applications and provide high-quality messaging service. In this case, you need to take resource isolation into consideration and weigh your intended actions against expected and unexpected consequences.
@@ -18,6 +20,7 @@ In Pulsar, when namespaces (more specifically, namespace bundles) are assigned d
 
 You can set a namespace isolation policy for a cluster using one of the following methods. 
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
@@ -57,6 +60,7 @@ For how to set namespace isolation policy using Java admin API, see [here](https
 </TabItem>
 
 </Tabs>
+````
 
 ## Bookie isolation
 
@@ -64,6 +68,7 @@ A namespace can be isolated into user-defined groups of bookies, which guarantee
 
 You can set a bookie affinity group using one of the following methods.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
@@ -112,3 +117,4 @@ For how to set bookie affinity group for a namespace using Java admin API, see [
 </TabItem>
 
 </Tabs>
+````

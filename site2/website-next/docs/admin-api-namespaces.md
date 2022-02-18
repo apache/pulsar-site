@@ -4,8 +4,10 @@ title: Managing Namespaces
 sidebar_label: "Namespaces"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 > **Important**
@@ -32,6 +34,7 @@ Namespaces can be managed via:
 
 You can create new namespaces under a given [tenant](reference-terminology.md#tenant).
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -66,11 +69,13 @@ admin.namespaces().createNamespace(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get policies
 
 You can fetch the current policies associated with a namespace at any time.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -126,11 +131,13 @@ admin.namespaces().getPolicies(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### List namespaces
 
 You can list all namespaces within a given Pulsar [tenant](reference-terminology.md#tenant).
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -167,11 +174,13 @@ admin.namespaces().getNamespaces(tenant);
 </TabItem>
 
 </Tabs>
+````
 
 ### Delete namespaces
 
 You can delete existing namespaces from a tenant.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -206,6 +215,7 @@ admin.namespaces().deleteNamespace(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure replication clusters
 
@@ -213,6 +223,7 @@ admin.namespaces().deleteNamespace(namespace);
 
 You can set replication clusters for a namespace to enable Pulsar to internally replicate the published messages from one colocation facility to another.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -246,11 +257,13 @@ admin.namespaces().setNamespaceReplicationClusters(namespace, clusters);
 </TabItem>
 
 </Tabs>
+````
 
 #### Get replication cluster
 
 You can get the list of replication clusters for a given namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -289,6 +302,7 @@ admin.namespaces().getNamespaceReplicationClusters(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure backlog quota policies
 
@@ -304,6 +318,7 @@ Backlog quota helps the broker to restrict bandwidth/storage of a namespace once
 
 Backlog quota restriction can be taken care by defining restriction of backlog-quota-type: destination_storage.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -336,11 +351,13 @@ admin.namespaces().setBacklogQuota(namespace, new BacklogQuota(limit, limitTime,
 </TabItem>
 
 </Tabs>
+````
 
 #### Get backlog quota policies
 
 You can get a configured backlog quota for a given namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -384,11 +401,13 @@ admin.namespaces().getBacklogQuotaMap(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 #### Remove backlog quota policies
 
 You can remove backlog quota policies for a given namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -421,6 +440,7 @@ admin.namespaces().removeBacklogQuota(namespace, backlogQuotaType)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure persistence policies
 
@@ -436,6 +456,7 @@ Persistence policies allow users to configure persistency-level for all topic me
 
   -   Ml-mark-delete-max-rate: Throttling rate of mark-delete operation (0 means no throttle), default: 0.0
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -468,11 +489,13 @@ admin.namespaces().setPersistence(namespace,new PersistencePolicies(bookkeeperEn
 </TabItem>
 
 </Tabs>
+````
 
 #### Get persistence policies
 
 You can get the configured persistence policies of a given namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -516,6 +539,7 @@ admin.namespaces().getPersistence(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure namespace bundles
 
@@ -523,6 +547,7 @@ admin.namespaces().getPersistence(namespace)
 
 The namespace bundle is a virtual group of topics which belong to the same namespace. If the broker gets overloaded with the number of bundles, this command can help unload a bundle from that broker, so it can be served by some other less-loaded brokers. The namespace bundle ID ranges from 0x00000000 to 0xffffffff.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -555,11 +580,13 @@ admin.namespaces().unloadNamespaceBundle(namespace, bundle)
 </TabItem>
 
 </Tabs>
+````
 
 #### Split namespace bundles
 
 One namespace bundle can contain multiple topics but can be served by only one broker. If a single bundle is creating an excessive load on a broker, an admin can split the bundle using the command below, permitting one or more of the new bundles to be unloaded, thus balancing the load across the brokers.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -592,6 +619,7 @@ admin.namespaces().splitNamespaceBundle(namespace, bundle)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure message TTL
 
@@ -599,6 +627,7 @@ admin.namespaces().splitNamespaceBundle(namespace, bundle)
 
 You can configure the time to live (in seconds) duration for messages. In the example below, the message-ttl is set as 100s.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -631,11 +660,13 @@ admin.namespaces().setNamespaceMessageTTL(namespace, messageTTL)
 </TabItem>
 
 </Tabs>
+````
 
 #### Get message-ttl
 
 When the message-ttl for a namespace is set, you can use the command below to get the configured value. This example comtinues the example of the command `set message-ttl`, so the returned value is 100(s).
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -686,11 +717,13 @@ admin.namespaces().getNamespaceMessageTTL(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 #### Remove message-ttl
 
 Remove a message TTL of the configured namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -723,6 +756,7 @@ admin.namespaces().removeNamespaceMessageTTL(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 
 ### Clear backlog
@@ -731,6 +765,7 @@ admin.namespaces().removeNamespaceMessageTTL(namespace)
 
 It clears all message backlog for all the topics that belong to a specific namespace. You can also clear backlog for a specific subscription as well.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -763,11 +798,13 @@ admin.namespaces().clearNamespaceBacklogForSubscription(namespace, subscription)
 </TabItem>
 
 </Tabs>
+````
 
 #### Clear bundle backlog
 
 It clears all message backlog for all the topics that belong to a specific NamespaceBundle. You can also clear backlog for a specific subscription as well.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -800,6 +837,7 @@ admin.namespaces().clearNamespaceBundleBacklogForSubscription(namespace, bundle,
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure retention
 
@@ -807,6 +845,7 @@ admin.namespaces().clearNamespaceBundleBacklogForSubscription(namespace, bundle,
 
 Each namespace contains multiple topics and the retention size (storage size) of each topic should not exceed a specific threshold or it should be stored for a certain period. This command helps configure the retention size and time of topics in a given namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -839,11 +878,13 @@ admin.namespaces().setRetention(namespace, new RetentionPolicies(retentionTimeIn
 </TabItem>
 
 </Tabs>
+````
 
 #### Get retention
 
 It shows retention information of a given namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -885,6 +926,7 @@ admin.namespaces().getRetention(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure dispatch throttling for topics
 
@@ -903,6 +945,7 @@ disables the throttling.
 
 :::
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -938,11 +981,13 @@ admin.namespaces().setDispatchRate(namespace, new DispatchRate(1000, 1048576, 1)
 </TabItem>
 
 </Tabs>
+````
 
 #### Get configured message-rate for topics
 
 It shows configured message-rate for the namespace (topics under this namespace can dispatch this many messages per second)
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -985,6 +1030,7 @@ admin.namespaces().getDispatchRate(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure dispatch throttling for subscription
 
@@ -995,6 +1041,7 @@ The dispatch rate can be restricted by the number of messages per X seconds (`ms
 dispatch rate is in second and it can be configured with `dispatch-rate-period`. Default value of `msg-dispatch-rate` and `byte-dispatch-rate` is -1 which
 disables the throttling.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1030,11 +1077,13 @@ admin.namespaces().setSubscriptionDispatchRate(namespace, new DispatchRate(1000,
 </TabItem>
 
 </Tabs>
+````
 
 #### Get configured message-rate for subscription
 
 It shows configured message-rate for the namespace (topics under this namespace can dispatch this many messages per second)
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1077,6 +1126,7 @@ admin.namespaces().getSubscriptionDispatchRate(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure dispatch throttling for replicator
 
@@ -1087,6 +1137,7 @@ The dispatch rate can be restricted by the number of messages per X seconds (`ms
 dispatch rate is in second and it can be configured with `dispatch-rate-period`. Default value of `msg-dispatch-rate` and `byte-dispatch-rate` is -1 which
 disables the throttling.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1122,11 +1173,13 @@ admin.namespaces().setReplicatorDispatchRate(namespace, new DispatchRate(1000, 1
 </TabItem>
 
 </Tabs>
+````
 
 #### Get configured message-rate for replicator
 
 It shows configured message-rate for the namespace (topics under this namespace can dispatch this many messages per second)
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1169,6 +1222,7 @@ admin.namespaces().getReplicatorDispatchRate(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Configure deduplication snapshot interval
 
@@ -1176,6 +1230,7 @@ admin.namespaces().getReplicatorDispatchRate(namespace)
 
 It shows configured `deduplicationSnapshotInterval` for a namespace (Each topic under the namespace will take a deduplication snapshot according to this interval)
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1208,12 +1263,14 @@ admin.namespaces().getDeduplicationSnapshotInterval(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 #### Set deduplication snapshot interval
 
 Set configured `deduplicationSnapshotInterval` for a namespace. Each topic under the namespace will take a deduplication snapshot according to this interval.
 `brokerDeduplicationEnabled` must be set to `true` for this property to take effect.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1254,11 +1311,13 @@ admin.namespaces().setDeduplicationSnapshotInterval(namespace, 1000)
 </TabItem>
 
 </Tabs>
+````
 
 #### Remove deduplication snapshot interval
 
 Remove configured `deduplicationSnapshotInterval` of a namespace (Each topic under the namespace will take a deduplication snapshot according to this interval)
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -1291,6 +1350,7 @@ admin.namespaces().removeDeduplicationSnapshotInterval(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Namespace isolation
 
@@ -1304,6 +1364,7 @@ You can unload a namespace, or a [namespace bundle](reference-terminology.md#nam
 
 Use the [`unload`](reference-pulsar-admin.md#unload) subcommand of the [`namespaces`](reference-pulsar-admin.md#namespaces) command.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST","value":"REST"},{"label":"Java","value":"Java"}]}>
@@ -1336,3 +1397,4 @@ admin.namespaces().unload(namespace)
 </TabItem>
 
 </Tabs>
+````

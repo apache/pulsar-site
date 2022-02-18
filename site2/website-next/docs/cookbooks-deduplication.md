@@ -4,8 +4,10 @@ title: Message deduplication
 sidebar_label: "Message deduplication "
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 When **Message deduplication** is enabled, it ensures that each message produced on Pulsar topics is persisted to disk *only once*, even if the message is produced more than once. Message deduplication is handled automatically on the server side. 
@@ -74,6 +76,7 @@ If you enable message deduplication in Pulsar brokers, you need complete the fol
 
 The instructions for Java, Python, and C++ clients are different.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java clients"
   values={[{"label":"Java clients","value":"Java clients"},{"label":"Python clients","value":"Python clients"},{"label":"C++ clients","value":"C++ clients"}]}>
@@ -143,3 +146,4 @@ Result result = client.createProducer(topic, producerConfig, producer);
 </TabItem>
 
 </Tabs>
+````

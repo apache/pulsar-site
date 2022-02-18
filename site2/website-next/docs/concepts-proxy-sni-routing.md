@@ -4,8 +4,10 @@ title: Proxy support with SNI routing
 sidebar_label: "Proxy support with SNI routing"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 A proxy server is an intermediary server that forwards requests from multiple clients to different servers across the Internet. The proxy server acts as a "traffic cop" in both forward and reverse proxy scenarios, and benefits your system such as load balancing, performance, security, auto-scaling, and so on.
@@ -80,6 +82,7 @@ After you configure the `ssl_server_name.config` and `records.config` files, the
 ### Configure Pulsar-client with SNI routing
 ATS SNI-routing works only with TLS. You need to enable TLS for the ATS proxy and brokers first, configure the SNI routing protocol, and then connect Pulsar clients to brokers through ATS proxy. Pulsar clients support SNI routing by connecting to the proxy, and sending the target broker URL to the SNI header. This process is processed internally. You only need to configure the following proxy configuration initially when you create a Pulsar client to use the SNI routing protocol.
 
+````mdx-code-block
 <Tabs 
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
@@ -141,6 +144,7 @@ client = Client("pulsar+ssl://ats-proxy:443",
 </TabItem>
 
 </Tabs>
+````
 
 ### Pulsar geo-replication with SNI routing
 You can use the ATS proxy for geo-replication. Pulsar brokers can connect to brokers in geo-replication by using SNI routing. To enable SNI routing for broker connection cross clusters, you need to configure SNI proxy URL to the cluster metadata. If you have configured SNI proxy URL in the cluster metadata, you can connect to broker cross clusters through the proxy over SNI routing.

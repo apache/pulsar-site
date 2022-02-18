@@ -4,8 +4,10 @@ title: Message retention and expiry
 sidebar_label: "Message retention and expiry"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 Pulsar brokers are responsible for handling messages that pass through Pulsar, including [persistent storage](concepts-architecture-overview.md#persistent-storage) of messages. By default, for each topic, brokers only retain messages that are in at least one backlog. A backlog is the set of unacknowledged messages for a particular subscription. As a topic can have multiple subscriptions, a topic can have multiple backlogs.
@@ -61,6 +63,7 @@ For more information of the two parameters, refer to the [`broker.conf`](referen
 
 You can set a retention policy for a namespace by specifying the namespace, a size limit and a time limit in `pulsar-admin`, REST API and Java.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -146,11 +149,13 @@ admin.namespaces().setRetention(namespace, policies);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get retention policy
 
 You can fetch the retention policy for a namespace by specifying the namespace. The output will be a JSON object with two keys: `retentionTimeInMinutes` and `retentionSizeInMB`.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -187,6 +192,7 @@ admin.namespaces().getRetention(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ## Backlog quotas
 
@@ -216,6 +222,7 @@ Backlog quotas are handled at the namespace level. They can be managed via:
 
 You can set a size and/or time threshold and backlog retention policy for all of the topics in a [namespace](reference-terminology.md#namespace) by specifying the namespace, a size limit and/or a time limit in second, and a policy by name.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -262,11 +269,13 @@ admin.namespaces().setBacklogQuota(namespace, quota);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get backlog threshold and backlog retention policy
 
 You can see which size threshold and backlog retention policy has been applied to a namespace.
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -304,9 +313,11 @@ Map<BacklogQuota.BacklogQuotaType,BacklogQuota> quotas =
 </TabItem>
 
 </Tabs>
+````
 
 ### Remove backlog quotas
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -337,6 +348,7 @@ admin.namespaces().removeBacklogQuota(namespace);
 </TabItem>
 
 </Tabs>
+````
 
 ### Clear backlog
 
@@ -360,6 +372,7 @@ By default, Pulsar stores all unacknowledged messages forever. This can lead to 
 
 ### Set the TTL for a namespace
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -393,9 +406,11 @@ admin.namespaces().setNamespaceMessageTTL(namespace, ttlInSeconds);
 </TabItem>
 
 </Tabs>
+````
 
 ### Get the TTL configuration for a namespace
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -429,9 +444,11 @@ admin.namespaces().getNamespaceMessageTTL(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ### Remove the TTL configuration for a namespace
 
+````mdx-code-block
 <Tabs 
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -464,6 +481,7 @@ admin.namespaces().removeNamespaceMessageTTL(namespace)
 </TabItem>
 
 </Tabs>
+````
 
 ## Delete messages from namespaces
 

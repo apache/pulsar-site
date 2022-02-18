@@ -103,10 +103,10 @@ module.exports = {
     githubUrl,
     oldUrl,
   },
-  // i18n: {
-  //   defaultLocale: "en",
-  //   locales: ["en", "zh"],
-  // },
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "zh-CN"],
+  },
   themeConfig: {
     navbar: {
       title: "",
@@ -366,6 +366,10 @@ module.exports = {
           ],
         },
         {
+          type: "localeDropdown",
+          position: "left",
+        },
+        {
           href: "https://pulsar.staged.apache.org/",
           label: "Old Website",
           position: "right",
@@ -377,11 +381,6 @@ module.exports = {
         },
       ],
     },
-    // scripts: [
-    //   "https://buttons.github.io/buttons.js",
-    //   "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",
-    //   `${baseUrl}js/custom.js`,
-    // ],
     footer: {
       style: "dark",
       copyright: `Inc.Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.`,
@@ -399,7 +398,6 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
           editUrl: `${githubUrl}/edit/master/site2/website-next`,
           remarkPlugins: [
             linkifyRegex(
@@ -414,7 +412,6 @@ module.exports = {
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl: `${githubUrl}/edit/master/site2/website-next`,
         },
         theme: {
@@ -428,35 +425,8 @@ module.exports = {
       "@docusaurus/plugin-client-redirects",
       {
         fromExtensions: ["md"],
-        // redirects: [
-        //   // /docs/oldDoc -> /docs/newDoc
-        //   {
-        //     to: "/docs/newDoc",
-        //     from: "/docs/oldDoc",
-        //   },
-        //   // Redirect from multiple old paths to the new path
-        //   {
-        //     to: "/docs/newDoc2",
-        //     from: ["/docs/oldDocFrom2019", "/docs/legacyDocFrom2016"],
-        //   },
-        // ],
-        // createRedirects(existingPath) {
-        //   if (existingPath.includes("/standalone/")) {
-        //     return [
-        //       existingPath.replace("/en/", "/").replace("/standalone/", "/"),
-        //     ];
-        //   }
-        //   if (existingPath.includes("/en/")) {
-        //     return [existingPath.replace("/en/", "/")];
-        //   }
-        //   return undefined;
-        // },
       },
     ],
     "./postcss-tailwind-loader",
   ],
-  // clientModules: [
-  //   require.resolve("./mySiteGlobalJs.js"),
-  //   require.resolve("./mySiteGlobalCss.css"),
-  // ],
 };

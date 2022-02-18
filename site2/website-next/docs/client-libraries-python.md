@@ -4,8 +4,10 @@ title: Pulsar Python client
 sidebar_label: "Python"
 ---
 
+````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+````
 
 
 Pulsar Python client library is a wrapper over the existing [C++ client library](client-libraries-cpp) and exposes all of the [same features](/api/cpp). You can find the code in the [Python directory](https://github.com/apache/pulsar/tree/master/pulsar-client-cpp/python) of the C++ client code.
@@ -337,6 +339,7 @@ while True:
 
 ```
 
+````mdx-code-block
 <Tabs 
   defaultValue="BytesSchema"
   values={[{"label":"BytesSchema","value":"BytesSchema"},{"label":"StringSchema","value":"StringSchema"},{"label":"AvroSchema","value":"AvroSchema"},{"label":"JsonSchema","value":"JsonSchema"}]}>
@@ -517,6 +520,7 @@ consumer = client.subscribe(
 </TabItem>
 
 </Tabs>
+````
 
 ## End-to-end encryption
 
