@@ -22,16 +22,16 @@ on:
   push:
     branches: [docs-sync]
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: "0 */6 * * *"
 
 jobs:
   build-website:
     if: ${{ github.repository == 'apache/pulsar-site' }}
-    name: Docs sync from repo apache/pulsar 
+    name: Docs sync from repo apache/pulsar
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      - name: Docs sync from repo apache/pulsar 
+      - name: Docs sync from repo apache/pulsar
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
           CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
@@ -41,8 +41,10 @@ jobs:
           git clone -b master --depth 1 https://github.com/apache/pulsar.git pulsar
           echo "pulsar clone done."
 
+          cp -r pulsar/site2/docs/* pulsar-site/site2/docs
           cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
           cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
+          cp -r pulsar/site2/docs/assets/* pulsar-site/site2/website-next/static/assets
 
           # cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
           # cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website-next/versioned_docs
