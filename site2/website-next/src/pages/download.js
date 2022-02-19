@@ -8,6 +8,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
 import ReactMarkdown from "react-markdown";
 
+const versions = require(`../../versions.json`);
 const releases = require(`../../releases.json`);
 const pulsarManagerReleases = require(`../../pulsar-manager-release.json`);
 const pulsarAdaptersReleases = require(`../../pulsar-adapters-release.json`);

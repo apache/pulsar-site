@@ -1,54 +1,31 @@
 const React = require("react");
 import Layout from "@theme/Layout";
-import { setVersion, getVersion, getApiVersion } from "../utils/index.js";
-
-function parseVersion(pathName) {
-  let swagger = "swagger";
-  if (pathName.indexOf("functions") > -1) {
-    swagger = "swaggerfunctions";
-  } else if (pathName.indexOf("source") > -1) {
-    swagger = "swaggersource";
-  } else if (pathName.indexOf("sink") > -1) {
-    swagger = "swaggersink";
-  } else if (pathName.indexOf("packages") > -1) {
-    swagger = "swaggerpackages";
-  }
-  let version = getVersion();
-  let apiversion = getApiVersion(swagger);
-
-  if (version !== "master") {
-    var versions = version.split(".");
-    var majorVersion = parseInt(versions[0]);
-    var minorVersion = parseInt(versions[1]);
-    if (majorVersion < 2) {
-      version = "2.3.0";
-    } else if (minorVersion < 3) {
-      version = "2.3.0";
-    }
-  }
-
-  return [version, apiversion];
-}
 class RestApi extends React.Component {
   componentDidMount() {
-    let pathName = window.location.pathname;
-
-    let [version, apiversion] = parseVersion(pathName);
-
-    let params = window.location.search;
+    var params = window.location.search;
+    var pathName = window.location.pathname;
     params = params.replace("?", "");
     const paramsList = params.split("&");
-    if (paramsList && paramsList.length > 0) {
-      version = "master";
-      apiversion = "";
-      for (let i in paramsList) {
-        let param = paramsList[i].split("=");
-        if (param[0] === "version") {
-          version = param[1];
-        }
-        if (param[0] === "apiversion") {
-          apiversion = param[1];
-        }
+    var version = "master";
+    var apiversion = "";
+    for (var i in paramsList) {
+      var param = paramsList[i].split("=");
+      if (param[0] === "version") {
+        version = param[1];
+      }
+      if (param[0] === "apiversion") {
+        apiversion = param[1];
+      }
+    }
+
+    if (version !== "master") {
+      var versions = version.split(".");
+      var majorVersion = parseInt(versions[0]);
+      var minorVersion = parseInt(versions[1]);
+      if (majorVersion < 2) {
+        version = "2.3.0";
+      } else if (minorVersion < 3) {
+        version = "2.3.0";
       }
     }
 
