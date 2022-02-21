@@ -7,7 +7,7 @@ import styles from "./index.module.css";
 import HomepageFeatures from "../components/HomepageFeatures";
 import HomeQuotes from "../components/HomeQuotes";
 import SubHeroBlock from "../components/SubHeroBlock";
-import PromoCallout from "../components/promoCallout";
+import PromoCallout from "../components/PromoCallout";
 import PillButton from "../components/PillButton";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { docUrl, githubUrl } from "../utils/index";

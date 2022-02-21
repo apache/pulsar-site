@@ -6,7 +6,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from "./index.module.css";
 import CommunityList from "../components/CommunityList";
-import PromoCallout from "../components/promoCallout";
+import PromoCallout from "../components/PromoCallout";
 import PillButton from "../components/PillButton";
 import GroupsIcon from '@mui/icons-material/Groups';
 import WavySeparatorFive from '@site/static/img/separator-5.svg';
