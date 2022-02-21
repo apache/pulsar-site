@@ -424,4 +424,10 @@ module.exports = {
     ],
     "./postcss-tailwind-loader",
   ],
+  scripts: [
+    {
+      src: "https://cdn.jsdelivr.net/npm/sine-waves@0.3.0/sine-waves.min.js",
+      async: true,
+    },
+  ],
 };
