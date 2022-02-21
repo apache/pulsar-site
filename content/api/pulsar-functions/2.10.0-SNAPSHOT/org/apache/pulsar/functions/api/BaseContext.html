@@ -163,7 +163,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deleteStateAsync(java.lang.String)">deleteStateAsync</a></span>&#8203;(java.lang.String&nbsp;key)</code></th>
 <td class="colLast">
-<div class="block">Delete the state value for the key, but don't wait for the operation to be completed</div>
+<div class="block">Delete the state value for the key, but don't wait for the operation to be completed.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -178,7 +178,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCounterAsync(java.lang.String)">getCounterAsync</a></span>&#8203;(java.lang.String&nbsp;key)</code></th>
 <td class="colLast">
 <div class="block">Retrieve the counter value for the key, but don't wait
- for the operation to be completed</div>
+ for the operation to be completed.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -241,18 +241,18 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.nio.ByteBuffer&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateAsync(java.lang.String)">getStateAsync</a></span>&#8203;(java.lang.String&nbsp;key)</code></th>
 <td class="colLast">
-<div class="block">Retrieve the state value for the key, but don't wait for the operation to be completed</div>
+<div class="block">Retrieve the state value for the key, but don't wait for the operation to be completed.</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
-<td class="colFirst"><code>default &lt;S extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;<br>S</code></td>
+<td class="colFirst"><code>default &lt;X extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;<br>X</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateStore(java.lang.String)">getStateStore</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Get the state store with the provided store name in the tenant & namespace.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
-<td class="colFirst"><code>default &lt;S extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;<br>S</code></td>
+<td class="colFirst"><code>default &lt;X extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;<br>X</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStateStore(java.lang.String,java.lang.String,java.lang.String)">getStateStore</a></span>&#8203;(java.lang.String&nbsp;tenant,
              java.lang.String&nbsp;ns,
              java.lang.String&nbsp;name)</code></th>
@@ -281,7 +281,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
                 long&nbsp;amount)</code></th>
 <td class="colLast">
 <div class="block">Increment the builtin distributed counter referred by key
- but dont wait for the completion of the increment operation</div>
+ but dont wait for the completion of the increment operation.</div>
 </td>
 </tr>
 <tr id="i18" class="altColor">
@@ -297,7 +297,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#putStateAsync(java.lang.String,java.nio.ByteBuffer)">putStateAsync</a></span>&#8203;(java.lang.String&nbsp;key,
              java.nio.ByteBuffer&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Update the state value for the key, but don't wait for the operation to be completed</div>
+<div class="block">Update the state value for the key, but don't wait for the operation to be completed.</div>
 </td>
 </tr>
 <tr id="i20" class="altColor">
@@ -305,7 +305,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#recordMetric(java.lang.String,double)">recordMetric</a></span>&#8203;(java.lang.String&nbsp;metricName,
             double&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Record a user defined metric</div>
+<div class="block">Record a user defined metric.</div>
 </td>
 </tr>
 </table>
@@ -417,11 +417,11 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getStateStore</h4>
-<pre class="methodSignature">default&nbsp;&lt;S extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;&nbsp;S&nbsp;getStateStore&#8203;(java.lang.String&nbsp;name)</pre>
+<pre class="methodSignature">default&nbsp;&lt;X extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;&nbsp;X&nbsp;getStateStore&#8203;(java.lang.String&nbsp;name)</pre>
 <div class="block">Get the state store with the provided store name in the tenant & namespace.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>S</code> - the type of interface of the store to return</dd>
+<dd><code>X</code> - the type of interface of the store to return</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>name</code> - the state store name</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -438,13 +438,13 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getStateStore</h4>
-<pre class="methodSignature">default&nbsp;&lt;S extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;&nbsp;S&nbsp;getStateStore&#8203;(java.lang.String&nbsp;tenant,
+<pre class="methodSignature">default&nbsp;&lt;X extends <a href="StateStore.html" title="interface in org.apache.pulsar.functions.api">StateStore</a>&gt;&nbsp;X&nbsp;getStateStore&#8203;(java.lang.String&nbsp;tenant,
                                                java.lang.String&nbsp;ns,
                                                java.lang.String&nbsp;name)</pre>
 <div class="block">Get the state store with the provided store name.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>S</code> - the type of interface of the store to return</dd>
+<dd><code>X</code> - the type of interface of the store to return</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>tenant</code> - the state tenant name</dd>
 <dd><code>ns</code> - the state namespace name</dd>
@@ -481,7 +481,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <h4>putStateAsync</h4>
 <pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;&nbsp;putStateAsync&#8203;(java.lang.String&nbsp;key,
                                                                      java.nio.ByteBuffer&nbsp;value)</pre>
-<div class="block">Update the state value for the key, but don't wait for the operation to be completed</div>
+<div class="block">Update the state value for the key, but don't wait for the operation to be completed.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>key</code> - name of the key</dd>
@@ -512,7 +512,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <li class="blockList">
 <h4>getStateAsync</h4>
 <pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.nio.ByteBuffer&gt;&nbsp;getStateAsync&#8203;(java.lang.String&nbsp;key)</pre>
-<div class="block">Retrieve the state value for the key, but don't wait for the operation to be completed</div>
+<div class="block">Retrieve the state value for the key, but don't wait for the operation to be completed.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>key</code> - name of the key</dd>
@@ -542,7 +542,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <li class="blockList">
 <h4>deleteStateAsync</h4>
 <pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;&nbsp;deleteStateAsync&#8203;(java.lang.String&nbsp;key)</pre>
-<div class="block">Delete the state value for the key, but don't wait for the operation to be completed</div>
+<div class="block">Delete the state value for the key, but don't wait for the operation to be completed.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>key</code> - name of the key</dd>
@@ -574,7 +574,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;&nbsp;incrCounterAsync&#8203;(java.lang.String&nbsp;key,
                                                                         long&nbsp;amount)</pre>
 <div class="block">Increment the builtin distributed counter referred by key
- but dont wait for the completion of the increment operation</div>
+ but dont wait for the completion of the increment operation.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>key</code> - The name of the key</dd>
@@ -606,7 +606,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <h4>getCounterAsync</h4>
 <pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.lang.Long&gt;&nbsp;getCounterAsync&#8203;(java.lang.String&nbsp;key)</pre>
 <div class="block">Retrieve the counter value for the key, but don't wait
- for the operation to be completed</div>
+ for the operation to be completed.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>key</code> - name of the key</dd>
@@ -623,7 +623,7 @@ public interface <span class="typeNameLabel">BaseContext</span></pre>
 <h4>recordMetric</h4>
 <pre class="methodSignature">void&nbsp;recordMetric&#8203;(java.lang.String&nbsp;metricName,
                   double&nbsp;value)</pre>
-<div class="block">Record a user defined metric</div>
+<div class="block">Record a user defined metric.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>metricName</code> - The name of the metric</dd>
