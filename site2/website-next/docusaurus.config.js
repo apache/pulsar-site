@@ -116,24 +116,24 @@ module.exports = {
       },
       items: [
         {
-          type: 'dropdown',
-          label: 'Get Started',
-          position: 'right',
+          type: "dropdown",
+          label: "Get Started",
+          position: "right",
           items: [
             {
               type: "doc",
               docId: "concepts-overview",
-              label: 'Pulsar Concepts'
+              label: "Pulsar Concepts",
             },
             {
               type: "doc",
-              label: 'Quickstart',
+              label: "Quickstart",
               docId: "about",
             },
             {
-              label: 'Ecosystem',
-              to: 'ecosystem'
-            }
+              label: "Ecosystem",
+              to: "ecosystem",
+            },
             // ... more items
           ],
         },
@@ -144,64 +144,110 @@ module.exports = {
           label: "Docs",
         },
         {
-          type: 'dropdown',
-          label: 'Community',
-          position: 'right',
+          label: "REST APIs",
+          position: "right",
           items: [
-            { 
-              to: "community#welcome", 
-              label: "Welcome" 
+            {
+              label: "Admin REST API",
+              to: "/admin-rest-api",
             },
-            { 
-              to: "community#discussions", 
-              label: "Discussions"
+            {
+              label: "Functions",
+              to: "/functions-rest-api",
             },
-            { 
-              to: "community#governance", 
-              label: "Governance"
+            {
+              label: "Sources",
+              to: "/source-rest-api",
             },
-            { 
-              to: "community#community", 
-              label: "Meet the Community"
+            {
+              label: "Sinks",
+              to: "/sink-rest-api",
             },
-            { 
-              to: "community#how-to-contribute", 
-              label: "Contribute"
+            {
+              label: "Packages",
+              to: "/packages-rest-api",
             },
-            { 
-              to: "https://github.com/apache/pulsar/wiki", 
-              label: "Wiki"
-            },
-            { 
-              to: "https://github.com/apache/pulsar/issues", 
-              label: "Issue Tracking"
-            },
-
-          ]
+          ],
         },
         {
-          type: 'dropdown',
-          label: 'Learn',
-          position: 'right',
+          label: "CLI",
+          position: "right",
           items: [
-            { 
-              to: "blog", 
-              label: "Blog" 
+            {
+              label: "Pulsar Admin",
+              to: "/pulsar-admin-cli",
             },
-            { 
-              to: "case-studies", 
-              label: "Case Studies"
+            {
+              label: "Pulsar Client",
+              to: "/pulsar-client-cli",
             },
-            { 
-              to: "resources", 
-              label: "Resources"
+            {
+              label: "Pulsar Perf",
+              to: "/pulsar-perf-cli",
             },
-            { 
-              to: "events", 
-              label: "Events"
+            {
+              label: "Pulsar",
+              to: "/pulsar-cli",
             },
-
-          ]
+          ],
+        },
+        {
+          type: "dropdown",
+          label: "Community",
+          position: "right",
+          items: [
+            {
+              to: "community#welcome",
+              label: "Welcome",
+            },
+            {
+              to: "community#discussions",
+              label: "Discussions",
+            },
+            {
+              to: "community#governance",
+              label: "Governance",
+            },
+            {
+              to: "community#community",
+              label: "Meet the Community",
+            },
+            {
+              to: "community#how-to-contribute",
+              label: "Contribute",
+            },
+            {
+              to: "https://github.com/apache/pulsar/wiki",
+              label: "Wiki",
+            },
+            {
+              to: "https://github.com/apache/pulsar/issues",
+              label: "Issue Tracking",
+            },
+          ],
+        },
+        {
+          type: "dropdown",
+          label: "Learn",
+          position: "right",
+          items: [
+            {
+              to: "blog",
+              label: "Blog",
+            },
+            {
+              to: "case-studies",
+              label: "Case Studies",
+            },
+            {
+              to: "resources",
+              label: "Resources",
+            },
+            {
+              to: "events",
+              label: "Events",
+            },
+          ],
         },
         // {
         //   type: "localeDropdown",
@@ -278,55 +324,57 @@ module.exports = {
     },
     footer: {
       logo: {
-        alt: 'Pulsar Logo',
-        src: 'img/pulsar-white.svg',
-        href: '/',
+        alt: "Pulsar Logo",
+        src: "img/pulsar-white.svg",
+        href: "/",
       },
       links: [
         {
-          title: 'Apache Foundation.', //Column title
-	          items: [
-              { //Embedded HTML
-	              html: `
+          title: "Apache Foundation.", //Column title
+          items: [
+            {
+              //Embedded HTML
+              html: `
 	              <img src="/img/Apache_Feather_Logo.svg" alt="" width="20">
 	              `,
-	            },
-	            {
-	              label: "Foundation",
-                href: "http://www.apache.org/",
-	            },
-	            {
-	              label: "Events",
-                href: "https://www.apache.org/events/current-event.html",
-	            },
-	            {
-	              label: "License",
-                href: "https://www.apache.org/licenses/",
-	            },
-	            {
-	              label: "Thanks",
-                href: "https://www.apache.org/foundation/thanks",
-	            },
-	            {
-	              label: "Security",
-                href: "https://www.apache.org/security",
-	            },
-	            {
-	              label: "Sponsorship",
-                href: "https://www.apache.org/foundation/sponsorship",
-	            },
-	          ],
+            },
+            {
+              label: "Foundation",
+              href: "http://www.apache.org/",
+            },
+            {
+              label: "Events",
+              href: "https://www.apache.org/events/current-event.html",
+            },
+            {
+              label: "License",
+              href: "https://www.apache.org/licenses/",
+            },
+            {
+              label: "Thanks",
+              href: "https://www.apache.org/foundation/thanks",
+            },
+            {
+              label: "Security",
+              href: "https://www.apache.org/security",
+            },
+            {
+              label: "Sponsorship",
+              href: "https://www.apache.org/foundation/sponsorship",
+            },
+          ],
         },
         {
-          title: ' ', //Column title
-	          items: [
-	            { //Embedded HTML
-	              html: `
+          title: " ", //Column title
+          items: [
+            {
+              //Embedded HTML
+              html: `
 	              <div><small><strong>Apache Pulsar is available under the <a href="/">Apache License, version 2.0.</a></strong></small></div>
                 <div>Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.</div>
 	              `,
-	            },
-	          ],
+            },
+          ],
         },
       ],
       copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
