@@ -5,6 +5,8 @@ title: Pulsar Summit Asia 2020 Schedule is Now Online
 
 The Pulsar Summit is a global conference dedicated to sharing best practices, project updates, and insights across the Apache Pulsar community. Pulsar’s inaugural global summit, the [Pulsar Summit Virtual Conference 2020](https://pulsar-summit.org/en/event/virtual-conference-2020), took place in June 2020 and featured more than 30 sessions from top Pulsar experts, developers and thought-leaders from companies such as Salesforce, Verizon Media, and Splunk, and the conference attracted 600+ attendees. 
 
+<!--truncate-->
+
 The rapid adoption of Apache Pulsar over the past few years has led to a high demand for Pulsar events. Today, StreamNative, a cloud-native event streaming company powered by Apache Pulsar, and also the host of [Pulsar Summit Asia 2020](https://pulsar-summit.org/en/event/asia-2020), announced more details on the upcoming event. Taking place on November 28th & 29th, the two-day event will feature more than 30 live sessions by tech leads, open-source developers, software engineers, and software architects from **Splunk, Yahoo! JAPAN, TIBCO, China Mobile, Tencent, Dada Group, KingSoft Cloud, Tuya Smart, and PingCAP**, and will include sessions on Pulsar use cases, its ecosystem, operations, and technology deep dives. 
 
 See below for some of our featured sessions, which include both English and Mandarin tracks:
@@ -23,9 +25,11 @@ The number and diversity of the sessions demonstrate the accelerated adoption of
 We would like to say special thanks to the speakers for sharing their Pulsar expertise and experience with the community.
 
 
-# About Apache Pulsar [Apache Pulsar](https://pulsar.apache.org) is a cloud-native, distributed messaging and streaming platform that manages hundreds of billions of events per day. Pulsar was originally developed at Yahoo! as the unified messaging platform connecting critical Yahoo applications such as Yahoo Finance, Yahoo Mail, and Flickr to data. 
+## About Apache Pulsar
+[Apache Pulsar](https://pulsar.apache.org) is a cloud-native, distributed messaging and streaming platform that manages hundreds of billions of events per day. Pulsar was originally developed at Yahoo! as the unified messaging platform connecting critical Yahoo applications such as Yahoo Finance, Yahoo Mail, and Flickr to data. 
 
 Today, Pulsar is used for real-time event streaming use cases, including data pipelines, microservices, and stream processing. Its cloud-native architecture and built-in multi-tenancy differentiate it from its predecessors and uniquely position it as an enterprise-ready, event streaming platform. Pulsar's multi-layer architecture enables stability, reliability, scalability, and high performance, simplifies management and reduces costs. Its built-in multi-tenancy and geo-replication ensure that companies are able to build applications with disaster recovery. 
 
 
-# About StreamNative [StreamNative](https://streamnative.io), founded by the original developers of Apache Pulsar and Apache BookKeeper, enables organizations to build the next generation of messaging and event streaming applications. Leveraging Apache Pulsar and BookKeeper, we optimize for scalability and resiliency while reducing the overhead management and complexity required by incumbent technologies. We do this by offering Pulsar and StreamNative’s ‘products as a service’. StreamNative is building a world-class team that is passionate about building amazing products and committed to customer success.
+## About StreamNative
+[StreamNative](https://streamnative.io), founded by the original developers of Apache Pulsar and Apache BookKeeper, enables organizations to build the next generation of messaging and event streaming applications. Leveraging Apache Pulsar and BookKeeper, we optimize for scalability and resiliency while reducing the overhead management and complexity required by incumbent technologies. We do this by offering Pulsar and StreamNative’s ‘products as a service’. StreamNative is building a world-class team that is passionate about building amazing products and committed to customer success.

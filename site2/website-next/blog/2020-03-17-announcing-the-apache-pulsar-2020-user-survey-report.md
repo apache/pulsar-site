@@ -9,6 +9,8 @@ For the first time ever, the Apache Pulsar PMC team is publishing a user survey 
 adoption, details how organizations are leveraging Pulsar to build real-time streaming
 applications, and highlights key features on Pulsar’s product roadmap.
 
+<!--truncate-->
+
 ![](/img/pulsar-user-ban.jpg)
 
 Pulsar adoption has largely been driven by the market’s increased demand for real-time,
@@ -36,6 +38,7 @@ report details insights and use cases on how organizations are deploying Pulsar 
 
 The report also reveals Pulsar’s top-used features, its most popular applications, and how
 it is delivering scalable, reliable, real-time streaming solutions for organizations. In
+
 this quotation from Qiang Fei, Tech Lead for Tencent, we see how [one organization is leveraging Pulsar to improve their offering](https://streamnative.io/whitepaper/case-studay-apache-pulsar-tencent-billing/):
 
 > Pulsar provides us with a highly consistent and highly reliable distributed message queue that
