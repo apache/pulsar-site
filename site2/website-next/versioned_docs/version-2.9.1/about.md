@@ -1,5 +1,4 @@
 ---
-slug: /
 id: about
 title: Welcome to the doc portal!
 sidebar_label: "About"

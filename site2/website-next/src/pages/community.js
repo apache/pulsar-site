@@ -1,23 +1,15 @@
 import React, { useEffect, componentDidMount } from "react";
-import clsx from "clsx";
-import SineWaves from "sine-waves";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from "./index.module.css";
 import CommunityList from "../components/CommunityList";
 import PromoCallout from "../components/PromoCallout";
 import PillButton from "../components/PillButton";
 import GroupsIcon from '@mui/icons-material/Groups';
 import WavySeparatorFive from '@site/static/img/separator-5.svg';
 import WavySeparatorSix from '@site/static/img/separator-6.svg';
-import Svg from "../components/Svg";
-import { docUrl, githubUrl } from "../utils/index";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 const teamObj = require("../../data/team.js");
 export default function Community() {
-  const { siteConfig } = useDocusaurusContext();
   useEffect((d) => {
     if(location.hash){
       let hash = location.hash;
