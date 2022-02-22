@@ -17,8 +17,8 @@ export function docUrl(doc, language, version) {
   // if (version == "" || version == "next") {
   return (
     siteConfig.baseUrl +
-    "docs/" +
     (language ? language + "/" : "") +
+    "docs/" +
     (version ? version + "/" : "") +
     (doc ? doc : "")
   );

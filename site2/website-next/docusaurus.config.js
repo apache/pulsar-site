@@ -125,11 +125,11 @@ module.exports = {
               docId: "concepts-overview",
               label: "Pulsar Concepts",
             },
-            // {
-            //   type: "doc",
-            //   label: "Quickstart",
-            //   docId: "about",
-            // },
+            {
+              type: "doc",
+              label: "Quickstart",
+              docId: "about",
+            },
             {
               label: "Ecosystem",
               to: "ecosystem",
