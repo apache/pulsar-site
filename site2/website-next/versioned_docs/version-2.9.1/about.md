@@ -4,9 +4,9 @@ title: Welcome to the doc portal!
 sidebar_label: "About"
 ---
 
-import BlockLinks from "../../src/components/BlockLinks";
-import BlockLink from "../../src/components/BlockLink";
-import { docUrl } from "../../src/utils/index";
+import BlockLinks from "@site/src/components/BlockLinks";
+import BlockLink from "@site/src/components/BlockLink";
+import { docUrl } from "@site/src/utils/index";
 
 
 # Welcome to the doc portal!
