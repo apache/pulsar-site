@@ -6,9 +6,10 @@ import theme from "./material-theme";
 // Default implementation, that you can customize
 function Root({ children }) {
   return (
-    <>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </>
+    // <>
+    //   <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    // </>
+    <>{children}</>
   );
 }
 
