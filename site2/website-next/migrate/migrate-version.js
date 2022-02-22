@@ -49,11 +49,6 @@ const migrate = (version) => {
   // delDuplicate(dest, version);
 
   //copy about.md from next version dir
-  sidebar = fs.readFileSync(
-    path.join(__dirname, `../../${next.baseDir}/sidebars.json`),
-    "utf8"
-  );
-  sidebar = JSON.parse(sidebar);
   let aboutDocPath = path.join(__dirname, `../../${next.docsDir}/about.md`);
   let destSidebarPath = path.join(
     __dirname,
@@ -70,6 +65,9 @@ const migrate = (version) => {
       fs.readFileSync(aboutDocPath, "utf8")
     );
   }
+
+  sidebar = fs.readFileSync(destSidebarPath, "utf8");
+  sidebar = JSON.parse(sidebar);
   let items = Object.values(sidebar)[0];
   let aboutId = version == "next" ? "about" : `${version_full}/about`;
   let _items = [
@@ -79,7 +77,7 @@ const migrate = (version) => {
     },
   ];
   for (let item of items) {
-    if (item.type == "doc" && id == aboutId) {
+    if (item.type == "doc" && item.id == aboutId) {
       continue;
     }
     _items.push(item);
