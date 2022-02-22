@@ -105,7 +105,7 @@ module.exports = {
   },
   // i18n: {
   //   defaultLocale: "en",
-  //   locales: ["en", "zh-CN"],
+  //   locales: ["en", "zh-CN", "zh-TW", "ja", "fr"],
   // },
   themeConfig: {
     navbar: {
