@@ -1,4 +1,5 @@
-import React, { useEffect, componentDidMount } from "react";
+import React, { useEffect } from "react";
+import SineWaves from "sine-waves";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomepageFeatures from "../components/HomepageFeatures";
@@ -129,7 +130,13 @@ export default function Home() {
   ];
   useEffect((d) => {
     startWaves();
-
+    var winW = window.outerWidth;
+    console.log(winW);
+    var thresh = 0.2;
+    if(winW < 800){
+      thresh = 0.1
+    }
+    console.log(thresh);
     var observer = new IntersectionObserver(
       function (entries) {
         if (entries[0].isIntersecting === true) {
@@ -142,7 +149,7 @@ export default function Home() {
           });
         }
       },
-      { threshold: [0.2] }
+      { threshold: [ thresh] }
     );
     observer.observe(document.querySelector("#home-features"));
 

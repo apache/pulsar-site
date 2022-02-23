@@ -49,10 +49,9 @@ svg {
   height: inherit;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap');
 
 :root {
-  --ifm-font-family-base: 'Red Hat Display';
+  --ifm-font-family-base: 'Red Hat Display', Arial, San-serif;
   --ifm-font-size-base : 20px;
   --ifm-color-primary: #198fff;
   --ifm-color-primary-dark: #1379da;
@@ -172,11 +171,13 @@ html[data-theme="dark"] .navbar-sidebar {
   margin: 0 auto;
 }
 
-.navbar__item.navbar__link, .navbar__link{
+.navbar__item.navbar__link, .navbar__link, .navbar__item.dropdown .navbar__link{
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
+  line-height: 1em;
 }
+.navbar__item.navbar__link {margin-top: 4px;}
 
 .dropdown__link--active {
   background-color: transparent;
@@ -424,7 +425,7 @@ html[data-theme="dark"] .resource-card {background-color: #222;}
   content: "";
   font-weight: 700;
   position: absolute;
-  bottom: 3px;
+  bottom: 1px;
   height: 6px;
   left: 0;
   width: 100%;
@@ -798,6 +799,7 @@ footer .row.footer__links {
     padding-left: 30px;
     padding-right: 30px;
   }
+  .inner {padding-left: 12px; padding-right:12px;}
 }
 @media (max-width: 768px){
   :root{
@@ -817,5 +819,12 @@ footer .row.footer__links {
 }
 
 @media (max-width: 640px){
-
+  .main-wrapper:not(.docs-doc-page):not(.mdx-page) blockquote {
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 18px;
+  }
+  .secondary-cta::before, .TabsUnstyled-horizontal button::before, .blog-wrapper article footer .col.text--right a::before {
+    bottom: -2px;
+  }
 }
