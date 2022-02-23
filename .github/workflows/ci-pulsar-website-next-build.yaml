@@ -99,7 +99,10 @@ jobs:
         run: |
           cd site2/website-next
           yarn install
+          sed "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" crowdin.yml
+          cat crowdin.yaml
           yarn download
+
           # export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
           # echo "Copying swagger json file ..."
           # mkdir -p site2/website-next/static/swagger/master/
