@@ -98,7 +98,6 @@ cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 yarn
 
 if [ -n "$NEXT" ]; then
-  sed -i "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" crowdin.yml
   yarn download
 
   node scripts/replace.js

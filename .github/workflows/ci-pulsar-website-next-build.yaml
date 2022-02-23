@@ -103,5 +103,6 @@ jobs:
           echo "Copied swagger json file."
           echo "Building Website"
           # Build the new website
+          sed -i "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" site2/website-next/crowdin.yml
           site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
           bash -e site2/tools/publish-website.sh next
