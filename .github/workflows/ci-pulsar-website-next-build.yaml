@@ -30,84 +30,85 @@ jobs:
     if: ${{ github.repository == 'apache/pulsar-site' }}
     name: Build and publish pulsar website-next
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 360
     steps:
       - name: checkout
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
 
-      - name: Get changed files
-        uses: ./.github/actions/changed-files
-        id: changed-files
-        with:
-          token: ${{ secrets.PULSARBOT_TOKEN }}
+      # - name: Get changed files
+      #   uses: ./.github/actions/changed-files
+      #   id: changed-files
+      #   with:
+      #     token: ${{ secrets.PULSARBOT_TOKEN }}
 
-      - name: List all modified files
-        run: |
-          echo ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
-          for file in ${{ steps.changed-files.outputs.all_changed_and_modified_files }}; do
-            echo "$file was modified"
-          done
+      # - name: List all modified files
+      #   run: |
+      #     echo ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+      #     for file in ${{ steps.changed-files.outputs.all_changed_and_modified_files }}; do
+      #       echo "$file was modified"
+      #     done
 
-      - name: Tune Runner VM
-        uses: ./.github/actions/tune-runner-vm
+      # - name: Tune Runner VM
+      #   uses: ./.github/actions/tune-runner-vm
 
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.m2/repository/*/*/*
-            !~/.m2/repository/org/apache/pulsar
-          key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
-            ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
-            ${{ runner.os }}-m2-dependencies-core-modules-
+      # - name: Cache local Maven repository
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       ~/.m2/repository/*/*/*
+      #       !~/.m2/repository/org/apache/pulsar
+      #     key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
+      #       ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
+      #       ${{ runner.os }}-m2-dependencies-core-modules-
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: 11
+      # - name: Set up JDK 11
+      #   uses: actions/setup-java@v2
+      #   with:
+      #     distribution: "temurin"
+      #     java-version: 11
 
-      - name: Clean disk
-        run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-          sudo apt clean
-          docker rmi $(docker images -q) -f
-          df -h
+      # - name: Clean disk
+      #   run: |
+      #     sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+      #     sudo apt clean
+      #     docker rmi $(docker images -q) -f
+      #     df -h
 
-      - name: Clone Pulsar
-        env:
-          GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
-          CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
-        run: |
-          cd ../
-          git clone -b master --depth 1 https://github.com/apache/pulsar.git
-          rm -rf pulsar/.git
-          rm -rf pulsar/site2
-          mv pulsar/* pulsar-site/
+      # - name: Clone Pulsar
+      #   run: |
+      #     cd ../
+      #     git clone -b master --depth 1 https://github.com/apache/pulsar.git
+      #     rm -rf pulsar/.git
+      #     rm -rf pulsar/site2
+      #     mv pulsar/* pulsar-site/
 
-      - name: Run install by skip tests
-        run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
-          
-      - name: Generate swagger json file
-        run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
+      # - name: Run install by skip tests
+      #   run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+
+      # - name: Generate swagger json file
+      #   run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
-          CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
+          NEXT_CROWDIN_DOCUSAURUS_PROJECT_ID: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_PROJECT_ID }}
+          NEXT_CROWDIN_DOCUSAURUS_API_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
         run: |
-          export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
-          echo "Copying swagger json file ..."
-          mkdir -p site2/website-next/static/swagger/master/
-          cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
-          echo "Copied swagger json file."
-          echo "Building Website"
-          # Build the new website
-          site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+          cd site2/website-next
+          yarn install
+          yarn download
+          # export CROWDIN_DOCUSAURUS_PROJECT_ID=apache-pulsar
+          # echo "Copying swagger json file ..."
+          # mkdir -p site2/website-next/static/swagger/master/
+          # cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
+          # echo "Copied swagger json file."
+          # echo "Building Website"
+          # # Build the new website
+          # site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
 
-          # # Script was initially made for travis
-          bash -e site2/tools/publish-website.sh next
+          # # # Script was initially made for travis
+          # bash -e site2/tools/publish-website.sh next
