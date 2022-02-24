@@ -132,7 +132,7 @@ module.exports = {
             },
             {
               label: "Ecosystem",
-              to: "ecosystem",
+              to: "/ecosystem",
             },
             // ... more items
           ],
@@ -197,23 +197,23 @@ module.exports = {
           position: "right",
           items: [
             {
-              to: "community#welcome",
+              to: "/community#welcome",
               label: "Welcome",
             },
             {
-              to: "community#discussions",
+              to: "/community#discussions",
               label: "Discussions",
             },
             {
-              to: "community#governance",
+              to: "/community#governance",
               label: "Governance",
             },
             {
-              to: "community#community",
+              to: "/community#community",
               label: "Meet the Community",
             },
             {
-              to: "community#how-to-contribute",
+              to: "/community#how-to-contribute",
               label: "Contribute",
             },
             {
@@ -232,19 +232,19 @@ module.exports = {
           position: "right",
           items: [
             {
-              to: "blog",
+              to: "/blog",
               label: "Blog",
             },
             {
-              to: "case-studies",
+              to: "/case-studies",
               label: "Case Studies",
             },
             {
-              to: "resources",
+              to: "/resources",
               label: "Resources",
             },
             {
-              to: "events",
+              to: "/events",
               label: "Events",
             },
           ],
@@ -255,68 +255,68 @@ module.exports = {
         },
         {
           label: "Version",
-          to: "docs",
+          to: "/docs",
           position: "right",
           items: [
             {
               label: "2.9.1",
-              to: "docs/",
+              to: "/docs/",
             },
             {
               label: "2.9.0",
-              to: "docs/2.9.0/",
+              to: "/docs/2.9.0/",
             },
             {
               label: "2.8.2",
-              to: "docs/2.8.2/",
+              to: "/docs/2.8.2/",
             },
             {
               label: "2.8.1",
-              to: "docs/2.8.1/",
+              to: "/docs/2.8.1/",
             },
             {
               label: "2.8.0",
-              to: "docs/2.8.0/",
+              to: "/docs/2.8.0/",
             },
             {
               label: "2.7.3",
-              to: "docs/2.7.3/",
+              to: "/docs/2.7.3/",
             },
             {
               label: "2.7.2",
-              to: "docs/2.7.2/",
+              to: "/docs/2.7.2/",
             },
             {
               label: "2.7.1",
-              to: "docs/2.7.1/",
+              to: "/docs/2.7.1/",
             },
             {
               label: "2.7.0",
-              to: "docs/2.7.0/",
+              to: "/docs/2.7.0/",
             },
             {
               label: "2.6.4",
-              to: "docs/2.6.4/",
+              to: "/docs/2.6.4/",
             },
             {
               label: "2.6.3",
-              to: "docs/2.6.3/",
+              to: "/docs/2.6.3/",
             },
             {
               label: "2.6.2",
-              to: "docs/2.6.2/",
+              to: "/docs/2.6.2/",
             },
             {
               label: "2.6.1",
-              to: "docs/2.6.1/",
+              to: "/docs/2.6.1/",
             },
             {
               label: "2.6.0",
-              to: "docs/2.6.0/",
+              to: "/docs/2.6.0/",
             },
             {
               label: "2.2.0",
-              to: "docs/2.2.0/",
+              to: "/docs/2.2.0/",
             },
           ],
         },

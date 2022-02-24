@@ -19,6 +19,7 @@ export function NavLink({
   to,
   href,
   link,
+  custom,
   label,
   activeClassName = "",
   prependBaseUrlToHref,
@@ -36,6 +37,17 @@ export function NavLink({
   if (link) {
     return (
       <a href={link} rel="noopener noreferrer" className="dropdown__link">
+        <span>{label}</span>
+      </a>
+    );
+  }
+  if (custom) {
+    return (
+      <a
+        rel="noopener noreferrer"
+        className="dropdown__link cursor-pointer"
+        {...props}
+      >
         <span>{label}</span>
       </a>
     );

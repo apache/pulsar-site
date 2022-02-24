@@ -25,6 +25,8 @@ import Logo from "@theme/Logo";
 import IconMenu from "@theme/IconMenu";
 import IconClose from "@theme/IconClose";
 import styles from "./styles.module.css"; // retrocompatible with v1
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import useIsBrowser from "@docusaurus/useIsBrowser";
 import {
   latestStableVersion,
   setVersion,
@@ -271,6 +273,7 @@ function Navbar() {
   const items = useNavbarItems();
   const hasSearchNavbarItem = items.some((item) => item.type === "search");
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
+  const isBrowser = useIsBrowser();
   return (
     <nav
       ref={navbarRef}
@@ -304,9 +307,13 @@ function Navbar() {
               setVersion(latestStableVersion);
             }}
           />
-          {/* <a className="font-bold underline mr-4 -ml-4" href="/versions/">
-            {getVersion() == "master" ? "next" : getVersion()}
-          </a> */}
+          <BrowserOnly>
+            {() => (
+              <a className="font-bold underline mr-4 -ml-4" href="/versions/">
+                {getVersion() == "master" ? "next" : getVersion()}
+              </a>
+            )}
+          </BrowserOnly>
           {leftItems.map((item, i) => {
             if (item.label == "REST APIs") {
               item.items = item.items.map((e) => {
@@ -354,16 +361,20 @@ function Navbar() {
         </div>
         <div className="navbar__items navbar__items--right">
           {rightItems.map((item, i) => {
-            if (item.label == "Previous Versions") {
+            if (item.label && item.label.toLocaleLowerCase() == "version") {
               item.items = item.items.map((e) => {
                 return {
                   ...e,
+                  custom: e.to,
                   onClick: () => {
-                    if (/(\d\.)+/.test(e.to)) {
-                      let version = e.to.substring(5, e.to.length - 1);
+                    if (/(\d\.?)+/.test(e.to)) {
+                      let version = /((\d\.?)+)/.exec(e.to)[1];
                       setVersion(version);
                     } else {
                       setVersion(latestStableVersion);
+                    }
+                    if (isBrowser) {
+                      window.open(e.to, "_self");
                     }
                   },
                 };
