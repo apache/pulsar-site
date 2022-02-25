@@ -139,7 +139,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "standalone",
+          docId: "about",
           position: "right",
           label: "Docs",
         },
