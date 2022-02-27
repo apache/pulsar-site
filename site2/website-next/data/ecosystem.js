@@ -40,6 +40,12 @@ module.exports = {
 
         },
         {
+            name: 'AWS Lambda Sink',
+            description: '',
+            link: 'https://github.com/streamnative/pulsar-io-aws-lambda'
+
+        },
+        {
             name: 'Azure DocumentDB',
             description: '',
             link: 'https://github.com/datastax/pulsar-3rdparty-connector/blob/master/pulsar-connectors/azure-documentdb'
@@ -54,6 +60,11 @@ module.exports = {
             name: 'Cassandra Sink',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#cassandra'
+        },
+        {
+            name: 'Cloud Storage Sink',
+            description: '',
+            link: 'https://github.com/streamnative/pulsar-io-cloud-storage'
         },
         {
             name: 'CoAP',
@@ -134,6 +145,11 @@ module.exports = {
             name: 'Google BigQuery',
             description: '',
             link: 'https://github.com/datastax/pulsar-3rdparty-connector/blob/master/pulsar-connectors/bigquery'
+        },
+        {
+            name: 'Google Cloud Pub/Sub',
+            description: '',
+            link: 'https://github.com/streamnative/pulsar-io-google-pubsub'
         },
         {
             name: 'Hazelcast Jet',
@@ -309,6 +325,11 @@ module.exports = {
             link: 'https://github.com/datastax/pulsar-3rdparty-connector/blob/master/pulsar-connectors/splunk'
         },
         {
+            name: 'Spark',
+            description: '',
+            link: 'https://github.com/streamnative/pulsar-spark'
+        },
+        {
             name: 'Twitter firehose',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#twitter-firehose'
@@ -323,6 +344,11 @@ module.exports = {
             description: '',
             link: 'https://github.com/datastax/pulsar-3rdparty-connector/blob/master/pulsar-connectors/zeebe'
         },
+        {
+            name: 'Flink',
+            description: '',
+            link: 'https://github.com/apache/flink/tree/master/flink-connectors/flink-connector-pulsar'
+        }
     ],
     tools: [{
             name: 'DataStax CDC for Apache Cassandra',
@@ -333,6 +359,11 @@ module.exports = {
             name: 'Helm Chart for Apache Pulsar',
             description: '',
             link: 'https://github.com/datastax/pulsar-helm-chart'
+        },
+        {
+            name: 'Helm Chart for Apache Pulsar',
+            description: 'Officially supported Helm Chart for installing Apache Pulsar on Kubernetes.',
+            link: 'https://github.com/apache/pulsar-helm-chart'
         },
         {
             name: 'Pulsar Admin Console',
@@ -349,6 +380,11 @@ module.exports = {
             description: 'Acts as a proxy between your RabbitMQ application and Apache Pulsar. ',
             link: 'https://github.com/datastax/starlight-for-rabbitmq'
         },
+        {
+            name: 'Pulsar Manager',
+            description: 'Apache Pulsar manager is a web-based GUI management tool for managing and monitoring Pulsar.',
+            link: 'https://github.com/apache/pulsar-manager'
+        }
     ],
     adapters: [{
             name: 'Pulsar Client Kafka Compatible',
