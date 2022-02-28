@@ -7,7 +7,6 @@ import SubHeroBlock from "../components/SubHeroBlock";
 import PromoCallout from "../components/PromoCallout";
 import PillButton from "../components/PillButton";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import useIsBrowser from "@docusaurus/useIsBrowser";
 import { docUrl, githubUrl } from "../utils/index";
 var startWaves = function () {
   new SineWaves({
