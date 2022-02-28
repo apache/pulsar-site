@@ -128,7 +128,6 @@ export default function Home() {
   ];
   useEffect((d) => {
     startWaves();
-    var thresh = 0.1;
     var observer = new IntersectionObserver(
       function (entries) {
         if (entries[0].isIntersecting === true) {
@@ -141,7 +140,7 @@ export default function Home() {
           });
         }
       },
-      { threshold: [ thresh] }
+      { threshold: [ 0.1 ] }
     );
     observer.observe(document.querySelector("#home-features"));
 
