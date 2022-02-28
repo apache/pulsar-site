@@ -1,4 +1,4 @@
-import React, { useEffect, componentDidMount } from "react";
+import React, { useEffect } from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomepageFeatures from "../components/HomepageFeatures";
@@ -129,7 +129,6 @@ export default function Home() {
   ];
   useEffect((d) => {
     startWaves();
-
     var observer = new IntersectionObserver(
       function (entries) {
         if (entries[0].isIntersecting === true) {
@@ -142,7 +141,7 @@ export default function Home() {
           });
         }
       },
-      { threshold: [0.2] }
+      { threshold: [ 0.1 ] }
     );
     observer.observe(document.querySelector("#home-features"));
 
