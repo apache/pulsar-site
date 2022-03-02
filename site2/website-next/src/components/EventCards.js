@@ -1,6 +1,7 @@
 import React from "react";
 import IconEvent from '@site/static/img/events.svg';
 import IconGroups from '@site/static/img/groups.svg';
+import IconPlaylists from '@site/static/img/playlists.svg';
 import IconReplays from '@site/static/img/replays.svg';
 export default function EventCards(props) {
   let eventsList = props.events;
@@ -14,6 +15,7 @@ export default function EventCards(props) {
       <div className={`mb-4 sm:mb-0 resource-card bg-white p-6 shadow-lg relative flex flex-col type-${props.type}`}>
         <div className="resource-card__icon mb-4 text--center relative z-5">
           {type === 'upcoming events' && <IconEvent></IconEvent>}
+          {type === 'playlists' && <IconPlaylists></IconPlaylists>}
           {type === 'meetups' && <IconGroups></IconGroups>}
           {type === 'past events' && <IconReplays></IconReplays>}
         </div>

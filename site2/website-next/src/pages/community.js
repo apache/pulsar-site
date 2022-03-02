@@ -8,8 +8,9 @@ import PillButton from "../components/PillButton";
 import GroupsIcon from '@mui/icons-material/Groups';
 import WavySeparatorFive from '@site/static/img/separator-5.svg';
 import WavySeparatorSix from '@site/static/img/separator-6.svg';
+import { pageUrl } from "@site/src/utils/index";
 const teamObj = require("../../data/team.js");
-export default function Community() {
+export default function Community(props) {
   useEffect((d) => {
     if(location.hash){
       let hash = location.hash;
@@ -22,11 +23,6 @@ export default function Community() {
         });
       }
     }
-    const headers = { 'Content-Type': 'text/html'}
-    fetch("https://nightlies.apache.org/cassandra/devbranch/misc/contribulyze/html/last_1_month/", { headers })
-      .then((res) => 
-        console.log(res)
-      );  
   });
 
   return (
@@ -99,7 +95,7 @@ export default function Community() {
                             target="_blank"
                             href="mailto:users-unsubscribe@pulsar.apache.org"
                           >Unsubscribe</PillButton>
-                        <p><strong>You can access the archive <a className="secondary-cta" href="http://mail-archives.apache.org/mod_mbox/pulsar-dev/">here</a>.</strong></p>
+                        <p><strong>You can access the archive <a className="secondary-cta" href="https://lists.apache.org/list.html?users@pulsar.apache.org" target="_blank">here</a>.</strong></p>
                       </div>
                       <div className="discussion-box md:w-1/2 md:pr-2">
                         <h4>Developer List</h4>
@@ -138,11 +134,6 @@ export default function Community() {
                           target="_blank"
                           href="https://www.google.com/url?q=https://apache-pulsar.slack.com/&sa=D&source=docs&ust=1641865410610919&usg=AOvVaw3iDpbML7pbfCR7HJBqoUck"
                         >PULSAR SLACK</PillButton>
-                        <PillButton
-                          variant="grey"
-                          target="_blank"
-                          href="https://apache-pulsar.herokuapp.com/"
-                        >Unsubscribe</PillButton>
                   </div>
 
                 </div>
@@ -211,7 +202,7 @@ export default function Community() {
                   </div>
                   <div className="sm:w-2/3">
                     <h3>Contributing to the Project</h3>
-                    <p>Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more. Read our <a href="https://pulsar.apache.org/en/contributing/" className="secondary-cta">Guide to Contributing</a> and <a href="/coding-guide/" className="secondary-cta">Coding Guide</a> to get started.</p>
+                    <p>Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more. Read our <a href={pageUrl('contributing')} className="secondary-cta">Guide to Contributing</a> and <a href={pageUrl('coding-guide')} className="secondary-cta">Coding Guide</a> to get started.</p>
                   </div>
                 </div>
                 <div className="flex flex-col  sm:flex-row items-center  py-12">
@@ -243,7 +234,7 @@ export default function Community() {
               <CommunityList list={teamObj.committers} />
             </div>
           </section>
-          <PromoCallout url="https://www.google.com" linkText="Read the Blog"  text="Check out the latest blog post!"/>
+          <PromoCallout url="/blog" linkText="Read Now"  text="Get up-to-date Pulsar insights on the blog"/>
       </div>
     </Layout>
   );

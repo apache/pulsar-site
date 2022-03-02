@@ -29,7 +29,7 @@ module.exports = {
         startDate: '2021-11-28' // year-month-day
       },
       {
-        title: 'Pulsar Summit North America 2020',
+        title: 'Pulsar Summit Virtual Conference 2020',
         description: '',
         link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWjVlPfaWlf3VO9W-XWsF_4-',
         displayDate: '17-18 June 2020',
@@ -85,6 +85,28 @@ module.exports = {
         title: 'Japan Pulsar User Group',
         description: '',
         link: 'https://japan-pulsar-user-group.connpass.com/'
+      },
+    ],
+    playlists: [
+      {
+        title: 'Pulsar Summit Europe 2021',
+        description: '',
+        link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWh7zes7mNeTUCr2iU-2C1jB',
+      },
+      {
+        title: 'Pulsar Summit North America 2021',
+        description: '',
+        link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWjyezVodJHcp8GSypvGuc1C'
+      },
+      {
+        title: 'Pulsar Summit Asia 2020',
+        description: '',
+        link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWjHlRb-dzjwYdETkVlyCJOq'
+      },
+      {
+        title: 'Pulsar North America 2020',
+        description: '',
+        link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWjVlPfaWlf3VO9W-XWsF_4-'
       },
     ]
   }
