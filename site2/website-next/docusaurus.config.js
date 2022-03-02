@@ -342,6 +342,13 @@ module.exports = {
       theme: require("prism-react-renderer/themes/dracula"),
       additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
     },
+    algolia: {
+      apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
+      indexName: "apache_pulsar",
+      algoliaOptions: {
+        facetFilters: ["language:LANGUAGE", "version:VERSION"],
+      },
+    },
   },
   stylesheets: [
     'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap'
