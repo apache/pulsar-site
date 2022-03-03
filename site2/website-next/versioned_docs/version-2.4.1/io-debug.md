@@ -43,11 +43,11 @@ To better demonstrate how to debug Pulsar connectors, here takes a Mongo sink co
    ```bash
    
    configs:
-   mongoUri: "mongodb://pulsar-mongo:27017"
-   database: "pulsar"
-   collection: "messages"
-   batchSize: 2
-   batchTimeMs: 500
+     mongoUri: "mongodb://pulsar-mongo:27017"
+     database: "pulsar"
+     collection: "messages"
+     batchSize: 2
+     batchTimeMs: 500
    
    ```
 

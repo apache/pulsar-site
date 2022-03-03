@@ -195,6 +195,12 @@ You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](referenc
 
 The minimum configuration changes required in `conf/bookkeeper.conf` are as follows:
 
+:::note
+
+Set `journalDirectory` and `ledgerDirectories` carefully. It is difficilt to change them later.
+
+:::
+
 ```properties
 
 # Change to point to journal disk mount point
@@ -205,6 +211,9 @@ ledgerDirectories=data/bookkeeper/ledgers
 
 # Point to local ZK quorum
 zkServers=zk1.example.com:2181,zk2.example.com:2181,zk3.example.com:2181
+
+#It is recommended to set this parameter. Otherwise, BookKeeper can't start normally in certain environments (for example, Huawei Cloud).
+advertisedAddress=
 
 ```
 
