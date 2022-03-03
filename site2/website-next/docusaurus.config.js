@@ -92,7 +92,7 @@ module.exports = {
   title: "Apache Pulsar",
   tagline:
     "Apache Pulsar is a cloud-native, distributed messaging and streaming platform originally created at Yahoo! and now a top-level Apache Software Foundation project",
-  url: "https://pulsar.apache.com",
+  url: "https://pulsar.apache.org",
   baseUrl: baseUrl,
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
@@ -351,7 +351,7 @@ module.exports = {
     },
   },
   stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap'
+    "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap",
   ],
   presets: [
     [
