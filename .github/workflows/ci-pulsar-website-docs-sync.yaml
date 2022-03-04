@@ -45,6 +45,10 @@ jobs:
           cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
           cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
           cp -r pulsar/site2/docs/assets/* pulsar-site/site2/website-next/static/assets
+          cd pulsar-site/site2/website-next
+          yarn install
+          node migrate/migrate-full.js
+          cd ../../../
 
           # cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
           # cp -r pulsar-site/site2/website-next/docs/assets/* pulsar-site/site2/website-next/static/assets
@@ -60,6 +64,7 @@ jobs:
           PULSAR_COMMIT_ID=$(git rev-parse --short HEAD)
 
           cd ../pulsar-site
+
 
           git add -A .
           git status
