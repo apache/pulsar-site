@@ -106,7 +106,7 @@ if [ -n "$NEXT" ]; then
   # The split-version-build script is used to build in different versions, and finally the build results are merged.
   echo "all params: "$@
   echo "split version build for files: "$2
-  bash scripts/split-version-build.sh $2
+  bash scripts/split-version-build.sh $@
 else
   crowdin
   yarn build
