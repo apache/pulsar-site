@@ -5,6 +5,7 @@ sidebar_label: "Kafka client wrapper"
 original_id: adaptors-kafka
 ---
 
+
 Pulsar provides an easy option for applications that are currently written using the [Apache Kafka](http://kafka.apache.org) Java client API.
 
 ## Using the Pulsar Kafka compatibility wrapper

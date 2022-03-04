@@ -17,7 +17,6 @@ This portal holds a variety of support documents to help you work with Pulsar . 
 If you’re an experienced coder, review this page to learn the easiest way to access the specific content you’re looking for.
 
 ## Navigation
-
 ***
 
 There are several ways to get around in the doc portal. The index navigation pane is a table of contents for the entire archive. The archive is divided into sections, like chapters in a book. Click the title of the topic to view it.
