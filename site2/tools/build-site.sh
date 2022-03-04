@@ -98,7 +98,11 @@ cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 yarn
 
 if [ -n "$NEXT" ]; then
-  yarn download
+  CURRENT_HOUR=$(date +%H)
+  if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
+    yarn run crowdin-upload
+  fi
+  yarn crowdin-download
 
   node scripts/replace.js
   node scripts/split-swagger-by-version.js
