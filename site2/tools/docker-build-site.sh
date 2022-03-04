@@ -25,7 +25,7 @@ set -e
 
 echo "some files..."
 echo $@
-./build-site.sh $@
+site2/tools/build-site.sh $@
 
 # ROOT_DIR=$(git rev-parse --show-toplevel)
 # cd $ROOT_DIR/pulsar-client-cpp
