@@ -91,17 +91,17 @@ EOF
 
 set -x -e
 
-export NODE_OPTIONS="--max-old-space-size=16000"
-${ROOT_DIR}/site2/tools/generate-api-docs.sh
+# export NODE_OPTIONS="--max-old-space-size=16000"
+# ${ROOT_DIR}/site2/tools/generate-api-docs.sh
 cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 
-yarn
+# yarn
 
 if [ -n "$NEXT" ]; then
-  yarn download
+  # yarn download
 
-  node scripts/replace.js
-  node scripts/split-swagger-by-version.js
+  # node scripts/replace.js
+  # node scripts/split-swagger-by-version.js
   # Because there are too many versions of the document, the memory overflows during the full build. 
   # The split-version-build script is used to build in different versions, and finally the build results are merged.
   bash scripts/split-version-build.sh $2
@@ -113,19 +113,19 @@ else
 fi
 
 # Generate document for command line tools.
-${ROOT_DIR}/site2/tools/pulsar-admin-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-client-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-perf-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-doc-gen.sh $WEBSITE_DIR
-cd ${ROOT_DIR}/site2/$WEBSITE_DIR
+# ${ROOT_DIR}/site2/tools/pulsar-admin-doc-gen.sh $WEBSITE_DIR
+# ${ROOT_DIR}/site2/tools/pulsar-client-doc-gen.sh $WEBSITE_DIR
+# ${ROOT_DIR}/site2/tools/pulsar-perf-doc-gen.sh $WEBSITE_DIR
+# ${ROOT_DIR}/site2/tools/pulsar-doc-gen.sh $WEBSITE_DIR
+# cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 
-rm -rf ${ROOT_DIR}/generated-site/content
-mkdir -p ${ROOT_DIR}/generated-site/content
-cp -R ${ROOT_DIR}/generated-site/api ${ROOT_DIR}/generated-site/content
-if [ -n "$NEXT" ]; then
-  cp -R ./build/* ${ROOT_DIR}/generated-site/content
-else
-  cp -R ./build/pulsar/* ${ROOT_DIR}/generated-site/content
-fi
-cp -R ${ROOT_DIR}/generated-site/tools ${ROOT_DIR}/generated-site/content
-cp -R ${ROOT_DIR}/site2/$WEBSITE_DIR/static/swagger/* ${ROOT_DIR}/generated-site/content/swagger/
+# rm -rf ${ROOT_DIR}/generated-site/content
+# mkdir -p ${ROOT_DIR}/generated-site/content
+# cp -R ${ROOT_DIR}/generated-site/api ${ROOT_DIR}/generated-site/content
+# if [ -n "$NEXT" ]; then
+#   cp -R ./build/* ${ROOT_DIR}/generated-site/content
+# else
+#   cp -R ./build/pulsar/* ${ROOT_DIR}/generated-site/content
+# fi
+# cp -R ${ROOT_DIR}/generated-site/tools ${ROOT_DIR}/generated-site/content
+# cp -R ${ROOT_DIR}/site2/$WEBSITE_DIR/static/swagger/* ${ROOT_DIR}/generated-site/content/swagger/
