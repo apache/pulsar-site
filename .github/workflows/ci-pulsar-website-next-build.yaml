@@ -50,59 +50,59 @@ jobs:
             echo "$file was modified"
           done
 
-      - name: Tune Runner VM
-        uses: ./.github/actions/tune-runner-vm
+      # - name: Tune Runner VM
+      #   uses: ./.github/actions/tune-runner-vm
 
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.m2/repository/*/*/*
-            !~/.m2/repository/org/apache/pulsar
-          key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
-            ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
-            ${{ runner.os }}-m2-dependencies-core-modules-
+      # - name: Cache local Maven repository
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       ~/.m2/repository/*/*/*
+      #       !~/.m2/repository/org/apache/pulsar
+      #     key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
+      #       ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
+      #       ${{ runner.os }}-m2-dependencies-core-modules-
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          distribution: "temurin"
-          java-version: 11
+      # - name: Set up JDK 11
+      #   uses: actions/setup-java@v2
+      #   with:
+      #     distribution: "temurin"
+      #     java-version: 11
 
-      - name: Clean disk
-        run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-          sudo apt clean
-          docker rmi $(docker images -q) -f
-          df -h
+      # - name: Clean disk
+      #   run: |
+      #     sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+      #     sudo apt clean
+      #     docker rmi $(docker images -q) -f
+      #     df -h
 
-      - name: Clone Pulsar
-        run: |
-          cd ../
-          git clone -b master --depth 1 https://github.com/apache/pulsar.git
-          rm -rf pulsar/.git
-          rm -rf pulsar/site2
-          mv pulsar/* pulsar-site/
+      # - name: Clone Pulsar
+      #   run: |
+      #     cd ../
+      #     git clone -b master --depth 1 https://github.com/apache/pulsar.git
+      #     rm -rf pulsar/.git
+      #     rm -rf pulsar/site2
+      #     mv pulsar/* pulsar-site/
 
-      - name: Run install by skip tests
-        run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+      # - name: Run install by skip tests
+      #   run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 
-      - name: Generate swagger json file
-        run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
+      # - name: Generate swagger json file
+      #   run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
-      - name: Publish
-        env:
-          GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
-        run: |
-          echo "Copying swagger json file ..."
-          mkdir -p site2/website-next/static/swagger/master/
-          cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
-          echo "Copied swagger json file."
-          echo "Building Website"
-          # Build the new website
-          sed -i "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" site2/website-next/crowdin.yml
-          site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
-          bash -e site2/tools/publish-website.sh next
+      # - name: Publish
+      #   env:
+      #     GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
+      #     CROWDIN_PERSONAL_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
+      #   run: |
+      #     echo "Copying swagger json file ..."
+      #     mkdir -p site2/website-next/static/swagger/master/
+      #     cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
+      #     echo "Copied swagger json file."
+      #     echo "Building Website"
+      #     # Build the new website
+      #     sed -i "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" site2/website-next/crowdin.yml
+      #     site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+      #     bash -e site2/tools/publish-website.sh next
