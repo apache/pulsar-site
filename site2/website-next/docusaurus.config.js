@@ -334,7 +334,7 @@ module.exports = {
         },
       ],
       copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
-      <p>Inc.Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</p>`,
+      <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</p>`,
     },
     prism: {
       // theme: lightCodeTheme,
