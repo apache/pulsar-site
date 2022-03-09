@@ -358,6 +358,7 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
+          path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `${githubUrl}/edit/master/site2/website-next`,
           remarkPlugins: [
@@ -389,6 +390,25 @@ module.exports = {
       },
     ],
     "./postcss-tailwind-loader",
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: "releases-notes",
+        path: "releases-notes",
+        routeBasePath: "releases-notes",
+        // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
+        //   if (locale !== "en") {
+        //     return ``;
+        //   }
+        //   return ``;
+        // },
+        // editCurrentVersion: true,
+        sidebarPath: require.resolve("./sidebarsReleasesNotes.js"),
+        // showLastUpdateAuthor: true,
+        // showLastUpdateTime: true,
+      }),
+    ],
   ],
   scripts: [
     {
