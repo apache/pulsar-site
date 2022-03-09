@@ -1,5 +1,8 @@
 ---
-title: Release Notes 
+id: all
+title: All Releases
+sidebar_label: All Releases
+slug: /
 ---
 
 ## Apache Pulsar Release Notes

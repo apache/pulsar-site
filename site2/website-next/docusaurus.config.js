@@ -358,6 +358,7 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
+          path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `${githubUrl}/edit/master/site2/website-next`,
           remarkPlugins: [
@@ -389,6 +390,34 @@ module.exports = {
       },
     ],
     "./postcss-tailwind-loader",
+    // [
+    //   "@docusaurus/plugin-content-docs",
+    //   {
+    //     id: "releases-notes",
+    //     path: "all",
+    //     routeBasePath: "releases-notes",
+    //     sidebarPath: require.resolve("./sidebarsReleasesNotes.js"),
+    //   },
+    // ],
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: "releases-notes",
+        path: "releases-notes",
+        routeBasePath: "releases-notes",
+        // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
+        //   if (locale !== "en") {
+        //     return `https://crowdin.com/project/docusaurus-v2/${locale}`;
+        //   }
+        //   return `https://github.com/facebook/docusaurus/edit/main/website/${versionDocsDirPath}/${docPath}`;
+        // },
+        // editCurrentVersion: true,
+        sidebarPath: require.resolve("./sidebarsReleasesNotes.js"),
+        // showLastUpdateAuthor: true,
+        // showLastUpdateTime: true,
+      }),
+    ],
   ],
   scripts: [
     {
