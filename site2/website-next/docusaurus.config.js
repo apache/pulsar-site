@@ -143,54 +143,54 @@ module.exports = {
           position: "right",
           label: "Docs",
         },
-        {
-          label: "REST APIs",
-          position: "right",
-          items: [
-            {
-              label: "Admin REST API",
-              to: "/admin-rest-api",
-            },
-            {
-              label: "Functions",
-              to: "/functions-rest-api",
-            },
-            {
-              label: "Sources",
-              to: "/source-rest-api",
-            },
-            {
-              label: "Sinks",
-              to: "/sink-rest-api",
-            },
-            {
-              label: "Packages",
-              to: "/packages-rest-api",
-            },
-          ],
-        },
-        {
-          label: "CLI",
-          position: "right",
-          items: [
-            {
-              label: "Pulsar Admin",
-              to: "/pulsar-admin-cli",
-            },
-            {
-              label: "Pulsar Client",
-              to: "/pulsar-client-cli",
-            },
-            {
-              label: "Pulsar Perf",
-              to: "/pulsar-perf-cli",
-            },
-            {
-              label: "Pulsar",
-              to: "/pulsar-cli",
-            },
-          ],
-        },
+        // {
+        //   label: "REST APIs",
+        //   position: "right",
+        //   items: [
+        //     {
+        //       label: "Admin REST API",
+        //       to: "/admin-rest-api",
+        //     },
+        //     {
+        //       label: "Functions",
+        //       to: "/functions-rest-api",
+        //     },
+        //     {
+        //       label: "Sources",
+        //       to: "/source-rest-api",
+        //     },
+        //     {
+        //       label: "Sinks",
+        //       to: "/sink-rest-api",
+        //     },
+        //     {
+        //       label: "Packages",
+        //       to: "/packages-rest-api",
+        //     },
+        //   ],
+        // },
+        // {
+        //   label: "CLI",
+        //   position: "right",
+        //   items: [
+        //     {
+        //       label: "Pulsar Admin",
+        //       to: "/pulsar-admin-cli",
+        //     },
+        //     {
+        //       label: "Pulsar Client",
+        //       to: "/pulsar-client-cli",
+        //     },
+        //     {
+        //       label: "Pulsar Perf",
+        //       to: "/pulsar-perf-cli",
+        //     },
+        //     {
+        //       label: "Pulsar",
+        //       to: "/pulsar-cli",
+        //     },
+        //   ],
+        // },
         {
           type: "dropdown",
           label: "Community",
@@ -343,6 +343,7 @@ module.exports = {
       additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
     },
     algolia: {
+      appId: "d226a455cecdd4bc18a554c1b47e5b52",
       apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
       indexName: "apache_pulsar",
       algoliaOptions: {

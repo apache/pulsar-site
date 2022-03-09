@@ -1,7 +1,7 @@
 ---
 id: head-metadata
 title: Coding Guide
-description: 
+description: Coding Guide
 hide_table_of_contents: true
 ---
 
