@@ -390,15 +390,6 @@ module.exports = {
       },
     ],
     "./postcss-tailwind-loader",
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "releases-notes",
-    //     path: "all",
-    //     routeBasePath: "releases-notes",
-    //     sidebarPath: require.resolve("./sidebarsReleasesNotes.js"),
-    //   },
-    // ],
     [
       "content-docs",
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
@@ -408,9 +399,9 @@ module.exports = {
         routeBasePath: "releases-notes",
         // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
         //   if (locale !== "en") {
-        //     return `https://crowdin.com/project/docusaurus-v2/${locale}`;
+        //     return ``;
         //   }
-        //   return `https://github.com/facebook/docusaurus/edit/main/website/${versionDocsDirPath}/${docPath}`;
+        //   return ``;
         // },
         // editCurrentVersion: true,
         sidebarPath: require.resolve("./sidebarsReleasesNotes.js"),
