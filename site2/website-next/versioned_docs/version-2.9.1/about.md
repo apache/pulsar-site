@@ -45,7 +45,7 @@ An equally passionate community can be found in the Pulsar Slack channel (https:
 
 ## Get Started Now
 <BlockLinks>
-    <BlockLink title="Pulsar Basics" url={docUrl()} />
+    <BlockLink title="Pulsar Basics" url={docUrl('concepts-overview')} />
     <BlockLink title="Quickstart" url={docUrl("about")} />
     <BlockLink title="Ecosystem" url='/ecosystem/' />
 </BlockLinks>

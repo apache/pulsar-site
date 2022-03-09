@@ -38,7 +38,7 @@ const csObj =
         description: "When serving a large volume of data collection and annotation, we faced some challenges on task distribution, anti-scamming and AI model training. We adopted the Apache Pulsar and NoSQL database solution to resolve those pain points and keep the flexibility. "
       },
       {
-        company: "BIGIO",
+        company: "BIGO",
         link: 'https://www.youtube.com/watch?v=CdPd5zAPsgc',
         image: require("@site/static/img/bigo.png").default,
         description: "We have adopted Apache Pulsar to build our Message Processing System, especially in Real-Time ETL, short-form video recommendation and AB-test Real-Time Data report."
@@ -188,7 +188,7 @@ const csObj =
         description: "We are very happy with our choice of Pulsar and the performance and reliability it provides."
       }
     ],
-    telcom: [
+    telecom: [
       {
         company: "Verizon Media",
         link: 'https://www.youtube.com/watch?v=pDAh-gh-aZ0',
@@ -295,7 +295,7 @@ export default function CaseStudies() {
                 <TabUnstyled className="mx-2">Financial Services</TabUnstyled>
                 <TabUnstyled className="mx-2">Retail</TabUnstyled>
                 <TabUnstyled className="mx-2">Software/IT</TabUnstyled>
-                <TabUnstyled className="mx-2">Telcom</TabUnstyled>
+                <TabUnstyled className="mx-2">Telecom</TabUnstyled>
                 <TabUnstyled className="mx-2">Transportation/Logistics</TabUnstyled>
               </TabsListUnstyled>
               
@@ -304,7 +304,7 @@ export default function CaseStudies() {
               <TabPanelUnstyled value={2}><CaseStudyCards cards={csObj.financial_services} /></TabPanelUnstyled>
               <TabPanelUnstyled value={3}><CaseStudyCards cards={csObj.retail} /></TabPanelUnstyled>
               <TabPanelUnstyled value={4}><CaseStudyCards cards={csObj.software_it} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={5}><CaseStudyCards cards={csObj.telcom} /></TabPanelUnstyled>
+              <TabPanelUnstyled value={5}><CaseStudyCards cards={csObj.telecom} /></TabPanelUnstyled>
               <TabPanelUnstyled value={6}><CaseStudyCards cards={csObj.transportation_logistics} /></TabPanelUnstyled>
             </TabsUnstyled>
           </div>

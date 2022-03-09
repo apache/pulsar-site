@@ -8,7 +8,7 @@ const FeaturedEvent = (props) => {
             <h3 className="mb-2">{props.title}</h3>
             <h4 className="mb-8">{props.date}</h4>
             <p className="mb-4">{props.description}</p>
-            <a className="secondary-cta" href={props.link} target="_blank">Learn More</a>
+            <a className="secondary-cta" href={props.link} target="_blank">{ props.linkText }</a>
         </div>
     </div>
   )

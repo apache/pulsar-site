@@ -173,11 +173,11 @@ export default function Home() {
         </div>
         <div className="home-ctas relative z-5">
           <div className="inner">
-            <PillButton variant="" target="" href={docUrl("")}>
-              Read the docs
+            <PillButton variant="" target="" href={docUrl('concepts-overview')}>
+              Learn More
             </PillButton>
-            <PillButton variant="grey" target="_blank" href={githubUrl()}>
-              <GitHubIcon className="btn-icon"></GitHubIcon> Github
+            <PillButton variant="grey" href={docUrl()}>
+              Quickstart
             </PillButton>
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function Home() {
         />
         <SubHeroBlock
           heading="What is Apache Pulsar?"
-          content="Apache Pulsar is a cloud-native, multi-tenant, high-performance solution for server-to-server messaging and queuing built on the publisher-subscribe (pub-sub) pattern. Pulsar combines the best features of a traditional messaging system like RabbitMQ with those of a pub-sub system like Apache Kafka -- scaling up or down dynamically without downtime. It's used by thousands of companies for high-performance data pipelines, microservices, instant messaging, data integrations, and more."
+          content="Apache Pulsar is a cloud-native, multi-tenant, high-performance solution for server-to-server messaging and queuing built on the publisher-subscribe (pub-sub) pattern. Pulsar combines the best features of a traditional messaging system like RabbitMQ with those of a pub-sub system like Apache Kafka &#8211; scaling up or down dynamically without downtime. It's used by thousands of companies for high-performance data pipelines, microservices, instant messaging, data integrations, and more."
         />
 
         <section className="waves-bg home-features py-48 mb-24">
@@ -201,7 +201,7 @@ export default function Home() {
             <SubHeroBlock
               className="test"
               heading="Pulsar Users"
-              content="Run in production at Yahoo! scale with millions of messages per second across millions of topics, Pulsar is now used by thousands of companies for real-time workloads."
+              content="Run in production at scale with millions of messages per second across millions of topics, Pulsar is now used by thousands of companies for real-time workloads."
             />
             <HomeQuotes quotes={quotesArr} />
             <p className="text--center">
