@@ -128,7 +128,7 @@ module.exports = {
             {
               type: "doc",
               label: "Quickstart",
-              docId: "about",
+              docId: "standalone",
             },
             {
               label: "Ecosystem",
@@ -333,7 +333,7 @@ module.exports = {
     },
   },
   stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap'
+    'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap'
   ],
   presets: [
     [
