@@ -1,19 +1,3 @@
-// const sidebarJson = require("./sidebars.json");
-
-// module.exports = {
-//   docsSidebar: [
-//     // {
-//     //   type: "doc",
-//     //   id: "releases-notes",
-//     // },
-//     {
-//       type: "category",
-//       label: "Releases Notes",
-//       items: ["all"],
-//     },
-//   ],
-// };
-
 module.exports = {
   docs: [
     // {
@@ -28,20 +12,5 @@ module.exports = {
       type: "doc",
       id: "timeline",
     },
-    // {
-    //   type: "link",
-    //   href: "/showcase",
-    //   label: "Showcase",
-    // },
-    // {
-    //   type: "link",
-    //   href: "/feature-requests",
-    //   label: "Feature Requests",
-    // },
-    // {
-    //   type: "link",
-    //   label: "Chat with us on Discord",
-    //   href: "https://discord.gg/docusaurus",
-    // },
   ],
 };
