@@ -45,13 +45,12 @@ Before using the Mongo sink connector, you need to create a configuration file t
 
   ```yaml
   
-  {
+  configs:
       mongoUri: "mongodb://localhost:27017"
       database: "pulsar"
       collection: "messages"
       batchSize: 2
       batchTimeMs: 500
-  }
   
   ```
 

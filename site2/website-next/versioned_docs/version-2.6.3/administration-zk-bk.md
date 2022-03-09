@@ -170,6 +170,7 @@ The [`conf/zookeeper.conf`](reference-configuration.md#zookeeper) file handles t
 
 The [`conf/global-zookeeper.conf`](reference-configuration.md#configuration-store) file handles the configuration for configuration store. The table below shows the available parameters:
 
+
 ## BookKeeper
 
 BookKeeper stores all durable message in Pulsar. BookKeeper is a distributed [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) WAL system that guarantees read consistency of independent message logs calls ledgers. Individual BookKeeper servers are also called *bookies*.
@@ -194,6 +195,12 @@ You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](referenc
 
 The minimum configuration changes required in `conf/bookkeeper.conf` are as follows:
 
+:::note
+
+Set `journalDirectory` and `ledgerDirectories` carefully. It is difficilt to change them later.
+
+:::
+
 ```properties
 
 # Change to point to journal disk mount point
@@ -204,6 +211,9 @@ ledgerDirectories=data/bookkeeper/ledgers
 
 # Point to local ZK quorum
 zkServers=zk1.example.com:2181,zk2.example.com:2181,zk3.example.com:2181
+
+#It is recommended to set this parameter. Otherwise, BookKeeper can't start normally in certain environments (for example, Huawei Cloud).
+advertisedAddress=
 
 ```
 

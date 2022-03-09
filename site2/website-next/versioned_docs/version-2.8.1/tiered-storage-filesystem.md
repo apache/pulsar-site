@@ -345,7 +345,6 @@ For details about how to set up a Hadoop single node cluster, see [here](https:/
 
    ![](/assets/FileSystem-1.png)
 
-
    1. At the top navigation bar, click **Datanodes** to check DataNode information.
 
        ![](/assets/FileSystem-2.png)

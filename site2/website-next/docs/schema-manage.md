@@ -639,26 +639,172 @@ To use your custom schema storage implementation, perform the following steps.
 
 ## Set schema compatibility check strategy 
 
-You can set [schema compatibility check strategy](schema-evolution-compatibility.md#schema-compatibility-check-strategy) at namespace or broker level. 
+You can set [schema compatibility check strategy](schema-evolution-compatibility.md#schema-compatibility-check-strategy) at the topic, namespace or broker level. 
 
-- If you set schema compatibility check strategy at both namespace or broker level, it uses the strategy set for the namespace level.
+The schema compatibility check strategy set at different levels has priority: topic level > namespace level > broker level. 
 
-- If you do not set schema compatibility check strategy at both namespace or broker level, it uses the `FULL` strategy.
+- If you set the strategy at both topic and namespace level, it uses the topic-level strategy. 
 
-- If you set schema compatibility check strategy at broker level rather than namespace level, it uses the strategy set for the broker level.
+- If you set the strategy at both namespace and broker level, it uses the namespace-level strategy.
 
-- If you set schema compatibility check strategy at namespace level rather than broker level, it uses the strategy set for the namespace level.
+- If you do not set the strategy at any level, it uses the `FULL` strategy. For all available values, see [here](schema-evolution-compatibility.md#schema-compatibility-check-strategy).
 
-### Namespace 
+
+### Topic level
+
+To set a schema compatibility check strategy at the topic level, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Admin CLI"
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+
+<TabItem value="Admin CLI">
+
+Use the [`pulsar-admin topicsPolicies set-schema-compatibility-strategy`](https://pulsar.apache.org/tools/pulsar-admin/) command. 
+
+```shell
+
+pulsar-admin topicsPolicies set-schema-compatibility-strategy <strategy> <topicName>
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+
+</TabItem>
+<TabItem value="Java Admin API">
+
+```java
+
+void setSchemaCompatibilityStrategy(String topic, SchemaCompatibilityStrategy strategy)
+
+```
+
+Here is an example of setting a schema compatibility check strategy at the topic level.
+
+```java
+
+PulsarAdmin admin = …;
+
+admin.topicPolicies().setSchemaCompatibilityStrategy("my-tenant/my-ns/my-topic", SchemaCompatibilityStrategy.ALWAYS_INCOMPATIBLE);
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+<br />
+To get the topic-level schema compatibility check strategy, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Admin CLI"
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+
+<TabItem value="Admin CLI">
+
+Use the [`pulsar-admin topicsPolicies get-schema-compatibility-strategy`](https://pulsar.apache.org/tools/pulsar-admin/) command. 
+
+```shell
+
+pulsar-admin topicsPolicies get-schema-compatibility-strategy <topicName>
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+
+</TabItem>
+<TabItem value="Java Admin API">
+
+```java
+
+SchemaCompatibilityStrategy getSchemaCompatibilityStrategy(String topic, boolean applied)
+
+```
+
+Here is an example of getting the topic-level schema compatibility check strategy.
+
+```java
+
+PulsarAdmin admin = …;
+
+// get the current applied schema compatibility strategy
+admin.topicPolicies().getSchemaCompatibilityStrategy("my-tenant/my-ns/my-topic", true);
+
+// only get the schema compatibility strategy from topic policies
+admin.topicPolicies().getSchemaCompatibilityStrategy("my-tenant/my-ns/my-topic", false);
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+<br />
+To remove the topic-level schema compatibility check strategy, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Admin CLI"
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+
+<TabItem value="Admin CLI">
+
+Use the [`pulsar-admin topicsPolicies remove-schema-compatibility-strategy`](https://pulsar.apache.org/tools/pulsar-admin/) command. 
+
+```shell
+
+pulsar-admin topicsPolicies remove-schema-compatibility-strategy <topicName>
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+Send a `DELETE` request to this endpoint: {@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+
+</TabItem>
+<TabItem value="Java Admin API">
+
+```java
+
+void removeSchemaCompatibilityStrategy(String topic)
+
+```
+
+Here is an example of removing the topic-level schema compatibility check strategy.
+
+```java
+
+PulsarAdmin admin = …;
+
+admin.removeSchemaCompatibilityStrategy("my-tenant/my-ns/my-topic");
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+
+### Namespace level
 
 You can set schema compatibility check strategy at namespace level using one of the following methods.
 
 ````mdx-code-block
 <Tabs 
-  defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+  defaultValue="Admin CLI"
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin CLI","value":"Java Admin CLI"}]}>
 
-<TabItem value="pulsar-admin">
+<TabItem value="Admin CLI">
 
 Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](https://pulsar.apache.org/tools/pulsar-admin/) command. 
 
@@ -674,7 +820,7 @@ pulsar-admin namespaces set-schema-compatibility-strategy options
 Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java">
+<TabItem value="Java Admin CLI">
 
 Use the [`setSchemaCompatibilityStrategy`](https://pulsar.apache.org/api/admin/)method.
 
@@ -689,7 +835,7 @@ admin.namespaces().setSchemaCompatibilityStrategy("test", SchemaCompatibilityStr
 </Tabs>
 ````
 
-### Broker 
+### Broker level
 
 You can set schema compatibility check strategy at broker level by setting `schemaCompatibilityStrategy` in [`broker.conf`](https://github.com/apache/pulsar/blob/f24b4890c278f72a67fe30e7bf22dc36d71aac6a/conf/broker.conf#L1240) or [`standalone.conf`](https://github.com/apache/pulsar/blob/master/conf/standalone.conf) file.
 

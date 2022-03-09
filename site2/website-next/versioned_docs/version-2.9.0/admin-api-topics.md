@@ -1253,6 +1253,377 @@ admin.topics().getLastMessage(topic);
 </Tabs>
 ````
 
+
+### Configure deduplication snapshot interval
+
+#### Get deduplication snapshot interval
+
+To get the topic-level deduplication snapshot interval, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics get-deduplication-snapshot-interval options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/deduplicationSnapshotInterval?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().getDeduplicationSnapshotInterval(topic)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+#### Set deduplication snapshot interval
+
+To set the topic-level deduplication snapshot interval, use one of the following methods.
+
+> **Prerequisite** `brokerDeduplicationEnabled` must be set to `true`.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics set-deduplication-snapshot-interval options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|POST|/admin/v2/topics/:tenant/:namespace/:topic/deduplicationSnapshotInterval?version=@pulsar:version_number@}
+
+```
+
+```json
+
+{
+  "interval": 1000
+}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().setDeduplicationSnapshotInterval(topic, 1000)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+#### Remove deduplication snapshot interval
+
+To remove the topic-level deduplication snapshot interval, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics remove-deduplication-snapshot-interval options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic/deduplicationSnapshotInterval?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().removeDeduplicationSnapshotInterval(topic)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+
+### Configure inactive topic policies
+
+#### Get inactive topic policies
+
+To get the topic-level inactive topic policies, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics get-inactive-topic-policies options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/inactiveTopicPolicies?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().getInactiveTopicPolicies(topic)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+#### Set inactive topic policies
+
+To set the topic-level inactive topic policies, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics set-inactive-topic-policies options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|POST|/admin/v2/topics/:tenant/:namespace/:topic/inactiveTopicPolicies?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().setInactiveTopicPolicies(topic, inactiveTopicPolicies)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+#### Remove inactive topic policies
+
+To remove the topic-level inactive topic policies, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics remove-inactive-topic-policies options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic/inactiveTopicPolicies?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().removeInactiveTopicPolicies(topic)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+
+### Configure offload policies
+
+#### Get offload policies
+
+To get the topic-level offload policies, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics get-offload-policies options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/offloadPolicies?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().getOffloadPolicies(topic)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+#### Set offload policies
+
+To set the topic-level offload policies, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics set-offload-policies options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|POST|/admin/v2/topics/:tenant/:namespace/:topic/offloadPolicies?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().setOffloadPolicies(topic, offloadPolicies)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+#### Remove offload policies
+
+To remove the topic-level offload policies, use one of the following methods.
+
+````mdx-code-block
+<Tabs 
+  defaultValue="Pulsar-admin API"
+  values={[{"label":"Pulsar-admin API","value":"Pulsar-admin API"},{"label":"REST API","value":"REST API"},{"label":"Java API","value":"Java API"}]}>
+<TabItem value="Pulsar-admin API">
+
+```
+
+pulsar-admin topics remove-offload-policies options
+
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+```
+
+{@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic/offloadPolicies?version=@pulsar:version_number@}
+
+```
+
+</TabItem>
+<TabItem value="Java API">
+
+```java
+
+admin.topics().removeOffloadPolicies(topic)
+
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+
 ## Manage non-partitioned topics
 You can use Pulsar [admin API](admin-api-overview) to create, delete and check status of non-partitioned topics.
 

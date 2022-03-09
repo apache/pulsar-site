@@ -98,13 +98,18 @@ cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 yarn
 
 if [ -n "$NEXT" ]; then
-  yarn download
+  CURRENT_HOUR=$(date +%H)
+  if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
+    yarn run crowdin-upload
+  fi
+  yarn crowdin-download
 
   node scripts/replace.js
   node scripts/split-swagger-by-version.js
-  # Because there are too many versions of the document, the memory overflows during the full build. 
+  # Because there are too many versions of the document, the memory overflows during the full build.
   # The split-version-build script is used to build in different versions, and finally the build results are merged.
-  bash scripts/split-version-build.sh $2
+  echo "all params: "$@
+  bash scripts/split-version-build.sh $@
 else
   crowdin
   yarn build
