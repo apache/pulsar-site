@@ -8,12 +8,12 @@ const FeatureList = (language) => [
   {
     title: "Cloud-native",
     Svg: require("../../static/img/Technology-Solution.svg").default,
-    content: "A multiple layer approach separating compute from storage to work with cloud infrastructures and Kubernetes",
+    content: "A multiple layer approach separating compute from storage to work with cloud infrastructures and Kubernetes.",
   },
   {
     title: "Serverless functions",
     Svg: require("../../static/img/proven-in-production.svg").default,
-    content:"Write serverless functions with developer-friendly APIs to natively process data immediately upon arrival. No need to run your own stream processing engine",
+    content:"Write serverless functions with developer-friendly APIs to natively process data immediately upon arrival. No need to run your own stream processing engine.",
   },
   {
     title: "Horizontally scalable",
@@ -33,12 +33,12 @@ const FeatureList = (language) => [
   {
     title: "Multi-tenancy",
     Svg: require("../../static/img/multi-tenancy.svg").default,
-    content:"Built from the ground up as a multi-tenant system. Supports isolation, authentication, authorization and quotas.",
+    content:"Built from the ground up as a multi-tenant system. Supports isolation, authentication, authorization, and quotas.",
   },
   {
     title: "Persistent storage",
     Svg: require("../../static/img/persistent-storage.svg").default,
-    content:"Persistent message storage based on Apache BookKeeper. IO-level isolation between write and read operations.",
+    content:"Persistent message storage based on Apache BookKeeper. IO-level isolation between write, and read operations.",
   },
   {
     title: "Client libraries",

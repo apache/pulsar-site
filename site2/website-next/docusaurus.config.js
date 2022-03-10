@@ -128,13 +128,12 @@ module.exports = {
             {
               type: "doc",
               label: "Quickstart",
-              docId: "about",
+              docId: "standalone",
             },
             {
               label: "Ecosystem",
               to: "/ecosystem",
             },
-            // ... more items
           ],
         },
         {
@@ -254,28 +253,10 @@ module.exports = {
           position: "right",
         },
         {
-          label: "Version",
-          to: "/docs",
-          position: "right",
-          items: [
-            {
-              label: "2.9.0",
-              to: "/docs/2.9.0/",
-            },
-            {
-              label: "2.8.0",
-              to: "/docs/2.8.0/",
-            },
-            {
-              label: "2.7.0",
-              to: "/docs/2.7.0/",
-            },
-            {
-              label: "2.6.0",
-              to: "/docs/2.6.0/",
-            },
-          ],
-        },
+          to: '/download',
+          label: 'Download',
+          position: 'right',
+        }
       ],
     },
     footer: {
@@ -291,7 +272,7 @@ module.exports = {
             {
               //Embedded HTML
               html: `
-	              <img src="/img/Apache_Feather_Logo.svg" alt="" width="20">
+	              <img class="footer-apache-logo" src="/img/Apache_Feather_Logo.svg" alt="" width="20">
 	              `,
             },
             {
@@ -326,7 +307,7 @@ module.exports = {
             {
               //Embedded HTML
               html: `
-	              <div><small><strong>Apache Pulsar is available under the <a href="/">Apache License, version 2.0.</a></strong></small></div>
+	              <div><small><strong>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0.</a></strong></small></div>
                 <div>Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.</div>
 	              `,
             },
@@ -352,7 +333,7 @@ module.exports = {
     },
   },
   stylesheets: [
-    "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap",
+    'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap'
   ],
   presets: [
     [

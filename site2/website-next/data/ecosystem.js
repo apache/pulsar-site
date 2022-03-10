@@ -132,12 +132,12 @@ module.exports = {
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#file'
         },
         {
-            name: 'Flume',
+            name: 'Flume Sink',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#flume-1'
         },
         {
-            name: 'Flume',
+            name: 'Flume Source',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#flume'
         },
@@ -210,25 +210,25 @@ module.exports = {
 
         },
         {
-            name: 'Kafka',
+            name: 'Kafka Sink',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#kafka-1'
 
         },
         {
-            name: 'Kafka',
+            name: 'Kafka Source',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#kafka'
 
         },
         {
-            name: 'Kinesis',
+            name: 'Kinesis Sink',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#kinesis-1'
 
         },
         {
-            name: 'Kinesis',
+            name: 'Kinesis Source',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#kinesis'
 
@@ -283,23 +283,23 @@ module.exports = {
             link: 'https://github.com/datastax/pulsar-3rdparty-connector/blob/master/pulsar-connectors/orientdb'
         },
         {
-            name: 'RabbitMQ',
+            name: 'RabbitMQ Sink',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#rabbitmq-1'
         },
         {
-            name: 'RabbitMQ',
+            name: 'RabbitMQ Source',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#rabbitmq'
         },
         {
-            name: 'Redis',
+            name: 'Redis Sink',
             description: '',
             link: 'https://pulsar.apache.org/docs/en/io-connectors/#redis'
             
         },
         {
-            name: 'Redis',
+            name: 'Redis Sink and Source',
             description: '',
             link: 'https://github.com/datastax/pulsar-3rdparty-connector/blob/master/pulsar-connectors/redis'
             
@@ -373,7 +373,7 @@ module.exports = {
         {
             name: 'Starlight for JMS',
             description: 'Implements the JMS 2.0 (Java Messaging Service ®) API over the Apache Pulsar® Java Client.',
-            link: 'https://github.com/datastax/starlight-for-kafka'
+            link: 'https://github.com/datastax/pulsar-jms'
         },
         {
             name: 'Starlight for RabbitMQ',
@@ -394,7 +394,7 @@ module.exports = {
         {
             name: 'Pulsar Flink',
             description: '',
-            link: 'https://github.com/apache/pulsar-adapters/tree/master/pulsar-flink'
+            link: 'https://github.com/apache/flink/tree/master/flink-connectors/flink-connector-pulsar'
         },
         {
             name: 'Pulsar Log4j2 Appender',
