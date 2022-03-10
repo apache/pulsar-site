@@ -59,7 +59,7 @@ export default function VersionsTable(props) {
                 href={
                   row.name == "next"
                     ? repoUrl
-                    : `${siteConfig.baseUrl}releases-notes#${row.name.replace(/\./g, '')}`
+                    : `${siteConfig.baseUrl}release-notes#${row.name.replace(/\./g, '')}`
                 }
                 underline="none"
               >
