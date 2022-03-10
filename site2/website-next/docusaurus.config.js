@@ -376,9 +376,9 @@ module.exports = {
       "content-docs",
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
       ({
-        id: "releases-notes",
-        path: "releases-notes",
-        routeBasePath: "releases-notes",
+        id: "release-notes",
+        path: "release-notes",
+        routeBasePath: "release-notes",
         // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
         //   if (locale !== "en") {
         //     return ``;
@@ -386,7 +386,7 @@ module.exports = {
         //   return ``;
         // },
         // editCurrentVersion: true,
-        sidebarPath: require.resolve("./sidebarsReleasesNotes.js"),
+        sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
         // showLastUpdateAuthor: true,
         // showLastUpdateTime: true,
       }),
