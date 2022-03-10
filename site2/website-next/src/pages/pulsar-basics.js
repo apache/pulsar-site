@@ -6,15 +6,25 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Pulsar Basics`}
+      title={`Release Notes`}
       description="Learn about the basics of using Apache Pulsar"
     >    
       <div className="page-wrap tailwind">
-        <section className="hero">
-            <div className="inner text--center">
-                <h1>Pulsar Basics</h1>
+        <aside>
+          I'm an asside
+        </aside>
+        <main class="docMainContainer_node_modules-@docusaurus-theme-classic-lib-next-theme-DocPage-styles-module">
+          <div class="container padding-top--md padding-bottom--lg">
+            <div class="row">
+              <div class="col docItemCol_node_modules-@docusaurus-theme-classic-lib-next-theme-DocItem-styles-module">
+                main content goes here
+              </div>
+              <div class="col col--3">
+                stuff goes here
+              </div>
             </div>
-        </section>
+          </div>
+        </main>
       </div>
     </Layout>
   );

@@ -108,6 +108,9 @@ module.exports = {
     locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
   },
   themeConfig: {
+    colorMode: {
+      disableSwitch: false
+    },
     navbar: {
       title: "",
       logo: {
@@ -256,6 +259,7 @@ module.exports = {
           to: '/download',
           label: 'Download',
           position: 'right',
+          className: 'download-btn pill-btn',
         }
       ],
     },
