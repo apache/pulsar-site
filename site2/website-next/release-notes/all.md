@@ -4,10 +4,6 @@ title: All Releases
 sidebar_label: All Releases
 slug: /
 ---
-import TOCInline from '@theme/TOCInline';
-
-<div class="rn-content">
-
 ## Apache Pulsar Release Notes
 
 ### 2.9.1
@@ -3677,7 +3673,3 @@ https://github.com/apache/incubator-pulsar/releases/tag/v1.15
 First public release of Pulsar
 
 https://github.com/apache/incubator-pulsar/releases/tag/v1.14
-
-</div>
-
-<TOCInline toc={toc} />
