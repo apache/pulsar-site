@@ -524,9 +524,10 @@ implements java.lang.AutoCloseable</pre>
 </tr>
 <tr id="i47" class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitAndOwnBundle(org.apache.pulsar.common.naming.NamespaceBundle,boolean,org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm)">splitAndOwnBundle</a></span>&#8203;(<a href="../../common/naming/NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitAndOwnBundle(org.apache.pulsar.common.naming.NamespaceBundle,boolean,org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm,java.util.List)">splitAndOwnBundle</a></span>&#8203;(<a href="../../common/naming/NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle,
                  boolean&nbsp;unload,
-                 <a href="../../common/naming/NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;splitAlgorithm)</code></th>
+                 <a href="../../common/naming/NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;splitAlgorithm,
+                 java.util.List&lt;java.lang.Long&gt;&nbsp;boundaries)</code></th>
 <td class="colLast">
 <div class="block">1.</div>
 </td>
@@ -900,7 +901,7 @@ implements java.lang.AutoCloseable</pre>
 </dl>
 </li>
 </ul>
-<a id="splitAndOwnBundle(org.apache.pulsar.common.naming.NamespaceBundle,boolean,org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm)">
+<a id="splitAndOwnBundle(org.apache.pulsar.common.naming.NamespaceBundle,boolean,org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm,java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -908,7 +909,8 @@ implements java.lang.AutoCloseable</pre>
 <h4>splitAndOwnBundle</h4>
 <pre class="methodSignature">public&nbsp;java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;&nbsp;splitAndOwnBundle&#8203;(<a href="../../common/naming/NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle,
                                                                                 boolean&nbsp;unload,
-                                                                                <a href="../../common/naming/NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;splitAlgorithm)</pre>
+                                                                                <a href="../../common/naming/NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;splitAlgorithm,
+                                                                                java.util.List&lt;java.lang.Long&gt;&nbsp;boundaries)</pre>
 <div class="block">1. split the given bundle into two bundles 2. assign ownership of both the bundles to current broker 3. update
  policies with newly created bundles into LocalZK 4. disable original bundle and refresh the cache.
 

@@ -124,7 +124,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="RangeEquallyDivideBundleSplitAlgorithm.html" title="class in org.apache.pulsar.common.naming">RangeEquallyDivideBundleSplitAlgorithm</a></code>, <code><a href="TopicCountEquallyDivideBundleSplitAlgorithm.html" title="class in org.apache.pulsar.common.naming">TopicCountEquallyDivideBundleSplitAlgorithm</a></code></dd>
+<dd><code><a href="RangeEquallyDivideBundleSplitAlgorithm.html" title="class in org.apache.pulsar.common.naming">RangeEquallyDivideBundleSplitAlgorithm</a></code>, <code><a href="SpecifiedPositionsBundleSplitAlgorithm.html" title="class in org.apache.pulsar.common.naming">SpecifiedPositionsBundleSplitAlgorithm</a></code>, <code><a href="TopicCountEquallyDivideBundleSplitAlgorithm.html" title="class in org.apache.pulsar.common.naming">TopicCountEquallyDivideBundleSplitAlgorithm</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">NamespaceBundleSplitAlgorithm</span></pre>
@@ -166,6 +166,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#SPECIFIED_POSITIONS_DIVIDE">SPECIFIED_POSITIONS_DIVIDE</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#SPECIFIED_POSITIONS_DIVIDE_ALGO">SPECIFIED_POSITIONS_DIVIDE_ALGO</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#TOPIC_COUNT_EQUALLY_DIVIDE">TOPIC_COUNT_EQUALLY_DIVIDE</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -193,9 +203,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Long&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSplitBoundary(org.apache.pulsar.broker.namespace.NamespaceService,org.apache.pulsar.common.naming.NamespaceBundle)">getSplitBoundary</a></span>&#8203;(<a href="../../broker/namespace/NamespaceService.html" title="class in org.apache.pulsar.broker.namespace">NamespaceService</a>&nbsp;service,
-                <a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle)</code></th>
+<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.util.List&lt;java.lang.Long&gt;&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSplitBoundary(org.apache.pulsar.common.naming.BundleSplitOption)">getSplitBoundary</a></span>&#8203;(<a href="BundleSplitOption.html" title="class in org.apache.pulsar.common.naming">BundleSplitOption</a>&nbsp;bundleSplitOption)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -246,6 +255,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 </li>
 </ul>
+<a id="SPECIFIED_POSITIONS_DIVIDE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>SPECIFIED_POSITIONS_DIVIDE</h4>
+<pre>static final&nbsp;java.lang.String SPECIFIED_POSITIONS_DIVIDE</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm.SPECIFIED_POSITIONS_DIVIDE">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
 <a id="AVAILABLE_ALGORITHMS">
 <!--   -->
 </a>
@@ -267,10 +289,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <a id="TOPIC_COUNT_EQUALLY_DIVIDE_ALGO">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>TOPIC_COUNT_EQUALLY_DIVIDE_ALGO</h4>
 <pre>static final&nbsp;<a href="NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a> TOPIC_COUNT_EQUALLY_DIVIDE_ALGO</pre>
+</li>
+</ul>
+<a id="SPECIFIED_POSITIONS_DIVIDE_ALGO">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>SPECIFIED_POSITIONS_DIVIDE_ALGO</h4>
+<pre>static final&nbsp;<a href="NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a> SPECIFIED_POSITIONS_DIVIDE_ALGO</pre>
 </li>
 </ul>
 </li>
@@ -292,14 +323,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre class="methodSignature">static&nbsp;<a href="NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;of&#8203;(java.lang.String&nbsp;algorithmName)</pre>
 </li>
 </ul>
-<a id="getSplitBoundary(org.apache.pulsar.broker.namespace.NamespaceService,org.apache.pulsar.common.naming.NamespaceBundle)">
+<a id="getSplitBoundary(org.apache.pulsar.common.naming.BundleSplitOption)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getSplitBoundary</h4>
-<pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.lang.Long&gt;&nbsp;getSplitBoundary&#8203;(<a href="../../broker/namespace/NamespaceService.html" title="class in org.apache.pulsar.broker.namespace">NamespaceService</a>&nbsp;service,
-                                                                        <a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle)</pre>
+<pre class="methodSignature">java.util.concurrent.CompletableFuture&lt;java.util.List&lt;java.lang.Long&gt;&gt;&nbsp;getSplitBoundary&#8203;(<a href="BundleSplitOption.html" title="class in org.apache.pulsar.common.naming">BundleSplitOption</a>&nbsp;bundleSplitOption)</pre>
 </li>
 </ul>
 </li>

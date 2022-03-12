@@ -276,9 +276,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;org.apache.commons.lang3.tuple.Pair&lt;<a href="NamespaceBundles.html" title="class in org.apache.pulsar.common.naming">NamespaceBundles</a>,&#8203;java.util.List&lt;<a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&gt;&gt;&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.lang.Long)">splitBundles</a></span>&#8203;(<a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.util.List)">splitBundles</a></span>&#8203;(<a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
             int&nbsp;argNumBundles,
-            java.lang.Long&nbsp;splitBoundary)</code></th>
+            java.util.List&lt;java.lang.Long&gt;&nbsp;splitBoundaries)</code></th>
 <td class="colLast">
 <div class="block">Fetches <a href="NamespaceBundles.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundles</code></a> from cache for a given namespace.</div>
 </td>
@@ -466,7 +466,7 @@ extends java.lang.Object</pre>
                                    org.apache.pulsar.common.policies.data.BundlesData&nbsp;bundleData)</pre>
 </li>
 </ul>
-<a id="splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.lang.Long)">
+<a id="splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -474,15 +474,15 @@ extends java.lang.Object</pre>
 <h4>splitBundles</h4>
 <pre class="methodSignature">public&nbsp;java.util.concurrent.CompletableFuture&lt;org.apache.commons.lang3.tuple.Pair&lt;<a href="NamespaceBundles.html" title="class in org.apache.pulsar.common.naming">NamespaceBundles</a>,&#8203;java.util.List&lt;<a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&gt;&gt;&gt;&nbsp;splitBundles&#8203;(<a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
                                                                                                                                                         int&nbsp;argNumBundles,
-                                                                                                                                                        java.lang.Long&nbsp;splitBoundary)</pre>
+                                                                                                                                                        java.util.List&lt;java.lang.Long&gt;&nbsp;splitBoundaries)</pre>
 <div class="block">Fetches <a href="NamespaceBundles.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundles</code></a> from cache for a given namespace. finds target bundle, split into numBundles and
  returns new <a href="NamespaceBundles.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundles</code></a> with newly split bundles into it.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>targetBundle</code> - <a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundle</code></a> needs to be split</dd>
 <dd><code>argNumBundles</code> - split into numBundles</dd>
-<dd><code>splitBoundary</code> - split into 2 numBundles by the given split key. The given split key must between the key range of the
-            given split bundle.</dd>
+<dd><code>splitBoundaries</code> - split into multi numBundles by the given split boundaries. All these given split boundaries must
+            between the key range of the given split bundle.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>List of split <a href="NamespaceBundle.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundle</code></a> and <a href="NamespaceBundles.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundles</code></a> that contains final bundles including
          split bundles for a given namespace</dd>

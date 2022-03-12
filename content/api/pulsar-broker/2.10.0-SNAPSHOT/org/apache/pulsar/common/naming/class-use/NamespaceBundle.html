@@ -407,9 +407,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceService.</span><code><span class="memberNameLink"><a href="../../../broker/namespace/NamespaceService.html#splitAndOwnBundle(org.apache.pulsar.common.naming.NamespaceBundle,boolean,org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm)">splitAndOwnBundle</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle,
+<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceService.</span><code><span class="memberNameLink"><a href="../../../broker/namespace/NamespaceService.html#splitAndOwnBundle(org.apache.pulsar.common.naming.NamespaceBundle,boolean,org.apache.pulsar.common.naming.NamespaceBundleSplitAlgorithm,java.util.List)">splitAndOwnBundle</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle,
                  boolean&nbsp;unload,
-                 <a href="../NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;splitAlgorithm)</code></th>
+                 <a href="../NamespaceBundleSplitAlgorithm.html" title="interface in org.apache.pulsar.common.naming">NamespaceBundleSplitAlgorithm</a>&nbsp;splitAlgorithm,
+                 java.util.List&lt;java.lang.Long&gt;&nbsp;boundaries)</code></th>
 <td class="colLast">
 <div class="block">1.</div>
 </td>
@@ -705,9 +706,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;org.apache.commons.lang3.tuple.Pair&lt;<a href="../NamespaceBundles.html" title="class in org.apache.pulsar.common.naming">NamespaceBundles</a>,&#8203;java.util.List&lt;<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&gt;&gt;&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceBundleFactory.</span><code><span class="memberNameLink"><a href="../NamespaceBundleFactory.html#splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.lang.Long)">splitBundles</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
+<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceBundleFactory.</span><code><span class="memberNameLink"><a href="../NamespaceBundleFactory.html#splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.util.List)">splitBundles</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
             int&nbsp;argNumBundles,
-            java.lang.Long&nbsp;splitBoundary)</code></th>
+            java.util.List&lt;java.lang.Long&gt;&nbsp;splitBoundaries)</code></th>
 <td class="colLast">
 <div class="block">Fetches <a href="../NamespaceBundles.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundles</code></a> from cache for a given namespace.</div>
 </td>
@@ -733,33 +734,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Long&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceBundleSplitAlgorithm.</span><code><span class="memberNameLink"><a href="../NamespaceBundleSplitAlgorithm.html#getSplitBoundary(org.apache.pulsar.broker.namespace.NamespaceService,org.apache.pulsar.common.naming.NamespaceBundle)">getSplitBoundary</a></span>&#8203;(<a href="../../../broker/namespace/NamespaceService.html" title="class in org.apache.pulsar.broker.namespace">NamespaceService</a>&nbsp;service,
-                <a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Long&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">RangeEquallyDivideBundleSplitAlgorithm.</span><code><span class="memberNameLink"><a href="../RangeEquallyDivideBundleSplitAlgorithm.html#getSplitBoundary(org.apache.pulsar.broker.namespace.NamespaceService,org.apache.pulsar.common.naming.NamespaceBundle)">getSplitBoundary</a></span>&#8203;(<a href="../../../broker/namespace/NamespaceService.html" title="class in org.apache.pulsar.broker.namespace">NamespaceService</a>&nbsp;service,
-                <a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Long&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">TopicCountEquallyDivideBundleSplitAlgorithm.</span><code><span class="memberNameLink"><a href="../TopicCountEquallyDivideBundleSplitAlgorithm.html#getSplitBoundary(org.apache.pulsar.broker.namespace.NamespaceService,org.apache.pulsar.common.naming.NamespaceBundle)">getSplitBoundary</a></span>&#8203;(<a href="../../../broker/namespace/NamespaceService.html" title="class in org.apache.pulsar.broker.namespace">NamespaceService</a>&nbsp;service,
-                <a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;bundle)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;org.apache.commons.lang3.tuple.Pair&lt;<a href="../NamespaceBundles.html" title="class in org.apache.pulsar.common.naming">NamespaceBundles</a>,&#8203;java.util.List&lt;<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&gt;&gt;&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceBundleFactory.</span><code><span class="memberNameLink"><a href="../NamespaceBundleFactory.html#splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.lang.Long)">splitBundles</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
+<th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceBundleFactory.</span><code><span class="memberNameLink"><a href="../NamespaceBundleFactory.html#splitBundles(org.apache.pulsar.common.naming.NamespaceBundle,int,java.util.List)">splitBundles</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;targetBundle,
             int&nbsp;argNumBundles,
-            java.lang.Long&nbsp;splitBoundary)</code></th>
+            java.util.List&lt;java.lang.Long&gt;&nbsp;splitBoundaries)</code></th>
 <td class="colLast">
 <div class="block">Fetches <a href="../NamespaceBundles.html" title="class in org.apache.pulsar.common.naming"><code>NamespaceBundles</code></a> from cache for a given namespace.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">NamespaceBundles.</span><code><span class="memberNameLink"><a href="../NamespaceBundles.html#validateBundle(org.apache.pulsar.common.naming.NamespaceBundle)">validateBundle</a></span>&#8203;(<a href="../NamespaceBundle.html" title="class in org.apache.pulsar.common.naming">NamespaceBundle</a>&nbsp;nsBundle)</code></th>
 <td class="colLast">&nbsp;</td>
