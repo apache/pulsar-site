@@ -98,6 +98,7 @@ cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 yarn
 
 if [ -n "$NEXT" ]; then
+  yarn write-translations
   CURRENT_HOUR=$(date +%H)
   if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
     yarn run crowdin-upload
