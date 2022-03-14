@@ -77,7 +77,11 @@ const migrate = (version, category, cb) => {
         items: sidebar,
       });
     } else {
-      categoryMap[category].items = sidebar;
+      categoryMap[category].items.concat(
+        sidebar.filter((item) => {
+          return !categoryMap[category].items.includes(item);
+        })
+      );
       new_sidebar.docsSidebar = _.values(categoryMap);
     }
   } else {
@@ -116,13 +120,23 @@ const migrate = (version, category, cb) => {
         // collapsed: true,
       });
     } else {
-      categoryMap[category].items = sidebar.map((item) => {
-        return {
-          type: "doc",
-          id:
-            version_full + "/" + (item == "deploy-docs" ? "deploy-dcos" : item),
-        };
-      });
+      let _sbExists = _.keyBy(categoryMap[category].items, "id");
+      let _sb = sidebar
+        .map((item) => {
+          return {
+            type: "doc",
+            id:
+              version_full +
+              "/" +
+              (item == "deploy-docs" ? "deploy-dcos" : item),
+          };
+        })
+        .filter((item) => {
+          return !_sbExists[item.id];
+        });
+      if (_sb.length > 0) {
+        categoryMap[category].items = categoryMap[category].items.concat(_sb);
+      }
       new_sidebar[version_full + "/docsSidebar"] = _.values(categoryMap);
     }
   }
