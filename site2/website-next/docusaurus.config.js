@@ -109,7 +109,7 @@ module.exports = {
   },
   themeConfig: {
     colorMode: {
-      disableSwitch: false
+      disableSwitch: false,
     },
     navbar: {
       title: "",
@@ -140,8 +140,9 @@ module.exports = {
           ],
         },
         {
-          type: "doc",
-          docId: "about",
+          // type: "doc",
+          // docId: "about",
+          to: "/docs/next/about",
           position: "right",
           label: "Docs",
         },
@@ -256,11 +257,11 @@ module.exports = {
           position: "right",
         },
         {
-          to: '/download',
-          label: 'Download',
-          position: 'right',
-          className: 'download-btn pill-btn',
-        }
+          to: "/download",
+          label: "Download",
+          position: "right",
+          className: "download-btn pill-btn",
+        },
       ],
     },
     footer: {
@@ -337,7 +338,7 @@ module.exports = {
     },
   },
   stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap'
+    "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap",
   ],
   presets: [
     [

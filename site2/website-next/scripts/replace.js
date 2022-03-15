@@ -88,23 +88,24 @@ function debDistUrl(version, type) {
 }
 
 function clientVersionUrl(version, type) {
-  var versions = version.split(".");
-  var majorVersion = parseInt(versions[0]);
-  var minorVersion = parseInt(versions[1]);
-  if (majorVersion === 2 && minorVersion < 5) {
-    return `${siteConfig.url}/api/` + type + `/` + version + "/";
-  } else if (majorVersion >= 2 && minorVersion >= 5) {
-    return (
-      `${siteConfig.url}/api/` +
-      type +
-      `/` +
-      majorVersion +
-      `.` +
-      minorVersion +
-      `.0` +
-      `-SNAPSHOT/`
-    );
-  }
+  return `${siteConfig.url}/api/${type}`;
+  // var versions = version.split(".");
+  // var majorVersion = parseInt(versions[0]);
+  // var minorVersion = parseInt(versions[1]);
+  // if (majorVersion === 2 && minorVersion < 5) {
+  //   return `${siteConfig.url}/api/` + type + `/` + version + "/";
+  // } else if (majorVersion >= 2 && minorVersion >= 5) {
+  //   return (
+  //     `${siteConfig.url}/api/` +
+  //     type +
+  //     `/` +
+  //     majorVersion +
+  //     `.` +
+  //     minorVersion +
+  //     `.0` +
+  //     `-SNAPSHOT/`
+  //   );
+  // }
 }
 
 function doReplace(options) {
