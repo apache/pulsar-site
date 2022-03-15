@@ -1,4 +1,5 @@
 ---
+slug: /
 id: about
 title: Welcome to the doc portal!
 sidebar_label: "About"
@@ -45,7 +46,7 @@ An equally passionate community can be found in the Pulsar Slack channel (https:
 
 ## Get Started Now
 <BlockLinks>
+    <BlockLink title="Pulsar Basics" url={docUrl("standalone")} />
     <BlockLink title="Pulsar Basics" url={docUrl()} />
-    <BlockLink title="Quickstart" url={docUrl("about")} />
     <BlockLink title="Ecosystem" url='/ecosystem/' />
 </BlockLinks>

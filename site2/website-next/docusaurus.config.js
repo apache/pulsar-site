@@ -142,7 +142,7 @@ module.exports = {
         {
           // type: "doc",
           // docId: "about",
-          to: "/docs/next/about",
+          to: "/docs/next",
           position: "right",
           label: "Docs",
         },

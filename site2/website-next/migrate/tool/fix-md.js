@@ -19,7 +19,7 @@ function fix(data, version) {
     .replace(reg, "id: ")
     .replace("id: deploy-docs", "id: deploy-dcos")
     .replace(/`{4,}/g, "```")
-    .replace(/^(id:\sstandalone)\s*$/gm, "slug: /\n$1")
+    // .replace(/^(id:\sstandalone)\s*$/gm, "slug: /\n$1")
     .replace(/<style[\s\S]*?<\/style>/g, "")
     .replace(/\[(.*)\]\s*\((.*)\.md\)/g, "[$1]($2)")
     .replace(/\*\*(((?!\*).)+)\*/g, "**$1**") //**macOS* => **macOS**

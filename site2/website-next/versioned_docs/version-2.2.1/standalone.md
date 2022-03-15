@@ -1,5 +1,4 @@
 ---
-slug: /
 id: standalone
 title: Setting up a local standalone cluster
 sidebar_label: "Run Pulsar locally"
