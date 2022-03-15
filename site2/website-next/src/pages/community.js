@@ -222,6 +222,7 @@ export default function Community(props) {
                   <div className="sm:w-2/3">
                   <h3>Reporting a Vulnerability</h3>
                   <p>To report a vulnerability for Pulsar, contact the <a className="secondary-cta" href="https://www.apache.org/security/projects.html" target="_blank">Apache Security Team</a>.</p>
+                  <p>The process for reporting a vulnerability is outlined <a className="secondary-cta" href="https://www.apache.org/security/" target="_blank">here</a>. When reporting a vulnerability to <a className="secondary-cta" href="mailto:security@apache.org" target="_blank">security@apache.org</a>, you can copy your email to <a className="secondary-cta" href="mailto:private@pulsar.apache.org" target="_blank">private@pulsar.apache.org</a> to send your report to the Apache Pulsar Project Management Committee. This is a private mailing list.</p>
                   </div>
                 </div>
               </div>
