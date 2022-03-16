@@ -2,8 +2,6 @@
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
-TOKEN=""
-
 echo $TOKEN >./token
 gh auth login --with-token <token
 cd $ROOT_DIR/../pulsar
