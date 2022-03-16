@@ -216,10 +216,11 @@ extends <a href="../impl/SchemasResourceBase.html" title="class in org.apache.pu
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deleteSchema(java.lang.String,java.lang.String,java.lang.String,boolean,javax.ws.rs.container.AsyncResponse)">deleteSchema</a></span>&#8203;(java.lang.String&nbsp;tenant,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deleteSchema(java.lang.String,java.lang.String,java.lang.String,boolean,boolean,javax.ws.rs.container.AsyncResponse)">deleteSchema</a></span>&#8203;(java.lang.String&nbsp;tenant,
             java.lang.String&nbsp;namespace,
             java.lang.String&nbsp;topic,
             boolean&nbsp;authoritative,
+            boolean&nbsp;force,
             javax.ws.rs.container.AsyncResponse&nbsp;response)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -287,7 +288,7 @@ extends <a href="../impl/SchemasResourceBase.html" title="class in org.apache.pu
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.pulsar.broker.admin.impl.<a href="../impl/SchemasResourceBase.html" title="class in org.apache.pulsar.broker.admin.impl">SchemasResourceBase</a></h3>
-<code><a href="../impl/SchemasResourceBase.html#deleteSchema(boolean,javax.ws.rs.container.AsyncResponse)">deleteSchema</a>, <a href="../impl/SchemasResourceBase.html#domain()">domain</a>, <a href="../impl/SchemasResourceBase.html#getAllSchemas(boolean,javax.ws.rs.container.AsyncResponse)">getAllSchemas</a>, <a href="../impl/SchemasResourceBase.html#getSchema(boolean,java.lang.String,javax.ws.rs.container.AsyncResponse)">getSchema</a>, <a href="../impl/SchemasResourceBase.html#getSchema(boolean,javax.ws.rs.container.AsyncResponse)">getSchema</a>, <a href="../impl/SchemasResourceBase.html#getVersionBySchema(org.apache.pulsar.common.protocol.schema.PostSchemaPayload,boolean,javax.ws.rs.container.AsyncResponse)">getVersionBySchema</a>, <a href="../impl/SchemasResourceBase.html#postSchema(org.apache.pulsar.common.protocol.schema.PostSchemaPayload,boolean,javax.ws.rs.container.AsyncResponse)">postSchema</a>, <a href="../impl/SchemasResourceBase.html#testCompatibility(org.apache.pulsar.common.protocol.schema.PostSchemaPayload,boolean,javax.ws.rs.container.AsyncResponse)">testCompatibility</a></code></li>
+<code><a href="../impl/SchemasResourceBase.html#deleteSchema(boolean,javax.ws.rs.container.AsyncResponse,boolean)">deleteSchema</a>, <a href="../impl/SchemasResourceBase.html#domain()">domain</a>, <a href="../impl/SchemasResourceBase.html#getAllSchemas(boolean,javax.ws.rs.container.AsyncResponse)">getAllSchemas</a>, <a href="../impl/SchemasResourceBase.html#getSchema(boolean,java.lang.String,javax.ws.rs.container.AsyncResponse)">getSchema</a>, <a href="../impl/SchemasResourceBase.html#getSchema(boolean,javax.ws.rs.container.AsyncResponse)">getSchema</a>, <a href="../impl/SchemasResourceBase.html#getVersionBySchema(org.apache.pulsar.common.protocol.schema.PostSchemaPayload,boolean,javax.ws.rs.container.AsyncResponse)">getVersionBySchema</a>, <a href="../impl/SchemasResourceBase.html#postSchema(org.apache.pulsar.common.protocol.schema.PostSchemaPayload,boolean,javax.ws.rs.container.AsyncResponse)">postSchema</a>, <a href="../impl/SchemasResourceBase.html#testCompatibility(org.apache.pulsar.common.protocol.schema.PostSchemaPayload,boolean,javax.ws.rs.container.AsyncResponse)">testCompatibility</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.org.apache.pulsar.broker.admin.AdminResource">
@@ -410,7 +411,7 @@ public&nbsp;void&nbsp;getAllSchemas&#8203;(@PathParam("tenant")
                           javax.ws.rs.container.AsyncResponse&nbsp;response)</pre>
 </li>
 </ul>
-<a id="deleteSchema(java.lang.String,java.lang.String,java.lang.String,boolean,javax.ws.rs.container.AsyncResponse)">
+<a id="deleteSchema(java.lang.String,java.lang.String,java.lang.String,boolean,boolean,javax.ws.rs.container.AsyncResponse)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -427,6 +428,8 @@ public&nbsp;void&nbsp;deleteSchema&#8203;(@PathParam("tenant")
                          java.lang.String&nbsp;topic,
                          @QueryParam("authoritative") @DefaultValue("false")
                          boolean&nbsp;authoritative,
+                         @QueryParam("force") @DefaultValue("false")
+                         boolean&nbsp;force,
                          @Suspended
                          javax.ws.rs.container.AsyncResponse&nbsp;response)</pre>
 </li>
