@@ -2,8 +2,10 @@
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
-echo $TOKEN >./token
-gh auth login --with-token <token
+echo $TOKEN >$ROOT_DIR/site2/website-next/scripts/token
+gh auth login --with-token <$ROOT_DIR/site2/website-next/scripts/token
+rm $ROOT_DIR/site2/website-next/scripts/token
+
 cd $ROOT_DIR/../pulsar
 
 mkdir -p $ROOT_DIR/site2/website-next/scripts/release-notes
