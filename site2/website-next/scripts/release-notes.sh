@@ -2,7 +2,7 @@
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
-TOKEN=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
+TOKEN=""
 
 echo $TOKEN >./token
 gh auth login --with-token <token
