@@ -357,11 +357,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">If enabled, partitioned producer will automatically discover new partitions at runtime.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#autoUpdatePartitions(boolean)">autoUpdatePartitions(boolean)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
+<dd>
+<div class="block">If enabled, the reader will auto subscribe for partitions increasement.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ConsumerBuilder.html#autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)">autoUpdatePartitionsInterval(int, TimeUnit)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a></dt>
 <dd>
 <div class="block">Set the interval of updating partitions <i>(default: 1 minute)</i>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ProducerBuilder.html#autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)">autoUpdatePartitionsInterval(int, TimeUnit)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ProducerBuilder.html" title="interface in org.apache.pulsar.client.api">ProducerBuilder</a></dt>
+<dd>
+<div class="block">Set the interval of updating partitions <i>(default: 1 minute)</i>.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)">autoUpdatePartitionsInterval(int, TimeUnit)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
 <dd>
 <div class="block">Set the interval of updating partitions <i>(default: 1 minute)</i>.</div>
 </dd>
@@ -446,6 +454,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  <a href="org/apache/pulsar/client/api/Consumer.html#receive()"><code>Consumer.receive()</code></a>, <a href="org/apache/pulsar/client/api/MessageListener.html#received(org.apache.pulsar.client.api.Consumer,org.apache.pulsar.client.api.Message)"><code>MessageListener.received(Consumer,
  Message)</code></a> or the <code>CompletableFuture</code> returned by
  <a href="org/apache/pulsar/client/api/Consumer.html#receiveAsync()"><code>Consumer.receiveAsync()</code></a> completes.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderInterceptor.html#beforeRead(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)">beforeRead(Reader&lt;T&gt;, Message&lt;T&gt;)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api">ReaderInterceptor</a></dt>
+<dd>
+<div class="block">This is called just before the message is returned by
+ <a href="org/apache/pulsar/client/api/Reader.html#readNext()"><code>Reader.readNext()</code></a>, <a href="org/apache/pulsar/client/api/ReaderListener.html#received(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)"><code>ReaderListener.received(Reader, Message)</code></a>
+ or the <code>CompletableFuture</code> returned by
+ <a href="org/apache/pulsar/client/api/Reader.html#readNextAsync()"><code>Reader.readNextAsync()</code></a> completes.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ProducerInterceptor.html#beforeSend(org.apache.pulsar.client.api.Producer,org.apache.pulsar.client.api.Message)">beforeSend(Producer&lt;T&gt;, Message&lt;T&gt;)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ProducerInterceptor.html" title="interface in org.apache.pulsar.client.api">ProducerInterceptor</a></dt>
 <dd>
@@ -643,6 +658,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/PulsarClient.html#close()">close()</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/PulsarClient.html" title="interface in org.apache.pulsar.client.api">PulsarClient</a></dt>
 <dd>
 <div class="block">Close the PulsarClient and release all the resources.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderInterceptor.html#close()">close()</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api">ReaderInterceptor</a></dt>
+<dd>
+<div class="block">Close the interceptor.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ServiceUrlProvider.html#close()">close()</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ServiceUrlProvider.html" title="interface in org.apache.pulsar.client.api">ServiceUrlProvider</a></dt>
 <dd>
@@ -1902,6 +1921,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#intercept(org.apache.pulsar.client.api.ReaderInterceptor...)">intercept(ReaderInterceptor&lt;T&gt;...)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
+<dd>
+<div class="block">Intercept <a href="org/apache/pulsar/client/api/Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a>.</div>
+</dd>
 <dt><a href="org/apache/pulsar/common/classification/InterfaceAudience.html" title="class in org.apache.pulsar.common.classification"><span class="typeNameLink">InterfaceAudience</span></a> - Class in <a href="org/apache/pulsar/common/classification/package-summary.html">org.apache.pulsar.common.classification</a></dt>
 <dd>
 <div class="block">Annotation to inform users of a package, class or method's intended audience.</div>
@@ -2694,6 +2717,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">This method is called when partitions of the topic (partitioned-topic) changes.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderInterceptor.html#onPartitionsChange(java.lang.String,int)">onPartitionsChange(String, int)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api">ReaderInterceptor</a></dt>
+<dd>
+<div class="block">This method is called when partitions of the topic (partitioned-topic) changes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ProducerInterceptor.html#onSendAcknowledgement(org.apache.pulsar.client.api.Producer,org.apache.pulsar.client.api.Message,org.apache.pulsar.client.api.MessageId,java.lang.Throwable)">onSendAcknowledgement(Producer&lt;T&gt;, Message&lt;T&gt;, MessageId, Throwable)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ProducerInterceptor.html" title="interface in org.apache.pulsar.client.api">ProducerInterceptor</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -3165,6 +3192,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api"><span class="typeNameLink">ReaderBuilder</span></a>&lt;<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt; - Interface in <a href="org/apache/pulsar/client/api/package-summary.html">org.apache.pulsar.client.api</a></dt>
 <dd>
 <div class="block"><a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api"><code>ReaderBuilder</code></a> is used to configure and create instances of <a href="org/apache/pulsar/client/api/Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a>.</div>
+</dd>
+<dt><a href="org/apache/pulsar/client/api/ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api"><span class="typeNameLink">ReaderInterceptor</span></a>&lt;<a href="org/apache/pulsar/client/api/ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt; - Interface in <a href="org/apache/pulsar/client/api/package-summary.html">org.apache.pulsar.client.api</a></dt>
+<dd>
+<div class="block">Reader interceptor.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#readerListener(org.apache.pulsar.client.api.ReaderListener)">readerListener(ReaderListener&lt;T&gt;)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
 <dd>

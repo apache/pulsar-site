@@ -155,6 +155,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">ReaderInterceptor.</span><code><span class="memberNameLink"><a href="../ReaderInterceptor.html#beforeRead(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)">beforeRead</a></span>&#8203;(<a href="../Reader.html" title="interface in org.apache.pulsar.client.api">Reader</a>&lt;<a href="../ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt;&nbsp;reader,
+          <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt;&nbsp;message)</code></th>
+<td class="colLast">
+<div class="block">This is called just before the message is returned by
+ <a href="../Reader.html#readNext()"><code>Reader.readNext()</code></a>, <a href="../ReaderListener.html#received(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)"><code>ReaderListener.received(Reader, Message)</code></a>
+ or the <code>CompletableFuture</code> returned by
+ <a href="../Reader.html#readNextAsync()"><code>Reader.readNextAsync()</code></a> completes.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ProducerInterceptor.</span><code><span class="memberNameLink"><a href="../ProducerInterceptor.html#beforeSend(org.apache.pulsar.client.api.Producer,org.apache.pulsar.client.api.Message)">beforeSend</a></span>&#8203;(<a href="../Producer.html" title="interface in org.apache.pulsar.client.api">Producer</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;&nbsp;producer,
           <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;&nbsp;message)</code></th>
@@ -164,7 +175,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  send the message to the brokers.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;T&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">MessagePayloadContext.</span><code><span class="memberNameLink"><a href="../MessagePayloadContext.html#getMessageAt(int,int,org.apache.pulsar.client.api.MessagePayload,boolean,org.apache.pulsar.client.api.Schema)">getMessageAt</a></span>&#8203;(int&nbsp;index,
             int&nbsp;numMessages,
@@ -175,14 +186,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Get the internal single message with a specific index from a payload if the payload is a batch.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../Reader.html" title="type parameter in Reader">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Reader.</span><code><span class="memberNameLink"><a href="../Reader.html#readNext()">readNext</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Read the next message in the topic.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../Reader.html" title="type parameter in Reader">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Reader.</span><code><span class="memberNameLink"><a href="../Reader.html#readNext(int,java.util.concurrent.TimeUnit)">readNext</a></span>&#8203;(int&nbsp;timeout,
         java.util.concurrent.TimeUnit&nbsp;unit)</code></th>
@@ -190,14 +201,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Read the next message in the topic waiting for a maximum time.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../Consumer.html" title="type parameter in Consumer">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#receive()">receive</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Receives a single message.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../Consumer.html" title="type parameter in Consumer">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#receive(int,java.util.concurrent.TimeUnit)">receive</a></span>&#8203;(int&nbsp;timeout,
        java.util.concurrent.TimeUnit&nbsp;unit)</code></th>
@@ -280,6 +291,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">ReaderInterceptor.</span><code><span class="memberNameLink"><a href="../ReaderInterceptor.html#beforeRead(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)">beforeRead</a></span>&#8203;(<a href="../Reader.html" title="interface in org.apache.pulsar.client.api">Reader</a>&lt;<a href="../ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt;&nbsp;reader,
+          <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ReaderInterceptor.html" title="type parameter in ReaderInterceptor">T</a>&gt;&nbsp;message)</code></th>
+<td class="colLast">
+<div class="block">This is called just before the message is returned by
+ <a href="../Reader.html#readNext()"><code>Reader.readNext()</code></a>, <a href="../ReaderListener.html#received(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)"><code>ReaderListener.received(Reader, Message)</code></a>
+ or the <code>CompletableFuture</code> returned by
+ <a href="../Reader.html#readNextAsync()"><code>Reader.readNextAsync()</code></a> completes.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ProducerInterceptor.</span><code><span class="memberNameLink"><a href="../ProducerInterceptor.html#beforeSend(org.apache.pulsar.client.api.Producer,org.apache.pulsar.client.api.Message)">beforeSend</a></span>&#8203;(<a href="../Producer.html" title="interface in org.apache.pulsar.client.api">Producer</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;&nbsp;producer,
           <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;&nbsp;message)</code></th>
@@ -289,7 +311,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  send the message to the brokers.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>default int</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">MessageRouter.</span><code><span class="memberNameLink"><a href="../MessageRouter.html#choosePartition(org.apache.pulsar.client.api.Message)">choosePartition</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;msg)</code></th>
 <td class="colLast">
@@ -298,7 +320,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>default int</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">MessageRouter.</span><code><span class="memberNameLink"><a href="../MessageRouter.html#choosePartition(org.apache.pulsar.client.api.Message,org.apache.pulsar.client.api.TopicMetadata)">choosePartition</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;msg,
                <a href="../TopicMetadata.html" title="interface in org.apache.pulsar.client.api">TopicMetadata</a>&nbsp;metadata)</code></th>
@@ -306,14 +328,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Choose a partition based on msg and the topic metadata.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#negativeAcknowledge(org.apache.pulsar.client.api.Message)">negativeAcknowledge</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message)</code></th>
 <td class="colLast">
 <div class="block">Acknowledge the failure to process a single message.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ProducerInterceptor.</span><code><span class="memberNameLink"><a href="../ProducerInterceptor.html#onSendAcknowledgement(org.apache.pulsar.client.api.Producer,org.apache.pulsar.client.api.Message,org.apache.pulsar.client.api.MessageId,java.lang.Throwable)">onSendAcknowledgement</a></span>&#8203;(<a href="../Producer.html" title="interface in org.apache.pulsar.client.api">Producer</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;&nbsp;producer,
                      <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ProducerInterceptor.html" title="type parameter in ProducerInterceptor">T</a>&gt;&nbsp;message,
@@ -325,7 +347,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  acknowledged, or when sending the message fails.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">MessageListener.</span><code><span class="memberNameLink"><a href="../MessageListener.html#received(org.apache.pulsar.client.api.Consumer,org.apache.pulsar.client.api.Message)">received</a></span>&#8203;(<a href="../Consumer.html" title="interface in org.apache.pulsar.client.api">Consumer</a>&lt;<a href="../MessageListener.html" title="type parameter in MessageListener">T</a>&gt;&nbsp;consumer,
         <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../MessageListener.html" title="type parameter in MessageListener">T</a>&gt;&nbsp;msg)</code></th>
@@ -333,7 +355,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">This method is called whenever a new message is received.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderListener.</span><code><span class="memberNameLink"><a href="../ReaderListener.html#received(org.apache.pulsar.client.api.Reader,org.apache.pulsar.client.api.Message)">received</a></span>&#8203;(<a href="../Reader.html" title="interface in org.apache.pulsar.client.api">Reader</a>&lt;<a href="../ReaderListener.html" title="type parameter in ReaderListener">T</a>&gt;&nbsp;reader,
         <a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;<a href="../ReaderListener.html" title="type parameter in ReaderListener">T</a>&gt;&nbsp;msg)</code></th>
@@ -341,7 +363,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">This method is called whenever a new message is received.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLater(org.apache.pulsar.client.api.Message,long,java.util.concurrent.TimeUnit)">reconsumeLater</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
               long&nbsp;delayTime,
@@ -350,7 +372,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">reconsumeLater the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLater(org.apache.pulsar.client.api.Message,java.util.Map,long,java.util.concurrent.TimeUnit)">reconsumeLater</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
               java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;customProperties,
@@ -360,7 +382,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">reconsumeLater the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLaterAsync(org.apache.pulsar.client.api.Message,long,java.util.concurrent.TimeUnit)">reconsumeLaterAsync</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
                    long&nbsp;delayTime,
@@ -369,7 +391,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Asynchronously reconsumeLater the consumption of a single message.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLaterAsync(org.apache.pulsar.client.api.Message,java.util.Map,long,java.util.concurrent.TimeUnit)">reconsumeLaterAsync</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
                    java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;customProperties,
@@ -379,7 +401,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Asynchronously reconsumeLater the consumption of a single message.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLaterCumulative(org.apache.pulsar.client.api.Message,long,java.util.concurrent.TimeUnit)">reconsumeLaterCumulative</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
                         long&nbsp;delayTime,
@@ -388,7 +410,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">reconsumeLater the reception of all the messages in the stream up to (and including) the provided message.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLaterCumulativeAsync(org.apache.pulsar.client.api.Message,long,java.util.concurrent.TimeUnit)">reconsumeLaterCumulativeAsync</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
                              long&nbsp;delayTime,
@@ -398,7 +420,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  message.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.Void&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Consumer.</span><code><span class="memberNameLink"><a href="../Consumer.html#reconsumeLaterCumulativeAsync(org.apache.pulsar.client.api.Message,java.util.Map,long,java.util.concurrent.TimeUnit)">reconsumeLaterCumulativeAsync</a></span>&#8203;(<a href="../Message.html" title="interface in org.apache.pulsar.client.api">Message</a>&lt;?&gt;&nbsp;message,
                              java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;customProperties,

@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -325,6 +325,22 @@ implements <a href="BrokerInterceptor.html" title="interface in org.apache.pulsa
 <div class="block">Called by the broker when a new connection is created.</div>
 </td>
 </tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#txnEnded(java.lang.String,long)">txnEnded</a></span>&#8203;(java.lang.String&nbsp;txnID,
+        long&nbsp;txnAction)</code></th>
+<td class="colLast">
+<div class="block">Intercept when a transaction ends.</div>
+</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#txnOpened(long,java.lang.String)">txnOpened</a></span>&#8203;(long&nbsp;tcId,
+         java.lang.String&nbsp;txnID)</code></th>
+<td class="colLast">
+<div class="block">Intercept when a transaction begins.</div>
+</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -502,6 +518,44 @@ implements <a href="BrokerInterceptor.html" title="interface in org.apache.pulsa
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>cnx</code> - client Connection</dd>
 <dd><code>ackCmd</code> - Command object</dd>
+</dl>
+</li>
+</ul>
+<a id="txnOpened(long,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>txnOpened</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;txnOpened&#8203;(long&nbsp;tcId,
+                      java.lang.String&nbsp;txnID)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="BrokerInterceptor.html#txnOpened(long,java.lang.String)">BrokerInterceptor</a></code></span></div>
+<div class="block">Intercept when a transaction begins.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="BrokerInterceptor.html#txnOpened(long,java.lang.String)">txnOpened</a></code>&nbsp;in interface&nbsp;<code><a href="BrokerInterceptor.html" title="interface in org.apache.pulsar.broker.intercept">BrokerInterceptor</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>tcId</code> - Transaction Coordinator Id</dd>
+<dd><code>txnID</code> - Transaction ID</dd>
+</dl>
+</li>
+</ul>
+<a id="txnEnded(java.lang.String,long)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>txnEnded</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;txnEnded&#8203;(java.lang.String&nbsp;txnID,
+                     long&nbsp;txnAction)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="BrokerInterceptor.html#txnEnded(java.lang.String,long)">BrokerInterceptor</a></code></span></div>
+<div class="block">Intercept when a transaction ends.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="BrokerInterceptor.html#txnEnded(java.lang.String,long)">txnEnded</a></code>&nbsp;in interface&nbsp;<code><a href="BrokerInterceptor.html" title="interface in org.apache.pulsar.broker.intercept">BrokerInterceptor</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>txnID</code> - Transaction ID</dd>
+<dd><code>txnAction</code> - Transaction Action</dd>
 </dl>
 </li>
 </ul>

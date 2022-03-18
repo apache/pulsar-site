@@ -131,6 +131,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#autoUpdatePartitions(boolean)">autoUpdatePartitions</a></span>&#8203;(boolean&nbsp;autoUpdate)</code></th>
+<td class="colLast">
+<div class="block">If enabled, the reader will auto subscribe for partitions increasement.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)">autoUpdatePartitionsInterval</a></span>&#8203;(int&nbsp;interval,
+                            java.util.concurrent.TimeUnit&nbsp;unit)</code></th>
+<td class="colLast">
+<div class="block">Set the interval of updating partitions <i>(default: 1 minute)</i>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#clone()">clone</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Create a copy of the current <a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api"><code>ReaderBuilder</code></a>.</div>
@@ -166,41 +181,48 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#intercept(org.apache.pulsar.client.api.ReaderInterceptor...)">intercept</a></span>&#8203;(<a href="../ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api">ReaderInterceptor</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;...&nbsp;interceptors)</code></th>
+<td class="colLast">
+<div class="block">Intercept <a href="../Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#keyHashRange(org.apache.pulsar.client.api.Range...)">keyHashRange</a></span>&#8203;(<a href="../Range.html" title="class in org.apache.pulsar.client.api">Range</a>...&nbsp;ranges)</code></th>
 <td class="colLast">
 <div class="block">Set key hash range of the reader, broker will only dispatch messages which hash of the message key contains by
  the specified key hash range.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#loadConf(java.util.Map)">loadConf</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;config)</code></th>
 <td class="colLast">
 <div class="block">Load the configuration from provided <tt>config</tt> map.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;byte[]&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">PulsarClient.</span><code><span class="memberNameLink"><a href="../PulsarClient.html#newReader()">newReader</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Create a topic reader builder with no schema (<a href="../Schema.html#BYTES"><code>Schema.BYTES</code></a>) to read from the specified topic.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;<a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;T&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">PulsarClient.</span><code><span class="memberNameLink"><a href="../PulsarClient.html#newReader(org.apache.pulsar.client.api.Schema)">newReader</a></span>&#8203;(<a href="../Schema.html" title="interface in org.apache.pulsar.client.api">Schema</a>&lt;T&gt;&nbsp;schema)</code></th>
 <td class="colLast">
 <div class="block">Create a topic reader builder with a specific <a href="../Schema.html" title="interface in org.apache.pulsar.client.api"><code>Schema</code></a>) to read from the specified topic.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#poolMessages(boolean)">poolMessages</a></span>&#8203;(boolean&nbsp;poolMessages)</code></th>
 <td class="colLast">
 <div class="block">Enable pooling of messages and the underlying data buffers.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#readCompacted(boolean)">readCompacted</a></span>&#8203;(boolean&nbsp;readCompacted)</code></th>
 <td class="colLast">
@@ -208,28 +230,28 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  of the topic.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#readerListener(org.apache.pulsar.client.api.ReaderListener)">readerListener</a></span>&#8203;(<a href="../ReaderListener.html" title="interface in org.apache.pulsar.client.api">ReaderListener</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&nbsp;readerListener)</code></th>
 <td class="colLast">
 <div class="block">Sets a <a href="../ReaderListener.html" title="interface in org.apache.pulsar.client.api"><code>ReaderListener</code></a> for the reader.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#readerName(java.lang.String)">readerName</a></span>&#8203;(java.lang.String&nbsp;readerName)</code></th>
 <td class="colLast">
 <div class="block">Specify a reader name.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#receiverQueueSize(int)">receiverQueueSize</a></span>&#8203;(int&nbsp;receiverQueueSize)</code></th>
 <td class="colLast">
 <div class="block">Sets the size of the consumer receive queue.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#startMessageFromRollbackDuration(long,java.util.concurrent.TimeUnit)">startMessageFromRollbackDuration</a></span>&#8203;(long&nbsp;rollbackDuration,
                                 java.util.concurrent.TimeUnit&nbsp;timeunit)</code></th>
@@ -237,42 +259,42 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">The initial reader positioning can be set at specific timestamp by providing total rollback duration.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#startMessageId(org.apache.pulsar.client.api.MessageId)">startMessageId</a></span>&#8203;(<a href="../MessageId.html" title="interface in org.apache.pulsar.client.api">MessageId</a>&nbsp;startMessageId)</code></th>
 <td class="colLast">
 <div class="block">The initial reader positioning is done by specifying a message id.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#startMessageIdInclusive()">startMessageIdInclusive</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Set the reader to include the given position of <a href="../ReaderBuilder.html#startMessageId(org.apache.pulsar.client.api.MessageId)"><code>startMessageId(MessageId)</code></a></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#subscriptionName(java.lang.String)">subscriptionName</a></span>&#8203;(java.lang.String&nbsp;subscriptionName)</code></th>
 <td class="colLast">
 <div class="block">Set the subscription name.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#subscriptionRolePrefix(java.lang.String)">subscriptionRolePrefix</a></span>&#8203;(java.lang.String&nbsp;subscriptionRolePrefix)</code></th>
 <td class="colLast">
 <div class="block">Set the subscription role prefix.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#topic(java.lang.String)">topic</a></span>&#8203;(java.lang.String&nbsp;topicName)</code></th>
 <td class="colLast">
 <div class="block">Specify the topic this reader will read from.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="../ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReaderBuilder.</span><code><span class="memberNameLink"><a href="../ReaderBuilder.html#topics(java.util.List)">topics</a></span>&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;topicNames)</code></th>
 <td class="colLast">

@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":18,"i1":6,"i2":18,"i3":6,"i4":18,"i5":18,"i6":18,"i7":6,"i8":18,"i9":18,"i10":6,"i11":6,"i12":6,"i13":18};
+var data = {"i0":18,"i1":6,"i2":18,"i3":6,"i4":18,"i5":18,"i6":18,"i7":6,"i8":18,"i9":18,"i10":6,"i11":6,"i12":6,"i13":18,"i14":18,"i15":18};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -328,6 +328,22 @@ extends java.lang.AutoCloseable</pre>
 <div class="block">Called by the broker when a new connection is created.</div>
 </td>
 </tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code>default void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#txnEnded(java.lang.String,long)">txnEnded</a></span>&#8203;(java.lang.String&nbsp;txnID,
+        long&nbsp;txnAction)</code></th>
+<td class="colLast">
+<div class="block">Intercept when a transaction ends.</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>default void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#txnOpened(long,java.lang.String)">txnOpened</a></span>&#8203;(long&nbsp;tcId,
+         java.lang.String&nbsp;txnID)</code></th>
+<td class="colLast">
+<div class="block">Intercept when a transaction begins.</div>
+</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -481,6 +497,38 @@ extends java.lang.AutoCloseable</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>cnx</code> - client Connection</dd>
 <dd><code>ackCmd</code> - Command object</dd>
+</dl>
+</li>
+</ul>
+<a id="txnOpened(long,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>txnOpened</h4>
+<pre class="methodSignature">default&nbsp;void&nbsp;txnOpened&#8203;(long&nbsp;tcId,
+                       java.lang.String&nbsp;txnID)</pre>
+<div class="block">Intercept when a transaction begins.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>tcId</code> - Transaction Coordinator Id</dd>
+<dd><code>txnID</code> - Transaction ID</dd>
+</dl>
+</li>
+</ul>
+<a id="txnEnded(java.lang.String,long)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>txnEnded</h4>
+<pre class="methodSignature">default&nbsp;void&nbsp;txnEnded&#8203;(java.lang.String&nbsp;txnID,
+                      long&nbsp;txnAction)</pre>
+<div class="block">Intercept when a transaction ends.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>txnID</code> - Transaction ID</dd>
+<dd><code>txnAction</code> - Transaction Action</dd>
 </dl>
 </li>
 </ul>

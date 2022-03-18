@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6};
+var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -160,54 +160,76 @@ extends java.lang.Cloneable</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#autoUpdatePartitions(boolean)">autoUpdatePartitions</a></span>&#8203;(boolean&nbsp;autoUpdate)</code></th>
+<td class="colLast">
+<div class="block">If enabled, the reader will auto subscribe for partitions increasement.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)">autoUpdatePartitionsInterval</a></span>&#8203;(int&nbsp;interval,
+                            java.util.concurrent.TimeUnit&nbsp;unit)</code></th>
+<td class="colLast">
+<div class="block">Set the interval of updating partitions <i>(default: 1 minute)</i>.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clone()">clone</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Create a copy of the current <a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api"><code>ReaderBuilder</code></a>.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="Reader.html" title="interface in org.apache.pulsar.client.api">Reader</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Finalize the creation of the <a href="Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a> instance.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;<a href="Reader.html" title="interface in org.apache.pulsar.client.api">Reader</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAsync()">createAsync</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Finalize the creation of the <a href="Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a> instance in asynchronous mode.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cryptoFailureAction(org.apache.pulsar.client.api.ConsumerCryptoFailureAction)">cryptoFailureAction</a></span>&#8203;(<a href="ConsumerCryptoFailureAction.html" title="enum in org.apache.pulsar.client.api">ConsumerCryptoFailureAction</a>&nbsp;action)</code></th>
 <td class="colLast">
 <div class="block">Sets the <a href="ConsumerCryptoFailureAction.html" title="enum in org.apache.pulsar.client.api"><code>ConsumerCryptoFailureAction</code></a> to specify.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cryptoKeyReader(org.apache.pulsar.client.api.CryptoKeyReader)">cryptoKeyReader</a></span>&#8203;(<a href="CryptoKeyReader.html" title="interface in org.apache.pulsar.client.api">CryptoKeyReader</a>&nbsp;cryptoKeyReader)</code></th>
 <td class="colLast">
 <div class="block">Sets a <a href="CryptoKeyReader.html" title="interface in org.apache.pulsar.client.api"><code>CryptoKeyReader</code></a> to decrypt the message payloads.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#defaultCryptoKeyReader(java.lang.String)">defaultCryptoKeyReader</a></span>&#8203;(java.lang.String&nbsp;privateKey)</code></th>
 <td class="colLast">
 <div class="block">Sets the default implementation of <a href="CryptoKeyReader.html" title="interface in org.apache.pulsar.client.api"><code>CryptoKeyReader</code></a>.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#defaultCryptoKeyReader(java.util.Map)">defaultCryptoKeyReader</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;privateKeys)</code></th>
 <td class="colLast">
 <div class="block">Sets the default implementation of <a href="CryptoKeyReader.html" title="interface in org.apache.pulsar.client.api"><code>CryptoKeyReader</code></a>.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#intercept(org.apache.pulsar.client.api.ReaderInterceptor...)">intercept</a></span>&#8203;(<a href="ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api">ReaderInterceptor</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;...&nbsp;interceptors)</code></th>
+<td class="colLast">
+<div class="block">Intercept <a href="Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a>.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#keyHashRange(org.apache.pulsar.client.api.Range...)">keyHashRange</a></span>&#8203;(<a href="Range.html" title="class in org.apache.pulsar.client.api">Range</a>...&nbsp;ranges)</code></th>
 <td class="colLast">
@@ -215,21 +237,21 @@ extends java.lang.Cloneable</pre>
  the specified key hash range.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadConf(java.util.Map)">loadConf</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;config)</code></th>
 <td class="colLast">
 <div class="block">Load the configuration from provided <tt>config</tt> map.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#poolMessages(boolean)">poolMessages</a></span>&#8203;(boolean&nbsp;poolMessages)</code></th>
 <td class="colLast">
 <div class="block">Enable pooling of messages and the underlying data buffers.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readCompacted(boolean)">readCompacted</a></span>&#8203;(boolean&nbsp;readCompacted)</code></th>
 <td class="colLast">
@@ -237,28 +259,28 @@ extends java.lang.Cloneable</pre>
  of the topic.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readerListener(org.apache.pulsar.client.api.ReaderListener)">readerListener</a></span>&#8203;(<a href="ReaderListener.html" title="interface in org.apache.pulsar.client.api">ReaderListener</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&nbsp;readerListener)</code></th>
 <td class="colLast">
 <div class="block">Sets a <a href="ReaderListener.html" title="interface in org.apache.pulsar.client.api"><code>ReaderListener</code></a> for the reader.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readerName(java.lang.String)">readerName</a></span>&#8203;(java.lang.String&nbsp;readerName)</code></th>
 <td class="colLast">
 <div class="block">Specify a reader name.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#receiverQueueSize(int)">receiverQueueSize</a></span>&#8203;(int&nbsp;receiverQueueSize)</code></th>
 <td class="colLast">
 <div class="block">Sets the size of the consumer receive queue.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startMessageFromRollbackDuration(long,java.util.concurrent.TimeUnit)">startMessageFromRollbackDuration</a></span>&#8203;(long&nbsp;rollbackDuration,
                                 java.util.concurrent.TimeUnit&nbsp;timeunit)</code></th>
@@ -266,42 +288,42 @@ extends java.lang.Cloneable</pre>
 <div class="block">The initial reader positioning can be set at specific timestamp by providing total rollback duration.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startMessageId(org.apache.pulsar.client.api.MessageId)">startMessageId</a></span>&#8203;(<a href="MessageId.html" title="interface in org.apache.pulsar.client.api">MessageId</a>&nbsp;startMessageId)</code></th>
 <td class="colLast">
 <div class="block">The initial reader positioning is done by specifying a message id.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startMessageIdInclusive()">startMessageIdInclusive</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Set the reader to include the given position of <a href="#startMessageId(org.apache.pulsar.client.api.MessageId)"><code>startMessageId(MessageId)</code></a></div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#subscriptionName(java.lang.String)">subscriptionName</a></span>&#8203;(java.lang.String&nbsp;subscriptionName)</code></th>
 <td class="colLast">
 <div class="block">Set the subscription name.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#subscriptionRolePrefix(java.lang.String)">subscriptionRolePrefix</a></span>&#8203;(java.lang.String&nbsp;subscriptionRolePrefix)</code></th>
 <td class="colLast">
 <div class="block">Set the subscription role prefix.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#topic(java.lang.String)">topic</a></span>&#8203;(java.lang.String&nbsp;topicName)</code></th>
 <td class="colLast">
 <div class="block">Specify the topic this reader will read from.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#topics(java.util.List)">topics</a></span>&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;topicNames)</code></th>
 <td class="colLast">
@@ -720,7 +742,7 @@ extends java.lang.Cloneable</pre>
 <a id="poolMessages(boolean)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>poolMessages</h4>
 <pre class="methodSignature"><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&nbsp;poolMessages&#8203;(boolean&nbsp;poolMessages)</pre>
@@ -730,6 +752,58 @@ extends java.lang.Cloneable</pre>
  received message. If “release()” is not called on a received message, there will be a memory leak. If an
  application attempts to use and already “released” message, it might experience undefined behavior (for example,
  memory corruption, deserialization error, etc.).</div>
+</li>
+</ul>
+<a id="autoUpdatePartitions(boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>autoUpdatePartitions</h4>
+<pre class="methodSignature"><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&nbsp;autoUpdatePartitions&#8203;(boolean&nbsp;autoUpdate)</pre>
+<div class="block">If enabled, the reader will auto subscribe for partitions increasement.
+ This is only for partitioned reader.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>autoUpdate</code> - whether to auto update partition increasement</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the reader builder instance</dd>
+</dl>
+</li>
+</ul>
+<a id="autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>autoUpdatePartitionsInterval</h4>
+<pre class="methodSignature"><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&nbsp;autoUpdatePartitionsInterval&#8203;(int&nbsp;interval,
+                                              java.util.concurrent.TimeUnit&nbsp;unit)</pre>
+<div class="block">Set the interval of updating partitions <i>(default: 1 minute)</i>. This only works if autoUpdatePartitions is
+ enabled.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interval</code> - the interval of updating partitions</dd>
+<dd><code>unit</code> - the time unit of the interval.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the reader builder instance</dd>
+</dl>
+</li>
+</ul>
+<a id="intercept(org.apache.pulsar.client.api.ReaderInterceptor...)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>intercept</h4>
+<pre class="methodSignature"><a href="ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;&nbsp;intercept&#8203;(<a href="ReaderInterceptor.html" title="interface in org.apache.pulsar.client.api">ReaderInterceptor</a>&lt;<a href="ReaderBuilder.html" title="type parameter in ReaderBuilder">T</a>&gt;...&nbsp;interceptors)</pre>
+<div class="block">Intercept <a href="Reader.html" title="interface in org.apache.pulsar.client.api"><code>Reader</code></a>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>interceptors</code> - the list of interceptors to intercept the reader created by this builder.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the reader builder instance</dd>
+</dl>
 </li>
 </ul>
 </li>
