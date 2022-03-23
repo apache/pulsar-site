@@ -151,7 +151,6 @@ export default function Home() {
   // gets blog posts
   const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
   const latestPost = recentPosts.items[0];
-  console.log(latestPost);
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
