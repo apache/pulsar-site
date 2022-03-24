@@ -147,8 +147,7 @@ export default function Community(props) {
                     <img className="mx-auto md:m-0" src={useBaseUrl('/img/logo-stackoverflow.svg')} />
                   </div>
                   <h3>Stack Overflow</h3>
-                  <p>For technical questions, we ask that you post them to <a href="https://stackoverflow.com/tags/apache-pulsar" target="_blank">Stack Overflow</a> using the tag “apache-pulsar”.
-.</p>
+                  <p>For technical questions, we ask that you post them to <a href="https://stackoverflow.com/tags/apache-pulsar" target="_blank">Stack Overflow</a> using the tag “apache-pulsar”.</p>
                 </div>
                 <div className="discussion-box">
                   <div className="icon-wrap flex items-center">
@@ -156,7 +155,7 @@ export default function Community(props) {
                   </div>
                   
                   <h3>WeChat</h3>
-                  <p>There are several WeChat groups that are used for informal discussions for devs and users. To join these WeChat tech groups, you can add Bot with the WeChat ID: StreamNative_BJ</p>
+                  <p>Welcome to subscribe to the Apache Pulsar WeChat Official Account! The account ID is ApachePulsar.</p>
                 </div>
                 <div className="discussion-box">
                   <div className="icon-wrap text-2xl flex items-center">

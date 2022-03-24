@@ -72,7 +72,6 @@ var startWaves = function () {
     },
   });
 };
-var cascade = function () {};
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
@@ -149,7 +148,9 @@ export default function Home() {
       pulsingWaves.classList.add("show-waves");
     }, 50);
   });
-
+  // gets blog posts
+  const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
+  const latestPost = recentPosts.items[0];
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
@@ -181,11 +182,10 @@ export default function Home() {
             </PillButton>
           </div>
         </div>
-
         <PromoCallout
-          url="/blog"
-          linkText="Read the Blog"
-          text="Check out the latest blog post!"
+          url={latestPost.permalink}
+          linkText="Read Now"
+          text={latestPost.title}
         />
         <SubHeroBlock
           heading="What is Apache Pulsar?"
