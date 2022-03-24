@@ -147,8 +147,7 @@ export default function Community(props) {
                     <img className="mx-auto md:m-0" src={useBaseUrl('/img/logo-stackoverflow.svg')} />
                   </div>
                   <h3>Stack Overflow</h3>
-                  <p>For technical questions, we ask that you post them to <a href="https://stackoverflow.com/tags/apache-pulsar" target="_blank">Stack Overflow</a> using the tag “apache-pulsar”.
-.</p>
+                  <p>For technical questions, we ask that you post them to <a href="https://stackoverflow.com/tags/apache-pulsar" target="_blank">Stack Overflow</a> using the tag “apache-pulsar”.</p>
                 </div>
                 <div className="discussion-box">
                   <div className="icon-wrap flex items-center">
