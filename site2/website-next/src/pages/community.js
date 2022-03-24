@@ -155,7 +155,7 @@ export default function Community(props) {
                   </div>
                   
                   <h3>WeChat</h3>
-                  <p>There are several WeChat groups that are used for informal discussions for devs and users. To join these WeChat tech groups, you can add a Bot with the WeChat ID: StreamNative_BJ</p>
+                  <p>Welcome to subscribe to the Apache Pulsar WeChat Official Account! The account ID is ApachePulsar.</p>
                 </div>
                 <div className="discussion-box">
                   <div className="icon-wrap text-2xl flex items-center">
