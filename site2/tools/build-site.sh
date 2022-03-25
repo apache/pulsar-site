@@ -102,10 +102,13 @@ yarn
 if [ -n "$NEXT" ]; then
   yarn write-translations
   CURRENT_HOUR=$(date +%H)
+  echo "------ crowdin envs:" $CROWDIN_UPLOAD $CROWDIN_DOWNLOAD $CURRENT_HOUR
   if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
+    echo "------ crowdin upload"
     yarn run crowdin-upload
   fi
   if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
+    echo "------ crowdin download"
     yarn crowdin-download
     echo 'all' > scripts/.language
   else
