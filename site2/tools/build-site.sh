@@ -64,15 +64,17 @@ function workaround_crowdin_problem_by_copying_files() {
 function crowdin() {
   yarn write-translations
   if [ "$CROWDIN_DOCUSAURUS_API_KEY" != "UNSET" ]; then
-    # upload only if environment variable CROWDIN_UPLOAD=1 is set
-    # or current hour is 0-5
-    # this leads to executing crowdin-upload once per day when website build is scheduled
+    # The crowdin upload and download take a long time to run, and have resulted in timeouts. In order to ensure that the
+    # website is still able to get published, we only run the download and upload if current hour is 0-5.
+    # This leads to executing crowdin-upload and crowdin-download once per day when website build is scheduled
     # to run with cron expression '0 */6 * * *'
     CURRENT_HOUR=$(date +%H)
     if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
       yarn run crowdin-upload
     fi
-    yarn run crowdin-download
+    if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
+      yarn crowdin-download
+    fi
 
     workaround_crowdin_problem_by_copying_files
   else
@@ -103,13 +105,17 @@ if [ -n "$NEXT" ]; then
   if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
     yarn run crowdin-upload
   fi
-  yarn crowdin-download
+  if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
+    yarn crowdin-download
+    echo 'all' > scripts/.language
+  else
+    echo 'en' > scripts/.language
+  fi
 
   node scripts/replace.js
   node scripts/split-swagger-by-version.js
   # Because there are too many versions of the document, the memory overflows during the full build.
   # The split-version-build script is used to build in different versions, and finally the build results are merged.
-  echo "all params: "$@
   bash scripts/split-version-build.sh $@
 else
   crowdin
