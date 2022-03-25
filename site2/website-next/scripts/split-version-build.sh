@@ -43,7 +43,7 @@ done <scripts/.versions
 
 echo "latest version begin build..."
 echo "[\"${latest}\"]" >versions.json
-yarn build
+_build
 echo "latest version build done..."
 
 while read version; do
