@@ -107,6 +107,9 @@ if [ -n "$NEXT" ]; then
   fi
   if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
     yarn crowdin-download
+    echo 'all' > scripts/.language
+  else
+    echo 'en' > scripts/.language
   fi
 
   node scripts/replace.js
