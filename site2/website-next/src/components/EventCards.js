@@ -22,7 +22,7 @@ export default function EventCards(props) {
         <h3 className="mb-2 relative z-5"><a target="_blank" href={link}>{ title }</a></h3>
         {displayDate && <h5 className="mb-4 relative z-5">{ displayDate }</h5>}
         {description && <p>{ description} </p>}
-        <a className="mt-6" href={link} className="secondary-cta secondary-cta--small" target="_blank">Learn More</a>
+        <a href={link} className="mt-6 secondary-cta secondary-cta--small" target="_blank">Learn More</a>
       </div>
     );
   }
