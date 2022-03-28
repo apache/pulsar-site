@@ -12,10 +12,10 @@ let fileList = fs.readFileSync(
   path.join(dir, "/site2/website-next/other-component.json"),
   "utf-8"
 );
-let allMd = fs.readFileSync(
-  path.join(dir, "/site2/website-next/release-notes/all.md")
+let allPageMd = fs.readFileSync(
+  path.join(dir, "/site2/website-next/release-notes/all.md"),
+  "utf8"
 );
-let allPageMd = Buffer.from(allMd, "base64").toString();
 let fileListJson = JSON.parse(fileList);
 
 let origin = "https://api.github.com/repos";
@@ -66,7 +66,7 @@ fileListJson.forEach((element) => {
 
     let categoryGroup = _.groupBy(repoContet, "type");
     for (let [key, value] of Object.entries(categoryGroup)) {
-      allPageMd += `### ${key === "Node" ? "NodeJs" : key}\n`;
+      allPageMd += `\n### ${key === "Node" ? "NodeJs" : key}\n`;
       let bigVersionGroup = _.groupBy(value, "bigVersion");
 
       for (let [bigVersionKey, bigVersionVal] of Object.entries(
@@ -163,7 +163,7 @@ ${content.replace(/# 0/, " ")}
   let bigVersionGroup = _.groupBy(versionObject, "bigVersion");
 
   for (let [key, value] of Object.entries(bigVersionGroup)) {
-    allPageMd += `#### ${key}\n`;
+    allPageMd += `\n#### ${key}\n`;
     let versionGroup = _.groupBy(value, "version");
     for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
       allPageMd += `[${versionKey}](/release-notes/docs/pulsar-cs-${versionVal[0].version})&ensp;&ensp;\n`;
