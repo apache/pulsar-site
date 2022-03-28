@@ -1,5 +1,5 @@
 ---
-id: pulsar-c#-2.1.0
+id: pulsar-cs-2.1.0
 title: Pulsar DotPulsar
 sidebar_label: Pulsar DotPulsar
 ---
