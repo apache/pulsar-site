@@ -2,16 +2,21 @@ const fs = require("fs");
 const request = require('sync-request');
 const md2json = require('md-2-json');
 const _ = require("lodash");
+const path = require("path");
 const token = process.env.TOKEN
 
-let fileList = fs.readFileSync('../other-component.json', 'utf-8');
-let allMd = fs.readFileSync('../release-notes/all.md')
+const args = process.argv.slice(2);
+const dir = args[0];
+
+let fileList = fs.readFileSync(
+  path.join(dir, "/site2/website-next/other-component.json"), 
+  'utf-8'
+);
+let allMd = fs.readFileSync(path.join(dir, "/site2/website-next/release-notes/all.md"))
 let allPageMd = Buffer.from(allMd, 'base64').toString()
 let fileListJson = JSON.parse(fileList)
 
-
 let origin = 'https://api.github.com/repos'
-let outDir = './release-other'
 
 fileListJson.forEach(element => {
   let repo = new Object()
@@ -19,22 +24,10 @@ fileListJson.forEach(element => {
   let fileName = element.split('/')[2]
 
   if (element == '/apache/pulsar-dotpulsar') {
-    // repo = getRequest(origin + element + '/contents')
-    // repoContet = JSON.parse(repo.getBody('utf-8'))
-    // // let content = Buffer.from(repoContet.content, 'base64').toString();
-    
-    // let value = {
-    //   client: fileName,
-    //   version: '',
-    //   body: Buffer.from(repoContet.content, 'base64').toString()
-    // }
-    // let content = generateMdByContent(value)
-    // fs.writeFileSync(outDir + '/' + value.client + '.md', content)
     let url = origin + element
     getDotPulsarMd(url)
   } else {
     repo = getRequest(origin + element + '/releases')
-    // repo = ''
     repoContet = JSON.parse(repo.getBody('utf-8'))
 
     let typeList = fileName.split('-')
@@ -54,18 +47,21 @@ fileListJson.forEach(element => {
       let content = generateMdByContent(value)
 
 
-      fs.writeFileSync('../release-notes/docs/' + value.client + '-' + value.version + '.md', content)
+      fs.writeFileSync(
+        path.join(dir, ),
+        '/site2/website-next/release-notes/docs/' + value.client + '-' + value.version + '.md', 
+        content
+      )
       
     });
 
     let categoryGroup = _.groupBy(repoContet, 'type')
     for (let [key, value] of Object.entries(categoryGroup)) {
       
-      allPageMd += `### ${key}\n`;
+      allPageMd += `### ${key === 'Node' ? 'NodeJs' : key}\n`;
       let bigVersionGroup = _.groupBy(value, 'bigVersion')
       
       for (let [bigVersionKey, bigVersionVal] of Object.entries(bigVersionGroup)) {
-        console.log(bigVersionKey, bigVersionVal)
         allPageMd += `#### ${bigVersionKey}\n`;
         let versionGroup = _.groupBy(bigVersionVal, "tag_name");
         for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
@@ -81,7 +77,10 @@ fileListJson.forEach(element => {
 })
 
 fs.writeFileSync(
-  '../release-notes/all.md',
+  path.join(
+    dir, 
+    '/site2/website-next/release-notes/all.md'
+  ),
   allPageMd,
   "utf8"
 );
@@ -118,15 +117,11 @@ function getRequest(url) {
 
 function getDotPulsarMd(url) {
   let contents = getRequest(url + '/contents/CHANGELOG.md').getBody('utf-8')
-  // let contents = ''
   let contentsBody = JSON.parse(contents)
   let changeLog = Buffer.from(contentsBody.content, 'base64').toString()
   let changeLogJson = md2json.parse(changeLog)
   let versionObject = []
   
-
-  // console.log(Object.entries(changeLogJson['Changelog']))
-
 
   for (let [key, value] of Object.entries(changeLogJson['Changelog'])) {
     if (key.includes('[')) {
@@ -143,15 +138,19 @@ sidebar_label: Pulsar DotPulsar
 ---
 ${content.replace(/# 0/, ' ')}
 `
-      // fs.writeFileSync('../release-notes/docs/' + 'pulsar-c#-' + version + '.md', temp)
+      fs.writeFileSync(
+        path.join(
+          dir, 
+          '/site2/website-next/release-notes/docs/pulsar-c#-',
+          version + '.md'
+        ),
+        temp
+      )
       
       versionObject.push({
         bigVersion: bigVersion,
         version: version
       })
-
-      
-      
       
     }
 
@@ -160,13 +159,12 @@ ${content.replace(/# 0/, ' ')}
   allPageMd += `### C#\n`;
 
   let bigVersionGroup = _.groupBy(versionObject, 'bigVersion')
-  
-  for( let i in Object.entries(bigVersionGroup) ) {
-    
-    allPageMd += `### ${key}\n`;
+
+  for( let [key, value] of Object.entries(bigVersionGroup) ) {
+    allPageMd += `#### ${key}\n`;
     let versionGroup = _.groupBy(value, 'version')
-    for (let [versionKey, versionVal] in Object.entries(versionGroup)) {
-      allPageMd += `[${versionKey}](/release-notes/docs/${versionVal[0].fileName.toLowerCase()}-${versionKey.slice(1)})&ensp;&ensp;`;
+    for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
+      allPageMd += `[${versionKey}](/release-notes/docs/pulsar-c#-${versionVal[0].version})&ensp;&ensp;\n`;
     }
     
   }
