@@ -76,6 +76,7 @@ slug: /
 [v0.2.0](/release-notes/docs/pulsar-client-go-0.2.0)&ensp;&ensp;  
 #### 0.1.x
 [v0.1.1](/release-notes/docs/pulsar-client-go-0.1.1)&ensp;&ensp;[v0.1.0](/release-notes/docs/pulsar-client-go-0.1.0)&ensp;&ensp;  
+
 ### NodeJs
 #### 1.6.x
 [v1.6.2](/release-notes/docs/pulsar-client-node-1.6.2)&ensp;&ensp;  
@@ -92,28 +93,37 @@ slug: /
 #### 1.0.x
 [v1.0.0](/release-notes/docs/pulsar-client-node-1.0.0)&ensp;&ensp;  
 ### C#
+
 #### 2.3.x
-[2.3.0](/release-notes/docs/pulsar-c#-2.3.0)&ensp;&ensp;
+[2.3.0](/release-notes/docs/pulsar-cs-2.3.0)&ensp;&ensp;
+
 #### 2.2.x
-[2.2.0](/release-notes/docs/pulsar-c#-2.2.0)&ensp;&ensp;
+[2.2.0](/release-notes/docs/pulsar-cs-2.2.0)&ensp;&ensp;
+
 #### 2.1.x
-[2.1.0](/release-notes/docs/pulsar-c#-2.1.0)&ensp;&ensp;
+[2.1.0](/release-notes/docs/pulsar-cs-2.1.0)&ensp;&ensp;
+
 #### 2.0.x
-[2.0.1](/release-notes/docs/pulsar-c#-2.0.1)&ensp;&ensp;
-[2.0.0](/release-notes/docs/pulsar-c#-2.0.0)&ensp;&ensp;
+[2.0.1](/release-notes/docs/pulsar-cs-2.0.1)&ensp;&ensp;
+[2.0.0](/release-notes/docs/pulsar-cs-2.0.0)&ensp;&ensp;
+
 #### 1.1.x
-[1.1.2](/release-notes/docs/pulsar-c#-1.1.2)&ensp;&ensp;
-[1.1.1](/release-notes/docs/pulsar-c#-1.1.1)&ensp;&ensp;
-[1.1.0](/release-notes/docs/pulsar-c#-1.1.0)&ensp;&ensp;
+[1.1.2](/release-notes/docs/pulsar-cs-1.1.2)&ensp;&ensp;
+[1.1.1](/release-notes/docs/pulsar-cs-1.1.1)&ensp;&ensp;
+[1.1.0](/release-notes/docs/pulsar-cs-1.1.0)&ensp;&ensp;
+
 #### 1.0.x
-[1.0.2](/release-notes/docs/pulsar-c#-1.0.2)&ensp;&ensp;
-[1.0.1](/release-notes/docs/pulsar-c#-1.0.1)&ensp;&ensp;
-[1.0.0](/release-notes/docs/pulsar-c#-1.0.0)&ensp;&ensp;
+[1.0.2](/release-notes/docs/pulsar-cs-1.0.2)&ensp;&ensp;
+[1.0.1](/release-notes/docs/pulsar-cs-1.0.1)&ensp;&ensp;
+[1.0.0](/release-notes/docs/pulsar-cs-1.0.0)&ensp;&ensp;
+
 #### 0.11.x
-[0.11.0](/release-notes/docs/pulsar-c#-0.11.0)&ensp;&ensp;
+[0.11.0](/release-notes/docs/pulsar-cs-0.11.0)&ensp;&ensp;
+
 #### 0.10.x
-[0.10.1](/release-notes/docs/pulsar-c#-0.10.1)&ensp;&ensp;
-[0.10.0](/release-notes/docs/pulsar-c#-0.10.0)&ensp;&ensp;
+[0.10.1](/release-notes/docs/pulsar-cs-0.10.1)&ensp;&ensp;
+[0.10.0](/release-notes/docs/pulsar-cs-0.10.0)&ensp;&ensp;
+
 #### 0.9.x
-[0.9.7](/release-notes/docs/pulsar-c#-0.9.7)&ensp;&ensp;
-[0.9.6](/release-notes/docs/pulsar-c#-0.9.6)&ensp;&ensp;
+[0.9.7](/release-notes/docs/pulsar-cs-0.9.7)&ensp;&ensp;
+[0.9.6](/release-notes/docs/pulsar-cs-0.9.6)&ensp;&ensp;
