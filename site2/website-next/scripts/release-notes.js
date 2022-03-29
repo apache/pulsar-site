@@ -15,6 +15,14 @@ let allList = [];
 
 const args = process.argv.slice(2);
 const dir = args[0];
+let VERSION = null;
+let COMPONENT = null;
+if (args.length > 1) {
+  COMPONENT = args[1];
+}
+if (args.length > 2) {
+  VERSION = args[2];
+}
 
 function generateMdByVersion(version) {
   const src = path.join(
@@ -65,6 +73,9 @@ function generateMdByVersion(version) {
   let group = _.groupBy(list, "category");
 
   for (let [category, prs] of Object.entries(group)) {
+    if (COMPONENT && category != COMPONENT) {
+      continue;
+    }
     let result = `---
 id: ${category.toLowerCase()}-${version}
 title: ${_.startCase(
@@ -94,38 +105,48 @@ sidebar_label: ${_.startCase(
       result,
       "utf8"
     );
+    console.log(
+      path.join(dest, category.toLowerCase() + "-" + version + ".md")
+    );
   }
 }
 
-for (let version of versions) {
-  generateMdByVersion(version);
-}
-
-let topGroup = _.groupBy(allList, "top");
-for (let [topKey, topVal] of Object.entries(topGroup)) {
-  console.log(topKey);
-  allPageMd += `## ${_.startCase(topKey)} Release Notes\n`;
-  let categoryGroup = _.groupBy(topVal, "category");
-  for (let [categoryKey, categoryVal] of Object.entries(categoryGroup)) {
-    if (categoryKey.toLowerCase() != "pulsar") {
-      allPageMd += `### ${_.startCase(categoryKey.replace("client-", ""))}\n`;
-    }
-    let bigVersionGroup = _.groupBy(categoryVal, "bigVersion");
-    for (let [bigVersionKey, bigVersionVal] of Object.entries(
-      bigVersionGroup
-    )) {
-      allPageMd += `#### ${bigVersionKey}\n`;
-      let versionGroup = _.groupBy(bigVersionVal, "version");
-      for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
-        allPageMd += `[${versionKey}](/release-notes/docs/${categoryKey.toLowerCase()}-${versionKey})&ensp;&ensp;`;
+function generateAll() {
+  let topGroup = _.groupBy(allList, "top");
+  for (let [topKey, topVal] of Object.entries(topGroup)) {
+    allPageMd += `## ${_.startCase(topKey)} Release Notes\n`;
+    let categoryGroup = _.groupBy(topVal, "category");
+    for (let [categoryKey, categoryVal] of Object.entries(categoryGroup)) {
+      if (categoryKey.toLowerCase() != "pulsar") {
+        allPageMd += `### ${_.startCase(categoryKey.replace("client-", ""))}\n`;
       }
-      allPageMd += `  \n`;
+      let bigVersionGroup = _.groupBy(categoryVal, "bigVersion");
+      for (let [bigVersionKey, bigVersionVal] of Object.entries(
+        bigVersionGroup
+      )) {
+        allPageMd += `#### ${bigVersionKey}\n`;
+        let versionGroup = _.groupBy(bigVersionVal, "version");
+        for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
+          allPageMd += `[${versionKey}](/release-notes/docs/${categoryKey.toLowerCase()}-${versionKey})&ensp;&ensp;`;
+        }
+        allPageMd += `  \n`;
+      }
     }
   }
+
+  fs.writeFileSync(
+    path.join(dir, "/site2/website-next/release-notes", "all.md"),
+    allPageMd,
+    "utf8"
+  );
 }
 
-fs.writeFileSync(
-  path.join(dir, "/site2/website-next/release-notes", "all.md"),
-  allPageMd,
-  "utf8"
-);
+if (VERSION) {
+  generateMdByVersion(VERSION);
+} else {
+  for (let version of versions) {
+    generateMdByVersion(version);
+  }
+  //Only if the version is not specified, please modify all.md manually if the version is specified to avoid overwriting the contents of other versions
+  generateAll();
+}
