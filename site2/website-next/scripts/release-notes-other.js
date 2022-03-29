@@ -5,8 +5,21 @@ const _ = require("lodash");
 const path = require("path");
 const token = process.env.TOKEN;
 
+const COMP_MAP = {
+  "client-c#": "pulsar-dotpulsar",
+};
+
 const args = process.argv.slice(2);
 const dir = args[0];
+let VERSION = null;
+let COMPONENT = null;
+if (args.length > 1) {
+  COMPONENT = args[1];
+  COMPONENT = COMP_MAP[COMPONENT] || COMPONENT;
+}
+if (args.length > 2) {
+  VERSION = args[2];
+}
 
 let fileList = fs.readFileSync(
   path.join(dir, "/site2/website-next/other-component.json"),
@@ -20,7 +33,10 @@ let fileListJson = JSON.parse(fileList);
 
 let origin = "https://api.github.com/repos";
 
-fileListJson.forEach((element) => {
+for (let element of fileListJson) {
+  if (COMPONENT && element.indexOf(COMPONENT) < 0) {
+    continue;
+  }
   let repo = new Object();
   let repoContet = new Object();
   let fileName = element.split("/")[2];
@@ -38,7 +54,7 @@ fileListJson.forEach((element) => {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
-    repoContet.forEach((ele) => {
+    for (let ele of repoContet) {
       ele.fileName = fileName;
       ele.type = type;
       ele.bigVersion =
@@ -49,20 +65,22 @@ fileListJson.forEach((element) => {
         version: ele.tag_name.slice(1),
         body: ele.body,
       };
+      if (VERSION && value.version != VERSION) {
+        continue;
+      }
       let content = generateMdByContent(value);
 
-      fs.writeFileSync(
-        path.join(
-          dir,
-          "/site2/website-next/release-notes/docs/" +
-            value.client +
-            "-" +
-            value.version +
-            ".md"
-        ),
-        content
+      let _path = path.join(
+        dir,
+        "/site2/website-next/release-notes/docs/" +
+          value.client +
+          "-" +
+          value.version +
+          ".md"
       );
-    });
+      fs.writeFileSync(_path, content);
+      console.log(_path);
+    }
 
     let categoryGroup = _.groupBy(repoContet, "type");
     for (let [key, value] of Object.entries(categoryGroup)) {
@@ -83,13 +101,16 @@ fileListJson.forEach((element) => {
       }
     }
   }
-});
+}
 
-fs.writeFileSync(
-  path.join(dir, "/site2/website-next/release-notes/all.md"),
-  allPageMd,
-  "utf8"
-);
+if (!VERSION) {
+  //Only if the version is not specified, please modify all.md manually if the version is specified to avoid overwriting the contents of other versions
+  fs.writeFileSync(
+    path.join(dir, "/site2/website-next/release-notes/all.md"),
+    allPageMd,
+    "utf8"
+  );
+}
 
 function generateMdByContent(value) {
   let clientName = value.client
@@ -133,6 +154,9 @@ function getDotPulsarMd(url) {
     if (key.includes("[")) {
       let strEnd = key.search("]");
       let version = key.slice(1, strEnd);
+      if (VERSION && version != VERSION) {
+        continue;
+      }
       let bigVersion = version.slice(0, version.lastIndexOf(".")) + ".x";
 
       let content = md2json.toMd([value]);
@@ -143,13 +167,12 @@ sidebar_label: Pulsar DotPulsar
 ---
 ${content.replace(/# 0/, " ")}
 `;
-      fs.writeFileSync(
-        path.join(
-          dir,
-          "/site2/website-next/release-notes/docs/pulsar-cs-" + version + ".md"
-        ),
-        temp
+      const _path = path.join(
+        dir,
+        "/site2/website-next/release-notes/docs/pulsar-cs-" + version + ".md"
       );
+      fs.writeFileSync(_path, temp);
+      console.log(_path);
 
       versionObject.push({
         bigVersion: bigVersion,
