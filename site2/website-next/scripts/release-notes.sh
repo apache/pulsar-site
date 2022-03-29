@@ -47,14 +47,14 @@ function _ghFromPulsar() {
 }
 
 if [ ! $COMPONENT ]; then
-    # _ghFromPulsar
+    _ghFromPulsar
     node $ROOT_DIR/site2/website-next/scripts/release-notes.js $ROOT_DIR
     node $ROOT_DIR/site2/website-next/scripts/release-notes-other.js $ROOT_DIR
 else
     if [[ "${OTHER[@]}" =~ "${COMPONENT}" ]]; then
         node $ROOT_DIR/site2/website-next/scripts/release-notes-other.js $ROOT_DIR $COMPONENT $VERSION
     else
-        # _ghFromPulsar
+        _ghFromPulsar
         node $ROOT_DIR/site2/website-next/scripts/release-notes.js $ROOT_DIR $COMPONENT $VERSION
     fi
 fi
