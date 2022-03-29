@@ -118,7 +118,15 @@ function generateAll() {
     let categoryGroup = _.groupBy(topVal, "category");
     for (let [categoryKey, categoryVal] of Object.entries(categoryGroup)) {
       if (categoryKey.toLowerCase() != "pulsar") {
-        allPageMd += `### ${_.startCase(categoryKey.replace("client-", ""))}\n`;
+        if (categoryKey.toLocaleLowerCase() == "client-cpp") {
+          allPageMd += `### C++\n`;
+        } else if (categoryKey.toLocaleLowerCase() == "client-websocket") {
+          allPageMd += `### WebSocket++\n`;
+        } else {
+          allPageMd += `### ${_.startCase(
+            categoryKey.replace("client-", "")
+          )}\n`;
+        }
       }
       let bigVersionGroup = _.groupBy(categoryVal, "bigVersion");
       for (let [bigVersionKey, bigVersionVal] of Object.entries(
