@@ -23,6 +23,34 @@ export default function Community(props) {
         });
       }
     }
+    const first = document.getElementById('slider').firstChild;
+    const slides = document.querySelectorAll('.slide-image');
+    const slideCount = slides.length;
+    const intervalTime = 4000;
+    let interval;
+    let counter = 0;
+    function cycleSlides(){
+      var active = document.querySelector('.active-slide');
+        active.classList.remove('active-slide');
+        if (counter === (slideCount - 1)){
+          slides[0].classList.add('active-slide');
+          counter = 0;
+        } else {
+          var next = counter++;
+          slides[next].nextElementSibling.classList.add('active-slide');
+          counter + 1;
+        }
+    }
+    var slideInterval = function(){
+      interval = setInterval(function(){
+        cycleSlides();
+      }, intervalTime);
+    };
+    slideInterval();
+    // cleanup required or interval will continue to run, even on other pages
+    return function cleanup() {
+      clearInterval(interval);
+    };
   });
 
   return (
@@ -54,7 +82,14 @@ export default function Community(props) {
                   
                 </div>
                 <div className="image-bg-container p-8 md:w-1/2">
-                  <img className="" src={useBaseUrl('/img/community-photo-small.jpg')} />
+                  <div id="slider" className="relative">
+                    {/* 
+                      NOTE: The first image must have a class of "active-slide". Add as many images as desired
+                    */}
+                    <img className="slide-image active-slide" src={useBaseUrl('/img/community-photo-small.jpg')} alt="pulsar community photo" />
+                    <img className="slide-image" src={useBaseUrl('/img/community-image-2.jpg')} alt="pulsar community photo" />
+                    <img className="slide-image" src={useBaseUrl('/img/community-image-3.jpg')} alt="pulsar community photo" />
+                  </div>
                 </div>
               </div>
               <div className="cf py-12 flex flex-col sm:flex-row">
