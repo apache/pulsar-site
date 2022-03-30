@@ -106,6 +106,14 @@ module.exports = {
   i18n: {
     defaultLocale: "en",
     locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
+    localeConfigs: {
+      'zh-CN': {
+        label: '简体中文',
+      },
+      'zh-TW': {
+        label: '繁体中文',
+      },
+    },
   },
   themeConfig: {
     colorMode: {
@@ -347,7 +355,7 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubUrl}/edit/master/site2/website-next`,
+          editUrl: `${githubUrl}/edit/master/site2/docs`,
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
