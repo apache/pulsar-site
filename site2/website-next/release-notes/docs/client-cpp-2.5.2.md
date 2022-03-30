@@ -4,8 +4,8 @@ title: Client CPP 2.5.2
 sidebar_label: Client CPP 2.5.2 
 ---
 
-[C++] Fix message id error if messages were sent to a partitioned topic #6938  
-[C++] Fix message id is always the default value in send callback #6812  
-[C++] Subscription InitialPosition is not correctly set on regex consumers #6810  
-[C++] Auto update topic partitions #6732  
+[C++] Fix message id error if messages were sent to a partitioned topic [#6938](https://github.com/apache/pulsar/pull/6938)  
+[C++] Fix message id is always the default value in send callback [#6812](https://github.com/apache/pulsar/pull/6812)  
+[C++] Subscription InitialPosition is not correctly set on regex consumers [#6810](https://github.com/apache/pulsar/pull/6810)  
+[C++] Auto update topic partitions [#6732](https://github.com/apache/pulsar/pull/6732)  
 

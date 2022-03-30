@@ -4,18 +4,18 @@ title: Client CPP 2.8.2
 sidebar_label: Client CPP 2.8.2 
 ---
 
-[C++]Fix libcurl miss auth header when broker return 307 #13112  
-[c++] Define and expose PULSAR_VERSION macro #12769  
-[C++] Fix request timeout for GetLastMessageId doesn't work #12586  
-[C++] Fixed connection read error logging #12492  
-Fix frequent segmentation fault of Python tests by refactoring ExecutorService #12427  
-[C++] Use weak ref to ClientConnection for timeout task #12409  
-[C++] Delay ClientCredentialFlow::initialize to the first authenticate call #12372  
-[C++] Use URL encoded content type for OAuth 2.0 authentication #12341  
-[C++] Handle OAuth 2.0 exceptional cases gracefully #12335  
-[C++] Support configuring optional scope field for OAuth2 authentication #12305  
-Remove python3 from vcpkg.json #12092  
-[C++] Fixed attempting to connect to multiple IP addresses #11958  
-[C++] Handle error when shutting down client after forks #11954  
-[C++] Move all C symbols into C++ pulsar namespace #11919  
+[C++]Fix libcurl miss auth header when broker return 307 [#13112](https://github.com/apache/pulsar/pull/13112)  
+[c++] Define and expose PULSAR_VERSION macro [#12769](https://github.com/apache/pulsar/pull/12769)  
+[C++] Fix request timeout for GetLastMessageId doesn't work [#12586](https://github.com/apache/pulsar/pull/12586)  
+[C++] Fixed connection read error logging [#12492](https://github.com/apache/pulsar/pull/12492)  
+Fix frequent segmentation fault of Python tests by refactoring ExecutorService [#12427](https://github.com/apache/pulsar/pull/12427)  
+[C++] Use weak ref to ClientConnection for timeout task [#12409](https://github.com/apache/pulsar/pull/12409)  
+[C++] Delay ClientCredentialFlow::initialize to the first authenticate call [#12372](https://github.com/apache/pulsar/pull/12372)  
+[C++] Use URL encoded content type for OAuth 2.0 authentication [#12341](https://github.com/apache/pulsar/pull/12341)  
+[C++] Handle OAuth 2.0 exceptional cases gracefully [#12335](https://github.com/apache/pulsar/pull/12335)  
+[C++] Support configuring optional scope field for OAuth2 authentication [#12305](https://github.com/apache/pulsar/pull/12305)  
+Remove python3 from vcpkg.json [#12092](https://github.com/apache/pulsar/pull/12092)  
+[C++] Fixed attempting to connect to multiple IP addresses [#11958](https://github.com/apache/pulsar/pull/11958)  
+[C++] Handle error when shutting down client after forks [#11954](https://github.com/apache/pulsar/pull/11954)  
+[C++] Move all C symbols into C++ pulsar namespace [#11919](https://github.com/apache/pulsar/pull/11919)  
 

@@ -95,7 +95,14 @@ sidebar_label: ${_.startCase(
       }
       result += _prs
         .map((pr) => {
-          return pr.title + " #" + pr.number + "  ";
+          return (
+            pr.title +
+            " [#" +
+            pr.number +
+            "](https://github.com/apache/pulsar/pull/" +
+            pr.number +
+            ")  "
+          );
         })
         .join("\n");
       result += "\n\n";

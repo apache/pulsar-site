@@ -50,7 +50,7 @@ slug: /
 [2.6.2](/release-notes/docs/client-cpp-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/docs/client-cpp-2.6.1)&ensp;&ensp;  
 #### 2.5.x
 [2.5.2](/release-notes/docs/client-cpp-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/docs/client-cpp-2.5.1)&ensp;&ensp;  
-### WebSocket
+### WebSocket++
 #### 2.8.x
 [2.8.2](/release-notes/docs/client-websocket-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/client-websocket-2.8.1)&ensp;&ensp;  
 #### 2.7.x
@@ -59,6 +59,7 @@ slug: /
 [2.6.3](/release-notes/docs/client-websocket-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/docs/client-websocket-2.6.2)&ensp;&ensp;  
 #### 2.5.x
 [2.5.1](/release-notes/docs/client-websocket-2.5.1)&ensp;&ensp;  
+
 ### Go
 #### 0.8.x
 [v0.8.1](/release-notes/docs/pulsar-client-go-0.8.1)&ensp;&ensp;[v0.8.0](/release-notes/docs/pulsar-client-go-0.8.0)&ensp;&ensp;  

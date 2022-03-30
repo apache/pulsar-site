@@ -5,47 +5,47 @@ sidebar_label: Apache Pulsar 2.6.3
 ---
 
 ## security
-[Authentication] Support chained authentication with same auth method name #9094  
-[docs] Add config info in security jwt #8482  
+[Authentication] Support chained authentication with same auth method name [#9094](https://github.com/apache/pulsar/pull/9094)  
+[docs] Add config info in security jwt [#8482](https://github.com/apache/pulsar/pull/8482)  
 
 ## proxy
-Fix Proxy Config bindAddress does not working for servicePort  #9068  
-Support enable WebSocket on Pulsar Proxy. #8613  
-[Pulsar Proxy] Add error log for pulsar proxy starter #8451  
-[Pulsar-Proxy] Fix request.getContentLength() to return 0 if it is less than 0 #8448  
+Fix Proxy Config bindAddress does not working for servicePort  [#9068](https://github.com/apache/pulsar/pull/9068)  
+Support enable WebSocket on Pulsar Proxy. [#8613](https://github.com/apache/pulsar/pull/8613)  
+[Pulsar Proxy] Add error log for pulsar proxy starter [#8451](https://github.com/apache/pulsar/pull/8451)  
+[Pulsar-Proxy] Fix request.getContentLength() to return 0 if it is less than 0 [#8448](https://github.com/apache/pulsar/pull/8448)  
 
 ## connector
-[connector]fix debezium-connector error log #9063  
-Pulsar IO: Make Source topic Schema information available to downstream Sinks #8854  
+[connector]fix debezium-connector error log [#9063](https://github.com/apache/pulsar/pull/9063)  
+Pulsar IO: Make Source topic Schema information available to downstream Sinks [#8854](https://github.com/apache/pulsar/pull/8854)  
 
 ## storm
-[ISSUE] DOCS-8994 fix the links of examples #9062  
+[ISSUE] DOCS-8994 fix the links of examples [#9062](https://github.com/apache/pulsar/pull/9062)  
 
 ## build
-[docs] Generate the whole doc set for 2.6.3 release #9027  
+[docs] Generate the whole doc set for 2.6.3 release [#9027](https://github.com/apache/pulsar/pull/9027)  
 
 ## broker
-Improve error handling when broker doesn't trust client certificates #8998  
-Intercept beforeSendMessage calls #8932  
-[pulsar-broker] capture stats with precise backlog #8928  
-[Issue 8783][pulsar-broker] Execute removing non-persistent subscription of topic from different thread to avoid deadlock when removing inactive subscriptions #8820  
-[broker] Close topics that remain fenced forcefully #8561  
-[pulsar-broker] Refresh ZooKeeper-data cache in background to avoid d… #8304  
-[pulsar-broker] fix: use correct configuration for zk-cache expire time #8302  
+Improve error handling when broker doesn't trust client certificates [#8998](https://github.com/apache/pulsar/pull/8998)  
+Intercept beforeSendMessage calls [#8932](https://github.com/apache/pulsar/pull/8932)  
+[pulsar-broker] capture stats with precise backlog [#8928](https://github.com/apache/pulsar/pull/8928)  
+[Issue 8783][pulsar-broker] Execute removing non-persistent subscription of topic from different thread to avoid deadlock when removing inactive subscriptions [#8820](https://github.com/apache/pulsar/pull/8820)  
+[broker] Close topics that remain fenced forcefully [#8561](https://github.com/apache/pulsar/pull/8561)  
+[pulsar-broker] Refresh ZooKeeper-data cache in background to avoid d… [#8304](https://github.com/apache/pulsar/pull/8304)  
+[pulsar-broker] fix: use correct configuration for zk-cache expire time [#8302](https://github.com/apache/pulsar/pull/8302)  
 
 ## stats
-remove duplicated broker prometheus metrics type #8995  
-Monitor if a cursor moves its mark-delete position #8930  
-Export Prometheus metric for messageTTL #8871  
+remove duplicated broker prometheus metrics type [#8995](https://github.com/apache/pulsar/pull/8995)  
+Monitor if a cursor moves its mark-delete position [#8930](https://github.com/apache/pulsar/pull/8930)  
+Export Prometheus metric for messageTTL [#8871](https://github.com/apache/pulsar/pull/8871)  
 
-## go
-Fix single-quotes added to user-conf #8780  
-[Issue #8268][Pulsar Function] k8s runtime with go functions support #8352  
-[component/functions|component/go] Propagate user-config parameter into instances of Golang pulsar functions #8132  
+## function
+Fix single-quotes added to user-conf [#8780](https://github.com/apache/pulsar/pull/8780)  
+[Issue #8268][Pulsar Function] k8s runtime with go functions support [#8352](https://github.com/apache/pulsar/pull/8352)  
+[component/functions|component/go] Propagate user-config parameter into instances of Golang pulsar functions [#8132](https://github.com/apache/pulsar/pull/8132)  
 
 ## tieredstorage
-[Tiered Storage] Offload manager initialization once #8739  
+[Tiered Storage] Offload manager initialization once [#8739](https://github.com/apache/pulsar/pull/8739)  
 
 ## admin
-Issue 8677: Cannot get lastMessageId for an empty topic due to message retention #8725  
+Issue 8677: Cannot get lastMessageId for an empty topic due to message retention [#8725](https://github.com/apache/pulsar/pull/8725)  
 
