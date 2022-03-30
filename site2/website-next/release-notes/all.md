@@ -16,7 +16,18 @@ slug: /
 [2.6.4](/release-notes/docs/pulsar-2.6.4)&ensp;&ensp;[2.6.3](/release-notes/docs/pulsar-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/docs/pulsar-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/docs/pulsar-2.6.1)&ensp;&ensp;  
 #### 2.5.x
 [2.5.2](/release-notes/docs/pulsar-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/docs/pulsar-2.5.1)&ensp;&ensp;  
+
+#### Previous versions
+
+All release notes of previous versions are available at [here]().
+
 ## Client Release Notes
+
+> **Tip**
+> 
+> The code repos of **Java, C++, Python, and WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar) and these clients are released with Pulsar. Their release notes of previous versions are parts of Pulsar release notes. You can check them out at [here]().
+> 
+> The code repos of **Go, Node.js, and C#** clients are hosted outside of the Pulsar main repo and these clients are not released with Pulsar. They have independent release notes in their repos and all of them are synced to this page.
 ### Java
 #### 2.9.x
 [2.9.1](/release-notes/docs/client-java-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/docs/client-java-2.9.0)&ensp;&ensp;  
@@ -50,7 +61,9 @@ slug: /
 [2.6.2](/release-notes/docs/client-cpp-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/docs/client-cpp-2.6.1)&ensp;&ensp;  
 #### 2.5.x
 [2.5.2](/release-notes/docs/client-cpp-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/docs/client-cpp-2.5.1)&ensp;&ensp;  
-### WebSocket++
+
+
+### WebSocket
 #### 2.8.x
 [2.8.2](/release-notes/docs/client-websocket-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/client-websocket-2.8.1)&ensp;&ensp;  
 #### 2.7.x
