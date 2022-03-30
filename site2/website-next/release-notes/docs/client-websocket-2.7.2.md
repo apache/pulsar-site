@@ -4,5 +4,5 @@ title: Client Websocket 2.7.2
 sidebar_label: Client Websocket 2.7.2 
 ---
 
-[WebSocket Client] Make the browser client support the token authentication #9886  
+[WebSocket Client] Make the browser client support the token authentication [#9886](https://github.com/apache/pulsar/pull/9886)  
 

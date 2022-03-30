@@ -4,5 +4,5 @@ title: Client Websocket 2.8.2
 sidebar_label: Client Websocket 2.8.2 
 ---
 
-Add debug log for WebSocket. #12458  
+Add debug log for WebSocket. [#12458](https://github.com/apache/pulsar/pull/12458)  
 

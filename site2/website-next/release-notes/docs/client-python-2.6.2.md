@@ -4,7 +4,7 @@ title: Client Python 2.6.2
 sidebar_label: Client Python 2.6.2 
 ---
 
-[Issue 7050][python] Limit enum34 installation via environment markers #8213  
-add python schema field default value #8122  
-Remove python2 from the pulsar images build #7936  
+[Issue 7050][python] Limit enum34 installation via environment markers [#8213](https://github.com/apache/pulsar/pull/8213)  
+add python schema field default value [#8122](https://github.com/apache/pulsar/pull/8122)  
+Remove python2 from the pulsar images build [#7936](https://github.com/apache/pulsar/pull/7936)  
 
