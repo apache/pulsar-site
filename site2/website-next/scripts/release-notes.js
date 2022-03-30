@@ -128,7 +128,7 @@ function generateAll() {
         if (categoryKey.toLocaleLowerCase() == "client-cpp") {
           allPageMd += `### C++\n`;
         } else if (categoryKey.toLocaleLowerCase() == "client-websocket") {
-          allPageMd += `### WebSocket++\n`;
+          allPageMd += `### WebSocket\n`;
         } else {
           allPageMd += `### ${_.startCase(
             categoryKey.replace("client-", "")
