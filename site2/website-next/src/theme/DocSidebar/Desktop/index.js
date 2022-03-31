@@ -11,7 +11,7 @@ import Logo from "@theme/Logo";
 import CollapseButton from "@theme/DocSidebar/Desktop/CollapseButton";
 import Content from "@theme/DocSidebar/Desktop/Content";
 import styles from "./styles.module.css";
-import DocsVersionDropdownNavbarItem from "@theme/NavbarItem/DocsVersionDropdownNavbarItem";
+import DocsVersionDropdownNavbarItem from "../../DocsVersionDropdownNavbarItem";
 
 function DocSidebarDesktop({
   path,

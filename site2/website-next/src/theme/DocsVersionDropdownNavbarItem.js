@@ -4,16 +4,27 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import DefaultNavbarItem from '@theme/NavbarItem/DefaultNavbarItem';
-import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
+import React, { version } from "react";
+import DefaultNavbarItem from "@theme/NavbarItem/DefaultNavbarItem";
+import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
 import {
   useVersions,
   useLatestVersion,
   useActiveDocContext,
-} from '@docusaurus/plugin-content-docs/client';
-import {useDocsPreferredVersion} from '@docusaurus/theme-common';
-import {translate} from '@docusaurus/Translate';
+} from "@docusaurus/plugin-content-docs/client";
+import { useDocsPreferredVersion } from "@docusaurus/theme-common";
+import { translate } from "@docusaurus/Translate";
+// let versions = require("../../versions-full.json");
+// const _latestVersion = versions[0];
+// versions = [{ name: "current", label: "Master", path: "/docs/next" }].concat(
+//   versions.map((item) => {
+//     return {
+//       label: item,
+//       name: item,
+//       path: item == _latestVersion ? "/docs" : "/docs/" + item,
+//     };
+//   })
+// );
 
 const getVersionMainDoc = (version) =>
   version.docs.find((doc) => doc.id === version.mainDocId);
@@ -27,23 +38,36 @@ export default function DocsVersionDropdownNavbarItem({
   ...props
 }) {
   const activeDocContext = useActiveDocContext(docsPluginId);
-  const versions = useVersions(docsPluginId);
+  // const _versions = useVersions(docsPluginId);
+  // console.log(_versions);
   const latestVersion = useLatestVersion(docsPluginId);
-  const {preferredVersion, savePreferredVersionName} =
+  const { preferredVersion, savePreferredVersionName } =
     useDocsPreferredVersion(docsPluginId);
-
+  console.log(activeDocContext);
+  const versions = [
+    activeDocContext.activeVersion,
+    {
+      name: "others",
+      label: "Other Versions",
+      path: "/versions",
+    },
+  ];
   function getItems() {
     const versionLinks = versions.map((version) => {
       // We try to link to the same doc, in another version
       // When not possible, fallback to the "main doc" of the version
-      const versionDoc =
-        activeDocContext?.alternateDocVersions[version.name] ||
-        getVersionMainDoc(version);
+      const versionDoc = activeDocContext?.alternateDocVersions[
+        version.name
+      ] || { path: "/docs/" + version.name + "/about" };
+      // getVersionMainDoc(version);
+      // console.log("version: ", version);
+      // console.log("main: ", getVersionMainDoc(version));
+      // console.log("versionDoc: ", versionDoc);
       return {
         isNavLink: true,
         label: version.label,
-        to: versionDoc.path,
-        isActive: () => version === activeDocContext?.activeVersion,
+        to: version.name == "others" ? "/versions" : versionDoc.path,
+        isActive: () => version.name === activeDocContext?.activeVersion.name,
         onClick: () => {
           savePreferredVersionName(version.name);
         },
@@ -59,10 +83,10 @@ export default function DocsVersionDropdownNavbarItem({
   const dropdownLabel =
     mobile && items.length > 1
       ? translate({
-          id: 'theme.navbar.mobileVersionsDropdown.label',
-          message: 'Versions',
+          id: "theme.navbar.mobileVersionsDropdown.label",
+          message: "Versions",
           description:
-            'The label for the navbar versions dropdown on mobile view',
+            "The label for the navbar versions dropdown on mobile view",
         })
       : dropdownVersion.label;
   const dropdownTo =
