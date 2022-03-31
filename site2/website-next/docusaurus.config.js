@@ -156,26 +156,37 @@ module.exports = {
           type: "dropdown",
           label: "Community",
           position: "right",
+          className: 'community-dropdown',
           items: [
             {
-              to: "/community#welcome",
+              to: "/community#section-welcome",
               label: "Welcome",
+              className: 'scroll-link scroll-welcome',
+              id: 'scroll-welcome'
             },
             {
-              to: "/community#discussions",
+              to: "/community#section-discussions",
               label: "Discussions",
+              className: 'scroll-link scroll-discussions',
+              id: 'scroll-discussions'
             },
             {
-              to: "/community#governance",
+              to: "/community#section-governance",
               label: "Governance",
+              className: 'scroll-link',
+              id: 'scroll-governance'
             },
             {
-              to: "/community#community",
+              to: "/community#section-community",
               label: "Meet the Community",
+              className: 'scroll-link',
+              id: 'scroll-community'
             },
             {
-              to: "/community#how-to-contribute",
+              to: "/community#section-contribute",
               label: "Contribute",
+              className: 'scroll-link',
+              id: 'scroll-contribute'
             },
             {
               to: "https://github.com/apache/pulsar/wiki",
