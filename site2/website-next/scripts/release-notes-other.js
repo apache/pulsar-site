@@ -72,7 +72,7 @@ for (let element of fileListJson) {
 
       let _path = path.join(
         dir,
-        "/site2/website-next/release-notes/docs/" +
+        "/site2/website-next/release-notes/versioned/" +
           value.client +
           "-" +
           value.version +
@@ -93,7 +93,7 @@ for (let element of fileListJson) {
         allPageMd += `#### ${bigVersionKey}\n`;
         let versionGroup = _.groupBy(bigVersionVal, "tag_name");
         for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
-          allPageMd += `[${versionKey}](/release-notes/docs/${versionVal[0].fileName.toLowerCase()}-${versionKey.slice(
+          allPageMd += `[${versionKey}](/release-notes/versioned/${versionVal[0].fileName.toLowerCase()}-${versionKey.slice(
             1
           )})&ensp;&ensp;`;
         }
@@ -169,7 +169,7 @@ ${content.replace(/# 0/, " ")}
 `;
       const _path = path.join(
         dir,
-        "/site2/website-next/release-notes/docs/pulsar-cs-" + version + ".md"
+        "/site2/website-next/release-notes/versioned/pulsar-cs-" + version + ".md"
       );
       fs.writeFileSync(_path, temp);
       console.log(_path);
@@ -189,7 +189,7 @@ ${content.replace(/# 0/, " ")}
     allPageMd += `\n#### ${key}\n`;
     let versionGroup = _.groupBy(value, "version");
     for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
-      allPageMd += `[${versionKey}](/release-notes/docs/pulsar-cs-${versionVal[0].version})&ensp;&ensp;\n`;
+      allPageMd += `[${versionKey}](/release-notes/versioned/pulsar-cs-${versionVal[0].version})&ensp;&ensp;\n`;
     }
   }
 }

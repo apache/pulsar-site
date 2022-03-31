@@ -13,14 +13,15 @@ import {
 } from "@docusaurus/theme-common";
 import DocSidebarItems from "@theme/DocSidebarItems";
 import styles from "./styles.module.css";
-import DocsVersionDropdownNavbarItem from "@theme/NavbarItem/DocsVersionDropdownNavbarItem";
+import DocsVersionDropdownNavbarItem from "../../DocsVersionDropdownNavbarItem";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 // eslint-disable-next-line react/function-component-definition
 const DocSidebarMobileSecondaryMenu = ({ sidebar, path, docsPluginId }) => {
   const mobileSidebar = useNavbarMobileSidebar();
   return (
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, "menu__list")}>
-      <DocsVersionWrapperMemo docsPluginId={docsPluginId} />
+      <BrowserOnlyDocsVersionWrapper docsPluginId={docsPluginId} />
       <DocSidebarItems
         items={sidebar}
         activePath={path}
@@ -64,5 +65,19 @@ function DocsVersionWrapper(props) {
 }
 
 const DocsVersionWrapperMemo = React.memo(DocsVersionWrapper);
+
+const BrowserOnlyDocsVersionWrapper = (props) => {
+  return (
+    <BrowserOnly>
+      {() => {
+        return location.pathname.indexOf("/docs/") > -1 ? (
+          <DocsVersionWrapperMemo docsPluginId={props.docsPluginId} />
+        ) : (
+          <></>
+        );
+      }}
+    </BrowserOnly>
+  );
+};
 
 export default React.memo(DocSidebarMobile);

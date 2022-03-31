@@ -12,6 +12,7 @@ import CollapseButton from "@theme/DocSidebar/Desktop/CollapseButton";
 import Content from "@theme/DocSidebar/Desktop/Content";
 import styles from "./styles.module.css";
 import DocsVersionDropdownNavbarItem from "../../DocsVersionDropdownNavbarItem";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 function DocSidebarDesktop({
   path,
@@ -33,7 +34,7 @@ function DocSidebarDesktop({
       )}
     >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
-      <DocsVersionWrapperMemo docsPluginId={docsPluginId} />
+      <BrowserOnlyDocsVersionWrapper docsPluginId={docsPluginId} />
       <Content path={path} sidebar={sidebar} />
       {hideableSidebar && <CollapseButton onClick={onCollapse} />}
     </div>
@@ -48,12 +49,26 @@ function DocsVersionWrapper(props) {
         docsPluginId={props.docsPluginId}
         dropdownItemsBefore={[]}
         dropdownItemsAfter={[]}
-        items={['Master', 'Legacy']}
+        items={[]}
       />
     </div>
   );
 }
 
 const DocsVersionWrapperMemo = React.memo(DocsVersionWrapper);
+
+const BrowserOnlyDocsVersionWrapper = (props) => {
+  return (
+    <BrowserOnly>
+      {() => {
+        return location.pathname.indexOf("/docs/") > -1 ? (
+          <DocsVersionWrapperMemo docsPluginId={props.docsPluginId} />
+        ) : (
+          <></>
+        );
+      }}
+    </BrowserOnly>
+  );
+};
 
 export default React.memo(DocSidebarDesktop);
