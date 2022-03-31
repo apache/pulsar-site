@@ -298,7 +298,7 @@ div[class^="searchBox_"]  {
   margin-bottom: 100px;
 }
 .mdx-page header:after{
-  z-index: 0;
+  z-index: -1;
   content: '';
   position: absolute; 
   top:50%; 
@@ -316,7 +316,7 @@ div[class^="searchBox_"]  {
 }
 .main-wrapper.mdx-wrapper.mdx-page {position: relative; padding-bottom: 200px; margin-bottom: 100px;}
 .docs-wrapper.docs-doc-page:after {
-  z-index: 0;
+  z-index: -1;
   content: '';
   position: absolute; 
   width: 100%;
@@ -644,6 +644,9 @@ html[data-theme="dark"] .featured-card--inner {background-color: rgba(34, 34, 34
 }
 .icon-wrap-icon {height: auto !important; width: 150px !important; fill: #198fff !important; max-height: 100% !important;}
 .section-icon img {width: 100%;}
+#slider {width: 100%; height: 0; padding-top: 66.5%;}
+.slide-image {opacity: 0; position: absolute; left:0; top:0; object-fit: cover; width: 100%; height: 100%; object-position: 50% 50%; transform: scale(.95);}
+.slide-image.active-slide {opacity: 1; transform: scale(1); transition: all 0.5s ease;}
 
 /* BLOG */
 .blog-list-page article footer.docusaurus-mt-lg {margin-right: 30px;}
@@ -896,4 +899,8 @@ footer .row.footer__links {
 }
 @media (max-width: 400px){
   .row.footer__links .footer__col:first-child  .footer-items .footer__item a { font-size: 14px;}
+}
+
+.sidebarVersionSwitch_src-theme-DocSidebar-Desktop-styles-module .dropdown__menu {
+  min-width: 165px !important;
 }

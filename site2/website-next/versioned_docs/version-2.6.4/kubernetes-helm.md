@@ -63,39 +63,59 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 ## Step 1: Install Pulsar Helm chart
 
-1. Clone the Pulsar Helm chart repository.
+1. Add Pulsar charts repo.
 
    ```bash
    
-   git clone https://github.com/apache/pulsar
-   cd deployment/kubernetes/helm/
+   helm repo add apache https://pulsar.apache.org/charts
    
    ```
 
-2. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
+   ```bash
+   
+   helm repo update
+   
+   ```
+
+2. Clone the Pulsar Helm chart repository.
+
+   ```bash
+   
+   git clone https://github.com/apache/pulsar-helm-chart
+   cd pulsar-helm-chart
+   
+   ```
+
+3. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
    ```bash
    
    ./scripts/pulsar/prepare_helm_release.sh \
        -n pulsar \
        -k pulsar-mini \
-       --control-center-admin pulsar \
-       --control-center-password pulsar \
        -c
    
    ```
 
-3. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
+4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes. 
+
+   :::note
+
+   You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+
+   :::
 
    ```bash
    
    helm install \
        --values examples/values-minikube.yaml \
-       pulsar-mini pulsar
+       --set initialize=true \
+       --namespace pulsar \
+       pulsar-mini apache/pulsar
    
    ```
 
-4. Check the status of all pods.
+5. Check the status of all pods.
 
    ```bash
    
@@ -123,7 +143,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-5. Check the status of all services in the namespace `pulsar`.
+6. Check the status of all services in the namespace `pulsar`.
 
    ```bash
    
@@ -155,7 +175,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
    ```bash
    
-   kubectl exec -it -n pulsar pulsar-mini-toolset-0 /bin/bash
+   kubectl exec -it -n pulsar pulsar-mini-toolset-0 -- /bin/bash
    
    ```
 

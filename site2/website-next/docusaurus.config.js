@@ -107,11 +107,11 @@ module.exports = {
     defaultLocale: "en",
     locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
     localeConfigs: {
-      'zh-CN': {
-        label: '简体中文',
+      "zh-CN": {
+        label: "简体中文",
       },
-      'zh-TW': {
-        label: '繁体中文',
+      "zh-TW": {
+        label: "繁体中文",
       },
     },
   },
@@ -148,60 +148,10 @@ module.exports = {
           ],
         },
         {
-          // type: "doc",
-          // docId: "about",
           to: "/docs/next",
           position: "right",
           label: "Docs",
         },
-        // {
-        //   label: "REST APIs",
-        //   position: "right",
-        //   items: [
-        //     {
-        //       label: "Admin REST API",
-        //       to: "/admin-rest-api",
-        //     },
-        //     {
-        //       label: "Functions",
-        //       to: "/functions-rest-api",
-        //     },
-        //     {
-        //       label: "Sources",
-        //       to: "/source-rest-api",
-        //     },
-        //     {
-        //       label: "Sinks",
-        //       to: "/sink-rest-api",
-        //     },
-        //     {
-        //       label: "Packages",
-        //       to: "/packages-rest-api",
-        //     },
-        //   ],
-        // },
-        // {
-        //   label: "CLI",
-        //   position: "right",
-        //   items: [
-        //     {
-        //       label: "Pulsar Admin",
-        //       to: "/pulsar-admin-cli",
-        //     },
-        //     {
-        //       label: "Pulsar Client",
-        //       to: "/pulsar-client-cli",
-        //     },
-        //     {
-        //       label: "Pulsar Perf",
-        //       to: "/pulsar-perf-cli",
-        //     },
-        //     {
-        //       label: "Pulsar",
-        //       to: "/pulsar-cli",
-        //     },
-        //   ],
-        // },
         {
           type: "dropdown",
           label: "Community",
@@ -355,7 +305,7 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubUrl}/edit/master/site2/docs`,
+          editUrl: `${githubUrl}/edit/master/site2`,
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,

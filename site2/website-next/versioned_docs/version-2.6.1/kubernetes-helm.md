@@ -63,7 +63,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 ## Step 1: Install Pulsar Helm chart
 
-0. Add Pulsar charts repo.
+1. Add Pulsar charts repo.
 
    ```bash
    
@@ -77,7 +77,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-1. Clone the Pulsar Helm chart repository.
+2. Clone the Pulsar Helm chart repository.
 
    ```bash
    
@@ -86,7 +86,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-2. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
    ```bash
    
@@ -97,10 +97,13 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-3. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
+4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes. 
 
-   > **NOTE**  
-   > You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+   :::note
+
+   You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+
+   :::
 
    ```bash
    
@@ -112,7 +115,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-4. Check the status of all pods.
+5. Check the status of all pods.
 
    ```bash
    
@@ -140,7 +143,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-5. Check the status of all services in the namespace `pulsar`.
+6. Check the status of all services in the namespace `pulsar`.
 
    ```bash
    
@@ -254,7 +257,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 You can use the Pulsar client to create producers and consumers to produce and consume messages.
 
-By default, the Pulsar Helm chart exposes the Pulsar cluster through a Kubernetes `LoadBalancer`. In Minikube, you can use the following command to get the IP address of the proxy service.
+By default, the Pulsar Helm chart exposes the Pulsar cluster through a Kubernetes `LoadBalancer`. In Minikube, you can use the following command to check the proxy service.
 
 ```bash
 
@@ -270,22 +273,42 @@ pulsar-mini-proxy            LoadBalancer   10.97.240.109    <pending>     80:32
 
 ```
 
-This output tells what are the node ports that Pulsar cluster's binary port and HTTP port are exposed to. The port after `80:` is the HTTP port while the port after `6650:` is the binary port.
+This output tells what are the node ports that Pulsar cluster's binary port and HTTP port are mapped to. The port after `80:` is the HTTP port while the port after `6650:` is the binary port.
 
-Then you can find the IP address of your Minikube server by running the following command.
+Then you can find the IP address and exposed ports of your Minikube server by running the following command.
 
 ```bash
 
-minikube ip
+minikube service pulsar-mini-proxy -n pulsar
 
 ```
 
-At this point, you can get the service URLs to connect to your Pulsar client.
+**Output**
+
+```bash
+
+|-----------|-------------------|-------------|-------------------------|
+| NAMESPACE |       NAME        | TARGET PORT |           URL           |
+|-----------|-------------------|-------------|-------------------------|
+| pulsar    | pulsar-mini-proxy | http/80     | http://172.17.0.4:32305 |
+|           |                   | pulsar/6650 | http://172.17.0.4:31816 |
+|-----------|-------------------|-------------|-------------------------|
+🏃  Starting tunnel for service pulsar-mini-proxy.
+|-----------|-------------------|-------------|------------------------|
+| NAMESPACE |       NAME        | TARGET PORT |          URL           |
+|-----------|-------------------|-------------|------------------------|
+| pulsar    | pulsar-mini-proxy |             | http://127.0.0.1:61853 |
+|           |                   |             | http://127.0.0.1:61854 |
+|-----------|-------------------|-------------|------------------------|
 
 ```
 
-webServiceUrl=http://$(minikube ip):<exposed-http-port>/
-brokerServiceUrl=pulsar://$(minikube ip):<exposed-binary-port>/
+At this point, you can get the service URLs to connect to your Pulsar client. Here are URL examples:
+
+```
+
+webServiceUrl=http://127.0.0.1:61853/
+brokerServiceUrl=pulsar://127.0.0.1:61854/
 
 ```
 

@@ -63,7 +63,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 ## Step 1: Install Pulsar Helm chart
 
-0. Add Pulsar charts repo.
+1. Add Pulsar charts repo.
 
    ```bash
    
@@ -77,7 +77,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-1. Clone the Pulsar Helm chart repository.
+2. Clone the Pulsar Helm chart repository.
 
    ```bash
    
@@ -86,7 +86,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-2. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
    ```bash
    
@@ -97,10 +97,13 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-3. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
+4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes. 
 
-   > **NOTE**  
-   > You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+   :::note
+
+   You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+
+   :::
 
    ```bash
    
@@ -112,7 +115,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-4. Check the status of all pods.
+5. Check the status of all pods.
 
    ```bash
    
@@ -140,7 +143,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-5. Check the status of all services in the namespace `pulsar`.
+6. Check the status of all services in the namespace `pulsar`.
 
    ```bash
    
