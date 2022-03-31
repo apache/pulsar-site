@@ -30,7 +30,7 @@ function generateMdByVersion(version) {
     "/site2/website-next/scripts/release-notes",
     version + ".json"
   );
-  const dest = path.join(dir, "/site2/website-next/release-notes/docs");
+  const dest = path.join(dir, "/site2/website-next/release-notes/versioned");
 
   const data = fs.readFileSync(src, "utf8");
 
@@ -142,7 +142,7 @@ function generateAll() {
         allPageMd += `#### ${bigVersionKey}\n`;
         let versionGroup = _.groupBy(bigVersionVal, "version");
         for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
-          allPageMd += `[${versionKey}](/release-notes/docs/${categoryKey.toLowerCase()}-${versionKey})&ensp;&ensp;`;
+          allPageMd += `[${versionKey}](/release-notes/versioned/${categoryKey.toLowerCase()}-${versionKey})&ensp;&ensp;`;
         }
         allPageMd += `  \n`;
       }
