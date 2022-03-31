@@ -1,8 +1,8 @@
 ---
-id: develop-binary-protocol
+id: developing-binary-protocol
 title: Pulsar binary protocol specification
 sidebar_label: "Binary protocol"
-original_id: develop-binary-protocol
+original_id: developing-binary-protocol
 ---
 
 Pulsar uses a custom binary protocol for communications between producers/consumers and brokers. This protocol is designed to support required features, such as acknowledgements and flow control, while ensuring maximum transport and implementation efficiency.
@@ -57,7 +57,7 @@ Message metadata is stored alongside the application-specified payload as a seri
 | Field                                | Description                                                                                                                                                                                                                                               |
 |:-------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `producer_name`                      | The name of the producer that published the message                                                                                                                                                                                         |
-| `sequence_id`                        | The sequence ID of the message, assigned by producer                                                                                                                                                                                        |
+| `sequence_id`                        | The sequence ID of the message, assigned by producer}                                                                                                                                                                                        |
 | `publish_time`                       | The publish timestamp in Unix time (i.e. as the number of milliseconds since January 1st, 1970 in UTC)                                                                                                                                                    |
 | `properties`                         | A sequence of key/value pairs (using the [`KeyValue`](https://github.com/apache/pulsar/blob/master/pulsar-common/src/main/proto/PulsarApi.proto#L32) message). These are application-defined keys and values with no special meaning to Pulsar. |
 | `replicated_from` *(optional)*       | Indicates that the message has been replicated and specifies the name of the [cluster](reference-terminology.md#cluster) where the message was originally published                                                                                                             |
@@ -298,11 +298,8 @@ A `Flow` command gives additional *permits* to send messages to the consumer.
 A typical consumer implementation will use a queue to accumulate these messages
 before the application is ready to consume them.
 
-After the application has dequeued half of the messages in the queue, the consumer 
-sends permits to the broker to ask for more messages (equals to half of the messages in the queue).
-
-For example, if the queue size is 1000 and the consumer consumes 500 messages in the queue.
-Then the consumer sends permits to the broker to ask for 500 messages.
+After the application has dequeued a number of message, the consumer will
+send additional number of permits to allow the broker to push more messages.
 
 ##### Command Subscribe
 
@@ -321,7 +318,7 @@ message CommandSubscribe {
 Parameters:
  * `topic` → Complete topic name to where you want to create the consumer on
  * `subscription` → Subscription name
- * `subType` → Subscription type: Exclusive, Shared, Failover, Key_Shared
+ * `subType` → Subscription type: Exclusive, Shared, Failover
  * `consumer_id` → Client generated consumer identifier. Needs to be unique
     within the same connection
  * `request_id` → Identifier for this request. Used to match the response with
