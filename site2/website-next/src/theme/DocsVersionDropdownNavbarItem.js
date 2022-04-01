@@ -46,7 +46,7 @@ export default function DocsVersionDropdownNavbarItem({
     activeDocContext.activeVersion,
     {
       name: "others",
-      label: "Other Versions",
+      label: "Other",
       path: "/versions",
     },
   ];
