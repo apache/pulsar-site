@@ -51,7 +51,7 @@ function _buildVersion() {
 # Build next version that has any changed
 while read version; do
     buildVersion=$version
-    if [[ $@ == *website-next/versioned_docs/version-$version* || $buildVersion == "next" || $BUILD_ALL_VERSION == "1" ]]; then
+    if [[ $@ == *website-next/versioned_docs/version-$version* || $buildVersion == "next" || $BUILD_ALL_VERSION == "1" || $buildVersion == $BUILD_VERSION ]]; then
         _buildVersion
     else
         echo "..." $buildVersion "no change, skip"
