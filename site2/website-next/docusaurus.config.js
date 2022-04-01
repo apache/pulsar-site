@@ -172,7 +172,7 @@ module.exports = {
           ],
         },
         {
-          to: "/docs/next",
+          to: "/docs/next/",
           position: "right",
           label: "Docs",
         },

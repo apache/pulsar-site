@@ -43,7 +43,7 @@ export default function DocsVersionDropdownNavbarItem({
   const latestVersion = useLatestVersion(docsPluginId);
   const { preferredVersion, savePreferredVersionName } =
     useDocsPreferredVersion(docsPluginId);
-  console.log(activeDocContext);
+  // console.log(activeDocContext);
   const versions = [
     activeDocContext.activeVersion,
     {
