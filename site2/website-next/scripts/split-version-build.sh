@@ -60,12 +60,12 @@ done <scripts/.versions
 
 while read version; do
     if [ -d "build-$version" ]; then
-        mv build-$version/* build/docs
+        mv -r build-$version/* build/docs
         rm -rf build-$version
 
         for language in ${locals[@]}; do
             if [ -d "build-$language-$version" ]; then
-                mv build-$language-$version/* build/$language/docs
+                mv -r build-$language-$version/* build/$language/docs
                 rm -rf build-$language-$version
             fi
         done

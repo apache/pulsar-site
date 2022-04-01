@@ -20,7 +20,12 @@ const versionsMap = {
   },
 };
 
-const buildVersions = require("./.build-versions.json");
+let buildVersions = ["current"];
+try {
+  buildVersions = require("./.build-versions.json");
+} catch (error) {
+  //do nothing
+}
 
 const oldUrl = "https://pulsar.apache.org";
 const url = "https://pulsar.apache.org";
@@ -175,37 +180,37 @@ module.exports = {
           type: "dropdown",
           label: "Community",
           position: "right",
-          className: 'community-dropdown',
+          className: "community-dropdown",
           items: [
             {
               to: "/community#section-welcome",
               label: "Welcome",
-              className: 'scroll-link scroll-welcome',
-              id: 'scroll-welcome'
+              className: "scroll-link scroll-welcome",
+              id: "scroll-welcome",
             },
             {
               to: "/community#section-discussions",
               label: "Discussions",
-              className: 'scroll-link scroll-discussions',
-              id: 'scroll-discussions'
+              className: "scroll-link scroll-discussions",
+              id: "scroll-discussions",
             },
             {
               to: "/community#section-governance",
               label: "Governance",
-              className: 'scroll-link',
-              id: 'scroll-governance'
+              className: "scroll-link",
+              id: "scroll-governance",
             },
             {
               to: "/community#section-community",
               label: "Meet the Community",
-              className: 'scroll-link',
-              id: 'scroll-community'
+              className: "scroll-link",
+              id: "scroll-community",
             },
             {
               to: "/community#section-contribute",
               label: "Contribute",
-              className: 'scroll-link',
-              id: 'scroll-contribute'
+              className: "scroll-link",
+              id: "scroll-contribute",
             },
             {
               to: "https://github.com/apache/pulsar/wiki",
