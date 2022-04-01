@@ -10,6 +10,14 @@ import ecoObj from '@site/data/ecosystem.js';
 
 
 // create combine the arrays from each category.
+let eObj = ecoObj;
+// add type as a property to each object to use in the tile cta.
+Object.keys(eObj).forEach(key =>{
+  ecoObj[key].forEach((obj) => {
+    obj.type = key.charAt(0).toUpperCase() + key.slice(1);;
+  })
+});
+
 let allArr = [];
 Object.keys(ecoObj).forEach(key => {
   allArr = [...allArr, ...ecoObj[key]];
@@ -48,10 +56,10 @@ export default function Home() {
               <input type="text" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
               <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
             </form>
-            <TabPanelUnstyled value={0}><EcoCards search={searchString} type="Connector" resources={allArr} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={1}><EcoCards search={searchString} type="Connector" resources={ecoObj.connectors} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={2}><EcoCards search={searchString} type="Adapter" resources={ecoObj.adapters} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={3}><EcoCards search={searchString} type="Tool" resources={ecoObj.tools} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={0}><EcoCards search={searchString} resources={allArr} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={1}><EcoCards search={searchString} resources={ecoObj.connector} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={2}><EcoCards search={searchString} resources={ecoObj.adapter} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={3}><EcoCards search={searchString} resources={ecoObj.tool} /></TabPanelUnstyled>
           </TabsUnstyled>
         </section>
       </div>
