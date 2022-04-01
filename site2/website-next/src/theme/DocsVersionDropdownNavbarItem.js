@@ -39,11 +39,9 @@ export default function DocsVersionDropdownNavbarItem({
 }) {
   const activeDocContext = useActiveDocContext(docsPluginId);
   // const _versions = useVersions(docsPluginId);
-  // console.log(_versions);
   const latestVersion = useLatestVersion(docsPluginId);
   const { preferredVersion, savePreferredVersionName } =
     useDocsPreferredVersion(docsPluginId);
-  // console.log(activeDocContext);
   const versions = [
     activeDocContext.activeVersion,
     {
@@ -60,9 +58,6 @@ export default function DocsVersionDropdownNavbarItem({
         version.name
       ] || { path: "/docs/" + version.name + "/about" };
       // getVersionMainDoc(version);
-      // console.log("version: ", version);
-      // console.log("main: ", getVersionMainDoc(version));
-      // console.log("versionDoc: ", versionDoc);
       return {
         isNavLink: true,
         label: version.label,
