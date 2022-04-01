@@ -34,7 +34,7 @@ function _buildVersion() {
         mkdir -p build-${buildVersion}/${buildVersion} build-${buildVersion}/${buildVersion}.md
         cp -r build/docs/${buildVersion}/* build-${buildVersion}/${buildVersion}
         cp -r build/docs/${buildVersion}.md/* build-${buildVersion}/${buildVersion}.md
-        rm -rf build/docs/${buildVersion} build/${language}/docs/${buildVersion}.md
+        rm -rf build/docs/${buildVersion} build/docs/${buildVersion}.md
         for language in ${locals[@]}; do
             if [ -d "build/${language}/docs/${buildVersion}" ]; then
                 mkdir -p build-${language}-${buildVersion}/${buildVersion} build-${language}-${buildVersion}/${buildVersion}.md
@@ -60,12 +60,12 @@ done <scripts/.versions
 
 while read version; do
     if [ -d "build-$version" ]; then
-        mv -r build-$version/* build/docs
+        mv -f build-$version/* build/docs
         rm -rf build-$version
 
         for language in ${locals[@]}; do
             if [ -d "build-$language-$version" ]; then
-                mv -r build-$language-$version/* build/$language/docs
+                mv -f build-$language-$version/* build/$language/docs
                 rm -rf build-$language-$version
             fi
         done
