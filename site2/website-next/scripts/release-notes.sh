@@ -37,7 +37,7 @@ function _ghFromPulsar() {
     mkdir -p $ROOT_DIR/site2/website-next/scripts/release-notes
 
     if [ ! $VERSION ]; then
-        VERSIONS=$(cat $ROOT_DIR/site2/website-next/versions-full.json | jq -r ".[]")
+        VERSIONS=$(cat $ROOT_DIR/site2/website-next/versions.json | jq -r ".[]")
         for version in $VERSIONS; do
             gh pr list --limit 200 --label "release/"$version --state merged --json labels,title,number >$ROOT_DIR/site2/website-next/scripts/release-notes/$version.json
         done

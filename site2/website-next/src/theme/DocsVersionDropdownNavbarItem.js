@@ -14,7 +14,7 @@ import {
 } from "@docusaurus/plugin-content-docs/client";
 import { useDocsPreferredVersion } from "@docusaurus/theme-common";
 import { translate } from "@docusaurus/Translate";
-// let versions = require("../../versions-full.json");
+// let versions = require("../../versions.json");
 // const _latestVersion = versions[0];
 // versions = [{ name: "current", label: "Master", path: "/docs/next" }].concat(
 //   versions.map((item) => {
