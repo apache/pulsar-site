@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -200,8 +200,19 @@ implements org.apache.pulsar.client.api.transaction.TransactionBufferClient</pre
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static org.apache.pulsar.client.api.transaction.TransactionBufferClient</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(org.apache.pulsar.client.api.PulsarClient,io.netty.util.HashedWheelTimer)">create</a></span>&#8203;(org.apache.pulsar.client.api.PulsarClient&nbsp;pulsarClient,
-      io.netty.util.HashedWheelTimer&nbsp;timer)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(org.apache.pulsar.client.api.PulsarClient,io.netty.util.HashedWheelTimer,int)">create</a></span>&#8203;(org.apache.pulsar.client.api.PulsarClient&nbsp;pulsarClient,
+      io.netty.util.HashedWheelTimer&nbsp;timer,
+      int&nbsp;maxConcurrentRequests)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAvailableRequestCredits()">getAvailableRequestCredits</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPendingRequestsCount()">getPendingRequestsCount</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -228,14 +239,15 @@ implements org.apache.pulsar.client.api.transaction.TransactionBufferClient</pre
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="create(org.apache.pulsar.client.api.PulsarClient,io.netty.util.HashedWheelTimer)">
+<a id="create(org.apache.pulsar.client.api.PulsarClient,io.netty.util.HashedWheelTimer,int)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>create</h4>
 <pre class="methodSignature">public static&nbsp;org.apache.pulsar.client.api.transaction.TransactionBufferClient&nbsp;create&#8203;(org.apache.pulsar.client.api.PulsarClient&nbsp;pulsarClient,
-                                                                                      io.netty.util.HashedWheelTimer&nbsp;timer)</pre>
+                                                                                      io.netty.util.HashedWheelTimer&nbsp;timer,
+                                                                                      int&nbsp;maxConcurrentRequests)</pre>
 </li>
 </ul>
 <a id="commitTxnOnTopic(java.lang.String,long,long,long)">
@@ -307,13 +319,39 @@ implements org.apache.pulsar.client.api.transaction.TransactionBufferClient</pre
 <a id="close()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>close</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;close()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>close</code>&nbsp;in interface&nbsp;<code>org.apache.pulsar.client.api.transaction.TransactionBufferClient</code></dd>
+</dl>
+</li>
+</ul>
+<a id="getAvailableRequestCredits()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAvailableRequestCredits</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getAvailableRequestCredits()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getAvailableRequestCredits</code>&nbsp;in interface&nbsp;<code>org.apache.pulsar.client.api.transaction.TransactionBufferClient</code></dd>
+</dl>
+</li>
+</ul>
+<a id="getPendingRequestsCount()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getPendingRequestsCount</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getPendingRequestsCount()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getPendingRequestsCount</code>&nbsp;in interface&nbsp;<code>org.apache.pulsar.client.api.transaction.TransactionBufferClient</code></dd>
 </dl>
 </li>
 </ul>
