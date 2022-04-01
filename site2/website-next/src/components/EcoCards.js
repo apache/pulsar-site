@@ -7,8 +7,7 @@ export default function EcoCards(props) {
   const filteredRes = ecoList.filter((r)=>{
     return (r.name && r.name.toLowerCase().includes(searchString.toLowerCase())) ||  (r.description && r.description.toLowerCase().includes(searchString.toLowerCase()));
   });
-  const type = props.type;
-  function ResCard({ name, description, link }) {
+  function ResCard({ name, description, link, type }) {
     return (
       <div className="mb-4 sm:mb-0 resource-card type-resource bg-white p-6 shadow-lg relative flex flex-col">
       

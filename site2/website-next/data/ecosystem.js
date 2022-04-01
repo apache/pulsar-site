@@ -1,8 +1,8 @@
 module.exports = {
-    connectors: [{
+    connector: [{
             name: 'ActiveMQ Sink',
             description: 'The ActiveMQ sink connector pulls messages from Pulsar topics and persist messages to ActiveMQ clusters.',
-            link: 'https://hub.streamnative.io/connectors/activemq-sink/2.5.1/'
+            link: 'https://hub.streamnative.io/connectors/activemq-sink/2.5.1/',
         },
         {
             name: 'ActiveMQ Source',
@@ -350,7 +350,7 @@ module.exports = {
             link: 'https://github.com/apache/flink/tree/master/flink-connectors/flink-connector-pulsar'
         }
     ],
-    tools: [{
+    tool: [{
             name: 'DataStax CDC for Apache Cassandra',
             description: 'Send Apache Cassandra mutations for tables having Change Data Capture (CDC) enabled to Luna Streaming or Apache Pulsar™, which in turn can write the data to platforms such as Elasticsearch® or Snowflake®.',
             link: 'https://github.com/datastax/cdc-apache-cassandra'
@@ -386,7 +386,7 @@ module.exports = {
             link: 'https://github.com/apache/pulsar-manager'
         }
     ],
-    adapters: [{
+    adapter: [{
             name: 'Pulsar Client Kafka Compatible',
             description: '',
             link: 'https://github.com/apache/pulsar-adapters/tree/master/pulsar-client-kafka-compat'

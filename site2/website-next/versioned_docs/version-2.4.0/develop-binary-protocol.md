@@ -61,7 +61,7 @@ Message metadata is stored alongside the application-specified payload as a seri
 | `publish_time`                       | The publish timestamp in Unix time (i.e. as the number of milliseconds since January 1st, 1970 in UTC)                                                                                                                                                    |
 | `properties`                         | A sequence of key/value pairs (using the [`KeyValue`](https://github.com/apache/pulsar/blob/master/pulsar-common/src/main/proto/PulsarApi.proto#L32) message). These are application-defined keys and values with no special meaning to Pulsar. |
 | `replicated_from` *(optional)*       | Indicates that the message has been replicated and specifies the name of the [cluster](reference-terminology.md#cluster) where the message was originally published                                                                                                             |
-| `partition_key` *(optional)*         | While publishing on a partition topic, if the key is present, the hash of the key is used to determine which partition to choose                                                                                                                          |
+| `partition_key` *(optional)*         | While publishing on a partition topic, if the key is present, the hash of the key is used to determine which partition to choose. Partition key is used as the message key.                                                                                                                          |
 | `compression` *(optional)*           | Signals that payload has been compressed and with which compression library                                                                                                                                                                               |
 | `uncompressed_size` *(optional)*     | If compression is used, the producer must fill the uncompressed size field with the original payload size                                                                                                                                                 |
 | `num_messages_in_batch` *(optional)* | If this message is really a [batch](#batch-messages) of multiple entries, this field must be set to the number of messages in the batch                                                                                                                   |
@@ -298,8 +298,11 @@ A `Flow` command gives additional *permits* to send messages to the consumer.
 A typical consumer implementation will use a queue to accumulate these messages
 before the application is ready to consume them.
 
-After the application has dequeued a number of message, the consumer will
-send additional number of permits to allow the broker to push more messages.
+After the application has dequeued half of the messages in the queue, the consumer 
+sends permits to the broker to ask for more messages (equals to half of the messages in the queue).
+
+For example, if the queue size is 1000 and the consumer consumes 500 messages in the queue.
+Then the consumer sends permits to the broker to ask for 500 messages.
 
 ##### Command Subscribe
 
@@ -455,7 +458,7 @@ Topic lookup needs to be performed each time a client needs to create or
 reconnect a producer or a consumer. Lookup is used to discover which particular
 broker is serving the topic we are about to use.
 
-Lookup can be done with a REST call as described in the [admin API](admin-api-persistent-topics.md#lookup-of-topic)
+Lookup can be done with a REST call as described in the [admin API](admin-api-topics.md#lookup-of-topic)
 docs.
 
 Since Pulsar-1.16 it is also possible to perform the lookup within the binary

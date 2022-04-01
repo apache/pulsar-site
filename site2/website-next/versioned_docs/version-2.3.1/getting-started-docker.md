@@ -1,8 +1,8 @@
 ---
-id: standalone-docker
-title: Set up a standalone Pulsar in Docker
-sidebar_label: "Run Pulsar in Docker"
-original_id: standalone-docker
+id: getting-started-docker
+title: Start a standalone cluster with Docker
+sidebar_label: "Pulsar in Docker"
+original_id: getting-started-docker
 ---
 
 For local development and testing, you can run Pulsar in standalone
@@ -11,26 +11,36 @@ mode on your own machine within a Docker container.
 If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition)
 and follow the instructions for your OS.
 
-## Start Pulsar in Docker
+## Start Pulsar inside Docker
 
-* For MacOS, Linux, and Windows:
+```shell
 
-  ```shell
-  
-  $ docker run -it \
+$ docker run -it \
   -p 6650:6650 \
   -p 8080:8080 \
-  --mount source=pulsardata,target=/pulsar/data \
-  --mount source=pulsarconf,target=/pulsar/conf \
+  -v $PWD/data:/pulsar/data \
   apachepulsar/pulsar:@pulsar:version@ \
   bin/pulsar standalone
-  
-  ```
+
+```
+
+For Windows, enter something like the following docker command:
+
+```shell
+
+$ docker run -it \
+  -p 6650:6650 \
+  -p 8080:8080 \
+  -v "$PWD/data:/pulsar/data".ToLower() \
+  apachepulsar/pulsar:@pulsar:version@ \
+  bin/pulsar standalone
+
+```
 
 A few things to note about this command:
- * The data, metadata, and configuration are persisted on Docker volumes in order to not start "fresh" every 
-time the container is restarted. For details on the volumes you can use `docker volume inspect <sourcename>`
- * For Docker on Windows make sure to configure it to use Linux containers
+ * `$PWD/data` : The docker host directory in Windows operating system must be lowercase.`$PWD/data` provides you with the specified directory, for example: `E:/data`.
+ * `-v $PWD/data:/pulsar/data`: This makes the process inside the container to store the
+   data and metadata in the filesystem outside the container, in order not to start "fresh" every time the container is restarted.
 
 If you start Pulsar successfully, you will see `INFO`-level log messages like this:
 
@@ -42,16 +52,13 @@ If you start Pulsar successfully, you will see `INFO`-level log messages like th
 
 ```
 
-:::tip
-
-When you start a local standalone cluster, a `public/default`
-
-:::
-
+> #### Automatically created namespace
+> When you start a local standalone cluster, a `public/default`
 namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces.
 For more information, see [Topics](concepts-messaging.md#topics).
 
-## Use Pulsar in Docker
+
+## Start publishing and consuming messages
 
 Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python) 
 and [C++](client-libraries-cpp). If you're running a local standalone cluster, you can
@@ -71,8 +78,6 @@ $ pip install pulsar-client
 
 ```
 
-### Consume a message
-
 Create a consumer and subscribe to the topic:
 
 ```python
@@ -91,8 +96,6 @@ while True:
 client.close()
 
 ```
-
-### Produce a message
 
 Now start a producer to send some test messages:
 
