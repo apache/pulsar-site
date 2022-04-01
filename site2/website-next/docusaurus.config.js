@@ -1,7 +1,26 @@
 // const lightCodeTheme = require("prism-react-renderer/themes/github");
 // const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
+const _ = require("lodash");
 const linkifyRegex = require("./plugins/remark-linkify-regex");
+const versions = require("./versions.json");
+const versionsMap = {
+  ..._.keyBy(
+    versions.slice(1).map((item) => {
+      return {
+        label: item,
+        path: item,
+      };
+    }),
+    "label"
+  ),
+  current: {
+    label: "Next",
+    path: "next",
+  },
+};
+
+const buildVersions = require("./.build-versions.json");
 
 const oldUrl = "https://pulsar.apache.org";
 const url = "https://pulsar.apache.org";
@@ -327,6 +346,8 @@ module.exports = {
               injectLinkParseForEndpoint
             ),
           ],
+          versions: versionsMap,
+          onlyIncludeVersions: buildVersions || ["current"],
         },
         blog: {
           showReadingTime: true,
