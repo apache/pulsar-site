@@ -30,7 +30,7 @@ function generateMdByVersion(version) {
     "/site2/website-next/scripts/release-notes",
     version + ".json"
   );
-  const dest = path.join(dir, "/site2/website-next/release-notes/docs");
+  const dest = path.join(dir, "/site2/website-next/release-notes/versioned");
 
   const data = fs.readFileSync(src, "utf8");
 
@@ -95,7 +95,14 @@ sidebar_label: ${_.startCase(
       }
       result += _prs
         .map((pr) => {
-          return pr.title + " #" + pr.number + "  ";
+          return (
+            pr.title +
+            " [#" +
+            pr.number +
+            "](https://github.com/apache/pulsar/pull/" +
+            pr.number +
+            ")  "
+          );
         })
         .join("\n");
       result += "\n\n";
@@ -121,7 +128,7 @@ function generateAll() {
         if (categoryKey.toLocaleLowerCase() == "client-cpp") {
           allPageMd += `### C++\n`;
         } else if (categoryKey.toLocaleLowerCase() == "client-websocket") {
-          allPageMd += `### WebSocket++\n`;
+          allPageMd += `### WebSocket\n`;
         } else {
           allPageMd += `### ${_.startCase(
             categoryKey.replace("client-", "")
@@ -135,7 +142,7 @@ function generateAll() {
         allPageMd += `#### ${bigVersionKey}\n`;
         let versionGroup = _.groupBy(bigVersionVal, "version");
         for (let [versionKey, versionVal] of Object.entries(versionGroup)) {
-          allPageMd += `[${versionKey}](/release-notes/docs/${categoryKey.toLowerCase()}-${versionKey})&ensp;&ensp;`;
+          allPageMd += `[${versionKey}](/release-notes/versioned/${categoryKey.toLowerCase()}-${versionKey})&ensp;&ensp;`;
         }
         allPageMd += `  \n`;
       }
