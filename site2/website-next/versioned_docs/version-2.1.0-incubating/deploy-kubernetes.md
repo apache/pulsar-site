@@ -19,7 +19,7 @@ The deployment method shown in this guide relies on [YAML](http://yaml.org/) def
 * A two-bookie BookKeeper cluster
 * A three-node ZooKeeper cluster
 * A three-broker Pulsar cluster
-* A [monitoring stack](#) consisting of [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com), and the [Pulsar dashboard](administration-dashboard)
+* A [monitoring stack]() consisting of [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com), and the [Pulsar dashboard](administration-dashboard)
 * A [pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/) from which you can run administrative commands using the [`pulsar-admin`](reference-pulsar-admin) CLI tool
 
 ## Setup
@@ -40,7 +40,7 @@ To get started, you'll need:
 
 * A Google Cloud Platform account, which you can sign up for at [cloud.google.com](https://cloud.google.com)
 * An existing Cloud Platform project
-* The [Google Cloud SDK](https://cloud.google.com/sdk/downloads) (in particular the [`gcloud`](https://cloud.google.com/sdk/gcloud/) and [`kubectl`](https://kubernetes.io/docs/reference/kubectl/) tools).
+* The [Google Cloud SDK](https://cloud.google.com/sdk/downloads) (in particular the [`gcloud`](https://cloud.google.com/sdk/gcloud/) and [`kubectl`]() tools).
 
 ### Create a new Kubernetes cluster
 
