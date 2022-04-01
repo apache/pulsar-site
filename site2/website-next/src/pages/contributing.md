@@ -4,6 +4,8 @@ title: Contributing
 description: Learn how to contribute to Pulsar
 hide_table_of_contents: true
 ---
+# Contribute
+
 The Apache Pulsar community welcomes contributions from anyone with a passion for distributed systems! Pulsar has many different opportunities for contributions --
 write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, or participate on the documentation effort.
 

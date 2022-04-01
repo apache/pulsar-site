@@ -1,6 +1,6 @@
 const migrateVersion = require("./migrate-version");
 
-let versions = require("../versions-full.json");
+let versions = require("../versions.json");
 versions = ["next"].concat(versions);
 
 const migrate = (vs) => {

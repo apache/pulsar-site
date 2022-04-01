@@ -13,9 +13,14 @@ module.exports = (dest, version) => {
       continue;
     }
     let data = fs.readFileSync(pathname, "utf8");
-    let id = /id:\s*(.*)/.exec(data)[1];
-    duplicateMap[id] = duplicateMap[id] || [];
-    duplicateMap[id].push(pathname);
+    try {
+      let id = /id:\s*(.*)/.exec(data)[1];
+      duplicateMap[id] = duplicateMap[id] || [];
+      duplicateMap[id].push(pathname);
+    } catch (error) {
+      console.log("...error path: ", pathname);
+      throw error;
+    }
   }
   for (let [key, duplicateFiles] of Object.entries(duplicateMap)) {
     if (duplicateFiles.length > 1) {

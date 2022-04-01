@@ -41,30 +41,19 @@ jobs:
           git clone -b master --depth 1 https://github.com/apache/pulsar.git pulsar
           echo "pulsar clone done."
 
-          cp -r pulsar/site2/docs/* pulsar-site/site2/docs
-          cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
-          cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
-          cp -r pulsar/site2/docs/assets/* pulsar-site/site2/website-next/static/assets
-          cd pulsar-site/site2/website-next
-          yarn install
-          node migrate/migrate-full.js
-          cd ../../../
+          DIR=$(pwd)
 
-          # cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
-          # cp -r pulsar-site/site2/website-next/docs/assets/* pulsar-site/site2/website-next/static/assets
-          # rm -rf pulsar-site/site2/website-next/docs/assets
-          # cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website-next/versioned_docs
-          # cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website-next/versioned_sidebars
-          # cp -r pulsar/site2/website/sidebars.json pulsar-site/site2/website-next/sidebars.json
-          # cp -r pulsar/site2/website/versions.json pulsar-site/site2/website-next/versions-full.json
+          cd pulsar-site/site2/website-next
+
+          sh scripts/sync-docs.sh
 
           echo "docs override done."
 
-          cd pulsar 
+          cd $DIR/pulsar
+
           PULSAR_COMMIT_ID=$(git rev-parse --short HEAD)
 
           cd ../pulsar-site
-
 
           git add -A .
           git status

@@ -1,7 +1,31 @@
 // const lightCodeTheme = require("prism-react-renderer/themes/github");
 // const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
+const _ = require("lodash");
 const linkifyRegex = require("./plugins/remark-linkify-regex");
+const versions = require("./versions.json");
+const versionsMap = {
+  ..._.keyBy(
+    versions.slice(1).map((item) => {
+      return {
+        label: item,
+        path: item,
+      };
+    }),
+    "label"
+  ),
+  current: {
+    label: "Next",
+    path: "next",
+  },
+};
+
+let buildVersions = ["current"];
+try {
+  buildVersions = require("./.build-versions.json");
+} catch (error) {
+  //do nothing
+}
 
 const oldUrl = "https://pulsar.apache.org";
 const url = "https://pulsar.apache.org";
@@ -148,7 +172,7 @@ module.exports = {
           ],
         },
         {
-          to: "/docs/next",
+          to: "/docs/next/",
           position: "right",
           label: "Docs",
         },
@@ -156,26 +180,37 @@ module.exports = {
           type: "dropdown",
           label: "Community",
           position: "right",
+          className: "community-dropdown",
           items: [
             {
-              to: "/community#welcome",
+              to: "/community#section-welcome",
               label: "Welcome",
+              className: "scroll-link scroll-welcome",
+              id: "scroll-welcome",
             },
             {
-              to: "/community#discussions",
+              to: "/community#section-discussions",
               label: "Discussions",
+              className: "scroll-link scroll-discussions",
+              id: "scroll-discussions",
             },
             {
-              to: "/community#governance",
+              to: "/community#section-governance",
               label: "Governance",
+              className: "scroll-link",
+              id: "scroll-governance",
             },
             {
-              to: "/community#community",
+              to: "/community#section-community",
               label: "Meet the Community",
+              className: "scroll-link",
+              id: "scroll-community",
             },
             {
-              to: "/community#how-to-contribute",
+              to: "/community#section-contribute",
               label: "Contribute",
+              className: "scroll-link",
+              id: "scroll-contribute",
             },
             {
               to: "https://github.com/apache/pulsar/wiki",
@@ -316,6 +351,8 @@ module.exports = {
               injectLinkParseForEndpoint
             ),
           ],
+          versions: versionsMap,
+          onlyIncludeVersions: buildVersions || ["current"],
         },
         blog: {
           showReadingTime: true,

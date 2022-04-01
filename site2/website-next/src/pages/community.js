@@ -14,7 +14,7 @@ export default function Community(props) {
   useEffect((d) => {
     if(location.hash){
       let hash = location.hash;
-      let id = hash.substring(1);
+      let id = hash.split('-')[1];
       let target = document.getElementById(id);
       if(target){
         target.scrollIntoView({
@@ -23,6 +23,31 @@ export default function Community(props) {
         });
       }
     }
+    
+    const sections = document.querySelectorAll(".scrollable");
+    const links = document.querySelectorAll(".scroll-link");
+    var observer = new IntersectionObserver(
+      function (entries, observer) {
+        if (entries[0].isIntersecting === true) {
+          let id = entries[0].target.id;
+          let target = 'scroll-'+id;
+          links.forEach(l => {
+            console.log(l);
+            l.classList.remove('active-section');
+          });
+          let finalTarget = document.getElementById(target);
+          console.log(target);
+          if(finalTarget){
+            finalTarget.classList.add('active-section');
+          }
+        }
+      },
+      { threshold: [ 0.1 ] }
+    );
+    sections.forEach(s => {
+      observer.observe(document.getElementById(s.id));
+    });
+
     const first = document.getElementById('slider').firstChild;
     const slides = document.querySelectorAll('.slide-image');
     const slideCount = slides.length;
@@ -62,7 +87,7 @@ export default function Community(props) {
         <div className="hero-bg absolute z-0">
           <img className="relative" src={useBaseUrl('/img/community-hero-bg.jpg')} />
         </div>
-        <section id="welcome" className="hero hero--welcome pt-24 relative">
+        <section id="welcome" className="scrollable hero hero--welcome pt-24 relative">
           <div className="inner cf">
             <h1>Welcome to the Pulsar Community</h1>
             <div className="cf">
@@ -104,7 +129,7 @@ export default function Community(props) {
             </div>
           </section>
           <WavySeparatorFive></WavySeparatorFive>
-          <section id="discussions" className="">
+          <section id="discussions" className="scrollable">
             <div className="inner pt-12">
               
               <h2 className="text--center">Discussions</h2>
@@ -205,7 +230,7 @@ export default function Community(props) {
            
           </section>
           <WavySeparatorSix></WavySeparatorSix>
-          <section id="governance" className="py-12">
+          <section id="governance" className="py-12 scrollable">
             <div className="inner">
               <h2>Project Governance</h2>
               <p>Apache Pulsar is independently managed by its Project Management Committee (PMC)—the governing body tasked with project management including technical direction, voting on new committers and PMC members, setting policies, and formally voting on software product releases.</p>
@@ -226,7 +251,7 @@ export default function Community(props) {
                 >THE APACHE WAY</PillButton>
             </div>
           </section>
-          <section id="how-to-contribute" className="py-12">
+          <section id="contribute" className="py-12 scrollable">
             <div className="inner">
               <h2 className="text-center sm:text-left">How to Contribute</h2>
               <div className="">
@@ -262,7 +287,7 @@ export default function Community(props) {
             </div>
           </section>
           <WavySeparatorSix></WavySeparatorSix>
-          <section id="community" className="py-12">
+          <section id="community" className="py-12 scrollable">
             <div className="inner">
               <h2 className="text--center">Meet the Community</h2>
               <CommunityList list={teamObj.committers} />

@@ -77,6 +77,8 @@ const migrate = (version, category, cb) => {
         items: sidebar,
       });
     } else {
+      //Temp overrite test
+      // categoryMap[category].items = sidebar;
       categoryMap[category].items.concat(
         sidebar.filter((item) => {
           return !categoryMap[category].items.includes(item);
@@ -120,6 +122,15 @@ const migrate = (version, category, cb) => {
         // collapsed: true,
       });
     } else {
+      //Temp overrite test
+      // categoryMap[category].items = sidebar.map((item) => {
+      //   return {
+      //     type: "doc",
+      //     id:
+      //       version_full + "/" + (item == "deploy-docs" ? "deploy-dcos" : item),
+      //   };
+      // });
+
       let _sbExists = _.keyBy(categoryMap[category].items, "id");
       let _sb = sidebar
         .map((item) => {
