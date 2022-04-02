@@ -38,7 +38,7 @@ Regardless of the value of `brokerDeduplicationEnabled`, [enabling](#enabling) a
 
 ### Enabling message deduplication {#enabling}
 
-You can enable message deduplication on specific namespaces, regardless of the the [default](#default) for the broker, using the [`pulsar-admin namespace set-deduplication`](reference-pulsar-admin.md#namespace-set-deduplication) command. You can use the `--enable`/`-e` flag and specify the namespace. Here's an example with <tenant>/<namespace>:
+You can enable message deduplication on specific namespaces, regardless of the the [default](#default) for the broker, using the [`pulsar-admin namespace set-deduplication`](reference-pulsar-admin.md#namespace-set-deduplication) command. You can use the `--enable`/`-e` flag and specify the namespace. Here's an example with `<tenant>/<namespace>`:
 
 ```bash
 
@@ -50,7 +50,7 @@ $ bin/pulsar-admin namespaces set-deduplication \
 
 ### Disabling message deduplication {#disabling}
 
-You can disable message deduplication on a specific namespace using the same method shown [above](#enabling), except using the `--disable`/`-d` flag instead. Here's an example with <tenant>/<namespace>:
+You can disable message deduplication on a specific namespace using the same method shown [above](#enabling), except using the `--disable`/`-d` flag instead. Here's an example with `<tenant>/<namespace>`:
 
 ```bash
 
