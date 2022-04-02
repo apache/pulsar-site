@@ -14,7 +14,7 @@ import {
 } from "@docusaurus/plugin-content-docs/client";
 import { useDocsPreferredVersion } from "@docusaurus/theme-common";
 import { translate } from "@docusaurus/Translate";
-// let versions = require("../../versions-full.json");
+// let versions = require("../../versions.json");
 // const _latestVersion = versions[0];
 // versions = [{ name: "current", label: "Master", path: "/docs/next" }].concat(
 //   versions.map((item) => {
@@ -39,16 +39,14 @@ export default function DocsVersionDropdownNavbarItem({
 }) {
   const activeDocContext = useActiveDocContext(docsPluginId);
   // const _versions = useVersions(docsPluginId);
-  // console.log(_versions);
   const latestVersion = useLatestVersion(docsPluginId);
   const { preferredVersion, savePreferredVersionName } =
     useDocsPreferredVersion(docsPluginId);
-  console.log(activeDocContext);
   const versions = [
     activeDocContext.activeVersion,
     {
       name: "others",
-      label: "Other Versions",
+      label: "Other",
       path: "/versions",
     },
   ];
@@ -60,9 +58,6 @@ export default function DocsVersionDropdownNavbarItem({
         version.name
       ] || { path: "/docs/" + version.name + "/about" };
       // getVersionMainDoc(version);
-      // console.log("version: ", version);
-      // console.log("main: ", getVersionMainDoc(version));
-      // console.log("versionDoc: ", versionDoc);
       return {
         isNavLink: true,
         label: version.label,

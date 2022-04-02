@@ -11,10 +11,28 @@ import WavySeparatorSix from '@site/static/img/separator-6.svg';
 import { pageUrl } from "@site/src/utils/index";
 const teamObj = require("../../data/team.js");
 export default function Community(props) {
+  
+  // Images in this array are used in the carousel
+  const slidesArr = [
+    { 
+      img: useBaseUrl('/img/community-photo-small.jpg'),
+      alt: 'community photo'
+    },
+    { 
+      img: useBaseUrl('/img/community-image-2.jpg'),
+      alt: 'community photo 2'
+    },
+    { 
+      img: useBaseUrl('/img/community-image-2.jpg'),
+      alt: 'community photo 3'
+    },
+  ];
+
   useEffect((d) => {
+    // used to scroll to anchor on the page
     if(location.hash){
       let hash = location.hash;
-      let id = hash.substring(1);
+      let id = hash.split('-')[1];
       let target = document.getElementById(id);
       if(target){
         target.scrollIntoView({
@@ -23,21 +41,71 @@ export default function Community(props) {
         });
       }
     }
-    const first = document.getElementById('slider').firstChild;
+    
+    // highlights the link in the navigation when that section is in the viewport
+    const sections = document.querySelectorAll(".scrollable");
+    const links = document.querySelectorAll(".scroll-link");
+    var observer = new IntersectionObserver(
+      function (entries, observer) {
+        if (entries[0].isIntersecting === true) {
+          let id = entries[0].target.id;
+          let target = 'scroll-'+id;
+          links.forEach(l => {
+            l.classList.remove('active-section');
+          });
+          let finalTarget = document.getElementById(target);
+          if(finalTarget){
+            finalTarget.classList.add('active-section');
+          }
+        }
+      },
+      { threshold: [ 0.1 ] }
+    );
+    sections.forEach(s => {
+      observer.observe(document.getElementById(s.id));
+    });
+
+    // This code runs the image carousel
     const slides = document.querySelectorAll('.slide-image');
+    const allDots = document.getElementsByClassName('dot');
+    var showSlide = function() {
+        let id = this.getAttribute("id");
+        let slideId = id.replace('dot', 'slide');
+        let target = document.getElementById(slideId);
+        var active = document.querySelector('.active-slide');
+        var activeDot = document.querySelector('.active-dot');
+        active.classList.remove('active-slide');
+        activeDot.classList.remove('active-dot');
+        this.classList.add('active-dot');
+        target.classList.add('active-slide');
+        clearInterval(interval);
+    };
+    for (var i = 0; i < allDots.length; i++) {
+        allDots[i].addEventListener('click', showSlide, false);
+    }
+    
+    const firstSlide = document.getElementById('slide-0');
+    const firstDot = document.getElementById('dot-0');
+    firstSlide.classList.add('active-slide');
+    firstDot.classList.add('active-dot');
+    const dots = document.querySelectorAll('.dot');
     const slideCount = slides.length;
     const intervalTime = 4000;
     let interval;
     let counter = 0;
     function cycleSlides(){
       var active = document.querySelector('.active-slide');
+      var activeDot = document.querySelector('.active-dot');
         active.classList.remove('active-slide');
+        activeDot.classList.remove('active-dot');
         if (counter === (slideCount - 1)){
           slides[0].classList.add('active-slide');
+          dots[0].classList.add('active-dot');
           counter = 0;
         } else {
           var next = counter++;
           slides[next].nextElementSibling.classList.add('active-slide');
+          dots[next].nextElementSibling.classList.add('active-dot');
           counter + 1;
         }
     }
@@ -62,7 +130,7 @@ export default function Community(props) {
         <div className="hero-bg absolute z-0">
           <img className="relative" src={useBaseUrl('/img/community-hero-bg.jpg')} />
         </div>
-        <section id="welcome" className="hero hero--welcome pt-24 relative">
+        <section id="welcome" className="scrollable hero hero--welcome pt-24 relative">
           <div className="inner cf">
             <h1>Welcome to the Pulsar Community</h1>
             <div className="cf">
@@ -84,11 +152,24 @@ export default function Community(props) {
                 <div className="image-bg-container p-8 md:w-1/2">
                   <div id="slider" className="relative">
                     {/* 
-                      NOTE: The first image must have a class of "active-slide". Add as many images as desired
+                      NOTE: add images to the slidesArr array above to include the in the image carousel.
                     */}
-                    <img className="slide-image active-slide" src={useBaseUrl('/img/community-photo-small.jpg')} alt="pulsar community photo" />
-                    <img className="slide-image" src={useBaseUrl('/img/community-image-2.jpg')} alt="pulsar community photo" />
-                    <img className="slide-image" src={useBaseUrl('/img/community-image-3.jpg')} alt="pulsar community photo" />
+                    {slidesArr.map((s,i) => 
+                      (() => {
+                        return(
+                          <img id={`slide-${i}`} key={i} className="slide-image" src={s.img} alt={s.alt} />
+                        )
+                      })()
+                    )}
+                  </div>
+                  <div className="pagination">
+                    {slidesArr.map((d,i) => 
+                      (() => {
+                        return(
+                          <div id={`dot-${i}`} key={i} className="dot"></div>
+                        )
+                      })()
+                    )}
                   </div>
                 </div>
               </div>
@@ -104,7 +185,7 @@ export default function Community(props) {
             </div>
           </section>
           <WavySeparatorFive></WavySeparatorFive>
-          <section id="discussions" className="">
+          <section id="discussions" className="scrollable">
             <div className="inner pt-12">
               
               <h2 className="text--center">Discussions</h2>
@@ -205,7 +286,7 @@ export default function Community(props) {
            
           </section>
           <WavySeparatorSix></WavySeparatorSix>
-          <section id="governance" className="py-12">
+          <section id="governance" className="py-12 scrollable">
             <div className="inner">
               <h2>Project Governance</h2>
               <p>Apache Pulsar is independently managed by its Project Management Committee (PMC)—the governing body tasked with project management including technical direction, voting on new committers and PMC members, setting policies, and formally voting on software product releases.</p>
@@ -226,7 +307,7 @@ export default function Community(props) {
                 >THE APACHE WAY</PillButton>
             </div>
           </section>
-          <section id="how-to-contribute" className="py-12">
+          <section id="contribute" className="py-12 scrollable">
             <div className="inner">
               <h2 className="text-center sm:text-left">How to Contribute</h2>
               <div className="">
@@ -262,7 +343,7 @@ export default function Community(props) {
             </div>
           </section>
           <WavySeparatorSix></WavySeparatorSix>
-          <section id="community" className="py-12">
+          <section id="community" className="py-12 scrollable">
             <div className="inner">
               <h2 className="text--center">Meet the Community</h2>
               <CommunityList list={teamObj.committers} />
