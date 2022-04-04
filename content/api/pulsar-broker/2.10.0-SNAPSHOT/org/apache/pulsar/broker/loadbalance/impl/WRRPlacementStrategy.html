@@ -240,7 +240,7 @@ implements <a href="../PlacementStrategy.html" title="interface in org.apache.pu
 <pre class="methodSignature">public&nbsp;<a href="../ResourceUnit.html" title="interface in org.apache.pulsar.broker.loadbalance">ResourceUnit</a>&nbsp;findBrokerForPlacement&#8203;(com.google.common.collect.Multimap&lt;java.lang.Long,&#8203;<a href="../ResourceUnit.html" title="interface in org.apache.pulsar.broker.loadbalance">ResourceUnit</a>&gt;&nbsp;finalCandidates)</pre>
 <div class="block">Function : getByWeightedRoundRobin returns ResourceUnit selected by WRR algorithm
               based on available resource on RU.
- <code>
+ &lt;code&gt;
  ^
  |
  |
@@ -249,14 +249,14 @@ implements <a href="../PlacementStrategy.html" title="interface in org.apache.pu
  |                |                        |                                |     |
  |   Broker 2     |       Broker 3         |         Broker 1               |  B4 |
  |                |                        |                                |     |
- +----------------+------------------------+--------------------------------+--------->
+ +----------------+------------------------+--------------------------------+---------
  0                20                       50                               90    100
 
  This is weighted Round robin, we calculate weight based on availability of resources;
  total availability is taken as a full range then each broker is given range based on
   its resource availability, if the number generated within total range happens to be in
  broker's range, that broker is selected
- </code></div>
+ &lt;/code&gt;</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../PlacementStrategy.html#findBrokerForPlacement(com.google.common.collect.Multimap)">findBrokerForPlacement</a></code>&nbsp;in interface&nbsp;<code><a href="../PlacementStrategy.html" title="interface in org.apache.pulsar.broker.loadbalance">PlacementStrategy</a></code></dd>

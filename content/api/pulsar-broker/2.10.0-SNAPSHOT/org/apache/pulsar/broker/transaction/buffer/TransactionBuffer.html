@@ -136,8 +136,8 @@ public interface <span class="typeNameLabel">TransactionBuffer</span></pre>
 
  <p>When committing transaction starts, the broker will append a `COMMITTED`
  marker to the data partition first to mark the transaction is committed.
- The broker knows the data ledger of the commit marker and calls <code>#commitTxn(TxnID, long, long)</code>
- to commit and seal the buffer.
+ The broker knows the data ledger of the commit marker and calls
+ <a href="#commitTxn(org.apache.pulsar.client.api.transaction.TxnID,long)"><code>commitTxn(TxnID, long)</code></a> to commit and seal the buffer.
 
  <p>When the marker is appended to the data partition, all the entries are visible
  to the consumers. So a transaction reader <a href="TransactionBufferReader.html" title="interface in org.apache.pulsar.broker.transaction.buffer"><code>TransactionBufferReader</code></a> will be
