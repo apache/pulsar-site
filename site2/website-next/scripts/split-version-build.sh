@@ -21,7 +21,7 @@ function _build() {
 }
 
 function _buildVersion() {
-    echo "..." $buildVersion " begin build..."
+    echo "..." $buildVersion "begin build..."
     if [[ $buildVersion = "next" ]]; then
         echo "[\"current\"]" >.build-versions.json
     else
@@ -51,7 +51,7 @@ function _buildVersion() {
 # Build next version that has any changed
 while read version; do
     buildVersion=$version
-    if [[ $@ == *website-next/versioned_docs/version-$version* || $buildVersion == "next" || $BUILD_ALL_VERSION == "1" || $buildVersion == $BUILD_VERSION ]]; then
+    if [[ $@ == *website-next/versioned_docs/version-$version* || $buildVersion == "next" || $BUILD_ALL_VERSION == "1" || $BUILD_VERSION == *$buildVersion* ]]; then
         _buildVersion
     else
         echo "..." $buildVersion "no change, skip"
