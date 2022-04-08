@@ -322,8 +322,8 @@ module.exports = {
       additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
     },
     algolia: {
-      appId: "d226a455cecdd4bc18a554c1b47e5b52",
-      apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
+      appId: "WK2YL0SALL",
+      apiKey: "3d383365697b6418f159cbe03e12a0f8",
       indexName: "apache_pulsar",
       algoliaOptions: {
         facetFilters: ["language:LANGUAGE", "version:VERSION"],
