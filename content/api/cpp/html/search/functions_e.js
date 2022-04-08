@@ -80,6 +80,7 @@ var searchData=
   ['setstatsintervalinseconds',['setStatsIntervalInSeconds',['../classpulsar_1_1_client_configuration.html#ad4dbc03465c7cdfae528c9dfe9d43cec',1,'pulsar::ClientConfiguration']]],
   ['setstickyranges',['setStickyRanges',['../classpulsar_1_1_key_shared_policy.html#a0f54710a1b3e5c91303ff1391bcc7872',1,'pulsar::KeySharedPolicy']]],
   ['setsubscriptioninitialposition',['setSubscriptionInitialPosition',['../classpulsar_1_1_consumer_configuration.html#ab0e049e62befb9b924307ba6f990cd97',1,'pulsar::ConsumerConfiguration']]],
+  ['setsubscriptionproperties',['setSubscriptionProperties',['../classpulsar_1_1_consumer_configuration.html#afc5da389c33b35224f024caf3e1ca290',1,'pulsar::ConsumerConfiguration']]],
   ['setsubscriptionroleprefix',['setSubscriptionRolePrefix',['../classpulsar_1_1_reader_configuration.html#a281c0ae5579461f80677b43126329cd1',1,'pulsar::ReaderConfiguration']]],
   ['settickdurationinms',['setTickDurationInMs',['../classpulsar_1_1_consumer_configuration.html#a8b86fc6d5d8ca8e5c5dd35aa8a1c52b4',1,'pulsar::ConsumerConfiguration::setTickDurationInMs()'],['../classpulsar_1_1_reader_configuration.html#a23df99b9e97709fcaa50e1766eb84e9b',1,'pulsar::ReaderConfiguration::setTickDurationInMs()']]],
   ['settlsallowinsecureconnection',['setTlsAllowInsecureConnection',['../classpulsar_1_1_client_configuration.html#a53c581f0f665bb415415acf68b0d0863',1,'pulsar::ClientConfiguration']]],

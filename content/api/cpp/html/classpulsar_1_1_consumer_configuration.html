@@ -205,6 +205,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8399c4f4aa28a7373c46709f9206ecf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2c0ddeaf2537c4f7959b81f2ef64a5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpulsar_1_1_consumer_configuration.html">ConsumerConfiguration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_consumer_configuration.html#ab2c0ddeaf2537c4f7959b81f2ef64a5d">setProperties</a> (const std::map&lt; std::string, std::string &gt; &amp;properties)</td></tr>
 <tr class="separator:ab2c0ddeaf2537c4f7959b81f2ef64a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff92bccdbe54330c09197ee7a7a3c693"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_consumer_configuration.html#aff92bccdbe54330c09197ee7a7a3c693">getSubscriptionProperties</a> () const </td></tr>
+<tr class="separator:aff92bccdbe54330c09197ee7a7a3c693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc5da389c33b35224f024caf3e1ca290"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpulsar_1_1_consumer_configuration.html">ConsumerConfiguration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_consumer_configuration.html#afc5da389c33b35224f024caf3e1ca290">setSubscriptionProperties</a> (const std::map&lt; std::string, std::string &gt; &amp;subscriptionProperties)</td></tr>
+<tr class="separator:afc5da389c33b35224f024caf3e1ca290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9693c31afb355845c28afc29a37b2e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpulsar_1_1_consumer_configuration.html">ConsumerConfiguration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_consumer_configuration.html#aa9693c31afb355845c28afc29a37b2e1">setPriorityLevel</a> (int priorityLevel)</td></tr>
 <tr class="separator:aa9693c31afb355845c28afc29a37b2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a742efdf93be5237b73e3a466f35a093a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_consumer_configuration.html#a742efdf93be5237b73e3a466f35a093a">getPriorityLevel</a> () const </td></tr>
@@ -571,6 +575,22 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PulsarWrapper</b></t
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the configured <code>InitialPosition</code> for the consumer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aff92bccdbe54330c09197ee7a7a3c693"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, std::string&gt;&amp; pulsar::ConsumerConfiguration::getSubscriptionProperties </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get all the subscription properties attached to this subscription. </p>
 
 </div>
 </div>
@@ -1248,6 +1268,29 @@ false if the property is not defined </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">subscriptionInitialPosition</td><td>the initial position at which to set the cursor when subscribing to the topic for the first time </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afc5da389c33b35224f024caf3e1ca290"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpulsar_1_1_consumer_configuration.html">ConsumerConfiguration</a>&amp; pulsar::ConsumerConfiguration::setSubscriptionProperties </td>
+          <td>(</td>
+          <td class="paramtype">const std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>subscriptionProperties</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets a new subscription properties for this subscription. Notice: SubscriptionProperties are immutable, and consumers under the same subscription will fail to create a subscription if they use different properties.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subscriptionProperties</td><td>all the subscription properties in the provided map </td></tr>
   </table>
   </dd>
 </dl>
