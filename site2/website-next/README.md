@@ -2,32 +2,28 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-## Installation
+## Installation Dependencies
 
 ```console
 yarn install
 ```
 
-## Local Development
+## Local Debug
 
 ```console
 yarn start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## Local Preview
 
-## Build
-
-```console
-yarn build
+```
+./preview.sh 2.9.1 2.9.0 #or more versions, just split by space
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+> Different from the old site, running yarn start only builds the docs of the latest version for your local preview. This change is specifically to reduce the build time. 
+> 
+> To build and preview the historical versions of docs in the new site, for example, 2.9.1 and 2.9.0, run the ./preview.sh 2.9.1 2.9.0 command under the pulsar-site/site2/website-next directory.
+> 
+> Note: 
+> 
+> Use space to separate version numbers, and append version numbers in the command if you want to preview more versions of docs locally.
