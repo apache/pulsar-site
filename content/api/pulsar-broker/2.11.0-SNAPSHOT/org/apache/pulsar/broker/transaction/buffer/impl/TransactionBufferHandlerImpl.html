@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -181,7 +181,7 @@ implements org.apache.pulsar.client.impl.transaction.TransactionBufferHandler</p
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.pulsar.client.api.PulsarClient,io.netty.util.HashedWheelTimer,int,long)">TransactionBufferHandlerImpl</a></span>&#8203;(org.apache.pulsar.client.api.PulsarClient&nbsp;pulsarClient,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.pulsar.broker.PulsarService,io.netty.util.HashedWheelTimer,int,long)">TransactionBufferHandlerImpl</a></span>&#8203;(<a href="../../../PulsarService.html" title="class in org.apache.pulsar.broker">PulsarService</a>&nbsp;pulsarService,
                             io.netty.util.HashedWheelTimer&nbsp;timer,
                             int&nbsp;maxConcurrentRequests,
                             long&nbsp;operationTimeoutInMills)</code></th>
@@ -245,23 +245,28 @@ implements org.apache.pulsar.client.impl.transaction.TransactionBufferHandler</p
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;org.apache.pulsar.client.impl.ClientCnx&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getClientCnxWithLookup(java.lang.String)">getClientCnxWithLookup</a></span>&#8203;(java.lang.String&nbsp;topic)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPendingRequestsCount()">getPendingRequestsCount</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleEndTxnOnSubscriptionResponse(long,org.apache.pulsar.common.api.proto.CommandEndTxnOnSubscriptionResponse)">handleEndTxnOnSubscriptionResponse</a></span>&#8203;(long&nbsp;requestId,
                                   org.apache.pulsar.common.api.proto.CommandEndTxnOnSubscriptionResponse&nbsp;response)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleEndTxnOnTopicResponse(long,org.apache.pulsar.common.api.proto.CommandEndTxnOnPartitionResponse)">handleEndTxnOnTopicResponse</a></span>&#8203;(long&nbsp;requestId,
                            org.apache.pulsar.common.api.proto.CommandEndTxnOnPartitionResponse&nbsp;response)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onResponse(org.apache.pulsar.broker.transaction.buffer.impl.TransactionBufferHandlerImpl.OpRequestSend)">onResponse</a></span>&#8203;(<a href="TransactionBufferHandlerImpl.OpRequestSend.html" title="class in org.apache.pulsar.broker.transaction.buffer.impl">TransactionBufferHandlerImpl.OpRequestSend</a>&nbsp;op)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -290,16 +295,21 @@ implements org.apache.pulsar.client.impl.transaction.TransactionBufferHandler</p
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.apache.pulsar.client.api.PulsarClient,io.netty.util.HashedWheelTimer,int,long)">
+<a id="&lt;init&gt;(org.apache.pulsar.broker.PulsarService,io.netty.util.HashedWheelTimer,int,long)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>TransactionBufferHandlerImpl</h4>
-<pre>public&nbsp;TransactionBufferHandlerImpl&#8203;(org.apache.pulsar.client.api.PulsarClient&nbsp;pulsarClient,
+<pre>public&nbsp;TransactionBufferHandlerImpl&#8203;(<a href="../../../PulsarService.html" title="class in org.apache.pulsar.broker">PulsarService</a>&nbsp;pulsarService,
                                     io.netty.util.HashedWheelTimer&nbsp;timer,
                                     int&nbsp;maxConcurrentRequests,
-                                    long&nbsp;operationTimeoutInMills)</pre>
+                                    long&nbsp;operationTimeoutInMills)
+                             throws org.apache.pulsar.broker.PulsarServerException</pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>org.apache.pulsar.broker.PulsarServerException</code></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -391,6 +401,15 @@ implements org.apache.pulsar.client.impl.transaction.TransactionBufferHandler</p
 <li class="blockList">
 <h4>onResponse</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;onResponse&#8203;(<a href="TransactionBufferHandlerImpl.OpRequestSend.html" title="class in org.apache.pulsar.broker.transaction.buffer.impl">TransactionBufferHandlerImpl.OpRequestSend</a>&nbsp;op)</pre>
+</li>
+</ul>
+<a id="getClientCnxWithLookup(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getClientCnxWithLookup</h4>
+<pre class="methodSignature">public&nbsp;java.util.concurrent.CompletableFuture&lt;org.apache.pulsar.client.impl.ClientCnx&gt;&nbsp;getClientCnxWithLookup&#8203;(java.lang.String&nbsp;topic)</pre>
 </li>
 </ul>
 <a id="getClientCnx(java.lang.String)">
