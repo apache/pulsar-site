@@ -9,7 +9,7 @@ Pulsar Manager is a web-based GUI management and monitoring tool that helps admi
 
 :::note
 
-If you are monitoring your current stats with [Pulsar dashboard](administration-dashboard), we recommend you use Pulsar Manager instead. Pulsar dashboard is deprecated.
+If you are monitoring your current stats with Pulsar dashboard, we recommend you use Pulsar Manager instead. Pulsar dashboard is deprecated.
 
 :::
 

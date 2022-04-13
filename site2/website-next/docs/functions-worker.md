@@ -230,14 +230,14 @@ authenticationProviders: ['org.apache.pulsar.broker.authentication.Authenticatio
 
 ```
 
-For *SASL Authentication* provider, add `saslJaasClientAllowedIds` and `saslJaasBrokerSectionName`
+For *SASL Authentication* provider, add `saslJaasClientAllowedIds` and `saslJaasServerSectionName`
 under `properties` if needed. 
 
 ```
 
 properties:
   saslJaasClientAllowedIds: .*pulsar.*
-  saslJaasBrokerSectionName: Broker
+  saslJaasServerSectionName: Broker
 
 ```
 
