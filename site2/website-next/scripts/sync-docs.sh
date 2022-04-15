@@ -4,6 +4,7 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 cd $ROOT_DIR/../
 
 cp -r pulsar/site2/docs/* pulsar-site/site2/docs
+cp -r pulsar/site2/website/sidebars.json pulsar-site/site2/website/sidebars.json
 cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
 cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
 cp -r pulsar/site2/docs/assets/* pulsar-site/site2/website-next/static/assets
