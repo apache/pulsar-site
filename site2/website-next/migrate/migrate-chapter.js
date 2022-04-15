@@ -79,7 +79,7 @@ const migrate = (version, category, cb) => {
     } else {
       //Temp overrite test
       // categoryMap[category].items = sidebar;
-      categoryMap[category].items.concat(
+      categoryMap[category].items = categoryMap[category].items.concat(
         sidebar.filter((item) => {
           return !categoryMap[category].items.includes(item);
         })
