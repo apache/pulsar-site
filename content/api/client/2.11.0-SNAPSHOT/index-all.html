@@ -341,6 +341,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Buffering large number of outstanding uncompleted chunked messages can create memory pressure and it can be
  guarded by providing this @maxPendingChunkedMessage threshold.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#autoAckOldestChunkedMessageOnQueueFull(boolean)">autoAckOldestChunkedMessageOnQueueFull(boolean)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
+<dd>
+<div class="block">Buffering large number of outstanding uncompleted chunked messages can create memory pressure and it can be
+ guarded by providing this @maxPendingChunkedMessage threshold.</div>
+</dd>
 <dt><a href="org/apache/pulsar/client/api/AutoClusterFailoverBuilder.html" title="interface in org.apache.pulsar.client.api"><span class="typeNameLink">AutoClusterFailoverBuilder</span></a> - Interface in <a href="org/apache/pulsar/client/api/package-summary.html">org.apache.pulsar.client.api</a></dt>
 <dd>
 <div class="block"><a href="org/apache/pulsar/client/api/AutoClusterFailoverBuilder.html" title="interface in org.apache.pulsar.client.api"><code>AutoClusterFailoverBuilder</code></a> is used to configure and create instance of <a href="org/apache/pulsar/client/api/ServiceUrlProvider.html" title="interface in org.apache.pulsar.client.api"><code>ServiceUrlProvider</code></a>.</div>
@@ -1206,6 +1211,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">There can be only 1 consumer on the same topic with the same subscription name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ConsumerBuilder.html#expireTimeOfIncompleteChunkedMessage(long,java.util.concurrent.TimeUnit)">expireTimeOfIncompleteChunkedMessage(long, TimeUnit)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a></dt>
+<dd>
+<div class="block">If producer fails to publish all the chunks of a message then consumer can expire incomplete chunks if consumer
+ won't be able to receive all chunks in expire times (default 1 minute).</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#expireTimeOfIncompleteChunkedMessage(long,java.util.concurrent.TimeUnit)">expireTimeOfIncompleteChunkedMessage(long, TimeUnit)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
 <dd>
 <div class="block">If producer fails to publish all the chunks of a message then consumer can expire incomplete chunks if consumer
  won't be able to receive all chunks in expire times (default 1 minute).</div>
@@ -2328,6 +2338,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ConsumerBuilder.html#maxPendingChunkedMessage(int)">maxPendingChunkedMessage(int)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a></dt>
+<dd>
+<div class="block">Consumer buffers chunk messages into memory until it receives all the chunks of the original message.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/apache/pulsar/client/api/ReaderBuilder.html#maxPendingChunkedMessage(int)">maxPendingChunkedMessage(int)</a></span> - Method in interface org.apache.pulsar.client.api.<a href="org/apache/pulsar/client/api/ReaderBuilder.html" title="interface in org.apache.pulsar.client.api">ReaderBuilder</a></dt>
 <dd>
 <div class="block">Consumer buffers chunk messages into memory until it receives all the chunks of the original message.</div>
 </dd>
