@@ -11,7 +11,7 @@ import WavySeparatorSix from '@site/static/img/separator-6.svg';
 import { pageUrl } from "@site/src/utils/index";
 const teamObj = require("../../data/team.js");
 export default function Community(props) {
-  
+
   // Images in this array are used in the carousel
   const slidesArr = [
     { 
@@ -23,7 +23,7 @@ export default function Community(props) {
       alt: 'community photo 2'
     },
     { 
-      img: useBaseUrl('/img/community-image-2.jpg'),
+      img: useBaseUrl('/img/community-image-3.jpg'),
       alt: 'community photo 3'
     },
   ];
@@ -46,7 +46,7 @@ export default function Community(props) {
     const sections = document.querySelectorAll(".scrollable");
     const links = document.querySelectorAll(".scroll-link");
     var observer = new IntersectionObserver(
-      function (entries, observer) {
+      function (entries) {
         if (entries[0].isIntersecting === true) {
           let id = entries[0].target.id;
           let target = 'scroll-'+id;
@@ -59,7 +59,7 @@ export default function Community(props) {
           }
         }
       },
-      { threshold: [ 0.1 ] }
+      { threshold: [ 0.5 ] }
     );
     sections.forEach(s => {
       observer.observe(document.getElementById(s.id));
@@ -67,23 +67,7 @@ export default function Community(props) {
 
     // This code runs the image carousel
     const slides = document.querySelectorAll('.slide-image');
-    const allDots = document.getElementsByClassName('dot');
-    var showSlide = function() {
-        let id = this.getAttribute("id");
-        let slideId = id.replace('dot', 'slide');
-        let target = document.getElementById(slideId);
-        var active = document.querySelector('.active-slide');
-        var activeDot = document.querySelector('.active-dot');
-        active.classList.remove('active-slide');
-        activeDot.classList.remove('active-dot');
-        this.classList.add('active-dot');
-        target.classList.add('active-slide');
-        clearInterval(interval);
-    };
-    for (var i = 0; i < allDots.length; i++) {
-        allDots[i].addEventListener('click', showSlide, false);
-    }
-    
+    const allDots = document.getElementsByClassName('dot'); 
     const firstSlide = document.getElementById('slide-0');
     const firstDot = document.getElementById('dot-0');
     firstSlide.classList.add('active-slide');
@@ -114,7 +98,27 @@ export default function Community(props) {
         cycleSlides();
       }, intervalTime);
     };
+
     slideInterval();
+    
+    // if you click on  on a pagination dot
+    var showSlide = function() {
+      let id = this.getAttribute("id");
+      let slideId = id.replace('dot', 'slide');
+      let target = document.getElementById(slideId);
+      var active = document.querySelector('.active-slide');
+      var activeDot = document.querySelector('.active-dot');
+      active.classList.remove('active-slide');
+      activeDot.classList.remove('active-dot');
+      this.classList.add('active-dot');
+      target.classList.add('active-slide');
+      // stops the interval when someone clicks on a dot.
+      clearInterval(interval);
+    };
+    for (var i = 0; i < allDots.length; i++) {
+        allDots[i].addEventListener('click', showSlide, false);
+    }
+
     // cleanup required or interval will continue to run, even on other pages
     return function cleanup() {
       clearInterval(interval);
@@ -154,21 +158,19 @@ export default function Community(props) {
                     {/* 
                       NOTE: add images to the slidesArr array above to include the in the image carousel.
                     */}
-                    {slidesArr.map((s,i) => 
-                      (() => {
+                    {slidesArr.map((s, i) => {
                         return(
                           <img id={`slide-${i}`} key={i} className="slide-image" src={s.img} alt={s.alt} />
                         )
-                      })()
+                      }
                     )}
                   </div>
-                  <div className="pagination">
-                    {slidesArr.map((d,i) => 
-                      (() => {
-                        return(
-                          <div id={`dot-${i}`} key={i} className="dot"></div>
+                  <div className="pagination">                   
+                    {slidesArr.map((d, i) => {
+                       return(
+                        <div id={`dot-${i}`} key={i} className="dot"></div>
                         )
-                      })()
+                      }
                     )}
                   </div>
                 </div>
