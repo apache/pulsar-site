@@ -10,7 +10,9 @@ cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versio
 cp -r pulsar/site2/docs/assets/* pulsar-site/site2/website-next/static/assets
 
 cp -r pulsar/site2/website/versions.json pulsar-site/site2/website/versions.json
+cp -r pulsar/site2/website/releases.json pulsar-site/site2/website/releases.json
 cp -r pulsar/site2/website/versions.json pulsar-site/site2/website-next/versions.json
+cp -r pulsar/site2/website/releases.json pulsar-site/site2/website-next/releases.json
 # cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
 # cp -r pulsar-site/site2/website-next/docs/assets/* pulsar-site/site2/website-next/static/assets
 # rm -rf pulsar-site/site2/website-next/docs/assets
