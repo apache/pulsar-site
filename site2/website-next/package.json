@@ -7,6 +7,8 @@
     "start": "NODE_OPTIONS=--max_old_space_size=16000 docusaurus start",
     "dev": "NODE_OPTIONS=--max_old_space_size=16000 node scripts/split-swagger-by-version.js && docusaurus start",
     "build": "NODE_OPTIONS=--max_old_space_size=16000 docusaurus build",
+    "build:all:split": "BUILD_ALL_VERSION=1 ./scripts/split-version-build.sh",
+    "sync:docs": "./scripts/sync-docs.sh",
     "preview": "npm run build && sh scripts/docker.sh",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -73,7 +75,7 @@
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
     "postcss-preset-env": "^7.1.0",
-    "tailwindcss": "^3.0.7",
+    "tailwindcss": "^3.0.24",
     "sync-request": "^6.1.0"
   }
 }
