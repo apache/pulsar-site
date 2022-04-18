@@ -25,6 +25,7 @@ This section provides an example of how to use the transaction API to send and r
    ```
    
    transactionCoordinatorEnabled=true
+   systemTopicEnabled=true
    
    ```
 
