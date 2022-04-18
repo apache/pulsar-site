@@ -1,10 +1,10 @@
 ---
 id: getting-started-docker
 title: Set up a standalone Pulsar in Docker
-sidebar_label: "Run Pulsar in Docker"
+sidebar_label: "Get Started"
 ---
 
-For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container. 
+For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
 If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition) and follow the instructions for your OS.
 
@@ -13,13 +13,13 @@ If you have not installed Docker, download the [Community edition](https://www.d
 * For MacOS, Linux, and Windows:
 
   ```shell
-  
+
   $ docker run -it -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
-  
+
   ```
 
 A few things to note about this command:
- * The data, metadata, and configuration are persisted on Docker volumes in order to not start "fresh" every 
+ * The data, metadata, and configuration are persisted on Docker volumes in order to not start "fresh" every
 time the container is restarted. For details on the volumes you can use `docker volume inspect <sourcename>`
  * For Docker on Windows make sure to configure it to use Linux containers
  * The docker container will run as UID 10000 and GID 0, by default. You'll need to ensure the mounted volumes give write permission to either UID 10000 or GID 0. Note that UID 10000 is arbitrary, so it is recommended to make these mounts writable for the root group (GID 0).
@@ -46,7 +46,7 @@ For more information, see [Topics](concepts-messaging.md#topics).
 
 ## Use Pulsar in Docker
 
-Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python) 
+Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python)
 and [C++](client-libraries-cpp). If you're running a local standalone cluster, you can
 use one of these root URLs to interact with your cluster:
 
@@ -211,4 +211,3 @@ The output is something like this:
 }
 
 ```
-
