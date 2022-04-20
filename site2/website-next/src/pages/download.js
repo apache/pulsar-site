@@ -9,8 +9,9 @@ import Translate, { translate } from "@docusaurus/Translate";
 import ReactMarkdown from "react-markdown";
 
 const releases = require(`../../releases.json`);
-const pulsarManagerReleases = require(`../../pulsar-manager-release.json`);
-const pulsarAdaptersReleases = require(`../../pulsar-adapters-release.json`);
+const legacyVersions = require(`../../legacy-versions.json`);
+const pulsarManagerReleases = require(`../../pulsar-manager/pulsar-manager-release.json`);
+const pulsarAdaptersReleases = require(`../../pulsar-manager/pulsar-adapters-release.json`);
 const connectors = require(`../../data/connectors.js`);
 
 function getLatestArchiveMirrorUrl(version, type) {
@@ -195,9 +196,12 @@ export default function page(props) {
         sourceAsc: `${info.srcArchiveUrl}.asc`,
         sourceSha: `${info.srcArchiveUrl}.${sha}`,
         sourceShaText: `${sha}`,
-        releaseNote: `${siteConfig.baseUrl}${language(
-          props
-        )}release-notes#${info.version.replace(/\./g, "")}`,
+        releaseNote: !legacyVersions.includes(info.version)
+          ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${info.version}`
+          : `${siteConfig.baseUrl}release-notes/legacy/#${info.version.replace(
+              /\./g,
+              ""
+            )}`,
       };
     });
   const apmStable = [
