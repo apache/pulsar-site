@@ -1,3 +1,8 @@
+---
+id: pulsar-manager-release-notes
+title: Pulsar Manager Release Notes
+---
+
 ## Apache Pulsar Manager
 
 ### 0.2.0 &mdash; 2020-09-28 <a id="0.2.0"></a>

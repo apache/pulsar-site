@@ -13,6 +13,14 @@ cp -r pulsar/site2/website/versions.json pulsar-site/site2/website/versions.json
 cp -r pulsar/site2/website/releases.json pulsar-site/site2/website/releases.json
 cp -r pulsar/site2/website/versions.json pulsar-site/site2/website-next/versions.json
 cp -r pulsar/site2/website/releases.json pulsar-site/site2/website-next/releases.json
+
+cp -r pulsar/site2/website/release-notes.md pulsar-site/site2/website/release-notes.md
+cp -r pulsar/site2/website/pulsar-manager-release.json pulsar-site/site2/website/pulsar-manager-release.json
+cp -r pulsar/site2/website/pulsar-manager-release-notes.md pulsar-site/site2/website/pulsar-manager-release-notes.md
+cp -r pulsar/site2/website/pulsar-adapters-release.json pulsar-site/site2/website/pulsar-adapters-release.json
+
+cp -r pulsar/site2/website/pulsar-manager-release-notes.md pulsar-site/site2/website-next/pulsar-manager-release-notes.md
+
 # cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
 # cp -r pulsar-site/site2/website-next/docs/assets/* pulsar-site/site2/website-next/static/assets
 # rm -rf pulsar-site/site2/website-next/docs/assets
