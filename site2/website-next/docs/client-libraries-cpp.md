@@ -386,6 +386,8 @@ using namespace pulsar;
 
 int main() {
     Client client("pulsar://localhost:6650");
+    
+    Producer producer;
 
     Result result = client.createProducer("persistent://public/default/my-topic", producer);
     if (result != ResultOk) {
@@ -429,6 +431,7 @@ Without this configuration, the result code `ResultProducerQueueIsFull` is passe
 
 #include <pulsar/Client.h>
 #include <thread>
+#include <atomic>
 
 using namespace pulsar;
 
