@@ -213,7 +213,7 @@ export default function Community(props) {
                             target="_blank"
                             href="mailto:users-unsubscribe@pulsar.apache.org"
                           >Unsubscribe</PillButton>
-                        <p><strong>You can access the archive <a className="secondary-cta" href="https://lists.apache.org/list.html?users@pulsar.apache.org" target="_blank">here</a>.</strong></p>
+                        <p><strong>Access the <a className="secondary-cta" href="https://lists.apache.org/list.html?users@pulsar.apache.org" target="_blank">User List Archives</a>.</strong></p>
                       </div>
                       <div className="discussion-box md:w-1/2 md:pr-2">
                         <h4>Developer List</h4>
@@ -230,7 +230,7 @@ export default function Community(props) {
                             href="mailto:dev-unsubscribe@pulsar.apache.org"
                           >Unsubscribe</PillButton>
                        
-                        <p><strong>You can access the archive <a  className="secondary-cta" href="http://mail-archives.apache.org/mod_mbox/pulsar-dev/">here</a>.</strong></p>
+                        <p><strong>Access the <a  className="secondary-cta" href="http://mail-archives.apache.org/mod_mbox/pulsar-dev/">Developer List Archives</a>.</strong></p>
                       </div>
                     </div>
 
@@ -319,7 +319,17 @@ export default function Community(props) {
                   </div>
                   <div className="sm:w-2/3">
                     <h3>Contributing to the Project</h3>
-                    <p>Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more. Read our <a href={pageUrl('contributing')} className="secondary-cta">Guide to Contributing</a> and <a href={pageUrl('coding-guide')} className="secondary-cta">Coding Guide</a> to get started.</p>
+                    <p>Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more. </p>
+                    <PillButton
+                      variant=""
+                      target=""
+                      href={pageUrl('contributing')}
+                    >Contributor Guide</PillButton>
+                    <PillButton
+                      variant="grey"
+                      target=""
+                      href={pageUrl('coding-guide')}
+                    >Coding Guide</PillButton>
                   </div>
                 </div>
                 <div className="flex flex-col  sm:flex-row items-center  py-12">
