@@ -47,8 +47,16 @@ export default function Home() {
           <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
             <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
               <TabUnstyled className="mx-2">All</TabUnstyled>
-              <TabUnstyled className="mx-2">Connectors</TabUnstyled>
-              <TabUnstyled className="mx-2">Adapters</TabUnstyled>
+              <TabUnstyled className="mx-2">Client API</TabUnstyled>
+              <TabUnstyled className="mx-2">Client Wrapper</TabUnstyled>
+              <TabUnstyled className="mx-2">Database Integration</TabUnstyled>
+              <TabUnstyled className="mx-2">IO</TabUnstyled>
+              <TabUnstyled className="mx-2">Logging</TabUnstyled>
+              <TabUnstyled className="mx-2">Observability</TabUnstyled>
+              <TabUnstyled className="mx-2">Protocol Handlers</TabUnstyled>
+              <TabUnstyled className="mx-2">Search and Query </TabUnstyled>
+              <TabUnstyled className="mx-2">Security Plugin</TabUnstyled>
+              <TabUnstyled className="mx-2">Stream Processing</TabUnstyled>
               <TabUnstyled className="mx-2">Tools</TabUnstyled>
             </TabsListUnstyled>
             <form className="search-form relative z10 text--center">
@@ -57,9 +65,17 @@ export default function Home() {
               <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
             </form>
             <TabPanelUnstyled value={0}><EcoCards search={searchString} resources={allArr} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={1}><EcoCards search={searchString} resources={ecoObj.connector} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={2}><EcoCards search={searchString} resources={ecoObj.adapter} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={3}><EcoCards search={searchString} resources={ecoObj.tool} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={1}><EcoCards search={searchString} resources={ecoObj.client_api} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={2}><EcoCards search={searchString} resources={ecoObj.client_wrapper} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={3}><EcoCards search={searchString} resources={ecoObj.database_integration} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={4}><EcoCards search={searchString} resources={ecoObj.io} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={5}><EcoCards search={searchString} resources={ecoObj.logging} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={6}><EcoCards search={searchString} resources={ecoObj.observability} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={7}><EcoCards search={searchString} resources={ecoObj.protocol_handlers} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={8}><EcoCards search={searchString} resources={ecoObj.search_and_query} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={9}><EcoCards search={searchString} resources={ecoObj.security_plugins} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={10}><EcoCards search={searchString} resources={ecoObj.stream_processing} /></TabPanelUnstyled>
+            <TabPanelUnstyled value={11}><EcoCards search={searchString} resources={ecoObj.tools} /></TabPanelUnstyled>
           </TabsUnstyled>
         </section>
       </div>
