@@ -78,7 +78,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mysql-source"
-  topicName: "debezium-mysql-topic"
+  inputs: [ "debezium-mysql-topic" ]
   archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar"
   parallelism: 1
 
@@ -231,7 +231,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-postgres-source"
-  topicName: "debezium-postgres-topic"
+  inputs: [ "debezium-postgres-topic" ]
   archive: "connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar"
   parallelism: 1
 
@@ -386,7 +386,7 @@ You need to create a configuration file before using the Pulsar Debezium connect
   tenant: "public"
   namespace: "default"
   name: "debezium-mongodb-source"
-  topicName: "debezium-mongodb-topic"
+  inputs: [ "debezium-mongodb-topic" ]
   archive: "connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar"
   parallelism: 1
 
