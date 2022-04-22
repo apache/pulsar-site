@@ -1,7 +1,7 @@
 ---
 author: Penghui Li
 authorURL: https://twitter.com/lipenghui6
-title: Apache Pulsar 2.4.0
+title: "Apache Pulsar 2.4.0"
 ---
 
 We are glad to publish Apache Pulsar 2.4.0. This is the result of a huge 

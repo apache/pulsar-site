@@ -8,6 +8,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
 import { docUrl, getCache } from "../utils/index";
 const versions = require("../../versions.json");
+const legacyVersions = require(`../../legacy-versions.json`);
 
 export default function VersionsTable(props) {
   const { siteConfig } = useDocusaurusContext();
@@ -59,7 +60,11 @@ export default function VersionsTable(props) {
                 href={
                   row.name == "next"
                     ? repoUrl
-                    : `${siteConfig.baseUrl}release-notes/versioned/pulsar-${row.name}`
+                    : !legacyVersions.includes(row.name)
+                    ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${row.name}`
+                    : `${
+                        siteConfig.baseUrl
+                      }release-notes/legacy/#${row.name.replace(/\./g, "")}`
                 }
                 underline="none"
               >

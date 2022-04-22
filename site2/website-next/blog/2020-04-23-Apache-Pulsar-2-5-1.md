@@ -1,7 +1,7 @@
 ---
 author: Guangning E
 authorURL: https://twitter.com/tuteng3
-title: Apache Pulsar 2.5.1
+title: "Apache Pulsar 2.5.1"
 ---
 
 We are proud to publish Apache Pulsar 2.5.1. This is the result of a huge effort from the community, with over 130 commits and a long list of new features, general improvements and bug fixes.
