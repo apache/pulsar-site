@@ -41,4 +41,4 @@ else
 fi
 
 node migrate/migrate-blogs.js
-# node migrate/migrate-full.js
+node migrate/migrate-full.js
