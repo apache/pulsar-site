@@ -1,7 +1,7 @@
 ---
 author: Xiaolong Ran
 authorURL: https://twitter.com/wolf4j1
-title: Apache Pulsar 2.4.2
+title: "Apache Pulsar 2.4.2"
 ---
 
 We are proud to publish Apache Pulsar 2.4.2. Thank the great efforts from Apache Pulsar community with over 110 commits, covering improvements and bug fixes.

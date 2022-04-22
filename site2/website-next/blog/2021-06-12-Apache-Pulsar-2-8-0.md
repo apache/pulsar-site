@@ -1,6 +1,6 @@
 ---
 author: Matteo Merli, Sijie Guo
-title: Apache Pulsar 2.8.0
+title: "Apache Pulsar 2.8.0"
 ---
 
 # An Overview of the 2.8.0 Release
