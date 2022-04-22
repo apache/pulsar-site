@@ -346,7 +346,16 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubUrl}/edit/master/site2`,
+          // editUrl: `${githubUrl}/edit/master/site2`,
+          editUrl: ({
+            version,
+            versionDocsDirPath,
+            docPath,
+            permalink,
+            locale,
+          }) => {
+            return `${githubUrl}/edit/master/site2/docs/${docPath}`;
+          },
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
@@ -362,7 +371,7 @@ module.exports = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: `${githubUrl}/edit/master/site2/website-next`,
+          editUrl: `${githubUrl}/edit/master/site2/website`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
