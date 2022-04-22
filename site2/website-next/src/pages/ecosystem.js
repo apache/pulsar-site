@@ -46,18 +46,18 @@ export default function Home() {
           
           <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
             <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
-              <TabUnstyled className="mx-2">All</TabUnstyled>
-              <TabUnstyled className="mx-2">Client API</TabUnstyled>
-              <TabUnstyled className="mx-2">Client Wrapper</TabUnstyled>
-              <TabUnstyled className="mx-2">Database Integration</TabUnstyled>
-              <TabUnstyled className="mx-2">IO</TabUnstyled>
-              <TabUnstyled className="mx-2">Logging</TabUnstyled>
-              <TabUnstyled className="mx-2">Observability</TabUnstyled>
-              <TabUnstyled className="mx-2">Protocol Handlers</TabUnstyled>
-              <TabUnstyled className="mx-2">Search and Query </TabUnstyled>
-              <TabUnstyled className="mx-2">Security Plugin</TabUnstyled>
-              <TabUnstyled className="mx-2">Stream Processing</TabUnstyled>
-              <TabUnstyled className="mx-2">Tools</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">All</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Client API</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Client Wrapper</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Database Integration</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">IO</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Logging</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Observability</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Protocol Handlers</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Search and Query </TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Security Plugin</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Stream Processing</TabUnstyled>
+              <TabUnstyled className="mx-2 mb-2">Tools</TabUnstyled>
             </TabsListUnstyled>
             <form className="search-form relative z10 text--center">
               <label className="block mb-4">Search by name or description key word: </label>
