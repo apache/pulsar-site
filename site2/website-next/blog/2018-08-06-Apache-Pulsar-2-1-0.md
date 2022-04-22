@@ -1,7 +1,7 @@
 ---
 author: Sijie Guo
 authorURL: https://twitter.com/sijieg
-title: Apache Pulsar 2.1.0-incubating
+title: "Apache Pulsar 2.1.0-incubating"
 ---
 
 We are glad to present the new 2.1.0-incubating release of Pulsar.

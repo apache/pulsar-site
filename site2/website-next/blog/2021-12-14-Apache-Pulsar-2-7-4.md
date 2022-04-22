@@ -1,6 +1,6 @@
 ---
 author: Technoboy-, Anonymitaet
-title: What’s New in Apache Pulsar 2.7.4
+title: "What’s New in Apache Pulsar 2.7.4"
 ---
 
 The Apache Pulsar community releases version 2.7.4! 32 contributors provided improvements and bug fixes that delivered 98 commits.

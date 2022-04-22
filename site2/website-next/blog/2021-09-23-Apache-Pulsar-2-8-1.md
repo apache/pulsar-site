@@ -1,6 +1,6 @@
 ---
 author: Hang Chen, Anonymitaet
-title: Apache Pulsar 2.8.1
+title: "Apache Pulsar 2.8.1"
 ---
 
 # What’s New in Apache Pulsar 2.8.1
