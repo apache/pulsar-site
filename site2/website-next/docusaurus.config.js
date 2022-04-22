@@ -346,7 +346,6 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          // editUrl: `${githubUrl}/edit/master/site2`,
           editUrl: ({
             version,
             versionDocsDirPath,
