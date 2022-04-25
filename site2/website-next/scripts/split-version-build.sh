@@ -48,7 +48,7 @@ function _buildVersion() {
 }
 
 # force build all versions
-BUILD_ALL_VERSION="1"
+# BUILD_ALL_VERSION="1"
 
 # sometimes need build specify versions
 SUPPLEMENT_VERSIONS=""
