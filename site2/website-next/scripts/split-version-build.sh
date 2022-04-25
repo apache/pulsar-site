@@ -47,8 +47,11 @@ function _buildVersion() {
     echo "..." $buildVersion "build done..."
 }
 
+# force build all versions
+BUILD_ALL_VERSION="1"
+
 # sometimes need build specify versions
-SUPPLEMENT_VERSIONS="2.9.2,2.9.1"
+SUPPLEMENT_VERSIONS=""
 
 # Build only the versions that has changed
 # Build next version that has any changed
