@@ -329,7 +329,7 @@ module.exports = {
     },
     algolia: {
       appId: "WK2YL0SALL",
-      apiKey: "3d383365697b6418f159cbe03e12a0f8", //search api key: b0803d95fa8b9628ddc98488a9b64d47
+      apiKey: "3d383365697b6418f159cbe03e12a0f8",
       indexName: "apache_pulsar",
       algoliaOptions: {
         facetFilters: ["language:LANGUAGE", "version:VERSION"],
