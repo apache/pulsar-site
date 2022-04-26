@@ -17,6 +17,13 @@ This portal holds a variety of support documents to help you work with Pulsar . 
 
 If you’re an experienced coder, review this page to learn the easiest way to access the specific content you’re looking for.
 
+## Get Started Now
+<BlockLinks>
+    <BlockLink title="Get Started" url={docUrl("standalone")} />
+    <BlockLink title="Pulsar Basics" url={docUrl()} />
+    <BlockLink title="Ecosystem" url='/ecosystem/' />
+</BlockLinks>
+
 ## Navigation
 ***
 
@@ -44,9 +51,3 @@ The Pulsar community on github is active, passionate, and knowledgeable.  Join d
 
 An equally passionate community can be found in the [Pulsar Slack channel](https://apache-pulsar.slack.com/). You’ll need an invitation to join, but many Github Pulsar community members are Slack members too.  Join, hang out, learn, and make some new friends.
 
-## Get Started Now
-<BlockLinks>
-    <BlockLink title="Pulsar Basics" url={docUrl("standalone")} />
-    <BlockLink title="Pulsar Basics" url={docUrl()} />
-    <BlockLink title="Ecosystem" url='/ecosystem/' />
-</BlockLinks>
