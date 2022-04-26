@@ -160,7 +160,7 @@ export default function Home() {
         <section className="home-hero pt-24">
           <div className="inner">
             <div className="md:float-left md:w-2/3">
-              <h1>Real-time, Continuous Data Feeds</h1>
+              <h1>Cloud-Native, Distributed Messaging and Streaming</h1>
               <p>
                 Apache Pulsar is a distributed, open source pub-sub messaging
                 and streaming platform for real-time workloads, managing

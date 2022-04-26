@@ -1,6 +1,6 @@
 ---
 author: Bo Cong, Anonymitaet
-title: Apache Pulsar 2.7.3
+title: "Apache Pulsar 2.7.3"
 ---
 
 # What’s New in Apache Pulsar 2.7.3

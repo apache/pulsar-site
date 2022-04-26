@@ -255,6 +255,12 @@ module.exports = {
           position: "right",
           className: "download-btn pill-btn",
         },
+        {
+          href: "https://github.com/apache/pulsar",
+          label: "Github",
+          position: "right",
+          className: "github-nav",
+        },
       ],
     },
     footer: {
@@ -322,8 +328,8 @@ module.exports = {
       additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
     },
     algolia: {
-      appId: "d226a455cecdd4bc18a554c1b47e5b52",
-      apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
+      appId: "WK2YL0SALL",
+      apiKey: "3d383365697b6418f159cbe03e12a0f8",
       indexName: "apache_pulsar",
       algoliaOptions: {
         facetFilters: ["language:LANGUAGE", "version:VERSION"],
@@ -340,7 +346,15 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubUrl}/edit/master/site2`,
+          editUrl: ({
+            version,
+            versionDocsDirPath,
+            docPath,
+            permalink,
+            locale,
+          }) => {
+            return `${githubUrl}/edit/master/site2/docs/${docPath}`;
+          },
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
@@ -356,7 +370,7 @@ module.exports = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: `${githubUrl}/edit/master/site2/website-next`,
+          editUrl: `${githubUrl}/edit/master/site2/website`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -390,6 +404,14 @@ module.exports = {
         // showLastUpdateAuthor: true,
         // showLastUpdateTime: true,
       }),
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "pulsar-manager-release-notes",
+        path: "pulsar-manager",
+        routeBasePath: "/",
+      },
     ],
   ],
   scripts: [

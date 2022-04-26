@@ -1,15 +1,13 @@
 ---
 author: Jennifer Huang  
 authorURL: https://twitter.com/Jennife06125739  
-title: Apache Pulsar Celebrates 300 Contributors
+title: "Apache Pulsar Celebrates 300 Contributors"
 
 ---
 
 Dear Pulsar community,
 
 Over the last few years, the shift to real-time streaming technologies has bolstered the adoption of Pulsar and there has been a major increase in both the interest and adoption of Pulsar in 2020 alone. With Pulsar being sought out by companies developing messaging and event-streaming applications — from Fortune 100 companies to forward-thinking start-ups — the community is growing quickly. 
-
-<!--truncate-->
 
 This community growth has contributed to a new milestone for Pulsar - our [300th contributor](https://github.com/apache/pulsar/graphs/contributors) to the Pulsar repository. This milestone is even more exciting given that we added 100 contributors in the last 8 months alone!
 
@@ -21,6 +19,8 @@ The influx of developers joining the Pulsar community is in large part due to th
 To meet the high demand for education and training in the Pulsar community, the community has launched some key initiatives this year. We host weekly TGIP(Thank God It's Pulsar) training, which features Pulsar thought-leaders and Pulsar PMC Members. To meet global demand, we currently host two different weekly trainings. One [TGIP training](https://www.youtube.com/watch?v=Vc_a2ppRzlI&list=PLqRma1oIkcWhWAhKgImEeRiQi5vMlqTc-) runs on Pacific Time, and the other [TGIP-CN training](https://github.com/streamnative/tgip-cn) runs on Beijing Time. 
 
 We also host monthly [webinars](https://www.youtube.com/watch?v=mncXc_T6JkU&list=PLqRma1oIkcWhfmUuJrMM5YIG8hjju62Ev) to bring together Pulsar and messaging community thought-leaders to share best practices, insights and product news. Thank [Matteo Merli](https://twitter.com/merlimat), [Addison Higham](https://twitter.com/addisonjh), Joe Francis, [Shivji Kumar Jha](https://twitter.com/ShivjiJha), [Devin Bost](https://twitter.com/DevinBost), [Pierre Zemb](https://twitter.com/PierreZ), [Jesse Anderson](https://twitter.com/jessetanderson), [Sijie Guo](https://twitter.com/sijieg) and other speakers for contributing so much valuable knowledge.
+
+<!--truncate-->
 
 This year also marked our first global summit, held in June 2020. Hosted by StreamNative and Splunk, the first-ever [Pulsar Summit Virtual Conference](https://pulsar-summit.org/) featured 30+ talks from 20+ organizations. Thank all speakers for sharing your stories about Pulsar, and thank you to all of the attendees for joining the event.
 

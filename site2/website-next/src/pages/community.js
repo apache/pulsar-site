@@ -11,7 +11,7 @@ import WavySeparatorSix from '@site/static/img/separator-6.svg';
 import { pageUrl } from "@site/src/utils/index";
 const teamObj = require("../../data/team.js");
 export default function Community(props) {
-  
+
   // Images in this array are used in the carousel
   const slidesArr = [
     { 
@@ -23,7 +23,7 @@ export default function Community(props) {
       alt: 'community photo 2'
     },
     { 
-      img: useBaseUrl('/img/community-image-2.jpg'),
+      img: useBaseUrl('/img/community-image-3.jpg'),
       alt: 'community photo 3'
     },
   ];
@@ -46,7 +46,7 @@ export default function Community(props) {
     const sections = document.querySelectorAll(".scrollable");
     const links = document.querySelectorAll(".scroll-link");
     var observer = new IntersectionObserver(
-      function (entries, observer) {
+      function (entries) {
         if (entries[0].isIntersecting === true) {
           let id = entries[0].target.id;
           let target = 'scroll-'+id;
@@ -59,7 +59,7 @@ export default function Community(props) {
           }
         }
       },
-      { threshold: [ 0.1 ] }
+      { threshold: [ 0.5 ] }
     );
     sections.forEach(s => {
       observer.observe(document.getElementById(s.id));
@@ -67,23 +67,7 @@ export default function Community(props) {
 
     // This code runs the image carousel
     const slides = document.querySelectorAll('.slide-image');
-    const allDots = document.getElementsByClassName('dot');
-    var showSlide = function() {
-        let id = this.getAttribute("id");
-        let slideId = id.replace('dot', 'slide');
-        let target = document.getElementById(slideId);
-        var active = document.querySelector('.active-slide');
-        var activeDot = document.querySelector('.active-dot');
-        active.classList.remove('active-slide');
-        activeDot.classList.remove('active-dot');
-        this.classList.add('active-dot');
-        target.classList.add('active-slide');
-        clearInterval(interval);
-    };
-    for (var i = 0; i < allDots.length; i++) {
-        allDots[i].addEventListener('click', showSlide, false);
-    }
-    
+    const allDots = document.getElementsByClassName('dot'); 
     const firstSlide = document.getElementById('slide-0');
     const firstDot = document.getElementById('dot-0');
     firstSlide.classList.add('active-slide');
@@ -114,7 +98,27 @@ export default function Community(props) {
         cycleSlides();
       }, intervalTime);
     };
+
     slideInterval();
+    
+    // if you click on  on a pagination dot
+    var showSlide = function() {
+      let id = this.getAttribute("id");
+      let slideId = id.replace('dot', 'slide');
+      let target = document.getElementById(slideId);
+      var active = document.querySelector('.active-slide');
+      var activeDot = document.querySelector('.active-dot');
+      active.classList.remove('active-slide');
+      activeDot.classList.remove('active-dot');
+      this.classList.add('active-dot');
+      target.classList.add('active-slide');
+      // stops the interval when someone clicks on a dot.
+      clearInterval(interval);
+    };
+    for (var i = 0; i < allDots.length; i++) {
+        allDots[i].addEventListener('click', showSlide, false);
+    }
+
     // cleanup required or interval will continue to run, even on other pages
     return function cleanup() {
       clearInterval(interval);
@@ -154,21 +158,19 @@ export default function Community(props) {
                     {/* 
                       NOTE: add images to the slidesArr array above to include the in the image carousel.
                     */}
-                    {slidesArr.map((s,i) => 
-                      (() => {
+                    {slidesArr.map((s, i) => {
                         return(
                           <img id={`slide-${i}`} key={i} className="slide-image" src={s.img} alt={s.alt} />
                         )
-                      })()
+                      }
                     )}
                   </div>
-                  <div className="pagination">
-                    {slidesArr.map((d,i) => 
-                      (() => {
-                        return(
-                          <div id={`dot-${i}`} key={i} className="dot"></div>
+                  <div className="pagination">                   
+                    {slidesArr.map((d, i) => {
+                       return(
+                        <div id={`dot-${i}`} key={i} className="dot"></div>
                         )
-                      })()
+                      }
                     )}
                   </div>
                 </div>
@@ -211,7 +213,7 @@ export default function Community(props) {
                             target="_blank"
                             href="mailto:users-unsubscribe@pulsar.apache.org"
                           >Unsubscribe</PillButton>
-                        <p><strong>You can access the archive <a className="secondary-cta" href="https://lists.apache.org/list.html?users@pulsar.apache.org" target="_blank">here</a>.</strong></p>
+                        <p><strong>Access the <a className="secondary-cta" href="https://lists.apache.org/list.html?users@pulsar.apache.org" target="_blank">User List Archives</a>.</strong></p>
                       </div>
                       <div className="discussion-box md:w-1/2 md:pr-2">
                         <h4>Developer List</h4>
@@ -228,7 +230,7 @@ export default function Community(props) {
                             href="mailto:dev-unsubscribe@pulsar.apache.org"
                           >Unsubscribe</PillButton>
                        
-                        <p><strong>You can access the archive <a  className="secondary-cta" href="http://mail-archives.apache.org/mod_mbox/pulsar-dev/">here</a>.</strong></p>
+                        <p><strong>Access the <a  className="secondary-cta" href="http://mail-archives.apache.org/mod_mbox/pulsar-dev/">Developer List Archives</a>.</strong></p>
                       </div>
                     </div>
 
@@ -317,7 +319,17 @@ export default function Community(props) {
                   </div>
                   <div className="sm:w-2/3">
                     <h3>Contributing to the Project</h3>
-                    <p>Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more. Read our <a href={pageUrl('contributing')} className="secondary-cta">Guide to Contributing</a> and <a href={pageUrl('coding-guide')} className="secondary-cta">Coding Guide</a> to get started.</p>
+                    <p>Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more. </p>
+                    <PillButton
+                      variant=""
+                      target=""
+                      href={pageUrl('contributing')}
+                    >Contributor Guide</PillButton>
+                    <PillButton
+                      variant="grey"
+                      target=""
+                      href={pageUrl('coding-guide')}
+                    >Coding Guide</PillButton>
                   </div>
                 </div>
                 <div className="flex flex-col  sm:flex-row items-center  py-12">

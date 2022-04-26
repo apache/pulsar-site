@@ -12,9 +12,9 @@
   @tailwind screens;
 }
 
-.tailwind .section {
+/* .tailwind .section {
   @apply max-w-screen-xl container mx-auto;
-}
+} */
 
 @layer base {
   h1, h2 {
@@ -190,15 +190,20 @@ html[data-theme="dark"] .navbar-sidebar {
 .dropdown__link--active {
   background-color: transparent;
 }
-.community-dropdown ~ .dropdown__menu .dropdown__link--active{color: #1c1e21;}
-.community-dropdown ~ .dropdown__menu .dropdown__link--active.active-section {color: var(--ifm-navbar-link-hover-color);}
+.github-nav.navbar__link{ color: transparent; font-size: 0px; top: 0; position: absolute;}
+.github-nav::before {content: url('@site/static/img/github-bg.svg');}
+.github-nav.navbar__link:hover::before {content: url('@site/static/img/github-bg-hovered.svg');}
+.navbar div[class^="toggle_node_"] {top: 9px; position: absolute; transform: translateX(-70px);}
+.community-dropdown ~ .dropdown__menu .dropdown__link--active, .dropdown__link.navbar__link--active{color: #1c1e21;}
 .navbar__link svg {
   display: none;
 }
 div[class^="searchBox_"]  {
   position: absolute; 
   top: 0;
+  transform: translateX(-130px);
 }
+
 .DocSearch-Button {
   border: 1px solid #198fff !important;
 }
@@ -273,8 +278,66 @@ div[class^="searchBox_"]  {
   padding-bottom: 24rem;
   margin-bottom: 12rem;
 }
-.docs-wrapper.docs-doc-page .main-wrapper aside {border: none; z-index: 1;}
-.docs-wrapper.docs-doc-page .main-wrapper aside nav.menu {border-right: 1px solid var(--ifm-toc-border-color)}
+.docs-wrapper.docs-doc-page .main-wrapper aside {
+  border: none; 
+  z-index: 1;
+}
+.docs-wrapper.docs-doc-page .main-wrapper aside nav.menu {
+  border-right: 1px solid var(--ifm-toc-border-color)
+}
+
+.docs-doc-page h1,
+.docs-doc-page .markdown h1:first-child {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.docs-doc-page h2 {
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+.docs-doc-page h3 {
+  font-size: 18px;
+}
+
+.docs-doc-page h4 {
+  font-size: 16px;
+}
+
+.docs-doc-page p {
+  font-size: 15px;
+  line-height: 1.3em;
+}
+
+.docs-doc-page li p {
+  font-size: 14px;
+  line-height: 1.5em;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.docs-doc-page .markdown li {
+  font-size: 14px;
+}
+
+.docs-doc-page code {
+  font-size: 14px;
+}
+
+.markdown table td {
+  font-size: 14px;
+}
+
+html[data-theme="dark"] .markdown table td,
+html[data-theme="dark"] .markdown table th {
+  color: #333;
+}
+
+html[data-theme="dark"] .markdown table td code {
+  color: #fff;
+}
 .waves-bg:before,.waves-bg:after,.mdx-wrapper.mdx-page .main-wrapper:after {
   z-index: 0;
   content: '';
@@ -687,7 +750,7 @@ html[data-theme="dark"] .featured-card--inner {background-color: rgba(34, 34, 34
   z-index: 1;
 }
 
-
+table tr:nth-child(2n) {background-color: #fff;;}
 .blog-wrapper .main-wrapper.blog-list-page::before {
   content: 'Pulsar Blog';
   position: relative;
@@ -841,10 +904,11 @@ footer .row.footer__links {
     display: none;
   }
   .navbar.navbar--fixed-top {padding-top: 0px;}
-  div[class^="searchBox_"]  {position: relative; top: auto;}
+  div[class^="searchBox_"]  {position: relative; top: auto; transform: translateX(0px);}
   :root {
     --ifm-navbar-height : 75px;
   }
+  .menu__link.github-nav {font-size: 0px;}
 }
 
 @media (max-width: 880px){

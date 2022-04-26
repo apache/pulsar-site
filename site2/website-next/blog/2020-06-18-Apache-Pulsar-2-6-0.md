@@ -1,7 +1,7 @@
 ---
 author: Penghui Li
 authorURL: https://twitter.com/lipenghui6
-title: Apache Pulsar 2.6.0
+title: "Apache Pulsar 2.6.0"
 ---
 We are very glad to see the Apache Pulsar community has successfully released the wonderful 2.6.0 version after accumulated hard work. It is a great milestone for this fast-growing project and the whole Pulsar community. This is the result of a huge effort from the community, with over 450 commits and a long list of new features, improvements, and bug fixes.
 
