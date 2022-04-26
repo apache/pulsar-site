@@ -4,5 +4,5 @@ title: Client Python 2.7.4
 sidebar_label: Client Python 2.7.4 
 ---
 
-[Issue 11473] [Python] Fix fields that are ignoring the required key argument [#11508](https://github.com/apache/pulsar/pull/11508)  
+- [Python] Fix fields that are ignoring the required key argument. [#11508](https://github.com/apache/pulsar/pull/11508)
 

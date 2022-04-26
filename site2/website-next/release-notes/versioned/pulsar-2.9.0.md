@@ -4,83 +4,75 @@ title: Apache Pulsar 2.9.0
 sidebar_label: Apache Pulsar 2.9.0 
 ---
 
-## schema
-[Schema] Fix pulsar use json or avro primitive schema. [#12886](https://github.com/apache/pulsar/pull/12886)  
+#### 2021-11-25
 
-## transaction
-[Transaction] Fix transaction system topic create in loop. [#12749](https://github.com/apache/pulsar/pull/12749)  
-[Transaction] add method to clear up transaction buffer snapshot [#11934](https://github.com/apache/pulsar/pull/11934)  
+**IMPORTANT NOTICE**
 
-## broker
-[#12423] allow `GetTopicsOfNamespace` op with `consume` permission [#12600](https://github.com/apache/pulsar/pull/12600)  
-Allow to configure schema compatibility policy for system topics [#12598](https://github.com/apache/pulsar/pull/12598)  
-[pulsar-broker] Cleanup already deleted namespace topics. [#12597](https://github.com/apache/pulsar/pull/12597)  
-Disable stats recorder for built-in PulsarClient [#12217](https://github.com/apache/pulsar/pull/12217)  
-[pulsar-broker] support remove-ttl api for V1 namespace [#12121](https://github.com/apache/pulsar/pull/12121)  
-[pulsar-broker] Broker auto refresh bk-client certs to avoid cnx failure after cert refresh [#12107](https://github.com/apache/pulsar/pull/12107)  
-Optimize the memory usage of Cache Eviction [#12045](https://github.com/apache/pulsar/pull/12045)  
-Avoid adding duplicated BrokerEntryMetadata [#12018](https://github.com/apache/pulsar/pull/12018)  
-[PIP-82] [pulsar-broker] Misc fixes: [#11918](https://github.com/apache/pulsar/pull/11918)  
-[Broker] Refine topic level backlog quota policies warning log [#11863](https://github.com/apache/pulsar/pull/11863)  
+**IT IS NOT RECOMMENDED TO USE PULSAR 2.9.0 ON PRODUCTION ENVIRONMENT** since it does not include the fixes for [Log4j2 vulnerability (CVE-2021-44228)](https://pulsar.apache.org/blog/2021/12/11/Log4j-CVE/) and the [bundle unloading timeout issue](https://github.com/apache/pulsar/pull/12993).
 
-## proxy
-Fix the batch message ack for WebSocket proxy. [#12530](https://github.com/apache/pulsar/pull/12530)  
-PIP-99 - Pulsar Proxy Estensions [#11838](https://github.com/apache/pulsar/pull/11838)  
+### News and noteworthy
 
-## function
-Allow Pulsar Functions localrun to exit on error [#12278](https://github.com/apache/pulsar/pull/12278)  
-Support for draining workers [#12178](https://github.com/apache/pulsar/pull/12178)  
-[pulsar-functions-go] support set subscription position [#11990](https://github.com/apache/pulsar/pull/11990)  
-[function] enable protobuf-native schema support for function [#11868](https://github.com/apache/pulsar/pull/11868)  
-[pulsar-functions-go] sync to the latest function proto [#11853](https://github.com/apache/pulsar/pull/11853)  
-[pulsar-functions] Pass `SubscriptionPosition` from `FunctionDetails` to `FunctionConfig` / `SinkConfig` [#11831](https://github.com/apache/pulsar/pull/11831)  
+- PIP-45 Pluggable metadata interface introduced many changes about ZooKeeper metadata management: consistency, resilience, stability, tech debt reduction (less code duplication)
+- Pulsar IO: Oracle Debezium connector, new Schema aware Elasticsearch sink connector
+- Many improvements to the Pulsar clients, with PIP-83, PIP-91, PIP-96 (see below)
+- Geo-replication improvements: PIP-88 replicate schemas across clusters
+- Apache Kafka connect sinks can be run as Pulsar sinks [#9927](https://github.com/apache/pulsar/pull/9927)
 
-## compaction
-Fix incorrect returned last message ID while the `lastConfirmedEntry` with negative entry ID [#12277](https://github.com/apache/pulsar/pull/12277)  
-Fix typo of the returned last message ID when the last message ID is from compacted ledger [#12237](https://github.com/apache/pulsar/pull/12237)  
-Return the last position of the compacted data while the original data been deleted [#12161](https://github.com/apache/pulsar/pull/12161)  
+### Breaking changes
 
-## security
-[security] Upgrade netty to 4.1.68.Final [#12218](https://github.com/apache/pulsar/pull/12218)  
-Forbid to read other topic's data in managedLedger layer [#11912](https://github.com/apache/pulsar/pull/11912)  
+- Now Pulsar requires ZooKeeper 3.6.x because it uses the Persistent Recursive Watches feature (see PIP-45)
+- The Discovery Service has been removed. [12119](https://github.com/apache/pulsar/pull/12119)
+- The Pulsar Standalone docker image has been removed. [11657](https://github.com/apache/pulsar/pull/11657)
+- The Pulsar Dashboard docker image has been removed. [11284](https://github.com/apache/pulsar/pull/11284)
 
-## key-shared
-Fix returned wrong hash ranges for the consumer with same consumer name [#12212](https://github.com/apache/pulsar/pull/12212)  
+### PIPs
 
-## test
-[unit test] use correct line separator instead of \n [#12143](https://github.com/apache/pulsar/pull/12143)  
-Force Python CI to use earlier version of Protobuf which supports Python2 [#12058](https://github.com/apache/pulsar/pull/12058)  
-[Test] Fix managed cursor metrics test [#11879](https://github.com/apache/pulsar/pull/11879)  
+- [PIP 96] Add message payload processor for Pulsar client [#12088](https://github.com/apache/pulsar/pull/12088)
+- [PIP 99] Pulsar Proxy Extensions [#11838](https://github.com/apache/pulsar/pull/11838)
+- [PIP 89] Timed log events [#11944](https://github.com/apache/pulsar/pull/11944)
+- [PIP 82] Tenant and namespace level rate limiting [#11918](https://github.com/apache/pulsar/pull/11918)
+- [PIP 91] Separate lookup timeout from operation timeout [#11627](https://github.com/apache/pulsar/pull/11627)
+- [PIP 88] Replicate schemas across clusters [#11441](https://github.com/apache/pulsar/pull/11441)
+- [PIP 83] Pulsar Reader: Message consumption with pooled buffer [#11725](https://github.com/apache/pulsar/pull/11725)
+- [PIP 64] Rest API Produce message [PIP 64](https://github.com/apache/pulsar/pull/8125)
+- [PIP 45] Pluggable metadata interface [PIP 45](https://github.com/apache/pulsar/wiki/PIP-45%3A-Pluggable-metadata-interface)
 
-## cli
-[pulsar-client] Make it possible to disable poolMessages [#12108](https://github.com/apache/pulsar/pull/12108)  
-[testclient] Add total messages when periodic printing throughput [#12084](https://github.com/apache/pulsar/pull/12084)  
-[cli] Fix issue where pulsar-client command cannot consume v2 topics through WebSocket [#12000](https://github.com/apache/pulsar/pull/12000)  
+### Pulsar IO and Pulsar Functions
 
-## connect
-Remove the deprecated api usage in hdfs [#12080](https://github.com/apache/pulsar/pull/12080)  
+- Added Debezium source for Microsoft SQL Server. [12256](https://github.com/apache/pulsar/pull/12256)
+- Upgrading Debezium to 1.7. [12295](https://github.com/apache/pulsar/pull/12295)
+- Allow Pulsar Functions localrun to exit on error. [12278](https://github.com/apache/pulsar/pull/12278)
+- Function: Support for draining workers. [12178](https://github.com/apache/pulsar/pull/12178)
+- Go Functions: support set subscription position. [11990](https://github.com/apache/pulsar/pull/11990)
+- Support protobuf-native schema for functions. [11868](https://github.com/apache/pulsar/pull/11868)
+- Support protobuf schema for pulsar function. [11709](https://github.com/apache/pulsar/pull/11709)
+- Support KEY_BASED batch builder for Java based functions and sources. [11706](https://github.com/apache/pulsar/pull/11706)
+- Upgrade Go client version to 0.6.0. [11477](https://github.com/apache/pulsar/pull/11477)
+- Stop calling the deprecated method Thread.stop() when stopping the function thread in ThreadRuntime. [11401](https://github.com/apache/pulsar/pull/11401)
 
-## zookeeper
-[Zookeeper Client] Fix String formatting conversion in toString method [#12006](https://github.com/apache/pulsar/pull/12006)  
+### Proxy
+- Set default httpProxyTimeout to 5 minutes. [12299](https://github.com/apache/pulsar/pull/12299)
+- Fixed NPE in ProxyConnection with no auth data. [12111](https://github.com/apache/pulsar/pull/12111)
+- Set default http proxy request timeout. [11971](https://github.com/apache/pulsar/pull/11971)
+- Fixed Proxy leaking outbound connections. [11848](https://github.com/apache/pulsar/pull/11848)
 
-## tool
-[testclient] Printing aggregated data when client exit [#11985](https://github.com/apache/pulsar/pull/11985)  
-[standalone] remove noisy log on pulsar standalone startup [#11970](https://github.com/apache/pulsar/pull/11970)  
+### Metrics
+- Add support for splitting topic and partition label in Prometheus. [12225](https://github.com/apache/pulsar/pull/12225)
 
-## topic-policy
-Fix messages in TopicPolicies will never be cleaned up [#11928](https://github.com/apache/pulsar/pull/11928)  
+### Library updates
+- Upgrade netty to 4.1.68.Final. [12218](https://github.com/apache/pulsar/pull/12218)
+- Added JLine 2.x for ZK CLI tool. [12102](https://github.com/apache/pulsar/pull/12102)
+- Upgrade aircompressor to 0.20. [11790](https://github.com/apache/pulsar/pull/11790)
+- Upgrade Jetty to 9.4.43.v20210629. [11660](https://github.com/apache/pulsar/pull/11660)
+- Upgrade commons-compress to 1.21. [11345](https://github.com/apache/pulsar/pull/11345)
+- Bump Netty version to 4.1.66.Final. [11344](https://github.com/apache/pulsar/pull/11344)
+- Exclude grpc-okhttp dependency and set okhttp3 & okio version. [11025](https://github.com/apache/pulsar/pull/11025)
+- Use ubuntu:20.04 base image for Pulsar docker images. [11026](https://github.com/apache/pulsar/pull/11026)
 
-## build
-Fixed merge conflict on MetadataStoreTest [#11921](https://github.com/apache/pulsar/pull/11921)  
-Source tarball: apply executable file permissions to shell scripts (fixes #10917)  [#11858](https://github.com/apache/pulsar/pull/11858)  
+### Tiered Storage
+- Fix the potential race condition in the BlobStore readhandler. [12123](https://github.com/apache/pulsar/pull/12123)
 
-## dependency
-Upgrade Netty to 4.1.67.Final [#11875](https://github.com/apache/pulsar/pull/11875)  
-
-## admin
-[Issue 11814] fix pulsar admin method:getMessageById. [#11852](https://github.com/apache/pulsar/pull/11852)  
-[pulsar-admin] add option to get precise backlog on v1 topic [#8927](https://github.com/apache/pulsar/pull/8927)  
-
-## stats
-[stats] Add Key_Shared metadata to topic stats [#11839](https://github.com/apache/pulsar/pull/11839)  
-
+### Broker
+- AuthorizationService should use provider's canLookupAsync method. [11777](https://github.com/apache/pulsar/pull/11777)
+- Broker auto refresh bk-client certs to avoid cnx failure after cert refresh. [12107](https://github.com/apache/pulsar/pull/12107)
+- Add multi roles support for authorization. [11341](https://github.com/apache/pulsar/pull/11341)

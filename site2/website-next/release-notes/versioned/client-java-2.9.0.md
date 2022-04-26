@@ -4,11 +4,14 @@ title: Client Java 2.9.0
 sidebar_label: Client Java 2.9.0 
 ---
 
-[Java Client] Use failPendingMessages to ensure proper cleanup [#12259](https://github.com/apache/pulsar/pull/12259)  
-[pulsar-client] Fix NPE in pulsar bolt while publishing messages [#12106](https://github.com/apache/pulsar/pull/12106)  
-[PIP 96] Add message payload processor for Pulsar client [#12088](https://github.com/apache/pulsar/pull/12088)  
-[Client] Fix endless receiveAsync loop in MultiTopicsConsumer [#12044](https://github.com/apache/pulsar/pull/12044)  
-Forget to update memory usage on producer close [#11906](https://github.com/apache/pulsar/pull/11906)  
-[Client] Fix ConcurrentModificationException in sendAsync [#11884](https://github.com/apache/pulsar/pull/11884)  
-Handle receiveAsync() failures in MultiTopicsConsumer [#11843](https://github.com/apache/pulsar/pull/11843)  
+- Add partition-change API for producer or consumer interceptors. [12287](https://github.com/apache/pulsar/pull/12287)
+- Fix deadLetterPolicy is not working with key shared subscription under partitioned topic. [12148](https://github.com/apache/pulsar/pull/12148)
+- Fix endless receiveAsync loop in MultiTopicsConsumer. [12044](https://github.com/apache/pulsar/pull/12044)
+- Reduce redundant FLOW requests for non-durable multi-topics consumer. [11802](https://github.com/apache/pulsar/pull/11802)
+- Set and return topic names on message API. [11743](https://github.com/apache/pulsar/pull/11743)
+- Separate lookup timeout from operation timeout (PIP-91). [11627](https://github.com/apache/pulsar/pull/11627)
+- Switch from pretty print to compact print for configs. [11609](https://github.com/apache/pulsar/pull/11609)
+- Java Client: remove usage of reflection while using Pulsar Implementation classes. [11636](https://github.com/apache/pulsar/pull/11636)
+- Add a optional params scope for pulsar oauth2 client. [11931](https://github.com/apache/pulsar/pull/11931)
+- Schema.NATIVE_AVRO: add a version of AUTO_PRODUCE_BYTES that doesn't validate the message in `encode`. [11238](https://github.com/apache/pulsar/pull/11238)
 

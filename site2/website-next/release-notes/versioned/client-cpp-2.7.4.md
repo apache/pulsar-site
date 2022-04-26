@@ -4,7 +4,5 @@ title: Client CPP 2.7.4
 sidebar_label: Client CPP 2.7.4 
 ---
 
-[CI][C++] Force CMake to find Python2 [#9690](https://github.com/apache/pulsar/pull/9690)  
-[C++] Removed usages of boost::regex [#9533](https://github.com/apache/pulsar/pull/9533)  
-[C++] Remove Boost::System runtime dependency [#9498](https://github.com/apache/pulsar/pull/9498)  
-
+- [C++] Remove usages of boost::regex. [#9533](https://github.com/apache/pulsar/pull/9533)
+- [C++] Use sendRequestWithId to add timeout to hasMessageAvailable. [#11600](https://github.com/apache/pulsar/pull/11600)
