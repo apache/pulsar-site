@@ -51,7 +51,7 @@ function _buildVersion() {
 # BUILD_ALL_VERSION="1"
 
 # sometimes need build specify versions
-SUPPLEMENT_VERSIONS=""
+SUPPLEMENT_VERSIONS=$latest
 
 # Build only the versions that has changed
 # Build next version that has any changed
