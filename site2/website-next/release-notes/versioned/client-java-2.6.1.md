@@ -4,11 +4,18 @@ title: Client Java 2.6.1
 sidebar_label: Client Java 2.6.1 
 ---
 
-[Issue 8294][docs]Some errors on the official website document of Pulsar Java client #8294 [#8296](https://github.com/apache/pulsar/pull/8296)  
-cpp: fix reference leak when reader create [#7793](https://github.com/apache/pulsar/pull/7793)  
-Make OAuth2 auth plugin to use AsyncHttpClient [#7615](https://github.com/apache/pulsar/pull/7615)  
-[oauth2 cpp] add support to read credentials from file [#7606](https://github.com/apache/pulsar/pull/7606)  
-[CPP] Fix segment crashes that caused by race condition of timer in cpp client [#7572](https://github.com/apache/pulsar/pull/7572)  
-Ensure the create subscription can be completed when the operation timeout happens [#7522](https://github.com/apache/pulsar/pull/7522)  
-[client] Fix issue where HTTP header used in Athenz authentication can not be renamed [#7311](https://github.com/apache/pulsar/pull/7311)  
-
+- [Java Client] Fix the issue that the HTTP header used in Athenz authentication can not be renamed [#7311](https://github.com/apache/pulsar/pull/7311)
+- [Java Client] Add more detail information of retry errors [#7341](https://github.com/apache/pulsar/pull/7341)
+- [Java Client] Check NPE when a tombstone (null value) is produced. [#7408](https://github.com/apache/pulsar/pull/7408)
+- [Java Client] Fix batch ackset recycled multiple times. [#7409](https://github.com/apache/pulsar/pull/7409)
+- [Java Client] Support Oauth2 authentication [#7420](https://github.com/apache/pulsar/pull/7420)
+- [Java Client] Ensure the create subscription can be completed when the operation timeout happens [#7522](https://github.com/apache/pulsar/pull/7522)
+- [Java Client] Fix race condition on the close consumer while reconnecting to the broker. [#7589](https://github.com/apache/pulsar/pull/7589)
+- [Java Client] Fix validation never return false [#7593](https://github.com/apache/pulsar/pull/7593)
+- [Java Client] Make OAuth2 auth plugin to use AsyncHttpClient [#7615](https://github.com/apache/pulsar/pull/7615)
+- [Java Client] Support to set listener name for client CLI [#7621](https://github.com/apache/pulsar/pull/7621)
+- [Java Client] Fix batch index filter issue in Consumer [#7654](https://github.com/apache/pulsar/pull/7654)
+- [Java Client] Fix the backward compatibility issues with batch index acknowledgment. [#7655](https://github.com/apache/pulsar/pull/7655)
+- [Java Client] Fix the issue that batchReceiveAsync is not completed exceptionally when closing consumer [#7661](https://github.com/apache/pulsar/pull/7661)
+- [Java Client] Fix producer stats recorder time unit error [#7670](https://github.com/apache/pulsar/pull/7670)
+- [Java Client] Fix shutdown AsyncHttpConnector.delayer [#7687](https://github.com/apache/pulsar/pull/7687)

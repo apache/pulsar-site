@@ -4,63 +4,56 @@ title: Apache Pulsar 2.5.2
 sidebar_label: Apache Pulsar 2.5.2 
 ---
 
-## function
-[Issue 5520][Function Doc] Add window function context docs for repo [#7741](https://github.com/apache/pulsar/pull/7741)  
-[functions] Fix typos in exceptions related to functions [#6910](https://github.com/apache/pulsar/pull/6910)  
-[functions] Fix validation of function's update [#6888](https://github.com/apache/pulsar/pull/6888)  
-Fix localrunner netty dependency issue and add default log4j2 config file [#6779](https://github.com/apache/pulsar/pull/6779)  
-Ensure that all dangling consumers are cleaned up during failures [#6778](https://github.com/apache/pulsar/pull/6778)  
-Support function with format: Function`<I, CompletableFuture<O>>` [#6684](https://github.com/apache/pulsar/pull/6684)  
+#### 2020-05-19
 
-## admin
-Fix pulsar admin thread number explode bug [#6940](https://github.com/apache/pulsar/pull/6940)  
-[Issue 6887][pulsar-broker] ttlDurationDefaultInSeconds not applying [#6920](https://github.com/apache/pulsar/pull/6920)  
-[function] Function endpoint admin/v3/functions/{tenant}/{namespace} always returns 404 [#6767](https://github.com/apache/pulsar/pull/6767)  
-fix_admin_getIndividualMsgsFromBatch_bug [#6715](https://github.com/apache/pulsar/pull/6715)  
-Retention policy should be respected when there is no traffic [#6676](https://github.com/apache/pulsar/pull/6676)  
+#### Fixes and Enhancements
 
-## sql
-Pulsar SQL Support Avro Schema `ByteBuffer` Type [#6925](https://github.com/apache/pulsar/pull/6925)  
-Add a note for bookkeeper explicit LAC [#6908](https://github.com/apache/pulsar/pull/6908)  
+##### Broker
+* [Broker] Implement AutoTopicCreation by namespace level override [#6471](https://github.com/apache/pulsar/pull/6471)
+* [Broker] Add custom deletionLag and threshold for offload policies per namespace  [#6422](https://github.com/apache/pulsar/pull/6422)
+* [Broker] Invalidate managed ledgers zookeeper cache instead of reloading on watcher triggered [#6659](https://github.com/apache/pulsar/pull/6659) 
+* [Broker] Retention policy should be respected when there is no traffic [#6676](https://github.com/apache/pulsar/pull/6676)
+* [Broker] Fixed double delete on a namespace [#6713](https://github.com/apache/pulsar/pull/6713)
+* [Broker] fix get batch message from http response, only get the first message[#6715](https://github.com/apache/pulsar/pull/6715)
+* [Broker] Fix Deadlock by Consumer and Reader[#6728](https://github.com/apache/pulsar/pull/6728)
+* [Broker] avoid backpressure by skipping dispatching if consumer channel is not writable [#6740](https://github.com/apache/pulsar/pull/6740)
+* [Broker] fix when producing encrypted messages, MessageMetadata objects are not released after they are created. [#6745](https://github.com/apache/pulsar/pull/6745)
+* [Broker] Bump netty version to 4.1.48.Final [#6746](https://github.com/apache/pulsar/pull/6746)
+* [Broker] Increase timeout for loading topics [#6750](https://github.com/apache/pulsar/pull/6750)
+* [Broker] Fix wrong cursor state for cursor without consumer  [#6766](https://github.com/apache/pulsar/pull/6766)
+* [Broker] change nondurable cursor to active to improve performance [#6769](https://github.com/apache/pulsar/pull/6769)
+* [Broker] register loadbalance znode should attempt to wait until session expired [#6788](https://github.com/apache/pulsar/pull/6788)
+* [Broker] Fix some empty message related problems in the compacted topic. [#6795](https://github.com/apache/pulsar/pull/6795)
+* [Broker] Avoid creating partitioned topic for partition name [#6846](https://github.com/apache/pulsar/pull/6846)
+* [Broker] Add Tls with keystore type config support [#6853](https://github.com/apache/pulsar/pull/6853)
+* [Broker] fix consumer stuck when batchReceivePolicy maxNumMessages > maxReceiverQueueSize [#6862](https://github.com/apache/pulsar/pull/6862)
+* [Broker] use originalAuthMethod on originalAuthChecker in Proxy Authentication [#6870](https://github.com/apache/pulsar/pull/6870)
+* [Broker] Close producer when the topic does not exists. [#6879](https://github.com/apache/pulsar/pull/6879)
+* [Broker] Handle all exceptions from `topic.addProducer` [#6881](https://github.com/apache/pulsar/pull/6881)
+* [Broker] fix topicPublishRateLimiter not effective after restart broker [#6893](https://github.com/apache/pulsar/pull/6893)
+* [Broker] Expose pulsar_out_bytes_total and pulsar_out_messages_total for namespace/subscription/consumer. [#6918](https://github.com/apache/pulsar/pull/6918)
+* [Broker] Policy ttlDurationDefaultInSeconds not applying  [#6920](https://github.com/apache/pulsar/pull/6920)
+* [Broker] Fix pulsar admin thread number explode bug. [#6940](https://github.com/apache/pulsar/pull/6940)
 
-## security
-add keystore tls config doc [#6922](https://github.com/apache/pulsar/pull/6922)  
-use originalAuthMethod on originalAuthChecker [#6870](https://github.com/apache/pulsar/pull/6870)  
-Add Tls with keystore type config support [#6853](https://github.com/apache/pulsar/pull/6853)  
+##### Pulsar Schema
 
-## metrics
-Expose pulsar_out_bytes_total and pulsar_out_messages_total for namespace/subscription/consumer. [#6918](https://github.com/apache/pulsar/pull/6918)  
+* [Schema] Fix long field parse in GenricJsonRecord [#6622](https://github.com/apache/pulsar/pull/6622) 
+* [Schema] Fix the leak of cursor reset if message encode fails in Avro schema. [#6695](https://github.com/apache/pulsar/pull/6695) 
+* [Schema] fix Get schema by version can get the deleted schema info #6754 [#6754](https://github.com/apache/pulsar/pull/6754)
+* [Schema] Fix serialization of enums with json/avro schemas in python [#6808](https://github.com/apache/pulsar/pull/6808) 
+* [Schema] Pulsar SQL Support Avro Schema `ByteBuffer` Type [#6925](https://github.com/apache/pulsar/pull/6925) 
 
-## broker
-[Broker] Handle all exceptions from `topic.addProducer` [#6881](https://github.com/apache/pulsar/pull/6881)  
-[broker] register loadbalance znode should attempt to wait until session expired [#6788](https://github.com/apache/pulsar/pull/6788)  
-change nondurable cursor to active [#6769](https://github.com/apache/pulsar/pull/6769)  
-Fix check backlogged cursors without consumer [#6766](https://github.com/apache/pulsar/pull/6766)  
-[pulsar-broker] avoid backpressure by skipping dispatching if consumer channel is not writable [#6740](https://github.com/apache/pulsar/pull/6740)  
-[pulsar-broker] Fix Deadlock by Consumer and Reader [#6728](https://github.com/apache/pulsar/pull/6728)  
-[ISSUE 6563][Broker] Invalidate managed ledgers zookeeper cache instead of reloading on watcher triggered [#6659](https://github.com/apache/pulsar/pull/6659)  
-[Issue #5395][broker] Implement AutoTopicCreation by namespace override [#6471](https://github.com/apache/pulsar/pull/6471)  
+##### Pulsar Functions
+* [Functions] Support function with format: `Function<I, CompletableFuture<O>>`[#6684](https://github.com/apache/pulsar/pull/6684)
+* [Functions] Function endpoint admin/v3/functions/{tenant}/{namespace} always returns 404 [#6767](https://github.com/apache/pulsar/pull/6767)
+* [Functions] Ensure that all dangling consumers are cleaned up during failures [#6778](https://github.com/apache/pulsar/pull/6778)
+* [Functions] Fix localrunner netty dependency issue [#6779](https://github.com/apache/pulsar/pull/6779)
+* [Functions] Fix SerDe validation of function's update [#6888](https://github.com/apache/pulsar/pull/6888)
 
-## build
-[Dashboard]Fixed dashboard start failed [#6857](https://github.com/apache/pulsar/pull/6857)  
-[build] Bump netty version to 4.1.48.Final [#6746](https://github.com/apache/pulsar/pull/6746)  
+##### Tiered Storage
+* [Tiered Storage]  Extract common SerDe method in tiered storage to managed-ledger module [#6533](https://github.com/apache/pulsar/pull/6533)
+* [Tiered Storage]  Make SchemaStorage accessible in Offloader [#6567](https://github.com/apache/pulsar/pull/6567)
+* [Tiered Storage]  Avoid prefetch too much data causing OutOfMemory, when offloading data to HDFS [#6717](https://github.com/apache/pulsar/pull/6717)
 
-## connect
-[JDBC Sink] JDBC sink does not handle null in schema [#6848](https://github.com/apache/pulsar/pull/6848)  
-
-## schemaregistry
-fix Get schema by version can get the deleted schema info #6754 [#6764](https://github.com/apache/pulsar/pull/6764)  
-[issue 6694][AVRO ENCODE] Reset cursor if message encode fails. [#6695](https://github.com/apache/pulsar/pull/6695)  
-ISSUE-6612 FIX: parse long field in GenricJsonRecord (#6612) [#6622](https://github.com/apache/pulsar/pull/6622)  
-Make SchemaStorage accessible in Offloader [#6567](https://github.com/apache/pulsar/pull/6567)  
-
-## tieredstorage
-Avoid prefetch too much data when offloading data to HDFS [#6717](https://github.com/apache/pulsar/pull/6717)  
-[Issue 6283][tiered-storage] Offload policies per namespace [#6422](https://github.com/apache/pulsar/pull/6422)  
-
-## test
-[hotfix]Python function protobuf missing field and broker test failed [#6641](https://github.com/apache/pulsar/pull/6641)  
-
-## storage
-[2nd Storage]Extract common method in tiered storage to managed-ledger module [#6533](https://github.com/apache/pulsar/pull/6533)  
-
+##### Pulsar IO
+* [IO] JDBC sink does not handle null in schema [#6848](https://github.com/apache/pulsar/pull/6848)

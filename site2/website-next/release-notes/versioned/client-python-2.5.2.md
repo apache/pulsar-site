@@ -4,5 +4,5 @@ title: Client Python 2.5.2
 sidebar_label: Client Python 2.5.2 
 ---
 
-[PY] Fix serialization of enums with json/avro schemas [#6808](https://github.com/apache/pulsar/pull/6808)  
+* [Python Client] Fix Python function protobuf missing field[#6641](https://github.com/apache/pulsar/pull/6641) 
 
