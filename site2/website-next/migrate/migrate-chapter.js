@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 const migrateDocs = require("./migrate-docs");
+const migrateExt = require("./migrate-ext");
 const CONST = require("./const");
 const { old, next } = CONST;
 
@@ -77,13 +78,19 @@ const migrate = (version, category, cb) => {
         items: sidebar,
       });
     } else {
-      //Temp overrite test
-      // categoryMap[category].items = sidebar;
-      categoryMap[category].items = categoryMap[category].items.concat(
-        sidebar.filter((item) => {
-          return !categoryMap[category].items.includes(item);
-        })
-      );
+      categoryMap[category].items = sidebar;
+      if (migrateExt.sidebar[category]) {
+        categoryMap[category].items = categoryMap[category].items.concat(
+          migrateExt.sidebar[category].map((it) => it.id)
+        );
+      }
+
+      // categoryMap[category].items = categoryMap[category].items.concat(
+      //   sidebar.filter((item) => {
+      //     return !categoryMap[category].items.includes(item);
+      //   })
+      // );
+
       new_sidebar.docsSidebar = _.values(categoryMap);
     }
   } else {
@@ -122,32 +129,42 @@ const migrate = (version, category, cb) => {
         // collapsed: true,
       });
     } else {
-      //Temp overrite test
-      // categoryMap[category].items = sidebar.map((item) => {
-      //   return {
-      //     type: "doc",
-      //     id:
-      //       version_full + "/" + (item == "deploy-docs" ? "deploy-dcos" : item),
-      //   };
-      // });
-
-      let _sbExists = _.keyBy(categoryMap[category].items, "id");
-      let _sb = sidebar
-        .map((item) => {
-          return {
-            type: "doc",
-            id:
-              version_full +
-              "/" +
-              (item == "deploy-docs" ? "deploy-dcos" : item),
-          };
-        })
-        .filter((item) => {
-          return !_sbExists[item.id];
-        });
-      if (_sb.length > 0) {
-        categoryMap[category].items = categoryMap[category].items.concat(_sb);
+      categoryMap[category].items = sidebar.map((item) => {
+        return {
+          type: "doc",
+          id:
+            version_full + "/" + (item == "deploy-docs" ? "deploy-dcos" : item),
+        };
+      });
+      if (migrateExt.sidebar[category]) {
+        categoryMap[category].items = categoryMap[category].items.concat(
+          migrateExt.sidebar[category].map((item) => {
+            return {
+              ...item,
+              id: version_full + "/" + item.id,
+            };
+          })
+        );
       }
+
+      // let _sbExists = _.keyBy(categoryMap[category].items, "id");
+      // let _sb = sidebar
+      //   .map((item) => {
+      //     return {
+      //       type: "doc",
+      //       id:
+      //         version_full +
+      //         "/" +
+      //         (item == "deploy-docs" ? "deploy-dcos" : item),
+      //     };
+      //   })
+      //   .filter((item) => {
+      //     return !_sbExists[item.id];
+      //   });
+      // if (_sb.length > 0) {
+      //   categoryMap[category].items = categoryMap[category].items.concat(_sb);
+      // }
+
       new_sidebar[version_full + "/docsSidebar"] = _.values(categoryMap);
     }
   }
