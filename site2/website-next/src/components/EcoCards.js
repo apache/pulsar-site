@@ -33,7 +33,7 @@ export default function EcoCards(props) {
   } else {
     return (
       <section className="resource-cards py-12 mx-auto text--center">
-       <h3>Sorry, no {props.type.toLowerCase()} match your search.</h3>
+       <h3>Sorry, no resources match your search.</h3>
       </section>
     )
   }
