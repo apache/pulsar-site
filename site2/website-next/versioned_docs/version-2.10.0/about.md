@@ -19,7 +19,7 @@ If you’re an experienced coder, review this page to learn the easiest way to a
 
 ## Get Started Now
 <BlockLinks>
-    <BlockLink title="Get Started" url={docUrl("standalone")} />
+    <BlockLink title="Get Started" url={docUrl("getting-started-standalone")} />
     <BlockLink title="Pulsar Basics" url={docUrl()} />
     <BlockLink title="Ecosystem" url='/ecosystem/' />
 </BlockLinks>
