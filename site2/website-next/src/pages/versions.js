@@ -47,7 +47,7 @@ export default function DenseTable() {
           <VersionsTable
             data={versions
               .filter((item) => item != latestStableVersion)
-              .concat(oldversions)
+              .concat(oldversions.map((item) => "v" + item))
               .map((item) => ({
                 name: item,
               }))}

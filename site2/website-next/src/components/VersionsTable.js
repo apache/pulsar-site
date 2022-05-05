@@ -8,6 +8,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
 import { docUrl, getCache } from "../utils/index";
 const versions = require("../../versions.json");
+const oldversions = require("../../oldversions.json");
 const legacyVersions = require(`../../legacy-versions.json`);
 
 export default function VersionsTable(props) {
@@ -37,7 +38,11 @@ export default function VersionsTable(props) {
                 href={docUrl(
                   "",
                   "",
-                  row.name == latestStableVersion ? "" : row.name
+                  row.name == latestStableVersion
+                    ? ""
+                    : oldversions.includes(row.name.replace("v", ""))
+                    ? row.name + "/getting-started/LocalCluster"
+                    : row.name
                 )}
                 underline="none"
                 onClick={() => {
@@ -60,11 +65,11 @@ export default function VersionsTable(props) {
                 href={
                   row.name == "next"
                     ? repoUrl
-                    : !legacyVersions.includes(row.name)
+                    : !legacyVersions.includes(row.name.replace("v", ""))
                     ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${row.name}`
-                    : `${
-                        siteConfig.baseUrl
-                      }release-notes/legacy/#${row.name.replace(/\./g, "")}`
+                    : `${siteConfig.baseUrl}release-notes/legacy/#${row.name
+                        .replace(/\./g, "")
+                        .replace("v", "")}`
                 }
                 underline="none"
               >
