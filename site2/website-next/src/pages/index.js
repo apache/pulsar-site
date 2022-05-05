@@ -174,10 +174,10 @@ export default function Home() {
         </div>
         <div className="home-ctas relative z-5">
           <div className="inner">
-            <PillButton variant="" target="" href={docUrl('concepts-overview')}>
+            <PillButton variant="" target="" href={docUrl('next/concepts-overview')}>
               Learn More
             </PillButton>
-            <PillButton variant="grey" href={docUrl()}>
+            <PillButton variant="grey" href={docUrl('next/')}>
               Quickstart
             </PillButton>
           </div>
