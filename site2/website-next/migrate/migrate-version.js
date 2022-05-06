@@ -7,6 +7,8 @@ const migrateChapter = require("./migrate-chapter");
 const delDuplicate = require("./tool/del-duplicate");
 const CONST = require("./const");
 const { old, next } = CONST;
+const versions = require("../versions.json");
+const latestVersion = versions[0];
 
 const migrate = (version) => {
   let version_full = "version-" + version;
@@ -60,10 +62,13 @@ const migrate = (version) => {
       `../../${next.baseDir}/sidebars.json`
     );
   } else {
-    fs.writeFileSync(
-      path.join(dest, "about.md"),
-      fs.readFileSync(aboutDocPath, "utf8")
-    );
+    let _about = fs.readFileSync(aboutDocPath, "utf8");
+    let _replace = `url="/docs/${version}/`;
+    if (version == latestVersion) {
+      _replace = `url="/docs/`;
+    }
+    _about = _about.replace(/url="\/docs\/next\//g, _replace);
+    fs.writeFileSync(path.join(dest, "about.md"), _about);
   }
 
   sidebar = fs.readFileSync(destSidebarPath, "utf8");

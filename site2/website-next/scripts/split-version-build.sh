@@ -14,16 +14,16 @@ function _build() {
     if [[ "$buildLanguage" == "en" ]]; then
         echo "only build en"
         yarn build --locale en
-    else
-        echo "build all"
-        yarn build
+    # else
+    #     echo "build all"
+    #     yarn build
     fi
 }
 
 function _buildVersion() {
     echo "..." $buildVersion "begin build..."
     if [[ $buildVersion = "next" ]]; then
-        echo "[\"current\"]" >.build-versions.json
+        echo "[\"current\", \"${latest}\"]" >.build-versions.json
     else
         echo "[\"${buildVersion}\"]" >.build-versions.json
     fi
@@ -48,7 +48,7 @@ function _buildVersion() {
 }
 
 # force build all versions
-BUILD_ALL_VERSION="1"
+# BUILD_ALL_VERSION="1"
 
 # sometimes need build specify versions
 SUPPLEMENT_VERSIONS=$latest
