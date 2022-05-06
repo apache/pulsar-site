@@ -19,9 +19,12 @@ If you’re an experienced coder, review this page to learn the easiest way to a
 
 ## Get Started Now
 <BlockLinks>
+    <BlockLink title="About Pulsar" url="/docs/2.1.1-incubating/concepts-overview/" />
     <BlockLink title="Get Started" url="/docs/2.1.1-incubating/getting-started-standalone/" />
-    <BlockLink title="Pulsar Basics" url="/docs/2.1.1-incubating/" />
-    <BlockLink title="Ecosystem" url='/ecosystem/' />
+    <BlockLink title="Install, Deploy, Upgrade" url="/docs/2.1.1-incubating/deploy-aws/" />
+    <BlockLink title="Pulsar for Developers" url="/docs/2.1.1-incubating/develop-tools/" />
+    <BlockLink title="How To" url="/docs/2.1.1-incubating/functions-develop/" />
+    <BlockLink title="References" url="/docs/2.1.1-incubating/reference-terminology/" />
 </BlockLinks>
 
 ## Navigation

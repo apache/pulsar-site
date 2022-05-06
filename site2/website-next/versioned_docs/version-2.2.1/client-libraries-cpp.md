@@ -151,7 +151,7 @@ $ rpm -ivh apache-pulsar-client*.rpm
 
 ```
 
-After you install RPM successfully, Pulsar libraries are in the `/usr/lib` directory，for example：
+After you install RPM successfully, Pulsar libraries are in the `/usr/lib` directory, for example：
 
 ```bash
 

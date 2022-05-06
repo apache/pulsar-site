@@ -23,8 +23,6 @@ This example uses Pulsar 2.8.0.
 2. Download and untar the Pulsar offloaders package, then copy the Pulsar offloaders as `offloaders` in the Pulsar directory, see [here](https://pulsar.apache.org/docs/en/standalone/#install-tiered-storage-offloaders-optional).
 
    **Output**
-   
-   As shown from the output, Pulsar uses [Apache jclouds](https://jclouds.apache.org) to support [AWS S3](https://aws.amazon.com/s3/), [GCS](https://cloud.google.com/storage/), [Azure](https://portal.azure.com/#home), and [Aliyun OSS](https://www.aliyun.com/product/oss) for long-term storage.
 
    ```
    
