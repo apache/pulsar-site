@@ -38,7 +38,6 @@ export default function Home() {
                 <h1>Ecosystem</h1>
                 <p>To build better streaming data pipelines and event-driven applications, you can use the powerful extensions to Pulsar, including <a href="/docs/next/io-overview">connectors</a>, protocol handlers, tools, and more. Additionally, you can develop applications using <a href="/docs/next/client-libraries">client libraries</a>.</p>
                 <p>This page lists both built-in and third-party tools. Note that some of the third-party tools were not tested throughly by the community, and may not work as expected.</p>
-                    
 
               </div>
             </div>
@@ -47,7 +46,7 @@ export default function Home() {
         <section className="main-content waves-bg py-12 mb-24">
           
           <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
-            <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
+            <TabsListUnstyled className="block inner text--center tabs-bar py-8 px-4">
               <TabUnstyled className="mx-2 mb-2">All</TabUnstyled>
               <TabUnstyled className="mx-2 mb-2">Client API</TabUnstyled>
               <TabUnstyled className="mx-2 mb-2">Client Wrapper</TabUnstyled>
