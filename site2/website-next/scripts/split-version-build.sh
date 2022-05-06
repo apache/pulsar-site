@@ -23,7 +23,7 @@ function _build() {
 function _buildVersion() {
     echo "..." $buildVersion "begin build..."
     if [[ $buildVersion = "next" ]]; then
-        echo "[\"current\"]" >.build-versions.json
+        echo "[\"current\", \"${latest}\"]" >.build-versions.json
     else
         echo "[\"${buildVersion}\"]" >.build-versions.json
     fi
