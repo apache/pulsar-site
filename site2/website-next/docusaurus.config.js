@@ -163,7 +163,7 @@ module.exports = {
             {
               type: "doc",
               label: "Quickstart",
-              docId: "standalone",
+              docId: "getting-started-standalone",
             },
             {
               label: "Ecosystem",
