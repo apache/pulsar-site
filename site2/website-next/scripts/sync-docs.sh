@@ -25,6 +25,9 @@ cp -r pulsar/site2/website/pulsar-manager-release.json pulsar-site/site2/website
 cp -r pulsar/site2/website/pulsar-adapters-release.json pulsar-site/site2/website/pulsar-adapters-release.json
 cp -r pulsar/site2/website/pulsar-adapters-release.json pulsar-site/site2/website-next/pulsar-manager/pulsar-adapters-release.json
 
+cp -r pulsar/site2/website/static/swagger/* pulsar-site/site2/website/static/swagger/
+cp -r pulsar/site2/website/static/swagger/* pulsar-site/site2/website-next/static/swagger/
+
 # cp -r pulsar/site2/docs/* pulsar-site/site2/website-next/docs
 # cp -r pulsar-site/site2/website-next/docs/assets/* pulsar-site/site2/website-next/static/assets
 # rm -rf pulsar-site/site2/website-next/docs/assets
