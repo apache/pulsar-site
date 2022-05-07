@@ -36,9 +36,9 @@ function connectorReleaseUrl(version) {
   if (version.includes('incubating')) {
     return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`
   } else if (majorVersion > 2 || (majorVersion == 2 && minorVersion >= 3)) {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/connectors`;
+    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/connectors`
   } else {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`;
+    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`
   }
 }
 
@@ -92,7 +92,7 @@ function clientVersionUrl(version, type) {
   var versions = version.split('.')
   var majorVersion = parseInt(versions[0])
   var minorVersion = parseInt(versions[1])
-  if (majorVersion === 2 && minorVersion < 5) {
+  if ((majorVersion === 2 && minorVersion < 5) || (type === "python" && minorVersion >= 7)) {
     return `/api/` + type + `/` + version;
   } else if (majorVersion >= 2 && minorVersion >= 5) {
     return `/api/` + type + `/` + majorVersion + `.` + minorVersion + `.0` + `-SNAPSHOT`
