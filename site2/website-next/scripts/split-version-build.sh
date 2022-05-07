@@ -14,9 +14,9 @@ function _build() {
     if [[ "$buildLanguage" == "en" ]]; then
         echo "only build en"
         yarn build --locale en
-    # else
-    #     echo "build all"
-    #     yarn build
+    else
+        echo "build all"
+        yarn build
     fi
 }
 
