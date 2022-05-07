@@ -118,4 +118,4 @@ else
   cp -R ./build/pulsar/* ${ROOT_DIR}/generated-site/content
 fi
 cp -R ${ROOT_DIR}/generated-site/tools ${ROOT_DIR}/generated-site/content
-# cp -R ${ROOT_DIR}/site2/$WEBSITE_DIR/static/swagger/* ${ROOT_DIR}/generated-site/content/swagger/
+cp -R ${ROOT_DIR}/site2/$WEBSITE_DIR/static/swagger/* ${ROOT_DIR}/generated-site/content/swagger/
