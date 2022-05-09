@@ -377,6 +377,14 @@ module.exports = {
         },
       },
     ],
+    // [
+    //   "@docusaurus/preset-classic",
+    //   {
+    //     googleAnalytics: {
+    //       trackingID: "UA-102219959-1",
+    //     },
+    //   },
+    // ],
   ],
   plugins: [
     [
