@@ -46,9 +46,8 @@ function crowdin() {
     fi
     if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
       yarn crowdin-download
+      workaround_crowdin_problem_by_copying_files
     fi
-
-    workaround_crowdin_problem_by_copying_files
   else
     # set English as the only language to build in this case
     cat >languages.js <<'EOF'
