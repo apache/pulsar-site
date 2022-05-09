@@ -43,5 +43,6 @@ else
     yarn install
 fi
 
+node scripts/split-swagger-by-version.js
 node migrate/migrate-blogs.js
 node migrate/migrate-full.js
