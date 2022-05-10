@@ -37,7 +37,7 @@ export default function Home() {
               <div className="col col--8">
                 <h1>Ecosystem</h1>
                 <p>To build better streaming data pipelines and event-driven applications, you can use the powerful extensions to Pulsar, including <a href="/docs/next/io-overview">connectors</a>, protocol handlers, tools, and more. Additionally, you can develop applications using <a href="/docs/next/client-libraries">client libraries</a>.</p>
-                <p>This page lists both built-in and third-party tools. Note that some of the third-party tools were not tested throughly by the community, and may not work as expected.</p>
+                <p>This page lists both built-in and third-party tools. Note that some of the third-party tools were not tested throughly by the community, and may not work as expected. Components with <a href="https://opensource.org/licenses">OSI approved licenses</a> are only allowed. </p>
 
               </div>
             </div>
