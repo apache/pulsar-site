@@ -56,12 +56,9 @@ If you start Pulsar successfully, you will see `INFO`-level log messages like th
 
 :::tip
 
-When you start a local standalone cluster, a `public/default`
+When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::
-
-namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces.
-For more information, see [Topics](concepts-messaging.md#topics).
 
 ## Use Pulsar in Docker
 
