@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.apache.pulsar.functions.api"},{"l":"org.apache.pulsar.functions.api.state"},{"l":"org.apache.pulsar.functions.api.utils"}]
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.pulsar.functions.api"},{"l":"org.apache.pulsar.functions.api.state"},{"l":"org.apache.pulsar.functions.api.utils"}];updateSearchResults();
