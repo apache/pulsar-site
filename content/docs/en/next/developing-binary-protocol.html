@@ -87,7 +87,7 @@
 <p>The Pulsar protocol allows for two types of commands:</p>
 <ol>
 <li><strong>Simple commands</strong> that do not carry a message payload.</li>
-<li><strong>Payload commands</strong> that bear a payload that is used when publishing or delivering messages. In payload commands, the protobuf command data is followed by protobuf <a href="#message-metadata">metadata</a> and then the payload, which is passed in raw format outside of protobuf. All sizes are passed as 4-byte unsigned big endian integers.</li>
+<li><strong>Payload commands</strong> that bear a payload that is used when publishing or delivering messages. In payload commands, the protobuf command data is followed by protobuf <a href="#message-metadata">metadata</a> and then the payload, which is passed in a raw format outside of protobuf. All sizes are passed as 4-byte unsigned big-endian integers.</li>
 </ol>
 <blockquote>
 <p>Message payloads are passed in raw format rather than protobuf format for efficiency reasons.</p>
@@ -154,7 +154,7 @@ It is created by the broker when the message arrived at the broker and passed wi
 <tr><td style="text-align:left"><code>publish_time</code></td><td style="text-align:left">Required</td><td style="text-align:left">The publish timestamp in Unix time (i.e. as the number of milliseconds since January 1st, 1970 in UTC)</td></tr>
 <tr><td style="text-align:left"><code>properties</code></td><td style="text-align:left">Required</td><td style="text-align:left">A sequence of key/value pairs (using the <a href="https://github.com/apache/pulsar/blob/master/pulsar-common/src/main/proto/PulsarApi.proto#L32"><code>KeyValue</code></a> message). These are application-defined keys and values with no special meaning to Pulsar.</td></tr>
 <tr><td style="text-align:left"><code>replicated_from</code></td><td style="text-align:left">Optional</td><td style="text-align:left">Indicates that the message has been replicated and specifies the name of the <a href="/docs/en/next/reference-terminology#cluster">cluster</a> where the message was originally published</td></tr>
-<tr><td style="text-align:left"><code>partition_key</code></td><td style="text-align:left">Optional</td><td style="text-align:left">While publishing on a partition topic, if the key is present, the hash of the key is used to determine which partition to choose. Partition key is used as the message key.</td></tr>
+<tr><td style="text-align:left"><code>partition_key</code></td><td style="text-align:left">Optional</td><td style="text-align:left">While publishing on a partitioned topic, if the key is present, the hash of the key is used to determine which partition to choose. Partition key is used as the message key.</td></tr>
 <tr><td style="text-align:left"><code>compression</code></td><td style="text-align:left">Optional</td><td style="text-align:left">Signals that payload has been compressed and with which compression library</td></tr>
 <tr><td style="text-align:left"><code>uncompressed_size</code></td><td style="text-align:left">Optional</td><td style="text-align:left">If compression is used, the producer must fill the uncompressed size field with the original payload size</td></tr>
 <tr><td style="text-align:left"><code>num_messages_in_batch</code></td><td style="text-align:left">Optional</td><td style="text-align:left">If this message is really a <a href="#batch-messages">batch</a> of multiple entries, this field must be set to the number of messages in the batch</td></tr>
@@ -206,13 +206,10 @@ close the TCP connection.</p>
 </code></pre>
 <p>Fields:</p>
 <ul>
-<li><code>client_version</code> → String based identifier. Format is not enforced</li>
-<li><code>auth_method_name</code> → <em>(optional)</em> Name of the authentication plugin if auth
-enabled</li>
-<li><code>auth_data</code> → <em>(optional)</em> Plugin specific authentication data</li>
-<li><code>protocol_version</code> → Indicates the protocol version supported by the
-client. Broker will not send commands introduced in newer revisions of the
-protocol. Broker might be enforcing a minimum version</li>
+<li><code>client_version</code>: String-based identifier. Format is not enforced.</li>
+<li><code>auth_method_name</code>: <em>(optional)</em> Name of the authentication plugin if auth is enabled.</li>
+<li><code>auth_data</code>: <em>(optional)</em> Plugin specific authentication data.</li>
+<li><code>protocol_version</code>: Indicates the protocol version supported by the client. Broker will not send commands introduced in newer revisions of the protocol. Broker might be enforcing a minimum version.</li>
 </ul>
 <pre><code class="hljs css language-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CommandConnected</span> </span>{
   <span class="hljs-string">"server_version"</span> : <span class="hljs-string">"Pulsar-Broker-v1.15.2"</span>,
@@ -221,10 +218,10 @@ protocol. Broker might be enforcing a minimum version</li>
 </code></pre>
 <p>Fields:</p>
 <ul>
-<li><code>server_version</code> → String identifier of broker version</li>
-<li><code>protocol_version</code> → Protocol version supported by the broker. Client
+<li><code>server_version</code>: String identifier of broker version.</li>
+<li><code>protocol_version</code>: Protocol version supported by the broker. Client
 must not attempt to send commands introduced in newer revisions of the
-protocol</li>
+protocol.</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="keep-alive"></a><a href="#keep-alive" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Keep Alive</h3>
 <p>To identify prolonged network partitions between clients and brokers or cases
@@ -242,7 +239,7 @@ broker in order to prevent the remote side from forcibly closing the TCP connect
 a producer, the broker will first verify that this particular client is
 authorized to publish on the topic.</p>
 <p>Once the client gets confirmation of the producer creation, it can publish
-messages to the broker, referring to the producer id negotiated before.</p>
+messages to the broker, referring to the producer ID negotiated before.</p>
 <p><img src="/docs/assets/binary-protocol-producer.png" alt="Producer interaction"></p>
 <p>If the client does not receive a response indicating producer creation success or failure,
 the client should first send a command to close the original producer before sending a
@@ -254,14 +251,14 @@ command to re-attempt producer creation.</p>
   <span class="hljs-string">"request_id"</span> : <span class="hljs-number">1</span>
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>topic</code> → Complete topic name to where you want to create the producer on</li>
-<li><code>producer_id</code> → Client generated producer identifier. Needs to be unique
-within the same connection</li>
-<li><code>request_id</code> → Identifier for this request. Used to match the response with
-the originating request. Needs to be unique within the same connection</li>
-<li><code>producer_name</code> → <em>(optional)</em> If a producer name is specified, the name will
+<li><code>topic</code>: Complete topic name to where you want to create the producer on.</li>
+<li><code>producer_id</code>: Client generated producer identifier. Needs to be unique
+within the same connection.</li>
+<li><code>request_id</code>: Identifier for this request. Used to match the response with
+the originating request. Needs to be unique within the same connection.</li>
+<li><code>producer_name</code>: <em>(optional)</em> If a producer name is specified, the name will
 be used, otherwise the broker will generate a unique name. Generated
 producer name is guaranteed to be globally unique. Implementations are
 expected to let the broker generate a new producer name when the producer
@@ -275,10 +272,10 @@ reconnections.</li>
   <span class="hljs-string">"producer_name"</span> : <span class="hljs-string">"generated-unique-producer-name"</span>
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>request_id</code> → Original id of the <code>CreateProducer</code> request</li>
-<li><code>producer_name</code> → Generated globally unique producer name or the name
+<li><code>request_id</code>: Original ID of the <code>CreateProducer</code> request.</li>
+<li><code>producer_name</code>: Generated globally unique producer name or the name
 specified by the client, if any.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-send"></a><a href="#command-send" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command Send</h5>
@@ -293,14 +290,14 @@ complete format is specified in the <a href="#payload-commands">payload commands
   <span class="hljs-string">"num_messages"</span> : <span class="hljs-number">1</span>
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>producer_id</code> → id of an existing producer</li>
-<li><code>sequence_id</code> → each message has an associated sequence id which is expected
+<li><code>producer_id</code>: The ID of an existing producer.</li>
+<li><code>sequence_id</code>: Each message has an associated sequence ID which is expected
 to be implemented with a counter starting at 0. The <code>SendReceipt</code> that
-acknowledges the effective publishing of a messages will refer to it by
-its sequence id.</li>
-<li><code>num_messages</code> → <em>(optional)</em> Used when publishing a batch of messages at
+acknowledges the effective publishing of messages will refer to it by
+its sequence ID.</li>
+<li><code>num_messages</code>: <em>(optional)</em> Used when publishing a batch of messages at
 once.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-sendreceipt"></a><a href="#command-sendreceipt" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command SendReceipt</h5>
@@ -315,17 +312,20 @@ broker will send the acknowledgment receipt to the producer.</p>
   }
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>producer_id</code> → id of producer originating the send request</li>
-<li><code>sequence_id</code> → sequence id of the published message</li>
-<li><code>message_id</code> → message id assigned by the system to the published message
-Unique within a single cluster. Message id is composed of 2 longs, <code>ledgerId</code>
-and <code>entryId</code>, that reflect that this unique id is assigned when appending
-to a BookKeeper ledger</li>
+<li><code>producer_id</code>: The ID of producer originating the send request.</li>
+<li><code>sequence_id</code>: The sequence ID of the published message.</li>
+<li><code>message_id</code>: The message ID assigned by the system to the published message
+Unique within a single cluster. Message ID is composed of 2 longs, <code>ledgerId</code>
+and <code>entryId</code>, that reflect that this unique ID is assigned when appending
+to a BookKeeper ledger.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-closeproducer"></a><a href="#command-closeproducer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command CloseProducer</h5>
-<p><strong>Note</strong>: <em>This command can be sent by either producer or broker</em>.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>This command can be sent by either producer or broker.</p>
+</blockquote>
 <p>When receiving a <code>CloseProducer</code> command, the broker will stop accepting any
 more messages for the producer, wait until all pending messages are persisted
 and then reply <code>Success</code> to the client.</p>
@@ -363,16 +363,16 @@ Then the consumer sends permits to the broker to ask for 500 messages.</p>
   <span class="hljs-string">"request_id"</span> : <span class="hljs-number">1</span>
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>topic</code> → Complete topic name to where you want to create the consumer on</li>
-<li><code>subscription</code> → Subscription name</li>
-<li><code>subType</code> → Subscription type: Exclusive, Shared, Failover, Key_Shared</li>
-<li><code>consumer_id</code> → Client generated consumer identifier. Needs to be unique
-within the same connection</li>
-<li><code>request_id</code> → Identifier for this request. Used to match the response with
-the originating request. Needs to be unique within the same connection</li>
-<li><code>consumer_name</code> → <em>(optional)</em> Clients can specify a consumer name. This
+<li><code>topic</code>: Complete topic name to where you want to create the consumer on.</li>
+<li><code>subscription</code>: Subscription name.</li>
+<li><code>subType</code>: Subscription type: Exclusive, Shared, Failover, Key_Shared.</li>
+<li><code>consumer_id</code>: Client generated consumer identifier. Needs to be unique
+within the same connection.</li>
+<li><code>request_id</code>: Identifier for this request. Used to match the response with
+the originating request. Needs to be unique within the same connection.</li>
+<li><code>consumer_name</code>: <em>(optional)</em> Clients can specify a consumer name. This
 name can be used to track a particular consumer in the stats. Also, in
 Failover subscription type, the name is used to decide which consumer is
 elected as <em>master</em> (the one receiving messages): consumers are sorted by
@@ -384,11 +384,11 @@ their consumer name and the first one is elected master.</li>
   <span class="hljs-string">"messagePermits"</span> : <span class="hljs-number">1000</span>
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>consumer_id</code> → ID of an already established consumer</li>
-<li><code>messagePermits</code> → Number of additional permits to grant to the broker for
-pushing more messages</li>
+<li><code>consumer_id</code>: The ID of an already established consumer.</li>
+<li><code>messagePermits</code>: The number of additional permits to grant to the broker for
+pushing more messages.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-message"></a><a href="#command-message" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command Message</h5>
 <p>Command <code>Message</code> is used by the broker to push messages to an existing consumer,
@@ -418,27 +418,27 @@ acknowledged messages.</p>
   }
 }
 </code></pre>
-<p>Parameters:</p>
+<p>Fields:</p>
 <ul>
-<li><code>consumer_id</code> → ID of an already established consumer</li>
-<li><code>ack_type</code> → Type of acknowledgment: <code>Individual</code> or <code>Cumulative</code></li>
-<li><code>message_id</code> → ID of the message to acknowledge</li>
-<li><code>validation_error</code> → <em>(optional)</em> Indicates that the consumer has discarded
+<li><code>consumer_id</code>: The ID of an already established consumer.</li>
+<li><code>ack_type</code>: Acknowledgment type: <code>Individual</code> or <code>Cumulative</code>.</li>
+<li><code>message_id</code>: The ID of the message to acknowledge.</li>
+<li><code>validation_error</code>: <em>(optional)</em> Indicates that the consumer has discarded
 the messages due to: <code>UncompressedSizeCorruption</code>,
-<code>DecompressionError</code>, <code>ChecksumMismatch</code>, <code>BatchDeSerializeError</code></li>
-<li><code>properties</code> -&gt; <em>(optional)</em> Reserved configuration items</li>
-<li><code>txnid_most_bits</code> -&gt; <em>(optional)</em> Same as TC ID, <code>txnid_most_bits</code> and <code>txnid_least_bits</code>
+<code>DecompressionError</code>, <code>ChecksumMismatch</code>, <code>BatchDeSerializeError</code>.</li>
+<li><code>properties</code>: <em>(optional)</em> Reserved configuration items.</li>
+<li><code>txnid_most_bits</code>: <em>(optional)</em> Same as Transaction Coordinator ID, <code>txnid_most_bits</code> and <code>txnid_least_bits</code>
 uniquely identify a transaction.</li>
-<li><code>txnid_least_bits</code> -&gt; <em>(optional)</em> The ID of the transaction opened in a TC,
+<li><code>txnid_least_bits</code>: <em>(optional)</em> The ID of the transaction opened in a transaction coordinator,
 <code>txnid_most_bits</code> and <code>txnid_least_bits</code>uniquely identify a transaction.</li>
-<li><code>request_id</code> -&gt; <em>(optional)</em> ID for handling response and timeout.</li>
+<li><code>request_id</code>: <em>(optional)</em> The ID for handling response and timeout.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-ackresponse"></a><a href="#command-ackresponse" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command AckResponse</h5>
 <p>An <code>AckResponse</code> is the broker’s response to acknowledge a request sent by the client. It contains the <code>consumer_id</code> sent in the request.
-If a transaction is used, it contains both Transaction ID and Request ID that are sent in the request.
+If a transaction is used, it contains both the Transaction ID and the Request ID that are sent in the request.
 The client finishes the specific request according to the Request ID.
 If the <code>error</code> field is set, it indicates that the request has failed.</p>
-<p>Example of ack response with redirection:</p>
+<p>An example of <code>AckResponse</code> with redirection:</p>
 <pre><code class="hljs css language-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CommandAckResponse</span> </span>{
     <span class="hljs-string">"consumer_id"</span> : <span class="hljs-number">1</span>,
     <span class="hljs-string">"txnid_least_bits"</span> = <span class="hljs-number">0</span>,
@@ -447,12 +447,15 @@ If the <code>error</code> field is set, it indicates that the request has failed
 }
 </code></pre>
 <h5><a class="anchor" aria-hidden="true" id="command-closeconsumer"></a><a href="#command-closeconsumer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command CloseConsumer</h5>
-<p><strong><em>Note</em></strong>: <em>This command can be sent by either producer or broker</em>.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>This command can be sent by either producer or broker.</p>
+</blockquote>
 <p>This command behaves the same as <a href="#command-closeproducer"><code>CloseProducer</code></a></p>
 <h5><a class="anchor" aria-hidden="true" id="command-redeliverunacknowledgedmessages"></a><a href="#command-redeliverunacknowledgedmessages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command RedeliverUnacknowledgedMessages</h5>
 <p>A consumer can ask the broker to redeliver some or all of the pending messages
 that were pushed to that particular consumer and not yet acknowledged.</p>
-<p>The protobuf object accepts a list of message ids that the consumer wants to
+<p>The protobuf object accepts a list of message IDs that the consumer wants to
 be redelivered. If the list is empty, the broker will redeliver all the
 pending messages.</p>
 <p>On redelivery, messages can be sent to the same consumer or, in the case of a
@@ -465,23 +468,23 @@ acknowledged.</p>
 messages are coming from the consumer.</p>
 <h5><a class="anchor" aria-hidden="true" id="command-consumerstats"></a><a href="#command-consumerstats" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command ConsumerStats</h5>
 <p>This command is sent by the client to retrieve Subscriber and Consumer level
-stats from the broker.
-Parameters:</p>
+stats from the broker.</p>
+<p>Fields:</p>
 <ul>
-<li><code>request_id</code> → ID of the request, used to correlate the request
+<li><code>request_id</code>: The ID of the request, used to correlate the request
 and the response.</li>
-<li><code>consumer_id</code> → ID of an already established consumer.</li>
+<li><code>consumer_id</code>: The ID of an already established consumer.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-consumerstatsresponse"></a><a href="#command-consumerstatsresponse" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command ConsumerStatsResponse</h5>
 <p>This is the broker's response to ConsumerStats request by the client.
 It contains the Subscriber and Consumer level stats of the <code>consumer_id</code> sent in the request.
 If the <code>error_code</code> or the <code>error_message</code> field is set it indicates that the request has failed.</p>
 <h5><a class="anchor" aria-hidden="true" id="command-unsubscribe"></a><a href="#command-unsubscribe" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command Unsubscribe</h5>
-<p>This command is sent by the client to unsubscribe the <code>consumer_id</code> from the associated topic.
-Parameters:</p>
+<p>This command is sent by the client to unsubscribe the <code>consumer_id</code> from the associated topic.</p>
+<p>Fields:</p>
 <ul>
-<li><code>request_id</code> → ID of the request.</li>
-<li><code>consumer_id</code> → ID of an already established consumer which needs to unsubscribe.</li>
+<li><code>request_id</code>: The ID of the request.</li>
+<li><code>consumer_id</code>: The ID of an already established consumer that needs to unsubscribe.</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="service-discovery"></a><a href="#service-discovery" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Service discovery</h2>
 <h3><a class="anchor" aria-hidden="true" id="topic-lookup"></a><a href="#topic-lookup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Topic lookup</h3>
@@ -489,10 +492,8 @@ Parameters:</p>
 reconnect a producer or a consumer. Lookup is used to discover which particular
 broker is serving the topic we are about to use.</p>
 <p>Lookup can be done with a REST call as described in the
-<a href="/docs/en/next/admin-api-topics#lookup-of-topic">admin API</a>
-docs.</p>
-<p>Since Pulsar-1.16 it is also possible to perform the lookup within the binary
-protocol.</p>
+<a href="/docs/en/next/admin-api-topics#lookup-of-topic">admin API</a> docs.</p>
+<p>Since Pulsar-1.16 it is also possible to perform the lookup within the binary protocol.</p>
 <p>For the sake of example, let's assume we have a service discovery component
 running at <code>pulsar://broker.example.com:6650</code></p>
 <p>Individual brokers will be running at <code>pulsar://broker-1.example.com:6650</code>,
@@ -511,14 +512,14 @@ gone through the <code>Connect</code> / <code>Connected</code> initial handshake
 </code></pre>
 <p>Fields:</p>
 <ul>
-<li><code>topic</code> → Topic name to lookup</li>
-<li><code>request_id</code> → ID of the request that will be passed with its response</li>
-<li><code>authoritative</code> → Initial lookup request should use false. When following a
+<li><code>topic</code>: The topic name to lookup.</li>
+<li><code>request_id</code>: The ID of the request that will be passed with its response.</li>
+<li><code>authoritative</code>: Initial lookup request should use false. When following a
 redirect response, client should pass the same value contained in the
-response</li>
+response.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="lookuptopicresponse"></a><a href="#lookuptopicresponse" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LookupTopicResponse</h5>
-<p>Example of response with successful lookup:</p>
+<p>An example of response with successful lookup:</p>
 <pre><code class="hljs css language-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CommandLookupTopicResponse</span> </span>{
   <span class="hljs-string">"request_id"</span> : <span class="hljs-number">1</span>,
   <span class="hljs-string">"response"</span> : <span class="hljs-string">"Connect"</span>,
@@ -527,7 +528,7 @@ response</li>
   <span class="hljs-string">"authoritative"</span> : <span class="hljs-literal">true</span>
 }
 </code></pre>
-<p>Example of lookup response with redirection:</p>
+<p>This is an example of lookup response with redirection:</p>
 <pre><code class="hljs css language-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CommandLookupTopicResponse</span> </span>{
   <span class="hljs-string">"request_id"</span> : <span class="hljs-number">1</span>,
   <span class="hljs-string">"response"</span> : <span class="hljs-string">"Redirect"</span>,
@@ -547,7 +548,7 @@ multiple producers or consumers, one for each partition, using the <code>partiti
 suffix.</p>
 <p>This information only needs to be retrieved the first time a producer or
 consumer is created. There is no need to do this after reconnections.</p>
-<p>The discovery of partitioned topics metadata works very similar to the topic
+<p>The discovery of partitioned topics metadata works very similarly to the topic
 lookup. The client send a request to the service discovery address and the
 response will contain actual metadata.</p>
 <h5><a class="anchor" aria-hidden="true" id="command-partitionedtopicmetadata"></a><a href="#command-partitionedtopicmetadata" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command PartitionedTopicMetadata</h5>
@@ -558,11 +559,11 @@ response will contain actual metadata.</p>
 </code></pre>
 <p>Fields:</p>
 <ul>
-<li><code>topic</code> → the topic for which to check the partitions metadata</li>
-<li><code>request_id</code> → ID of the request that will be passed with its response</li>
+<li><code>topic</code>: The topic for which to check the partitions metadata.</li>
+<li><code>request_id</code>: The ID of the request that will be passed with its response.</li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="command-partitionedtopicmetadataresponse"></a><a href="#command-partitionedtopicmetadataresponse" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command PartitionedTopicMetadataResponse</h5>
-<p>Example of response with metadata:</p>
+<p>An example of response with metadata:</p>
 <pre><code class="hljs css language-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CommandPartitionedTopicMetadataResponse</span> </span>{
   <span class="hljs-string">"request_id"</span> : <span class="hljs-number">1</span>,
   <span class="hljs-string">"response"</span> : <span class="hljs-string">"Success"</span>,
