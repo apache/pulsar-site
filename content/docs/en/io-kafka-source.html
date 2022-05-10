@@ -36,11 +36,11 @@ to Pulsar topics.</p>
 <tr><td><code>autoCommitIntervalMs</code></td><td>long</td><td>false</td><td>5000</td><td>The frequency in milliseconds that the consumer offsets are auto-committed to Kafka if <code>autoCommitEnabled</code> is set to true.</td></tr>
 <tr><td><code>heartbeatIntervalMs</code></td><td>long</td><td>false</td><td>3000</td><td>The interval between heartbeats to the consumer when using Kafka's group management facilities. <br/><br/><strong>Note: <code>heartbeatIntervalMs</code> must be smaller than <code>sessionTimeoutMs</code></strong>.</td></tr>
 <tr><td><code>sessionTimeoutMs</code></td><td>long</td><td>false</td><td>30000</td><td>The timeout used to detect consumer failures when using Kafka's group management facility.</td></tr>
-<tr><td><code>topic</code></td><td>String</td><td>true</td><td>&quot; &quot; (empty string)</td><td>The Kafka topic which sends messages to Pulsar.</td></tr>
+<tr><td><code>topic</code></td><td>String</td><td>true</td><td>&quot; &quot; (empty string)</td><td>The Kafka topic that sends messages to Pulsar.</td></tr>
 <tr><td><code>consumerConfigProperties</code></td><td>Map</td><td>false</td><td>&quot; &quot; (empty string)</td><td>The consumer configuration properties to be passed to consumers. <br/><br/><strong>Note: other properties specified in the connector configuration file take precedence over this configuration</strong>.</td></tr>
 <tr><td><code>keyDeserializationClass</code></td><td>String</td><td>false</td><td>org.apache.kafka.common.serialization.StringDeserializer</td><td>The deserializer class for Kafka consumers to deserialize keys.<br/> The deserializer is set by a specific implementation of <a href="https://github.com/apache/pulsar/blob/master/pulsar-io/kafka/src/main/java/org/apache/pulsar/io/kafka/KafkaAbstractSource.java"><code>KafkaAbstractSource</code></a>.</td></tr>
 <tr><td><code>valueDeserializationClass</code></td><td>String</td><td>false</td><td>org.apache.kafka.common.serialization.ByteArrayDeserializer</td><td>The deserializer class for Kafka consumers to deserialize values.</td></tr>
-<tr><td><code>autoOffsetReset</code></td><td>String</td><td>false</td><td>&quot;earliest&quot;</td><td>The default offset reset policy.</td></tr>
+<tr><td><code>autoOffsetReset</code></td><td>String</td><td>false</td><td>earliest</td><td>The default offset reset policy.</td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="schema-management"></a><a href="#schema-management" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Schema Management</h3>
@@ -69,54 +69,45 @@ If you want to access the raw key, you can use the <code>Message#getKeyBytes()</
 <p>Before using the Kafka source connector, you need to create a configuration file through one of the following methods.</p>
 <ul>
 <li><p>JSON</p>
-<pre><code class="hljs css language-json">{
-   <span class="hljs-attr">"configs"</span>: {
-      <span class="hljs-attr">"bootstrapServers"</span>: <span class="hljs-string">"pulsar-kafka:9092"</span>,
-      <span class="hljs-attr">"groupId"</span>: <span class="hljs-string">"test-pulsar-io"</span>,
-      <span class="hljs-attr">"topic"</span>: <span class="hljs-string">"my-topic"</span>,
-      <span class="hljs-attr">"sessionTimeoutMs"</span>: <span class="hljs-string">"10000"</span>,
-      <span class="hljs-attr">"autoCommitEnabled"</span>: <span class="hljs-literal">false</span>
-   }
-}
+<pre><code class="hljs css language-json"> {
+   <span class="hljs-attr">"bootstrapServers"</span>: <span class="hljs-string">"pulsar-kafka:9092"</span>,
+   <span class="hljs-attr">"groupId"</span>: <span class="hljs-string">"test-pulsar-io"</span>,
+   <span class="hljs-attr">"topic"</span>: <span class="hljs-string">"my-topic"</span>,
+   <span class="hljs-attr">"sessionTimeoutMs"</span>: <span class="hljs-string">"10000"</span>,
+   <span class="hljs-attr">"autoCommitEnabled"</span>: <span class="hljs-literal">false</span>
+ }
 </code></pre></li>
 <li><p>YAML</p>
-<pre><code class="hljs css language-yaml"><span class="hljs-attr">configs:</span>
-    <span class="hljs-attr">bootstrapServers:</span> <span class="hljs-string">"pulsar-kafka:9092"</span>
-    <span class="hljs-attr">groupId:</span> <span class="hljs-string">"test-pulsar-io"</span>
-    <span class="hljs-attr">topic:</span> <span class="hljs-string">"my-topic"</span>
-    <span class="hljs-attr">sessionTimeoutMs:</span> <span class="hljs-string">"10000"</span>
-    <span class="hljs-attr">autoCommitEnabled:</span> <span class="hljs-literal">false</span>
+<pre><code class="hljs css language-yaml"> <span class="hljs-attr">configs:</span>
+   <span class="hljs-attr">bootstrapServers:</span> <span class="hljs-string">"pulsar-kafka:9092"</span>
+   <span class="hljs-attr">groupId:</span> <span class="hljs-string">"test-pulsar-io"</span>
+   <span class="hljs-attr">topic:</span> <span class="hljs-string">"my-topic"</span>
+   <span class="hljs-attr">sessionTimeoutMs:</span> <span class="hljs-string">"10000"</span>
+     <span class="hljs-attr">autoCommitEnabled:</span> <span class="hljs-literal">false</span>
 </code></pre></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
-<p>Here is an example of using the Kafka source connector with the configuration file as shown previously.</p>
+<p>You can make the Kafka source connector as a Pulsar built-in connector and use it on a standalone cluster or an on-premises cluster.</p>
+<h3><a class="anchor" aria-hidden="true" id="standalone-cluster"></a><a href="#standalone-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Standalone cluster</h3>
+<p>This example describes how to use the Kafka source connector to feed data from Kafka and write data to Pulsar topics in the standalone mode.</p>
+<h4><a class="anchor" aria-hidden="true" id="prerequisites"></a><a href="#prerequisites" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prerequisites</h4>
+<ul>
+<li>Install <a href="https://docs.docker.com/get-docker/">Docker</a>(Community Edition).</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="steps"></a><a href="#steps" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Steps</h4>
 <ol>
-<li><p>Download a Kafka client and a Kafka connector.</p>
-<pre><code class="hljs css language-bash">$ wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/0.10.2.1/kafka-clients-0.10.2.1.jar
-
-$ wget https://archive.apache.org/dist/pulsar/pulsar-2.4.0/connectors/pulsar-io-kafka-2.4.0.nar
-</code></pre></li>
-<li><p>Create a network.</p>
-<pre><code class="hljs css language-bash">$ docker network create kafka-pulsar
-</code></pre></li>
-<li><p>Pull a ZooKeeper image and start ZooKeeper.</p>
-<pre><code class="hljs css language-bash">$ docker pull wurstmeister/zookeeper
-
-$ docker run -d -it -p 2181:2181 --name pulsar-kafka-zookeeper --network kafka-pulsar wurstmeister/zookeeper
-</code></pre></li>
-<li><p>Pull a Kafka image and start Kafka.</p>
-<pre><code class="hljs css language-bash">$ docker pull wurstmeister/kafka:2.11-1.0.2
-
-$ docker run -d -it --network kafka-pulsar -p 6667:6667 -p 9092:9092 -e KAFKA_ADVERTISED_HOST_NAME=pulsar-kafka -e KAFKA_ZOOKEEPER_CONNECT=pulsar-kafka-zookeeper:2181 --name pulsar-kafka wurstmeister/kafka:2.11-1.0.2
-</code></pre></li>
-<li><p>Pull a Pulsar image and start Pulsar standalone.</p>
-<pre><code class="hljs css language-bash">$ docker pull apachepulsar/pulsar:2.10.0
-
-$ docker run -d -it --network kafka-pulsar -p 6650:6650 -p 8080:8080 -v <span class="hljs-variable">$PWD</span>/data:/pulsar/data --name pulsar-kafka-standalone apachepulsar/pulsar:2.4.0 bin/pulsar standalone
+<li>Download and start the Confluent Platform.</li>
+</ol>
+<p>For details, see the <a href="https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-1-download-and-start-cp">documentation</a> to install the Kafka service locally.</p>
+<ol start="2">
+<li><p>Pull a Pulsar image and start Pulsar in standalone mode.</p>
+<pre><code class="hljs css language-bash">docker pull apachepulsar/pulsar:latest
+  
+docker run -d -it -p 6650:6650 -p 8080:8080 -v <span class="hljs-variable">$PWD</span>/data:/pulsar/data --name pulsar-kafka-standalone apachepulsar/pulsar:latest bin/pulsar standalone
 </code></pre></li>
 <li><p>Create a producer file <em>kafka-producer.py</em>.</p>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> kafka <span class="hljs-keyword">import</span> KafkaProducer
-producer = KafkaProducer(bootstrap_servers=<span class="hljs-string">'pulsar-kafka:9092'</span>)
+producer = KafkaProducer(bootstrap_servers=<span class="hljs-string">'localhost:9092'</span>)
 future = producer.send(<span class="hljs-string">'my-topic'</span>, <span class="hljs-string">b'hello world'</span>)
 future.get()
 </code></pre></li>
@@ -136,17 +127,14 @@ consumer = client.subscribe(<span class="hljs-string">'my-topic'</span>, subscri
 client.close()
 </code></pre></li>
 <li><p>Copy the following files to Pulsar.</p>
-<pre><code class="hljs css language-bash">$ docker cp pulsar-io-kafka-2.10.0.nar pulsar-kafka-standalone:/pulsar
-$ docker cp kafkaSourceConfig.yaml pulsar-kafka-standalone:/pulsar/conf
-$ docker cp pulsar-client.py pulsar-kafka-standalone:/pulsar/
-$ docker cp kafka-producer.py pulsar-kafka-standalone:/pulsar/
+<pre><code class="hljs css language-bash">docker cp pulsar-io-kafka.nar pulsar-kafka-standalone:/pulsar
+docker cp kafkaSourceConfig.yaml pulsar-kafka-standalone:/pulsar/conf
 </code></pre></li>
 <li><p>Open a new terminal window and start the Kafka source connector in local run mode.</p>
-<pre><code class="hljs css language-bash">$ docker <span class="hljs-built_in">exec</span> -it pulsar-kafka-standalone /bin/bash
+<pre><code class="hljs css language-bash">docker <span class="hljs-built_in">exec</span> -it pulsar-kafka-standalone /bin/bash
 
-$ ./bin/pulsar-admin <span class="hljs-built_in">source</span> localrun \
---archive ./pulsar-io-kafka-2.10.0.nar \
---classname org.apache.pulsar.io.kafka.KafkaBytesSource \
+./bin/pulsar-admin <span class="hljs-built_in">source</span> localrun \
+--archive ./pulsar-io-kafka.nar \
 --tenant public \
 --namespace default \
 --name kafka \
@@ -154,18 +142,36 @@ $ ./bin/pulsar-admin <span class="hljs-built_in">source</span> localrun \
 --<span class="hljs-built_in">source</span>-config-file ./conf/kafkaSourceConfig.yaml \
 --parallelism 1
 </code></pre></li>
-<li><p>Open a new terminal window and run the consumer.</p>
-<pre><code class="hljs css language-bash">$ docker <span class="hljs-built_in">exec</span> -it pulsar-kafka-standalone /bin/bash
-
-$ pip install kafka-python
-
-$ python3 kafka-producer.py
-</code></pre>
-<p>The following information appears on the consumer terminal window.</p>
-<pre><code class="hljs css language-bash">Received message: <span class="hljs-string">'hello world'</span>
+<li><p>Open a new terminal window and run the Kafka producer locally.</p>
+<pre><code class="hljs css language-bash">python3 kafka-producer.py
+</code></pre></li>
+<li><p>Open a new terminal window and run the Pulsar consumer locally.</p>
+<pre><code class="hljs css language-bash">python3 pulsar-client.py
 </code></pre></li>
 </ol>
-</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#property">Property</a></li><li><a href="#schema-management">Schema Management</a></li><li><a href="#example">Example</a></li></ul></li><li><a href="#usage">Usage</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2022 The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</section><span><script>
+<p>The following information appears on the consumer terminal window.</p>
+<pre><code class="hljs">```bash
+Received message: 'hello world'
+```
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="on-premises-cluster"></a><a href="#on-premises-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>On-premises cluster</h3>
+<p>This example explains how to create a Kafka source connector in an on-premises cluster.</p>
+<ol>
+<li><p>Copy the NAR package of the Kafka connector to the Pulsar connectors directory.</p>
+<pre><code class="hljs">cp pulsar-io-kafka-{{<span class="hljs-string">connector:</span>version}}.nar $PULSAR_HOME<span class="hljs-regexp">/connectors/</span>pulsar-io-kafka-{{<span class="hljs-string">connector:</span>version}}.nar
+</code></pre></li>
+<li><p>Reload all <a href="https://pulsar.apache.org/docs/en/next/io-connectors/">built-in connectors</a>.</p>
+<pre><code class="hljs">PULSAR_HOME/bin/pulsar-<span class="hljs-built_in">admin</span> sources <span class="hljs-built_in">reload</span>
+</code></pre></li>
+<li><p>Check whether the Kafka source connector is available on the list or not.</p>
+<pre><code class="hljs">PULSAR_HOME/bin/pulsar-admin sources <span class="hljs-built_in">available</span>-sources
+</code></pre></li>
+<li><p>Create a Kafka source connector on a Pulsar cluster using the <a href="http://pulsar.apache.org/tools/pulsar-admin/2.10.0-SNAPSHOT/#-em-create-em--14"><code>pulsar-admin sources create</code></a> command.</p>
+<pre><code class="hljs">PULSAR_HOME<span class="hljs-regexp">/bin/</span>pulsar-admin sources create \
+--<span class="hljs-keyword">source</span>-config-<span class="hljs-keyword">file</span> &lt;kafka-<span class="hljs-keyword">source</span>-config.yaml&gt;
+</code></pre></li>
+</ol>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#property">Property</a></li><li><a href="#schema-management">Schema Management</a></li><li><a href="#example">Example</a></li></ul></li><li><a href="#usage">Usage</a><ul class="toc-headings"><li><a href="#standalone-cluster">Standalone cluster</a></li><li><a href="#on-premises-cluster">On-premises cluster</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2022 The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</section><span><script>
       const community = document.querySelector("a[href='#community']").parentNode;
       const communityMenu =
         '<li>' +
