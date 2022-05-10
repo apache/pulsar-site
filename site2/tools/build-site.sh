@@ -65,7 +65,7 @@ EOF
 set -x -e
 
 export NODE_OPTIONS="--max-old-space-size=16000"
-# ${ROOT_DIR}/site2/tools/generate-api-docs.sh
+${ROOT_DIR}/site2/tools/generate-api-docs.sh
 cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 
 yarn
@@ -110,7 +110,7 @@ cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 
 rm -rf ${ROOT_DIR}/generated-site/content
 mkdir -p ${ROOT_DIR}/generated-site/content
-# cp -R ${ROOT_DIR}/generated-site/api ${ROOT_DIR}/generated-site/content
+cp -R ${ROOT_DIR}/generated-site/api ${ROOT_DIR}/generated-site/content
 if [ -n "$NEXT" ]; then
   cp -R ./build/* ${ROOT_DIR}/generated-site/content
 else

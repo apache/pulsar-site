@@ -29,6 +29,9 @@ cp -r pulsar/site2/website/pulsar-adapters-release.json pulsar-site/site2/websit
 cp -r pulsar/site2/website/static/swagger/* pulsar-site/site2/website/static/swagger/
 cp -r pulsar/site2/website/static/swagger/* pulsar-site/site2/website-next/static/swagger/
 
+cp -r pulsar/site2/website/static/api pulsar-site/site2/website/static/
+cp -r pulsar/site2/website/static/api pulsar-site/site2/website-next/static/
+
 cd pulsar-site/site2/website-next
 if [ -d "node_modules" ]; then
     echo "skip install"
@@ -54,3 +57,4 @@ node migrate/migrate-full.js
 # cp -r pulsar/site2/website/pulsar-manager-release.json pulsar-site/site2/website-next/pulsar-manager/pulsar-manager-release.json
 # cp -r pulsar/site2/website/pulsar-adapters-release.json pulsar-site/site2/website-next/pulsar-manager/pulsar-adapters-release.json
 # cp -r pulsar/site2/website/static/swagger/* pulsar-site/site2/website-next/static/swagger/
+# cp -r pulsar/site2/website/static/api pulsar-site/site2/website-next/static/
