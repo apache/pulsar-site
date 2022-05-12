@@ -1168,6 +1168,9 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
+                "subscription": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
@@ -1178,9 +1181,6 @@
                     "type": "string"
                 },
                 "commandData": {
-                    "type": "string"
-                },
-                "subscription": {
                     "type": "string"
                 }
             }
@@ -1512,14 +1512,14 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
+                },
                 "config": {
                     "$ref": "#/definitions/DeserializationConfig"
                 },
                 "parser": {
                     "$ref": "#/definitions/JsonParser"
-                },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
                 },
                 "annotationIntrospector": {
                     "$ref": "#/definitions/AnnotationIntrospector"
@@ -1801,6 +1801,9 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
@@ -1811,9 +1814,6 @@
                         "type": "number",
                         "format": "double"
                     }
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "receivedTotal": {
                     "type": "integer",
@@ -2605,9 +2605,6 @@
                         "format": "byte"
                     }
                 },
-                "topicName": {
-                    "type": "string"
-                },
                 "publishTime": {
                     "type": "integer",
                     "format": "int64"
@@ -2642,6 +2639,9 @@
                 },
                 "replicated": {
                     "type": "boolean"
+                },
+                "topicName": {
+                    "type": "string"
                 },
                 "messageId": {
                     "$ref": "#/definitions/MessageId"
@@ -3115,11 +3115,11 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
-                "config": {
-                    "$ref": "#/definitions/SerializationConfig"
-                },
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
+                },
+                "config": {
+                    "$ref": "#/definitions/SerializationConfig"
                 },
                 "annotationIntrospector": {
                     "$ref": "#/definitions/AnnotationIntrospector"
