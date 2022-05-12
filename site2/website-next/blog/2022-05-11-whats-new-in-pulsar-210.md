@@ -146,7 +146,7 @@ key for received messages. This is common when constructing a local cache of the
 **Resolution:** Added new ``TableView`` type and updated the PulsarClient.
 
 ***
-####Topic
+#### Topic
 ***
 ##### Support Topic metadata - PART-1 create topic with properties #12818
 
@@ -157,7 +157,7 @@ key for received messages. This is common when constructing a local cache of the
 - Added two new paths to REST API to reduce compatibility issues.
 
 ***
-Metadata Store
+#### Metadata Store
 ***
 ##### Added Etcd MetadataStore implementation #13225
 
