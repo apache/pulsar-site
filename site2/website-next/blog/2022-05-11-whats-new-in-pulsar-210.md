@@ -1,7 +1,7 @@
 ---
 title: "What’s New in Apache Pulsar 2.10"
 date: 2022-05-11
-author: "Penghui Li", "Dave Duggins"
+author: "Penghui Li, Dave Duggins"
 ---
 
 The Apache Pulsar community releases version 2.10. 99 contributors provided improvements and bug fixes that delivered over 800 commits.
