@@ -21,6 +21,7 @@ function migrate(mdpath) {
   let data = fs.readFileSync(mdpath, "utf8");
   data = fixMd(data)
     .replace(/title:\s*(.*)/, 'title: "$1"')
+    .replace(/title:\s*""(.*)""/, 'title: "$1"')
     .replace(/\.\.\/img\//g, "/img/");
   if (!/<!--truncate-->/.test(data)) {
     data = data.replace(/\.\n/, ".\n\n<!--truncate-->\n");
