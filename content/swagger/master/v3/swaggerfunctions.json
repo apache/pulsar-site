@@ -1168,7 +1168,10 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "subscription": {
+                "commandData": {
+                    "type": "string"
+                },
+                "httpAuthType": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -1177,10 +1180,7 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "httpAuthType": {
-                    "type": "string"
-                },
-                "commandData": {
+                "subscription": {
                     "type": "string"
                 }
             }
@@ -1462,11 +1462,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -1476,9 +1476,6 @@
                 },
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
-                },
-                "classIntrospector": {
-                    "$ref": "#/definitions/ClassIntrospector"
                 },
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
@@ -1497,6 +1494,9 @@
                 },
                 "annotationProcessingEnabled": {
                     "type": "boolean"
+                },
+                "classIntrospector": {
+                    "$ref": "#/definitions/ClassIntrospector"
                 }
             }
         },
@@ -1815,6 +1815,10 @@
                         "format": "double"
                     }
                 },
+                "receivedTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -1830,16 +1834,16 @@
                 "avgProcessLatency": {
                     "type": "number",
                     "format": "double"
-                },
-                "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
+                "receivedTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -1855,10 +1859,6 @@
                 "avgProcessLatency": {
                     "type": "number",
                     "format": "double"
-                },
-                "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
@@ -2293,6 +2293,10 @@
                 "text": {
                     "type": "string"
                 },
+                "intValue": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "textCharacters": {
                     "type": "array",
                     "items": {
@@ -2324,10 +2328,6 @@
                 },
                 "objectId": {
                     "type": "object"
-                },
-                "intValue": {
-                    "type": "integer",
-                    "format": "int32"
                 },
                 "typeId": {
                     "type": "object"
@@ -2605,6 +2605,23 @@
                         "format": "byte"
                     }
                 },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "topicName": {
                     "type": "string"
                 },
@@ -2642,23 +2659,6 @@
                 },
                 "replicated": {
                     "type": "boolean"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -3006,15 +3006,15 @@
                         "AUTO_PUBLISH"
                     ]
                 },
+                "schemaDefinition": {
+                    "type": "string"
+                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
-                },
-                "schemaDefinition": {
-                    "type": "string"
                 }
             }
         },
@@ -3065,11 +3065,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -3079,9 +3079,6 @@
                 },
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
-                },
-                "classIntrospector": {
-                    "$ref": "#/definitions/ClassIntrospector"
                 },
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
@@ -3100,6 +3097,9 @@
                 },
                 "annotationProcessingEnabled": {
                     "type": "boolean"
+                },
+                "classIntrospector": {
+                    "$ref": "#/definitions/ClassIntrospector"
                 }
             }
         },

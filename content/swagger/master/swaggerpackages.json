@@ -414,7 +414,10 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "subscription" : {
+        "commandData" : {
+          "type" : "string"
+        },
+        "httpAuthType" : {
           "type" : "string"
         },
         "tlsCertificates" : {
@@ -423,10 +426,7 @@
             "$ref" : "#/definitions/Certificate"
           }
         },
-        "httpAuthType" : {
-          "type" : "string"
-        },
-        "commandData" : {
+        "subscription" : {
           "type" : "string"
         }
       }
@@ -637,11 +637,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
+        },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -651,9 +651,6 @@
         },
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
-        },
-        "classIntrospector" : {
-          "$ref" : "#/definitions/ClassIntrospector"
         },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
@@ -672,6 +669,9 @@
         },
         "annotationProcessingEnabled" : {
           "type" : "boolean"
+        },
+        "classIntrospector" : {
+          "$ref" : "#/definitions/ClassIntrospector"
         }
       }
     },
@@ -940,6 +940,10 @@
         "text" : {
           "type" : "string"
         },
+        "intValue" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
@@ -971,10 +975,6 @@
         },
         "objectId" : {
           "type" : "object"
-        },
-        "intValue" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "typeId" : {
           "type" : "object"
@@ -1478,11 +1478,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
+        },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1492,9 +1492,6 @@
         },
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
-        },
-        "classIntrospector" : {
-          "$ref" : "#/definitions/ClassIntrospector"
         },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
@@ -1513,6 +1510,9 @@
         },
         "annotationProcessingEnabled" : {
           "type" : "boolean"
+        },
+        "classIntrospector" : {
+          "$ref" : "#/definitions/ClassIntrospector"
         }
       }
     },
