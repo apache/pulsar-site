@@ -6,7 +6,7 @@ const linkifyRegex = require("./plugins/remark-linkify-regex");
 const versions = require("./versions.json");
 const versionsMap = {
   ..._.keyBy(
-    versions.slice(1).map((item) => {
+    versions.slice(1).map(item => {
       return {
         label: item,
         path: item,
@@ -140,6 +140,14 @@ module.exports = {
     },
   },
   themeConfig: {
+    announcementBar: {
+      id: "summit",
+      content:
+        '🚀 Pulsar Summit San Francisco 2022 will take place on August 18th, 2022. <a target="_blank" href="https://pulsar-summit.org/">Register now</a> and help us make it an even bigger success by spreading the word on social media!',
+      backgroundColor: "#198fff",
+      textColor: "#fff",
+      isCloseable: true,
+    },
     colorMode: {
       disableSwitch: false,
     },
