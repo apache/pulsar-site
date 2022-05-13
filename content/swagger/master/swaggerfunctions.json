@@ -965,10 +965,7 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "commandData" : {
-          "type" : "string"
-        },
-        "httpAuthType" : {
+        "subscription" : {
           "type" : "string"
         },
         "tlsCertificates" : {
@@ -977,7 +974,10 @@
             "$ref" : "#/definitions/Certificate"
           }
         },
-        "subscription" : {
+        "httpAuthType" : {
+          "type" : "string"
+        },
+        "commandData" : {
           "type" : "string"
         }
       }
@@ -1252,11 +1252,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "fullRootName" : {
-          "$ref" : "#/definitions/PropertyName"
-        },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
+        },
+        "fullRootName" : {
+          "$ref" : "#/definitions/PropertyName"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1270,11 +1270,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
@@ -1302,14 +1302,14 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
+        },
         "config" : {
           "$ref" : "#/definitions/DeserializationConfig"
         },
         "parser" : {
           "$ref" : "#/definitions/JsonParser"
-        },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
         },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
@@ -2072,13 +2072,6 @@
             "type" : "string"
           }
         },
-        "booleanValue" : {
-          "type" : "boolean"
-        },
-        "byteValue" : {
-          "type" : "string",
-          "format" : "byte"
-        },
         "doubleValue" : {
           "type" : "number",
           "format" : "double"
@@ -2094,6 +2087,13 @@
         "shortValue" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "booleanValue" : {
+          "type" : "boolean"
+        },
+        "byteValue" : {
+          "type" : "string",
+          "format" : "byte"
         },
         "objectId" : {
           "type" : "object"
@@ -2343,9 +2343,6 @@
             "format" : "byte"
           }
         },
-        "topicName" : {
-          "type" : "string"
-        },
         "publishTime" : {
           "type" : "integer",
           "format" : "int64"
@@ -2380,6 +2377,9 @@
         },
         "replicated" : {
           "type" : "boolean"
+        },
+        "topicName" : {
+          "type" : "string"
         },
         "messageId" : {
           "$ref" : "#/definitions/MessageId"
@@ -2517,6 +2517,9 @@
         "factory" : {
           "$ref" : "#/definitions/JsonFactory"
         },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
+        },
         "serializationConfig" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
@@ -2534,9 +2537,6 @@
         },
         "serializerProviderInstance" : {
           "$ref" : "#/definitions/SerializerProvider"
-        },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
         },
         "visibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -2761,11 +2761,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "fullRootName" : {
-          "$ref" : "#/definitions/PropertyName"
-        },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
+        },
+        "fullRootName" : {
+          "$ref" : "#/definitions/PropertyName"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -2779,11 +2779,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
@@ -2811,11 +2811,11 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
-        "config" : {
-          "$ref" : "#/definitions/SerializationConfig"
-        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
+        },
+        "config" : {
+          "$ref" : "#/definitions/SerializationConfig"
         },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
