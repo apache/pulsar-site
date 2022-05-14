@@ -2807,6 +2807,11 @@
 </thead>
 <tbody>
 <tr>
+<td><code>-lt, --limitTime</code></td>
+<td>Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.</td>
+<td>null</td>
+</tr>
+<tr>
 <td><code>-l, --limit</code></td>
 <td>Size limit (eg: 10M, 16G)</td>
 <td>null</td>
@@ -2815,11 +2820,6 @@
 <td><code>-t, --type</code></td>
 <td>Backlog quota type to set. Valid options are: destination_storage and message_age. destination_storage limits backlog by size (in bytes). message_age limits backlog by time, that is, message timestamp (broker or publish timestamp). You can set size or time to control the backlog, or combine them together to control the backlog.</td>
 <td>destination_storage</td>
-</tr>
-<tr>
-<td><code>-lt, --limitTime</code></td>
-<td>Time limit in second, non-positive number for disabling time limit.</td>
-<td>-1</td>
 </tr>
 <tr>
 <td><code>-p, --policy</code></td>
@@ -7723,13 +7723,13 @@
 <td>false</td>
 </tr>
 <tr>
-<td><code>-t, --expireTime</code></td>
-<td>Expire messages older than time in seconds</td>
-<td>-1</td>
-</tr>
-<tr>
 <td><code>-s, --subscription</code></td>
 <td>Subscription to be skip messages on</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-t, --expireTime</code></td>
+<td>Expire messages older than time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)</td>
 <td>null</td>
 </tr>
 <tr>
@@ -7757,8 +7757,8 @@
 <tbody>
 <tr>
 <td><code>-t, --expireTime</code></td>
-<td>Expire messages older than time in seconds</td>
-<td>0</td>
+<td>Expire messages older than time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)</td>
+<td>null</td>
 </tr>
 </tbody>
 </table>
@@ -8175,8 +8175,8 @@
 </tr>
 <tr>
 <td><code>-lt, --limitTime</code></td>
-<td>Time limit in second, non-positive number for disabling time limit.</td>
-<td>-1</td>
+<td>Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.</td>
+<td>null</td>
 </tr>
 </tbody>
 </table>
@@ -8244,8 +8244,8 @@
 <tbody>
 <tr>
 <td><code>-t, --ttl</code></td>
-<td>Message TTL for topic in second, allowed range from 1 to Integer.MAX_VALUE</td>
-<td>0</td>
+<td>Message TTL for topic in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), allowed range from 1 to Integer.MAX_VALUE</td>
+<td>null</td>
 </tr>
 </tbody>
 </table>
@@ -10203,13 +10203,13 @@
 <td>destination_storage</td>
 </tr>
 <tr>
-<td><code>-lt, --limitTime</code></td>
-<td>Time limit in second, non-positive number for disabling time limit.</td>
-<td>-1</td>
-</tr>
-<tr>
 <td><code>-p, --policy</code></td>
 <td>Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-lt, --limitTime</code></td>
+<td>Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.</td>
 <td>null</td>
 </tr>
 <tr>
