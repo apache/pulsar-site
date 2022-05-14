@@ -325,7 +325,7 @@ port by configuring the <code>metricsProvider.httpPort</code> in zookeeper.conf.
 <p>You can configure BookKeeper bookies using the <a href="/docs/en/next/reference-configuration#bookkeeper"><code>conf/bookkeeper.conf</code></a> configuration file. The most important step in configuring bookies for our purposes here is ensuring that <a href="/docs/en/next/reference-configuration#bookkeeper-zkServers"><code>zkServers</code></a> is set to the connection string for the ZooKeeper cluster. The following is an example:</p>
 <pre><code class="hljs css language-properties"><span class="hljs-attr">zkServers</span>=<span class="hljs-string">zk1.us-west.example.com:2181,zk2.us-west.example.com:2181,zk3.us-west.example.com:2181</span>
 </code></pre>
-<p>Once you appropriately modify the <code>zkServers</code> parameter, you can make any other configuration changes that you require. You can find a full listing of the available BookKeeper configuration parameters <a href="/docs/en/next/reference-configuration#bookkeeper">here</a>. However, consulting the <a href="http://bookkeeper.apache.org/docs/latest/reference/config/">BookKeeper documentation</a> for a more in-depth guide might be a better choice.</p>
+<p>Once you appropriately modify the <code>zkServers</code> parameter, you can make any other configuration changes that you require. You can find a full listing of the available BookKeeper configuration parameters <a href="/docs/en/next/reference-configuration#bookkeeper">here</a>. However, consulting the <a href="https://bookkeeper.apache.org/docs/next/reference/config/">BookKeeper documentation</a> for a more in-depth guide might be a better choice.</p>
 <p>Once you apply the desired configuration in <code>conf/bookkeeper.conf</code>, you can start up a bookie on each of your BookKeeper hosts. You can start up each bookie either in the background, using <a href="https://en.wikipedia.org/wiki/Nohup">nohup</a>, or in the foreground.</p>
 <p>To start the bookie in the background, use the <a href="/docs/en/next/reference-cli-tools#pulsar-daemon"><code>pulsar-daemon</code></a> CLI tool:</p>
 <pre><code class="hljs css language-bash">$ bin/pulsar-daemon start bookie
@@ -407,9 +407,6 @@ port by configuring the <code>metricsProvider.httpPort</code> in zookeeper.conf.
   -n 1 \
   -m <span class="hljs-string">"Hello Pulsar"</span>
 </code></pre>
-<blockquote>
-<p>You may need to use a different cluster name in the topic if you specify a cluster name other than <code>pulsar-cluster-1</code>.</p>
-</blockquote>
 <p>This command publishes a single message to the Pulsar topic. In addition, you can subscribe to the Pulsar topic in a different terminal before publishing messages as below:</p>
 <pre><code class="hljs css language-bash">$ bin/pulsar-client consume \
   persistent://public/default/<span class="hljs-built_in">test</span> \
