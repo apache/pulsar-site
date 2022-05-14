@@ -1369,7 +1369,7 @@ Options
 |Flag|Description|Default|
 |----|---|---|
 |`-l`, `--limit`|The backlog size limit (for example `10M` or `16G`)||
-|`-lt`, `--limitTime`|Time limit in second, non-positive number for disabling time limit. (for example 3600 for 1 hour)||
+|`-lt`, `--limitTime`|Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit. (for example 3600 for 1 hour)||
 |`-p`, `--policy`|The retention policy to enforce when the limit is reached. The valid options are: `producer_request_hold`, `producer_exception` or `consumer_backlog_eviction`|
 |`-t`, `--type`|Backlog quota type to set. The valid options are: `destination_storage`, `message_age` |destination_storage|
 
@@ -2861,7 +2861,7 @@ Options
 
 |Flag|Description|Default|
 |---|---|---|
-|`-t`, `--expireTime`|Expire messages older than the time (in seconds)|0|
+|`-t`, `--expireTime`|Expire messages older than the time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|0|
 |`-s`, `--subscription`|The subscription to skip messages on||
 
 
@@ -2880,7 +2880,7 @@ Options
 
 |Flag|Description|Default|
 |---|---|---|
-|`-t`, `--expireTime`|Expire messages older than the time (in seconds)|0|
+|`-t`, `--expireTime`|Expire messages older than the time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|0|
 
 
 ### `peek-messages`
@@ -2967,7 +2967,7 @@ Set a backlog quota policy for a topic.
 |Flag|Description|Default|
 |----|---|---|
 |`-l`, `--limit`|The backlog size limit (for example `10M` or `16G`)||
-|`-lt`, `--limitTime`|Time limit in second, non-positive number for disabling time limit. (for example 3600 for 1 hour)||
+|`-lt`, `--limitTime`|Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit. (for example 3600 for 1 hour)||
 |`-p`, `--policy`|The retention policy to enforce when the limit is reached. The valid options are: `producer_request_hold`, `producer_exception` or `consumer_backlog_eviction`|
 |`-t`, `--type`|Backlog quota type to set. The valid options are: `destination_storage`, `message_age` |destination_storage|
 
@@ -3081,7 +3081,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-ttl`, `--messageTTL`|Message TTL for a topic in second, allowed range from 1 to `Integer.MAX_VALUE` |0|
+|`-t`, `--ttl`|Message TTL for a topic in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), allowed range from 1 to `Integer.MAX_VALUE` |0|
 
 ### `remove-message-ttl`
 Remove the message TTL for a topic.
