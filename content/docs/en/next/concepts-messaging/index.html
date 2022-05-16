@@ -119,12 +119,12 @@ nettyMaxFrameSizeBytes=5253120
 <p>You can have different types of access modes on topics for producers.</p>
 <table>
 <thead>
-<tr><th>Access mode</th><th>Description</th></tr>
+<tr><th style="text-align:left">Access mode</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code>Shared</code></td><td>Multiple producers can publish on a topic. <br><br>This is the <strong>default</strong> setting.</td></tr>
-<tr><td><code>Exclusive</code></td><td>Only one producer can publish on a topic. <br><br>If there is already a producer connected, other producers trying to publish on this topic get errors immediately.<br><br>The “old” producer is evicted and a “new” producer is selected to be the next exclusive producer if the “old” producer experiences a network partition with the broker.</td></tr>
-<tr><td><code>WaitForExclusive</code></td><td>If there is already a producer connected, the producer creation is pending (rather than timing out) until the producer gets the <code>Exclusive</code> access.<br><br>The producer that succeeds in becoming the exclusive one is treated as the leader. Consequently, if you want to implement a leader election scheme for your application, you can use this access mode. Note that the leader pattern scheme mentioned refers to using Pulsar as a Write-Ahead Log (WAL) which means the leader writes its &quot;decisions&quot; to the topic. On error cases, the leader will get notified it is no longer the leader <em>only</em> when it tries to write a message and fails on appropriate error, by the broker.</td></tr>
+<tr><td style="text-align:left"><code>Shared</code></td><td>Multiple producers can publish on a topic. <br><br>This is the <strong>default</strong> setting.</td></tr>
+<tr><td style="text-align:left"><code>Exclusive</code></td><td>Only one producer can publish on a topic. <br><br>If there is already a producer connected, other producers trying to publish on this topic get errors immediately.<br><br>The “old” producer is evicted and a “new” producer is selected to be the next exclusive producer if the “old” producer experiences a network partition with the broker.</td></tr>
+<tr><td style="text-align:left"><code>WaitForExclusive</code></td><td>If there is already a producer connected, the producer creation is pending (rather than timing out) until the producer gets the <code>Exclusive</code> access.<br><br>The producer that succeeds in becoming the exclusive one is treated as the leader. Consequently, if you want to implement a leader election scheme for your application, you can use this access mode. Note that the leader pattern scheme mentioned refers to using Pulsar as a Write-Ahead Log (WAL) which means the leader writes its &quot;decisions&quot; to the topic. On error cases, the leader will get notified it is no longer the leader <em>only</em> when it tries to write a message and fails on appropriate error, by the broker.</td></tr>
 </tbody>
 </table>
 <blockquote>
