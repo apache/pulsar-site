@@ -443,7 +443,7 @@ export default function CaseStudies() {
           <div className="my-12 relative z-5">
           <div className="ml-2 px-2">
                 <CustomSelect className="inline-block px-4 cursor-pointer ml-4 underline-offset-1 text-sm" name="search" defaultValue={0} value={value} onChange={setValue}>
-                  <StyledOption value={0}>Filter by type</StyledOption>
+                  <StyledOption value={0}>Filter by Industry</StyledOption>
                   <StyledOption value={1}>Healthcare</StyledOption>
                   <StyledOption value={2}>Financial Services</StyledOption>
                   <StyledOption value={3}>Retail</StyledOption>
@@ -451,36 +451,18 @@ export default function CaseStudies() {
                   <StyledOption value={5}>Telecom</StyledOption>
                   <StyledOption value={6}>Transportation/Logistics</StyledOption>
                 </CustomSelect>
-
+                <input type="text" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
+                <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
                 <Paragraph>
-                  {value == 0 && <CaseStudyCards  cards={allArr} />}
-                  {value == 1 && <CaseStudyCards cards={csObj.healthcare} />}
-                  {value == 2 && <CaseStudyCards cards={csObj.financial_services} />}
-                  {value == 3 && <CaseStudyCards cards={csObj.retail} />}
-                  {value == 4 && <CaseStudyCards cards={csObj.software_it} />}
-                  {value == 5 && <CaseStudyCards cards={csObj.telecom} />}
-                  {value == 6 && <CaseStudyCards cards={csObj.transportation_logistics} />}
+                  {value == 0 && <CaseStudyCards search={searchString} cards={allArr} />}
+                  {value == 1 && <CaseStudyCards search={searchString} cards={csObj.healthcare} />}
+                  {value == 2 && <CaseStudyCards search={searchString} cards={csObj.financial_services} />}
+                  {value == 3 && <CaseStudyCards search={searchString} cards={csObj.retail} />}
+                  {value == 4 && <CaseStudyCards search={searchString} cards={csObj.software_it} />}
+                  {value == 5 && <CaseStudyCards search={searchString} cards={csObj.telecom} />}
+                  {value == 6 && <CaseStudyCards search={searchString} cards={csObj.transportation_logistics} />}
                 </Paragraph>
               </div>
-            {/* <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
-              <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
-                <TabUnstyled className="mx-2">All Case Studies</TabUnstyled>
-                <TabUnstyled className="mx-2">Healthcare</TabUnstyled>
-                <TabUnstyled className="mx-2">Financial Services</TabUnstyled>
-                <TabUnstyled className="mx-2">Retail</TabUnstyled>
-                <TabUnstyled className="mx-2">Software/IT</TabUnstyled>
-                <TabUnstyled className="mx-2">Telecom</TabUnstyled>
-                <TabUnstyled className="mx-2">Transportation/Logistics</TabUnstyled>
-              </TabsListUnstyled>
-              
-              <TabPanelUnstyled value={0}><CaseStudyCards cards={allArr} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={1}><CaseStudyCards cards={csObj.healthcare} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={2}><CaseStudyCards cards={csObj.financial_services} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={3}><CaseStudyCards cards={csObj.retail} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={4}><CaseStudyCards cards={csObj.software_it} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={5}><CaseStudyCards cards={csObj.telecom} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={6}><CaseStudyCards cards={csObj.transportation_logistics} /></TabPanelUnstyled>
-            </TabsUnstyled> */}
           </div>
           </form>
         </section>

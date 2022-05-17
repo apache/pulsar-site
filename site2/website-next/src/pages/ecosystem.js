@@ -61,25 +61,30 @@ const StyledButton = styled('button')(
   text-align: left;
   line-height: 1.5;
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  z-index:10000;
 
   &:hover {
     background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
     border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+    z-index:10000;
   }
 
   &.${selectUnstyledClasses.focusVisible} {
     outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+    z-index:10000;
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: '▴';
+      z-index:10000;
     }
   }
 
   &::after {
     content: '▾';
     float: right;
+    z-index:10000;
   }
   `,
 );
@@ -98,6 +103,7 @@ const StyledListbox = styled('ul')(
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   overflow: auto;
   outline: 0px;
+  z-index:10000;
   `,
 );
 
@@ -196,8 +202,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="main-content waves-bg py-12 mb-24">
-          <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
+
+          <section className="main-content waves-bg py-12 mb-24">
             <form className="search-form relative z10 text--center">
               <label className="block mb-4">Search by name or description key word: </label>
               <div className="ml-2 px-2">
@@ -234,7 +240,6 @@ export default function Home() {
                 </Paragraph>
               </div>
             </form>
-          </TabsUnstyled>
         </section>
       </div>
     </Layout>
