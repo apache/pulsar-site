@@ -3,16 +3,18 @@ import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import EcoCards from "../components/EcoCards";
 import TabsUnstyled from '@mui/base/TabsUnstyled';
-import TabsListUnstyled from '@mui/base/TabsListUnstyled';
-import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import TabUnstyled from '@mui/base/TabUnstyled';
 import ecoObj from '@site/data/ecosystem.js';
+import PropTypes from 'prop-types';
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
 
 
 // create combine the arrays from each category.
 let eObj = ecoObj;
 // add type as a property to each object to use in the tile cta.
-Object.keys(eObj).forEach(key =>{
+Object.keys(eObj).forEach(key => {
   ecoObj[key].forEach((obj) => {
     obj.type = key.charAt(0).toUpperCase() + key.slice(1);;
   })
@@ -23,14 +25,165 @@ Object.keys(ecoObj).forEach(key => {
   allArr = [...allArr, ...ecoObj[key]];
 });
 
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 320px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.75em;
+  margin-top: 0.5em;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+
+  &:hover {
+    background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
+    border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  &.${selectUnstyledClasses.expanded} {
+    &::after {
+      content: '▴';
+    }
+  }
+
+  &::after {
+    content: '▾';
+    float: right;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 320px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.75em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.45em;
+  cursor: default;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+`;
+
+const Paragraph = styled('p')(
+  ({ theme }) => `
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  margin: 10px 0;
+  color: ${theme.palette.mode === 'dark' ? grey[400] : grey[700]};
+  `,
+);
+
+function CustomSelect(props) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} components={components} />;
+}
+
+CustomSelect.propTypes = {
+  /**
+   * The components used for each slot inside the Select.
+   * Either a string to use a HTML element or a component.
+   * @default {}
+   */
+  components: PropTypes.shape({
+    Listbox: PropTypes.elementType,
+    Popper: PropTypes.func,
+    Root: PropTypes.elementType,
+  }),
+};
+
 export default function Home() {
   const [searchString, setSearch] = useState('');
+  const [value, setValue] = React.useState(0);
   return (
     <Layout
       title={`Ecosystem`}
       description="Learn about the basics of using Apache Pulsar"
-    >    
-     <div className="page-wrap tailwind">
+    >
+      <div className="page-wrap tailwind">
         <section className="hero">
           <div className="inner text--left">
             <div className="row">
@@ -44,39 +197,43 @@ export default function Home() {
           </div>
         </section>
         <section className="main-content waves-bg py-12 mb-24">
-          
           <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
-            <TabsListUnstyled className="block inner text--center tabs-bar py-8 px-4">
-              <TabUnstyled className="mx-2 mb-2">All</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Client API</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Client Wrapper</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Database Integration</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">IO</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Logging</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Observability</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Protocol Handlers</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Search and Query </TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Security Plugin</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Stream Processing</TabUnstyled>
-              <TabUnstyled className="mx-2 mb-2">Tools</TabUnstyled>
-            </TabsListUnstyled>
             <form className="search-form relative z10 text--center">
               <label className="block mb-4">Search by name or description key word: </label>
-              <input type="text" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
-              <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
+              <div className="ml-2 px-2">
+                <CustomSelect className="inline-block px-4 cursor-pointer ml-4 underline-offset-1 text-sm" name="search" defaultValue={0} value={value} onChange={setValue}>
+                  <StyledOption value={0}>Filter by type</StyledOption>
+                  <StyledOption value={1}>Client API</StyledOption>
+                  <StyledOption value={2}>Client Wrapper</StyledOption>
+                  <StyledOption value={3}>Database Integration</StyledOption>
+                  <StyledOption value={4}>IO</StyledOption>
+                  <StyledOption value={5}>Logging</StyledOption>
+                  <StyledOption value={6}>Observability</StyledOption>
+                  <StyledOption value={7}>Protocol Handlers</StyledOption>
+                  <StyledOption value={8}>Search and Query </StyledOption>
+                  <StyledOption value={9}>Security Plugin</StyledOption>
+                  <StyledOption value={10}>Stream Processing</StyledOption>
+                  <StyledOption value={11}>Tools</StyledOption>
+                </CustomSelect>
+                <input type="text" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
+                <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
+
+                <Paragraph>
+                  {value == 0 && <EcoCards search={searchString} resources={allArr} />}
+                  {value == 1 && <EcoCards search={searchString} resources={ecoObj.client_api} />}
+                  {value == 2 && <EcoCards search={searchString} resources={ecoObj.client_wrapper} />}
+                  {value == 3 && <EcoCards search={searchString} resources={ecoObj.database_integration} />}
+                  {value == 4 && <EcoCards search={searchString} resources={ecoObj.io} />}
+                  {value == 5 && <EcoCards search={searchString} resources={ecoObj.logging} />}
+                  {value == 6 && <EcoCards search={searchString} resources={ecoObj.observability} />}
+                  {value == 7 && <EcoCards search={searchString} resources={ecoObj.protocol_handlers} />}
+                  {value == 8 && <EcoCards search={searchString} resources={ecoObj.search_and_query} />}
+                  {value == 9 && <EcoCards search={searchString} resources={ecoObj.security_plugins} />}
+                  {value == 10 && <EcoCards search={searchString} resources={ecoObj.stream_processing} />}
+                  {value == 11 && <EcoCards search={searchString} resources={ecoObj.tools} />}
+                </Paragraph>
+              </div>
             </form>
-            <TabPanelUnstyled value={0}><EcoCards search={searchString} resources={allArr} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={1}><EcoCards search={searchString} resources={ecoObj.client_api} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={2}><EcoCards search={searchString} resources={ecoObj.client_wrapper} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={3}><EcoCards search={searchString} resources={ecoObj.database_integration} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={4}><EcoCards search={searchString} resources={ecoObj.io} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={5}><EcoCards search={searchString} resources={ecoObj.logging} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={6}><EcoCards search={searchString} resources={ecoObj.observability} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={7}><EcoCards search={searchString} resources={ecoObj.protocol_handlers} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={8}><EcoCards search={searchString} resources={ecoObj.search_and_query} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={9}><EcoCards search={searchString} resources={ecoObj.security_plugins} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={10}><EcoCards search={searchString} resources={ecoObj.stream_processing} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={11}><EcoCards search={searchString} resources={ecoObj.tools} /></TabPanelUnstyled>
           </TabsUnstyled>
         </section>
       </div>
