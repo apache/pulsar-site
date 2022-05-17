@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Layout from "@theme/Layout";
-import TabsUnstyled from '@mui/base/TabsUnstyled';
-import TabsListUnstyled from '@mui/base/TabsListUnstyled';
-import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import TabUnstyled from '@mui/base/TabUnstyled';
 import CaseStudyCards from "../components/CaseStudyCards";
+import PropTypes from 'prop-types';
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
 const csObj = 
   {
 
@@ -264,13 +265,165 @@ Object.keys(csObj).forEach(key => {
   allArr = [...allArr, ...csObj[key]];
 });
 
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 320px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.75em;
+  margin-top: 0.5em;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+
+  &:hover {
+    background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
+    border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  &.${selectUnstyledClasses.expanded} {
+    &::after {
+      content: '▴';
+    }
+  }
+
+  &::after {
+    content: '▾';
+    float: right;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 320px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.75em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.45em;
+  cursor: default;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+`;
+
+const Paragraph = styled('p')(
+  ({ theme }) => `
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  margin: 10px 0;
+  color: ${theme.palette.mode === 'dark' ? grey[400] : grey[700]};
+  `,
+);
+
+function CustomSelect(props) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} components={components} />;
+}
+
+CustomSelect.propTypes = {
+  /**
+   * The components used for each slot inside the Select.
+   * Either a string to use a HTML element or a component.
+   * @default {}
+   */
+  components: PropTypes.shape({
+    Listbox: PropTypes.elementType,
+    Popper: PropTypes.func,
+    Root: PropTypes.elementType,
+  }),
+};
+
 
 export default function CaseStudies() {
+  const [value, setValue] = React.useState(0);
+  const [searchString, setSearch] = useState('');
   return (
     <Layout
       title={`Case Studies`}
       description="Pulsar Case Stdies"
-    >    
+    >
       <div className="page-wrap tailwind">
         <section className="hero">
           <div className="inner text--left">
@@ -286,28 +439,31 @@ export default function CaseStudies() {
         <section className="main-content waves-bg pt-12 pb-48 mb-24">
           <div className="block text--center tabs-bar py-8 px-4">
           </div>
+          <form className="search-form relative z10 text--center">
           <div className="my-12 relative z-5">
-            
-            <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
-              <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
-                <TabUnstyled className="mx-2">All Case Studies</TabUnstyled>
-                <TabUnstyled className="mx-2">Healthcare</TabUnstyled>
-                <TabUnstyled className="mx-2">Financial Services</TabUnstyled>
-                <TabUnstyled className="mx-2">Retail</TabUnstyled>
-                <TabUnstyled className="mx-2">Software/IT</TabUnstyled>
-                <TabUnstyled className="mx-2">Telecom</TabUnstyled>
-                <TabUnstyled className="mx-2">Transportation/Logistics</TabUnstyled>
-              </TabsListUnstyled>
-              
-              <TabPanelUnstyled value={0}><CaseStudyCards cards={allArr} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={1}><CaseStudyCards cards={csObj.healthcare} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={2}><CaseStudyCards cards={csObj.financial_services} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={3}><CaseStudyCards cards={csObj.retail} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={4}><CaseStudyCards cards={csObj.software_it} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={5}><CaseStudyCards cards={csObj.telecom} /></TabPanelUnstyled>
-              <TabPanelUnstyled value={6}><CaseStudyCards cards={csObj.transportation_logistics} /></TabPanelUnstyled>
-            </TabsUnstyled>
+          <div className="ml-2 px-2">
+                <CustomSelect className="inline-block px-4 cursor-pointer ml-4 underline-offset-1 text-sm" name="search" defaultValue={0} value={value} onChange={setValue}>
+                  <StyledOption value={0}>Filter by Industry</StyledOption>
+                  <StyledOption value={1}>Healthcare</StyledOption>
+                  <StyledOption value={2}>Financial Services</StyledOption>
+                  <StyledOption value={3}>Retail</StyledOption>
+                  <StyledOption value={4}>Software/IT</StyledOption>
+                  <StyledOption value={5}>Telecom</StyledOption>
+                  <StyledOption value={6}>Transportation/Logistics</StyledOption>
+                </CustomSelect>
+                <input type="text" placeholder="Search" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
+                <Paragraph>
+                  {value == 0 && <CaseStudyCards search={searchString} cards={allArr} />}
+                  {value == 1 && <CaseStudyCards search={searchString} cards={csObj.healthcare} />}
+                  {value == 2 && <CaseStudyCards search={searchString} cards={csObj.financial_services} />}
+                  {value == 3 && <CaseStudyCards search={searchString} cards={csObj.retail} />}
+                  {value == 4 && <CaseStudyCards search={searchString} cards={csObj.software_it} />}
+                  {value == 5 && <CaseStudyCards search={searchString} cards={csObj.telecom} />}
+                  {value == 6 && <CaseStudyCards search={searchString} cards={csObj.transportation_logistics} />}
+                </Paragraph>
+              </div>
           </div>
+          </form>
         </section>
       </div>
     </Layout>
