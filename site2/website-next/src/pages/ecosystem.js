@@ -205,10 +205,9 @@ export default function Home() {
 
           <section className="main-content waves-bg py-12 mb-24">
             <form className="search-form relative z10 text--center">
-              <label className="block mb-4">Search by name or description key word: </label>
               <div className="ml-2 px-2">
                 <CustomSelect className="inline-block px-4 cursor-pointer ml-4 underline-offset-1 text-sm" name="search" defaultValue={0} value={value} onChange={setValue}>
-                  <StyledOption value={0}>Filter by type</StyledOption>
+                  <StyledOption value={0}>Filter by Type</StyledOption>
                   <StyledOption value={1}>Client API</StyledOption>
                   <StyledOption value={2}>Client Wrapper</StyledOption>
                   <StyledOption value={3}>Database Integration</StyledOption>
@@ -221,8 +220,7 @@ export default function Home() {
                   <StyledOption value={10}>Stream Processing</StyledOption>
                   <StyledOption value={11}>Tools</StyledOption>
                 </CustomSelect>
-                <input type="text" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
-                <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
+                <input type="text" className="ml-2 px-2" name="search" placeholder="Search" value={searchString} onChange={e => setSearch(e.target.value)} onFocus="if(value==''){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" />
 
                 <Paragraph>
                   {value == 0 && <EcoCards search={searchString} resources={allArr} />}

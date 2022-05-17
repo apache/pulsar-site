@@ -451,8 +451,7 @@ export default function CaseStudies() {
                   <StyledOption value={5}>Telecom</StyledOption>
                   <StyledOption value={6}>Transportation/Logistics</StyledOption>
                 </CustomSelect>
-                <input type="text" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
-                <div className="inline-block px-4 cursor-pointer ml-4 underline underline-offset-1 text-sm font-light" onClick={e => setSearch('')} >Clear Search</div>
+                <input type="text" placeholder="Search" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
                 <Paragraph>
                   {value == 0 && <CaseStudyCards search={searchString} cards={allArr} />}
                   {value == 1 && <CaseStudyCards search={searchString} cards={csObj.healthcare} />}
