@@ -7,8 +7,8 @@ if [ "" != $1"" ]; then # when preview in pulsar repo
     SRC_DIR=$ROOT_DIR/../..
 fi
 
-cp -r $SRC_DIR/blog/* $ROOT_DIR/site2/website-next/blog
 cp -r $SRC_DIR/docs/* $ROOT_DIR/site2/website-next/docs
+cp -r $SRC_DIR/website/blog/* $ROOT_DIR/site2/website-next/blog
 cp -r $ROOT_DIR/site2/website-next/docs/assets/* $ROOT_DIR/site2/website-next/static/assets
 rm -rf $ROOT_DIR/site2/website-next/docs/assets
 cp -r $SRC_DIR/website/versioned_docs/* $ROOT_DIR/site2/website-next/versioned_docs
