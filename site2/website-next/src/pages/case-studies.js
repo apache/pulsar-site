@@ -379,7 +379,7 @@ const StyledOption = styled(OptionUnstyled)(
 );
 
 const StyledPopper = styled(PopperUnstyled)`
-  z-index: 1;
+  z-index: 10;
 `;
 
 const Paragraph = styled('p')(

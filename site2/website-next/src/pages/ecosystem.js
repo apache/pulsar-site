@@ -61,30 +61,25 @@ const StyledButton = styled('button')(
   text-align: left;
   line-height: 1.5;
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  z-index:10000;
 
   &:hover {
     background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
     border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-    z-index:10000;
   }
 
   &.${selectUnstyledClasses.focusVisible} {
     outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
-    z-index:10000;
   }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
       content: '▴';
-      z-index:10000;
     }
   }
 
   &::after {
     content: '▾';
     float: right;
-    z-index:10000;
   }
   `,
 );
@@ -103,7 +98,6 @@ const StyledListbox = styled('ul')(
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   overflow: auto;
   outline: 0px;
-  z-index:10000;
   `,
 );
 
@@ -145,7 +139,7 @@ const StyledOption = styled(OptionUnstyled)(
 );
 
 const StyledPopper = styled(PopperUnstyled)`
-  z-index: 1;
+  z-index: 10;
 `;
 
 const Paragraph = styled('p')(
