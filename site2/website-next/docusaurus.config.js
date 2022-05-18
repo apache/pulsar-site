@@ -337,9 +337,10 @@ module.exports = {
     },
     algolia: {
       appId: "WK2YL0SALL",
-      apiKey: "42d24d221fbd8eb59804a078208aaec0",
+      apiKey: "3d383365697b6418f159cbe03e12a0f8",
       indexName: "apache_pulsar",
-      algoliaOptions: {
+      contextualSearch: true, 
+      searchParameters: {
         facetFilters: ["language:LANGUAGE", "version:VERSION"],
       },
     },
