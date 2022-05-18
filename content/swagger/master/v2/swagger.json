@@ -2781,12 +2781,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "boolean"
-                        }
-                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -4502,13 +4496,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        }
-                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -4570,7 +4557,7 @@
                 "tags": [
                     "namespaces"
                 ],
-                "summary": "Set message TTL in seconds for namespace",
+                "summary": "Remove message TTL in seconds for namespace",
                 "description": "",
                 "operationId": "removeNamespaceMessageTTL",
                 "consumes": [
@@ -25911,7 +25898,7 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "httpAuthType": {
+                "commandData": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -25920,7 +25907,7 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "commandData": {
+                "httpAuthType": {
                     "type": "string"
                 },
                 "subscription": {
@@ -25956,15 +25943,15 @@
         "AutoTopicCreationOverride": {
             "type": "object",
             "properties": {
+                "topicType": {
+                    "type": "string"
+                },
                 "defaultNumPartitions": {
                     "type": "integer",
                     "format": "int32"
                 },
                 "allowAutoTopicCreation": {
                     "type": "boolean"
-                },
-                "topicType": {
-                    "type": "string"
                 }
             }
         },
@@ -25979,10 +25966,6 @@
                         "consumer_backlog_eviction"
                     ]
                 },
-                "limit": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "limitSize": {
                     "type": "integer",
                     "format": "int64"
@@ -25990,6 +25973,10 @@
                 "limitTime": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -26505,11 +26492,11 @@
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
                 },
-                "defaultVisibilityChecker": {
-                    "$ref": "#/definitions/VisibilityCheckerObject"
-                },
                 "rootName": {
                     "type": "string"
+                },
+                "defaultVisibilityChecker": {
+                    "$ref": "#/definitions/VisibilityCheckerObject"
                 },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
@@ -26591,13 +26578,6 @@
         "DispatchRate": {
             "type": "object",
             "properties": {
-                "relativeToPublishRate": {
-                    "type": "boolean"
-                },
-                "ratePeriodInSecond": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "dispatchThrottlingRateInMsg": {
                     "type": "integer",
                     "format": "int32"
@@ -26605,6 +26585,13 @@
                 "dispatchThrottlingRateInByte": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "relativeToPublishRate": {
+                    "type": "boolean"
+                },
+                "ratePeriodInSecond": {
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         },
@@ -26663,12 +26650,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -26677,10 +26664,6 @@
                         "format": "double"
                     }
                 },
-                "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -26696,16 +26679,16 @@
                 "avgProcessLatency": {
                     "type": "number",
                     "format": "double"
+                },
+                "receivedTotal": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
-                "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -26721,6 +26704,10 @@
                 "avgProcessLatency": {
                     "type": "number",
                     "format": "double"
+                },
+                "receivedTotal": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -26917,9 +26904,6 @@
                 "abstract": {
                     "type": "boolean"
                 },
-                "contentType": {
-                    "$ref": "#/definitions/JavaType"
-                },
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
@@ -26936,6 +26920,9 @@
                     "type": "boolean"
                 },
                 "javaLangObject": {
+                    "type": "boolean"
+                },
+                "enumType": {
                     "type": "boolean"
                 },
                 "containerType": {
@@ -26968,8 +26955,8 @@
                 "mapLikeType": {
                     "type": "boolean"
                 },
-                "enumType": {
-                    "type": "boolean"
+                "contentType": {
+                    "$ref": "#/definitions/JavaType"
                 },
                 "typeName": {
                     "type": "string"
@@ -27005,9 +26992,6 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
-                "closed": {
-                    "type": "boolean"
-                },
                 "codec": {
                     "$ref": "#/definitions/ObjectCodec"
                 },
@@ -27016,6 +27000,9 @@
                 },
                 "characterEscapes": {
                     "$ref": "#/definitions/CharacterEscapes"
+                },
+                "prettyPrinter": {
+                    "$ref": "#/definitions/PrettyPrinter"
                 },
                 "currentValue": {
                     "type": "object"
@@ -27042,8 +27029,8 @@
                 "outputContext": {
                     "$ref": "#/definitions/JsonStreamContext"
                 },
-                "prettyPrinter": {
-                    "$ref": "#/definitions/PrettyPrinter"
+                "closed": {
+                    "type": "boolean"
                 }
             }
         },
@@ -27083,9 +27070,6 @@
                 },
                 "text": {
                     "type": "string"
-                },
-                "closed": {
-                    "type": "boolean"
                 },
                 "textCharacters": {
                     "type": "array",
@@ -27132,6 +27116,24 @@
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
+                "currentToken": {
+                    "type": "string",
+                    "enum": [
+                        "NOT_AVAILABLE",
+                        "START_OBJECT",
+                        "END_OBJECT",
+                        "START_ARRAY",
+                        "END_ARRAY",
+                        "FIELD_NAME",
+                        "VALUE_EMBEDDED_OBJECT",
+                        "VALUE_STRING",
+                        "VALUE_NUMBER_INT",
+                        "VALUE_NUMBER_FLOAT",
+                        "VALUE_TRUE",
+                        "VALUE_FALSE",
+                        "VALUE_NULL"
+                    ]
+                },
                 "currentName": {
                     "type": "string"
                 },
@@ -27149,15 +27151,15 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "tokenLocation": {
-                    "$ref": "#/definitions/JsonLocation"
-                },
                 "currentTokenId": {
                     "type": "integer",
                     "format": "int32"
                 },
                 "parsingContext": {
                     "$ref": "#/definitions/JsonStreamContext"
+                },
+                "tokenLocation": {
+                    "$ref": "#/definitions/JsonLocation"
                 },
                 "currentLocation": {
                     "$ref": "#/definitions/JsonLocation"
@@ -27238,23 +27240,8 @@
                 "valueAsString": {
                     "type": "string"
                 },
-                "currentToken": {
-                    "type": "string",
-                    "enum": [
-                        "NOT_AVAILABLE",
-                        "START_OBJECT",
-                        "END_OBJECT",
-                        "START_ARRAY",
-                        "END_ARRAY",
-                        "FIELD_NAME",
-                        "VALUE_EMBEDDED_OBJECT",
-                        "VALUE_STRING",
-                        "VALUE_NUMBER_INT",
-                        "VALUE_NUMBER_FLOAT",
-                        "VALUE_TRUE",
-                        "VALUE_FALSE",
-                        "VALUE_NULL"
-                    ]
+                "closed": {
+                    "type": "boolean"
                 }
             }
         },
@@ -27586,6 +27573,15 @@
                     "type": "number",
                     "format": "double"
                 },
+                "underLoaded": {
+                    "type": "boolean"
+                },
+                "overLoaded": {
+                    "type": "boolean"
+                },
+                "loadReportType": {
+                    "type": "string"
+                },
                 "cpu": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
@@ -27612,15 +27608,6 @@
                 "msgThroughputOut": {
                     "type": "number",
                     "format": "double"
-                },
-                "underLoaded": {
-                    "type": "boolean"
-                },
-                "overLoaded": {
-                    "type": "boolean"
-                },
-                "loadReportType": {
-                    "type": "string"
                 }
             }
         },
@@ -27949,6 +27936,12 @@
                 "factory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
+                },
+                "nodeFactory": {
+                    "$ref": "#/definitions/JsonNodeFactory"
+                },
                 "jsonFactory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
@@ -27957,12 +27950,6 @@
                 },
                 "injectableValues": {
                     "$ref": "#/definitions/InjectableValues"
-                },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
-                },
-                "nodeFactory": {
-                    "$ref": "#/definitions/JsonNodeFactory"
                 },
                 "visibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -27996,60 +27983,6 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
-                "managedLedgerOffloadMaxThreads": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadDriver": {
-                    "type": "string"
-                },
-                "offloadersDirectory": {
-                    "type": "string"
-                },
-                "managedLedgerOffloadThresholdInBytes": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "managedLedgerOffloadDeletionLagInMillis": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "managedLedgerOffloadPrefetchRounds": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "s3ManagedLedgerOffloadRegion": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadBucket": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadServiceEndpoint": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "s3ManagedLedgerOffloadCredentialId": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadCredentialSecret": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadRole": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadRoleSessionName": {
-                    "type": "string"
-                },
-                "gcsManagedLedgerOffloadRegion": {
-                    "type": "string"
-                },
                 "gcsManagedLedgerOffloadBucket": {
                     "type": "string"
                 },
@@ -28093,6 +28026,60 @@
                         "BOOKKEEPER_FIRST",
                         "TIERED_STORAGE_FIRST"
                     ]
+                },
+                "s3ManagedLedgerOffloadRegion": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadBucket": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadServiceEndpoint": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "s3ManagedLedgerOffloadCredentialId": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadCredentialSecret": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadRole": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadRoleSessionName": {
+                    "type": "string"
+                },
+                "gcsManagedLedgerOffloadRegion": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadDriver": {
+                    "type": "string"
+                },
+                "offloadersDirectory": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadPrefetchRounds": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "managedLedgerOffloadMaxThreads": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "managedLedgerOffloadThresholdInBytes": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "managedLedgerOffloadDeletionLagInMillis": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -29050,11 +29037,11 @@
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
                 },
-                "defaultVisibilityChecker": {
-                    "$ref": "#/definitions/VisibilityCheckerObject"
-                },
                 "rootName": {
                     "type": "string"
+                },
+                "defaultVisibilityChecker": {
+                    "$ref": "#/definitions/VisibilityCheckerObject"
                 },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
@@ -29100,9 +29087,6 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
-                "generator": {
-                    "$ref": "#/definitions/JsonGenerator"
-                },
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -29120,6 +29104,9 @@
                 },
                 "defaultNullKeySerializer": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "generator": {
+                    "$ref": "#/definitions/JsonGenerator"
                 }
             }
         },
