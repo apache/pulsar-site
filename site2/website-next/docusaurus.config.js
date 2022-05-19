@@ -428,7 +428,7 @@ module.exports = {
   ],
   scripts: [
     {
-      src: "https://cdn.jsdelivr.net/npm/sine-waves@0.3.0/sine-waves.min.js",
+      src: "https://pulsar.apache.org/js/sine-waves.min.js",
       async: true,
     },
   ],
