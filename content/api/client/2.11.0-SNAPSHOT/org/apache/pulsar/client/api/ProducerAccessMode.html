@@ -110,12 +110,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Require exclusive access for producer.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#Shared" class="member-name-link">Shared</a></code></div>
+<div class="col-first odd-row-color"><code><a href="#ExclusiveWithFencing" class="member-name-link">ExclusiveWithFencing</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">Acquire exclusive access for the producer.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="#Shared" class="member-name-link">Shared</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">By default multiple producers can publish on a topic.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#WaitForExclusive" class="member-name-link">WaitForExclusive</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="#WaitForExclusive" class="member-name-link">WaitForExclusive</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Producer creation is pending until it can acquire exclusive access.</div>
 </div>
 </div>
@@ -175,6 +179,14 @@ the order they are declared.</div>
 <h3>Exclusive</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="ProducerAccessMode.html" title="enum class in org.apache.pulsar.client.api">ProducerAccessMode</a></span>&nbsp;<span class="element-name">Exclusive</span></div>
 <div class="block">Require exclusive access for producer. Fail immediately if there's already a producer connected.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="ExclusiveWithFencing">
+<h3>ExclusiveWithFencing</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="ProducerAccessMode.html" title="enum class in org.apache.pulsar.client.api">ProducerAccessMode</a></span>&nbsp;<span class="element-name">ExclusiveWithFencing</span></div>
+<div class="block">Acquire exclusive access for the producer. Any existing producer will be removed and
+ invalidated immediately.</div>
 </section>
 </li>
 <li>
