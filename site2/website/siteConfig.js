@@ -147,13 +147,13 @@ const siteConfig = {
   headerIcon: "img/pulsar.svg",
   footerIcon: "img/pulsar.svg",
   favicon: "img/pulsar.ico",
-  algolia: {
-    apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
-    indexName: "apache_pulsar",
-    algoliaOptions: {
-      facetFilters: ["language:LANGUAGE", "version:VERSION"],
-    },
-  },
+  // algolia: {
+  //   apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
+  //   indexName: "apache_pulsar",
+  //   algoliaOptions: {
+  //     facetFilters: ["language:LANGUAGE", "version:VERSION"],
+  //   },
+  // },
   // gaTrackingId: "UA-102219959-1",
 
   /* colors for website */
