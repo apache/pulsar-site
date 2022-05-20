@@ -1801,12 +1801,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -2322,12 +2322,12 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "objectId": {
-                    "type": "object"
-                },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "objectId": {
+                    "type": "object"
                 },
                 "typeId": {
                     "type": "object"
@@ -2605,6 +2605,23 @@
                         "format": "byte"
                     }
                 },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
                 "topicName": {
                     "type": "string"
                 },
@@ -2642,23 +2659,6 @@
                 },
                 "replicated": {
                     "type": "boolean"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -2956,11 +2956,11 @@
         "Schema": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
@@ -3021,11 +3021,11 @@
         "SchemaObject": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },

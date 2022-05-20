@@ -20678,6 +20678,9 @@
                 "summary": "Create a partitioned topic.",
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
+                "consumes": [
+                    "application/vnd.partitioned-topic-metadata+json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -20706,12 +20709,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "The number of partitions for the topic",
+                        "description": "The metadata for the topic",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 0
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
                         }
                     },
                     {
@@ -24479,12 +24480,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/ResourceQuota"
-                        }
-                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -25841,6 +25836,16 @@
         "AuthPolicies": {
             "type": "object",
             "properties": {
+                "subscriptionAuthentication": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "namespaceAuthentication": {
                     "type": "object",
                     "additionalProperties": {
@@ -25856,16 +25861,6 @@
                                 "sinks",
                                 "packages"
                             ]
-                        }
-                    }
-                },
-                "subscriptionAuthentication": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "array",
-                        "uniqueItems": true,
-                        "items": {
-                            "type": "string"
                         }
                     }
                 },
@@ -25943,15 +25938,15 @@
         "AutoTopicCreationOverride": {
             "type": "object",
             "properties": {
+                "topicType": {
+                    "type": "string"
+                },
                 "defaultNumPartitions": {
                     "type": "integer",
                     "format": "int32"
                 },
                 "allowAutoTopicCreation": {
                     "type": "boolean"
-                },
-                "topicType": {
-                    "type": "string"
                 }
             }
         },
@@ -25966,10 +25961,6 @@
                         "consumer_backlog_eviction"
                     ]
                 },
-                "limit": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "limitSize": {
                     "type": "integer",
                     "format": "int64"
@@ -25977,6 +25968,10 @@
                 "limitTime": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -26269,6 +26264,24 @@
             }
         },
         "CompletableFuturePartitionedTopicMetadata": {
+            "type": "object",
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "CompletableFutureResourceQuota": {
             "type": "object",
             "properties": {
                 "cancelled": {
@@ -26582,16 +26595,16 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "dispatchThrottlingRateInByte": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "relativeToPublishRate": {
                     "type": "boolean"
                 },
                 "ratePeriodInSecond": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "dispatchThrottlingRateInByte": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -26650,12 +26663,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -27100,12 +27113,12 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "objectId": {
-                    "type": "object"
-                },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "objectId": {
+                    "type": "object"
                 },
                 "typeId": {
                     "type": "object"
@@ -27573,20 +27586,25 @@
                     "type": "number",
                     "format": "double"
                 },
-                "cpu": {
-                    "$ref": "#/definitions/ResourceUsage"
+                "underLoaded": {
+                    "type": "boolean"
+                },
+                "overLoaded": {
+                    "type": "boolean"
+                },
+                "loadReportType": {
+                    "type": "string"
                 },
                 "msgThroughputIn": {
                     "type": "number",
                     "format": "double"
                 },
-                "lastUpdate": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "msgThroughputOut": {
                     "type": "number",
                     "format": "double"
+                },
+                "cpu": {
+                    "$ref": "#/definitions/ResourceUsage"
                 },
                 "memory": {
                     "$ref": "#/definitions/ResourceUsage"
@@ -27600,14 +27618,9 @@
                 "bandwidthOut": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
-                "underLoaded": {
-                    "type": "boolean"
-                },
-                "overLoaded": {
-                    "type": "boolean"
-                },
-                "loadReportType": {
-                    "type": "string"
+                "lastUpdate": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -27983,57 +27996,10 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
-                "managedLedgerOffloadedReadPriority": {
-                    "type": "string",
-                    "enum": [
-                        "BOOKKEEPER_FIRST",
-                        "TIERED_STORAGE_FIRST"
-                    ]
-                },
-                "s3ManagedLedgerOffloadRegion": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadBucket": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadServiceEndpoint": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "s3ManagedLedgerOffloadCredentialId": {
-                    "type": "string"
-                },
                 "s3ManagedLedgerOffloadCredentialSecret": {
                     "type": "string"
                 },
-                "s3ManagedLedgerOffloadRole": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadRoleSessionName": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "gcsManagedLedgerOffloadRegion": {
-                    "type": "string"
-                },
-                "gcsManagedLedgerOffloadBucket": {
-                    "type": "string"
-                },
-                "gcsManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "gcsManagedLedgerOffloadReadBufferSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "gcsManagedLedgerOffloadServiceAccountKeyFile": {
+                "offloadersDirectory": {
                     "type": "string"
                 },
                 "fileSystemProfilePath": {
@@ -28042,8 +28008,26 @@
                 "fileSystemURI": {
                     "type": "string"
                 },
+                "gcsManagedLedgerOffloadBucket": {
+                    "type": "string"
+                },
+                "gcsManagedLedgerOffloadServiceAccountKeyFile": {
+                    "type": "string"
+                },
+                "gcsManagedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "gcsManagedLedgerOffloadMaxBlockSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "managedLedgerOffloadBucket": {
                     "type": "string"
+                },
+                "managedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "managedLedgerOffloadRegion": {
                     "type": "string"
@@ -28055,19 +28039,45 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "managedLedgerOffloadReadBufferSizeInBytes": {
+                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
                 },
-                "managedLedgerOffloadDriver": {
+                "managedLedgerOffloadPrefetchRounds": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "s3ManagedLedgerOffloadServiceEndpoint": {
                     "type": "string"
                 },
-                "offloadersDirectory": {
+                "s3ManagedLedgerOffloadCredentialId": {
                     "type": "string"
                 },
                 "managedLedgerOffloadMaxThreads": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "s3ManagedLedgerOffloadRole": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadRoleSessionName": {
+                    "type": "string"
+                },
+                "gcsManagedLedgerOffloadRegion": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadBucket": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadRegion": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadedReadPriority": {
+                    "type": "string",
+                    "enum": [
+                        "BOOKKEEPER_FIRST",
+                        "TIERED_STORAGE_FIRST"
+                    ]
                 },
                 "managedLedgerOffloadThresholdInBytes": {
                     "type": "integer",
@@ -28077,7 +28087,10 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "managedLedgerOffloadPrefetchRounds": {
+                "managedLedgerOffloadDriver": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
                 }
@@ -28947,11 +28960,11 @@
         "ResourceUnit": {
             "type": "object",
             "properties": {
-                "availableResource": {
-                    "$ref": "#/definitions/ResourceDescription"
-                },
                 "resourceId": {
                     "type": "string"
+                },
+                "availableResource": {
+                    "$ref": "#/definitions/ResourceDescription"
                 }
             }
         },
