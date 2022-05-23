@@ -339,10 +339,6 @@ module.exports = {
       appId: "WK2YL0SALL",
       apiKey: "42d24d221fbd8eb59804a078208aaec0",
       indexName: "apache_pulsar",
-      contextualSearch: true, 
-      searchParameters: {
-        facetFilters: ["language:LANGUAGE", "version:VERSION"],
-      },
     },
   },
   stylesheets: [
