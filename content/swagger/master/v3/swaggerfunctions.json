@@ -1168,7 +1168,7 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "commandData": {
+                "subscription": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -1180,7 +1180,7 @@
                 "httpAuthType": {
                     "type": "string"
                 },
-                "subscription": {
+                "commandData": {
                     "type": "string"
                 }
             }
@@ -1480,11 +1480,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -1801,12 +1801,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -2605,6 +2605,9 @@
                         "format": "byte"
                     }
                 },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
                 "brokerPublishTime": {
                     "type": "integer",
                     "format": "int64"
@@ -2612,11 +2615,12 @@
                 "messageId": {
                     "$ref": "#/definitions/MessageId"
                 },
-                "topicName": {
-                    "type": "string"
-                },
                 "encryptionCtx": {
                     "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "publishTime": {
                     "type": "integer",
@@ -2653,12 +2657,8 @@
                 "replicated": {
                     "type": "boolean"
                 },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
+                "topicName": {
+                    "type": "string"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -3006,15 +3006,15 @@
                         "AUTO_PUBLISH"
                     ]
                 },
+                "schemaDefinition": {
+                    "type": "string"
+                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
-                },
-                "schemaDefinition": {
-                    "type": "string"
                 }
             }
         },
@@ -3083,11 +3083,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
