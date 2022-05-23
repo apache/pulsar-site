@@ -7,4 +7,5 @@ BUILD_VERSIONS=$BUILD_VERSIONS"]"
 
 echo $BUILD_VERSIONS >.build-versions.json
 
+yarn install
 yarn start
