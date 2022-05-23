@@ -24,7 +24,7 @@ cp -r $SRC_DIR/website/static/api $ROOT_DIR/site2/website-next/static/
 
 cd $ROOT_DIR/site2/website-next
 if [ -d "node_modules" ]; then
-    echo "skip install"
+    :
 else
     yarn install
 fi
