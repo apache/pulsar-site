@@ -21,7 +21,7 @@ In Pulsar, when namespaces (more specifically, namespace bundles) are assigned d
 You can set a namespace isolation policy for a cluster using one of the following methods. 
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
 
@@ -69,7 +69,7 @@ A namespace can be isolated into user-defined groups of bookies, which guarantee
 You can set a bookie affinity group using one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
 
