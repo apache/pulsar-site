@@ -41,6 +41,10 @@ watcher
     } else if (/\/website\/(.*)/.exec(path)) {
       const r = /\/website\/(.*)/.exec(path);
       dest += "/" + r[1];
+    } else {
+      console.log(path, "has been changed, do a full sync");
+      execa("sh scripts/sync-docs.sh " + src).stdout.pipe(process.stdout);
+      return;
     }
     console.log(path, "has been changed, sync to " + dest);
     execa("cp -r " + path + " " + dest).stdout.pipe(process.stdout);
