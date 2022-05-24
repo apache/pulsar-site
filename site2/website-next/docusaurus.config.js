@@ -4,6 +4,7 @@
 const _ = require("lodash");
 const linkifyRegex = require("./plugins/remark-linkify-regex");
 const versions = require("./versions.json");
+const axios = require("axios");
 const versionsMap = {
   ..._.keyBy(
     versions.slice(1).map(item => {
@@ -111,325 +112,338 @@ const injectLinkParseForEndpoint = ([, info]) => {
   };
 };
 
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
-module.exports = {
-  title: "Apache Pulsar",
-  tagline:
-    "Apache Pulsar is a cloud-native, distributed messaging and streaming platform originally created at Yahoo! and now a top-level Apache Software Foundation project",
-  url: "https://pulsar.apache.org",
-  baseUrl: baseUrl,
-  onBrokenLinks: "ignore",
-  onBrokenMarkdownLinks: "ignore",
-  favicon: "img/favicon.ico",
-  organizationName: "apache",
-  projectName: "pulsar",
-  customFields: {
-    githubUrl,
-    oldUrl,
-  },
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
-    localeConfigs: {
-      "zh-CN": {
-        label: "简体中文",
-      },
-      "zh-TW": {
-        label: "繁体中文",
+function thousands(num){
+  var reg = num.indexOf(".") > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(?:\d{3})+$)/g;
+  return num.replace(reg,"$1,");
+}
+
+module.exports = (async () => {
+  let {
+    data: { stargazers_count },
+  } = await axios.get("https://api.github.com/repos/apache/pulsar");
+
+  /** @type {import('@docusaurus/types').DocusaurusConfig} */
+  let res = {
+    title: "Apache Pulsar",
+    tagline:
+      "Apache Pulsar is a cloud-native, distributed messaging and streaming platform originally created at Yahoo! and now a top-level Apache Software Foundation project",
+    url: "https://pulsar.apache.org",
+    baseUrl: baseUrl,
+    onBrokenLinks: "ignore",
+    onBrokenMarkdownLinks: "ignore",
+    favicon: "img/favicon.ico",
+    organizationName: "apache",
+    projectName: "pulsar",
+    customFields: {
+      githubUrl,
+      oldUrl,
+    },
+    i18n: {
+      defaultLocale: "en",
+      locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
+      localeConfigs: {
+        "zh-CN": {
+          label: "简体中文",
+        },
+        "zh-TW": {
+          label: "繁体中文",
+        },
       },
     },
-  },
-  themeConfig: {
-    announcementBar: {
-      id: "summit",
-      content:
-        '🚀 Pulsar Summit San Francisco 2022 will take place on August 18th, 2022. <a target="_blank" href="https://pulsar-summit.org/">Register now</a> and help us make it an even bigger success by spreading the word on social media!',
-      backgroundColor: "#198fff",
-      textColor: "#fff",
-      isCloseable: true,
-    },
-    colorMode: {
-      disableSwitch: false,
-    },
-    navbar: {
-      title: "",
-      logo: {
-        alt: "pulasr logo",
-        src: "img/logo.svg",
+    themeConfig: {
+      announcementBar: {
+        id: "summit",
+        content:
+          '🚀 Pulsar Summit San Francisco 2022 will take place on August 18th, 2022. <a target="_blank" href="https://pulsar-summit.org/">Register now</a> and help us make it an even bigger success by spreading the word on social media!',
+        backgroundColor: "#198fff",
+        textColor: "#fff",
+        isCloseable: true,
       },
-      items: [
-        {
-          type: "dropdown",
-          label: "Get Started",
-          position: "right",
-          items: [
-            {
-              type: "doc",
-              docId: "concepts-overview",
-              label: "Pulsar Concepts",
-            },
-            {
-              type: "doc",
-              label: "Quickstart",
-              docId: "getting-started-standalone",
-            },
-            {
-              label: "Ecosystem",
-              to: "/ecosystem",
-            },
-          ],
-        },
-        {
-          href: "/docs/next/",
-          position: "right",
-          label: "Docs",
-        },
-        {
-          type: "dropdown",
-          label: "Community",
-          position: "right",
-          className: "community-dropdown",
-          items: [
-            {
-              to: "/community#section-welcome",
-              label: "Welcome",
-              className: "scroll-link scroll-welcome",
-              id: "scroll-welcome",
-            },
-            {
-              to: "/community#section-discussions",
-              label: "Discussions",
-              className: "scroll-link scroll-discussions",
-              id: "scroll-discussions",
-            },
-            {
-              to: "/community#section-governance",
-              label: "Governance",
-              className: "scroll-link",
-              id: "scroll-governance",
-            },
-            {
-              to: "/community#section-community",
-              label: "Meet the Community",
-              className: "scroll-link",
-              id: "scroll-community",
-            },
-            {
-              to: "/community#section-contribute",
-              label: "Contribute",
-              className: "scroll-link",
-              id: "scroll-contribute",
-            },
-            {
-              to: "https://github.com/apache/pulsar/wiki",
-              label: "Wiki",
-            },
-            {
-              to: "https://github.com/apache/pulsar/issues",
-              label: "Issue Tracking",
-            },
-          ],
-        },
-        {
-          type: "dropdown",
-          label: "Learn",
-          position: "right",
-          items: [
-            {
-              to: "/blog",
-              label: "Blog",
-            },
-            {
-              to: "/case-studies",
-              label: "Case Studies",
-            },
-            {
-              to: "/resources",
-              label: "Resources",
-            },
-            {
-              to: "/events",
-              label: "Events",
-            },
-          ],
-        },
-        {
-          type: "localeDropdown",
-          position: "right",
-        },
-        {
-          to: "/download",
-          label: "Download",
-          position: "right",
-          className: "download-btn pill-btn",
-        },
-        {
-          href: "https://github.com/apache/pulsar",
-          label: "Github",
-          position: "right",
-          className: "github-nav",
-        },
-      ],
-    },
-    footer: {
-      logo: {
-        alt: "Pulsar Logo",
-        src: "img/pulsar-white.svg",
-        href: "/",
+      colorMode: {
+        disableSwitch: false,
       },
-      links: [
-        {
-          title: "Apache Foundation.", //Column title
-          items: [
-            {
-              //Embedded HTML
-              html: `
+      navbar: {
+        title: "",
+        logo: {
+          alt: "pulasr logo",
+          src: "img/logo.svg",
+        },
+        items: [
+          {
+            type: "dropdown",
+            label: "Get Started",
+            position: "right",
+            items: [
+              {
+                type: "doc",
+                docId: "concepts-overview",
+                label: "Pulsar Concepts",
+              },
+              {
+                type: "doc",
+                label: "Quickstart",
+                docId: "getting-started-standalone",
+              },
+              {
+                label: "Ecosystem",
+                to: "/ecosystem",
+              },
+            ],
+          },
+          {
+            href: "/docs/next/",
+            position: "right",
+            label: "Docs",
+          },
+          {
+            type: "dropdown",
+            label: "Community",
+            position: "right",
+            className: "community-dropdown",
+            items: [
+              {
+                to: "/community#section-welcome",
+                label: "Welcome",
+                className: "scroll-link scroll-welcome",
+                id: "scroll-welcome",
+              },
+              {
+                to: "/community#section-discussions",
+                label: "Discussions",
+                className: "scroll-link scroll-discussions",
+                id: "scroll-discussions",
+              },
+              {
+                to: "/community#section-governance",
+                label: "Governance",
+                className: "scroll-link",
+                id: "scroll-governance",
+              },
+              {
+                to: "/community#section-community",
+                label: "Meet the Community",
+                className: "scroll-link",
+                id: "scroll-community",
+              },
+              {
+                to: "/community#section-contribute",
+                label: "Contribute",
+                className: "scroll-link",
+                id: "scroll-contribute",
+              },
+              {
+                to: "https://github.com/apache/pulsar/wiki",
+                label: "Wiki",
+              },
+              {
+                to: "https://github.com/apache/pulsar/issues",
+                label: "Issue Tracking",
+              },
+            ],
+          },
+          {
+            type: "dropdown",
+            label: "Learn",
+            position: "right",
+            items: [
+              {
+                to: "/blog",
+                label: "Blog",
+              },
+              {
+                to: "/case-studies",
+                label: "Case Studies",
+              },
+              {
+                to: "/resources",
+                label: "Resources",
+              },
+              {
+                to: "/events",
+                label: "Events",
+              },
+            ],
+          },
+          {
+            type: "localeDropdown",
+            position: "right",
+          },
+          {
+            to: "/download",
+            label: "Download",
+            position: "right",
+            className: "download-btn pill-btn",
+          },
+          {
+            href: "https://github.com/apache/pulsar",
+            label: thousands(String(stargazers_count)),
+            position: "right",
+            className: "github-nav",
+          },
+        ],
+      },
+      footer: {
+        logo: {
+          alt: "Pulsar Logo",
+          src: "img/pulsar-white.svg",
+          href: "/",
+        },
+        links: [
+          {
+            title: "Apache Foundation.", //Column title
+            items: [
+              {
+                //Embedded HTML
+                html: `
 	              <img class="footer-apache-logo" src="/img/Apache_Feather_Logo.svg" alt="" width="20">
 	              `,
-            },
-            {
-              label: "Foundation",
-              href: "http://www.apache.org/",
-            },
-            {
-              label: "Events",
-              href: "https://www.apache.org/events/current-event.html",
-            },
-            {
-              label: "License",
-              href: "https://www.apache.org/licenses/",
-            },
-            {
-              label: "Thanks",
-              href: "https://www.apache.org/foundation/thanks",
-            },
-            {
-              label: "Security",
-              href: "https://www.apache.org/security",
-            },
-            {
-              label: "Sponsorship",
-              href: "https://www.apache.org/foundation/sponsorship",
-            },
-          ],
-        },
-        {
-          title: " ", //Column title
-          items: [
-            {
-              //Embedded HTML
-              html: `
+              },
+              {
+                label: "Foundation",
+                href: "http://www.apache.org/",
+              },
+              {
+                label: "Events",
+                href: "https://www.apache.org/events/current-event.html",
+              },
+              {
+                label: "License",
+                href: "https://www.apache.org/licenses/",
+              },
+              {
+                label: "Thanks",
+                href: "https://www.apache.org/foundation/thanks",
+              },
+              {
+                label: "Security",
+                href: "https://www.apache.org/security",
+              },
+              {
+                label: "Sponsorship",
+                href: "https://www.apache.org/foundation/sponsorship",
+              },
+            ],
+          },
+          {
+            title: " ", //Column title
+            items: [
+              {
+                //Embedded HTML
+                html: `
 	              <div><small><strong>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0.</a></strong></small></div>
                 <div>Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.</div>
 	              `,
+              },
+            ],
+          },
+        ],
+        copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
+      <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</p>`,
+      },
+      prism: {
+        // theme: lightCodeTheme,
+        // darkTheme: darkCodeTheme,
+        theme: require("prism-react-renderer/themes/dracula"),
+        additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
+      },
+      algolia: {
+        appId: "WK2YL0SALL",
+        apiKey: "42d24d221fbd8eb59804a078208aaec0",
+        indexName: "apache_pulsar",
+        contextualSearch: true,
+        searchParameters: {
+          facetFilters: ["language:LANGUAGE", "version:VERSION"],
+        },
+      },
+    },
+    stylesheets: [
+      "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap",
+    ],
+    presets: [
+      [
+        "@docusaurus/preset-classic",
+        {
+          docs: {
+            path: "docs",
+            sidebarPath: require.resolve("./sidebars.js"),
+            editUrl: ({
+              version,
+              versionDocsDirPath,
+              docPath,
+              permalink,
+              locale,
+            }) => {
+              return `${githubUrl}/edit/master/site2/docs/${docPath}`;
             },
-          ],
+            remarkPlugins: [
+              linkifyRegex(
+                /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
+                injectLinkParse
+              ),
+              linkifyRegex(
+                /{\@inject\:\s?endpoint\|([^}]+)}/,
+                injectLinkParseForEndpoint
+              ),
+            ],
+            versions: versionsMap,
+            onlyIncludeVersions: buildVersions || ["current"],
+          },
+          blog: {
+            showReadingTime: true,
+            editUrl: `${githubUrl}/edit/master/site2/website`,
+          },
+          theme: {
+            customCss: require.resolve("./src/css/custom.css"),
+          },
+          googleAnalytics: {
+            trackingID: "UA-102219959-1",
+          },
         },
       ],
-      copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
-      <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</p>`,
-    },
-    prism: {
-      // theme: lightCodeTheme,
-      // darkTheme: darkCodeTheme,
-      theme: require("prism-react-renderer/themes/dracula"),
-      additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
-    },
-    algolia: {
-      appId: "WK2YL0SALL",
-      apiKey: "42d24d221fbd8eb59804a078208aaec0",
-      indexName: "apache_pulsar",
-      contextualSearch: true, 
-      searchParameters: {
-        facetFilters: ["language:LANGUAGE", "version:VERSION"],
-      },
-    },
-  },
-  stylesheets: [
-    "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap",
-  ],
-  presets: [
-    [
-      "@docusaurus/preset-classic",
+    ],
+    plugins: [
+      [
+        "@docusaurus/plugin-client-redirects",
+        {
+          fromExtensions: ["md"],
+        },
+      ],
+      "./postcss-tailwind-loader",
+      [
+        "content-docs",
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: "release-notes",
+          path: "release-notes",
+          routeBasePath: "release-notes",
+          // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
+          //   if (locale !== "en") {
+          //     return ``;
+          //   }
+          //   return ``;
+          // },
+          // editCurrentVersion: true,
+          sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
+          // showLastUpdateAuthor: true,
+          // showLastUpdateTime: true,
+        }),
+      ],
+      [
+        "@docusaurus/plugin-content-docs",
+        {
+          id: "pulsar-manager-release-notes",
+          path: "pulsar-manager",
+          routeBasePath: "/",
+        },
+      ],
+    ],
+    scripts: [
       {
-        docs: {
-          path: "docs",
-          sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: ({
-            version,
-            versionDocsDirPath,
-            docPath,
-            permalink,
-            locale,
-          }) => {
-            return `${githubUrl}/edit/master/site2/docs/${docPath}`;
-          },
-          remarkPlugins: [
-            linkifyRegex(
-              /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
-              injectLinkParse
-            ),
-            linkifyRegex(
-              /{\@inject\:\s?endpoint\|([^}]+)}/,
-              injectLinkParseForEndpoint
-            ),
-          ],
-          versions: versionsMap,
-          onlyIncludeVersions: buildVersions || ["current"],
-        },
-        blog: {
-          showReadingTime: true,
-          editUrl: `${githubUrl}/edit/master/site2/website`,
-        },
-        theme: {
-          customCss: require.resolve("./src/css/custom.css"),
-        },
-        googleAnalytics: {
-          trackingID: "UA-102219959-1",
-        },
+        src: "https://pulsar.apache.org/js/sine-waves.min.js",
+        async: true,
       },
     ],
-  ],
-  plugins: [
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        fromExtensions: ["md"],
-      },
-    ],
-    "./postcss-tailwind-loader",
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "release-notes",
-        path: "release-notes",
-        routeBasePath: "release-notes",
-        // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
-        //   if (locale !== "en") {
-        //     return ``;
-        //   }
-        //   return ``;
-        // },
-        // editCurrentVersion: true,
-        sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
-        // showLastUpdateAuthor: true,
-        // showLastUpdateTime: true,
-      }),
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "pulsar-manager-release-notes",
-        path: "pulsar-manager",
-        routeBasePath: "/",
-      },
-    ],
-  ],
-  scripts: [
-    {
-      src: "https://pulsar.apache.org/js/sine-waves.min.js",
-      async: true,
-    },
-  ],
-};
+  };
+
+  return res;
+})();
