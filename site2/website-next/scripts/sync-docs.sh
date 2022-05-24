@@ -30,3 +30,5 @@ else
 fi
 
 node scripts/split-swagger-by-version.js
+
+echo "full sync done..."
