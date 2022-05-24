@@ -193,7 +193,7 @@ You can create a connector using **Admin CLI**, **REST API** or **JAVA admin API
 Create a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -284,7 +284,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
 Create a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -379,7 +379,7 @@ You can start a connector using **Admin CLI** or **REST API**.
 Start a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"}]}>
 
@@ -416,7 +416,7 @@ For more information, see [here](io-cli.md#start).
 Start a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"}]}>
 
@@ -457,7 +457,7 @@ You can run a connector locally rather than deploying it on a Pulsar cluster usi
 Run a source connector locally.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"}]}>
 
@@ -483,7 +483,7 @@ For more information, see [here](io-cli.md#localrun).
 Run a sink connector locally.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"}]}>
 
@@ -523,7 +523,7 @@ You can get the information of a connector using **Admin CLI**, **REST API** or 
 Get the information of a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -636,7 +636,7 @@ For more information, see [`getSource`](https://pulsar.apache.org/api/admin/org/
 Get the information of a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -746,7 +746,7 @@ You can get the list of all running connectors using **Admin CLI**, **REST API**
 Get the list of all running source connectors.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -805,7 +805,7 @@ For more information, see [`listSource`](https://pulsar.apache.org/api/admin/org
 Get the list of all running sink connectors.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -868,7 +868,7 @@ You can get the current status of a connector using **Admin CLI**, **REST API** 
 Get the current status of a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -964,7 +964,7 @@ For more information, see [here](io-cli.md#status).
 Get the current status of a Pulsar sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1066,7 +1066,7 @@ You can update a running connector using **Admin CLI**, **REST API** or **JAVA a
 Update a running Pulsar source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1161,7 +1161,7 @@ For more information, see [`createSourceWithUrl`](https://pulsar.apache.org/api/
 Update a running Pulsar sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1262,7 +1262,7 @@ You can stop a connector using **Admin CLI**, **REST API** or **JAVA admin API**
 Stop a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1358,7 +1358,7 @@ For more information, see [here](io-cli.md#stop).
 Stop a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1460,7 +1460,7 @@ You can restart a connector using **Admin CLI**, **REST API** or **JAVA admin AP
 Restart a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1556,7 +1556,7 @@ For more information, see [here](io-cli.md#restart).
 Restart a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1658,7 +1658,7 @@ You can delete a connector using **Admin CLI**, **REST API** or **JAVA admin API
 Delete a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1724,7 +1724,7 @@ For more information, see [`deleteSource`](https://pulsar.apache.org/api/admin/o
 Delete a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
