@@ -996,14 +996,14 @@ footer .row.footer__links {
   counter-reset: line-number;
 }
 
-.prism-code .token-line::marker {
-  color: var(--ifm-color-gray-700);
-  content: counter(line-number);
-}
-
-.prism-code .token-line {
+.prism-code .token-line::before {
   counter-increment: line-number;
-  display: list-item;
-  padding-left: var(--ifm-pre-padding);
-  margin-left: var(--ifm-global-spacing);
+  content: counter(line-number);
+  margin-right: calc(var(--ifm-pre-padding) * 1.5);
+  text-align: right;
+  min-width: 1rem;
+  display: inline-block;
+  opacity: .3;
+  position: sticky;
+  left: var(--ifm-pre-padding);
 }
