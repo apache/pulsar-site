@@ -38,7 +38,7 @@ New clusters can be provisioned using the admin interface.
 > Please note that this operation requires superuser privileges.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -119,7 +119,7 @@ You'll need to use `--*-tls` flags only if you're using [TLS authentication](sec
 You can fetch the [configuration](reference-configuration) for an existing cluster at any time.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -163,7 +163,7 @@ admin.clusters().getCluster(clusterName);
 You can update the configuration for an existing cluster at any time.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -208,7 +208,7 @@ admin.clusters().updateCluster(clusterName, clusterData);
 Clusters can be deleted from a Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -245,7 +245,7 @@ admin.clusters().deleteCluster(clusterName);
 You can fetch a list of all clusters in a Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -284,7 +284,7 @@ admin.clusters().getClusters();
 Peer clusters can be configured for a given cluster in a Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">

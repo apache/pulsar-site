@@ -88,9 +88,9 @@ packagesManagementLedgerRootPath=/ledgers
 You can use the following commands to upload a package.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 ```shell
@@ -105,13 +105,13 @@ bin/pulsar-admin packages upload function://public/default/example@v0.1 --path p
 {@inject: endpoint|POST|/admin/v3/packages/:type/:tenant/:namespace/:packageName/:version}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 Upload a package to the package management service synchronously.
 
 ```java
 
-  void upload(PackageMetadata metadata, String packageName, String path) throws PulsarAdminException;
+void upload(PackageMetadata metadata, String packageName, String path) throws PulsarAdminException;
 
 ```
 
@@ -119,7 +119,7 @@ Upload a package to the package management service asynchronously.
 
 ```java
 
-  CompletableFuture<Void> uploadAsync(PackageMetadata metadata, String packageName, String path);
+CompletableFuture<Void> uploadAsync(PackageMetadata metadata, String packageName, String path);
 
 ```
 
@@ -133,9 +133,9 @@ Upload a package to the package management service asynchronously.
 You can use the following commands to download a package.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 ```shell
@@ -150,13 +150,13 @@ bin/pulsar-admin packages download function://public/default/example@v0.1 --path
 {@inject: endpoint|GET|/admin/v3/packages/:type/:tenant/:namespace/:packageName/:version}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 Download a package from the package management service synchronously.
 
 ```java
 
-  void download(String packageName, String path) throws PulsarAdminException;
+void download(String packageName, String path) throws PulsarAdminException;
 
 ```
 
@@ -164,7 +164,7 @@ Download a package from the package management service asynchronously.
 
 ```java
 
-  CompletableFuture<Void> downloadAsync(String packageName, String path);
+CompletableFuture<Void> downloadAsync(String packageName, String path);
 
 ```
 
@@ -178,9 +178,9 @@ Download a package from the package management service asynchronously.
 You can use the following commands to delete a package.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 The following command deletes a package of version 0.1.
@@ -197,13 +197,13 @@ bin/pulsar-admin packages delete functions://public/default/example@v0.1
 {@inject: endpoint|DELETE|/admin/v3/packages/:type/:tenant/:namespace/:packageName/:version}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 Delete a specified package synchronously.
 
 ```java
 
-  void delete(String packageName) throws PulsarAdminException;
+void delete(String packageName) throws PulsarAdminException;
 
 ```
 
@@ -211,7 +211,7 @@ Delete a specified package asynchronously.
 
 ```java
 
-  CompletableFuture<Void> deleteAsync(String packageName);
+CompletableFuture<Void> deleteAsync(String packageName);
 
 ```
 
@@ -225,9 +225,9 @@ Delete a specified package asynchronously.
 You can use the following commands to get the metadate of a package.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 ```shell
@@ -242,13 +242,13 @@ bin/pulsar-admin packages get-metadata function://public/default/test@v1
 {@inject: endpoint|GET|/admin/v3/packages/:type/:tenant/:namespace/:packageName/:version/metadata}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 Get the metadata of a package synchronously.
 
 ```java
 
-  PackageMetadata getMetadata(String packageName) throws PulsarAdminException;
+PackageMetadata getMetadata(String packageName) throws PulsarAdminException;
 
 ```
 
@@ -256,7 +256,7 @@ Get the metadata of a package asynchronously.
 
 ```java
 
-  CompletableFuture<PackageMetadata> getMetadataAsync(String packageName);
+CompletableFuture<PackageMetadata> getMetadataAsync(String packageName);
 
 ```
 
@@ -270,9 +270,9 @@ Get the metadata of a package asynchronously.
 You can use the following commands to update the metadata of a package.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 ```shell
@@ -287,13 +287,13 @@ bin/pulsar-admin packages update-metadata function://public/default/example@v0.1
 {@inject: endpoint|PUT|/admin/v3/packages/:type/:tenant/:namespace/:packageName/:version/metadata}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 Update the metadata of a package synchronously.
 
 ```java
 
-  void updateMetadata(String packageName, PackageMetadata metadata) throws PulsarAdminException;
+void updateMetadata(String packageName, PackageMetadata metadata) throws PulsarAdminException;
 
 ```
 
@@ -301,7 +301,7 @@ Update the metadata of a package asynchronously.
 
 ```java
 
-  CompletableFuture<Void> updateMetadataAsync(String packageName, PackageMetadata metadata);
+CompletableFuture<Void> updateMetadataAsync(String packageName, PackageMetadata metadata);
 
 ```
 
@@ -315,9 +315,9 @@ Update the metadata of a package asynchronously.
 You can use the following commands to list all versions of a package.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
 ```shell
@@ -332,13 +332,13 @@ bin/pulsar-admin packages list-versions type://tenant/namespace/packageName
 {@inject: endpoint|GET|/admin/v3/packages/:type/:tenant/:namespace/:packageName}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 List all versions of a package synchronously.
 
 ```java
 
-  List<String> listPackageVersions(String packageName) throws PulsarAdminException;
+List<String> listPackageVersions(String packageName) throws PulsarAdminException;
 
 ```
 
@@ -346,7 +346,7 @@ List all versions of a package asynchronously.
 
 ```java
 
-  CompletableFuture<List<String>> listPackageVersionsAsync(String packageName);
+CompletableFuture<List<String>> listPackageVersionsAsync(String packageName);
 
 ```
 
@@ -360,9 +360,9 @@ List all versions of a package asynchronously.
 You can use the following commands to list all packages of a specific type under a namespace.
 
 ````mdx-code-block
-<Tabs 
+<Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="pulsar-admin">
 
@@ -378,13 +378,13 @@ bin/pulsar-admin packages list --type function public/default
 {@inject: endpoint|PUT|/admin/v3/packages/:type/:tenant/:namespace}
 
 </TabItem>
-<TabItem value="JAVA">
+<TabItem value="Java">
 
 List all packages of a specific type under a namespace synchronously.
 
 ```java
 
-  List<String> listPackages(String type, String namespace) throws PulsarAdminException;
+List<String> listPackages(String type, String namespace) throws PulsarAdminException;
 
 ```
 
@@ -392,7 +392,7 @@ List all packages of a specific type under a namespace asynchronously.
 
 ```java
 
-  CompletableFuture<List<String>> listPackagesAsync(String type, String namespace);
+CompletableFuture<List<String>> listPackagesAsync(String type, String namespace);
 
 ```
 
