@@ -15,6 +15,7 @@ var searchData=
   ['resultcumulativeacknowledgementnotallowederror',['ResultCumulativeAcknowledgementNotAllowedError',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbba2e01cfc218b721cbd2e2a06bf3cb78b0',1,'pulsar']]],
   ['resulterrorgettingauthenticationdata',['ResultErrorGettingAuthenticationData',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbba8014344f94ba9ad55337f01767e0e30c',1,'pulsar']]],
   ['resultincompatibleschema',['ResultIncompatibleSchema',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbbafe509853528453adc4ca304ea9b1d79e',1,'pulsar']]],
+  ['resultinterrupted',['ResultInterrupted',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbba67722ba0750e461ae03912f5dc10d03a',1,'pulsar']]],
   ['resultinvalidconfiguration',['ResultInvalidConfiguration',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbbad3d7545107897e19819066fe42e81a06',1,'pulsar']]],
   ['resultinvalidmessage',['ResultInvalidMessage',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbba875234396481a34fb7f02d3ecd1936f0',1,'pulsar']]],
   ['resultinvalidtopicname',['ResultInvalidTopicName',['../namespacepulsar.html#ae85314d6b9e8afd831cf8c66705f2dbbafcb0b43f04e494ba3784f6c259b5137f',1,'pulsar']]],
