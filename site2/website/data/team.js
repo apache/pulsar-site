@@ -294,6 +294,12 @@ module.exports = {
       apacheId: 'shoothzj',
       org: 'HuaWei',
       roles: 'Committer'
+    },
+    {
+      name: 'Zike Yang',
+      apacheId: 'zike',
+      org: 'StreamNative',
+      roles: 'Committer'
     }
   ]
 }
