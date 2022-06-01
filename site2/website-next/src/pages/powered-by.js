@@ -9,12 +9,12 @@ export default function page(props) {
     <Layout>
       <div className="tailwind">
         <div className="my-12 container">
-          <header className="postHeader">
-            <h1>
+          <header>
+            <h2>
               <translate>
                 Companies using or contributing to Apache Pulsar
               </translate>
-            </h1>
+            </h2>
             <hr />
           </header>
 
