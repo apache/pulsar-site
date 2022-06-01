@@ -29,7 +29,7 @@ mkdir -p $DEST_DIR/tools/pulsar-client/${VERSION}
 mkdir -p $DEST_DIR/tools/pulsar-client/${VERSION}/node_modules
 mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
 
-$ROOT_DIR/bin/pulsar-client generate_documentation > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/pulsar-client.md
+${ROOT_DIR}/site2/tools/pulsar-client-md.sh $ROOT_DIR $WEBSITE
 
 cd $ROOT_DIR/site2/${WEBSITE}/brodocs
 cp pulsar-client-manifest.json manifest.json

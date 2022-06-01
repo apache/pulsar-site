@@ -29,7 +29,7 @@ mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}
 mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules
 mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
 
-$ROOT_DIR/bin/pulsar-perf gen-doc > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/pulsar-perf.md
+${ROOT_DIR}/site2/tools/pulsar-perf-md.sh $ROOT_DIR $WEBSITE
 
 cd $ROOT_DIR/site2/${WEBSITE}/brodocs
 cp pulsar-perf-manifest.json manifest.json
