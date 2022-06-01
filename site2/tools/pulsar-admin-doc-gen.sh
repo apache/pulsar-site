@@ -27,26 +27,8 @@ cd $ROOT_DIR
 
 mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}
 mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules
-mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
 
-$ROOT_DIR/bin/pulsar-admin documents generate broker-stats > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/broker-stats.md
-$ROOT_DIR/bin/pulsar-admin documents generate brokers > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/brokers.md
-$ROOT_DIR/bin/pulsar-admin documents generate clusters > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/clusters.md
-$ROOT_DIR/bin/pulsar-admin documents generate functions > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/functions.md
-$ROOT_DIR/bin/pulsar-admin documents generate functions-worker > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/functions-worker.md
-$ROOT_DIR/bin/pulsar-admin documents generate namespaces > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/namespaces.md
-$ROOT_DIR/bin/pulsar-admin documents generate ns-isolation-policy > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/ns-isolation-policy.md
-$ROOT_DIR/bin/pulsar-admin documents generate sources > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/sources.md
-$ROOT_DIR/bin/pulsar-admin documents generate sinks > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/sinks.md
-$ROOT_DIR/bin/pulsar-admin documents generate topics > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/topics.md
-$ROOT_DIR/bin/pulsar-admin documents generate topicPolicies > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/topicPolicies.md
-$ROOT_DIR/bin/pulsar-admin documents generate proxy-stats > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/proxy-stats.md
-$ROOT_DIR/bin/pulsar-admin documents generate resourcegroups > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/resourcegroups.md
-$ROOT_DIR/bin/pulsar-admin documents generate transactions > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/transactions.md
-$ROOT_DIR/bin/pulsar-admin documents generate tenants > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/tenants.md
-$ROOT_DIR/bin/pulsar-admin documents generate resource-quotas > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/resource-quotas.md
-$ROOT_DIR/bin/pulsar-admin documents generate schemas > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/schemas.md
-$ROOT_DIR/bin/pulsar-admin documents generate packages > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/packages.md
+${ROOT_DIR}/site2/tools/pulsar-admin-md.sh $ROOT_DIR $WEBSITE
 
 cd $ROOT_DIR/site2/${WEBSITE}/brodocs
 cp pulsar-admin-manifest.json manifest.json
