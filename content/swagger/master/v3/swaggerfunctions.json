@@ -1174,10 +1174,10 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "httpAuthType": {
+                "commandData": {
                     "type": "string"
                 },
-                "commandData": {
+                "httpAuthType": {
                     "type": "string"
                 },
                 "subscription": {
@@ -1462,11 +1462,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -2129,6 +2129,9 @@
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
+                "enumType": {
+                    "type": "boolean"
+                },
                 "concrete": {
                     "type": "boolean"
                 },
@@ -2142,9 +2145,6 @@
                     "type": "boolean"
                 },
                 "javaLangObject": {
-                    "type": "boolean"
-                },
-                "enumType": {
                     "type": "boolean"
                 },
                 "containerType": {
@@ -2325,12 +2325,12 @@
                 "objectId": {
                     "type": "object"
                 },
+                "typeId": {
+                    "type": "object"
+                },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
-                },
-                "typeId": {
-                    "type": "object"
                 },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
@@ -2605,23 +2605,6 @@
                         "format": "byte"
                     }
                 },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "topicName": {
                     "type": "string"
                 },
@@ -2659,6 +2642,23 @@
                 },
                 "replicated": {
                     "type": "boolean"
+                },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -3006,15 +3006,15 @@
                         "AUTO_PUBLISH"
                     ]
                 },
-                "schemaDefinition": {
-                    "type": "string"
-                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
+                },
+                "schemaDefinition": {
+                    "type": "string"
                 }
             }
         },
@@ -3065,11 +3065,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"

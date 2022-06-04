@@ -14626,6 +14626,92 @@
                 }
             }
         },
+        "/non-persistent/{tenant}/{namespace}/{topic}/subscription/{subName}/properties": {
+            "put": {
+                "tags": [
+                    "non-persistent topic"
+                ],
+                "summary": "Replaces all the properties on the given subscription",
+                "description": "",
+                "operationId": "updateSubscriptionProperties",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Specify the tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namespace",
+                        "in": "path",
+                        "description": "Specify the namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topic",
+                        "in": "path",
+                        "description": "Specify topic name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subName",
+                        "in": "path",
+                        "description": "Subscription to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The new properties",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "authoritative",
+                        "in": "query",
+                        "description": "Is authentication required to perform this operation",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    }
+                ],
+                "responses": {
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant orsubscriber is not authorized to access this operation"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Topic/Subscription does not exist"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "503": {
+                        "description": "Failed to validate global cluster configuration"
+                    }
+                }
+            }
+        },
         "/non-persistent/{tenant}/{namespace}/{topic}/subscription/{subName}/replicatedSubscriptionStatus": {
             "get": {
                 "tags": [
@@ -20786,9 +20872,6 @@
                 "summary": "Create a partitioned topic.",
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
-                "consumes": [
-                    "application/vnd.partitioned-topic-metadata+json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -20817,10 +20900,12 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "The metadata for the topic",
+                        "description": "The number of partitions for the topic",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PartitionedTopicMetadata"
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
                         }
                     },
                     {
@@ -23058,6 +23143,92 @@
                     },
                     "412": {
                         "description": "Topic name is not valid"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "503": {
+                        "description": "Failed to validate global cluster configuration"
+                    }
+                }
+            }
+        },
+        "/persistent/{tenant}/{namespace}/{topic}/subscription/{subName}/properties": {
+            "put": {
+                "tags": [
+                    "persistent topic"
+                ],
+                "summary": "Replaces all the properties on the given subscription",
+                "description": "",
+                "operationId": "updateSubscriptionProperties",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Specify the tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namespace",
+                        "in": "path",
+                        "description": "Specify the namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topic",
+                        "in": "path",
+                        "description": "Specify topic name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subName",
+                        "in": "path",
+                        "description": "Subscription to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The new properties",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "authoritative",
+                        "in": "query",
+                        "description": "Is authentication required to perform this operation",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    }
+                ],
+                "responses": {
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant orsubscriber is not authorized to access this operation"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Topic/Subscription does not exist"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -26127,10 +26298,10 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "httpAuthType": {
+                "commandData": {
                     "type": "string"
                 },
-                "commandData": {
+                "httpAuthType": {
                     "type": "string"
                 },
                 "subscription": {
@@ -26236,10 +26407,10 @@
         "BookieInfo": {
             "type": "object",
             "properties": {
-                "hostname": {
+                "rack": {
                     "type": "string"
                 },
-                "rack": {
+                "hostname": {
                     "type": "string"
                 }
             }
@@ -26823,11 +26994,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -27238,6 +27409,9 @@
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
+                "enumType": {
+                    "type": "boolean"
+                },
                 "concrete": {
                     "type": "boolean"
                 },
@@ -27251,9 +27425,6 @@
                     "type": "boolean"
                 },
                 "javaLangObject": {
-                    "type": "boolean"
-                },
-                "enumType": {
                     "type": "boolean"
                 },
                 "containerType": {
@@ -27434,12 +27605,12 @@
                 "objectId": {
                     "type": "object"
                 },
+                "typeId": {
+                    "type": "object"
+                },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
-                },
-                "typeId": {
-                    "type": "object"
                 },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
@@ -27904,13 +28075,24 @@
                     "type": "number",
                     "format": "double"
                 },
-                "underLoaded": {
-                    "type": "boolean"
+                "memory": {
+                    "$ref": "#/definitions/ResourceUsage"
                 },
-                "overLoaded": {
-                    "type": "boolean"
+                "directMemory": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "msgThroughputIn": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "msgThroughputOut": {
+                    "type": "number",
+                    "format": "double"
                 },
                 "bandwidthIn": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "cpu": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
                 "bandwidthOut": {
@@ -27920,25 +28102,14 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "cpu": {
-                    "$ref": "#/definitions/ResourceUsage"
+                "underLoaded": {
+                    "type": "boolean"
                 },
-                "memory": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "directMemory": {
-                    "$ref": "#/definitions/ResourceUsage"
+                "overLoaded": {
+                    "type": "boolean"
                 },
                 "loadReportType": {
                     "type": "string"
-                },
-                "msgThroughputIn": {
-                    "type": "number",
-                    "format": "double"
-                },
-                "msgThroughputOut": {
-                    "type": "number",
-                    "format": "double"
                 }
             }
         },
@@ -28314,21 +28485,13 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
-                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "gcsManagedLedgerOffloadRegion": {
+                "managedLedgerOffloadDriver": {
                     "type": "string"
                 },
-                "gcsManagedLedgerOffloadBucket": {
+                "offloadersDirectory": {
                     "type": "string"
                 },
-                "gcsManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "gcsManagedLedgerOffloadReadBufferSizeInBytes": {
+                "managedLedgerOffloadMaxThreads": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28339,13 +28502,20 @@
                         "TIERED_STORAGE_FIRST"
                     ]
                 },
-                "offloadersDirectory": {
+                "s3ManagedLedgerOffloadRegion": {
                     "type": "string"
                 },
-                "managedLedgerOffloadDriver": {
+                "s3ManagedLedgerOffloadBucket": {
                     "type": "string"
                 },
-                "managedLedgerOffloadMaxThreads": {
+                "s3ManagedLedgerOffloadServiceEndpoint": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28361,31 +28531,17 @@
                 "s3ManagedLedgerOffloadRoleSessionName": {
                     "type": "string"
                 },
-                "managedLedgerOffloadPrefetchRounds": {
+                "gcsManagedLedgerOffloadRegion": {
+                    "type": "string"
+                },
+                "gcsManagedLedgerOffloadBucket": {
+                    "type": "string"
+                },
+                "gcsManagedLedgerOffloadMaxBlockSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
                 },
-                "s3ManagedLedgerOffloadRegion": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadBucket": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadServiceEndpoint": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadServiceEndpoint": {
-                    "type": "string"
-                },
-                "managedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadReadBufferSizeInBytes": {
+                "gcsManagedLedgerOffloadReadBufferSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28404,6 +28560,17 @@
                 "managedLedgerOffloadRegion": {
                     "type": "string"
                 },
+                "managedLedgerOffloadServiceEndpoint": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadMaxBlockSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "managedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "managedLedgerOffloadThresholdInBytes": {
                     "type": "integer",
                     "format": "int64"
@@ -28411,6 +28578,10 @@
                 "managedLedgerOffloadDeletionLagInMillis": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "managedLedgerOffloadPrefetchRounds": {
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         },
@@ -29374,11 +29545,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
                 "fullRootName": {
                     "$ref": "#/definitions/PropertyName"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -30106,26 +30277,26 @@
         "WorkerService": {
             "type": "object",
             "properties": {
+                "workerConfig": {
+                    "$ref": "#/definitions/WorkerConfig"
+                },
                 "sources": {
                     "$ref": "#/definitions/SourcesWorkerService"
                 },
                 "initialized": {
                     "type": "boolean"
                 },
-                "functions": {
-                    "$ref": "#/definitions/FunctionsWorkerService"
-                },
-                "sinks": {
-                    "$ref": "#/definitions/SinksWorkerService"
-                },
-                "workerConfig": {
-                    "$ref": "#/definitions/WorkerConfig"
-                },
                 "functionsV2": {
                     "$ref": "#/definitions/FunctionsV2WorkerService"
                 },
                 "workers": {
                     "$ref": "#/definitions/WorkersWorkerService"
+                },
+                "functions": {
+                    "$ref": "#/definitions/FunctionsWorkerService"
+                },
+                "sinks": {
+                    "$ref": "#/definitions/SinksWorkerService"
                 }
             }
         },
