@@ -30,7 +30,7 @@ fi
 function workaround_crowdin_problem_by_copying_files() {
   # TODO: remove this after figuring out why crowdin removed code tab when generating translated files
   # https://github.com/apache/pulsar/issues/5816
-  node scripts/fix-tab.js 
+  node scripts/fix-tab.js
 }
 
 function crowdin() {
@@ -41,6 +41,7 @@ function crowdin() {
     # This leads to executing crowdin-upload and crowdin-download once per day when website build is scheduled
     # to run with cron expression '0 */6 * * *'
     CURRENT_HOUR=$(date +%H)
+    CURRENT_HOUR=${CURRENT_HOUR#0}
     if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
       yarn run crowdin-upload
     fi
@@ -73,20 +74,21 @@ yarn
 if [ -n "$NEXT" ]; then
   yarn write-translations
   CURRENT_HOUR=$(date +%H)
+  CURRENT_HOUR=${CURRENT_HOUR#0}
   echo "------ crowdin envs:" "CROWDIN_UPLOAD: "$CROWDIN_UPLOAD "CROWDIN_DOWNLOAD: "$CROWDIN_DOWNLOAD "CURRENT_HOUR: "$CURRENT_HOUR
-  if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -eq 6 ]]; then
+  if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
     echo "------ exec crowdin upload"
     yarn run crowdin-upload
-  else 
+  else
     echo "------ skip crowdin upload"
   fi
-  if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -eq 12 ]]; then
+  if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
     echo "------ exec crowdin download"
     yarn crowdin-download
-    echo 'all' > scripts/.language
+    echo 'all' >scripts/.language
   else
     echo "------ skip crowdin download"
-    echo 'en' > scripts/.language
+    echo 'en' >scripts/.language
   fi
 
   node scripts/replace.js
