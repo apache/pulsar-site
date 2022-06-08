@@ -12894,6 +12894,73 @@
                 }
             }
         },
+        "/non-persistent/{tenant}/{namespace}/{topic}/properties": {
+            "get": {
+                "tags": [
+                    "non-persistent topic"
+                ],
+                "summary": "Get topic properties.",
+                "description": "",
+                "operationId": "getProperties",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Specify the tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namespace",
+                        "in": "path",
+                        "description": "Specify the namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topic",
+                        "in": "path",
+                        "description": "Specify topic name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "authoritative",
+                        "in": "query",
+                        "description": "Is authentication required to perform this operation",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    }
+                ],
+                "responses": {
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Topic does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "412": {
+                        "description": "Topic name is invalid"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/non-persistent/{tenant}/{namespace}/{topic}/publishRate": {
             "get": {
                 "tags": [
@@ -20872,6 +20939,9 @@
                 "summary": "Create a partitioned topic.",
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
+                "consumes": [
+                    "application/vnd.partitioned-topic-metadata+json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -20900,12 +20970,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "The number of partitions for the topic",
+                        "description": "The metadata for the topic",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 0
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
                         }
                     },
                     {
@@ -21417,6 +21485,73 @@
                     },
                     "409": {
                         "description": "Concurrent modification"
+                    }
+                }
+            }
+        },
+        "/persistent/{tenant}/{namespace}/{topic}/properties": {
+            "get": {
+                "tags": [
+                    "persistent topic"
+                ],
+                "summary": "Get topic properties.",
+                "description": "",
+                "operationId": "getProperties",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Specify the tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namespace",
+                        "in": "path",
+                        "description": "Specify the namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topic",
+                        "in": "path",
+                        "description": "Specify topic name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "authoritative",
+                        "in": "query",
+                        "description": "Is authentication required to perform this operation",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    }
+                ],
+                "responses": {
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Topic does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "412": {
+                        "description": "Topic name is invalid"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
@@ -27156,15 +27291,15 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
                 "userMetrics": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "number",
                         "format": "double"
                     }
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "receivedTotal": {
                     "type": "integer",
@@ -27406,6 +27541,9 @@
                 "abstract": {
                     "type": "boolean"
                 },
+                "contentType": {
+                    "$ref": "#/definitions/JavaType"
+                },
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
@@ -27457,9 +27595,6 @@
                 "mapLikeType": {
                     "type": "boolean"
                 },
-                "contentType": {
-                    "$ref": "#/definitions/JavaType"
-                },
                 "typeName": {
                     "type": "string"
                 },
@@ -27494,6 +27629,9 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
+                "closed": {
+                    "type": "boolean"
+                },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
@@ -27530,9 +27668,6 @@
                 },
                 "outputContext": {
                     "$ref": "#/definitions/JsonStreamContext"
-                },
-                "closed": {
-                    "type": "boolean"
                 }
             }
         },
@@ -27572,6 +27707,9 @@
                 },
                 "text": {
                     "type": "string"
+                },
+                "closed": {
+                    "type": "boolean"
                 },
                 "textCharacters": {
                     "type": "array",
@@ -27741,9 +27879,6 @@
                 },
                 "currentValue": {
                     "type": "object"
-                },
-                "closed": {
-                    "type": "boolean"
                 }
             }
         },
@@ -28075,9 +28210,6 @@
                     "type": "number",
                     "format": "double"
                 },
-                "bandwidthIn": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
                 "underLoaded": {
                     "type": "boolean"
                 },
@@ -28087,11 +28219,24 @@
                 "loadReportType": {
                     "type": "string"
                 },
-                "bandwidthOut": {
+                "cpu": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
                 "memory": {
                     "$ref": "#/definitions/ResourceUsage"
+                },
+                "directMemory": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "bandwidthIn": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "bandwidthOut": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "lastUpdate": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "msgThroughputIn": {
                     "type": "number",
@@ -28100,16 +28245,6 @@
                 "msgThroughputOut": {
                     "type": "number",
                     "format": "double"
-                },
-                "cpu": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "directMemory": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "lastUpdate": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
@@ -28485,20 +28620,6 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
-                "managedLedgerOffloadDriver": {
-                    "type": "string"
-                },
-                "offloadersDirectory": {
-                    "type": "string"
-                },
-                "managedLedgerOffloadMaxThreads": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadPrefetchRounds": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "managedLedgerOffloadThresholdInBytes": {
                     "type": "integer",
                     "format": "int64"
@@ -28513,6 +28634,20 @@
                         "BOOKKEEPER_FIRST",
                         "TIERED_STORAGE_FIRST"
                     ]
+                },
+                "offloadersDirectory": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadDriver": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadMaxThreads": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "managedLedgerOffloadPrefetchRounds": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "s3ManagedLedgerOffloadRegion": {
                     "type": "string"
@@ -29595,6 +29730,9 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
+                "generator": {
+                    "$ref": "#/definitions/JsonGenerator"
+                },
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -29612,9 +29750,6 @@
                 },
                 "defaultNullKeySerializer": {
                     "$ref": "#/definitions/JsonSerializerObject"
-                },
-                "generator": {
-                    "$ref": "#/definitions/JsonGenerator"
                 }
             }
         },
@@ -30277,26 +30412,26 @@
         "WorkerService": {
             "type": "object",
             "properties": {
-                "workerConfig": {
-                    "$ref": "#/definitions/WorkerConfig"
-                },
                 "sources": {
                     "$ref": "#/definitions/SourcesWorkerService"
                 },
                 "initialized": {
                     "type": "boolean"
                 },
-                "functions": {
-                    "$ref": "#/definitions/FunctionsWorkerService"
-                },
                 "sinks": {
                     "$ref": "#/definitions/SinksWorkerService"
+                },
+                "functions": {
+                    "$ref": "#/definitions/FunctionsWorkerService"
                 },
                 "functionsV2": {
                     "$ref": "#/definitions/FunctionsV2WorkerService"
                 },
                 "workers": {
                     "$ref": "#/definitions/WorkersWorkerService"
+                },
+                "workerConfig": {
+                    "$ref": "#/definitions/WorkerConfig"
                 }
             }
         },
