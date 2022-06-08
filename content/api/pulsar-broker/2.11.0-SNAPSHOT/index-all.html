@@ -2911,8 +2911,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/schema/SchemaStorageFormat.PositionInfo.html#ENTRYID_FIELD_NUMBER" class="member-name-link">ENTRYID_FIELD_NUMBER</a> - Static variable in class org.apache.pulsar.broker.service.schema.<a href="org/apache/pulsar/broker/service/schema/SchemaStorageFormat.PositionInfo.html" title="class in org.apache.pulsar.broker.service.schema">SchemaStorageFormat.PositionInfo</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/apache/pulsar/broker/service/EntryWrapper.html" class="type-name-link" title="class in org.apache.pulsar.broker.service">EntryWrapper</a> - Class in <a href="org/apache/pulsar/broker/service/package-summary.html">org.apache.pulsar.broker.service</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/loadbalance/impl/SimpleResourceUnit.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class org.apache.pulsar.broker.loadbalance.impl.<a href="org/apache/pulsar/broker/loadbalance/impl/SimpleResourceUnit.html" title="class in org.apache.pulsar.broker.loadbalance.impl">SimpleResourceUnit</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/Consumer.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/Consumer.html" title="class in org.apache.pulsar.broker.service">Consumer</a></dt>
@@ -3057,8 +3055,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Filter messages that are being sent to a consumers.</div>
 </dd>
-<dt><a href="org/apache/pulsar/broker/service/AbstractBaseDispatcher.html#filterEntriesForConsumer(java.util.Optional,int,java.util.List,org.apache.pulsar.broker.service.EntryBatchSizes,org.apache.pulsar.broker.service.SendMessageInfo,org.apache.pulsar.broker.service.EntryBatchIndexesAcks,org.apache.bookkeeper.mledger.ManagedCursor,boolean,org.apache.pulsar.broker.service.Consumer)" class="member-name-link">filterEntriesForConsumer(Optional&lt;EntryWrapper[]&gt;, int, List&lt;Entry&gt;, EntryBatchSizes, SendMessageInfo, EntryBatchIndexesAcks, ManagedCursor, boolean, Consumer)</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/AbstractBaseDispatcher.html" title="class in org.apache.pulsar.broker.service">AbstractBaseDispatcher</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="org/apache/pulsar/broker/service/AbstractBaseDispatcher.html#filterEntriesForConsumer(java.util.Optional,int,java.util.List,org.apache.pulsar.broker.service.EntryBatchSizes,org.apache.pulsar.broker.service.SendMessageInfo,org.apache.pulsar.broker.service.EntryBatchIndexesAcks,org.apache.bookkeeper.mledger.ManagedCursor,boolean,org.apache.pulsar.broker.service.Consumer)" class="member-name-link">filterEntriesForConsumer(Optional&lt;MessageMetadata[]&gt;, int, List&lt;Entry&gt;, EntryBatchSizes, SendMessageInfo, EntryBatchIndexesAcks, ManagedCursor, boolean, Consumer)</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/AbstractBaseDispatcher.html" title="class in org.apache.pulsar.broker.service">AbstractBaseDispatcher</a></dt>
+<dd>
+<div class="block">Filter entries with prefetched message metadata range so that there is no need to peek metadata from Entry.</div>
+</dd>
 <dt><a href="org/apache/pulsar/broker/service/plugin/EntryFilter.html#filterEntry(org.apache.bookkeeper.mledger.Entry,org.apache.pulsar.broker.service.plugin.FilterContext)" class="member-name-link">filterEntry(Entry, FilterContext)</a> - Method in interface org.apache.pulsar.broker.service.plugin.<a href="org/apache/pulsar/broker/service/plugin/EntryFilter.html" title="interface in org.apache.pulsar.broker.service.plugin">EntryFilter</a></dt>
 <dd>
 <div class="block">1.</div>
@@ -3249,8 +3249,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/apache/pulsar/broker/service/schema/BookkeeperSchemaStorage.html#get(java.lang.String,org.apache.pulsar.common.protocol.schema.SchemaVersion)" class="member-name-link">get(String, SchemaVersion)</a> - Method in class org.apache.pulsar.broker.service.schema.<a href="org/apache/pulsar/broker/service/schema/BookkeeperSchemaStorage.html" title="class in org.apache.pulsar.broker.service.schema">BookkeeperSchemaStorage</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/rest/RestMessagePublishContext.html#get(java.util.concurrent.CompletableFuture,org.apache.pulsar.broker.service.Topic,long)" class="member-name-link">get(CompletableFuture&lt;PositionImpl&gt;, Topic, long)</a> - Static method in class org.apache.pulsar.broker.rest.<a href="org/apache/pulsar/broker/rest/RestMessagePublishContext.html" title="class in org.apache.pulsar.broker.rest">RestMessagePublishContext</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="org/apache/pulsar/broker/service/EntryWrapper.html#get(org.apache.bookkeeper.mledger.Entry,org.apache.pulsar.common.api.proto.MessageMetadata)" class="member-name-link">get(Entry, MessageMetadata)</a> - Static method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/EntryWrapper.html" title="class in org.apache.pulsar.broker.service">EntryWrapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/Producer.html#getAccessMode()" class="member-name-link">getAccessMode()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/Producer.html" title="class in org.apache.pulsar.broker.service">Producer</a></dt>
 <dd>&nbsp;</dd>
@@ -3939,8 +3937,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/admin/v1/Namespaces.html#getEncryptionRequired(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getEncryptionRequired(String, String, String)</a> - Method in class org.apache.pulsar.broker.admin.v1.<a href="org/apache/pulsar/broker/admin/v1/Namespaces.html" title="class in org.apache.pulsar.broker.admin.v1">Namespaces</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/apache/pulsar/broker/service/EntryWrapper.html#getEntry()" class="member-name-link">getEntry()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/EntryWrapper.html" title="class in org.apache.pulsar.broker.service">EntryWrapper</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/transaction/buffer/impl/TransactionEntryImpl.html#getEntry()" class="member-name-link">getEntry()</a> - Method in class org.apache.pulsar.broker.transaction.buffer.impl.<a href="org/apache/pulsar/broker/transaction/buffer/impl/TransactionEntryImpl.html" title="class in org.apache.pulsar.broker.transaction.buffer.impl">TransactionEntryImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/transaction/buffer/TransactionEntry.html#getEntry()" class="member-name-link">getEntry()</a> - Method in interface org.apache.pulsar.broker.transaction.buffer.<a href="org/apache/pulsar/broker/transaction/buffer/TransactionEntry.html" title="interface in org.apache.pulsar.broker.transaction.buffer">TransactionEntry</a></dt>
@@ -4574,8 +4570,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/apache/pulsar/broker/admin/v3/Packages.html#getMeta(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,javax.ws.rs.container.AsyncResponse)" class="member-name-link">getMeta(String, String, String, String, String, AsyncResponse)</a> - Method in class org.apache.pulsar.broker.admin.v3.<a href="org/apache/pulsar/broker/admin/v3/Packages.html" title="class in org.apache.pulsar.broker.admin.v3">Packages</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/Consumer.html#getMetadata()" class="member-name-link">getMetadata()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/Consumer.html" title="class in org.apache.pulsar.broker.service">Consumer</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="org/apache/pulsar/broker/service/EntryWrapper.html#getMetadata()" class="member-name-link">getMetadata()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/EntryWrapper.html" title="class in org.apache.pulsar.broker.service">EntryWrapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/Producer.html#getMetadata()" class="member-name-link">getMetadata()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/Producer.html" title="class in org.apache.pulsar.broker.service">Producer</a></dt>
 <dd>&nbsp;</dd>
@@ -10240,8 +10234,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/EntryBatchIndexesAcks.html#recycle()" class="member-name-link">recycle()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/EntryBatchIndexesAcks.html" title="class in org.apache.pulsar.broker.service">EntryBatchIndexesAcks</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/apache/pulsar/broker/service/EntryWrapper.html#recycle()" class="member-name-link">recycle()</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/EntryWrapper.html" title="class in org.apache.pulsar.broker.service">EntryWrapper</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/persistent/PersistentDispatcherSingleActiveConsumer.ReadEntriesCtx.html#recycle()" class="member-name-link">recycle()</a> - Method in class org.apache.pulsar.broker.service.persistent.<a href="org/apache/pulsar/broker/service/persistent/PersistentDispatcherSingleActiveConsumer.ReadEntriesCtx.html" title="class in org.apache.pulsar.broker.service.persistent">PersistentDispatcherSingleActiveConsumer.ReadEntriesCtx</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/service/streamingdispatch/PendingReadEntryRequest.html#recycle()" class="member-name-link">recycle()</a> - Method in class org.apache.pulsar.broker.service.streamingdispatch.<a href="org/apache/pulsar/broker/service/streamingdispatch/PendingReadEntryRequest.html" title="class in org.apache.pulsar.broker.service.streamingdispatch">PendingReadEntryRequest</a></dt>
@@ -13119,10 +13111,6 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org/apache/pulsar/broker/admin/impl/BrokersBase.html#updateDynamicConfiguration(javax.ws.rs.container.AsyncResponse,java.lang.String,java.lang.String)" class="member-name-link">updateDynamicConfiguration(AsyncResponse, String, String)</a> - Method in class org.apache.pulsar.broker.admin.impl.<a href="org/apache/pulsar/broker/admin/impl/BrokersBase.html" title="class in org.apache.pulsar.broker.admin.impl">BrokersBase</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/apache/pulsar/broker/service/AbstractBaseDispatcher.html#updateEntryWrapperWithMetadata(org.apache.pulsar.broker.service.EntryWrapper%5B%5D,java.util.List)" class="member-name-link">updateEntryWrapperWithMetadata(EntryWrapper[], List&lt;Entry&gt;)</a> - Method in class org.apache.pulsar.broker.service.<a href="org/apache/pulsar/broker/service/AbstractBaseDispatcher.html" title="class in org.apache.pulsar.broker.service">AbstractBaseDispatcher</a></dt>
-<dd>
-<div class="block">Update Entries with the metadata of each entry.</div>
-</dd>
 <dt><a href="org/apache/pulsar/broker/admin/v2/Functions.html#updateFunction(java.lang.String,java.lang.String,java.lang.String,java.io.InputStream,org.glassfish.jersey.media.multipart.FormDataContentDisposition,java.lang.String,java.lang.String)" class="member-name-link">updateFunction(String, String, String, InputStream, FormDataContentDisposition, String, String)</a> - Method in class org.apache.pulsar.broker.admin.v2.<a href="org/apache/pulsar/broker/admin/v2/Functions.html" title="class in org.apache.pulsar.broker.admin.v2">Functions</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/apache/pulsar/broker/admin/impl/FunctionsBase.html#updateFunction(java.lang.String,java.lang.String,java.lang.String,java.io.InputStream,org.glassfish.jersey.media.multipart.FormDataContentDisposition,java.lang.String,org.apache.pulsar.common.functions.FunctionConfig,org.apache.pulsar.common.functions.UpdateOptionsImpl)" class="member-name-link">updateFunction(String, String, String, InputStream, FormDataContentDisposition, String, FunctionConfig, UpdateOptionsImpl)</a> - Method in class org.apache.pulsar.broker.admin.impl.<a href="org/apache/pulsar/broker/admin/impl/FunctionsBase.html" title="class in org.apache.pulsar.broker.admin.impl">FunctionsBase</a></dt>
