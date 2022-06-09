@@ -48,8 +48,13 @@ function _buildVersion() {
     echo "..." $buildVersion "build done..."
 }
 
-# force build all versions
-# BUILD_ALL_VERSION="1"
+CURRENT_HOUR=$(date +%H)
+CURRENT_HOUR=${CURRENT_HOUR#0}
+if [[ $CURRENT_HOUR -eq 18 ]]; then
+    BUILD_ALL_VERSION="1"
+else
+    BUILD_ALL_VERSION="0"
+fi
 
 # sometimes need build specify versions
 SUPPLEMENT_VERSIONS=$latest
