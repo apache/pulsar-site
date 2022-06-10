@@ -1109,14 +1109,14 @@
     "DeserializationConfig" : {
       "type" : "object",
       "properties" : {
+        "nodeFactory" : {
+          "$ref" : "#/definitions/JsonNodeFactory"
+        },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
         },
         "defaultPropertyInclusion" : {
           "$ref" : "#/definitions/Value"
-        },
-        "nodeFactory" : {
-          "$ref" : "#/definitions/JsonNodeFactory"
         },
         "deserializationFeatures" : {
           "type" : "integer",
@@ -1128,14 +1128,14 @@
         "attributes" : {
           "$ref" : "#/definitions/ContextAttributes"
         },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
+        },
         "rootName" : {
           "type" : "string"
         },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
-        },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1146,17 +1146,17 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "dateFormat" : {
+          "$ref" : "#/definitions/DateFormat"
+        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
-        },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
         },
-        "dateFormat" : {
-          "$ref" : "#/definitions/DateFormat"
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "base64Variant" : {
           "$ref" : "#/definitions/Base64Variant"
@@ -1181,20 +1181,20 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "nodeFactory" : {
+          "$ref" : "#/definitions/JsonNodeFactory"
+        },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
+        },
         "config" : {
           "$ref" : "#/definitions/DeserializationConfig"
         },
         "parser" : {
           "$ref" : "#/definitions/JsonParser"
         },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
-        },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
-        },
-        "nodeFactory" : {
-          "$ref" : "#/definitions/JsonNodeFactory"
         },
         "contextualType" : {
           "$ref" : "#/definitions/JavaType"
@@ -1452,6 +1452,13 @@
             "type" : "string"
           }
         },
+        "intValue" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "typeId" : {
+          "type" : "object"
+        },
         "booleanValue" : {
           "type" : "boolean"
         },
@@ -1477,13 +1484,6 @@
         },
         "objectId" : {
           "type" : "object"
-        },
-        "typeId" : {
-          "type" : "object"
-        },
-        "intValue" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
@@ -1804,8 +1804,8 @@
         "factory" : {
           "$ref" : "#/definitions/JsonFactory"
         },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
+        "injectableValues" : {
+          "$ref" : "#/definitions/InjectableValues"
         },
         "serializationConfig" : {
           "$ref" : "#/definitions/SerializationConfig"
@@ -1828,11 +1828,8 @@
         "visibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
-        "propertyNamingStrategy" : {
-          "$ref" : "#/definitions/PropertyNamingStrategy"
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
         },
         "nodeFactory" : {
           "$ref" : "#/definitions/JsonNodeFactory"
@@ -1843,8 +1840,11 @@
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
         },
-        "injectableValues" : {
-          "$ref" : "#/definitions/InjectableValues"
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
+        },
+        "propertyNamingStrategy" : {
+          "$ref" : "#/definitions/PropertyNamingStrategy"
         }
       }
     },
@@ -1973,14 +1973,14 @@
         "attributes" : {
           "$ref" : "#/definitions/ContextAttributes"
         },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
+        },
         "rootName" : {
           "type" : "string"
         },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
-        },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1991,17 +1991,17 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "dateFormat" : {
+          "$ref" : "#/definitions/DateFormat"
+        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
-        },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
         },
-        "dateFormat" : {
-          "$ref" : "#/definitions/DateFormat"
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "base64Variant" : {
           "$ref" : "#/definitions/Base64Variant"
@@ -2026,11 +2026,11 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
-        "config" : {
-          "$ref" : "#/definitions/SerializationConfig"
-        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
+        },
+        "config" : {
+          "$ref" : "#/definitions/SerializationConfig"
         },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
