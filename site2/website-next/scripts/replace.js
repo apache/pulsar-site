@@ -156,6 +156,8 @@ const from = [
   /\/api\/admin/g,
 
   /@pulsar:version_number@/g,
+
+  /\[([^\]]*)\]\((\/tools\/pulsar[^\)]*)\)/g,
 ];
 
 const options = {
@@ -186,7 +188,10 @@ const options = {
     clientVersionUrl(`${latestVersion}`, "pulsar-functions"),
     clientVersionUrl(`${latestVersion}`, "client"),
     clientVersionUrl(`${latestVersion}`, "admin"),
+
     `${latestVersion}`,
+
+    '<a href="$2" target="_blank">$1</a>',
   ],
   dry: false,
 };
@@ -232,8 +237,9 @@ for (v of versions) {
       clientVersionUrl(`${v}`, "client"),
       clientVersionUrl(`${v}`, "admin"),
       `${v}`,
+      '<a href="$2" target="_blank">$1</a>',
     ],
     dry: false,
   };
-  doReplace(opts);
+  // doReplace(opts);
 }
