@@ -311,6 +311,10 @@ module.exports = {
               label: "Sponsorship",
               href: "https://www.apache.org/foundation/sponsorship",
             },
+	    {
+              label: "Privacy",
+              href: "https://www.apache.org/foundation/policies/privacy.html",
+            },
           ],
         },
         {
