@@ -241,5 +241,5 @@ for (v of versions) {
     ],
     dry: false,
   };
-  // doReplace(opts);
+  doReplace(opts);
 }
