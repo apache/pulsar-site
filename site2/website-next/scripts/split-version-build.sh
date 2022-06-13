@@ -56,8 +56,6 @@ else
     BUILD_ALL_VERSION="0"
 fi
 
-BUILD_ALL_VERSION="1"
-
 # sometimes need build specify versions
 SUPPLEMENT_VERSIONS=$latest
 
