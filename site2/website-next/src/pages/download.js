@@ -266,14 +266,26 @@ export default function page(props) {
           <h2 id="latest">
             <Translate>Current version (Stable)</Translate> {latestVersion}
           </h2>
+          <ReactMarkdown>
+            You can download all previous versions of Pulsar
+             [here](https://archive.apache.org/dist/pulsar/).
+          </ReactMarkdown>
           <ReleaseTable data={latest}></ReleaseTable>
           <h3>
             <Translate>Tiered storage offloaders</Translate>
           </h3>
+          <ReactMarkdown>
+            You can download all previous versions of tiered storage offloaders
+             [here](https://archive.apache.org/dist/pulsar/).
+          </ReactMarkdown>
           <ReleaseTable data={offloaders}></ReleaseTable>
           <h3 id="connectors">
             <Translate>Pulsar IO connectors</Translate>
           </h3>
+          <ReactMarkdown>
+          You can download all previous versions of connectors
+             [here](https://archive.apache.org/dist/pulsar/).
+          </ReactMarkdown>
           <ConnectorTable
             data={connectors.map((connector) => {
               return {
