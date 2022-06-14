@@ -1168,19 +1168,19 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
+                "subscription": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "commandData": {
-                    "type": "string"
-                },
                 "httpAuthType": {
                     "type": "string"
                 },
-                "subscription": {
+                "commandData": {
                     "type": "string"
                 }
             }
@@ -1480,11 +1480,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
-                },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -1801,19 +1801,19 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
+                "lastInvocation": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
                 "userMetrics": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "number",
                         "format": "double"
                     }
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
-                "lastInvocation": {
-                    "type": "integer",
-                    "format": "int64"
                 },
                 "receivedTotal": {
                     "type": "integer",
@@ -2144,6 +2144,9 @@
                 "javaLangObject": {
                     "type": "boolean"
                 },
+                "enumType": {
+                    "type": "boolean"
+                },
                 "containerType": {
                     "type": "boolean"
                 },
@@ -2172,9 +2175,6 @@
                     "type": "boolean"
                 },
                 "mapLikeType": {
-                    "type": "boolean"
-                },
-                "enumType": {
                     "type": "boolean"
                 },
                 "contentType": {
@@ -2478,11 +2478,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "unwrappingSerializer": {
-                    "type": "boolean"
-                },
                 "delegatee": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "unwrappingSerializer": {
+                    "type": "boolean"
                 }
             }
         },
@@ -2605,26 +2605,6 @@
                         "format": "byte"
                     }
                 },
-                "topicName": {
-                    "type": "string"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "publishTime": {
                     "type": "integer",
                     "format": "int64"
@@ -2659,6 +2639,26 @@
                 },
                 "replicated": {
                     "type": "boolean"
+                },
+                "topicName": {
+                    "type": "string"
+                },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -2788,6 +2788,9 @@
                 "factory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
+                },
                 "serializationConfig": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -2808,9 +2811,6 @@
                 },
                 "visibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
-                },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
                 },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
@@ -3083,11 +3083,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
-                },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
