@@ -24,10 +24,17 @@ We use a review-then-commit workflow in Pulsar for all contributions.
 
 1. **Code:** code changes are always welcomed. 
 2. **Doc**: it is worth taking the time to make users know your code changes. Pulsar's long-term success rests on its ease of use, maintainability, etc. 
-3. **Review:** Submit a pull request with your contribution to our
+   
+:::tip
+
+For how to make contributions to Pulsar documentation, see [Pulsar Documentation Contribution Guide](https://docs.google.com/document/d/11DTnNPpvcPrebLkMAFcDEIFlD8ARD-k6F-LXoIwdD9Y/edit#).
+
+:::
+
+1. **Review:** Submit a pull request with your contribution to our
    [GitHub Repo](https://github.com/apache/pulsar). Work with a committer to review and
    iterate on the code, if needed.
-4. **Commit:** Once at least 2 Pulsar committers have approved the pull request, a Pulsar committer
+2. **Commit:** Once at least 2 Pulsar committers have approved the pull request, a Pulsar committer
     will merge it into the master branch (and potentially backport to stable branches in case of
     bug fixes).
 
