@@ -92,11 +92,6 @@ jobs:
       - name: Generate swagger json file
         run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
-      - name: Setup Node 
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
