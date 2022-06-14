@@ -197,7 +197,7 @@ export default function Community(props) {
                 </div>
                 <div className="md:w-2/3">
                   <h3>Mailing Lists</h3>
-                  <p>The primary place for discussions is on the mailing lists which includes Pulsar committers.</p>
+                  <p>The primary place for discussions is on the Pulsar mailing lists.</p>
                     <div className="flex flex-col md:flex-row">
                       <div className="discussion-box md:w-1/2 md:pr-2">
                         <h4>User List</h4>
@@ -230,7 +230,7 @@ export default function Community(props) {
                             href="mailto:dev-unsubscribe@pulsar.apache.org"
                           >Unsubscribe</PillButton>
                        
-                        <p><strong>Access the <a  className="secondary-cta" href="http://mail-archives.apache.org/mod_mbox/pulsar-dev/">Developer List Archives</a>.</strong></p>
+                        <p><strong>Access the <a  className="secondary-cta" href="https://lists.apache.org/list.html?dev@pulsar.apache.org">Developer List Archives</a>.</strong></p>
                       </div>
                     </div>
 
@@ -246,12 +246,19 @@ export default function Community(props) {
                   <div className="">
                       <p>The Pulsar community maintains its own Slack instance (separate from ASF Slack) used for informal discussions for developers and users. </p>
                       <p>Slack channels are great for quick questions or discussions on specialized topics. Remember that we strongly encourage communication via the mailing lists, and we prefer to discuss more complex subjects by email. Developers should be careful to move or duplicate all official or useful discussions to the issue tracking system and/or the dev mailing list.</p>
-                      
+                      <p>Not signed up?  Use our Heroku App to self-register </p>                      
                         <PillButton
                           variant=""
                           target="_blank"
-                          href="https://www.google.com/url?q=https://apache-pulsar.slack.com/&sa=D&source=docs&ust=1641865410610919&usg=AOvVaw3iDpbML7pbfCR7HJBqoUck"
-                        >PULSAR SLACK</PillButton>
+                          href="https://apache-pulsar.slack.com/">
+                          PULSAR SLACK
+                        </PillButton>
+                        <PillButton
+                          variant="grey"
+                          target="_blank"
+                          href="https://apache-pulsar.herokuapp.com/">
+                          PULSAR SLACK SIGN-UP
+                        </PillButton>
                   </div>
 
                 </div>
