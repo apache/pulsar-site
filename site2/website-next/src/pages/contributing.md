@@ -31,10 +31,10 @@ For how to make contributions to Pulsar documentation, see [Pulsar Documentation
 
 :::
 
-1. **Review:** Submit a pull request with your contribution to our
+3. **Review:** Submit a pull request with your contribution to our
    [GitHub Repo](https://github.com/apache/pulsar). Work with a committer to review and
    iterate on the code, if needed.
-2. **Commit:** Once at least 2 Pulsar committers have approved the pull request, a Pulsar committer
+4. **Commit:** Once at least 2 Pulsar committers have approved the pull request, a Pulsar committer
     will merge it into the master branch (and potentially backport to stable branches in case of
     bug fixes).
 
