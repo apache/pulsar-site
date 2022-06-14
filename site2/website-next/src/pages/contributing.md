@@ -290,17 +290,17 @@ Follow the [README](https://github.com/apache/pulsar-site/tree/main/site2/websit
 #### Updating user logo
 The Apache Pulsar Community welcomes all users to update their company logos on Pulsar website. If your team or organization has adopted Pulsar in production, you can update your company logos on [Pulsar website](https://pulsar.apache.org/en/powered-by/).
 
-To update your company logo, follow these steps:
-1. Open [link](https://github.com/apache/pulsar/blob/master/site2/website/data/users.js) in your browser, then click the **Edit** icon to fork Pulsar repo, create a new branch and edit this file.
+To update your company's logo, follow these steps:
+1. Open [link](https://github.com/apache/pulsar-site/tree/main/site2/website-next/data/users.js) in your browser, then click the **Edit** icon to fork Pulsar repo, create a new branch and edit this file.
 2. Add your company’s information at the end of file. 
 
 	Example:
 	```
 	{
-	name: 'StreamNative',
-	url: 'https://streamnative.io/',
-	logo: 'https://streamnative.io/static/images/streamnative-logo-white-bakground.png',
-	logo_white: true
+	    name: 'My Company's Name',
+	    url: 'https://mycompanyname.com/',
+	    logo: 'https://mycompanyname.com/logo/myCompanyNamelong.svg',
+	    logo_white: true
 	}
 	```
 
@@ -314,7 +314,7 @@ To update your company logo, follow these steps:
 ## Becoming a committer
 
 Committers are community members that have write access to the project’s
-repositories, i.e., they can modify the code, documentation, and website
+repositories, i.e. they can modify the code, documentation, and website
 by themselves and also accept other contributions.
 
 There is no strict protocol for becoming a committer. Candidates for new
