@@ -53,8 +53,6 @@ function _buildVersion() {
 yarn write-translations
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
-#force set CURRENT_HOUR for testing crowdin download and build all
-CURRENT_HOUR=18
 echo "------ crowdin envs:" "CROWDIN_UPLOAD: "$CROWDIN_UPLOAD "CROWDIN_DOWNLOAD: "$CROWDIN_DOWNLOAD "CURRENT_HOUR: "$CURRENT_HOUR
 if [[ $CURRENT_HOUR -eq 0 ]]; then
     echo "------ exec crowdin upload"
@@ -62,6 +60,9 @@ if [[ $CURRENT_HOUR -eq 0 ]]; then
 else
     echo "------ skip crowdin upload"
 fi
+
+#force set CURRENT_HOUR for testing crowdin download and build all
+CURRENT_HOUR=18
 if [[ $CURRENT_HOUR -eq 18 ]]; then
     echo "------ exec crowdin download"
     yarn crowdin-download
