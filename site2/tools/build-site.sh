@@ -72,25 +72,6 @@ cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 yarn
 
 if [ -n "$NEXT" ]; then
-  yarn write-translations
-  CURRENT_HOUR=$(date +%H)
-  CURRENT_HOUR=${CURRENT_HOUR#0}
-  echo "------ crowdin envs:" "CROWDIN_UPLOAD: "$CROWDIN_UPLOAD "CROWDIN_DOWNLOAD: "$CROWDIN_DOWNLOAD "CURRENT_HOUR: "$CURRENT_HOUR
-  if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -eq 0 ]]; then
-    echo "------ exec crowdin upload"
-    yarn run crowdin-upload
-  else
-    echo "------ skip crowdin upload"
-  fi
-  if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -eq 18 ]]; then
-    echo "------ exec crowdin download"
-    yarn crowdin-download
-    echo 'all' >scripts/.language
-  else
-    echo "------ skip crowdin download"
-    echo 'en' >scripts/.language
-  fi
-
   node scripts/replace.js
   node scripts/split-swagger-by-version.js
   # Because there are too many versions of the document, the memory overflows during the full build.

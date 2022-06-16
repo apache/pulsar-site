@@ -63,6 +63,8 @@ jobs:
 
           git remote -v
 
-          git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
+          # git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
+          git commit --allow-empty -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
+          git push -q origin main
 
           echo "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
