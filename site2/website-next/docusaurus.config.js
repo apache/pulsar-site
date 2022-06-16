@@ -6,7 +6,7 @@ const linkifyRegex = require("./plugins/remark-linkify-regex");
 const versions = require("./versions.json");
 const versionsMap = {
   ..._.keyBy(
-    versions.slice(1).map(item => {
+    versions.slice(1).map((item) => {
       return {
         label: item,
         path: item,
@@ -21,8 +21,14 @@ const versionsMap = {
 };
 
 let buildVersions = ["current"];
+let buildLanguages = ["en"];
 try {
   buildVersions = require("./.build-versions.json");
+} catch (error) {
+  //do nothing
+}
+try {
+  buildLanguages = require("./.build-languages.json");
 } catch (error) {
   //do nothing
 }
@@ -129,7 +135,7 @@ module.exports = {
   },
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
+    locales: buildLanguages,
     localeConfigs: {
       "zh-CN": {
         label: "简体中文",
@@ -311,7 +317,7 @@ module.exports = {
               label: "Sponsorship",
               href: "https://www.apache.org/foundation/sponsorship",
             },
-	    {
+            {
               label: "Privacy",
               href: "https://www.apache.org/foundation/policies/privacy.html",
             },

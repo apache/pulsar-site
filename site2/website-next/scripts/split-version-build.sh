@@ -4,14 +4,14 @@ node scripts/split-version.js
 
 locals=("en" "zh-CN" "zh-TW" "ja" "ko" "fr")
 latest=$(cat scripts/.latest)
-buildLanguage=$(cat scripts/.language)
+BUILD_ALL_LANGUAGE="en"
 buildVersion="next"
 
 echo "changed files: "
 echo $@
 
 function _build() {
-    if [[ "$buildLanguage" == "en" ]]; then
+    if [[ "$BUILD_ALL_LANGUAGE" == "0" ]]; then
         echo "only build en"
         yarn build --locale en
     else
@@ -23,9 +23,11 @@ function _build() {
 function _buildVersion() {
     if [[ $buildVersion = "next" ]]; then
         echo "..." ${buildVersion} "and" $latest" begin build..."
+        echo "[\"en\", \"zh-CN\", \"zh-TW\", \"ja\", \"fr\", \"ko\"]" >./.build-languages.json
         echo "[\"current\", \"${latest}\"]" >.build-versions.json
     else
         echo "..." $buildVersion "begin build..."
+        echo "[\"en\", \"zh-CN\"]" >./.build-languages.json
         echo "[\"${buildVersion}\"]" >.build-versions.json
     fi
 
@@ -48,16 +50,28 @@ function _buildVersion() {
     echo "..." $buildVersion "build done..."
 }
 
+yarn write-translations
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
+#force set CURRENT_HOUR for testing crowdin download and build all
+CURRENT_HOUR=18
+echo "------ crowdin envs:" "CROWDIN_UPLOAD: "$CROWDIN_UPLOAD "CROWDIN_DOWNLOAD: "$CROWDIN_DOWNLOAD "CURRENT_HOUR: "$CURRENT_HOUR
+if [[ $CURRENT_HOUR -eq 0 ]]; then
+    echo "------ exec crowdin upload"
+    yarn run crowdin-upload
+else
+    echo "------ skip crowdin upload"
+fi
 if [[ $CURRENT_HOUR -eq 18 ]]; then
+    echo "------ exec crowdin download"
+    yarn crowdin-download
+    BUILD_ALL_LANGUAGE="1"
     BUILD_ALL_VERSION="1"
 else
+    echo "------ skip crowdin download"
+    BUILD_ALL_LANGUAGE="0"
     BUILD_ALL_VERSION="0"
 fi
-
-# sometimes need build specify versions
-SUPPLEMENT_VERSIONS=$latest
 
 # Build only the versions that has changed
 # Build next version that has any changed
