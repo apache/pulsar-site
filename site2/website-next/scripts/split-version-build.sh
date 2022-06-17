@@ -62,7 +62,7 @@ else
 fi
 
 #force set CURRENT_HOUR for testing crowdin download and build all
-CURRENT_HOUR=18
+# CURRENT_HOUR=18
 if [[ $CURRENT_HOUR -eq 18 ]]; then
     echo "------ exec crowdin download"
     yarn crowdin-download
