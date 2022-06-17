@@ -357,6 +357,12 @@ module.exports = {
   ],
   presets: [
     [
+      "@docusaurus/plugin-client-redirects",
+      {
+        fromExtensions: [""],
+      },
+    ],
+    [
       "@docusaurus/preset-classic",
       {
         docs: {
