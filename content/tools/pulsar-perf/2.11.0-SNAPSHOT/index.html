@@ -32,11 +32,6 @@
 </thead>
 <tbody>
 <tr>
-<td><code>-s, --size</code></td>
-<td>Message size (bytes)</td>
-<td>1024</td>
-</tr>
-<tr>
 <td><code>-ch, --chunking</code></td>
 <td>Should split the message and publish in chunks if message size is larger than allowed max size</td>
 <td>false</td>
@@ -52,44 +47,14 @@
 <td>-</td>
 </tr>
 <tr>
-<td><code>--auth-plugin</code></td>
-<td>Authentication plugin class name</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>--trust-cert-file</code></td>
-<td>Path for the trusted TLS certificate file</td>
-<td></td>
-</tr>
-<tr>
-<td><code>-d, --delay</code></td>
-<td>Mark messages with a given delay in seconds</td>
-<td>0</td>
-</tr>
-<tr>
-<td><code>-b, --batch-time-window</code></td>
-<td>Batch messages in &#39;x&#39; ms window (Default: 1ms)</td>
-<td>1.0</td>
-</tr>
-<tr>
 <td><code>-au, --admin-url</code></td>
 <td>Pulsar Admin URL</td>
 <td>null</td>
 </tr>
 <tr>
-<td><code>-h, --help</code></td>
-<td>Help message</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>-am, --access-mode</code></td>
-<td>Producer access mode</td>
-<td>Shared</td>
-</tr>
-<tr>
-<td><code>-time, --test-duration</code></td>
-<td>Test duration in secs. If &lt;= 0, it will keep publishing</td>
-<td>0</td>
+<td><code>-cf, --conf-file</code></td>
+<td>Configuration file</td>
+<td>null</td>
 </tr>
 <tr>
 <td><code>-pn, --producer-name</code></td>
@@ -112,83 +77,13 @@
 <td>50</td>
 </tr>
 <tr>
-<td><code>-n, --num-producers</code></td>
-<td>Number of producers (per topic)</td>
-<td>1</td>
-</tr>
-<tr>
-<td><code>-np, --partitions</code></td>
-<td>Create partitioned topics with the given number of partitions, set 0 to not try to create the topic</td>
+<td><code>--tls-hostname-verification</code></td>
+<td>Enable TLS hostname verification</td>
 <td>null</td>
 </tr>
 <tr>
-<td><code>-m, --num-messages</code></td>
-<td>Number of messages to publish in total. If &lt;= 0, it will keep publishing</td>
-<td>0</td>
-</tr>
-<tr>
-<td><code>-z, --compression</code></td>
-<td>Compress messages payload</td>
-<td>NONE</td>
-</tr>
-<tr>
-<td><code>--warmup-time</code></td>
-<td>Warm-up time in seconds (Default: 1 sec)</td>
-<td>1.0</td>
-</tr>
-<tr>
-<td><code>-txn, --txn-enable</code></td>
-<td>Enable or disable the transaction</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>-fp, --format-payload</code></td>
-<td>Format %i as a message index in the stream from producer and/or %t as the timestamp nanoseconds.</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>-bm, --batch-max-messages</code></td>
-<td>Maximum number of messages per batch</td>
-<td>1000</td>
-</tr>
-<tr>
-<td><code>--send-timeout</code></td>
-<td>Set the sendTimeout value default 0 to keep compatibility with previous version of pulsar-perf</td>
-<td>0</td>
-</tr>
-<tr>
-<td><code>-u, --service-url</code></td>
-<td>Pulsar Service URL</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>--auth-params</code></td>
-<td>Authentication parameters, whose format is determined by the implementation of method <code>configure</code> in authentication plugin class, for example &quot;key1:val1,key2:val2&quot; or &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}.</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>-o, --max-outstanding</code></td>
-<td>Max number of outstanding messages</td>
-<td>0</td>
-</tr>
-<tr>
-<td><code>-abort</code></td>
-<td>Abort the transaction. (After --txn-enable setting to true, -abort takes effect)</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>-t, --num-topic</code></td>
-<td>Number of topics</td>
-<td>1</td>
-</tr>
-<tr>
-<td><code>-tto, --txn-timeout</code></td>
-<td>Set the time value of transaction timeout, and the time unit is second. (After --txn-enable setting to true, --txn-timeout takes effect)</td>
-<td>10</td>
-</tr>
-<tr>
-<td><code>--listener-name</code></td>
-<td>Listener name for the broker.</td>
+<td><code>--tls-allow-insecure</code></td>
+<td>Allow insecure TLS connection</td>
 <td>null</td>
 </tr>
 <tr>
@@ -202,6 +97,26 @@
 <td>0</td>
 </tr>
 <tr>
+<td><code>-np, --partitions</code></td>
+<td>Create partitioned topics with the given number of partitions, set 0 to not try to create the topic</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-txn, --txn-enable</code></td>
+<td>Enable or disable the transaction</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>-fp, --format-payload</code></td>
+<td>Format %i as a message index in the stream from producer and/or %t as the timestamp nanoseconds.</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>-t, --num-topic</code></td>
+<td>Number of topics</td>
+<td>1</td>
+</tr>
+<tr>
 <td><code>-v, --encryption-key-value-file</code></td>
 <td>The file which contains the public key to encrypt payload</td>
 <td>null</td>
@@ -212,8 +127,8 @@
 <td>4194304</td>
 </tr>
 <tr>
-<td><code>--histogram-file</code></td>
-<td>HdrHistogram output file</td>
+<td><code>-u, --service-url</code></td>
+<td>Pulsar Service URL</td>
 <td>null</td>
 </tr>
 <tr>
@@ -225,11 +140,6 @@
 <td><code>-ef, --exit-on-failure</code></td>
 <td>Exit from the process on publish failure (default: disable)</td>
 <td>false</td>
-</tr>
-<tr>
-<td><code>-cf, --conf-file</code></td>
-<td>Configuration file</td>
-<td>null</td>
 </tr>
 <tr>
 <td><code>-p, --max-outstanding-across-partitions</code></td>
@@ -247,21 +157,6 @@
 <td>null</td>
 </tr>
 <tr>
-<td><code>--auth_plugin</code></td>
-<td>Authentication plugin class name</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>--tls-allow-insecure</code></td>
-<td>Allow insecure TLS connection</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>-ioThreads, --num-io-threads</code></td>
-<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
-<td>1</td>
-</tr>
-<tr>
 <td><code>-c, --max-connections</code></td>
 <td>Max number of TCP connections to a single broker</td>
 <td>1</td>
@@ -270,6 +165,121 @@
 <td><code>-e, --payload-delimiter</code></td>
 <td>The delimiter used to split lines when using payload from a file</td>
 <td>\n</td>
+</tr>
+<tr>
+<td><code>-s, --size</code></td>
+<td>Message size (bytes)</td>
+<td>1024</td>
+</tr>
+<tr>
+<td><code>-d, --delay</code></td>
+<td>Mark messages with a given delay in seconds</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>-b, --batch-time-window</code></td>
+<td>Batch messages in &#39;x&#39; ms window (Default: 1ms)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>-am, --access-mode</code></td>
+<td>Producer access mode</td>
+<td>Shared</td>
+</tr>
+<tr>
+<td><code>-time, --test-duration</code></td>
+<td>Test duration in secs. If &lt;= 0, it will keep publishing</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>--auth-params</code></td>
+<td>Authentication parameters, whose format is determined by the implementation of method <code>configure</code> in authentication plugin class, for example &quot;key1:val1,key2:val2&quot; or &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}.</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-ioThreads, --num-io-threads</code></td>
+<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>-n, --num-producers</code></td>
+<td>Number of producers (per topic)</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>-m, --num-messages</code></td>
+<td>Number of messages to publish in total. If &lt;= 0, it will keep publishing</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>-z, --compression</code></td>
+<td>Compress messages payload</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td><code>--warmup-time</code></td>
+<td>Warm-up time in seconds (Default: 1 sec)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>-bm, --batch-max-messages</code></td>
+<td>Maximum number of messages per batch</td>
+<td>1000</td>
+</tr>
+<tr>
+<td><code>--send-timeout</code></td>
+<td>Set the sendTimeout value default 0 to keep compatibility with previous version of pulsar-perf</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>-o, --max-outstanding</code></td>
+<td>Max number of outstanding messages</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>-abort</code></td>
+<td>Abort the transaction. (After --txn-enable setting to true, -abort takes effect)</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>-tto, --txn-timeout</code></td>
+<td>Set the time value of transaction timeout, and the time unit is second. (After --txn-enable setting to true, --txn-timeout takes effect)</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>--trust-cert-file</code></td>
+<td>Path for the trusted TLS certificate file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--auth-plugin</code></td>
+<td>Authentication plugin class name</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--histogram-file</code></td>
+<td>HdrHistogram output file</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--auth_plugin</code></td>
+<td>Authentication plugin class name</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--listener-name</code></td>
+<td>Listener name for the broker.</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-h, --help</code></td>
+<td>Help message</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>-lt, --num-listener-threads</code></td>
+<td>Set the number of threads to be used for message listeners</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -294,11 +304,6 @@
 <td><code>-sp, --subscription-position</code></td>
 <td>Subscription position</td>
 <td>Latest</td>
-</tr>
-<tr>
-<td><code>-h, --help</code></td>
-<td>Help message</td>
-<td>false</td>
 </tr>
 <tr>
 <td><code>--replicated</code></td>
@@ -326,11 +331,6 @@
 <td>1</td>
 </tr>
 <tr>
-<td><code>-ioThreads, --num-io-threads</code></td>
-<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
-<td>1</td>
-</tr>
-<tr>
 <td><code>-r, --rate</code></td>
 <td>Simulate a slow message consumer (rate in msg/s)</td>
 <td>0.0</td>
@@ -346,18 +346,13 @@
 <td>0</td>
 </tr>
 <tr>
+<td><code>-cf, --conf-file</code></td>
+<td>Configuration file</td>
+<td>null</td>
+</tr>
+<tr>
 <td><code>--auth_plugin</code></td>
 <td>Authentication plugin class name</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>--auth-params</code></td>
-<td>Authentication parameters, whose format is determined by the implementation of method <code>configure</code> in authentication plugin class, for example &quot;key1:val1,key2:val2&quot; or &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}.</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>--tls-allow-insecure</code></td>
-<td>Allow insecure TLS connection</td>
 <td>null</td>
 </tr>
 <tr>
@@ -366,14 +361,39 @@
 <td>1</td>
 </tr>
 <tr>
+<td><code>--tls-hostname-verification</code></td>
+<td>Enable TLS hostname verification</td>
+<td>null</td>
+</tr>
+<tr>
 <td><code>--acks-delay-millis</code></td>
 <td>Acknowledgements grouping delay in millis</td>
 <td>100</td>
 </tr>
 <tr>
-<td><code>-cf, --conf-file</code></td>
-<td>Configuration file</td>
+<td><code>--tls-allow-insecure</code></td>
+<td>Allow insecure TLS connection</td>
 <td>null</td>
+</tr>
+<tr>
+<td><code>--auth-params</code></td>
+<td>Authentication parameters, whose format is determined by the implementation of method <code>configure</code> in authentication plugin class, for example &quot;key1:val1,key2:val2&quot; or &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}.</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-bw, --busy-wait</code></td>
+<td>Enable Busy-Wait on the Pulsar client</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>-i, --stats-interval-seconds</code></td>
+<td>Statistics Interval Seconds. If 0, statistics will be disabled</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>-ioThreads, --num-io-threads</code></td>
+<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
+<td>1</td>
 </tr>
 <tr>
 <td><code>-tto, --txn-timeout</code></td>
@@ -401,16 +421,6 @@
 <td>0</td>
 </tr>
 <tr>
-<td><code>--auth-plugin</code></td>
-<td>Authentication plugin class name</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>-i, --stats-interval-seconds</code></td>
-<td>Statistics Interval Seconds. If 0, statistics will be disabled</td>
-<td>0</td>
-</tr>
-<tr>
 <td><code>-abort</code></td>
 <td>Abort the transaction. (After --txn-enable setting to true, -abort takes effect)</td>
 <td>false</td>
@@ -426,9 +436,9 @@
 <td>true</td>
 </tr>
 <tr>
-<td><code>-u, --service-url</code></td>
-<td>Pulsar Service URL</td>
-<td>null</td>
+<td><code>--trust-cert-file</code></td>
+<td>Path for the trusted TLS certificate file</td>
+<td></td>
 </tr>
 <tr>
 <td><code>-s, --subscriber-name</code></td>
@@ -441,9 +451,9 @@
 <td>false</td>
 </tr>
 <tr>
-<td><code>-c, --max-connections</code></td>
-<td>Max number of TCP connections to a single broker</td>
-<td>1</td>
+<td><code>--auth-plugin</code></td>
+<td>Authentication plugin class name</td>
+<td>null</td>
 </tr>
 <tr>
 <td><code>-p, --receiver-queue-size-across-partitions</code></td>
@@ -451,9 +461,9 @@
 <td>50000</td>
 </tr>
 <tr>
-<td><code>--trust-cert-file</code></td>
-<td>Path for the trusted TLS certificate file</td>
-<td></td>
+<td><code>-u, --service-url</code></td>
+<td>Pulsar Service URL</td>
+<td>null</td>
 </tr>
 <tr>
 <td><code>-q, --receiver-queue-size</code></td>
@@ -466,11 +476,6 @@
 <td>false</td>
 </tr>
 <tr>
-<td><code>-lt, --num-listener-threads</code></td>
-<td>Set the number of threads to be used for message listeners</td>
-<td>1</td>
-</tr>
-<tr>
 <td><code>--histogram-file</code></td>
 <td>HdrHistogram output file</td>
 <td>null</td>
@@ -481,9 +486,9 @@
 <td>null</td>
 </tr>
 <tr>
-<td><code>-bw, --busy-wait</code></td>
-<td>Enable Busy-Wait on the Pulsar client</td>
-<td>false</td>
+<td><code>-c, --max-connections</code></td>
+<td>Max number of TCP connections to a single broker</td>
+<td>1</td>
 </tr>
 <tr>
 <td><code>--listener-name</code></td>
@@ -491,9 +496,19 @@
 <td>null</td>
 </tr>
 <tr>
+<td><code>-h, --help</code></td>
+<td>Help message</td>
+<td>false</td>
+</tr>
+<tr>
 <td><code>-ac, --auto_ack_chunk_q_full</code></td>
 <td>Auto ack for oldest message on queue is full</td>
 <td>false</td>
+</tr>
+<tr>
+<td><code>-lt, --num-listener-threads</code></td>
+<td>Set the number of threads to be used for message listeners</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -525,19 +540,9 @@
 <td>false</td>
 </tr>
 <tr>
-<td><code>-ioThreads, --num-io-threads</code></td>
-<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
-<td>1</td>
-</tr>
-<tr>
 <td><code>-nmc, --numMessage-perTransaction-consume</code></td>
 <td>Set the number of messages consumed in a transaction.If transaction disabled, it means the number of messages consumed in a task.</td>
 <td>1</td>
-</tr>
-<tr>
-<td><code>-h, --help</code></td>
-<td>Help message</td>
-<td>false</td>
 </tr>
 <tr>
 <td><code>-nmp, --numMessage-perTransaction-produce</code></td>
@@ -550,13 +555,23 @@
 <td>1</td>
 </tr>
 <tr>
+<td><code>-cf, --conf-file</code></td>
+<td>Configuration file</td>
+<td>null</td>
+</tr>
+<tr>
 <td><code>-time, --test-duration</code></td>
 <td>Test duration (in second). 0 means keeping publishing</td>
 <td>0</td>
 </tr>
 <tr>
-<td><code>-cf, --conf-file</code></td>
-<td>Configuration file</td>
+<td><code>--tls-hostname-verification</code></td>
+<td>Enable TLS hostname verification</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--tls-allow-insecure</code></td>
+<td>Allow insecure TLS connection</td>
 <td>null</td>
 </tr>
 <tr>
@@ -565,14 +580,24 @@
 <td>null</td>
 </tr>
 <tr>
-<td><code>--auth-plugin</code></td>
-<td>Authentication plugin class name</td>
-<td>null</td>
+<td><code>-bw, --busy-wait</code></td>
+<td>Enable Busy-Wait on the Pulsar client</td>
+<td>false</td>
 </tr>
 <tr>
 <td><code>-np, --partitions</code></td>
 <td>Create partitioned topics with a given number of partitions, 0 meansnot trying to create a topic</td>
 <td>null</td>
+</tr>
+<tr>
+<td><code>-i, --stats-interval-seconds</code></td>
+<td>Statistics Interval Seconds. If 0, statistics will be disabled</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>-ioThreads, --num-io-threads</code></td>
+<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
+<td>1</td>
 </tr>
 <tr>
 <td><code>-sp, --subscription-position</code></td>
@@ -600,11 +625,6 @@
 <td>0</td>
 </tr>
 <tr>
-<td><code>-c, --max-connections</code></td>
-<td>Max number of TCP connections to a single broker</td>
-<td>1</td>
-</tr>
-<tr>
 <td><code>-txnRate</code></td>
 <td>Set the rate of opened transaction or task. 0 means no limit</td>
 <td>0</td>
@@ -625,6 +645,16 @@
 <td>Shared</td>
 </tr>
 <tr>
+<td><code>--trust-cert-file</code></td>
+<td>Path for the trusted TLS certificate file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--auth-plugin</code></td>
+<td>Authentication plugin class name</td>
+<td>null</td>
+</tr>
+<tr>
 <td><code>-abort</code></td>
 <td>Abort the transaction. (After --txn-disEnable setting to false, -abort takes effect)</td>
 <td>false</td>
@@ -635,9 +665,29 @@
 <td>null</td>
 </tr>
 <tr>
+<td><code>-c, --max-connections</code></td>
+<td>Max number of TCP connections to a single broker</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>--listener-name</code></td>
+<td>Listener name for the broker.</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-h, --help</code></td>
+<td>Help message</td>
+<td>false</td>
+</tr>
+<tr>
 <td><code>-au, --admin-url</code></td>
 <td>Pulsar Admin URL</td>
 <td>null</td>
+</tr>
+<tr>
+<td><code>-lt, --num-listener-threads</code></td>
+<td>Set the number of threads to be used for message listeners</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -659,24 +709,9 @@
 </thead>
 <tbody>
 <tr>
-<td><code>--trust-cert-file</code></td>
-<td>Path for the trusted TLS certificate file</td>
-<td></td>
-</tr>
-<tr>
-<td><code>--tls-allow-insecure</code></td>
-<td>Allow insecure TLS connection</td>
-<td>null</td>
-</tr>
-<tr>
 <td><code>-time, --test-duration</code></td>
 <td>Test duration in secs. If &lt;= 0, it will keep consuming</td>
 <td>0</td>
-</tr>
-<tr>
-<td><code>--auth-params</code></td>
-<td>Authentication parameters, whose format is determined by the implementation of method <code>configure</code> in authentication plugin class, for example &quot;key1:val1,key2:val2&quot; or &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}.</td>
-<td>null</td>
 </tr>
 <tr>
 <td><code>-q, --receiver-queue-size</code></td>
@@ -689,8 +724,58 @@
 <td>0</td>
 </tr>
 <tr>
-<td><code>-h, --help</code></td>
-<td>Help message</td>
+<td><code>-m, --start-message-id</code></td>
+<td>Start message id. This can be either &#39;earliest&#39;, &#39;latest&#39; or a specific message id by using &#39;lid:eid&#39;</td>
+<td>earliest</td>
+</tr>
+<tr>
+<td><code>--trust-cert-file</code></td>
+<td>Path for the trusted TLS certificate file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-cf, --conf-file</code></td>
+<td>Configuration file</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--auth-plugin</code></td>
+<td>Authentication plugin class name</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--use-tls</code></td>
+<td>Use TLS encryption on the connection</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>-u, --service-url</code></td>
+<td>Pulsar Service URL</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-r, --rate</code></td>
+<td>Simulate a slow message reader (rate in msg/s)</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td><code>--tls-hostname-verification</code></td>
+<td>Enable TLS hostname verification</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--tls-allow-insecure</code></td>
+<td>Allow insecure TLS connection</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>--auth-params</code></td>
+<td>Authentication parameters, whose format is determined by the implementation of method <code>configure</code> in authentication plugin class, for example &quot;key1:val1,key2:val2&quot; or &quot;{&quot;key1&quot;:&quot;val1&quot;,&quot;key2&quot;:&quot;val2&quot;}.</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>-bw, --busy-wait</code></td>
+<td>Enable Busy-Wait on the Pulsar client</td>
 <td>false</td>
 </tr>
 <tr>
@@ -699,39 +784,14 @@
 <td>1</td>
 </tr>
 <tr>
+<td><code>-i, --stats-interval-seconds</code></td>
+<td>Statistics Interval Seconds. If 0, statistics will be disabled</td>
+<td>0</td>
+</tr>
+<tr>
 <td><code>-ioThreads, --num-io-threads</code></td>
-<td>Set the number of threads to be used for handling connections to brokers, default is 1 thread</td>
+<td>Set the number of threads to be used for handling connections to brokers. The default value is 1.</td>
 <td>1</td>
-</tr>
-<tr>
-<td><code>-m, --start-message-id</code></td>
-<td>Start message id. This can be either &#39;earliest&#39;, &#39;latest&#39; or a specific message id by using &#39;lid:eid&#39;</td>
-<td>earliest</td>
-</tr>
-<tr>
-<td><code>--auth-plugin</code></td>
-<td>Authentication plugin class name</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>-lt, --num-listener-threads</code></td>
-<td>Set the number of threads to be used for message listeners</td>
-<td>1</td>
-</tr>
-<tr>
-<td><code>--use-tls</code></td>
-<td>Use TLS encryption on the connection</td>
-<td>false</td>
-</tr>
-<tr>
-<td><code>-cf, --conf-file</code></td>
-<td>Configuration file</td>
-<td>null</td>
-</tr>
-<tr>
-<td><code>-r, --rate</code></td>
-<td>Simulate a slow message reader (rate in msg/s)</td>
-<td>0.0</td>
 </tr>
 <tr>
 <td><code>--listener-name</code></td>
@@ -744,14 +804,14 @@
 <td>1</td>
 </tr>
 <tr>
-<td><code>-i, --stats-interval-seconds</code></td>
-<td>Statistics Interval Seconds. If 0, statistics will be disabled</td>
-<td>0</td>
+<td><code>-h, --help</code></td>
+<td>Help message</td>
+<td>false</td>
 </tr>
 <tr>
-<td><code>-u, --service-url</code></td>
-<td>Pulsar Service URL</td>
-<td>null</td>
+<td><code>-lt, --num-listener-threads</code></td>
+<td>Set the number of threads to be used for message listeners</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>

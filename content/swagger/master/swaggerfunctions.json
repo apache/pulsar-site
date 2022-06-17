@@ -1230,14 +1230,14 @@
     "DeserializationConfig" : {
       "type" : "object",
       "properties" : {
-        "nodeFactory" : {
-          "$ref" : "#/definitions/JsonNodeFactory"
-        },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
         },
         "defaultPropertyInclusion" : {
           "$ref" : "#/definitions/Value"
+        },
+        "nodeFactory" : {
+          "$ref" : "#/definitions/JsonNodeFactory"
         },
         "deserializationFeatures" : {
           "type" : "integer",
@@ -1270,14 +1270,14 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
+        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
-        },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "base64Variant" : {
           "$ref" : "#/definitions/Base64Variant"
@@ -1311,11 +1311,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "nodeFactory" : {
-          "$ref" : "#/definitions/JsonNodeFactory"
-        },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
+        },
+        "nodeFactory" : {
+          "$ref" : "#/definitions/JsonNodeFactory"
         },
         "contextualType" : {
           "$ref" : "#/definitions/JavaType"
@@ -1577,12 +1577,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
+        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -1902,6 +1902,9 @@
         "abstract" : {
           "type" : "boolean"
         },
+        "contentType" : {
+          "$ref" : "#/definitions/JavaType"
+        },
         "bindings" : {
           "$ref" : "#/definitions/TypeBindings"
         },
@@ -1953,9 +1956,6 @@
         "mapLikeType" : {
           "type" : "boolean"
         },
-        "contentType" : {
-          "$ref" : "#/definitions/JavaType"
-        },
         "typeName" : {
           "type" : "string"
         },
@@ -1990,6 +1990,9 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
+        "closed" : {
+          "type" : "boolean"
+        },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
         },
@@ -2026,9 +2029,6 @@
         },
         "outputContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -2069,6 +2069,9 @@
         "text" : {
           "type" : "string"
         },
+        "closed" : {
+          "type" : "boolean"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
@@ -2098,12 +2101,12 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "objectId" : {
-          "type" : "object"
-        },
         "intValue" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "objectId" : {
+          "type" : "object"
         },
         "typeId" : {
           "type" : "object"
@@ -2202,9 +2205,6 @@
         },
         "currentValue" : {
           "type" : "object"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -2339,6 +2339,13 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "keyBytes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
         "data" : {
           "type" : "array",
           "items" : {
@@ -2400,13 +2407,6 @@
         },
         "topicName" : {
           "type" : "string"
-        },
-        "keyBytes" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string",
-            "format" : "byte"
-          }
         }
       }
     },
@@ -2712,15 +2712,15 @@
           "type" : "string",
           "enum" : [ "NONE", "STRING", "JSON", "PROTOBUF", "AVRO", "BOOLEAN", "INT8", "INT16", "INT32", "INT64", "FLOAT", "DOUBLE", "DATE", "TIME", "TIMESTAMP", "KEY_VALUE", "INSTANT", "LOCAL_DATE", "LOCAL_TIME", "LOCAL_DATE_TIME", "PROTOBUF_NATIVE", "BYTES", "AUTO", "AUTO_CONSUME", "AUTO_PUBLISH" ]
         },
+        "schemaDefinition" : {
+          "type" : "string"
+        },
         "schema" : {
           "type" : "array",
           "items" : {
             "type" : "string",
             "format" : "byte"
           }
-        },
-        "schemaDefinition" : {
-          "type" : "string"
         }
       }
     },
@@ -2782,14 +2782,14 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
+        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
-        },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "base64Variant" : {
           "$ref" : "#/definitions/Base64Variant"
@@ -2814,6 +2814,9 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "generator" : {
+          "$ref" : "#/definitions/JsonGenerator"
+        },
         "config" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
@@ -2831,9 +2834,6 @@
         },
         "defaultNullKeySerializer" : {
           "$ref" : "#/definitions/JsonSerializerObject"
-        },
-        "generator" : {
-          "$ref" : "#/definitions/JsonGenerator"
         }
       }
     },

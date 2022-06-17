@@ -6725,12 +6725,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/DispatchRate"
-                        }
-                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20971,6 +20965,9 @@
                 "summary": "Create a partitioned topic.",
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
+                "consumes": [
+                    "application/vnd.partitioned-topic-metadata+json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -20999,12 +20996,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "The number of partitions for the topic",
+                        "description": "The metadata for the topic",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 0
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
                         }
                     },
                     {
@@ -27160,11 +27155,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "fullRootName": {
-                    "$ref": "#/definitions/PropertyName"
-                },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
+                },
+                "fullRootName": {
+                    "$ref": "#/definitions/PropertyName"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -27705,6 +27700,10 @@
         "JsonLocation": {
             "type": "object",
             "properties": {
+                "byteOffset": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "sourceRef": {
                     "type": "object"
                 },
@@ -27717,10 +27716,6 @@
                     "format": "int32"
                 },
                 "charOffset": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "byteOffset": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -27771,12 +27766,12 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "objectId": {
-                    "type": "object"
-                },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "objectId": {
+                    "type": "object"
                 },
                 "typeId": {
                     "type": "object"
@@ -27938,13 +27933,6 @@
                 "parent": {
                     "$ref": "#/definitions/JsonStreamContext"
                 },
-                "typeDesc": {
-                    "type": "string"
-                },
-                "currentIndex": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "currentName": {
                     "type": "string"
                 },
@@ -27952,6 +27940,13 @@
                     "type": "object"
                 },
                 "entryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "typeDesc": {
+                    "type": "string"
+                },
+                "currentIndex": {
                     "type": "integer",
                     "format": "int32"
                 }
@@ -28241,19 +28236,19 @@
                     "type": "number",
                     "format": "double"
                 },
+                "underLoaded": {
+                    "type": "boolean"
+                },
+                "overLoaded": {
+                    "type": "boolean"
+                },
+                "loadReportType": {
+                    "type": "string"
+                },
                 "cpu": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
-                "memory": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
                 "directMemory": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "bandwidthIn": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "bandwidthOut": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
                 "lastUpdate": {
@@ -28268,14 +28263,14 @@
                     "type": "number",
                     "format": "double"
                 },
-                "underLoaded": {
-                    "type": "boolean"
+                "memory": {
+                    "$ref": "#/definitions/ResourceUsage"
                 },
-                "overLoaded": {
-                    "type": "boolean"
+                "bandwidthIn": {
+                    "$ref": "#/definitions/ResourceUsage"
                 },
-                "loadReportType": {
-                    "type": "string"
+                "bandwidthOut": {
+                    "$ref": "#/definitions/ResourceUsage"
                 }
             }
         },
@@ -28659,10 +28654,17 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "managedLedgerOffloadDriver": {
-                    "type": "string"
+                "managedLedgerOffloadedReadPriority": {
+                    "type": "string",
+                    "enum": [
+                        "BOOKKEEPER_FIRST",
+                        "TIERED_STORAGE_FIRST"
+                    ]
                 },
                 "offloadersDirectory": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadDriver": {
                     "type": "string"
                 },
                 "managedLedgerOffloadMaxThreads": {
@@ -28672,13 +28674,6 @@
                 "managedLedgerOffloadPrefetchRounds": {
                     "type": "integer",
                     "format": "int32"
-                },
-                "managedLedgerOffloadedReadPriority": {
-                    "type": "string",
-                    "enum": [
-                        "BOOKKEEPER_FIRST",
-                        "TIERED_STORAGE_FIRST"
-                    ]
                 },
                 "s3ManagedLedgerOffloadRegion": {
                     "type": "string"
@@ -29621,11 +29616,11 @@
         "ResourceUnit": {
             "type": "object",
             "properties": {
-                "resourceId": {
-                    "type": "string"
-                },
                 "availableResource": {
                     "$ref": "#/definitions/ResourceDescription"
+                },
+                "resourceId": {
+                    "type": "string"
                 }
             }
         },
@@ -29711,11 +29706,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "fullRootName": {
-                    "$ref": "#/definitions/PropertyName"
-                },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
+                },
+                "fullRootName": {
+                    "$ref": "#/definitions/PropertyName"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -30449,12 +30444,6 @@
                 "initialized": {
                     "type": "boolean"
                 },
-                "functions": {
-                    "$ref": "#/definitions/FunctionsWorkerService"
-                },
-                "sinks": {
-                    "$ref": "#/definitions/SinksWorkerService"
-                },
                 "functionsV2": {
                     "$ref": "#/definitions/FunctionsV2WorkerService"
                 },
@@ -30463,6 +30452,12 @@
                 },
                 "workerConfig": {
                     "$ref": "#/definitions/WorkerConfig"
+                },
+                "sinks": {
+                    "$ref": "#/definitions/SinksWorkerService"
+                },
+                "functions": {
+                    "$ref": "#/definitions/FunctionsWorkerService"
                 }
             }
         },
