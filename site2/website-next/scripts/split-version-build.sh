@@ -20,7 +20,7 @@ function _fileSlash() {
                     dir=$(basename $fname ".$ex")
                     mkdir -p $slashDir/$dir
                     cp -r $file $slashDir/$dir/index.html
-                    node scripts/fix-index.js $slashDir/$dir/index.html
+                    # node scripts/fix-index.js $slashDir/$dir/index.html
                 fi
             fi
         done
@@ -72,7 +72,7 @@ function _buildVersion() {
     _build
 
     if [[ $buildVersion != $latest ]]; then
-        _copySlash
+        # _copySlash
 
         mkdir -p build-${buildVersion}/${buildVersion} #build-${buildVersion}/${buildVersion}.md
         cp -r build/docs/${buildVersion}/* build-${buildVersion}/${buildVersion}
