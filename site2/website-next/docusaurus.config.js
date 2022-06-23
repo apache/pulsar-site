@@ -124,7 +124,6 @@ module.exports = {
     "Apache Pulsar is a cloud-native, distributed messaging and streaming platform originally created at Yahoo! and now a top-level Apache Software Foundation project",
   url: "https://pulsar.apache.org",
   baseUrl: baseUrl,
-  trailingSlash: false,
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
   favicon: "img/favicon.ico",
@@ -357,12 +356,6 @@ module.exports = {
   ],
   presets: [
     [
-      "@docusaurus/plugin-client-redirects",
-      {
-        fromExtensions: [""],
-      },
-    ],
-    [
       "@docusaurus/preset-classic",
       {
         docs: {
@@ -404,6 +397,13 @@ module.exports = {
     ],
   ],
   plugins: [
+    // [
+    //   "client-redirects",
+    //   /** @type {import('@docusaurus/plugin-client-redirects').Options} */
+    //   ({
+    //     fromExtensions: ["html"],
+    //   }),
+    // ],
     "./postcss-tailwind-loader",
     [
       "content-docs",

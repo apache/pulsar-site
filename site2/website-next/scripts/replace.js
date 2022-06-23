@@ -158,6 +158,7 @@ const from = [
   /@pulsar:version_number@/g,
 
   /\[([^\]]*)\]\((\/tools\/pulsar[^\)]*)\)/g,
+  /(\[[^\]]+\]\((?!http|assets|\.|\/|#)((?!\.md|:|\.|#).)*)\)$/g, //fix some relative link 404 due to the path missing .md
 ];
 
 const options = {
@@ -192,6 +193,7 @@ const options = {
     `${latestVersion}`,
 
     '<a href="$2" target="_blank">$1</a>',
+    "$1.md)",
   ],
   dry: false,
 };
@@ -238,6 +240,7 @@ for (v of versions) {
       clientVersionUrl(`${v}`, "admin"),
       `${v}`,
       '<a href="$2" target="_blank">$1</a>',
+      "$1.md)",
     ],
     dry: false,
   };
