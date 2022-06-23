@@ -1252,11 +1252,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
+        },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1270,11 +1270,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "propertyNamingStrategy" : {
-          "$ref" : "#/definitions/PropertyNamingStrategy"
-        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
+        },
+        "propertyNamingStrategy" : {
+          "$ref" : "#/definitions/PropertyNamingStrategy"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
@@ -1577,12 +1577,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -1932,6 +1932,12 @@
         "typeHandler" : {
           "type" : "object"
         },
+        "collectionLikeType" : {
+          "type" : "boolean"
+        },
+        "mapLikeType" : {
+          "type" : "boolean"
+        },
         "referencedType" : {
           "$ref" : "#/definitions/JavaType"
         },
@@ -1946,12 +1952,6 @@
         },
         "erasedSignature" : {
           "type" : "string"
-        },
-        "collectionLikeType" : {
-          "type" : "boolean"
-        },
-        "mapLikeType" : {
-          "type" : "boolean"
         },
         "contentType" : {
           "$ref" : "#/definitions/JavaType"
@@ -1990,20 +1990,6 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
-        "highestEscapedChar" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "outputTarget" : {
-          "type" : "object"
-        },
-        "outputBuffered" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "outputContext" : {
-          "$ref" : "#/definitions/JsonStreamContext"
-        },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
         },
@@ -2027,6 +2013,20 @@
         "currentValue" : {
           "type" : "object"
         },
+        "highestEscapedChar" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "outputTarget" : {
+          "type" : "object"
+        },
+        "outputBuffered" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "outputContext" : {
+          "$ref" : "#/definitions/JsonStreamContext"
+        },
         "closed" : {
           "type" : "boolean"
         }
@@ -2035,10 +2035,6 @@
     "JsonLocation" : {
       "type" : "object",
       "properties" : {
-        "byteOffset" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "sourceRef" : {
           "type" : "object"
         },
@@ -2051,6 +2047,10 @@
           "format" : "int32"
         },
         "charOffset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "byteOffset" : {
           "type" : "integer",
           "format" : "int64"
         }
@@ -2104,9 +2104,6 @@
         "intValue" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "inputSource" : {
-          "type" : "object"
         },
         "typeId" : {
           "type" : "object"
@@ -2200,6 +2197,9 @@
         "valueAsString" : {
           "type" : "string"
         },
+        "inputSource" : {
+          "type" : "object"
+        },
         "currentValue" : {
           "type" : "object"
         },
@@ -2233,18 +2233,18 @@
         "parent" : {
           "$ref" : "#/definitions/JsonStreamContext"
         },
-        "currentName" : {
-          "type" : "string"
-        },
-        "currentValue" : {
-          "type" : "object"
-        },
         "typeDesc" : {
           "type" : "string"
         },
         "currentIndex" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "currentName" : {
+          "type" : "string"
+        },
+        "currentValue" : {
+          "type" : "object"
         },
         "entryCount" : {
           "type" : "integer",
@@ -2346,6 +2346,23 @@
             "format" : "byte"
           }
         },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
         "topicName" : {
           "type" : "string"
         },
@@ -2383,23 +2400,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2712,15 +2712,15 @@
           "type" : "string",
           "enum" : [ "NONE", "STRING", "JSON", "PROTOBUF", "AVRO", "BOOLEAN", "INT8", "INT16", "INT32", "INT64", "FLOAT", "DOUBLE", "DATE", "TIME", "TIMESTAMP", "KEY_VALUE", "INSTANT", "LOCAL_DATE", "LOCAL_TIME", "LOCAL_DATE_TIME", "PROTOBUF_NATIVE", "BYTES", "AUTO", "AUTO_CONSUME", "AUTO_PUBLISH" ]
         },
+        "schemaDefinition" : {
+          "type" : "string"
+        },
         "schema" : {
           "type" : "array",
           "items" : {
             "type" : "string",
             "format" : "byte"
           }
-        },
-        "schemaDefinition" : {
-          "type" : "string"
         }
       }
     },
@@ -2764,11 +2764,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
+        },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -2782,11 +2782,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "propertyNamingStrategy" : {
-          "$ref" : "#/definitions/PropertyNamingStrategy"
-        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
+        },
+        "propertyNamingStrategy" : {
+          "$ref" : "#/definitions/PropertyNamingStrategy"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
