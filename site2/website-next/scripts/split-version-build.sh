@@ -3,50 +3,11 @@ node scripts/split-version.js
 
 locals=("en" "zh-CN" "zh-TW" "ja" "ko" "fr")
 latest=$(cat scripts/.latest)
-BUILD_ALL_LANGUAGE="en"
+BUILD_ALL_LANGUAGE="0"
 buildVersion="next"
-slashDir=""
 
 echo "changed files: "
 echo $@
-
-function _fileSlash() {
-    if [ -d "$slashDir/" ]; then
-        for file in $slashDir/*; do
-            if test -f $file; then
-                fname=$(basename $file)
-                ex=${fname##*.}
-                if [ $ex == "html" ]; then
-                    dir=$(basename $fname ".$ex")
-                    mkdir -p $slashDir/$dir
-                    cp -r $file $slashDir/$dir/index.html
-                    # node scripts/fix-index.js $slashDir/$dir/index.html
-                fi
-            fi
-        done
-    fi
-}
-
-function _copySlash() {
-    array=($buildVersion)
-    if [ ${buildVersion} = "next" ]; then
-        array=("next" "latest")
-    fi
-    for bv in ${array[@]}; do
-        slashDir="build/docs/${bv}"
-        if [ $bv = "latest" ]; then
-            slashDir="build/docs"
-        fi
-        _fileSlash
-        for language in ${locals[@]}; do
-            slashDir="build/${language}/docs/${bv}"
-            if [ $bv = "latest" ]; then
-                slashDir="build/${language}/docs"
-            fi
-            _fileSlash
-        done
-    done
-}
 
 function _build() {
     if [[ "$BUILD_ALL_LANGUAGE" == "0" ]]; then
@@ -72,18 +33,14 @@ function _buildVersion() {
     _build
 
     if [[ $buildVersion != $latest ]]; then
-        # _copySlash
-
-        mkdir -p build-${buildVersion}/${buildVersion} #build-${buildVersion}/${buildVersion}.md
+        mkdir -p build-${buildVersion}/${buildVersion}
         cp -r build/docs/${buildVersion}/* build-${buildVersion}/${buildVersion}
-        # cp -r build/docs/${buildVersion}.md/* build-${buildVersion}/${buildVersion}.md
-        rm -rf build/docs/${buildVersion} #build/docs/${buildVersion}.md
+        rm -rf build/docs/${buildVersion}
         for language in ${locals[@]}; do
             if [ -d "build/${language}/docs/${buildVersion}" ]; then
-                mkdir -p build-${language}-${buildVersion}/${buildVersion} #build-${language}-${buildVersion}/${buildVersion}.md
+                mkdir -p build-${language}-${buildVersion}/${buildVersion}
                 cp -r build/${language}/docs/${buildVersion}/* build-${language}-${buildVersion}/${buildVersion}
-                # cp -r build/${language}/docs/${buildVersion}.md/* build-${language}-${buildVersion}/${buildVersion}.md
-                rm -rf build/${language}/docs/${buildVersion} #build/${language}/docs/${buildVersion}.md
+                rm -rf build/${language}/docs/${buildVersion}
             fi
         done
     fi
