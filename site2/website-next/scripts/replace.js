@@ -97,7 +97,7 @@ function clientVersionUrl(version, type) {
   if ((majorVersion === 2 && minorVersion < 5) || (type === "python" && minorVersion >= 7)) {
     return `${siteConfig.url}/api/${type}/${version}`;
   } else if (majorVersion >= 2 && minorVersion >= 5) {
-    return `${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT/`
+    return `${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`
   }
 }
 
