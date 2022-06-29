@@ -106,14 +106,15 @@ const injectLinkParseForEndpoint = ([, info]) => {
     restBaseUrl = sinkApiUrl;
   }
   let restUrl = "";
-  if (suffix.indexOf("?version") >= 0) {
-    restUrl = suffix + "&apiVersion=" + restApiVersion;
+  if (suffix.indexOf("?version=") >= 0) {
+    const suffixAndVersion = suffix.split("?version=")
+    restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" +  suffixAndVersion[0];
   } else {
-    restUrl = suffix + "version=master&apiVersion=" + restApiVersion;
+    restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
   }
   return {
     text: method + " " + path,
-    link: restBaseUrl + "#" + restUrl,
+    link: restBaseUrl + "?" + restUrl,
   };
 };
 
