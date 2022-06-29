@@ -124,6 +124,20 @@ implements org.apache.pulsar.client.admin.Transactions</span></div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.apache.pulsar.common.stats.PositionInPendingAckStats</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkPositionInPendingAckState(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Integer)" class="member-name-link">checkPositionInPendingAckState</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topic,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;ledgerId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;entryId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;batchIndex)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;org.apache.pulsar.common.stats.PositionInPendingAckStats&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkPositionInPendingAckStateAsync(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Integer)" class="member-name-link">checkPositionInPendingAckStateAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topic,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;ledgerId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;entryId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;batchIndex)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.apache.pulsar.common.policies.data.TransactionCoordinatorInternalStats</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCoordinatorInternalStats(int,boolean)" class="member-name-link">getCoordinatorInternalStats</a><wbr>(int&nbsp;coordinatorId,
  boolean&nbsp;metadata)</code></div>
@@ -556,6 +570,37 @@ implements org.apache.pulsar.client.admin.Transactions</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>scaleTransactionCoordinatorsAsync</code>&nbsp;in interface&nbsp;<code>org.apache.pulsar.client.admin.Transactions</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="checkPositionInPendingAckStateAsync(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Integer)">
+<h3>checkPositionInPendingAckStateAsync</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;org.apache.pulsar.common.stats.PositionInPendingAckStats&gt;</span>&nbsp;<span class="element-name">checkPositionInPendingAckStateAsync</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topic,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;ledgerId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;entryId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;batchIndex)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>checkPositionInPendingAckStateAsync</code>&nbsp;in interface&nbsp;<code>org.apache.pulsar.client.admin.Transactions</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="checkPositionInPendingAckState(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Integer)">
+<h3>checkPositionInPendingAckState</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.apache.pulsar.common.stats.PositionInPendingAckStats</span>&nbsp;<span class="element-name">checkPositionInPendingAckState</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topic,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;ledgerId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;entryId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;batchIndex)</span>
+                                                                                        throws <span class="exceptions">org.apache.pulsar.client.admin.PulsarAdminException</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>checkPositionInPendingAckState</code>&nbsp;in interface&nbsp;<code>org.apache.pulsar.client.admin.Transactions</code></dd>
+<dt>Throws:</dt>
+<dd><code>org.apache.pulsar.client.admin.PulsarAdminException</code></dd>
 </dl>
 </section>
 </li>
