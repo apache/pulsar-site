@@ -71,6 +71,9 @@ else
     BUILD_ALL_VERSION="0"
 fi
 
+BUILD_ALL_LANGUAGE="0"
+BUILD_ALL_VERSION="1"
+
 # Build only the versions that has changed
 # Build next version that has any changed
 while read version; do
