@@ -34,7 +34,9 @@ function _buildVersion() {
 
     if [[ $buildVersion != $latest ]]; then
         mkdir -p build-${buildVersion}/${buildVersion}
+        mkdir -p build-assets
         cp -r build/docs/${buildVersion}/* build-${buildVersion}/${buildVersion}
+        cp -r build/assets/* build-assets/
         rm -rf build/docs/${buildVersion}
         for language in ${locals[@]}; do
             if [ -d "build/${language}/docs/${buildVersion}" ]; then
@@ -71,9 +73,6 @@ else
     BUILD_ALL_VERSION="0"
 fi
 
-BUILD_ALL_LANGUAGE="0"
-BUILD_ALL_VERSION="1"
-
 # Build only the versions that has changed
 # Build next version that has any changed
 while read version; do
@@ -98,3 +97,5 @@ while read version; do
         done
     fi
 done <scripts/.versions
+
+cp -r build-assets/* build/assets/ 
