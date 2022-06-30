@@ -1133,11 +1133,11 @@
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
         },
-        "dateFormat" : {
-          "$ref" : "#/definitions/DateFormat"
-        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
+        },
+        "dateFormat" : {
+          "$ref" : "#/definitions/DateFormat"
         },
         "base64Variant" : {
           "$ref" : "#/definitions/Base64Variant"
@@ -1165,11 +1165,11 @@
         "config" : {
           "$ref" : "#/definitions/DeserializationConfig"
         },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
-        },
         "parser" : {
           "$ref" : "#/definitions/JsonParser"
+        },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
         },
         "nodeFactory" : {
           "$ref" : "#/definitions/JsonNodeFactory"
@@ -1260,6 +1260,9 @@
         "abstract" : {
           "type" : "boolean"
         },
+        "contentType" : {
+          "$ref" : "#/definitions/JavaType"
+        },
         "bindings" : {
           "$ref" : "#/definitions/TypeBindings"
         },
@@ -1311,9 +1314,6 @@
         "mapLikeType" : {
           "type" : "boolean"
         },
-        "contentType" : {
-          "$ref" : "#/definitions/JavaType"
-        },
         "typeName" : {
           "type" : "string"
         },
@@ -1348,6 +1348,9 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
+        "closed" : {
+          "type" : "boolean"
+        },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
         },
@@ -1384,9 +1387,6 @@
         },
         "outputContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -1427,14 +1427,18 @@
         "text" : {
           "type" : "string"
         },
+        "closed" : {
+          "type" : "boolean"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
             "type" : "string"
           }
         },
-        "typeId" : {
-          "type" : "object"
+        "intValue" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "booleanValue" : {
           "type" : "boolean"
@@ -1462,9 +1466,8 @@
         "objectId" : {
           "type" : "object"
         },
-        "intValue" : {
-          "type" : "integer",
-          "format" : "int32"
+        "typeId" : {
+          "type" : "object"
         },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
@@ -1560,9 +1563,6 @@
         },
         "currentValue" : {
           "type" : "object"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -1788,6 +1788,9 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
+        "visibilityChecker" : {
+          "$ref" : "#/definitions/VisibilityCheckerObject"
+        },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
         },
@@ -1814,9 +1817,6 @@
         },
         "serializerProviderInstance" : {
           "$ref" : "#/definitions/SerializerProvider"
-        },
-        "visibilityChecker" : {
-          "$ref" : "#/definitions/VisibilityCheckerObject"
         },
         "jsonFactory" : {
           "$ref" : "#/definitions/JsonFactory"
@@ -2000,11 +2000,11 @@
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
         },
-        "dateFormat" : {
-          "$ref" : "#/definitions/DateFormat"
-        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
+        },
+        "dateFormat" : {
+          "$ref" : "#/definitions/DateFormat"
         },
         "base64Variant" : {
           "$ref" : "#/definitions/Base64Variant"
@@ -2029,6 +2029,9 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "generator" : {
+          "$ref" : "#/definitions/JsonGenerator"
+        },
         "config" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
@@ -2046,9 +2049,6 @@
         },
         "defaultNullKeySerializer" : {
           "$ref" : "#/definitions/JsonSerializerObject"
-        },
-        "generator" : {
-          "$ref" : "#/definitions/JsonGenerator"
         }
       }
     },
