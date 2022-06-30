@@ -98,4 +98,5 @@ while read version; do
     fi
 done <scripts/.versions
 
-cp -r build-assets/* build/assets/ 
+cp -r build-assets/* build/assets/
+rm -rf build-assets
