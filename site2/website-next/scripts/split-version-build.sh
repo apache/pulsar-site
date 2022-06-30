@@ -49,28 +49,42 @@ function _buildVersion() {
     echo "..." $buildVersion "build done..."
 }
 
+COMMIT_MSG=$(git show -s --format=%s)
+FORCE_BUILD_ALL_LANGUAGE=$(echo $COMMIT_MSG | sed 's/.*BUILD_ALL_LANGUAGE=\([0-1]*\).*/\1/g')
+FORCE_BUILD_ALL_VERSION=$(echo $COMMIT_MSG | sed 's/.*BUILD_ALL_VERSION=\([0-1]*\).*/\1/g')
+FORCE_CROWDIN_ALL=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_ALL=\([0-1]*\).*/\1/g')
+FORCE_CROWDIN_UP=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_UP=\([0-1]*\).*/\1/g')
+FORCE_CROWDIN_DOWN=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_DOWN=\([0-1]*\).*/\1/g')
+
 yarn write-translations
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
-echo "------ crowdin envs:" "CROWDIN_UPLOAD: "$CROWDIN_UPLOAD "CROWDIN_DOWNLOAD: "$CROWDIN_DOWNLOAD "CURRENT_HOUR: "$CURRENT_HOUR
-if [[ $CURRENT_HOUR -eq 0 ]]; then
-    echo "------ exec crowdin upload"
+echo "CURRENT_HOUR: "$CURRENT_HOUR
+if [[ $CURRENT_HOUR -eq 0 ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_UP"" == "1" ]]; then
+    echo "exec crowdin upload"
     yarn run crowdin-upload
 else
-    echo "------ skip crowdin upload"
+    echo "skip crowdin upload"
 fi
 
-#force set CURRENT_HOUR for testing crowdin download and build all
-# CURRENT_HOUR=18
-if [[ $CURRENT_HOUR -eq 18 ]]; then
-    echo "------ exec crowdin download"
+if [[ $CURRENT_HOUR -eq 18 ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_DOWN"" == "1" ]]; then
+    echo "exec crowdin download"
     yarn crowdin-download
     BUILD_ALL_LANGUAGE="1"
     BUILD_ALL_VERSION="1"
 else
-    echo "------ skip crowdin download"
+    echo "skip crowdin download"
     BUILD_ALL_LANGUAGE="0"
     BUILD_ALL_VERSION="0"
+fi
+
+if [[ $FORCE_BUILD_ALL_LANGUAGE"" == "1" ]] || [[ $FORCE_BUILD_ALL_LANGUAGE"" == "0" ]]; then
+    BUILD_ALL_LANGUAGE=$FORCE_BUILD_ALL_LANGUAGE""
+    echo "force build all languages"
+fi
+if [[ $FORCE_BUILD_ALL_VERSION"" == "1" ]] || [[ $FORCE_BUILD_ALL_VERSION"" == "0" ]]; then
+    BUILD_ALL_VERSION=$FORCE_BUILD_ALL_VERSION""
+    echo "force build all versions"
 fi
 
 # Build only the versions that has changed
