@@ -60,23 +60,6 @@ yarn write-translations
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
 echo "CURRENT_HOUR: "$CURRENT_HOUR
-if [[ $CURRENT_HOUR -eq 0 ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_UP"" == "1" ]]; then
-    echo "exec crowdin upload"
-    yarn run crowdin-upload
-else
-    echo "skip crowdin upload"
-fi
-
-if [[ $CURRENT_HOUR -eq 18 ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_DOWN"" == "1" ]]; then
-    echo "exec crowdin download"
-    yarn crowdin-download
-    BUILD_ALL_LANGUAGE="1"
-    BUILD_ALL_VERSION="1"
-else
-    echo "skip crowdin download"
-    BUILD_ALL_LANGUAGE="0"
-    BUILD_ALL_VERSION="0"
-fi
 
 if [[ $FORCE_BUILD_ALL_LANGUAGE"" == "1" ]] || [[ $FORCE_BUILD_ALL_LANGUAGE"" == "0" ]]; then
     BUILD_ALL_LANGUAGE=$FORCE_BUILD_ALL_LANGUAGE""
@@ -85,6 +68,20 @@ fi
 if [[ $FORCE_BUILD_ALL_VERSION"" == "1" ]] || [[ $FORCE_BUILD_ALL_VERSION"" == "0" ]]; then
     BUILD_ALL_VERSION=$FORCE_BUILD_ALL_VERSION""
     echo "force build all versions"
+fi
+
+if [[ $CURRENT_HOUR -eq 0 ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_UP"" == "1" ]]; then
+    echo "exec crowdin upload"
+    yarn run crowdin-upload
+else
+    echo "skip crowdin upload"
+fi
+
+if [[ $CURRENT_HOUR -eq 18 ]] || [[ $BUILD_ALL_LANGUAGE"" == "1" ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_DOWN"" == "1" ]]; then
+    echo "exec crowdin download"
+    yarn crowdin-download
+else
+    echo "skip crowdin download"
 fi
 
 # Build only the versions that has changed
@@ -114,3 +111,5 @@ done <scripts/.versions
 
 cp -r build-assets/* build/assets/
 rm -rf build-assets
+
+echo $BUILD_ALL_VERSION""$BUILD_ALL_LANGUAGE >scripts/.build
