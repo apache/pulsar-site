@@ -115,23 +115,29 @@ implements <a href="Topic.html" title="interface in org.apache.pulsar.broker.ser
 <div class="col-first odd-row-color"><code>protected final <a href="BrokerService.html" title="class in org.apache.pulsar.broker.service">BrokerService</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#brokerService" class="member-name-link">brokerService</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected boolean</code></div>
-<div class="col-second even-row-color"><code><a href="#hasBatchMessagePublished" class="member-name-link">hasBatchMessagePublished</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#isAllowAutoUpdateSchema" class="member-name-link">isAllowAutoUpdateSchema</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected boolean</code></div>
-<div class="col-second even-row-color"><code><a href="#isEncryptionRequired" class="member-name-link">isEncryptionRequired</a></code></div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/LongAdder.html" title="class or interface in java.util.concurrent.atomic" class="external-link">LongAdder</a></code></div>
+<div class="col-second even-row-color"><code><a href="#bytesOutFromRemovedSubscriptions" class="member-name-link">bytesOutFromRemovedSubscriptions</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>protected boolean</code></div>
-<div class="col-second odd-row-color"><code><a href="#isFenced" class="member-name-link">isFenced</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#hasBatchMessagePublished" class="member-name-link">hasBatchMessagePublished</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected long</code></div>
-<div class="col-second even-row-color"><code><a href="#lastActive" class="member-name-link">lastActive</a></code></div>
+<div class="col-first even-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a></code></div>
+<div class="col-second even-row-color"><code><a href="#isAllowAutoUpdateSchema" class="member-name-link">isAllowAutoUpdateSchema</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html" title="class or interface in java.util.concurrent.locks" class="external-link">ReentrantReadWriteLock</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#lock" class="member-name-link">lock</a></code></div>
+<div class="col-first odd-row-color"><code>protected boolean</code></div>
+<div class="col-second odd-row-color"><code><a href="#isEncryptionRequired" class="member-name-link">isEncryptionRequired</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>protected boolean</code></div>
+<div class="col-second even-row-color"><code><a href="#isFenced" class="member-name-link">isFenced</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected long</code></div>
+<div class="col-second odd-row-color"><code><a href="#lastActive" class="member-name-link">lastActive</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html" title="class or interface in java.util.concurrent.locks" class="external-link">ReentrantReadWriteLock</a></code></div>
+<div class="col-second even-row-color"><code><a href="#lock" class="member-name-link">lock</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/LongAdder.html" title="class or interface in java.util.concurrent.atomic" class="external-link">LongAdder</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#msgOutFromRemovedSubscriptions" class="member-name-link">msgOutFromRemovedSubscriptions</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>protected static final long</code></div>
 <div class="col-second even-row-color"><code><a href="#POLICY_UPDATE_FAILURE_RETRY_TIME_SECONDS" class="member-name-link">POLICY_UPDATE_FAILURE_RETRY_TIME_SECONDS</a></code></div>
@@ -623,6 +629,18 @@ implements <a href="Topic.html" title="interface in org.apache.pulsar.broker.ser
 <section class="detail" id="topicEpoch">
 <h3>topicEpoch</h3>
 <div class="member-signature"><span class="modifiers">protected volatile</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name">topicEpoch</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="msgOutFromRemovedSubscriptions">
+<h3>msgOutFromRemovedSubscriptions</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/LongAdder.html" title="class or interface in java.util.concurrent.atomic" class="external-link">LongAdder</a></span>&nbsp;<span class="element-name">msgOutFromRemovedSubscriptions</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="bytesOutFromRemovedSubscriptions">
+<h3>bytesOutFromRemovedSubscriptions</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/LongAdder.html" title="class or interface in java.util.concurrent.atomic" class="external-link">LongAdder</a></span>&nbsp;<span class="element-name">bytesOutFromRemovedSubscriptions</span></div>
 </section>
 </li>
 </ul>
