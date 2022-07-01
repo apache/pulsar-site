@@ -27,6 +27,7 @@ mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
 
 $ROOT_DIR/bin/pulsar-admin documents generate broker-stats > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/broker-stats.md
 $ROOT_DIR/bin/pulsar-admin documents generate brokers > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/brokers.md
+$ROOT_DIR/bin/pulsar-admin documents generate bookies > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/bookies.md
 $ROOT_DIR/bin/pulsar-admin documents generate clusters > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/clusters.md
 $ROOT_DIR/bin/pulsar-admin documents generate functions > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/functions.md
 $ROOT_DIR/bin/pulsar-admin documents generate functions-worker > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/functions-worker.md
