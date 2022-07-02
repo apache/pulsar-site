@@ -117,8 +117,9 @@ implements <a href="PulsarCommandSender.html" title="interface in org.apache.pul
  boolean&nbsp;isActive)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendConnectedResponse(int,int)" class="member-name-link">sendConnectedResponse</a><wbr>(int&nbsp;clientProtocolVersion,
- int&nbsp;maxMessageSize)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendConnectedResponse(int,int,boolean)" class="member-name-link">sendConnectedResponse</a><wbr>(int&nbsp;clientProtocolVersion,
+ int&nbsp;maxMessageSize,
+ boolean&nbsp;supportsTopicWatchers)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendEndTxnErrorResponse(long,org.apache.pulsar.client.api.transaction.TxnID,org.apache.pulsar.common.api.proto.ServerError,java.lang.String)" class="member-name-link">sendEndTxnErrorResponse</a><wbr>(long&nbsp;requestId,
@@ -253,6 +254,18 @@ implements <a href="PulsarCommandSender.html" title="interface in org.apache.pul
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendTcClientConnectResponse(long,org.apache.pulsar.common.api.proto.ServerError,java.lang.String)" class="member-name-link">sendTcClientConnectResponse</a><wbr>(long&nbsp;requestId,
  org.apache.pulsar.common.api.proto.ServerError&nbsp;error,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendWatchTopicListSuccess(long,long,java.lang.String,java.util.List)" class="member-name-link">sendWatchTopicListSuccess</a><wbr>(long&nbsp;requestId,
+ long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;topics)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendWatchTopicListUpdate(long,java.util.List,java.util.List,java.lang.String)" class="member-name-link">sendWatchTopicListUpdate</a><wbr>(long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;newTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;deletedTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
@@ -447,13 +460,14 @@ implements <a href="PulsarCommandSender.html" title="interface in org.apache.pul
 </section>
 </li>
 <li>
-<section class="detail" id="sendConnectedResponse(int,int)">
+<section class="detail" id="sendConnectedResponse(int,int,boolean)">
 <h3>sendConnectedResponse</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sendConnectedResponse</span><wbr><span class="parameters">(int&nbsp;clientProtocolVersion,
- int&nbsp;maxMessageSize)</span></div>
+ int&nbsp;maxMessageSize,
+ boolean&nbsp;supportsTopicWatchers)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PulsarCommandSender.html#sendConnectedResponse(int,int)">sendConnectedResponse</a></code>&nbsp;in interface&nbsp;<code><a href="PulsarCommandSender.html" title="interface in org.apache.pulsar.broker.service">PulsarCommandSender</a></code></dd>
+<dd><code><a href="PulsarCommandSender.html#sendConnectedResponse(int,int,boolean)">sendConnectedResponse</a></code>&nbsp;in interface&nbsp;<code><a href="PulsarCommandSender.html" title="interface in org.apache.pulsar.broker.service">PulsarCommandSender</a></code></dd>
 </dl>
 </section>
 </li>
@@ -614,6 +628,32 @@ implements <a href="PulsarCommandSender.html" title="interface in org.apache.pul
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PulsarCommandSender.html#sendEndTxnErrorResponse(long,org.apache.pulsar.client.api.transaction.TxnID,org.apache.pulsar.common.api.proto.ServerError,java.lang.String)">sendEndTxnErrorResponse</a></code>&nbsp;in interface&nbsp;<code><a href="PulsarCommandSender.html" title="interface in org.apache.pulsar.broker.service">PulsarCommandSender</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="sendWatchTopicListSuccess(long,long,java.lang.String,java.util.List)">
+<h3>sendWatchTopicListSuccess</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sendWatchTopicListSuccess</span><wbr><span class="parameters">(long&nbsp;requestId,
+ long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;topics)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="PulsarCommandSender.html#sendWatchTopicListSuccess(long,long,java.lang.String,java.util.List)">sendWatchTopicListSuccess</a></code>&nbsp;in interface&nbsp;<code><a href="PulsarCommandSender.html" title="interface in org.apache.pulsar.broker.service">PulsarCommandSender</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="sendWatchTopicListUpdate(long,java.util.List,java.util.List,java.lang.String)">
+<h3>sendWatchTopicListUpdate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sendWatchTopicListUpdate</span><wbr><span class="parameters">(long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;newTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;deletedTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="PulsarCommandSender.html#sendWatchTopicListUpdate(long,java.util.List,java.util.List,java.lang.String)">sendWatchTopicListUpdate</a></code>&nbsp;in interface&nbsp;<code><a href="PulsarCommandSender.html" title="interface in org.apache.pulsar.broker.service">PulsarCommandSender</a></code></dd>
 </dl>
 </section>
 </li>

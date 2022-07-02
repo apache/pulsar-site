@@ -98,8 +98,9 @@ loadScripts(document, 'script');</script>
  boolean&nbsp;isActive)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendConnectedResponse(int,int)" class="member-name-link">sendConnectedResponse</a><wbr>(int&nbsp;clientProtocolVersion,
- int&nbsp;maxMessageSize)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendConnectedResponse(int,int,boolean)" class="member-name-link">sendConnectedResponse</a><wbr>(int&nbsp;clientProtocolVersion,
+ int&nbsp;maxMessageSize,
+ boolean&nbsp;supportsTopicWatchers)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendEndTxnErrorResponse(long,org.apache.pulsar.client.api.transaction.TxnID,org.apache.pulsar.common.api.proto.ServerError,java.lang.String)" class="member-name-link">sendEndTxnErrorResponse</a><wbr>(long&nbsp;requestId,
@@ -235,6 +236,18 @@ loadScripts(document, 'script');</script>
  org.apache.pulsar.common.api.proto.ServerError&nbsp;error,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendWatchTopicListSuccess(long,long,java.lang.String,java.util.List)" class="member-name-link">sendWatchTopicListSuccess</a><wbr>(long&nbsp;requestId,
+ long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;topics)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendWatchTopicListUpdate(long,java.util.List,java.util.List,java.lang.String)" class="member-name-link">sendWatchTopicListUpdate</a><wbr>(long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;newTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;deletedTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -358,10 +371,11 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="sendConnectedResponse(int,int)">
+<section class="detail" id="sendConnectedResponse(int,int,boolean)">
 <h3>sendConnectedResponse</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">sendConnectedResponse</span><wbr><span class="parameters">(int&nbsp;clientProtocolVersion,
- int&nbsp;maxMessageSize)</span></div>
+ int&nbsp;maxMessageSize,
+ boolean&nbsp;supportsTopicWatchers)</span></div>
 </section>
 </li>
 <li>
@@ -470,6 +484,24 @@ loadScripts(document, 'script');</script>
  org.apache.pulsar.client.api.transaction.TxnID&nbsp;txnID,
  org.apache.pulsar.common.api.proto.ServerError&nbsp;error,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="sendWatchTopicListSuccess(long,long,java.lang.String,java.util.List)">
+<h3>sendWatchTopicListSuccess</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">sendWatchTopicListSuccess</span><wbr><span class="parameters">(long&nbsp;requestId,
+ long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;topics)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="sendWatchTopicListUpdate(long,java.util.List,java.util.List,java.lang.String)">
+<h3>sendWatchTopicListUpdate</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">sendWatchTopicListUpdate</span><wbr><span class="parameters">(long&nbsp;watcherId,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;newTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;deletedTopics,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsHash)</span></div>
 </section>
 </li>
 </ul>
