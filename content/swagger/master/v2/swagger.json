@@ -26555,6 +26555,9 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
+                "subscription": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
@@ -26565,9 +26568,6 @@
                     "type": "string"
                 },
                 "commandData": {
-                    "type": "string"
-                },
-                "subscription": {
                     "type": "string"
                 }
             }
@@ -26623,10 +26623,6 @@
                         "consumer_backlog_eviction"
                     ]
                 },
-                "limit": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "limitSize": {
                     "type": "integer",
                     "format": "int64"
@@ -26634,6 +26630,10 @@
                 "limitTime": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -27202,11 +27202,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -27270,6 +27270,13 @@
         "DispatchRate": {
             "type": "object",
             "properties": {
+                "relativeToPublishRate": {
+                    "type": "boolean"
+                },
+                "ratePeriodInSecond": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "dispatchThrottlingRateInMsg": {
                     "type": "integer",
                     "format": "int32"
@@ -27277,13 +27284,6 @@
                 "dispatchThrottlingRateInByte": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "relativeToPublishRate": {
-                    "type": "boolean"
-                },
-                "ratePeriodInSecond": {
-                    "type": "integer",
-                    "format": "int32"
                 }
             }
         },
@@ -27342,12 +27342,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -27763,10 +27763,6 @@
                 "text": {
                     "type": "string"
                 },
-                "intValue": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "textCharacters": {
                     "type": "array",
                     "items": {
@@ -27793,6 +27789,10 @@
                     "format": "int64"
                 },
                 "shortValue": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "intValue": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -28218,14 +28218,21 @@
                     "type": "number",
                     "format": "double"
                 },
+                "msgThroughputIn": {
+                    "type": "number",
+                    "format": "double"
+                },
                 "msgThroughputOut": {
                     "type": "number",
                     "format": "double"
                 },
-                "memory": {
+                "cpu": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
                 "directMemory": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "bandwidthIn": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
                 "bandwidthOut": {
@@ -28235,14 +28242,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "bandwidthIn": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "msgThroughputIn": {
-                    "type": "number",
-                    "format": "double"
-                },
-                "cpu": {
+                "memory": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
                 "underLoaded": {
@@ -28625,16 +28625,6 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
-                "managedLedgerOffloadMaxThreads": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadDriver": {
-                    "type": "string"
-                },
-                "offloadersDirectory": {
-                    "type": "string"
-                },
                 "managedLedgerOffloadThresholdInBytes": {
                     "type": "integer",
                     "format": "int64"
@@ -28642,6 +28632,16 @@
                 "managedLedgerOffloadDeletionLagInMillis": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "managedLedgerOffloadDriver": {
+                    "type": "string"
+                },
+                "offloadersDirectory": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadMaxThreads": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "managedLedgerOffloadPrefetchRounds": {
                     "type": "integer",
@@ -29598,11 +29598,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -30315,23 +30315,23 @@
                 "sources": {
                     "$ref": "#/definitions/SourcesWorkerService"
                 },
+                "initialized": {
+                    "type": "boolean"
+                },
                 "functions": {
                     "$ref": "#/definitions/FunctionsWorkerService"
                 },
                 "sinks": {
                     "$ref": "#/definitions/SinksWorkerService"
                 },
-                "initialized": {
-                    "type": "boolean"
-                },
-                "workerConfig": {
-                    "$ref": "#/definitions/WorkerConfig"
-                },
                 "functionsV2": {
                     "$ref": "#/definitions/FunctionsV2WorkerService"
                 },
                 "workers": {
                     "$ref": "#/definitions/WorkersWorkerService"
+                },
+                "workerConfig": {
+                    "$ref": "#/definitions/WorkerConfig"
                 }
             }
         },
