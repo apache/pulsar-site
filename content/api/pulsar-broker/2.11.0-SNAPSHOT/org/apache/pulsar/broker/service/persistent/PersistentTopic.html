@@ -521,16 +521,19 @@ implements <a href="../Topic.html" title="interface in org.apache.pulsar.broker.
 <div class="block">Delete the cursor ledger for a given subscription.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateRates(org.apache.pulsar.broker.stats.NamespaceStats,org.apache.pulsar.policies.data.loadbalancer.NamespaceBundleStats,org.apache.pulsar.utils.StatsOutputStream,org.apache.pulsar.broker.stats.ClusterReplicationMetrics,java.lang.String,boolean)" class="member-name-link">updateRates</a><wbr>(<a href="../../stats/NamespaceStats.html" title="class in org.apache.pulsar.broker.stats">NamespaceStats</a>&nbsp;nsStats,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDispatchRateLimiter()" class="member-name-link">updateDispatchRateLimiter</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateRates(org.apache.pulsar.broker.stats.NamespaceStats,org.apache.pulsar.policies.data.loadbalancer.NamespaceBundleStats,org.apache.pulsar.utils.StatsOutputStream,org.apache.pulsar.broker.stats.ClusterReplicationMetrics,java.lang.String,boolean)" class="member-name-link">updateRates</a><wbr>(<a href="../../stats/NamespaceStats.html" title="class in org.apache.pulsar.broker.stats">NamespaceStats</a>&nbsp;nsStats,
  org.apache.pulsar.policies.data.loadbalancer.NamespaceBundleStats&nbsp;bundleStats,
  <a href="../../../utils/StatsOutputStream.html" title="class in org.apache.pulsar.utils">StatsOutputStream</a>&nbsp;topicStatsStream,
  <a href="../../stats/ClusterReplicationMetrics.html" title="class in org.apache.pulsar.broker.stats">ClusterReplicationMetrics</a>&nbsp;replStats,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;namespace,
  boolean&nbsp;hydratePublishers)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateSubscribeRateLimiter()" class="member-name-link">updateSubscribeRateLimiter</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateSubscribeRateLimiter()" class="member-name-link">updateSubscribeRateLimiter</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -1154,6 +1157,16 @@ implements <a href="../Topic.html" title="interface in org.apache.pulsar.broker.
 <section class="detail" id="onLocalPoliciesUpdate()">
 <h3>onLocalPoliciesUpdate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">onLocalPoliciesUpdate</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="updateDispatchRateLimiter()">
+<h3>updateDispatchRateLimiter</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDispatchRateLimiter</span>()</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="../AbstractTopic.html#updateDispatchRateLimiter()">updateDispatchRateLimiter</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractTopic.html" title="class in org.apache.pulsar.broker.service">AbstractTopic</a></code></dd>
+</dl>
 </section>
 </li>
 <li>

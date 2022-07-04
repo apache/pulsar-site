@@ -473,19 +473,22 @@ implements <a href="Topic.html" title="interface in org.apache.pulsar.broker.ser
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateBrokerSubscriptionTypesEnabled()" class="member-name-link">updateBrokerSubscriptionTypesEnabled</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updatePublishDispatcher()" class="member-name-link">updatePublishDispatcher</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDispatchRateLimiter()" class="member-name-link">updateDispatchRateLimiter</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updatePublishDispatcher()" class="member-name-link">updatePublishDispatcher</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">update topic publish dispatcher for this topic.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateResourceGroupLimiter(java.util.Optional)" class="member-name-link">updateResourceGroupLimiter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;org.apache.pulsar.common.policies.data.Policies&gt;&nbsp;optPolicies)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateTopicPolicy(org.apache.pulsar.common.policies.data.TopicPolicies)" class="member-name-link">updateTopicPolicy</a><wbr>(org.apache.pulsar.common.policies.data.TopicPolicies&nbsp;data)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateResourceGroupLimiter(java.util.Optional)" class="member-name-link">updateResourceGroupLimiter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;org.apache.pulsar.common.policies.data.Policies&gt;&nbsp;optPolicies)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateTopicPolicyByNamespacePolicy(org.apache.pulsar.common.policies.data.Policies)" class="member-name-link">updateTopicPolicyByNamespacePolicy</a><wbr>(org.apache.pulsar.common.policies.data.Policies&nbsp;namespacePolicies)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateTopicPolicy(org.apache.pulsar.common.policies.data.TopicPolicies)" class="member-name-link">updateTopicPolicy</a><wbr>(org.apache.pulsar.common.policies.data.TopicPolicies&nbsp;data)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateTopicPolicyByNamespacePolicy(org.apache.pulsar.common.policies.data.Policies)" class="member-name-link">updateTopicPolicyByNamespacePolicy</a><wbr>(org.apache.pulsar.common.policies.data.Policies&nbsp;namespacePolicies)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -1021,6 +1024,12 @@ implements <a href="Topic.html" title="interface in org.apache.pulsar.broker.ser
 <dt>Specified by:</dt>
 <dd><code><a href="Topic.html#resetTopicPublishCountAndEnableReadIfRequired()">resetTopicPublishCountAndEnableReadIfRequired</a></code>&nbsp;in interface&nbsp;<code><a href="Topic.html" title="interface in org.apache.pulsar.broker.service">Topic</a></code></dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="updateDispatchRateLimiter()">
+<h3>updateDispatchRateLimiter</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDispatchRateLimiter</span>()</div>
 </section>
 </li>
 <li>

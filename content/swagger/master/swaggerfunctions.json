@@ -965,7 +965,7 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "subscription" : {
+        "httpAuthType" : {
           "type" : "string"
         },
         "tlsCertificates" : {
@@ -974,10 +974,10 @@
             "$ref" : "#/definitions/Certificate"
           }
         },
-        "httpAuthType" : {
+        "commandData" : {
           "type" : "string"
         },
-        "commandData" : {
+        "subscription" : {
           "type" : "string"
         }
       }
@@ -1252,11 +1252,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
+        },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1270,11 +1270,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "propertyNamingStrategy" : {
-          "$ref" : "#/definitions/PropertyNamingStrategy"
-        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
+        },
+        "propertyNamingStrategy" : {
+          "$ref" : "#/definitions/PropertyNamingStrategy"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
@@ -1577,12 +1577,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
+        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -1911,6 +1911,9 @@
         "keyType" : {
           "$ref" : "#/definitions/JavaType"
         },
+        "enumType" : {
+          "type" : "boolean"
+        },
         "arrayType" : {
           "type" : "boolean"
         },
@@ -1918,9 +1921,6 @@
           "type" : "boolean"
         },
         "javaLangObject" : {
-          "type" : "boolean"
-        },
-        "enumType" : {
           "type" : "boolean"
         },
         "containerType" : {
@@ -2219,11 +2219,11 @@
     "JsonSerializerObject" : {
       "type" : "object",
       "properties" : {
-        "delegatee" : {
-          "$ref" : "#/definitions/JsonSerializerObject"
-        },
         "unwrappingSerializer" : {
           "type" : "boolean"
+        },
+        "delegatee" : {
+          "$ref" : "#/definitions/JsonSerializerObject"
         }
       }
     },
@@ -2346,6 +2346,9 @@
             "format" : "byte"
           }
         },
+        "topicName" : {
+          "type" : "string"
+        },
         "messageId" : {
           "$ref" : "#/definitions/MessageId"
         },
@@ -2397,9 +2400,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "topicName" : {
-          "type" : "string"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2764,11 +2764,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "subtypeResolver" : {
-          "$ref" : "#/definitions/SubtypeResolver"
-        },
         "fullRootName" : {
           "$ref" : "#/definitions/PropertyName"
+        },
+        "subtypeResolver" : {
+          "$ref" : "#/definitions/SubtypeResolver"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -2782,11 +2782,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "propertyNamingStrategy" : {
-          "$ref" : "#/definitions/PropertyNamingStrategy"
-        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
+        },
+        "propertyNamingStrategy" : {
+          "$ref" : "#/definitions/PropertyNamingStrategy"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
