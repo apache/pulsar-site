@@ -8,7 +8,7 @@ slug: /
 ## Pulsar Release Notes
 
 #### 2.10.x
-[2.10.0](/release-notes/versioned/pulsar-2.10.0)
+[2.10.0](/release-notes/versioned/pulsar-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/pulsar-2.10.1)&ensp;&ensp;
 #### 2.9.x
 [2.9.2](/release-notes/versioned/pulsar-2.9.2)&ensp;&ensp;[2.9.1](/release-notes/versioned/pulsar-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/versioned/pulsar-2.9.0)&ensp;&ensp;  
 #### 2.8.x
@@ -33,6 +33,8 @@ All release notes of previous versions are available at [here](/release-notes/le
 > The code repos of **Go, Node.js, and C#** clients are hosted outside of the Pulsar main repo and these clients are not released with Pulsar. They have independent release notes in their repos and all of them are synced to this page.
 
 ### Java
+#### 2.10.x
+[2.10.0](/release-notes/versioned/client-java-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-java-2.10.1)&ensp;&ensp;
 #### 2.9.x
 [2.9.1](/release-notes/versioned/client-java-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/versioned/client-java-2.9.0)&ensp;&ensp;  
 #### 2.8.x
@@ -44,6 +46,8 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.5.x
 [2.5.2](/release-notes/versioned/client-java-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/versioned/client-java-2.5.1)&ensp;&ensp; [2.5.0](/release-notes/versioned/client-java-2.5.0)&ensp;&ensp;
 ### Python
+#### 2.10.x
+[2.10.0](/release-notes/versioned/client-python-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-python-2.10.1)&ensp;&ensp;
 #### 2.9.x
 [2.9.0](/release-notes/versioned/client-python-2.9.0)&ensp;&ensp;  
 #### 2.8.x
@@ -55,6 +59,8 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.5.x
 [2.5.2](/release-notes/versioned/client-python-2.5.2)&ensp;&ensp;  
 ### C++
+#### 2.10.x
+[2.10.0](/release-notes/versioned/client-cpp-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-cpp-2.10.1)&ensp;&ensp;
 #### 2.9.x
 [2.9.0](/release-notes/versioned/client-cpp-2.9.0)&ensp;&ensp;  
 #### 2.8.x
@@ -68,6 +74,8 @@ All release notes of previous versions are available at [here](/release-notes/le
 
 
 ### WebSocket
+#### 2.10.x
+[2.10.0](/release-notes/versioned/client-websocket-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-websocket-2.10.1)&ensp;&ensp;
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-websocket-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-websocket-2.8.1)&ensp;&ensp;  
 #### 2.7.x
