@@ -257,16 +257,22 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Asynchronously acknowledge the consumption of a list of message.</div>
 </div>
-<div class="col-first even-row-color"><code>void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">ConsumerInterceptor.</span><code><a href="../ConsumerInterceptor.html#onAckTimeoutSend(org.apache.pulsar.client.api.Consumer,java.util.Set)" class="member-name-link">onAckTimeoutSend</a><wbr>(<a href="../Consumer.html" title="interface in org.apache.pulsar.client.api">Consumer</a>&lt;<a href="../ConsumerInterceptor.html" title="type parameter in ConsumerInterceptor">T</a>&gt;&nbsp;consumer,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../MessageId.html" title="interface in org.apache.pulsar.client.api">MessageId</a>&gt;&nbsp;messageIds)</code></div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#acknowledgeAsync(java.util.List,org.apache.pulsar.client.api.transaction.Transaction)" class="member-name-link">acknowledgeAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../MessageId.html" title="interface in org.apache.pulsar.client.api">MessageId</a>&gt;&nbsp;messageIdList,
+ <a href="../transaction/Transaction.html" title="interface in org.apache.pulsar.client.api.transaction">Transaction</a>&nbsp;txn)</code></div>
 <div class="col-last even-row-color">
-<div class="block">This method will be called when a redelivery from an acknowledge timeout occurs.</div>
+<div class="block">Acknowledge the consumption of a list of message, it will store in pending ack.</div>
 </div>
 <div class="col-first odd-row-color"><code>void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">ConsumerInterceptor.</span><code><a href="../ConsumerInterceptor.html#onNegativeAcksSend(org.apache.pulsar.client.api.Consumer,java.util.Set)" class="member-name-link">onNegativeAcksSend</a><wbr>(<a href="../Consumer.html" title="interface in org.apache.pulsar.client.api">Consumer</a>&lt;<a href="../ConsumerInterceptor.html" title="type parameter in ConsumerInterceptor">T</a>&gt;&nbsp;consumer,
+<div class="col-second odd-row-color"><span class="type-name-label">ConsumerInterceptor.</span><code><a href="../ConsumerInterceptor.html#onAckTimeoutSend(org.apache.pulsar.client.api.Consumer,java.util.Set)" class="member-name-link">onAckTimeoutSend</a><wbr>(<a href="../Consumer.html" title="interface in org.apache.pulsar.client.api">Consumer</a>&lt;<a href="../ConsumerInterceptor.html" title="type parameter in ConsumerInterceptor">T</a>&gt;&nbsp;consumer,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../MessageId.html" title="interface in org.apache.pulsar.client.api">MessageId</a>&gt;&nbsp;messageIds)</code></div>
 <div class="col-last odd-row-color">
+<div class="block">This method will be called when a redelivery from an acknowledge timeout occurs.</div>
+</div>
+<div class="col-first even-row-color"><code>void</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ConsumerInterceptor.</span><code><a href="../ConsumerInterceptor.html#onNegativeAcksSend(org.apache.pulsar.client.api.Consumer,java.util.Set)" class="member-name-link">onNegativeAcksSend</a><wbr>(<a href="../Consumer.html" title="interface in org.apache.pulsar.client.api">Consumer</a>&lt;<a href="../ConsumerInterceptor.html" title="type parameter in ConsumerInterceptor">T</a>&gt;&nbsp;consumer,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../MessageId.html" title="interface in org.apache.pulsar.client.api">MessageId</a>&gt;&nbsp;messageIds)</code></div>
+<div class="col-last even-row-color">
 <div class="block">This method will be called when a redelivery from a negative acknowledge occurs.</div>
 </div>
 </div>

@@ -102,23 +102,29 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Asynchronously acknowledge the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
 </div>
-<div class="col-first even-row-color"><code>void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#negativeAcknowledge(org.apache.pulsar.client.api.Messages)" class="member-name-link">negativeAcknowledge</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages)</code></div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#acknowledgeAsync(org.apache.pulsar.client.api.Messages,org.apache.pulsar.client.api.transaction.Transaction)" class="member-name-link">acknowledgeAsync</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages,
+ <a href="../transaction/Transaction.html" title="interface in org.apache.pulsar.client.api.transaction">Transaction</a>&nbsp;txn)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Acknowledge the failure to process <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
+<div class="block">Asynchronously acknowledge the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>, it will store in pending ack.</div>
 </div>
 <div class="col-first odd-row-color"><code>void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#reconsumeLater(org.apache.pulsar.client.api.Messages,long,java.util.concurrent.TimeUnit)" class="member-name-link">reconsumeLater</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages,
+<div class="col-second odd-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#negativeAcknowledge(org.apache.pulsar.client.api.Messages)" class="member-name-link">negativeAcknowledge</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Acknowledge the failure to process <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
+</div>
+<div class="col-first even-row-color"><code>void</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#reconsumeLater(org.apache.pulsar.client.api.Messages,long,java.util.concurrent.TimeUnit)" class="member-name-link">reconsumeLater</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages,
+ long&nbsp;delayTime,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;unit)</code></div>
+<div class="col-last even-row-color">
+<div class="block">reconsumeLater the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#reconsumeLaterAsync(org.apache.pulsar.client.api.Messages,long,java.util.concurrent.TimeUnit)" class="member-name-link">reconsumeLaterAsync</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages,
  long&nbsp;delayTime,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;unit)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">reconsumeLater the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
-</div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Consumer.</span><code><a href="../Consumer.html#reconsumeLaterAsync(org.apache.pulsar.client.api.Messages,long,java.util.concurrent.TimeUnit)" class="member-name-link">reconsumeLaterAsync</a><wbr>(<a href="../Messages.html" title="interface in org.apache.pulsar.client.api">Messages</a>&lt;?&gt;&nbsp;messages,
- long&nbsp;delayTime,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;unit)</code></div>
-<div class="col-last even-row-color">
 <div class="block">Asynchronously reconsumeLater the consumption of <a href="../Messages.html" title="interface in org.apache.pulsar.client.api"><code>Messages</code></a>.</div>
 </div>
 </div>
