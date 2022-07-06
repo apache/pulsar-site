@@ -36,8 +36,8 @@ cp -r pulsar-client-api/target/site/apidocs/* $DEST_DIR/api/client/${VERSION}/
 
 # Java admin
 mkdir -p $DEST_DIR/api/admin/${VERSION}
-mvn -pl pulsar-client-admin javadoc:javadoc
-cp -r pulsar-client-admin/target/site/apidocs/* $DEST_DIR/api/admin/${VERSION}/
+mvn -pl pulsar-client-admin-api javadoc:javadoc
+cp -r pulsar-client-admin-api/target/site/apidocs/* $DEST_DIR/api/admin/${VERSION}/
 
 # Pulsar Functions Java SDK
 mkdir -p $DEST_DIR/api/pulsar-functions/${VERSION}
