@@ -139,11 +139,11 @@ const from = [
   /@pulsar:dist_deb:client@/g,
   /@pulsar:dist_deb:client-devel@/g,
 
-  /\/api\/python/g,
-  /\/api\/cpp/g,
-  /\/api\/pulsar-functions/g,
-  /\/api\/client/g,
-  /\/api\/admin/g,
+  /\(\/api\/python/g,
+  /\(\/api\/cpp/g,
+  /\(\/api\/pulsar-functions/g,
+  /\(\/api\/client/g,
+  /\(\/api\/admin/g,
 
   /@pulsar:version_number@/g,
 
