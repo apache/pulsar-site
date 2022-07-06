@@ -46,9 +46,4 @@ mvn -pl api-java javadoc:javadoc
 cd ..
 cp -r pulsar-functions/api-java/target/site/apidocs/* $DEST_DIR/api/pulsar-functions/${VERSION}/
 
-# Broker
-mkdir -p $DEST_DIR/api/pulsar-broker/${VERSION}
-mvn -pl pulsar-broker javadoc:javadoc
-cp -r pulsar-broker/target/site/apidocs/* $DEST_DIR/api/pulsar-broker/${VERSION}/
-
 rm -rf apache-pulsar-${VERSION}
