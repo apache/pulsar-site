@@ -31,4 +31,4 @@ The previous flow built -SNAPSHOT docs on a regular cadence. The new paradigm is
 
 The following docs are generated per version:
 
-1. Pulsar Javadocs (client, admin client, function api, broker)
+1. Pulsar Javadocs (client, admin client, function api)
