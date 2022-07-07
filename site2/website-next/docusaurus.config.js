@@ -122,7 +122,7 @@ const injectLinkParseForEndpoint = ([, info]) => {
 module.exports = {
   title: "Apache Pulsar",
   tagline:
-    "Apache Pulsar is a cloud-native, distributed messaging and streaming platform originally created at Yahoo! and now a top-level Apache Software Foundation project",
+    "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
   url: "https://pulsar.apache.org",
   baseUrl: baseUrl,
   onBrokenLinks: "ignore",
