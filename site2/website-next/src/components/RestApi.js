@@ -12,6 +12,8 @@ function parseVersion(pathName) {
     swagger = "swaggersink";
   } else if (pathName.indexOf("packages") > -1) {
     swagger = "swaggerpackages";
+  } else if (pathName.indexOf("transactions") > -1) {
+    swagger = "swaggertransactions";
   }
   let version = getVersion();
   let apiversion = getApiVersion(swagger);
@@ -79,6 +81,11 @@ class RestApi extends React.Component {
       redoc.setAttribute(
         "spec-url",
         "/swagger/" + version + "/" + apiversion + "/swaggerpackages.json"
+      );
+    } else if (pathName.indexOf("transactions-rest-api" >= 0)) {
+      redoc.setAttribute(
+        "spec-url",
+        "/swagger/" + version + "/" + apiversion + "/swaggertransactions.json"
       );
     }
     redoc.setAttribute("lazy-rendering", "true");
