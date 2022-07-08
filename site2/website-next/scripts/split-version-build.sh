@@ -57,9 +57,9 @@ FORCE_CROWDIN_ALL=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_ALL=\([0-1]*\).*/\1/g')
 FORCE_CROWDIN_UP=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_UP=\([0-1]*\).*/\1/g')
 FORCE_CROWDIN_DOWN=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_DOWN=\([0-1]*\).*/\1/g')
 if [[ $FORCE_BUILD_VERSIONS =~ ^[0-9\.]+$ ]]; then
-    $SUPPLEMENT_VERSIONS=$FORCE_BUILD_VERSIONS
+    SUPPLEMENT_VERSIONS=$FORCE_BUILD_VERSIONS
 else
-    $SUPPLEMENT_VERSIONS=""
+    SUPPLEMENT_VERSIONS=""
 fi
 
 yarn write-translations
