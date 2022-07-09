@@ -85,7 +85,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#ackTimeoutRedeliveryBackoff(org.apache.pulsar.client.api.RedeliveryBackoff)" class="member-name-link">ackTimeoutRedeliveryBackoff</a><wbr>(<a href="../RedeliveryBackoff.html" title="interface in org.apache.pulsar.client.api">RedeliveryBackoff</a>&nbsp;ackTimeoutRedeliveryBackoff)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Notice: the redeliveryBackoff will not work with `consumer.negativeAcknowledge(MessageId messageId)`
+<div class="block">Notice: the redeliveryBackoff doesn't work with `consumer.negativeAcknowledge(MessageId messageId)`
  because we are not able to get the redelivery count from the message ID.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
@@ -110,7 +110,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#autoUpdatePartitions(boolean)" class="member-name-link">autoUpdatePartitions</a><wbr>(boolean&nbsp;autoUpdate)</code></div>
 <div class="col-last even-row-color">
-<div class="block">If enabled, the consumer will auto subscribe for partitions increasement.</div>
+<div class="block">If enabled, the consumer auto-subscribes for partitions increasement.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#autoUpdatePartitionsInterval(int,java.util.concurrent.TimeUnit)" class="member-name-link">autoUpdatePartitionsInterval</a><wbr>(int&nbsp;interval,
@@ -171,7 +171,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#enableRetry(boolean)" class="member-name-link">enableRetry</a><wbr>(boolean&nbsp;retryEnable)</code></div>
 <div class="col-last even-row-color">
-<div class="block">If enabled, the consumer will auto retry message.</div>
+<div class="block">If enabled, the consumer auto retries message.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#expireTimeOfIncompleteChunkedMessage(long,java.util.concurrent.TimeUnit)" class="member-name-link">expireTimeOfIncompleteChunkedMessage</a><wbr>(long&nbsp;duration,
@@ -188,7 +188,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#isAckReceiptEnabled(boolean)" class="member-name-link">isAckReceiptEnabled</a><wbr>(boolean&nbsp;isAckReceiptEnabled)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Ack will return receipt but does not mean that the message will not be resent after get receipt.</div>
+<div class="block">Ack returns receipt but does not mean that the message is not resent after get receipt.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#keySharedPolicy(org.apache.pulsar.client.api.KeySharedPolicy)" class="member-name-link">keySharedPolicy</a><wbr>(<a href="../KeySharedPolicy.html" title="class in org.apache.pulsar.client.api">KeySharedPolicy</a>&nbsp;keySharedPolicy)</code></div>
@@ -230,13 +230,13 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#messagePayloadProcessor(org.apache.pulsar.client.api.MessagePayloadProcessor)" class="member-name-link">messagePayloadProcessor</a><wbr>(<a href="../MessagePayloadProcessor.html" title="interface in org.apache.pulsar.client.api">MessagePayloadProcessor</a>&nbsp;payloadProcessor)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">If it's configured with a non-null value, the consumer will use the processor to process the payload, including
+<div class="block">If it's configured with a non-null value, the consumer uses the processor to process the payload, including
  decoding it to messages and triggering the listener.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#negativeAckRedeliveryBackoff(org.apache.pulsar.client.api.RedeliveryBackoff)" class="member-name-link">negativeAckRedeliveryBackoff</a><wbr>(<a href="../RedeliveryBackoff.html" title="interface in org.apache.pulsar.client.api">RedeliveryBackoff</a>&nbsp;negativeAckRedeliveryBackoff)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Notice: the negativeAckRedeliveryBackoff will not work with `consumer.negativeAcknowledge(MessageId messageId)`
+<div class="block">Notice: the negativeAckRedeliveryBackoff doesn't work with `consumer.negativeAcknowledge(MessageId messageId)`
  because we are not able to get the redelivery count from the message ID.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
@@ -293,7 +293,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#readCompacted(boolean)" class="member-name-link">readCompacted</a><wbr>(boolean&nbsp;readCompacted)</code></div>
 <div class="col-last even-row-color">
-<div class="block">If enabled, the consumer will read messages from the compacted topic rather than reading the full message backlog
+<div class="block">If enabled, the consumer reads messages from the compacted topic rather than reading the full message backlog
  of the topic.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
@@ -348,22 +348,22 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#topic(java.lang.String...)" class="member-name-link">topic</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;topicNames)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Specify the topics this consumer will subscribe on.</div>
+<div class="block">Specify the topics this consumer subscribes on.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#topics(java.util.List)" class="member-name-link">topics</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;topicNames)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Specify a list of topics that this consumer will subscribe on.</div>
+<div class="block">Specify a list of topics that this consumer subscribes on.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#topicsPattern(java.lang.String)" class="member-name-link">topicsPattern</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;topicsPattern)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Specify a pattern for topics that this consumer will subscribe on.</div>
+<div class="block">Specify a pattern for topics that this consumer subscribes on.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="../ConsumerBuilder.html" title="interface in org.apache.pulsar.client.api">ConsumerBuilder</a>&lt;<a href="../ConsumerBuilder.html" title="type parameter in ConsumerBuilder">T</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">ConsumerBuilder.</span><code><a href="../ConsumerBuilder.html#topicsPattern(java.util.regex.Pattern)" class="member-name-link">topicsPattern</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html" title="class or interface in java.util.regex" class="external-link">Pattern</a>&nbsp;topicsPattern)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Specify a pattern for topics that this consumer will subscribe on.</div>
+<div class="block">Specify a pattern for topics that this consumer subscribes on.</div>
 </div>
 </div>
 </section>
