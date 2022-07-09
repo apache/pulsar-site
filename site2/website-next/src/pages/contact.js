@@ -56,6 +56,23 @@ export default function page(props) {
           </h2>
           <MailTable data={mailingLists}></MailTable>
           <h2>
+            <translate>
+              Reporting a Vulnerability
+            </translate>
+          </h2>
+          <p>
+            To report a vulnerability for Pulsar, contact the <a href="https://www.apache.org/security/projects.html" target="_blank">Apache Security Team</a>.
+          </p>
+          <p>
+            <translate>The process for reporting a vulnerability is outlined </translate>
+            <a href="https://www.apache.org/security/" target="_blank">here</a>
+            <translate>. When reporting a vulnerability to </translate>
+            <a href="mailto:security@apache.org" target="_blank">security@apache.org</a>
+            <translate>, you can copy your email to </translate>
+            <a href="mailto:private@pulsar.apache.org" target="_blank">private@pulsar.apache.org</a>
+            <translate> to send your report to the Apache Pulsar Project Management Committee. This is a private mailing list.</translate>
+          </p>
+          <h2>
             <Translate>Stack Overflow</Translate>
           </h2>
           <p>
