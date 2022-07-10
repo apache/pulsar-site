@@ -521,7 +521,29 @@ export default function Community(props) {
         <section id="community" className="py-12 scrollable">
           <div className="inner">
             <h2 className="text--center">Meet the Community</h2>
-            <TeamTable data={teamObj.committers} />
+            <h3 className="text--center">PMC</h3>
+            <div className="md:grid md:grid-cols-2 md:gap-x-4">
+              <TeamTable
+                data={teamObj.pmc.slice(0, (teamObj.pmc.length + 1) / 2)}
+              />
+              <TeamTable
+                data={teamObj.pmc.slice((teamObj.pmc.length + 1) / 2)}
+              />
+            </div>
+            <h3 className="text--center">Committers</h3>
+            <div className="md:grid md:grid-cols-2 md:gap-x-4">
+              <TeamTable
+                data={teamObj.committers.slice(
+                  0,
+                  (teamObj.committers.length + 1) / 2
+                )}
+              />
+              <TeamTable
+                data={teamObj.committers.slice(
+                  (teamObj.committers.length + 1) / 2
+                )}
+              />
+            </div>
           </div>
         </section>
         <PromoCallout
