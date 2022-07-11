@@ -542,6 +542,10 @@ export default function Community(props) {
                 data={teamObj.pmc.slice((teamObj.pmc.length + 1) / 2)}
               />
             </div>
+            <div className="md:grid md:grid-cols-2 md:gap-x-4">
+              <img src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorOverTime&repo=apache/pulsar" />
+              <img src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorMonthlyActivity&repo=apache/pulsar" />
+            </div>
           </div>
         </section>
         <PromoCallout
