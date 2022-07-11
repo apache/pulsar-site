@@ -1,287 +1,268 @@
 module.exports = {
+  pmc: [
+    {
+      name: "Sahaya Andrews",
+      apacheId: "andrews",
+    },
+    {
+      name: "Brad McMillen",
+      apacheId: "bradtm",
+    },
+    {
+      name: "Hang Chen",
+      apacheId: "chenhang",
+    },
+    {
+      name: "Enrico Olivelli",
+      apacheId: "eolivelli",
+    },
+    {
+      name: "Jennifer Huang",
+      apacheId: "hjf",
+    },
+    {
+      name: "Hiroyuki Sakai",
+      apacheId: "hrsakai",
+    },
+    {
+      name: "Ivan Brendan Kelly",
+      apacheId: "ivank",
+    },
+    {
+      name: "Jai Asher",
+      apacheId: "jai1",
+    },
+    {
+      name: "Boyang Jerry Peng",
+      apacheId: "jerrypeng",
+    },
+    {
+      name: "Jim Jagielski",
+      apacheId: "jim",
+    },
+    {
+      name: "Joe Francis",
+      apacheId: "joef",
+    },
+    {
+      name: "Lari Hotari",
+      apacheId: "lhotari",
+    },
+    {
+      name: "Lin Lin",
+      apacheId: "linlin",
+    },
+    {
+      name: "Liu Yu",
+      apacheId: "liuyu",
+    },
+    {
+      name: "Ludwig Pummer",
+      apacheId: "ludwigp",
+    },
+    {
+      name: "Masakazu Kitajo",
+      apacheId: "maskit",
+    },
+    {
+      name: "Masahiro Sakamoto",
+      apacheId: "massakam",
+    },
+    {
+      name: "Matteo Merli",
+      apacheId: "mmerli",
+    },
+    {
+      name: "Nozomi Kurihara",
+      apacheId: "nkurihar",
+    },
+    {
+      name: "Penghui Li",
+      apacheId: "penghui",
+    },
+    {
+      name: "P. Taylor Goetz",
+      apacheId: "ptgoetz",
+    },
+    {
+      name: "Rajan Dhabalia",
+      apacheId: "rdhabalia",
+    },
+    {
+      name: "Sanjeev Kulkarni",
+      apacheId: "sanjeevrk",
+    },
+    {
+      name: "Siddharth Boobna",
+      apacheId: "sboobna",
+    },
+    {
+      name: "Sijie Guo",
+      apacheId: "sijie",
+    },
+    {
+      name: "Sebastián Schepens",
+      apacheId: "sschepens",
+    },
+    {
+      name: "Francis Christopher Liu",
+      apacheId: "toffer",
+    },
+    {
+      name: "Dave Fisher",
+      apacheId: "wave",
+    },
+    {
+      name: "Yuki Shiga",
+      apacheId: "yushiga",
+    },
+    {
+      name: "Jia Zhai",
+      apacheId: "zhaijia",
+    },
+  ],
   committers: [
     {
-      name: 'Ali Ahmed',
-      apacheId: 'aahmed',
-      roles: 'Committer'
+      name: "Ali Ahmed",
+      apacheId: "aahmed",
     },
     {
-      name: 'Addison Higham',
-      apacheId: 'addisonj',
-      org: 'StreamNative',
-      roles: 'Committer'
+      name: "Addison Higham",
+      apacheId: "addisonj",
+      org: "StreamNative",
     },
     {
-      name: 'Bo Cong',
-      apacheId: 'bogong',
-      org: 'StreamNative',
-      roles: 'Committer'
+      name: "Aloys Zhang",
+      apacheId: "aloyszhang",
     },
     {
-      name: 'Boyang Jerry Peng',
-      apacheId: 'jerrypeng',
-      org: 'Streamlio',
-      roles: 'Committer, PMC'
+      name: "Andrey Yegorov",
+      apacheId: "ayegorov",
     },
     {
-      name: 'Brad McMillen',
-      apacheId: 'bradtm',
-      org: 'Yahoo',
-      roles: 'Committer, PMC',
+      name: "Daniel Blankensteiner",
+      apacheId: "blankensteiner",
     },
     {
-      name: 'Chris Kellogg',
-      apacheId: 'cckellogg',
-      org: 'Splunk',
-      roles: 'Committer'
+      name: "Bo Cong",
+      apacheId: "bogong",
+      org: "StreamNative",
     },
     {
-      name: 'Daniel Blankensteiner',
-      apacheId: 'blankensteiner',
-      roles: 'Committer'
+      name: "Chris Kellogg",
+      apacheId: "cckellogg",
+      org: "Splunk",
     },
     {
-      name: 'David Fisher',
-      apacheId: 'wave',
-      roles: 'Committer, PMC'
+      name: "davidkj",
+      apacheId: "davekj",
     },
     {
-      name: 'David Kjerrumgaard',
-      apacheId: 'david-streamlio',
-      roles: 'Committer'
+      name: "Dezhi Liu",
+      apacheId: "dezhiliu",
     },
     {
-      name: 'Enrico Olivelli',
-      apacheId: 'eolivelli',
-      roles: 'Committer, PMC'
+      name: "Guangning E",
+      apacheId: "guangning",
     },
     {
-      name: 'Fangbin Sun',
-      apacheId: 'sunfangbin',
-      roles: 'Committer'
+      name: "Huanli Meng",
+      apacheId: "huanlimeng",
+      org: "StreamNative",
     },
     {
-      name: 'Francis Christopher Liu',
-      apacheId: 'toffer',
-      roles: 'Committer, PMC'
+      name: "Haiting Jiang",
+      apacheId: "jianghaiting",
     },
     {
-      name: 'Guangning E',
-      apacheId: 'guangning',
-      roles: 'Committer'
+      name: "Yuto Furuta",
+      apacheId: "k2la",
+      org: "Yahoo Japan Corporation",
     },
     {
-      name: 'Guo Jiwei',
-      apacheId: 'technoboy',
-      org: 'StreamNative',
-      roles: 'Committer'
+      name: "Qiang Zhao",
+      apacheId: "mattisonchao",
     },
     {
-      name: 'Hang Chen',
-      apacheId: 'chenhang',
-      org: 'BIGO Technology',
-      roles: 'Committer, PMC'
+      name: "Michael Marshall",
+      apacheId: "mmarshall",
+      org: "DataStax",
     },
     {
-      name: 'Hiroyuki Sakai',
-      apacheId: 'hrsakai',
-      org: 'Yahoo Japan Corporation',
-      roles: 'Committer, PMC'
+      name: "Nicolò Boschi",
+      apacheId: "nicoloboschi",
     },
     {
-      name: 'Huanli Meng',
-      apacheId: 'huanlimeng',
-      org: 'StreamNative',
-      roles: 'Committer'
+      name: "Rui Fu",
+      apacheId: "rfu",
+      org: "StreamNative",
     },
     {
-      name: 'Ivan Brendan Kelly',
-      apacheId: 'ivank',
-      org: 'Streamlio',
-      roles: 'Committer, PMC'
+      name: "Ran Gao",
+      apacheId: "rgao",
+      org: "StreamNative",
     },
     {
-      name: 'Jai Asher',
-      apacheId: 'jai1',
-      org: 'Yahoo',
-      roles: 'Committer, PMC'
+      name: "Xiaolong Ran",
+      apacheId: "rxl",
+      org: "StreamNative",
     },
     {
-      name: 'Jennifer Huang',
-      apacheId: 'hjf',
-      org: 'StreamNative',
-      roles: 'Committer, PMC'
+      name: "ZhangJian He",
+      apacheId: "shoothzj",
     },
     {
-      name: 'Jia Zhai',
-      apacheId: 'zhaijia',
-      org: 'StreamNative',
-      roles: 'Committer, PMC'
+      name: "Fangbin Sun",
+      apacheId: "sunfangbin",
     },
     {
-      name: 'Jim Jagielski',
-      apacheId: 'jim',
-      roles: 'Committer, PMC'
+      name: "Guo Jiwei",
+      apacheId: "technoboy",
+      org: "StreamNative",
     },
     {
-      name: 'Joe Francis',
-      apacheId: 'joef',
-      org: 'Yahoo',
-      roles: 'Committer, PMC'
+      name: "Li Li",
+      apacheId: "urfree",
     },
     {
-      name: 'Lari Hotari',
-      apacheId: 'lhotari',
-      org: 'DataStax',
-      roles: 'Committer'
+      name: "Xiangying Meng",
+      apacheId: "xiangying",
     },
     {
-      name: 'Lin Lin',
-      apacheId: 'linlin',
-      org: 'Tencent',
-      roles: 'Committer, PMC'
+      name: "Marvin Cai",
+      apacheId: "xxc",
     },
     {
-      name: 'Ludwig Pummer',
-      apacheId: 'ludwigp',
-      org: 'Yahoo',
-      roles: 'Committer, PMC'
+      name: "Yunze Xu",
+      apacheId: "xyz",
+      org: "StreamNative",
     },
     {
-      name: 'Masahiro Sakamoto',
-      apacheId: 'massakam',
-      org: 'Yahoo Japan Corporation',
-      roles: 'Committer, PMC'
+      name: "Yijie Shen",
+      apacheId: "yjshen",
+      org: "KUAISHOU",
     },
     {
-      name: 'Masakazu Kitajo',
-      apacheId: 'maskit',
-      org: '',
-      roles: 'Committer, PMC'
+      name: "Yong Zhang",
+      apacheId: "yong",
+      org: "StreamNative",
     },
     {
-      name: 'Matteo Merli',
-      apacheId: 'mmerli',
-      org: 'Streamlio',
-      roles: 'Committer, PMC'
+      name: "Ruguo Yu",
+      apacheId: "yuruguo",
     },
     {
-      name: 'Michael Marshall',
-      apacheId: 'mmarshall',
-      org: 'DataStax',
-      roles: 'Committer'
+      name: "Gavin Gao",
+      apacheId: "zhangmingao",
     },
     {
-      name: 'Nozomi Kurihara',
-      apacheId: 'nkurihar',
-      org: 'Yahoo Japan Corporation',
-      roles: 'Committer, PMC'
+      name: "Zike Yang",
+      apacheId: "zike",
+      org: "StreamNative",
     },
     {
-      name: 'P. Taylor Goetz',
-      apacheId: 'ptgoetz',
-      roles: 'Committer, PMC'
+      name: "Zixuan Liu",
+      apacheId: "zixuan",
     },
-    {
-      name: 'Penghui Li',
-      apacheId: 'penghui',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Rajan Dhabalia',
-      apacheId: 'rdhabalia',
-      org: 'Yahoo',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Ran Gao',
-      apacheId: 'rgao',
-      org: 'StreamNative',
-      roles: 'Committer'
-    },
-    {
-      name: 'Rui Fu',
-      apacheId: 'rfu',
-      org: 'StreamNative',
-      roles: 'Committer'
-    },
-    {
-      name: 'Sahaya Andrews',
-      apacheId: 'andrews',
-      org: 'Yahoo',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Sanjeev Kulkarni',
-      apacheId: 'sanjeevrk',
-      org: 'Streamlio',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Sebastián Schepens',
-      apacheId: 'sschepens',
-      org: 'MercadoLibre',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Siddharth Boobna',
-      apacheId: 'sboobna',
-      org: 'Salesforce',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Sijie Guo',
-      apacheId: 'sijie',
-      org: 'StreamNative',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Xiaolong Ran',
-      apacheId: 'rxl',
-      org: 'StreamNative',
-      roles: 'Committer'
-    },
-    {
-      name: 'Yijie Shen',
-      apacheId: 'yjshen',
-      org: 'KUAISHOU',
-      roles: 'Committer'
-    },
-    {
-      name: 'Yu Liu',
-      apacheId: 'liuyu',
-      org: 'StreamNative',
-      roles: 'Committer'
-    },
-    {
-      name: 'Yuki Shiga',
-      apacheId: 'yushiga',
-      org: 'Yahoo Japan Corporation',
-      roles: 'Committer, PMC'
-    },
-    {
-      name: 'Yunze Xu',
-      apacheId: 'xyz',
-      org: 'StreamNative',
-      roles: 'Committer'
-    },
-    {
-      name: 'Yuto Furuta',
-      apacheId: 'k2la',
-      org: 'Yahoo Japan Corporation',
-      roles: 'Committer'
-    },
-    {
-      name: 'Yong Zhang',
-      apacheId: 'yong',
-      org: 'StreamNative',
-      roles: 'Committer'
-    },
-    {
-      name: 'Zike Yang',
-      apacheId: 'zike',
-      org: 'StreamNative',
-      roles: 'Committer'
-    }
-  ]
-}
+  ],
+};
