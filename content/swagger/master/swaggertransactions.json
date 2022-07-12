@@ -1004,9 +1004,6 @@
         "abstract" : {
           "type" : "boolean"
         },
-        "contentType" : {
-          "$ref" : "#/definitions/JavaType"
-        },
         "bindings" : {
           "$ref" : "#/definitions/TypeBindings"
         },
@@ -1058,6 +1055,9 @@
         "mapLikeType" : {
           "type" : "boolean"
         },
+        "contentType" : {
+          "$ref" : "#/definitions/JavaType"
+        },
         "typeName" : {
           "type" : "string"
         },
@@ -1092,9 +1092,6 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
-        "closed" : {
-          "type" : "boolean"
-        },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
         },
@@ -1106,17 +1103,6 @@
         },
         "prettyPrinter" : {
           "$ref" : "#/definitions/PrettyPrinter"
-        },
-        "currentValue" : {
-          "type" : "object"
-        },
-        "featureMask" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "formatFeatures" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "highestEscapedChar" : {
           "type" : "integer",
@@ -1131,6 +1117,20 @@
         },
         "outputContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
+        },
+        "currentValue" : {
+          "type" : "object"
+        },
+        "featureMask" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "formatFeatures" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "closed" : {
+          "type" : "boolean"
         }
       }
     },
@@ -1170,9 +1170,6 @@
         },
         "text" : {
           "type" : "string"
-        },
-        "closed" : {
-          "type" : "boolean"
         },
         "textCharacters" : {
           "type" : "array",
@@ -1243,20 +1240,6 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "valueAsLong" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "valueAsDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "valueAsBoolean" : {
-          "type" : "boolean"
-        },
-        "valueAsString" : {
-          "type" : "string"
-        },
         "currentTokenId" : {
           "type" : "integer",
           "format" : "int32"
@@ -1307,6 +1290,23 @@
         "valueAsInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "valueAsLong" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "valueAsDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "valueAsBoolean" : {
+          "type" : "boolean"
+        },
+        "valueAsString" : {
+          "type" : "string"
+        },
+        "closed" : {
+          "type" : "boolean"
         }
       }
     },
@@ -1734,9 +1734,6 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
-        "generator" : {
-          "$ref" : "#/definitions/JsonGenerator"
-        },
         "config" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
@@ -1754,6 +1751,9 @@
         },
         "defaultNullKeySerializer" : {
           "$ref" : "#/definitions/JsonSerializerObject"
+        },
+        "generator" : {
+          "$ref" : "#/definitions/JsonGenerator"
         }
       }
     },
