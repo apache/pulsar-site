@@ -77,12 +77,12 @@ class RestApi extends React.Component {
         "spec-url",
         "/swagger/" + version + "/" + apiversion + "/swaggersink.json"
       );
-    } else if (pathName.indexOf("packages-rest-api" >= 0)) {
+    } else if (pathName.indexOf("packages-rest-api") >= 0) {
       redoc.setAttribute(
         "spec-url",
         "/swagger/" + version + "/" + apiversion + "/swaggerpackages.json"
       );
-    } else if (pathName.indexOf("transactions-rest-api" >= 0)) {
+    } else if (pathName.indexOf("transactions-rest-api") >= 0) {
       redoc.setAttribute(
         "spec-url",
         "/swagger/" + version + "/" + apiversion + "/swaggertransactions.json"
