@@ -965,10 +965,7 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "httpAuthType" : {
-          "type" : "string"
-        },
-        "commandData" : {
+        "subscription" : {
           "type" : "string"
         },
         "tlsCertificates" : {
@@ -977,7 +974,10 @@
             "$ref" : "#/definitions/Certificate"
           }
         },
-        "subscription" : {
+        "httpAuthType" : {
+          "type" : "string"
+        },
+        "commandData" : {
           "type" : "string"
         }
       }
@@ -1270,6 +1270,9 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
+        "classIntrospector" : {
+          "$ref" : "#/definitions/ClassIntrospector"
+        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
         },
@@ -1284,9 +1287,6 @@
         },
         "annotationProcessingEnabled" : {
           "type" : "boolean"
-        },
-        "classIntrospector" : {
-          "$ref" : "#/definitions/ClassIntrospector"
         }
       }
     },
@@ -1577,12 +1577,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -1908,6 +1908,9 @@
         "concrete" : {
           "type" : "boolean"
         },
+        "enumType" : {
+          "type" : "boolean"
+        },
         "keyType" : {
           "$ref" : "#/definitions/JavaType"
         },
@@ -1918,9 +1921,6 @@
           "type" : "boolean"
         },
         "javaLangObject" : {
-          "type" : "boolean"
-        },
-        "enumType" : {
           "type" : "boolean"
         },
         "containerType" : {
@@ -1947,10 +1947,10 @@
         "erasedSignature" : {
           "type" : "string"
         },
-        "collectionLikeType" : {
+        "mapLikeType" : {
           "type" : "boolean"
         },
-        "mapLikeType" : {
+        "collectionLikeType" : {
           "type" : "boolean"
         },
         "contentType" : {
@@ -2346,12 +2346,6 @@
             "format" : "byte"
           }
         },
-        "topicName" : {
-          "type" : "string"
-        },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
         "encryptionCtx" : {
           "$ref" : "#/definitions/EncryptionContext"
         },
@@ -2365,6 +2359,9 @@
         "brokerPublishTime" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
         },
         "publishTime" : {
           "type" : "integer",
@@ -2400,6 +2397,9 @@
         },
         "replicated" : {
           "type" : "boolean"
+        },
+        "topicName" : {
+          "type" : "string"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2786,6 +2786,9 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
+        "classIntrospector" : {
+          "$ref" : "#/definitions/ClassIntrospector"
+        },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
         },
@@ -2800,9 +2803,6 @@
         },
         "annotationProcessingEnabled" : {
           "type" : "boolean"
-        },
-        "classIntrospector" : {
-          "$ref" : "#/definitions/ClassIntrospector"
         }
       }
     },
