@@ -1,7 +1,7 @@
 #! /bin/sh
 node scripts/split-version.js
 
-locals=("en" "zh-CN" "zh-TW" "ja" "ko" "fr")
+locals=("en" "zh-CN")
 latest=$(cat scripts/.latest)
 BUILD_ALL_LANGUAGE="0"
 buildVersion="next"
@@ -22,7 +22,7 @@ function _build() {
 function _buildVersion() {
     if [[ $buildVersion = "next" ]]; then
         echo "..." ${buildVersion} "and" $latest" begin build..."
-        echo "[\"en\", \"zh-CN\", \"zh-TW\", \"ja\", \"fr\", \"ko\"]" >./.build-languages.json
+        echo "[\"en\", \"zh-CN\"]" >./.build-languages.json
         echo "[\"current\", \"${latest}\"]" >.build-versions.json
     else
         echo "..." $buildVersion "begin build..."

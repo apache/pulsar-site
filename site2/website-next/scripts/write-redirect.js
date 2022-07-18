@@ -5,7 +5,7 @@ const mkdirp = require("mkdirp");
 let versions = require("../versions.json");
 const latestVersion = versions[0];
 versions.push("next");
-const locales = ["en", "zh-CN", "zh-TW", "ja", "ko", "fr"];
+const locales = ["en", "zh-CN"];
 
 function _template(locale, version, docsId) {
   locale = locale == "en" ? "" : "/" + locale;
