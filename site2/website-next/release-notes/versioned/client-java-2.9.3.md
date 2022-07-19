@@ -4,7 +4,7 @@ title: Client Java 2.9.3
 sidebar_label: Client Java 2.9.3
 ---
 
-- [fix][java] Fix ConsumerBuilderImpl can not set null to deadLetterPolicy. [#14980](https://github.com/apache/pulsar/pull/14980)
+- [fix][java] Fix ConsumerBuilderImpl can not set null to deadLetterPolicy [#14980](https://github.com/apache/pulsar/pull/14980)
 - [fix][java] Fix conversion of `TimestampMillisConversion` has no effect when Jsr310Conversion enabled [#15863](https://github.com/apache/pulsar/pull/15863)
 - [fix][java] Fix messages sent by producers without schema cannot be decoded [#15622](https://github.com/apache/pulsar/pull/15622)
 - [fix][java] Fix performance regression with message listener [#15162](https://github.com/apache/pulsar/pull/15162)
