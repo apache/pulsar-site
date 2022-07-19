@@ -72,7 +72,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][broker] Fix duplicated delayed messages when all consumers disconnect [#14740](https://github.com/apache/pulsar/pull/14740)
 - [fix][broker] Fix the pid occupied check when use pulsar-daemon start or stop process [#14701](https://github.com/apache/pulsar/pull/14701)
 - [fix][broker] Fix potential NPE in Replicator [#15003](https://github.com/apache/pulsar/pull/15003)
-- [improve][broker] Add log when update namespace policies with error [#14850](https://github.com/apache/pulsar/pull/14850)
+- [improve][broker] Add log when updating namespace policies with error [#14850](https://github.com/apache/pulsar/pull/14850)
 - [improve][broker] Add publishRateLimitedTimes to topic metrics [#15739](https://github.com/apache/pulsar/pull/15739)
 - [improve][broker] Avoid using blocking calls for the async method ``checkTopicOwnership`` [#15023](https://github.com/apache/pulsar/pull/15023)
 - [improve][broker] Cancel offload tasks when managed ledger closed [#14545](https://github.com/apache/pulsar/pull/14545)
