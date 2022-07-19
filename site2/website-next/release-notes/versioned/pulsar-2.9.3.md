@@ -55,7 +55,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][broker] Fix when nextValidLedger is null caused NPE [#13975](https://github.com/apache/pulsar/pull/13975)
 - [fix][broker] Fix wrong prompt exception when getting the non-persistent topic list without GET_BUDNLE permission [#14638](https://github.com/apache/pulsar/pull/14638)
 - [fix][broker] Fix wrong state for non-durable cursor [#14869](https://github.com/apache/pulsar/pull/14869)
-- [fix][broker] Fix wrong unit of NIC speed on linux [#15770](https://github.com/apache/pulsar/pull/15770)
+- [fix][broker] Fix wrong unit of NIC speed on Linux [#15770](https://github.com/apache/pulsar/pull/15770)
 - [fix][broker] Fix 404 error msg not being returned correctly using http lookup [#14677](https://github.com/apache/pulsar/pull/14677)
 - [fix][broker] Follow up on race condition fixes in ManagedCursorImpl [#15067](https://github.com/apache/pulsar/pull/15067)
 - [fix][broker] Remove the loadbalance/bundle-data node [#13164](https://github.com/apache/pulsar/pull/13164)
