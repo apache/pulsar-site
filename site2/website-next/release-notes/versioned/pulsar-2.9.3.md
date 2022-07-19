@@ -77,7 +77,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [improve][broker] Avoid using blocking calls for the async method ``checkTopicOwnership`` [#15023](https://github.com/apache/pulsar/pull/15023)
 - [improve][broker] Cancel offload tasks when managed ledger closed [#14545](https://github.com/apache/pulsar/pull/14545)
 - [improve][broker] Close connection if a ping or pong message cannot be sent [#15382](https://github.com/apache/pulsar/pull/15382)
-- [improve][broker] Configure DLog Bookie, Pulsar, and Admin clients via pass through config [#15818](https://github.com/apache/pulsar/pull/15818)
+- [improve][broker] Configure DLog Bookie, Pulsar, and Admin clients via pass-through config [#15818](https://github.com/apache/pulsar/pull/15818)
 - [improve][broker] Full-support SSL provider, ciphers, and protocols for broker service and proxy service [#14569](https://github.com/apache/pulsar/pull/14569)
 - [improve][broker] Ignore the print the log that the topic does not exist [#13535](https://github.com/apache/pulsar/pull/13535)
 - [improve][broker] Optimize RawReader#create when using Compactor [#14447](https://github.com/apache/pulsar/pull/14447)
