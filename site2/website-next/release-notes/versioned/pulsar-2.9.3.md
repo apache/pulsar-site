@@ -70,7 +70,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][broker] Fix resource group does not report usage [#15292](https://github.com/apache/pulsar/pull/15292)
 - [fix][broker] Fix the pid occupied check when use pulsar-daemon start or stop process [#15745](https://github.com/apache/pulsar/pull/15745)
 - [fix][broker] Fix duplicated delayed messages when all consumers disconnect [#14740](https://github.com/apache/pulsar/pull/14740)
-- [fix][broker] Fix the pid occupied check when use pulsar-daemon start or stop process [#14701](https://github.com/apache/pulsar/pull/14701)
+- [fix][broker] Fix the pid occupied check when using pulsar-daemon start or stop process [#14701](https://github.com/apache/pulsar/pull/14701)
 - [fix][broker] Fix potential NPE in Replicator [#15003](https://github.com/apache/pulsar/pull/15003)
 - [improve][broker] Add log when updating namespace policies with error [#14850](https://github.com/apache/pulsar/pull/14850)
 - [improve][broker] Add publishRateLimitedTimes to topic metrics [#15739](https://github.com/apache/pulsar/pull/15739)
