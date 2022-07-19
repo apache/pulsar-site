@@ -14,7 +14,7 @@ sidebar_label: Client Java 2.9.3
 - [fix][java] PartitionsAutoUpdateFuture never complete [#14625](https://github.com/apache/pulsar/pull/14625)
 - [fix][java] Remove consumer when close consumer command is received [#15761](https://github.com/apache/pulsar/pull/15761)
 - [fix][java] Fix PartitionedProducerImpl flushAsync always fail when one partition send TimeOutException [#14602](https://github.com/apache/pulsar/pull/14602)
-- [improve][java] Add pending messages information while print the producer stats [#15440](https://github.com/apache/pulsar/pull/15440)
+- [improve][java] Add pending messages information while printing the producer stats [#15440](https://github.com/apache/pulsar/pull/15440)
 - [improve][java] AsyncHttpConnector doesn't use the system properties configured [#15307](https://github.com/apache/pulsar/pull/15307)
 - [improve][java] Avoid timer task run before previous subscribe complete [#14818](https://github.com/apache/pulsar/pull/14818)
 - [improve][java] Process maxRedeliverCount is 0 of DeadLeddterPolicy [#14706](https://github.com/apache/pulsar/pull/14706)
