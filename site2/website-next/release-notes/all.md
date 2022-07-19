@@ -10,7 +10,7 @@ slug: /
 #### 2.10.x
 [2.10.0](/release-notes/versioned/pulsar-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/pulsar-2.10.1)&ensp;&ensp;
 #### 2.9.x
-[2.9.2](/release-notes/versioned/pulsar-2.9.2)&ensp;&ensp;[2.9.1](/release-notes/versioned/pulsar-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/versioned/pulsar-2.9.0)&ensp;&ensp;  
+[2.9.3](/release-notes/versioned/pulsar-2.9.3)&ensp;&ensp;[2.9.2](/release-notes/versioned/pulsar-2.9.2)&ensp;&ensp;[2.9.1](/release-notes/versioned/pulsar-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/versioned/pulsar-2.9.0)&ensp;&ensp;  
 #### 2.8.x
 [2.8.3](/release-notes/versioned/pulsar-2.8.3)&ensp;&ensp;[2.8.2](/release-notes/versioned/pulsar-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/pulsar-2.8.1)&ensp;&ensp;[2.8.0](/release-notes/versioned/pulsar-2.8.0)&ensp;&ensp;  
 #### 2.7.x
@@ -36,7 +36,7 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.10.x
 [2.10.0](/release-notes/versioned/client-java-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-java-2.10.1)&ensp;&ensp;
 #### 2.9.x
-[2.9.1](/release-notes/versioned/client-java-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/versioned/client-java-2.9.0)&ensp;&ensp;  
+[2.9.3](/release-notes/versioned/client-java-2.9.3)&ensp;&ensp;[2.9.0](/release-notes/versioned/client-java-2.9.0)&ensp;&ensp;  
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-java-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-java-2.8.1)&ensp;&ensp;  
 #### 2.7.x
@@ -49,7 +49,7 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.10.x
 [2.10.0](/release-notes/versioned/client-python-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-python-2.10.1)&ensp;&ensp;
 #### 2.9.x
-[2.9.0](/release-notes/versioned/client-python-2.9.0)&ensp;&ensp;  
+[2.9.3](/release-notes/versioned/client-python-2.9.3)&ensp;&ensp;[2.9.0](/release-notes/versioned/client-python-2.9.0)&ensp;&ensp;  
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-python-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-python-2.8.1)&ensp;&ensp;  
 #### 2.7.x
@@ -62,7 +62,7 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.10.x
 [2.10.0](/release-notes/versioned/client-cpp-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-cpp-2.10.1)&ensp;&ensp;
 #### 2.9.x
-[2.9.0](/release-notes/versioned/client-cpp-2.9.0)&ensp;&ensp;  
+[2.9.3](/release-notes/versioned/client-cpp-2.9.3)&ensp;&ensp;[2.9.0](/release-notes/versioned/client-cpp-2.9.0)&ensp;&ensp;  
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-cpp-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-cpp-2.8.1)&ensp;&ensp;  
 #### 2.7.x
@@ -76,6 +76,8 @@ All release notes of previous versions are available at [here](/release-notes/le
 ### WebSocket
 #### 2.10.x
 [2.10.0](/release-notes/versioned/client-websocket-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/client-websocket-2.10.1)&ensp;&ensp;
+#### 2.9.x
+[2.9.3](/release-notes/versioned/client-websocket-2.9.3)&ensp;&ensp;
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-websocket-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-websocket-2.8.1)&ensp;&ensp;  
 #### 2.7.x
