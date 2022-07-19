@@ -125,7 +125,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][txn] Fix transaction producer stuck problem [#15061](https://github.com/apache/pulsar/pull/15061)
 - [fix][txn] Fix transaction component recover fillQueue [#15418](https://github.com/apache/pulsar/pull/15418)
 - [fix][txn] Fix transasction ack batch message [#15875](https://github.com/apache/pulsar/pull/15875)
-- [improve][txn] Avoid create multiple future and exception handler [#15089](https://github.com/apache/pulsar/pull/15089)
+- [improve][txn] Avoid creating multiple future and exception handlers [#15089](https://github.com/apache/pulsar/pull/15089)
 - [improve][txn] Improve transaction perf logs [#14816](https://github.com/apache/pulsar/pull/14816)
 - [improve][txn] Optimize topic lookup when TC end tx [#14991](https://github.com/apache/pulsar/pull/14991)
 - [improve][txn] Optimize transaction lowWaterMark to clean useless data faster [#15592](https://github.com/apache/pulsar/pull/15592)
