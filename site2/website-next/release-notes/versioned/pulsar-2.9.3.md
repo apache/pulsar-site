@@ -183,7 +183,7 @@ sidebar_label: Apache Pulsar 2.9.3
 
 #### Connector
 
-- [fix][connector] Pass client builder if no service url provided to debezium connector [#12145](https://github.com/apache/pulsar/pull/12145)
+- [fix][connector] Pass client builder if no service URL is provided to Debezium connector [#12145](https://github.com/apache/pulsar/pull/12145)
 - [fix][connector] Throw exceptions when Kafka offset backing store failed to start  [#14491](https://github.com/apache/pulsar/pull/14491)
 
 #### Tiered Storage
