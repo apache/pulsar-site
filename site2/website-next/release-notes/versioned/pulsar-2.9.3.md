@@ -142,7 +142,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][auth] Role with namespace produce authz can also get topics [#15740](https://github.com/apache/pulsar/pull/15740)
 - [improve][auth] Add KeyStore support in WebSocket, Function Worker HTTPS Servers  [#15084](https://github.com/apache/pulsar/pull/15084)
 - [improve][auth] Allow to config web server's cipher and protocols [#13354](https://github.com/apache/pulsar/pull/13354)
-- [improve][auth] Full-support set ssl provider, ciphers and protocols [#13740](https://github.com/apache/pulsar/pull/13740)
+- [improve][auth] Full-support set SSL provider, ciphers, and protocols [#13740](https://github.com/apache/pulsar/pull/13740)
 - [improve][auth] Improve skipping of DNS resolution when creating AuthenticationDataHttp instance [#15228](https://github.com/apache/pulsar/pull/15228)
 - [improve][auth] Optimize the logic of allowing namespace operation [#15731](https://github.com/apache/pulsar/pull/15731)
 - [improve][auth] Remove sensitive msg from consumer/producer stats log [#15483](https://github.com/apache/pulsar/pull/15483)
