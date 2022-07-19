@@ -191,7 +191,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][tiered-storage] Fix NoClassDefFoundError: com/google/inject/AbstractModule in pulsar-io/batch-data-generator and Jcloud offloader [#14150](https://github.com/apache/pulsar/pull/14150)
 - [improve][tiered-storage] Add debug information  [#14907](https://github.com/apache/pulsar/pull/14907)
 - [improve][tiered-storage] Add pure S3 provider for the offloader [#15710](https://github.com/apache/pulsar/pull/15710)
-- [improve][tiered-storage] Reduce cpu usage when offloading the ledger [#15063](https://github.com/apache/pulsar/pull/15063)
+- [improve][tiered-storage] Reduce CPU usage when offloading the ledger [#15063](https://github.com/apache/pulsar/pull/15063)
 - [improve][tiered-storage] Upgrade JClouds to 2.5.0 [#15649](https://github.com/apache/pulsar/pull/15649)
 
 #### Dependencies
