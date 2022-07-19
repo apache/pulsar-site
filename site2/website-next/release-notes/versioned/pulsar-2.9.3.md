@@ -38,7 +38,7 @@ sidebar_label: Apache Pulsar 2.9.3
 - [fix][broker] Fix deadlock in broker after race condition in topic creation failure [#15570](https://github.com/apache/pulsar/pull/15570)
 - [fix][broker] Fix getPendingAckInternalStats redirect issue [#14876](https://github.com/apache/pulsar/pull/14876)
 - [fix][broker] Fix inconsistent prompt message when schema version is empty using AVRO [#14626](https://github.com/apache/pulsar/pull/14626)
-- [fix][broker] Fix incorrect entryId in warn log when reading entry from tiered storage [#14685](https://github.com/apache/pulsar/pull/14685)
+- [fix][broker] Fix incorrect entryId in warning logs when reading an entry from tiered storage [#14685](https://github.com/apache/pulsar/pull/14685)
 - [fix][broker] Fix metadata store deadlock when checking BacklogQuota [#14634](https://github.com/apache/pulsar/pull/14634)
 - [fix][broker] Fix no value present [#14891](https://github.com/apache/pulsar/pull/14891)
 - [fix][broker] Fix normal topic named ends with `healthcheck`  becomes system topic issue [#14671](https://github.com/apache/pulsar/pull/14671)
