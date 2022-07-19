@@ -10,7 +10,7 @@ sidebar_label: Client Java 2.9.3
 - [fix][java] Fix performance regression with message listener [#15162](https://github.com/apache/pulsar/pull/15162)
 - [fix][java] Fix potentially unfinished CompletableFuture in doReconsumeLater [#14947](https://github.com/apache/pulsar/pull/14947)
 - [fix][java] Fix race condition in consumer redelivery [#14687](https://github.com/apache/pulsar/pull/14687)
-- [fix][java] Fixed the producer OOM if got exception while add message to batch container [#12170](https://github.com/apache/pulsar/pull/12170)
+- [fix][java] Fix the producer OOM if got exception while add message to batch container [#12170](https://github.com/apache/pulsar/pull/12170)
 - [fix][java] PartitionsAutoUpdateFuture never complete [#14625](https://github.com/apache/pulsar/pull/14625)
 - [fix][java] Remove consumer when close consumer command is received [#15761](https://github.com/apache/pulsar/pull/15761)
 - [fix][java] Fix PartitionedProducerImpl flushAsync always fail when one partition send TimeOutException [#14602](https://github.com/apache/pulsar/pull/14602)
