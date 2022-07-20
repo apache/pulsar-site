@@ -1,6 +1,13 @@
 module.exports = {
     events: [
       {
+        title: 'Pulsar Summit San Francisco 2022 ',
+        description: '',
+        link: 'https://pulsar-summit.org/event/san-francisco-2022',
+        displayDate: '18 Aug 2022',
+        startDate: '2022-08-18' // year-month-day
+      },
+      {
         title: 'Pulsar Summit Europe 2021 ',
         description: '',
         link: 'https://pulsar-summit.org/en/event/europe-2021',
