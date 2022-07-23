@@ -965,17 +965,17 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "httpAuthType" : {
-          "type" : "string"
-        },
-        "commandData" : {
-          "type" : "string"
-        },
         "tlsCertificates" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/Certificate"
           }
+        },
+        "httpAuthType" : {
+          "type" : "string"
+        },
+        "commandData" : {
+          "type" : "string"
         },
         "subscription" : {
           "type" : "string"
@@ -1591,10 +1591,6 @@
             "format" : "double"
           }
         },
-        "avgProcessLatency" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1610,16 +1606,16 @@
         "userExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "avgProcessLatency" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
     "FunctionInstanceStatsDataBase" : {
       "type" : "object",
       "properties" : {
-        "avgProcessLatency" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1635,6 +1631,10 @@
         "userExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "avgProcessLatency" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -1990,6 +1990,20 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
+        "highestEscapedChar" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "outputTarget" : {
+          "type" : "object"
+        },
+        "outputBuffered" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "outputContext" : {
+          "$ref" : "#/definitions/JsonStreamContext"
+        },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
         },
@@ -2012,20 +2026,6 @@
         },
         "currentValue" : {
           "type" : "object"
-        },
-        "highestEscapedChar" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "outputTarget" : {
-          "type" : "object"
-        },
-        "outputBuffered" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "outputContext" : {
-          "$ref" : "#/definitions/JsonStreamContext"
         },
         "closed" : {
           "type" : "boolean"
@@ -2106,6 +2106,9 @@
           "format" : "int32"
         },
         "typeId" : {
+          "type" : "object"
+        },
+        "inputSource" : {
           "type" : "object"
         },
         "schema" : {
@@ -2196,9 +2199,6 @@
         },
         "valueAsString" : {
           "type" : "string"
-        },
-        "inputSource" : {
-          "type" : "object"
         },
         "currentValue" : {
           "type" : "object"
@@ -2349,6 +2349,23 @@
         "topicName" : {
           "type" : "string"
         },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
         "publishTime" : {
           "type" : "integer",
           "format" : "int64"
@@ -2383,23 +2400,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "keyBytes" : {
           "type" : "array",

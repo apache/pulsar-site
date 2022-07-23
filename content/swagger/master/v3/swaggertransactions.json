@@ -775,17 +775,17 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "httpAuthType": {
-                    "type": "string"
-                },
-                "commandData": {
-                    "type": "string"
-                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Certificate"
                     }
+                },
+                "httpAuthType": {
+                    "type": "string"
+                },
+                "commandData": {
+                    "type": "string"
                 },
                 "subscription": {
                     "type": "string"
@@ -1222,6 +1222,20 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
+                "highestEscapedChar": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "outputTarget": {
+                    "type": "object"
+                },
+                "outputBuffered": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "outputContext": {
+                    "$ref": "#/definitions/JsonStreamContext"
+                },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
@@ -1244,20 +1258,6 @@
                 },
                 "currentValue": {
                     "type": "object"
-                },
-                "highestEscapedChar": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "outputTarget": {
-                    "type": "object"
-                },
-                "outputBuffered": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "outputContext": {
-                    "$ref": "#/definitions/JsonStreamContext"
                 },
                 "closed": {
                     "type": "boolean"
@@ -1338,6 +1338,9 @@
                     "format": "int32"
                 },
                 "typeId": {
+                    "type": "object"
+                },
+                "inputSource": {
                     "type": "object"
                 },
                 "schema": {
@@ -1463,9 +1466,6 @@
                 },
                 "valueAsString": {
                     "type": "string"
-                },
-                "inputSource": {
-                    "type": "object"
                 },
                 "currentValue": {
                     "type": "object"
