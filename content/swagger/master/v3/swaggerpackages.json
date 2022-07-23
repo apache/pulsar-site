@@ -741,11 +741,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
-                },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -859,6 +859,9 @@
                 "abstract": {
                     "type": "boolean"
                 },
+                "contentType": {
+                    "$ref": "#/definitions/JavaType"
+                },
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
@@ -910,9 +913,6 @@
                 "mapLikeType": {
                     "type": "boolean"
                 },
-                "contentType": {
-                    "$ref": "#/definitions/JavaType"
-                },
                 "typeName": {
                     "type": "string"
                 },
@@ -947,19 +947,8 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
-                "highestEscapedChar": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "outputTarget": {
-                    "type": "object"
-                },
-                "outputBuffered": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "outputContext": {
-                    "$ref": "#/definitions/JsonStreamContext"
+                "closed": {
+                    "type": "boolean"
                 },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
@@ -984,8 +973,19 @@
                 "currentValue": {
                     "type": "object"
                 },
-                "closed": {
-                    "type": "boolean"
+                "highestEscapedChar": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "outputTarget": {
+                    "type": "object"
+                },
+                "outputBuffered": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "outputContext": {
+                    "$ref": "#/definitions/JsonStreamContext"
                 }
             }
         },
@@ -1026,6 +1026,9 @@
                 "text": {
                     "type": "string"
                 },
+                "closed": {
+                    "type": "boolean"
+                },
                 "textCharacters": {
                     "type": "array",
                     "items": {
@@ -1063,9 +1066,6 @@
                     "format": "int32"
                 },
                 "typeId": {
-                    "type": "object"
-                },
-                "inputSource": {
                     "type": "object"
                 },
                 "schema": {
@@ -1192,11 +1192,11 @@
                 "valueAsString": {
                     "type": "string"
                 },
-                "currentValue": {
+                "inputSource": {
                     "type": "object"
                 },
-                "closed": {
-                    "type": "boolean"
+                "currentValue": {
+                    "type": "object"
                 }
             }
         },
@@ -1633,11 +1633,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
-                },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -1665,6 +1665,9 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
+                "generator": {
+                    "$ref": "#/definitions/JsonGenerator"
+                },
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -1682,9 +1685,6 @@
                 },
                 "defaultNullKeySerializer": {
                     "$ref": "#/definitions/JsonSerializerObject"
-                },
-                "generator": {
-                    "$ref": "#/definitions/JsonGenerator"
                 }
             }
         },
