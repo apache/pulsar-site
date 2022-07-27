@@ -1168,17 +1168,17 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "commandData": {
-                    "type": "string"
-                },
-                "httpAuthType": {
-                    "type": "string"
-                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Certificate"
                     }
+                },
+                "httpAuthType": {
+                    "type": "string"
+                },
+                "commandData": {
+                    "type": "string"
                 },
                 "subscription": {
                     "type": "string"
@@ -1804,12 +1804,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -1818,7 +1818,7 @@
                         "format": "double"
                     }
                 },
-                "systemExceptionsTotal": {
+                "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1826,7 +1826,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "receivedTotal": {
+                "systemExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1843,7 +1843,7 @@
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
-                "systemExceptionsTotal": {
+                "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1851,7 +1851,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "receivedTotal": {
+                "systemExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
