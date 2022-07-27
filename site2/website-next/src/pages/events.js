@@ -52,10 +52,10 @@ export default function Events() {
                 <FeaturedEvent
                   hidden="false" // use true to hide and false to show the featured event card
                   title="Pulsar Summit San Francisco 2022"
-                  description=""
+                  description="Join the one-day, action-packed event at Hotel Nikko San Francisco on August 18th"
                   date=""
                   link="https://pulsar-summit.org/event/san-francisco-2022"
-                  linkText="Learn More"
+                  linkText="Save Your Spot"
                 />
               </div>
             </div>
