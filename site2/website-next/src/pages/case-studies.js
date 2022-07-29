@@ -141,6 +141,12 @@ const csObj =
         description: "It gives us consistency with the messages in the queue. It also allows us to replay messages, and it’s a very powerful tool for the distributed systems that like us."
       },
       {
+        company: "Qraft",
+        link: 'https://streamnative.io/success-story/qraft/',
+        image: require("@site/static/img/qraft.png").default,
+        description: "We choose Pulsar for its ability to manage distributed transactions within a microservice architecture and its feature flexibility. Pulsar now plays an essential part in helping our AI-powered order execution system to find the optimal strategy in real time."
+      },
+      {
         company: "Softtech",
         link: 'https://www.youtube.com/watch?v=meDBzeintyE',
         image: require("@site/static/img/softtech.png").default,
