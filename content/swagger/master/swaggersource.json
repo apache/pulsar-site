@@ -1260,17 +1260,20 @@
         "abstract" : {
           "type" : "boolean"
         },
+        "contentType" : {
+          "$ref" : "#/definitions/JavaType"
+        },
         "bindings" : {
           "$ref" : "#/definitions/TypeBindings"
         },
         "concrete" : {
           "type" : "boolean"
         },
-        "keyType" : {
-          "$ref" : "#/definitions/JavaType"
-        },
         "arrayType" : {
           "type" : "boolean"
+        },
+        "keyType" : {
+          "$ref" : "#/definitions/JavaType"
         },
         "throwable" : {
           "type" : "boolean"
@@ -1305,14 +1308,11 @@
         "erasedSignature" : {
           "type" : "string"
         },
-        "collectionLikeType" : {
-          "type" : "boolean"
-        },
         "mapLikeType" : {
           "type" : "boolean"
         },
-        "contentType" : {
-          "$ref" : "#/definitions/JavaType"
+        "collectionLikeType" : {
+          "type" : "boolean"
         },
         "typeName" : {
           "type" : "string"
@@ -1348,11 +1348,14 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
-        "characterEscapes" : {
-          "$ref" : "#/definitions/CharacterEscapes"
+        "closed" : {
+          "type" : "boolean"
         },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
+        },
+        "characterEscapes" : {
+          "$ref" : "#/definitions/CharacterEscapes"
         },
         "codec" : {
           "$ref" : "#/definitions/ObjectCodec"
@@ -1384,9 +1387,6 @@
         },
         "outputContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -1426,6 +1426,9 @@
         },
         "text" : {
           "type" : "string"
+        },
+        "closed" : {
+          "type" : "boolean"
         },
         "textCharacters" : {
           "type" : "array",
@@ -1560,9 +1563,6 @@
         },
         "currentValue" : {
           "type" : "object"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -2029,6 +2029,9 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "generator" : {
+          "$ref" : "#/definitions/JsonGenerator"
+        },
         "config" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
@@ -2038,17 +2041,14 @@
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
         },
+        "defaultNullValueSerializer" : {
+          "$ref" : "#/definitions/JsonSerializerObject"
+        },
         "filterProvider" : {
           "$ref" : "#/definitions/FilterProvider"
         },
         "defaultNullKeySerializer" : {
           "$ref" : "#/definitions/JsonSerializerObject"
-        },
-        "defaultNullValueSerializer" : {
-          "$ref" : "#/definitions/JsonSerializerObject"
-        },
-        "generator" : {
-          "$ref" : "#/definitions/JsonGenerator"
         }
       }
     },
