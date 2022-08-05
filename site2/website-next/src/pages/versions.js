@@ -23,6 +23,9 @@ export default function DenseTable() {
             data={[{ name: latestStableVersion }]}
             type="stable"
           ></VersionsTable>
+          <p className="mt-8 mb-4">
+            For release notes of all versions, go to the <a href="/release-notes"> Release Notes</a> page.
+          </p>
           <h3 className="mt-8 mb-4" id="latest">
             <Translate> Latest Version</Translate>
           </h3>
