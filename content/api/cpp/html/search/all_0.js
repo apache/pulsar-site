@@ -6,6 +6,7 @@ var searchData=
   ['acknowledgecumulativeasync',['acknowledgeCumulativeAsync',['../classpulsar_1_1_consumer.html#a6ad164b1ab4449b17bce764224e92960',1,'pulsar::Consumer::acknowledgeCumulativeAsync(const Message &amp;message, ResultCallback callback)'],['../classpulsar_1_1_consumer.html#a5d4cf148f372618961fd3411792a5cd7',1,'pulsar::Consumer::acknowledgeCumulativeAsync(const MessageId &amp;messageId, ResultCallback callback)']]],
   ['addencryptionkey',['addEncryptionKey',['../classpulsar_1_1_producer_configuration.html#ae696a84743d6b95795bf17d68981ec51',1,'pulsar::ProducerConfiguration']]],
   ['authathenz',['AuthAthenz',['../classpulsar_1_1_auth_athenz.html',1,'pulsar']]],
+  ['authbasic',['AuthBasic',['../classpulsar_1_1_auth_basic.html',1,'pulsar']]],
   ['authenticate',['authenticate',['../classpulsar_1_1_oauth2_flow.html#a26ba112e97d9ce0283adaa9213f848ac',1,'pulsar::Oauth2Flow']]],
   ['authentication',['Authentication',['../classpulsar_1_1_authentication.html',1,'pulsar']]],
   ['authenticationdataprovider',['AuthenticationDataProvider',['../classpulsar_1_1_authentication_data_provider.html',1,'pulsar']]],
