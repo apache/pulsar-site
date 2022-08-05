@@ -1,6 +1,14 @@
 module.exports = {
   articles: [
   {
+      forum: 'DZone',
+      forum_link: 'https://dzone.com/',
+      date: 'August 2022',
+      title: "Understanding Cursors in Apache Pulsar",
+      link: 'https://dzone.com/articles/understanding-cursors-tracking-mechanism-in-pulsar',
+      tags: 'Pulsar, cursor, subscription, acknowledgment'
+    },
+    {
       forum: 'Pedro Silvestre',
       forum_link: 'https://www.doc.ic.ac.uk/~pms20/',
       date: 'Oct 2021',
