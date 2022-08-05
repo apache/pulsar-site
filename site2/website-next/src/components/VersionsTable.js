@@ -55,33 +55,6 @@ export default function VersionsTable(props) {
                 <Translate>Documentation</Translate>
               </Link>
             </TableCell>
-            <TableCell
-              className="border-gray-300"
-              sx={{ border: 1 }}
-              align="center"
-            >
-              <Link
-                className="text-primary"
-                href={
-                  row.name == "next"
-                    ? repoUrl
-                    : !legacyVersions.includes(row.name.replace("v", ""))
-                    ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${row.name}`
-                    : `${siteConfig.baseUrl}release-notes/legacy/#${row.name
-                        .replace(/\./g, "")
-                        .replace("v", "")}`
-                }
-                underline="none"
-              >
-                {row.name == "next"
-                  ? translate({
-                      message: "Source Code",
-                    })
-                  : translate({
-                      message: "Release Notes",
-                    })}
-              </Link>
-            </TableCell>
           </TableRow>
         ))}
       </TableBody>
