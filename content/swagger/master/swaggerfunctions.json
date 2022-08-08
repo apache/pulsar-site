@@ -965,7 +965,7 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "commandData" : {
+        "subscription" : {
           "type" : "string"
         },
         "tlsCertificates" : {
@@ -977,7 +977,7 @@
         "httpAuthType" : {
           "type" : "string"
         },
-        "subscription" : {
+        "commandData" : {
           "type" : "string"
         }
       }
@@ -1577,19 +1577,19 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "lastInvocation" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
         "userMetrics" : {
           "type" : "object",
           "additionalProperties" : {
             "type" : "number",
             "format" : "double"
           }
+        },
+        "lastInvocation" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "receivedTotal" : {
           "type" : "integer",
@@ -2075,6 +2075,10 @@
             "type" : "string"
           }
         },
+        "intValue" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
         "booleanValue" : {
           "type" : "boolean"
         },
@@ -2095,10 +2099,6 @@
           "format" : "int64"
         },
         "shortValue" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "intValue" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -2346,9 +2346,6 @@
             "format" : "byte"
           }
         },
-        "topicName" : {
-          "type" : "string"
-        },
         "publishTime" : {
           "type" : "integer",
           "format" : "int64"
@@ -2383,6 +2380,9 @@
         },
         "replicated" : {
           "type" : "boolean"
+        },
+        "topicName" : {
+          "type" : "string"
         },
         "messageId" : {
           "$ref" : "#/definitions/MessageId"
