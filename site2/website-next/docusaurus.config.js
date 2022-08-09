@@ -42,6 +42,7 @@ const sourceApiUrl = url + "/source-rest-api";
 const sinkApiUrl = url + "/sink-rest-api";
 const packagesApiUrl = url + "/packages-rest-api";
 const transactionsApiUrl = url + "/transactions-rest-api";
+const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
 const baseUrl = "/";
 
@@ -109,6 +110,8 @@ const injectLinkParseForEndpoint = ([, info]) => {
     restBaseUrl = packagesApiUrl;
   } else if (restApiType == "transactions") {
     restBaseUrl = transactionsApiUrl;
+  } else if (restApiType == "lookup") {
+    restBaseUrl = lookupApiUrl;
   }
   let restUrl = "";
   if (suffix.indexOf("?version=") >= 0) {
