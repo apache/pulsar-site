@@ -89,6 +89,7 @@ ${ROOT_DIR}/site2/tools/pulsar-admin-doc-gen.sh $WEBSITE_DIR
 ${ROOT_DIR}/site2/tools/pulsar-client-doc-gen.sh $WEBSITE_DIR
 ${ROOT_DIR}/site2/tools/pulsar-perf-doc-gen.sh $WEBSITE_DIR
 ${ROOT_DIR}/site2/tools/pulsar-doc-gen.sh $WEBSITE_DIR
+${ROOT_DIR}/site2/tools/pulsar-config-doc-gen.sh $WEBSITE_DIR
 cd ${ROOT_DIR}/site2/$WEBSITE_DIR
 
 rm -rf ${ROOT_DIR}/generated-site/content
