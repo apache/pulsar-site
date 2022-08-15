@@ -34,6 +34,7 @@ DOCS_DIR=site2/$WEBSITE/docsify/config
 
 cd $ROOT_DIR
 mkdir -p $DEST_DIR/tools/pulsar-config/$VERSION
+mkdir -p $DOCS_DIR
 
 cp site2/$WEBSITE/docs/reference-configuration*.md $DOCS_DIR
 
