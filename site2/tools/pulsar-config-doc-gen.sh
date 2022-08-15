@@ -35,7 +35,7 @@ DOCS_DIR=site2/$WEBSITE/docsify/config
 cd $ROOT_DIR
 mkdir -p $DEST_DIR/tools/pulsar-config/$VERSION
 
-cp site2/docs/reference-configuration*.md $DOCS_DIR
+cp site2/$WEBSITE/docs/reference-configuration*.md $DOCS_DIR
 
 exec $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.broker.ServiceConfiguration > $DOCS_DIR/reference-configuration-broker.md
 exec $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.client.impl.conf.ClientConfigurationData > $DOCS_DIR/reference-configuration-client.md
