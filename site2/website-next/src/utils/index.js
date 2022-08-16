@@ -66,7 +66,7 @@ export function getApiVersion(anchor) {
   let _restApiVs = {};
   let _vsGroups = {};
   for (let [key, val] of Object.entries(restApiVersions)) {
-    if (compareVersions.compare(key, "2.8.0", "<")) {
+    if (key == 'master' || compareVersions.compare(key, "2.8.0", "<")) {
       _restApiVs[key] = val;
     } else {
       let [one, two] = key.split(".");
@@ -80,12 +80,12 @@ export function getApiVersion(anchor) {
     })[0];
     _restApiVs[key] = restApiVersions[_tKey];
   }
-  // console.log("...", version, _restApiVs);
 
   if (_restApiVs[version][0]["fileName"].indexOf(anchor) == 0) {
     apiVersion = _restApiVs[version][0]["version"];
   } else {
     apiVersion = _restApiVs[version][1]["version"];
   }
+  console.log('...', apiVersion)
   return apiVersion;
 }
