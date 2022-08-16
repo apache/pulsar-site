@@ -7,6 +7,8 @@ slug: /
 
 ## Pulsar Release Notes
 
+#### 2.11.X
+[2.11.0](/release-notes/versioned/pulsar-2.11.0)&ensp;&ensp;
 #### 2.10.x
 [2.10.0](/release-notes/versioned/pulsar-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/pulsar-2.10.1)&ensp;&ensp;
 #### 2.9.x
