@@ -6,6 +6,7 @@ const versions = require("../../versions.json");
 const restApiVersions = require("../../static/swagger/restApiVersions.json");
 
 const siteConfig = require(`../../docusaurus.config.js`);
+const compareVersions = require("compare-versions");
 
 export const latestStableVersion = versions[0];
 
@@ -62,11 +63,29 @@ export function getVersion() {
 export function getApiVersion(anchor) {
   let version = getVersion();
   let apiVersion = "";
-  if (restApiVersions[version][0]["fileName"].indexOf(anchor) == 0) {
-    apiVersion = restApiVersions[version][0]["version"];
+  let _restApiVs = {};
+  let _vsGroups = {};
+  for (let [key, val] of Object.entries(restApiVersions)) {
+    if (compareVersions.compare(key, "2.8.0", "<")) {
+      _restApiVs[key] = val;
+    } else {
+      let [one, two] = key.split(".");
+      let _tKey = one + "." + two + ".x";
+      _vsGroups[_tKey] = [...(_vsGroups[_tKey] || []), key];
+    }
+  }
+  for (let [key, val] of Object.entries(_vsGroups)) {
+    let _tKey = val.sort((a, b) => {
+      return -compareVersions.compare(b, a, "<");
+    })[0];
+    _restApiVs[key] = restApiVersions[_tKey];
+  }
+  // console.log("...", version, _restApiVs);
+
+  if (_restApiVs[version][0]["fileName"].indexOf(anchor) == 0) {
+    apiVersion = _restApiVs[version][0]["version"];
   } else {
-    apiVersion = restApiVersions[version][1]["version"];
+    apiVersion = _restApiVs[version][1]["version"];
   }
   return apiVersion;
 }
-
