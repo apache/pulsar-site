@@ -49,11 +49,6 @@
 -
 
 ### Broker
-- [PIP 74] Pulsar client memory limits
-  - Support auto scaled consumer receiver queue [#14494](https://github.com/apache/pulsar/pull/14494)
-  - Add Rocksdb metadata store [#12776](https://github.com/apache/pulsar/pull/12776)
-  - Support dynamic limit of consumer receiver queue [#14400](https://github.com/apache/pulsar/pull/14400)
-  - Support consumer client memory limit [#15216](https://github.com/apache/pulsar/pull/15216)
 - [PIP 81] Split the individual acknowledgments into multiple entries
   - Add range set wrapper to support record dirty ledgers [#15607](https://github.com/apache/pulsar/pull/15607)
   - Notifications for faster topic discovery [#16062](https://github.com/apache/pulsar/pull/16062)
@@ -75,6 +70,9 @@
 - [PIP-156] Build Pulsar Server on Java 17
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
+- Optimize getting ledger and entry id from entry [#17108](https://github.com/apache/pulsar/pull/17108)
+- Fix calculate avg message per entry [#17046](https://github.com/apache/pulsar/pull/17046)
+- Bundle-data metadata leak because of bundlestats was not clean [#17095](https://github.com/apache/pulsar/pull/17095)
 - Duplicate ByteBuffer when Caching Backlogged Consumers [#17105](https://github.com/apache/pulsar/pull/17105)
 - Fix offload read handle NPE [#17056](https://github.com/apache/pulsar/pull/17056)
 - Move the state check forward [#17020](https://github.com/apache/pulsar/pull/17020)
@@ -216,6 +214,10 @@
 - Strict bookie affinity group strategy [#12025](https://github.com/apache/pulsar/pull/12025)
 
 ### Clients
+- [PIP 74] Pulsar client memory limits
+  - Support auto scaled consumer receiver queue [#14494](https://github.com/apache/pulsar/pull/14494)
+  - Support dynamic limit of consumer receiver queue [#14400](https://github.com/apache/pulsar/pull/14400)
+  - Support consumer client memory limit [#15216](https://github.com/apache/pulsar/pull/15216)
 - [Java] LastBatchSendNanoTime initialization [#17058](https://github.com/apache/pulsar/pull/17058)
 - [Java] Release semaphore before discarding messages in batchMessageContainer [#17019](https://github.com/apache/pulsar/pull/17019)
 - [Java] Reduce code duplication in admin client [#16377](https://github.com/apache/pulsar/pull/16377)
