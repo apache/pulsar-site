@@ -77,6 +77,7 @@ sidebar_label: Apache Pulsar 2.11.0
 - [PIP-156] Build Pulsar Server on Java 17
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
+- Bundle-data metadata leak because of bundlestats was not clean [#17095](https://github.com/apache/pulsar/pull/17095)
 - Duplicate ByteBuffer when Caching Backlogged Consumers [#17105](https://github.com/apache/pulsar/pull/17105)
 - Fix offload read handle NPE [#17056](https://github.com/apache/pulsar/pull/17056)
 - Move the state check forward [#17020](https://github.com/apache/pulsar/pull/17020)
