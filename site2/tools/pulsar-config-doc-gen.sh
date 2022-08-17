@@ -18,8 +18,6 @@
 # under the License.
 #
 
-set -x -e
-
 ROOT_DIR=$(git rev-parse --show-toplevel)
 VERSION=`$ROOT_DIR/src/get-project-version.py`
 DEST_DIR=$ROOT_DIR/generated-site
@@ -38,9 +36,9 @@ mkdir -p $DOCS_DIR
 
 cp site2/$WEBSITE/docs/reference-configuration*.md $DOCS_DIR
 
-exec $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.broker.ServiceConfiguration > $DOCS_DIR/reference-configuration-broker.md
-exec $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.client.impl.conf.ClientConfigurationData > $DOCS_DIR/reference-configuration-client.md
-exec $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.websocket.service.WebSocketProxyConfiguration > $DOCS_DIR/reference-configuration-websocket.md
-exec $JAVA -cp `cat "${f}"` $GEN_DOCS_PROXY -c org.apache.pulsar.proxy.server.ProxyConfiguration > $DOCS_DIR/reference-configuration-pulsar-proxy.md
+$JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.broker.ServiceConfiguration > $DOCS_DIR/reference-configuration-broker.md
+$JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.client.impl.conf.ClientConfigurationData > $DOCS_DIR/reference-configuration-client.md
+$JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.websocket.service.WebSocketProxyConfiguration > $DOCS_DIR/reference-configuration-websocket.md
+$JAVA -cp `cat "${f}"` $GEN_DOCS_PROXY -c org.apache.pulsar.proxy.server.ProxyConfiguration > $DOCS_DIR/reference-configuration-pulsar-proxy.md
 
 cp -r site2/$WEBSITE/docsify/* $DEST_DIR/tools/pulsar-config/$VERSION
