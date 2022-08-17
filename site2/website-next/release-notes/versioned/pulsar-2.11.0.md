@@ -48,7 +48,6 @@ sidebar_label: Apache Pulsar 2.11.0
 - [PIP-181] Pulsar Shell [#16250](https://github.com/apache/pulsar/issues/16250)
 - [PIP-184] Topic specific consumer priorityLevel [#16715](https://github.com/apache/pulsar/issues/16715)
 - [PIP-187] Add API to analyze a subscription backlog and provide a accurate value [#16545](https://github.com/apache/pulsar/issues/16545)
--
 
 ### Broker
 - [PIP 81] Split the individual acknowledgments into multiple entries
@@ -308,6 +307,27 @@ sidebar_label: Apache Pulsar 2.11.0
 - [Functions] Fix python instance not process zip file correctly [#16697](https://github.com/apache/pulsar/pull/16697)
 - [Functions] Missing assertion in KubernetesRuntimeTest::verifyJavaInstance [#16747](https://github.com/apache/pulsar/pull/16747)
 - [IO Connector] IOConfigUtils support required and defaultValue annotations [#16785](https://github.com/apache/pulsar/pull/16785)
+- [IO Connector] Fixed kafka source config for pulsar-io-kafka when consumerConfigProperties="" [#16731](https://github.com/apache/pulsar/pull/16731)
+- [IO Connector] Add reader config to pulsar-io-debezium and pulsar-io-kafka-connect-adaptor [#16675](https://github.com/apache/pulsar/pull/16675)
+- [IO Connector] Support transactions for JDBC connector [#16468](https://github.com/apache/pulsar/pull/16468)
+- [IO Connector] JDBC sinks: support upsert and row deletion [#16448](https://github.com/apache/pulsar/pull/16448)
+- [IO Connector] Add getSourceConfig method on SourceContext [#16305](https://github.com/apache/pulsar/pull/16305)
+- [IO Connector] KCA sinks: fix offset mapping when sanitizeTopicName=true [#15950](https://github.com/apache/pulsar/pull/15950)
+- [IO Connector] Allow pulsar_tool_env.sh PULSAR_MEM to be Overridden [#15868](https://github.com/apache/pulsar/pull/15868)
+- [IO Connector] JDBC sinks: support Avro specific datatypes [#15845](https://github.com/apache/pulsar/pull/15845)
+- [IO Connector] Sink support custom acknowledge type [#15491](https://github.com/apache/pulsar/pull/15491)
+- [IO Connector] Add getSinkConfig method to SinkContext [#15482](https://github.com/apache/pulsar/pull/15482)
+- [IO Connector] Handle Avro collections native types (GenericData.Array and Utf8 map keys) [#15432](https://github.com/apache/pulsar/pull/15432)
+- [IO Connector] Handle Avro collections native types (GenericData.Array and Utf8 map keys) [#15430](https://github.com/apache/pulsar/pull/15430)
+- [IO Connector] Add hashed id support [#15428](https://github.com/apache/pulsar/pull/15428)
+- [IO Connector] ElasticSearch Sink: option to output canonical key fields (JSON and Avro) [#15426](https://github.com/apache/pulsar/pull/15426)
+- [IO Connector] Replaced "Device" with "measurement" [#15416](https://github.com/apache/pulsar/pull/15416)
+- [IO Connector] Enable bulk flushing scheduling by default [#15244](https://github.com/apache/pulsar/pull/15244)
+- [IO Connector] Set sinkType in config file [#15174](https://github.com/apache/pulsar/pull/15174)
+- [IO Connector] Add a cache of versioned KeyValueSchemaImpl [#15122](https://github.com/apache/pulsar/pull/15122)
+- [IO Connector] Support 4paradigm/OpenMLDB jdbc sink connector [#15064](https://github.com/apache/pulsar/pull/15064)
+- [IO Connector] ElasticSearch Sink: option to disable SSL certificate validation [#14997](https://github.com/apache/pulsar/pull/14997)
+- [IO Connector] Add FULL_MESSAGE_IN_JSON_EXPAND_VALUE message format to Kinesis sink [#14929](https://github.com/apache/pulsar/pull/14929)
 
 ### Observability
 - [Broker] Add per-subscription EntryFilter metrics [#16932](https://github.com/apache/pulsar/pull/16932)
@@ -435,7 +455,6 @@ sidebar_label: Apache Pulsar 2.11.0
 - Migrate Docker images and CI to Java 17 [#14355](https://github.com/apache/pulsar/pull/14355)
 
 ### Library updates
-
 - Upgrade to Jetty to 9.4.48.v20220622 [#16520](https://github.com/apache/pulsar/pull/16520)
 - Bump jackson version from 2.13.2 to 2.13.3 [#16508](https://github.com/apache/pulsar/pull/16508)
 - Bump maven-dependency-plugin to 3.3.0 [#16318](https://github.com/apache/pulsar/pull/16318)
@@ -449,3 +468,17 @@ sidebar_label: Apache Pulsar 2.11.0
 - Remove --illegal-access errors resulting from Google Guice - Pulsar IO, Offloaders and Pulsar SQL - Bump Guice to 5.1.0 [#14300](https://github.com/apache/pulsar/pull/14300)
 - Bump prometheus client version from 0.5.0 to 0.15.0 [#13785](https://github.com/apache/pulsar/pull/13785)
 - Upgrade log4j2 version to 2.18.0 [#16884](https://github.com/apache/pulsar/pull/16884
+
+### Documentation
+- Simplify documentation release and maintenance strategy [#16637](https://github.com/apache/pulsar/issues/16637)
+- Enable the anchoring for REST API doc links [#127](https://github.com/apache/pulsar-site/pull/127)
+- Publish REST API docs for [lookup](https://pulsar.apache.org/lookup-rest-api/?version=master) related operations [#16621](https://github.com/apache/pulsar/pull/16621)
+- Add instructions about [how to run CI from fork](https://pulsar.apache.org/contributing/#ci-testing-in-your-fork) to the Contribution Guide [#15535](https://github.com/apache/pulsar/pull/15535)
+- Information architecture redesigns and improvements for [Pulsar Functions](https://pulsar.apache.org/docs/next/functions-overview) and add a new topic about [how to get started](https://pulsar.apache.org/docs/next/functions-quickstart) [#15975](https://github.com/apache/pulsar/pull/15975)
+- Add a comprehensive reference table about [YAML configurations](https://pulsar.apache.org/docs/next/functions-cli) of Pulsar Functions [#15389](https://github.com/apache/pulsar/pull/15389)
+- Add docs about how to use [basic authentication](https://pulsar.apache.org/docs/next/security-basic-auth) [#15734](https://github.com/apache/pulsar/pull/15734)
+- Add docs about [system topic](https://pulsar.apache.org/docs/next/concepts-messaging#system-topic) [#14795](https://github.com/apache/pulsar/pull/14795)
+- Add docs about [isolation deployments](https://pulsar.apache.org/docs/next/administration-isolation) [#15802](https://github.com/apache/pulsar/pull/15802)
+- Add more concepts and tasks about [bookie isolation](https://pulsar.apache.org/docs/next/administration-isolation-bookie) [#16843](https://github.com/apache/pulsar/pull/16843)
+- Add docs about [anti-affinity namespace distribution across failure domains](https://pulsar.apache.org/docs/next/administration-load-balance#distribute-anti-affinity-namespaces-across-failure-domains) [#16069](https://github.com/apache/pulsar/pull/16069)
+- Add an introductory table about [BookKeeper recovery metrics](https://pulsar.apache.org/docs/next/reference-metrics#replication-metrics) [#16554](https://github.com/apache/pulsar/pull/16554)
