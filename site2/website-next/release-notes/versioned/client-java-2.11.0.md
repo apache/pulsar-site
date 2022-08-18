@@ -5,6 +5,7 @@ sidebar_label: Client Java 2.11.0
 ---
 
 - [fix][Java] LastBatchSendNanoTime initialization [#17058](https://github.com/apache/pulsar/pull/17058)
+- [fix][Java] Fixed cnx channel Inactive causing the request fail to time out and fail to return [#17051](https://github.com/apache/pulsar/pull/17051)
 - [fix][Java] Release semaphore before discarding messages in batchMessageContainer [#17019](https://github.com/apache/pulsar/pull/17019)
 - [cleanup][Java] Reduce code duplication in admin client [#16377](https://github.com/apache/pulsar/pull/16377)
 - [cleanup][Java] Remove redundant check for chunked message TotalChunkMsgSize in ConsumerImpl [#16797](https://github.com/apache/pulsar/pull/16797)

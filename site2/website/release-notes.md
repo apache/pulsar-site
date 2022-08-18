@@ -70,6 +70,9 @@
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
 - Optimize getting ledger and entry id from entry [#17108](https://github.com/apache/pulsar/pull/17108)
+- Support loadBalancerSheddingIntervalMinutes dynamic configuration [#16408](https://github.com/apache/pulsar/pull/16408)
+- Fix schema does not replicate successfully [#17049](https://github.com/apache/pulsar/pull/17049)
+- Streaming dispatcher stuck after reading the first entry with SHARED subscriptions [#17143](https://github.com/apache/pulsar/pull/17143)
 - Fix calculate avg message per entry [#17046](https://github.com/apache/pulsar/pull/17046)
 - Bundle-data metadata leak because of bundlestats was not clean [#17095](https://github.com/apache/pulsar/pull/17095)
 - Duplicate ByteBuffer when Caching Backlogged Consumers [#17105](https://github.com/apache/pulsar/pull/17105)
@@ -218,6 +221,7 @@
   - Support dynamic limit of consumer receiver queue [#14400](https://github.com/apache/pulsar/pull/14400)
   - Support consumer client memory limit [#15216](https://github.com/apache/pulsar/pull/15216)
 - [Java] LastBatchSendNanoTime initialization [#17058](https://github.com/apache/pulsar/pull/17058)
+- [Java] Fixed cnx channel Inactive causing the request fail to time out and fail to return [#17051](https://github.com/apache/pulsar/pull/17051)
 - [Java] Release semaphore before discarding messages in batchMessageContainer [#17019](https://github.com/apache/pulsar/pull/17019)
 - [Java] Reduce code duplication in admin client [#16377](https://github.com/apache/pulsar/pull/16377)
 - [Java] Remove redundant check for chunked message TotalChunkMsgSize in ConsumerImpl [#16797](https://github.com/apache/pulsar/pull/16797)
@@ -468,18 +472,23 @@
 - Upgrade log4j2 version to 2.18.0 [#16884](https://github.com/apache/pulsar/pull/16884
 
 ### Documentation
-- Simplify documentation release and maintenance strategy [#16637](https://github.com/apache/pulsar/issues/16637)
-- Enable the anchoring for REST API doc links [#127](https://github.com/apache/pulsar-site/pull/127)
-- Publish REST API docs for [lookup](https://pulsar.apache.org/lookup-rest-api/?version=master) related operations [#16621](https://github.com/apache/pulsar/pull/16621)
-- Add instructions about [how to run CI from fork](https://pulsar.apache.org/contributing/#ci-testing-in-your-fork) to the Contribution Guide [#15535](https://github.com/apache/pulsar/pull/15535)
-- Information architecture redesigns and improvements for [Pulsar Functions](https://pulsar.apache.org/docs/next/functions-overview) and add a new topic about [how to get started](https://pulsar.apache.org/docs/next/functions-quickstart) [#15975](https://github.com/apache/pulsar/pull/15975)
-- Add a comprehensive reference table about [YAML configurations](https://pulsar.apache.org/docs/next/functions-cli) of Pulsar Functions [#15389](https://github.com/apache/pulsar/pull/15389)
-- Add docs about how to use [basic authentication](https://pulsar.apache.org/docs/next/security-basic-auth) [#15734](https://github.com/apache/pulsar/pull/15734)
+
+This section only highlights the non-2.11.0-specific doc availability that fulfills existing content gaps.
+
 - Add docs about [system topic](https://pulsar.apache.org/docs/next/concepts-messaging#system-topic) [#14795](https://github.com/apache/pulsar/pull/14795)
+- Add a comprehensive reference table about [YAML configurations](https://pulsar.apache.org/docs/next/functions-cli) of Pulsar Functions [#15389](https://github.com/apache/pulsar/pull/15389)
+- Add instructions about [how to run CI from fork](https://pulsar.apache.org/contributing/#ci-testing-in-your-fork) to the Contribution Guide [#15535](https://github.com/apache/pulsar/pull/15535)
+- Add docs about [basic authentication](https://pulsar.apache.org/docs/next/security-basic-auth) [#15734](https://github.com/apache/pulsar/pull/15734)
 - Add docs about [isolation deployments](https://pulsar.apache.org/docs/next/administration-isolation) [#15802](https://github.com/apache/pulsar/pull/15802)
-- Add more concepts and tasks about [bookie isolation](https://pulsar.apache.org/docs/next/administration-isolation-bookie) [#16843](https://github.com/apache/pulsar/pull/16843)
+- Information architecture redesigns and improvements for [Pulsar Functions](https://pulsar.apache.org/docs/next/functions-overview) and add a new topic about [how to get started](https://pulsar.apache.org/docs/next/functions-quickstart) [#15975](https://github.com/apache/pulsar/pull/15975)
 - Add docs about [anti-affinity namespace distribution across failure domains](https://pulsar.apache.org/docs/next/administration-load-balance#distribute-anti-affinity-namespaces-across-failure-domains) [#16069](https://github.com/apache/pulsar/pull/16069)
 - Add an introductory table about [BookKeeper recovery metrics](https://pulsar.apache.org/docs/next/reference-metrics#replication-metrics) [#16554](https://github.com/apache/pulsar/pull/16554)
+- Publish REST API docs for [lookup](https://pulsar.apache.org/lookup-rest-api/?version=master) related operations [#16621](https://github.com/apache/pulsar/pull/16621)
+- Add more concepts and user tasks about [bookie isolation](https://pulsar.apache.org/docs/next/administration-isolation-bookie) [#16843](https://github.com/apache/pulsar/pull/16843)
+- Use 2.8.x/2.9.x/2.10.x doc set instead of version-specific doc set [#17074](https://github.com/apache/pulsar/pull/17074)
+
+> For the comprehensive list of doc-related improvements in 2.11.0, you can go to [GitHub](https://github.com/apache/pulsar/pulls?q=is%3Apr+milestone%3A2.11.0+label%3Adoc+is%3Aclosed). A special thanks to the following contributors (alphabetic Github IDs) who helped add docs for Pulsar 2.11.0.
+> [704237006](https://github.com/704237006), [AlphaWang](https://github.com/AlphaWang), [Anonymitaet](https://github.com/Anonymitaet), [asafm](https://github.com/asafm), [cbornet](https://github.com/cbornet), [codelipenghui](https://github.com/codelipenghui), [coderzc](https://github.com/coderzc), [Demogorgon314](https://github.com/Demogorgon314), [ericsyh](https://github.com/ericsyh), [fantapsody](https://github.com/fantapsody), [futeng](https://github.com/futeng), [hangc0276](https://github.com/hangc0276), [heesung-sn](https://github.com/heesung-sn), [hrsakai](https://github.com/hrsakai), [HQebupt](https://github.com/HQebupt), [horizonzy](https://github.com/horizonzy), [Huanli-Meng](https://github.com/Huanli-Meng), [gaozhangmin](https://github.com/gaozhangmin), [ikilobyte](https://github.com/ikilobyte), [Jason918](https://github.com/Jason918), [komalatammal](https://github.com/komalatammal), [larshp](https://github.com/larshp), [lgxbslgx](https://github.com/lgxbslgx), [lhotari](https://github.com/lhotari), [liangyepianzhou](https://github.com/liangyepianzhou), [liudezhi2098](https://github.com/liudezhi2098), [liuzhuang2017](https://github.com/liuzhuang2017), [Mans2singh](https://github.com/mans2singh), [massakam](https://github.com/massakam), [mattisonchao](https://github.com/mattisonchao), [maxsxu](https://github.com/maxsxu), [mendonk](mendonk), [merlimat](https://github.com/merlimat), [michaeljmarshall](https://github.com/michaeljmarshall), [misselvexu](https://github.com/misselvexu), [momo-jun](https://github.com/momo-jun), [MTwz](https://github.com/MTwz), [nahguam](https://github.com/nahguam),[nicoloboschi](https://github.com/nicoloboschi), [nodece](https://github.com/nodece), [poorbarcode](https://github.com/poorbarcode), [rdhabalia](https://github.com/rdhabalia), [RobertIndie](https://github.com/RobertIndie), [samredai](https://github.com/samredai), [Shawyeok](https://github.com/Shawyeok), [Sherlock113](https://github.com/Sherlock113), [shibd](https://github.com/shibd), [Shoothzj](https://github.com/Shoothzj), [SignorMercurio](https://github.com/SignorMercurio), [Technoboy-](https://github.com/Technoboy-), [tjiuming](https://github.com/tjiuming), [tisonkun](https://github.com/tisonkun), [urfreespace](https://github.com/urfreespace), [wangjialing218](https://github.com/wangjialing218), [wenbingshen](https://github.com/wenbingshen), [youzipi](https://github.com/youzipi), [zwOvO](https://github.com/zwOvO).
 
 ### 2.10.0
 #### 2022-04-13
