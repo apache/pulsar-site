@@ -292,6 +292,7 @@ sidebar_label: Apache Pulsar 2.11.0
 
 ### Pulsar IO and Pulsar Functions
 - [Functions] Add the ability to customize logging level for Go & Python functions [#16939](https://github.com/apache/pulsar/pull/16939)
+- [Functions] Use the schema set by the Function when it returns a Record [#17142](https://github.com/apache/pulsar/pull/17142)
 - [Functions] Make mandatory to provide a schema in Context::newOutputRecordBuilder [#17118](https://github.com/apache/pulsar/pull/17118)
 - [Functions] Fixed error when user starts with the pulsar functions local runner [#16565](https://github.com/apache/pulsar/pull/16565)
 - [Functions] Fix netty.DnsResolverUtil compat issue on JDK9+ for the function Runtimes [#16423](https://github.com/apache/pulsar/pull/16423)
