@@ -72,7 +72,9 @@ sidebar_label: Apache Pulsar 2.11.0
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
 - Optimize getting ledger and entry id from entry [#17108](https://github.com/apache/pulsar/pull/17108)
+- Pass subscriptionName to auth service [#17123](https://github.com/apache/pulsar/pull/17123)
 - Support loadBalancerSheddingIntervalMinutes dynamic configuration [#16408](https://github.com/apache/pulsar/pull/16408)
+- Fix out of order data replication [#17154](https://github.com/apache/pulsar/pull/17154)
 - Fix schema does not replicate successfully [#17049](https://github.com/apache/pulsar/pull/17049)
 - Streaming dispatcher stuck after reading the first entry with SHARED subscriptions [#17143](https://github.com/apache/pulsar/pull/17143)
 - Fix calculate avg message per entry [#17046](https://github.com/apache/pulsar/pull/17046)
@@ -290,6 +292,7 @@ sidebar_label: Apache Pulsar 2.11.0
 
 ### Pulsar IO and Pulsar Functions
 - [Functions] Add the ability to customize logging level for Go & Python functions [#16939](https://github.com/apache/pulsar/pull/16939)
+- [Functions] Make mandatory to provide a schema in Context::newOutputRecordBuilder [#17118](https://github.com/apache/pulsar/pull/17118)
 - [Functions] Fixed error when user starts with the pulsar functions local runner [#16565](https://github.com/apache/pulsar/pull/16565)
 - [Functions] Fix netty.DnsResolverUtil compat issue on JDK9+ for the function Runtimes [#16423](https://github.com/apache/pulsar/pull/16423)
 - [Functions] Ensure bytes is a well-formed UTF-8 byte sequence when decode the FunctionState bytes to string [#16199](https://github.com/apache/pulsar/pull/16199)
