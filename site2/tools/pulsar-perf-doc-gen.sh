@@ -22,32 +22,30 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 VERSION=`${ROOT_DIR}/src/get-project-version.py`
 DEST_DIR=$ROOT_DIR/generated-site
 WEBSITE=$1
+SITE_DIR=$DEST_DIR/tools/pulsar-perf/${VERSION}
 
 cd $ROOT_DIR
 
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules
-mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
+mkdir -p $SITE_DIR
+mkdir -p $SITE_DIR/node_modules
+mkdir -p ${WEBSITE}/brodocs/documents
 
 ${ROOT_DIR}/site2/tools/pulsar-perf-md.sh $ROOT_DIR $WEBSITE
 
-cd $ROOT_DIR/site2/${WEBSITE}/brodocs
+cd ${WEBSITE}/brodocs
 cp pulsar-perf-manifest.json manifest.json
 node brodoc.js
 
-cp index.html $DEST_DIR/tools/pulsar-perf/${VERSION}/
-cp navData.js stylesheet.css $DEST_DIR/tools/pulsar-perf/${VERSION}/
-cp scroll.js tabvisibility.js $DEST_DIR/tools/pulsar-perf/${VERSION}/
-cp favicon.ico $DEST_DIR/tools/pulsar-perf/${VERSION}/
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/bootstrap/dist/css
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/bootstrap/dist/css/bootstrap.min.css $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/bootstrap/dist/css
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/font-awesome/css
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/font-awesome/css/font-awesome.min.css $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/font-awesome/css
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/highlight.js/styles
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/highlight.js/styles/default.css $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/highlight.js/styles
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/jquery/dist
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/jquery/dist/jquery.min.js $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/jquery/dist/
-mkdir -p $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/jquery.scrollto
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/jquery.scrollto/jquery.scrollTo.min.js $DEST_DIR/tools/pulsar-perf/${VERSION}/node_modules/jquery.scrollto
+cp index.html navData.js stylesheet.css scroll.js tabvisibility.js favicon.ico $SITE_DIR
+mkdir -p $SITE_DIR/node_modules/bootstrap/dist/css
+cp -r ${WEBSITE}/node_modules/bootstrap/dist/css/bootstrap.min.css $SITE_DIR/node_modules/bootstrap/dist/css
+mkdir -p $SITE_DIR/node_modules/font-awesome/css
+cp -r ${WEBSITE}/node_modules/font-awesome/css/font-awesome.min.css $SITE_DIR/node_modules/font-awesome/css
+mkdir -p $SITE_DIR/node_modules/highlight.js/styles
+cp -r ${WEBSITE}/node_modules/highlight.js/styles/default.css $SITE_DIR/node_modules/highlight.js/styles
+mkdir -p $SITE_DIR/node_modules/jquery/dist
+cp -r ${WEBSITE}/node_modules/jquery/dist/jquery.min.js $SITE_DIR/node_modules/jquery/dist/
+mkdir -p $SITE_DIR/node_modules/jquery.scrollto
+cp -r ${WEBSITE}/node_modules/jquery.scrollto/jquery.scrollTo.min.js $SITE_DIR/node_modules/jquery.scrollto
 
 

@@ -21,8 +21,6 @@
 ROOT_DIR=$1
 WEBSITE=$2
 
-cd $ROOT_DIR
+mkdir -p ${WEBSITE}/brodocs/documents
 
-mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
-
-$ROOT_DIR/bin/pulsar-client generate_documentation > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/pulsar-client.md
+$ROOT_DIR/bin/pulsar-client generate_documentation > ${WEBSITE}/brodocs/documents/pulsar-client.md

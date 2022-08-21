@@ -21,8 +21,6 @@
 ROOT_DIR=$1
 WEBSITE=$2
 
-cd $ROOT_DIR
+mkdir -p ${WEBSITE}/brodocs/documents
 
-mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
-
-$ROOT_DIR/bin/pulsar-perf gen-doc > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/pulsar-perf.md
+$ROOT_DIR/bin/pulsar-perf gen-doc > ${WEBSITE}/brodocs/documents/pulsar-perf.md
