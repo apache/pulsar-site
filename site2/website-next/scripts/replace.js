@@ -39,8 +39,7 @@ function getRealVersion(version) {
     })[0];
     versionMap[key] = _tKey;
   }
-  console.log("..., ", versionMap);
-  return versionMap[version];
+  return versionMap[version] || version;
 }
 
 function downloadPageUrl() {
