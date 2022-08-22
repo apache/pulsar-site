@@ -6,6 +6,8 @@ const CWD = process.cwd();
 const siteConfig = require(`${CWD}/docusaurus.config.js`);
 const nextDocsDir = `${CWD}/docs`;
 const docsDir = `${CWD}/versioned_docs`;
+const restApiVersions = require("../static/swagger/restApiVersions.json");
+const compareVersions = require("compare-versions");
 
 function getVersions() {
   try {
@@ -17,6 +19,28 @@ function getVersions() {
     console.error("no versions found defaulting to 2.1.0");
   }
   return ["2.1.0"];
+}
+
+function getRealVersion(version) {
+  let versionMap = {};
+  let _vsGroups = {};
+  for (let [key, val] of Object.entries(restApiVersions)) {
+    if (key == "master" || compareVersions.compare(key, "2.8.0", "<")) {
+      versionMap[key] = key;
+    } else {
+      let [one, two] = key.split(".");
+      let _tKey = one + "." + two + ".x";
+      _vsGroups[_tKey] = [...(_vsGroups[_tKey] || []), key];
+    }
+  }
+  for (let [key, val] of Object.entries(_vsGroups)) {
+    let _tKey = val.sort((a, b) => {
+      return -compareVersions.compare(b, a, "<");
+    })[0];
+    versionMap[key] = _tKey;
+  }
+  console.log("..., ", versionMap);
+  return versionMap[version];
 }
 
 function downloadPageUrl() {
@@ -91,13 +115,16 @@ function debDistUrl(version, type) {
 }
 
 function clientVersionUrl(version, type) {
-  var versions = version.split('.')
-  var majorVersion = parseInt(versions[0])
-  var minorVersion = parseInt(versions[1])
-  if ((majorVersion === 2 && minorVersion < 5) || (type === "python" && minorVersion >= 7)) {
+  var versions = version.split(".");
+  var majorVersion = parseInt(versions[0]);
+  var minorVersion = parseInt(versions[1]);
+  if (
+    (majorVersion === 2 && minorVersion < 5) ||
+    (type === "python" && minorVersion >= 7)
+  ) {
     return `(${siteConfig.url}/api/${type}/${version}`;
   } else if (majorVersion >= 2 && minorVersion >= 5) {
-    return `(${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`
+    return `(${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`;
   }
 }
 
@@ -190,10 +217,11 @@ doReplace(options);
 
 // TODO activate and test when first version of docs are cut
 // replaces versions
-for (v of versions) {
+for (_v of versions) {
   // if (v === latestVersion) {
   //   continue;
   // }
+  const v = getRealVersion(_v)
   const vWithoutIncubating = v.replace("-incubating", "");
   const opts = {
     files: [
