@@ -56,7 +56,7 @@ FORCE_BUILD_VERSIONS=$(echo $COMMIT_MSG | sed 's/.*BUILD_VERSIONS=\([0-9\.x,]*\)
 FORCE_CROWDIN_ALL=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_ALL=\([0-1]*\).*/\1/g')
 FORCE_CROWDIN_UP=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_UP=\([0-1]*\).*/\1/g')
 FORCE_CROWDIN_DOWN=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_DOWN=\([0-1]*\).*/\1/g')
-if [[ $FORCE_BUILD_VERSIONS =~ ^[0-9\.]+$ ]]; then
+if [[ $FORCE_BUILD_VERSIONS =~ ^[0-9\.x,]+$ ]]; then
     SUPPLEMENT_VERSIONS=$FORCE_BUILD_VERSIONS
 else
     SUPPLEMENT_VERSIONS=""
