@@ -143,7 +143,7 @@ function doReplace(options) {
 
 const versions = getVersions();
 
-const latestVersion = versions[0];
+const latestVersion = getRealVersion(versions[0]);
 const latestVersionWithoutIncubating = latestVersion.replace("-incubating", "");
 
 const from = [
@@ -217,10 +217,7 @@ doReplace(options);
 
 // TODO activate and test when first version of docs are cut
 // replaces versions
-for (_v of versions) {
-  // if (v === latestVersion) {
-  //   continue;
-  // }
+for (let _v of versions) {
   const v = getRealVersion(_v)
   const vWithoutIncubating = v.replace("-incubating", "");
   const opts = {

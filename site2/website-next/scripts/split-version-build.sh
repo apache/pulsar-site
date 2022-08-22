@@ -52,7 +52,7 @@ function _buildVersion() {
 COMMIT_MSG=$(git show -s --format=%s)
 FORCE_BUILD_ALL_LANGUAGE=$(echo $COMMIT_MSG | sed 's/.*BUILD_ALL_LANGUAGE=\([0-1]*\).*/\1/g')
 FORCE_BUILD_ALL_VERSION=$(echo $COMMIT_MSG | sed 's/.*BUILD_ALL_VERSION=\([0-1]*\).*/\1/g')
-FORCE_BUILD_VERSIONS=$(echo $COMMIT_MSG | sed 's/.*BUILD_VERSIONS=\([0-9\.]*\).*/\1/g')
+FORCE_BUILD_VERSIONS=$(echo $COMMIT_MSG | sed 's/.*BUILD_VERSIONS=\([0-9\.x,]*\).*/\1/g')
 FORCE_CROWDIN_ALL=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_ALL=\([0-1]*\).*/\1/g')
 FORCE_CROWDIN_UP=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_UP=\([0-1]*\).*/\1/g')
 FORCE_CROWDIN_DOWN=$(echo $COMMIT_MSG | sed 's/.*CROWDIN_DOWN=\([0-1]*\).*/\1/g')
