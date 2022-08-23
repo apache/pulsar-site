@@ -27,7 +27,7 @@ if [ -n "$NEXT" ]; then
   WEBSITE_DIR=${ROOT_DIR}/site2/website-$NEXT
 fi
 TOOLS_DIR=${ROOT_DIR}/site2/tools
-GEN_SITE_DIR=$GEN_SITE_DIR
+GEN_SITE_DIR=${ROOT_DIR}/generated-site
 
 function workaround_crowdin_problem_by_copying_files() {
   # TODO: remove this after figuring out why crowdin removed code tab when generating translated files
