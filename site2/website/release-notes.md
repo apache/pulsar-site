@@ -424,6 +424,7 @@
 - [Pulsar CLI] Support filtering system topic when get list [#15410](https://github.com/apache/pulsar/pull/15410)
 - [Pulsar CLI] Change the default for max-connections from 100 to 1 [#15387](https://github.com/apache/pulsar/pull/15387)
 - [Pulsar CLI] Add short name for full name in admin cli [#14301](https://github.com/apache/pulsar/pull/14301)
+- [Client Tool] Using int instead of long in python scripts [#17215](https://github.com/apache/pulsar/pull/17215)
 - [Client Tool] Fix using directory '?' in the docker image [#17185](https://github.com/apache/pulsar/pull/17185)
 - [Client Tool] Handle ctrl-d and exit the shell [#17204](https://github.com/apache/pulsar/pull/17204)
 - [Client Tool] Add tlsTrustCertFilePath as CLI argument for pulsar-client-tool [#16961](https://github.com/apache/pulsar/pull/16961)
