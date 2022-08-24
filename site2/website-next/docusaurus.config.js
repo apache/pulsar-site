@@ -158,7 +158,7 @@ module.exports = {
     announcementBar: {
       id: "summit",
       content:
-        '🚀 Pulsar Summit San Francisco 2022 will take place on August 18th, 2022. <a target="_blank" href="https://pulsar-summit.org/">Register now</a> and help us make it an even bigger success by spreading the word on social media!',
+        '🚀 Pulsar Summit Asia 2022 will take place on November 19th and 20th, 2022. The CFP is open now! <a target="_blank" href="https://sessionize.com/pulsar-summit-asia-2022/">Submit a proposal</a> to share your Pulsar story!',
       backgroundColor: "#198fff",
       textColor: "#fff",
       isCloseable: true,
