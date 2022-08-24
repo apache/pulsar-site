@@ -39,4 +39,6 @@ $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.client.impl.conf.Cl
 $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.websocket.service.WebSocketProxyConfiguration > $DOCS_DIR/reference-configuration-websocket.md
 $JAVA -cp `cat "${f}"` $GEN_DOCS_PROXY -c org.apache.pulsar.proxy.server.ProxyConfiguration > $DOCS_DIR/reference-configuration-pulsar-proxy.md
 
+cp $DOCS_DIR/reference-configuration-broker.md $DOCS_DIR/reference-configuration-standalone.md
+
 cp -r $WEBSITE/docsify/* $SITE_DIR
