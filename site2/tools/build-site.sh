@@ -22,10 +22,12 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 VERSION=$(${ROOT_DIR}/src/get-project-version.py)
 
 NEXT=$1
-WEBSITE_DIR="website"
+WEBSITE_DIR=${ROOT_DIR}/site2/website
 if [ -n "$NEXT" ]; then
-  WEBSITE_DIR="website-"$NEXT
+  WEBSITE_DIR=${ROOT_DIR}/site2/website-$NEXT
 fi
+TOOLS_DIR=${ROOT_DIR}/site2/tools
+GEN_SITE_DIR=${ROOT_DIR}/generated-site
 
 function workaround_crowdin_problem_by_copying_files() {
   # TODO: remove this after figuring out why crowdin removed code tab when generating translated files
@@ -66,8 +68,8 @@ EOF
 set -x -e
 
 export NODE_OPTIONS="--max-old-space-size=16000"
-${ROOT_DIR}/site2/tools/generate-api-docs.sh
-cd ${ROOT_DIR}/site2/$WEBSITE_DIR
+$TOOLS_DIR/generate-api-docs.sh
+cd $WEBSITE_DIR
 
 yarn
 
@@ -85,20 +87,23 @@ else
 fi
 
 # Generate document for command line tools.
-${ROOT_DIR}/site2/tools/pulsar-admin-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-client-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-perf-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-config-doc-gen.sh $WEBSITE_DIR
-cd ${ROOT_DIR}/site2/$WEBSITE_DIR
+$TOOLS_DIR/pulsar-admin-doc-gen.sh $WEBSITE_DIR
+$TOOLS_DIR/pulsar-client-doc-gen.sh $WEBSITE_DIR
+$TOOLS_DIR/pulsar-perf-doc-gen.sh $WEBSITE_DIR
+$TOOLS_DIR/pulsar-doc-gen.sh $WEBSITE_DIR
+$TOOLS_DIR/pulsar-config-doc-gen.sh $WEBSITE_DIR
+cd $WEBSITE_DIR
 
-rm -rf ${ROOT_DIR}/generated-site/content
-mkdir -p ${ROOT_DIR}/generated-site/content
-cp -R ${ROOT_DIR}/generated-site/api ${ROOT_DIR}/generated-site/content
+CONTENT_DIR=$GEN_SITE_DIR/content
+
+rm -rf $CONTENT_DIR
+mkdir -p $CONTENT_DIR
+cp -R $GEN_SITE_DIR/reference $CONTENT_DIR
+cp -R $GEN_SITE_DIR/api $CONTENT_DIR
 if [ -n "$NEXT" ]; then
-  cp -R ./build/* ${ROOT_DIR}/generated-site/content
+  cp -R ./build/* $CONTENT_DIR
 else
-  cp -R ./build/pulsar/* ${ROOT_DIR}/generated-site/content
+  cp -R ./build/pulsar/* $CONTENT_DIR
 fi
-cp -R ${ROOT_DIR}/generated-site/tools ${ROOT_DIR}/generated-site/content
-cp -R ${ROOT_DIR}/site2/$WEBSITE_DIR/static/swagger/* ${ROOT_DIR}/generated-site/content/swagger/
+cp -R $GEN_SITE_DIR/tools $CONTENT_DIR
+cp -R $WEBSITE_DIR/static/swagger/* $CONTENT_DIR/swagger/

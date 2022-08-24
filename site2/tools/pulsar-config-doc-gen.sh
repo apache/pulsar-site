@@ -19,26 +19,26 @@
 #
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
-VERSION=`$ROOT_DIR/src/get-project-version.py`
 DEST_DIR=$ROOT_DIR/generated-site
 WEBSITE=$1
+SITE_DIR=$DEST_DIR/reference
+DOCS_DIR=$WEBSITE/docsify/config
 
 JAVA=java
 f=$ROOT_DIR/distribution/server/target/classpath.txt
 GEN_DOCS_BROKER=org.apache.pulsar.utils.CmdGenerateDocumentation
 GEN_DOCS_PROXY=org.apache.pulsar.proxy.util.CmdGenerateDocumentation
 
-DOCS_DIR=site2/$WEBSITE/docsify/config
-
-cd $ROOT_DIR
-mkdir -p $DEST_DIR/tools/pulsar-config/$VERSION
+mkdir -p $SITE_DIR
 mkdir -p $DOCS_DIR
 
-cp site2/$WEBSITE/docs/reference-configuration*.md $DOCS_DIR
+cp $WEBSITE/docs/reference-configuration*.md $DOCS_DIR
 
 $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.broker.ServiceConfiguration > $DOCS_DIR/reference-configuration-broker.md
 $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.client.impl.conf.ClientConfigurationData > $DOCS_DIR/reference-configuration-client.md
 $JAVA -cp `cat "${f}"` $GEN_DOCS_BROKER -c org.apache.pulsar.websocket.service.WebSocketProxyConfiguration > $DOCS_DIR/reference-configuration-websocket.md
 $JAVA -cp `cat "${f}"` $GEN_DOCS_PROXY -c org.apache.pulsar.proxy.server.ProxyConfiguration > $DOCS_DIR/reference-configuration-pulsar-proxy.md
 
-cp -r site2/$WEBSITE/docsify/* $DEST_DIR/tools/pulsar-config/$VERSION
+cp $DOCS_DIR/reference-configuration-broker.md $DOCS_DIR/reference-configuration-standalone.md
+
+cp -r $WEBSITE/docsify/* $SITE_DIR
