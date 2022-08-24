@@ -72,6 +72,8 @@ sidebar_label: Apache Pulsar 2.11.0
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
 - Optimize getting ledger and entry id from entry [#17108](https://github.com/apache/pulsar/pull/17108)
+- Fix update topic remove properties [#17231](https://github.com/apache/pulsar/pull/17231)
+- Fix arithmetic exception for LeastResourceUsageWithWeight strategy [#17149](https://github.com/apache/pulsar/pull/17149)
 - Fix pulsarLedgerIdGenerator can't delete index path when zk metadata store config rootPath [#17192](https://github.com/apache/pulsar/pull/17192)
 - Make deleteTopicPolicies serialized is executed when close topic [#15811](https://github.com/apache/pulsar/pull/15811)
 - Avoid messages being repeatedly replayed with SHARED subscriptions (streaming dispatcher) [#17163](https://github.com/apache/pulsar/pull/17163)
