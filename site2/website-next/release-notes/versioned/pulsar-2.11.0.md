@@ -266,6 +266,8 @@ sidebar_label: Apache Pulsar 2.11.0
 - [Java] Avoid timer task run before previous subscribe complete [#14818](https://github.com/apache/pulsar/pull/14818)
 - [Java] Support Reader Interceptor [#14729](https://github.com/apache/pulsar/pull/14729)
 - [Java] Optimize pause when creating sub consumers in multi-topic consumer [#14566](https://github.com/apache/pulsar/pull/14566)
+- [C++] Use an atomic state_ instead of the lock to improve performance [#16940](https://github.com/apache/pulsar/pull/16940)
+- [C++] Fix multi-topics consumer close segmentation fault [#17239](https://github.com/apache/pulsar/pull/17239)
 - [C++] Fix rpm and deb packaging [#17064](https://github.com/apache/pulsar/pull/17064)
 - [C++] Add producerId to the log of closed producer [#17079](https://github.com/apache/pulsar/pull/17079)
 - [C++] Add basic authentication [#15822](https://github.com/apache/pulsar/pull/15822)

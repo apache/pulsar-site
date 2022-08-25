@@ -24,3 +24,5 @@ sidebar_label: Client CPP 2.11.0
 - [fix][C++] Fix the race condition of connect timeout task [#14823](https://github.com/apache/pulsar/pull/14823)
 - [fix][C++] Fix producer is never destructed until client is closed [#14797](https://github.com/apache/pulsar/pull/14797)
 - [fix][C++] Close messages_ when PartitionedConsumer is closed [#16887](https://github.com/apache/pulsar/pull/16887)
+- [improve][C++] Use an atomic state_ instead of the lock to improve performance [#16940](https://github.com/apache/pulsar/pull/16940)
+- [fix][C++] Fix multi-topics consumer close segmentation fault [#17239](https://github.com/apache/pulsar/pull/17239)
