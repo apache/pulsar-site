@@ -16,7 +16,7 @@ export default function VersionsTable(props) {
           {["Release", "Binary", "Source", "Release notes"].map((header) => (
             <TableCell
               className="border-gray-300 font-bold"
-              sx={{ border: 1, color: "inherit" }}
+              sx={{ border: 1 }}
               align="left"
               key={header}
             >
@@ -28,7 +28,7 @@ export default function VersionsTable(props) {
           <TableRow key={index}>
             <TableCell
               className="border-gray-300 font-bold"
-              sx={{ border: 1, color: "inherit" }}
+              sx={{ border: 1 }}
               align="left"
             >
               <Translate>{row.release}</Translate>

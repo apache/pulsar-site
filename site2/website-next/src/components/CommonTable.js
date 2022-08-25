@@ -16,7 +16,7 @@ export default function VersionsTable(props) {
           {props.header.map((header) => (
             <TableCell
               className="border-gray-300 font-bold"
-              sx={{ border: 1, color: "inherit" }}
+              sx={{ border: 1 }}
               align="left"
               key={header}
             >
@@ -31,7 +31,7 @@ export default function VersionsTable(props) {
                 <TableCell
                   key={key}
                   className="border-gray-300"
-                  sx={{ border: 1, color: "inherit" }}
+                  sx={{ border: 1 }}
                   align="left"
                 >
                   {(() => {

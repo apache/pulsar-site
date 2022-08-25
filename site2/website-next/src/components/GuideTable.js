@@ -15,8 +15,8 @@ export default function VersionsTable(props) {
         <TableRow key="header">
           {["Client guide", "API docs"].map((header) => (
             <TableCell
-              className="border-gray-300 font-bold"
-              sx={{ border: 1, color: "inherit" }}
+              className="border-gray-300 font-bold text-black"
+              sx={{ border: 1 }}
               align="left"
               key={header}
             >
@@ -28,7 +28,7 @@ export default function VersionsTable(props) {
           <TableRow key={index}>
             <TableCell
               className="border-gray-300"
-              sx={{ border: 1, color: "inherit" }}
+              sx={{ border: 1 }}
               align="left"
             >
               <Link
@@ -42,7 +42,7 @@ export default function VersionsTable(props) {
             </TableCell>
             <TableCell
               className="border-gray-300 font-bold"
-              sx={{ border: 1, color: "inherit" }}
+              sx={{ border: 1 }}
               align="left"
             >
               {row.description}
