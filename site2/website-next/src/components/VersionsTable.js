@@ -23,7 +23,7 @@ export default function VersionsTable(props) {
           <TableRow key={row.name}>
             <TableCell
               className="border-gray-300 font-bold"
-              sx={{ border: 1, color: "inherit" }}
+              sx={{ border: 1 }}
               align="left"
             >
               <span>{row.name}</span>
