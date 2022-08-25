@@ -475,7 +475,6 @@
 
 ### Library updates
 - Upgrade to Jetty to 9.4.48.v20220622 [#16520](https://github.com/apache/pulsar/pull/16520)
-- Bump jackson version from 2.13.2 to 2.13.3 [#16508](https://github.com/apache/pulsar/pull/16508)
 - Bump maven-dependency-plugin to 3.3.0 [#16318](https://github.com/apache/pulsar/pull/16318)
 - Bump os-maven-plugin version from 1.4.1.Final to 1.7.0 [#16308](https://github.com/apache/pulsar/pull/16308)
 - Bump presto.version to run PrestoServer on JDK11+ [#16163](https://github.com/apache/pulsar/pull/16163)
