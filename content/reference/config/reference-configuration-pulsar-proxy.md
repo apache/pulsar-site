@@ -634,6 +634,15 @@ Maximum number of inbound http connections. (0 to disable limiting)
 
 **Category**: Server
 
+### maxMessageSize
+Max size of messages.
+
+**Default**: `5242880`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreCacheExpirySeconds
 Metadata store cache expiry time in seconds.
 
