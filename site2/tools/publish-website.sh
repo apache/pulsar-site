@@ -37,7 +37,6 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
 (
   cd $ROOT_DIR
   REVISION=$(git rev-parse --short HEAD)
-  BUILD_ALL=$(cat $ROOT_DIR/site2/website-next/scripts/.build)
 
   rm -rf $PULSAR_SITE_TMP
   mkdir $PULSAR_SITE_TMP
@@ -52,11 +51,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
     mkdir -p $PULSAR_SITE_TMP/content/
   fi
 
-  echo "BUILD_ALL:"$BUILD_ALL
-  if [[ $BUILD_ALL"" == "11" ]]; then
-    echo "clean all the old random js files because a new all version build done, all the js is regenerated with a random name"
-    rm -rf $PULSAR_SITE_TMP/content/assets/js
-  fi
+  rm -rf $PULSAR_SITE_TMP/content/*
   cp -r $GENERATED_SITE_DIR/content/* $PULSAR_SITE_TMP/content
 
   git add -A .
