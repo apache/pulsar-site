@@ -1,10 +1,6 @@
 # Broker
-:::note
-
-This page is automatically generated from code files.
+!> This page is automatically generated from code files.
 If you find something inaccurate, feel free to update `org.apache.pulsar.broker.ServiceConfiguration`. Do NOT edit this markdown file manually. Manual changes will be overwritten by automatic generation.
-
-:::
 ## Required
 ### clusterName
 Name of the cluster to which this broker belongs to

@@ -1,10 +1,6 @@
 # Pulsar proxy
-:::note
-
-This page is automatically generated from code files.
+!> This page is automatically generated from code files.
 If you find something inaccurate, feel free to update `org.apache.pulsar.proxy.server.ProxyConfiguration`. Do NOT edit this markdown file manually. Manual changes will be overwritten by automatic generation.
-
-:::
 ## Required
 ## Optional
 ### brokerClientAuthenticationParameters
