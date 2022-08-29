@@ -1,6 +1,7 @@
 - [Pulsar Configuration](config/)
 - [Client Configuration](client/)
-- [`pulsar-admin`](pulsar-admin/)
-- [`pulsar-client`](pulsar-client/)
-- [`pulsar`](pulsar/)
-- [`pulsar-perf`](pulsar-perf/)
+- CLI Configuration
+  - [`pulsar-admin`](pulsar-admin/)
+  - [`pulsar-client`](pulsar-client/)
+  - [`pulsar`](pulsar/)
+  - [`pulsar-perf`](pulsar-perf/)

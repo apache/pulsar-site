@@ -1,2 +1,1 @@
-- `pulsar-perf`
-  - [pulsar-perf](pulsar-perf/pulsar-perf.md)
+- [pulsar-perf](pulsar-perf/pulsar-perf.md)

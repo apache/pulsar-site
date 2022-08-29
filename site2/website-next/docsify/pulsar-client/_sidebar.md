@@ -1,2 +1,1 @@
-- `pulsar-client`
-  - [pulsar-client](pulsar-client/pulsar-client.md)
+- [pulsar-client](pulsar-client/pulsar-client.md)
