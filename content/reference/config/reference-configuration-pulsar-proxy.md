@@ -519,6 +519,15 @@ Max concurrent inbound connections. The proxy will reject requests beyond that
 
 **Category**: RateLimiting
 
+### maxConcurrentInboundConnectionsPerIp
+The maximum number of connections per IP. If it exceeds, new connections are rejected.
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
 ### maxConcurrentLookupRequests
 Max concurrent lookup requests. The proxy will reject requests beyond that
 
