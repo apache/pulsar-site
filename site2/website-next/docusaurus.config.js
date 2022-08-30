@@ -353,8 +353,9 @@ module.exports = {
       additionalLanguages: [
         "csharp",
         "groovy",
-        "java",
+        "http",
         "ini",
+        "java",
         "powershell",
         "properties",
         "protobuf",
