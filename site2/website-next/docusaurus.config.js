@@ -357,6 +357,7 @@ module.exports = {
         "ini",
         "powershell",
         "properties",
+        "protobuf",
       ],
     },
     algolia: {
