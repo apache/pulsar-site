@@ -19,7 +19,6 @@
 #
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
-VERSION=$(${ROOT_DIR}/src/get-project-version.py)
 
 NEXT=$1
 WEBSITE_DIR=${ROOT_DIR}/site2/website
@@ -93,6 +92,7 @@ $TOOLS_DIR/pulsar-perf-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-config-doc-gen.sh $WEBSITE_DIR
 cd $WEBSITE_DIR
+cp -r docsify/* $GEN_SITE_DIR/reference
 
 CONTENT_DIR=$GEN_SITE_DIR/content
 
@@ -105,5 +105,4 @@ if [ -n "$NEXT" ]; then
 else
   cp -R ./build/pulsar/* $CONTENT_DIR
 fi
-cp -R $GEN_SITE_DIR/tools $CONTENT_DIR
 cp -R $WEBSITE_DIR/static/swagger/* $CONTENT_DIR/swagger/
