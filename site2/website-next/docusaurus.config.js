@@ -349,10 +349,15 @@ module.exports = {
       <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>`,
     },
     prism: {
-      // theme: lightCodeTheme,
-      // darkTheme: darkCodeTheme,
       theme: require("prism-react-renderer/themes/dracula"),
-      additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
+      additionalLanguages: [
+        "csharp",
+        "groovy",
+        "java",
+        "ini",
+        "powershell",
+        "properties",
+      ],
     },
     algolia: {
       appId: "WK2YL0SALL",
