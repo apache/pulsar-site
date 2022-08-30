@@ -246,7 +246,7 @@ This section describes how to use Pulsar CLI tools to connect a cluster through 
 
 This example shows how to use pulsar-admin to connect to a cluster through OAuth2 authentication plugin.
 
-```shell script
+```shell
 
 bin/pulsar-admin --admin-url https://streamnative.cloud:443 \
 --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
@@ -264,7 +264,7 @@ Set the `privateKey`, `issuerUrl`, and `audience` parameters to the values based
 
 This example shows how to use pulsar-client to connect to a cluster through OAuth2 authentication plugin.
 
-```shell script
+```shell
 
 bin/pulsar-client \
 --url SERVICE_URL \
@@ -283,7 +283,7 @@ Set the `privateKey`, `issuerUrl`, and `audience` parameters to the values based
 
 This example shows how to use pulsar-perf to connect to a cluster through OAuth2 authentication plugin.
 
-```shell script
+```shell
 
 bin/pulsar-perf produce --service-url pulsar+ssl://streamnative.cloud:6651 \
 --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \

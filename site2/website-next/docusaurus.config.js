@@ -358,6 +358,7 @@ module.exports = {
         "powershell",
         "properties",
         "protobuf",
+        "yaml",
       ],
     },
     algolia: {
