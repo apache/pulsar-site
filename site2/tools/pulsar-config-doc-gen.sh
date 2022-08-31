@@ -18,7 +18,7 @@
 # under the License.
 #
 
-set -x -e
+set -x
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
