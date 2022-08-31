@@ -94,6 +94,8 @@ $TOOLS_DIR/pulsar-perf-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-config-doc-gen.sh $WEBSITE_DIR
 cd $WEBSITE_DIR
+
+mkdir -p $GEN_SITE_DIR/reference
 cp -r docsify/* $GEN_SITE_DIR/reference
 
 CONTENT_DIR=$GEN_SITE_DIR/content
