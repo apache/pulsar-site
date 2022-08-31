@@ -30,5 +30,5 @@ COMMANDS="broker-stats brokers bookies clusters functions functions-worker names
 
 for CMD in $COMMANDS
 do
-    $DOC_GEN generate $CMD > $DOCS_DIR/$CMD.md
+    $DOC_GEN $CMD > $DOCS_DIR/$CMD.md
 done
