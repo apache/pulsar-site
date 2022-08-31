@@ -18,6 +18,8 @@
 # under the License.
 #
 
+set -x -e
+
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
 DOCS_DIR=$WEBSITE/docsify/pulsar-perf
