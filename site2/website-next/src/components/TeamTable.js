@@ -14,7 +14,7 @@ export default function VersionsTable(props) {
       <TableHead>
         <TableRow>
           {["Name", "Apache Id"].map(header => (
-            <TableCell className="font-bold" sx={{ border: 0 }} key={header}>
+            <TableCell className="font-bold" sx={{ border: 0, color: "inherit" }} key={header}>
               <Translate>{header}</Translate>
             </TableCell>
           ))}
@@ -23,8 +23,8 @@ export default function VersionsTable(props) {
       <TableBody>
         {props.data.map((row, index) => (
           <TableRow key={index}>
-            <TableCell sx={{ border: 0 }}>{row.name}</TableCell>
-            <TableCell sx={{ border: 0 }}>{row.apacheId}</TableCell>
+            <TableCell sx={{ border: 0 , color: "inherit" }}>{row.name}</TableCell>
+            <TableCell sx={{ border: 0 , color: "inherit" }}>{row.apacheId}</TableCell>
           </TableRow>
         ))}
       </TableBody>
