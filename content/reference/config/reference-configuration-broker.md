@@ -1798,6 +1798,15 @@ Used to specify multiple advertised listeners for the broker. The value must for
 
 **Category**: Server
 
+### allowOverrideEntryFilters
+Whether allow topic level entry filters policies overrides broker configuration.
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### autoShrinkForConsumerPendingAcksMap
 Whether to enable the automatic shrink of pendingAcks map, the default is false, which means it is not enabled. When there are a large number of share or key share consumers in the cluster, it can be enabled to reduce the memory consumption caused by pendingAcks.
 
