@@ -58,6 +58,7 @@ $ pulsar-admin sinks create options
 | `--dead-letter-topic` | Name of the dead topic where the failing messages will be sent.|null||
 | `-i, --inputs` | The sink's input topic or topics (multiple topics can be specified as a comma-separated list)|null||
 | `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the sink|null||
+| `--transform-function-config` | Configuration of the transform function applied before the Sink|null||
 | `--subs-position` | Pulsar source subscription position if user wants to consume messages from the specified location|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per sink instance (applicable only to the process and Docker runtimes)|null||
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string)|null||
@@ -65,9 +66,11 @@ $ pulsar-admin sinks create options
 | `--custom-schema-inputs` | The map of input topics to Schema types or class names (as a JSON string)|null||
 | `--namespace` | The sink's namespace|null||
 | `--retain-ordering` | Sink consumes and sinks messages in order|null||
+| `--transform-function` | Transform function applied before the Sink|null||
 | `--parallelism` | The sink's parallelism factor (i.e. the number of sink instances to run)|null||
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null||
 | `--input-specs` | The map of inputs to custom configuration (as a JSON string)|null||
+| `--transform-function-classname` | The transform function class name|null||
 | `--classname` | The sink's class name if archive is file-url-path (file://)|null||
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null||
 | `--timeout-ms` | The message timeout in milliseconds|null||
@@ -108,6 +111,7 @@ $ pulsar-admin sinks update options
 | `--dead-letter-topic` | Name of the dead topic where the failing messages will be sent.|null||
 | `-i, --inputs` | The sink's input topic or topics (multiple topics can be specified as a comma-separated list)|null||
 | `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the sink|null||
+| `--transform-function-config` | Configuration of the transform function applied before the Sink|null||
 | `--subs-position` | Pulsar source subscription position if user wants to consume messages from the specified location|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per sink instance (applicable only to the process and Docker runtimes)|null||
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string)|null||
@@ -115,9 +119,11 @@ $ pulsar-admin sinks update options
 | `--custom-schema-inputs` | The map of input topics to Schema types or class names (as a JSON string)|null||
 | `--namespace` | The sink's namespace|null||
 | `--retain-ordering` | Sink consumes and sinks messages in order|null||
+| `--transform-function` | Transform function applied before the Sink|null||
 | `--parallelism` | The sink's parallelism factor (i.e. the number of sink instances to run)|null||
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null||
 | `--input-specs` | The map of inputs to custom configuration (as a JSON string)|null||
+| `--transform-function-classname` | The transform function class name|null||
 | `--classname` | The sink's class name if archive is file-url-path (file://)|null||
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null||
 | `--timeout-ms` | The message timeout in milliseconds|null||
@@ -323,9 +329,11 @@ $ pulsar-admin sinks localrun options
 | `--secrets-provider-config` | Config that needs to be passed to secrets provider|null||
 | `--hostname-verification-enabled` | Enable hostname verification|false||
 | `--retain-ordering` | Sink consumes and sinks messages in order|null||
+| `--transform-function` | Transform function applied before the Sink|null||
 | `--parallelism` | The sink's parallelism factor (i.e. the number of sink instances to run)|null||
 | `--input-specs` | The map of inputs to custom configuration (as a JSON string)|null||
 | `--use-tls` | Use tls connection|false||
+| `--transform-function-classname` | The transform function class name|null||
 | `--classname` | The sink's class name if archive is file-url-path (file://)|null||
 | `--timeout-ms` | The message timeout in milliseconds|null||
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null||
@@ -337,6 +345,7 @@ $ pulsar-admin sinks localrun options
 | `--state-storage-service-url` | The URL for the state storage service (the default is Apache BookKeeper)|null||
 | `--client-auth-params` | Client authentication param|null||
 | `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the sink|null||
+| `--transform-function-config` | Configuration of the transform function applied before the Sink|null||
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per sink instance (applicable only to the process and Docker runtimes)|null||
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string)|null||

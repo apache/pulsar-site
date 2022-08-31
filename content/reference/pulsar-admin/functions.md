@@ -556,6 +556,7 @@ $ pulsar-admin functions download options
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null||
 | `--namespace` | The namespace of a Pulsar Function|null||
 | `--destination-file` | The file to store downloaded content|null||
+| `--transform-function` | Download the transform Function of the connector|false||
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
