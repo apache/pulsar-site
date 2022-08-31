@@ -24,7 +24,7 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
 DOCS_DIR=$WEBSITE/docsify/pulsar-admin
 
-DOC_GEN=$ROOT_DIR/bin/pulsar-admin documents generate
+DOC_GEN="$ROOT_DIR/bin/pulsar-admin documents generate"
 
 COMMANDS="broker-stats brokers bookies clusters functions functions-worker namespaces ns-isolation-policy sources sinks topics topicPolicies proxy-stats resourcegroups transactions tenants resource-quotas schemas packages"
 

@@ -24,7 +24,7 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
 DOCS_DIR=$WEBSITE/docsify/pulsar
 
-PULSAR=$ROOT_DIR/bin/pulsar
+PULSAR="$ROOT_DIR/bin/pulsar"
 
 $PULSAR broker -g > $DOCS_DIR/broker.md
 $PULSAR broker-tool gen-doc > $DOCS_DIR/broker-tool.md
