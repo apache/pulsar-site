@@ -18,24 +18,24 @@
 # under the License.
 #
 
-set -x -e
-
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
 DOCS_DIR=$WEBSITE/docsify/pulsar
 
-$ROOT_DIR/bin/pulsar broker -g > $DOCS_DIR/broker.md
-$ROOT_DIR/bin/pulsar broker-tool gen-doc > $DOCS_DIR/broker-tool.md
-$ROOT_DIR/bin/pulsar compact-topic -t tmp -g > $DOCS_DIR/compact-topic.md
-$ROOT_DIR/bin/pulsar tokens gen-doc > $DOCS_DIR/tokens.md
-$ROOT_DIR/bin/pulsar proxy -g > $DOCS_DIR/proxy.md
-$ROOT_DIR/bin/pulsar functions-worker -g > $DOCS_DIR/functions-worker.md
-$ROOT_DIR/bin/pulsar standalone -g > $DOCS_DIR/standalone.md
-$ROOT_DIR/bin/pulsar initialize-cluster-metadata -cs cs -uw uw -zk zk -c c -g > $DOCS_DIR/initialize-cluster-metadata.md
-$ROOT_DIR/bin/pulsar delete-cluster-metadata -zk zk -g > $DOCS_DIR/delete-cluster-metadata.md
-$ROOT_DIR/bin/pulsar initialize-transaction-coordinator-metadata -cs cs -c c -g > $DOCS_DIR/initialize-transaction-coordinator-metadata.md
-$ROOT_DIR/bin/pulsar initialize-namespace -cs cs -c c -g demo > $DOCS_DIR/initialize-namespace.md
-$ROOT_DIR/bin/pulsar version -g > $DOCS_DIR/version.md
-$ROOT_DIR/bin/pulsar websocket -g > $DOCS_DIR/websocket.md
+PULSAR="$ROOT_DIR/bin/pulsar"
+
+$PULSAR broker -g > $DOCS_DIR/broker.md
+$PULSAR broker-tool gen-doc > $DOCS_DIR/broker-tool.md
+$PULSAR compact-topic -t tmp -g > $DOCS_DIR/compact-topic.md
+$PULSAR tokens gen-doc > $DOCS_DIR/tokens.md
+$PULSAR proxy -g > $DOCS_DIR/proxy.md
+$PULSAR functions-worker -g > $DOCS_DIR/functions-worker.md
+$PULSAR standalone -g > $DOCS_DIR/standalone.md
+$PULSAR initialize-cluster-metadata -cs cs -uw uw -zk zk -c c -g > $DOCS_DIR/initialize-cluster-metadata.md
+$PULSAR delete-cluster-metadata -zk zk -g > $DOCS_DIR/delete-cluster-metadata.md
+$PULSAR initialize-transaction-coordinator-metadata -cs cs -c c -g > $DOCS_DIR/initialize-transaction-coordinator-metadata.md
+$PULSAR initialize-namespace -cs cs -c c -g demo > $DOCS_DIR/initialize-namespace.md
+$PULSAR version -g > $DOCS_DIR/version.md
+$PULSAR websocket -g > $DOCS_DIR/websocket.md
 
 
