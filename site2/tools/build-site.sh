@@ -89,7 +89,7 @@ fi
 $TOOLS_DIR/pulsar-admin-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-client-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-perf-doc-gen.sh $WEBSITE_DIR
-$TOOLS_DIR/pulsar-doc-gen.sh $WEBSITE_DIR
+# $TOOLS_DIR/pulsar-doc-gen.sh $WEBSITE_DIR
 $TOOLS_DIR/pulsar-config-doc-gen.sh $WEBSITE_DIR
 cd $WEBSITE_DIR
 cp -r docsify/* $GEN_SITE_DIR/reference
