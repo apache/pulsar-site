@@ -72,7 +72,7 @@ export NODE_OPTIONS="--max-old-space-size=16000"
 $TOOLS_DIR/generate-api-docs.sh
 cd $WEBSITE_DIR
 
-yarn
+npm install
 
 if [ -n "$NEXT" ]; then
   node scripts/replace.js
