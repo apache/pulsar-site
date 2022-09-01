@@ -47,6 +47,7 @@ $ pulsar-admin topics subcommand
 * `get-partitioned-topic-metadata`
 * `get-properties`
 * `update-properties`
+* `remove-properties`
 * `delete-partitioned-topic`
 * `peek-messages`
 * `examine-messages`
@@ -791,6 +792,27 @@ $ pulsar-admin topics update-properties options
 |Flag|Description|Default|
 |---|---|---|
 | `--property, -p` | key value pair properties(-p a=b -p c=d)|null||
+
+
+## <em>remove-properties</em>
+
+Remove the key in properties of a topic
+
+### Usage
+
+------------
+
+**Command:**
+
+```bdocs-tab:example_shell
+$ pulsar-admin topics remove-properties options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--key, -k` | The key to remove in the properties of topic|null||
 
 
 ## <em>delete-partitioned-topic</em>
