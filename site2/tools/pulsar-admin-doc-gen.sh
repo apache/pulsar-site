@@ -18,33 +18,17 @@
 # under the License.
 #
 
+set -x
+
 ROOT_DIR=$(git rev-parse --show-toplevel)
-VERSION=`${ROOT_DIR}/src/get-project-version.py`
-DEST_DIR=$ROOT_DIR/generated-site
 WEBSITE=$1
-SITE_DIR=$DEST_DIR/tools/pulsar-admin/${VERSION}
+DOCS_DIR=$WEBSITE/docsify/pulsar-admin
 
-cd $ROOT_DIR
+DOC_GEN="$ROOT_DIR/bin/pulsar-admin documents generate"
 
-mkdir -p $SITE_DIR
-mkdir -p $SITE_DIR/node_modules
+COMMANDS="broker-stats brokers bookies clusters functions functions-worker namespaces ns-isolation-policy sources sinks topics topicPolicies proxy-stats resourcegroups transactions tenants resource-quotas schemas packages"
 
-${ROOT_DIR}/site2/tools/pulsar-admin-md.sh $ROOT_DIR $WEBSITE
-
-cd ${WEBSITE}/brodocs
-cp pulsar-admin-manifest.json manifest.json
-node brodoc.js
-
-cp index.html navData.js stylesheet.css scroll.js tabvisibility.js favicon.ico $SITE_DIR
-mkdir -p $SITE_DIR/node_modules/bootstrap/dist/css
-cp -r ${WEBSITE}/node_modules/bootstrap/dist/css/bootstrap.min.css $SITE_DIR/node_modules/bootstrap/dist/css
-mkdir -p $SITE_DIR/node_modules/font-awesome/css
-cp -r ${WEBSITE}/node_modules/font-awesome/css/font-awesome.min.css $SITE_DIR/node_modules/font-awesome/css
-mkdir -p $SITE_DIR/node_modules/highlight.js/styles
-cp -r ${WEBSITE}/node_modules/highlight.js/styles/default.css $SITE_DIR/node_modules/highlight.js/styles
-mkdir -p $SITE_DIR/node_modules/jquery/dist
-cp -r ${WEBSITE}/node_modules/jquery/dist/jquery.min.js $SITE_DIR/node_modules/jquery/dist/
-mkdir -p $SITE_DIR/node_modules/jquery.scrollto
-cp -r ${WEBSITE}/node_modules/jquery.scrollto/jquery.scrollTo.min.js $SITE_DIR/node_modules/jquery.scrollto
-
-
+for CMD in $COMMANDS
+do
+    $DOC_GEN $CMD > $DOCS_DIR/$CMD.md
+done

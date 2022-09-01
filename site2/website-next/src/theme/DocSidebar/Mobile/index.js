@@ -1,17 +1,11 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-import React from "react";
-import clsx from "clsx";
+import React from 'react';
+import clsx from 'clsx';
 import {
   NavbarSecondaryMenuFiller,
   ThemeClassNames,
-  useNavbarMobileSidebar,
-} from "@docusaurus/theme-common";
-import DocSidebarItems from "@theme/DocSidebarItems";
+} from '@docusaurus/theme-common';
+import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
+import DocSidebarItems from '@theme/DocSidebarItems';
 import styles from "./styles.module.css";
 import DocsVersionDropdownNavbarItem from "../../DocsVersionDropdownNavbarItem";
 import BrowserOnly from "@docusaurus/BrowserOnly";
@@ -30,7 +24,6 @@ const DocSidebarMobileSecondaryMenu = ({ sidebar, path, docsPluginId }) => {
           if (item.type === "category" && item.href) {
             mobileSidebar.toggle();
           }
-
           if (item.type === "link") {
             mobileSidebar.toggle();
           }

@@ -18,7 +18,7 @@
 # under the License.
 #
 
-set -e
+set -x -e
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
@@ -54,8 +54,20 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
 
   echo "BUILD_ALL:"$BUILD_ALL
   if [[ $BUILD_ALL"" == "11" ]]; then
-    echo "clean all the old random js files because a new all version build done, all the js is regenerated with a random name"
-    rm -rf $PULSAR_SITE_TMP/content/assets/js
+    echo "clean all the old content"
+    find $PULSAR_SITE_TMP/content -print \
+      | grep -v $PULSAR_SITE_TMP/content$ \
+      | grep -v $PULSAR_SITE_TMP/content/api \
+      | grep -v $PULSAR_SITE_TMP/content/css \
+      | grep -v $PULSAR_SITE_TMP/content/tools \
+      | grep -v $PULSAR_SITE_TMP/content/.htaccess \
+      | grep -v $PULSAR_SITE_TMP/content/docs/v2.0.1-incubating \
+      | grep -v $PULSAR_SITE_TMP/content/docs/v2.0.0-rc1-incubating \
+      | grep -v $PULSAR_SITE_TMP/content/docs/v1.22.1-incubating \
+      | grep -v $PULSAR_SITE_TMP/content/docs/v1.21.0-incubating \
+      | grep -v $PULSAR_SITE_TMP/content/docs/v1.20.0-incubating \
+      | grep -v $PULSAR_SITE_TMP/content/docs/v1.19.0-incubating\
+      | xargs rm -rf
   fi
   cp -r $GENERATED_SITE_DIR/content/* $PULSAR_SITE_TMP/content
 
