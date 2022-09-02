@@ -57,7 +57,7 @@ $ pulsar-admin sinks create options
 | `--disk` | The disk (in bytes) that need to be allocated per sink instance (applicable only to Docker runtime)|null||
 | `--dead-letter-topic` | Name of the dead topic where the failing messages will be sent.|null||
 | `-i, --inputs` | The sink's input topic or topics (multiple topics can be specified as a comma-separated list)|null||
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the sink|null||
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the sink. The '--processing-guarantees' implementation in Pulsar also relies on sink implementation. The available values are `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, `ATLEAST_ONCE` delivery guarantee is used.|null||
 | `--transform-function-config` | Configuration of the transform function applied before the Sink|null||
 | `--subs-position` | Pulsar source subscription position if user wants to consume messages from the specified location|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per sink instance (applicable only to the process and Docker runtimes)|null||
@@ -110,7 +110,7 @@ $ pulsar-admin sinks update options
 | `--disk` | The disk (in bytes) that need to be allocated per sink instance (applicable only to Docker runtime)|null||
 | `--dead-letter-topic` | Name of the dead topic where the failing messages will be sent.|null||
 | `-i, --inputs` | The sink's input topic or topics (multiple topics can be specified as a comma-separated list)|null||
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the sink|null||
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the sink. The '--processing-guarantees' implementation in Pulsar also relies on sink implementation. The available values are `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, `ATLEAST_ONCE` delivery guarantee is used.|null||
 | `--transform-function-config` | Configuration of the transform function applied before the Sink|null||
 | `--subs-position` | Pulsar source subscription position if user wants to consume messages from the specified location|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per sink instance (applicable only to the process and Docker runtimes)|null||
@@ -344,7 +344,7 @@ $ pulsar-admin sinks localrun options
 | `--sink-config` | User defined configs key/values|null||
 | `--state-storage-service-url` | The URL for the state storage service (the default is Apache BookKeeper)|null||
 | `--client-auth-params` | Client authentication param|null||
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the sink|null||
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the sink. The '--processing-guarantees' implementation in Pulsar also relies on sink implementation. The available values are `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, `ATLEAST_ONCE` delivery guarantee is used.|null||
 | `--transform-function-config` | Configuration of the transform function applied before the Sink|null||
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per sink instance (applicable only to the process and Docker runtimes)|null||

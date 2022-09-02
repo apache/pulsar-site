@@ -47,7 +47,7 @@ $ pulsar-admin sources create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the source|null||
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the source. A source connector receives messages from external system and writes messages to a Pulsar topic. The '--processing-guarantees' is used to ensure the processing guarantees for writing messages to the Pulsar topic. The available values are `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, `ATLEAST_ONCE` delivery guarantee is used.|null||
 | `--disk` | The disk (in bytes) that need to be allocated per source instance (applicable only to Docker runtime)|null||
 | `--producer-config` | The custom producer configuration (as a JSON string)|null||
 | `--batch-builder` | BatchBuilder provides two types of batch construction methods, DEFAULT and KEY_BASED. The default value is: DEFAULT|null||
@@ -88,7 +88,7 @@ $ pulsar-admin sources update options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the source|null||
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the source. A source connector receives messages from external system and writes messages to a Pulsar topic. The '--processing-guarantees' is used to ensure the processing guarantees for writing messages to the Pulsar topic. The available values are `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, `ATLEAST_ONCE` delivery guarantee is used.|null||
 | `--disk` | The disk (in bytes) that need to be allocated per source instance (applicable only to Docker runtime)|null||
 | `--producer-config` | The custom producer configuration (as a JSON string)|null||
 | `--batch-builder` | BatchBuilder provides two types of batch construction methods, DEFAULT and KEY_BASED. The default value is: DEFAULT|null||
@@ -294,7 +294,7 @@ $ pulsar-admin sources localrun options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the source|null||
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the source. A source connector receives messages from external system and writes messages to a Pulsar topic. The '--processing-guarantees' is used to ensure the processing guarantees for writing messages to the Pulsar topic. The available values are `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, `ATLEAST_ONCE` delivery guarantee is used.|null||
 | `--disk` | The disk (in bytes) that need to be allocated per source instance (applicable only to Docker runtime)|null||
 | `--producer-config` | The custom producer configuration (as a JSON string)|null||
 | `--batch-builder` | BatchBuilder provides two types of batch construction methods, DEFAULT and KEY_BASED. The default value is: DEFAULT|null||

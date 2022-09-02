@@ -79,7 +79,7 @@ $ pulsar-admin functions localrun options
 | `--producer-config` | The custom producer configuration (as a JSON string)|null|Java|
 | `--tls-trust-cert-path` | tls trust cert file path|null|Java, Python|
 | `--log-topic` | The topic to which the logs of a Pulsar Function are produced|null|Java, Python, Go|
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the function|null|Java, Python, Go|
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the function. Available values are: `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, the `ATLEAST_ONCE` delivery guarantee is used.|null|Java, Python, Go|
 | `--input-specs` | The map of inputs to custom configuration (as a JSON string)|null|Java, Python, Go|
 | `-o, --output` | The output topic of a Pulsar Function (If none is specified, no output is written)|null|Java, Python, Go|
 | `--jar` | Path to the JAR file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.|null|Java|
@@ -151,7 +151,7 @@ $ pulsar-admin functions create options
 | `--tenant` | The tenant of a Pulsar Function|null|Java, Python, Go|
 | `--producer-config` | The custom producer configuration (as a JSON string)|null|Java|
 | `--log-topic` | The topic to which the logs of a Pulsar Function are produced|null|Java, Python, Go|
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the function|null|Java, Python, Go|
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the function. Available values are: `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, the `ATLEAST_ONCE` delivery guarantee is used.|null|Java, Python, Go|
 | `--input-specs` | The map of inputs to custom configuration (as a JSON string)|null|Java, Python, Go|
 | `-o, --output` | The output topic of a Pulsar Function (If none is specified, no output is written)|null|Java, Python, Go|
 | `--jar` | Path to the JAR file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.|null|Java|
@@ -239,7 +239,7 @@ $ pulsar-admin functions update options
 | `--tenant` | The tenant of a Pulsar Function|null|Java, Python, Go|
 | `--producer-config` | The custom producer configuration (as a JSON string)|null|Java|
 | `--log-topic` | The topic to which the logs of a Pulsar Function are produced|null|Java, Python, Go|
-| `--processing-guarantees` | The processing guarantees (aka delivery semantics) applied to the function|null|Java, Python, Go|
+| `--processing-guarantees` | The processing guarantees (as known as delivery semantics) applied to the function. Available values are: `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`. If it is not specified, the `ATLEAST_ONCE` delivery guarantee is used.|null|Java, Python, Go|
 | `--input-specs` | The map of inputs to custom configuration (as a JSON string)|null|Java, Python, Go|
 | `-o, --output` | The output topic of a Pulsar Function (If none is specified, no output is written)|null|Java, Python, Go|
 | `--jar` | Path to the JAR file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.|null|Java|
