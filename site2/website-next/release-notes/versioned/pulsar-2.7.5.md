@@ -56,7 +56,7 @@ sidebar_label: Apache Pulsar 2.7.5
 - [fix][storage] Follow up on race condition fixes in ManagedCursorImpl #15031 [#15067](https://github.com/apache/pulsar/pull/15067)
 - [fix][storage] Fix race condition in updating lastMarkDeleteEntry field [#15031](https://github.com/apache/pulsar/pull/15031)
 - [fix][storage] Fix NPE when removing cursor [#12297](https://github.com/apache/pulsar/pull/12297)
-- [improve][storage]If mark-delete operation fails, mark the cursor as "dirty" [#14256](https://github.com/apache/pulsar/pull/14256)
+- [improve][storage] If mark-delete operation fails, mark the cursor as "dirty" [#14256](https://github.com/apache/pulsar/pull/14256)
 
 #### Proxy
 - [fix][proxy] Fix client service url [#16894](https://github.com/apache/pulsar/pull/16894)
