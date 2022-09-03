@@ -45,7 +45,7 @@ sidebar_label: Apache Pulsar 2.7.5
 - [fix][sec] Avoid AuthenticationDataSource mutation for subscription name [#16065](https://github.com/apache/pulsar/pull/16065)
 - [fix][sec] Return if namespace policies are read only [#12514](https://github.com/apache/pulsar/pull/12514)
 - [refactor][sec] Switch to rely on Netty for Hostname Verification [#15824](https://github.com/apache/pulsar/pull/15824)
-- [cleanup][sec]Ignore case when obfuscating passwords in configuration scripts [#15077](https://github.com/apache/pulsar/pull/15077)
+- [cleanup][sec] Ignore case when obfuscating passwords in configuration scripts [#15077](https://github.com/apache/pulsar/pull/15077)
 
 #### Storage
 - [fix][storage] ManagedCursor: mark delete no callback when create meta-ledger fail [#16841](https://github.com/apache/pulsar/pull/16841)
@@ -60,7 +60,6 @@ sidebar_label: Apache Pulsar 2.7.5
 
 #### Proxy
 - [fix][proxy] Fix client service url [#16894](https://github.com/apache/pulsar/pull/16894)
-- [fix][proxy] Fix client service url [#16834](https://github.com/apache/pulsar/pull/16834)
 - [fix][proxy] Prevent leak of unreleased lookupRequestSemaphore permits [#13812](https://github.com/apache/pulsar/pull/13812)
 - [fix][proxy] Remove unnecessary blocking DNS lookup in LookupProxyHandler [#15415](https://github.com/apache/pulsar/pull/15415)
 - [fix][proxy] Fix proxy connection leak when inbound connection closes while connecting is in progress [#15366](https://github.com/apache/pulsar/pull/15366)
