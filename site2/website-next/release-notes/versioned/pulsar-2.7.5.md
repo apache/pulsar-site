@@ -42,7 +42,7 @@ sidebar_label: Apache Pulsar 2.7.5
 - [improve][sec] Improve get the basic authentication config [#16947](https://github.com/apache/pulsar/pull/16947)
 - [improve][sec] Support for get token from HTTP params [#16892](https://github.com/apache/pulsar/pull/16892)
 - [fix][sec] AuthorizationService should use provider's canLookupAsync method [#11777](https://github.com/apache/pulsar/pull/11777)
-- [fix][sec]Avoid AuthenticationDataSource mutation for subscription name [#16065](https://github.com/apache/pulsar/pull/16065)
+- [fix][sec] Avoid AuthenticationDataSource mutation for subscription name [#16065](https://github.com/apache/pulsar/pull/16065)
 - [fix][sec] Return if namespace policies are read only [#12514](https://github.com/apache/pulsar/pull/12514)
 - [refactor][sec] Switch to rely on Netty for Hostname Verification [#15824](https://github.com/apache/pulsar/pull/15824)
 - [cleanup][sec]Ignore case when obfuscating passwords in configuration scripts [#15077](https://github.com/apache/pulsar/pull/15077)
