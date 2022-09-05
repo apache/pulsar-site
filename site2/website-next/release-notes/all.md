@@ -14,7 +14,7 @@ slug: /
 #### 2.8.x
 [2.8.3](/release-notes/versioned/pulsar-2.8.3)&ensp;&ensp;[2.8.2](/release-notes/versioned/pulsar-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/pulsar-2.8.1)&ensp;&ensp;[2.8.0](/release-notes/versioned/pulsar-2.8.0)&ensp;&ensp;  
 #### 2.7.x
-[2.7.4](/release-notes/versioned/pulsar-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/pulsar-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/pulsar-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/pulsar-2.7.1)&ensp;&ensp;  
+[2.7.5](/release-notes/versioned/pulsar-2.7.5)&ensp;&ensp;[2.7.4](/release-notes/versioned/pulsar-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/pulsar-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/pulsar-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/pulsar-2.7.1)&ensp;&ensp;  
 #### 2.6.x
 [2.6.4](/release-notes/versioned/pulsar-2.6.4)&ensp;&ensp;[2.6.3](/release-notes/versioned/pulsar-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/versioned/pulsar-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/versioned/pulsar-2.6.1)&ensp;&ensp;  
 #### 2.5.x
@@ -40,7 +40,7 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-java-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-java-2.8.1)&ensp;&ensp;  
 #### 2.7.x
-[2.7.4](/release-notes/versioned/client-java-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/client-java-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/client-java-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/client-java-2.7.1)&ensp;&ensp;  
+[2.7.5](/release-notes/versioned/client-java-2.7.5)&ensp;&ensp;[2.7.4](/release-notes/versioned/client-java-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/client-java-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/client-java-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/client-java-2.7.1)&ensp;&ensp;  
 #### 2.6.x
 [2.6.4](/release-notes/versioned/client-java-2.6.4)&ensp;&ensp;[2.6.3](/release-notes/versioned/client-java-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/versioned/client-java-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/versioned/client-java-2.6.1)&ensp;&ensp;  
 #### 2.5.x
@@ -53,7 +53,7 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-python-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-python-2.8.1)&ensp;&ensp;  
 #### 2.7.x
-[2.7.4](/release-notes/versioned/client-python-2.7.4)&ensp;&ensp;[2.7.2](/release-notes/versioned/client-python-2.7.2)&ensp;&ensp;  
+[2.7.5](/release-notes/versioned/client-python-2.7.5)&ensp;&ensp;[2.7.4](/release-notes/versioned/client-python-2.7.4)&ensp;&ensp;[2.7.2](/release-notes/versioned/client-python-2.7.2)&ensp;&ensp;  
 #### 2.6.x
 [2.6.2](/release-notes/versioned/client-python-2.6.2)&ensp;&ensp;  
 #### 2.5.x
@@ -66,7 +66,7 @@ All release notes of previous versions are available at [here](/release-notes/le
 #### 2.8.x
 [2.8.2](/release-notes/versioned/client-cpp-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/client-cpp-2.8.1)&ensp;&ensp;  
 #### 2.7.x
-[2.7.4](/release-notes/versioned/client-cpp-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/client-cpp-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/client-cpp-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/client-cpp-2.7.1)&ensp;&ensp;  
+[2.7.5](/release-notes/versioned/client-cpp-2.7.5)&ensp;&ensp;[2.7.4](/release-notes/versioned/client-cpp-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/client-cpp-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/client-cpp-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/client-cpp-2.7.1)&ensp;&ensp;  
 #### 2.6.x
 [2.6.2](/release-notes/versioned/client-cpp-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/versioned/client-cpp-2.6.1)&ensp;&ensp;  
 #### 2.5.x
