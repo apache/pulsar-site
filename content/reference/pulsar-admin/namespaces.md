@@ -1169,7 +1169,7 @@ $ pulsar-admin namespaces split-bundle options
 |Flag|Description|Default|
 |---|---|---|
 | `--unload, -u` | Unload newly split bundles after splitting old bundle|false||
-| `--split-algorithm-name, -san` | Algorithm name for split namespace bundle. Valid options are: [range_equally_divide, topic_count_equally_divide, specified_positions_divide]. Use broker side config if absent|null||
+| `--split-algorithm-name, -san` | Algorithm name for split namespace bundle. Valid options are: [range_equally_divide, topic_count_equally_divide, specified_positions_divide, flow_or_qps_equally_divide]. Use broker side config if absent|null||
 | `--bundle-type, -bt` | bundle type (mutually exclusive with --bundle)|null||
 | `--split-boundaries, -sb` | Specified split boundary for bundle split, will split one bundle to multi bundles only works with specified_positions_divide algorithm|null||
 | `--bundle, -b` | {start-boundary}_{end-boundary} (mutually exclusive with --bundle-type)|null||

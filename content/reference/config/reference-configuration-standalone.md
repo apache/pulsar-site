@@ -446,6 +446,15 @@ Default algorithm name for namespace bundle split
 
 **Category**: Load Balancer
 
+### flowOrQpsDifferenceThresholdPercentage
+In FlowOrQpsEquallyDivideBundleSplitAlgorithm, if msgRate \>= loadBalancerNamespaceBundleMaxMsgRate *  (100 + flowOrQpsDifferenceThresholdPercentage)/100.0  or throughput \>=  loadBalancerNamespaceBundleMaxBandwidthMbytes *  (100 + flowOrQpsDifferenceThresholdPercentage)/100.0,  execute split bundle
+
+**Default**: `10`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerAutoBundleSplitEnabled
 enable/disable automatic namespace bundle split
 
@@ -793,7 +802,7 @@ Time to wait for the unloading of a namespace bundle
 ### supportedNamespaceBundleSplitAlgorithms
 Supported algorithms name for namespace bundle split
 
-**Default**: `[range_equally_divide, topic_count_equally_divide, specified_positions_divide]`
+**Default**: `[range_equally_divide, topic_count_equally_divide, specified_positions_divide, flow_or_qps_equally_divide]`
 
 **Dynamic**: `true`
 
