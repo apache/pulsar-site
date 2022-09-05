@@ -60,6 +60,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
       | grep -v $PULSAR_SITE_TMP/content/api \
       | grep -v $PULSAR_SITE_TMP/content/css \
       | grep -v $PULSAR_SITE_TMP/content/tools \
+      | grep -v $PULSAR_SITE_TMP/content/reference \
       | grep -v $PULSAR_SITE_TMP/content/.htaccess \
       | grep -v $PULSAR_SITE_TMP/content/docs/v2.0.1-incubating \
       | grep -v $PULSAR_SITE_TMP/content/docs/v2.0.0-rc1-incubating \
