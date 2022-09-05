@@ -14,17 +14,17 @@ import {
 } from "@docusaurus/plugin-content-docs/client";
 import { useDocsPreferredVersion } from "@docusaurus/theme-common";
 import { translate } from "@docusaurus/Translate";
-// let versions = require("../../versions.json");
-// const _latestVersion = versions[0];
-// versions = [{ name: "current", label: "Master", path: "/docs/next" }].concat(
-//   versions.map((item) => {
-//     return {
-//       label: item,
-//       name: item,
-//       path: item == _latestVersion ? "/docs" : "/docs/" + item,
-//     };
-//   })
-// );
+let versions = require("../../versions.json");
+const _latestVersion = versions[0];
+versions = [{ name: "current", label: "Next", path: "/docs/next" }].concat(
+  versions.map((item) => {
+    return {
+      label: item,
+      name: item,
+      path: item == _latestVersion ? "/docs" : "/docs/" + item,
+    };
+  }).slice(0, 5)
+);
 
 const getVersionMainDoc = (version) =>
   version.docs.find((doc) => doc.id === version.mainDocId);
@@ -42,14 +42,14 @@ export default function DocsVersionDropdownNavbarItem({
   const latestVersion = useLatestVersion(docsPluginId);
   const { preferredVersion, savePreferredVersionName } =
     useDocsPreferredVersion(docsPluginId);
-  const versions = [
-    activeDocContext.activeVersion,
-    {
-      name: "others",
-      label: "Other",
-      path: "/versions",
-    },
-  ];
+  // const versions = [
+  //   activeDocContext.activeVersion,
+  //   {
+  //     name: "others",
+  //     label: "Other",
+  //     path: "/versions",
+  //   },
+  // ];
   function getItems() {
     const versionLinks = versions.map((version) => {
       // We try to link to the same doc, in another version
