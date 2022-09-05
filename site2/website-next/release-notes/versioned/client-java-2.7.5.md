@@ -5,7 +5,7 @@ sidebar_label: Client Java 2.7.5
 ---
 
 - [fix][java] Fix semaphore release duplicated in ProducerImpl [#16972](https://github.com/apache/pulsar/pull/16972)
-- [fix][java]Fix MaxQueueSize semaphore release leak in createOpSendMsg [#16915](https://github.com/apache/pulsar/pull/16915)
+- [fix][java] Fix MaxQueueSize semaphore release leak in createOpSendMsg [#16915](https://github.com/apache/pulsar/pull/16915)
 - [fix][java] Fix PatternTopicsChangedListener blocked when topic removed [#16842](https://github.com/apache/pulsar/pull/16842)
 - [fix][java] Fix ReconsumeLater will hang up if retryLetterProducer exception [#16655](https://github.com/apache/pulsar/pull/16655)
 - [fix][java] Fix DNS server denial-of-service issue when DNS entry expires [#15403](https://github.com/apache/pulsar/pull/15403)
