@@ -775,17 +775,17 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "tlsCertificates": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Certificate"
-                    }
-                },
                 "httpAuthType": {
                     "type": "string"
                 },
                 "commandData": {
                     "type": "string"
+                },
+                "tlsCertificates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Certificate"
+                    }
                 },
                 "subscription": {
                     "type": "string"
@@ -1051,14 +1051,14 @@
                 "config": {
                     "$ref": "#/definitions/DeserializationConfig"
                 },
-                "nodeFactory": {
-                    "$ref": "#/definitions/JsonNodeFactory"
+                "parser": {
+                    "$ref": "#/definitions/JsonParser"
                 },
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "parser": {
-                    "$ref": "#/definitions/JsonParser"
+                "nodeFactory": {
+                    "$ref": "#/definitions/JsonNodeFactory"
                 },
                 "annotationIntrospector": {
                     "$ref": "#/definitions/AnnotationIntrospector"
@@ -1330,15 +1330,15 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "typeId": {
-                    "type": "object"
-                },
                 "objectId": {
                     "type": "object"
                 },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "typeId": {
+                    "type": "object"
                 },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
@@ -1367,6 +1367,9 @@
                 "currentName": {
                     "type": "string"
                 },
+                "tokenLocation": {
+                    "$ref": "#/definitions/JsonLocation"
+                },
                 "featureMask": {
                     "type": "integer",
                     "format": "int32"
@@ -1381,9 +1384,6 @@
                 },
                 "parsingContext": {
                     "$ref": "#/definitions/JsonStreamContext"
-                },
-                "tokenLocation": {
-                    "$ref": "#/definitions/JsonLocation"
                 },
                 "currentLocation": {
                     "$ref": "#/definitions/JsonLocation"
@@ -1703,18 +1703,6 @@
                 "factory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
-                "deserializationContext": {
-                    "$ref": "#/definitions/DeserializationContext"
-                },
-                "serializerFactory": {
-                    "$ref": "#/definitions/SerializerFactory"
-                },
-                "serializerProvider": {
-                    "$ref": "#/definitions/SerializerProvider"
-                },
-                "serializerProviderInstance": {
-                    "$ref": "#/definitions/SerializerProvider"
-                },
                 "visibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
                 },
@@ -1744,6 +1732,18 @@
                 },
                 "deserializationConfig": {
                     "$ref": "#/definitions/DeserializationConfig"
+                },
+                "deserializationContext": {
+                    "$ref": "#/definitions/DeserializationContext"
+                },
+                "serializerFactory": {
+                    "$ref": "#/definitions/SerializerFactory"
+                },
+                "serializerProvider": {
+                    "$ref": "#/definitions/SerializerProvider"
+                },
+                "serializerProviderInstance": {
+                    "$ref": "#/definitions/SerializerProvider"
                 }
             }
         },
@@ -1918,6 +1918,9 @@
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
+                "defaultNullKeySerializer": {
+                    "$ref": "#/definitions/JsonSerializerObject"
+                },
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
@@ -1929,9 +1932,6 @@
                 },
                 "filterProvider": {
                     "$ref": "#/definitions/FilterProvider"
-                },
-                "defaultNullKeySerializer": {
-                    "$ref": "#/definitions/JsonSerializerObject"
                 },
                 "generator": {
                     "$ref": "#/definitions/JsonGenerator"

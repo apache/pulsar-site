@@ -1016,17 +1016,17 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "tlsCertificates" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Certificate"
-          }
-        },
         "httpAuthType" : {
           "type" : "string"
         },
         "commandData" : {
           "type" : "string"
+        },
+        "tlsCertificates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Certificate"
+          }
         },
         "subscription" : {
           "type" : "string"
@@ -1356,14 +1356,14 @@
         "config" : {
           "$ref" : "#/definitions/DeserializationConfig"
         },
-        "nodeFactory" : {
-          "$ref" : "#/definitions/JsonNodeFactory"
+        "parser" : {
+          "$ref" : "#/definitions/JsonParser"
         },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "parser" : {
-          "$ref" : "#/definitions/JsonParser"
+        "nodeFactory" : {
+          "$ref" : "#/definitions/JsonNodeFactory"
         },
         "annotationIntrospector" : {
           "$ref" : "#/definitions/AnnotationIntrospector"
@@ -1656,10 +1656,6 @@
             "format" : "double"
           }
         },
-        "userExceptionsTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1669,6 +1665,10 @@
           "format" : "int64"
         },
         "systemExceptionsTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "userExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
         },
@@ -1681,10 +1681,6 @@
     "FunctionInstanceStatsDataBase" : {
       "type" : "object",
       "properties" : {
-        "userExceptionsTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1694,6 +1690,10 @@
           "format" : "int64"
         },
         "systemExceptionsTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "userExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
         },
@@ -2163,15 +2163,15 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "typeId" : {
-          "type" : "object"
-        },
         "objectId" : {
           "type" : "object"
         },
         "intValue" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "typeId" : {
+          "type" : "object"
         },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
@@ -2185,6 +2185,9 @@
         },
         "currentName" : {
           "type" : "string"
+        },
+        "tokenLocation" : {
+          "$ref" : "#/definitions/JsonLocation"
         },
         "featureMask" : {
           "type" : "integer",
@@ -2200,9 +2203,6 @@
         },
         "parsingContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
-        },
-        "tokenLocation" : {
-          "$ref" : "#/definitions/JsonLocation"
         },
         "currentLocation" : {
           "$ref" : "#/definitions/JsonLocation"
@@ -2414,23 +2414,6 @@
         "topicName" : {
           "type" : "string"
         },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "publishTime" : {
           "type" : "integer",
           "format" : "int64"
@@ -2465,6 +2448,23 @@
         },
         "replicated" : {
           "type" : "boolean"
+        },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2585,18 +2585,6 @@
         "factory" : {
           "$ref" : "#/definitions/JsonFactory"
         },
-        "deserializationContext" : {
-          "$ref" : "#/definitions/DeserializationContext"
-        },
-        "serializerFactory" : {
-          "$ref" : "#/definitions/SerializerFactory"
-        },
-        "serializerProvider" : {
-          "$ref" : "#/definitions/SerializerProvider"
-        },
-        "serializerProviderInstance" : {
-          "$ref" : "#/definitions/SerializerProvider"
-        },
         "visibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
         },
@@ -2626,6 +2614,18 @@
         },
         "deserializationConfig" : {
           "$ref" : "#/definitions/DeserializationConfig"
+        },
+        "deserializationContext" : {
+          "$ref" : "#/definitions/DeserializationContext"
+        },
+        "serializerFactory" : {
+          "$ref" : "#/definitions/SerializerFactory"
+        },
+        "serializerProvider" : {
+          "$ref" : "#/definitions/SerializerProvider"
+        },
+        "serializerProviderInstance" : {
+          "$ref" : "#/definitions/SerializerProvider"
         }
       }
     },
@@ -2753,11 +2753,11 @@
     "Schema" : {
       "type" : "object",
       "properties" : {
-        "nativeSchema" : {
-          "type" : "object"
-        },
         "schemaInfo" : {
           "$ref" : "#/definitions/SchemaInfo"
+        },
+        "nativeSchema" : {
+          "type" : "object"
         }
       }
     },
@@ -2796,11 +2796,11 @@
     "SchemaObject" : {
       "type" : "object",
       "properties" : {
-        "nativeSchema" : {
-          "type" : "object"
-        },
         "schemaInfo" : {
           "$ref" : "#/definitions/SchemaInfo"
+        },
+        "nativeSchema" : {
+          "type" : "object"
         }
       }
     },
@@ -2886,6 +2886,9 @@
         "config" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
+        "defaultNullKeySerializer" : {
+          "$ref" : "#/definitions/JsonSerializerObject"
+        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
@@ -2897,9 +2900,6 @@
         },
         "filterProvider" : {
           "$ref" : "#/definitions/FilterProvider"
-        },
-        "defaultNullKeySerializer" : {
-          "$ref" : "#/definitions/JsonSerializerObject"
         },
         "generator" : {
           "$ref" : "#/definitions/JsonGenerator"
