@@ -16,7 +16,7 @@ import { useDocsPreferredVersion } from "@docusaurus/theme-common";
 import { translate } from "@docusaurus/Translate";
 let versions = require("../../versions.json");
 const _latestVersion = versions[0];
-versions = [{ name: "current", label: "Master", path: "/docs/next" }]
+versions = [{ name: "current", label: "Next", path: "/docs/next" }]
   .concat(
     versions.map((item) => {
       return {
@@ -29,7 +29,7 @@ versions = [{ name: "current", label: "Master", path: "/docs/next" }]
   .slice(0, 5)
   .concat({
     name: "others",
-    label: "Other",
+    label: "Others",
     path: "/versions",
   });
 
