@@ -69,7 +69,7 @@ export default function DocsVersionDropdownNavbarItem({
       return {
         isNavLink: true,
         label: version.label,
-        to: version.name == "others" ? "/versions" : versionDoc.path,
+        to: "", //iiversion.name == "others" ? "/versions" : versionDoc.path,
         isActive: () => version.name === activeDocContext.activeVersion.name,
         onClick: () => {
           savePreferredVersionName(version.name);
