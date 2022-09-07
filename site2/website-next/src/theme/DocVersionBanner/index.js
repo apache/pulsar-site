@@ -107,7 +107,7 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
 
   let path = latestVersionSuggestedDoc.path;
   let reg = new RegExp("/" + versionMetadata.version + "/");
-  path = path.replace(reg, "");
+  path = path.replace(reg, "/");
   return (
     <div
       className={clsx(
