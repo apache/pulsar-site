@@ -21,6 +21,7 @@ $ pulsar-perf produce [options]
 | `-threads, --num-test-threads` | Number of test threads|1|
 | `--separator` | Separator between the topic and topic number|-|
 | `-au, --admin-url` | Pulsar Admin URL|null|
+| `-db, --disable-batching` | Disable batching if true|false|
 | `-cf, --conf-file` | Configuration file|null|
 | `-pn, --producer-name` | Producer Name|null|
 | `-fc, --format-class` | Custom Formatter class name|org.apache.pulsar.testclient.DefaultMessageFormatter|
