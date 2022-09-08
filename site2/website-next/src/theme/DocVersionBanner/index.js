@@ -25,7 +25,7 @@ function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
       }}
     >
       {
-        "This is unreleased documentation for {siteTitle} {versionLabel} version."
+        "This documentation is for an unreleased {siteTitle} {versionLabel} version of Apache Pulsar. "
       }
     </Translate>
   );
@@ -41,7 +41,7 @@ function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
       }}
     >
       {
-        "This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained."
+        "This documentation is for an out-of-date {siteTitle} {versionLabel} version of Apache Pulsar. "
       }
     </Translate>
   );
@@ -85,7 +85,7 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
       }}
     >
       {
-        "For up-to-date documentation, see the {latestVersionLink} ({versionLabel})."
+        "We recommend you use the latest stable version {latestVersionLink} ({versionLabel})."
       }
     </Translate>
   );
@@ -127,7 +127,7 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
           // to={latestVersionSuggestedDoc.path}
           onClick={() => {
             savePreferredVersionName(latestVersionSuggestion.name);
-            window.location.href = path
+            window.location.href = path;
           }}
         />
       </div>
