@@ -1234,14 +1234,14 @@
                 "commandData": {
                     "type": "string"
                 },
-                "httpAuthType": {
-                    "type": "string"
-                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Certificate"
                     }
+                },
+                "httpAuthType": {
+                    "type": "string"
                 },
                 "subscription": {
                     "type": "string"
@@ -1543,11 +1543,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -1882,13 +1882,6 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
-                "lastInvocation": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "userMetrics": {
                     "type": "object",
                     "additionalProperties": {
@@ -1896,7 +1889,14 @@
                         "format": "double"
                     }
                 },
-                "systemExceptionsTotal": {
+                "lastInvocation": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
+                "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1904,11 +1904,11 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "userExceptionsTotal": {
+                "systemExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "receivedTotal": {
+                "userExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1921,7 +1921,7 @@
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
-                "systemExceptionsTotal": {
+                "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1929,11 +1929,11 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "userExceptionsTotal": {
+                "systemExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "receivedTotal": {
+                "userExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2559,11 +2559,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "unwrappingSerializer": {
-                    "type": "boolean"
-                },
                 "delegatee": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "unwrappingSerializer": {
+                    "type": "boolean"
                 }
             }
         },
@@ -2686,23 +2686,6 @@
                         "format": "byte"
                     }
                 },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
                 "topicName": {
                     "type": "string"
                 },
@@ -2740,6 +2723,23 @@
                 },
                 "replicated": {
                     "type": "boolean"
+                },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -3037,11 +3037,11 @@
         "Schema": {
             "type": "object",
             "properties": {
-                "nativeSchema": {
-                    "type": "object"
-                },
                 "schemaInfo": {
                     "$ref": "#/definitions/SchemaInfo"
+                },
+                "nativeSchema": {
+                    "type": "object"
                 }
             }
         },
@@ -3091,26 +3091,26 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "schemaDefinition": {
-                    "type": "string"
-                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
+                },
+                "schemaDefinition": {
+                    "type": "string"
                 }
             }
         },
         "SchemaObject": {
             "type": "object",
             "properties": {
-                "nativeSchema": {
-                    "type": "object"
-                },
                 "schemaInfo": {
                     "$ref": "#/definitions/SchemaInfo"
+                },
+                "nativeSchema": {
+                    "type": "object"
                 }
             }
         },
@@ -3168,11 +3168,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"

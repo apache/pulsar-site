@@ -2382,7 +2382,7 @@ Max memory size for broker handling messages sending from producers.
 
 
 
-**Default**: `994`
+**Default**: `869`
 
 **Dynamic**: `true`
 
@@ -3451,7 +3451,7 @@ Amount of memory to use for caching data payload in managed ledger.
 
 This memory is allocated from JVM direct memory and it's shared across all the topics running in the same broker. By default, uses 1/5th of available direct memory
 
-**Default**: `397`
+**Default**: `347`
 
 **Dynamic**: `true`
 
