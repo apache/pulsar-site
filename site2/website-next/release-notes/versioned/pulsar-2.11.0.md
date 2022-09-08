@@ -48,6 +48,7 @@ sidebar_label: Apache Pulsar 2.11.0
 - [PIP-181] Pulsar Shell [#16250](https://github.com/apache/pulsar/issues/16250)
 - [PIP-184] Topic specific consumer priorityLevel [#16715](https://github.com/apache/pulsar/issues/16715)
 - [PIP-187] Add API to analyze a subscription backlog and provide an accurate value [#16545](https://github.com/apache/pulsar/issues/16545)
+- [PIP-201] Extensions mechanism for Pulsar Admin CLI tools [#17158](https://github.com/apache/pulsar/issues/17158)
 
 ### Broker
 - [PIP 81] Split the individual acknowledgments into multiple entries
@@ -72,6 +73,10 @@ sidebar_label: Apache Pulsar 2.11.0
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
 - Optimize getting ledger and entry id from entry [#17108](https://github.com/apache/pulsar/pull/17108)
+- Fix arithmetic exception for LeastResourceUsageWithWeight strategy [#17149](https://github.com/apache/pulsar/pull/17149)
+- Fix update topic remove properties [#17231](https://github.com/apache/pulsar/pull/17231)
+- Fix ack with txn compute ackedCount error [#17016](https://github.com/apache/pulsar/pull/17016)
+- Improve cursor.getNumberOfEntries if isUnackedRangesOpenCacheSetEnabled=true [#17465](https://github.com/apache/pulsar/pull/17465)
 - Fix dispatch duplicated messages with Exclusive mode [#17237](https://github.com/apache/pulsar/pull/17237)
 - Remove internalUpdateOffloadPolicies to keep the same behavior update topic policy [#17236](https://github.com/apache/pulsar/pull/17236)
 - Fix update topic remove properties [#17231](https://github.com/apache/pulsar/pull/17231)
@@ -288,6 +293,7 @@ sidebar_label: Apache Pulsar 2.11.0
 - [C++] Fix the race condition of connect timeout task [#14823](https://github.com/apache/pulsar/pull/14823)
 - [C++] Fix producer is never destructed until client is closed [#14797](https://github.com/apache/pulsar/pull/14797)
 - [C++] Close messages_ when PartitionedConsumer is closed [#16887](https://github.com/apache/pulsar/pull/16887)
+- [Python] Add basic authentication [#17482](https://github.com/apache/pulsar/pull/17482)
 - [Python] Add getLastMessageIdAsync C binding [#16255](https://github.com/apache/pulsar/pull/16255)
 - [Python] Remove reserved keys when JsonSchema is being encoded [#15947](https://github.com/apache/pulsar/pull/15947)
 - [Python] Use MacOS 10.15 as the target OS version for Python wheel files [#15788](https://github.com/apache/pulsar/pull/15788)
@@ -420,6 +426,8 @@ sidebar_label: Apache Pulsar 2.11.0
 - [Pulsar Admin] Add get active brokers api without cluster name [#14702](https://github.com/apache/pulsar/pull/14702)
 - [Pulsar Admin] Grab contextual stacktrace for sync methods [#14620](https://github.com/apache/pulsar/pull/14620)
 - [Pulsar Admin] Correct status message prompt [#14603](https://github.com/apache/pulsar/pull/14603)
+- [Pulsar CLI] Fix Pulsar shell custom commands execution [#17479](https://github.com/apache/pulsar/pull/17479)
+- [Pulsar CLI] CLI extensions: rename default location to 'cliextensions' [#17435](https://github.com/apache/pulsar/pull/17435)
 - [Pulsar CLI] Add a separate TLS transport encryption configuration [#16930](https://github.com/apache/pulsar/pull/16930)
 - [Pulsar CLI] Fix incorrect description for producing messages [#16876](https://github.com/apache/pulsar/pull/16876)
 - [Pulsar CLI] Use NoSplitter for subscription properties [#16862](https://github.com/apache/pulsar/pull/16862)
