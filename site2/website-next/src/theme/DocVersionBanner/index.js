@@ -85,7 +85,7 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
       }}
     >
       {
-        "We recommend you use the latest stable version {latestVersionLink} ({versionLabel})."
+        "We recommend you use the {latestVersionLink} ({versionLabel})."
       }
     </Translate>
   );
