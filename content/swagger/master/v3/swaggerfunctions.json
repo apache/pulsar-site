@@ -1231,9 +1231,6 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "subscription": {
-                    "type": "string"
-                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
@@ -1244,6 +1241,9 @@
                     "type": "string"
                 },
                 "commandData": {
+                    "type": "string"
+                },
+                "subscription": {
                     "type": "string"
                 }
             }
@@ -2559,11 +2559,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "delegatee": {
-                    "$ref": "#/definitions/JsonSerializerObject"
-                },
                 "unwrappingSerializer": {
                     "type": "boolean"
+                },
+                "delegatee": {
+                    "$ref": "#/definitions/JsonSerializerObject"
                 }
             }
         },
@@ -2693,22 +2693,8 @@
                         "format": "byte"
                     }
                 },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
+                "topicName": {
+                    "type": "string"
                 },
                 "publishTime": {
                     "type": "integer",
@@ -2745,8 +2731,22 @@
                 "replicated": {
                     "type": "boolean"
                 },
-                "topicName": {
-                    "type": "string"
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -3037,11 +3037,11 @@
         "Schema": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
@@ -3106,11 +3106,11 @@
         "SchemaObject": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
