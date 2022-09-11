@@ -18,17 +18,24 @@
 # under the License.
 #
 
-set -x
-
+# common variables
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
-DOCS_DIR=$WEBSITE/docsify/config
-
 JAVA=java
 f=$ROOT_DIR/distribution/server/target/classpath.txt
+
+# config doc gen variables
+DOCS_DIR=$WEBSITE/docsify/config
 GEN_DOCS_BROKER=org.apache.pulsar.utils.CmdGenerateDocumentation
 GEN_DOCS_PROXY=org.apache.pulsar.proxy.util.CmdGenerateDocumentation
 
+# client config doc gen variables
+CLIENT_DIR=$WEBSITE/docsify/client
+CLIENT_CP=$ROOT_DIR/pulsar-client/target/classes
+CLIENT_CONF=org.apache.pulsar.client.impl.conf
+GEN_DOCS_CLIENT=$CLINET_CONF.CmdGenerateDocumentation
+
+# config doc gen
 cp $WEBSITE/docs/reference-configuration*.md $DOCS_DIR
 
 $JAVA -cp "$(cat $f)" $GEN_DOCS_BROKER -c org.apache.pulsar.broker.ServiceConfiguration > $DOCS_DIR/reference-configuration-broker.md
@@ -37,3 +44,9 @@ $JAVA -cp "$(cat $f)" $GEN_DOCS_BROKER -c org.apache.pulsar.websocket.service.We
 $JAVA -cp "$(cat $f)" $GEN_DOCS_PROXY -c org.apache.pulsar.proxy.server.ProxyConfiguration > $DOCS_DIR/reference-configuration-pulsar-proxy.md
 
 cp $DOCS_DIR/reference-configuration-broker.md $DOCS_DIR/reference-configuration-standalone.md
+
+# client config doc gen
+$JAVA -cp $CLIENT_CP:"$(cat $f)" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ClientConfigurationData > $CLIENT_DIR/client-configuration-client.md
+$JAVA -cp $CLIENT_CP:"$(cat $f)" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ProducerConfigurationData > $CLIENT_DIR/client-configuration-producer.md
+$JAVA -cp $CLIENT_CP:"$(cat $f)" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ConsumerConfigurationData > $CLIENT_DIR/client-configuration-consumer.md
+$JAVA -cp $CLIENT_CP:"$(cat $f)" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ReaderConfigurationData > $CLIENT_DIR/client-configuration-reader.md
