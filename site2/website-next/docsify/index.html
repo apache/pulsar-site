@@ -25,21 +25,114 @@
     <!-- Plugins -->
     <link
       rel="stylesheet"
-      href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/fontawesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/solid.css"
     />
     <style>
-      aside.toc-nav {
-        right: 0;
-        max-height: 90%;
-        scrollbar-width: thin;
+      #jx-toc {
+        background-color: var(--sidebar-background, #fafafa);
+        border: 1px solid var(--sidebar-border-color, rgba(0, 0, 0, 0.07));
+        border-radius: 1px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-clip: padding-box;
+        padding: 5px 10px;
+        position: fixed;
+        right: 50px;
+        top: 68px;
+        font-size: 14px;
+        white-space: nowrap;
+        z-index: 999;
+        cursor: pointer;
+        text-align: right;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        color: var(
+          --sidebar-nav-link-color--hover,
+          var(--sidebar-nav-link-color),
+          #364149
+        );
       }
-      aside.toc-nav::-webkit-scrollbar {
-        width: 5px;
-        background-color: #e0e0e0;
+      #jx-toc::-webkit-scrollbar {
+        width: 4px;
       }
-      aside.toc-nav::-webkit-scrollbar-thumb {
-        background: #9e9e9e;
-        border-radius: 5px;
+      #jx-toc::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 4px;
+      }
+      #jx-toc:hover::-webkit-scrollbar-thumb {
+        background: hsla(0, 0%, 53.3%, 0.4);
+      }
+      #jx-toc:hover::-webkit-scrollbar-track {
+        background: hsla(0, 0%, 53.3%, 0.1);
+      }
+      #jx-toc ul {
+        text-align: left;
+        padding-right: 10px;
+        padding-left: 10px;
+        list-style-type: none;
+      }
+      #jx-toc ul li a {
+        text-decoration: none;
+        border-bottom: none;
+        font-size: 14px;
+        color: var(--sidebar-nav-link-color, #364149);
+        background: 0 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+      }
+      #jx-toc ul li a:hover {
+        text-decoration: underline;
+      }
+      #jx-toc .active {
+        border-left: 5px solid;
+        color: var(--theme-color, #42b983);
+        padding-left: 10px;
+      }
+      #jx-toc-gotop {
+        position: fixed;
+        right: 50px;
+        bottom: 68px;
+        background-color: var(--sidebar-background, #fafafa);
+        border: 1px solid var(--sidebar-border-color, rgba(0, 0, 0, 0.07));
+        border-radius: 1px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-clip: padding-box;
+        z-index: 999;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 5px 10px;
+        color: var(
+          --sidebar-nav-link-color--hover,
+          var(--sidebar-nav-link-color)
+        );
+      }
+    </style>
+    <style>
+      .select {
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        padding: 5px 8px;
+        margin: 0 5px;
+        background: #fff;
+        font-size: 14px;
+      }
+      .select:hover {
+        border-color: #cfcfcf;
+      }
+      .select:active {
+        border-color: #b3b3b3;
+      }
+      .select:focus {
+        border-color: #8c8c8c;
+        outline: none;
       }
     </style>
   </head>
@@ -49,15 +142,28 @@
     <script>
       // Docsify Configuration
       window.$docsify = {
-        name: "Pulsar Configuration",
+        name:
+          '<a id="home-link" class="app-name-link" data-nosearch href="/">Pulsar Configuration</a>' +
+          '<select id="ver-selector" name="v" class="select">' +
+          '<option value="2.9.0">2.9.0</value>' +
+          '<option value="2.10.0">2.10.0</value>' +
+          '<option value="latest">latest</value>' +
+          "</select>",
         repo: "apache/pulsar",
         loadSidebar: true,
-        loadNavbar: true,
         auto2top: true,
-        toc: {
-          tocMaxLevel: 3,
-          target: "h2, h3",
+        jxtoc: {
+          headings: "h2, h3, h4",
         },
+        namespaces: [
+          {
+            id: "version",
+            values: ["2.9.0", "2.10.0", "latest"],
+            optional: true,
+            selector: "#ver-selector",
+            default: "latest",
+          },
+        ],
       };
     </script>
 
@@ -70,6 +176,175 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 
     <!-- Plugins -->
-    <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
+    <script src="https://unpkg.com/docsify-namespaced"></script>
+    <script>
+      var defaultOptions = {
+        headings: "h1, h2, h3",
+      };
+
+      var aTag = function (src) {
+        var a = document.createElement("a");
+        var content = src.firstChild.innerHTML;
+
+        a.innerHTML = content;
+        a.href = src.firstChild.href;
+        a.onclick = activeClass;
+
+        return a;
+      };
+
+      var activeClass = function (e) {
+        var divs = document.querySelectorAll("#jx-toc .active");
+
+        // 删除之前的样式
+        [].forEach.call(divs, function (div) {
+          div.setAttribute("class", "");
+        });
+
+        // 给当前点击的项加入新的样式
+        e.target.parentNode.setAttribute("class", "active");
+      };
+
+      var createList = function (wrapper, count) {
+        while (count--) {
+          wrapper = wrapper.appendChild(document.createElement("ul"));
+
+          if (count) {
+            wrapper = wrapper.appendChild(document.createElement("li"));
+          }
+        }
+
+        return wrapper;
+      };
+
+      var getHeaders = function (selector) {
+        var allHeadings = document.querySelectorAll(selector);
+        var ret = [];
+
+        [].forEach.call(allHeadings, function (heading) {
+          ret = ret.concat(heading);
+        });
+
+        return ret;
+      };
+
+      var getLevel = function (header) {
+        var decs = header.match(/\d/g);
+
+        return decs ? Math.min.apply(null, decs) : 1;
+      };
+
+      var jumpBack = function (currentWrapper, offset) {
+        while (offset--) {
+          currentWrapper = currentWrapper.parentElement;
+        }
+
+        return currentWrapper;
+      };
+
+      var buildTOC = function (options) {
+        var ret = document.createElement("ul");
+        var wrapper = ret;
+        var lastLi = null;
+        var selector = ".markdown-section " + options.headings;
+        var headers = getHeaders(selector).filter(h => h.id);
+
+        headers.reduce(function (prev, curr, index) {
+          var currentLevel = getLevel(curr.tagName);
+          var offset = currentLevel - prev;
+
+          wrapper =
+            offset > 0
+              ? createList(lastLi || ret, offset)
+              : jumpBack(wrapper, -offset * 2);
+
+          wrapper = wrapper || ret;
+
+          var li = document.createElement("li");
+
+          wrapper.appendChild(li).appendChild(aTag(curr));
+
+          lastLi = li;
+
+          return currentLevel;
+        }, getLevel(options.headings));
+
+        return ret;
+      };
+
+      var goTopFunction = function (e) {
+        e.stopPropagation();
+        var step = window.scrollY / 50;
+        var scroll = function () {
+          window.scrollTo(0, window.scrollY - step);
+          if (window.scrollY > 0) {
+            setTimeout(scroll, 10);
+          }
+        };
+        scroll();
+      };
+
+      var pinFunction = function (e) {
+        e.stopPropagation();
+        var ul = document.querySelector("#jx-toc ul");
+        if (ul.style.display == "none") {
+          ul.style.display = "block";
+        } else {
+          ul.style.display = "none";
+        }
+      };
+
+      // Docsify plugin functions
+      function plugin(hook, vm) {
+        var userOptions = vm.config.jxtoc;
+
+        hook.mounted(function () {
+          var mainElm = document.querySelector("main");
+          var content = window.Docsify.dom.find(".content");
+          if (content) {
+            var jxtoc = window.Docsify.dom.create("div", "");
+            jxtoc.id = "jx-toc";
+            window.Docsify.dom.before(mainElm, jxtoc);
+
+            var jxGoTop = window.Docsify.dom.create(
+              "span",
+              "<i class='fas fa-arrow-up'></i>"
+            );
+            jxGoTop.id = "jx-toc-gotop";
+            jxGoTop.onclick = goTopFunction;
+            window.Docsify.dom.before(mainElm, jxGoTop);
+          }
+        });
+
+        hook.doneEach(function () {
+          var jxtoc = document.getElementById("jx-toc");
+
+          if (!jxtoc) {
+            return;
+          }
+          jxtoc.innerHTML = null;
+
+          var TocAnchor = document.createElement("i");
+          TocAnchor.setAttribute("class", "fas fa-list");
+          TocAnchor.onclick = pinFunction;
+          jxtoc.appendChild(TocAnchor);
+
+          const toc = buildTOC(userOptions);
+
+          if (!toc.innerHTML) {
+            return;
+          }
+
+          jxtoc.appendChild(toc);
+        });
+      }
+
+      // Docsify plugin options
+      window.$docsify["jx-toc"] = Object.assign(
+        defaultOptions,
+        window.$docsify["jx-toc"]
+      );
+      window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins);
+    </script>
   </body>
 </html>
