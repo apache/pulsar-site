@@ -20,7 +20,6 @@
 - [PIP-155] Remove Python 2 support [#15376](https://github.com/apache/pulsar/pull/15376)
 - [PIP-156] Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
 - [PIP-162] Enable system topic by default [#15619](https://github.com/apache/pulsar/pull/15619)
-- [PIP-174] New managed ledger entry cache implementation [#15955](https://github.com/apache/pulsar/pull/15955)
 
 ### PIPs
 - [PIP 37] Support chunking with Shared subscription [#16202](https://github.com/apache/pulsar/pull/16202)
@@ -71,6 +70,9 @@
   - Build changes by dropping some required checks [#15496](https://github.com/apache/pulsar/pull/15496)
   - Build Pulsar Server on Java 17 [#15264](https://github.com/apache/pulsar/pull/15264)
 - Optimize getting ledger and entry id from entry [#17108](https://github.com/apache/pulsar/pull/17108)
+- Topic policy reader can't recover when get any exception [#17562](https://github.com/apache/pulsar/pull/17562)
+- Multiple consumer dispatcher stuck when unackedMessages greater than maxUnackedMessages [#17483](https://github.com/apache/pulsar/pull/17483)
+- Fix memoryLimitController currentUsage and MaxQueueSize semaphore leak when batchMessageContainer add message exception [#17276](https://github.com/apache/pulsar/pull/17276)
 - Fix arithmetic exception for LeastResourceUsageWithWeight strategy [#17149](https://github.com/apache/pulsar/pull/17149)
 - Fix update topic remove properties [#17231](https://github.com/apache/pulsar/pull/17231)
 - Fix ack with txn compute ackedCount error [#17016](https://github.com/apache/pulsar/pull/17016)
