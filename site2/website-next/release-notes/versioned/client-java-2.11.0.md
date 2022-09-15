@@ -19,6 +19,7 @@ sidebar_label: Client Java 2.11.0
 - [improve][Java] Optimize pause when creating sub consumers in multi-topic consumer [#14566](https://github.com/apache/pulsar/pull/14566)
 - [cleanup][Java] Reduce code duplication in admin client [#16377](https://github.com/apache/pulsar/pull/16377)
 - [cleanup][Java] Remove redundant check for chunked message TotalChunkMsgSize in ConsumerImpl [#16797](https://github.com/apache/pulsar/pull/16797)
+- [fix][Java] Fix scheduledExecutorProvider not shutdown [#17527](https://github.com/apache/pulsar/pull/17527)
 - [fix][Java] Fix the message present in incoming queue after go to DLQ [#17326](https://github.com/apache/pulsar/pull/17326)
 - [fix][Java] Fix reach redeliverCount client can't send messages to DLQ [#17287](https://github.com/apache/pulsar/pull/17287)
 - [fix][Java] Fix reach redeliverCount client can't send batch messags [#17317](https://github.com/apache/pulsar/pull/17317)

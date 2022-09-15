@@ -5,6 +5,7 @@ sidebar_label: Client CPP 2.11.0
 ---
 
 - [feature][C++] Add basic authentication [#15822](https://github.com/apache/pulsar/pull/15822)
+- [feature][C++] Support multiple brokers in service URL [#17162](https://github.com/apache/pulsar/pull/17162)
 - [improve][C++] Use an atomic state_ instead of the lock to improve performance [#16940](https://github.com/apache/pulsar/pull/16940)
 - [improve][C++] Add producerId to the log of closed producer [#17079](https://github.com/apache/pulsar/pull/17079)
 - [improve][C++] Add getLastMessageIdAsync in Consumer [#16182](https://github.com/apache/pulsar/pull/16182)
@@ -14,6 +15,8 @@ sidebar_label: Client CPP 2.11.0
 - [improve][C++] Add subscription properties to consumer for cpp [#15020](https://github.com/apache/pulsar/pull/15020)
 - [improve][C++] Use an atomic state_ instead of the lock to improve performance [#16940](https://github.com/apache/pulsar/pull/16940)
 - [cleanup][C++] Remove the flaky and meaningless tests [#15271](https://github.com/apache/pulsar/pull/15271)
+- [fix][C++] Fix potential segfault when resending messages [#17395](https://github.com/apache/pulsar/pull/17395)
+- [fix][C++] Support retry and apply operation timeout for lookup requests [#17410](https://github.com/apache/pulsar/pull/17410)
 - [fix][C++] Fix multi-topics consumer close segmentation fault [#17239](https://github.com/apache/pulsar/pull/17239)
 - [fix][C++] Wait until event loop terminates when closing the Client [#15316](https://github.com/apache/pulsar/pull/15316)
 - [fix][C++] Fix rpm and deb packaging [#17064](https://github.com/apache/pulsar/pull/17064)
