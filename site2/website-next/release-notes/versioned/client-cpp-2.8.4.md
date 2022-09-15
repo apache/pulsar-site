@@ -14,7 +14,7 @@ sidebar_label: Client CPP 2.8.4
 - [fix][cpp] Fix flaky tests about reference count [14854](https://github.com/apache/pulsar/pull/14854)
 - [fix][cpp] Fix segmentation fault when creating socket failed [14834](https://github.com/apache/pulsar/pull/14834)
 - [fix][cpp] Fix the race condition of connect timeout task [14823](https://github.com/apache/pulsar/pull/14823)
-- [fix][cpp] Fix send callback might not be invoked in key based batching [14898](https://github.com/apache/pulsar/pull/14898)
+- [fix][cpp] Fix send callback might not be invoked in key-based batching [14898](https://github.com/apache/pulsar/pull/14898)
 - [fix][cpp] Fix connection is not closed when broker closes the connection to proxy [15009](https://github.com/apache/pulsar/pull/15009)
 - [fix][cpp] Fix single message metadata not set correctly [15072](https://github.com/apache/pulsar/pull/15072)
 - [fix][cpp] Fix UnknownError might be returned for a partitioned producer [15161](https://github.com/apache/pulsar/pull/15161)

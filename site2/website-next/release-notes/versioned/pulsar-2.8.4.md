@@ -51,7 +51,7 @@ sidebar_label: Apache Pulsar 2.8.4
 - [fix][broker] Fix creating producer failure when set backlog quota [15663](https://github.com/apache/pulsar/pull/15663)
 - [fix][broker] Fix NPE when put value to `RangeCache` [15707](https://github.com/apache/pulsar/pull/15707)
 - [fix][broker] Fix can not enable system topic if `AutoUpdateSchemaEnabled=false` [15759](https://github.com/apache/pulsar/pull/15759)
-- [fix][broker] Fix wrong unit of NIC speed on linux  [15770](https://github.com/apache/pulsar/pull/15770)
+- [fix][broker] Fix wrong unit of NIC speed on Linux  [15770](https://github.com/apache/pulsar/pull/15770)
 - [fix][broker] Fix NPE in MessageDeduplication [15820](https://github.com/apache/pulsar/pull/15820)
 - [fix][broker] Fix NPE when ledger id not found in `OpReadEntry` [15837](https://github.com/apache/pulsar/pull/15837)
 - [fix][broker] When skipping updating mark delete position, execute callback with executor to prevent deadlock [15971](https://github.com/apache/pulsar/pull/15971)
@@ -71,9 +71,9 @@ sidebar_label: Apache Pulsar 2.8.4
 #### Security
 - [fix][sec] Use provider's canLookupAsync method for AuthorizationService [11777](https://github.com/apache/pulsar/pull/11777)
 - [improve][sec] Optimize the logic of allowing namespace operation [13090](https://github.com/apache/pulsar/pull/13090)
-- [improve][sec] Full-support set ssl provider, ciphers and protocols [13740](https://github.com/apache/pulsar/pull/13740)
+- [improve][sec] Full-support set SSL provider, ciphers and protocols [13740](https://github.com/apache/pulsar/pull/13740)
 - [fix][sec] Role with namespace produce authz can also get topics [13773](https://github.com/apache/pulsar/pull/13773)
-- [improve][sec] Full-support ssl provider, ciphers and protocols for broker service and proxy service [15034](https://github.com/apache/pulsar/pull/15034)
+- [improve][sec] Full-support SSL provider, ciphers, and protocols for broker service and proxy service [15034](https://github.com/apache/pulsar/pull/15034)
 - [improve][sec] Add load multiple certificates support [14798](https://github.com/apache/pulsar/pull/14798)
 - [fix][sec] Fix handling single role and non-jwt-token in MultiRolesTokenAuthorizationProvider [14857](https://github.com/apache/pulsar/pull/14857)
 - [fix][sec] Use tlsCertRefreshCheckDurationSec instead of 0 for refresh value [15075](https://github.com/apache/pulsar/pull/15075)
@@ -94,7 +94,7 @@ sidebar_label: Apache Pulsar 2.8.4
 - [improve][admin] Add corresponding get command for namespace [12322](https://github.com/apache/pulsar/pull/12322)
 - [fix][admin] Fix deleting namespace will fail when system topics exist [15040](https://github.com/apache/pulsar/pull/15040)
 - [fix][admin] Fix validateGlobalNamespaceOwnership wrap exception issue [14612](https://github.com/apache/pulsar/pull/14612)
-- [fix][admin] Fix wrong prompt exception when get non-persistent topic list without GET_BUDNLE permission [14638](https://github.com/apache/pulsar/pull/14638)
+- [fix][admin] Fix wrong prompt exception when getting the non-persistent topic list without GET_BUDNLE permission [14638](https://github.com/apache/pulsar/pull/14638)
 - [fix][admin] Fixed 404 error msg not returned correctly using http lookup [14677](https://github.com/apache/pulsar/pull/14677)
 - [improve][admin] Provide an accurate error message when set `autoTopicCreation` [14684](https://github.com/apache/pulsar/pull/14684)
 - [fix][admin] Fix cannot delete namespace with system topic [14730](https://github.com/apache/pulsar/pull/14730)
@@ -113,8 +113,8 @@ sidebar_label: Apache Pulsar 2.8.4
 - [fix][function] Fix python instance not process zip file correctly [16697](https://github.com/apache/pulsar/pull/16697)
 
 #### IO
-- [fix][io] throw exceptions when kafka offset backing store failed to start [14491](https://github.com/apache/pulsar/pull/14491)
-- [fix][io] Handle kafka sinks that return immutable maps as configs [14780](https://github.com/apache/pulsar/pull/14780)
+- [fix][io] throw exceptions when Kafka offset backing store failed to start [14491](https://github.com/apache/pulsar/pull/14491)
+- [fix][io] Handle Kafka sinks that return immutable maps as configs [14780](https://github.com/apache/pulsar/pull/14780)
 
 #### SQL
 - [fix][sql] Fix PulsarRecordCursor deserialize issue. [14615](https://github.com/apache/pulsar/pull/14615)
@@ -134,7 +134,7 @@ sidebar_label: Apache Pulsar 2.8.4
 - [fix][proxy] Fix DNS server denial-of-service issue when DNS entry expires [15403](https://github.com/apache/pulsar/pull/15403)
 - [improve][proxy] Remove unnecessary blocking DNS lookup in LookupProxyHandler [15415](https://github.com/apache/pulsar/pull/15415)
 - [fix][proxy] Do not preserve host when forwarding admin requests. [16342](https://github.com/apache/pulsar/pull/16342)
-- [fix][proxy] Fix client service url [16834](https://github.com/apache/pulsar/pull/16834)
+- [fix][proxy] Fix client service URL [16834](https://github.com/apache/pulsar/pull/16834)
 
 #### Monitor
 - [improve][monitor]: add metrics for pulsar web service thread pool [14742](https://github.com/apache/pulsar/pull/14742)
@@ -157,7 +157,7 @@ sidebar_label: Apache Pulsar 2.8.4
 - [improve][build] Ignore case when obfuscating passwords in configuration scripts [15077](https://github.com/apache/pulsar/pull/15077)
 - [fix][build] Fix LICENSE files for branch-2.8 [15261](https://github.com/apache/pulsar/pull/15261)
 - [Improve][doc] Add config of IO and acceptor threads in proxy [15340](https://github.com/apache/pulsar/pull/15340)
-- [improve][build] Configure DLog Bookie, Pulsar, and Admin clients via pass through config [15818](https://github.com/apache/pulsar/pull/15818)
+- [improve][build] Configure DLog Bookie, Pulsar, and Admin clients via pass-through config [15818](https://github.com/apache/pulsar/pull/15818)
 - [improve][build] Allow pulsar_tool_env.sh PULSAR_MEM to be Overridden [15868](https://github.com/apache/pulsar/pull/15868)
 - [fix][test] TieredStorageConfigurationTests - clear system properties [15957](https://github.com/apache/pulsar/pull/15957)
 - [fix][doc] Update/fix Swagger Annotation for param: authoritative [16222](https://github.com/apache/pulsar/pull/16222)
