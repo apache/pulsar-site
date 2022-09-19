@@ -6,6 +6,7 @@ var searchData=
   ['send',['send',['../classpulsar_1_1_producer.html#ad4737186cf798acfb24a167796259443',1,'pulsar::Producer::send(const Message &amp;msg)'],['../classpulsar_1_1_producer.html#a32a8c234d42e1951c0357a7562ccdb3a',1,'pulsar::Producer::send(const Message &amp;msg, MessageId &amp;messageId)']]],
   ['sendasync',['sendAsync',['../classpulsar_1_1_producer.html#a7b31f92eb0362bdff32316fc9ab70fd7',1,'pulsar::Producer']]],
   ['serialize',['serialize',['../classpulsar_1_1_message_id.html#a665b97923d70670a87361038e5ec3fe6',1,'pulsar::MessageId']]],
+  ['setaccessmode',['setAccessMode',['../classpulsar_1_1_producer_configuration.html#ac686c49ae0058e764b46fe14e7cbfefc',1,'pulsar::ProducerConfiguration']]],
   ['setaccesstoken',['setAccessToken',['../classpulsar_1_1_oauth2_token_result.html#ab8714dfd4aa25c2032efaa1f39d418fb',1,'pulsar::Oauth2TokenResult']]],
   ['setackgroupingmaxsize',['setAckGroupingMaxSize',['../classpulsar_1_1_consumer_configuration.html#a593295c1aa0cd77c32a6cfdee80cd452',1,'pulsar::ConsumerConfiguration::setAckGroupingMaxSize()'],['../classpulsar_1_1_reader_configuration.html#af3e84677688a37133d9b270f86aed8da',1,'pulsar::ReaderConfiguration::setAckGroupingMaxSize()']]],
   ['setackgroupingtimems',['setAckGroupingTimeMs',['../classpulsar_1_1_consumer_configuration.html#af3f26276c9027a78b9e3243a3e2e38bb',1,'pulsar::ConsumerConfiguration::setAckGroupingTimeMs()'],['../classpulsar_1_1_reader_configuration.html#ab909115a0d99bf1d13f00d098bd4af6f',1,'pulsar::ReaderConfiguration::setAckGroupingTimeMs()']]],

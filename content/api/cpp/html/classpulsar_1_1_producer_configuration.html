@@ -116,6 +116,10 @@ Public Types</h2></td></tr>
 <a class="el" href="classpulsar_1_1_producer_configuration.html#adeed584c68f90401147e31091e54c5e5a291402f9cfb8e9f0fa888722930233ea">KeyBasedBatching</a>
  }</td></tr>
 <tr class="separator:adeed584c68f90401147e31091e54c5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab217b341d1fa532552bcd03064a39cea"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">ProducerAccessMode</a> { <a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39ceaa73f8f203fbd16f91a5b123a362bf13e5">Shared</a> = 0, 
+<a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39ceaabd2cd3c2f4a00e0dc5d5aeb07404831d">Exclusive</a> = 1
+ }</td></tr>
+<tr class="separator:ab217b341d1fa532552bcd03064a39cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -221,6 +225,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a259efb00b66989ee88a0da7d1ab11e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46d2bb0dba7a7c342fcedafe17bad471"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_producer_configuration.html#a46d2bb0dba7a7c342fcedafe17bad471">isChunkingEnabled</a> () const </td></tr>
 <tr class="separator:a46d2bb0dba7a7c342fcedafe17bad471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac686c49ae0058e764b46fe14e7cbfefc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpulsar_1_1_producer_configuration.html">ProducerConfiguration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_producer_configuration.html#ac686c49ae0058e764b46fe14e7cbfefc">setAccessMode</a> (const <a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">ProducerAccessMode</a> &amp;accessMode)</td></tr>
+<tr class="separator:ac686c49ae0058e764b46fe14e7cbfefc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa09aaf76916a6917e86c36c4d380fe86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">ProducerAccessMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpulsar_1_1_producer_configuration.html#aa09aaf76916a6917e86c36c4d380fe86">getAccessMode</a> () const </td></tr>
+<tr class="separator:aa09aaf76916a6917e86c36c4d380fe86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -255,6 +263,26 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PulsarWrapper</b></t
 
 </div>
 </div>
+<a class="anchor" id="ab217b341d1fa532552bcd03064a39cea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">pulsar::ProducerConfiguration::ProducerAccessMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ab217b341d1fa532552bcd03064a39ceaa73f8f203fbd16f91a5b123a362bf13e5"></a>Shared&#160;</td><td class="fielddoc">
+<p>By default multiple producers can publish on a topic. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="ab217b341d1fa532552bcd03064a39ceaabd2cd3c2f4a00e0dc5d5aeb07404831d"></a>Exclusive&#160;</td><td class="fielddoc">
+<p>Require exclusive access for producer. Fail immediately if there's already a producer connected. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ae696a84743d6b95795bf17d68981ec51"></a>
 <div class="memitem">
@@ -272,6 +300,22 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PulsarWrapper</b></t
 <p>Add public encryption key, used by producer to encrypt the data key.</p>
 <p>At the time of producer creation, Pulsar client checks if there are keys added to encryptionKeys. If keys are found, a callback getKey(String keyName) is invoked against each key to load the values of the key. Application should implement this callback to return the key in pkcs8 format. If compression is enabled, message is encrypted after compression. If batch messaging is enabled, the batched message is encrypted.</p>
 <p>the encryption key to add </p><dl class="section return"><dt>Returns</dt><dd>the <a class="el" href="classpulsar_1_1_producer_configuration.html">ProducerConfiguration</a> self </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa09aaf76916a6917e86c36c4d380fe86"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">ProducerAccessMode</a> pulsar::ProducerConfiguration::getAccessMode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the type of access mode that the producer requires on the topic. </p>
 
 </div>
 </div>
@@ -697,6 +741,30 @@ false if the property is not defined </dd></dl>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>true if encryption keys are added </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac686c49ae0058e764b46fe14e7cbfefc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpulsar_1_1_producer_configuration.html">ProducerConfiguration</a>&amp; pulsar::ProducerConfiguration::setAccessMode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">ProducerAccessMode</a> &amp;&#160;</td>
+          <td class="paramname"><em>accessMode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the type of access mode that the producer requires on the topic.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39cea">ProducerAccessMode</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">accessMode</td><td>The type of access to the topic that the producer requires </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

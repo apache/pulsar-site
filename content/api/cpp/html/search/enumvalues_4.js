@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['float',['FLOAT',['../namespacepulsar.html#abab5b1f233c9cc54c10d28cb5b973305a5102395892b9d15d0a0483a27ca64777',1,'pulsar']]]
+  ['exclusive',['Exclusive',['../classpulsar_1_1_producer_configuration.html#ab217b341d1fa532552bcd03064a39ceaabd2cd3c2f4a00e0dc5d5aeb07404831d',1,'pulsar::ProducerConfiguration']]]
 ];
