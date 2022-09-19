@@ -22,7 +22,8 @@ set -x
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
-DOCS_DIR=$WEBSITE/docsify/pulsar-perf
+VERSION=$2
+DOCS_DIR=$WEBSITE/docsify/$VERSION/pulsar-perf
 
 $ROOT_DIR/bin/pulsar-perf gen-doc > $DOCS_DIR/pulsar-perf.md
 

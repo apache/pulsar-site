@@ -22,7 +22,8 @@ set -x
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
-DOCS_DIR=$WEBSITE/docsify/pulsar
+VERSION=$2
+DOCS_DIR=$WEBSITE/docsify/$VERSION/pulsar
 
 PULSAR="$ROOT_DIR/bin/pulsar"
 
