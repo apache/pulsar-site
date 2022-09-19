@@ -54,10 +54,15 @@ export function setVersion(version) {
 }
 
 export function getVersion() {
-  if (!getCache()) {
-    return latestStableVersion;
+  // if (!getCache()) {
+  //   return latestStableVersion;
+  // }
+  // return getCache().getItem("version") || latestStableVersion;
+  //version=2.10.1
+  if (/version=(\d+\.?\x?)+/.test(location.href)) {
+    return location.href.match(/version=(\d+\.?\x?)+/)[0];
   }
-  return getCache().getItem("version") || latestStableVersion;
+  return "master";
 }
 
 export function getApiVersion(anchor) {
@@ -66,9 +71,10 @@ export function getApiVersion(anchor) {
   let _restApiVs = {};
   let _vsGroups = {};
   for (let [key, val] of Object.entries(restApiVersions)) {
-    if (key == 'master' || compareVersions.compare(key, "2.8.0", "<")) {
+    if (key == "master" || compareVersions.compare(key, "2.8.0", "<")) {
       _restApiVs[key] = val;
     } else {
+      _restApiVs[key] = val;
       let [one, two] = key.split(".");
       let _tKey = one + "." + two + ".x";
       _vsGroups[_tKey] = [...(_vsGroups[_tKey] || []), key];
