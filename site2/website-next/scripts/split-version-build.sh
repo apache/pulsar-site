@@ -63,6 +63,8 @@ else
 fi
 
 yarn write-translations
+cp scripts/code.json i18n/en/
+
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
 echo "CURRENT_HOUR: "$CURRENT_HOUR

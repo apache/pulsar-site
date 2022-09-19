@@ -14,6 +14,7 @@ import {
 } from "@docusaurus/theme-common/internal";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
+const _maintainedVersions = [versions[1], versions[2]];
 function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
   return (
     <Translate
@@ -24,9 +25,21 @@ function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}
     >
-      {
-        "This is unreleased documentation for {siteTitle} {versionLabel} version."
-      }
+      {"This is unreleased documentation for Next."}
+    </Translate>
+  );
+}
+function MaintainedVersionLabel({ siteTitle, versionMetadata }) {
+  return (
+    <Translate
+      id="theme.docs.versions.maintainedVersionLabel"
+      description="The label used to tell the user that he's browsing an unmaintained doc version"
+      values={{
+        siteTitle,
+        versionLabel: <b>{versionMetadata.label}</b>,
+      }}
+    >
+      {"This is the documentation for {versionLabel}."}
     </Translate>
   );
 }
@@ -41,19 +54,22 @@ function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
       }}
     >
       {
-        "This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained."
+        "This is the documentation for {versionLabel}, which is no longer actively maintained."
       }
     </Translate>
   );
 }
 const BannerLabelComponents = {
   unreleased: UnreleasedVersionLabel,
+  maintained: MaintainedVersionLabel,
   unmaintained: UnmaintainedVersionLabel,
 };
 function BannerLabel(props) {
   let BannerLabelComponent = null;
   if (props.versionMetadata.version == "current") {
     BannerLabelComponent = BannerLabelComponents.unreleased;
+  } else if (_maintainedVersions.includes(props.versionMetadata.version)) {
+    BannerLabelComponent = BannerLabelComponents.maintained;
   } else if (props.versionMetadata.version != _latestVersion) {
     BannerLabelComponent = BannerLabelComponents.unmaintained;
   } else {
@@ -73,19 +89,19 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
         latestVersionLink: (
           <b>
             <Link to={to} onClick={onClick}>
-              <Translate
+              {/* <Translate
                 id="theme.docs.versions.latestVersionLinkLabel"
                 description="The label used for the latest version suggestion link label"
-              >
-                latest version
-              </Translate>
+              > */}
+              {versionLabel}
+              {/* </Translate> */}
             </Link>
           </b>
         ),
       }}
     >
       {
-        "For up-to-date documentation, see the {latestVersionLink} ({versionLabel})."
+        "We recommend you use the {latestVersionLink} ({versionLabel})."
       }
     </Translate>
   );
@@ -127,7 +143,7 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
           // to={latestVersionSuggestedDoc.path}
           onClick={() => {
             savePreferredVersionName(latestVersionSuggestion.name);
-            window.location.href = path
+            window.location.href = path;
           }}
         />
       </div>
