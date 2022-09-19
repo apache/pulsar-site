@@ -27,18 +27,18 @@ DOCS_DIR=$WEBSITE/docsify/$VERSION/pulsar
 
 PULSAR="$ROOT_DIR/bin/pulsar"
 
-$PULSAR broker -g > $DOCS_DIR/broker.md
-$PULSAR broker-tool gen-doc > $DOCS_DIR/broker-tool.md
-$PULSAR compact-topic -t tmp -g > $DOCS_DIR/compact-topic.md
-$PULSAR tokens gen-doc > $DOCS_DIR/tokens.md
-$PULSAR proxy -g > $DOCS_DIR/proxy.md
-$PULSAR functions-worker -g > $DOCS_DIR/functions-worker.md
-$PULSAR standalone -g > $DOCS_DIR/standalone.md
-$PULSAR initialize-cluster-metadata -cs cs -uw uw -zk zk -c c -g > $DOCS_DIR/initialize-cluster-metadata.md
-$PULSAR delete-cluster-metadata -zk zk -g > $DOCS_DIR/delete-cluster-metadata.md
-$PULSAR initialize-transaction-coordinator-metadata -cs cs -c c -g > $DOCS_DIR/initialize-transaction-coordinator-metadata.md
-$PULSAR initialize-namespace -cs cs -c c -g demo > $DOCS_DIR/initialize-namespace.md
-$PULSAR version -g > $DOCS_DIR/version.md
-$PULSAR websocket -g > $DOCS_DIR/websocket.md
+$PULSAR broker -g > "$DOCS_DIR"/broker.md
+$PULSAR broker-tool gen-doc > "$DOCS_DIR"/broker-tool.md
+$PULSAR compact-topic -t tmp -g > "$DOCS_DIR"/compact-topic.md
+$PULSAR tokens gen-doc > "$DOCS_DIR"/tokens.md
+$PULSAR proxy -g > "$DOCS_DIR"/proxy.md
+$PULSAR functions-worker -g > "$DOCS_DIR"/functions-worker.md
+$PULSAR standalone -g > "$DOCS_DIR"/standalone.md
+$PULSAR initialize-cluster-metadata -cs cs -uw uw -zk zk -c c -g > "$DOCS_DIR"/initialize-cluster-metadata.md
+$PULSAR delete-cluster-metadata -zk zk -g > "$DOCS_DIR"/delete-cluster-metadata.md
+$PULSAR initialize-transaction-coordinator-metadata -cs cs -c c -g > "$DOCS_DIR"/initialize-transaction-coordinator-metadata.md
+$PULSAR initialize-namespace -cs cs -c c -g demo > "$DOCS_DIR"/initialize-namespace.md
+$PULSAR version -g > "$DOCS_DIR"/version.md
+$PULSAR websocket -g > "$DOCS_DIR"/websocket.md
 
 
