@@ -54,11 +54,6 @@ export function setVersion(version) {
 }
 
 export function getVersion() {
-  // if (!getCache()) {
-  //   return latestStableVersion;
-  // }
-  // return getCache().getItem("version") || latestStableVersion;
-  //version=2.10.1
   if (/version=(\d+\.?\x?)+/.test(location.href)) {
     return location.href.match(/version=(\d+\.?\x?)+/)[0];
   }
