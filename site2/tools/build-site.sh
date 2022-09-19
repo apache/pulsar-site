@@ -29,6 +29,7 @@ if [ -n "$NEXT" ]; then
 fi
 TOOLS_DIR=${ROOT_DIR}/site2/tools
 GEN_SITE_DIR=${ROOT_DIR}/generated-site
+VERSION=latest
 
 function workaround_crowdin_problem_by_copying_files() {
   # TODO: remove this after figuring out why crowdin removed code tab when generating translated files
@@ -69,8 +70,8 @@ EOF
 set -x -e
 
 export NODE_OPTIONS="--max-old-space-size=16000"
-$TOOLS_DIR/generate-api-docs.sh
-cd $WEBSITE_DIR
+"$TOOLS_DIR"/generate-api-docs.sh
+cd "$WEBSITE_DIR"
 
 npm install
 
@@ -88,25 +89,25 @@ else
 fi
 
 # Generate document for command line tools.
-$TOOLS_DIR/pulsar-admin-doc-gen.sh $WEBSITE_DIR $VERSION
-$TOOLS_DIR/pulsar-client-doc-gen.sh $WEBSITE_DIR $VERSION
-$TOOLS_DIR/pulsar-perf-doc-gen.sh $WEBSITE_DIR $VERSION
-$TOOLS_DIR/pulsar-doc-gen.sh $WEBSITE_DIR $VERSION
-$TOOLS_DIR/pulsar-config-doc-gen.sh $WEBSITE_DIR $VERSION
-cd $WEBSITE_DIR
+"$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-client-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-perf-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+cd "$WEBSITE_DIR"
 
-mkdir -p $GEN_SITE_DIR/reference
-cp -r docsify/* $GEN_SITE_DIR/reference
+mkdir -p "$GEN_SITE_DIR"/reference
+cp -r docsify/* "$GEN_SITE_DIR"/reference
 
-CONTENT_DIR=$GEN_SITE_DIR/content
+CONTENT_DIR="$GEN_SITE_DIR"/content
 
-rm -rf $CONTENT_DIR
-mkdir -p $CONTENT_DIR
-cp -R $GEN_SITE_DIR/reference $CONTENT_DIR
-cp -R $GEN_SITE_DIR/api $CONTENT_DIR
+rm -rf "$CONTENT_DIR"
+mkdir -p "$CONTENT_DIR"
+cp -R "$GEN_SITE_DIR"/reference "$CONTENT_DIR"
+cp -R "$GEN_SITE_DIR"/api "$CONTENT_DIR"
 if [ -n "$NEXT" ]; then
-  cp -R ./build/* $CONTENT_DIR
+  cp -R ./build/* "$CONTENT_DIR"
 else
-  cp -R ./build/pulsar/* $CONTENT_DIR
+  cp -R ./build/pulsar/* "$CONTENT_DIR"
 fi
-cp -R $WEBSITE_DIR/static/swagger/* $CONTENT_DIR/swagger/
+cp -R "$WEBSITE_DIR"/static/swagger/* "$CONTENT_DIR"/swagger/
