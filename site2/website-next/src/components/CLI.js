@@ -1,7 +1,7 @@
 const React = require("react");
 import Layout from "@theme/Layout";
 const versionList = require("../../versions.json");
-import { setVersion, getVersion, getApiVersion } from "../utils/index.js";
+import { getVersion } from "../utils/index.js";
 
 function parseVersion() {}
 

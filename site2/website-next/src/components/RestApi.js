@@ -1,6 +1,6 @@
 const React = require("react");
 import Layout from "@theme/Layout";
-import { setVersion, getVersion, getApiVersion } from "../utils/index.js";
+import { getVersion, getApiVersion } from "../utils/index.js";
 
 function parseVersion(pathName) {
   let swagger = "swagger";
