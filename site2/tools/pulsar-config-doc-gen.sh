@@ -35,7 +35,7 @@ GEN_DOCS_PROXY=org.apache.pulsar.proxy.util.CmdGenerateDocumentation
 CLIENT_DIR=$VERSIONED_DIR/client
 CLIENT_CP=$ROOT_DIR/pulsar-client/target/classes
 CLIENT_CONF=org.apache.pulsar.client.impl.conf
-GEN_DOCS_CLIENT=$CLINET_CONF.CmdGenerateDocumentation
+GEN_DOCS_CLIENT=$CLIENT_CONF.CmdGenerateDocumentation
 
 # config doc gen
 cp $WEBSITE/docs/reference-configuration*.md $DOCS_DIR
