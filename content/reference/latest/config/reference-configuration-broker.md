@@ -2949,7 +2949,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `868`
+**Default**: `869`
 
 **Dynamic**: `true`
 
@@ -4827,8 +4827,19 @@ Class name for transaction buffer provider
 
 **Category**: Transaction
 
+### transactionBufferSegmentedSnapshotEnabled
+Whether to enable segmented transaction buffer snapshot to handle a large number of aborted transactions.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
 ### transactionBufferSnapshotMaxTransactionCount
-Transaction buffer take snapshot transaction count
+Transaction buffer take snapshot transaction countIf transaction buffer enables snapshot segment, transaction buffer updates snapshot metadataafter the number of transaction operations reaches this value.
 
 **Type**: `int`
 
@@ -4839,11 +4850,22 @@ Transaction buffer take snapshot transaction count
 **Category**: Transaction
 
 ### transactionBufferSnapshotMinTimeInMillis
-Transaction buffer take snapshot min interval time
+The interval time for transaction buffer to take snapshots.If transaction buffer enables snapshot segment, it is the interval time for transaction buffer to update snapshot metadata.
 
 **Type**: `int`
 
 **Default**: `5000`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
+### transactionBufferSnapshotSegmentSize
+Transaction buffer stores the transaction ID of aborted transactions and takes snapshots.This configuration determines the size of the snapshot segment. The default value is 256 KB (262144 bytes).
+
+**Type**: `int`
+
+**Default**: `262144`
 
 **Dynamic**: `false`
 
