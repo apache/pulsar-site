@@ -1318,6 +1318,9 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "classIntrospector" : {
+          "$ref" : "#/definitions/ClassIntrospector"
+        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
@@ -1335,9 +1338,6 @@
         },
         "annotationProcessingEnabled" : {
           "type" : "boolean"
-        },
-        "classIntrospector" : {
-          "$ref" : "#/definitions/ClassIntrospector"
         }
       }
     },
@@ -1642,13 +1642,6 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
-        "lastInvocation" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "userMetrics" : {
           "type" : "object",
           "additionalProperties" : {
@@ -1656,13 +1649,12 @@
             "format" : "double"
           }
         },
-        "receivedTotal" : {
+        "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
         },
-        "processedSuccessfullyTotal" : {
-          "type" : "integer",
-          "format" : "int64"
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "systemExceptionsTotal" : {
           "type" : "integer",
@@ -1675,20 +1667,20 @@
         "avgProcessLatency" : {
           "type" : "number",
           "format" : "double"
+        },
+        "receivedTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "processedSuccessfullyTotal" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
     "FunctionInstanceStatsDataBase" : {
       "type" : "object",
       "properties" : {
-        "receivedTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "processedSuccessfullyTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "systemExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1700,6 +1692,14 @@
         "avgProcessLatency" : {
           "type" : "number",
           "format" : "double"
+        },
+        "receivedTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "processedSuccessfullyTotal" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -2411,6 +2411,23 @@
             "format" : "byte"
           }
         },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
         "topicName" : {
           "type" : "string"
         },
@@ -2448,23 +2465,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2753,11 +2753,11 @@
     "Schema" : {
       "type" : "object",
       "properties" : {
-        "nativeSchema" : {
-          "type" : "object"
-        },
         "schemaInfo" : {
           "$ref" : "#/definitions/SchemaInfo"
+        },
+        "nativeSchema" : {
+          "type" : "object"
         }
       }
     },
@@ -2781,26 +2781,26 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "schemaDefinition" : {
+          "type" : "string"
+        },
         "schema" : {
           "type" : "array",
           "items" : {
             "type" : "string",
             "format" : "byte"
           }
-        },
-        "schemaDefinition" : {
-          "type" : "string"
         }
       }
     },
     "SchemaObject" : {
       "type" : "object",
       "properties" : {
-        "nativeSchema" : {
-          "type" : "object"
-        },
         "schemaInfo" : {
           "$ref" : "#/definitions/SchemaInfo"
+        },
+        "nativeSchema" : {
+          "type" : "object"
         }
       }
     },
@@ -2848,6 +2848,9 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "classIntrospector" : {
+          "$ref" : "#/definitions/ClassIntrospector"
+        },
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
@@ -2865,9 +2868,6 @@
         },
         "annotationProcessingEnabled" : {
           "type" : "boolean"
-        },
-        "classIntrospector" : {
-          "$ref" : "#/definitions/ClassIntrospector"
         }
       }
     },
