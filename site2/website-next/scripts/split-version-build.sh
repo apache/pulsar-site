@@ -63,7 +63,6 @@ else
 fi
 
 yarn write-translations
-cp scripts/code.json i18n/en/
 
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
@@ -91,6 +90,8 @@ if [[ $CURRENT_HOUR -eq 18 ]] || [[ $BUILD_ALL_LANGUAGE"" == "1" ]] || [[ $FORCE
 else
     echo "skip crowdin download"
 fi
+
+cp scripts/code.json i18n/en/
 
 # Build only the versions that has changed
 # Build next version that has any changed
