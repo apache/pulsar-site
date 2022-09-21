@@ -2949,7 +2949,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `869`
+**Default**: `994`
 
 **Dynamic**: `true`
 
@@ -4248,7 +4248,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `347`
+**Default**: `397`
 
 **Dynamic**: `true`
 
