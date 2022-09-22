@@ -645,17 +645,17 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "tlsCertificates" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Certificate"
-          }
-        },
         "httpAuthType" : {
           "type" : "string"
         },
         "commandData" : {
           "type" : "string"
+        },
+        "tlsCertificates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Certificate"
+          }
         },
         "subscription" : {
           "type" : "string"
@@ -1321,11 +1321,11 @@
     "JsonSerializerObject" : {
       "type" : "object",
       "properties" : {
-        "unwrappingSerializer" : {
-          "type" : "boolean"
-        },
         "delegatee" : {
           "$ref" : "#/definitions/JsonSerializerObject"
+        },
+        "unwrappingSerializer" : {
+          "type" : "boolean"
         }
       }
     },
@@ -1810,11 +1810,11 @@
     "Value" : {
       "type" : "object",
       "properties" : {
-        "valueInclusion" : {
+        "contentInclusion" : {
           "type" : "string",
           "enum" : [ "ALWAYS", "NON_NULL", "NON_ABSENT", "NON_EMPTY", "NON_DEFAULT", "USE_DEFAULTS" ]
         },
-        "contentInclusion" : {
+        "valueInclusion" : {
           "type" : "string",
           "enum" : [ "ALWAYS", "NON_NULL", "NON_ABSENT", "NON_EMPTY", "NON_DEFAULT", "USE_DEFAULTS" ]
         }
