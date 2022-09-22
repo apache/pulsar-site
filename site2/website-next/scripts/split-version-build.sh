@@ -93,6 +93,8 @@ fi
 
 cp scripts/code.json i18n/en/
 
+node scripts/fix-i18n.js
+
 # Build only the versions that has changed
 # Build next version that has any changed
 while read version; do
