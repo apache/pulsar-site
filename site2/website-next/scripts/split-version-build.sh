@@ -86,14 +86,15 @@ fi
 
 if [[ $CURRENT_HOUR -eq 18 ]] || [[ $BUILD_ALL_LANGUAGE"" == "1" ]] || [[ $FORCE_CROWDIN_ALL"" == "1" ]] || [[ $FORCE_CROWDIN_DOWN"" == "1" ]]; then
     echo "exec crowdin download"
-    yarn crowdin-download
+    # too much crowdin docs error, skip download, will auto copy en docs to build
+    # yarn crowdin-download
 else
     echo "skip crowdin download"
 fi
 
 cp scripts/code.json i18n/en/
 
-node scripts/fix-i18n.js
+# node scripts/fix-i18n.js
 
 # Build only the versions that has changed
 # Build next version that has any changed
