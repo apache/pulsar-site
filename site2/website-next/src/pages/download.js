@@ -2,7 +2,6 @@ import * as React from "react";
 import Layout from "@theme/Layout";
 import ReleaseTable from "../components/ReleaseTable";
 import ConnectorTable from "../components/ConnectorTable";
-import GuideTable from "../components/GuideTable";
 import OldReleaseTable from "../components/OldReleaseTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
@@ -146,30 +145,6 @@ export default function page(props) {
       linkText: `apache-pulsar-offloaders-${latestVersion}-bin.tar.gz`,
       asc: `${distOffloadersUrl(latestVersion)}.asc`,
       sha512: `${distOffloadersUrl(latestVersion)}.sha512`,
-    },
-  ];
-  const guides = [
-    {
-      name: "The Pulsar java client",
-      link: `${siteConfig.baseUrl}docs/${language(props)}client-libraries-java`,
-      description: "The Pulsar java client",
-    },
-    {
-      name: "The Pulsar go client",
-      link: `${siteConfig.baseUrl}docs/${language(props)}client-libraries-go`,
-      description: "The Pulsar go client",
-    },
-    {
-      name: "The Pulsar python client",
-      link: `${siteConfig.baseUrl}docs/${language(
-        props
-      )}client-libraries-python`,
-      description: "The Pulsar java client",
-    },
-    {
-      name: "The Pulsar C++ client",
-      link: `${siteConfig.baseUrl}docs/${language(props)}client-libraries-cpp`,
-      description: "The Pulsar C++ client",
     },
   ];
   const oldReleases = releaseInfo
@@ -329,7 +304,7 @@ export default function page(props) {
               </Translate>
               &nbsp;
               <a
-                href={`${siteConfig.baseUrl}docs/${language(props)}standalone`}
+                href={`${siteConfig.baseUrl}docs/${language(props)}getting-started-standalone`}
               >
                 <Translate>Run Pulsar locally</Translate>
               </a>{" "}
@@ -338,12 +313,16 @@ export default function page(props) {
           </div>
           <p>
             <Translate>
-              If you need to connect to an existing Pulsar cluster or instance
-              using an officially supported client, see the client docs for
-              these languages:
+              If you need to connect to an existing Pulsar server or cluster
+              using an officially supported client, read the
             </Translate>
+            &nbsp;
+            <a
+              href={`${siteConfig.baseUrl}docs/${language(props)}client-libraries`}
+            >
+              <Translate>client libraries docs</Translate>
+            </a>{"."}
           </p>
-          <GuideTable data={guides}></GuideTable>
           <h2 id="archive">
             <Translate>Older releases</Translate>
           </h2>
