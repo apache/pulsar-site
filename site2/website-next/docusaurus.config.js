@@ -195,7 +195,7 @@ module.exports = {
           ],
         },
         {
-          href: "/docs/next",
+          href: "/docs",
           position: "right",
           label: "Docs",
         },
