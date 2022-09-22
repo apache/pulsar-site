@@ -57,6 +57,11 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
     echo "clean all the old content"
     find $PULSAR_SITE_TMP/content -print \
       | grep -v $PULSAR_SITE_TMP/content$ \
+      | grep -v $PULSAR_SITE_TMP/content/zh-CN \
+      | grep -v $PULSAR_SITE_TMP/content/zh-TW \
+      | grep -v $PULSAR_SITE_TMP/content/ja \
+      | grep -v $PULSAR_SITE_TMP/content/ko \
+      | grep -v $PULSAR_SITE_TMP/content/fr \
       | grep -v $PULSAR_SITE_TMP/content/api \
       | grep -v $PULSAR_SITE_TMP/content/css \
       | grep -v $PULSAR_SITE_TMP/content/tools \
