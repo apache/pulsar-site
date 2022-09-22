@@ -63,6 +63,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
       | grep -v $PULSAR_SITE_TMP/content/ko \
       | grep -v $PULSAR_SITE_TMP/content/fr \
       | grep -v $PULSAR_SITE_TMP/content/api \
+      | grep -v $PULSAR_SITE_TMP/content/charts \
       | grep -v $PULSAR_SITE_TMP/content/css \
       | grep -v $PULSAR_SITE_TMP/content/tools \
       | grep -v $PULSAR_SITE_TMP/content/reference \
