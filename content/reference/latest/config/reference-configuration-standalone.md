@@ -927,6 +927,17 @@ Name of load manager to use
 
 **Category**: Load Balancer
 
+### lowerBoundarySheddingEnabled
+When [current usage < average usage - threshold], the broker with the highest load will be triggered to unload
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### maxUnloadBundleNumPerShedding
 For each uniform balanced unload, the maximum number of bundles that can be unloaded. The default value is -1, which means no limit
 
