@@ -1,17 +1,9 @@
-------------
-
 # bookies
-
-### Usage
-
-`$bookies`
-
-------------
 
 Operations about bookies rack placement
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin bookies subcommand
 ```
 
@@ -26,13 +18,9 @@ $ pulsar-admin bookies subcommand
 
 Gets the rack placement information for all the bookies in the cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin bookies racks-placement options
 ```
 
@@ -42,13 +30,9 @@ $ pulsar-admin bookies racks-placement options
 
 List bookies
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin bookies list-bookies options
 ```
 
@@ -58,13 +42,9 @@ $ pulsar-admin bookies list-bookies options
 
 Gets the rack placement information for a specific bookie in the cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin bookies get-bookie-rack options
 ```
 
@@ -79,13 +59,9 @@ $ pulsar-admin bookies get-bookie-rack options
 
 Remove rack placement information for a specific bookie in the cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin bookies delete-bookie-rack options
 ```
 
@@ -100,13 +76,9 @@ $ pulsar-admin bookies delete-bookie-rack options
 
 Updates the rack placement information for a specific bookie in the cluster (note. bookie address format:`address:port`)
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin bookies set-bookie-rack options
 ```
 

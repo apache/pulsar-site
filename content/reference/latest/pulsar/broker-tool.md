@@ -1,16 +1,8 @@
-------------
-
 # broker-tool
 
-### Usage
-
-`$broker-tool`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar broker-tool subcommand
 ```
 
@@ -19,17 +11,9 @@ $ pulsar broker-tool subcommand
 
 ## <em>load-report</em>
 
-### Usage
-
-------------
-
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar broker-tool load-report options
 ```
-
-Options
-
 
 |Flag|Description|Default|
 |---|---|---|

@@ -1,16 +1,8 @@
-------------
-
 # websocket
 
-### Usage
-
-`$websocket`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar websocket options
 ```
 

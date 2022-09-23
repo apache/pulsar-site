@@ -1,17 +1,9 @@
-------------
-
 # schemas
-
-### Usage
-
-`$schemas`
-
-------------
 
 Operations about schemas
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin schemas subcommand
 ```
 
@@ -25,13 +17,9 @@ $ pulsar-admin schemas subcommand
 
 Get the schema for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin schemas get options
 ```
 
@@ -47,13 +35,9 @@ $ pulsar-admin schemas get options
 
 Delete the latest schema for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin schemas delete options
 ```
 
@@ -68,13 +52,9 @@ $ pulsar-admin schemas delete options
 
 Update the schema for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin schemas upload options
 ```
 
@@ -89,13 +69,9 @@ $ pulsar-admin schemas upload options
 
 Provide the schema via a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin schemas extract options
 ```
 

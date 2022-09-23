@@ -1,16 +1,8 @@
-------------
-
 # tokens
 
-### Usage
-
-`$tokens`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar tokens subcommand
 ```
 
@@ -24,17 +16,9 @@ $ pulsar tokens subcommand
 ## <em>create-secret-key</em>
 
 Create a new secret key
-### Usage
-
-------------
-
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar tokens create-secret-key options
 ```
-
-Options
-
 
 |Flag|Description|Default|
 |---|---|---|
@@ -46,17 +30,9 @@ Options
 ## <em>create-key-pair</em>
 
 Create a new or pair of keys public/private
-### Usage
-
-------------
-
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar tokens create-key-pair options
 ```
-
-Options
-
 
 |Flag|Description|Default|
 |---|---|---|
@@ -68,17 +44,9 @@ Options
 ## <em>create</em>
 
 Create a new token
-### Usage
-
-------------
-
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar tokens create options
 ```
-
-Options
-
 
 |Flag|Description|Default|
 |---|---|---|
@@ -92,17 +60,9 @@ Options
 ## <em>show</em>
 
 Show the content of token
-### Usage
-
-------------
-
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar tokens show options
 ```
-
-Options
-
 
 |Flag|Description|Default|
 |---|---|---|
@@ -113,17 +73,9 @@ Options
 ## <em>validate</em>
 
 Validate a token against a key
-### Usage
-
-------------
-
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar tokens validate options
 ```
-
-Options
-
 
 |Flag|Description|Default|
 |---|---|---|

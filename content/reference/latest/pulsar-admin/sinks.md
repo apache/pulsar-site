@@ -1,17 +1,9 @@
-------------
-
 # sinks
-
-### Usage
-
-`$sinks`
-
-------------
 
 Interface for managing Pulsar IO sinks (egress data from Pulsar)
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks subcommand
 ```
 
@@ -33,13 +25,9 @@ $ pulsar-admin sinks subcommand
 
 Submit a Pulsar IO sink connector to run in a Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks create options
 ```
 
@@ -85,13 +73,9 @@ $ pulsar-admin sinks create options
 
 Update a Pulsar IO sink connector
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks update options
 ```
 
@@ -138,13 +122,9 @@ $ pulsar-admin sinks update options
 
 Stops a Pulsar IO sink connector
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks delete options
 ```
 
@@ -161,13 +141,9 @@ $ pulsar-admin sinks delete options
 
 List all running Pulsar IO sink connectors
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks list options
 ```
 
@@ -183,13 +159,9 @@ $ pulsar-admin sinks list options
 
 Gets the information about a Pulsar IO sink connector
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks get options
 ```
 
@@ -206,13 +178,9 @@ $ pulsar-admin sinks get options
 
 Check the current status of a Pulsar Sink
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks status options
 ```
 
@@ -230,13 +198,9 @@ $ pulsar-admin sinks status options
 
 Stops sink instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks stop options
 ```
 
@@ -254,13 +218,9 @@ $ pulsar-admin sinks stop options
 
 Starts sink instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks start options
 ```
 
@@ -278,13 +238,9 @@ $ pulsar-admin sinks start options
 
 Restart sink instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks restart options
 ```
 
@@ -302,13 +258,9 @@ $ pulsar-admin sinks restart options
 
 Run a Pulsar IO sink connector locally (rather than deploying it to the Pulsar cluster)
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks localrun options
 ```
 
@@ -365,13 +317,9 @@ $ pulsar-admin sinks localrun options
 
 Get the list of Pulsar IO connector sinks supported by Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks available-sinks options
 ```
 
@@ -381,13 +329,9 @@ $ pulsar-admin sinks available-sinks options
 
 Reload the available built-in connectors
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks reload options
 ```
 

@@ -1,16 +1,8 @@
-------------
-
 # standalone
 
-### Usage
-
-`$standalone`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar standalone options
 ```
 

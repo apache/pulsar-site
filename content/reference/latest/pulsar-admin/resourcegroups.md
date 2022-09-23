@@ -1,17 +1,9 @@
-------------
-
 # resourcegroups
-
-### Usage
-
-`$resourcegroups`
-
-------------
 
 Operations about ResourceGroups
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups subcommand
 ```
 
@@ -26,13 +18,9 @@ $ pulsar-admin resourcegroups subcommand
 
 List the existing resourcegroups
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups list options
 ```
 
@@ -42,13 +30,9 @@ $ pulsar-admin resourcegroups list options
 
 Gets the configuration of a resourcegroup
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups get options
 ```
 
@@ -58,13 +42,9 @@ $ pulsar-admin resourcegroups get options
 
 Creates a new resourcegroup
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups create options
 ```
 
@@ -82,13 +62,9 @@ $ pulsar-admin resourcegroups create options
 
 Updates a resourcegroup
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups update options
 ```
 
@@ -106,13 +82,9 @@ $ pulsar-admin resourcegroups update options
 
 Deletes an existing ResourceGroup
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups delete options
 ```
 

@@ -1,16 +1,8 @@
-------------
-
 # version
 
-### Usage
-
-`$version`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar version options
 ```
 

@@ -1,16 +1,8 @@
-------------
-
 # initialize-transaction-coordinator-metadata
 
-### Usage
-
-`$initialize-transaction-coordinator-metadata`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar initialize-transaction-coordinator-metadata options
 ```
 

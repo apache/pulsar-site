@@ -1,17 +1,9 @@
-------------
-
 # brokers
-
-### Usage
-
-`$brokers`
-
-------------
 
 Operations about brokers
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers subcommand
 ```
 
@@ -34,13 +26,9 @@ $ pulsar-admin brokers subcommand
 
 List active brokers of the cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers list options
 ```
 
@@ -50,13 +38,9 @@ $ pulsar-admin brokers list options
 
 Get the information of the leader broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers leader-broker options
 ```
 
@@ -66,13 +50,9 @@ $ pulsar-admin brokers leader-broker options
 
 List namespaces owned by the broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers namespaces options
 ```
 
@@ -87,13 +67,9 @@ $ pulsar-admin brokers namespaces options
 
 Update dynamic-serviceConfiguration of broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers update-dynamic-config options
 ```
 
@@ -109,13 +85,9 @@ $ pulsar-admin brokers update-dynamic-config options
 
 Delete dynamic-serviceConfiguration of broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers delete-dynamic-config options
 ```
 
@@ -130,13 +102,9 @@ $ pulsar-admin brokers delete-dynamic-config options
 
 Get list of updatable configuration name
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers list-dynamic-config options
 ```
 
@@ -146,13 +114,9 @@ $ pulsar-admin brokers list-dynamic-config options
 
 Get all overridden dynamic-configuration values
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers get-all-dynamic-config options
 ```
 
@@ -162,13 +126,9 @@ $ pulsar-admin brokers get-all-dynamic-config options
 
 Get internal configuration information
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers get-internal-config options
 ```
 
@@ -178,13 +138,9 @@ $ pulsar-admin brokers get-internal-config options
 
 Get runtime configuration values
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers get-runtime-config options
 ```
 
@@ -194,13 +150,9 @@ $ pulsar-admin brokers get-runtime-config options
 
 Run a health check against the broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers healthcheck options
 ```
 
@@ -215,13 +167,9 @@ $ pulsar-admin brokers healthcheck options
 
 Manually trigger backlogQuotaCheck
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers backlog-quota-check options
 ```
 
@@ -231,13 +179,9 @@ $ pulsar-admin brokers backlog-quota-check options
 
 Get the version of the currently connected broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers version options
 ```
 
@@ -247,13 +191,9 @@ $ pulsar-admin brokers version options
 
 Shutdown broker gracefully.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers shutdown options
 ```
 

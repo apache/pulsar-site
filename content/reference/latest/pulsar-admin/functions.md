@@ -1,17 +1,9 @@
-------------
-
 # functions
-
-### Usage
-
-`$functions`
-
-------------
 
 Interface for managing Pulsar Functions (lightweight, Lambda-style compute processes that work with Pulsar)
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions subcommand
 ```
 
@@ -39,13 +31,9 @@ $ pulsar-admin functions subcommand
 
 Run a Pulsar Function locally, rather than deploy to a Pulsar cluster)
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions localrun options
 ```
 
@@ -116,13 +104,9 @@ $ pulsar-admin functions localrun options
 
 Create a Pulsar Function in cluster mode (deploy it on a Pulsar cluster)
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions create options
 ```
 
@@ -179,13 +163,9 @@ $ pulsar-admin functions create options
 
 Delete a Pulsar Function that is running on a Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions delete options
 ```
 
@@ -203,13 +183,9 @@ $ pulsar-admin functions delete options
 
 Update a Pulsar Function that has been deployed to a Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions update options
 ```
 
@@ -267,13 +243,9 @@ $ pulsar-admin functions update options
 
 Fetch information about a Pulsar Function
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions get options
 ```
 
@@ -291,13 +263,9 @@ $ pulsar-admin functions get options
 
 Restart function instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions restart options
 ```
 
@@ -316,13 +284,9 @@ $ pulsar-admin functions restart options
 
 Stops function instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions stop options
 ```
 
@@ -341,13 +305,9 @@ $ pulsar-admin functions stop options
 
 Starts a stopped function instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions start options
 ```
 
@@ -366,13 +326,9 @@ $ pulsar-admin functions start options
 
 Check the current status of a Pulsar Function
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions status options
 ```
 
@@ -391,13 +347,9 @@ $ pulsar-admin functions status options
 
 Get the current stats of a Pulsar Function
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions stats options
 ```
 
@@ -416,13 +368,9 @@ $ pulsar-admin functions stats options
 
 List all Pulsar Functions running under a specific tenant and namespace
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions list options
 ```
 
@@ -438,13 +386,9 @@ $ pulsar-admin functions list options
 
 Fetch the current state associated with a Pulsar Function
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions querystate options
 ```
 
@@ -464,13 +408,9 @@ $ pulsar-admin functions querystate options
 
 Put the state associated with a Pulsar Function
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions putstate options
 ```
 
@@ -489,13 +429,9 @@ $ pulsar-admin functions putstate options
 
 Trigger the specified Pulsar Function with a supplied value
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions trigger options
 ```
 
@@ -516,13 +452,9 @@ $ pulsar-admin functions trigger options
 
 Upload File Data to Pulsar
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions upload options
 ```
 
@@ -538,13 +470,9 @@ $ pulsar-admin functions upload options
 
 Download File Data from Pulsar
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions download options
 ```
 
@@ -564,13 +492,9 @@ $ pulsar-admin functions download options
 
 Reload the available built-in functions
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions reload options
 ```
 
@@ -580,13 +504,9 @@ $ pulsar-admin functions reload options
 
 Get the list of Pulsar Functions supported by Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions available-functions options
 ```
 

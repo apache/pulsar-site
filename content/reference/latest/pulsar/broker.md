@@ -1,17 +1,9 @@
-------------
-
 # broker
-
-### Usage
-
-`$broker`
-
-------------
 
 Options
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar broker options
 ```
 

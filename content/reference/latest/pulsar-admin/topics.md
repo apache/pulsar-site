@@ -1,17 +1,9 @@
-------------
-
 # topics
-
-### Usage
-
-`$topics`
-
-------------
 
 Operations on persistent topics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics subcommand
 ```
 
@@ -160,13 +152,9 @@ $ pulsar-admin topics subcommand
 
 Get the list of topics under a namespace.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics list options
 ```
 
@@ -183,13 +171,9 @@ $ pulsar-admin topics list options
 
 Get the list of partitioned topics under a namespace.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics list-partitioned-topics options
 ```
 
@@ -204,13 +188,9 @@ $ pulsar-admin topics list-partitioned-topics options
 
 Get the permissions on a topic. Retrieve the effective permissions for a topic. These permissions are defined by the permissions set at the namespace level combined (union) with any eventual specific permission set on the topic.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics permissions options
 ```
 
@@ -220,13 +200,9 @@ $ pulsar-admin topics permissions options
 
 Grant a new permission to a client role on a single topic.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics grant-permission options
 ```
 
@@ -242,13 +218,9 @@ $ pulsar-admin topics grant-permission options
 
 Revoke permissions on a topic. Revoke permissions to a client role on a single topic. If the permission was not set at the topic level, but rather at the namespace level, this operation will return an error (HTTP status code 412).
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics revoke-permission options
 ```
 
@@ -263,13 +235,9 @@ $ pulsar-admin topics revoke-permission options
 
 Lookup a topic from the current serving broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics lookup options
 ```
 
@@ -279,13 +247,9 @@ $ pulsar-admin topics lookup options
 
 Lookup a partitioned topic from the current serving broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics partitioned-lookup options
 ```
 
@@ -300,13 +264,9 @@ $ pulsar-admin topics partitioned-lookup options
 
 Get Namespace bundle range of a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics bundle-range options
 ```
 
@@ -316,13 +276,9 @@ $ pulsar-admin topics bundle-range options
 
 Delete a topic. The topic cannot be deleted if there's any active subscription or producers connected to it.And the application is not able to connect to the topic(delete then re-create with same name) again if the schema auto uploading is disabled. Besides, users should to use the truncate cmd to clean up data of the topic instead of delete cmd if users continue to use this topic later.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics delete options
 ```
 
@@ -338,13 +294,9 @@ $ pulsar-admin topics delete options
 Truncate a topic. 
 		The truncate operation will move all cursors to the end of the topic and delete all inactive ledgers. 
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics truncate options
 ```
 
@@ -354,13 +306,9 @@ $ pulsar-admin topics truncate options
 
 Unload a topic.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics unload options
 ```
 
@@ -370,13 +318,9 @@ $ pulsar-admin topics unload options
 
 Get the list of subscriptions on the topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics subscriptions options
 ```
 
@@ -386,13 +330,9 @@ $ pulsar-admin topics subscriptions options
 
 Delete a durable subscriber from a topic. The subscription cannot be deleted if there are any active consumers attached to it
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics unsubscribe options
 ```
 
@@ -408,13 +348,9 @@ $ pulsar-admin topics unsubscribe options
 
 Create a new subscription on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics create-subscription options
 ```
 
@@ -432,13 +368,9 @@ $ pulsar-admin topics create-subscription options
 
 Update the properties of a subscription on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics update-subscription-properties options
 ```
 
@@ -455,13 +387,9 @@ $ pulsar-admin topics update-subscription-properties options
 
 Get the properties of a subscription on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-subscription-properties options
 ```
 
@@ -476,13 +404,9 @@ $ pulsar-admin topics get-subscription-properties options
 
 Get the stats for the topic and its connected producers and consumers. All the rates are computed over a 1 minute window and are relative the last completed 1 minute period.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics stats options
 ```
 
@@ -499,13 +423,9 @@ $ pulsar-admin topics stats options
 
 Get the internal stats for the topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics stats-internal options
 ```
 
@@ -520,13 +440,9 @@ $ pulsar-admin topics stats-internal options
 
 Get the internal metadata info for the topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics info-internal options
 ```
 
@@ -536,13 +452,9 @@ $ pulsar-admin topics info-internal options
 
 Get the stats for the partitioned topic and its connected producers and consumers. All the rates are computed over a 1 minute window and are relative the last completed 1 minute period.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics partitioned-stats options
 ```
 
@@ -560,13 +472,9 @@ $ pulsar-admin topics partitioned-stats options
 
 Get the internal stats for the partitioned topic and its connected producers and consumers. All the rates are computed over a 1 minute window and are relative the last completed 1 minute period.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics partitioned-stats-internal options
 ```
 
@@ -576,13 +484,9 @@ $ pulsar-admin topics partitioned-stats-internal options
 
 Skip some messages for the subscription
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics skip options
 ```
 
@@ -598,13 +502,9 @@ $ pulsar-admin topics skip options
 
 Skip all the messages for the subscription
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics clear-backlog options
 ```
 
@@ -619,13 +519,9 @@ $ pulsar-admin topics clear-backlog options
 
 Expire messages that older than given expiry time (in seconds) for the subscription
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics expire-messages options
 ```
 
@@ -643,13 +539,9 @@ $ pulsar-admin topics expire-messages options
 
 Expire messages that older than given expiry time (in seconds) for all subscriptions
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics expire-messages-all-subscriptions options
 ```
 
@@ -664,13 +556,9 @@ $ pulsar-admin topics expire-messages-all-subscriptions options
 
 Create a partitioned topic. The partitioned topic has to be created before creating a producer on it.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics create-partitioned-topic options
 ```
 
@@ -686,13 +574,9 @@ $ pulsar-admin topics create-partitioned-topic options
 
 Try to create partitions for partitioned topic. The partitions of partition topic has to be created, can be used by repair partitions when topic auto creation is disabled
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics create-missed-partitions options
 ```
 
@@ -702,13 +586,9 @@ $ pulsar-admin topics create-missed-partitions options
 
 Create a non-partitioned topic.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics create options
 ```
 
@@ -723,13 +603,9 @@ $ pulsar-admin topics create options
 
 Update existing non-global partitioned topic. New updating number of partitions must be greater than existing number of partitions.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics update-partitioned-topic options
 ```
 
@@ -745,13 +621,9 @@ $ pulsar-admin topics update-partitioned-topic options
 
 Get the partitioned topic metadata. If the topic is not created or is a non-partitioned topic, it returns empty topic with 0 partitions
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-partitioned-topic-metadata options
 ```
 
@@ -761,13 +633,9 @@ $ pulsar-admin topics get-partitioned-topic-metadata options
 
 Get the topic properties.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-properties options
 ```
 
@@ -777,13 +645,9 @@ $ pulsar-admin topics get-properties options
 
 Update the properties of on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics update-properties options
 ```
 
@@ -798,13 +662,9 @@ $ pulsar-admin topics update-properties options
 
 Remove the key in properties of a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-properties options
 ```
 
@@ -819,13 +679,9 @@ $ pulsar-admin topics remove-properties options
 
 Delete a partitioned topic. It will also delete all the partitions of the topic if it exists.And the application is not able to connect to the topic(delete then re-create with same name) again if the schema auto uploading is disabled. Besides, users should to use the truncate cmd to clean up data of the topic instead of delete cmd if users continue to use this topic later.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics delete-partitioned-topic options
 ```
 
@@ -840,13 +696,9 @@ $ pulsar-admin topics delete-partitioned-topic options
 
 Peek some messages for the subscription
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics peek-messages options
 ```
 
@@ -862,13 +714,9 @@ $ pulsar-admin topics peek-messages options
 
 Examine a specific message on a topic by position relative to the earliest or the latest message.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics examine-messages options
 ```
 
@@ -884,13 +732,9 @@ $ pulsar-admin topics examine-messages options
 
 Get message by its ledgerId and entryId
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-message-by-id options
 ```
 
@@ -906,13 +750,9 @@ $ pulsar-admin topics get-message-by-id options
 
 Get message ID
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-message-id options
 ```
 
@@ -927,13 +767,9 @@ $ pulsar-admin topics get-message-id options
 
 Reset position for subscription to a position that is closest to timestamp or messageId.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics reset-cursor options
 ```
 
@@ -951,13 +787,9 @@ $ pulsar-admin topics reset-cursor options
 
 Terminate a topic and don't allow any more messages to be published
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics terminate options
 ```
 
@@ -967,13 +799,9 @@ $ pulsar-admin topics terminate options
 
 Terminate a partitioned topic and don't allow any more messages to be published
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics partitioned-terminate options
 ```
 
@@ -983,13 +811,9 @@ $ pulsar-admin topics partitioned-terminate options
 
 Compact a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics compact options
 ```
 
@@ -999,13 +823,9 @@ $ pulsar-admin topics compact options
 
 Status of compaction on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics compaction-status options
 ```
 
@@ -1020,13 +840,9 @@ $ pulsar-admin topics compaction-status options
 
 Trigger offload of data from a topic to long-term storage (e.g. Amazon S3)
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics offload options
 ```
 
@@ -1041,13 +857,9 @@ $ pulsar-admin topics offload options
 
 Check the status of data offloading from a topic to long-term storage
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics offload-status options
 ```
 
@@ -1062,13 +874,9 @@ $ pulsar-admin topics offload-status options
 
 get the last commit message id of topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics last-message-id options
 ```
 
@@ -1078,13 +886,9 @@ $ pulsar-admin topics last-message-id options
 
 Get the backlog quota policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-backlog-quotas options
 ```
 
@@ -1099,13 +903,9 @@ $ pulsar-admin topics get-backlog-quotas options
 
 Set a backlog quota policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-backlog-quota options
 ```
 
@@ -1123,13 +923,9 @@ $ pulsar-admin topics set-backlog-quota options
 
 Remove a backlog quota policy from a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-backlog-quota options
 ```
 
@@ -1144,13 +940,9 @@ $ pulsar-admin topics remove-backlog-quota options
 
 Get the message TTL for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-message-ttl options
 ```
 
@@ -1165,13 +957,9 @@ $ pulsar-admin topics get-message-ttl options
 
 Set message TTL for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-message-ttl options
 ```
 
@@ -1186,13 +974,9 @@ $ pulsar-admin topics set-message-ttl options
 
 Remove message TTL for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-message-ttl options
 ```
 
@@ -1202,13 +986,9 @@ $ pulsar-admin topics remove-message-ttl options
 
 Get the retention policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-retention options
 ```
 
@@ -1223,13 +1003,9 @@ $ pulsar-admin topics get-retention options
 
 Set the retention policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-retention options
 ```
 
@@ -1245,13 +1021,9 @@ $ pulsar-admin topics set-retention options
 
 Remove the retention policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-retention options
 ```
 
@@ -1261,13 +1033,9 @@ $ pulsar-admin topics remove-retention options
 
 Enable the deduplication policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics enable-deduplication options
 ```
 
@@ -1277,13 +1045,9 @@ $ pulsar-admin topics enable-deduplication options
 
 Disable the deduplication policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics disable-deduplication options
 ```
 
@@ -1293,13 +1057,9 @@ $ pulsar-admin topics disable-deduplication options
 
 Get the deduplication policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-deduplication-enabled options
 ```
 
@@ -1309,13 +1069,9 @@ $ pulsar-admin topics get-deduplication-enabled options
 
 Enable or disable deduplication for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-deduplication options
 ```
 
@@ -1331,13 +1087,9 @@ $ pulsar-admin topics set-deduplication options
 
 Get the deduplication policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-deduplication options
 ```
 
@@ -1347,13 +1099,9 @@ $ pulsar-admin topics get-deduplication options
 
 Remove the deduplication policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-deduplication options
 ```
 
@@ -1363,13 +1111,9 @@ $ pulsar-admin topics remove-deduplication options
 
 Get deduplication snapshot interval for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-deduplication-snapshot-interval options
 ```
 
@@ -1379,13 +1123,9 @@ $ pulsar-admin topics get-deduplication-snapshot-interval options
 
 Set deduplication snapshot interval for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-deduplication-snapshot-interval options
 ```
 
@@ -1400,13 +1140,9 @@ $ pulsar-admin topics set-deduplication-snapshot-interval options
 
 Remove deduplication snapshot interval for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-deduplication-snapshot-interval options
 ```
 
@@ -1416,13 +1152,9 @@ $ pulsar-admin topics remove-deduplication-snapshot-interval options
 
 Get the delayed delivery policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-delayed-delivery options
 ```
 
@@ -1437,13 +1169,9 @@ $ pulsar-admin topics get-delayed-delivery options
 
 Set the delayed delivery policy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-delayed-delivery options
 ```
 
@@ -1460,13 +1188,9 @@ $ pulsar-admin topics set-delayed-delivery options
 
 Remove the delayed delivery policy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-delayed-delivery options
 ```
 
@@ -1476,13 +1200,9 @@ $ pulsar-admin topics remove-delayed-delivery options
 
 Get the persistence policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-persistence options
 ```
 
@@ -1492,13 +1212,9 @@ $ pulsar-admin topics get-persistence options
 
 Set the persistence policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-persistence options
 ```
 
@@ -1516,13 +1232,9 @@ $ pulsar-admin topics set-persistence options
 
 Remove the persistence policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-persistence options
 ```
 
@@ -1532,13 +1244,9 @@ $ pulsar-admin topics remove-persistence options
 
 Get the offload policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-offload-policies options
 ```
 
@@ -1553,13 +1261,9 @@ $ pulsar-admin topics get-offload-policies options
 
 Set the offload policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-offload-policies options
 ```
 
@@ -1586,13 +1290,9 @@ $ pulsar-admin topics set-offload-policies options
 
 Remove the offload policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-offload-policies options
 ```
 
@@ -1602,13 +1302,9 @@ $ pulsar-admin topics remove-offload-policies options
 
 Get message dispatch rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-dispatch-rate options
 ```
 
@@ -1623,13 +1319,9 @@ $ pulsar-admin topics get-dispatch-rate options
 
 Set message dispatch rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-dispatch-rate options
 ```
 
@@ -1647,13 +1339,9 @@ $ pulsar-admin topics set-dispatch-rate options
 
 Remove message dispatch rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-dispatch-rate options
 ```
 
@@ -1663,13 +1351,9 @@ $ pulsar-admin topics remove-dispatch-rate options
 
 Get subscription message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-subscription-dispatch-rate options
 ```
 
@@ -1684,13 +1368,9 @@ $ pulsar-admin topics get-subscription-dispatch-rate options
 
 Set subscription message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-subscription-dispatch-rate options
 ```
 
@@ -1708,13 +1388,9 @@ $ pulsar-admin topics set-subscription-dispatch-rate options
 
 Remove subscription message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-subscription-dispatch-rate options
 ```
 
@@ -1724,13 +1400,9 @@ $ pulsar-admin topics remove-subscription-dispatch-rate options
 
 Get replicator message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-replicator-dispatch-rate options
 ```
 
@@ -1745,13 +1417,9 @@ $ pulsar-admin topics get-replicator-dispatch-rate options
 
 Set replicator message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-replicator-dispatch-rate options
 ```
 
@@ -1769,13 +1437,9 @@ $ pulsar-admin topics set-replicator-dispatch-rate options
 
 Remove replicator message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-replicator-dispatch-rate options
 ```
 
@@ -1785,13 +1449,9 @@ $ pulsar-admin topics remove-replicator-dispatch-rate options
 
 Get compaction threshold for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-compaction-threshold options
 ```
 
@@ -1806,13 +1466,9 @@ $ pulsar-admin topics get-compaction-threshold options
 
 Set compaction threshold for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-compaction-threshold options
 ```
 
@@ -1827,13 +1483,9 @@ $ pulsar-admin topics set-compaction-threshold options
 
 Remove compaction threshold for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-compaction-threshold options
 ```
 
@@ -1843,13 +1495,9 @@ $ pulsar-admin topics remove-compaction-threshold options
 
 Get max unacked messages policy on consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-unacked-messages-on-consumer options
 ```
 
@@ -1864,13 +1512,9 @@ $ pulsar-admin topics get-max-unacked-messages-on-consumer options
 
 Set max unacked messages policy on consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-unacked-messages-on-consumer options
 ```
 
@@ -1885,13 +1529,9 @@ $ pulsar-admin topics set-max-unacked-messages-on-consumer options
 
 Remove max unacked messages policy on consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-unacked-messages-on-consumer options
 ```
 
@@ -1901,13 +1541,9 @@ $ pulsar-admin topics remove-max-unacked-messages-on-consumer options
 
 Get max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-unacked-messages-on-subscription options
 ```
 
@@ -1922,13 +1558,9 @@ $ pulsar-admin topics get-max-unacked-messages-on-subscription options
 
 Set max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-unacked-messages-on-subscription options
 ```
 
@@ -1943,13 +1575,9 @@ $ pulsar-admin topics set-max-unacked-messages-on-subscription options
 
 Remove max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-unacked-messages-on-subscription options
 ```
 
@@ -1959,13 +1587,9 @@ $ pulsar-admin topics remove-max-unacked-messages-on-subscription options
 
 Get max unacked messages policy on consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-unacked-messages-per-consumer options
 ```
 
@@ -1980,13 +1604,9 @@ $ pulsar-admin topics get-max-unacked-messages-per-consumer options
 
 Set max unacked messages policy on consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-unacked-messages-per-consumer options
 ```
 
@@ -2001,13 +1621,9 @@ $ pulsar-admin topics set-max-unacked-messages-per-consumer options
 
 Remove max unacked messages policy on consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-unacked-messages-per-consumer options
 ```
 
@@ -2017,13 +1633,9 @@ $ pulsar-admin topics remove-max-unacked-messages-per-consumer options
 
 Get max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-unacked-messages-per-subscription options
 ```
 
@@ -2038,13 +1650,9 @@ $ pulsar-admin topics get-max-unacked-messages-per-subscription options
 
 Set max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-unacked-messages-per-subscription options
 ```
 
@@ -2059,13 +1667,9 @@ $ pulsar-admin topics set-max-unacked-messages-per-subscription options
 
 Remove max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-unacked-messages-per-subscription options
 ```
 
@@ -2075,13 +1679,9 @@ $ pulsar-admin topics remove-max-unacked-messages-per-subscription options
 
 Get publish rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-publish-rate options
 ```
 
@@ -2091,13 +1691,9 @@ $ pulsar-admin topics get-publish-rate options
 
 Set publish rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-publish-rate options
 ```
 
@@ -2113,13 +1709,9 @@ $ pulsar-admin topics set-publish-rate options
 
 Remove publish rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-publish-rate options
 ```
 
@@ -2129,13 +1721,9 @@ $ pulsar-admin topics remove-publish-rate options
 
 Set subscription types enabled for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-subscription-types-enabled options
 ```
 
@@ -2150,13 +1738,9 @@ $ pulsar-admin topics set-subscription-types-enabled options
 
 Get subscription types enabled for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-subscription-types-enabled options
 ```
 
@@ -2166,13 +1750,9 @@ $ pulsar-admin topics get-subscription-types-enabled options
 
 Remove subscription types enabled for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-subscription-types-enabled options
 ```
 
@@ -2182,13 +1762,9 @@ $ pulsar-admin topics remove-subscription-types-enabled options
 
 Get max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-maxProducers options
 ```
 
@@ -2203,13 +1779,9 @@ $ pulsar-admin topics get-maxProducers options
 
 Set max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-maxProducers options
 ```
 
@@ -2224,13 +1796,9 @@ $ pulsar-admin topics set-maxProducers options
 
 Remove max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-maxProducers options
 ```
 
@@ -2240,13 +1808,9 @@ $ pulsar-admin topics remove-maxProducers options
 
 Get max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-producers options
 ```
 
@@ -2261,13 +1825,9 @@ $ pulsar-admin topics get-max-producers options
 
 Set max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-producers options
 ```
 
@@ -2282,13 +1842,9 @@ $ pulsar-admin topics set-max-producers options
 
 Remove max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-producers options
 ```
 
@@ -2298,13 +1854,9 @@ $ pulsar-admin topics remove-max-producers options
 
 Get max number of subscriptions for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-subscriptions options
 ```
 
@@ -2314,13 +1866,9 @@ $ pulsar-admin topics get-max-subscriptions options
 
 Set max number of subscriptions for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-subscriptions options
 ```
 
@@ -2335,13 +1883,9 @@ $ pulsar-admin topics set-max-subscriptions options
 
 Remove max number of subscriptions for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-subscriptions options
 ```
 
@@ -2351,13 +1895,9 @@ $ pulsar-admin topics remove-max-subscriptions options
 
 Get max message size for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-message-size options
 ```
 
@@ -2367,13 +1907,9 @@ $ pulsar-admin topics get-max-message-size options
 
 Set max message size for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-message-size options
 ```
 
@@ -2388,13 +1924,9 @@ $ pulsar-admin topics set-max-message-size options
 
 Remove max message size for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-message-size options
 ```
 
@@ -2404,13 +1936,9 @@ $ pulsar-admin topics remove-max-message-size options
 
 Get max consumers per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-consumers-per-subscription options
 ```
 
@@ -2420,13 +1948,9 @@ $ pulsar-admin topics get-max-consumers-per-subscription options
 
 Set max consumers per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-consumers-per-subscription options
 ```
 
@@ -2441,13 +1965,9 @@ $ pulsar-admin topics set-max-consumers-per-subscription options
 
 Remove max consumers per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-consumers-per-subscription options
 ```
 
@@ -2457,13 +1977,9 @@ $ pulsar-admin topics remove-max-consumers-per-subscription options
 
 Get the inactive topic policies on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-inactive-topic-policies options
 ```
 
@@ -2478,13 +1994,9 @@ $ pulsar-admin topics get-inactive-topic-policies options
 
 Set the inactive topic policies on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-inactive-topic-policies options
 ```
 
@@ -2502,13 +2014,9 @@ $ pulsar-admin topics set-inactive-topic-policies options
 
 Remove inactive topic policies from a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-inactive-topic-policies options
 ```
 
@@ -2518,13 +2026,9 @@ $ pulsar-admin topics remove-inactive-topic-policies options
 
 Get max number of consumers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-max-consumers options
 ```
 
@@ -2539,13 +2043,9 @@ $ pulsar-admin topics get-max-consumers options
 
 Set max number of consumers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-max-consumers options
 ```
 
@@ -2560,13 +2060,9 @@ $ pulsar-admin topics set-max-consumers options
 
 Remove max number of consumers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-max-consumers options
 ```
 
@@ -2576,13 +2072,9 @@ $ pulsar-admin topics remove-max-consumers options
 
 Get consumer subscribe rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-subscribe-rate options
 ```
 
@@ -2597,13 +2089,9 @@ $ pulsar-admin topics get-subscribe-rate options
 
 Set consumer subscribe rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-subscribe-rate options
 ```
 
@@ -2619,13 +2107,9 @@ $ pulsar-admin topics set-subscribe-rate options
 
 Remove consumer subscribe rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-subscribe-rate options
 ```
 
@@ -2635,13 +2119,9 @@ $ pulsar-admin topics remove-subscribe-rate options
 
 Enable or disable a replicated subscription on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-replicated-subscription-status options
 ```
 
@@ -2658,13 +2138,9 @@ $ pulsar-admin topics set-replicated-subscription-status options
 
 Get replicated subscription status on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-replicated-subscription-status options
 ```
 
@@ -2679,13 +2155,9 @@ $ pulsar-admin topics get-replicated-subscription-status options
 
 Calculate backlog size by a message ID (in bytes).
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-backlog-size options
 ```
 
@@ -2700,13 +2172,9 @@ $ pulsar-admin topics get-backlog-size options
 
 Analyze the backlog of a subscription.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics analyze-backlog options
 ```
 
@@ -2722,13 +2190,9 @@ $ pulsar-admin topics analyze-backlog options
 
 Get the replication clusters for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-replication-clusters options
 ```
 
@@ -2743,13 +2207,9 @@ $ pulsar-admin topics get-replication-clusters options
 
 Set the replication clusters for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-replication-clusters options
 ```
 
@@ -2764,13 +2224,9 @@ $ pulsar-admin topics set-replication-clusters options
 
 Remove the replication clusters for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-replication-clusters options
 ```
 
@@ -2780,13 +2236,9 @@ $ pulsar-admin topics remove-replication-clusters options
 
 Get the shadow topics for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-shadow-topics options
 ```
 
@@ -2796,13 +2248,9 @@ $ pulsar-admin topics get-shadow-topics options
 
 Set the shadow topics for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-shadow-topics options
 ```
 
@@ -2817,13 +2265,9 @@ $ pulsar-admin topics set-shadow-topics options
 
 Remove the shadow topics for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics remove-shadow-topics options
 ```
 
@@ -2833,13 +2277,9 @@ $ pulsar-admin topics remove-shadow-topics options
 
 Get the schema validation enforced
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics get-schema-validation-enforce options
 ```
 
@@ -2854,13 +2294,9 @@ $ pulsar-admin topics get-schema-validation-enforce options
 
 Set the schema whether open schema validation enforced
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topics set-schema-validation-enforce options
 ```
 

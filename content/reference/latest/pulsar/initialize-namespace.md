@@ -1,16 +1,8 @@
-------------
-
 # initialize-namespace
 
-### Usage
-
-`$initialize-namespace`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar initialize-namespace options
 ```
 

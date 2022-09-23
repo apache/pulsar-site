@@ -1,17 +1,9 @@
-------------
-
 # broker-stats
-
-### Usage
-
-`$broker-stats`
-
-------------
 
 Operations to collect broker statistics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats subcommand
 ```
 
@@ -26,13 +18,9 @@ $ pulsar-admin broker-stats subcommand
 
 dump metrics for Monitoring
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats monitoring-metrics options
 ```
 
@@ -47,13 +35,9 @@ $ pulsar-admin broker-stats monitoring-metrics options
 
 dump mbean stats
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats mbeans options
 ```
 
@@ -68,13 +52,9 @@ $ pulsar-admin broker-stats mbeans options
 
 dump topics stats
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats topics options
 ```
 
@@ -89,13 +69,9 @@ $ pulsar-admin broker-stats topics options
 
 dump allocator stats
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats allocator-stats options
 ```
 
@@ -105,13 +81,9 @@ $ pulsar-admin broker-stats allocator-stats options
 
 dump broker load-report
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats load-report options
 ```
 

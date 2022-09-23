@@ -1,17 +1,9 @@
-------------
-
 # sources
-
-### Usage
-
-`$sources`
-
-------------
 
 Interface for managing Pulsar IO Sources (ingress data into Pulsar)
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources subcommand
 ```
 
@@ -33,13 +25,9 @@ $ pulsar-admin sources subcommand
 
 Submit a Pulsar IO source connector to run in a Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources create options
 ```
 
@@ -74,13 +62,9 @@ $ pulsar-admin sources create options
 
 Update a Pulsar IO source connector
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources update options
 ```
 
@@ -116,13 +100,9 @@ $ pulsar-admin sources update options
 
 Stops a Pulsar IO source connector
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources delete options
 ```
 
@@ -139,13 +119,9 @@ $ pulsar-admin sources delete options
 
 Gets the information about a Pulsar IO source connector
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources get options
 ```
 
@@ -162,13 +138,9 @@ $ pulsar-admin sources get options
 
 Check the current status of a Pulsar Source
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources status options
 ```
 
@@ -186,13 +158,9 @@ $ pulsar-admin sources status options
 
 List all running Pulsar IO source connectors
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources list options
 ```
 
@@ -208,13 +176,9 @@ $ pulsar-admin sources list options
 
 Stop source instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources stop options
 ```
 
@@ -232,13 +196,9 @@ $ pulsar-admin sources stop options
 
 Start source instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources start options
 ```
 
@@ -256,13 +216,9 @@ $ pulsar-admin sources start options
 
 Restart source instance
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources restart options
 ```
 
@@ -280,13 +236,9 @@ $ pulsar-admin sources restart options
 
 Run a Pulsar IO source connector locally (rather than deploying it to the Pulsar cluster)
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources localrun options
 ```
 
@@ -332,13 +284,9 @@ $ pulsar-admin sources localrun options
 
 Get the list of Pulsar IO connector sources supported by Pulsar cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources available-sources options
 ```
 
@@ -348,13 +296,9 @@ $ pulsar-admin sources available-sources options
 
 Reload the available built-in connectors
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources reload options
 ```
 

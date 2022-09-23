@@ -1,16 +1,8 @@
-------------
-
 # proxy
 
-### Usage
-
-`$proxy`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar proxy options
 ```
 

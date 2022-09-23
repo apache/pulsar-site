@@ -1,17 +1,9 @@
-------------
-
 # packages
-
-### Usage
-
-`$packages`
-
-------------
 
 Operations about packages
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages subcommand
 ```
 
@@ -28,13 +20,9 @@ $ pulsar-admin packages subcommand
 
 Get a package metadata information.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages get-metadata options
 ```
 
@@ -44,13 +32,9 @@ $ pulsar-admin packages get-metadata options
 
 Update a package metadata information.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages update-metadata options
 ```
 
@@ -67,13 +51,9 @@ $ pulsar-admin packages update-metadata options
 
 Upload a package
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages upload options
 ```
 
@@ -91,13 +71,9 @@ $ pulsar-admin packages upload options
 
 Download a package
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages download options
 ```
 
@@ -112,13 +88,9 @@ $ pulsar-admin packages download options
 
 List all packages with given type in the specified namespace
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages list options
 ```
 
@@ -133,13 +105,9 @@ $ pulsar-admin packages list options
 
 List all versions of the given package
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages list-versions options
 ```
 
@@ -149,13 +117,9 @@ $ pulsar-admin packages list-versions options
 
 Delete a package
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin packages delete options
 ```
 

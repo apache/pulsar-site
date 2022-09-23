@@ -1016,14 +1016,14 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
+        "commandData" : {
+          "type" : "string"
+        },
         "tlsCertificates" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/Certificate"
           }
-        },
-        "commandData" : {
-          "type" : "string"
         },
         "httpAuthType" : {
           "type" : "string"
@@ -1300,17 +1300,17 @@
         "attributes" : {
           "$ref" : "#/definitions/ContextAttributes"
         },
-        "rootName" : {
-          "type" : "string"
+        "fullRootName" : {
+          "$ref" : "#/definitions/PropertyName"
         },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
         },
-        "fullRootName" : {
-          "$ref" : "#/definitions/PropertyName"
-        },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
+        },
+        "rootName" : {
+          "type" : "string"
         },
         "locale" : {
           "$ref" : "#/definitions/Locale"
@@ -1642,13 +1642,6 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
-        "lastInvocation" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
         "userMetrics" : {
           "type" : "object",
           "additionalProperties" : {
@@ -1656,15 +1649,14 @@
             "format" : "double"
           }
         },
-        "avgProcessLatency" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "userExceptionsTotal" : {
+        "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
         },
-        "systemExceptionsTotal" : {
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
+        },
+        "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
         },
@@ -1672,24 +1664,24 @@
           "type" : "integer",
           "format" : "int64"
         },
-        "receivedTotal" : {
+        "systemExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "userExceptionsTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "avgProcessLatency" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
     "FunctionInstanceStatsDataBase" : {
       "type" : "object",
       "properties" : {
-        "avgProcessLatency" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "userExceptionsTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "systemExceptionsTotal" : {
+        "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
         },
@@ -1697,9 +1689,17 @@
           "type" : "integer",
           "format" : "int64"
         },
-        "receivedTotal" : {
+        "systemExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "userExceptionsTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "avgProcessLatency" : {
+          "type" : "number",
+          "format" : "double"
         }
       }
     },
@@ -1967,6 +1967,9 @@
         "abstract" : {
           "type" : "boolean"
         },
+        "contentType" : {
+          "$ref" : "#/definitions/JavaType"
+        },
         "bindings" : {
           "$ref" : "#/definitions/TypeBindings"
         },
@@ -1983,9 +1986,6 @@
           "type" : "boolean"
         },
         "javaLangObject" : {
-          "type" : "boolean"
-        },
-        "enumType" : {
           "type" : "boolean"
         },
         "containerType" : {
@@ -2018,8 +2018,8 @@
         "mapLikeType" : {
           "type" : "boolean"
         },
-        "contentType" : {
-          "$ref" : "#/definitions/JavaType"
+        "enumType" : {
+          "type" : "boolean"
         },
         "typeName" : {
           "type" : "string"
@@ -2055,6 +2055,9 @@
     "JsonGenerator" : {
       "type" : "object",
       "properties" : {
+        "closed" : {
+          "type" : "boolean"
+        },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
         },
@@ -2091,9 +2094,6 @@
         },
         "outputContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
-        },
-        "closed" : {
-          "type" : "boolean"
         }
       }
     },
@@ -2134,15 +2134,14 @@
         "text" : {
           "type" : "string"
         },
+        "closed" : {
+          "type" : "boolean"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
             "type" : "string"
           }
-        },
-        "intValue" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "booleanValue" : {
           "type" : "boolean"
@@ -2170,8 +2169,9 @@
         "objectId" : {
           "type" : "object"
         },
-        "typeId" : {
-          "type" : "object"
+        "intValue" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "schema" : {
           "$ref" : "#/definitions/FormatSchema"
@@ -2185,9 +2185,6 @@
         },
         "currentName" : {
           "type" : "string"
-        },
-        "tokenLocation" : {
-          "$ref" : "#/definitions/JsonLocation"
         },
         "featureMask" : {
           "type" : "integer",
@@ -2203,6 +2200,9 @@
         },
         "parsingContext" : {
           "$ref" : "#/definitions/JsonStreamContext"
+        },
+        "tokenLocation" : {
+          "$ref" : "#/definitions/JsonLocation"
         },
         "currentLocation" : {
           "$ref" : "#/definitions/JsonLocation"
@@ -2268,8 +2268,8 @@
         "currentValue" : {
           "type" : "object"
         },
-        "closed" : {
-          "type" : "boolean"
+        "typeId" : {
+          "type" : "object"
         }
       }
     },
@@ -2404,12 +2404,36 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "keyBytes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
         "data" : {
           "type" : "array",
           "items" : {
             "type" : "string",
             "format" : "byte"
           }
+        },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "topicName" : {
           "type" : "string"
@@ -2448,30 +2472,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "keyBytes" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string",
-            "format" : "byte"
-          }
         }
       }
     },
@@ -2753,11 +2753,11 @@
     "Schema" : {
       "type" : "object",
       "properties" : {
-        "schemaInfo" : {
-          "$ref" : "#/definitions/SchemaInfo"
-        },
         "nativeSchema" : {
           "type" : "object"
+        },
+        "schemaInfo" : {
+          "$ref" : "#/definitions/SchemaInfo"
         }
       }
     },
@@ -2781,26 +2781,26 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "schemaDefinition" : {
+          "type" : "string"
+        },
         "schema" : {
           "type" : "array",
           "items" : {
             "type" : "string",
             "format" : "byte"
           }
-        },
-        "schemaDefinition" : {
-          "type" : "string"
         }
       }
     },
     "SchemaObject" : {
       "type" : "object",
       "properties" : {
-        "schemaInfo" : {
-          "$ref" : "#/definitions/SchemaInfo"
-        },
         "nativeSchema" : {
           "type" : "object"
+        },
+        "schemaInfo" : {
+          "$ref" : "#/definitions/SchemaInfo"
         }
       }
     },
@@ -2830,17 +2830,17 @@
         "attributes" : {
           "$ref" : "#/definitions/ContextAttributes"
         },
-        "rootName" : {
-          "type" : "string"
+        "fullRootName" : {
+          "$ref" : "#/definitions/PropertyName"
         },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
         },
-        "fullRootName" : {
-          "$ref" : "#/definitions/PropertyName"
-        },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
+        },
+        "rootName" : {
+          "type" : "string"
         },
         "locale" : {
           "$ref" : "#/definitions/Locale"
@@ -2883,6 +2883,9 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
+        "generator" : {
+          "$ref" : "#/definitions/JsonGenerator"
+        },
         "config" : {
           "$ref" : "#/definitions/SerializationConfig"
         },
@@ -2900,9 +2903,6 @@
         },
         "defaultNullKeySerializer" : {
           "$ref" : "#/definitions/JsonSerializerObject"
-        },
-        "generator" : {
-          "$ref" : "#/definitions/JsonGenerator"
         }
       }
     },

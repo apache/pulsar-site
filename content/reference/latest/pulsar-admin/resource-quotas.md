@@ -1,17 +1,9 @@
-------------
-
 # resource-quotas
-
-### Usage
-
-`$resource-quotas`
-
-------------
 
 Operations about resource quotas
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resource-quotas subcommand
 ```
 
@@ -24,13 +16,9 @@ $ pulsar-admin resource-quotas subcommand
 
 Get the resource quota for specified namespace bundle, or default quota if no namespace/bundle specified.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resource-quotas get options
 ```
 
@@ -46,13 +34,9 @@ $ pulsar-admin resource-quotas get options
 
 Set the resource quota for specified namespace bundle, or default quota if no namespace/bundle specified.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resource-quotas set options
 ```
 
@@ -74,13 +58,9 @@ $ pulsar-admin resource-quotas set options
 
 Reset the specified namespace bundle's resource quota to default value.
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resource-quotas reset-namespace-bundle-quota options
 ```
 

@@ -1,16 +1,8 @@
-------------
-
 # functions-worker
 
-### Usage
-
-`$functions-worker`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar functions-worker options
 ```
 

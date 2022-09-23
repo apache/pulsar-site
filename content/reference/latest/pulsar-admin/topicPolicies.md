@@ -1,17 +1,9 @@
-------------
-
 # topicPolicies
-
-### Usage
-
-`$topicPolicies`
-
-------------
 
 Operations on persistent topics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies subcommand
 ```
 
@@ -96,13 +88,9 @@ $ pulsar-admin topicPolicies subcommand
 
 Get the message TTL for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-message-ttl options
 ```
 
@@ -118,13 +106,9 @@ $ pulsar-admin topicPolicies get-message-ttl options
 
 Set message TTL for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-message-ttl options
 ```
 
@@ -140,13 +124,9 @@ $ pulsar-admin topicPolicies set-message-ttl options
 
 Remove message TTL for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
 ```
 
@@ -161,13 +141,9 @@ $ pulsar-admin topicPolicies remove-message-ttl options
 
 Get max unacked messages policy per consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-unacked-messages-per-consumer options
 ```
 
@@ -183,13 +159,9 @@ $ pulsar-admin topicPolicies get-max-unacked-messages-per-consumer options
 
 Set max unacked messages policy per consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-unacked-messages-per-consumer options
 ```
 
@@ -205,13 +177,9 @@ $ pulsar-admin topicPolicies set-max-unacked-messages-per-consumer options
 
 Remove max unacked messages policy per consumer for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-unacked-messages-per-consumer options
 ```
 
@@ -226,13 +194,9 @@ $ pulsar-admin topicPolicies remove-max-unacked-messages-per-consumer options
 
 Get max consumers per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-consumers-per-subscription options
 ```
 
@@ -247,13 +211,9 @@ $ pulsar-admin topicPolicies get-max-consumers-per-subscription options
 
 Set max consumers per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-consumers-per-subscription options
 ```
 
@@ -269,13 +229,9 @@ $ pulsar-admin topicPolicies set-max-consumers-per-subscription options
 
 Remove max consumers per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-consumers-per-subscription options
 ```
 
@@ -290,13 +246,9 @@ $ pulsar-admin topicPolicies remove-max-consumers-per-subscription options
 
 Set subscription types enabled for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-subscription-types-enabled options
 ```
 
@@ -312,13 +264,9 @@ $ pulsar-admin topicPolicies set-subscription-types-enabled options
 
 Get subscription types enabled for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-subscription-types-enabled options
 ```
 
@@ -333,13 +281,9 @@ $ pulsar-admin topicPolicies get-subscription-types-enabled options
 
 Remove subscription types enabled for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-subscription-types-enabled options
 ```
 
@@ -354,13 +298,9 @@ $ pulsar-admin topicPolicies remove-subscription-types-enabled options
 
 Get the retention policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-retention options
 ```
 
@@ -376,13 +316,9 @@ $ pulsar-admin topicPolicies get-retention options
 
 Set the retention policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-retention options
 ```
 
@@ -399,13 +335,9 @@ $ pulsar-admin topicPolicies set-retention options
 
 Remove the retention policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-retention options
 ```
 
@@ -420,13 +352,9 @@ $ pulsar-admin topicPolicies remove-retention options
 
 Get the backlog quota policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-backlog-quota options
 ```
 
@@ -442,13 +370,9 @@ $ pulsar-admin topicPolicies get-backlog-quota options
 
 Set a backlog quota policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-backlog-quota options
 ```
 
@@ -467,13 +391,9 @@ $ pulsar-admin topicPolicies set-backlog-quota options
 
 Remove a backlog quota policy from a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-backlog-quota options
 ```
 
@@ -489,13 +409,9 @@ $ pulsar-admin topicPolicies remove-backlog-quota options
 
 Get max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-producers options
 ```
 
@@ -511,13 +427,9 @@ $ pulsar-admin topicPolicies get-max-producers options
 
 Set max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-producers options
 ```
 
@@ -533,13 +445,9 @@ $ pulsar-admin topicPolicies set-max-producers options
 
 Remove max number of producers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-producers options
 ```
 
@@ -554,13 +462,9 @@ $ pulsar-admin topicPolicies remove-max-producers options
 
 Get max message size for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-message-size options
 ```
 
@@ -575,13 +479,9 @@ $ pulsar-admin topicPolicies get-max-message-size options
 
 Set max message size for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-message-size options
 ```
 
@@ -597,13 +497,9 @@ $ pulsar-admin topicPolicies set-max-message-size options
 
 Remove max message size for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-message-size options
 ```
 
@@ -618,13 +514,9 @@ $ pulsar-admin topicPolicies remove-max-message-size options
 
 Enable or disable status for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-deduplication options
 ```
 
@@ -641,13 +533,9 @@ $ pulsar-admin topicPolicies set-deduplication options
 
 Get the deduplication status for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-deduplication options
 ```
 
@@ -662,13 +550,9 @@ $ pulsar-admin topicPolicies get-deduplication options
 
 Remove the deduplication status for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-deduplication options
 ```
 
@@ -683,13 +567,9 @@ $ pulsar-admin topicPolicies remove-deduplication options
 
 Get deduplication snapshot interval for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-deduplication-snapshot-interval options
 ```
 
@@ -704,13 +584,9 @@ $ pulsar-admin topicPolicies get-deduplication-snapshot-interval options
 
 Set deduplication snapshot interval for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-deduplication-snapshot-interval options
 ```
 
@@ -726,13 +602,9 @@ $ pulsar-admin topicPolicies set-deduplication-snapshot-interval options
 
 Remove deduplication snapshot interval for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-deduplication-snapshot-interval options
 ```
 
@@ -747,13 +619,9 @@ $ pulsar-admin topicPolicies remove-deduplication-snapshot-interval options
 
 Get the persistence policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-persistence options
 ```
 
@@ -768,13 +636,9 @@ $ pulsar-admin topicPolicies get-persistence options
 
 Set the persistence policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-persistence options
 ```
 
@@ -793,13 +657,9 @@ $ pulsar-admin topicPolicies set-persistence options
 
 Remove the persistence policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-persistence options
 ```
 
@@ -814,13 +674,9 @@ $ pulsar-admin topicPolicies remove-persistence options
 
 Get subscription message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-subscription-dispatch-rate options
 ```
 
@@ -837,13 +693,9 @@ $ pulsar-admin topicPolicies get-subscription-dispatch-rate options
 
 Set subscription message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-subscription-dispatch-rate options
 ```
 
@@ -863,13 +715,9 @@ $ pulsar-admin topicPolicies set-subscription-dispatch-rate options
 
 Remove subscription message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-subscription-dispatch-rate options
 ```
 
@@ -885,13 +733,9 @@ $ pulsar-admin topicPolicies remove-subscription-dispatch-rate options
 
 Get replicator message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-replicator-dispatch-rate options
 ```
 
@@ -907,13 +751,9 @@ $ pulsar-admin topicPolicies get-replicator-dispatch-rate options
 
 Set replicator message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-replicator-dispatch-rate options
 ```
 
@@ -932,13 +772,9 @@ $ pulsar-admin topicPolicies set-replicator-dispatch-rate options
 
 Remove replicator message-dispatch-rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-replicator-dispatch-rate options
 ```
 
@@ -953,13 +789,9 @@ $ pulsar-admin topicPolicies remove-replicator-dispatch-rate options
 
 Get publish rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-publish-rate options
 ```
 
@@ -974,13 +806,9 @@ $ pulsar-admin topicPolicies get-publish-rate options
 
 Set publish rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-publish-rate options
 ```
 
@@ -997,13 +825,9 @@ $ pulsar-admin topicPolicies set-publish-rate options
 
 Remove publish rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-publish-rate options
 ```
 
@@ -1018,13 +842,9 @@ $ pulsar-admin topicPolicies remove-publish-rate options
 
 Get compaction threshold for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-compaction-threshold options
 ```
 
@@ -1040,13 +860,9 @@ $ pulsar-admin topicPolicies get-compaction-threshold options
 
 Set compaction threshold for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-compaction-threshold options
 ```
 
@@ -1062,13 +878,9 @@ $ pulsar-admin topicPolicies set-compaction-threshold options
 
 Remove compaction threshold for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-compaction-threshold options
 ```
 
@@ -1083,13 +895,9 @@ $ pulsar-admin topicPolicies remove-compaction-threshold options
 
 Get consumer subscribe rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-subscribe-rate options
 ```
 
@@ -1105,13 +913,9 @@ $ pulsar-admin topicPolicies get-subscribe-rate options
 
 Set consumer subscribe rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-subscribe-rate options
 ```
 
@@ -1128,13 +932,9 @@ $ pulsar-admin topicPolicies set-subscribe-rate options
 
 Remove consumer subscribe rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-subscribe-rate options
 ```
 
@@ -1149,13 +949,9 @@ $ pulsar-admin topicPolicies remove-subscribe-rate options
 
 Get max number of consumers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-consumers options
 ```
 
@@ -1171,13 +967,9 @@ $ pulsar-admin topicPolicies get-max-consumers options
 
 Set max number of consumers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-consumers options
 ```
 
@@ -1193,13 +985,9 @@ $ pulsar-admin topicPolicies set-max-consumers options
 
 Remove max number of consumers for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-consumers options
 ```
 
@@ -1214,13 +1002,9 @@ $ pulsar-admin topicPolicies remove-max-consumers options
 
 Get the delayed delivery policy for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-delayed-delivery options
 ```
 
@@ -1236,13 +1020,9 @@ $ pulsar-admin topicPolicies get-delayed-delivery options
 
 Set the delayed delivery policy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-delayed-delivery options
 ```
 
@@ -1260,13 +1040,9 @@ $ pulsar-admin topicPolicies set-delayed-delivery options
 
 Remove the delayed delivery policy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-delayed-delivery options
 ```
 
@@ -1281,13 +1057,9 @@ $ pulsar-admin topicPolicies remove-delayed-delivery options
 
 Get message dispatch rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-dispatch-rate options
 ```
 
@@ -1303,13 +1075,9 @@ $ pulsar-admin topicPolicies get-dispatch-rate options
 
 Set message dispatch rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-dispatch-rate options
 ```
 
@@ -1328,13 +1096,9 @@ $ pulsar-admin topicPolicies set-dispatch-rate options
 
 Remove message dispatch rate for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-dispatch-rate options
 ```
 
@@ -1349,13 +1113,9 @@ $ pulsar-admin topicPolicies remove-dispatch-rate options
 
 Get the offload policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-offload-policies options
 ```
 
@@ -1371,13 +1131,9 @@ $ pulsar-admin topicPolicies get-offload-policies options
 
 Set the offload policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-offload-policies options
 ```
 
@@ -1405,13 +1161,9 @@ $ pulsar-admin topicPolicies set-offload-policies options
 
 Remove the offload policies for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-offload-policies options
 ```
 
@@ -1426,13 +1178,9 @@ $ pulsar-admin topicPolicies remove-offload-policies options
 
 Get max unacked messages policy per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-unacked-messages-per-subscription options
 ```
 
@@ -1448,13 +1196,9 @@ $ pulsar-admin topicPolicies get-max-unacked-messages-per-subscription options
 
 Set max unacked messages policy on subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-unacked-messages-per-subscription options
 ```
 
@@ -1470,13 +1214,9 @@ $ pulsar-admin topicPolicies set-max-unacked-messages-per-subscription options
 
 Remove max unacked messages policy per subscription for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-unacked-messages-per-subscription options
 ```
 
@@ -1491,13 +1231,9 @@ $ pulsar-admin topicPolicies remove-max-unacked-messages-per-subscription option
 
 Get the inactive topic policies on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-inactive-topic-policies options
 ```
 
@@ -1513,13 +1249,9 @@ $ pulsar-admin topicPolicies get-inactive-topic-policies options
 
 Set the inactive topic policies on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-inactive-topic-policies options
 ```
 
@@ -1538,13 +1270,9 @@ $ pulsar-admin topicPolicies set-inactive-topic-policies options
 
 Remove inactive topic policies from a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-inactive-topic-policies options
 ```
 
@@ -1559,13 +1287,9 @@ $ pulsar-admin topicPolicies remove-inactive-topic-policies options
 
 Get max subscriptions for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-max-subscriptions-per-topic options
 ```
 
@@ -1580,13 +1304,9 @@ $ pulsar-admin topicPolicies get-max-subscriptions-per-topic options
 
 Set max subscriptions for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-max-subscriptions-per-topic options
 ```
 
@@ -1602,13 +1322,9 @@ $ pulsar-admin topicPolicies set-max-subscriptions-per-topic options
 
 Remove max subscriptions for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-max-subscriptions-per-topic options
 ```
 
@@ -1623,13 +1339,9 @@ $ pulsar-admin topicPolicies remove-max-subscriptions-per-topic options
 
 Remove schema compatibility strategy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-schema-compatibility-strategy options
 ```
 
@@ -1639,13 +1351,9 @@ $ pulsar-admin topicPolicies remove-schema-compatibility-strategy options
 
 Set schema compatibility strategy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-schema-compatibility-strategy options
 ```
 
@@ -1660,13 +1368,9 @@ $ pulsar-admin topicPolicies set-schema-compatibility-strategy options
 
 Get schema compatibility strategy on a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-schema-compatibility-strategy options
 ```
 
@@ -1681,13 +1385,9 @@ $ pulsar-admin topicPolicies get-schema-compatibility-strategy options
 
 Get entry filters for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies get-entry-filters-per-topic options
 ```
 
@@ -1703,13 +1403,9 @@ $ pulsar-admin topicPolicies get-entry-filters-per-topic options
 
 Set entry filters for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies set-entry-filters-per-topic options
 ```
 
@@ -1725,13 +1421,9 @@ $ pulsar-admin topicPolicies set-entry-filters-per-topic options
 
 Remove entry filters for a topic
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin topicPolicies remove-entry-filters-per-topic options
 ```
 

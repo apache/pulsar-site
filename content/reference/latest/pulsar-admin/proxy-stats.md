@@ -1,17 +1,9 @@
-------------
-
 # proxy-stats
-
-### Usage
-
-`$proxy-stats`
-
-------------
 
 Operations to collect Proxy statistics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin proxy-stats subcommand
 ```
 
@@ -23,13 +15,9 @@ $ pulsar-admin proxy-stats subcommand
 
 dump connections metrics for Monitoring
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin proxy-stats connections options
 ```
 
@@ -44,13 +32,9 @@ $ pulsar-admin proxy-stats connections options
 
 dump topics metrics for Monitoring
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin proxy-stats topics options
 ```
 

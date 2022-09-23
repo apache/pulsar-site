@@ -1,17 +1,9 @@
-------------
-
 # functions-worker
-
-### Usage
-
-`$functions-worker`
-
-------------
 
 Operations to collect function-worker statistics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker subcommand
 ```
 
@@ -27,13 +19,9 @@ $ pulsar-admin functions-worker subcommand
 
 Dump all functions stats running on this broker
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker function-stats options
 ```
 
@@ -43,13 +31,9 @@ $ pulsar-admin functions-worker function-stats options
 
 Dump metrics for Monitoring
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker monitoring-metrics options
 ```
 
@@ -59,13 +43,9 @@ $ pulsar-admin functions-worker monitoring-metrics options
 
 Get all workers belonging to this cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker get-cluster options
 ```
 
@@ -75,13 +55,9 @@ $ pulsar-admin functions-worker get-cluster options
 
 Get the leader of the worker cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker get-cluster-leader options
 ```
 
@@ -91,13 +67,9 @@ $ pulsar-admin functions-worker get-cluster-leader options
 
 Get the assignments of the functions across the worker cluster
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker get-function-assignments options
 ```
 
@@ -107,13 +79,9 @@ $ pulsar-admin functions-worker get-function-assignments options
 
 Triggers a rebalance of functions to workers
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker rebalance options
 ```
 

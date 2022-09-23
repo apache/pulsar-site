@@ -1,16 +1,8 @@
-------------
-
 # initialize-cluster-metadata
 
-### Usage
-
-`$initialize-cluster-metadata`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar initialize-cluster-metadata options
 ```
 

@@ -1,16 +1,8 @@
-------------
-
 # compact-topic
 
-### Usage
-
-`$compact-topic`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar compact-topic options
 ```
 

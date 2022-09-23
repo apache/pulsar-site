@@ -1,17 +1,9 @@
-------------
-
-# produce
-
-### Usage
-
-`$produce`
-
-------------
+## produce
 
 Produce messages to a specified topic
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-client produce [options]
 ```
 
@@ -33,20 +25,12 @@ $ pulsar-client produce [options]
 | `-vs, --value-schema` | Schema type (can be bytes,avro,json,string...)|bytes|
 | `-r, --rate` | Rate (in msg/sec) at which to produce, value 0 means to produce messages as fast as possible.|0.0|
 
-------------
-
-# consume
-
-### Usage
-
-`$consume`
-
-------------
+## consume
 
 Consume messages from a specified topic
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-client consume [options]
 ```
 

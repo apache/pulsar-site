@@ -1,17 +1,9 @@
-------------
-
 # tenants
-
-### Usage
-
-`$tenants`
-
-------------
 
 Operations about tenants
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin tenants subcommand
 ```
 
@@ -26,13 +18,9 @@ $ pulsar-admin tenants subcommand
 
 List the existing tenants
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin tenants list options
 ```
 
@@ -42,13 +30,9 @@ $ pulsar-admin tenants list options
 
 Gets the configuration of a tenant
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin tenants get options
 ```
 
@@ -58,13 +42,9 @@ $ pulsar-admin tenants get options
 
 Creates a new tenant
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin tenants create options
 ```
 
@@ -80,13 +60,9 @@ $ pulsar-admin tenants create options
 
 Updates the configuration for a tenant
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin tenants update options
 ```
 
@@ -102,13 +78,9 @@ $ pulsar-admin tenants update options
 
 Deletes an existing tenant
 
-### Usage
-
-------------
-
 **Command:**
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin tenants delete options
 ```
 

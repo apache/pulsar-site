@@ -1,17 +1,9 @@
-------------
-
-# produce
-
-### Usage
-
-`$produce`
-
-------------
+## produce
 
 Test pulsar producer performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf produce [options]
 ```
 
@@ -70,20 +62,12 @@ $ pulsar-perf produce [options]
 | `-h, --help` | Help message|false|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
-------------
-
-# consume
-
-### Usage
-
-`$consume`
-
-------------
+## consume
 
 Test pulsar consumer performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf consume [options]
 ```
 
@@ -131,20 +115,12 @@ $ pulsar-perf consume [options]
 | `-ac, --auto_ack_chunk_q_full` | Auto ack for oldest message on queue is full|false|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
-------------
-
-# transaction
-
-### Usage
-
-`$transaction`
-
-------------
+## transaction
 
 Test pulsar transaction performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf transaction [options]
 ```
 
@@ -184,20 +160,12 @@ $ pulsar-perf transaction [options]
 | `-au, --admin-url` | Pulsar Admin URL|null|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
-------------
-
-# read
-
-### Usage
-
-`$read`
-
-------------
+## read
 
 Test pulsar reader performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf read [options]
 ```
 
@@ -226,21 +194,13 @@ $ pulsar-perf read [options]
 | `-h, --help` | Help message|false|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
-------------
-
-# monitor-brokers
-
-### Usage
-
-`$monitor-brokers`
-
-------------
+## monitor-brokers
 
 Monitors brokers and prints to the console information about their system resource usages, 
 their topic and bundle counts, their message rates, and other metrics.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf monitor-brokers [options]
 ```
 
@@ -249,20 +209,12 @@ $ pulsar-perf monitor-brokers [options]
 | `-h, --help` | Help message|false|
 | `--connect-string` | Zookeeper connect string|null|
 
-------------
-
-# simulation-client
-
-### Usage
-
-`$simulation-client`
-
-------------
+## simulation-client
 
 Simulate client load by maintaining producers and consumers for topics.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf simulation-client [options]
 ```
 
@@ -272,20 +224,12 @@ $ pulsar-perf simulation-client [options]
 | `--port` | Port to listen on for controller|0|
 | `--service-url` | Pulsar Service URL|null|
 
-------------
-
-# simulation-controller
-
-### Usage
-
-`$simulation-controller`
-
-------------
+## simulation-controller
 
 Provides a shell for the user to dictate how simulation clients should incur load.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf simulation-controller [options]
 ```
 
@@ -296,20 +240,12 @@ $ pulsar-perf simulation-controller [options]
 | `--client-port` | Port that the clients are listening on|0|
 | `--clients` | Comma separated list of client hostnames|null|
 
-------------
-
-# websocket-producer
-
-### Usage
-
-`$websocket-producer`
-
-------------
+## websocket-producer
 
 Test pulsar websocket producer performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf websocket-producer [options]
 ```
 
@@ -330,20 +266,12 @@ $ pulsar-perf websocket-producer [options]
 | `-r, --rate` | Publish rate msg/s across topics|100|
 | `-m, --num-messages` | Number of messages to publish in total. If <= 0, it will keep publishing|0|
 
-------------
-
-# managed-ledger
-
-### Usage
-
-`$managed-ledger`
-
-------------
+## managed-ledger
 
 Write directly on managed-ledgers
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf managed-ledger [options]
 ```
 

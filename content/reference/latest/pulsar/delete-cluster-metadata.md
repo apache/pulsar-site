@@ -1,16 +1,8 @@
-------------
-
 # delete-cluster-metadata
 
-### Usage
-
-`$delete-cluster-metadata`
-
-------------
 
 
-
-```bdocs-tab:example_shell
+```shell
 $ pulsar delete-cluster-metadata options
 ```
 
