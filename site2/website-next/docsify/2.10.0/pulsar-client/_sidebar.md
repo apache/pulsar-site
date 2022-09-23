@@ -1,1 +1,2 @@
-- [pulsar-client](pulsar-client/pulsar-client.md)
+- CLI Configuration > `pulsar-client`
+    - [pulsar-client](pulsar-client/pulsar-client.md)
