@@ -5,22 +5,60 @@ sidebar_label: All Releases
 slug: /
 ---
 
+````mdx-code-block
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+const rows = require(`../data/release-table.js`);
+````
+
 ## Pulsar Release Notes
 
-#### 2.10.x
-[2.10.0](/release-notes/versioned/pulsar-2.10.0)&ensp;&ensp;[2.10.1](/release-notes/versioned/pulsar-2.10.1)&ensp;&ensp;
-#### 2.9.x
-[2.9.3](/release-notes/versioned/pulsar-2.9.3)&ensp;&ensp;[2.9.2](/release-notes/versioned/pulsar-2.9.2)&ensp;&ensp;[2.9.1](/release-notes/versioned/pulsar-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/versioned/pulsar-2.9.0)&ensp;&ensp;  
-#### 2.8.x
-[2.8.4](/release-notes/versioned/pulsar-2.8.4)&ensp;&ensp;[2.8.3](/release-notes/versioned/pulsar-2.8.3)&ensp;&ensp;[2.8.2](/release-notes/versioned/pulsar-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/versioned/pulsar-2.8.1)&ensp;&ensp;[2.8.0](/release-notes/versioned/pulsar-2.8.0)&ensp;&ensp;
-#### 2.7.x
-[2.7.5](/release-notes/versioned/pulsar-2.7.5)&ensp;&ensp;[2.7.4](/release-notes/versioned/pulsar-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/versioned/pulsar-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/versioned/pulsar-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/versioned/pulsar-2.7.1)&ensp;&ensp;  
-#### 2.6.x
-[2.6.4](/release-notes/versioned/pulsar-2.6.4)&ensp;&ensp;[2.6.3](/release-notes/versioned/pulsar-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/versioned/pulsar-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/versioned/pulsar-2.6.1)&ensp;&ensp;  
-#### 2.5.x
-[2.5.2](/release-notes/versioned/pulsar-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/versioned/pulsar-2.5.1)&ensp;&ensp; [2.5.0](/release-notes/versioned/pulsar-2.5.0)&ensp;&ensp;
+````mdx-code-block
+<TableContainer component={Paper}>
+  <Table sx={{ minWidth: 650 }} size="small">
+    <TableHead>
+      <TableRow>
+        <TableCell>Release Note</TableCell>
+        <TableCell>Release Blog</TableCell>
+        <TableCell align="right">Documentation</TableCell>
+        <TableCell align="right">Release Date</TableCell>
+        <TableCell align="right">Release Manager</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {rows.map((row) => (
+        <TableRow
+          key={row.tagName}
+        >
+          <TableCell component="th" scope="row">
+            <a href={row.releaseNotes}>{row.tagName}</a>
+          </TableCell>
+          <TableCell align="right">
+            {row.releaseBlog == "N/A"
+                ? "N/A"
+                : <a href={row.releaseBlog}>What's New in Apache Pulsar {row.tagName}</a>
+            }
+          </TableCell>
+          <TableCell align="right">
+            <a href={row.doc}>{row.tagName} Documentation</a>
+          </TableCell>
+          <TableCell align="right">{new Date(row.publishedAt).toDateString().substr(4)}</TableCell>
+          <TableCell align="right">
+            <a href={`https://github.com/${row.author}`}>{row.author}</a>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
+````
 
-#### Previous versions
+### Previous versions
 
 All release notes of previous versions are available at [here](/release-notes/legacy).
 
