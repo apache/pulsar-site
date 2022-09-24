@@ -968,7 +968,7 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "commandData": {
+                "subscription": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -980,7 +980,7 @@
                 "httpAuthType": {
                     "type": "string"
                 },
-                "subscription": {
+                "commandData": {
                     "type": "string"
                 }
             }
@@ -1277,17 +1277,17 @@
                 "attributes": {
                     "$ref": "#/definitions/ContextAttributes"
                 },
-                "fullRootName": {
-                    "$ref": "#/definitions/PropertyName"
+                "rootName": {
+                    "type": "string"
                 },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
                 },
+                "fullRootName": {
+                    "$ref": "#/definitions/PropertyName"
+                },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
-                },
-                "rootName": {
-                    "type": "string"
                 },
                 "locale": {
                     "$ref": "#/definitions/Locale"
@@ -1428,9 +1428,6 @@
                 "abstract": {
                     "type": "boolean"
                 },
-                "contentType": {
-                    "$ref": "#/definitions/JavaType"
-                },
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
@@ -1447,6 +1444,9 @@
                     "type": "boolean"
                 },
                 "javaLangObject": {
+                    "type": "boolean"
+                },
+                "enumType": {
                     "type": "boolean"
                 },
                 "containerType": {
@@ -1479,8 +1479,8 @@
                 "mapLikeType": {
                     "type": "boolean"
                 },
-                "enumType": {
-                    "type": "boolean"
+                "contentType": {
+                    "$ref": "#/definitions/JavaType"
                 },
                 "typeName": {
                     "type": "string"
@@ -1516,9 +1516,6 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
-                "closed": {
-                    "type": "boolean"
-                },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
@@ -1555,6 +1552,9 @@
                 },
                 "outputContext": {
                     "$ref": "#/definitions/JsonStreamContext"
+                },
+                "closed": {
+                    "type": "boolean"
                 }
             }
         },
@@ -1595,9 +1595,6 @@
                 "text": {
                     "type": "string"
                 },
-                "closed": {
-                    "type": "boolean"
-                },
                 "textCharacters": {
                     "type": "array",
                     "items": {
@@ -1634,6 +1631,9 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "typeId": {
+                    "type": "object"
+                },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
@@ -1661,6 +1661,9 @@
                 "currentName": {
                     "type": "string"
                 },
+                "tokenLocation": {
+                    "$ref": "#/definitions/JsonLocation"
+                },
                 "featureMask": {
                     "type": "integer",
                     "format": "int32"
@@ -1675,9 +1678,6 @@
                 },
                 "parsingContext": {
                     "$ref": "#/definitions/JsonStreamContext"
-                },
-                "tokenLocation": {
-                    "$ref": "#/definitions/JsonLocation"
                 },
                 "currentLocation": {
                     "$ref": "#/definitions/JsonLocation"
@@ -1764,8 +1764,8 @@
                 "currentValue": {
                     "type": "object"
                 },
-                "typeId": {
-                    "type": "object"
+                "closed": {
+                    "type": "boolean"
                 }
             }
         },
@@ -2195,17 +2195,17 @@
                 "attributes": {
                     "$ref": "#/definitions/ContextAttributes"
                 },
-                "fullRootName": {
-                    "$ref": "#/definitions/PropertyName"
+                "rootName": {
+                    "type": "string"
                 },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
                 },
+                "fullRootName": {
+                    "$ref": "#/definitions/PropertyName"
+                },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
-                },
-                "rootName": {
-                    "type": "string"
                 },
                 "locale": {
                     "$ref": "#/definitions/Locale"
@@ -2248,9 +2248,6 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
-                "generator": {
-                    "$ref": "#/definitions/JsonGenerator"
-                },
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -2268,6 +2265,9 @@
                 },
                 "defaultNullKeySerializer": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "generator": {
+                    "$ref": "#/definitions/JsonGenerator"
                 }
             }
         },
