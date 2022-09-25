@@ -11,7 +11,7 @@
 Interface for managing Pulsar IO sinks (egress data from Pulsar)
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks subcommand
 ```
 
@@ -38,7 +38,7 @@ Submit a Pulsar IO sink connector to run in a Pulsar cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks create options
 ```
 
@@ -94,7 +94,7 @@ Update a Pulsar IO sink connector
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks update options
 ```
 
@@ -151,7 +151,7 @@ Stops a Pulsar IO sink connector
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks delete options
 ```
 
@@ -174,7 +174,7 @@ List all running Pulsar IO sink connectors
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks list options
 ```
 
@@ -196,7 +196,7 @@ Gets the information about a Pulsar IO sink connector
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks get options
 ```
 
@@ -219,7 +219,7 @@ Check the current status of a Pulsar Sink
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks status options
 ```
 
@@ -243,7 +243,7 @@ Stops sink instance
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks stop options
 ```
 
@@ -267,7 +267,7 @@ Starts sink instance
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks start options
 ```
 
@@ -291,7 +291,7 @@ Restart sink instance
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks restart options
 ```
 
@@ -315,7 +315,7 @@ Run a Pulsar IO sink connector locally (rather than deploying it to the Pulsar c
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks localrun options
 ```
 
@@ -389,7 +389,7 @@ Get the list of Pulsar IO connector sinks supported by Pulsar cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks available-sinks options
 ```
 
@@ -404,7 +404,7 @@ Reload the available built-in connectors
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sinks reload options
 ```
 

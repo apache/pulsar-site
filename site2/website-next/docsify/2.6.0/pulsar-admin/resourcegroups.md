@@ -11,7 +11,7 @@
 Operations about ResourceGroups
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups subcommand
 ```
 
@@ -31,7 +31,7 @@ List the existing resourcegroups
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups list options
 ```
 
@@ -46,7 +46,7 @@ Gets the configuration of a resourcegroup
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups get options
 ```
 
@@ -61,7 +61,7 @@ Creates a new resourcegroup
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups create options
 ```
 
@@ -85,7 +85,7 @@ Updates a resourcegroup
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups update options
 ```
 
@@ -109,7 +109,7 @@ Deletes an existing ResourceGroup
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin resourcegroups delete options
 ```
 

@@ -11,7 +11,7 @@
 Operations to collect function-worker statistics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker subcommand
 ```
 
@@ -31,7 +31,7 @@ Dump all functions stats running on this broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker function-stats options
 ```
 
@@ -46,7 +46,7 @@ Dump metrics for Monitoring
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker monitoring-metrics options
 ```
 
@@ -61,7 +61,7 @@ Get all workers belonging to this cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker get-cluster options
 ```
 
@@ -76,7 +76,7 @@ Get the leader of the worker cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker get-cluster-leader options
 ```
 
@@ -91,7 +91,7 @@ Get the assignments of the functions across the worker cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin functions-worker get-function-assignments options
 ```
 

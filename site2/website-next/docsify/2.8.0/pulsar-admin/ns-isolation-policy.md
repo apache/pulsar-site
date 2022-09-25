@@ -11,7 +11,7 @@
 Operations about namespace isolation policy
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy subcommand
 ```
 
@@ -32,7 +32,7 @@ Create/Update a namespace isolation policy for a cluster. This operation require
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy set options
 ```
 
@@ -57,7 +57,7 @@ Get namespace isolation policy of a cluster. This operation requires Pulsar supe
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy get options
 ```
 
@@ -72,7 +72,7 @@ List all namespace isolation policies of a cluster. This operation requires Puls
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy list options
 ```
 
@@ -87,7 +87,7 @@ Delete namespace isolation policy of a cluster. This operation requires Pulsar s
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy delete options
 ```
 
@@ -102,7 +102,7 @@ List all brokers with namespace-isolation policies attached to it. This operatio
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy brokers options
 ```
 
@@ -117,7 +117,7 @@ Get broker with namespace-isolation policies attached to it. This operation requ
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin ns-isolation-policy broker options
 ```
 

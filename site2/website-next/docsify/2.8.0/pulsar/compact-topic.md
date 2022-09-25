@@ -10,7 +10,7 @@
 
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar compact-topic options
 ```
 

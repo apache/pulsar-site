@@ -11,7 +11,7 @@
 Produce messages to a specified topic
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-client produce [options]
 ```
 
@@ -45,7 +45,7 @@ $ pulsar-client produce [options]
 Consume messages from a specified topic
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-client consume [options]
 ```
 
