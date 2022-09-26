@@ -1,21 +1,5 @@
 module.exports = [
 {
-  "author": "Jason918",
-  "tagName": "v2.7.5",
-  "publishedAt": "2022-09-06T10:53:32Z",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.5/",
-  "releaseBlog": "https://pulsar.apache.org/blog/2022/09/09/Apache-Pulsar-2-7-5",
-  "doc": "https://pulsar.apache.org/docs/2.7.5"
-},
-{
-  "author": "mattisonchao",
-  "tagName": "v2.9.3",
-  "publishedAt": "2022-07-20T02:04:10Z",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.9.3/",
-  "releaseBlog": "https://pulsar.apache.org/blog/2022/07/27/Apache-Pulsar-2-9-3",
-  "doc": "https://pulsar.apache.org/docs/2.9.x"
-},
-{
   "author": "codelipenghui",
   "tagName": "v2.10.1",
   "publishedAt": "2022-07-04T14:45:46Z",
@@ -30,6 +14,14 @@ module.exports = [
   "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.10.0/",
   "releaseBlog": "N/A",
   "doc": "https://pulsar.apache.org/docs/"
+},
+{
+  "author": "mattisonchao",
+  "tagName": "v2.9.3",
+  "publishedAt": "2022-07-20T02:04:10Z",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.9.3/",
+  "releaseBlog": "https://pulsar.apache.org/blog/2022/07/27/Apache-Pulsar-2-9-3",
+  "doc": "https://pulsar.apache.org/docs/2.9.x"
 },
 {
   "author": "gaoran10",
@@ -56,28 +48,12 @@ module.exports = [
   "doc": "https://pulsar.apache.org/docs/2.8.x"
 },
 {
-  "author": "Technoboy-",
-  "tagName": "v2.7.4",
-  "publishedAt": "2021-12-27T08:24:54Z",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.4/",
-  "releaseBlog": "https://pulsar.apache.org/blog/2021/12/14/Apache-Pulsar-2-7-4",
-  "doc": "https://pulsar.apache.org/docs/2.7.4"
-},
-{
   "author": "hangc0276",
   "tagName": "v2.8.1",
   "publishedAt": "2021-09-18T01:39:29Z",
   "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.8.1/",
   "releaseBlog": "https://pulsar.apache.org/blog/2021/09/23/Apache-Pulsar-2-8-1",
   "doc": "https://pulsar.apache.org/docs/2.8.x"
-},
-{
-  "author": "congbobo184",
-  "tagName": "v2.7.3",
-  "publishedAt": "2021-08-11T01:45:27Z",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.3/",
-  "releaseBlog": "https://pulsar.apache.org/blog/2021/08/11/Apache-Pulsar-2-7-3",
-  "doc": "https://pulsar.apache.org/docs/2.7.3"
 },
 {
   "author": "codelipenghui",
@@ -88,12 +64,28 @@ module.exports = [
   "doc": "https://pulsar.apache.org/docs/2.8.x"
 },
 {
-  "author": "lhotari",
-  "tagName": "v2.6.4",
-  "publishedAt": "2021-06-02T18:10:21Z",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.6.4/",
-  "releaseBlog": "N/A",
-  "doc": "https://pulsar.apache.org/docs/2.6.4"
+  "author": "Jason918",
+  "tagName": "v2.7.5",
+  "publishedAt": "2022-09-06T10:53:32Z",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.5/",
+  "releaseBlog": "https://pulsar.apache.org/blog/2022/09/09/Apache-Pulsar-2-7-5",
+  "doc": "https://pulsar.apache.org/docs/2.7.5"
+},
+{
+  "author": "Technoboy-",
+  "tagName": "v2.7.4",
+  "publishedAt": "2021-12-27T08:24:54Z",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.4/",
+  "releaseBlog": "https://pulsar.apache.org/blog/2021/12/14/Apache-Pulsar-2-7-4",
+  "doc": "https://pulsar.apache.org/docs/2.7.4"
+},
+{
+  "author": "congbobo184",
+  "tagName": "v2.7.3",
+  "publishedAt": "2021-08-11T01:45:27Z",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.3/",
+  "releaseBlog": "https://pulsar.apache.org/blog/2021/08/11/Apache-Pulsar-2-7-3",
+  "doc": "https://pulsar.apache.org/docs/2.7.3"
 },
 {
   "author": "eolivelli",
@@ -118,6 +110,14 @@ module.exports = [
   "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.0/",
   "releaseBlog": "https://pulsar.apache.org/blog/2020/12/24/Apache-Pulsar-2-7-0",
   "doc": "https://pulsar.apache.org/docs/2.7.0"
+},
+{
+  "author": "lhotari",
+  "tagName": "v2.6.4",
+  "publishedAt": "2021-06-02T18:10:21Z",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.6.4/",
+  "releaseBlog": "N/A",
+  "doc": "https://pulsar.apache.org/docs/2.6.4"
 },
 {
   "author": "wolfstudy",
