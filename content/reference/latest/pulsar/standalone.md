@@ -14,6 +14,7 @@ $ pulsar standalone options
 | `--wipe-data` | Clean up previous ZK/BK data|false|
 | `-fwc, --functions-worker-conf` | Configuration file for Functions Worker|/pulsar/conf/functions_worker.yml|
 | `-nss, --no-stream-storage` | Disable stream storage|false|
+| `--metadata-url` | Metadata store url||
 | `--no-broker` | Only start ZK and BK services, no broker|false|
 | `--zookeeper-dir` | Local zooKeeper's data directory|data/standalone/zookeeper|
 | `--only-broker` | Only start Pulsar broker service (no ZK, BK)|false|
