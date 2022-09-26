@@ -2960,7 +2960,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `869`
+**Default**: `868`
 
 **Dynamic**: `true`
 
