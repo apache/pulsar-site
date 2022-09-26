@@ -968,7 +968,7 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "commandData": {
+                "httpAuthType": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -977,7 +977,7 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "httpAuthType": {
+                "commandData": {
                     "type": "string"
                 },
                 "subscription": {
@@ -1295,11 +1295,11 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
                 },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
@@ -1601,10 +1601,6 @@
                         "type": "string"
                     }
                 },
-                "intValue": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "booleanValue": {
                     "type": "boolean"
                 },
@@ -1630,6 +1626,10 @@
                 },
                 "objectId": {
                     "type": "object"
+                },
+                "intValue": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "typeId": {
                     "type": "object"
@@ -1997,8 +1997,14 @@
                 "factory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
+                "visibilityChecker": {
+                    "$ref": "#/definitions/VisibilityCheckerObject"
+                },
+                "subtypeResolver": {
+                    "$ref": "#/definitions/SubtypeResolver"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "serializationConfig": {
                     "$ref": "#/definitions/SerializationConfig"
@@ -2018,14 +2024,8 @@
                 "serializerProviderInstance": {
                     "$ref": "#/definitions/SerializerProvider"
                 },
-                "visibilityChecker": {
-                    "$ref": "#/definitions/VisibilityCheckerObject"
-                },
-                "subtypeResolver": {
-                    "$ref": "#/definitions/SubtypeResolver"
-                },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
                 },
                 "nodeFactory": {
                     "$ref": "#/definitions/JsonNodeFactory"
@@ -2213,11 +2213,11 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
                 },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
@@ -2487,7 +2487,7 @@
         "Value": {
             "type": "object",
             "properties": {
-                "contentInclusion": {
+                "valueInclusion": {
                     "type": "string",
                     "enum": [
                         "ALWAYS",
@@ -2498,7 +2498,7 @@
                         "USE_DEFAULTS"
                     ]
                 },
-                "valueInclusion": {
+                "contentInclusion": {
                     "type": "string",
                     "enum": [
                         "ALWAYS",

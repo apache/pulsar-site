@@ -1,6 +1,6 @@
 # Client
 !> This page is automatically generated from code files.
-If you find something inaccurate, feel free to update `org.apache.pulsar.client.impl.conf.ClientConfigurationData`. Do NOT edit this markdown file manually. Manual changes will be overwritten by automatic generation.
+If you find something inaccurate, feel free to update `org.apache.pulsar.client.impl.conf.ClientConfigurationData`.
 ## Required
 ### serviceUrl
 Pulsar cluster HTTP URL to connect to a broker.

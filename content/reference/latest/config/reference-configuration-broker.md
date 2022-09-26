@@ -1,6 +1,6 @@
 # Broker
 !> This page is automatically generated from code files.
-If you find something inaccurate, feel free to update `org.apache.pulsar.broker.ServiceConfiguration`. Do NOT edit this markdown file manually. Manual changes will be overwritten by automatic generation.
+If you find something inaccurate, feel free to update `org.apache.pulsar.broker.ServiceConfiguration`.
 ## Required
 ### clusterName
 Name of the cluster to which this broker belongs to
@@ -2960,7 +2960,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `868`
+**Default**: `869`
 
 **Dynamic**: `true`
 
