@@ -144,7 +144,7 @@ Maximum number of lookup requests allowed on each broker connection to prevent o
 **Default**: `50000`
 
 ### maxNumberOfRejectedRequestPerConnection
-Maximum number of rejected requests of a broker in a certain time frame (30 seconds) after the current connection is closed and the client creating a new connection to connect to a different broker.
+Maximum number of rejected requests of a broker in a certain time frame (60 seconds) after the current connection is closed and the client creating a new connection to connect to a different broker.
 
 **Type**: `int`
 
