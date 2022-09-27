@@ -10,6 +10,8 @@ $ pulsar initialize-cluster-metadata options
 |---|---|---|
 | `-tb, --broker-service-url-tls` | Broker-service URL for new cluster with TLS encryption|null|
 | `-cs, --configuration-store` | Configuration Store connection string|cs|
+| `-pp, --proxy-protocol` | Proxy protocol to select type of routing at proxy. Possible Values: [SNI]|null|
+| `-pu, --proxy-url` | Proxy-server URL to which to connect.|null|
 | `--initial-num-transaction-coordinators` | Num transaction coordinators will assigned in cluster|16|
 | `-uw, --web-service-url` | Web-service URL for new cluster|uw|
 | `--bookkeeper-metadata-service-uri` | The metadata service URI of the existing BookKeeper cluster that you want to use|null|
