@@ -11,7 +11,7 @@
 Test pulsar producer performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf produce [options]
 ```
 
@@ -79,7 +79,7 @@ $ pulsar-perf produce [options]
 Test pulsar consumer performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf consume [options]
 ```
 
@@ -139,7 +139,7 @@ $ pulsar-perf consume [options]
 Test pulsar transaction performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf transaction [options]
 ```
 
@@ -182,7 +182,7 @@ $ pulsar-perf transaction [options]
 Test pulsar reader performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf read [options]
 ```
 
@@ -222,7 +222,7 @@ Monitors brokers and prints to the console information about their system resour
 their topic and bundle counts, their message rates, and other metrics.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf monitor-brokers [options]
 ```
 
@@ -244,7 +244,7 @@ $ pulsar-perf monitor-brokers [options]
 Simulate client load by maintaining producers and consumers for topics.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf simulation-client [options]
 ```
 
@@ -267,7 +267,7 @@ $ pulsar-perf simulation-client [options]
 Provides a shell for the user to dictate how simulation clients should incur load.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf simulation-controller [options]
 ```
 
@@ -291,7 +291,7 @@ $ pulsar-perf simulation-controller [options]
 Test pulsar websocket producer performance.
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf websocket-producer [options]
 ```
 
@@ -326,7 +326,7 @@ $ pulsar-perf websocket-producer [options]
 Write directly on managed-ledgers
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-perf managed-ledger [options]
 ```
 

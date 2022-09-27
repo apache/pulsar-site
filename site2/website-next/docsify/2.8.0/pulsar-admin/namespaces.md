@@ -11,7 +11,7 @@
 Operations about namespaces
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces subcommand
 ```
 
@@ -155,7 +155,7 @@ Get the namespaces for a tenant
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces list options
 ```
 
@@ -170,7 +170,7 @@ Get the namespaces for a tenant in a cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces list-cluster options
 ```
 
@@ -185,7 +185,7 @@ Get the list of topics for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces topics options
 ```
 
@@ -200,7 +200,7 @@ Get the list of bundles for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces bundles options
 ```
 
@@ -215,7 +215,7 @@ Get the list of destinations for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces destinations options
 ```
 
@@ -230,7 +230,7 @@ Get the configuration policies of a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces policies options
 ```
 
@@ -245,7 +245,7 @@ Creates a new namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces create options
 ```
 
@@ -267,7 +267,7 @@ Deletes a namespace.
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces delete options
 ```
 
@@ -288,7 +288,7 @@ Get the permissions on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces permissions options
 ```
 
@@ -303,7 +303,7 @@ Grant permissions on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces grant-permission options
 ```
 
@@ -325,7 +325,7 @@ Revoke permissions on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces revoke-permission options
 ```
 
@@ -346,7 +346,7 @@ Get permissions to access subscription admin-api
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces subscription-permission options
 ```
 
@@ -361,7 +361,7 @@ Grant permissions to access subscription admin-api
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces grant-subscription-permission options
 ```
 
@@ -383,7 +383,7 @@ Revoke permissions to access subscription admin-api
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces revoke-subscription-permission options
 ```
 
@@ -405,7 +405,7 @@ Set replication clusters for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-clusters options
 ```
 
@@ -426,7 +426,7 @@ Get replication clusters for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-clusters options
 ```
 
@@ -441,7 +441,7 @@ Set subscription types enabled for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-subscription-types-enabled options
 ```
 
@@ -462,7 +462,7 @@ Get subscription types enabled for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-subscription-types-enabled options
 ```
 
@@ -477,7 +477,7 @@ Get the backlog quota policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-backlog-quotas options
 ```
 
@@ -492,7 +492,7 @@ Set a backlog quota policy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-backlog-quota options
 ```
 
@@ -516,7 +516,7 @@ Remove a backlog quota policy from a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-backlog-quota options
 ```
 
@@ -537,7 +537,7 @@ Get the persistence policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-persistence options
 ```
 
@@ -552,7 +552,7 @@ Set the persistence policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-persistence options
 ```
 
@@ -576,7 +576,7 @@ Remove the persistence policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-persistence options
 ```
 
@@ -591,7 +591,7 @@ Get message TTL for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-message-ttl options
 ```
 
@@ -606,7 +606,7 @@ Set Message TTL for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-message-ttl options
 ```
 
@@ -627,7 +627,7 @@ Remove Message TTL for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-message-ttl options
 ```
 
@@ -642,7 +642,7 @@ Get max subscriptions per topic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-subscriptions-per-topic options
 ```
 
@@ -657,7 +657,7 @@ Set max subscriptions per topic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-subscriptions-per-topic options
 ```
 
@@ -678,7 +678,7 @@ Remove max subscriptions per topic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-max-subscriptions-per-topic options
 ```
 
@@ -693,7 +693,7 @@ Get subscription expiration time for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-subscription-expiration-time options
 ```
 
@@ -708,7 +708,7 @@ Set subscription expiration time for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-subscription-expiration-time options
 ```
 
@@ -729,7 +729,7 @@ Remove subscription expiration time for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-subscription-expiration-time options
 ```
 
@@ -744,7 +744,7 @@ Get Anti-affinity group name for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-anti-affinity-group options
 ```
 
@@ -759,7 +759,7 @@ Set Anti-affinity group name for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-anti-affinity-group options
 ```
 
@@ -780,7 +780,7 @@ Get Anti-affinity namespaces grouped with the given anti-affinity group name
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-anti-affinity-namespaces options
 ```
 
@@ -803,7 +803,7 @@ Remove Anti-affinity group name for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces delete-anti-affinity-group options
 ```
 
@@ -818,7 +818,7 @@ Enable or disable deduplication for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-deduplication options
 ```
 
@@ -840,7 +840,7 @@ Get Deduplication for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-deduplication options
 ```
 
@@ -855,7 +855,7 @@ Remove Deduplication for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-deduplication options
 ```
 
@@ -870,7 +870,7 @@ Enable or disable autoTopicCreation for a namespace, overriding broker settings
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-auto-topic-creation options
 ```
 
@@ -894,7 +894,7 @@ Get autoTopicCreation info for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-auto-topic-creation options
 ```
 
@@ -909,7 +909,7 @@ Remove override of autoTopicCreation for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-auto-topic-creation options
 ```
 
@@ -924,7 +924,7 @@ Enable autoSubscriptionCreation for a namespace, overriding broker settings
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-auto-subscription-creation options
 ```
 
@@ -945,7 +945,7 @@ Get the autoSubscriptionCreation for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-auto-subscription-creation options
 ```
 
@@ -960,7 +960,7 @@ Remove override of autoSubscriptionCreation for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-auto-subscription-creation options
 ```
 
@@ -975,7 +975,7 @@ Get the retention policy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-retention options
 ```
 
@@ -990,7 +990,7 @@ Set the retention policy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-retention options
 ```
 
@@ -1012,7 +1012,7 @@ Remove the retention policy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-retention options
 ```
 
@@ -1027,7 +1027,7 @@ Set the bookie-affinity group name
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-bookie-affinity-group options
 ```
 
@@ -1049,7 +1049,7 @@ Get the bookie-affinity group name
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-bookie-affinity-group options
 ```
 
@@ -1064,7 +1064,7 @@ Set the bookie-affinity group name
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces delete-bookie-affinity-group options
 ```
 
@@ -1079,7 +1079,7 @@ Unload a namespace from the current serving broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces unload options
 ```
 
@@ -1100,7 +1100,7 @@ Split a namespace-bundle from the current serving broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces split-bundle options
 ```
 
@@ -1123,7 +1123,7 @@ Set message-dispatch-rate for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-dispatch-rate options
 ```
 
@@ -1147,7 +1147,7 @@ Remove configured message-dispatch-rate for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-dispatch-rate options
 ```
 
@@ -1162,7 +1162,7 @@ Get configured message-dispatch-rate for all topics of the namespace (Disabled i
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-dispatch-rate options
 ```
 
@@ -1177,7 +1177,7 @@ Set subscribe-rate per consumer for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-subscribe-rate options
 ```
 
@@ -1199,7 +1199,7 @@ Get configured subscribe-rate per consumer for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-subscribe-rate options
 ```
 
@@ -1214,7 +1214,7 @@ Remove configured subscribe-rate per consumer for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-subscribe-rate options
 ```
 
@@ -1229,7 +1229,7 @@ Set subscription message-dispatch-rate for all subscription of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-subscription-dispatch-rate options
 ```
 
@@ -1253,7 +1253,7 @@ Get subscription configured message-dispatch-rate for all topics of the namespac
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-subscription-dispatch-rate options
 ```
 
@@ -1268,7 +1268,7 @@ Remove subscription configured message-dispatch-rate for all topics of the names
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-subscription-dispatch-rate options
 ```
 
@@ -1283,7 +1283,7 @@ Set publish-rate for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-publish-rate options
 ```
 
@@ -1305,7 +1305,7 @@ Get configured message-publish-rate for all topics of the namespace (Disabled if
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-publish-rate options
 ```
 
@@ -1320,7 +1320,7 @@ Remove publish-rate for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-publish-rate options
 ```
 
@@ -1335,7 +1335,7 @@ Set replicator message-dispatch-rate for all topics of the namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-replicator-dispatch-rate options
 ```
 
@@ -1358,7 +1358,7 @@ Get replicator configured message-dispatch-rate for all topics of the namespace 
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-replicator-dispatch-rate options
 ```
 
@@ -1373,7 +1373,7 @@ Remove replicator configured message-dispatch-rate for all topics of the namespa
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-replicator-dispatch-rate options
 ```
 
@@ -1388,7 +1388,7 @@ Clear backlog for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces clear-backlog options
 ```
 
@@ -1411,7 +1411,7 @@ Unsubscribe the given subscription on all topics on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces unsubscribe options
 ```
 
@@ -1433,7 +1433,7 @@ Enable or disable message encryption required for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-encryption-required options
 ```
 
@@ -1455,7 +1455,7 @@ Get encryption required for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-encryption-required options
 ```
 
@@ -1470,7 +1470,7 @@ Set subscription auth mode on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-subscription-auth-mode options
 ```
 
@@ -1491,7 +1491,7 @@ Get subscriptionAuthMod for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-subscription-auth-mode options
 ```
 
@@ -1506,7 +1506,7 @@ Set the delayed delivery policy on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-delayed-delivery options
 ```
 
@@ -1529,7 +1529,7 @@ Get the delayed delivery policy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-delayed-delivery options
 ```
 
@@ -1544,7 +1544,7 @@ Remove delayed delivery policies from a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-delayed-delivery options
 ```
 
@@ -1559,7 +1559,7 @@ Get the inactive topic policy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-inactive-topic-policies options
 ```
 
@@ -1574,7 +1574,7 @@ Set the inactive topic policies on a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-inactive-topic-policies options
 ```
 
@@ -1598,7 +1598,7 @@ Remove inactive topic policies from a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-inactive-topic-policies options
 ```
 
@@ -1613,7 +1613,7 @@ Get maxProducersPerTopic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-producers-per-topic options
 ```
 
@@ -1628,7 +1628,7 @@ Set maxProducersPerTopic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-producers-per-topic options
 ```
 
@@ -1649,7 +1649,7 @@ Remove max producers per topic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-max-producers-per-topic options
 ```
 
@@ -1664,7 +1664,7 @@ Get maxConsumersPerTopic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-consumers-per-topic options
 ```
 
@@ -1679,7 +1679,7 @@ Set maxConsumersPerTopic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-consumers-per-topic options
 ```
 
@@ -1700,7 +1700,7 @@ Remove max consumers per topic for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-max-consumers-per-topic options
 ```
 
@@ -1715,7 +1715,7 @@ Get maxConsumersPerSubscription for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-consumers-per-subscription options
 ```
 
@@ -1730,7 +1730,7 @@ Set maxConsumersPerSubscription for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-consumers-per-subscription options
 ```
 
@@ -1751,7 +1751,7 @@ Remove maxConsumersPerSubscription for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-max-consumers-per-subscription options
 ```
 
@@ -1766,7 +1766,7 @@ Get maxUnackedMessagesPerSubscription for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-unacked-messages-per-subscription options
 ```
 
@@ -1781,7 +1781,7 @@ Set maxUnackedMessagesPerSubscription for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-unacked-messages-per-subscription options
 ```
 
@@ -1802,7 +1802,7 @@ Remove maxUnackedMessagesPerSubscription for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-max-unacked-messages-per-subscription options
 ```
 
@@ -1817,7 +1817,7 @@ Get maxUnackedMessagesPerConsumer for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-unacked-messages-per-consumer options
 ```
 
@@ -1832,7 +1832,7 @@ Set maxUnackedMessagesPerConsumer for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-unacked-messages-per-consumer options
 ```
 
@@ -1853,7 +1853,7 @@ Get compactionThreshold for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-compaction-threshold options
 ```
 
@@ -1868,7 +1868,7 @@ Set compactionThreshold for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-compaction-threshold options
 ```
 
@@ -1889,7 +1889,7 @@ Remove compactionThreshold for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-compaction-threshold options
 ```
 
@@ -1904,7 +1904,7 @@ Get offloadThreshold for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-offload-threshold options
 ```
 
@@ -1919,7 +1919,7 @@ Set offloadThreshold for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-offload-threshold options
 ```
 
@@ -1940,7 +1940,7 @@ Get offloadDeletionLag, in minutes, for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-offload-deletion-lag options
 ```
 
@@ -1955,7 +1955,7 @@ Set offloadDeletionLag for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-offload-deletion-lag options
 ```
 
@@ -1976,7 +1976,7 @@ Clear offloadDeletionLag for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces clear-offload-deletion-lag options
 ```
 
@@ -1991,7 +1991,7 @@ Get the schema auto-update strategy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-schema-autoupdate-strategy options
 ```
 
@@ -2006,7 +2006,7 @@ Set the schema auto-update strategy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-schema-autoupdate-strategy options
 ```
 
@@ -2028,7 +2028,7 @@ Get the schema compatibility strategy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-schema-compatibility-strategy options
 ```
 
@@ -2043,7 +2043,7 @@ Set the schema compatibility strategy for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-schema-compatibility-strategy options
 ```
 
@@ -2064,7 +2064,7 @@ Get the namespace whether allow auto update schema
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-is-allow-auto-update-schema options
 ```
 
@@ -2079,7 +2079,7 @@ Set the namespace whether allow auto update schema
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-is-allow-auto-update-schema options
 ```
 
@@ -2101,7 +2101,7 @@ Get the schema validation enforced
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-schema-validation-enforce options
 ```
 
@@ -2122,7 +2122,7 @@ Set the schema whether open schema validation enforced
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-schema-validation-enforce options
 ```
 
@@ -2144,7 +2144,7 @@ Set the offload policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-offload-policies options
 ```
 
@@ -2177,7 +2177,7 @@ Remove the offload policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-offload-policies options
 ```
 
@@ -2192,7 +2192,7 @@ Get the offload policies for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-offload-policies options
 ```
 
@@ -2207,7 +2207,7 @@ Set deduplicationSnapshotInterval for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-deduplication-snapshot-interval options
 ```
 
@@ -2228,7 +2228,7 @@ Get deduplicationSnapshotInterval for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-deduplication-snapshot-interval options
 ```
 
@@ -2243,7 +2243,7 @@ Remove deduplicationSnapshotInterval for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-deduplication-snapshot-interval options
 ```
 
@@ -2258,7 +2258,7 @@ Set max topics per namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-max-topics-per-namespace options
 ```
 
@@ -2279,7 +2279,7 @@ Get max topics per namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-max-topics-per-namespace options
 ```
 
@@ -2294,7 +2294,7 @@ Remove max topics per namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-max-topics-per-namespace options
 ```
 
@@ -2309,7 +2309,7 @@ Set property for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-property options
 ```
 
@@ -2331,7 +2331,7 @@ Get property for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-property options
 ```
 
@@ -2352,7 +2352,7 @@ Remove property for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-property options
 ```
 
@@ -2373,7 +2373,7 @@ Set properties of a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-properties options
 ```
 
@@ -2394,7 +2394,7 @@ Get properties of a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-properties options
 ```
 
@@ -2409,7 +2409,7 @@ Clear all properties for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces clear-properties options
 ```
 
@@ -2424,7 +2424,7 @@ Get ResourceGroup for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces get-resource-group options
 ```
 
@@ -2439,7 +2439,7 @@ Set ResourceGroup for a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces set-resource-group options
 ```
 
@@ -2460,7 +2460,7 @@ Remove ResourceGroup from a namespace
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin namespaces remove-resource-group options
 ```
 

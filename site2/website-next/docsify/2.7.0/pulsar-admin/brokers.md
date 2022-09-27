@@ -11,7 +11,7 @@
 Operations about brokers
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers subcommand
 ```
 
@@ -38,7 +38,7 @@ List active brokers of the cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers list options
 ```
 
@@ -53,7 +53,7 @@ Get the information of the leader broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers leader-broker options
 ```
 
@@ -68,7 +68,7 @@ List namespaces owned by the broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers namespaces options
 ```
 
@@ -89,7 +89,7 @@ Update dynamic-serviceConfiguration of broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers update-dynamic-config options
 ```
 
@@ -111,7 +111,7 @@ Delete dynamic-serviceConfiguration of broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers delete-dynamic-config options
 ```
 
@@ -132,7 +132,7 @@ Get list of updatable configuration name
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers list-dynamic-config options
 ```
 
@@ -147,7 +147,7 @@ Get all overridden dynamic-configuration values
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers get-all-dynamic-config options
 ```
 
@@ -162,7 +162,7 @@ Get internal configuration information
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers get-internal-config options
 ```
 
@@ -177,7 +177,7 @@ Get runtime configuration values
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers get-runtime-config options
 ```
 
@@ -192,7 +192,7 @@ Run a health check against the broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers healthcheck options
 ```
 
@@ -213,7 +213,7 @@ Manually trigger backlogQuotaCheck
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers backlog-quota-check options
 ```
 
@@ -228,7 +228,7 @@ Get the version of the currently connected broker
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin brokers version options
 ```
 

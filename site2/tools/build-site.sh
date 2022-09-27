@@ -111,3 +111,6 @@ else
   cp -R ./build/pulsar/* "$CONTENT_DIR"
 fi
 cp -R "$WEBSITE_DIR"/static/swagger/* "$CONTENT_DIR"/swagger/
+
+# Generate document for release table
+"$TOOLS_DIR"/release-json-gen.sh "$WEBSITE_DIR"

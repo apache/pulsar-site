@@ -11,7 +11,7 @@
 Interface for managing Pulsar IO Sources (ingress data into Pulsar)
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources subcommand
 ```
 
@@ -38,7 +38,7 @@ Submit a Pulsar IO source connector to run in a Pulsar cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources create options
 ```
 
@@ -85,7 +85,7 @@ Update a Pulsar IO source connector
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources update options
 ```
 
@@ -133,7 +133,7 @@ Stops a Pulsar IO source connector
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources delete options
 ```
 
@@ -156,7 +156,7 @@ Gets the information about a Pulsar IO source connector
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources get options
 ```
 
@@ -179,7 +179,7 @@ Check the current status of a Pulsar Source
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources status options
 ```
 
@@ -203,7 +203,7 @@ List all running Pulsar IO source connectors
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources list options
 ```
 
@@ -225,7 +225,7 @@ Stop source instance
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources stop options
 ```
 
@@ -249,7 +249,7 @@ Start source instance
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources start options
 ```
 
@@ -273,7 +273,7 @@ Restart source instance
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources restart options
 ```
 
@@ -297,7 +297,7 @@ Run a Pulsar IO source connector locally (rather than deploying it to the Pulsar
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources localrun options
 ```
 
@@ -362,7 +362,7 @@ Get the list of Pulsar IO connector sources supported by Pulsar cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources available-sources options
 ```
 
@@ -377,7 +377,7 @@ Reload the available built-in connectors
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin sources reload options
 ```
 
