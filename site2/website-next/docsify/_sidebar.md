@@ -2,7 +2,7 @@
   - [Pulsar](config/)
   - [Client Library](client/)
 - CLI Configuration
-  - [`pulsar-admin`](pulsar-admin/)
-  - [`pulsar-client`](pulsar-client/)
-  - [`pulsar`](pulsar/)
-  - [`pulsar-perf`](pulsar-perf/)
+  - [pulsar-admin](pulsar-admin/)
+  - [pulsar-client](pulsar-client/)
+  - [pulsar](pulsar/)
+  - [pulsar-perf](pulsar-perf/)

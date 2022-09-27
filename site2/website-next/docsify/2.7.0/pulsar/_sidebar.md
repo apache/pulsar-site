@@ -1,4 +1,4 @@
-- CLI Configuration > `pulsar`
+- CLI Configuration > pulsar
     - [broker-tool](pulsar/broker-tool.md)
     - [compact-topic](pulsar/compact-topic.md)
     - [tokens](pulsar/tokens.md)
