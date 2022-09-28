@@ -21,7 +21,8 @@
 set -x -e
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
-WEBSITE=$1
+GH_TOKEN=$1
+WEBSITE=$2
 
 DATA=$WEBSITE/data
 OUTPUT_PULSAR=$DATA/release-pulsar.js

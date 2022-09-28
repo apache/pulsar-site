@@ -18,18 +18,16 @@
 # under the License.
 #
 
-set -x
+set -x -e
+
+GH_TOKEN=$1
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
-NEXT=$1
-
-WEBSITE_DIR=${ROOT_DIR}/site2/website-$NEXT
+WEBSITE_DIR=${ROOT_DIR}/site2/website-next
 TOOLS_DIR=${ROOT_DIR}/site2/tools
 GEN_SITE_DIR=${ROOT_DIR}/generated-site
 VERSION=latest
-
-set -x -e
 
 export NODE_OPTIONS="--max-old-space-size=16000"
 "$TOOLS_DIR"/generate-api-docs.sh
@@ -64,4 +62,4 @@ cp -R ./build/* "$CONTENT_DIR"
 cp -R "$WEBSITE_DIR"/static/swagger/* "$CONTENT_DIR"/swagger/
 
 # Generate document for release table
-"$TOOLS_DIR"/release-json-gen.sh "$WEBSITE_DIR"
+"$TOOLS_DIR"/release-json-gen.sh $GH_TOKEN "$WEBSITE_DIR"

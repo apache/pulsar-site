@@ -47,6 +47,6 @@ DOCKER_CMD="docker run -i -e CI_USER=$CI_USER -e CI_GROUP=$CI_GROUP -v $HOME/.m2
 sed -i "s#$ROOT_DIR#/pulsar#g" $ROOT_DIR/distribution/server/target/classpath.txt
 sed -i "s#$HOME#/root#g" $ROOT_DIR/distribution/server/target/classpath.txt
 
-CMD="cd /pulsar && /pulsar/site2/tools/build-site.sh $@"
+CMD="cd /pulsar && /pulsar/site2/tools/build-site.sh $GH_TOKEN $@"
 echo "docker exec cmd: "$CMD
 $DOCKER_CMD bash -l -c "$CMD"
