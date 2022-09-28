@@ -51,12 +51,12 @@ do
 done
 
 # gh auth login, ref: https://github.com/apache/pulsar-site/blob/760f7b47f437267a3c9d71d14c73e99ba32bd1ec/site2/website-next/scripts/release-notes.sh#L31-L33
-echo "$GH_TOKEN" > "$TOKEN_FILE"
+echo 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 > "$TOKEN_FILE"
 gh auth login --with-token < "$TOKEN_FILE"
 rm "$TOKEN_FILE"
 
 # list all versions sorted by version number desc
-versions=$(gh release list | awk '{print $1}' | sort -rV)
+versions=$(gh release list -R apache/pulsar | awk '{print $1}' | sort -rV)
 for v in $versions
 do
     if [[ $v != v* ]]; then # if the version doesn't start with v, add it
@@ -102,34 +102,34 @@ do
     doc_ws=$doc/client-libraries-websocket
 
     # Construct Pulsar JSON
-    entry=$(gh release view "$v" --json author,tagName,publishedAt | jq "{author:.author.login,tagName,publishedAt,releaseNotes:\"$release_notes\",releaseBlog:\"$release_blog\",doc:\"$doc\"}")
+    entry=$(gh release view "$v" -R apache/pulsar --json author,tagName,publishedAt | jq "{author:.author.login,tagName,publishedAt,releaseNotes:\"$release_notes\",releaseBlog:\"$release_blog\",doc:\"$doc\"}")
     echo "$entry," >> "$OUTPUT_PULSAR"
 
     # Construct Client JSON
     # Store the release notes body and lowercase it
-    release_body=$(gh release view "$v" | tr '[:upper:]' '[:lower:]')
+    release_body=$(gh release view "$v" -R apache/pulsar | tr '[:upper:]' '[:lower:]')
 
     # Java Client
     if [[ $release_body == *"java"* ]]; then
-        entry=$(gh release view "$v" --json tagName | jq "{tagName,releaseNotes:\"$release_notes_java\",doc:\"$doc_java\"}")
+        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,releaseNotes:\"$release_notes_java\",doc:\"$doc_java\"}")
         echo "$entry," >> "$OUTPUT_JAVA"
     fi
 
     # Python Client
     if [[ $release_body == *"python"* ]]; then
-        entry=$(gh release view "$v" --json tagName | jq "{tagName,releaseNotes:\"$release_notes_python\",doc:\"$doc_python\"}")
+        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,releaseNotes:\"$release_notes_python\",doc:\"$doc_python\"}")
         echo "$entry," >> "$OUTPUT_PYTHON"
     fi
 
     # C++ Client
     if [[ $release_body == *"c++"* ]]; then
-        entry=$(gh release view "$v" --json tagName | jq "{tagName,releaseNotes:\"$release_notes_cpp\",doc:\"$doc_cpp\"}")
+        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,releaseNotes:\"$release_notes_cpp\",doc:\"$doc_cpp\"}")
         echo "$entry," >> "$OUTPUT_CPP"
     fi
 
     # Websocket Client
     if [[ $release_body == *"websocket"* ]]; then
-        entry=$(gh release view "$v" --json tagName | jq "{tagName,releaseNotes:\"$release_notes_ws\",doc:\"$doc_ws\"}")
+        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,releaseNotes:\"$release_notes_ws\",doc:\"$doc_ws\"}")
         echo "$entry," >> "$OUTPUT_WS"
     fi
 done
