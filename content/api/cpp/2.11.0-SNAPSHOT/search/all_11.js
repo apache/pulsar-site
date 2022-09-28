@@ -80,6 +80,7 @@ var searchData=
   ['setschema',['setSchema',['../classpulsar_1_1_consumer_configuration.html#aae87d7d3ae1e6ff6366bda6a569fd87c',1,'pulsar::ConsumerConfiguration::setSchema()'],['../classpulsar_1_1_producer_configuration.html#a48bbf349742a3d0571e16e987d7d7bbd',1,'pulsar::ProducerConfiguration::setSchema()'],['../classpulsar_1_1_reader_configuration.html#a330df4dbe27302427687dbbdd4420906',1,'pulsar::ReaderConfiguration::setSchema()']]],
   ['setsendtimeout',['setSendTimeout',['../classpulsar_1_1_producer_configuration.html#a33ea529f72531ec010d1ad935124f592',1,'pulsar::ProducerConfiguration']]],
   ['setsequenceid',['setSequenceId',['../classpulsar_1_1_message_builder.html#ae1c62a5fb7a064714b615be585d5bf92',1,'pulsar::MessageBuilder']]],
+  ['setstartmessageidinclusive',['setStartMessageIdInclusive',['../classpulsar_1_1_consumer_configuration.html#a0f78bf0238f8ef393d7ce0d18cb8be9f',1,'pulsar::ConsumerConfiguration']]],
   ['setstatsintervalinseconds',['setStatsIntervalInSeconds',['../classpulsar_1_1_client_configuration.html#ad4dbc03465c7cdfae528c9dfe9d43cec',1,'pulsar::ClientConfiguration']]],
   ['setstickyranges',['setStickyRanges',['../classpulsar_1_1_key_shared_policy.html#a0f54710a1b3e5c91303ff1391bcc7872',1,'pulsar::KeySharedPolicy']]],
   ['setsubscriptioninitialposition',['setSubscriptionInitialPosition',['../classpulsar_1_1_consumer_configuration.html#ab0e049e62befb9b924307ba6f990cd97',1,'pulsar::ConsumerConfiguration']]],

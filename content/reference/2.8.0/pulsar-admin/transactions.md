@@ -11,7 +11,7 @@
 Operations on transactions
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions subcommand
 ```
 
@@ -35,7 +35,7 @@ Get transaction coordinator internal stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions coordinator-internal-stats options
 ```
 
@@ -57,7 +57,7 @@ Get pending ack internal stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions pending-ack-internal-stats options
 ```
 
@@ -80,7 +80,7 @@ Get transaction coordinator stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions coordinator-stats options
 ```
 
@@ -101,7 +101,7 @@ Get transaction buffer stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions transaction-buffer-stats options
 ```
 
@@ -122,7 +122,7 @@ Get transaction pending ack stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions pending-ack-stats options
 ```
 
@@ -144,7 +144,7 @@ Get transaction in buffer stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions transaction-in-buffer-stats options
 ```
 
@@ -167,7 +167,7 @@ Get transaction in pending ack stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions transaction-in-pending-ack-stats options
 ```
 
@@ -191,7 +191,7 @@ Get transaction metadata
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions transaction-metadata options
 ```
 
@@ -213,7 +213,7 @@ Get slow transactions.
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin transactions slow-transactions options
 ```
 

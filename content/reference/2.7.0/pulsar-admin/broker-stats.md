@@ -11,7 +11,7 @@
 Operations to collect broker statistics
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats subcommand
 ```
 
@@ -31,7 +31,7 @@ dump metrics for Monitoring
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats monitoring-metrics options
 ```
 
@@ -52,7 +52,7 @@ dump mbean stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats mbeans options
 ```
 
@@ -73,7 +73,7 @@ dump topics stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats topics options
 ```
 
@@ -94,7 +94,7 @@ dump allocator stats
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats allocator-stats options
 ```
 
@@ -109,7 +109,7 @@ dump broker load-report
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin broker-stats load-report options
 ```
 

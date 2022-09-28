@@ -11,6 +11,7 @@ var searchData=
   ['isexpired',['isExpired',['../classpulsar_1_1_cached_token.html#a2fe69f2fb7037139b52f9c66a0af05f2',1,'pulsar::CachedToken']]],
   ['isreadcompacted',['isReadCompacted',['../classpulsar_1_1_consumer_configuration.html#a2635a64878d8bf47a24f0be2a1d14201',1,'pulsar::ConsumerConfiguration::isReadCompacted()'],['../classpulsar_1_1_reader_configuration.html#a8ad4f393183dd3f5c09df5772eb2f83c',1,'pulsar::ReaderConfiguration::isReadCompacted()']]],
   ['isreplicatesubscriptionstateenabled',['isReplicateSubscriptionStateEnabled',['../classpulsar_1_1_consumer_configuration.html#abf4d3d14144f555511bce0c960702994',1,'pulsar::ConsumerConfiguration']]],
+  ['isstartmessageidinclusive',['isStartMessageIdInclusive',['../classpulsar_1_1_consumer_configuration.html#a3ec96466edeae3a3e97ded9eef330beb',1,'pulsar::ConsumerConfiguration']]],
   ['istlsallowinsecureconnection',['isTlsAllowInsecureConnection',['../classpulsar_1_1_client_configuration.html#ac9924c79749c02d44252314413e9fd7e',1,'pulsar::ClientConfiguration']]],
   ['isusetls',['isUseTls',['../classpulsar_1_1_client_configuration.html#a8743c78fd4ea30aea204a736683b5b91',1,'pulsar::ClientConfiguration']]],
   ['isvalid',['isValid',['../classpulsar_1_1_broker_consumer_stats.html#ab832325475970e501d0e10530696a8d1',1,'pulsar::BrokerConsumerStats']]],

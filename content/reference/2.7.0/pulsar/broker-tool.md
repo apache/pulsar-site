@@ -10,7 +10,7 @@
 
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar broker-tool subcommand
 ```
 
@@ -24,7 +24,7 @@ $ pulsar broker-tool subcommand
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar broker-tool load-report options
 ```
 

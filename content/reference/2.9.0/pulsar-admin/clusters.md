@@ -11,7 +11,7 @@
 Operations about clusters
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters subcommand
 ```
 
@@ -38,7 +38,7 @@ Get the configuration data for the specified cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters get options
 ```
 
@@ -53,7 +53,7 @@ Provisions a new cluster. This operation requires Pulsar super-user privileges
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters create options
 ```
 
@@ -90,7 +90,7 @@ Update the configuration for a cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters update options
 ```
 
@@ -127,7 +127,7 @@ Deletes an existing cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters delete options
 ```
 
@@ -148,7 +148,7 @@ List the existing clusters
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters list options
 ```
 
@@ -163,7 +163,7 @@ Update peer cluster names
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters update-peer-clusters options
 ```
 
@@ -184,7 +184,7 @@ Get list of peer-clusters
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters get-peer-clusters options
 ```
 
@@ -199,7 +199,7 @@ Get the configuration brokers of a failure-domain
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters get-failure-domain options
 ```
 
@@ -220,7 +220,7 @@ Create a new failure-domain for a cluster. updates it if already created.
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters create-failure-domain options
 ```
 
@@ -242,7 +242,7 @@ Update failure-domain for a cluster. Creates a new one if not exist.
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters update-failure-domain options
 ```
 
@@ -264,7 +264,7 @@ Deletes an existing failure-domain
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters delete-failure-domain options
 ```
 
@@ -285,7 +285,7 @@ List the existing failure-domains for a cluster
 ------------
 
 
-```bdocs-tab:example_shell
+```shell
 $ pulsar-admin clusters list-failure-domains options
 ```
 
