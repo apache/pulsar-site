@@ -23,49 +23,11 @@ set -x
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
 NEXT=$1
-WEBSITE_DIR=${ROOT_DIR}/site2/website
-if [ -n "$NEXT" ]; then
-  WEBSITE_DIR=${ROOT_DIR}/site2/website-$NEXT
-fi
+
+WEBSITE_DIR=${ROOT_DIR}/site2/website-$NEXT
 TOOLS_DIR=${ROOT_DIR}/site2/tools
 GEN_SITE_DIR=${ROOT_DIR}/generated-site
 VERSION=latest
-
-function workaround_crowdin_problem_by_copying_files() {
-  # TODO: remove this after figuring out why crowdin removed code tab when generating translated files
-  # https://github.com/apache/pulsar/issues/5816
-  node scripts/fix-tab.js
-}
-
-function crowdin() {
-  yarn write-translations
-  if [ "$CROWDIN_DOCUSAURUS_API_KEY" != "UNSET" ]; then
-    # The crowdin upload and download take a long time to run, and have resulted in timeouts. In order to ensure that the
-    # website is still able to get published, we only run the download and upload if current hour is 0-5.
-    # This leads to executing crowdin-upload and crowdin-download once per day when website build is scheduled
-    # to run with cron expression '0 */6 * * *'
-    CURRENT_HOUR=$(date +%H)
-    CURRENT_HOUR=${CURRENT_HOUR#0}
-    if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
-      yarn run crowdin-upload
-    fi
-    if [[ "$CROWDIN_DOWNLOAD" == "1" || $CURRENT_HOUR -gt 12 ]]; then
-      yarn crowdin-download
-      workaround_crowdin_problem_by_copying_files
-    fi
-  else
-    # set English as the only language to build in this case
-    cat >languages.js <<'EOF'
-const languages = [
-{
-  enabled: true,
-  name: 'English',
-  tag: 'en',
-}];
-module.exports = languages;
-EOF
-  fi
-}
 
 set -x -e
 
@@ -75,18 +37,11 @@ cd "$WEBSITE_DIR"
 
 npm install
 
-if [ -n "$NEXT" ]; then
-  node scripts/replace.js
-  node scripts/split-swagger-by-version.js
-  # Because there are too many versions of the document, the memory overflows during the full build.
-  # The split-version-build script is used to build in different versions, and finally the build results are merged.
-  bash scripts/split-version-build.sh $@
-else
-  crowdin
-  yarn build
-  node ./scripts/replace.js
-  node ./scripts/split-swagger-by-version.js
-fi
+node scripts/replace.js
+node scripts/split-swagger-by-version.js
+# Because there are too many versions of the document, the memory overflows during the full build.
+# The split-version-build script is used to build in different versions, and finally the build results are merged.
+bash scripts/split-version-build.sh $@
 
 # Generate document for command line tools.
 "$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
@@ -105,11 +60,7 @@ rm -rf "$CONTENT_DIR"
 mkdir -p "$CONTENT_DIR"
 cp -R "$GEN_SITE_DIR"/reference "$CONTENT_DIR"
 cp -R "$GEN_SITE_DIR"/api "$CONTENT_DIR"
-if [ -n "$NEXT" ]; then
-  cp -R ./build/* "$CONTENT_DIR"
-else
-  cp -R ./build/pulsar/* "$CONTENT_DIR"
-fi
+cp -R ./build/* "$CONTENT_DIR"
 cp -R "$WEBSITE_DIR"/static/swagger/* "$CONTENT_DIR"/swagger/
 
 # Generate document for release table
