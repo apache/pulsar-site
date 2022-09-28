@@ -51,7 +51,7 @@ do
 done
 
 # gh auth login, ref: https://github.com/apache/pulsar-site/blob/760f7b47f437267a3c9d71d14c73e99ba32bd1ec/site2/website-next/scripts/release-notes.sh#L31-L33
-echo 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 > "$TOKEN_FILE"
+echo $GH_TOKEN > "$TOKEN_FILE"
 gh auth login --with-token < "$TOKEN_FILE"
 rm "$TOKEN_FILE"
 
