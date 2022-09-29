@@ -2535,6 +2535,17 @@ Enable or disable the broker interceptor, which is only used for testing for now
 
 **Category**: Server
 
+### dispatchThrottlingForFilteredEntriesEnabled
+Whether the broker should count filtered entries in dispatch rate limit calculations. When disabled, only messages sent to a consumer count towards a dispatch rate limit at the broker, topic, and subscription level. When enabled, messages filtered out due to entry filter logic are counted towards each relevant rate limit.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### dispatchThrottlingRateInByte
 Default bytes per second dispatch throttling-limit for whole broker. Using a value of 0, is disabling default message-byte dispatch-throttling
 
@@ -2960,7 +2971,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `868`
+**Default**: `869`
 
 **Dynamic**: `true`
 
