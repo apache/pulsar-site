@@ -112,23 +112,4 @@ module.exports = [
   "vtag": "2.5.1",
   "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/client-java-2.5.1/",
   "doc": "https://pulsar.apache.org/docs/2.5.1/client-libraries-java"
-},
-{
-  "tagName": "v2.4.2",
-  "vtag": "2.4.2",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/client-java-2.4.2/",
-  "doc": "https://pulsar.apache.org/docs/2.4.2/client-libraries-java"
-},
-{
-  "tagName": "v2.4.1",
-  "vtag": "2.4.1",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/client-java-2.4.1/",
-  "doc": "https://pulsar.apache.org/docs/2.4.1/client-libraries-java"
-},
-{
-  "tagName": "v2.4.0",
-  "vtag": "2.4.0",
-  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/client-java-2.4.0/",
-  "doc": "https://pulsar.apache.org/docs/2.4.0/client-libraries-java"
-},
-]
+}]
