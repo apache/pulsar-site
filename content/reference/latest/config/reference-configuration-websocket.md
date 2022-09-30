@@ -1,6 +1,8 @@
 # WebSocket
+
 !> This page is automatically generated from code files.
-If you find something inaccurate, feel free to update `org.apache.pulsar.websocket.service.WebSocketProxyConfiguration`.
+If you find something inaccurate, feel free to update `org.apache.pulsar.websocket.service.WebSocketProxyConfiguration
+`.
 ## Required
 ### clusterName
 Name of the cluster to which this broker belongs to
