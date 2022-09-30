@@ -9,6 +9,7 @@ $ pulsar initialize-cluster-metadata options
 |Flag|Description|Default|
 |---|---|---|
 | `-tb, --broker-service-url-tls` | Broker-service URL for new cluster with TLS encryption|null|
+| `-bn, --default-namespace-bundle-number` | The bundle numbers for the default namespaces(public/default), default is 16|0|
 | `-cs, --configuration-store` | Configuration Store connection string|cs|
 | `-pp, --proxy-protocol` | Proxy protocol to select type of routing at proxy. Possible Values: [SNI]|null|
 | `-pu, --proxy-url` | Proxy-server URL to which to connect.|null|
