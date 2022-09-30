@@ -12,6 +12,7 @@ import {
   useDocsPreferredVersion,
   useDocsVersion,
 } from "@docusaurus/theme-common/internal";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
 const _maintainedVersions = [versions[1], versions[2]];
@@ -100,9 +101,7 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
         ),
       }}
     >
-      {
-        "We recommend you use the {latestVersionLink} ({versionLabel})."
-      }
+      {"We recommend you use the {latestVersionLink} ({versionLabel})."}
     </Translate>
   );
 }
@@ -152,13 +151,21 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
 }
 export default function DocVersionBanner({ className }) {
   const versionMetadata = useDocsVersion();
-  if (versionMetadata.version != _latestVersion) {
-    return (
-      <DocVersionBannerEnabled
-        className={className}
-        versionMetadata={versionMetadata}
-      />
-    );
-  }
-  return null;
+  console.log("...", versionMetadata.version, _latestVersion);
+  return (
+    <BrowserOnly>
+      {() => {
+        console.log("...", location.pathname.startsWith("/docs"));
+        return versionMetadata.version != _latestVersion &&
+          location.pathname.startsWith("/docs") ? (
+          <DocVersionBannerEnabled
+            className={className}
+            versionMetadata={versionMetadata}
+          />
+        ) : (
+          <></>
+        );
+      }}
+    </BrowserOnly>
+  );
 }
