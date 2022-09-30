@@ -6,13 +6,8 @@ slug: /
 ---
 
 ````mdx-code-block
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import PulsarReleaseTable from "../src/components/PulsarReleaseTable";
+import ClientReleaseTable from "../src/components/ClientReleaseTable";
 const pulsar = require(`../data/release-pulsar.js`);
 const java = require(`../data/release-java.js`);
 const python = require(`../data/release-python.js`);
@@ -26,44 +21,7 @@ const cs = require(`../data/release-cs.js`);
 ## Pulsar Release Notes
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell>Release Blog</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-        <TableCell align="right">Release Date</TableCell>
-        <TableCell align="right">Release Manager</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {pulsar.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            {row.releaseBlog == "N/A"
-                ? "N/A"
-                : <a href={row.releaseBlog}>What's New in Apache Pulsar {row.tagName}</a>
-            }
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-          <TableCell align="right">{new Date(row.publishedAt).toDateString().substr(4)}</TableCell>
-          <TableCell align="right">
-            <a href={`https://github.com/${row.author}`}>{row.author}</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<PulsarReleaseTable data={pulsar} />
 ````
 
 ### Previous versions
@@ -81,208 +39,41 @@ All release notes of previous versions are available at [here](/release-notes/le
 ### Java
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {java.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={java} />
 ````
 
 ### Python
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {python.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={python} />
 ````
 
 ### C++
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {cpp.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={cpp} />
 ````
+
 ### WebSocket
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {ws.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={ws} />
 ````
 
 ### Go
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {golang.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={golang} />
 ````
 
 ### NodeJs
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {node.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={node} />
 ````
 
 ### C#
 
 ````mdx-code-block
-<TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} size="small">
-    <TableHead>
-      <TableRow>
-        <TableCell>Release Note</TableCell>
-        <TableCell align="right">Documentation</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {cs.map((row) => (
-        <TableRow
-          key={row.tagName}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            <a href={row.releaseNotes}>{row.tagName}</a>
-          </TableCell>
-          <TableCell align="right">
-            <a href={row.doc}>{row.tagName} Documentation</a>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+<ClientReleaseTable data={cs} />
 ````
