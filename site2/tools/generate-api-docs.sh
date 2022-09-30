@@ -34,4 +34,4 @@ SCRIPT_DIR=`dirname "$0"`
 
 cd $SCRIPT_DIR
 
-./doxygen-doc-gen.sh
+# ./doxygen-doc-gen.sh
