@@ -151,11 +151,9 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
 }
 export default function DocVersionBanner({ className }) {
   const versionMetadata = useDocsVersion();
-  console.log("...", versionMetadata.version, _latestVersion);
   return (
     <BrowserOnly>
       {() => {
-        console.log("...", location.pathname.startsWith("/docs"));
         return versionMetadata.version != _latestVersion &&
           location.pathname.startsWith("/docs") ? (
           <DocVersionBannerEnabled
