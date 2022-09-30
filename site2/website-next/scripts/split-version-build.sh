@@ -1,4 +1,7 @@
 #! /bin/sh
+
+set -x -e
+
 node scripts/split-version.js
 
 locals=("en" "zh-CN" "zh-TW" "ja" "ko" "fr")
