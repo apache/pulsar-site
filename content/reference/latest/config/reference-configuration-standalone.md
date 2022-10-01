@@ -2458,6 +2458,17 @@ Whether to enable the delayed delivery for messages.
 
 **Category**: Server
 
+### delayedDeliveryFixedDelayDetectionLookahead
+Size of the lookahead window to use when detecting if all the messages in the topic have a fixed delay. Default is 50,000. Setting the lookahead window to 0 will disable the logic to handle fixed delays in messages in a different way.
+
+**Type**: `long`
+
+**Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### delayedDeliveryMaxNumBuckets
 The max number of delayed message index bucket, after reaching the max buckets limitation, the adjacent buckets will be merged.
 
