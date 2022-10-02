@@ -1016,20 +1016,20 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "commandData" : {
-          "type" : "string"
-        },
-        "httpAuthType" : {
-          "type" : "string"
-        },
-        "subscription" : {
-          "type" : "string"
-        },
         "tlsCertificates" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/Certificate"
           }
+        },
+        "httpAuthType" : {
+          "type" : "string"
+        },
+        "commandData" : {
+          "type" : "string"
+        },
+        "subscription" : {
+          "type" : "string"
         }
       }
     },
@@ -1642,12 +1642,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -2067,9 +2067,6 @@
         "prettyPrinter" : {
           "$ref" : "#/definitions/PrettyPrinter"
         },
-        "currentValue" : {
-          "type" : "object"
-        },
         "featureMask" : {
           "type" : "integer",
           "format" : "int32"
@@ -2077,6 +2074,9 @@
         "formatFeatures" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "currentValue" : {
+          "type" : "object"
         },
         "highestEscapedChar" : {
           "type" : "integer",
@@ -2134,6 +2134,10 @@
         "text" : {
           "type" : "string"
         },
+        "intValue" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
         "textCharacters" : {
           "type" : "array",
           "items" : {
@@ -2166,10 +2170,6 @@
         "objectId" : {
           "type" : "object"
         },
-        "intValue" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "typeId" : {
           "type" : "object"
         },
@@ -2189,12 +2189,6 @@
         "tokenLocation" : {
           "$ref" : "#/definitions/JsonLocation"
         },
-        "inputSource" : {
-          "type" : "object"
-        },
-        "currentValue" : {
-          "type" : "object"
-        },
         "featureMask" : {
           "type" : "integer",
           "format" : "int32"
@@ -2202,20 +2196,6 @@
         "formatFeatures" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "valueAsLong" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "valueAsDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "valueAsBoolean" : {
-          "type" : "boolean"
-        },
-        "valueAsString" : {
-          "type" : "string"
         },
         "currentTokenId" : {
           "type" : "integer",
@@ -2267,6 +2247,26 @@
         "valueAsInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "valueAsLong" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "valueAsDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "valueAsBoolean" : {
+          "type" : "boolean"
+        },
+        "valueAsString" : {
+          "type" : "string"
+        },
+        "inputSource" : {
+          "type" : "object"
+        },
+        "currentValue" : {
+          "type" : "object"
         },
         "closed" : {
           "type" : "boolean"
@@ -2411,6 +2411,23 @@
             "format" : "byte"
           }
         },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
         "topicName" : {
           "type" : "string"
         },
@@ -2448,23 +2465,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2781,15 +2781,15 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "schemaDefinition" : {
+          "type" : "string"
+        },
         "schema" : {
           "type" : "array",
           "items" : {
             "type" : "string",
             "format" : "byte"
           }
-        },
-        "schemaDefinition" : {
-          "type" : "string"
         }
       }
     },
