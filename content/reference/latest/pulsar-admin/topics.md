@@ -144,6 +144,8 @@ $ pulsar-admin topics subcommand
 * `get-shadow-topics`
 * `set-shadow-topics`
 * `remove-shadow-topics`
+* `create-shadow-topic`
+* `get-shadow-source`
 * `get-schema-validation-enforce`
 * `set-schema-validation-enforce`
 
@@ -2269,6 +2271,36 @@ Remove the shadow topics for a topic
 
 ```shell
 $ pulsar-admin topics remove-shadow-topics options
+```
+
+
+
+## <em>create-shadow-topic</em>
+
+Create a shadow topic for an existing source topic.
+
+**Command:**
+
+```shell
+$ pulsar-admin topics create-shadow-topic options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--source, -s` | source topic name|null||
+| `--properties, -p` | key value pair properties(eg: a=a b=b c=c)|null||
+
+
+## <em>get-shadow-source</em>
+
+Get the source topic for a shadow topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topics get-shadow-source options
 ```
 
 
