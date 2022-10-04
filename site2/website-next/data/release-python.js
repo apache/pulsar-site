@@ -24,6 +24,12 @@ module.exports = [
   "doc": "https://pulsar.apache.org/docs/2.9.x/client-libraries-python"
 },
 {
+  "tagName": "v2.8.4",
+  "vtag": "2.8.x",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/client-python-2.8.4/",
+  "doc": "https://pulsar.apache.org/docs/2.8.x/client-libraries-python"
+},
+{
   "tagName": "v2.8.3",
   "vtag": "2.8.x",
   "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/client-python-2.8.3/",

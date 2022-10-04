@@ -36,6 +36,15 @@ module.exports = [
   "doc": "https://pulsar.apache.org/docs/2.9.x"
 },
 {
+  "author": "BewareMyPower",
+  "tagName": "v2.8.4",
+  "publishedAt": "2022-09-13T21:27:18Z",
+  "vtag": "2.8.x",
+  "releaseNotes": "https://pulsar.apache.org/release-notes/versioned/pulsar-2.8.4/",
+  "releaseBlog": "N/A",
+  "doc": "https://pulsar.apache.org/docs/2.8.x"
+},
+{
   "author": "michaeljmarshall",
   "tagName": "v2.8.3",
   "publishedAt": "2022-04-08T03:27:18Z",
