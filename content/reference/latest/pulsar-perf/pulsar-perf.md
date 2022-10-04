@@ -26,6 +26,7 @@ $ pulsar-perf produce [options]
 | `-np, --partitions` | Create partitioned topics with the given number of partitions, set 0 to not try to create the topic|null|
 | `-txn, --txn-enable` | Enable or disable the transaction|false|
 | `-fp, --format-payload` | Format %i as a message index in the stream from producer and/or %t as the timestamp nanoseconds.|false|
+| `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-t, --num-topic` | Number of topics|1|
 | `-v, --encryption-key-value-file` | The file which contains the public key to encrypt payload|null|
 | `-bb, --batch-max-bytes` | Maximum number of bytes per batch|4194304|
@@ -55,6 +56,7 @@ $ pulsar-perf produce [options]
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `-tto, --txn-timeout` | Set the time value of transaction timeout, and the time unit is second. (After --txn-enable setting to true, --txn-timeout takes effect)|10|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `-set, --set-event-time` | Set the eventTime on messages|false|
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--histogram-file` | HdrHistogram output file|null|
@@ -96,11 +98,13 @@ $ pulsar-perf consume [options]
 | `-n, --num-consumers` | Number of consumers (per subscription), only one consumer is allowed when subscriptionType is Exclusive|1|
 | `-ntxn` | The number of opened transactions, 0 means keeping open.(After --txn-enable setting to true, -ntxn takes effect.)|0|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep consuming|0|
+| `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-m, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `-ss, --subscriptions` | A list of subscriptions to consume (for example, sub1,sub2)|[sub]|
 | `-pm, --pool-messages` | Use the pooled message|true|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--batch-index-ack` | Enable or disable the batch index acknowledgment|false|
 | `--auth-plugin` | Authentication plugin class name|null|
 | `-p, --receiver-queue-size-across-partitions` | Max total size of the receiver queue across partitions|50000|
@@ -144,6 +148,7 @@ $ pulsar-perf transaction [options]
 | `-sp, --subscription-position` | Subscription position|Earliest|
 | `--topics-p` | All topics that need produce for a transaction|[test-produce]|
 | `-tto, --txn-timeout` | Set the time value of transaction timeout, and the time unit is second. (After --txn-enable setting to true, --txn-timeout takes effect)|5|
+| `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
 | `-ntxn, --number-txn` | Set the number of transaction. 0 means keeping open.If transaction disabled, it means the number of tasks. The task or transaction produces or consumes a specified number of messages.|0|
 | `-txnRate` | Set the rate of opened transaction or task. 0 means no limit|0|
@@ -151,6 +156,7 @@ $ pulsar-perf transaction [options]
 | `--topics-c` | All topics that need ack for a transaction|[test-consume]|
 | `-st, --subscription-type` | Subscription type|Shared|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--auth-plugin` | Authentication plugin class name|null|
 | `-abort` | Abort the transaction. (After --txn-disEnable setting to false, -abort takes effect)|false|
 | `-u, --service-url` | Pulsar Service URL|null|
@@ -172,11 +178,13 @@ $ pulsar-perf read [options]
 |Flag|Description|Default|
 |---|---|---|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep consuming|0|
+| `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
 | `-n, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
 | `-m, --start-message-id` | Start message id. This can be either 'earliest', 'latest' or a specific message id by using 'lid:eid'|earliest|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `-cf, --conf-file` | Configuration file|null|
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--use-tls` | Use TLS encryption on the connection|false|
