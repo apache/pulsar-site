@@ -53,7 +53,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
   fi
 
   echo "BUILD_ALL:"$BUILD_ALL
-  if [[ $BUILD_ALL"" == "11" ]]; then
+  if [[ $BUILD_ALL"" == "1" ]]; then
     echo "clean all the old content"
     find $PULSAR_SITE_TMP/content -print \
       | grep -v $PULSAR_SITE_TMP/content$ \
