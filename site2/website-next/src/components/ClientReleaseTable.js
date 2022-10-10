@@ -11,7 +11,7 @@ export default function VersionsTable(props) {
     <Table size="small">
       <TableHead>
         <TableRow>
-          {["Release Note", "Documentation"].map(header => (
+          {["Version", "Release Note", "Documentation"].map(header => (
             <TableCell
               className="font-bold"
               sx={{ color: "inherit" }}
@@ -25,6 +25,7 @@ export default function VersionsTable(props) {
       <TableBody>
         {props.data.map((row, index) => (
           <TableRow key={index} sx={{ color: "inherit" }}>
+            <TableCell sx={{ color: "inherit" }}>{row.version}</TableCell>
             <TableCell sx={{ color: "inherit" }}>
               <a href={row.releaseNotes}>{row.tagName}</a>
             </TableCell>
