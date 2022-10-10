@@ -32,7 +32,7 @@ All release notes of previous versions are available [here](/release-notes/legac
 
 > **Tip**
 >
-> - The code repos of**Java and WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar). These clients are released with Pulsar. 
+> - The code repos of **Java and WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar). These clients are released with Pulsar. 
 >
 > - The code repos of **[C++](https://github.com/apache/pulsar-client-cpp), [Python](https://github.com/apache/pulsar-client-python), [Go](https://github.com/apache/pulsar-client-go), [Node.js](https://github.com/apache/pulsar-client-node), and [C#](https://github.com/apache/pulsar-dotpulsar)** clients are hosted outside of the Pulsar main repo. These clients are not released with Pulsar.
 >
