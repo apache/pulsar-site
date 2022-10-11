@@ -51,16 +51,26 @@ do
     echo "module.exports = [" > "$OUTPUT"
 done
 
+# login to GitHub
 echo $GH_TOKEN > "$TOKEN_FILE"
 gh auth login --with-token < "$TOKEN_FILE"
 rm "$TOKEN_FILE"
 
-# list all versions (after v2.5.1) sorted by version number desc
-versions=$(gh release list -R apache/pulsar | head -n -10 | awk '{print $1}' | sort -rV)
+# list all versions (>= v2.5.0) sorted by version number desc, including legacy tag releases
+releases=$(gh release list -R apache/pulsar | head -n -10 | awk '{print $1}')
+versions=$(printf '%s\nv2.5.0\nv2.6.3\nv2.9.1' "$releases" | sort -rV)
 for v in $versions
 do
     vnum=${v:1} # version number without the leading "v"
     vtag=$vnum
+
+    # Version
+    version=
+    next=$(echo "$vnum" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+    if [[ $versions != *$next* ]]; then
+        # If the next patch version exists, then we add a version column
+        version="${v%.*}.x"
+    fi
 
     # Release Note URL
     release_notes=$RELEASE_NOTES/pulsar-$vnum/
@@ -85,6 +95,15 @@ do
         release_blog=$BASE_URL/blog/$date/$path
     fi
 
+    # author, tagName, publishedAt info and release body
+    if [[ $vnum == "2.5.0" || $vnum == "2.6.3" || $vnum == "2.9.1" ]]; then # legacy tag releases
+        entry_input=$(cat "$DATA/$vnum.json")
+        release_body_input=$(cat "$WEBSITE/release-notes/versioned/pulsar-$vnum.md")
+    else
+        entry_input=$(gh release view "$v" -R apache/pulsar --json author,tagName,publishedAt)
+        release_body_input=$(gh release view "$v" -R apache/pulsar)
+    fi
+
     # Documentation URL
     lower=$(printf '%s\n2.8.0' "$vnum" | sort -V | head -n1)
     if [[ $lower == "2.8.0" ]]; then # 2.8.0 or later, use ".x" as patch number
@@ -101,34 +120,34 @@ do
     doc_ws=$doc/client-libraries-websocket
 
     # Construct Pulsar JSON
-    entry=$(gh release view "$v" -R apache/pulsar --json author,tagName,publishedAt | jq "{author:.author.login,tagName,publishedAt,vtag:\"$vtag\",releaseNotes:\"$release_notes\",releaseBlog:\"$release_blog\",doc:\"$doc\"}")
+    entry=$(echo "$entry_input" | jq "{author:.author.login,tagName,publishedAt,vtag:\"$vtag\",releaseNotes:\"$release_notes\",releaseBlog:\"$release_blog\",doc:\"$doc\",version:\"$version\"}")
     echo "$entry," >> "$OUTPUT_PULSAR"
 
     # Construct Client JSON
     # Store the release notes body and lowercase it
-    release_body=$(gh release view "$v" -R apache/pulsar | tr '[:upper:]' '[:lower:]')
+    release_body=$(echo "$release_body_input" | tr '[:upper:]' '[:lower:]')
 
     # Java Client
     if [[ $release_body == *"java"* ]]; then
-        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,vtag:\"$vtag\",releaseNotes:\"$release_notes_java\",doc:\"$doc_java\"}")
+        entry="{tagName: \"$v\",vtag:\"$vtag\",releaseNotes:\"$release_notes_java\",doc:\"$doc_java\",version:\"$version\"}"
         echo "$entry," >> "$OUTPUT_JAVA"
     fi
 
     # Python Client
     if [[ $release_body == *"python"* ]]; then
-        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,vtag:\"$vtag\",releaseNotes:\"$release_notes_python\",doc:\"$doc_python\"}")
+        entry="{tagName: \"$v\",vtag:\"$vtag\",releaseNotes:\"$release_notes_python\",doc:\"$doc_python\",version:\"$version\"}"
         echo "$entry," >> "$OUTPUT_PYTHON"
     fi
 
     # C++ Client
     if [[ $release_body == *"c++"* ]]; then
-        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,vtag:\"$vtag\",releaseNotes:\"$release_notes_cpp\",doc:\"$doc_cpp\"}")
+        entry="{tagName: \"$v\",vtag:\"$vtag\",releaseNotes:\"$release_notes_cpp\",doc:\"$doc_cpp\",version:\"$version\"}"
         echo "$entry," >> "$OUTPUT_CPP"
     fi
 
     # Websocket Client
     if [[ $release_body == *"websocket"* ]]; then
-        entry=$(gh release view "$v" -R apache/pulsar --json tagName | jq "{tagName,vtag:\"$vtag\",releaseNotes:\"$release_notes_ws\",doc:\"$doc_ws\"}")
+        entry="{tagName: \"$v\",vtag:\"$vtag\",releaseNotes:\"$release_notes_ws\",doc:\"$doc_ws\",version:\"$version\"}"
         echo "$entry," >> "$OUTPUT_WS"
     fi
 done
@@ -139,6 +158,14 @@ for v in $versions
 do
     vnum=${v:1} # version number without the leading "v"
 
+    # Version
+    version=
+    next=$(echo "$vnum" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+    if [[ $versions != *$next* ]]; then
+        # If the next patch version exists, then we add a version column
+        version="${v%.*}.x"
+    fi
+
     # Release Note URL
     release_notes_go=$RELEASE_NOTES/pulsar-client-go-$vnum/
 
@@ -146,7 +173,7 @@ do
     doc=$BASE_URL/docs
     doc_go=$doc/client-libraries-go
 
-    entry=$(gh release view "$v" -R apache/pulsar-client-go --json tagName | jq "{tagName,releaseNotes:\"$release_notes_go\",doc:\"$doc_go\"}")
+    entry="{tagName: \"$v\",releaseNotes:\"$release_notes_go\",doc:\"$doc_go\",version:\"$version\"}"
     echo "$entry," >> "$OUTPUT_GO"
 done
 
@@ -156,6 +183,14 @@ for v in $versions
 do
     vnum=${v:1} # version number without the leading "v"
 
+    # Version
+    version=
+    next=$(echo "$vnum" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+    if [[ $versions != *$next* ]]; then
+        # If the next patch version exists, then we add a version column
+        version="${v%.*}.x"
+    fi
+
     # Release Note URL
     release_notes_node=$RELEASE_NOTES/pulsar-client-node-$vnum/
 
@@ -163,14 +198,22 @@ do
     doc=$BASE_URL/docs
     doc_node=$doc/client-libraries-node
 
-    entry=$(gh release view "$v" -R apache/pulsar-client-node --json tagName | jq "{tagName,releaseNotes:\"$release_notes_node\",doc:\"$doc_node\"}")
+    entry="{tagName: \"$v\",releaseNotes:\"$release_notes_node\",doc:\"$doc_node\",version:\"$version\"}"
     echo "$entry," >> "$OUTPUT_NODE"
 done
 
-# C# Client, note that we can only get the tags here
+# C# Client (>= 0.9.6), note that we can only get the tags here
 versions=$(gh api repos/apache/pulsar-dotpulsar/tags -q ".[].name" | head -n -11 | sort -rV)
 for v in $versions
 do
+    # Version
+    version=
+    next=$(echo "$v" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+    if [[ $versions != *$next* ]]; then
+        # If the next patch version exists, then we add a version column
+        version="${v%.*}.x"
+    fi
+
     # Release Note URL
     release_notes_cs=$RELEASE_NOTES/pulsar-cs-$v/
 
@@ -178,7 +221,7 @@ do
     doc=$BASE_URL/docs
     doc_cs=$doc/client-libraries-dotnet
 
-    entry="{\"tagName\":\"$v\",\"releaseNotes\":\"$release_notes_cs\",\"doc\":\"$doc_cs\"}"
+    entry="{\"tagName\":\"$v\",\"releaseNotes\":\"$release_notes_cs\",\"doc\":\"$doc_cs\",version:\"$version\"}"
     echo "$entry," >> "$OUTPUT_CS"
 done
 
