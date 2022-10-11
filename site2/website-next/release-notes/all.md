@@ -26,15 +26,17 @@ const cs = require(`../data/release-cs.js`);
 
 ### Previous versions
 
-All release notes of previous versions are available at [here](/release-notes/legacy).
+All release notes of previous versions are available [here](/release-notes/legacy).
 
 ## Client Release Notes
 
 > **Tip**
-> 
-> The code repos of **Java, C++, Python, and WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar) and these clients are released with Pulsar. Their release notes of previous versions are parts of Pulsar release notes. You can check them out at [here](/release-notes/legacy).
-> 
-> The code repos of **Go, Node.js, and C#** clients are hosted outside of the Pulsar main repo and these clients are not released with Pulsar. They have independent release notes in their repos and all of them are synced to this page.
+>
+> - The code repos of **Java and WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar). These clients are released with Pulsar. 
+>
+> - The code repos of **[C++](https://github.com/apache/pulsar-client-cpp), [Python](https://github.com/apache/pulsar-client-python), [Go](https://github.com/apache/pulsar-client-go), [Node.js](https://github.com/apache/pulsar-client-node), and [C#](https://github.com/apache/pulsar-dotpulsar)** clients are hosted outside of the Pulsar main repo. These clients are not released with Pulsar.
+>
+> - All clients have [independent release notes](release-notes/versioned) and they are automatically synced to this page.
 
 ### Java
 
