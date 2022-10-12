@@ -105,6 +105,5 @@ jobs:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
         run: |
           echo "Building Website"
-          sed -i "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" site2/website-next/crowdin.yml
           site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
           bash -e site2/tools/publish-website.sh next
