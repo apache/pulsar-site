@@ -14,6 +14,7 @@ sidebar_label: Client CPP 2.11.0
 - [improve][C++] Avoid race condition causing double callback on close [#15508](https://github.com/apache/pulsar/pull/15508)
 - [improve][C++] Add subscription properties to consumer for cpp [#15020](https://github.com/apache/pulsar/pull/15020)
 - [improve][C++] Use an atomic state_ instead of the lock to improve performance [#16940](https://github.com/apache/pulsar/pull/16940)
+- [improve][C++] Reset havePendingPingRequest flag for any data received from broker [#17658](https://github.com/apache/pulsar/pull/17658)
 - [cleanup][C++] Remove the flaky and meaningless tests [#15271](https://github.com/apache/pulsar/pull/15271)
 - [fix][C++] Fix potential segfault when resending messages [#17395](https://github.com/apache/pulsar/pull/17395)
 - [fix][C++] Support retry and apply operation timeout for lookup requests [#17410](https://github.com/apache/pulsar/pull/17410)

@@ -5,6 +5,7 @@ sidebar_label: Client Java 2.11.0
 ---
 
 - [feature][Java] Support Reader Interceptor [#14729](https://github.com/apache/pulsar/pull/14729)
+- [improve][Java] Refactor SchemaHash to reduce call of hashFunction in SchemaHash [#17948](https://github.com/apache/pulsar/pull/17948)
 - [improve][Java] Send CloseConsumer on client timeout [#16616](https://github.com/apache/pulsar/pull/16616)
 - [improve][Java] Make DeadLetterPolicy deserializable [#16513](https://github.com/apache/pulsar/pull/16513)
 - [improve][Java] Improve performance of multi-topic consumer with more than one IO thread [#16336](https://github.com/apache/pulsar/pull/16336)
@@ -19,6 +20,8 @@ sidebar_label: Client Java 2.11.0
 - [improve][Java] Optimize pause when creating sub consumers in multi-topic consumer [#14566](https://github.com/apache/pulsar/pull/14566)
 - [cleanup][Java] Reduce code duplication in admin client [#16377](https://github.com/apache/pulsar/pull/16377)
 - [cleanup][Java] Remove redundant check for chunked message TotalChunkMsgSize in ConsumerImpl [#16797](https://github.com/apache/pulsar/pull/16797)
+- [fix][Java] Unwrap completion exception for Lookup Services [#17717](https://github.com/apache/pulsar/pull/17717)
+- [fix][Java] Fixed ack failure in ReaderImpl due to null messageId [#17728](https://github.com/apache/pulsar/pull/17728)
 - [fix][Java] Fix scheduledExecutorProvider not shutdown [#17527](https://github.com/apache/pulsar/pull/17527)
 - [fix][Java] Fix the message present in incoming queue after go to DLQ [#17326](https://github.com/apache/pulsar/pull/17326)
 - [fix][Java] Fix reach redeliverCount client can't send messages to DLQ [#17287](https://github.com/apache/pulsar/pull/17287)
