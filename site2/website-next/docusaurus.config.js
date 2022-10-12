@@ -251,10 +251,6 @@ module.exports = {
           ],
         },
         {
-          type: "localeDropdown",
-          position: "right",
-        },
-        {
           to: "/download",
           label: "Download",
           position: "right",
