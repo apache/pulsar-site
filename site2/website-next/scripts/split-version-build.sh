@@ -11,7 +11,7 @@ echo "changed files: "
 echo $@
 
 function _build() {
-    yarn build --locale en
+    yarn build
 }
 
 function _buildVersion() {
