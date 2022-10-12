@@ -21,14 +21,8 @@ const versionsMap = {
 };
 
 let buildVersions = ["current"];
-let buildLanguages = ["en"];
 try {
   buildVersions = require("./.build-versions.json");
-} catch (error) {
-  //do nothing
-}
-try {
-  buildLanguages = require("./.build-languages.json");
 } catch (error) {
   //do nothing
 }
@@ -141,18 +135,6 @@ module.exports = {
   customFields: {
     githubUrl,
     oldUrl,
-  },
-  i18n: {
-    defaultLocale: "en",
-    locales: buildLanguages,
-    localeConfigs: {
-      "zh-CN": {
-        label: "简体中文",
-      },
-      "zh-TW": {
-        label: "繁体中文",
-      },
-    },
   },
   themeConfig: {
     announcementBar: {
@@ -267,10 +249,6 @@ module.exports = {
               label: "Events",
             },
           ],
-        },
-        {
-          type: "localeDropdown",
-          position: "right",
         },
         {
           to: "/download",
