@@ -38,6 +38,7 @@ const packagesApiUrl = url + "/packages-rest-api";
 const transactionsApiUrl = url + "/transactions-rest-api";
 const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
+const githubSiteUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
 
 const injectLinkParse = ([, prefix, , name, path]) => {
@@ -380,7 +381,7 @@ module.exports = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: `${githubUrl}/edit/master/site2/website`,
+          editUrl: `${githubSiteUrl}/edit/main/site2/website-next/`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
