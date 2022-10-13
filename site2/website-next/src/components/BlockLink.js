@@ -1,6 +1,4 @@
 import React from "react";
-import { docUrl } from "../utils/index";
-
 
 const BlockLink = (props) => {
   return(
@@ -11,4 +9,5 @@ const BlockLink = (props) => {
       </div>
   )
 }
+
 export default BlockLink;

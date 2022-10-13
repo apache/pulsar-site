@@ -1,5 +1,4 @@
 import React from "react";
-import { docUrl } from "../utils/index";
 
 const PromoCallout = (props) => {
   return (
@@ -12,4 +11,5 @@ const PromoCallout = (props) => {
     </div>
   );
 };
+
 export default PromoCallout;
