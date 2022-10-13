@@ -180,7 +180,7 @@ export default function Home() {
             <PillButton variant="" target="" href={docUrl("concepts-overview")}>
               Learn More
             </PillButton>
-            <PillButton variant="grey" href={docUrl("getting-started-home")}>
+            <PillButton variant="grey" href={docUrl("getting-started-standalone")}>
               Quickstart
             </PillButton>
           </div>
