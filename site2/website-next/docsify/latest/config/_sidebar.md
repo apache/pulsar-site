@@ -1,4 +1,5 @@
-- Pulsar Configuration > Pulsar
+- [Configuration]()
+  - [Pulsar](config/)
     - [BookKeeper](config/reference-configuration-bookkeeper)
     - [Broker](config/reference-configuration-broker)
     - [Client](config/reference-configuration-client)
