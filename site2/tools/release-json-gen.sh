@@ -68,7 +68,7 @@ do
     version=
     next=$(echo "$vnum" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
     if [[ $versions != *$next* ]]; then
-        # If the next patch version exists, then we add a version column
+        # If the next patch version does not exist, then we add a version column
         version="${v%.*}.x"
     fi
 
