@@ -1,5 +1,4 @@
 import React from "react";
-import { docUrl } from "../utils/index";
 
 const PillButton = (props) => {
   return (

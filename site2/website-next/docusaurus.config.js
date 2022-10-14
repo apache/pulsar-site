@@ -167,9 +167,8 @@ module.exports = {
               label: "Pulsar Concepts",
             },
             {
-              type: "doc",
               label: "Quickstart",
-              docId: "getting-started-standalone",
+              to: "/docs",
             },
             {
               label: "Ecosystem",

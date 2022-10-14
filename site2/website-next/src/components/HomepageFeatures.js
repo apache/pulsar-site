@@ -1,8 +1,6 @@
 import React from "react";
-import clsx from "clsx";
 import styles from "./HomepageFeatures.module.css";
 import ReactMarkdown from "react-markdown";
-import { docUrl } from "../utils/index";
 
 const FeatureList = (language) => [
   {

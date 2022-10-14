@@ -6,8 +6,7 @@ import HomeQuotes from "../components/HomeQuotes";
 import SubHeroBlock from "../components/SubHeroBlock";
 import PromoCallout from "../components/PromoCallout";
 import PillButton from "../components/PillButton";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { docUrl, githubUrl } from "../utils/index";
+
 var startWaves = function () {
   if (!SineWaves) {
     return;
@@ -177,14 +176,10 @@ export default function Home() {
         </div>
         <div className="home-ctas relative z-5">
           <div className="inner">
-            <PillButton
-              variant=""
-              target=""
-              href={docUrl("next/concepts-overview")}
-            >
+            <PillButton variant="" target="" href={`${siteConfig.baseUrl}docs/concepts-overview`}>
               Learn More
             </PillButton>
-            <PillButton variant="grey" href={docUrl("next/")}>
+            <PillButton variant="grey" href={`${siteConfig.baseUrl}docs`}>
               Quickstart
             </PillButton>
           </div>
@@ -216,16 +211,6 @@ export default function Home() {
                 Read Case Studies
               </a>
             </p>
-          </div>
-          <div className="final-cta relative z-5 py-12">
-            <div className="inner inner--narrow text--center">
-              <h2 className="">Get real-time with Pulsar</h2>
-              <p className="">
-                <PillButton variant="" target="" href={docUrl("")}>
-                  Quickstart Guide
-                </PillButton>
-              </p>
-            </div>
           </div>
         </section>
       </div>

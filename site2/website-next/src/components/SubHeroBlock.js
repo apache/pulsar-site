@@ -1,8 +1,4 @@
 import React from "react";
-import styles from "./SubHeroBlock.module.css";
-import ReactMarkdown from "react-markdown";
-import { docUrl } from "../utils/index";
-
 
 const SubHeroBlock = (props) => {
   return(
@@ -14,4 +10,5 @@ const SubHeroBlock = (props) => {
       </section>
   )
 }
+
 export default SubHeroBlock;
