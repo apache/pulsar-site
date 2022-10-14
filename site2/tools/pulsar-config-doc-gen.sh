@@ -52,3 +52,10 @@ $JAVA -cp "$CLIENT_CP:$(cat "$f")" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ClientConfig
 $JAVA -cp "$CLIENT_CP:$(cat "$f")" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ProducerConfigurationData > "$CLIENT_DIR"/client-configuration-producer.md
 $JAVA -cp "$CLIENT_CP:$(cat "$f")" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ConsumerConfigurationData > "$CLIENT_DIR"/client-configuration-consumer.md
 $JAVA -cp "$CLIENT_CP:$(cat "$f")" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ReaderConfigurationData > "$CLIENT_DIR"/client-configuration-reader.md
+
+# copy CLI tools docs
+tools="bookkeeper broker-tool pulsar-daemon pulsar-shell"
+for tool in $tools
+do
+    cp "$WEBSITE/docs/reference-cli-$tool.md" "$VERSIONED_DIR/$tool/README.md"
+done
