@@ -28296,11 +28296,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
-                },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -29306,11 +29306,13 @@
                     "type": "number",
                     "format": "double"
                 },
-                "underLoaded": {
-                    "type": "boolean"
+                "msgThroughputOut": {
+                    "type": "number",
+                    "format": "double"
                 },
-                "overLoaded": {
-                    "type": "boolean"
+                "msgThroughputIn": {
+                    "type": "number",
+                    "format": "double"
                 },
                 "cpu": {
                     "$ref": "#/definitions/ResourceUsage"
@@ -29322,9 +29324,6 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "loadReportType": {
-                    "type": "string"
-                },
                 "bandwidthIn": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
@@ -29334,13 +29333,14 @@
                 "memory": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
-                "msgThroughputIn": {
-                    "type": "number",
-                    "format": "double"
+                "underLoaded": {
+                    "type": "boolean"
                 },
-                "msgThroughputOut": {
-                    "type": "number",
-                    "format": "double"
+                "overLoaded": {
+                    "type": "boolean"
+                },
+                "loadReportType": {
+                    "type": "string"
                 }
             }
         },
@@ -29713,27 +29713,20 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
-                "managedLedgerOffloadDriver": {
+                "gcsManagedLedgerOffloadRegion": {
                     "type": "string"
                 },
-                "offloadersDirectory": {
+                "managedLedgerOffloadBucket": {
                     "type": "string"
                 },
-                "managedLedgerOffloadPrefetchRounds": {
-                    "type": "integer",
-                    "format": "int32"
+                "fileSystemProfilePath": {
+                    "type": "string"
                 },
-                "managedLedgerOffloadMaxThreads": {
-                    "type": "integer",
-                    "format": "int32"
+                "fileSystemURI": {
+                    "type": "string"
                 },
-                "managedLedgerOffloadDeletionLagInMillis": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "managedLedgerOffloadThresholdInBytes": {
-                    "type": "integer",
-                    "format": "int64"
+                "s3ManagedLedgerOffloadCredentialId": {
+                    "type": "string"
                 },
                 "managedLedgerOffloadedReadPriority": {
                     "type": "string",
@@ -29748,33 +29741,7 @@
                 "s3ManagedLedgerOffloadBucket": {
                     "type": "string"
                 },
-                "s3ManagedLedgerOffloadServiceEndpoint": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "s3ManagedLedgerOffloadCredentialId": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadCredentialSecret": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadRole": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadRoleSessionName": {
-                    "type": "string"
-                },
-                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "gcsManagedLedgerOffloadRegion": {
-                    "type": "string"
-                },
-                "gcsManagedLedgerOffloadBucket": {
+                "managedLedgerOffloadRegion": {
                     "type": "string"
                 },
                 "gcsManagedLedgerOffloadMaxBlockSizeInBytes": {
@@ -29785,20 +29752,22 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "gcsManagedLedgerOffloadServiceAccountKeyFile": {
+                "s3ManagedLedgerOffloadServiceEndpoint": {
                     "type": "string"
                 },
-                "fileSystemProfilePath": {
+                "gcsManagedLedgerOffloadBucket": {
                     "type": "string"
                 },
-                "fileSystemURI": {
+                "s3ManagedLedgerOffloadCredentialSecret": {
                     "type": "string"
                 },
-                "managedLedgerOffloadBucket": {
-                    "type": "string"
+                "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
                 },
-                "managedLedgerOffloadRegion": {
-                    "type": "string"
+                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "managedLedgerOffloadServiceEndpoint": {
                     "type": "string"
@@ -29807,9 +29776,40 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "managedLedgerOffloadMaxThreads": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "offloadersDirectory": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadDriver": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadRole": {
+                    "type": "string"
+                },
+                "s3ManagedLedgerOffloadRoleSessionName": {
+                    "type": "string"
+                },
                 "managedLedgerOffloadReadBufferSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "managedLedgerOffloadPrefetchRounds": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "gcsManagedLedgerOffloadServiceAccountKeyFile": {
+                    "type": "string"
+                },
+                "managedLedgerOffloadDeletionLagInMillis": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "managedLedgerOffloadThresholdInBytes": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -29914,13 +29914,13 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "fileSystemDriver": {
+                    "type": "boolean"
+                },
                 "s3Driver": {
                     "type": "boolean"
                 },
                 "gcsDriver": {
-                    "type": "boolean"
-                },
-                "fileSystemDriver": {
                     "type": "boolean"
                 }
             }
@@ -30689,11 +30689,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "propertyNamingStrategy": {
-                    "$ref": "#/definitions/PropertyNamingStrategy"
-                },
                 "handlerInstantiator": {
                     "$ref": "#/definitions/HandlerInstantiator"
+                },
+                "propertyNamingStrategy": {
+                    "$ref": "#/definitions/PropertyNamingStrategy"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -31409,12 +31409,6 @@
                 "initialized": {
                     "type": "boolean"
                 },
-                "functions": {
-                    "$ref": "#/definitions/FunctionsWorkerService"
-                },
-                "sinks": {
-                    "$ref": "#/definitions/SinksWorkerService"
-                },
                 "workerConfig": {
                     "$ref": "#/definitions/WorkerConfig"
                 },
@@ -31423,6 +31417,12 @@
                 },
                 "workers": {
                     "$ref": "#/definitions/WorkersWorkerService"
+                },
+                "functions": {
+                    "$ref": "#/definitions/FunctionsWorkerService"
+                },
+                "sinks": {
+                    "$ref": "#/definitions/SinksWorkerService"
                 }
             }
         },
