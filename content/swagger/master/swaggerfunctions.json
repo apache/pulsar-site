@@ -1016,7 +1016,10 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
-        "subscription" : {
+        "commandData" : {
+          "type" : "string"
+        },
+        "httpAuthType" : {
           "type" : "string"
         },
         "tlsCertificates" : {
@@ -1025,10 +1028,7 @@
             "$ref" : "#/definitions/Certificate"
           }
         },
-        "httpAuthType" : {
-          "type" : "string"
-        },
-        "commandData" : {
+        "subscription" : {
           "type" : "string"
         }
       }
@@ -1321,11 +1321,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
@@ -1642,12 +1642,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
+        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -2428,6 +2428,9 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "topicName" : {
+          "type" : "string"
+        },
         "publishTime" : {
           "type" : "integer",
           "format" : "int64"
@@ -2462,9 +2465,6 @@
         },
         "replicated" : {
           "type" : "boolean"
-        },
-        "topicName" : {
-          "type" : "string"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2851,11 +2851,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
