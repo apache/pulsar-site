@@ -1,0 +1,2 @@
+- [CLI Tools](cli)
+  - [pulsar-daemon](pulsar-daemon/)

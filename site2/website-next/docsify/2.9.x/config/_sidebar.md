@@ -1,2 +1,3 @@
-- Pulsar Configuration > Pulsar
+- [Configuration]()
+  - [Pulsar](config/)
     - [Configuration](config/reference-configuration)

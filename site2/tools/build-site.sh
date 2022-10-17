@@ -62,4 +62,4 @@ cp -R ./build/* "$CONTENT_DIR"
 cp -R "$WEBSITE_DIR"/static/swagger/* "$CONTENT_DIR"/swagger/
 
 # Generate document for release table
-"$TOOLS_DIR"/release-json-gen.sh $GH_TOKEN "$WEBSITE_DIR"
+"$TOOLS_DIR"/release-json-gen.sh "$GH_TOKEN" "$WEBSITE_DIR"

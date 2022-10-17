@@ -25,7 +25,7 @@ WEBSITE=$1
 VERSION=$2
 DOCS_DIR=$WEBSITE/docsify/$VERSION/pulsar-perf
 
-"$ROOT_DIR"/bin/pulsar-perf gen-doc > "$DOCS_DIR"/pulsar-perf.md
+"$ROOT_DIR"/bin/pulsar-perf gen-doc > "$DOCS_DIR"/README.md
 
 
 
