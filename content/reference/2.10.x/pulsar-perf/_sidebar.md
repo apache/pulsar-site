@@ -1,2 +1,2 @@
-- CLI Configuration > pulsar-perf
-    - [pulsar-perf](pulsar-perf/pulsar-perf.md)
+- [CLI Tools](cli)
+  - [pulsar-perf](pulsar-perf/)

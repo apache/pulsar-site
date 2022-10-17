@@ -1,4 +1,5 @@
-- CLI Configuration > pulsar-admin
+- [CLI Tools](cli)
+  - [pulsar-admin](pulsar-admin/)
     - [broker-stats](pulsar-admin/broker-stats.md)
     - [brokers](pulsar-admin/brokers.md)
     - [bookies](pulsar-admin/bookies.md)

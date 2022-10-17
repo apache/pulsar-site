@@ -1,1 +1,1 @@
-> Docs for Pulsar Client Library Configuration.
+> Docs for Pulsar Client Configuration.

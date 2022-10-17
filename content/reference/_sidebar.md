@@ -1,8 +1,11 @@
-- Pulsar Configuration
+- [Configuration]()
   - [Pulsar](config/)
-  - [Client Library](client/)
-- CLI Configuration
+  - [Client](client/)
+- [CLI Tools](cli)
   - [pulsar-admin](pulsar-admin/)
   - [pulsar-client](pulsar-client/)
   - [pulsar](pulsar/)
+  - [pulsar-daemon](pulsar-daemon/)
   - [pulsar-perf](pulsar-perf/)
+  - [bookkeeper](bookkeeper/)
+  - [broker-tool](broker-tool/)
