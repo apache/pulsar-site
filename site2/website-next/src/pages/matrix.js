@@ -1,89 +1,70 @@
 import * as React from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+import ReactDOM from 'react-dom';
 import Layout from "@theme/Layout";
+import { Table } from 'element-react';
+import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
+import Icon from '@mui/material/Icon';
+import 'element-theme-default';
 
-export default function Home() {
+const matrixObj = require("../../data/matrix.js");
+const data = matrixObj.data
 
-  const tableHead = [
-    { id: 'zero', label: '' },
-    { id: 'feature', label: 'Feature' },
-    { id: 'java', label: 'Java' },
-    { id: 'c++', label: 'C++' },
-    { id: 'go', label: 'Go' },
-    { id: 'python', label: 'Python' }
-  ];
+const subHeader = matrixObj.subHeader.map(subRow => {
+  if (subRow.subColumns) {
+    let subColumns = subRow.subColumns
+    subColumns.forEach( subColumnsItem => {
+      subColumnsItem.render = function(subColumnsItemRow, subColumnsItemColoum) {
+        if (subColumnsItemRow[subColumnsItemColoum.prop]) {
+          return (
+            <span>true</span>
+          )
+        } else {
+          return (
+            <span>false</span>
+          )
+        }
+        
+      }
+    })
+  }
+  // console.log('subRow-------',subRow)
 
-  // const tableBody = [
-  //   {
+  return subRow
+})
 
-  //   }
-  // ]
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-    price: number,
-  ) {
-    return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
-      price,
-      history: [
-        {
-          date: '2020-01-05',
-          customerId: '11091700',
-          amount: 3,
-        },
-        {
-          date: '2020-01-02',
-          customerId: 'Anonymous',
-          amount: 1,
-        },
-      ],
-    };
+const tableHead = matrixObj.tableHeader.map( row => {
+  
+  if (row.type == "expand") {
+    row.expandPannel = function(row) {
+      return (
+        <Table
+          style={{width: '100%'}}
+          columns={subHeader}
+          data={row.children}
+          border={false}
+        />
+      )
+    }
   }
 
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-  
+  return row
+})
+
+
+export default function Matrix() {
   return (
     <Layout>
-      <TableContainer>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {tableHead.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableBody>
-              {rows.map((row) => (
-                <Row key={row.name} row={row} />
-              ))}
-            </TableBody>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div className="matrix-padding-x">
+        <section className="matrix-margin-top">
+          <Table
+            style={{width: '100%'}}
+            showHeader={false}
+            columns={tableHead}
+            data={data}
+            border={false}
+          />
+        </section>
+      </div>
     </Layout>
-  );
+  )
 }
