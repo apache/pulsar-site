@@ -162,8 +162,7 @@ module.exports = {
           position: "right",
           items: [
             {
-              type: "doc",
-              docId: "concepts-overview",
+              to: "/docs/concepts-overview",
               label: "Pulsar Concepts",
             },
             {
