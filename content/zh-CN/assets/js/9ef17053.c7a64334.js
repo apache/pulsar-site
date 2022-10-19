@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite_next=self.webpackChunkwebsite_next||[]).push([[53936],{12146:e=>{e.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"pulsar-manager-release-notes"}')}}]);
