@@ -13,6 +13,7 @@ $ pulsar-admin clusters subcommand
 * `delete`
 * `list`
 * `update-peer-clusters`
+* `update-cluster-migration`
 * `get-peer-clusters`
 * `get-failure-domain`
 * `create-failure-domain`
@@ -143,6 +144,25 @@ $ pulsar-admin clusters update-peer-clusters options
 |Flag|Description|Default|
 |---|---|---|
 | `--peer-clusters` | Comma separated peer-cluster names [Pass empty string "" to delete list]|null||
+
+
+## <em>update-cluster-migration</em>
+
+Update cluster migration
+
+**Command:**
+
+```shell
+$ pulsar-admin clusters update-cluster-migration options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--migrated` | Is cluster migrated|false||
+| `--broker-url` | New migrated cluster broker service url|null||
+| `--broker-url-secure` | New migrated cluster broker service url secure|null||
 
 
 ## <em>get-peer-clusters</em>

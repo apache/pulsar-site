@@ -2425,6 +2425,17 @@ Enable check for minimum allowed client library version
 
 **Category**: Server
 
+### clusterMigrationCheckDurationSeconds
+Interval between checks to see if cluster is migrated and marks topic migrated  if cluster is marked migrated. Disable with value 0. (Default disabled).
+
+**Type**: `int`
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### configurationMetadataStoreUrl
 The metadata store URL for the configuration data. If empty, we fall back to use metadataStoreUrl
 
@@ -2984,7 +2995,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `869`
+**Default**: `868`
 
 **Dynamic**: `true`
 
