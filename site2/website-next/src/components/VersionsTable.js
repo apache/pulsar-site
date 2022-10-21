@@ -4,18 +4,12 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Link from "@mui/material/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Translate, { translate } from "@docusaurus/Translate";
+import Translate from "@docusaurus/Translate";
 import { docUrl, getCache } from "../utils/index";
 const versions = require("../../versions.json");
-const oldversions = require("../../oldversions.json");
-const legacyVersions = require(`../../legacy-versions.json`);
 
 export default function VersionsTable(props) {
-  const { siteConfig } = useDocusaurusContext();
   const latestStableVersion = versions[0];
-
-  const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
   return (
     <Table size="small" sx={{ maxWidth: 500 }}>
       <TableBody>
@@ -38,11 +32,7 @@ export default function VersionsTable(props) {
                 href={docUrl(
                   "",
                   "",
-                  row.name == latestStableVersion
-                    ? ""
-                    : oldversions.includes(row.name.replace("v", ""))
-                    ? row.name + "/getting-started/LocalCluster"
-                    : row.name
+                  row.name == latestStableVersion ? "" : row.name
                 )}
                 underline="none"
                 onClick={() => {
