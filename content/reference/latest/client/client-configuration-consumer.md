@@ -115,6 +115,13 @@ The time interval to expire incomplete chunks if a consumer fails to receive all
 
 **Default**: `60000`
 
+### maxAcknowledgmentGroupSize
+Group a consumer acknowledgment for the number of messages.
+
+**Type**: `int`
+
+**Default**: `1000`
+
 ### maxPendingChunkedMessage
 The maximum size of a queue holding pending chunked messages. When the threshold is reached, the consumer drops pending messages to optimize memory utilization.
 
