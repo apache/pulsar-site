@@ -120,7 +120,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][txn] Fix race in TransactionMetaStoreHandler [#16147](https://github.com/apache/pulsar/pull/16147)
 
 ### Pulsar IO and Pulsar Functions
-- [fix][connector] Fixed kafka source config for `pulsar-io-kafka` when `consumerConfigProperties`="" [#16731](https://github.com/apache/pulsar/pull/16731)
+- [fix][connector] Fix Kafka source config for `pulsar-io-kafka` when `consumerConfigProperties`="" [#16731](https://github.com/apache/pulsar/pull/16731)
 - [fix][connector] IOConfigUtils support required and defaultValue annotations. [#16785](https://github.com/apache/pulsar/pull/16785)
 - [improve][connector] Add reader config to `pulsar-io-debezium` and `pulsar-io-kafka-connect-adaptor` [#16675](https://github.com/apache/pulsar/pull/16675)
 - [fix][function] Ensure bytes is a well-formed UTF-8 byte sequence when decode the `FunctionState` bytes to string [#16199](https://github.com/apache/pulsar/pull/16199)
