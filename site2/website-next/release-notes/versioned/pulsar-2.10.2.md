@@ -49,7 +49,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][broker] Skip reading more entries for a pending read with no more entries [#16400](https://github.com/apache/pulsar/pull/16400)
 - [fix][broker] Support loadBalancerSheddingIntervalMinutes dynamic configuration [#16408](https://github.com/apache/pulsar/pull/16408)
 - [fix][broker] The configuration loadBalancerNamespaceMaximumBundles is invalid [#16552](https://github.com/apache/pulsar/pull/16552)
-- [fix][broker] Topic policy reader can't recover when get any exception. [#17562](https://github.com/apache/pulsar/pull/17562)
+- [fix][broker] Topic policy reader can't recover when getting any exception. [#17562](https://github.com/apache/pulsar/pull/17562)
 - [fix][broker] Unregister topic policy listener if managed ledger close failed [#17652](https://github.com/apache/pulsar/pull/17652)
 - [fix][broker] Upgrade log4j2 version to 2.18.0 [#16884](https://github.com/apache/pulsar/pull/16884)
 - [fix][broker] fix No such ledger exception [#16420](https://github.com/apache/pulsar/pull/16420)
