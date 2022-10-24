@@ -140,7 +140,7 @@ sidebar_label: Apache Pulsar 2.10.2
 
 ### Pulsar Proxy
 - [fix][proxy] Do not preserve host when forwarding admin requests. [#16342](https://github.com/apache/pulsar/pull/16342)
-- [fix][proxy] Fix client service url [#16834](https://github.com/apache/pulsar/pull/16834)
+- [fix][proxy] Fix client service URL [#16834](https://github.com/apache/pulsar/pull/16834)
 - [improve][proxy] Update proxy lookup throw exception type [#17600](https://github.com/apache/pulsar/pull/17600)
 
 ### CLI/Admin
