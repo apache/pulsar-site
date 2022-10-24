@@ -136,7 +136,7 @@ sidebar_label: Apache Pulsar 2.10.2
 
 ### Pulsar SQL
 - [fix][sql] Fix `messageQueue` release message issue. [#16155](https://github.com/apache/pulsar/pull/16155)
-- [fix][sql] Fix presto sql avro decode error when publish non-batched msgs [#17093](https://github.com/apache/pulsar/pull/17093)
+- [fix][sql] Fix Presto SQL Avro decode error when publish non-batched msgs [#17093](https://github.com/apache/pulsar/pull/17093)
 
 ### Pulsar Proxy
 - [fix][proxy] Do not preserve host when forwarding admin requests. [#16342](https://github.com/apache/pulsar/pull/16342)
