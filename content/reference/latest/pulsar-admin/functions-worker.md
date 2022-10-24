@@ -7,12 +7,6 @@ Operations to collect function-worker statistics
 $ pulsar-admin functions-worker subcommand
 ```
 
-* `function-stats`
-* `monitoring-metrics`
-* `get-cluster`
-* `get-cluster-leader`
-* `get-function-assignments`
-* `rebalance`
 
 
 ## <em>function-stats</em>

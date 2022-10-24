@@ -7,17 +7,6 @@ Operations on transactions
 $ pulsar-admin transactions subcommand
 ```
 
-* `coordinator-internal-stats`
-* `pending-ack-internal-stats`
-* `coordinator-stats`
-* `transaction-buffer-stats`
-* `pending-ack-stats`
-* `transaction-in-buffer-stats`
-* `transaction-in-pending-ack-stats`
-* `transaction-metadata`
-* `slow-transactions`
-* `scale-transactionCoordinators`
-* `position-stats-in-pending-ack`
 
 
 ## <em>coordinator-internal-stats</em>

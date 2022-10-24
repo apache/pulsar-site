@@ -7,13 +7,6 @@ Operations about packages
 $ pulsar-admin packages subcommand
 ```
 
-* `get-metadata`
-* `update-metadata`
-* `upload`
-* `download`
-* `list`
-* `list-versions`
-* `delete`
 
 
 ## <em>get-metadata</em>

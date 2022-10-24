@@ -1,8 +1,5 @@
 # Reader
 
-!> This page is automatically generated from code files.
-If you find something inaccurate, feel free to update `org.apache.pulsar.client.impl.conf.ReaderConfigurationData
-`.
 ## Required
 ### topicNames
 Topic name

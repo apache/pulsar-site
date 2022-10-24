@@ -7,18 +7,6 @@ Interface for managing Pulsar IO Sources (ingress data into Pulsar)
 $ pulsar-admin sources subcommand
 ```
 
-* `create`
-* `update`
-* `delete`
-* `get`
-* `status`
-* `list`
-* `stop`
-* `start`
-* `restart`
-* `localrun`
-* `available-sources`
-* `reload`
 
 
 ## <em>create</em>

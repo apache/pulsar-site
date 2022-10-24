@@ -1,8 +1,5 @@
 # Producer
 
-!> This page is automatically generated from code files.
-If you find something inaccurate, feel free to update `org.apache.pulsar.client.impl.conf.ProducerConfigurationData
-`.
 ## Required
 ### topicName
 Topic name

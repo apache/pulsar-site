@@ -7,24 +7,6 @@ Interface for managing Pulsar Functions (lightweight, Lambda-style compute proce
 $ pulsar-admin functions subcommand
 ```
 
-* `localrun`
-* `create`
-* `delete`
-* `update`
-* `get`
-* `restart`
-* `stop`
-* `start`
-* `status`
-* `stats`
-* `list`
-* `querystate`
-* `putstate`
-* `trigger`
-* `upload`
-* `download`
-* `reload`
-* `available-functions`
 
 
 ## <em>localrun</em>

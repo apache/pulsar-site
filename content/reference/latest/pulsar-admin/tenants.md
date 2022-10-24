@@ -7,11 +7,6 @@ Operations about tenants
 $ pulsar-admin tenants subcommand
 ```
 
-* `list`
-* `get`
-* `create`
-* `update`
-* `delete`
 
 
 ## <em>list</em>

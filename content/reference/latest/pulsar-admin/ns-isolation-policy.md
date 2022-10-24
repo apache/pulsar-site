@@ -7,12 +7,6 @@ Operations about namespace isolation policy
 $ pulsar-admin ns-isolation-policy subcommand
 ```
 
-* `set`
-* `get`
-* `list`
-* `delete`
-* `brokers`
-* `broker`
 
 
 ## <em>set</em>

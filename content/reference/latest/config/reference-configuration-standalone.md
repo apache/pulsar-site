@@ -1,8 +1,5 @@
 # Broker
 
-!> This page is automatically generated from code files.
-If you find something inaccurate, feel free to update `org.apache.pulsar.broker.ServiceConfiguration
-`.
 ## Required
 ### clusterName
 Name of the cluster to which this broker belongs to
@@ -1035,7 +1032,7 @@ Enable expose the broker bundles metrics.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -4103,6 +4100,17 @@ Maximum prefetch rounds for ledger reading for offloading
 **Type**: `int`
 
 **Default**: `1`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
+### managedLedgerOffloadThresholdInSeconds
+The threshold to triggering automatic offload to long term storage
+
+**Type**: `long`
+
+**Default**: `-1`
 
 **Dynamic**: `false`
 

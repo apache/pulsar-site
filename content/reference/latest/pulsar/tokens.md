@@ -6,11 +6,6 @@
 $ pulsar tokens subcommand
 ```
 
-* `create-secret-key`
-* `create-key-pair`
-* `create`
-* `show`
-* `validate`
 
 
 ## <em>create-secret-key</em>

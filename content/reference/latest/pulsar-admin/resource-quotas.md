@@ -7,9 +7,6 @@ Operations about resource quotas
 $ pulsar-admin resource-quotas subcommand
 ```
 
-* `get`
-* `set`
-* `reset-namespace-bundle-quota`
 
 
 ## <em>get</em>

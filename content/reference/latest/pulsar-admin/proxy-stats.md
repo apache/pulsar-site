@@ -7,8 +7,6 @@ Operations to collect Proxy statistics
 $ pulsar-admin proxy-stats subcommand
 ```
 
-* `connections`
-* `topics`
 
 
 ## <em>connections</em>

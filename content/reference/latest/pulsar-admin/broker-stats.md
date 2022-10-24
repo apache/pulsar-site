@@ -7,11 +7,6 @@ Operations to collect broker statistics
 $ pulsar-admin broker-stats subcommand
 ```
 
-* `monitoring-metrics`
-* `mbeans`
-* `topics`
-* `allocator-stats`
-* `load-report`
 
 
 ## <em>monitoring-metrics</em>

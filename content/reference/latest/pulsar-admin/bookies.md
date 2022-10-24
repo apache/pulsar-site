@@ -7,11 +7,6 @@ Operations about bookies rack placement
 $ pulsar-admin bookies subcommand
 ```
 
-* `racks-placement`
-* `list-bookies`
-* `get-bookie-rack`
-* `delete-bookie-rack`
-* `set-bookie-rack`
 
 
 ## <em>racks-placement</em>

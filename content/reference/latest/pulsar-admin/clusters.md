@@ -7,19 +7,6 @@ Operations about clusters
 $ pulsar-admin clusters subcommand
 ```
 
-* `get`
-* `create`
-* `update`
-* `delete`
-* `list`
-* `update-peer-clusters`
-* `update-cluster-migration`
-* `get-peer-clusters`
-* `get-failure-domain`
-* `create-failure-domain`
-* `update-failure-domain`
-* `delete-failure-domain`
-* `list-failure-domains`
 
 
 ## <em>get</em>

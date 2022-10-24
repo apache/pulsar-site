@@ -7,19 +7,6 @@ Operations about brokers
 $ pulsar-admin brokers subcommand
 ```
 
-* `list`
-* `leader-broker`
-* `namespaces`
-* `update-dynamic-config`
-* `delete-dynamic-config`
-* `list-dynamic-config`
-* `get-all-dynamic-config`
-* `get-internal-config`
-* `get-runtime-config`
-* `healthcheck`
-* `backlog-quota-check`
-* `version`
-* `shutdown`
 
 
 ## <em>list</em>

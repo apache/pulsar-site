@@ -7,18 +7,6 @@ Interface for managing Pulsar IO sinks (egress data from Pulsar)
 $ pulsar-admin sinks subcommand
 ```
 
-* `create`
-* `update`
-* `delete`
-* `list`
-* `get`
-* `status`
-* `stop`
-* `start`
-* `restart`
-* `localrun`
-* `available-sinks`
-* `reload`
 
 
 ## <em>create</em>

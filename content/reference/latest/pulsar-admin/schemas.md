@@ -7,10 +7,6 @@ Operations about schemas
 $ pulsar-admin schemas subcommand
 ```
 
-* `get`
-* `delete`
-* `upload`
-* `extract`
 
 
 ## <em>get</em>

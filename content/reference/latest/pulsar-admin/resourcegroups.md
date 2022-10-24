@@ -7,11 +7,6 @@ Operations about ResourceGroups
 $ pulsar-admin resourcegroups subcommand
 ```
 
-* `list`
-* `get`
-* `create`
-* `update`
-* `delete`
 
 
 ## <em>list</em>
