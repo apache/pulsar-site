@@ -55,7 +55,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][broker] fix No such ledger exception [#16420](https://github.com/apache/pulsar/pull/16420)
 - [fix][broker] fix broker unackmessages become a negative number [#17003](https://github.com/apache/pulsar/pull/17003)
 - [fix][broker] remove exception log when access status.html [#17025](https://github.com/apache/pulsar/pull/17025)
-- [fix][broker] Consumer can't consume messages because there has two sames topics in one broker [#17526](https://github.com/apache/pulsar/pull/17526)
+- [fix][broker] Consumer can't consume messages because there are two same topics in one broker [#17526](https://github.com/apache/pulsar/pull/17526)
 - [fix][broker] Fix getInternalStats occasional lack of LeaderInfo again [#16238](https://github.com/apache/pulsar/pull/16238)
 - [fix][broker] Fix subscribe dispatcher limiter not be initialized [#16175](https://github.com/apache/pulsar/pull/16175)
 - [fix][broker] Fix topic policies update not check message expiry [#15941](https://github.com/apache/pulsar/pull/15941)
