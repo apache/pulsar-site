@@ -214,7 +214,7 @@ sidebar_label: Apache Pulsar 2.10.2
 
 ### Others
 - [fix][build] Duplicate entry when merging services [#17659](https://github.com/apache/pulsar/pull/17659)
-- [cleanup][owasp] Supress false positive netty-tcnative [#17282](https://github.com/apache/pulsar/pull/17282)
+- [cleanup][owasp] Suppress false positive netty-tcnative [#17282](https://github.com/apache/pulsar/pull/17282)
 - [fix][doc] Fix comments for exposeManagedLedgerMetricsInPrometheus field [#17792](https://github.com/apache/pulsar/pull/17792)
 - [fix][tool] Using int instead of long in python scripts [#17215](https://github.com/apache/pulsar/pull/17215)
 - [improve][package] Improve the package download process  [#16365](https://github.com/apache/pulsar/pull/16365)
