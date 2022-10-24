@@ -78,7 +78,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [improve][broker] Expose topic level storage write and read rate metrics [#16855](https://github.com/apache/pulsar/pull/16855)
 - [improve][broker] Broker/EntryFilter: make the delay for RESCHEDULED messages configurable (dispatcherFilterRescheduledMessageDelay) [#16602](https://github.com/apache/pulsar/pull/16602)
 - [improve][broker] Use OrderedExecutor instead of OrderedScheduler for consumer dispatch [#16115](https://github.com/apache/pulsar/pull/16115)
-- [improve][broker] Avoid go through all the consumers to get the message ack owner [#16245](https://github.com/apache/pulsar/pull/16245)
+- [improve][broker] Avoid going through all the consumers to get the message ack owner [#16245](https://github.com/apache/pulsar/pull/16245)
 - [improve][broker] Avoid reconnection when a partitioned topic was created concurrently [#16043](https://github.com/apache/pulsar/pull/16043)
 - [improve][broker] Cancel the loadShedding task when closing pulsar service [#17632](https://github.com/apache/pulsar/pull/17632)
 - [improve][broker] Consolidate Netty channel flushes to mitigate syscall overhead [#16361](https://github.com/apache/pulsar/pull/16361)
