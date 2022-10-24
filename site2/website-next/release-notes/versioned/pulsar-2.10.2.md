@@ -16,7 +16,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][broker] Fix stats-internal with option -m cause active ledger recover then close [#16662](https://github.com/apache/pulsar/pull/16662)
 - [fix][broker] Fix deadlock in key-shared dispatcher [#16660](https://github.com/apache/pulsar/pull/16660)
 - [fix][broker] PulsarLedgerManager: add missed return statement [#16607](https://github.com/apache/pulsar/pull/16607)
-- [fix][broker] Ensure ack-timeout task gets re-scheduled when there are exception in the final stage [#16337](https://github.com/apache/pulsar/pull/16337)
+- [fix][broker] Ensure the ack-timeout task gets re-scheduled when there is an exception in the final stage [#16337](https://github.com/apache/pulsar/pull/16337)
 - [fix][broker] Fix select broker is none [#16316](https://github.com/apache/pulsar/pull/16316)
 - [fix][broker] Fixed deadlock when checking topic ownership [#16310](https://github.com/apache/pulsar/pull/16310)
 - [fix][broker] Fix thread safety issues in accessing ManagedCursorContainer.heap ArrayList [#16049](https://github.com/apache/pulsar/pull/16049)
