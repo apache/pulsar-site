@@ -33,6 +33,7 @@ fi
 
 GENERATED_SITE_DIR=$ROOT_DIR/generated-site
 ls $GENERATED_SITE_DIR
+ls $GENERATED_SITE_DIR/content
 
 PULSAR_SITE_TMP=/tmp/pulsar-site
 (
