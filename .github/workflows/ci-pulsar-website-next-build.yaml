@@ -20,13 +20,14 @@
 name: CI - Pulsar Website-Next build
 on:
   push:
-    branches: [dev]
+    branches: [main]
 
 env:
   MAVEN_OPTS: -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3
 
 jobs:
   build-website:
+    if: ${{ github.repository == 'apache/pulsar-site' }}
     name: Build and publish pulsar website-next
     runs-on: ubuntu-latest
     timeout-minutes: 600
