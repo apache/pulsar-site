@@ -49,16 +49,13 @@ bash scripts/split-version-build.sh $@
 "$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
 cd "$WEBSITE_DIR"
 
-mkdir -p "$GEN_SITE_DIR"/reference
-cp -R docsify/* "$GEN_SITE_DIR"/reference
-
 CONTENT_DIR="$GEN_SITE_DIR"/content
 
 rm -rf "$CONTENT_DIR"
 mkdir -p "$CONTENT_DIR"
-cp -R "$GEN_SITE_DIR"/reference "$CONTENT_DIR"
-# cp -R "$GEN_SITE_DIR"/api "$CONTENT_DIR"
-cp -R ./build/ "$CONTENT_DIR"
+mkdir -p "$CONTENT_DIR"/reference
+rsync -a ./docsify/ "$CONTENT_DIR"/reference
+rsync -a ./build/ "$CONTENT_DIR"
 
 # Generate document for release table
 "$TOOLS_DIR"/release-json-gen.sh "$GH_TOKEN" "$WEBSITE_DIR"
