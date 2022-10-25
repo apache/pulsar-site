@@ -1642,7 +1642,7 @@ Allow forced deletion of namespaces. Default is false.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Policies
 
