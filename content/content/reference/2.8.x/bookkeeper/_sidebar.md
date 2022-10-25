@@ -1,2 +1,0 @@
-- [CLI Tools](cli)
-  - [bookkeeper](bookkeeper/)
