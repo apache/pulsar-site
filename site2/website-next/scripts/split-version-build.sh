@@ -76,5 +76,6 @@ done <scripts/.versions
 
 cp -r build-assets/* build/assets/
 rm -rf build-assets
+cp static/.htaccess build/
 
 echo $BUILD_ALL_VERSION >scripts/.build
