@@ -53,7 +53,8 @@ CONTENT_DIR="$GEN_SITE_DIR"/content
 
 rm -rf "$CONTENT_DIR"
 mkdir -p "$CONTENT_DIR"
-rsync -a ./docsify/ "$CONTENT_DIR"
+mkdir -p "$CONTENT_DIR"/reference
+rsync -a ./docsify/ "$CONTENT_DIR"/reference
 rsync -a ./build/ "$CONTENT_DIR"
 
 # Generate document for release table
