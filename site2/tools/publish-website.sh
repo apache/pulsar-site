@@ -32,6 +32,7 @@ if [ -n "$NEXT" ]; then
 fi
 
 GENERATED_SITE_DIR=$ROOT_DIR/generated-site
+ls $GENERATED_SITE_DIR
 
 PULSAR_SITE_TMP=/tmp/pulsar-site
 (
