@@ -67,7 +67,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
       | grep -v $PULSAR_SITE_TMP/content/.htaccess \
       | xargs rm -rf
   fi
-  cp -R $GENERATED_SITE_DIR/content/ $PULSAR_SITE_TMP/content
+  rsync -a $GENERATED_SITE_DIR/content/ $PULSAR_SITE_TMP/content
 
   git add -A .
   git diff-index --quiet HEAD || (git commit -m "Updated site at revision $REVISION" && git push -q origin HEAD:$BRANCH_CONTENT)
