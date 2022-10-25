@@ -58,8 +58,7 @@ rm -rf "$CONTENT_DIR"
 mkdir -p "$CONTENT_DIR"
 cp -R "$GEN_SITE_DIR"/reference "$CONTENT_DIR"
 # cp -R "$GEN_SITE_DIR"/api "$CONTENT_DIR"
-cp -R ./build/* "$CONTENT_DIR"
-cp -R ./build/.htaccess "$CONTENT_DIR"
+cp -R ./build/ "$CONTENT_DIR"
 cp -R "$WEBSITE_DIR"/static/swagger/* "$CONTENT_DIR"/swagger/
 
 # Generate document for release table
