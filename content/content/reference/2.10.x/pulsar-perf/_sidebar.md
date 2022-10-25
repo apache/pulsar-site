@@ -1,2 +1,0 @@
-- [CLI Tools](cli)
-  - [pulsar-perf](pulsar-perf/)
