@@ -52,9 +52,7 @@ cd "$WEBSITE_DIR"
 CONTENT_DIR="$GEN_SITE_DIR"/content
 rm -rf "$CONTENT_DIR" && mkdir -p "$CONTENT_DIR"
 cp -R static/reference "$CONTENT_DIR"
-# cp -R "$GEN_SITE_DIR"/api "$CONTENT_DIR"
-cp -R build/* "$CONTENT_DIR"
-cp -R static/swagger/* "$CONTENT_DIR"/swagger/
+rsync -a ./build/ "$CONTENT_DIR"
 
 # Generate document for release table
 "$TOOLS_DIR"/release-json-gen.sh "$GH_TOKEN" "$WEBSITE_DIR"

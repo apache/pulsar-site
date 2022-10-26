@@ -21,7 +21,7 @@
 # Build Pulsar website within a Docker container
 
 # Fail script in case of errors
-set -e
+set -e -x
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
