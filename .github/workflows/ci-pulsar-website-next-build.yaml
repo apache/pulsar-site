@@ -30,10 +30,17 @@ jobs:
     if: ${{ github.repository == 'apache/pulsar-site' }}
     name: Build and publish pulsar website-next
     runs-on: ubuntu-latest
+<<<<<<< .merge_file_5jroQB
     timeout-minutes: 360
     steps:
       - name: checkout
         uses: actions/checkout@v2
+=======
+    timeout-minutes: 600
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+>>>>>>> .merge_file_53EQIv
         with:
           fetch-depth: 2
 
@@ -65,11 +72,19 @@ jobs:
             ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
             ${{ runner.os }}-m2-dependencies-core-modules-
 
+<<<<<<< .merge_file_5jroQB
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: "temurin"
           java-version: 11
+=======
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 17
+>>>>>>> .merge_file_53EQIv
 
       - name: Clean disk
         run: |
@@ -92,17 +107,31 @@ jobs:
       - name: Generate swagger json file
         run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
 
+<<<<<<< .merge_file_5jroQB
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
+=======
+      - name: Copy swagger json file
+>>>>>>> .merge_file_53EQIv
         run: |
           echo "Copying swagger json file ..."
           mkdir -p site2/website-next/static/swagger/master/
           cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
           echo "Copied swagger json file."
+<<<<<<< .merge_file_5jroQB
           echo "Building Website"
           # Build the new website
           sed -i "s#CROWDIN_PERSONAL_TOKEN#$CROWDIN_PERSONAL_TOKEN#g" site2/website-next/crowdin.yml
+=======
+
+      - name: Build and Publish website
+        env:
+          GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
+        run: |
+          echo "Building Website"
+>>>>>>> .merge_file_53EQIv
           site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
           bash -e site2/tools/publish-website.sh next

@@ -1,6 +1,6 @@
 const React = require("react");
 import Layout from "@theme/Layout";
-import { setVersion, getVersion, getApiVersion } from "../utils/index.js";
+import { getVersion, getApiVersion } from "../utils/index.js";
 
 function parseVersion(pathName) {
   let swagger = "swagger";
@@ -12,6 +12,10 @@ function parseVersion(pathName) {
     swagger = "swaggersink";
   } else if (pathName.indexOf("packages") > -1) {
     swagger = "swaggerpackages";
+  } else if (pathName.indexOf("transactions") > -1) {
+    swagger = "swaggertransactions";
+  } else if (pathName.indexOf("lookup") > -1) {
+    swagger = "swaggerlookup";
   }
   let version = getVersion();
   let apiversion = getApiVersion(swagger);
@@ -75,10 +79,20 @@ class RestApi extends React.Component {
         "spec-url",
         "/swagger/" + version + "/" + apiversion + "/swaggersink.json"
       );
-    } else if (pathName.indexOf("packages-rest-api" >= 0)) {
+    } else if (pathName.indexOf("packages-rest-api") >= 0) {
       redoc.setAttribute(
         "spec-url",
         "/swagger/" + version + "/" + apiversion + "/swaggerpackages.json"
+      );
+    } else if (pathName.indexOf("transactions-rest-api") >= 0) {
+      redoc.setAttribute(
+        "spec-url",
+        "/swagger/" + version + "/" + apiversion + "/swaggertransactions.json"
+      );
+    } else if (pathName.indexOf("lookup-rest-api") >= 0) {
+      redoc.setAttribute(
+        "spec-url",
+        "/swagger/" + version + "/" + apiversion + "/swaggerlookup.json"
       );
     }
     redoc.setAttribute("lazy-rendering", "true");

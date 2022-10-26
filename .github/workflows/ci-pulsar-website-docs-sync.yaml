@@ -41,6 +41,7 @@ jobs:
           git clone -b master --depth 1 https://github.com/apache/pulsar.git pulsar
           echo "pulsar clone done."
 
+<<<<<<< .merge_file_lYw66M
           cp -r pulsar/site2/docs/* pulsar-site/site2/docs
           cp -r pulsar/site2/website/versioned_docs/* pulsar-site/site2/website/versioned_docs
           cp -r pulsar/site2/website/versioned_sidebars/* pulsar-site/site2/website/versioned_sidebars
@@ -65,6 +66,21 @@ jobs:
 
           cd ../pulsar-site
 
+=======
+          DIR=$(pwd)
+
+          cd pulsar-site/site2/website-next
+
+          sh scripts/sync-docs.sh
+
+          echo "docs override done."
+
+          cd $DIR/pulsar
+
+          PULSAR_COMMIT_ID=$(git rev-parse --short HEAD)
+
+          cd $DIR/pulsar-site
+>>>>>>> .merge_file_4mwChM
 
           git add -A .
           git status
@@ -74,6 +90,12 @@ jobs:
 
           git remote -v
 
+<<<<<<< .merge_file_lYw66M
           git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
+=======
+          # git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
+          git commit --allow-empty -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
+          git push -q origin main
+>>>>>>> .merge_file_4mwChM
 
           echo "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"

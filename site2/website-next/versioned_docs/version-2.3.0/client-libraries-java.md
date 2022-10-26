@@ -10,19 +10,19 @@ import TabItem from '@theme/TabItem';
 ````
 
 
-You can use a Pulsar Java client to create the Java [producer](#producer), [consumer](#consumer), [readers](#reader) and [TableView](#tableview) of messages and to perform [administrative tasks](admin-api-overview). The current Java client version is **@pulsar:version@**.
+You can use a Pulsar Java client to create the Java [producer](#producer), [consumer](#consumer), [reader](#reader) and [TableView](#tableview) of messages and to perform [administrative tasks](admin-api-overview.md). The current Java client version is **@pulsar:version@**.
 
-All the methods in [producer](#producer), [consumer](#consumer), [readers](#reader) and [TableView](#tableview) of a Java client are thread-safe.
+All the methods in [producer](#producer), [consumer](#consumer), [reader](#reader) and [TableView](#tableview) of a Java client are thread-safe.
 
 Javadoc for the Pulsar client is divided into two domains by package as follows.
 
 Package | Description | Maven Artifact
 :-------|:------------|:--------------
 [`org.apache.pulsar.client.api`](/api/client) | [The producer and consumer API](https://pulsar.apache.org/api/client/) | [org.apache.pulsar:pulsar-client:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version@%7Cjar)
-[`org.apache.pulsar.client.admin`](/api/admin) | The Java [admin API](admin-api-overview) | [org.apache.pulsar:pulsar-client-admin:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C@pulsar:version@%7Cjar)
+[`org.apache.pulsar.client.admin`](/api/admin) | The Java [admin API](admin-api-overview.md) | [org.apache.pulsar:pulsar-client-admin:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C@pulsar:version@%7Cjar)
 `org.apache.pulsar.client.all` |Include both `pulsar-client` and `pulsar-client-admin`<br /> Both `pulsar-client` and `pulsar-client-admin` are shaded packages and they shade dependencies independently. Consequently, the applications using both `pulsar-client` and `pulsar-client-admin` have redundant shaded classes. It would be troublesome if you introduce new dependencies but forget to update shading rules. <br /> In this case, you can use `pulsar-client-all`, which shades dependencies only one time and reduces the size of dependencies.  |[org.apache.pulsar:pulsar-client-all:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-all%7C@pulsar:version@%7Cjar)
 
-This document focuses only on the client API for producing and consuming messages on Pulsar topics. For how to use the Java admin client, see [Pulsar admin interface](admin-api-overview).
+This document focuses only on the client API for producing and consuming messages on Pulsar topics. For how to use the Java admin client, see [Pulsar admin interface](admin-api-overview.md).
 
 ## Installation
 
@@ -69,7 +69,7 @@ dependencies {
 
 ## Connection URLs
 
-To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol) URL.
+To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 
 You can assign Pulsar protocol URLs to specific clusters and use the `pulsar` scheme. The default port is `6650`. The following is an example of `localhost`.
 
@@ -95,7 +95,7 @@ pulsar://pulsar.us-west.example.com:6650
 
 ```
 
-If you use [TLS](security-tls-authentication) authentication, the URL is as follows. 
+If you use [TLS](security-tls-authentication.md) authentication, the URL is as follows. 
 
 ```http
 
@@ -126,7 +126,7 @@ PulsarClient client = PulsarClient.builder()
 ```
 
 > ### Default broker URLs for standalone clusters
-> If you run a cluster in [standalone mode](getting-started-standalone), the broker is available at the `pulsar://localhost:6650` URL by default.
+> If you run a cluster in [standalone mode](getting-started-standalone.md), the broker is available at the `pulsar://localhost:6650` URL by default.
 
 If you create a client, you can use the `loadConf` configuration. The following parameters are available in `loadConf`.
 
@@ -140,7 +140,7 @@ If you create a client, you can use the `loadConf` configuration. The following 
 `numIoThreads`| int| The number of threads used for handling connections to brokers | 1 
 `numListenerThreads`|int|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](https://pulsar.apache.org/docs/en/next/concepts-messaging/#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1 
 `useTcpNoDelay`| boolean| Whether to use TCP no-delay flag on the connection to disable Nagle algorithm |true
-`useTls` |boolean |Whether to use TLS encryption on the connection| false
+`enableTls` |boolean | Whether to use TLS encryption on the connection. Note that this parameter is **deprecated**. If you want to enable TLS, use `pulsar+ssl://` in `serviceUrl` instead. | false
  `tlsTrustCertsFilePath` |string |Path to the trusted TLS certificate file|None
 `tlsAllowInsecureConnection`|boolean|Whether the Pulsar client accepts untrusted TLS certificate from broker | false
 `tlsHostnameVerificationEnable` |boolean |  Whether to enable TLS hostname verification|false
@@ -159,27 +159,6 @@ If you create a client, you can use the `loadConf` configuration. The following 
 Check out the Javadoc for the {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} class for a full list of configurable parameters.
 
 > In addition to client-level configuration, you can also apply [producer](#configure-producer) and [consumer](#configure-consumer) specific configuration as described in sections below.
-
-### Client memory allocator configuration
-You can set the client memory allocator configurations through Java properties.<br />
-
-| Property | Type |  <div>Description</div> | Default | Available values
-|---|---|---|---|---
-`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li> 
-`pulsar.allocator.exit_on_oom` | String | Whether to exit the JVM when OOM happens | false |  <li> true </li> <li> false </li>
-`pulsar.allocator.leak_detection` | String | Service URL provider for Pulsar service | Disabled | <li> Disabled </li> <li> Simple </li> <li> Advanced </li> <li> Paranoid </li>
-`pulsar.allocator.out_of_memory_policy` | String | When an OOM occurs, the client throws an exception or fallbacks to heap | FallbackToHeap | <li> ThrowException </li> <li> FallbackToHeap </li>
-
-**Example**:
-
-```
-
--Dpulsar.allocator.pooled=true
--Dpulsar.allocator.exit_on_oom=false
--Dpulsar.allocator.leak_detection=Disabled
--Dpulsar.allocator.out_of_memory_policy=ThrowException
-
-```
 
 ### Cluster-level failover
 
@@ -240,7 +219,7 @@ The cluster-level failover provides fault tolerance, continuous availability, an
 
 * Reduced cost: services can be switched and recovered automatically with no data loss.
 
-* Simplified management: businesses can operate on an “always-on” basis since no immediate user intervention is required.
+* Simplified management: businesses can operate on an "always-on" basis since no immediate user intervention is required.
 
 * Improved stability and robustness: it ensures continuous performance and minimizes service downtime. 
 
@@ -300,7 +279,7 @@ Currently, cluster-level failover can perform probes to prevent data loss, but i
 
 > #### What are the relationships between cluster-level failover and geo-replication?
 
-The cluster-level failover is an extension of [geo-replication](concepts-replication) to improve stability and robustness. The cluster-level failover depends on geo-replication, and they have some **differences** as below.
+The cluster-level failover is an extension of [geo-replication](concepts-replication.md) to improve stability and robustness. The cluster-level failover depends on geo-replication, and they have some **differences** as below.
 
 Influence |Cluster-level failover|Geo-replication
 |---|---|---
@@ -324,7 +303,7 @@ This section guides you through every step on how to configure cluster-level fai
 
 * For backup clusters:
 
-  * The number of BooKeeper nodes should be equal to or greater than the ensemble quorum.
+  * The number of BookKeeper nodes should be equal to or greater than the ensemble quorum.
 
   * The number of ZooKeeper nodes should be equal to or greater than 3.
 
@@ -388,10 +367,10 @@ This is an example of how to construct a Java Pulsar client to use controlled cl
 
  public PulsarClient getControlledFailoverClient() throws IOException {
 Map<String, String> header = new HashMap(); 
-  header.put(“service_user_id”, “my-user”);
-  header.put(“service_password”, “tiger”);
-  header.put(“clusterA”, “tokenA”);
-  header.put(“clusterB”, “tokenB”);
+  header.put("service_user_id", "my-user");
+  header.put("service_password", "tiger");
+  header.put("clusterA", "tokenA");
+  header.put("clusterB", "tokenB");
 
   ServiceUrlProvider provider = 
       ControlledClusterFailover.builder()
@@ -461,7 +440,7 @@ This chapter explains the working process of cluster-level failover. For more im
   values={[{"label":"Automatic cluster-level failover","value":"Automatic cluster-level failover"},{"label":"Controlled cluster-level failover","value":"Controlled cluster-level failover"}]}>
 <TabItem value="Automatic cluster-level failover">
 
-In automatic failover cluster, the primary cluster and backup cluster are aware of each other's availability. The automatic failover cluster performs the following actions without administrator intervention:
+In an automatic failover cluster, the primary cluster and backup cluster are aware of each other's availability. The automatic failover cluster performs the following actions without administrator intervention:
 
 1. The Pulsar client runs a probe task at intervals defined in `checkInterval`.
    
@@ -469,7 +448,7 @@ In automatic failover cluster, the primary cluster and backup cluster are aware 
 
    2a) If there are healthy backup clusters, the Pulsar client switches to a backup cluster in the order defined in `secondary`.
 
-   2b) If there is no healthy backup cluster, the Pulsar client does not perform the switchover, and the probe task continues to look  for an available backup cluster.
+   2b) If there is no healthy backup cluster, the Pulsar client does not perform the switchover, and the probe task continues to look for an available backup cluster.
 
 3. The probe task checks whether the primary cluster functions well or not. 
 
@@ -486,13 +465,13 @@ In automatic failover cluster, the primary cluster and backup cluster are aware 
 
 2. The probe task fetches the service URL configuration from the URL provider service, which is configured by `urlProvider`.
 
-   2a) If the service URL configuration is changed, the probe task  switches to the target cluster without checking the health status of the target cluster.
+   2a) If the service URL configuration is changed, the probe task switches to the target cluster without checking the health status of the target cluster.
 
    2b) If the service URL configuration is not changed, the Pulsar client does not perform the switchover.
 
 3. If the Pulsar client switches to the target cluster, the probe task continues to fetch service URL configuration from the URL provider service at intervals defined in `checkInterval`. 
 
-   3a) If the service URL configuration is changed, the probe task  switches to the target cluster without checking the health status of the target cluster.
+   3a) If the service URL configuration is changed, the probe task switches to the target cluster without checking the health status of the target cluster.
 
    3b) If the service URL configuration is not changed, it does not perform the switchover.
 
@@ -597,7 +576,7 @@ Producer<byte[]> producer = client.newProducer()
 
 ### Message routing
 
-When using partitioned topics, you can specify the routing mode whenever you publish messages using a producer. For more information on specifying a routing mode using the Java client, see the [Partitioned Topics cookbook](cookbooks-partitioned).
+When using partitioned topics, you can specify the routing mode whenever you publish messages using a producer. For more information on specifying a routing mode using the Java client, see the [Partitioned Topics cookbook](cookbooks-partitioned.md).
 
 ### Async send
 
@@ -634,9 +613,9 @@ You can terminate the builder chain with `sendAsync()` and get a future return.
 
 ### Enable chunking
 
-Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side. 
+Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side. 
 
-The message chunking feature is OFF by default. The following is an example about how to enable message chunking when creating a producer.
+The message chunking feature is OFF by default. The following is an example of how to enable message chunking when creating a producer.
 
 ```java
 
@@ -666,7 +645,7 @@ Consumer consumer = client.newConsumer()
 
 ```
 
-The `subscribe` method will auto subscribe the consumer to the specified topic and subscription. One way to make the consumer listen on the topic is to set up a `while` loop. In this example loop, the consumer listens for messages, prints the contents of any received message, and then [acknowledges](reference-terminology.md#acknowledgment-ack) that the message has been processed. If the processing logic fails, you can use [negative acknowledgement](reference-terminology.md#acknowledgment-ack) to redeliver the message later.
+The `subscribe` method will auto-subscribe the consumer to the specified topic and subscription. One way to make the consumer listen on the topic is to set up a `while` loop. In this example loop, the consumer listens for messages, prints the contents of any received message, and then [acknowledges](reference-terminology.md#acknowledgment-ack) that the message has been processed. If the processing logic fails, you can use [negative acknowledgement](reference-terminology.md#acknowledgment-ack) to redeliver the message later.
 
 ```java
 
@@ -792,7 +771,7 @@ consumer.acknowledge(messages)
 :::note
 
 Batch receive policy limits the number and bytes of messages in a single batch. You can specify a timeout to wait for enough messages.
-The batch receive is completed if any of the following condition is met: enough number of messages, bytes of messages, wait timeout.
+The batch receive is completed if any of the following conditions is met: enough number of messages, bytes of messages, wait timeout.
 
 ```java
 
@@ -998,7 +977,7 @@ Pulsar has various [subscription types](concepts-messaging#subscription-types) t
 
 A subscription is identical with the subscription name; a subscription name can specify only one subscription type at a time. To change the subscription type, you should first stop all consumers of this subscription.
 
-Different subscription types have different message distribution types. This section describes the differences of subscription types and how to use them.
+Different subscription types have different message distribution types. This section describes the differences between subscription types and how to use them.
 
 In order to better describe their differences, assuming you have a topic named "my-topic", and the producer has published 10 messages.
 
@@ -1114,11 +1093,11 @@ Consumer consumer2 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
-//Both consumer1 and consumer 2 is active consumers.
+//Both consumer1 and consumer2 are active consumers.
 
 ```
 
-In Shared subscription type, multiple consumers can attach to the same subscription and messages are delivered in a round robin distribution across consumers.
+In Shared subscription type, multiple consumers can attach to the same subscription and messages are delivered in a round-robin distribution across consumers.
 
 If a broker dispatches only one message at a time, consumer1 receives the following information.
 
@@ -1282,13 +1261,74 @@ pulsarClient.newReader()
 Total hash range size is 65536, so the max end of the range should be less than or equal to 65535.
 
 
+### Configure chunking
+
+Configuring chuncking for readers is similar to that for consumers. See [configure chunking for consumers](#configure-chunking) for more information.
+
+The following is an example of how to configure message chunking for a reader.
+
+```java
+
+Reader<byte[]> reader = pulsarClient.newReader()
+        .topic(topicName)
+        .startMessageId(MessageId.earliest)
+        .maxPendingChunkedMessage(12)
+        .autoAckOldestChunkedMessageOnQueueFull(true)
+        .expireTimeOfIncompleteChunkedMessage(12, TimeUnit.MILLISECONDS)
+        .create();
+
+```
+
+### Create reader with interceptor
+
+Pulsar reader interceptor intercepts and possibly mutates messages with user-defined processing before [Pulsar reader](concepts-clients.md#reader-interface) reads them. With reader interceptors, you can apply unified messaging processes before messages can be read, such as modifying messages, adding properties, collecting statistics and etc, without creating similar mechanisms respectively.
+
+![Reader interceptor](/assets/reader-interceptor.svg)
+
+Pulsar reader interceptor works on top of Pulsar consumer interceptor. The plugin interface `ReaderInterceptor` can be treated as a subset of `ConsumerInterceptor` and it has two main events.
+* `beforeRead` is triggered before readers read messages. You can modify messages within this event.
+* `onPartitionsChange` is triggered when changes on partitions have been detected.
+
+To perceive triggered events and perform customized processing, you can add `ReaderInterceptor` when creating a `Reader` as follows.
+
+```java
+
+PulsarClient pulsarClient = PulsarClient.builder().serviceUrl("pulsar://localhost:6650").build();
+Reader<byte[]> reader = pulsarClient.newReader()
+        .topic("t1")
+        .autoUpdatePartitionsInterval(5, TimeUnit.SECONDS)
+        .intercept(new ReaderInterceptor<byte[]>() {
+            @Override
+            public void close() {
+            }
+
+            @Override
+            public Message<byte[]> beforeRead(Reader<byte[]> reader, Message<byte[]> message) {
+                // user-defined processing logic
+                return message;
+            }
+
+            @Override
+            public void onPartitionsChange(String topicName, int partitions) {
+                // user-defined processing logic
+            }
+        })
+        .startMessageId(MessageId.earliest)
+        .create();
+
+```
+
 ## TableView
 
 The TableView interface serves an encapsulated access pattern, providing a continuously updated key-value map view of the compacted topic data. Messages without keys will be ignored.
 
 With TableView, Pulsar clients can fetch all the message updates from a topic and construct a map with the latest values of each key. These values can then be used to build a local cache of data. In addition, you can register consumers with the TableView by specifying a listener to perform a scan of the map and then receive notifications when new messages are received. Consequently, event handling can be triggered to serve use cases, such as event-driven applications and message monitoring.
 
-> **Note:** Each TableView uses one Reader instance per partition, and reads the topic starting from the compacted view by default. It is highly recommended to enable automatic compaction by [configuring the topic compaction policies](cookbooks-compaction.md#configuring-compaction-to-run-automatically) for the given topic or namespace. More frequent compaction results in shorter startup times because less data is replayed to reconstruct the TableView of the topic.
+:::note
+
+Each TableView uses one Reader instance per partition, and reads the topic starting from the compacted view by default. It is highly recommended to enable automatic compaction by [configuring the topic compaction policies](cookbooks-compaction.md#configuring-compaction-to-run-automatically) for the given topic or namespace. More frequent compaction results in shorter startup times because less data is replayed to reconstruct the TableView of the topic.
+
+:::
 
 The following figure illustrates the dynamic construction of a TableView updated with newer values of each key.
 ![TableView](/assets/tableview.png)
@@ -1330,7 +1370,7 @@ tv.forEach((key, value) -> /*operations on all existing messages*/)
 
 ## Schema
 
-In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types). If you construct, say, a [producer](#producer) without specifying a schema, then the producer can only produce messages of type `byte[]`. The following is an example.
+In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types.md). If you construct, say, a [producer](#producer) without specifying a schema, then the producer can only produce messages of type `byte[]`. The following is an example.
 
 ```java
 
@@ -1448,11 +1488,11 @@ For example of ProtobufNativeSchema, see [`SchemaDefinition` in `Complex type`](
 
 ## Authentication
 
-Pulsar currently supports three authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), and [Oauth2](security-oauth2). You can use the Pulsar Java client with all of them.
+Pulsar currently supports three authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), and [Oauth2](security-oauth2.md). You can use the Pulsar Java client with all of them.
 
 ### TLS Authentication
 
-To use [TLS](security-tls-authentication), you need to set TLS to `true` using the `setUseTls` method, point your Pulsar client to a TLS cert path, and provide paths to cert and key files.
+To use [TLS](security-tls-authentication.md), `enableTls` method is deprecated and you need to use "pulsar+ssl://" in serviceUrl to enable, point your Pulsar client to a TLS cert path, and provide paths to cert and key files.
 
 The following is an example.
 
@@ -1467,7 +1507,6 @@ Authentication tlsAuth = AuthenticationFactory
 
 PulsarClient client = PulsarClient.builder()
         .serviceUrl("pulsar+ssl://my-broker.com:6651")
-        .enableTls(true)
         .tlsTrustCertsFilePath("/path/to/cacert.pem")
         .authentication(tlsAuth)
         .build();
@@ -1476,7 +1515,7 @@ PulsarClient client = PulsarClient.builder()
 
 ### Athenz
 
-To use [Athenz](security-athenz) as an authentication provider, you need to [use TLS](#tls-authentication) and provide values for four parameters in a hash:
+To use [Athenz](security-athenz.md) as an authentication provider, you need to [use TLS](#tls-authentication) and provide values for four parameters in a hash:
 
 * `tenantDomain`
 * `tenantService`
@@ -1499,7 +1538,6 @@ Authentication athenzAuth = AuthenticationFactory
 
 PulsarClient client = PulsarClient.builder()
         .serviceUrl("pulsar+ssl://my-broker.com:6651")
-        .enableTls(true)
         .tlsTrustCertsFilePath("/path/to/cacert.pem")
         .authentication(athenzAuth)
         .build();
@@ -1514,7 +1552,7 @@ PulsarClient client = PulsarClient.builder()
 
 ### Oauth2
 
-The following example shows how to use [Oauth2](security-oauth2) as an authentication provider for the Pulsar Java client.
+The following example shows how to use [Oauth2](security-oauth2.md) as an authentication provider for the Pulsar Java client.
 
 You can use the factory method to configure authentication for Pulsar Java client.
 

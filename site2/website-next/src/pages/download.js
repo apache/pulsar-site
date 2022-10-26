@@ -2,15 +2,15 @@ import * as React from "react";
 import Layout from "@theme/Layout";
 import ReleaseTable from "../components/ReleaseTable";
 import ConnectorTable from "../components/ConnectorTable";
-import GuideTable from "../components/GuideTable";
 import OldReleaseTable from "../components/OldReleaseTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
 import ReactMarkdown from "react-markdown";
 
 const releases = require(`../../releases.json`);
-const pulsarManagerReleases = require(`../../pulsar-manager-release.json`);
-const pulsarAdaptersReleases = require(`../../pulsar-adapters-release.json`);
+const legacyVersions = require(`../../legacy-versions.json`);
+const pulsarManagerReleases = require(`../../pulsar-manager/pulsar-manager-release.json`);
+const pulsarAdaptersReleases = require(`../../pulsar-manager/pulsar-adapters-release.json`);
 const connectors = require(`../../data/connectors.js`);
 
 function getLatestArchiveMirrorUrl(version, type) {
@@ -26,11 +26,11 @@ function getLatestAdaptersMirrorUrl(version) {
 }
 
 function distUrl(version, type) {
-  return `https://www.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz`;
+  return `https://downloads.apache.org/pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz`;
 }
 
 function distOffloadersUrl(version) {
-  return `https://www.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-offloaders-${version}-bin.tar.gz`;
+  return `https://downloads.apache.org/pulsar/pulsar-${version}/apache-pulsar-offloaders-${version}-bin.tar.gz`;
 }
 
 function distAdaptersUrl(version) {
@@ -50,7 +50,7 @@ function pularManagerArchiveUrl(version, type) {
 }
 
 function connectorDistUrl(name, version) {
-  return `https://www.apache.org/dist/pulsar/pulsar-${version}/connectors/pulsar-io-${name}-${version}.nar`;
+  return `https://downloads.apache.org/pulsar/pulsar-${version}/connectors/pulsar-io-${name}-${version}.nar`;
 }
 
 function connectorDownloadUrl(name, version) {
@@ -62,7 +62,7 @@ function getLatestPulsarManagerArchiveMirrorUrl(version, type) {
 }
 
 function pulsarManagerDistUrl(version, type) {
-  return `https://www.apache.org/dist/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
+  return `https://downloads.apache.org/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
 }
 
 function language(props) {
@@ -147,30 +147,6 @@ export default function page(props) {
       sha512: `${distOffloadersUrl(latestVersion)}.sha512`,
     },
   ];
-  const guides = [
-    {
-      name: "The Pulsar java client",
-      link: `${siteConfig.baseUrl}docs/${language(props)}client-libraries-java`,
-      description: "The Pulsar java client",
-    },
-    {
-      name: "The Pulsar go client",
-      link: `${siteConfig.baseUrl}docs/${language(props)}client-libraries-go`,
-      description: "The Pulsar go client",
-    },
-    {
-      name: "The Pulsar python client",
-      link: `${siteConfig.baseUrl}docs/${language(
-        props
-      )}client-libraries-python`,
-      description: "The Pulsar java client",
-    },
-    {
-      name: "The Pulsar C++ client",
-      link: `${siteConfig.baseUrl}docs/${language(props)}client-libraries-cpp`,
-      description: "The Pulsar C++ client",
-    },
-  ];
   const oldReleases = releaseInfo
     .filter((info) => {
       return info.version != latestVersion;
@@ -195,9 +171,12 @@ export default function page(props) {
         sourceAsc: `${info.srcArchiveUrl}.asc`,
         sourceSha: `${info.srcArchiveUrl}.${sha}`,
         sourceShaText: `${sha}`,
-        releaseNote: `${siteConfig.baseUrl}${language(
-          props
-        )}release-notes#${info.version.replace(/\./g, "")}`,
+        releaseNote: !legacyVersions.includes(info.version)
+          ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${info.version}`
+          : `${siteConfig.baseUrl}release-notes/legacy/#${info.version.replace(
+              /\./g,
+              ""
+            )}`,
       };
     });
   const apmStable = [
@@ -262,14 +241,26 @@ export default function page(props) {
           <h2 id="latest">
             <Translate>Current version (Stable)</Translate> {latestVersion}
           </h2>
+          <ReactMarkdown>
+            You can download all previous versions of Pulsar
+             [here](https://archive.apache.org/dist/pulsar/).
+          </ReactMarkdown>
           <ReleaseTable data={latest}></ReleaseTable>
           <h3>
             <Translate>Tiered storage offloaders</Translate>
           </h3>
+          <ReactMarkdown>
+            You can download all previous versions of tiered storage offloaders
+             [here](https://archive.apache.org/dist/pulsar/).
+          </ReactMarkdown>
           <ReleaseTable data={offloaders}></ReleaseTable>
           <h3 id="connectors">
             <Translate>Pulsar IO connectors</Translate>
           </h3>
+          <ReactMarkdown>
+          You can download all previous versions of connectors
+             [here](https://archive.apache.org/dist/pulsar/).
+          </ReactMarkdown>
           <ConnectorTable
             data={connectors.map((connector) => {
               return {
@@ -295,7 +286,7 @@ export default function page(props) {
             You must [verify](https://www.apache.org/info/verification.html) the
             integrity of the downloaded files. We provide OpenPGP signatures for
             every release file. This signature should be matched against the
-            [KEYS](https://www.apache.org/dist/pulsar/KEYS) file which contains
+            [KEYS](https://downloads.apache.org/pulsar/KEYS) file which contains
             the OpenPGP keys of Pulsar's Release Managers. We also provide
             `SHA-512` checksums for every release file. After you download the
             file, you should calculate a checksum for your download, and make
@@ -313,7 +304,7 @@ export default function page(props) {
               </Translate>
               &nbsp;
               <a
-                href={`${siteConfig.baseUrl}docs/${language(props)}standalone`}
+                href={`${siteConfig.baseUrl}docs/${language(props)}getting-started-standalone`}
               >
                 <Translate>Run Pulsar locally</Translate>
               </a>{" "}
@@ -322,12 +313,16 @@ export default function page(props) {
           </div>
           <p>
             <Translate>
-              If you need to connect to an existing Pulsar cluster or instance
-              using an officially supported client, see the client docs for
-              these languages:
+              If you need to connect to an existing Pulsar server or cluster
+              using an officially supported client, read the
             </Translate>
+            &nbsp;
+            <a
+              href={`${siteConfig.baseUrl}docs/${language(props)}client-libraries`}
+            >
+              <Translate>client libraries docs</Translate>
+            </a>{"."}
           </p>
-          <GuideTable data={guides}></GuideTable>
           <h2 id="archive">
             <Translate>Older releases</Translate>
           </h2>

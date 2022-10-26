@@ -6,6 +6,8 @@ const CWD = process.cwd();
 const siteConfig = require(`${CWD}/docusaurus.config.js`);
 const nextDocsDir = `${CWD}/docs`;
 const docsDir = `${CWD}/versioned_docs`;
+const restApiVersions = require("../static/swagger/restApiVersions.json");
+const compareVersions = require("compare-versions");
 
 function getVersions() {
   try {
@@ -17,6 +19,27 @@ function getVersions() {
     console.error("no versions found defaulting to 2.1.0");
   }
   return ["2.1.0"];
+}
+
+function getRealVersion(version) {
+  let versionMap = {};
+  let _vsGroups = {};
+  for (let [key, val] of Object.entries(restApiVersions)) {
+    if (key == "master" || compareVersions.compare(key, "2.8.0", "<")) {
+      versionMap[key] = key;
+    } else {
+      let [one, two] = key.split(".");
+      let _tKey = one + "." + two + ".x";
+      _vsGroups[_tKey] = [...(_vsGroups[_tKey] || []), key];
+    }
+  }
+  for (let [key, val] of Object.entries(_vsGroups)) {
+    let _tKey = val.sort((a, b) => {
+      return -compareVersions.compare(b, a, "<");
+    })[0];
+    versionMap[key] = _tKey;
+  }
+  return versionMap[version] || version;
 }
 
 function downloadPageUrl() {
@@ -32,9 +55,12 @@ function binaryReleaseUrl(version) {
 }
 
 function connectorReleaseUrl(version) {
+  var versions = version.split(".");
+  var majorVersion = parseInt(versions[0]);
+  var minorVersion = parseInt(versions[1]);
   if (version.includes("incubating")) {
     return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`;
-  } else if (version >= "2.3.0") {
+  } else if (majorVersion > 2 || (majorVersion == 2 && minorVersion >= 3)) {
     return `https://archive.apache.org/dist/pulsar/pulsar-${version}/connectors`;
   } else {
     return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`;
@@ -88,24 +114,17 @@ function debDistUrl(version, type) {
 }
 
 function clientVersionUrl(version, type) {
-  return `${siteConfig.url}/api/${type}`;
-  // var versions = version.split(".");
-  // var majorVersion = parseInt(versions[0]);
-  // var minorVersion = parseInt(versions[1]);
-  // if (majorVersion === 2 && minorVersion < 5) {
-  //   return `${siteConfig.url}/api/` + type + `/` + version + "/";
-  // } else if (majorVersion >= 2 && minorVersion >= 5) {
-  //   return (
-  //     `${siteConfig.url}/api/` +
-  //     type +
-  //     `/` +
-  //     majorVersion +
-  //     `.` +
-  //     minorVersion +
-  //     `.0` +
-  //     `-SNAPSHOT/`
-  //   );
-  // }
+  var versions = version.split(".");
+  var majorVersion = parseInt(versions[0]);
+  var minorVersion = parseInt(versions[1]);
+  if (
+    (majorVersion === 2 && minorVersion < 5) ||
+    (type === "python" && minorVersion >= 7)
+  ) {
+    return `(${siteConfig.url}/api/${type}/${version}`;
+  } else if (majorVersion >= 2 && minorVersion >= 5) {
+    return `(${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`;
+  }
 }
 
 function doReplace(options) {
@@ -123,7 +142,7 @@ function doReplace(options) {
 
 const versions = getVersions();
 
-const latestVersion = versions[0];
+const latestVersion = getRealVersion(versions[0]);
 const latestVersionWithoutIncubating = latestVersion.replace("-incubating", "");
 
 const from = [
@@ -146,13 +165,15 @@ const from = [
   /@pulsar:dist_deb:client@/g,
   /@pulsar:dist_deb:client-devel@/g,
 
-  /\/api\/python/g,
-  /\/api\/cpp/g,
-  /\/api\/pulsar-functions/g,
-  /\/api\/client/g,
-  /\/api\/admin/g,
+  /\(\/api\/python/g,
+  /\(\/api\/cpp/g,
+  /\(\/api\/pulsar-functions/g,
+  /\(\/api\/client/g,
+  /\(\/api\/admin/g,
 
   /@pulsar:version_number@/g,
+
+  /\[([^\]]*)\]\((\/tools\/pulsar[^\)]*)\)/g,
 ];
 
 const options = {
@@ -183,7 +204,10 @@ const options = {
     clientVersionUrl(`${latestVersion}`, "pulsar-functions"),
     clientVersionUrl(`${latestVersion}`, "client"),
     clientVersionUrl(`${latestVersion}`, "admin"),
+
     `${latestVersion}`,
+
+    '<a href="$2" target="_blank">$1</a>',
   ],
   dry: false,
 };
@@ -192,15 +216,13 @@ doReplace(options);
 
 // TODO activate and test when first version of docs are cut
 // replaces versions
-for (v of versions) {
-  // if (v === latestVersion) {
-  //   continue;
-  // }
+for (let _v of versions) {
+  const v = getRealVersion(_v)
   const vWithoutIncubating = v.replace("-incubating", "");
   const opts = {
     files: [
-      `${docsDir}/version-${v}/*.md`,
-      `${docsDir}/version-${v}/**/*.md`,
+      `${docsDir}/version-${_v}/*.md`,
+      `${docsDir}/version-${_v}/**/*.md`,
       // `${docsDir}/en/${v}/*.html`,
       // `${docsDir}/en/${v}/**/*.html`,
     ],
@@ -229,6 +251,7 @@ for (v of versions) {
       clientVersionUrl(`${v}`, "client"),
       clientVersionUrl(`${v}`, "admin"),
       `${v}`,
+      '<a href="$2" target="_blank">$1</a>',
     ],
     dry: false,
   };

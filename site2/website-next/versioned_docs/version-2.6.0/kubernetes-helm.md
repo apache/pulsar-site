@@ -13,7 +13,7 @@ This section guides you through every step of installing and running Apache Puls
 - Produce and consume messages using Pulsar clients
 - Monitor Apache Pulsar status with Prometheus and Grafana
 
-For deploying a Pulsar cluster for production usage, read the documentation on [how to configure and install a Pulsar Helm chart](helm-deploy).
+For deploying a Pulsar cluster for production usage, read the documentation on [how to configure and install a Pulsar Helm chart](helm-deploy.md).
 
 ## Prerequisite
 
@@ -29,7 +29,7 @@ For the following steps, step 2 and step 3 are for **developers** and step 4 and
 
 ## Step 0: Prepare a Kubernetes cluster
 
-Before installing a Pulsar Helm chart, you have to create a Kubernetes cluster. You can follow [the instructions](helm-prepare) to prepare a Kubernetes cluster.
+Before installing a Pulsar Helm chart, you have to create a Kubernetes cluster. You can follow [the instructions](helm-prepare.md) to prepare a Kubernetes cluster.
 
 We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start guide. To prepare a Kubernetes cluster, follow these steps:
 
@@ -63,7 +63,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 ## Step 1: Install Pulsar Helm chart
 
-0. Add Pulsar charts repo.
+1. Add Pulsar charts repo.
 
    ```bash
    
@@ -77,7 +77,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-1. Clone the Pulsar Helm chart repository.
+2. Clone the Pulsar Helm chart repository.
 
    ```bash
    
@@ -86,7 +86,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-2. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
    ```bash
    
@@ -97,17 +97,25 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-3. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
+4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes. 
+
+   :::note
+
+   You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+
+   :::
 
    ```bash
    
    helm install \
        --values examples/values-minikube.yaml \
+       --set initialize=true \
+       --namespace pulsar \
        pulsar-mini apache/pulsar
    
    ```
 
-4. Check the status of all pods.
+5. Check the status of all pods.
 
    ```bash
    
@@ -135,7 +143,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    
    ```
 
-5. Check the status of all services in the namespace `pulsar`.
+6. Check the status of all services in the namespace `pulsar`.
 
    ```bash
    
@@ -249,7 +257,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 You can use the Pulsar client to create producers and consumers to produce and consume messages.
 
-By default, the Pulsar Helm chart exposes the Pulsar cluster through a Kubernetes `LoadBalancer`. In Minikube, you can use the following command to get the IP address of the proxy service.
+By default, the Pulsar Helm chart exposes the Pulsar cluster through a Kubernetes `LoadBalancer`. In Minikube, you can use the following command to check the proxy service.
 
 ```bash
 
@@ -265,28 +273,48 @@ pulsar-mini-proxy            LoadBalancer   10.97.240.109    <pending>     80:32
 
 ```
 
-This output tells what are the node ports that Pulsar cluster's binary port and HTTP port are exposed to. The port after `80:` is the HTTP port while the port after `6650:` is the binary port.
+This output tells what are the node ports that Pulsar cluster's binary port and HTTP port are mapped to. The port after `80:` is the HTTP port while the port after `6650:` is the binary port.
 
-Then you can find the IP address of your Minikube server by running the following command.
+Then you can find the IP address and exposed ports of your Minikube server by running the following command.
 
 ```bash
 
-minikube ip
+minikube service pulsar-mini-proxy -n pulsar
 
 ```
 
-At this point, you can get the service URLs to connect to your Pulsar client.
+**Output**
+
+```bash
+
+|-----------|-------------------|-------------|-------------------------|
+| NAMESPACE |       NAME        | TARGET PORT |           URL           |
+|-----------|-------------------|-------------|-------------------------|
+| pulsar    | pulsar-mini-proxy | http/80     | http://172.17.0.4:32305 |
+|           |                   | pulsar/6650 | http://172.17.0.4:31816 |
+|-----------|-------------------|-------------|-------------------------|
+🏃  Starting tunnel for service pulsar-mini-proxy.
+|-----------|-------------------|-------------|------------------------|
+| NAMESPACE |       NAME        | TARGET PORT |          URL           |
+|-----------|-------------------|-------------|------------------------|
+| pulsar    | pulsar-mini-proxy |             | http://127.0.0.1:61853 |
+|           |                   |             | http://127.0.0.1:61854 |
+|-----------|-------------------|-------------|------------------------|
 
 ```
 
-webServiceUrl=http://$(minikube ip):<exposed-http-port>/
-brokerServiceUrl=pulsar://$(minikube ip):<exposed-binary-port>/
+At this point, you can get the service URLs to connect to your Pulsar client. Here are URL examples:
+
+```
+
+webServiceUrl=http://127.0.0.1:61853/
+brokerServiceUrl=pulsar://127.0.0.1:61854/
 
 ```
 
 Then you can proceed with the following steps:
 
-1. Download the Apache Pulsar tarball from the [downloads page](https://pulsar.apache.org/en/download/).
+1. Download the Apache Pulsar tarball from the [downloads page](https://pulsar.apache.org/download/).
 
 2. Decompress the tarball based on your download file.
 
@@ -375,7 +403,7 @@ Then you can proceed with the following steps:
 
 ## Step 4: Use Pulsar Manager to manage the cluster
 
-[Pulsar Manager](administration-pulsar-manager) is a web-based GUI management tool for managing and monitoring Pulsar.
+[Pulsar Manager](administration-pulsar-manager.md) is a web-based GUI management tool for managing and monitoring Pulsar.
 
 1. By default, the `Pulsar Manager` is exposed as a separate `LoadBalancer`. You can open the Pulsar Manager UI using the following command:
 
@@ -394,7 +422,7 @@ Then you can proceed with the following steps:
    - Type `http://pulsar-mini-broker:8080` for the field `Service URL` in the popup window.
    - Click `Confirm` button in the popup window.
 
-4. After successfully created an environment, you are redirected to the `tenants` page of that environment. Then you can create `tenants`, `namespaces` and `topics` using the Pulsar Manager.
+4. After successfully creating an environment, you are redirected to the `tenants` page of that environment. Then you can create `tenants`, `namespaces` and `topics` using the Pulsar Manager.
 
 ## Step 5: Use Prometheus and Grafana to monitor cluster
 

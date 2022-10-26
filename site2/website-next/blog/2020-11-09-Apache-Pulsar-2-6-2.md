@@ -1,7 +1,7 @@
 ---
 author: Xiaolong Ran
 authorURL: https://twitter.com/wolf4j1
-title: Apache Pulsar 2.6.2
+title: "Apache Pulsar 2.6.2"
 ---
 We are excited to see that the Apache Pulsar community has successfully released the 2.6.2 version after a lot of hard work. It is a great milestone for this fast-growing project and the Pulsar community. 2.6.2 is the result of a big effort from the community, with over 154 commits and a long list of improvements and bug fixes.
 
@@ -323,7 +323,7 @@ For more information about implementation, see [PR-8090](https://github.com/apac
 
 ## More information
 
-- To download Apache Pulsar 2.6.2, click [download](https://pulsar.apache.org/en/download/).
+- To download Apache Pulsar 2.6.2, click [download](https://pulsar.apache.org/download/).
 - For more information about Apache Pulsar 2.6.2, see [2.6.2 release notes](https://pulsar.apache.org/release-notes/#2.6.2 and [2.6.2 PR list](https://github.com/apache/pulsar/pulls?q=is%3Apr+label%3Arelease%2F2.6.2+is%3Aclosed).
 
 If you have any questions or suggestions, contact us with mailing lists or slack.

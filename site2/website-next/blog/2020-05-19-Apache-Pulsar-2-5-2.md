@@ -1,7 +1,7 @@
 ---
 author: Jia Zhai
 authorURL: https://twitter.com/Jia_Zhai
-title: Apache Pulsar 2.5.2
+title: "Apache Pulsar 2.5.2"
 ---
 
 We are proud to publish Apache Pulsar 2.5.2. This is the result of a huge effort from the community, with over 56 commits, general improvements and bug fixes.
@@ -122,7 +122,7 @@ JDBC sink does not handle `null` fields. The schema registered in Pulsar allows 
 
 ## Reference
 
-To download Apache Pulsar 2.5.2, click [here](https://pulsar.apache.org/en/download/).
+To download Apache Pulsar 2.5.2, click [here](https://pulsar.apache.org/download/).
 
 If you have any questions or suggestions, contact us with mailing lists or slack.
 

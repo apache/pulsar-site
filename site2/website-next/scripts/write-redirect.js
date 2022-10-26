@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const mkdirp = require("mkdirp");
 
-let versions = require("../versions-full.json");
+let versions = require("../versions.json");
 const latestVersion = versions[0];
 versions.push("next");
 const locales = ["en", "zh-CN", "zh-TW", "ja", "ko", "fr"];

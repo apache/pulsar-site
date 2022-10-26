@@ -8,7 +8,7 @@ Pulsar Manager is a web-based GUI management and monitoring tool that helps admi
 
 :::note
 
-If you are monitoring your current stats with [Pulsar dashboard](administration-dashboard), we recommend you use Pulsar Manager instead. Pulsar dashboard is deprecated.
+If you are monitoring your current stats with Pulsar dashboard, we recommend you use Pulsar Manager instead. Pulsar dashboard is deprecated.
 
 :::
 
@@ -34,7 +34,7 @@ docker run -it \
 ### Configure Database or JWT authentication
 ####  Configure Database (optional)
 
-If you have a large amount of data, you can use a custom database, otherwise, some display errors may occur, such as the topic information cannot be displayed when the topic exceeds 10000.
+If you have a large amount of data, you can use a custom database. Otherwise, some display errors may occur. For example, the topic information cannot be displayed when the topic exceeds 10000.
 The following is an example of PostgreSQL.
 
 1. Initialize database and table structures using the [file](https://github.com/apache/pulsar-manager/blob/master/src/main/resources/META-INF/sql/postgresql-schema.sql).
@@ -145,7 +145,7 @@ The request parameter in curl command:
 
 When using binary packages for direct deployment, you can follow these steps.
 
-- Download and unzip the binary package, which is available on the [Pulsar Download](https://pulsar.apache.org/en/download/) page.
+- Download and unzip the binary package, which is available on the [Pulsar Download](https://pulsar.apache.org/download/) page.
 
   ```bash
   

@@ -18,53 +18,18 @@
 # under the License.
 #
 
+set -x
+
 ROOT_DIR=$(git rev-parse --show-toplevel)
-VERSION=`${ROOT_DIR}/src/get-project-version.py`
-DEST_DIR=$ROOT_DIR/generated-site
 WEBSITE=$1
+VERSION=$2
+DOCS_DIR=$WEBSITE/docsify/$VERSION/pulsar-admin
 
-cd $ROOT_DIR
+DOC_GEN="$ROOT_DIR/bin/pulsar-admin documents generate"
 
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules
-mkdir -p $ROOT_DIR/site2/${WEBSITE}/brodocs/documents
+COMMANDS="broker-stats brokers bookies clusters functions functions-worker namespaces ns-isolation-policy sources sinks topics topicPolicies proxy-stats resourcegroups transactions tenants resource-quotas schemas packages"
 
-$ROOT_DIR/bin/pulsar-admin documents generate broker-stats > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/broker-stats.md
-$ROOT_DIR/bin/pulsar-admin documents generate brokers > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/brokers.md
-$ROOT_DIR/bin/pulsar-admin documents generate clusters > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/clusters.md
-$ROOT_DIR/bin/pulsar-admin documents generate functions > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/functions.md
-$ROOT_DIR/bin/pulsar-admin documents generate functions-worker > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/functions-worker.md
-$ROOT_DIR/bin/pulsar-admin documents generate namespaces > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/namespaces.md
-$ROOT_DIR/bin/pulsar-admin documents generate ns-isolation-policy > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/ns-isolation-policy.md
-$ROOT_DIR/bin/pulsar-admin documents generate sources > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/sources.md
-$ROOT_DIR/bin/pulsar-admin documents generate sinks > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/sinks.md
-$ROOT_DIR/bin/pulsar-admin documents generate topics > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/topics.md
-$ROOT_DIR/bin/pulsar-admin documents generate topicPolicies > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/topicPolicies.md
-$ROOT_DIR/bin/pulsar-admin documents generate proxy-stats > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/proxy-stats.md
-$ROOT_DIR/bin/pulsar-admin documents generate resourcegroups > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/resourcegroups.md
-$ROOT_DIR/bin/pulsar-admin documents generate transactions > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/transactions.md
-$ROOT_DIR/bin/pulsar-admin documents generate tenants > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/tenants.md
-$ROOT_DIR/bin/pulsar-admin documents generate resource-quotas > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/resource-quotas.md
-$ROOT_DIR/bin/pulsar-admin documents generate schemas > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/schemas.md
-$ROOT_DIR/bin/pulsar-admin documents generate packages > $ROOT_DIR/site2/${WEBSITE}/brodocs/documents/packages.md
-
-cd $ROOT_DIR/site2/${WEBSITE}/brodocs
-cp pulsar-admin-manifest.json manifest.json
-node brodoc.js
-
-cp index.html $DEST_DIR/tools/pulsar-admin/${VERSION}/
-cp navData.js stylesheet.css $DEST_DIR/tools/pulsar-admin/${VERSION}/
-cp scroll.js tabvisibility.js $DEST_DIR/tools/pulsar-admin/${VERSION}/
-cp favicon.ico $DEST_DIR/tools/pulsar-admin/${VERSION}/
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/bootstrap/dist/css
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/bootstrap/dist/css/bootstrap.min.css $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/bootstrap/dist/css
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/font-awesome/css
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/font-awesome/css/font-awesome.min.css $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/font-awesome/css
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/highlight.js/styles
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/highlight.js/styles/default.css $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/highlight.js/styles
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/jquery/dist
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/jquery/dist/jquery.min.js $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/jquery/dist/
-mkdir -p $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/jquery.scrollto
-cp -r $ROOT_DIR/site2/${WEBSITE}/node_modules/jquery.scrollto/jquery.scrollTo.min.js $DEST_DIR/tools/pulsar-admin/${VERSION}/node_modules/jquery.scrollto
-
-
+for CMD in $COMMANDS
+do
+    $DOC_GEN "$CMD" > "$DOCS_DIR/$CMD".md
+done

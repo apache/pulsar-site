@@ -5,57 +5,77 @@ sidebar_label: All Releases
 slug: /
 ---
 
+````mdx-code-block
+import PulsarReleaseTable from "../src/components/PulsarReleaseTable";
+import ClientReleaseTable from "../src/components/ClientReleaseTable";
+const pulsar = require(`../data/release-pulsar.js`);
+const java = require(`../data/release-java.js`);
+const python = require(`../data/release-python.js`);
+const cpp = require(`../data/release-cpp.js`);
+const ws = require(`../data/release-ws.js`);
+const golang = require(`../data/release-go.js`);
+const node = require(`../data/release-node.js`);
+const cs = require(`../data/release-cs.js`);
+````
+
 ## Pulsar Release Notes
-#### 2.9.x
-[2.9.1](/release-notes/docs/pulsar-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/docs/pulsar-2.9.0)&ensp;&ensp;  
-#### 2.8.x
-[2.8.2](/release-notes/docs/pulsar-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/pulsar-2.8.1)&ensp;&ensp;  
-#### 2.7.x
-[2.7.4](/release-notes/docs/pulsar-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/docs/pulsar-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/docs/pulsar-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/docs/pulsar-2.7.1)&ensp;&ensp;  
-#### 2.6.x
-[2.6.4](/release-notes/docs/pulsar-2.6.4)&ensp;&ensp;[2.6.3](/release-notes/docs/pulsar-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/docs/pulsar-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/docs/pulsar-2.6.1)&ensp;&ensp;  
-#### 2.5.x
-[2.5.2](/release-notes/docs/pulsar-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/docs/pulsar-2.5.1)&ensp;&ensp;  
+
+````mdx-code-block
+<PulsarReleaseTable data={pulsar} />
+````
+
+### Previous versions
+
+All release notes of previous versions are available [here](/release-notes/legacy).
+
 ## Client Release Notes
+
+> **Tip**
+>
+> - The code repos of **Java and WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar). These clients are released with Pulsar. 
+>
+> - The code repos of **[C++](https://github.com/apache/pulsar-client-cpp), [Python](https://github.com/apache/pulsar-client-python), [Go](https://github.com/apache/pulsar-client-go), [Node.js](https://github.com/apache/pulsar-client-node), and [C#](https://github.com/apache/pulsar-dotpulsar)** clients are hosted outside of the Pulsar main repo. These clients are not released with Pulsar.
+>
+> - All clients have [independent release notes](release-notes/versioned) and they are automatically synced to this page.
+
 ### Java
-#### 2.9.x
-[2.9.1](/release-notes/docs/client-java-2.9.1)&ensp;&ensp;[2.9.0](/release-notes/docs/client-java-2.9.0)&ensp;&ensp;  
-#### 2.8.x
-[2.8.2](/release-notes/docs/client-java-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/client-java-2.8.1)&ensp;&ensp;  
-#### 2.7.x
-[2.7.4](/release-notes/docs/client-java-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/docs/client-java-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/docs/client-java-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/docs/client-java-2.7.1)&ensp;&ensp;  
-#### 2.6.x
-[2.6.4](/release-notes/docs/client-java-2.6.4)&ensp;&ensp;[2.6.3](/release-notes/docs/client-java-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/docs/client-java-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/docs/client-java-2.6.1)&ensp;&ensp;  
-#### 2.5.x
-[2.5.2](/release-notes/docs/client-java-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/docs/client-java-2.5.1)&ensp;&ensp;  
+
+````mdx-code-block
+<ClientReleaseTable data={java} />
+````
+
 ### Python
-#### 2.9.x
-[2.9.0](/release-notes/docs/client-python-2.9.0)&ensp;&ensp;  
-#### 2.8.x
-[2.8.2](/release-notes/docs/client-python-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/client-python-2.8.1)&ensp;&ensp;  
-#### 2.7.x
-[2.7.4](/release-notes/docs/client-python-2.7.4)&ensp;&ensp;[2.7.2](/release-notes/docs/client-python-2.7.2)&ensp;&ensp;  
-#### 2.6.x
-[2.6.2](/release-notes/docs/client-python-2.6.2)&ensp;&ensp;  
-#### 2.5.x
-[2.5.2](/release-notes/docs/client-python-2.5.2)&ensp;&ensp;  
-### CPP
-#### 2.9.x
-[2.9.0](/release-notes/docs/client-cpp-2.9.0)&ensp;&ensp;  
-#### 2.8.x
-[2.8.2](/release-notes/docs/client-cpp-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/client-cpp-2.8.1)&ensp;&ensp;  
-#### 2.7.x
-[2.7.4](/release-notes/docs/client-cpp-2.7.4)&ensp;&ensp;[2.7.3](/release-notes/docs/client-cpp-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/docs/client-cpp-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/docs/client-cpp-2.7.1)&ensp;&ensp;  
-#### 2.6.x
-[2.6.2](/release-notes/docs/client-cpp-2.6.2)&ensp;&ensp;[2.6.1](/release-notes/docs/client-cpp-2.6.1)&ensp;&ensp;  
-#### 2.5.x
-[2.5.2](/release-notes/docs/client-cpp-2.5.2)&ensp;&ensp;[2.5.1](/release-notes/docs/client-cpp-2.5.1)&ensp;&ensp;  
-### Websocket
-#### 2.8.x
-[2.8.2](/release-notes/docs/client-websocket-2.8.2)&ensp;&ensp;[2.8.1](/release-notes/docs/client-websocket-2.8.1)&ensp;&ensp;  
-#### 2.7.x
-[2.7.3](/release-notes/docs/client-websocket-2.7.3)&ensp;&ensp;[2.7.2](/release-notes/docs/client-websocket-2.7.2)&ensp;&ensp;[2.7.1](/release-notes/docs/client-websocket-2.7.1)&ensp;&ensp;  
-#### 2.6.x
-[2.6.3](/release-notes/docs/client-websocket-2.6.3)&ensp;&ensp;[2.6.2](/release-notes/docs/client-websocket-2.6.2)&ensp;&ensp;  
-#### 2.5.x
-[2.5.1](/release-notes/docs/client-websocket-2.5.1)&ensp;&ensp;  
+
+````mdx-code-block
+<ClientReleaseTable data={python} />
+````
+
+### C++
+
+````mdx-code-block
+<ClientReleaseTable data={cpp} />
+````
+
+### WebSocket
+
+````mdx-code-block
+<ClientReleaseTable data={ws} />
+````
+
+### Go
+
+````mdx-code-block
+<ClientReleaseTable data={golang} />
+````
+
+### NodeJs
+
+````mdx-code-block
+<ClientReleaseTable data={node} />
+````
+
+### C#
+
+````mdx-code-block
+<ClientReleaseTable data={cs} />
+````

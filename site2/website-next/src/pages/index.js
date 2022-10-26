@@ -6,9 +6,11 @@ import HomeQuotes from "../components/HomeQuotes";
 import SubHeroBlock from "../components/SubHeroBlock";
 import PromoCallout from "../components/PromoCallout";
 import PillButton from "../components/PillButton";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { docUrl, githubUrl } from "../utils/index";
+
 var startWaves = function () {
+  if (!SineWaves) {
+    return;
+  }
   new SineWaves({
     el: document.getElementById("waves"),
     speed: 2,
@@ -72,7 +74,6 @@ var startWaves = function () {
     },
   });
 };
-var cascade = function () {};
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
@@ -140,7 +141,7 @@ export default function Home() {
           });
         }
       },
-      { threshold: [ 0.1 ] }
+      { threshold: [0.1] }
     );
     observer.observe(document.querySelector("#home-features"));
 
@@ -149,7 +150,9 @@ export default function Home() {
       pulsingWaves.classList.add("show-waves");
     }, 50);
   });
-
+  // gets blog posts
+  const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
+  const latestPost = recentPosts.items[0];
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
@@ -159,9 +162,9 @@ export default function Home() {
         <section className="home-hero pt-24">
           <div className="inner">
             <div className="md:float-left md:w-2/3">
-              <h1>Real-time, Continuous Data Feeds</h1>
+              <h1>Cloud-Native, Distributed Messaging and Streaming</h1>
               <p>
-                Apache Pulsar is a distributed, open source pub-sub messaging
+                Apache® Pulsar™ is a distributed, open source pub-sub messaging
                 and streaming platform for real-time workloads, managing
                 hundreds of billions of events per day.
               </p>
@@ -173,19 +176,18 @@ export default function Home() {
         </div>
         <div className="home-ctas relative z-5">
           <div className="inner">
-            <PillButton variant="" target="" href={docUrl('concepts-overview')}>
+            <PillButton variant="" target="" href={`${siteConfig.baseUrl}docs/concepts-overview`}>
               Learn More
             </PillButton>
-            <PillButton variant="grey" href={docUrl()}>
+            <PillButton variant="grey" href={`${siteConfig.baseUrl}docs`}>
               Quickstart
             </PillButton>
           </div>
         </div>
-
         <PromoCallout
-          url="/blog"
-          linkText="Read the Blog"
-          text="Check out the latest blog post!"
+          url={latestPost.permalink}
+          linkText="Read Now"
+          text={latestPost.title}
         />
         <SubHeroBlock
           heading="What is Apache Pulsar?"
@@ -209,16 +211,6 @@ export default function Home() {
                 Read Case Studies
               </a>
             </p>
-          </div>
-          <div className="final-cta relative z-5 py-12">
-            <div className="inner inner--narrow text--center">
-              <h2 className="">Get real-time with Pulsar</h2>
-              <p className="">
-                <PillButton variant="" target="" href={docUrl("")}>
-                  Quickstart Guide
-                </PillButton>
-              </p>
-            </div>
           </div>
         </section>
       </div>

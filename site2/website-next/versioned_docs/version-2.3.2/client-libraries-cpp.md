@@ -151,7 +151,7 @@ $ rpm -ivh apache-pulsar-client*.rpm
 
 ```
 
-After you install RPM successfully, Pulsar libraries are in the `/usr/lib` directory，for example：
+After you install RPM successfully, Pulsar libraries are in the `/usr/lib` directory, for example：
 
 ```bash
 
@@ -270,6 +270,7 @@ $ brew install protobuf boost boost-python log4cxx
 # Google Test installation
 $ git clone https://github.com/google/googletest.git
 $ cd googletest
+$ git checkout release-1.12.1
 $ cmake .
 $ make install
 
@@ -386,6 +387,8 @@ using namespace pulsar;
 
 int main() {
     Client client("pulsar://localhost:6650");
+    
+    Producer producer;
 
     Result result = client.createProducer("persistent://public/default/my-topic", producer);
     if (result != ResultOk) {
@@ -429,6 +432,7 @@ Without this configuration, the result code `ResultProducerQueueIsFull` is passe
 
 #include <pulsar/Client.h>
 #include <thread>
+#include <atomic>
 
 using namespace pulsar;
 
@@ -652,12 +656,12 @@ Client client("pulsar+ssl://my-broker.com:6651", config);
 
 ```
 
-For complete examples, refer to [C++ client examples](https://github.com/apache/pulsar/tree/master/pulsar-client-cpp/examples).
+For complete examples, refer to [C++ client examples](https://github.com/apache/pulsar-client-cpp/tree/main/examples).
 
 ## Schema
 
 This section describes some examples about schema. For more information about
-schema, see [Pulsar schema](schema-get-started).
+schema, see [Pulsar schema](schema-get-started.md).
 
 ### Avro schema
 

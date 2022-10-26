@@ -18,120 +18,44 @@
 # under the License.
 #
 
-ROOT_DIR=$(git rev-parse --show-toplevel)
-VERSION=$(${ROOT_DIR}/src/get-project-version.py)
-
-NEXT=$1
-WEBSITE_DIR="website"
-if [ -n "$NEXT" ]; then
-  WEBSITE_DIR="website-"$NEXT
-fi
-
-function workaround_crowdin_problem_by_copying_files() {
-  # TODO: remove this after figuring out why crowdin removed code tab when generating translated files
-  # https://github.com/apache/pulsar/issues/5816
-  cp versioned_docs/version-2.4.2/functions-develop.md translated_docs/zh-CN/version-2.4.2/functions-develop.md
-  cp versioned_docs/version-2.5.0/functions-develop.md translated_docs/zh-CN/version-2.5.0/functions-develop.md
-  cp versioned_docs/version-2.5.0/io-overview.md translated_docs/zh-CN/version-2.5.0/io-overview.md
-  cp versioned_docs/version-2.5.1/functions-develop.md translated_docs/zh-CN/version-2.5.1/functions-develop.md
-  cp versioned_docs/version-2.5.2/functions-develop.md translated_docs/zh-CN/version-2.5.2/functions-develop.md
-
-  cp versioned_docs/version-2.4.2/functions-develop.md translated_docs/ja/version-2.4.2/functions-develop.md
-  cp versioned_docs/version-2.5.0/functions-develop.md translated_docs/ja/version-2.5.0/functions-develop.md
-  cp versioned_docs/version-2.5.0/io-overview.md translated_docs/ja/version-2.5.0/io-overview.md
-  cp versioned_docs/version-2.5.1/functions-develop.md translated_docs/ja/version-2.5.1/functions-develop.md
-  cp versioned_docs/version-2.5.2/functions-develop.md translated_docs/ja/version-2.5.2/functions-develop.md
-
-  cp versioned_docs/version-2.4.2/functions-develop.md translated_docs/fr/version-2.4.2/functions-develop.md
-  cp versioned_docs/version-2.5.0/functions-develop.md translated_docs/fr/version-2.5.0/functions-develop.md
-  cp versioned_docs/version-2.5.0/io-overview.md translated_docs/fr/version-2.5.0/io-overview.md
-  cp versioned_docs/version-2.5.1/functions-develop.md translated_docs/fr/version-2.5.1/functions-develop.md
-  cp versioned_docs/version-2.5.2/functions-develop.md translated_docs/fr/version-2.5.2/functions-develop.md
-
-  cp versioned_docs/version-2.4.2/functions-develop.md translated_docs/zh-TW/version-2.4.2/functions-develop.md
-  cp versioned_docs/version-2.5.0/functions-develop.md translated_docs/zh-TW/version-2.5.0/functions-develop.md
-  cp versioned_docs/version-2.5.0/io-overview.md translated_docs/zh-TW/version-2.5.0/io-overview.md
-  cp versioned_docs/version-2.5.1/functions-develop.md translated_docs/zh-TW/version-2.5.1/functions-develop.md
-  cp versioned_docs/version-2.5.2/functions-develop.md translated_docs/zh-TW/version-2.5.2/functions-develop.md
-
-  cp versioned_docs/version-2.4.2/functions-develop.md translated_docs/ko/version-2.4.2/functions-develop.md
-  cp versioned_docs/version-2.5.0/functions-develop.md translated_docs/ko/version-2.5.0/functions-develop.md
-  cp versioned_docs/version-2.5.0/io-overview.md translated_docs/ko/version-2.5.0/io-overview.md
-  cp versioned_docs/version-2.5.1/functions-develop.md translated_docs/ko/version-2.5.1/functions-develop.md
-  cp versioned_docs/version-2.5.2/functions-develop.md translated_docs/ko/version-2.5.2/functions-develop.md
-}
-
-function crowdin() {
-  yarn write-translations
-  if [ "$CROWDIN_DOCUSAURUS_API_KEY" != "UNSET" ]; then
-    # upload only if environment variable CROWDIN_UPLOAD=1 is set
-    # or current hour is 0-5
-    # this leads to executing crowdin-upload once per day when website build is scheduled
-    # to run with cron expression '0 */6 * * *'
-    CURRENT_HOUR=$(date +%H)
-    if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
-      yarn run crowdin-upload
-    fi
-    yarn run crowdin-download
-
-    workaround_crowdin_problem_by_copying_files
-  else
-    # set English as the only language to build in this case
-    cat >languages.js <<'EOF'
-const languages = [
-{
-  enabled: true,
-  name: 'English',
-  tag: 'en',
-}];
-module.exports = languages;
-EOF
-  fi
-}
-
 set -x -e
 
+GH_TOKEN=$1
+
+ROOT_DIR=$(git rev-parse --show-toplevel)
+
+WEBSITE_DIR=${ROOT_DIR}/site2/website-next
+TOOLS_DIR=${ROOT_DIR}/site2/tools
+GEN_SITE_DIR=${ROOT_DIR}/generated-site
+VERSION=latest
+
 export NODE_OPTIONS="--max-old-space-size=16000"
-${ROOT_DIR}/site2/tools/generate-api-docs.sh
-cd ${ROOT_DIR}/site2/$WEBSITE_DIR
+"$TOOLS_DIR"/generate-api-docs.sh
+cd "$WEBSITE_DIR"
 
-yarn
+npm install
 
-if [ -n "$NEXT" ]; then
-  yarn write-translations
-  CURRENT_HOUR=$(date +%H)
-  if [[ "$CROWDIN_UPLOAD" == "1" || $CURRENT_HOUR -lt 6 ]]; then
-    yarn run crowdin-upload
-  fi
-  yarn crowdin-download
-
-  node scripts/replace.js
-  node scripts/split-swagger-by-version.js
-  # Because there are too many versions of the document, the memory overflows during the full build.
-  # The split-version-build script is used to build in different versions, and finally the build results are merged.
-  echo "all params: "$@
-  bash scripts/split-version-build.sh $@
-else
-  crowdin
-  yarn build
-  node ./scripts/replace.js
-  node ./scripts/split-swagger-by-version.js
-fi
+node scripts/replace.js
+node scripts/split-swagger-by-version.js
+# Because there are too many versions of the document, the memory overflows during the full build.
+# The split-version-build script is used to build in different versions, and finally the build results are merged.
+bash scripts/split-version-build.sh $@
 
 # Generate document for command line tools.
-${ROOT_DIR}/site2/tools/pulsar-admin-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-client-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-perf-doc-gen.sh $WEBSITE_DIR
-${ROOT_DIR}/site2/tools/pulsar-doc-gen.sh $WEBSITE_DIR
-cd ${ROOT_DIR}/site2/$WEBSITE_DIR
+"$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-client-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-perf-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+cd "$WEBSITE_DIR"
 
-rm -rf ${ROOT_DIR}/generated-site/content
-mkdir -p ${ROOT_DIR}/generated-site/content
-cp -R ${ROOT_DIR}/generated-site/api ${ROOT_DIR}/generated-site/content
-if [ -n "$NEXT" ]; then
-  cp -R ./build/* ${ROOT_DIR}/generated-site/content
-else
-  cp -R ./build/pulsar/* ${ROOT_DIR}/generated-site/content
-fi
-cp -R ${ROOT_DIR}/generated-site/tools ${ROOT_DIR}/generated-site/content
-cp -R ${ROOT_DIR}/site2/$WEBSITE_DIR/static/swagger/* ${ROOT_DIR}/generated-site/content/swagger/
+CONTENT_DIR="$GEN_SITE_DIR"/content
+
+rm -rf "$CONTENT_DIR"
+mkdir -p "$CONTENT_DIR"
+mkdir -p "$CONTENT_DIR"/reference
+rsync -a ./docsify/ "$CONTENT_DIR"/reference
+rsync -a ./build/ "$CONTENT_DIR"
+
+# Generate document for release table
+"$TOOLS_DIR"/release-json-gen.sh "$GH_TOKEN" "$WEBSITE_DIR"

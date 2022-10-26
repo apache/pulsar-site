@@ -3,8 +3,7 @@ import Layout from "@theme/Layout";
 import VersionsTable from "../components/VersionsTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
-const versions = require("../../versions-full.json");
-const oldversions = require("../../oldversions.json");
+const versions = require("../../versions.json");
 
 export default function DenseTable() {
   const { siteConfig } = useDocusaurusContext();
@@ -23,6 +22,9 @@ export default function DenseTable() {
             data={[{ name: latestStableVersion }]}
             type="stable"
           ></VersionsTable>
+          <p className="mt-8 mb-4">
+            For release notes of all versions, go to the <a href="/release-notes"> Release Notes</a> page.
+          </p>
           <h3 className="mt-8 mb-4" id="latest">
             <Translate> Latest Version</Translate>
           </h3>
@@ -47,7 +49,6 @@ export default function DenseTable() {
           <VersionsTable
             data={versions
               .filter((item) => item != latestStableVersion)
-              .concat(oldversions)
               .map((item) => ({
                 name: item,
               }))}

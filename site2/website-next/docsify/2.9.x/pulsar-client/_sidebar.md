@@ -1,0 +1,2 @@
+- [CLI Tools](cli)
+  - [pulsar-client](pulsar-client/)

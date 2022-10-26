@@ -18,7 +18,7 @@
 # under the License.
 #
 
-set -e
+set -x -e
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
@@ -37,21 +37,35 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
 (
   cd $ROOT_DIR
   REVISION=$(git rev-parse --short HEAD)
+  BUILD_ALL=$(cat $ROOT_DIR/site2/website-next/scripts/.build)
 
   rm -rf $PULSAR_SITE_TMP
   mkdir $PULSAR_SITE_TMP
   cd $PULSAR_SITE_TMP
 
-  git clone "https://$GH_TOKEN@$ORIGIN_REPO" .
+  git clone -b $BRANCH_CONTENT --depth 1 "https://$GH_TOKEN@$ORIGIN_REPO" .
   git config user.name "Pulsar Site Updater"
   git config user.email "dev@pulsar.apache.org"
-  git checkout $BRANCH_CONTENT
 
   # copy the apache generated dir
   if [ ! -d "$PULSAR_SITE_TMP/content/" ]; then
     mkdir -p $PULSAR_SITE_TMP/content/
   fi
-  cp -r $GENERATED_SITE_DIR/content/* $PULSAR_SITE_TMP/content
+
+  echo "BUILD_ALL:"$BUILD_ALL
+  if [[ $BUILD_ALL"" == "1" ]]; then
+    echo "clean all the old content"
+    find $PULSAR_SITE_TMP/content -print \
+      | grep -v $PULSAR_SITE_TMP/content$ \
+      | grep -v $PULSAR_SITE_TMP/content/api \
+      | grep -v $PULSAR_SITE_TMP/content/charts \
+      | grep -v $PULSAR_SITE_TMP/content/css \
+      | grep -v $PULSAR_SITE_TMP/content/tools \
+      | grep -v $PULSAR_SITE_TMP/content/reference \
+      | grep -v $PULSAR_SITE_TMP/content/.htaccess \
+      | xargs rm -rf
+  fi
+  rsync -a $GENERATED_SITE_DIR/content/ $PULSAR_SITE_TMP/content
 
   git add -A .
   git diff-index --quiet HEAD || (git commit -m "Updated site at revision $REVISION" && git push -q origin HEAD:$BRANCH_CONTENT)

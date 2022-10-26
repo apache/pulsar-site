@@ -1,7 +1,7 @@
 ---
 author: Matteo Merli
 authorURL: https://twitter.com/merlimat
-title: Apache Pulsar 2.3.0
+title: "Apache Pulsar 2.3.0"
 ---
 
 The Apache Pulsar PMC is happy to announce the release of Pulsar 2.3.0. This

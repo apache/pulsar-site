@@ -1,7 +1,31 @@
 // const lightCodeTheme = require("prism-react-renderer/themes/github");
 // const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
+const _ = require("lodash");
 const linkifyRegex = require("./plugins/remark-linkify-regex");
+const versions = require("./versions.json");
+const versionsMap = {
+  ..._.keyBy(
+    versions.slice(1).map((item) => {
+      return {
+        label: item,
+        path: item,
+      };
+    }),
+    "label"
+  ),
+  current: {
+    label: "Next",
+    path: "next",
+  },
+};
+
+let buildVersions = ["current"];
+try {
+  buildVersions = require("./.build-versions.json");
+} catch (error) {
+  //do nothing
+}
 
 const oldUrl = "https://pulsar.apache.org";
 const url = "https://pulsar.apache.org";
@@ -11,7 +35,10 @@ const functionsApiUrl = url + "/functions-rest-api";
 const sourceApiUrl = url + "/source-rest-api";
 const sinkApiUrl = url + "/sink-rest-api";
 const packagesApiUrl = url + "/packages-rest-api";
+const transactionsApiUrl = url + "/transactions-rest-api";
+const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
+const githubSiteUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
 
 const injectLinkParse = ([, prefix, , name, path]) => {
@@ -74,16 +101,23 @@ const injectLinkParseForEndpoint = ([, info]) => {
     restBaseUrl = sourceApiUrl;
   } else if (restApiType == "sink") {
     restBaseUrl = sinkApiUrl;
+  } else if (restApiType == "packages") {
+    restBaseUrl = packagesApiUrl;
+  } else if (restApiType == "transactions") {
+    restBaseUrl = transactionsApiUrl;
+  } else if (restApiType == "lookup") {
+    restBaseUrl = lookupApiUrl;
   }
   let restUrl = "";
-  if (suffix.indexOf("?version") >= 0) {
-    restUrl = suffix + "&apiVersion=" + restApiVersion;
+  if (suffix.indexOf("?version=") >= 0) {
+    const suffixAndVersion = suffix.split("?version=")
+    restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" +  suffixAndVersion[0];
   } else {
-    restUrl = suffix + "version=master&apiVersion=" + restApiVersion;
+    restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
   }
   return {
     text: method + " " + path,
-    link: restBaseUrl + "#" + restUrl,
+    link: restBaseUrl + "?" + restUrl,
   };
 };
 
@@ -91,7 +125,7 @@ const injectLinkParseForEndpoint = ([, info]) => {
 module.exports = {
   title: "Apache Pulsar",
   tagline:
-    "Apache Pulsar is a cloud-native, distributed messaging and streaming platform originally created at Yahoo! and now a top-level Apache Software Foundation project",
+    "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
   url: "https://pulsar.apache.org",
   baseUrl: baseUrl,
   onBrokenLinks: "ignore",
@@ -103,19 +137,15 @@ module.exports = {
     githubUrl,
     oldUrl,
   },
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "zh-CN", "zh-TW", "ja", "fr", "ko"],
-    localeConfigs: {
-      'zh-CN': {
-        label: '简体中文',
-      },
-      'zh-TW': {
-        label: '繁体中文',
-      },
-    },
-  },
   themeConfig: {
+    announcementBar: {
+      id: "summit",
+      content:
+        '🚀 Pulsar Summit Asia 2022 will take place on November 19th and 20th, 2022. The CFP is open now! <a target="_blank" href="https://sessionize.com/pulsar-summit-asia-2022/">Submit a proposal</a> to share your Pulsar story!',
+      backgroundColor: "#198fff",
+      textColor: "#fff",
+      isCloseable: true,
+    },
     colorMode: {
       disableSwitch: false,
     },
@@ -137,9 +167,8 @@ module.exports = {
               label: "Pulsar Concepts",
             },
             {
-              type: "doc",
               label: "Quickstart",
-              docId: "standalone",
+              to: "/docs",
             },
             {
               label: "Ecosystem",
@@ -148,84 +177,45 @@ module.exports = {
           ],
         },
         {
-          // type: "doc",
-          // docId: "about",
-          to: "/docs/next",
+          href: "/docs/",
           position: "right",
           label: "Docs",
         },
-        // {
-        //   label: "REST APIs",
-        //   position: "right",
-        //   items: [
-        //     {
-        //       label: "Admin REST API",
-        //       to: "/admin-rest-api",
-        //     },
-        //     {
-        //       label: "Functions",
-        //       to: "/functions-rest-api",
-        //     },
-        //     {
-        //       label: "Sources",
-        //       to: "/source-rest-api",
-        //     },
-        //     {
-        //       label: "Sinks",
-        //       to: "/sink-rest-api",
-        //     },
-        //     {
-        //       label: "Packages",
-        //       to: "/packages-rest-api",
-        //     },
-        //   ],
-        // },
-        // {
-        //   label: "CLI",
-        //   position: "right",
-        //   items: [
-        //     {
-        //       label: "Pulsar Admin",
-        //       to: "/pulsar-admin-cli",
-        //     },
-        //     {
-        //       label: "Pulsar Client",
-        //       to: "/pulsar-client-cli",
-        //     },
-        //     {
-        //       label: "Pulsar Perf",
-        //       to: "/pulsar-perf-cli",
-        //     },
-        //     {
-        //       label: "Pulsar",
-        //       to: "/pulsar-cli",
-        //     },
-        //   ],
-        // },
         {
           type: "dropdown",
           label: "Community",
           position: "right",
+          className: "community-dropdown",
           items: [
             {
-              to: "/community#welcome",
+              to: "/community#section-welcome",
               label: "Welcome",
+              className: "scroll-link scroll-welcome",
+              id: "scroll-welcome",
             },
             {
-              to: "/community#discussions",
+              to: "/community#section-discussions",
               label: "Discussions",
+              className: "scroll-link scroll-discussions",
+              id: "scroll-discussions",
             },
             {
-              to: "/community#governance",
+              to: "/community#section-governance",
               label: "Governance",
+              className: "scroll-link",
+              id: "scroll-governance",
             },
             {
-              to: "/community#community",
+              to: "/community#section-community",
               label: "Meet the Community",
+              className: "scroll-link",
+              id: "scroll-community",
             },
             {
-              to: "/community#how-to-contribute",
+              to: "/community#section-contribute",
               label: "Contribute",
+              className: "scroll-link",
+              id: "scroll-contribute",
             },
             {
               to: "https://github.com/apache/pulsar/wiki",
@@ -261,14 +251,16 @@ module.exports = {
           ],
         },
         {
-          type: "localeDropdown",
-          position: "right",
-        },
-        {
           to: "/download",
           label: "Download",
           position: "right",
           className: "download-btn pill-btn",
+        },
+        {
+          href: "https://github.com/apache/pulsar",
+          label: "Github",
+          position: "right",
+          className: "github-nav",
         },
       ],
     },
@@ -312,6 +304,10 @@ module.exports = {
               label: "Sponsorship",
               href: "https://www.apache.org/foundation/sponsorship",
             },
+            {
+              label: "Privacy",
+              href: "https://www.apache.org/foundation/policies/privacy.html",
+            },
           ],
         },
         {
@@ -328,21 +324,26 @@ module.exports = {
         },
       ],
       copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
-      <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Apache Pulsar and the Apache feather logo are trademarks of The Apache Software Foundation.</p>`,
+      <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>`,
     },
     prism: {
-      // theme: lightCodeTheme,
-      // darkTheme: darkCodeTheme,
       theme: require("prism-react-renderer/themes/dracula"),
-      additionalLanguages: ["powershell", "java", "go", "c", "cpp", "python"],
+      additionalLanguages: [
+        "csharp",
+        "groovy",
+        "http",
+        "ini",
+        "java",
+        "powershell",
+        "properties",
+        "protobuf",
+        "yaml",
+      ],
     },
     algolia: {
-      appId: "d226a455cecdd4bc18a554c1b47e5b52",
-      apiKey: "d226a455cecdd4bc18a554c1b47e5b52",
+      appId: "WK2YL0SALL",
+      apiKey: "42d24d221fbd8eb59804a078208aaec0",
       indexName: "apache_pulsar",
-      algoliaOptions: {
-        facetFilters: ["language:LANGUAGE", "version:VERSION"],
-      },
     },
   },
   stylesheets: [
@@ -355,7 +356,15 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubUrl}/edit/master/site2/website-next`,
+          editUrl: ({
+            version,
+            versionDocsDirPath,
+            docPath,
+            permalink,
+            locale,
+          }) => {
+            return `${githubUrl}/edit/master/site2/docs/${docPath}`;
+          },
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
@@ -366,24 +375,30 @@ module.exports = {
               injectLinkParseForEndpoint
             ),
           ],
+          versions: versionsMap,
+          onlyIncludeVersions: buildVersions || ["current"],
         },
         blog: {
           showReadingTime: true,
-          editUrl: `${githubUrl}/edit/master/site2/website-next`,
+          editUrl: `${githubSiteUrl}/edit/main/site2/website-next/`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        googleAnalytics: {
+          trackingID: "UA-102219959-1",
         },
       },
     ],
   ],
   plugins: [
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        fromExtensions: ["md"],
-      },
-    ],
+    // [
+    //   "client-redirects",
+    //   /** @type {import('@docusaurus/plugin-client-redirects').Options} */
+    //   ({
+    //     fromExtensions: ["html"],
+    //   }),
+    // ],
     "./postcss-tailwind-loader",
     [
       "content-docs",
@@ -404,10 +419,18 @@ module.exports = {
         // showLastUpdateTime: true,
       }),
     ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "pulsar-manager-release-notes",
+        path: "pulsar-manager",
+        routeBasePath: "/",
+      },
+    ],
   ],
   scripts: [
     {
-      src: "https://cdn.jsdelivr.net/npm/sine-waves@0.3.0/sine-waves.min.js",
+      src: "https://pulsar.apache.org/js/sine-waves.min.js",
       async: true,
     },
   ],

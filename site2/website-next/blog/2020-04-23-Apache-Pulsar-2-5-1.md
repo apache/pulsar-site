@@ -1,7 +1,7 @@
 ---
 author: Guangning E
 authorURL: https://twitter.com/tuteng3
-title: Apache Pulsar 2.5.1
+title: "Apache Pulsar 2.5.1"
 ---
 
 We are proud to publish Apache Pulsar 2.5.1. This is the result of a huge effort from the community, with over 130 commits and a long list of new features, general improvements and bug fixes.
@@ -110,7 +110,7 @@ Pulsar 2.5.1 mainly provides 2 additional pulsar c++ client libraries in Debian/
 - pulsarSharedNossl (libpulsarnossl.so): it is similar to pulsarShared(libpulsar.so), and has no SSL statically linked.
 - pulsarStaticWithDeps(libpulsarwithdeps.a): it is similar to pulsarStatic(libpulsar.a), and is archived in the dependencies libraries of `libboost_regex`, `libboost_system`, `libcurl`, `libprotobuf`, `libzstd` and `libz` statically.
 ## Reference
-To download Apache Pulsar 2.5.1, click [here](https://pulsar.apache.org/en/download/).
+To download Apache Pulsar 2.5.1, click [here](https://pulsar.apache.org/download/).
 If you have any questions or suggestions, contact us with mailing lists or slack.
 - [users@pulsar.apache.org](mailto:users@pulsar.apache.org)
 - [dev@pulsar.apache.org](mailto:dev@pulsar.apache.org)

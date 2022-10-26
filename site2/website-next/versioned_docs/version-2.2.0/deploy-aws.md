@@ -5,7 +5,7 @@ sidebar_label: "Amazon Web Services"
 original_id: deploy-aws
 ---
 
-> For instructions on deploying a single Pulsar cluster manually rather than using Terraform and Ansible, see [Deploying a Pulsar cluster on bare metal](deploy-bare-metal.md). For instructions on manually deploying a multi-cluster Pulsar instance, see [Deploying a Pulsar instance on bare metal](deploy-bare-metal-multi-cluster).
+> For instructions on deploying a single Pulsar cluster manually rather than using Terraform and Ansible, see [Deploying a Pulsar cluster on bare metal](deploy-bare-metal.md). For instructions on manually deploying a multi-cluster Pulsar instance, see [Deploying a Pulsar instance on bare metal](deploy-bare-metal-multi-cluster.md).
 
 One of the easiest ways to get a Pulsar [cluster](reference-terminology.md#cluster) running on [Amazon Web Services](https://aws.amazon.com/) (AWS) is to use the the [Terraform](https://terraform.io) infrastructure provisioning tool and the [Ansible](https://www.ansible.com) server automation tool. Terraform can create the resources necessary to run the Pulsar cluster---[EC2](https://aws.amazon.com/ec2/) instances, networking and security infrastructure, etc.---while Ansible can install and run Pulsar on the provisioned resources.
 
@@ -35,7 +35,7 @@ $ pip install ansible
 
 ```
 
-You can install Terraform using the instructions [here](https://www.terraform.io/intro/getting-started/install.html).
+You can install Terraform using the instructions [here](https://learn.hashicorp.com/tutorials/terraform/install-cli).
 
 You'll also need to have the Terraform and Ansible configurations for Pulsar locally on your machine. They're contained in Pulsar's [GitHub repository](https://github.com/apache/pulsar), which you can fetch using Git:
 

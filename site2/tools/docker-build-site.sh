@@ -21,13 +21,12 @@
 # Build Pulsar website within a Docker container
 
 # Fail script in case of errors
-set -e
+set -e -x
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
-cd $ROOT_DIR/pulsar-client-cpp
 
 BUILD_IMAGE_NAME="${BUILD_IMAGE_NAME:-apachepulsar/pulsar-build}"
-BUILD_IMAGE_VERSION="${BUILD_IMAGE_VERSION:-ubuntu-16.04-pb3-website}"
+BUILD_IMAGE_VERSION="${BUILD_IMAGE_VERSION:-website-v2}"
 
 IMAGE="$BUILD_IMAGE_NAME:$BUILD_IMAGE_VERSION"
 
@@ -38,15 +37,11 @@ echo "---- Build Pulsar website using image $IMAGE"
 CI_USER=$(id -u)
 CI_GROUP=$(id -g)
 
-# crowdin keys
-CROWDIN_DOCUSAURUS_PROJECT_ID=${CROWDIN_DOCUSAURUS_PROJECT_ID:-"apache-pulsar"}
-CROWDIN_DOCUSAURUS_API_KEY=${CROWDIN_DOCUSAURUS_API_KEY:-UNSET}
-
-DOCKER_CMD="docker run -i -e CI_USER=$CI_USER -e CI_GROUP=$CI_GROUP -v $HOME/.m2:/root/.m2 -e CROWDIN_DOCUSAURUS_PROJECT_ID=${CROWDIN_DOCUSAURUS_PROJECT_ID} -e CROWDIN_DOCUSAURUS_API_KEY=${CROWDIN_DOCUSAURUS_API_KEY} -v $ROOT_DIR:/pulsar $IMAGE"
+DOCKER_CMD="docker run -i -e CI_USER=$CI_USER -e CI_GROUP=$CI_GROUP -v $HOME/.m2:/root/.m2 -v $ROOT_DIR:/pulsar $IMAGE"
 
 sed -i "s#$ROOT_DIR#/pulsar#g" $ROOT_DIR/distribution/server/target/classpath.txt
 sed -i "s#$HOME#/root#g" $ROOT_DIR/distribution/server/target/classpath.txt
 
-CMD="export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 && cd /pulsar && /pulsar/site2/tools/build-site.sh $@"
+CMD="cd /pulsar && /pulsar/site2/tools/build-site.sh $GH_TOKEN $@"
 echo "docker exec cmd: "$CMD
 $DOCKER_CMD bash -l -c "$CMD"

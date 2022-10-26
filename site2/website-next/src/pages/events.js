@@ -27,49 +27,75 @@ export default function Events() {
     }
   });
   return (
-    <Layout
-      title={`Events`}
-      description="Apache Pulsar Events"
-    >    
+    <Layout title={`Events`} description="Apache Pulsar Events">
       <div className="page-wrap tailwind">
         <section className="hero">
-            <div className="inner text--left">
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2">
-                  <h1>Events</h1>
-                  <p>Below is a list of key industry events hosted by Pulsar contributors, as well as local meetups around the globe. If you have one to add, learn more about submitting a pull request<a href="https://github.com/apache/pulsar/pulls" target="_blank"> here.</a></p>
-
-                </div>
-                <div className="mt-12 md:mt-0 md:w-1/2">
-                  <FeaturedEvent
-                    hidden="false" // use true to hide and false to show the featured event card
-                    title=" [Recap] Pulsar Virtual Summit Europe 2021"
-                    description="Watch dozens of sessions from the most recent Pulsar Summit event in Europe"
-                    date=""
-                    link="https://www.youtube.com/playlist?list=PLqRma1oIkcWh7zes7mNeTUCr2iU-2C1jB"
-                    linkText= "Watch Now"
-                  />
-                </div>
+          <div className="inner text--left">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-1/2">
+                <h1>Events</h1>
+                <p>
+                  Below is a list of key industry events hosted by Pulsar
+                  contributors, as well as local meetups around the globe. If
+                  you have one to add, learn more about submitting a pull
+                  request
+                  <a
+                    href="https://github.com/apache/pulsar/pulls"
+                    target="_blank"
+                  >
+                    {" "}
+                    here.
+                  </a>
+                </p>
+              </div>
+              <div className="mt-12 md:mt-0 md:w-1/2">
+                <FeaturedEvent
+                  hidden="false" // use true to hide and false to show the featured event card
+                  title="Pulsar Summit Asia 2022"
+                  description="Pulsar Summit Asia 2022 will be hosted virtually on November 19th and 20th, 2022. The CFP is open now!"
+                  date=""
+                  link="https://sessionize.com/pulsar-summit-asia-2022/"
+                  linkText="Submit Your Session"
+                />
               </div>
             </div>
+          </div>
         </section>
         <section className="main-content waves-bg pt-12 pb-48 mb-24">
-          <TabsUnstyled defaultValue={0} className="tabs tabs--resources block my-24 relative z-5">
-          <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
+          <TabsUnstyled
+            defaultValue={0}
+            className="tabs tabs--resources block my-24 relative z-5"
+          >
+            <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
               <TabUnstyled className="mx-2">Meetups</TabUnstyled>
               <TabUnstyled className="mx-2">Playlists</TabUnstyled>
-              {futureEvents.length && <TabUnstyled className="mx-2">Upcoming Events</TabUnstyled>}
-              
+              {futureEvents.length && (
+                <TabUnstyled className="mx-2">Upcoming Events</TabUnstyled>
+              )}
+
               <TabUnstyled className="mx-2">Past Events</TabUnstyled>
             </TabsListUnstyled>
-            <TabPanelUnstyled value={0}><EventCards type="meetups" events={resObj.meetups} /></TabPanelUnstyled>
-            <TabPanelUnstyled value={1}><EventCards type="playlists" events={resObj.playlists} /></TabPanelUnstyled>
-            {futureEvents.length 
-            ? <><TabPanelUnstyled value={2}> <EventCards type="upcoming events" events={futureEvents} /></TabPanelUnstyled><TabPanelUnstyled value={3}><EventCards type="past events" events={pastEvents} /></TabPanelUnstyled></>
-            :  <TabPanelUnstyled value={2}><EventCards type="past events" events={pastEvents} /></TabPanelUnstyled>
-            }
-           
-           
+            <TabPanelUnstyled value={0}>
+              <EventCards type="meetups" events={resObj.meetups} />
+            </TabPanelUnstyled>
+            <TabPanelUnstyled value={1}>
+              <EventCards type="playlists" events={resObj.playlists} />
+            </TabPanelUnstyled>
+            {futureEvents.length ? (
+              <>
+                <TabPanelUnstyled value={2}>
+                  {" "}
+                  <EventCards type="upcoming events" events={futureEvents} />
+                </TabPanelUnstyled>
+                <TabPanelUnstyled value={3}>
+                  <EventCards type="past events" events={pastEvents} />
+                </TabPanelUnstyled>
+              </>
+            ) : (
+              <TabPanelUnstyled value={2}>
+                <EventCards type="past events" events={pastEvents} />
+              </TabPanelUnstyled>
+            )}
           </TabsUnstyled>
         </section>
       </div>

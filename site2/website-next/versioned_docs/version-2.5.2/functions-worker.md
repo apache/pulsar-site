@@ -3,7 +3,7 @@ id: functions-worker
 title: Deploy and manage functions worker
 sidebar_label: "Setup: Pulsar Functions Worker"
 ---
-Before using Pulsar Functions, you need to learn how to set up Pulsar Functions worker and how to [configure Functions runtime](functions-runtime).  
+Before using Pulsar Functions, you need to learn how to set up Pulsar Functions worker and how to [configure Functions runtime](functions-runtime.md).  
 
 Pulsar `functions-worker` is a logic component to run Pulsar Functions in cluster mode. Two options are available, and you can select either based on your requirements. 
 - [run with brokers](#run-functions-worker-with-brokers)
@@ -131,7 +131,7 @@ To run function-worker separately, you have to configure the following parameter
 
 - `workerId`: The type is string. It is unique across clusters, which is used to identify a worker machine.
 - `workerHostname`: The hostname of the worker machine.
-- `workerPort`: The port that the worker server listens on. Keep it as default if you don't customize it.
+- `workerPort`: The port that the worker server listens on. Keep it as default if you don't customize it. Set it to `null` to disable the plaintext port.
 - `workerPortTls`: The TLS port that the worker server listens on. Keep it as default if you don't customize it.
 
 #### Function package parameter
@@ -198,7 +198,7 @@ brokerClientTrustCertsFilePath: /path/to/ca.cert.pem
 
 ```
 
-For details on TLS encryption, refer to [Transport Encryption using TLS](security-tls-transport).
+For details on TLS encryption, refer to [Transport Encryption using TLS](security-tls-transport.md).
 
 ##### Enable Authentication Provider
 
@@ -218,7 +218,7 @@ authenticationProviders: [ provider1, provider2 ]
 ```
 
 For *TLS Authentication* provider, follow the example below to add the necessary settings.
-See [TLS Authentication](security-tls-authentication) for more details.
+See [TLS Authentication](security-tls-authentication.md) for more details.
 
 ```
 
@@ -230,19 +230,19 @@ authenticationProviders: ['org.apache.pulsar.broker.authentication.Authenticatio
 
 ```
 
-For *SASL Authentication* provider, add `saslJaasClientAllowedIds` and `saslJaasBrokerSectionName`
+For *SASL Authentication* provider, add `saslJaasClientAllowedIds` and `saslJaasServerSectionName`
 under `properties` if needed. 
 
 ```
 
 properties:
   saslJaasClientAllowedIds: .*pulsar.*
-  saslJaasBrokerSectionName: Broker
+  saslJaasServerSectionName: Broker
 
 ```
 
 For *Token Authentication* provider, add necessary settings for `properties` if needed.
-See [Token Authentication](security-jwt) for more details.
+See [Token Authentication](security-jwt.md) for more details.
 Note: key files must be DER-encoded
 
 ```
@@ -281,7 +281,7 @@ superUserRoles:
 
 You can use the public and private key pair that the application configures to perform encryption. Only the consumers with a valid key can decrypt the encrypted messages.
 
-To enable End-to-End encryption on Functions Worker, you can set it by specifying `--producer-config` in the command line terminal, for more information, please refer to [here](security-encryption).
+To enable End-to-End encryption on Functions Worker, you can set it by specifying `--producer-config` in the command line terminal, for more information, please refer to [here](security-encryption.md).
 
 We include the relevant configuration information of `CryptoConfig` into `ProducerConfig`. The specific configurable field information about `CryptoConfig` is as follows:
 
