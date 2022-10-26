@@ -1234,14 +1234,14 @@
                 "httpAuthType": {
                     "type": "string"
                 },
+                "commandData": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Certificate"
                     }
-                },
-                "commandData": {
-                    "type": "string"
                 },
                 "subscription": {
                     "type": "string"
@@ -1882,10 +1882,6 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "lastInvocation": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "userMetrics": {
                     "type": "object",
                     "additionalProperties": {
@@ -1896,7 +1892,7 @@
                 "oneMin": {
                     "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
-                "userExceptionsTotal": {
+                "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1904,42 +1900,46 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "avgProcessLatency": {
-                    "type": "number",
-                    "format": "double"
+                "processedSuccessfullyTotal": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "systemExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "processedSuccessfullyTotal": {
+                "userExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "avgProcessLatency": {
+                    "type": "number",
+                    "format": "double"
                 }
             }
         },
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
-                "userExceptionsTotal": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "avgProcessLatency": {
-                    "type": "number",
-                    "format": "double"
-                },
-                "systemExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "systemExceptionsTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "userExceptionsTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "avgProcessLatency": {
+                    "type": "number",
+                    "format": "double"
                 }
             }
         },
@@ -2689,23 +2689,6 @@
                 "topicName": {
                     "type": "string"
                 },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "publishTime": {
                     "type": "integer",
                     "format": "int64"
@@ -2740,6 +2723,23 @@
                 },
                 "replicated": {
                     "type": "boolean"
+                },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -3091,15 +3091,15 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "schemaDefinition": {
-                    "type": "string"
-                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
+                },
+                "schemaDefinition": {
+                    "type": "string"
                 }
             }
         },
