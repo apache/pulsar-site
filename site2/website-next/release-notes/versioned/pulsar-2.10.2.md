@@ -179,7 +179,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][ci] Remove post-commit trigger for old release branches (2.10 and previous) [#17570](https://github.com/apache/pulsar/pull/17570)
 - [fix][ci] Fix some OWASP dependency problems. [#16260](https://github.com/apache/pulsar/pull/16260)
 - [fix][test] Fix flaky-test RackAwareTest.testRackUpdate [#16071](https://github.com/apache/pulsar/pull/16071)
-- [fix][test] Catch exception when update data in mockZookeeper [#16473](https://github.com/apache/pulsar/pull/16473)
+- [fix][test] Catch exception when updating data in mockZookeeper [#16473](https://github.com/apache/pulsar/pull/16473)
 - [fix][test] Fix jvm oom on Unit Test broker group 1 [#16542](https://github.com/apache/pulsar/pull/16542)
 - [fix][test] Fix ManagedLedgerTest#avoidUseSameOpAddEntryBetweenDifferentLedger [#16720](https://github.com/apache/pulsar/pull/16720)
 - [fix][test] Fix test TransactionEndToEndTest#testSendTxnMessageTimeout (only release branches) [#16570](https://github.com/apache/pulsar/pull/16570)
