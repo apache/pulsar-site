@@ -44,7 +44,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][broker] Multiple consumer dispatcher stuck when `unackedMessages` greater than `maxUnackedMessages` [#17483](https://github.com/apache/pulsar/pull/17483)
 - [fix][broker] PulsarLedgerManager to pass correct error code to BK client [#16857](https://github.com/apache/pulsar/pull/16857)
 - [fix][broker] Release the entry in getEarliestMessagePublishTimeOfPos. [#16386](https://github.com/apache/pulsar/pull/16386)
-- [fix][broker] Retry to delete the namespace if new topics created during the namespace deletion [#16676](https://github.com/apache/pulsar/pull/16676)
+- [fix][broker] Retry to delete the namespace if new topics are created during the namespace deletion [#16676](https://github.com/apache/pulsar/pull/16676)
 - [fix][broker] Retry when DistributedIdGenerator has BadVersion error [#16491](https://github.com/apache/pulsar/pull/16491)
 - [fix][broker] Skip reading more entries for a pending read with no more entries [#16400](https://github.com/apache/pulsar/pull/16400)
 - [fix][broker] Support loadBalancerSheddingIntervalMinutes dynamic configuration [#16408](https://github.com/apache/pulsar/pull/16408)
