@@ -11,7 +11,7 @@ sidebar_label: Apache Pulsar 2.10.2
 ### Broker
 - [fix][broker] ManagedLedger: move to FENCED state in case of BadVersionException [#17736](https://github.com/apache/pulsar/pull/17736)
 - [fix][broker] Issue 17588: Allow deletion of a namespace that was left in deleted status [#17592](https://github.com/apache/pulsar/pull/17592)
-- [fix][broker] Fix bookeeper packages npe [#17291](https://github.com/apache/pulsar/pull/17291)
+- [fix][broker] Fix BookKeeper packages npe [#17291](https://github.com/apache/pulsar/pull/17291)
 - [fix][broker] Fix rack awareness cache expiration data race [#16825](https://github.com/apache/pulsar/pull/16825)
 - [fix][broker] Fix stats-internal with option -m cause active ledger recover then close [#16662](https://github.com/apache/pulsar/pull/16662)
 - [fix][broker] Fix deadlock in key-shared dispatcher [#16660](https://github.com/apache/pulsar/pull/16660)
