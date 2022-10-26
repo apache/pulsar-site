@@ -73,7 +73,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][broker] Fix topic dispatch rate limiter not init on broker-level #16084 [#17000](https://github.com/apache/pulsar/pull/17000)
 - [fix][broker] Prevent StackOverFlowException in SHARED subscription [#17053](https://github.com/apache/pulsar/pull/17053)
 - [fix][broker] skip mis-configured resource usage(>100%) in load balancer [#16937](https://github.com/apache/pulsar/pull/16937)
-- [fix][broker] Fix wrong unit of NIC speed on linux [#15304](https://github.com/apache/pulsar/pull/15304)
+- [fix][broker] Fix wrong unit of NIC speed on Linux [#15304](https://github.com/apache/pulsar/pull/15304)
 - [fix][broker] Fix RawReader hasMessageAvailable returns true when no messages [#16443](https://github.com/apache/pulsar/pull/16443)
 - [improve][broker] Expose topic level storage write and read rate metrics [#16855](https://github.com/apache/pulsar/pull/16855)
 - [improve][broker] Broker/EntryFilter: make the delay for RESCHEDULED messages configurable (dispatcherFilterRescheduledMessageDelay) [#16602](https://github.com/apache/pulsar/pull/16602)
