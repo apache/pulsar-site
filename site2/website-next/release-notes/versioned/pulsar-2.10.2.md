@@ -64,7 +64,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][broker] Prevent `StackOverFlowException` in SHARED subscription [#16968](https://github.com/apache/pulsar/pull/16968)
 - [fix][broker] Fix message ack rate [#16108](https://github.com/apache/pulsar/pull/16108)
 - [fix][broker] Fix bug: fail to expose managed ledger client stats to prometheus if bookkeeperClientExposeStatsToPrometheus is true [#16219](https://github.com/apache/pulsar/pull/16219)
-- [fix][broker] Fix npe when invoke replaceBookie. [#16239](https://github.com/apache/pulsar/pull/16239)
+- [fix][broker] Fix npe when invoking replaceBookie. [#16239](https://github.com/apache/pulsar/pull/16239)
 - [fix][broker] Fail to update partition meta of topic due to ConflictException: subscription already exists for topic [#17488](https://github.com/apache/pulsar/pull/17488)
 - [fix][broker] Fix NPE when ledger id not found in `OpReadEntry` [#15837](https://github.com/apache/pulsar/pull/15837)
 - [Fix][broker] Fix topic dispatch rate limiter not init on broker-level [#16084](https://github.com/apache/pulsar/pull/16084)
