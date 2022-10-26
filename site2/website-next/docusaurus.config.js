@@ -182,6 +182,11 @@ module.exports = {
           label: "Docs",
         },
         {
+          href: "/contribute/",
+          position: "right",
+          label: "Contribute",
+        },
+        {
           type: "dropdown",
           label: "Community",
           position: "right",
@@ -400,6 +405,18 @@ module.exports = {
     //   }),
     // ],
     "./postcss-tailwind-loader",
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'contribute',
+          path: 'contribute',
+          routeBasePath: 'contribute',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          sidebarPath: require.resolve('./sidebarsContribute.js'),
+          editUrl: 'https://github.com/apache/pulsar-site/tree/main/site2/website-next',
+      },
+    ],
     [
       "content-docs",
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
