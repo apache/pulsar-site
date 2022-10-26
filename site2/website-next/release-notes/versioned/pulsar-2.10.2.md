@@ -111,7 +111,7 @@ sidebar_label: Apache Pulsar 2.10.2
 - [fix][txn] Cmd-Subscribe and Cmd-Producer will not succeed even after 100 retries [#16248](https://github.com/apache/pulsar/pull/16248)
 - [fix][txn] Set TC state is Ready after open MLTransactionMetadataStore completely. [#13957](https://github.com/apache/pulsar/pull/13957)
 - [fix][txn] Ack the same batch message different batchIndex with transaction [#16032](https://github.com/apache/pulsar/pull/16032)
-- [fix][txn] Allow producer enable send timeout in transaction [#16519](https://github.com/apache/pulsar/pull/16519)
+- [fix][txn] Allow producer to enable send timeout in transaction [#16519](https://github.com/apache/pulsar/pull/16519)
 - [fix][txn] Fix NPE when ack message with transaction at cnx = null  [#16142](https://github.com/apache/pulsar/pull/16142)
 - [fix][txn] Fix TopicTransactionBuffer ledger apend marker throw ManagedLedgerAlreadyClosedException [#16265](https://github.com/apache/pulsar/pull/16265)
 - [fix][txn] Fix append txn message is lower than lowWaterMark decrease PendingWriteOps [#16266](https://github.com/apache/pulsar/pull/16266)
