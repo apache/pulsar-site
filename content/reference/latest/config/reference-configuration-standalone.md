@@ -1653,7 +1653,7 @@ Allow forced deletion of tenants. Default is false.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Policies
 
