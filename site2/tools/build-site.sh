@@ -51,7 +51,6 @@ cd "$WEBSITE_DIR"
 
 CONTENT_DIR="$GEN_SITE_DIR"/content
 rm -rf "$CONTENT_DIR" && mkdir -p "$CONTENT_DIR"
-cp -R static/reference "$CONTENT_DIR"
 rsync -a ./build/ "$CONTENT_DIR"
 
 # Generate document for release table
