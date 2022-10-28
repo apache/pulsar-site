@@ -26,7 +26,7 @@ Good titles often bring many benefits, including but not limited to the followin
 * Increase search efficiency.
     * You can skim through hundreds of commits and locate desired information quickly.
 * Remind you to think about your PR.
-    * If you can not write a PR title in a simple way (for example, [[type](#type)] [[scope](#scope)] [summary](#summary)), or you need to use several types / scopes, consider whether your PR contains **too many** changes across various scopes. If so, consider splitting this big PR into several small PRs. In this way, you might get your PRs reviewed faster.
+    * If you can not write a PR title in a simple way (for example, [[type]](#type) [[scope]](#scope) [[summary]](#summary)), or you need to use several types / scopes, consider whether your PR contains **too many** changes across various scopes. If so, consider splitting this big PR into several small PRs. In this way, you might get your PRs reviewed faster.
 
 ## How to write good PR titles?
 
