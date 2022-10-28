@@ -17,7 +17,7 @@ Apache Pulsar code follows the [Sun Java Coding Convention](http://www.oracle.co
 * Use curly braces even for single-line ifs and elses.
 * No @author tags in any javadoc.
 * Use try-with-resources blocks whenever is possible.
-* **TODO**s should be associated to at least one issue. 
+* **TODO**s should be associated to at least one issue.
 
 ## Dependencies
 
@@ -26,7 +26,7 @@ Apache Pulsar uses the following libraries a lot:
 * [Guava](https://github.com/google/guava): as a fundamental core library
 * [Netty](http://netty.io/): for network communications and memory buffer management.
 
-Use these libraries whenever possible rather than introducing more dependencies. 
+Use these libraries whenever possible rather than introducing more dependencies.
 
 Dependencies are bundled with our binary distributions, so we need to attach the relevant licenses. See [Third party dependencies and licensing](https://pulsar.apache.org/docs/en/client-libraries/) for a guide on how to do it correctly.
 

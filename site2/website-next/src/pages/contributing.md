@@ -22,9 +22,9 @@ We use a review-then-commit workflow in Pulsar for all contributions.
 
 **For all contributions:**
 
-1. **Code:** code changes are always welcomed. 
-2. **Doc**: it is worth taking the time to make users know your code changes. Pulsar's long-term success rests on its ease of use, maintainability, etc. 
-   
+1. **Code:** code changes are always welcomed.
+2. **Doc**: it is worth taking the time to make users know your code changes. Pulsar's long-term success rests on its ease of use, maintainability, etc.
+
 :::tip
 
 For how to make contributions to Pulsar documentation, see [Pulsar Documentation Contribution Guide](https://docs.google.com/document/d/11DTnNPpvcPrebLkMAFcDEIFlD8ARD-k6F-LXoIwdD9Y/edit#).
@@ -135,7 +135,7 @@ You are now ready to start developing!
 
 #### IDE Setup
 
-For how to set up IDE, see [here](https://github.com/apache/pulsar/blob/master/README.md#setting-up-your-ide). 
+For how to set up IDE, see [here](https://github.com/apache/pulsar/blob/master/README.md#setting-up-your-ide).
 
 
 ### Create a branch in your fork
@@ -302,7 +302,7 @@ You'll then push to your branch on GitHub. Note: when updating your commit after
 Navigate to the [Pulsar GitHub Repo](https://github.com/apache/pulsar) to create a pull request.
 
 > **Note**
-> 
+>
 > Vague, boring, and unclear PR titles decrease team efficiency and productivity. Good titles speed up the review process and increase search efficiency. PR titles should be engaging, easy to understand, and readable. For how to **write self​-explanatory PR titles** and **quality PR title examples**, see [[Guideline] Pulsar PR Naming Convention](https://docs.google.com/document/d/1d8Pw6ZbWk-_pCKdOmdvx9rnhPiyuxwq60_TrD68d7BA/edit#).
 
 In the pull request description, please include:
@@ -358,9 +358,9 @@ Once the code has been peer reviewed by a committer, the next step is for the co
 Pull requests should not be merged before the review has approved from at least 2 committers.
 
 > **Tip**
-> 
+>
 > Git commit message is not only the best way to communicate context about code changes, but also shows whether a developer is a good collaborator. If the first commit message of a PR is not clear but the PR description is clear and concise, when merging a PR, consider copying the PR description to the commit message box or writing a proper one rather than using the default (first) commit message (see image below). In this way, others know the changes clearly, which is beneficial to cut a release or write a release note. Be well cared for git log is a healthy and sustainable thing.
- 
+
 ![Submit clear commit message](/img/commit-message.png)
 
 ### Contributor License Agreement
@@ -383,7 +383,7 @@ The Apache Pulsar Community welcomes all users to update their company logos on 
 
 To update your company's logo, follow these steps:
 1. Open [link](https://github.com/apache/pulsar-site/tree/main/site2/website-next/data/users.js) in your browser, then click the **Edit** icon to fork Pulsar repo, create a new branch and edit this file.
-2. Add your company’s information at the end of file. 
+2. Add your company’s information at the end of file.
 
 	Example:
 	```
