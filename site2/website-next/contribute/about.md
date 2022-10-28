@@ -14,8 +14,3 @@ Here are some links that you probably will reference frequently while contributi
 * [Issue tracker](https://github.com/apache/pulsar/issues)
 * [Developer mailing list](mailto:dev@pulsar.apache.org) ([subscribe](mailto:dev-subscribe@pulsar.apache.org))
 * [#contributors channel on Pulsar Slack](https://apache-pulsar.slack.com/channels/contributors) ([join](https://pulsar.apache.org/community#section-discussions))
-
-
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
