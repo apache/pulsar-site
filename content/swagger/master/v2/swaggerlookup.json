@@ -182,6 +182,9 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
+                "subscription": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
@@ -192,9 +195,6 @@
                     "type": "string"
                 },
                 "commandData": {
-                    "type": "string"
-                },
-                "subscription": {
                     "type": "string"
                 }
             }
@@ -911,11 +911,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "unwrappingSerializer": {
-                    "type": "boolean"
-                },
                 "delegatee": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "unwrappingSerializer": {
+                    "type": "boolean"
                 }
             }
         },
@@ -1151,6 +1151,9 @@
                 "factory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
+                },
                 "serializationConfig": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -1177,9 +1180,6 @@
                 },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
-                },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
                 },
                 "nodeFactory": {
                     "$ref": "#/definitions/JsonNodeFactory"

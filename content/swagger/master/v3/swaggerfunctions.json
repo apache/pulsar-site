@@ -1231,6 +1231,9 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
+                "subscription": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
@@ -1241,9 +1244,6 @@
                     "type": "string"
                 },
                 "commandData": {
-                    "type": "string"
-                },
-                "subscription": {
                     "type": "string"
                 }
             }
@@ -1882,12 +1882,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -2559,11 +2559,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "unwrappingSerializer": {
-                    "type": "boolean"
-                },
                 "delegatee": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "unwrappingSerializer": {
+                    "type": "boolean"
                 }
             }
         },
@@ -2686,8 +2686,22 @@
                         "format": "byte"
                     }
                 },
-                "topicName": {
-                    "type": "string"
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "publishTime": {
                     "type": "integer",
@@ -2724,22 +2738,8 @@
                 "replicated": {
                     "type": "boolean"
                 },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
+                "topicName": {
+                    "type": "string"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -2869,6 +2869,9 @@
                 "factory": {
                     "$ref": "#/definitions/JsonFactory"
                 },
+                "typeFactory": {
+                    "$ref": "#/definitions/TypeFactory"
+                },
                 "serializationConfig": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -2895,9 +2898,6 @@
                 },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
-                },
-                "typeFactory": {
-                    "$ref": "#/definitions/TypeFactory"
                 },
                 "nodeFactory": {
                     "$ref": "#/definitions/JsonNodeFactory"
@@ -3037,11 +3037,11 @@
         "Schema": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
@@ -3106,11 +3106,11 @@
         "SchemaObject": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
