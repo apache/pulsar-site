@@ -32,6 +32,12 @@ VERSION=next
 export NODE_OPTIONS="--max-old-space-size=16000"
 "$TOOLS_DIR"/generate-api-docs.sh
 
+# Generate document for command line tools.
+"$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-client-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-perf-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
+"$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
 # Generate document for release table.
 "$TOOLS_DIR"/release-json-gen.sh "$GH_TOKEN" "$WEBSITE_DIR"
 
@@ -44,14 +50,6 @@ node scripts/split-swagger-by-version.js
 # Because there are too many versions of the document, the memory overflows during the full build.
 # The split-version-build script is used to build in different versions, and finally the build results are merged.
 bash scripts/split-version-build.sh $@
-
-# Generate document for command line tools.
-"$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-client-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-perf-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-cd "$WEBSITE_DIR"
 
 CONTENT_DIR="$GEN_SITE_DIR"/content
 rm -rf "$CONTENT_DIR" && mkdir -p "$CONTENT_DIR"
