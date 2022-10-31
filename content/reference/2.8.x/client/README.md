@@ -1,1 +1,1 @@
-> Docs for Pulsar Client Configuration.
+> Docs for Pulsar Java Client Configuration.

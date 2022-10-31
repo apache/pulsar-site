@@ -1,3 +1,2 @@
 - [Configuration]()
-  - [Client](client/)
-    - [Java](client/client-libraries-java)
+  - [Client](client/client-libraries-java)

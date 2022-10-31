@@ -1,1 +1,1 @@
-> Docs for Configuration for `pulsar`.
+> Docs for `pulsar`.

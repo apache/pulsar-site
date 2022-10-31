@@ -200,7 +200,7 @@
           '<option value="2.8.x">2.8.x</value>' +
           '<option value="2.9.x">2.9.x</value>' +
           '<option value="2.10.x">2.10.x</value>' +
-          '<option value="latest">latest</value>' +
+          '<option value="next">next</value>' +
           "</select>",
         repo: "apache/pulsar",
         loadSidebar: true,
@@ -212,12 +212,14 @@
         namespaces: [
           {
             id: "version",
-            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "latest"],
+            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "next"],
             optional: true,
             selector: "#ver-selector",
-            default: "latest",
+            default: "next",
           },
         ],
+        subMaxLevel: 1,
+        sidebarDisplayLevel: 1,
       };
     </script>
 
@@ -232,5 +234,6 @@
     <!-- Plugins -->
     <script src="https://unpkg.com/docsify-namespaced"></script>
     <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   </body>
 </html>

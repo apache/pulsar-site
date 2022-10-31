@@ -1,1 +1,1 @@
-> Docs for Configuration for `pulsar-admin`.
+> Docs for `pulsar-admin`.
