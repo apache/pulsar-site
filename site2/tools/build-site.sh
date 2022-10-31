@@ -50,11 +50,7 @@ bash scripts/split-version-build.sh $@
 cd "$WEBSITE_DIR"
 
 CONTENT_DIR="$GEN_SITE_DIR"/content
-
-rm -rf "$CONTENT_DIR"
-mkdir -p "$CONTENT_DIR"
-mkdir -p "$CONTENT_DIR"/reference
-rsync -a ./docsify/ "$CONTENT_DIR"/reference
+rm -rf "$CONTENT_DIR" && mkdir -p "$CONTENT_DIR"
 rsync -a ./build/ "$CONTENT_DIR"
 
 # Generate document for release table

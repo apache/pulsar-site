@@ -22,7 +22,7 @@
 ROOT_DIR=$(git rev-parse --show-toplevel)
 WEBSITE=$1
 VERSION=$2
-VERSIONED_DIR=$WEBSITE/docsify/$VERSION
+VERSIONED_DIR=$WEBSITE/static/reference/$VERSION
 JAVA=java
 f=$ROOT_DIR/distribution/server/target/classpath.txt
 
@@ -54,8 +54,8 @@ $JAVA -cp "$CLIENT_CP:$(cat "$f")" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ConsumerConf
 $JAVA -cp "$CLIENT_CP:$(cat "$f")" $GEN_DOCS_CLIENT -c $CLIENT_CONF.ReaderConfigurationData > "$CLIENT_DIR"/client-configuration-reader.md
 
 # copy CLI tools docs
-tools="bookkeeper broker-tool pulsar-daemon pulsar-shell"
+tools="bookkeeper pulsar-daemon pulsar-shell"
 for tool in $tools
 do
-    cp "$WEBSITE/docs/reference-cli-$tool.md" "$VERSIONED_DIR/$tool/README.md"
+    cp "$WEBSITE/docs/reference-cli-$tool.md" "$VERSIONED_DIR/$tool/$tool.md"
 done
