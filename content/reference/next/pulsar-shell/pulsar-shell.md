@@ -1,6 +1,12 @@
+---
+id: reference-cli-pulsar-shell
+title: Pulsar CLI tools - pulsar-shell
+sidebar_label: "cli-pulsar-shell"
+---
+
 ## `pulsar-shell`
 
-[Pulsar shell](https://pulsar.apache.org/docs/next/administration-pulsar-shell) tool.
+[Pulsar shell](administration-pulsar-shell.md) tool.
 
 ### Interactive mode
 
