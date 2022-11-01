@@ -35,12 +35,15 @@ $ pulsar-admin clusters create options
 
 |Flag|Description|Default|
 |---|---|---|
+| `--tls-key-filepath` | path for the TLS private key file|null||
 | `--listener-name` | listenerName when client would like to connect to cluster|null||
 | `--proxy-url` | Proxy-service url when client would like to connect to broker via proxy.|null||
 | `--tls-trust-store-type` | TLS TrustStore type configuration for internal client eg: JKS|null||
+| `--tls-key-store-pwd` | TLS KeyStore password for internal client|null||
 | `--tls-enable` | Enable tls connection|null||
 | `--auth-parameters` | authentication parameters|null||
 | `--proxy-protocol` | protocol to decide type of proxy routing eg: SNI|null||
+| `--tls-key-store-type` | TLS TrustStore type configuration for internal client eg: JKS|null||
 | `--tls-allow-insecure` | Allow insecure tls connection|null||
 | `--url` | service-url|null||
 | `--broker-url` | broker-service-url|null||
@@ -49,6 +52,8 @@ $ pulsar-admin clusters create options
 | `--cluster-config-file` | The path to a YAML config file specifying the cluster's configuration|null||
 | `--tls-enable-keystore` | Whether use KeyStore type to authenticate|null||
 | `--tls-trust-store-pwd` | TLS TrustStore password for internal client|null||
+| `--tls-key-store` | TLS KeyStore path for internal client|null||
+| `--tls-certs-filepath` | path for the TLS certificate file|null||
 | `--tls-trust-store` | TLS TrustStore path for internal client|null||
 | `--broker-url-secure` | broker-service-url for secure connection|null||
 | `--url-secure` | service-url for secure connection|null||
@@ -68,12 +73,15 @@ $ pulsar-admin clusters update options
 
 |Flag|Description|Default|
 |---|---|---|
+| `--tls-key-filepath` | path for the TLS private key file|null||
 | `--listener-name` | listenerName when client would like to connect to cluster|null||
 | `--proxy-url` | Proxy-service url when client would like to connect to broker via proxy.|null||
 | `--tls-trust-store-type` | TLS TrustStore type configuration for internal client eg: JKS|null||
+| `--tls-key-store-pwd` | TLS KeyStore password for internal client|null||
 | `--tls-enable` | Enable tls connection|null||
 | `--auth-parameters` | authentication parameters|null||
 | `--proxy-protocol` | protocol to decide type of proxy routing eg: SNI|null||
+| `--tls-key-store-type` | TLS TrustStore type configuration for internal client eg: JKS|null||
 | `--tls-allow-insecure` | Allow insecure tls connection|null||
 | `--url` | service-url|null||
 | `--broker-url` | broker-service-url|null||
@@ -82,6 +90,8 @@ $ pulsar-admin clusters update options
 | `--cluster-config-file` | The path to a YAML config file specifying the cluster's configuration|null||
 | `--tls-enable-keystore` | Whether use KeyStore type to authenticate|null||
 | `--tls-trust-store-pwd` | TLS TrustStore password for internal client|null||
+| `--tls-key-store` | TLS KeyStore path for internal client|null||
+| `--tls-certs-filepath` | path for the TLS certificate file|null||
 | `--tls-trust-store` | TLS TrustStore path for internal client|null||
 | `--broker-url-secure` | broker-service-url for secure connection|null||
 | `--url-secure` | service-url for secure connection|null||
