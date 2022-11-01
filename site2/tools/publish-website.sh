@@ -61,8 +61,6 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
       | grep -v $PULSAR_SITE_TMP/content/charts \
       | grep -v $PULSAR_SITE_TMP/content/css \
       | grep -v $PULSAR_SITE_TMP/content/tools \
-      | grep -v $PULSAR_SITE_TMP/content/reference \
-      | grep -v $PULSAR_SITE_TMP/content/.htaccess \
       | xargs rm -rf
   fi
   rsync -a $GENERATED_SITE_DIR/content/ $PULSAR_SITE_TMP/content
