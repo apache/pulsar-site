@@ -1358,3 +1358,56 @@ $ pulsar-admin topicPolicies remove-entry-filters-per-topic options
 |---|---|---|
 | `--global, -g` | Whether to remove this policy globally. If set to true, broker returned global topic policies|false||
 
+
+## <em>set-auto-subscription-creation</em>
+
+Enable autoSubscriptionCreation for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-auto-subscription-creation options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--enable, -e` | Enable allowAutoSubscriptionCreation on topic|false||
+| `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
+
+
+## <em>get-auto-subscription-creation</em>
+
+Get the autoSubscriptionCreation for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-auto-subscription-creation options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--applied, -a` | Get the applied policy of the topic|false||
+| `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
+
+
+## <em>remove-auto-subscription-creation</em>
+
+Remove override of autoSubscriptionCreation for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-auto-subscription-creation options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--global, -g` | Whether to remove this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
+
