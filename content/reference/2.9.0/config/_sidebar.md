@@ -1,2 +1,0 @@
-- Pulsar Configuration > Pulsar
-    - [Configuration](config/reference-configuration)

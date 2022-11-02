@@ -1,2 +1,0 @@
-- Pulsar Configuration > Client Library
-    - [Java](client/client-libraries-java)
