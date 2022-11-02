@@ -1,19 +1,7 @@
----
-id: reference-cli-bookkeeper
-title: Pulsar CLI tools - bookkeeper
-sidebar_label: "cli-bookkeeper"
----
-
 ## `bookkeeper`
 A tool for managing BookKeeper.
 
-Usage
-
-```bash
-bookkeeper command
-```
-
-Environment variables
+### Environment variables
 
 The table below lists the environment variables that you can use to configure the bookkeeper tool.
 
