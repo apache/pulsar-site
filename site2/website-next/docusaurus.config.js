@@ -447,7 +447,7 @@ module.exports = {
   ],
   scripts: [
     {
-      src: "https://pulsar.apache.org/js/sine-waves.min.js",
+      src: "/js/sine-waves.min.js",
       async: true,
     },
   ],
