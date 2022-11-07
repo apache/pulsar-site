@@ -28111,19 +28111,19 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
+                "httpAuthType": {
+                    "type": "string"
+                },
                 "tlsCertificates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "httpAuthType": {
+                "commandData": {
                     "type": "string"
                 },
                 "subscription": {
-                    "type": "string"
-                },
-                "commandData": {
                     "type": "string"
                 }
             }
@@ -28179,6 +28179,10 @@
         "BacklogQuota": {
             "type": "object",
             "properties": {
+                "limit": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "policy": {
                     "type": "string",
                     "enum": [
@@ -28186,10 +28190,6 @@
                         "producer_exception",
                         "consumer_backlog_eviction"
                     ]
-                },
-                "limit": {
-                    "type": "integer",
-                    "format": "int64"
                 },
                 "limitSize": {
                     "type": "integer",
@@ -28937,19 +28937,19 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "lastInvocation": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "userMetrics": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "number",
                         "format": "double"
                     }
+                },
+                "lastInvocation": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "receivedTotal": {
                     "type": "integer",
@@ -29819,24 +29819,11 @@
                     "type": "number",
                     "format": "double"
                 },
-                "cpu": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "directMemory": {
-                    "$ref": "#/definitions/ResourceUsage"
-                },
-                "lastUpdate": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "underLoaded": {
                     "type": "boolean"
                 },
                 "overLoaded": {
                     "type": "boolean"
-                },
-                "loadReportType": {
-                    "type": "string"
                 },
                 "msgThroughputIn": {
                     "type": "number",
@@ -29846,6 +29833,9 @@
                     "type": "number",
                     "format": "double"
                 },
+                "loadReportType": {
+                    "type": "string"
+                },
                 "bandwidthIn": {
                     "$ref": "#/definitions/ResourceUsage"
                 },
@@ -29854,6 +29844,16 @@
                 },
                 "memory": {
                     "$ref": "#/definitions/ResourceUsage"
+                },
+                "cpu": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "directMemory": {
+                    "$ref": "#/definitions/ResourceUsage"
+                },
+                "lastUpdate": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -30230,19 +30230,19 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "managedLedgerOffloadThresholdInSeconds": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "managedLedgerOffloadMaxThreads": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "managedLedgerOffloadDriver": {
                     "type": "string"
                 },
                 "offloadersDirectory": {
                     "type": "string"
+                },
+                "managedLedgerOffloadMaxThreads": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "managedLedgerOffloadThresholdInSeconds": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "managedLedgerOffloadDeletionLagInMillis": {
                     "type": "integer",
@@ -31105,11 +31105,11 @@
         "ResourceUnit": {
             "type": "object",
             "properties": {
-                "availableResource": {
-                    "$ref": "#/definitions/ResourceDescription"
-                },
                 "resourceId": {
                     "type": "string"
+                },
+                "availableResource": {
+                    "$ref": "#/definitions/ResourceDescription"
                 }
             }
         },
