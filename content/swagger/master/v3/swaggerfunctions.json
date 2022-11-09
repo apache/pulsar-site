@@ -1231,17 +1231,17 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "tlsCertificates": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Certificate"
-                    }
-                },
                 "httpAuthType": {
                     "type": "string"
                 },
                 "commandData": {
                     "type": "string"
+                },
+                "tlsCertificates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Certificate"
+                    }
                 },
                 "subscription": {
                     "type": "string"
@@ -1543,11 +1543,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
@@ -1882,12 +1882,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -1896,11 +1896,11 @@
                         "format": "double"
                     }
                 },
-                "processedSuccessfullyTotal": {
+                "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "receivedTotal": {
+                "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1921,11 +1921,11 @@
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
-                "processedSuccessfullyTotal": {
+                "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "receivedTotal": {
+                "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2686,6 +2686,9 @@
                         "format": "byte"
                     }
                 },
+                "topicName": {
+                    "type": "string"
+                },
                 "messageId": {
                     "$ref": "#/definitions/MessageId"
                 },
@@ -2702,9 +2705,6 @@
                 "brokerPublishTime": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "topicName": {
-                    "type": "string"
                 },
                 "publishTime": {
                     "type": "integer",
@@ -3037,11 +3037,11 @@
         "Schema": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
@@ -3091,26 +3091,26 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "schemaDefinition": {
-                    "type": "string"
-                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
+                },
+                "schemaDefinition": {
+                    "type": "string"
                 }
             }
         },
         "SchemaObject": {
             "type": "object",
             "properties": {
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                },
                 "nativeSchema": {
                     "type": "object"
+                },
+                "schemaInfo": {
+                    "$ref": "#/definitions/SchemaInfo"
                 }
             }
         },
@@ -3168,11 +3168,11 @@
                 "typeFactory": {
                     "$ref": "#/definitions/TypeFactory"
                 },
-                "handlerInstantiator": {
-                    "$ref": "#/definitions/HandlerInstantiator"
-                },
                 "propertyNamingStrategy": {
                     "$ref": "#/definitions/PropertyNamingStrategy"
+                },
+                "handlerInstantiator": {
+                    "$ref": "#/definitions/HandlerInstantiator"
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/DateFormat"
