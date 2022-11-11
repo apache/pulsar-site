@@ -19,12 +19,15 @@
 #
 
 
-set -e
+set -x -e
 
-PULSAR_VERSION="${PULSAR_VERSION:-2.9.1}"
+if [ -z "$PULSAR_VERSION" ]; then
+    echo "PULSAR_VERSION must be set."
+    exit 1
+fi
 
 python -m pip install --upgrade pip
 
-pip install pdoc
+pip install -U pdoc
 pip install pulsar-client==${PULSAR_VERSION}
 pdoc pulsar -o /pulsar/site2/website-next/static/api/python/${PULSAR_VERSION}
