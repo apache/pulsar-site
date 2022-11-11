@@ -1,5 +1,4 @@
-// const lightCodeTheme = require("prism-react-renderer/themes/github");
-// const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+// @ts-check
 
 const _ = require("lodash");
 const linkifyRegex = require("./plugins/remark-linkify-regex");
@@ -121,7 +120,7 @@ const injectLinkParseForEndpoint = ([, info]) => {
   };
 };
 
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
+/** @type {import('@docusaurus/types').Config} */
 module.exports = {
   title: "Apache Pulsar",
   tagline:
@@ -138,6 +137,7 @@ module.exports = {
     oldUrl,
   },
   themeConfig: {
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     announcementBar: {
       id: "summit",
       content:
@@ -357,6 +357,7 @@ module.exports = {
   presets: [
     [
       "@docusaurus/preset-classic",
+      /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
           path: "docs",
