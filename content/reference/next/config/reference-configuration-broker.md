@@ -4501,6 +4501,17 @@ Maximum time before forcing a ledger rollover for a topic
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerMaxReadsInFlightSizeInMB
+Maximum buffer size for bytes read from storage. This is the memory retained by data read from storage (or cache) until it has been delivered to the Consumer Netty channel. Use O to disable
+
+**Type**: `long`
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerMaxSizePerLedgerMbytes
 Maximum ledger size before triggering a rollover for a topic (MB)
 

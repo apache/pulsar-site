@@ -212,3 +212,15 @@ $ pulsar-admin transactions position-stats-in-pending-ack options
 | `-l, --ledger-id` | Ledger ID of the position|null||
 | `-s, --subscription-name` | Subscription name|null||
 
+
+## <em>coordinators-list</em>
+
+List transaction coordinators
+
+**Command:**
+
+```shell
+$ pulsar-admin transactions coordinators-list options
+```
+
+
