@@ -500,7 +500,7 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "httpAuthType": {
+                "subscription": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -509,10 +509,10 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "commandData": {
+                "httpAuthType": {
                     "type": "string"
                 },
-                "subscription": {
+                "commandData": {
                     "type": "string"
                 }
             }
@@ -859,6 +859,9 @@
                 "abstract": {
                     "type": "boolean"
                 },
+                "contentType": {
+                    "$ref": "#/definitions/JavaType"
+                },
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
@@ -910,9 +913,6 @@
                 "mapLikeType": {
                     "type": "boolean"
                 },
-                "contentType": {
-                    "$ref": "#/definitions/JavaType"
-                },
                 "typeName": {
                     "type": "string"
                 },
@@ -947,6 +947,9 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
+                "closed": {
+                    "type": "boolean"
+                },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
@@ -983,16 +986,13 @@
                 },
                 "outputContext": {
                     "$ref": "#/definitions/JsonStreamContext"
-                },
-                "closed": {
-                    "type": "boolean"
                 }
             }
         },
         "JsonLocation": {
             "type": "object",
             "properties": {
-                "charOffset": {
+                "byteOffset": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1007,7 +1007,7 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "byteOffset": {
+                "charOffset": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -1025,6 +1025,9 @@
                 },
                 "text": {
                     "type": "string"
+                },
+                "closed": {
+                    "type": "boolean"
                 },
                 "textCharacters": {
                     "type": "array",
@@ -1194,9 +1197,6 @@
                 },
                 "currentValue": {
                     "type": "object"
-                },
-                "closed": {
-                    "type": "boolean"
                 }
             }
         },
@@ -1211,11 +1211,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "unwrappingSerializer": {
-                    "type": "boolean"
-                },
                 "delegatee": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "unwrappingSerializer": {
+                    "type": "boolean"
                 }
             }
         },
@@ -1225,13 +1225,6 @@
                 "parent": {
                     "$ref": "#/definitions/JsonStreamContext"
                 },
-                "typeDesc": {
-                    "type": "string"
-                },
-                "currentIndex": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "currentName": {
                     "type": "string"
                 },
@@ -1239,6 +1232,13 @@
                     "type": "object"
                 },
                 "entryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "typeDesc": {
+                    "type": "string"
+                },
+                "currentIndex": {
                     "type": "integer",
                     "format": "int32"
                 }
@@ -1665,6 +1665,9 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
+                "generator": {
+                    "$ref": "#/definitions/JsonGenerator"
+                },
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -1682,9 +1685,6 @@
                 },
                 "defaultNullKeySerializer": {
                     "$ref": "#/definitions/JsonSerializerObject"
-                },
-                "generator": {
-                    "$ref": "#/definitions/JsonGenerator"
                 }
             }
         },
@@ -1744,7 +1744,7 @@
         "Value": {
             "type": "object",
             "properties": {
-                "valueInclusion": {
+                "contentInclusion": {
                     "type": "string",
                     "enum": [
                         "ALWAYS",
@@ -1755,7 +1755,7 @@
                         "USE_DEFAULTS"
                     ]
                 },
-                "contentInclusion": {
+                "valueInclusion": {
                     "type": "string",
                     "enum": [
                         "ALWAYS",

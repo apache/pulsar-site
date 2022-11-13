@@ -1231,7 +1231,7 @@
                 "peerAddress": {
                     "$ref": "#/definitions/SocketAddress"
                 },
-                "httpAuthType": {
+                "subscription": {
                     "type": "string"
                 },
                 "tlsCertificates": {
@@ -1240,10 +1240,10 @@
                         "$ref": "#/definitions/Certificate"
                     }
                 },
-                "commandData": {
+                "httpAuthType": {
                     "type": "string"
                 },
-                "subscription": {
+                "commandData": {
                     "type": "string"
                 }
             }
@@ -1882,19 +1882,19 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                },
+                "lastInvocation": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "userMetrics": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "number",
                         "format": "double"
                     }
-                },
-                "lastInvocation": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "receivedTotal": {
                     "type": "integer",
@@ -2207,6 +2207,9 @@
                 "abstract": {
                     "type": "boolean"
                 },
+                "contentType": {
+                    "$ref": "#/definitions/JavaType"
+                },
                 "bindings": {
                     "$ref": "#/definitions/TypeBindings"
                 },
@@ -2258,9 +2261,6 @@
                 "mapLikeType": {
                     "type": "boolean"
                 },
-                "contentType": {
-                    "$ref": "#/definitions/JavaType"
-                },
                 "typeName": {
                     "type": "string"
                 },
@@ -2295,6 +2295,9 @@
         "JsonGenerator": {
             "type": "object",
             "properties": {
+                "closed": {
+                    "type": "boolean"
+                },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
                 },
@@ -2331,16 +2334,13 @@
                 },
                 "outputContext": {
                     "$ref": "#/definitions/JsonStreamContext"
-                },
-                "closed": {
-                    "type": "boolean"
                 }
             }
         },
         "JsonLocation": {
             "type": "object",
             "properties": {
-                "charOffset": {
+                "byteOffset": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2355,7 +2355,7 @@
                     "type": "integer",
                     "format": "int32"
                 },
-                "byteOffset": {
+                "charOffset": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -2373,6 +2373,9 @@
                 },
                 "text": {
                     "type": "string"
+                },
+                "closed": {
+                    "type": "boolean"
                 },
                 "textCharacters": {
                     "type": "array",
@@ -2542,9 +2545,6 @@
                 },
                 "currentValue": {
                     "type": "object"
-                },
-                "closed": {
-                    "type": "boolean"
                 }
             }
         },
@@ -2559,11 +2559,11 @@
         "JsonSerializerObject": {
             "type": "object",
             "properties": {
-                "unwrappingSerializer": {
-                    "type": "boolean"
-                },
                 "delegatee": {
                     "$ref": "#/definitions/JsonSerializerObject"
+                },
+                "unwrappingSerializer": {
+                    "type": "boolean"
                 }
             }
         },
@@ -2573,13 +2573,6 @@
                 "parent": {
                     "$ref": "#/definitions/JsonStreamContext"
                 },
-                "typeDesc": {
-                    "type": "string"
-                },
-                "currentIndex": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "currentName": {
                     "type": "string"
                 },
@@ -2587,6 +2580,13 @@
                     "type": "object"
                 },
                 "entryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "typeDesc": {
+                    "type": "string"
+                },
+                "currentIndex": {
                     "type": "integer",
                     "format": "int32"
                 }
@@ -2679,32 +2679,19 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "data": {
+                "keyBytes": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
                 },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "topicName": {
-                    "type": "string"
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "byte"
+                    }
                 },
                 "publishTime": {
                     "type": "integer",
@@ -2741,12 +2728,25 @@
                 "replicated": {
                     "type": "boolean"
                 },
-                "keyBytes": {
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "format": "byte"
-                    }
+                "topicName": {
+                    "type": "string"
+                },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -3037,11 +3037,11 @@
         "Schema": {
             "type": "object",
             "properties": {
-                "nativeSchema": {
-                    "type": "object"
-                },
                 "schemaInfo": {
                     "$ref": "#/definitions/SchemaInfo"
+                },
+                "nativeSchema": {
+                    "type": "object"
                 }
             }
         },
@@ -3091,26 +3091,26 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "schemaDefinition": {
-                    "type": "string"
-                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
+                },
+                "schemaDefinition": {
+                    "type": "string"
                 }
             }
         },
         "SchemaObject": {
             "type": "object",
             "properties": {
-                "nativeSchema": {
-                    "type": "object"
-                },
                 "schemaInfo": {
                     "$ref": "#/definitions/SchemaInfo"
+                },
+                "nativeSchema": {
+                    "type": "object"
                 }
             }
         },
@@ -3200,6 +3200,9 @@
                 "timeZone": {
                     "$ref": "#/definitions/TimeZone"
                 },
+                "generator": {
+                    "$ref": "#/definitions/JsonGenerator"
+                },
                 "config": {
                     "$ref": "#/definitions/SerializationConfig"
                 },
@@ -3217,9 +3220,6 @@
                 },
                 "defaultNullKeySerializer": {
                     "$ref": "#/definitions/JsonSerializerObject"
-                },
-                "generator": {
-                    "$ref": "#/definitions/JsonGenerator"
                 }
             }
         },
@@ -3286,7 +3286,7 @@
         "Value": {
             "type": "object",
             "properties": {
-                "valueInclusion": {
+                "contentInclusion": {
                     "type": "string",
                     "enum": [
                         "ALWAYS",
@@ -3297,7 +3297,7 @@
                         "USE_DEFAULTS"
                     ]
                 },
-                "contentInclusion": {
+                "valueInclusion": {
                     "type": "string",
                     "enum": [
                         "ALWAYS",
