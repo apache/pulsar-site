@@ -19,24 +19,27 @@
 #
 
 
-set -e
+set -x -e
+
+if [ -z "$PULSAR_VERSION" ]; then
+    echo "PULSAR_VERSION must be set."
+    exit 1
+fi
 
 BUILD_IMAGE_NAME="${BUILD_IMAGE_NAME:-apachepulsar/pulsar-build}"
-# Use python 3.8 for now because it works for 2.7, 2.8, and 2.9.
 PYTHON_VERSION="${PYTHON_VERSION:-3.8}"
 PYTHON_SPEC="${PYTHON_SPEC:-cp38-cp38}"
-# ROOT_DIR should be an absolute path so that Docker accepts it as a valid volumes path
+IMAGE=$BUILD_IMAGE_NAME:manylinux-$PYTHON_SPEC
+
+# ROOT_DIR should be an absolute path so that Docker accepts it as a valid volumes path.
 ROOT_DIR=`cd $(dirname $0)/../../../..; pwd`
 cd $ROOT_DIR
 
 echo "Build Python docs for python version $PYTHON_VERSION, spec $PYTHON_SPEC, and pulsar version ${PULSAR_VERSION}"
-
-IMAGE=$BUILD_IMAGE_NAME:manylinux-$PYTHON_SPEC
-
 echo "Using image: $IMAGE"
 
 VOLUME_OPTION=${VOLUME_OPTION:-"-v $ROOT_DIR:/pulsar"}
-COMMAND="/pulsar/site2/tools/api/python/generate-python-client-docs.sh"
+COMMAND="/pulsar/site2/tools/apidoc/python/pydoctor-generator-helper.sh"
 DOCKER_CMD="docker run -e PULSAR_VERSION=${PULSAR_VERSION} --entrypoint ${COMMAND} -i ${VOLUME_OPTION} ${IMAGE}"
 
 $DOCKER_CMD

@@ -21,14 +21,22 @@
 
 # Pulsar Client Generated Docs
 
-Pulsar's Python docs used to be generated for every wesbite build, but this is unnecessary. We now generate
-the docs for each version by running the [build-docs-in-docker.sh](./build-docs-in-docker.sh) script in this
-directory.
+## 3.0.0 and Later
 
-## Example
+Releases start from 3.0.0 uses [`pydoctor`](https://github.com/twisted/pydoctor) to generate API docs.
 
-When starting in the root directory of the project, you can run:
+When starting in the root directory of the `pulsar-site` project, you can run:
 
 ```shell
-PULSAR_VERSION=2.8.3 ./site2/tools/python-client/build-docs-in-docker.sh
+PULSAR_VERSION=3.0.0 ./site2/tools/apidoc/python/pydoctor-generator.sh
+```
+
+## Before 3.0.0
+
+Releases before 3.0.0 uses [`pdoc`](https://github.com/mitmproxy/pdoc) to generate API docs.
+
+When starting in the root directory of the `pulsar-site` project, you can run:
+
+```shell
+PULSAR_VERSION=2.8.3 ./site2/tools/apidoc/python/pdoc-generator.sh
 ```
