@@ -19,6 +19,29 @@ This chapter gives an overview of Pulsar release notes.
 | [Pulsar Core](/release-notes/#pulsar-release-notes) | <div align="center">Pulsar</div>                                                                         |
 | [Pulsar Clients](/docs/client-libraries.md)         | <ul><li>Java</li><li>WebSocket</li><li>C++</li><li>Python</li><li>Go</li><li>NodeJs</li><li>C#</li></ul> |
 
+### Maintenance info
+
+To generate release note page, you're suggested to install the [GitHub CLI](https://cli.github.com/) and authenticate first.
+
+1. Fetch the release metadata:
+
+```bash
+# Replace v2.10.2 with the target version tag
+gh release view "v2.10.2" -R apache/pulsar --json author,tagName,publishedAt
+```
+
+2. Fetch the release notes:
+
+```bash
+# Replace v2.10.2 with the target version tag
+gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
+```
+
+3. Select the related release notes entries and add a [versioned release note](https://github.com/apache/pulsar-site/tree/main/site2/website-next/release-notes/versioned).
+4. Update the metadata file [site2/website-next/data/release-*.js](https://github.com/apache/pulsar-site/tree/main/site2/website-next/data).
+
+The process is similar to update standalone client releases.
+
 ## Submit release notes
 
 Follow the steps below to submit release notes for Pulsar and clients (**Java and WebSocket**).
