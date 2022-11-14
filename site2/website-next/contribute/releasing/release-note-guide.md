@@ -12,22 +12,12 @@ This chapter gives an overview of Pulsar release notes.
 
 ### Basic info
 
-[Pulsar release notes](https://pulsar.apache.org/release-notes/) consist of the following parts.
+[Pulsar release notes](/release-notes/) consist of the following parts.
 
-| Release note                                                                 | Component                                                                                                |
-| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [Pulsar Core](https://pulsar.apache.org/release-notes/#pulsar-release-notes) | <div align="center">Pulsar</div>                                                                           |
-| [Pulsar Clients](../../site2/docs/client-libraries.md)                       | <ul><li>Java</li><li>WebSocket</li><li>C++</li><li>Python</li><li>Go</li><li>NodeJs</li><li>C#</li></ul> |
-
-### Maintenance info
-
-For the [Pulsar Release Note page](https://pulsar.apache.org/release-notes/):
-
-* It is generated automatically using [release-json-gen.sh](https://github.com/apache/pulsar-site/blob/main/site2/tools/release-json-gen.sh). For implementation details, see [PIP 112: Generate Release Notes Automatically](https://github.com/apache/pulsar/wiki/PIP-112:-Generate-Release-Notes-Automatically).
-* The info is fetched from the [Pulsar Releases Page - GitHub](https://github.com/apache/pulsar/releases).
-* It is updated when one of the following conditions is met:
-  * *A commit is pushed to the [pulsar-site repo](https://github.com/apache/pulsar-site).
-  * A [Pulsar site sync job](https://github.com/apache/pulsar-site/actions/workflows/ci-pulsar-website-docs-sync.yaml) is performed (every 6 hours).
+| Release note                                        | Component                                                                                                |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [Pulsar Core](/release-notes/#pulsar-release-notes) | <div align="center">Pulsar</div>                                                                         |
+| [Pulsar Clients](/docs/client-libraries.md)         | <ul><li>Java</li><li>WebSocket</li><li>C++</li><li>Python</li><li>Go</li><li>NodeJs</li><li>C#</li></ul> |
 
 ## Submit release notes
 
