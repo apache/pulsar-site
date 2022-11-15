@@ -24071,11 +24071,11 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
         },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
@@ -25020,6 +25020,12 @@
           "type" : "number",
           "format" : "double"
         },
+        "underLoaded" : {
+          "type" : "boolean"
+        },
+        "overLoaded" : {
+          "type" : "boolean"
+        },
         "cpu" : {
           "$ref" : "#/definitions/ResourceUsage"
         },
@@ -25030,6 +25036,9 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "loadReportType" : {
+          "type" : "string"
+        },
         "msgThroughputIn" : {
           "type" : "number",
           "format" : "double"
@@ -25037,15 +25046,6 @@
         "msgThroughputOut" : {
           "type" : "number",
           "format" : "double"
-        },
-        "underLoaded" : {
-          "type" : "boolean"
-        },
-        "overLoaded" : {
-          "type" : "boolean"
-        },
-        "loadReportType" : {
-          "type" : "string"
         },
         "bandwidthIn" : {
           "$ref" : "#/definitions/ResourceUsage"
@@ -25362,12 +25362,6 @@
         "factory" : {
           "$ref" : "#/definitions/JsonFactory"
         },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
-        },
-        "serializationConfig" : {
-          "$ref" : "#/definitions/SerializationConfig"
-        },
         "deserializationConfig" : {
           "$ref" : "#/definitions/DeserializationConfig"
         },
@@ -25391,6 +25385,12 @@
         },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
+        },
+        "serializationConfig" : {
+          "$ref" : "#/definitions/SerializationConfig"
         },
         "nodeFactory" : {
           "$ref" : "#/definitions/JsonNodeFactory"
@@ -25417,6 +25417,10 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "managedLedgerOffloadedReadPriority" : {
+          "type" : "string",
+          "enum" : [ "BOOKKEEPER_FIRST", "TIERED_STORAGE_FIRST" ]
+        },
         "offloadersDirectory" : {
           "type" : "string"
         },
@@ -25435,10 +25439,6 @@
           "type" : "integer",
           "format" : "int64"
         },
-        "managedLedgerOffloadedReadPriority" : {
-          "type" : "string",
-          "enum" : [ "BOOKKEEPER_FIRST", "TIERED_STORAGE_FIRST" ]
-        },
         "s3ManagedLedgerOffloadRegion" : {
           "type" : "string"
         },
@@ -25449,10 +25449,6 @@
           "type" : "string"
         },
         "s3ManagedLedgerOffloadMaxBlockSizeInBytes" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "s3ManagedLedgerOffloadReadBufferSizeInBytes" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -25467,6 +25463,10 @@
         },
         "s3ManagedLedgerOffloadRoleSessionName" : {
           "type" : "string"
+        },
+        "s3ManagedLedgerOffloadReadBufferSizeInBytes" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "gcsManagedLedgerOffloadRegion" : {
           "type" : "string"
@@ -26358,11 +26358,11 @@
         "timeZone" : {
           "$ref" : "#/definitions/TimeZone"
         },
-        "typeFactory" : {
-          "$ref" : "#/definitions/TypeFactory"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "typeFactory" : {
+          "$ref" : "#/definitions/TypeFactory"
         },
         "handlerInstantiator" : {
           "$ref" : "#/definitions/HandlerInstantiator"
