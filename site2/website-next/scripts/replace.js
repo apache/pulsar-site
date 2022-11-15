@@ -117,10 +117,7 @@ function clientVersionUrl(version, type) {
   var versions = version.split(".");
   var majorVersion = parseInt(versions[0]);
   var minorVersion = parseInt(versions[1]);
-  if (
-    (majorVersion === 2 && minorVersion < 5) ||
-    (type === "python" && minorVersion >= 7)
-  ) {
+  if (majorVersion === 2 && minorVersion < 5) {
     return `(${siteConfig.url}/api/${type}/${version}`;
   } else if (majorVersion >= 2 && minorVersion >= 5) {
     return `(${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`;
@@ -165,8 +162,6 @@ const from = [
   /@pulsar:dist_deb:client@/g,
   /@pulsar:dist_deb:client-devel@/g,
 
-  /\(\/api\/python/g,
-  /\(\/api\/cpp/g,
   /\(\/api\/pulsar-functions/g,
   /\(\/api\/client/g,
   /\(\/api\/admin/g,
@@ -199,8 +194,6 @@ const options = {
     debDistUrl(`${latestVersion}`, ""),
     debDistUrl(`${latestVersion}`, "-dev"),
 
-    clientVersionUrl(`${latestVersion}`, "python"),
-    clientVersionUrl(`${latestVersion}`, "cpp"),
     clientVersionUrl(`${latestVersion}`, "pulsar-functions"),
     clientVersionUrl(`${latestVersion}`, "client"),
     clientVersionUrl(`${latestVersion}`, "admin"),
@@ -245,8 +238,6 @@ for (let _v of versions) {
       rpmDistUrl(`${v}`, "-devel"),
       debDistUrl(`${v}`, ""),
       debDistUrl(`${v}`, "-dev"),
-      clientVersionUrl(`${v}`, "python"),
-      clientVersionUrl(`${v}`, "cpp"),
       clientVersionUrl(`${v}`, "pulsar-functions"),
       clientVersionUrl(`${v}`, "client"),
       clientVersionUrl(`${v}`, "admin"),
