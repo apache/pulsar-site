@@ -113,16 +113,22 @@ function debDistUrl(version, type) {
   }
 }
 
+// Specially handle Python and C++ API documents, since they are moved out start from 2.11.0.
+function multiClientVersionUrl(version, type) {
+  if (type === "python" && version === "2.6.4") {
+    // There's no release for Python client 2.6.4. Add this trick to avoid broken link.
+    return `${siteConfig.url}/api/${type}/2.6.3`
+  }
+  return `${siteConfig.url}/api/${type}/${version}`
+}
+
 function clientVersionUrl(version, type) {
   var versions = version.split(".");
   var majorVersion = parseInt(versions[0]);
   var minorVersion = parseInt(versions[1]);
-  if (
-    (majorVersion === 2 && minorVersion < 5) ||
-    (type === "python" && minorVersion >= 7)
-  ) {
+  if (majorVersion === 2 && minorVersion < 5) {
     return `(${siteConfig.url}/api/${type}/${version}`;
-  } else if (majorVersion >= 2 && minorVersion >= 5) {
+  } else {
     return `(${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`;
   }
 }
@@ -165,8 +171,8 @@ const from = [
   /@pulsar:dist_deb:client@/g,
   /@pulsar:dist_deb:client-devel@/g,
 
-  /\(\/api\/python/g,
-  /\(\/api\/cpp/g,
+  /@pulsar:apidoc:python@/g,
+  /@pulsar:apidoc:cpp@/g,
   /\(\/api\/pulsar-functions/g,
   /\(\/api\/client/g,
   /\(\/api\/admin/g,
@@ -199,8 +205,8 @@ const options = {
     debDistUrl(`${latestVersion}`, ""),
     debDistUrl(`${latestVersion}`, "-dev"),
 
-    clientVersionUrl(`${latestVersion}`, "python"),
-    clientVersionUrl(`${latestVersion}`, "cpp"),
+    multiClientVersionUrl(`${latestVersion}`, "python"),
+    multiClientVersionUrl(`${latestVersion}`, "cpp"),
     clientVersionUrl(`${latestVersion}`, "pulsar-functions"),
     clientVersionUrl(`${latestVersion}`, "client"),
     clientVersionUrl(`${latestVersion}`, "admin"),
@@ -245,8 +251,8 @@ for (let _v of versions) {
       rpmDistUrl(`${v}`, "-devel"),
       debDistUrl(`${v}`, ""),
       debDistUrl(`${v}`, "-dev"),
-      clientVersionUrl(`${v}`, "python"),
-      clientVersionUrl(`${v}`, "cpp"),
+      multiClientVersionUrl(`${v}`, "python"),
+      multiClientVersionUrl(`${v}`, "cpp"),
       clientVersionUrl(`${v}`, "pulsar-functions"),
       clientVersionUrl(`${v}`, "client"),
       clientVersionUrl(`${v}`, "admin"),
