@@ -19,24 +19,14 @@
 
 -->
 
-# Pulsar Python Client Generated Docs
+# Pulsar C++ Client Generated Docs
 
-## 3.0.0 and Later
-
-Releases start from 3.0.0 uses [`pydoctor`](https://github.com/twisted/pydoctor) to generate API docs.
+Pulsar C++ client uses [`doxygen`](https://doxygen.nl/) to generate API docs.
 
 When starting in the root directory of the `pulsar-site` project, you can run:
 
 ```shell
-PULSAR_VERSION=3.0.0 ./site2/tools/apidoc/python/pydoctor-generator.sh
+./site2/tools/apidoc/cpp/doxygen-generator.py <VERSION>
 ```
 
-## Before 3.0.0
-
-Releases before 3.0.0 uses [`pdoc`](https://github.com/mitmproxy/pdoc) to generate API docs.
-
-When starting in the root directory of the `pulsar-site` project, you can run:
-
-```shell
-PULSAR_VERSION=2.8.3 ./site2/tools/apidoc/python/pdoc-generator.sh
-```
+... where the `VERSION` is released semantic version like `2.10.2` or `3.0.0`.
