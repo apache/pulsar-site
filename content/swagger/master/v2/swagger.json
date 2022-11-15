@@ -28187,6 +28187,10 @@
                         "consumer_backlog_eviction"
                     ]
                 },
+                "limit": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "limitSize": {
                     "type": "integer",
                     "format": "int64"
@@ -28194,10 +28198,6 @@
                 "limitTime": {
                     "type": "integer",
                     "format": "int32"
-                },
-                "limit": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
@@ -28234,10 +28234,10 @@
         "BookieInfo": {
             "type": "object",
             "properties": {
-                "hostname": {
+                "rack": {
                     "type": "string"
                 },
-                "rack": {
+                "hostname": {
                     "type": "string"
                 }
             }
@@ -28791,11 +28791,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "fullRootName": {
-                    "$ref": "#/definitions/PropertyName"
-                },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
+                },
+                "fullRootName": {
+                    "$ref": "#/definitions/PropertyName"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
@@ -28937,12 +28937,12 @@
         "FunctionInstanceStatsData": {
             "type": "object",
             "properties": {
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
-                },
                 "lastInvocation": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "oneMin": {
+                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
                 },
                 "userMetrics": {
                     "type": "object",
@@ -28951,6 +28951,10 @@
                         "format": "double"
                     }
                 },
+                "receivedTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -28966,16 +28970,16 @@
                 "avgProcessLatency": {
                     "type": "number",
                     "format": "double"
-                },
-                "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
+                "receivedTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "processedSuccessfullyTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -28991,10 +28995,6 @@
                 "avgProcessLatency": {
                     "type": "number",
                     "format": "double"
-                },
-                "receivedTotal": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
@@ -29364,10 +29364,6 @@
                 "text": {
                     "type": "string"
                 },
-                "intValue": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "textCharacters": {
                     "type": "array",
                     "items": {
@@ -29399,6 +29395,10 @@
                 },
                 "objectId": {
                     "type": "object"
+                },
+                "intValue": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "typeId": {
                     "type": "object"
@@ -30226,6 +30226,21 @@
         "OffloadPolicies": {
             "type": "object",
             "properties": {
+                "managedLedgerOffloadDeletionLagInMillis": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "managedLedgerOffloadThresholdInBytes": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "managedLedgerOffloadedReadPriority": {
+                    "type": "string",
+                    "enum": [
+                        "BOOKKEEPER_FIRST",
+                        "TIERED_STORAGE_FIRST"
+                    ]
+                },
                 "s3ManagedLedgerOffloadRegion": {
                     "type": "string"
                 },
@@ -30236,10 +30251,6 @@
                     "type": "string"
                 },
                 "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
                     "type": "integer",
                     "format": "int32"
                 },
@@ -30254,6 +30265,10 @@
                 },
                 "s3ManagedLedgerOffloadRoleSessionName": {
                     "type": "string"
+                },
+                "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "gcsManagedLedgerOffloadRegion": {
                     "type": "string"
@@ -30284,13 +30299,16 @@
                 "managedLedgerOffloadRegion": {
                     "type": "string"
                 },
-                "managedLedgerOffloadDeletionLagInMillis": {
-                    "type": "integer",
-                    "format": "int64"
+                "managedLedgerOffloadServiceEndpoint": {
+                    "type": "string"
                 },
-                "managedLedgerOffloadThresholdInBytes": {
+                "managedLedgerOffloadMaxBlockSizeInBytes": {
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int32"
+                },
+                "managedLedgerOffloadReadBufferSizeInBytes": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "managedLedgerOffloadDriver": {
                     "type": "string"
@@ -30309,24 +30327,6 @@
                 "managedLedgerOffloadPrefetchRounds": {
                     "type": "integer",
                     "format": "int32"
-                },
-                "managedLedgerOffloadServiceEndpoint": {
-                    "type": "string"
-                },
-                "managedLedgerOffloadMaxBlockSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadReadBufferSizeInBytes": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "managedLedgerOffloadedReadPriority": {
-                    "type": "string",
-                    "enum": [
-                        "BOOKKEEPER_FIRST",
-                        "TIERED_STORAGE_FIRST"
-                    ]
                 }
             }
         },
@@ -31195,11 +31195,11 @@
                 "rootName": {
                     "type": "string"
                 },
-                "fullRootName": {
-                    "$ref": "#/definitions/PropertyName"
-                },
                 "subtypeResolver": {
                     "$ref": "#/definitions/SubtypeResolver"
+                },
+                "fullRootName": {
+                    "$ref": "#/definitions/PropertyName"
                 },
                 "defaultVisibilityChecker": {
                     "$ref": "#/definitions/VisibilityCheckerObject"
