@@ -173,6 +173,7 @@ const from = [
 
   /@pulsar:apidoc:python@/g,
   /@pulsar:apidoc:cpp@/g,
+  /\(\/api\/cpp/g,
   /\(\/api\/pulsar-functions/g,
   /\(\/api\/client/g,
   /\(\/api\/admin/g,
@@ -207,6 +208,7 @@ const options = {
 
     multiClientVersionUrl(`${latestVersion}`, "python"),
     multiClientVersionUrl(`${latestVersion}`, "cpp"),
+    `(${siteConfig.url}/api/cpp`,
     clientVersionUrl(`${latestVersion}`, "pulsar-functions"),
     clientVersionUrl(`${latestVersion}`, "client"),
     clientVersionUrl(`${latestVersion}`, "admin"),
@@ -229,8 +231,6 @@ for (let _v of versions) {
     files: [
       `${docsDir}/version-${_v}/*.md`,
       `${docsDir}/version-${_v}/**/*.md`,
-      // `${docsDir}/en/${v}/*.html`,
-      // `${docsDir}/en/${v}/**/*.html`,
     ],
     from: from,
     to: [
@@ -253,6 +253,7 @@ for (let _v of versions) {
       debDistUrl(`${v}`, "-dev"),
       multiClientVersionUrl(`${v}`, "python"),
       multiClientVersionUrl(`${v}`, "cpp"),
+      `(${siteConfig.url}/api/cpp`,
       clientVersionUrl(`${v}`, "pulsar-functions"),
       clientVersionUrl(`${v}`, "client"),
       clientVersionUrl(`${v}`, "admin"),
