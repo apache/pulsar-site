@@ -38,7 +38,7 @@ There are also [pdoc](https://github.com/BurntSushi/pdoc)-generated API docs for
 
 For a tutorial on using the Pulsar C++ clent, see [The Pulsar C++ client](client-libraries-cpp.md).
 
-There are also [Doxygen](http://www.stack.nl/~dimitri/doxygen/)-generated API docs for the C++ client [here](/api/cpp).
+There are also [Doxygen](http://www.stack.nl/~dimitri/doxygen/)-generated API docs for the C++ client [here](@pulsar:apidoc:cpp@).
 
 ## Feature Matrix
 

@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 ````
 
 
-Pulsar Python client library is a wrapper over the existing [C++ client library](client-libraries-cpp.md) and exposes all of the [same features](/api/cpp). You can find the code in the [Python directory](https://github.com/apache/pulsar-client-python) of the C++ client code.
+Pulsar Python client library is a wrapper over the existing [C++ client library](client-libraries-cpp.md) and exposes all of the [same features](@pulsar:apidoc:cpp@). You can find the code in the [Python directory](https://github.com/apache/pulsar-client-python) of the C++ client code.
 
 All the methods in producer, consumer, and reader of a Python client are thread-safe.
 
