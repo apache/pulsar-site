@@ -4,25 +4,21 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { version } from "react";
+import React from "react";
 import DefaultNavbarItem from "@theme/NavbarItem/DefaultNavbarItem";
 import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
-import {
-  useVersions,
-  useLatestVersion,
-  useActiveDocContext,
-} from "@docusaurus/plugin-content-docs/client";
-import { useDocsPreferredVersion } from "@docusaurus/theme-common";
-import { translate } from "@docusaurus/Translate";
+import {useActiveDocContext, useLatestVersion,} from "@docusaurus/plugin-content-docs/client";
+import {useDocsPreferredVersion} from "@docusaurus/theme-common";
+import {translate} from "@docusaurus/Translate";
+
 let versions = require("../../versions.json");
-const _latestVersion = versions[0];
 versions = [{ name: "current", label: "Next", path: "/docs/next" }]
   .concat(
     versions.map((item) => {
       return {
         label: item,
         name: item,
-        path: item == _latestVersion ? "/docs" : "/docs/" + item,
+        path: "/docs/" + item,
       };
     })
   )
@@ -45,7 +41,6 @@ export default function DocsVersionDropdownNavbarItem({
   ...props
 }) {
   const activeDocContext = useActiveDocContext(docsPluginId);
-  const _versions = useVersions(docsPluginId);
   const latestVersion = useLatestVersion(docsPluginId);
   const { preferredVersion, savePreferredVersionName } =
     useDocsPreferredVersion(docsPluginId);
@@ -53,28 +48,19 @@ export default function DocsVersionDropdownNavbarItem({
     const versionLinks = versions.map((version) => {
       // We try to link to the same doc, in another version
       // When not possible, fallback to the "main doc" of the version
-      const _version =
-        version.name == _latestVersion
-          ? ""
-          : version.name == "current"
-          ? "next/"
-          : version.name + "/";
-      const _docId =
-        activeDocContext.activeDoc.id == "about"
-          ? ""
-          : activeDocContext.activeDoc.id;
+      const _version = version.name === "current" ? "/next" : "/" + version.name;
+      const _docId = activeDocContext.activeDoc.id === "about" ? "/" : activeDocContext.activeDoc.id;
       const versionDoc = {
-        path: "/docs/" + _version + _docId,
+        path: "/docs" + _version + _docId,
       };
       return {
         isNavLink: true,
         label: version.label,
-        to: "", //iiversion.name == "others" ? "/versions" : versionDoc.path,
+        to: "",
         isActive: () => version.name === activeDocContext.activeVersion.name,
         onClick: () => {
           savePreferredVersionName(version.name);
-          window.location.href =
-            version.name == "others" ? "/versions" : versionDoc.path;
+          window.location.href = version.name === "others" ? "/versions" : versionDoc.path;
         },
       };
     });

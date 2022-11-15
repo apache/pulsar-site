@@ -5,7 +5,7 @@ const linkifyRegex = require("./plugins/remark-linkify-regex");
 const versions = require("./versions.json");
 const versionsMap = {
   ..._.keyBy(
-    versions.slice(1).map((item) => {
+    versions.map((item) => {
       return {
         label: item,
         path: item,
@@ -152,7 +152,7 @@ module.exports = {
     navbar: {
       title: "",
       logo: {
-        alt: "pulasr logo",
+        alt: "pulsar logo",
         src: "img/logo.svg",
       },
       items: [
@@ -177,7 +177,7 @@ module.exports = {
           ],
         },
         {
-          href: "/docs/",
+          href: `/docs/${versions[0]}`,
           position: "right",
           label: "Docs",
         },
@@ -398,13 +398,21 @@ module.exports = {
     ],
   ],
   plugins: [
-    // [
-    //   "client-redirects",
-    //   /** @type {import('@docusaurus/plugin-client-redirects').Options} */
-    //   ({
-    //     fromExtensions: ["html"],
-    //   }),
-    // ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      /** @type {import('@docusaurus/plugin-client-redirects').Options} */
+      {
+        createRedirects(existingPath) {
+          const latestVersion = versions[0];
+          if (existingPath.includes(`/docs/${latestVersion}`)) {
+            return [
+              existingPath.replace(`/docs/${latestVersion}`, '/docs/'),
+            ];
+          }
+          return undefined;
+        },
+      },
+    ],
     "./postcss-tailwind-loader",
     [
       '@docusaurus/plugin-content-docs',
