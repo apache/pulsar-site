@@ -19,7 +19,7 @@
 
 -->
 
-# Pulsar Client Generated Docs
+# Pulsar Python Client Generated Docs
 
 ## 3.0.0 and Later
 
