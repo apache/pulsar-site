@@ -39,12 +39,12 @@ export default function VersionsTable(props) {
               <a href={row.releaseNotes}>{row.tagName}</a>
             </TableCell>
             <TableCell sx={{ color: "inherit" }}>
-              {row.releaseBlog == "N/A" ? (
-                "N/A"
+              {row.releaseBlog ? (
+                  <a href={row.releaseBlog}>
+                      What's New in Apache Pulsar {row.tagName}
+                  </a>
               ) : (
-                <a href={row.releaseBlog}>
-                  What's New in Apache Pulsar {row.tagName}
-                </a>
+                  <></>
               )}
             </TableCell>
             <TableCell sx={{ color: "inherit" }}>

@@ -12,22 +12,37 @@ This chapter gives an overview of Pulsar release notes.
 
 ### Basic info
 
-[Pulsar release notes](https://pulsar.apache.org/release-notes/) consist of the following parts.
+[Pulsar release notes](/release-notes/) consist of the following parts.
 
-| Release note                                                                 | Component                                                                                                |
-| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [Pulsar Core](https://pulsar.apache.org/release-notes/#pulsar-release-notes) | <div align="center">Pulsar</div>                                                                           |
-| [Pulsar Clients](../../site2/docs/client-libraries.md)                       | <ul><li>Java</li><li>WebSocket</li><li>C++</li><li>Python</li><li>Go</li><li>NodeJs</li><li>C#</li></ul> |
+| Release note                                        | Component                                                                                                |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [Pulsar Core](/release-notes/#pulsar-release-notes) | <div align="center">Pulsar</div>                                                                         |
+| [Pulsar Clients](/docs/client-libraries.md)         | <ul><li>Java</li><li>WebSocket</li><li>C++</li><li>Python</li><li>Go</li><li>NodeJs</li><li>C#</li></ul> |
 
 ### Maintenance info
 
-For the [Pulsar Release Note page](https://pulsar.apache.org/release-notes/):
+To generate release note page, you're suggested to install the [GitHub CLI](https://cli.github.com/) and authenticate first.
 
-* It is generated automatically using [release-json-gen.sh](https://github.com/apache/pulsar-site/blob/main/site2/tools/release-json-gen.sh). For implementation details, see [PIP 112: Generate Release Notes Automatically](https://github.com/apache/pulsar/wiki/PIP-112:-Generate-Release-Notes-Automatically).
-* The info is fetched from the [Pulsar Releases Page - GitHub](https://github.com/apache/pulsar/releases).
-* It is updated when one of the following conditions is met:
-  * *A commit is pushed to the [pulsar-site repo](https://github.com/apache/pulsar-site).
-  * A [Pulsar site sync job](https://github.com/apache/pulsar-site/actions/workflows/ci-pulsar-website-docs-sync.yaml) is performed (every 6 hours).
+1. Fetch the release metadata:
+
+```bash
+# Replace v2.10.2 with the target version tag
+gh release view "v2.10.2" -R apache/pulsar --json author,tagName,publishedAt
+```
+
+2. Fetch the release notes:
+
+```bash
+# Replace v2.10.2 with the target version tag
+gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
+```
+
+3. Select the related release notes entries and add a [versioned release note](https://github.com/apache/pulsar-site/tree/main/site2/website-next/release-notes/versioned).
+4. Update the metadata file [site2/website-next/data/release-*.js](https://github.com/apache/pulsar-site/tree/main/site2/website-next/data).
+
+The process is similar to update standalone client releases.
+
+To preview the result, follow the instructions documented at the [Content Preview Guide](/contribute/documentation/preview.md#preview-website-changes).
 
 ## Submit release notes
 

@@ -38,8 +38,6 @@ export NODE_OPTIONS="--max-old-space-size=16000"
 "$TOOLS_DIR"/pulsar-perf-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
 "$TOOLS_DIR"/pulsar-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
 "$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-# Generate document for release table.
-"$TOOLS_DIR"/release-json-gen.sh "$GH_TOKEN" "$WEBSITE_DIR"
 
 cd "$WEBSITE_DIR"
 
