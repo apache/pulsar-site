@@ -33,7 +33,7 @@ For a tutorial on using the Pulsar Go client, see [Pulsar Go client](client-libr
 
 For a tutorial on using the Pulsar Python client, see [Pulsar Python client](client-libraries-python.md).
 
-There are also [pdoc](https://github.com/BurntSushi/pdoc)-generated API docs for the Python client [here](/api/python).
+There are also [pdoc](https://github.com/BurntSushi/pdoc)-generated API docs for the Python client [here](@pulsar:apidoc:python@).
 
 ## C++ client
 

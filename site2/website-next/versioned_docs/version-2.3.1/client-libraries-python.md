@@ -44,7 +44,7 @@ $ sudo python setup.py install
 
 ## API Reference
 
-The complete Python API reference is available at [api/python](/api/python).
+The complete Python API reference is available at [api/python](@pulsar:apidoc:python@).
 
 ## Examples
 
