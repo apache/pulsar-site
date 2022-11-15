@@ -30,7 +30,6 @@ GEN_SITE_DIR=${ROOT_DIR}/generated-site
 VERSION=next
 
 export NODE_OPTIONS="--max-old-space-size=16000"
-"$TOOLS_DIR"/generate-api-docs.sh
 
 # Generate document for command line tools.
 "$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
