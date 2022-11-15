@@ -42,6 +42,8 @@ gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
 
 The process is similar to update standalone client releases.
 
+To preview the result, follow the instructions documented at the [Content Preview Guide](/contribute/documentation/preview.md#preview-website-changes).
+
 ## Submit release notes
 
 Follow the steps below to submit release notes for Pulsar and clients (**Java and WebSocket**).
