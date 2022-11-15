@@ -24,7 +24,7 @@ from subprocess import PIPE, Popen
 import sys
 import tempfile
 from typing import Any, Optional, TextIO
-
+import urllib.request
 
 SEMVER_REGEX = re.compile(
     r"""
@@ -86,8 +86,8 @@ def doxygen_generate(version: str):
         repo = 'https://github.com/apache/pulsar-client-cpp'
     tag = f'v{semver[0]}.{semver[1]}.{semver[2]}'
 
-    with open(f'{basedir}/Doxyfile', 'r') as f:
-        config = f.read()
+    with urllib.request.urlopen('https://raw.githubusercontent.com/apache/pulsar-client-cpp/main/Doxyfile') as f:
+        config = f.read().decode('utf-8')
     config += f"\nOUTPUT_DIRECTORY={rootdir}/site2/website-next/static/api/cpp\n"
     config += f"\nHTML_OUTPUT={semver[0]}.{semver[1]}.{semver[2]}\n"
 
