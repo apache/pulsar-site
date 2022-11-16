@@ -10,6 +10,7 @@ const sidebars = {
             },
             items: [
                 'setup-building',
+                'setup-ide',
             ]
         }
     ],
