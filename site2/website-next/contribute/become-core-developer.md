@@ -1,8 +1,13 @@
 ---
-id: become-a-committer-or-pmc-member
-title: How to Become a Committer or PMC mmeber
-sidebar_label: "How to Become a Committer or PMC mmeber"
+id: become-core-developer
+title: How to Become a Core Developer
 ---
+
+The Pulsar community follows [the Apache governance model](https://www.apache.org/foundation/how-it-works.html#roles).
+
+Basically, core developers consist of committers and PMC members.
+
+## Committers
 
 Committers are community members that have write access to the project's repositories, i.e. they can modify the code, documentation, and website by themselves and also accept other contributions.
 
@@ -17,6 +22,8 @@ Every new committer has to be proposed by a current committer and then privately
 Candidates prepare for their nomination as committer by contributing to the Pulsar project and its community, by acting according to the Apache Way, and by generally following the path from [contributor to committer](https://community.apache.org/contributors/) for Apache projects.
 
 If you would like to become a committer, you should engage with the community and start contributing to Apache Pulsar in any of the above ways. You might also want to talk to other committers and ask for their advice and guidance.
+
+## PMC Members
 
 The project management committee (PMC) is the project governance body. Committers or contributors that have demonstrated continued involvement with the community can be nominated to become members of the PMC.
 

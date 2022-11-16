@@ -36,6 +36,16 @@ const sidebars = {
                 'document-syntax',
                 'document-preview',
             ]
+        },
+        {
+            "type": "category",
+            "label": "Committers",
+            link: {
+                type: 'generated-index',
+            },
+            items: [
+                'become-core-developer',
+            ]
         }
     ],
 };
