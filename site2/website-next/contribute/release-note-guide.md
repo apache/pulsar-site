@@ -55,7 +55,7 @@ For C++, Python, Go, Node.js, and C# clients, you do not need to take care of th
 
 1. Submit a PR to add separate release notes for Pulsar and clients (Java and WebSocket) to [versioned release-notes folder](https://github.com/apache/pulsar-site/tree/main/site2/website-next/release-notes/versioned).
 2. Get this PR reviewed and merged.
-3. Copy the release note to the [Pulsar Releases Page - GitHub](https://github.com/apache/pulsar/releases).
+3. Copy the release note to the [Pulsar Releases Page on GitHub](https://github.com/apache/pulsar/releases).
 
     | Component                             | Step                                                                       |
     |---------------------------------------|----------------------------------------------------------------------------|
