@@ -12,7 +12,7 @@ module.exports = [
 {tagName: "v2.7.4",vtag:"2.7.4",releaseNotes:"/release-notes/versioned/client-python-2.7.4/",doc:"/docs/2.7.4/client-libraries-python",version:""},
 {tagName: "v2.7.2",vtag:"2.7.2",releaseNotes:"/release-notes/versioned/client-python-2.7.2/",doc:"/docs/2.7.2/client-libraries-python",version:""},
 {tagName: "v2.7.1",vtag:"2.7.1",releaseNotes:"/release-notes/versioned/client-python-2.7.1/",doc:"/docs/2.7.1/client-libraries-python",version:""},
-{tagName: "v2.6.2",vtag:"2.6.2",releaseNotes:"/release-notes/versioned/client-python-2.6.2/",doc:"/docs/2.6.2/client-libraries-python",version:""},
+{tagName: "v2.6.2",vtag:"2.6.2",releaseNotes:"/release-notes/versioned/client-python-2.6.2/",doc:"/docs/2.6.2/client-libraries-python",version:"v2.6.x"},
 {tagName: "v2.6.0",vtag:"2.6.0",releaseNotes:"/release-notes/versioned/client-python-2.6.0/",doc:"/docs/2.6.0/client-libraries-python",version:""},
 {tagName: "v2.5.2",vtag:"2.5.2",releaseNotes:"/release-notes/versioned/client-python-2.5.2/",doc:"/docs/2.5.2/client-libraries-python",version:"v2.5.x"},
 {tagName: "v2.5.1",vtag:"2.5.1",releaseNotes:"/release-notes/versioned/client-python-2.5.1/",doc:"/docs/2.5.1/client-libraries-python",version:""},

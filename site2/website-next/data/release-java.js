@@ -19,6 +19,6 @@ module.exports = [
 {tagName: "v2.6.2",vtag:"2.6.2",releaseNotes:"/release-notes/versioned/client-java-2.6.2/",doc:"/docs/2.6.2/client-libraries-java",version:""},
 {tagName: "v2.6.1",vtag:"2.6.1",releaseNotes:"/release-notes/versioned/client-java-2.6.1/",doc:"/docs/2.6.1/client-libraries-java",version:""},
 {tagName: "v2.6.0",vtag:"2.6.0",releaseNotes:"/release-notes/versioned/client-java-2.6.0/",doc:"/docs/2.6.0/client-libraries-java",version:""},
-{tagName: "v2.5.1",vtag:"2.5.1",releaseNotes:"/release-notes/versioned/client-java-2.5.1/",doc:"/docs/2.5.1/client-libraries-java",version:""},
+{tagName: "v2.5.1",vtag:"2.5.1",releaseNotes:"/release-notes/versioned/client-java-2.5.1/",doc:"/docs/2.5.1/client-libraries-java",version:"v2.5.x"},
 {tagName: "v2.5.0",vtag:"2.5.0",releaseNotes:"/release-notes/versioned/client-java-2.5.0/",doc:"/docs/2.5.0/client-libraries-java",version:""},
 ]
