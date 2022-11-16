@@ -9,7 +9,6 @@ This guide explains the organization of Pulsar documentation and website repos a
 
 Currently, the source of documents and website (where the docs are finally published) are located in two repositories:
 
-
 | Type          | Location                                                     | Description                                                                                                                                                                       |
 |---------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Documentation | [pulsar](https://github.com/apache/pulsar/tree/master/site2) | All files related to Pulsar documentation are stored in this repo.                                                                                                                |
@@ -24,7 +23,7 @@ Documents in the `pulsar` repo are synced to the `pulsar-site` repo every 6 hour
 
 ## Update versioned docs
 
-If you want to update versioned docs, go to [pulsar/site2/website/versioned_docs/](https://github.com/apache/pulsar/tree/master/site2/website/versioned_docs) to find your desired one.
+If you want to update versioned docs, go to [site2/website/versioned_docs/ folder under the main repo](https://github.com/apache/pulsar/tree/master/site2/website/versioned_docs) to find your desired one.
 
 For versions prior to 2.8, Pulsar releases versioned docs for each patch release. You can update the exact versioned doc.
 
@@ -55,7 +54,7 @@ If you want to update [Pulsar configuration docs](https://pulsar.apache.org/refe
 
 ### Update configuration docs
 
-Configurations of bundled components are generated from command-line tools **automatically**:
+Docs for configs of bundled components are generated from command-line tools **automatically**:
 
 | Components | Update where ...                                                                                                                                                                                                    |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -68,24 +67,37 @@ Configurations of bundled components are generated from command-line tools **aut
 | Consumer   | [org.apache.pulsar.client.impl.conf.ConsumerConfigurationData](https://github.com/apache/pulsar/blob/master/pulsar-client/src/main/java/org/apache/pulsar/client/impl/conf/ConsumerConfigurationData.java)          |
 | Reader     | [org.apache.pulsar.client.impl.conf.ReaderConfigurationData](https://github.com/apache/pulsar/blob/master/pulsar-client/src/main/java/org/apache/pulsar/client/impl/conf/ReaderConfigurationData.java)              |
 
-Configurations of external components (whose source code is hosted outside the Pulsar repositories) are updated **manually**:
+Docs for configs of external components (whose source code is hosted outside the Pulsar repositories) are updated **manually**:
+
+| Components  | Update where ...                                                                                                                                                                 |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BookKeeper  | [reference-configuration-bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-bookkeeper.md)   |
+| Log4j       | [reference-configuration-log4j.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-log4j.md)             |
+| Log4j shell | [reference-configuration-log4j-shell.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-log4j-shell.md) |
+| ZooKeeper   | [reference-configuration-zookeeper.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-zookeeper.md)     |
 
 ### Update command-line tool docs
 
-| Components    | Update where…                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pulsar-admin  | [pulsar/pulsar-client-tools/src/main/java/org/apache/pulsar/admin/cli/](https://github.com/apache/pulsar/tree/master/pulsar-client-tools/src/main/java/org/apache/pulsar/admin/cli)                                                                                                                                                                                                                                                     |
-| pulsar        | Different commands are updated in different code files.<br/>Details see [pulsar/bin/pulsar](https://github.com/apache/pulsar/blob/master/bin/pulsar).                                                                                                                                                                                                                                                                                    |
-| pulsar-client | [pulsar/pulsar-client-tools/src/main/java/org/apache/pulsar/client/cli/](https://github.com/apache/pulsar/tree/master/pulsar-client-tools/src/main/java/org/apache/pulsar/client/cli)                                                                                                                                                                                                                                                   |
-| pulsar-perf   | - `websocket-producer`: [pulsar/pulsar-testclient/src/main/java/org/apache/pulsar/proxy/socket/client/](https://github.com/apache/pulsar/tree/master/pulsar-testclient/src/main/java/org/apache/pulsar/proxy/socket/client)<br/><br/> - Other commands: [pulsar/pulsar-testclient/src/main/java/org/apache/pulsar/testclient/](https://github.com/apache/pulsar/tree/master/pulsar-testclient/src/main/java/org/apache/pulsar/testclient) |
-| pulsar-shell  | reference-cli-pulsar-shell.md                                                                                                                                                                                                                                                                                                                                                                                                           |
-| pulsar-daemon | reference-cli-pulsar-daemon.md <br/><br/> (It's almost not updated and only contains 3 commands, so it's managed in `md` file rather than being generated automatically)                                                                                                                                                                                                                                                                  |
-| bookkeeper    | reference-cli-bookkeeper.md                                                                                                                                                                                                                                                                                                                                                                                                             |
+Docs for bundled Java-based command-line tools are generated **automatically**:
+
+| Components    | Update where…                                                                                                                                                                                                                                                                                             |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pulsar        | Different subcommands of [bin/pulsar](https://github.com/apache/pulsar/blob/master/bin/pulsar) are updated in different code files                                                                                                                                                                        |
+| pulsar-admin  | [Classes under the admin command-line folder](https://github.com/apache/pulsar/tree/master/pulsar-client-tools/src/main/java/org/apache/pulsar/admin/cli)                                                                                                                                                 |
+| pulsar-client | [Classes under the client command-line folder](https://github.com/apache/pulsar/tree/master/pulsar-client-tools/src/main/java/org/apache/pulsar/client/cli)                                                                                                                                               |
+| pulsar-perf   | <li>[The `websocket-producer` subcommand](https://github.com/apache/pulsar/tree/master/pulsar-testclient/src/main/java/org/apache/pulsar/proxy/socket/client)</li><li>[Other subcommands](https://github.com/apache/pulsar/tree/master/pulsar-testclient/src/main/java/org/apache/pulsar/testclient)</li> |
+
+Docs for external command-line tools or bare scripts are updated **manually**:
+
+| Components    | Update where…                                                                                                                               |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| pulsar-shell  | [pulsar-shell.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/pulsar-shell/pulsar-shell.md)    |
+| pulsar-daemon | [pulsar-daemon.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/pulsar-daemon/pulsar-daemon.md) |
+| bookkeeper    | [bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/bookkeeper/bookkeeper.md)          |
 
 ## Update client/function matrix
 
 [Pulsar Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914) outlines every feature supported by the Pulsar client and function.
-
 
 :::note
 
