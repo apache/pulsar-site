@@ -422,7 +422,7 @@ module.exports = {
           routeBasePath: 'contribute',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
-          sidebarPath: require.resolve('./sidebarsContribute.js'),
+          sidebarPath: require.resolve('./sidebarsDevelopment.js'),
           editUrl: 'https://github.com/apache/pulsar-site/tree/main/site2/website-next',
       },
     ],
