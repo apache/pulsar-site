@@ -26,6 +26,17 @@ const sidebars = {
         },
         {
             "type": "category",
+            "label": "Testing and CI",
+            link: {
+                type: 'generated-index',
+            },
+            items: [
+                'testing-licenses',
+                'personal-ci',
+            ]
+        },
+        {
+            "type": "category",
             "label": "Documentation",
             link: {
                 type: 'generated-index',

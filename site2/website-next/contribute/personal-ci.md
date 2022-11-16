@@ -1,12 +1,11 @@
 ---
-id: ci-testing-in-fork
-title: CI Testing in Fork
-sidebar_label: "CI Testing in Fork"
+id: personal-ci
+title: Personal CI
 ---
 
 Pulsar CI is currently hosted on Apache Infra resources. Since we cannot add more resources to Pulsar CI, we need to find other ways to reduce the load on Pulsar CI.
 
-After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, any pull request directly sent to `apache/pulsar` won't be triggered any more.
+After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, any pull request directly sent to `apache/pulsar` won't be triggered anymore.
 
 That said, pull requests should be first tested in your own fork. GitHub Actions provides separate quota for pull requests that are executed in a forked repository.
 

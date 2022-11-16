@@ -11,7 +11,7 @@ After the patch [Add approval solution to reduce GitHub Actions resource consump
 
 When a committer believe the PR is ready to test, they will label `ready-to-test` to the PR, and then you can rerun the CI tasks by commenting `/pulsarbot run-failure-checks` and trigger the full CI validation.
 
-See also [CI Testing in Fork](testing-and-ci/ci-testing-in-fork.md).
+See also [CI Testing in Fork](testing-and-ci/personal-ci.md).
 
 ## doc-*
 
