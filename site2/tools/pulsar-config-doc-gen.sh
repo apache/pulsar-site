@@ -38,8 +38,6 @@ CLIENT_CONF=org.apache.pulsar.client.impl.conf
 GEN_DOCS_CLIENT=$CLIENT_CONF.CmdGenerateDocumentation
 
 # config doc gen
-cp "$WEBSITE"/docs/reference-configuration*.md "$DOCS_DIR"
-
 $JAVA -cp "$(cat "$f")" $GEN_DOCS_BROKER -c org.apache.pulsar.broker.ServiceConfiguration > "$DOCS_DIR"/reference-configuration-broker.md
 $JAVA -cp "$(cat "$f")" $GEN_DOCS_BROKER -c org.apache.pulsar.client.impl.conf.ClientConfigurationData > "$DOCS_DIR"/reference-configuration-client.md
 $JAVA -cp "$(cat "$f")" $GEN_DOCS_BROKER -c org.apache.pulsar.websocket.service.WebSocketProxyConfiguration > "$DOCS_DIR"/reference-configuration-websocket.md
