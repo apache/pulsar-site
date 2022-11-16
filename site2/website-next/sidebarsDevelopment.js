@@ -39,6 +39,19 @@ const sidebars = {
         },
         {
             "type": "category",
+            "label": "Releases",
+            link: {
+                type: 'generated-index',
+            },
+            items: [
+                'create-gpg-keys',
+                'validate-release-candidate',
+                'release-process',
+                'release-note-guide',
+            ]
+        },
+        {
+            "type": "category",
             "label": "Committers",
             link: {
                 type: 'generated-index',

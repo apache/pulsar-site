@@ -1,14 +1,13 @@
 ---
 id: create-gpg-keys
 title: Create GPG keys
-sidebar_label: "Create GPG keys"
 ---
 
 This page provides instructions for Pulsar committers on how to do the initial GPG setup.
 
 This is a condensed version of instructions available at http://apache.org/dev/openpgp.html.
 
-Install GnuPG. For example on MacOS:
+Install GnuPG. For example on macOS:
 
 ```shell
 brew install gnupg

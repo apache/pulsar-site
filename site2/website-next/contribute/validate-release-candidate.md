@@ -1,7 +1,6 @@
 ---
 id: validate-release-candidate
 title: Validate Release Candidate
-sidebar_label: "Validate Release Candidate"
 ---
 
 The following are manual instructions for reviewing and validating a release candidate.
@@ -617,7 +616,7 @@ Checkout the result in the terminal of step 3.
 
 Produce another 10 messages "hello". The result is updated to 20.
 
-```json
+```bash
 bin/pulsar-client produce -m "hello" -n 10 test_wordcount_src
 ```
 
