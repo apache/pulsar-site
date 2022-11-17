@@ -167,22 +167,22 @@ module.exports = {
               label: "Pulsar Concepts",
             },
             {
+              to: `/docs/${versions[0]}/`,
               label: "Quickstart",
-              to: "/docs/",
             },
             {
-              label: "Ecosystem",
               to: "/ecosystem/",
+              label: "Ecosystem",
             },
           ],
         },
         {
-          href: `/docs/${versions[0]}/`,
+          to: `/docs/${versions[0]}/`,
           position: "right",
           label: "Docs",
         },
         {
-          href: "/contribute/",
+          to: "/contribute/",
           position: "right",
           label: "Contribute",
         },
