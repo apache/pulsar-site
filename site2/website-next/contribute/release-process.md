@@ -408,7 +408,7 @@ Then you can run `twin upload` to upload those wheel files.
 After publishing the python client docs, run the following script from the apache/pulsar-site `main` branch:
 
 ```shell
-PULSAR_VERSION=2.X.Y ./site2/tools/api/python/build-docs-in-docker.sh
+PULSAR_VERSION=2.X.Y ./site2/tools/apidoc/python/pdoc-generator.sh
 ```
 
 Note that it builds the docs within a docker image, so you'll need to have docker running.
