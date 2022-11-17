@@ -168,16 +168,16 @@ module.exports = {
             },
             {
               label: "Quickstart",
-              to: "/docs",
+              to: "/docs/",
             },
             {
               label: "Ecosystem",
-              to: "/ecosystem",
+              to: "/ecosystem/",
             },
           ],
         },
         {
-          href: `/docs/${versions[0]}`,
+          href: `/docs/${versions[0]}/`,
           position: "right",
           label: "Docs",
         },
