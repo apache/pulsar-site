@@ -37,6 +37,13 @@ Authentication settings of the client.
 
 **Default**: `null`
 
+### autoCertRefreshSeconds
+Seconds of auto refreshing certificate.
+
+**Type**: `int`
+
+**Default**: `300`
+
 ### concurrentLookupRequest
 The number of concurrent lookup requests that can be sent on each broker connection. Setting a maximum prevents overloading a broker.
 
@@ -190,6 +197,13 @@ URL of proxy service. proxyServiceUrl and proxyProtocol must be mutually inclusi
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+### readTimeoutMs
+Maximum read time of a request.
+
+**Type**: `int`
+
+**Default**: `60000`
 
 ### requestTimeoutMs
 Maximum duration for completing a request.
