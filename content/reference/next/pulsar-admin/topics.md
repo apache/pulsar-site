@@ -1140,6 +1140,7 @@ $ pulsar-admin topics set-offload-policies options
 | `-dl, --offloadDeletionLagInMillis` | ManagedLedger offload deletion lag in bytes|null||
 | `-rb, --readBufferSizeInBytes` | ManagedLedger offload read buffer size in bytes,s3 and google-cloud-storage requires this parameter|0||
 | `-i, --aws-id` | AWS Credential Id to use when using driver S3 or aws-s3|null||
+| `-ts, --offloadThresholdInSeconds` | ManagedLedger offload threshold in seconds|null||
 | `-d, --driver` | ManagedLedger offload driver|null||
 | `--ro, --s3-role` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null||
 | `-m, --maxBlockSizeInBytes` | ManagedLedger offload max block Size in bytes,s3 and google-cloud-storage requires this parameter|0||

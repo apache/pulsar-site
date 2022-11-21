@@ -1694,6 +1694,7 @@ $ pulsar-admin namespaces set-offload-policies options
 | `--driver, -d` | Driver to use to offload old data to long term storage, (Possible values: S3, aws-s3, google-cloud-storage, filesystem, azureblob)|null||
 | `--endpoint, -e` | Alternative endpoint to connect to, s3 default is s3ManagedLedgerOffloadServiceEndpoint in broker.conf|null||
 | `--aws-id, -i` | AWS Credential Id to use when using driver S3 or aws-s3|null||
+| `--offloadAfterThresholdInSeconds, -oats` | Offload after threshold seconds (eg: 1,5,10)|null||
 | `--offloadedReadPriority, -orp` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null||
 
 

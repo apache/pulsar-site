@@ -1075,6 +1075,7 @@ $ pulsar-admin topicPolicies set-offload-policies options
 | `-i, --aws-id` | AWS Credential Id to use when using driver S3 or aws-s3|null||
 | `--ro, --s3-role` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null||
 | `--s3-role-session-name, -rsn` | S3 role session name used for STSAssumeRoleSessionCredentialsProvider|null||
+| `-ts, --offloadThresholdInSeconds` | ManagedLedger offload threshold in seconds|null||
 | `--offloadedReadPriority, -orp` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null||
 | `-d, --driver` | ManagedLedger offload driver|null||
 | `-e, --endpoint` | ManagedLedger offload service endpoint, only s3 requires this parameter|null||
