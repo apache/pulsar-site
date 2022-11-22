@@ -1,3 +1,5 @@
-- For how to preview Pulsar website changes, see [Preview Website Changes](https://docs.google.com/document/d/1wszdtMRo6MhKbVaggPK7_bnKaC4TewuT--GWZZxJNGg/edit#bookmark=id.rshrr6sdmd56) in **Pulsar Content Preview Guide**.
+# Pulsar Official Website
 
-- For more documentation guides, see [Pulsar Documentation Contribution Guide](https://docs.google.com/document/d/11DTnNPpvcPrebLkMAFcDEIFlD8ARD-k6F-LXoIwdD9Y/edit#).
+For how to preview Pulsar website changes, see [Content Preview](https://pulsar.apache.org/contribute/document-preview).
+
+For more documentation and website guides, see [Documentation Guide](https://pulsar.apache.org/contribute/document-intro).
