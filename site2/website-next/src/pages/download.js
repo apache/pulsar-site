@@ -11,7 +11,7 @@ const releases = require(`../../releases.json`);
 const legacyVersions = require(`../../legacy-versions.json`);
 const pulsarManagerReleases = require(`../../pulsar-manager/pulsar-manager-release.json`);
 const pulsarAdaptersReleases = require(`../../pulsar-manager/pulsar-adapters-release.json`);
-const pulsarCppReleases = require(`../../pulsar-cpp/releases.json`)
+const pulsarCppReleases = require(`../../data/release-cpp.js`);
 const connectors = require(`../../data/connectors.js`);
 
 function getLatestArchiveMirrorUrl(version, type) {
@@ -110,16 +110,18 @@ export default function page(props) {
     };
   });
 
-  const pulsarCppReleaseInfo = pulsarCppReleases.map((version) => {
-    const url = pulsarCppUrl(version);
-    const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`;
-    return {
-      release: version,
-      link: pulsarCppUrl(version),
-      linkText: `apache-pulsar-cpp-${version}`,
-      asc: `${tarPath}.asc`,
-      sha512: `${tarPath}.sha512`
-    };
+  const pulsarCppReleaseInfo = pulsarCppReleases.map(item => item.vtag)
+    .filter(version => Number(version.split('.')[0]) >= 3)
+    .map(version => {
+      const url = pulsarCppUrl(version);
+      const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`;
+      return {
+        release: version,
+        link: pulsarCppUrl(version),
+        linkText: `apache-pulsar-cpp-${version}`,
+        asc: `${tarPath}.asc`,
+        sha512: `${tarPath}.sha512`
+      };
   });
 
   const pulsarManagerReleaseInfo = pulsarManagerReleases.map((version) => {
