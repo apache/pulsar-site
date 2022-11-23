@@ -11,6 +11,7 @@ const releases = require(`../../releases.json`);
 const legacyVersions = require(`../../legacy-versions.json`);
 const pulsarManagerReleases = require(`../../pulsar-manager/pulsar-manager-release.json`);
 const pulsarAdaptersReleases = require(`../../pulsar-manager/pulsar-adapters-release.json`);
+const pulsarCppReleases = require(`../../pulsar-cpp/releases.json`)
 const connectors = require(`../../data/connectors.js`);
 
 function getLatestArchiveMirrorUrl(version, type) {
@@ -43,6 +44,10 @@ function archiveUrl(version, type) {
   } else {
     return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz`;
   }
+}
+
+function pulsarCppUrl(version) {
+  return `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`;
 }
 
 function pularManagerArchiveUrl(version, type) {
@@ -102,6 +107,18 @@ export default function page(props) {
       version: version,
       binArchiveUrl: archiveUrl(version, "bin"),
       srcArchiveUrl: archiveUrl(version, "src"),
+    };
+  });
+
+  const pulsarCppReleaseInfo = pulsarCppReleases.map((version) => {
+    const url = pulsarCppUrl(version);
+    const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`;
+    return {
+      release: version,
+      link: pulsarCppUrl(version),
+      linkText: `apache-pulsar-cpp-${version}`,
+      asc: `${tarPath}.asc`,
+      sha512: `${tarPath}.sha512`
     };
   });
 
@@ -327,6 +344,16 @@ export default function page(props) {
             <Translate>Older releases</Translate>
           </h2>
           <OldReleaseTable data={oldReleases}></OldReleaseTable>
+          <header className="postHeader mt-12">
+            <h1>
+              <Translate>Pulsar C++ Client</Translate>
+            </h1>
+            <div>
+              <p>The Link column contains C++ packages for different systems and architectures.</p>
+            </div>
+            <hr />
+          </header>
+          <ReleaseTable data={pulsarCppReleaseInfo}></ReleaseTable>
           <header className="postHeader mt-12">
             <h1>
               <Translate>Pulsar Adapters</Translate>
