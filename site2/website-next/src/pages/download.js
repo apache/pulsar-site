@@ -46,10 +46,6 @@ function archiveUrl(version, type) {
   }
 }
 
-function pulsarCppUrl(version) {
-  return `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`;
-}
-
 function pularManagerArchiveUrl(version, type) {
   return `https://archive.apache.org/dist/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
 }
@@ -113,11 +109,11 @@ export default function page(props) {
   const pulsarCppReleaseInfo = pulsarCppReleases.map(item => item.vtag)
     .filter(version => Number(version.split('.')[0]) >= 3)
     .map(version => {
-      const url = pulsarCppUrl(version);
+      const url = `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`;
       const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`;
       return {
         release: version,
-        link: pulsarCppUrl(version),
+        link: url,
         linkText: `apache-pulsar-cpp-${version}`,
         asc: `${tarPath}.asc`,
         sha512: `${tarPath}.sha512`
@@ -351,7 +347,7 @@ export default function page(props) {
               <Translate>Pulsar C++ Client</Translate>
             </h1>
             <div>
-              <p>The Link column contains C++ packages for different systems and architectures.</p>
+              <p>The Link column contains C++ packages for various systems and architectures.</p>
             </div>
             <hr />
           </header>
