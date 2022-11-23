@@ -11,6 +11,7 @@ const releases = require(`../../releases.json`);
 const legacyVersions = require(`../../legacy-versions.json`);
 const pulsarManagerReleases = require(`../../pulsar-manager/pulsar-manager-release.json`);
 const pulsarAdaptersReleases = require(`../../pulsar-manager/pulsar-adapters-release.json`);
+const pulsarCppReleases = require(`../../data/release-cpp.js`);
 const connectors = require(`../../data/connectors.js`);
 
 function getLatestArchiveMirrorUrl(version, type) {
@@ -103,6 +104,20 @@ export default function page(props) {
       binArchiveUrl: archiveUrl(version, "bin"),
       srcArchiveUrl: archiveUrl(version, "src"),
     };
+  });
+
+  const pulsarCppReleaseInfo = pulsarCppReleases.map(item => item.vtag)
+    .filter(version => Number(version.split('.')[0]) >= 3)
+    .map(version => {
+      const url = `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`;
+      const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`;
+      return {
+        release: version,
+        link: url,
+        linkText: `apache-pulsar-cpp-${version}`,
+        asc: `${tarPath}.asc`,
+        sha512: `${tarPath}.sha512`
+      };
   });
 
   const pulsarManagerReleaseInfo = pulsarManagerReleases.map((version) => {
@@ -327,6 +342,16 @@ export default function page(props) {
             <Translate>Older releases</Translate>
           </h2>
           <OldReleaseTable data={oldReleases}></OldReleaseTable>
+          <header className="postHeader mt-12">
+            <h1>
+              <Translate>Pulsar C++ Client</Translate>
+            </h1>
+            <div>
+              <p>The Link column contains C++ packages for various systems and architectures.</p>
+            </div>
+            <hr />
+          </header>
+          <ReleaseTable data={pulsarCppReleaseInfo}></ReleaseTable>
           <header className="postHeader mt-12">
             <h1>
               <Translate>Pulsar Adapters</Translate>
