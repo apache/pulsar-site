@@ -49,12 +49,12 @@ poetry install
 
 Pytools provides the following executables:
 
-### [cpp_doxygen_generator](bin/cpp_doxygen_generator.py)
+### [cpp_doxygen_generator](bin/cpp_apidoc_generator.py)
 
 This executable generate API docs for Pulsar C++ Client using [`doxygen`](https://doxygen.nl/):
 
 ```bash
-poetry run bin/cpp_doxygen_generator.py <VERSION>
+poetry run bin/cpp_apidoc_generator.py <VERSION>
 ```
 
 ... where the `VERSION` is released semantic version like `2.10.2` or `3.0.0`.
