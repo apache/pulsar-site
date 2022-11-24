@@ -115,12 +115,20 @@ For minor releases, the tag is like `2.3.1`.
 mvn clean install -DskipTests
 ```
 
-After the build, there will be 4 generated artifacts:
+After the build, there will be 5 generated artifacts and the connectors directory with all the Pulsar IO nar files:
 
 * `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
 * `target/apache-pulsar-2.X.0-src.tar.gz`
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
-* directory `distribution/io/target/apache-pulsar-io-connectors-2.x.0-bin` contains all io connect nars
+* `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.zip`
+* directory `distribution/io/target/apache-pulsar-io-connectors-2.x.0-bin`
+
+:::note
+
+The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.0.
+
+:::
 
 Inspect the artifacts:
 * Check that the `LICENSE` and `NOTICE` files cover all included jars for the -bin package)
