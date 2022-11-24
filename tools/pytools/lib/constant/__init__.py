@@ -12,6 +12,11 @@ def site_path():
     return root_path() / 'site2' / 'website-next'
 
 
+@functools.lru_cache
+def tool_path():
+    return root_path() / 'tools' / 'pytools'
+
+
 def _basedir_relative(level: int) -> Path:
     result = Path(__file__)
     for _ in range(level):

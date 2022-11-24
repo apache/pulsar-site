@@ -2,13 +2,21 @@
 
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-from execute import doxygen_generator
+import semver
+from execute import pydoctor_generator
+
+
+def _dispatch(version: str):
+    ver = semver.VersionInfo.parse(version)
+    if ver.compare('3.0.0') < 0:
+        pass
+    else:
+        pydoctor_generator.execute(version)
+
 
 if __name__ == '__main__':
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
-    parser.set_defaults(func=parser.print_help)
-
-    parser.set_defaults(func=doxygen_generator.execute)
+    parser.set_defaults(func=_dispatch)
     parser.add_argument('version', metavar='VERSION', help='version of Pulsar C++ Client')
 
     args = parser.parse_args()
