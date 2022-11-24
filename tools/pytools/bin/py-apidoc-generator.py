@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-#
+#!/usr/bin/env python3
+
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -16,18 +16,28 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-#
+
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+
+import semver
+from execute import pydoctor_generator, pdoc_generator
 
 
-set -x -e
+def _dispatch(version: str):
+    ver = semver.VersionInfo.parse(version)
+    if ver.compare('3.0.0') < 0:
+        pdoc_generator.execute(version)
+    else:
+        pydoctor_generator.execute(version)
 
-if [ -z "$PULSAR_VERSION" ]; then
-    echo "PULSAR_VERSION must be set."
-    exit 1
-fi
 
-python -m pip install --upgrade pip
+if __name__ == '__main__':
+    parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.set_defaults(func=_dispatch)
+    parser.add_argument('version', metavar='VERSION', help='version of Pulsar C++ Client')
 
-pip install -U pdoc
-pip install pulsar-client==${PULSAR_VERSION}
-pdoc pulsar -o /pulsar/site2/website-next/static/api/python/${PULSAR_VERSION}
+    args = parser.parse_args()
+    fn = args.func
+    args = dict(vars(args))
+    del args['func']
+    fn(**args)

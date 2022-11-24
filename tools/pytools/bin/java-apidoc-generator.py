@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-#
+#!/usr/bin/env python3
+
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -16,23 +16,18 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-#
 
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-set -x -e
+from execute import javadoc_generator
 
-if [ -z "$PULSAR_VERSION" ]; then
-    echo "PULSAR_VERSION must be set."
-    exit 1
-fi
+if __name__ == '__main__':
+    parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.set_defaults(func=javadoc_generator.execute)
+    parser.add_argument('version', metavar='VERSION', help='version of Apache Pulsar')
 
-python -m pip install --upgrade pip
-
-pip install -U pydoctor
-git clone https://github.com/apache/pulsar-client-python --single-branch --branch v$PULSAR_VERSION
-pydoctor --make-html \
-            --html-viewsource-base=https://github.com/apache/pulsar-client-python/tree/v$PULSAR_VERSION \
-            --docformat=numpy --theme=readthedocs \
-            --intersphinx=https://docs.python.org/3/objects.inv \
-            --html-output=/pulsar/site2/website-next/static/api/python/${PULSAR_VERSION} \
-            pulsar-client-python/pulsar
+    args = parser.parse_args()
+    fn = args.func
+    args = dict(vars(args))
+    del args['func']
+    fn(**args)
