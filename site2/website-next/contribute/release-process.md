@@ -124,7 +124,11 @@ After the build, there will be 5 generated artifacts and the connectors director
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.zip`
 * directory `distribution/io/target/apache-pulsar-io-connectors-2.x.0-bin`
 
-Note: the _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.0.
+:::note
+
+The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.0.
+
+:::
 
 Inspect the artifacts:
 * Check that the `LICENSE` and `NOTICE` files cover all included jars for the -bin package)
