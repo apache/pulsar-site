@@ -416,12 +416,16 @@ Then you can run `twin upload` to upload those wheel files.
 After publishing the python client docs, run the following script from the apache/pulsar-site `main` branch:
 
 ```shell
-PULSAR_VERSION=2.X.Y ./site2/tools/apidoc/python/pdoc-generator.sh
+cd tools/pytools
+poetry install
+poetry run bin/py-apidoc-generator.py 2.8.3
 ```
 
-Note that it builds the docs within a docker image, so you'll need to have docker running.
+Note that before version 3.0.0, it builds the docs within a docker image, so you'll need to have docker running.
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `site2/website/static/api/python`.
+
+Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
 ## Publish Homebrew libpulsar package
 

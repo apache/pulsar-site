@@ -19,7 +19,7 @@
 
 -->
 
-# Python tools to support website development
+# Python tools to support Pulsar document/website development
 
 ## Prerequisite
 
@@ -64,7 +64,7 @@ poetry run bin/cpp-apidoc-generator.py <VERSION>
 This executable generate API docs for Pulsar Python Client:
 
 ```bash
-poetry run bin/cpp-apidoc-generator.py <VERSION>
+poetry run bin/py-apidoc-generator.py <VERSION>
 ```
 
 ... where the `VERSION` is released semantic version like `2.10.2` or `3.0.0`.
