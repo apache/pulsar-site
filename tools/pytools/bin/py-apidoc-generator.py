@@ -3,13 +3,13 @@
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 import semver
-from execute import pydoctor_generator
+from execute import pydoctor_generator, pdoc_generator
 
 
 def _dispatch(version: str):
     ver = semver.VersionInfo.parse(version)
     if ver.compare('3.0.0') < 0:
-        pass
+        pdoc_generator.execute(version)
     else:
         pydoctor_generator.execute(version)
 

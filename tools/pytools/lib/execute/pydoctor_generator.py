@@ -3,7 +3,7 @@ from pathlib import Path
 
 import semver
 from command import find_command, run
-from constant import site_path, tool_path
+from constant import site_path, pytools_path
 
 
 def execute(version: str):
@@ -13,7 +13,7 @@ def execute(version: str):
     ver = semver.VersionInfo.parse(version)
     assert ver.compare('3.0.0') >= 0
 
-    tmpdir = (Path(tool_path()) / 'tmp').absolute()
+    tmpdir = (Path(pytools_path()) / 'tmp').absolute()
     with tempfile.TemporaryDirectory(dir=tmpdir) as cwd:
         v = f"{ver.major}.{ver.minor}.{ver.patch}"
         tag = f"v{ver.major}.{ver.minor}.{ver.patch}"

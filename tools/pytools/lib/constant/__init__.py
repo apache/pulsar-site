@@ -13,7 +13,7 @@ def site_path():
 
 
 @functools.lru_cache
-def tool_path():
+def pytools_path():
     return root_path() / 'tools' / 'pytools'
 
 
