@@ -10,7 +10,6 @@ Usage
 pulsar-shell
 ```
 
-Options
 
 | Flag               | Description                                                               | Default          |
 |--------------------|---------------------------------------------------------------------------|------------------|
@@ -29,7 +28,6 @@ pulsar-shell -e [COMMAND]
 echo "[COMMAND]" | pulsar-shell -
 ```
 
-Options
 
 | Flag                      | Description                                                                                         | Default         |
 |---------------------------|-----------------------------------------------------------------------------------------------------|-----------------|
@@ -68,13 +66,27 @@ Create a new configuration.
 default(localhost)> config create --file ./conf/client.conf mycluster
 ```
 
-Options
 
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
 | `--file` | File path of the config. |  | 
 | `--url`  | URL of the config.       |  |
 | `--value`  | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |  |
+
+
+#### `clone`
+
+Create a new configuration cloning an existing one.
+
+```bash
+default(localhost)> config clone mycluster --name mycluster2
+```
+
+
+| Flag     | Description              | Default         |
+|----------|--------------------------|-----------------|
+| `--name` | Name of the new config.  |                 | 
+
 
 #### `update`
 
@@ -84,7 +96,6 @@ Update an existing configuration.
 default(localhost)> config update --file ./conf/client.conf mycluster
 ```
 
-Options
 
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
@@ -100,7 +111,6 @@ Set a value for a specified configuration property.
 default(localhost)> config set-property -p webServiceUrl -v http://<cluster-hostname> mycluster
 ```
 
-Options
 
 | Flag               | Description                 | Default         |
 |--------------------|-----------------------------|-----------------|
@@ -116,7 +126,6 @@ Get the value for a specified configuration property.
 default(localhost)> config get-property -p webServiceUrl mycluster
 ```
 
-Options
 
 | Flag               | Description                 | Default         |
 |--------------------|-----------------------------|-----------------|
