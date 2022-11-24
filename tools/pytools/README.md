@@ -71,3 +71,13 @@ poetry run bin/py-apidoc-generator.py <VERSION>
 
 * Releases start from 3.0.0 uses [`pydoctor`](https://github.com/twisted/pydoctor) to generate API docs.
 * Releases before 3.0.0 uses [`pdoc`](https://github.com/mitmproxy/pdoc) to generate API docs.
+
+### [java-apidoc-generator](bin/java-apidoc-generator.py)
+
+This executable generate API docs for Pulsar Java Client, Admin and Functions using Maven:
+
+```bash
+poetry run bin/java-apidoc-generator.py <VERSION>
+```
+
+... where the `VERSION` is released semantic version like `2.10.2`.
