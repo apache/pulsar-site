@@ -10,7 +10,6 @@ Usage
 pulsar-shell
 ```
 
-
 | Flag               | Description                                                               | Default          |
 |--------------------|---------------------------------------------------------------------------|------------------|
 | `-c`, `--config`   | Client configuration file. It is used as a `default` config.           | conf/client.conf | 
@@ -27,7 +26,6 @@ pulsar-shell -f [FILE]
 pulsar-shell -e [COMMAND]
 echo "[COMMAND]" | pulsar-shell -
 ```
-
 
 | Flag                      | Description                                                                                         | Default         |
 |---------------------------|-----------------------------------------------------------------------------------------------------|-----------------|
@@ -66,7 +64,6 @@ Create a new configuration.
 default(localhost)> config create --file ./conf/client.conf mycluster
 ```
 
-
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
 | `--file` | File path of the config. |  | 
@@ -81,13 +78,9 @@ Create a new configuration cloning an existing one.
 ```bash
 default(localhost)> config clone mycluster --name mycluster2
 ```
-
-
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
 | `--name` | Name of the new config.  |                 | 
-
-
 #### `update`
 
 Update an existing configuration.
@@ -95,7 +88,6 @@ Update an existing configuration.
 ```bash
 default(localhost)> config update --file ./conf/client.conf mycluster
 ```
-
 
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
@@ -111,7 +103,6 @@ Set a value for a specified configuration property.
 default(localhost)> config set-property -p webServiceUrl -v http://<cluster-hostname> mycluster
 ```
 
-
 | Flag               | Description                 | Default         |
 |--------------------|-----------------------------|-----------------|
 | `-p`, `--property` | Property name to update.    |  | 
@@ -125,7 +116,6 @@ Get the value for a specified configuration property.
 ```bash
 default(localhost)> config get-property -p webServiceUrl mycluster
 ```
-
 
 | Flag               | Description                 | Default         |
 |--------------------|-----------------------------|-----------------|
