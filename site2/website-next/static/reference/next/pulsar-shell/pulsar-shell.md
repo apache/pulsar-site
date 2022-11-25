@@ -69,8 +69,6 @@ default(localhost)> config create --file ./conf/client.conf mycluster
 | `--file` | File path of the config. |  | 
 | `--url`  | URL of the config.       |  |
 | `--value`  | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |  |
-
-
 #### `clone`
 
 Create a new configuration cloning an existing one.
