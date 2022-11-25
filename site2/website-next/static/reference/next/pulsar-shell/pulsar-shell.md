@@ -81,6 +81,7 @@ default(localhost)> config clone mycluster --name mycluster2
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
 | `--name` | Name of the new config.  |                 | 
+
 #### `update`
 
 Update an existing configuration.
