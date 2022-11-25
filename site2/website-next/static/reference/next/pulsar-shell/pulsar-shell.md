@@ -77,6 +77,7 @@ Create a new configuration cloning an existing one.
 ```bash
 default(localhost)> config clone mycluster --name mycluster2
 ```
+
 | Flag     | Description              | Default         |
 |----------|--------------------------|-----------------|
 | `--name` | Name of the new config.  |                 | 
