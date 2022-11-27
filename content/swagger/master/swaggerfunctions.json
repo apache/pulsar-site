@@ -1016,19 +1016,19 @@
         "peerAddress" : {
           "$ref" : "#/definitions/SocketAddress"
         },
+        "subscription" : {
+          "type" : "string"
+        },
         "tlsCertificates" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/Certificate"
           }
         },
-        "commandData" : {
-          "type" : "string"
-        },
         "httpAuthType" : {
           "type" : "string"
         },
-        "subscription" : {
+        "commandData" : {
           "type" : "string"
         }
       }
@@ -1303,11 +1303,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "fullRootName" : {
-          "$ref" : "#/definitions/PropertyName"
-        },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
+        },
+        "fullRootName" : {
+          "$ref" : "#/definitions/PropertyName"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -1321,11 +1321,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
@@ -1642,12 +1642,12 @@
     "FunctionInstanceStatsData" : {
       "type" : "object",
       "properties" : {
-        "oneMin" : {
-          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
-        },
         "lastInvocation" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "oneMin" : {
+          "$ref" : "#/definitions/FunctionInstanceStatsDataBase"
         },
         "userMetrics" : {
           "type" : "object",
@@ -1656,6 +1656,14 @@
             "format" : "double"
           }
         },
+        "userExceptionsTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "avgProcessLatency" : {
+          "type" : "number",
+          "format" : "double"
+        },
         "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1667,20 +1675,20 @@
         "systemExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "userExceptionsTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "avgProcessLatency" : {
-          "type" : "number",
-          "format" : "double"
         }
       }
     },
     "FunctionInstanceStatsDataBase" : {
       "type" : "object",
       "properties" : {
+        "userExceptionsTotal" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "avgProcessLatency" : {
+          "type" : "number",
+          "format" : "double"
+        },
         "receivedTotal" : {
           "type" : "integer",
           "format" : "int64"
@@ -1692,14 +1700,6 @@
         "systemExceptionsTotal" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "userExceptionsTotal" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "avgProcessLatency" : {
-          "type" : "number",
-          "format" : "double"
         }
       }
     },
@@ -2411,26 +2411,6 @@
             "format" : "byte"
           }
         },
-        "messageId" : {
-          "$ref" : "#/definitions/MessageId"
-        },
-        "encryptionCtx" : {
-          "$ref" : "#/definitions/EncryptionContext"
-        },
-        "redeliveryCount" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "readerSchema" : {
-          "$ref" : "#/definitions/SchemaObject"
-        },
-        "brokerPublishTime" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "topicName" : {
-          "type" : "string"
-        },
         "publishTime" : {
           "type" : "integer",
           "format" : "int64"
@@ -2465,6 +2445,26 @@
         },
         "replicated" : {
           "type" : "boolean"
+        },
+        "topicName" : {
+          "type" : "string"
+        },
+        "messageId" : {
+          "$ref" : "#/definitions/MessageId"
+        },
+        "encryptionCtx" : {
+          "$ref" : "#/definitions/EncryptionContext"
+        },
+        "redeliveryCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "readerSchema" : {
+          "$ref" : "#/definitions/SchemaObject"
+        },
+        "brokerPublishTime" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "keyBytes" : {
           "type" : "array",
@@ -2753,11 +2753,11 @@
     "Schema" : {
       "type" : "object",
       "properties" : {
-        "nativeSchema" : {
-          "type" : "object"
-        },
         "schemaInfo" : {
           "$ref" : "#/definitions/SchemaInfo"
+        },
+        "nativeSchema" : {
+          "type" : "object"
         }
       }
     },
@@ -2796,11 +2796,11 @@
     "SchemaObject" : {
       "type" : "object",
       "properties" : {
-        "nativeSchema" : {
-          "type" : "object"
-        },
         "schemaInfo" : {
           "$ref" : "#/definitions/SchemaInfo"
+        },
+        "nativeSchema" : {
+          "type" : "object"
         }
       }
     },
@@ -2833,11 +2833,11 @@
         "rootName" : {
           "type" : "string"
         },
-        "fullRootName" : {
-          "$ref" : "#/definitions/PropertyName"
-        },
         "subtypeResolver" : {
           "$ref" : "#/definitions/SubtypeResolver"
+        },
+        "fullRootName" : {
+          "$ref" : "#/definitions/PropertyName"
         },
         "defaultVisibilityChecker" : {
           "$ref" : "#/definitions/VisibilityCheckerObject"
@@ -2851,11 +2851,11 @@
         "typeFactory" : {
           "$ref" : "#/definitions/TypeFactory"
         },
-        "handlerInstantiator" : {
-          "$ref" : "#/definitions/HandlerInstantiator"
-        },
         "propertyNamingStrategy" : {
           "$ref" : "#/definitions/PropertyNamingStrategy"
+        },
+        "handlerInstantiator" : {
+          "$ref" : "#/definitions/HandlerInstantiator"
         },
         "dateFormat" : {
           "$ref" : "#/definitions/DateFormat"
