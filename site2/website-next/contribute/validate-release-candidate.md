@@ -32,7 +32,7 @@ and place them in the `connectors` directory.
 Download the `*.asc` file and verify the GPG signature:
 
 ```bash
-gpg verify apache-pulsar-<release>-bin.tar.gz.asc
+gpg --verify apache-pulsar-<release>-bin.tar.gz.asc
 ```
 
 ### Validate Pub/Sub and Java Functions
