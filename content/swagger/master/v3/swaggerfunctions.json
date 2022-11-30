@@ -1896,6 +1896,14 @@
                         "format": "double"
                     }
                 },
+                "avgProcessLatency": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "systemExceptionsTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -1904,23 +1912,23 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "systemExceptionsTotal": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "userExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "avgProcessLatency": {
-                    "type": "number",
-                    "format": "double"
                 }
             }
         },
         "FunctionInstanceStatsDataBase": {
             "type": "object",
             "properties": {
+                "avgProcessLatency": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "systemExceptionsTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "receivedTotal": {
                     "type": "integer",
                     "format": "int64"
@@ -1929,17 +1937,9 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "systemExceptionsTotal": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "userExceptionsTotal": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "avgProcessLatency": {
-                    "type": "number",
-                    "format": "double"
                 }
             }
         },
@@ -2406,12 +2406,12 @@
                 "objectId": {
                     "type": "object"
                 },
+                "typeId": {
+                    "type": "object"
+                },
                 "intValue": {
                     "type": "integer",
                     "format": "int32"
-                },
-                "typeId": {
-                    "type": "object"
                 },
                 "schema": {
                     "$ref": "#/definitions/FormatSchema"
@@ -2686,6 +2686,23 @@
                         "format": "byte"
                     }
                 },
+                "messageId": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "encryptionCtx": {
+                    "$ref": "#/definitions/EncryptionContext"
+                },
+                "redeliveryCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "readerSchema": {
+                    "$ref": "#/definitions/SchemaObject"
+                },
+                "brokerPublishTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "publishTime": {
                     "type": "integer",
                     "format": "int64"
@@ -2723,23 +2740,6 @@
                 },
                 "topicName": {
                     "type": "string"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "redeliveryCount": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "brokerPublishTime": {
-                    "type": "integer",
-                    "format": "int64"
                 },
                 "keyBytes": {
                     "type": "array",
@@ -3091,15 +3091,15 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "schemaDefinition": {
+                    "type": "string"
+                },
                 "schema": {
                     "type": "array",
                     "items": {
                         "type": "string",
                         "format": "byte"
                     }
-                },
-                "schemaDefinition": {
-                    "type": "string"
                 }
             }
         },
