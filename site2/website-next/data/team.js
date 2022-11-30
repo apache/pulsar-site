@@ -21,6 +21,10 @@ module.exports = {
       apacheId: "hjf",
     },
     {
+      name: "Haiting Jiang",
+      apacheId: "jianghaiting",
+    },
+    {
       name: "Hiroyuki Sakai",
       apacheId: "hrsakai",
     },
@@ -41,12 +45,21 @@ module.exports = {
       apacheId: "jim",
     },
     {
+      name: "Jiwei Guo",
+      apacheId: "technoboy",
+      org: "StreamNative",
+    },
+    {
       name: "Joe Francis",
       apacheId: "joef",
     },
     {
       name: "Lari Hotari",
       apacheId: "lhotari",
+    },
+    {
+      name: "Lin Chen",
+      apacheId: "lordcheng10",
     },
     {
       name: "Lin Lin",
@@ -140,6 +153,10 @@ module.exports = {
       apacheId: "ayegorov",
     },
     {
+      name: "Cong Zhao",
+      apacheId: "zhaocong",
+    },
+    {
       name: "Daniel Blankensteiner",
       apacheId: "blankensteiner",
     },
@@ -171,13 +188,13 @@ module.exports = {
       org: "StreamNative",
     },
     {
-      name: "Haiting Jiang",
-      apacheId: "jianghaiting",
-    },
-    {
       name: "Yuto Furuta",
       apacheId: "k2la",
       org: "Yahoo Japan Corporation",
+    },
+    {
+      name: "Qiang Huang",
+      apacheId: "huangqiang",
     },
     {
       name: "Qiang Zhao",
@@ -216,11 +233,6 @@ module.exports = {
       apacheId: "sunfangbin",
     },
     {
-      name: "Guo Jiwei",
-      apacheId: "technoboy",
-      org: "StreamNative",
-    },
-    {
       name: "Li Li",
       apacheId: "urfree",
     },
@@ -254,6 +266,10 @@ module.exports = {
     {
       name: "Gavin Gao",
       apacheId: "zhangmingao",
+    },
+    {
+      name: "Zili Chen",
+      apacheId: "tison",
     },
     {
       name: "Zike Yang",
