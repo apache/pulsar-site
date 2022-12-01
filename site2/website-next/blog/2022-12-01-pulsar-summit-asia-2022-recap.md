@@ -21,27 +21,15 @@ And now, let’s look at some of the highlights and a round-up of this online vi
 * 14 Program Committee members
 * 18 community and media partners
 
-
 ## Keynotes and sessions at a glance
 
 This two-day virtual event brought together engineers, architects, and data scientists from the messaging and streaming communities. They talked about Pulsar adoption for different use cases, event-driven platforms, technical details, and even Pulsar integration with other ecosystems. The following is a quick recap of some of the keynotes and sessions.
-
 
 ### Keynotes
 
 * **A Cloud-Native, Unified Messaging and Streaming System for Modern Data Infrastructure (Mandarin)**: Jia Zhai, an Apache Pulsar PMC member, gave a high-level overview of Apache Pulsar and explained how it meets the requirements for messaging and streaming with its cloud-native features.
 * **What You Should Know about Apache Pulsar in 2022 (Mandarin)**: Penghui Li, an Apache Pulsar PMC member, talked about some of the existing problems in Pulsar and how the Pulsar community would work to solve them going forward.
 * **Event-Driven Applications Done Right (English)**: Matteo Merli, Apache Pulsar PMC Chair, provided his insights on the fundamentals of modern event-driven applications.
-
-
-### Technical deep dives
-
-* **Taking Jakarta JMS to New Generation Messaging Systems - Apache Pulsar (English)**: Enrico Olivelli and Mary Grygleski from DataStax explained how Pulsar concepts map to the Jakarta Messaging Specifications and demonstrated how to connect a Jakarta EE application to Pulsar.
-* **A New Way of Managing Pulsar with Infrastructure as Code (Mandarin): **Max Xu and Fushu Wang from StreamNative discussed how to leverage the Terraform Provider for Pulsar and the Pulsar Resources Operator to help better manage Pulsar.
-* **A Deep Dive into Pulsar's Geo-replication for High Availability (Mandarin)**: Jialing Wang from China Mobile talked about the asynchronous and synchronous data replication mechanisms, and explained how they deployed Pulsar across multiple regions and improved its performance at China Mobile.
-* **Apache Pulsar in Volcano Engine E-MapReduce: Integration and Scenarios (Mandarin)**: Xin Liang from ByteDance introduced Volcano Engine E-MapReduce, a stateless, open-source big data platform, and how Pulsar fits into the platform’s ecosystem supporting different use cases.
-* **Handling 100K Consumers with One Topic: Practices and Technical Details (English): **Hongjie Zhai from NTT Software Innovation Center shared their practices and technical details of handling 100K consumers with a single Pulsar topic.
-
 
 ### Use cases
 
@@ -51,6 +39,13 @@ This two-day virtual event brought together engineers, architects, and data scie
 * **Streaming Wars and How Apache Pulsar is Acing the Battle (English)**: Shivji Kumar Jha and Sachidananda Maharana from Nutanix talked about how they adopted Pulsar for different use cases and migrated applications from other messaging solutions to Pulsar.
 * **Tens of Trillions of Messages: How Apache Pulsar Supports Big Data Business at Tencent (Mandarin)**: Dawei Zhang from Tencent discussed how they used Apache Pulsar for big data business to support scenarios requiring high availability and strong consistency.
 
+### Technical deep dives
+
+* **Taking Jakarta JMS to New Generation Messaging Systems - Apache Pulsar (English)**: Enrico Olivelli and Mary Grygleski from DataStax explained how Pulsar concepts map to the Jakarta Messaging Specifications and demonstrated how to connect a Jakarta EE application to Pulsar.
+* **A New Way of Managing Pulsar with Infrastructure as Code (Mandarin): **Max Xu and Fushu Wang from StreamNative discussed how to leverage the Terraform Provider for Pulsar and the Pulsar Resources Operator to help better manage Pulsar.
+* **A Deep Dive into Pulsar's Geo-replication for High Availability (Mandarin)**: Jialing Wang from China Mobile talked about the asynchronous and synchronous data replication mechanisms, and explained how they deployed Pulsar across multiple regions and improved its performance at China Mobile.
+* **Apache Pulsar in Volcano Engine E-MapReduce: Integration and Scenarios (Mandarin)**: Xin Liang from ByteDance introduced Volcano Engine E-MapReduce, a stateless, open-source big data platform, and how Pulsar fits into the platform’s ecosystem supporting different use cases.
+* **Handling 100K Consumers with One Topic: Practices and Technical Details (English): **Hongjie Zhai from NTT Software Innovation Center shared their practices and technical details of handling 100K consumers with a single Pulsar topic.
 
 ### Ecosystem
 
@@ -59,7 +54,6 @@ This two-day virtual event brought together engineers, architects, and data scie
 * **Apache Pulsar + KubeEdge: Managing Edge Devices with Low Latency and Persistent Storage (Mandarin)**: Ryan Zhao from Huawei Cloud introduced a management solution for edge devices implemented through the Device Management Interface of KubeEdge and Apache Pulsar.
 * **Make Querying from Pulsar Easier: Introduce Flink Pulsar SQL Connector (English)**: Yufei Zhang from StreamNative walked through the basic concepts and examples of using Pulsar SQL Connector and discussed PulsarCatalog’s two different modes of using Pulsar as a metadata store.
 * **Migrating from RabbitMQ to Apache Pulsar: Using AMQP-on-Pulsar (AoP) in E-commerce Industry (Mandarin)**: Yifei Ming from Access Corporate Group talked about their experience of using the AMQP-on-Pulsar project to migrate RabbitMQ workloads to AoP.
-
 
 ## What’s new in the Pulsar community
 
@@ -97,7 +91,6 @@ We also have 4 new members joining the Apache Pulsar [Project Management Committ
 * [@Jason918](https://github.com/Jason918)
 
 Congratulations to them all 🎉 ! And we are looking forward to more contributions from more friends in the broader open-source community.
-
 
 ## More on Pulsar Summit Asia 2022
 
