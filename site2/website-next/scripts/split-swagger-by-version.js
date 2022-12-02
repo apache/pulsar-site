@@ -8,7 +8,7 @@ const patterns = [`${CWD}/static/swagger/*/**.json`];
 (async () => {
     const jsonFiles = await globby(patterns);
     let restApiVersions = {}
-    
+
     jsonFiles.map(async (filePath) => {
         let data = fs.readFileSync(filePath)
         let jsonData = JSON.parse(data)
@@ -18,12 +18,12 @@ const patterns = [`${CWD}/static/swagger/*/**.json`];
         let pulsarVersion = reverseList[1]
         let restApiVersion = jsonData.info.version
         let restApiDir = `${CWD}/static/swagger/${pulsarVersion}/${restApiVersion}`
-        
+
         if (!fs.existsSync(restApiDir)){
             fs.mkdirSync(restApiDir);
         }
         if (restApiVersions.hasOwnProperty(pulsarVersion)) {
-            
+
             let isHasFileFlag = false
             for (var i = 0; i < restApiVersions[pulsarVersion].length; i++) {
                 if (restApiVersion === restApiVersions[pulsarVersion][i]['version']) {
@@ -46,7 +46,7 @@ const patterns = [`${CWD}/static/swagger/*/**.json`];
             }]
 
         }
-        
+
         fs.writeFile(restApiDir + '/' + fileName, JSON.stringify(jsonData, null, 4),  function(err) {
             if (err) {
                 return console.error(err);
