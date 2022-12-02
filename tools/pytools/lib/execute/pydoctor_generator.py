@@ -32,7 +32,7 @@ def execute(version: str):
 
     tmpdir = (Path(pytools_path()) / 'tmp').absolute()
     with tempfile.TemporaryDirectory(dir=tmpdir) as cwd:
-        v = f"{ver.major}.{ver.minor}.{ver.patch}"
+        v = f"{ver.major}.{ver.minor}.x"
         tag = f"v{ver.major}.{ver.minor}.{ver.patch}"
         remote = 'https://github.com/apache/pulsar-client-python'
         run(git, 'clone', '--depth=1', '--single-branch', f'--branch={tag}', remote, cwd=cwd)

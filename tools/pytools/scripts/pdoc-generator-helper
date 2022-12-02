@@ -24,8 +24,10 @@ if [ -z "$PULSAR_VERSION" ]; then
     exit 1
 fi
 
+DOC_VERSION=$(echo "$PULSAR_VERSION" | awk -F \. '{print $1"."$2".x"}')
+
 python -m pip install --upgrade pip
 
 pip install -U pdoc
 pip install pulsar-client=="${PULSAR_VERSION}"
-pdoc pulsar -o /api/python/"${PULSAR_VERSION}"
+pdoc pulsar -o /api/python/"${DOC_VERSION}"

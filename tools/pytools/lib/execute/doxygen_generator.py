@@ -33,7 +33,7 @@ def execute(version: str):
     assert resp.status_code == 200
     config = resp.text
     config += f"\nOUTPUT_DIRECTORY={site_path()}/static/api/cpp\n"
-    config += f"\nHTML_OUTPUT={ver.major}.{ver.minor}.{ver.patch}\n"
+    config += f"\nHTML_OUTPUT={ver.major}.{ver.minor}.x\n"
 
     with tempfile.TemporaryDirectory() as cwd:
         tag = f"v{ver.major}.{ver.minor}.{ver.patch}"
