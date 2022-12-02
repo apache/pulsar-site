@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.pulsar.client.admin"},{"l":"org.apache.pulsar.client.admin.internal"},{"l":"org.apache.pulsar.client.admin.internal.http"}];updateSearchResults();
