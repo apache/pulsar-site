@@ -41,7 +41,9 @@ def execute(version: str):
         f = tarfile.open(fileobj=resp.raw, mode='r|gz')
         f.extractall(cwd)
         print(f'Extract source code to {cwd}')
+
         src = Path(cwd) / f'apache-pulsar-{v}-src'
+        v = f"{ver.major}.{ver.minor}.x"
 
         # client
         dst = site_path() / 'static' / 'api' / 'client' / v
