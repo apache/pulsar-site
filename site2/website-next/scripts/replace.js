@@ -122,15 +122,8 @@ function multiClientVersionUrl(version, type) {
   return `${siteConfig.url}/api/${type}/${version}`
 }
 
-function clientVersionUrl(version, type) {
-  var versions = version.split(".");
-  var majorVersion = parseInt(versions[0]);
-  var minorVersion = parseInt(versions[1]);
-  if (majorVersion === 2 && minorVersion < 5) {
-    return `(${siteConfig.url}/api/${type}/${version}`;
-  } else {
-    return `(${siteConfig.url}/api/${type}/${majorVersion}.${minorVersion}.0-SNAPSHOT`;
-  }
+function javadocVersionUrl(version, type) {
+  return `(${siteConfig.url}/api/${type}/${version}`
 }
 
 function doReplace(options) {
@@ -148,8 +141,8 @@ function doReplace(options) {
 
 const versions = getVersions();
 
-const latestVersion = getRealVersion(versions[0]);
-const latestVersionWithoutIncubating = latestVersion.replace("-incubating", "");
+const latestMajorRelease = versions[0];
+const latestVersion = getRealVersion(latestMajorRelease);
 
 const from = [
   /@pulsar:version_number@/g,
@@ -186,7 +179,7 @@ const options = {
   files: [`${nextDocsDir}/*.md`, `${nextDocsDir}/**/*.md`],
   from: from,
   to: [
-    `${latestVersionWithoutIncubating}`,
+    `${latestVersion}`,
     `${latestVersion}`,
     binaryReleaseUrl(`${latestVersion}`),
     connectorReleaseUrl(`${latestVersion}`),
@@ -205,11 +198,11 @@ const options = {
     debDistUrl(`${latestVersion}`, ""),
     debDistUrl(`${latestVersion}`, "-dev"),
 
-    multiClientVersionUrl(`${latestVersion}`, "python"),
-    multiClientVersionUrl(`${latestVersion}`, "cpp"),
-    clientVersionUrl(`${latestVersion}`, "pulsar-functions"),
-    clientVersionUrl(`${latestVersion}`, "client"),
-    clientVersionUrl(`${latestVersion}`, "admin"),
+    multiClientVersionUrl(`${latestMajorRelease}`, "python"),
+    multiClientVersionUrl(`${latestMajorRelease}`, "cpp"),
+    javadocVersionUrl(`${latestMajorRelease}`, "pulsar-functions"),
+    javadocVersionUrl(`${latestMajorRelease}`, "client"),
+    javadocVersionUrl(`${latestMajorRelease}`, "admin"),
 
     `${latestVersion}`,
 
@@ -249,11 +242,11 @@ for (let _v of versions) {
       rpmDistUrl(`${v}`, "-devel"),
       debDistUrl(`${v}`, ""),
       debDistUrl(`${v}`, "-dev"),
-      multiClientVersionUrl(`${v}`, "python"),
-      multiClientVersionUrl(`${v}`, "cpp"),
-      clientVersionUrl(`${v}`, "pulsar-functions"),
-      clientVersionUrl(`${v}`, "client"),
-      clientVersionUrl(`${v}`, "admin"),
+      multiClientVersionUrl(`${_v}`, "python"),
+      multiClientVersionUrl(`${_v}`, "cpp"),
+      javadocVersionUrl(`${_v}`, "pulsar-functions"),
+      javadocVersionUrl(`${_v}`, "client"),
+      javadocVersionUrl(`${_v}`, "admin"),
       `${v}`,
       '<a href="$2" target="_blank">$1</a>',
     ],
