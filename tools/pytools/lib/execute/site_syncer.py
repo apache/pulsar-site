@@ -19,7 +19,8 @@ import shutil
 import tempfile
 from pathlib import Path
 
-from command import find_command, run
+from command import find_command, run, run_pipe
+from execute import swagger_sorter
 
 
 def execute(dry_run: bool):
@@ -31,12 +32,13 @@ def execute(dry_run: bool):
         run(git, 'clone', '-b', 'master', '--depth', '1', 'https://github.com/apache/pulsar', cwd=cwd)
         main = Path(cwd) / 'pulsar' / 'site2'
         site = Path(cwd) / 'pulsar-site' / 'site2' / 'website-next'
-        shutil.move(main / 'docs', site / 'docs')
-        shutil.move(site / 'docs' / 'assets', site / 'static' / 'assets')
+        shutil.copytree(main / 'docs', site / 'docs', dirs_exist_ok=True)
+        shutil.copytree(site / 'docs' / 'assets', site / 'static' / 'assets', dirs_exist_ok=True)
+        shutil.rmtree(site / 'docs' / 'assets')
 
         main = main / 'website'
-        shutil.move(main / 'versioned_docs', site / 'versioned_docs')
-        shutil.move(main / 'versioned_sidebars', site / 'versioned_sidebars')
+        shutil.copytree(main / 'versioned_docs', site / 'versioned_docs', dirs_exist_ok=True)
+        shutil.copytree(main / 'versioned_sidebars', site / 'versioned_sidebars', dirs_exist_ok=True)
         shutil.move(main / 'sidebars.json', site / 'sidebars.json')
         shutil.move(main / 'versions.json', site / 'versions.json')
         shutil.move(main / 'releases.json', site / 'releases.json')
@@ -51,9 +53,22 @@ def execute(dry_run: bool):
             main / 'pulsar-adapters-release.json',
             site / 'pulsar-manager' / 'pulsar-adapters-release.json')
 
-        shutil.move(main / 'static' / 'swagger', site / 'static' / 'swagger')
+        shutil.copytree(main / 'static' / 'swagger', site / 'static' / 'swagger', dirs_exist_ok=True)
+        swagger_sorter.execute(site / 'static' / 'swagger')
 
-        input()
+        main = Path(cwd) / 'pulsar'
+        commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=main).read().strip()
+
+        site = Path(cwd) / 'pulsar-site'
+        run(git, 'add', '-A', '.', cwd=site)
+        run(git, 'status', cwd=site)
+        run(git, 'config', 'user.name', 'Pulsar Site Updater', cwd=site)
+        run(git, 'config', 'user.email', 'dev@pulsar.apache.org', cwd=site)
+        run(git, 'remote', '-v', cwd=site)
+        run(git, 'commit', '--allow-empty', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
+
+        if not dry_run:
+            run(git, 'push', 'origin', 'main', cwd=site)
 
 
 if __name__ == '__main__':

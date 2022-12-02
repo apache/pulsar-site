@@ -19,8 +19,6 @@ import json
 import os
 from pathlib import Path
 
-from constant import site_path
-
 
 def execute(base: Path):
     rest_api_versions = {}
@@ -51,7 +49,3 @@ def execute(base: Path):
     with (base / 'restApiVersions.json').open('w+') as m:
         json.dump(rest_api_versions, m, indent=4, sort_keys=True)
         m.write('\n')
-
-
-if __name__ == '__main__':
-    execute(site_path() / 'static' / 'swagger')
