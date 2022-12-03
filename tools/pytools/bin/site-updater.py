@@ -45,7 +45,7 @@ def _should_push(mode: Mode) -> bool:
             event = os.getenv('GITHUB_EVENT_NAME')
             print(f'repo={repo}, event={event}')
 
-            result = (repo is not None) and (repo == 'apache/pulsar')
+            result = (repo is not None) and (repo == 'apache/pulsar-site')
             result = result and (event is not None) and (event != 'pull_request')
             return result
 
