@@ -23,7 +23,7 @@ from pathlib import Path
 def execute(base: Path):
     rest_api_versions = {}
 
-    for f in base.glob('*/*.json'):
+    for f in sorted(base.glob('*/*.json')):
         filename = f.stem
         pulsar_version = f.parent.name
 
