@@ -33,9 +33,13 @@ jobs:
     steps:
       - name: Install poetry
         run: pipx install poetry
+        working-directory: tools/pytools
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'poetry'
+        working-directory: tools/pytools
       - run: poetry install
+        working-directory: tools/pytools
       - run: poetry run bin/site-updater.py
+        working-directory: tools/pytools
