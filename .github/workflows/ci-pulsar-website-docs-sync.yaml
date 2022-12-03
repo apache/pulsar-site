@@ -19,6 +19,7 @@
 
 name: CI - Pulsar Website Docs Sync from apache/pulsar
 on:
+  pull_request:
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
@@ -30,40 +31,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      - name: Docs sync from repo apache/pulsar
-        env:
-          GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
-          CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.PULSAR_CROWDIN_DOCUSAURUS_API_KEY }}
-        run: |
-          git clone -b main --depth 1 "https://$GH_TOKEN@github.com/apache/pulsar-site.git" pulsar-site
-          echo "pulsar-site clone done."
-          git clone -b master --depth 1 https://github.com/apache/pulsar.git pulsar
-          echo "pulsar clone done."
-
-          DIR=$(pwd)
-
-          cd pulsar-site/site2/website-next
-
-          sh scripts/sync-docs.sh
-
-          echo "docs override done."
-
-          cd $DIR/pulsar
-
-          PULSAR_COMMIT_ID=$(git rev-parse --short HEAD)
-
-          cd $DIR/pulsar-site
-
-          git add -A .
-          git status
-
-          git config user.name "Pulsar Site Updater"
-          git config user.email "dev@pulsar.apache.org"
-
-          git remote -v
-
-          # git diff-index --quiet HEAD || (git commit -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)" && git push -q origin main)
-          git commit --allow-empty -m "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
-          git push -q origin main
-
-          echo "Docs sync done from apache/pulsar(#$PULSAR_COMMIT_ID)"
+      - name: Install poetry
+        run: pipx install poetry
+      - name: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'poetry'
+      - run: poetry install
+      - run: poetry run bin/site-updater.py
