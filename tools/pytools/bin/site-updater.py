@@ -55,8 +55,6 @@ def _do_push(main: Path, site: Path):
     commit = run_pipe(_git, 'rev-parse', '--short', 'HEAD', cwd=main).read().strip()
     run(_git, 'add', '-A', '.', cwd=site)
     run(_git, 'status', cwd=site)
-    run(_git, 'config', 'user.name', 'Pulsar Site Updater', cwd=site)
-    run(_git, 'config', 'user.email', 'dev@pulsar.apache.org', cwd=site)
     run(_git, 'remote', '-v', cwd=site)
     run(_git, 'commit', '--allow-empty', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
     run(_git, 'push', 'origin', 'main', cwd=site)
