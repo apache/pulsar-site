@@ -41,7 +41,7 @@ def _should_push(mode: Mode) -> bool:
         case Mode.n:
             return False
         case Mode.auto:
-            repo = os.getenv('GITHUB_ACTION_REPOSITORY')
+            repo = os.getenv('GITHUB_REPOSITORY')
             event = os.getenv('GITHUB_EVENT_NAME')
             print(f'repo={repo}, event={event}')
 
