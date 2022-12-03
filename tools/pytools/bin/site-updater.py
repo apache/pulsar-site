@@ -56,6 +56,10 @@ def _do_push(main: Path, site: Path):
     run(_git, 'add', '-A', '.', cwd=site)
     run(_git, 'status', cwd=site)
     run(_git, 'remote', '-v', cwd=site)
+    if os.getenv('GITHUB_ACTIONS') is not None:
+        name = os.getenv('GITHUB_ACTOR') or 'Pulsar Site Updater'
+        run(_git, 'config', 'user.name', name, cwd=site)
+        run(_git, 'config', 'user.email', f"{name}@users.noreply.github.com", cwd=site)
     run(_git, 'commit', '--allow-empty', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
     run(_git, 'push', 'origin', 'main', cwd=site)
 
