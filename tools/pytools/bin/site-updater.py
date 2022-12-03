@@ -57,11 +57,18 @@ def _do_push(main: Path, site: Path):
     run(_git, 'status', cwd=site)
     run(_git, 'remote', '-v', cwd=site)
     if os.getenv('GITHUB_ACTIONS') is not None:
-        name = os.getenv('GITHUB_ACTOR') or 'Pulsar Site Updater'
+        if os.getenv('GITHUB_EVENT_NAME') != 'schedule':
+            name = os.getenv('GITHUB_ACTOR')
+            email = f'{name}@users.noreply.github.com'
+        else:
+            name = 'github-actions[bot]'
+            email = f'41898282+{name}@users.noreply.github.com'
         run(_git, 'config', 'user.name', name, cwd=site)
-        run(_git, 'config', 'user.email', f"{name}@users.noreply.github.com", cwd=site)
-    run(_git, 'commit', '--allow-empty', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
-    run(_git, 'push', 'origin', 'main', cwd=site)
+        run(_git, 'config', 'user.email', email, cwd=site)
+    changed = run_pipe(_git, 'status', '--porcelain', cwd=site).read().strip()
+    if len(changed) != 0:
+        run(_git, 'commit', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
+        run(_git, 'push', 'origin', 'main', cwd=site)
 
 
 if __name__ == '__main__':
