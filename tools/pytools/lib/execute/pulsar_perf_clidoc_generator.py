@@ -26,6 +26,6 @@ def execute(basedir: Path, version: str):
     perf = basedir / 'bin' / 'pulsar-perf'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-perf'
 
-    output = run_pipe(str(perf.absolute()), 'gen-doc').read().strip()
+    output = run_pipe(str(perf.absolute()), 'gen-doc').read()
     output = output.strip() + os.linesep
     (reference / 'pulsar-perf.md').write_text(output)

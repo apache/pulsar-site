@@ -26,6 +26,6 @@ def execute(basedir: Path, version: str):
     client = basedir / 'bin' / 'pulsar-client'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-client'
 
-    output = run_pipe(str(client.absolute()), 'generate_documentation').read().strip()
+    output = run_pipe(str(client.absolute()), 'generate_documentation').read()
     output = output.strip() + os.linesep
     (reference / 'pulsar-client.md').write_text(output)

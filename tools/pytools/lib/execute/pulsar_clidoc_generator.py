@@ -43,6 +43,6 @@ def execute(basedir: Path, version: str):
     ]
 
     for command in commands:
-        output = run_pipe(str(pulsar.absolute()), *command, codes={0, 255}).read().strip()
+        output = run_pipe(str(pulsar.absolute()), *command, codes={0, 255}).read()
         output = output.strip() + os.linesep
         (reference / f'{command[0]}.md').write_text(output)

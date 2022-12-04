@@ -49,6 +49,6 @@ def execute(basedir: Path, version: str):
     ]
 
     for command in commands:
-        output = run_pipe(str(admin.absolute()), 'documents', 'generate', command).read().strip()
+        output = run_pipe(str(admin.absolute()), 'documents', 'generate', command).read()
         output = output.strip() + os.linesep
         (reference / f'{command}.md').write_text(output)
