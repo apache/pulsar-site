@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -16,20 +14,16 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-#
 
-set -x
+from pathlib import Path
 
-ROOT_DIR=$(git rev-parse --show-toplevel)
-WEBSITE=$1
-VERSION=$2
-DOCS_DIR=$WEBSITE/static/reference/$VERSION/pulsar-admin
+from command import run
+from constant import site_path
 
-DOC_GEN="$ROOT_DIR/bin/pulsar-admin documents generate"
 
-COMMANDS="broker-stats brokers bookies clusters functions functions-worker namespaces ns-isolation-policy sources sinks topics topicPolicies proxy-stats resourcegroups transactions tenants resource-quotas schemas packages"
+def execute(basedir: Path, version: str):
+    perf = basedir / 'bin' / 'pulsar-perf'
+    reference = site_path() / 'static' / 'reference' / version / 'pulsar-perf'
 
-for CMD in $COMMANDS
-do
-    $DOC_GEN "$CMD" > "$DOCS_DIR/$CMD".md
-done
+    with (reference / 'pulsar-perf.md').open('w') as f:
+        run(str(perf.absolute()), 'gen-doc', stdout=f)

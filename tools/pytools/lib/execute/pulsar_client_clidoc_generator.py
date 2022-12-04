@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -16,13 +14,16 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-#
 
-set -x
+from pathlib import Path
 
-ROOT_DIR=$(git rev-parse --show-toplevel)
-WEBSITE=$1
-VERSION=$2
-DOCS_DIR=$WEBSITE/static/reference/$VERSION/pulsar-client
+from command import run
+from constant import site_path
 
-"$ROOT_DIR"/bin/pulsar-client generate_documentation > "$DOCS_DIR"/pulsar-client.md
+
+def execute(basedir: Path, version: str):
+    client = basedir / 'bin' / 'pulsar-client'
+    reference = site_path() / 'static' / 'reference' / version / 'pulsar-client'
+
+    with (reference / 'pulsar-client.md').open('w') as f:
+        run(str(client.absolute()), 'generate_documentation', stdout=f)

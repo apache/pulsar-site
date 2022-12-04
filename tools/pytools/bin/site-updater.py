@@ -50,12 +50,14 @@ def _should_push(mode: Mode) -> bool:
             return result
 
 
+git = find_command('git', msg="git is required")
+
+
 def _do_push(main: Path, site: Path):
-    _git = find_command('git', msg="git is required")
-    commit = run_pipe(_git, 'rev-parse', '--short', 'HEAD', cwd=main).read().strip()
-    run(_git, 'add', '-A', '.', cwd=site)
-    run(_git, 'status', cwd=site)
-    run(_git, 'remote', '-v', cwd=site)
+    commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=main).read().strip()
+    run(git, 'add', '-A', '.', cwd=site)
+    run(git, 'status', cwd=site)
+    run(git, 'remote', '-v', cwd=site)
     if os.getenv('GITHUB_ACTIONS') is not None:
         if os.getenv('GITHUB_EVENT_NAME') != 'schedule':
             name = os.getenv('GITHUB_ACTOR')
@@ -63,12 +65,12 @@ def _do_push(main: Path, site: Path):
         else:
             name = 'github-actions[bot]'
             email = f'41898282+{name}@users.noreply.github.com'
-        run(_git, 'config', 'user.name', name, cwd=site)
-        run(_git, 'config', 'user.email', email, cwd=site)
-    changed = run_pipe(_git, 'status', '--porcelain', cwd=site).read().strip()
+        run(git, 'config', 'user.name', name, cwd=site)
+        run(git, 'config', 'user.email', email, cwd=site)
+    changed = run_pipe(git, 'status', '--porcelain', cwd=site).read().strip()
     if len(changed) != 0:
-        run(_git, 'commit', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
-        run(_git, 'push', 'origin', 'main', cwd=site)
+        run(git, 'commit', '-m', f'Docs sync done from apache/pulsar (#{commit})', cwd=site)
+        run(git, 'push', 'origin', 'main', cwd=site)
 
 
 if __name__ == '__main__':
@@ -80,7 +82,6 @@ if __name__ == '__main__':
 
     with tempfile.TemporaryDirectory() as cwd:
         if args.master_path is None:
-            git = find_command('git', msg="git is required")
             run(git, 'clone', '-b', 'master', '--depth', '1', 'https://github.com/apache/pulsar', cwd=cwd)
             master = Path(cwd) / 'pulsar'
         else:
@@ -89,3 +90,6 @@ if __name__ == '__main__':
         site_syncer.execute(master)
         if _should_push(args.push):
             _do_push(master, root_path())
+        else:  # show changes
+            change_files = run_pipe(git, 'status', '--porcelain', cwd=root_path()).read().strip()
+            print(f'\nchange files:\n{change_files}\n')
