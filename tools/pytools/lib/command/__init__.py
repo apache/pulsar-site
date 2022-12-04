@@ -17,17 +17,24 @@
 
 import sys
 from subprocess import PIPE, Popen
-from typing import Optional, Any, TextIO
+from typing import Optional, Any, TextIO, Set
 
 
-def run(*args: str, msg: Optional[str] = None, verbose: bool = False, **kwargs: Any) -> Popen:
+def run(
+    *args: str,
+    msg: Optional[str] = None,
+    verbose: bool = False,
+    codes: Optional[Set[int]] = None,
+    **kwargs: Any
+) -> Popen:
     sys.stdout.flush()
     if verbose:
         print(f"$ {' '.join(args)}")
 
     p = Popen(args, **kwargs)
     code = p.wait()
-    if code != 0:
+    codes = codes or {0}
+    if code not in codes:
         err = f"\nfailed to run: {args}\nexit with code: {code}\n"
         if msg:
             err += f"error message: {msg}\n"
@@ -36,8 +43,14 @@ def run(*args: str, msg: Optional[str] = None, verbose: bool = False, **kwargs: 
     return p
 
 
-def run_pipe(*args: str, msg: Optional[str] = None, verbose: bool = False, **kwargs: Any) -> TextIO:
-    p = run(*args, msg=msg, verbose=verbose, stdout=PIPE, universal_newlines=True, **kwargs)
+def run_pipe(
+    *args: str,
+    msg: Optional[str] = None,
+    verbose: bool = False,
+    codes: Optional[Set[int]] = None,
+    **kwargs: Any
+) -> TextIO:
+    p = run(*args, msg=msg, verbose=verbose, codes=codes, stdout=PIPE, universal_newlines=True, **kwargs)
     return p.stdout  # type: ignore
 
 
