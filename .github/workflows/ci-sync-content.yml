@@ -62,7 +62,7 @@ jobs:
           java-version: 17
       - name: Run install by skip tests
         working-directory: tmp/pulsar
-        run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+        run: mvn -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 
       - name: Update site sources
         working-directory: tools/pytools
