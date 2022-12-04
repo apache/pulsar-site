@@ -89,3 +89,6 @@ if __name__ == '__main__':
         site_syncer.execute(master)
         if _should_push(args.push):
             _do_push(master, root_path())
+        else:  # show changes
+            change_files = run_pipe(git, 'status', '--porcelain', cwd=root_path()).read().strip()
+            print(f'\nchange files:\n{change_files}\n')

@@ -31,13 +31,6 @@ VERSION=next
 
 export NODE_OPTIONS="--max-old-space-size=16000"
 
-# Generate document for command line tools.
-"$TOOLS_DIR"/pulsar-admin-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-client-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-perf-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-"$TOOLS_DIR"/pulsar-config-doc-gen.sh "$WEBSITE_DIR" "$VERSION"
-
 cd "$WEBSITE_DIR"
 
 npm install

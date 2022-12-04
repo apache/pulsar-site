@@ -51,7 +51,7 @@ Pytools provides the following executables:
 
 ### [cpp-apidoc-generator](bin/cpp-apidoc-generator.py)
 
-This executable generate API docs for Pulsar C++ Client using [`doxygen`](https://doxygen.nl/):
+This executable generates API docs for Pulsar C++ Client using [`doxygen`](https://doxygen.nl/):
 
 ```bash
 poetry run bin/cpp-apidoc-generator.py <VERSION>
@@ -61,7 +61,7 @@ poetry run bin/cpp-apidoc-generator.py <VERSION>
 
 ### [py-apidoc-generator](bin/py-apidoc-generator.py)
 
-This executable generate API docs for Pulsar Python Client:
+This executable generates API docs for Pulsar Python Client:
 
 ```bash
 poetry run bin/py-apidoc-generator.py <VERSION>
@@ -74,10 +74,38 @@ poetry run bin/py-apidoc-generator.py <VERSION>
 
 ### [java-apidoc-generator](bin/java-apidoc-generator.py)
 
-This executable generate API docs for Pulsar Java Client, Admin and Functions using Maven:
+This executable generates API docs for Pulsar Java Client, Admin and Functions using Maven:
 
 ```bash
 poetry run bin/java-apidoc-generator.py <VERSION>
 ```
 
 ... where the `VERSION` is released semantic version like `2.10.2`.
+
+### [site-updater](bin/site-updater.py)
+
+This executable synchronizes site content from the main repo:
+
+```bash
+poetry run bin/site-updater.py --master-path=<PATH> [--push={y|n|auto}]
+```
+
+... where:
+
+1. `master-path` is path to the main repo;
+2. `push` specifies whether push to the remote site repo.
+
+### [reference-doc-generator](bin/reference-doc-generator.py)
+
+This executable generates Pulsar references, including command-line documents and configs:
+
+```bash
+poetry run bin/reference-doc-generator.py --master-path=<path> [--version=<VERSION>]
+  [--kind={all|admin|cient|config|perf|pulsar}]
+```
+
+... where:
+
+1. `master-path` is path to the main repo, which must be built to execute the `bin` scripts;
+2. `version` is the version of the main repo, default to `next` a.k.a. the latest master branch;
+3. `kind` is what references to generate, default to `all`.
