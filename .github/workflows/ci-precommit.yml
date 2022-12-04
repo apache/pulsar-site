@@ -15,20 +15,20 @@
 # specific language governing permissions and limitations
 # under the License.
 
-version: "3.1"
-services:
-  # web:
-  #   image: nginx:1.18.0-alpine
-  #   ports:
-  #     - 80:80
-  #   volumes:
-  #     - ./build:/usr/share/nginx/html
-  #   container_name: psite
-  web:
-    image: httpd:2.4.54-alpine
-    ports:
-      - 80:80
-    volumes:
-      - ./build:/usr/local/apache2/htdocs
-      - ./scripts/httpd.conf:/usr/local/apache2/conf/httpd.conf
-    container_name: psite
+name: CI - Precommit
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  license:
+    name: Check license header
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: apache/skywalking-eyes/header@main
+        with:
+          config: tools/ci/licenserc.yml
