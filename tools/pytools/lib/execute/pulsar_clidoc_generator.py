@@ -18,7 +18,7 @@
 import os
 from pathlib import Path
 
-from command import run_pipe
+from command import run
 from constant import site_path
 
 
@@ -43,6 +43,5 @@ def execute(basedir: Path, version: str):
     ]
 
     for command in commands:
-        output = run_pipe(str(pulsar.absolute()), *command, codes={0, 255}).read()
-        output = output.strip() + os.linesep
-        (reference / f'{command[0]}.md').write_text(output)
+        with (reference / f'{command[0]}.md').open('w') as f:
+            run(str(pulsar.absolute()), *command, codes={0, 255}, stdout=f)

@@ -15,10 +15,9 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import os
 from pathlib import Path
 
-from command import run_pipe
+from command import run
 from constant import site_path
 
 
@@ -26,6 +25,5 @@ def execute(basedir: Path, version: str):
     perf = basedir / 'bin' / 'pulsar-perf'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-perf'
 
-    output = run_pipe(str(perf.absolute()), 'gen-doc').read()
-    output = output.strip() + os.linesep
-    (reference / 'pulsar-perf.md').write_text(output)
+    with (reference / 'pulsar-perf.md').open('w') as f:
+        run(str(perf.absolute()), 'gen-doc', stdout=f)

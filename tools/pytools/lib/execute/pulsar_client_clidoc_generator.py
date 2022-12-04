@@ -15,10 +15,9 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import os
 from pathlib import Path
 
-from command import run_pipe
+from command import run
 from constant import site_path
 
 
@@ -26,6 +25,5 @@ def execute(basedir: Path, version: str):
     client = basedir / 'bin' / 'pulsar-client'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-client'
 
-    output = run_pipe(str(client.absolute()), 'generate_documentation').read()
-    output = output.strip() + os.linesep
-    (reference / 'pulsar-client.md').write_text(output)
+    with (reference / 'pulsar-client.md').open('w') as f:
+        run(str(client.absolute()), 'generate_documentation', stdout=f)

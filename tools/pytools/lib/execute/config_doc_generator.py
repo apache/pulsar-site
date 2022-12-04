@@ -15,12 +15,11 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import os
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
 
-from command import run_pipe, find_command
+from command import find_command, run
 from constant import site_path
 
 
@@ -95,9 +94,8 @@ def execute(master: Path, version: str):
     ]
 
     for config in configs:
-        output = run_pipe(java, '-cp', classpath, config.generator, '-c', config.classname, verbose=True).read()
-        output = output.strip() + os.linesep
-        (reference / config.type / config.filename).write_text(output)
+        with (reference / config.type / config.filename).open('w') as f:
+            run(java, '-cp', classpath, config.generator, '-c', config.classname, stdout=f)
 
     shutil.copy2(
         reference / 'config' / 'reference-configuration-broker.md',

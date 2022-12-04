@@ -18,7 +18,7 @@
 import os
 from pathlib import Path
 
-from command import run_pipe
+from command import run
 from constant import site_path
 
 
@@ -49,6 +49,5 @@ def execute(basedir: Path, version: str):
     ]
 
     for command in commands:
-        output = run_pipe(str(admin.absolute()), 'documents', 'generate', command).read()
-        output = output.strip() + os.linesep
-        (reference / f'{command}.md').write_text(output)
+        with (reference / f'{command}.md').open('w') as f:
+            run(str(admin.absolute()), 'documents', 'generate', command, stdout=f)
