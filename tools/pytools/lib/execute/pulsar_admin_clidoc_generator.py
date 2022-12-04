@@ -23,26 +23,32 @@ from constant import site_path
 
 
 def execute(basedir: Path, version: str):
-    pulsar = basedir / 'bin' / 'pulsar'
-    reference = site_path() / 'static' / 'reference' / version / 'pulsar'
+    admin = basedir / 'bin' / 'pulsar-admin'
+    reference = site_path() / 'static' / 'reference' / version / 'pulsar-admin'
 
     commands = [
-        ('broker', '-g'),
-        ('broker-tool', 'gen-doc'),
-        ('compact-topic', '-t', 'tmp', '-g'),
-        ('tokens', 'gen-doc'),
-        ('proxy', '-g'),
-        ('functions-worker', '-g'),
-        ('standalone', '-g'),
-        ('initialize-cluster-metadata', '-cs', 'cs', '-uw', 'uw', '-zk', 'zk', '-c', 'c', '-g'),
-        ('delete-cluster-metadata', '-zk', 'zk', '-g'),
-        ('initialize-transaction-coordinator-metadata', '-cs', 'cs', '-c', 'c', '-g'),
-        ('initialize-namespace', '-cs', 'cs', '-c', 'c', '-g', 'demo'),
-        ('version', '-g'),
-        ('websocket', '-g'),
+        'broker-stats',
+        'brokers',
+        'bookies',
+        'clusters',
+        'functions',
+        'functions-worker',
+        'namespaces',
+        'ns-isolation-policy',
+        'sources',
+        'sinks',
+        'topics',
+        'topicPolicies',
+        'proxy-stats',
+        'resourcegroups',
+        'transactions',
+        'tenants',
+        'resource-quotas',
+        'schemas',
+        'packages',
     ]
 
     for command in commands:
-        output = run_pipe(str(pulsar.absolute()), *command, codes={0, 255}).read().strip()
+        output = run_pipe(str(admin.absolute()), 'documents', 'generate', command).read().strip()
         output = output.strip() + os.linesep
-        (reference / f'{command[0]}.md').write_text(output)
+        (reference / f'{command}.md').write_text(output)
