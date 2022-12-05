@@ -22,7 +22,7 @@ $ pulsar standalone options
 | `--metadata-dir` | Directory for storing metadata|data/metadata|
 | `--stream-storage-port` | Local bookies stream storage port|4181|
 | `-a, --advertised-address` | Standalone broker advertised address|null|
-| `-c, --config` | Configuration file path|/home/runner/work/pulsar-site/pulsar-site/tmp/pulsar/conf/standalone.conf|
+| `-c, --config` | Configuration file path|conf/standalone.conf|
 | `--zookeeper-port` | Local zookeeper's port|2181|
 | `--bookkeeper-port` | Local bookies base port|3181|
 | `--bookkeeper-dir` | Local bookies base data directory|data/standalone/bookkeeper|
