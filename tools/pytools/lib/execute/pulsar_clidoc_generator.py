@@ -44,4 +44,10 @@ def execute(basedir: Path, version: str):
 
     for command in commands:
         with (reference / f'{command[0]}.md').open('w') as f:
-            run(str(pulsar.absolute()), *command, codes={0, 255}, stdout=f)
+            run(str(pulsar.absolute()), *command, codes={0, 255}, stdout=f, env={
+                'PULSAR_BROKER_CONF': 'conf/broker.conf',
+                'PULSAR_WORKER_CONF': 'conf/functions_worker.yml',
+                'PULSAR_PROXY_CONF': 'conf/proxy.conf',
+                'PULSAR_STANDALONE_CONF': 'conf/standalone.conf',
+                **os.environ,
+            }, cwd=basedir)
