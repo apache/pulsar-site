@@ -136,6 +136,7 @@ module.exports = {
     githubUrl,
     oldUrl,
   },
+  trailingSlash: true,
   themeConfig: {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     announcementBar: {
