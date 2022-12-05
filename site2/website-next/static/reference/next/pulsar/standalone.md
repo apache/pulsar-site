@@ -12,7 +12,7 @@ $ pulsar standalone options
 | `-g, --generate-docs` | Generate docs|true|
 | `-h, --help` | Show this help message|false|
 | `--wipe-data` | Clean up previous ZK/BK data|false|
-| `-fwc, --functions-worker-conf` | Configuration file for Functions Worker|/home/runner/work/pulsar-site/pulsar-site/tmp/pulsar/conf/functions_worker.yml|
+| `-fwc, --functions-worker-conf` | Configuration file for Functions Worker|conf/functions_worker.yml|
 | `-nss, --no-stream-storage` | Disable stream storage|false|
 | `--metadata-url` | Metadata store url||
 | `--no-broker` | Only start ZK and BK services, no broker|false|

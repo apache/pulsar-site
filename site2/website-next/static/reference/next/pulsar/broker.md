@@ -15,6 +15,6 @@ $ pulsar broker options
 | `-rfw, --run-functions-worker` | Run functions worker with Broker|false|
 | `-c, --broker-conf` | Configuration file for Broker|conf/broker.conf|
 | `-rb, --run-bookie` | Run Bookie together with Broker|false|
-| `-bc, --bookie-conf` | Configuration file for Bookie|/home/runner/work/pulsar-site/pulsar-site/tmp/pulsar/conf/bookkeeper.conf|
-| `-fwc, --functions-worker-conf` | Configuration file for Functions Worker|/home/runner/work/pulsar-site/pulsar-site/tmp/pulsar/conf/functions_worker.yml|
+| `-bc, --bookie-conf` | Configuration file for Bookie|conf/bookkeeper.conf|
+| `-fwc, --functions-worker-conf` | Configuration file for Functions Worker|conf/functions_worker.yml|
 
