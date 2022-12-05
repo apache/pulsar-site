@@ -66,6 +66,8 @@ jobs:
 
       - name: Update site sources
         working-directory: tools/pytools
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
         run: |
           poetry install
           poetry run bin/reference-doc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
