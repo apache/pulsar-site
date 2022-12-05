@@ -33,6 +33,10 @@ jobs:
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PULSARBOT_TOKEN }}
+          persist-credentials: true
+
       - name: Install poetry
         run: pipx install poetry
       - uses: actions/setup-python@v4
@@ -66,8 +70,6 @@ jobs:
 
       - name: Update site sources
         working-directory: tools/pytools
-        env:
-          GITHUB_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
         run: |
           poetry install
           poetry run bin/reference-doc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
