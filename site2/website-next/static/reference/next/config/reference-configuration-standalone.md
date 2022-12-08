@@ -4174,7 +4174,7 @@ Allow automated creation of topics if set to true (default value).
 ### allowAutoTopicCreationType
 The type of topic that is allowed to be automatically created.(partitioned/non-partitioned)
 
-**Type**: `java.lang.String`
+**Type**: `org.apache.pulsar.common.policies.data.TopicType`
 
 **Default**: `non-partitioned`
 
