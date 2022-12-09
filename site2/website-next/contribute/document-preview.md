@@ -46,8 +46,8 @@ Follow these steps to preview documentation changes on the **master** branch.
     # Preview changes on multiple versions
     sh start.sh 2.10.x 2.9.x ...
     ```
-
-3. By default, a browser window will open at http://localhost:3000 to show the changes.
+    
+  By default, a browser window will open at http://localhost:3000 to show the changes.
 
   > **Tip**
   >
