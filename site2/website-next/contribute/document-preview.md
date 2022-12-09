@@ -37,13 +37,21 @@ Follow these steps to preview documentation changes on the **master** branch.
 2. Run the following command to preview changes:
 
     ```bash
-    # Preview the next version
+    # Preview changes on latest stable version 
     sh start.sh
-    # Preview historical versions
-    sh start.sh [<version-number> ...]
+
+    # Preview changes on a specific version version
+    sh start.sh 2.10.x 
+
+    # Preview changes on multiple versions
+    sh start.sh 2.10.x 2.9.x ...
     ```
 
 3. By default, a browser window will open at http://localhost:3000 to show the changes.
+
+  > **Tip**
+  >
+  > If you want to preview changes on `master`, change the URL to `http://localhost:3000/docs/next`.
 
     ![alt_text](assets/website-preview.png)
 
@@ -92,7 +100,14 @@ Follow these steps to preview the website changes.
 2. Run the following command to preview changes:
    
    ```bash
-    ./preview.sh 2.10.x # more versions
+    # Preview changes on master
+    ./preview.sh current
+
+    # preview changes on a specific version
+    ./preview.sh 2.10.x
+
+    # preview changes on multiple versions
+    ./preview.sh 2.10.x 2.9.x ...
     ```
 
 ### Stop preview
