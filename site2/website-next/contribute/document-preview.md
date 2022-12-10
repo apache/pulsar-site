@@ -37,7 +37,7 @@ Follow these steps to preview documentation changes on the **master** branch.
 2. Run the following command to preview changes:
 
     ```bash
-    # Preview changes on latest stable version 
+    # Preview changes on latest stable version
     sh start.sh
 
     # Preview changes on a specific version version
