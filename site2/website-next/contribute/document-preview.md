@@ -49,11 +49,13 @@ Follow these steps to preview documentation changes on the **master** branch.
     
   By default, a browser window will open at http://localhost:3000 to show the changes.
 
-  > **Tip**
-  >
-  > If you want to preview changes on `master`, change the URL to `http://localhost:3000/docs/next`.
+  :::tip
+  
+  If you want to preview changes on `master`, change the URL to `http://localhost:3000/docs/next`.
 
-    ![alt_text](assets/website-preview.png)
+  :::
+
+  ![alt_text](assets/website-preview.png)
 
 ### Preview Java API document changes
 
