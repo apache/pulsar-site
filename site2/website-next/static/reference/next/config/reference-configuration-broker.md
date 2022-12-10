@@ -3735,6 +3735,17 @@ Any bookie outside the specified groups will not be used by the broker
 
 **Category**: Storage (BookKeeper)
 
+### bookkeeperClientLimitStatsLogging
+whether limit per_channel_bookie_client metrics of bookkeeper client stats
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Storage (BookKeeper)
+
 ### bookkeeperClientMinNumRacksPerWriteQuorum
 Minimum number of racks per write quorum. 
 
