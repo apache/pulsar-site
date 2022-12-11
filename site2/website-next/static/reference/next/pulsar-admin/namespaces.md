@@ -217,36 +217,6 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 | `-r, --role` | Client role to which revoke permissions|null||
 
 
-## <em>get-subscription-permission-required</em>
-
-Get whether a namespace requires explicit permission to consume from a subscription when no permission is defined.
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces get-subscription-permission-required options
-```
-
-
-
-## <em>set-subscription-permission-required</em>
-
-Set whether a role requires explicit permission to consume from a subscription that has no subscription permission defined in the namespace.
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces set-subscription-permission-required options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `--disable, -d` | Disable message encryption required|false||
-| `--enable, -e` | Enable message encryption required|false||
-
-
 ## <em>set-clusters</em>
 
 Set replication clusters for a namespace
