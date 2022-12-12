@@ -11,7 +11,7 @@ After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, pull reque
 
 When a committer believe the PR is ready to test, they will label `ready-to-test` to the PR, and then you can rerun the CI tasks by commenting `/pulsarbot run-failure-checks` and trigger the full CI validation.
 
-See also [CI Testing in Fork](testing-and-ci/personal-ci.md).
+See also [CI Testing in Fork](personal-ci.md).
 
 ## doc-*
 
