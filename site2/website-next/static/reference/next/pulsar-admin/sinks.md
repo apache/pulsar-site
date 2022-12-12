@@ -311,6 +311,10 @@ Get the list of Pulsar IO connector sinks supported by Pulsar cluster
 $ pulsar-admin sinks available-sinks options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>reload</em>
@@ -323,4 +327,8 @@ Reload the available built-in connectors
 $ pulsar-admin sinks reload options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

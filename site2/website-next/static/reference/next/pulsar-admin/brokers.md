@@ -19,6 +19,10 @@ List active brokers of the cluster
 $ pulsar-admin brokers list options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>leader-broker</em>
@@ -31,6 +35,10 @@ Get the information of the leader broker
 $ pulsar-admin brokers leader-broker options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>namespaces</em>
@@ -95,6 +103,10 @@ Get list of updatable configuration name
 $ pulsar-admin brokers list-dynamic-config options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get-all-dynamic-config</em>
@@ -107,6 +119,10 @@ Get all overridden dynamic-configuration values
 $ pulsar-admin brokers get-all-dynamic-config options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get-internal-config</em>
@@ -119,6 +135,10 @@ Get internal configuration information
 $ pulsar-admin brokers get-internal-config options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get-runtime-config</em>
@@ -131,6 +151,10 @@ Get runtime configuration values
 $ pulsar-admin brokers get-runtime-config options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>healthcheck</em>
@@ -160,6 +184,10 @@ Manually trigger backlogQuotaCheck
 $ pulsar-admin brokers backlog-quota-check options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>version</em>
@@ -172,6 +200,10 @@ Get the version of the currently connected broker
 $ pulsar-admin brokers version options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>shutdown</em>

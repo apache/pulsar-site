@@ -19,6 +19,10 @@ Gets the rack placement information for all the bookies in the cluster
 $ pulsar-admin bookies racks-placement options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>list-bookies</em>
@@ -31,6 +35,10 @@ List bookies
 $ pulsar-admin bookies list-bookies options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get-bookie-rack</em>

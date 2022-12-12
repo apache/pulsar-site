@@ -480,6 +480,10 @@ Reload the available built-in functions
 $ pulsar-admin functions reload options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>available-functions</em>
@@ -492,4 +496,8 @@ Get the list of Pulsar Functions supported by Pulsar cluster
 $ pulsar-admin functions available-functions options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

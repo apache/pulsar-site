@@ -223,4 +223,8 @@ List transaction coordinators
 $ pulsar-admin transactions coordinators-list options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

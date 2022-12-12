@@ -40,6 +40,10 @@ Get namespace isolation policy of a cluster. This operation requires Pulsar supe
 $ pulsar-admin ns-isolation-policy get options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>list</em>
@@ -52,6 +56,10 @@ List all namespace isolation policies of a cluster. This operation requires Puls
 $ pulsar-admin ns-isolation-policy list options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>delete</em>
@@ -64,6 +72,10 @@ Delete namespace isolation policy of a cluster. This operation requires Pulsar s
 $ pulsar-admin ns-isolation-policy delete options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>brokers</em>
@@ -76,6 +88,10 @@ List all brokers with namespace-isolation policies attached to it. This operatio
 $ pulsar-admin ns-isolation-policy brokers options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>broker</em>

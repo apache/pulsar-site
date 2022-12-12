@@ -278,6 +278,10 @@ Get the list of Pulsar IO connector sources supported by Pulsar cluster
 $ pulsar-admin sources available-sources options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>reload</em>
@@ -290,4 +294,8 @@ Reload the available built-in connectors
 $ pulsar-admin sources reload options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

@@ -19,6 +19,10 @@ List the existing tenants
 $ pulsar-admin tenants list options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get</em>
@@ -31,6 +35,10 @@ Gets the configuration of a tenant
 $ pulsar-admin tenants get options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>create</em>

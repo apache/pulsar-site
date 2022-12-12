@@ -19,6 +19,10 @@ List the existing resourcegroups
 $ pulsar-admin resourcegroups list options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get</em>
@@ -31,6 +35,10 @@ Gets the configuration of a resourcegroup
 $ pulsar-admin resourcegroups get options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>create</em>
@@ -83,4 +91,8 @@ Deletes an existing ResourceGroup
 $ pulsar-admin resourcegroups delete options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

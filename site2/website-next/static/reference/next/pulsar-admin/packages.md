@@ -19,6 +19,10 @@ Get a package metadata information.
 $ pulsar-admin packages get-metadata options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>update-metadata</em>
@@ -104,6 +108,10 @@ List all versions of the given package
 $ pulsar-admin packages list-versions options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>delete</em>
@@ -116,4 +124,8 @@ Delete a package
 $ pulsar-admin packages delete options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

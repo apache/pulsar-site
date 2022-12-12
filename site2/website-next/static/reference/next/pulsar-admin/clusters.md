@@ -19,6 +19,10 @@ Get the configuration data for the specified cluster
 $ pulsar-admin clusters get options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>create</em>
@@ -124,6 +128,10 @@ List the existing clusters
 $ pulsar-admin clusters list options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>update-peer-clusters</em>
@@ -172,6 +180,10 @@ Get list of peer-clusters
 $ pulsar-admin clusters get-peer-clusters options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>get-failure-domain</em>
@@ -254,4 +266,8 @@ List the existing failure-domains for a cluster
 $ pulsar-admin clusters list-failure-domains options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

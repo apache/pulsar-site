@@ -70,6 +70,10 @@ dump allocator stats
 $ pulsar-admin broker-stats allocator-stats options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>load-report</em>
@@ -82,4 +86,8 @@ dump broker load-report
 $ pulsar-admin broker-stats load-report options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

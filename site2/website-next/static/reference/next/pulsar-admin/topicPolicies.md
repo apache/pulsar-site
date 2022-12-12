@@ -1271,6 +1271,10 @@ Remove schema compatibility strategy on a topic
 $ pulsar-admin topicPolicies remove-schema-compatibility-strategy options
 ```
 
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 
 
 ## <em>set-schema-compatibility-strategy</em>
