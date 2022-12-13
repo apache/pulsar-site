@@ -25,7 +25,7 @@ from pathlib import Path
 
 from command import run, find_command, run_pipe
 from constant import root_path
-from execute import site_syncer
+from execute import site_syncer, swagger_generator
 
 
 class Mode(enum.Enum):
@@ -87,7 +87,9 @@ if __name__ == '__main__':
         else:
             master = Path(args.master_path)
 
+        swagger_generator.execute(master)
         site_syncer.execute(master)
+
         if _should_push(args.push):
             _do_push(master, root_path())
         else:  # show changes
