@@ -435,17 +435,22 @@ Release a new version of libpulsar for Homebrew, You can follow the example [her
 
 ## Update swagger file
 
-> For major releases, the swagger file update happen under `master` branch.
-> while for minor releases, swagger file is created from branch-2.x, and need copy to a new branch based on master.
+> For major releases, the swagger file update happen under `master` branch, while for minor releases, swagger file is created from branch-2.x.
 
 ```shell
+# ... in the main repo (apache/pulsar)
+cd pulsar
 git checkout branch-2.X
 mvn -am -pl pulsar-broker install -DskipTests -Pswagger
-git checkout master
+
+# ... in the site repo (apache/pulsar-site)
+cd pulsar-site
 git checkout -b fix/swagger-file
-mkdir -p site2/website/static/swagger/2.X.0
-cp pulsar-broker/target/docs/*.json site2/website/static/swagger/2.X.0
+cd tools/pytools
+poetry install
+poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar
 ```
+
 Send out a PR request for review.
 
 ## Write release notes
