@@ -22,7 +22,8 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from pathlib import Path
 
 from command import run, find_command
-from execute import swagger_generator
+from constant import site_path
+from execute import swagger_generator, swagger_sorter
 
 if __name__ == '__main__':
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
@@ -39,3 +40,5 @@ if __name__ == '__main__':
             master = Path(args.master_path)
 
         swagger_generator.execute(master)
+        swagger_sorter.execute(site_path() / 'static' / 'swagger')
+
