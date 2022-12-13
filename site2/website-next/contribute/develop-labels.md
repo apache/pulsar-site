@@ -7,7 +7,7 @@ This guide explains the labels used in the [apache/pulsar](http://github.com/apa
 
 ## ready-to-test
 
-After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, pull requests should be first tested in your own fork since the pulsar CI based on GitHub Actions has constrained resources and quota. GitHub Actions provides separate quota for pull requests that are executed in a forked repository.
+After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, pull requests **except [docs only changes](https://github.com/apache/pulsar/blob/master/.github/changes-filter.yaml#L5)** should be first tested in your own fork since the pulsar CI based on GitHub Actions has constrained resources and quota. GitHub Actions provides separate quota for pull requests that are executed in a forked repository.
 
 When a committer believe the PR is ready to test, they will label `ready-to-test` to the PR, and then you can rerun the CI tasks by commenting `/pulsarbot run-failure-checks` and trigger the full CI validation.
 
