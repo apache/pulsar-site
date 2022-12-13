@@ -13,6 +13,11 @@ When a committer believe the PR is ready to test, they will label `ready-to-test
 
 See also [CI Testing in Fork](personal-ci.md).
 
+:::tip
+
+If you submit doc changes with [`.md` files only](https://github.com/apache/pulsar/blob/346b04a8149df0683891408456bd4306b39f2103/.github/changes-filter.yaml#L9), you can skip this step.
+
+:::
 ## doc-*
 
 When submitting an issue or PR, you must [choose one of the documentation checkboxes](https://github.com/apache/pulsar/blob/master/.github/PULL_REQUEST_TEMPLATE.md#documentation), so the automation can label the PR correctly.
