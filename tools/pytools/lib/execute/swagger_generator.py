@@ -29,4 +29,4 @@ def execute(master: Path):
         mvn = find_command('mvn', msg="mvn is required")
         run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
 
-    shutil.copytree(master_swaggers, site_path() / 'static' / 'swagger' / 'master')
+    shutil.copytree(master_swaggers, site_path() / 'static' / 'swagger' / 'master', dirs_exist_ok=True)
