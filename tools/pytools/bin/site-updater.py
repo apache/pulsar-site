@@ -87,7 +87,6 @@ if __name__ == '__main__':
         else:
             master = Path(args.master_path)
 
-        swagger_generator.execute(master)
         site_syncer.execute(master)
 
         if _should_push(args.push):
