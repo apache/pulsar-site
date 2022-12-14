@@ -76,7 +76,7 @@ $ pulsar-perf consume [options]
 |Flag|Description|Default|
 |---|---|---|
 | `-sp, --subscription-position` | Subscription position|Latest|
-| `--replicated` | Whether the subscription status should be replicated|false|
+| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `-mc, --max_chunked_msg` | Max pending chunk messages|0|
 | `-nmt, --numMessage-perTransaction` | The number of messages acknowledged by a transaction. (After --txn-enable setting to true, -numMessage-perTransaction takes effect|50|
 | `-st, --subscription-type` | Subscription type|Exclusive|
@@ -134,6 +134,7 @@ $ pulsar-perf transaction [options]
 | `--txn-disable` | Disable transaction|false|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `-nmc, --numMessage-perTransaction-consume` | Set the number of messages consumed in a transaction.If transaction disabled, it means the number of messages consumed in a task.|1|
+| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `-nmp, --numMessage-perTransaction-produce` | Set the number of messages produced in  a transaction.If transaction disabled, it means the number of messages produced in a task.|1|
 | `-threads, --num-test-threads` | Number of test threads.This thread is for a new transaction to ack messages from consumer topics and produce message to producer topics, and then commit or abort this transaction. Increasing the number of threads increases the parallelism of the performance test, thereby increasing the intensity of the stress test.|1|
 | `-cf, --conf-file` | Configuration file|null|
