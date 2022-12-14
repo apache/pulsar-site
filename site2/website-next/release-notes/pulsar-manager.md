@@ -1,6 +1,11 @@
-## Apache Pulsar Manager
+---
+id: pulsar-manager
+title: Pulsar Manager Release Notes
+sidebar_label: Pulsar Manager Release Notes
+---
 
-### 0.3.0 &mdash; 2022-05-25 <a id="0.3.0"></a>
+## 0.3.0 &mdash; 2022-05-25 <a id="0.3.0"></a>
+
 * Fix MySQL schema field token error [PR-339](https://github.com/apache/pulsar-manager/pull/339)
 * Fix the bugs in topics list page and search topics [PR-342](https://github.com/apache/pulsar-manager/pull/342)
 * Fix the issue of Swagger does not work [PR-369](https://github.com/apache/pulsar-manager/pull/369)
@@ -14,7 +19,7 @@
 * Add support for Casdoor [PR-446](https://github.com/apache/pulsar-manager/pull/446)
 * Fix unload namespace error [PR-386](https://github.com/apache/pulsar-manager/pull/386)
 
-### 0.2.0 &mdash; 2020-09-28 <a id="0.2.0"></a>
+## 0.2.0 &mdash; 2020-09-28 <a id="0.2.0"></a>
 
 * Support multiple addresses for the broker stats [PR-306](https://github.com/apache/pulsar-manager/pull/306).
 * Use `PulsarAdmin` instead of `HttpUti`l in `BrokerStatsServiceImpl` [PR-315](https://github.com/apache/pulsar-manager/pull/315).
@@ -32,7 +37,7 @@
 * Change the default port and replace the request URI [PR-316](https://github.com/apache/pulsar-manager/pull/316).
 
 
-### 0.1.0 &mdash; 2019-11-25 <a id="0.1.0"></a>
+## 0.1.0 &mdash; 2019-11-25 <a id="0.1.0"></a>
 
 * Remove streamnative from the project [PR-213](https://github.com/apache/pulsar-manager/pull/213).
 * Add license file for pulsar-manager [PR-209](https://github.com/apache/pulsar-manager/pull/209).

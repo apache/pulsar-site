@@ -446,14 +446,6 @@ module.exports = {
         // showLastUpdateTime: true,
       }),
     ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "pulsar-manager-release-notes",
-        path: "pulsar-manager",
-        routeBasePath: "/",
-      },
-    ],
   ],
   scripts: [
     {

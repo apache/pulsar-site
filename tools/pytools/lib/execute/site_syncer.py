@@ -36,13 +36,3 @@ def execute(master: Path):
     shutil.copy2(main / 'sidebars.json', site / 'sidebars.json')
     shutil.copy2(main / 'versions.json', site / 'versions.json')
     shutil.copy2(main / 'releases.json', site / 'releases.json')
-
-    shutil.copy2(
-        main / 'pulsar-manager-release-notes.md',
-        site / 'pulsar-manager' / 'pulsar-manager-release-notes.md')
-    shutil.copy2(
-        main / 'pulsar-manager-release.json',
-        site / 'pulsar-manager' / 'pulsar-manager-release.json')
-    shutil.copy2(
-        main / 'pulsar-adapters-release.json',
-        site / 'pulsar-manager' / 'pulsar-adapters-release.json')

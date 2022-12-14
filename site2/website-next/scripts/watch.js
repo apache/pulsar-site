@@ -17,13 +17,7 @@ const watcher = chokidar.watch([src + "/docs", src + "/website"], {
 
 function _watch(path) {
   let dest = src + "/.preview/pulsar-site/site2/website-next";
-  if (/pulsar-manager-release-notes\.md/.exec(path)) {
-    dest += "/pulsar-manager/pulsar-manager-release-notes.md";
-  } else if (/pulsar-manager-release\.json/.exec(path)) {
-    dest += "/pulsar-manager/pulsar-manager-release.json";
-  } else if (/pulsar-adapters-release\.json/.exec(path)) {
-    dest = "/pulsar-manager/pulsar-adapters-release.json";
-  } else if (/\/docs\/assets\/(.*)/.exec(path)) {
+  if (/\/docs\/assets\/(.*)/.exec(path)) {
     const r = /\/docs\/assets\/(.*)/.exec(path);
     dest += "/static/assets/" + r[1];
   } else if (/(\/docs\/.*)/.exec(path)) {
