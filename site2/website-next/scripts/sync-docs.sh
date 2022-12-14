@@ -15,9 +15,6 @@ cp -r $SRC_DIR/website/versioned_sidebars/* $ROOT_DIR/site2/website-next/version
 cp -r $SRC_DIR/website/sidebars.json $ROOT_DIR/site2/website-next/sidebars.json
 cp -r $SRC_DIR/website/versions.json $ROOT_DIR/site2/website-next/versions.json
 cp -r $SRC_DIR/website/releases.json $ROOT_DIR/site2/website-next/releases.json
-cp -r $SRC_DIR/website/pulsar-manager-release-notes.md $ROOT_DIR/site2/website-next/pulsar-manager/pulsar-manager-release-notes.md
-cp -r $SRC_DIR/website/pulsar-manager-release.json $ROOT_DIR/site2/website-next/pulsar-manager/pulsar-manager-release.json
-cp -r $SRC_DIR/website/pulsar-adapters-release.json $ROOT_DIR/site2/website-next/pulsar-manager/pulsar-adapters-release.json
 cp -r $SRC_DIR/website/static/api $ROOT_DIR/site2/website-next/static/
 
 cd $ROOT_DIR/site2/website-next

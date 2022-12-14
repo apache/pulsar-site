@@ -3,8 +3,8 @@ import pulsarReleases from '@site/releases.json'
 import pulsarLegacyVersions from '@site/legacy-versions.json'
 import connectors from '@site/data/connectors'
 import cppReleases from '@site/data/release-cpp'
-import pulsarManagerReleases from '@site/pulsar-manager/pulsar-manager-release.json'
-import pulsarAdaptersReleases from '@site/pulsar-manager/pulsar-adapters-release.json'
+import pulsarManagerReleases from '@site/data/release-pulsar-manager'
+import pulsarAdaptersReleases from '@site/data/release-pulsar-adapters'
 import ReleaseTable from "@site/src/components/ReleaseTable";
 import ConnectorTable from "@site/src/components/ConnectorTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
