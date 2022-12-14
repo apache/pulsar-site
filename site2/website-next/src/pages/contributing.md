@@ -74,7 +74,7 @@ do not require an associated issue.
 ### Online discussions
 
 We are using [Apache Pulsar Slack channel](https://apache-pulsar.slack.com/) for online discussions.
-You can self-invite yourself by accessing [this link](https://apache-pulsar.herokuapp.com/).
+You can self-invite yourself by accessing [this link](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
 
 Slack channels are great for quick questions or discussions on specialized topics. Remember that we
 strongly encourage communication via the mailing lists, and we prefer to discuss more complex subjects

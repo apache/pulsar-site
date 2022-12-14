@@ -91,8 +91,8 @@ export default function page(props) {
 
           <p>
             <Translate>You can self-register at </Translate>{" "}
-            <a href="https://apache-pulsar.herokuapp.com/" target="_blank">
-              https://apache-pulsar.herokuapp.com/
+            <a href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar" target="_blank">
+              https://communityinviter.com/apps/apache-pulsar/apache-pulsar
             </a>
           </p>
 
