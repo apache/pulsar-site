@@ -26,7 +26,7 @@ sidebar_label: Client CPP 3.1.0
 * [fix] Flush no batch message when call producer.flush by @shibd in https://github.com/apache/pulsar-client-cpp/pull/98
 * [Build] Use Windows server 2019 to release Windows artifacts by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/99
 * [fix] Fix consumer doesn't clear incomingMessageQueue during seek by @RobertIndie in https://github.com/apache/pulsar-client-cpp/pull/101
-* Fix doxygen generation by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/103
+* Fix Doxygen generation by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/103
 * Add MessageId::batchSize() and the MessageIdBuilder by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/105
 * Fix MessageId::getDataAsString() crashed with MSVC debug config by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/108
 * [feat] Support WaitForExclusive producer access mode. by @shibd in https://github.com/apache/pulsar-client-cpp/pull/109
