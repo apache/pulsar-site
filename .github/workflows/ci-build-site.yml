@@ -28,16 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 600
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
       - name: Get changed files
-        uses: ./.github/actions/changed-files
         id: changed-files
-        with:
-          token: ${{ secrets.PULSARBOT_TOKEN }}
+        run: |
+          echo "all_changed_and_modified_files=$(git diff --name-only HEAD~1 HEAD | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
       - name: List all modified files
         run: |
