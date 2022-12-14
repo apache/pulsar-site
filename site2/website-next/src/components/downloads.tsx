@@ -1,10 +1,14 @@
 import React from 'react'
 import pulsarReleases from '@site/releases.json'
+import pulsarLegacyVersions from '@site/legacy-versions.json'
 import connectors from '@site/data/connectors'
+import cppReleases from '@site/data/release-cpp'
 import pulsarManagerReleases from '@site/pulsar-manager/pulsar-manager-release.json'
 import pulsarAdaptersReleases from '@site/pulsar-manager/pulsar-adapters-release.json'
 import ReleaseTable from "@site/src/components/ReleaseTable";
 import ConnectorTable from "@site/src/components/ConnectorTable";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import OldReleaseTable from "@site/src/components/OldReleaseTable";
 
 export function CurrentPulsarVersion(): JSX.Element {
     return <>{pulsarReleases[0]}</>
@@ -24,7 +28,7 @@ export function CurrentPulsarDownloadTable(): JSX.Element {
     const latestSrcArchiveMirrorUrl = getLatestArchiveMirrorUrl(latestVersion, "src")
     const latestArchiveUrl = distUrl(latestVersion, "bin")
     const latestSrcArchiveUrl = distUrl(latestVersion, "src")
-    const latest = [
+    const data = [
         {
             release: "Binary",
             link: latestArchiveMirrorUrl,
@@ -41,13 +45,13 @@ export function CurrentPulsarDownloadTable(): JSX.Element {
         },
     ]
     return <div className="tailwind">
-        <ReleaseTable data={latest}></ReleaseTable>
+        <ReleaseTable data={data}></ReleaseTable>
     </div>
 }
 
 export function CurrentPulsarOffloadersDownloadTable(): JSX.Element {
     const latestVersion = pulsarReleases[0]
-    const offloaders = [
+    const data = [
         {
             release: "Offloaders",
             link: getLatestOffloadersMirrorUrl(latestVersion),
@@ -57,13 +61,13 @@ export function CurrentPulsarOffloadersDownloadTable(): JSX.Element {
         },
     ]
     return <div className="tailwind">
-        <ReleaseTable data={offloaders}></ReleaseTable>
+        <ReleaseTable data={data}></ReleaseTable>
     </div>
 }
 
 export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
     const latestVersion = pulsarReleases[0]
-    const connectorList = connectors.map((connector) => ({
+    const data = connectors.map((connector) => ({
         connector: connector.link,
         connectorText: connector.longName,
         archive: `${connectorDownloadUrl(
@@ -78,7 +82,144 @@ export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
         )}.sha512`,
     }))
     return <div className="tailwind">
-        <ConnectorTable data={connectorList}></ConnectorTable>
+        <ConnectorTable data={data}></ConnectorTable>
+    </div>
+}
+
+export function ArchivedPulsarDownloadTable(): JSX.Element {
+    const { siteConfig } = useDocusaurusContext()
+    const latestVersion = pulsarReleases[0]
+    const releaseInfo = pulsarReleases.map((version) => ({
+        version: version,
+        binArchiveUrl: archiveUrl(version, "bin"),
+        srcArchiveUrl: archiveUrl(version, "src"),
+    }))
+    const data = releaseInfo
+        .filter((info) => info.version != latestVersion)
+        .map((info) => {
+            let sha = "sha512"
+            if (info.version.includes("1.19.0-incubating") || info.version.includes("1.20.0-incubating")) {
+                sha = "sha"
+            }
+            return {
+                release: info.version,
+                binary: info.binArchiveUrl,
+                binaryText: `apache-pulsar-${info.version}-bin.tar.gz`,
+                binaryAsc: `${info.binArchiveUrl}.asc`,
+                binarySha: `${info.binArchiveUrl}.${sha}`,
+                binaryShaText: `${sha}`,
+                source: info.srcArchiveUrl,
+                sourceText: `apache-pulsar-${info.version}-src.tar.gz`,
+                sourceAsc: `${info.srcArchiveUrl}.asc`,
+                sourceSha: `${info.srcArchiveUrl}.${sha}`,
+                sourceShaText: `${sha}`,
+                releaseNote: !pulsarLegacyVersions.includes(info.version)
+                    ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${info.version}`
+                    : `${siteConfig.baseUrl}release-notes/legacy/#${info.version.replace(
+                        /\./g,
+                        ""
+                    )}`,
+            }
+        })
+    return <div className="tailwind">
+        <OldReleaseTable data={data}></OldReleaseTable>
+    </div>
+}
+
+export function CppReleasesDownloadTable(): JSX.Element {
+    const data = cppReleases
+        .map(item => item.vtag)
+        .filter(version => Number(version.split('.')[0]) >= 3)
+        .map(version => {
+            const url = `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`
+            const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`
+            return {
+                release: version,
+                link: url,
+                linkText: `apache-pulsar-cpp-${version}`,
+                asc: `${tarPath}.asc`,
+                sha512: `${tarPath}.sha512`
+            }
+        })
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
+export function CurrentPulsarAdapterDownloadTable(): JSX.Element {
+    const latestPulsarAdaptersVersion = pulsarAdaptersReleases[0]
+    const data = [
+        {
+            release: "Source",
+            link: getLatestAdaptersMirrorUrl(latestPulsarAdaptersVersion),
+            linkText: `apache-pulsar-adapters-${latestPulsarAdaptersVersion}-src.tar.gz`,
+            asc: `${distAdaptersUrl(latestPulsarAdaptersVersion)}.asc`,
+            sha512: `${distAdaptersUrl(latestPulsarAdaptersVersion)}.sha512`,
+        },
+    ]
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
+export function CurrentPulsarManagerDownloadTable(): JSX.Element {
+    const latestPulsarManagerVersion = pulsarManagerReleases[0]
+    const latestPulsarManagerArchiveMirrorUrl = getLatestPulsarManagerArchiveMirrorUrl(latestPulsarManagerVersion, "bin")
+    const latestPulsarManagerSrcArchiveMirrorUrl = getLatestPulsarManagerArchiveMirrorUrl(latestPulsarManagerVersion, "src")
+    const pulsarManagerLatestArchiveUrl = pulsarManagerDistUrl(latestPulsarManagerVersion, "bin")
+    const pulsarManagerLatestSrcArchiveUrl = pulsarManagerDistUrl(latestPulsarManagerVersion, "src")
+    const data = [
+        {
+            release: "Binary",
+            link: latestPulsarManagerArchiveMirrorUrl,
+            linkText: `apache-pulsar-manager-${latestPulsarManagerVersion}-bin.tar.gz`,
+            asc: `${pulsarManagerLatestArchiveUrl}.asc`,
+            sha512: `${pulsarManagerLatestArchiveUrl}.sha512`,
+        },
+        {
+            release: "Source",
+            link: latestPulsarManagerSrcArchiveMirrorUrl,
+            linkText: `apache-pulsar-manager-${latestPulsarManagerVersion}-src.tar.gz`,
+            asc: `${pulsarManagerLatestSrcArchiveUrl}.asc`,
+            sha512: `${pulsarManagerLatestSrcArchiveUrl}.sha512`,
+        },
+    ]
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
+export function ArchivedPulsarManagerDownloadTable(): JSX.Element {
+    const { siteConfig } = useDocusaurusContext()
+    const latestPulsarManagerVersion = pulsarManagerReleases[0]
+    const pulsarManagerReleaseInfo = pulsarManagerReleases.map((version) => ({
+        version: version,
+        binArchiveUrl: pulsarManagerArchiveUrl(version, "bin"),
+        srcArchiveUrl: pulsarManagerArchiveUrl(version, "src"),
+    }))
+    const data = pulsarManagerReleaseInfo
+        .filter((info) => info.version !== latestPulsarManagerVersion)
+        .map((info) => {
+            const sha = "sha512";
+            return {
+                release: info.version,
+                binary: info.binArchiveUrl,
+                binaryText: `apache-pulsar-manager-${info.version}-bin.tar.gz`,
+                binaryAsc: `${info.binArchiveUrl}.asc`,
+                binarySha: `${info.binArchiveUrl}.${sha}`,
+                binaryShaText: `${sha}`,
+                source: info.srcArchiveUrl,
+                sourceText: `apache-pulsar-manager-${info.version}-src.tar.gz`,
+                sourceAsc: `${info.srcArchiveUrl}.asc`,
+                sourceSha: `${info.srcArchiveUrl}.${sha}`,
+                sourceShaText: `${sha}`,
+                releaseNote: `${siteConfig.baseUrl}release-notes#${
+                    info.version
+                }`,
+            };
+        })
+    return <div className="tailwind">
+        <OldReleaseTable data={data}></OldReleaseTable>
     </div>
 }
 
