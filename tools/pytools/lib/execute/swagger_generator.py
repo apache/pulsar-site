@@ -22,11 +22,11 @@ from command import find_command, run
 from constant import site_path
 
 
-def execute(master: Path):
+def execute(master: Path, version: str):
     master_swaggers = master / 'pulsar-broker' / 'target' / 'docs'
 
     if not master_swaggers.exists():  # generate master swaggers
         mvn = find_command('mvn', msg="mvn is required")
         run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
 
-    shutil.copytree(master_swaggers, site_path() / 'static' / 'swagger' / 'master', dirs_exist_ok=True)
+    shutil.copytree(master_swaggers, site_path() / 'static' / 'swagger' / version, dirs_exist_ok=True)

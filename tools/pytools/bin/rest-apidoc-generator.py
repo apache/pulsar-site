@@ -28,6 +28,7 @@ from execute import swagger_generator, swagger_sorter
 if __name__ == '__main__':
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument('--master-path', type=str, metavar='PATH', help='path to pulsar main repo')
+    parser.add_argument('--version', default='master', metavar='VERSION', help='version of Apache Pulsar')
 
     args = parser.parse_args()
 
@@ -39,6 +40,6 @@ if __name__ == '__main__':
         else:
             master = Path(args.master_path)
 
-        swagger_generator.execute(master)
+        swagger_generator.execute(master, args.version)
         swagger_sorter.execute(site_path() / 'static' / 'swagger')
 

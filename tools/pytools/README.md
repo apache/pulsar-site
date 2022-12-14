@@ -115,7 +115,10 @@ poetry run bin/reference-doc-generator.py --master-path=<path> [--version=<VERSI
 This executable generates REST API docs based on Swagger:
 
 ```bash
-poetry run bin/rest-apidoc-generator.py [--master-path=<path>]
+poetry run bin/rest-apidoc-generator.py [--master-path=<path>] [--version=<VERSION>]
 ```
 
-... where `master-path` is path to the main repo. If it's empty, the script will clone the main repo on the fly.
+... where:
+
+1. `master-path` is path to the main repo. If it's empty, the script will clone the main repo on the fly.
+2. `version` is the version of the main repo, default to `master` a.k.a. the latest master branch;

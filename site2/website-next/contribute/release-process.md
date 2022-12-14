@@ -448,7 +448,7 @@ cd pulsar-site
 git checkout -b fix/swagger-file
 cd tools/pytools
 poetry install
-poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar
+poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar --version 2.10.2
 ```
 
 Send out a PR request for review.
