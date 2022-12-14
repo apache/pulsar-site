@@ -34,7 +34,7 @@ module.exports = {
       forum: 'DataStax Blog',
       forum_link: 'https://www.datastax.com/blog',
       date: 'Nov 2021',
-      title: "Infinite Scale without Fail",
+      title: "Infinite Scale without Fail with Starlight for RabbitMQ",
       link: 'https://www.datastax.com/blog/infinite-scale-without-fail-starlight-rabbitmq'
     },
     {
