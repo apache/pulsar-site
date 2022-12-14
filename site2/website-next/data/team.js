@@ -171,6 +171,10 @@ module.exports = {
       org: "Splunk",
     },
     {
+      name: "Christophe Bornet",
+      apacheId: "cbornet"
+    },
+    {
       name: "davidkj",
       apacheId: "davekj",
     },
