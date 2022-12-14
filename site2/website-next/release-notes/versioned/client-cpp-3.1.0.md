@@ -35,7 +35,7 @@ sidebar_label: Client CPP 3.1.0
 * Fix getLastMessageId method dead recursion. by @shibd in https://github.com/apache/pulsar-client-cpp/pull/117
 * [feat] Support consumer seek by timestamp and reader seek for C Api by @RobertIndie in https://github.com/apache/pulsar-client-cpp/pull/118
 
+**Full Changelog**: https://github.com/apache/pulsar-client-cpp/commits/v3.1.0
+
 ## New Contributors
 * @fregate made their first contribution in https://github.com/apache/pulsar-client-cpp/pull/115
-
-**Full Changelog**: https://github.com/apache/pulsar-client-cpp/commits/v3.1.0
