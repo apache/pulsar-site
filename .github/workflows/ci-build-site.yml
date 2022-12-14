@@ -49,46 +49,9 @@ jobs:
             echo "$file was modified"
           done
 
-      - name: Tune Runner VM
-        uses: ./.github/actions/tune-runner-vm
-
-      - name: Cache local Maven repository
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.m2/repository/*/*/*
-            !~/.m2/repository/org/apache/pulsar
-          key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
-            ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
-            ${{ runner.os }}-m2-dependencies-core-modules-
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 17
-
-      - name: Clean disk
-        run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-          sudo apt clean
-          docker rmi $(docker images -q) -f
-          df -h
-
-      - name: Clone Pulsar
-        run: |
-          cd ../
-          git clone -b master --depth 1 https://github.com/apache/pulsar.git
-          rm -rf pulsar/.git
-          rm -rf pulsar/site2
-          mv pulsar/* pulsar-site/
-
       - name: Build and Publish website
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.NEXT_CROWDIN_DOCUSAURUS_API_TOKEN }}
         run: |
           echo "Building Website"
           site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
