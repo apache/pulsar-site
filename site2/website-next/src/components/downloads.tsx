@@ -1,8 +1,10 @@
 import React from 'react'
 import pulsarReleases from '@site/releases.json'
+import connectors from '@site/data/connectors'
 import pulsarManagerReleases from '@site/pulsar-manager/pulsar-manager-release.json'
 import pulsarAdaptersReleases from '@site/pulsar-manager/pulsar-adapters-release.json'
 import ReleaseTable from "@site/src/components/ReleaseTable";
+import ConnectorTable from "@site/src/components/ConnectorTable";
 
 export function CurrentPulsarVersion(): JSX.Element {
     return <>{pulsarReleases[0]}</>
@@ -16,7 +18,7 @@ export function CurrentPulsarAdapterVersion(): JSX.Element {
     return <>{pulsarAdaptersReleases[0]}</>
 }
 
-export function CurrentPulsarVersionTable(): JSX.Element {
+export function CurrentPulsarDownloadTable(): JSX.Element {
     const latestVersion = pulsarReleases[0]
     const latestArchiveMirrorUrl = getLatestArchiveMirrorUrl(latestVersion, "bin")
     const latestSrcArchiveMirrorUrl = getLatestArchiveMirrorUrl(latestVersion, "src")
@@ -37,8 +39,47 @@ export function CurrentPulsarVersionTable(): JSX.Element {
             asc: `${latestSrcArchiveUrl}.asc`,
             sha512: `${latestSrcArchiveUrl}.sha512`,
         },
-    ];
-    return <ReleaseTable data={latest}></ReleaseTable>
+    ]
+    return <div className="tailwind">
+        <ReleaseTable data={latest}></ReleaseTable>
+    </div>
+}
+
+export function CurrentPulsarOffloadersDownloadTable(): JSX.Element {
+    const latestVersion = pulsarReleases[0]
+    const offloaders = [
+        {
+            release: "Offloaders",
+            link: getLatestOffloadersMirrorUrl(latestVersion),
+            linkText: `apache-pulsar-offloaders-${latestVersion}-bin.tar.gz`,
+            asc: `${distOffloadersUrl(latestVersion)}.asc`,
+            sha512: `${distOffloadersUrl(latestVersion)}.sha512`,
+        },
+    ]
+    return <div className="tailwind">
+        <ReleaseTable data={offloaders}></ReleaseTable>
+    </div>
+}
+
+export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
+    const latestVersion = pulsarReleases[0]
+    const connectorList = connectors.map((connector) => ({
+        connector: connector.link,
+        connectorText: connector.longName,
+        archive: `${connectorDownloadUrl(
+            connector.name,
+            latestVersion
+        )}`,
+        archiveText: `pulsar-io-${connector.name}-${latestVersion}.nar`,
+        asc: `${connectorDistUrl(connector.name, latestVersion)}.asc`,
+        sha512: `${connectorDistUrl(
+            connector.name,
+            latestVersion
+        )}.sha512`,
+    }))
+    return <div className="tailwind">
+        <ConnectorTable data={connectorList}></ConnectorTable>
+    </div>
 }
 
 function getLatestArchiveMirrorUrl(version, type) {
@@ -63,4 +104,32 @@ function distOffloadersUrl(version) {
 
 function distAdaptersUrl(version) {
     return `https://downloads.apache.org/pulsar/pulsar-adapters-${version}/apache-pulsar-adapters-${version}-src.tar.gz`;
+}
+
+function archiveUrl(version, type) {
+    if (version.includes("incubating")) {
+        return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz`;
+    } else {
+        return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz`;
+    }
+}
+
+function pulsarManagerArchiveUrl(version, type) {
+    return `https://archive.apache.org/dist/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
+}
+
+function connectorDistUrl(name, version) {
+    return `https://downloads.apache.org/pulsar/pulsar-${version}/connectors/pulsar-io-${name}-${version}.nar`;
+}
+
+function connectorDownloadUrl(name, version) {
+    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-${version}/connectors/pulsar-io-${name}-${version}.nar`;
+}
+
+function getLatestPulsarManagerArchiveMirrorUrl(version, type) {
+    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
+}
+
+function pulsarManagerDistUrl(version, type) {
+    return `https://downloads.apache.org/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
 }
