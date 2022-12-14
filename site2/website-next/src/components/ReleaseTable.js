@@ -4,11 +4,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Link from "@mui/material/Link";
-// import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Translate, { translate } from "@docusaurus/Translate";
+import Translate from "@docusaurus/Translate";
 
 export default function VersionsTable(props) {
-  // const { siteConfig } = useDocusaurusContext();
   return (
     <Table size="small">
       <TableBody>
