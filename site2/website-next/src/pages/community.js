@@ -335,7 +335,7 @@ export default function Community(props) {
                     discussions to the issue tracking system and/or the dev
                     mailing list.
                   </p>
-                  <p>Not signed up? Use our Heroku App to self-register </p>
+                  <p>Not signed up? Use our Slack App to self-register </p>
                   <PillButton
                     variant=""
                     target="_blank"
@@ -346,7 +346,7 @@ export default function Community(props) {
                   <PillButton
                     variant="grey"
                     target="_blank"
-                    href="https://apache-pulsar.herokuapp.com/"
+                    href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"
                   >
                     PULSAR SLACK SIGN-UP
                   </PillButton>
