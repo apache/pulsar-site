@@ -46,6 +46,3 @@ def execute(master: Path):
     shutil.copy2(
         main / 'pulsar-adapters-release.json',
         site / 'pulsar-manager' / 'pulsar-adapters-release.json')
-
-    shutil.copytree(main / 'static' / 'swagger', site / 'static' / 'swagger', dirs_exist_ok=True)
-    swagger_sorter.execute(site / 'static' / 'swagger')

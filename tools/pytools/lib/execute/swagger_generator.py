@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -16,30 +14,19 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-#
 
-set -x -e
+import shutil
+from pathlib import Path
 
-GH_TOKEN=$1
+from command import find_command, run
+from constant import site_path
 
-ROOT_DIR=$(git rev-parse --show-toplevel)
 
-WEBSITE_DIR=${ROOT_DIR}/site2/website-next
-TOOLS_DIR=${ROOT_DIR}/site2/tools
-GEN_SITE_DIR=${ROOT_DIR}/generated-site
-VERSION=next
+def execute(master: Path):
+    master_swaggers = master / 'pulsar-broker' / 'target' / 'docs'
 
-export NODE_OPTIONS="--max-old-space-size=16000"
+    if not master_swaggers.exists():  # generate master swaggers
+        mvn = find_command('mvn', msg="mvn is required")
+        run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
 
-cd "$WEBSITE_DIR"
-
-npm install
-
-node scripts/replace.js
-# Because there are too many versions of the document, the memory overflows during the full build.
-# The split-version-build script is used to build in different versions, and finally the build results are merged.
-bash scripts/split-version-build.sh $@
-
-CONTENT_DIR="$GEN_SITE_DIR"/content
-rm -rf "$CONTENT_DIR" && mkdir -p "$CONTENT_DIR"
-rsync -a ./build/ "$CONTENT_DIR"
+    shutil.copytree(master_swaggers, site_path() / 'static' / 'swagger' / 'master', dirs_exist_ok=True)

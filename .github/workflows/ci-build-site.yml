@@ -85,19 +85,6 @@ jobs:
           rm -rf pulsar/site2
           mv pulsar/* pulsar-site/
 
-      - name: Run install by skip tests
-        run: mvn -q -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
-
-      - name: Generate swagger json file
-        run: mvn -B -ntp -pl pulsar-broker install -DskipTests -Pswagger
-
-      - name: Copy swagger json file
-        run: |
-          echo "Copying swagger json file ..."
-          mkdir -p site2/website-next/static/swagger/master/
-          cp pulsar-broker/target/docs/swagger*.json site2/website-next/static/swagger/master
-          echo "Copied swagger json file."
-
       - name: Build and Publish website
         env:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}

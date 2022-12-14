@@ -33,9 +33,12 @@ jobs:
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v3
+        if: ${{ github.event_name != 'pull_request' }}
         with:
           token: ${{ secrets.PULSARBOT_TOKEN }}
           persist-credentials: true
+      - uses: actions/checkout@v3
+        if: ${{ github.event_name == 'pull_request' }}
 
       - name: Install poetry
         run: pipx install poetry
@@ -66,11 +69,12 @@ jobs:
           java-version: 17
       - name: Run install by skip tests
         working-directory: tmp/pulsar
-        run: mvn -B -ntp install -Pcore-modules,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+        run: mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 
       - name: Update site sources
         working-directory: tools/pytools
         run: |
           poetry install
           poetry run bin/reference-doc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
+          poetry run bin/rest-apidoc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
           poetry run bin/site-updater.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
