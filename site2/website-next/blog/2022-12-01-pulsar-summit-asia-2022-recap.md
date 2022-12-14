@@ -65,7 +65,7 @@ Apache Pulsar has been adopted by organizations and users across the globe since
 
 <small><center>Figure 1. Pulsar GitHub repo contributors</center></small>
 
-So far this year, we have welcomed 15 new Apache Pulsar [Committers](https://www.apache.org/foundation/how-it-works.html#committers) to the Pulsar family. They have made continuous contributions to the Pulsar community and as Pulsar Committers, they now have write access to the Pulsar repository. They are:
+So far this year, we have welcomed 16 new Apache Pulsar [Committers](https://www.apache.org/foundation/how-it-works.html#committers) to the Pulsar family. They have made continuous contributions to the Pulsar community and as Pulsar Committers, they now have write access to the Pulsar repository. They are:
 
 * [@RobertIndie](https://github.com/RobertIndie)
 * [@yuruguo](https://github.com/yuruguo)
@@ -82,6 +82,7 @@ So far this year, we have welcomed 15 new Apache Pulsar [Committers](https://www
 * [@dlg99](https://github.com/dlg99)
 * [@nicoloboschi](https://github.com/nicoloboschi)
 * [@liudezhi2098](https://github.com/liudezhi2098)
+* [@cbornet](https://github.com/cbornet)
 
 We also have 4 new members joining the Apache Pulsar [Project Management Committee (PMC)](https://www.apache.org/foundation/how-it-works.html#pmc-members) for their merit for the evolution of the project. They are:
 
