@@ -411,9 +411,60 @@ pulsar-client-cpp/python/build-mac-wheels.sh
 The wheel files will be generated at each platform directory under `pulsar-client-cpp/python/pkg/osx/`.
 Then you can run `twin upload` to upload those wheel files.
 
-## Update Python Client docs
+## Update Javadocs
 
-After publishing the python client docs, run the following script from the apache/pulsar-site `main` branch:
+After publish Java libraries, run the following script from the apache/pulsar-site `main` branch:
+
+```shell
+cd tools/pytools
+poetry install
+poetry run bin/java-apidoc-generator.py 2.11.0
+```
+
+Once the docs are generated, you can add them and submit them in a PR. The expected doc output is: 
+
+* `site2/website-next/static/api/admin`
+* `site2/website-next/static/api/client`
+* `site2/website-next/static/api/pulsar-functions`
+
+Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
+
+## Update config and command-line tool references 
+
+Run the following script from the apache/pulsar-site `main` branch:
+
+```shell
+# build Pulsar distributions under /path/to/pulsar-2.11.0
+cd tools/pytools
+poetry install
+poetry run bin/bin/reference-doc-generator.py --master-path=/path/to/pulsar-2.11.0 --version=2.11.0
+```
+
+Once the docs are generated, you can add them and submit them in a PR. The expected doc output is:
+
+* `site2/website-next/static/api/admin`
+* `site2/website-next/static/api/client`
+* `site2/website-next/static/api/pulsar-functions`
+
+Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
+
+## Update C++ client docs
+
+After publishing the C++ client, run the following script from the apache/pulsar-site `main` branch:
+
+```shell
+cd tools/pytools
+poetry install
+poetry run bin/cpp-apidoc-generator.py 2.11.0
+```
+
+Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `site2/website-next/static/api/cpp`.
+
+Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
+
+## Update Python client docs
+
+After publishing the Python client, run the following script from the apache/pulsar-site `main` branch:
 
 ```shell
 cd tools/pytools
@@ -423,7 +474,7 @@ poetry run bin/py-apidoc-generator.py 2.8.3
 
 Note that before version 3.0.0, it builds the docs within a docker image, so you'll need to have docker running.
 
-Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `site2/website/static/api/python`.
+Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `site2/website-next/static/api/python`.
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
