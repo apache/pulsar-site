@@ -1,288 +1,291 @@
 module.exports = {
-  pmc: [
+  "pmc": [
     {
-      name: "Sahaya Andrews",
-      apacheId: "andrews",
+      "name": "Sahaya Andrews",
+      "apacheId": "andrews"
     },
     {
-      name: "Brad McMillen",
-      apacheId: "bradtm",
+      "name": "Brad McMillen",
+      "apacheId": "bradtm"
     },
     {
-      name: "Hang Chen",
-      apacheId: "chenhang",
+      "name": "Hang Chen",
+      "apacheId": "chenhang"
     },
     {
-      name: "Enrico Olivelli",
-      apacheId: "eolivelli",
+      "name": "Enrico Olivelli",
+      "apacheId": "eolivelli"
     },
     {
-      name: "Jennifer Huang",
-      apacheId: "hjf",
+      "name": "Jennifer Huang",
+      "apacheId": "hjf"
     },
     {
-      name: "Haiting Jiang",
-      apacheId: "jianghaiting",
+      "name": "Hiroyuki Sakai",
+      "apacheId": "hrsakai"
     },
     {
-      name: "Hiroyuki Sakai",
-      apacheId: "hrsakai",
+      "name": "Ivan Brendan Kelly",
+      "apacheId": "ivank"
     },
     {
-      name: "Ivan Brendan Kelly",
-      apacheId: "ivank",
+      "name": "Jai Asher",
+      "apacheId": "jai1"
     },
     {
-      name: "Jai Asher",
-      apacheId: "jai1",
+      "name": "Boyang Jerry Peng",
+      "apacheId": "jerrypeng"
     },
     {
-      name: "Boyang Jerry Peng",
-      apacheId: "jerrypeng",
+      "name": "Haiting Jiang",
+      "apacheId": "jianghaiting"
     },
     {
-      name: "Jim Jagielski",
-      apacheId: "jim",
+      "name": "Jim Jagielski",
+      "apacheId": "jim"
     },
     {
-      name: "Jiwei Guo",
-      apacheId: "technoboy",
-      org: "StreamNative",
+      "name": "Joe Francis",
+      "apacheId": "joef"
     },
     {
-      name: "Joe Francis",
-      apacheId: "joef",
+      "name": "Lari Hotari",
+      "apacheId": "lhotari"
     },
     {
-      name: "Lari Hotari",
-      apacheId: "lhotari",
+      "name": "Lin Lin",
+      "apacheId": "linlin"
     },
     {
-      name: "Lin Chen",
-      apacheId: "lordcheng10",
+      "name": "Liu Yu",
+      "apacheId": "liuyu"
     },
     {
-      name: "Lin Lin",
-      apacheId: "linlin",
+      "name": "Ludwig Pummer",
+      "apacheId": "ludwigp"
     },
     {
-      name: "Liu Yu",
-      apacheId: "liuyu",
+      "name": "Masakazu Kitajo",
+      "apacheId": "maskit"
     },
     {
-      name: "Ludwig Pummer",
-      apacheId: "ludwigp",
+      "name": "Masahiro Sakamoto",
+      "apacheId": "massakam"
     },
     {
-      name: "Masakazu Kitajo",
-      apacheId: "maskit",
+      "name": "Michael Marshall",
+      "apacheId": "mmarshall"
     },
     {
-      name: "Masahiro Sakamoto",
-      apacheId: "massakam",
+      "name": "Matteo Merli",
+      "apacheId": "mmerli"
     },
     {
-      name: "Matteo Merli",
-      apacheId: "mmerli",
+      "name": "Nozomi Kurihara",
+      "apacheId": "nkurihar"
     },
     {
-      name: "Nozomi Kurihara",
-      apacheId: "nkurihar",
+      "name": "Penghui Li",
+      "apacheId": "penghui"
     },
     {
-      name: "Penghui Li",
-      apacheId: "penghui",
+      "name": "P. Taylor Goetz",
+      "apacheId": "ptgoetz"
     },
     {
-      name: "P. Taylor Goetz",
-      apacheId: "ptgoetz",
+      "name": "Rajan Dhabalia",
+      "apacheId": "rdhabalia"
     },
     {
-      name: "Rajan Dhabalia",
-      apacheId: "rdhabalia",
+      "name": "Sanjeev Kulkarni",
+      "apacheId": "sanjeevrk"
     },
     {
-      name: "Sanjeev Kulkarni",
-      apacheId: "sanjeevrk",
+      "name": "Siddharth Boobna",
+      "apacheId": "sboobna"
     },
     {
-      name: "Siddharth Boobna",
-      apacheId: "sboobna",
+      "name": "Sijie Guo",
+      "apacheId": "sijie"
     },
     {
-      name: "Sijie Guo",
-      apacheId: "sijie",
+      "name": "Sebastián Schepens",
+      "apacheId": "sschepens"
     },
     {
-      name: "Sebastián Schepens",
-      apacheId: "sschepens",
+      "name": "Guo Jiwei",
+      "apacheId": "technoboy"
     },
     {
-      name: "Francis Christopher Liu",
-      apacheId: "toffer",
+      "name": "Francis Christopher Liu",
+      "apacheId": "toffer"
     },
     {
-      name: "Dave Fisher",
-      apacheId: "wave",
+      "name": "David Fisher",
+      "apacheId": "wave"
     },
     {
-      name: "Yuki Shiga",
-      apacheId: "yushiga",
+      "name": "Yuki Shiga",
+      "apacheId": "yushiga"
     },
     {
-      name: "Jia Zhai",
-      apacheId: "zhaijia",
-    },
+      "name": "Jia Zhai",
+      "apacheId": "zhaijia"
+    }
   ],
-  committers: [
+  "committers": [
     {
-      name: "Ali Ahmed",
-      apacheId: "aahmed",
+      "name": "Ali Ahmed",
+      "apacheId": "aahmed"
     },
     {
-      name: "Addison Higham",
-      apacheId: "addisonj",
-      org: "StreamNative",
+      "name": "Addison Higham",
+      "apacheId": "addisonj"
     },
     {
-      name: "Aloys Zhang",
-      apacheId: "aloyszhang",
+      "name": "Aloys Zhang",
+      "apacheId": "aloyszhang"
     },
     {
-      name: "Andrey Yegorov",
-      apacheId: "ayegorov",
+      "name": "Andrey Yegorov",
+      "apacheId": "ayegorov"
     },
     {
-      name: "Cong Zhao",
-      apacheId: "zhaocong",
+      "name": "Daniel Blankensteiner",
+      "apacheId": "blankensteiner"
     },
     {
-      name: "Daniel Blankensteiner",
-      apacheId: "blankensteiner",
+      "name": "Bo Cong",
+      "apacheId": "bogong"
     },
     {
-      name: "Bo Cong",
-      apacheId: "bogong",
-      org: "StreamNative",
+      "name": "Christophe Bornet",
+      "apacheId": "cbornet"
     },
     {
-      name: "Chris Kellogg",
-      apacheId: "cckellogg",
-      org: "Splunk",
+      "name": "Chris Kellogg",
+      "apacheId": "cckellogg"
     },
     {
-      name: "Christophe Bornet",
-      apacheId: "cbornet"
+      "name": "davidkj",
+      "apacheId": "davekj"
     },
     {
-      name: "davidkj",
-      apacheId: "davekj",
+      "name": "Dezhi Liu",
+      "apacheId": "dezhiliu"
     },
     {
-      name: "Dezhi Liu",
-      apacheId: "dezhiliu",
+      "name": "Guangning E",
+      "apacheId": "guangning"
     },
     {
-      name: "Guangning E",
-      apacheId: "guangning",
+      "name": "Xiaoyu Hou",
+      "apacheId": "houxiaoyu"
     },
     {
-      name: "Huanli Meng",
-      apacheId: "huanlimeng",
-      org: "StreamNative",
+      "name": "Qiang Huang",
+      "apacheId": "huangqiang"
     },
     {
-      name: "Yuto Furuta",
-      apacheId: "k2la",
-      org: "Yahoo Japan Corporation",
+      "name": "Huanli Meng",
+      "apacheId": "huanlimeng"
     },
     {
-      name: "Qiang Huang",
-      apacheId: "huangqiang",
+      "name": "Jun Ma",
+      "apacheId": "junma"
     },
     {
-      name: "Qiang Zhao",
-      apacheId: "mattisonchao",
+      "name": "Yuto Furuta",
+      "apacheId": "k2la"
     },
     {
-      name: "Michael Marshall",
-      apacheId: "mmarshall",
-      org: "DataStax",
+      "name": "Kai Wang",
+      "apacheId": "kwang"
     },
     {
-      name: "Nicolò Boschi",
-      apacheId: "nicoloboschi",
+      "name": "Lin Chen",
+      "apacheId": "lordcheng10"
     },
     {
-      name: "Rui Fu",
-      apacheId: "rfu",
-      org: "StreamNative",
+      "name": "Qiang Zhao",
+      "apacheId": "mattisonchao"
     },
     {
-      name: "Ran Gao",
-      apacheId: "rgao",
-      org: "StreamNative",
+      "name": "Nicolò Boschi",
+      "apacheId": "nicoloboschi"
     },
     {
-      name: "Xiaolong Ran",
-      apacheId: "rxl",
-      org: "StreamNative",
+      "name": "Neng Lu",
+      "apacheId": "nlu90"
     },
     {
-      name: "ZhangJian He",
-      apacheId: "shoothzj",
+      "name": "Rui Fu",
+      "apacheId": "rfu"
     },
     {
-      name: "Fangbin Sun",
-      apacheId: "sunfangbin",
+      "name": "Ran Gao",
+      "apacheId": "rgao"
     },
     {
-      name: "Li Li",
-      apacheId: "urfree",
+      "name": "Xiaolong Ran",
+      "apacheId": "rxl"
     },
     {
-      name: "Xiangying Meng",
-      apacheId: "xiangying",
+      "name": "ZhangJian He",
+      "apacheId": "shoothzj"
     },
     {
-      name: "Marvin Cai",
-      apacheId: "xxc",
+      "name": "Fangbin Sun",
+      "apacheId": "sunfangbin"
     },
     {
-      name: "Yunze Xu",
-      apacheId: "xyz",
-      org: "StreamNative",
+      "name": "Zili Chen",
+      "apacheId": "tison"
     },
     {
-      name: "Yijie Shen",
-      apacheId: "yjshen",
-      org: "KUAISHOU",
+      "name": "Li Li",
+      "apacheId": "urfree"
     },
     {
-      name: "Yong Zhang",
-      apacheId: "yong",
-      org: "StreamNative",
+      "name": "Xiangying Meng",
+      "apacheId": "xiangying"
     },
     {
-      name: "Ruguo Yu",
-      apacheId: "yuruguo",
+      "name": "Marvin Cai",
+      "apacheId": "xxc"
     },
     {
-      name: "Gavin Gao",
-      apacheId: "zhangmingao",
+      "name": "Yunze Xu",
+      "apacheId": "xyz"
     },
     {
-      name: "Zili Chen",
-      apacheId: "tison",
+      "name": "Yijie Shen",
+      "apacheId": "yjshen"
     },
     {
-      name: "Zike Yang",
-      apacheId: "zike",
-      org: "StreamNative",
+      "name": "Yong Zhang",
+      "apacheId": "yong"
     },
     {
-      name: "Zixuan Liu",
-      apacheId: "zixuan",
+      "name": "Ruguo Yu",
+      "apacheId": "yuruguo"
     },
-  ],
+    {
+      "name": "Gavin Gao",
+      "apacheId": "zhangmingao"
+    },
+    {
+      "name": "Cong Zhao",
+      "apacheId": "zhaocong"
+    },
+    {
+      "name": "Zike Yang",
+      "apacheId": "zike"
+    },
+    {
+      "name": "Zixuan Liu",
+      "apacheId": "zixuan"
+    }
+  ]
 };
+

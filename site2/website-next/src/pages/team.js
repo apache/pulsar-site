@@ -36,6 +36,11 @@ export default function page(props) {
           </p>
 
           <h2>
+            <translate>PMC members</translate>
+          </h2>
+          <TeamTable data={team.pmc} />
+
+          <h2>
             <translate>Committers</translate>
           </h2>
           <p>
