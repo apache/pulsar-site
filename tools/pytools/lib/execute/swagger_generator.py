@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import shutil
+import json
 from pathlib import Path
 
 from command import find_command, run
@@ -29,4 +29,8 @@ def execute(master: Path, version: str):
         mvn = find_command('mvn', msg="mvn is required")
         run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
 
-    shutil.copytree(master_swaggers, site_path() / 'static' / 'swagger' / version, dirs_exist_ok=True)
+    for f in master_swaggers.glob('*.json'):
+        data = json.loads(f.read_text())
+        with (site_path() / 'static' / 'swagger' / version / f'{f.stem}.json').open('w+') as m:
+            json.dump(data, m, indent=4, sort_keys=True)
+            m.write('\n')
