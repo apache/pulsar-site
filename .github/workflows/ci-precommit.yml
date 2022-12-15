@@ -19,8 +19,6 @@ name: CI - Precommit
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [main]
 
 jobs:
   license:
@@ -32,3 +30,11 @@ jobs:
       - uses: apache/skywalking-eyes/header@main
         with:
           config: tools/ci/licenserc.yml
+
+  sync-without-push:
+    name: Check synchronize content
+    runs-on: ubuntu-latest
+    timeout-minutes: 600
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/sync-content.yml

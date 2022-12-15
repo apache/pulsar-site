@@ -1,0 +1,60 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+name: Synchronize Website Content
+description: Synchronize website content from the main repo
+runs:
+  using: composite
+  steps:
+    - name: Install poetry
+      run: pipx install poetry
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'poetry'
+
+    - uses: actions/checkout@v3
+      with:
+        repository: apache/pulsar
+        path: tmp/pulsar
+    - name: Cache local Maven repository
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.m2/repository/*/*/*
+          !~/.m2/repository/org/apache/pulsar
+        key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
+          ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
+          ${{ runner.os }}-m2-dependencies-core-modules-
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 17
+    - name: Run install by skip tests
+      working-directory: tmp/pulsar
+      run: mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+
+    - name: Update site sources
+      working-directory: tools/pytools
+      run: |
+        poetry install
+        poetry run bin/reference-doc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
+        poetry run bin/rest-apidoc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
+        poetry run bin/site-updater.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
