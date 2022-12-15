@@ -31,10 +31,16 @@ jobs:
         with:
           config: tools/ci/licenserc.yml
 
+  # TODO: If it causes too much time to every PR, split to another
+  # workflow file and filter by paths:
+  # - '.github/actions/sync-content/action.yml'
+  # - '.github/workflows/ci-precommit.yml'
+  # - 'tools/pytools/**'
   sync-without-push:
     name: Check synchronize content
     runs-on: ubuntu-latest
     timeout-minutes: 600
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/sync-content
+      - name: Sync content without push
+        uses: .github/actions/sync-content
