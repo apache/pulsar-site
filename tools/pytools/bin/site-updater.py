@@ -47,7 +47,7 @@ def _should_push(mode: Mode) -> bool:
 
             result = (repo is not None) and (repo == 'apache/pulsar-site')
             result = result and (event is not None) and (event != 'pull_request')
-            return False
+            return result
 
 
 git = find_command('git', msg="git is required")
