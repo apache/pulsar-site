@@ -21,6 +21,8 @@ import enum
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from pathlib import Path
 
+import semver
+
 from execute import config_doc_generator, pulsar_admin_clidoc_generator, pulsar_clidoc_generator
 from execute import pulsar_client_clidoc_generator, pulsar_perf_clidoc_generator
 
@@ -46,15 +48,21 @@ if __name__ == '__main__':
     if Kind.all in kinds:
         kinds = {Kind.config, Kind.admin, Kind.pulsar, Kind.client, Kind.perf}
 
+    if args.version != 'next':
+        ver = semver.VersionInfo.parse(args.version)
+        version = f"{ver.major}.{ver.minor}.x"
+    else:
+        version = args.version
+
     for kind in kinds:
         match kind:
             case Kind.config:
-                config_doc_generator.execute(master_path, args.version)
+                config_doc_generator.execute(master_path, version)
             case Kind.admin:
-                pulsar_admin_clidoc_generator.execute(master_path, args.version)
+                pulsar_admin_clidoc_generator.execute(master_path, version)
             case Kind.pulsar:
-                pulsar_clidoc_generator.execute(master_path, args.version)
+                pulsar_clidoc_generator.execute(master_path, version)
             case Kind.client:
-                pulsar_client_clidoc_generator.execute(master_path, args.version)
+                pulsar_client_clidoc_generator.execute(master_path, version)
             case Kind.perf:
-                pulsar_perf_clidoc_generator.execute(master_path, args.version)
+                pulsar_perf_clidoc_generator.execute(master_path, version)
