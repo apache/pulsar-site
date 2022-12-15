@@ -50,6 +50,8 @@ runs:
         java-version: 17
     - name: Run install by skip tests
       working-directory: tmp/pulsar
+      env:
+        MAVEN_OPTS: -Xss1500k -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3
       run: mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
       shell: bash
 
