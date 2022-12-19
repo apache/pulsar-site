@@ -1,16 +1,3 @@
----
-id: reference-configuration
-title: Pulsar configuration
-sidebar_label: Pulsar configuration
----
-
-<style type="text/css">
-  table{
-    font-size: 80%;
-  }
-</style>
-
-
 Pulsar configuration can be managed via a series of configuration files contained in the [`conf`](https://github.com/apache/pulsar/tree/master/conf) directory of a Pulsar [installation](getting-started-standalone.md)
 
 - [BookKeeper](#bookkeeper)

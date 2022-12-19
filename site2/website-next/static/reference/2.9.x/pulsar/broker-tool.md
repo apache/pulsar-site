@@ -8,14 +8,11 @@
 
 ------------
 
-
-
 ```shell
 $ pulsar broker-tool subcommand
 ```
 
 * `load-report`
-
 
 ## <em>load-report</em>
 
@@ -23,16 +20,14 @@ $ pulsar broker-tool subcommand
 
 ------------
 
-
 ```shell
 $ pulsar broker-tool load-report options
 ```
 
 Options
 
-
-|Flag|Description|Default|
-|---|---|---|
-| `-h, --help` | Display help information|false|
-| `-i, --interval-ms` | Interval to collect load report, in milliseconds|100|
+| Flag                | Description                                      | Default |
+|---------------------|--------------------------------------------------|---------|
+| `-h, --help`        | Display help information                         | false   |
+| `-i, --interval-ms` | Interval to collect load report, in milliseconds | 100     |
 
