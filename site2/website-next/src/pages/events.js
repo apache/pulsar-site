@@ -52,10 +52,10 @@ export default function Events() {
                 <FeaturedEvent
                   hidden="false" // use true to hide and false to show the featured event card
                   title="Pulsar Summit Asia 2022"
-                  description="Pulsar Summit Asia 2022 will be hosted virtually on November 19th and 20th, 2022. Register now for free!"
+                  description="Pulsar Summit Asia 2022 was held on November 19th and 20th, 2022. All the sessions are available now!"
                   date=""
-                  link="https://pulsar.apache.org/blog/2022/11/04/pulsar-summit-asia-2022-schedule-announced/#how-to-participate"
-                  linkText="Register"
+                  link="https://www.youtube.com/playlist?list=PLqRma1oIkcWgeNb3kgzqFyg5sywH8S4yy"
+                  linkText="Watch on YouTube"
                 />
               </div>
             </div>
