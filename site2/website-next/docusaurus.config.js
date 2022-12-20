@@ -142,7 +142,7 @@ module.exports = {
     announcementBar: {
       id: "summit",
       content:
-        '🚀 Pulsar Summit Asia 2022 will take place on November 19th and 20th, 2022. <a target="_blank" href="https://pulsar.apache.org/blog/2022/11/04/pulsar-summit-asia-2022-schedule-announced#how-to-participate">Register now for free</a>!',
+        '🚀 Check out <a target="_blank" href="https://www.youtube.com/playlist?list=PLqRma1oIkcWgeNb3kgzqFyg5sywH8S4yy">all the sessions</a> in Pulsar Summit Asia 2022 on YouTube!',
       backgroundColor: "#198fff",
       textColor: "#fff",
       isCloseable: true,
