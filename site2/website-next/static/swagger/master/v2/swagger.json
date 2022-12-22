@@ -28483,6 +28483,9 @@
                 ]
             },
             "put": {
+                "consumes": [
+                    "application/vnd.partitioned-topic-metadata+json"
+                ],
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
                 "parameters": [
@@ -28508,14 +28511,12 @@
                         "type": "string"
                     },
                     {
-                        "description": "The number of partitions for the topic",
+                        "description": "The metadata for the topic",
                         "in": "body",
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "default": 0,
-                            "format": "int32",
-                            "type": "integer"
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
                         }
                     },
                     {
