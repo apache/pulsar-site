@@ -540,6 +540,48 @@
             },
             "type": "object"
         },
+        "CompactionStats": {
+            "properties": {
+                "lastCompactionDurationTimeInMills": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCompactionFailedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCompactionRemovedEventCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCompactionSucceedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "CompactionStatsImpl": {
+            "properties": {
+                "lastCompactionDurationTimeInMills": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCompactionFailedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCompactionRemovedEventCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastCompactionSucceedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "CompletableFuture": {
             "properties": {
                 "cancelled": {
@@ -743,6 +785,93 @@
             },
             "type": "object"
         },
+        "ConsumerStats": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "availablePermits": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "avgMessagesPerEntry": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "blockedConsumerOnUnackedMsgs": {
+                    "type": "boolean"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "chunkedMessageRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "clientVersion": {
+                    "type": "string"
+                },
+                "connectedSince": {
+                    "type": "string"
+                },
+                "consumerName": {
+                    "type": "string"
+                },
+                "keyHashRanges": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lastAckedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConsumedFlowTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConsumedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "messageAckRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "metadata": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateRedeliver": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "readPositionWhenJoining": {
+                    "type": "string"
+                },
+                "unackedMessages": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "ContextAttributes": {
             "type": "object"
         },
@@ -767,6 +896,117 @@
                 },
                 "symbol": {
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CursorDetails": {
+            "properties": {
+                "cursorBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cursorLedgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "CursorInfo": {
+            "properties": {
+                "creationDate": {
+                    "type": "string"
+                },
+                "cursorsLedgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "individualDeletedMessages": {
+                    "items": {
+                        "$ref": "#/definitions/MessageRangeInfo"
+                    },
+                    "type": "array"
+                },
+                "markDelete": {
+                    "$ref": "#/definitions/PositionInfo"
+                },
+                "modificationDate": {
+                    "type": "string"
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "object"
+                },
+                "version": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "CursorStats": {
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "cursorLedger": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cursorLedgerLastEntry": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "individuallyDeletedMessages": {
+                    "type": "string"
+                },
+                "lastLedgerSwitchTimestamp": {
+                    "type": "string"
+                },
+                "markDeletePosition": {
+                    "type": "string"
+                },
+                "messagesConsumedCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "numberOfEntriesSinceFirstNotAckedMessage": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "pendingReadOps": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "object"
+                },
+                "readPosition": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "subscriptionHavePendingRead": {
+                    "type": "boolean"
+                },
+                "subscriptionHavePendingReplayRead": {
+                    "type": "boolean"
+                },
+                "totalNonContiguousDeletedMessagesRange": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "waitingReadOp": {
+                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -916,6 +1156,26 @@
             "type": "object"
         },
         "DeserializerFactory": {
+            "type": "object"
+        },
+        "DispatchRate": {
+            "properties": {
+                "dispatchThrottlingRateInByte": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottlingRateInMsg": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "ratePeriodInSecond": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "relativeToPublishRate": {
+                    "type": "boolean"
+                }
+            },
             "type": "object"
         },
         "DispatchRateImpl": {
@@ -1725,6 +1985,53 @@
             },
             "type": "object"
         },
+        "LedgerDetails": {
+            "properties": {
+                "entries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ledgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "size": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "timestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "LedgerInfo": {
+            "properties": {
+                "entries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ledgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "metadata": {
+                    "type": "string"
+                },
+                "offloaded": {
+                    "type": "boolean"
+                },
+                "size": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "underReplicated": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "LinkedNode": {
             "type": "object"
         },
@@ -1989,6 +2296,42 @@
             },
             "type": "object"
         },
+        "ManagedLedgerInfo": {
+            "properties": {
+                "creationDate": {
+                    "type": "string"
+                },
+                "cursors": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/CursorInfo"
+                    },
+                    "type": "object"
+                },
+                "ledgers": {
+                    "items": {
+                        "$ref": "#/definitions/LedgerInfo"
+                    },
+                    "type": "array"
+                },
+                "modificationDate": {
+                    "type": "string"
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "terminatedPosition": {
+                    "$ref": "#/definitions/PositionInfo"
+                },
+                "version": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "MemoryLimit": {
             "properties": {
                 "absoluteValue": {
@@ -1998,6 +2341,17 @@
                 "percentOfMaxDirectMemory": {
                     "format": "double",
                     "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "MessageRangeInfo": {
+            "properties": {
+                "from": {
+                    "$ref": "#/definitions/PositionInfo"
+                },
+                "to": {
+                    "$ref": "#/definitions/PositionInfo"
                 }
             },
             "type": "object"
@@ -2156,6 +2510,562 @@
                 },
                 "is_controlled": {
                     "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "NonPersistentPartitionedTopicStatsImpl": {
+            "properties": {
+                "abortedTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "committedTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "compaction": {
+                    "$ref": "#/definitions/CompactionStatsImpl"
+                },
+                "deduplicationStatus": {
+                    "type": "string"
+                },
+                "delayedMessageIndexSizeInBytes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "earliestMsgPublishTimeInBacklogs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadFailureTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadLedgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadSuccessTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/PartitionedTopicMetadata"
+                },
+                "msgChunkPublished": {
+                    "type": "boolean"
+                },
+                "msgDropRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offloadedStorageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ongoingTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ownerBroker": {
+                    "type": "string"
+                },
+                "partitions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/NonPersistentTopicStatsImpl"
+                    },
+                    "type": "object"
+                },
+                "publishRateLimitedTimes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "publishers": {
+                    "items": {
+                        "$ref": "#/definitions/NonPersistentPublisherStats"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "replication": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/NonPersistentReplicatorStats"
+                    },
+                    "readOnly": true,
+                    "type": "object"
+                },
+                "storageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "subscriptions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/NonPersistentSubscriptionStats"
+                    },
+                    "readOnly": true,
+                    "type": "object"
+                },
+                "topicEpoch": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingPublishers": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "NonPersistentPublisherStats": {
+            "properties": {
+                "accessMode": {
+                    "enum": [
+                        "Shared",
+                        "Exclusive",
+                        "ExclusiveWithFencing",
+                        "WaitForExclusive"
+                    ],
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "chunkedMessageRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "clientVersion": {
+                    "type": "string"
+                },
+                "connectedSince": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "msgDropRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "producerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "producerName": {
+                    "type": "string"
+                },
+                "supportsPartialProducer": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "NonPersistentReplicatorStats": {
+            "properties": {
+                "connected": {
+                    "type": "boolean"
+                },
+                "inboundConnectedSince": {
+                    "type": "string"
+                },
+                "inboundConnection": {
+                    "type": "string"
+                },
+                "msgDropRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateExpired": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "outboundConnectedSince": {
+                    "type": "string"
+                },
+                "outboundConnection": {
+                    "type": "string"
+                },
+                "replicationBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "replicationDelayInSeconds": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "NonPersistentSubscriptionStats": {
+            "properties": {
+                "activeConsumerName": {
+                    "type": "string"
+                },
+                "allowOutOfOrderDelivery": {
+                    "type": "boolean"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "blockedSubscriptionOnUnackedMsgs": {
+                    "type": "boolean"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "chunkedMessageRate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "consumers": {
+                    "items": {
+                        "$ref": "#/definitions/ConsumerStats"
+                    },
+                    "type": "array"
+                },
+                "consumersAfterMarkDeletePosition": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "durable": {
+                    "type": "boolean"
+                },
+                "earliestMsgPublishTimeInBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterAcceptedMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterProcessedMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterRejectedMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterRescheduledMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "keySharedMode": {
+                    "type": "string"
+                },
+                "lastAckedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConsumedFlowTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConsumedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastExpireTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastMarkDeleteAdvancedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "messageAckRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgBacklogNoDelayed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgDelayed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgDropRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateExpired": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateRedeliver": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "replicated": {
+                    "type": "boolean"
+                },
+                "subscriptionProperties": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "totalMsgExpired": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "unackedMessages": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "NonPersistentTopicStatsImpl": {
+            "properties": {
+                "abortedTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "committedTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "compaction": {
+                    "$ref": "#/definitions/CompactionStatsImpl"
+                },
+                "deduplicationStatus": {
+                    "type": "string"
+                },
+                "delayedMessageIndexSizeInBytes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "earliestMsgPublishTimeInBacklogs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadFailureTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadLedgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadSuccessTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgChunkPublished": {
+                    "type": "boolean"
+                },
+                "msgDropRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offloadedStorageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ongoingTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ownerBroker": {
+                    "type": "string"
+                },
+                "publishRateLimitedTimes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "publishers": {
+                    "items": {
+                        "$ref": "#/definitions/NonPersistentPublisherStats"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "replication": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/NonPersistentReplicatorStats"
+                    },
+                    "readOnly": true,
+                    "type": "object"
+                },
+                "storageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "subscriptions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/NonPersistentSubscriptionStats"
+                    },
+                    "readOnly": true,
+                    "type": "object"
+                },
+                "topicEpoch": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingPublishers": {
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -2537,6 +3447,62 @@
             },
             "type": "object"
         },
+        "PartitionedManagedLedgerInfo": {
+            "properties": {
+                "creationDate": {
+                    "type": "string"
+                },
+                "cursors": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/CursorInfo"
+                    },
+                    "type": "object"
+                },
+                "ledgers": {
+                    "items": {
+                        "$ref": "#/definitions/LedgerInfo"
+                    },
+                    "type": "array"
+                },
+                "modificationDate": {
+                    "type": "string"
+                },
+                "partitions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ManagedLedgerInfo"
+                    },
+                    "type": "object"
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "terminatedPosition": {
+                    "$ref": "#/definitions/PositionInfo"
+                },
+                "version": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "PartitionedTopicInternalStats": {
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/PartitionedTopicMetadata"
+                },
+                "partitions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/PersistentTopicInternalStats"
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
         "PartitionedTopicMetadata": {
             "properties": {
                 "deleted": {
@@ -2551,6 +3517,150 @@
                         "type": "string"
                     },
                     "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "PartitionedTopicStatsImpl": {
+            "properties": {
+                "abortedTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "committedTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "compaction": {
+                    "$ref": "#/definitions/CompactionStatsImpl"
+                },
+                "deduplicationStatus": {
+                    "type": "string"
+                },
+                "delayedMessageIndexSizeInBytes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "earliestMsgPublishTimeInBacklogs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadFailureTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadLedgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastOffloadSuccessTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/PartitionedTopicMetadata"
+                },
+                "msgChunkPublished": {
+                    "type": "boolean"
+                },
+                "msgInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offloadedStorageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ongoingTxnCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ownerBroker": {
+                    "type": "string"
+                },
+                "partitions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicStats"
+                    },
+                    "type": "object"
+                },
+                "publishRateLimitedTimes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "publishers": {
+                    "items": {
+                        "$ref": "#/definitions/PublisherStats"
+                    },
+                    "type": "array"
+                },
+                "replication": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ReplicatorStats"
+                    },
+                    "type": "object"
+                },
+                "storageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "subscriptions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/SubscriptionStats"
+                    },
+                    "type": "object"
+                },
+                "topicEpoch": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingPublishers": {
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -2609,6 +3719,214 @@
                 "managedLedgerMaxMarkDeleteRate": {
                     "format": "double",
                     "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "PersistentOfflineTopicStats": {
+            "properties": {
+                "brokerName": {
+                    "type": "string"
+                },
+                "cursorDetails": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/CursorDetails"
+                    },
+                    "type": "object"
+                },
+                "dataLedgerDetails": {
+                    "items": {
+                        "$ref": "#/definitions/LedgerDetails"
+                    },
+                    "type": "array"
+                },
+                "messageBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "statGeneratedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "storageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicName": {
+                    "type": "string"
+                },
+                "totalMessages": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "PersistentTopicInternalStats": {
+            "properties": {
+                "compactedLedger": {
+                    "$ref": "#/definitions/LedgerInfo"
+                },
+                "currentLedgerEntries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "currentLedgerSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cursors": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/CursorStats"
+                    },
+                    "type": "object"
+                },
+                "entriesAddedCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConfirmedEntry": {
+                    "type": "string"
+                },
+                "lastLedgerCreatedTimestamp": {
+                    "type": "string"
+                },
+                "lastLedgerCreationFailureTimestamp": {
+                    "type": "string"
+                },
+                "ledgers": {
+                    "items": {
+                        "$ref": "#/definitions/LedgerInfo"
+                    },
+                    "type": "array"
+                },
+                "numberOfEntries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "pendingAddEntriesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "schemaLedgers": {
+                    "items": {
+                        "$ref": "#/definitions/LedgerInfo"
+                    },
+                    "type": "array"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "totalSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingCursorsCount": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "PersistentTopicStats": {
+            "properties": {
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "compaction": {
+                    "$ref": "#/definitions/CompactionStats"
+                },
+                "deduplicationStatus": {
+                    "type": "string"
+                },
+                "earliestMsgPublishTimeInBacklogs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgChunkPublished": {
+                    "type": "boolean"
+                },
+                "msgInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offloadedStorageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ownerBroker": {
+                    "type": "string"
+                },
+                "publishers": {
+                    "items": {
+                        "$ref": "#/definitions/PublisherStats"
+                    },
+                    "type": "array"
+                },
+                "replication": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ReplicatorStats"
+                    },
+                    "type": "object"
+                },
+                "storageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "subscriptions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/SubscriptionStats"
+                    },
+                    "type": "object"
+                },
+                "topicEpoch": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingPublishers": {
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -2955,6 +4273,19 @@
             },
             "type": "object"
         },
+        "PositionInfo": {
+            "properties": {
+                "entryId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ledgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "PostSchemaPayload": {
             "properties": {
                 "properties": {
@@ -3048,10 +4379,113 @@
             },
             "type": "object"
         },
+        "PublisherStats": {
+            "properties": {
+                "accessMode": {
+                    "enum": [
+                        "Shared",
+                        "Exclusive",
+                        "ExclusiveWithFencing",
+                        "WaitForExclusive"
+                    ],
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "chunkedMessageRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "clientVersion": {
+                    "type": "string"
+                },
+                "connectedSince": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "producerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "producerName": {
+                    "type": "string"
+                },
+                "supportsPartialProducer": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "RawBookieInfo": {
             "properties": {
                 "bookieId": {
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ReplicatorStats": {
+            "properties": {
+                "connected": {
+                    "type": "boolean"
+                },
+                "inboundConnectedSince": {
+                    "type": "string"
+                },
+                "inboundConnection": {
+                    "type": "string"
+                },
+                "msgRateExpired": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "outboundConnectedSince": {
+                    "type": "string"
+                },
+                "outboundConnection": {
+                    "type": "string"
+                },
+                "replicationBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "replicationDelayInSeconds": {
+                    "format": "int64",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -3403,6 +4837,154 @@
             },
             "type": "object"
         },
+        "SubscriptionStats": {
+            "properties": {
+                "activeConsumerName": {
+                    "type": "string"
+                },
+                "allowOutOfOrderDelivery": {
+                    "type": "boolean"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "blockedSubscriptionOnUnackedMsgs": {
+                    "type": "boolean"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "chunkedMessageRate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "consumers": {
+                    "items": {
+                        "$ref": "#/definitions/ConsumerStats"
+                    },
+                    "type": "array"
+                },
+                "consumersAfterMarkDeletePosition": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "durable": {
+                    "type": "boolean"
+                },
+                "earliestMsgPublishTimeInBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterAcceptedMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterProcessedMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterRejectedMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filterRescheduledMsgCount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "keySharedMode": {
+                    "type": "string"
+                },
+                "lastAckedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConsumedFlowTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConsumedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastExpireTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastMarkDeleteAdvancedTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "messageAckRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgBacklog": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgBacklogNoDelayed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgDelayed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateExpired": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateRedeliver": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "replicated": {
+                    "type": "boolean"
+                },
+                "subscriptionProperties": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "totalMsgExpired": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "unackedMessages": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "SubtypeResolver": {
             "type": "object"
         },
@@ -3472,6 +5054,109 @@
                     "type": "string"
                 },
                 "rawOffset": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "TopicStats": {
+            "properties": {
+                "averageMsgSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "backlogSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "bytesOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "compaction": {
+                    "$ref": "#/definitions/CompactionStats"
+                },
+                "deduplicationStatus": {
+                    "type": "string"
+                },
+                "earliestMsgPublishTimeInBacklogs": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgChunkPublished": {
+                    "type": "boolean"
+                },
+                "msgInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgOutCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgRateIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgRateOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputIn": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "msgThroughputOut": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "nonContiguousDeletedMessagesRanges": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nonContiguousDeletedMessagesRangesSerializedSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offloadedStorageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ownerBroker": {
+                    "type": "string"
+                },
+                "publishers": {
+                    "items": {
+                        "$ref": "#/definitions/PublisherStats"
+                    },
+                    "type": "array"
+                },
+                "replication": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ReplicatorStats"
+                    },
+                    "type": "object"
+                },
+                "storageSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "subscriptions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/SubscriptionStats"
+                    },
+                    "type": "object"
+                },
+                "topicEpoch": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingPublishers": {
                     "format": "int32",
                     "type": "integer"
                 }
@@ -12346,6 +14031,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistentOfflineTopicStats"
+                        }
+                    },
                     "404": {
                         "description": "Namespace does not exist"
                     },
@@ -12566,6 +14257,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "$ref": "#/definitions/BacklogQuota"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -12621,6 +14321,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -12894,6 +14601,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13152,6 +14866,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13331,6 +15051,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13515,6 +15242,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DelayedDeliveryPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14176,6 +15909,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/InactiveTopicPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14294,6 +16033,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedManagedLedgerInfo"
+                        }
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"
                     },
@@ -14656,6 +16401,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14851,6 +16603,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15043,6 +16802,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15245,6 +17011,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15440,6 +17213,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15636,6 +17416,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15820,6 +17607,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16010,6 +17804,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16538,6 +18339,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedTopicInternalStats"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -16637,6 +18444,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/NonPersistentPartitionedTopicStatsImpl"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -17298,6 +19111,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistencePolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17498,6 +19317,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -17706,6 +19534,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PublishRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17900,6 +19734,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -18094,6 +19937,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -18298,6 +20147,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/RetentionPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -18500,6 +20355,23 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "enum": [
+                                "UNDEFINED",
+                                "ALWAYS_INCOMPATIBLE",
+                                "ALWAYS_COMPATIBLE",
+                                "BACKWARD",
+                                "FORWARD",
+                                "FULL",
+                                "BACKWARD_TRANSITIVE",
+                                "FORWARD_TRANSITIVE",
+                                "FULL_TRANSITIVE"
+                            ],
+                            "type": "string"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18937,6 +20809,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistentTopicStats"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -19084,6 +20962,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SubscribeRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19793,6 +21677,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "boolean"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources"
                     },
@@ -20433,6 +22326,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20624,6 +22523,21 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "enum": [
+                                    "Exclusive",
+                                    "Shared",
+                                    "Failover",
+                                    "Key_Shared"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20760,6 +22674,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21857,6 +23780,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistentOfflineTopicStats"
+                        }
+                    },
                     "404": {
                         "description": "Namespace does not exist"
                     },
@@ -22077,6 +24006,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "$ref": "#/definitions/BacklogQuota"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22132,6 +24070,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22405,6 +24350,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22663,6 +24615,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22842,6 +24800,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23026,6 +24991,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DelayedDeliveryPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23687,6 +25658,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/InactiveTopicPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23805,6 +25782,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedManagedLedgerInfo"
+                        }
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"
                     },
@@ -23876,6 +25859,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistentTopicInternalStats"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -24170,6 +26159,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24365,6 +26361,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24557,6 +26560,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24759,6 +26769,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24954,6 +26971,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25150,6 +27174,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25334,6 +27365,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25524,6 +27562,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26052,6 +28097,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedTopicInternalStats"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -26151,6 +28202,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedTopicStatsImpl"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -26299,6 +28356,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -26420,9 +28483,6 @@
                 ]
             },
             "put": {
-                "consumes": [
-                    "application/vnd.partitioned-topic-metadata+json"
-                ],
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
                 "parameters": [
@@ -26448,12 +28508,14 @@
                         "type": "string"
                     },
                     {
-                        "description": "The metadata for the topic",
+                        "description": "The number of partitions for the topic",
                         "in": "body",
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PartitionedTopicMetadata"
+                            "default": 0,
+                            "format": "int32",
+                            "type": "integer"
                         }
                     },
                     {
@@ -26812,6 +28874,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistencePolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27012,6 +29080,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -27220,6 +29297,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PublishRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27414,6 +29497,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27608,6 +29700,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27812,6 +29910,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/RetentionPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -28014,6 +30118,23 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "enum": [
+                                "UNDEFINED",
+                                "ALWAYS_INCOMPATIBLE",
+                                "ALWAYS_COMPATIBLE",
+                                "BACKWARD",
+                                "FORWARD",
+                                "FULL",
+                                "BACKWARD_TRANSITIVE",
+                                "FORWARD_TRANSITIVE",
+                                "FULL_TRANSITIVE"
+                            ],
+                            "type": "string"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28451,6 +30572,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistentTopicStats"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28598,6 +30725,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SubscribeRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29307,6 +31440,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "boolean"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources"
                     },
@@ -29947,6 +32089,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30138,6 +32286,21 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "enum": [
+                                    "Exclusive",
+                                    "Shared",
+                                    "Failover",
+                                    "Key_Shared"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30274,6 +32437,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31775,6 +33947,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TenantInfo"
+                        }
+                    },
                     "403": {
                         "description": "The requester doesn't have admin permissions"
                     },
