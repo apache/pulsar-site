@@ -1,6 +1,5 @@
 import React from 'react'
 import pulsarReleases from '@site/releases.json'
-import pulsarLegacyVersions from '@site/legacy-versions.json'
 import connectors from '@site/data/connectors'
 import cppReleases from '@site/data/release-cpp'
 import pulsarManagerReleases from '@site/data/release-pulsar-manager'
@@ -86,6 +85,28 @@ export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
     </div>
 }
 
+const legacyReleaseNoteVersions = [
+    "2.5.0",
+    "2.4.2",
+    "2.4.1",
+    "2.4.0",
+    "2.3.2",
+    "2.3.1",
+    "2.3.0",
+    "2.2.1",
+    "2.2.0",
+    "2.1.1-incubating",
+    "2.1.0-incubating",
+    "2.0.1-incubating",
+    "2.0.0-incubating",
+    "2.0.0-rc1-incubating",
+    "1.22.1-incubating",
+    "1.22.0-incubating",
+    "1.21.0-incubating",
+    "1.20.0-incubating",
+    "1.19.0-incubating"
+]
+
 export function ArchivedPulsarDownloadTable(): JSX.Element {
     const { siteConfig } = useDocusaurusContext()
     const latestVersion = pulsarReleases[0]
@@ -113,7 +134,7 @@ export function ArchivedPulsarDownloadTable(): JSX.Element {
                 sourceAsc: `${info.srcArchiveUrl}.asc`,
                 sourceSha: `${info.srcArchiveUrl}.${sha}`,
                 sourceShaText: `${sha}`,
-                releaseNote: !pulsarLegacyVersions.includes(info.version)
+                releaseNote: !legacyReleaseNoteVersions.includes(info.version)
                     ? `${siteConfig.baseUrl}release-notes/versioned/pulsar-${info.version}`
                     : `${siteConfig.baseUrl}release-notes/legacy/#${info.version.replace(
                         /\./g,
