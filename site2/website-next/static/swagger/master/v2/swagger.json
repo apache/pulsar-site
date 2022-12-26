@@ -18719,9 +18719,6 @@
                 ]
             },
             "put": {
-                "consumes": [
-                    "application/vnd.partitioned-topic-metadata+json"
-                ],
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
                 "parameters": [
@@ -18747,12 +18744,14 @@
                         "type": "string"
                     },
                     {
-                        "description": "The metadata for the topic",
+                        "description": "The number of partitions for the topic",
                         "in": "body",
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PartitionedTopicMetadata"
+                            "default": 0,
+                            "format": "int32",
+                            "type": "integer"
                         }
                     },
                     {
@@ -18771,19 +18770,19 @@
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
                     "401": {
-                        "description": "Don't have permission to administrate resources on this tenant"
+                        "description": "Don't have permission to manage resources on this tenant"
                     },
                     "403": {
                         "description": "Don't have admin permission"
                     },
                     "404": {
-                        "description": "Tenant or namespace doesn't exist"
+                        "description": "The tenant/namespace does not exist"
                     },
                     "406": {
                         "description": "The number of partitions should be more than 0 and less than or equal to maxNumPartitionsPerPartitionedTopic"
                     },
                     "409": {
-                        "description": "Partitioned topic already exist"
+                        "description": "Partitioned topic already exists"
                     },
                     "412": {
                         "description": "Failed Reason : Name is invalid or Namespace does not have any clusters configured"
@@ -28483,6 +28482,9 @@
                 ]
             },
             "put": {
+                "consumes": [
+                    "application/vnd.partitioned-topic-metadata+json"
+                ],
                 "description": "It needs to be called before creating a producer on a partitioned topic.",
                 "operationId": "createPartitionedTopic",
                 "parameters": [
@@ -28508,14 +28510,12 @@
                         "type": "string"
                     },
                     {
-                        "description": "The number of partitions for the topic",
+                        "description": "The metadata for the topic",
                         "in": "body",
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "default": 0,
-                            "format": "int32",
-                            "type": "integer"
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
                         }
                     },
                     {
