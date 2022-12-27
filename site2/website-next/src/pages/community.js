@@ -172,7 +172,7 @@ export default function Community(props) {
               </div>
               <div className="image-bg-container p-8 md:w-1/2">
                 <div id="slider" className="relative">
-                  {/* 
+                  {/*
                       NOTE: add images to the slidesArr array above to include the in the image carousel.
                     */}
                   {slidesArr.map((s, i) => {
@@ -512,6 +512,14 @@ export default function Community(props) {
                     </a>
                     .
                   </p>
+                    <p>The process for reporting a vulnerability is outlined
+                        <a className="secondary-cta" href="https://www.apache.org/security/" target="_blank">here</a>
+                      . When reporting a vulnerability to
+                      <a className="secondary-cta" href="mailto:security@apache.org" target="_blank">security@apache.org</a>
+                      , you can copy your email to
+                      <a className="secondary-cta" href="mailto:private@pulsar.apache.org" target="_blank">private@pulsar.apache.org</a>
+                      to send your report to the Apache Pulsar Project Management Committee. This is a private mailing list.
+                    </p>
                 </div>
               </div>
             </div>
