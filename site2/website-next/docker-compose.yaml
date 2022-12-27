@@ -17,18 +17,11 @@
 
 version: "3.1"
 services:
-  # web:
-  #   image: nginx:1.18.0-alpine
-  #   ports:
-  #     - 80:80
-  #   volumes:
-  #     - ./build:/usr/share/nginx/html
-  #   container_name: psite
   web:
     image: httpd:2.4.54-alpine
     ports:
-      - 80:80
+      - "80:80"
     volumes:
       - ./build:/usr/local/apache2/htdocs
       - ./scripts/httpd.conf:/usr/local/apache2/conf/httpd.conf
-    container_name: psite
+    container_name: pulsar_site
