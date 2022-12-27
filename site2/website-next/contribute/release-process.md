@@ -38,7 +38,7 @@ To verify the release branch is not broken, you can synchronize the branch in yo
 
 If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md) to sign the release artifacts.
 
-Before you start the next release steps, make sure you have installed the **JDK8** and maven **3.6.1** for Pulsar 2.6 and Pulsar 2.7, and **JDK11** and Maven **3.6.1** for Pulsar 2.8 onwards. And **clean up the bookkeeper's local compiled** to make sure the bookkeeper dependency is fetched from the Maven repo, details to see https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2
+Before you start the next release steps, make sure you have installed the **JDK8** and maven **3.6.1** for Pulsar 2.6 and Pulsar 2.7, and **JDK11** and Maven **3.6.1** or **3.8.6** for Pulsar 2.8 onwards. And **clean up the bookkeeper's local compiled** to make sure the bookkeeper dependency is fetched from the Maven repo, details to see https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2
 
 ## Create the release branch
 
@@ -149,7 +149,7 @@ Inspect the artifacts:
  bin/pulsar standalone
  ```
 
-* Use instructions in [Release-Candidate-Validation](https://github.com/apache/pulsar/blob/master/wiki/release/release-candidate-validation.md) to do some sanity checks on the produced binary distributions.
+* Use instructions in [Release-Candidate-Validation](validate-release-candidate.md) to do some sanity checks on the produced binary distributions.
 
 ### Build RPM and DEB packages
 
