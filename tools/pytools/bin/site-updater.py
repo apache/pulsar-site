@@ -25,7 +25,7 @@ from pathlib import Path
 
 from command import run, find_command, run_pipe
 from constant import root_path
-from execute import site_syncer, swagger_generator
+from execute import site_syncer
 
 
 class Mode(enum.Enum):
@@ -35,19 +35,16 @@ class Mode(enum.Enum):
 
 
 def _should_push(mode: Mode) -> bool:
-    match mode:
-        case Mode.y:
-            return True
-        case Mode.n:
-            return False
-        case Mode.auto:
-            repo = os.getenv('GITHUB_REPOSITORY')
-            event = os.getenv('GITHUB_EVENT_NAME')
-            print(f'repo={repo}, event={event}')
+    if mode != Mode.auto:
+        return mode != Mode.n
 
-            result = (repo is not None) and (repo == 'apache/pulsar-site')
-            result = result and (event is not None) and (event != 'pull_request')
-            return result
+    repo = os.getenv('GITHUB_REPOSITORY')
+    event = os.getenv('GITHUB_EVENT_NAME')
+    print(f'repo={repo}, event={event}')
+
+    result = (repo is not None) and (repo == 'apache/pulsar-site')
+    result = result and (event is not None) and (event != 'pull_request')
+    return result
 
 
 git = find_command('git', msg="git is required")
