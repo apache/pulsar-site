@@ -23,7 +23,7 @@
 
 ## Prerequisite
 
-Pytools requires Python 3.10+.
+Pytools requires Python 3.8+.
 
 Pytools uses [poetry](https://python-poetry.org/) to manage dependencies and projects.
 
