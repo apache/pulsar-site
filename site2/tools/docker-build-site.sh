@@ -20,7 +20,6 @@
 
 # Build Pulsar website within a Docker container
 
-# Fail script in case of errors
 set -e -x
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
@@ -31,8 +30,6 @@ BUILD_IMAGE_VERSION="${BUILD_IMAGE_VERSION:-website-v2}"
 IMAGE="$BUILD_IMAGE_NAME:$BUILD_IMAGE_VERSION"
 
 echo "---- Build Pulsar website using image $IMAGE"
-
-#docker pull $IMAGE
 
 CI_USER=$(id -u)
 CI_GROUP=$(id -g)
