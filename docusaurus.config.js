@@ -424,7 +424,7 @@ module.exports = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           sidebarPath: require.resolve('./sidebarsDevelopment.js'),
-          editUrl: 'https://github.com/apache/pulsar-site/tree/main/site2/website-next',
+          editUrl: 'https://github.com/apache/pulsar-site/tree/main/',
       },
     ],
     [
