@@ -446,6 +446,16 @@ module.exports = {
         // showLastUpdateTime: true,
       }),
     ],
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: "security",
+        path: "security",
+        routeBasePath: "security",
+        sidebarPath: false,
+      }),
+    ],
   ],
   scripts: [
     {

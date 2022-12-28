@@ -59,6 +59,7 @@ const sidebars = {
                 'validate-release-candidate',
                 'release-process',
                 'release-note-guide',
+                'version-policy',
             ]
         },
         {
