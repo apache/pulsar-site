@@ -36,6 +36,6 @@ CI_GROUP=$(id -g)
 
 DOCKER_CMD="docker run -i -e CI_USER=$CI_USER -e CI_GROUP=$CI_GROUP -v $HOME/.m2:/root/.m2 -v $ROOT_DIR:/pulsar $IMAGE"
 
-CMD="cd /pulsar && /pulsar/site2/tools/build-site.sh $GH_TOKEN $@"
+CMD="cd /pulsar && /pulsar/tools/build-site.sh $GH_TOKEN $@"
 echo "docker exec cmd: "$CMD
 $DOCKER_CMD bash -l -c "$CMD"

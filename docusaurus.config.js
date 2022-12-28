@@ -387,7 +387,7 @@ module.exports = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: `${githubSiteUrl}/edit/main/site2/website-next/`,
+          editUrl: `${githubSiteUrl}/edit/main/`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
