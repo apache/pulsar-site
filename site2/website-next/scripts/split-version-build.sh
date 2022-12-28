@@ -44,8 +44,6 @@ else
     SUPPLEMENT_VERSIONS=""
 fi
 
-yarn write-translations
-
 CURRENT_HOUR=$(date +%H)
 CURRENT_HOUR=${CURRENT_HOUR#0}
 echo "CURRENT_HOUR: "$CURRENT_HOUR
@@ -54,8 +52,6 @@ if [[ $FORCE_BUILD_ALL_VERSION"" == "1" ]] || [[ $FORCE_BUILD_ALL_VERSION"" == "
     BUILD_ALL_VERSION=$FORCE_BUILD_ALL_VERSION""
     echo "force build all versions"
 fi
-
-cp scripts/code.json i18n/en/
 
 # Build only the versions that has changed and build next version that has any changed
 while read version; do
