@@ -84,7 +84,7 @@ poetry run bin/java-apidoc-generator.py <VERSION>
 
 ### [site-updater](bin/site-updater.py)
 
-This executable synchronizes site content from the main repo:
+This executable synchronizes references built from the main repo:
 
 ```bash
 poetry run bin/site-updater.py --master-path=<PATH> [--push={y|n|auto}]
