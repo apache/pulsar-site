@@ -55,11 +55,11 @@ runs:
       run: mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
       shell: bash
 
-    - name: Update site sources
+    - name: Update generated docs
       working-directory: tools/pytools
       run: |
         poetry install
         poetry run bin/reference-doc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
-        # poetry run bin/rest-apidoc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
+        poetry run bin/rest-apidoc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
         poetry run bin/site-updater.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
       shell: bash
