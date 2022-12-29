@@ -25,7 +25,6 @@ from pathlib import Path
 
 from command import run, find_command, run_pipe
 from constant import root_path
-from execute import site_syncer
 
 
 class Mode(enum.Enum):
@@ -83,8 +82,6 @@ if __name__ == '__main__':
             master = Path(cwd) / 'pulsar'
         else:
             master = Path(args.master_path)
-
-        site_syncer.execute(master)
 
         if _should_push(args.push):
             _do_push(master, root_path())
