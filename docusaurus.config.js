@@ -363,15 +363,7 @@ module.exports = {
         docs: {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: ({
-            version,
-            versionDocsDirPath,
-            docPath,
-            permalink,
-            locale,
-          }) => {
-            return `${githubUrl}/edit/master/site2/docs/${docPath}`;
-          },
+          editUrl: `${githubSiteUrl}/edit/main`,
           remarkPlugins: [
             linkifyRegex(
               /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
@@ -424,7 +416,7 @@ module.exports = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           sidebarPath: require.resolve('./sidebarsDevelopment.js'),
-          editUrl: 'https://github.com/apache/pulsar-site/tree/main/',
+          editUrl: `${githubSiteUrl}/edit/main`,
       },
     ],
     [
@@ -434,16 +426,8 @@ module.exports = {
         id: "release-notes",
         path: "release-notes",
         routeBasePath: "release-notes",
-        // editUrl: ({ locale, versionDocsDirPath, docPath }) => {
-        //   if (locale !== "en") {
-        //     return ``;
-        //   }
-        //   return ``;
-        // },
-        // editCurrentVersion: true,
+        editUrl: `${githubSiteUrl}/edit/main`,
         sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
-        // showLastUpdateAuthor: true,
-        // showLastUpdateTime: true,
       }),
     ],
     [
