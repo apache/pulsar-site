@@ -49,5 +49,5 @@ jobs:
           GH_TOKEN: ${{ secrets.PULSARBOT_TOKEN }}
         run: |
           echo "Building Website"
-          site2/tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
-          bash -e site2/tools/publish-website.sh next
+          tools/docker-build-site.sh next ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
+          bash -e tools/publish-website.sh next

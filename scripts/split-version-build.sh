@@ -56,7 +56,7 @@ fi
 # Build only the versions that has changed and build next version that has any changed
 while read version; do
     buildVersion=$version
-    if [[ $@ == *website-next/versioned_docs/version-$version* || $buildVersion == "next" || $BUILD_ALL_VERSION == "1" || $BUILD_VERSION == *$buildVersion* || $SUPPLEMENT_VERSIONS == *$buildVersion* ]]; then
+    if [[ $@ == *versioned_docs/version-$version* || $buildVersion == "next" || $BUILD_ALL_VERSION == "1" || $BUILD_VERSION == *$buildVersion* || $SUPPLEMENT_VERSIONS == *$buildVersion* ]]; then
         _buildVersion
     else
         echo "..." $buildVersion "no change, skip"

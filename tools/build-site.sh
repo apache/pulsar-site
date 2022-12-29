@@ -24,8 +24,8 @@ GH_TOKEN=$1
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
-WEBSITE_DIR=${ROOT_DIR}/site2/website-next
-TOOLS_DIR=${ROOT_DIR}/site2/tools
+WEBSITE_DIR=${ROOT_DIR}/
+TOOLS_DIR=${ROOT_DIR}/tools
 GEN_SITE_DIR=${ROOT_DIR}/generated-site
 VERSION=next
 

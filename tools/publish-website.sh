@@ -37,7 +37,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site
 (
   cd $ROOT_DIR
   REVISION=$(git rev-parse --short HEAD)
-  BUILD_ALL=$(cat $ROOT_DIR/site2/website-next/scripts/.build)
+  BUILD_ALL=$(cat $ROOT_DIR/scripts/.build)
 
   rm -rf $PULSAR_SITE_TMP
   mkdir $PULSAR_SITE_TMP

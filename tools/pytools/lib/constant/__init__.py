@@ -26,7 +26,7 @@ def root_path():
 
 @functools.lru_cache
 def site_path():
-    return root_path() / 'site2' / 'website-next'
+    return root_path()
 
 
 @functools.lru_cache
