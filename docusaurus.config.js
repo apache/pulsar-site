@@ -352,9 +352,6 @@ module.exports = {
       indexName: "apache_pulsar",
     },
   },
-  stylesheets: [
-    "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600,900&display=swap",
-  ],
   presets: [
     [
       "@docusaurus/preset-classic",
