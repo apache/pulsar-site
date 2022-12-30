@@ -1,6 +1,6 @@
 ---
 id: develop-semantic-title
-title: Conventional Commits
+title: Conventional commits
 ---
 
 This guide explains why you need good PR titles and how you do write PR titles in Conventional Commits spec.

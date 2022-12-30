@@ -1,6 +1,6 @@
 ---
 id: document-syntax
-title: Writing Syntax
+title: Writing syntax guide
 ---
 
 ````mdx-code-block

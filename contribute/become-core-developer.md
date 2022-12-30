@@ -1,6 +1,6 @@
 ---
 id: become-core-developer
-title: How to Become a Core Developer
+title: How to become a core developer
 ---
 
 The Pulsar community follows [the Apache governance model](https://www.apache.org/foundation/how-it-works.html#roles).

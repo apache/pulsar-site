@@ -1,29 +1,17 @@
 ---
 id: document-contribution
-title: Contribution
+title: Updating document
 ---
 
 This guide explains the organization of Pulsar documentation and website repos and the workflow of updating various Pulsar documents.
 
 ## Source repositories
 
-Currently, the source of documents and website (where the docs are finally published) are located in two repositories:
-
-| Type          | Location                                                     | Description                                                                                                                                                                       |
-|---------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Documentation | [pulsar](https://github.com/apache/pulsar/tree/master/site2) | All files related to Pulsar documentation are stored in this repo.                                                                                                                |
-| Website       | [pulsar-site](https://github.com/apache/pulsar-site)         | 1. All files related to the Pulsar website are stored in the **main** branch in this repo. <br/> 2. The website is built and put in in the **asf-site-next** branch in this repo. |
-
-Documents in the `pulsar` repo are synced to the `pulsar-site` repo every 6 hours, following the rules:
-
-| Source (pulsar)    | Destination (pulsar-site) |
-|--------------------|---------------------------|
-| site2/website      | site2/website-next        |
-| site2/docs         | site2/website-next/docs   |
+Currently, the source of documents and website (where the docs are finally published) are located at the [apache/pulsar-site](https://github.com/apache/pulsar-site) repo.
 
 ## Update versioned docs
 
-If you want to update versioned docs, go to [site2/website/versioned_docs/ folder under the main repo](https://github.com/apache/pulsar/tree/master/site2/website/versioned_docs) to find your desired one.
+If you want to update versioned docs, go to [versioned_docs folder](https://github.com/apache/pulsar-site/tree/main/versioned_docs) to find your desired one.
 
 For versions prior to 2.8, Pulsar releases versioned docs for each patch release. You can update the exact versioned doc.
 

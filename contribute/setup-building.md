@@ -1,6 +1,6 @@
 ---
 id: setup-building
-title: Setup and Building
+title: Setup and building
 ---
 
 ## Prerequisites
