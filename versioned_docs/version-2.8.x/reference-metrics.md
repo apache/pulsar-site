@@ -157,11 +157,11 @@ All the replication metrics are also labelled with `remoteCluster=${pulsar_remot
 
 | Name | Type | Description |
 |---|---|---|
-| pulsar_replication_rate_in | Gauge | The total message rate of the topic replicating from remote cluster (messages/second). |
-| pulsar_replication_rate_out | Gauge | The total message rate of the topic replicating to remote cluster (messages/second). |
-| pulsar_replication_throughput_in | Gauge | The total throughput of the topic replicating from remote cluster (bytes/second). |
-| pulsar_replication_throughput_out | Gauge | The total throughput of the topic replicating to remote cluster (bytes/second). |
-| pulsar_replication_backlog | Gauge | The total backlog of the topic replicating to remote cluster (messages). |
+| pulsar_replication_rate_in | Gauge | The total message rate of the namespace replicating from remote cluster (messages/second). |
+| pulsar_replication_rate_out | Gauge | The total message rate of the namespace replicating to remote cluster (messages/second). |
+| pulsar_replication_throughput_in | Gauge | The total throughput of the namespace replicating from remote cluster (bytes/second). |
+| pulsar_replication_throughput_out | Gauge | The total throughput of the namespace replicating to remote cluster (bytes/second). |
+| pulsar_replication_backlog | Gauge | The total backlog of the namespace replicating to remote cluster (messages). |
 
 ### ManagedLedgerCache metrics
 All the ManagedLedgerCache metrics are labelled with the following labels:
