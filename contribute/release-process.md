@@ -428,6 +428,26 @@ The wheel files will be generated at each platform directory under `pulsar-clien
 
 This step is for every release. Read the specific guide for [writing release notes](release-note-guide.md).
 
+### Swagger files
+
+This step is for every release.
+
+First, build swagger files from apache/pulsar repo at the released tag:
+
+```shell
+mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+```
+
+Now, run the following script from the main branch of apache/pulsar-site repo:
+
+```shell
+cd tools/pytools
+poetry install
+poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar-2.X.Y --version=2.X.Y
+```
+
+Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
+
 ### Javadoc
 
 :::caution
@@ -456,7 +476,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant Javadoc fixes are made against the minor release.
+This step is for major releases only, unless you're sure that significant reference fixes are made against the minor release.
 
 :::
 
@@ -477,7 +497,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant Javadoc fixes are made against the minor release.
+This step is for major releases only, unless you're sure that significant doc fixes are made against the minor release.
 
 :::
 
@@ -497,7 +517,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant Javadoc fixes are made against the minor release.
+This step is for major releases only, unless you're sure that significant doc fixes are made against the minor release.
 
 :::
 
@@ -512,24 +532,6 @@ poetry run bin/py-apidoc-generator.py 2.X.0
 Note that before version 3.0.0, it builds the docs within a docker image, so you'll need to have docker running.
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/api/python`.
-
-Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
-
-### Swagger files
-
-First, build swagger files from apache/pulsar repo at the released tag:
-
-```shell
-mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
-```
-
-Now, run the following script from the main branch of apache/pulsar-site repo:
-
-```shell
-cd tools/pytools
-poetry install
-poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar-2.X.Y --version=2.X.Y
-```
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
