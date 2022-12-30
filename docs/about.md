@@ -55,7 +55,7 @@ You’ll notice an Edit button at the bottom and top of each page. Click it to o
 
 :::tip
 
-For how to make contributions to documentation, see [Pulsar Documentation Contribution Guide](https://github.com/apache/pulsar/blob/master/site2/README.md).
+For how to make contributions to documentation, see [Pulsar Documentation Contribution Guide](pathname:///contribute/document-intro).
 
 :::
 
