@@ -549,7 +549,7 @@ git checkout -b doc_release_<release-version>
 
 For every release, you should add a `<release-version>` entry to the corresponding place in the `releases.json` file.
 
-:::note
+:::caution
 
 The following steps are for major releases only.
 
