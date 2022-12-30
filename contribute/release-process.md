@@ -535,25 +535,27 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 ## Update the site
 
-:::note
-
-This step is for major releases only.
-
-:::
-
-1. Clone the apache/site repo:
+Clone the apache/site repo:
 
 ```shell
 git clone git@github.com:apache/pulsar-site.git
 ```
 
-2. Create a new branch from the main branch.
+Create a new branch from the main branch:
 
 ```shell
 git checkout -b doc_release_<release-version>
 ```
 
-3. Generate a new version of the documentation.
+For every release, you should add a `<release-version>` entry to the corresponding place in the `releases.json` file.
+
+:::note
+
+The following steps are for major releases only.
+
+:::
+
+1. Generate a new version of the documentation.
 
 ```shell
 yarn install
@@ -568,11 +570,9 @@ You can move the latest version under the old version in the `versions.json` fil
 
 :::
 
-4. Add `<release-version>` to the corresponding place in the `releases.json` file.
+2. Send out a PR request for review. After your PR is approved and merged to main, the website is published automatically after the new website is built. The website is built every 6 hours.
 
-5. Send out a PR request for review. After your PR is approved and merged to main, the website is published automatically after the new website is built. The website is built every 6 hours.
-
-6. Check the new website after the website is built. Open https://pulsar.apache.org in your browsers to verify all the changes are alive. If the website build succeeds but the website is not updated, you can try to sync the git repository. Navigate to https://selfserve.apache.org/ and click the "Synchronize Git Repositories" and then select apache/pulsar-site.
+3. Check the new website after the website is built. Open https://pulsar.apache.org in your browsers to verify all the changes are alive. If the website build succeeds but the website is not updated, you can try to sync the git repository. Navigate to https://selfserve.apache.org/ and click the "Synchronize Git Repositories" and then select apache/pulsar-site.
 
 ## Announce the release
 
