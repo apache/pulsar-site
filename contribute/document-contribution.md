@@ -27,18 +27,12 @@ This <fix / improvment> is available for 2.8.2 and later versions.
 :::
 ```
 
-:::note
-
-Read [PIP-190: Simplify documentation release and maintenance strategy](https://github.com/apache/pulsar/issues/16637) for more information.
-
-:::
-
 ## Update reference docs
 
-If you want to update [Pulsar configuration docs](https://pulsar.apache.org/reference/#/latest/), pay attention to the doc source files.
+If you want to update [Pulsar reference docs](pathname:///reference/), you should update the corresponding source files.
 
-- Some docs are generated from code **automatically**. If you want to update the docs, you need to update the source code files.
-- Some configuration docs are updated **manually** using markdown files.
+* Some reference docs are generated from code **automatically**. If you want to update the docs, you need to update the source code files.
+* Some configuration docs are updated **manually** using markdown files.
 
 ### Update configuration docs
 
@@ -57,12 +51,12 @@ Docs for configs of bundled components are generated from command-line tools **a
 
 Docs for configs of external components (whose source code is hosted outside the Pulsar repositories) are updated **manually**:
 
-| Components  | Update where ...                                                                                                                                                                 |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| BookKeeper  | [reference-configuration-bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-bookkeeper.md)   |
-| Log4j       | [reference-configuration-log4j.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-log4j.md)             |
-| Log4j shell | [reference-configuration-log4j-shell.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-log4j-shell.md) |
-| ZooKeeper   | [reference-configuration-zookeeper.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/config/reference-configuration-zookeeper.md)     |
+| Components  | Update where ...                                                                                                                                              |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BookKeeper  | [reference-configuration-bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-bookkeeper.md)   |
+| Log4j       | [reference-configuration-log4j.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-log4j.md)             |
+| Log4j shell | [reference-configuration-log4j-shell.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-log4j-shell.md) |
+| ZooKeeper   | [reference-configuration-zookeeper.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-zookeeper.md)     |
 
 ### Update command-line tool docs
 
@@ -77,11 +71,11 @@ Docs for bundled Java-based command-line tools are generated **automatically**:
 
 Docs for external command-line tools or bare scripts are updated **manually**:
 
-| Components    | Update where…                                                                                                                               |
-|---------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| pulsar-shell  | [pulsar-shell.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/pulsar-shell/pulsar-shell.md)    |
-| pulsar-daemon | [pulsar-daemon.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/pulsar-daemon/pulsar-daemon.md) |
-| bookkeeper    | [bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/site2/website-next/static/reference/next/bookkeeper/bookkeeper.md)          |
+| Components    | Update where…                                                                                                            |
+|---------------|--------------------------------------------------------------------------------------------------------------------------|
+| pulsar-shell  | [pulsar-shell.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/pulsar-shell/pulsar-shell.md)    |
+| pulsar-daemon | [pulsar-daemon.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/pulsar-daemon/pulsar-daemon.md) |
+| bookkeeper    | [bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/bookkeeper/bookkeeper.md)          |
 
 ## Update client/function matrix
 
@@ -100,4 +94,4 @@ If you want to update the Pulsar Feature Matrix, follow the steps below.
 2. Get your PR reviewed and merged.
 3. In the [Pulsar Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914), check the box in the corresponding cell with the links of PRs and doc site.
 
-![Client Feature Matrix Workflow](assets/client-matrix-workflow.png)
+![Client Feature Matrix Workflow](media/client-matrix-workflow.png)

@@ -55,7 +55,7 @@ Follow these steps to preview documentation changes on the **master** branch.
 
   :::
 
-  ![alt_text](assets/website-preview.png)
+  ![alt_text](media/website-preview.png)
 
 ### Preview Java API document changes
 
