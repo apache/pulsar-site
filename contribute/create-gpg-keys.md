@@ -1,6 +1,6 @@
 ---
 id: create-gpg-keys
-title: Create GPG keys
+title: Creating GPG keys
 ---
 
 This page provides instructions for Pulsar committers on how to do the initial GPG setup.

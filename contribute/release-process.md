@@ -1,6 +1,6 @@
 ---
 id: release-process
-title: Release Process
+title: Release process
 ---
 
 This page contains instructions for Pulsar committers on how to perform a release.
