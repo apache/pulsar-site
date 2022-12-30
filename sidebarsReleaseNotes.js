@@ -5,10 +5,7 @@ module.exports = {
         {
             "type": "category",
             "label": "Clients Release Notes",
-            link: {
-                type: 'doc',
-                id: 'clients',
-            },
+            link: {type: 'doc', id: 'clients'},
             items: [
                 'client-java',
                 'client-ws',
