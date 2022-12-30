@@ -55,14 +55,15 @@ if __name__ == '__main__':
         version = args.version
 
     for kind in kinds:
-        match kind:
-            case Kind.config:
-                config_doc_generator.execute(master_path, version)
-            case Kind.admin:
-                pulsar_admin_clidoc_generator.execute(master_path, version)
-            case Kind.pulsar:
-                pulsar_clidoc_generator.execute(master_path, version)
-            case Kind.client:
-                pulsar_client_clidoc_generator.execute(master_path, version)
-            case Kind.perf:
-                pulsar_perf_clidoc_generator.execute(master_path, version)
+        if kind == Kind.config:
+            config_doc_generator.execute(master_path, version)
+        elif kind == Kind.admin:
+            pulsar_admin_clidoc_generator.execute(master_path, version)
+        elif kind == Kind.pulsar:
+            pulsar_clidoc_generator.execute(master_path, version)
+        elif kind == Kind.client:
+            pulsar_client_clidoc_generator.execute(master_path, version)
+        elif kind == Kind.perf:
+            pulsar_perf_clidoc_generator.execute(master_path, version)
+        else:
+            raise Exception(f'Unknown reference kind: {kind}')

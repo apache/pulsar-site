@@ -1,6 +1,6 @@
 ---
 id: document-syntax
-title: Writing Syntax
+title: Writing syntax guide
 ---
 
 ````mdx-code-block
@@ -268,7 +268,7 @@ For example, if you're describing a feature in Microsoft's Active Directory, inc
 
 Use a **permalink** when linking to a specific line in a file to ensure users land on the line you're referring to though lines of code change over time.
 
-![alt_text](assets/obtain-github-permalink.png)
+![alt_text](media/obtain-github-permalink.png)
 
 ### Authoritative sources
 

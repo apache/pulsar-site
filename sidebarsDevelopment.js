@@ -4,7 +4,7 @@ const sidebars = {
         'about',
         {
             type: "category",
-            label: "Getting Started",
+            label: "Getting started",
             items: [
                 'setup-building',
                 'setup-ide',
@@ -32,8 +32,8 @@ const sidebars = {
             items: [
                 'document-intro',
                 'document-contribution',
-                'document-syntax',
                 'document-preview',
+                'document-syntax',
             ]
         },
         {

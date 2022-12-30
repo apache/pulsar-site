@@ -1,6 +1,6 @@
 ---
 id: develop-semantic-title
-title: Conventional Commits
+title: Conventional commits
 ---
 
 This guide explains why you need good PR titles and how you do write PR titles in Conventional Commits spec.
@@ -32,7 +32,7 @@ Good titles often bring many benefits, including but not limited to the followin
 
 A PR title should be structured as follows:
 
-![Semantic Pull Request Title](assets/semantic-pull-request-title.png)
+![Semantic Pull Request Title](media/semantic-pull-request-title.png)
 
 The rule can be interpreted as: A good title = clear format ([type](#type) and [scope](#scope)) + self-explanatory [summary](#summary).
 

@@ -30,7 +30,11 @@ Pulsar client feature matrix for different languages is listed on [Pulsar Featur
 
 Besides the officially released clients, multiple projects on developing Pulsar clients are available in different languages.
 
-> Want your repository listed here? Just submit a PR to the [pulsar repository](https://github.com/apache/pulsar/edit/master/site2/docs/client-libraries.md).
+:::tip
+
+Want your repository listed here? Click the "Edit this page" button at the bottom of this page.
+
+:::
 
 ### .NET
 

@@ -1,6 +1,6 @@
 ---
 id: validate-release-candidate
-title: Validate Release Candidate
+title: Verifying release candidates
 ---
 
 The following are manual instructions for reviewing and validating a release candidate.

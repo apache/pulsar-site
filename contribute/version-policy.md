@@ -1,6 +1,6 @@
 ---
 id: version-policy
-title: Version Policy
+title: Version policy
 ---
 
 The Pulsar project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html). Existing releases can expect
