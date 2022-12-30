@@ -407,5 +407,5 @@ module.exports = {
         {src: "/js/sine-waves.min.js", async: true},
         "/js/matomo-agent.js",
     ],
-    clientModules: [require.resolve('./matomoClientModule.js')],
+    clientModules: [require.resolve('./matomoClientModule.ts')],
 };
