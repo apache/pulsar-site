@@ -156,8 +156,8 @@ $ pulsar-admin sources list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--namespace` | The sink's namespace|null||
-| `--tenant` | The sink's tenant|null||
+| `--namespace` | The source's namespace|null||
+| `--tenant` | The source's tenant|null||
 
 
 ## <em>stop</em>
