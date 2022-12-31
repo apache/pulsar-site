@@ -44,7 +44,7 @@ gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
 1. Copy the related release notes entries and add a [versioned release note file](https://github.com/apache/pulsar-site/tree/main/release-notes/versioned).
 2. Update the [version metadata files](https://github.com/apache/pulsar-site/tree/main/data) (`release-*.js`).
 
-To preview the result, follow the instructions documented at the [Content Preview Guide](document-preview.md#preview-website-changes).
+To preview the result, follow the instructions for [previewing content](document-preview.md#preview-changes).
 
 ## Submit the release note
 
