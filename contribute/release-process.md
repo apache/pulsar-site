@@ -435,7 +435,7 @@ This step is for every release.
 First, build swagger files from apache/pulsar repo at the released tag:
 
 ```shell
-mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 ```
 
 Now, run the following script from the main branch of apache/pulsar-site repo:
