@@ -1,6 +1,6 @@
 ---
 id: develop-labels
-title: Labels
+title: Label strategy
 ---
 
 This guide explains the labels used in the [apache/pulsar](http://github.com/apache/pulsar) repository (the main repo).
