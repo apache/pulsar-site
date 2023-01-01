@@ -2,7 +2,6 @@
 id: head-metadata
 title: Contributing
 description: Learn how to contribute to Pulsar
-hide_table_of_contents: true
 ---
 # Contribute
 
