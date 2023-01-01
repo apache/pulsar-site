@@ -6,7 +6,7 @@ sidebar_label: "About"
 sidebar_position: 2
 ---
 
-This guide is a comprehensive resource for contributing to Apache Pulsar – for both new and experienced contributors. It is maintained by the same community that maintains Pulsar. We welcome your contributions to Pulsar!
+The Apache Pulsar community welcomes contributions from anyone with a passion for distributed systems! Pulsar has many opportunities for contributions: write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, or participate on the documentation effort.
 
 ## Quick Links
 

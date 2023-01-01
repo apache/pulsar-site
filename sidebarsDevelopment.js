@@ -14,6 +14,7 @@ const sidebars = {
             type: "category",
             label: "Development",
             items: [
+                'develop-coding-conventions',
                 'develop-labels',
                 'develop-semantic-title'
             ]
