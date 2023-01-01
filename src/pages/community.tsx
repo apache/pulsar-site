@@ -462,22 +462,22 @@ export default function Community(): JSX.Element {
                                     <PillButton
                                         variant=""
                                         target=""
-                                        href={pageUrl("contributing")}
+                                        href={useBaseUrl("contribute")}
                                     >
-                                        Contributor Guide
+                                        Contribution Guide
                                     </PillButton>
                                     <PillButton
                                         variant="grey"
                                         target=""
-                                        href={pageUrl("coding-guide")}
+                                        href={useBaseUrl("contribute/develop-coding-conventions")}
                                     >
-                                        Coding Guide
+                                        Coding Conventions
                                     </PillButton>
                                 </div>
                             </div>
                             <div className="flex flex-col  sm:flex-row items-center  py-12">
                                 <div className="sm:w-1/3 section-icon px-12">
-                                    <img src={useBaseUrl("/img/report-bugs.svg")} />
+                                    <img src={useBaseUrl("/img/report-bugs.svg")} alt={'Report bugs'} />
                                 </div>
                                 <div className="sm:w-2/3 ">
                                     <h3>Reporting Bugs</h3>
