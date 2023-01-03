@@ -30,6 +30,16 @@ module.exports = [
         "version": ""
     },
     {
+        "author": "congbobo184",
+        "tagName": "v2.9.4",
+        "publishedAt": "2022-12-28T01:12:20Z",
+        "vtag": "2.9.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.9.4/",
+        "releaseBlog": "",
+        "doc": "/docs/2.9.x",
+        "version": "v2.9.x"
+    },
+    {
         "author": "mattisonchao",
         "tagName": "v2.9.3",
         "publishedAt": "2022-07-20T02:04:10Z",
@@ -37,7 +47,7 @@ module.exports = [
         "releaseNotes": "/release-notes/versioned/pulsar-2.9.3/",
         "releaseBlog": "/blog/2022/07/27/Apache-Pulsar-2-9-3",
         "doc": "/docs/2.9.x",
-        "version": "v2.9.x"
+        "version": ""
     },
     {
         "author": "gaoran10",
