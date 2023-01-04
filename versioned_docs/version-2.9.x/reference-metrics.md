@@ -178,8 +178,8 @@ All the replication metrics are also labelled with `remoteCluster=${pulsar_remot
 | pulsar_replication_throughput_in | Gauge | The total throughput of the namespace replicating from remote cluster (bytes/second). |
 | pulsar_replication_throughput_out | Gauge | The total throughput of the namespace replicating to remote cluster (bytes/second). |
 | pulsar_replication_backlog | Gauge | The total backlog of the namespace replicating to remote cluster (messages). |
-| pulsar_replication_rate_expired | Gauge | Total rate of messages expired (messages/second). |
-| pulsar_replication_connected_count | Gauge | The count of replication-subscriber up and running to replicate to remote cluster. |
+| pulsar_replication_rate_expired | Gauge | Total rate of messages expired (messages/second). |	
+| pulsar_replication_connected_count | Gauge | The count of replication-subscriber up and running to replicate to remote cluster. |	
 | pulsar_replication_delay_in_seconds | Gauge | Time in seconds from the time a message was produced to the time when it is about to be replicated. |
 
 ### ManagedLedgerCache metrics
@@ -189,6 +189,9 @@ All the ManagedLedgerCache metrics are labelled with the following labels:
 | Name | Type | Description |
 | --- | --- | --- |
 | pulsar_ml_cache_evictions | Gauge | The number of cache evictions during the last minute. |
+| pulsar_ml_cache_inserted_entries_total | Counter | The number of entries inserted into the entry cache. Note that this metric is only available in Pulsar 2.9.4 and later versions. |
+| pulsar_ml_cache_evicted_entries_total | Counter | The number of entries evicted from the entry cache. Note that this metric is only available in Pulsar 2.9.4 and later versions. |
+| pulsar_ml_cache_entries | Gauge | The number of entries in the entry cache. Note that this metric is only available in Pulsar 2.9.4 and later versions.|
 | pulsar_ml_cache_hits_rate | Gauge | The number of cache hits per second. |
 | pulsar_ml_cache_hits_throughput | Gauge | The amount of data is retrieved from the cache in byte/s |
 | pulsar_ml_cache_misses_rate | Gauge | The number of cache misses per second |
@@ -285,7 +288,7 @@ All the bundleUnloading metrics are labelled with the following labels:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| pulsar_lb_bundles_split_count | Counter | bundle split count in this bundle splitting check interval |
+| pulsar_lb_bundles_split_count | Counter | The total count of bundle split in this leader broker |
 
 ### Subscription metrics
 
@@ -390,7 +393,6 @@ All the connection metrics are labelled with the following labels:
 ### Jetty metrics
 
 > For a functions-worker running separately from brokers, its Jetty metrics are only exposed when `includeStandardPrometheusMetrics` is set to `true`.
-
 All the jetty metrics are labelled with the following labels:
 
 - *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
