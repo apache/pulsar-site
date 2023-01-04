@@ -1,6 +1,6 @@
 module.exports = [
-{tagName: "v2.10.1",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-websocket-2.10.1/",doc:"/docs/client-libraries-websocket",version:"v2.10.x"},
-{tagName: "v2.10.0",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-websocket-2.10.0/",doc:"/docs/client-libraries-websocket",version:""},
+{tagName: "v2.10.1",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-websocket-2.10.1/",doc:"/docs/2.10.x/client-libraries-websocket",version:"v2.10.x"},
+{tagName: "v2.10.0",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-websocket-2.10.0/",doc:"/docs/2.10.x/client-libraries-websocket",version:""},
 {tagName: "v2.9.3",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-websocket-2.9.3/",doc:"/docs/2.9.x/client-libraries-websocket",version:"v2.9.x"},
 {tagName: "v2.9.2",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-websocket-2.9.2/",doc:"/docs/2.9.x/client-libraries-websocket",version:""},
 {tagName: "v2.8.4",vtag:"2.8.x",releaseNotes:"/release-notes/versioned/client-websocket-2.8.4/",doc:"/docs/2.8.x/client-libraries-websocket",version:"v2.8.x"},
