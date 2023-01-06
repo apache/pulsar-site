@@ -40,7 +40,7 @@ const FeatureList = (language) => [
   },
   {
     title: "Official 3rd party integrations",
-    Svg: require("../../static/img/official-3rd-party.svg").default,
+    Svg: require("../../static/img/official-3rd-party-integrations.svg").default,
     content: "Pulsar has officially maintained connectors with popular 3rd parties: MySQL, Elasticsearch, Cassandra, and more. Allows streaming data in (source) or out (sink).",
   },
   {
