@@ -1,7 +1,7 @@
 ---
 Id: tutorials-namespace
-title: How to create a namespace
-sidebar_label: "Tutorials"
+title: Create a namespace
+sidebar_label: "Create a namespace"
 ---
 
 
@@ -35,10 +35,3 @@ You should see similar output to show the namespace apache/pulsar has been succe
 - [Create a topic](tutorials-topic.md)
 - [Produce and consume messages](tutorials-produce-consume.md)
 - [Manage clusters](admin-api-clusters.md)
-
-
-
-
-
-
-

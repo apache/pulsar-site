@@ -1,7 +1,7 @@
 ---
 Id: tutorials-tenant
 title: How to set up a tenant
-sidebar_label: "Tutorials"
+sidebar_label: "Set up a tenant"
 ---
 
 
@@ -40,8 +40,8 @@ To create a tenant:
 
 #### Related Topics
 
-- [How to create a namespace](tutorials-namespace.md)
-- [How to create a topic](tutorials-topic.md)
+- [Create a namespace](tutorials-namespace.md)
+- [Create a topic](tutorials-topic.md)
 - [Run a standalone cluster in Kubernetes](getting-started-helm.md)
 
 

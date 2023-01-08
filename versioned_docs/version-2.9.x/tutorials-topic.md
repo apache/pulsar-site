@@ -1,7 +1,7 @@
 ---
 Id: tutorials-topic
 title: How to create a topic
-sidebar_label: "Tutorials"
+sidebar_label: "Create a topic"
 ---
 
 
@@ -26,9 +26,9 @@ Apache Pulsar is a distributed messaging system that supports high performance a
 
 #### Related Topics
 
-- [How to set up a tenant](tutorials-tenant.md)
-- [How to create a namespace](tutorials-namespace.md)
-- [How to produce and consume messages](tutorial-produce-consume.md)
+- [Set up a tenant](tutorials-tenant.md)
+- [Create a namespace](tutorials-namespace.md)
+- [Produce and consume messages](tutorials-produce-consume.md)
 
 
 

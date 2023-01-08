@@ -1,7 +1,7 @@
 ---
 Id: tutorials-produce-consume
 title: Produce and consume messages
-sidebar_label: "Tutorials"
+sidebar_label: "Produce and consume messages"
 ---
 
 In this tutorial, we will:
@@ -13,9 +13,9 @@ In this tutorial, we will:
 
 ## Prerequisites
 
-- [Create tenant](tutorials-tenant.md)
-- [Create namespace](tutorials-namespace.md)
-- [Create topic](tutorials-topic.md)
+- [Set up a tenant](tutorials-tenant.md)
+- [Create a namespace](tutorials-namespace.md)
+- [Create a topic](tutorials-topic.md)
 
 ## Produce and consume messages
 
@@ -62,9 +62,7 @@ In this tutorial, we will:
    ```
 
 #### Related Topics
-- [Set up a tenant](tutorials-tenant.md)
-- [Create a topic](tutorials-topic.md)
-- [Create a namespace](tutorials-namespace.md)
+
 - [Manage clusters](admin-api-clusters.md)
 
 
