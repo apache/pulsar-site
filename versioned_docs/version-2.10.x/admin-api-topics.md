@@ -322,7 +322,7 @@ All metrics below are *reset* to 0 upon broker restart, *except* gauges marked a
 
   -   **backlogSize**: Estimated total unconsumed or backlog size (in bytes). Note that **this metric is not reset upon restart**. 
 
-  -   **offloadedStorageSize**: Space used to store the offloaded messages for the topic (in bytes). Not reset upon restart.
+  -   **offloadedStorageSize**: Space used to store the offloaded messages for the topic (in bytes). Note that **this metric is not reset upon restart**. 
   
   -   **waitingPublishers**: The number of publishers waiting in a queue in exclusive access mode.
   
