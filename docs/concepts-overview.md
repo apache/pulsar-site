@@ -6,6 +6,8 @@ sidebar_label: "Overview"
 
 Pulsar is a multi-tenant, high-performance solution for server-to-server messaging. Originally developed by Yahoo, Pulsar is under the stewardship of the [Apache Software Foundation](https://www.apache.org/).
 
+## Key features
+
 Key features of Pulsar are listed below:
 
 * Native support for multiple clusters in a Pulsar instance, with seamless [geo-replication](administration-geo.md) of messages across clusters.
@@ -16,7 +18,7 @@ Key features of Pulsar are listed below:
 * Guaranteed message delivery with [persistent message storage](concepts-architecture-overview.md#persistent-storage) provided by [Apache BookKeeper](http://bookkeeper.apache.org/).
 A serverless lightweight computing framework [Pulsar Functions](functions-overview.md) offers the capability for stream-native data processing.
 * A serverless connector framework [Pulsar IO](io-overview.md), which is built on Pulsar Functions, makes it easier to move data in and out of Apache Pulsar.
-* [Tiered Storage](concepts-tiered-storage.md) offloads data from hot/warm storage to cold/long-term storage (such as S3 and GCS) when the data is aging out.
+* [Tiered Storage](tiered-storage-overview.md) offloads data from hot/warm storage to cold/long-term storage (such as S3 and GCS) when the data is aging out.
 
 ## Contents
 

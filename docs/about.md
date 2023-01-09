@@ -33,19 +33,9 @@ Select one of the content blocks below to begin your Pulsar journey. If you ...
     <BlockLink title="Reference" url="/docs/next/reference-landing/" />
 </BlockLinks>
 
-## Navigation
-***
-
-There are several ways to get around in the doc portal. The index navigation pane is a table of contents for the entire archive. The archive is divided into sections, like chapters in a book. Click the title of the topic to view it.
-
-In-context links provide an easy way to immediately reference related topics. Click the underlined term to view the topic.
-
-Links to related topics can be found at the bottom of each topic page. Click the link to view the topic.
-
-![Page Linking](/assets/page-linking.png)
-
 ## Continuous Improvement
 ***
+
 As you probably know, we are working on a new user experience for our documentation portal that will make learning about and building on top of Apache Pulsar a much better experience. Whether you need overview concepts, how-to procedures, curated guides or quick references, we’re building content to support it. This welcome page is just the first step. We will be providing updates every month.
 
 ## Help Improve These Documents
