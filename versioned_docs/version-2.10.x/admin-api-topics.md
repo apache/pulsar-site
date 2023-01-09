@@ -320,7 +320,7 @@ All metrics below are *reset* to 0 upon broker restart, *except* gauges marked a
 
   -   **msgChunkPublished**: Topic has chunked message published on it.
 
-  -   **backlogSize**: Estimated total unconsumed or backlog size (in bytes). Not reset upon restart.
+  -   **backlogSize**: Estimated total unconsumed or backlog size (in bytes). Note that **this metric is not reset upon restart**. 
 
   -   **offloadedStorageSize**: Space used to store the offloaded messages for the topic (in bytes). Not reset upon restart.
   
