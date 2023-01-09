@@ -5,7 +5,7 @@ module.exports = [
         "publishedAt": "2023-01-04T01:53:34Z",
         "vtag": "2.10.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.10.3/",
-        "releaseBlog": "",
+        "releaseBlog": "/blog/2023/01/09/Apache-Pulsar-2-10-3",
         "doc": "/docs/2.10.x",
         "version": "v2.10.x"
     },
