@@ -390,7 +390,7 @@ All metrics below are *reset* to 0 upon broker restart, *except* gauges marked a
 
           -   **backlogSize**: Size of backlog for this subscription (in bytes).
           
-          -   **earliestMsgPublishTimeInBacklog**: The publish time of the earliest message in the backlog for the subscription (ms). Not reset upon restart.
+          -   **earliestMsgPublishTimeInBacklog**: The publish time of the earliest message in the backlog for the subscription (ms). Note that **this metric is not reset upon restart**. 
 
           -   **msgBacklogNoDelayed**: Number of messages in the subscription backlog that do not contain the delay messages.
 
