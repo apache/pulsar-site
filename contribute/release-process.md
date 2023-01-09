@@ -118,8 +118,8 @@ After the build, you should find the following tarballs, zip files, and the conn
 * `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
 * `target/apache-pulsar-2.X.0-src.tar.gz`
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.zip`
+* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
 * directory `distribution/io/target/apache-pulsar-io-connectors-2.x.0-bin`
 
 :::note
@@ -156,7 +156,7 @@ The C++ client is now developing in a [separated repo](https://github.com/apache
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
 
 ```shell
-src/check-binary-license distribution/server/target/apache-pulsar-2.x.0-bin.tar.gz
+src/check-binary-license.sh distribution/server/target/apache-pulsar-2.x.0-bin.tar.gz
 ```
 
 Then, run Apache RAT to verify the license headers in the src package:
