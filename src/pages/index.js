@@ -164,9 +164,8 @@ export default function Home() {
             <div className="md:float-left md:w-2/3">
               <h1>Cloud-Native, Distributed Messaging and Streaming</h1>
               <p>
-                Apache® Pulsar™ is a distributed, open source pub-sub messaging
-                and streaming platform for real-time workloads, managing
-                hundreds of billions of events per day.
+                Apache® Pulsar™ is an open-source, distributed messaging
+                and streaming platform built for the cloud.
               </p>
             </div>
           </div>
