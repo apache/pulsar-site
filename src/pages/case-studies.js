@@ -40,9 +40,9 @@ const csObj =
       },
       {
         company: "BIGO",
-        link: 'https://www.youtube.com/watch?v=CdPd5zAPsgc',
+        link: 'https://streamnative.io/success-story/bigo/',
         image: require("@site/static/img/bigo.png").default,
-        description: "We have adopted Apache Pulsar to build our Message Processing System, especially in Real-Time ETL, short-form video recommendation and AB-test Real-Time Data report."
+        description: "The messaging team at BIGO found themselves overwhelmed by the massive amounts of data when using Kafka. They then started to learn Apache Pulsar and ran some tests with it, after which they believed Pulsar could be a solution to their challenges. They use Pulsar as a key component in their real-time messaging architecture, which has helped them reduce the hardware cost by 50%."
       },
       {
         company: "Clever Cloud",
@@ -147,6 +147,12 @@ const csObj =
         description: "We choose Pulsar for its ability to manage distributed transactions within a microservice architecture and its feature flexibility. Pulsar now plays an essential part in helping our AI-powered order execution system to find the optimal strategy in real time."
       },
       {
+        company: "Sina Weibo",
+        link: 'https://streamnative.io/success-story/sina-weibo/',
+        image: require("@site/static/img/sina-weibo-logo.png").default,
+        description: "Sina Weibo selected Apache Pulsar and KoP (Kafka on Pulsar) due to Pulsar’s great scalability and KoP’s native support for Kafka clients. It also achieved better metadata consistency by introducing a new component Metadata Event Handler in KoP."
+      },
+      {
         company: "Softtech",
         link: 'https://www.youtube.com/watch?v=meDBzeintyE',
         image: require("@site/static/img/softtech.png").default,
@@ -175,6 +181,12 @@ const csObj =
         link: 'https://streamnative.io/success-story/tuya/',
         image: require("@site/static/img/tuya.png").default,
         description: "Tuya settled on Apache Pulsar because it proved to be the most adept at handling the accumulation of messages and repeated consumption. The addition of Pulsar has made Tuya’s message system much more efficient, resulting in lower operational and maintenance costs."
+      },
+      {
+        company: "vivo",
+        link: 'https://streamnative.io/success-story/vivo/',
+        image: require("@site/static/img/vivo-logo.png").default,
+        description: "After comparing different streaming and messaging tools, vivo began to learn Apache Pulsar and explored its features in scalability, fault tolerance, and load balancing. As vivo put Apache Pulsar into use, it summarized some useful practices in bundle and data management. vivo built its monitoring architecture based on Pulsar and created its customized Pulsar metrics for better observability."
       },
       {
         company: "Yahoo!",
@@ -214,6 +226,12 @@ const csObj =
         image: require("@site/static/img/getui.png").default,
         description: "We adopted Pulsar for the new priority-based push notification solution."
       },
+      {
+        company: "NTT Software Innovation Center",
+        link: 'https://streamnative.io/blog/case/2023-01-10-handling-100k-consumers-with-one-pulsar-topic/',
+        image: require("@site/static/img/ntt_logo.jpg").default,
+        description: "Pulsar has a flexible design and its performance is already good enough for many use cases. The NTT Software Innovation Center ran different performance tests and implemented its own subscription model in Pulsar to further improve its performance. This has allowed them to use one Pulsar topic to support 100K consumers in their IoT scenario."
+      },
     ],
     retail: [
       {
@@ -250,9 +268,9 @@ const csObj =
     transportation_logistics: [
       {
         company: "Keytop",
-        link: 'https://www.youtube.com/watch?v=ITR-J_D8wFg',
+        link: 'https://streamnative.io/success-story/keytop/',
         image: require("@site/static/img/keytop.png").default,
-        description: "Pulsar is an ideal streaming data platform for our parking system. We customize a messaging system with EMQX, Pulsar and Sink to deal with our data."
+        description: "Keytop redesigned its messaging system by using Apache Pulsar as the backbone of its architecture. Its geo-replication feature helps Keytop securely store mission-critical data across multiple data centers."
       },
     ],
     apprel_manufacturing: [
