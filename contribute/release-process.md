@@ -34,7 +34,7 @@ If you haven't already done it, [create and publish the GPG key](create-gpg-keys
 
 Before you start the next release steps, make sure you have installed these software:
 
-* JDK 17
+* JDK 11 (up to 2.10.x) or 17 (2.11+)
 * Maven 3.8.6
 * Zip
 
