@@ -228,9 +228,9 @@ const csObj =
       },
       {
         company: "NTT Software Innovation Center",
-        link: 'https://www.youtube.com/watch?v=o6Dt_LZCd3U',
+        link: 'https://streamnative.io/blog/case/2023-01-10-handling-100k-consumers-with-one-pulsar-topic/',
         image: require("@site/static/img/ntt_logo.jpg").default,
-        description: "Pulsar has a flexible design and its performance is already good enough for many use cases. The NTT Software Innovation Center ran different performance tests and implemented their own subscription model in Pulsar to further improve its performance. This has allowed them to use one Pulsar topic to support 100K consumers in their IoT scenario."
+        description: "Pulsar has a flexible design and its performance is already good enough for many use cases. The NTT Software Innovation Center ran different performance tests and implemented its own subscription model in Pulsar to further improve its performance. This has allowed them to use one Pulsar topic to support 100K consumers in their IoT scenario."
       },
     ],
     retail: [
@@ -270,7 +270,7 @@ const csObj =
         company: "Keytop",
         link: 'https://streamnative.io/success-story/keytop/',
         image: require("@site/static/img/keytop.png").default,
-        description: "Keytop redesigned its message system by using Apache Pulsar as the backbone of its architecture. Its geo-replication feature helps Keytop securely store mission-critical data across multiple data centers."
+        description: "Keytop redesigned its messaging system by using Apache Pulsar as the backbone of its architecture. Its geo-replication feature helps Keytop securely store mission-critical data across multiple data centers."
       },
     ],
     apprel_manufacturing: [
