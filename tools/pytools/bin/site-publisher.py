@@ -23,24 +23,26 @@ from pathlib import Path
 
 from command import run, find_command, run_pipe
 from constant import root_path
-from execute import site_uploader
+from execute import site_uploader, site_builder
 from execute.site_uploader import Mode
 
 if __name__ == '__main__':
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--master-path', type=str, metavar='PATH', help='path to pulsar main repo')
+    parser.add_argument('--site-path', type=str, metavar='PATH', help='path to asf-site-next branch')
     parser.add_argument('--push', type=Mode, default=Mode.auto, choices=list(Mode), help='whether push to remote')
     args = parser.parse_args()
 
     git = find_command('git', msg="git is required")
 
     with tempfile.TemporaryDirectory() as cwd:
-        if args.master_path is None:
-            run(git, 'clone', '-b', 'master', '--depth', '1', 'https://github.com/apache/pulsar', cwd=cwd)
-            master = Path(cwd) / 'pulsar'
+        if args.site_path is None:
+            run(git, 'clone', '-b', 'asf-site-next', '--depth', '1', 'https://github.com/apache/pulsar-site', cwd=cwd)
+            site = Path(cwd) / 'pulsar-site'
         else:
-            master = Path(args.master_path)
+            site = Path(args.site_path)
 
-        commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=master).read().strip()
-        msg = f'Docs sync done from apache/pulsar (#{commit})'
-        site_uploader.execute(args.push, msg, root_path())
+        site_builder.execute(site)
+
+        commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=root_path()).read().strip()
+        msg = f'Site updated at revision {commit}'
+        site_uploader.execute(args.push, msg, site)

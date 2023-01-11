@@ -30,3 +30,31 @@ jobs:
       - uses: ./.github/actions/check-license-header
         with:
           config: tools/ci/licenserc.toml
+
+  build-without-push:
+    name: Check build site
+    runs-on: ubuntu-latest
+    timeout-minutes: 600
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - uses: actions/checkout@v3
+        with:
+          ref: 'asf-site-next'
+          path: tmp/asf-site-next
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+          cache: 'poetry'
+      - name: Set Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Update generated docs
+        working-directory: tools/pytools
+        run: |
+          poetry install
+          poetry run bin/site-publisher.py --site-path=$GITHUB_WORKSPACE/tmp/asf-site-next
