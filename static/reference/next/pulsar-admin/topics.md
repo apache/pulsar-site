@@ -512,6 +512,7 @@ $ pulsar-admin topics update-partitioned-topic options
 |---|---|---|
 | `-p, --partitions` | Number of partitions for the topic|0||
 | `-f, --force` | Update forcefully without validating existing partitioned topic|false||
+| `-ulo, --update-local-only` | Update partitions number for topic in local cluster only|false||
 
 
 ## <em>get-partitioned-topic-metadata</em>
