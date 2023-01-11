@@ -35,7 +35,7 @@ if __name__ == '__main__':
     git = find_command('git', msg="git is required")
 
     with tempfile.TemporaryDirectory() as cwd:
-        if args.master_path is None:
+        if args.site_path is None:
             run(git, 'clone', '-b', 'asf-site-next', '--depth', '1', 'https://github.com/apache/pulsar-site', cwd=cwd)
             site = Path(cwd) / 'pulsar-site'
         else:
