@@ -15,18 +15,21 @@
 # specific language governing permissions and limitations
 # under the License.
 
-name: CI - Precommit
+name: CI - Dummy Sync
 on:
   pull_request:
     branches: [main]
+    paths:
+      - '.github/actions/sync-content/action.yml'
+      - '.github/workflows/ci-dummy-sync.yml'
+      - 'tools/pytools/**'
 
 jobs:
-  license:
-    name: Check license header
+  sync-without-push:
+    name: Check synchronize content
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/check-license-header
-        with:
-          config: tools/ci/licenserc.toml
+      - name: Sync content without push
+        uses: ./.github/actions/sync-content
