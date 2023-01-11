@@ -27,9 +27,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-      - uses: apache/skywalking-eyes/header@main
+      - uses: ./.github/actions/check-license-header
         with:
-          config: tools/ci/licenserc.yml
+          config: tools/ci/licenserc.toml
 
   # TODO: If it causes too much time to every PR, split to another
   # workflow file and filter by paths:

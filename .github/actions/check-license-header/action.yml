@@ -15,11 +15,17 @@
 # specific language governing permissions and limitations
 # under the License.
 
-header:
-  license:
-    spdx-id: Apache-2.0
-    copyright-owner: Apache Software Foundation
-  paths:
-    - '**/*.py'
-    - '**/*.yaml'
-    - '**/*.yml'
+name: Check license header
+description: Check license header for files of the work.
+inputs:
+  config:
+    description: The configuration file
+    required: false
+    default: licenserc.toml
+runs:
+  using: docker
+  image: docker://ghcr.io/korandoru/hawkeye-native:v1
+  args:
+    - check
+    - --config
+    - ${{ inputs.config }}
