@@ -15,17 +15,25 @@
 # specific language governing permissions and limitations
 # under the License.
 
-from command import find_command, run_pipe
+from command import find_command, run_pipe, run
 from constant import site_path
 
 
 def execute():
+    # 1. Get modified files
     git = find_command('git', msg="git is required")
     modified_files = run_pipe(git, 'diff', '--name-only', 'HEAD~1', 'HEAD', cwd=site_path()).read().strip()
     modified_files = modified_files.split('\n')
     for file in modified_files:
         print(f"{file} was modified")
-    modified_files = ' '.join(modified_files)
+
+    # 2. Install and build
+    npm = find_command('npm', msg="npm is required")
+    node = find_command('node', msg="node is required")
+    bash = find_command('bash', msg="bash is required")
+    run(npm, 'install', cwd=site_path())
+    run(node, 'scripts/replace.js', cwd=site_path())
+    run(bash, 'scripts/split-version-build.sh', *modified_files, cwd=site_path())
 
 
 if __name__ == '__main__':
