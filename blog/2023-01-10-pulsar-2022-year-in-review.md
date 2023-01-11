@@ -33,7 +33,7 @@ Many community members [participated in the discussion and provided valuable fee
 In 2022, the Apache Pulsar community put together a number of meetups and events across the globe to share the latest messaging and streaming technologies. Among others, two Pulsar Summits received the most attention from community members.
 
 - [Pulsar Summit San Francisco 2022](https://streamnative.io/blog/community/2022-08-25-pulsar-summit-sf-2022-community-event-recap/): This event marked the first-ever, in-person Pulsar Summit in North America with 200+ attendees. It featured 20 speakers from companies like Google, AWS, and Yahoo!, 5 keynotes on Apache Pulsar and other streaming technologies, and 12 breakout sessions on tech deep dives, use cases, and ecosystem talks. [Watch the sessions](https://streamnative.io/pulsar-summit-on-demand/).
-- [Pulsar Summit Asia 2022](https://pulsar.apache.org/blog/2022/12/01/pulsar-summit-asia-2022-recap/): With 1,500+ registrations and 40,000+ views globally, this two-day virtual event gathered 41 speakers giving 3 keynote addresses and 36 sessions. They came from companies like ByteDance, Huawei, Tencent, Nippon Telegraph and Telephone Corporation (NTT), Yum China, Netease, vivo, Nutanix, and StreamNative. [Watch the sessions](https://www.youtube.com/playlist?list=PLqRma1oIkcWgeNb3kgzqFyg5sywH8S4yy).
+- [Pulsar Summit Asia 2022](pathname:///blog/2022/12/01/pulsar-summit-asia-2022-recap/): With 1,500+ registrations and 40,000+ views globally, this two-day virtual event gathered 41 speakers giving 3 keynote addresses and 36 sessions. They came from companies like ByteDance, Huawei, Tencent, Nippon Telegraph and Telephone Corporation (NTT), Yum China, Netease, vivo, Nutanix, and StreamNative. [Watch the sessions](https://www.youtube.com/playlist?list=PLqRma1oIkcWgeNb3kgzqFyg5sywH8S4yy).
 
 To stay up to date with the latest events, you can join the following meetups or groups:
 
@@ -55,11 +55,11 @@ The development of the Pulsar community would not be possible without our contri
 - **4.3K+** downloads
 - **14M+** Docker pulls
 
-The Pulsar community welcomes all kinds of contributions. For more information, see the [Apache Pulsar Contribution Guide](https://pulsar.apache.org/contribute/).
+The Pulsar community welcomes all kinds of contributions. For more information, see the [Apache Pulsar Contribution Guide](pathname:///contribute/).
 
 ## Project releases
 
-In 2022, the Pulsar community worked hard to improve the project’s capabilities and fix existing bugs with 1 major version and 8 minor versions. Many important Pulsar capabilities were delivered in these releases, such as [cluster-level automatic failure recovery](https://github.com/apache/pulsar/pull/13316) and [lazy-loading added to PartitionedProducer](https://github.com/apache/pulsar/pull/10279). Check out each release below to see details.
+In 2022, the Pulsar community worked hard to improve the project’s capabilities and fix existing bugs with 1 major version and 8 minor versions. Many important Pulsar capabilities were delivered in these releases, such as [cluster-level automatic failure recovery](https://github.com/apache/pulsar/pull/13316) and [lazy-loading added to PartitionedProducer](https://github.com/apache/pulsar/pull/10279). Check out each release below to see details:
 
 - [2.10.2](https://github.com/apache/pulsar/releases/tag/v2.10.2)
 - [2.10.1](https://github.com/apache/pulsar/releases/tag/v2.10.1)
@@ -71,7 +71,7 @@ In 2022, the Pulsar community worked hard to improve the project’s capabilitie
 - [2.8.2](https://github.com/apache/pulsar/releases/tag/v2.8.2)
 - [2.7.5](https://github.com/apache/pulsar/releases/tag/v2.7.5)
 
-For more information, see the [Release Notes page](https://pulsar.apache.org/release-notes/).
+For more information, see the [Release Notes page](pathname:///release-notes/).
 
 Updates about clients, Pulsar Manager, and Pulsar Helm Chart are listed below:
 
@@ -87,7 +87,7 @@ Updates about clients, Pulsar Manager, and Pulsar Helm Chart are listed below:
 - [Pulsar Manager 0.3.0](https://github.com/apache/pulsar-manager/releases/tag/v0.3.0)
 - [Pulsar Helm Chart 3.0.0](https://github.com/apache/pulsar-helm-chart/releases/tag/pulsar-3.0.0)
 
-For more information, see the [Clients Release Notes page](https://pulsar.apache.org/release-notes/clients/).
+For more information, see the [Clients Release Notes page](pathname:///release-notes/clients/).
 
 ## Pulsar ecosystem
 
@@ -97,7 +97,7 @@ In 2022, the Pulsar community worked with other open-source communities to add m
 - [Flink-Pulsar Sink Connector](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/pulsar/#pulsar-sink): The Flink-Pulsar Sink Connector is part of the Flink-Pulsar DataStream Connector. It implements Flink’s new [SinkV2 API](https://cwiki.apache.org/confluence/display/FLINK/FLIP-177%3A+Extend+Sink+API) and allows you to write Flink job results back to Pulsar topics seamlessly.
 - [HTTP Sink Connector](https://github.com/apache/pulsar/issues/17719): The HTTP Sink Connector pushes records to any HTTP server with the record value in the body of POST method. The body of the HTTP request is the JSON representation of the record value.
 
-For more information, see the [Ecosystem page](https://pulsar.apache.org/ecosystem/).
+For more information, see the [Ecosystem page](pathname:///ecosystem/).
 
 ## What’s next in 2023
 
