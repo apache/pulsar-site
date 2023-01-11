@@ -125,7 +125,7 @@ poetry run bin/site-updater.py --master-path=<PATH> [--push={y|n|auto}]
 
 ### [site-publisher](bin/site-publisher.py)
 
-This executable synchronizes references built from the main repo:
+This executable publishes a new static site built from the current site repo:
 
 ```bash
 poetry run bin/site-publisher.py --site-path=<PATH> [--push={y|n|auto}]
