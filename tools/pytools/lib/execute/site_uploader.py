@@ -43,7 +43,7 @@ def _should_push(mode: Mode) -> bool:
     return result
 
 
-def _do_push(msg: str, site: Path):
+def _do_push(msg: str, site: Path, branch: str):
     git = find_command('git', msg="git is required")
 
     run(git, 'add', '-A', '.', cwd=site)
@@ -61,12 +61,12 @@ def _do_push(msg: str, site: Path):
     changed = run_pipe(git, 'status', '--porcelain', cwd=site).read().strip()
     if len(changed) != 0:
         run(git, 'commit', '-m', msg, cwd=site)
-        run(git, 'push', 'origin', 'main', cwd=site)
+        run(git, 'push', 'origin', branch, cwd=site)
 
 
-def execute(mode: Mode, msg: str, site: Path):
+def execute(mode: Mode, msg: str, site: Path, branch: str):
     if _should_push(mode):
-        _do_push(msg, site)
+        _do_push(msg, site, branch)
     else:  # show changes
         git = find_command('git', msg="git is required")
         change_files = run_pipe(git, 'status', '--porcelain', cwd=site).read().strip()

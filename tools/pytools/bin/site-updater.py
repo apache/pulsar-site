@@ -33,14 +33,16 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     git = find_command('git', msg="git is required")
+    branch = 'master'
 
     with tempfile.TemporaryDirectory() as cwd:
         if args.master_path is None:
-            run(git, 'clone', '-b', 'master', '--depth', '1', 'https://github.com/apache/pulsar', cwd=cwd)
+            run(git, 'clone', '-b', branch, '--depth', '1', 'https://github.com/apache/pulsar', cwd=cwd)
             master = Path(cwd) / 'pulsar'
         else:
             master = Path(args.master_path)
 
         commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=master).read().strip()
         msg = f'Docs sync done from apache/pulsar (#{commit})'
-        site_uploader.execute(args.push, msg, root_path())
+
+        site_uploader.execute(args.push, msg, root_path(), branch)

@@ -33,16 +33,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     git = find_command('git', msg="git is required")
+    branch = 'asf-site-next'
 
     with tempfile.TemporaryDirectory() as cwd:
         if args.site_path is None:
-            run(git, 'clone', '-b', 'asf-site-next', '--depth', '1', 'https://github.com/apache/pulsar-site', cwd=cwd)
+            run(git, 'clone', '-b', branch, '--depth', '1', 'https://github.com/apache/pulsar-site', cwd=cwd)
             site = Path(cwd) / 'pulsar-site'
         else:
             site = Path(args.site_path)
 
-        site_builder.execute(site)
-
         commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=root_path()).read().strip()
         msg = f'Site updated at revision {commit}'
-        site_uploader.execute(args.push, msg, site)
+
+        site_builder.execute(site)
+        site_uploader.execute(args.push, msg, site, branch)
