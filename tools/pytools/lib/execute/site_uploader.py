@@ -47,6 +47,9 @@ def _do_push(msg: str, site: Path, branch: str):
     git = find_command('git', msg="git is required")
 
     run(git, 'add', '-A', '.', cwd=site)
+    changed = run(git, 'diff-index', '--quiet', 'HEAD').returncode
+    print(f'changed: {changed}')
+
     run(git, 'status', cwd=site)
     run(git, 'remote', '-v', cwd=site)
     if os.getenv('GITHUB_ACTIONS') is not None:
@@ -56,10 +59,10 @@ def _do_push(msg: str, site: Path, branch: str):
         else:
             name = 'github-actions[bot]'
             email = f'41898282+{name}@users.noreply.github.com'
+        print(f'config with name: {name}, email: {email}')
         run(git, 'config', 'user.name', name, cwd=site)
         run(git, 'config', 'user.email', email, cwd=site)
-    changed = run_pipe(git, 'status', '--porcelain', cwd=site).read().strip()
-    if len(changed) != 0:
+    if changed != 0:
         run(git, 'commit', '-m', msg, cwd=site)
         run(git, 'push', 'origin', branch, cwd=site)
 
