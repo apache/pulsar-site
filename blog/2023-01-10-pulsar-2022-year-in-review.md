@@ -75,8 +75,6 @@ For more information, see the [Release Notes page](https://pulsar.apache.org/rel
 
 Updates about clients, Pulsar Manager, and Pulsar Helm Chart are listed below:
 
-
-
 - [Pulsar C++ Client 3.1.0](https://github.com/apache/pulsar-client-cpp/releases/tag/v3.1.0)
 - [Pulsar C++ Client 3.0.0](https://github.com/apache/pulsar-client-cpp/releases/tag/v3.0.0)
 - [Pulsar Go Client 0.9.0](https://github.com/apache/pulsar-client-go/releases/tag/v0.9.0)
