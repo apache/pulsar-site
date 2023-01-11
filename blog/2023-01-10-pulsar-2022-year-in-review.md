@@ -61,28 +61,31 @@ The Pulsar community welcomes all kinds of contributions. For more information, 
 
 In 2022, the Pulsar community worked hard to improve the project’s capabilities and fix existing bugs with 1 major version and 8 minor versions. Many important Pulsar capabilities were delivered in these releases, such as [cluster-level automatic failure recovery](https://github.com/apache/pulsar/pull/13316) and [lazy-loading added to PartitionedProducer](https://github.com/apache/pulsar/pull/10279). Check out each release below to see details.
 
-- [2.7.5](https://github.com/apache/pulsar/releases/tag/v2.7.5)
-- [2.8.2](https://github.com/apache/pulsar/releases/tag/v2.8.2)
-- [2.8.3](https://github.com/apache/pulsar/releases/tag/v2.8.3)
-- [2.8.4](https://github.com/apache/pulsar/releases/tag/v2.8.4)
-- [2.9.2](https://github.com/apache/pulsar/releases/tag/v2.9.2)
-- [2.9.3](https://github.com/apache/pulsar/releases/tag/v2.9.3)
-- [2.10.0](https://github.com/apache/pulsar/releases/tag/v2.10.0)
-- [2.10.1](https://github.com/apache/pulsar/releases/tag/v2.10.1)
 - [2.10.2](https://github.com/apache/pulsar/releases/tag/v2.10.2)
+- [2.10.1](https://github.com/apache/pulsar/releases/tag/v2.10.1)
+- [2.10.0](https://github.com/apache/pulsar/releases/tag/v2.10.0)
+- [2.9.3](https://github.com/apache/pulsar/releases/tag/v2.9.3)
+- [2.9.2](https://github.com/apache/pulsar/releases/tag/v2.9.2)
+- [2.8.4](https://github.com/apache/pulsar/releases/tag/v2.8.4)
+- [2.8.3](https://github.com/apache/pulsar/releases/tag/v2.8.3)
+- [2.8.2](https://github.com/apache/pulsar/releases/tag/v2.8.2)
+- [2.7.5](https://github.com/apache/pulsar/releases/tag/v2.7.5)
 
 For more information, see the [Release Notes page](https://pulsar.apache.org/release-notes/).
 
 Updates about clients, Pulsar Manager, and Pulsar Helm Chart are listed below:
 
-- [Pulsar C++ Client 3.0.0](https://github.com/apache/pulsar-client-cpp/releases/tag/v3.0.0)
+
+
 - [Pulsar C++ Client 3.1.0](https://github.com/apache/pulsar-client-cpp/releases/tag/v3.1.0)
-- [Pulsar Go Client 0.8.0](https://github.com/apache/pulsar-client-go/releases/tag/v0.8.0)
-- [Pulsar Go Client 0.8.1](https://github.com/apache/pulsar-client-go/releases/tag/v0.8.1)
+- [Pulsar C++ Client 3.0.0](https://github.com/apache/pulsar-client-cpp/releases/tag/v3.0.0)
 - [Pulsar Go Client 0.9.0](https://github.com/apache/pulsar-client-go/releases/tag/v0.9.0)
-- [Pulsar Node.js client 1.6.2](https://github.com/apache/pulsar-client-node/releases/tag/v1.6.2)
+- [Pulsar Go Client 0.8.1](https://github.com/apache/pulsar-client-go/releases/tag/v0.8.1)
+- [Pulsar Go Client 0.8.0](https://github.com/apache/pulsar-client-go/releases/tag/v0.8.0)
 - [Pulsar Node.js client 1.7.0](https://github.com/apache/pulsar-client-node/releases/tag/v1.7.0)
+- [Pulsar Node.js client 1.6.2](https://github.com/apache/pulsar-client-node/releases/tag/v1.6.2)
 - [Pulsar Python Client 3.0.0](https://github.com/apache/pulsar-client-python/releases/tag/v3.0.0)
+- [Reactive client for Apache Pulsar 0.1.0](https://github.com/apache/pulsar-client-reactive/releases/tag/v0.1.0)
 - [Pulsar Manager 0.3.0](https://github.com/apache/pulsar-manager/releases/tag/v0.3.0)
 - [Pulsar Helm Chart 3.0.0](https://github.com/apache/pulsar-helm-chart/releases/tag/pulsar-3.0.0)
 
@@ -92,18 +95,14 @@ For more information, see the [Clients Release Notes page](https://pulsar.apache
 
 In 2022, the Pulsar community worked with other open-source communities to add more integrations to the Pulsar ecosystem. Notable integrations include:
 
-- [Spring for Apache Pulsar](https://spring.io/blog/2022/09/20/spring-for-apache-pulsar-0-1-0-m1-is-now-available): This project aims to provide Spring-friendly APIs, building blocks, and programming models for writing Java applications that interact with Apache Pulsar. Read this [blog](https://streamnative.io/blog/release/2022-09-21-announcing-spring-for-apache-pulsar/) to see details.
-- [Apache NiFi Processor for Apache Pulsar](https://github.com/streamnative/pulsar-nifi-bundle): With the integration, users are able to consume and produce messages from Pulsar topics at scale with simple configuration settings within Apache NiFi. Read this [blog](https://streamnative.io/blog/release/2022-03-09-cloudera-and-streamnative-announce-the-integration-of-apache-nifi-and-apache-pulsar/) to see details.
-- [Flink-Pulsar Sink Connector](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/pulsar/#pulsar-sink): The Flink-Pulsar Sink Connector is part of the Flink-Pulsar DataStream Connector. It implements Flink’s new [SinkV2 API](https://cwiki.apache.org/confluence/display/FLINK/FLIP-177%3A+Extend+Sink+API) and allows you to write Flink job results back to Pulsar topics seamlessly. Read this [blog](https://streamnative.io/blog/release/2022-08-30-announcing-the-flink-pulsar-sink-connector/) to see details.
-- [Flink-Pulsar SQL Connector](https://github.com/streamnative/flink): The Flink-Pulsar SQL Connector supports querying data from and writing data to Pulsar topics with simple Flink SQL queries. Read this [blog](https://streamnative.io/blog/release/2022-09-29-announcing-the-flink-pulsar-sql-connector/) to see details.
-- [Google Cloud Pub/Sub Connector for Apache Pulsar](https://github.com/streamnative/pulsar-io-google-pubsub): It is a Pulsar IO connector enabling data replication between Google Cloud Pub/Sub and Apache Pulsar. Read this [blog](https://streamnative.io/blog/release/2022-6-24-announcing-the-google-cloud-pub-sub-connector-for-apache-pulsar/) to see details.
-- [Google Cloud BigQuery Sink Connector for Apache Pulsar](https://github.com/streamnative/pulsar-io-bigquery): This connector pulls data from Pulsar topics and persists data to Google Cloud BigQuery tables. Read this [blog](https://streamnative.io/blog/release/2022-8-3-announcing-the-google-cloud-bigquery-sink-connector-for-apache-pulsar/) to see details.
-- [Delta Lake Sink Connector for Apache Pulsar](https://github.com/streamnative/pulsar-io-lakehouse): It is a Pulsar IO connector that pulls data from Apache Pulsar topics and persists data to Delta Lake. Read this [blog](https://streamnative.io/blog/release/2022-08-17-announcing-the-delta-lake-sink-connector-for-apache-pulsar/) to see details.
-- [Iceberg Sink Connector for Apache Pulsar](https://github.com/streamnative/pulsar-io-lakehouse): It is a Pulsar IO connector that pulls data from Apache Pulsar topics and persists data to Iceberg tables. Read this [blog](https://streamnative.io/blog/release/2022-12-14-announcing-the-iceberg-sink-connector-for-apache-pulsar/) to see details.
-- [Pulsar Resources Operator for Kubernetes](https://github.com/streamnative/pulsar-resources-operator): The Pulsar Resources Operator is an independent controller that automatically manages Pulsar resources on Kubernetes using manifest files. Read this [blog](https://streamnative.io/blog/release/2022-08-15-introducing-pulsar-resources-operator-for-kubernetes/) to see details.
+- [Spring for Apache Pulsar](https://spring.io/blog/2022/09/20/spring-for-apache-pulsar-0-1-0-m1-is-now-available): This project aims to provide Spring-friendly APIs, building blocks, and programming models for writing Java applications that interact with Apache Pulsar. For more information, read the blog [Spring for Apache Pulsar 0.1.0 available now](https://spring.io/blog/2022/12/15/spring-for-apache-pulsar-0-1-0-available-now).
+- [Flink-Pulsar Sink Connector](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/pulsar/#pulsar-sink): The Flink-Pulsar Sink Connector is part of the Flink-Pulsar DataStream Connector. It implements Flink’s new [SinkV2 API](https://cwiki.apache.org/confluence/display/FLINK/FLIP-177%3A+Extend+Sink+API) and allows you to write Flink job results back to Pulsar topics seamlessly.
+- [HTTP Sink Connector](https://github.com/apache/pulsar/issues/17719): The HTTP Sink Connector pushes records to any HTTP server with the record value in the body of POST method. The body of the HTTP request is the JSON representation of the record value.
+
+For more information, see the [Ecosystem page](https://pulsar.apache.org/ecosystem/).
 
 ## What’s next in 2023
 
-The Pulsar community seeks to further improve the project from different aspects. For example, we plan on releasing the first long-term support (LTS) version of Pulsar to meet the needs of different users. For those who want a more stable Pulsar version, they can choose the LTS version, which is expected to be released every 18 months with bug fix support for 24 months and security patches for 36 months. Ordinary releases will come out every 3 months with bug fix support and security patches for 6 months.
+The Pulsar community seeks to further improve the project from different aspects. For example, we plan on releasing the first long-term support (LTS) version of Pulsar to meet the needs of different users. For those who want a more stable Pulsar version, they can choose the LTS release. The Pulsar community will help improve and upgrade the LTS versions with bug fixes and security patches.
 
 Additionally, we will also have more events coming for 2023, including Pulsar Summit North America and Pulsar Summit APAC. To stay up to date with community news and discuss hot topics with other members, you can subscribe to the Pulsar mailing lists for [users](mailto:users-subscribe@pulsar.apache.org) and [developers](mailto:dev-subscribe@pulsar.apache.org), follow us on [Twitter](https://twitter.com/apache_pulsar), and join the [Pulsar Slack workspace](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
