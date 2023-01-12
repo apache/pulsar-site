@@ -80,10 +80,10 @@ Updates about clients, Pulsar Manager, and Pulsar Helm Chart are listed below:
 - [Pulsar Go Client 0.9.0](https://github.com/apache/pulsar-client-go/releases/tag/v0.9.0)
 - [Pulsar Go Client 0.8.1](https://github.com/apache/pulsar-client-go/releases/tag/v0.8.1)
 - [Pulsar Go Client 0.8.0](https://github.com/apache/pulsar-client-go/releases/tag/v0.8.0)
-- [Pulsar Node.js client 1.7.0](https://github.com/apache/pulsar-client-node/releases/tag/v1.7.0)
-- [Pulsar Node.js client 1.6.2](https://github.com/apache/pulsar-client-node/releases/tag/v1.6.2)
+- [Pulsar Node.js Client 1.7.0](https://github.com/apache/pulsar-client-node/releases/tag/v1.7.0)
+- [Pulsar Node.js Client 1.6.2](https://github.com/apache/pulsar-client-node/releases/tag/v1.6.2)
 - [Pulsar Python Client 3.0.0](https://github.com/apache/pulsar-client-python/releases/tag/v3.0.0)
-- [Reactive client for Apache Pulsar 0.1.0](https://github.com/apache/pulsar-client-reactive/releases/tag/v0.1.0)
+- [Reactive Client for Apache Pulsar 0.1.0](https://github.com/apache/pulsar-client-reactive/releases/tag/v0.1.0)
 - [Pulsar Manager 0.3.0](https://github.com/apache/pulsar-manager/releases/tag/v0.3.0)
 - [Pulsar Helm Chart 3.0.0](https://github.com/apache/pulsar-helm-chart/releases/tag/pulsar-3.0.0)
 
