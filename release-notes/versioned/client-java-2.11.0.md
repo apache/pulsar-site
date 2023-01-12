@@ -23,7 +23,7 @@ sidebar_label: Client Java 2.11.0
 - [fix][Java] Fixed ack failure in ReaderImpl due to null messageId [#17728](https://github.com/apache/pulsar/pull/17728)
 - [fix][Java] Unwrap completion exception for Lookup Services [#17717](https://github.com/apache/pulsar/pull/17717)
 - [fix][Java] Fix scheduledExecutorProvider not shutdown [#17527](https://github.com/apache/pulsar/pull/17527)
-- [fix][Java] Fix the message present in incoming queue after go to DLQ [#17326](https://github.com/apache/pulsar/pull/17326)
+- [fix][Java] Fix the message present in incoming queue after going to DLQ [#17326](https://github.com/apache/pulsar/pull/17326)
 - [fix][Java] Fix reach redeliverCount client can't send batch messags [#17317](https://github.com/apache/pulsar/pull/17317)
 - [fix][Java] Fix reach redeliverCount client can't send messages to DLQ [#17287](https://github.com/apache/pulsar/pull/17287)
 - [fix][Java] LastBatchSendNanoTime initialization [#17058](https://github.com/apache/pulsar/pull/17058)
