@@ -7,6 +7,119 @@ original_id: develop-plugin
 
 You can develop various plugins for Pulsar, such as entry filters, protocol handlers, interceptors, and so on.
 
+## Additional Servlets
+
+This chapter describes what additional servlets are and how to use them.
+
+### What is an additional servlet?
+
+Pulsar offers a multitude of REST APIs to interact with it. To expose additional custom logic as a REST API, Pulsar offers the concept of additional servlets. These servlets run as plugins in either the broker or the pulsar proxy.
+
+### How to use an additional servlet?
+
+Take a look at [this example implementation](https://github.com/apache/pulsar/blob/master/tests/docker-images/java-test-plugins/src/main/java/org/apache/pulsar/tests/integration/plugins/RandomAdditionalServlet.java), or follow the steps below:
+
+1. Create a Maven project.
+
+2. Implement the `AdditionalServlet` or `AdditionalServletWithPulsarService` interface. Use `AdditionalServletWithPulsarService`, if you need access to Pulsar internals for performing administrative tasks or producing messages.
+
+3. Package your project into a NAR file.
+
+4. Configure the `broker.conf` file (or the `standalone.conf` file) and restart your broker.
+
+#### Step 1: Create a Maven project
+
+For how to create a Maven project, see [here](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html).
+
+#### Step 2: Implement the `AdditionalServlet` interface
+
+1. Add a dependency for `pulsar-broker` in the `pom.xml` file as displayed. Otherwise, you can not find the [`AdditionalServlet`](https://github.com/apache/pulsar/blob/master/pulsar-broker-common/src/main/java/org/apache/pulsar/broker/web/plugin/servlet/AdditionalServlet.java) interface.
+
+   ```xml
+   <dependency>
+      <groupId>org.apache.pulsar</groupId>
+      <artifactId>pulsar-broker</artifactId>
+      <version>${pulsar.version}</version>
+      <scope>provided</scope>
+   </dependency>
+   ```
+
+2. Implement the methods of the `AdditionalServlet` interface.
+
+   - `loadConfig` allows you to configure your servlet by loading configuration properties from the `PulsarConfiguration`.
+
+   - `getBasePath` defines the path your servlet will be loaded under.
+
+   - `getServletHolder` returns the `ServletHolder` for this servlet.
+
+   - `close` allows you to free up resources.
+
+3. Describe a NAR file.
+
+   Create an `additional_servlet.yml` file in the `resources/META-INF/services` directory to describe a NAR file.
+
+   ```conf
+   name: my-servlet
+   description: Describes my-servlet
+   additionalServletClass: org.my.package.MyServlet
+   ```
+
+#### Step 3: package your project into a NAR file
+
+1. Add the compiled plugin of the NAR file to your `pom.xml` file.
+
+   ```xml
+   <build>
+      <finalName>${project.artifactId}</finalName>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.nifi</groupId>
+            <artifactId>nifi-nar-maven-plugin</artifactId>
+            <version>1.2.0</version>
+            <extensions>true</extensions>
+            <configuration>
+               <finalName>${project.artifactId}-${project.version}</finalName>
+            </configuration>
+            <executions>
+               <execution>
+                  <id>default-nar</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>nar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+   ```
+
+2. Generate a NAR file in the `target` directory.
+
+   ```script
+   mvn clean install
+   ```
+
+#### Step 4: configure and restart broker
+
+1. Configure the following parameters in the `broker.conf` file (or the `standalone.conf` file).
+
+   ```conf
+   # Name of pluggable additional servlets
+   # Multiple servlets need to be separated by commas.
+   additionalServlets=my-servlet
+   # The directory for all additional servlet implementations
+   additionalServletDirectory=tempDir
+   ```
+
+2. Restart your broker.
+
+   You can see the following broker log if the plug-in is successfully loaded.
+
+   ```text
+   Successfully loaded additional servlet for name `my-servlet`
+   ```
+
 ## Entry filter
 
 This chapter describes what the entry filter is and shows how to use the entry filter.
