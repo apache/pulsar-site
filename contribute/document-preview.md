@@ -60,8 +60,10 @@ By default, a browser window will open at [http://localhost:3000](http://localho
 
 ![alt_text](media/website-preview.png)
 
-::: tip
+:::tip
+
 When you click on `Docs`, you are taken to the latest stable version (e.g., `http://localhost:3000/docs/2.10.x/`). If you want to preview changes on `master`, change the URL to `http://localhost:3000/docs/next`
+
 :::
 ### Stop preview
 
