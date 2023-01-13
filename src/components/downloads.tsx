@@ -91,7 +91,7 @@ export function CurrentPulsarShellDownloadTable(): JSX.Element {
     const latestArchiveUrlZip = distShellUrl(latestVersion, "zip")
     const data = [
         {
-            release: "Unix",
+            release: "Linux / MacOS",
             link: latestArchiveUrl,
             linkText: `apache-pulsar-shell-${latestVersion}-bin.tar.gz`,
             asc: `${latestArchiveUrl}.asc`,
