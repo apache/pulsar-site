@@ -10,6 +10,7 @@ The highlight of the 2.9.3 release is introducing 30+ transaction fixes and impr
 
 This blog walks through the most noteworthy changes. For the complete list including all feature enhancements and bug fixes, check out the [Pulsar 2.9.3 Release Notes](https://pulsar.apache.org/release-notes/versioned/pulsar-2.9.3/).
 
+<!--truncate-->
 
 ### Enabled cursor data compression to reduce persistent cursor data size. [14542](https://github.com/apache/pulsar/pull/14542)
 
