@@ -16,17 +16,20 @@
 # under the License.
 
 import shutil
+import tempfile
 from pathlib import Path
 
-from command import find_command, run_pipe, run
+from command import find_command, run
 from constant import site_path
 
 
 def execute(asf_site: Path):
     # 1. Get modified files
     git = find_command('git', msg="git is required")
-    modified_files = run_pipe(git, 'diff', '--name-only', 'HEAD~1', 'HEAD', cwd=site_path()).read().strip()
-    modified_files = modified_files.split('\n')
+    with tempfile.TemporaryFile('w+') as f:
+        run(git, 'diff', '--name-only', 'HEAD~1', 'HEAD', stdout=f, cwd=site_path())
+        f.seek(0)
+        modified_files = f.read().splitlines()
     for file in modified_files:
         print(f"{file} was modified")
 
