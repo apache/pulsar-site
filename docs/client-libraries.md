@@ -22,6 +22,12 @@ Pulsar supports the following language-agnostic client libraries:
 | REST      | [User doc](client-libraries-rest.md)      | [Bundled](pathname:///release-notes/)             | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-broker)    |
 | WebSocket | [User doc](client-libraries-websocket.md) | [Standalone](pathname:///release-notes/client-ws) | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-websocket) |
 
+:::tip
+
+If you want to create your own client library, read the [binary protocol documentation](developing-binary-protocol.md).
+
+:::
+
 ## Feature matrix
 
 Pulsar client feature matrix for different languages is listed on [Pulsar Feature Matrix (Client and Function)](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914) page.
