@@ -1,6 +1,6 @@
 module.exports = [
     {
-        "author": "liangyepianzhou",
+        "author": "Technoboy",
         "tagName": "v2.11.0",
         "publishedAt": "2023-01-11T01:53:34Z",
         "vtag": "2.11.x",
