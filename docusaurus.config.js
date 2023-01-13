@@ -161,11 +161,13 @@ module.exports = {
                     position: "right",
                     items: [
                         {
-                            to: `/docs/${versions[0]}/concepts-overview/`,
+                            type: 'doc',
+                            docId: 'concepts-overview',
                             label: "Pulsar Concepts",
                         },
                         {
-                            to: `/docs/${versions[0]}/`,
+                            type: 'doc',
+                            docId: 'about',
                             label: "Quickstart",
                         },
                         {
@@ -175,7 +177,8 @@ module.exports = {
                     ],
                 },
                 {
-                    to: `/docs/${versions[0]}/`,
+                    type: 'doc',
+                    docId: 'about',
                     position: "right",
                     label: "Docs",
                 },
