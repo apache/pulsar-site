@@ -1,6 +1,16 @@
 module.exports = [
     {
         "author": "liangyepianzhou",
+        "tagName": "v2.11.0",
+        "publishedAt": "2023-01-11T01:53:34Z",
+        "vtag": "2.11.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.0/",
+        "releaseBlog": "",
+        "doc": "/docs/2.11.x",
+        "version": "v2.11.x"
+    },
+    {
+        "author": "liangyepianzhou",
         "tagName": "v2.10.3",
         "publishedAt": "2023-01-04T01:53:34Z",
         "vtag": "2.10.x",
