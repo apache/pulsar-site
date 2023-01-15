@@ -3597,6 +3597,17 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 
 **Category**: Server
 
+### zooKeeperAllowReadOnlyOperations
+Is zookeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### bookkeeperClientAuthenticationParameters
 Parameters for bookkeeper auth plugin
 

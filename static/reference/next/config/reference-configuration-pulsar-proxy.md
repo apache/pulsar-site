@@ -917,6 +917,17 @@ The port for serving https requests
 
 **Category**: Server
 
+### zooKeeperAllowReadOnlyOperations
+Is zooKeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### tlsAllowInsecureConnection
 Accept untrusted TLS certificate from client.
 
