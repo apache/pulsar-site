@@ -556,6 +556,17 @@ Number of threads used by Websocket service
 
 **Category**: 
 
+### webSocketPingDurationSeconds
+Interval of time to sending the ping to keep alive. This value greater than 0 means enabled
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### webSocketSessionIdleTimeoutMillis
 Timeout of idling WebSocket session (in milliseconds)
 
