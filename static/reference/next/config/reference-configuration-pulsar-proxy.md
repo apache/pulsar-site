@@ -785,6 +785,17 @@ Max size of messages.
 
 **Category**: Server
 
+### metadataStoreAllowReadOnlyOperations
+Is metadata store read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreCacheExpirySeconds
 Metadata store cache expiry time in seconds.
 
@@ -912,17 +923,6 @@ The port for serving https requests
 **Type**: `java.util.Optional`
 
 **Default**: `Optional.empty`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### zooKeeperAllowReadOnlyOperations
-Is zooKeeper allow read-only operations.
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -1217,5 +1217,16 @@ ZooKeeper session timeout in milliseconds. @deprecated - Use metadataStoreSessio
 **Dynamic**: `false`
 
 **Category**: Broker Discovery
+
+### zooKeeperAllowReadOnlyOperations
+Is zooKeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
 
 

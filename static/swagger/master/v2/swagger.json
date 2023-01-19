@@ -4240,6 +4240,9 @@
                     "format": "int32",
                     "type": "integer"
                 },
+                "metadataStoreAllowReadOnlyOperations": {
+                    "type": "boolean"
+                },
                 "metadataStoreCacheExpirySeconds": {
                     "format": "int32",
                     "type": "integer"
@@ -17535,26 +17538,26 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Update topic partition successful."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
                     "401": {
-                        "description": "Don't have permission to administrate resources on this tenant"
+                        "description": "Unauthenticated"
                     },
                     "403": {
-                        "description": "Don't have admin permission"
+                        "description": "Forbidden/Unauthorized"
                     },
                     "404": {
-                        "description": "Tenant does not exist"
-                    },
-                    "406": {
-                        "description": "The number of partitions should be more than 0 and less than or equal to maxNumPartitionsPerPartitionedTopic and number of new partitions must be greater than existing number of partitions"
-                    },
-                    "409": {
-                        "description": "Partitioned topic does not exist"
+                        "description": "Topic does not exist"
                     },
                     "412": {
                         "description": "Partitioned topic name is invalid"
+                    },
+                    "422": {
+                        "description": "The number of partitions should be more than 0 and less than or equal to maxNumPartitionsPerPartitionedTopic and number of new partitions must be greater than existing number of partitions"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -27298,26 +27301,26 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Update topic partition successful."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
                     "401": {
-                        "description": "Don't have permission to administrate resources on this tenant"
+                        "description": "Unauthenticated"
                     },
                     "403": {
-                        "description": "Don't have admin permission"
+                        "description": "Forbidden/Unauthorized"
                     },
                     "404": {
-                        "description": "Tenant does not exist"
-                    },
-                    "406": {
-                        "description": "The number of partitions should be more than 0 and less than or equal to maxNumPartitionsPerPartitionedTopic and number of new partitions must be greater than existing number of partitions"
-                    },
-                    "409": {
-                        "description": "Partitioned topic does not exist"
+                        "description": "Topic does not exist"
                     },
                     "412": {
                         "description": "Partitioned topic name is invalid"
+                    },
+                    "422": {
+                        "description": "The number of partitions should be more than 0 and less than or equal to maxNumPartitionsPerPartitionedTopic and number of new partitions must be greater than existing number of partitions"
                     },
                     "500": {
                         "description": "Internal server error"

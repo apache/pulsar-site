@@ -3118,6 +3118,17 @@ Interval between checks to see if message publish buffer size is exceed the max 
 
 **Category**: Server
 
+### metadataStoreAllowReadOnlyOperations
+Is metadata store read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreBatchingEnabled
 Whether we should enable metadata operations batching
 
@@ -3592,17 +3603,6 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 **Type**: `java.lang.String`
 
 **Default**: `Conscrypt`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### zooKeeperAllowReadOnlyOperations
-Is zookeeper allow read-only operations.
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -5154,6 +5154,17 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### zooKeeperAllowReadOnlyOperations
+Is zookeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
