@@ -329,8 +329,8 @@ module.exports = {
                     path: "docs",
                     sidebarPath: require.resolve("./sidebars.js"),
                     editUrl: `${githubSiteUrl}/edit/main`,
-                    remarkPlugins:
-                        [linkifyRegex(
+                    remarkPlugins: [
+                        linkifyRegex(
                             /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
                             injectLinkParse
                         ),

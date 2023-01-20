@@ -44,69 +44,6 @@ The process of message dispatch throttling can be divided into the following ste
 
 :::
 
-### Limitations
-
-Message dispatch throttling may cause messages over-delivered per unit of time due to the following reasons:
-
-1. The broker may read more entries or bytes from the bookies than the throttling limit.
-   - The byte size of messages delivered to the client may exceed the configured threshold. 
-   
-     When you set the dispatch rate limit in bytes/throttling-period (`dispatchThrottlingRateInByte`/`ratePeriodInSecond`), the broker calculates `the number of entries to read from bookies` in one throttling period through the following equation:
-   
-     $$
-     The \ number \ of \ entries \ to \ read \ from \ bookies = {{The \ total \ byte \ size \ to \ read} \over{The \ average \ byte \ size \ per \ entry}}
-     $$
-
-     By controlling `the number of entries to read from bookies`, the broker attempts to limit `the total byte size to read` below `the dispatch rate` within each throttling period. It reads messages from the bookies in the unit of `entry` and approximates the bytes of the next entry to read because it does not know the exact byte size of each entry before reading it.
-
-     The broker uses the following two metrics to get the average byte size per entry:
-       - Average publish size (`brk_ml_EntrySizeBuckets`): the average byte size per entry stored in the bookies when the broker receives a publish request.
-       - Average dispatch size (`entriesReadSize`/`entriesReadCount`): the average number of messages that have been delivered to the client. 
-
-    The broker uses the average publish size in preference to the average dispatch size. If the average publish size is unavailable, then it uses the average dispatch size. When none of the two metrics are available, the broker only reads one entry at the first attempt.
-
-   - The number of messages delivered to the client may exceed the configured threshold. 
-     
-     When you set the dispatch rate limit in message-count/throttling-period (`dispatchThrottlingRateInMsg`/`ratePeriodInSecond`) and batching (`batch-send`) is enabled, the broker counts an entry as one message (despite the message count per entry) and calculates `the number of entries to read from bookies` through the following equation:
-      
-     $$
-     The \ number \ of \ entries \ to \ read \ from \ bookies = {{The \ total \ number \ of \ messages \ to \ read} \over{The \ average \ message \ count \ per \ entry} \ (=1)}
-     $$
-
-     Since there is a number of messages per entry, the number of messages delivered to the client always exceeds or equals the configured threshold.
-
-**Workaround**
-
-Configuring `preciseDispatcherFlowControl` or `dispatchThrottlingOnBatchMessageEnabled` can improve the over-delivery issue. See [Throttling configurations](#throttling-configurations) for more details.
-
-2. Concurrent throttling processes may not decrease the quota in a timely manner. 
-
-   As introduced in [How it works](#how-it-works), the dispatch throttling process is: `1.get remaining quota` $$\to$$ `2.load data` $$\to$$ `3.decrease quota`. 
-   
-   When two processes "dispatch replay messages (process-R)" and "dispatch non-replay messages (process-N)" in the same subscription are executed concurrently, their throttling processes can be interwoven in this order: 
-
-     1) process-R: `1.get remaining quota`
-
-     2) process-R: `2.load data`
-
-     3) process-N: `1.get remaining quota`
-
-     4) process-N: `2.load data`
-
-     5) process-R: `3.decrease quota`
-
-     6) process-N: `3.decrease quota`
-
-   As a result, the total number of dispatched messages may exceed the quota.
-
-:::note
-
-When over-delivery happens, and the delivered message count exceeds the quota in the current period, then the quota for the next period will be reduced accordingly. For example, if the rate limit is set to `10/s`, and `11` messages have been delivered to the client in the first period, then only up to `9` messages can be delivered to the client in the next period.
-
-![An example of over-delivery occurred within a throttling period](/assets/throttling-limitation.svg)
-
-:::
-
 ## Concepts
 
 ### Throttling levels
@@ -158,5 +95,71 @@ dispatchThrottlingOnNonBacklogConsumerEnabled | Whether the dispatch throttling 
 
 - You can use `dispatchThrottlingRateInMsg` and `dispatchThrottlingRateInByte` simultaneously (logical AND).
 - Ensure that only one of `preciseDispatcherFlowControl` and `dispatchThrottlingOnBatchMessageEnabled` is enabled since these two parameters are mutually exclusive.
+
+:::
+
+## Limitations
+
+Message dispatch throttling may cause messages over-delivered per unit of time due to the following reasons:
+
+1. **The broker may read more entries or bytes from the bookies than the throttling limit.**
+
+   a) **The byte size of messages delivered to the client may exceed the configured threshold.**
+   
+     When you set the dispatch rate limit in bytes/throttling-period (`dispatchThrottlingRateInByte`/`ratePeriodInSecond`), the broker calculates `the number of entries to read from bookies` in one throttling period through the following equation:
+   
+     $$
+     The \ number \ of \ entries \ to \ read \ from \ bookies = {{The \ total \ byte \ size \ to \ read} \over{The \ average \ byte \ size \ per \ entry}}
+     $$
+
+     By controlling `the number of entries to read from bookies`, the broker attempts to limit `the total byte size to read` below `the dispatch rate` within each throttling period. It reads messages from the bookies in the unit of `entry` and approximates the bytes of the next entry to read because it does not know the exact byte size of each entry before reading it.
+
+     The broker uses the following two metrics to get the average byte size per entry:
+
+      * Average publish size (`brk_ml_EntrySizeBuckets`): the average byte size per entry stored in the bookies when the broker receives a publish request.
+
+      * Average dispatch size (`entriesReadSize`/`entriesReadCount`): the average number of messages that have been delivered to the client. 
+      
+     The broker uses the average publish size in preference to the average dispatch size. If the average publish size is unavailable, then it uses the average dispatch size. When none of the two metrics are available, the broker only reads one entry at the first attempt.
+
+   **b) The number of messages delivered to the client may exceed the configured threshold.**
+     
+     When you set the dispatch rate limit in message-count/throttling-period (`dispatchThrottlingRateInMsg`/`ratePeriodInSecond`) and batching (`batch-send`) is enabled, the broker counts an entry as one message (despite the message count per entry) and calculates `the number of entries to read from bookies` through the following equation:
+      
+     $$
+     The \ number \ of \ entries \ to \ read \ from \ bookies = {{The \ total \ number \ of \ messages \ to \ read} \over{The \ average \ message \ count \ per \ entry} \ (=1)}
+     $$
+
+     Since there is a number of messages per entry, the number of messages delivered to the client always exceeds or equals the configured threshold.
+
+   **Workaround**
+
+   Configuring `preciseDispatcherFlowControl` or `dispatchThrottlingOnBatchMessageEnabled` can improve the over-delivery issue. See [Throttling configurations](#throttling-configurations) for more details.
+
+2. **Concurrent throttling processes may not decrease the quota in a timely manner.**
+
+   As introduced in [How it works](#how-it-works), the dispatch throttling process is: `1.get remaining quota` $$\to$$ `2.load data` $$\to$$ `3.decrease quota`. 
+   
+   When two processes "dispatch replay messages (process-R)" and "dispatch non-replay messages (process-N)" in the same subscription are executed concurrently, their throttling processes can be interwoven in this order: 
+
+     1) process-R: `1.get remaining quota`
+
+     2) process-R: `2.load data`
+
+     3) process-N: `1.get remaining quota`
+
+     4) process-N: `2.load data`
+
+     5) process-R: `3.decrease quota`
+
+     6) process-N: `3.decrease quota`
+
+   As a result, the total number of dispatched messages may exceed the quota.
+
+   :::note
+
+   When over-delivery happens, and the delivered message count exceeds the quota in the current period, then the quota for the next period will be reduced accordingly. For example, if the rate limit is set to `10/s`, and `11` messages have been delivered to the client in the first period, then only up to `9` messages can be delivered to the client in the next period.
+
+   ![An example of over-delivery occurred within a throttling period](/assets/throttling-limitation.svg)
 
 :::
