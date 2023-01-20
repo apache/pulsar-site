@@ -2419,3 +2419,19 @@ $ pulsar-admin topics set-schema-validation-enforce options
 |---|---|---|
 | `--enable, -e` | Enable schema validation enforced|false||
 
+
+## <em>trim-topic</em>
+
+Trim a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topics trim-topic options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
