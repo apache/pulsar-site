@@ -1074,6 +1074,17 @@ Name of the cluster to which this broker belongs to
 
 **Category**: WebSocket
 
+### webSocketPingDurationSeconds
+Interval of time to sending the ping to keep alive in WebSocket proxy. This value greater than 0 means enabled
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
 ### webSocketServiceEnabled
 Enable or disable the WebSocket servlet
 
