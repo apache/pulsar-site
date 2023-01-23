@@ -290,7 +290,7 @@ module.exports = {
                     items: [
                         {
                             html: `<div><small><strong>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0.</a></strong></small></div>
-                            <div>Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.</div>`,
+                            <div>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</div>`,
                         },
                     ],
                 },
