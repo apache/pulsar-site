@@ -120,7 +120,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mysql-source"
-  inputs: [ "debezium-mysql-topic" ]
+  topicName: "debezium-mysql-topic"
   archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar"
   parallelism: 1
 
