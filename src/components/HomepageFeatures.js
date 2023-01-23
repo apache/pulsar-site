@@ -19,9 +19,9 @@ const FeatureList = (language) => [
     content: "Scales horizontally to handle the increased load. Its unique design and separate storage layer enable handling the sudden surge in traffic by scaling out in seconds.",
   },
   {
-    title: "Low-latency messaging and streaming",
+    title: "Durable Low-latency Messaging and Streaming",
     Svg: require("../../static/img/low-latency.svg").default,
-    content:"Acknowledge messages individually (RabbitMQ style) or cumulative per partition (i.e., offset-like). Enables use cases such as distributed work queues or order-preserving data streams at very large scales (hundreds of nodes) and low latency (<5ms).",
+    content:"Acknowledge messages individually (RabbitMQ style) or cumulative per partition (i.e., offset-like). Enables use cases such as distributed work queues or order-preserving data streams at very large scales (hundreds of nodes) and low latency (<5ms). Message durability is achieved using Bookkeeper as a storage layer and cloud-based tiered storage.",
   },
   {
     title: "Seamless Geo-Replication",
