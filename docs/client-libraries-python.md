@@ -90,6 +90,27 @@ for i in range(10):
 client.close()
 ```
 
+#### Enable Chunking
+
+Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side. 
+
+The message chunking feature is OFF by default. The following is an example of how to enable message chunking when creating a producer.
+
+```python
+producer = client.create_producer(
+            topic,
+            chunking_enabled=True
+        )
+```
+
+By default, producer chunks the large message based on max message size (`maxMessageSize`) configured at broker (eg: 5MB).
+
+:::note
+
+To enable chunking, you need to disable batching (`chunking_enabled`=`false`) concurrently.
+
+:::
+
 ### Consumer example
 
 The following example creates a consumer with the `my-subscription` subscription name on the `my-topic` topic, receives incoming messages, prints the content and ID of messages that arrive, and acknowledges each message to the Pulsar broker.
@@ -139,6 +160,19 @@ try:
 except:
     print("no more msg")
     pass
+```
+
+#### Configure chunking
+
+You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `max_pending_chunked_message` and `auto_ack_oldest_chunked_message_on_queue_full` parameters. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later.
+
+The following is an example of how to configure message chunking.
+
+```python
+consumer = client.subscribe(topic, "my-subscription",
+                                max_pending_chunked_message=10,
+                                auto_ack_oldest_chunked_message_on_queue_full=False
+                                )
 ```
 
 ### Reader interface example
