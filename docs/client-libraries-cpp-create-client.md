@@ -134,26 +134,6 @@ producerConf.setPartitionsRoutingMode(ProducerConfiguration::UseSinglePartition)
 producerConf.setLazyStartPartitionedProducers(true);
 ```
 
-### Enable chunking
-
-Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
-
-The message chunking feature is OFF by default. The following is an example about how to enable message chunking when creating a producer.
-
-```cpp
-ProducerConfiguration conf;
-conf.setBatchingEnabled(false);
-conf.setChunkingEnabled(true);
-Producer producer;
-client.createProducer("my-topic", conf, producer);
-```
-
-:::note
-
-To enable chunking, you need to disable batching (`setBatchingEnabled`=`false`) concurrently.
-
-:::
-
 ## Create a consumer
 
 To use Pulsar as a consumer, you need to create a consumer on the C++ client. There are two main ways of using the consumer:
@@ -250,18 +230,4 @@ int main() {
     client.close();
     return 0;
 }
-```
-
-### Configure chunking
-
-You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `setMaxPendingChunkedMessage` and `setAutoAckOldestChunkedMessageOnQueueFull` parameters. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later.
-
-The following is an example of how to configure message chunking.
-
-```cpp
-ConsumerConfiguration conf;
-conf.setAutoAckOldestChunkedMessageOnQueueFull(true);
-conf.setMaxPendingChunkedMessage(100);
-Consumer consumer;
-client.subscribe("my-topic", "my-sub", conf, consumer);
 ```
