@@ -18,6 +18,9 @@ const ArticleThumb = () => {
         justifyContent: 'center', display: 'flex', borderRadius: '99999px',
         width: '2.5rem', height: '2.5rem',
     }
+    if (!activeKey) {
+        thumb_style['cursor'] = "pointer"
+    }
     return (
         <div className="border">
             <div style={{color: 'var(--ifm-toc-link-color)'}}>
