@@ -1,5 +1,5 @@
 ---
-id: client-libraries-dotnet-install
+id: client-libraries-dotnet-setup
 title: Set up C# client
 sidebar_label: "Set up"
 ---
@@ -44,7 +44,7 @@ To install the Pulsar C# client library using the dotnet CLI, follow these steps
        </ItemGroup>
        ```
 
-## Connect Pulsar cluster
+## Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

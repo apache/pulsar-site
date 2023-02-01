@@ -1,28 +1,8 @@
 ---
-id: client-libraries-node-create-client
-title: Create Node.js client
-sidebar_label: "Create a client"
+id: client-libraries-node-use
+title: Usee Node.js client
+sidebar_label: "Use"
 ---
-
-## Create a client object
-
-To interact with Pulsar, you first need a client object. You can create a client instance using a `new` operator and the `Client` method, passing in a client options object.
-
-Here is an example:
-
-```javascript
-const Pulsar = require('pulsar-client');
-
-(async () => {
-  const client = new Pulsar.Client({
-    serviceUrl: 'pulsar://localhost:6650',
-  });
-
-  await client.close();
-})();
-```
-
-For a complete list of client configurations, see [here](client-libraries-node-configs.md#client-configuration).
 
 ## Create a producer
 
@@ -43,10 +23,12 @@ await producer.close();
 ```
 
 :::note
+
 When you create a new Pulsar producer, the operation returns `Promise` object and get producer instance or an error through executor function. In the above example, use `await` operator instead of executor function.
+
 :::
 
-### Producer operations
+#### Producer operations
 
 Pulsar Node.js producers have the following methods available:
 
@@ -58,7 +40,7 @@ Pulsar Node.js producers have the following methods available:
 | `getProducerName()` | Getter method of the producer name. | `string` |
 | `getTopic()` | Getter method of the name of the topic. | `string` |
 
-### Producer example
+#### Producer example
 
 This example creates a Node.js producer for the `my-topic` topic and sends 10 messages to that topic:
 
@@ -91,8 +73,6 @@ const Pulsar = require('pulsar-client');
 })();
 ```
 
-
-
 ## Create a consumer
 
 You can configure Node.js consumers using a [consumer configuration](client-libraries-node-configs.md#consumer-configuration) object.
@@ -116,7 +96,7 @@ await consumer.close();
 When you create a new Pulsar consumer, the operation returns `Promise` object and get consumer instance or an error through executor function. In this example, use `await` operator instead of executor function.
 :::
 
-### Consumer operations
+#### Consumer operations
 
 Pulsar Node.js consumers have the following methods available:
 
@@ -133,7 +113,7 @@ Pulsar Node.js consumers have the following methods available:
 | `close()` | Closes the consumer, disabling its ability to receive messages from the broker. | `Promise<null>` |
 | `unsubscribe()` | Unsubscribes the subscription. | `Promise<null>` |
 
-### Consumer example
+#### Consumer example
 
 This example creates a Node.js consumer with the `my-subscription` subscription on the `my-topic` topic, receives messages, prints the content that arrive, and acknowledges each message to the Pulsar broker for 10 times:
 
@@ -207,7 +187,7 @@ console.log(msg.getData().toString());
 await reader.close();
 ```
 
-### Reader operations
+#### Reader operations
 
 Pulsar Node.js readers have the following methods available:
 
@@ -218,7 +198,7 @@ Pulsar Node.js readers have the following methods available:
 | `hasNext()` | Return whether the broker has next message in target topic. | `Boolean` |
 | `close()` | Closes the reader, disabling its ability to receive messages from the broker. | `Promise<null>` |
 
-### Reader example
+#### Reader example
 
 This example creates a Node.js reader with the `my-topic` topic, reads messages, and prints the content that arrive for 10 times:
 
@@ -285,7 +265,7 @@ The following keys are available for producer message objects:
 | `deliverAt` | The absolute timestamp at or after which the message is delivered. | |
 | `deliverAfter` | The relative delay after which the message is delivered. | |
 
-### Message object operations
+#### Message object operations
 
 In Pulsar Node.js client, you can receive (or read) message objects as consumers (or readers).
 
@@ -302,7 +282,7 @@ The message object has the following methods available:
 | `getRedeliveryCount()` | Getter method of redelivery count. | `Number` |
 | `getPartitionKey()` | Getter method of partition key. | `String` |
 
-### Message ID object operations
+#### Message ID object operations
 
 In Pulsar Node.js client, you can get message id objects from message objects.
 

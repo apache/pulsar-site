@@ -1,5 +1,5 @@
 ---
-id: client-libraries-python-install
+id: client-libraries-python-setup
 title: Set up Python client
 sidebar_label: "Set up"
 ---
@@ -32,7 +32,7 @@ Installation via PyPi is available for the following Python versions:
 | macOS (>= 11.0)                | 3.7, 3.8, 3.9 and 3.10    |
 | Linux (including Alpine Linux) | 3.7, 3.8, 3.9 and 3.10    |
 
-## Connect Pulsar cluster
+## Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

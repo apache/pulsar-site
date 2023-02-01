@@ -1,59 +1,9 @@
 ---
-id: client-libraries-go-create-client
-title: Create Pulsar Go client
-sidebar_label: "Create a client"
+id: client-libraries-go-use
+title: Use Pulsar Go client
+sidebar_label: "Use"
 ---
 
-## Create a client object
-
-To interact with Pulsar, you need a [`Client`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Client) object first. You can create a client object using the [`NewClient`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#NewClient) function, passing in a [`ClientOptions`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ClientOptions) object. Here's an example:
-
-```go
-import (
-    "log"
-    "time"
-
-    "github.com/apache/pulsar-client-go/pulsar"
-)
-
-func main() {
-    client, err := pulsar.NewClient(pulsar.ClientOptions{
-        URL:               "pulsar://localhost:6650",
-        OperationTimeout:  30 * time.Second,
-        ConnectionTimeout: 30 * time.Second,
-    })
-    if err != nil {
-        log.Fatalf("Could not instantiate Pulsar client: %v", err)
-    }
-
-    defer client.Close()
-}
-```
-
-If you have multiple brokers, you can initiate a client object as below.
-
-```go
-import (
-    "log"
-    "time"
-    "github.com/apache/pulsar-client-go/pulsar"
-)
-
-func main() {
-    client, err := pulsar.NewClient(pulsar.ClientOptions{
-        URL: "pulsar://localhost:6650,localhost:6651,localhost:6652",
-        OperationTimeout:  30 * time.Second,
-        ConnectionTimeout: 30 * time.Second,
-    })
-    if err != nil {
-        log.Fatalf("Could not instantiate Pulsar client: %v", err)
-    }
-
-    defer client.Close()
-}
-```
-
-All configurable parameters for `ClientOptions` are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ClientOptions).
 
 ## Create a producer
 
@@ -80,13 +30,10 @@ if err != nil {
 fmt.Println("Published message")
 ```
 
-### Producer operations
+For all available methods of `Producer` interface, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Producer).
 
-All available methods of `Producer` interface are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Producer).
 
-### Producer Example
-
-#### Use message router in producer
+### Use message router
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -145,7 +92,7 @@ for i := 0; i < 10; i++ {
 }
 ```
 
-#### Use chunking in producer
+### Use chunking
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -173,7 +120,7 @@ if err != nil {
 defer producer.Close()
 ```
 
-#### Use schema interface in producer
+### Use schema interface
 
 ```go
 type testJSON struct {
@@ -218,7 +165,7 @@ if err != nil {
 producer.Close()
 ```
 
-#### Use delay relative in producer
+### Use delay relative
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -275,7 +222,7 @@ fmt.Println(msg.Payload())
 cancel()
 ```
 
-#### Use Prometheus metrics in producer
+### Use Prometheus metrics
 
 Pulsar Go client registers client metrics using Prometheus. This section demonstrates how to create a simple Pulsar producer application that exposes Prometheus metrics via HTTP.
 
@@ -350,7 +297,9 @@ scrape_configs:
 
 ## Create a consumer
 
-Pulsar consumers subscribe to one or more Pulsar topics and listen for incoming messages produced on that topic/those topics. You can [configure](#consumer-configuration) Go consumers using a `ConsumerOptions` object. Here's a basic example that uses channels:
+Pulsar consumers subscribe to one or more Pulsar topics and listen for incoming messages produced on that topic/those topics. You can configure Go consumers using a `ConsumerOptions` object. 
+
+Here's a basic example that uses channels:
 
 ```go
 consumer, err := client.Subscribe(pulsar.ConsumerOptions{
@@ -381,11 +330,9 @@ if err := consumer.Unsubscribe(); err != nil {
 }
 ```
 
-### Consumer operations
+For all available methods of `Consumer` interface, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Consumer).
 
-All available methods of `Consumer` interface are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Consumer).
-
-#### Create single-topic consumer
+### Create single-topic consumer
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{URL: "pulsar://localhost:6650"})
@@ -407,7 +354,7 @@ if err != nil {
 defer consumer.Close()
 ```
 
-#### Create regex-topic consumer
+### Create regex-topic consumer
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -429,7 +376,7 @@ if err != nil {
 defer consumer.Close()
 ```
 
-#### Create multi-topic consumer
+### Create multi-topic consumer
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -451,7 +398,7 @@ if err != nil {
 defer consumer.Close()
 ```
 
-#### Create consumer listener
+### Create consumer listener
 
 ```go
 import (
@@ -501,7 +448,7 @@ func main() {
 }
 ```
 
-#### Receive message with timeout
+### Receive message with timeout
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -535,7 +482,7 @@ if err != nil {
 fmt.Println(msg.Payload())
 ```
 
-#### Use schema in consumer
+### Use schema
 
 ```go
 type testJSON struct {
@@ -581,7 +528,7 @@ if err != nil {
 defer consumer.Close()
 ```
 
-#### Use Prometheus metrics in consumer
+### Use Prometheus metrics
 
 In this guide, This section demonstrates how to create a simple Pulsar consumer application that exposes Prometheus metrics via HTTP.
 1. Write a simple consumer application.
@@ -669,13 +616,9 @@ if err != nil {
 defer reader.Close()
 ```
 
-### Reader operations
+For all available methods of the `Reader` interface, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Reader).
 
-All available methods of the `Reader` interface are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Reader).
-
-### Reader example
-
-#### Use reader to read 'next' message
+### Use reader to read `next` message
 
 Here's an example usage of a Go reader that uses the `Next()` method to process incoming messages:
 
@@ -728,7 +671,7 @@ reader, err := client.CreateReader(pulsar.ReaderOptions{
 })
 ```
 
-#### Use reader to read specific message
+### Use reader to read specific message
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -815,4 +758,4 @@ if _, err := producer.send(msg); err != nil {
 }
 ```
 
-All methods of `ProducerMessage` object are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerMessage).
+For all methods of the `ProducerMessage` object, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerMessage).

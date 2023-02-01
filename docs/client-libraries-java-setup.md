@@ -1,5 +1,5 @@
 ---
-id: client-libraries-java-install
+id: client-libraries-java-setup
 title: Set up Java client
 sidebar_label: "Set up"
 ---
@@ -43,7 +43,7 @@ dependencies {
 }
 ```
 
-## Connect Pulsar cluster
+## Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

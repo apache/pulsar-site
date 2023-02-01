@@ -1,7 +1,7 @@
 ---
-id: client-libraries-python-create-client
-title: Create Python client
-sidebar_label: "Create a client"
+id: client-libraries-python-use
+title: Use Python client
+sidebar_label: "Use"
 ---
 
 ## Create a producer
@@ -86,39 +86,6 @@ while True:
     msg = reader.read_next()
     print("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
     # No acknowledgment
-```
-
-## Subscribe to multi-topics
-
-In addition to subscribing a consumer to a single Pulsar topic, you can also subscribe to multiple topics simultaneously. To use multi-topic subscriptions, you can supply a regular expression (regex) or a `List` of topics. If you select topics via regex, all topics must be within the same Pulsar namespace.
-
-The following is an example:
-
-```python
-import re
-consumer = client.subscribe(re.compile('persistent://public/default/topic-*'), 'my-subscription')
-while True:
-    msg = consumer.receive()
-    try:
-        print("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
-        # Acknowledge successful processing of the message
-        consumer.acknowledge(msg)
-    except Exception:
-        # Message failed to be processed
-        consumer.negative_acknowledge(msg)
-client.close()
-```
-
-## Create a Python client with multiple advertised listeners
-
-To ensure clients in both internal and external networks can connect to a Pulsar cluster, Pulsar introduces [advertisedListeners](concepts-multiple-advertised-listeners.md).
-
-The following example creates a Python client using multiple advertised listeners:
-
-```python
-import pulsar
-
-client = pulsar.Client('pulsar://localhost:6650', listener_name='external')
 ```
 
 ## Work with schema

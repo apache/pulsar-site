@@ -1,5 +1,5 @@
 ---
-id: client-libraries-node-install
+id: client-libraries-node-setup
 title: Set up Pulsar Node.js client
 sidebar_label: "Set up"
 ---
@@ -26,7 +26,7 @@ This library only works in Node.js 10.x or later versions because it uses the [`
 
 :::
 
-## Connect Pulsar cluster
+## Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

@@ -1,7 +1,7 @@
 ---
-id: client-libraries-cpp-create-client
-title: Create C++ client
-sidebar_label: "Create C++ client"
+id: client-libraries-cpp-use
+title: Use C++ client
+sidebar_label: "Use"
 ---
 
 ## Create a producer

@@ -1,34 +1,8 @@
 ---
-id: client-libraries-java-create-client
-title: Create a Java client
-sidebar_label: "Create a client"
+id: client-libraries-java-use
+title: Use a Java client
+sidebar_label: "Use"
 ---
-
-## Create a Java client object
-
-You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
-
-```java
-PulsarClient client = PulsarClient.builder()
-        .serviceUrl("pulsar://localhost:6650")
-        .build();
-```
-
-If you have multiple brokers, you can initiate a PulsarClient like this:
-
-```java
-PulsarClient client = PulsarClient.builder()
-        .serviceUrl("pulsar://localhost:6650,localhost:6651,localhost:6652")
-        .build();
-```
-
-:::note
-
-If you run a cluster in [standalone mode](getting-started-standalone.md), the broker is available at the `pulsar://localhost:6650` URL by default.
-
-:::
-
-For detailed client configurations, read the [reference](client-libraries-java-configs.md#client-configurations).
 
 ## Create a producer
 

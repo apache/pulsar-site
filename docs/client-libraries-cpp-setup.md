@@ -1,5 +1,5 @@
 ---
-id: client-libraries-cpp-install
+id: client-libraries-cpp-setup
 title: Set up Pulsar C++ client
 sidebar_label: "Set up"
 ---
@@ -103,7 +103,7 @@ If you get an error like "libpulsar.so: cannot open shared object file: No such 
 apk add --allow-untrusted ./apache-pulsar-client-*.apk
 ```
 
-## Connect Pulsar cluster
+## Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

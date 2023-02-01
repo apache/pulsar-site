@@ -1,27 +1,10 @@
 ---
-id: client-libraries-dotnet-create-client
-title: Create C# client
-sidebar_label: "Create C# client"
+id: client-libraries-dotnet-use
+title: Use C# client
+sidebar_label: "Use"
 ---
 
-This section describes some hands-on examples to get started with the Pulsar C# client.
-
-## Create client
-
-This example shows how to create a Pulsar C# client connected to localhost.
-
-```csharp
-using DotPulsar;
-
-var client = PulsarClient.Builder().Build();
-```
-
-To create a Pulsar C# client by using the builder, you can specify the following options.
-
-| Option | Description | Default |
-| ---- | ---- | ---- |
-| ServiceUrl | Set the service URL for the Pulsar cluster. | pulsar://localhost:6650 |
-| RetryInterval | Set the time to wait before retrying an operation or a reconnection. | 3s |
+This section introduces some hands-on examples to get started with using the Pulsar C# client.
 
 ## Create producer
 
