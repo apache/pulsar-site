@@ -10,7 +10,7 @@ The Apache Pulsar community embraced a significant milestone last month as the p
 
 <!--truncate-->
 
-Since Pulsar’s graduation as a Top-Level Project (TLP) in September 2018, it has been driven by an active global community, with **160**+ releases, **11K+** commits from **600** contributors, **12.2K+** stars, **3.2K+** forks, and **9600+** Slack users.
+Since Pulsar’s graduation as a Top-Level Project (TLP) in September 2018, it has been driven by an active global community, with **160+** releases, **11K+** commits from **600** contributors, **12.2K+** stars, **3.2K+** forks, and **9600+** Slack users.
 
 ## Strong community growth
 
