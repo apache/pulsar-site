@@ -541,7 +541,7 @@ export default function Community(): JSX.Element {
                             </a>
                             .
                         </p>
-                        <h3 className="text--center">PMC</h3>
+                        <h3 className="text--center">PMC members</h3>
                         <div className="md:grid md:grid-cols-2 md:gap-x-4">
                             <TeamTable
                                 data={team.pmc.slice(0, (team.pmc.length + 1) / 2)}
