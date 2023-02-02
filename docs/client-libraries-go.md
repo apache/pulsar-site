@@ -14,7 +14,6 @@ You can use a Pulsar [Go client](https://github.com/apache/pulsar-client-go) to 
 
 ## What's next?
 
-Configure Pulsar features on your Go client:
 - [Work with clients](client-libraries-client-objects.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)

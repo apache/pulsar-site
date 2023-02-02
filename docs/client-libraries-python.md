@@ -14,7 +14,6 @@ You can use a Pulsar Python client to create producers, consumers, and readers i
 
 ## What's next?
 
-Configure Pulsar features on your Python client:
 - [Work with clients](client-libraries-client-objects.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)

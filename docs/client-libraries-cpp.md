@@ -14,7 +14,6 @@ You can use a Pulsar C++ client to create Pulsar producers, consumers, and reade
 
 ## What's next?
 
-Configure Pulsar features on your C++ client:
 - [Work with clients](client-libraries-client-objects.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)

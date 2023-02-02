@@ -95,6 +95,65 @@ If a message has a key, it supersedes the round robin routing policy. The follow
         }
 ```
 
+## Use message router - Go
+
+```go
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+    URL: "pulsar://localhost:6650",
+})
+
+if err != nil {
+    log.Fatal(err)
+}
+defer client.Close()
+
+producer, err := client.CreateProducer(pulsar.ProducerOptions{
+    Topic: "my-partitioned-topic",
+    MessageRouter: func(msg *pulsar.ProducerMessage, tm pulsar.TopicMetadata) int {
+        fmt.Println("Topic has", tm.NumPartitions(), "partitions. Routing message ", msg, " to partition 2.")
+        // always push msg to partition 2
+        return 2
+    },
+})
+
+if err != nil {
+    log.Fatal(err)
+}
+defer producer.Close()
+
+for i := 0; i < 10; i++ {
+    if msgId, err := producer.Send(context.Background(), &pulsar.ProducerMessage{
+        Payload: []byte(fmt.Sprintf("message-%d", i)),
+    }); err != nil {
+        log.Fatal(err)
+    } else {
+        log.Println("Published message: ", msgId)
+    }
+}
+
+// subscribe a specific partition of a topic
+// for demos only, not recommend to subscribe a specific partition
+consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+    // pulsar partition is a special topic has the suffix '-partition-xx'
+    Topic:            "my-partitioned-topic-partition-2",
+    SubscriptionName: "my-sub",
+    Type:             pulsar.Shared,
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer consumer.Close()
+
+for i := 0; i < 10; i++ {
+    msg, err := consumer.Receive(context.Background())
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("Received message msgId: %#v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
+    consumer.Ack(msg)
+}
+```
+
 ## Async send messages
 
 You can publish messages [asynchronously](concepts-clients.md#send-modes) using the Java client. With async send, the producer puts the message in a blocking queue and returns it immediately. Then the client library sends the message to the broker in the background. If the queue is full (max size configurable), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer.
@@ -109,7 +168,35 @@ producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
 
 As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
-## Configure messages - Java
+## Send data - C#
+
+This example shows how to send data.
+
+```csharp
+var data = Encoding.UTF8.GetBytes("Hello World");
+await producer.Send(data);
+```
+
+## Send messages with customized metadata - C#
+
+- Send messages with customized metadata by using the builder.
+
+  ```csharp
+  var messageId = await producer.NewMessage()
+                                .Property("SomeKey", "SomeValue")
+                                .Send(data);
+  ```
+
+- Send messages with customized metadata without using the builder.
+
+  ```csharp
+  var data = Encoding.UTF8.GetBytes("Hello World");
+  var metadata = new MessageMetadata();
+  metadata["SomeKey"] = "SomeValue";
+  var messageId = await producer.Send(metadata, data));
+  ```
+
+## Configure messages
 
 In addition to a value, you can set additional items on a given message:
 
@@ -351,34 +438,6 @@ var client = PulsarClient.Builder()
                          .Build();
 ```
 
-## Send data - C#
-
-This example shows how to send data.
-
-```csharp
-var data = Encoding.UTF8.GetBytes("Hello World");
-await producer.Send(data);
-```
-
-## Send messages with customized metadata - C#
-
-- Send messages with customized metadata by using the builder.
-
-  ```csharp
-  var messageId = await producer.NewMessage()
-                                .Property("SomeKey", "SomeValue")
-                                .Send(data);
-  ```
-
-- Send messages with customized metadata without using the builder.
-
-  ```csharp
-  var data = Encoding.UTF8.GetBytes("Hello World");
-  var metadata = new MessageMetadata();
-  metadata["SomeKey"] = "SomeValue";
-  var messageId = await producer.Send(metadata, data));
-  ```
-
 ## Monitor producer - C#
 
 This example shows how to monitor the producer state.
@@ -491,65 +550,6 @@ scrape_configs:
   static_configs:
   - targets:
   - localhost:2112
-```
-
-## Use message router - Go
-
-```go
-client, err := pulsar.NewClient(pulsar.ClientOptions{
-    URL: "pulsar://localhost:6650",
-})
-
-if err != nil {
-    log.Fatal(err)
-}
-defer client.Close()
-
-producer, err := client.CreateProducer(pulsar.ProducerOptions{
-    Topic: "my-partitioned-topic",
-    MessageRouter: func(msg *pulsar.ProducerMessage, tm pulsar.TopicMetadata) int {
-        fmt.Println("Topic has", tm.NumPartitions(), "partitions. Routing message ", msg, " to partition 2.")
-        // always push msg to partition 2
-        return 2
-    },
-})
-
-if err != nil {
-    log.Fatal(err)
-}
-defer producer.Close()
-
-for i := 0; i < 10; i++ {
-    if msgId, err := producer.Send(context.Background(), &pulsar.ProducerMessage{
-        Payload: []byte(fmt.Sprintf("message-%d", i)),
-    }); err != nil {
-        log.Fatal(err)
-    } else {
-        log.Println("Published message: ", msgId)
-    }
-}
-
-// subscribe a specific partition of a topic
-// for demos only, not recommend to subscribe a specific partition
-consumer, err := client.Subscribe(pulsar.ConsumerOptions{
-    // pulsar partition is a special topic has the suffix '-partition-xx'
-    Topic:            "my-partitioned-topic-partition-2",
-    SubscriptionName: "my-sub",
-    Type:             pulsar.Shared,
-})
-if err != nil {
-    log.Fatal(err)
-}
-defer consumer.Close()
-
-for i := 0; i < 10; i++ {
-    msg, err := consumer.Receive(context.Background())
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("Received message msgId: %#v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
-    consumer.Ack(msg)
-}
 ```
 
 ## Use delay relative - Go

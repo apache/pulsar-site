@@ -129,7 +129,7 @@ The following table lists states available for the reader.
 | Faulted | An unrecoverable error has occurred. |
 | ReachedEndOfTopic | No more messages are delivered. |
 
-## Use reader to read `next` message - Go
+## Read `next` message - Go
 
 Here's an example usage of a Go reader that uses the `Next()` method to process incoming messages:
 
@@ -182,7 +182,7 @@ reader, err := client.CreateReader(pulsar.ReaderOptions{
 })
 ```
 
-## Use reader to read specific message - Go
+## Read specific message - Go
 
 ```go
 client, err := pulsar.NewClient(pulsar.ClientOptions{

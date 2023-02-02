@@ -14,7 +14,6 @@ You can use a Pulsar Java client to create Pulsar producers, consumers, and read
 
 ## What's next?
 
-Configure Pulsar features on your Java client:
 - [Work with clients](client-libraries-client-objects.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)
