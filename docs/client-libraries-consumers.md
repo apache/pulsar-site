@@ -1,7 +1,7 @@
 ---
 id: client-libraries-consumers
-title: Work with consumers
-sidebar_label: "Work with consumers"
+title: Work with consumer
+sidebar_label: "Work with consumer"
 ---
 
 ````mdx-code-block
@@ -22,6 +22,51 @@ CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
 ```
 
 Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+
+## Receive messages - C#
+
+This example shows how a consumer receives messages from a topic.
+
+```csharp
+await foreach (var message in consumer.Messages())
+{
+    Console.WriteLine("Received: " + Encoding.UTF8.GetString(message.Data.ToArray()));
+}
+```
+
+## Receive message with timeout - Go
+
+```go
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+    URL: "pulsar://localhost:6650",
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer client.Close()
+
+topic := "test-topic-with-no-messages"
+ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+defer cancel()
+
+// create consumer
+consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+    Topic:            topic,
+    SubscriptionName: "my-sub1",
+    Type:             pulsar.Shared,
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer consumer.Close()
+
+// receive message with a timeout
+msg, err := consumer.Receive(ctx)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Println(msg.Payload())
+```
 
 ## Batch receive messages
 
@@ -508,3 +553,338 @@ Consumer<String> consumer = client.newConsumer()
 If you are using multiple interceptors, they apply in the order they are passed to the `intercept` method.
 
 :::
+
+## Subscribe to multi-topics
+
+In addition to subscribing a consumer to a single Pulsar topic, you can also subscribe to multiple topics simultaneously. To use multi-topic subscriptions, you can supply a regular expression (regex) or a `List` of topics. If you select topics via regex, all topics must be within the same Pulsar namespace.
+
+The following is an example:
+
+```python
+import re
+consumer = client.subscribe(re.compile('persistent://public/default/topic-*'), 'my-subscription')
+while True:
+    msg = consumer.receive()
+    try:
+        print("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
+        # Acknowledge successful processing of the message
+        consumer.acknowledge(msg)
+    except Exception:
+        # Message failed to be processed
+        consumer.negative_acknowledge(msg)
+client.close()
+```
+
+## Create multi-topic consumer - Go
+
+```go
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+    URL: "pulsar://localhost:6650",
+})
+if err != nil {
+    log.Fatal(err)
+}
+
+topics := []string{"topic-1", "topic-2"}
+consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+    // fill `Topics` field will create a multi-topic consumer
+    Topics:           topics,
+    SubscriptionName: "multi-topic-sub",
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer consumer.Close()
+```
+
+## Create consumer listener - Go
+
+```go
+import (
+    "fmt"
+    "log"
+
+    "github.com/apache/pulsar-client-go/pulsar"
+)
+
+func main() {
+    client, err := pulsar.NewClient(pulsar.ClientOptions{URL: "pulsar://localhost:6650"})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    defer client.Close()
+
+    // we can listen this channel
+    channel := make(chan pulsar.ConsumerMessage, 100)
+
+    options := pulsar.ConsumerOptions{
+        Topic:            "topic-1",
+        SubscriptionName: "my-subscription",
+        Type:             pulsar.Shared,
+        // fill `MessageChannel` field will create a listener
+        MessageChannel: channel,
+    }
+
+    consumer, err := client.Subscribe(options)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    defer consumer.Close()
+
+    // Receive messages from channel. The channel returns a struct `ConsumerMessage` which contains message and the consumer from where
+    // the message was received. It's not necessary here since we have 1 single consumer, but the channel could be
+    // shared across multiple consumers as well
+    for cm := range channel {
+        consumer := cm.Consumer
+        msg := cm.Message
+        fmt.Printf("Consumer %s received a message, msgId: %v, content: '%s'\n",
+            consumer.Name(), msg.ID(), string(msg.Payload()))
+
+        consumer.Ack(msg)
+    }
+}
+```
+
+## Acknowledge messages - C#
+
+Messages can be acknowledged individually or cumulatively. For details about message acknowledgment, see [acknowledgment](concepts-messaging.md#acknowledgment).
+
+- Acknowledge messages individually.
+
+  ```csharp
+  await consumer.Acknowledge(message);
+  ```
+
+- Acknowledge messages cumulatively.
+
+  ```csharp
+  await consumer.AcknowledgeCumulative(message);
+  ```
+
+## Unsubscribe from topics - C#
+
+This example shows how a consumer unsubscribes from a topic.
+
+```csharp
+await consumer.Unsubscribe();
+```
+
+:::note
+
+A consumer cannot be used and is disposed once the consumer unsubscribes from a topic.
+
+:::
+
+## Monitor consumer - C#
+
+This example shows how to monitor the consumer state.
+
+```csharp
+private static async ValueTask Monitor(IConsumer consumer, CancellationToken cancellationToken)
+{
+    var state = ConsumerState.Disconnected;
+
+    while (!cancellationToken.IsCancellationRequested)
+    {
+        state = (await consumer.StateChangedFrom(state, cancellationToken)).ConsumerState;
+
+        var stateMessage = state switch
+        {
+            ConsumerState.Active => "The consumer is active",
+            ConsumerState.Inactive => "The consumer is inactive",
+            ConsumerState.Disconnected => "The consumer is disconnected",
+            ConsumerState.Closed => "The consumer has closed",
+            ConsumerState.ReachedEndOfTopic => "The consumer has reached end of topic",
+            ConsumerState.Faulted => "The consumer has faulted",
+            ConsumerState.Unsubscribed => "The consumer is unsubscribed.",
+            _ => $"The consumer has an unknown state '{state}'"
+        };
+
+        Console.WriteLine(stateMessage);
+
+        if (consumer.IsFinalState(state))
+            return;
+    }
+}
+```
+
+The following table lists states available for the consumer.
+
+| State | Description |
+| ---- | ----|
+| Active | All is well. |
+| Inactive | All is well. The subscription type is `Failover` and you are not the active consumer. |
+| Closed | The consumer or the Pulsar client has been disposed. |
+| Disconnected | The connection is lost and attempts are being made to reconnect. |
+| Faulted | An unrecoverable error has occurred. |
+| ReachedEndOfTopic | No more messages are delivered. |
+| Unsubscribed | The consumer has unsubscribed. |
+
+## Use Prometheus metrics - Go
+
+In this guide, This section demonstrates how to create a simple Pulsar consumer application that exposes Prometheus metrics via HTTP.
+1. Write a simple consumer application.
+
+```go
+// Create a Pulsar client
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+    URL: "pulsar://localhost:6650",
+})
+if err != nil {
+    log.Fatal(err)
+}
+
+defer client.Close()
+
+// Start a separate goroutine for Prometheus metrics
+// In this case, Prometheus metrics can be accessed via http://localhost:2112/metrics
+go func() {
+    prometheusPort := 2112
+    log.Printf("Starting Prometheus metrics at http://localhost:%v/metrics\n", prometheusPort)
+    http.Handle("/metrics", promhttp.Handler())
+    err = http.ListenAndServe(":"+strconv.Itoa(prometheusPort), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+}()
+
+// Create a consumer
+consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+    Topic:            "topic-1",
+    SubscriptionName: "sub-1",
+    Type:             pulsar.Shared,
+})
+if err != nil {
+    log.Fatal(err)
+}
+
+defer consumer.Close()
+
+ctx := context.Background()
+
+// Write your business logic here
+// In this case, you build a simple Web server. You can consume messages by requesting http://localhost:8083/consume
+webPort := 8083
+http.HandleFunc("/consume", func(w http.ResponseWriter, r *http.Request) {
+    msg, err := consumer.Receive(ctx)
+    if err != nil {
+        log.Fatal(err)
+    } else {
+        log.Printf("Received message msgId: %v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
+        fmt.Fprintf(w, "Received message msgId: %v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
+        consumer.Ack(msg)
+    }
+})
+
+err = http.ListenAndServe(":"+strconv.Itoa(webPort), nil)
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+2. To scrape metrics from applications, configure a local running Prometheus instance using a configuration file (`prometheus.yml`).
+
+```yaml
+scrape_configs:
+- job_name: pulsar-client-go-metrics
+  scrape_interval: 10s
+  static_configs:
+  - targets:
+  - localhost: 2112
+```
+
+## Create single-topic consumer - Go
+
+```go
+client, err := pulsar.NewClient(pulsar.ClientOptions{URL: "pulsar://localhost:6650"})
+if err != nil {
+    log.Fatal(err)
+}
+
+defer client.Close()
+
+consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+    // fill `Topic` field will create a single-topic consumer
+    Topic:            "topic-1",
+    SubscriptionName: "my-sub",
+    Type:             pulsar.Shared,
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer consumer.Close()
+```
+
+## Create regex-topic consumer - Go
+
+```go
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+    URL: "pulsar://localhost:6650",
+})
+defer client.Close()
+
+topicsPattern := "persistent://public/default/topic.*"
+opts := pulsar.ConsumerOptions{
+    // fill `TopicsPattern` field will create a regex consumer
+    TopicsPattern:    topicsPattern,
+    SubscriptionName: "regex-sub",
+}
+
+consumer, err := client.Subscribe(opts)
+if err != nil {
+    log.Fatal(err)
+}
+defer consumer.Close()
+```
+
+## Create a consumer with a message listener - C++
+
+You can avoid running a loop by blocking calls with an event-based style by using a message listener which is invoked for each message that is received.
+
+This example starts a subscription at the earliest offset and consumes 100 messages.
+
+```cpp
+#include <pulsar/Client.h>
+#include <atomic>
+#include <thread>
+
+using namespace pulsar;
+
+std::atomic<uint32_t> messagesReceived;
+
+void handleAckComplete(Result res) {
+    std::cout << "Ack res: " << res << std::endl;
+}
+
+void listener(Consumer consumer, const Message& msg) {
+    std::cout << "Got message " << msg << " with content '" << msg.getDataAsString() << "'" << std::endl;
+    messagesReceived++;
+    consumer.acknowledgeAsync(msg.getMessageId(), handleAckComplete);
+}
+
+int main() {
+    Client client("pulsar://localhost:6650");
+
+    Consumer consumer;
+    ConsumerConfiguration config;
+    config.setMessageListener(listener);
+    config.setSubscriptionInitialPosition(InitialPositionEarliest);
+    Result result = client.subscribe("persistent://public/default/my-topic", "consumer-1", config, consumer);
+    if (result != ResultOk) {
+        std::cout << "Failed to subscribe: " << result << std::endl;
+        return -1;
+    }
+
+    // wait for 100 messages to be consumed
+    while (messagesReceived < 100) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    std::cout << "Finished consuming asynchronously!" << std::endl;
+
+    client.close();
+    return 0;
+}
+```

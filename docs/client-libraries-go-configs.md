@@ -1,18 +1,18 @@
 ---
 id: client-libraries-go-configs
 title: Pulsar Go client configurations
-sidebar_label: "Configs"
+sidebar_label: "Go client"
 ---
 
 
-## Producer configuration
+## Producer configs
 
-All available options of `ProducerOptions` are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
+For all available options, see [`ProducerOptions`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
 
-## Consumer configuration
+## Consumer configs
 
-All available options of `ConsumerOptions` are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ConsumerOptions).
+For all available options, see [`ConsumerOptions`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ConsumerOptions).
 
-## Reader configuration
+## Reader configs
 
-All available options of `ReaderOptions` are [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ReaderOptions).
+For all available options, see [`ReaderOptions`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ReaderOptions).

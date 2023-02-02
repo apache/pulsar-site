@@ -4,20 +4,25 @@ title: Pulsar Python client
 sidebar_label: "Python client"
 ---
 
-You can use a Pulsar Python client to create producers, consumers, and readers. All the methods in producer, consumer, and reader of Pulsar Python clients are thread-safe.
+You can use a Pulsar Python client to create producers, consumers, and readers in Python. All the methods in Pulsar Python clients are thread-safe.
+
+## Get started
+
+1. [Set up Python client library](client-libraries-python-setup.md)
+2. [Initilize a Python client](client-libraries-python-initialize.md)
+3. [Use a Python client](client-libraries-python-use.md)
 
 ## What's next?
 
-1. [Set up Python client library](client-libraries-python-install.md)
-2. [Create a Python client](client-libraries-python-create-client.md)
-3. Work on advanced tasks:
-   - [Configure Producers](client-libraries-producers.md)
-   - [Configure Consumers](client-libraries-consumers.md)
-   - [Configure Readers](client-libraries-readers.md)
+Configure Pulsar features on your Python client:
+- [Work with clients](client-libraries-client-objects.md)
+- [Work with producers](client-libraries-producers.md)
+- [Work with consumers](client-libraries-consumers.md)
+- [Work with readers](client-libraries-readers.md)
 
-**More reference**
+## Reference doc
 
+- [Python client configurations](client-libraries-python-configs.md)
 - [API docs](@pulsar:apidoc:python@)
 - [Release notes](/release-notes/client-python)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
-- [End-to-end encryption](security-encryption.md#get-started)

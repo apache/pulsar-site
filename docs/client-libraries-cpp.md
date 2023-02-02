@@ -4,9 +4,31 @@ title: Pulsar C++ client
 sidebar_label: "C++ client"
 ---
 
-You can use a Pulsar C++ client to create producers, consumers, and readers. All the methods in producer, consumer, and reader of Pulsar C++ clients are thread-safe.
+You can use a Pulsar C++ client to create Pulsar producers, consumers, and readers in C++. All the methods in Pulsar C++ clients are thread-safe.
 
-## Changes for version 3.0.0 or later
+## Get started
+
+1. [Set up C++ client library](client-libraries-cpp-setup.md)
+2. [Initilize a C++ client](client-libraries-cpp-initialize.md)
+3. [Use a C++ client](client-libraries-cpp-use.md)
+
+## What's next?
+
+Configure Pulsar features on your C++ client:
+- [Work with clients](client-libraries-client-objects.md)
+- [Work with producers](client-libraries-producers.md)
+- [Work with consumers](client-libraries-consumers.md)
+- [Work with readers](client-libraries-readers.md)
+
+## Reference doc
+
+- [C++ client configurations](client-libraries-cpp-configs.md)
+- [API docs](@pulsar:apidoc:cpp@)
+- [Release notes](/release-notes/client-cpp)
+- [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
+- [C++ client examples](https://github.com/apache/pulsar-client-cpp/tree/main/examples)
+
+## Changes for version 3.0.0 and later
 
 The new version of the Pulsar C++ client starts from 3.0.0 and has been no longer consistent with Pulsar since 2.10.x. For the latest releases, see the [Download](/download/) page.
 
@@ -35,31 +57,10 @@ g++ -std=c++11 main.cc /usr/lib/libpulsar.a \
   -lprotobuf -lcurl -lssl -lcrypto -lz -lzstd -lsnappy -lpthread -ldl
 ```
 
-:::caution
+:::note
 
-Linking to `libpulsar.a` can be difficult for beginners because the 3rd party dependencies must be compatible. For example, the protobuf version must be 3.20.0 or higher for Pulsar C++ client 3.0.0. It's better to link to `libpulsarwithdeps.a` instead.
+- Linking to `libpulsar.a` can be difficult for beginners because the 3rd party dependencies must be compatible. For example, the protobuf version must be 3.20.0 or higher for Pulsar C++ client 3.0.0. It's better to link to `libpulsarwithdeps.a` instead.
 
-:::
-
-:::danger
-
-Before 3.0.0, there was a `libpulsarnossl.so`, which is removed now.
+- Before 3.0.0, there was a `libpulsarnossl.so`, which is removed now.
 
 :::
-
-## What's next?
-
-1. [Set up C++ client library](client-libraries-cpp-install.md)
-2. [Create a C++ client](client-libraries-cpp-create-client.md)
-3. Work on advanced tasks:
-   - [Configure Producers](client-libraries-producers.md)
-   - [Configure Consumers](client-libraries-consumers.md)
-   - [Configure Readers](client-libraries-readers.md)
-
-**More reference**
-
-- [API docs](@pulsar:apidoc:cpp@)
-- [Release notes](/release-notes/client-cpp)
-- [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
-- [C++ client examples](https://github.com/apache/pulsar-client-cpp/tree/main/examples)
-- [Get started with Schema](schema-get-started.md) - for specific schema types that C++ clients support, see [code](https://github.com/apache/pulsar-client-cpp/blob/main/include/pulsar/Schema.h).

@@ -4,22 +4,26 @@ title: Pulsar Go client
 sidebar_label: "Go client"
 ---
 
-You can use a Pulsar [Go client](https://github.com/apache/pulsar-client-go) to create Pulsar [producers](#producers), [consumers](#consumers), and [readers](#readers) in Golang.
+You can use a Pulsar [Go client](https://github.com/apache/pulsar-client-go) to create Pulsar producers, consumers, and readers in Golang.
+
+## Get started
+
+1. [Set up Go client library](client-libraries-go-setup.md)
+2. [Initilize a Go client](client-libraries-go-initialize.md)
+3. [Use a Go client](client-libraries-go-use.md)
 
 ## What's next?
 
-1. [Set up Go client library](client-libraries-go-install.md)
-2. [Create a Go client](client-libraries-go-create-client.md)
-3. Work on advanced tasks:
-   - [Configure Producers](client-libraries-producers.md)
-   - [Configure Consumers](client-libraries-consumers.md)
-   - [Configure Readers](client-libraries-readers.md)
+Configure Pulsar features on your Go client:
+- [Work with clients](client-libraries-client-objects.md)
+- [Work with producers](client-libraries-producers.md)
+- [Work with consumers](client-libraries-consumers.md)
+- [Work with readers](client-libraries-readers.md)
 
-**More reference**
 
+## Reference doc
+
+- [Go client configurations](client-libraries-go-configs.md)
 - [API docs](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar)
 - [Release notes](/release-notes/client-go)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
-- [Work with TLS encryption](security-tls-transport.md)
-- [Work with OAuth2 authentication](security-oauth2.md)
-- [Get started with Schema](schema-get-started.md)

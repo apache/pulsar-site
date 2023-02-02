@@ -4,19 +4,24 @@ title: Pulsar Node.js client
 sidebar_label: "Node.js client"
 ---
 
-You can use a Pulsar Node.js client to create producers, consumers, and readers.
+You can use a Pulsar Node.js client to create producers, consumers, and readers in Node.js. All the methods in Pulsar Node.js clients are thread-safe.
+
+## Get started
+
+1. [Set up Node.js client library](client-libraries-node-setup.md)
+2. [Initilize a Node.js client](client-libraries-node-initialize.md)
+3. [Use a Node.js client](client-libraries-node-use.md)
 
 ## What's next?
 
-1. [Set up Node.js client library](client-libraries-node-install.md)
-2. [Create a Node.js client](client-libraries-node-create-client.md)
-3. Work on advanced tasks:
-   - [Configure Producers](client-libraries-producers.md)
-   - [Configure Consumers](client-libraries-consumers.md)
-   - [Configure Readers](client-libraries-readers.md)
+Configure Pulsar features on your Node.js client:
+- [Work with clients](client-libraries-client-objects.md)
+- [Work with producers](client-libraries-producers.md)
+- [Work with consumers](client-libraries-consumers.md)
+- [Work with readers](client-libraries-readers.md)
 
-**More reference**
+## Reference doc
 
-- [Release notes](/release-notes/client-node)
+- [Node.js client configurations](client-libraries-node-configs.md)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
 - [Type definitions](https://github.com/apache/pulsar-client-node/blob/master/index.d.ts) used in TypeScript (for 1.3.0 or later versions).

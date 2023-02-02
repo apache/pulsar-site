@@ -1,10 +1,10 @@
 ---
 id: client-libraries-java-configs
 title: Java client configs
-sidebar_label: "Configs"
+sidebar_label: "Java client"
 ---
 
-## Client configurations
+## Client configs
 
 If you create a Java client, you can use the `loadConf` configuration. The following parameters are available in `loadConf`.
 
@@ -38,26 +38,6 @@ If you create a Java client, you can use the `loadConf` configuration. The follo
 In addition to client-level configuration, you can also apply [producer](#producer-configs) and [consumer](#consumer-configs) specific configurations.
 
 For a full list of configurable parameters, check out the Javadoc for the {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} class.
-
-## Client memory allocator configuration
-
-You can set the client memory allocator configurations through Java properties.<br />
-
-| Property | Type |  <div>Description</div> | Default | Available values
-|---|---|---|---|---
-`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li> 
-`pulsar.allocator.exit_on_oom` | String | Whether to exit the JVM when OOM happens | false |  <li> true </li> <li> false </li>
-`pulsar.allocator.leak_detection` | String | The leak detection policy for Pulsar bytebuf allocator. <li> **Disabled**: No leak detection and no overhead. </li> <li> **Simple**: Instruments 1% of the allocated buffer to track for leaks. </li> <li> **Advanced**: Instruments 1% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used. </li> <li> **Paranoid**: Instruments 100% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used and introduces a significant overhead. </li> | Disabled | <li> Disabled </li> <li> Simple </li> <li> Advanced </li> <li> Paranoid </li>
-`pulsar.allocator.out_of_memory_policy` | String | When an OOM occurs, the client throws an exception or fallbacks to heap | FallbackToHeap | <li> ThrowException </li> <li> FallbackToHeap </li>
-
-**Example**
-
-```conf
-Dpulsar.allocator.pooled=true
-Dpulsar.allocator.exit_on_oom=false
-Dpulsar.allocator.leak_detection=Disabled
-Dpulsar.allocator.out_of_memory_policy=ThrowException
-```
 
 ## Producer configs
 
@@ -162,126 +142,22 @@ When you create a reader, you can use the `loadConf` configuration. The followin
 `readCompacted`|boolean|If enabling `readCompacted`, a consumer reads messages from a compacted topic rather than a full message backlog of a topic.<br /><br /> A consumer only sees the latest value for each key in the compacted topic, up until reaching the point in the topic message when compacting backlog. Beyond that point, send messages as normal.<br /><br />`readCompacted` can only be enabled on subscriptions to persistent topics, which have a single active consumer (for example, failure or exclusive subscriptions). <br /><br />Attempting to enable it on subscriptions to non-persistent topics or on shared subscriptions leads to a subscription call throwing a `PulsarClientException`.|false
 `resetIncludeHead`|boolean|If set to true, the first message to be returned is the one specified by `messageId`.<br /><br />If set to false, the first message to be returned is the one next to the message specified by `messageId`.|false
 
-## TableView configs
+## Client memory allocator configs
 
-You can use the available parameters in the `loadConf` configuration or related [API](/api/client/2.10.0-SNAPSHOT/org/apache/pulsar/client/api/TableViewBuilder.html) to configure your TableView.
+You can set the client memory allocator configurations through Java properties.<br />
 
-| Name | Type| Required? |  <div>Description</div> | Default
+| Property | Type |  <div>Description</div> | Default | Available values
 |---|---|---|---|---
-| `topic` | string | yes | The topic name of the TableView. | N/A
-| `autoUpdatePartitionInterval` | int | no | The interval to check for newly added partitions. | 60 (seconds)
-| `subscriptionName` | string | no | The subscription name of the TableView. | null
+`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li> 
+`pulsar.allocator.exit_on_oom` | String | Whether to exit the JVM when OOM happens | false |  <li> true </li> <li> false </li>
+`pulsar.allocator.leak_detection` | String | The leak detection policy for Pulsar bytebuf allocator. <li> **Disabled**: No leak detection and no overhead. </li> <li> **Simple**: Instruments 1% of the allocated buffer to track for leaks. </li> <li> **Advanced**: Instruments 1% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used. </li> <li> **Paranoid**: Instruments 100% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used and introduces a significant overhead. </li> | Disabled | <li> Disabled </li> <li> Simple </li> <li> Advanced </li> <li> Paranoid </li>
+`pulsar.allocator.out_of_memory_policy` | String | When an OOM occurs, the client throws an exception or fallbacks to heap | FallbackToHeap | <li> ThrowException </li> <li> FallbackToHeap </li>
 
-## Cluster-level failover configs
+**Example**
 
-````mdx-code-block
-<Tabs groupId="failover-choice"
-  defaultValue="Automatic cluster-level failover"
-  values={[{"label":"Automatic cluster-level failover","value":"Automatic cluster-level failover"},{"label":"Controlled cluster-level failover","value":"Controlled cluster-level failover"}]}>
-<TabItem value="Automatic cluster-level failover">
-
-This is an example of how to construct a Java Pulsar client to use automatic cluster-level failover. The switchover is triggered automatically.
-
-```java
-private PulsarClient getAutoFailoverClient() throws PulsarClientException {
-    ServiceUrlProvider failover = AutoClusterFailover.builder()
-            .primary("pulsar://localhost:6650")
-            .secondary(Collections.singletonList("pulsar://other1:6650", "pulsar://other2:6650"))
-            .failoverDelay(30, TimeUnit.SECONDS)
-            .switchBackDelay(60, TimeUnit.SECONDS)
-            .checkInterval(1000, TimeUnit.MILLISECONDS)
-            .secondaryTlsTrustCertsFilePath("/path/to/ca.cert.pem")
-            .secondaryAuthentication("org.apache.pulsar.client.impl.auth.AuthenticationTls",
-                    "tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem")
-
-            .build();
-
-    PulsarClient pulsarClient = PulsarClient.builder()
-            .build();
-
-    failover.initialize(pulsarClient);
-    return pulsarClient;
-}
+```conf
+Dpulsar.allocator.pooled=true
+Dpulsar.allocator.exit_on_oom=false
+Dpulsar.allocator.leak_detection=Disabled
+Dpulsar.allocator.out_of_memory_policy=ThrowException
 ```
-
-Configure the following parameters:
-
-Parameter|Default value|Required?|Description
-|---|---|---|---
-`primary`|N/A|Yes|Service URL of the primary cluster.
-`secondary`|N/A|Yes|Service URL(s) of one or several backup clusters.<br /><br />You can specify several backup clusters using a comma-separated list.<br /><br /> Note that:<br />- The backup cluster is chosen in the sequence shown in the list. <br />- If all backup clusters are available, the Pulsar client chooses the first backup cluster.
-`failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster. 
-`switchBackDelay`|N/A|Yes|The delay before the Pulsar client switches from the backup cluster to the primary cluster.<br /><br />Automatic failover switchover is controlled by a probe task: <br /> 1) After the Pulsar client switches from the primary cluster to the backup cluster, the probe task continues to check the status of the primary cluster. <br /> 2) If the primary cluster functions well and continuously remains active longer than `switchBackDelay`, the Pulsar client switches back to the primary cluster.
-`checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
-`secondaryTlsTrustCertsFilePath`|N/A|No|Path to the trusted TLS certificate file of the backup cluster.
-`secondaryAuthentication`|N/A|No|Authentication of the backup cluster.
-
-</TabItem>
-<TabItem value="Controlled cluster-level failover">
-
-This is an example of how to construct a Java Pulsar client to use controlled cluster-level failover. The switchover is triggered by administrators manually.
-
-**Note**: you can have one or several backup clusters but can only specify one.
-
-```java
-public PulsarClient getControlledFailoverClient() throws IOException {
-    Map<String, String> header = new HashMap();
-    header.put("service_user_id", "my-user");
-    header.put("service_password", "tiger");
-    header.put("clusterA", "tokenA");
-    header.put("clusterB", "tokenB");
-
-    ServiceUrlProvider provider =
-            ControlledClusterFailover.builder()
-                    .defaultServiceUrl("pulsar://localhost:6650")
-                    .checkInterval(1, TimeUnit.MINUTES)
-                    .urlProvider("http://localhost:8080/test")
-                    .urlProviderHeader(header)
-                    .build();
-
-    PulsarClient pulsarClient =
-            PulsarClient.builder()
-                    .build();
-
-    provider.initialize(pulsarClient);
-    return pulsarClient;
-}
-```
-
-Parameter|Default value|Required?|Description
-|---|---|---|---
-`defaultServiceUrl`|N/A|Yes|Pulsar service URL.
-`checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
-`urlProvider`|N/A|Yes|URL provider service.
-`urlProviderHeader`|N/A|No|`urlProviderHeader` is a map containing tokens and credentials. <br /><br />If you enable authentication or authorization between Pulsar clients and primary and backup clusters, you need to provide `urlProviderHeader`.
-
-Here is an example of how `urlProviderHeader` works.
-
-![How urlProviderHeader works](/assets/cluster-level-failover-3.png)
-
-Assume that you want to connect Pulsar client 1 to cluster A.
-
-1. Pulsar client 1 sends the token *t1* to the URL provider service.
-
-2. The URL provider service returns the credential *c1* and the cluster A URL to the Pulsar client.
-   
-   The URL provider service manages all tokens and credentials. It returns different credentials based on different tokens and different target cluster URLs to different Pulsar clients.
-
-   **Note**: **the credential must be in a JSON file and contain parameters as shown**.
-
-   ```java
-   {
-   "serviceUrl": "pulsar+ssl://target:6651", 
-   "tlsTrustCertsFilePath": "/security/ca.cert.pem",
-   "authPluginClassName":"org.apache.pulsar.client.impl.auth.AuthenticationTls",
-   "authParamsString": " \"tlsCertFile\": \"/security/client.cert.pem\" 
-       \"tlsKeyFile\": \"/security/client-pk8.pem\" "
-   }
-   ```
-
-3. Pulsar client 1 connects to cluster A using credential *c1*.
-
-</TabItem>
-
-</Tabs>
-````

@@ -1,11 +1,11 @@
 ---
 id: client-libraries-node-configs
 title: Pulsar Node.js client configurations
-sidebar_label: "Configs"
+sidebar_label: "Node.js client"
 ---
 
 
-## Client configuration
+## Client configs
 
 The following configurable parameters are available for Pulsar Node.js clients:
 
@@ -24,7 +24,7 @@ The following configurable parameters are available for Pulsar Node.js clients:
 | `log` | A function that is used for logging. | `console.log` |
 
 
-## Producer configuration
+## Producer configs
 
 | Parameter | Description | Default |
 | :-------- | :---------- | :------ |
@@ -43,7 +43,7 @@ The following configurable parameters are available for Pulsar Node.js clients:
 | `batchingMaxMessages` | The maximum size of sending message in each time of batching. | 1000 |
 | `properties` | The metadata of producer. | |
 
-## Consumer configuration
+## Consumer configs
 
 | Parameter | Description | Default |
 | :-------- | :---------- | :------ |
@@ -62,7 +62,7 @@ The following configurable parameters are available for Pulsar Node.js clients:
 | `listener`| A listener that is called for a message received. | |
 | `readCompacted`| If enabling `readCompacted`, a consumer reads messages from a compacted topic rather than reading a full message backlog of a topic.<br /><br />A consumer only sees the latest value for each key in the compacted topic, up until reaching the point in the topic message when compacting backlog. Beyond that point, send messages as normal.<br /><br /> `readCompacted` can only be enabled on subscriptions to persistent topics, which have a single active consumer (like failure or exclusive subscriptions).<br /><br />Attempting to enable it on subscriptions to non-persistent topics or on shared subscriptions leads to a subscription call throwing a `PulsarClientException`. | false |
 
-## Reader configuration
+## Reader configs
 
 | Parameter | Description | Default |
 | :-------- | :---------- | :------ |
