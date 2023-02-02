@@ -3118,6 +3118,17 @@ Interval between checks to see if message publish buffer size is exceed the max 
 
 **Category**: Server
 
+### metadataStoreAllowReadOnlyOperations
+Is metadata store read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreBatchingEnabled
 Whether we should enable metadata operations batching
 
@@ -5047,6 +5058,17 @@ Number of threads used by Websocket service
 
 **Category**: WebSocket
 
+### webSocketPingDurationSeconds
+Interval of time to sending the ping to keep alive in WebSocket proxy. This value greater than 0 means enabled
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
 ### webSocketServiceEnabled
 Enable the WebSocket API service in broker
 
@@ -5143,6 +5165,17 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### zooKeeperAllowReadOnlyOperations
+Is zookeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 

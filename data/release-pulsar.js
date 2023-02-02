@@ -1,11 +1,21 @@
 module.exports = [
     {
+        "author": "Technoboy-",
+        "tagName": "v2.11.0",
+        "publishedAt": "2023-01-11T01:53:34Z",
+        "vtag": "2.11.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.0/",
+        "releaseBlog": "/blog/2023/01/20/Apache-Pulsar-2-11-0",
+        "doc": "/docs/2.11.x",
+        "version": "v2.11.x"
+    },
+    {
         "author": "liangyepianzhou",
         "tagName": "v2.10.3",
         "publishedAt": "2023-01-04T01:53:34Z",
         "vtag": "2.10.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.10.3/",
-        "releaseBlog": "",
+        "releaseBlog": "/blog/2023/01/09/Apache-Pulsar-2-10-3",
         "doc": "/docs/2.10.x",
         "version": "v2.10.x"
     },

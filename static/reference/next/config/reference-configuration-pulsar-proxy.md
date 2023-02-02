@@ -785,6 +785,17 @@ Max size of messages.
 
 **Category**: Server
 
+### metadataStoreAllowReadOnlyOperations
+Is metadata store read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreCacheExpirySeconds
 Metadata store cache expiry time in seconds.
 
@@ -1063,6 +1074,17 @@ Name of the cluster to which this broker belongs to
 
 **Category**: WebSocket
 
+### webSocketPingDurationSeconds
+Interval of time to sending the ping to keep alive in WebSocket proxy. This value greater than 0 means enabled
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
 ### webSocketServiceEnabled
 Enable or disable the WebSocket servlet
 
@@ -1206,5 +1228,16 @@ ZooKeeper session timeout in milliseconds. @deprecated - Use metadataStoreSessio
 **Dynamic**: `false`
 
 **Category**: Broker Discovery
+
+### zooKeeperAllowReadOnlyOperations
+Is zooKeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
 
 

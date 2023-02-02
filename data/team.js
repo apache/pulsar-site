@@ -5,6 +5,10 @@ module.exports = {
       "apacheId": "andrews"
     },
     {
+      "name": "Bo Cong",
+      "apacheId": "bogong"
+    },
+    {
       "name": "Brad McMillen",
       "apacheId": "bradtm"
     },
@@ -81,6 +85,10 @@ module.exports = {
       "apacheId": "mmerli"
     },
     {
+      "name": "Nicolò Boschi",
+      "apacheId": "nicoloboschi"
+    },
+    {
       "name": "Nozomi Kurihara",
       "apacheId": "nkurihar"
     },
@@ -125,6 +133,10 @@ module.exports = {
       "apacheId": "wave"
     },
     {
+      "name": "Yunze Xu",
+      "apacheId": "xyz"
+    },
+    {
       "name": "Yuki Shiga",
       "apacheId": "yushiga"
     },
@@ -151,12 +163,12 @@ module.exports = {
       "apacheId": "ayegorov"
     },
     {
-      "name": "Daniel Blankensteiner",
-      "apacheId": "blankensteiner"
+      "name": "Baodi Shi",
+      "apacheId": "baodi"
     },
     {
-      "name": "Bo Cong",
-      "apacheId": "bogong"
+      "name": "Daniel Blankensteiner",
+      "apacheId": "blankensteiner"
     },
     {
       "name": "Christophe Bornet",
@@ -211,10 +223,6 @@ module.exports = {
       "apacheId": "mattisonchao"
     },
     {
-      "name": "Nicolò Boschi",
-      "apacheId": "nicoloboschi"
-    },
-    {
       "name": "Neng Lu",
       "apacheId": "nlu90"
     },
@@ -253,10 +261,6 @@ module.exports = {
     {
       "name": "Marvin Cai",
       "apacheId": "xxc"
-    },
-    {
-      "name": "Yunze Xu",
-      "apacheId": "xyz"
     },
     {
       "name": "Yijie Shen",

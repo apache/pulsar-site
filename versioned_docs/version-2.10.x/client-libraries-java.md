@@ -341,29 +341,40 @@ This section guides you through every step on how to configure cluster-level fai
 
 This is an example of how to construct a Java Pulsar client to use automatic cluster-level failover. The switchover is triggered automatically.
 
-```
+```java
+private PulsarClient getAutoFailoverClient() throws PulsarClientException {
+    String primaryUrl = "pulsar+ssl://localhost:6651";
+    String secondaryUrl = "pulsar+ssl://localhost:6661";
 
-  private PulsarClient getAutoFailoverClient() throws PulsarClientException {
+    String secondaryTlsTrustCertsFilePath = "secondary/path";
+    Authentication secondaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/secondary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/secondary-role.key-pk8.pem");
 
-        ServiceUrlProvider failover = AutoClusterFailover.builder()
-                .primary("pulsar://localhost:6650")
-                .secondary(Collections.singletonList("pulsar://other1:6650","pulsar://other2:6650"))
-                .failoverDelay(30, TimeUnit.SECONDS)
-                .switchBackDelay(60, TimeUnit.SECONDS)
-                .checkInterval(1000, TimeUnit.MILLISECONDS)
-	    	    .secondaryTlsTrustCertsFilePath("/path/to/ca.cert.pem")
-    .secondaryAuthentication("org.apache.pulsar.client.impl.auth.AuthenticationTls",
-"tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem")
+    // You can put more failover cluster config in to map
+    Map<String, String> secondaryTlsTrustCertsFilePaths = new HashMap<>();
+    secondaryTlsTrustCertsFilePaths.put(secondaryUrl, secondaryTlsTrustCertsFilePath);
 
-                .build();
+    Map<String, Authentication> secondaryAuthentications = new HashMap<>();
+    secondaryAuthentications.put(secondaryUrl, secondaryAuthentication);
 
-        PulsarClient pulsarClient = PulsarClient.builder()
-                .build();
+    ServiceUrlProvider failover = AutoClusterFailover.builder()
+        .primary(primaryUrl)
+        .secondary(List.of(secondaryUrl))
+        .failoverDelay(30, TimeUnit.SECONDS)
+        .switchBackDelay(60, TimeUnit.SECONDS)
+        .checkInterval(1000, TimeUnit.MILLISECONDS)
+        .secondaryTlsTrustCertsFilePath(secondaryTlsTrustCertsFilePaths)
+        .secondaryAuthentication(secondaryAuthentications)
+        .build();
 
-        failover.initialize(pulsarClient);
-        return pulsarClient;
-    }
+    PulsarClient pulsarClient = PulsarClient.builder()
+        .build();
 
+    failover.initialize(pulsarClient);
+    return pulsarClient;
+}
 ```
 
 Configure the following parameters:
@@ -375,8 +386,8 @@ Parameter|Default value|Required?|Description
 `failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster. 
 `switchBackDelay`|N/A|Yes|The delay before the Pulsar client switches from the backup cluster to the primary cluster.<br /><br />Automatic failover switchover is controlled by a probe task: <br /> 1) After the Pulsar client switches from the primary cluster to the backup cluster, the probe task continues to check the status of the primary cluster. <br /> 2) If the primary cluster functions well and continuously remains active longer than `switchBackDelay`, the Pulsar client switches back to the primary cluster.
 `checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
-`secondaryTlsTrustCertsFilePath`|N/A|No|Path to the trusted TLS certificate file of the backup cluster.
-`secondaryAuthentication`|N/A|No|Authentication of the backup cluster.
+`secondaryTlsTrustCertsFilePath`|N/A|No|A map of certificate file. Keys are service urls of backup cluster. Values are paths to the trusted TLS certificate file of the backup cluster.
+`secondaryAuthentication`|N/A|No|A map of Authentication config. Keys are service urls of backup cluster. Values are Authentication object of the backup cluster.
 
 </TabItem>
 <TabItem value="Controlled cluster-level failover">
@@ -385,31 +396,26 @@ This is an example of how to construct a Java Pulsar client to use controlled cl
 
 **Note**: you can have one or several backup clusters but can only specify one.
 
-```
+```java
+public PulsarClient getControlledFailoverClient() throws IOException {
+    Map<String, String> header = new HashMap();
+    header.put("service_user_id", "my-user");
+    header.put("service_password", "tiger");
+    header.put("clusterA", "tokenA");
+    header.put("clusterB", "tokenB");
 
- public PulsarClient getControlledFailoverClient() throws IOException {
-Map<String, String> header = new HashMap(); 
-  header.put("service_user_id", "my-user");
-  header.put("service_password", "tiger");
-  header.put("clusterA", "tokenA");
-  header.put("clusterB", "tokenB");
-
-  ServiceUrlProvider provider = 
-      ControlledClusterFailover.builder()
+    ServiceUrlProvider provider = ControlledClusterFailover.builder()
         .defaultServiceUrl("pulsar://localhost:6650")
         .checkInterval(1, TimeUnit.MINUTES)
         .urlProvider("http://localhost:8080/test")
         .urlProviderHeader(header)
         .build();
 
-  PulsarClient pulsarClient = 
-     PulsarClient.builder()
-      .build();
+    PulsarClient pulsarClient = PulsarClient.builder().build();
 
-  provider.initialize(pulsarClient);
-  return pulsarClient;
+    provider.initialize(pulsarClient);
+    return pulsarClient;
 }
-
 ```
 
 Parameter|Default value|Required?|Description
@@ -433,8 +439,7 @@ Assume that you want to connect Pulsar client 1 to cluster A.
 
    **Note**: **the credential must be in a JSON file and contain parameters as shown**.
 
-   ```
-   
+   ```java
    {
    "serviceUrl": "pulsar+ssl://target:6651", 
    "tlsTrustCertsFilePath": "/security/ca.cert.pem",
@@ -442,7 +447,6 @@ Assume that you want to connect Pulsar client 1 to cluster A.
    "authParamsString": " \"tlsCertFile\": \"/security/client.cert.pem\" 
        \"tlsKeyFile\": \"/security/client-pk8.pem\" "
    }
-   
    ```
 
 3. Pulsar client 1 connects to cluster A using credential *c1*.

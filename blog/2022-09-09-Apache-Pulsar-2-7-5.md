@@ -10,6 +10,8 @@ The highlight of the 2.7.5 release is that it fixes some critical bugs on broker
 
 This blog walks through the most noteworthy changes. For the complete list, including all feature enhancements and bug fixes, check out the [Pulsar 2.7.5 Release Notes](https://pulsar.apache.org/release-notes/versioned/pulsar-2.7.5/).
 
+<!--truncate-->
+
 ### Fixed the deadlock on metadata cache missing while checking replications. [PR-16889](https://github.com/apache/pulsar/pull/16889)
 
 #### Issue

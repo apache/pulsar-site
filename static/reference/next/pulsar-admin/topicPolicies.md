@@ -573,9 +573,9 @@ $ pulsar-admin topicPolicies set-persistence options
 |---|---|---|
 | `-r, --ml-mark-delete-max-rate` | Throttling rate of mark-delete operation (0 means no throttle)|0.0||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
-| `-w, --bookkeeper-write-quorum` | How many writes to make of each entry|0||
-| `-a, --bookkeeper-ack-quorum` | Number of acks (guaranteed copies) to wait for each entry|0||
-| `-e, --bookkeeper-ensemble` | Number of bookies to use for a topic|0||
+| `-w, --bookkeeper-write-quorum` | How many writes to make of each entry|2||
+| `-a, --bookkeeper-ack-quorum` | Number of acks (guaranteed copies) to wait for each entry|2||
+| `-e, --bookkeeper-ensemble` | Number of bookies to use for a topic|2||
 
 
 ## <em>remove-persistence</em>
