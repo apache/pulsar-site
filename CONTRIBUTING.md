@@ -18,6 +18,26 @@ The source of reference pages consists of:
 
 Read [update reference docs](https://pulsar.apache.org/contribute/document-contribution/#update-reference-docs) guide for details.
 
+### How to update data driven pages?
+
+| Page                                                  | Data                              |
+|-------------------------------------------------------|-----------------------------------|
+| [Ecosystem](https://pulsar.apache.org/ecosystem/)     | [ecosystem.js](data/ecosystem.js) |
+| [Events](https://pulsar.apache.org/events/)           | [events.js](data/events.js)       |
+| [Resources](https://pulsar.apache.org/resources/)     | [resources.js](data/resources.js) |
+| [Team](https://pulsar.apache.org/team/)               | [team.js](data/team.js)           |
+| [Case Study](https://pulsar.apache.org/case-studies/) | [users.js](data/users.js)         |
+
+Additionally, [connectors.js](data/connectors.js) is used for the [Downloads](https://pulsar.apache.org/download/) page, whose source is at `src/components/downloads.tsx`.
+
+Additionally, `release-*.js` files are used for the [Release notes](https://pulsar.apache.org/release-notes/) page, whose sources are at:
+
+* `release-notes/*`
+* `src/components/ClientReleaseTable.js`
+* `src/components/PulsarReleaseTable.js`
+
+Additionally, PMC members can generate the `team.js` file as @lhotari did in https://github.com/apache/pulsar-site/pull/387.
+
 ## Files layout
 
 This site is built with [Docusaurus](http://docusaurus.io/) framework. You can find all technical details on [its docs](https://docusaurus.io/docs).
@@ -96,4 +116,4 @@ See the completed guide at: https://pulsar.apache.org/contribute/document-previe
 
 The repo has a set of Python scripts for maintaining generated content and site syncing, updating, and publish.
 
-You can read the [README file for pytools](/tools/pytools/README.md) for details.
+You can read the [README file for pytools](tools/pytools/README.md) for details.
