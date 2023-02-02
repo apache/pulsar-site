@@ -10,6 +10,50 @@ Currently, the source of the site is located at the [apache/pulsar-site](http://
 
 ## Pages
 
+Docusaurus provides three kinds of pages out-of-the-box: [docs](https://docusaurus.io/docs/docs-introduction), [blogs](https://docusaurus.io/docs/blog), and [JSX pages](https://docusaurus.io/docs/creating-pages).
+
+The Pulsar site pages are of:
+
+| Page                                       | Type      | Source                                                                                            |
+|--------------------------------------------|-----------|---------------------------------------------------------------------------------------------------|
+| [User docs](pathname:///docs)              | docs      | <ul><li>docs/</li><li>versioned_docs/</li><li>versioned_sidebars/</li><li>sidebars.json</li></ul> |
+| [Contrib guides](about.md)                 | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
+| [Release notes](pathname:///release-notes) | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  | 
+| [Security](pathname:///security)           | docs      | <ul><li>security/</li></ul>                                                                       |                    
+| [Blogs](pathname:///blog)                  | blog      | <ul><li>blog/</li></ul>                                                                           |
+| Other pages                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
+
+Besides, the site serves multiple static pages generated outsides, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
+
+## Tools
+
+### preview.sh
+
+The most commonly used tools is `preview.sh`. You can preview your local changes by:
+
+```shell
+./preview.sh 2.11.x
+```
+
+See the [previewing content](document-preview.md) guide for more details.
+
+### docker-compose.yaml
+
+The `preview.sh` script use the Docusaurus dev server for testing, which is different from the real Apache Web Server based env that serves the site online.
+
+To emulate the server-side logics, like `.htaccess` rewrite rules, you can run:
+
+```shell
+yarn build
+docker-compose up
+```
+
+### Pytools
+
+The site repo has a set of Python scripts for generating content and syncing/updating/publish the site.
+
+You can read the [README](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md) file for pytools for details.
+
 ## How-tos
 
 This section holds common how-tos about website maintenance and troubleshooting.
