@@ -316,7 +316,7 @@ The message chunking feature is OFF by default. The following is an example of h
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -365,6 +365,16 @@ The message chunking feature is OFF by default. The following is an example of h
    	log.Fatal(err)
    }
    defer producer.Close()
+   ```
+
+  </TabItem>
+  <TabItem value="Python">
+
+   ```python
+   producer = client.create_producer(
+            topic,
+            chunking_enabled=True
+        )
    ```
 
   </TabItem>

@@ -36,20 +36,31 @@ This is an example of how to construct a Java Pulsar client to use automatic clu
 
 ```java
 private PulsarClient getAutoFailoverClient() throws PulsarClientException {
+    String primaryUrl = "pulsar+ssl://localhost:6651";
+    String secondaryUrl = "pulsar+ssl://localhost:6661";
+    String secondaryTlsTrustCertsFilePath = "secondary/path";
+    Authentication secondaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/secondary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/secondary-role.key-pk8.pem");
+                
+    // You can put more failover cluster config in to map
+    Map<String, String> secondaryTlsTrustCertsFilePaths = new HashMap<>();
+    secondaryTlsTrustCertsFilePaths.put(secondaryUrl, secondaryTlsTrustCertsFilePath);
+    Map<String, Authentication> secondaryAuthentications = new HashMap<>();
+    secondaryAuthentications.put(secondaryUrl, secondaryAuthentication);
     ServiceUrlProvider failover = AutoClusterFailover.builder()
-            .primary("pulsar://localhost:6650")
-            .secondary(Collections.singletonList("pulsar://other1:6650", "pulsar://other2:6650"))
-            .failoverDelay(30, TimeUnit.SECONDS)
-            .switchBackDelay(60, TimeUnit.SECONDS)
-            .checkInterval(1000, TimeUnit.MILLISECONDS)
-            .secondaryTlsTrustCertsFilePath("/path/to/ca.cert.pem")
-            .secondaryAuthentication("org.apache.pulsar.client.impl.auth.AuthenticationTls",
-                    "tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem")
-
-            .build();
+        .primary(primaryUrl)
+        .secondary(List.of(secondaryUrl))
+        .failoverDelay(30, TimeUnit.SECONDS)
+        .switchBackDelay(60, TimeUnit.SECONDS)
+        .checkInterval(1000, TimeUnit.MILLISECONDS)
+        .secondaryTlsTrustCertsFilePath(secondaryTlsTrustCertsFilePaths)
+        .secondaryAuthentication(secondaryAuthentications)
+        .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
-            .build();
+        .build();
 
     failover.initialize(pulsarClient);
     return pulsarClient;

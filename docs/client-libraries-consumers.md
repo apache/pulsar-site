@@ -113,18 +113,14 @@ BatchReceivePolicy.builder()
 
 ## Configure chunking
 
-You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the following parameters:
-- For Java clients: `maxPendingChunkedMessage` and `autoAckOldestChunkedMessageOnQueueFull`
-- For C++ clients: `setMaxPendingChunkedMessage` and `setAutoAckOldestChunkedMessageOnQueueFull`
-
-When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later. The `expireTimeOfIncompleteChunkedMessage` parameter decides the time interval to expire incomplete chunks if the consumer fails to receive all chunks of a message within the specified time period.
+You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring specific parameters. When the configured threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later.
 
 The following is an example of how to configure message chunking.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -146,6 +142,20 @@ The following is an example of how to configure message chunking.
    conf.setMaxPendingChunkedMessage(100);
    Consumer consumer;
    client.subscribe("my-topic", "my-sub", conf, consumer);
+   ```
+
+ </TabItem>
+ <TabItem value="Go">
+ Coming soon...
+
+ </TabItem>
+ <TabItem value="Python">
+
+   ```python
+   consumer = client.subscribe(topic, "my-subscription",
+                    max_pending_chunked_message=10,
+                    auto_ack_oldest_chunked_message_on_queue_full=False
+                    )
    ```
 
   </TabItem>
