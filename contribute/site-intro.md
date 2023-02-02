@@ -75,3 +75,36 @@ If you're gonna to update the content, read the [update reference docs](document
 If you're gonna to debug the reference generation process, read the [reference-doc-generator](https://github.com/apache/pulsar-site/tree/main/tools/pytools#reference-doc-generator) usage section and its source code.
 
 ### How to update data driven pages?
+
+The following pages contain data-driven tables:
+
+* [Case studies](pathname:///case-studies)
+  * data/users.js
+  * src/pages/case-studies.js
+* [Downloads](pathname:///download)
+  * releases.json
+  * data/connectors.js
+  * data/release-cpp.js
+  * data/release-pulsar-manager.js
+  * data/release-pulsar-adapters.js
+  * src/components/download.tsx
+  * src/pages/download.mdx
+* [Ecosystem](pathname:///ecosystem)
+  * data/ecosystem.js
+  * src/pages/ecosystem.js
+* [Events](pathname:///events)
+  * data/events.js
+  * src/pages/events.js
+* [Release notes](pathname:///release-notes)
+  * data/release-*.js
+  * release-notes/
+  * src/components/ClientReleaseTable.js
+  * src/components/PulsarReleaseTable.js
+* [Resources](pathname:///resources)
+  * data/resources.js
+  * src/pages/resources.js
+* [Team](pathname:///team)
+  * data/team.js
+  * src/pages/team.js
+
+Additionally, PMC members can generate the `team.js` file as @lhotari did in https://github.com/apache/pulsar-site/pull/387.
