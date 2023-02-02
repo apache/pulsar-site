@@ -1,0 +1,237 @@
+---
+id: deploy-ibm
+title: Apache Pulsar Installation on IBM Kubernetes Cluster through Helm chart
+sidebar_label: "IBM Cloud Services"
+original_id: deploy-ibm
+---
+# Apache Pulsar Installation on IBM Kubernetes Cluster through Helm chart
+
+:::note
+
+ This doc referes to the Apache pulsar 2.93 Version. if you want to upgrade the Apache Pulsar version you need to follow the [helm-upgrade](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/) Document for upgrade on the  perticular version.
+
+:::
+
+
+
+- [Setup a virtual machine (VM) on IBM Cloud.](#create-vm-on-ibm-cloud)
+- [Create Kubernete cluster on IBM Cloud.](#create-kubernetes-cluster-on-ibm)
+- [Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.](#prepare-vm-for-connecting-to-kubernetes-cluster-and-deploy-pulsar-helm-chart-on-kubernetes-cluster)
+- [Verify the deployment.](#run-kubectl-commands-to-verify-the-deployment)
+
+
+#### Create VM on IBM Cloud
+
+- Go to [IBM Cloud]( https://cloud.ibm.com/login)  and login with your credentials.
+- Search for Virtual Server.
+- Select Virtual Server for Classic.
+
+![VM Creation Image 1](/assets/IBMCloud/VM1.png)
+
+- Select the type of virtual server as selected "Public" in the image.
+- Type the host name, quantity of the machine and billing method.
+
+![VM Creation Image 2](/assets/IBMCloud/VM2.png)
+
+- Select location value according to your region. For example: In below image we have selected Chennai in Asia region.
+
+![VM Creation Image 3](/assets/IBMCloud/VM3.png)
+
+- Select the profile of virtual machine.
+
+![VM Creation Image 4](/assets/IBMCloud/VM4.png)
+
+- Select the operating system and version.
+
+![VM Creation Image 5](/assets/IBMCloud/VM5.png)
+
+- Select network interface according to use.
+
+![VM Creation Image 6](/assets/IBMCloud/VM6.png)
+
+- Select the security group.
+
+![VM Creation Image 7](/assets/IBMCloud/VM7.png)
+
+- Leave rest of the things could be default. Click on the "Create" button.
+
+![VM Creation Image 8](/assets/IBMCloud/VM8.png)
+
+- Check created VM in "Navigation Menu" -> "Resource list" Devices 
+
+![VM Creation Image 9](/assets/IBMCloud/VM9.png)
+
+![VM Creation Image 10](/assets/IBMCloud/VM10.png)
+
+- Check the detail of VM in overview 
+
+![VM Creation Image 11](/assets/IBMCloud/VM11.png)
+
+- Check the devices list, click on the menu option on the same page.
+
+![VM Creation Image 12](/assets/IBMCloud/VM12.png)
+
+#### Create Kubernetes Cluster on IBM 
+
+- Search for the Kubernetes services
+
+![K8S Creation Image 1](/assets/IBMCloud/k8s1.png)
+
+- Select the plan details to "Standard". Please note "Free" plan has the limited resources, which can not fulfill the Pulsar cluster requirement.
+
+![K8S Creation Image 2](/assets/IBMCloud/k8s2.png)
+
+- Select the infrastructure type we are going with the classic and also select the Kubernetes version .
+
+![K8S Creation Image 3](/assets/IBMCloud/k8s3.png)
+
+- Select location and resource group. Select single single zone or multi zone as per your need.
+
+![K8S Creation Image 4](/assets/IBMCloud/k8s4.png)
+
+![K8S Creation Image 5](/assets/IBMCloud/k8s5.png)
+
+- Select worker pool size and flavor (vCPU, Memory) of the worker.
+
+![K8S Creation Image 6](/assets/IBMCloud/k8s6.png)
+
+![K8S Creation Image 7](/assets/IBMCloud/k8s7.png)
+
+- Set cluster name as you want.
+
+![K8S Creation Image 8](/assets/IBMCloud/k8s8.png)
+- Leave rest of the things as we are selecting as default. You can disable below options. Click on create and wait for provisioning of the cluster. 
+
+![K8S Creation Image 9](/assets/IBMCloud/k8s9.png)
+
+- After the cluster is successfully provisioned, connect to the cluster. In order to connect click on the "Action" button then click on "Connect via CLI", it will give you commands, copy that and run in your VM so that we can communicate to cluster through VM. We have to configure VM for communicating to cluster in the next steps will describe how to configure VM for that.
+
+![K8S Creation Image 10](/assets/IBMCloud/k8s10.png)
+
+- Check the created cluster list through clicking on the clusters options 
+
+![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
+
+- It will show you the list of all the created clusters.
+
+![K8S Creation Image 12](/assets/IBMCloud/k8s12.png)
+
+#### Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
+
+**Requirements** : 
+- Installation of [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli): For login in IBM cloud and for connection to Kubernetes master node.
+
+- Installation of [IBM Cloud CLI Plugins](https://cloud.ibm.com/docs/containers?topic=containers-cs_cli_install) Required for connect to IKS (IBM Kubernetes services).
+
+- Installation of [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)  (kubeControl-CLI) version 1.23, because on IBM we are using kubernetes version 1.23 
+- Installation of [Helm](https://helm.sh/docs/intro/install/)
+
+> Note:- Please install all the above things before running the below commands
+
+- First take SSH of your VM with your private key. Run all the below commands one by one.
+```bash
+   $ ibmcloud login 
+   $ ibmcloud plugin list
+```
+
+Output
+![Output of Command img IBMLogin](/assets/IBMCloud/IBMLogin.png)
+
+- For connection to Kubernetes cluster, you will get command in Kubernete cluster section. It is like below example.
+
+> Note: below command is just an example, you will get this command in your kubernetes console.
+
+```bash
+    $ibmcloud ks cluster config --cluster ccql163t064kpvg5gg10
+```
+
+> Note: this step is showing during creation of Kubernetes Cluster.
+
+![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
+
+- After running 2nd and 3rd commands showing in above image you will get output shows like in the below image (no need to run number 1 command because we already logged in to IBM Cloud)
+
+Output
+![Output of Command IKSConnect](/assets/IBMCloud/IKSConnect.png)
+
+> Now we are able to run commands of kubectl.
+
+#### Run kubectl commands to verify the deployment
+Make sure all the pods of Pulsar are runnig. Get the service URL and broker URL for publishing and consuming the messages.
+
+
+- We will add "Pulsar" Helm repo in VM and clone the repo of Apache Pulsar from Github, below is all the commands.
+
+> [Installation of Pulsar helm in minikube cluster](https://pulsar.apache.org/docs/getting-started-helm/)  this document is for minikube cluster we are taking reference from that.
+
+1. Add Pulsar chart repo
+
+```bash
+$ helm repo add apache https://pulsar.apache.org/charts
+$ helm repo update
+$ helm repo list
+```
+
+Output
+![Output of Command Helmrepo](/assets/IBMCloud/Helmrepo.png)
+
+2. Clone the Pulsar Helm chart repository, go inside the pulsar-helm-chart directory
+
+```bash
+git clone https://github.com/apache/pulsar-helm-chart   
+cd pulsar-helm-chart
+```
+
+3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username`pulsar`and password`pulsar`are used for logging into the Grafana dashboard and Pulsar Manager.
+
+:::note
+
+When running the script, you can use`-n`to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and`-c`to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
+
+:::
+
+```bash
+ ./scripts/pulsar/prepare_helm_release.sh -n default -k asia -c 
+```
+
+Output
+![Output of Command HelmOutPut](/assets/IBMCloud/HelmOutPut.png)
+
+4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
+
+```bash
+helm install --values examples/values-minikube.yaml --set initialize=true asia apache/pulsar
+```
+
+:::note
+
+You need to specify`--set initialize=true`when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+
+:::
+
+Output
+![Output of Command HelmInstall](/assets/IBMCloud/HelmInstall.png)
+
+5. Check the status of all pods.
+
+```bash 
+kubectl get pods
+```
+If all pods start up successfully, you can see that the`STATUS`is changed to`Running`or`Completed`
+
+Output
+![Output of Command PodStatus](/assets/IBMCloud/PodStatus.png)
+
+6. Check the status of all services
+
+```bash
+ kubectl get services
+``` 
+
+Output
+![Output of Command Services](/assets/IBMCloud/Services.png)
+
+> Output of above command will give us `services URL` and `broker URL`, proxy external ip is for both just change ports (for service URL port is 80 and for broker URL port is 6650 this is default)
+If all of these commands are successful, Pulsar clients can now use your cluster!
+
+> You can use Pulsar client to publishing and consuming messages you just need to use `proxy external IP` and ports of `broker URL` and `service URL`.
