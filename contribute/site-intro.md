@@ -23,7 +23,7 @@ The Pulsar site pages are of:
 | [Blogs](pathname:///blog)                  | blog      | <ul><li>blog/</li></ul>                                                                           |
 | Other pages                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
 
-Besides, the site serves multiple static pages generated outsides, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
+Besides, the site serves multiple static pages generated outside the framework, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
 
 ## Tools
 
@@ -52,7 +52,7 @@ docker-compose up
 
 The site repo has a set of Python scripts for generating content and syncing/updating/publish the site.
 
-You can read the [README](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md) file for pytools for details.
+You can read the [README](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md) file of pytools for details.
 
 ## How-tos
 
