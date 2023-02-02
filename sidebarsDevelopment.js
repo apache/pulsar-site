@@ -29,12 +29,19 @@ const sidebars = {
         },
         {
             type: "category",
+            label: "Website",
+            items: [
+                'site-intro',
+                'document-preview',
+                'document-syntax',
+            ]
+        },
+        {
+            type: "category",
             label: "Documentation",
             items: [
                 'document-intro',
                 'document-contribution',
-                'document-preview',
-                'document-syntax',
             ]
         },
         {
