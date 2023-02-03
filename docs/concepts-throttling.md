@@ -164,4 +164,4 @@ Message dispatch throttling may cause messages over-delivered per unit of time d
 
    ![An example of over-delivery occurred within a throttling period](/assets/throttling-limitation.svg)
 
-:::
+   :::
