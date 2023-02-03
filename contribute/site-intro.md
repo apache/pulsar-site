@@ -17,7 +17,7 @@ The Pulsar site pages are of:
 | Page                                       | Type      | Source                                                                                            |
 |--------------------------------------------|-----------|---------------------------------------------------------------------------------------------------|
 | [User docs](pathname:///docs)              | docs      | <ul><li>docs/</li><li>versioned_docs/</li><li>versioned_sidebars/</li><li>sidebars.json</li></ul> |
-| [Contrib guides](about.md)                 | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
+| [Contribution guides](about.md)                 | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
 | [Release notes](pathname:///release-notes) | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  | 
 | [Security](pathname:///security)           | docs      | <ul><li>security/</li></ul>                                                                       |                    
 | [Blogs](pathname:///blog)                  | blog      | <ul><li>blog/</li></ul>                                                                           |
@@ -29,7 +29,7 @@ Besides, the site serves multiple static pages generated outside the framework, 
 
 ### preview.sh
 
-The most commonly used tools is `preview.sh`. You can preview your local changes by:
+The most commonly used tool is `preview.sh`. You can preview your local changes by:
 
 ```shell
 ./preview.sh 2.11.x
@@ -50,7 +50,7 @@ docker-compose up
 
 ### Pytools
 
-The site repo has a set of Python scripts for generating content and syncing/updating/publish the site.
+The site repo has a set of Python scripts for generating content and syncing/updating/publishing the site.
 
 You can read the [README](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md) file of pytools for details.
 
@@ -60,7 +60,7 @@ This section holds common how-tos about website maintenance and troubleshooting.
 
 ### How to fix search index mismatches?
 
-First of all, you should get the permission to access `apache_pulsar` crawler on [Algolia Crawler console](https://crawler.algolia.com/). You can email dev@pulsar.apache.org to ask for permission.
+First of all, you should get permission to access `apache_pulsar` crawler on [Algolia Crawler console](https://crawler.algolia.com/). You can email dev@pulsar.apache.org to ask for permission.
 
 The most common fix for search index mismatches is to re-index the pages. You can do so by clicking "Restart crawling" button on the [crawler page](https://crawler.algolia.com/admin/crawlers/7a3458ba-2373-47d5-9520-90cc9cc10736/overview). Typically, it takes about 1 or 2 hours to complete.
 
