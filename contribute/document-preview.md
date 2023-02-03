@@ -1,7 +1,4 @@
----
-id: document-preview
-title: Previewing content
----
+# Previewing content
 
 This guide explains why and how to preview Pulsar content locally with detailed steps and various examples.
 
