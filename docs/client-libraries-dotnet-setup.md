@@ -4,7 +4,7 @@ title: Set up C# client
 sidebar_label: "Set up"
 ---
 
-## Install C# client
+## Install C# client library
 
 This section describes how to install the Pulsar C# client library through the dotnet CLI. 
 

@@ -11,228 +11,68 @@ import TabItem from '@theme/TabItem';
 
 After setting up your clients, you can explore more to start working with [producers](concepts-clients.md#producers).
 
-## Publish messages to partitioned topics
-
-By default, Pulsar topics are served by a single broker, which limits the maximum throughput of a topic. *Partitioned topics* can span multiple brokers and thus allow for higher throughput.
-
-You can publish messages to partitioned topics using Pulsar client libraries. When publishing messages to partitioned topics, you must specify a routing mode. If you do not specify any routing mode when you create a new producer, the round-robin routing mode is used.
-
-#### Routing mode
-
-You can specify the routing mode in the `ProducerConfiguration` object used to configure your producer. The routing mode determines which partition (internal topic) each message should be published to.
-
-The following {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} options are available.
-
-Mode     | Description
-:--------|:------------
-`RoundRobinPartition` | If no key is provided, the producer publishes messages across all partitions in the round-robin policy to achieve the maximum throughput. Round-robin is not done per individual message. It is set to the same boundary of batching delay to ensure that batching is effective. If a key is specified on the message, the partitioned producer hashes the key and assigns the message to a particular partition. This is the default mode.
-`SinglePartition`     | If no key is provided, the producer picks a single partition randomly and publishes all messages into that partition. If a key is specified on the message, the partitioned producer hashes the key and assigns the message to a particular partition.
-`CustomPartition`     | Use custom message router implementation that is called to determine the partition for a particular message. You can create a custom routing mode by using the Java client and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
-
-The following is an example:
-
-```java
-String pulsarBrokerRootUrl = "pulsar://localhost:6650";
-String topic = "persistent://my-tenant/my-namespace/my-topic";
-
-PulsarClient pulsarClient = PulsarClient.builder().serviceUrl(pulsarBrokerRootUrl).build();
-Producer<byte[]> producer = pulsarClient.newProducer()
-        .topic(topic)
-        .messageRoutingMode(MessageRoutingMode.SinglePartition)
-        .create();
-producer.send("Partitioned topic message".getBytes());
-```
-
-#### Custom message router
-
-To use a custom message router, you need to provide an implementation of the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface, which has just one `choosePartition` method:
-
-```java
-public interface MessageRouter extends Serializable {
-    int choosePartition(Message msg);
-}
-```
-
-The following router routes every message to partition 10:
-
-```java
-public class AlwaysTenRouter implements MessageRouter {
-    public int choosePartition(Message msg) {
-        return 10;
-    }
-}
-```
-
-With that implementation, you can send messages to partitioned topics as below.
-
-```java
-String pulsarBrokerRootUrl = "pulsar://localhost:6650";
-String topic = "persistent://my-tenant/my-cluster-my-namespace/my-topic";
-
-PulsarClient pulsarClient = PulsarClient.builder().serviceUrl(pulsarBrokerRootUrl).build();
-Producer<byte[]> producer = pulsarClient.newProducer()
-        .topic(topic)
-        .messageRouter(new AlwaysTenRouter())
-        .create();
-producer.send("Partitioned topic message".getBytes());
-```
-
-#### Choose partitions when using a key
-
-If a message has a key, it supersedes the round robin routing policy. The following example illustrates how to choose the partition when using a key.
-
-```java
-// If the message has a key, it supersedes the round robin routing policy
-        if (msg.hasKey()) {
-            return signSafeMod(hash.makeHash(msg.getKey()), topicMetadata.numPartitions());
-        }
-
-        if (isBatchingEnabled) { // if batching is enabled, choose partition on `partitionSwitchMs` boundary.
-            long currentMs = clock.millis();
-            return signSafeMod(currentMs / partitionSwitchMs + startPtnIdx, topicMetadata.numPartitions());
-        } else {
-            return signSafeMod(PARTITION_INDEX_UPDATER.getAndIncrement(this), topicMetadata.numPartitions());
-        }
-```
-
-## Use message router - Go
-
-```go
-client, err := pulsar.NewClient(pulsar.ClientOptions{
-    URL: "pulsar://localhost:6650",
-})
-
-if err != nil {
-    log.Fatal(err)
-}
-defer client.Close()
-
-producer, err := client.CreateProducer(pulsar.ProducerOptions{
-    Topic: "my-partitioned-topic",
-    MessageRouter: func(msg *pulsar.ProducerMessage, tm pulsar.TopicMetadata) int {
-        fmt.Println("Topic has", tm.NumPartitions(), "partitions. Routing message ", msg, " to partition 2.")
-        // always push msg to partition 2
-        return 2
-    },
-})
-
-if err != nil {
-    log.Fatal(err)
-}
-defer producer.Close()
-
-for i := 0; i < 10; i++ {
-    if msgId, err := producer.Send(context.Background(), &pulsar.ProducerMessage{
-        Payload: []byte(fmt.Sprintf("message-%d", i)),
-    }); err != nil {
-        log.Fatal(err)
-    } else {
-        log.Println("Published message: ", msgId)
-    }
-}
-
-// subscribe a specific partition of a topic
-// for demos only, not recommend to subscribe a specific partition
-consumer, err := client.Subscribe(pulsar.ConsumerOptions{
-    // pulsar partition is a special topic has the suffix '-partition-xx'
-    Topic:            "my-partitioned-topic-partition-2",
-    SubscriptionName: "my-sub",
-    Type:             pulsar.Shared,
-})
-if err != nil {
-    log.Fatal(err)
-}
-defer consumer.Close()
-
-for i := 0; i < 10; i++ {
-    msg, err := consumer.Receive(context.Background())
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("Received message msgId: %#v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
-    consumer.Ack(msg)
-}
-```
-
-## Async send messages
-
-You can publish messages [asynchronously](concepts-clients.md#send-modes) using the Java client. With async send, the producer puts the message in a blocking queue and returns it immediately. Then the client library sends the message to the broker in the background. If the queue is full (max size configurable), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer.
-
-The following is an example.
-
-```java
-producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
-    System.out.println("Message with ID " + msgId + " successfully sent");
-});
-```
-
-As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
-
-## Send data - C#
-
-This example shows how to send data.
-
-```csharp
-var data = Encoding.UTF8.GetBytes("Hello World");
-await producer.Send(data);
-```
-
-## Send messages with customized metadata - C#
-
-- Send messages with customized metadata by using the builder.
-
-  ```csharp
-  var messageId = await producer.NewMessage()
-                                .Property("SomeKey", "SomeValue")
-                                .Send(data);
-  ```
-
-- Send messages with customized metadata without using the builder.
-
-  ```csharp
-  var data = Encoding.UTF8.GetBytes("Hello World");
-  var metadata = new MessageMetadata();
-  metadata["SomeKey"] = "SomeValue";
-  var messageId = await producer.Send(metadata, data));
-  ```
 
 ## Configure messages
 
-In addition to a value, you can set additional items on a given message:
+Pulsar clients provide an interface that you can use to construct and configure messages. Here's an example message:
 
-```java
-producer.newMessage()
-    .key("my-message-key")
-    .value("my-async-message".getBytes())
-    .property("my-key", "my-value")
-    .property("my-other-key", "my-other-value")
-    .send();
-```
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"}]}>
+<TabItem value="Java">
 
-You can terminate the builder chain with `sendAsync()` and get a future return.
+   ```java
+   producer.newMessage()
+       .key("my-message-key")
+       .value("my-async-message".getBytes())
+       .property("my-key", "my-value")
+       .property("my-other-key", "my-other-value")
+       .send();
+   ```
 
-## Construct messages - Node
+   You can terminate the builder chain with `sendAsync()` and get a future return.
 
-In Pulsar Node.js client, you have to construct producer message objects for producers.
+  </TabItem>
+  <TabItem value="Go">
 
-Here is an example of a message:
+   ```go
+    msg := pulsar.ProducerMessage{
+        Payload: []byte("Here is some message data"),
+        Key: "message-key",
+        Properties: map[string]string{
+            "foo": "bar",
+        },
+        EventTime: time.Now(),
+        ReplicationClusters: []string{"cluster1", "cluster3"},
+    }
 
-```javascript
-const msg = {
-  data: Buffer.from('Hello, Pulsar'),
-  partitionKey: 'key1',
-  properties: {
-    'foo': 'bar',
-  },
-  eventTimestamp: Date.now(),
-  replicationClusters: [
-    'cluster1',
-    'cluster2',
-  ],
-}
+    if _, err := producer.send(msg); err != nil {
+      log.Fatalf("Could not publish message due to: %v", err)
+    }
+   ```
 
-await producer.send(msg);
-```
+    For all methods of the `ProducerMessage` object, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerMessage).
+
+  </TabItem>
+  <TabItem value="Node.js">
+
+   ```javascript
+   const msg = {
+   data: Buffer.from('Hello, Pulsar'),
+   partitionKey: 'key1',
+   properties: {
+       'foo': 'bar',
+   },
+   eventTimestamp: Date.now(),
+   replicationClusters: [
+       'cluster1',
+       'cluster2',
+   ],
+   }
+
+   await producer.send(msg);
+   ```
 
 The following keys are available for producer message objects:
 
@@ -247,7 +87,7 @@ The following keys are available for producer message objects:
 | `deliverAt` | The absolute timestamp at or after which the message is delivered. | |
 | `deliverAfter` | The relative delay after which the message is delivered. | |
 
-#### Message object operations
+**Message object operations**
 
 In Pulsar Node.js client, you can receive (or read) message objects as consumers (or readers).
 
@@ -264,7 +104,7 @@ The message object has the following methods available:
 | `getRedeliveryCount()` | Getter method of redelivery count. | `Number` |
 | `getPartitionKey()` | Getter method of partition key. | `String` |
 
-#### Message ID object operations
+**Message ID object operations**
 
 In Pulsar Node.js client, you can get message id objects from message objects.
 
@@ -285,27 +125,277 @@ The following static methods are available for the message id object:
 | `latest()` | MessageId representing the latest, or last published message in the topic. | `Object` |
 | `deserialize(Buffer)` | Deserialize a message id object from a Buffer. | `Object` |
 
-## Construct messages - Go
+ </TabItem>
+</Tabs>
+````
 
-The Pulsar Go client provides a `ProducerMessage` interface that you can use to construct messages to producers on Pulsar topics. Here's an example message:
+## Send messages
 
-```go
-msg := pulsar.ProducerMessage{
-    Payload: []byte("Here is some message data"),
-    Key: "message-key",
-    Properties: map[string]string{
-        "foo": "bar",
-    },
-    EventTime: time.Now(),
-    ReplicationClusters: []string{"cluster1", "cluster3"},
-}
+This example shows how to send messages using producers.
 
-if _, err := producer.send(msg); err != nil {
-    log.Fatalf("Could not publish message due to: %v", err)
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="C#"
+  values={[{"label":"C#","value":"C#"}]}>
+<TabItem value="C#">
+
+```csharp
+var data = Encoding.UTF8.GetBytes("Hello World");
+await producer.Send(data);
+```
+
+  </TabItem>
+</Tabs>
+````
+
+## Send messages with customized metadata
+
+- Send messages with customized metadata by using the builder.
+
+  ````mdx-code-block
+  <Tabs groupId="lang-choice"
+    defaultValue="C#"
+    values={[{"label":"C#","value":"C#"}]}>
+  <TabItem value="C#">
+
+    ```csharp
+    var messageId = await producer.NewMessage()
+                                .Property("SomeKey", "SomeValue")
+                                .Send(data);
+    ```
+
+    </TabItem>
+  </Tabs>
+  ````
+
+- Send messages with customized metadata without using the builder.
+
+  ````mdx-code-block
+  <Tabs groupId="lang-choice"
+    defaultValue="C#"
+    values={[{"label":"C#","value":"C#"}]}>
+  <TabItem value="C#">
+
+  ```csharp
+  var data = Encoding.UTF8.GetBytes("Hello World");
+  var metadata = new MessageMetadata();
+  metadata["SomeKey"] = "SomeValue";
+  var messageId = await producer.Send(metadata, data));
+  ```
+
+  </TabItem>
+  </Tabs>
+  ````
+
+## Async send messages
+
+You can publish messages [asynchronously](concepts-clients.md#send-modes) using the Java client. With async send, the producer puts the message in a blocking queue and returns it immediately. Then the client library sends the message to the broker in the background. If the queue is full (max size configurable), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer.
+
+The following is an example.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
+    System.out.println("Message with ID " + msgId + " successfully sent");
+});
+```
+
+</TabItem>
+</Tabs>
+````
+
+As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+
+## Publish messages to partitioned topics
+
+By default, Pulsar topics are served by a single broker, which limits the maximum throughput of a topic. *Partitioned topics* can span multiple brokers and thus allow for higher throughput.
+
+You can publish messages to partitioned topics using Pulsar client libraries. When publishing messages to partitioned topics, you must specify a routing mode. If you do not specify any routing mode when you create a new producer, the round-robin routing mode is used.
+
+### Use built-in message router
+
+You can specify the [routing mode](concepts-messaging.md#routing-modes) in the `ProducerConfiguration` object to configure your producer. The routing mode determines which partition (internal topic) each message should be published to.
+
+The following is an example:
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
+  <TabItem value="Java">
+
+   ```java
+   String pulsarBrokerRootUrl = "pulsar://localhost:6650";
+   String topic = "persistent://my-tenant/my-namespace/my-topic";
+
+   PulsarClient pulsarClient = PulsarClient.builder().serviceUrl(pulsarBrokerRootUrl).build();
+   Producer<byte[]> producer = pulsarClient.newProducer()
+      .topic(topic)
+      .messageRoutingMode(MessageRoutingMode.SinglePartition)
+      .create();
+   producer.send("Partitioned topic message".getBytes());
+   ```
+
+  </TabItem>
+  <TabItem value="Go">
+
+   ```go
+    client, err := pulsar.NewClient(pulsar.ClientOptions{
+        URL: "pulsar://localhost:6650",
+    })
+
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer client.Close()
+
+    producer, err := client.CreateProducer(pulsar.ProducerOptions{
+        Topic: "my-partitioned-topic",
+        MessageRouter: func(msg *pulsar.ProducerMessage, tm pulsar.TopicMetadata) int {
+            fmt.Println("Topic has", tm.NumPartitions(), "partitions. Routing message ", msg, " to partition 2.")
+            // always push msg to partition 2
+            return 2
+        },
+    })
+
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer producer.Close()
+
+    for i := 0; i < 10; i++ {
+        if msgId, err := producer.Send(context.Background(), &pulsar.ProducerMessage{
+            Payload: []byte(fmt.Sprintf("message-%d", i)),
+        }); err != nil {
+            log.Fatal(err)
+        } else {
+            log.Println("Published message: ", msgId)
+        }
+    }
+
+    // subscribe a specific partition of a topic
+    // for demos only, not recommend to subscribe a specific partition
+    consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+        // pulsar partition is a special topic has the suffix '-partition-xx'
+        Topic:            "my-partitioned-topic-partition-2",
+        SubscriptionName: "my-sub",
+        Type:             pulsar.Shared,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer consumer.Close()
+
+    for i := 0; i < 10; i++ {
+        msg, err := consumer.Receive(context.Background())
+        if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Printf("Received message msgId: %#v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
+        consumer.Ack(msg)
+    }
+   ```
+
+  </TabItem>
+</Tabs>
+````
+
+### Customize message router
+
+To use a custom message router, you need to provide an implementation of the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface, which has just one `choosePartition` method:
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+public interface MessageRouter extends Serializable {
+    int choosePartition(Message msg);
 }
 ```
 
-For all methods of the `ProducerMessage` object, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerMessage).
+  </TabItem>
+</Tabs>
+````
+
+The following router routes every message to partition 10:
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+public class AlwaysTenRouter implements MessageRouter {
+    public int choosePartition(Message msg) {
+        return 10;
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+````
+
+With that implementation, you can send messages to partitioned topics as below.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+String pulsarBrokerRootUrl = "pulsar://localhost:6650";
+String topic = "persistent://my-tenant/my-cluster-my-namespace/my-topic";
+
+PulsarClient pulsarClient = PulsarClient.builder().serviceUrl(pulsarBrokerRootUrl).build();
+Producer<byte[]> producer = pulsarClient.newProducer()
+        .topic(topic)
+        .messageRouter(new AlwaysTenRouter())
+        .create();
+producer.send("Partitioned topic message".getBytes());
+```
+
+  </TabItem>
+</Tabs>
+````
+
+### Choose partitions when using a key
+
+If a message has a key, it supersedes the round robin routing policy. The following example illustrates how to choose the partition when using a key.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+// If the message has a key, it supersedes the round robin routing policy
+        if (msg.hasKey()) {
+            return signSafeMod(hash.makeHash(msg.getKey()), topicMetadata.numPartitions());
+        }
+
+        if (isBatchingEnabled) { // if batching is enabled, choose partition on `partitionSwitchMs` boundary.
+            long currentMs = clock.millis();
+            return signSafeMod(currentMs / partitionSwitchMs + startPtnIdx, topicMetadata.numPartitions());
+        } else {
+            return signSafeMod(PARTITION_INDEX_UPDATER.getAndIncrement(this), topicMetadata.numPartitions());
+        }
+```
+
+  </TabItem>
+</Tabs>
+````
 
 ## Enable chunking
 
@@ -389,6 +479,82 @@ To enable chunking, you need to disable batching (`enableBatching`=`false`) conc
 
 :::
 
+## Configure delayed message delivery
+
+The following is an example of how to configure delayed message delivery for a producer.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
+<TabItem value="Java">
+
+   ```java
+   // message to be delivered at the configured delay interval
+   producer.newMessage().deliverAfter(3L, TimeUnit.Minute).value("Hello Pulsar!").send();
+   ```
+
+  </TabItem>
+  <TabItem value="Go">
+
+   ```go
+   client, err := pulsar.NewClient(pulsar.ClientOptions{
+       URL: "pulsar://localhost:6650",
+   })
+   if err != nil {
+       log.Fatal(err)
+   }
+   defer client.Close()
+
+   topicName := "topic-1"
+   producer, err := client.CreateProducer(pulsar.ProducerOptions{
+       Topic:           topicName,
+       DisableBatching: true,
+   })
+   if err != nil {
+       log.Fatal(err)
+   }
+   defer producer.Close()
+
+   consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+       Topic:            topicName,
+       SubscriptionName: "subName",
+       Type:             pulsar.Shared,
+   })
+   if err != nil {
+       log.Fatal(err)
+   }
+   defer consumer.Close()
+
+   ID, err := producer.Send(context.Background(), &pulsar.ProducerMessage{
+       Payload:      []byte(fmt.Sprintf("test")),
+       DeliverAfter: 3 * time.Second,
+   })
+   if err != nil {
+       log.Fatal(err)
+   }
+   fmt.Println(ID)
+
+   ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+   msg, err := consumer.Receive(ctx)
+   if err != nil {
+       log.Fatal(err)
+   }
+   fmt.Println(msg.Payload())
+   cancel()
+
+   ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+   msg, err = consumer.Receive(ctx)
+   if err != nil {
+       log.Fatal(err)
+   }
+   fmt.Println(msg.Payload())
+   cancel()
+   ```
+
+  </TabItem>
+</Tabs>
+````
 
 ## Intercept messages
 
@@ -401,8 +567,14 @@ The interface has three main events:
 
 To intercept messages, you can add a `ProducerInterceptor` or multiple ones when creating a `Producer` as follows.
 
-```java
-Producer<byte[]> producer = client.newProducer()
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+   ```java
+   Producer<byte[]> producer = client.newProducer()
         .topic(topic)
         .intercept(new ProducerInterceptor {
 			@Override
@@ -421,7 +593,11 @@ Producer<byte[]> producer = client.newProducer()
 			}
         })
         .create();
-```
+   ```
+
+  </TabItem>
+</Tabs>
+````
 
 :::note
 
@@ -429,7 +605,7 @@ Multiple interceptors apply in the order they are passed to the `intercept` meth
 
 :::
 
-## Configure encryption policies - C#
+## Configure encryption policies
 
 The Pulsar C# client supports four kinds of encryption policies:
 
@@ -440,181 +616,20 @@ The Pulsar C# client supports four kinds of encryption policies:
 
 This example shows how to set the `EnforceUnencrypted` encryption policy.
 
-```csharp
-using DotPulsar;
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="C#"
+  values={[{"label":"C#","value":"C#"}]}>
+<TabItem value="C#">
 
-var client = PulsarClient.Builder()
+   ```csharp
+   using DotPulsar;
+
+   var client = PulsarClient.Builder()
                          .ConnectionSecurity(EncryptionPolicy.EnforceEncrypted)
                          .Build();
-```
+   ```
 
-## Monitor producer - C#
-
-This example shows how to monitor the producer state.
-
-```csharp
-private static async ValueTask Monitor(IProducer producer, CancellationToken cancellationToken)
-{
-    var state = ProducerState.Disconnected;
-
-    while (!cancellationToken.IsCancellationRequested)
-    {
-        state = (await producer.StateChangedFrom(state, cancellationToken)).ProducerState;
-
-        var stateMessage = state switch
-        {
-            ProducerState.Connected => $"The producer is connected",
-            ProducerState.Disconnected => $"The producer is disconnected",
-            ProducerState.Closed => $"The producer has closed",
-            ProducerState.Faulted => $"The producer has faulted",
-            ProducerState.PartiallyConnected => $"The producer is partially connected.",
-            _ => $"The producer has an unknown state '{state}'"
-        };
-
-        Console.WriteLine(stateMessage);
-
-        if (producer.IsFinalState(state))
-            return;
-    }
-}
-```
-
-The following table lists states available for the producer.
-
-| State | Description |
-| ---- | ----|
-| Closed | The producer or the Pulsar client has been disposed. |
-| Connected | All is well. |
-| Disconnected | The connection is lost and attempts are being made to reconnect. |
-| Faulted | An unrecoverable error has occurred. |
-| PartiallyConnected | Some of the sub-producers are disconnected. |
-
-## Use Prometheus metrics - Go
-
-Pulsar Go client registers client metrics using Prometheus. This section demonstrates how to create a simple Pulsar producer application that exposes Prometheus metrics via HTTP.
-
-1. Write a simple producer application.
-
-```go
-// Create a Pulsar client
-client, err := pulsar.NewClient(pulsar.ClientOptions{
-    URL: "pulsar://localhost:6650",
-})
-if err != nil {
-    log.Fatal(err)
-}
-
-defer client.Close()
-
-// Start a separate goroutine for Prometheus metrics
-// In this case, Prometheus metrics can be accessed via http://localhost:2112/metrics
-go func() {
-    prometheusPort := 2112
-    log.Printf("Starting Prometheus metrics at http://localhost:%v/metrics\n", prometheusPort)
-    http.Handle("/metrics", promhttp.Handler())
-    err = http.ListenAndServe(":"+strconv.Itoa(prometheusPort), nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-}()
-
-// Create a producer
-producer, err := client.CreateProducer(pulsar.ProducerOptions{
-    Topic: "topic-1",
-})
-if err != nil {
-    log.Fatal(err)
-}
-
-defer producer.Close()
-
-ctx := context.Background()
-
-// Write your business logic here
-// In this case, you build a simple Web server. You can produce messages by requesting http://localhost:8082/produce
-webPort := 8082
-http.HandleFunc("/produce", func(w http.ResponseWriter, r *http.Request) {
-    msgId, err := producer.Send(ctx, &pulsar.ProducerMessage{
-        Payload: []byte(fmt.Sprintf("hello world")),
-    })
-    if err != nil {
-        log.Fatal(err)
-    } else {
-        log.Printf("Published message: %v", msgId)
-        fmt.Fprintf(w, "Published message: %v", msgId)
-    }
-})
-
-err = http.ListenAndServe(":"+strconv.Itoa(webPort), nil)
-if err != nil {
-    log.Fatal(err)
-}
-```
-
-2. To scrape metrics from applications, configure a local running Prometheus instance using a configuration file (`prometheus.yml`).
-
-```yaml
-scrape_configs:
-- job_name: pulsar-client-go-metrics
-  scrape_interval: 10s
-  static_configs:
-  - targets:
-  - localhost:2112
-```
-
-## Use delay relative - Go
-
-```go
-client, err := pulsar.NewClient(pulsar.ClientOptions{
-    URL: "pulsar://localhost:6650",
-})
-if err != nil {
-    log.Fatal(err)
-}
-defer client.Close()
-
-topicName := "topic-1"
-producer, err := client.CreateProducer(pulsar.ProducerOptions{
-    Topic:           topicName,
-    DisableBatching: true,
-})
-if err != nil {
-    log.Fatal(err)
-}
-defer producer.Close()
-
-consumer, err := client.Subscribe(pulsar.ConsumerOptions{
-    Topic:            topicName,
-    SubscriptionName: "subName",
-    Type:             pulsar.Shared,
-})
-if err != nil {
-    log.Fatal(err)
-}
-defer consumer.Close()
-
-ID, err := producer.Send(context.Background(), &pulsar.ProducerMessage{
-    Payload:      []byte(fmt.Sprintf("test")),
-    DeliverAfter: 3 * time.Second,
-})
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Println(ID)
-
-ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
-msg, err := consumer.Receive(ctx)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Println(msg.Payload())
-cancel()
-
-ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
-msg, err = consumer.Receive(ctx)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Println(msg.Payload())
-cancel()
-```
+  </TabItem>
+</Tabs>
+````

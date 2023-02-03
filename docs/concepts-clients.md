@@ -4,7 +4,7 @@ title: Pulsar Clients
 sidebar_label: "Clients"
 ---
 
-Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
+Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [C++](client-libraries-cpp.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [Node.js](client-libraries-node.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
 
 Pulsar client libraries support transparent reconnection and/or connection failover to brokers, queuing of messages until acknowledged by the broker, and heuristics such as connection retries with backoff.
 
@@ -13,15 +13,15 @@ Pulsar client libraries support transparent reconnection and/or connection failo
 Before an application creates a producer/consumer, the Pulsar client library needs to initiate a setup phase including two steps:
 
 1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker. The request could reach one of the active brokers which, by looking at the (cached) zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
-1. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. Within this connection, the client and broker exchange binary commands from a custom protocol. At this point, the client sends a command to create producer/consumer to the broker, which will comply after having validated the authorization policy.
+2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. Within this connection, the client and broker exchange binary commands from a custom protocol. At this point, the client sends a command to create producer/consumer to the broker, which will comply after having validated the authorization policy.
 
 Whenever the TCP connection breaks, the client immediately re-initiates this setup phase and keeps trying with exponential backoff to re-establish the producer or consumer until the operation succeeds.
 
-## Producers
+## Producer
 
 A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](reference-terminology.md#broker). The Pulsar broker processes the messages.
 
-### Send modes
+### Send mode
 
 Producers send messages to brokers synchronously (sync) or asynchronously (async).
 
@@ -51,7 +51,7 @@ For more information, see [PIP 68: Exclusive Producer](https://github.com/apache
 You can set producer access mode through Java Client API. For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
 
 
-## Consumers
+## Consumer
 
 A consumer is a process that attaches to a topic via a subscription and then receives messages.
 
@@ -59,7 +59,7 @@ A consumer is a process that attaches to a topic via a subscription and then rec
 
 A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
-### Receive modes
+### Receive mode
 
 Messages are received from [brokers](reference-terminology.md#broker) either synchronously (sync) or asynchronously (async).
 
@@ -68,13 +68,13 @@ Messages are received from [brokers](reference-terminology.md#broker) either syn
 | Sync receive  | A sync receive is blocked until a message is available.                                                                                                                                                  |
 | Async receive | An async receive returns immediately with a future value—for example, a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture) in Java—that completes once a new message is available. |
 
-### Listeners
+### Listener
 
 Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a {@inject: javadoc:MesssageListener:/client/org/apache/pulsar/client/api/MessageListener} interface. In this interface, the `received` method is called whenever a new message is received.
 
-## Reader interface
+## Reader
 
-In Pulsar, the "standard" [consumer interface](#consumers) involves using consumers to listen on [topics](reference-terminology.md#topic), process incoming messages, and finally acknowledge those messages when they are processed. Whenever a new subscription is created, it is initially positioned at the end of the topic (by default), and consumers associated with that subscription begin reading with the first message created afterward.  Whenever a consumer connects to a topic using a pre-existing subscription, it begins reading from the earliest message un-acked within that subscription. In summary, with the consumer interface, subscription cursors are automatically managed by Pulsar in response to [message acknowledgments](concepts-messaging.md#acknowledgment).
+In Pulsar, the "standard" [consumer interface](#consumer) involves using consumers to listen on [topics](reference-terminology.md#topic), process incoming messages, and finally acknowledge those messages when they are processed. Whenever a new subscription is created, it is initially positioned at the end of the topic (by default), and consumers associated with that subscription begin reading with the first message created afterward.  Whenever a consumer connects to a topic using a pre-existing subscription, it begins reading from the earliest message un-acked within that subscription. In summary, with the consumer interface, subscription cursors are automatically managed by Pulsar in response to [message acknowledgments](concepts-messaging.md#acknowledgment).
 
 The **reader interface** for Pulsar enables applications to manually manage cursors. When you use a reader to connect to a topic---rather than a consumer---you need to specify *which* message the reader begins reading from when it connects to a topic. When connecting to a topic, the reader interface enables you to begin with:
 
@@ -96,46 +96,6 @@ Please also note that a reader can have a "backlog", but the metric is only used
 
 ![The Pulsar consumer and reader interfaces](/assets/pulsar-reader-consumer-interfaces.png)
 
-Here's a Java example that begins reading from the earliest available message on a topic:
-
-```java
-import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.MessageId;
-import org.apache.pulsar.client.api.Reader;
-
-// Create a reader on a topic and for a specific message (and onward)
-Reader<byte[]> reader = pulsarClient.newReader()
-    .topic("reader-api-test")
-    .startMessageId(MessageId.earliest)
-    .create();
-
-while (true) {
-    Message message = reader.readNext();
-
-    // Process the message
-}
-```
-
-To create a reader that reads from the latest available message:
-
-```java
-Reader<byte[]> reader = pulsarClient.newReader()
-    .topic(topic)
-    .startMessageId(MessageId.latest)
-    .create();
-```
-
-To create a reader that reads from some message between the earliest and the latest:
-
-```java
-byte[] msgIdBytes = // Some byte array
-MessageId id = MessageId.fromByteArray(msgIdBytes);
-Reader<byte[]> reader = pulsarClient.newReader()
-    .topic(topic)
-    .startMessageId(id)
-    .create();
-```
-
 ## TableView
 
 The TableView interface serves an encapsulated access pattern, providing a continuously updated key-value map view of the compacted topic data. Messages without keys will be ignored.
@@ -149,4 +109,5 @@ Each TableView uses one Reader instance per partition, and reads the topic start
 :::
 
 The following figure illustrates the dynamic construction of a TableView updated with newer values of each key.
+
 ![TableView](/assets/tableview.png)

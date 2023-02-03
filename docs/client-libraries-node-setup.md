@@ -4,7 +4,7 @@ title: Set up Pulsar Node.js client
 sidebar_label: "Set up"
 ---
 
-## Install Node.js client
+## Install Node.js client library
 
 :::tip
 
