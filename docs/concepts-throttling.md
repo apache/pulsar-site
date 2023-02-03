@@ -8,7 +8,7 @@ sidebar_label: "Message throttling"
 
 ### What is message dispatch throttling?
 
-Large message payloads can cause memory usage spikes that lead to performance decreases. Pulsar adopts a rate-limit throttling mechanism for message dispatch, avoiding a traffic surge and improving message deliverability. It allows you to set a threshold to limit the number of messages and the byte size of entries that can be delivered to clients, blocking subsequent deliveries when the traffic per unit of time exceeds the threshold.
+Large message payloads can cause memory usage spikes that lead to performance decreases. Pulsar adopts a rate-limit throttling mechanism for message dispatch, avoiding a traffic surge and improving message deliverability. You can set a threshold to limit the number of messages and the byte size of entries that can be delivered to clients, blocking subsequent deliveries when the traffic per unit of time exceeds the threshold.
 
 For example, when you configure the dispatch rate limit to 10 messages per second, then the number of messages that can be delivered to the client per second is up to 10.
 
@@ -20,7 +20,7 @@ Message dispatch throttling brings the following benefits in detail:
 
 - **Limit broker’s read request loads to BookKeeper**
 
-  Messages are persistently stored in the BookKeeper cluster. If a large number of read requests cannot be fulfilled using the cached data, the BookKeeper cluster may become too busy to respond, and the broker's I/O or CPU resources can be fully occupied. Using the message dispatch throttling feature can make Pulsar work steadily by limiting the broker’s I/O and CPU load, as well as BookKeeper’s read request load.
+  Messages are persistently stored in the BookKeeper cluster. If a large number of read requests cannot be fulfilled using the cached data, the BookKeeper cluster may become too busy to respond, and the broker's I/O or CPU resources can be fully occupied. Using the message dispatch throttling feature can regulate the data flow by limiting the broker’s I/O and CPU load, as well as BookKeeper’s read request load.
 
 - **Balance the allocation of broker’s hardware resources at topic/subscription levels**
 
@@ -28,19 +28,18 @@ Message dispatch throttling brings the following benefits in detail:
 
 - **Limit the allocation of client’s hardware resources at topic/subscription levels**
 
-  When there is a large backlog of messages to consume, clients may receive a large amount of data in a short period of time, which monopolizes their computing resources. Since the client has no mechanisms to proactively limit the consumption rate, using the message dispatch throttling feature can also limit the allocation of the client’s hardware resources.
+  When there is a large backlog of messages to consume, clients may receive a large amount of data in a short period of time, which monopolizes their computing resources. Since the client has no mechanisms to proactively limit the consumption rate, using the message dispatch throttling feature can also regulate the allocation of the client’s hardware resources.
 
 ### How it works?
 
 The process of message dispatch throttling can be divided into the following steps:
 1. The broker approximates the number of entries to read from the bookies by calculating the remaining quota. 
 2. The broker reads the messages from the bookies.
-3. The broker dispatches the messages to the client and updates the counter to decrease the quota.
+3. The broker dispatches the messages to the client and updates the counter to decrease the quota. A scheduled task refreshes the quota when a throttling period ends.
 
 :::note
 
 - The quota cannot be decreased before step 3, because the broker doesn’t know the actual number of messages per entry or the actual entry size until it reads the data.
-- A scheduled task refreshes the quota when a throttling period ends.
 - Operations like `seek` or `redeliver` may deliver messages to a client multiple times. The broker counts them as different messages and updates the counter.
 
 :::
@@ -137,7 +136,7 @@ Message dispatch throttling may cause messages over-delivered per unit of time d
 
    **Workaround**
 
-   Configuring `preciseDispatcherFlowControl` or `dispatchThrottlingOnBatchMessageEnabled` can improve the over-delivery issue. See [Throttling configurations](#throttling-configurations) for more details.
+   Configuring `preciseDispatcherFlowControl` or `dispatchThrottlingOnBatchMessageEnabled` can mitigate the over-delivery issue. For example, turning on `preciseDispatcherFlowControl` can mitigate the limitation by pre-decrementing the quota using the approximated average message count per entry. See [Throttling configurations](#throttling-configurations) for more details.
 
 2. **Concurrent throttling processes may not decrease the quota in a timely manner.**
 
