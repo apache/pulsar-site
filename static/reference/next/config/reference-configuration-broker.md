@@ -550,6 +550,17 @@ In FlowOrQpsEquallyDivideBundleSplitAlgorithm, if msgRate \>= loadBalancerNamesp
 
 **Category**: Load Balancer
 
+### loadBalanceUnloadDelayInSeconds
+Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `long`
+
+**Default**: `600`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerAutoBundleSplitEnabled
 enable/disable automatic namespace bundle split
 
@@ -605,6 +616,28 @@ BandwithOut Resource Usage Weight
 
 **Category**: Load Balancer
 
+### loadBalancerBrokerLoadDataTTLInSeconds
+Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default is loadBalancerReportUpdateMaxIntervalMinutes * 2. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `long`
+
+**Default**: `1800`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBrokerLoadTargetStd
+The target standard deviation of the resource usage across brokers (100% resource usage is 1.0 load). The shedder logic tries to distribute bundle load across brokers to meet this target std. The smaller value will incur load balancing more frequently. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `double`
+
+**Default**: `0.25`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBrokerMaxTopics
 Usage threshold to allocate max number of topics to broker
 
@@ -655,6 +688,17 @@ CPU Resource Usage Weight
 **Type**: `double`
 
 **Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerDebugModeEnabled
+Option to enable the debug mode for the load balancer logics. The debug mode prints more logs to provide more information such as load balance states and decisions. (only used in load balancer extension logics)
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -732,6 +776,17 @@ load balance load shedding strategy (It requires broker restart if value is chan
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerMaxNumberOfBrokerTransfersPerCycle
+Maximum number of brokers to transfer bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `int`
+
+**Default**: `3`
 
 **Dynamic**: `true`
 
@@ -910,6 +965,17 @@ Broker periodically checks whether some traffic should be offload from some over
 **Type**: `int`
 
 **Default**: `1`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerTransferEnabled
+Option to enable the bundle transfer mode when distributing bundle loads. On: transfer bundles from overloaded brokers to underloaded -- pre-assigns the destination broker upon unloading). Off: unload bundles from overloaded brokers -- post-assigns the destination broker upon lookups). (only used in load balancer extension TransferSheddeer)
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `true`
 
