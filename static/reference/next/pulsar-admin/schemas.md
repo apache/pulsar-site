@@ -29,7 +29,7 @@ $ pulsar-admin schemas get options
 
 ## <em>delete</em>
 
-Delete the latest schema for a topic
+Delete all versions schema of a topic
 
 **Command:**
 
