@@ -1242,12 +1242,12 @@ Options
 
 | Flag                 | Description                                                                                                                                                                                          | Default             |
 |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| `-t`, `--type`       | Backlog quota type to set. The valid options are: `destination_storage`, `message_age`                                                                                                               | destination_storage |
-| `-l`, `--limit`      | If you set backlog quota type to `destination_storage`, this parameter can set the backlog size limit (for example `10M` or `16G`), non-positive number for disabling size limit.                    ||
-| `-lt`, `--limitTime` | If you set backlog quota type to `message_age`, this parameter can set the time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit. ||
-| `-p`, `--policy`     | The retention policy to enforce when the limit is reached. The valid options are: `producer_request_hold`, `producer_exception` or `consumer_backlog_eviction`                                       |
+| `-t`, `--type`       | The backlog quota type. The valid options are: `destination_storage` and `message_age`.                                                                                                               | destination_storage |
+| `-l`, `--limit`      | If the backlog quota type is set to `destination_storage`, you can use this parameter to set the backlog size limit (for example, `10MB` or `16GB`). To disable the size limit, use a non-positive number.                    ||
+| `-lt`, `--limitTime` | If the backlog quota type is set to `message_age`, you can use this parameter to set the time limit in seconds (or minutes, hours, days, weeks, e.g., 100m, 3h, 2d, 5w). To disable the time limit, use a non-positive number. ||
+| `-p`, `--policy`     | The retention policy to enforce when the limit is reached. The valid options are: `producer_request_hold`, `producer_exception`, and `consumer_backlog_eviction`.                                       |
 
-If you want set both time limit and size limit, you can set them separately.
+If you want to set both the time limit and the size limit, you need to set them separately.
 
 Example
 
