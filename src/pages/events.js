@@ -51,11 +51,11 @@ export default function Events() {
               <div className="mt-12 md:mt-0 md:w-1/2">
                 <FeaturedEvent
                   hidden="false" // use true to hide and false to show the featured event card
-                  title="Pulsar Summit Asia 2022"
-                  description="Pulsar Summit Asia 2022 was held on November 19th and 20th, 2022. All the sessions are available now!"
+                  title="Pulsar Virtual Summit Europe 2023"
+                  description="Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! The CFP is now open!"
                   date=""
-                  link="https://www.youtube.com/playlist?list=PLqRma1oIkcWgeNb3kgzqFyg5sywH8S4yy"
-                  linkText="Watch on YouTube"
+                  link="https://sessionize.com/pulsar-virtual-summit-europe-2023/"
+                  linkText="Submit your session"
                 />
               </div>
             </div>
