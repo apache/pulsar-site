@@ -396,7 +396,7 @@ admin.namespaces().setIsAllowAutoUpdateSchema("my-namspace", false);
 
 ### Enable schema validation enforcement
 
-To enforce schema validation enforcement at the **cluster** level, you can configure `schemaValidationEnforced` to `true` in the `conf/broker.conf` file. 
+To enforce schema validation enforcement at the **cluster** level, you can configure `isSchemaValidationEnforced` to `true` in the `conf/broker.conf` file. 
 
 To enable schema validation enforcement at the **namespace** level, you can use one of the following commands.
 
