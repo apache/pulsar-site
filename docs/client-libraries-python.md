@@ -9,12 +9,12 @@ You can use a Pulsar Python client to create producers, consumers, and readers i
 ## Get started
 
 1. [Set up Python client library](client-libraries-python-setup.md)
-2. [Initilize a Python client](client-libraries-python-initialize.md)
+2. [Initialize a Python client](client-libraries-python-initialize.md)
 3. [Use a Python client](client-libraries-python-use.md)
 
 ## What's next?
 
-- [Work with clients](client-libraries-client-objects.md)
+- [Work with clients](client-libraries-clients.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)
 - [Work with readers](client-libraries-readers.md)

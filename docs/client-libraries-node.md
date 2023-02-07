@@ -9,12 +9,12 @@ You can use a Pulsar Node.js client to create producers, consumers, and readers 
 ## Get started
 
 1. [Set up Node.js client library](client-libraries-node-setup.md)
-2. [Initilize a Node.js client](client-libraries-node-initialize.md)
+2. [Initialize a Node.js client](client-libraries-node-initialize.md)
 3. [Use a Node.js client](client-libraries-node-use.md)
 
 ## What's next?
 
-- [Work with clients](client-libraries-client-objects.md)
+- [Work with clients](client-libraries-clients.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)
 - [Work with readers](client-libraries-readers.md)

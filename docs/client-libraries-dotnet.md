@@ -14,7 +14,7 @@ You can use the Pulsar C# client (DotPulsar) to create Pulsar producers, consume
 
 ## What's next?
 
-- [Work with clients](client-libraries-client-objects.md)
+- [Work with clients](client-libraries-clients.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)
 - [Work with readers](client-libraries-readers.md)

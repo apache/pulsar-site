@@ -1,7 +1,7 @@
 ---
-id: client-libraries-client-objects
-title: Work with client object
-sidebar_label: "Work with client object"
+id: client-libraries-clients
+title: Work with clients
+sidebar_label: "Work with clients"
 ---
 
 ````mdx-code-block

@@ -9,12 +9,12 @@ You can use a Pulsar Java client to create Pulsar producers, consumers, and read
 ## Get started
 
 1. [Set up Java client library](client-libraries-java-setup.md)
-2. [Initilize a Java client](client-libraries-java-initialize.md)
+2. [Initialize a Java client](client-libraries-java-initialize.md)
 3. [Use a Java client](client-libraries-java-use.md)
 
 ## What's next?
 
-- [Work with clients](client-libraries-client-objects.md)
+- [Work with clients](client-libraries-clients.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)
 - [Work with readers](client-libraries-readers.md)

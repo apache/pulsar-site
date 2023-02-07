@@ -9,12 +9,12 @@ You can use a Pulsar [Go client](https://github.com/apache/pulsar-client-go) to 
 ## Get started
 
 1. [Set up Go client library](client-libraries-go-setup.md)
-2. [Initilize a Go client](client-libraries-go-initialize.md)
+2. [Initialize a Go client](client-libraries-go-initialize.md)
 3. [Use a Go client](client-libraries-go-use.md)
 
 ## What's next?
 
-- [Work with clients](client-libraries-client-objects.md)
+- [Work with clients](client-libraries-clients.md)
 - [Work with producers](client-libraries-producers.md)
 - [Work with consumers](client-libraries-consumers.md)
 - [Work with readers](client-libraries-readers.md)

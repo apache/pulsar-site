@@ -11,426 +11,6 @@ import TabItem from '@theme/TabItem';
 
 After setting up your clients, you can explore more to start working with [consumers](concepts-clients.md#consumers).
 
-## Receive messages
-
-This example shows how a consumer receives messages from a topic.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="C#"
-  values={[{"label":"C#","value":"C#"}]}>
-<TabItem value="C#">
-
-   ```csharp
-   await foreach (var message in consumer.Messages())
-   {
-       Console.WriteLine("Received: " + Encoding.UTF8.GetString(message.Data.ToArray()));
-   }
-   ```
-
- </TabItem>
-</Tabs>
-````
-
-## Receive messages with timeout
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Go"
-  values={[{"label":"Go","value":"Go"}]}>
-  <TabItem value="Go">
-
-
-   ```go
-   client, err := pulsar.NewClient(pulsar.ClientOptions{
-       URL: "pulsar://localhost:6650",
-   })
-   if err != nil {
-       log.Fatal(err)
-   }
-   defer client.Close()
-
-   topic := "test-topic-with-no-messages"
-   ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
-   defer cancel()
-
-   // create consumer
-   consumer, err := client.Subscribe(pulsar.ConsumerOptions{
-       Topic:            topic,
-       SubscriptionName: "my-sub1",
-       Type:             pulsar.Shared,
-   })
-   if err != nil {
-       log.Fatal(err)
-   }
-   defer consumer.Close()
-
-   // receive message with a timeout
-   msg, err := consumer.Receive(ctx)
-   if err != nil {
-       log.Fatal(err)
-   }
-   fmt.Println(msg.Payload())
-   ```
-
-  </TabItem>
-</Tabs>
-````
-
-## Async receive messages
-
-The `receive` method receives messages synchronously (the consumer process is blocked until a message is available). You can also use [async receive](concepts-clients.md#receive-modes), which returns a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture) object immediately once a new message is available.
-
-The following is an example.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
-<TabItem value="Java">
-
-   ```java
-   CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
-   ```
-   
-   Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
-
- </TabItem>
-</Tabs>
-````
-
-## Batch receive messages
-
-Use `batchReceive` to receive multiple messages for each call. 
-
-The following is an example.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
-<TabItem value="Java">
-
-```java
-Messages messages = consumer.batchReceive();
-for (Object message : messages) {
-  // do something
-}
-consumer.acknowledge(messages)
-```
-
-  </TabItem>
-</Tabs>
-````
-
-:::note
-
-Batch receive policy limits the number and bytes of messages in a single batch. You can specify a timeout to wait for enough messages.
-The batch receive is completed if any of the following conditions are met: enough number of messages, bytes of messages, wait timeout.
-
-```java
-Consumer consumer = client.newConsumer()
-.topic("my-topic")
-.subscriptionName("my-subscription")
-.batchReceivePolicy(BatchReceivePolicy.builder()
-.maxNumMessages(100)
-.maxNumBytes(1024 * 1024)
-.timeout(200, TimeUnit.MILLISECONDS)
-.build())
-.subscribe();
-```
-
-The default batch receive policy is:
-
-```java
-BatchReceivePolicy.builder()
-.maxNumMessage(-1)
-.maxNumBytes(10 * 1024 * 1024)
-.timeout(100, TimeUnit.MILLISECONDS)
-.build();
-```
-
-:::
-
-## Acknowledge messages
-
-Messages can be acknowledged individually or cumulatively. For details about message acknowledgment, see [acknowledgment](concepts-messaging.md#acknowledgment).
-
-### Acknowledge messages individually
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
-<TabItem value="Java">
-
-
-
-  </TabItem>
-  <TabItem value="C#">
-
-  ```csharp
-  await consumer.Acknowledge(message);
-  ```
-
-  </TabItem>
-</Tabs>
-````
-
-### Acknowledge messages cumulatively
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
-<TabItem value="Java">
-
-
-  </TabItem>
-  <TabItem value="C#">
-
-  ```csharp
-  await consumer.AcknowledgeCumulative(message);
-  ```
-
-  </TabItem>
-</Tabs>
-````
-
-## Negative acknowledgment redelivery backoff
-
-The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achieve redelivery with different delays by setting `redeliveryCount ` of messages. 
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
-<TabItem value="Java">
-
-```java
-Consumer consumer =  client.newConsumer()
-        .topic("my-topic")
-        .subscriptionName("my-subscription")
-        .negativeAckRedeliveryBackoff(MultiplierRedeliveryBackoff.builder()
-                .minDelayMs(1000)
-                .maxDelayMs(60 * 1000)
-                .build())
-        .subscribe();
-```
-
-  </TabItem>
-</Tabs>
-````
-
-## Acknowledgment timeout redelivery backoff
-
-The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can redeliver messages with different delays by setting the number of times the messages are retried.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
-<TabItem value="Java">
-
-```java
-Consumer consumer =  client.newConsumer()
-        .topic("my-topic")
-        .subscriptionName("my-subscription")
-        .ackTimeout(10, TimeUnit.SECOND)
-        .ackTimeoutRedeliveryBackoff(MultiplierRedeliveryBackoff.builder()
-                .minDelayMs(1000)
-                .maxDelayMs(60000)
-                .multiplier(2)
-                .build())
-        .subscribe();
-```
-
-  </TabItem>
-</Tabs>
-````
-
-The message redelivery behavior should be as follows.
-
-Redelivery count | Redelivery delay
-:--------------------|:-----------
-1 | 10 + 1 seconds
-2 | 10 + 2 seconds
-3 | 10 + 4 seconds
-4 | 10 + 8 seconds
-5 | 10 + 16 seconds
-6 | 10 + 32 seconds
-7 | 10 + 60 seconds
-8 | 10 + 60 seconds
-
-:::note
-
-- The `negativeAckRedeliveryBackoff` does not work with `consumer.negativeAcknowledge(MessageId messageId)` because you are not able to get the redelivery count from the message ID.
-- If a consumer crashes, it triggers the redelivery of unacked messages. In this case, `RedeliveryBackoff` does not take effect and the messages might get redelivered earlier than the delay time from the backoff.
-
-:::
-
-## Configure chunking
-
-You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring specific parameters. When the configured threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later.
-
-The following is an example of how to configure message chunking.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
-<TabItem value="Java">
-
-   ```java
-   Consumer<byte[]> consumer = client.newConsumer()
-        .topic(topic)
-        .subscriptionName("test")
-        .autoAckOldestChunkedMessageOnQueueFull(true)
-        .maxPendingChunkedMessage(100)
-        .expireTimeOfIncompleteChunkedMessage(10, TimeUnit.MINUTES)
-        .subscribe();
-   ```
-   
- </TabItem>
- <TabItem value="C++">
-
-   ```cpp
-   ConsumerConfiguration conf;
-   conf.setAutoAckOldestChunkedMessageOnQueueFull(true);
-   conf.setMaxPendingChunkedMessage(100);
-   Consumer consumer;
-   client.subscribe("my-topic", "my-sub", conf, consumer);
-   ```
-
- </TabItem>
- <TabItem value="Go">
- Coming soon...
-
- </TabItem>
- <TabItem value="Python">
-
-   ```python
-   consumer = client.subscribe(topic, "my-subscription",
-                    max_pending_chunked_message=10,
-                    auto_ack_oldest_chunked_message_on_queue_full=False
-                    )
-   ```
-
-  </TabItem>
-</Tabs>
-````
-
-## Create a consumer with a message listener
-
-You can avoid running a loop by blocking calls with an event-based style by using a message listener which is invoked for each message that is received.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="C++"
-  values={[{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
-<TabItem value="C++">
-
-This example starts a subscription at the earliest offset and consumes 100 messages.
-
-```cpp
-#include <pulsar/Client.h>
-#include <atomic>
-#include <thread>
-
-using namespace pulsar;
-
-std::atomic<uint32_t> messagesReceived;
-
-void handleAckComplete(Result res) {
-    std::cout << "Ack res: " << res << std::endl;
-}
-
-void listener(Consumer consumer, const Message& msg) {
-    std::cout << "Got message " << msg << " with content '" << msg.getDataAsString() << "'" << std::endl;
-    messagesReceived++;
-    consumer.acknowledgeAsync(msg.getMessageId(), handleAckComplete);
-}
-
-int main() {
-    Client client("pulsar://localhost:6650");
-
-    Consumer consumer;
-    ConsumerConfiguration config;
-    config.setMessageListener(listener);
-    config.setSubscriptionInitialPosition(InitialPositionEarliest);
-    Result result = client.subscribe("persistent://public/default/my-topic", "consumer-1", config, consumer);
-    if (result != ResultOk) {
-        std::cout << "Failed to subscribe: " << result << std::endl;
-        return -1;
-    }
-
-    // wait for 100 messages to be consumed
-    while (messagesReceived < 100) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-
-    std::cout << "Finished consuming asynchronously!" << std::endl;
-
-    client.close();
-    return 0;
-}
-```
-
-</TabItem>
-<TabItem value="Go">
-
-```go
-import (
-    "fmt"
-    "log"
-
-    "github.com/apache/pulsar-client-go/pulsar"
-)
-
-func main() {
-    client, err := pulsar.NewClient(pulsar.ClientOptions{URL: "pulsar://localhost:6650"})
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    defer client.Close()
-
-    // we can listen this channel
-    channel := make(chan pulsar.ConsumerMessage, 100)
-
-    options := pulsar.ConsumerOptions{
-        Topic:            "topic-1",
-        SubscriptionName: "my-subscription",
-        Type:             pulsar.Shared,
-        // fill `MessageChannel` field will create a listener
-        MessageChannel: channel,
-    }
-
-    consumer, err := client.Subscribe(options)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    defer consumer.Close()
-
-    // Receive messages from channel. The channel returns a struct `ConsumerMessage` which contains message and the consumer from where
-    // the message was received. It's not necessary here since we have 1 single consumer, but the channel could be
-    // shared across multiple consumers as well
-    for cm := range channel {
-        consumer := cm.Consumer
-        msg := cm.Message
-        fmt.Printf("Consumer %s received a message, msgId: %v, content: '%s'\n",
-            consumer.Name(), msg.ID(), string(msg.Payload()))
-
-        consumer.Ack(msg)
-    }
-}
-```
-
-  </TabItem>
-</Tabs>
-````
-
 ## Subscribe to topics
 
 Pulsar has various [subscription types](concepts-messaging.md#subscription-types) to match different scenarios. A topic can have multiple subscriptions with different subscription types. However, a subscription can only have one subscription type at a time.
@@ -491,17 +71,17 @@ Consumer consumer = client.newConsumer()
 </Tabs>
 ````
 
-Only the first consumer is allowed to the subscription, other consumers receive an error. The first consumer receives all 10 messages, and the consuming order is the same as the producing order.
+Only the first consumer is allowed to the subscription, and other consumers receive an error. The first consumer receives all 10 messages, and the consuming order is the same as the producing order.
 
 :::note
 
-If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error. 
+If the topic is partitioned, the first consumer subscribes to all partitioned topics, and other consumers are not assigned with partitions and receive an error. 
 
 :::
 
 #### Failover
 
-Create new consumers and subscribe with the`Failover` subscription type.
+Create new consumers and subscribe with the `Failover` subscription type.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -585,7 +165,7 @@ Consumer consumer2 = client.newConsumer()
 </Tabs>
 ````
 
-In Shared subscription type, multiple consumers can attach to the same subscription and messages are delivered in a round-robin distribution across consumers.
+In `Shared` subscription type, multiple consumers can attach to the same subscription and messages are delivered in a round-robin distribution across consumers.
 
 If a broker dispatches only one message at a time, consumer1 receives the following information.
 
@@ -865,6 +445,426 @@ This example shows how a consumer unsubscribes from a topic.
 A consumer cannot be used and is disposed once the consumer unsubscribes from a topic.
 
 :::
+
+## Receive messages
+
+This example shows how a consumer receives messages from a topic.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="C#"
+  values={[{"label":"C#","value":"C#"}]}>
+<TabItem value="C#">
+
+   ```csharp
+   await foreach (var message in consumer.Messages())
+   {
+       Console.WriteLine("Received: " + Encoding.UTF8.GetString(message.Data.ToArray()));
+   }
+   ```
+
+ </TabItem>
+</Tabs>
+````
+
+## Receive messages with timeout
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Go"
+  values={[{"label":"Go","value":"Go"}]}>
+  <TabItem value="Go">
+
+
+   ```go
+   client, err := pulsar.NewClient(pulsar.ClientOptions{
+       URL: "pulsar://localhost:6650",
+   })
+   if err != nil {
+       log.Fatal(err)
+   }
+   defer client.Close()
+
+   topic := "test-topic-with-no-messages"
+   ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+   defer cancel()
+
+   // create consumer
+   consumer, err := client.Subscribe(pulsar.ConsumerOptions{
+       Topic:            topic,
+       SubscriptionName: "my-sub1",
+       Type:             pulsar.Shared,
+   })
+   if err != nil {
+       log.Fatal(err)
+   }
+   defer consumer.Close()
+
+   // receive message with a timeout
+   msg, err := consumer.Receive(ctx)
+   if err != nil {
+       log.Fatal(err)
+   }
+   fmt.Println(msg.Payload())
+   ```
+
+  </TabItem>
+</Tabs>
+````
+
+## Async receive messages
+
+The `receive` method receives messages synchronously (the consumer process is blocked until a message is available). You can also use [async receive](concepts-clients.md#receive-modes), which returns a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture) object immediately once a new message is available.
+
+The following is an example.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+   ```java
+   CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
+   ```
+   
+   Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+
+ </TabItem>
+</Tabs>
+````
+
+## Batch receive messages
+
+Use `batchReceive` to receive multiple messages for each call. 
+
+The following is an example.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+Messages messages = consumer.batchReceive();
+for (Object message : messages) {
+  // do something
+}
+consumer.acknowledge(messages)
+```
+
+  </TabItem>
+</Tabs>
+````
+
+:::note
+
+Batch receive policy limits the number and bytes of messages in a single batch. You can specify a timeout to wait for enough messages.
+The batch receive is completed if any of the following conditions are met: enough number of messages, bytes of messages, wait timeout.
+
+```java
+Consumer consumer = client.newConsumer()
+.topic("my-topic")
+.subscriptionName("my-subscription")
+.batchReceivePolicy(BatchReceivePolicy.builder()
+.maxNumMessages(100)
+.maxNumBytes(1024 * 1024)
+.timeout(200, TimeUnit.MILLISECONDS)
+.build())
+.subscribe();
+```
+
+The default batch receive policy is:
+
+```java
+BatchReceivePolicy.builder()
+.maxNumMessage(-1)
+.maxNumBytes(10 * 1024 * 1024)
+.timeout(100, TimeUnit.MILLISECONDS)
+.build();
+```
+
+:::
+
+## Acknowledge messages
+
+Messages can be acknowledged individually or cumulatively. For details about message acknowledgment, see [acknowledgment](concepts-messaging.md#acknowledgment).
+
+### Acknowledge messages individually
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
+<TabItem value="Java">
+
+
+
+  </TabItem>
+  <TabItem value="C#">
+
+  ```csharp
+  await consumer.Acknowledge(message);
+  ```
+
+  </TabItem>
+</Tabs>
+````
+
+### Acknowledge messages cumulatively
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
+<TabItem value="Java">
+
+
+  </TabItem>
+  <TabItem value="C#">
+
+  ```csharp
+  await consumer.AcknowledgeCumulative(message);
+  ```
+
+  </TabItem>
+</Tabs>
+````
+
+## Negative acknowledgment redelivery backoff
+
+The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achieve redelivery with different delays by setting the redelivery count of messages. 
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+Consumer consumer =  client.newConsumer()
+        .topic("my-topic")
+        .subscriptionName("my-subscription")
+        .negativeAckRedeliveryBackoff(MultiplierRedeliveryBackoff.builder()
+                .minDelayMs(1000)
+                .maxDelayMs(60 * 1000)
+                .build())
+        .subscribe();
+```
+
+  </TabItem>
+</Tabs>
+````
+
+## Acknowledgment timeout redelivery backoff
+
+The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can redeliver messages with different delays by setting the number of times the messages are retried.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+Consumer consumer =  client.newConsumer()
+        .topic("my-topic")
+        .subscriptionName("my-subscription")
+        .ackTimeout(10, TimeUnit.SECOND)
+        .ackTimeoutRedeliveryBackoff(MultiplierRedeliveryBackoff.builder()
+                .minDelayMs(1000)
+                .maxDelayMs(60000)
+                .multiplier(2)
+                .build())
+        .subscribe();
+```
+
+  </TabItem>
+</Tabs>
+````
+
+The message redelivery behavior should be as follows.
+
+Redelivery count | Redelivery delay
+:--------------------|:-----------
+1 | 10 + 1 seconds
+2 | 10 + 2 seconds
+3 | 10 + 4 seconds
+4 | 10 + 8 seconds
+5 | 10 + 16 seconds
+6 | 10 + 32 seconds
+7 | 10 + 60 seconds
+8 | 10 + 60 seconds
+
+:::note
+
+- The `negativeAckRedeliveryBackoff` does not work with `consumer.negativeAcknowledge(MessageId messageId)` because you are not able to get the redelivery count from the message ID.
+- If a consumer crashes, it triggers the redelivery of unacked messages. In this case, `RedeliveryBackoff` does not take effect and the messages might get redelivered earlier than the delay time from the backoff.
+
+:::
+
+## Configure chunking
+
+You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring specific parameters. When the configured threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later.
+
+The following is an example of how to configure message chunking.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
+<TabItem value="Java">
+
+   ```java
+   Consumer<byte[]> consumer = client.newConsumer()
+        .topic(topic)
+        .subscriptionName("test")
+        .autoAckOldestChunkedMessageOnQueueFull(true)
+        .maxPendingChunkedMessage(100)
+        .expireTimeOfIncompleteChunkedMessage(10, TimeUnit.MINUTES)
+        .subscribe();
+   ```
+   
+ </TabItem>
+ <TabItem value="C++">
+
+   ```cpp
+   ConsumerConfiguration conf;
+   conf.setAutoAckOldestChunkedMessageOnQueueFull(true);
+   conf.setMaxPendingChunkedMessage(100);
+   Consumer consumer;
+   client.subscribe("my-topic", "my-sub", conf, consumer);
+   ```
+
+ </TabItem>
+ <TabItem value="Go">
+ Coming soon...
+
+ </TabItem>
+ <TabItem value="Python">
+
+   ```python
+   consumer = client.subscribe(topic, "my-subscription",
+                    max_pending_chunked_message=10,
+                    auto_ack_oldest_chunked_message_on_queue_full=False
+                    )
+   ```
+
+  </TabItem>
+</Tabs>
+````
+
+## Create a consumer with a message listener
+
+You can avoid running a loop by blocking calls with an event-based style by using a message listener which is invoked for each message that is received.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="C++"
+  values={[{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+<TabItem value="C++">
+
+This example starts a subscription at the earliest offset and consumes 100 messages.
+
+```cpp
+#include <pulsar/Client.h>
+#include <atomic>
+#include <thread>
+
+using namespace pulsar;
+
+std::atomic<uint32_t> messagesReceived;
+
+void handleAckComplete(Result res) {
+    std::cout << "Ack res: " << res << std::endl;
+}
+
+void listener(Consumer consumer, const Message& msg) {
+    std::cout << "Got message " << msg << " with content '" << msg.getDataAsString() << "'" << std::endl;
+    messagesReceived++;
+    consumer.acknowledgeAsync(msg.getMessageId(), handleAckComplete);
+}
+
+int main() {
+    Client client("pulsar://localhost:6650");
+
+    Consumer consumer;
+    ConsumerConfiguration config;
+    config.setMessageListener(listener);
+    config.setSubscriptionInitialPosition(InitialPositionEarliest);
+    Result result = client.subscribe("persistent://public/default/my-topic", "consumer-1", config, consumer);
+    if (result != ResultOk) {
+        std::cout << "Failed to subscribe: " << result << std::endl;
+        return -1;
+    }
+
+    // wait for 100 messages to be consumed
+    while (messagesReceived < 100) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    std::cout << "Finished consuming asynchronously!" << std::endl;
+
+    client.close();
+    return 0;
+}
+```
+
+</TabItem>
+<TabItem value="Go">
+
+```go
+import (
+    "fmt"
+    "log"
+
+    "github.com/apache/pulsar-client-go/pulsar"
+)
+
+func main() {
+    client, err := pulsar.NewClient(pulsar.ClientOptions{URL: "pulsar://localhost:6650"})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    defer client.Close()
+
+    // we can listen this channel
+    channel := make(chan pulsar.ConsumerMessage, 100)
+
+    options := pulsar.ConsumerOptions{
+        Topic:            "topic-1",
+        SubscriptionName: "my-subscription",
+        Type:             pulsar.Shared,
+        // fill `MessageChannel` field will create a listener
+        MessageChannel: channel,
+    }
+
+    consumer, err := client.Subscribe(options)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    defer consumer.Close()
+
+    // Receive messages from channel. The channel returns a struct `ConsumerMessage` which contains message and the consumer from where
+    // the message was received. It's not necessary here since we have 1 single consumer, but the channel could be
+    // shared across multiple consumers as well
+    for cm := range channel {
+        consumer := cm.Consumer
+        msg := cm.Message
+        fmt.Printf("Consumer %s received a message, msgId: %v, content: '%s'\n",
+            consumer.Name(), msg.ID(), string(msg.Payload()))
+
+        consumer.Ack(msg)
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+````
 
 ## Intercept messages
 
