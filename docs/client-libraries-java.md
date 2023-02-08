@@ -4,7 +4,7 @@ title: Pulsar Java client
 sidebar_label: "Java"
 ---
 
-You can use a Pulsar Java client to create Pulsar producers, consumers, and readers in Java and perform [administrative tasks](admin-api-overview.md). All the methods in Java clients are thread-safe. The current Java client version is **@pulsar:version@**.
+You can use a Pulsar Java client to create Pulsar [producers](concepts-clients.md#producer), [consumers](concepts-clients.md#consumer), and [readers](concepts-clients.md#reader) in Java and perform [administrative tasks](admin-api-overview.md). All the methods in Java clients are thread-safe. The current Java client version is **@pulsar:version@**.
 
 ## Get started
 

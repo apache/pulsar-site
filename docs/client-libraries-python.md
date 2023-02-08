@@ -4,7 +4,7 @@ title: Pulsar Python client
 sidebar_label: "Python client"
 ---
 
-You can use a Pulsar Python client to create producers, consumers, and readers in Python. All the methods in Pulsar Python clients are thread-safe.
+You can use a Pulsar Python client to create Pulsar [producers](concepts-clients.md#producer), [consumers](concepts-clients.md#consumer), and [readers](concepts-clients.md#reader) in Python. All the methods in Pulsar Python clients are thread-safe.
 
 ## Get started
 

@@ -4,7 +4,7 @@ title: Pulsar C# client
 sidebar_label: "C# client"
 ---
 
-You can use the Pulsar C# client (DotPulsar) to create Pulsar producers, consumers, and readers in C#. All the methods in the producer, consumer, and reader of a C# client are thread-safe.
+You can use the Pulsar C# client (DotPulsar) to create Pulsar [producers](concepts-clients.md#producer), [consumers](concepts-clients.md#consumer), and [readers](concepts-clients.md#reader) in C#. All the methods in the producer, consumer, and reader of a C# client are thread-safe.
 
 ## Get started
 

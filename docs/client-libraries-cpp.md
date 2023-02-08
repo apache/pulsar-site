@@ -4,7 +4,7 @@ title: Pulsar C++ client
 sidebar_label: "C++ client"
 ---
 
-You can use a Pulsar C++ client to create producers, consumers, and readers. All the methods in Pulsar C++ clients are thread-safe.
+You can use a Pulsar C++ client to create Pulsar [producers](concepts-clients.md#producer), [consumers](concepts-clients.md#consumer), and [readers](concepts-clients.md#reader) in C++. All the methods in Pulsar C++ clients are thread-safe.
 
 ## Get started
 

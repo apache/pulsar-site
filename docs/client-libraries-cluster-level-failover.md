@@ -131,7 +131,11 @@ Assume that you want to connect Pulsar client 1 to cluster A.
    
    The URL provider service manages all tokens and credentials. It returns different credentials based on different tokens and different target cluster URLs to different Pulsar clients.
 
-   **Note**: **The credential must be in a JSON file and contain parameters as shown**.
+   :::note
+   
+   The credential must be in a JSON file and contain parameters as shown.
+
+   :::
 
    ```java
    {
