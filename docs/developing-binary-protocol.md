@@ -435,7 +435,7 @@ Fields:
 
 ##### Command AckResponse
 
-An `AckResponse` is the broker’s response to acknowledge a request sent by the client. It contains the `consumer_id` sent in the request.
+An `AckResponse` is the broker's response to acknowledge a request sent by the client. It contains the `consumer_id` sent in the request.
 If a transaction is used, it contains both the Transaction ID and the Request ID that are sent in the request.
 The client finishes the specific request according to the Request ID.
 If the `error` field is set, it indicates that the request has failed.

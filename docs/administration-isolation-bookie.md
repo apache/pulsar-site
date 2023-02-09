@@ -49,7 +49,7 @@ Rack-aware placement policy enforces different data replicas to be placed in dif
 
 #### Qualified rack size of bookies
 
-When the available rack size of bookies can meet the requirements configured on a topic, the rack-aware placement policy can work well and you don’t need any extra configurations.
+When the available rack size of bookies can meet the requirements configured on a topic, the rack-aware placement policy can work well and you don't need any extra configurations.
 
 For example, the BookKeeper cluster has 4 racks and 13 bookie instances as shown in the following diagram. When a topic is configured with `EnsembleSize=3, WriteQuorum=3, AckQuorum=2`, the BookKeeper client chooses one bookie instance from three different racks to write data to, such as Bookie2, Bookie8, and Bookie12.
 

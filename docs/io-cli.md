@@ -255,16 +255,16 @@ pulsar-admin sources localrun options
 |`--destination-topic-name`|The Pulsar topic to which data is sent.
 |`--disk`|The disk (in bytes) that needs to be allocated per source instance (applicable only to the Docker runtime).|
 |`--hostname-verification-enabled`|Enable hostname verification.<br />**Default value: false**.
-|`--name`|The source’s name.|
-|`--namespace`|The source’s namespace.|
-|`--parallelism`|The source’s parallelism factor, that is, the number of source instances to run).|
+|`--name`|The source's name.|
+|`--namespace`|The source's namespace.|
+|`--parallelism`|The source's parallelism factor, that is, the number of source instances to run).|
 |`--processing-guarantees` | The processing guarantees (also named as delivery semantics) applied to the source. A source connector receives messages from external system and writes messages to a Pulsar topic. The `--processing-guarantees` is used to ensure the processing guarantees for writing messages to the Pulsar topic. <br />The available values are ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE.
 |`--ram`|The RAM (in bytes) that needs to be allocated per source instance (applicable only to the Docker runtime).|
 | `-st`, `--schema-type` | The schema type.<br /> Either a built-in schema (for example, AVRO and JSON) or custom schema class name to be used to encode messages emitted from source.
 |`--source-config`|Source config key/values.
-|`--source-config-file`|The path to a YAML config file specifying the source’s configuration.
+|`--source-config-file`|The path to a YAML config file specifying the source's configuration.
 |`--source-type`|The source's connector provider.
-|`--tenant`|The source’s tenant.
+|`--tenant`|The source's tenant.
 |`--tls-allow-insecure`|Allow insecure tls connection.<br />**Default value: false**.
 |`--tls-trust-cert-path`|The tls trust cert file path.
 |`--use-tls`|Use tls connection.<br />**Default value: false**.
@@ -546,17 +546,17 @@ pulsar-admin sinks localrun options
 |`--disk`|The disk (in bytes) that needs to be allocated per sink instance (applicable only to the Docker runtime).|
 |`--hostname-verification-enabled`|Enable hostname verification.<br />**Default value: false**.
 | `-i`, `--inputs` | The sink's input topic or topics (multiple topics can be specified as a comma-separated list).
-|`--name`|The sink’s name.|
-|`--namespace`|The sink’s namespace.|
-|`--parallelism`|The sink’s parallelism factor, that is, the number of sink instances to run).|
+|`--name`|The sink's name.|
+|`--namespace`|The sink's namespace.|
+|`--parallelism`|The sink's parallelism factor, that is, the number of sink instances to run).|
 |`--processing-guarantees`|The processing guarantees (also known as delivery semantics) applied to the sink. The `--processing-guarantees` implementation in Pulsar also relies on sink implementation. <br />The available values are ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE.
 |`--ram`|The RAM (in bytes) that needs to be allocated per sink instance (applicable only to the Docker runtime).|
 |`--retain-ordering` | Sink consumes and sinks messages in order.
 |`--sink-config`|sink config key/values.
-|`--sink-config-file`|The path to a YAML config file specifying the sink’s configuration.
+|`--sink-config-file`|The path to a YAML config file specifying the sink's configuration.
 |`--sink-type`|The sink's connector provider.
 |`--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer.
-|`--tenant`|The sink’s tenant.
+|`--tenant`|The sink's tenant.
 | `--timeout-ms` | The message timeout in milliseconds.
 | `--negative-ack-redelivery-delay-ms` | The negatively-acknowledged message redelivery delay in milliseconds. |
 |`--tls-allow-insecure`|Allow insecure tls connection.<br />**Default value: false**.

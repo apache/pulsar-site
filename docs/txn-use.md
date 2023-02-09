@@ -69,7 +69,7 @@ Now you can start using the transaction API to send and receive messages. Below 
 
 ![](/assets/txn-9.png)
 
-Let’s walk through this example step by step.
+Let's walk through this example step by step.
 
 | Step  |  Description  | 
 | --- | --- |

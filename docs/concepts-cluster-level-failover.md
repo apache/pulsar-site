@@ -30,7 +30,7 @@ Controlled cluster-level failover supports Pulsar clients switching from a prima
 </Tabs>
 ````
 
-Once the primary cluster functions again, Pulsar clients can switch back to the primary cluster. Most of the time users won’t even notice a thing. Users can keep using applications and services without interruptions or timeouts.
+Once the primary cluster functions again, Pulsar clients can switch back to the primary cluster. Most of the time users won't even notice a thing. Users can keep using applications and services without interruptions or timeouts.
 
 ### Why use cluster-level failover?
 

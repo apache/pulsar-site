@@ -279,7 +279,7 @@ Flag | Description                                                              
 `-a`, `--bookkeeper-ack-quorum` | Ack quorum (Q<sub>a</sub>) size, Number of guaranteed copies (acks to wait for before a write is considered completed)                          | 0
 `-r`, `--ml-mark-delete-max-rate` | Throttling rate for mark-delete operations (0 means no throttle)                                                           | 0
 
-Please notice that sticky reads enabled by `bookkeeperEnableStickyReads=true` aren’t used unless ensemble size (E) equals write quorum (Q<sub>w</sub>) size. Sticky reads improve the efficiency of the Bookkeeper read ahead cache when all reads for a single ledger are sent to a single bookie.
+Please notice that sticky reads enabled by `bookkeeperEnableStickyReads=true` are not used unless ensemble size (E) equals write quorum (Q<sub>w</sub>) size. Sticky reads improve the efficiency of the Bookkeeper read ahead cache when all reads for a single ledger are sent to a single bookie.
 
 Some rules for choosing the values:
 
