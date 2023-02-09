@@ -455,7 +455,7 @@ admin.namespaces().removeNamespaceMessageTTL(namespace)
 ## Delete messages from namespaces
 
 When it comes to the physical storage size, message expiry and retention are just like two sides of the same coin.
-* The backlog quota and TTL parameters prevent disk size from growing indefinitely, as Pulsar’s default behavior is to persist unacknowledged messages. 
+* The backlog quota and TTL parameters prevent disk size from growing indefinitely, as Pulsar's default behavior is to persist unacknowledged messages. 
 * The retention policy allocates storage space to accommodate the messages that are supposed to be deleted by Pulsar by default.
 
 In conclusion, the size of your physical storage should accommodate the sum of the backlog quota and the retention size. 

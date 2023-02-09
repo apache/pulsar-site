@@ -390,7 +390,7 @@ The coordinator's internal stats that can be retrieved include:
 * **managedLedgerName:** The name of the managed ledger where the transaction coordinator log is stored. 
 * **managedLedgerInternalStats:** The internal stats of the managed ledger where the transaction coordinator log is stored. See `[managedLedgerInternalStats](admin-api-topics.md#get-internal-stats)` for more details.
 
-Use one of the following ways to get coordinator’s internal stats:
+Use one of the following ways to get coordinator's internal stats:
 ````mdx-code-block
 <Tabs groupId="api-choice"
  defaultValue="pulsar-admin"

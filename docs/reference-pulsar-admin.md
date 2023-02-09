@@ -515,7 +515,7 @@ Options
 |`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
-|`--parallelism`|The function’s parallelism factor, i.e. the number of instances of the function to run|1|
+|`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
 |`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
@@ -523,7 +523,7 @@ Options
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
 |`--state-storage-service-url`|The URL for the state storage service. By default, it it set to the service URL of the Apache BookKeeper. This service URL must be added manually when the Pulsar Function runs locally. ||
-|`--tenant`|The function’s tenant||
+|`--tenant`|The function's tenant||
 |`--topics-pattern`|The topic pattern to consume from list of topics under a namespace that match the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (supported for java fun only)||
 |`--user-config`|User-defined config key/values||
 |`--window-length-count`|The number of messages per window||
@@ -566,17 +566,17 @@ Options
 |`--log-topic`|The topic to which the function's logs are produced||
 |`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
-|`--namespace`|The function’s namespace||
+|`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
-|`--parallelism`|The function’s parallelism factor, i.e. the number of instances of the function to run|1|
+|`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
 |`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
-|`--tenant`|The function’s tenant||
+|`--tenant`|The function's tenant||
 |`--topics-pattern`|The topic pattern to consume from list of topics under a namespace that match the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (supported for java fun only)||
 |`--user-config`|User-defined config key/values||
 |`--window-length-count`|The number of messages per window||
@@ -635,17 +635,17 @@ Options
 |`--log-topic`|The topic to which the function's logs are produced||
 |`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
-|`--namespace`|The function’s namespace||
+|`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
-|`--parallelism`|The function’s parallelism factor, i.e. the number of instances of the function to run|1|
+|`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
 |`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
-|`--tenant`|The function’s tenant||
+|`--tenant`|The function's tenant||
 |`--topics-pattern`|The topic pattern to consume from list of topics under a namespace that match the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (supported for java fun only)||
 |`--user-config`|User-defined config key/values||
 |`--window-length-count`|The number of messages per window||

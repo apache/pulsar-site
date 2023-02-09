@@ -397,7 +397,7 @@ By default, Pulsar uses [Conscrypt](https://github.com/google/conscrypt) for bot
 
 ### Generate JKS certificate
 
-You can use Java’s `keytool` utility to generate the key and certificate for each machine in the cluster. 
+You can use Java's `keytool` utility to generate the key and certificate for each machine in the cluster. 
 
 ```bash
 DAYS=365
