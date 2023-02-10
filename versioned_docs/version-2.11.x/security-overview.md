@@ -59,7 +59,7 @@ When you use proxies between clients and brokers, there are two authentication d
   - [JSON Web Token (JWT) authentication](security-jwt.md)
   - [OAuth 2.0 authentication](security-oauth2.md)
   - [HTTP basic authentication](security-basic-auth.md)
-- To customize an authentication plugin, read [extended authentication](security-extending).
+- To customize an authentication plugin, read [extended authentication](security-extending.md).
 
 :::note
 
