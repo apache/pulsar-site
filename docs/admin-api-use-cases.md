@@ -11,11 +11,11 @@ import TabItem from '@theme/TabItem';
 
 Pulsar admin APIs are one of the best productivity tools. You can perform various tasks with them, for example:
 
-- administering Pulsar instances easily by creating, updating, or deleting objects with a single line of command, which increases management efficiency.
+- Administering Pulsar instances easily by creating, updating, or deleting objects with a single line of command, which increases management efficiency.
 
-- monitoring Pulsar or troubleshooting issues by getting the status and information about Pulsar clusters, which reduces maintenance costs.
+- Monitoring Pulsar or troubleshooting issues by getting the status and information about Pulsar clusters, which reduces maintenance costs.
 
-- facilitating the workflow of application development by implementing admin interface clients using your preferred languages (e.g., Go, Python, C++) based on REST APIs, which enhances developer experiences.
+- Facilitating the workflow of application development by implementing admin interface clients using your preferred languages (e.g., Go, Python, C++) based on REST APIs, which enhances developer experiences.
 
 ![Pulsar admin APIs - use cases](/assets/admin-api-use-cases.svg)
 
