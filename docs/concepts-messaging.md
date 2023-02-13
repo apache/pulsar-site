@@ -943,7 +943,7 @@ Non-persistent messaging is usually faster than persistent messaging because bro
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key-shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java.md#consumer) for a non-persistent topic:
+Here's an example [Java consumer](client-libraries-java-use.md#create-a-consumer) for a non-persistent topic:
 
 ```java
 PulsarClient client = PulsarClient.builder()
@@ -958,7 +958,7 @@ Consumer<byte[]> consumer = client.newConsumer()
         .subscribe();
 ```
 
-Here's an example [Java producer](client-libraries-java.md#producer) for the same non-persistent topic:
+Here's an example [Java producer](client-libraries-java-use/#create-a-producer) for the same non-persistent topic:
 
 ```java
 Producer<byte[]> producer = client.newProducer()
