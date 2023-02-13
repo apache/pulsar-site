@@ -20,11 +20,11 @@ Message dispatch throttling brings the following benefits in detail:
 
 - **Limit broker's read request loads to BookKeeper**
 
-  Messages are persistently stored in the BookKeeper cluster. If a large number of read requests cannot be fulfilled using the cached data, the BookKeeper cluster may become too busy to respond, and the broker's I/O or CPU resources can be fully occupied. Using the message dispatch throttling feature can regulate the data flow by limiting the broker's I/O and CPU load, as well as BookKeeper's read request load.
+  Messages are persistently stored in the BookKeeper cluster. If a large number of read requests cannot be fulfilled using the cached data, the BookKeeper cluster may become too busy to respond, and the broker's I/O or CPU resources can be fully occupied. Using the message dispatch throttling feature can regulate the data flow to limit the broker’s read request loads to BookKeeper.
 
 - **Balance the allocation of broker's hardware resources at topic/subscription levels**
 
-  A broker instance serves multiple topics at one time. If a topic is frequently looked up, it will occupy almost all of the I/O, CPU, and memory resources, causing other topics cannot be looked up. Using the message dispatch throttling feature can limit the allocation of broker's hardware resources across topics.
+  A broker instance serves multiple topics at one time. If a topic is overloaded with requests, it will occupy almost all of the I/O, CPU, and memory resources of the broker, causing other topics cannot be read. Using the message dispatch throttling feature can limit the allocation of broker’s hardware resources across topics.
 
 - **Limit the allocation of client's hardware resources at topic/subscription levels**
 
