@@ -69,7 +69,7 @@ bin/pulsar-daemon start websocket
 
 ## Release notes
 
-For the changelog of Pulsar WebSocket APIs, see [release notes](/release-notes/#websocket).
+For the changelog of Pulsar WebSocket APIs, see [release notes](/release-notes/client-ws).
 
 ## API Reference
 
