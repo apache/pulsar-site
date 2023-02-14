@@ -671,6 +671,17 @@ Usage threshold to determine a broker whether to start threshold shedder
 
 **Category**: Load Balancer
 
+### loadBalancerBundleLoadReportPercentage
+Percentage of bundles to compute topK bundle load data from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. (only used in load balancer extension logics)
+
+**Type**: `double`
+
+**Default**: `10.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBundleUnloadMinThroughputThreshold
 Bundle unload minimum throughput threshold (MB)
 
