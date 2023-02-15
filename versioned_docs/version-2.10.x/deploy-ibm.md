@@ -222,7 +222,7 @@ If all pods start up successfully, you can see that `STATUS`is changed to`Runnin
 Output
 ![Output of Command PodStatus](/assets/IBMCloud/PodStatus.png)
 
-6. Check the status of all services
+6. Check the status of all services.
 
 ```bash
  kubectl get services
