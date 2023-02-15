@@ -231,7 +231,10 @@ Output
 Output
 ![Output of Command Services](/assets/IBMCloud/Services.png)
 
-> Output of above command will give us `services URL` and `broker URL`, proxy external ip is for both just change ports (for service URL port is 80 and for broker URL port is 6650 this is default)
+The output shows both `services URL` and `broker URL`. 
+Proxy external IPs are the ports changed just now:
+- Service URL port is 80.
+- Broker URL port is 6650. This is default.
 If all of these commands are successful, Pulsar clients can now use your cluster!
 
 > You can use Pulsar client to publishing and consuming messages you just need to use `proxy external IP` and ports of `broker URL` and `service URL`.
