@@ -136,7 +136,7 @@ var client = PulsarClient.Builder()
 
 ## Configure TLS authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/2.11.x/pulsar-admin/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/2.11.x/pulsar-perf), and [`pulsar-client`](https://pulsar.apache.org/reference/#/2.11.x/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
 
 To use TLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configuration to enable TLS encryption](security-tls-transport.md#configure-tls-encryption-in-cli-tools):
 
@@ -191,7 +191,7 @@ Besides configuring [TLS encryption](security-tls-transport.md), you need to con
 
 For example:
 
-1. for [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/2.11.x/pulsar-admin/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/2.11.x/pulsar-perf), and [`pulsar-client`](https://pulsar.apache.org/reference/#/2.11.x/pulsar-client/), set the `conf/client.conf` file in a Pulsar installation.
+1. for [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/), set the `conf/client.conf` file in a Pulsar installation.
 
    ```properties
    webServiceUrl=https://broker.example.com:8443/

@@ -377,7 +377,7 @@ asyncio.run(test())
 
 ### Configure CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/next/pulsar-admin/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/next/pulsar-perf), and [`pulsar-client`](https://pulsar.apache.org/reference/#/next/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
 
 To use TLS encryption with Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 
@@ -553,7 +553,7 @@ The following is an example.
 
 ### Configure CLI tools
 
-For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/next/pulsar-admin/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/next/pulsar-perf), and [`pulsar-client`](https://pulsar.apache.org/reference/#/next/pulsar-client/), use the `conf/client.conf` config file in a Pulsar installation.
+For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/), use the `conf/client.conf` config file in a Pulsar installation.
 
    ```properties
    webServiceUrl=https://broker.example.com:8443/
