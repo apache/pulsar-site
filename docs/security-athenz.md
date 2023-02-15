@@ -172,6 +172,45 @@ client, err := pulsarNewClient(ClientOptions{
 </Tabs>
 ````
 
+### When using Copper Argos
+
+Athenz has a mechanism called [Copper Argos](https://github.com/AthenZ/athenz/blob/master/docs/copper_argos.md). This means that ZTS distributes an X.509 certificate and private key pair to each service, which it can use to identify itself to other services within the organization.
+
+Pulsar currently supports Copper Argos only in the Java client. When using Copper Argos, you need to provide at least the following four parameters:
+* `providerDomain`
+* `x509CertChain`
+* `privateKey`
+* `caCert`
+
+In this case, `tenantDomain`, `tenantService` and `keyId` are ignored.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+```java
+Map<String, String> authParams = new HashMap();
+authParams.put("ztsUrl", "http://localhost:9998");
+authParams.put("providerDomain", "pulsar"); // Provider domain name
+authParams.put("x509CertChain", "file:///path/to/x509cert.pem"); // Distributed X.509 certificate path
+authParams.put("privateKey", "file:///path/to/private.pem"); // Distributed private key path
+authParams.put("caCert", "file:///path/to/cacert.pem"); // CA certificate path
+
+Authentication athenzAuth = AuthenticationFactory
+        .create(AuthenticationAthenz.class.getName(), authParams);
+
+PulsarClient client = PulsarClient.builder()
+        .serviceUrl("pulsar://my-broker.com:6650")
+        .authentication(athenzAuth)
+        .build();
+```
+
+</TabItem>
+</Tabs>
+````
+
 ## Configure Athenz authentication in CLI tools
 
 [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/tools/pulsar-admin/), [`pulsar-perf`](reference-cli-tools.md), and [`pulsar-client`](reference-cli-tools.md) use the `conf/client.conf` config file in a Pulsar installation.
