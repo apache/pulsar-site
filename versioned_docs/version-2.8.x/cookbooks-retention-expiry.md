@@ -257,6 +257,8 @@ admin.namespaces().setBacklogQuota(namespace, quota);
 
 You can see which size threshold and backlog retention policy has been applied to a namespace.
 
+Note that by default, time-based backlogs are enforced periodically using an approximate method. This avoids a potentially costly scan of the backlog each time a message is produced. However, it does mean that in some cases you may observe a lack of strict enforcement. To tune this behavior you should consider using the [`backlogQuotaCheckIntervalInSeconds`][backlogquotacheckintervalinseconds] and [`preciseTimeBasedBacklogQuotaCheck`][precisetimebasedbacklogquotacheck] broker options.
+
 #### pulsar-admin
 
 Use the [`get-backlog-quotas`](reference-pulsar-admin.md#pulsar-admin-namespaces-get-backlog-quotas) subcommand and specify a namespace. Here's an example:
@@ -420,3 +422,6 @@ If you do not have any retention period and that you never have much of a backlo
 The entry log rollover period is configurable, but is purely based on the entry log size. For details, see [here](https://bookkeeper.apache.org/docs/4.11.1/reference/config/#entry-log-settings). Once the entry log is rolled over, the entry log can be garbage collected.
 
 - **Garbage collection interval**: because entry logs have interleaved ledgers, to free up space, the entry logs need to be rewritten. The garbage collection interval is how often BookKeeper performs garbage collection. which is related to minor compaction and major compaction of entry logs. For details, see [here](https://bookkeeper.apache.org/docs/4.11.1/reference/config/#entry-log-compaction-settings).
+
+[backlogquotacheckintervalinseconds]: https://pulsar.apache.org/reference/#/next/config/reference-configuration-broker?id=backlogquotacheckintervalinseconds
+[precisetimebasedbacklogquotacheck]: https://pulsar.apache.org/reference/#/next/config/reference-configuration-broker?id=precisetimebasedbacklogquotacheck
