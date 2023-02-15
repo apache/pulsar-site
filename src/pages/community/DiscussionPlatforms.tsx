@@ -166,7 +166,6 @@ const DiscussionPlatforms: React.FC = () => {
         <span>
           The community meeting occurs biweekly on Tuesdays and Thursdays to
           discuss new proposals, open pull requests, and host open discussions.
-          Details and how to join here.
         </span>
       ),
       logoSrc: useBaseUrl("/img/community-meetings.svg"),
