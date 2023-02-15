@@ -12,7 +12,7 @@ This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pul
 
 :::
 
-
+Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 - [Setup a virtual machine (VM) on IBM Cloud.](#create-vm-on-ibm-cloud)
 - [Create Kubernete cluster on IBM Cloud.](#create-kubernetes-cluster-on-ibm)
