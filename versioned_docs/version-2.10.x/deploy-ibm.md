@@ -236,5 +236,3 @@ Proxy external IPs are the ports changed just now:
 - Service URL port is 80.
 - Broker URL port is 6650. This is default.
 If you execute all the commands successfully, you can use the Pulsar client to connect to ?? clusters and produce and consume messages through proxy external IPs.
-
-> You can use Pulsar client to publishing and consuming messages you just need to use `proxy external IP` and ports of `broker URL` and `service URL`.
