@@ -8,7 +8,7 @@ original_id: deploy-ibm
 
 :::note
 
- This doc referes to the Apache pulsar 2.93 Version. if you want to upgrade the Apache Pulsar version you need to follow the [helm-upgrade](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/) Document for upgrade on the  perticular version.
+This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/).
 
 :::
 
