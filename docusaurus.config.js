@@ -257,16 +257,15 @@ module.exports = {
                     ],
                 },
                 {
+                    href: "https://github.com/apache/pulsar",
+                    position: "right",
+                    className: "github-nav",
+                },
+                {
                     to: "/download",
                     label: "Download",
                     position: "right",
                     className: "download-btn pill-btn",
-                },
-                {
-                    href: "https://github.com/apache/pulsar",
-                    label: "Github",
-                    position: "right",
-                    className: "github-nav",
                 },
             ],
         },
