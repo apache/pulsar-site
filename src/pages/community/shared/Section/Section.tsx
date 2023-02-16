@@ -13,7 +13,7 @@ const Section: React.FC<SectionProps> = (props) => {
   return (
     <section className={s.Section} id={props.anchor}>
       <div className={s.Content}>
-        <h2>{props.title}</h2>
+        <h2 className={s.Title}>{props.title}</h2>
         {props.children}
       </div>
       {!props.isHideSeparator && (

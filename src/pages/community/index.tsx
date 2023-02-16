@@ -3,9 +3,7 @@ import Layout from "@theme/Layout";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import TeamTable from "@site/src/components/TeamTable";
 import PromoCallout from "@site/src/components/PromoCallout";
-import PillButton from "@site/src/components/PillButton";
 import WavySeparatorFive from "@site/static/img/separator-5.svg";
-import WavySeparatorSix from "@site/static/img/separator-6.svg";
 import team from "@site/data/team";
 import Slider from "./shared/Slider/Slider";
 import DiscussionPlatforms from "./sections/discussions/DiscussionPlatforms";
@@ -116,6 +114,8 @@ const CommunityPage: React.FC = () => {
           </div>
         </section>
 
+        <WavySeparatorFive />
+
         <Section title="Discussions" anchor="section-discussions">
           <DiscussionPlatforms />
         </Section>
@@ -128,53 +128,48 @@ const CommunityPage: React.FC = () => {
           <HowToContribute />
         </Section>
 
-        <section id="section-community" className="py-12 scrollable">
-          <div className="inner">
-            <h2 className="text--center">Meet the Community</h2>
-            <p>
-              Pulsar community consists of PMC members, committers and
-              contributors.{" "}
-            </p>
-            <p>
-              For the complete and up-to-date list, see{" "}
-              <a
-                className="secondary-cta"
-                href="https://projects.apache.org/committee.html?pulsar"
-                target="_blank"
-              >
-                Apache Pulsar Committee
-              </a>
-              .
-            </p>
-            <h3 className="text--center">PMC members</h3>
-            <div className="md:grid md:grid-cols-2 md:gap-x-4">
-              <TeamTable data={team.pmc.slice(0, (team.pmc.length + 1) / 2)} />
-              <TeamTable data={team.pmc.slice((team.pmc.length + 1) / 2)} />
-            </div>
-            <h3 className="text--center">Committers</h3>
-            <div className="md:grid md:grid-cols-2 md:gap-x-4">
-              <TeamTable
-                data={team.committers.slice(
-                  0,
-                  (team.committers.length + 1) / 2
-                )}
-              />
-              <TeamTable
-                data={team.committers.slice((team.committers.length + 1) / 2)}
-              />
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-x-4">
-              <img
-                src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorOverTime&repo=apache/pulsar"
-                alt={"Contributors over time"}
-              />
-              <img
-                src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorMonthlyActivity&repo=apache/pulsar"
-                alt={"Active contributors monthly"}
-              />
-            </div>
+        <Section anchor="section-community" title="Meet the Community">
+          <p>
+            Pulsar community consists of PMC members, committers and
+            contributors.{" "}
+          </p>
+          <p>
+            For the complete and up-to-date list, see{" "}
+            <a
+              className="secondary-cta"
+              href="https://projects.apache.org/committee.html?pulsar"
+              target="_blank"
+            >
+              Apache Pulsar Committee
+            </a>
+            .
+          </p>
+          <h3 className="text--center">PMC members</h3>
+          <div className="md:grid md:grid-cols-2 md:gap-x-4">
+            <TeamTable data={team.pmc.slice(0, (team.pmc.length + 1) / 2)} />
+            <TeamTable data={team.pmc.slice((team.pmc.length + 1) / 2)} />
           </div>
-        </section>
+          <h3 className="text--center">Committers</h3>
+          <div className="md:grid md:grid-cols-2 md:gap-x-4">
+            <TeamTable
+              data={team.committers.slice(0, (team.committers.length + 1) / 2)}
+            />
+            <TeamTable
+              data={team.committers.slice((team.committers.length + 1) / 2)}
+            />
+          </div>
+          <div className="md:grid md:grid-cols-2 md:gap-x-4">
+            <img
+              src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorOverTime&repo=apache/pulsar"
+              alt={"Contributors over time"}
+            />
+            <img
+              src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorMonthlyActivity&repo=apache/pulsar"
+              alt={"Active contributors monthly"}
+            />
+          </div>
+        </Section>
+
         <PromoCallout
           url="/blog"
           linkText="Read Now"
