@@ -6,18 +6,18 @@ original_id: deploy-ibm
 ---
 # Apache Pulsar Installation on IBM Kubernetes Cluster through Helm chart
 
-:::note
+:::tip
 
- This doc referes to the Apache pulsar 2.93 Version. if you want to upgrade the Apache Pulsar version you need to follow the [helm-upgrade](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/) Document for upgrade on the  perticular version.
+This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/).
 
 :::
 
+Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
-
-- [Setup a virtual machine (VM) on IBM Cloud.](#create-vm-on-ibm-cloud)
-- [Create Kubernete cluster on IBM Cloud.](#create-kubernetes-cluster-on-ibm)
-- [Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.](#prepare-vm-for-connecting-to-kubernetes-cluster-and-deploy-pulsar-helm-chart-on-kubernetes-cluster)
-- [Verify the deployment.](#run-kubectl-commands-to-verify-the-deployment)
+1. [Create VM on IBM Cloud.](#create-vm-on-ibm-cloud)
+2. [Create Kubernete cluster on IBM Cloud.](#create-kubernetes-cluster-on-ibm)
+3. [Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.](#prepare-vm-for-connecting-to-kubernetes-cluster-and-deploy-pulsar-helm-chart-on-kubernetes-cluster)
+4. [Verify the deployment.](#run-kubectl-commands-to-verify-the-deployment)
 
 
 #### Create VM on IBM Cloud
@@ -217,12 +217,12 @@ Output
 ```bash 
 kubectl get pods
 ```
-If all pods start up successfully, you can see that the`STATUS`is changed to`Running`or`Completed`
+If all pods start up successfully, you can see that `STATUS`is changed to`Running`or`Completed`.
 
 Output
 ![Output of Command PodStatus](/assets/IBMCloud/PodStatus.png)
 
-6. Check the status of all services
+6. Check the status of all services.
 
 ```bash
  kubectl get services
@@ -231,7 +231,8 @@ Output
 Output
 ![Output of Command Services](/assets/IBMCloud/Services.png)
 
-> Output of above command will give us `services URL` and `broker URL`, proxy external ip is for both just change ports (for service URL port is 80 and for broker URL port is 6650 this is default)
-If all of these commands are successful, Pulsar clients can now use your cluster!
-
-> You can use Pulsar client to publishing and consuming messages you just need to use `proxy external IP` and ports of `broker URL` and `service URL`.
+The output shows both `services URL` and `broker URL`. 
+Proxy external IPs are the ports changed just now:
+- Service URL port is 80.
+- Broker URL port is 6650. This is default.
+If you execute all the commands successfully, you can use the Pulsar client to connect to ?? clusters and produce and consume messages through proxy external IPs.
