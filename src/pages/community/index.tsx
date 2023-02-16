@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "@theme/Layout";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import TeamTable from "@site/src/components/TeamTable";
@@ -7,8 +7,10 @@ import PillButton from "@site/src/components/PillButton";
 import WavySeparatorFive from "@site/static/img/separator-5.svg";
 import WavySeparatorSix from "@site/static/img/separator-6.svg";
 import team from "@site/data/team";
-import Slider from "./Slider";
-import DiscussionPlatforms from "./DiscussionPlatforms";
+import Slider from "./shared/Slider/Slider";
+import DiscussionPlatforms from "./sections/discussions/DiscussionPlatforms";
+import HowToContribute from "./sections/how-to-contribute/HowToContribute";
+import Section from "./shared/Section/Section";
 
 const CommunityPage: React.FC = () => {
   return (
@@ -115,16 +117,11 @@ const CommunityPage: React.FC = () => {
 
         <WavySeparatorFive />
 
-        <section id="section-discussions">
-          <div className="inner pt-12">
-            <h2 className="text--center">Discussions</h2>
-            <DiscussionPlatforms />
-          </div>
-        </section>
+        <Section anchor="section-discussions" title="Discussions">
+          <DiscussionPlatforms />
+        </Section>
 
-        <WavySeparatorSix />
-
-        <section id="section-governance" className="py-12 scrollable">
+        <Section anchor="section-governance">
           <div className="inner">
             <h2>Project Governance</h2>
             <p>
@@ -156,108 +153,12 @@ const CommunityPage: React.FC = () => {
               THE APACHE WAY
             </PillButton>
           </div>
-        </section>
+        </Section>
+
         <section id="section-contribute" className="py-12 scrollable">
           <div className="inner">
             <h2 className="text-center sm:text-left">How to Contribute</h2>
-            <div className="">
-              <div className="flex flex-col  sm:flex-row items-center py-12">
-                <div className="sm:w-1/3 section-icon px-12">
-                  <img src={useBaseUrl("/img/contribute.svg")} />
-                </div>
-                <div className="sm:w-2/3">
-                  <h3>Contributing to the Project</h3>
-                  <p>
-                    Pulsar has many different opportunities for contributions --
-                    you can write new examples/tutorials, add new user-facing
-                    libraries, write new Pulsar IO connectors, participate in
-                    documentation, and more.{" "}
-                  </p>
-                  <PillButton
-                    variant="primary"
-                    href={useBaseUrl("contribute")}
-                  >
-                    Contribution Guide
-                  </PillButton>
-                  <PillButton
-                    variant="grey"
-                    href={useBaseUrl("contribute/develop-coding-conventions")}
-                  >
-                    Coding Conventions
-                  </PillButton>
-                </div>
-              </div>
-              <div className="flex flex-col  sm:flex-row items-center  py-12">
-                <div className="sm:w-1/3 section-icon px-12">
-                  <img
-                    src={useBaseUrl("/img/report-bugs.svg")}
-                    alt={"Report bugs"}
-                  />
-                </div>
-                <div className="sm:w-2/3 ">
-                  <h3>Reporting Bugs</h3>
-                  <p>
-                    If you encounter a problem with Pulsar, the first places to
-                    ask for help are the user mailing list or Stack Overflow.
-                  </p>
-                  <p>
-                    If, after having asked for help, you suspect that you have
-                    found a bug in Pulsar, you should report it to the developer
-                    mailing list or by opening GitHub Issue. Please provide as
-                    much detail as you can on your problem. Don’t forget to
-                    indicate which version of Pulsar you are running and on
-                    which environment.
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col  sm:flex-row items-center py-12">
-                <div className="sm:w-1/3 section-icon  px-12">
-                  <img src={useBaseUrl("/img/report-vulnerabillity.svg")} />
-                </div>
-                <div className="sm:w-2/3">
-                  <h3>Reporting a Vulnerability</h3>
-                  <p>
-                    To report a vulnerability for Pulsar, contact the{" "}
-                    <a
-                      className="secondary-cta"
-                      href="https://www.apache.org/security/projects.html"
-                      target="_blank"
-                    >
-                      Apache Security Team
-                    </a>
-                    .
-                  </p>
-                  <p>
-                    The process for reporting a vulnerability is outlined
-                    <a
-                      className="secondary-cta"
-                      href="https://www.apache.org/security/"
-                      target="_blank"
-                    >
-                      here
-                    </a>
-                    . When reporting a vulnerability to
-                    <a
-                      className="secondary-cta"
-                      href="mailto:security@apache.org"
-                      target="_blank"
-                    >
-                      security@apache.org
-                    </a>
-                    , you can copy your email to
-                    <a
-                      className="secondary-cta"
-                      href="mailto:private@pulsar.apache.org"
-                      target="_blank"
-                    >
-                      private@pulsar.apache.org
-                    </a>
-                    to send your report to the Apache Pulsar Project Management
-                    Committee. This is a private mailing list.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <HowToContribute />
           </div>
         </section>
         <WavySeparatorSix></WavySeparatorSix>
