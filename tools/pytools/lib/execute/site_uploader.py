@@ -72,5 +72,5 @@ def execute(mode: Mode, msg: str, site: Path, branch: str):
         _do_push(msg, site, branch)
     else:  # show changes
         git = find_command('git', msg="git is required")
-        change_files = run_pipe(git, 'status', '--porcelain', cwd=site).read().strip()
+        change_files = run_pipe(git, 'status', '--short', cwd=site).read().strip()
         print(f'\nchange files:\n{change_files}\n')
