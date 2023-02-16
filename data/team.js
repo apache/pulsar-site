@@ -179,6 +179,10 @@ module.exports = {
       "apacheId": "cckellogg"
     },
     {
+      "name": "Tao Jiuming",
+      "apacheId": "daojun"
+    },
+    {
       "name": "davidkj",
       "apacheId": "davekj"
     },
@@ -269,6 +273,10 @@ module.exports = {
     {
       "name": "Yong Zhang",
       "apacheId": "yong"
+    },
+    {
+      "name": "Yubiao Feng",
+      "apacheId": "yubiao"
     },
     {
       "name": "Ruguo Yu",
