@@ -11,7 +11,7 @@ import HowToContribute from "./sections/how-to-contribute/HowToContribute";
 import Section from "./shared/Section/Section";
 import ProjectGovernance from "./sections/project-governance/ProjectGovernance";
 
-const CommunityPage: React.FC = () => {
+export default function CommunityPage(): JSX.Element {
   return (
     <Layout
       title={"Community"}
@@ -179,5 +179,3 @@ const CommunityPage: React.FC = () => {
     </Layout>
   );
 };
-
-export default CommunityPage;

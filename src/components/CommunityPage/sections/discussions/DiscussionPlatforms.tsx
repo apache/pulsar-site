@@ -44,7 +44,7 @@ const DiscussionPlatforms: React.FC = () => {
           Questions and discussions related to Pulsar development.
           <br />
           <a
-            href="https://lists.apache.org/list.html?users@pulsar.apache.org"
+            href="https://lists.apache.org/list.html?dev@pulsar.apache.org"
             target="_blank"
           >
             Access the archives
