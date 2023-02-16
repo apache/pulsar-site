@@ -140,16 +140,16 @@ const DiscussionPlatforms: React.FC = () => {
       ),
       actions: [
         {
-          id: "open",
-          text: "Open",
-          href: "https://apache-pulsar.slack.com/",
+          id: "sign-up",
+          text: "Sign-up",
+          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
           type: "primary",
           isExternal: true,
         },
         {
-          id: "sign-up",
-          text: "Sign-up",
-          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
+          id: "launch-slack",
+          text: "Launch Slack",
+          href: "https://apache-pulsar.slack.com/",
           type: "normal",
           isExternal: true,
         },
@@ -193,12 +193,7 @@ const DiscussionPlatforms: React.FC = () => {
     },
   ];
 
-  return (
-    <ContentCardsLayout
-      cards={platforms}
-      columns={2}
-    />
-  );
+  return <ContentCardsLayout cards={platforms} columns={2} />;
 };
 
 export default DiscussionPlatforms;
