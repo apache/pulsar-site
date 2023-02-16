@@ -1,6 +1,4 @@
 import React from "react";
-import { docUrl } from "../utils/index";
-
 
 const BlockLinks = (props) => {
   return(
