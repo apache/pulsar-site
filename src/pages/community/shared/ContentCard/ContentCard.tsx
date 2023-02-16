@@ -31,8 +31,8 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
       )}
       <div>
         <h3>{props.title}</h3>
-        <p>{props.description}</p>
-        <div>
+        <div>{props.description}</div>
+        <div className={s.Actions}>
           {(props.actions || []).map((action) => (
             <ActionButton key={action.id} {...action} />
           ))}

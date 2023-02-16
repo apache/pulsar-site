@@ -25,8 +25,8 @@ const HowToContribute: React.FC = () => {
         {
           id: "contributing-to-the-project",
           href: useBaseUrl("/contribute/develop-coding-conventions"),
-          text: "Contribution guide",
-          type: "primary",
+          text: "Coding conventions",
+          type: "normal",
         },
       ],
       image: {

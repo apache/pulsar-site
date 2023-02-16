@@ -6,16 +6,21 @@ export type SectionProps = {
   title: string;
   children: React.ReactNode;
   anchor?: string;
+  isHideSeparator?: boolean;
 };
 
 const Section: React.FC<SectionProps> = (props) => {
   return (
     <section className={s.Section} id={props.anchor}>
-      <h2 className={s.Title}>{props.title}</h2>
-      <div className={s.Content}>{props.children}</div>
-      <div className={s.Separator}>
-        <WavySeparatorSix />
+      <div className={s.Content}>
+        <h2>{props.title}</h2>
+        {props.children}
       </div>
+      {!props.isHideSeparator && (
+        <div className={s.Separator}>
+          <WavySeparatorSix />
+        </div>
+      )}
     </section>
   );
 };

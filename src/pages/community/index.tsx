@@ -11,6 +11,7 @@ import Slider from "./shared/Slider/Slider";
 import DiscussionPlatforms from "./sections/discussions/DiscussionPlatforms";
 import HowToContribute from "./sections/how-to-contribute/HowToContribute";
 import Section from "./shared/Section/Section";
+import ProjectGovernance from "./sections/project-governance/ProjectGovernance";
 
 const CommunityPage: React.FC = () => {
   return (
@@ -115,53 +116,18 @@ const CommunityPage: React.FC = () => {
           </div>
         </section>
 
-        <WavySeparatorFive />
-
-        <Section anchor="section-discussions" title="Discussions">
+        <Section title="Discussions" anchor="section-discussions">
           <DiscussionPlatforms />
         </Section>
 
-        <Section anchor="section-governance">
-          <div className="inner">
-            <h2>Project Governance</h2>
-            <p>
-              Apache Pulsar is independently managed by its Project Management
-              Committee (PMC)—the governing body tasked with project management
-              including technical direction, voting on new committers and PMC
-              members, setting policies, and formally voting on software product
-              releases.
-            </p>
-            <PillButton
-              variant="primary"
-              target="_blank"
-              href="https://community.apache.org/projectIndependence"
-            >
-              ASF PROJECT INDEPENDENCE OVERVIEW
-            </PillButton>
-            <PillButton
-              variant="grey"
-              target="_blank"
-              href="https://www.apache.org/foundation/governance/pmcs.html"
-            >
-              ASF PMC OVERVIEW
-            </PillButton>
-            <PillButton
-              variant="primary"
-              target="_blank"
-              href="https://www.apache.org/theapacheway/index.html"
-            >
-              THE APACHE WAY
-            </PillButton>
-          </div>
+        <Section title="Project Governance" anchor="section-governance">
+          <ProjectGovernance />
         </Section>
 
-        <section id="section-contribute" className="py-12 scrollable">
-          <div className="inner">
-            <h2 className="text-center sm:text-left">How to Contribute</h2>
-            <HowToContribute />
-          </div>
-        </section>
-        <WavySeparatorSix></WavySeparatorSix>
+        <Section title="How to Contribute" anchor="section-contribute">
+          <HowToContribute />
+        </Section>
+
         <section id="section-community" className="py-12 scrollable">
           <div className="inner">
             <h2 className="text--center">Meet the Community</h2>
