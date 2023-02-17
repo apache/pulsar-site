@@ -1,8 +1,13 @@
 import React from "react";
 import s from "./Greeting.module.css";
 import SineWavesAnimation from "./SineWaves/SineWavesAnimation";
+import ActionButton from "../../ui/ActionButton/ActionButton";
+import ActionButtonGroup from "../../ui/ActionButton/ActionButtonGroup";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 const Greeting: React.FC = () => {
+  const { siteConfig } = useDocusaurusContext();
+
   return (
     <section className={s.Greeting}>
       <div className={s.Content}>
@@ -18,6 +23,24 @@ const Greeting: React.FC = () => {
           <div className={s.Animation}>
             <SineWavesAnimation />
           </div>
+        </div>
+
+        <div className={s.ActionButtons}>
+          <ActionButtonGroup>
+            <ActionButton
+              title="Learn more"
+              type="primary"
+              link={{
+                href: `${siteConfig.baseUrl}docs/concepts-overview`,
+              }}
+            />
+            <ActionButton
+              title="Quickstart"
+              link={{
+                href: `${siteConfig.baseUrl}docs`,
+              }}
+            />
+          </ActionButtonGroup>
         </div>
       </div>
     </section>
