@@ -1,4 +1,4 @@
-`pulsar-client` is a tool used to produce and consume messages
+`pulsar-client` is a tool used to produce and consume messages.
 
 ## Environment variables
 
