@@ -369,7 +369,6 @@ module.exports = {
           customCss: [
             require.resolve("./src/css/custom.css"),
             require.resolve("./src/css/fonts.css"),
-            require.resolve("./src/css/navbar.css"),
             require.resolve("./src/css/footer.css"),
             require.resolve("./src/css/variables.css"),
           ],
@@ -417,7 +416,6 @@ module.exports = {
     ],
   ],
   scripts: [
-    { src: "/js/sine-waves.min.js", async: true },
     "/js/matomo-agent.js",
   ],
   clientModules: [require.resolve("./matomoClientModule.ts")],
