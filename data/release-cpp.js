@@ -1,7 +1,7 @@
 module.exports = [
-{tagName: "v3.1.2",vtag:"3.1.x",releaseNotes:"/release-notes/versioned/client-cpp-3.1.2/",doc:"/docs/client-libraries-cpp",version:"v3.1.x"},
-{tagName: "v3.1.1",vtag:"3.1.x",releaseNotes:"/release-notes/versioned/client-cpp-3.1.1/",doc:"/docs/client-libraries-cpp",version:""},
-{tagName: "v3.1.0",vtag:"3.1.x",releaseNotes:"/release-notes/versioned/client-cpp-3.1.0/",doc:"/docs/client-libraries-cpp",version:""},
+{tagName: "v3.1.2",vtag:"3.1.2",releaseNotes:"/release-notes/versioned/client-cpp-3.1.2/",doc:"/docs/client-libraries-cpp",version:"v3.1.x"},
+{tagName: "v3.1.1",vtag:"3.1.1",releaseNotes:"/release-notes/versioned/client-cpp-3.1.1/",doc:"/docs/client-libraries-cpp",version:""},
+{tagName: "v3.1.0",vtag:"3.1.0",releaseNotes:"/release-notes/versioned/client-cpp-3.1.0/",doc:"/docs/client-libraries-cpp",version:""},
 {tagName: "v3.0.0",vtag:"3.0.0",releaseNotes:"/release-notes/versioned/client-cpp-3.0.0/",doc:"/docs/client-libraries-cpp",version:"v3.0.x"},
 {tagName: "v2.10.3",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-cpp-2.10.3/",doc:"/docs/2.10.x/client-libraries-cpp",version:"v2.10.x"},
 {tagName: "v2.10.2",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-cpp-2.10.2/",doc:"/docs/2.10.x/client-libraries-cpp",version:""},
