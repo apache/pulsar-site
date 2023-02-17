@@ -153,7 +153,7 @@ module.exports = {
       isCloseable: true,
     },
     colorMode: {
-      disableSwitch: false,
+      disableSwitch: true,
     },
     navbar: {
       title: "",

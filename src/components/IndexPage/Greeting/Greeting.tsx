@@ -4,6 +4,7 @@ import SineWavesAnimation from "./SineWaves/SineWavesAnimation";
 import ActionButton from "../../ui/ActionButton/ActionButton";
 import ActionButtonGroup from "../../ui/ActionButton/ActionButtonGroup";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import BlogPosts from "./BlogPosts/BlogPosts";
 
 const Greeting: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -41,6 +42,10 @@ const Greeting: React.FC = () => {
               }}
             />
           </ActionButtonGroup>
+
+          <div className={s.LatestPostInBlog}>
+            <BlogPosts count={3}/>
+          </div>
         </div>
       </div>
     </section>
