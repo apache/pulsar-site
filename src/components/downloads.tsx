@@ -174,7 +174,7 @@ export function ArchivedPulsarDownloadTable(): JSX.Element {
 
 export function CppReleasesDownloadTable(): JSX.Element {
     const data = cppReleases
-        .map(item => item.vtag)
+        .map(item => item.tagName.substring(1))
         .filter(version => Number(version.split('.')[0]) >= 3)
         .map(version => {
             const url = `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`
