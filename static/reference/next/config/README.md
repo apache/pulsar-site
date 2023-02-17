@@ -1,7 +1,5 @@
 ## Pulsar configurations
 
-Pulsar offers several command-line tools that you can use for managing Pulsar installations, performance testing, using command-line producers and consumers, and more.
-
 You can manage Pulsar configurations through configuration files in the [`conf`](https://github.com/apache/pulsar/tree/master/conf) directory of a Pulsar installation.
 
 - [BookKeeper](/next/config/reference-configuration-bookkeeper)
