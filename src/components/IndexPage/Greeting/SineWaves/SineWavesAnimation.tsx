@@ -15,15 +15,12 @@ const SineWavesAnimation: React.FC = () => {
 
   return (
     <div className={s.SineWavesAnimation}>
-      <canvas ref={ref}></canvas>
+      <canvas ref={ref} className={s.Canvas}></canvas>
     </div>
   );
 };
 
 function startWaves(el: HTMLElement) {
-  if (!SineWaves) {
-    return;
-  }
   new SineWaves({
     el,
     speed: 2,
