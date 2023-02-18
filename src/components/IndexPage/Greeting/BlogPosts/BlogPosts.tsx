@@ -20,7 +20,7 @@ const BlogPosts: React.FC<BlogPostsProps> = (props) => {
 
   return (
     <div className={s.BlogPosts}>
-      <strong>Latest news:</strong>
+      <strong>New in blog:</strong>
       <ul className={s.List}>
         {posts.map((post, i) => (
           <li key={i} className={s.ListItem}>

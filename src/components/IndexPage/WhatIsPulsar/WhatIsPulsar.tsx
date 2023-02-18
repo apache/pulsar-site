@@ -88,9 +88,20 @@ const WhatIsPulsar: React.FC = () => {
             <H3>Community</H3>
             <p className={s.Paragraph}>
               Pulsar is a Top 10 Apache Software Foundation project and has a
-              vibrant and passionate community and user base spanning small
-              companies and large enterprises.
+              vibrant and passionate community of its users.
             </p>
+            <p className={s.Paragraph}>
+              From online forums and documentation to meetups and conferences,
+              there are endless opportunities to connect with like-minded
+              individuals who are passionate about building the next generation
+              of data-driven applications.
+            </p>
+            <ul>
+              <li>Over 12 000 stars on GitHub.</li>
+              <li>More than 9500 users in Slack workspace.</li>
+              <li>Pulsar Summit conference and local meetups.</li>
+            </ul>
+
             <Link href="/community" variant="navigate">
               Join the community
             </Link>
