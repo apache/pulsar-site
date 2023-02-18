@@ -8,13 +8,14 @@ export type LinkProps = {
   href: string;
   children: React.ReactNode;
   variant?: "regular" | "external" | "navigate";
+  isDark?: boolean;
   isExternal?: boolean;
 };
 
 const Link: React.FC<LinkProps> = (props) => {
   return (
     <a
-      className={s.Link}
+      className={`${s.Link} ${props.isDark ? s.isDark : ""}`}
       href={props.isExternal ? props.href : useBaseUrl(props.href)}
       target={props.isExternal ? "_blank" : "_self"}
       rel={props.isExternal ? "noopener noreferrer" : undefined}

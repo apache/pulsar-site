@@ -31,39 +31,55 @@ const WhatIsPulsar: React.FC = () => {
           <div className={s.Section}>
             <H3>Trusted by</H3>
 
-            <div className={s.CompanyLogos}>
-              <YahooLogo className={s.CompanyLogo} />
-              <TencentLogo
-                className={s.CompanyLogo}
-                style={{ transform: `scale(0.8)` }}
-              />
-              <IntuitLogo className={s.CompanyLogo} />
-              <NttLogo
-                className={s.CompanyLogo}
-                style={{ transform: "scale(1.3)", margin: "0 1rem" }}
-              />
-              <SplunkLogo
-                className={s.CompanyLogo}
-                style={{ transform: "translate(0, 0.25rem)" }}
-              />
-              <MicroFocusLogo className={s.CompanyLogo} />
-              <HuaweiLogo
-                className={s.CompanyLogo}
-                style={{ transform: "scale(1.3)", padding: "0 2rem" }}
-              />
-              <VivoLogo
-                className={s.CompanyLogo}
-                style={{ transform: "translate(0, -0.25rem)" }}
-              />
-              <ChinaMobileLogo className={s.CompanyLogo} />
-            </div>
-
             <p className={s.Paragraph}>
               Apache Pulsar is used by many companies of all sizes, from
               startups to large&nbsp;enterprises.
             </p>
 
-            <Link href="/case-studies" variant="navigate">
+            <div className={s.CompanyLogos}>
+              <YahooLogo
+                className={s.CompanyLogo}
+                style={{ transform: "translate(0, 0.2rem)" }}
+              />
+              <TencentLogo
+                className={s.CompanyLogo}
+                style={{ transform: `scale(0.8)`, marginLeft: "-1rem" }}
+              />
+              <IntuitLogo className={s.CompanyLogo} />
+              <NttLogo
+                className={s.CompanyLogo}
+                style={{ transform: "scale(1.3)", margin: "0 3rem 0 1rem" }}
+              />
+              <HuaweiLogo
+                className={s.CompanyLogo}
+                style={{
+                  transform: "scale(1.3) translate(0.3rem, 0)",
+                  marginRight: "3rem",
+                }}
+              />
+              <SplunkLogo
+                className={s.CompanyLogo}
+                style={{
+                  transform: "translate(0, 0.25rem)",
+                  marginRight: "2.5rem",
+                }}
+              />
+              <MicroFocusLogo
+                className={s.CompanyLogo}
+                style={{ marginRight: "1.5rem" }}
+              />
+
+              <VivoLogo
+                className={s.CompanyLogo}
+                style={{
+                  transform: "translate(0, -0.25rem)",
+                  marginRight: "2rem",
+                }}
+              />
+              <ChinaMobileLogo className={s.CompanyLogo} />
+            </div>
+
+            <Link href="/case-studies" variant="navigate" isDark>
               See case studies
             </Link>
           </div>
@@ -73,19 +89,19 @@ const WhatIsPulsar: React.FC = () => {
             <p className={s.Paragraph}>
               Pulsar is able to handle both messaging and streaming workloads
               seamlessly.
-              <br />
-              <br />
-              You can process data in real-time as it
-              arrives, allowing you to make decisions faster and respond more
-              quickly to changing conditions.
-              <br />
-              <br />
-              Plus, Pulsar offers flexible
-              messaging models and messaging patterns, enabling you to build
-              event-driven architectures and handle complex workflows with ease.
+            </p>
+            <p className={s.Paragraph}>
+              You can process data in real-time as it arrives, allowing you to
+              make decisions faster and respond more quickly to changing
+              conditions.
+            </p>
+            <p className={s.Paragraph}>
+              Plus, Pulsar offers flexible messaging models and messaging
+              patterns, enabling you to build event-driven architectures and
+              handle complex workflows with ease.
             </p>
 
-            <Link href="#features" variant="navigate">
+            <Link href="#features" variant="navigate" isDark>
               More about features
             </Link>
           </div>
@@ -108,12 +124,13 @@ const WhatIsPulsar: React.FC = () => {
               <li>Pulsar Summit conference and local meetups.</li>
             </ul>
 
-            <Link href="/community" variant="navigate">
+            <Link href="/community" variant="navigate" isDark>
               Join the community
             </Link>
           </div>
         </div>
       </div>
+
       <WavesBackground className={s.WavesBackground} />
     </section>
   );

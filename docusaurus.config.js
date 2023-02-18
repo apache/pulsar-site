@@ -187,7 +187,7 @@ module.exports = {
           type: "doc",
           docId: "about",
           position: "right",
-          label: "Docs",
+          label: "Documentation",
         },
         {
           to: "/contribute/",
