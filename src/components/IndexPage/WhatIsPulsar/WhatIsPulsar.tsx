@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./WhatIsPulsar.module.css";
 import H2 from "../../ui/H/H2";
+import H3 from "../../ui/H/H3";
 import Link from "../../ui/Link/Link";
 
 import SplunkLogo from "./logos/splunk.svg";
@@ -12,7 +13,6 @@ import MicroFocusLogo from "./logos/micro-focus.svg";
 import VivoLogo from "./logos/vivo.svg";
 import ChinaMobileLogo from "./logos/china-mobile.svg";
 import NttLogo from "./logos/ntt.svg";
-import H1 from "../../ui/H/H1";
 import WavesBackground from "./waves.svg";
 
 const WhatIsPulsar: React.FC = () => {
@@ -20,7 +20,7 @@ const WhatIsPulsar: React.FC = () => {
     <section className={s.WhatIsPulsar}>
       <div className={s.Content}>
         <div className={s.ReadableContent}>
-          <H1>What is Apache Pulsar?</H1>
+          <H2>What is Apache Pulsar?</H2>
 
           <p className={s.Description}>
             Apache Pulsar is a powerful all-in-one distributed messaging and
@@ -29,7 +29,7 @@ const WhatIsPulsar: React.FC = () => {
           </p>
 
           <div className={s.Section}>
-            <H2>Trusted by</H2>
+            <H3>Trusted by</H3>
 
             <div className={s.CompanyLogos}>
               <YahooLogo className={s.CompanyLogo} />
@@ -69,7 +69,7 @@ const WhatIsPulsar: React.FC = () => {
           </div>
 
           <div className={s.Section}>
-            <H2>Why Apache Pulsar?</H2>
+            <H3>Why Apache Pulsar?</H3>
             <p className={s.Paragraph}>
               Pulsar is able to handle both messaging and streaming workloads
               seamlessly. With Pulsar, you can process data in real-time as it
@@ -85,7 +85,7 @@ const WhatIsPulsar: React.FC = () => {
           </div>
 
           <div className={s.Section}>
-            <H2>Community</H2>
+            <H3>Community</H3>
             <p className={s.Paragraph}>
               Pulsar is a Top 10 Apache Software Foundation project and has a
               vibrant and passionate community and user base spanning small
