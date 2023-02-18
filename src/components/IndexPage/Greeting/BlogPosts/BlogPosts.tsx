@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./BlogPosts.module.css";
 import { BlogPostMetadata } from "@docusaurus/plugin-content-blog";
+import Link from "../../../ui/Link/Link";
 
 const recentPosts: {
   items: BlogPostMetadata[];
@@ -13,20 +14,22 @@ export type BlogPostsProps = {
 const BlogPosts: React.FC<BlogPostsProps> = (props) => {
   const posts = recentPosts.items.slice(0, props.count);
 
-  console.log('posts', posts)
   if (posts.length === 0) {
     return <></>;
   }
 
   return (
     <div className={s.BlogPosts}>
-      {posts.map((post, i) => (
-        <div key={i}>
-          <a className={s.Link} href={post.permalink}>
-            {post.title}
-          </a>
-        </div>
-      ))}
+      <strong>Latest news:</strong>
+      <ul className={s.List}>
+        {posts.map((post, i) => (
+          <li key={i} className={s.ListItem}>
+            <Link href={post.permalink} variant="navigate">
+              {post.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
