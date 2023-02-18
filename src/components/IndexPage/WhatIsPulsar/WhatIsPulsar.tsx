@@ -72,9 +72,15 @@ const WhatIsPulsar: React.FC = () => {
             <H3>Why Apache Pulsar?</H3>
             <p className={s.Paragraph}>
               Pulsar is able to handle both messaging and streaming workloads
-              seamlessly. With Pulsar, you can process data in real-time as it
+              seamlessly.
+              <br />
+              <br />
+              You can process data in real-time as it
               arrives, allowing you to make decisions faster and respond more
-              quickly to changing conditions. Plus, Pulsar offers flexible
+              quickly to changing conditions.
+              <br />
+              <br />
+              Plus, Pulsar offers flexible
               messaging models and messaging patterns, enabling you to build
               event-driven architectures and handle complex workflows with ease.
             </p>
