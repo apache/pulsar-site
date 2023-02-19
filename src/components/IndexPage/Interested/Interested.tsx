@@ -9,7 +9,6 @@ const Interested: React.FC = () => {
       <div className={s.Content}>
         <div className={s.ReadableContent}>
           <H3>Interested in Pulsar?</H3>
-          <div className={s.Description}>Now choose your next step:</div>
           <div>
             <div className={s.Option}>
               <Link href="mailto:users@pulsar.apache.org" variant="navigate">

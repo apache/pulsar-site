@@ -15,7 +15,9 @@ const Greeting: React.FC = () => {
       <div
         className={s.Content}
         style={{
-          top: isAnnouncementBarVisible ? "calc(var(--docusaurus-announcement-bar-height) * -1)" : "0",
+          top: isAnnouncementBarVisible
+            ? "calc(var(--docusaurus-announcement-bar-height) * -1)"
+            : "0",
         }}
       >
         <div className={s.Text}>
@@ -50,7 +52,7 @@ const Greeting: React.FC = () => {
           </ActionButtonGroup>
 
           <div className={s.LatestPostInBlog}>
-            <BlogPosts count={3}/>
+            <BlogPosts count={3} />
           </div>
         </div>
       </div>

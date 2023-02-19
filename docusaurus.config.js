@@ -314,13 +314,12 @@ module.exports = {
         {
           items: [
             {
-              html: `<div><small><strong>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0.</a></strong></small></div>
-                            <div>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</div>`,
+              html: `<div>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</div>`,
             },
           ],
         },
       ],
-      copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
+      copyright: `<p>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0</a>.</p>
                         <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>`,
     },
     prism: {
