@@ -147,7 +147,7 @@ module.exports = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     announcementBar: {
       id: "summit",
-      content: require("./announcement").html,
+      content: require("./src/components/announcement").html,
       backgroundColor: "#0071e3",
       textColor: "#fff",
       isCloseable: false,
@@ -158,7 +158,7 @@ module.exports = {
     navbar: {
       title: "",
       logo: {
-        alt: "pulsar logo",
+        alt: "Apache Pulsar logo",
         src: "img/logo.svg",
       },
       items: [
@@ -273,7 +273,7 @@ module.exports = {
           href: "https://github.com/apache/pulsar",
           label: "Github",
           position: "right",
-          className: "header-github-link",
+          className: "navbar-github-link",
         },
       ],
     },
