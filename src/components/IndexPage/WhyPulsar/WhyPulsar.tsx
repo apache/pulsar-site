@@ -6,7 +6,7 @@ import s from "./WhyPulsar.module.css";
 const WhyPulsar: React.FC = () => {
   return (
     <div className={s.WhyPulsar}>
-      <div className="DottyBackground"></div>
+      <div className={s.DottyBackground}></div>
       <div className={s.Content} id="why-pulsar">
         <div className={s.ReadableContent}>
           <div className={s.Title}>
