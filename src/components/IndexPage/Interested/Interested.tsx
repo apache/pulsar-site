@@ -12,13 +12,18 @@ const Interested: React.FC = () => {
           <div className={s.Description}>Now choose your next step:</div>
           <div>
             <div className={s.Option}>
-              <Link href="/docs" variant="navigate">
-                Learn
+              <Link href="mailto:users@pulsar.apache.org" variant="navigate">
+                Ask a question
               </Link>
             </div>
             <div className={s.Option}>
-              <Link href="#" variant="navigate">
-                Ask question
+              <Link href="/blog" variant="navigate">
+                Checkout the blog
+              </Link>
+            </div>
+            <div className={s.Option}>
+              <Link href="/docs" variant="navigate">
+                Learn Pulsar
               </Link>
             </div>
             <div className={s.Option}>
