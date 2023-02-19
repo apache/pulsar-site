@@ -8,10 +8,16 @@ import BlogPosts from "./BlogPosts/BlogPosts";
 
 const Greeting: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const isAnnouncementBarVisible = siteConfig.themeConfig?.announcementBar;
 
   return (
     <section className={s.Greeting}>
-      <div className={s.Content}>
+      <div
+        className={s.Content}
+        style={{
+          top: isAnnouncementBarVisible ? "calc(var(--docusaurus-announcement-bar-height) * -1)" : "0",
+        }}
+      >
         <div className={s.Text}>
           <h1 className={s.Title}>
             Cloud-Native, Distributed Messaging and Streaming
