@@ -102,8 +102,8 @@ const WhatIsPulsar: React.FC = () => {
               handle complex workflows with ease.
             </p>
 
-            <Link href="#features" variant="navigate" isDark>
-              More about features
+            <Link href="#why-pulsar" variant="navigate" isDark>
+              Learn more
             </Link>
           </div>
 
