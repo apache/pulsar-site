@@ -20,14 +20,15 @@ const WhatIsPulsar: React.FC = () => {
     <section className={s.WhatIsPulsar}>
       <div className={s.Content}>
         <div className={s.ReadableContent}>
-          <H2>What is Apache Pulsar?</H2>
+          <div className={s.Section}>
+            <H2>What is Apache Pulsar?</H2>
 
-          <p className={s.Description}>
-            Apache Pulsar is a powerful all-in-one distributed messaging and
-            streaming platform that delivers high performance, scalability, and
-            reliability for real-time data processing.
-          </p>
-
+            <p className={s.Description}>
+              Apache Pulsar is a powerful all-in-one distributed messaging and
+              streaming platform that delivers high performance, scalability,
+              and reliability for real-time data processing.
+            </p>
+          </div>
           <div className={s.Section}>
             <H3>Trusted by</H3>
 

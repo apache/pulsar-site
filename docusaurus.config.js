@@ -147,10 +147,10 @@ module.exports = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     announcementBar: {
       id: "summit",
-      content: `🚀 Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! <a target="_blank" href="https://sessionize.com/pulsar-virtual-summit-europe-2023/">Submit your session now</a>!`,
-      backgroundColor: "#198fff",
+      content: require("./announcement").html,
+      backgroundColor: "#0071e3",
       textColor: "#fff",
-      isCloseable: true,
+      isCloseable: false,
     },
     colorMode: {
       disableSwitch: true,
@@ -369,6 +369,7 @@ module.exports = {
           customCss: [
             require.resolve("./src/css/custom.css"),
             require.resolve("./src/css/fonts.css"),
+            require.resolve("./src/css/announcement-bar.css"),
             require.resolve("./src/css/footer.css"),
             require.resolve("./src/css/variables.css"),
           ],
@@ -415,8 +416,6 @@ module.exports = {
       }),
     ],
   ],
-  scripts: [
-    "/js/matomo-agent.js",
-  ],
+  scripts: ["/js/matomo-agent.js"],
   clientModules: [require.resolve("./matomoClientModule.ts")],
 };
