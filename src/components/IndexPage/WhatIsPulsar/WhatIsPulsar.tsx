@@ -79,6 +79,18 @@ const WhatIsPulsar: React.FC = () => {
               />
               <ChinaMobileLogo className={s.CompanyLogo} />
             </div>
+            <strong>Use cases:</strong>
+            <div>
+              <ul style={{ display: 'grid', maxWidth: '20rem', gridTemplateColumns: '1fr 1fr', columnGap: '1rem' }}>
+                <li>Messaging</li>
+                <li>Streaming</li>
+                <li>Event sourcing</li>
+                <li>Metrics</li>
+                <li>Log aggregation</li>
+                <li>Stream processing</li>
+                <li>Commit log</li>
+              </ul>
+            </div>
 
             <Link href="/case-studies" variant="navigate" isDark>
               See case studies

@@ -16,8 +16,8 @@ const WhyPulsar: React.FC = () => {
             <div className={s.Section}>
               <H3>Ideal for mission critical workload</H3>
               <ul>
-                <li>Zero messages loss guarantee.</li>
                 <li>Highly available and fault-tolerant architecture.</li>
+                <li>Zero messages loss guarantee.</li>
                 <li>
                   At-most-once, at-least-once, and exactly-once delivery
                   guarantees.
@@ -68,7 +68,7 @@ const WhyPulsar: React.FC = () => {
               </ul>
             </div>
             <div className={s.Section}>
-              <H3>Great set of built-in features</H3>
+              <H3>Unique set of built-in features</H3>
               <ul>
                 <li>
                   Serverless computing on top of Pulsar with Pulsar Functions.
