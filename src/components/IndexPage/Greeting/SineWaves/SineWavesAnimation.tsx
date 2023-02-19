@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import s from "./SineWavesAnimation.module.css";
-import SineWaves from "sine-waves";
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
+const SineWaves = ExecutionEnvironment.canUseDOM ? require("sine-waves") : null;
 
 const SineWavesAnimation: React.FC = () => {
   const ref = React.useRef<HTMLCanvasElement>(null);
@@ -85,4 +86,4 @@ function startWaves(el: HTMLElement) {
   });
 }
 
-export default SineWavesAnimation;
+export default SineWaves ? SineWavesAnimation : () => null;
