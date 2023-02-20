@@ -8,6 +8,7 @@ import BlogPosts from "./BlogPosts/BlogPosts";
 
 const Greeting: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const [isAnimationReady, setIsAnimationReady] = React.useState(false);
   const isAnnouncementBarVisible = siteConfig.themeConfig?.announcementBar;
 
   return (
@@ -36,8 +37,8 @@ const Greeting: React.FC = () => {
             streaming platform built for the cloud.
           </p>
 
-          <div className={s.Animation}>
-            <SineWavesAnimation />
+          <div className={`${s.Animation} ${isAnimationReady ? s.AnimationReady : ''}`}>
+            <SineWavesAnimation onReady={() => setIsAnimationReady(true)}/>
           </div>
         </div>
 

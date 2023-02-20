@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import s from "./SineWavesAnimation.module.css";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
+import { PropaneSharp } from "@mui/icons-material";
 const SineWaves = ExecutionEnvironment.canUseDOM ? require("sine-waves") : null;
 
-const SineWavesAnimation: React.FC = () => {
+export type SineWavesAnimationProps = {
+  onReady?: () => void;
+};
+
+const SineWavesAnimation: React.FC<SineWavesAnimationProps> = (props) => {
   const ref = React.useRef<HTMLCanvasElement>(null);
   const [isStarted, setIsStarted] = React.useState(false);
 
   useEffect(() => {
     if (!isStarted && ref.current) {
       startWaves(ref.current);
+      props.onReady?.();
       setIsStarted(true);
     }
   }, []);
