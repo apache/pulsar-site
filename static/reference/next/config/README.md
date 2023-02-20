@@ -26,3 +26,11 @@ If you want to override the configurations of clients internal to brokers, webso
 > Notes:
 > * This override feature only applies to Pulsar 2.10.1 and later versions.
 > * When running the function worker within the broker, you have to configure those clients by using the `functions_worker.yml` file. These prefixed configurations do not apply to any of those clients.
+
+### Java system property
+
+You can set some specifying configurations through Java properties.
+
+| **Property**       | **Description**                                              |
+| ------------------ | ------------------------------------------------------------ |
+| pulsar.enableUring | Use `io_uring` instead of `epoll` as network IO mode, `-Dpulsar.enableUring=1` means this feature is enable. |
