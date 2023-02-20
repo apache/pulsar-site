@@ -12,14 +12,7 @@ const Greeting: React.FC = () => {
   const isAnnouncementBarVisible = siteConfig.themeConfig?.announcementBar;
 
   return (
-    <section
-      className={s.Greeting}
-      style={{
-        minHeight: isAnnouncementBarVisible ?
-          `calc(100vh - var(--ifm-navbar-height) - var(--docusaurus-announcement-bar-height))` :
-          `calc(100vh - var(--ifm-navbar-height))`
-      }}
-    >
+    <section className={`${s.Greeting} ${isAnnouncementBarVisible ? s.GreetingWithAnnouncementBar : ''}`}>
       <div
         className={s.Content}
         style={{

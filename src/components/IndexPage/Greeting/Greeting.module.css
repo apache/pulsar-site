@@ -1,12 +1,13 @@
 .Greeting {
   overflow: hidden;
   position: relative;
-  padding: 0 2rem;
+  padding: 0 1rem;
+  display: flex;
 }
 
 .Content {
   max-width: var(--max-content-width);
-  margin: auto;
+  margin: 0 auto;
   padding-top: 5rem;
   padding-bottom: 4rem;
   position: relative;
@@ -55,8 +56,12 @@
 }
 
 @keyframes animationFadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .LatestPostInBlog {
@@ -82,5 +87,18 @@
 
   .ActionButtons {
     top: 7rem;
+  }
+}
+
+@media (orientation: landscape) {
+  .Greeting {
+    min-height: calc(100vh - var(--ifm-navbar-height));
+  }
+
+  .Greeting.GreetingWithAnnouncementBar {
+    min-height: calc(
+      100vh - var(--ifm-navbar-height) -
+        var(--docusaurus-announcement-bar-height)
+    );
   }
 }
