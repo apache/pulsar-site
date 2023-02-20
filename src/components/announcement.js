@@ -7,8 +7,8 @@ const html = `
   "
 >
   <span>
-    <strong>Pulsar Virtual Summit Europe 2023</strong> will take place on May 23rd, 2023.
-    <span>CFP is open now!</span>
+    <strong>Pulsar Virtual Summit Europe 2023</strong>
+    <span class="mobile-hidden">will take place on May 23rd, 2023. CFP is open now!</span>
   </span>
 
   <a

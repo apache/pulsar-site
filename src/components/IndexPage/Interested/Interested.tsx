@@ -32,7 +32,7 @@ const Interested: React.FC = () => {
             </div>
             <div className={s.Option}>
               <Link href="#" variant="navigate">
-                Discover managed solutions and support providers
+                Discover support providers
               </Link>
             </div>
           </div>
