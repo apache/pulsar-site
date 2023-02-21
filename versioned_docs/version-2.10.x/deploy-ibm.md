@@ -138,7 +138,6 @@ Output
 
 - For connection to the Kubernetes cluster, you will get a command in the Kubernetes cluster section (Kubernetes console) as below.
 
-> Note: below command is just an example, you will get this command in your kubernetes console.
 
 ```bash
     $ibmcloud ks cluster config --cluster ccql163t064kpvg5gg10
