@@ -136,7 +136,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 Output
 ![Output of Command img IBMLogin](/assets/IBMCloud/IBMLogin.png)
 
-- For connection to Kubernetes cluster, you will get command in Kubernete cluster section. It is like below example.
+- For connection to the Kubernetes cluster, you will get a command in the Kubernetes cluster section (Kubernetes console) as below.
 
 > Note: below command is just an example, you will get this command in your kubernetes console.
 
