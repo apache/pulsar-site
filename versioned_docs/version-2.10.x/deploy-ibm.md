@@ -158,7 +158,6 @@ Output
 Make sure all the pods of Pulsar are running. Get the service URL and broker URL for publishing and consuming the messages.
 
 
-- We will add "Pulsar" Helm repo in VM and clone the repo of Apache Pulsar from Github, below is all the commands.
 
 > [Installation of Pulsar helm in minikube cluster](https://pulsar.apache.org/docs/getting-started-helm/)  this document is for minikube cluster we are taking reference from that.
 
