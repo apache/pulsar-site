@@ -123,7 +123,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 - Install [IBM Cloud CLI Plugins](https://cloud.ibm.com/docs/containers?topic=containers-cs_cli_install) to connect to IKS (IBM Kubernetes services). This is a required step.
 
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) 1.23 or later versions.
-- Installation of [Helm](https://helm.sh/docs/intro/install/)
+- Install [Helm](https://helm.sh/docs/intro/install/).
 
 > Note:- Please install all the above things before running the below commands
 
