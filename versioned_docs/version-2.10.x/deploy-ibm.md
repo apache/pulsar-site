@@ -118,7 +118,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 #### Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
 
-**Requirements** : 
+**Prerequisites** 
 - Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli) and connect to Kubernetes master node.
 
 - Installation of [IBM Cloud CLI Plugins](https://cloud.ibm.com/docs/containers?topic=containers-cs_cli_install) Required for connect to IKS (IBM Kubernetes services).
