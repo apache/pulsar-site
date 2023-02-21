@@ -154,7 +154,7 @@ Output
 
 > Now we are able to run commands of kubectl.
 
-#### Run kubectl commands to verify the deployment
+## Verify the deployment
 Make sure all the pods of Pulsar are runnig. Get the service URL and broker URL for publishing and consuming the messages.
 
 
