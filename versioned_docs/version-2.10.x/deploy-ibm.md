@@ -155,7 +155,7 @@ Output
 > Now we are able to run commands of kubectl.
 
 ## Verify the deployment
-Make sure all the pods of Pulsar are runnig. Get the service URL and broker URL for publishing and consuming the messages.
+Make sure all the pods of Pulsar are running. Get the service URL and broker URL for publishing and consuming the messages.
 
 
 - We will add "Pulsar" Helm repo in VM and clone the repo of Apache Pulsar from Github, below is all the commands.
