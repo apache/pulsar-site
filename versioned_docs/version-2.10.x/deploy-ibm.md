@@ -4,7 +4,6 @@ title: Apache Pulsar Installation on IBM Kubernetes Cluster through Helm chart
 sidebar_label: "IBM Cloud Services"
 original_id: deploy-ibm
 ---
-# Apache Pulsar Installation on IBM Kubernetes Cluster through Helm chart
 
 :::tip
 
