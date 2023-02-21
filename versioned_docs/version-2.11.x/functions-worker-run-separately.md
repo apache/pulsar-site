@@ -128,7 +128,7 @@ authenticationEnabled: true
 authenticationProviders: [provider1, provider2]
 ```
 
-For [TLS authentication](security-tls-authentication.md) provider, follow the example below to add the required settings.
+For [mTLS authentication](security-tls-authentication.md) provider, follow the example below to add the required settings.
 
 ```properties
 brokerClientAuthenticationPlugin: org.apache.pulsar.client.impl.auth.AuthenticationTls

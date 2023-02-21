@@ -46,7 +46,7 @@ If you have multiple brokers, separate `IP:port` by commas:
 pulsar://localhost:6550,localhost:6651,localhost:6652
 ```
 
-If you use [TLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
+If you use [mTLS authentication](security-tls-authentication.md), add `+ssl` in the scheme:
 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651
@@ -81,7 +81,7 @@ The following configurable parameters are available for Pulsar clients:
 | Parameter | Description | Default |
 | :-------- | :---------- | :------ |
 | `serviceUrl` | The connection URL for the Pulsar cluster. See [above](#connection-urls) for more info. |  |
-| `authentication` | Configure the authentication provider. (default: no authentication). See [TLS Authentication](security-tls-authentication.md) for more info. | |
+| `authentication` | Configure the authentication provider. (default: no authentication). See [mTLS authentication](security-tls-authentication.md) for more info. | |
 | `operationTimeoutSeconds` | The timeout for Node.js client operations (creating producers, subscribing to and unsubscribing from [topics](reference-terminology.md#topic)). Retries occur until this threshold is reached, at which point the operation fails. | 30 |
 | `ioThreads` | The number of threads to use for handling connections to Pulsar [brokers](reference-terminology.md#broker). | 1 |
 | `messageListenerThreads` | The number of threads used by message listeners ([consumers](#consumers) and [readers](#readers)). | 1 |
