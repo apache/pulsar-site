@@ -145,7 +145,6 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 
 **Limitations:**
 - Chunking is only available for persisted topics.
-- Chunking is only available for the exclusive and failover subscription types.
 - Chunking cannot be enabled simultaneously with batching.
 
 #### Handle consecutive chunked messages with one ordered consumer
@@ -362,7 +361,7 @@ consumer.acknowledge(message);
 
 ### Retry letter topic
 
-Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers. 
+Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers.
 
 The diagram below illustrates the concept of the retry letter topic.
 ![](/assets/retry-letter-topic.svg)
@@ -448,7 +447,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 
 ### Dead letter topic
 
-Dead letter topic allows you to continue message consumption even when some messages are not consumed successfully. The messages that have failed to be consumed are stored in a specific topic, which is called the dead letter topic. The functionality of a dead letter topic is implemented by consumers. You can decide how to handle the messages in the dead letter topic. 
+Dead letter topic allows you to continue message consumption even when some messages are not consumed successfully. The messages that have failed to be consumed are stored in a specific topic, which is called the dead letter topic. The functionality of a dead letter topic is implemented by consumers. You can decide how to handle the messages in the dead letter topic.
 
 Enable dead letter topic in a Java client using the default dead letter topic.
 
@@ -598,17 +597,17 @@ In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all 
 
 #### Key_Shared
 
-In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer. 
+In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
 
 There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key): Sticky, Auto-split Hash Range, and Auto-split Consistent Hashing. The steps for all algorithms are:
-1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash. 
+1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash.
 2. That hash number is fed to the algorithm to select a consumer from the existing connected consumers.
 
 ```
                       +--------------+                              +-----------+
-Message Key ----->  / Hash Function / ----- hash (32-bit) -------> / Algorithm / ----> Consumer   
+Message Key ----->  / Hash Function / ----- hash (32-bit) -------> / Algorithm / ----> Consumer
                    +---------------+                               +----------+
 ```
 
@@ -660,7 +659,7 @@ C1 is disconnected:
 |------- C3 ------|-------------------------- C2 -----------------------|
 ```
 
-The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around. 
+The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around.
 
 ##### Auto-split Consistent Hashing
 
@@ -693,7 +692,7 @@ When adding a consumer, we mark 100 points on that circle and associate them to 
 Since the hash function has the uniform distribution attribute, those points would be uniformly distributed across the circle.
 
 ```
-    C1-100                 
+    C1-100
          , - ~ ~ ~ - ,   C1-1
      , '               ' ,
    ,                       ,
@@ -705,7 +704,7 @@ Since the hash function has the uniform distribution attribute, those points wou
    ,                       ,
      ,                  , '
        ' - , _ _ _ ,  '      ...
- 
+
 ```
 
 A consumer is selected for a given message key by putting its hash on the circle then continue clock-wise on the circle until you reach a marking point. The point might have more than one consumer on it (hash function might have collisions) there for, we run the following operation to get a position within the list of consumers for that point, then we take the consumer in that position: `hash % consumer_list_size = index`.
@@ -724,7 +723,7 @@ Suppose we have 2 consumers (C1 and C2) each specified their ranges, then:
 ```
 C1 = [0, 16384), [32768, 49152)
 C2 = [16384, 32768), [49152, 65536)
- 
+
  0               16,384            32,768           49,152             65,536
  |------- C1 ------|------- C2 ------|------- C1 ------|------- C2 ------|
 ```
@@ -735,7 +734,7 @@ If the newly connected consumer didn't supply their ranges, or they overlap with
 
 ##### How to use them?
 
-When building the consumer, you can specify the Key Shared Mode: 
+When building the consumer, you can specify the Key Shared Mode:
 * AUTO_SPLIT - Auto-split Hash Range
 * STICKY - Sticky
 
@@ -751,7 +750,7 @@ That requirement can be relaxed by enabling `allowOutOfOrderDelivery` via the Co
 
 :::note
 
-When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers. 
+When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers.
 :::
 
 There are two reasons why the key-based batching is necessary for the Key_Shared subscription type:
