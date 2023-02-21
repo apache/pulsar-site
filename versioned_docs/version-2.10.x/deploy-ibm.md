@@ -147,7 +147,7 @@ Output
 
 ![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
 
-- After running 2nd and 3rd commands showing in above image you will get output shows like in the below image (no need to run number 1 command because we already logged in to IBM Cloud)
+- After running the second and third commands shown in the above images, you will get an output as below. You do not need to run the first command because you've already logged in to IBM Cloud.
 
 Output
 ![Output of Command IKSConnect](/assets/IBMCloud/IKSConnect.png)
