@@ -214,7 +214,11 @@ Backlog quotas are handled at the namespace level. They can be managed via:
 
 You can set a size and/or time threshold and backlog retention policy for all of the topics in a [namespace](reference-terminology.md#namespace) by specifying the namespace, a size limit and/or a time limit in second, and a policy by name.
 
-Note that by default, time-based backlogs are enforced periodically using an approximate method. This avoids a potentially costly scan of the backlog each time a message is produced. However, it does mean that in some cases you may observe a lack of strict enforcement. To tune this behavior you should consider using the [`backlogQuotaCheckIntervalInSeconds`][backlogquotacheckintervalinseconds] and [`preciseTimeBasedBacklogQuotaCheck`][precisetimebasedbacklogquotacheck] broker options.
+::: note 
+
+By default, time-based backlogs are enforced periodically using an approximate method. This avoids a potentially costly scan of the backlog each time a message is produced. However, it does mean that in some cases you may observe a lack of strict enforcement. To tune this behavior, you should consider using the [`backlogQuotaCheckIntervalInSeconds`][backlogquotacheckintervalinseconds] and [`preciseTimeBasedBacklogQuotaCheck`][precisetimebasedbacklogquotacheck] broker options.
+
+:::
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
