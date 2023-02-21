@@ -92,3 +92,57 @@ Consumer<byte[]> consumer = pulsarClient
     .subscribe();
 ```
 
+[2] Example of using transactions to ack messages individually
+```java
+// resource prepare
+String sourceTopicName = "persistent://" + NAMESPACE1 + "/sourceTopic";
+String sinkTopicName = "persistent://" + NAMESPACE1 + "/sinkTopic";
+String subName = "shared-subscription";
+String producerName = "txn-message-producer";
+try {
+  @Cleanup
+  Producer<String> sinkProducer = pulsarClient.newProducer(Schema.STRING)
+          .topic(sinkTopicName)
+          .producerName(producerName)
+          .create();
+  @Cleanup
+  Consumer<String> sourceConsumer = pulsarClient.newConsumer(Schema.STRING)
+          .topic(sourceTopicName)
+          .subscriptionName(subName)
+          .subscriptionType(SubscriptionType.Shared)
+          .subscribe();
+  Message<String> message = null;
+  Transaction transaction = null;
+  while (true) {
+      try {
+          message = sourceConsumer.receive();
+          //Open a transaction to handle the received message
+          transaction = pulsarClient.newTransaction()
+                  .withTransactionTimeout(5, TimeUnit.SECONDS)
+                  .build()
+                  .get();
+          //Do some things there
+          //Send message to another topic
+          sinkProducer.newMessage(transaction)
+                  .value("handle message " + message.getValue())
+                  .send();
+          //Ack the message that has been consumed
+          sourceConsumer.acknowledgeAsync(message.getMessageId(), transaction).get();
+          //Commit the transaction
+          transaction.commit().get();
+      } catch (ExecutionException e) {
+          Throwable exception = e.getCause();
+          if (!(exception instanceof PulsarClientException.TransactionConflictException)) {
+              //The message may not be handled, so we need to redeliver it
+              sourceConsumer.negativeAcknowledge(message);
+          }
+          if (!(exception instanceof TransactionCoordinatorClientException.TransactionNotFoundException) && transaction !=null) {
+              //Abort the transaction if there is an exception and the transaction is not end.
+              transaction.abort().get();
+          }
+      }
+  }
+} catch (Exception e) {
+  log.error("Catch Exception", e);
+}
+```
