@@ -19,7 +19,7 @@ The application configures the producer with the public key for encryption. You 
 
 The following figure illustrates how Pulsar encrypts messages on the producer side and decrypts messages on the consumer side.
 
-![alt text](/assets/pulsar-encryption.svg "Pulsar Encryption Process")
+![Pulsar end-to-end encryption](/assets/pulsar-encryption.svg)
 
 If produced messages are consumed across application boundaries, you need to ensure that consumers in other applications have access to one of the private keys that can decrypt the messages. You can do this in two ways:
 1. The consumer application provides you access to the public key, which you add to your producer keys.
