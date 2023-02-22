@@ -17,8 +17,29 @@ To ensure clients in both internal and external networks can connect to a Pulsar
 
 The following example creates a Python client using multiple advertised listeners:
 
-```python
-import pulsar
 
-client = pulsar.Client('pulsar://localhost:6650', listener_name='external')
-```
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
+  <TabItem value="Java">
+
+  ```java
+  PulsarClient client = PulsarClient.builder()
+    .serviceUrl("pulsar://xxxx:6650")
+    .listenerName("external")
+    .build();
+  ```
+
+  </TabItem>
+  <TabItem value="Python">
+
+  ```python
+  import pulsar
+
+  client = pulsar.Client('pulsar://localhost:6650', listener_name='external')
+  ```
+
+  </TabItem>
+</Tabs>
+````

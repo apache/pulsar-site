@@ -428,8 +428,16 @@ This example shows how a consumer unsubscribes from a topic.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
-  defaultValue="C#"
-  values={[{"label":"C#","value":"C#"}]}>
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
+<TabItem value="Java">
+
+   ```java
+   consumer.unsubscribe();
+   ```
+
+  </TabItem>
+
 <TabItem value="C#">
 
    ```csharp
@@ -452,8 +460,16 @@ This example shows how a consumer receives messages from a topic.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
-  defaultValue="C#"
-  values={[{"label":"C#","value":"C#"}]}>
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}, {"label":"C#","value":"C#"}]}>
+<TabItem value="Java">
+
+   ```java
+   Message message = consumer.receive();
+   ```
+
+ </TabItem>
+
 <TabItem value="C#">
 
    ```csharp
@@ -471,8 +487,16 @@ This example shows how a consumer receives messages from a topic.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
-  defaultValue="Go"
-  values={[{"label":"Go","value":"Go"}]}>
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}, {"label":"Go","value":"Go"}]}>
+<TabItem value="Java">
+
+   ```java
+   consumer.receive(10, TimeUnit.SECONDS);
+   ```
+
+ </TabItem>
+
   <TabItem value="Go">
 
 
@@ -599,6 +623,9 @@ Messages can be acknowledged individually or cumulatively. For details about mes
   values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
 <TabItem value="Java">
 
+  ```java
+  consumer.acknowledge(msg);
+  ```
 
 
   </TabItem>
@@ -620,6 +647,9 @@ Messages can be acknowledged individually or cumulatively. For details about mes
   values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
 <TabItem value="Java">
 
+  ```java
+  consumer.acknowledgeCumulative(msg);
+  ```
 
   </TabItem>
   <TabItem value="C#">
@@ -761,8 +791,27 @@ You can avoid running a loop by blocking calls with an event-based style by usin
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
-  defaultValue="C++"
-  values={[{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+<TabItem value="Java">
+
+```java
+Consumer<String> consumer = pulsarClient.newConsumer(Schema.STRING)
+                      .topic("persistent://my-property/my-ns/my-topic")
+                      .subscriptionName("my-subscription")
+                      .messageListener((c, m) -> {
+                          try {
+                              c.acknowledge(m);
+                          } catch (Exception e) {
+                              Assert.fail("Failed to acknowledge", e);
+                          }
+                      })
+                      .subscribe();
+```
+
+</TabItem>
+
+
 <TabItem value="C++">
 
 This example starts a subscription at the earliest offset and consumes 100 messages.

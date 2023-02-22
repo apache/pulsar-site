@@ -11,24 +11,44 @@ import TabItem from '@theme/TabItem';
 
 After setting up your clients, you can explore more to start working with [producers](concepts-clients.md#producers).
 
+## Create the producer
 
-## Configure messages
-
-Pulsar clients provide an interface that you can use to construct and configure messages. Here's an example message:
+This example shows how to create a producer.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"}]}>
+  values={[{"label":"Java","value":"Java"}]}>
+
+  <TabItem value="Java">
+
+  ```java
+Producer<String> producer = pulsarClient.newProducer(Schema.STRING)
+                .topic("my-topic")
+                .create();
+  ```
+
+  </TabItem>
+</Tabs>
+````
+
+## Send messages
+
+This example shows how to send messages using producers.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"}]}>
 <TabItem value="Java">
 
    ```java
-   producer.newMessage()
-       .key("my-message-key")
-       .value("my-async-message".getBytes())
-       .property("my-key", "my-value")
-       .property("my-other-key", "my-other-value")
-       .send();
+  producer.newMessage()
+          .key("my-message-key")
+          .value("my-async-message")
+          .property("my-key", "my-value")
+          .property("my-other-key", "my-other-value")
+          .send();
    ```
 
    You can terminate the builder chain with `sendAsync()` and get a future return.
@@ -126,17 +146,7 @@ The following static methods are available for the message id object:
 | `deserialize(Buffer)` | Deserialize a message id object from a Buffer. | `Object` |
 
  </TabItem>
-</Tabs>
-````
 
-## Send messages
-
-This example shows how to send messages using producers.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="C#"
-  values={[{"label":"C#","value":"C#"}]}>
 <TabItem value="C#">
 
 ```csharp
