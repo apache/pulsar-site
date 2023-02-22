@@ -48,6 +48,7 @@ const sidebars = {
             type: "category",
             label: "Releases",
             items: [
+                'version-policy',
                 {
                     type: "category",
                     label: 'Release process',
@@ -58,7 +59,6 @@ const sidebars = {
                     ]
                 },
                 'validate-release-candidate',
-                'version-policy',
             ]
         },
         {
