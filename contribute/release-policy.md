@@ -50,6 +50,7 @@ Therefore, users can choose between stay in an LTS release until they are ready 
 
 | Version | Released      | Active Support	 | Security Support | Latest |
 |---------|---------------|-----------------|------------------|--------|
+| 2.11    | January 2023  | January 2024    | January 2024     | 2.11.0 |
 | 2.10    | April 2022    | April 2023      | April 2023       | 2.10.3 |
 | 2.9     | November 2021 | November 2022   | November 2022    | 2.9.4  |
 | 2.8     | June 2021     | June 2022       | June 2022        | 2.8.4  |
