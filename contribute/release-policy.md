@@ -48,7 +48,7 @@ Therefore, users can choose between stay in an LTS release until they are ready 
 
 ## Supported Versions
 
-| Version | Released      | Active Support	 | Security Support | Latest |
+| Version | Released      | Active Support  | Security Support | Latest |
 |---------|---------------|-----------------|------------------|--------|
 | 2.11    | January 2023  | January 2024    | January 2024     | 2.11.0 |
 | 2.10    | April 2022    | April 2023      | April 2023       | 2.10.3 |
