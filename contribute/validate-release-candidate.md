@@ -3,7 +3,7 @@ id: validate-release-candidate
 title: Verifying release candidates
 ---
 
-The following are manual instructions for reviewing and validating a release candidate.
+This page contains manual instructions for reviewing and verifying a release candidate.
 
 ## Validate the binary distribution
 
