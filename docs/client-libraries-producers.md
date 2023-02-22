@@ -13,7 +13,7 @@ After setting up your clients, you can explore more to start working with [produ
 
 ## Create the producer
 
-This example shows how to create a producer:
+This example shows how to create a producer.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
