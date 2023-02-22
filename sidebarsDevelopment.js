@@ -48,7 +48,7 @@ const sidebars = {
             type: "category",
             label: "Releases",
             items: [
-                'version-policy',
+                'release-policy',
                 {
                     type: "category",
                     label: 'Release process',
