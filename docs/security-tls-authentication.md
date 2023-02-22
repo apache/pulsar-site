@@ -13,28 +13,71 @@ import TabItem from '@theme/TabItem';
 
 Mutual TLS (mTLS) is a mutual authentication mechanism. Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients. You must have [TLS transport encryption](security-tls-transport.md) configured on your cluster before you can use mTLS authentication. This guide assumes you already have TLS transport encryption configured.
 
-## Enable mTLS authentication on brokers/proxies
+## Enable mTLS authentication on brokers
 
-To configure brokers/proxies to authenticate clients using mTLS, add the following parameters to the `conf/broker.conf` and the `conf/proxy.conf` file. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
+To configure brokers to authenticate clients using mTLS, add the following parameters to the `conf/broker.conf`. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
 
 ```properties
-# Configuration to enable authentication
+# enable authentication
 authenticationEnabled=true
+# set TLS authentication plugin
 authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
 
+# configure TLS for client to connect brokers
+brokerClientTlsEnabled=true
+brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
 brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/admin.cert.pem","tlsKeyFile":"/path/to/admin.key-pk8.pem"}
-brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 
-tlsCertificateFilePath=/path/to/broker.cert.pem
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+# configure TLS ports
+brokerServicePortTls=6651
+webServicePortTls=8081
+
+# configure CA certificate
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
+# configure server certificate
+tlsCertificateFilePath=/path/to/broker.cert.pem
+# configure server's private key
+tlsKeyFilePath=/path/to/broker.key-pk8.pem
 
+# enable mTLS
 tlsRequireTrustedClientCertOnConnect=true
 tlsAllowInsecureConnection=false
 
 # Tls cert refresh duration in seconds (set 0 to check on every new connection)
 tlsCertRefreshCheckDurationSec=300
+```
+
+## Enable mTLS authentication on proxies
+
+To configure proxies to authenticate clients using mTLS, add the following parameters to the `conf/proxy.conf` file.
+
+```properties
+# enable authentication
+authenticationEnabled=true
+# set TLS authentication plugin
+authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
+
+# configure TLS for client to connect proxies
+tlsEnabledWithBroker=true
+brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
+brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
+brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/admin.cert.pem","tlsKeyFile":"/path/to/admin.key-pk8.pem"}
+
+# configure TLS ports
+brokerServicePortTls=6651
+webServicePortTls=8081
+
+# configure CA certificate
+tlsTrustCertsFilePath=/path/to/ca.cert.pem
+# configure server certificate
+tlsCertificateFilePath=/path/to/proxy.cert.pem
+# configure server's private key
+tlsKeyFilePath=/path/to/proxy.key-pk8.pem
+
+# enable mTLS
+tlsRequireTrustedClientCertOnConnect=true
+tlsAllowInsecureConnection=false
 ```
 
 ## Configure mTLS authentication in Pulsar clients
@@ -138,7 +181,7 @@ var client = PulsarClient.Builder()
 
 [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
 
-To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configuration to enable TLS encryption](security-tls-transport.md#configure-tls-encryption-in-cli-tools):
+To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configurations to enable mTLS encryption](security-tls-transport.md#configure-mtls-encryption-in-cli-tools):
 
 ```properties
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls

@@ -55,11 +55,11 @@ By default, Pulsar clients disable hostname verification, as it requires that ea
 
 One scenario where you may want to enable hostname verification is where you have multiple proxy nodes behind a VIP, and the VIP has a DNS record, for example, `pulsar.mycompany.com`. In this case, you can generate a TLS cert with `pulsar.mycompany.com` as the SAN, and then enable hostname verification on the client.
 
-To enable hostname verification in Pulsar, ensure that SAN exactly matches the fully qualified domain name (FQDN) of the server. The client compares the SAN with the DNS domain name to ensure that it is connecting to the desired server. See [Configure clients](security-tls-transport.md#configure-clients) for more details.
+To enable hostname verification in Pulsar, ensure that SAN exactly matches the fully qualified domain name (FQDN) of the server. The client compares the SAN with the DNS domain name to ensure that it is connecting to the desired server. See [Configure clients](#configure-clients) for more details.
 
 Moreover, as the administrator has full control of the CA, a bad actor is unlikely to be able to pull off a man-in-the-middle attack. `allowInsecureConnection` allows the client to connect to servers whose cert has not been signed by an approved CA. The client disables `allowInsecureConnection` by default, and you should always disable `allowInsecureConnection` in production environments. As long as you disable `allowInsecureConnection`, a man-in-the-middle attack requires that the attacker has access to the CA.
 
-## Configure TLS encryption with PEM
+## Configure mTLS encryption with PEM
 
 By default, Pulsar uses [netty-tcnative](https://github.com/netty/netty-tcnative). It includes two implementations, `OpenSSL` (default) and `JDK`. When `OpenSSL` is unavailable, `JDK` is used.
 
@@ -186,13 +186,21 @@ At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`,
 To configure a Pulsar [broker](reference-terminology.md#broker) to use TLS encryption, you need to add these values to `broker.conf` in the `conf` directory of your Pulsar installation. Substitute the appropriate certificate paths where necessary.
 
 ```properties
+# configure TLS ports
 brokerServicePortTls=6651
 webServicePortTls=8081
-tlsRequireTrustedClientCertOnConnect=true
-tlsCertificateFilePath=/path/to/broker.cert.pem
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
-tlsTrustCertsFilePath=/path/to/ca.cert.pem
 
+# configure CA certificate
+tlsTrustCertsFilePath=/path/to/ca.cert.pem
+# configure server certificate
+tlsCertificateFilePath=/path/to/broker.cert.pem
+# configure server's priviate key
+tlsKeyFilePath=/path/to/broker.key-pk8.pem
+
+# enable mTLS
+tlsRequireTrustedClientCertOnConnect=true
+
+# configure mTLS
 brokerClientTlsEnabled=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientCertificateFilePath=/path/to/client.cert.pem
@@ -224,16 +232,19 @@ For JDK 11, you can obtain a list of supported values from the documentation:
 Configuring TLS on proxies includes two directions of connections, from clients to proxies, and from proxies to brokers.
 
 ```properties
+# configure TLS ports
 servicePortTls=6651
 webServicePortTls=8081
 
-# For clients connecting to the proxy
+# configure certificates for clients to connect proxy
 tlsRequireTrustedClientCertOnConnect=true
 tlsCertificateFilePath=/path/to/broker.cert.pem
 tlsKeyFilePath=/path/to/broker.key-pk8.pem
+
+# enable mTLS
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 
-# For the proxy to connect to brokers
+# configure TLS for proxy to connect brokers
 tlsEnabledWithBroker=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientCertificateFilePath=/path/to/client.cert.pem
@@ -369,7 +380,7 @@ async def test():
 asyncio.run(test())
 ```
 
-> Note that in addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md/#security-settings).
+> Note that in addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md#security-settings).
 
 </TabItem>
 </Tabs>
@@ -379,19 +390,16 @@ asyncio.run(test())
 
 [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
 
-To use TLS encryption with Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
+To use mTLS encryption with Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 
 ```properties
-webServiceUrl=https://broker.example.com:8443/
-brokerServiceUrl=pulsar+ssl://broker.example.com:6651/
-tlsAllowInsecureConnection=false
-tlsTrustCertsFilePath=/path/to/ca.cert.pem
-tlsKeyFilePath=/path/to/client.key-pk8.pem
-tlsCertFile=/path/to/client-cert.pem
-tlsEnableHostnameVerification=false
+webServiceUrl=https://localhost:8081/
+brokerServiceUrl=pulsar+ssl://localhost:6651/
+authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
+authParams=tlsCertFile:/path/to/client.cert.pem,tlsKeyFile:/path/to/client.key-pk8.pem
 ```
 
-## Configure TLS encryption with KeyStore
+## Configure mTLS encryption with KeyStore
 
 By default, Pulsar uses [Conscrypt](https://github.com/google/conscrypt) for both broker service and Web service.
 
@@ -472,7 +480,7 @@ The default value of `tlsRequireTrustedClientCertOnConnect` is `false`, which re
 
 ### Configure proxies
 
-Configuring TLS on proxies includes two directions of connections, from clients to proxies, and from proxies to brokers.
+Configuring mTLS on proxies includes two directions of connections, from clients to proxies, and from proxies to brokers.
 
 ```properties
 servicePortTls=6651
@@ -504,7 +512,7 @@ brokerClientTlsKeyStorePassword=clientpw
 
 ### Configure clients
 
-Similar to [Configure TLS encryption with PEM](security-tls-transport.md#configure-clients), you need to provide the TrustStore information for a minimal configuration.
+Similar to [Configure mTLS encryption with PEM](#configure-clients), you need to provide the TrustStore information for a minimal configuration.
 
 The following is an example.
 

@@ -902,10 +902,10 @@ All methods of `ProducerMessage` object are [here](https://pkg.go.dev/github.com
 
 ## TLS encryption and authentication
 
-To use [TLS encryption](security-tls-transport.md), you need to configure your client to do so:
+To use [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md), you need to configure your client to do so:
 
  * Use `pulsar+ssl` URL type
- * Set `TLSTrustCertsFilePath` to the path to the TLS certs used by your client and the Pulsar broker
+ * Set `TLSTrustCertsFilePath` to the path of the TLS certs used by your client and the Pulsar broker
  * Configure `Authentication` option
 
 Here's an example:
