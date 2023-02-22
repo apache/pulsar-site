@@ -113,7 +113,7 @@ in the `bookkeeper.conf` configuration file.
 
 ## Broker
 
-The broker metrics are exposed under "/metrics" at port `8080`. You can change the port by updating `webServicePort` to a different port
+The broker metrics are exposed under "/metrics/" at port `8080`. You can change the port by updating `webServicePort` to a different port
 in the `broker.conf` configuration file.
 
 All the metrics exposed by a broker are labeled with `cluster=${pulsar_cluster}`. The name of Pulsar cluster is the value of `${pulsar_cluster}`, which you have configured in the `broker.conf` file.

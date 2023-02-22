@@ -48,10 +48,16 @@ const sidebars = {
             type: "category",
             label: "Releases",
             items: [
-                'create-gpg-keys',
+                {
+                    type: "category",
+                    label: 'Release process',
+                    link: {type: 'doc', id: 'release-process'},
+                    items: [
+                        'create-gpg-keys',
+                        'release-note-guide',
+                    ]
+                },
                 'validate-release-candidate',
-                'release-process',
-                'release-note-guide',
                 'version-policy',
             ]
         },

@@ -388,7 +388,7 @@ asyncio.run(test())
 
 ### Configure CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](reference-cli-tools.md), [`pulsar-perf`](reference-cli-tools.md), and [`pulsar-client`](reference-cli-tools.md) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
 
 To use mTLS encryption with Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 

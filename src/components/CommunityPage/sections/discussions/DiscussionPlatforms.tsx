@@ -1,14 +1,12 @@
 import React from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import DiscussionPlatform, {
-  DiscussionPlatformProps,
-} from "./DiscussionPlatform";
-import s from "./DiscussionPlatforms.module.css";
+import { ContentCardProps } from "../../shared/ContentCard/ContentCard";
+import ContentCardsLayout from "../../shared/ContentCard/ContentCardsLayout";
 
 const DiscussionPlatforms: React.FC = () => {
-  const platforms: DiscussionPlatformProps[] = [
+  const platforms: ContentCardProps[] = [
     {
-      name: "User Mailing List",
+      title: "User Mailing List",
       description: (
         <div>
           General mailing list for user-related discussions.
@@ -25,26 +23,28 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "subscribe",
           text: "Subscribe",
-          href: "users-subscribe@pulsar.apache.org",
+          href: "mailto:users-subscribe@pulsar.apache.org",
           type: "primary",
         },
         {
           id: "unsubscribe",
           text: "Unsubscribe",
-          href: "users-unsubscribe@pulsar.apache.org",
+          href: "mailto:users-unsubscribe@pulsar.apache.org",
           type: "normal",
         },
       ],
-      logoSrc: useBaseUrl("/img/mailing-list.svg"),
+      image: {
+        src: useBaseUrl("/img/mailing-list.svg"),
+      },
     },
     {
-      name: "Developer Mailing List",
+      title: "Developer Mailing List",
       description: (
         <div>
           Questions and discussions related to Pulsar development.
           <br />
           <a
-            href="https://lists.apache.org/list.html?users@pulsar.apache.org"
+            href="https://lists.apache.org/list.html?dev@pulsar.apache.org"
             target="_blank"
           >
             Access the archives
@@ -55,24 +55,26 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "subscribe",
           text: "Subscribe",
-          href: "dev-subscribe@pulsar.apache.org",
+          href: "mailto:dev-subscribe@pulsar.apache.org",
           type: "primary",
         },
         {
           id: "unsubscribe",
           text: "Unsubscribe",
-          href: "dev-unsubscribe@pulsar.apache.org",
+          href: "mailto:dev-unsubscribe@pulsar.apache.org",
           type: "normal",
         },
       ],
-      logoSrc: useBaseUrl("/img/mailing-list.svg"),
+      image: {
+        src: useBaseUrl("/img/mailing-list.svg"),
+      },
     },
     {
-      name: "Discussions at GitHub",
+      title: "Discussions at GitHub",
       description: (
         <div>
-          A good place to ask any question, bring an idea or get support. Especially if you are not
-          friends with mailing lists.
+          A good place to ask any question, bring an idea or get support.
+          Especially if you are not friends with mailing lists.
         </div>
       ),
       actions: [
@@ -91,10 +93,12 @@ const DiscussionPlatforms: React.FC = () => {
           isExternal: true,
         },
       ],
-      logoSrc: useBaseUrl("/img/github-mark.svg"),
+      image: {
+        src: useBaseUrl("/img/github-mark.svg"),
+      },
     },
     {
-      name: "Stack Overflow",
+      title: "Stack Overflow",
       description: (
         <span>
           For technical questions, we ask that you post them to Stack Overflow
@@ -118,10 +122,12 @@ const DiscussionPlatforms: React.FC = () => {
           isExternal: true,
         },
       ],
-      logoSrc: useBaseUrl("/img/stackoverflow-logo.svg"),
+      image: {
+        src: useBaseUrl("/img/stackoverflow-logo.svg"),
+      },
     },
     {
-      name: "Slack",
+      title: "Slack",
       description: (
         <>
           Use it for instant messaging and real-time discussions.
@@ -134,41 +140,44 @@ const DiscussionPlatforms: React.FC = () => {
       ),
       actions: [
         {
-          id: "open",
-          text: "Open",
-          href: "https://apache-pulsar.slack.com/",
+          id: "sign-up",
+          text: "Sign-up",
+          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
           type: "primary",
           isExternal: true,
         },
         {
-          id: "sign-up",
-          text: "Sign-up",
-          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
+          id: "launch-slack",
+          text: "Launch Slack",
+          href: "https://apache-pulsar.slack.com/",
           type: "normal",
           isExternal: true,
         },
       ],
-      logoSrc: useBaseUrl("/img/Slack_Mark.svg"),
+      image: {
+        src: useBaseUrl("/img/Slack_Mark.svg"),
+      },
     },
     {
-      name: "WeChat",
+      title: "WeChat",
       description: (
         <span>
           Welcome to the Apache Pulsar Official Account at WeChat! The account
           ID is <code>ApachePulsar</code>.
         </span>
       ),
-      logoSrc: useBaseUrl("/img/wechat-logo.svg"),
+      image: {
+        src: useBaseUrl("/img/wechat-logo.svg"),
+      },
     },
     {
-      name: "Community Meetings",
+      title: "Community Meetings",
       description: (
         <span>
           The community meeting occurs biweekly on Tuesdays and Thursdays to
           discuss new proposals, open pull requests, and host open discussions.
         </span>
       ),
-      logoSrc: useBaseUrl("/img/community-meetings.svg"),
       actions: [
         {
           id: "see-details",
@@ -178,18 +187,13 @@ const DiscussionPlatforms: React.FC = () => {
           isExternal: true,
         },
       ],
+      image: {
+        src: useBaseUrl("/img/community-meetings.svg"),
+      },
     },
   ];
 
-  return (
-    <div className={s.DiscussionPlatforms}>
-      {platforms.map((platform) => (
-        <div key={platform.name} className={s.DiscussionPlatform}>
-          <DiscussionPlatform {...platform} />
-        </div>
-      ))}
-    </div>
-  );
+  return <ContentCardsLayout cards={platforms} columns={2} />;
 };
 
 export default DiscussionPlatforms;

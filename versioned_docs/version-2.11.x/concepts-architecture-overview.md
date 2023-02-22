@@ -84,7 +84,7 @@ At the moment, Pulsar supports persistent message storage. This accounts for the
 persistent://my-tenant/my-namespace/my-topic
 ```
 
-> Pulsar also supports ephemeral ([non-persistent](concepts-messaging.md#non-persistent-topics.md)) message storage.
+> Pulsar also supports ephemeral ([non-persistent](concepts-messaging.md#non-persistent-topics) message storage.
 
 
 You can see an illustration of how brokers and bookies interact in the diagram below:

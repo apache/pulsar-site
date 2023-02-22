@@ -9,4 +9,3 @@ Developing applications for Pulsar can be a fun and rewarding experience. With P
 - [Develop simulation tools](develop-tools.md)
 - [Develop binary protocol](developing-binary-protocol.md)
 - [Develop load manager](develop-load-manager.md)
-- [Develop Pulsar plugin](develop-plugin.md)

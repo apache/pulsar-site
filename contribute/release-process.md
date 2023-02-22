@@ -147,7 +147,7 @@ If you get error `c++: internal compiler error: Killed (program cc1plus)` when r
 
 :::caution
 
-The C++ client is now developing in a [separated repo](https://github.com/apache/pulsar-client-cpp). You should check its own [release guide](https://github.com/apache/pulsar-client-cpp/wiki/Committer-Release-Guide) if you're releasing version >= 3.0.0.  
+The C++ client is now developing in a [separated repo](https://github.com/apache/pulsar-client-cpp). You should check its own [release guide](https://github.com/apache/pulsar-client-cpp/wiki/Committer-Release-Guide) if you're releasing version >= 3.0.0.
 
 :::
 
@@ -464,7 +464,7 @@ poetry install
 poetry run bin/java-apidoc-generator.py 2.X.0
 ```
 
-Once the docs are generated, you can add them and submit them in a PR. The expected doc output is: 
+Once the docs are generated, you can add them and submit them in a PR. The expected doc output is:
 
 * `static/api/admin`
 * `static/api/client`

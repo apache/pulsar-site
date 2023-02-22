@@ -567,7 +567,7 @@ If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
 
 ### Configure CLI tools
 
-For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
+For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/), use the `conf/client.conf` config file in a Pulsar installation.
 
 ```properties
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationKeyStoreTls

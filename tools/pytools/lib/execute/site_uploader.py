@@ -19,6 +19,7 @@
 
 import enum
 import os
+import tempfile
 from pathlib import Path
 
 from command import run, find_command, run_pipe
@@ -72,5 +73,8 @@ def execute(mode: Mode, msg: str, site: Path, branch: str):
         _do_push(msg, site, branch)
     else:  # show changes
         git = find_command('git', msg="git is required")
-        change_files = run_pipe(git, 'status', '--porcelain', cwd=site).read().strip()
-        print(f'\nchange files:\n{change_files}\n')
+        with tempfile.TemporaryFile('w+') as f:
+            run(git, 'status', '--porcelain', stdout=f, cwd=site)
+            f.seek(0)
+            change_files = f.read().strip()
+            print(f'\nchange files:\n{change_files}\n')

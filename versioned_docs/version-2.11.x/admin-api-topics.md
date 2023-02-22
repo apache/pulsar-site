@@ -2041,7 +2041,7 @@ pulsar-admin topics unsubscribe \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/:topic/subscription/:subscription|operation/deleteSubscription?version=@pulsar:version_number@}
+{@inject: endpoint|DELETE|/admin/v2/:schema/:tenant/:namespace/:topic/subscription/:subscription|operation/deleteSubscription?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
