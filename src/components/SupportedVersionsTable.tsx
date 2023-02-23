@@ -4,6 +4,9 @@ import semver from "semver/preload"
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material"
 
 import releases from '@site/data/release-pulsar'
+import Link from "@docusaurus/Link";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import moment from "moment";
 
 type SimpleReleaseData = {
   version: semver.SemVer,
@@ -55,6 +58,42 @@ function isSameFeatureRelease(v1: semver.SemVer, v2: semver.SemVer): boolean {
   return v1.major == v2.major && v1.minor == v2.minor
 }
 
+function renderVersionCell(version: semver.SemVer): JSX.Element {
+  if (version.compareMain('3.0.0') < 0) {
+    return <TableCell>{version.major}.{version.minor}</TableCell>
+  } else if (version.minor != 0) {
+    return <TableCell>{version.major}.{version.minor}</TableCell>
+  } else {
+    return <TableCell>{version.major}.{version.minor} (LTS)</TableCell>
+  }
+}
+
+function renderReleasedCell(released: Date): JSX.Element {
+  return <TableCell><>
+    ({released.toDateString()})
+  </>
+  </TableCell>
+}
+
+function renderSupportCell(support: Date): JSX.Element {
+  return <TableCell><>
+    ({support.toDateString()})
+  </>
+  </TableCell>
+}
+
+function renderLatestVersionCell(d: SupportedVersionData): JSX.Element {
+  return <TableCell>
+    <>
+      <Link href={useBaseUrl(d.latestReleaseNoteLink)}>
+        {d.latest.version}
+      </Link>
+      <br/>
+      ({d.latestReleased.toDateString()})
+    </>
+  </TableCell>
+}
+
 export default function SupportedVersionsTable(): JSX.Element {
   let releaseList: SimpleReleaseData[] = releases.map(r => ({
     version: semver.coerce(r.tagName),
@@ -101,11 +140,11 @@ export default function SupportedVersionsTable(): JSX.Element {
         {
           supportedVersionList.map(r => <>
             <TableRow>
-              <TableCell>{r.version.major}.{r.version.minor}</TableCell>
-              <TableCell>{r.released.toDateString()}</TableCell>
-              <TableCell>{r.activeSupport.toDateString()}</TableCell>
-              <TableCell>{r.securitySupport.toDateString()}</TableCell>
-              <TableCell>{r.latest.version}</TableCell>
+              {renderVersionCell(r.version)}
+              {renderReleasedCell(r.released)}
+              {renderSupportCell(r.activeSupport)}
+              {renderSupportCell(r.securitySupport)}
+              {renderLatestVersionCell(r)}
             </TableRow>
           </>)
         }
