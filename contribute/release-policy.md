@@ -54,17 +54,6 @@ import SupportedVersionsTable from "@site/src/components/SupportedVersionsTable"
 <SupportedVersionsTable />
 ````
 
-| Version | Released      | Active Support  | Security Support | Latest |
-|---------|---------------|-----------------|------------------|--------|
-| 2.11    | January 2023  | January 2024    | January 2024     | 2.11.0 |
-| 2.10    | April 2022    | April 2023      | April 2023       | 2.10.3 |
-| 2.9     | November 2021 | November 2022   | November 2022    | 2.9.4  |
-| 2.8     | June 2021     | June 2022       | June 2022        | 2.8.4  |
-| 2.7     | November 2020 | November 2021   | November 2021    | 2.7.5  |
-| 2.6     | June 2020     | June 2021       | June 2021        | 2.6.4  |
-| 2.5     | January 2020  | January 2021    | January 2021     | 2.5.2  |
-| 2.4     | July 2019     | July 2020       | July 2020        | 2.4.2  |
-
 ## Roadmap for release plans
 
 The next release of Pulsar is 3.0.0, and it has the planned timeline as:
