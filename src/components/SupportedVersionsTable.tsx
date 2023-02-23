@@ -1,12 +1,13 @@
 import lodash from 'lodash'
 import React from 'react'
 import semver from "semver/preload"
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material"
+import {Stack, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material"
 
 import releases from '@site/data/release-pulsar'
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import moment from "moment";
+import {styled} from "@mui/system";
 
 type SimpleReleaseData = {
   version: semver.SemVer,
@@ -71,18 +72,31 @@ function renderReleasedCell(released: moment.Moment): JSX.Element {
     {released.fromNow()}
     <br/>
     ({released.format('DD MMM YYYY')})
-  </></TableCell>
+  </>
+  </TableCell>
 }
+
+const Dot = styled('div')({
+  width: 15,
+  height: 15,
+  borderRadius: '50%',
+});
 
 function renderSupportCell(support: moment.Moment): JSX.Element {
   const now = moment()
-  return <TableCell
-    style={{backgroundColor: support.isBefore(now) ? 'crimson' : 'mediumaquamarine'}}
-  ><>
-    {support.isBefore(now) ? "Ended" : "End"} {support.fromNow()}
-    <br/>
-    ({support.format('DD MMM YYYY')})
-  </></TableCell>
+  return <TableCell><>
+    <Stack direction="row" spacing={2}>
+      <div style={{marginTop: 10}}>
+        <Dot style={{background: support.isBefore(now) ? 'crimson' : 'mediumaquamarine'}}/>
+      </div>
+      <div style={{color: support.isBefore(now) ? 'crimson' : 'inherit'}}>
+        {support.isBefore(now) ? "Ended" : "End"} {support.fromNow()}
+        <br/>
+        ({support.format('DD MMM YYYY')})
+      </div>
+    </Stack>
+  </>
+  </TableCell>
 }
 
 function renderLatestVersionCell(d: SupportedVersionData): JSX.Element {
@@ -98,7 +112,8 @@ function renderLatestVersionCell(d: SupportedVersionData): JSX.Element {
     <Link href={useBaseUrl(d.latestReleaseNoteLink)}>{d.latest.version}</Link>
     <br/>
     ({d.latestReleased.format('DD MMM YYYY')})
-  </></TableCell>
+  </>
+  </TableCell>
 }
 
 export default function SupportedVersionsTable(): JSX.Element {
@@ -108,8 +123,6 @@ export default function SupportedVersionsTable(): JSX.Element {
     releaseNoteLink: r.releaseNotes,
   }))
   releaseList.sort((o1, o2) => semver.rcompare(o1.version, o2.version))
-
-  console.log(`releaseList=${JSON.stringify(releaseList)}`)
 
   let supportedVersionList: SupportedVersionData[] = []
   for (const release of releaseList) {
