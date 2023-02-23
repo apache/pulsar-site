@@ -13,25 +13,28 @@ Applications can use Pulsar end-to-end encryption (E2EE) to encrypt messages on 
 
 ## How it works in Pulsar
 
-Pulsar uses a dynamically generated symmetric AES key to encrypt messages (data). You can use the application-provided ECDSA (Elliptic Curve Digital Signature Algorithm) or RSA (Rivest–Shamir–Adleman) key pair to encrypt the AES key (data key), so you do not have to share the secret with everyone.
-
-The application configures the producer with the public key for encryption. You can use this key to encrypt the AES data key. The encrypted data key is sent as part of the message header. Only entities with the private key (in this case the consumer) can decrypt the data key which is used to decrypt the message.
+Pulsar uses a dynamically generated symmetric session key to encrypt messages (data). You can use the application-provided ECDSA (Elliptic Curve Digital Signature Algorithm) or RSA (Rivest–Shamir–Adleman) key pair to encrypt the session key (data key), so you do not have to share the secret with everyone.
 
 The following figure illustrates how Pulsar encrypts messages on the producer side and decrypts messages on the consumer side.
 
 ![Pulsar end-to-end encryption](/assets/pulsar-encryption.svg)
 
-If produced messages are consumed across application boundaries, you need to ensure that consumers in other applications have access to one of the private keys that can decrypt the messages. You can do this in two ways:
-1. The consumer application provides you access to the public key, which you add to your producer keys.
-2. You grant access to one of the private keys from the pairs that the producer uses. 
+1. The producer generates a session key regularly to encrypt the message payload using a symmetric algorithm, such as AES. The plaintext message is packed as the message body.
+2. The producer uses the consumer’s public key to encrypt the session key using an asymmetric algorithm, such as RSA, and adds an alias with the encrypted secret to the message header.
+3. The consumer reads the message header and decrypts the session key using its private key.
+4. The consumer uses the decrypted session key to decrypt the message payload. 
 
 :::tip
 
+* Both public and private keys are given to the consumer by PKI (Public Key Infrastructure). The consumer's public key is shared with the producer, but only the consumer has the access to the private key.
+* Pulsar generates a new AES session key every 4 hours or after publishing a certain number of messages. Producers fetch the asymmetric public key every 4 hours by calling `CryptoKeyReader.getPublicKey()` to retrieve the latest version.
 * Pulsar does not store the encryption key anywhere in the Pulsar service. If you lose or delete the private key, your message is irretrievably lost and unrecoverable.
-* Pulsar generates a new AES data key every 4 hours or after publishing a certain number of messages. Producers fetch the asymmetric public key every 4 hours by calling `CryptoKeyReader.getPublicKey()` to retrieve the latest version.
 
 :::
 
+If the produced messages are consumed across application boundaries, you need to ensure that consumers in other applications have access to one of the private keys that can decrypt the messages. You can do this in two ways:
+- Access the public key that the consumer application provides and add it to the producer's keys.
+- Grant access to one of the private keys from the pairs that the producer uses. 
 
 ## Get started
 

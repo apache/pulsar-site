@@ -11,7 +11,9 @@ import TabItem from '@theme/TabItem';
 
 ## mTLS authentication overview
 
-Mutual TLS (mTLS) is a mutual authentication mechanism. Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients. This guide assumes you already have [TLS transport encryption](security-tls-transport.md) configured.
+Mutual TLS (mTLS) is a mutual authentication mechanism. Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients. 
+
+The following figure illustrates how Pulsar processes mTLS authentication between clients and servers.
 
 ![Pulsar mTLS authentication process](/assets/mTLS-authentication.svg)
 

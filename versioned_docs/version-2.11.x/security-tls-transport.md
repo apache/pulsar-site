@@ -200,7 +200,7 @@ tlsKeyFilePath=/path/to/broker.key-pk8.pem
 # enable mTLS
 tlsRequireTrustedClientCertOnConnect=true
 
-# configure mTLS
+# configure mTLS for the internal client
 brokerClientTlsEnabled=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientCertificateFilePath=/path/to/client.cert.pem
