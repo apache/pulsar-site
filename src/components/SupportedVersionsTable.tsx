@@ -147,15 +147,17 @@ export default function SupportedVersionsTable(): JSX.Element {
     })
   }
 
+  const TableHeaderCell = styled(TableCell)({fontWeight: "bold"})
+
   return <>
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Version</TableCell>
-          <TableCell>Released</TableCell>
-          <TableCell>Active Support</TableCell>
-          <TableCell>Security Support</TableCell>
-          <TableCell>Latest</TableCell>
+          <TableHeaderCell>Version</TableHeaderCell>
+          <TableHeaderCell>Released</TableHeaderCell>
+          <TableHeaderCell>Active Support</TableHeaderCell>
+          <TableHeaderCell>Security Support</TableHeaderCell>
+          <TableHeaderCell>Latest</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
