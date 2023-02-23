@@ -10,48 +10,46 @@ import moment from "moment";
 
 type SimpleReleaseData = {
   version: semver.SemVer,
-  released: Date,
+  released: moment.Moment,
   releaseNoteLink: string,
 };
 
 type SupportedVersionData = {
   version: semver.SemVer,
-  released: Date,
-  activeSupport: Date,
-  securitySupport: Date,
+  released: moment.Moment,
+  activeSupport: moment.Moment,
+  securitySupport: moment.Moment,
   latest: semver.SemVer,
-  latestReleased: Date,
+  latestReleased: moment.Moment,
   latestReleaseNoteLink: string,
 };
 
-function resolveActiveSupport(version: semver.SemVer, released: Date): Date {
-  let result = new Date(released)
+function resolveActiveSupport(version: semver.SemVer, released: moment.Moment): moment.Moment {
+  const support = moment(released)
   if (version.compareMain('3.0.0') < 0) {
     // before 3.0 - active support for 12 months
-    result.setMonth(released.getMonth() + 12)
+    return support.add(12, 'months')
   } else if (version.minor > 0) {
     // regular release - active support for 6 months
-    result.setMonth(released.getMonth() + 6)
+    return support.add(6, 'months')
   } else {
     // LTS release - active support for 24 months
-    result.setMonth(released.getMonth() + 24)
+    return support.add(24, 'months')
   }
-  return result
 }
 
-function resolveSecuritySupport(version: semver.SemVer, released: Date): Date {
-  let result = new Date(released)
+function resolveSecuritySupport(version: semver.SemVer, released: moment.Moment): moment.Moment {
+  const support = moment(released)
   if (version.compareMain('3.0.0') < 0) {
     // before 3.0 - security support for 12 months
-    result.setMonth(released.getMonth() + 12)
+    return support.add(12, 'months')
   } else if (version.minor > 0) {
     // regular release - security support for 6 months
-    result.setMonth(released.getMonth() + 6)
+    return support.add(6, 'months')
   } else {
     // LTS release - security support for 36 months
-    result.setMonth(released.getMonth() + 36)
+    return support.add(36, 'months')
   }
-  return result
 }
 
 function isSameFeatureRelease(v1: semver.SemVer, v2: semver.SemVer): boolean {
@@ -68,39 +66,47 @@ function renderVersionCell(version: semver.SemVer): JSX.Element {
   }
 }
 
-function renderReleasedCell(released: Date): JSX.Element {
+function renderReleasedCell(released: moment.Moment): JSX.Element {
   return <TableCell><>
-    ({released.toDateString()})
-  </>
-  </TableCell>
+    {released.fromNow()}
+    <br/>
+    ({released.format('DD MMM YYYY')})
+  </></TableCell>
 }
 
-function renderSupportCell(support: Date): JSX.Element {
+function renderSupportCell(support: moment.Moment): JSX.Element {
   return <TableCell><>
-    ({support.toDateString()})
-  </>
-  </TableCell>
+    {support.isBefore(moment()) ? "Ended" : "End"} {support.fromNow()}
+    <br/>
+    ({support.format('DD MMM YYYY')})
+  </></TableCell>
 }
 
 function renderLatestVersionCell(d: SupportedVersionData): JSX.Element {
-  return <TableCell>
-    <>
-      <Link href={useBaseUrl(d.latestReleaseNoteLink)}>
-        {d.latest.version}
-      </Link>
-      <br/>
-      ({d.latestReleased.toDateString()})
-    </>
-  </TableCell>
+  const now = moment()
+  if (d.activeSupport.isBefore(now) && d.securitySupport.isBefore(now)) {
+    // no longer supported
+    return <TableCell>
+      <del>{d.latest.version}</del>
+    </TableCell>
+  }
+
+  return <TableCell><>
+    <Link href={useBaseUrl(d.latestReleaseNoteLink)}>{d.latest.version}</Link>
+    <br/>
+    ({d.latestReleased.format('DD MMM YYYY')})
+  </></TableCell>
 }
 
 export default function SupportedVersionsTable(): JSX.Element {
   let releaseList: SimpleReleaseData[] = releases.map(r => ({
     version: semver.coerce(r.tagName),
-    released: new Date(r.publishedAt),
+    released: moment(r.publishedAt),
     releaseNoteLink: r.releaseNotes,
   }))
   releaseList.sort((o1, o2) => semver.rcompare(o1.version, o2.version))
+
+  console.log(`releaseList=${JSON.stringify(releaseList)}`)
 
   let supportedVersionList: SupportedVersionData[] = []
   for (const release of releaseList) {
