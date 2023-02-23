@@ -75,8 +75,11 @@ function renderReleasedCell(released: moment.Moment): JSX.Element {
 }
 
 function renderSupportCell(support: moment.Moment): JSX.Element {
-  return <TableCell><>
-    {support.isBefore(moment()) ? "Ended" : "End"} {support.fromNow()}
+  const now = moment()
+  return <TableCell
+    style={{backgroundColor: support.isBefore(now) ? 'red' : 'green'}}
+  ><>
+    {support.isBefore(now) ? "Ended" : "End"} {support.fromNow()}
     <br/>
     ({support.format('DD MMM YYYY')})
   </></TableCell>
