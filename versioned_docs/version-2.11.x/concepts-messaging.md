@@ -979,7 +979,7 @@ Non-persistent topics have names of this form (note the `non-persistent` in the 
 non-persistent://tenant/namespace/topic
 ```
 
-For more info on using non-persistent topics, see the [Non-persistent messaging cookbook](cookbooks-non-persistent).
+For more info on using non-persistent topics, see the [Non-persistent messaging cookbook](cookbooks-non-persistent.md).
 
 In non-persistent topics, brokers immediately deliver messages to all connected subscribers *without persisting them* in [BookKeeper](concepts-architecture-overview.md#persistent-storage). If a subscriber is disconnected, the broker will not be able to deliver those in-transit messages, and subscribers will never be able to receive those messages again. Eliminating the persistent storage step makes messaging on non-persistent topics slightly faster than on persistent topics in some cases, but with the caveat that some core benefits of Pulsar are lost.
 
