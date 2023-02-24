@@ -10,9 +10,9 @@ import TabItem from '@theme/TabItem';
 ````
 
 
-You can use a Pulsar Java client to create the Java [producer](#producer), [consumer](#consumer), [reader](#reader) and [TableView](#tableview) of messages and to perform [administrative tasks](admin-api-overview.md). The current Java client version is **@pulsar:version@**.
+You can use a Pulsar Java client to create the Java [producer](#producer), [consumer](#consumer), and [reader](#reader) of messages and to perform [administrative tasks](admin-api-overview.md). The current Java client version is **@pulsar:version@**.
 
-All the methods in [producer](#producer), [consumer](#consumer), [reader](#reader) and [TableView](#tableview) of a Java client are thread-safe.
+All the methods in [producer](#producer), [consumer](#consumer), and [reader](#reader) of a Java client are thread-safe.
 
 Javadoc for the Pulsar client is divided into two domains by package as follows.
 
@@ -1318,59 +1318,9 @@ Reader<byte[]> reader = pulsarClient.newReader()
 
 ```
 
-## TableView
-
-The TableView interface serves an encapsulated access pattern, providing a continuously updated key-value map view of the compacted topic data. Messages without keys will be ignored.
-
-With TableView, Pulsar clients can fetch all the message updates from a topic and construct a map with the latest values of each key. These values can then be used to build a local cache of data. In addition, you can register consumers with the TableView by specifying a listener to perform a scan of the map and then receive notifications when new messages are received. Consequently, event handling can be triggered to serve use cases, such as event-driven applications and message monitoring.
-
-:::note
-
-Each TableView uses one Reader instance per partition, and reads the topic starting from the compacted view by default. It is highly recommended to enable automatic compaction by [configuring the topic compaction policies](cookbooks-compaction.md#configuring-compaction-to-run-automatically) for the given topic or namespace. More frequent compaction results in shorter startup times because less data is replayed to reconstruct the TableView of the topic.
-
-:::
-
-The following figure illustrates the dynamic construction of a TableView updated with newer values of each key.
-![TableView](/assets/tableview.png)
-
-### Configure TableView
- 
-The following is an example of how to configure a TableView.
-
-```java
-
-TableView<String> tv = client.newTableViewBuilder(Schema.STRING)
-  .topic("my-tableview")
-  .create()
-
-```
-
-You can use the available parameters in the `loadConf` configuration or related [API](https://pulsar.apache.org/api/client/2.10.0-SNAPSHOT/org/apache/pulsar/client/api/TableViewBuilder.html) to customize your TableView.
-
-| Name | Type| Required? |  <div>Description</div> | Default
-|---|---|---|---|---
-| `topic` | string | yes | The topic name of the TableView. | N/A
-| `autoUpdatePartitionInterval` | int | no | The interval to check for newly added partitions. | 60 (seconds)
-
-### Register listeners
- 
-You can register listeners for both existing messages on a topic and new messages coming into the topic by using `forEachAndListen`, and specify to perform operations for all existing messages by using `forEach`.
-
-The following is an example of how to register listeners with TableView.
-
-```java
-
-// Register listeners for all existing and incoming messages
-tv.forEachAndListen((key, value) -> /*operations on all existing and incoming messages*/)
-
-// Register action for all existing messages
-tv.forEach((key, value) -> /*operations on all existing messages*/)
-
-```
-
 ## Schema
 
-In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types.md). If you construct, say, a [producer](#producer) without specifying a schema, then the producer can only produce messages of type `byte[]`. The following is an example.
+In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types). If you construct, say, a [producer](#producer) without specifying a schema, then the producer can only produce messages of type `byte[]`. The following is an example.
 
 ```java
 
