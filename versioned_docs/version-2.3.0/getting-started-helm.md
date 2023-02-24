@@ -364,7 +364,7 @@ Then proceed with the following steps:
 
 ## Step 4: Use Pulsar Manager to manage the cluster
 
-[Pulsar Manager](administration-pulsar-manager.md) is a web-based GUI management tool for managing and monitoring Pulsar.
+[Pulsar Manager](/docs/administration-pulsar-manager.md) is a web-based GUI management tool for managing and monitoring Pulsar.
 
 1. By default, the `Pulsar Manager` is exposed as a separate `LoadBalancer`. You can open the Pulsar Manager UI using the following command:
 
