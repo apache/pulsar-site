@@ -946,6 +946,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitStateCleanUpDelayTimeInSeconds
+After this delay, the service-unit state channel tombstones any service units (e.g., bundles) in semi-terminal states. For example, after splits, parent bundles will be `deleted`, and then after this delay, the parent bundles' state will be `tombstoned` in the service-unit state channel. Pulsar does not immediately remove such semi-terminal states to avoid unnecessary system confusion, as the bundles in the `tombstoned` state might temporarily look available to reassign. Rarely, one could lower this delay in order to aggressively clean the service-unit state channel when there are a large number of bundles. minimum value = 30 secs(only used in load balancer extension logics)
+
+**Type**: `long`
+
+**Default**: `604800`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingEnabled
 Enable/disable automatic bundle unloading for load-shedding
 
