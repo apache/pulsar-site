@@ -904,7 +904,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+{@inject: javadoc:HashingScheme:/client/2.4.2/org/apache/pulsar/client/api/HashingScheme} is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producers is `JavaStringHash`.
