@@ -24,10 +24,10 @@ Component | Description
 Value / data payload | The data carried by the message. All Pulsar messages contain raw bytes, although message data can also conform to data [schemas](schema-get-started.md).
 Key | Messages are optionally tagged with keys, which is useful for things like [topic compaction](concepts-topic-compaction.md).
 Properties | An optional key/value map of user-defined properties.
-Producer name | The name of the producer who produces the message. If you do not specify a producer name, the default name is used. 
+Producer name | The name of the producer who produces the message. If you do not specify a producer name, the default name is used.
 Sequence ID | Each Pulsar message belongs to an ordered sequence on its topic. The sequence ID of the message is its order in that sequence.
 Publish time | The timestamp of when the message is published. The timestamp is automatically applied by the producer.
-Event time | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`. 
+Event time | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.
 TypedMessageBuilder | It is used to construct a message. You can set message properties such as the message key, message value with `TypedMessageBuilder`. <br /> When you set `TypedMessageBuilder`, set the key as a string. If you set the key as other types, for example, an AVRO object, the key is sent as bytes, and it is difficult to get the AVRO object back on the consumer.
 
 The default size of a message is 5 MB. You can configure the max size of a message with the following configurations.
@@ -35,19 +35,19 @@ The default size of a message is 5 MB. You can configure the max size of a messa
 - In the `broker.conf` file.
 
   ```bash
-  
+
   # The max size of a message (in bytes).
   maxMessageSize=5242880
-  
+
   ```
 
 - In the `bookkeeper.conf` file.
 
   ```bash
-  
+
   # The max size of the netty frame (in bytes). Any messages received larger than this value are rejected. The default value is 5 MB.
   nettyMaxFrameSizeBytes=5253120
-  
+
   ```
 
 > For more information on Pulsar message contents, see Pulsar [binary protocol](developing-binary-protocol.md).
@@ -60,7 +60,7 @@ A producer is a process that attaches to a topic and publishes messages to a Pul
 
 Producers send messages to brokers synchronously (sync) or asynchronously (async).
 
-| Mode       | Description |            
+| Mode       | Description |
 |:-----------|-----------|
 | Sync send  | The producer waits for an acknowledgement from the broker after sending every message. If the acknowledgment is not received, the producer treats the sending operation as a failure.                                                                                                                                                                                    |
 | Async send | The producer puts a message in a blocking queue and returns immediately. The client library sends the message to the broker in the background. If the queue is full (you can [configure](reference-configuration.md#broker) the maximum size), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer. |
@@ -77,7 +77,7 @@ You can have different types of access modes on topics for producers.
 
 :::note
 
-Once an application creates a producer with the `Exclusive` or `WaitForExclusive` access mode successfully, the instance of the application is guaranteed to be the **only one writer** on the topic. Other producers trying to produce on this topic get errors immediately or have to wait until they get the `Exclusive` access. 
+Once an application creates a producer with the `Exclusive` or `WaitForExclusive` access mode successfully, the instance of the application is guaranteed to be the **only one writer** on the topic. Other producers trying to produce on this topic get errors immediately or have to wait until they get the `Exclusive` access.
 For more information, see [PIP 68: Exclusive Producer](https://github.com/apache/pulsar/wiki/PIP-68:-Exclusive-Producer).
 
 :::
@@ -104,7 +104,7 @@ In general, a batch is acknowledged when all of its messages are acknowledged by
 
 To avoid redelivering acknowledged messages in a batch to the consumer, Pulsar introduces batch index acknowledgement since Pulsar 2.6.0. When batch index acknowledgement is enabled, the consumer filters out the batch index that has been acknowledged and sends the batch index acknowledgement request to the broker. The broker maintains the batch index acknowledgement status and tracks the acknowledgement status of each batch index to avoid dispatching acknowledged messages to the consumer. When all indexes of the batch message are acknowledged, the batch message is deleted.
 
-By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgement by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgement results in more memory overheads. 
+By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgement by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgement results in more memory overheads.
 
 ### Chunking
 When you enable chunking, read the following instructions.
@@ -134,7 +134,7 @@ When multiple publishers publish chunked messages into a single topic, the broke
 
 A consumer is a process that attaches to a topic via a subscription and then receives messages.
 
-A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.  
+A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive modes
 
@@ -219,7 +219,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 ```
 
-The default dead letter topic uses this format: 
+The default dead letter topic uses this format:
 
 ```
 
@@ -227,7 +227,7 @@ The default dead letter topic uses this format:
 
 ```
 
-  
+
 If you want to specify the name of the dead letter topic, use this Java client example:
 
 ```java
@@ -244,7 +244,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 ```
 
-Dead letter topic depends on message re-delivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout. 
+Dead letter topic depends on message re-delivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout.
 
 :::note
 
@@ -370,15 +370,15 @@ In *Key_Shared* type, multiple consumers can attach to the same subscription. Me
 
 #### What is a subscription mode
 
-The subscription mode indicates the cursor type. 
+The subscription mode indicates the cursor type.
 
-- When a subscription is created, an associated cursor is created to record the last consumed position. 
+- When a subscription is created, an associated cursor is created to record the last consumed position.
 - When a consumer of the subscription restarts, it can continue consuming from the last message it consumes.
 
 Subscription mode | Description | Note
 |---|---|---
 `Durable`|The cursor is durable, which retains messages and persists the current position. <br /><br />If a broker restarts from a failure, it can recover the cursor from the persistent storage (BookKeeper), so that messages can continue to be consumed from the last consumed position.|`Durable` is the **default** subscription mode.
-`NonDurable`|The cursor is non-durable. <br /><br />Once a broker stops, the cursor is lost and can never be recovered, so that messages **can not** continue to be consumed from the last consumed position.|Reader’s subscription mode is `NonDurable` in nature and it does not prevent data in a topic from being deleted. Reader’s subscription mode **can not** be changed. 
+`NonDurable`|The cursor is non-durable. <br /><br />Once a broker stops, the cursor is lost and can never be recovered, so that messages **can not** continue to be consumed from the last consumed position.|Reader’s subscription mode is `NonDurable` in nature and it does not prevent data in a topic from being deleted. Reader’s subscription mode **can not** be changed.
 
 A [subscription](#subscriptions) can have one or more consumers. When a consumer subscribes to a topic, it must specify the subscription name. A durable subscription and a non-durable subscription can have the same name, they are independent of each other. If a consumer specifies a subscription which does not exist before, the subscription is automatically created.
 
@@ -391,7 +391,7 @@ By default, messages of a topic without any durable subscriptions are marked as 
 After a consumer is created, the default subscription mode of the consumer is `Durable`. You can change the subscription mode to `NonDurable` by making changes to the consumer’s configuration.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Durable"
   values={[{"label":"Durable","value":"Durable"},{"label":"Non-durable","value":"Non-durable"}]}>
 
@@ -496,9 +496,9 @@ When publishing to partitioned topics, you must specify a *routing mode*. The ro
 
 There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} available:
 
-Mode     | Description 
+Mode     | Description
 :--------|:------------
-`RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. 
+`RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.
 `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
 
@@ -506,7 +506,7 @@ Mode     | Description
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by {@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 Ordering guarantee | Description | Routing Mode and Key
 :------------------|:------------|:------------
@@ -515,9 +515,9 @@ Per-producer       | All the messages from the same producer will be in order. |
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
 
-There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`. 
+There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producer is `JavaStringHash`.
 Please pay attention that `JavaStringHash` is not useful when producers can be from different multiple language clients, under this use case, it is recommended to use `Murmur3_32Hash`.
 
@@ -662,7 +662,7 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 > You can find more in-depth information in [this post](https://www.splunk.com/en_us/blog/it/exactly-once-is-not-exactly-the-same.html).
 
 ## Delayed message delivery
-Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.  
+Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.
 
 Delayed message delivery only works in Shared subscription type. In Exclusive and Failover subscription types, the delayed message is dispatched immediately.
 
@@ -672,7 +672,7 @@ The diagram below illustrates the concept of delayed message delivery:
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
 
-### Broker 
+### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:
 
 ```
@@ -688,7 +688,7 @@ delayedDeliveryTickTimeMillis=1000
 
 ```
 
-### Producer 
+### Producer
 The following is an example of delayed message delivery for a producer in Java:
 
 ```java
@@ -697,4 +697,3 @@ The following is an example of delayed message delivery for a producer in Java:
 producer.newMessage().deliverAfter(3L, TimeUnit.Minute).value("Hello Pulsar!").send();
 
 ```
-

@@ -950,7 +950,7 @@ There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/c
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by {@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -959,7 +959,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producers is `JavaStringHash`.

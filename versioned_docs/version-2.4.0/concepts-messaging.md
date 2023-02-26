@@ -119,7 +119,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 ```
 
-Dead letter topic depends on message re-delivery. You need to confirm message re-delivery method: negative acknowledgement or acknowledgement timeout. Use negative acknowledgement prior to acknowledgement timeout. 
+Dead letter topic depends on message re-delivery. You need to confirm message re-delivery method: negative acknowledgement or acknowledgement timeout. Use negative acknowledgement prior to acknowledgement timeout.
 
 :::note
 
@@ -277,9 +277,9 @@ When publishing to partitioned topics, you must specify a *routing mode*. The ro
 
 There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} available:
 
-Mode     | Description 
+Mode     | Description
 :--------|:------------
-`RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. 
+`RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.
 `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
 
@@ -287,7 +287,7 @@ Mode     | Description
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by {@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 Ordering guarantee | Description | Routing Mode and Key
 :------------------|:------------|:------------
@@ -296,9 +296,9 @@ Per-producer       | All the messages from the same producer will be in order. |
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
 
-There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`. 
+There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producer is `JavaStringHash`.
 Please pay attention that `JavaStringHash` is not useful when producers can be from different multiple language clients, under this use case, it is recommended to use `Murmur3_32Hash`.
 
@@ -409,5 +409,3 @@ The other available approach to message deduplication is to ensure that each mes
 Message deduplication makes Pulsar an ideal messaging system to be used in conjunction with stream processing engines (SPEs) and other systems seeking to provide [effectively-once](https://streaml.io/blog/exactly-once) processing semantics. Messaging systems that don't offer automatic message deduplication require the SPE or other system to guarantee deduplication, which means that strict message ordering comes at the cost of burdening the application with the responsibility of deduplication. With Pulsar, strict ordering guarantees come at no application-level cost.
 
 > More in-depth information can be found in [this post](https://streaml.io/blog/pulsar-effectively-once/) on the [Streamlio blog](https://streaml.io/blog)
-
-
