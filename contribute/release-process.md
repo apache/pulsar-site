@@ -71,8 +71,6 @@ If you created a new branch, update the [CI - OWASP Dependency Check](https://gi
 
 Note that you should also stop the workflow for previous Pulsar versions that are EOL.
 
-Also, if you created a new branch, please update the "Supported Versions" table on the [release policy](release-policy.md) page. This table is for support timelines based on when minor releases take place.
-
 ### Update project version and tag
 
 During the release process, you are going to initially create "candidate" tags, that after verification and approval will get promoted to the "real" final tag.
