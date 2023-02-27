@@ -896,7 +896,7 @@ The following schema formats are currently available for Java:
 
 ## Authentication
 
-Pulsar currently supports three authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), and [Oauth2](security-oauth2.md). You can use the Pulsar Java client with all of them.
+Pulsar currently supports multiple authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), [Kerberos](security-kerberos.md), and [JSON Web Token (JWT)](security-jwt.md). You can use the Pulsar Java client with all of them.
 
 ### TLS Authentication
 
@@ -957,33 +957,3 @@ PulsarClient client = PulsarClient.builder()
 > * `file:///path/to/file`
 > * `file:/path/to/file`
 > * `data:application/x-pem-file;base64,<base64-encoded value>`
-
-### Oauth2
-
-The following example shows how to use [Oauth2](security-oauth2.md) as an authentication provider for the Pulsar Java client.
-
-You can use the factory method to configure authentication for Pulsar Java client.
-
-```java
-
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://broker.example.com:6650/")
-    .authentication(
-        AuthenticationFactoryOAuth2.clientCredentials(this.issuerUrl, this.credentialsUrl, this.audience))
-    .build();
-
-```
-
-In addition, you can also use the encoded parameters to configure authentication for Pulsar Java client.
-
-```java
-
-Authentication auth = AuthenticationFactory
-    .create(AuthenticationOAuth2.class.getName(), "{"type":"client_credentials","privateKey":"...","issuerUrl":"...","audience":"..."}");
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://broker.example.com:6650/")
-    .authentication(auth)
-    .build();
-
-```
-
