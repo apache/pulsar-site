@@ -803,17 +803,6 @@ Maximum number of brokers to transfer bundle load for each unloading cycle. The 
 
 **Category**: Load Balancer
 
-### loadBalancerMemoryResourceWeight
-Memory Resource Usage Weight
-
-**Type**: `double`
-
-**Default**: `1.0`
-
-**Dynamic**: `true`
-
-**Category**: Load Balancer
-
 ### loadBalancerMsgRateDifferenceShedderThreshold
 Message-rate percentage threshold between highest and least loaded brokers for uniform load shedding. (eg: broker1 with 50K msgRate and broker2 with 30K msgRate will have 66% msgRate difference and load balancer can unload bundles from broker-1 to broker-2)
 
@@ -3530,6 +3519,35 @@ Enable or disable strict bookie affinity.
 
 **Category**: Server
 
+### strictTopicNameEnabled
+# Enable strict topic name check. Which includes two parts as follows:
+# 1. Mark `-partition-` as a keyword.
+# E.g.
+    Create a non-partitioned topic.
+      No corresponding partitioned topic
+       - persistent://public/default/local-name (passed)
+       - persistent://public/default/local-name-partition-z (rejected by keyword)
+       - persistent://public/default/local-name-partition-0 (rejected by keyword)
+      Has corresponding partitioned topic, partitions=2 and topic partition name is persistent://public/default/local-name
+       - persistent://public/default/local-name-partition-0 (passed, Because it is the partition topic's sub-partition)
+       - persistent://public/default/local-name-partition-z (rejected by keyword)
+       - persistent://public/default/local-name-partition-4 (rejected, Because it exceeds the number of maximum partitions)
+    Create a partitioned topic(topic metadata)
+       - persistent://public/default/local-name (passed)
+       - persistent://public/default/local-name-partition-z (rejected by keyword)
+       - persistent://public/default/local-name-partition-0 (rejected by keyword)
+# 2. Allowed alphanumeric (a-zA-Z_0-9) and these special chars -=:. for topic name.
+# NOTE: This flag will be removed in some major releases in the future.
+
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### systemTopicEnabled
 Enable or disable system topic.
 
@@ -5199,6 +5217,17 @@ Usage threshold to determine a broker as under-loaded (only used by SimpleLoadMa
 **Default**: `50`
 
 **Dynamic**: `false`
+
+**Category**: Load Balancer
+
+### loadBalancerMemoryResourceWeight
+Memory Resource Usage Weight. Deprecated: Memory is no longer used as a load balancing item.
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
 
 **Category**: Load Balancer
 
