@@ -439,12 +439,12 @@ e = msg.value()
 
 Suppose you have an `avroExampleStruct` class as follows, and you'd like to transmit it over a Pulsar topic.
 
-```go
+    ```go
     type avroExampleStruct struct {
-    ID   int
-    Name string
-}
-```
+        ID   int
+        Name string
+    }
+    ```
 
 1. Add an `avroSchemaDef` like this:
 
