@@ -67,19 +67,14 @@ The next release of Pulsar is 3.0.0, and it has the planned timeline as:
 
 Generally, one committer shall volunteer as the release manager (RM) for a specific release.
 
-For feature releases and LTS releases, the last 3 weeks of the release cycle will be marked as a code-freeze period. The RN will branch off from master, and the RM is responsible for selecting the changes that will be cherry-picked in the release branch.
+For feature releases and LTS releases, the last 3 weeks of the release cycle will be marked as a code-freeze period. The RM will branch off from master, and the RM is also responsible for selecting the changes that will be cherry-picked in the release branch.
 
 From the code-freeze point, to minimize the risk of delaying the release, only bug fixes involving a regression of behavior compared to a previous release should be allowed. Occasional exceptions will be possible after higher scrutiny of the change.
 
-At the moment of the code freeze, the RM will also prepare a release candidate (RC) following the [release process](release-process.md). Committers, contributors, and users will [test this RC](validate-release-candidate.md) to detect issues as early as possible.
-
-A formal vote by the PMC will not be required at this stage (though any disagreement should be sent out ASAP).
-
-After 1 week, if there are any changes, the RM will provide a new RC release that the community will test again.
-
-After 1 more week, if there are any changes, a third RC will be prepared, and this will be submitted to vote to the PMC. Otherwise, the vote will be held on an earlier RC if no issues are found.
-
-The last 1 week will be used for the voting process and for updating Pulsar website and the blog post announcing the release, which should (hopefully) happen on the scheduled day.
+1. At the moment of the code freeze, the RM will start preparing a release candidate (RC) following the [release process](release-process.md). Committers, contributors, and users will [test this RC](validate-release-candidate.md) to detect issues as early as possible. (A formal vote by the PMC will not be required at this stage, though any disagreement should be sent out ASAP).
+2. After 1 week, if there are any changes, the RM will provide a new RC release that the community will test again.
+3. After 1 more week, if there are any changes, a third RC will be prepared, and this will be submitted to vote to the PMC. Otherwise, the vote will be held on an earlier RC if no issues are found.
+4. The last 1 week will be used for the voting process and for updating Pulsar website and the blog post announcing the release, which should (hopefully) happen on the scheduled day.
 
 For patch releases, the process is the same while there is no code-freeze period and strict timeline. Basically, patch release is out "when it is ready".
 
