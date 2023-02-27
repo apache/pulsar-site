@@ -191,6 +191,10 @@ module.exports = {
       "apacheId": "dezhiliu"
     },
     {
+      "name": "Yuri Mizushima",
+      "apacheId": "equanz"
+    },
+    {
       "name": "Guangning E",
       "apacheId": "guangning"
     },
