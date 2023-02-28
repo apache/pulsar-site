@@ -697,25 +697,3 @@ opts := pulsar.ClientOptions{
 }
 
 ```
-
-## OAuth2 authentication
-
-To use [OAuth2 authentication](security-oauth2.md), you'll need to configure your client to perform the following operations.
-This example shows how to configure OAuth2 authentication.
-
-```go
-
-oauth := pulsar.NewAuthenticationOAuth2(map[string]string{
-		"type":       "client_credentials",
-		"issuerUrl":  "https://dev-kt-aa9ne.us.auth0.com/oauth/token",
-		"audience":   "https://dev-kt-aa9ne.us.auth0.com/api/v2/",
-		"privateKey": "/path/to/privateKey",
-		"clientId":   "0Xx...Yyxeny",
-	})
-client, err := pulsar.NewClient(pulsar.ClientOptions{
-		URL:              "puslar://my-cluster:6650",
-		Authentication:   oauth,
-})
-
-```
-

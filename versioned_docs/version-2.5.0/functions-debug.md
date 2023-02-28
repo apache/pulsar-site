@@ -508,7 +508,7 @@ This is my function!
 
 :::note
 
-You must specify the [entire topic name](getting-started-pulsar.md#topic-names) when using the `--topic` option. Otherwise, the following error occurs.
+You must specify the entire topic name when using the `--topic` option. Otherwise, the following error occurs.
 
 ```text
 

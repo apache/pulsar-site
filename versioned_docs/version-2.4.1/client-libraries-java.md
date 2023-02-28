@@ -630,7 +630,7 @@ The code sample above shows pointing the `Reader` object to a specific message (
 
 ## Schemas
 
-In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types.md). If you construct, say, a [producer](#producers) without specifying a schema, then the producer can only produce messages of type `byte[]`. Here's an example:
+In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types). If you construct, say, a [producer](#producers) without specifying a schema, then the producer can only produce messages of type `byte[]`. Here's an example:
 
 ```java
 
@@ -744,7 +744,7 @@ The following schema formats are currently available for Java:
 
 ## Authentication
 
-Pulsar currently supports two authentication schemes: [TLS](security-tls-authentication.md) and [Athenz](security-athenz.md). The Pulsar Java client can be used with both.
+Pulsar currently supports multiple authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), [Kerberos](security-kerberos.md), and [JSON Web Token (JWT)](security-jwt.md). You can use the Pulsar Java client with all of them.
 
 ### TLS Authentication
 
