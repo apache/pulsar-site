@@ -333,7 +333,11 @@ var client = PulsarClient.Builder()
                          .Build();
 ```
 
-> Note that `VerifyCertificateName` refers to the configuration of hostname verification in the C# client.
+:::note
+
+`VerifyCertificateName` refers to the configuration of hostname verification in the C# client.
+
+:::
 
 </TabItem>
 <TabItem value="WebSocket API">
@@ -380,7 +384,11 @@ async def test():
 asyncio.run(test())
 ```
 
-> Note that in addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md#security-settings).
+:::note
+
+In addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md#security-settings).
+
+:::
 
 </TabItem>
 </Tabs>
