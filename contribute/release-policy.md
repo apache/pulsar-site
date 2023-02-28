@@ -5,7 +5,7 @@ title: Release policy
 
 ## Release semantics
 
-The Pulsar project follows a variant of Semantic Versioning (semver), which mapping `z.minor.patch` to `LTS.feature.patch`.
+The Pulsar project follows a variant of Semantic Versioning (semver), which replacing `major.minor.patch` with `LTS.feature.patch`.
 
 Concretely, existing releases can expect patches for bugs and security vulnerabilities. New features will target to feature releases. A "major" version bump will not carry any special meaning in terms of "big features" included in the release or breaking API changes. Instead, it would simply signal a new long-term support (LTS) release.
 
