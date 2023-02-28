@@ -19,7 +19,7 @@ For example,
 * 3.1.0 is a feature release;
 * 3.2.0 is a feature release;
 * 3.2.1 is a patch release;
-* 4.0.0 is a LTS release.
+* 4.0.0 is an LTS release.
 
 ## Compatibility between releases
 
