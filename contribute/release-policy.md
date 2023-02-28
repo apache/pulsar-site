@@ -5,7 +5,9 @@ title: Release policy
 
 ## Release semantics
 
-The Pulsar project follows a variant of [Semantic Versioning](http://semver.org/spec/v2.0.0.html). Existing releases can expect patches for bugs and security vulnerabilities. New features will target minor releases. The difference is that a major version bump will not carry any special meaning in terms of "big features" included in the release or breaking API changes. Instead, it would simply signal a new long-term support (LTS) release.
+The Pulsar project follows a variant of Semantic Versioning (semver), which mapping `z.minor.patch` to `LTS.feature.patch`.
+
+Concretely, existing releases can expect patches for bugs and security vulnerabilities. New features will target to feature releases. A "major" version bump will not carry any special meaning in terms of "big features" included in the release or breaking API changes. Instead, it would simply signal a new long-term support (LTS) release.
 
 For example,
 
@@ -13,6 +15,7 @@ For example,
 * 2.10.1 is a patch release;
 * 2.11.0 is a feature release;
 * 3.0.0 is the first LTS release;
+* 3.0.1 is a patch release of the LTS release;
 * 3.1.0 is a feature release;
 * 3.2.0 is a feature release;
 * 3.2.1 is a patch release;
@@ -22,7 +25,7 @@ For example,
 
 When upgrading an existing cluster, it is important to upgrade components linearly.
 
-Before 3.0, upgrade should be done linearly through each minor version. For example, when upgrading from 2.8 to 2.10, it is important to upgrade to 2.9 before going to 2.10.
+Before 3.0, upgrade should be done linearly through each feature version. For example, when upgrading from 2.8 to 2.10, it is important to upgrade to 2.9 before going to 2.10.
 
 Starting from 3.0, additionally, live upgrade/downgrade between one LTS and the next one is guaranteed. For example,
 
@@ -54,15 +57,6 @@ import SupportedVersionsTable from "@site/src/components/SupportedVersionsTable"
 <SupportedVersionsTable />
 ````
 
-## Roadmap for release plans
-
-The next release of Pulsar is 3.0.0, and it has the planned timeline as:
-
-* 2023-04-11 - RC-1
-* 2023-04-18 - RC-2
-* 2023-04-25 - RC-3
-* 2023-05-02 - Announce 3.0 Release
-
 ## Release cycles
 
 Generally, one committer shall volunteer as the release manager (RM) for a specific release.
@@ -77,6 +71,17 @@ From the code-freeze point, to minimize the risk of delaying the release, only b
 4. The last 1 week will be used for the voting process and for updating Pulsar website and the blog post announcing the release, which should (hopefully) happen on the scheduled day.
 
 For patch releases, the process is the same while there is no code-freeze period and strict timeline. Basically, patch release is out "when it is ready".
+
+:::note
+
+For example, the next release of Pulsar is 3.0.0, and it has the planned timeline as:
+
+* 2023-04-11 - RC-1
+* 2023-04-18 - RC-2
+* 2023-04-25 - RC-3
+* 2023-05-02 - Announce 3.0 Release
+
+:::
 
 ## Related PIPs
 
