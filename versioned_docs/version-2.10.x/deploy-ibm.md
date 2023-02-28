@@ -21,7 +21,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 #### Create VM on IBM Cloud
 
-1. Go to [IBM Cloud]( https://cloud.ibm.com/login)  and login with your credentials.
+1. Go to [IBM Cloud]( https://cloud.ibm.com/?cm_sp=freelancer-_-pulsar-iks-_-cta)  and login with your credentials.
 2. Search for Virtual Server.
 3. Select Virtual Server for Classic.
 
