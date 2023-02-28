@@ -19,7 +19,7 @@ The following figure illustrates how Pulsar encrypts messages on the producer si
 
 ![Pulsar end-to-end encryption](/assets/pulsar-encryption.svg)
 
-1. The producer generates a session key regularly to encrypt the message payload using a symmetric algorithm, such as AES. The plaintext message is packed as the message body.
+1. The producer generates a session key regularly to encrypt the message payload using a symmetric algorithm, such as AES. The ciphertext is packed as the message body.
 2. The producer uses the consumer’s public key to encrypt the session key using an asymmetric algorithm, such as RSA, and adds an alias with the encrypted secret to the message header.
 3. The consumer reads the message header and decrypts the session key using its private key.
 4. The consumer uses the decrypted session key to decrypt the message payload. 

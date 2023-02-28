@@ -24,7 +24,7 @@ To configure brokers/proxies to authenticate clients using mTLS, add the followi
 ```properties
 # enable authentication
 authenticationEnabled=true
-# set TLS authentication plugin
+# set mTLS authentication provider
 authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
 
 # configure TLS for client to connect brokers
@@ -59,7 +59,7 @@ To configure proxies to authenticate clients using mTLS, add the following param
 ```properties
 # enable authentication
 authenticationEnabled=true
-# set TLS authentication plugin
+# set mTLS authentication provider
 authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
 
 # configure TLS for client to connect proxies
