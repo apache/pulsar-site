@@ -54,10 +54,14 @@ export function setVersion(version) {
 }
 
 export function getVersion() {
-  if (/version=(\d+\.?\x?)+/.test(location.href)) {
-    return location.href.match(/version=(\d+\.?\x?)+/)[0];
+  try {
+    if (/version=(\d+\.?\x?)+/.test(location.href)) {
+      return location.href.match(/version=((\d+\.?\x?)+)/)[1];
+    }
+  } catch (error) {
+    console.error(error)
+    return "master";
   }
-  return "master";
 }
 
 export function getApiVersion(anchor) {
