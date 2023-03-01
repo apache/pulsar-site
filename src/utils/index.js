@@ -56,7 +56,7 @@ export function setVersion(version) {
 export function getVersion() {
   try {
     if (/version=(\d+\.?\x?)+/.test(location.href)) {
-      return location.href.match(/version=((\d+\.?\x?)+)/)[1];
+      return location.href.match(/version=([0-9.x]+)/)[1];
     }
   } catch (error) {
     console.error(error)
