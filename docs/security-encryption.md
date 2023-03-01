@@ -19,18 +19,19 @@ The following figure illustrates how Pulsar encrypts messages on the producer si
 
 ![Pulsar end-to-end encryption](/assets/pulsar-encryption.svg)
 
-1. The producer generates a session key regularly to encrypt the message payload using a symmetric algorithm, such as AES. The ciphertext is packed as the message body.
+1. The producer generates a session key regularly (every 4 hours or after publishing a certain number of messages) to encrypt the message payload using a symmetric algorithm, such as AES, and fetches the asymmetric public key every 4 hours. The ciphertext is packed as the message body.
 2. The producer uses the consumer’s public key to encrypt the session key using an asymmetric algorithm, such as RSA, and adds an alias with the encrypted secret to the message header.
-3. The consumer reads the message header and decrypts the session key using its private key.
+3. The consumer reads the message header and decrypts the session key using its private key. 
 4. The consumer uses the decrypted session key to decrypt the message payload. 
 
-:::tip
+:::note
 
-* Both public and private keys are given to the consumer by PKI (Public Key Infrastructure). The consumer's public key is shared with the producer, but only the consumer has the access to the private key.
-* Pulsar generates a new AES session key every 4 hours or after publishing a certain number of messages. Producers fetch the asymmetric public key every 4 hours by calling `CryptoKeyReader.getPublicKey()` to retrieve the latest version.
+* The consumer's public key is shared with the producer, but only the consumer has the access to the private key.
 * Pulsar does not store the encryption key anywhere in the Pulsar service. If you lose or delete the private key, your message is irretrievably lost and unrecoverable.
 
 :::
+
+Pulsar isolates the key management and only provides interfaces (`CryptoKeyReader`) to access public keys. For production systems, it's highly recommended to extend/implement `CryptoKeyReader` with cloud key management ([KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) or [CKM](https://cloud.google.com/security-key-management)) or PKI (Public Key Infrastructure, such as freeIPA).
 
 If the produced messages are consumed across application boundaries, you need to ensure that consumers in other applications have access to one of the private keys that can decrypt the messages. You can do this in two ways:
 - Access the public key that the consumer application provides and add it to the producer's keys.
