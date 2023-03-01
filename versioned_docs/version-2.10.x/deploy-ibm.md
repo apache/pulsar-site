@@ -11,6 +11,7 @@ This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pul
 
 :::
 
+
 Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 1. [Create VM on IBM Cloud.](#create-vm-on-ibm-cloud)
@@ -19,7 +20,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 4. [Verify the deployment.](#run-kubectl-commands-to-verify-the-deployment)
 
 
-#### Create VM on IBM Cloud
+## 1. Create VM on IBM Cloud
 
 1. Go to [IBM Cloud]( https://cloud.ibm.com/?cm_sp=freelancer-_-pulsar-iks-_-cta)  and login with your credentials.
 2. Search for Virtual Server.
@@ -70,7 +71,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![VM Creation Image 12](/assets/IBMCloud/VM12.png)
 
-#### Create Kubernetes Cluster on IBM 
+## 2. Create Kubernetes Cluster on IBM 
 
 1. Search for the Kubernetes services
 
@@ -115,7 +116,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 12](/assets/IBMCloud/k8s12.png)
 
-## Step 3: Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
+## 3. Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
 
 **Prerequisites** 
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli) and connect to Kubernetes master node.
@@ -162,7 +163,7 @@ Output
 
 > Now we are able to run commands of kubectl.
 
-## Verify the deployment
+## 4. Verify the deployment
 Make sure all the pods of Pulsar are running. Get the service URL and broker URL for publishing and consuming the messages.
 
 
