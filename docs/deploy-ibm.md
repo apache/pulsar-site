@@ -188,7 +188,7 @@ git clone https://github.com/apache/pulsar-helm-chart
 cd pulsar-helm-chart
 ```
 
-3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username`pulsar`and password`pulsar`are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
 :::note
 
