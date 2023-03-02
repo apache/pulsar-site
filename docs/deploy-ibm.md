@@ -223,7 +223,7 @@ Output
 ```bash 
 kubectl get pods
 ```
-If all pods start up successfully, you can see that `STATUS`is changed to`Running`or`Completed`.
+If all pods start up successfully, you can see that `STATUS` is changed to `Running` or `Completed`.
 
 Output
 
