@@ -67,7 +67,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![VM Creation Image 11](/assets/IBMCloud/VM11.png)
 
-13. Check the devices list, click on the menu option on the same page.
+13. Check the devices list, and click on the menu option on the same page.
 
 ![VM Creation Image 12](/assets/IBMCloud/VM12.png)
 
