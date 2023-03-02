@@ -108,7 +108,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 10](/assets/IBMCloud/k8s10.png)
 
-9. Check the created cluster list through clicking on the clusters options 
+9. Check the created cluster list by clicking on the clusters options.
 
 ![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
 
