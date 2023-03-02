@@ -276,7 +276,7 @@ Set of TLS Ciphers.
 **Default**: `[]`
 
 ### tlsHostnameVerificationEnable
-Whether the hostname is validated when the proxy creates a TLS connection with brokers.
+Whether the hostname is validated when the client creates a TLS connection with brokers.
 
 **Type**: `boolean`
 

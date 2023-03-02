@@ -4893,6 +4893,17 @@ Enable TLS
 
 **Category**: TLS
 
+### tlsHostnameVerificationEnabled
+Whether the hostname is validated when the broker creates a TLS connection with other brokers
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsKeyFilePath
 Path for the TLS private key file
 

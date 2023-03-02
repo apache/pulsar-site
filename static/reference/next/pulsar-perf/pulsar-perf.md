@@ -215,8 +215,9 @@ $ pulsar-perf monitor-brokers [options]
 
 |Flag|Description|Default|
 |---|---|---|
+| `--extensions` | true to monitor Load Balance Extensions.|false|
 | `-h, --help` | Help message|false|
-| `--connect-string` | Zookeeper connect string|null|
+| `--connect-string` | Zookeeper or broker connect string|null|
 
 ## simulation-client
 
