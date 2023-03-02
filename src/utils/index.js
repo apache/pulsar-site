@@ -55,13 +55,13 @@ export function setVersion(version) {
 
 export function getVersion() {
   try {
-    if (/version=(\d+\.?\x?)+/.test(location.href)) {
+    if (/version=[0-9.x]+/.test(location.href)) {
       return location.href.match(/version=([0-9.x]+)/)[1];
     }
   } catch (error) {
-    console.error(error)
-    return "master";
+    console.error(error);
   }
+  return "master";
 }
 
 export function getApiVersion(anchor) {
