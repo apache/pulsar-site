@@ -1,7 +1,7 @@
 ---
 id: getting-started-docker-compose
-title: Run a Pulsar cluster locally with `docker-compose`
-sidebar_label: "Run Pulsar locally with `docker-compose`"
+title: Run a Pulsar cluster locally with Docker Compose
+sidebar_label: "Run Pulsar locally with Docker Compose"
 ---
 
 ## Configure the `docker-compose.yaml` template
