@@ -8,7 +8,7 @@ sidebar_label: Apache Pulsar 2.11.0
 
 ### Important notice
 
-Starting from 2.11.0, the minimal version of JDK on the server side (broker, functions, connectors) is required to be 17. See [PIP-156](https://github.com/apache/pulsar/pull/15264) for more details.
+Starting from 2.11.0, the minimal version of JDK on the server side (broker, functions, connectors) is required to be 17. See [PIP-156](https://github.com/apache/pulsar/issues/15207) for more details.
 
 - Rename Pulsar txn metrics to specify OpenMetrics [#16581](https://github.com/apache/pulsar/pull/16581)
 - Rename Pulsar schema metrics to specify OpenMetrics [#16610](https://github.com/apache/pulsar/pull/16610)
