@@ -7,6 +7,9 @@ sidebar_label: Apache Pulsar 2.11.0
 #### 2023-01-11
 
 ### Important notice
+
+Starting from 2.11.0, the minimal version of JDK on the server side (broker, functions, connectors) is required to be 17. See [PIP-156](https://github.com/apache/pulsar/pull/15264) for more details.
+
 - Rename Pulsar txn metrics to specify OpenMetrics [#16581](https://github.com/apache/pulsar/pull/16581)
 - Rename Pulsar schema metrics to specify OpenMetrics [#16610](https://github.com/apache/pulsar/pull/16610)
 - Rename Pulsar lb metrics to specify OpenMetrics [#16611](https://github.com/apache/pulsar/pull/16611)
@@ -599,7 +602,7 @@ This section only highlights the availability of docs serving existing features.
 - Add more concepts and user tasks about [bookie isolation](https://pulsar.apache.org/docs/2.11.x/administration-isolation-bookie) [#16843](https://github.com/apache/pulsar/pull/16843)
 - Use 2.8.x/2.9.x/2.10.x doc set instead of version-specific doc set [#17074](https://github.com/apache/pulsar/pull/17074)
 
-For the comprehensive list of doc-related improvements in 2.11.0, you can go to [GitHub](https://github.com/apache/pulsar/pulls?q=is%3Apr+milestone%3A2.11.0+label%3Adoc+is%3Aclosed). 
+For the comprehensive list of doc-related improvements in 2.11.0, you can go to [GitHub](https://github.com/apache/pulsar/pulls?q=is%3Apr+milestone%3A2.11.0+label%3Adoc+is%3Aclosed).
 
 > A special thanks to the following contributors (alphabetic Github IDs) who helped add the docs for Pulsar 2.11.0.
 >
