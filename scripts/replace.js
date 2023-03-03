@@ -1,25 +1,12 @@
 const replace = require("replace-in-file");
 
-const fs = require("fs");
-
+const semver = require("semver");
 const CWD = process.cwd();
 const siteConfig = require(`${CWD}/docusaurus.config.js`);
 const nextDocsDir = `${CWD}/docs`;
 const docsDir = `${CWD}/versioned_docs`;
 const restApiVersions = require("../static/swagger/restApiVersions.json");
 const compareVersions = require("compare-versions");
-
-function getVersions() {
-  try {
-    return JSON.parse(
-      require("fs").readFileSync(`${CWD}/versions.json`, "utf8")
-    );
-  } catch (error) {
-    //console.error(error)
-    console.error("no versions found defaulting to 2.1.0");
-  }
-  return ["2.1.0"];
-}
 
 function getRealVersion(version) {
   let versionMap = {};
@@ -80,7 +67,7 @@ function prestoPulsarReleaseUrl(version) {
 }
 
 function rpmReleaseUrl(version, type) {
-  rpmVersion = version.replace("incubating", "1_incubating");
+  let rpmVersion = version.replace("incubating", "1_incubating");
   if (version.includes("incubating")) {
     return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=incubator/pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${rpmVersion}.x86_64.rpm`;
   } else {
@@ -97,7 +84,7 @@ function debReleaseUrl(version, type) {
 }
 
 function rpmDistUrl(version, type) {
-  rpmVersion = version.replace("incubating", "1_incubating");
+  let rpmVersion = version.replace("incubating", "1_incubating");
   if (version.includes("incubating")) {
     return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${rpmVersion}.x86_64.rpm`;
   } else {
@@ -113,13 +100,31 @@ function debDistUrl(version, type) {
   }
 }
 
-// Specially handle Python and C++ API documents, since they are moved out start from 2.11.0.
-function multiClientVersionUrl(version, type) {
-  if (type === "python" && version === "2.6.4") {
-    // There's no release for Python client 2.6.4. Add this trick to avoid broken link.
-    return `${siteConfig.url}/api/${type}/2.6.3`
+function clientPythonVersionUrl(version) {
+  if (version === "2.6.4") {
+    return `${siteConfig.url}/api/python/2.6.3`;
   }
-  return `${siteConfig.url}/api/${type}/${version}`
+  let v = semver.coerce(version);
+  if (v.compareMain("2.8.0") < 0) {
+    return `${siteConfig.url}/api/python/${version}`;
+  }
+  if (v.compareMain("2.11.0") < 0) {
+    return `${siteConfig.url}/api/python/${v.major}.${v.minor}.x`;
+  }
+  let versions = require(`${CWD}/data/release-python`);
+  return `${siteConfig.url}/api/python/${versions[0].vtag}`;
+}
+
+function clientCPPVersionUrl(version) {
+  let v = semver.coerce(version);
+  if (v.compareMain("2.8.0") < 0) {
+    return `${siteConfig.url}/api/cpp/${version}`;
+  }
+  if (v.compareMain("2.11.0") < 0) {
+    return `${siteConfig.url}/api/cpp/${v.major}.${v.minor}.x`;
+  }
+  let versions = require(`${CWD}/data/release-cpp`);
+  return `${siteConfig.url}/api/cpp/${versions[0].vtag}`;
 }
 
 function javadocVersionUrl(version, type) {
@@ -139,8 +144,7 @@ function doReplace(options) {
     });
 }
 
-const versions = getVersions();
-
+const versions = JSON.parse(require("fs").readFileSync(`${CWD}/versions.json`, "utf8"));
 const latestMajorRelease = versions[0];
 const latestVersion = getRealVersion(latestMajorRelease);
 
@@ -198,8 +202,8 @@ const options = {
     debDistUrl(`${latestVersion}`, ""),
     debDistUrl(`${latestVersion}`, "-dev"),
 
-    multiClientVersionUrl(`${latestMajorRelease}`, "python"),
-    multiClientVersionUrl(`${latestMajorRelease}`, "cpp"),
+    clientPythonVersionUrl(`${latestMajorRelease}`),
+    clientCPPVersionUrl(`${latestMajorRelease}`),
     javadocVersionUrl(`${latestMajorRelease}`, "pulsar-functions"),
     javadocVersionUrl(`${latestMajorRelease}`, "client"),
     javadocVersionUrl(`${latestMajorRelease}`, "admin"),
@@ -242,8 +246,8 @@ for (let _v of versions) {
       rpmDistUrl(`${v}`, "-devel"),
       debDistUrl(`${v}`, ""),
       debDistUrl(`${v}`, "-dev"),
-      multiClientVersionUrl(`${_v}`, "python"),
-      multiClientVersionUrl(`${_v}`, "cpp"),
+      clientPythonVersionUrl(`${_v}`),
+      clientCPPVersionUrl(`${_v}`),
       javadocVersionUrl(`${_v}`, "pulsar-functions"),
       javadocVersionUrl(`${_v}`, "client"),
       javadocVersionUrl(`${_v}`, "admin"),
