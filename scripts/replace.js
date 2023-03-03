@@ -57,7 +57,15 @@ function prestoPulsarReleaseUrl(version) {
 function rpmDistUrl(version, type) {
   let v = semver.coerce(version);
   if (v.compareMain("2.11.0") < 0) {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${version}-1.x86_64.rpm`;
+    let resolvedVersion = version;
+    if (v.minor === 8) {
+      resolvedVersion = "2.8.4";
+    } else if (v.minor === 9) {
+      resolvedVersion = "2.9.4";
+    } else if (v.minor === 10) {
+      resolvedVersion = "2.10.2"
+    }
+    return `https://archive.apache.org/dist/pulsar/pulsar-${resolvedVersion}/RPMS/apache-pulsar-client${type}-${resolvedVersion}-1.x86_64.rpm`;
   } else {
     const versions = require(`${CWD}/data/release-cpp`);
     const ver = versions[0].tagName.substring(1);
@@ -68,7 +76,15 @@ function rpmDistUrl(version, type) {
 function debDistUrl(version, type) {
   let v = semver.coerce(version);
   if (v.compareMain("2.11.0") < 0) {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/DEB/apache-pulsar-client${type}.deb`;
+    let resolvedVersion = version;
+    if (v.minor === 8) {
+      resolvedVersion = "2.8.4";
+    } else if (v.minor === 9) {
+      resolvedVersion = "2.9.4";
+    } else if (v.minor === 10) {
+      resolvedVersion = "2.10.2"
+    }
+    return `https://archive.apache.org/dist/pulsar/pulsar-${resolvedVersion}/DEB/apache-pulsar-client${type}.deb`;
   } else {
     const versions = require(`${CWD}/data/release-cpp`);
     const ver = versions[0].tagName.substring(1);
