@@ -61,7 +61,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![VM Creation Image 11](/assets/IBMCloud/VM11.png)
 
-13. Check the devices list, click on the menu option on the same page.
+13. Check the devices list, and click on the menu option on the same page.
 
 ![VM Creation Image 12](/assets/IBMCloud/VM12.png)
 
@@ -75,7 +75,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 2](/assets/IBMCloud/k8s2.png)
 
-3. Select the infrastructure type we are going with the classic and also select the Kubernetes version .
+3. Select the infrastructure type we are going with the classic and also select the Kubernetes version.
 
 ![K8S Creation Image 3](/assets/IBMCloud/k8s3.png)
 
@@ -102,7 +102,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 10](/assets/IBMCloud/k8s10.png)
 
-9. Check the created cluster list through clicking on the clusters options 
+9. Check the created cluster list by clicking on the clusters options 
 
 ![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
 
@@ -182,11 +182,11 @@ git clone https://github.com/apache/pulsar-helm-chart
 cd pulsar-helm-chart
 ```
 
-3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username`pulsar`and password`pulsar`are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
 :::note
 
-When running the script, you can use`-n`to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and`-c`to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
+When running the script, you can use `-n` to specify the Kubernetes namespace where the Pulsar Helm chart is installed, `-k` to define the Pulsar Helm release name, and `-c` to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
 
 :::
 
@@ -205,7 +205,7 @@ helm install --values examples/values-minikube.yaml --set initialize=true asia a
 
 :::note
 
-You need to specify`--set initialize=true`when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
 
 :::
 
@@ -217,7 +217,7 @@ Output
 ```bash 
 kubectl get pods
 ```
-If all pods start up successfully, you can see that `STATUS`is changed to`Running`or`Completed`.
+If all pods start up successfully, you can see that `STATUS` is changed to `Running` or `Completed`.
 
 Output
 
@@ -237,4 +237,4 @@ The output shows both `services URL` and `broker URL`.
 Proxy external IPs are the ports changed just now:
 - Service URL port is 80.
 - Broker URL port is 6650. This is default.
-If you execute all the commands successfully, you can use the Pulsar client to connect to ?? clusters and produce and consume messages through proxy external IPs.
+If you execute all the commands successfully, you can use the Pulsar client to connect to  clusters and produce and consume messages through proxy external IPs.

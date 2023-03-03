@@ -188,11 +188,11 @@ git clone https://github.com/apache/pulsar-helm-chart
 cd pulsar-helm-chart
 ```
 
-3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script `prepare_helm_release.sh` to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
 :::note
 
-When running the script, you can use`-n`to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and`-c`to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
+When running the script, you can use `-n` to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and `-c` to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
 
 :::
 
@@ -211,7 +211,7 @@ helm install --values examples/values-minikube.yaml --set initialize=true asia a
 
 :::note
 
-You need to specify`--set initialize=true`when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
 
 :::
 
@@ -243,4 +243,4 @@ The output shows both `services URL` and `broker URL`.
 Proxy external IPs are the ports changed just now:
 - Service URL port is 80.
 - Broker URL port is 6650. This is default.
-If you execute all the commands successfully, you can use the Pulsar client to connect to ?? clusters and produce and consume messages through proxy external IPs.
+If you execute all the commands successfully, you can use the Pulsar client to connect to  clusters and produce and consume messages through proxy external IPs.
