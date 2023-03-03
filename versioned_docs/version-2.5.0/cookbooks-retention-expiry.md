@@ -183,10 +183,11 @@ $ pulsar-admin namespaces set-backlog-quota my-tenant/my-ns \
 
 ```java
 
-long sizeLimit = 2147483648L;
-BacklogQuota.RetentionPolicy policy = BacklogQuota.RetentionPolicy.producer_request_hold;
-BacklogQuota quota = new BacklogQuota(sizeLimit, policy);
-admin.namespaces().setBacklogQuota(namespace, quota);
+admin.namespaces().setBacklogQuota(namespace, BacklogQuota.builder()
+        .retentionPolicy(RetentionPolicy.producer_request_hold)
+        .limitSize(2147483648L)
+        .limitTime(60 * 60)
+        .build());
 
 ```
 

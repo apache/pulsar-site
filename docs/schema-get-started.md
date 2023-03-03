@@ -440,7 +440,7 @@ e = msg.value()
 Suppose you have an `avroExampleStruct` class as follows, and you'd like to transmit it over a Pulsar topic.
 
 ```go
-    type avroExampleStruct struct {
+type avroExampleStruct struct {
     ID   int
     Name string
 }

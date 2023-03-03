@@ -1,7 +1,4 @@
----
-id: document-preview
-title: Previewing content
----
+# Previewing content
 
 This guide explains why and how to preview Pulsar content locally with detailed steps and various examples.
 
@@ -60,6 +57,11 @@ By default, a browser window will open at [http://localhost:3000](http://localho
 
 ![alt_text](media/website-preview.png)
 
+:::tip
+
+When you click on `Docs`, you are taken to the latest stable version (e.g., `http://localhost:3000/docs/2.10.x/`). If you want to preview changes on `master`, change the URL to `http://localhost:3000/docs/next`
+
+:::
 ### Stop preview
 
 Switch to your command-line interface and press **Control+C**.

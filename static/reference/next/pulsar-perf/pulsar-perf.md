@@ -44,7 +44,7 @@ $ pulsar-perf produce [options]
 | `-b, --batch-time-window` | Batch messages in 'x' ms window (Default: 1ms)|1.0|
 | `-am, --access-mode` | Producer access mode|Shared|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep publishing|0|
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}.|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
 | `-n, --num-producers` | Number of producers (per topic)|1|
 | `-m, --num-messages` | Number of messages to publish in total. If <= 0, it will keep publishing|0|
@@ -90,7 +90,7 @@ $ pulsar-perf consume [options]
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--acks-delay-millis` | Acknowledgements grouping delay in millis|100|
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}.|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-bw, --busy-wait` | Enable Busy-Wait on the Pulsar client|false|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -141,7 +141,7 @@ $ pulsar-perf transaction [options]
 | `-time, --test-duration` | Test duration (in second). 0 means keeping publishing|0|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}.|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-bw, --busy-wait` | Enable Busy-Wait on the Pulsar client|false|
 | `-np, --partitions` | Create partitioned topics with a given number of partitions, 0 meansnot trying to create a topic|null|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
@@ -193,7 +193,7 @@ $ pulsar-perf read [options]
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}.|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-bw, --busy-wait` | Enable Busy-Wait on the Pulsar client|false|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
@@ -215,8 +215,9 @@ $ pulsar-perf monitor-brokers [options]
 
 |Flag|Description|Default|
 |---|---|---|
+| `--extensions` | true to monitor Load Balance Extensions.|false|
 | `-h, --help` | Help message|false|
-| `--connect-string` | Zookeeper connect string|null|
+| `--connect-string` | Zookeeper or broker connect string|null|
 
 ## simulation-client
 
@@ -261,7 +262,7 @@ $ pulsar-perf websocket-producer [options]
 |Flag|Description|Default|
 |---|---|---|
 | `-s, --size` | Message size in byte|1024|
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}.|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep publishing|0|
 | `-e, --payload-delimiter` | The delimiter used to split lines when using payload from a file|\n|
 | `-h, --help` | Help message|false|

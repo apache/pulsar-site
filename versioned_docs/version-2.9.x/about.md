@@ -1,7 +1,7 @@
 ---
 slug: /
 id: about
-title: Welcome to the doc portal!
+title: Welcome to the Apache Pulsar documentation portal
 sidebar_label: "About"
 ---
 
@@ -10,33 +10,26 @@ import BlockLink from "@site/src/components/BlockLink";
 import { docUrl } from "@site/src/utils/index";
 
 
-# Welcome to the doc portal!
+# Welcome to the Apache Pulsar documentation portal
 ***
 
-This portal holds a variety of support documents to help you work with Pulsar . If you’re a beginner, there are tutorials and explainers to help you understand Pulsar and how it works.
+## Choose your path....
+Select one of the content blocks below to begin your Pulsar journey. If you ...
+* Are new to Pulsar, start with **About Pulsar** to learn about features and concepts.
+* Want to jump to the quickstart, select **Get Started**.
+* Are an operator responsible for architecting and supporting Apache Pulsar, start with **Install, Deploy, Upgrade**.
+* Are a developer who wants to master Apache Pulsar, select **Pulsar for Developers**. 
+* Want to try out Pulsar, select **How To** for access to the "hello world" tutorial.
+* An experienced Pulsar coder looking for API, metrics, or configuration documentation, go to **Reference**. 
 
-If you’re an experienced coder, review this page to learn the easiest way to access the specific content you’re looking for.
-
-## Get Started Now
 <BlockLinks>
     <BlockLink title="About Pulsar" url="/docs/2.9.x/concepts-overview/" />
-    <BlockLink title="Get Started" url="/docs/2.9.x/getting-started-standalone/" />
-    <BlockLink title="Install, Deploy, Upgrade" url="/docs/2.9.x/deploy-aws/" />
-    <BlockLink title="Pulsar for Developers" url="/docs/2.9.x/develop-tools/" />
-    <BlockLink title="How To" url="/docs/2.9.x/functions-develop/" />
-    <BlockLink title="References" url="/docs/2.9.x/reference-terminology/" />
+    <BlockLink title="Get Started" url="/docs/2.9.x/getting-started-home/" />
+    <BlockLink title="Install, Deploy, Upgrade" url="/docs/2.9.x/install-deploy-upgrade-landing/" />
+    <BlockLink title="Pulsar for Developers" url="/docs/2.9.x/developers-landing/" />
+    <BlockLink title="How To" url="/docs/2.9.x/how-to-landing/" />
+    <BlockLink title="Reference" url="/docs/2.9.x/reference-landing/" />
 </BlockLinks>
-
-## Navigation
-***
-
-There are several ways to get around in the doc portal. The index navigation pane is a table of contents for the entire archive. The archive is divided into sections, like chapters in a book. Click the title of the topic to view it.
-
-In-context links provide an easy way to immediately reference related topics. Click the underlined term to view the topic.
-
-Links to related topics can be found at the bottom of each topic page. Click the link to view the topic.
-
-![Page Linking](/assets/page-linking.png)
 
 ## Continuous Improvement
 ***

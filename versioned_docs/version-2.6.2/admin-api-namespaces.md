@@ -950,10 +950,6 @@ admin.namespaces().getReplicatorDispatchRate(namespace)
 
 ```
 
-### Namespace isolation
-
-Coming soon.
-
 ### Unloading from a broker
 
 You can unload a namespace, or a [namespace bundle](reference-terminology.md#namespace-bundle), from the Pulsar [broker](reference-terminology.md#broker) that is currently responsible for it.

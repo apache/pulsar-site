@@ -1,7 +1,5 @@
 ## Pulsar configurations
 
-Pulsar offers several command-line tools that you can use for managing Pulsar installations, performance testing, using command-line producers and consumers, and more.
-
 You can manage Pulsar configurations through configuration files in the [`conf`](https://github.com/apache/pulsar/tree/master/conf) directory of a Pulsar installation.
 
 - [BookKeeper](/next/config/reference-configuration-bookkeeper)
@@ -26,3 +24,11 @@ If you want to override the configurations of clients internal to brokers, webso
 > Notes:
 > * This override feature only applies to Pulsar 2.10.1 and later versions.
 > * When running the function worker within the broker, you have to configure those clients by using the `functions_worker.yml` file. These prefixed configurations do not apply to any of those clients.
+
+### Set specific configurations using Java system property
+
+You can set specific configurations through Java properties.
+
+| **Property**       | **Description**                                              |
+| ------------------ | ------------------------------------------------------------ |
+| pulsar.enableUring | Use `io_uring` instead of `epoll` as network IO mode. `-Dpulsar.enableUring=1` means this feature is enabled. |

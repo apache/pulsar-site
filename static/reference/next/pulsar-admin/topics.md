@@ -299,7 +299,7 @@ $ pulsar-admin topics stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-sbs, --get-subscription-backlog-size` | Set true to get backlog size for each subscription, locking required.|false||
+| `-sbs, --get-subscription-backlog-size` | Set true to get backlog size for each subscription, locking required. If set to false, the attribute 'backlogSize' in the response will be -1|true||
 | `-gpb, --get-precise-backlog` | Set true to get precise backlog|false||
 | `-etb, --get-earliest-time-in-backlog` | Set true to get earliest time in backlog|false||
 
@@ -352,7 +352,7 @@ $ pulsar-admin topics partitioned-stats options
 |Flag|Description|Default|
 |---|---|---|
 | `-gpb, --get-precise-backlog` | Set true to get precise backlog|false||
-| `-sbs, --get-subscription-backlog-size` | Set true to get backlog size for each subscription, locking required.|false||
+| `-sbs, --get-subscription-backlog-size` | Set true to get backlog size for each subscription, locking required.|true||
 | `-etb, --get-earliest-time-in-backlog` | Set true to get earliest time in backlog|false||
 | `--per-partition` | Get per partition stats|false||
 
@@ -512,6 +512,7 @@ $ pulsar-admin topics update-partitioned-topic options
 |---|---|---|
 | `-p, --partitions` | Number of partitions for the topic|0||
 | `-f, --force` | Update forcefully without validating existing partitioned topic|false||
+| `-ulo, --update-local-only` | Update partitions number for topic in local cluster only|false||
 
 
 ## <em>get-partitioned-topic-metadata</em>
@@ -1187,10 +1188,10 @@ $ pulsar-admin topics set-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-e, --bookkeeper-ensemble` | Number of bookies to use for a topic|0||
-| `-a, --bookkeeper-ack-quorum` | Number of acks (guaranteed copies) to wait for each entry|0||
+| `-e, --bookkeeper-ensemble` | Number of bookies to use for a topic|2||
+| `-a, --bookkeeper-ack-quorum` | Number of acks (guaranteed copies) to wait for each entry|2||
 | `-r, --ml-mark-delete-max-rate` | Throttling rate of mark-delete operation (0 means no throttle)|0.0||
-| `-w, --bookkeeper-write-quorum` | How many writes to make of each entry|0||
+| `-w, --bookkeeper-write-quorum` | How many writes to make of each entry|2||
 
 
 ## <em>remove-persistence</em>
@@ -2417,4 +2418,20 @@ $ pulsar-admin topics set-schema-validation-enforce options
 |Flag|Description|Default|
 |---|---|---|
 | `--enable, -e` | Enable schema validation enforced|false||
+
+
+## <em>trim-topic</em>
+
+Trim a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topics trim-topic options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

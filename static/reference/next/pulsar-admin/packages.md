@@ -60,7 +60,7 @@ $ pulsar-admin packages upload options
 |---|---|---|
 | `--contact` | contact information of a package|null||
 | `--path` | file path of the package|null||
-| `--properties, -P` | external infromations of a package|{}||
+| `--properties, -P` | external information of a package|{}||
 | `--description` | descriptions of a package|null||
 
 

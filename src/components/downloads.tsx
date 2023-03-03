@@ -85,6 +85,31 @@ export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
     </div>
 }
 
+export function CurrentPulsarShellDownloadTable(): JSX.Element {
+    const latestVersion = pulsarReleases[0]
+    const latestArchiveUrl = distShellUrl(latestVersion, "tar.gz")
+    const latestArchiveUrlZip = distShellUrl(latestVersion, "zip")
+    const data = [
+        {
+            release: "Linux / MacOS",
+            link: latestArchiveUrl,
+            linkText: `apache-pulsar-shell-${latestVersion}-bin.tar.gz`,
+            asc: `${latestArchiveUrl}.asc`,
+            sha512: `${latestArchiveUrl}.sha512`,
+        },
+        {
+            release: "Windows",
+            link: latestArchiveUrlZip,
+            linkText: `apache-pulsar-shell-${latestVersion}-bin.zip`,
+            asc: `${latestArchiveUrl}.asc`,
+            sha512: `${latestArchiveUrl}.sha512`,
+        }
+    ]
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
 const legacyReleaseNoteVersions = [
     "2.5.0",
     "2.4.2",
@@ -149,7 +174,7 @@ export function ArchivedPulsarDownloadTable(): JSX.Element {
 
 export function CppReleasesDownloadTable(): JSX.Element {
     const data = cppReleases
-        .map(item => item.vtag)
+        .map(item => item.tagName.substring(1))
         .filter(version => Number(version.split('.')[0]) >= 3)
         .map(version => {
             const url = `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`
@@ -266,6 +291,10 @@ function distOffloadersUrl(version) {
 
 function distAdaptersUrl(version) {
     return `https://downloads.apache.org/pulsar/pulsar-adapters-${version}/apache-pulsar-adapters-${version}-src.tar.gz`;
+}
+
+function distShellUrl(version, ext) {
+    return `https://downloads.apache.org/pulsar/pulsar-${version}/apache-pulsar-shell-${version}-bin.${ext}`;
 }
 
 function archiveUrl(version, type) {

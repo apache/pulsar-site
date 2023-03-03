@@ -11,38 +11,14 @@ import TabItem from '@theme/TabItem';
 
 Pulsar admin APIs enable you to administer clusters programmatically. For example, you can create, update, delete, and manage all the entities within Pulsar instances (such as clusters, namespaces, tenants, topics, schemas, connectors, functions, and so on), and set various policies for data, resources, and security.
 
-![Admin APIs - Definition](/assets/admin-api-definition.svg)
+![Pulsar admin APIs - definition](/assets/admin-api-definition.svg)
 
-You can interact with the admin interface via:
+### Next steps
 
-- The `pulsar-admin` CLI tool, which is available in the `bin` folder of your Pulsar installation:
+- To learn usage scenarios, see [Pulsar admin API - Use cases](admin-api-use-cases.md).
 
-  ```shell
-  bin/pulsar-admin
-  ```
+- To learn common administrative tasks, see [Pulsar admin API - Features](admin-api-features.md).
 
-  :::tip
-   
-  For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](/tools/pulsar-admin/).
+- To perform administrative operations and check details of API references, see [Pulsar admin API - Tools](admin-api-tools.md).
 
-  [Pulsar Shell](administration-pulsar-shell.md) extends `pulsar-admin` with an improved user experience for more flexibility and easier navigation between multiple clusters.
-  
-  :::
-
-- HTTP calls, which are made against the admin {@inject: rest:REST:/} API provided by Pulsar brokers. For some RESTful APIs, they might be redirected to the owner brokers for serving with [`307 Temporary Redirect`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307), hence the HTTP callers should handle `307 Temporary Redirect`. If you use `curl` commands, you should specify `-L` to handle redirections.
-  
-  :::tip
-  
-  For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
-
-  :::
-
-- A Java client interface.
-  
-  :::tip
-   
-  For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
-
-  :::
-  
-> **The REST API is the admin interface**. Both the `pulsar-admin` CLI tool and the Java client use the REST API. If you implement your own admin interface client, you should use the REST API. 
+- To get up and running with Pulsar admin APIs quickly, see [Pulsar admin API - Get started](admin-get-started.md).

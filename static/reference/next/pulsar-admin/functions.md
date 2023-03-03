@@ -31,9 +31,11 @@ $ pulsar-admin functions localrun options
 | `--forward-source-message-property` | Forwarding input message's properties to output topic when processing (use false to disable it)|true|Java|
 | `--metrics-port-start` | The starting port range for metrics server|null|Java, Python, Go|
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
+| `--output-type-class-name` | The class name of output type class|null|Java, Python, Go|
 | `--ram` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `--function-config-file` | The path to a YAML config file that specifies the configuration of a Pulsar Function|null|Java, Python, Go|
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null|Java, Python, Go|
+| `--skip-to-latest` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `--use-tls` | Use tls connection|false|Java, Python|
 | `--dead-letter-topic` | The topic where messages that are not processed successfully are sent to|null|Java|
 | `-i, --inputs` | The input topic or topics (multiple topics can be specified as a comma-separated list) of a Pulsar Function|null|Java, Python, Go|
@@ -60,6 +62,7 @@ $ pulsar-admin functions localrun options
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker|null|Java, Python|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
 | `--retain-key-ordering` | Function consumes and processes messages in key order|null|Java|
+| `--input-type-class-name` | The class name of input type class|null|Java, Python, Go|
 | `--sliding-interval-count` | The number of messages after which the window slides|null|Java|
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string)|null|Java, Python|
@@ -103,9 +106,11 @@ $ pulsar-admin functions create options
 | `--window-length-count` | The number of messages per window|null|Java|
 | `--forward-source-message-property` | Forwarding input message's properties to output topic when processing (use false to disable it)|true|Java|
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
+| `--output-type-class-name` | The class name of output type class|null|Java, Python, Go|
 | `--ram` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `--function-config-file` | The path to a YAML config file that specifies the configuration of a Pulsar Function|null|Java, Python, Go|
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null|Java, Python, Go|
+| `--skip-to-latest` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `--dead-letter-topic` | The topic where messages that are not processed successfully are sent to|null|Java|
 | `-i, --inputs` | The input topic or topics (multiple topics can be specified as a comma-separated list) of a Pulsar Function|null|Java, Python, Go|
 | `--auto-ack` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
@@ -125,6 +130,7 @@ $ pulsar-admin functions create options
 | `-st, --schema-type` | The builtin schema type or custom schema class name to be used for messages output by the function||Java|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
 | `--retain-key-ordering` | Function consumes and processes messages in key order|null|Java|
+| `--input-type-class-name` | The class name of input type class|null|Java, Python, Go|
 | `--sliding-interval-count` | The number of messages after which the window slides|null|Java|
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string)|null|Java, Python|
@@ -182,9 +188,11 @@ $ pulsar-admin functions update options
 | `--window-length-count` | The number of messages per window|null|Java|
 | `--forward-source-message-property` | Forwarding input message's properties to output topic when processing (use false to disable it)|true|Java|
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
+| `--output-type-class-name` | The class name of output type class|null|Java, Python, Go|
 | `--ram` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `--function-config-file` | The path to a YAML config file that specifies the configuration of a Pulsar Function|null|Java, Python, Go|
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null|Java, Python, Go|
+| `--skip-to-latest` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `--dead-letter-topic` | The topic where messages that are not processed successfully are sent to|null|Java|
 | `-i, --inputs` | The input topic or topics (multiple topics can be specified as a comma-separated list) of a Pulsar Function|null|Java, Python, Go|
 | `--auto-ack` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
@@ -205,6 +213,7 @@ $ pulsar-admin functions update options
 | `-st, --schema-type` | The builtin schema type or custom schema class name to be used for messages output by the function||Java|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
 | `--retain-key-ordering` | Function consumes and processes messages in key order|null|Java|
+| `--input-type-class-name` | The class name of input type class|null|Java, Python, Go|
 | `--sliding-interval-count` | The number of messages after which the window slides|null|Java|
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string)|null|Java, Python|

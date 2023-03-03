@@ -27,20 +27,34 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-      - uses: apache/skywalking-eyes/header@main
+      - uses: ./.github/actions/check-license-header
         with:
-          config: tools/ci/licenserc.yml
+          config: tools/ci/licenserc.toml
 
-  # TODO: If it causes too much time to every PR, split to another
-  # workflow file and filter by paths:
-  # - '.github/actions/sync-content/action.yml'
-  # - '.github/workflows/ci-precommit.yml'
-  # - 'tools/pytools/**'
-  sync-without-push:
-    name: Check synchronize content
+  build-without-push:
+    name: Check build site
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 600
     steps:
       - uses: actions/checkout@v3
-      - name: Sync content without push
-        uses: ./.github/actions/sync-content
+        with:
+          fetch-depth: 2
+      - uses: actions/checkout@v3
+        with:
+          ref: 'asf-site-next'
+          path: tmp/asf-site-next
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+          cache: 'poetry'
+      - name: Set Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Update generated docs
+        working-directory: tools/pytools
+        run: |
+          poetry install
+          poetry run bin/site-publisher.py --site-path=$GITHUB_WORKSPACE/tmp/asf-site-next

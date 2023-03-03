@@ -82,19 +82,6 @@ poetry run bin/java-apidoc-generator.py <VERSION>
 
 ... where the `VERSION` is released semantic version like `2.10.2`.
 
-### [site-updater](bin/site-updater.py)
-
-This executable synchronizes references built from the main repo:
-
-```bash
-poetry run bin/site-updater.py --master-path=<PATH> [--push={y|n|auto}]
-```
-
-... where:
-
-1. `master-path` is path to the main repo;
-2. `push` specifies whether push to the remote site repo.
-
 ### [reference-doc-generator](bin/reference-doc-generator.py)
 
 This executable generates Pulsar references, including command-line documents and configs:
@@ -122,3 +109,29 @@ poetry run bin/rest-apidoc-generator.py [--master-path=<path>] [--version=<VERSI
 
 1. `master-path` is path to the main repo. If it's empty, the script will clone the main repo on the fly.
 2. `version` is the version of the main repo, default to `master` a.k.a. the latest master branch;
+
+### [site-updater](bin/site-updater.py)
+
+This executable synchronizes references built from the main repo:
+
+```bash
+poetry run bin/site-updater.py --master-path=<PATH> [--push={y|n|auto}]
+```
+
+... where:
+
+1. `master-path` is path to the main repo;
+2. `push` specifies whether push to the remote site repo.
+
+### [site-publisher](bin/site-publisher.py)
+
+This executable publishes a new static site built from the current site repo:
+
+```bash
+poetry run bin/site-publisher.py --site-path=<PATH> [--push={y|n|auto}]
+```
+
+... where:
+
+1. `site-path` is path to the site repo (of published branch `asf-site-next`);
+2. `push` specifies whether push to the remote published branch of site repo.

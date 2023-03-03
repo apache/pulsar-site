@@ -290,7 +290,13 @@ admin.topics().unload(topic);
 
 You can check the following statistics of a given non-partitioned topic.
 
-  -   **msgRateIn**: The sum of all local and replication publishers' publish rates (msg/s).
+:::note
+
+All metrics below are *reset* to 0 upon broker restart, *except* gauges marked as "Not reset upon restart".
+
+:::
+
+-   **msgRateIn**: The sum of all local and replication publishers' publish rates (msg/s).
 
   -   **msgThroughputIn**: The sum of all local and replication publishers' publish rates (bytes/s).
 
@@ -300,7 +306,7 @@ You can check the following statistics of a given non-partitioned topic.
 
   -   **averageMsgSize**: The average size (in bytes) of messages published within the last interval.
 
-  -   **storageSize**: The sum of the ledgers' storage size for this topic. The space used to store the messages for the topic.
+  -   **storageSize**: The sum of the ledgers' storage size for this topic. The space used to store the messages for the topic. Not reset upon restart.
 
   -   **earliestMsgPublishTimeInBacklogs**: The publish time of the earliest message in the backlog (ms).
 
@@ -314,9 +320,9 @@ You can check the following statistics of a given non-partitioned topic.
 
   -   **msgChunkPublished**: Topic has chunked message published on it.
 
-  -   **backlogSize**: Estimated total unconsumed or backlog size (in bytes).
+  -   **backlogSize**: Estimated total unconsumed or backlog size (in bytes). Note that **this metric is not reset upon restart**. 
 
-  -   **offloadedStorageSize**: Space used to store the offloaded messages for the topic (in bytes).
+  -   **offloadedStorageSize**: Space used to store the offloaded messages for the topic (in bytes). Note that **this metric is not reset upon restart**. 
   
   -   **waitingPublishers**: The number of publishers waiting in a queue in exclusive access mode.
   
@@ -384,7 +390,7 @@ You can check the following statistics of a given non-partitioned topic.
 
           -   **backlogSize**: Size of backlog for this subscription (in bytes).
           
-          -   **earliestMsgPublishTimeInBacklog**: The publish time of the earliest message in the backlog for the subscription (ms).
+          -   **earliestMsgPublishTimeInBacklog**: The publish time of the earliest message in the backlog for the subscription (ms). Note that **this metric is not reset upon restart**. 
 
           -   **msgBacklogNoDelayed**: Number of messages in the subscription backlog that do not contain the delay messages.
 

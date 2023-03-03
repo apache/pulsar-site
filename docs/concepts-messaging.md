@@ -31,7 +31,7 @@ Messages are the basic "unit" of Pulsar. The following table lists the component
 | Topic name           | The name of the topic that the message is published to.                                                                                                                                                                                                                                                                                                                                                                    |
 | Schema version       | The version number of the schema that the message is produced with.                                                                                                                                                                                                                                                                                                                                                        |
 | Sequence ID          | Each Pulsar message belongs to an ordered sequence on its topic. The sequence ID of a message is initially assigned by its producer, indicating its order in that sequence, and can also be customized.<br />Sequence ID can be used for message deduplication. If `brokerDeduplicationEnabled` is set to `true`, the sequence ID of each message is unique within a producer of a topic (non-partitioned) or a partition. |
-| Message ID           | The message ID of a message is assigned by bookies as soon as the message is persistently stored. Message ID indicates a message’s specific position in a ledger and is unique within a Pulsar cluster.                                                                                                                                                                                                                    |
+| Message ID           | The message ID of a message is assigned by bookies as soon as the message is persistently stored. Message ID indicates a message's specific position in a ledger and is unique within a Pulsar cluster.                                                                                                                                                                                                                    |
 | Publish time         | The timestamp of when the message is published. The timestamp is automatically applied by the producer.                                                                                                                                                                                                                                                                                                                    |
 | Event time           | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.                                                                                                                                                                                                                             |
 
@@ -52,153 +52,6 @@ The default size of a message is 5 MB. You can configure the max size of a messa
   ```
 
 > For more information on Pulsar messages, see Pulsar [binary protocol](developing-binary-protocol.md).
-
-## Producers
-
-A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](reference-terminology.md#broker). The Pulsar broker processes the messages.
-
-### Send modes
-
-Producers send messages to brokers synchronously (sync) or asynchronously (async).
-
-| Mode       | Description                                                                                                                                                                                                                                                                                                                                                      |
-|:-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Sync send  | The producer waits for an acknowledgment from the broker after sending every message. If the acknowledgment is not received, the producer treats the sending operation as a failure.                                                                                                                                                                             |
-| Async send | The producer puts a message in a blocking queue and returns immediately. The client library sends the message to the broker in the background. If the queue is full (you can [configure](reference-configuration.md#broker) the maximum size), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer. |
-
-### Access mode
-
-You can have different types of access modes on topics for producers.
-
-| Access mode            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|:-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Shared`               | Multiple producers can publish on a topic. <br /><br />This is the **default** setting.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `Exclusive`            | Only one producer can publish on a topic. <br /><br />If there is already a producer connected, other producers trying to publish on this topic get errors immediately.<br /><br />The "old" producer is evicted and a "new" producer is selected to be the next exclusive producer if the "old" producer experiences a network partition with the broker.                                                                                                                                                                                                                                                                                                                                       |
-| `ExclusiveWithFencing` | Only one producer can publish on a topic. <br /><br />If there is already a producer connected, it will be removed and invalidated immediately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `WaitForExclusive`     | If there is already a producer connected, the producer creation is pending (rather than timing out) until the producer gets the `Exclusive` access.<br /><br />The producer that succeeds in becoming the exclusive one is treated as the leader. Consequently, if you want to implement a leader election scheme for your application, you can use this access mode. Note that the leader pattern scheme mentioned refers to using Pulsar as a Write-Ahead Log (WAL) which means the leader writes its "decisions" to the topic. On error cases, the leader will get notified it is no longer the leader *only* when it tries to write a message and fails on appropriate error, by the broker. |
-
-:::note
-
-Once an application creates a producer with `Exclusive` or `WaitForExclusive` access mode successfully, the instance of this application is guaranteed to be the **only writer** to the topic. Any other producers trying to produce messages on this topic will either get errors immediately or have to wait until they get the `Exclusive` access.
-For more information, see [PIP 68: Exclusive Producer](https://github.com/apache/pulsar/wiki/PIP-68:-Exclusive-Producer).
-
-:::
-
-You can set producer access mode through Java Client API. For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
-
-
-### Compression
-
-Message compression can reduce message size by paying some CPU overhead. The Pulsar client supports the following compression types:
-* [LZ4](https://github.com/lz4/lz4)
-* [ZLIB](https://zlib.net/)
-* [ZSTD](https://facebook.github.io/zstd/)
-* [SNAPPY](https://google.github.io/snappy/).
-
-Compression types are stored in the message metadata, so consumers can adopt different compression types automatically, as needed.
-
-The sample code below shows how to enable compression type for a producer:
-
-```java
-client.newProducer()
-    .topic("topic-name")
-    .compressionType(CompressionType.LZ4)
-    .create();
-```
-
-### Batching
-
-When batching is enabled, the producer accumulates and sends a batch of messages in a single request. The batch size is defined by the maximum number of messages and the maximum publish latency. Therefore, the backlog size represents the total number of batches instead of the total number of messages.
-
-![Batching](/assets/batching.svg)
-
-In Pulsar, batches are tracked and stored as single units rather than as individual messages. Consumers unbundle a batch into individual messages. However, scheduled messages (configured through the `deliverAt` or the `deliverAfter` parameter) are always sent as individual messages even when batching is enabled.
-
-In general, a batch is acknowledged when all of its messages are acknowledged by a consumer. It means that when **not all** batch messages are acknowledged, then unexpected failures, negative acknowledgments, or acknowledgment timeouts can result in a redelivery of all messages in this batch.
-
-To avoid redelivering acknowledged messages in a batch to the consumer, Pulsar introduces batch index acknowledgment since Pulsar 2.6.0. When batch index acknowledgment is enabled, the consumer filters out the batch index that has been acknowledged and sends the batch index acknowledgment request to the broker. The broker maintains the batch index acknowledgment status and tracks the acknowledgment status of each batch index to avoid dispatching acknowledged messages to the consumer. The batch is deleted when all indices of the messages in it are acknowledged.
-
-By default, batch index acknowledgment is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgment by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgment results in more memory overheads.
-
-Batch index acknowledgment must also be enabled in the consumer by calling `.enableBatchIndexAcknowledgment(true);`
-
-For example:
-
-```java
-Consumer<byte[]> consumer = pulsarClient.newConsumer()
-        .topic(topicName)
-        .subscriptionName(subscriptionName)
-        .subscriptionType(subType)
-        .enableBatchIndexAcknowledgment(true)
-        .subscribe();
-```
-
-
-### Chunking
-Message chunking enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
-
-With message chunking enabled, when the size of a message exceeds the allowed maximum payload size (the `maxMessageSize` parameter of broker), the workflow of messaging is as follows:
-1. The producer splits the original message into chunked messages and publishes them with chunked metadata to the broker separately and in order.
-2. The broker stores the chunked messages in one managed ledger in the same way as that of ordinary messages, and it uses the `chunkedMessageRate` parameter to record chunked message rate on the topic.
-3. The consumer buffers the chunked messages and aggregates them into the receiver queue when it receives all the chunks of a message.
-4. The client consumes the aggregated message from the receiver queue.
-
-**Limitations:**
-- Chunking is only available for persisted topics.
-- Chunking is only available for the exclusive and failover subscription types.
-- Chunking cannot be enabled simultaneously with batching.
-
-#### Handle consecutive chunked messages with one ordered consumer
-
-The following figure shows a topic with one producer that publishes a large message payload in chunked messages along with regular non-chunked messages. The producer publishes message M1 in three chunks labeled M1-C1, M1-C2 and M1-C3. The broker stores all the three chunked messages in the [managed ledger](concepts-architecture-overview.md#managed-ledgers) and dispatches them to the ordered (exclusive/failover) consumer in the same order. The consumer buffers all the chunked messages in memory until it receives all the chunked messages, aggregates them into one message and then hands over the original message M1 to the client.
-
-![](/assets/chunking-01.png)
-
-#### Handle interwoven chunked messages with one ordered consumer
-
-When multiple producers publish chunked messages into a single topic, the broker stores all the chunked messages coming from different producers in the same [managed ledger](concepts-architecture-overview.md#managed-ledgers). The chunked messages in the managed ledger can be interwoven with each other. As shown below, Producer 1 publishes message M1 in three chunks M1-C1, M1-C2 and M1-C3. Producer 2 publishes message M2 in three chunks M2-C1, M2-C2 and M2-C3. All chunked messages of the specific message are still in order but might not be consecutive in the managed ledger.
-
-![](/assets/chunking-02.png)
-
-:::note
-
-In this case, interwoven chunked messages may bring some memory pressure to the consumer because the consumer keeps a separate buffer for each large message to aggregate all its chunks in one message. You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `maxPendingChunkedMessage` parameter. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later, optimizing memory utilization.
-
-:::
-
-#### Enable Message Chunking
-
-**Prerequisite:** Disable batching by setting the `enableBatching` parameter to `false`.
-
-The message chunking feature is OFF by default.
-To enable message chunking, set the `chunkingEnabled` parameter to `true` when creating a producer.
-
-:::note
-
-If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](/api/client/).
-
-:::
-
-## Consumers
-
-A consumer is a process that attaches to a topic via a subscription and then receives messages.
-
-![Consumer](/assets/consumer.svg)
-
-A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
-
-### Receive modes
-
-Messages are received from [brokers](reference-terminology.md#broker) either synchronously (sync) or asynchronously (async).
-
-| Mode          | Description                                                                                                                                                                                                   |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Sync receive  | A sync receive is blocked until a message is available.                                                                                                                                                  |
-| Async receive | An async receive returns immediately with a future value—for example, a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture) in Java—that completes once a new message is available. |
-
-### Listeners
-
-Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a {@inject: javadoc:MesssageListener:/client/org/apache/pulsar/client/api/MessageListener} interface. In this interface, the `received` method is called whenever a new message is received.
 
 ### Acknowledgment
 
@@ -362,7 +215,7 @@ consumer.acknowledge(message);
 
 ### Retry letter topic
 
-Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers. 
+Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers.
 
 The diagram below illustrates the concept of the retry letter topic.
 ![](/assets/retry-letter-topic.svg)
@@ -448,7 +301,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 
 ### Dead letter topic
 
-Dead letter topic allows you to continue message consumption even when some messages are not consumed successfully. The messages that have failed to be consumed are stored in a specific topic, which is called the dead letter topic. The functionality of a dead letter topic is implemented by consumers. You can decide how to handle the messages in the dead letter topic. 
+Dead letter topic allows you to continue message consumption even when some messages are not consumed successfully. The messages that have failed to be consumed are stored in a specific topic, which is called the dead letter topic. The functionality of a dead letter topic is implemented by consumers. You can decide how to handle the messages in the dead letter topic.
 
 Enable dead letter topic in a Java client using the default dead letter topic.
 
@@ -503,6 +356,97 @@ Dead letter topic serves message redelivery, which is triggered by [acknowledgme
 :::note
 
 Currently, dead letter topic is enabled in Shared and Key_Shared subscription types.
+
+:::
+
+### Compression
+
+Message compression can reduce message size by paying some CPU overhead. The Pulsar client supports the following compression types:
+* [LZ4](https://github.com/lz4/lz4)
+* [ZLIB](https://zlib.net/)
+* [ZSTD](https://facebook.github.io/zstd/)
+* [SNAPPY](https://google.github.io/snappy/).
+
+Compression types are stored in the message metadata, so consumers can adopt different compression types automatically, as needed.
+
+The sample code below shows how to enable compression type for a producer:
+
+```java
+client.newProducer()
+    .topic("topic-name")
+    .compressionType(CompressionType.LZ4)
+    .create();
+```
+
+### Batching
+
+When batching is enabled, the producer accumulates and sends a batch of messages in a single request. The batch size is defined by the maximum number of messages and the maximum publish latency. Therefore, the backlog size represents the total number of batches instead of the total number of messages.
+
+![Batching](/assets/batching.svg)
+
+In Pulsar, batches are tracked and stored as single units rather than as individual messages. Consumers unbundle a batch into individual messages. However, scheduled messages (configured through the `deliverAt` or the `deliverAfter` parameter) are always sent as individual messages even when batching is enabled.
+
+In general, a batch is acknowledged when all of its messages are acknowledged by a consumer. It means that when **not all** batch messages are acknowledged, then unexpected failures, negative acknowledgments, or acknowledgment timeouts can result in a redelivery of all messages in this batch.
+
+To avoid redelivering acknowledged messages in a batch to the consumer, Pulsar introduces batch index acknowledgment since Pulsar 2.6.0. When batch index acknowledgment is enabled, the consumer filters out the batch index that has been acknowledged and sends the batch index acknowledgment request to the broker. The broker maintains the batch index acknowledgment status and tracks the acknowledgment status of each batch index to avoid dispatching acknowledged messages to the consumer. The batch is deleted when all indices of the messages in it are acknowledged.
+
+By default, batch index acknowledgment is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgment by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgment results in more memory overheads.
+
+Batch index acknowledgment must also be enabled in the consumer by calling `.enableBatchIndexAcknowledgment(true);`
+
+For example:
+
+```java
+Consumer<byte[]> consumer = pulsarClient.newConsumer()
+        .topic(topicName)
+        .subscriptionName(subscriptionName)
+        .subscriptionType(subType)
+        .enableBatchIndexAcknowledgment(true)
+        .subscribe();
+```
+
+
+### Chunking
+Message chunking enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
+
+With message chunking enabled, when the size of a message exceeds the allowed maximum payload size (the `maxMessageSize` parameter of broker), the workflow of messaging is as follows:
+1. The producer splits the original message into chunked messages and publishes them with chunked metadata to the broker separately and in order.
+2. The broker stores the chunked messages in one managed ledger in the same way as that of ordinary messages, and it uses the `chunkedMessageRate` parameter to record chunked message rate on the topic.
+3. The consumer buffers the chunked messages and aggregates them into the receiver queue when it receives all the chunks of a message.
+4. The client consumes the aggregated message from the receiver queue.
+
+**Limitations:**
+- Chunking is only available for persisted topics.
+- Chunking cannot be enabled simultaneously with batching.
+
+#### Handle consecutive chunked messages with one ordered consumer
+
+The following figure shows a topic with one producer that publishes a large message payload in chunked messages along with regular non-chunked messages. The producer publishes message M1 in three chunks labeled M1-C1, M1-C2 and M1-C3. The broker stores all the three chunked messages in the [managed ledger](concepts-architecture-overview.md#managed-ledgers) and dispatches them to the ordered (exclusive/failover) consumer in the same order. The consumer buffers all the chunked messages in memory until it receives all the chunked messages, aggregates them into one message and then hands over the original message M1 to the client.
+
+![](/assets/chunking-01.png)
+
+#### Handle interwoven chunked messages with one ordered consumer
+
+When multiple producers publish chunked messages into a single topic, the broker stores all the chunked messages coming from different producers in the same [managed ledger](concepts-architecture-overview.md#managed-ledgers). The chunked messages in the managed ledger can be interwoven with each other. As shown below, Producer 1 publishes message M1 in three chunks M1-C1, M1-C2 and M1-C3. Producer 2 publishes message M2 in three chunks M2-C1, M2-C2 and M2-C3. All chunked messages of the specific message are still in order but might not be consecutive in the managed ledger.
+
+![](/assets/chunking-02.png)
+
+:::note
+
+In this case, interwoven chunked messages may bring some memory pressure to the consumer because the consumer keeps a separate buffer for each large message to aggregate all its chunks in one message. You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `maxPendingChunkedMessage` parameter. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later, optimizing memory utilization.
+
+:::
+
+#### Enable Message Chunking
+
+**Prerequisite:** Disable batching by setting the `enableBatching` parameter to `false`.
+
+The message chunking feature is OFF by default.
+To enable message chunking, set the `chunkingEnabled` parameter to `true` when creating a producer.
+
+:::note
+
+If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](/api/client/).
 
 :::
 
@@ -598,17 +542,17 @@ In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all 
 
 #### Key_Shared
 
-In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer. 
+In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
 
 There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key): Sticky, Auto-split Hash Range, and Auto-split Consistent Hashing. The steps for all algorithms are:
-1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash. 
+1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash.
 2. That hash number is fed to the algorithm to select a consumer from the existing connected consumers.
 
 ```
                       +--------------+                              +-----------+
-Message Key ----->  / Hash Function / ----- hash (32-bit) -------> / Algorithm / ----> Consumer   
+Message Key ----->  / Hash Function / ----- hash (32-bit) -------> / Algorithm / ----> Consumer
                    +---------------+                               +----------+
 ```
 
@@ -660,7 +604,7 @@ C1 is disconnected:
 |------- C3 ------|-------------------------- C2 -----------------------|
 ```
 
-The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around. 
+The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around.
 
 ##### Auto-split Consistent Hashing
 
@@ -693,7 +637,7 @@ When adding a consumer, we mark 100 points on that circle and associate them to 
 Since the hash function has the uniform distribution attribute, those points would be uniformly distributed across the circle.
 
 ```
-    C1-100                 
+    C1-100
          , - ~ ~ ~ - ,   C1-1
      , '               ' ,
    ,                       ,
@@ -705,7 +649,7 @@ Since the hash function has the uniform distribution attribute, those points wou
    ,                       ,
      ,                  , '
        ' - , _ _ _ ,  '      ...
- 
+
 ```
 
 A consumer is selected for a given message key by putting its hash on the circle then continue clock-wise on the circle until you reach a marking point. The point might have more than one consumer on it (hash function might have collisions) there for, we run the following operation to get a position within the list of consumers for that point, then we take the consumer in that position: `hash % consumer_list_size = index`.
@@ -722,9 +666,9 @@ Example:
 Suppose we have 2 consumers (C1 and C2) each specified their ranges, then:
 
 ```
-C1 = [0, 16384), (32768, 49152]
-C2 = [16384, 32768), (49,152, 65536]
- 
+C1 = [0, 16384), [32768, 49152)
+C2 = [16384, 32768), [49152, 65536)
+
  0               16,384            32,768           49,152             65,536
  |------- C1 ------|------- C2 ------|------- C1 ------|------- C2 ------|
 ```
@@ -735,7 +679,7 @@ If the newly connected consumer didn't supply their ranges, or they overlap with
 
 ##### How to use them?
 
-When building the consumer, you can specify the Key Shared Mode: 
+When building the consumer, you can specify the Key Shared Mode:
 * AUTO_SPLIT - Auto-split Hash Range
 * STICKY - Sticky
 
@@ -751,7 +695,7 @@ That requirement can be relaxed by enabling `allowOutOfOrderDelivery` via the Co
 
 :::note
 
-When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers. 
+When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers.
 :::
 
 There are two reasons why the key-based batching is necessary for the Key_Shared subscription type:
@@ -821,7 +765,7 @@ The subscription mode indicates the cursor type.
 | Subscription mode | Description                                                                                                                                                                                                                                                                   | Note                                                                                                                                                                |
 |:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Durable`         | The cursor is durable, which retains messages and persists the current position. <br />If a broker restarts from a failure, it can recover the cursor from the persistent storage (BookKeeper), so that messages can continue to be consumed from the last consumed position. | `Durable` is the **default** subscription mode.                                                                                                                     |
-| `NonDurable`      | The cursor is non-durable. <br />Once a broker stops, the cursor is lost and can never be recovered, so that messages **can not** continue to be consumed from the last consumed position.                                                                                    | Reader’s subscription mode is `NonDurable` in nature and it does not prevent data in a topic from being deleted. Reader’s subscription mode **can not** be changed. |
+| `NonDurable`      | The cursor is non-durable. <br />Once a broker stops, the cursor is lost and can never be recovered, so that messages **can not** continue to be consumed from the last consumed position.                                                                                    | Reader's subscription mode is `NonDurable` in nature and it does not prevent data in a topic from being deleted. Reader's subscription mode **can not** be changed. |
 
 A [subscription](#subscriptions) can have one or more consumers. When a consumer subscribes to a topic, it must specify the subscription name. A durable subscription and a non-durable subscription can have the same name, they are independent of each other. If a consumer specifies a subscription that does not exist before, the subscription is automatically created.
 
@@ -831,7 +775,7 @@ By default, messages of a topic without any durable subscriptions are marked as 
 
 #### How to use
 
-After a consumer is created, the default subscription mode of the consumer is `Durable`. You can change the subscription mode to `NonDurable` by making changes to the consumer’s configuration.
+After a consumer is created, the default subscription mode of the consumer is `Durable`. You can change the subscription mode to `NonDurable` by making changes to the consumer's configuration.
 
 ````mdx-code-block
 <Tabs
@@ -951,7 +895,7 @@ There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/c
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by {@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -960,7 +904,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producers is `JavaStringHash`.
@@ -980,7 +924,7 @@ Non-persistent topics have names of this form (note the `non-persistent` in the 
 non-persistent://tenant/namespace/topic
 ```
 
-For more info on using non-persistent topics, see the [Non-persistent messaging cookbook](cookbooks-non-persistent).
+For more info on using non-persistent topics, see the [Non-persistent messaging cookbook](cookbooks-non-persistent.md).
 
 In non-persistent topics, brokers immediately deliver messages to all connected subscribers *without persisting them* in [BookKeeper](concepts-architecture-overview.md#persistent-storage). If a subscriber is disconnected, the broker will not be able to deliver those in-transit messages, and subscribers will never be able to receive those messages again. Eliminating the persistent storage step makes messaging on non-persistent topics slightly faster than on persistent topics in some cases, but with the caveat that some core benefits of Pulsar are lost.
 
@@ -998,7 +942,7 @@ Non-persistent messaging is usually faster than persistent messaging because bro
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key-shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java.md#consumer) for a non-persistent topic:
+Here's an example [Java consumer](client-libraries-java-use.md#create-a-consumer) for a non-persistent topic:
 
 ```java
 PulsarClient client = PulsarClient.builder()
@@ -1013,7 +957,7 @@ Consumer<byte[]> consumer = client.newConsumer()
         .subscribe();
 ```
 
-Here's an example [Java producer](client-libraries-java.md#producer) for the same non-persistent topic:
+Here's an example [Java producer](client-libraries-java-use/#create-a-producer) for the same non-persistent topic:
 
 ```java
 Producer<byte[]> producer = client.newProducer()

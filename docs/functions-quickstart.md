@@ -120,7 +120,7 @@ Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) 
 
    :::tip
 
-   You can see both the `example-function-config.yaml` and `api-examples.jar` files under the `examples` folder of the Pulsar’s directory on your local machine.
+   You can see both the `example-function-config.yaml` and `api-examples.jar` files under the `examples` folder of the Pulsar's directory on your local machine.
 
    This example function will add a `!` at the end of every message.
 
@@ -565,7 +565,7 @@ Before starting window functions, you need to [start Pulsar](#start-standalone-p
    }
    ```
 
-3. In the same terminal window as step 1, verify the function’s status.
+3. In the same terminal window as step 1, verify the function's status.
 
    ```bash
    bin/pulsar-admin functions status \

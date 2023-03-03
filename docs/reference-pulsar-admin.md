@@ -515,7 +515,7 @@ Options
 |`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
-|`--parallelism`|The function’s parallelism factor, i.e. the number of instances of the function to run|1|
+|`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
 |`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
@@ -523,7 +523,7 @@ Options
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
 |`--state-storage-service-url`|The URL for the state storage service. By default, it it set to the service URL of the Apache BookKeeper. This service URL must be added manually when the Pulsar Function runs locally. ||
-|`--tenant`|The function’s tenant||
+|`--tenant`|The function's tenant||
 |`--topics-pattern`|The topic pattern to consume from list of topics under a namespace that match the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (supported for java fun only)||
 |`--user-config`|User-defined config key/values||
 |`--window-length-count`|The number of messages per window||
@@ -566,17 +566,17 @@ Options
 |`--log-topic`|The topic to which the function's logs are produced||
 |`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
-|`--namespace`|The function’s namespace||
+|`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
-|`--parallelism`|The function’s parallelism factor, i.e. the number of instances of the function to run|1|
+|`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
 |`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
-|`--tenant`|The function’s tenant||
+|`--tenant`|The function's tenant||
 |`--topics-pattern`|The topic pattern to consume from list of topics under a namespace that match the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (supported for java fun only)||
 |`--user-config`|User-defined config key/values||
 |`--window-length-count`|The number of messages per window||
@@ -635,17 +635,17 @@ Options
 |`--log-topic`|The topic to which the function's logs are produced||
 |`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
-|`--namespace`|The function’s namespace||
+|`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
-|`--parallelism`|The function’s parallelism factor, i.e. the number of instances of the function to run|1|
+|`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
 |`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
-|`--tenant`|The function’s tenant||
+|`--tenant`|The function's tenant||
 |`--topics-pattern`|The topic pattern to consume from list of topics under a namespace that match the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (supported for java fun only)||
 |`--user-config`|User-defined config key/values||
 |`--window-length-count`|The number of messages per window||
@@ -1240,26 +1240,29 @@ pulsar-admin namespaces set-backlog-quota tenant/namespace options
 
 Options
 
-|Flag|Description|Default|
-|----|---|---|
-|`-l`, `--limit`|The backlog size limit (for example `10M` or `16G`)||
-|`-lt`, `--limitTime`|Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit. (for example 3600 for 1 hour)||
-|`-p`, `--policy`|The retention policy to enforce when the limit is reached. The valid options are: `producer_request_hold`, `producer_exception` or `consumer_backlog_eviction`|
-|`-t`, `--type`|Backlog quota type to set. The valid options are: `destination_storage`, `message_age` |destination_storage|
+| Flag                 | Description                                                                                                                                                                                          | Default             |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `-t`, `--type`       | The backlog quota type. The valid options are: `destination_storage` and `message_age`.                                                                                                               | destination_storage |
+| `-l`, `--limit`      | If the backlog quota type is set to `destination_storage`, you can use this parameter to set the backlog size limit (for example, `10MB` or `16GB`). To disable the size limit, use a non-positive number.                    ||
+| `-lt`, `--limitTime` | If the backlog quota type is set to `message_age`, you can use this parameter to set the time limit in seconds (or minutes, hours, days, weeks, e.g., 100m, 3h, 2d, 5w). To disable the time limit, use a non-positive number. ||
+| `-p`, `--policy`     | The retention policy to enforce when the limit is reached. The valid options are: `producer_request_hold`, `producer_exception`, and `consumer_backlog_eviction`.                                       |
+
+If you want to set both the time limit and the size limit, you need to set them separately.
 
 Example
 
 ```bash
 pulsar-admin namespaces set-backlog-quota my-tenant/my-ns \
---limit 2G \
---policy producer_request_hold
+   --type destination_storage \
+   --limit 2G \
+   --policy producer_request_hold
 ```
 
 ```bash
 pulsar-admin namespaces set-backlog-quota my-tenant/my-ns \
---limitTime 3600 \
---policy producer_request_hold \
---type message_age
+   --limitTime 3600 \
+   --policy producer_request_hold \
+   --type message_age
 ```
 
 ### `remove-backlog-quota`
@@ -1295,12 +1298,12 @@ pulsar-admin namespaces set-persistence tenant/namespace options
 
 Options
 
-|Flag|Description|Default|
-|----|---|---|
-|`-a`, `--bookkeeper-ack-quorum`|The number of acks (guaranteed copies) to wait for each entry|0|
-|`-e`, `--bookkeeper-ensemble`|The number of bookies to use for a topic|0|
-|`-w`, `--bookkeeper-write-quorum`|How many writes to make of each entry|0|
-|`-r`, `--ml-mark-delete-max-rate`|Throttling rate of mark-delete operation (0 means no throttle)||
+| Flag                              | Description                                                    | Default |
+|-----------------------------------|----------------------------------------------------------------|---------|
+| `-a`, `--bookkeeper-ack-quorum`   | The number of acks (guaranteed copies) to wait for each entry  | 2       |
+| `-e`, `--bookkeeper-ensemble`     | The number of bookies to use for a topic                       | 2       |
+| `-w`, `--bookkeeper-write-quorum` | How many writes to make of each entry                          | 2       |
+| `-r`, `--ml-mark-delete-max-rate` | Throttling rate of mark-delete operation (0 means no throttle) | 0       |
 
 
 ### `get-message-ttl`
@@ -2705,12 +2708,12 @@ pulsar-admin topics set-persistence tenant/namespace/topic options
 
 Options
 
-|Flag|Description|Default|
-|----|---|---|
-|`-e`, `--bookkeeper-ensemble`|Number of bookies to use for a topic|0|
-|`-w`, `--bookkeeper-write-quorum`|How many writes to make of each entry|0|
-|`-a`, `--bookkeeper-ack-quorum`|Number of acks (guaranteed copies) to wait for each entry|0|
-|`-r`, `--ml-mark-delete-max-rate`|Throttling rate of mark-delete operation (0 means no throttle)||
+| Flag                              | Description                                                    | Default |
+|-----------------------------------|----------------------------------------------------------------|---------|
+| `-e`, `--bookkeeper-ensemble`     | Number of bookies to use for a topic                           | 2       |
+| `-w`, `--bookkeeper-write-quorum` | How many writes to make of each entry                          | 2       |
+| `-a`, `--bookkeeper-ack-quorum`   | Number of acks (guaranteed copies) to wait for each entry      | 2       |
+| `-r`, `--ml-mark-delete-max-rate` | Throttling rate of mark-delete operation (0 means no throttle) | 0       |
 
 ### `remove-persistence`
 Remove the persistence policy for a topic.

@@ -30,7 +30,8 @@ from constant import site_path
 def execute(version: str):
     mvn = find_command('mvn', msg="mvn is required")
     ver = semver.VersionInfo.parse(version)
-    assert ver.compare('2.8.0') >= 0  # versions before 2.8.0 did not have the -src suffix
+    assert ver.compare('2.8.0') >= 0, 'versions before 2.8.0 did not have the -src suffix'
+    assert ver.compare('2.11.0') != 0, '2.11.0 is unsupported, see https://github.com/apache/pulsar/pull/19202'
 
     with tempfile.TemporaryDirectory() as cwd:
         v = f"{ver.major}.{ver.minor}.{ver.patch}"

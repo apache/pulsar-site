@@ -17,7 +17,7 @@ Pulsar messages are stored as unstructured byte arrays and the data structure (a
 
 Pulsar schema is the metadata that defines how to translate the raw message bytes into a more formal structure type, serving as a protocol between the applications that generate messages and the applications that consume them. It serializes data into raw bytes before they are published to a topic and deserializes the raw bytes before they are delivered to consumers.
 
-Pulsar uses a schema registry as a central repository to store the registered schema information, which enables producers/consumers to coordinate the schema of a topic’s messages through brokers.
+Pulsar uses a schema registry as a central repository to store the registered schema information, which enables producers/consumers to coordinate the schema of a topic's messages through brokers.
 
 ![Pulsar schema](/assets/schema.svg)
 
@@ -58,7 +58,7 @@ This diagram illustrates how Pulsar schema works on the Producer side.
    * Otherwise, go to step 4.
 
 4. The broker checks whether the schema can be auto-updated. 
-   * If it’s not allowed to be auto-updated, then the schema cannot be registered, and the broker rejects the producer.
+   * If it's not allowed to be auto-updated, then the schema cannot be registered, and the broker rejects the producer.
    * Otherwise, go to step 5.
 
 5. The broker performs the [schema compatibility check](schema-understand.md#schema-compatibility-check) defined for the topic.

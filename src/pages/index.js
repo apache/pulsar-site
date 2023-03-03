@@ -164,9 +164,8 @@ export default function Home() {
             <div className="md:float-left md:w-2/3">
               <h1>Cloud-Native, Distributed Messaging and Streaming</h1>
               <p>
-                Apache® Pulsar™ is a distributed, open source pub-sub messaging
-                and streaming platform for real-time workloads, managing
-                hundreds of billions of events per day.
+                Apache® Pulsar™ is an open-source, distributed messaging
+                and streaming platform built for the cloud.
               </p>
             </div>
           </div>
@@ -191,7 +190,9 @@ export default function Home() {
         />
         <SubHeroBlock
           heading="What is Apache Pulsar?"
-          content="Apache Pulsar is a cloud-native, multi-tenant, high-performance solution for server-to-server messaging and queuing built on the publisher-subscribe (pub-sub) pattern. Pulsar combines the best features of a traditional messaging system like RabbitMQ with those of a pub-sub system like Apache Kafka &#8211; scaling up or down dynamically without downtime. It's used by thousands of companies for high-performance data pipelines, microservices, instant messaging, data integrations, and more."
+          content="Apache Pulsar is an all-in-one messaging and streaming platform. Messages can be consumed and acknowledged individually or consumed as streams with less than 5ms of latency. Its layered architecture allows rapid scaling across hundreds of nodes, without data reshuffling. Its features include multi-tenancy with resource separation and access control, geo-replication across regions, tiered storage and support for five official client languages. It supports up to one million unique topics and is designed to simplify your application architecture.
+
+Pulsar is a Top 10 Apache Software Foundation project and has a vibrant and passionate community and user base spanning small companies and large enterprises."
         />
 
         <section className="waves-bg home-features py-48 mb-24">

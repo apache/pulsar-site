@@ -107,7 +107,7 @@ If your machines configured with Kerberos already have a system-wide configurati
 
 :::
 
-The content of `krb5.conf` file indicates the default Realm and KDC information. See [JDK’s Kerberos Requirements](https://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/KerberosReq.html) for more details.
+The content of `krb5.conf` file indicates the default Realm and KDC information. See [JDK's Kerberos Requirements](https://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/KerberosReq.html) for more details.
 
 To specify the path to the `krb5.conf` file for brokers, enter the command below. 
 

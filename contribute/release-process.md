@@ -5,18 +5,18 @@ title: Release process
 
 This page contains instructions for Pulsar committers on how to perform a release.
 
-The term major/minor releases used throughout this document is defined as follows:
+The term feature/patch releases used throughout this document is defined as follows:
 
-* Major releases refer to feature releases, such as 2.10.0, 2.11.0, and so on.
-* Minor releases refer to bug-fix releases, such as 2.10.1, 2.10.2, and so on.
+* Feature releases contain 2.10.0, 2.11.0, 3.0.0, and so on.
+* Patch releases refer to bug-fix releases, such as 2.10.1, 2.10.2, and so on.
 
 ## Preparation
 
 Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
 
-For major releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
+For feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
 
-For minor releases, if there are no disagreements, you should cherry-pick all merged PRs labeled with `release/X.Y.Z` into `branch-X.Y`. After these PRs are cherry-picked, you should add the `cherry-picked/branch-X.Y` labels.
+For patch releases, if there are no disagreements, you should cherry-pick all merged PRs labeled with `release/X.Y.Z` into `branch-X.Y`. After these PRs are cherry-picked, you should add the `cherry-picked/branch-X.Y` labels.
 
 Sometimes some PRs cannot be cherry-picked cleanly, you might need to create a separate PR and move the `release/X.Y.Z` label from the original PR to it. In this case, you can ask the author to help create the new PR.
 
@@ -34,7 +34,7 @@ If you haven't already done it, [create and publish the GPG key](create-gpg-keys
 
 Before you start the next release steps, make sure you have installed these software:
 
-* JDK 11
+* JDK 17 (for Pulsar version >= 2.11) or JDK 11 (for earlier versions)
 * Maven 3.8.6
 * Zip
 
@@ -46,7 +46,7 @@ Also, you need to **clean up the bookkeeper's local compiled** to make sure the 
 
 We are going to create a branch from `master` to `branch-v2.X` where the tag will be generated and where new fixes will be applied as part of the maintenance for the release.
 
-The branch needs only to be created for major releases, and not for minor releases like `2.3.1`. For minor releases, go to the next step.
+The branch needs only to be created for feature releases, and not for patch releases like `2.3.1`. For patch releases, go to the next step.
 
 For example, when you create the `v2.3.0` release, the branch `branch-2.3` will be created; but for `v2.3.1`, we
 keep using the old `branch-2.3`.
@@ -70,8 +70,6 @@ git worktree add ../pulsar.branch-2.X branch-2.X
 If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch.
 
 Note that you should also stop the workflow for previous Pulsar versions that are EOL.
-
-Also, if you created a new branch, please update the "Supported Versions" table on the [version policy](version-policy.md) page. This table is for support timelines based on when minor releases take place.
 
 ### Update project version and tag
 
@@ -103,7 +101,7 @@ git push origin branch-2.X
 git push origin v2.X.0-candidate-1
 ```
 
-For minor releases, the tag is like `2.3.1`.
+For patch releases, the tag is like `2.3.1`.
 
 ### Build release artifacts
 
@@ -118,8 +116,8 @@ After the build, you should find the following tarballs, zip files, and the conn
 * `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
 * `target/apache-pulsar-2.X.0-src.tar.gz`
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-shell.zip`
+* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
 * directory `distribution/io/target/apache-pulsar-io-connectors-2.x.0-bin`
 
 :::note
@@ -133,7 +131,7 @@ The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
 
 ```shell
-src/check-binary-license distribution/server/target/apache-pulsar-2.x.0-bin.tar.gz
+src/check-binary-license.sh distribution/server/target/apache-pulsar-2.x.0-bin.tar.gz
 ```
 
 Then, run Apache RAT to verify the license headers in the src package:
@@ -324,7 +322,7 @@ If you don't have the permission, you can ask someone with access to apachepulsa
 
 :::caution
 
-This step can be skipped if the major version number is not the latest.
+This step is for the latest release only.
 
 :::
 
@@ -427,7 +425,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant Javadoc fixes are made against the minor release.
+This step is for feature releases only, unless you're sure that significant Javadoc fixes are made against the patch release.
 
 :::
 
@@ -439,7 +437,7 @@ poetry install
 poetry run bin/java-apidoc-generator.py 2.X.0
 ```
 
-Once the docs are generated, you can add them and submit them in a PR. The expected doc output is: 
+Once the docs are generated, you can add them and submit them in a PR. The expected doc output is:
 
 * `static/api/admin`
 * `static/api/client`
@@ -451,7 +449,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant reference fixes are made against the minor release.
+This step is for feature releases only, unless you're sure that significant reference fixes are made against the patch release.
 
 :::
 
@@ -472,7 +470,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant doc fixes are made against the minor release.
+This step is for feature releases only, unless you're sure that significant doc fixes are made against the patch release.
 
 :::
 
@@ -492,7 +490,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 :::caution
 
-This step is for major releases only, unless you're sure that significant doc fixes are made against the minor release.
+This step is for feature releases only, unless you're sure that significant doc fixes are made against the patch release.
 
 :::
 
@@ -528,7 +526,7 @@ For every release, you should add a `<release-version>` entry to the correspondi
 
 :::caution
 
-The following steps are for major releases only.
+The following steps are for feature releases only.
 
 :::
 
@@ -606,7 +604,7 @@ svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-2.Y.0
 
 :::caution
 
-This step is for major releases only.
+This step is for feature releases only.
 
 :::
 

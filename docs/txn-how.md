@@ -60,7 +60,7 @@ Before introducing the transaction in Pulsar, a producer is created and then mes
 
 ![](/assets/txn-3.png)
 
-Let’s walk through the steps for _beginning a transaction_.
+Let's walk through the steps for _beginning a transaction_.
 
 | Step  |  Description  | 
 | --- | --- |
@@ -75,7 +75,7 @@ In this stage, the Pulsar client enters a transaction loop, repeating the `consu
 
 ![](/assets/txn-4.png)
 
-Let’s walk through the steps for _publishing messages with a transaction_.
+Let's walk through the steps for _publishing messages with a transaction_.
 
 | Step  |  Description  | 
 | --- | --- |
@@ -92,7 +92,7 @@ In this phase, the Pulsar client sends a request to the transaction coordinator 
 
 ![](/assets/txn-5.png)
 
-Let’s walk through the steps for _acknowledging messages with a transaction_.
+Let's walk through the steps for _acknowledging messages with a transaction_.
 
 | Step  |  Description  | 
 | --- | --- |
@@ -113,7 +113,7 @@ When the Pulsar client finishes a transaction, it issues an end transaction requ
 
 ![](/assets/txn-6.png)
 
-Let’s walk through the steps for _ending the transaction_.
+Let's walk through the steps for _ending the transaction_.
 
 | Step  |  Description  | 
 | --- | --- |
@@ -127,7 +127,7 @@ The transaction coordinator starts the process of committing or aborting message
 
 ![](/assets/txn-7.png)
 
-Let’s walk through the steps for _finalizing a transaction_.
+Let's walk through the steps for _finalizing a transaction_.
 
 | Step  |  Description  | 
 | --- | --- |
@@ -141,7 +141,7 @@ The transaction coordinator writes the final transaction status to the transacti
 
 ![](/assets/txn-8.png)
 
-Let’s walk through the steps for _marking a transaction as COMMITTED or ABORTED_.
+Let's walk through the steps for _marking a transaction as COMMITTED or ABORTED_.
 
 | Step  |  Description  | 
 | --- | --- |

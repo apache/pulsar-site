@@ -120,7 +120,7 @@ When you collect time series statistics, the major problem is to make sure the n
 
 ### Pulsar per-topic dashboard
 
-The per-topic dashboard instructions are available at [Pulsar manager](administration-pulsar-manager.md).
+The per-topic dashboard instructions are available at [Pulsar manager](/docs/administration-pulsar-manager.md).
 
 ### Grafana
 

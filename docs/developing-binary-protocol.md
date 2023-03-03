@@ -62,13 +62,13 @@ It is created by the broker when the message arrived at the broker and passed wi
 | `broker_timestamp` | Optional             | The timestamp when a message arrived at the broker (`id est` as the number of milliseconds since January 1st, 1970 in UTC) |
 | `index`            | Optional             | The index of the message. It is assigned by the broker.                                                                    |
 
-If you want to use broker entry metadata for **brokers**, configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md#broker) parameter in the `broker.conf` file.
+If you want to use broker entry metadata for **brokers**, configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md) parameter in the `broker.conf` file.
 
 If you want to use broker entry metadata for **consumers**:
 
 1. Use the client protocol version [18 or later](https://github.com/apache/pulsar/blob/ca37e67211feda4f7e0984e6414e707f1c1dfd07/pulsar-common/src/main/proto/PulsarApi.proto#L259).
    
-2. Configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md#broker) parameter and set the [`exposingBrokerEntryMetadataToClientEnabled`](reference-configuration-broker.md#exposingbrokerentrymetadatatoclientenabled) parameter to `true` in the `broker.conf` file.
+2. Configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md) parameter and set the [`exposingBrokerEntryMetadataToClientEnabled`](reference-configuration.md) parameter to `true` in the `broker.conf` file.
 
 ## Message metadata
 
@@ -142,6 +142,9 @@ Fields:
  * `auth_method_name`: *(optional)* Name of the authentication plugin if auth is enabled.
  * `auth_data`: *(optional)* Plugin specific authentication data.
  * `protocol_version`: Indicates the protocol version supported by the client. Broker will not send commands introduced in newer revisions of the protocol. Broker might be enforcing a minimum version.
+ * `original_principal`: Added by the proxy. Regular clients are not expected to supply this value. When set and when authorization is enabled, the `auth_data` must map to one of the `proxyRoles` in the broker.conf.
+ * `original_auth_method`: Added by the proxy. Regular clients are not expected to supply this value.
+ * `original_auth_data`: Added by the proxy when configured to do so. Regular clients are not expected to supply this value.
 
 ```protobuf
 message CommandConnected {
@@ -435,7 +438,7 @@ Fields:
 
 ##### Command AckResponse
 
-An `AckResponse` is the broker’s response to acknowledge a request sent by the client. It contains the `consumer_id` sent in the request.
+An `AckResponse` is the broker's response to acknowledge a request sent by the client. It contains the `consumer_id` sent in the request.
 If a transaction is used, it contains both the Transaction ID and the Request ID that are sent in the request.
 The client finishes the specific request according to the Request ID.
 If the `error` field is set, it indicates that the request has failed.

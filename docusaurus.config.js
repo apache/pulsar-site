@@ -126,8 +126,8 @@ module.exports = {
     tagline: "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
     url: "https://pulsar.apache.org",
     baseUrl: baseUrl,
-    onBrokenLinks: "ignore",
-    onBrokenMarkdownLinks: "ignore",
+    onBrokenLinks: "warn",
+    onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
     organizationName: "apache",
     projectName: "pulsar",
@@ -140,7 +140,7 @@ module.exports = {
         /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         announcementBar: {
             id: "summit",
-            content: `🚀 Check out <a target="_blank" href="https://www.youtube.com/playlist?list=PLqRma1oIkcWgeNb3kgzqFyg5sywH8S4yy">all the sessions</a> in Pulsar Summit Asia 2022 on YouTube!`,
+            content: `🚀 Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! <a target="_blank" href="https://sessionize.com/pulsar-virtual-summit-europe-2023/">Submit your session now</a>!`,
             backgroundColor: "#198fff",
             textColor: "#fff",
             isCloseable: true,
@@ -161,12 +161,13 @@ module.exports = {
                     position: "right",
                     items: [
                         {
-                            type: "doc",
-                            docId: "concepts-overview",
+                            type: 'doc',
+                            docId: 'concepts-overview',
                             label: "Pulsar Concepts",
                         },
                         {
-                            to: `/docs/${versions[0]}/`,
+                            type: 'doc',
+                            docId: 'about',
                             label: "Quickstart",
                         },
                         {
@@ -176,7 +177,8 @@ module.exports = {
                     ],
                 },
                 {
-                    to: `/docs/${versions[0]}/`,
+                    type: 'doc',
+                    docId: 'about',
                     position: "right",
                     label: "Docs",
                 },
@@ -288,7 +290,7 @@ module.exports = {
                     items: [
                         {
                             html: `<div><small><strong>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0.</a></strong></small></div>
-                            <div>Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.</div>`,
+                            <div>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</div>`,
                         },
                     ],
                 },
@@ -352,21 +354,6 @@ module.exports = {
         ],
     ],
     plugins: [
-        [
-            '@docusaurus/plugin-client-redirects',
-            /** @type {import('@docusaurus/plugin-client-redirects').Options} */
-            {
-                createRedirects(existingPath) {
-                    const latestVersion = versions[0];
-                    if (existingPath.includes(`/docs/${latestVersion}`)) {
-                        return [
-                            existingPath.replace(`/docs/${latestVersion}`, '/docs/'),
-                        ];
-                    }
-                    return undefined;
-                },
-            },
-        ],
         "./postcss-tailwind-loader",
         [
             'content-docs',
