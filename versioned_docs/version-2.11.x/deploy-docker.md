@@ -5,7 +5,7 @@ sidebar_label: "Docker"
 ---
 
 You can use two kinds of methods to deploy a Pulsar cluster on Docker.
-The first uses Docker commands, while the second uses a `docker-compose.yaml` file.
+The first uses Docker commands, while the second uses a `compose.yml` file.
 ## Deploy a cluster using Docker commands
 To deploy a Pulsar cluster on Docker, you need to complete the following steps:
 1. Pull a Pulsar Docker image.
@@ -70,8 +70,8 @@ Create a broker container and start the broker service.
 docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar  -e metadataStoreUrl=zk:zookeeper:2181  -e zookeeperServers=zookeeper:2181 -e clusterName=cluster-a  -e managedLedgerDefaultEnsembleSize=1 -e managedLedgerDefaultWriteQuorum=1   -e managedLedgerDefaultAckQuorum=1 --name broker --hostname broker apachepulsar/pulsar-all:latest bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
 
-## Deploy a cluster by using `docker-compose.yaml`
-Use the following template to create a `docker-compose.yaml` file to deploy a Pulsar cluster quickly. And you can modify or add the configurations in the `environment` section.
+## Deploy a cluster by using `compose.yml`
+Use the following template to create a `compose.yml` file to deploy a Pulsar cluster quickly. And you can modify or add the configurations in the `environment` section.
 
 ```yaml
 version: '3'
@@ -169,12 +169,12 @@ services:
       &&  exec bin/pulsar broker"
 ```
 
-To create a Pulsar cluster by using the `docker-compose.yaml` file, run the following command.
+To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 If you want to destroy the Pulsar cluster with all the containers, run the following command. It will also delete the network that the containers are connected to.
 ```bash
-docker-compose down
+docker compose down
 ```

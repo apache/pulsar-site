@@ -4,9 +4,9 @@ title: Run a Pulsar cluster locally with Docker Compose
 sidebar_label: "Run Pulsar locally with Docker Compose"
 ---
 
-## Configure the `docker-compose.yaml` template
+## Configure the `compose.yml` template
 
-To get up and run a Pulsar cluster quickly, you can use the following template to create a `docker-compose.yaml` file by modifying or adding the configurations in the **environment** section.
+To get up and run a Pulsar cluster quickly, you can use the following template to create a `compose.yml` file by modifying or adding the configurations in the **environment** section.
 
 ```yaml
 version: '3'
@@ -106,14 +106,14 @@ services:
 
 ## Create a Pulsar cluster
 
-To create a Pulsar cluster by using the `docker-compose.yaml` file, run the following command.
+To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 If you want to destroy the Pulsar cluster with all the containers, run the following command. It will also delete the network that the containers are connected to.
 
 ```bash
-docker-compose down
+docker compose down
 ```
