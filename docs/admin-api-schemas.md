@@ -52,6 +52,7 @@ The `schema-definition-file` is in JSON format.
 ```
 
 The `schema-definition-file` includes the following fields:
+
 | Field |  Description | 
 | --- | --- |
 |  `type`  |   The schema type. | 
