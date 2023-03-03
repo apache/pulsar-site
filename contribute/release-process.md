@@ -126,29 +126,6 @@ The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.
 
 :::
 
-#### Build RPM and DEB packages
-
-For 2.8, 2.9 and 2.10 releases, you should build RPM and DEB packages for the C++ client:
-
-```shell
-pulsar-client-cpp/pkg/rpm/docker-build-rpm.sh
-pulsar-client-cpp/pkg/deb/docker-build-deb.sh
-```
-
-This will leave the RPM/YUM and DEB repo files in `pulsar-client-cpp/pkg/rpm/RPMS/x86_64` and `pulsar-client-cpp/pkg/deb/BUILD/DEB` directory.
-
-:::note
-
-If you get error `c++: internal compiler error: Killed (program cc1plus)` when run `pulsar-client-cpp/pkg/deb/docker-build-deb.sh`. You may need to expand your docker memory greater than 2GB.
-
-:::
-
-:::caution
-
-The C++ client is now developing in a [separated repo](https://github.com/apache/pulsar-client-cpp). You should check its own [release guide](https://github.com/apache/pulsar-client-cpp/wiki/Committer-Release-Guide) if you're releasing version >= 3.0.0.
-
-:::
-
 ### Inspect the artifacts
 
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
@@ -201,10 +178,8 @@ svn ci -m 'Staging artifacts and signature for Pulsar release 2.X.0'
 Upload the artifacts to ASF Nexus:
 
 ```shell
-# remove CPP client binaries (they would file the license/RAT check in "deploy")
-cd pulsar-client-cpp
-git clean -xfd
-cd ..
+cd $PULSAR_PATH
+rm -rf apache-pulsar-2.X.0-src
 
 export APACHE_USER=$USER
 export APACHE_PASSWORD=$MY_PASSWORD
