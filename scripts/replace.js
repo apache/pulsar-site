@@ -92,6 +92,27 @@ function debDistUrl(version, type) {
   }
 }
 
+function clientPythonVersion(version) {
+  if (version === "2.6.4") {
+    return "2.6.3";
+  }
+  let v = semver.coerce(version);
+  if (v.compareMain("2.8.0") < 0) {
+    return version;
+  }
+  if (v.compareMain("2.11.0") < 0) {
+    if (v.minor === 8) {
+      return "2.8.4";
+    } else if (v.minor === 9) {
+      return "2.9.4";
+    } else if (v.minor === 10) {
+      return "2.10.2"
+    }
+  }
+  let versions = require(`${CWD}/data/release-python`);
+  return `${versions[0].tagName.substring(1)}`;
+}
+
 function clientPythonVersionUrl(version) {
   if (version === "2.6.4") {
     return `${siteConfig.url}/api/python/2.6.3`;
@@ -160,6 +181,8 @@ const from = [
   /@pulsar:dist_deb:client@/g,
   /@pulsar:dist_deb:client-devel@/g,
 
+  /@pulsar:version:python@/g,
+
   /@pulsar:apidoc:python@/g,
   /@pulsar:apidoc:cpp@/g,
   /\(\/api\/pulsar-functions/g,
@@ -194,6 +217,8 @@ const options = {
     debDistUrl(`${latestVersion}`, ""),
     debDistUrl(`${latestVersion}`, "-dev"),
 
+    clientPythonVersion(`${latestMajorRelease}`),
+
     clientPythonVersionUrl(`${latestMajorRelease}`),
     clientCPPVersionUrl(`${latestMajorRelease}`),
     javadocVersionUrl(`${latestMajorRelease}`, "pulsar-functions"),
@@ -209,7 +234,6 @@ const options = {
 
 doReplace(options);
 
-// TODO activate and test when first version of docs are cut
 // replaces versions
 for (let _v of versions) {
   const v = getRealVersion(_v)
@@ -238,6 +262,7 @@ for (let _v of versions) {
       rpmDistUrl(`${v}`, "-devel"),
       debDistUrl(`${v}`, ""),
       debDistUrl(`${v}`, "-dev"),
+      clientPythonVersion(`${v}`),
       clientPythonVersionUrl(`${v}`),
       clientCPPVersionUrl(`${v}`),
       javadocVersionUrl(`${_v}`, "pulsar-functions"),
