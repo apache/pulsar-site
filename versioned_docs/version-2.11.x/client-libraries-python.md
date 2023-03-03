@@ -16,20 +16,20 @@ You can use a Pulsar Python client to create producers, consumers, and readers. 
 Use [pip](https://pip.pypa.io/) to install the latest version:
 
 ```bash
-pip install 'pulsar-client==@pulsar:version_number@'
+pip install 'pulsar-client==@pulsar:version:python@'
 ```
 
 You can install optional components alongside the client library:
 
 ```bash
 # avro serialization
-pip install 'pulsar-client[avro]==@pulsar:version_number@'
+pip install 'pulsar-client[avro]==@pulsar:version:python@'
 
 # functions runtime
-pip install 'pulsar-client[functions]==@pulsar:version_number@'
+pip install 'pulsar-client[functions]==@pulsar:version:python@'
 
 # all optional components
-pip install 'pulsar-client[all]==@pulsar:version_number@'
+pip install 'pulsar-client[all]==@pulsar:version:python@'
 ```
 
 Installation via PyPi is available for the following Python versions:
