@@ -21,7 +21,7 @@ You can use a Pulsar C++ client to create Pulsar [producers](concepts-clients.md
 
 ## Reference doc
 
-- [API docs](@pulsar:apidoc:cpp@)
+- [API docs](pathname:///api/cpp)
 - [Release notes](/release-notes/client-cpp)
 - [C++ client configurations](client-libraries-cpp-configs.md)
 - [C++ client examples](https://github.com/apache/pulsar-client-cpp/tree/main/examples)
