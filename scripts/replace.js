@@ -164,6 +164,7 @@ const latestVersion = getRealVersion(latestMajorRelease);
 const from = [
   /@pulsar:version_number@/g,
   /@pulsar:version@/g,
+  /@pulsar:version_origin@/g,
   /pulsar:binary_release_url/g,
   /pulsar:connector_release_url/g,
   /pulsar:offloader_release_url/g,
@@ -198,6 +199,7 @@ const options = {
   files: [`${nextDocsDir}/*.md`, `${nextDocsDir}/**/*.md`],
   from: from,
   to: [
+    `${latestVersion}`,
     `${latestVersion}`,
     `${latestVersion}`,
     binaryReleaseUrl(`${latestVersion}`),
@@ -247,6 +249,7 @@ for (let _v of versions) {
     to: [
       `${vWithoutIncubating}`,
       `${v}`,
+      `${_v}`,
       binaryReleaseUrl(`${v}`),
       connectorReleaseUrl(`${v}`),
       offloaderReleaseUrl(`${v}`),
