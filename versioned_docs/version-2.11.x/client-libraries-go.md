@@ -57,7 +57,7 @@ If you have multiple brokers, separate `IP:port` by commas:
 pulsar://localhost:6550,localhost:6651,localhost:6652
 ```
 
-If you use [TLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
+If you use [mTLS authentication](security-tls-authentication.md), add `+ssl` in the scheme:
 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651
@@ -902,10 +902,10 @@ All methods of `ProducerMessage` object are [here](https://pkg.go.dev/github.com
 
 ## TLS encryption and authentication
 
-To use [TLS encryption](security-tls-transport.md), you need to configure your client to do so:
+To use [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md), you need to configure your client to do so:
 
  * Use `pulsar+ssl` URL type
- * Set `TLSTrustCertsFilePath` to the path to the TLS certs used by your client and the Pulsar broker
+ * Set `TLSTrustCertsFilePath` to the path of the TLS certs used by your client and the Pulsar broker
  * Configure `Authentication` option
 
 Here's an example:

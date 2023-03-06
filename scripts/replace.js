@@ -1,25 +1,12 @@
 const replace = require("replace-in-file");
 
-const fs = require("fs");
-
+const semver = require("semver");
 const CWD = process.cwd();
 const siteConfig = require(`${CWD}/docusaurus.config.js`);
 const nextDocsDir = `${CWD}/docs`;
 const docsDir = `${CWD}/versioned_docs`;
 const restApiVersions = require("../static/swagger/restApiVersions.json");
 const compareVersions = require("compare-versions");
-
-function getVersions() {
-  try {
-    return JSON.parse(
-      require("fs").readFileSync(`${CWD}/versions.json`, "utf8")
-    );
-  } catch (error) {
-    //console.error(error)
-    console.error("no versions found defaulting to 2.1.0");
-  }
-  return ["2.1.0"];
-}
 
 function getRealVersion(version) {
   let versionMap = {};
@@ -47,20 +34,12 @@ function downloadPageUrl() {
 }
 
 function binaryReleaseUrl(version) {
-  if (version.includes("incubating")) {
-    return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/apache-pulsar-${version}-bin.tar.gz`;
-  } else {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-${version}-bin.tar.gz`;
-  }
+  return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-${version}-bin.tar.gz`;
 }
 
 function connectorReleaseUrl(version) {
-  var versions = version.split(".");
-  var majorVersion = parseInt(versions[0]);
-  var minorVersion = parseInt(versions[1]);
-  if (version.includes("incubating")) {
-    return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`;
-  } else if (majorVersion > 2 || (majorVersion == 2 && minorVersion >= 3)) {
+  let v = semver.coerce(version);
+  if (v.compareMain("2.3.0") >= 0) {
     return `https://archive.apache.org/dist/pulsar/pulsar-${version}/connectors`;
   } else {
     return `https://archive.apache.org/dist/pulsar/pulsar-${version}/apache-pulsar-io-connectors-${version}-bin.tar.gz`;
@@ -72,54 +51,93 @@ function offloaderReleaseUrl(version) {
 }
 
 function prestoPulsarReleaseUrl(version) {
-  if (version.includes("incubating")) {
-    return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/pulsar-presto-connector-${version}.tar.gz`;
-  } else {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/pulsar-presto-connector-${version}.tar.gz`;
-  }
-}
-
-function rpmReleaseUrl(version, type) {
-  rpmVersion = version.replace("incubating", "1_incubating");
-  if (version.includes("incubating")) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=incubator/pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${rpmVersion}.x86_64.rpm`;
-  } else {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${rpmVersion}-1.x86_64.rpm`;
-  }
-}
-
-function debReleaseUrl(version, type) {
-  if (version.includes("incubating")) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=incubator/pulsar/pulsar-${version}/DEB/apache-pulsar-client${type}.deb`;
-  } else {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-${version}/DEB/apache-pulsar-client${type}.deb`;
-  }
+  return `https://archive.apache.org/dist/pulsar/pulsar-${version}/pulsar-presto-connector-${version}.tar.gz`;
 }
 
 function rpmDistUrl(version, type) {
-  rpmVersion = version.replace("incubating", "1_incubating");
-  if (version.includes("incubating")) {
-    return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${rpmVersion}.x86_64.rpm`;
+  let v = semver.coerce(version);
+  if (v.compareMain("2.11.0") < 0) {
+    let resolvedVersion = version;
+    if (v.minor === 8) {
+      resolvedVersion = "2.8.4";
+    } else if (v.minor === 9) {
+      resolvedVersion = "2.9.4";
+    } else if (v.minor === 10) {
+      resolvedVersion = "2.10.2"
+    }
+    return `https://archive.apache.org/dist/pulsar/pulsar-${resolvedVersion}/RPMS/apache-pulsar-client${type}-${resolvedVersion}-1.x86_64.rpm`;
   } else {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/RPMS/apache-pulsar-client${type}-${rpmVersion}-1.x86_64.rpm`;
+    const versions = require(`${CWD}/data/release-cpp`);
+    const ver = versions[0].tagName.substring(1);
+    return `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${ver}/rpm-x86_64/x86_64/apache-pulsar-client${type}-${ver}-1.x86_64.rpm`
   }
 }
 
 function debDistUrl(version, type) {
-  if (version.includes("incubating")) {
-    return `https://archive.apache.org/dist/incubator/pulsar/pulsar-${version}/DEB/apache-pulsar-client${type}.deb`;
+  let v = semver.coerce(version);
+  if (v.compareMain("2.11.0") < 0) {
+    let resolvedVersion = version;
+    if (v.minor === 8) {
+      resolvedVersion = "2.8.4";
+    } else if (v.minor === 9) {
+      resolvedVersion = "2.9.4";
+    } else if (v.minor === 10) {
+      resolvedVersion = "2.10.2"
+    }
+    return `https://archive.apache.org/dist/pulsar/pulsar-${resolvedVersion}/DEB/apache-pulsar-client${type}.deb`;
   } else {
-    return `https://archive.apache.org/dist/pulsar/pulsar-${version}/DEB/apache-pulsar-client${type}.deb`;
+    const versions = require(`${CWD}/data/release-cpp`);
+    const ver = versions[0].tagName.substring(1);
+    return `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${ver}/deb-x86_64/apache-pulsar-client${type}.deb`
   }
 }
 
-// Specially handle Python and C++ API documents, since they are moved out start from 2.11.0.
-function multiClientVersionUrl(version, type) {
-  if (type === "python" && version === "2.6.4") {
-    // There's no release for Python client 2.6.4. Add this trick to avoid broken link.
-    return `${siteConfig.url}/api/${type}/2.6.3`
+function clientPythonVersion(version) {
+  if (version === "2.6.4") {
+    return "2.6.3";
   }
-  return `${siteConfig.url}/api/${type}/${version}`
+  let v = semver.coerce(version);
+  if (v.compareMain("2.8.0") < 0) {
+    return version;
+  }
+  if (v.compareMain("2.11.0") < 0) {
+    if (v.minor === 8) {
+      return "2.8.4";
+    } else if (v.minor === 9) {
+      return "2.9.4";
+    } else if (v.minor === 10) {
+      return "2.10.2"
+    }
+  }
+  let versions = require(`${CWD}/data/release-python`);
+  return `${versions[0].tagName.substring(1)}`;
+}
+
+function clientPythonVersionUrl(version) {
+  if (version === "2.6.4") {
+    return `${siteConfig.url}/api/python/2.6.3`;
+  }
+  let v = semver.coerce(version);
+  if (v.compareMain("2.8.0") < 0) {
+    return `${siteConfig.url}/api/python/${version}`;
+  }
+  if (v.compareMain("2.11.0") < 0) {
+    return `${siteConfig.url}/api/python/${v.major}.${v.minor}.x`;
+  }
+  let versions = require(`${CWD}/data/release-python`);
+  return `${siteConfig.url}/api/python/${versions[0].vtag}`;
+}
+
+function clientCPPVersionUrl(version) {
+  let v = semver.coerce(version);
+  if (v.compareMain("2.8.0") < 0) {
+    return `${siteConfig.url}/api/cpp/${version}`;
+  }
+  if (v.compareMain("2.11.0") < 0) {
+    return `${siteConfig.url}/api/cpp/${v.major}.${v.minor}.x`;
+  }
+  let versions = require(`${CWD}/data/release-cpp`);
+  return `${siteConfig.url}/api/cpp/${versions[0].vtag}`;
 }
 
 function javadocVersionUrl(version, type) {
@@ -139,8 +157,7 @@ function doReplace(options) {
     });
 }
 
-const versions = getVersions();
-
+const versions = JSON.parse(require("fs").readFileSync(`${CWD}/versions.json`, "utf8"));
 const latestMajorRelease = versions[0];
 const latestVersion = getRealVersion(latestMajorRelease);
 
@@ -164,6 +181,8 @@ const from = [
   /@pulsar:dist_deb:client@/g,
   /@pulsar:dist_deb:client-devel@/g,
 
+  /@pulsar:version:python@/g,
+
   /@pulsar:apidoc:python@/g,
   /@pulsar:apidoc:cpp@/g,
   /\(\/api\/pulsar-functions/g,
@@ -186,11 +205,11 @@ const options = {
     offloaderReleaseUrl(`${latestVersion}`),
     prestoPulsarReleaseUrl(`${latestVersion}`),
     downloadPageUrl(),
-    rpmReleaseUrl(`${latestVersion}`, ""),
-    rpmReleaseUrl(`${latestVersion}`, "-debuginfo"),
-    rpmReleaseUrl(`${latestVersion}`, "-devel"),
-    debReleaseUrl(`${latestVersion}`, ""),
-    debReleaseUrl(`${latestVersion}`, "-dev"),
+    rpmDistUrl(`${latestVersion}`, ""),
+    rpmDistUrl(`${latestVersion}`, "-debuginfo"),
+    rpmDistUrl(`${latestVersion}`, "-devel"),
+    debDistUrl(`${latestVersion}`, ""),
+    debDistUrl(`${latestVersion}`, "-dev"),
 
     rpmDistUrl(`${latestVersion}`, ""),
     rpmDistUrl(`${latestVersion}`, "-debuginfo"),
@@ -198,8 +217,10 @@ const options = {
     debDistUrl(`${latestVersion}`, ""),
     debDistUrl(`${latestVersion}`, "-dev"),
 
-    multiClientVersionUrl(`${latestMajorRelease}`, "python"),
-    multiClientVersionUrl(`${latestMajorRelease}`, "cpp"),
+    clientPythonVersion(`${latestMajorRelease}`),
+
+    clientPythonVersionUrl(`${latestMajorRelease}`),
+    clientCPPVersionUrl(`${latestMajorRelease}`),
     javadocVersionUrl(`${latestMajorRelease}`, "pulsar-functions"),
     javadocVersionUrl(`${latestMajorRelease}`, "client"),
     javadocVersionUrl(`${latestMajorRelease}`, "admin"),
@@ -213,7 +234,6 @@ const options = {
 
 doReplace(options);
 
-// TODO activate and test when first version of docs are cut
 // replaces versions
 for (let _v of versions) {
   const v = getRealVersion(_v)
@@ -242,8 +262,9 @@ for (let _v of versions) {
       rpmDistUrl(`${v}`, "-devel"),
       debDistUrl(`${v}`, ""),
       debDistUrl(`${v}`, "-dev"),
-      multiClientVersionUrl(`${_v}`, "python"),
-      multiClientVersionUrl(`${_v}`, "cpp"),
+      clientPythonVersion(`${v}`),
+      clientPythonVersionUrl(`${v}`),
+      clientCPPVersionUrl(`${v}`),
       javadocVersionUrl(`${_v}`, "pulsar-functions"),
       javadocVersionUrl(`${_v}`, "client"),
       javadocVersionUrl(`${_v}`, "admin"),

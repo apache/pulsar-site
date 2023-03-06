@@ -8,14 +8,14 @@ sidebar_label: "Overview"
 
 Pulsar supports the following language-specific client libraries:
 
-| Language  | Documentation                                                                        | Release note                                          | Code repo                                                             |
-|-----------|--------------------------------------------------------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------|
-| Java      | [User doc](client-libraries-java.md)   <br/> [API doc](/api/client/)                 | [Standalone](pathname:///release-notes/client-java)   | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-client) |
-| C++       | [User doc](client-libraries-cpp.md)    <br/> [API doc](pathname:///api/cpp/3.1.x)    | [Standalone](pathname:///release-notes/client-cpp)    | [Standalone](https://github.com/apache/pulsar-client-cpp)             |
-| Python    | [User doc](client-libraries-python.md) <br/> [API doc](pathname:///api/python/3.0.x) | [Standalone](pathname:///release-notes/client-python) | [Standalone](https://github.com/apache/pulsar-client-python)          |
-| Go client | [User doc](client-libraries-go.md)                                                   | [Standalone](pathname:///release-notes/client-go)     | [Standalone](https://github.com/apache/pulsar-client-go)              |
-| Node.js   | [User doc](client-libraries-node.md)                                                 | [Standalone](pathname:///release-notes/client-node)   | [Standalone](https://github.com/apache/pulsar-client-node)            |
-| C#        | [User doc](client-libraries-dotnet.md)                                               | [Standalone](pathname:///release-notes/client-cs)     | [Standalone](https://github.com/apache/pulsar-dotpulsar)              |
+| Language  | Documentation                                                                  | Release note                                          | Code repo                                                             |
+|-----------|--------------------------------------------------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------|
+| Java      | [User doc](client-libraries-java.md)   <br/> [API doc](/api/client/)           | [Standalone](pathname:///release-notes/client-java)   | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-client) |
+| C++       | [User doc](client-libraries-cpp.md)    <br/> [API doc](@pulsar:apidoc:cpp@)    | [Standalone](pathname:///release-notes/client-cpp)    | [Standalone](https://github.com/apache/pulsar-client-cpp)             |
+| Python    | [User doc](client-libraries-python.md) <br/> [API doc](@pulsar:apidoc:python@) | [Standalone](pathname:///release-notes/client-python) | [Standalone](https://github.com/apache/pulsar-client-python)          |
+| Go client | [User doc](client-libraries-go.md)                                             | [Standalone](pathname:///release-notes/client-go)     | [Standalone](https://github.com/apache/pulsar-client-go)              |
+| Node.js   | [User doc](client-libraries-node.md)                                           | [Standalone](pathname:///release-notes/client-node)   | [Standalone](https://github.com/apache/pulsar-client-node)            |
+| C#        | [User doc](client-libraries-dotnet.md)                                         | [Standalone](pathname:///release-notes/client-cs)     | [Standalone](https://github.com/apache/pulsar-dotpulsar)              |
 
 :::tip
 

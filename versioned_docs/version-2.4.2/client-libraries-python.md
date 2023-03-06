@@ -16,17 +16,15 @@ You can install the [`pulsar-client`](https://pypi.python.org/pypi/pulsar-client
 To install the `pulsar-client` library as a pre-built package using the [pip](https://pip.pypa.io/en/stable/) package manager:
 
 ```shell
-
-$ pip install pulsar-client==@pulsar:version_number@
-
+pip install pulsar-client==@pulsar:version:python@
 ```
 
 Installation via PyPi is available for the following Python versions:
 
-Platform | Supported Python versions
-:--------|:-------------------------
-| MacOS<br /> 10.11 (El Capitan) — 10.12 (Sierra) — 10.13 (High Sierra) — 10.14 (Mojave)<br />| 2.7, 3.7
-|Linux | 2.7, 3.4, 3.5, 3.6, 3.7
+| Platform                                                                                     | Supported Python versions |
+|:---------------------------------------------------------------------------------------------|:--------------------------|
+| MacOS<br /> 10.11 (El Capitan) — 10.12 (Sierra) — 10.13 (High Sierra) — 10.14 (Mojave)<br /> | 2.7, 3.7                  |
+| Linux                                                                                        | 2.7, 3.4, 3.5, 3.6, 3.7   |
 
 ### Installing from source
 

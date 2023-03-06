@@ -12,7 +12,7 @@ The following configurable parameters are available for Pulsar Node.js clients:
 | Parameter | Description | Default |
 | :-------- | :---------- | :------ |
 | `serviceUrl` | The connection URL for the Pulsar cluster. See [above](#connection-urls) for more info. |  |
-| `authentication` | Configure the authentication provider. (default: no authentication). See [TLS Authentication](security-tls-authentication.md) for more info. | |
+| `authentication` | Configure the authentication provider. (default: no authentication). See [mTLS authentication](security-tls-authentication.md) for more info. | |
 | `operationTimeoutSeconds` | The timeout for Node.js client operations (creating producers, subscribing to and unsubscribing from [topics](reference-terminology.md#topic)). Retries occur until this threshold is reached, at which point the operation fails. | 30 |
 | `ioThreads` | The number of threads to use for handling connections to Pulsar [brokers](reference-terminology.md#broker). | 1 |
 | `messageListenerThreads` | The number of threads used by message listeners ([consumers](#consumers) and [readers](#readers)). | 1 |

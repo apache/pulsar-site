@@ -311,7 +311,7 @@ Role names that are treated as "super-user", which means they can do all admin o
 **Category**: 
 
 ### tlsAllowInsecureConnection
-Accept untrusted TLS certificate from client
+Accept untrusted TLS certificate from client and broker
 
 **Type**: `boolean`
 
@@ -345,6 +345,17 @@ Path for the TLS certificate file
 
 ### tlsEnabledWithKeyStore
 Enable TLS with KeyStore type configuration for WebSocket
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### tlsHostnameVerificationEnabled
+Enable TLS hostname verification when connecting to broker
 
 **Type**: `boolean`
 

@@ -55,7 +55,7 @@ If you have multiple brokers, separate `IP:port` by commas:
 pulsar://localhost:6550,localhost:6651,localhost:6652
 ```
 
-If you use [TLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
+If you use [mTLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651

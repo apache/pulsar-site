@@ -53,7 +53,7 @@ When you use proxies between clients and brokers, there are two authentication d
 **What's next?**
 
 - To configure built-in authentication plugins, read:
-  - [TLS authentication](security-tls-authentication.md)
+  - [mTLS authentication](security-tls-authentication.md)
   - [Athenz authentication](security-athenz.md)
   - [Kerberos authentication](security-kerberos.md)
   - [JSON Web Token (JWT) authentication](security-jwt.md)
@@ -63,7 +63,7 @@ When you use proxies between clients and brokers, there are two authentication d
 
 :::note
 
-Starting from 2.11.0, you can configure [Mutual TLS](security-tls-transport.md) with any one of the above authentication providers.
+Starting from 2.11.0, you can configure [TLS encryption](security-tls-transport.md) with any one of the above authentication providers.
 
 :::
 

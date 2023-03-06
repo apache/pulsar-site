@@ -79,7 +79,7 @@ If you have multiple brokers, separate `IP:port` by commas:
 pulsar://localhost:6550,localhost:6651,localhost:6652
 ```
 
-If you use [TLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
+If you use [mTLS authentication](security-tls-authentication.md), add `+ssl` in the scheme:
 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651
@@ -1161,7 +1161,7 @@ The producer above is equivalent to a `Producer<byte[]>` (in fact, you should *a
 ## Authentication
 
 Pulsar Java clients currently support the following authentication mechansims:
-* [TLS](security-tls-authentication.md#configure-tls-authentication-in-pulsar-clients)
+* [mTLS](security-tls-authentication.md#configure-mtls-authentication-in-pulsar-clients)
 * [JWT](security-jwt.md#configure-jwt-authentication-in-pulsar-clients)
 * [Athenz](security-athenz.md#configure-athenz-authentication-in-pulsar-clients)
 * [Kerberos](security-kerberos.md#configure-kerberos-authentication-in-pulsar-clients)

@@ -30,18 +30,18 @@ To package a Python function into **one Python file**, complete the following st
 
     In this example, when you write a Python function, you need to inherit the Function class and implement the `process()` method.
 
-    `process()` mainly has two parameters: 
+    `process()` mainly has two parameters:
 
     - `input` represents your input.
-  
+
     - `context` represents an interface exposed by the Pulsar Function. You can get the attributes in the Python function based on the provided context object.
 
-2. Install a Python client. The implementation of a Python function depends on the Python client. 
+2. Install a Python client. The implementation of a Python function depends on the Python client.
 
    ```bash
    pip install pulsar-client==2.10.0
    ```
-   
+
    And install protobuf tools to generate the proto files:
 
    ```bash
@@ -80,7 +80,7 @@ To package a Python function into **one Python file**, complete the following st
 
 To package a Python function into a **ZIP file**, complete the following steps.
 
-1. Prepare the ZIP file. 
+1. Prepare the ZIP file.
 
    ```text
     Assuming the zip file is named as `func.zip`, unzip the `func.zip` folder:
@@ -88,7 +88,7 @@ To package a Python function into a **ZIP file**, complete the following steps.
         "func/requirements.txt"
         "func/deps"
    ```
-    
+
    Take the [exclamation.zip](https://github.com/apache/pulsar/tree/master/tests/docker-images/latest-version-image/python-examples) file as an example. The internal structure of the example is as follows.
 
    ```text
@@ -131,7 +131,7 @@ To package a Python function into a **ZIP file**, complete the following steps.
 
 :::note
 
-The PIP method is only supported in Kubernetes runtime. 
+The PIP method is only supported in Kubernetes runtime.
 
 :::
 
@@ -149,13 +149,13 @@ To package a Python function with **PIP**, complete the following steps.
    ```python
    from pulsar import Function
    import js2xml
-   
+
    # The classic ExclamationFunction that appends an exclamation at the end
    # of the input
    class ExclamationFunction(Function):
        def __init__(self):
            pass
-   
+
        def process(self, input, context):
            # add your logic
            return input + '!'
