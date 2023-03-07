@@ -412,7 +412,7 @@ Before starting stateful functions, you need to [start Pulsar](#start-standalone
 
    :::tip
     
-   For more information about the `pulsar-admin functions querystate options` command, including flags, descriptions, default values, and shorthands, see [Admin API](/tools/pulsar-admin/).
+   For more information about the `pulsar-admin functions querystate options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).
 
    :::
 

@@ -49,7 +49,7 @@ This operation requires superuser privileges.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can provision a new cluster using the [`create`](/tools/pulsar-admin/) subcommand. Here's an example:
+You can provision a new cluster using the [`create`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=create) subcommand. Here's an example:
 
 ```shell
 pulsar-admin clusters create cluster-1 \
@@ -124,7 +124,7 @@ You can fetch the [configuration](reference-configuration.md) for an existing cl
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`get`](/tools/pulsar-admin/) subcommand and specify the name of the cluster. Here's an example:
+Use the [`get`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=get) subcommand and specify the name of the cluster. Here's an example:
 
 ```shell
 pulsar-admin clusters get cluster-1
@@ -168,7 +168,7 @@ You can update the configuration for an existing cluster at any time.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`update`](/tools/pulsar-admin/) subcommand and specify new configuration values using flags.
+Use the [`update`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=update) subcommand and specify new configuration values using flags.
 
 ```shell
 pulsar-admin clusters update cluster-1 \
@@ -209,7 +209,7 @@ Clusters can be deleted from a Pulsar [instance](reference-terminology.md#instan
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`delete`](/tools/pulsar-admin/) subcommand and specify the name of the cluster.
+Use the [`delete`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=delete) subcommand and specify the name of the cluster.
 
 ```
 pulsar-admin clusters delete cluster-1
@@ -242,7 +242,7 @@ You can fetch a list of all clusters in a Pulsar [instance](reference-terminolog
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`list`](/tools/pulsar-admin/) subcommand.
+Use the [`list`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=list) subcommand.
 
 ```shell
 pulsar-admin clusters list
@@ -281,7 +281,7 @@ Peer clusters can be configured for a given cluster in a Pulsar [instance](refer
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`update-peer-clusters`](/tools/pulsar-admin/) subcommand and specify the list of peer-cluster names.
+Use the [`update-peer-clusters`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=update) subcommand and specify the list of peer-cluster names.
 
 ```shell
 pulsar-admin update-peer-clusters cluster-1 --peer-clusters cluster-2

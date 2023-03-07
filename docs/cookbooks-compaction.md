@@ -42,7 +42,7 @@ bin/pulsar-admin namespaces set-compaction-threshold \
 
 ## Trigger compaction manually
 
-To run compaction on a topic, you need to use the [`topics compact`](/tools/pulsar-admin/) command for the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/) CLI tool. Here's an example:
+To run compaction on a topic, you need to use the [`topics compact`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=compact) command for the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/) CLI tool. Here's an example:
 
 ```bash
 bin/pulsar-admin topics compact \

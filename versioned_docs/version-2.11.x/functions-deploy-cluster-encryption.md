@@ -4,7 +4,7 @@ title: Enable end-to-end-encryption
 sidebar_label: "Enable end-to-end-encryption"
 ---
 
-To perform end-to-end [encryption](security-encryption.md), you can specify `--producer-config` and `--input-specs` in the [`pulsar-admin`](/tools/pulsar-admin/) CLI with the public and private key pair configured by the application. Only the consumers with a valid key can decrypt the encrypted messages. 
+To perform end-to-end [encryption](security-encryption.md), you can specify `--producer-config` and `--input-specs` in the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin) CLI with the public and private key pair configured by the application. Only the consumers with a valid key can decrypt the encrypted messages. 
 
 The encryption/decryption relevant configuration [`CryptoConfig`](functions-cli.md) is included in both `ProducerConfig` and `inputSpecs`. The specific configurable fields about `CryptoConfig` are as follows:
 

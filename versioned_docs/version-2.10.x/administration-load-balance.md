@@ -41,7 +41,7 @@ defaultNumberOfNamespaceBundles=4
 
 ```
 
-Alternatively, you can override the value when you create a new namespace using [Pulsar admin](/tools/pulsar-admin/):
+Alternatively, you can override the value when you create a new namespace using [Pulsar admin](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin):
 
 ```shell
 
@@ -265,7 +265,7 @@ pulsar-admin clusters create-failure-domain <cluster-name> --domain-name <domain
 
 ```
 
-You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](/tools/pulsar-admin/).
+You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).
 
 ### Create an anti-affinity namespace group
 
@@ -277,4 +277,4 @@ pulsar-admin namespaces set-anti-affinity-group <namespace> --group <group-name>
  
 ```
 
-For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](/tools/pulsar-admin/).
+For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).

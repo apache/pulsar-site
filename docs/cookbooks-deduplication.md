@@ -45,7 +45,7 @@ Even if you set the value for `brokerDeduplicationEnabled`, enabling or disablin
 
 ### Enable message deduplication at namespace or topic level
 
-Though message deduplication is disabled by default at the broker level, you can enable message deduplication for a specific namespace or topic using the [`pulsar-admin namespaces set-deduplication`](/tools/pulsar-admin/) or the [`pulsar-admin topics set-deduplication`](/tools/pulsar-admin/) command. You can use the `--enable`/`-e` flag and specify the namespace/topic. 
+Though message deduplication is disabled by default at the broker level, you can enable message deduplication for a specific namespace or topic using the [`pulsar-admin namespaces set-deduplication`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-deduplication) or the [`pulsar-admin topics set-deduplication`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=set-deduplication) command. You can use the `--enable`/`-e` flag and specify the namespace/topic. 
 
 The following example shows how to enable message deduplication at the namespace level.
 
@@ -57,7 +57,7 @@ public/default \
 
 ### Disable message deduplication at namespace or topic level
 
-Even if you enable message deduplication at the broker level, you can disable message deduplication for a specific namespace or topic using the [`pulsar-admin namespace set-deduplication`](/tools/pulsar-admin/) or the [`pulsar-admin topics set-deduplication`](/tools/pulsar-admin/) command. Use the `--disable`/`-d` flag and specify the namespace/topic.
+Even if you enable message deduplication at the broker level, you can disable message deduplication for a specific namespace or topic using the [`pulsar-admin namespace set-deduplication`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-deduplication) or the [`pulsar-admin topics set-deduplication`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=set-deduplication) command. Use the `--disable`/`-d` flag and specify the namespace/topic.
 
 The following example shows how to disable message deduplication at the namespace level.
 

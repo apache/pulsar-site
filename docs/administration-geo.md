@@ -68,7 +68,7 @@ Suppose that you have 3 replication clusters: `us-west`, `us-cent`, and `us-east
 
 :::tip
 
-   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](/tools/pulsar-admin/).
+   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=create).
    - Different clusters may have different authentications. You can use the authentication flag `--auth-plugin` and `--auth-parameters` together to set cluster authentication, which overrides `brokerClientAuthenticationPlugin` and `brokerClientAuthenticationParameters` if `authenticationEnabled` sets to `true` in `broker.conf` and `standalone.conf`. For more information, see [authentication and authorization](concepts-authentication.md).
 
 :::
@@ -174,7 +174,7 @@ You can check topic-specific statistics for geo-replication topics using one of 
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`pulsar-admin topics stats`](/tools/pulsar-admin/) command.
+Use the [`pulsar-admin topics stats`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=stats) command.
 
 ```shell
 bin/pulsar-admin topics stats persistent://my-tenant/my-namespace/my-topic

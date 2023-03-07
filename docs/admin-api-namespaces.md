@@ -42,7 +42,7 @@ You can create new namespaces under a given [tenant](reference-terminology.md#te
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`create`](/tools/pulsar-admin/) subcommand and specify the namespace by name:
+Use the [`create`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=create) subcommand and specify the namespace by name:
 
 ```shell
 pulsar-admin namespaces create test-tenant/test-namespace
@@ -75,7 +75,7 @@ You can fetch the current policies associated with a namespace at any time.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`policies`](/tools/pulsar-admin/) subcommand and specify the namespace:
+Use the [`policies`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=policies) subcommand and specify the namespace:
 
 ```shell
 pulsar-admin namespaces policies test-tenant/test-namespace
@@ -134,7 +134,7 @@ You can list all namespaces within a given Pulsar [tenant](reference-terminology
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`list`](/tools/pulsar-admin/) subcommand and specify the tenant:
+Use the [`list`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=list) subcommand and specify the tenant:
 
 ```shell
 pulsar-admin namespaces list test-tenant
@@ -174,7 +174,7 @@ You can delete existing namespaces from a tenant.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`delete`](/tools/pulsar-admin/) subcommand and specify the namespace:
+Use the [`delete`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=delete) subcommand and specify the namespace:
 
 ```shell
 pulsar-admin namespaces delete test-tenant/namespace1
@@ -1122,7 +1122,7 @@ You can unload a namespace, or a [namespace bundle](reference-terminology.md#nam
 
 #### pulsar-admin
 
-Use the [`unload`](/tools/pulsar-admin/) subcommand of the [`namespaces`](/tools/pulsar-admin/) command.
+Use the [`unload`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=unload) subcommand of the [`namespaces`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces) command.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"

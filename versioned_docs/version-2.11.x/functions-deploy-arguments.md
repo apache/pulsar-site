@@ -4,7 +4,7 @@ title: Default arguments of CLI
 sidebar_label: "Default arguments of CLI"
 ---
 
-You can use function-related commands in the [`pulsar-admin`](/tools/pulsar-admin/) CLI to deploy functions. Pulsar provides a variety of commands, such as: 
+You can use function-related commands in the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin) CLI to deploy functions. Pulsar provides a variety of commands, such as: 
 * `create` command for deploying functions in [cluster mode](functions-deploy-cluster.md)
 * `trigger` command for [triggering](functions-deploy-trigger.md) functions
 

@@ -101,7 +101,7 @@ pulsar-admin functions-worker function-stats
 
 ```
 
-The aggregated functions and connectors metrics can be exposed in Prometheus formats as below. You can get [`FUNCTIONS_WORKER_ADDRESS`](http://pulsar.apache.org/docs/en/next/functions-worker/) and `WORKER_PORT` from the `functions_worker.yml` file.
+The aggregated functions and connectors metrics can be exposed in Prometheus formats as below. You can get [`FUNCTIONS_WORKER_ADDRESS`](functions-worker.md) and `WORKER_PORT` from the `functions_worker.yml` file.
 
 ```
 

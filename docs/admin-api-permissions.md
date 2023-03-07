@@ -40,7 +40,7 @@ You can grant permissions to specific roles for lists of operations such as `pro
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`grant-permission`](/tools/pulsar-admin/) subcommand and specify a namespace, actions using the `--actions` flag, and a role using the `--role` flag:
+Use the [`grant-permission`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=grant-permission) subcommand and specify a namespace, actions using the `--actions` flag, and a role using the `--role` flag:
 
 ```shell
 pulsar-admin namespaces grant-permission test-tenant/namespace1 \
@@ -112,7 +112,7 @@ You can see which permissions have been granted to which roles in a namespace.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`permissions`](/tools/pulsar-admin/) subcommand and specify a namespace:
+Use the [`permissions`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=grant-permission) subcommand and specify a namespace:
 
 ```shell
 pulsar-admin namespaces permissions test-tenant/namespace1
@@ -151,7 +151,7 @@ You can revoke permissions from specific roles, which means that those roles wil
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`revoke-permission`](/tools/pulsar-admin/) subcommand and specify a namespace and a role using the `--role` flag:
+Use the [`revoke-permission`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=revoke-permission) subcommand and specify a namespace and a role using the `--role` flag:
 
 ```shell
 pulsar-admin namespaces revoke-permission test-tenant/namespace1 \

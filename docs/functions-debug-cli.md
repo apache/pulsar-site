@@ -177,7 +177,7 @@ This is my function!
 
 :::note
 
-When using the `--topic` option, you must specify the [entire topic name](getting-started-pulsar.md#topic-names). Otherwise, the following error occurs.
+When using the `--topic` option, you must specify the entire topic name. Otherwise, the following error occurs.
 
   ```text
   Function in trigger function has unidentified topic
