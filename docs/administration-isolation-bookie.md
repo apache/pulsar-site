@@ -229,7 +229,7 @@ To configure bookie affinity groups, you can use one of the following methods.
 pulsar-admin namespaces set-bookie-affinity-group options
 ```
 
-For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [Pulsar admin docs](/tools/pulsar-admin/).
+For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [Pulsar admin docs](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 **Example**
 

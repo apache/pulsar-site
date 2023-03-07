@@ -8,7 +8,7 @@ Triggering a function means that you invoke a function by producing a message to
 
 :::tip
 
-With the [`pulsar-admin`](/tools/pulsar-admin/) CLI, you can send messages to functions without using the [`pulsar-client`](reference-cli-tools.md) tool or a language-specific client library.
+With the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/) CLI, you can send messages to functions without using the [`pulsar-client`](reference-cli-tools.md) tool or a language-specific client library.
 
 :::
 

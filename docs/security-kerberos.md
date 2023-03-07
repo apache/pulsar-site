@@ -237,7 +237,7 @@ Ensure that the operating system user who starts Pulsar clients can access the k
 
 ## Configure Kerberos authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/tools/pulsar-admin/), [`pulsar-perf`](reference-cli-tools.md#pulsar-perf), and [`pulsar-client`](reference-cli-tools.md#pulsar-client) use the `conf/client.conf` file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-perf/), and [`pulsar-client`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-client/) use the `conf/client.conf` file in a Pulsar installation.
 
 When using command-line tools, you need to perform the following steps:
 

@@ -34,7 +34,7 @@ If you have enabled authentication, you need to provide an auth configuration to
 </TabItem>
 <TabItem value="REST API">
 
-You can find details for the REST API exposed by Pulsar brokers in the [REST API doc](https://pulsar.apache.org/admin-rest-api/?version=master).
+You can find details for the REST API exposed by Pulsar brokers in the [REST API doc](https://pulsar.apache.org/admin-rest-api/?version=@pulsar:version_number@).
 
 If you want to test REST APIs in postman, you can use the REST API JSON files [here](https://pulsar.apache.org/swagger/master/).
 
