@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -1293,7 +1293,7 @@ You can create non-partitioned topics in the following ways.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-When you create non-partitioned topics with the [`create`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create) command, you need to specify the topic name as an argument.
+When you create non-partitioned topics with the [`create`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create) command, you need to specify the topic name as an argument.
 
 ```shell
 pulsar-admin topics create \
@@ -1557,7 +1557,7 @@ You can create partitioned topics in the following ways.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-When you create partitioned topics with the [`create-partitioned-topic`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create-partitioned-topic)
+When you create partitioned topics with the [`create-partitioned-topic`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create-partitioned-topic)
 command, you need to specify the topic name as an argument and the number of partitions using the `-p` or `--partitions` flag.
 
 ```shell
@@ -1593,7 +1593,7 @@ admin.topics().createPartitionedTopic(topicName, numPartitions);
 
 ### Create missed partitions
 
-When topic auto-creation is disabled, and you have a partitioned topic without any partitions, you can use the [`create-missed-partitions`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create-missed-partitions) command to create partitions for the topic.
+When topic auto-creation is disabled, and you have a partitioned topic without any partitions, you can use the [`create-missed-partitions`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create-missed-partitions) command to create partitions for the topic.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1601,7 +1601,7 @@ When topic auto-creation is disabled, and you have a partitioned topic without a
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can create missed partitions with the [`create-missed-partitions`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create-missed-partitions) command and specify the topic name as an argument.
+You can create missed partitions with the [`create-missed-partitions`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=create-missed-partitions) command and specify the topic name as an argument.
 
 ```shell
 pulsar-admin topics create-missed-partitions \
@@ -1640,7 +1640,7 @@ Field | Description
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can check the number of partitions in a partitioned topic with the [`get-partitioned-topic-metadata`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=get-partitioned-topic-metadata) subcommand. 
+You can check the number of partitions in a partitioned topic with the [`get-partitioned-topic-metadata`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=get-partitioned-topic-metadata) subcommand. 
 
 ```shell
 pulsar-admin topics get-partitioned-topic-metadata \
@@ -1686,7 +1686,7 @@ Producers and consumers can find the newly created partitions automatically.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can update partitioned topics with the [`update-partitioned-topic`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=update-partitioned-topic) command.
+You can update partitioned topics with the [`update-partitioned-topic`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=update-partitioned-topic) command.
 
 ```shell
 pulsar-admin topics update-partitioned-topic \
@@ -1712,7 +1712,7 @@ admin.topics().updatePartitionedTopic(topic, numPartitions);
 ````
 
 ### Delete
-You can delete partitioned topics with the [`delete-partitioned-topic`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=delete-partitioned-topic) command, REST API and Java.
+You can delete partitioned topics with the [`delete-partitioned-topic`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=delete-partitioned-topic) command, REST API and Java.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"

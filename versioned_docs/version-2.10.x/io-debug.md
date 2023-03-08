@@ -380,7 +380,7 @@ Use the `topics stats` command to get the stats for a topic and its connected pr
 
 :::tip
 
-For more information about the `topic stats` command, see [Pulsar admin docs](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).
+For more information about the `topic stats` command, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 :::
 

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/).
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -509,7 +509,7 @@ To set a schema compatibility check strategy at the topic level, you can use one
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
 
 ```shell
 pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicName>
@@ -550,7 +550,7 @@ To set schema compatibility check strategy at the namespace level, you can use o
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-schema-compatibility-strategy) command. 
 
 ```shell
 pulsar-admin namespaces set-schema-compatibility-strategy options
@@ -597,7 +597,7 @@ To get the topic-level schema compatibility check strategy, you can use one of t
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command. 
 
 ```shell
 pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
@@ -642,7 +642,7 @@ You can get schema compatibility check strategy at namespace level using one of 
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces get-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=get-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin namespaces get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=get-schema-compatibility-strategy) command. 
 
 ```shell
 pulsar-admin namespaces get-schema-compatibility-strategy options

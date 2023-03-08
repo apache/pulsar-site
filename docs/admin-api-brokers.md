@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
  This page only shows **some frequently used operations**.
 
- - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/).
+ - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
  - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -29,7 +29,7 @@ Pulsar brokers consist of two components:
 
 [Brokers](reference-terminology.md#broker) can be managed via:
 
-* The `brokers` command of the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/) tool
+* The `brokers` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool
 * The `/admin/v2/brokers` endpoint of the admin {@inject: rest:REST:/} API
 * The `brokers` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
 
@@ -168,7 +168,7 @@ One way to configure a Pulsar [broker](reference-terminology.md#broker) is to su
 
 But since all broker configuration in Pulsar is stored in ZooKeeper, configuration values can also be dynamically updated *while the broker is running*. When you update broker configuration dynamically, ZooKeeper will notify the broker of the change and the broker will then override any existing configuration values.
 
-* The `brokers` command for the [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/) tool has a variety of subcommands that enable you to manipulate a broker's configuration dynamically, enabling you to [update config values](#update-dynamic-configuration) and more.
+* The `brokers` command for the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool has a variety of subcommands that enable you to manipulate a broker's configuration dynamically, enabling you to [update config values](#update-dynamic-configuration) and more.
 * In the Pulsar admin {@inject: rest:REST:/} API, dynamic configuration is managed through the `/admin/v2/brokers/configuration` endpoint.
 
 ### Update dynamic configuration
@@ -179,7 +179,7 @@ But since all broker configuration in Pulsar is stored in ZooKeeper, configurati
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-The [`update-dynamic-config`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
+The [`update-dynamic-config`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
 
 ```shell
 pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --value 100

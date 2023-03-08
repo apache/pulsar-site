@@ -119,7 +119,7 @@ tokenSecretKey=file:///path/to/secret.key
 
 ## Configure JWT authentication in CLI Tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin), [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-perf), and [`pulsar-client`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-client) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/pulsar-client) use the `conf/client.conf` config file in a Pulsar installation.
 
 You need to add the following parameters to the `conf/client.conf` config file to use the JWT authentication with CLI tools of Pulsar:
 

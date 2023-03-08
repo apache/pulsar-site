@@ -183,7 +183,7 @@ var client = PulsarClient.Builder()
 
 ## Configure mTLS authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), and [`pulsar-client`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/), use the `conf/client.conf` config file in a Pulsar installation.
 
 To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configuration to enable mTLS encryption](security-tls-transport.md#configure-mtls-encryption-in-cli-tools):
 
@@ -238,7 +238,7 @@ Besides configuring [TLS encryption](security-tls-transport.md), you need to con
 
 For example:
 
-1. for [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), and [`pulsar-client`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), set the `conf/client.conf` file in a Pulsar installation.
+1. for [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/), set the `conf/client.conf` file in a Pulsar installation.
 
    ```properties
    webServiceUrl=https://broker.example.com:8443/

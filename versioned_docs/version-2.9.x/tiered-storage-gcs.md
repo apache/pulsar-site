@@ -23,7 +23,7 @@ This example uses Pulsar 2.5.1.
 
    * Download from the [Apache mirror](https://archive.apache.org/dist/pulsar/pulsar-2.5.1/apache-pulsar-2.5.1-bin.tar.gz)
 
-   * Download from the Pulsar [download page](https://pulsar.apache.org/download)
+   * Download from the Pulsar [download page](pathname:///download)
 
    * Use [wget](https://www.gnu.org/software/wget)
 
@@ -205,7 +205,7 @@ Automatic offloading runs when a new segment is added to a topic log. If you set
 
 You can configure the threshold size using CLI tools, such as pulsar-admin.
 
-The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace level offload policies. Each namespace can have its own offload policy. If you want to set offload policy for each namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-offload-policies) command.
+The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace level offload policies. Each namespace can have its own offload policy. If you want to set offload policy for each namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-offload-policies) command.
 
 #### Example
 

@@ -10,7 +10,7 @@ The Pulsar Perf is a built-in performance test tool for Apache Pulsar. You can u
 
 :::tip
 
-For the latest and complete information about `pulsar-perf`, including commands, flags, descriptions, and more, see [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-perf/).
+For the latest and complete information about `pulsar-perf`, including commands, flags, descriptions, and more, see [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf/).
 
 :::
 
@@ -68,7 +68,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
 :::tip
 
-For the latest and complete information about `pulsar-perf`, including commands, flags, descriptions, and more, see [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-perf/).
+For the latest and complete information about `pulsar-perf`, including commands, flags, descriptions, and more, see [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf/).
 
 :::
 

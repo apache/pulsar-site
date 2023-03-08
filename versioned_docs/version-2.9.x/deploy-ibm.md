@@ -16,7 +16,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 #### Create VM on IBM Cloud
 
-1. Go to [IBM Cloud]( https://cloud.ibm.com/login)  and login with your credentials.
+1. Go to [IBM Cloud]( https://cloud.ibm.com/login) and login with your credentials.
 2. Search for Virtual Server.
 3. Select Virtual Server for Classic.
 
@@ -162,7 +162,7 @@ Make sure all the pods of Pulsar are running. Get the service URL and broker URL
 
 
 
-> [Installation of Pulsar helm in minikube cluster](https://pulsar.apache.org/docs/getting-started-helm/)  this document is for minikube cluster we are taking reference from that.
+> [Installation of Pulsar helm in minikube cluster](getting-started-helm.md)  this document is for minikube cluster we are taking reference from that.
 
 1. Add Pulsar chart repo
 

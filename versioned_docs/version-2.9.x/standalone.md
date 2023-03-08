@@ -63,7 +63,7 @@ The Pulsar binary package initially contains the following directories:
 
 Directory | Contains
 :---------|:--------
-`bin` | Pulsar's command-line tools, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).
+`bin` | Pulsar's command-line tools, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 `conf` | Configuration files for Pulsar, including [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more.
 `examples` | A Java JAR file containing [Pulsar Functions](functions-overview.md) example.
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files used by Pulsar.
@@ -203,7 +203,7 @@ If you have started Pulsar successfully, you will see `INFO`-level log messages 
 
 :::
 
-You can also run the service as a background process using the `pulsar-daemon start standalone` command. For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
+You can also run the service as a background process using the `pulsar-daemon start standalone` command. For more information, see [pulsar-daemon](reference-cli-tools.md#pulsar-daemon).
 > 
 > * By default, there is no encryption, authentication, or authorization configured. Apache Pulsar can be accessed from remote server without any authorization. Please do check [Security Overview](security-overview.md) document to secure your deployment.
 >
@@ -262,7 +262,7 @@ Press `Ctrl+C` to stop a local standalone Pulsar.
 :::tip
 
 If the service runs as a background process using the `pulsar-daemon start standalone` command, then use the `pulsar-daemon stop standalone`  command to stop the service.
-For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
+For more information, see [pulsar-daemon](reference-cli-tools.md#pulsar-daemon).
 
 :::
 

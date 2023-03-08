@@ -85,7 +85,7 @@ Pulsar provides three different messaging delivery semantics that you can apply 
 * The `Exclusive` subscription type is **not** available in Pulsar Functions because:
   * If there is only one instance, `exclusive` equals `failover`.
   * If there are multiple instances, `exclusive` may crash and restart when functions restart. In this case, `exclusive` does not equal `failover`. Because when the master consumer disconnects, all non-acknowledged and subsequent messages are delivered to the next consumer in line.
-* To change the subscription type from `shared` to `key_shared`, you can use the `—retain-key-ordering` option in [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin).
+* To change the subscription type from `shared` to `key_shared`, you can use the `—retain-key-ordering` option in [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 :::
 

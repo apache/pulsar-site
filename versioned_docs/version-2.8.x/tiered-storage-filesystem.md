@@ -29,7 +29,7 @@ This example uses Pulsar 2.5.1.
 
    * Download the Pulsar tarball from the [Apache mirror](https://archive.apache.org/dist/pulsar/pulsar-2.5.1/apache-pulsar-2.5.1-bin.tar.gz)
 
-   * Download the Pulsar tarball from the Pulsar [download page](https://pulsar.apache.org/download)
+   * Download the Pulsar tarball from the Pulsar [download page](pathname:///download)
 
    * Use the [wget](https://www.gnu.org/software/wget) command to dowload the Pulsar tarball.
 

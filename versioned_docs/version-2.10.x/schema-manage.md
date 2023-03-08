@@ -662,7 +662,7 @@ To set a schema compatibility check strategy at the topic level, use one of the 
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
 
 ```shell
 
@@ -708,7 +708,7 @@ To get the topic-level schema compatibility check strategy, use one of the follo
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command. 
 
 ```shell
 
@@ -758,7 +758,7 @@ To remove the topic-level schema compatibility check strategy, use one of the fo
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies remove-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=remove-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies remove-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=remove-schema-compatibility-strategy) command. 
 
 ```shell
 
@@ -807,7 +807,7 @@ You can set schema compatibility check strategy at namespace level using one of 
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
 
 ```shell
 
