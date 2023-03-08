@@ -12,4 +12,4 @@ This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pul
 
 :::
 
-[Deploying a Pulsar cluster on IBM cloud you need to Follow this link](/docs/2.10.x/deploy-ibm/)
+[Deploying a Pulsar cluster on IBM cloud you need to Follow this link](deploy-ibm.md)

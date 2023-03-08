@@ -87,7 +87,7 @@ If you want to turn on JWT authentication, configure the following parameters:
 * `jwt.broker.private.key`: configure this option if you use the PRIVATE mode.
 * `jwt.broker.secret.key`: configure this option if you use the SECRET mode.
 
-For more information, see [Token Authentication Admin of Pulsar](http://pulsar.apache.org/docs/en/security-token-admin/).
+For more information, see [Token Authentication Admin of Pulsar](security-token-admin.md).
 
 
 If you want to enable JWT authentication, use one of the following methods.

@@ -4,4 +4,4 @@ title: Pulsar Configuration
 sidebar_label: "Pulsar Configuration"
 ---
 
-For a complete list of Pulsar configuration, visit the [Pulsar Reference](http://pulsar.apache.org/reference/#/@pulsar:version_origin@/) website.
+For a complete list of Pulsar configuration, visit the [Pulsar Reference](pathname:///reference/#/@pulsar:version_origin@/) website.
