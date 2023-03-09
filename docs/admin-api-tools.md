@@ -15,7 +15,9 @@ You can manage Pulsar entities through the Pulsar admin layer via one of the fol
 
   - [Java admin API](pathname:///api/admin/): It’s a programmable interface written in Java.
 
-   - [REST API](pathname:///admin-rest-api/?version=@pulsar:version_number@): HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
+  - Go admin API (coming soon)
+
+  - [REST API](pathname:///admin-rest-api/?version=@pulsar:version_number@): HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
 
 - [pulsar-admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/): It’s a command-line tool and is available in the bin folder of your Pulsar installation.
 
@@ -29,6 +31,18 @@ Pulsar admin APIs|[Java admin API](pathname:///api/admin/)| - If you want to imp
 Pulsar admin APIs | [REST API](pathname:///admin-rest-api/?version=@pulsar:version_number@)|- If you want to implement your own admin interface client using other languages and manage clusters using scripts.| - This method is the most complicated. <br/><br/> - It needs more development work if you want to use it to build applications.
 Pulsar admin CLI| [pulsar-admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) | - If you want to get started with Pulsar admin APIs with minimal effort (e.g., no need to prepare an extra environment). <br/><br/> - If you want to perform common administrative tasks.| - This method is the most easy-to-use. <br/><br/> - It’s challenging to use this method to build applications.<br/><br/> - It takes a little more time because JVM starts slowly.
 
-### Next steps
+### Related topics
 
-- To get up and running with Pulsar admin APIs quickly, see [Pulsar admin API - Get started](admin-get-started.md).
+- To understand the basics, see [Pulsar admin API - Overview](admin-api-overview.md)
+
+- To learn usage scenarios, see [Pulsar admin API - Use cases](admin-api-use-cases.md).
+
+- To learn common administrative tasks, see [Pulsar admin API - Features](admin-api-features.md).
+
+- To get up quickly, see [Pulsar admin API - Get started](admin-get-started.md).
+
+- To check the detailed usage, see the API references below.
+
+  - [Java admin API](pathname:///api/admin/)
+
+  - [REST API](reference-rest-api-overview.md)

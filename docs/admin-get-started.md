@@ -9,76 +9,271 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-## Admin setup
+This guide walks you through the quickest way to get started with the following Pulsar admin APIs to manage topics:
 
-Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](pathname:///api/admin/) requires some special setup if you have enabled authentication in your Pulsar instance.
+- Java admin API
+  
+- Go admin API (coming soon)
+
+- REST API
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
-  defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
-<TabItem value="pulsar-admin">
+  defaultValue="Java admin API"
+  values={[{"label":"Java admin API","value":"Java admin API"},{"label":"REST API","value":"REST API"}]}>
+<TabItem value="Java admin API">
 
-If you have enabled authentication, you need to provide an auth configuration to use the `pulsar-admin` tool. By default, the configuration for the `pulsar-admin` tool is in the [`conf/client.conf`](https://github.com/apache/pulsar/blob/master/conf/client.conf) file. The following are the available parameters:
+This tutorial guides you through every step of using Java admin API to manage topics. It includes the following steps:
 
-|Name|Description|Default|
-|----|-----------|-------|
-|webServiceUrl|The web URL for the cluster.|http://localhost:8080/|
-|brokerServiceUrl|The Pulsar protocol URL for the cluster.|pulsar://localhost:6650/|
-|authPlugin|The authentication plugin.| |
-|authParams|The authentication parameters for the cluster, as a comma-separated string.| |
-|useTls|Whether or not TLS authentication will be enforced in the cluster.|false|
-|tlsAllowInsecureConnection|Accept untrusted TLS certificate from client.|false|
-|tlsTrustCertsFilePath|Path for the trusted TLS certificate file.| |
+1. Initiate a Pulsar Java client.
+
+2. Create a partitioned topic
+
+3. Update the number of a partition.
+
+4. Produce messages to the topic.
+
+5. Check the stats of the topic.
+
+6. Delete the topic. 
+
+**Prerequisites**
+
+- Prepare a Java project. You can download one from [Apache Pulsar examples and demos](https://github.com/streamnative/examples).
+
+**Steps**
+
+1. Initiate a Pulsar Java client in your Java project.
+
+    **Input**
+
+    ```java
+    String url = "http://localhost:8080";
+    PulsarAdmin admin = PulsarAdmin.builder()
+        .serviceHttpUrl(url)
+        .build();
+    ```
+
+2. Create a partitioned topic _test-topic-1_ with 4 partitions.
+
+    **Input**
+
+    ```java
+    admin.topics().createPartitionedTopic("persistent://public/default/test-topic-1", 4);
+    ```
+
+3. Update the number of the partition to 5.
+
+    **Input**
+
+    ```java
+    admin.topics().updatePartitionedTopic("test-topic-1", 5);
+    ```
+
+4. Produce some messages to the topic _test-topic-1_.
+
+    **Input**
+
+    ```java
+    PulsarClient client = PulsarClient.builder()
+    .serviceUrl("pulsar://localhost:6650")
+    .build();
+
+    Producer<String> producer = client.newProducer(Schema.STRING)
+    .topic(topic)
+    .blockIfQueueFull(true)
+    .create();
+
+    for (int i = 0; i < 100; ++i) {
+    producer.newMessage().value("test").send();
+    }
+    producer.close();
+    client.close();
+    ```
+
+5. Check the stats of the topic _test-topic-1_.
+
+    **Input**
+
+    ```
+    admin.topics().getPartitionedStats("persistent://public/default/test-topic-1", false)
+    ````
+
+5. Delete the topic _test-topic-1_. 
+
+    **Input**
+
+    ```java
+    admin.topics().deletePartitionedTopic("test-topic-1");
+    ```
 
 </TabItem>
 <TabItem value="REST API">
 
-You can find details for the REST API exposed by Pulsar brokers in the [REST API doc](pathname:///admin-rest-api/?version=@pulsar:version_number@).
+This tutorial guides you through every step of using REST API to manage topics. It includes the following steps:
 
-If you want to test REST APIs in postman, you can use the REST API JSON files [here](pathname:///swagger/).
+1. Create a partitioned topic
 
-</TabItem>
-<TabItem value="Java">
+2. Update the number of a partition.
 
-To use the Java admin API, instantiate a {@inject: javadoc:PulsarAdmin:/admin/org/apache/pulsar/client/admin/PulsarAdmin} object, and specify a URL for a Pulsar broker and a {@inject: javadoc:PulsarAdminBuilder:/admin/org/apache/pulsar/client/admin/PulsarAdminBuilder}. The following is a minimal example using `localhost`.
+3. Produce messages to the topic.
 
-```java
-String url = "http://localhost:8080";
-// Pass auth-plugin class fully-qualified name if Pulsar-security enabled
-String authPluginClassName = "com.org.MyAuthPluginClass";
-// Pass auth-param if auth-plugin class requires it
-String authParams = "param1=value1";
-boolean tlsAllowInsecureConnection = false;
-String tlsTrustCertsFilePath = null;
-PulsarAdmin admin = PulsarAdmin.builder()
-    .authentication(authPluginClassName,authParams)
-    .serviceHttpUrl(url)
-    .tlsTrustCertsFilePath(tlsTrustCertsFilePath)
-    .allowTlsInsecureConnection(tlsAllowInsecureConnection)
-    .build();
-```
+4. Check the stats of the topic.
 
-If you use multiple brokers, you can use multi-host like Pulsar service. For example,
+5. Delete the topic. 
 
-```java
-String url = "http://localhost:8080,localhost:8081,localhost:8082";
-// Below are the same to the line 2 - line 13 in the code snippet above
-// Pass auth-plugin class fully-qualified name if Pulsar-security enabled
-String authPluginClassName = "com.org.MyAuthPluginClass";
-// Pass auth-param if auth-plugin class requires it
-String authParams = "param1=value1";
-boolean tlsAllowInsecureConnection = false;
-String tlsTrustCertsFilePath = null;
-PulsarAdmin admin = PulsarAdmin.builder()
-    .authentication(authPluginClassName,authParams)
-    .serviceHttpUrl(url)
-    .tlsTrustCertsFilePath(tlsTrustCertsFilePath)
-    .allowTlsInsecureConnection(tlsAllowInsecureConnection)
-    .build();
-```
+**Prerequisites**
+
+- [Install and start Pulsar standalone](getting-started-standalone.md). This tutorial runs Pulsar 2.11 as an example.
+
+**Steps**
+
+1. Create a persistent topic named _test-topic-2_ with 4 partitions.
+
+    **Input**
+
+    ```bash
+    curl -X PUT http://localhost:8080/admin/v2/persistent/public/default/test-topic-2/partitions -H 'Content-Type: application/json' -d "4"
+    ```
+
+    **Output**
+
+    There is no output. You can check the topic in Step 4.
+
+2. Update the number of the partition to 5.
+
+    **Input**
+
+    ```bash
+    curl -X POST http://localhost:8080/admin/v2/persistent/public/default/test-topic-2/partitions -H 'Content-Type: application/json' -d "5"
+    ```
+
+    **Output**
+
+    There is no output. You can check the status of the topic in Step 4.
+
+3. Produce some messages to the partitioned topic _test-topic-2_.
+
+    **Input**
+
+    ```bash
+    bin/pulsar-perf produce -u pulsar://localhost:6650 -r 1000 -i 1000 persistent://public/default/test-topic-2
+    ```
+
+    **Output**
+
+    ```bash
+    2023-03-08T15:47:06,268+0800 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: {
+      "confFile" : "/Users/yu/apache-pulsar-2.11.0/conf/client.conf",
+      "serviceURL" : "pulsar://localhost:6650",
+      "authPluginClassName" : "",
+      "authParams" : "",
+      "tlsTrustCertsFilePath" : "",
+      "tlsAllowInsecureConnection" : false,
+      "tlsHostnameVerificationEnable" : false,
+      "maxConnections" : 1,
+      "statsIntervalSeconds" : 1000,
+      "ioThreads" : 1,
+      "enableBusyWait" : false,
+      "listenerName" : null,
+      "listenerThreads" : 1,
+      "maxLookupRequest" : 50000,
+      "topics" : [ "persistent://public/default/test-topic-2" ],
+      "numTestThreads" : 1,
+      "msgRate" : 1000,
+      "msgSize" : 1024,
+      "numTopics" : 1,
+    "numProducers" : 1,
+      "separator" : "-",
+      "sendTimeout" : 0,
+      "producerName" : null,
+      "adminURL" : "http://localhost:8080/",
+      "deprecatedAuthPluginClassName" : null,
+      "maxOutstanding" : 0,
+      "maxPendingMessagesAcrossPartitions" : 0,
+      "partitions" : null,
+      "numMessages" : 0,
+      "compression" : "NONE",
+      "payloadFilename" : null,
+      "payloadDelimiter" : "\\n",
+      "batchTimeMillis" : 1.0,
+      "batchMaxMessages" : 1000,
+      "batchMaxBytes" : 4194304,
+      "testTime" : 0,
+      "warmupTimeSeconds" : 1.0,
+      "encKeyName" : null,
+      "encKeyFile" : null,
+      "delay" : 0,
+      "exitOnFailure" : false,
+      "messageKeyGenerationMode" : null,
+      "producerAccessMode" : "Shared",
+      "formatPayload" : false,
+      "formatterClass" : "org.apache.pulsar.testclient.DefaultMessageFormatter",
+      "transactionTimeout" : 10,
+      "numMessagesPerTransaction" : 50,
+      "isEnableTransaction" : false,
+
+      "isAbortTransaction" : false,
+      "histogramFile" : null
+    }
+
+    ...
+
+    2023-03-08T15:53:28,178+0800 [Thread-0] INFO  org.apache.pulsar.testclient.PerformanceProducer - Aggregated latency stats --- Latency: mean:   4.481 ms - med:   2.918 - 95pct:  10.710 - 99pct:  38.928 - 99.9pct: 112.689 - 99.99pct: 154.241 - 99.999pct: 193.249 - Max: 241.717
+    ```
+
+4. Check the internal stats of the topic _test-topic-2_.
+
+    **Input**
+
+    ```bash
+    curl -X GET http://localhost:8080/admin/v2/persistent/public/default/test-topic-2/partitioned-internalStats
+    ```
+
+    **Output**
+
+    For detailed explanations of topic stats, see [Pulsar statistics](administration-stats.md).
+
+    ```bash
+    {"metadata":{"partitions":5},"partitions":{"persistent://public/default/test-topic-2-partition-3":{"entriesAddedCounter":47087,"numberOfEntries":47087,"totalSize":80406959,"currentLedgerEntries":47087,"currentLedgerSize":80406959,"lastLedgerCreatedTimestamp":"2023-03-08T15:47:07.273+08:00","waitingCursorsCount":0,"pendingAddEntriesCount":0,"lastConfirmedEntry":"117:47086","state":"LedgerOpened","ledgers":[{"ledgerId":117,"entries":0,"size":0,"offloaded":false,"underReplicated":false}],"cursors":{},"schemaLedgers":[],"compactedLedger":{"ledgerId":-1,"entries":-1,"size":-1,"offloaded":false,"underReplicated":false}},"persistent://public/default/test-topic-2-partition-2":{"entriesAddedCounter":46995,"numberOfEntries":46995,"totalSize":80445417,"currentLedgerEntries":46995,"currentLedgerSize":80445417,"lastLedgerCreatedTimestamp":"2023-03-08T15:47:07.43+08:00","waitingCursorsCount":0,"pendingAddEntriesCount":0,"lastConfirmedEntry":"118:46994","state":"LedgerOpened","ledgers":[{"ledgerId":118,"entries":0,"size":0,"offloaded":false,"underReplicated":false}],...
+    ```
+
+5. Delete the topic _test-topic-2_.
+
+    **Input**
+
+    ```
+    curl -X DELETE http://localhost:8080/admin/v2/persistent/public/default/test-topic-2/partitions
+    ```
+
+    **Output**
+
+    There is no output. You can verify whether the _test-topic-2_ exists or not using the following command.
+    
+    **Input**
+
+    List topics in `public/default` namespace.
+
+    ```
+    curl -X GET http://localhost:8080/admin/v2/persistent/public/default
+    ```
 
 </TabItem>
 
 </Tabs>
-````
+
+## Related topics
+
+- To understand basics, see [Pulsar admin API - Overview](admin-api-overview.md)
+
+- To learn usage scenarios, see [Pulsar admin API - Use cases](admin-api-use-cases.md).
+
+- To learn common administrative tasks, see [Pulsar admin API - Features](admin-api-features.md).
+
+- To perform administrative operations, see [Pulsar admin API - Tools](admin-api-tools.md).
+
+- To check the detailed usage, see the API references below.
+
+  - [Java admin API](pathname:///api/admin/)
+
+  - [REST API](reference-rest-api-overview.md)

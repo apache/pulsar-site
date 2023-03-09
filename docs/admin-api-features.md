@@ -23,8 +23,18 @@ Entities|- Topic <br/><br/> - Schema <br/><br/> - Namespace  <br/><br/> - Tenant
 Stream processing|<br/><br/> - Function <br/><br/> - Connector <br/><br/> - Transaction <br/><br/> - Package | Operations on functions, function workers, or connectors. <br/> For example, <br/> - Create, update, and delete functions or connectors <br/> - Get stats of function workers, trigger rebalance of functions to workers <br/><br/> Operations on transactions. <br/> For example, <br/> - Get stats of transactions <br/> - Update the scale of transaction coordinators <br/><br/> Operations on packages. <br/> For example, <br/> - Upload, download, and delete packages
 Others| - Proxy <br/><br/> - Resource groups <br/><br/> - Resource quotas | Operations on proxy stats. <br/> For example, <br/> - Get various monitoring metrics for proxy stats <br/><br/> Operations on resource groups.<br/>For example, <br/> - Create, update, and delete resource groups <br/><br/>Operations on resource quotas.<br/>For example, <br/> - Set resource quota for namespace bundles
 
-### Next steps
+### Related topics
 
-- To perform administrative operations and check details of API references, see [Pulsar admin API - Tools](admin-api-tools.md).
+- To understand the basics, see [Pulsar admin API - Overview](admin-api-overview.md)
 
-- To get up and running with Pulsar admin APIs quickly, see [Pulsar admin API - Get started](admin-get-started.md).
+- To learn usage scenarios, see [Pulsar admin API - Use cases](admin-api-use-cases.md).
+
+- To perform administrative operations, see [Pulsar admin API - Tools](admin-api-tools.md).
+
+- To get up quickly, see [Pulsar admin API - Get started](admin-get-started.md).
+
+- To check the detailed usage, see the API references below.
+
+  - [Java admin API](pathname:///api/admin/)
+
+  - [REST API](reference-rest-api-overview.md)
