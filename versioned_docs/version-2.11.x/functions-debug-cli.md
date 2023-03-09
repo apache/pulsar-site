@@ -4,7 +4,7 @@ title: Debug with Functions CLI
 sidebar_label: "Debug with Functions CLI"
 ---
 
-With [Pulsar Functions CLI](/tools/pulsar-admin/), you can debug Pulsar Functions with the following subcommands:
+With [Pulsar Functions CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin), you can debug Pulsar Functions with the following subcommands:
 * `get`
 * `status`
 * `stats`
@@ -177,7 +177,7 @@ This is my function!
 
 :::note
 
-When using the `--topic` option, you must specify the [entire topic name](getting-started-pulsar.md#topic-names). Otherwise, the following error occurs.
+When using the `--topic` option, you must specify the entire topic name. Otherwise, the following error occurs.
 
   ```text
   Function in trigger function has unidentified topic

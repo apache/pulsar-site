@@ -468,7 +468,7 @@ The following static methods are available for the message id object:
 
 ## End-to-end encryption
 
-[End-to-end encryption](https://pulsar.apache.org/docs/en/next/cookbooks-encryption/#docsNav) allows applications to encrypt messages at producers and decrypt at consumers.
+[End-to-end encryption](cookbooks-encryption.md) allows applications to encrypt messages at producers and decrypt at consumers.
 
 ### Configuration
 

@@ -25,7 +25,7 @@ This example uses Pulsar 2.5.1.
 
    * Download from the [Apache mirror](https://archive.apache.org/dist/pulsar/pulsar-2.5.1/apache-pulsar-2.5.1-bin.tar.gz)
 
-   * Download from the Pulsar [download page](https://pulsar.apache.org/download)
+   * Download from the Pulsar [download page](pathname:///download)
 
    * Use [wget](https://www.gnu.org/software/wget)
 

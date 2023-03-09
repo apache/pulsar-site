@@ -16,11 +16,11 @@ It's great for quickly switching between different clusters, and can modify clus
 
 ## Use case
 - Administration: find all the [Admin API](admin-api-overview.md) features under the `admin` command.
-- Client: find all the [pulsar-client](https://pulsar.apache.org/reference/) features under the `client` command.
+- Client: find all the [pulsar-client](pathname:///reference/#/@pulsar:version_origin@/pulsar-client/) features under the `client` command.
 
 
 ## Install Pulsar Shell
-Download the tarball from the [download page](https://pulsar.apache.org/download) and extract it.
+Download the tarball from the [download page](pathname:///download) and extract it.
 
 ```shell
 wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-shell-@pulsar:version@-bin.tar.gz

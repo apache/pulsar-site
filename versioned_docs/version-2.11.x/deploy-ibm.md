@@ -8,8 +8,8 @@ original_id: deploy-ibm
 
 :::tip
 
-This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/).
+This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](helm-upgrade.md).
 
 :::
 
-[Deploying a Pulsar cluster on IBM cloud you need to Follow this link](/docs/2.10.x/deploy-ibm/)
+[Deploying a Pulsar cluster on IBM cloud you need to Follow this link](deploy-ibm.md)

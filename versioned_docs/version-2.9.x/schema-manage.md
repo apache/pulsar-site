@@ -161,7 +161,7 @@ To manage schemas, you can use one of the following methods.
 | Method |  Description | 
 | --- | --- |
 |  **Admin CLI**<li></li> |   You can use the `pulsar-admin` tool to manage Pulsar schemas, brokers, clusters, sources, sinks, topics, tenants and so on. For more information about how to use the `pulsar-admin` tool, see [here](reference-pulsar-admin.md).  | 
-|  **REST API**<li></li> |   Pulsar exposes schema related management API in Pulsar’s admin RESTful API. You can access the admin RESTful endpoint directly to manage schemas. For more information about how to use the Pulsar REST API, see [here](http://pulsar.apache.org/admin-rest-api/).  | 
+|  **REST API**<li></li> |   Pulsar exposes schema related management API in Pulsar’s admin RESTful API. You can access the admin RESTful endpoint directly to manage schemas. For more information about how to use the Pulsar REST API, see [here](pathname:///admin-rest-api/?version=@pulsar:version_number@).  | 
 |  **Java Admin API**<li></li> |  Pulsar provides Java admin library. | 
 
 ### Upload a schema

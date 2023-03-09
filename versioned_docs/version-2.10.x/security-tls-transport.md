@@ -47,7 +47,7 @@ Follow the guide below to set up a certificate authority. You can also refer to 
 
 mkdir my-ca
 cd my-ca
-wget https://pulsar.apache.org/examples/openssl.cnf
+wget https://pulsar.apache.org/openssl.cnf
 export CA_HOME=$(pwd)
 
 ```

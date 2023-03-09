@@ -396,7 +396,7 @@ In addition to the required configurations in the `conf/client.conf` file, you n
 
 ### Configure CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), and [`pulsar-client`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/) use the `conf/client.conf` config file in a Pulsar installation.
 
 To use mTLS encryption with Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 
@@ -575,7 +575,7 @@ If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
 
 ### Configure CLI tools
 
-For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), [`pulsar-perf`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), and [`pulsar-client`](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/), use the `conf/client.conf` config file in a Pulsar installation.
+For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/), use the `conf/client.conf` config file in a Pulsar installation.
 
 ```properties
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationKeyStoreTls

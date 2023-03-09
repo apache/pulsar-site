@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 ## Pulsar admin CLI for Pulsar Functions
 
-The Pulsar admin interface enables you to create and manage Pulsar Functions through CLI. For the latest and complete information, including commands, flags, and descriptions, refer to [Pulsar admin CLI](/tools/pulsar-admin/).
+The Pulsar admin interface enables you to create and manage Pulsar Functions through CLI. For the latest and complete information, including commands, flags, and descriptions, refer to [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 
 ## YAML configurations for Pulsar Functions
