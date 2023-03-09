@@ -51,26 +51,6 @@ The `schema-definition-file` is in JSON format.
 }
 ```
 
-The `schema-definition-file` includes the following fields:
-
-| Field |  Description | 
-| --- | --- |
-|  `type`  |   The schema type. | 
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> | 
-|  `properties`  |  The additional properties associated with the schema. | 
-
-The following is an example of the `schema-definition-file` for a JSON schema.
-
-**Example**
-
-```json
-{
-    "type": "JSON",
-    "schema": "{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.foo\",\"fields\":[{\"name\":\"file1\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"file2\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"file3\",\"type\":[\"string\",\"null\"],\"default\":\"dfdf\"}]}",
-    "properties": {}
-}
-```
-
 </TabItem>
 <TabItem value="REST API">
 
@@ -105,9 +85,32 @@ payload.setSchema("");
 admin.createSchema("my-tenant/my-ns/my-topic", payload);
 ```
 
+If the schema is a **primitive** schema, the `schema` field must be blank.
+If the schema is a **struct** schema, this field must be a JSON string of the Avro schema definition.
+
 </TabItem>
 </Tabs>
 ````
+
+The payload includes the following fields:
+
+| Field |  Description | 
+| --- | --- |
+|  `type`  |   The schema type. | 
+|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> | 
+|  `properties`  |  The additional properties associated with the schema. | 
+
+The following is an example for a JSON schema.
+
+**Example**
+
+```json
+{
+    "type": "JSON",
+    "schema": "{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.foo\",\"fields\":[{\"name\":\"file1\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"file2\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"file3\",\"type\":[\"string\",\"null\"],\"default\":\"dfdf\"}]}",
+    "properties": {}
+}
+```
 
 ### Get the latest schema
 
