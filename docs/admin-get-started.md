@@ -76,16 +76,16 @@ This tutorial guides you through every step of using Java admin API to manage to
 
     ```java
     PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://localhost:6650")
-    .build();
+        .serviceUrl("pulsar://localhost:6650")
+        .build();
 
     Producer<String> producer = client.newProducer(Schema.STRING)
-    .topic(topic)
-    .blockIfQueueFull(true)
-    .create();
+        .topic(topic)
+        .blockIfQueueFull(true)
+        .create();
 
     for (int i = 0; i < 100; ++i) {
-    producer.newMessage().value("test").send();
+        producer.newMessage().value("test").send();
     }
     producer.close();
     client.close();
