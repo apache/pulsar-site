@@ -17,7 +17,7 @@ export function CurrentPulsarManagerVersion(): JSX.Element {
     return <>{pulsarManagerReleases[0]}</>
 }
 
-export function CurrentPulsarAdapterVersion(): JSX.Element {
+export function CurrentPulsarAdaptersVersion(): JSX.Element {
     return <>{pulsarAdaptersReleases[0]}</>
 }
 
@@ -192,17 +192,41 @@ export function CppReleasesDownloadTable(): JSX.Element {
     </div>
 }
 
-export function CurrentPulsarAdapterDownloadTable(): JSX.Element {
+export function CurrentPulsarAdaptersDownloadTable(): JSX.Element {
     const latestPulsarAdaptersVersion = pulsarAdaptersReleases[0]
     const data = [
         {
-            release: "Source",
+            release: latestPulsarAdaptersVersion,
             link: getLatestAdaptersMirrorUrl(latestPulsarAdaptersVersion),
             linkText: `apache-pulsar-adapters-${latestPulsarAdaptersVersion}-src.tar.gz`,
             asc: `${distAdaptersUrl(latestPulsarAdaptersVersion)}.asc`,
             sha512: `${distAdaptersUrl(latestPulsarAdaptersVersion)}.sha512`,
         },
     ]
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
+export function ArchivedPulsarAdaptersDownloadTable(): JSX.Element {
+    const { siteConfig } = useDocusaurusContext()
+    const latestPulsarAdaptersVersion = pulsarAdaptersReleases[0]
+    const pulsarAdaptersReleaseInfo = pulsarAdaptersReleases.map((version) => ({
+        version: version,
+        srcArchiveUrl: distAdaptersUrl(version),
+    }))
+    const data = pulsarAdaptersReleaseInfo
+        .filter((info) => info.version !== latestPulsarAdaptersVersion)
+        .map((info) => {
+            const sha = "sha512";
+            return {
+                release: info.version,
+                link: info.srcArchiveUrl,
+                linkText: `apache-pulsar-adapters-${info.version}-src.tar.gz`,
+                asc: `${info.srcArchiveUrl}.asc`,
+                sha512: `${info.srcArchiveUrl}.${sha}`,
+            };
+        })
     return <div className="tailwind">
         <ReleaseTable data={data}></ReleaseTable>
     </div>
