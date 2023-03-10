@@ -7,7 +7,7 @@ original_id: deploy-ibm
 
 :::tip
 
-This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/).
+This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](helm-upgrade.md).
 
 :::
 
@@ -168,7 +168,7 @@ Make sure all the pods of Pulsar are running. Get the service URL and broker URL
 
 
 
-> [Installation of Pulsar helm in minikube cluster](https://pulsar.apache.org/docs/getting-started-helm/)  this document is for minikube cluster we are taking reference from that.
+> [Installation of Pulsar helm in minikube cluster](getting-started-helm.md)  this document is for minikube cluster we are taking reference from that.
 
 1. Add Pulsar chart repo
 

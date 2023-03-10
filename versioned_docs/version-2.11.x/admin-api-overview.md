@@ -23,7 +23,7 @@ You can interact with the admin interface via:
 
   :::tip
    
-  For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](/tools/pulsar-admin/).
+  For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
   [Pulsar Shell](administration-pulsar-shell.md) extends `pulsar-admin` with an improved user experience for more flexibility and easier navigation between multiple clusters.
   
@@ -41,7 +41,7 @@ You can interact with the admin interface via:
   
   :::tip
    
-  For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](https://pulsar.apache.org/api/admin/).
+  For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](pathname:///api/admin/).
 
   :::
   

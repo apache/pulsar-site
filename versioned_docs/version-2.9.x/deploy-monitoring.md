@@ -101,7 +101,7 @@ pulsar-admin functions-worker function-stats
 
 ```
 
-The aggregated functions and connectors metrics can be exposed in Prometheus formats as below. You can get [`FUNCTIONS_WORKER_ADDRESS`](http://pulsar.apache.org/docs/en/next/functions-worker/) and `WORKER_PORT` from the `functions_worker.yml` file.
+The aggregated functions and connectors metrics can be exposed in Prometheus formats as below. You can get [`FUNCTIONS_WORKER_ADDRESS`](functions-worker.md) and `WORKER_PORT` from the `functions_worker.yml` file.
 
 ```
 
@@ -141,7 +141,7 @@ docker run -p3000:3000 \
 
 The following are some Grafana dashboards examples:
 
-- [pulsar-grafana](http://pulsar.apache.org/docs/en/deploy-monitoring/#grafana): a Grafana dashboard that displays metrics collected in Prometheus for Pulsar clusters running on Kubernetes.
+- [pulsar-grafana](deploy-monitoring.md#grafana): a Grafana dashboard that displays metrics collected in Prometheus for Pulsar clusters running on Kubernetes.
 - [apache-pulsar-grafana-dashboard](https://github.com/streamnative/apache-pulsar-grafana-dashboard): a collection of Grafana dashboard templates for different Pulsar components running on both Kubernetes and on-premise machines.
 
  ## Alerting rules

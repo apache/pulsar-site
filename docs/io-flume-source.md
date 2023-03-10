@@ -6,7 +6,7 @@ sidebar_label: "Flume source connector"
 
 :::note
 
-You can download all the Pulsar connectors on [download page](https://pulsar.apache.org/download).
+You can download all the Pulsar connectors on [download page](pathname:///download).
 
 ::::
 

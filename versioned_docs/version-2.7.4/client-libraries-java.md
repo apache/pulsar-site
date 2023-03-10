@@ -822,7 +822,7 @@ Total hash range size is 65536, so the max end of the range should be less than 
 
 ## Schema
 
-In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types.md). If you construct, say, a [producer](#producers) without specifying a schema, then the producer can only produce messages of type `byte[]`. The following is an example.
+In Pulsar, all message data consists of byte arrays "under the hood." [Message schemas](schema-get-started.md) enable you to use other types of data when constructing and handling messages (from simple types like strings to more complex, application-specific types). If you construct, say, a [producer](#producers) without specifying a schema, then the producer can only produce messages of type `byte[]`. The following is an example.
 
 ```java
 
@@ -936,8 +936,7 @@ The following schema formats are currently available for Java:
 
 ## Authentication
 
-Pulsar currently supports three authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), and [Oauth2](security-oauth2.md). You can use the Pulsar Java client with all of them.
-
+Pulsar currently supports multiple authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), [Kerberos](security-kerberos.md), [JSON Web Token (JWT)](security-jwt.md), and [Oauth2](security-oauth2.md). You can use the Pulsar Java client with all of them.
 ### TLS Authentication
 
 To use [TLS](security-tls-authentication.md), `enableTls` method is deprecated and you need to use "pulsar+ssl://" in serviceUrl to enable, point your Pulsar client to a TLS cert path, and provide paths to cert and key files.

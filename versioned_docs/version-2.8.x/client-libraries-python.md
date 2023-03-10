@@ -20,9 +20,7 @@ You can install the [`pulsar-client`](https://pypi.python.org/pypi/pulsar-client
 To install the `pulsar-client` library as a pre-built package using the [pip](https://pip.pypa.io/en/stable/) package manager:
 
 ```shell
-
-$ pip install pulsar-client==@pulsar:version_number@
-
+pip install pulsar-client==@pulsar:version:python@
 ```
 
 ### Optional dependencies
@@ -30,24 +28,22 @@ $ pip install pulsar-client==@pulsar:version_number@
 To support aspects like pulsar functions or Avro serialization, additional optional components can be installed alongside the  `pulsar-client` library
 
 ```shell
-
 # avro serialization
-$ pip install pulsar-client[avro]=='@pulsar:version_number@'
+pip install 'pulsar-client[avro]==@pulsar:version:python@'
 
 # functions runtime
-$ pip install pulsar-client[functions]=='@pulsar:version_number@'
+pip install 'pulsar-client[functions]==@pulsar:version:python@'
 
 # all optional components
-$ pip install pulsar-client[all]=='@pulsar:version_number@'
-
+pip install 'pulsar-client[all]==@pulsar:version:python@'
 ```
 
 Installation via PyPi is available for the following Python versions:
 
-Platform | Supported Python versions
-:--------|:-------------------------
-MacOS <br />  10.13 (High Sierra), 10.14 (Mojave) <br /> | 2.7, 3.7
-Linux | 2.7, 3.4, 3.5, 3.6, 3.7, 3.8
+| Platform                                                 | Supported Python versions    |
+|:---------------------------------------------------------|:-----------------------------|
+| MacOS <br />  10.13 (High Sierra), 10.14 (Mojave) <br /> | 2.7, 3.7                     |
+| Linux                                                    | 2.7, 3.4, 3.5, 3.6, 3.7, 3.8 |
 
 ### Install from source
 
@@ -167,7 +163,7 @@ while True:
 
 In addition to subscribing a consumer to a single Pulsar topic, you can also subscribe to multiple topics simultaneously. To use multi-topic subscriptions, you can supply a regular expression (regex) or a `List` of topics. If you select topics via regex, all topics must be within the same Pulsar namespace.
 
-The following is an example. 
+The following is an example.
 
 ```python
 
@@ -358,7 +354,7 @@ The schema definition is like this.
 ```
 {
   'name': 'NamespaceDemo', 'namespace': 'xxx.xxx.xxx', 'type': 'record', 'fields': [
-    {'name': 'x', 'type': ['null', 'string']}, 
+    {'name': 'x', 'type': ['null', 'string']},
     {'name': 'y', 'type': ['null', 'int']}
   ]
 }
@@ -367,7 +363,7 @@ The schema definition is like this.
 
 ## End-to-end encryption
 
-[End-to-end encryption](https://pulsar.apache.org/docs/en/next/cookbooks-encryption/#docsNav) allows applications to encrypt messages at producers and decrypt messages at consumers.
+[End-to-end encryption](cookbooks-encryption.md) allows applications to encrypt messages at producers and decrypt messages at consumers.
 
 ### Configuration
 
@@ -386,7 +382,7 @@ This section provides step-by-step instructions on how to use the end-to-end enc
 
 **Prerequisite**
 
-- Pulsar Python client 2.7.1 or later 
+- Pulsar Python client 2.7.1 or later
 
 **Step**
 
@@ -395,10 +391,10 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    **Input**
 
    ```shell
-   
+
    openssl genrsa -out private.pem 2048
    openssl rsa -in private.pem -pubout -out public.pem
-   
+
    ```
 
 2. Create a producer to send encrypted messages.
@@ -406,7 +402,7 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    **Input**
 
    ```python
-   
+
    import pulsar
 
    publicKeyPath = "./public.pem"
@@ -418,7 +414,7 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    print('sent message')
    producer.close()
    client.close()
-   
+
    ```
 
 3. Create a consumer to receive encrypted messages.
@@ -426,7 +422,7 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    **Input**
 
    ```python
-   
+
    import pulsar
 
    publicKeyPath = "./public.pem"
@@ -438,7 +434,7 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    print("Received msg '{}' id = '{}'".format(msg.data(), msg.message_id()))
    consumer.close()
    client.close()
-   
+
    ```
 
 4. Run the consumer to receive encrypted messages.
@@ -446,9 +442,9 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    **Input**
 
    ```shell
-   
+
    python consumer.py
-   
+
    ```
 
 5. In a new terminal tab, run the producer to produce encrypted messages.
@@ -456,9 +452,9 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    **Input**
 
    ```shell
-   
+
    python producer.py
-   
+
    ```
 
    Now you can see the producer sends messages and the consumer receives messages successfully.
@@ -468,16 +464,16 @@ This section provides step-by-step instructions on how to use the end-to-end enc
    This is from the producer side.
 
    ```
-   
+
    sent message
-   
+
    ```
 
    This is from the consumer side.
 
    ```
-   
+
    Received msg 'b'encryption message'' id = '(0,0,-1,-1)'
-   
+
    ```
 

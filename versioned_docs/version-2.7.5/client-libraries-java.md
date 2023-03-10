@@ -936,7 +936,7 @@ The following schema formats are currently available for Java:
 
 ## Authentication
 
-Pulsar currently supports three authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), and [Oauth2](security-oauth2.md). You can use the Pulsar Java client with all of them.
+Pulsar currently supports multiple authentication schemes: [TLS](security-tls-authentication.md), [Athenz](security-athenz.md), [Kerberos](security-kerberos.md), [JSON Web Token (JWT)](security-jwt.md), and [Oauth2](security-oauth2.md). You can use the Pulsar Java client with all of them.
 
 ### TLS Authentication
 

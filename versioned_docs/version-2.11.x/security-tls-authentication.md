@@ -1,7 +1,7 @@
 ---
 id: security-tls-authentication
-title: Authentication using TLS
-sidebar_label: "Authentication using TLS"
+title: Authentication using mTLS
+sidebar_label: "Authentication using mTLS"
 ---
 
 ````mdx-code-block
@@ -9,27 +9,42 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-## TLS authentication overview
+## mTLS authentication overview
 
-TLS authentication is an extension of [TLS transport encryption](security-tls-transport.md). Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients. You must have TLS transport encryption configured on your cluster before you can use TLS authentication. This guide assumes you already have TLS transport encryption configured.
+Mutual TLS (mTLS) is a mutual authentication mechanism. Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients. 
 
-## Enable TLS authentication on brokers/proxies
+The following figure illustrates how Pulsar processes mTLS authentication between clients and servers.
 
-To configure brokers/proxies to authenticate clients using Mutual TLS, add the following parameters to the `conf/broker.conf` and the `conf/proxy.conf` file. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
+![Pulsar mTLS authentication process](/assets/mTLS-authentication.svg)
+
+## Enable mTLS authentication on brokers
+
+To configure brokers/proxies to authenticate clients using mTLS, add the following parameters to the `conf/broker.conf` file. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file.
 
 ```properties
-# Configuration to enable authentication
+# enable authentication
 authenticationEnabled=true
+# set mTLS authentication provider
 authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
 
+# configure TLS for client to connect brokers
+brokerClientTlsEnabled=true
+brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
 brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/admin.cert.pem","tlsKeyFile":"/path/to/admin.key-pk8.pem"}
-brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 
-tlsCertificateFilePath=/path/to/broker.cert.pem
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+# configure TLS ports
+brokerServicePortTls=6651
+webServicePortTls=8081
+
+# configure CA certificate
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
+# configure server certificate
+tlsCertificateFilePath=/path/to/broker.cert.pem
+# configure server's private key
+tlsKeyFilePath=/path/to/broker.key-pk8.pem
 
+# enable mTLS
 tlsRequireTrustedClientCertOnConnect=true
 tlsAllowInsecureConnection=false
 
@@ -37,9 +52,41 @@ tlsAllowInsecureConnection=false
 tlsCertRefreshCheckDurationSec=300
 ```
 
-## Configure TLS authentication in Pulsar clients
+## Enable mTLS authentication on proxies
 
-When using TLS authentication, clients connect via TLS transport. You need to configure clients to use `https://` and the `8443` port for the web service URL, use `pulsar+ssl://` and the `6651` port for the broker service URL.
+To configure proxies to authenticate clients using mTLS, add the following parameters to the `conf/proxy.conf` file.
+
+```properties
+# enable authentication
+authenticationEnabled=true
+# set mTLS authentication provider
+authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
+
+# configure TLS for client to connect proxies
+tlsEnabledWithBroker=true
+brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
+brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
+brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/admin.cert.pem","tlsKeyFile":"/path/to/admin.key-pk8.pem"}
+
+# configure TLS ports
+brokerServicePortTls=6651
+webServicePortTls=8081
+
+# configure CA certificate
+tlsTrustCertsFilePath=/path/to/ca.cert.pem
+# configure server certificate
+tlsCertificateFilePath=/path/to/proxy.cert.pem
+# configure server's private key
+tlsKeyFilePath=/path/to/proxy.key-pk8.pem
+
+# enable mTLS
+tlsRequireTrustedClientCertOnConnect=true
+tlsAllowInsecureConnection=false
+```
+
+## Configure mTLS authentication in Pulsar clients
+
+When using mTLS authentication, clients connect via TLS transport. You need to configure clients to use `https://` and the `8443` port for the web service URL, use `pulsar+ssl://` and the `6651` port for the broker service URL.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -134,20 +181,20 @@ var client = PulsarClient.Builder()
 </Tabs>
 ````
 
-## Configure TLS authentication in CLI tools
+## Configure mTLS authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/), use the `conf/client.conf` config file in a Pulsar installation.
 
-To use TLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configuration to enable TLS encryption](security-tls-transport.md#configure-tls-encryption-in-cli-tools):
+To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configuration to enable mTLS encryption](security-tls-transport.md#configure-mtls-encryption-in-cli-tools):
 
 ```properties
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
 authParams=tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem
 ```
 
-## Configure TLS authentication with KeyStore 
+## Configure mTLS authentication with KeyStore 
 
-Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [TLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration. This section tries to describe how to use [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) type to configure TLS.
+Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration. This section describes how to use [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) type to configure mTLS.
 
 ### Configure brokers
 
@@ -191,7 +238,7 @@ Besides configuring [TLS encryption](security-tls-transport.md), you need to con
 
 For example:
 
-1. for [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](https://pulsar.apache.org/reference/), [`pulsar-perf`](https://pulsar.apache.org/reference/), and [`pulsar-client`](https://pulsar.apache.org/reference/), set the `conf/client.conf` file in a Pulsar installation.
+1. for [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/), set the `conf/client.conf` file in a Pulsar installation.
 
    ```properties
    webServiceUrl=https://broker.example.com:8443/
@@ -242,13 +289,3 @@ For example:
 Configure `tlsTrustStorePath` when you set `useKeyStoreTls` to `true`.
 
 :::
-
-## Enable TLS Logging
-
-You can enable TLS debug logging at the JVM level by starting the brokers and/or clients with `javax.net.debug` system property. For example:
-
-```shell
--Djavax.net.debug=all
-```
-
-You can find more details on this in [Oracle documentation](http://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/ReadDebug.html) on [debugging SSL/TLS connections](http://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/ReadDebug.html).

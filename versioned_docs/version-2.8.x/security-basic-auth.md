@@ -111,7 +111,7 @@ You can also set an environment variable named `PULSAR_EXTRA_OPTS` and the value
 
 ## Configure basic authentication in CLI tools
 
-[Command-line tools](/docs/next/reference-cli-tools), such as [Pulsar-admin](/tools/pulsar-admin/), [Pulsar-perf](/tools/pulsar-perf/) and [Pulsar-client](/tools/pulsar-client/), use the `conf/client.conf` file in your Pulsar installation. To configure basic authentication in Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
+[Command-line tools](reference-cli-tools.md), such as [Pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin), [Pulsar-perf](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf) and [Pulsar-client](pathname:///reference/#/@pulsar:version_origin@/pulsar-client), use the `conf/client.conf` file in your Pulsar installation. To configure basic authentication in Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 
 ```conf
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationBasic
