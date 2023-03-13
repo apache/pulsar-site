@@ -12,7 +12,7 @@ Large message payloads can cause memory usage spikes that lead to performance de
 
 For example, when you configure the dispatch rate limit to 10 messages per second, then the number of messages that can be delivered to the client per second is up to 10.
 
-![Rate-limit dispatch throttling](/assets/throttling-dispatch.svg)
+![Rate-limit dispatch throttling](/assets/throttling-dispatch.svg 'message throttling')
 
 ### Why use it?
 
@@ -70,7 +70,7 @@ Approach | Per cluster | Per topic | Per subscription
 :--------|:------------|:----------|:----------------
 Set [broker configurations](#throttling-configurations) or [dynamic broker configurations](admin-api-brokers.md#dynamic-broker-configuration) | <li>`dispatchThrottlingRateInMsg`</li><li>`dispatchThrottlingRateInByte`</li> | <li>`dispatchThrottlingRatePerTopicInMsg`</li><li>`dispatchThrottlingRatePerTopicInByte`</li><br />It applies to all topics in the cluster. | <li>`dispatchThrottlingRatePerSubscriptionInMsg`</li><li>`dispatchThrottlingRatePerSubscriptionInByte`</li><br />It applies to all subscriptions in the cluster.
 Set namespace policies | N/A | Refer to [Configure dispatch throttling for topics](admin-api-namespaces.md#configure-dispatch-throttling-for-topics). | Refer to [Configure dispatch throttling for subscriptions](admin-api-namespaces.md#configure-dispatch-throttling-for-subscription).
-Set topic policies | N/A | Refer to [Set topic-level dispatch rate](https://pulsar.apache.org/admin-rest-api/#operation/persistent_setDispatchRate). | Refer to [Set subscription-level dispatch rate](https://pulsar.apache.org/admin-rest-api/#operation/getSubscriptionLevelDispatchRate).<br />It applies to all subscriptions in a topic.
+Set topic policies | N/A | Refer to [Set topic-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/PersistentTopics_setDispatchRate). | Refer to [Set subscription-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/Namespaces_setDispatchRate).<br />It applies to all subscriptions in a topic.
 
 :::note
 
