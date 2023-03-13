@@ -5,6 +5,12 @@ sidebar_label: "IBM Cloud Services"
 original_id: deploy-ibm
 ---
 
+:::tip
+
+This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/).
+
+:::
+
 
 Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
@@ -75,7 +81,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 2](/assets/IBMCloud/k8s2.png)
 
-3. Select the infrastructure type we are going with the classic and also select the Kubernetes version.
+3. Select the infrastructure type we are going with the classic and also select the Kubernetes version .
 
 ![K8S Creation Image 3](/assets/IBMCloud/k8s3.png)
 
@@ -102,7 +108,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 10](/assets/IBMCloud/k8s10.png)
 
-9. Check the created cluster list by clicking on the clusters options 
+9. Check the created cluster list by clicking on the clusters options.
 
 ![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
 
@@ -162,7 +168,7 @@ Make sure all the pods of Pulsar are running. Get the service URL and broker URL
 
 
 
-> [Installation of Pulsar helm in minikube cluster](getting-started-helm.md)  this document is for minikube cluster we are taking reference from that.
+> [Installation of Pulsar helm in minikube cluster](https://pulsar.apache.org/docs/getting-started-helm/)  this document is for minikube cluster we are taking reference from that.
 
 1. Add Pulsar chart repo
 
@@ -186,7 +192,7 @@ cd pulsar-helm-chart
 
 :::note
 
-When running the script, you can use `-n` to specify the Kubernetes namespace where the Pulsar Helm chart is installed, `-k` to define the Pulsar Helm release name, and `-c` to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
+When running the script, you can use `-n` to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and `-c` to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
 
 :::
 

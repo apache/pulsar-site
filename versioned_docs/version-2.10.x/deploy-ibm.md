@@ -11,6 +11,7 @@ This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pul
 
 :::
 
+
 Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 1. [Create VM on IBM Cloud.](#create-vm-on-ibm-cloud)
@@ -19,9 +20,9 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 4. [Verify the deployment.](#run-kubectl-commands-to-verify-the-deployment)
 
 
-#### Create VM on IBM Cloud
+## 1. Create VM on IBM Cloud
 
-1. Go to [IBM Cloud]( https://cloud.ibm.com/login)  and login with your credentials.
+1. Go to [IBM Cloud]( https://cloud.ibm.com/?cm_sp=freelancer-_-pulsar-iks-_-cta)  and login with your credentials.
 2. Search for Virtual Server.
 3. Select Virtual Server for Classic.
 
@@ -66,11 +67,11 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![VM Creation Image 11](/assets/IBMCloud/VM11.png)
 
-13. Check the devices list, click on the menu option on the same page.
+13. Check the devices list, and click on the menu option on the same page.
 
 ![VM Creation Image 12](/assets/IBMCloud/VM12.png)
 
-#### Create Kubernetes Cluster on IBM 
+## 2. Create Kubernetes Cluster on IBM 
 
 1. Search for the Kubernetes services
 
@@ -107,7 +108,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 10](/assets/IBMCloud/k8s10.png)
 
-9. Check the created cluster list through clicking on the clusters options 
+9. Check the created cluster list by clicking on the clusters options.
 
 ![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
 
@@ -115,7 +116,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 12](/assets/IBMCloud/k8s12.png)
 
-## Step 3: Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
+## 3. Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
 
 **Prerequisites** 
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli) and connect to Kubernetes master node.
@@ -162,7 +163,7 @@ Output
 
 > Now we are able to run commands of kubectl.
 
-## Verify the deployment
+## 4. Verify the deployment
 Make sure all the pods of Pulsar are running. Get the service URL and broker URL for publishing and consuming the messages.
 
 
@@ -187,11 +188,11 @@ git clone https://github.com/apache/pulsar-helm-chart
 cd pulsar-helm-chart
 ```
 
-3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username`pulsar`and password`pulsar`are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
 :::note
 
-When running the script, you can use`-n`to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and`-c`to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
+When running the script, you can use `-n` to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and `-c` to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
 
 :::
 
@@ -210,7 +211,7 @@ helm install --values examples/values-minikube.yaml --set initialize=true asia a
 
 :::note
 
-You need to specify`--set initialize=true`when installing Pulsar the first time. This command installs and starts Apache Pulsar.
+You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
 
 :::
 
@@ -222,7 +223,7 @@ Output
 ```bash 
 kubectl get pods
 ```
-If all pods start up successfully, you can see that `STATUS`is changed to`Running`or`Completed`.
+If all pods start up successfully, you can see that `STATUS` is changed to `Running` or `Completed`.
 
 Output
 
@@ -242,4 +243,4 @@ The output shows both `services URL` and `broker URL`.
 Proxy external IPs are the ports changed just now:
 - Service URL port is 80.
 - Broker URL port is 6650. This is default.
-If you execute all the commands successfully, you can use the Pulsar client to connect to ?? clusters and produce and consume messages through proxy external IPs.
+If you execute all the commands successfully, you can use the Pulsar client to connect to  clusters and produce and consume messages through proxy external IPs.
