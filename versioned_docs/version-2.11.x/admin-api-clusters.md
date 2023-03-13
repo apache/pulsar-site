@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
  This page only shows **some frequently used operations**.
 
- - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](/tools/pulsar-admin/)
+ - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
  
  - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
  
@@ -27,7 +27,7 @@ servers (aka [bookies](reference-terminology.md#bookie)), and a [ZooKeeper](http
 
 Clusters can be managed via:
 
-* The `clusters` command of the [`pulsar-admin`](/tools/pulsar-admin/) tool
+* The `clusters` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin) tool
 * The `/admin/v2/clusters` endpoint of the admin {@inject: rest:REST:/} API
 * The `clusters` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
 
@@ -49,7 +49,7 @@ This operation requires superuser privileges.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can provision a new cluster using the [`create`](/tools/pulsar-admin/) subcommand. Here's an example:
+You can provision a new cluster using the [`create`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=create) subcommand. Here's an example:
 
 ```shell
 pulsar-admin clusters create cluster-1 \
@@ -112,7 +112,7 @@ bin/pulsar initialize-cluster-metadata \
   --broker-service-url-tls pulsar+ssl://pulsar.us-west.example.com:6651/
 ```
 
-You'll need to use `--*-tls` flags only if you're using [TLS authentication](security-tls-authentication.md) in your instance.
+You'll need to use `--*-tls` flags only if you're using [mTLS authentication](security-tls-authentication.md) in your instance.
 
 ### Get configuration
 
@@ -124,7 +124,7 @@ You can fetch the [configuration](reference-configuration.md) for an existing cl
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`get`](/tools/pulsar-admin/) subcommand and specify the name of the cluster. Here's an example:
+Use the [`get`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=get) subcommand and specify the name of the cluster. Here's an example:
 
 ```shell
 pulsar-admin clusters get cluster-1
@@ -168,7 +168,7 @@ You can update the configuration for an existing cluster at any time.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`update`](/tools/pulsar-admin/) subcommand and specify new configuration values using flags.
+Use the [`update`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=update) subcommand and specify new configuration values using flags.
 
 ```shell
 pulsar-admin clusters update cluster-1 \
@@ -209,7 +209,7 @@ Clusters can be deleted from a Pulsar [instance](reference-terminology.md#instan
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`delete`](/tools/pulsar-admin/) subcommand and specify the name of the cluster.
+Use the [`delete`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=delete) subcommand and specify the name of the cluster.
 
 ```
 pulsar-admin clusters delete cluster-1
@@ -242,7 +242,7 @@ You can fetch a list of all clusters in a Pulsar [instance](reference-terminolog
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`list`](/tools/pulsar-admin/) subcommand.
+Use the [`list`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=list) subcommand.
 
 ```shell
 pulsar-admin clusters list
@@ -281,7 +281,7 @@ Peer clusters can be configured for a given cluster in a Pulsar [instance](refer
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`update-peer-clusters`](/tools/pulsar-admin/) subcommand and specify the list of peer-cluster names.
+Use the [`update-peer-clusters`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=update-peer-clusters) subcommand and specify the list of peer-cluster names.
 
 ```shell
 pulsar-admin update-peer-clusters cluster-1 --peer-clusters cluster-2

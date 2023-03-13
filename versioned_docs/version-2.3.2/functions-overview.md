@@ -78,7 +78,7 @@ public class WordCountFunction implements Function<String, Void> {
 
 ```
 
-Bundle and build the JAR file to be deployed, and then deploy it in your Pulsar cluster using the [command line](functions-deploy.md#command-line-interface) as follows.
+Bundle and build the JAR file to be deployed, and then deploy it in your Pulsar cluster using the [command line](functions-deploying.md#command-line-interface) as follows.
 
 ```bash
 
@@ -131,7 +131,7 @@ class RoutingFunction(Function):
 
 ```
 
-If this code is stored in `~/router.py`, then you can deploy it in your Pulsar cluster using the [command line](functions-deploy.md#command-line-interface) as follows.
+If this code is stored in `~/router.py`, then you can deploy it in your Pulsar cluster using the [command line](functions-deploying.md#command-line-interface) as follows.
 
 ```bash
 

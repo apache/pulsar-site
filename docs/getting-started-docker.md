@@ -13,21 +13,13 @@ If you have not installed Docker, download the [Community edition](https://www.d
 For macOS, Linux, and Windows, run the following command to start Pulsar within a Docker container.
 
 ```shell
-docker run -it -p 6650:6650 -p 8080:8080 \
-    --mount source=pulsardata,target=/pulsar/data \
-    --mount source=pulsarconf,target=/pulsar/conf \
-    apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
+docker run -it -p 6650:6650 -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
 ```
 
 If you want to change Pulsar configurations and start Pulsar, run the following command by passing environment variables with the `PULSAR_PREFIX_` prefix. See [default configuration file](https://github.com/apache/pulsar/blob/e6b12c64b043903eb5ff2dc5186fe8030f157cfc/conf/standalone.conf) for more details.
 
 ```shell
-docker run -it -e PULSAR_PREFIX_xxx=yyy \
-    -p 6650:6650  -p 8080:8080 \
-    --mount source=pulsardata,target=/pulsar/data \
-    --mount source=pulsarconf,target=/pulsar/conf \
-    apachepulsar/pulsar:2.10.0 \
-    sh -c "bin/apply-config-from-env.py conf/standalone.conf && bin/pulsar standalone"
+docker run -it -e PULSAR_PREFIX_xxx=yyy -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:2.10.0 sh -c "bin/apply-config-from-env.py conf/standalone.conf && bin/pulsar standalone"
 ```
 
 :::tip
@@ -49,7 +41,7 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 :::tip
 
-* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar-admin docs](/tools/pulsar-admin/).
+* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 * When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::

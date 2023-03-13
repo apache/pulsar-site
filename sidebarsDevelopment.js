@@ -29,23 +29,36 @@ const sidebars = {
         },
         {
             type: "category",
-            label: "Documentation",
+            label: "Website",
             items: [
-                'document-intro',
-                'document-contribution',
+                'site-intro',
                 'document-preview',
                 'document-syntax',
             ]
         },
         {
             type: "category",
+            label: "Documentation",
+            items: [
+                'document-intro',
+                'document-contribution',
+            ]
+        },
+        {
+            type: "category",
             label: "Releases",
             items: [
-                'create-gpg-keys',
+                'release-policy',
+                {
+                    type: "category",
+                    label: 'Release process',
+                    link: {type: 'doc', id: 'release-process'},
+                    items: [
+                        'create-gpg-keys',
+                        'release-note-guide',
+                    ]
+                },
                 'validate-release-candidate',
-                'release-process',
-                'release-note-guide',
-                'version-policy',
             ]
         },
         {

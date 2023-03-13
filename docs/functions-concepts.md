@@ -73,7 +73,7 @@ Pulsar provides three different messaging delivery semantics that you can apply 
 
 | Delivery semantics | Description | Adopted subscription type |
 |--------------------|-------------|---------------------------|
-| **At-most-once** delivery | Each message sent to a function is processed at its best effort. There’s no guarantee that the message will be processed or not. <br /><br /> When you select this semantic, the `autoAck` configuration must be set to `true`, otherwise the startup will fail (the `autoAck` configuration will be deprecated in future releases). <br /><br /> **Ack time node**: Before function processing. | Shared |
+| **At-most-once** delivery | Each message sent to a function is processed at its best effort. There is no guarantee that the message will be processed or not. <br /><br /> When you select this semantic, the `autoAck` configuration must be set to `true`, otherwise the startup will fail (the `autoAck` configuration will be deprecated in future releases). <br /><br /> **Ack time node**: Before function processing. | Shared |
 | **At-least-once** delivery (default) | Each message sent to a function can be processed more than once (in case of a processing failure or redelivery).<br /><br />If you create a function without specifying the `--processing-guarantees` flag, the function provides `at-least-once` delivery guarantee. <br /><br /> **Ack time node**: After sending a message to output. | Shared |
 | **Effectively-once** delivery | Each message sent to a function can be processed more than once but it has only one output. Duplicated messages are ignored.<br /><br />`Effectively once` is achieved on top of `at-least-once` processing and guaranteed server-side deduplication. This means a state update can happen twice, but the same state update is only applied once, the other duplicated state update is discarded on the server-side. <br /><br /> **Ack time node**: After sending a message to output. | Failover |
 | **Manual** delivery | When you select this semantic, the framework does not perform any ack operations, and you need to call the method `context.getCurrentRecord().ack()` inside a function to manually perform the ack operation. <br /><br /> **Ack time node**: User-defined within function methods. | Shared |
@@ -85,7 +85,7 @@ Pulsar provides three different messaging delivery semantics that you can apply 
 * The `Exclusive` subscription type is **not** available in Pulsar Functions because:
   * If there is only one instance, `exclusive` equals `failover`.
   * If there are multiple instances, `exclusive` may crash and restart when functions restart. In this case, `exclusive` does not equal `failover`. Because when the master consumer disconnects, all non-acknowledged and subsequent messages are delivered to the next consumer in line.
-* To change the subscription type from `shared` to `key_shared`, you can use the `—retain-key-ordering` option in [`pulsar-admin`](/tools/pulsar-admin/).
+* To change the subscription type from `shared` to `key_shared`, you can use the `—retain-key-ordering` option in [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 :::
 
@@ -161,7 +161,7 @@ Both trigger policy and eviction policy are driven by either time or count.
 :::tip
 
 Both processing time and event time are supported.
- * Processing time is defined based on the wall time when the function instance builds and processes a window. The judging of window completeness is straightforward and you don’t have to worry about data arrival disorder. 
+ * Processing time is defined based on the wall time when the function instance builds and processes a window. The judging of window completeness is straightforward and you don't have to worry about data arrival disorder. 
  * Event time is defined based on the timestamps that come with the event record. It guarantees event time correctness but also offers more data buffering and a limited completeness guarantee.
    
 :::

@@ -5,6 +5,10 @@ module.exports = {
       "apacheId": "andrews"
     },
     {
+      "name": "Bo Cong",
+      "apacheId": "bogong"
+    },
+    {
       "name": "Brad McMillen",
       "apacheId": "bradtm"
     },
@@ -81,6 +85,10 @@ module.exports = {
       "apacheId": "mmerli"
     },
     {
+      "name": "Nicolò Boschi",
+      "apacheId": "nicoloboschi"
+    },
+    {
       "name": "Nozomi Kurihara",
       "apacheId": "nkurihar"
     },
@@ -125,6 +133,10 @@ module.exports = {
       "apacheId": "wave"
     },
     {
+      "name": "Yunze Xu",
+      "apacheId": "xyz"
+    },
+    {
       "name": "Yuki Shiga",
       "apacheId": "yushiga"
     },
@@ -151,12 +163,12 @@ module.exports = {
       "apacheId": "ayegorov"
     },
     {
-      "name": "Daniel Blankensteiner",
-      "apacheId": "blankensteiner"
+      "name": "Baodi Shi",
+      "apacheId": "baodi"
     },
     {
-      "name": "Bo Cong",
-      "apacheId": "bogong"
+      "name": "Daniel Blankensteiner",
+      "apacheId": "blankensteiner"
     },
     {
       "name": "Christophe Bornet",
@@ -167,12 +179,20 @@ module.exports = {
       "apacheId": "cckellogg"
     },
     {
+      "name": "Tao Jiuming",
+      "apacheId": "daojun"
+    },
+    {
       "name": "davidkj",
       "apacheId": "davekj"
     },
     {
       "name": "Dezhi Liu",
       "apacheId": "dezhiliu"
+    },
+    {
+      "name": "Yuri Mizushima",
+      "apacheId": "equanz"
     },
     {
       "name": "Guangning E",
@@ -209,10 +229,6 @@ module.exports = {
     {
       "name": "Qiang Zhao",
       "apacheId": "mattisonchao"
-    },
-    {
-      "name": "Nicolò Boschi",
-      "apacheId": "nicoloboschi"
     },
     {
       "name": "Neng Lu",
@@ -255,16 +271,16 @@ module.exports = {
       "apacheId": "xxc"
     },
     {
-      "name": "Yunze Xu",
-      "apacheId": "xyz"
-    },
-    {
       "name": "Yijie Shen",
       "apacheId": "yjshen"
     },
     {
       "name": "Yong Zhang",
       "apacheId": "yong"
+    },
+    {
+      "name": "Yubiao Feng",
+      "apacheId": "yubiao"
     },
     {
       "name": "Ruguo Yu",

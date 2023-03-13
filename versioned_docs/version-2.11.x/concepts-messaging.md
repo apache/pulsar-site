@@ -145,7 +145,6 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 
 **Limitations:**
 - Chunking is only available for persisted topics.
-- Chunking is only available for the exclusive and failover subscription types.
 - Chunking cannot be enabled simultaneously with batching.
 
 #### Handle consecutive chunked messages with one ordered consumer
@@ -362,7 +361,7 @@ consumer.acknowledge(message);
 
 ### Retry letter topic
 
-Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers. 
+Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers.
 
 The diagram below illustrates the concept of the retry letter topic.
 ![](/assets/retry-letter-topic.svg)
@@ -448,7 +447,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 
 ### Dead letter topic
 
-Dead letter topic allows you to continue message consumption even when some messages are not consumed successfully. The messages that have failed to be consumed are stored in a specific topic, which is called the dead letter topic. The functionality of a dead letter topic is implemented by consumers. You can decide how to handle the messages in the dead letter topic. 
+Dead letter topic allows you to continue message consumption even when some messages are not consumed successfully. The messages that have failed to be consumed are stored in a specific topic, which is called the dead letter topic. The functionality of a dead letter topic is implemented by consumers. You can decide how to handle the messages in the dead letter topic.
 
 Enable dead letter topic in a Java client using the default dead letter topic.
 
@@ -598,17 +597,17 @@ In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all 
 
 #### Key_Shared
 
-In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer. 
+In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
 
 There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key): Sticky, Auto-split Hash Range, and Auto-split Consistent Hashing. The steps for all algorithms are:
-1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash. 
+1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash.
 2. That hash number is fed to the algorithm to select a consumer from the existing connected consumers.
 
 ```
                       +--------------+                              +-----------+
-Message Key ----->  / Hash Function / ----- hash (32-bit) -------> / Algorithm / ----> Consumer   
+Message Key ----->  / Hash Function / ----- hash (32-bit) -------> / Algorithm / ----> Consumer
                    +---------------+                               +----------+
 ```
 
@@ -660,7 +659,7 @@ C1 is disconnected:
 |------- C3 ------|-------------------------- C2 -----------------------|
 ```
 
-The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around. 
+The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around.
 
 ##### Auto-split Consistent Hashing
 
@@ -693,7 +692,7 @@ When adding a consumer, we mark 100 points on that circle and associate them to 
 Since the hash function has the uniform distribution attribute, those points would be uniformly distributed across the circle.
 
 ```
-    C1-100                 
+    C1-100
          , - ~ ~ ~ - ,   C1-1
      , '               ' ,
    ,                       ,
@@ -705,7 +704,7 @@ Since the hash function has the uniform distribution attribute, those points wou
    ,                       ,
      ,                  , '
        ' - , _ _ _ ,  '      ...
- 
+
 ```
 
 A consumer is selected for a given message key by putting its hash on the circle then continue clock-wise on the circle until you reach a marking point. The point might have more than one consumer on it (hash function might have collisions) there for, we run the following operation to get a position within the list of consumers for that point, then we take the consumer in that position: `hash % consumer_list_size = index`.
@@ -722,9 +721,9 @@ Example:
 Suppose we have 2 consumers (C1 and C2) each specified their ranges, then:
 
 ```
-C1 = [0, 16384), (32768, 49152]
-C2 = [16384, 32768), (49,152, 65536]
- 
+C1 = [0, 16384), [32768, 49152)
+C2 = [16384, 32768), [49152, 65536)
+
  0               16,384            32,768           49,152             65,536
  |------- C1 ------|------- C2 ------|------- C1 ------|------- C2 ------|
 ```
@@ -735,7 +734,7 @@ If the newly connected consumer didn't supply their ranges, or they overlap with
 
 ##### How to use them?
 
-When building the consumer, you can specify the Key Shared Mode: 
+When building the consumer, you can specify the Key Shared Mode:
 * AUTO_SPLIT - Auto-split Hash Range
 * STICKY - Sticky
 
@@ -751,7 +750,7 @@ That requirement can be relaxed by enabling `allowOutOfOrderDelivery` via the Co
 
 :::note
 
-When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers. 
+When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers.
 :::
 
 There are two reasons why the key-based batching is necessary for the Key_Shared subscription type:
@@ -951,7 +950,7 @@ There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/c
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by {@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -960,7 +959,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producers is `JavaStringHash`.
@@ -980,13 +979,13 @@ Non-persistent topics have names of this form (note the `non-persistent` in the 
 non-persistent://tenant/namespace/topic
 ```
 
-For more info on using non-persistent topics, see the [Non-persistent messaging cookbook](cookbooks-non-persistent).
+For more info on using non-persistent topics, see the [Non-persistent messaging cookbook](cookbooks-non-persistent.md).
 
 In non-persistent topics, brokers immediately deliver messages to all connected subscribers *without persisting them* in [BookKeeper](concepts-architecture-overview.md#persistent-storage). If a subscriber is disconnected, the broker will not be able to deliver those in-transit messages, and subscribers will never be able to receive those messages again. Eliminating the persistent storage step makes messaging on non-persistent topics slightly faster than on persistent topics in some cases, but with the caveat that some core benefits of Pulsar are lost.
 
 > With non-persistent topics, message data lives only in memory, without a specific buffer - which means data *is not* buffered in memory. The received messages are immediately transmitted to all *connected consumers*. If a message broker fails or message data can otherwise not be retrieved from memory, your message data may be lost. Use non-persistent topics only if you're *certain* that your use case requires it and can sustain it.
 
-By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [`pulsar-admin`](/tools/pulsar-admin/).
+By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 Currently, non-persistent topics which are not partitioned are not persisted to ZooKeeper, which means if the broker owning them crashes, they do not get re-assigned to another broker because they only exist in the owner broker memory. The current workaround is to set the value of `allowAutoTopicCreation` to `true` and `allowAutoTopicCreationType` to `non-partitioned` (they are default values) in broker configuration.
 
@@ -1041,7 +1040,7 @@ The following table outlines the available system topics for each specific names
 
 :::note
 
-* You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](/tools/pulsar-admin).
+* You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 * Since Pulsar version 2.11.0, system topics are enabled by default.
   In earlier versions, you need to change the following configurations in the `conf/broker.conf` or `conf/standalone.conf` file to enable system topics.

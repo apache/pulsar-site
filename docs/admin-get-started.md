@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Admin setup
 
-Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](https://pulsar.apache.org/api/admin/)) requires some special setup if you have enabled authentication in your Pulsar instance.
+Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](pathname:///api/admin/) requires some special setup if you have enabled authentication in your Pulsar instance.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -19,7 +19,7 @@ Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-If you have enabled authentication, you need to provide an auth configuration to use the `pulsar-admin` tool. By default, the configuration for the `pulsar-admin` tool is in the [`conf/client.conf`](reference-configuration.md#client) file. The following are the available parameters:
+If you have enabled authentication, you need to provide an auth configuration to use the `pulsar-admin` tool. By default, the configuration for the `pulsar-admin` tool is in the [`conf/client.conf`](https://github.com/apache/pulsar/blob/master/conf/client.conf) file. The following are the available parameters:
 
 |Name|Description|Default|
 |----|-----------|-------|
@@ -34,9 +34,9 @@ If you have enabled authentication, you need to provide an auth configuration to
 </TabItem>
 <TabItem value="REST API">
 
-You can find details for the REST API exposed by Pulsar brokers in the [REST API doc](reference-rest-api-overview.md).
+You can find details for the REST API exposed by Pulsar brokers in the [REST API doc](pathname:///admin-rest-api/?version=@pulsar:version_number@).
 
-If you want to test REST APIs in postman, you can use the REST API JSON files [here](https://pulsar.apache.org/swagger/master/).
+If you want to test REST APIs in postman, you can use the REST API JSON files [here](pathname:///swagger/).
 
 </TabItem>
 <TabItem value="Java">

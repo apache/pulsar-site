@@ -52,3 +52,27 @@ $ pulsar-client consume [options]
 | `-ac, --auto_ack_chunk_q_full` | Auto ack for oldest message on queue is full|false|
 | `-pm, --pool-messages` | Use the pooled message|true|
 
+## read
+
+Read messages from a specified topic
+
+
+```shell
+$ pulsar-client read [options]
+```
+
+|Flag|Description|Default|
+|---|---|---|
+| `-i, --start-message-id-inclusive` | Whether to include the position specified by -m option.|false|
+| `-mc, --max_chunked_msg` | Max pending chunk messages|0|
+| `-n, --num-messages` | Number of messages to read, 0 means to read forever.|1|
+| `--hide-content` | Do not write the message to console.|false|
+| `-ekv, --encryption-key-value` | The URI of private key to decrypt payload, for example file:///path/to/private.key or data:application/x-pem-file;base64,*****|null|
+| `-pm, --pool-messages` | Use the pooled message|true|
+| `-q, --queue-size` | Reader receiver queue size.|0|
+| `--hex` | Display binary messages in hex.|false|
+| `-r, --rate` | Rate (in msg/sec) at which to read, value 0 means to read messages as fast as possible.|0.0|
+| `-m, --start-message-id` | Initial reader position, it can be 'latest', 'earliest' or '<ledgerId>:<entryId>'|latest|
+| `-ac, --auto_ack_chunk_q_full` | Auto ack for oldest message on queue is full|false|
+| `-st, --schema-type` | Set a schema type on the reader, it can be 'bytes' or 'auto_consume'|bytes|
+

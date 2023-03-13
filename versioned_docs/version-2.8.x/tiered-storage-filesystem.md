@@ -29,7 +29,7 @@ This example uses Pulsar 2.5.1.
 
    * Download the Pulsar tarball from the [Apache mirror](https://archive.apache.org/dist/pulsar/pulsar-2.5.1/apache-pulsar-2.5.1-bin.tar.gz)
 
-   * Download the Pulsar tarball from the Pulsar [download page](https://pulsar.apache.org/download)
+   * Download the Pulsar tarball from the Pulsar [download page](pathname:///download)
 
    * Use the [wget](https://www.gnu.org/software/wget) command to dowload the Pulsar tarball.
 
@@ -115,8 +115,8 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 
   Parameter| Description | Example value
   |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|2
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|5000
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|10
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|50000
 
 </TabItem>
 <TabItem value="NFS">
@@ -133,8 +133,8 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 
   Parameter| Description | Example value
   |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|2
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|5000
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|10
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|50000
 
 </TabItem>
 
@@ -477,7 +477,7 @@ Execute the following commands in the repository where you download Pulsar tarba
    
    ```
 
-2. To ensure the data generated is not deleted immediately, it is recommended to set the [retention policy](https://pulsar.apache.org/docs/en/next/cookbooks-retention-expiry/#retention-policies), which can be either a **size** limit or a **time** limit. The larger value you set for the retention policy, the longer the data can be retained.
+2. To ensure the data generated is not deleted immediately, it is recommended to set the [retention policy](cookbooks-retention-expiry.md#retention-policies), which can be either a **size** limit or a **time** limit. The larger value you set for the retention policy, the longer the data can be retained.
 
    ```
    

@@ -1,4 +1,4 @@
-const React = require("react");
+import * as React from "react";
 import Layout from "@theme/Layout";
 import { getVersion, getApiVersion } from "../utils/index.js";
 
@@ -102,11 +102,6 @@ class RestApi extends React.Component {
       "https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js"
     );
     const script = document.querySelector(".container script");
-    console.log(
-      "script: ",
-      script,
-      "/swagger/" + version + "/" + apiversion + "/swagger.json"
-    );
     wrapper.insertBefore(redoc, script);
     wrapper.insertBefore(redocLink, script);
   }

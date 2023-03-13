@@ -70,8 +70,8 @@ You can configure the Aliyun OSS offloader driver in the configuration file `bro
   | --- | --- | --- |
   | `managedLedgerOffloadReadBufferSizeInBytes` | Size of block read | 1 MB |
   | `managedLedgerOffloadMaxBlockSizeInBytes` | Size of block write | 64 MB |
-  | `managedLedgerMinLedgerRolloverTimeMinutes` | Minimum time between ledger rollover for a topic<br /><br />**Note**: it is not recommended that you set this configuration in the production environment. | 2 |
-  | `managedLedgerMaxEntriesPerLedger` | Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended that you set this configuration in the production environment. | 5000 |
+  | `managedLedgerMinLedgerRolloverTimeMinutes` | Minimum time between ledger rollover for a topic<br /><br />**Note**: it is not recommended that you set this configuration in the production environment. | 10 |
+  | `managedLedgerMaxEntriesPerLedger` | Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended that you set this configuration in the production environment. | 50000 |
 
 #### Bucket (required)
 
@@ -146,7 +146,7 @@ Automatic offloading runs when a new segment is added to a topic log. If you set
 
 You can configure the threshold size using CLI tools, such as pulsar-admin.
 
-The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace level offload policies. Each namespace can have its own offload policy. If you want to set offload policy for each namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](/tools/pulsar-admin/) command.
+The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace level offload policies. Each namespace can have its own offload policy. If you want to set offload policy for each namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-offload-policies) command.
  
 #### Example
 
@@ -160,7 +160,7 @@ bin/pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-namesp
 
 :::tip
 
-For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, and default values, see [here](/tools/pulsar-admin/). 
+For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin). 
 
 :::
 
@@ -194,7 +194,7 @@ For individual topics, you can trigger the Aliyun OSS offloader manually using o
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, and default values, see [here](/tools/pulsar-admin/). 
+  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin). 
 
   :::
 
@@ -251,7 +251,7 @@ For individual topics, you can trigger the Aliyun OSS offloader manually using o
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, and default values, see [here](/tools/pulsar-admin/). 
+  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin). 
 
   :::
 

@@ -153,7 +153,7 @@ handles all message transfers. Pulsar clusters typically consist of multiple bro
 
 #### Dispatcher
 
-An asynchronous TCP server used for all data transfers in and out of a Pulsar [broker](#broker)](#broker). The Pulsar
+An asynchronous TCP server used for all data transfers in and out of a Pulsar [broker](#broker). The Pulsar
 dispatcher uses a custom binary protocol for all communications.
 
 ### Storage

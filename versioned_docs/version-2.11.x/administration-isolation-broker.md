@@ -25,7 +25,7 @@ To set a namespace isolation policy for a broker cluster, you can use one of the
 pulsar-admin ns-isolation-policy set options
 ```
 
-For more information about the command `pulsar-admin ns-isolation-policy set options`, see [Pulsar admin docs](https://pulsar.apache.org/tools/pulsar-admin/).
+For more information about the command `pulsar-admin ns-isolation-policy set options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 **Example**
 

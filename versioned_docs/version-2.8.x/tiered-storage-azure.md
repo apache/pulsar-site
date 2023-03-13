@@ -23,7 +23,7 @@ This example uses Pulsar 2.6.2.
 
    * Download from the [Apache mirror](https://archive.apache.org/dist/pulsar/pulsar-2.6.2/apache-pulsar-2.6.2-bin.tar.gz)
 
-   * Download from the Pulsar [downloads page](https://pulsar.apache.org/download)
+   * Download from the Pulsar [downloads page](pathname:///download)
 
    * Use [wget](https://www.gnu.org/software/wget):
 
@@ -98,8 +98,8 @@ You can configure the Azure BlobStore offloader driver in the configuration file
   |---|---|---
   `managedLedgerOffloadReadBufferSizeInBytes`|Size of block read|1 MB
   `managedLedgerOffloadMaxBlockSizeInBytes`|Size of block write|64 MB
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|2
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|5000
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|10
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|50000
 
 #### Bucket (required)
 
@@ -153,7 +153,7 @@ Automatic offloading runs when a new segment is added to a topic log. If you set
 
 You can configure the threshold size using CLI tools, such as pulsar-admin.
 
-The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace level offload policies. Each namespace can have its own offload policy. If you want to set offload policy for each namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](https://pulsar.apache.org/tools/pulsar-admin/2.6.0-SNAPSHOT/#-em-set-offload-policies-em-) command.
+The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace level offload policies. Each namespace can have its own offload policy. If you want to set offload policy for each namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-offload-policies) command.
  
 #### Example
 
@@ -167,7 +167,7 @@ bin/pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-namesp
 
 :::tip
 
-For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, and default values, see [here](https://pulsar.apache.org/tools/pulsar-admin/2.6.0-SNAPSHOT/#-em-set-offload-threshold-em-). 
+For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin). 
 
 :::
 
@@ -201,7 +201,7 @@ For individual topics, you can trigger Azure BlobStore offloader manually using 
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, and default values, see [here](https://pulsar.apache.org/tools/pulsar-admin/2.6.0-SNAPSHOT/#-em-offload-em-). 
+  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin). 
 
   :::
 
@@ -258,7 +258,7 @@ For individual topics, you can trigger Azure BlobStore offloader manually using 
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, and default values, see [here](https://pulsar.apache.org/tools/pulsar-admin/2.6.0-SNAPSHOT/#-em-offload-status-em-). 
+  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin). 
 
   :::
 

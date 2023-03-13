@@ -25,7 +25,7 @@ This example uses Pulsar 2.5.1.
 
    * Download from the [Apache mirror](https://archive.apache.org/dist/pulsar/pulsar-2.5.1/apache-pulsar-2.5.1-bin.tar.gz)
 
-   * Download from the Pulsar [download page](https://pulsar.apache.org/download)
+   * Download from the Pulsar [download page](pathname:///download)
 
    * Use [wget](https://www.gnu.org/software/wget)
 
@@ -104,8 +104,8 @@ You can configure filesystem offloader driver in the configuration file `broker.
 
   Optional configuration| Description | Example value
   |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|2
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|5000
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|10
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended that you set this configuration in the production environment.|50000
 
 #### Offloader driver (required)
 

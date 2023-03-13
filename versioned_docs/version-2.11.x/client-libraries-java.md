@@ -79,7 +79,7 @@ If you have multiple brokers, separate `IP:port` by commas:
 pulsar://localhost:6550,localhost:6651,localhost:6652
 ```
 
-If you use [TLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
+If you use [mTLS authentication](security-tls-authentication.md), add `+ssl` in the scheme:
 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651
@@ -1161,7 +1161,7 @@ The producer above is equivalent to a `Producer<byte[]>` (in fact, you should *a
 ## Authentication
 
 Pulsar Java clients currently support the following authentication mechansims:
-* [TLS](security-tls-authentication.md#configure-tls-authentication-in-pulsar-clients)
+* [mTLS](security-tls-authentication.md#configure-mtls-authentication-in-pulsar-clients)
 * [JWT](security-jwt.md#configure-jwt-authentication-in-pulsar-clients)
 * [Athenz](security-athenz.md#configure-athenz-authentication-in-pulsar-clients)
 * [Kerberos](security-kerberos.md#configure-kerberos-authentication-in-pulsar-clients)
@@ -1205,20 +1205,34 @@ This is an example of how to construct a Java Pulsar client to use automatic clu
 
 ```java
 private PulsarClient getAutoFailoverClient() throws PulsarClientException {
-    ServiceUrlProvider failover = AutoClusterFailover.builder()
-            .primary("pulsar://localhost:6650")
-            .secondary(Collections.singletonList("pulsar://other1:6650", "pulsar://other2:6650"))
-            .failoverDelay(30, TimeUnit.SECONDS)
-            .switchBackDelay(60, TimeUnit.SECONDS)
-            .checkInterval(1000, TimeUnit.MILLISECONDS)
-            .secondaryTlsTrustCertsFilePath("/path/to/ca.cert.pem")
-            .secondaryAuthentication("org.apache.pulsar.client.impl.auth.AuthenticationTls",
-                    "tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem")
+    String primaryUrl = "pulsar+ssl://localhost:6651";
+    String secondaryUrl = "pulsar+ssl://localhost:6661";
 
-            .build();
+    String secondaryTlsTrustCertsFilePath = "secondary/path";
+    Authentication secondaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/secondary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/secondary-role.key-pk8.pem");
+
+    // You can put more failover cluster config in to map
+    Map<String, String> secondaryTlsTrustCertsFilePaths = new HashMap<>();
+    secondaryTlsTrustCertsFilePaths.put(secondaryUrl, secondaryTlsTrustCertsFilePath);
+
+    Map<String, Authentication> secondaryAuthentications = new HashMap<>();
+    secondaryAuthentications.put(secondaryUrl, secondaryAuthentication);
+
+    ServiceUrlProvider failover = AutoClusterFailover.builder()
+        .primary(primaryUrl)
+        .secondary(List.of(secondaryUrl))
+        .failoverDelay(30, TimeUnit.SECONDS)
+        .switchBackDelay(60, TimeUnit.SECONDS)
+        .checkInterval(1000, TimeUnit.MILLISECONDS)
+        .secondaryTlsTrustCertsFilePath(secondaryTlsTrustCertsFilePaths)
+        .secondaryAuthentication(secondaryAuthentications)
+        .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
-            .build();
+        .build();
 
     failover.initialize(pulsarClient);
     return pulsarClient;
@@ -1234,8 +1248,8 @@ Parameter|Default value|Required?|Description
 `failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster. 
 `switchBackDelay`|N/A|Yes|The delay before the Pulsar client switches from the backup cluster to the primary cluster.<br /><br />Automatic failover switchover is controlled by a probe task: <br /> 1) After the Pulsar client switches from the primary cluster to the backup cluster, the probe task continues to check the status of the primary cluster. <br /> 2) If the primary cluster functions well and continuously remains active longer than `switchBackDelay`, the Pulsar client switches back to the primary cluster.
 `checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
-`secondaryTlsTrustCertsFilePath`|N/A|No|Path to the trusted TLS certificate file of the backup cluster.
-`secondaryAuthentication`|N/A|No|Authentication of the backup cluster.
+`secondaryTlsTrustCertsFilePath`|N/A|No|A map of certificate file. Keys are service urls of backup cluster. Values are paths to the trusted TLS certificate file of the backup cluster.
+`secondaryAuthentication`|N/A|No|A map of Authentication config. Keys are service urls of backup cluster. Values are Authentication object of the backup cluster.
 
 </TabItem>
 <TabItem value="Controlled cluster-level failover">
@@ -1252,17 +1266,14 @@ public PulsarClient getControlledFailoverClient() throws IOException {
     header.put("clusterA", "tokenA");
     header.put("clusterB", "tokenB");
 
-    ServiceUrlProvider provider =
-            ControlledClusterFailover.builder()
-                    .defaultServiceUrl("pulsar://localhost:6650")
-                    .checkInterval(1, TimeUnit.MINUTES)
-                    .urlProvider("http://localhost:8080/test")
-                    .urlProviderHeader(header)
-                    .build();
+    ServiceUrlProvider provider = ControlledClusterFailover.builder()
+        .defaultServiceUrl("pulsar://localhost:6650")
+        .checkInterval(1, TimeUnit.MINUTES)
+        .urlProvider("http://localhost:8080/test")
+        .urlProviderHeader(header)
+        .build();
 
-    PulsarClient pulsarClient =
-            PulsarClient.builder()
-                    .build();
+    PulsarClient pulsarClient = PulsarClient.builder().build();
 
     provider.initialize(pulsarClient);
     return pulsarClient;

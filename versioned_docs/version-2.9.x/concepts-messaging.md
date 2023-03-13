@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) pattern (often abbreviated to pub-sub). In this pattern, [producers](#producers) publish messages to [topics](#topics); [consumers](#consumers) [subscribe](#subscription-modes) to those topics, process incoming messages, and send [acknowledgements](#acknowledgement) to the broker when processing is finished.
 
-When a subscription is created, Pulsar [retains](concepts-architecture-overview.md#persistent-storage) all messages, even if the consumer is disconnected. The retained messages are discarded only when a consumer acknowledges that all these messages are processed successfully. 
+When a subscription is created, Pulsar [retains](concepts-architecture-overview.md#persistent-storage) all messages, even if the consumer is disconnected. The retained messages are discarded only when a consumer acknowledges that all these messages are processed successfully.
 
 If the consumption of a message fails and you want this message to be consumed again, then you can enable the automatic redelivery of this message by sending a [negative acknowledgement](#negative-acknowledgement) to the broker or enabling the [acknowledgement timeout](#acknowledgement-timeout) for unacknowledged messages.
 
@@ -26,10 +26,10 @@ Component | Description
 Value / data payload | The data carried by the message. All Pulsar messages contain raw bytes, although message data can also conform to data [schemas](schema-get-started.md).
 Key | Messages are optionally tagged with keys, which is useful for things like [topic compaction](concepts-topic-compaction.md).
 Properties | An optional key/value map of user-defined properties.
-Producer name | The name of the producer who produces the message. If you do not specify a producer name, the default name is used. 
+Producer name | The name of the producer who produces the message. If you do not specify a producer name, the default name is used.
 Sequence ID | Each Pulsar message belongs to an ordered sequence on its topic. The sequence ID of the message is its order in that sequence.
 Publish time | The timestamp of when the message is published. The timestamp is automatically applied by the producer.
-Event time | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`. 
+Event time | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.
 TypedMessageBuilder | It is used to construct a message. You can set message properties such as the message key, message value with `TypedMessageBuilder`. <br /> When you set `TypedMessageBuilder`, set the key as a string. If you set the key as other types, for example, an AVRO object, the key is sent as bytes, and it is difficult to get the AVRO object back on the consumer.
 
 The default size of a message is 5 MB. You can configure the max size of a message with the following configurations.
@@ -37,19 +37,19 @@ The default size of a message is 5 MB. You can configure the max size of a messa
 - In the `broker.conf` file.
 
   ```bash
-  
+
   # The max size of a message (in bytes).
   maxMessageSize=5242880
-  
+
   ```
 
 - In the `bookkeeper.conf` file.
 
   ```bash
-  
+
   # The max size of the netty frame (in bytes). Any messages received larger than this value are rejected. The default value is 5 MB.
   nettyMaxFrameSizeBytes=5253120
-  
+
   ```
 
 > For more information on Pulsar messages, see Pulsar [binary protocol](developing-binary-protocol.md).
@@ -79,7 +79,7 @@ You can have different types of access modes on topics for producers.
 
 :::note
 
-Once an application creates a producer with `Exclusive` or `WaitForExclusive` access mode successfully, the instance of this application is guaranteed to be the **only writer** to the topic. Any other producers trying to produce messages on this topic will either get errors immediately or have to wait until they get the `Exclusive` access. 
+Once an application creates a producer with `Exclusive` or `WaitForExclusive` access mode successfully, the instance of this application is guaranteed to be the **only writer** to the topic. Any other producers trying to produce messages on this topic will either get errors immediately or have to wait until they get the `Exclusive` access.
 For more information, see [PIP 68: Exclusive Producer](https://github.com/apache/pulsar/wiki/PIP-68:-Exclusive-Producer).
 
 :::
@@ -106,7 +106,7 @@ In general, a batch is acknowledged when all of its messages are acknowledged by
 
 To avoid redelivering acknowledged messages in a batch to the consumer, Pulsar introduces batch index acknowledgement since Pulsar 2.6.0. When batch index acknowledgement is enabled, the consumer filters out the batch index that has been acknowledged and sends the batch index acknowledgement request to the broker. The broker maintains the batch index acknowledgement status and tracks the acknowledgement status of each batch index to avoid dispatching acknowledged messages to the consumer. The batch is deleted when all indices of the messages in it are acknowledged.
 
-By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgement by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgement results in more memory overheads. 
+By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgement by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgement results in more memory overheads.
 
 ### Chunking
 Before you enable chunking, read the following instructions.
@@ -136,7 +136,7 @@ When multiple publishers publish chunked messages into a single topic, the broke
 
 A consumer is a process that attaches to a topic via a subscription and then receives messages.
 
-A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.  
+A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive modes
 
@@ -200,7 +200,7 @@ If you want to acknowledge messages negatively, you can use the following API.
 
 ```java
 
-//With calling this api, messages are negatively acknowledged 
+//With calling this api, messages are negatively acknowledged
 consumer.negativeAcknowledge(msg);
 
 ```
@@ -217,7 +217,7 @@ If a message is not consumed successfully, and you want the broker to redeliver 
 
 :::note
 
-- If batching is enabled, all messages in one batch are redelivered to the consumer.  
+- If batching is enabled, all messages in one batch are redelivered to the consumer.
 - The negative acknowledgement is preferable over the acknowledgement timeout, since negative acknowledgement controls the redelivery of individual messages more precisely and avoids invalid redeliveries when the message processing time exceeds the acknowledgement timeout.
 
 :::
@@ -241,7 +241,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 ```
 
-The default dead letter topic uses this format: 
+The default dead letter topic uses this format:
 
 ```
 
@@ -265,7 +265,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 ```
 
-Dead letter topic depends on message redelivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout. 
+Dead letter topic depends on message redelivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout.
 
 :::note
 
@@ -323,7 +323,7 @@ Topic name component | Description
 `namespace`          | The administrative unit of the topic, which acts as a grouping mechanism for related topics. Most topic configuration is performed at the [namespace](#namespaces) level. Each tenant has one or multiple namespaces.
 `topic`              | The final part of the name. Topic names have no special meaning in a Pulsar instance.
 
-> **No need to explicitly create new topics**  
+> **No need to explicitly create new topics**
 > You do not need to explicitly create topics in Pulsar. If a client attempts to write or receive messages to/from a topic that does not yet exist, Pulsar creates that topic under the namespace provided in the [topic name](#topics) automatically.
 > If no tenant or namespace is specified when a client creates a topic, the topic is created in the default tenant and namespace. You can also create a topic in a specified tenant and namespace, such as `persistent://my-tenant/my-namespace/my-topic`. `persistent://my-tenant/my-namespace/my-topic` means the `my-topic` topic is created in the `my-namespace` namespace of the `my-tenant` tenant.
 
@@ -337,7 +337,7 @@ A subscription is a named configuration rule that determines how messages are de
 
 ![Subscription modes](/assets/pulsar-subscription-types.png)
 
-> **Pub-Sub or Queuing**  
+> **Pub-Sub or Queuing**
 > In Pulsar, you can use different subscriptions flexibly.
 > * If you want to achieve traditional "fan-out pub-sub messaging" among consumers, specify a unique subscription name for each consumer. It is exclusive subscription mode.
 > * If you want to achieve "message queuing" among consumers, share the same subscription name among multiple consumers(shared, failover, key_shared).
@@ -374,7 +374,7 @@ In *shared* or *round robin* mode, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-> **Limitations of shared mode**  
+> **Limitations of shared mode**
 > When using shared mode, be aware that:
 > * Message ordering is not guaranteed.
 > * You cannot use cumulative acknowledgment with shared mode.
@@ -388,15 +388,15 @@ In *Key_Shared* mode, multiple consumers can attach to the same subscription. Me
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.png)
 
 Note that when the consumers are using the Key_Shared subscription mode, you need to **disable batching** or **use key-based batching** for the producers. There are two reasons why the key-based batching is necessary for Key_Shared subscription mode:
-1. The broker dispatches messages according to the keys of the messages, but the default batching approach might fail to pack the messages with the same key to the same batch. 
-2. Since it is the consumers instead of the broker who dispatch the messages from the batches, the key of the first message in one batch is considered as the key of all messages in this batch, thereby leading to context errors. 
+1. The broker dispatches messages according to the keys of the messages, but the default batching approach might fail to pack the messages with the same key to the same batch.
+2. Since it is the consumers instead of the broker who dispatch the messages from the batches, the key of the first message in one batch is considered as the key of all messages in this batch, thereby leading to context errors.
 
-The key-based batching aims at resolving the above-mentioned issues. This batching method ensures that the producers pack the messages with the same key to the same batch. The messages without a key are packed into one batch and this batch has no key. When the broker dispatches messages from this batch, it uses `NON_KEY` as the key. In addition, each consumer is associated with **only one** key and should receive **only one message batch** for the connected key. By default, you can limit batching by configuring the number of messages that producers are allowed to send. 
+The key-based batching aims at resolving the above-mentioned issues. This batching method ensures that the producers pack the messages with the same key to the same batch. The messages without a key are packed into one batch and this batch has no key. When the broker dispatches messages from this batch, it uses `NON_KEY` as the key. In addition, each consumer is associated with **only one** key and should receive **only one message batch** for the connected key. By default, you can limit batching by configuring the number of messages that producers are allowed to send.
 
 Below are examples of enabling the key-based batching under the Key_Shared subscription mode, with `client` being the Pulsar client that you created.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
@@ -436,7 +436,7 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </Tabs>
 ````
 
-> **Limitations of Key_Shared mode**  
+> **Limitations of Key_Shared mode**
 > When you use Key_Shared mode, be aware that:
 > * You need to specify a key or orderingKey for messages.
 > * You cannot use cumulative acknowledgment with Key_Shared mode.
@@ -452,7 +452,7 @@ When a consumer subscribes to a Pulsar topic, by default it subscribes to one sp
 
 When subscribing to multiple topics, the Pulsar client automatically makes a call to the Pulsar API to discover the topics that match the regex pattern/list, and then subscribe to all of them. If any of the topics do not exist, the consumer auto-subscribes to them once the topics are created.
 
-> **No ordering guarantees across multiple topics**  
+> **No ordering guarantees across multiple topics**
 > When a producer sends messages to a single topic, all messages are guaranteed to be read from that topic in the same order. However, these guarantees do not hold across multiple topics. So when a producer sends message to multiple topics, the order in which messages are read from those topics is not guaranteed to be the same.
 
 The following are multi-topic subscription examples for Java.
@@ -510,9 +510,9 @@ When publishing to partitioned topics, you must specify a *routing mode*. The ro
 
 There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} available:
 
-Mode     | Description 
+Mode     | Description
 :--------|:------------
-`RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. 
+`RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.
 `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
 
@@ -520,7 +520,7 @@ Mode     | Description
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by {@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 Ordering guarantee | Description | Routing Mode and Key
 :------------------|:------------|:------------
@@ -529,9 +529,9 @@ Per-producer       | All the messages from the same producer will be in order. |
 
 ### Hashing scheme
 
-{@inject: javadoc:HashingScheme:/client/org/apache/pulsar/client/api/HashingScheme} is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
 
-There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`. 
+There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producer is `JavaStringHash`.
 Please pay attention that `JavaStringHash` is not useful when producers can be from different multiple language clients, under this use case, it is recommended to use `Murmur3_32Hash`.
 
@@ -558,7 +558,7 @@ In non-persistent topics, brokers immediately deliver messages to all connected 
 
 > With non-persistent topics, message data lives only in memory. If a message broker fails or message data can otherwise not be retrieved from memory, your message data may be lost. Use non-persistent topics only if you're *certain* that your use case requires it and can sustain it.
 
-By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [`pulsar-admin`](https://pulsar.apache.org/tools/pulsar-admin/).
+By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 ### Performance
 
@@ -676,7 +676,7 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 > You can find more in-depth information in [this post](https://www.splunk.com/en_us/blog/it/exactly-once-is-not-exactly-the-same.html).
 
 ## Delayed message delivery
-Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.  
+Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.
 
 Delayed message delivery only works in Shared subscription mode. In Exclusive and Failover subscription modes, the delayed message is dispatched immediately.
 
@@ -686,7 +686,7 @@ The diagram below illustrates the concept of delayed message delivery:
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
 
-### Broker 
+### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:
 
 ```
@@ -712,7 +712,7 @@ isDelayedDeliveryDeliverAtTimeStrict=false
 
 ```
 
-### Producer 
+### Producer
 The following is an example of delayed message delivery for a producer in Java:
 
 ```java
@@ -721,4 +721,3 @@ The following is an example of delayed message delivery for a producer in Java:
 producer.newMessage().deliverAfter(3L, TimeUnit.Minute).value("Hello Pulsar!").send();
 
 ```
-

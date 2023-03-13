@@ -6,7 +6,7 @@ sidebar_label: "Debezium source connector"
 
 :::note
 
-You can download all the Pulsar connectors on [download page](https://pulsar.apache.org/download).
+You can download all the Pulsar connectors on [download page](pathname:///download).
 
 ::::
 
@@ -23,7 +23,7 @@ The configuration of the Debezium source connector has the following properties.
 | `database.port` | true | null | The port number of a database server.|
 | `database.user` | true | null | The name of a database user that has the required privileges. |
 | `database.password` | true | null | The password for a database user that has the required privileges. |
-| `database.server.id` | true | null | The connector’s identifier that must be unique within a database cluster and similar to the database’s server-id configuration property. |
+| `database.server.id` | true | null | The connector's identifier that must be unique within a database cluster and similar to the database's server-id configuration property. |
 | `database.server.name` | true | null | The logical name of a database server/cluster, which forms a namespace and is used in all the names of Kafka topics to which the connector writes, the Kafka Connect schema names, and the namespaces of the corresponding Avro schema when the Avro Connector is used. |
 | `database.whitelist` | false | null | A list of all databases hosted by this server that is monitored by the connector.<br /><br /> This is optional, and there are other properties for listing databases and tables to include or exclude from monitoring. |
 | `key.converter` | true | null | The converter provided by Kafka Connect to convert the record key. |

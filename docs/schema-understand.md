@@ -250,7 +250,7 @@ Schema validation enforcement enables brokers to reject producers/consumers with
 
 By default, schema validation enforcement is only **disabled** (`isSchemaValidationEnforced`=`false`) for producers, which means:
 * A producer without a schema can produce any messages to a topic with schemas, which may result in producing trash data to the topic. 
-* Clients that don’t support schema are allowed to produce messages to a topic with schemas.
+* Clients that don't support schema are allowed to produce messages to a topic with schemas.
 
 For how to enable schema validation enforcement, see [Manage schema validation](admin-api-schemas.md#manage-schema-validation).
 
@@ -343,9 +343,9 @@ By default, schema `AutoUpdate` is enabled. When a schema passes the schema comp
 
 For a producer, the `AutoUpdate` happens in the following cases:
 
-* If a **topic doesn’t have a schema** (meaning the data is in raw bytes), Pulsar registers the schema automatically.
+* If a **topic doesn't have a schema** (meaning the data is in raw bytes), Pulsar registers the schema automatically.
 
-* If a **topic has a schema** and the **producer doesn’t carry any schema** (meaning it produces raw bytes):
+* If a **topic has a schema** and the **producer doesn't carry any schema** (meaning it produces raw bytes):
 
     * If [schema validation enforcement](#schema-validation-enforcement) is **disabled** (`schemaValidationEnforced`=`false`) in the namespace that the topic belongs to, the producer is allowed to connect to the topic and produce data. 
   

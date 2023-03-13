@@ -49,7 +49,7 @@ Rack-aware placement policy enforces different data replicas to be placed in dif
 
 #### Qualified rack size of bookies
 
-When the available rack size of bookies can meet the requirements configured on a topic, the rack-aware placement policy can work well and you don’t need any extra configurations.
+When the available rack size of bookies can meet the requirements configured on a topic, the rack-aware placement policy can work well and you don't need any extra configurations.
 
 For example, the BookKeeper cluster has 4 racks and 13 bookie instances as shown in the following diagram. When a topic is configured with `EnsembleSize=3, WriteQuorum=3, AckQuorum=2`, the BookKeeper client chooses one bookie instance from three different racks to write data to, such as Bookie2, Bookie8, and Bookie12.
 
@@ -229,7 +229,7 @@ To configure bookie affinity groups, you can use one of the following methods.
 pulsar-admin namespaces set-bookie-affinity-group options
 ```
 
-For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [Pulsar admin docs](/tools/pulsar-admin/).
+For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 **Example**
 
@@ -249,7 +249,7 @@ bin/pulsar-admin namespaces set-bookie-affinity-group public/default \
 - Do not set a bookie rack name to slash (`/`) or an empty string (`""`) if you use Pulsar earlier than 2.7.5, 2.8.3, and 2.9.2. If you use Pulsar 2.7.5, 2.8.3, 2.9.2 or later versions, it falls back to `/default-rack` or `/default-region/default-rack`.
 - When `RackawareEnsemblePlacementPolicy` is enabled, the rack name is not allowed to contain one slash (`/`) except for the beginning and end of the rack name string. For example, a rack name like `/rack0` is allowed, but `/rack/0` is invalid.
 - When `RegionAwareEnsemblePlacementPolicy` is enabled, the rack name can only contain one slash (`/`) except for the beginning and end of the rack name string. For example, rack name like `/region0/rack0` is allowed, but `/region0rack0` and `/region0/rack/0` are invalid.
-For the bookie rack name restrictions, see [pulsar-admin bookies set-bookie-rack](/tools/pulsar-admin/).
+For the bookie rack name restrictions, see [pulsar-admin bookies set-bookie-rack](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/bookies?id=set-bookie-rack).
 
 :::
 

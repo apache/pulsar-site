@@ -6,7 +6,7 @@ sidebar_label: "Kafka source connector"
 
 :::note
 
-You can download all the Pulsar connectors on [download page](https://pulsar.apache.org/download).
+You can download all the Pulsar connectors on [download page](pathname:///download).
 
 ::::
 
@@ -213,7 +213,7 @@ This example explains how to create a Kafka source connector in an on-premises c
    PULSAR_HOME/bin/pulsar-admin sources available-sources
    ```
 
-4. Create a Kafka source connector on a Pulsar cluster using the [`pulsar-admin sources create`](/tools/pulsar-admin/2.11.0-SNAPSHOT/#-em-create-em--14) command.
+4. Create a Kafka source connector on a Pulsar cluster using the [`pulsar-admin sources create`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/sources?id=create) command.
 
    ```bash
    PULSAR_HOME/bin/pulsar-admin sources create \

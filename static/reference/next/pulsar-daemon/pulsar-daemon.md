@@ -7,6 +7,10 @@ pulsar-daemon has a similar interface to the pulsar command but adds start and s
 ### `start`
 Start a service in the background using nohup.
 
+**Tip**
+
+> You can use flags to perform more tasks. For example, `pulsar-daemon start standalone -nfw -nss` can start Pulsar faster in the background (without function workers and stream storage). `pulsar-daemon start standalone` flags are the same as `pulsar standalone` flags. For the complete flag list, see flags of the `pulsar standalone` command on the [Pulsar Reference Site](https://pulsar.apache.org/reference).
+
 Usage
 
 ```bash

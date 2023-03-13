@@ -295,6 +295,9 @@
                     },
                     "type": "object"
                 },
+                "inputTypeClassName": {
+                    "type": "string"
+                },
                 "inputs": {
                     "items": {
                         "type": "string"
@@ -328,6 +331,9 @@
                     "type": "string"
                 },
                 "outputSerdeClassName": {
+                    "type": "string"
+                },
+                "outputTypeClassName": {
                     "type": "string"
                 },
                 "parallelism": {
@@ -374,6 +380,9 @@
                         "type": "object"
                     },
                     "type": "object"
+                },
+                "skipToLatest": {
+                    "type": "boolean"
                 },
                 "subName": {
                     "type": "string"
@@ -1018,7 +1027,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getBuiltinFunction",
+                "operationId": "FunctionsBase_getBuiltinFunction",
                 "produces": [
                     "application/json"
                 ],
@@ -1054,7 +1063,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "reloadBuiltinFunctions",
+                "operationId": "FunctionsBase_reloadBuiltinFunctions",
                 "produces": [
                     "application/json"
                 ],
@@ -1082,7 +1091,7 @@
                 ],
                 "deprecated": true,
                 "description": "",
-                "operationId": "getConnectorsList",
+                "operationId": "FunctionsBase_getConnectorsList",
                 "produces": [
                     "application/json"
                 ],
@@ -1118,7 +1127,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "listFunctions",
+                "operationId": "FunctionsBase_listFunctions",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1164,7 +1173,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "deregisterFunction",
+                "operationId": "FunctionsBase_deregisterFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1218,7 +1227,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getFunctionInfo",
+                "operationId": "FunctionsBase_getFunctionInfo",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1275,7 +1284,7 @@
                     "multipart/form-data"
                 ],
                 "description": "",
-                "operationId": "registerFunction",
+                "operationId": "FunctionsBase_registerFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1338,7 +1347,7 @@
                     "multipart/form-data"
                 ],
                 "description": "",
-                "operationId": "updateFunction",
+                "operationId": "FunctionsBase_updateFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1409,7 +1418,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "restartFunction",
+                "operationId": "FunctionsBase_restartFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1459,7 +1468,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "startFunction",
+                "operationId": "FunctionsBase_startFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1509,7 +1518,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getFunctionState",
+                "operationId": "FunctionsBase_getFunctionState",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1573,7 +1582,7 @@
                     "multipart/form-data"
                 ],
                 "description": "",
-                "operationId": "putFunctionState",
+                "operationId": "FunctionsBase_putFunctionState",
                 "parameters": [
                     {
                         "in": "path",
@@ -1629,7 +1638,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getFunctionStats",
+                "operationId": "FunctionsBase_getFunctionStats",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1688,7 +1697,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getFunctionStatus",
+                "operationId": "FunctionsBase_getFunctionStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1747,7 +1756,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "stopFunction",
+                "operationId": "FunctionsBase_stopFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1797,7 +1806,7 @@
                     "multipart/form-data"
                 ],
                 "description": "",
-                "operationId": "triggerFunction",
+                "operationId": "FunctionsBase_triggerFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1883,7 +1892,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "restartFunction",
+                "operationId": "FunctionsBase_restartFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -1943,7 +1952,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "startFunction",
+                "operationId": "FunctionsBase_startFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -2000,7 +2009,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getFunctionInstanceStats",
+                "operationId": "FunctionsBase_getFunctionInstanceStats",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -2066,7 +2075,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "getFunctionInstanceStatus",
+                "operationId": "FunctionsBase_getFunctionInstanceStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
@@ -2132,7 +2141,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "stopFunction",
+                "operationId": "FunctionsBase_stopFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",

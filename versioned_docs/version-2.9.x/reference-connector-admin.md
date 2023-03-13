@@ -7,6 +7,6 @@ original_id: reference-connector-admin
 
 > **Important**
 >
-> For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](https://pulsar.apache.org/tools/pulsar-admin/).
+> For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 > 
 

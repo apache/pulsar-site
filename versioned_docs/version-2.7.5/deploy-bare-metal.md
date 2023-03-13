@@ -523,7 +523,7 @@ bin/pulsar-admin functions create \
 
 ```
 
-Check whether the function runs as expected by [triggering](functions-deploying.md#triggering-pulsar-functions) the function.
+Check whether the function runs as expected by [triggering](functions-deploy.md#triggering-pulsar-functions) the function.
 
 ```bash
 

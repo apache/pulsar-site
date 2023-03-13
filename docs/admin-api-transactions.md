@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](/tools/pulsar-admin/)
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -390,7 +390,7 @@ The coordinator's internal stats that can be retrieved include:
 * **managedLedgerName:** The name of the managed ledger where the transaction coordinator log is stored. 
 * **managedLedgerInternalStats:** The internal stats of the managed ledger where the transaction coordinator log is stored. See `[managedLedgerInternalStats](admin-api-topics.md#get-internal-stats)` for more details.
 
-Use one of the following ways to get coordinator’s internal stats:
+Use one of the following ways to get coordinator's internal stats:
 ````mdx-code-block
 <Tabs groupId="api-choice"
  defaultValue="pulsar-admin"

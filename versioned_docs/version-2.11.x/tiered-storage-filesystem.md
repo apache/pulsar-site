@@ -59,8 +59,8 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 
   Parameter| Description | Example value
   |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|2
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|5000
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|10
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|50000
 
 </TabItem>
 <TabItem value="NFS">
@@ -76,8 +76,8 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 
   Parameter| Description | Example value
   |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|2
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|5000
+  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|10
+  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|50000
 
 </TabItem>
 
@@ -108,7 +108,7 @@ pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-namespace
 
 :::tip
 
-For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, default values, and shorthands, see [here](/tools/pulsar-admin/).
+For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 :::
 
@@ -138,7 +138,7 @@ To manually trigger the filesystem offloader via CLI tools, you need to specify 
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, default values, and shorthands, see [here](/tools/pulsar-admin/).
+  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
   :::
 
@@ -183,7 +183,7 @@ To manually trigger the filesystem offloader via CLI tools, you need to specify 
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, default values, and shorthands, see [here](/tools/pulsar-admin/).
+  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
   :::
 

@@ -4,6 +4,11 @@ title: Authentication using Athenz
 sidebar_label: "Authentication using Athenz"
 ---
 
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
+
 [Athenz](https://github.com/AthenZ/athenz) is a role-based authentication/authorization system. In Pulsar, you can use Athenz role tokens (also known as *z-tokens*) to establish the identity of the client.
 
 A [decentralized Athenz system](https://github.com/AthenZ/athenz/blob/master/docs/decent_authz_flow.md) contains an [authori**Z**ation **M**anagement **S**ystem](https://github.com/AthenZ/athenz/blob/master/docs/setup_zms.md) (ZMS) server and an [authori**Z**ation **T**oken **S**ystem](https://github.com/AthenZ/athenz/blob/master/docs/setup_zts) (ZTS) server.
@@ -174,7 +179,7 @@ client, err := pulsarNewClient(ClientOptions{
 
 ## Configure Athenz authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/tools/pulsar-admin/), [`pulsar-perf`](reference-cli-tools.md), and [`pulsar-client`](reference-cli-tools.md) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/pulsar-client) use the `conf/client.conf` config file in a Pulsar installation.
 
 You need to add the following authentication parameters to the `conf/client.conf` config file to use Athenz with CLI tools of Pulsar:
 

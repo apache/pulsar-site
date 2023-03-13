@@ -128,7 +128,7 @@ authenticationEnabled: true
 authenticationProviders: [provider1, provider2]
 ```
 
-For [TLS authentication](security-tls-authentication.md) provider, follow the example below to add the required settings.
+For [mTLS authentication](security-tls-authentication.md) provider, follow the example below to add the required settings.
 
 ```properties
 brokerClientAuthenticationPlugin: org.apache.pulsar.client.impl.auth.AuthenticationTls
@@ -203,7 +203,7 @@ Before starting function workers, make sure [function runtime](functions-runtime
   bin/pulsar-daemon start functions-worker
   ```
 
-* To start a function worker in the foreground, you can use the [`pulsar-admin`](/tools/pulsar-admin/) CLI as follows.
+* To start a function worker in the foreground, you can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) CLI as follows.
 
   ```bash
   bin/pulsar functions-worker

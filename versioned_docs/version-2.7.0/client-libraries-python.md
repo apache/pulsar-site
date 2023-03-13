@@ -20,17 +20,15 @@ You can install the [`pulsar-client`](https://pypi.python.org/pypi/pulsar-client
 To install the `pulsar-client` library as a pre-built package using the [pip](https://pip.pypa.io/en/stable/) package manager:
 
 ```shell
-
-$ pip install pulsar-client==@pulsar:version_number@
-
+pip install pulsar-client==@pulsar:version:python@
 ```
 
 Installation via PyPi is available for the following Python versions:
 
-Platform | Supported Python versions
-:--------|:-------------------------
-MacOS <br />  10.13 (High Sierra), 10.14 (Mojave) <br /> | 2.7, 3.7
-Linux | 2.7, 3.4, 3.5, 3.6, 3.7
+| Platform                                                 | Supported Python versions |
+|:---------------------------------------------------------|:--------------------------|
+| MacOS <br />  10.13 (High Sierra), 10.14 (Mojave) <br /> | 2.7, 3.7                  |
+| Linux                                                    | 2.7, 3.4, 3.5, 3.6, 3.7   |
 
 ### Install from source
 
@@ -150,7 +148,7 @@ while True:
 
 In addition to subscribing a consumer to a single Pulsar topic, you can also subscribe to multiple topics simultaneously. To use multi-topic subscriptions, you can supply a regular expression (regex) or a `List` of topics. If you select topics via regex, all topics must be within the same Pulsar namespace.
 
-The following is an example. 
+The following is an example.
 
 ```python
 

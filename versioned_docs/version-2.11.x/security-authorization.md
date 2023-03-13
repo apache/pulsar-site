@@ -31,7 +31,7 @@ If you enable authorization on the broker, the broker checks the authorization o
 
 ### Proxy Roles
 
-By default, the broker treats the connection between a proxy and the broker as a normal user connection. The broker authenticates the user as the role configured in `proxy.conf`(see ["Enable TLS Authentication on Proxies"](security-tls-authentication.md#enable-tls-authentication-on-proxies)). However, when the user connects to the cluster through a proxy, the user rarely requires authentication. The user expects to be able to interact with the cluster as the role for which they have authenticated with the proxy.
+By default, the broker treats the connection between a proxy and the broker as a normal user connection. The broker authenticates the user as the role configured in `proxy.conf` (see [Enable mTLS authentication on proxies](security-tls-authentication.md#enable-mtls-authentication-on-proxies)). However, when the user connects to the cluster through a proxy, the user rarely requires authentication. The user expects to be able to interact with the cluster as the role for which they have authenticated with the proxy.
 
 Pulsar uses *Proxy roles* to enable the authentication. Proxy roles are specified in the broker configuration file, [`conf/broker.conf`](reference-configuration.md#broker). If a client that is authenticated with a broker is one of its `proxyRoles`, all requests from that client must also carry information about the role of the client that is authenticated with the proxy. This information is called the *original principal*. If the *original principal* is absent, the client is not able to access anything.
 
@@ -54,7 +54,7 @@ superUserRoles=my-super-user-1,my-super-user-2,my-proxy-role
 
 Pulsar [instance](reference-terminology.md#instance) administrators or some kind of self-service portal typically provisions a Pulsar [tenant](reference-terminology.md#tenant). 
 
-You can manage tenants using the [`pulsar-admin`](/tools/pulsar-admin/) tool. 
+You can manage tenants using the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin) tool. 
 
 ### Create a new tenant
 

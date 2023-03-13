@@ -3,7 +3,7 @@ id: validate-release-candidate
 title: Verifying release candidates
 ---
 
-The following are manual instructions for reviewing and validating a release candidate.
+This page contains manual instructions for reviewing and verifying a release candidate.
 
 ## Validate the binary distribution
 
@@ -342,13 +342,13 @@ In the cqlsh, create the `pulsar_test_keyspace` keyspace and the `pulsar_test_ta
 cqlsh> CREATE KEYSPACE pulsar_test_keyspace WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
 cqlsh> USE pulsar_test_keyspace;
 cqlsh:pulsar_test_keyspace> CREATE TABLE pulsar_test_table (key text PRIMARY KEY, col text);
-
+cqlsh:pulsar_test_keyspace> exit
 ```
 
 3. Prepare a cassandra sink yaml file and put it under examples directory as `cassandra-sink.yml`.
 
 ```shell
-cat examples/cassandra-sink.yml
+vim examples/cassandra-sink.yml
 ```
 
 The content should be:
@@ -498,6 +498,7 @@ cqlsh:pulsar_test_keyspace> select * from pulsar_test_table;
  key-10 | key-10
 
 (11 rows)
+cqlsh:pulsar_test_keyspace> exit
 ```
 
 8. Delete the sink.

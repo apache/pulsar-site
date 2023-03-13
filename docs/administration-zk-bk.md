@@ -270,7 +270,7 @@ You can set persistence policies for BookKeeper at the [namespace](reference-ter
 
 #### Pulsar-admin
 
-Use the [`set-persistence`](/tools/pulsar-admin/) subcommand and specify a namespace as well as any policies that you want to apply. The available flags are:
+Use the [`set-persistence`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-persistence) subcommand and specify a namespace as well as any policies that you want to apply. The available flags are:
 
 Flag | Description                                                                                                                | Default
 :----|:---------------------------------------------------------------------------------------------------------------------------|:-------
@@ -279,7 +279,7 @@ Flag | Description                                                              
 `-a`, `--bookkeeper-ack-quorum` | Ack quorum (Q<sub>a</sub>) size, Number of guaranteed copies (acks to wait for before a write is considered completed)                          | 0
 `-r`, `--ml-mark-delete-max-rate` | Throttling rate for mark-delete operations (0 means no throttle)                                                           | 0
 
-Please notice that sticky reads enabled by `bookkeeperEnableStickyReads=true` aren’t used unless ensemble size (E) equals write quorum (Q<sub>w</sub>) size. Sticky reads improve the efficiency of the Bookkeeper read ahead cache when all reads for a single ledger are sent to a single bookie.
+Please notice that sticky reads enabled by `bookkeeperEnableStickyReads=true` are not used unless ensemble size (E) equals write quorum (Q<sub>w</sub>) size. Sticky reads improve the efficiency of the Bookkeeper read ahead cache when all reads for a single ledger are sent to a single bookie.
 
 Some rules for choosing the values:
 
@@ -329,7 +329,7 @@ You can see which persistence policy currently applies to a namespace.
 
 #### Pulsar-admin
 
-Use the [`get-persistence`](/tools/pulsar-admin/) subcommand and specify the namespace.
+Use the [`get-persistence`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=get-persistence) subcommand and specify the namespace.
 
 The following is an example:
 

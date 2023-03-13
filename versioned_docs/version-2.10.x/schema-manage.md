@@ -200,7 +200,7 @@ The `schema-definition-file` includes the following fields:
 | Field |  Description | 
 | --- | --- |
 |  `type`  |   The schema type. | 
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> | 
+| `schema` | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
 |  `properties`  |  The additional properties associated with the schema. | 
 
 Here are examples of the `schema-definition-file` for a JSON schema.
@@ -253,7 +253,7 @@ The post payload includes the following fields:
 | Field |  Description | 
 | --- | --- |
 |  `type`  |   The schema type. | 
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> | 
+| `schema` | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
 |  `properties`  |  The additional properties associated with the schema. |
 
 </TabItem>
@@ -270,7 +270,7 @@ The `PostSchemaPayload` includes the following fields:
 | Field |  Description | 
 | --- | --- |
 |  `type`  |   The schema type. | 
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> | 
+| `schema` | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
 |  `properties`  |  The additional properties associated with the schema. | 
 
 Here is an example of `PostSchemaPayload`:
@@ -662,7 +662,7 @@ To set a schema compatibility check strategy at the topic level, use one of the 
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](/tools/pulsar-admin/) command. 
+Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
 
 ```shell
 
@@ -708,7 +708,7 @@ To get the topic-level schema compatibility check strategy, use one of the follo
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](/tools/pulsar-admin/) command. 
+Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command. 
 
 ```shell
 
@@ -758,7 +758,7 @@ To remove the topic-level schema compatibility check strategy, use one of the fo
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies remove-schema-compatibility-strategy`](/tools/pulsar-admin/) command. 
+Use the [`pulsar-admin topicPolicies remove-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=remove-schema-compatibility-strategy) command. 
 
 ```shell
 
@@ -807,7 +807,7 @@ You can set schema compatibility check strategy at namespace level using one of 
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](/tools/pulsar-admin/) command. 
+Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
 
 ```shell
 

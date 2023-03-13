@@ -550,6 +550,17 @@ In FlowOrQpsEquallyDivideBundleSplitAlgorithm, if msgRate \>= loadBalancerNamesp
 
 **Category**: Load Balancer
 
+### loadBalanceUnloadDelayInSeconds
+Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `long`
+
+**Default**: `600`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerAutoBundleSplitEnabled
 enable/disable automatic namespace bundle split
 
@@ -605,6 +616,28 @@ BandwithOut Resource Usage Weight
 
 **Category**: Load Balancer
 
+### loadBalancerBrokerLoadDataTTLInSeconds
+Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default is loadBalancerReportUpdateMaxIntervalMinutes * 2. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `long`
+
+**Default**: `1800`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBrokerLoadTargetStd
+The target standard deviation of the resource usage across brokers (100% resource usage is 1.0 load). The shedder logic tries to distribute bundle load across brokers to meet this target std. The smaller value will incur load balancing more frequently. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `double`
+
+**Default**: `0.25`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBrokerMaxTopics
 Usage threshold to allocate max number of topics to broker
 
@@ -638,6 +671,17 @@ Usage threshold to determine a broker whether to start threshold shedder
 
 **Category**: Load Balancer
 
+### loadBalancerBundleLoadReportPercentage
+Percentage of bundles to compute topK bundle load data from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. (only used in load balancer extension logics)
+
+**Type**: `double`
+
+**Default**: `10.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBundleUnloadMinThroughputThreshold
 Bundle unload minimum throughput threshold (MB)
 
@@ -655,6 +699,17 @@ CPU Resource Usage Weight
 **Type**: `double`
 
 **Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerDebugModeEnabled
+Option to enable the debug mode for the load balancer logics. The debug mode prints more logs to provide more information such as load balance states and decisions. (only used in load balancer extension logics)
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -737,12 +792,12 @@ load balance load shedding strategy (It requires broker restart if value is chan
 
 **Category**: Load Balancer
 
-### loadBalancerMemoryResourceWeight
-Memory Resource Usage Weight
+### loadBalancerMaxNumberOfBrokerTransfersPerCycle
+Maximum number of brokers to transfer bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferSheddeer)
 
-**Type**: `double`
+**Type**: `int`
 
-**Default**: `1.0`
+**Default**: `3`
 
 **Dynamic**: `true`
 
@@ -880,6 +935,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitStateCleanUpDelayTimeInSeconds
+After this delay, the service-unit state channel tombstones any service units (e.g., bundles) in semi-terminal states. For example, after splits, parent bundles will be `deleted`, and then after this delay, the parent bundles' state will be `tombstoned` in the service-unit state channel. Pulsar does not immediately remove such semi-terminal states to avoid unnecessary system confusion, as the bundles in the `tombstoned` state might temporarily look available to reassign. Rarely, one could lower this delay in order to aggressively clean the service-unit state channel when there are a large number of bundles. minimum value = 30 secs(only used in load balancer extension logics)
+
+**Type**: `long`
+
+**Default**: `604800`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingEnabled
 Enable/disable automatic bundle unloading for load-shedding
 
@@ -910,6 +976,17 @@ Broker periodically checks whether some traffic should be offload from some over
 **Type**: `int`
 
 **Default**: `1`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerTransferEnabled
+Option to enable the bundle transfer mode when distributing bundle loads. On: transfer bundles from overloaded brokers to underloaded -- pre-assigns the destination broker upon unloading). Off: unload bundles from overloaded brokers -- post-assigns the destination broker upon lookups). (only used in load balancer extension TransferSheddeer)
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `true`
 
@@ -3118,6 +3195,17 @@ Interval between checks to see if message publish buffer size is exceed the max 
 
 **Category**: Server
 
+### metadataStoreAllowReadOnlyOperations
+Is metadata store read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreBatchingEnabled
 Whether we should enable metadata operations batching
 
@@ -3431,6 +3519,35 @@ Enable or disable strict bookie affinity.
 
 **Category**: Server
 
+### strictTopicNameEnabled
+# Enable strict topic name check. Which includes two parts as follows:
+# 1. Mark `-partition-` as a keyword.
+# E.g.
+    Create a non-partitioned topic.
+      No corresponding partitioned topic
+       - persistent://public/default/local-name (passed)
+       - persistent://public/default/local-name-partition-z (rejected by keyword)
+       - persistent://public/default/local-name-partition-0 (rejected by keyword)
+      Has corresponding partitioned topic, partitions=2 and topic partition name is persistent://public/default/local-name
+       - persistent://public/default/local-name-partition-0 (passed, Because it is the partition topic's sub-partition)
+       - persistent://public/default/local-name-partition-z (rejected by keyword)
+       - persistent://public/default/local-name-partition-4 (rejected, Because it exceeds the number of maximum partitions)
+    Create a partitioned topic(topic metadata)
+       - persistent://public/default/local-name (passed)
+       - persistent://public/default/local-name-partition-z (rejected by keyword)
+       - persistent://public/default/local-name-partition-0 (rejected by keyword)
+# 2. Allowed alphanumeric (a-zA-Z_0-9) and these special chars -=:. for topic name.
+# NOTE: This flag will be removed in some major releases in the future.
+
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### systemTopicEnabled
 Enable or disable system topic.
 
@@ -3592,17 +3709,6 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 **Type**: `java.lang.String`
 
 **Default**: `Conscrypt`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### zooKeeperAllowReadOnlyOperations
-Is zookeeper allow read-only operations.
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -4787,6 +4893,17 @@ Enable TLS
 
 **Category**: TLS
 
+### tlsHostnameVerificationEnabled
+Whether the hostname is validated when the broker creates a TLS connection with other brokers
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsKeyFilePath
 Path for the TLS private key file
 
@@ -5058,6 +5175,17 @@ Number of threads used by Websocket service
 
 **Category**: WebSocket
 
+### webSocketPingDurationSeconds
+Interval of time to sending the ping to keep alive in WebSocket proxy. This value greater than 0 means enabled
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
 ### webSocketServiceEnabled
 Enable the WebSocket API service in broker
 
@@ -5100,6 +5228,17 @@ Usage threshold to determine a broker as under-loaded (only used by SimpleLoadMa
 **Default**: `50`
 
 **Dynamic**: `false`
+
+**Category**: Load Balancer
+
+### loadBalancerMemoryResourceWeight
+Memory Resource Usage Weight. Deprecated: Memory is no longer used as a load balancing item.
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
 
 **Category**: Load Balancer
 
@@ -5154,6 +5293,17 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### zooKeeperAllowReadOnlyOperations
+Is zookeeper allow read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 

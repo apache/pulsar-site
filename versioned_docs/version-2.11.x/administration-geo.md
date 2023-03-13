@@ -49,7 +49,7 @@ This section guides you through the steps to configure geo-replicated clusters.
 
 ### Connect replication clusters
 
-To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](/tools/pulsar-admin/) tool to create a connection.
+To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin) tool to create a connection.
 
 **Example**
 
@@ -68,7 +68,7 @@ Suppose that you have 3 replication clusters: `us-west`, `us-cent`, and `us-east
 
 :::tip
 
-   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](/tools/pulsar-admin/).
+   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=create).
    - Different clusters may have different authentications. You can use the authentication flag `--auth-plugin` and `--auth-parameters` together to set cluster authentication, which overrides `brokerClientAuthenticationPlugin` and `brokerClientAuthenticationParameters` if `authenticationEnabled` sets to `true` in `broker.conf` and `standalone.conf`. For more information, see [authentication and authorization](concepts-authentication.md).
 
 :::
@@ -121,7 +121,7 @@ bin/pulsar-admin namespaces set-clusters my-tenant/my-namespace \
 
 #### Enable geo-replication at topic level
 
-You can set geo-replication at topic level using the command `pulsar-admin topics set-replication-clusters`. For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](/tools/pulsar-admin/).
+You can set geo-replication at topic level using the command `pulsar-admin topics set-replication-clusters`. For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
 
 ```shell
 bin/pulsar-admin topics set-replication-clusters --clusters us-west,us-east,us-cent my-tenant/my-namespace/my-topic
@@ -146,7 +146,7 @@ topicLevelPoliciesEnabled=true
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example of the [Java](client-libraries-java.md) API](client-libraries-java.md). Note the use of the `setReplicationClusters` method when you construct the {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} object:
+The following is an example of the [Java API](client-libraries-java.md). Note the use of the `setReplicationClusters` method when you construct the {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} object:
 
 ```java
 List<String> restrictReplicationTo = Arrays.asList(
@@ -174,7 +174,7 @@ You can check topic-specific statistics for geo-replication topics using one of 
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`pulsar-admin topics stats`](/tools/pulsar-admin/) command.
+Use the [`pulsar-admin topics stats`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=stats) command.
 
 ```shell
 bin/pulsar-admin topics stats persistent://my-tenant/my-namespace/my-topic

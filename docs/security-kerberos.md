@@ -107,7 +107,7 @@ If your machines configured with Kerberos already have a system-wide configurati
 
 :::
 
-The content of `krb5.conf` file indicates the default Realm and KDC information. See [JDK’s Kerberos Requirements](https://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/KerberosReq.html) for more details.
+The content of `krb5.conf` file indicates the default Realm and KDC information. See [JDK's Kerberos Requirements](https://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/tutorials/KerberosReq.html) for more details.
 
 To specify the path to the `krb5.conf` file for brokers, enter the command below. 
 
@@ -237,7 +237,7 @@ Ensure that the operating system user who starts Pulsar clients can access the k
 
 ## Configure Kerberos authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/tools/pulsar-admin/), [`pulsar-perf`](reference-cli-tools.md#pulsar-perf), and [`pulsar-client`](reference-cli-tools.md#pulsar-client) use the `conf/client.conf` file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/pulsar-client/) use the `conf/client.conf` file in a Pulsar installation.
 
 When using command-line tools, you need to perform the following steps:
 
