@@ -39,6 +39,8 @@ const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
 const githubSiteUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
+const math = require('remark-math');
+const katex = require('rehype-katex');
 
 const injectLinkParse = ([, prefix, , name, path]) => {
     if (prefix == "javadoc") {
@@ -336,7 +338,9 @@ module.exports = {
                             /{\@inject\:\s?endpoint\|([^}]+)}/,
                             injectLinkParseForEndpoint
                         ),
-                    ],
+                        math,
+                        ],
+                    rehypePlugins: [katex],
                     versions: versionsMap,
                     onlyIncludeVersions: buildVersions || ["current"],
                 },
@@ -395,4 +399,13 @@ module.exports = {
         "/js/matomo-agent.js",
     ],
     clientModules: [require.resolve('./matomoClientModule.ts')],
+    stylesheets: [
+        {
+          href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+          type: 'text/css',
+          integrity:
+            'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+          crossorigin: 'anonymous',
+        },
+      ],
 };

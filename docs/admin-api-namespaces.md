@@ -886,7 +886,7 @@ pulsar-admin namespaces set-subscription-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/setDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/setSubscriptionDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -928,7 +928,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/getDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/getSubscriptionDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
