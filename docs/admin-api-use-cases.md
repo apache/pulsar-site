@@ -19,10 +19,18 @@ Pulsar admin APIs are one of the best productivity tools. You can perform variou
 
 ![Pulsar admin APIs - use cases](/assets/admin-api-use-cases.svg)
 
-### Next steps
+### Related topics
+
+- To understand basics, see [Pulsar admin API - Overview](admin-api-overview.md)
 
 - To learn common administrative tasks, see [Pulsar admin API - Features](admin-api-features.md).
 
-- To perform administrative operations and check details of API references, see [Pulsar admin API - Tools](admin-api-tools.md).
+- To perform administrative operations, see [Pulsar admin API - Tools](admin-api-tools.md).
 
-- To get up and running with Pulsar admin APIs quickly, see [Pulsar admin API - Get started](admin-get-started.md).
+- To get up quickly, see [Pulsar admin API - Get started](admin-get-started.md).
+
+- To check the detailed usage, see the API references below.
+
+  - [Java admin API](pathname:///api/admin/)
+
+  - [REST API](reference-rest-api-overview.md)
