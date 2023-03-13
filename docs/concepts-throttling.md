@@ -70,11 +70,11 @@ Approach | Per cluster | Per topic | Per subscription
 :--------|:------------|:----------|:----------------
 Set [broker configurations](#throttling-configurations) or [dynamic broker configurations](admin-api-brokers.md#dynamic-broker-configuration) | <li>`dispatchThrottlingRateInMsg`</li><li>`dispatchThrottlingRateInByte`</li> | <li>`dispatchThrottlingRatePerTopicInMsg`</li><li>`dispatchThrottlingRatePerTopicInByte`</li><br />It applies to all topics in the cluster. | <li>`dispatchThrottlingRatePerSubscriptionInMsg`</li><li>`dispatchThrottlingRatePerSubscriptionInByte`</li><br />It applies to all subscriptions in the cluster.
 Set namespace policies | N/A | Refer to [Configure dispatch throttling for topics](admin-api-namespaces.md#configure-dispatch-throttling-for-topics). | Refer to [Configure dispatch throttling for subscriptions](admin-api-namespaces.md#configure-dispatch-throttling-for-subscription).
-Set topic policies | N/A | Refer to [Set topic-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/PersistentTopics_setDispatchRate). | Refer to [Set subscription-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/Namespaces_setDispatchRate).<br />It applies to all subscriptions in a topic.
+Set topic policies | N/A | Refer to [Set topic-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/PersistentTopics_setDispatchRate). | Refer to [Set subscription-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/PersistentTopics_setSubscriptionDispatchRate).<br />It applies to all subscriptions in a topic.
 
 :::note
 
-The dispatch rate limits configured through the above three approaches take effect with priorities, which is "topic policies" > "namespace policies" > "broker configurations". For example, if you have configured the dispatch rate limit for a subscription using all these three approaches, only the one configured through “topic policies” takes effect.
+The dispatch rate limits configured through the above three approaches take effect with priorities, which is "topic policies" > "namespace policies" > "broker configurations". For example, if you have configured the dispatch rate limit for a subscription using all these three approaches, only the one configured through "topic policies" takes effect.
 
 :::
 
