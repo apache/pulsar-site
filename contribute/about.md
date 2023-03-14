@@ -26,7 +26,11 @@ If a quick [search](https://github.com/apache/pulsar/issues) doesn't turn up an 
 
 If there’s an existing GitHub issue for your intended contribution, please comment about your intended work. Once the work is understood, a committer will assign the issue to you. If an issue is currently assigned, please check with the current assignee before reassigning.
 
-For moderate or large contributions, you should not start coding or writing a design document unless there is a corresponding GitHub issue assigned to you for that work. Simple changes, like fixing typos, do not require an associated issue.
+For moderate or large contributions, you should not start coding or writing a design document, a.k.a PIP (see below) unless there is a corresponding GitHub issue assigned to you for that work. Simple changes, like fixing typos, do not require an associated issue.
+
+### Pulsar Improvement Proposal (PIP)
+
+On any change which is either significant, or changes any public facing component of Pulsar (API, configuration, ...), the author should write design document known as Pulsar Improvement Proposal (PIP). There is a process for it that you should follow before starting to write one. It is [here]([url](https://github.com/apache/pulsar/blob/master/wiki/proposals/PIP.md))
 
 ### Online discussions
 
