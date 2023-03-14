@@ -159,18 +159,19 @@ const client = new Pulsar.Client({
 <TabItem value="Go">
 
 ```go
-provider := pulsar.NewAuthenticationAthenz(
-		"pulsar",
-		"shopping",
-		"some_app",
-		"file:///path/to/private.pem",
-		"v1",
-		"",
-		"http://localhost:9998")
-client, err := pulsarNewClient(ClientOptions{
-		URL:                   "pulsar://my-broker.com:6650",
-		Authentication:        basicAuth,
-	})
+provider := pulsar.NewAuthenticationAthenz(map[string]string{
+	"ztsUrl":         "http://localhost:9998",
+	"providerDomain": "pulsar",
+	"tenantDomain":   "shopping",
+	"tenantService":  "some_app",
+	"privateKey":     "file:///path/to/private.pem",
+	"keyId":          "v1",
+})
+
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+	URL:            "pulsar://my-broker.com:6650",
+	Authentication: provider,
+})
 ```
 
 </TabItem>
@@ -181,7 +182,7 @@ client, err := pulsarNewClient(ClientOptions{
 
 Athenz has a mechanism called [Copper Argos](https://github.com/AthenZ/athenz/blob/master/docs/copper_argos.md). This means that ZTS distributes an X.509 certificate and private key pair to each service, which it can use to identify itself to other services within the organization.
 
-Pulsar currently supports Copper Argos only in the Java client. When using Copper Argos, you need to provide at least the following four parameters:
+Pulsar currently supports Copper Argos only in Java and Go. When using Copper Argos, you need to provide at least the following four parameters:
 * `providerDomain`
 * `x509CertChain`
 * `privateKey`
@@ -192,7 +193,7 @@ In this case, `tenantDomain`, `tenantService` and `keyId` are ignored.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
 ```java
@@ -210,6 +211,24 @@ PulsarClient client = PulsarClient.builder()
         .serviceUrl("pulsar://my-broker.com:6650")
         .authentication(athenzAuth)
         .build();
+```
+
+</TabItem>
+<TabItem value="Go">
+
+```go
+provider := pulsar.NewAuthenticationAthenz(map[string]string{
+	"ztsUrl":         "http://localhost:9998",
+	"providerDomain": "pulsar",
+	"x509CertChain":  "file:///path/to/x509cert.pem",
+	"privateKey":     "file:///path/to/private.pem",
+	"caCert":         "file:///path/to/cacert.pem",
+})
+
+client, err := pulsar.NewClient(pulsar.ClientOptions{
+	URL:            "pulsar://my-broker.com:6650",
+	Authentication: provider,
+})
 ```
 
 </TabItem>
