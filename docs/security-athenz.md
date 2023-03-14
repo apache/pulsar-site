@@ -159,18 +159,18 @@ const client = new Pulsar.Client({
 <TabItem value="Go">
 
 ```go
-authParams := map[string]string{
+provider := pulsar.NewAuthenticationAthenz(map[string]string{
 	"ztsUrl":         "http://localhost:9998",
 	"providerDomain": "pulsar",
 	"tenantDomain":   "shopping",
 	"tenantService":  "some_app",
 	"privateKey":     "file:///path/to/private.pem",
 	"keyId":          "v1",
-}
+})
 
-client, err := pulsar.NewClient(ClientOptions{
+client, err := pulsar.NewClient(pulsar.ClientOptions{
 	URL:            "pulsar://my-broker.com:6650",
-	Authentication: pulsar.NewAuthenticationAthenz(authParams),
+	Authentication: provider,
 })
 ```
 
@@ -217,17 +217,17 @@ PulsarClient client = PulsarClient.builder()
 <TabItem value="Go">
 
 ```go
-authParams := map[string]string{
+provider := pulsar.NewAuthenticationAthenz(map[string]string{
 	"ztsUrl":         "http://localhost:9998",
 	"providerDomain": "pulsar",
 	"x509CertChain":  "file:///path/to/x509cert.pem",
 	"privateKey":     "file:///path/to/private.pem",
 	"caCert":         "file:///path/to/cacert.pem",
-}
+})
 
-client, err := pulsar.NewClient(ClientOptions{
+client, err := pulsar.NewClient(pulsar.ClientOptions{
 	URL:            "pulsar://my-broker.com:6650",
-	Authentication: pulsar.NewAuthenticationAthenz(authParams),
+	Authentication: provider,
 })
 ```
 
