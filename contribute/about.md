@@ -30,7 +30,7 @@ For moderate or large contributions, you should not start coding or writing a de
 
 ### Pulsar Improvement Proposal (PIP)
 
-On any change which is either significant, or changes any public facing component of Pulsar (API, configuration, ...), the author should write design document known as Pulsar Improvement Proposal (PIP). There is a process for it that you should follow before starting to write one. It is [here]([url](https://github.com/apache/pulsar/blob/master/wiki/proposals/PIP.md))
+On any change which is either significant (e.g., new features), or changes any public-facing component of Pulsar (API, configuration, metric ...), you need to write a design document known as a *Pulsar Improvement Proposal (PIP)*. There is a process for it that you should follow before starting to write one. It is [here](https://github.com/apache/pulsar/blob/master/wiki/proposals/PIP.md)
 
 ### Online discussions
 
