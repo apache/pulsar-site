@@ -28,7 +28,7 @@ Select one of the content blocks below to begin your Pulsar journey. If you ...
     <BlockLink title="About Pulsar" url="concepts-overview" />
     <BlockLink title="Get Started" url="getting-started-home" />
     <BlockLink title="Install, Deploy, Upgrade" url="install-deploy-upgrade-landing" />
-    <BlockLink title="Pulsar for Developers" url="/developers-landing" />
+    <BlockLink title="Pulsar for Developers" url="developers-landing" />
     <BlockLink title="How To" url="how-to-landing" />
     <BlockLink title="Reference" url="reference-landing" />
 </BlockLinks>
