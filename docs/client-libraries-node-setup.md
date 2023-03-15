@@ -6,23 +6,17 @@ sidebar_label: "Set up"
 
 ## Install Node.js client library
 
-:::tip
-
-Pulsar Node.js client library is based on the C++ client library. 
-* You must install the Pulsar C++ client library before installing a Node.js client. For more details, see [instructions](client-libraries-cpp.md).
-* If an incompatible version of the C++ client is installed, you may fail to build or run the Node.js library. For the compatibility between each version of the Node.js client and the C++ client, see [README](https://github.com/apache/pulsar-client-node/blob/master/README.md).
-
-:::
-
 Install the [`pulsar-client`](https://www.npmjs.com/package/pulsar-client) library via [npm](https://www.npmjs.com/):
 
 ```shell
 npm install pulsar-client
 ```
 
+For more information, see [README](https://github.com/apache/pulsar-client-node/blob/master/README.md).
+
 :::note
 
-This library only works in Node.js 10.x or later versions because it uses the [`node-addon-api`](https://github.com/nodejs/node-addon-api) module to wrap the C++ library.
+This library only works in Node.js 10.x or later versions because it uses the [`node-addon-api`](https://github.com/nodejs/node-addon-api) module.
 
 :::
 
