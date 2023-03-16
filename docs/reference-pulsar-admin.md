@@ -2278,7 +2278,7 @@ pulsar-admin topics get-partitioned-topic-metadata {persistent|non-persistent}:/
 ```
 
 ### `update-partitioned-topic`
-Update existing non-global partitioned topic. New updating number of partitions must be greater than existing number of partitions.
+Update existing partitioned topic. New updating number of partitions must be greater than existing number of partitions.
 
 Usage
 
