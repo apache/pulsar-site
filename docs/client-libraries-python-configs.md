@@ -10,12 +10,12 @@ For all available configurations, see [`the constructor of the pulsar client`](@
 
 ## Producer configuration
 
-For all available configurations, see [`client.create_producer`](@pulsar:apidoc:cpp@/pulsar.Client.html#create_producer).
+For all available configurations, see [`client.create_producer`](@pulsar:apidoc:python@/pulsar.Client.html#create_producer).
 
 ## Consumer configuration
 
-For all available configurations, see [`client.subscribe`](@pulsar:apidoc:cpp@/pulsar.Client.html#create_producerl).
+For all available configurations, see [`client.subscribe`](@pulsar:apidoc:python@/pulsar.Client.html#subscribe).
 
 ## Reader configuration
 
-For all available configurations, see [`client.create_reader`](@pulsar:apidoc:cpp@/pulsar.Client.html#create_producer).
+For all available configurations, see [`client.create_reader`](@pulsar:apidoc:python@/pulsar.Client.html#create_reader).
