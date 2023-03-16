@@ -803,6 +803,17 @@ Maximum number of brokers to transfer bundle load for each unloading cycle. The 
 
 **Category**: Load Balancer
 
+### loadBalancerMaxNumberOfBundlesToSplitPerCycle
+Max number of bundles to split to per cycle. (only used in load balancer extension logics)
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerMsgRateDifferenceShedderThreshold
 Message-rate percentage threshold between highest and least loaded brokers for uniform load shedding. (eg: broker1 with 50K msgRate and broker2 with 30K msgRate will have 66% msgRate difference and load balancer can unload bundles from broker-1 to broker-2)
 
@@ -864,6 +875,17 @@ maximum topics in a bundle, otherwise bundle split will be triggered
 **Type**: `int`
 
 **Default**: `1000`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerNamespaceBundleSplitConditionThreshold
+Threshold to the consecutive count of fulfilled split conditions. If the split scheduler consecutively finds bundles that meet split conditions many times bigger than this threshold, the scheduler will trigger splits on the bundles (if the number of bundles is less than loadBalancerNamespaceMaximumBundles). (only used in load balancer extension logics)
+
+**Type**: `int`
+
+**Default**: `5`
 
 **Dynamic**: `true`
 
@@ -978,6 +1000,17 @@ Broker periodically checks whether some traffic should be offload from some over
 **Default**: `1`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerSplitIntervalMinutes
+Service units'(bundles) split interval. Broker periodically checks whether some service units(e.g. bundles) should split if they become hot-spots. (only used in load balancer extension logics)
+
+**Type**: `int`
+
+**Default**: `1`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
@@ -2554,6 +2587,17 @@ Size of the lookahead window to use when detecting if all the messages in the to
 
 **Category**: Server
 
+### delayedDeliveryMaxIndexesPerBucketSnapshotSegment
+The max number of delayed message index in per bucket snapshot segment, -1 means no limitationafter reaching the max number limitation, the snapshot segment will be cut off.
+
+**Type**: `int`
+
+**Default**: `5000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### delayedDeliveryMaxNumBuckets
 The max number of delayed message index bucket, after reaching the max buckets limitation, the adjacent buckets will be merged.
 
@@ -2566,9 +2610,9 @@ The max number of delayed message index bucket, after reaching the max buckets l
 **Category**: Server
 
 ### delayedDeliveryMaxTimeStepPerBucketSnapshotSegmentSeconds
-The delayed message index bucket time step(in seconds) in per bucket snapshot segment, after reaching the max time step limitation, the snapshot segment will be cut off.
+The delayed message index time step(in seconds) in per bucket snapshot segment, after reaching the max time step limitation, the snapshot segment will be cut off.
 
-**Type**: `long`
+**Type**: `int`
 
 **Default**: `300`
 
@@ -2582,17 +2626,6 @@ The delayed message index bucket min index count. When the index count of the cu
 **Type**: `long`
 
 **Default**: `50000`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### delayedDeliverySharedIndexEnabled
-Enable share the delayed message index across subscriptions
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
