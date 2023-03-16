@@ -1,7 +1,7 @@
 ---
-id: reference-cli-get-started
-title: Get Started
-sidebar_label: "Get started"
+id: get-started-pulsar-admin
+title: Get started with pulsar-admin CLI tool
+sidebar_label: "Get started with pulsar-admin"
 ---
 
 This tutorial guides you through every step of using pulsar-admin CLI to manage topics. It includes the following steps:
