@@ -223,8 +223,6 @@ After that, the following images will be built and pushed to your own DockerHub 
 
 * pulsar
 * pulsar-all
-* pulsar-grafana
-* pulsar-standalone
 
 ## Vote for the release candidate
 
