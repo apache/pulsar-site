@@ -118,7 +118,7 @@ After the build, you should find the following tarballs, zip files, and the conn
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
-* directory `distribution/io/target/apache-pulsar-io-connectors-2.x.0-bin`
+* directory `distribution/io/target/apache-pulsar-io-connectors-2.X.0-bin`
 
 :::note
 
@@ -131,7 +131,7 @@ The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
 
 ```shell
-src/check-binary-license.sh distribution/server/target/apache-pulsar-2.x.0-bin.tar.gz
+src/check-binary-license.sh distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz
 ```
 
 Then, run Apache RAT to verify the license headers in the src package:
@@ -169,6 +169,9 @@ svn mkdir pulsar-2.X.0-candidate-1
 cd pulsar-2.X.0-candidate-1
 $PULSAR_PATH/src/stage-release.sh .
 
+# Please check the size of the files in the `pulsar-2.X.0-candidate-1`.
+# If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
+# may be too large to be unable to upload.
 svn add *
 svn ci -m 'Staging artifacts and signature for Pulsar release 2.X.0'
 ```
