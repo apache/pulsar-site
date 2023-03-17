@@ -169,6 +169,10 @@ svn mkdir pulsar-2.X.0-candidate-1
 cd pulsar-2.X.0-candidate-1
 $PULSAR_PATH/src/stage-release.sh .
 
+# Verify the artifacts are correctly signed have correct checksums:
+( for i in **/*.(tar.gz|zip|nar); do echo $i; gpg --verify $i.asc $i || exit 1 ; done )
+( for i in **/*.(tar.gz|zip|nar); do echo $i; shasum -a 512 -c $i.sha512 || exit 1 ; done )
+
 # Please check the size of the files in the `pulsar-2.X.0-candidate-1`.
 # If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
 # may be too large to be unable to upload.
