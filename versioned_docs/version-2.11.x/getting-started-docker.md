@@ -54,7 +54,7 @@ If you're running a local standalone cluster, you can use one of these root URLs
 * `pulsar://localhost:6650`
 * `http://localhost:8080`
 
-The following example guides you to get started with Pulsar by using the [Python client API](client-libraries-python.md).
+The following example guides you to get started with Pulsar by using the [Python client API](@pulsar:apidoc:python@).
 
 Install the Pulsar Python client library directly from [PyPI](https://pypi.org/project/pulsar-client/):
 
