@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Admin setup
 
-Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](pathname:///api/admin/) requires some special setup if you have enabled authentication in your Pulsar instance.
+Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](/api/admin/) requires some special setup if you have enabled authentication in your Pulsar instance.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -29,7 +29,7 @@ If you have enabled authentication, you need to provide an auth configuration to
 |authParams|The authentication parameters for the cluster, as a comma-separated string.| |
 |useTls|Whether or not TLS authentication will be enforced in the cluster.|false|
 |tlsAllowInsecureConnection|Accept untrusted TLS certificate from client.|false|
-|tlsTrustCertsFilePath|Path for the trusted TLS certificate file.| | 
+|tlsTrustCertsFilePath|Path for the trusted TLS certificate file.| |
 
 </TabItem>
 <TabItem value="REST API">

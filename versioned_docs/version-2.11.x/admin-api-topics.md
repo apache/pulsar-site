@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -39,7 +39,7 @@ Whether it is a persistent or non-persistent topic, you can obtain the topic res
 
 :::note
 
-In REST API, `:schema` stands for persistent or non-persistent. `:tenant`, `:namespace`, `:x` are variables, replace them with the real tenant, namespace, and `x` names when using them.     
+In REST API, `:schema` stands for persistent or non-persistent. `:tenant`, `:namespace`, `:x` are variables, replace them with the real tenant, namespace, and `x` names when using them.
 Take {@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getList?version=@pulsar:version_number@} as an example, to get the list of persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/persistent/my-tenant/my-namespace`. To get the list of non-persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/non-persistent/my-tenant/my-namespace`.
 
 :::
@@ -124,7 +124,7 @@ You can fetch permission in the following ways.
 <TabItem value="pulsar-admin">
 
 ```shell
-pulsar-admin topics permissions persistent://test-tenant/ns1/tp1 
+pulsar-admin topics permissions persistent://test-tenant/ns1/tp1
 ```
 
 Example output:
@@ -164,7 +164,7 @@ You can revoke permissions granted on a client role in the following ways.
 ```shell
 pulsar-admin topics revoke-permission \
     --role application1 \
-    persistent://test-tenant/ns1/tp1 
+    persistent://test-tenant/ns1/tp1
 ```
 
 </TabItem>
@@ -1640,7 +1640,7 @@ Field | Description
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can check the number of partitions in a partitioned topic with the [`get-partitioned-topic-metadata`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=get-partitioned-topic-metadata) subcommand. 
+You can check the number of partitions in a partitioned topic with the [`get-partitioned-topic-metadata`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=get-partitioned-topic-metadata) subcommand.
 
 ```shell
 pulsar-admin topics get-partitioned-topic-metadata \

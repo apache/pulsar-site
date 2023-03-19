@@ -25,6 +25,6 @@ Pulsar admin APIs enable you to administer clusters programmatically. For exampl
 
 - To check the detailed usage, see the API references below.
 
-  - [Java admin API](pathname:///api/admin/)
+  - [Java admin API](/api/admin/)
 
   - [REST API](reference-rest-api-overview.md)

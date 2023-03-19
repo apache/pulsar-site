@@ -20,22 +20,22 @@ You can interact with the admin interface via:
 - The `pulsar-admin` CLI tool, which is available in the `bin` folder of your Pulsar installation:
 
   ```shell
-  
+
    $ bin/pulsar-admin
-  
+
   ```
 
-  For complete commands of `pulsar-admin` tool, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+  For complete commands of `pulsar-admin` tool, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 
-> **The REST API is the admin interface**. Both the `pulsar-admin` CLI tool and the Java client use the REST API. If you implement your own admin interface client, you should use the REST API. 
+> **The REST API is the admin interface**. Both the `pulsar-admin` CLI tool and the Java client use the REST API. If you implement your own admin interface client, you should use the REST API.
 
 ## Admin setup
 
 Each of the three admin interfaces (the `pulsar-admin` CLI tool, the {@inject: rest:REST:/} API, and the [Java admin API](/api/admin)) requires some special setup if you have enabled authentication in your Pulsar instance.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
@@ -113,17 +113,17 @@ If you run Pulsar Functions or connectors on Kubernetes, you need to follow Kube
 Kubernetes requires a name that can be used as a DNS subdomain name as defined in [RFC 1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). Pulsar supports more legal characters than Kubernetes naming convention. If you create a Pulsar resource name with special characters that are not supported by Kubernetes (for example, including colons in a Pulsar namespace name), Kubernetes runtime translates the Pulsar object names into Kubernetes resource labels which are in RFC 1123-compliant forms. Consequently, you can run functions or connectors using Kubernetes runtime. The rules for translating Pulsar object names into Kubernetes resource labels are as below:
 
 - Truncate to 63 characters
-  
+
 - Replace the following characters with dashes (-):
-  
+
   - Non-alphanumeric characters
-  
+
   - Underscores (_)
-  
-  - Dots (.) 
-  
+
+  - Dots (.)
+
 - Replace beginning and ending non-alphanumeric characters with 0
-  
+
 :::tip
 
 If you get an error in translating Pulsar object names into Kubernetes resource labels (for example, you may have a naming collision if your Pulsar object name is too long) or want to customize the translating rules, see [customize Kubernetes runtime](functions-runtime.md#configure-kubernetes-runtime).

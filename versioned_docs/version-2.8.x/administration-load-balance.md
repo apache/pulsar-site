@@ -10,7 +10,7 @@ original_id: administration-load-balance
 Pulsar is an horizontally scalable messaging system, so the traffic
 in a logical cluster must be spread across all the available Pulsar brokers as evenly as possible, which is a core requirement.
 
-You can use multiple settings and tools to control the traffic distribution which require a bit of context to understand how the traffic is managed in Pulsar. Though, in most cases, the core requirement mentioned above is true out of the box and you should not worry about it. 
+You can use multiple settings and tools to control the traffic distribution which require a bit of context to understand how the traffic is managed in Pulsar. Though, in most cases, the core requirement mentioned above is true out of the box and you should not worry about it.
 
 ## Pulsar load manager architecture
 
@@ -20,7 +20,7 @@ The following part introduces the basic architecture of the Pulsar load manager.
 
 Topics are dynamically assigned to brokers based on the load conditions of all brokers in the cluster.
 
-When a client starts using new topics that are not assigned to any broker, a process is triggered to choose the best suited broker to acquire ownership of these topics according to the load conditions. 
+When a client starts using new topics that are not assigned to any broker, a process is triggered to choose the best suited broker to acquire ownership of these topics according to the load conditions.
 
 In case of partitioned topics, different partitions are assigned to different brokers. Here "topic" means either a non-partitioned topic or one partition of a topic.
 
@@ -30,7 +30,7 @@ The stateless nature of brokers makes the dynamic assignment possible, so you ca
 
 #### Assignment granularity
 
-The assignment of topics or partitions to brokers is not done at the topics or partitions level, but done at the Bundle level (a higher level). The reason is to amortize the amount of information that you need to keep track. Based on CPU, memory, traffic load and other indexes, topics are assigned to a particular broker dynamically. 
+The assignment of topics or partitions to brokers is not done at the topics or partitions level, but done at the Bundle level (a higher level). The reason is to amortize the amount of information that you need to keep track. Based on CPU, memory, traffic load and other indexes, topics are assigned to a particular broker dynamically.
 
 Instead of individual topic or partition assignment, each broker takes ownership of a subset of the topics for a namespace. This subset is called a "*bundle*" and effectively this subset is a sharding mechanism.
 
@@ -95,7 +95,7 @@ pulsar-admin namespaces unload tenant/namespace
 
 ```
 
-### Split namespace bundles 
+### Split namespace bundles
 
 Since the load for the topics in a bundle might change over time, or predicting upfront might just be hard, brokers can split bundles into two. The new smaller bundles can be reassigned to different brokers.
 
@@ -202,7 +202,7 @@ When the value is empty, Pulsar uses the value that the OS reports.
 
 When your application has multiple namespaces and you want one of them available all the time to avoid any downtime, you can group these namespaces and distribute them across different [failure domains](reference-terminology.md#failure-domain) and different brokers. Thus, if one of the failure domains is down (due to release rollout or brokers restart), it only disrupts namespaces owned by that specific failure domain and the rest of the namespaces owned by other domains remain available without any impact.
 
-Such a group of namespaces has anti-affinity to each other, that is, all the namespaces in this group are [anti-affinity namespaces](reference-terminology.md#anti-affinity-namespaces) and are distributed to different failure domains in a load-balanced manner. 
+Such a group of namespaces has anti-affinity to each other, that is, all the namespaces in this group are [anti-affinity namespaces](reference-terminology.md#anti-affinity-namespaces) and are distributed to different failure domains in a load-balanced manner.
 
 As illustrated in the following figure, Pulsar has 2 failure domains (Domain1 and Domain2) and each domain has 2 brokers in it. You can create an anti-affinity namespace group that has 4 namespaces in it, and all the 4 namespaces have anti-affinity to each other. The load manager tries to distribute namespaces evenly across all the brokers in the same domain. Since each domain has 2 brokers, every broker owns one namespace from this anti-affinity namespace group, and you can see each domain owns 2 namespaces, and each broker owns 1 namespace.
 
@@ -216,7 +216,7 @@ The load manager follows an even distribution policy across failure domains to a
 | 2 | Namespace2 | Domain2          | Broker3, Broker4                   | Domain2:Broker3 |
 | 3 | Namespace3 | Domain1, Domain2 | Broker2, Broker4                   | Domain1:Broker2 |
 | 4 | Namespace4 | Domain2          | Broker4                            | Domain2:Broker4 |
- 
+
 :::tip
 
 * Each namespace belongs to only one anti-affinity group. If a namespace with an existing anti-affinity assignment is assigned to another anti-affinity group, the original assignment is dropped.
@@ -226,13 +226,13 @@ The load manager follows an even distribution policy across failure domains to a
 :::
 
 #### Create a failure domain and register brokers
- 
+
 :::note
 
 One broker can only be registered to a single failure domain.
 
 :::
- 
+
 To create a domain under a specific cluster and register brokers, run the following command:
 
 ```bash
@@ -241,16 +241,16 @@ pulsar-admin clusters create-failure-domain <cluster-name> --domain-name <domain
 
 ```
 
-You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 #### Create an anti-affinity namespace group
 
 An anti-affinity group is created automatically when the first namespace is assigned to the group. To assign a namespace to an anti-affinity group, run the following command. It sets an anti-affinity group name for a namespace.
- 
+
 ```bash
 
 pulsar-admin namespaces set-anti-affinity-group <namespace> --group <group-name>
- 
+
 ```
 
-For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).

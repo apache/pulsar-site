@@ -16,11 +16,11 @@ import TabItem from '@theme/TabItem';
 Install [`htpasswd`](https://httpd.apache.org/docs/2.4/programs/htpasswd.html) in your environment to create a password file for storing username-password pairs.
 
 * For Ubuntu/Debian, run the following command to install `htpasswd`.
-   
+
    ```
    apt install apache2-utils
    ```
- 
+
 * For CentOS/RHEL, run the following command to install `htpasswd`.
 
    ```
@@ -111,7 +111,7 @@ You can also set an environment variable named `PULSAR_EXTRA_OPTS` and the value
 
 ## Configure basic authentication in CLI tools
 
-[Command-line tools](reference-cli-tools.md), such as [Pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin), [Pulsar-perf](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf) and [Pulsar-client](pathname:///reference/#/@pulsar:version_origin@/pulsar-client), use the `conf/client.conf` file in your Pulsar installation. To configure basic authentication in Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
+[Command-line tools](reference-cli-tools.md), such as [Pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), [Pulsar-perf](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf/) and [Pulsar-client](pathname:///reference/#/@pulsar:version_origin@/pulsar-client/), use the `conf/client.conf` file in your Pulsar installation. To configure basic authentication in Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 
 ```conf
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationBasic
@@ -139,13 +139,13 @@ The following example shows how to configure basic authentication when using Pul
 
    ```c++
    #include <pulsar/Client.h>
-    
+
    int main() {
        pulsar::ClientConfiguration config;
        AuthenticationPtr auth = pulsar::AuthBasic::create("admin", "123456")
        config.setAuth(auth);
        pulsar::Client client("pulsar://broker.example.com:6650/", config);
-       
+
        return 0;
    }
    ```

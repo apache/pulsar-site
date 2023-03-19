@@ -15,18 +15,18 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
-> 
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+>
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
-> 
-> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](pathname:///api/admin/).
+>
+> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
 Pulsar clusters consist of one or more Pulsar [brokers](reference-terminology.md#broker), one or more [BookKeeper](reference-terminology.md#bookkeeper)
 servers (aka [bookies](reference-terminology.md#bookie)), and a [ZooKeeper](https://zookeeper.apache.org) cluster that provides configuration and coordination management.
 
 Clusters can be managed via:
 
-* The `clusters` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin) tool
+* The `clusters` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool
 * The `/admin/v2/clusters` endpoint of the admin {@inject: rest:REST:/} API
 * The `clusters` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
 
@@ -39,7 +39,7 @@ New clusters can be provisioned using the admin interface.
 > Please note that this operation requires superuser privileges.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -120,7 +120,7 @@ You'll need to use `--*-tls` flags only if you're using [TLS authentication](sec
 You can fetch the [configuration](reference-configuration.md) for an existing cluster at any time.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -164,7 +164,7 @@ admin.clusters().getCluster(clusterName);
 You can update the configuration for an existing cluster at any time.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -209,7 +209,7 @@ admin.clusters().updateCluster(clusterName, clusterData);
 Clusters can be deleted from a Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -246,7 +246,7 @@ admin.clusters().deleteCluster(clusterName);
 You can fetch a list of all clusters in a Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -285,7 +285,7 @@ admin.clusters().getClusters();
 Peer clusters can be configured for a given cluster in a Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">

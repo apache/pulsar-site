@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -41,7 +41,7 @@ Use the `upload` subcommand.
 pulsar-admin schemas upload --filename <schema-definition-file> <topic-name>
 ```
 
-The `schema-definition-file` is in JSON format. 
+The `schema-definition-file` is in JSON format.
 
 ```json
 {
@@ -53,11 +53,11 @@ The `schema-definition-file` is in JSON format.
 
 The `schema-definition-file` includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `type`  |   The schema type. | 
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> | 
-|  `properties`  |  The additional properties associated with the schema. | 
+|  `type`  |   The schema type. |
+|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
+|  `properties`  |  The additional properties associated with the schema. |
 
 The following is an example of the `schema-definition-file` for a JSON schema.
 
@@ -111,7 +111,7 @@ admin.createSchema("my-tenant/my-ns/my-topic", payload);
 
 ### Get the latest schema
 
-To get the latest schema for a topic, you can use one of the following methods. 
+To get the latest schema for a topic, you can use one of the following methods.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -277,7 +277,7 @@ pulsar-admin schemas delete <topic-name>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `DELETE` request to a schema endpoint: {@inject: endpoint|DELETE|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/deleteSchema?version=@pulsar:version_number@} 
+Send a `DELETE` request to a schema endpoint: {@inject: endpoint|DELETE|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/deleteSchema?version=@pulsar:version_number@}
 
 Here is an example of a response returned in JSON format.
 
@@ -319,7 +319,7 @@ To enable/enforce schema auto-update at the namespace level, you can use one of 
 
 <TabItem value="Admin CLI">
 
-Use the `set-is-allow-auto-update-schema` subcommand. 
+Use the `set-is-allow-auto-update-schema` subcommand.
 
 ```bash
 bin/pulsar-admin namespaces set-is-allow-auto-update-schema --enable tenant/namespace
@@ -368,7 +368,7 @@ To disable schema auto-update at the **namespace** level, you can use one of the
 
 <TabItem value="Admin CLI">
 
-Use the `set-is-allow-auto-update-schema` subcommand. 
+Use the `set-is-allow-auto-update-schema` subcommand.
 
 ```bash
 bin/pulsar-admin namespaces set-is-allow-auto-update-schema --disable tenant/namespace
@@ -404,7 +404,7 @@ admin.namespaces().setIsAllowAutoUpdateSchema("my-namspace", false);
 
 ### Enable schema validation enforcement
 
-To enforce schema validation enforcement at the **cluster** level, you can configure `isSchemaValidationEnforced` to `true` in the `conf/broker.conf` file. 
+To enforce schema validation enforcement at the **cluster** level, you can configure `isSchemaValidationEnforced` to `true` in the `conf/broker.conf` file.
 
 To enable schema validation enforcement at the **namespace** level, you can use one of the following commands.
 
@@ -415,7 +415,7 @@ To enable schema validation enforcement at the **namespace** level, you can use 
 
 <TabItem value="Admin CLI">
 
-Use the `set-schema-validation-enforce` subcommand. 
+Use the `set-schema-validation-enforce` subcommand.
 
 ```bash
 bin/pulsar-admin namespaces set-schema-validation-enforce --enable tenant/namespace
@@ -458,7 +458,7 @@ To disable schema validation enforcement at the **namespace** level, you can use
 
 <TabItem value="Admin CLI">
 
-Use the `set-schema-validation-enforce` subcommand. 
+Use the `set-schema-validation-enforce` subcommand.
 
 ```bash
 bin/pulsar-admin namespaces set-schema-validation-enforce --disable tenant/namespace
@@ -490,11 +490,11 @@ admin.namespaces().setSchemaValidationEnforced("my-namspace", false);
 </Tabs>
 ````
 
-## Manage schema compatibility strategy 
+## Manage schema compatibility strategy
 
 The [schema compatibility check strategy](schema-understand.md#schema-compatibility-check-strategy) configured at different levels has priority: topic level > namespace level > cluster level. In other words:
-  * If you set the strategy at both topic and namespace levels, the topic-level strategy is used. 
-  * If you set the strategy at both namespace and cluster levels, the namespace-level strategy is used. 
+  * If you set the strategy at both topic and namespace levels, the topic-level strategy is used.
+  * If you set the strategy at both namespace and cluster levels, the namespace-level strategy is used.
 
 ### Set schema compatibility strategy
 
@@ -509,7 +509,7 @@ To set a schema compatibility check strategy at the topic level, you can use one
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicName>
@@ -550,7 +550,7 @@ To set schema compatibility check strategy at the namespace level, you can use o
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin namespaces set-schema-compatibility-strategy options
@@ -597,7 +597,7 @@ To get the topic-level schema compatibility check strategy, you can use one of t
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
@@ -642,7 +642,7 @@ You can get schema compatibility check strategy at namespace level using one of 
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=get-schema-compatibility-strategy) command. 
+Use the [`pulsar-admin namespaces get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=get-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin namespaces get-schema-compatibility-strategy options
