@@ -70,7 +70,7 @@ For example, you have the same BookKeeper cluster with the same topic requiremen
 
 ![Rack-aware placement policy with an enforced minimum rack size of bookies](/assets/rack-aware-placement-policy-2.svg)
 
-* If you have configured `EnforceMinNumRacksPerWriteQuorum=false`, the BookKeeper client tries its best effort to apply the placement policy depending on the available number of racks and bookies. It may still work as the above diagram or the following diagram. 
+* If you have configured `EnforceMinNumRacksPerWriteQuorum=false`, the BookKeeper client tries its best effort to apply the placement policy depending on the available number of racks and bookies. It may still work as the above diagram or the following diagram.
 
 ![Rack-aware placement policy without an enforced minimum rack size of bookies](/assets/rack-aware-placement-policy-3.svg)
 
@@ -229,7 +229,7 @@ To configure bookie affinity groups, you can use one of the following methods.
 pulsar-admin namespaces set-bookie-affinity-group options
 ```
 
-For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 **Example**
 

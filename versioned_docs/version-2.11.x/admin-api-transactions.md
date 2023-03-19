@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -387,7 +387,7 @@ The following is an example of the returned values.
 
 The coordinator's internal stats that can be retrieved include:
 * **transactionLogStats:** The stats of the transaction coordinator log.
-* **managedLedgerName:** The name of the managed ledger where the transaction coordinator log is stored. 
+* **managedLedgerName:** The name of the managed ledger where the transaction coordinator log is stored.
 * **managedLedgerInternalStats:** The internal stats of the managed ledger where the transaction coordinator log is stored. See `[managedLedgerInternalStats](admin-api-topics.md#get-internal-stats)` for more details.
 
 Use one of the following ways to get coordinator’s internal stats:
@@ -527,7 +527,7 @@ The following is an example of the returned values.
 
 The transaction pending ack internal stats that can be retrieved include:
 * **transactionLogStats:** The stats of the transaction pending ack log.
-* **managedLedgerName:** The name of the managed ledger where the transaction pending ack log is stored. 
+* **managedLedgerName:** The name of the managed ledger where the transaction pending ack log is stored.
 * **managedLedgerInternalStats:** The internal stats of the managed ledger where the transaction coordinator log is stored. See `[managedLedgerInternalStats](admin-api-topics.md#get-internal-stats)` for more details.
 
 Use one of the following ways to get transaction pending ack internal stats:
@@ -664,8 +664,8 @@ The following is an example of the returned values.
 
 ## Transaction buffer stats
 
-Transaction buffer handles messages produced to a topic partition within a transaction. 
-The messages in the transaction buffer are not visible to consumers until the transactions are committed. The messages in the transaction buffer are discarded when the transactions are aborted. 
+Transaction buffer handles messages produced to a topic partition within a transaction.
+The messages in the transaction buffer are not visible to consumers until the transactions are committed. The messages in the transaction buffer are discarded when the transactions are aborted.
 
 ### Get transaction buffer stats
 

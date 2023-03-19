@@ -15,10 +15,10 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
-> 
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+>
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
-> 
+>
 > - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
 Pulsar allows you to grant namespace-level or topic-level permission to users.
@@ -34,7 +34,7 @@ The chapters below demonstrate how to grant namespace-level permissions to users
 You can grant permissions to specific roles for lists of operations such as `produce` and `consume`.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
@@ -61,7 +61,7 @@ $ pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
 ```
 
-Then, roles `my.role.1`, `my.role.2`, `my.role.foo`, `my.role.bar`, etc. can produce and consume.  
+Then, roles `my.role.1`, `my.role.2`, `my.role.foo`, `my.role.bar`, etc. can produce and consume.
 
 ```shell
 
@@ -85,7 +85,7 @@ $ pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
 ```
 
-In this case, only the role `my.*.role` has permissions.  
+In this case, only the role `my.*.role` has permissions.
 Roles `my.1.role`, `my.2.role`, `my.foo.role`, `my.bar.role`, etc. **cannot** produce and consume.
 
 </TabItem>
@@ -112,7 +112,7 @@ admin.namespaces().grantPermissionOnNamespace(namespace, role, getAuthActions(ac
 You can see which permissions have been granted to which roles in a namespace.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
@@ -155,7 +155,7 @@ admin.namespaces().getPermissions(namespace);
 You can revoke permissions from specific roles, which means that those roles will no longer have access to the specified namespace.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">

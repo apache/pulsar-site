@@ -8,18 +8,18 @@ original_id: administration-load-balance
 
 Pulsar is a horizontally scalable messaging system, so the traffic in a logical cluster must be balanced across all the available Pulsar brokers as evenly as possible, which is a core requirement.
 
-You can use multiple settings and tools to control the traffic distribution which requires a bit of context to understand how the traffic is managed in Pulsar. Though in most cases, the core requirement mentioned above is true out of the box and you should not worry about it. 
+You can use multiple settings and tools to control the traffic distribution which requires a bit of context to understand how the traffic is managed in Pulsar. Though in most cases, the core requirement mentioned above is true out of the box and you should not worry about it.
 
 The following sections introduce how the load-balanced assignments work across Pulsar brokers and how you can leverage the framework to adjust.
 
 ## Dynamic assignments
 
-Topics are dynamically assigned to brokers based on the load conditions of all brokers in the cluster. The assignment of topics to brokers is not done at the topic level but at the **bundle** level (a higher level). Instead of individual topic assignments, each broker takes ownership of a subset of the topics for a namespace. This subset is called a bundle and effectively this subset is a sharding mechanism. 
+Topics are dynamically assigned to brokers based on the load conditions of all brokers in the cluster. The assignment of topics to brokers is not done at the topic level but at the **bundle** level (a higher level). Instead of individual topic assignments, each broker takes ownership of a subset of the topics for a namespace. This subset is called a bundle and effectively this subset is a sharding mechanism.
 
 In other words, each namespace is an "administrative" unit and sharded into a list of bundles, with each bundle comprising a portion of the overall hash range of the namespace. Topics are assigned to a particular bundle by taking the hash of the topic name and checking in which bundle the hash falls. Each bundle is independent of the others and thus is independently assigned to different brokers.
 
-The benefit of the assignment granularity is to amortize the amount of information that you need to keep track of. Based on CPU, memory, traffic load, and other indexes, topics are assigned to a particular broker dynamically. For example: 
-* When a client starts using new topics that are not assigned to any broker, a process is triggered to choose the best-suited broker to acquire ownership of these topics according to the load conditions. 
+The benefit of the assignment granularity is to amortize the amount of information that you need to keep track of. Based on CPU, memory, traffic load, and other indexes, topics are assigned to a particular broker dynamically. For example:
+* When a client starts using new topics that are not assigned to any broker, a process is triggered to choose the best-suited broker to acquire ownership of these topics according to the load conditions.
 * If the broker owning a topic becomes overloaded, the topic is reassigned to a less-loaded broker.
 * If the broker owning a topic crashes, the topic is reassigned to another active broker.
 
@@ -41,7 +41,7 @@ defaultNumberOfNamespaceBundles=4
 
 ```
 
-Alternatively, you can override the value when you create a new namespace using [Pulsar admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin):
+Alternatively, you can override the value when you create a new namespace using [Pulsar admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/):
 
 ```shell
 
@@ -74,7 +74,7 @@ defaultNamespaceBundleSplitAlgorithm=range_equally_divide
 
 ```
 
-You can configure more parameters for splitting thresholds. Any existing bundle that exceeds any of the thresholds is a candidate to be split. By default, the newly split bundles are immediately reassigned to other brokers, to facilitate the traffic distribution. 
+You can configure more parameters for splitting thresholds. Any existing bundle that exceeds any of the thresholds is a candidate to be split. By default, the newly split bundles are immediately reassigned to other brokers, to facilitate the traffic distribution.
 
 ```conf
 
@@ -123,7 +123,7 @@ loadBalancerSheddingGracePeriodMinutes=30
 
 ```
 
-Pulsar supports the following types of automatic load shedding strategies. 
+Pulsar supports the following types of automatic load shedding strategies.
 * [ThresholdShedder](#thresholdshedder)
 * [OverloadShedder](#overloadshedder)
 * [UniformLoadShedder](#uniformloadshedder)
@@ -131,12 +131,12 @@ Pulsar supports the following types of automatic load shedding strategies.
 :::note
 
 * From Pulsar 2.10, the **default** shedding strategy is `ThresholdShedder`.
-* You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md/#dynamic-broker-configuration). 
+* You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md/#dynamic-broker-configuration).
 
 :::
 
 ### ThresholdShedder
-This strategy tends to shed the bundles if any broker's usage is above the configured threshold. It does this by first computing the average resource usage per broker for the whole cluster. The resource usage for each broker is calculated using the following method `LocalBrokerData#getMaxResourceUsageWithWeight`. Historical observations are included in the running average based on the broker's setting for `loadBalancerHistoryResourcePercentage`. Once the average resource usage is calculated, a broker's current/historical usage is compared to the average broker usage. If a broker's usage is greater than the average usage per broker plus the `loadBalancerBrokerThresholdShedderPercentage`, this load shedder proposes removing enough bundles to bring the unloaded broker 5% below the current average broker usage. Note that recently unloaded bundles are not unloaded again. 
+This strategy tends to shed the bundles if any broker's usage is above the configured threshold. It does this by first computing the average resource usage per broker for the whole cluster. The resource usage for each broker is calculated using the following method `LocalBrokerData#getMaxResourceUsageWithWeight`. Historical observations are included in the running average based on the broker's setting for `loadBalancerHistoryResourcePercentage`. Once the average resource usage is calculated, a broker's current/historical usage is compared to the average broker usage. If a broker's usage is greater than the average usage per broker plus the `loadBalancerBrokerThresholdShedderPercentage`, this load shedder proposes removing enough bundles to bring the unloaded broker 5% below the current average broker usage. Note that recently unloaded bundles are not unloaded again.
 
 ![Shedding strategy - ThresholdShedder](/assets/shedding-strategy-thresholdshedder.svg)
 
@@ -145,7 +145,7 @@ For example, assume you have three brokers, the average broker usage of broker1 
 To use the `ThresholdShedder` strategy, configure brokers with this value.
 `loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder`
 
-You can configure the weights for each resource per broker in the `conf/broker.conf` file. 
+You can configure the weights for each resource per broker in the `conf/broker.conf` file.
 
 ```conf
 
@@ -167,7 +167,7 @@ loadBalancerDirectMemoryResourceWeight=1.0
 ```
 
 ### OverloadShedder
-This strategy attempts to shed exactly one bundle on brokers which are overloaded, that is, whose maximum system resource usage exceeds [`loadBalancerBrokerOverloadedThresholdPercentage`](#broker-overload-thresholds). To see which resources are considered when determining the maximum system resource. A bundle is recommended for unloading off that broker if and only if the following conditions hold: The broker has at least two bundles assigned and the broker has at least one bundle that has not been unloaded recently according to `LoadBalancerSheddingGracePeriodMinutes`. The unloaded bundle will be the most expensive bundle in terms of message rate that has not been recently unloaded. Note that this strategy does not take into account "underloaded" brokers when determining which bundles to unload. If you are looking for a strategy that spreads load evenly across all brokers, see [ThresholdShedder](#thresholdshedder). 
+This strategy attempts to shed exactly one bundle on brokers which are overloaded, that is, whose maximum system resource usage exceeds [`loadBalancerBrokerOverloadedThresholdPercentage`](#broker-overload-thresholds). To see which resources are considered when determining the maximum system resource. A bundle is recommended for unloading off that broker if and only if the following conditions hold: The broker has at least two bundles assigned and the broker has at least one bundle that has not been unloaded recently according to `LoadBalancerSheddingGracePeriodMinutes`. The unloaded bundle will be the most expensive bundle in terms of message rate that has not been recently unloaded. Note that this strategy does not take into account "underloaded" brokers when determining which bundles to unload. If you are looking for a strategy that spreads load evenly across all brokers, see [ThresholdShedder](#thresholdshedder).
 
 ![Shedding strategy - OverloadShedder](/assets/shedding-strategy-overloadshedder.svg)
 
@@ -191,7 +191,7 @@ Because of the incorrect max speed, the load manager might think the broker has 
 You can set `loadBalancerOverrideBrokerNicSpeedGbps` in the `conf/broker.conf` file to correct the max NIC speed. When the value is empty, Pulsar uses the value that the OS reports.
 
 ### UniformLoadShedder
-This strategy tends to distribute load uniformly across all brokers. This strategy checks the load difference between the broker with the highest load and the broker with the lowest load. If the difference is higher than configured thresholds `loadBalancerMsgRateDifferenceShedderThreshold` and `loadBalancerMsgThroughputMultiplierDifferenceShedderThreshold` then it finds out bundles that can be unloaded to distribute traffic evenly across all brokers. 
+This strategy tends to distribute load uniformly across all brokers. This strategy checks the load difference between the broker with the highest load and the broker with the lowest load. If the difference is higher than configured thresholds `loadBalancerMsgRateDifferenceShedderThreshold` and `loadBalancerMsgThroughputMultiplierDifferenceShedderThreshold` then it finds out bundles that can be unloaded to distribute traffic evenly across all brokers.
 
 ![Shedding strategy - UniformLoadShedder](/assets/shedding-strategy-uniformLoadshedder.svg)
 
@@ -226,7 +226,7 @@ pulsar-admin namespaces unload tenant/namespace
 
 When your application has multiple namespaces and you want one of them available all the time to avoid any downtime, you can group these namespaces and distribute them across different [failure domains](reference-terminology.md#failure-domain) and different brokers. Thus, if one of the failure domains is down (due to release rollout or brokers restart), it only disrupts namespaces owned by that specific failure domain and the rest of the namespaces owned by other domains remain available without any impact.
 
-Such a group of namespaces has anti-affinity to each other, that is, all the namespaces in this group are [anti-affinity namespaces](reference-terminology.md#anti-affinity-namespaces) and are distributed to different failure domains in a load-balanced manner. 
+Such a group of namespaces has anti-affinity to each other, that is, all the namespaces in this group are [anti-affinity namespaces](reference-terminology.md#anti-affinity-namespaces) and are distributed to different failure domains in a load-balanced manner.
 
 As illustrated in the following figure, Pulsar has 2 failure domains (Domain1 and Domain2) and each domain has 2 brokers in it. You can create an anti-affinity namespace group that has 4 namespaces in it, and all the 4 namespaces have anti-affinity to each other. The load manager tries to distribute namespaces evenly across all the brokers in the same domain. Since each domain has 2 brokers, every broker owns one namespace from this anti-affinity namespace group, and you can see each domain owns 2 namespaces, and each broker owns 1 namespace.
 
@@ -240,7 +240,7 @@ The load manager follows an even distribution policy across failure domains to a
 | 2 | Namespace2 | Domain2          | Broker3, Broker4                   | Domain2:Broker3 |
 | 3 | Namespace3 | Domain1, Domain2 | Broker2, Broker4                   | Domain1:Broker2 |
 | 4 | Namespace4 | Domain2          | Broker4                            | Domain2:Broker4 |
- 
+
 :::tip
 
 * Each namespace belongs to only one anti-affinity group. If a namespace with an existing anti-affinity assignment is assigned to another anti-affinity group, the original assignment is dropped.
@@ -250,13 +250,13 @@ The load manager follows an even distribution policy across failure domains to a
 :::
 
 ### Create a failure domain and register brokers
- 
+
 :::note
 
 One broker can only be registered to a single failure domain.
 
 :::
- 
+
 To create a domain under a specific cluster and register brokers, run the following command:
 
 ```bash
@@ -265,16 +265,16 @@ pulsar-admin clusters create-failure-domain <cluster-name> --domain-name <domain
 
 ```
 
-You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 ### Create an anti-affinity namespace group
 
 An anti-affinity group is created automatically when the first namespace is assigned to the group. To assign a namespace to an anti-affinity group, run the following command. It sets an anti-affinity group name for a namespace.
- 
+
 ```bash
 
 pulsar-admin namespaces set-anti-affinity-group <namespace> --group <group-name>
- 
+
 ```
 
-For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
