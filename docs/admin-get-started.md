@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 This guide walks you through the quickest way to get started with the following Pulsar admin APIs to manage topics:
 
 - Java admin API
-  
+
 - Go admin API (coming soon)
 
 - REST API
@@ -35,7 +35,7 @@ This tutorial guides you through every step of using Java admin API to manage to
 
 5. Check the stats of the topic.
 
-6. Delete the topic. 
+6. Delete the topic.
 
 **Prerequisites**
 
@@ -99,7 +99,7 @@ This tutorial guides you through every step of using Java admin API to manage to
     admin.topics().getPartitionedStats("persistent://public/default/test-topic-1", false)
     ````
 
-5. Delete the topic _test-topic-1_. 
+5. Delete the topic _test-topic-1_.
 
     **Input**
 
@@ -120,7 +120,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
 4. Check the stats of the topic.
 
-5. Delete the topic. 
+5. Delete the topic.
 
 **Prerequisites**
 
@@ -249,7 +249,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
     **Output**
 
     There is no output. You can verify whether the _test-topic-2_ exists or not using the following command.
-    
+
     **Input**
 
     List topics in `public/default` namespace.
@@ -274,6 +274,6 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
 - To check the detailed usage, see the API references below.
 
-  - [Java admin API](pathname:///api/admin/)
+  - [Java admin API](/api/admin/)
 
   - [REST API](reference-rest-api-overview.md)

@@ -41,7 +41,7 @@ You can interact with the admin interface via:
 
   :::tip
 
-  For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](pathname:///api/admin/).
+  For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
   :::
 

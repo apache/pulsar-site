@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
-> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](pathname:///api/admin/).
+> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
 Tenants, like namespaces, can be managed using the [admin API](admin-api-overview.md). There are currently two configurable aspects of tenants:
 

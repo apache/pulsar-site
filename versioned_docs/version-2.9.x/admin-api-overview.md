@@ -37,7 +37,7 @@ You can interact with the admin interface via:
 
   > **Important**
   >
-  > For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](pathname:///api/admin/).
+  > For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
 > **The REST API is the admin interface**. Both the `pulsar-admin` CLI tool and the Java client use the REST API. If you implement your own admin interface client, you should use the REST API.
 

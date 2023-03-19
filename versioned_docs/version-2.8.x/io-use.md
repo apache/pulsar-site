@@ -65,9 +65,9 @@ The YAML configuration file tells Pulsar where to locate connectors and how to c
 Below is a YAML configuration file of a Cassandra sink, which tells Pulsar:
 
 * Which Cassandra cluster to connect
-  
+
 * What is the `keyspace` and `columnFamily` to be used in Cassandra for collecting data
-  
+
 * How to map Pulsar messages into Cassandra table key and columns
 
 ```shell
@@ -120,7 +120,7 @@ configs:
 Before starting using connectors, you can perform the following operations:
 
 * [Reload connectors](#reload)
-  
+
 * [Get a list of available connectors](#get-available-connectors)
 
 ### `reload`
@@ -180,7 +180,7 @@ $ pulsar-admin sinks available-sinks
 To run a connector, you can perform the following operations:
 
 * [Create a connector](#create)
-  
+
 * [Start a connector](#start)
 
 * [Run a connector locally](#localrun)
@@ -194,7 +194,7 @@ You can create a connector using **Admin CLI**, **REST API** or **JAVA admin API
 Create a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -221,11 +221,11 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
 * Create a source connector with a **local file**.
 
   ```java
-  
+
   void createSource(SourceConfig sourceConfig,
                     String fileName)
              throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -240,16 +240,16 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`createSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#createSource-SourceConfig-java.lang.String-).
+  For more information, see [`createSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#createSource-SourceConfig-java.lang.String-).
 
-* Create a source connector using a **remote file** with a URL from which fun-pkg can be downloaded. 
+* Create a source connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
   ```java
-  
+
   void createSourceWithUrl(SourceConfig sourceConfig,
                            String pkgUrl)
                     throws PulsarAdminException
-  
+
   ```
 
   Supported URLs are `http` and `file`.
@@ -272,8 +272,8 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
   |Name|Description|
   |---|---
   | `PulsarAdminException` | Unexpected error
-  
-  For more information, see [`createSourceWithUrl`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#createSourceWithUrl-SourceConfig-java.lang.String-).
+
+  For more information, see [`createSourceWithUrl`](/api/admin/org/apache/pulsar/client/admin/Source.html#createSourceWithUrl-SourceConfig-java.lang.String-).
 
 </TabItem>
 
@@ -285,7 +285,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
 Create a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -312,11 +312,11 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
 * Create a sink connector with a **local file**.
 
   ```java
-  
+
   void createSink(SinkConfig sinkConfig,
                   String fileName)
            throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -331,16 +331,16 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`createSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#createSink-SinkConfig-java.lang.String-).
+  For more information, see [`createSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#createSink-SinkConfig-java.lang.String-).
 
-* Create a sink connector using a **remote file** with a URL from which fun-pkg can be downloaded. 
+* Create a sink connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
   ```java
-  
+
   void createSinkWithUrl(SinkConfig sinkConfig,
                       String pkgUrl)
                   throws PulsarAdminException
-  
+
   ```
 
   Supported URLs are `http` and `file`.
@@ -363,8 +363,8 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
   |Name|Description|
   |---|---
   | `PulsarAdminException` | Unexpected error
-  
-  For more information, see [`createSinkWithUrl`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#createSinkWithUrl-SinkConfig-java.lang.String-).
+
+  For more information, see [`createSinkWithUrl`](/api/admin/org/apache/pulsar/client/admin/Sink.html#createSinkWithUrl-SinkConfig-java.lang.String-).
 
 </TabItem>
 
@@ -380,7 +380,7 @@ You can start a connector using **Admin CLI** or **REST API**.
 Start a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"}]}>
 
@@ -417,7 +417,7 @@ For more information, see [here](io-cli.md#start).
 Start a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"}]}>
 
@@ -458,7 +458,7 @@ You can run a connector locally rather than deploying it on a Pulsar cluster usi
 Run a source connector locally.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"}]}>
 
@@ -484,7 +484,7 @@ For more information, see [here](io-cli.md#localrun).
 Run a sink connector locally.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"}]}>
 
@@ -524,7 +524,7 @@ You can get the information of a connector using **Admin CLI**, **REST API** or 
 Get the information of a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -621,11 +621,11 @@ This is a sourceConfig example.
 
 Exception name | Description
 |---|---
-`PulsarAdminException.NotAuthorizedException` | You don't have the admin permission 
+`PulsarAdminException.NotAuthorizedException` | You don't have the admin permission
 `PulsarAdminException.NotFoundException` | Cluster doesn't exist
 `PulsarAdminException` | Unexpected error
 
-For more information, see [`getSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`getSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -637,7 +637,7 @@ For more information, see [`getSource`](pathname:///api/admin/org/apache/pulsar/
 Get the information of a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -731,7 +731,7 @@ Name| Description
 `namespace` | Namespace name
 `sink` | Sink name
 
-For more information, see [`getSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#getSink-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`getSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#getSink-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -747,7 +747,7 @@ You can get the list of all running connectors using **Admin CLI**, **REST API**
 Get the list of all running source connectors.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -794,7 +794,7 @@ Exception name | Description
 `PulsarAdminException.NotAuthorizedException` | You don't have the admin permission
 `PulsarAdminException` | Unexpected error
 
-For more information, see [`listSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#listSources-java.lang.String-java.lang.String-).
+For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#listSources-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -806,7 +806,7 @@ For more information, see [`listSource`](pathname:///api/admin/org/apache/pulsar
 Get the list of all running sink connectors.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -850,10 +850,10 @@ List<String> listSinks(String tenant,
 
 Exception name | Description
 |---|---
-`PulsarAdminException.NotAuthorizedException` | You don't have the admin permission 
+`PulsarAdminException.NotAuthorizedException` | You don't have the admin permission
 `PulsarAdminException` | Unexpected error
 
-For more information, see [`listSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#listSinks-java.lang.String-java.lang.String-).
+For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/admin/Sink.html#listSinks-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -869,7 +869,7 @@ You can get the current status of a connector using **Admin CLI**, **REST API** 
 Get the current status of a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -889,7 +889,7 @@ For more information, see [here](io-cli.md#status).
 <TabItem value="REST API">
 
 * Get the current status of **all** source connectors.
-  
+
   Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sources/:tenant/:namespace/:sourceName/status|operation/getSourceStatus?version=@pulsar:version_number@}
 
 * Gets the current status of a **specified** source connector.
@@ -902,12 +902,12 @@ For more information, see [here](io-cli.md#status).
 * Get the current status of **all** source connectors.
 
   ```java
-  
+
   SourceStatus getSourceStatus(String tenant,
                               String namespace,
                               String source)
                       throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -924,18 +924,18 @@ For more information, see [here](io-cli.md#status).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSourceStatus`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`getSourceStatus`](/api/admin/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
 
 * Gets the current status of a **specified** source connector.
 
   ```java
-  
+
   SourceStatus.SourceInstanceStatus.SourceInstanceStatusData getSourceStatus(String tenant,
                                                                              String namespace,
                                                                              String source,
                                                                              int id)
                                                                       throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -953,7 +953,7 @@ For more information, see [here](io-cli.md#status).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSourceStatus`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#getSourceStatus-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`getSourceStatus`](/api/admin/org/apache/pulsar/client/admin/Source.html#getSourceStatus-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -965,7 +965,7 @@ For more information, see [here](io-cli.md#status).
 Get the current status of a Pulsar sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -985,7 +985,7 @@ For more information, see [here](io-cli.md#status-1).
 <TabItem value="REST API">
 
 * Get the current status of **all** sink connectors.
-  
+
   Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sinks/:tenant/:namespace/:sinkName/status|operation/getSinkStatus?version=@pulsar:version_number@}
 
 * Gets the current status of a **specified** sink connector.
@@ -998,12 +998,12 @@ For more information, see [here](io-cli.md#status-1).
 * Get the current status of **all** sink connectors.
 
   ```java
-  
+
   SinkStatus getSinkStatus(String tenant,
                            String namespace,
                            String sink)
                     throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1020,18 +1020,18 @@ For more information, see [here](io-cli.md#status-1).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSinkStatus`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`getSinkStatus`](/api/admin/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-).
 
 * Gets the current status of a **specified** source connector.
 
   ```java
-  
+
   SinkStatus.SinkInstanceStatus.SinkInstanceStatusData getSinkStatus(String tenant,
                                                                      String namespace,
                                                                      String sink,
                                                                      int id)
                                                               throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1049,7 +1049,7 @@ For more information, see [here](io-cli.md#status-1).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSinkStatusWithInstanceID`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`getSinkStatusWithInstanceID`](/api/admin/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1067,7 +1067,7 @@ You can update a running connector using **Admin CLI**, **REST API** or **JAVA a
 Update a running Pulsar source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1094,11 +1094,11 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/
 * Update a running source connector with a **local file**.
 
   ```java
-  
+
   void updateSource(SourceConfig sourceConfig,
                   String fileName)
           throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1111,20 +1111,20 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/
 
   |Name|Description|
   |---|---
-  |`PulsarAdminException.NotAuthorizedException`| You don't have the admin permission 
+  |`PulsarAdminException.NotAuthorizedException`| You don't have the admin permission
   | `PulsarAdminException.NotFoundException` | Cluster doesn't exist
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`updateSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#updateSource-SourceConfig-java.lang.String-).
+  For more information, see [`updateSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#updateSource-SourceConfig-java.lang.String-).
 
-* Update a source connector using a **remote file** with a URL from which fun-pkg can be downloaded. 
+* Update a source connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
   ```java
-  
+
   void updateSourceWithUrl(SourceConfig sourceConfig,
                        String pkgUrl)
                 throws PulsarAdminException
-  
+
   ```
 
   Supported URLs are `http` and `file`.
@@ -1134,7 +1134,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/
   * HTTP: http://www.repo.com/fileName.jar
 
   * File: file:///dir/fileName.jar
-  
+
   **Parameter**
 
   | Name | Description
@@ -1146,11 +1146,11 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/
 
   |Name|Description|
   |---|---
-  |`PulsarAdminException.NotAuthorizedException`| You don't have the admin permission 
+  |`PulsarAdminException.NotAuthorizedException`| You don't have the admin permission
   | `PulsarAdminException.NotFoundException` | Cluster doesn't exist
   | `PulsarAdminException` | Unexpected error
 
-For more information, see [`createSourceWithUrl`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#updateSourceWithUrl-SourceConfig-java.lang.String-).
+For more information, see [`createSourceWithUrl`](/api/admin/org/apache/pulsar/client/admin/Source.html#updateSourceWithUrl-SourceConfig-java.lang.String-).
 
 </TabItem>
 
@@ -1162,7 +1162,7 @@ For more information, see [`createSourceWithUrl`](pathname:///api/admin/org/apac
 Update a running Pulsar sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1189,11 +1189,11 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:t
 * Update a running sink connector with a **local file**.
 
   ```java
-  
+
   void updateSink(SinkConfig sinkConfig,
                   String fileName)
        throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1210,16 +1210,16 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:t
   | `PulsarAdminException.NotFoundException` | Cluster doesn't exist
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`updateSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#updateSink-SinkConfig-java.lang.String-).
+  For more information, see [`updateSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#updateSink-SinkConfig-java.lang.String-).
 
-* Update a sink connector using a **remote file** with a URL from which fun-pkg can be downloaded. 
+* Update a sink connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
   ```java
-  
+
   void updateSinkWithUrl(SinkConfig sinkConfig,
                          String pkgUrl)
                   throws PulsarAdminException
-  
+
   ```
 
   Supported URLs are `http` and `file`.
@@ -1229,7 +1229,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:t
   * HTTP: http://www.repo.com/fileName.jar
 
   * File: file:///dir/fileName.jar
-  
+
   **Parameter**
 
   | Name | Description
@@ -1241,11 +1241,11 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:t
 
   |Name|Description|
   |---|---
-  |`PulsarAdminException.NotAuthorizedException`| You don't have the admin permission 
+  |`PulsarAdminException.NotAuthorizedException`| You don't have the admin permission
   |`PulsarAdminException.NotFoundException` | Cluster doesn't exist
   |`PulsarAdminException` | Unexpected error
 
-For more information, see [`updateSinkWithUrl`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#updateSinkWithUrl-SinkConfig-java.lang.String-).
+For more information, see [`updateSinkWithUrl`](/api/admin/org/apache/pulsar/client/admin/Sink.html#updateSinkWithUrl-SinkConfig-java.lang.String-).
 
 </TabItem>
 
@@ -1263,7 +1263,7 @@ You can stop a connector using **Admin CLI**, **REST API** or **JAVA admin API**
 Stop a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1283,11 +1283,11 @@ For more information, see [here](io-cli.md#stop).
 <TabItem value="REST API">
 
 * Stop **all** source connectors.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/stopSource?version=@pulsar:version_number@}
 
 * Stop a **specified** source connector.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/:instanceId|operation/stopSource?version=@pulsar:version_number@}
 
 </TabItem>
@@ -1296,12 +1296,12 @@ For more information, see [here](io-cli.md#stop).
 * Stop **all** source connectors.
 
   ```java
-  
+
   void stopSource(String tenant,
                   String namespace,
                   String source)
           throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1318,18 +1318,18 @@ For more information, see [here](io-cli.md#stop).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`stopSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-).
 
-* Stop a **specified** source connector. 
+* Stop a **specified** source connector.
 
   ```java
-  
+
   void stopSource(String tenant,
                   String namespace,
                   String source,
                   int instanceId)
            throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1347,7 +1347,7 @@ For more information, see [here](io-cli.md#stop).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`stopSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1359,7 +1359,7 @@ For more information, see [here](io-cli.md#stop).
 Stop a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1379,11 +1379,11 @@ For more information, see [here](io-cli.md#stop-1).
 <TabItem value="REST API">
 
 * Stop **all** sink connectors.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/:tenant/:namespace/:sinkName/stop|operation/stopSink?version=@pulsar:version_number@}
 
 * Stop a **specified** sink connector.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkeName/:instanceId/stop|operation/stopSink?version=@pulsar:version_number@}
 
 </TabItem>
@@ -1392,12 +1392,12 @@ For more information, see [here](io-cli.md#stop-1).
 * Stop **all** sink connectors.
 
   ```java
-  
+
   void stopSink(String tenant,
               String namespace,
               String sink)
       throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1414,18 +1414,18 @@ For more information, see [here](io-cli.md#stop-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`stopSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-).
 
-* Stop a **specified** sink connector. 
+* Stop a **specified** sink connector.
 
   ```java
-  
+
   void stopSink(String tenant,
                 String namespace,
                 String sink,
                 int instanceId)
          throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1443,7 +1443,7 @@ For more information, see [here](io-cli.md#stop-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`stopSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1461,7 +1461,7 @@ You can restart a connector using **Admin CLI**, **REST API** or **JAVA admin AP
 Restart a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1481,11 +1481,11 @@ For more information, see [here](io-cli.md#restart).
 <TabItem value="REST API">
 
 * Restart **all** source connectors.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/restart|operation/restartSource?version=@pulsar:version_number@}
 
 * Restart a **specified** source connector.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/:instanceId/restart|operation/restartSource?version=@pulsar:version_number@}
 
 </TabItem>
@@ -1494,12 +1494,12 @@ For more information, see [here](io-cli.md#restart).
 * Restart **all** source connectors.
 
   ```java
-  
+
   void restartSource(String tenant,
                      String namespace,
                      String source)
               throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1516,18 +1516,18 @@ For more information, see [here](io-cli.md#restart).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`restartSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-).
 
-* Restart a **specified** source connector. 
+* Restart a **specified** source connector.
 
   ```java
-  
+
   void restartSource(String tenant,
                      String namespace,
                      String source,
                      int instanceId)
               throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1545,7 +1545,7 @@ For more information, see [here](io-cli.md#restart).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`restartSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1557,7 +1557,7 @@ For more information, see [here](io-cli.md#restart).
 Restart a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1577,11 +1577,11 @@ For more information, see [here](io-cli.md#restart-1).
 <TabItem value="REST API">
 
 * Restart **all** sink connectors.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkName/restart|operation/restartSource?version=@pulsar:version_number@}
 
 * Restart a **specified** sink connector.
-  
+
   Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkName/:instanceId/restart|operation/restartSource?version=@pulsar:version_number@}
 
 </TabItem>
@@ -1590,12 +1590,12 @@ For more information, see [here](io-cli.md#restart-1).
 * Restart all Pulsar sink connectors.
 
   ```java
-  
+
   void restartSink(String tenant,
                    String namespace,
                    String sink)
             throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1612,18 +1612,18 @@ For more information, see [here](io-cli.md#restart-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`restartSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-).
 
-* Restart a **specified** sink connector. 
+* Restart a **specified** sink connector.
 
   ```java
-  
+
   void restartSink(String tenant,
                    String namespace,
                    String sink,
                    int instanceId)
             throws PulsarAdminException
-  
+
   ```
 
   **Parameter**
@@ -1641,7 +1641,7 @@ For more information, see [here](io-cli.md#restart-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSink`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`restartSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1659,7 +1659,7 @@ You can delete a connector using **Admin CLI**, **REST API** or **JAVA admin API
 Delete a source connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1679,7 +1679,7 @@ For more information, see [here](io-cli.md#delete).
 <TabItem value="REST API">
 
 Delete al Pulsar source connector.
-  
+
 Send a `DELETE` request to this endpoint: {@inject: endpoint|DELETE|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/deregisterSource?version=@pulsar:version_number@}
 
 </TabItem>
@@ -1713,7 +1713,7 @@ void deleteSource(String tenant,
 | `PulsarAdminException.PreconditionFailedException` | Cluster is not empty
 | `PulsarAdminException` | Unexpected error
 
-For more information, see [`deleteSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Source.html#deleteSource-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`deleteSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#deleteSource-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -1725,7 +1725,7 @@ For more information, see [`deleteSource`](pathname:///api/admin/org/apache/puls
 Delete a sink connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -1745,7 +1745,7 @@ For more information, see [here](io-cli.md#delete-1).
 <TabItem value="REST API">
 
 Delete a sink connector.
-  
+
 Send a `DELETE` request to this endpoint: {@inject: endpoint|DELETE|/admin/v3/sinks/:tenant/:namespace/:sinkName|operation/deregisterSink?version=@pulsar:version_number@}
 
 </TabItem>
@@ -1779,7 +1779,7 @@ void deleteSink(String tenant,
 | `PulsarAdminException.PreconditionFailedException` | Cluster is not empty
 | `PulsarAdminException` | Unexpected error
 
-For more information, see [`deleteSource`](pathname:///api/admin/org/apache/pulsar/client/admin/Sink.html#deleteSink-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`deleteSource`](/api/admin/org/apache/pulsar/client/admin/Sink.html#deleteSink-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 

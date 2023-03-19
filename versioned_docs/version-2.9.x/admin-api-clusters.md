@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
-> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](pathname:///api/admin/).
+> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
 Pulsar clusters consist of one or more Pulsar [brokers](reference-terminology.md#broker), one or more [BookKeeper](reference-terminology.md#bookkeeper)
 servers (aka [bookies](reference-terminology.md#bookie)), and a [ZooKeeper](https://zookeeper.apache.org) cluster that provides configuration and coordination management.

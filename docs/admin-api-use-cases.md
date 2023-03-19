@@ -31,6 +31,6 @@ Pulsar admin APIs are one of the best productivity tools. You can perform variou
 
 - To check the detailed usage, see the API references below.
 
-  - [Java admin API](pathname:///api/admin/)
+  - [Java admin API](/api/admin/)
 
   - [REST API](reference-rest-api-overview.md)
