@@ -7,7 +7,7 @@ original_id: administration-dashboard
 
 :::note
 
-Pulsar dashboard is deprecated. We recommend you use [Pulsar Manager](administration-pulsar-manager.md) to manage and monitor the stats of your topics. 
+Pulsar dashboard is deprecated. We recommend you use [Pulsar Manager](administration-pulsar-manager.md) to manage and monitor the stats of your topics.
 
 :::
 
@@ -19,7 +19,7 @@ You can use the [Django](https://www.djangoproject.com) web app to render the co
 
 ## Install
 
-The easiest way to use the dashboard is to run it inside a [Docker](https://www.docker.com/products/docker) container.
+The easiest way to use the dashboard is to run it inside a Docker container.
 
 ```shell
 
@@ -39,7 +39,7 @@ $ docker build -t apachepulsar/pulsar-dashboard dashboard
 ```
 
 If token authentication is enabled:
-> Provided token should have super-user access. 
+> Provided token should have super-user access.
 
 ```shell
 
@@ -52,7 +52,7 @@ $ docker run -p 80:80 \
 
 ```
 
- 
+
 You need to specify only one service URL for a Pulsar cluster. Internally, the collector figures out all the existing clusters and the brokers from where it needs to pull the metrics. If you connect the dashboard to Pulsar running in standalone mode, the URL is `http://<broker-ip>:8080` by default. `<broker-ip>` is the IP address or hostname of the machine that runs Pulsar standalone. The IP address or hostname should be accessible from the running dashboard in the docker instance.
 
 Once the Docker container starts, the web dashboard is accessible via `localhost` or whichever host that Docker uses.

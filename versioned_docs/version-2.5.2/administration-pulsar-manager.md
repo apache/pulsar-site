@@ -9,7 +9,7 @@ Pulsar Manager is a web-based GUI management and monitoring tool that helps admi
 ## Install
 
 ### Quick Install
-The easiest way to use the Pulsar Manager is to run it inside a [Docker](https://www.docker.com/products/docker) container.
+The easiest way to use the Pulsar Manager is to run it inside a Docker container.
 
 ```shell
 
@@ -68,17 +68,17 @@ jwt.broker.token.mode=PRIVATE
 jwt.broker.public.key=file:///path/broker-public.key
 jwt.broker.private.key=file:///path/broker-private.key
 
-or 
+or
 jwt.broker.token.mode=SECRET
 jwt.broker.secret.key=file:///path/broker-secret.key
 
 ```
 
-•	`backend.jwt.token`: token for the superuser. You need to configure this parameter during cluster initialization.   
-•	`jwt.broker.token.mode`: multiple modes of generating token, including PUBLIC, PRIVATE, and SECRET.  
-•	`jwt.broker.public.key`: configure this option if you use the PUBLIC mode.  
-•	`jwt.broker.private.key`: configure this option if you use the PRIVATE mode.  
-•	`jwt.broker.secret.key`: configure this option if you use the SECRET mode.  
+•	`backend.jwt.token`: token for the superuser. You need to configure this parameter during cluster initialization.
+•	`jwt.broker.token.mode`: multiple modes of generating token, including PUBLIC, PRIVATE, and SECRET.
+•	`jwt.broker.public.key`: configure this option if you use the PUBLIC mode.
+•	`jwt.broker.private.key`: configure this option if you use the PRIVATE mode.
+•	`jwt.broker.secret.key`: configure this option if you use the SECRET mode.
 For more information, see [Token Authentication Admin of Pulsar](https://pulsar.apache.org/docs/en/security-token-admin/).
 
 Docker command to add profile and key files mount.
@@ -140,21 +140,21 @@ When using binary packages for direct deployment, you can follow these steps.
 - Download and unzip the binary package, which is available on the [Pulsar Download](https://pulsar.apache.org/download/) page.
 
   ```bash
-  
+
   	wget https://dist.apache.org/repos/dist/release/pulsar/pulsar-manager/pulsar-manager-0.2.0/apache-pulsar-manager-0.2.0-bin.tar.gz
   	tar -zxvf apache-pulsar-manager-0.2.0-bin.tar.gz
-  
+
   ```
 
 - Extract the back-end service binary package and place the front-end resources in the back-end service directory.
 
   ```bash
-  
+
   	cd pulsar-manager
   	tar -zxvf pulsar-manager.tar
   	cd pulsar-manager
   	cp -r ../dist ui
-  
+
   ```
 
 - Modify `application.properties` configuration on demand.
@@ -164,9 +164,9 @@ When using binary packages for direct deployment, you can follow these steps.
 - Start Pulsar Manager
 
   ```bash
-  
+
   ./bin/pulsar-manager
-  
+
   ```
 
 ### Custom docker image installation
@@ -174,7 +174,7 @@ When using binary packages for direct deployment, you can follow these steps.
 You can find the docker image in the [Docker Hub](https://github.com/apache/pulsar-manager/tree/master/docker) directory and build an image from the source code as well:
 
   ```bash
-  
+
   git clone https://github.com/apache/pulsar-manager
   cd pulsar-manager/front-end
   npm install --save
@@ -183,7 +183,7 @@ You can find the docker image in the [Docker Hub](https://github.com/apache/puls
   ./gradlew build -x test
   cd ..
   docker build -f docker/Dockerfile --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`latest` --build-arg VERSION=`latest` -t apachepulsar/pulsar-manager .
-  
+
   ```
 
 ## Configuration

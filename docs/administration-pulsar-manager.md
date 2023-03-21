@@ -9,7 +9,7 @@ Pulsar Manager is a web-based GUI management and monitoring tool that helps admi
 ## Install
 
 ### Quick Install
-The easiest way to use the Pulsar Manager is to run it inside a [Docker](https://www.docker.com/products/docker) container.
+The easiest way to use the Pulsar Manager is to run it inside a Docker container.
 
 ```shell
 docker pull apachepulsar/pulsar-manager:v0.3.0
@@ -61,16 +61,16 @@ jwt.broker.token.mode=PRIVATE
 jwt.broker.public.key=file:///path/broker-public.key
 jwt.broker.private.key=file:///path/broker-private.key
 
-or 
+or
 jwt.broker.token.mode=SECRET
 jwt.broker.secret.key=file:///path/broker-secret.key
 ```
 
-* `backend.jwt.token`: token for the superuser. You need to configure this parameter during cluster initialization.   
-* `jwt.broker.token.mode`: multiple modes of generating tokens, including PUBLIC, PRIVATE, and SECRET.  
-* `jwt.broker.public.key`: configure this option if you use the PUBLIC mode.  
-* `jwt.broker.private.key`: configure this option if you use the PRIVATE mode.  
-* `jwt.broker.secret.key`: configure this option if you use the SECRET mode.  
+* `backend.jwt.token`: token for the superuser. You need to configure this parameter during cluster initialization.
+* `jwt.broker.token.mode`: multiple modes of generating tokens, including PUBLIC, PRIVATE, and SECRET.
+* `jwt.broker.public.key`: configure this option if you use the PUBLIC mode.
+* `jwt.broker.private.key`: configure this option if you use the PRIVATE mode.
+* `jwt.broker.secret.key`: configure this option if you use the SECRET mode.
 For more information, see [Token Authentication Admin of Pulsar](security-token-admin.md).
 
 Docker command to add profile and key files mount.

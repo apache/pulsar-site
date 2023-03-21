@@ -9,7 +9,7 @@ Pulsar Manager is a web-based GUI management and monitoring tool that helps admi
 
 ## Install
 
-The easiest way to use the Pulsar Manager is to run it inside a [Docker](https://www.docker.com/products/docker) container.
+The easiest way to use the Pulsar Manager is to run it inside a Docker container.
 
 ```shell
 
@@ -26,7 +26,7 @@ docker run -it \
 ### Set administrator account and password
 
  ```shell
- 
+
  CSRF_TOKEN=$(curl http://localhost:7750/pulsar-manager/csrf-token)
  curl \
      -H 'X-XSRF-TOKEN: $CSRF_TOKEN' \
@@ -34,7 +34,7 @@ docker run -it \
      -H "Content-Type: application/json" \
      -X PUT http://localhost:7750/pulsar-manager/users/superuser \
      -d '{"name": "admin", "password": "apachepulsar", "description": "test", "email": "username@test.org"}'
- 
+
  ```
 
 You can find the docker image in the [Docker Hub](https://github.com/apache/pulsar-manager/tree/master/docker) directory and build an image from the source code as well:
@@ -54,7 +54,7 @@ docker build -f docker/Dockerfile --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:
 
 ### Use custom databases
 
-If you have a large amount of data, you can use a custom database. The following is an example of PostgreSQL.   
+If you have a large amount of data, you can use a custom database. The following is an example of PostgreSQL.
 
 1. Initialize database and table structures using the [file](https://github.com/apache/pulsar-manager/tree/master/src/main/resources/META-INF/sql/postgresql-schema.sql).
 
@@ -121,7 +121,7 @@ jwt.broker.token.mode=PRIVATE
 jwt.broker.public.key=file:///path/broker-public.key
 jwt.broker.private.key=file:///path/broker-private.key
 
-or 
+or
 jwt.broker.token.mode=SECRET
 jwt.broker.secret.key=file:///path/broker-secret.key
 

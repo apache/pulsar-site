@@ -5,22 +5,22 @@ sidebar_label: "Run Pulsar in Docker"
 original_id: standalone-docker
 ---
 
-For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container. 
+For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
-If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition) and follow the instructions for your OS.
+If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
 
 ## Start Pulsar in Docker
 
 * For MacOS, Linux, and Windows:
 
   ```shell
-  
+
   $ docker run -it -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
-  
+
   ```
 
 A few things to note about this command:
- * The data, metadata, and configuration are persisted on Docker volumes in order to not start "fresh" every 
+ * The data, metadata, and configuration are persisted on Docker volumes in order to not start "fresh" every
 time the container is restarted. For details on the volumes you can use `docker volume inspect <sourcename>`
  * For Docker on Windows make sure to configure it to use Linux containers
 
