@@ -5,7 +5,7 @@ sidebar_label: "REST"
 original_id: client-libraries-rest
 ---
 
-Pulsar not only provides REST endpoints to manage resources in Pulsar clusters, but also provides methods to query the state for those resources. In addition, Pulsar REST provides a simple way to interact with Pulsar **without using client libraries**, which is convenient for applications to use HTTP to interact with Pulsar. 
+Pulsar not only provides REST endpoints to manage resources in Pulsar clusters, but also provides methods to query the state for those resources. In addition, Pulsar REST provides a simple way to interact with Pulsar **without using client libraries**, which is convenient for applications to use HTTP to interact with Pulsar.
 
 ## Connection
 
@@ -14,22 +14,22 @@ To connect to Pulsar, you need to specify a URL.
 - Produce messages to non-partitioned or partitioned topics
 
   ```
-  
+
   brokerUrl:{8080/8081}/topics/{persistent/non-persistent}/{my-tenant}/{my-namespace}/{my-topic}
-  
+
   ```
 
 - Produce messages to specific partitions of partitioned topics
 
   ```
-  
+
   brokerUrl:{8080/8081}/topics/{persistent/non-persistent}/{my-tenant}/{my-namespace}/{my-topic}/partitions/{partition-number}
-  
+
   ```
 
 ## Producer
 
-Currently, you can produce messages to the following destinations with tools like cURL or Postman via REST. 
+Currently, you can produce messages to the following destinations with tools like cURL or Postman via REST.
 
 - Non-partitioned or partitioned topics
 
@@ -54,13 +54,13 @@ Consuming and reading messages via REST will be supported in the future.
   `producerName`|No|Producer name
   `Messages[] SingleMessage`|Yes|Messages to be sent
 
-- Below is the structure of a message. 
+- Below is the structure of a message.
 
   Parameter|Required?|Type|Description
   |---|---|---|---
   `payload`|Yes|`String`|Actual message payload <br /><br />Messages are sent in strings and encoded with given schemas on the server side
   `properties`|No|`Map<String, String>`|Custom properties
-  `key`|No|`String`|Partition key 
+  `key`|No|`String`|Partition key
   `replicationClusters`|No|`List<String>`|Clusters to which messages replicate
   `eventTime`|No|`String`|Message event time
   `sequenceId`|No|`long`|Message sequence ID
@@ -72,7 +72,7 @@ Consuming and reading messages via REST will be supported in the future.
 
 - Currently, Primitive, Avro, JSON, and KeyValue schemas are supported.
 
-- For Primitive, Avro and JSON schemas, schemas should be provided as the full schema encoded as a string.  
+- For Primitive, Avro and JSON schemas, schemas should be provided as the full schema encoded as a string.
 
 - If the schema is not set, messages are encoded with string schema.
 
@@ -127,7 +127,7 @@ curl --location --request POST 'brokerUrl:{8080/8081}/topics/{persistent/non-per
     }
   ]
 }
-`  
+`
 // Sample message
 
 ```

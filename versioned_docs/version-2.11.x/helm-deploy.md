@@ -61,7 +61,7 @@ The Pulsar Helm Chart is designed for production use. To use the Pulsar Helm Cha
 --set volumes.persistence=false
 ```
 
-#### Affinity 
+#### Affinity
 
 By default, `anti-affinity` is enabled to ensure pods of the same component can run on different nodes.
 

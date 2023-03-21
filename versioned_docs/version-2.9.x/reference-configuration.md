@@ -169,7 +169,7 @@ Pulsar brokers are responsible for handling incoming messages from producers, di
 |brokerDeduplicationSnapshotIntervalSeconds| The time period after which a deduplication informational snapshot is taken. It runs simultaneously with `brokerDeduplicationEntriesInterval`. |120|
 |brokerDeduplicationProducerInactivityTimeoutMinutes| The time of inactivity (in minutes) after which the broker will discard deduplication information related to a disconnected producer. |360|
 |dispatchThrottlingRatePerReplicatorInMsg| The default messages per second dispatch throttling-limit for every replicator in replication. The value of `0` means disabling replication message dispatch-throttling| 0 |
-|dispatchThrottlingRatePerReplicatorInByte| The default bytes per second dispatch throttling-limit for every replicator in replication. The value of `0` means disabling replication message-byte dispatch-throttling| 0 | 
+|dispatchThrottlingRatePerReplicatorInByte| The default bytes per second dispatch throttling-limit for every replicator in replication. The value of `0` means disabling replication message-byte dispatch-throttling| 0 |
 |zooKeeperSessionTimeoutMillis| Zookeeper session timeout in milliseconds |30000|
 |brokerShutdownTimeoutMs| Time to wait for broker graceful shutdown. After this time elapses, the process will be killed  |60000|
 |skipBrokerShutdownOnOOM| Flag to skip broker shutdown when broker handles Out of memory error. |false|
@@ -352,7 +352,7 @@ brokerServiceCompactionThresholdInBytes|If the estimated backlog size is greater
 |retentionCheckIntervalInSeconds|Check between intervals to see if consumed ledgers need to be trimmed. Use 0 or negative number to disable the check.|120|
 | maxMessageSize | Set the maximum size of a message. | 5242880 |
 | preciseTopicPublishRateLimiterEnable | Enable precise topic publish rate limiting. | false |
-| lazyCursorRecovery | Whether to recover cursors lazily when trying to recover a managed ledger backing a persistent topic. It can improve write availability of topics. The caveat is now when recovered ledger is ready to write we're not sure if all old consumers' last mark delete position(ack position) can be recovered or not. So user can make the trade off or have custom logic in application to checkpoint consumer state.| false |  
+| lazyCursorRecovery | Whether to recover cursors lazily when trying to recover a managed ledger backing a persistent topic. It can improve write availability of topics. The caveat is now when recovered ledger is ready to write we're not sure if all old consumers' last mark delete position(ack position) can be recovered or not. So user can make the trade off or have custom logic in application to checkpoint consumer state.| false |
 |haProxyProtocolEnabled | Enable or disable the [HAProxy](http://www.haproxy.org/) protocol. |false|
 | maxTopicsPerNamespace | The maximum number of persistent topics that can be created in the namespace. When the number of topics reaches this threshold, the broker rejects the request of creating a new topic, including the auto-created topics by the producer or consumer, until the number of connected consumers decreases. The default value 0 disables the check. | 0 |
 |subscriptionTypesEnabled| Enable all subscription types, which are exclusive, shared, failover, and key_shared. | Exclusive, Shared, Failover, Key_Shared |
@@ -427,9 +427,9 @@ You can set the log level and configuration in the  [log4j2.yaml](https://github
 
 :::note
 
-'topic' in log4j2.appender is configurable. 
+'topic' in log4j2.appender is configurable.
 - If you want to append all logs to a single topic, set the same topic name.
-- If you want to append logs to different topics, you can set different topic names. 
+- If you want to append logs to different topics, you can set different topic names.
 
 :::
 

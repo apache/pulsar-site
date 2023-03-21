@@ -657,7 +657,7 @@ The following example shows how to create a producer/consumer with a ProtobufNat
 
    Message<DemoMessage> message = consumer.receive(5, TimeUnit.SECONDS);
    ```
-  
+
 </TabItem>
 <TabItem value="C++">
 
@@ -861,7 +861,7 @@ This example shows how to construct an [AUTO_PRODUCE](schema-understand.md#auto-
 Produce<byte[]> pulsarProducer = client.newProducer(Schema.AUTO_PRODUCE_BYTES())
     …
     .create();
-byte[] kafkaMessageBytes = … ; 
+byte[] kafkaMessageBytes = … ;
 pulsarProducer.produce(kafkaMessageBytes);
 ```
 
@@ -876,22 +876,22 @@ Consumer<GenericRecord> pulsarConsumer = client.newConsumer(Schema.AUTO_CONSUME(
     …
     .subscribe();
 
-Message<GenericRecord> msg = consumer.receive() ; 
+Message<GenericRecord> msg = consumer.receive() ;
 GenericRecord record = msg.getValue();
 record.getFields().forEach((field -> {
    if (field.getName().equals("theNeedFieldName")) {
        Object recordField = record.getField(field);
-       //Do some things 
+       //Do some things
    }
 }));
 ```
 
 ## Customize schema storage
 
-By default, Pulsar stores various data types of schemas in [Apache BookKeeper](https://bookkeeper.apache.org) deployed alongside Pulsar. Alternatively, you can use another storage system if needed. 
+By default, Pulsar stores various data types of schemas in [Apache BookKeeper](https://bookkeeper.apache.org) deployed alongside Pulsar. Alternatively, you can use another storage system if needed.
 
-To use a non-default (non-BookKeeper) storage system for Pulsar schemas, you need to implement the following Java interfaces before [deploying custom schema storage](#deploy-custom-schema-storage): 
-* [SchemaStorage interface](#implement-schemastorage-interface) 
+To use a non-default (non-BookKeeper) storage system for Pulsar schemas, you need to implement the following Java interfaces before [deploying custom schema storage](#deploy-custom-schema-storage):
+* [SchemaStorage interface](#implement-schemastorage-interface)
 * [SchemaStorageFactory interface](#implement-schemastoragefactory-interface)
 
 ### Implement `SchemaStorage` interface
@@ -926,7 +926,7 @@ For a complete example of **schema storage** implementation, see the [BookKeeper
 
 :::
 
-### Implement `SchemaStorageFactory` interface 
+### Implement `SchemaStorageFactory` interface
 
 The `SchemaStorageFactory` interface has the following method:
 
@@ -948,9 +948,9 @@ For a complete example of **schema storage factory** implementation, see the [Bo
 To use your custom schema storage implementation, perform the following steps.
 
 1. Package the implementation in a [JAR](https://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html) file.
-   
+
 2. Add the JAR file to the `lib` folder in your Pulsar binary or source distribution.
-   
+
 3. Change the `schemaRegistryStorageClassName` configuration in the `conf/broker.conf` file to your custom factory class.
-      
+
 4. Start Pulsar.

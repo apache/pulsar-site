@@ -64,7 +64,7 @@ For more information about the `localrun` command, see [`localrun`](reference-co
 
 ```bash
 ./bin/pulsar-admin sinks localrun \
-    --archive connectors/pulsar-io-mongo-@pulsar:version@.nar \ 
+    --archive connectors/pulsar-io-mongo-@pulsar:version@.nar \
     --tenant public --namespace default \
     --inputs test-mongo \
     --name pulsar-mongo-sink \
@@ -82,7 +82,7 @@ Use one of the following methods to get a connector log in localrun mode:
   ```
 
   **Example**
-  
+
   The path of the Mongo sink connector is:
 
   ```bash
@@ -209,7 +209,7 @@ In cluster mode, multiple connectors can run on a worker. To find the log path o
 Pulsar admin CLI helps you debug Pulsar connectors with the following subcommands:
 * [`get`](#get)
 * [`status`](#status)
-* [`topics stats`](#topics-stats)  
+* [`topics stats`](#topics-stats)
 
 **Create a Mongo sink**
 
@@ -269,7 +269,7 @@ For more information about the `get` command, see [`get`](reference-connector-ad
 Use the `status` command to get the current status about the Mongo sink connector, such as the number of instance, the number of running instance, instanceId, workerId and so on.
 
 ```bash
-./bin/pulsar-admin sinks status 
+./bin/pulsar-admin sinks status
 --tenant public \
 --namespace default  \
 --name pulsar-mongo-sink
@@ -369,23 +369,23 @@ For more information about the `topic stats` command, see [`topic stats`](pathna
 :::
 
 ## Checklist
-This checklist indicates the major areas to check when you debug connectors. It is a reminder of what to look for to ensure a thorough review and an evaluation tool to get the status of connectors. 
+This checklist indicates the major areas to check when you debug connectors. It is a reminder of what to look for to ensure a thorough review and an evaluation tool to get the status of connectors.
 * Does Pulsar start successfully?
-  
+
 * Does the external service run normally?
-  
+
 * Is the nar package complete?
-  
+
 * Is the connector configuration file correct?
-  
+
 * In localrun mode, run a connector and check the printed information (connector log) on the console.
-  
+
 * In cluster mode：
-  
+
    * Use the `get` command to get the basic information.
-  
+
    * Use the `status` command to get the current status.
    * Use the `topics stats` command to get the stats for a specified topic and its connected producers and consumers.
-  
+
    * Check the connector log.
 * Enter into the external system and verify the result.

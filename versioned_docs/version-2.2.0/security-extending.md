@@ -117,10 +117,10 @@ To provide a custom provider, one needs to implement the
  Pulsar broker classpath and configure it in `conf/broker.conf`:
 
  ```properties
- 
+
  # Authorization provider fully qualified class-name
  authorizationProvider=org.apache.pulsar.broker.authorization.PulsarAuthorizationProvider
- 
+
  ```
 
 ```java

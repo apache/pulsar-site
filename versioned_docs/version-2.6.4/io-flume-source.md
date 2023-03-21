@@ -13,7 +13,7 @@ The configuration of the Flume source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 `name`|String|true|"" (empty string)|The name of the agent.
 `confFile`|String|true|"" (empty string)|The configuration file.
@@ -27,10 +27,10 @@ Before using the Flume source connector, you need to create a configuration file
 
 > For more information about the `source.conf` in the example below, see [here](https://github.com/apache/pulsar/blob/master/pulsar-io/flume/src/main/resources/flume/source.conf).
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "name": "a1",
       "confFile": "source.conf",
@@ -38,19 +38,19 @@ Before using the Flume source connector, you need to create a configuration file
       "zkConnString": "",
       "zkBasePath": ""
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       name: a1
       confFile: source.conf
       noReloadConf: false
       zkConnString: ""
       zkBasePath: ""
-  
+
   ```
 

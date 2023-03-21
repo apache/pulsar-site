@@ -10,7 +10,7 @@ The Apache Pulsar Helm Chart contains all components to support the features and
 
 ## What's Next?
 
-* To get up and running with Pulsar Helm Chart as fast as possible for Proof of Concept (PoC) in a **non-production** use case, see the [Quick Start Guide](getting-started-helm.md). 
+* To get up and running with Pulsar Helm Chart as fast as possible for Proof of Concept (PoC) in a **non-production** use case, see the [Quick Start Guide](getting-started-helm.md).
 
 * To get up and running with Pulsar Helm Chart in production under sustained load, see the [preparations](helm-prepare.md) and [Deployment Guide](helm-deploy.md).
 

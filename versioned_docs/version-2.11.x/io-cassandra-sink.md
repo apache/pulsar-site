@@ -18,7 +18,7 @@ The configuration of the Cassandra sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `roots` | String|true | " " (empty string) | A comma-separated list of Cassandra hosts to connect to.|
 | `keyspace` | String|true| " " (empty string)| The key space used for writing pulsar messages. <br /><br />**Note: `keyspace` should be created prior to a Cassandra sink.**|

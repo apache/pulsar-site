@@ -188,7 +188,7 @@ All the namespace metrics are labeled with the following labels:
 | pulsar_subscription_delayed | Gauge | The total message batches (entries) are delayed for dispatching. |
 | pulsar_storage_write_latency_le_* | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: <= 0.5ms </li><li>pulsar_storage_write_latency_le_1: <= 1ms</li><li>pulsar_storage_write_latency_le_5: <= 5ms</li><li>pulsar_storage_write_latency_le_10: <= 10ms</li><li>pulsar_storage_write_latency_le_20: <= 20ms</li><li>pulsar_storage_write_latency_le_50: <= 50ms</li><li>pulsar_storage_write_latency_le_100: <= 100ms</li><li>pulsar_storage_write_latency_le_200: <= 200ms</li><li>pulsar_storage_write_latency_le_1000: <= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul> |
 | pulsar_entry_size_le_* | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: <= 128 bytes </li><li>pulsar_entry_size_le_512: <= 512 bytes</li><li>pulsar_entry_size_le_1_kb: <= 1 KB</li><li>pulsar_entry_size_le_2_kb: <= 2 KB</li><li>pulsar_entry_size_le_4_kb: <= 4 KB</li><li>pulsar_entry_size_le_16_kb: <= 16 KB</li><li>pulsar_entry_size_le_100_kb: <= 100 KB</li><li>pulsar_entry_size_le_1_mb: <= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul> |
-| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `InMemoryDelayedDeliveryTracker` of the namespace owned by this broker (in bytes). | 
+| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `InMemoryDelayedDeliveryTracker` of the namespace owned by this broker (in bytes). |
 
 ### Topic metrics
 
@@ -331,7 +331,7 @@ All the loadbalancing metrics are labeled with the following labels:
 | pulsar_lb_bandwidth_in_usage | Gauge | The broker inbound bandwidth usage (in percent). |
 | pulsar_lb_bandwidth_out_usage | Gauge | The broker outbound bandwidth usage (in percent). |
 | pulsar_lb_cpu_usage | Gauge | The broker cpu usage (in percent). |
-| pulsar_lb_directMemory_usage | Gauge | The broker process direct memory usage (in percent). | 
+| pulsar_lb_directMemory_usage | Gauge | The broker process direct memory usage (in percent). |
 | pulsar_lb_memory_usage | Gauge | The broker process memory usage (in percent). |
 
 ### BundleUnloading metrics

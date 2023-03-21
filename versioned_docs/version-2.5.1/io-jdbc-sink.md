@@ -5,18 +5,18 @@ sidebar_label: "JDBC sink connector"
 original_id: io-jdbc-sink
 ---
 
-The JDBC sink connector pulls messages from Pulsar topics 
+The JDBC sink connector pulls messages from Pulsar topics
 and persists the messages to MySQL or SQlite.
 
 > Currently, INSERT, DELETE and UPDATE operations are supported.
 
-## Configuration 
+## Configuration
 
 The configuration of the JDBC sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `userName` | String|false | " " (empty string) | The username used to connect to the database specified by `jdbcUrl`.<br /><br />**Note: `userName` is case-sensitive.**|
 | `password` | String|false | " " (empty string)| The password used to connect to the database specified by `jdbcUrl`. <br /><br />**Note: `password` is case-sensitive.**|
@@ -31,29 +31,29 @@ The configuration of the JDBC sink connector has the following properties.
 
 Before using the JDBC sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "userName": "root",
       "password": "jdbc",
       "jdbcUrl": "jdbc:mysql://127.0.0.1:3306/pulsar_mysql_jdbc_sink",
       "tableName": "pulsar_mysql_jdbc_sink"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       userName: "root"
       password: "jdbc"
       jdbcUrl: "jdbc:mysql://127.0.0.1:3306/pulsar_mysql_jdbc_sink"
       tableName: "pulsar_mysql_jdbc_sink"
-  
+
   ```
 
 ## Usage

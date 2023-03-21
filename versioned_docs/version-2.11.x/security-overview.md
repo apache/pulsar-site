@@ -17,7 +17,7 @@ Apache Pulsar uses an [Authentication Provider](#authentication) or an [Authenti
 
 ## Encryption
 
-Encryption ensures that if an attacker gets access to your data, the attacker cannot read the data without also having access to the encryption keys. Encryption provides an important mechanism for protecting your data in-transit to meet your security requirements for cryptographic algorithms and key management. 
+Encryption ensures that if an attacker gets access to your data, the attacker cannot read the data without also having access to the encryption keys. Encryption provides an important mechanism for protecting your data in-transit to meet your security requirements for cryptographic algorithms and key management.
 
 **What's next?**
 
@@ -26,7 +26,7 @@ Encryption ensures that if an attacker gets access to your data, the attacker ca
 
 ## Authentication
 
-Authentication is the process of verifying the identity of clients. In Pulsar, the authentication provider is responsible for properly identifying clients and associating them with role tokens. Note that if you only enable authentication, an authenticated role token can access all resources in the cluster. 
+Authentication is the process of verifying the identity of clients. In Pulsar, the authentication provider is responsible for properly identifying clients and associating them with role tokens. Note that if you only enable authentication, an authenticated role token can access all resources in the cluster.
 
 ### How it works in Pulsar
 

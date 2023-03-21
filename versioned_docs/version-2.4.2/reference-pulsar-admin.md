@@ -26,7 +26,7 @@ Commands
 
   For more information, see [here](reference-connector-admin.md#sources)
 * `sinks`
-  
+
   For more information, see [here](reference-connector-admin.md#sinks)
 * `topics`
 * `tenants`

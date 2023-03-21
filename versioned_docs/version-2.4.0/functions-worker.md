@@ -4,9 +4,9 @@ title: Deploy and manage functions worker
 sidebar_label: "Admin: Pulsar Functions Worker"
 original_id: functions-worker
 ---
-This guide is used for administrator. 
+This guide is used for administrator.
 
-Pulsar `functions-worker` is a logic component to run Pulsar Functions in cluster mode. Two options are available, and you can select either of the two options based on your requirements. 
+Pulsar `functions-worker` is a logic component to run Pulsar Functions in cluster mode. Two options are available, and you can select either of the two options based on your requirements.
 - [run with brokers](#run-Functions-worker-with-brokers)
 - [run it separately](#run-Functions-worker-separately) in a different broker
 
@@ -50,7 +50,7 @@ If authentication is enabled on the BookKeeper cluster, configure the following 
 
 ### Start Functions-worker with broker
 
-Once you have configured the `functions_worker.yml` file, you can start or restart your broker. 
+Once you have configured the `functions_worker.yml` file, you can start or restart your broker.
 
 And then you can use the following command to verify if `functions-worker` is running well.
 
@@ -74,12 +74,12 @@ This section illustrates how to run `functions-worker` as a separate process in 
 
 ![assets/functions-worker-separated.png](/assets/functions-worker-separated.png)
 
-> Note    
+> Note
 In this mode, make sure `functionsWorkerEnabled` is set to `false`, so you won't start `functions-worker` with brokers by mistake.
 
 ### Configure Functions-worker to run separately
 
-To run function-worker separately, you have to configure the following parameters. 
+To run function-worker separately, you have to configure the following parameters.
 
 #### Worker parameters
 
@@ -128,7 +128,7 @@ For details on TLS encryption, refer to [Transport Encryption using TLS](securit
 **Enable Authentication Provider**
 
 To enable authentication on Functions Worker, configure the following settings.
-> Note  
+> Note
 Substitute the *providers list* with the providers you want to enable.
 
 ```
@@ -139,7 +139,7 @@ authenticationProviders: [ provider1, provider2 ]
 ```
 
 For *SASL Authentication* provider, add `saslJaasClientAllowedIds` and `saslJaasBrokerSectionName`
-under `properties` if needed. 
+under `properties` if needed.
 
 ```
 
@@ -155,7 +155,7 @@ See [Token Authentication](security-token-admin.md) for more details.
 ```
 
 properties:
-  tokenSecretKey:       file://my/secret.key 
+  tokenSecretKey:       file://my/secret.key
   # If using public/private
   # tokenPublicKey:     file:///path/to/public.key
 
@@ -210,7 +210,7 @@ Hence you need to configure your `pulsar-admin` to use the right service URL acc
 In order to address this inconvenience, you can start a proxy cluster for routing the admin rest requests accordingly. Hence you will have one central entry point for your admin service.
 
 If you already have a proxy cluster, continue reading. If you haven't setup a proxy cluster before, you can follow the [instructions](http://pulsar.apache.org/docs/en/administration-proxy/) to
-start proxies.    
+start proxies.
 
 ![assets/functions-worker-separated.png](/assets/functions-worker-separated-proxy.png)
 
@@ -230,11 +230,11 @@ As described above, you can run Function-worker with brokers, or run it separate
 Use which mode for your cases, refer to the following guidelines to determine.
 
 Use the `Run-with-Broker` mode in the following cases:
-- a) if resource isolation is not required when running functions in `Process` or `Thread` mode; 
+- a) if resource isolation is not required when running functions in `Process` or `Thread` mode;
 - b) if you configure the functions-worker to run functions on Kubernetes (where the resource isolation problem is addressed by Kubernetes).
 
 Use the `Run-separately` mode in the following cases:
--  a) you don't have a Kubernetes cluster; 
+-  a) you don't have a Kubernetes cluster;
 -  b) if you want to run functions and brokers separately.
 
 ## Troubleshooting
@@ -273,7 +273,7 @@ bin/pulsar-admin namespaces set-clusters --clusters <existing-clusters>,<new-clu
 
 ```
 
-4. After setting the cluster successfully, enable functions worker by setting `functionsWorkerEnabled=true`. 
+4. After setting the cluster successfully, enable functions worker by setting `functionsWorkerEnabled=true`.
 
-5. Set the correct cluster name in `pulsarFunctionsCluster` in the `conf/functions_worker.yml` file, and restart brokers. 
+5. Set the correct cluster name in `pulsarFunctionsCluster` in the `conf/functions_worker.yml` file, and restart brokers.
 

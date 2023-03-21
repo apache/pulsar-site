@@ -18,18 +18,18 @@ Pulsar Functions are a serverless computing framework that runs on top of Pulsar
 * applies a user-defined processing logic to the messages,
 * publishes the outputs of the messages to other topics.
 
-The diagram below illustrates the three steps in the functions computing process. 
+The diagram below illustrates the three steps in the functions computing process.
 
 ![Pulsar Functions execute user-defined code on data published to Pulsar topics](/assets/function-overview.svg)
 
 Each time a function receives a message, it completes the following consume-apply-publish steps.
-1. Consumes the message from one or more **input topics**. 
+1. Consumes the message from one or more **input topics**.
 2. Applies the customized (user-supplied) processing logic to the message.
 3. Publishes the output of the message, including:
     1. writes output messages to an **output topic** in Pulsar
     2. writes logs to a **log topic** (if it is configured)for debugging
-    3. writes [state](functions-develop-state.md) updates to BookKeeper (if it is configured) 
-    
+    3. writes [state](functions-develop-state.md) updates to BookKeeper (if it is configured)
+
 You can write functions in Java, Python, and Go. For example, you can use Pulsar Functions to set up the following processing chain:
 * A Python function listens for the `raw-sentences` topic and "sanitizes" incoming strings (removing extraneous white space and converting all characters to lowercase) and then publishes the results to a `sanitized-sentences` topic.
 * A Java function listens for the `sanitized-sentences` topic, counts the number of times each word appears within a specified time [window](functions-concepts.md#window-function), and publishes the results to a `results` topic.
@@ -62,7 +62,7 @@ In this example, the function calculates a sum of the occurrences of every indiv
 
 ### Content-based routing example
 
-This figure demonstrates the process of implementing a content-based routing use case. 
+This figure demonstrates the process of implementing a content-based routing use case.
 
 ![Count-based routing example using Pulsar Functions](/assets/pulsar-functions-routing-example.png)
 
@@ -81,6 +81,6 @@ In this example, a function takes items (strings) as input and publishes them to
 
 **For admins/operators**
 1. [Set up function workers](functions-worker.md).
-2. [Configure function runtime](functions-runtime.md). 
+2. [Configure function runtime](functions-runtime.md).
 3. [Deploy a function](functions-deploy.md).
 

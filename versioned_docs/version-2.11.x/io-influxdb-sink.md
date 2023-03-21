@@ -20,7 +20,7 @@ The configuration of the InfluxDB sink connector has the following properties.
 
 ### Property
 #### InfluxDBv2
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `influxdbUrl` |String| true|" " (empty string) | The URL of the InfluxDB instance. |
 | `token` | String|true| " " (empty string) |The authentication token used to authenticate to InfluxDB. |
@@ -33,7 +33,7 @@ The configuration of the InfluxDB sink connector has the following properties.
 | `batchSize` | int|false|200| The batch size of writing to InfluxDB. |
 
 #### InfluxDBv1
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `influxdbUrl` |String| true|" " (empty string) | The URL of the InfluxDB instance. |
 | `username` | String|false| " " (empty string) |The username used to authenticate to InfluxDB. |
@@ -85,7 +85,7 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
 
 #### InfluxDBv1
 
-* JSON 
+* JSON
 
   ```json
   {

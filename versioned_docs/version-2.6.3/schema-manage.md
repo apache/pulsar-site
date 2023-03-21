@@ -13,19 +13,19 @@ import TabItem from '@theme/TabItem';
 
 This guide demonstrates the ways to manage schemas:
 
-* Automatically 
-  
+* Automatically
+
   * [Schema AutoUpdate](#schema-autoupdate)
 
 * Manually
-  
+
   * [Schema manual management](#schema-manual-management)
-  
+
   * [Custom schema storage](#custom-schema-storage)
 
 ## Schema AutoUpdate
 
-If a schema passes the schema compatibility check, Pulsar producer automatically updates this schema to the topic it produces by default. 
+If a schema passes the schema compatibility check, Pulsar producer automatically updates this schema to the topic it produces by default.
 
 ### AutoUpdate for producer
 
@@ -37,24 +37,24 @@ For a producer, the `AutoUpdate` happens in the following cases:
 
   * If a **producer doesn’t carry a schema**:
 
-  * If `isSchemaValidationEnforced` or `schemaValidationEnforced` is **disabled** in the namespace to which the topic belongs, the producer is allowed to connect to the topic and produce data. 
-  
+  * If `isSchemaValidationEnforced` or `schemaValidationEnforced` is **disabled** in the namespace to which the topic belongs, the producer is allowed to connect to the topic and produce data.
+
   * If `isSchemaValidationEnforced` or `schemaValidationEnforced` is **enabled** in the namespace to which the topic belongs, the producer is rejected and disconnected.
 
   * If a **producer carries a schema**:
-  
+
   A broker performs the compatibility check based on the configured compatibility check strategy of the namespace to which the topic belongs.
-  
-  * If the schema is registered, a producer is connected to a broker. 
-  
+
+  * If the schema is registered, a producer is connected to a broker.
+
   * If the schema is not registered:
-  
+
      * If `isAllowAutoUpdateSchema` sets to **false**, the producer is rejected to connect to a broker.
-  
+
       * If `isAllowAutoUpdateSchema` sets to **true**:
-   
+
           * If the schema passes the compatibility check, then the broker registers a new schema automatically for the topic and the producer is connected.
-      
+
           * If the schema does not pass the compatibility check, then the broker does not register a schema and the producer is rejected to connect to a broker.
 
 ![AutoUpdate Producer](/assets/schema-producer.png)
@@ -68,19 +68,19 @@ For a consumer, the `AutoUpdate` happens in the following cases:
 * If a **consumer connects to a topic with a schema**.
 
   * If a topic does not have all of them (a schema/data/a local consumer and a local producer):
-  
+
       * If `isAllowAutoUpdateSchema` sets to **true**, then the consumer registers a schema and it is connected to a broker.
-      
+
       * If `isAllowAutoUpdateSchema` sets to **false**, then the consumer is rejected to connect to a broker.
-      
+
   * If a topic has one of them (a schema/data/a local consumer and a local producer), then the schema compatibility check is performed.
-  
+
       * If the schema passes the compatibility check, then the consumer is connected to the broker.
-      
+
       * If the schema does not pass the compatibility check, then the consumer is rejected to connect to the broker.
-      
+
 ![AutoUpdate Consumer](/assets/schema-consumer.png)
-        
+
 
 ### Manage AutoUpdate strategy
 
@@ -102,7 +102,7 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --enable tenant/name
 
 ```
 
-#### Disable AutoUpdate 
+#### Disable AutoUpdate
 
 To disable `AutoUpdate` on a namespace, you can use the `pulsar-admin` command.
 
@@ -128,7 +128,7 @@ bin/pulsar-admin namespaces set-schema-compatibility-strategy --compatibility <c
 
 By default, `schemaValidationEnforced` is **disabled** for producers:
 
-* This means a producer without a schema can produce any kind of messages to a topic with schemas, which may result in producing trash data to the topic. 
+* This means a producer without a schema can produce any kind of messages to a topic with schemas, which may result in producing trash data to the topic.
 
 * This allows non-java language clients that don’t support schema can produce messages to a topic with schemas.
 
@@ -158,18 +158,18 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --disable tenant/names
 
 To manage schemas, you can use one of the following methods.
 
-| Method |  Description | 
+| Method |  Description |
 | --- | --- |
-|  **Admin CLI**<li></li> |   You can use the `pulsar-admin` tool to manage Pulsar schemas, brokers, clusters, sources, sinks, topics, tenants and so on. For more information about how to use the `pulsar-admin` tool, see [here](reference-pulsar-admin.md).  | 
-|  **REST API**<li></li> |   Pulsar exposes schema related management API in Pulsar’s admin RESTful API. You can access the admin RESTful endpoint directly to manage schemas. For more information about how to use the Pulsar REST API, see [here](http://pulsar.apache.org/admin-rest-api/).  | 
-|  **Java Admin API**<li></li> |  Pulsar provides Java admin library. | 
+|  **Admin CLI**<li></li> |   You can use the `pulsar-admin` tool to manage Pulsar schemas, brokers, clusters, sources, sinks, topics, tenants and so on. For more information about how to use the `pulsar-admin` tool, see [here](reference-pulsar-admin.md).  |
+|  **REST API**<li></li> |   Pulsar exposes schema related management API in Pulsar’s admin RESTful API. You can access the admin RESTful endpoint directly to manage schemas. For more information about how to use the Pulsar REST API, see [here](http://pulsar.apache.org/admin-rest-api/).  |
+|  **Java Admin API**<li></li> |  Pulsar provides Java admin library. |
 
 ### Upload a schema
 
 To upload (register) a new schema for a topic, you can use one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -183,7 +183,7 @@ $ pulsar-admin schemas upload --filename <schema-definition-file> <topic-name>
 
 ```
 
-The `schema-definition-file` is in JSON format. 
+The `schema-definition-file` is in JSON format.
 
 ```json
 
@@ -197,11 +197,11 @@ The `schema-definition-file` is in JSON format.
 
 The `schema-definition-file` includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `type`  |   The schema type. | 
+|  `type`  |   The schema type. |
 | `schema` | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
-|  `properties`  |  The additional properties associated with the schema. | 
+|  `properties`  |  The additional properties associated with the schema. |
 
 Here are examples of the `schema-definition-file` for a JSON schema.
 
@@ -250,9 +250,9 @@ The post payload is in JSON format.
 
 The post payload includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `type`  |   The schema type. | 
+|  `type`  |   The schema type. |
 | `schema` | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
 |  `properties`  |  The additional properties associated with the schema. |
 
@@ -267,11 +267,11 @@ void createSchema(String topic, PostSchemaPayload schemaPayload)
 
 The `PostSchemaPayload` includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `type`  |   The schema type. | 
+|  `type`  |   The schema type. |
 | `schema` | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
-|  `properties`  |  The additional properties associated with the schema. | 
+|  `properties`  |  The additional properties associated with the schema. |
 
 Here is an example of `PostSchemaPayload`:
 
@@ -294,10 +294,10 @@ admin.createSchema("my-tenant/my-ns/my-topic", payload);
 
 ### Get a schema (latest)
 
-To get the latest schema for a topic, you can use one of the following methods. 
+To get the latest schema for a topic, you can use one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -343,12 +343,12 @@ Here is an example of a response, which is returned in JSON format.
 
 The response includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `version`  |   The schema version, which is a long number. | 
-|  `type`  |   The schema type. | 
-|  `timestamp`  |   The timestamp of creating this version of schema. | 
-|  `data`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> | 
+|  `version`  |   The schema version, which is a long number. |
+|  `type`  |   The schema type. |
+|  `timestamp`  |   The timestamp of creating this version of schema. |
+|  `data`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> |
 |  `properties`  |  The additional properties associated with the schema. |
 
 </TabItem>
@@ -362,12 +362,12 @@ SchemaInfo createSchema(String topic)
 
 The `SchemaInfo` includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `name`  |   The schema name. | 
-|  `type`  |   The schema type. | 
-|  `schema`  |   A byte array of the schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this byte array should be empty. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition converted to a byte array. </li> | 
-|  `properties`  |  The additional properties associated with the schema. | 
+|  `name`  |   The schema name. |
+|  `type`  |   The schema type. |
+|  `schema`  |   A byte array of the schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this byte array should be empty. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition converted to a byte array. </li> |
+|  `properties`  |  The additional properties associated with the schema. |
 
 Here is an example of `SchemaInfo`:
 
@@ -389,7 +389,7 @@ SchemaInfo si = admin.getSchema("my-tenant/my-ns/my-topic");
 To get a specific version of a schema, you can use one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -424,12 +424,12 @@ Here is an example of a response, which is returned in JSON format.
 
 The response includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `version`  |   The schema version, which is a long number. | 
-|  `type`  |   The schema type. | 
-|  `timestamp`  |   The timestamp of creating this version of schema. | 
-|  `data`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> | 
+|  `version`  |   The schema version, which is a long number. |
+|  `type`  |   The schema type. |
+|  `timestamp`  |   The timestamp of creating this version of schema. |
+|  `data`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a </li>**primitive**<li>schema, this field should be blank. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition. </li> |
 |  `properties`  |  The additional properties associated with the schema. |
 
 </TabItem>
@@ -443,12 +443,12 @@ SchemaInfo createSchema(String topic, long version)
 
 The `SchemaInfo` includes the following fields:
 
-| Field |  Description | 
+| Field |  Description |
 | --- | --- |
-|  `name`  |  The schema name. | 
-|  `type`  |  The schema type. | 
-|  `schema`  |   A byte array of the schema definition data, which is encoded in UTF 8. <li>If the schema is a </li>**primitive**<li>schema, this byte array should be empty. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition converted to a byte array. </li> | 
-|  `properties`  |  The additional properties associated with the schema. | 
+|  `name`  |  The schema name. |
+|  `type`  |  The schema type. |
+|  `schema`  |   A byte array of the schema definition data, which is encoded in UTF 8. <li>If the schema is a </li>**primitive**<li>schema, this byte array should be empty. </li><li>If the schema is a </li>**struct**<li>schema, this field should be a JSON string of the Avro schema definition converted to a byte array. </li> |
+|  `properties`  |  The additional properties associated with the schema. |
 
 Here is an example of `SchemaInfo`:
 
@@ -470,7 +470,7 @@ SchemaInfo si = admin.getSchema("my-tenant/my-ns/my-topic", 1L);
 To provide a schema via a topic, you can use the following method.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"}]}>
 
@@ -500,7 +500,7 @@ In any case, the **delete** action deletes **all versions** of a schema register
 :::
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
 
@@ -561,15 +561,15 @@ admin.deleteSchema("my-tenant/my-ns/my-topic");
 
 ## Custom schema storage
 
-By default, Pulsar stores various data types of schemas in [Apache BookKeeper](https://bookkeeper.apache.org) deployed alongside Pulsar. 
+By default, Pulsar stores various data types of schemas in [Apache BookKeeper](https://bookkeeper.apache.org) deployed alongside Pulsar.
 
-However, you can use another storage system if needed. 
+However, you can use another storage system if needed.
 
 ### Implement
 
-To use a non-default (non-BookKeeper) storage system for Pulsar schemas, you need to implement the following Java interfaces: 
+To use a non-default (non-BookKeeper) storage system for Pulsar schemas, you need to implement the following Java interfaces:
 
-* [SchemaStorage interface](#schemastorage-interface) 
+* [SchemaStorage interface](#schemastorage-interface)
 
 * [SchemaStorageFactory interface](#schemastoragefactory-interface)
 
@@ -607,7 +607,7 @@ For a complete example of **schema storage** implementation, see [BookKeeperSche
 
 :::
 
-#### SchemaStorageFactory interface 
+#### SchemaStorageFactory interface
 
 The `SchemaStorageFactory` interface has the following method:
 
@@ -631,9 +631,9 @@ For a complete example of **schema storage factory** implementation, see [BookKe
 To use your custom schema storage implementation, perform the following steps.
 
 1. Package the implementation in a [JAR](https://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html) file.
-   
+
 2. Add the JAR file to the `lib` folder in your Pulsar binary or source distribution.
-   
+
 3. Change the `schemaRegistryStorageClassName` configuration in `broker.conf` to your custom factory class.
-      
+
 4. Start Pulsar.

@@ -220,7 +220,7 @@ It shows current statistics of a given non-partitioned topic.
 
   -   **publishers**: The list of all local publishers into the topic. There can be zero or thousands
 
-      -   **msgRateIn**: Total rate of messages published by this publisher in messages per second 
+      -   **msgRateIn**: Total rate of messages published by this publisher in messages per second
 
       -   **msgThroughputIn**: Total throughput of the messages published by this publisher in bytes per second
 

@@ -160,7 +160,7 @@ mysql> UPDATE products SET name='1111111111' WHERE id=107;
 - In above subscribe topic terminal tab, we could find that 2 changes has been kept into products topic.
 
 ## FAQ
- 
+
 ### Debezium postgres connector will hang when create snap
 
 ```$xslt

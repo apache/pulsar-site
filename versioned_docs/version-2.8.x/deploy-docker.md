@@ -45,7 +45,7 @@ docker network create pulsar
 ```
 
 ### Connect containers to network
-Connect the containers of ZooKeeper, BookKeeper and broker to the `pulsar` network with the following commands. 
+Connect the containers of ZooKeeper, BookKeeper and broker to the `pulsar` network with the following commands.
 
 ```
 

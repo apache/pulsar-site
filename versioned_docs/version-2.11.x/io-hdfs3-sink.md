@@ -18,7 +18,7 @@ The configuration of the HDFS3 sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `hdfsConfigResources` | String|true| None | A file or a comma-separated list containing the Hadoop file system configuration.<br /><br />**Example**<br />'core-site.xml'<br />'hdfs-site.xml' |
 | `directory` | String | true | None|The HDFS directory where files read from or written to. |
@@ -30,13 +30,13 @@ The configuration of the HDFS3 sink connector has the following properties.
 | `fileExtension` | String| false | None| The extension added to the files written to HDFS.<br /><br />**Example**<br />'.txt'<br /> '.seq' |
 | `separator` | char|false |None |The character used to separate records in a text file. <br /><br />If no value is provided, the contents from all records are concatenated together in one continuous byte array. |
 | `syncInterval` | long| false |0| The interval between calls to flush data to HDFS disk in milliseconds. |
-| `maxPendingRecords` |int| false|Integer.MAX_VALUE |  The maximum number of records that hold in memory before acking. <br /><br />Setting this property to 1 makes every record send to disk before the record is acked.<br /><br />Setting this property to a higher value allows buffering records before flushing them to disk. 
+| `maxPendingRecords` |int| false|Integer.MAX_VALUE |  The maximum number of records that hold in memory before acking. <br /><br />Setting this property to 1 makes every record send to disk before the record is acked.<br /><br />Setting this property to a higher value allows buffering records before flushing them to disk.
 
 ### Example
 
 Before using the HDFS3 sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {

@@ -35,7 +35,7 @@ The tuples that fail to be processed by the downstream bolts will be re-injected
 ClientConfiguration clientConf = new ClientConfiguration();
 
 // Configure a Pulsar Consumer
-ConsumerConfiguration consumerConf = new ConsumerConfiguration();  
+ConsumerConfiguration consumerConf = new ConsumerConfiguration();
 
 @SuppressWarnings("serial")
 MessageToValuesMapper messageToValuesMapper = new MessageToValuesMapper() {
@@ -75,7 +75,7 @@ A partitioned topic can also be used to publish messages on different topics. In
 // Configure a Pulsar Client
 ClientConfiguration clientConf = new ClientConfiguration();
 
-// Configure a Pulsar Producer  
+// Configure a Pulsar Producer
 ProducerConfiguration producerConf = new ProducerConfiguration();
 
 @SuppressWarnings("serial")

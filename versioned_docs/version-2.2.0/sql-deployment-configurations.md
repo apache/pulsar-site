@@ -156,10 +156,10 @@ You can then run the following command to check the status of your nodes:
 ```bash
 
 presto> SELECT * FROM system.runtime.nodes;
- node_id |        http_uri         | node_version | coordinator | state  
+ node_id |        http_uri         | node_version | coordinator | state
 ---------+-------------------------+--------------+-------------+--------
- 1       | http://192.168.2.1:8081 | testversion  | true        | active 
- 3       | http://192.168.2.2:8081 | testversion  | false       | active 
+ 1       | http://192.168.2.1:8081 | testversion  | true        | active
+ 3       | http://192.168.2.2:8081 | testversion  | false       | active
  2       | http://192.168.2.3:8081 | testversion  | false       | active
 
 ```

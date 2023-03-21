@@ -7,7 +7,7 @@ original_id: concepts-replication
 
 Regardless of industries, when an unforeseen event occurs and brings day-to-day operations to a halt, an organization needs a well-prepared disaster recovery plan to quickly restore service to clients. However, a disaster recovery plan usually requires a multi-datacenter deployment with geographically dispersed data centers. Such a multi-datacenter deployment requires a geo-replication mechanism to provide additional redundancy in case a data center fails.
 
-Pulsar's geo-replication mechanism is typically used for disaster recovery, enabling the replication of persistently stored message data across multiple data centers. For instance, your application is publishing data in one region and you would like to process it for consumption in other regions. With Pulsar’s geo-replication mechanism, messages can be produced and consumed in different geo-locations. 
+Pulsar's geo-replication mechanism is typically used for disaster recovery, enabling the replication of persistently stored message data across multiple data centers. For instance, your application is publishing data in one region and you would like to process it for consumption in other regions. With Pulsar’s geo-replication mechanism, messages can be produced and consumed in different geo-locations.
 
 The diagram below illustrates the process of [geo-replication](administration-geo.md). Whenever three producers (P1, P2 and P3) respectively publish messages to the T1 topic in three clusters, those messages are instantly replicated across clusters. Once the messages are replicated, two consumers (C1 and C2) can consume those messages from their clusters.
 
@@ -19,17 +19,17 @@ The geo-replication mechanism can be categorized into synchronous geo-replicatio
 
 ### Asynchronous geo-replication in Pulsar
 
-An asynchronous geo-replicated cluster is composed of multiple physical clusters set up in different datacenters. Messages produced on a Pulsar topic are first persisted to the local cluster and then replicated asynchronously to the remote clusters by brokers. 
+An asynchronous geo-replicated cluster is composed of multiple physical clusters set up in different datacenters. Messages produced on a Pulsar topic are first persisted to the local cluster and then replicated asynchronously to the remote clusters by brokers.
 
 ![An example of an asynchronous geo-replication mechanism](/assets/geo-replication-async.svg)
 
 In normal cases, when there are no connectivity issues, messages are replicated immediately, at the same time as they are dispatched to local consumers. Typically, end-to-end delivery latency is defined by the network round-trip time (RTT) between the data centers. Applications can create producers and consumers in any of the clusters, even when the remote clusters are not reachable (for example, during a network partition).
 
-Asynchronous geo-replication provides lower latency but may result in weaker consistency guarantees due to the potential replication lag that some data hasn’t been replicated. 
+Asynchronous geo-replication provides lower latency but may result in weaker consistency guarantees due to the potential replication lag that some data hasn’t been replicated.
 
 ### Synchronous geo-replication via BookKeeper
 
-In synchronous geo-replication, data is synchronously replicated to multiple data centers and the client has to wait for an acknowledgment from the other data centers. As illustrated below, when the client issues a write request to one cluster, the written data will be replicated to the other two data centers. The write request is only acknowledged to the client when the majority of data centers (in this example, at least 2 data centers) have acknowledged that the write has been persisted. 
+In synchronous geo-replication, data is synchronously replicated to multiple data centers and the client has to wait for an acknowledgment from the other data centers. As illustrated below, when the client issues a write request to one cluster, the written data will be replicated to the other two data centers. The write request is only acknowledged to the client when the majority of data centers (in this example, at least 2 data centers) have acknowledged that the write has been persisted.
 
 ![An example of a synchronous geo-replication mechanism](/assets/geo-replication-sync.svg)
 

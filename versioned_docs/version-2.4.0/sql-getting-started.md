@@ -5,7 +5,7 @@ sidebar_label: "Get Started"
 original_id: sql-getting-started
 ---
 
-It is super easy to get started on querying data in Pulsar.  
+It is super easy to get started on querying data in Pulsar.
 
 ## Requirements
 1. **Pulsar distribution**
@@ -42,10 +42,10 @@ You can now start typing some SQL commands:
 ```bash
 
 presto> show catalogs;
- Catalog 
+ Catalog
 ---------
- pulsar  
- system  
+ pulsar
+ system
 (2 rows)
 
 Query 20180829_211752_00004_7qpwh, FINISHED, 1 node
@@ -54,12 +54,12 @@ Splits: 19 total, 19 done (100.00%)
 
 
 presto> show schemas in pulsar;
-        Schema         
+        Schema
 -----------------------
- information_schema    
- public/default        
- public/functions      
- sample/standalone/ns1 
+ information_schema
+ public/default
+ public/functions
+ sample/standalone/ns1
 (4 rows)
 
 Query 20180829_211818_00005_7qpwh, FINISHED, 1 node
@@ -68,7 +68,7 @@ Splits: 19 total, 19 done (100.00%)
 
 
 presto> show tables in pulsar."public/default";
- Table 
+ Table
 -------
 (0 rows)
 
@@ -91,9 +91,9 @@ Afterwards, the will be a topic with can query in the namespace "public/default"
 ```bash
 
 presto> show tables in pulsar."public/default";
-     Table      
+     Table
 ----------------
- generator_test 
+ generator_test
 (1 row)
 
 Query 20180829_213202_00000_csyeu, FINISHED, 1 node
@@ -108,14 +108,14 @@ We can now query the data within the topic "generator_test":
 
 presto> select * from pulsar."public/default".generator_test;
 
-  firstname  | middlename  |  lastname   |              email               |   username   | password | telephonenumber | age |                 companyemail                  | nationalidentitycardnumber | 
+  firstname  | middlename  |  lastname   |              email               |   username   | password | telephonenumber | age |                 companyemail                  | nationalidentitycardnumber |
 -------------+-------------+-------------+----------------------------------+--------------+----------+-----------------+-----+-----------------------------------------------+----------------------------+
- Genesis     | Katherine   | Wiley       | genesis.wiley@gmail.com          | genesisw     | y9D2dtU3 | 959-197-1860    |  71 | genesis.wiley@interdemconsulting.eu           | 880-58-9247                |   
- Brayden     |             | Stanton     | brayden.stanton@yahoo.com        | braydens     | ZnjmhXik | 220-027-867     |  81 | brayden.stanton@supermemo.eu                  | 604-60-7069                |   
- Benjamin    | Julian      | Velasquez   | benjamin.velasquez@yahoo.com     | benjaminv    | 8Bc7m3eb | 298-377-0062    |  21 | benjamin.velasquez@hostesltd.biz              | 213-32-5882                |   
- Michael     | Thomas      | Donovan     | donovan@mail.com                 | michaeld     | OqBm9MLs | 078-134-4685    |  55 | michael.donovan@memortech.eu                  | 443-30-3442                |   
- Brooklyn    | Avery       | Roach       | brooklynroach@yahoo.com          | broach       | IxtBLafO | 387-786-2998    |  68 | brooklyn.roach@warst.biz                      | 085-88-3973                |   
- Skylar      |             | Bradshaw    | skylarbradshaw@yahoo.com         | skylarb      | p6eC6cKy | 210-872-608     |  96 | skylar.bradshaw@flyhigh.eu                    | 453-46-0334                |    
+ Genesis     | Katherine   | Wiley       | genesis.wiley@gmail.com          | genesisw     | y9D2dtU3 | 959-197-1860    |  71 | genesis.wiley@interdemconsulting.eu           | 880-58-9247                |
+ Brayden     |             | Stanton     | brayden.stanton@yahoo.com        | braydens     | ZnjmhXik | 220-027-867     |  81 | brayden.stanton@supermemo.eu                  | 604-60-7069                |
+ Benjamin    | Julian      | Velasquez   | benjamin.velasquez@yahoo.com     | benjaminv    | 8Bc7m3eb | 298-377-0062    |  21 | benjamin.velasquez@hostesltd.biz              | 213-32-5882                |
+ Michael     | Thomas      | Donovan     | donovan@mail.com                 | michaeld     | OqBm9MLs | 078-134-4685    |  55 | michael.donovan@memortech.eu                  | 443-30-3442                |
+ Brooklyn    | Avery       | Roach       | brooklynroach@yahoo.com          | broach       | IxtBLafO | 387-786-2998    |  68 | brooklyn.roach@warst.biz                      | 085-88-3973                |
+ Skylar      |             | Bradshaw    | skylarbradshaw@yahoo.com         | skylarb      | p6eC6cKy | 210-872-608     |  96 | skylar.bradshaw@flyhigh.eu                    | 453-46-0334                |
 .
 .
 .

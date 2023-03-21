@@ -94,7 +94,7 @@ curl -O http://mirror-hk.koddos.net/apache/pulsar/pulsar-2.4.0/connectors/pulsar
 
 ```
 
-- Consume data 
+- Consume data
 
 ```$bash
 

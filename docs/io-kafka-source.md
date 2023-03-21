@@ -20,7 +20,7 @@ The configuration of the Kafka source connector has the following properties.
 
 ### Property
 
-| Name | Type| Required | Default | Description 
+| Name | Type| Required | Default | Description
 |------|----------|---------|-------------|-------------|
 |  `bootstrapServers` |String| true | " " (empty string) | A comma-separated list of host and port pairs for establishing the initial connection to the Kafka cluster. |
 |  `securityProtocol` |String| false | " " (empty string) | The protocol used to communicate with Kafka brokers. |
@@ -55,7 +55,7 @@ and sets it properly on the Pulsar topic.
 In this case, you need to set `schema.registry.url` inside of the `consumerConfigProperties` configuration entry
 of the source.
 
-If `keyDeserializationClass` is not `org.apache.kafka.common.serialization.StringDeserializer`, it means 
+If `keyDeserializationClass` is not `org.apache.kafka.common.serialization.StringDeserializer`, it means
 that you do not have a string as a key and the Kafka Source uses the KeyValue schema type with the SEPARATED encoding.
 
 Pulsar supports the AVRO format for keys.
@@ -109,18 +109,18 @@ This example describes how to use the Kafka source connector to feed data from K
 
 #### Prerequisites
 
-- Install [Docker](https://docs.docker.com/get-docker/)(Community Edition). 
+- Install [Docker](https://docs.docker.com/get-docker/)(Community Edition).
 
 #### Steps
 
-1. Download and start the Confluent Platform. 
+1. Download and start the Confluent Platform.
    For details, see the [documentation](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-1-download-and-start-cp) to install the Kafka service locally.
 
 2. Pull a Pulsar image and start Pulsar in standalone mode.
 
    ```bash
    docker pull apachepulsar/pulsar:latest
-     
+
    docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-kafka-standalone apachepulsar/pulsar:latest bin/pulsar standalone
    ```
 
@@ -162,7 +162,7 @@ This example describes how to use the Kafka source connector to feed data from K
 
    ```bash
    docker exec -it pulsar-kafka-standalone /bin/bash
-   
+
    ./bin/pulsar-admin source localrun \
       --archive ./pulsar-io-kafka.nar \
       --tenant public \

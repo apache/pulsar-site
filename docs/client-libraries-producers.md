@@ -409,7 +409,7 @@ If a message has a key, it supersedes the round robin routing policy. The follow
 
 ## Enable chunking
 
-Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side. 
+Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side.
 
 The message chunking feature is OFF by default. The following is an example of how to enable message chunking when creating a producer.
 
@@ -426,7 +426,7 @@ The message chunking feature is OFF by default. The following is an example of h
         .enableBatching(false)
         .create();
    ```
-   
+
   </TabItem>
   <TabItem value="C++">
 

@@ -74,8 +74,8 @@ A schema already exists; the producer connects using a new schema that is compat
 
 If you do not know the schema type of a Pulsar topic in advance, you can use AUTO schema to produce or consume generic records to or from brokers.
 
-- `AUTO_PRODUCE` schema helps a producer validate whether the bytes sent by the producer is compatible with the schema of a topic. 
-- `AUTO_CONSUME` schema helps a Pulsar topic validate whether the bytes sent by a Pulsar topic is compatible with a consumer, that is, the Pulsar topic deserializes messages into language-specific objects using the schema retrieved from broker-side.  
+- `AUTO_PRODUCE` schema helps a producer validate whether the bytes sent by the producer is compatible with the schema of a topic.
+- `AUTO_CONSUME` schema helps a Pulsar topic validate whether the bytes sent by a Pulsar topic is compatible with a consumer, that is, the Pulsar topic deserializes messages into language-specific objects using the schema retrieved from broker-side.
 
 In `AUTO_CONSUME` mode, you can set the `useProvidedSchemaAsReaderSchema` flag to `false`. Therefore, the messages can be decoded based on the schema associated with the messages.
 
@@ -97,28 +97,28 @@ For usage instructions, see the documentation for your preferred client library:
 
 The following example shows how to define an Avro schema using the `GenericSchemaBuilder`, generate a generic Avro schema using `GenericRecordBuilder`, and consume messages into `GenericRecord`.
 
-**Example** 
+**Example**
 
 1. Use the `RecordSchemaBuilder` to build a schema.
 
    ```java
-   
+
    RecordSchemaBuilder recordSchemaBuilder = SchemaBuilder.record("schemaName");
    recordSchemaBuilder.field("intField").type(SchemaType.INT32);
    SchemaInfo schemaInfo = recordSchemaBuilder.build(SchemaType.AVRO);
 
    Producer<GenericRecord> producer = client.newProducer(Schema.generic(schemaInfo)).create();
-   
+
    ```
 
 2. Use `RecordBuilder` to build the generic records.
 
    ```java
-   
+
    producer.newMessage().value(schema.newRecordBuilder()
                .set("intField", 32)
                .build()).send();
-   
+
    ```
 
 ## Managing Schemas

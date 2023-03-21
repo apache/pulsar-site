@@ -22,7 +22,7 @@ Each Pulsar cluster consists of one or more message brokers. Each broker relies 
 Each Pulsar instance relies on two separate ZooKeeper quorums.
 
 * [Local ZooKeeper](#deploy-local-zookeeper) operates at the cluster level and provides cluster-specific configuration management and coordination. Each Pulsar cluster needs to have a dedicated ZooKeeper cluster.
-* [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum. 
+* [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum.
 
 ### Deploy local ZooKeeper
 
@@ -245,7 +245,7 @@ And then you can decommission bookies safely. To decommission bookies, complete 
    or
    `bin/bookkeeper shell decommissionbookie -bookieid <target bookieid>`
 
-4. Validate that no ledgers are on the decommissioned bookie.   
+4. Validate that no ledgers are on the decommissioned bookie.
 `bin/bookkeeper shell listledgers -bookieid <target bookieid>`
 
 You can run the following command to check if the bookie you have decommissioned is listed:
@@ -313,7 +313,7 @@ pulsar-admin namespaces set-persistence my-tenant/my-ns -e 3 -w 3 -a 3
 
 ```java
 // The following must be true: bkEnsemble >= bkWriteQuorum >= bkAckQuorum
-// Please notice that sticky reads cannot be used unless bkEnsemble == bkWriteQuorum. 
+// Please notice that sticky reads cannot be used unless bkEnsemble == bkWriteQuorum.
 int bkEnsemble = 3;
 int bkWriteQuorum = 3;
 int bkAckQuorum = 3;

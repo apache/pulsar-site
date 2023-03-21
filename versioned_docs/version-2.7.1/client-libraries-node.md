@@ -86,7 +86,7 @@ const Pulsar = require('pulsar-client');
   const client = new Pulsar.Client({
     serviceUrl: 'pulsar://localhost:6650',
   });
-  
+
   await client.close();
 })();
 
@@ -131,7 +131,7 @@ await producer.close();
 ```
 
 > #### Promise operation
-> When you create a new Pulsar producer, the operation will return `Promise` object and get producer instance or an error through executor function.  
+> When you create a new Pulsar producer, the operation will return `Promise` object and get producer instance or an error through executor function.
 > In this example, using await operator instead of executor function.
 
 ### Producer operations
@@ -220,7 +220,7 @@ await consumer.close();
 ```
 
 > #### Promise operation
-> When you create a new Pulsar consumer, the operation will return `Promise` object and get consumer instance or an error through executor function.  
+> When you create a new Pulsar consumer, the operation will return `Promise` object and get consumer instance or an error through executor function.
 > In this example, using await operator instead of executor function.
 
 ### Consumer operations

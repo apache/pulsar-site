@@ -4,9 +4,9 @@ title: Deploy a function in cluster mode
 sidebar_label: "Deploy a function in cluster mode"
 ---
 
-Deploying a function in cluster mode uploads the function to a function worker, which means the function is scheduled by the worker. 
+Deploying a function in cluster mode uploads the function to a function worker, which means the function is scheduled by the worker.
 
-To deploy a function in cluster mode, use the `create` command. 
+To deploy a function in cluster mode, use the `create` command.
 
 ```bash
 bin/pulsar-admin functions create \

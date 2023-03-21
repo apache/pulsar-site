@@ -23,7 +23,7 @@ You can choose one of the following installation methods based on your needs: Co
 
 :::
 
-### Compilation 
+### Compilation
 
 #### System requirements
 
@@ -135,7 +135,7 @@ The `libpulsarwithdeps.a` does not include library openssl related libraries `li
 
 ### Install RPM
 
-1. Download a RPM package from the links in the table. 
+1. Download a RPM package from the links in the table.
 
 | Link | Crypto files |
 |------|--------------|
@@ -177,7 +177,7 @@ $ sudo yum -y install gcc-c++
 
 ### Install Debian
 
-1. Download a Debian package from the links in the table. 
+1. Download a Debian package from the links in the table.
 
 | Link | Crypto files |
 |------|--------------|
@@ -265,7 +265,7 @@ $ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/
 
 # Protocol Buffers installation
 $ brew install protobuf boost boost-python log4cxx
-# If you are using python3, you need to install boost-python3 
+# If you are using python3, you need to install boost-python3
 
 # Google Test installation
 $ git clone https://github.com/google/googletest.git
@@ -352,7 +352,7 @@ pulsar://localhost:6650
 
 ```
 
-In a Pulsar cluster in production, the URL looks as follows. 
+In a Pulsar cluster in production, the URL looks as follows.
 
 ```http
 
@@ -387,7 +387,7 @@ using namespace pulsar;
 
 int main() {
     Client client("pulsar://localhost:6650");
-    
+
     Producer producer;
 
     Result result = client.createProducer("persistent://public/default/my-topic", producer);
@@ -506,7 +506,7 @@ producerConf.setLazyStartPartitionedProducers(true);
 
 ### Enable chunking
 
-Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side. 
+Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
 
 The message chunking feature is OFF by default. The following is an example about how to enable message chunking when creating a producer.
 
@@ -626,7 +626,7 @@ int main() {
 
 ### Configure chunking
 
-You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `setMaxPendingChunkedMessage` and `setAutoAckOldestChunkedMessageOnQueueFull` parameters. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later. 
+You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `setMaxPendingChunkedMessage` and `setAutoAckOldestChunkedMessageOnQueueFull` parameters. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later.
 
 The following is an example of how to configure message chunking.
 
@@ -668,7 +668,7 @@ schema, see [Pulsar schema](schema-get-started.md).
 - The following example shows how to create a producer with an Avro schema.
 
   ```cpp
-  
+
   static const std::string exampleSchema =
       "{\"type\":\"record\",\"name\":\"Example\",\"namespace\":\"test\","
       "\"fields\":[{\"name\":\"a\",\"type\":\"int\"},{\"name\":\"b\",\"type\":\"int\"}]}";
@@ -676,13 +676,13 @@ schema, see [Pulsar schema](schema-get-started.md).
   ProducerConfiguration producerConf;
   producerConf.setSchema(SchemaInfo(AVRO, "Avro", exampleSchema));
   client.createProducer("topic-avro", producerConf, producer);
-  
+
   ```
 
 - The following example shows how to create a consumer with an Avro schema.
 
   ```cpp
-  
+
   static const std::string exampleSchema =
       "{\"type\":\"record\",\"name\":\"Example\",\"namespace\":\"test\","
       "\"fields\":[{\"name\":\"a\",\"type\":\"int\"},{\"name\":\"b\",\"type\":\"int\"}]}";
@@ -690,14 +690,14 @@ schema, see [Pulsar schema](schema-get-started.md).
   Consumer consumer;
   consumerConf.setSchema(SchemaInfo(AVRO, "Avro", exampleSchema));
   client.subscribe("topic-avro", "sub-2", consumerConf, consumer)
-  
+
   ```
 
 ### ProtobufNative schema
 
 The following example shows how to create a producer and a consumer with a ProtobufNative schema.
 ​
-1. Generate the `User` class using Protobuf3. 
+1. Generate the `User` class using Protobuf3.
 
    :::note
 
@@ -708,14 +708,14 @@ The following example shows how to create a producer and a consumer with a Proto
 ​
 
    ```protobuf
-   
+
    syntax = "proto3";
-   
+
    message User {
        string name = 1;
        int32 age = 2;
    }
-   
+
    ```
 
 ​
@@ -723,9 +723,9 @@ The following example shows how to create a producer and a consumer with a Proto
 ​
 
    ```c++
-   
+
    #include <pulsar/ProtobufNativeSchema.h>
-   
+
    ```
 
 ​
@@ -733,7 +733,7 @@ The following example shows how to create a producer and a consumer with a Proto
 ​
 
    ```c++
-   
+
    ProducerConfiguration producerConf;
    producerConf.setSchema(createProtobufNativeSchema(User::GetDescriptor()));
    Producer producer;
@@ -744,7 +744,7 @@ The following example shows how to create a producer and a consumer with a Proto
    std::string content;
    user.SerializeToString(&content);
    producer.send(MessageBuilder().setContent(content).build());
-   
+
    ```
 
 ​
@@ -752,7 +752,7 @@ The following example shows how to create a producer and a consumer with a Proto
 ​
 
    ```c++
-   
+
    ConsumerConfiguration consumerConf;
    consumerConf.setSchema(createProtobufNativeSchema(User::GetDescriptor()));
    consumerConf.setSubscriptionInitialPosition(InitialPositionEarliest);
@@ -762,6 +762,6 @@ The following example shows how to create a producer and a consumer with a Proto
    consumer.receive(msg);
    User user2;
    user2.ParseFromArray(msg.getData(), msg.getLength());
-   
+
    ```
 

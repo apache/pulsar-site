@@ -20,7 +20,7 @@ ZooKeeper and BookKeeper are both open-source [Apache](https://www.apache.org/) 
 Each Pulsar instance relies on two separate ZooKeeper quorums.
 
 * [Local ZooKeeper](#deploy-local-zookeeper) operates at the cluster level and provides cluster-specific configuration management and coordination. Each Pulsar cluster needs to have a dedicated ZooKeeper cluster.
-* [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum. 
+* [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum.
 
 ### Deploy local ZooKeeper
 

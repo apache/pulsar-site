@@ -15,7 +15,7 @@ The JDBC sink connectors allow pulling messages from Pulsar topics and persist t
 > Currently, INSERT, DELETE and UPDATE operations are supported.
 > SQLite, MariaDB and PostgreSQL also support UPSERT operations and idempotent writes.
 
-## Configuration 
+## Configuration
 
 The configuration of all JDBC sink connectors has the following properties.
 
@@ -33,13 +33,13 @@ The configuration of all JDBC sink connectors has the following properties.
 | `batchSize` | int    | false    | 200                | The batch size of updates made to the database.                                                                                                                                                                                                                                                                                         |
 | `insertMode` | enum( INSERT,UPSERT,UPDATE) | false    | INSERT             | If it is configured as UPSERT, the sink uses upsert semantics rather than plain INSERT/UPDATE statements. Upsert semantics refer to atomically adding a new row or updating the existing row if there is a primary key constraint violation, which provides idempotence.                                                                |
 | `nullValueAction` | enum(FAIL, DELETE) | false    | FAIL               | How to handle records with NULL values. Possible options are `DELETE` or `FAIL`.                                                                                                                                                                                                                                                        |
-| `useTransactions` | boolean | false    | true               | Enable transactions of the database.                                                                                                                                                                                                                                                                                                    
+| `useTransactions` | boolean | false    | true               | Enable transactions of the database.
 | `excludeNonDeclaredFields` | boolean | false    | false              | All the table fields are discovered automatically. `excludeNonDeclaredFields` indicates if the table fields not explicitly listed in `nonKey` and `key` must be included in the query. By default all the table fields are included. To leverage of table fields defaults during insertion, it is suggested to set this value to `false`. |
 | `useJdbcBatch`    | boolean | false    | false              | Use the JDBC batch API. This option is suggested to improve write performance. |
 
 ### Example of ClickHouse
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -60,7 +60,7 @@ The configuration of all JDBC sink connectors has the following properties.
   namespace: "default"
   name: "jdbc-clickhouse-sink"
   inputs: [ "persistent://public/default/jdbc-clickhouse-topic" ]
-  sinkType: "jdbc-clickhouse"    
+  sinkType: "jdbc-clickhouse"
   configs:
       userName: "clickhouse"
       password: "password"
@@ -71,7 +71,7 @@ The configuration of all JDBC sink connectors has the following properties.
 
 ### Example of MariaDB
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -91,7 +91,7 @@ The configuration of all JDBC sink connectors has the following properties.
   namespace: "default"
   name: "jdbc-mariadb-sink"
   inputs: [ "persistent://public/default/jdbc-mariadb-topic" ]
-  sinkType: "jdbc-mariadb"    
+  sinkType: "jdbc-mariadb"
   configs:
       userName: "mariadb"
       password: "password"
@@ -119,7 +119,7 @@ The configuration of all JDBC sink connectors has the following properties.
   namespace: "default"
   name: "jdbc-openmldb-sink"
   inputs: [ "persistent://public/default/jdbc-openmldb-topic" ]
-  sinkType: "jdbc-openmldb"    
+  sinkType: "jdbc-openmldb"
   configs:
       jdbcUrl: "jdbc:openmldb:///pulsar_openmldb_db?zk=localhost:6181&zkPath=/openmldb"
       tableName: "pulsar_openmldb_jdbc_sink"
@@ -129,7 +129,7 @@ The configuration of all JDBC sink connectors has the following properties.
 
 Before using the JDBC PostgreSQL sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -149,7 +149,7 @@ Before using the JDBC PostgreSQL sink connector, you need to create a configurat
   namespace: "default"
   name: "jdbc-postgres-sink"
   inputs: [ "persistent://public/default/jdbc-postgres-topic" ]
-  sinkType: "jdbc-postgres"    
+  sinkType: "jdbc-postgres"
   configs:
       userName: "postgres"
       password: "password"
@@ -161,7 +161,7 @@ For more information on **how to use this JDBC sink connector**, see [connect Pu
 
 ### Example of SQLite
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -179,7 +179,7 @@ For more information on **how to use this JDBC sink connector**, see [connect Pu
   namespace: "default"
   name: "jdbc-sqlite-sink"
   inputs: [ "persistent://public/default/jdbc-sqlite-topic" ]
-  sinkType: "jdbc-sqlite"    
+  sinkType: "jdbc-sqlite"
   configs:
       jdbcUrl: "jdbc:sqlite:db.sqlite"
       tableName: "pulsar_sqlite_jdbc_sink"

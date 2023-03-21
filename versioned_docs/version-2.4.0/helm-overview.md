@@ -9,7 +9,7 @@ This is the official supported Helm chart to install Apache Pulsar on a cloud-na
 
 ## Introduction
 
-The Apache Pulsar Helm chart is one of the most convenient ways 
+The Apache Pulsar Helm chart is one of the most convenient ways
 to operate Pulsar on Kubernetes. This chart contains all the required components to get started and can scale to large deployments.
 
 This chart includes all the components for a complete experience, but each part can be configured to install separately.

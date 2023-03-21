@@ -82,7 +82,7 @@ functionRuntimeFactoryConfigs:
   jobNamespace:
   # The Kubernetes pod name to run the function instances. It is set to
   # `pf-<tenant>-<namespace>-<function_name>-<random_uuid(8)>` if this setting is left to be empty
-  jobName: 
+  jobName:
   # the docker image to run function instance. by default it is `apachepulsar/pulsar`
   pulsarDockerImageName:
   # the docker image to run function instance according to different configurations provided by users.
@@ -101,7 +101,7 @@ functionRuntimeFactoryConfigs:
   # The config admin CLI allows users to customize the configuration of the admin cli tool, such as:
   # `/bin/pulsar-admin and /bin/pulsarctl`. By default it is `/bin/pulsar-admin`. If you want to use `pulsarctl`
   # you need to set this setting accordingly
-  configAdminCLI: 
+  configAdminCLI:
   # this setting only takes effects if `k8Uri` is set to null. if your function worker is running as a k8 pod,
   # setting this to true is let function worker to submit functions to the same k8s cluster as function worker
   # is running. setting this to false if your function worker is not running as a k8 pod.
@@ -160,7 +160,7 @@ functionRuntimeFactoryConfigs:
 
 :::
 
-If you run functions worker embedded in a broker on Kubernetes, you can use the default settings. 
+If you run functions worker embedded in a broker on Kubernetes, you can use the default settings.
 
 ### Run standalone functions worker on Kubernetes
 
@@ -265,11 +265,11 @@ secrets:
 
 ```
 
-### Enable token authentication 
+### Enable token authentication
 
 When you enable authentication for your Pulsar cluster, you need a mechanism for the pod running your function to authenticate with the broker.
 
-The `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface provides support for any authentication mechanism. The `functionAuthProviderClassName` in `function-worker.yml` is used to specify your path to this implementation. 
+The `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface provides support for any authentication mechanism. The `functionAuthProviderClassName` in `function-worker.yml` is used to specify your path to this implementation.
 
 Pulsar includes an implementation of this interface for token authentication, and distributes the certificate authority via the same implementation. The configuration is similar as follows:
 
@@ -325,9 +325,9 @@ The Kubernetes integration enables you to implement a class and customize how to
 
 The functions (and sinks/sources) API provides a flag, `customRuntimeOptions`, which is passed to this interface.
 
-To initialize the `KubernetesManifestCustomizer`, you can provide `runtimeCustomizerConfig` in the `functions-worker.yml` file. `runtimeCustomizerConfig` is passed to the `public void initialize(Map<String, Object> config)` function of the interface. `runtimeCustomizerConfig`is different from the `customRuntimeOptions` as `runtimeCustomizerConfig` is the same across all functions. If you provide both `runtimeCustomizerConfig`  and `customRuntimeOptions`, you need to decide how to manage these two configurations in your implementation of `KubernetesManifestCustomizer`. 
+To initialize the `KubernetesManifestCustomizer`, you can provide `runtimeCustomizerConfig` in the `functions-worker.yml` file. `runtimeCustomizerConfig` is passed to the `public void initialize(Map<String, Object> config)` function of the interface. `runtimeCustomizerConfig`is different from the `customRuntimeOptions` as `runtimeCustomizerConfig` is the same across all functions. If you provide both `runtimeCustomizerConfig`  and `customRuntimeOptions`, you need to decide how to manage these two configurations in your implementation of `KubernetesManifestCustomizer`.
 
-Pulsar includes a built-in implementation. To use the basic implementation, set `runtimeCustomizerClassName` to `org.apache.pulsar.functions.runtime.kubernetes.BasicKubernetesManifestCustomizer`. The built-in implementation initialized with `runtimeCustomizerConfig` enables you to pass a JSON document as `customRuntimeOptions` with certain properties to augment, which decides how the manifests are generated. If both `runtimeCustomizerConfig` and `customRuntimeOptions` are provided, `BasicKubernetesManifestCustomizer` uses `customRuntimeOptions` to override the configuration if there are conflicts in these two configurations. 
+Pulsar includes a built-in implementation. To use the basic implementation, set `runtimeCustomizerClassName` to `org.apache.pulsar.functions.runtime.kubernetes.BasicKubernetesManifestCustomizer`. The built-in implementation initialized with `runtimeCustomizerConfig` enables you to pass a JSON document as `customRuntimeOptions` with certain properties to augment, which decides how the manifests are generated. If both `runtimeCustomizerConfig` and `customRuntimeOptions` are provided, `BasicKubernetesManifestCustomizer` uses `customRuntimeOptions` to override the configuration if there are conflicts in these two configurations.
 
 Below is an example of `customRuntimeOptions`.
 
@@ -390,7 +390,7 @@ This ensures the two different Functions Workers use distinct sets of topics for
 
 ## Configure standalone functions worker
 
-When configuring a standalone functions worker, you need to configure properties that the broker requires, especially if you use TLS. And then Functions Worker can communicate with the broker. 
+When configuring a standalone functions worker, you need to configure properties that the broker requires, especially if you use TLS. And then Functions Worker can communicate with the broker.
 
 You need to configure the following required properties.
 

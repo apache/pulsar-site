@@ -243,27 +243,27 @@ The model for storing topic data uses `org.apache.hadoop.io.MapFile`. You can us
         <name>fs.defaultFS</name>
         <value></value>
     </property>
-    
+
     <property>
         <name>hadoop.tmp.dir</name>
         <value>pulsar</value>
     </property>
-    
+
     <property>
         <name>io.file.buffer.size</name>
         <value>4096</value>
     </property>
-    
+
     <property>
         <name>io.seqfile.compress.blocksize</name>
         <value>1000000</value>
     </property>
     <property>
-    
+
         <name>io.seqfile.compression.type</name>
         <value>BLOCK</value>
     </property>
-    
+
     <property>
         <name>io.map.index.interval</name>
         <value>128</value>
@@ -286,7 +286,7 @@ $ bin/pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-name
 
 ## Configuring read priority for offloaded messages
 
-By default, once messages were offloaded to long term storage, brokers will read them from long term storage, but messages still exists in bookkeeper for a period depends on the administrator's configuration. For 
+By default, once messages were offloaded to long term storage, brokers will read them from long term storage, but messages still exists in bookkeeper for a period depends on the administrator's configuration. For
 messages exists in both bookkeeper and long term storage, if they are preferred to read from bookkeeper, you can use command to change this configuration.
 
 ```bash

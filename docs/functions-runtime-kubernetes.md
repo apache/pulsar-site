@@ -8,8 +8,8 @@ The Kubernetes runtime works when a function worker generates and applies Kubern
 * a `StatefulSet`
   By default, the `StatefulSet` manifest has a single pod with a number of replicas. The number is determined by the [parallelism](functions-deploy-cluster-parallelism.md) of the function. The pod downloads the function payload (via the function worker REST API) on pod boot. The pod's container image is configurable if the function runtime is configured.
 * a `Service` (used to communicate with the pod)
-* a `Secret` for authenticating credentials (when applicable). 
-  The Kubernetes runtime supports secrets. You can create a Kubernetes secret and expose it as an environment variable in the pod. 
+* a `Secret` for authenticating credentials (when applicable).
+  The Kubernetes runtime supports secrets. You can create a Kubernetes secret and expose it as an environment variable in the pod.
 
 :::tip
 
@@ -19,7 +19,7 @@ For the rules of translating Pulsar object names into Kubernetes resource labels
 
 ### Configure basic settings
 
-To quickly configure a Kubernetes runtime, you can use the default settings of [`KubernetesRuntimeFactoryConfig`](https://github.com/apache/pulsar/blob/master/pulsar-functions/runtime/src/main/java/org/apache/pulsar/functions/runtime/kubernetes/KubernetesRuntimeFactoryConfig.java) in the `conf/functions_worker.yml` file. 
+To quickly configure a Kubernetes runtime, you can use the default settings of [`KubernetesRuntimeFactoryConfig`](https://github.com/apache/pulsar/blob/master/pulsar-functions/runtime/src/main/java/org/apache/pulsar/functions/runtime/kubernetes/KubernetesRuntimeFactoryConfig.java) in the `conf/functions_worker.yml` file.
 
 If you have [set up a Pulsar cluster on Kubernetes using [Helm chart](helm-install.md), which means function workers have also been set up on Kubernetes, you can use the `serviceAccount` associated with the pod where the function worker is running. Otherwise, you can configure function workers to communicate with a Kubernetes cluster by setting `functionRuntimeFactoryConfigs` to `k8Uri`.
 
@@ -43,23 +43,23 @@ secrets:
     key: "password"
 ```
 
-### Enable token authentication 
+### Enable token authentication
 
 When you use token authentication, TLS encryption, or custom authentications to secure the communication with your Pulsar cluster, Pulsar passes your certificate authority (CA) to the client, so the client can authenticate the cluster with your signed certificate.
 
-To enable the authentication for your Pulsar cluster, you need to specify a mechanism for the pod running your function to authenticate the broker, by implementing the `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface. 
+To enable the authentication for your Pulsar cluster, you need to specify a mechanism for the pod running your function to authenticate the broker, by implementing the `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface.
 
 * For token authentication, Pulsar includes an implementation of the above interface to distribute the CA. The function worker captures the token that deploys (or updates) the function, saves it as a secret, and mounts it into the pod.
 
-  The configuration in the `conf/function-worker.yml` file is as follows. `functionAuthProviderClassName` is used to specify the path to this implementation. 
+  The configuration in the `conf/function-worker.yml` file is as follows. `functionAuthProviderClassName` is used to specify the path to this implementation.
 
   ```yaml
   functionAuthProviderClassName: org.apache.pulsar.functions.auth.KubernetesSecretsTokenAuthProvider
   ```
 
-* For TLS or custom authentication, you can either implement the `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface or use an alternative mechanism. 
+* For TLS or custom authentication, you can either implement the `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface or use an alternative mechanism.
 
-:::note   
+:::note
 
 If the token you use to deploy the function has an expiration date, you may need to deploy the function again after it expires.
 
@@ -69,19 +69,19 @@ If the token you use to deploy the function has an expiration date, you may need
 
 Customizing Kubernetes runtime allows you to customize Kubernetes resources created by the runtime, including how to generate manifests, how to pass authenticated data to pods, and how to integrate secrets.
 
-To customize Kubernetes runtime, you can set `runtimeCustomizerClassName` in the `conf/functions-worker.yml` file and use the fully qualified class name. 
+To customize Kubernetes runtime, you can set `runtimeCustomizerClassName` in the `conf/functions-worker.yml` file and use the fully qualified class name.
 
 The function API provides a flag named `customRuntimeOptions`, which is passed to the `org.apache.pulsar.functions.runtime.kubernetes.KubernetesManifestCustomizer` interface. To initialize `KubernetesManifestCustomizer`, you can set `runtimeCustomizerConfig` in the `conf/functions-worker.yml` file.
 
 :::note
 
-`runtimeCustomizerConfig` is the same across all functions. If you provide both `runtimeCustomizerConfig` and `customRuntimeOptions`, you need to decide how to manage these two configurations in your implementation of the `KubernetesManifestCustomizer` interface. 
+`runtimeCustomizerConfig` is the same across all functions. If you provide both `runtimeCustomizerConfig` and `customRuntimeOptions`, you need to decide how to manage these two configurations in your implementation of the `KubernetesManifestCustomizer` interface.
 
 :::
 
 Pulsar includes a built-in implementation initialized with `runtimeCustomizerConfig`. It enables you to pass a JSON document as `customRuntimeOptions` with certain properties to augment. To use this built-in implementation, set `runtimeCustomizerClassName` to `org.apache.pulsar.functions.runtime.kubernetes.BasicKubernetesManifestCustomizer`.
 
-If both `runtimeCustomizerConfig` and `customRuntimeOptions` are provided and have conflicts, `BasicKubernetesManifestCustomizer` uses `customRuntimeOptions` to override `runtimeCustomizerConfig`.  
+If both `runtimeCustomizerConfig` and `customRuntimeOptions` are provided and have conflicts, `BasicKubernetesManifestCustomizer` uses `customRuntimeOptions` to override `runtimeCustomizerConfig`.
 
 Below is an example of configuring `customRuntimeOptions`.
 
@@ -125,17 +125,17 @@ If you run Pulsar Functions or connectors on Kubernetes, you need to follow the 
 Kubernetes requires a name that can be used as a DNS subdomain name as defined in [RFC 1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). Pulsar supports more legal characters than the Kubernetes naming convention. If you create a Pulsar resource name with special characters that are not supported by Kubernetes (for example, including colons in a Pulsar namespace name), Kubernetes runtime translates the Pulsar object names into Kubernetes resource labels which are in RFC 1123-compliant forms. Consequently, you can run functions or connectors using Kubernetes runtime. The rules for translating Pulsar object names into Kubernetes resource labels are as below:
 
 - Truncate to 63 characters
-  
+
 - Replace the following characters with dashes (-):
-  
+
   - Non-alphanumeric characters
-  
+
   - Underscores (_)
-  
-  - Dots (.) 
-  
+
+  - Dots (.)
+
 - Replace beginning and ending non-alphanumeric characters with 0
-  
+
 :::tip
 
 - If you get an error in translating Pulsar object names into Kubernetes resource labels (for example, you may have a naming collision if your Pulsar object name is too long) or want to customize the translating rules, see [customize Kubernetes runtime](functions-runtime-kubernetes.md#customize-kubernetes-runtime).

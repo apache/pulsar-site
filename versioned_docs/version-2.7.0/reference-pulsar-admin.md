@@ -31,7 +31,7 @@ Commands
 
   For more information, see [here](io-cli.md#sources)
 * `sinks`
-  
+
   For more information, see [here](io-cli.md#sinks)
 * `topics`
 * `tenants`
@@ -2094,7 +2094,7 @@ Options
 |`-d`, `--disabled`|Disable automatic schema updates.|false|
 
 ### `get-publish-rate`
-Get the message publish rate for each topic in a namespace, in bytes as well as messages per second 
+Get the message publish rate for each topic in a namespace, in bytes as well as messages per second
 
 Usage
 
@@ -2235,7 +2235,7 @@ $ pulsar-admin topics subcommand
 
 ```
 
-Some namespace-level policies are available on topic level. To enable topic-level policy in Pulsar, you need to configure the following parameters in the `broker.conf` file. 
+Some namespace-level policies are available on topic level. To enable topic-level policy in Pulsar, you need to configure the following parameters in the `broker.conf` file.
 
 ```shell
 
@@ -2416,7 +2416,7 @@ Options
 |`-p`, `--partitions`|The number of partitions for the topic|0|
 
 ### `create-missed-partitions`
-Try to create partitions for partitioned topic. The partitions of partition topic has to be created, 
+Try to create partitions for partitioned topic. The partitions of partition topic has to be created,
 can be used by repair partitions when topic auto creation is disabled
 
 Usage

@@ -9,7 +9,7 @@ original_id: client-libraries-go
 
 You can use Pulsar [Go client](https://github.com/apache/pulsar-client-go) to create Pulsar [producers](#producers), [consumers](#consumers), and [readers](#readers) in Go (aka Golang).
 
-> **API docs available as well**  
+> **API docs available as well**
 > For standard API docs, consult the [Godoc](https://godoc.org/github.com/apache/pulsar-client-go/pulsar).
 
 
@@ -17,7 +17,7 @@ You can use Pulsar [Go client](https://github.com/apache/pulsar-client-go) to cr
 
 ### Install go package
 
-You can install the `pulsar` library locally using `go get`.  
+You can install the `pulsar` library locally using `go get`.
 
 ```bash
 
@@ -133,10 +133,10 @@ Method | Description | Return type
 `Topic()` | Fetches the producer's [topic](reference-terminology.md#topic)| `string`
 `Name()` | Fetches the producer's name | `string`
 `Send(context.Context, *ProducerMessage)` | Publishes a [message](#messages) to the producer's topic. This call will block until the message is successfully acknowledged by the Pulsar broker, or an error will be thrown if the timeout set using the `SendTimeout` in the producer's [configuration](#producer-configuration) is exceeded. | (MessageID, error)
-`SendAsync(context.Context, *ProducerMessage, func(MessageID, *ProducerMessage, error))`| Send a message, this call will be blocking until is successfully acknowledged by the Pulsar broker. | 
+`SendAsync(context.Context, *ProducerMessage, func(MessageID, *ProducerMessage, error))`| Send a message, this call will be blocking until is successfully acknowledged by the Pulsar broker. |
 `LastSequenceID()` | Get the last sequence id that was published by this producer. his represent either the automatically assigned or custom sequence id (set on the ProducerMessage) that was published and acknowledged by the broker. | int64
 `Flush()`| Flush all the messages buffered in the client and wait until all messages have been successfully persisted. | error
-`Close()` | Closes the producer and releases all resources allocated to it. If `Close()` is called then no more messages will be accepted from the publisher. This method will block until all pending publish requests have been persisted by Pulsar. If an error is thrown, no pending writes will be retried. | 
+`Close()` | Closes the producer and releases all resources allocated to it. If `Close()` is called then no more messages will be accepted from the publisher. This method will block until all pending publish requests have been persisted by Pulsar. If an error is thrown, no pending writes will be retried. |
 
 ### Producer Example
 
@@ -243,15 +243,15 @@ canc()
  Name | Description | Default
 | :-------- | :---------- |:---------- |
 | Topic | Topic specify the topic this consumer will subscribe to. This argument is required when constructing the reader. | |
-| Name | Name specify a name for the producer. If not assigned, the system will generate a globally unique name which can be access with Producer.ProducerName(). | | 
+| Name | Name specify a name for the producer. If not assigned, the system will generate a globally unique name which can be access with Producer.ProducerName(). | |
 | Properties | Properties attach a set of application defined properties to the producer This properties will be visible in the topic stats | |
 | MaxPendingMessages| MaxPendingMessages set the max size of the queue holding the messages pending to receive an acknowledgment from the broker. | |
 | HashingScheme | HashingScheme change the `HashingScheme` used to chose the partition on where to publish a particular message. | JavaStringHash |
-| CompressionType | CompressionType set the compression type for the producer. | not compressed | 
+| CompressionType | CompressionType set the compression type for the producer. | not compressed |
 | MessageRouter | MessageRouter set a custom message routing policy by passing an implementation of MessageRouter | |
 | DisableBatching | DisableBatching control whether automatic batching of messages is enabled for the producer. | false |
 | BatchingMaxPublishDelay | BatchingMaxPublishDelay set the time period within which the messages sent will be batched | 1ms |
-| BatchingMaxMessages | BatchingMaxMessages set the maximum number of messages permitted in a batch. | 1000 | 
+| BatchingMaxMessages | BatchingMaxMessages set the maximum number of messages permitted in a batch. | 1000 |
 
 ## Consumers
 
@@ -296,13 +296,13 @@ Method | Description | Return type
 `Subscription()` | Returns the consumer's subscription name | `string`
 `Unsubcribe()` | Unsubscribes the consumer from the assigned topic. Throws an error if the unsubscribe operation is somehow unsuccessful. | `error`
 `Receive(context.Context)` | Receives a single message from the topic. This method blocks until a message is available. | `(Message, error)`
-`Ack(Message)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) a message to the Pulsar [broker](reference-terminology.md#broker) | 
-`AckID(MessageID)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) a message to the Pulsar [broker](reference-terminology.md#broker) by message ID | 
-`Nack(Message)` | Acknowledge the failure to process a single message. | 
-`NackID(MessageID)` | Acknowledge the failure to process a single message. | 
+`Ack(Message)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) a message to the Pulsar [broker](reference-terminology.md#broker) |
+`AckID(MessageID)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) a message to the Pulsar [broker](reference-terminology.md#broker) by message ID |
+`Nack(Message)` | Acknowledge the failure to process a single message. |
+`NackID(MessageID)` | Acknowledge the failure to process a single message. |
 `Seek(msgID MessageID)` | Reset the subscription associated with this consumer to a specific message id. The message id can either be a specific message or represent the first or last messages in the topic. | `error`
 `SeekByTime(time time.Time)` | Reset the subscription associated with this consumer to a specific message publish time. | `error`
-`Close()` | Closes the consumer, disabling its ability to receive messages from the broker | 
+`Close()` | Closes the consumer, disabling its ability to receive messages from the broker |
 
 ### Receive example
 
@@ -462,13 +462,13 @@ if err != nil {
 | TopicsPattern | Specify a regular expression to subscribe to multiple topics under the same namespace. Either a topic, a list of topics or a topics pattern are required when subscribing | |
 | AutoDiscoveryPeriod | Specify the interval in which to poll for new partitions or new topics if using a TopicsPattern. | |
 | SubscriptionName | Specify the subscription name for this consumer. This argument is required when subscribing | |
-| Name | Set the consumer name | | 
+| Name | Set the consumer name | |
 | Properties | Properties attach a set of application defined properties to the producer This properties will be visible in the topic stats | |
 | Type | Select the subscription type to be used when subscribing to the topic. | Exclusive |
 | SubscriptionInitialPosition | InitialPosition at which the cursor will be set when subscribe | Latest |
-| DLQ | Configuration for Dead Letter Queue consumer policy. | no DLQ | 
-| MessageChannel | Sets a `MessageChannel` for the consumer. When a message is received, it will be pushed to the channel for consumption | | 
-| ReceiverQueueSize | Sets the size of the consumer receive queue. | 1000| 
+| DLQ | Configuration for Dead Letter Queue consumer policy. | no DLQ |
+| MessageChannel | Sets a `MessageChannel` for the consumer. When a message is received, it will be pushed to the channel for consumption | |
+| ReceiverQueueSize | Sets the size of the consumer receive queue. | 1000|
 | NackRedeliveryDelay | The delay after which to redeliver the messages that failed to be processed | 1min |
 | ReadCompacted | If enabled, the consumer will read messages from the compacted topic rather than reading the full message backlog of the topic | false |
 | ReplicateSubscriptionState | Mark the subscription as replicated to keep it in sync across clusters | false |
@@ -634,13 +634,13 @@ defer readerInclusive.Close()
  Name | Description | Default
 | :-------- | :---------- |:---------- |
 | Topic | Topic specify the topic this consumer will subscribe to. This argument is required when constructing the reader. | |
-| Name | Name set the reader name. | | 
+| Name | Name set the reader name. | |
 | Properties | Attach a set of application defined properties to the reader. This properties will be visible in the topic stats | |
 | StartMessageID | StartMessageID initial reader positioning is done by specifying a message id. | |
 | StartMessageIDInclusive | If true, the reader will start at the `StartMessageID`, included. Default is `false` and the reader will start from the "next" message | false |
 | MessageChannel | MessageChannel sets a `MessageChannel` for the consumer When a message is received, it will be pushed to the channel for consumption| |
 | ReceiverQueueSize | ReceiverQueueSize sets the size of the consumer receive queue. | 1000 |
-| SubscriptionRolePrefix| SubscriptionRolePrefix set the subscription role prefix. | "reader" | 
+| SubscriptionRolePrefix| SubscriptionRolePrefix set the subscription role prefix. | "reader" |
 | ReadCompacted | If enabled, the reader will read messages from the compacted topic rather than reading the full message backlog of the topic.  ReadCompacted can only be enabled when reading from a persistent topic. | false|
 
 ## Messages

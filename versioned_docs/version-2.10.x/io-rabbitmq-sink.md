@@ -5,18 +5,18 @@ sidebar_label: "RabbitMQ sink connector"
 original_id: io-rabbitmq-sink
 ---
 
-The RabbitMQ sink connector pulls messages from Pulsar topics 
+The RabbitMQ sink connector pulls messages from Pulsar topics
 and persist the messages to RabbitMQ queues.
 
 
-## Configuration 
+## Configuration
 
 The configuration of the RabbitMQ sink connector has the following properties.
 
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `connectionName` |String| true | " " (empty string) | The connection name. |
 | `host` | String| true | " " (empty string) | The RabbitMQ host. |
@@ -38,10 +38,10 @@ The configuration of the RabbitMQ sink connector has the following properties.
 
 Before using the RabbitMQ sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
      "configs": {
         "host": "localhost",
@@ -60,13 +60,13 @@ Before using the RabbitMQ sink connector, you need to create a configuration fil
         "routingKey": "test-key"
      }
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       host: "localhost"
       port: 5672
@@ -82,6 +82,6 @@ Before using the RabbitMQ sink connector, you need to create a configuration fil
       requestedHeartbeat: 60
       exchangeName: "test-exchange"
       routingKey: "test-key"
-  
+
   ```
 

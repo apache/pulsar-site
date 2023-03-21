@@ -83,7 +83,7 @@ You can use the factory method to configure authentication for Pulsar Java clien
 
 ```java
 
-import org.apache.pulsar.client.impl.auth.oauth2.AuthenticationFactoryOAuth2; 
+import org.apache.pulsar.client.impl.auth.oauth2.AuthenticationFactoryOAuth2;
 
 String issuerUrl = "https://dev-kt-aa9ne.us.auth0.com";
 String credentialsUrl = "file:///path/to/KeyFile.json";
@@ -123,7 +123,7 @@ std::string params = R"({
     "issuer_url": "https://dev-kt-aa9ne.us.auth0.com",
     "private_key": "../../pulsar-broker/src/test/resources/authentication/token/cpp_credentials_file.json",
     "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"})";
-    
+
 config.setAuth(pulsar::AuthOauth2::create(params));
 
 pulsar::Client client("pulsar://broker.example.com:6650/", config);
@@ -133,7 +133,7 @@ pulsar::Client client("pulsar://broker.example.com:6650/", config);
 ### Go client
 
 To enable OAuth2 authentication in Go client, you need to configure OAuth2 authentication.
-This example shows how to configure OAuth2 authentication in Go client. 
+This example shows how to configure OAuth2 authentication in Go client.
 
 ```go
 

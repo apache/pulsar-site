@@ -21,8 +21,8 @@ The following figure illustrates how Pulsar encrypts messages on the producer si
 
 1. The producer generates a session key regularly (every 4 hours or after publishing a certain number of messages) to encrypt the message payload using a symmetric algorithm, such as AES, and fetches the asymmetric public key every 4 hours. The ciphertext is packed as the message body.
 2. The producer uses the consumer’s public key to encrypt the session key using an asymmetric algorithm, such as RSA, and adds an alias with the encrypted secret to the message header.
-3. The consumer reads the message header and decrypts the session key using its private key. 
-4. The consumer uses the decrypted session key to decrypt the message payload. 
+3. The consumer reads the message header and decrypts the session key using its private key.
+4. The consumer uses the decrypted session key to decrypt the message payload.
 
 :::note
 
@@ -35,7 +35,7 @@ Pulsar isolates the key management and only provides interfaces (`CryptoKeyReade
 
 If the produced messages are consumed across application boundaries, you need to ensure that consumers in other applications have access to one of the private keys that can decrypt the messages. You can do this in two ways:
 - Access the public key that the consumer application provides and add it to the producer's keys.
-- Grant access to one of the private keys from the pairs that the producer uses. 
+- Grant access to one of the private keys from the pairs that the producer uses.
 
 ## Get started
 
@@ -256,7 +256,7 @@ If the produced messages are consumed across application boundaries, you need to
    ````
 
 3. Optional: customize the `CryptoKeyReader` implementation.
-   
+
    ````mdx-code-block
    <Tabs groupId="lang-choice"
      defaultValue="Java"
@@ -365,7 +365,7 @@ This is only available for Java clients.
 
 :::
 
-You can encrypt a message with more than one key. Producers add all such keys to the config and consumers can decrypt the message as long as they have access to at least one of the keys. Any one of the keys used for encrypting the message is sufficient to decrypt the message. 
+You can encrypt a message with more than one key. Producers add all such keys to the config and consumers can decrypt the message as long as they have access to at least one of the keys. Any one of the keys used for encrypting the message is sufficient to decrypt the message.
 
 For example, encrypt the messages using 2 keys (`myapp.messagekey1` and `myapp.messagekey2`):
 

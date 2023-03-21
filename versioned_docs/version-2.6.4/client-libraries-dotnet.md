@@ -28,9 +28,9 @@ To install the Pulsar C# client library, following these steps:
    3. Create the project using the following command.
 
        ```
-       
+
        dotnet new console
-       
+
        ```
 
    4. Use `dotnet run` to test that the app has been created properly.
@@ -40,19 +40,19 @@ To install the Pulsar C# client library, following these steps:
    1. Use the following command to install the `Newtonsoft.json` package:
 
        ```
-       
+
        dotnet add package Newtonsoft.Json
-       
+
        ```
 
    2. After the command completes, open the `.csproj` file to see the added reference:
 
        ```xml
-       
+
        <ItemGroup>
        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
        </ItemGroup>
-       
+
        ```
 
 3. Use the Newtonsoft.Json API in the app.
@@ -60,28 +60,28 @@ To install the Pulsar C# client library, following these steps:
    1. Open the `Program.cs` file and add the following line at the top of the file:
 
        ```c#
-       
+
        using Newtonsoft.Json;
-       
+
        ```
 
    2. Add the following code before the `class Program` line:
 
        ```c#
-       
+
        public class Account
        {
        public string Name { get; set; }
        public string Email { get; set; }
        public DateTime DOB { get; set; }
        }
-       
+
        ```
 
    3. Replace the `Main` function with the following:
 
        ```c#
-       
+
        static void Main(string[] args)
        {
            Account account = new Account
@@ -94,19 +94,19 @@ To install the Pulsar C# client library, following these steps:
            string json = JsonConvert.SerializeObject(account, Formatting.Indented);
            Console.WriteLine(json);
        }
-       
+
        ```
 
    4. Build and run the app by using the `dotnet run` command. The output should be the JSON representation of the `Account` object in the code:
 
        ```output
-       
+
        {
        "Name": "John Doe",
        "Email": "john@nuget.org",
        "DOB": "1980-02-20T00:00:00Z"
        }
-       
+
        ```
 
 ## Client
@@ -137,20 +137,20 @@ This section describes how to create a producer.
 - Create a producer by using the builder.
 
   ```c#
-  
+
   var producer = client.NewProducer()
                       .Topic("persistent://public/default/mytopic")
                       .Create();
-  
+
   ```
 
 - Create a producer without using the builder.
 
   ```c#
-  
+
   var options = new ProducerOptions("persistent://public/default/mytopic");
   var producer = client.CreateProducer(options);
-  
+
   ```
 
 ### Create consumer
@@ -160,21 +160,21 @@ This section describes how to create a consumer.
 - Create a consumer by using the builder.
 
   ```c#
-  
+
   var consumer = client.NewConsumer()
                       .SubscriptionName("MySubscription")
                       .Topic("persistent://public/default/mytopic")
                       .Create();
-  
+
   ```
 
 - Create a consumer without using the builder.
 
   ```c#
-  
+
   var options = new ConsumerOptions("MySubscription", "persistent://public/default/mytopic");
   var consumer = client.CreateConsumer(options);
-  
+
   ```
 
 ### Create reader
@@ -184,21 +184,21 @@ This section describes how to create a reader.
 - Create a reader by using the builder.
 
   ```c#
-  
+
   var reader = client.NewReader()
                   .StartMessageId(MessageId.Earliest)
                   .Topic("persistent://public/default/mytopic")
                   .Create();
-  
+
   ```
 
 - Create a reader without using the builder.
 
   ```c#
-  
+
   var options = new ReaderOptions(MessageId.Earliest, "persistent://public/default/mytopic");
   var reader = client.CreateReader(options);
-  
+
   ```
 
 ### Configure encryption policies
@@ -229,20 +229,20 @@ If you have followed [Authentication using TLS](security-tls-authentication.md),
 1. Create an unencrypted and password-less pfx file.
 
    ```c#
-   
+
    openssl pkcs12 -export -keypbe NONE -certpbe NONE -out admin.pfx -inkey admin.key.pem -in admin.cert.pem -passout pass:
-   
+
    ```
 
 2. Use the admin.pfx file to create an X509Certificate2 and pass it to the Pulsar C# client.
 
    ```c#
-   
+
    var clientCertificate = new X509Certificate2("admin.pfx");
    var client = PulsarClient.Builder()
                            .AuthenticateUsingClientCertificate(clientCertificate)
                            .Build();
-   
+
    ```
 
 ## Producer
@@ -265,23 +265,23 @@ await producer.Send(data);
 - Send messages with customized metadata by using the builder.
 
   ```c#
-  
+
   var data = Encoding.UTF8.GetBytes("Hello World");
   var messageId = await producer.NewMessage()
                               .Property("SomeKey", "SomeValue")
                               .Send(data);
-  
+
   ```
 
 - Send messages with customized metadata without using the builder.
 
   ```c#
-  
+
   var data = Encoding.UTF8.GetBytes("Hello World");
   var metadata = new MessageMetadata();
   metadata["SomeKey"] = "SomeValue";
   var messageId = await producer.Send(metadata, data));
-  
+
   ```
 
 ## Consumer
@@ -308,20 +308,20 @@ Messages can be acknowledged individually or cumulatively. For details about mes
 - Acknowledge messages individually.
 
   ```c#
-  
+
   await foreach (var message in consumer.Messages())
   {
       Console.WriteLine("Received: " + Encoding.UTF8.GetString(message.Data.ToArray()));
   }
-  
+
   ```
 
 - Acknowledge messages cumulatively.
 
   ```c#
-  
+
   await consumer.AcknowledgeCumulative(message);
-  
+
   ```
 
 ### Unsubscribe from topics

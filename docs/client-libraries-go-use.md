@@ -107,7 +107,7 @@ scrape_configs:
 
 ## Create a consumer
 
-Pulsar consumers subscribe to one or more Pulsar topics and listen for incoming messages produced on that topic/those topics. You can configure Go consumers using a `ConsumerOptions` object. 
+Pulsar consumers subscribe to one or more Pulsar topics and listen for incoming messages produced on that topic/those topics. You can configure Go consumers using a `ConsumerOptions` object.
 
 Here's a basic example that uses channels:
 

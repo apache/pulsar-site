@@ -13,16 +13,16 @@ import { docUrl } from "@site/src/utils/index";
 # Welcome to the Apache Pulsar documentation portal
 ***
 
-This portal holds a variety of topics, tutorials, guides, and reference material to help you work with Pulsar. 
+This portal holds a variety of topics, tutorials, guides, and reference material to help you work with Pulsar.
 
 ## Choose your path....
 Select one of the content blocks below to begin your Pulsar journey. If you ...
 * Are new to Pulsar, start with **About Pulsar** to learn about features and concepts.
 * Want to jump to the quickstart, select **Get Started**.
 * Are an operator responsible for architecting and supporting Apache Pulsar, start with **Install, Deploy, Upgrade**.
-* Are a developer who wants to master Apache Pulsar, select **Pulsar for Developers**. 
+* Are a developer who wants to master Apache Pulsar, select **Pulsar for Developers**.
 * Want to try out Pulsar, select **How To** for access to the "hello world" tutorial.
-* An experienced Pulsar coder looking for API, metrics, or configuration documentation, go to **Reference**. 
+* An experienced Pulsar coder looking for API, metrics, or configuration documentation, go to **Reference**.
 
 <BlockLinks>
     <BlockLink title="About Pulsar" url="/docs/2.10.x/concepts-overview/" />

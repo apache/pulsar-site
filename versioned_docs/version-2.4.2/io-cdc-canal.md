@@ -179,7 +179,7 @@ wget http://apache.01link.hk/pulsar/pulsar-2.4.2/connectors/pulsar-io-canal-2.4.
 
 ```
 
-- Consumption data 
+- Consumption data
 
 ```$bash
 

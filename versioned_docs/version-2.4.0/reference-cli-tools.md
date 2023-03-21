@@ -19,10 +19,10 @@ All Pulsar command-line tools can be run from the `bin` directory of your [insta
 > You can get help for any CLI tool, command, or subcommand using the `--help` flag, or `-h` for short. Here's an example:
 
 > ```shell
-> 
+>
 > $ bin/pulsar broker --help
 >
-> 
+>
 > ```
 
 
@@ -766,7 +766,7 @@ The table below lists the environment variables that you can use to configure th
 |BOOKIE_LOG_CONF|Log4j configuration file|conf/log4j2.yaml|
 |BOOKIE_CONF|BookKeeper configuration file|conf/bk_server.conf|
 |BOOKIE_EXTRA_OPTS|Extra options to be passed to the JVM||
-|BOOKIE_EXTRA_CLASSPATH|Extra paths for BookKeeper's classpath||  
+|BOOKIE_EXTRA_CLASSPATH|Extra paths for BookKeeper's classpath||
 |ENTRY_FORMATTER_CLASS|The Java class used to format entries||
 |BOOKIE_PID_DIR|Folder where the BookKeeper server PID file should be stored||
 |BOOKIE_STOP_TIMEOUT|Wait time before forcefully killing the Bookie server instance if attempts to stop it are not successful||

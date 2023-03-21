@@ -97,7 +97,7 @@ That means, `bouncy-castle` related jars are not shaded in these fat jars.
 
 ### Module BC-FIPS (`bouncy-castle-bcfips`)
 
-Pulsar module `bouncy-castle-bcfips`, which is defined by `bouncy-castle/bcfips/pom.xml`, contains the needed FIPS jars for Pulsar. 
+Pulsar module `bouncy-castle-bcfips`, which is defined by `bouncy-castle/bcfips/pom.xml`, contains the needed FIPS jars for Pulsar.
 Similar to `bouncy-castle-bc`, `bouncy-castle-bcfips` is also packaged as a `jar-in-jar` package for easy include/exclude.
 
 ```xml

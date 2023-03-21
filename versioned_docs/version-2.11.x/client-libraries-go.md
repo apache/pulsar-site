@@ -35,7 +35,7 @@ You can install the `pulsar` library by using either `go get` or `go module`.
 2. Write a sample script (such as `test_example.go`) in the `test_dir` directory and write `package main` at the beginning of the file.
 
    ```bash
-   go mod init test_dir 
+   go mod init test_dir
    go mod tidy && go mod download
    go build test_example.go
    ./test_example

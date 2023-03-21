@@ -59,7 +59,7 @@ To use the Java admin API, instantiate a {@inject: javadoc:PulsarAdmin:/admin/or
 
 URL url = new URL("http://localhost:8080");
 // Pass auth-plugin class fully-qualified name if Pulsar-security enabled
-String authPluginClassName = "com.org.MyAuthPluginClass"; 
+String authPluginClassName = "com.org.MyAuthPluginClass";
 // Pass auth-param if auth-plugin class requires it
 String authParams = "param1=value1";
 boolean useTls = false;
@@ -82,7 +82,7 @@ If you have multiple brokers to use, you can use multi-host like Pulsar service.
 
 URL url = new URL("http://localhost:8080,localhost:8081,localhost:8082");
 // Pass auth-plugin class fully-qualified name if Pulsar-security is enabled.
-String authPluginClassName = "com.org.MyAuthPluginClass"; 
+String authPluginClassName = "com.org.MyAuthPluginClass";
 // Pass auth-param if auth-plugin class requires it
 String authParams = "param1=value1";
 boolean useTls = false;

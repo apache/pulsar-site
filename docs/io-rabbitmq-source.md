@@ -12,13 +12,13 @@ You can download all the Pulsar connectors on [download page](pathname:///downlo
 
 The RabbitMQ source connector receives messages from RabbitMQ clusters and writes messages to Pulsar topics.
 
-## Configuration 
+## Configuration
 
 The configuration of the RabbitMQ source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `connectionName` |String| true | " " (empty string) | The connection name. |
 | `host` | String| true | " " (empty string) | The RabbitMQ host. |
@@ -40,7 +40,7 @@ The configuration of the RabbitMQ source connector has the following properties.
 
 Before using the RabbitMQ source connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {

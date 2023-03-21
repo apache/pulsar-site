@@ -75,7 +75,7 @@ Only the first consumer is allowed to the subscription, and other consumers rece
 
 :::note
 
-If the topic is partitioned, the first consumer subscribes to all partitioned topics, and other consumers are not assigned with partitions and receive an error. 
+If the topic is partitioned, the first consumer subscribes to all partitioned topics, and other consumers are not assigned with partitions and receive an error.
 
 :::
 
@@ -108,7 +108,7 @@ Consumer consumer2 = client.newConsumer()
 </Tabs>
 ````
 
-Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer then becomes the active consumer. 
+Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer then becomes the active consumer.
 
 If the first active consumer is disconnected after receiving 5 messages, the standby consumer becomes active consumer. Consumer1 will receive:
 
@@ -132,7 +132,7 @@ consumer2 will receive:
 
 :::note
 
-If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers. 
+If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers.
 
 :::
 
@@ -152,7 +152,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -205,7 +205,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -551,7 +551,7 @@ The following is an example.
    ```java
    CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
    ```
-   
+
    Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
  </TabItem>
@@ -560,7 +560,7 @@ The following is an example.
 
 ## Batch receive messages
 
-Use `batchReceive` to receive multiple messages for each call. 
+Use `batchReceive` to receive multiple messages for each call.
 
 The following is an example.
 
@@ -664,7 +664,7 @@ Messages can be acknowledged individually or cumulatively. For details about mes
 
 ## Negative acknowledgment redelivery backoff
 
-The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achieve redelivery with different delays by setting the redelivery count of messages. 
+The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achieve redelivery with different delays by setting the redelivery count of messages.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -755,7 +755,7 @@ The following is an example of how to configure message chunking.
         .expireTimeOfIncompleteChunkedMessage(10, TimeUnit.MINUTES)
         .subscribe();
    ```
-   
+
  </TabItem>
  <TabItem value="C++">
 

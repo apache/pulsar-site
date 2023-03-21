@@ -11,16 +11,16 @@ import TabItem from '@theme/TabItem';
 
 The following table outlines the APIs that you can use to develop Pulsar Functions in Java, Python, and Go.
 
-| Interface | Description | Use case| 
-|---------|------------|---------| 
-| [Language-native interface for Java/Python](#use-language-native-interface-for-javapython) | No Pulsar-specific libraries or special dependencies required (only core libraries). | Functions that do not require access to the [context](functions-concepts.md#context).| 
-| [Pulsar Functions SDK for Java/Python/Go](#use-sdk-for-javapythongo) | Pulsar-specific libraries that provide a range of functionality not available in the language-native interfaces,  such as state management or user configuration. | Functions that require access to the [context](functions-concepts.md#context).| 
-| [Extended Pulsar Functions SDK for Java](#use-extended-sdk-for-java) | An extension to Pulsar-specific libraries, providing the initialization and close interfaces in Java. | Functions that require initializing and releasing external resources.| 
+| Interface | Description | Use case|
+|---------|------------|---------|
+| [Language-native interface for Java/Python](#use-language-native-interface-for-javapython) | No Pulsar-specific libraries or special dependencies required (only core libraries). | Functions that do not require access to the [context](functions-concepts.md#context).|
+| [Pulsar Functions SDK for Java/Python/Go](#use-sdk-for-javapythongo) | Pulsar-specific libraries that provide a range of functionality not available in the language-native interfaces,  such as state management or user configuration. | Functions that require access to the [context](functions-concepts.md#context).|
+| [Extended Pulsar Functions SDK for Java](#use-extended-sdk-for-java) | An extension to Pulsar-specific libraries, providing the initialization and close interfaces in Java. | Functions that require initializing and releasing external resources.|
 
 
 ## Use language-native interface for Java/Python
 
-The language-native interface provides a simple and clean approach to writing Java/Python functions, by adding an exclamation point to all incoming strings and publishing the output string to a topic. It has no external dependencies. 
+The language-native interface provides a simple and clean approach to writing Java/Python functions, by adding an exclamation point to all incoming strings and publishing the output string to a topic. It has no external dependencies.
 
 The following examples are language-native functions.
 
@@ -60,7 +60,7 @@ For more details, see [code example](https://github.com/apache/pulsar/blob/maste
 :::note
 
 Write Pulsar Functions in Python 3. To make sure your functions can run, you need to have Python 3 installed for functions workers and set Python 3 as the default interpreter.
- 
+
 :::
 
 </TabItem>
@@ -70,7 +70,7 @@ Write Pulsar Functions in Python 3. To make sure your functions can run, you nee
 
 ## Use SDK for Java/Python/Go
 
-The implementation of Pulsar Functions SDK specifies a functional interface that includes the [context](functions-concepts.md#context) object as a parameter. 
+The implementation of Pulsar Functions SDK specifies a functional interface that includes the [context](functions-concepts.md#context) object as a parameter.
 
 The following examples use Pulsar Functions SDK for different languages.
 
@@ -127,7 +127,7 @@ For more details, see [code example](https://github.com/apache/pulsar/blob/maste
 </TabItem>
 <TabItem value="Python">
 
-To develop a function using the Python SDK, you need to add the pulsar client dependency to your Python installation. 
+To develop a function using the Python SDK, you need to add the pulsar client dependency to your Python installation.
 
 ```python
 from pulsar import Function
@@ -145,7 +145,7 @@ For more details, see [code example](https://github.com/apache/pulsar/blob/maste
 </TabItem>
 <TabItem value="Go">
 
-To develop a function using the Go SDK, you need to add the pulsar client dependency to your Go installation and provide the name of the function to the `pf.Start()` method inside the `main()` method. This registers the function with the Pulsar Functions framework and ensures that the specified function can be invoked when a new message arrives. 
+To develop a function using the Go SDK, you need to add the pulsar client dependency to your Go installation and provide the name of the function to the `pf.Start()` method inside the `main()` method. This registers the function with the Pulsar Functions framework and ensures that the specified function can be invoked when a new message arrives.
 
 ```go
 package main
@@ -178,7 +178,7 @@ For more details, see [code example](https://github.com/apache/pulsar/blob/77cf0
 
 This extended Pulsar Functions SDK provides two additional interfaces to initialize and release external resources.
 - By using the `initialize` interface, you can initialize external resources which only need one-time initialization when the function instance starts.
-- By using the `close` interface, you can close the referenced external resources when the function instance closes. 
+- By using the `close` interface, you can close the referenced external resources when the function instance closes.
 
 :::note
 
@@ -201,7 +201,7 @@ import io.lettuce.core.RedisClient;
 
 public class InitializableFunction implements Function<String, String> {
     private RedisClient redisClient;
-    
+
     private void initRedisClient(Map<String, Object> connectInfo) {
         redisClient = RedisClient.create(connectInfo.get("redisURI"));
     }
@@ -211,7 +211,7 @@ public class InitializableFunction implements Function<String, String> {
         Map<String, Object> connectInfo = context.getUserConfigMap();
         redisClient = initRedisClient(connectInfo);
     }
-    
+
     @Override
     public String process(String input, Context context) {
         String value = client.get(key);

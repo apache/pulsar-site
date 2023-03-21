@@ -186,23 +186,23 @@ How you get started writing Pulsar Functions in Java depends on which API you're
   Here's an example for a Maven `pom.xml` configuration file:
 
   ```xml
-  
+
   <dependency>
     <groupId>org.apache.pulsar</groupId>
     <artifactId>pulsar-functions-api</artifactId>
     <version>2.1.1-incubating</version>
   </dependency>
-  
+
   ```
 
   Here's an example for a Gradle `build.gradle` configuration file:
 
   ```groovy
-  
+
   dependencies {
   compile group: 'org.apache.pulsar', name: 'pulsar-functions-api', version: '2.1.1-incubating'
   }
-  
+
   ```
 
 #### Packaging
@@ -702,7 +702,7 @@ In order to use this class in Pulsar Functions, you'd have two options:
 1. You could create your own SerDe class. Here's a simple example:
 
   ```python
-  
+
   from pulsar import SerDe
 
   class TweetSerDe(SerDe):
@@ -715,7 +715,7 @@ In order to use this class in Pulsar Functions, you'd have two options:
      def deserialize(self, input_bytes):
          tweet_components = str(input_bytes).split('|')
          return Tweet(tweet_components[0], tweet_componentsp[1])
-  
+
   ```
 
 ### Python logging

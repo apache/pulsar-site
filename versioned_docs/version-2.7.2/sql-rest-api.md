@@ -5,11 +5,11 @@ sidebar_label: "REST APIs"
 original_id: sql-rest-api
 ---
 
-This section lists resources that make up the Presto REST API v1. 
+This section lists resources that make up the Presto REST API v1.
 
 ## Request for Presto services
 
-All requests for Presto services should use Presto REST API v1 version. 
+All requests for Presto services should use Presto REST API v1 version.
 
 To request services, use explicit URL `http://presto.service:8081/v1`. You need to update `presto.service:8081` with your real Presto address before sending requests.
 

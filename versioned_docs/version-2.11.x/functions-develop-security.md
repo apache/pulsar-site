@@ -22,7 +22,7 @@ To use the secret APIs from the context, you need to set the following two param
 
 Pulsar Functions provided two types of `SecretsProviderConfigurator` implementation and both can be used as the value of `secretsProviderConfiguratorClassName` directly:
 * `org.apache.pulsar.functions.secretsproviderconfigurator.DefaultSecretsProviderConfigurator`: This is a barebones version of a secrets provider which wires in `ClearTextSecretsProvider` to the function instances.
-* `org.apache.pulsar.functions.secretsproviderconfigurator.KubernetesSecretsProviderConfigurator`: This is used by default for running in Kubernetes and it uses Kubernetes built-in secrets and binds them as environment variables (via `EnvironmentBasedSecretsProvider`) within the function container to ensure that the secrets are available to the function at runtime. 
+* `org.apache.pulsar.functions.secretsproviderconfigurator.KubernetesSecretsProviderConfigurator`: This is used by default for running in Kubernetes and it uses Kubernetes built-in secrets and binds them as environment variables (via `EnvironmentBasedSecretsProvider`) within the function container to ensure that the secrets are available to the function at runtime.
 
 Function workers use the `org.apache.pulsar.functions.secretsproviderconfigurator.SecretsProviderConfigurator` interface to choose the `SecretsProvider` class name and its associated configurations at the time of starting the function instances.
 

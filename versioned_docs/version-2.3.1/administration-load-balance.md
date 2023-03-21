@@ -23,7 +23,7 @@ cluster.
 
 When a client starts using new topics that are not assigned to any broker, a
 process is triggered to choose the best suited broker to acquire ownership
-of these topics according to the load conditions. 
+of these topics according to the load conditions.
 
 In case of partitioned topics, different partitions are assigned to different brokers. Here "topic" means either a non-partitioned topic or one partition of a topic.
 
@@ -32,12 +32,12 @@ the topic crashes, the topic will be reassigned immediately to another broker. A
 that the broker owning the topic becomes overloaded. In this case, the topic is
 reassigned to a less loaded broker.
 
-The dynamic assignment is made possible by the stateless nature of brokers, so you can 
+The dynamic assignment is made possible by the stateless nature of brokers, so you can
 quickly expand or shrink the cluster based on usage.
 
 ### Assignment granularity
 
-The assignment of topics/partitions to brokers is not done at the topics/partitions level, but done at the Bundle level (a higher level). The reason is to amortize the amount of information that you need to keep track. Based on CPU, memory, traffic load and other indexes, topics are assigned to a particular broker dynamically. 
+The assignment of topics/partitions to brokers is not done at the topics/partitions level, but done at the Bundle level (a higher level). The reason is to amortize the amount of information that you need to keep track. Based on CPU, memory, traffic load and other indexes, topics are assigned to a particular broker dynamically.
 
 Instead of individual topic/partition assignment, each broker takes ownership of a subset of the
 topics for a namespace. This subset is called a "*bundle*" and effectively it's a sharding
