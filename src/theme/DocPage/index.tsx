@@ -25,8 +25,6 @@ function createCanonicalHref(props: Props): string {
 }
 function DocPageMetadata(props: Props): JSX.Element {
   const {versionMetadata} = props;
-  console.log(`props=${JSON.stringify(props)}`);
-  console.log(`result=${createCanonicalHref(props)}`);
   return (
     <>
       <SearchMetadata
