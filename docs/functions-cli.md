@@ -63,7 +63,7 @@ You can configure a function by using a predefined YAML file. The following tabl
 | maxPendingAsyncRequests | Int    | `--max-message-retries`    | The max number of pending async requests per instance to avoid a large number of concurrent requests. |
 | exposePulsarAdminClientEnabled | Boolean | N/A                | Whether the Pulsar admin client is exposed to function context or not. By default, it is disabled. |
 | subscriptionPosition | String    | `--subs-position`          | The position of Pulsar source subscription used for consuming messages from a specified location. The default value is `Latest`.|
-| skipToLatest         | Boolean   | `--skip-to-latest`         | Whether the consumer should skip to the latest message upon the function instance restarts. |
+| skipToLatest         | Boolean   | `--skip-to-latest`         | Whether the consumer should skip to the latest message once the function instance restarts. |
 
 ##### ConsumerConfig
 
