@@ -5,7 +5,7 @@ import {
   DocsSidebarProvider,
   DocsVersionProvider,
   docVersionSearchTag,
-  useDocRouteMetadata,
+  useDocRouteMetadata, useDocsVersion,
 } from '@docusaurus/theme-common/internal';
 import DocPageLayout from '@theme/DocPage/Layout';
 import NotFound from '@theme/NotFound';
@@ -14,12 +14,19 @@ import type {Props} from '@theme/DocPage';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-function createCanonicalHref(pathname: string): string {
+function createCanonicalHref(props: Props): string {
   const {siteConfig} = useDocusaurusContext();
-  return siteConfig.url + useBaseUrl(pathname);
+  const {versionMetadata, location, match} = props;
+  if (versionMetadata.version === 'current') {
+    return siteConfig.url + useBaseUrl(location.pathname);
+  }
+  const basename = location.pathname.replace(match.path, '');
+  return siteConfig.url + useBaseUrl(`/docs/${basename}`);
 }
 function DocPageMetadata(props: Props): JSX.Element {
   const {versionMetadata} = props;
+  console.log(`props=${JSON.stringify(props)}`);
+  console.log(`result=${createCanonicalHref(props)}`);
   return (
     <>
       <SearchMetadata
@@ -33,7 +40,7 @@ function DocPageMetadata(props: Props): JSX.Element {
         {versionMetadata.noIndex && (
           <meta name="robots" content="noindex, nofollow" />
         )}
-        <link rel="canonical" href={createCanonicalHref(location.pathname)}/>
+        <link rel="canonical" href={createCanonicalHref(props)}/>
       </PageMetadata>
     </>
   );
