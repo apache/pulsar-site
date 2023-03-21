@@ -8,8 +8,7 @@ original_id: getting-started-docker
 For local development and testing, you can run Pulsar in standalone
 mode on your own machine within a Docker container.
 
-If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition)
-and follow the instructions for your OS.
+If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
 
 ## Start Pulsar inside Docker
 
@@ -58,7 +57,7 @@ If you start Pulsar successfully, you will see `INFO`-level log messages like th
 
 ## Start publishing and consuming messages
 
-Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md) 
+Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md)
 and [C++](client-libraries-cpp.md). If you're running a local standalone cluster, you can
 use one of these root URLs to interact with your cluster:
 
