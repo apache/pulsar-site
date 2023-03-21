@@ -18,6 +18,8 @@ function createCanonicalHref(props: Props): string {
   const {siteConfig} = useDocusaurusContext();
   const {versionMetadata, location, match} = props;
   if (versionMetadata.version === 'current') {
+    // 1. The NEXT version docs should not forward to the latest stable version
+    // 2. Other plugins-doc instance (contribute, release-note, ...) happens to keep the link
     return siteConfig.url + useBaseUrl(location.pathname);
   }
   const basename = location.pathname.replace(match.path, '');
