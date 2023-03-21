@@ -94,7 +94,7 @@ There are a few different ways to determine which load manager is being used:
    Here is an example from the modular load manager:
 
    ```
-   
+
    ===================================================================================================================
    ||SYSTEM         |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
    ||               |0.00           |48.33          |0.01           |0.00           |0.00           |48.33          ||
@@ -107,13 +107,13 @@ There are a few different ways to determine which load manager is being used:
    ||LONG           |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
    ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
    ===================================================================================================================
-   
+
    ```
 
    Here is an example from the simple load manager:
 
    ```
-   
+
    ===================================================================================================================
    ||COUNT          |TOPIC          |BUNDLE         |PRODUCER       |CONSUMER       |BUNDLE +       |BUNDLE -       ||
    ||               |4              |4              |0              |2              |0              |0              ||
@@ -126,7 +126,7 @@ There are a few different ways to determine which load manager is being used:
    ||ALLOC MSG      |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
    ||               |54.84          |134.48         |189.31         |126.54         |320.96         |447.50         ||
    ===================================================================================================================
-   
+
    ```
 
 It is important to note that the module load manager is _centralized_, meaning that all requests to assign a bundle---whether it's been seen before or whether this is the first time---only get handled by the _lead_ broker (which can change over time). To determine the current lead broker, examine the `/loadbalance/leader` node in ZooKeeper.

@@ -12,7 +12,7 @@ The multi-layer and segment-centric architecture and hierarchical resource manag
 
 ## Isolation levels
 
-Pulsar supports isolation at either of the following two levels or both. 
+Pulsar supports isolation at either of the following two levels or both.
 * [Broker-level isolation](administration-isolation-broker.md) divides brokers into different groups and assigns broker groups to different namespaces. In this way, you can bind topics in a namespace to a set of brokers that belong to specific groups.
 * [Bookie-level isolation](administration-isolation-bookie.md) divides bookies into different racks/regions and assigns data replicas to bookies based on a specified data placement policy for disaster tolerance.
 
@@ -37,11 +37,11 @@ Here are some key points for understanding how it works:
 - Separate Pulsar clusters use a shared [configuration store](concepts-architecture-overview.md#configuration-store).
 - Each cluster exposes its service through a DNS entry point and makes sure a client can access the cluster through the DNS entry point. Clients can use one or multiple Pulsar URLs that the Pulsar cluster exposes as the service URL.
 - Each Pulsar cluster has one or multiple brokers and bookies.
-- Each Pulsar cluster has one metadata store, which can be separated into [Pulsar metadata store](concepts-architecture-overview.md#metadata-store) and [BookKeeper metadata store](https://bookkeeper.apache.org/docs/latest/getting-started/concepts/#metadata-storage). 
+- Each Pulsar cluster has one metadata store, which can be separated into [Pulsar metadata store](concepts-architecture-overview.md#metadata-store) and [BookKeeper metadata store](https://bookkeeper.apache.org/docs/latest/getting-started/concepts/#metadata-storage).
 
 :::note
 
-When using this approach, if you want to achieve namespace isolation, you need to specify a cluster for a namespace. The cluster must be in the allowed cluster list of the tenant. Topics under the namespace are assigned to this cluster. 
+When using this approach, if you want to achieve namespace isolation, you need to specify a cluster for a namespace. The cluster must be in the allowed cluster list of the tenant. Topics under the namespace are assigned to this cluster.
 
 :::
 
@@ -55,7 +55,7 @@ Here are some key points for understanding how it works:
 - Separate Pulsar clusters share a BookKeeper cluster and a [configuration store](concepts-architecture-overview.md#configuration-store).
 - Each cluster exposes its service through a DNS entry point and makes sure a client can access the cluster through the DNS entry point. Clients can use one or multiple Pulsar URLs that the Pulsar cluster exposes as the service URL.
 - Each Pulsar cluster has one or multiple brokers.
-- Each Pulsar cluster has one metadata store. 
+- Each Pulsar cluster has one metadata store.
 
 As illustrated below, all bookie groups use a shared BookKeeper cluster and a metadata store, and each [bookie affinity group](administration-isolation-bookie.md#configure-bookie-affinity-groups) has one or several bookies. You can specify one or multiple primary/secondary groups for a namespace. Topics under the namespace are created on the bookies in the primary group first and then created on the bookies in the secondary group.
 

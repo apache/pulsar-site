@@ -84,7 +84,7 @@ const Pulsar = require('pulsar-client');
   const client = new Pulsar.Client({
     serviceUrl: 'pulsar://localhost:6650',
   });
-  
+
   await client.close();
 })();
 
@@ -116,7 +116,7 @@ Here is an example:
 ```JavaScript
 
 const producer = await client.createProducer({
-  topic: 'my-topic', // or 'my-tenant/my-namespace/my-topic' to specify topic's tenant and namespace 
+  topic: 'my-topic', // or 'my-tenant/my-namespace/my-topic' to specify topic's tenant and namespace
 });
 
 await producer.send({
@@ -128,7 +128,7 @@ await producer.close();
 ```
 
 > #### Promise operation
-> When you create a new Pulsar producer, the operation will return `Promise` object and get producer instance or an error through executor function.  
+> When you create a new Pulsar producer, the operation will return `Promise` object and get producer instance or an error through executor function.
 > In this example, using await operator instead of executor function.
 
 ### Producer operations
@@ -217,7 +217,7 @@ await consumer.close();
 ```
 
 > #### Promise operation
-> When you create a new Pulsar consumer, the operation will return `Promise` object and get consumer instance or an error through executor function.  
+> When you create a new Pulsar consumer, the operation will return `Promise` object and get consumer instance or an error through executor function.
 > In this example, using await operator instead of executor function.
 
 ### Consumer operations

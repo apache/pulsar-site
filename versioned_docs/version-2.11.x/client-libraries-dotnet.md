@@ -6,17 +6,17 @@ sidebar_label: "C#"
 
 You can use the Pulsar C# client (DotPulsar) to create Pulsar producers, consumers, and readers in C#. For Pulsar features that C# clients support, see [Pulsar Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914).
 
-All the methods in the producer, consumer, and reader of a C# client are thread-safe. The official documentation for DotPulsar is available [here](https://github.com/apache/pulsar-dotpulsar/wiki). 
+All the methods in the producer, consumer, and reader of a C# client are thread-safe. The official documentation for DotPulsar is available [here](https://github.com/apache/pulsar-dotpulsar/wiki).
 
 ## Installation
 
-This section describes how to install the Pulsar C# client library through the dotnet CLI. 
+This section describes how to install the Pulsar C# client library through the dotnet CLI.
 
 Alternatively, you can install the Pulsar C# client library through Visual Studio. Note that starting from Visual Studio 2017, the dotnet CLI is automatically installed with any .NET Core related workloads. For more information, see [Microsoft documentation](https://docs.microsoft.com/en-us/visualstudio/mac/nuget-walkthrough?view=vsmac-2019).
 
 To install the Pulsar C# client library using the dotnet CLI, follow these steps:
 
-1. Install the [.NET Core SDK](https://dotnet.microsoft.com/download/), which provides the dotnet CLI. 
+1. Install the [.NET Core SDK](https://dotnet.microsoft.com/download/), which provides the dotnet CLI.
 
 2. Create a project.
 

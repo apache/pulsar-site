@@ -19,7 +19,7 @@ When the stateful APIs of Pulsar Functions are required – for example, `putSta
    # Settings below are used by stream/table service
    ##################################################################
    ##################################################################
-   
+
    ### Grpc Server ###
 
    # the grpc server port to listen on. default is 4181
@@ -60,7 +60,7 @@ When the stateful APIs of Pulsar Functions are required – for example, `putSta
       Escape character is '^]'.
       ```
 
-3. Configure `stateStorageServiceUrl` in the `conf/functions_worker.yml` file. 
+3. Configure `stateStorageServiceUrl` in the `conf/functions_worker.yml` file.
    `bk-service-url` is the service URL pointing to the BookKeeper table service.
 
    ```yaml

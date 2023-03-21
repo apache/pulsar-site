@@ -147,19 +147,19 @@ stringProducer.send("My message");
 > You should always make sure to close your producers, consumers, and clients when they are no longer needed:
 
 > ```java
-> 
+>
 > producer.close();
 > consumer.close();
 > client.close();
 >
-> 
+>
 > ```
 
 >
 > Close operations can also be asynchronous:
 
 > ```java
-> 
+>
 > producer.closeAsync()
 >    .thenRun(() -> System.out.println("Producer closed"));
 >    .exceptionally((ex) -> {
@@ -167,7 +167,7 @@ stringProducer.send("My message");
 >        return ex;
 >    });
 >
-> 
+>
 > ```
 
 
@@ -417,7 +417,7 @@ Only the first consumer is allowed to the subscription, other consumers receive 
 
 :::note
 
-If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error. 
+If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
 :::
 
@@ -442,7 +442,7 @@ Consumer consumer2 = client.newConsumer()
 
 ```
 
-Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer becomes active consumer. 
+Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer becomes active consumer.
 
 If the first active consumer receives 5 messages and is disconnected, the standby consumer becomes active consumer. Consumer1 will receive:
 
@@ -470,7 +470,7 @@ consumer2 will receive:
 
 :::note
 
-If a topic is a partitioned topic, each partition only has one active consumer, messages of one partition only distributed to one consumer, messages of multiple partitions are distributed to multiple consumers. 
+If a topic is a partitioned topic, each partition only has one active consumer, messages of one partition only distributed to one consumer, messages of multiple partitions are distributed to multiple consumers.
 
 :::
 
@@ -485,7 +485,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -534,7 +534,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -659,42 +659,42 @@ The following schema formats are currently available for Java:
 * No schema or the byte array schema (which can be applied using `Schema.BYTES`):
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer(Schema.BYTES)
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
   Or, equivalently:
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer()
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
 * `String` for normal UTF-8-encoded string data. This schema can be applied using `Schema.STRING`:
 
   ```java
-  
+
   Producer<String> stringProducer = client.newProducer(Schema.STRING)
       .topic("some-string-topic")
       .create();
-  
+
   ```
 
 * JSON schemas can be created for POJOs using the `JSONSchema` class. Here's an example:
 
   ```java
-  
+
   Schema<MyPojo> pojoSchema = JSONSchema.of(MyPojo.class);
   Producer<MyPojo> pojoProducer = client.newProducer(pojoSchema)
       .topic("some-pojo-topic")
       .create();
-  
+
   ```
 
 ## Authentication

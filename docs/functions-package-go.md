@@ -6,7 +6,7 @@ sidebar_label: "Package Go Functions"
 
 :::note
 
-Currently, Go functions can be implemented only using SDK and the interface of functions is exposed in the form of SDK. Before using Go functions, you need to import `github.com/apache/pulsar/pulsar-function-go/pf`. 
+Currently, Go functions can be implemented only using SDK and the interface of functions is exposed in the form of SDK. Before using Go functions, you need to import `github.com/apache/pulsar/pulsar-function-go/pf`.
 
 :::
 
@@ -30,12 +30,12 @@ To package a Go function, complete the following steps.
 
    ```bash
     bin/pulsar-admin functions localrun \
-        --go [your go function path] 
+        --go [your go function path]
         --inputs [input topics] \
         --output [output topic] \
         --tenant [default:public] \
         --namespace [default:default] \
-        --name [custom unique go function name] 
+        --name [custom unique go function name]
    ```
 
    The following log indicates that the Go function starts successfully.

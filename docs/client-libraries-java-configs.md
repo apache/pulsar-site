@@ -15,8 +15,8 @@ If you create a Java client, you can use the `loadConf` configuration. The follo
  `authParams` | String | Parameters for the authentication plugin <br /><br />**Example**<br /> key1:val1,key2:val2|None
 `operationTimeoutMs`|long|`operationTimeoutMs`|Operation timeout |30000
 `statsIntervalSeconds`|long|Interval between each stats information<br /><br />Stats is activated with positive `statsInterval`<br /><br />Set `statsIntervalSeconds` to 1 second at least. |60
-`numIoThreads`| int| The number of threads used for handling connections to brokers | 1 
-`numListenerThreads`|int|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](/concepts-messaging.md#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1 
+`numIoThreads`| int| The number of threads used for handling connections to brokers | 1
+`numListenerThreads`|int|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](/concepts-messaging.md#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1
 `useTcpNoDelay`| boolean| Whether to use TCP no-delay flag on the connection to disable Nagle algorithm |true
 `enableTls` |boolean | Whether to use TLS encryption on the connection. Note that this parameter is **deprecated**. If you want to enable TLS, use `pulsar+ssl://` in `serviceUrl` instead. | false
  `tlsTrustCertsFilePath` |string |Path to the trusted TLS certificate file|None
@@ -78,7 +78,7 @@ Producer<byte[]> producer = client.newProducer()
 
 ## Consumer configs
 
-If you instantiate a `Consumer` object by specifying only a topic and subscription name as in the example above, the consumer uses the default configuration. 
+If you instantiate a `Consumer` object by specifying only a topic and subscription name as in the example above, the consumer uses the default configuration.
 
 When you create a consumer, you can use the `loadConf` configuration. The following parameters are available in `loadConf`.
 
@@ -148,7 +148,7 @@ You can set the client memory allocator configurations through Java properties.<
 
 | Property | Type |  <div>Description</div> | Default | Available values
 |---|---|---|---|---
-`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li> 
+`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li>
 `pulsar.allocator.exit_on_oom` | String | Whether to exit the JVM when OOM happens | false |  <li> true </li> <li> false </li>
 `pulsar.allocator.leak_detection` | String | The leak detection policy for Pulsar bytebuf allocator. <li> **Disabled**: No leak detection and no overhead. </li> <li> **Simple**: Instruments 1% of the allocated buffer to track for leaks. </li> <li> **Advanced**: Instruments 1% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used. </li> <li> **Paranoid**: Instruments 100% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used and introduces a significant overhead. </li> | Disabled | <li> Disabled </li> <li> Simple </li> <li> Advanced </li> <li> Paranoid </li>
 `pulsar.allocator.out_of_memory_policy` | String | When an OOM occurs, the client throws an exception or fallbacks to heap | FallbackToHeap | <li> ThrowException </li> <li> FallbackToHeap </li>

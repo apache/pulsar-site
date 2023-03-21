@@ -28,9 +28,9 @@ To install the Pulsar C# client library, follow these steps:
    3. Create the project using the following command.
 
        ```
-       
+
        dotnet new console
-       
+
        ```
 
    4. Use `dotnet run` to test that the app has been created properly.
@@ -40,19 +40,19 @@ To install the Pulsar C# client library, follow these steps:
    1. Use the following command to install the `DotPulsar` package.
 
        ```
-       
+
        dotnet add package DotPulsar
-       
+
        ```
 
    2. After the command completes, open the `.csproj` file to see the added reference.
 
        ```xml
-       
+
        <ItemGroup>
          <PackageReference Include="DotPulsar" Version="2.0.1" />
        </ItemGroup>
-       
+
        ```
 
 ## Client
@@ -85,25 +85,25 @@ This section describes how to create a producer.
 - Create a producer by using the builder.
 
   ```c#
-  
+
   using DotPulsar;
   using DotPulsar.Extensions;
 
   var producer = client.NewProducer())
                        .Topic("persistent://public/default/mytopic")
                        .Create();
-  
+
   ```
 
 - Create a producer without using the builder.
 
   ```c#
-  
+
   using DotPulsar;
 
   var options = new ProducerOptions<byte[]>("persistent://public/default/mytopic", Schema.ByteArray);
   var producer = client.CreateProducer(options);
-  
+
   ```
 
 ### Create consumer
@@ -113,7 +113,7 @@ This section describes how to create a consumer.
 - Create a consumer by using the builder.
 
   ```c#
-  
+
   using DotPulsar;
   using DotPulsar.Extensions;
 
@@ -121,18 +121,18 @@ This section describes how to create a consumer.
                        .SubscriptionName("MySubscription")
                        .Topic("persistent://public/default/mytopic")
                        .Create();
-  
+
   ```
 
 - Create a consumer without using the builder.
 
   ```c#
-  
+
   using DotPulsar;
 
   var options = new ConsumerOptions<byte[]>("MySubscription", "persistent://public/default/mytopic", Schema.ByteArray);
   var consumer = client.CreateConsumer(options);
-  
+
   ```
 
 ### Create reader
@@ -142,7 +142,7 @@ This section describes how to create a reader.
 - Create a reader by using the builder.
 
   ```c#
-  
+
   using DotPulsar;
   using DotPulsar.Extensions;
 
@@ -150,18 +150,18 @@ This section describes how to create a reader.
                      .StartMessageId(MessageId.Earliest)
                      .Topic("persistent://public/default/mytopic")
                      .Create();
-  
+
   ```
 
 - Create a reader without using the builder.
 
   ```c#
-  
+
   using DotPulsar;
 
   var options = new ReaderOptions<byte[]>(MessageId.Earliest, "persistent://public/default/mytopic", Schema.ByteArray);
   var reader = client.CreateReader(options);
-  
+
   ```
 
 ### Configure encryption policies
@@ -194,15 +194,15 @@ If you have followed [Authentication using TLS](security-tls-authentication.md),
 1. Create an unencrypted and password-less pfx file.
 
    ```c#
-   
+
    openssl pkcs12 -export -keypbe NONE -certpbe NONE -out admin.pfx -inkey admin.key.pem -in admin.cert.pem -passout pass:
-   
+
    ```
 
 2. Use the admin.pfx file to create an X509Certificate2 and pass it to the Pulsar C# client.
 
    ```c#
-   
+
    using System.Security.Cryptography.X509Certificates;
    using DotPulsar;
 
@@ -210,7 +210,7 @@ If you have followed [Authentication using TLS](security-tls-authentication.md),
    var client = PulsarClient.Builder()
                             .AuthenticateUsingClientCertificate(clientCertificate)
                             .Build();
-   
+
    ```
 
 ## Producer
@@ -233,22 +233,22 @@ await producer.Send(data);
 - Send messages with customized metadata by using the builder.
 
   ```c#
-  
+
   var messageId = await producer.NewMessage()
                                 .Property("SomeKey", "SomeValue")
                                 .Send(data);
-  
+
   ```
 
 - Send messages with customized metadata without using the builder.
 
   ```c#
-  
+
   var data = Encoding.UTF8.GetBytes("Hello World");
   var metadata = new MessageMetadata();
   metadata["SomeKey"] = "SomeValue";
   var messageId = await producer.Send(metadata, data));
-  
+
   ```
 
 ## Consumer
@@ -275,17 +275,17 @@ Messages can be acknowledged individually or cumulatively. For details about mes
 - Acknowledge messages individually.
 
   ```c#
-  
+
   await consumer.Acknowledge(message);
-  
+
   ```
 
 - Acknowledge messages cumulatively.
 
   ```c#
-  
+
   await consumer.AcknowledgeCumulative(message);
-  
+
   ```
 
 ### Unsubscribe from topics

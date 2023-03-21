@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-When you run or update functions created via SDK, you can pass arbitrary key/value pairs to them by using CLI with the `--user-config` flag. Key/value pairs must be specified as JSON. 
+When you run or update functions created via SDK, you can pass arbitrary key/value pairs to them by using CLI with the `--user-config` flag. Key/value pairs must be specified as JSON.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"

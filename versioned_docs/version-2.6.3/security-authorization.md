@@ -25,7 +25,7 @@ superUserRoles=my-super-user-1,my-super-user-2
 ```
 
 > A full list of parameters is available in the `conf/broker.conf` file.
-> You can also find the default values for those parameters in [Broker Configuration](reference-configuration.md#broker). 
+> You can also find the default values for those parameters in [Broker Configuration](reference-configuration.md#broker).
 
 Typically, you can not only use superuser roles for administrators and clients but also for broker-to-broker authorization. When you use [geo-replication](concepts-replication.md), every broker needs to be able to publish to all the other topics of clusters.
 
@@ -56,9 +56,9 @@ superUserRoles=my-super-user-1,my-super-user-2,my-proxy-role
 
 ## Administer tenants
 
-Pulsar [instance](reference-terminology.md#instance) administrators or some kind of self-service portal typically provisions a Pulsar [tenant](reference-terminology.md#tenant). 
+Pulsar [instance](reference-terminology.md#instance) administrators or some kind of self-service portal typically provisions a Pulsar [tenant](reference-terminology.md#tenant).
 
-You can manage tenants using the [`pulsar-admin`](reference-pulsar-admin.md) tool. 
+You can manage tenants using the [`pulsar-admin`](reference-pulsar-admin.md) tool.
 
 ### Create a new tenant
 

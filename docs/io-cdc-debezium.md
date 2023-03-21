@@ -132,8 +132,8 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
 3. Start the Pulsar Debezium connector in local run mode using one of the following methods.
 
-    * Use the **JSON** configuration file as shown previously. 
-   
+    * Use the **JSON** configuration file as shown previously.
+
        Make sure the NAR file is available at `connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar`.
 
        ```bash
@@ -254,8 +254,8 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
 3. Start the Pulsar Debezium connector in local run mode using one of the following methods.
 
-   * Use the **JSON** configuration file as shown previously. 
-    
+   * Use the **JSON** configuration file as shown previously.
+
     Make sure the NAR file is available at `connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar`.
 
        ```bash
@@ -396,8 +396,8 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
 3. Start the Pulsar Debezium connector in local run mode using one of the following methods.
 
-   * Use the **JSON** configuration file as shown previously. 
-    
+   * Use the **JSON** configuration file as shown previously.
+
     Make sure the NAR file is available at `connectors/pulsar-io-mongodb-@pulsar:version@.nar`.
 
        ```bash
@@ -443,7 +443,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
    ```
 
 ## FAQ
- 
+
 ### Debezium postgres connector will hang when creating snap
 
 ```

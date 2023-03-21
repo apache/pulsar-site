@@ -18,7 +18,7 @@ The configuration of the Flume sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 `name`|String|true|"" (empty string)|The name of the agent.
 `confFile`|String|true|"" (empty string)|The configuration file.
@@ -32,7 +32,7 @@ Before using the Flume sink connector, you need to create a configuration file t
 
 > For more information about the `sink.conf` in the example below, see [here](https://github.com/apache/pulsar/blob/master/pulsar-io/flume/src/main/resources/flume/sink.conf).
 
-* JSON 
+* JSON
 
   ```json
   {

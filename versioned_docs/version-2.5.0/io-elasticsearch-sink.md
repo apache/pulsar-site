@@ -13,7 +13,7 @@ The configuration of the ElasticSearch sink connector has the following properti
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `elasticSearchUrl` | String| true |" " (empty string)| The URL of elastic search cluster to which the connector connects. |
 | `indexName` | String| true |" " (empty string)| The index name to which the connector writes messages. |
@@ -26,28 +26,28 @@ The configuration of the ElasticSearch sink connector has the following properti
 
 Before using the ElasticSearch sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "elasticSearchUrl": "http://localhost:90902",
       "indexName": "myIndex",
       "username": "scooby",
       "password": "doobie"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       elasticSearchUrl: "http://localhost:90902"
       indexName: "myIndex"
       username: "scooby"
       password: "doobie"
-  
+
   ```
 

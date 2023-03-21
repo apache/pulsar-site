@@ -50,11 +50,11 @@ $ wget pulsar:binary_release_url
 
 ## Deploy a new cluster
 
-Since Pulsar SQL is powered by [Presto](https://prestodb.io), the configuration for deployment is the same for the Pulsar SQL worker. 
+Since Pulsar SQL is powered by [Presto](https://prestodb.io), the configuration for deployment is the same for the Pulsar SQL worker.
 
 :::note
 
-For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md). 
+For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md).
 
 :::
 
@@ -92,7 +92,7 @@ Options:
 
 The default configuration for the cluster is located in `${project.root}/conf/presto`. You can customize your deployment by modifying the default configuration.
 
-You can set the worker to read from a different configuration directory, or set a different directory to write data. 
+You can set the worker to read from a different configuration directory, or set a different directory to write data.
 
 ```bash
 
@@ -108,13 +108,13 @@ $ ./bin/pulsar sql-worker start
 
 ```
 
-### Deploy a cluster on multiple nodes 
+### Deploy a cluster on multiple nodes
 
-You can deploy a Pulsar SQL cluster or Presto cluster on multiple nodes. The following example shows how to deploy a cluster on three-node cluster. 
+You can deploy a Pulsar SQL cluster or Presto cluster on multiple nodes. The following example shows how to deploy a cluster on three-node cluster.
 
 1. Copy the Pulsar binary distribution to three nodes.
 
-The first node runs as Presto coordinator. The minimal configuration requirement in the `${project.root}/conf/presto/config.properties` file is as follows. 
+The first node runs as Presto coordinator. The minimal configuration requirement in the `${project.root}/conf/presto/config.properties` file is as follows.
 
 ```properties
 
@@ -128,7 +128,7 @@ discovery.uri=<coordinator-url>
 
 ```
 
-The other two nodes serve as worker nodes, you can use the following configuration for worker nodes. 
+The other two nodes serve as worker nodes, you can use the following configuration for worker nodes.
 
 ```properties
 
@@ -171,15 +171,15 @@ $ ./bin/pulsar sql --server <coordinate_url>
 ```bash
 
 presto> SELECT * FROM system.runtime.nodes;
- node_id |        http_uri         | node_version | coordinator | state  
+ node_id |        http_uri         | node_version | coordinator | state
 ---------+-------------------------+--------------+-------------+--------
- 1       | http://192.168.2.1:8081 | testversion  | true        | active 
- 3       | http://192.168.2.2:8081 | testversion  | false       | active 
+ 1       | http://192.168.2.1:8081 | testversion  | true        | active
+ 3       | http://192.168.2.2:8081 | testversion  | false       | active
  2       | http://192.168.2.3:8081 | testversion  | false       | active
 
 ```
 
 For more information about deployment in Presto, refer to [Presto deployment](https://prestodb.io/docs/current/installation/deployment.html).
 
-> Note  
+> Note
 > The broker does not advance LAC, so when Pulsar SQL bypass broker to query data, it can only read entries up to the LAC that all the bookies learned. You can enable periodically write LAC on the broker by setting "bookkeeperExplicitLacIntervalInMills" in the broker.conf.

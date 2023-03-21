@@ -9,7 +9,7 @@ Pulsar proxy is an optional gateway. Pulsar proxy is used when direction connect
 
 ## Configure the proxy
 
-Before using the proxy, you need to configure it with the brokers addresses in the cluster. You can configure the proxy to connect directly to service discovery, or specify a broker URL in the configuration. 
+Before using the proxy, you need to configure it with the brokers addresses in the cluster. You can configure the proxy to connect directly to service discovery, or specify a broker URL in the configuration.
 
 ### Use service discovery
 
@@ -24,7 +24,7 @@ configurationStoreServers=zk-0:2184,zk-remote:2184
 
 > To use service discovery, you need to open the network ACLs, so the proxy can connects to the ZooKeeper nodes through the ZooKeeper client port (port `2181`) and the configuration store client port (port `2184`).
 
-> However, it is not secure to use service discovery. Because if the network ACL is open, when someone compromises a proxy, they have full access to ZooKeeper. 
+> However, it is not secure to use service discovery. Because if the network ACL is open, when someone compromises a proxy, they have full access to ZooKeeper.
 
 ### Use broker URLs
 

@@ -15,9 +15,9 @@ import TabItem from '@theme/TabItem';
  This page only shows **some frequently used operations**.
 
  - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
- 
+
  - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
- 
+
  - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
 
 :::
@@ -58,7 +58,7 @@ pulsar-admin namespaces grant-permission test-tenant/namespace1 \
       --role 'my.role.*'
 ```
 
-Then, roles `my.role.1`, `my.role.2`, `my.role.foo`, `my.role.bar`, etc. can produce and consume.  
+Then, roles `my.role.1`, `my.role.2`, `my.role.foo`, `my.role.bar`, etc. can produce and consume.
 
 ```shell
 pulsar-admin namespaces grant-permission test-tenant/namespace1 \
@@ -82,7 +82,7 @@ pulsar-admin namespaces grant-permission test-tenant/namespace1 \
       --role 'my.*.role'
 ```
 
-In this case, only the role `my.*.role` has permissions.  
+In this case, only the role `my.*.role` has permissions.
 Roles `my.1.role`, `my.2.role`, `my.foo.role`, `my.bar.role`, etc. **cannot** produce and consume.
 
 </TabItem>

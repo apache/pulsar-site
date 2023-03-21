@@ -13,14 +13,14 @@ You can download all the Pulsar connectors on [download page](pathname:///downlo
 The RabbitMQ sink connector pulls messages from Pulsar topics and persists the messages to RabbitMQ queues.
 
 
-## Configuration 
+## Configuration
 
 The configuration of the RabbitMQ sink connector has the following properties.
 
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `connectionName` |String| true | " " (empty string) | The connection name. |
 | `host` | String| true | " " (empty string) | The RabbitMQ host. |
@@ -42,7 +42,7 @@ The configuration of the RabbitMQ sink connector has the following properties.
 
 Before using the RabbitMQ sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {

@@ -27,7 +27,7 @@ superUserRoles=my-super-user-1,my-super-user-2
 ```
 
 > A full list of parameters available in the `conf/broker.conf` file,
-> as well as the default values for those parameters, can be found in [Broker Configuration](reference-configuration.md#broker) 
+> as well as the default values for those parameters, can be found in [Broker Configuration](reference-configuration.md#broker)
 
 Typically, superuser roles are used for administrators and clients but also for broker-to-broker authorization. When using [geo-replication](concepts-replication.md), every broker needs to be able to publish to all the other clusters' topics.
 

@@ -105,7 +105,7 @@ await producer.close();
 ```
 
 > #### Promise operation
-> When you create a new Pulsar producer, the operation returns `Promise` object and get producer instance or an error through executor function.  
+> When you create a new Pulsar producer, the operation returns `Promise` object and get producer instance or an error through executor function.
 > In this example, use await operator instead of executor function.
 
 ### Producer operations
@@ -192,7 +192,7 @@ await consumer.close();
 ```
 
 > #### Promise operation
-> When you create a new Pulsar consumer, the operation returns `Promise` object and get consumer instance or an error through executor function.  
+> When you create a new Pulsar consumer, the operation returns `Promise` object and get consumer instance or an error through executor function.
 > In this example, use await operator instead of executor function.
 
 ### Consumer operations

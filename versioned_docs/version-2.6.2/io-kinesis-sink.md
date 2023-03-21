@@ -28,21 +28,21 @@ The configuration of the Kinesis sink connector has the following property.
 The following are built-in `AwsCredentialProviderPlugin` plugins:
 
 * `org.apache.pulsar.io.aws.AwsDefaultProviderChainPlugin`
-  
-  This plugin takes no configuration, it uses the default AWS provider chain. 
-  
+
+  This plugin takes no configuration, it uses the default AWS provider chain.
+
   For more information, see [AWS documentation](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default).
 
 * `org.apache.pulsar.io.aws.STSAssumeRoleProviderPlugin`
-  
+
   This plugin takes a configuration (via the `awsCredentialPluginParam`) that describes a role to assume when running the KCL.
 
   This configuration takes the form of a small json document like:
 
   ```json
-  
+
   {"roleArn": "arn...", "roleSessionName": "name"}
-  
+
   ```
 
 ### Example
@@ -52,7 +52,7 @@ Before using the Kinesis sink connector, you need to create a configuration file
 * JSON
 
   ```json
-  
+
   {
       "awsEndpoint": "some.endpoint.aws",
       "awsRegion": "us-east-1",
@@ -61,13 +61,13 @@ Before using the Kinesis sink connector, you need to create a configuration file
       "messageFormat": "ONLY_RAW_PAYLOAD",
       "retainOrdering": "true"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       awsEndpoint: "some.endpoint.aws"
       awsRegion: "us-east-1"
@@ -75,6 +75,6 @@ Before using the Kinesis sink connector, you need to create a configuration file
       awsCredentialPluginParam: "{\"accessKey\":\"myKey\",\"secretKey\":\"my-Secret\"}"
       messageFormat: "ONLY_RAW_PAYLOAD"
       retainOrdering: "true"
-  
+
   ```
 

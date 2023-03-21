@@ -16,18 +16,18 @@ Pulsar broker metrics can be collected from brokers and exported in JSON format.
 * *Destination dumps*, which containing stats for each individual topic. They can be fetched using
 
   ```shell
-  
+
   bin/pulsar-admin broker-stats destinations
-  
+
   ```
 
 * Broker metrics, containing broker info and topics stats aggregated at namespace
   level:
 
   ```shell
-  
+
   bin/pulsar-admin broker-stats monitoring-metrics
-  
+
   ```
 
 All the message rates are updated every 1min.

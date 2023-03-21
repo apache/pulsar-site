@@ -64,7 +64,7 @@ Directory | Contains
 `bin` | [Command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/)
 `conf` | Configuration files for Pulsar, including for [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more
 `examples` | A Java JAR file containing example [Pulsar Functions](functions-overview.md)
-`lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses 
+`lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses
 `licenses` | License files, in `.txt` form, for various components of the Pulsar codebase
 
 The following directories are created once you begin running Pulsar:
@@ -90,7 +90,7 @@ You can use an independent cluster of machines or the same machines used by loca
 
 ZooKeeper manages a variety of essential coordination-related and configuration-related tasks for Pulsar.
 
-You need to stand up one local ZooKeeper cluster per Pulsar cluster for deploying a Pulsar instance. 
+You need to stand up one local ZooKeeper cluster per Pulsar cluster for deploying a Pulsar instance.
 
 To begin, add all ZooKeeper servers to the quorum configuration specified in the [`conf/zookeeper.conf`](reference-configuration.md#zookeeper) file. Add a `server.N` line for each node in the cluster to the configuration, where `N` is the number of the ZooKeeper node. The following is an example of a three-node cluster:
 
@@ -123,7 +123,7 @@ Once you add each server to the `zookeeper.conf` configuration and each server h
 bin/pulsar-daemon start zookeeper
 ```
 
-### Deploy the configuration store 
+### Deploy the configuration store
 
 The ZooKeeper cluster configured and started up in the section above is a local ZooKeeper cluster that you can use to manage a single Pulsar cluster. In addition to a local cluster, however, a full Pulsar instance also requires a configuration store for handling some instance-level configuration and coordination tasks.
 
@@ -152,7 +152,7 @@ The key here is to make sure the ZK quorum members are spread across at least 3 
 
 Again, given the very low expected load on the configuration store servers, you can share the same hosts used for the local ZooKeeper quorum.
 
-For example, assume a Pulsar instance with the following clusters `us-west`, `us-east`, `us-central`, `eu-central`, `ap-south`. Also assume, each cluster has its own local ZK servers named such as the following: 
+For example, assume a Pulsar instance with the following clusters `us-west`, `us-east`, `us-central`, `eu-central`, `ap-south`. Also assume, each cluster has its own local ZK servers named such as the following:
 
 ```
 zk[1-3].${CLUSTER}.example.com

@@ -64,7 +64,7 @@ Unless the Pulsar Proxy is explicitly configured to limit access, the Pulsar Pro
 
 It is necessary to limit proxied broker connections to known broker addresses by specifying `brokerProxyAllowedHostNames` and `brokerProxyAllowedIPAddresses` settings.
 
-When specifying `brokerProxyAllowedHostNames`, it's possible to use a wildcard. 
+When specifying `brokerProxyAllowedHostNames`, it's possible to use a wildcard.
 Please notice that `*` is a wildcard that matches any character in the hostname. It also matches dot `.` characters.
 
 It is recommended to use a pattern that matches only the desired brokers and no other hosts in the local network. Pulsar lookups will use the default host name of the broker by default. This can be overridden with the `advertisedAddress` setting in `broker.conf`.
@@ -74,7 +74,7 @@ To increase security, it is also possible to restrict access with the `brokerPro
 
 Example: limiting by host name in a Kubernetes deployment
 ```yaml
-  # example of limiting to Kubernetes statefulset hostnames that contain "broker-" 
+  # example of limiting to Kubernetes statefulset hostnames that contain "broker-"
   PULSAR_PREFIX_brokerProxyAllowedHostNames: '*broker-*.*.*.svc.cluster.local'
 ```
 

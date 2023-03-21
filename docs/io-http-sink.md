@@ -38,7 +38,7 @@ The configuration of the HTTP sink connector has the following properties.
 
 Before using the HTTP sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {

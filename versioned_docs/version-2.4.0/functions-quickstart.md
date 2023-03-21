@@ -63,14 +63,14 @@ $ bin/pulsar-admin functions localrun \
 
 > #### Multiple input topics
 >
-> In the example above, a single topic is specified using the `--inputs` flag. You can also specify multiple input topics with a comma-separated list using the same flag. 
+> In the example above, a single topic is specified using the `--inputs` flag. You can also specify multiple input topics with a comma-separated list using the same flag.
 >
 
 > ```bash
-> 
+>
 > --inputs topic1,topic2
 >
-> 
+>
 > ```
 
 
@@ -240,7 +240,7 @@ $ bin/pulsar-admin functions delete \
 
 ```
 
-When you see `Deleted successfully` in the output, you've successfully run, updated, and shut down functions running in cluster mode. 
+When you see `Deleted successfully` in the output, you've successfully run, updated, and shut down functions running in cluster mode.
 
 ## Write and run a new function
 
@@ -306,7 +306,7 @@ This string was backwards but is now forwards
 
 ```
 
-You have created a new Pulsar Function, deployed it in your Pulsar standalone cluster in [cluster mode](#run-a-pulsar-function-in-cluster-mode), and triggered the Function. 
+You have created a new Pulsar Function, deployed it in your Pulsar standalone cluster in [cluster mode](#run-a-pulsar-function-in-cluster-mode), and triggered the Function.
 
 ## Write and run a Go function
 Go function depends on `pulsar-client-go`. Make sure that you have built `pulsar-client-go` before using Go function.
@@ -321,7 +321,7 @@ touch helloFunc.go
 
 ```
 
-2. Append a byte for messages from the input topic.    
+2. Append a byte for messages from the input topic.
 The following is a `helloFunc.go` example. Each message from the input topic is appended with a `110` byte, and then delivered to the output topic.
 
 ```
@@ -353,7 +353,7 @@ go build -o examplepulsar helloFunc.go
 
 ```
 
-4. Run Go function. 
+4. Run Go function.
 
 ```
 

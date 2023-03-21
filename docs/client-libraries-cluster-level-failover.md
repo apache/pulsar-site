@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-For more information about cluster-level failover, including concepts, benefits, use cases, constraints, usage and working principles, see [Cluster-level failover concepts](concepts-cluster-level-failover.md). 
+For more information about cluster-level failover, including concepts, benefits, use cases, constraints, usage and working principles, see [Cluster-level failover concepts](concepts-cluster-level-failover.md).
 
 :::tip
 
@@ -43,7 +43,7 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         "org.apache.pulsar.client.impl.auth.AuthenticationTls",
         "tlsCertFile:/path/to/secondary-my-role.cert.pem,"
                 + "tlsKeyFile:/path/to/secondary-role.key-pk8.pem");
-                
+
     // You can put more failover cluster config in to map
     Map<String, String> secondaryTlsTrustCertsFilePaths = new HashMap<>();
     secondaryTlsTrustCertsFilePaths.put(secondaryUrl, secondaryTlsTrustCertsFilePath);
@@ -73,7 +73,7 @@ Parameter|Default value|Required?|Description
 |---|---|---|---
 `primary`|N/A|Yes|Service URL of the primary cluster.
 `secondary`|N/A|Yes|Service URL(s) of one or several backup clusters.<br /><br />You can specify several backup clusters using a comma-separated list.<br /><br /> Note that:<br />- The backup cluster is chosen in the sequence shown in the list. <br />- If all backup clusters are available, the Pulsar client chooses the first backup cluster.
-`failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster. 
+`failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster.
 `switchBackDelay`|N/A|Yes|The delay before the Pulsar client switches from the backup cluster to the primary cluster.<br /><br />Automatic failover switchover is controlled by a probe task: <br /> 1) After the Pulsar client switches from the primary cluster to the backup cluster, the probe task continues to check the status of the primary cluster. <br /> 2) If the primary cluster functions well and continuously remains active longer than `switchBackDelay`, the Pulsar client switches back to the primary cluster.
 `checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
 `secondaryTlsTrustCertsFilePath`|N/A|No|Path to the trusted TLS certificate file of the backup cluster.
@@ -128,21 +128,21 @@ Assume that you want to connect Pulsar client 1 to cluster A.
 1. Pulsar client 1 sends the token *t1* to the URL provider service.
 
 2. The URL provider service returns the credential *c1* and the cluster A URL to the Pulsar client.
-   
+
    The URL provider service manages all tokens and credentials. It returns different credentials based on different tokens and different target cluster URLs to different Pulsar clients.
 
    :::note
-   
+
    The credential must be in a JSON file and contain parameters as shown.
 
    :::
 
    ```java
    {
-   "serviceUrl": "pulsar+ssl://target:6651", 
+   "serviceUrl": "pulsar+ssl://target:6651",
    "tlsTrustCertsFilePath": "/security/ca.cert.pem",
    "authPluginClassName":"org.apache.pulsar.client.impl.auth.AuthenticationTls",
-   "authParamsString": " \"tlsCertFile\": \"/security/client.cert.pem\" 
+   "authParamsString": " \"tlsCertFile\": \"/security/client.cert.pem\"
        \"tlsKeyFile\": \"/security/client-pk8.pem\" "
    }
    ```

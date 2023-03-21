@@ -30,19 +30,19 @@ This example uses Pulsar 2.5.1.
    * Use [wget](https://www.gnu.org/software/wget)
 
     ```shell
-    
+
     wget https://archive.apache.org/dist/pulsar/pulsar-2.5.1/apache-pulsar-2.5.1-bin.tar.gz
-    
+
     ```
 
-2. Download and untar the Pulsar offloaders package. 
+2. Download and untar the Pulsar offloaders package.
 
    ```bash
-   
+
    wget https://downloads.apache.org/pulsar/pulsar-2.5.1/apache-pulsar-offloaders-2.5.1-bin.tar.gz
 
    tar xvfz apache-pulsar-offloaders-2.5.1-bin.tar.gz
-   
+
    ```
 
    :::note
@@ -55,20 +55,20 @@ This example uses Pulsar 2.5.1.
 3. Copy the Pulsar offloaders as `offloaders` in the Pulsar directory.
 
    ```
-   
+
    mv apache-pulsar-offloaders-2.5.1/offloaders apache-pulsar-2.5.1/offloaders
 
    ls offloaders
-   
+
    ```
 
    **Output**
 
    ```
-   
+
    tiered-storage-file-system-2.5.1.nar
    tiered-storage-jcloud-2.5.1.nar
-   
+
    ```
 
    :::note
@@ -82,7 +82,7 @@ This example uses Pulsar 2.5.1.
 
 :::note
 
-Before offloading data from BookKeeper to filesystem, you need to configure some properties of the filesystem offloader driver. 
+Before offloading data from BookKeeper to filesystem, you need to configure some properties of the filesystem offloader driver.
 
 :::
 
@@ -93,7 +93,7 @@ Besides, you can also configure the filesystem offloader to run it automatically
 You can configure filesystem offloader driver in the configuration file `broker.conf` or `standalone.conf`.
 
 - **Required** configurations are as below.
-  
+
   Required configuration | Description | Example value
   |---|---|---
   `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive. | filesystem
@@ -121,7 +121,7 @@ managedLedgerOffloadDriver=filesystem
 
 #### Connection address (required)
 
-Connection address is the URI to access the default Hadoop distributed file system. 
+Connection address is the URI to access the default Hadoop distributed file system.
 
 ##### Example
 
@@ -191,7 +191,7 @@ For more information about the Hadoop HDFS, see [here](https://hadoop.apache.org
 
 ### Configure filesystem offloader to run automatically
 
-Namespace policy can be configured to offload data automatically once a threshold is reached. The threshold is based on the size of data that a topic has stored on a Pulsar cluster. Once the topic reaches the threshold, an offload operation is triggered automatically. 
+Namespace policy can be configured to offload data automatically once a threshold is reached. The threshold is based on the size of data that a topic has stored on a Pulsar cluster. Once the topic reaches the threshold, an offload operation is triggered automatically.
 
 Threshold value|Action
 |---|---
@@ -215,7 +215,7 @@ pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-namespace
 
 :::tip
 
-For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, default values, and shorthands, see [here](reference-pulsar-admin.md#set-offload-threshold). 
+For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, default values, and shorthands, see [here](reference-pulsar-admin.md#set-offload-threshold).
 
 :::
 
@@ -225,7 +225,7 @@ For individual topics, you can trigger filesystem offloader manually using one o
 
 - Use REST endpoint.
 
-- Use CLI tools (such as pulsar-admin). 
+- Use CLI tools (such as pulsar-admin).
 
 To trigger via CLI tools, you need to specify the maximum amount of data (threshold) that should be retained on a Pulsar cluster for a topic. If the size of the topic data on the Pulsar cluster exceeds this threshold, segments from the topic are offloaded to the filesystem until the threshold is no longer exceeded. Older segments are offloaded first.
 
@@ -234,81 +234,81 @@ To trigger via CLI tools, you need to specify the maximum amount of data (thresh
 - This example triggers the filesystem offloader to run manually using pulsar-admin.
 
   ```bash
-  
+
   pulsar-admin topics offload --size-threshold 10M persistent://my-tenant/my-namespace/topic1
-  
+
   ```
 
   **Output**
 
   ```bash
-  
+
   Offload triggered for persistent://my-tenant/my-namespace/topic1 for messages before 2:0:-1
-  
+
   ```
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, default values, and shorthands, see [here](reference-pulsar-admin.md#offload). 
+  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, default values, and shorthands, see [here](reference-pulsar-admin.md#offload).
 
   :::
 
 - This example checks filesystem offloader status using pulsar-admin.
 
   ```bash
-  
+
   pulsar-admin topics offload-status persistent://my-tenant/my-namespace/topic1
-  
+
   ```
 
   **Output**
 
   ```bash
-  
+
   Offload is currently running
-  
+
   ```
 
   To wait for the filesystem to complete the job, add the `-w` flag.
 
   ```bash
-  
+
   pulsar-admin topics offload-status -w persistent://my-tenant/my-namespace/topic1
-  
+
   ```
 
   **Output**
 
   ```
-  
+
   Offload was a success
-  
+
   ```
 
   If there is an error in the offloading operation, the error is propagated to the `pulsar-admin topics offload-status` command.
 
   ```bash
-  
+
   pulsar-admin topics offload-status persistent://my-tenant/my-namespace/topic1
-  
+
   ```
 
   **Output**
 
   ```
-  
+
   Error in offload
   null
 
   Reason: Error offloading: org.apache.bookkeeper.mledger.ManagedLedgerException: java.util.concurrent.CompletionException: com.amazonaws.services.s3.model.AmazonS3Exception: Anonymous users cannot initiate multipart uploads.  Please authenticate. (Service: Amazon S3; Status Code: 403; Error Code: AccessDenied; Request ID: 798758DE3F1776DF; S3 Extended Request ID: dhBFz/lZm1oiG/oBEepeNlhrtsDlzoOhocuYMpKihQGXe6EG8puRGOkK6UwqzVrMXTWBxxHcS+g=), S3 Extended Request ID: dhBFz/lZm1oiG/oBEepeNlhrtsDlzoOhocuYMpKihQGXe6EG8puRGOkK6UwqzVrMXTWBxxHcS+g=
-  
+
   ```
 
 `
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, default values, and shorthands, see [here](reference-pulsar-admin.md#offload-status). 
+  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, default values, and shorthands, see [here](reference-pulsar-admin.md#offload-status).
 
   :::
 

@@ -93,7 +93,7 @@ admin.topics().delete(persistentTopic);
 
 ### List
 
-It provides a list of topics existing under a given namespace.  
+It provides a list of topics existing under a given namespace.
 
 #### pulsar-admin
 

@@ -136,7 +136,7 @@ The following table outlines the nested fields and related arguments under the `
 The following example shows how to configure a function using YAML or JSON.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="YAML"
   values={[{"label":"YAML","value":"YAML"},{"label":"JSON","value":"JSON"}]}>
 
@@ -146,13 +146,13 @@ The following example shows how to configure a function using YAML or JSON.
 tenant: "public"
 namespace: "default"
 name: "config-file-function"
-inputs: 
+inputs:
   - "persistent://public/default/config-file-function-input-1"
   - "persistent://public/default/config-file-function-input-2"
 output: "persistent://public/default/config-file-function-output"
 jar: "function.jar"
 parallelism: 1
-resources: 
+resources:
   cpu: 8
   ram: 8589934592
 autoAck: true

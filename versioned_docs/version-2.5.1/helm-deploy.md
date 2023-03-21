@@ -59,7 +59,7 @@ volumes:
 
 ```
 
-To use local persistent volumes as the persistent storage for Helm release, you can install the [local storage provisioner](#install-local-storage-provisioner) and include the following option in the `helm install` command. 
+To use local persistent volumes as the persistent storage for Helm release, you can install the [local storage provisioner](#install-local-storage-provisioner) and include the following option in the `helm install` command.
 
 ```bash
 
@@ -81,7 +81,7 @@ The Pulsar Helm chart is designed for production use. To use the Pulsar Helm cha
 
 ```
 
-### Affinity 
+### Affinity
 
 By default, `anti-affinity` is enabled to ensure pods of the same component can run on different nodes.
 

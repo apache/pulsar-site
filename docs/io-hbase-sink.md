@@ -35,7 +35,7 @@ The configuration of the HBase sink connector has the following properties.
 
 Before using the HBase sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -66,4 +66,3 @@ Before using the HBase sink connector, you need to create a configuration file t
       qualifierNames: [ 'name', 'address', 'age']
   ```
 
-  

@@ -18,7 +18,7 @@ The configuration of the file source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `inputDirectory` | String|true  | No default value|The input directory to pull files. |
 | `recurse` | Boolean|false | true | Whether to pull files from subdirectory or not.|
@@ -38,7 +38,7 @@ The configuration of the file source connector has the following properties.
 
 Before using the File source connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -117,7 +117,7 @@ Here is an example of using the File source connecter.
 6. Copy it to the `connectors` folder, then restart the container.
 
    ```bash
-   docker cp pulsar-io-file-{version}.nar pulsar-standalone:/pulsar/connectors/  
+   docker cp pulsar-io-file-{version}.nar pulsar-standalone:/pulsar/connectors/
    docker restart pulsar-standalone
    ```
 
@@ -125,7 +125,7 @@ Here is an example of using the File source connecter.
 
    ```bash
    docker exec -it pulsar-standalone /bin/bash
-   
+
    ./bin/pulsar-admin sources localrun \
       --archive /pulsar/connectors/pulsar-io-file-{version}.nar \
       --name file-test \

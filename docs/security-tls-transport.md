@@ -42,14 +42,14 @@ The validity of these certificates is 365 days. It's highly recommended to use `
 ### Certificate formats
 
 You can use either one of the following certificate formats to configure TLS encryption:
-* Recommended: Privacy Enhanced Mail (PEM). 
+* Recommended: Privacy Enhanced Mail (PEM).
   See [Configure TLS encryption with PEM](#configure-tls-encryption-with-pem) for detailed instructions.
-* Optional: Java [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) (JKS). 
+* Optional: Java [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) (JKS).
   See [Configure TLS encryption with KeyStore](#configure-tls-encryption-with-keystore) for detailed instructions.
 
 ### Hostname verification
 
-Hostname verification is a TLS security feature whereby a client can refuse to connect to a server if the Subject Alternative Name (SAN) does not match the hostname that the hostname is connecting to. 
+Hostname verification is a TLS security feature whereby a client can refuse to connect to a server if the Subject Alternative Name (SAN) does not match the hostname that the hostname is connecting to.
 
 By default, Pulsar clients disable hostname verification, as it requires that each broker has a DNS record and a unique cert.
 
@@ -65,7 +65,7 @@ By default, Pulsar uses [netty-tcnative](https://github.com/netty/netty-tcnative
 
 ### Create TLS certificates
 
-Creating TLS certificates involves creating a [certificate authority](#create-a-certificate-authority), a [server certificate](#create-a-server-certificate), and a [client certificate](#create-a-client-certificate). 
+Creating TLS certificates involves creating a [certificate authority](#create-a-certificate-authority), a [server certificate](#create-a-server-certificate), and a [client certificate](#create-a-client-certificate).
 
 #### Create a certificate authority
 
@@ -87,7 +87,7 @@ brew install openssl
 export PATH="/usr/local/Cellar/openssl@3/3.0.1/bin:$PATH"
 ```
 
-Use the actual path from the output of the `brew install` command. Note that version number `3.0.1` might change. 
+Use the actual path from the output of the `brew install` command. Note that version number `3.0.1` might change.
 
 :::
 
@@ -132,7 +132,7 @@ Once you have created a CA, you can create certificate requests and sign them wi
    IP.1 = 127.0.0.1
    IP.2 = 192.168.1.2
    ```
-   
+
    :::tip
 
    To configure [hostname verification](#hostname-verification), you need to enter the hostname of the broker in `alt_names` as the Subject Alternative Name (SAN). To ensure that multiple machines can reuse the same certificate, you can also use a wildcard to match a group of broker hostnames, for example, `*.broker.usw.example.com`.
@@ -213,7 +213,7 @@ To configure the broker (and proxy) to require specific TLS protocol versions an
 
 By default, Pulsar uses OpenSSL when it is available, otherwise, Pulsar defaults back to the JDK implementation. OpenSSL currently supports `TLSv1.1`, `TLSv1.2` and `TLSv1.3`. You can acquire a list of supported ciphers from the OpenSSL ciphers command, i.e. `openssl ciphers -tls1_3`.
 
-Both the TLS protocol versions and cipher properties can take multiple values, separated by commas. The possible values for protocol versions and ciphers depend on the TLS provider that you are using. 
+Both the TLS protocol versions and cipher properties can take multiple values, separated by commas. The possible values for protocol versions and ciphers depend on the TLS provider that you are using.
 
 ```properties
 tlsProtocols=TLSv1.3,TLSv1.2
@@ -413,7 +413,7 @@ By default, Pulsar uses [Conscrypt](https://github.com/google/conscrypt) for bot
 
 ### Generate JKS certificate
 
-You can use Java's `keytool` utility to generate the key and certificate for each machine in the cluster. 
+You can use Java's `keytool` utility to generate the key and certificate for each machine in the cluster.
 
 ```bash
 DAYS=365
@@ -426,17 +426,17 @@ keytool -genkeypair -keystore broker.keystore.jks ${BROKER_COMMON_PARAMS} -keyal
 keytool -genkeypair -keystore client.keystore.jks ${CLIENT_COMMON_PARAMS} -keyalg RSA -keysize 2048 -alias client -validity $DAYS \
 -dname 'CN=client,OU=Unknown,O=Unknown,L=Unknown,ST=Unknown,C=Unknown'
 
-# export certificate 
+# export certificate
 keytool -exportcert -keystore broker.keystore.jks ${BROKER_COMMON_PARAMS} -file broker.cer -alias broker
 keytool -exportcert -keystore client.keystore.jks ${CLIENT_COMMON_PARAMS} -file client.cer -alias client
- 
+
 # generate truststore
 keytool -importcert -keystore client.truststore.jks ${CLIENT_COMMON_PARAMS} -file broker.cer -alias truststore
 keytool -importcert -keystore broker.truststore.jks ${BROKER_COMMON_PARAMS} -file client.cer -alias truststore
 ```
- 
+
 :::note
- 
+
 To configure [hostname verification](#hostname-verification), you need to append ` -ext SAN=IP:127.0.0.1,IP:192.168.20.2,DNS:broker.example.com` to the value of `BROKER_COMMON_PARAMS` as the Subject Alternative Name (SAN).
 
 :::
@@ -493,19 +493,19 @@ Configuring mTLS on proxies includes two directions of connections, from clients
 ```properties
 servicePortTls=6651
 webServicePortTls=8081
- 
+
 tlsRequireTrustedClientCertOnConnect=true
- 
+
 # keystore
 tlsKeyStoreType=JKS
 tlsKeyStore=/var/private/tls/proxy.keystore.jks
 tlsKeyStorePassword=brokerpw
- 
+
 # truststore
 tlsTrustStoreType=JKS
 tlsTrustStore=/var/private/tls/proxy.truststore.jks
 tlsTrustStorePassword=brokerpw
- 
+
 # internal client/admin-client config
 tlsEnabledWithKeyStore=true
 brokerClientTlsEnabled=true

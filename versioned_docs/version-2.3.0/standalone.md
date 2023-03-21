@@ -7,7 +7,7 @@ original_id: standalone
 
 For the purposes of local development and testing, you can run Pulsar in standalone mode on your own machine. Standalone mode includes a Pulsar broker as well as the necessary ZooKeeper and BookKeeper components running inside of a single Java Virtual Machine (JVM) process.
 
-> #### Pulsar in production? 
+> #### Pulsar in production?
 > If you're looking to run a full production Pulsar installation, see the [Deploying a Pulsar instance](deploy-bare-metal.md) guide.
 
 ## Run Pulsar Standalone Manually
@@ -30,9 +30,9 @@ To get started running Pulsar, download a binary tarball release in one of the f
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:binary_release_url
-  
+
   ```
 
 Once the tarball is downloaded, untar it and `cd` into the resulting directory:
@@ -79,12 +79,12 @@ If you would like to enable those `builtin` connectors, you can download the con
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
-  
+
   ```
 
-Once the nar file is downloaded, copy the file to directory `connectors` in the pulsar directory, 
+Once the nar file is downloaded, copy the file to directory `connectors` in the pulsar directory,
 for example, if the connector file `pulsar-io-aerospike-@pulsar:version@.nar` is downloaded:
 
 ```bash
@@ -102,7 +102,7 @@ pulsar-io-aerospike-@pulsar:version@.nar
 >
 > If you are running Pulsar in a bare metal cluster, you need to make sure `connectors` tarball is unzipped in every broker's pulsar directory
 > (or in every function-worker's pulsar directory if you are running a separate worker cluster for Pulsar functions).
-> 
+>
 > If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DC/OS](https://dcos.io/)),
 > you can use `apachepulsar/pulsar-all` image instead of `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all builtin connectors](io-overview.md#working-with-connectors).
 
@@ -124,9 +124,9 @@ one of the following ways:
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:offloader_release_url
-  
+
   ```
 
 Once the tarball is downloaded, in the pulsar directory, untar the offloaders package and copy the offloaders as `offloaders`
@@ -151,7 +151,7 @@ For more details of how to configure tiered storage feature, you could reference
 > #### NOTES
 >
 > If you are running Pulsar in a bare metal cluster, you need to make sure `offloaders` tarball is unzipped in every broker's pulsar directory
-> 
+>
 > If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DC/OS](https://dcos.io/)),
 > you can use `apachepulsar/pulsar-all` image instead of `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
 
@@ -218,7 +218,7 @@ If the message has been successfully published to the topic, you should see a co
 > #### No need to explicitly create new topics
 > You may have noticed that we did not explicitly create the `my-topic` topic to which we sent the `hello-pulsar` message. If you attempt to write a message to a topic that does not yet exist, Pulsar will automatically create that topic for you.
 
-## Using CLI pulsar clients 
+## Using CLI pulsar clients
 
 Pulsar provides a CLI tool called [`pulsar-client`](reference-cli-tools.md#pulsar-client) that enables you to do things like receive messages from a Pulsar topic in a running cluster. This command will receive a simple message saying `hello-pulsar` to the `my-topic` topic:
 

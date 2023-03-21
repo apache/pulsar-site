@@ -24,20 +24,20 @@ The following are the steps to upgrade Apache Pulsar to a newer version:
 3. Extract your previous `--set` arguments with
 
    ```bash
-   
+
    helm get values <release-name> > pulsar.yaml
-   
+
    ```
 
 4. Decide on all the values you need to set
 5. Perform the upgrade, with all `--set` arguments extracted in step 4
 
    ```bash
-   
+
    helm upgrade <release-name> charts/pulsar \
        --version <new version> \
        -f pulsar.yaml \
        --set ...
-   
+
    ```
 

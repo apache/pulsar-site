@@ -9,7 +9,7 @@ You can use different ways to monitor a Pulsar cluster, exposing both metrics re
 
 ## Collect metrics
 
-You can collect broker stats, ZooKeeper stats, and BookKeeper stats. 
+You can collect broker stats, ZooKeeper stats, and BookKeeper stats.
 
 ### Broker stats
 
@@ -18,17 +18,17 @@ You can collect Pulsar broker metrics from brokers and export the metrics in JSO
 * *Destination dumps*, which contain stats for each individual topic. You can fetch the destination dumps using the command below:
 
   ```shell
-  
+
   bin/pulsar-admin broker-stats destinations
-  
+
   ```
 
 * Broker metrics, which contain the broker information and topics stats aggregated at namespace level. You can fetch the broker metrics by using the following command:
 
   ```shell
-  
+
   bin/pulsar-admin broker-stats monitoring-metrics
-  
+
   ```
 
 All the message rates are updated every minute.
@@ -69,7 +69,7 @@ http://$BOOKIE_ADDRESS:8000/metrics
 The default port for bookie is `8000`. You can change the port by configuring `prometheusStatsHttpPort` in the `conf/bookkeeper.conf` file.
 
 ### Managed cursor acknowledgment state
-The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgement, you can configure the metrics for the managed cursor. 
+The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgement, you can configure the metrics for the managed cursor.
 
 ```
 
@@ -86,7 +86,7 @@ Those metrics are added in the Prometheus interface, you can monitor and check t
 
 You can use Prometheus to collect all the metrics exposed for Pulsar components and set up [Grafana](https://grafana.com/) dashboards to display the metrics and monitor your Pulsar cluster. For details, refer to [Prometheus guide](https://prometheus.io/docs/introduction/getting_started/).
 
-When you run Pulsar on bare metal, you can provide the list of nodes to be probed. When you deploy Pulsar in a Kubernetes cluster, the monitoring is setup automatically. For details, refer to [Kubernetes instructions](helm-deploy.md). 
+When you run Pulsar on bare metal, you can provide the list of nodes to be probed. When you deploy Pulsar in a Kubernetes cluster, the monitoring is setup automatically. For details, refer to [Kubernetes instructions](helm-deploy.md).
 
 ## Dashboards
 

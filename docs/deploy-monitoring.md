@@ -8,7 +8,7 @@ You can use different ways to monitor a Pulsar cluster, exposing both metrics re
 
 ## Collect metrics
 
-You can collect broker stats, ZooKeeper stats, and BookKeeper stats. 
+You can collect broker stats, ZooKeeper stats, and BookKeeper stats.
 
 ### Broker stats
 
@@ -58,7 +58,7 @@ http://$BOOKIE_ADDRESS:8000/metrics
 The default port for bookie is `8000`. You can change the port by configuring `prometheusStatsHttpPort` in the `conf/bookkeeper.conf` file.
 
 ### Managed cursor acknowledgment state
-The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgment, you can configure the metrics for the managed cursor. 
+The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgment, you can configure the metrics for the managed cursor.
 
 ```
 brk_ml_cursor_persistLedgerSucceed(namespace=", ledger_name="", cursor_name:")
@@ -94,7 +94,7 @@ http://$FUNCTIONS_WORKER_ADDRESS:$WORKER_PORT/metrics:
 
 You can use Prometheus to collect all the metrics exposed for Pulsar components and set up [Grafana](https://grafana.com/) dashboards to display the metrics and monitor your Pulsar cluster. For details, refer to [Prometheus guide](https://prometheus.io/docs/introduction/getting_started/).
 
-When you run Pulsar on bare metal, you can provide the list of nodes to be probed. When you deploy Pulsar in a Kubernetes cluster, the monitoring is set up automatically. For details, refer to [Kubernetes instructions](helm-deploy.md). 
+When you run Pulsar on bare metal, you can provide the list of nodes to be probed. When you deploy Pulsar in a Kubernetes cluster, the monitoring is set up automatically. For details, refer to [Kubernetes instructions](helm-deploy.md).
 
 ## Dashboards
 

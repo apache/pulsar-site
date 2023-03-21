@@ -56,7 +56,7 @@ When a retention limit is exceeded, the oldest message is marked for deletion un
 
 ### Defaults
 
-You can set message retention at instance level with the following two parameters: `defaultRetentionTimeInMinutes` and `defaultRetentionSizeInMB`. Both parameters are set to `0` by default. 
+You can set message retention at instance level with the following two parameters: `defaultRetentionTimeInMinutes` and `defaultRetentionSizeInMB`. Both parameters are set to `0` by default.
 
 For more information of the two parameters, refer to the [`broker.conf`](reference-configuration.md#broker) configuration file.
 
@@ -65,16 +65,16 @@ For more information of the two parameters, refer to the [`broker.conf`](referen
 You can set a retention policy for a namespace by specifying the namespace, a size limit and a time limit in `pulsar-admin`, REST API and Java.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can use the [`set-retention`](reference-pulsar-admin.md#namespaces-set-retention) subcommand and specify a namespace, a size limit using the `-s`/`--size` flag, and a time limit using the `-t`/`--time` flag. 
+You can use the [`set-retention`](reference-pulsar-admin.md#namespaces-set-retention) subcommand and specify a namespace, a size limit using the `-s`/`--size` flag, and a time limit using the `-t`/`--time` flag.
 
-In the following example, the size limit is set to 10 GB and the time limit is set to 3 hours for the `my-tenant/my-ns` namespace. 
-- When the message size reaches 10 GB within 3 hours, the acknowledged messages will not be retained any more. 
-- At the time of 3 hours, even the message size is less than 10 GB, the acknowledged messages will not be retained. 
+In the following example, the size limit is set to 10 GB and the time limit is set to 3 hours for the `my-tenant/my-ns` namespace.
+- When the message size reaches 10 GB within 3 hours, the acknowledged messages will not be retained any more.
+- At the time of 3 hours, even the message size is less than 10 GB, the acknowledged messages will not be retained.
 
 ```shell
 

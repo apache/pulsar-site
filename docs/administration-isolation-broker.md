@@ -12,10 +12,10 @@ import TabItem from '@theme/TabItem';
 
 In Pulsar, when namespaces (more specifically, namespace bundles) are assigned dynamically to brokers, the namespace isolation policy limits the set of brokers that can be used for assignment. Before topics are assigned to brokers, you can set the namespace isolation policy with a primary or a secondary regex to select desired brokers.
 
-To set a namespace isolation policy for a broker cluster, you can use one of the following methods. 
+To set a namespace isolation policy for a broker cluster, you can use one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Pulsar-admin CLI"
   values={[{"label":"Pulsar-admin CLI","value":"Pulsar-admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
 

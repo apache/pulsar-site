@@ -1051,7 +1051,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|||   
+|`-b`, `--bundle`|||
 |`-f`, `--force`|Whether to force a clear backlog without prompt|false|
 |`-s`, `--sub`|The subscription name||
 
@@ -1071,7 +1071,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|||   
+|`-b`, `--bundle`|||
 |`-s`, `--sub`|The subscription name||
 
 

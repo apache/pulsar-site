@@ -152,7 +152,7 @@ For [token authentication](security-jwt.md) provider, add the required settings 
 properties:
   tokenSecretKey:       file://my/secret.key
   # If using public/private
-  # tokenPublicKey:     file://path/to/public.key 
+  # tokenPublicKey:     file://path/to/public.key
 ```
 
 :::note

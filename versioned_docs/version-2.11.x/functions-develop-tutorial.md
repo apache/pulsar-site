@@ -92,11 +92,11 @@ The following example is a stateful function. By default, the state of a functio
 
 :::note
 
-Currently, window functions are only available in Java. 
+Currently, window functions are only available in Java.
 
 :::
 
-This example demonstrates how to use the [language-native interface](functions-develop-api.md) to write a window function in Java. 
+This example demonstrates how to use the [language-native interface](functions-develop-api.md) to write a window function in Java.
 
 Each input message is a sentence that is split into words and each word is counted. The built-in counter state is used to keep track of the word count in a persistent and consistent manner.
 

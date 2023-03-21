@@ -131,7 +131,7 @@ Given that geo-replication topics exist in multiple regions, it's not possible t
 In Pulsar, a topic is automatically deleted when it meets the following three conditions:
 - when no producers or consumers are connected to it;
 - there are no subscriptions to it;
-- no more messages are kept for retention. 
+- no more messages are kept for retention.
 For geo-replication topics, each region uses a fault-tolerant mechanism to decide when it's safe to delete the topic locally.
 
 You can explicitly disable topic garbage collection by setting `brokerDeleteInactiveTopicsEnabled` to `false` in your [broker configuration](reference-configuration.md#broker).

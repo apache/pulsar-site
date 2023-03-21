@@ -83,7 +83,7 @@ pulsar://pulsar.us-west.example.com:6650
 
 ```
 
-If you use [TLS](security-tls-authentication.md) authentication, the URL is as follows. 
+If you use [TLS](security-tls-authentication.md) authentication, the URL is as follows.
 
 ```http
 
@@ -91,7 +91,7 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 
 ```
 
-## Client 
+## Client
 
 You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
 
@@ -125,8 +125,8 @@ String | `authPluginClassName` | Name of the authentication plugin | None
 String | `authParams` | String represents parameters for the authentication plugin <br /><br />**Example**<br /> key1:val1,key2:val2|None
 long|`operationTimeoutMs`|Operation timeout |30000
 long|`statsIntervalSeconds`|Interval between each stats info<br /><br />Stats is activated with positive `statsInterval`<br /><br />Set `statsIntervalSeconds` to 1 second at least |60
-int|`numIoThreads`| The number of threads used for handling connections to brokers | 1 
-int|`numListenerThreads`|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](concepts-messaging.md#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1 
+int|`numIoThreads`| The number of threads used for handling connections to brokers | 1
+int|`numListenerThreads`|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](concepts-messaging.md#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1
 boolean|`useTcpNoDelay`|Whether to use TCP no-delay flag on the connection to disable Nagle algorithm |true
 boolean |`enableTls` |Whether to use TLS encryption on the connection. Note that this parameter is **deprecated**. If you want to enable TLS, use `pulsar+ssl://` in `serviceUrl` instead.| false
 string | `tlsTrustCertsFilePath` |Path to the trusted TLS certificate file|None
@@ -174,19 +174,19 @@ stringProducer.send("My message");
 > Make sure that you close your producers, consumers, and clients when you do not need them.
 
 > ```java
-> 
+>
 > producer.close();
 > consumer.close();
 > client.close();
 >
-> 
+>
 > ```
 
 >
 > Close operations can also be asynchronous:
 
 > ```java
-> 
+>
 > producer.closeAsync()
 >    .thenRun(() -> System.out.println("Producer closed"))
 >    .exceptionally((ex) -> {
@@ -194,13 +194,13 @@ stringProducer.send("My message");
 >        return null;
 >    });
 >
-> 
+>
 > ```
 
 
 ### Configure producer
 
-If you instantiate a `Producer` object by specifying only a topic name as the example above, use the default configuration for producer. 
+If you instantiate a `Producer` object by specifying only a topic name as the example above, use the default configuration for producer.
 
 If you create a producer, you can use the `loadConf` configuration. The following parameters are available in `loadConf`.
 
@@ -332,7 +332,7 @@ Consumer consumer = client.newConsumer()
 
 ### Configure consumer
 
-If you instantiate a `Consumer` object by specifying only a topic and subscription name as in the example above, the consumer uses the default configuration. 
+If you instantiate a `Consumer` object by specifying only a topic and subscription name as in the example above, the consumer uses the default configuration.
 
 When you create a consumer, you can use the `loadConf` configuration. The following parameters are available in `loadConf`.
 
@@ -360,7 +360,7 @@ DeadLetterPolicy|`deadLetterPolicy`|Dead letter policy for consumers.<br /><br /
 boolean|`autoUpdatePartitions`|If `autoUpdatePartitions` is enabled, a consumer subscribes to partition increasement automatically.<br /><br />**Note**: this is only for partitioned consumers.|true
 boolean|`replicateSubscriptionState`|If `replicateSubscriptionState` is enabled, a subscription state is replicated to geo-replicated clusters.|false
 
-You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class. 
+You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class.
 
 The following is an example.
 
@@ -391,7 +391,7 @@ Async receive operations return a {@inject: javadoc:Message:/client/org/apache/p
 
 ### Batch receive
 
-Use `batchReceive` to receive multiple messages for each call. 
+Use `batchReceive` to receive multiple messages for each call.
 
 The following is an example.
 
@@ -581,7 +581,7 @@ Only the first consumer is allowed to the subscription, other consumers receive 
 
 :::note
 
-If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error. 
+If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
 :::
 
@@ -606,7 +606,7 @@ Consumer consumer2 = client.newConsumer()
 
 ```
 
-Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer then becomes active consumer. 
+Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer then becomes active consumer.
 
 If the first active consumer is disconnected after receiving 5 messages, the standby consumer becomes active consumer. Consumer1 will receive:
 
@@ -634,7 +634,7 @@ consumer2 will receive:
 
 :::note
 
-If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers. 
+If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers.
 
 :::
 
@@ -649,7 +649,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -698,7 +698,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -762,7 +762,7 @@ If the message key is not specified, messages without keys are dispatched to one
 
 :::
 
-## Reader 
+## Reader
 
 With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic and a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}.
 
@@ -879,61 +879,61 @@ The following schema formats are currently available for Java:
 * No schema or the byte array schema (which can be applied using `Schema.BYTES`):
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer(Schema.BYTES)
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
   Or, equivalently:
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer()
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
 * `String` for normal UTF-8-encoded string data. Apply the schema using `Schema.STRING`:
 
   ```java
-  
+
   Producer<String> stringProducer = client.newProducer(Schema.STRING)
       .topic("some-string-topic")
       .create();
-  
+
   ```
 
 * Create JSON schemas for POJOs using `Schema.JSON`. The following is an example.
 
   ```java
-  
+
   Producer<MyPojo> pojoProducer = client.newProducer(Schema.JSON(MyPojo.class))
       .topic("some-pojo-topic")
       .create();
-  
+
   ```
 
 * Generate Protobuf schemas using `Schema.PROTOBUF`. The following example shows how to create the Protobuf schema and use it to instantiate a new producer:
 
   ```java
-  
+
   Producer<MyProtobuf> protobufProducer = client.newProducer(Schema.PROTOBUF(MyProtobuf.class))
       .topic("some-protobuf-topic")
       .create();
-  
+
   ```
 
 * Define Avro schemas with `Schema.AVRO`. The following code snippet demonstrates how to create and use Avro schema.
 
   ```java
-  
+
   Producer<MyAvro> avroProducer = client.newProducer(Schema.AVRO(MyAvro.class))
       .topic("some-avro-topic")
       .create();
-  
+
   ```
 
 ### ProtobufNativeSchema example

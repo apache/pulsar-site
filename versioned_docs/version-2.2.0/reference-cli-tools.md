@@ -15,18 +15,18 @@ All Pulsar command-line tools can be run from the `bin` directory of your [insta
 * [`bookkeeper`](#bookkeeper)
 * [`broker-tool`](#broker-tool)
 
-> **Important** 
+> **Important**
 >
 > - This page only shows **some frequently used commands**. For the latest information about `pulsar`, `pulsar-client`, and `pulsar-perf`, including commands, flags, descriptions, and more information, see [Pulsar tools](https://pulsar.apache.org/tools/).
->  
+>
 > - You can get help for any CLI tool, command, or subcommand using the `--help` flag, or `-h` for short. Here's an example:
-> 
+>
 
 > ```shell
-> 
+>
 > $ bin/pulsar broker --help
 >
-> 
+>
 > ```
 
 
@@ -961,7 +961,7 @@ $ broker-tool command --help
 
 ### `load-report`
 
-Collect the load report of a specific broker. 
+Collect the load report of a specific broker.
 The command is run on a broker, and used for troubleshooting why broker can’t collect right load report.
 
 Options

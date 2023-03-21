@@ -4,7 +4,7 @@ title: Trigger a function
 sidebar_label: "Trigger a function"
 ---
 
-Triggering a function means that you invoke a function by producing a message to one of the input topics via the CLI. You can use the `trigger` command to trigger a function at any time. 
+Triggering a function means that you invoke a function by producing a message to one of the input topics via the CLI. You can use the `trigger` command to trigger a function at any time.
 
 :::tip
 
@@ -53,7 +53,7 @@ def process(input):
 
    :::tip
 
-   In the `trigger` command, topic info is not required. You only need to specify basic information about the function, such as tenant, namespace, and function name. 
+   In the `trigger` command, topic info is not required. You only need to specify basic information about the function, such as tenant, namespace, and function name.
 
    :::
 

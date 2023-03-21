@@ -6,13 +6,13 @@ sidebar_label: "Set up"
 
 ## Install C# client library
 
-This section describes how to install the Pulsar C# client library through the dotnet CLI. 
+This section describes how to install the Pulsar C# client library through the dotnet CLI.
 
 Alternatively, you can install the Pulsar C# client library through Visual Studio. Note that starting from Visual Studio 2017, the dotnet CLI is automatically installed with any .NET Core related workloads. For more information, see [Microsoft documentation](https://docs.microsoft.com/en-us/visualstudio/mac/nuget-walkthrough?view=vsmac-2019).
 
 To install the Pulsar C# client library using the dotnet CLI, follow these steps:
 
-1. Install the [.NET Core SDK](https://dotnet.microsoft.com/download/), which provides the dotnet CLI. 
+1. Install the [.NET Core SDK](https://dotnet.microsoft.com/download/), which provides the dotnet CLI.
 
 2. Create a project.
 

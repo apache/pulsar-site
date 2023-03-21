@@ -122,8 +122,8 @@ String | `authPluginClassName` | Name of the authentication plugin | None
 String | `authParams` | String represents parameters for the authentication plugin <br />**Example**<br /> key1:val1,key2:val2|None
 long|`operationTimeoutMs`|Operation timeout |30000
 long|`statsIntervalSeconds`|Interval between each stat info<br />Stats is activated with positive `statsInterval`<br />`statsIntervalSeconds` should be set to 1 second at least |60
-int|`numIoThreads`| Number of threads used for handling connections to brokers | 1 
-int|`numListenerThreads`|Number of threads used for handling message listeners | 1 
+int|`numIoThreads`| Number of threads used for handling connections to brokers | 1
+int|`numListenerThreads`|Number of threads used for handling message listeners | 1
 boolean|`useTcpNoDelay`|Whether to use TCP no-delay flag on the connection to disable Nagle algorithm |true
 boolean |`useTls` |Whether to use TLS encryption on the connection| false
 string | `tlsTrustCertsFilePath` |Path to the trusted TLS certificate file|None
@@ -171,19 +171,19 @@ stringProducer.send("My message");
 > You should always make sure to close your producers, consumers, and clients when they are no longer needed:
 
 > ```java
-> 
+>
 > producer.close();
 > consumer.close();
 > client.close();
 >
-> 
+>
 > ```
 
 >
 > Close operations can also be asynchronous:
 
 > ```java
-> 
+>
 > producer.closeAsync()
 >    .thenRun(() -> System.out.println("Producer closed"));
 >    .exceptionally((ex) -> {
@@ -191,13 +191,13 @@ stringProducer.send("My message");
 >        return ex;
 >    });
 >
-> 
+>
 > ```
 
 
 ### Configuring producers
 
-If you instantiate a `Producer` object specifying only a topic name, as in the example above, the producer will use the default configuration. To use a non-default configuration, there's a variety of configurable parameters that you can set. 
+If you instantiate a `Producer` object specifying only a topic name, as in the example above, the producer will use the default configuration. To use a non-default configuration, there's a variety of configurable parameters that you can set.
 
 For a full listing, see the Javadoc for the {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder} class. Here's an example:
 
@@ -443,7 +443,7 @@ Only the first consumer is allowed to the subscription, other consumers receive 
 
 :::note
 
-If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error. 
+If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
 :::
 
@@ -468,7 +468,7 @@ Consumer consumer2 = client.newConsumer()
 
 ```
 
-Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer becomes active consumer. 
+Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer becomes active consumer.
 
 If the first active consumer receives 5 messages and is disconnected, the standby consumer becomes active consumer. Consumer1 will receive:
 
@@ -496,7 +496,7 @@ consumer2 will receive:
 
 :::note
 
-If a topic is a partitioned topic, each partition only has one active consumer, messages of one partition only distributed to one consumer, messages of multiple partitions are distributed to multiple consumers. 
+If a topic is a partitioned topic, each partition only has one active consumer, messages of one partition only distributed to one consumer, messages of multiple partitions are distributed to multiple consumers.
 
 :::
 
@@ -511,7 +511,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -560,7 +560,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -685,61 +685,61 @@ The following schema formats are currently available for Java:
 * No schema or the byte array schema (which can be applied using `Schema.BYTES`):
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer(Schema.BYTES)
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
   Or, equivalently:
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer()
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
 * `String` for normal UTF-8-encoded string data. This schema can be applied using `Schema.STRING`:
 
   ```java
-  
+
   Producer<String> stringProducer = client.newProducer(Schema.STRING)
       .topic("some-string-topic")
       .create();
-  
+
   ```
 
 * JSON schemas can be created for POJOs using `Schema.JSON`. Here's an example:
 
   ```java
-  
+
   Producer<MyPojo> pojoProducer = client.newProducer(Schema.JSON(MyPojo.class))
       .topic("some-pojo-topic")
       .create();
-  
+
   ```
 
 * Protobuf schemas can be generate using `Schema.PROTOBUF`. The following example shows how to create the Protobuf schema and use it to instantiate a new producer:
 
   ```java
-  
+
   Producer<MyProtobuf> protobufProducer = client.newProducer(Schema.PROTOBUF(MyProtobuf.class))
       .topic("some-protobuf-topic")
       .create();
-  
+
   ```
 
 * Avro schemas can be defined with the help of `Schema.AVRO`. The next code snippet demonstrates the creation and usage of the Avro schema:
 
   ```java
-  
+
   Producer<MyAvro> avroProducer = client.newProducer(Schema.AVRO(MyAvro.class))
       .topic("some-avro-topic")
       .create();
-  
+
   ```
 
 ## Authentication

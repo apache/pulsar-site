@@ -74,10 +74,10 @@ By default, you can use the embedded authorization provider provided by Pulsar. 
 To provide a custom authorization provider, you need to implement the `org.apache.pulsar.broker.authorization.AuthorizationProvider` interface, put this class in the Pulsar broker classpath and configure the class in `conf/broker.conf`:
 
  ```properties
- 
+
  # Authorization provider fully qualified class-name
  authorizationProvider=org.apache.pulsar.broker.authorization.PulsarAuthorizationProvider
- 
+
  ```
 
 For the implementation of the `org.apache.pulsar.broker.authorization.AuthorizationProvider` interface, refer to [here](https://github.com/apache/pulsar/blob/master/pulsar-broker-common/src/main/java/org/apache/pulsar/broker/authorization/AuthorizationProvider.java).

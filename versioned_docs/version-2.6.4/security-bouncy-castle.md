@@ -7,7 +7,7 @@ original_id: security-bouncy-castle
 
 ## BouncyCastle Introduce
 
-`Bouncy Castle` is a Java library that complements the default Java Cryptographic Extension (JCE), 
+`Bouncy Castle` is a Java library that complements the default Java Cryptographic Extension (JCE),
 and it many more cipher suites and algorithms than the default JCE provided by Sun.
 
 In addition to that, `Bouncy Castle` has lots of utilities for reading arcane formats like PEM and ASN.1 that no sane person would want to rewrite themselves.
@@ -93,7 +93,7 @@ Pulsar module `bouncy-castle-bcfips`, which defined by `bouncy-castle/bcfips/pom
 
 ```
 
-User can choose include module `bouncy-castle-bcfips` module directly, or include original BC-FIPS jars. 
+User can choose include module `bouncy-castle-bcfips` module directly, or include original BC-FIPS jars.
 
 For example:
 

@@ -4,7 +4,7 @@ title: Configure thread runtime
 sidebar_label: "Configure thread runtime"
 ---
 
-You can use the default configurations of thread runtime in the `conf/functions_worker.yml` file. 
+You can use the default configurations of thread runtime in the `conf/functions_worker.yml` file.
 
 If you want to customize more parameters, such as thread group name, refer to the following example.
 
