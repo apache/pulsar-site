@@ -1,29 +1,25 @@
 import React from 'react';
 import clsx from 'clsx';
+import {HtmlClassNameProvider, PageMetadata, ThemeClassNames,} from '@docusaurus/theme-common';
 import {
-  HtmlClassNameProvider,
-  ThemeClassNames,
-  PageMetadata,
-} from '@docusaurus/theme-common';
-import {
-  docVersionSearchTag,
   DocsSidebarProvider,
   DocsVersionProvider,
+  docVersionSearchTag,
   useDocRouteMetadata,
 } from '@docusaurus/theme-common/internal';
 import DocPageLayout from '@theme/DocPage/Layout';
 import NotFound from '@theme/NotFound';
 import SearchMetadata from '@theme/SearchMetadata';
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import type {Props} from '@theme/DocPage';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
-function createCanonicalHref(pathname) {
+function createCanonicalHref(pathname: string): string {
   const {siteConfig} = useDocusaurusContext();
-  return siteConfig.url + useBaseUrl(pathname) + '/';
+  return siteConfig.url + useBaseUrl(pathname);
 }
-
-function DocPageMetadata(props) {
-  const {versionMetadata, location} = props;
+function DocPageMetadata(props: Props): JSX.Element {
+  const {versionMetadata} = props;
   return (
     <>
       <SearchMetadata
@@ -35,7 +31,7 @@ function DocPageMetadata(props) {
       />
       <PageMetadata>
         {versionMetadata.noIndex && (
-          <meta name="robots" content="noindex, nofollow"/>
+          <meta name="robots" content="noindex, nofollow" />
         )}
         <link rel="canonical" href={createCanonicalHref(location.pathname)}/>
       </PageMetadata>
@@ -43,11 +39,11 @@ function DocPageMetadata(props) {
   );
 }
 
-export default function DocPage(props) {
+export default function DocPage(props: Props): JSX.Element {
   const {versionMetadata} = props;
   const currentDocRouteMetadata = useDocRouteMetadata(props);
   if (!currentDocRouteMetadata) {
-    return <NotFound/>;
+    return <NotFound />;
   }
   const {docElement, sidebarName, sidebarItems} = currentDocRouteMetadata;
   return (
