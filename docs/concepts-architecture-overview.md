@@ -49,7 +49,6 @@ The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such a
 
 > Pulsar also supports more metadata backend services, including [etcd](https://etcd.io/) and [RocksDB](http://rocksdb.org/) (for standalone Pulsar only).
 
-
 In a Pulsar instance:
 
 * A configuration store quorum stores configuration for tenants, namespaces, and other entities that need to be globally consistent.
