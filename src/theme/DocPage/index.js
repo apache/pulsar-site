@@ -14,8 +14,16 @@ import {
 import DocPageLayout from '@theme/DocPage/Layout';
 import NotFound from '@theme/NotFound';
 import SearchMetadata from '@theme/SearchMetadata';
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+
+function createCanonicalHref(pathname) {
+  const {siteConfig} = useDocusaurusContext();
+  return siteConfig.url + useBaseUrl(pathname) + '/';
+}
+
 function DocPageMetadata(props) {
-  const {versionMetadata} = props;
+  const {versionMetadata, location} = props;
   return (
     <>
       <SearchMetadata
@@ -27,17 +35,19 @@ function DocPageMetadata(props) {
       />
       <PageMetadata>
         {versionMetadata.noIndex && (
-          <meta name="robots" content="noindex, nofollow" />
+          <meta name="robots" content="noindex, nofollow"/>
         )}
+        <link rel="canonical" href={createCanonicalHref(location.pathname)}/>
       </PageMetadata>
     </>
   );
 }
+
 export default function DocPage(props) {
   const {versionMetadata} = props;
   const currentDocRouteMetadata = useDocRouteMetadata(props);
   if (!currentDocRouteMetadata) {
-    return <NotFound />;
+    return <NotFound/>;
   }
   const {docElement, sidebarName, sidebarItems} = currentDocRouteMetadata;
   return (
