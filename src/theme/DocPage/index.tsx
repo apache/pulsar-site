@@ -5,7 +5,7 @@ import {
   DocsSidebarProvider,
   DocsVersionProvider,
   docVersionSearchTag,
-  useDocRouteMetadata, useDocsVersion,
+  useDocRouteMetadata,
 } from '@docusaurus/theme-common/internal';
 import DocPageLayout from '@theme/DocPage/Layout';
 import NotFound from '@theme/NotFound';
