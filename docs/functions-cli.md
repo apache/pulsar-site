@@ -63,7 +63,7 @@ You can configure a function by using a predefined YAML file. The following tabl
 | maxPendingAsyncRequests | Int    | `--max-message-retries`    | The max number of pending async requests per instance to avoid a large number of concurrent requests. |
 | exposePulsarAdminClientEnabled | Boolean | N/A                | Whether the Pulsar admin client is exposed to function context or not. By default, it is disabled. |
 | subscriptionPosition | String    | `--subs-position`          | The position of Pulsar source subscription used for consuming messages from a specified location. The default value is `Latest`.|
-
+| skipToLatest         | Boolean   | `--skip-to-latest`         | Whether the consumer should skip to the latest message once the function instance restarts. |
 
 ##### ConsumerConfig
 
@@ -91,6 +91,7 @@ The following table outlines the nested fields and related arguments under the `
 | useThreadLocalProducers            | Boolean                       | N/A                      | N/A                             |
 | cryptoConfig                       | [CryptoConfig](#cryptoconfig) | N/A                      | Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java).|
 | batchBuilder                       | String                        | `--batch-builder`        | The type of batch construction method. Available values: `DEFAULT` and `KEY_BASED`. The default value is `DEFAULT`. |
+| compressionType                      | String                        | N/A                      | Message data compression type used by a producer. The default value is [`LZ4`](https://github.com/lz4/lz4). <br />Available options:<li>`NONE` (no compression)</li><li>[`ZLIB`](https://zlib.net/)<br /></li><li>[`ZSTD`](https://facebook.github.io/zstd/)</li><li>[`SNAPPY`](https://google.github.io/snappy/)</li>|
 
 ###### Resources
 
