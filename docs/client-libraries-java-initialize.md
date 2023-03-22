@@ -27,4 +27,4 @@ If you run a cluster in [standalone mode](getting-started-standalone.md), the br
 
 :::
 
-For detailed client configurations, see the [reference doc](client-libraries-java-configs.md#client-configurations).
+For detailed client configurations, see the [reference doc](pathname:///reference/#/@pulsar:version_origin@/client/).
