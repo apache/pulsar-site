@@ -29,12 +29,12 @@ The following table outlines the API packages and reference docs for Pulsar Java
 
 Package | Description | Maven Artifact
 :-------|:------------|:--------------
-[`org.apache.pulsar.client.api`](/api/client) | [Java client API](/api/client/) | [org.apache.pulsar:pulsar-client:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version@%7Cjar)
+[`org.apache.pulsar.client.api`](/api/client) | [Java client API](client-api-overview.md) | [org.apache.pulsar:pulsar-client:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version@%7Cjar)
 [`org.apache.pulsar.client.admin`](/api/admin) | [Java admin API](admin-api-overview.md) | [org.apache.pulsar:pulsar-client-admin:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C@pulsar:version@%7Cjar)
 `org.apache.pulsar.client.all` | Include both `pulsar-client` and `pulsar-client-admin`.<br /> Both `pulsar-client` and `pulsar-client-admin` are independently shaded packages. Consequently, the applications using both `pulsar-client` and `pulsar-client-admin` have redundant shaded classes. It would be troublesome if you introduce new dependencies but forget to update shading rules. <br /> In this case, you can use `pulsar-client-all`, which shades dependencies only one time and reduces the size of dependencies.  | [org.apache.pulsar:pulsar-client-all:@pulsar:version@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-all%7C@pulsar:version@%7Cjar)
 
 #### More reference
 
-- [Java client configurations](client-libraries-java-configs.md)
+- [Java client configurations](pathname:///reference/#/@pulsar:version_origin@/client/)
 - [Release notes](/release-notes/client-java)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
