@@ -40,7 +40,7 @@ const generateData = (columns, count = 200, prefix = "row-") =>
   });
 
 const columns = generateColumns(10);
-const data = generateData(columns, 10);
+const data = generateData(columns, 100);
 
 const fixedColumns = columns.map((column, columnIndex) => {
   let frozen;
