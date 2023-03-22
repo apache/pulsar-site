@@ -4,6 +4,12 @@ title: Pulsar Clients
 sidebar_label: "Clients"
 ---
 
+import Head from '@docusaurus/Head';
+
+<head>
+    <link rel="canonical" href="https://pulsar.apache.org/docs/concepts-clients/" />
+</head>
+
 Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [C++](client-libraries-cpp.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [Node.js](client-libraries-node.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
 
 Pulsar client libraries support transparent reconnection and/or connection failover to brokers, queuing of messages until acknowledged by the broker, and heuristics such as connection retries with backoff.
@@ -48,7 +54,7 @@ For more information, see [PIP 68: Exclusive Producer](https://github.com/apache
 
 :::
 
-You can set producer access mode through Java Client API. For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
+You can set producer access mode through [Java Client API](/api/client/). For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
 
 
 ## Consumer
