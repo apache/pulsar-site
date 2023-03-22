@@ -4,6 +4,9 @@ title: Pulsar Go client configurations
 sidebar_label: "Go client"
 ---
 
+## Client configs
+
+For all available options, see [`ClientOptions`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ClientOptions).
 
 ## Producer configs
 
