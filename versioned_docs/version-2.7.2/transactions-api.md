@@ -5,7 +5,7 @@ sidebar_label: "Transactions API"
 original_id: transactions-api
 ---
 
-All messages in a transaction is available only to consumers after the transaction is committed. If a transaction is aborted, all the writes and acknowledgments in this transaction rollback. 
+All messages in a transaction is available only to consumers after the transaction is committed. If a transaction is aborted, all the writes and acknowledgments in this transaction rollback.
 
 Currently, Pulsar transaction is a developer preview feature. It is disabled by default. You can enable the feature and use transactions in your application in development environment.
 
@@ -28,7 +28,7 @@ bin/pulsar initialize-transaction-coordinator-metadata -cs 127.0.0.1:2181 -c sta
 
 After initializing transaction coordinator metadata, you can use the transactions API. The following APIs are available.
 
-## Initialize Pulsar client 
+## Initialize Pulsar client
 
 You can enable transaction for transaction client and initialize transaction coordinator client.
 
@@ -75,7 +75,7 @@ consumer.acknowledgeAsync(message.getMessageId(), txn);
 
 ```
 
-## Commit transactions 
+## Commit transactions
 
 When the transaction is committed, consumers receive the transaction messages and the pending-ack state becomes ack state.
 

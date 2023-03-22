@@ -9,7 +9,7 @@ You can use different ways to monitor a Pulsar cluster, exposing both metrics th
 
 ## Collect metrics
 
-You can collect broker stats, ZooKeeper stats, and BookKeeper stats. 
+You can collect broker stats, ZooKeeper stats, and BookKeeper stats.
 
 ### Broker stats
 
@@ -18,17 +18,17 @@ You can collect Pulsar broker metrics from brokers and export the metrics in JSO
 * *Destination dumps*, which contain stats for each individual topic. You can fetch the destination dumps using the command below:
 
   ```shell
-  
+
   bin/pulsar-admin broker-stats destinations
-  
+
   ```
 
 * Broker metrics, which contain the broker information and topics stats aggregated at namespace level. You can fetch the broker metrics using the command below:
 
   ```shell
-  
+
   bin/pulsar-admin broker-stats monitoring-metrics
-  
+
   ```
 
 All the message rates are updated every 1min.

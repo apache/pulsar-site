@@ -16,9 +16,9 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
 5. Check the stats of the topic.
 
-6. Delete the topic. 
+6. Delete the topic.
 
-## Prerequisites 
+## Prerequisites
 
 - [Install and start Pulsar standalone](getting-started-standalone.md). This tutorial runs Pulsar 2.11 as an example.
 

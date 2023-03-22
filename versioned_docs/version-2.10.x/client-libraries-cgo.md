@@ -18,7 +18,7 @@ Currently, the following Go clients are maintained in two repositories.
 | CGo | [pulsar-client-go](https://github.com/apache/pulsar/tree/master/pulsar-client-go) | [Apache Pulsar](https://github.com/apache/pulsar) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | CGo client that depends on C++ client library |
 | Go | [pulsar-client-go](https://github.com/apache/pulsar-client-go) | [Apache Pulsar](https://github.com/apache/pulsar) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | A native golang client |
 
-> **API docs available as well**  
+> **API docs available as well**
 > For standard API docs, consult the [Godoc](https://godoc.org/github.com/apache/pulsar/pulsar-client-go/pulsar).
 
 ## Installation
@@ -30,7 +30,7 @@ the instructions for [C++ library](client-libraries-cpp.md) for installing the b
 
 ### Install go package
 
-> **Compatibility Warning**  
+> **Compatibility Warning**
 > The version number of the Go client **must match** the version number of the Pulsar C++ client library.
 
 You can install the `pulsar` library locally using `go get`.  Note that `go get` doesn't support fetching a specific tag - it will always pull in master's version of the Go client.  You'll need a C++ client library that matches master.
@@ -153,7 +153,7 @@ if err := producer.Send(context.Background(), msg); err != nil {
 
 ```
 
-> **Blocking operation**  
+> **Blocking operation**
 > When you create a new Pulsar producer, the operation will block (waiting on a go channel) until either a producer is successfully created or an error is thrown.
 
 
@@ -168,7 +168,7 @@ Method | Description | Return type
 `Send(context.Context, ProducerMessage)` | Publishes a [message](#messages) to the producer's topic. This call will block until the message is successfully acknowledged by the Pulsar broker, or an error will be thrown if the timeout set using the `SendTimeout` in the producer's [configuration](#producer-configuration) is exceeded. | `error`
 `SendAndGetMsgID(context.Context, ProducerMessage)`| Send a message, this call will be blocking until is successfully acknowledged by the Pulsar broker. | (MessageID, error)
 `SendAsync(context.Context, ProducerMessage, func(ProducerMessage, error))` | Publishes a [message](#messages) to the producer's topic asynchronously. The third argument is a callback function that specifies what happens either when the message is acknowledged or an error is thrown. |
-`SendAndGetMsgIDAsync(context.Context, ProducerMessage, func(MessageID, error))`| Send a message in asynchronous mode. The callback will report back the message being published and the eventual error in publishing | 
+`SendAndGetMsgIDAsync(context.Context, ProducerMessage, func(MessageID, error))`| Send a message in asynchronous mode. The callback will report back the message being published and the eventual error in publishing |
 `LastSequenceID()` | Get the last sequence id that was published by this producer. his represent either the automatically assigned or custom sequence id (set on the ProducerMessage) that was published and acknowledged by the broker. | int64
 `Flush()`| Flush all the messages buffered in the client and wait until all messages have been successfully persisted. | error
 `Close()` | Closes the producer and releases all resources allocated to it. If `Close()` is called then no more messages will be accepted from the publisher. This method will block until all pending publish requests have been persisted by Pulsar. If an error is thrown, no pending writes will be retried. | `error`
@@ -237,7 +237,7 @@ Parameter | Description | Default
 :---------|:------------|:-------
 `Topic` | The Pulsar [topic](reference-terminology.md#topic) to which the producer will publish messages |
 `Name` | A name for the producer. If you don't explicitly assign a name, Pulsar will automatically generate a globally unique name that you can access later using the `Name()` method.  If you choose to explicitly assign a name, it will need to be unique across *all* Pulsar clusters, otherwise the creation operation will throw an error. |
-`Properties`| Attach a set of application defined properties to the producer. This properties will be visible in the topic stats | 
+`Properties`| Attach a set of application defined properties to the producer. This properties will be visible in the topic stats |
 `SendTimeout` | When publishing a message to a topic, the producer will wait for an acknowledgment from the responsible Pulsar [broker](reference-terminology.md#broker). If a message is not acknowledged within the threshold set by this parameter, an error will be thrown. If you set `SendTimeout` to -1, the timeout will be set to infinity (and thus removed). Removing the send timeout is recommended when using Pulsar's [message de-duplication](cookbooks-deduplication.md) feature. | 30 seconds
 `MaxPendingMessages` | The maximum size of the queue holding pending messages (i.e. messages waiting to receive an acknowledgment from the [broker](reference-terminology.md#broker)). By default, when the queue is full all calls to the `Send` and `SendAsync` methods will fail *unless* `BlockIfQueueFull` is set to `true`. |
 `MaxPendingMessagesAcrossPartitions` | Set the number of max pending messages across all the partitions. This setting will be used to lower the max pending messages for each partition `MaxPendingMessages(int)`, if the total exceeds the configured value.|
@@ -284,7 +284,7 @@ for cm := range msgChannel {
 
 ```
 
-> **Blocking operation**  
+> **Blocking operation**
 > When you create a new Pulsar consumer, the operation will block (on a go channel) until either a producer is successfully created or an error is thrown.
 
 
@@ -394,7 +394,7 @@ reader, err := client.CreateReader(pulsar.ReaderOptions{
 
 ```
 
-> **Blocking operation**  
+> **Blocking operation**
 > When you create a new Pulsar reader, the operation will block (on a go channel) until either a reader is successfully created or an error is thrown.
 
 
@@ -470,8 +470,8 @@ reader, err := client.CreateReader(pulsar.ReaderOptions{
 
 Parameter | Description | Default
 :---------|:------------|:-------
-`Topic` | The Pulsar [topic](reference-terminology.md#topic) on which the reader will establish a subscription and listen for messages 
-`Name` | The name of the reader 
+`Topic` | The Pulsar [topic](reference-terminology.md#topic) on which the reader will establish a subscription and listen for messages
+`Name` | The name of the reader
 `StartMessageID` | The initial reader position, i.e. the message at which the reader begins processing messages. The options are `pulsar.EarliestMessage` (the earliest available message on the topic), `pulsar.LatestMessage` (the latest available message on the topic), or a `MessageID` object for a position that isn't earliest or latest. |
 `MessageChannel` | The Go channel used by the reader. Messages that arrive from the Pulsar topic(s) will be passed to this channel. |
 `ReceiverQueueSize` | Sets the size of the reader's receiver queue, i.e. the number of messages that can be accumulated by the reader before the application calls `Next`. A value higher than the default of 1000 could increase reader throughput, though at the expense of more memory utilization. | 1000

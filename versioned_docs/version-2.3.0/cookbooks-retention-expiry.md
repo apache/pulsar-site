@@ -22,7 +22,7 @@ Pulsar's [admin interface](admin-api-overview.md) enables you to manage both ret
 > * Message retention: Keep the data for at least X hours (even if acknowledged)
 > * Time-to-live: Discard data after some time (by automatically acknowledging)
 >
-> In most cases, applications will want to use either one or the other (or none). 
+> In most cases, applications will want to use either one or the other (or none).
 
 
 ## Retention policies

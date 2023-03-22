@@ -22,11 +22,11 @@ superUserRoles=my-super-user-1,my-super-user-2
 ```
 
 > A full list of parameters is available in the `conf/broker.conf` or `conf/standalone.conf` file.
-> You can also find the default values for those parameters in [Broker Configuration](reference-configuration.md#broker). 
+> You can also find the default values for those parameters in [Broker Configuration](reference-configuration.md#broker).
 
 Typically, you use superuser roles for administrators, clients as well as broker-to-broker authorization. When you use [geo-replication](concepts-replication.md), every broker needs to be able to publish to all the other topics of clusters.
 
-You can also enable the authorization for the proxy in the proxy configuration file (`conf/proxy.conf`). Once you enable the authorization on the proxy, the proxy does an additional authorization check before forwarding the request to a broker. 
+You can also enable the authorization for the proxy in the proxy configuration file (`conf/proxy.conf`). Once you enable the authorization on the proxy, the proxy does an additional authorization check before forwarding the request to a broker.
 If you enable authorization on the broker, the broker checks the authorization of the request when the broker receives the forwarded request.
 
 ### Proxy Roles
@@ -52,9 +52,9 @@ superUserRoles=my-super-user-1,my-super-user-2,my-proxy-role
 
 ## Administer tenants
 
-Pulsar [instance](reference-terminology.md#instance) administrators or some kind of self-service portal typically provisions a Pulsar [tenant](reference-terminology.md#tenant). 
+Pulsar [instance](reference-terminology.md#instance) administrators or some kind of self-service portal typically provisions a Pulsar [tenant](reference-terminology.md#tenant).
 
-You can manage tenants using the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin) tool. 
+You can manage tenants using the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool.
 
 ### Create a new tenant
 

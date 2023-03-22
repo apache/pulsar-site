@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-Below are the most common tasks you may want to do. For the exhaustive lists of tasks and the method to perform these tasks, see [Tools](admin-api-tools.md).  
+Below are the most common tasks you may want to do. For the exhaustive lists of tasks and the method to perform these tasks, see [Tools](admin-api-tools.md).
 
 ![Pulsar admin APIs - features](/assets/admin-api-features.svg)
 
@@ -35,6 +35,6 @@ Others| - Proxy <br/><br/> - Resource groups <br/><br/> - Resource quotas | Oper
 
 - To check the detailed usage, see the API references below.
 
-  - [Java admin API](pathname:///api/admin/)
+  - [Java admin API](/api/admin/)
 
   - [REST API](reference-rest-api-overview.md)

@@ -20,7 +20,7 @@ The configuration of the Redis sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `redisHosts` |String|true|" " (empty string) | A comma-separated list of Redis hosts to connect to. |
 | `redisPassword` |String|false|" " (empty string) | The password used to connect to Redis. |
@@ -89,10 +89,10 @@ This example shows how to write records to a Redis database using the Pulsar Red
    ```
 
    Make sure the NAR file is available at `connectors/pulsar-io-redis-@pulsar:version@.nar`.
-   
+
 3. Start the Pulsar Redis connector in local run mode using one of the following methods.
 
-   * Use the **JSON** configuration file as shown previously. 
+   * Use the **JSON** configuration file as shown previously.
 
    ```bash
    bin/pulsar-admin sinks localrun \

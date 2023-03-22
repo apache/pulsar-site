@@ -15,7 +15,7 @@ Pulsar C++ client is supported on **Linux** and **MacOS** platforms.
 
 ### Install RPM
 
-1. Download a RPM package from the links in the table. 
+1. Download a RPM package from the links in the table.
 
 | Link | Crypto files |
 |------|--------------|
@@ -33,7 +33,7 @@ $ rpm -ivh apache-pulsar-client*.rpm
 
 ### Install Debian
 
-1. Download a Debian package from the links in the table. 
+1. Download a Debian package from the links in the table.
 
 | Link | Crypto files |
 |------|--------------|
@@ -119,7 +119,7 @@ pulsar://localhost:6650
 
 ```
 
-In a Pulsar cluster in production, the URL looks as follows: 
+In a Pulsar cluster in production, the URL looks as follows:
 
 ```http
 
@@ -136,7 +136,7 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 ```
 
 ## Create a consumer
-To connect to Pulsar as a consumer, you need to create a consumer on the C++ client. The following is an example. 
+To connect to Pulsar as a consumer, you need to create a consumer on the C++ client. The following is an example.
 
 ```c++
 
@@ -164,7 +164,7 @@ client.close();
 ```
 
 ## Create a producer
-To connect to Pulsar as a producer, you need to create a producer on the C++ client. The following is an example. 
+To connect to Pulsar as a producer, you need to create a producer on the C++ client. The following is an example.
 
 ```c++
 

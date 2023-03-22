@@ -13,7 +13,7 @@ The configuration of the Cassandra sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `roots` | String|true | " " (empty string) | A comma-separated list of Cassandra hosts to connect to.|
 | `keyspace` | String|true| " " (empty string)| The key space used for writing pulsar messages. <br /><br />**Note: `keyspace` should be created prior to a Cassandra sink.**|
@@ -28,7 +28,7 @@ Before using the Cassandra sink connector, you need to create a configuration fi
 * JSON
 
   ```json
-  
+
   {
      "configs": {
         "roots": "localhost:9042",
@@ -38,20 +38,20 @@ Before using the Cassandra sink connector, you need to create a configuration fi
         "columnName": "col"
      }
   }
-  
+
   ```
 
 * YAML
 
   ```
-  
+
   configs:
       roots: "localhost:9042"
       keyspace: "pulsar_test_keyspace"
       columnFamily: "pulsar_test_table"
       keyname: "key"
       columnName: "col"
-  
+
   ```
 
 ## Usage

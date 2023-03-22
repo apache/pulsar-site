@@ -8,13 +8,13 @@ Pulsar supports the following client libraries:
 
 |Language|Documentation|Release note|Code repo
 |---|---|---|---
-Java |- [User doc](client-libraries-java.md) <br /><br />- [API doc](https://pulsar.apache.org/api/client/)|[Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar/tree/master/pulsar-client) 
-C++ | - [User doc](client-libraries-cpp.md) <br /><br />- [API doc](@pulsar:apidoc:cpp@)|[Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar-client-cpp) 
-Python | - [User doc](client-libraries-python.md) <br /><br />- [API doc](@pulsar:apidoc:python@)|[Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar-client-python) 
-WebSocket| [User doc](client-libraries-websocket.md) | [Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar/tree/master/pulsar-websocket) 
-Go client|[User doc](client-libraries-go.md)|[Here](https://github.com/apache/pulsar-client-go/blob/master/CHANGELOG) |[Here](https://github.com/apache/pulsar-client-go) 
-Node.js|[User doc](client-libraries-node.md)|[Here](https://github.com/apache/pulsar-client-node/releases) |[Here](https://github.com/apache/pulsar-client-node) 
-C# |[User doc](client-libraries-dotnet.md)| [Here](https://github.com/apache/pulsar-dotpulsar/blob/master/CHANGELOG)|[Here](https://github.com/apache/pulsar-dotpulsar) 
+Java |- [User doc](client-libraries-java.md) <br /><br />- [API doc](https://pulsar.apache.org/api/client/)|[Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar/tree/master/pulsar-client)
+C++ | - [User doc](client-libraries-cpp.md) <br /><br />- [API doc](@pulsar:apidoc:cpp@)|[Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar-client-cpp)
+Python | - [User doc](client-libraries-python.md) <br /><br />- [API doc](@pulsar:apidoc:python@)|[Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar-client-python)
+WebSocket| [User doc](client-libraries-websocket.md) | [Here](https://pulsar.apache.org/release-notes/)|[Here](https://github.com/apache/pulsar/tree/master/pulsar-websocket)
+Go client|[User doc](client-libraries-go.md)|[Here](https://github.com/apache/pulsar-client-go/blob/master/CHANGELOG) |[Here](https://github.com/apache/pulsar-client-go)
+Node.js|[User doc](client-libraries-node.md)|[Here](https://github.com/apache/pulsar-client-node/releases) |[Here](https://github.com/apache/pulsar-client-node)
+C# |[User doc](client-libraries-dotnet.md)| [Here](https://github.com/apache/pulsar-dotpulsar/blob/master/CHANGELOG)|[Here](https://github.com/apache/pulsar-dotpulsar)
 
 :::note
 
@@ -35,8 +35,8 @@ Besides the official released clients, multiple projects on developing Pulsar cl
 | Language | Project | Maintainer | License | Description |
 |----------|---------|------------|---------|-------------|
 | Go | [pulsar-client-go](https://github.com/Comcast/pulsar-client-go) | [Comcast](https://github.com/Comcast) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | A native golang client |
-| Go | [go-pulsar](https://github.com/t2y/go-pulsar) | [t2y](https://github.com/t2y) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | 
-| Haskell | [supernova](https://github.com/cr-org/supernova) | [Chatroulette](https://github.com/cr-org) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | Native Pulsar client for Haskell | 
+| Go | [go-pulsar](https://github.com/t2y/go-pulsar) | [t2y](https://github.com/t2y) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) |
+| Haskell | [supernova](https://github.com/cr-org/supernova) | [Chatroulette](https://github.com/cr-org) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | Native Pulsar client for Haskell |
 | Scala | [neutron](https://github.com/cr-org/neutron) | [Chatroulette](https://github.com/cr-org) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | Purely functional Apache Pulsar client for Scala built on top of Fs2 |
 | Scala | [pulsar4s](https://github.com/sksamuel/pulsar4s) | [sksamuel](https://github.com/sksamuel) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | Idomatic, typesafe, and reactive Scala client for Apache Pulsar |
 | Rust | [pulsar-rs](https://github.com/wyyerd/pulsar-rs) | [Wyyerd Group](https://github.com/wyyerd) | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) | Future-based Rust bindings for Apache Pulsar |

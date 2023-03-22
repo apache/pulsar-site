@@ -14,8 +14,7 @@ To deploy a Pulsar cluster on Docker using Docker commands, you need to complete
 To run Pulsar on Docker, you need to create a container for each Pulsar component: ZooKeeper, bookie, and the broker. You can pull the images of ZooKeeper and bookie separately on Docker Hub, and pull the Pulsar image for the broker. You can also pull only one Pulsar image and create three containers with this image. This tutorial takes the second option as an example.
 
 You can pull a Pulsar image from Docker Hub with the following command. If you do not want to use some connectors, you can use `apachepulsar/pulsar:latest` there.
-
-```java
+```bash
 docker pull apachepulsar/pulsar-all:latest
 ```
 

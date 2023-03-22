@@ -50,7 +50,7 @@ The following example connects three clusters: **us-east**, **us-west**, and **u
 
 ### Connect replication clusters
 
-To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin) tool to create a connection.
+To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool to create a connection.
 
 **Example**
 
@@ -175,7 +175,7 @@ Given that geo-replication topics exist in multiple regions, directly deleting a
 In Pulsar, a topic is automatically deleted when the topic meets the following three conditions:
 - no producers or consumers are connected to it;
 - no subscriptions to it;
-- no more messages are kept for retention. 
+- no more messages are kept for retention.
 For geo-replication topics, each region uses a fault-tolerant mechanism to decide when deleting the topic locally is safe.
 
 You can explicitly disable topic garbage collection by setting `brokerDeleteInactiveTopicsEnabled` to `false` in your [broker configuration](reference-configuration.md#broker).
@@ -186,11 +186,11 @@ To delete a geo-replication topic, close all producers and consumers on the topi
 
 Pulsar supports replicated subscriptions, so you can keep subscription state in sync, within a sub-second timeframe, in the context of a topic that is being asynchronously replicated across multiple geographical regions.
 
-In case of failover, a consumer can restart consuming from the failure point in a different cluster. 
+In case of failover, a consumer can restart consuming from the failure point in a different cluster.
 
 ### Enable replicated subscription
 
-Replicated subscription is disabled by default. You can enable replicated subscription when creating a consumer. 
+Replicated subscription is disabled by default. You can enable replicated subscription when creating a consumer.
 
 ```java
 
@@ -204,9 +204,9 @@ Consumer<String> consumer = client.newConsumer(Schema.STRING)
 
 ### Advantages
 
- * It is easy to implement the logic. 
+ * It is easy to implement the logic.
  * You can choose to enable or disable replicated subscription.
- * When you enable it, the overhead is low, and it is easy to configure. 
+ * When you enable it, the overhead is low, and it is easy to configure.
  * When you disable it, the overhead is zero.
 
 ### Limitations

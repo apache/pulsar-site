@@ -5,8 +5,8 @@ sidebar_label: "How to deploy"
 ---
 
 Pulsar provides two modes to deploy a function:
-* [cluster mode (for production)](functions-deploy-cluster.md) - you can submit a function to a Pulsar cluster and the cluster will take charge of running the function. 
-* [localrun mode](functions-deploy-localrun.md) - you can determine where a function runs, for example, on your local machine. 
+* [cluster mode (for production)](functions-deploy-cluster.md) - you can submit a function to a Pulsar cluster and the cluster will take charge of running the function.
+* [localrun mode](functions-deploy-localrun.md) - you can determine where a function runs, for example, on your local machine.
 
 ## Prerequisites
 

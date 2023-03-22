@@ -32,9 +32,9 @@ To get started running Pulsar, download a binary tarball release in one of the f
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:binary_release_url
-  
+
   ```
 
 Once the tarball is downloaded, untar it and `cd` into the resulting directory:

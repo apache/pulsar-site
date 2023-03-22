@@ -51,7 +51,7 @@ public class ExclamationFunction implements Function<String, String> {
 }
 ```
 
-You can write a unit test to test this function and mock the `Context` parameter as follows. 
+You can write a unit test to test this function and mock the `Context` parameter as follows.
 
 ```java
 @Test

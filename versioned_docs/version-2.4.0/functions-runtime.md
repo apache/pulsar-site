@@ -4,7 +4,7 @@ title: Configure Functions runtime
 sidebar_label: "Admin: Configure Functions runtime"
 original_id: functions-runtime
 ---
-This guide is used for administrator. 
+This guide is used for administrator.
 
 Pulsar Functions support the following methods to run functions.
 
@@ -66,7 +66,7 @@ kubernetesContainerFactory:
   # setting this to true is let function worker to submit functions to the same k8s cluster as function worker
   # is running. setting this to false if your function worker is not running as a k8 pod.
   submittingInsidePod: false
-  # setting the pulsar service url that pulsar function should use to connect to pulsar 
+  # setting the pulsar service url that pulsar function should use to connect to pulsar
   # if it is not set, it will use the pulsar service url configured in worker service
   pulsarServiceUrl:
   # setting the pulsar admin url that pulsar function should use to connect to pulsar
@@ -88,7 +88,7 @@ However, if you enable RBAC on deploying your Pulsar cluster, make sure the serv
 running Functions Workers (or brokers, if Functions Workers run along with brokers) have permissions on the following
 kubernetes APIs.
 
-- services 
+- services
 - configmaps
 - pods
 - apps.statefulsets
@@ -117,7 +117,7 @@ If this happens, you need to grant the required permissions to the service accou
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: functions-worker 
+  name: functions-worker
 rules:
 - apiGroups: [""]
   resources:

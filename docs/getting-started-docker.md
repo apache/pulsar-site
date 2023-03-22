@@ -6,7 +6,7 @@ sidebar_label: "Run Pulsar in Docker"
 
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
-If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition) and follow the instructions for your OS.
+If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
 
 ## Start Pulsar in Docker
 

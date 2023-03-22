@@ -7,7 +7,7 @@ original_id: reference-pulsar-admin
 
 :::tip
 
-This page is deprecated and not updated anymore. For the latest and complete information about `pulsar-admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+This page is deprecated and not updated anymore. For the latest and complete information about `pulsar-admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 :::
 
@@ -33,7 +33,7 @@ Commands
 
   For more information, see [here](io-cli.md#sources)
 * `sinks`
-  
+
   For more information, see [here](io-cli.md#sinks)
 * `topics`
 * `tenants`
@@ -2083,7 +2083,7 @@ Options
 |`-d`, `--disabled`|Disable automatic schema updates.|false|
 
 ### `get-publish-rate`
-Get the message publish rate for each topic in a namespace, in bytes as well as messages per second 
+Get the message publish rate for each topic in a namespace, in bytes as well as messages per second
 
 Usage
 
@@ -2286,7 +2286,7 @@ Options
 |`--broker`|Broker name to get namespace-isolation policies attached to it||
 
 ## `topics`
-Operations for managing Pulsar topics (both persistent and non-persistent). 
+Operations for managing Pulsar topics (both persistent and non-persistent).
 
 Usage
 
@@ -2296,7 +2296,7 @@ $ pulsar-admin topics subcommand
 
 ```
 
-From Pulsar 2.7.0, some namespace-level policies are available on topic level. To enable topic-level policy in Pulsar, you need to configure the following parameters in the `broker.conf` file. 
+From Pulsar 2.7.0, some namespace-level policies are available on topic level. To enable topic-level policy in Pulsar, you need to configure the following parameters in the `broker.conf` file.
 
 ```shell
 
@@ -2480,7 +2480,7 @@ Options
 |`-p`, `--partitions`|The number of partitions for the topic|0|
 
 ### `create-missed-partitions`
-Try to create partitions for partitioned topic. The partitions of partition topic has to be created, 
+Try to create partitions for partitioned topic. The partitions of partition topic has to be created,
 can be used by repair partitions when topic auto creation is disabled
 
 Usage
@@ -3038,7 +3038,7 @@ $ pulsar-admin topics remove-message-ttl tenant/namespace/topic
 
 ```
 
-Options 
+Options
 |Flag|Description|Default|
 |---|---|---|
 |`--enable`, `-e`|Enable message deduplication on the specified topic.|false|

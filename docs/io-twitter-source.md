@@ -10,7 +10,7 @@ You can download all the Pulsar connectors on [download page](pathname:///downlo
 
 ::::
 
-The Twitter Firehose source connector receives tweets from Twitter Firehose and 
+The Twitter Firehose source connector receives tweets from Twitter Firehose and
 writes the tweets to Pulsar topics.
 
 ## Configuration
@@ -19,7 +19,7 @@ The configuration of the Twitter Firehose source connector has the following pro
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `consumerKey` | String|true | " " (empty string) | The twitter OAuth consumer key.<br /><br />For more information, see [Access tokens](https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens). |
 | `consumerSecret` | String |true | " " (empty string)  | The twitter OAuth consumer secret. |

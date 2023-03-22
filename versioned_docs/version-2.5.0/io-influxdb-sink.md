@@ -5,7 +5,7 @@ sidebar_label: "InfluxDB sink connector"
 original_id: io-influxdb-sink
 ---
 
-The InfluxDB sink connector pulls messages from Pulsar topics 
+The InfluxDB sink connector pulls messages from Pulsar topics
 and persists the messages to InfluxDB.
 
 ## Configuration
@@ -14,7 +14,7 @@ The configuration of the InfluxDB sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `influxdbUrl` |String| true|" " (empty string) | The URL of the InfluxDB instance. |
 | `username` | String|false| " " (empty string) |The username used to authenticate to InfluxDB. |
@@ -31,10 +31,10 @@ The configuration of the InfluxDB sink connector has the following properties.
 
 Before using the InfluxDB sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "influxdbUrl": "http://localhost:8086",
       "database": "test_db",
@@ -45,13 +45,13 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
       "batchTimeMs": 1000,
       "batchSize": 100
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       influxdbUrl: "http://localhost:8086"
       database: "test_db"
@@ -61,6 +61,6 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
       gzipEnable: false
       batchTimeMs: 1000
       batchSize: 100
-  
+
   ```
 

@@ -6,7 +6,7 @@ sidebar_label: "Run Pulsar in Docker"
 
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
-If you have not installed Docker, download the [Community edition](https://www.docker.com/community-edition) and follow the instructions for your OS.
+If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
 
 ## Start Pulsar in Docker
 
@@ -41,7 +41,7 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 :::tip
 
-* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 * When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::

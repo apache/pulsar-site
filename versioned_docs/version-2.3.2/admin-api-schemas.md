@@ -5,14 +5,14 @@ sidebar_label: "Schemas"
 original_id: admin-api-schemas
 ---
 
-Schemas, like other entities in Pulsar, can be managed using the [admin API](admin-api-overview.md). 
+Schemas, like other entities in Pulsar, can be managed using the [admin API](admin-api-overview.md).
 
 ## Schema resources
 
 A Pulsar schema is a fairly simple data structure stored in Pulsar for representing the structure of messages stored in a Pulsar topic. The schema structure consists of:
 
 - *Name*: A schema's name is the topic that the schema is associated to.
-- *Type*: A schema type represents the type of the schema. The predefined schema types can be found [here](concepts-schema-registry.md#supported-schema-formats). If it 
+- *Type*: A schema type represents the type of the schema. The predefined schema types can be found [here](concepts-schema-registry.md#supported-schema-formats). If it
   is a customized schema, it is left as an empty string.
 - *Payload*: It is a binary representation of the schema. How to interpret it is up to the implementation of the schema.
 - *Properties*: It is a user defined properties as a string/string map. Applications can use this bag for carrying any application specific logics. Possible properties

@@ -47,9 +47,9 @@ To get started running Pulsar, download a binary tarball release in one of the f
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget 'https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz' -O apache-pulsar-@pulsar:version@-bin.tar.gz
-  
+
   ```
 
 Once the tarball is downloaded, untar it and `cd` into the resulting directory:
@@ -93,7 +93,7 @@ Each Pulsar instance relies on two separate ZooKeeper quorums.
 
 ZooKeeper manages a variety of essential coordination- and configuration-related tasks for Pulsar.
 
-Deploying a Pulsar instance requires you to stand up one local ZooKeeper cluster *per Pulsar cluster*. 
+Deploying a Pulsar instance requires you to stand up one local ZooKeeper cluster *per Pulsar cluster*.
 
 To begin, add all ZooKeeper servers to the quorum configuration specified in the [`conf/zookeeper.conf`](reference-configuration.md#zookeeper) file. Add a `server.N` line for each node in the cluster to the configuration, where `N` is the number of the ZooKeeper node. Here's an example for a three-node cluster:
 
@@ -128,7 +128,7 @@ $ bin/pulsar-daemon start zookeeper
 
 ```
 
-### Deploying the configuration store 
+### Deploying the configuration store
 
 The ZooKeeper cluster configured and started up in the section above is a *local* ZooKeeper cluster used to manage a single Pulsar cluster. In addition to a local cluster, however, a full Pulsar instance also requires a configuration store for handling some instance-level configuration and coordination tasks.
 

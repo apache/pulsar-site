@@ -20,7 +20,7 @@ The configuration of the Alluxio sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `alluxioMasterHost` | String | true | "" (empty string) | The hostname of Alluxio master. |
 | `alluxioMasterPort` | int | true | 19998 | The port that Alluxio master node runs on. |

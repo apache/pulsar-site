@@ -20,7 +20,7 @@ The configuration of the Netty source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `type` |String| true |tcp | The network protocol over which data is transmitted to netty. <br /><br />Below are the available options:<br /><li>tcp</li><li>http</li><li>udp </li>|
 | `host` | String|true | 127.0.0.1 | The host name or address on which the source instance listen. |
@@ -32,7 +32,7 @@ The configuration of the Netty source connector has the following properties.
 
 Before using the Netty source connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -55,11 +55,11 @@ Before using the Netty source connector, you need to create a configuration file
       numberOfThreads: 1
   ```
 
-## Usage 
+## Usage
 
 The following examples show how to use the Netty source connector with TCP and HTTP.
 
-### TCP 
+### TCP
 
 1. Start Pulsar standalone.
 
@@ -136,7 +136,7 @@ The following examples show how to use the Netty source connector with TCP and H
    world
    ```
 
-### HTTP 
+### HTTP
 
 1. Start Pulsar standalone.
 

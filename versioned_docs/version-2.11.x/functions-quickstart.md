@@ -11,7 +11,7 @@ This hands-on tutorial provides step-by-step instructions and examples on how to
 - JDK 8+. For more details, refer to [Pulsar runtime Java version recommendation](https://github.com/apache/pulsar#pulsar-runtime-java-version-recommendation).
 - Windows OS is not supported.
 
-## Start standalone Pulsar 
+## Start standalone Pulsar
 
 1. Enable pulsar function in `conf/standalone.conf` (add this field if not exists):
 
@@ -137,7 +137,7 @@ Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) 
    ```text
    Created Successfully
    ```
-   
+
    You can check the config of this function in `examples/example-function-config.yaml`:
 
    ```yaml
@@ -146,13 +146,13 @@ Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) 
    name: "example" # function name
    className: "org.apache.pulsar.functions.api.examples.ExclamationFunction"
    inputs: ["test_src"] # this function will read messages from these topics
-   output: "test_result" # the return value of this function will be sent to this topic  
-   autoAck: true # function will acknowledge input messages if set true 
+   output: "test_result" # the return value of this function will be sent to this topic
+   autoAck: true # function will acknowledge input messages if set true
    parallelism: 1
    ```
 
    You can see the [source code](https://github.com/apache/pulsar/blob/master/pulsar-functions/java-examples/src/main/java/org/apache/pulsar/functions/api/examples/ExclamationFunction.java) of `ExclamationFunction`.
-   For more information about the yaml config, see the [reference](functions-cli.md#yaml-configurations-for-pulsar-functions). 
+   For more information about the yaml config, see the [reference](functions-cli.md#yaml-configurations-for-pulsar-functions).
 
 2. In the same terminal window as step 1, verify the function's configurations.
 
@@ -214,7 +214,7 @@ Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) 
    **Output**
 
    `"running": true` shows that the function is running.
-    
+
    ```json
    {
      "numInstances" : 1,
@@ -315,7 +315,7 @@ Before starting stateful functions, you need to [start Pulsar](#start-standalone
    autoAck: true
    parallelism: 1
    ```
-   
+
    You can see the [source code](https://github.com/apache/pulsar/blob/master/pulsar-functions/java-examples/src/main/java/org/apache/pulsar/functions/api/examples/WordCountFunction.java) of `WordCountFunction`. This function won't return any value but store the occurrence of words in function context. So you don't need to specify an output topic.
    For more information about the yaml config, see the [reference](functions-cli.md#yaml-configurations-for-pulsar-functions).
 
@@ -411,8 +411,8 @@ Before starting stateful functions, you need to [start Pulsar](#start-standalone
    ```
 
    :::tip
-    
-   For more information about the `pulsar-admin functions querystate options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+
+   For more information about the `pulsar-admin functions querystate options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
    :::
 
@@ -431,7 +431,7 @@ Before starting stateful functions, you need to [start Pulsar](#start-standalone
   bin/pulsar-client produce -m "hello" -n 10 test_wordcount_src
   ```
 
-6. In the same terminal window as step 1, check the result. 
+6. In the same terminal window as step 1, check the result.
 
    The result shows that the **output topic** `test_wordcount_dest` receives the messages.
 
@@ -451,7 +451,7 @@ Before starting stateful functions, you need to [start Pulsar](#start-standalone
    bin/pulsar-client produce -m "hello" -n 10 test_wordcount_src
    ```
 
-8. In the same terminal window as step 1, check the result. 
+8. In the same terminal window as step 1, check the result.
 
    The result shows that the **output topic** `test_wordcount_dest` receives the value of 20.
 
@@ -500,7 +500,7 @@ Before starting window functions, you need to [start Pulsar](#start-standalone-p
    output: "test_window_result"
    autoAck: true
    parallelism: 1
-   
+
    # every 5 messages, calculate sum of the latest 10 messages
    windowConfig:
      windowLengthCount: 10
@@ -577,7 +577,7 @@ Before starting window functions, you need to [start Pulsar](#start-standalone-p
    **Output**
 
    `"running": true` shows that the function is running.
-    
+
    ```json
    {
      "numInstances" : 1,
@@ -614,7 +614,7 @@ Before starting window functions, you need to [start Pulsar](#start-standalone-p
    bin/pulsar-client produce -m "3" -n 10 test_window_src
    ```
 
-6. In the same terminal window as step 1, the messages produced by the window function `window-example` are returned. 
+6. In the same terminal window as step 1, the messages produced by the window function `window-example` are returned.
 
    **Output**
 

@@ -34,8 +34,8 @@ If any of these cases happen, follow the instructions below to fix the problem.
    bin/pulsar-admin namespaces set-clusters --clusters <existing-clusters>,<new-cluster> public/functions
    ```
 
-4. After setting the cluster successfully, enable function workers by setting `functionsWorkerEnabled=true`. 
+4. After setting the cluster successfully, enable function workers by setting `functionsWorkerEnabled=true`.
 
 5. Set the correct cluster name for the `pulsarFunctionsCluster` parameter in the `conf/functions_worker.yml` file.
 
-6. Restart brokers. 
+6. Restart brokers.

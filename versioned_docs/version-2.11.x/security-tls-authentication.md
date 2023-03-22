@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## mTLS authentication overview
 
-Mutual TLS (mTLS) is a mutual authentication mechanism. Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients. 
+Mutual TLS (mTLS) is a mutual authentication mechanism. Not only servers have keys and certs that the client uses to verify the identity of servers, clients also have keys and certs that the server uses to verify the identity of clients.
 
 The following figure illustrates how Pulsar processes mTLS authentication between clients and servers.
 
@@ -192,7 +192,7 @@ authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
 authParams=tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem
 ```
 
-## Configure mTLS authentication with KeyStore 
+## Configure mTLS authentication with KeyStore
 
 Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration. This section describes how to use [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) type to configure mTLS.
 

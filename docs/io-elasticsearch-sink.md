@@ -19,7 +19,7 @@ To deploy an Elasticsearch sink connector, the following are required:
 - Elasticsearch 7 (Elasticsearch 8 will be supported in the future)
 - OpenSearch 1.x
 
-## Feature 
+## Feature
 
 ### Handle data
 		
@@ -50,7 +50,7 @@ Since Pulsar 2.9.0, you can use bulk writes by setting the `bulkEnabled` propert
 
 ### Enable secure connections via TLS
 
-Since Pulsar 2.9.0, you can enable secure connections with TLS.  
+Since Pulsar 2.9.0, you can enable secure connections with TLS.
 
 ## Configuration
 
@@ -119,7 +119,7 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 
 #### For Elasticsearch After 6.2
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -144,7 +144,7 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 
 #### For Elasticsearch Before 6.2
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -186,7 +186,7 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
    Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-@pulsar:version@.nar`.
 
 3. Start the Pulsar Elasticsearch connector in local run mode using one of the following methods.
-   * Use the **JSON** configuration as shown previously. 
+   * Use the **JSON** configuration as shown previously.
 
        ```bash
        bin/pulsar-admin sinks localrun \
@@ -217,13 +217,13 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
    ```
 
 5. Check documents in Elasticsearch.
-   
+
    * refresh the index
 
        ```bash
        curl -s http://localhost:9200/my_index/_refresh
        ```
- 
+
    * search documents
 
        ```bash

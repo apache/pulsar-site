@@ -9,12 +9,12 @@ original_id: io-cli
 
 **Important**
 
-This page is deprecated and not updated anymore. For the latest and complete information about `Pulsar-admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+This page is deprecated and not updated anymore. For the latest and complete information about `Pulsar-admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 :::
 
 The `pulsar-admin` tool helps you manage Pulsar connectors.
-  
+
 ## `sources`
 
 An interface for managing Pulsar IO sources (ingress data into Pulsar).
@@ -28,25 +28,25 @@ $ pulsar-admin sources subcommands
 Subcommands are:
 
 * `create`
-  
+
 * `update`
-  
+
 * `delete`
-  
+
 * `get`
-  
+
 * `status`
-  
+
 * `list`
-  
+
 * `stop`
-  
+
 * `start`
-  
+
 * `restart`
-  
+
 * `localrun`
-  
+
 * `available-sources`
 
 * `reload`
@@ -344,25 +344,25 @@ $ pulsar-admin sinks subcommands
 Subcommands are:
 
 * `create`
-  
+
 * `update`
-  
+
 * `delete`
-  
+
 * `get`
-  
+
 * `status`
-  
+
 * `list`
-  
+
 * `stop`
-  
+
 * `start`
-  
+
 * `restart`
-  
+
 * `localrun`
-  
+
 * `available-sinks`
 
 * `reload`

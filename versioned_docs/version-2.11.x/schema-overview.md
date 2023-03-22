@@ -35,7 +35,7 @@ Pulsar schema resolves the pain points with the following capabilities:
 * enforces the data type safety when a topic has a schema defined. As a result, producers/consumers are only allowed to connect if they are using a "compatible" schema.
 * provides a central location for storing information about the schemas used within your organization, in turn greatly simplifies the sharing of this information across application teams.
 * serves as a single source of truth for all the message schemas used across all your services and development teams, which makes it easier for them to collaborate.
-* keeps data compatibility on-track between schema versions. When new schemas are uploaded, the new versions can be read by old consumers. 
+* keeps data compatibility on-track between schema versions. When new schemas are uploaded, the new versions can be read by old consumers.
 * stored in the existing storage layer BookKeeper, without additional system required.
 
 ## How it works
@@ -48,26 +48,26 @@ This diagram illustrates how Pulsar schema works on the Producer side.
 
 ![How Pulsar schema works on the producer side](/assets/schema-producer.svg)
 
-1. The application uses a schema instance to construct a producer instance. 
+1. The application uses a schema instance to construct a producer instance.
    The schema instance defines the schema for the data being produced using the producer instance. Take Avro as an example, Pulsar extracts the schema definition from the POJO class and constructs the `SchemaInfo`.
 
 2. The producer requests to connect to the broker with the `SchemaInfo` extracted from the passed-in schema instance.
-   
-3. The broker looks up the schema registry to check if it is a registered schema. 
+
+3. The broker looks up the schema registry to check if it is a registered schema.
    * If the schema is registered, the broker returns the schema version to the producer.
    * Otherwise, go to step 4.
 
-4. The broker checks whether the schema can be auto-updated. 
+4. The broker checks whether the schema can be auto-updated.
    * If it’s not allowed to be auto-updated, then the schema cannot be registered, and the broker rejects the producer.
    * Otherwise, go to step 5.
 
 5. The broker performs the [schema compatibility check](schema-understand.md#schema-compatibility-check) defined for the topic.
-   * If the schema passes the compatibility check, the broker stores it in the schema registry and returns the schema version to the producer. All the messages produced by this producer are tagged with the schema version. 
+   * If the schema passes the compatibility check, the broker stores it in the schema registry and returns the schema version to the producer. All the messages produced by this producer are tagged with the schema version.
    * Otherwise, the broker rejects the producer.
 
 ### Consumer side
 
-This diagram illustrates how schema works on the consumer side. 
+This diagram illustrates how schema works on the consumer side.
 
 ![How Pulsar schema works on the consumer side](/assets/schema-consumer.svg)
 
@@ -82,10 +82,10 @@ This diagram illustrates how schema works on the consumer side.
 4. The broker checks whether the schema can be auto-updated.
      * If the schema can be auto-updated, the broker registers the schema and connects the consumer.
      * Otherwise, the broker rejects the consumer.
-       
+
 5. The broker performs the [schema compatibility check](schema-understand.md#schema-compatibility-check).
      * If the schema passes the compatibility check, the broker connects the consumer.
-     * Otherwise, the broker rejects the consumer. 
+     * Otherwise, the broker rejects the consumer.
 
 ## Use case
 
@@ -97,9 +97,9 @@ For example, you are using the _User_ class to define the messages sent to Pulsa
 public class User {
    public String name;
    public int age;
-   
+
    User() {}
-   
+
    User(String name, int age) {
       this.name = name;
       this.age = age;

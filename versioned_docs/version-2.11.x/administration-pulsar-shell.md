@@ -39,7 +39,7 @@ Welcome to Pulsar shell!
 Type help to get started or try the autocompletion (TAB button).
 Type exit or quit to end the shell session.
 
-default(localhost)> 
+default(localhost)>
 ```
 
 
@@ -104,10 +104,10 @@ Welcome to Pulsar shell!
 Type help to get started or try the autocompletion (TAB button).
 Type exit or quit to end the shell session.
 
-my-cluster(mycluster)> 
+my-cluster(mycluster)>
 ```
 
- 
+
 ## Run commands sequentially
 To run a bunch of admin commands sequentially, you can use Pulsar shell's non-interactive mode.
 For example, to set up a new tenant with policies, you would normally need to run multiple `pulsar-admin` commands.
@@ -121,12 +121,12 @@ There are multiple ways to do this with Pulsar shell non-interactive mode:
   values={[{"label":"Single command","value":"single-command"},{"label":"File","value":"file"},{"label":"Unix pipe","value":"pipe"}]}>
 <TabItem value="single-command">
 
-Specify a multi-line command with the `-e` option. 
+Specify a multi-line command with the `-e` option.
 
 ```shell
 ./bin/pulsar-shell -e "
 config use my-cluster
-admin tenants create new-tenant 
+admin tenants create new-tenant
 admin namespaces create new-tenant/new-namespace
 " --fail-on-error
 ```
@@ -143,7 +143,7 @@ echo "
 config use my-cluster
 # Now it creates a new tenant
 admin tenants create new-tenant
-# And then it creates a new namespace inside the tenant 
+# And then it creates a new namespace inside the tenant
 admin namespaces create new-tenant/new-namespace
 " > setup-shell.txt
 
@@ -162,7 +162,7 @@ echo "
 config use my-cluster
 # Now it creates a new tenant
 admin tenants create new-tenant
-# And then it creates a new namespace inside the tenant 
+# And then it creates a new namespace inside the tenant
 admin namespaces create new-tenant/new-namespace
 " > ./bin/pulsar-shell --fail-on-error -
 

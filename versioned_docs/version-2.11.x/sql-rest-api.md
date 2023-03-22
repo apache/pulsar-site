@@ -4,11 +4,11 @@ title: Pulsar SQL REST APIs
 sidebar_label: "REST APIs"
 ---
 
-This section lists resources that make up the Trino REST API v1. 
+This section lists resources that make up the Trino REST API v1.
 
 ## Request for Trino services
 
-All requests for Trino services should use Trino REST API v1 version. 
+All requests for Trino services should use Trino REST API v1 version.
 
 To request services, use the explicit URL `http://trino.service:8081/v1``. You need to update `trino.service:8081` with your real Trino address before sending requests.
 

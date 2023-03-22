@@ -10,7 +10,7 @@ original_id: reference-connector-admin
 > For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](https://pulsar.apache.org/tools/pulsar-admin/).
 
 The `pulsar-admin` tool helps you manage Pulsar connectors.
-  
+
 ## `sources`
 
 An interface for managing Pulsar IO sources (ingress data into Pulsar).
@@ -24,25 +24,25 @@ $ pulsar-admin sources subcommands
 Subcommands are:
 
 * `create`
-  
+
 * `update`
-  
+
 * `delete`
-  
+
 * `get`
-  
+
 * `status`
-  
+
 * `list`
-  
+
 * `stop`
-  
+
 * `start`
-  
+
 * `restart`
-  
+
 * `localrun`
-  
+
 * `available-sources`
 
 * `reload`
@@ -338,25 +338,25 @@ $ pulsar-admin sinks subcommands
 Subcommands are:
 
 * `create`
-  
+
 * `update`
-  
+
 * `delete`
-  
+
 * `get`
-  
+
 * `status`
-  
+
 * `list`
-  
+
 * `stop`
-  
+
 * `start`
-  
+
 * `restart`
-  
+
 * `localrun`
-  
+
 * `available-sinks`
 
 * `reload`

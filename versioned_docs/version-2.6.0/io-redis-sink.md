@@ -5,7 +5,7 @@ sidebar_label: "Redis sink connector"
 original_id: io-redis-sink
 ---
 
-The  Redis sink connector pulls messages from Pulsar topics 
+The  Redis sink connector pulls messages from Pulsar topics
 and persists the messages to a Redis database.
 
 
@@ -18,7 +18,7 @@ The configuration of the Redis sink connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `redisHosts` |String|true|" " (empty string) | A comma-separated list of Redis hosts to connect to. |
 | `redisPassword` |String|false|" " (empty string) | The password used to connect to Redis. |
@@ -41,7 +41,7 @@ Before using the Redis sink connector, you need to create a configuration file t
 * JSON
 
   ```json
-  
+
   {
       "redisHosts": "localhost:6379",
       "redisPassword": "fake@123",
@@ -52,13 +52,13 @@ Before using the Redis sink connector, you need to create a configuration file t
       "batchTimeMs": "1000",
       "connectTimeout": "3000"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   {
       redisHosts: "localhost:6379"
       redisPassword: "fake@123"
@@ -69,6 +69,6 @@ Before using the Redis sink connector, you need to create a configuration file t
       batchTimeMs: 1000
       connectTimeout: 3000
   }
-  
+
   ```
 

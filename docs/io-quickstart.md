@@ -164,7 +164,7 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
    ```bash
    docker exec -ti cassandra cqlsh localhost
    ```
-   
+
     **Output**
    ```
    Connected to Test Cluster at localhost:9042.

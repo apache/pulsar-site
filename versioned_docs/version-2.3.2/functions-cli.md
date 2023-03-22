@@ -11,12 +11,12 @@ The following tables list Pulsar Functions command-line tools. You can learn Pul
 
 Run Pulsar Functions locally, rather than deploying it to the Pulsar cluster.
 
-Name | Description | Default 
+Name | Description | Default
 ---|---|---
 auto-ack | Whether or not the framework acknowledges messages automatically. | false |
 broker-service-url | The URL for the Pulsar broker. | |
-classname | The class name of a Pulsar Function.| | 
-client-auth-params | Client authentication parameter. | | 
+classname | The class name of a Pulsar Function.| |
+client-auth-params | Client authentication parameter. | |
 client-auth-plugin | Client authentication plugin using which function-process can connect to broker. |  |
 CPU | The CPU in cores that need to be allocated per function instance (applicable only to docker runtime).| |
 custom-schema-inputs | The map of input topics to Schema class names (as a JSON string). | |
@@ -40,8 +40,8 @@ parallelism | The parallelism factor of  a Pulsar Function (i.e. the number of f
 processing-guarantees | The processing guarantees (delivery semantics) applied to the function. Available values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]. | ATLEAST_ONCE
 py | Path to the main Python file/Python Wheel file for the function (if the function is written in Python). |  |
 ram | The ram in bytes that need to be allocated per function instance (applicable only to process/docker runtime). |  |
-retain-ordering | Function consumes and processes messages in order. | | 
-schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | | 
+retain-ordering | Function consumes and processes messages in order. | |
+schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | |
 sliding-interval-count | The number of messages after which the window slides. |  |
 sliding-interval-duration-ms | The time duration after which the window slides. |  |
 subs-name | Pulsar source subscription name if user wants a specific subscription-name for the input-topic consumer. |  |
@@ -60,7 +60,7 @@ window-length-duration-ms | The time duration of the window in milliseconds. | |
 
 Create and deploy a Pulsar Function in cluster mode.
 
-Name | Description | Default 
+Name | Description | Default
 ---|---|---
 auto-ack | Whether or not the framework acknowledges messages automatically. | false |
 classname | The class name of a Pulsar Function. |  |
@@ -85,7 +85,7 @@ processing-guarantees | The processing guarantees (delivery semantics) applied t
 py | Path to the main Python file/Python Wheel file for the function (if the function is written in Python). |  |
 ram | The ram in bytes that need to be allocated per function instance (applicable only to process/docker runtime). |  |
 retain-ordering | Function consumes and processes messages in order. |  |
-schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | | 
+schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | |
 sliding-interval-count | The number of messages after which the window slides. |  |
 sliding-interval-duration-ms | The time duration after which the window slides. |  |
 subs-name | Pulsar source subscription name if user wants a specific subscription-name for the input-topic consumer. |  |
@@ -136,7 +136,7 @@ processing-guarantees | The processing guarantees (delivery semantics) applied t
 py | Path to the main Python file/Python Wheel file for the function (if the function is written in Python). |  |
 ram | The ram in bytes that need to be allocated per function instance (applicable only to process/docker runtime). |  |
 retain-ordering | Function consumes and processes messages in order. |  |
-schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | | 
+schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | |
 sliding-interval-count | The number of messages after which the window slides. |  |
 sliding-interval-duration-ms | The time duration after which the window slides. |  |
 subs-name | Pulsar source subscription name if user wants a specific subscription-name for the input-topic consumer. |  |
@@ -187,8 +187,8 @@ tenant | The tenant of a Pulsar Function. |  |
 
 Starts a stopped function instance.
 
-Name | Description | Default 
----|---|--- 
+Name | Description | Default
+---|---|---
 fqfn | The Fully Qualified Function Name (FQFN) for the function. | |
 instance-id | The function instanceId (restart all instances if instance-id is not provided. |  |
 name | The name of a Pulsar Function. |  |

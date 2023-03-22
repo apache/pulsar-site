@@ -6,7 +6,7 @@ sidebar_label: "Produce function logs"
 
 ## Produce logs for Java functions
 
-Pulsar Functions that use the Java SDK have access to an [SLF4j `Logger`](https://www.slf4j.org/api/org/apache/log4j/Logger.html) object. The logger object can be used to produce logs at a specified log level. 
+Pulsar Functions that use the Java SDK have access to an [SLF4j `Logger`](https://www.slf4j.org/api/org/apache/log4j/Logger.html) object. The logger object can be used to produce logs at a specified log level.
 
 For example, the following function logs either a `WARNING`- or `INFO`-level log based on whether the incoming string contains the word `danger`.
 
@@ -50,7 +50,7 @@ By default, the log level for Java functions is `info`. If you want to customize
 
 :::tip
 
-The `functions_log4j2.xml` file is under your Pulsar configuration directory, for example, `/etc/pulsar/` on bare-metal, or `/pulsar/conf` on Kubernetes. 
+The `functions_log4j2.xml` file is under your Pulsar configuration directory, for example, `/etc/pulsar/` on bare-metal, or `/pulsar/conf` on Kubernetes.
 
 :::
 
@@ -63,7 +63,7 @@ The `functions_log4j2.xml` file is under your Pulsar configuration directory, fo
         </Property>
    ```
 
-2. Apply the log level to places where they are referenced. In the following example, `debug` applies to all function logs. 
+2. Apply the log level to places where they are referenced. In the following example, `debug` applies to all function logs.
 
    ```xml
         <Root>
@@ -116,7 +116,7 @@ The `functions_log4j2.xml` file is under your Pulsar configuration directory, fo
 
 ## Produce logs for Python functions
 
-Pulsar Functions that use the Python SDK have access to a logger object. The logger object can be used to produce logs at a specified log level. 
+Pulsar Functions that use the Python SDK have access to a logger object. The logger object can be used to produce logs at a specified log level.
 
 For example, the following function logs either a `WARNING`- or `INFO`-level log based on whether the incoming string contains the word `danger`.
 

@@ -27,7 +27,7 @@ The following types of metrics are available:
 
 ## ZooKeeper
 
-The ZooKeeper metrics are exposed under "/metrics" at port `8000`. You can use a different port by configuring the `metricsProvider.httpPort` in conf/zookeeper.conf. 
+The ZooKeeper metrics are exposed under "/metrics" at port `8000`. You can use a different port by configuring the `metricsProvider.httpPort` in conf/zookeeper.conf.
 
 ### Server metrics
 
@@ -61,8 +61,8 @@ in the `bookkeeper.conf` configuration file.
 | bookkeeper_server_READ_ENTRY_count | Counter | The total number of READ_ENTRY requests received at the bookie. The `success` label is used to distinguish between successes and failures. |
 | bookie_WRITE_BYTES | Counter | The total number of bytes written to the bookie. |
 | bookie_READ_BYTES | Counter | The total number of bytes read from the bookie. |
-| bookkeeper_server_ADD_ENTRY_REQUEST | Summary | The summary of request latency of ADD_ENTRY requests at the bookie. The `success` label is used to distinguish between successes and failures. | 
-| bookkeeper_server_READ_ENTRY_REQUEST | Summary | The summary of request latency of READ_ENTRY requests at the bookie. The `success` label is used to distinguish between successes and failures. | 
+| bookkeeper_server_ADD_ENTRY_REQUEST | Summary | The summary of request latency of ADD_ENTRY requests at the bookie. The `success` label is used to distinguish between successes and failures. |
+| bookkeeper_server_READ_ENTRY_REQUEST | Summary | The summary of request latency of READ_ENTRY requests at the bookie. The `success` label is used to distinguish between successes and failures. |
 
 ### Journal metrics
 
@@ -261,7 +261,7 @@ brk_ml_cursor_readLedgerSize(namespace="", ledger_name="", cursor_name:"")|Gauge
 All the loadbalancing metrics are labelled with the following labels:
 - cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
 - broker: broker=${broker}. ${broker} is the IP address of the broker
-- metric: metric="loadBalancing". 
+- metric: metric="loadBalancing".
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -274,7 +274,7 @@ All the loadbalancing metrics are labelled with the following labels:
 ### BundleUnloading metrics
 All the bundleUnloading metrics are labelled with the following labels:
 - cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- metric: metric="bundleUnloading". 
+- metric: metric="bundleUnloading".
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -284,7 +284,7 @@ All the bundleUnloading metrics are labelled with the following labels:
 ### BundleSplit metrics
 All the bundleUnloading metrics are labelled with the following labels:
 - cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- metric: metric="bundlesSplit". 
+- metric: metric="bundlesSplit".
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -470,10 +470,10 @@ Connector metrics contain **source** metrics and **sink** metrics.
 
   | Name | Type | Description |
   |---|---|---|
-  pulsar_sink_written_total|Counter| The total number of records processed by a sink. 
+  pulsar_sink_written_total|Counter| The total number of records processed by a sink.
   pulsar_sink_written_total_1min|Counter| The total number of records processed by a sink in the last 1 minute.
-  pulsar_sink_received_total_1min|Counter| The total number of messages that a sink has received from Pulsar topics in the last 1 minute. 
-  pulsar_sink_received_total|Counter| The total number of records that a sink has received from Pulsar topics. 
+  pulsar_sink_received_total_1min|Counter| The total number of messages that a sink has received from Pulsar topics in the last 1 minute.
+  pulsar_sink_received_total|Counter| The total number of records that a sink has received from Pulsar topics.
   pulsar_sink_last_invocation|Gauge|The timestamp of the last invocation of the sink.
   pulsar_sink_sink_exception|Gauge|The exception from a sink.
   pulsar_sink_sink_exceptions_total|Counter|The total number of sink exceptions.

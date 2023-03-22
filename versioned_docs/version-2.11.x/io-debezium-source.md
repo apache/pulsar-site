@@ -169,8 +169,8 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
 3. Start the Pulsar Debezium connector in local run mode using one of the following methods.
 
-    * Use the **JSON** configuration file as shown previously. 
-   
+    * Use the **JSON** configuration file as shown previously.
+
        Make sure the NAR file is available at `connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar`.
 
        ```bash
@@ -185,7 +185,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
      :::note
 
      The Debezium connector saves data in the following 4 types of topics:
-      
+
        - One topic named with the database server name (`database.server.name`) for storing the database metadata messages, such as `public/default/database.server.name`.
        - One topic (`database.history.pulsar.topic`) for storing the database history information. The connector writes and recovers DDL statements on this topic.
        - One topic (`offset.storage.topic`) for storing the offset metadata messages. The connector saves the last successfully-committed offsets on this topic.
@@ -310,8 +310,8 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
 3. Start the Pulsar Debezium connector in local run mode using one of the following methods.
 
-   * Use the **JSON** configuration file as shown previously. 
-    
+   * Use the **JSON** configuration file as shown previously.
+
      Make sure the NAR file is available at `connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar`.
 
        ```bash
@@ -470,8 +470,8 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
 3. Start the Pulsar Debezium connector in local run mode using one of the following methods.
 
-   * Use the **JSON** configuration file as shown previously. 
-    
+   * Use the **JSON** configuration file as shown previously.
+
       Make sure the NAR file is available at `connectors/pulsar-io-mongodb-@pulsar:version@.nar`.
 
        ```bash
@@ -535,7 +535,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
 Oracle connector does not include Oracle JDBC driver and you need to package it with the connector.
 Major reasons for not including the drivers are the variety of versions and Oracle licensing. It is recommended to use the driver provided with your Oracle DB installation, or you can [download](https://www.oracle.com/database/technologies/appdev/jdbc.html) one.
-Integration tests have an [example](https://github.com/apache/pulsar/blob/e2bc52d40450fa00af258c4432a5b71d50a5c6e0/tests/docker-images/latest-version-image/Dockerfile#L110-L122) of packaging the driver into the connector NAR file. 
+Integration tests have an [example](https://github.com/apache/pulsar/blob/e2bc52d40450fa00af258c4432a5b71d50a5c6e0/tests/docker-images/latest-version-image/Dockerfile#L110-L122) of packaging the driver into the connector NAR file.
 
 ### Configuration
 
@@ -676,7 +676,7 @@ configs:
 For the full list of configuration properties supported by Debezium, see [Debezium Connector for MS SQL](https://debezium.io/documentation/reference/1.5/connectors/sqlserver.html#sqlserver-connector-properties).
 
 ## FAQ
- 
+
 ### Debezium postgres connector will hang when creating snap
 
 ```

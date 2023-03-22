@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 ## Pulsar admin CLI for Pulsar Functions
 
-The Pulsar admin interface enables you to create and manage Pulsar Functions through CLI. For the latest and complete information, including commands, flags, and descriptions, refer to [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin).
+The Pulsar admin interface enables you to create and manage Pulsar Functions through CLI. For the latest and complete information, including commands, flags, and descriptions, refer to [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
 
 
 ## YAML configurations for Pulsar Functions
@@ -53,7 +53,7 @@ You can configure a function by using a predefined YAML file. The following tabl
 | parallelism          | Int      | `--parallelism`         | The parallelism factor of a function, that is, the number of function instances to run. |
 | resources     | [Resources](#resources)	| N/A           | N/A |
 | fqfn          | String          | `--fqfn`                | The Fully Qualified Function Name (FQFN) of a function. |
-| windowConfig  | [WindowConfig](#windowconfig) | N/A       | N/A |		
+| windowConfig  | [WindowConfig](#windowconfig) | N/A       | N/A |
 | timeoutMs     | Long            | `--timeout-ms`          | The message timeout (in milliseconds). |
 | jar           | String          | `--jar`                 | The path of the JAR file for a function (written in Java). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service). |
 | py            | String          | `--py`                  | The path of the main Python/Python wheel file for a function (written in Python). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service).  |
@@ -136,7 +136,7 @@ The following table outlines the nested fields and related arguments under the `
 The following example shows how to configure a function using YAML or JSON.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="YAML"
   values={[{"label":"YAML","value":"YAML"},{"label":"JSON","value":"JSON"}]}>
 
@@ -146,13 +146,13 @@ The following example shows how to configure a function using YAML or JSON.
 tenant: "public"
 namespace: "default"
 name: "config-file-function"
-inputs: 
+inputs:
   - "persistent://public/default/config-file-function-input-1"
   - "persistent://public/default/config-file-function-input-2"
 output: "persistent://public/default/config-file-function-output"
 jar: "function.jar"
 parallelism: 1
-resources: 
+resources:
   cpu: 8
   ram: 8589934592
 autoAck: true

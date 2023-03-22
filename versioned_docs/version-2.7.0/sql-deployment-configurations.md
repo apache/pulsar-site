@@ -38,12 +38,12 @@ pulsar.zookeeper-uri=localhost1,localhost2:2181
 
 ```
 
-**Note: by default, Pulsar SQL does not get the last message in a topic**. It is by design and controlled by settings. By default, BookKeeper LAC only advances when subsequent entries are added. If there is no subsequent entry added, the last written entry is not visible to readers until the ledger is closed. This is not a problem for Pulsar which uses managed ledger, but Pulsar SQL directly reads from BookKeeper ledger. 
+**Note: by default, Pulsar SQL does not get the last message in a topic**. It is by design and controlled by settings. By default, BookKeeper LAC only advances when subsequent entries are added. If there is no subsequent entry added, the last written entry is not visible to readers until the ledger is closed. This is not a problem for Pulsar which uses managed ledger, but Pulsar SQL directly reads from BookKeeper ledger.
 
 If you want to get the last message in a topic, set the following configurations:
 
 1. For the broker configuration, set `bookkeeperExplicitLacIntervalInMills` > 0 in `broker.conf` or `standalone.conf`.
-   
+
 2. For the Presto configuration, set `pulsar.bookkeeper-explicit-interval` > 0 and `pulsar.bookkeeper-use-v2-protocol=false`.
 
 However, using BookKeeper V3 protocol introduces additional GC overhead to BK as it uses Protobuf.
@@ -60,11 +60,11 @@ $ wget pulsar:binary_release_url
 
 ## Deploy a new cluster
 
-Since Pulsar SQL is powered by [Presto](https://prestosql.io), the configuration for deployment is the same for the Pulsar SQL worker. 
+Since Pulsar SQL is powered by [Presto](https://prestosql.io), the configuration for deployment is the same for the Pulsar SQL worker.
 
 :::note
 
-For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md). 
+For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md).
 
 :::
 
@@ -102,7 +102,7 @@ Options:
 
 The default configuration for the cluster is located in `${project.root}/conf/presto`. You can customize your deployment by modifying the default configuration.
 
-You can set the worker to read from a different configuration directory, or set a different directory to write data. 
+You can set the worker to read from a different configuration directory, or set a different directory to write data.
 
 ```bash
 
@@ -118,13 +118,13 @@ $ ./bin/pulsar sql-worker start
 
 ```
 
-### Deploy a cluster on multiple nodes 
+### Deploy a cluster on multiple nodes
 
-You can deploy a Pulsar SQL cluster or Presto cluster on multiple nodes. The following example shows how to deploy a cluster on three-node cluster. 
+You can deploy a Pulsar SQL cluster or Presto cluster on multiple nodes. The following example shows how to deploy a cluster on three-node cluster.
 
 1. Copy the Pulsar binary distribution to three nodes.
 
-The first node runs as Presto coordinator. The minimal configuration requirement in the `${project.root}/conf/presto/config.properties` file is as follows. 
+The first node runs as Presto coordinator. The minimal configuration requirement in the `${project.root}/conf/presto/config.properties` file is as follows.
 
 ```properties
 
@@ -138,7 +138,7 @@ discovery.uri=<coordinator-url>
 
 ```
 
-The other two nodes serve as worker nodes, you can use the following configuration for worker nodes. 
+The other two nodes serve as worker nodes, you can use the following configuration for worker nodes.
 
 ```properties
 
@@ -181,10 +181,10 @@ $ ./bin/pulsar sql --server <coordinate_url>
 ```bash
 
 presto> SELECT * FROM system.runtime.nodes;
- node_id |        http_uri         | node_version | coordinator | state  
+ node_id |        http_uri         | node_version | coordinator | state
 ---------+-------------------------+--------------+-------------+--------
- 1       | http://192.168.2.1:8081 | testversion  | true        | active 
- 3       | http://192.168.2.2:8081 | testversion  | false       | active 
+ 1       | http://192.168.2.1:8081 | testversion  | true        | active
+ 3       | http://192.168.2.2:8081 | testversion  | false       | active
  2       | http://192.168.2.3:8081 | testversion  | false       | active
 
 ```

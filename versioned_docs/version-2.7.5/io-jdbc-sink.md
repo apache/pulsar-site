@@ -5,18 +5,18 @@ sidebar_label: "JDBC sink connector"
 original_id: io-jdbc-sink
 ---
 
-The JDBC sink connectors allow pulling messages from Pulsar topics 
+The JDBC sink connectors allow pulling messages from Pulsar topics
 and persists the messages to ClickHouse, MariaDB, PostgreSQL, and SQLite.
 
 > Currently, INSERT, DELETE and UPDATE operations are supported.
 
-## Configuration 
+## Configuration
 
 The configuration of all JDBC sink connectors has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `userName` | String|false | " " (empty string) | The username used to connect to the database specified by `jdbcUrl`.<br /><br />**Note: `userName` is case-sensitive.**|
 | `password` | String|false | " " (empty string)| The password used to connect to the database specified by `jdbcUrl`. <br /><br />**Note: `password` is case-sensitive.**|
@@ -29,129 +29,129 @@ The configuration of all JDBC sink connectors has the following properties.
 
 ### Example for ClickHouse
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "userName": "clickhouse",
       "password": "password",
       "jdbcUrl": "jdbc:clickhouse://localhost:8123/pulsar_clickhouse_jdbc_sink",
       "tableName": "pulsar_clickhouse_jdbc_sink"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   tenant: "public"
   namespace: "default"
   name: "jdbc-clickhouse-sink"
   topicName: "persistent://public/default/jdbc-clickhouse-topic"
-  sinkType: "jdbc-clickhouse"    
+  sinkType: "jdbc-clickhouse"
   configs:
       userName: "clickhouse"
       password: "password"
       jdbcUrl: "jdbc:clickhouse://localhost:8123/pulsar_clickhouse_jdbc_sink"
       tableName: "pulsar_clickhouse_jdbc_sink"
-  
+
   ```
 
 ### Example for MariaDB
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "userName": "mariadb",
       "password": "password",
       "jdbcUrl": "jdbc:mariadb://localhost:3306/pulsar_mariadb_jdbc_sink",
       "tableName": "pulsar_mariadb_jdbc_sink"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   tenant: "public"
   namespace: "default"
   name: "jdbc-mariadb-sink"
   topicName: "persistent://public/default/jdbc-mariadb-topic"
-  sinkType: "jdbc-mariadb"    
+  sinkType: "jdbc-mariadb"
   configs:
       userName: "mariadb"
       password: "password"
       jdbcUrl: "jdbc:mariadb://localhost:3306/pulsar_mariadb_jdbc_sink"
       tableName: "pulsar_mariadb_jdbc_sink"
-  
+
   ```
 
 ### Example for PostgreSQL
 
 Before using the JDBC PostgreSQL sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "userName": "postgres",
       "password": "password",
       "jdbcUrl": "jdbc:postgresql://localhost:5432/pulsar_postgres_jdbc_sink",
       "tableName": "pulsar_postgres_jdbc_sink"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   tenant: "public"
   namespace: "default"
   name: "jdbc-postgres-sink"
   topicName: "persistent://public/default/jdbc-postgres-topic"
-  sinkType: "jdbc-postgres"    
+  sinkType: "jdbc-postgres"
   configs:
       userName: "postgres"
       password: "password"
       jdbcUrl: "jdbc:postgresql://localhost:5432/pulsar_postgres_jdbc_sink"
       tableName: "pulsar_postgres_jdbc_sink"
-  
+
   ```
 
 For more information on **how to use this JDBC sink connector**, see [connect Pulsar to PostgreSQL](io-quickstart.md#connect-pulsar-to-postgresql).
 
 ### Example for SQLite
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "jdbcUrl": "jdbc:sqlite:db.sqlite",
       "tableName": "pulsar_sqlite_jdbc_sink"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   tenant: "public"
   namespace: "default"
   name: "jdbc-sqlite-sink"
   topicName: "persistent://public/default/jdbc-sqlite-topic"
-  sinkType: "jdbc-sqlite"    
+  sinkType: "jdbc-sqlite"
   configs:
       jdbcUrl: "jdbc:sqlite:db.sqlite"
       tableName: "pulsar_sqlite_jdbc_sink"
-  
+
   ```
 

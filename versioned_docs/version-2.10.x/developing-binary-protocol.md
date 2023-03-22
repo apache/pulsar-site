@@ -68,7 +68,7 @@ If you want to use broker entry metadata for **brokers**, configure the [`broker
 If you want to use broker entry metadata for **consumers**:
 
 1. Use the client protocol version [18 or later](https://github.com/apache/pulsar/blob/ca37e67211feda4f7e0984e6414e707f1c1dfd07/pulsar-common/src/main/proto/PulsarApi.proto#L259).
-   
+
 2. Configure the [`brokerEntryMetadataInterceptors`](reference-configuration.md#broker) parameter and set the [`exposingBrokerEntryMetadataToClientEnabled`](reference-configuration.md#broker) parameter to `true` in the `broker.conf` file.
 
 ## Message metadata
@@ -330,7 +330,7 @@ A `Flow` command gives additional *permits* to send messages to the consumer.
 A typical consumer implementation will use a queue to accumulate these messages
 before the application is ready to consume them.
 
-After the application has dequeued half of the messages in the queue, the consumer 
+After the application has dequeued half of the messages in the queue, the consumer
 sends permits to the broker to ask for more messages (equals to half of the messages in the queue).
 
 For example, if the queue size is 1000 and the consumer consumes 500 messages in the queue.
@@ -486,16 +486,16 @@ messages are coming from the consumer.
 
 ##### Command ConsumerStats
 
-This command is sent by the client to retrieve Subscriber and Consumer level 
+This command is sent by the client to retrieve Subscriber and Consumer level
 stats from the broker.
 Parameters:
- * `request_id` → Id of the request, used to correlate the request 
+ * `request_id` → Id of the request, used to correlate the request
       and the response.
  * `consumer_id` → Id of an already established consumer.
 
 ##### Command ConsumerStatsResponse
 
-This is the broker's response to ConsumerStats request by the client. 
+This is the broker's response to ConsumerStats request by the client.
 It contains the Subscriber and Consumer level stats of the `consumer_id` sent in the request.
 If the `error_code` or the `error_message` field is set it indicates that the request has failed.
 

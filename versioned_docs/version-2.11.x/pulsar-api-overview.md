@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-Pulsar is a messaging and streaming platform that scales across organizations of all sizes. Pulsar APIs are the core building blocks of Pulsar, which allow you to interact with Pulsar or administer Pulsar clusters. Pulsar APIs consist of the following types: 
+Pulsar is a messaging and streaming platform that scales across organizations of all sizes. Pulsar APIs are the core building blocks of Pulsar, which allow you to interact with Pulsar or administer Pulsar clusters. Pulsar APIs consist of the following types:
 
 - [Pulsar client APIs](client-api-overview.md)
 

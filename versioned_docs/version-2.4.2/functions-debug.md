@@ -153,7 +153,7 @@ In Pulsar Functions, you can generate log information defined in functions to a 
 
 ![Pulsar Functions core programming model](/assets/pulsar-functions-overview.png)
 
-**Example** 
+**Example**
 
 ```text
 
@@ -181,7 +181,7 @@ public class LoggingFunction implements Function<String, Void> {
 
 As shown in the example above, you can get the logger via `context.getLogger()` and assign the logger to the `LOG` variable of `slf4j`, so you can define your desired log information in a function using the `LOG` variable. Meanwhile, you need to specify the topic to which the log information is produced.
 
-**Example** 
+**Example**
 
 ```
 
@@ -234,7 +234,7 @@ $ pulsar-admin functions get options
 
 :::
 
-**Example** 
+**Example**
 
 You can specify `--fqfn` to get information about a Pulsar Function.
 
@@ -298,11 +298,11 @@ $ pulsar-admin functions status options
 |---|---
 |`--fqfn`|The Fully Qualified Function Name (FQFN) of a Pulsar Function.
 |`--instance-id`|The instance ID of a Pulsar Function <br />If the `--instance-id` is not specified, it gets the IDs of all instances.<br />
-|`--name`|The name of a Pulsar Function. 
+|`--name`|The name of a Pulsar Function.
 |`--namespace`|The namespace of a Pulsar Function.
 |`--tenant`|The tenant of a Pulsar Function.
 
-**Example** 
+**Example**
 
 ```text
 
@@ -359,7 +359,7 @@ $ pulsar-admin functions stats options
 |---|---
 |`--fqfn`|The Fully Qualified Function Name (FQFN) of a Pulsar Function.
 |`--instance-id`|The instance ID of a Pulsar Function. <br />If the `--instance-id` is not specified, it gets the IDs of all instances.<br />
-|`--name`|The name of a Pulsar Function. 
+|`--name`|The name of a Pulsar Function.
 |`--namespace`|The namespace of a Pulsar Function.
 |`--tenant`|The tenant of a Pulsar Function.
 
@@ -434,7 +434,7 @@ $ pulsar-admin functions list options
 |`--namespace`|The namespace of a Pulsar Function.
 |`--tenant`|The tenant of a Pulsar Function.
 
-**Example** 
+**Example**
 
 ```text
 
@@ -478,7 +478,7 @@ $ pulsar-admin functions trigger options
 |`--trigger-file`|The path to a file that contains the data to trigger a Pulsar Function.
 |`--trigger-value`|The value to trigger a Pulsar Function.
 
-**Example** 
+**Example**
 
 ```text
 

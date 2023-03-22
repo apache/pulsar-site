@@ -67,10 +67,10 @@ $ bin/pulsar-admin functions localrun \
 >
 
 > ```bash
-> 
+>
 > --inputs topic1,topic2
 >
-> 
+>
 > ```
 
 
@@ -249,10 +249,10 @@ If you see `Deleted successfully` in the output, then you've successfully run, u
 > In order to write and run the [Python](functions-api.md#functions-for-python) function below, you'll need to install a few dependencies:
 
 > ```bash
-> 
+>
 > $ pip install pulsar-client
 >
-> 
+>
 > ```
 
 

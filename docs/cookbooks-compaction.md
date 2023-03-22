@@ -31,7 +31,7 @@ Thus, if you're using a Pulsar topic called `stock-values`, some consumers could
 
 Compaction policy specifies how large the topic backlog can grow before compaction is triggered.
 
-Tenant administrators can configure a compaction policy at namespace or topic levels. Configuring the compaction policy at the namespace level applies to all topics within that namespace. 
+Tenant administrators can configure a compaction policy at namespace or topic levels. Configuring the compaction policy at the namespace level applies to all topics within that namespace.
 
 For example, to trigger compaction in a namespace when the backlog reaches 100MB:
 

@@ -30,7 +30,7 @@ getting charged for incomplete uploads.
 
 ## Configuring the offload driver
 
-Offloading is configured in ```broker.conf```. 
+Offloading is configured in ```broker.conf```.
 
 At a minimum, the administrator must configure the driver, the bucket and the authenticating credentials.
 There is also some other knobs to configure, like the bucket region, the max block size in backed storage, etc.
@@ -144,7 +144,7 @@ gcsManagedLedgerOffloadBucket=pulsar-topic-offload
 Bucket Region is the region where bucket located. Bucket Region is not a required but
 a recommended configuration. If it is not configured, It will use the default region.
 
-Regarding GCS, buckets are default created in the `us multi-regional location`, 
+Regarding GCS, buckets are default created in the `us multi-regional location`,
 page [Bucket Locations](https://cloud.google.com/storage/docs/bucket-locations) contains more information.
 
 ```conf
@@ -234,7 +234,7 @@ If there is an error offloading, the error will be propagated to the offload-sta
 
 ```bash
 
-$ bin/pulsar-admin topics offload-status persistent://public/default/topic1                                                                                                       
+$ bin/pulsar-admin topics offload-status persistent://public/default/topic1
 Error in offload
 null
 
