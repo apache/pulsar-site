@@ -9,7 +9,7 @@ The [Pulsar proxy](concepts-architecture-overview.md#pulsar-proxy) is an optiona
 
 ## Configure the proxy
 
-The proxy must have some way to find the addresses of the brokers of the cluster. You can do this by either configuring the proxy to connect directly to service discovery or by specifying a broker URL in the configuration. 
+The proxy must have some way to find the addresses of the brokers of the cluster. You can do this by either configuring the proxy to connect directly to service discovery or by specifying a broker URL in the configuration.
 
 ### Option 1: Use service discovery
 

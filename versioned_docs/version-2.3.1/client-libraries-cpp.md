@@ -101,7 +101,7 @@ Debian packages will be created at `pulsar-client-cpp/pkg/deb/BUILD/DEB/`
 
 ## MacOS
 
-Pulsar releases are available through the [Homebrew](https://brew.sh/) core repository. You can install the C++ client 
+Pulsar releases are available through the [Homebrew](https://brew.sh/) core repository. You can install the C++ client
 library with:
 
 ```shell

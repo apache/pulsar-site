@@ -42,7 +42,7 @@ The command the when use this pulsar library is like this:
 
 ```
 
-3. `libpulsar.a` is the Static library, it need to load some dependencies library when using it. 
+3. `libpulsar.a` is the Static library, it need to load some dependencies library when using it.
 The command the when use this pulsar library is like this:
 
 ```bash
@@ -51,7 +51,7 @@ The command the when use this pulsar library is like this:
 
 ```
 
-4. `libpulsarwithdeps.a` is the Static library, base on `libpulsar.a`, and archived in the dependencies libraries of `libboost_regex`,  `libboost_system`, `libcurl`, `libprotobuf`, `libzstd` and `libz`, 
+4. `libpulsarwithdeps.a` is the Static library, base on `libpulsar.a`, and archived in the dependencies libraries of `libboost_regex`,  `libboost_system`, `libcurl`, `libprotobuf`, `libzstd` and `libz`,
 The command the when use this pulsar library is like this:
 
 ```bash
@@ -60,12 +60,12 @@ The command the when use this pulsar library is like this:
 
 ```
 
-`libpulsarwithdeps.a` does not include library openssl related libraries: `libssl` and `libcrypto`, because these 2 library is related to security, 
+`libpulsarwithdeps.a` does not include library openssl related libraries: `libssl` and `libcrypto`, because these 2 library is related to security,
 by using user local system provided version is more reasonable, and more easy for user to handling security issue and library upgrade.
 
 ### Install RPM
 
-1. Download a RPM package from the links in the table. 
+1. Download a RPM package from the links in the table.
 
 | Link | Crypto files |
 |------|--------------|
@@ -85,7 +85,7 @@ After install, Pulsar libraries will be placed under `/usr/lib`.
 
 ### Install Debian
 
-1. Download a Debian package from the links in the table. 
+1. Download a Debian package from the links in the table.
 
 | Link | Crypto files |
 |------|--------------|
@@ -173,7 +173,7 @@ pulsar://localhost:6650
 
 ```
 
-In a Pulsar cluster in production, the URL looks as follows: 
+In a Pulsar cluster in production, the URL looks as follows:
 
 ```http
 
@@ -190,7 +190,7 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 ```
 
 ## Create a consumer
-To connect to Pulsar as a consumer, you need to create a consumer on the C++ client. The following is an example. 
+To connect to Pulsar as a consumer, you need to create a consumer on the C++ client. The following is an example.
 
 ```c++
 
@@ -218,7 +218,7 @@ client.close();
 ```
 
 ## Create a producer
-To connect to Pulsar as a producer, you need to create a producer on the C++ client. The following is an example. 
+To connect to Pulsar as a producer, you need to create a producer on the C++ client. The following is an example.
 
 ```c++
 

@@ -100,7 +100,7 @@ on a per-[tenant](#tenant) basis.
 
 #### Failure Domain
 
-A logical domain under a Pulsar cluster. Each logical domain contains a pre-configured list of brokers. 
+A logical domain under a Pulsar cluster. Each logical domain contains a pre-configured list of brokers.
 
 #### Anti-affinity Namespaces
 

@@ -124,12 +124,12 @@ To get started using builtin connectors, you need to download the connectors tar
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
-  
+
   ```
 
-Once you download the nar file, copy the file to directory `connectors` in the pulsar directory, 
+Once you download the nar file, copy the file to directory `connectors` in the pulsar directory,
 for example, if you download the connector file `pulsar-io-aerospike-@pulsar:version@.nar`:
 
 ```bash
@@ -160,9 +160,9 @@ To get started using tiered storage offloaders, you need to download the offload
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:offloader_release_url
-  
+
   ```
 
 Once you download the tarball, in the pulsar directory, untar the offloaders package and copy the offloaders as `offloaders` in the pulsar directory:
@@ -273,13 +273,13 @@ Flag | Description
 >
 
 > ```properties
-> 
+>
 > --web-service-url http://host1:8080,host2:8080,host3:8080 \
 > --web-service-url-tls https://host1:8443,host2:8443,host3:8443 \
 > --broker-service-url pulsar://host1:6650,host2:6650,host3:6650 \
 > --broker-service-url-tls pulsar+ssl://host1:6651,host2:6651,host3:6651
 >
-> 
+>
 > ```
 
 
@@ -375,17 +375,17 @@ webServicePortTls=8443
 >
 
 > ```properties
-> 
+>
 > # Number of bookies to use when creating a ledger
 > managedLedgerDefaultEnsembleSize=1
 >
 > # Number of copies to store for each message
 > managedLedgerDefaultWriteQuorum=1
-> 
+>
 > # Number of guaranteed copies (acks to wait before write is complete)
 > managedLedgerDefaultAckQuorum=1
 >
-> 
+>
 > ```
 
 
@@ -396,17 +396,17 @@ If you want to enable [Pulsar Functions](functions-overview.md), you can follow 
 1. Edit `conf/broker.conf` to enable functions worker, by setting `functionsWorkerEnabled` to `true`.
 
    ```conf
-   
+
    functionsWorkerEnabled=true
-   
+
    ```
 
-2. Edit `conf/functions_worker.yml` and set `pulsarFunctionsCluster` to the cluster name that you provide when you [initialize the metadata of the cluster](#initialize-cluster-metadata). 
+2. Edit `conf/functions_worker.yml` and set `pulsarFunctionsCluster` to the cluster name that you provide when you [initialize the metadata of the cluster](#initialize-cluster-metadata).
 
    ```conf
-   
+
    pulsarFunctionsCluster: pulsar-cluster-1
-   
+
    ```
 
 If you want to learn more options about deploying functions worker, checkout [Deploy and manage functions worker](functions-worker.md).
@@ -450,11 +450,11 @@ brokerServiceurl=pulsar://us-west.example.com:6650
 >
 
 > ```properties
-> 
+>
 > webServiceUrl=http://host1:8080,host2:8080,host3:8080
 > brokerServiceurl=pulsar://host1:6650,host2:6650,host3:6650
 >
-> 
+>
 > ```
 
 

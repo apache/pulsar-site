@@ -58,7 +58,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    minikube dashboard
    ```
 
-   The command automatically triggers opening a webpage in your browser. 
+   The command automatically triggers opening a webpage in your browser.
 
 ## Step 1: Install Pulsar Helm chart
 
@@ -88,7 +88,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
        -c
    ```
 
-4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes. 
+4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
 
    ```bash
    helm install \
@@ -163,7 +163,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    bin/pulsar-admin tenants list
    ```
 
-   You should see a similar output as below. The tenant `apache` has been successfully created. 
+   You should see a similar output as below. The tenant `apache` has been successfully created.
 
    ```bash
    "apache"
@@ -183,7 +183,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    bin/pulsar-admin namespaces list apache
    ```
 
-   You should see a similar output as below. The namespace `apache/pulsar` has been successfully created. 
+   You should see a similar output as below. The namespace `apache/pulsar` has been successfully created.
 
    ```bash
    "apache/pulsar"
@@ -297,7 +297,7 @@ Then you can proceed with the following steps:
    - From the producer side
 
        **Output**
-       
+
        The messages have been produced successfully.
 
        ```bash
@@ -345,7 +345,7 @@ Then you can proceed with the following steps:
 
 2. The Pulsar Manager UI will be open in your browser. You can use the username `pulsar` and password `pulsar` to log into Pulsar Manager.
 
-3. In Pulsar Manager UI, you can create an environment. 
+3. In Pulsar Manager UI, you can create an environment.
 
    - Click `New Environment` button in the top-left corner.
    - Type `pulsar-mini` for the field `Environment Name` in the popup window.

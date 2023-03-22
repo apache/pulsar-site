@@ -10,7 +10,7 @@ As the core of Pulsar SQL, the Pulsar Trino plugin enables Trino workers within 
 
 ![The Pulsar consumer and reader interfaces](/assets/pulsar-sql-arch-2.png)
 
-The query performance is efficient and highly scalable, because Pulsar adopts [two-level-segment-based architecture](concepts-architecture-overview.md#apache-bookkeeper). 
+The query performance is efficient and highly scalable, because Pulsar adopts [two-level-segment-based architecture](concepts-architecture-overview.md#apache-bookkeeper).
 
 Topics in Pulsar are stored as segments in [Apache BookKeeper](https://bookkeeper.apache.org/). Each topic segment is replicated to some BookKeeper nodes, which enables concurrent reads and high read throughput. In the Pulsar Trino connector, data is read directly from BookKeeper, so Trino workers can read concurrently from a horizontally scalable number of BookKeeper nodes.
 

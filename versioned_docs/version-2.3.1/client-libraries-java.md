@@ -129,19 +129,19 @@ stringProducer.send("My message");
 > You should always make sure to close your producers, consumers, and clients when they are no longer needed:
 
 > ```java
-> 
+>
 > producer.close();
 > consumer.close();
 > client.close();
 >
-> 
+>
 > ```
 
 >
 > Close operations can also be asynchronous:
 
 > ```java
-> 
+>
 > producer.closeAsync()
 >    .thenRun(() -> System.out.println("Producer closed"));
 >    .exceptionally((ex) -> {
@@ -149,7 +149,7 @@ stringProducer.send("My message");
 >        return ex;
 >    });
 >
-> 
+>
 > ```
 
 
@@ -437,42 +437,42 @@ The following schema formats are currently available for Java:
 * No schema or the byte array schema (which can be applied using `Schema.BYTES`):
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer(Schema.BYTES)
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
   Or, equivalently:
 
   ```java
-  
+
   Producer<byte[]> bytesProducer = client.newProducer()
       .topic("some-raw-bytes-topic")
       .create();
-  
+
   ```
 
 * `String` for normal UTF-8-encoded string data. This schema can be applied using `Schema.STRING`:
 
   ```java
-  
+
   Producer<String> stringProducer = client.newProducer(Schema.STRING)
       .topic("some-string-topic")
       .create();
-  
+
   ```
 
 * JSON schemas can be created for POJOs using the `JSONSchema` class. Here's an example:
 
   ```java
-  
+
   Schema<MyPojo> pojoSchema = JSONSchema.of(MyPojo.class);
   Producer<MyPojo> pojoProducer = client.newProducer(pojoSchema)
       .topic("some-pojo-topic")
       .create();
-  
+
   ```
 
 ## Authentication

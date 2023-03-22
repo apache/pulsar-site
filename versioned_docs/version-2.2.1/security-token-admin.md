@@ -48,7 +48,7 @@ use it to generate the client tokens. This key will be also configured to
 the brokers to allow them to validate the clients.
 
 #### Creating a secret key
-> Output file will be generated in the root of your pulsar installation directory. You can also provide absolute path for the output file. 
+> Output file will be generated in the root of your pulsar installation directory. You can also provide absolute path for the output file.
 
 ```shell
 
@@ -56,7 +56,7 @@ $ bin/pulsar tokens create-secret-key --output my-secret.key
 
 ```
 
-To generate base64 encoded private key 
+To generate base64 encoded private key
 
 ```shell
 

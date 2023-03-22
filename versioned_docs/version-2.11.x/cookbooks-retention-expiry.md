@@ -72,11 +72,11 @@ You can set a retention policy for a namespace by specifying the namespace, a si
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can use the [`set-retention`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-retention) subcommand and specify a namespace, a size limit using the `-s`/`--size` flag, and a time limit using the `-t`/`--time` flag. 
+You can use the [`set-retention`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-retention) subcommand and specify a namespace, a size limit using the `-s`/`--size` flag, and a time limit using the `-t`/`--time` flag.
 
-In the following example, the size limit is set to 10 GB and the time limit is set to 3 hours for each topic within the `my-tenant/my-ns` namespace. 
-- When the size of messages reaches 10 GB on a topic within 3 hours, the acknowledged messages will not be retained. 
-- After 3 hours, even if the message size is less than 10 GB, the acknowledged messages will not be retained. 
+In the following example, the size limit is set to 10 GB and the time limit is set to 3 hours for each topic within the `my-tenant/my-ns` namespace.
+- When the size of messages reaches 10 GB on a topic within 3 hours, the acknowledged messages will not be retained.
+- After 3 hours, even if the message size is less than 10 GB, the acknowledged messages will not be retained.
 
 ```shell
 pulsar-admin namespaces set-retention my-tenant/my-ns \
@@ -456,12 +456,12 @@ admin.namespaces().removeNamespaceMessageTTL(namespace)
 ## Delete messages from namespaces
 
 When it comes to the physical storage size, message expiry and retention are just like two sides of the same coin.
-* The backlog quota and TTL parameters prevent disk size from growing indefinitely, as Pulsar’s default behavior is to persist unacknowledged messages. 
+* The backlog quota and TTL parameters prevent disk size from growing indefinitely, as Pulsar’s default behavior is to persist unacknowledged messages.
 * The retention policy allocates storage space to accommodate the messages that are supposed to be deleted by Pulsar by default.
 
-In conclusion, the size of your physical storage should accommodate the sum of the backlog quota and the retention size. 
+In conclusion, the size of your physical storage should accommodate the sum of the backlog quota and the retention size.
 
-The message deletion rate (releasing rate of disk space) can be determined by multiple factors. 
+The message deletion rate (releasing rate of disk space) can be determined by multiple factors.
 
 - **Segment rollover period**: basically, the segment rollover period is how often a new segment is created. Once a new segment is created, the old segment will be deleted. By default, this happens either when you have written 50,000 entries (messages) or have waited 240 minutes. You can tune this in your broker.
 

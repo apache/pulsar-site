@@ -11,7 +11,7 @@ This page is deprecated and not updated anymore. For the latest and complete inf
 :::
 
 The `pulsar-admin` tool helps you manage Pulsar connectors.
-  
+
 ## `sources`
 
 An interface for managing Pulsar IO sources (ingress data into Pulsar).

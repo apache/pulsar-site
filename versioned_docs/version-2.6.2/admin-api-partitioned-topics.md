@@ -72,7 +72,7 @@ admin.persistentTopics().createPartitionedTopic(topicName, numPartitions);
 
 ### Create missed partitions
 
-Try to create partitions for partitioned topic. The partitions of partition topic has to be created, 
+Try to create partitions for partitioned topic. The partitions of partition topic has to be created,
 can be used by repair partitions when topic auto creation is disabled
 
 #### pulsar-admin
@@ -200,7 +200,7 @@ admin.persistentTopics().delete(persistentTopic);
 
 ### List
 
-It provides a list of persistent topics existing under a given namespace.  
+It provides a list of persistent topics existing under a given namespace.
 
 #### pulsar-admin
 

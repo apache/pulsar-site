@@ -85,7 +85,7 @@ If you use [mTLS authentication](security-tls-authentication.md), add `+ssl` in 
 pulsar+ssl://pulsar.us-west.example.com:6651
 ```
 
-## Client 
+## Client
 
 You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
 
@@ -118,8 +118,8 @@ If you create a client, you can use the `loadConf` configuration. The following 
  `authParams` | String | Parameters for the authentication plugin <br /><br />**Example**<br /> key1:val1,key2:val2|None
 `operationTimeoutMs`|long|`operationTimeoutMs`|Operation timeout |30000
 `statsIntervalSeconds`|long|Interval between each stats information<br /><br />Stats is activated with positive `statsInterval`<br /><br />Set `statsIntervalSeconds` to 1 second at least. |60
-`numIoThreads`| int| The number of threads used for handling connections to brokers | 1 
-`numListenerThreads`|int|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](/concepts-messaging.md#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1 
+`numIoThreads`| int| The number of threads used for handling connections to brokers | 1
+`numListenerThreads`|int|The number of threads used for handling message listeners. The listener thread pool is shared across all the consumers and readers using the "listener" model to get messages. For a given consumer, the listener is always invoked from the same thread to ensure ordering. If you want multiple threads to process a single topic, you need to create a [`shared`](/concepts-messaging.md#shared) subscription and multiple consumers for this subscription. This does not ensure ordering.| 1
 `useTcpNoDelay`| boolean| Whether to use TCP no-delay flag on the connection to disable Nagle algorithm |true
 `enableTls` |boolean | Whether to use TLS encryption on the connection. Note that this parameter is **deprecated**. If you want to enable TLS, use `pulsar+ssl://` in `serviceUrl` instead. | false
  `tlsTrustCertsFilePath` |string |Path to the trusted TLS certificate file|None
@@ -147,7 +147,7 @@ You can set the client memory allocator configurations through Java properties.<
 
 | Property | Type |  <div>Description</div> | Default | Available values
 |---|---|---|---|---
-`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li> 
+`pulsar.allocator.pooled` | String | If set to `true`, the client uses a direct memory pool. <br /> If set to `false`, the client uses a heap memory without pool | true | <li> true </li> <li> false </li>
 `pulsar.allocator.exit_on_oom` | String | Whether to exit the JVM when OOM happens | false |  <li> true </li> <li> false </li>
 `pulsar.allocator.leak_detection` | String | The leak detection policy for Pulsar bytebuf allocator. <li> **Disabled**: No leak detection and no overhead. </li> <li> **Simple**: Instruments 1% of the allocated buffer to track for leaks. </li> <li> **Advanced**: Instruments 1% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used. </li> <li> **Paranoid**: Instruments 100% of the allocated buffer to track for leaks, reporting stack traces of places where the buffer is used and introduces a significant overhead. </li> | Disabled | <li> Disabled </li> <li> Simple </li> <li> Advanced </li> <li> Paranoid </li>
 `pulsar.allocator.out_of_memory_policy` | String | When an OOM occurs, the client throws an exception or fallbacks to heap | FallbackToHeap | <li> ThrowException </li> <li> FallbackToHeap </li>
@@ -355,7 +355,7 @@ You can terminate the builder chain with `sendAsync()` and get a future return.
 
 ### Enable chunking
 
-Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side. 
+Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side.
 
 The message chunking feature is OFF by default. The following is an example of how to enable message chunking when creating a producer.
 
@@ -468,7 +468,7 @@ Consumer consumer = client.newConsumer()
 
 ### Configure consumer
 
-If you instantiate a `Consumer` object by specifying only a topic and subscription name as in the example above, the consumer uses the default configuration. 
+If you instantiate a `Consumer` object by specifying only a topic and subscription name as in the example above, the consumer uses the default configuration.
 
 When you create a consumer, you can use the `loadConf` configuration. The following parameters are available in `loadConf`.
 
@@ -502,7 +502,7 @@ When you create a consumer, you can use the `loadConf` configuration. The follow
 `expireTimeOfIncompleteChunkedMessageMillis`|long|The time interval to expire incomplete chunks if a consumer fails to receive all the chunks in the specified time period. The default value is 1 minute. | 60000
 `ackReceiptEnabled`|boolean| If `ackReceiptEnabled` is enabled, ACK returns a receipt. The client got the ack receipt means the broker has processed the ack request, but if without transaction, the broker does not guarantee persistence of acknowledgments, which means the messages still have a chance to be redelivered after the broker crashes. With the transaction, the client can only get the receipt after the acknowledgments have been persistent. | false
 
-You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class. 
+You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class.
 
 The following is an example.
 
@@ -529,7 +529,7 @@ Async receive operations return a {@inject: javadoc:Message:/client/org/apache/p
 
 ### Batch receive
 
-Use `batchReceive` to receive multiple messages for each call. 
+Use `batchReceive` to receive multiple messages for each call.
 
 The following is an example.
 
@@ -588,7 +588,7 @@ Consumer<byte[]> consumer = client.newConsumer()
 
 ### Negative acknowledgment redelivery backoff
 
-The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achieve redelivery with different delays by setting `redeliveryCount ` of messages. 
+The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achieve redelivery with different delays by setting `redeliveryCount ` of messages.
 
 ```java
 Consumer consumer =  client.newConsumer()
@@ -769,7 +769,7 @@ Only the first consumer is allowed to the subscription, other consumers receive 
 
 :::note
 
-If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error. 
+If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
 :::
 
@@ -792,7 +792,7 @@ Consumer consumer2 = client.newConsumer()
 //consumer1 receives 5 messages and then crashes, consumer2 takes over as an  active consumer.
 ```
 
-Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer then becomes the active consumer. 
+Multiple consumers can attach to the same subscription, yet only the first consumer is active, and others are standby. When the active consumer is disconnected, messages will be dispatched to one of standby consumers, and the standby consumer then becomes the active consumer.
 
 If the first active consumer is disconnected after receiving 5 messages, the standby consumer becomes active consumer. Consumer1 will receive:
 
@@ -816,7 +816,7 @@ consumer2 will receive:
 
 :::note
 
-If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers. 
+If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers.
 
 :::
 
@@ -830,7 +830,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -873,7 +873,7 @@ Consumer consumer1 = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
         .subscribe()
-  
+
 Consumer consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
@@ -988,7 +988,7 @@ If you are using multiple interceptors, they apply in the order they are passed 
 
 :::
 
-## Reader 
+## Reader
 
 With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic and a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}.
 
@@ -1114,7 +1114,7 @@ The following figure illustrates the dynamic construction of a TableView updated
 ![TableView](/assets/tableview.png)
 
 ### Configure TableView
- 
+
 The following is an example of how to configure a TableView.
 
 ```java
@@ -1132,7 +1132,7 @@ You can use the available parameters in the `loadConf` configuration or related 
 | `subscriptionName` | string | no | The subscription name of the TableView. | null
 
 ### Register listeners
- 
+
 You can register listeners for both existing messages on a topic and new messages coming into the topic by using `forEachAndListen`, and specify to perform operations for all existing messages by using `forEach`.
 
 The following is an example of how to register listeners with TableView.
@@ -1171,7 +1171,7 @@ Pulsar Java clients currently support the following authentication mechansims:
 
 ## Cluster-level failover
 
-For more concepts and reference information about cluster-level failover, including concepts, benefits, use cases, constraints, usage and working principles, see [Cluster-level failover](concepts-cluster-level-failover.md). 
+For more concepts and reference information about cluster-level failover, including concepts, benefits, use cases, constraints, usage and working principles, see [Cluster-level failover](concepts-cluster-level-failover.md).
 
 :::tip
 
@@ -1245,7 +1245,7 @@ Parameter|Default value|Required?|Description
 |---|---|---|---
 `primary`|N/A|Yes|Service URL of the primary cluster.
 `secondary`|N/A|Yes|Service URL(s) of one or several backup clusters.<br /><br />You can specify several backup clusters using a comma-separated list.<br /><br /> Note that:<br />- The backup cluster is chosen in the sequence shown in the list. <br />- If all backup clusters are available, the Pulsar client chooses the first backup cluster.
-`failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster. 
+`failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster.
 `switchBackDelay`|N/A|Yes|The delay before the Pulsar client switches from the backup cluster to the primary cluster.<br /><br />Automatic failover switchover is controlled by a probe task: <br /> 1) After the Pulsar client switches from the primary cluster to the backup cluster, the probe task continues to check the status of the primary cluster. <br /> 2) If the primary cluster functions well and continuously remains active longer than `switchBackDelay`, the Pulsar client switches back to the primary cluster.
 `checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
 `secondaryTlsTrustCertsFilePath`|N/A|No|A map of certificate file. Keys are service urls of backup cluster. Values are paths to the trusted TLS certificate file of the backup cluster.
@@ -1296,17 +1296,17 @@ Assume that you want to connect Pulsar client 1 to cluster A.
 1. Pulsar client 1 sends the token *t1* to the URL provider service.
 
 2. The URL provider service returns the credential *c1* and the cluster A URL to the Pulsar client.
-   
+
    The URL provider service manages all tokens and credentials. It returns different credentials based on different tokens and different target cluster URLs to different Pulsar clients.
 
    **Note**: **the credential must be in a JSON file and contain parameters as shown**.
 
    ```java
    {
-   "serviceUrl": "pulsar+ssl://target:6651", 
+   "serviceUrl": "pulsar+ssl://target:6651",
    "tlsTrustCertsFilePath": "/security/ca.cert.pem",
    "authPluginClassName":"org.apache.pulsar.client.impl.auth.AuthenticationTls",
-   "authParamsString": " \"tlsCertFile\": \"/security/client.cert.pem\" 
+   "authParamsString": " \"tlsCertFile\": \"/security/client.cert.pem\"
        \"tlsKeyFile\": \"/security/client-pk8.pem\" "
    }
    ```

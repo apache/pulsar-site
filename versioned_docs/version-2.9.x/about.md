@@ -18,9 +18,9 @@ Select one of the content blocks below to begin your Pulsar journey. If you ...
 * Are new to Pulsar, start with **About Pulsar** to learn about features and concepts.
 * Want to jump to the quickstart, select **Get Started**.
 * Are an operator responsible for architecting and supporting Apache Pulsar, start with **Install, Deploy, Upgrade**.
-* Are a developer who wants to master Apache Pulsar, select **Pulsar for Developers**. 
+* Are a developer who wants to master Apache Pulsar, select **Pulsar for Developers**.
 * Want to try out Pulsar, select **How To** for access to the "hello world" tutorial.
-* An experienced Pulsar coder looking for API, metrics, or configuration documentation, go to **Reference**. 
+* An experienced Pulsar coder looking for API, metrics, or configuration documentation, go to **Reference**.
 
 <BlockLinks>
     <BlockLink title="About Pulsar" url="/docs/2.9.x/concepts-overview/" />

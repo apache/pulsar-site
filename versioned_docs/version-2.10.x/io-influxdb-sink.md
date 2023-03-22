@@ -5,7 +5,7 @@ sidebar_label: "InfluxDB sink connector"
 original_id: io-influxdb-sink
 ---
 
-The InfluxDB sink connector pulls messages from Pulsar topics 
+The InfluxDB sink connector pulls messages from Pulsar topics
 and persists the messages to InfluxDB.
 
 The InfluxDB sink provides different configurations for InfluxDBv1 and v2 respectively.
@@ -16,7 +16,7 @@ The configuration of the InfluxDB sink connector has the following properties.
 
 ### Property
 #### InfluxDBv2
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `influxdbUrl` |String| true|" " (empty string) | The URL of the InfluxDB instance. |
 | `token` | String|true| " " (empty string) |The authentication token used to authenticate to InfluxDB. |
@@ -29,7 +29,7 @@ The configuration of the InfluxDB sink connector has the following properties.
 | `batchSize` | int|false|200| The batch size of writing to InfluxDB. |
 
 #### InfluxDBv1
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `influxdbUrl` |String| true|" " (empty string) | The URL of the InfluxDB instance. |
 | `username` | String|false| " " (empty string) |The username used to authenticate to InfluxDB. |
@@ -49,7 +49,7 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
 * JSON
 
   ```json
-  
+
   {
      "configs": {
         "influxdbUrl": "http://localhost:9999",
@@ -63,13 +63,13 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
         "batchSize": 100
      }
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       influxdbUrl: "http://localhost:9999"
       organization: "example-org"
@@ -80,15 +80,15 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
       gzipEnable: false
       batchTimeMs: 1000
       batchSize: 100
-  
+
   ```
 
 #### InfluxDBv1
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
      "configs": {
         "influxdbUrl": "http://localhost:8086",
@@ -101,13 +101,13 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
         "batchSize": 100
      }
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       influxdbUrl: "http://localhost:8086"
       database: "test_db"
@@ -117,6 +117,6 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
       gzipEnable: false
       batchTimeMs: 1000
       batchSize: 100
-  
+
   ```
 

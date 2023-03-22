@@ -33,7 +33,7 @@ The configuration of the Canal source connector has the following properties.
 
 Before using the Canal connector, you can create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
   {
@@ -179,7 +179,7 @@ Here is an example of storing MySQL data using the configuration file as above.
       --parallelism 1
    ```
 
-12. Consume data from MySQL. 
+12. Consume data from MySQL.
 
    ```bash
    docker exec -it pulsar-standalone /bin/bash

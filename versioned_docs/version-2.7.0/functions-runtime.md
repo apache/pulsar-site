@@ -113,7 +113,7 @@ functionRuntimeFactoryConfigs:
 
 ```
 
-If you run functions worker embedded in a broker on Kubernetes, you can use the default settings. 
+If you run functions worker embedded in a broker on Kubernetes, you can use the default settings.
 
 ### Run standalone functions worker on Kubernetes
 
@@ -218,11 +218,11 @@ secrets:
 
 ```
 
-### Enable token authentication 
+### Enable token authentication
 
 When you enable authentication for your Pulsar cluster, you need a mechanism for the pod running your function to authenticate with the broker.
 
-The `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface provides support for any authentication mechanism. The `functionAuthProviderClassName` in `function-worker.yml` is used to specify your path to this implementation. 
+The `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface provides support for any authentication mechanism. The `functionAuthProviderClassName` in `function-worker.yml` is used to specify your path to this implementation.
 
 Pulsar includes an implementation of this interface for token authentication, and distributes the certificate authority via the same implementation. The configuration is similar as follows:
 
@@ -338,7 +338,7 @@ This ensures the two different Functions Workers use distinct sets of topics for
 
 ## Configure standalone functions worker
 
-When configuring a standalone functions worker, you need to configure properties that the broker requires, especially if you use TLS. And then Functions Worker can communicate with the broker. 
+When configuring a standalone functions worker, you need to configure properties that the broker requires, especially if you use TLS. And then Functions Worker can communicate with the broker.
 
 You need to configure the following required properties.
 

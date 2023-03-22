@@ -52,8 +52,8 @@ A package is located using a URL. The package URL is written in the following fo
 
 The following are package URL examples:
 
-`sink://public/default/mysql-sink@1.0`   
-`function://my-tenant/my-ns/my-function@0.1`   
+`sink://public/default/mysql-sink@1.0`
+`function://my-tenant/my-ns/my-function@0.1`
 `source://my-tenant/my-ns/mysql-cdc-source@2.3`
 
 The package management system stores the data, versions and metadata of each package. The metadata is shown in the following table.
@@ -77,7 +77,7 @@ You can use the package management with command line tools, REST API and Java cl
 You can upload a package to the package management service in the following ways.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -121,7 +121,7 @@ Upload a package to the package management service asynchronously.
 You can download a package to the package management service in the following ways.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -164,7 +164,7 @@ Download a package to the package management service asynchronously.
 ### List all versions of a package
 You can get a list of all versions of a package in the following ways.
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -207,7 +207,7 @@ List all versions of a package asynchronously.
 ### List all the specified type packages under a namespace
 You can get a list of all the packages with the given type in a namespace in the following ways.
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -251,7 +251,7 @@ List all the packages with the given type in a namespace asynchronously.
 You can get the metadata of a package in the following ways.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -294,7 +294,7 @@ Get the metadata of a package asynchronously.
 ### Update the metadata of a package
 You can update the metadata of a package in the following ways.
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">
@@ -338,7 +338,7 @@ Update a package metadata information asynchronously.
 You can delete a specified package with its package name in the following ways.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"JAVA","value":"JAVA"}]}>
 <TabItem value="pulsar-admin">

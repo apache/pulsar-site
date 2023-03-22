@@ -26,9 +26,9 @@ In order to run Pulsar on DC/OS, you need the following:
 * The [`PulsarGroups.json`](https://github.com/apache/pulsar/blob/master/deployment/dcos/PulsarGroups.json) configuration file from the Pulsar GitHub repo.
 
   ```bash
-  
+
   $ curl -O https://raw.githubusercontent.com/apache/pulsar/master/deployment/dcos/PulsarGroups.json
-  
+
   ```
 
 Each node in the DC/OS-managed Mesos cluster must have at least:
@@ -71,9 +71,9 @@ To monitor the status of the BookKeeper cluster deployment, click on the **bookk
 ![DC/OS bookkeeper status](/assets/dcos_bookkeeper_status.png)
 
 At this point, 3 [bookies](reference-terminology.md#bookie) should be shown as green, which means that the bookies have been deployed successfully and are now running.
- 
+
 ![DC/OS bookkeeper running](/assets/dcos_bookkeeper_run.png)
- 
+
 You can also click into each bookie instance to get more detailed information, such as the bookie running log.
 
 ![DC/OS bookie log](/assets/dcos_bookie_log.png)
@@ -117,7 +117,7 @@ If you click that endpoint, you can see the Prometheus dashboard. The [http://19
 ### Grafana
 
 Click into `grafana` to get the endpoint for Grafana, which is `192.168.65.121:3000` in this example.
- 
+
 ![DC/OS grafana endpoint](/assets/dcos_grafana_endpoint.png)
 
 If you click that endpoint, you can access the Grafana dashboard.
@@ -193,8 +193,8 @@ You can shut down and uninstall the `pulsar` application from DC/OS at any time 
 2. You can use the following command:
 
    ```bash
-   
+
    $ dcos marathon group remove /pulsar
-   
+
    ```
 

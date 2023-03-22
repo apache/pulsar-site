@@ -4,9 +4,9 @@ title: Deploy a function in localrun mode
 sidebar_label: "Deploy a function in localrun mode"
 ---
 
-When you deploy a function in localrun mode, it runs on the machine where you enter the commands – on your laptop, for example, or in an [AWS EC2](https://aws.amazon.com/ec2/) instance. 
+When you deploy a function in localrun mode, it runs on the machine where you enter the commands – on your laptop, for example, or in an [AWS EC2](https://aws.amazon.com/ec2/) instance.
 
-You can use the `localrun` command to run a single instance of a function. To run multiple instances, you can use the `localrun` command multiple times. 
+You can use the `localrun` command to run a single instance of a function. To run multiple instances, you can use the `localrun` command multiple times.
 
 The following is an example of how to use the `localrun` command.
 

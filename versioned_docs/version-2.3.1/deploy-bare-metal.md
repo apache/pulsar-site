@@ -123,12 +123,12 @@ one of the following ways:
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
-  
+
   ```
 
-Once the nar file is downloaded, copy the file to directory `connectors` in the pulsar directory, 
+Once the nar file is downloaded, copy the file to directory `connectors` in the pulsar directory,
 for example, if the connector file `pulsar-io-aerospike-@pulsar:version@.nar` is downloaded:
 
 ```bash
@@ -160,9 +160,9 @@ one of the following ways:
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:offloader_release_url
-  
+
   ```
 
 Once the tarball is downloaded, in the pulsar directory, untar the offloaders package and copy the offloaders as `offloaders`
@@ -360,17 +360,17 @@ webServicePortTls=8443
 >
 
 > ```properties
-> 
+>
 > # Number of bookies to use when creating a ledger
 > managedLedgerDefaultEnsembleSize=1
 >
 > # Number of copies to store for each message
 > managedLedgerDefaultWriteQuorum=1
-> 
+>
 > # Number of guaranteed copies (acks to wait before write is complete)
 > managedLedgerDefaultAckQuorum=1
 >
-> 
+>
 > ```
 
 
@@ -381,17 +381,17 @@ If you want to enable [Pulsar Functions](functions-overview.md), you can follow 
 1. Edit `conf/broker.conf` to enable function worker, by setting `functionsWorkerEnabled` to `true`.
 
    ```conf
-   
+
    functionsWorkerEnabled=true
-   
+
    ```
 
-2. Edit `conf/functions_worker.yml` and set `pulsarFunctionsCluster` to the cluster name that you provided when [initializing the cluster's metadata](#initializing-cluster-metadata). 
+2. Edit `conf/functions_worker.yml` and set `pulsarFunctionsCluster` to the cluster name that you provided when [initializing the cluster's metadata](#initializing-cluster-metadata).
 
    ```conf
-   
+
    pulsarFunctionsCluster: pulsar-cluster-1
-   
+
    ```
 
 ### Starting Brokers

@@ -16,8 +16,8 @@ Apache Pulsar is comprised of multiple components, ZooKeeper, bookies, and broke
 Read the following guidelines before upgrading a Pulsar cluster.
 
 - Back up all your configuration files before upgrading.
-- Read the guide entirely, make a plan, and then execute the plan. When you make an upgrade plan, you need to take your specific requirements and environment into consideration.   
-- Pay attention to the [upgrade sequence of components](#upgrade-sequence). In general, you do not need to upgrade your ZooKeeper or configuration store cluster (the global ZooKeeper cluster). You need to upgrade bookies first, and then upgrade brokers, proxies, and your clients. 
+- Read the guide entirely, make a plan, and then execute the plan. When you make an upgrade plan, you need to take your specific requirements and environment into consideration.
+- Pay attention to the [upgrade sequence of components](#upgrade-sequence). In general, you do not need to upgrade your ZooKeeper or configuration store cluster (the global ZooKeeper cluster). You need to upgrade bookies first, and then upgrade brokers, proxies, and your clients.
 - If `autorecovery` is enabled, you need to disable `autorecovery` in the upgrade process, and re-enable it after completing the process.
 - Read the release notes carefully for each release. Release notes contain features and configuration changes that might impact your upgrade.
 - Upgrade a small subset of nodes of each type to canary test the new version before upgrading all nodes of that type in the cluster. When you have upgraded the canary nodes, run for a while to ensure that they work correctly.
@@ -25,7 +25,7 @@ Read the following guidelines before upgrading a Pulsar cluster.
 
 :::note
 
-Currently, Apache Pulsar is compatible between versions. 
+Currently, Apache Pulsar is compatible between versions.
 
 :::
 
@@ -33,19 +33,19 @@ Currently, Apache Pulsar is compatible between versions.
 
 To upgrade an Apache Pulsar cluster, follow the upgrade sequence.
 
-1. Upgrade ZooKeeper (optional).  
-   - Canary test: test an upgraded version in one or a small set of ZooKeeper nodes.  
+1. Upgrade ZooKeeper (optional).
+   - Canary test: test an upgraded version in one or a small set of ZooKeeper nodes.
    - Rolling upgrade: roll out the upgraded version to all ZooKeeper servers incrementally, one at a time. Monitor your dashboard during the whole rolling upgrade process.
 2. Upgrade bookies.
    - Canary test: test an upgraded version in one or a small set of bookies.
-   - Rolling upgrade:  
+   - Rolling upgrade:
      - a. Disable `autorecovery` with the following command.
 
      ```shell
      bin/bookkeeper shell autorecovery -disable
      ```
 
-     - b. Roll out the upgraded version to all bookies in the cluster after you determine that a version is safe after canary.  
+     - b. Roll out the upgraded version to all bookies in the cluster after you determine that a version is safe after canary.
      - c. After you upgrade all bookies, re-enable `autorecovery` with the following command.
 
      ```shell
@@ -82,7 +82,7 @@ If issues occur during the canary test, you can shut down the problematic ZooKee
 
 ### Upgrade all ZooKeeper servers
 
-After the canary test to upgrade one ZooKeeper in your cluster, you can upgrade all ZooKeeper servers in your cluster. 
+After the canary test to upgrade one ZooKeeper in your cluster, you can upgrade all ZooKeeper servers in your cluster.
 
 You can upgrade all ZooKeeper servers one by one by following the steps in the canary test.
 
@@ -115,13 +115,13 @@ To upgrade a bookie to a new version, complete the following steps:
 
 :::tip
 
-If issues occur during the canary test, you can shut down the problematic bookie node. Other bookies in the cluster replace this problematic bookie node with auto-recovery. 
+If issues occur during the canary test, you can shut down the problematic bookie node. Other bookies in the cluster replace this problematic bookie node with auto-recovery.
 
 :::
 
 ### Upgrade all bookies
 
-After the canary test to upgrade some bookies in your cluster, you can upgrade all bookies in your cluster. 
+After the canary test to upgrade some bookies in your cluster, you can upgrade all bookies in your cluster.
 
 Before upgrading, you have to decide whether to upgrade the whole cluster at once, including downtime and rolling upgrade scenarios.
 
@@ -129,7 +129,7 @@ In a rolling upgrade scenario, upgrade one bookie at a time. In a downtime upgra
 
 While you upgrade in both scenarios, the procedure is the same for each bookie.
 
-1. Stop the bookie. 
+1. Stop the bookie.
 2. Upgrade the software (either new binary or new configuration files).
 2. Start the bookie.
 
@@ -161,7 +161,7 @@ If issues occur during the canary test, you can shut down the problematic broker
 
 ### Upgrade all brokers or proxies
 
-After the canary test to upgrade some brokers or proxies in your cluster, you can upgrade all brokers or proxies in your cluster. 
+After the canary test to upgrade some brokers or proxies in your cluster, you can upgrade all brokers or proxies in your cluster.
 
 Before upgrading, you have to decide whether to upgrade the whole cluster at once, including downtime and rolling upgrade scenarios.
 
@@ -171,7 +171,7 @@ In a downtime upgrade scenario, shut down the entire cluster, upgrade each broke
 
 While you upgrade in both scenarios, the procedure is the same for each broker or proxy.
 
-1. Stop the broker (or proxy). 
+1. Stop the broker (or proxy).
 2. Upgrade the software (either new binary or new configuration files).
 3. Start the broker (or proxy).
 

@@ -31,7 +31,7 @@ Pulsar Functions can be described as
 * specifically designed to use Pulsar as a message bus.
 
 ## Programming model
-Pulsar Functions provide a wide range of functionality, and the core programming model is simple. Functions receive messages from one or more **input [topics](reference-terminology.md#topic)**. Each time a message is received, the function will complete the following tasks.   
+Pulsar Functions provide a wide range of functionality, and the core programming model is simple. Functions receive messages from one or more **input [topics](reference-terminology.md#topic)**. Each time a message is received, the function will complete the following tasks.
 
   * Apply some processing logic to the input and write output to:
     * An **output topic** in Pulsar
@@ -147,7 +147,7 @@ $ bin/pulsar-admin functions create \
 ```
 
 ### Functions, messages and message types
-Pulsar Functions take byte arrays as inputs and spit out byte arrays as output. However in languages that support typed interfaces(Java), you can write typed Functions, and bind messages to types in the following ways. 
+Pulsar Functions take byte arrays as inputs and spit out byte arrays as output. However in languages that support typed interfaces(Java), you can write typed Functions, and bind messages to types in the following ways.
 * [Schema Registry](functions-develop.md#schema-registry)
 * [SerDe](functions-develop.md#serde)
 

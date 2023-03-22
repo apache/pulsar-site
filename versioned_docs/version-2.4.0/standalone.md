@@ -7,7 +7,7 @@ original_id: standalone
 
 For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode includes a Pulsar broker, the necessary ZooKeeper and BookKeeper components running inside of a single Java Virtual Machine (JVM) process.
 
-> #### Pulsar in production? 
+> #### Pulsar in production?
 > If you're looking to run a full production Pulsar installation, see the [Deploying a Pulsar instance](deploy-bare-metal.md) guide.
 
 ## Install Pulsar standalone
@@ -24,16 +24,16 @@ To get started with Pulsar, download a binary tarball release in one of the foll
 
 * download from the Apache mirror (<a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>)
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)  
-  
+* download from the Pulsar [downloads page](pulsar:download_page_url)
+
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
-  
+
 * use [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:binary_release_url
-  
+
   ```
 
 After you download the tarball, untar it and use the `cd` command to navigate to the resulting directory:
@@ -88,12 +88,12 @@ To enable those `builtin` connectors, you can download the connectors tarball re
 * use [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
-  
+
   ```
 
-After you download the nar file, copy the file to the `connectors` directory in the pulsar directory. 
+After you download the nar file, copy the file to the `connectors` directory in the pulsar directory.
 For example, if you download the `pulsar-io-aerospike-@pulsar:version@.nar` connector file, enter the following commands:
 
 ```bash
@@ -136,9 +136,9 @@ To get started with [tiered storage offloaders](concepts-tiered-storage.md), you
 * use [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  
+
   $ wget pulsar:offloader_release_url
-  
+
   ```
 
 After you download the tarball, untar the offloaders package and copy the offloaders as `offloaders`
@@ -190,17 +190,17 @@ If you have started Pulsar successfully, you will see `INFO`-level log messages 
 
 :::tip
 
-* The service is running on your terminal, which is under your direct control. If you need to run other commands, open a new terminal window.  
+* The service is running on your terminal, which is under your direct control. If you need to run other commands, open a new terminal window.
 
 :::
 
 You can also run the service as a background process using the `pulsar-daemon start standalone` command. For more information, see [pulsar-daemon](https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-daemon).
-> 
+>
 > * When you start a local standalone cluster, a `public/default` [namespace](concepts-messaging.md#namespaces) is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 ## Use Pulsar standalone
 
-Pulsar provides a CLI tool called [`pulsar-client`](reference-cli-tools.md#pulsar-client). The pulsar-client tool enables you to consume and produce messages to a Pulsar topic in a running cluster. 
+Pulsar provides a CLI tool called [`pulsar-client`](reference-cli-tools.md#pulsar-client). The pulsar-client tool enables you to consume and produce messages to a Pulsar topic in a running cluster.
 
 ### Consume a message
 

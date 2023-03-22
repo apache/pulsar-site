@@ -79,7 +79,7 @@ Pulsar Functions can be described as
 
 ## Programming model
 
-The core programming model of Pulsar Functions is simple. Functions receive messages from one or more **input [topics](reference-terminology.md#topic)**. Each time a message is received, the function will complete the following tasks.   
+The core programming model of Pulsar Functions is simple. Functions receive messages from one or more **input [topics](reference-terminology.md#topic)**. Each time a message is received, the function will complete the following tasks.
 
   * Apply some processing logic to the input and write output to:
     * An **output topic** in Pulsar
@@ -257,7 +257,7 @@ Each Pulsar Function created using [Pulsar Functions SDK](#the-pulsar-functions-
 
 The benefit of native functions is that they do not have any dependencies beyond what's already available in Java/Python "out of the box." The downside is that they do not provide access to the function [context](#function-context), which is necessary for a variety of functionalities, including [logging](#logging), [user configuration](#user-configuration), and more.
 
-## Pulsar Functions SDK   
+## Pulsar Functions SDK
 To enable a Pulsar Function to access to a [context object](#function-context), you can use **Pulsar Functions SDK**, available for [Java](functions-api.md#functions-for-java), [Python](functions-api.md#functions-for-python), and [Go](functions-api.md#functions-for-go).
 
 ### Java

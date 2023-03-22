@@ -24,7 +24,7 @@ You can use the same Pulsar installation to act as a real-time message bus and a
 
 ## Client configuration changes
 
-To use a Pulsar [topic](reference-terminology.md#topic) as a message queue, you should distribute the receiver load on that topic across several consumers (the optimal number of consumers depends on the load). 
+To use a Pulsar [topic](reference-terminology.md#topic) as a message queue, you should distribute the receiver load on that topic across several consumers (the optimal number of consumers depends on the load).
 
 Each consumer must establish a [shared subscription](concepts-messaging.md#shared) and use the same subscription name as the other consumers (otherwise the subscription is not shared and the consumers can't act as a processing ensemble).
 

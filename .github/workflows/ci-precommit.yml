@@ -21,15 +21,17 @@ on:
     branches: [main]
 
 jobs:
-  license:
-    name: Check license header
+  check:
+    name: Check
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/check-license-header
-        with:
-          config: tools/ci/licenserc.toml
+      - name: Check license header
+        env:
+          IMAGE: ghcr.io/korandoru/hawkeye-native:v1
+          CONFIG: tools/ci/licenserc.toml
+        run: docker run --rm -v $(pwd):/github/workspace ${IMAGE} check --config ${CONFIG}
 
   build-without-push:
     name: Check build site

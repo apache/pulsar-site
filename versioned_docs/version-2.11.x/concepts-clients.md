@@ -39,7 +39,7 @@ Internally, the reader interface is implemented as a consumer using an exclusive
 
 Unlike subscription/consumer, readers are non-durable in nature and do not prevent data in a topic from being deleted, thus it is ***strongly*** advised that [data retention](cookbooks-retention-expiry.md) be configured. If data retention for a topic is not configured for an adequate amount of time, messages that the reader has not yet read might be deleted.  This causes the readers to essentially skip messages. Configuring the data retention for a topic guarantees the reader with a certain duration to read a message.
 
-Please also note that a reader can have a "backlog", but the metric is only used for users to know how behind the reader is. The metric is not considered for any backlog quota calculations. 
+Please also note that a reader can have a "backlog", but the metric is only used for users to know how behind the reader is. The metric is not considered for any backlog quota calculations.
 
 :::
 

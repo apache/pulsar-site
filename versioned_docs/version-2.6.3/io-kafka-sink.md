@@ -16,7 +16,7 @@ The configuration of the Kafka sink connector has the following parameters.
 
 ### Property
 
-| Name | Type| Required | Default | Description 
+| Name | Type| Required | Default | Description
 |------|----------|---------|-------------|-------------|
 |  `bootstrapServers` |String| true | " " (empty string) | A comma-separated list of host and port pairs for establishing the initial connection to the Kafka cluster. |
 |`acks`|String|true|" " (empty string) |The number of acknowledgments that the producer requires the leader to receive before a request completes. <br />This controls the durability of the sent records.
@@ -32,10 +32,10 @@ The configuration of the Kafka sink connector has the following parameters.
 
 Before using the Kafka sink connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "bootstrapServers": "localhost:6667",
       "topic": "test",
@@ -48,12 +48,12 @@ Before using the Kafka sink connector, you need to create a configuration file t
           "security.protocol": "SASL_PLAINTEXT",
           "sasl.mechanism": "GSSAPI",
           "sasl.kerberos.service.name": "kafka",
-          "acks": "all" 
+          "acks": "all"
        }
   }
 
 * YAML
-  
+
   ```
 
 yaml
@@ -68,5 +68,5 @@ yaml
           security.protocol: "SASL_PLAINTEXT"
           sasl.mechanism: "GSSAPI"
           sasl.kerberos.service.name: "kafka"
-          acks: "all"   
+          acks: "all"
   ```

@@ -19,7 +19,7 @@ ZooKeeper and BookKeeper are both open-source [Apache](https://www.apache.org/) 
 Each Pulsar instance relies on two separate ZooKeeper quorums.
 
 * [Local ZooKeeper](#deploy-local-zookeeper) operates at the cluster level and provides cluster-specific configuration management and coordination. Each Pulsar cluster needs to have a dedicated ZooKeeper cluster.
-* [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum. 
+* [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum.
 
 ### Deploy local ZooKeeper
 
@@ -270,7 +270,7 @@ And then you can decommission bookies safely. To decommission bookies, complete 
    or
    `$ bin/bookkeeper shell decommissionbookie -bookieid <target bookieid>`
 
-4. Validate that no ledgers are on the decommissioned bookie.   
+4. Validate that no ledgers are on the decommissioned bookie.
 `$ bin/bookkeeper shell listledgers -bookieid <target bookieid>`
 
 You can run the following command to check if the bookie you have decommissioned is listed in the bookies list:

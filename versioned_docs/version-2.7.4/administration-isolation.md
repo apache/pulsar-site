@@ -19,10 +19,10 @@ To enforce resource isolation, you can use the Pulsar isolation policy, which al
 
 In Pulsar, when namespaces (more specifically, namespace bundles) are assigned dynamically to brokers, the namespace isolation policy limits the set of brokers that can be used for assignment. Before topics are assigned to brokers, you can set the namespace isolation policy with a primary or a secondary regex to select desired brokers.
 
-You can set a namespace isolation policy for a cluster using one of the following methods. 
+You can set a namespace isolation policy for a cluster using one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
 
@@ -70,7 +70,7 @@ A namespace can be isolated into user-defined groups of bookies, which guarantee
 You can set a bookie affinity group using one of the following methods.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Admin CLI"
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java admin API","value":"Java admin API"}]}>
 

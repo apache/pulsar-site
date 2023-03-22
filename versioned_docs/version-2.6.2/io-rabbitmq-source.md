@@ -5,16 +5,16 @@ sidebar_label: "RabbitMQ source connector"
 original_id: io-rabbitmq-source
 ---
 
-The RabbitMQ source connector receives messages from RabbitMQ clusters 
+The RabbitMQ source connector receives messages from RabbitMQ clusters
 and writes messages to Pulsar topics.
 
-## Configuration 
+## Configuration
 
 The configuration of the RabbitMQ source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `connectionName` |String| true | " " (empty string) | The connection name. |
 | `host` | String| true | " " (empty string) | The RabbitMQ host. |
@@ -35,10 +35,10 @@ The configuration of the RabbitMQ source connector has the following properties.
 
 Before using the RabbitMQ source connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
       "host": "localhost",
       "port": "5672",
@@ -55,13 +55,13 @@ Before using the RabbitMQ source connector, you need to create a configuration f
       "prefetchCount": "0",
       "prefetchGlobal": "false"
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       host: "localhost"
       port: 5672
@@ -77,6 +77,6 @@ Before using the RabbitMQ source connector, you need to create a configuration f
       requestedHeartbeat: 60
       prefetchCount: 0
       prefetchGlobal: "false"
-  
+
   ```
 

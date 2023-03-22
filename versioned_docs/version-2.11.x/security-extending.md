@@ -50,7 +50,7 @@ authenticationProviders=
 
 :::tip
 
-Pulsar supports an authentication provider chain that contains multiple authentication providers with the same authentication method name. 
+Pulsar supports an authentication provider chain that contains multiple authentication providers with the same authentication method name.
 
 For example, your Pulsar cluster uses JSON Web Token (JWT) authentication (with an authentication method named `token`) and you want to upgrade it to use OAuth2.0 authentication with the same authentication name. In this case, you can implement your own authentication provider `AuthenticationProviderOAuth2` and configure `authenticationProviders` as follows.
 

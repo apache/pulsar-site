@@ -1877,7 +1877,7 @@ Options
 |`-d`, `--disabled`|Disable automatic schema updates.|false|
 
 ### `get-publish-rate`
-Get the message publish rate for each topic in a namespace, in bytes as well as messages per second 
+Get the message publish rate for each topic in a namespace, in bytes as well as messages per second
 
 Usage
 
@@ -2052,7 +2052,7 @@ Options
 |`--broker`|Broker name to get namespace-isolation policies attached to it||
 
 ## `topics`
-Operations for managing Pulsar topics (both persistent and non-persistent). 
+Operations for managing Pulsar topics (both persistent and non-persistent).
 
 Usage
 
@@ -2060,7 +2060,7 @@ Usage
 pulsar-admin topics subcommand
 ```
 
-From Pulsar 2.7.0, some namespace-level policies are available on topic level. To enable topic-level policy in Pulsar, you need to configure the following parameters in the `broker.conf` file. 
+From Pulsar 2.7.0, some namespace-level policies are available on topic level. To enable topic-level policy in Pulsar, you need to configure the following parameters in the `broker.conf` file.
 
 ```conf
 systemTopicEnabled=true
@@ -2232,7 +2232,7 @@ Options
 |`-p`, `--partitions`|The number of partitions for the topic|0|
 
 ### `create-missed-partitions`
-Try to create partitions for partitioned topic. The partitions of partition topic has to be created, 
+Try to create partitions for partitioned topic. The partitions of partition topic has to be created,
 can be used by repair partitions when topic auto creation is disabled
 
 Usage
@@ -2456,7 +2456,7 @@ Options
 |---|---|---|
 |`-etb`,`--get-earliest-time-in-backlog` | Set to `true` to get the earliest time in backlog | false |
 |`-gpb`,`--get-precise-backlog`| Set to `true` to get precise backlog | false |
-|`-sbs`,` --get-subscription-backlog-size`| Set to `true` to get backlog size for each subscription, locking required | false | 
+|`-sbs`,` --get-subscription-backlog-size`| Set to `true` to get backlog size for each subscription, locking required | false |
 
 
 :::note
@@ -2497,7 +2497,7 @@ Options
 |Flag|Description|Default|
 |---|---|---|
 |`-gpb`,`--get-precise-backlog`| Set to `true` to get precise backlog | false |
-|`-sbs`,` --get-subscription-backlog-size`| Set to `true` to get backlog size for each subscription, locking required | false | 
+|`-sbs`,` --get-subscription-backlog-size`| Set to `true` to get backlog size for each subscription, locking required | false |
 |`--per-partition`|Get per-partition stats|false|
 
 
@@ -2757,7 +2757,7 @@ Usage
 pulsar-admin topics remove-message-ttl tenant/namespace/topic
 ```
 
-Options 
+Options
 
 |Flag|Description|Default|
 |---|---|---|

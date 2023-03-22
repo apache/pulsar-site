@@ -14,7 +14,7 @@ This chapter describes the concept, benefits, use cases, constraints, usage, wor
   values={[{"label":"Automatic cluster-level failover","value":"Automatic cluster-level failover"},{"label":"Controlled cluster-level failover","value":"Controlled cluster-level failover"}]}>
 <TabItem value="Automatic cluster-level failover">
 
-Automatic cluster-level failover supports Pulsar clients switching from a primary cluster to one or several backup clusters automatically and seamlessly when it detects a failover event based on the configured detecting policy set by **users**. 
+Automatic cluster-level failover supports Pulsar clients switching from a primary cluster to one or several backup clusters automatically and seamlessly when it detects a failover event based on the configured detecting policy set by **users**.
 
 ![Automatic cluster-level failover](/assets/cluster-level-failover-1.png)
 
@@ -58,7 +58,7 @@ The cluster-level failover protects your environment in a number of ways, includ
   values={[{"label":"Automatic cluster-level failover","value":"Automatic cluster-level failover"},{"label":"Controlled cluster-level failover","value":"Controlled cluster-level failover"}]}>
 <TabItem value="Automatic cluster-level failover">
 
-Automatic cluster-level failover is triggered when Pulsar clients cannot connect to the primary cluster for a prolonged period of time. This can be caused by any number of reasons including, but not limited to: 
+Automatic cluster-level failover is triggered when Pulsar clients cannot connect to the primary cluster for a prolonged period of time. This can be caused by any number of reasons including, but not limited to:
 
 * Network failure: internet connection is lost.
 
@@ -119,18 +119,18 @@ This chapter explains the working process of cluster-level failover. For more im
 In an automatic failover cluster, the primary cluster and backup cluster are aware of each other's availability. The automatic failover cluster performs the following actions without administrator intervention:
 
 1. The Pulsar client runs a probe task at intervals defined in `checkInterval`.
-   
+
 2. If the probe task finds the failure time of the primary cluster exceeds the time set in the `failoverDelay` parameter, it searches backup clusters for an available healthy cluster.
 
    2a) If there are healthy backup clusters, the Pulsar client switches to a backup cluster in the order defined in `secondary`.
 
    2b) If there is no healthy backup cluster, the Pulsar client does not perform the switchover, and the probe task continues to look for an available backup cluster.
 
-3. The probe task checks whether the primary cluster functions well or not. 
+3. The probe task checks whether the primary cluster functions well or not.
 
    3a) If the primary cluster comes back and the continuous healthy time exceeds the time set in `switchBackDelay`, the Pulsar client switches back to the primary cluster.
 
-   3b) If the primary cluster does not come back, the Pulsar client does not perform the switchover. 
+   3b) If the primary cluster does not come back, the Pulsar client does not perform the switchover.
 
 ![Workflow of automatic failover cluster](/assets/cluster-level-failover-4.png)
 
@@ -145,7 +145,7 @@ In an automatic failover cluster, the primary cluster and backup cluster are awa
 
    2b) If the service URL configuration is not changed, the Pulsar client does not perform the switchover.
 
-3. If the Pulsar client switches to the target cluster, the probe task continues to fetch service URL configuration from the URL provider service at intervals defined in `checkInterval`. 
+3. If the Pulsar client switches to the target cluster, the probe task continues to fetch service URL configuration from the URL provider service at intervals defined in `checkInterval`.
 
    3a) If the service URL configuration is changed, the probe task switches to the target cluster without checking the health status of the target cluster.
 

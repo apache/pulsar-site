@@ -24,7 +24,7 @@ Pulsar Function SDK for Java/Python/Go | Pulsar-specific libraries that provide 
 The language-native function, which adds an exclamation point to all incoming strings and publishes the resulting string to a topic, has no external dependencies. The following example is language-native function.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
@@ -78,7 +78,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 The following example uses Pulsar Functions SDK.
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
@@ -156,7 +156,7 @@ Pulsar has a built-in schema registry and is bundled with popular schema types, 
 SerDe stands for **Ser**ialization and **De**serialization. Pulsar Functions uses SerDe when publishing data to and consuming data from Pulsar topics. How SerDe works by default depends on the language you use for a particular function.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
@@ -186,7 +186,7 @@ SerDe works in the following ways in Java Functions.
 
 In Python, the default SerDe is identity, meaning that the type is serialized as whatever type the producer function returns.
 
-You can specify the SerDe when [creating](functions-deploy.md#cluster-mode) or [running](functions-deploy.md#local-run-mode) functions. 
+You can specify the SerDe when [creating](functions-deploy.md#cluster-mode) or [running](functions-deploy.md#local-run-mode) functions.
 
 ```bash
 
@@ -232,7 +232,7 @@ Currently, the feature is not available in Go.
 Imagine that you're writing Pulsar Functions that are processing tweet objects, you can refer to the following example of `Tweet` class.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
@@ -314,18 +314,18 @@ In order to use this class in Pulsar Functions, you have two options:
 2. You can create your own SerDe class. The following is an example.
 
   ```python
-  
+
   from pulsar import SerDe
-  
+
   class TweetSerDe(SerDe):
-  
+
       def serialize(self, input):
           return bytes("{0}|{1}".format(input.username, input.tweet_content))
-  
+
       def deserialize(self, input_bytes):
           tweet_components = str(input_bytes).split('|')
           return Tweet(tweet_components[0], tweet_componentsp[1])
-  
+
   ```
 
 For complete code, see [here](https://github.com/apache/pulsar/blob/master/pulsar-functions/python-examples/custom_object_function.py).
@@ -358,7 +358,7 @@ Java, Python and Go SDKs provide access to a **context object** that can be used
 * (Java) get Pulsar admin client.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
@@ -600,10 +600,10 @@ $ bin/pulsar-admin functions create \
 ```
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
-<TabItem value="Java"> 
+<TabItem value="Java">
 
 The Java SDK [`Context`](#context) object enables you to access key/value pairs provided to Pulsar Functions via the command line (as JSON). The following example passes a key/value pair.
 
@@ -749,7 +749,7 @@ func contextFunc(ctx context.Context) {
 ### Logger
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
@@ -974,7 +974,7 @@ Each `<AppenderRef>` entry allows you to output the log to a target specified in
 Additivity pertains to whether log messages will be duplicated if multiple Logger entries overlap.
 To disable additivity, specify
 
-```xml 
+```xml
 
 <additivity>false</additivity>
 
@@ -1060,7 +1060,7 @@ func main() {
 
 ```
 
-When you use `logTopic` related functionalities in Go Function, import `github.com/apache/pulsar/pulsar-function-go/logutil`, and you do not have to use the `getLogger()` context object. 
+When you use `logTopic` related functionalities in Go Function, import `github.com/apache/pulsar/pulsar-function-go/logutil`, and you do not have to use the `getLogger()` context object.
 
 Additionally, you can specify the function log level through the broker XML file, as described here: [Customize Function log level](#customize-function-log-level)
 
@@ -1074,7 +1074,7 @@ Additionally, you can specify the function log level through the broker XML file
 Pulsar Functions using the Java SDK has access to the Pulsar admin client, which allows the Pulsar admin client to manage API calls to current Pulsar clusters or external clusters (if `external-pulsars` is provided).
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"}]}>
 <TabItem value="Java">
@@ -1129,17 +1129,17 @@ $ bin/pulsar-admin functions localrun \
 ````
 
 ## Metrics
-Pulsar Functions can publish arbitrary metrics to the metrics interface which can be queried. 
+Pulsar Functions can publish arbitrary metrics to the metrics interface which can be queried.
 
 > If a Pulsar Function uses the language-native interface for Java or Python, that function is not able to publish metrics and stats to Pulsar.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
-You can record metrics using the [`Context`](#context) object on a per-key basis. For example, you can set a metric for the `process-count` key and a different metric for the `elevens-count` key every time the function processes a message. 
+You can record metrics using the [`Context`](#context) object on a per-key basis. For example, you can set a metric for the `process-count` key and a different metric for the `elevens-count` key every time the function processes a message.
 
 ```java
 
@@ -1194,7 +1194,7 @@ Currently, the feature is not available in Go.
 ````
 
 ### Access metrics
-To access metrics created by Pulsar Functions, refer to [Monitoring](deploy-monitoring.md) in Pulsar. 
+To access metrics created by Pulsar Functions, refer to [Monitoring](deploy-monitoring.md) in Pulsar.
 
 ## Security
 
@@ -1210,7 +1210,7 @@ Pulsar Functions can support the following providers:
 At the same time, Pulsar Functions provides two interfaces, **SecretsProvider** and **SecretsProviderConfigurator**, allowing users to customize secret provider.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
@@ -1290,7 +1290,7 @@ State storage is not available in Go.
 ### API
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
@@ -1529,7 +1529,7 @@ If `--watch` is specified, the CLI will watch the value of the provided `state-k
 ### Example
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">

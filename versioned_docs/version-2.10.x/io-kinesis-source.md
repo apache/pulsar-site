@@ -18,7 +18,7 @@ The configuration of the Kinesis source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 `initialPositionInStream`|InitialPositionInStream|false|LATEST|The position where the connector starts from.<br /><br />Below are the available options:<br /><br /><li>`AT_TIMESTAMP`: start from the record at or after the specified timestamp.<br /><br /></li><li>`LATEST`: start after the most recent data record.<br /><br /></li><li>`TRIM_HORIZON`: start from the oldest available data record.</li>
 `startAtTime`|Date|false|" " (empty string)|If set to `AT_TIMESTAMP`, it specifies the point in time to start consumption.
@@ -40,10 +40,10 @@ The configuration of the Kinesis source connector has the following properties.
 
 Before using the Kinesis source connector, you need to create a configuration file through one of the following methods.
 
-* JSON 
+* JSON
 
   ```json
-  
+
   {
      "configs": {
         "awsEndpoint": "https://some.endpoint.aws",
@@ -59,13 +59,13 @@ Before using the Kinesis source connector, you need to create a configuration fi
         "startAtTime": "2019-03-05T19:28:58.000Z"
      }
   }
-  
+
   ```
 
 * YAML
 
   ```yaml
-  
+
   configs:
       awsEndpoint: "https://some.endpoint.aws"
       awsRegion: "us-east-1"
@@ -78,6 +78,6 @@ Before using the Kinesis source connector, you need to create a configuration fi
       receiveQueueSize: 2000
       initialPositionInStream: "TRIM_HORIZON"
       startAtTime: "2019-03-05T19:28:58.000Z"
-  
+
   ```
 

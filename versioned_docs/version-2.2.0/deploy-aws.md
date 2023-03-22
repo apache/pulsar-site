@@ -58,10 +58,10 @@ $ cd pulsar/deployment/terraform-ansible/aws
 >
 
 > ```shell
-> 
+>
 > private_key_file=~/.ssh/pulsar_aws
 >
-> 
+>
 > ```
 
 >
@@ -69,10 +69,10 @@ $ cd pulsar/deployment/terraform-ansible/aws
 >
 
 > ```shell
-> 
+>
 > public_key_path=~/.ssh/pulsar_aws.pub
 >
-> 
+>
 > ```
 
 

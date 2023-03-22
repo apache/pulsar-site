@@ -142,7 +142,7 @@ tlsTrustCertsFilePath=/path/to/ca.cert.pem
 ```
 
 > A full list of parameters available in the `conf/broker.conf` file,
-> as well as the default values for those parameters, can be found in [Broker Configuration](reference-configuration.md#broker) 
+> as well as the default values for those parameters, can be found in [Broker Configuration](reference-configuration.md#broker)
 
 ### TLS Protocol Version and Cipher
 

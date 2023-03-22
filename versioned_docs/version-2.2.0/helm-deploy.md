@@ -60,7 +60,7 @@ volumes:
 
 ```
 
-If you would like to use local persistent volumes as the persistent storage for your Helm release, you can install [local-storage-provisioner](#install-local-storage-provisioner) and include the following option in your Helm install command. 
+If you would like to use local persistent volumes as the persistent storage for your Helm release, you can install [local-storage-provisioner](#install-local-storage-provisioner) and include the following option in your Helm install command.
 
 ```bash
 
@@ -79,7 +79,7 @@ This chart is designed for production use, To use this chart in a development en
 
 ```
 
-### Affinity 
+### Affinity
 
 By default `anti-affinity` is turned on to ensure pods of same component can run on different nodes.
 

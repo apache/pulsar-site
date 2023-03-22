@@ -39,7 +39,7 @@ public interface SchemaStorage {
 
 > For a full-fledged example schema storage implementation, see the [`BookKeeperSchemaStorage`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/service/schema/BookkeeperSchemaStorage.java) class.
 
-## SchemaStorageFactory interface 
+## SchemaStorageFactory interface
 
 ```java
 

@@ -220,7 +220,7 @@ It shows current statistics of a given non-partitioned topic.
 
   -   **publishers**: The list of all local publishers into the topic. There can be zero or thousands
 
-      -   **msgRateIn**: Total rate of messages published by this publisher in messages per second 
+      -   **msgRateIn**: Total rate of messages published by this publisher in messages per second
 
       -   **msgThroughputIn**: Total throughput of the messages published by this publisher in bytes per second
 
@@ -247,13 +247,13 @@ It shows current statistics of a given non-partitioned topic.
           -   **type**: This subscription type
 
           -   **msgRateExpired**: The rate at which messages were discarded instead of dispatched from this subscription due to TTL
-          
+
           -   **lastExpireTimestamp**: The last message expire execution timestamp
-          
-          -   **lastConsumedFlowTimestamp**: The last flow command received timestamp 
-          
+
+          -   **lastConsumedFlowTimestamp**: The last flow command received timestamp
+
           -   **lastConsumedTimestamp**: The latest timestamp of all the consumed timestamp of the consumers
-          
+
           -   **lastAckedTimestamp**: The latest timestamp of all the acked timestamp of the consumers
 
           -   **consumers**: The list of connected consumers for this subscription
@@ -269,9 +269,9 @@ It shows current statistics of a given non-partitioned topic.
                 -   **unackedMessages**: Number of unacknowledged messages for the consumer
 
                 -   **blockedConsumerOnUnackedMsgs**: Flag to verify if the consumer is blocked due to reaching threshold of unacked messages
-                
+
                 -   **lastConsumedTimestamp**: The timestamp of the consumer last consume a message
-          
+
                 -   **lastAckedTimestamp**: The timestamp of the consumer last ack a message
 
   -   **replication**: This section gives the stats for cross-colo replication of this topic

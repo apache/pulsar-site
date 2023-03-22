@@ -8,7 +8,7 @@ In cluster mode, you can specify the **parallelism** (the number of instances to
 
 **Example1**
 
-Specify the `--parallelism` flag of the `create` command when deploying a function. 
+Specify the `--parallelism` flag of the `create` command when deploying a function.
 
 ```bash
 bin/pulsar-admin functions create \

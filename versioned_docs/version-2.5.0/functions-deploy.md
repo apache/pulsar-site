@@ -76,7 +76,7 @@ $ bin/pulsar-admin functions localrun \
 
 ## Cluster mode
 
-When you run a Pulsar Function in **cluster** mode, the function code is uploaded to a Pulsar broker and runs *alongside the broker* rather than in your [local environment](#local-run-mode). You can run a function in cluster mode using the [`create`](reference-pulsar-admin.md#create-1) command. 
+When you run a Pulsar Function in **cluster** mode, the function code is uploaded to a Pulsar broker and runs *alongside the broker* rather than in your [local environment](#local-run-mode). You can run a function in cluster mode using the [`create`](reference-pulsar-admin.md#create-1) command.
 
 ```bash
 
@@ -88,7 +88,7 @@ $ bin/pulsar-admin functions create \
 
 ```
 
-### Update functions in cluster mode 
+### Update functions in cluster mode
 
 You can use the [`update`](reference-pulsar-admin.md#update-1) command to update a Pulsar Function running in cluster mode. The following command updates the function created in the [cluster mode](#cluster-mode) section.
 
@@ -104,9 +104,9 @@ $ bin/pulsar-admin functions update \
 
 ### Parallelism
 
-Pulsar Functions run as processes or threads, which are called **instances**. When you run a Pulsar Function, it runs as a single instance by default. With one localrun command, you can only run a single instance of a function. If you want to run multiple instances, you can use localrun command multiple times. 
+Pulsar Functions run as processes or threads, which are called **instances**. When you run a Pulsar Function, it runs as a single instance by default. With one localrun command, you can only run a single instance of a function. If you want to run multiple instances, you can use localrun command multiple times.
 
-When you create a function, you can specify the *parallelism* of a function (the number of instances to run). You can set the parallelism factor using the `--parallelism` flag of the [`create`](reference-pulsar-admin.md#functions-create) command. 
+When you create a function, you can specify the *parallelism* of a function (the number of instances to run). You can set the parallelism factor using the `--parallelism` flag of the [`create`](reference-pulsar-admin.md#functions-create) command.
 
 ```bash
 

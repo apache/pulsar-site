@@ -20,7 +20,7 @@ For the latest and complete information about command-line tools, including comm
 
 :::
 
-All Pulsar command-line tools can be run from the `bin` directory of your [installed Pulsar package](getting-started-standalone.md). 
+All Pulsar command-line tools can be run from the `bin` directory of your [installed Pulsar package](getting-started-standalone.md).
 
 You can get help for any CLI tool, command, or subcommand using the `--help` flag, or `-h` for short. Here's an example:
 

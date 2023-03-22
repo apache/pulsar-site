@@ -8,7 +8,7 @@ sidebar_label: "Load balance"
 
 Pulsar is an horizontally scalable messaging system, so the traffic in a logical cluster must be balanced across all the available Pulsar brokers as evenly as possible, which is a core requirement.
 
-You can use multiple settings and tools to control the traffic distribution which require a bit of context to understand how the traffic is managed in Pulsar. Though, in most cases, the core requirement mentioned above is true out of the box and you should not worry about it. 
+You can use multiple settings and tools to control the traffic distribution which require a bit of context to understand how the traffic is managed in Pulsar. Though, in most cases, the core requirement mentioned above is true out of the box and you should not worry about it.
 
 ## Pulsar load manager architecture
 
@@ -18,7 +18,7 @@ The following part introduces the basic architecture of the Pulsar load manager.
 
 Topics are dynamically assigned to brokers based on the load conditions of all brokers in the cluster.
 
-When a client starts using new topics that are not assigned to any broker, a process is triggered to choose the best suited broker to acquire ownership of these topics according to the load conditions. 
+When a client starts using new topics that are not assigned to any broker, a process is triggered to choose the best suited broker to acquire ownership of these topics according to the load conditions.
 
 In case of partitioned topics, different partitions are assigned to different brokers. Here "topic" means either a non-partitioned topic or one partition of a topic.
 
@@ -28,7 +28,7 @@ The stateless nature of brokers makes the dynamic assignment possible, so you ca
 
 #### Assignment granularity
 
-The assignment of topics or partitions to brokers is not done at the topics or partitions level, but done at the Bundle level (a higher level). The reason is to amortize the amount of information that you need to keep track. Based on CPU, memory, traffic load and other indexes, topics are assigned to a particular broker dynamically. 
+The assignment of topics or partitions to brokers is not done at the topics or partitions level, but done at the Bundle level (a higher level). The reason is to amortize the amount of information that you need to keep track. Based on CPU, memory, traffic load and other indexes, topics are assigned to a particular broker dynamically.
 
 Instead of individual topic or partition assignment, each broker takes ownership of a subset of the topics for a namespace. This subset is called a "*bundle*" and effectively this subset is a sharding mechanism.
 
@@ -90,11 +90,11 @@ pulsar-admin namespaces unload tenant/namespace
 
 ```
 
-### Split namespace bundles 
+### Split namespace bundles
 
 Since the load for the topics in a bundle might change over time and predicting the load might be hard, bundle split is designed to deal with these issues. The broker splits a bundle into two and the new smaller bundles can be reassigned to different brokers.
 
-The splitting is based on some tunable thresholds. Any existing bundle that exceeds any of the threshold is a candidate to be split. By default the newly split bundles are also immediately offloaded to other brokers, to facilitate the traffic distribution. 
+The splitting is based on some tunable thresholds. Any existing bundle that exceeds any of the threshold is a candidate to be split. By default the newly split bundles are also immediately offloaded to other brokers, to facilitate the traffic distribution.
 
 You can split namespace bundles in two ways, by setting `supportedNamespaceBundleSplitAlgorithms` to `range_equally_divide` or `topic_count_equally_divide` in `broker.conf` file. The former splits the bundle into two parts with the same hash range size; the latter splits the bundle into two parts with the same number of topics. You can also configure other parameters for namespace bundles.
 
@@ -157,8 +157,8 @@ loadBalancerSheddingGracePeriodMinutes=30
 
 Pulsar supports the following types of shedding strategies. From Pulsar 2.10, the **default** shedding strategy is `ThresholdShedder`.
 
-> **Note**<br /> 
-> You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md/#dynamic-broker-configuration). 
+> **Note**<br />
+> You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md/#dynamic-broker-configuration).
 
 ##### ThresholdShedder
 This strategy tends to shed the bundles if any broker's usage is above the configured threshold. It does this by first computing the average resource usage per broker for the whole cluster. The resource usage for each broker is calculated using the following method: LocalBrokerData#getMaxResourceUsageWithWeight. The weights for each resource are configurable. Historical observations are included in the running average based on the broker's setting for loadBalancerHistoryResourcePercentage. Once the average resource usage is calculated, a broker's current/historical usage is compared to the average broker usage. If a broker's usage is greater than the average usage per broker plus the loadBalancerBrokerThresholdShedderPercentage, this load shedder proposes removing enough bundles to bring the unloaded broker 5% below the current average broker usage. Note that recently unloaded bundles are not unloaded again. Configure broker with below value to use this strategy.

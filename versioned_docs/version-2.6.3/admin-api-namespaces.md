@@ -514,7 +514,7 @@ admin.namespaces().getNamespaceMessageTTL(namespace)
 Remove a message TTL of the configured namespace.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
@@ -729,7 +729,7 @@ admin.namespaces().getRetention(namespace)
 
 #### set dispatch throttling
 
-It sets message dispatch rate for all the topics under a given namespace. 
+It sets message dispatch rate for all the topics under a given namespace.
 Dispatch rate can be restricted by number of message per X seconds (`msg-dispatch-rate`) or by number of message-bytes per X second (`byte-dispatch-rate`).
 dispatch rate is in second and it can be configured with `dispatch-rate-period`. Default value of `msg-dispatch-rate` and `byte-dispatch-rate` is -1 which
 disables the throttling.
@@ -738,7 +738,7 @@ disables the throttling.
 > - If neither `clusterDispatchRate` nor `topicDispatchRate` is configured, dispatch throttling is disabled.
 > >
 > - If `topicDispatchRate` is not configured, `clusterDispatchRate` takes effect.
-> > 
+> >
 > - If `topicDispatchRate` is configured, `topicDispatchRate` takes effect.
 
 ###### CLI

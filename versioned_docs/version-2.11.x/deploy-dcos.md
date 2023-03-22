@@ -65,9 +65,9 @@ To monitor the status of the BookKeeper cluster deployment, click the **bookkeep
 ![DC/OS bookkeeper status](/assets/dcos_bookkeeper_status.png)
 
 At this point, the status of the 3 [bookies](reference-terminology.md#bookie) is green, which means that the bookies have been deployed successfully and are running.
- 
+
 ![DC/OS bookkeeper running](/assets/dcos_bookkeeper_run.png)
- 
+
 You can also click each bookie instance to get more detailed information, such as the bookie running log.
 
 ![DC/OS bookie log](/assets/dcos_bookie_log.png)
@@ -111,7 +111,7 @@ If you click that endpoint, you can see the Prometheus dashboard. All the bookie
 ### Grafana
 
 Click `grafana` to get the endpoint for Grafana, which is `192.168.65.121:3000` in this example.
- 
+
 ![DC/OS grafana endpoint](/assets/dcos_grafana_endpoint.png)
 
 If you click that endpoint, you can access the Grafana dashboard.

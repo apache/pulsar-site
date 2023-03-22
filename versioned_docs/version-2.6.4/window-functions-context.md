@@ -15,25 +15,25 @@ Java SDK provides access to a **window context object** that can be used by a wi
   * ID of the Pulsar function instance running the window function.
   * Number of instances that invoke the window function.
   * Built-in type or custom class name of the output schema.
-  
+
 - [Logger](#logger)
-  
+
   * Logger object used by the window function, which can be used to create window function log messages.
 
 - [User config](#user-config)
-  
+
   * Access to arbitrary user configuration values.
 
 - [Routing](#routing)
-  
+
   * Routing is supported in Pulsar window functions. Pulsar window functions send messages to arbitrary topics as per the `publish` interface.
 
 - [Metrics](#metrics)
-  
+
   * Interface for recording metrics.
 
 - [State storage](#state-storage)
-  
+
   * Interface for storing and retrieving state in [state storage](#state-storage).
 
 ## Spec
@@ -277,7 +277,7 @@ public class LoggingWindowFunction implements WindowFunction<String, Void> {
 
 ```
 
-If you need your function to produce logs, specify a log topic when creating or running the function. 
+If you need your function to produce logs, specify a log topic when creating or running the function.
 
 ```bash
 
@@ -293,7 +293,7 @@ You can access all logs produced by `LoggingFunction` via the `persistent://publ
 
 ## Metrics
 
-Pulsar window functions can publish arbitrary metrics to the metrics interface which can be queried. 
+Pulsar window functions can publish arbitrary metrics to the metrics interface which can be queried.
 
 :::note
 
@@ -301,9 +301,9 @@ If a Pulsar window function uses the language-native interface for Java, that fu
 
 :::
 
-You can record metrics using the context object on a per-key basis. 
+You can record metrics using the context object on a per-key basis.
 
-This example sets a metric for the `process-count` key and a different metric for the `elevens-count` key every time the function processes a message in a Java function. 
+This example sets a metric for the `process-count` key and a different metric for the `elevens-count` key every time the function processes a message in a Java function.
 
 ```java
 
@@ -335,7 +335,7 @@ public class UserMetricWindowFunction implements WindowFunction<String, Void> {
 
 ## User config
 
-When you run or update Pulsar Functions that are created using SDK, you can pass arbitrary key/value pairs to them with the `--user-config` flag. Key/value pairs **must** be specified as JSON. 
+When you run or update Pulsar Functions that are created using SDK, you can pass arbitrary key/value pairs to them with the `--user-config` flag. Key/value pairs **must** be specified as JSON.
 
 This example passes a user configured key/value to a function.
 
@@ -400,7 +400,7 @@ The `getUserConfigValueOrDefault` API gets a user-defined key/value or a default
 
 This example demonstrates how to access key/value pairs provided to Pulsar window functions.
 
-Java SDK context object enables you to access key/value pairs provided to Pulsar window functions via the command line (as JSON). 
+Java SDK context object enables you to access key/value pairs provided to Pulsar window functions via the command line (as JSON).
 
 :::tip
 
@@ -420,7 +420,7 @@ bin/pulsar-admin functions create \
 
 This example accesses values in a Java window function.
 
-The `UserConfigFunction` function logs the string `"The word of the day is verdure"` every time the function is invoked (which means every time a message arrives). The user config of `word-of-the-day` is changed **only** when the function is updated with a new config value via 
+The `UserConfigFunction` function logs the string `"The word of the day is verdure"` every time the function is invoked (which means every time a message arrives). The user config of `word-of-the-day` is changed **only** when the function is updated with a new config value via
 multiple ways, such as the command line tool or REST API.
 
 ```java
@@ -496,7 +496,7 @@ Currently, Pulsar window functions expose Java API to access, update, and manage
 |`getCounter`|Gets the counter value for the key.
 |`putState`|Updates the state value for the key.
 
-You can use the following APIs to access, update, and manage states in Java window functions. 
+You can use the following APIs to access, update, and manage states in Java window functions.
 
 #### incrCounter
 

@@ -5,7 +5,7 @@ sidebar_label: "NSQ source connector"
 original_id: io-nsq-source
 ---
 
-The NSQ source connector receives messages from NSQ topics 
+The NSQ source connector receives messages from NSQ topics
 and writes messages to Pulsar topics.
 
 ## Configuration
@@ -14,7 +14,7 @@ The configuration of the NSQ source connector has the following properties.
 
 ### Property
 
-| Name | Type|Required | Default | Description 
+| Name | Type|Required | Default | Description
 |------|----------|----------|---------|-------------|
 | `lookupds` |String| true | " " (empty string) | A comma-separated list of nsqlookupds to connect to. |
 | `topic` | String|true | " " (empty string) | The NSQ topic to transport. |

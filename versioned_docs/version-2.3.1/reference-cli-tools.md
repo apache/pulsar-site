@@ -19,10 +19,10 @@ All Pulsar command-line tools can be run from the `bin` directory of your [insta
 > You can get help for any CLI tool, command, or subcommand using the `--help` flag, or `-h` for short. Here's an example:
 
 > ```shell
-> 
+>
 > $ bin/pulsar broker --help
 >
-> 
+>
 > ```
 
 

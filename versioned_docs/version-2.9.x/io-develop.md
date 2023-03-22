@@ -12,11 +12,11 @@ import TabItem from '@theme/TabItem';
 
 
 This guide describes how to develop Pulsar connectors to move data
-between Pulsar and other systems. 
+between Pulsar and other systems.
 
-Pulsar connectors are special [Pulsar Functions](functions-overview.md), so creating a Pulsar connector is similar to creating a Pulsar function. 
+Pulsar connectors are special [Pulsar Functions](functions-overview.md), so creating a Pulsar connector is similar to creating a Pulsar function.
 
-Pulsar connectors come in two types: 
+Pulsar connectors come in two types:
 
 | Type | Description | Example
 |---|---|---
@@ -32,10 +32,10 @@ You can develop Pulsar source connectors and sink connectors.
 Developing a source connector is to implement the {@inject: github:Source:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java}
 interface, which means you need to implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method and the {@inject: github:read:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method.
 
-1. Implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method. 
+1. Implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method.
 
    ```java
-   
+
    /**
    * Open connector with configuration
    *
@@ -44,22 +44,22 @@ interface, which means you need to implement the {@inject: github:open:/pulsar-i
    * @throws Exception IO type exceptions when opening a connector
    */
    void open(final Map<String, Object> config, SourceContext sourceContext) throws Exception;
-   
+
    ```
 
-   This method is called when the source connector is initialized. 
+   This method is called when the source connector is initialized.
 
-   In this method, you can retrieve all connector specific settings through the passed-in `config` parameter and initialize all necessary resources. 
-   
+   In this method, you can retrieve all connector specific settings through the passed-in `config` parameter and initialize all necessary resources.
+
    For example, a Kafka connector can create a Kafka client in this `open` method.
 
-   Besides, Pulsar runtime also provides a `SourceContext` for the 
+   Besides, Pulsar runtime also provides a `SourceContext` for the
    connector to access runtime resources for tasks like collecting metrics. The implementation can save the `SourceContext` for future use.
 
 2. Implement the {@inject: github:read:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method.
 
    ```java
-   
+
        /**
        * Reads the next message from source.
        * If source does not have any new messages, this call should block.
@@ -67,12 +67,12 @@ interface, which means you need to implement the {@inject: github:open:/pulsar-i
        * @throws Exception
        */
        Record<T> read() throws Exception;
-   
+
    ```
 
-   If nothing to return, the implementation should be blocking rather than returning `null`. 
+   If nothing to return, the implementation should be blocking rather than returning `null`.
 
-   The returned {@inject: github:Record:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should encapsulate the following information, which is needed by Pulsar IO runtime. 
+   The returned {@inject: github:Record:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should encapsulate the following information, which is needed by Pulsar IO runtime.
 
    * {@inject: github:Record:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should provide the following variables:
 
@@ -114,14 +114,14 @@ If you want to implement a source that works with any schema, you can go with `b
 
 public class MySource implements Source<byte[]> {
     public Record<byte[]> read() {
-        
+
         Schema wantedSchema = ....
-        Record<byte[]> myRecord = new MyRecordImplementation(); 
+        Record<byte[]> myRecord = new MyRecordImplementation();
         ....
     }
     class MyRecordImplementation implements Record<byte[]> {
          public byte[] getValue() {
-            return ....encoded byte[]...that represents the value 
+            return ....encoded byte[]...that represents the value
          }
          public Schema<byte[]> getSchema() {
              return Schema.AUTO_PRODUCE_BYTES(wantedSchema);
@@ -153,7 +153,7 @@ Developing a sink connector **is similar to** developing a source connector, tha
 1. Implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method.
 
    ```java
-   
+
        /**
        * Open connector with configuration
        *
@@ -162,27 +162,27 @@ Developing a sink connector **is similar to** developing a source connector, tha
        * @throws Exception IO type exceptions when opening a connector
        */
        void open(final Map<String, Object> config, SinkContext sinkContext) throws Exception;
-   
+
    ```
 
 2. Implement the {@inject: github:write:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method.
 
    ```java
-   
+
        /**
        * Write a message to Sink
        * @param record record to write to sink
        * @throws Exception
        */
        void write(Record<T> record) throws Exception;
-   
+
    ```
 
    During the implementation, you can decide how to write the `Value` and
    the `Key` to the actual source, and leverage all the provided information such as
-   `PartitionId` and `RecordSequence` to achieve different processing guarantees. 
+   `PartitionId` and `RecordSequence` to achieve different processing guarantees.
 
-   You also need to ack records (if messages are sent successfully) or fail records (if messages fail to send). 
+   You also need to ack records (if messages are sent successfully) or fail records (if messages fail to send).
 
 ## Handling Schema information
 
@@ -234,7 +234,7 @@ public class MySink implements Sink<GenericObject> {
             KeyValue keyValue = (KeyValue) nativeObject;
             Object key = keyValue.getKey();
             Object value = keyValue.getValue();
-        
+
             KeyValueSchema keyValueSchema = (KeyValueSchema) schema;
             Schema keySchema = keyValueSchema.getKeySchema();
             Schema valueSchema = keyValueSchema.getValueSchema();
@@ -248,11 +248,11 @@ public class MySink implements Sink<GenericObject> {
 ## Test
 
 Testing connectors can be challenging because Pulsar IO connectors interact with two systems
-that may be difficult to mock—Pulsar and the system to which the connector is connecting. 
+that may be difficult to mock—Pulsar and the system to which the connector is connecting.
 
 It is
 recommended writing special tests to test the connector functionalities as below
-while mocking the external service. 
+while mocking the external service.
 
 ### Unit test
 
@@ -261,9 +261,9 @@ You can create unit tests for your connector.
 ### Integration test
 
 Once you have written sufficient unit tests, you can add
-separate integration tests to verify end-to-end functionality. 
+separate integration tests to verify end-to-end functionality.
 
-Pulsar uses [testcontainers](https://www.testcontainers.org/) **for all integration tests**. 
+Pulsar uses [testcontainers](https://www.testcontainers.org/) **for all integration tests**.
 
 :::tip
 
@@ -274,7 +274,7 @@ For more information about **how to create integration tests for Pulsar connecto
 ## Package
 
 Once you've developed and tested your connector, you need to package it so that it can be submitted
-to a [Pulsar Functions](functions-overview.md) cluster. 
+to a [Pulsar Functions](functions-overview.md) cluster.
 
 There are two methods to
 work with Pulsar Functions' runtime, that is, [NAR](#nar) and [uber JAR](#uber-jar).
@@ -286,28 +286,28 @@ If you plan to package and distribute your connector for others to use, you are 
 :::
 
 license and copyright your own code properly. Remember to add the license and copyright to
-all libraries your code uses and to your distribution. 
+all libraries your code uses and to your distribution.
 >
-> If you use the [NAR](#nar) method, the NAR plugin 
+> If you use the [NAR](#nar) method, the NAR plugin
 automatically creates a `DEPENDENCIES` file in the generated NAR package, including the proper
 licensing and copyrights of all libraries of your connector.
 
-### NAR 
+### NAR
 
 **NAR** stands for NiFi Archive, which is a custom packaging mechanism used by Apache NiFi, to provide
-a bit of Java ClassLoader isolation. 
+a bit of Java ClassLoader isolation.
 
 :::tip
 
-For more information about **how NAR works**, see [here](https://medium.com/hashmapinc/nifi-nar-files-explained-14113f7796fd). 
+For more information about **how NAR works**, see [here](https://medium.com/hashmapinc/nifi-nar-files-explained-14113f7796fd).
 
 :::
 
-Pulsar uses the same mechanism for packaging **all** [built-in connectors](io-connectors.md). 
+Pulsar uses the same mechanism for packaging **all** [built-in connectors](io-connectors.md).
 
 The easiest approach to package a Pulsar connector is to create a NAR package using [nifi-nar-maven-plugin](https://mvnrepository.com/artifact/org.apache.nifi/nifi-nar-maven-plugin).
 
-Include this [nifi-nar-maven-plugin](https://mvnrepository.com/artifact/org.apache.nifi/nifi-nar-maven-plugin) in your maven project for your connector as below. 
+Include this [nifi-nar-maven-plugin](https://mvnrepository.com/artifact/org.apache.nifi/nifi-nar-maven-plugin) in your maven project for your connector as below.
 
 ```xml
 
@@ -387,7 +387,7 @@ Pulsar connectors enable you to move data in and out of Pulsar easily. It is imp
 Here is an example of how to customize metrics for a Java connector.
 
 ````mdx-code-block
-<Tabs 
+<Tabs
   defaultValue="Java"
   values={[{"label":"Java","value":"Java"}]}>
 <TabItem value="Java">

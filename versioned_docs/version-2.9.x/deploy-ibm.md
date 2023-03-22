@@ -51,13 +51,13 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![VM Creation Image 8](/assets/IBMCloud/VM8.png)
 
-11. Check created VM in "Navigation Menu" -> "Resource list" Devices 
+11. Check created VM in "Navigation Menu" -> "Resource list" Devices
 
 ![VM Creation Image 9](/assets/IBMCloud/VM9.png)
 
 ![VM Creation Image 10](/assets/IBMCloud/VM10.png)
 
-12. Check the detail of VM in overview 
+12. Check the detail of VM in overview
 
 ![VM Creation Image 11](/assets/IBMCloud/VM11.png)
 
@@ -65,7 +65,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![VM Creation Image 12](/assets/IBMCloud/VM12.png)
 
-## 2. Create Kubernetes Cluster on IBM 
+## 2. Create Kubernetes Cluster on IBM
 
 1. Search for the Kubernetes services
 
@@ -94,7 +94,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 6. Set cluster name as you want.
 
 ![K8S Creation Image 8](/assets/IBMCloud/k8s8.png)
-7. Leave rest of the things as we are selecting as default. You can disable below options. Click on create and wait for provisioning of the cluster. 
+7. Leave rest of the things as we are selecting as default. You can disable below options. Click on create and wait for provisioning of the cluster.
 
 ![K8S Creation Image 9](/assets/IBMCloud/k8s9.png)
 
@@ -102,7 +102,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ![K8S Creation Image 10](/assets/IBMCloud/k8s10.png)
 
-9. Check the created cluster list by clicking on the clusters options 
+9. Check the created cluster list by clicking on the clusters options
 
 ![K8S Creation Image 11](/assets/IBMCloud/k8s11.png)
 
@@ -112,7 +112,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 
 ## 3. Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.
 
-**Prerequisites** 
+**Prerequisites**
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli) and connect to Kubernetes master node.
 
 2. Install [IBM Cloud CLI Plugins](https://cloud.ibm.com/docs/containers?topic=containers-cs_cli_install) to connect to IKS (IBM Kubernetes services). This is a required step.
@@ -120,7 +120,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 3. Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) 1.23 or later versions.
 4. Install [Helm](https://helm.sh/docs/intro/install/).
 
-:::note 
+:::note
 
 Please install all the above things before running the below commands
 
@@ -128,7 +128,7 @@ Please install all the above things before running the below commands
 
 1. First take SSH of your VM with your private key. Run all the below commands one by one.
 ```bash
-   $ ibmcloud login 
+   $ ibmcloud login
    $ ibmcloud plugin list
 ```
 
@@ -142,7 +142,7 @@ Output
     $ibmcloud ks cluster config --cluster ccql163t064kpvg5gg10
 ```
 
-:::note 
+:::note
 
 This step is showing during creation of Kubernetes Cluster.
 
@@ -178,7 +178,7 @@ Output
 2. Clone the Pulsar Helm chart repository, go inside the pulsar-helm-chart directory
 
 ```bash
-git clone https://github.com/apache/pulsar-helm-chart   
+git clone https://github.com/apache/pulsar-helm-chart
 cd pulsar-helm-chart
 ```
 
@@ -191,7 +191,7 @@ When running the script, you can use `-n` to specify the Kubernetes namespace wh
 :::
 
 ```bash
- ./scripts/pulsar/prepare_helm_release.sh -n default -k asia -c 
+ ./scripts/pulsar/prepare_helm_release.sh -n default -k asia -c
 ```
 
 Output
@@ -214,7 +214,7 @@ Output
 
 5. Check the status of all pods.
 
-```bash 
+```bash
 kubectl get pods
 ```
 If all pods start up successfully, you can see that `STATUS` is changed to `Running` or `Completed`.
@@ -227,13 +227,13 @@ Output
 
 ```bash
  kubectl get services
-``` 
+```
 
 Output
 
 ![Output of Command Services](/assets/IBMCloud/Services.png)
 
-The output shows both `services URL` and `broker URL`. 
+The output shows both `services URL` and `broker URL`.
 Proxy external IPs are the ports changed just now:
 - Service URL port is 80.
 - Broker URL port is 6650. This is default.

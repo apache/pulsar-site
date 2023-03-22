@@ -107,10 +107,10 @@ the Authorization plugin is designed only for use on the Broker however the Prox
 To provide a custom provider, you need to implement the `org.apache.pulsar.broker.authorization.AuthorizationProvider` interface, put this class in the Pulsar broker classpath and configure the class in `conf/broker.conf`:
 
  ```properties
- 
+
  # Authorization provider fully qualified class-name
  authorizationProvider=org.apache.pulsar.broker.authorization.PulsarAuthorizationProvider
- 
+
  ```
 
 ```java

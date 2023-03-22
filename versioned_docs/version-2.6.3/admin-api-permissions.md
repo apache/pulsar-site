@@ -36,7 +36,7 @@ $ pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
 ```
 
-Then, roles `my.role.1`, `my.role.2`, `my.role.foo`, `my.role.bar`, etc. can produce and consume.  
+Then, roles `my.role.1`, `my.role.2`, `my.role.foo`, `my.role.bar`, etc. can produce and consume.
 
 ```shell
 
@@ -60,7 +60,7 @@ $ pulsar-admin namespaces grant-permission test-tenant/ns1 \
 
 ```
 
-In this case, only the role `my.*.role` has permissions.  
+In this case, only the role `my.*.role` has permissions.
 Roles `my.1.role`, `my.2.role`, `my.foo.role`, `my.bar.role`, etc. **cannot** produce and consume.
 
 ### REST API
