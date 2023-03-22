@@ -968,6 +968,17 @@ After this delay, the service-unit state channel tombstones any service units (e
 
 **Category**: Load Balancer
 
+### loadBalancerSheddingBundlesWithPoliciesEnabled
+Option to automatically unload namespace bundles with affinity(isolation) or anti-affinity group policies.Such bundles are not ideal targets to auto-unload as destination brokers are limited.(only used in load balancer extension logics)
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingEnabled
 Enable/disable automatic bundle unloading for load-shedding
 
