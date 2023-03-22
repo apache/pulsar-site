@@ -40,7 +40,7 @@ const generateData = (columns, count = 200, prefix = "row-") =>
   });
 
 const columns = generateColumns(10);
-const data = generateData(columns, 200);
+const data = generateData(columns, 10);
 
 const fixedColumns = columns.map((column, columnIndex) => {
   let frozen;
@@ -51,6 +51,10 @@ const fixedColumns = columns.map((column, columnIndex) => {
 const rowSpanIndex = 0;
 fixedColumns[rowSpanIndex].rowSpan = ({ rowData, rowIndex }) =>
   rowIndex % 2 === 0 && rowIndex <= data.length - 2 ? 2 : 1;
+
+// console.log(JSON.stringify(fixedColumns, null, 2));
+// console.log(JSON.stringify(data, null, 2));
+// console.log('...', fixedColumns[rowSpanIndex]);
 
 const rowRenderer = ({ rowData, rowIndex, cells, columns }) => {
   const rowSpan = columns[rowSpanIndex].rowSpan({ rowData, rowIndex });
