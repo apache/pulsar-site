@@ -239,7 +239,12 @@ bin/pulsar-daemon start zookeeper
 
 ## Initialize cluster metadata
 
-Once you deploy ZooKeeper for your cluster, you need to write some metadata to ZooKeeper. You only need to write this data **once**.
+:::note
+
+When provisioning a new cluster, you need to initialize the cluster metadata on the metadata store (e.g., ZooKeeper). You need to initialize it **only once**.
+
+:::
+
 
 You can initialize this metadata using the [`initialize-cluster-metadata`](reference-cli-tools.md) command of the [`pulsar`](reference-cli-tools.md) CLI tool. This command can be run on any machine in your Pulsar cluster, so the metadata can be initialized from a ZooKeeper, broker, or bookie machine. The following is an example:
 
@@ -254,16 +259,16 @@ bin/pulsar initialize-cluster-metadata \
     --broker-service-url-tls pulsar+ssl://pulsar.us-west.example.com:6651
 ```
 
-As you can see from the example above, you will need to specify the following:
+As you can see from the example above, you will need to specify the following configurations. Items with * are **required** flags.
 
 Flag | Description
 :----|:-----------
-`--cluster` | A name for the cluster
-`--metadata-store` | A "local" metadata store connection string for the cluster. This connection string only needs to include *one* machine in the ZooKeeper cluster.
-`--configuration-metadata-store` | The configuration metadata store connection string for the entire instance. As with the `--metadata-store` flag, this connection string only needs to include *one* machine in the ZooKeeper cluster.
-`--web-service-url` | The web service URL for the cluster, plus a port. This URL should be a standard DNS name. The default port is 8080 (you had better not use a different port).
+`--cluster`* | A name for the cluster
+`--metadata-store`* | A "local" metadata store connection string for the cluster. This connection string only needs to include *one* machine in the ZooKeeper cluster.
+`--configuration-metadata-store`* | The configuration metadata store connection string for the entire instance. As with the `--metadata-store` flag, this connection string only needs to include *one* machine in the ZooKeeper cluster.
+`--web-service-url`* | The web service URL for the cluster, plus a port. This URL should be a standard DNS name. The default port is 8080 (you had better not use a different port).
 `--web-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster. The default port is 8443 (you had better not use a different port).
-`--broker-service-url` | A broker service URL enabling interaction with the brokers in the cluster. This URL should not use the same DNS name as the web service URL but should use the `pulsar` scheme instead. The default port is 6650 (you had better not use a different port).
+`--broker-service-url`* | A broker service URL enabling interaction with the brokers in the cluster. This URL should not use the same DNS name as the web service URL but should use the `pulsar` scheme instead. The default port is 6650 (you had better not use a different port).
 `--broker-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster as well as a TLS broker service URL for the brokers in the cluster. The default port is 6651 (you had better not use a different port).
 
 :::note
