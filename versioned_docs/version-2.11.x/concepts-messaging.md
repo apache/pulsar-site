@@ -93,7 +93,7 @@ Message compression can reduce message size by paying some CPU overhead. The Pul
 * [LZ4](https://github.com/lz4/lz4)
 * [ZLIB](https://zlib.net/)
 * [ZSTD](https://facebook.github.io/zstd/)
-* [SNAPPY](https://google.github.io/snappy/).
+* [SNAPPY](https://google.github.io/snappy/)
 
 Compression types are stored in the message metadata, so consumers can adopt different compression types automatically, as needed.
 
@@ -143,9 +143,12 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 3. The consumer buffers the chunked messages and aggregates them into the receiver queue when it receives all the chunks of a message.
 4. The client consumes the aggregated message from the receiver queue.
 
-**Limitations:**
-- Chunking is only available for persisted topics.
-- Chunking cannot be enabled simultaneously with batching.
+:::note
+
+- Chunking is only available for persistent topics.
+- Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
+
+:::
 
 #### Handle consecutive chunked messages with one ordered consumer
 
@@ -586,8 +589,7 @@ In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all 
 
 :::note
 
-**Limitations of Shared type**
- When using Shared type, be aware that:
+When using Shared type, be aware that:
  * Message ordering is not guaranteed.
  * You cannot use cumulative acknowledgment with Shared type.
 
@@ -797,8 +799,6 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 ````
 
 :::note
-
-**Limitations of Key_Shared type**
 
 When you use Key_Shared type, be aware that:
   * You need to specify a key or ordering key for messages.
@@ -1126,6 +1126,12 @@ The diagram below illustrates the concept of delayed message delivery:
 ![Delayed Message Delivery](/assets/message-delay.svg)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
+
+:::note
+
+Only shared subscription supports delayed message delivery.
+
+:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:

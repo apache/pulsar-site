@@ -109,10 +109,14 @@ To avoid redelivering acknowledged messages in a batch to the consumer, Pulsar i
 By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgement by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgement results in more memory overheads.
 
 ### Chunking
-Before you enable chunking, read the following instructions.
-- Batching and chunking cannot be enabled simultaneously. To enable chunking, you must disable batching in advance.
-- Chunking is only supported for persisted topics.
-- Chunking is only supported for the exclusive and failover subscription modes.
+
+:::note
+
+- Chunking is only available for persistent topics.
+- Chunking is only available for the exclusive and failover subscription types.
+- Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
+
+:::
 
 When chunking is enabled (`chunkingEnabled=true`), if the message size is greater than the allowed maximum publish-payload size, the producer splits the original message into chunked messages and publishes them with chunked metadata to the broker separately and in order. At the broker side, the chunked messages are stored in the managed-ledger in the same way as that of ordinary messages. The only difference is that the consumer needs to buffer the chunked messages and combines them into the real message when all chunked messages have been collected. The chunked messages in the managed-ledger can be interwoven with ordinary messages. If producer fails to publish all the chunks of a message, the consumer can expire incomplete chunks if consumer fail to receive all chunks in expire time. By default, the expire time is set to one minute.
 
@@ -374,10 +378,13 @@ In *shared* or *round robin* mode, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-> **Limitations of shared mode**
-> When using shared mode, be aware that:
-> * Message ordering is not guaranteed.
-> * You cannot use cumulative acknowledgment with shared mode.
+:::note
+
+When using shared mode, be aware that:
+* Message ordering is not guaranteed.
+* You cannot use cumulative acknowledgment with shared mode.
+
+:::
 
 ![Shared subscriptions](/assets/pulsar-shared-subscriptions.png)
 
@@ -436,10 +443,13 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </Tabs>
 ````
 
-> **Limitations of Key_Shared mode**
-> When you use Key_Shared mode, be aware that:
-> * You need to specify a key or orderingKey for messages.
-> * You cannot use cumulative acknowledgment with Key_Shared mode.
+:::note
+
+When you use Key_Shared mode, be aware that:
+* You need to specify a key or orderingKey for messages.
+* You cannot use cumulative acknowledgment with Key_Shared mode.
+
+:::
 
 ## Multi-topic subscriptions
 
@@ -685,6 +695,12 @@ The diagram below illustrates the concept of delayed message delivery:
 ![Delayed Message Delivery](/assets/message_delay.png)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
+
+:::note
+
+Only shared subscription supports delayed message delivery.
+
+:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:

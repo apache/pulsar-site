@@ -418,7 +418,7 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 :::note
 
 - Chunking is only available for persistent topics.
-- Chunking cannot be enabled simultaneously with batching.
+- Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
 
 :::
 

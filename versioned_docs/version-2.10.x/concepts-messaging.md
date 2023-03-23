@@ -119,10 +119,13 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 3. The consumer buffers the chunked messages and aggregates them into the receiver queue when it receives all the chunks of a message.
 4. The client consumes the aggregated message from the receiver queue.
 
-**Limitations:**
-- Chunking is only available for persisted topics.
+:::note
+
+- Chunking is only available for persistent topics.
 - Chunking is only available for the exclusive and failover subscription types.
-- Chunking cannot be enabled simultaneously with batching.
+- Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
+
+:::
 
 #### Handle consecutive chunked messages with one ordered consumer
 
@@ -572,10 +575,13 @@ In *shared* or *round robin* type, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-> **Limitations of Shared type**
-> When using Shared type, be aware that:
-> * Message ordering is not guaranteed.
-> * You cannot use cumulative acknowledgment with Shared type.
+:::note
+
+When using Shared type, be aware that:
+* Message ordering is not guaranteed.
+* You cannot use cumulative acknowledgment with Shared type.
+
+:::
 
 ![Shared subscriptions](/assets/pulsar-shared-subscriptions.png)
 
@@ -634,10 +640,13 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </Tabs>
 ````
 
-> **Limitations of Key_Shared type**
-> When you use Key_Shared type, be aware that:
-> * You need to specify a key or orderingKey for messages.
-> * You cannot use cumulative acknowledgment with Key_Shared type.
+:::note
+
+When you use Key_Shared type, be aware that:
+* You need to specify a key or orderingKey for messages.
+* You cannot use cumulative acknowledgment with Key_Shared type.
+
+:::
 
 ### Subscription modes
 
@@ -961,6 +970,12 @@ The diagram below illustrates the concept of delayed message delivery:
 ![Delayed Message Delivery](/assets/message_delay.png)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
+
+:::note
+
+Only shared subscription supports delayed message delivery.
+
+:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:
