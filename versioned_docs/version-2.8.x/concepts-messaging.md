@@ -674,19 +674,17 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 ## Delayed message delivery
 Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.
 
-Delayed message delivery only works in Shared subscription type. In Exclusive and Failover subscription types, the delayed message is dispatched immediately.
+:::note
+
+Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+
+:::
 
 The diagram below illustrates the concept of delayed message delivery:
 
 ![Delayed Message Delivery](/assets/message_delay.png)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
-
-:::note
-
-Only shared subscription supports delayed message delivery.
-
-:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:

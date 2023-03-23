@@ -1104,8 +1104,12 @@ Message deduplication is disabled in the scenario shown at the top. Here, a prod
 
 In the second scenario at the bottom, the producer publishes message 1, which is received by the broker and persisted, as in the first scenario. When the producer attempts to publish the message again, however, the broker knows that it has already seen message 1 and thus does not persist the message.
 
-> Message deduplication is handled at the namespace level or the topic level. For more instructions, see the [message deduplication cookbook](cookbooks-deduplication.md).
-> You can read the design of Message Deduplication in [PIP-6](https://github.com/aahmed-se/pulsar-wiki/blob/master/PIP-6:-Guaranteed-Message-Deduplication.md).
+:::tip
+
+- Message deduplication is handled at the namespace level or the topic level. For more instructions, see the [message deduplication cookbook](cookbooks-deduplication.md).
+- You can read the design of Message Deduplication in [PIP-6](https://github.com/aahmed-se/pulsar-wiki/blob/master/PIP-6:-Guaranteed-Message-Deduplication.md).
+
+:::
 
 ### Producer idempotency
 
@@ -1119,19 +1123,17 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 ## Delayed message delivery
 Delayed message delivery enables you to consume a message later. In this mechanism, a message is stored in BookKeeper. The `DelayedDeliveryTracker` maintains the time index (time -> messageId) in memory after the message is published to a broker. This message will be delivered to a consumer once the specified delay is over.
 
-Delayed message delivery only works in the Shared subscription type. In the Exclusive and Failover subscription types, the delayed message is dispatched immediately.
+:::note
+
+Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+
+:::
 
 The diagram below illustrates the concept of delayed message delivery:
 
 ![Delayed Message Delivery](/assets/message-delay.svg)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
-
-:::note
-
-Only shared subscription supports delayed message delivery.
-
-:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:
