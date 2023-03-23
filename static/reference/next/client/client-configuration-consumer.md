@@ -37,7 +37,7 @@ A longer ack group time is more efficient at the expense of a slight increase in
 **Default**: `100000`
 
 ### autoAckOldestChunkedMessageOnQueueFull
-Whether to automatically acknowledge pending chunked messages when the threashold of `maxPendingChunkedMessage` is reached. If set to `false`, these messages will be redelivered by their broker.
+Whether to automatically acknowledge pending chunked messages when the threshold of `maxPendingChunkedMessage` is reached. If set to `false`, these messages will be redelivered by their broker.
 
 **Type**: `boolean`
 
@@ -136,7 +136,7 @@ This setting reduces the receiver queue size for individual partitions if the to
 **Default**: `50000`
 
 ### negativeAckRedeliveryBackoff
-Interface for custom message is negativeAcked policy. You can specify `RedeliveryBackoff` for aconsumer.
+Interface for custom message is negativeAcked policy. You can specify `RedeliveryBackoff` for a consumer.
 
 **Type**: `org.apache.pulsar.client.api.RedeliveryBackoff`
 
