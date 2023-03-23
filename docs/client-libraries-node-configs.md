@@ -1,7 +1,7 @@
 ---
 id: client-libraries-node-configs
 title: Pulsar Node.js client configurations
-sidebar_label: "Node.js client"
+sidebar_label: "Configs"
 ---
 
 
