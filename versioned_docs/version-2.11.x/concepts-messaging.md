@@ -545,7 +545,7 @@ A subscription is a named configuration rule that determines how messages are de
 **Pub-Sub or Queuing**
   In Pulsar, you can use different subscriptions flexibly.
   * If you want to achieve traditional "fan-out pub-sub messaging" among consumers, specify a unique subscription name for each consumer. It is an exclusive subscription type.
-  * If you want to achieve "message queuing" among consumers, share the same subscription name among multiple consumers(shared, failover, key_shared).
+  * If you want to achieve "message queuing" among consumers, share the same subscription name among multiple consumers (shared, failover, key_shared).
   * If you want to achieve both effects simultaneously, combine exclusive subscription types with other subscription types for consumers.
 
 :::
@@ -589,9 +589,7 @@ In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all 
 
 :::note
 
-When using Shared type, be aware that:
- * Message ordering is not guaranteed.
- * You cannot use cumulative acknowledgment with Shared type.
+Shared subscriptions do not guarantee message ordering or support cumulative acknowledgment.
 
 :::
 
@@ -803,7 +801,7 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 When you use Key_Shared type, be aware that:
   * You need to specify a key or ordering key for messages.
   * You cannot use cumulative acknowledgment with Key_Shared type.
-  * When the position of the newest message in a topic is `X`, a key-shared consumer that is newly attached to the same subscription and connected to the topic will **not** receive any messages until all the messages before `X` have been acknowledged.
+  * When the position of the newest message in a topic is `X`, a key_shared consumer that is newly attached to the same subscription and connected to the topic will **not** receive any messages until all the messages before `X` have been acknowledged.
 
 :::
 
@@ -995,7 +993,7 @@ Non-persistent messaging is usually faster than persistent messaging because bro
 
 ### Client API
 
-Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key-shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
+Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key_shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
 
 Here's an example [Java consumer](client-libraries-java.md#consumer) for a non-persistent topic:
 
