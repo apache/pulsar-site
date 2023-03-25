@@ -156,7 +156,7 @@ All the broker metrics are labeled with the following labels:
 | pulsar_broker_rate_out | Gauge | The total message rate going out from this broker (message per second). |
 | pulsar_broker_throughput_in | Gauge | The total throughput coming into this broker (byte per second). |
 | pulsar_broker_throughput_out | Gauge | The total throughput going out from this broker (byte per second). |
-| pulsar_broker_storage_size | Gauge | The total storage size of all topics in this broker (bytes). |
+| pulsar_broker_storage_size | Gauge | The total storage size of all topics in this broker (in bytes). |
 | pulsar_broker_storage_logical_size | Gauge | The storage size of all topics in this broker without replicas (in bytes). |
 | pulsar_broker_storage_write_rate | Gauge | The total message batches (entries) written to the storage for this broker (message batch per second). |
 | pulsar_broker_storage_read_rate | Gauge | The total message batches (entries) read from the storage for this broker (message batch per second). |
