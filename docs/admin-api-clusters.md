@@ -20,6 +20,7 @@ This page only shows **some frequently used operations**. For the latest and com
  - [Pulsar admin APIs](admin-api-overview.md)
   
    - {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.
+  
    - [Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.
 
 :::
