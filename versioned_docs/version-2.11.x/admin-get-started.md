@@ -13,7 +13,6 @@ import TabItem from '@theme/TabItem';
 
 Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](/api/admin/) requires some special setup if you have enabled authentication in your Pulsar instance.
 
-````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
@@ -21,15 +20,15 @@ Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](
 
 If you have enabled authentication, you need to provide an auth configuration to use the `pulsar-admin` tool. By default, the configuration for the `pulsar-admin` tool is in the [`conf/client.conf`](https://github.com/apache/pulsar/blob/master/conf/client.conf) file. The following are the available parameters:
 
-|Name|Description|Default|
-|----|-----------|-------|
-|webServiceUrl|The web URL for the cluster.|http://localhost:8080/|
-|brokerServiceUrl|The Pulsar protocol URL for the cluster.|pulsar://localhost:6650/|
-|authPlugin|The authentication plugin.| |
-|authParams|The authentication parameters for the cluster, as a comma-separated string.| |
-|useTls|Whether or not TLS authentication will be enforced in the cluster.|false|
-|tlsAllowInsecureConnection|Accept untrusted TLS certificate from client.|false|
-|tlsTrustCertsFilePath|Path for the trusted TLS certificate file.| |
+| Name                       | Description                                                                 | Default                  |
+| -------------------------- | --------------------------------------------------------------------------- | ------------------------ |
+| webServiceUrl              | The web URL for the cluster.                                                | http://localhost:8080/   |
+| brokerServiceUrl           | The Pulsar protocol URL for the cluster.                                    | pulsar://localhost:6650/ |
+| authPlugin                 | The authentication plugin.                                                  |                          |
+| authParams                 | The authentication parameters for the cluster, as a comma-separated string. |                          |
+| useTls                     | Whether or not TLS authentication will be enforced in the cluster.          | false                    |
+| tlsAllowInsecureConnection | Accept untrusted TLS certificate from client.                               | false                    |
+| tlsTrustCertsFilePath      | Path for the trusted TLS certificate file.                                  |                          |
 
 </TabItem>
 <TabItem value="REST API">
@@ -79,4 +78,3 @@ PulsarAdmin admin = PulsarAdmin.builder()
 </TabItem>
 
 </Tabs>
-````
