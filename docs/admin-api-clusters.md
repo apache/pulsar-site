@@ -9,34 +9,36 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-
 :::tip
 
- This page only shows **some frequently used operations**.
+This page only shows **some frequently used operations**. For the latest and complete information, see the **reference docs** below.
 
- - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
-
- - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
-
- - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+ - [Pulsar CLI](reference-cli-tools.md) 
+  
+   - [pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), which lists all commands, flags, descriptions, and more.
+  
+ - [Pulsar admin APIs](admin-api-overview.md)
+  
+   - {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.
+   - [Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.
 
 :::
 
 You can manage [clusters](reference-terminology.md#cluster) via one of the following methods:
 
-* [Pulsar CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/)
+* [Pulsar CLI](reference-cli-tools.md)
   
-  * The `clusters` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool
+  * [pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/): the `clusters` command 
 
 * [Pulsar admin APIs](admin-api-overview.md)
   
-  * The `/admin/v2/clusters` endpoint of the admin {@inject: rest:REST:/} API
+  * {@inject: rest:REST API:/}: the `/admin/v2/clusters` endpoint
   
-  * The `clusters` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
+  * [Java admin API](/api/admin/): the `clusters` method of the `PulsarAdmin` object
 
 ## Provision cluster
 
-New clusters can be provisioned using the admin interface.
+You can provision new clusters using the admin interface.
 
 :::note
 
