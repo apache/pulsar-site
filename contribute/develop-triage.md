@@ -18,7 +18,13 @@ This guide documents the [issue tracker](https://github.com/apache/pulsar/issues
 
 This field indicates who is expected to take the next step in resolving the issue.
 
+Since the Pulsar community follows [Community of Peers](https://www.apache.org/theapacheway/) pattern, a contributor is assigned to an issue only if they ask for or self-assign. GitHub only allows team members or participants to be assigned, and asking for an assignment simplifies this restriction.
+
 ## Helping Triage Issues
+
+Once you know your way around how Pulsar's source files are structured and you are comfortable with the workflow, a great way to contribute is to help triage issues. Do realize, though, that experience working on Pulsar is needed in order to effectively help triage.
+
+Around the clock, new issues are being opened on the [issue tracker](https://github.com/apache/pulsar/issues) and existing issues are being updated. Every issue needs to be triaged to make sure everything runs smoothly.
 
 ### Classifying Reports
 
