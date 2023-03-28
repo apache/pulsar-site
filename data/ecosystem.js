@@ -167,6 +167,12 @@ module.exports = {
         source_or_sink: 'Source'
       },
       {
+        name: 'Debezium Connector (DB2)',
+        description: '',
+        link: 'https://github.com/apache/pulsar/tree/master/pulsar-io/debezium/db2',
+        source_or_sink: 'Source'
+      },
+      {
         name: 'Debezium Connector (PostgreSQL)',
         description: '',
         link: 'https://github.com/apache/pulsar/tree/master/pulsar-io/debezium/postgres',

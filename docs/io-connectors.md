@@ -53,6 +53,15 @@ Pulsar has various source connectors, which are sorted alphabetically as below.
 
 * [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/debezium/oracle/src/main/java/org/apache/pulsar/io/debezium/oracle/DebeziumOracleSource.java)
 
+
+### Debezium DB2
+
+* [Configuration](io-debezium-source.md#configuration)
+
+* [Example](io-debezium-source.md#example-of-db2)
+
+* [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/debezium/db2/src/main/java/org/apache/pulsar/io/debezium/db2/DebeziumDB2Source.java)
+
 ### Debezium Microsoft SQL Server
 
 * [Configuration](io-debezium-source.md#configuration)
