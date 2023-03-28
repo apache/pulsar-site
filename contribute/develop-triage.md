@@ -28,6 +28,27 @@ Around the clock, new issues are being opened on the [issue tracker](https://git
 
 ### Classifying Reports
 
+Pulsar provides five issue templates and they define what is desired in each category. Issue tracker holds only actionable items, including bug reports and enhancements. Questions and suggestions are recommended to be posted at:
+
+1. [User Mail List](mailto:users@pulsar.apache.org) ([subscribe](mailto:users-subscribe@pulsar.apache.org)), or
+2. [Github Discussion](https://github.com/apache/pulsar/discussions).
+
+For [bug reports](https://github.com/apache/pulsar/blob/master/.github/ISSUE_TEMPLATE/bug-report.yml), an issue needs to:
+
+* provide the OS and Pulsar version in use
+* give reproducing steps to facilitate quick location of the problem
+* clearly explain what is expected and what happens actually
+
+For [enhancements](https://github.com/apache/pulsar/blob/master/.github/ISSUE_TEMPLATE/enhancement.yml), an issue needs to:
+
+* describe the motivations (why does Pulsar need it)
+* describe the proposed solution and add related materials like links if any
+* describe other alternative solutions or features considered, but rejected
+
+Frequent raised issues have their own templates: [flaky tests](https://github.com/apache/pulsar/blob/master/.github/ISSUE_TEMPLATE/flaky-test.yml) and [document issues](https://github.com/apache/pulsar/blob/master/.github/ISSUE_TEMPLATE/doc.yml).
+
+Pulsar improvement proposal (PIP) has its own [workflow](https://github.com/apache/pulsar/blob/master/wiki/proposals/PIP.md).
+
 ### Finding an Issue You Can Help With
 
 If you want to help with triaging, you might also want to search for issues in modules for which you have a working knowledge. Search for the name of a module in the issue tracker, filter by `component/*` label, or use the [advanced search](https://github.com/search/advanced) to find these issues.
