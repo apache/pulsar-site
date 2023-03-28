@@ -147,10 +147,13 @@ with all the [brokers](#broker) in a [cluster](#cluster).
 
 #### Broker
 
-A stateless component of Pulsar [clusters](#cluster) that runs two other components: an HTTP server
-exposing a REST interface for administration and topic lookup and a [dispatcher](#dispatcher) that
-handles all message transfers. Pulsar clusters typically consist of multiple brokers.
+A broker is a stateless component of Pulsar [clusters](#cluster). It consists of two components: 
 
+- An HTTP server exposing a REST interface for administration and topic lookup.
+
+- A [dispatcher](#dispatcher) that handles all message transfers. 
+
+Pulsar clusters typically consist of multiple brokers.
 #### Dispatcher
 
 An asynchronous TCP server used for all data transfers in and out of a Pulsar [broker](#broker). The Pulsar
