@@ -29,3 +29,5 @@ Around the clock, new issues are being opened on the [issue tracker](https://git
 ### Classifying Reports
 
 ### Finding an Issue You Can Help With
+
+If you want to help with triaging, you might also want to search for issues in modules for which you have a working knowledge. Search for the name of a module in the issue tracker, filter by `component/*` label, or use the [advanced search](https://github.com/search/advanced) to find these issues.
