@@ -107,7 +107,7 @@ admin.brokers().getOwnedNamespaces(cluster,brokerUrl);
 
 You can update broker configurations using one of the following ways:
 
-- Supply [configurations](https://pulsar.apache.org/reference/#/@pulsar:version_origin@/config/reference-configuration-broker) when starting up brokers.
+- Supply [configurations](pathname:///reference/#/@pulsar:version_origin@/config/reference-configuration-broker) when starting up brokers.
 
 - [Update configurations dynamically](#update-broker-conf-dynamically) **when running brokers**.
 
