@@ -9,37 +9,19 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-
 :::tip
 
- This page only shows **some frequently used operations**.
-
- - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
-
- - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
-
- - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+This page only shows **some frequently used operations**. For the latest and complete information, see the **reference docs** below.
 
 :::
 
-Pulsar brokers consist of two components:
+Category|Method|If you want to manage brokers...
+|---|---|---
+[Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `broker` command
+[Pulsar admin APIs](admin-api-overview.md)| {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.|See the `/admin/v2/brokers` endpoint
+[Pulsar admin APIs](admin-api-overview.md)|[Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.|See the `brokers` method of the `PulsarAdmin` object
 
-1. An HTTP server exposing a {@inject: rest:REST:/} interface administration and [topic](reference-terminology.md#topic) lookup.
-2. A dispatcher that handles all Pulsar [message](reference-terminology.md#message) transfers.
-
-[Brokers](reference-terminology.md#broker) can be managed via:
-
-* The `brokers` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool
-* The `/admin/v2/brokers` endpoint of the admin {@inject: rest:REST:/} API
-* The `brokers` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
-
-In addition to being configurable when you start them up, brokers can also be [dynamically configured](#dynamic-broker-configuration).
-
-For a full listing of broker-specific configuration parameters, see the [Configuration](reference-configuration.md#broker) page.
-
-## Brokers resources
-
-### List active brokers
+## List active broker
 
 Fetch all available active brokers that are serving traffic with cluster name.
 
@@ -76,50 +58,9 @@ admin.brokers().getActiveBrokers(clusterName)
 </Tabs>
 ````
 
-### Get the information of the leader broker
+## List namespace owned by broker
 
-Fetch the information of the leader broker, for example, the service url.
-
-````mdx-code-block
-<Tabs groupId="api-choice"
-  defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
-<TabItem value="pulsar-admin">
-
-```shell
-pulsar-admin brokers leader-broker
-```
-
-Example output:
-
-```json
-{
-  "serviceUrl" : "http://localhost:8080"
-}
-```
-
-</TabItem>
-<TabItem value="REST API">
-
-{@inject: endpoint|GET|/admin/v2/brokers/leaderBroker|operation/getLeaderBroker?version=@pulsar:version_number@}
-
-</TabItem>
-<TabItem value="Java">
-
-```java
-admin.brokers().getLeaderBroker()
-```
-
-For the detail of the code above, see [here](https://github.com/apache/pulsar/blob/master/pulsar-client-admin/src/main/java/org/apache/pulsar/client/admin/internal/BrokersImpl.java#L80)
-
-</TabItem>
-
-</Tabs>
-````
-
-#### list of namespaces owned by a given broker
-
-It finds all namespaces which are owned and served by a given broker.
+You can list all namespaces which are owned and served by a given broker.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -162,47 +103,17 @@ admin.brokers().getOwnedNamespaces(cluster,brokerUrl);
 </Tabs>
 ````
 
-### Dynamic broker configuration
+## Update broker conf 
 
-One way to configure a Pulsar [broker](reference-terminology.md#broker) is to supply a [configuration](reference-configuration.md#broker) when the broker is [started up](reference-cli-tools.md).
+You can update broker configurations using one of the following ways:
 
-But since all broker configuration in Pulsar is stored in ZooKeeper, configuration values can also be dynamically updated *while the broker is running*. When you update broker configuration dynamically, ZooKeeper will notify the broker of the change and the broker will then override any existing configuration values.
+- Supply [configurations](pathname:///reference/#/@pulsar:version_origin@/config/reference-configuration-broker) when starting up brokers.
 
-* The `brokers` command for the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool has a variety of subcommands that enable you to manipulate a broker's configuration dynamically, enabling you to [update config values](#update-dynamic-configuration) and more.
-* In the Pulsar admin {@inject: rest:REST:/} API, dynamic configuration is managed through the `/admin/v2/brokers/configuration` endpoint.
+- [Update configurations dynamically](#update-broker-conf-dynamically) **when running brokers**.
 
-### Update dynamic configuration
+  Since all broker configurations in Pulsar are stored in ZooKeeper, configuration values can also be dynamically updated when brokers are running. When you update broker configurations dynamically, ZooKeeper will notify the broker of the change and then the broker will override any existing configuration values.
 
-````mdx-code-block
-<Tabs groupId="api-choice"
-  defaultValue="pulsar-admin"
-  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
-<TabItem value="pulsar-admin">
-
-The [`update-dynamic-config`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
-
-```shell
-pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --value 100
-```
-
-</TabItem>
-<TabItem value="REST API">
-
-{@inject: endpoint|POST|/admin/v2/brokers/configuration/:configName/:configValue|operation/updateDynamicConfiguration?version=@pulsar:version_number@}
-
-</TabItem>
-<TabItem value="Java">
-
-```java
-admin.brokers().updateDynamicConfiguration(configName, configValue);
-```
-
-</TabItem>
-
-</Tabs>
-````
-
-### List updated values
+### List updatable broker conf
 
 Fetch a list of all potentially updatable configuration parameters.
 
@@ -246,7 +157,38 @@ admin.brokers().getDynamicConfigurationNames();
 </Tabs>
 ````
 
-### List all
+### Update broker conf dynamically
+
+````mdx-code-block
+<Tabs groupId="api-choice"
+  defaultValue="pulsar-admin"
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+<TabItem value="pulsar-admin">
+
+The [`update-dynamic-config`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
+
+```shell
+pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --value 100
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+{@inject: endpoint|POST|/admin/v2/brokers/configuration/:configName/:configValue|operation/updateDynamicConfiguration?version=@pulsar:version_number@}
+
+</TabItem>
+<TabItem value="Java">
+
+```java
+admin.brokers().updateDynamicConfiguration(configName, configValue);
+```
+
+</TabItem>
+
+</Tabs>
+````
+
+### List updated broker conf
 
 Fetch a list of all parameters that have been dynamically updated.
 
@@ -276,6 +218,47 @@ brokerShutdownTimeoutMs    100
 ```java
 admin.brokers().getAllDynamicConfigurations();
 ```
+
+</TabItem>
+
+</Tabs>
+````
+
+## Get info of leader broker
+
+Fetch the information of the leader broker, for example, the service URL.
+
+````mdx-code-block
+<Tabs groupId="api-choice"
+  defaultValue="pulsar-admin"
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+<TabItem value="pulsar-admin">
+
+```shell
+pulsar-admin brokers leader-broker
+```
+
+Example output:
+
+```json
+{
+  "serviceUrl" : "http://localhost:8080"
+}
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+{@inject: endpoint|GET|/admin/v2/brokers/leaderBroker|operation/getLeaderBroker?version=@pulsar:version_number@}
+
+</TabItem>
+<TabItem value="Java">
+
+```java
+admin.brokers().getLeaderBroker()
+```
+
+For the detail of the code above, see [here](https://github.com/apache/pulsar/blob/master/pulsar-client-admin/src/main/java/org/apache/pulsar/client/admin/internal/BrokersImpl.java#L80)
 
 </TabItem>
 

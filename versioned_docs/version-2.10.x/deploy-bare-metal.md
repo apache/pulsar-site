@@ -123,7 +123,7 @@ The extracted directory contains the following subdirectories:
 
 Directory | Contains
 :---------|:--------
-`bin` |[command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/)
+`bin` |[command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
 `conf` | Configuration files for Pulsar, including for [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more
 `data` | The data storage directory that ZooKeeper and BookKeeper use
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses
@@ -386,8 +386,8 @@ The most important element of broker configuration is ensuring that each broker 
 
 ```properties
 
-metadataStoreUrl=zk://zk1.us-west.example.com:2181,zk2.us-west.example.com:2181,zk3.us-west.example.com:2181
-configurationMetadataStoreUrl=zk://zk1.us-west.example.com:2181,zk2.us-west.example.com:2181,zk3.us-west.example.com:2181
+metadataStoreUrl=zk:zk1.us-west.example.com:2181,zk2.us-west.example.com:2181,zk3.us-west.example.com:2181
+configurationMetadataStoreUrl=zk:zk1.us-west.example.com:2181,zk2.us-west.example.com:2181,zk3.us-west.example.com:2181
 
 ```
 
