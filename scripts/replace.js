@@ -144,6 +144,14 @@ function javadocVersionUrl(version, type) {
   return `(${siteConfig.url}/api/${type}/${version}`
 }
 
+function referenceVersion(version) {
+  let v = semver.coerce(version);
+  if (v.compareMain("2.7.0") < 0) {
+    return "2.6.x";
+  }
+  return `${v.major}.${v.minor}.x`;
+}
+
 function doReplace(options) {
   replace(options)
     .then((changes) => {
@@ -165,6 +173,7 @@ const from = [
   /@pulsar:version_number@/g,
   /@pulsar:version@/g,
   /@pulsar:version_origin@/g,
+  /@pulsar:version_reference@/g,
   /pulsar:binary_release_url/g,
   /pulsar:connector_release_url/g,
   /pulsar:offloader_release_url/g,
@@ -202,6 +211,7 @@ const options = {
     `${latestVersion}`,
     `${latestVersion}`,
     `${latestVersion}`,
+    `next`,
     binaryReleaseUrl(`${latestVersion}`),
     connectorReleaseUrl(`${latestVersion}`),
     offloaderReleaseUrl(`${latestVersion}`),
@@ -250,6 +260,7 @@ for (let _v of versions) {
       `${vWithoutIncubating}`,
       `${v}`,
       `${_v}`,
+      referenceVersion(v),
       binaryReleaseUrl(`${v}`),
       connectorReleaseUrl(`${v}`),
       offloaderReleaseUrl(`${v}`),
