@@ -213,7 +213,7 @@ This example explains how to create a Kafka source connector in an on-premises c
    PULSAR_HOME/bin/pulsar-admin sources available-sources
    ```
 
-4. Create a Kafka source connector on a Pulsar cluster using the [`pulsar-admin sources create`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/sources?id=create) command.
+4. Create a Kafka source connector on a Pulsar cluster using the [`pulsar-admin sources create`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/sources?id=create) command.
 
    ```bash
    PULSAR_HOME/bin/pulsar-admin sources create \

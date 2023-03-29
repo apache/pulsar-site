@@ -106,9 +106,9 @@ Namespace policy can be configured to offload data automatically once a threshol
 
 Automatic offloading runs when a new segment is added to a topic log. If you set the threshold for a namespace, but few messages are being produced to the topic, the offloader does not work until the current segment is full.
 
-You can configure the threshold size using CLI tools, such as [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+You can configure the threshold size using CLI tools, such as [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
-The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace-level offload policies. Each namespace can have its offload policy. If you want to set an offload policy for a specific namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-offload-policies) command.
+The offload configurations in `broker.conf` and `standalone.conf` are used for the namespaces that do not have namespace-level offload policies. Each namespace can have its offload policy. If you want to set an offload policy for a specific namespace, use the command [`pulsar-admin namespaces set-offload-policies options`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=set-offload-policies) command.
 
 #### Example
 
@@ -120,7 +120,7 @@ bin/pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-namesp
 
 :::tip
 
-For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -130,7 +130,7 @@ For individual topics, you can trigger the S3 offloader manually using one of th
 
 - Use REST endpoint.
 
-- Use CLI tools, such as [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+- Use CLI tools, such as [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
  To trigger it via CLI tools, you need to specify the maximum amount of data (threshold) that should be retained in a Pulsar cluster for a topic. If the size of the topic data in the Pulsar cluster exceeds this threshold, segments from the topic are moved to S3-compatible storage until the threshold is no longer exceeded. Older segments are moved first.
 
@@ -150,7 +150,7 @@ For individual topics, you can trigger the S3 offloader manually using one of th
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 
@@ -195,7 +195,7 @@ For individual topics, you can trigger the S3 offloader manually using one of th
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, and default values, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 

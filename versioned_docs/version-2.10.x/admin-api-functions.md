@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
@@ -31,7 +31,7 @@ Functions can be managed via the following methods.
 
 Method | Description
 ---|---
-**Admin CLI** | The `functions` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/) tool.
+**Admin CLI** | The `functions` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool.
 **REST API** |The `/admin/v3/functions` endpoint of the admin {@inject: rest:REST:/} API.
 **Java Admin API**| The `functions` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md).
 

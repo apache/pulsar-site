@@ -156,6 +156,7 @@ admin.brokers().getDynamicConfigurationNames();
 
 </Tabs>
 ````
+
 ### Update broker conf dynamically
 
 ````mdx-code-block
@@ -164,7 +165,7 @@ admin.brokers().getDynamicConfigurationNames();
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-The [`update-dynamic-config`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
+The [`update-dynamic-config`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
 
 ```shell
 pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --value 100

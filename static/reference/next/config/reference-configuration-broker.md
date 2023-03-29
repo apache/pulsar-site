@@ -4379,7 +4379,7 @@ Evicting cache data by the slowest markDeletedPosition or readPosition. The defa
 **Category**: Storage (Managed Ledger)
 
 ### defaultNumPartitions
-The number of partitioned topics that is allowed to be automatically createdif allowAutoTopicCreationType is partitioned.
+The number of partitioned topics that is allowed to be automatically created if allowAutoTopicCreationType is partitioned.
 
 **Type**: `int`
 
