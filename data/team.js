@@ -77,6 +77,10 @@ module.exports = {
       "apacheId": "massakam"
     },
     {
+      "name": "Qiang Zhao",
+      "apacheId": "mattisonchao"
+    },
+    {
       "name": "Michael Marshall",
       "apacheId": "mmarshall"
     },
@@ -225,10 +229,6 @@ module.exports = {
     {
       "name": "Lin Chen",
       "apacheId": "lordcheng10"
-    },
-    {
-      "name": "Qiang Zhao",
-      "apacheId": "mattisonchao"
     },
     {
       "name": "Neng Lu",
