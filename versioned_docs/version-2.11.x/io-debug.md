@@ -364,7 +364,7 @@ Output:
 
 :::tip
 
-For more information about the `topic stats` command, see [`topic stats`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topics?id=stats).
+For more information about the `topic stats` command, see [`topic stats`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/topics?id=stats).
 
 :::
 

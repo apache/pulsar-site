@@ -38,7 +38,7 @@ When you create a new namespace, a number of bundles are assigned to the namespa
 defaultNumberOfNamespaceBundles=4
 ```
 
-Alternatively, you can override the value when you create a new namespace using [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/):
+Alternatively, you can override the value when you create a new namespace using [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/):
 
 ```shell
 bin/pulsar-admin namespaces create my-tenant/my-namespace --clusters us-west --bundles 16
@@ -266,7 +266,7 @@ To create a domain under a specific cluster and register brokers, run the follow
 pulsar-admin clusters create-failure-domain <cluster-name> --domain-name <domain-name> --broker-list <broker-list-comma-separated>
 ```
 
-You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 ### Create an anti-affinity namespace group
 
@@ -276,4 +276,4 @@ An anti-affinity group is created automatically when the first namespace is assi
 pulsar-admin namespaces set-anti-affinity-group <namespace> --group <group-name>
 ```
 
-For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).

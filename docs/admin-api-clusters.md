@@ -17,7 +17,7 @@ This page only shows **some frequently used operations**. For the latest and com
 
 Category|Method|If you want to manage clusters...
 |---|---|---
-[Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `clusters` command
+[Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `clusters` command
 [Pulsar admin APIs](admin-api-overview.md)| {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.|See the `/admin/v2/clusters` endpoint
 [Pulsar admin APIs](admin-api-overview.md)|[Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.|See the `clusters` method of the `PulsarAdmin` object
 ## Provision cluster
@@ -38,7 +38,7 @@ You can provision new clusters using the admin interface.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-You can provision a new cluster using the [`create`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=create) subcommand. Here's an example:
+You can provision a new cluster using the [`create`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=create) subcommand. Here's an example:
 
 ```shell
 pulsar-admin clusters create cluster-1 \
@@ -79,7 +79,7 @@ You can fetch the [configuration](reference-configuration.md) for an existing cl
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`get`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=get) subcommand and specify the name of the cluster. Here's an example:
+Use the [`get`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=get) subcommand and specify the name of the cluster. Here's an example:
 
 ```shell
 pulsar-admin clusters get cluster-1
@@ -125,7 +125,7 @@ You can update the configuration for an existing cluster at any time.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`update`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=update) subcommand and specify new configuration values using flags.
+Use the [`update`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=update) subcommand and specify new configuration values using flags.
 
 ```shell
 pulsar-admin clusters update cluster-1 \
@@ -166,7 +166,7 @@ Peer clusters can be configured for a given cluster in a Pulsar [instance](refer
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`update-peer-clusters`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=update) subcommand and specify the list of peer-cluster names.
+Use the [`update-peer-clusters`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=update) subcommand and specify the list of peer-cluster names.
 
 ```shell
 pulsar-admin update-peer-clusters cluster-1 --peer-clusters cluster-2
@@ -199,7 +199,7 @@ You can fetch a list of all clusters in a Pulsar [instance](reference-terminolog
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`list`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=list) subcommand.
+Use the [`list`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=list) subcommand.
 
 ```shell
 pulsar-admin clusters list
@@ -237,7 +237,7 @@ Clusters can be deleted from a Pulsar [instance](reference-terminology.md#instan
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`delete`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/clusters?id=delete) subcommand and specify the name of the cluster.
+Use the [`delete`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=delete) subcommand and specify the name of the cluster.
 
 ```
 pulsar-admin clusters delete cluster-1
@@ -266,14 +266,14 @@ admin.clusters().deleteCluster(clusterName);
 
 This page only shows **some frequently used operations**. For the latest and complete information, see the **reference docs** below.
 
- - [Pulsar CLI](reference-cli-tools.md) 
-  
-   - [pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), which lists all commands, flags, descriptions, and more.
-  
+ - [Pulsar CLI](reference-cli-tools.md)
+
+   - [pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.
+
  - [Pulsar admin APIs](admin-api-overview.md)
-  
+
    - {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.
-  
+
    - [Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.
 
 :::
@@ -281,11 +281,11 @@ This page only shows **some frequently used operations**. For the latest and com
 You can manage [clusters](reference-terminology.md#cluster) via one of the following methods:
 
 * [Pulsar CLI](reference-cli-tools.md)
-  
-  * [pulsar-admin](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/): the `clusters` command 
+
+  * [pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/): the `clusters` command
 
 * [Pulsar admin APIs](admin-api-overview.md)
-  
+
   * {@inject: rest:REST API:/}: the `/admin/v2/clusters` endpoint
-  
+
   * [Java admin API](/api/admin/): the `clusters` method of the `PulsarAdmin` object
