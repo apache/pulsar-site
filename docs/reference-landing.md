@@ -10,6 +10,6 @@ This reference section provides an overview of Apache Pulsar's key concepts, ter
 - [Pulsar CLI tools](reference-cli-tools.md)
 - [Pulsar configuration](reference-configuration.md)
 - [Pulsar metrics](reference-metrics.md)
-
-
-
+- [Pulsar APIs](pulsar-api-overview.md)
+- [Pulsar REST APIs](reference-rest-api-overview.md)
+- [Pulsar release notes](/release-notes/)

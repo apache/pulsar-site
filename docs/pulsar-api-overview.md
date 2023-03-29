@@ -1,7 +1,7 @@
 ---
 id: pulsar-api-overview
-title: Pulsar API
-sidebar_label: "Overview"
+title: Pulsar APIs
+sidebar_label: "Pulsar APIs"
 ---
 
 ````mdx-code-block
@@ -9,13 +9,30 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-Pulsar is a messaging and streaming platform that scales across organizations of all sizes. Pulsar APIs are the core building blocks of Pulsar, which allow you to interact with Pulsar or administer Pulsar clusters. Pulsar APIs consist of the following types:
+Pulsar is a messaging and streaming platform that scales across organizations of all sizes. 
 
-- [Pulsar client APIs](client-api-overview.md)
-
-- [Pulsar admin APIs](admin-api-overview.md)
+As the core building blocks of Pulsar, Pulsar APIs allow you to:
+- build applications with Pulsar using client APIs
+- administer Pulsar clusters using admin APIs
 
 ![Pulsar APIs - Definition](/assets/pulsar-api-definition.svg)
+
+## Pulsar client APIs
+
+Pulsar client APIs encapsulate and optimize Pulsar's client-broker communication protocols and add additional features using Pulsar primitives. 
+
+With Pulsar client APIs, you can:
+- create and configure producers, consumers, and readers
+- produce and consume messages
+- perform authentication and authorization tasks 
+
+![Client APIs - Definition](/assets/client-api-definition.svg)
+
+Pulsar exposes client APIs with language bindings. For more details about Pulsar clients, including language-specific client libraries, feature matrix, third-party clients, see [Pulsar client - Overview](client-libraries.md).
+
+## Pulsar admin APIs
+
+See [Pulsar admin API overview](admin-api-overview.md).
 
 ## When to use Pulsar APIs
 
