@@ -16,7 +16,7 @@ Pulsar offers several command-line tools that you can use for managing Pulsar in
 
 :::tip
 
-For the latest and complete information about command-line tools, including commands, flags, descriptions, and more information, see the [reference doc](pathname:///reference/#/@pulsar:version_origin@/).
+For the latest and complete information about command-line tools, including commands, flags, descriptions, and more information, see the [reference doc](pathname:///reference/#/@pulsar:version_reference@/).
 
 :::
 
