@@ -9,6 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
+
 Pulsar is a messaging and streaming platform that scales across organizations of all sizes. 
 
 As the core building blocks of Pulsar, Pulsar APIs allow you to:
@@ -32,11 +33,9 @@ Pulsar exposes client APIs with language bindings. For more details about Pulsar
 
 ## Pulsar admin APIs
 
-See [Pulsar admin API overview](admin-api-overview.md).
+See [Pulsar admin API - Overview](admin-api-overview.md).
 
-## When to use Pulsar APIs
-
-Pulsar client APIs and Pulsar admin APIs serve two different purposes in the Pulsar API design. You can use Pulsar client APIs to build applications with Pulsar and use Pulsar admin APIs to manage Pulsar clusters.
+## Comparison
 
 Here is a simple comparison between Pulsar client APIs and Pulsar admin APIs.
 
