@@ -48,7 +48,7 @@ For more information, see [PIP 68: Exclusive Producer](https://github.com/apache
 
 :::
 
-You can set producer access mode through Java Client API. For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
+You can set producer access mode through [Java Client API](/api/client/). For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
 
 
 ## Consumer
@@ -57,7 +57,7 @@ A consumer is a process that attaches to a topic via a subscription and then rec
 
 ![Consumer](/assets/consumer.svg)
 
-A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java-configs.md#consumer-configs) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
+A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](pathname:///reference/#/@pulsar:version_reference@/client/client-configuration-consumer?id=receiverqueuesize) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive mode
 

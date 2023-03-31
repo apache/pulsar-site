@@ -19,10 +19,12 @@ You can use a Pulsar [Go client](https://github.com/apache/pulsar-client-go) to 
 - [Work with consumers](client-libraries-consumers.md)
 - [Work with readers](client-libraries-readers.md)
 
-
 ## Reference doc
 
-- [Go client configurations](client-libraries-go-configs.md)
-- [API docs](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar)
-- [Release notes](/release-notes/client-go)
+- [Go client API docs](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar)
+  - [Client configurations](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ClientOptions)
+  - [Producer configurations](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerOptions)
+  - [Consumer configurations](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ConsumerOptions)
+  - [Reader configurations](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ReaderOptions)
+- [Release notes](pathname:///release-notes/client-go)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
