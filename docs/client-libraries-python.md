@@ -21,7 +21,10 @@ You can use a Pulsar Python client to create Pulsar [producers](concepts-clients
 
 ## Reference doc
 
-- [Python client configurations](client-libraries-python-configs.md)
-- [API docs](@pulsar:apidoc:python@)
-- [Release notes](/release-notes/client-python)
+- [Python client API docs](@pulsar:apidoc:python@)
+  - [Client configurations](@pulsar:apidoc:python@/pulsar.Client.html#__init__)
+  - [Producer configurations](@pulsar:apidoc:python@/pulsar.Client.html#create_producer)
+  - [Consumer configurations](@pulsar:apidoc:python@/pulsar.Client.html#subscribe)
+  - [Reader configurations](@pulsar:apidoc:python@/pulsar.Client.html#create_reader)
+- [Release notes](pathname:///release-notes/client-python)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)

@@ -550,12 +550,12 @@ In FlowOrQpsEquallyDivideBundleSplitAlgorithm, if msgRate \>= loadBalancerNamesp
 
 **Category**: Load Balancer
 
-### loadBalanceUnloadDelayInSeconds
+### loadBalanceSheddingDelayInSeconds
 Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferSheddeer)
 
 **Type**: `long`
 
-**Default**: `600`
+**Default**: `180`
 
 **Dynamic**: `true`
 
@@ -671,17 +671,6 @@ Usage threshold to determine a broker whether to start threshold shedder
 
 **Category**: Load Balancer
 
-### loadBalancerBundleLoadReportPercentage
-Percentage of bundles to compute topK bundle load data from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. (only used in load balancer extension logics)
-
-**Type**: `double`
-
-**Default**: `10.0`
-
-**Dynamic**: `true`
-
-**Category**: Load Balancer
-
 ### loadBalancerBundleUnloadMinThroughputThreshold
 Bundle unload minimum throughput threshold (MB)
 
@@ -792,12 +781,23 @@ load balance load shedding strategy (It requires broker restart if value is chan
 
 **Category**: Load Balancer
 
-### loadBalancerMaxNumberOfBrokerTransfersPerCycle
-Maximum number of brokers to transfer bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferSheddeer)
+### loadBalancerMaxNumberOfBrokerSheddingPerCycle
+Maximum number of brokers to unload bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferSheddeer)
 
 **Type**: `int`
 
 **Default**: `3`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerMaxNumberOfBundlesInBundleLoadReport
+Max number of bundles in bundle load report from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. (only used in load balancer extension logics)
+
+**Type**: `int`
+
+**Default**: `10`
 
 **Dynamic**: `true`
 
@@ -880,12 +880,12 @@ maximum topics in a bundle, otherwise bundle split will be triggered
 
 **Category**: Load Balancer
 
-### loadBalancerNamespaceBundleSplitConditionThreshold
+### loadBalancerNamespaceBundleSplitConditionHitCountThreshold
 Threshold to the consecutive count of fulfilled split conditions. If the split scheduler consecutively finds bundles that meet split conditions many times bigger than this threshold, the scheduler will trigger splits on the bundles (if the number of bundles is less than loadBalancerNamespaceMaximumBundles). (only used in load balancer extension logics)
 
 **Type**: `int`
 
-**Default**: `5`
+**Default**: `3`
 
 **Dynamic**: `true`
 
@@ -974,6 +974,17 @@ Option to automatically unload namespace bundles with affinity(isolation) or ant
 **Type**: `boolean`
 
 **Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerSheddingConditionHitCountThreshold
+Threshold to the consecutive count of fulfilled shedding(unload) conditions. If the unload scheduler consecutively finds bundles that meet unload conditions many times bigger than this threshold, the scheduler will shed the bundles. The bigger value will incur less bundle unloading/transfers. (only used in load balancer extension TransferSheddeer)
+
+**Type**: `int`
+
+**Default**: `3`
 
 **Dynamic**: `true`
 
@@ -2599,7 +2610,7 @@ Size of the lookahead window to use when detecting if all the messages in the to
 **Category**: Server
 
 ### delayedDeliveryMaxIndexesPerBucketSnapshotSegment
-The max number of delayed message index in per bucket snapshot segment, -1 means no limitationafter reaching the max number limitation, the snapshot segment will be cut off.
+The max number of delayed message index in per bucket snapshot segment, -1 means no limitation, after reaching the max number limitation, the snapshot segment will be cut off.
 
 **Type**: `int`
 
@@ -4379,7 +4390,7 @@ Evicting cache data by the slowest markDeletedPosition or readPosition. The defa
 **Category**: Storage (Managed Ledger)
 
 ### defaultNumPartitions
-The number of partitioned topics that is allowed to be automatically createdif allowAutoTopicCreationType is partitioned.
+The number of partitioned topics that is allowed to be automatically created if allowAutoTopicCreationType is partitioned.
 
 **Type**: `int`
 

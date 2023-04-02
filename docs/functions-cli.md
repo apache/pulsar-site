@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 ## Pulsar admin CLI for Pulsar Functions
 
-The Pulsar admin interface enables you to create and manage Pulsar Functions through CLI. For the latest and complete information, including commands, flags, and descriptions, refer to [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+The Pulsar admin interface enables you to create and manage Pulsar Functions through CLI. For the latest and complete information, including commands, flags, and descriptions, refer to [Pulsar admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 
 ## YAML configurations for Pulsar Functions
@@ -53,7 +53,7 @@ You can configure a function by using a predefined YAML file. The following tabl
 | parallelism          | Int      | `--parallelism`         | The parallelism factor of a function, that is, the number of function instances to run. |
 | resources     | [Resources](#resources)	| N/A           | N/A |
 | fqfn          | String          | `--fqfn`                | The Fully Qualified Function Name (FQFN) of a function. |
-| windowConfig  | [WindowConfig](#windowconfig) | N/A       | N/A |		
+| windowConfig  | [WindowConfig](#windowconfig) | N/A       | N/A |
 | timeoutMs     | Long            | `--timeout-ms`          | The message timeout (in milliseconds). |
 | jar           | String          | `--jar`                 | The path of the JAR file for a function (written in Java). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service). |
 | py            | String          | `--py`                  | The path of the main Python/Python wheel file for a function (written in Python). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service).  |
@@ -63,7 +63,7 @@ You can configure a function by using a predefined YAML file. The following tabl
 | maxPendingAsyncRequests | Int    | `--max-message-retries`    | The max number of pending async requests per instance to avoid a large number of concurrent requests. |
 | exposePulsarAdminClientEnabled | Boolean | N/A                | Whether the Pulsar admin client is exposed to function context or not. By default, it is disabled. |
 | subscriptionPosition | String    | `--subs-position`          | The position of Pulsar source subscription used for consuming messages from a specified location. The default value is `Latest`.|
-
+| skipToLatest         | Boolean   | `--skip-to-latest`         | Whether the consumer should skip to the latest message once the function instance restarts. |
 
 ##### ConsumerConfig
 
@@ -91,6 +91,7 @@ The following table outlines the nested fields and related arguments under the `
 | useThreadLocalProducers            | Boolean                       | N/A                      | N/A                             |
 | cryptoConfig                       | [CryptoConfig](#cryptoconfig) | N/A                      | Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java).|
 | batchBuilder                       | String                        | `--batch-builder`        | The type of batch construction method. Available values: `DEFAULT` and `KEY_BASED`. The default value is `DEFAULT`. |
+| compressionType                      | String                        | N/A                      | Message data compression type used by a producer. The default value is [`LZ4`](https://github.com/lz4/lz4). <br />Available options:<li>`NONE` (no compression)</li><li>[`ZLIB`](https://zlib.net/)<br /></li><li>[`ZSTD`](https://facebook.github.io/zstd/)</li><li>[`SNAPPY`](https://google.github.io/snappy/)</li>|
 
 ###### Resources
 

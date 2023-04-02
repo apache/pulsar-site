@@ -21,7 +21,6 @@ You can use the Pulsar C# client (DotPulsar) to create Pulsar [producers](concep
 
 ## Reference doc
 
-- [C# client configurations](client-libraries-dotnet-configs.md)
+- [Release notes](pathname:///release-notes/client-cs)
 - [DotPulsar documentation](https://github.com/apache/pulsar-dotpulsar/wiki)
 - [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
-- [Release notes](/release-notes/client-cs)

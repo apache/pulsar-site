@@ -241,7 +241,7 @@ pulsar-admin clusters create-failure-domain <cluster-name> --domain-name <domain
 
 ```
 
-You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 #### Create an anti-affinity namespace group
 
@@ -253,4 +253,4 @@ pulsar-admin namespaces set-anti-affinity-group <namespace> --group <group-name>
 
 ```
 
-For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+For more information about `anti-affinity-group` related commands, refer to [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).

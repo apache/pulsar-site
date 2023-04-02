@@ -41,7 +41,7 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 :::tip
 
-* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 * When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::
@@ -54,7 +54,7 @@ If you're running a local standalone cluster, you can use one of these root URLs
 * `pulsar://localhost:6650`
 * `http://localhost:8080`
 
-The following example guides you to get started with Pulsar by using the [Python client API](client-libraries-python.md).
+The following example guides you to get started with Pulsar by using the [Python client API](@pulsar:apidoc:python@).
 
 Install the Pulsar Python client library directly from [PyPI](https://pypi.org/project/pulsar-client/):
 

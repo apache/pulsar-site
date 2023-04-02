@@ -215,5 +215,5 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
 ## Related topics
 
-To check the detailed usage of pulsar-admin CLI, see [pulsar-admin CLI reference](pathname:///reference/#/@pulsar:version_origin@/).
+To check the detailed usage of pulsar-admin CLI, see [pulsar-admin CLI reference](pathname:///reference/#/@pulsar:version_reference@/).
 

@@ -107,10 +107,14 @@ To avoid redelivering acknowledged messages in a batch to the consumer, Pulsar i
 By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndexLevelEnabled=false`). You can enable batch index acknowledgement by setting the `acknowledgmentAtBatchIndexLevelEnabled` parameter to `true` at the broker side. Enabling batch index acknowledgement results in more memory overheads.
 
 ### Chunking
-When you enable chunking, read the following instructions.
-- Batching and chunking cannot be enabled simultaneously. To enable chunking, you must disable batching in advance.
-- Chunking is only supported for persisted topics.
-- Chunking is only supported for the exclusive and failover subscription types.
+
+:::note
+
+- Chunking is only available for persistent topics.
+- Chunking is only available for the exclusive and failover subscription types.
+- Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
+
+:::
 
 When chunking is enabled (`chunkingEnabled=true`), if the message size is greater than the allowed maximum publish-payload size, the producer splits the original message into chunked messages and publishes them with chunked metadata to the broker separately and in order. At the broker side, the chunked messages are stored in the managed-ledger in the same way as that of ordinary messages. The only difference is that the consumer needs to buffer the chunked messages and combines them into the real message when all chunked messages have been collected. The chunked messages in the managed-ledger can be interwoven with ordinary messages. If producer fails to publish all the chunks of a message, the consumer can expire incomplete chunks if consumer fail to receive all chunks in expire time. By default, the expire time is set to one minute.
 
@@ -345,10 +349,13 @@ In *shared* or *round robin* mode, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-> **Limitations of Shared type**
-> When using Shared type, be aware that:
-> * Message ordering is not guaranteed.
-> * You cannot use cumulative acknowledgment with Shared type.
+:::note
+
+When using Shared type, be aware that:
+ * Message ordering is not guaranteed.
+ * You cannot use cumulative acknowledgment with Shared type.
+
+:::
 
 ![Shared subscriptions](/assets/pulsar-shared-subscriptions.png)
 
@@ -356,11 +363,14 @@ In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscrib
 
 In *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in a distribution across consumers and message with same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer. When a consumer connected or disconnected will cause served consumer change for some key of message.
 
-> **Limitations of Key_Shared type**
-> When you use Key_Shared type, be aware that:
-> * You need to specify a key or orderingKey for messages.
-> * You cannot use cumulative acknowledgment with Key_Shared type.
-> * Your producers should disable batching or use a key-based batch builder.
+:::note
+
+When you use Key_Shared type, be aware that:
+* You need to specify a key or orderingKey for messages.
+* You cannot use cumulative acknowledgment with Key_Shared type.
+* Your producers should disable batching or use a key-based batch builder.
+
+:::
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.png)
 
@@ -544,7 +554,7 @@ In non-persistent topics, brokers immediately deliver messages to all connected 
 
 > With non-persistent topics, message data lives only in memory. If a message broker fails or message data can otherwise not be retrieved from memory, your message data may be lost. Use non-persistent topics only if you're *certain* that your use case requires it and can sustain it.
 
-By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 ### Performance
 
@@ -664,7 +674,11 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 ## Delayed message delivery
 Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.
 
-Delayed message delivery only works in Shared subscription type. In Exclusive and Failover subscription types, the delayed message is dispatched immediately.
+:::note
+
+Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+
+:::
 
 The diagram below illustrates the concept of delayed message delivery:
 
