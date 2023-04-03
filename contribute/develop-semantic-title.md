@@ -36,7 +36,7 @@ A PR title should be structured as follows:
 
 The rule can be interpreted as: A good title = clear format ([type](#type) and [scope](#scope)) + self-explanatory [summary](#summary).
 
-### Quick Examples  
+### Quick Examples
 
 Here are some examples of unclear and good PR titles for your quick reference. Good PR titles are concise and self-explanatory since they tell you the changes in a clear and direct way.
 
