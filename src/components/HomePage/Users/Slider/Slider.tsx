@@ -1,67 +1,73 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import SlickSlider from 'react-slick';
 
-import reviews from './reviews';
+import slides from './reviews';
 
 import Quote from './picture/quote.svg';
 import LeftButton from './picture/leftButton.svg';
 import RightButton from './picture/rightButton.svg';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import s from './Slider.module.css';
 
 const Slider = () => {
-  const [shift, setShift] = useState(0);
-  const [slides, setSlides] = useState(reviews);
-
-  const moveLeft = () => {
-    if (shift !== 0) {
-      setShift(shift + 1);
-    }
+  const SampleNextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <RightButton
+        className={className}
+        style={{ ...style, top: '110%', left: '60', width: '48px', height: '48px' }}
+        onClick={onClick}
+      />
+    );
   }
 
-  const moveRight = () => {
-    if (Math.abs(shift) < reviews.length - 1) {
-      setShift(shift - 1);
-    }
+  const SamplePrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <LeftButton
+        className={className}
+        style={{ ...style, top: '110%', left: '0', width: '48px', height: '48px' }}
+        onClick={onClick}
+      />
+    );
   }
 
-  useEffect(() => {
-    // console.log(shift, slides.length)
-    // if (shift > -slides.length - 3 || Math.abs(shift) > slides.length - 3) {
-    //   setSlides([...slides, ...reviews]);
-    // }
-  }, [shift]);
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    className: "center",
+    centerPadding: "60px",
+    centerMode: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
+  };
 
   return (
     <div className={s.slider}>
-      <div
-        className={s.slider_container}
-        style={{
-          width: `${700 * reviews.length}px`,
-          left: `${shift * 700}px`
-        }}
-      >
+      <SlickSlider {...settings}>
         {slides.map((slide) => (
           <div className={s.slide}>
-            <Quote className={s.quote} />
-            <span className={s.text}>
-              {slide.text}
-            </span>
-            
-            <span className={s.author}>
-              {slide.author}
-            </span>
+            <div className={s.slide_container}>
+              <Quote className={s.quote} />
+              <span className={s.text}>
+                {slide.text}
+              </span>
+              
+              <span className={s.author}>
+                {slide.author}
+              </span>
 
-            <span className={s.platform}>
-              {slide.platform}
-            </span>
+              <span className={s.platform}>
+                {slide.platform}
+              </span>
+            </div>
           </div>
         ))}
-      </div>
-
-      <div className={s.buttons_container}>
-        <LeftButton onClick={() => moveLeft()} className={s.button} />
-        <RightButton onClick={() => moveRight()} />
-      </div>
+      </SlickSlider>
     </div>
   )
 }
