@@ -49,6 +49,20 @@ Frequent raised issues have their own templates: [flaky tests](https://github.co
 
 Pulsar improvement proposal (PIP) has its own [workflow](https://github.com/apache/pulsar/blob/master/wiki/proposals/PIP.md).
 
+### Closing Issues
+
+Stale issues coming from years ago are hardly handled today. Also, a huge issue backlog decreases the passion a contributor spends time on issue triaging.
+
+Here are several common reasons to close issues especially stale ones that you can use to judge:
+
+* If a bug report is associated with [unmaintained versions](release-policy.md#Supported-Versions), and it can hardly or cannot be reproduced on maintained versions, you can close the issue with comment "Closing as stale. If it's still relevant to maintained versions, feel free to open a new issue."
+* If an enhancement ticket gets stale for over a year and no one seems working on it, you can close the issue with comment "Closing as stale and no one worked on it. Please open a new issue if you volunteer to do it."
+* If a user question is answered in the thread, you can close the issue with comment "Closing as answered"; otherwise, you can [convert the issue to a discussion](https://docs.github.com/en/discussions/managing-discussions-for-your-community/managing-discussions#transferring-a-discussion) under the Q&A category.
+* If an open issue is already resolved on master or is duplicate to another issue, you can directly close the issue with those resolutions.
+* Due to historical reasons, some issues are about multilingual clients (C++, Go, Python) or other components moved out to their separate repositories. You can [transfer the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/transferring-an-issue-to-another-repository) to the corresponding repository, or close it with comment "Closing as stale. The development of {the specific module} is permantly moved to {the separate repository}. Please open a new issue there if it's still relevent."
+
+### Re-Evaluating Closed Issues
+
 ### Finding an Issue You Can Help With
 
 If you want to help with triaging, you might also want to search for issues in modules for which you have a working knowledge. Search for the name of a module in the issue tracker, filter by `component/*` label, or use the [advanced search](https://github.com/search/advanced) to find these issues.
