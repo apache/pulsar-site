@@ -63,6 +63,13 @@ Here are several common reasons to close issues especially stale ones that you c
 
 ### Re-Evaluating Closed Issues
 
+You can concern that some stale issues are still relevant but get closed eagerly.
+
+Do worry! Anyone is expected to search before asking. And once they find a closed issue is relevant, they can pick a up or open a new one and refer to the previous one. This is always viable and here are some examples:
+
+* [DB2 Connector for Pulsar](https://github.com/apache/pulsar/issues/7837) was picked up with a new volunteer working on it;
+* [Support basic-authentication in function url](https://github.com/apache/pulsar/issues/19910) refers to a closed issue and supersedes it.
+
 ### Finding an Issue You Can Help With
 
 If you want to help with triaging, you might also want to search for issues in modules for which you have a working knowledge. Search for the name of a module in the issue tracker, filter by `component/*` label, or use the [advanced search](https://github.com/search/advanced) to find these issues.
