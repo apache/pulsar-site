@@ -65,7 +65,7 @@ Here are several common reasons to close issues especially stale ones that you c
 
 You can concern that some stale issues are still relevant but get closed eagerly.
 
-Do worry! Anyone is expected to search before asking. And once they find a closed issue is relevant, they can pick a up or open a new one and refer to the previous one. This is always viable and here are some examples:
+Do worry! Anyone is expected to search before asking. And once they find a closed issue is relevant, they can pick it up or open a new one and refer to the previous one. This is always viable and here are some examples:
 
 * [DB2 Connector for Pulsar](https://github.com/apache/pulsar/issues/7837) was picked up with a new volunteer working on it;
 * [Support basic-authentication in function url](https://github.com/apache/pulsar/issues/19910) refers to a closed issue and supersedes it.
