@@ -15,6 +15,7 @@ const sidebars = {
             label: "Development",
             items: [
                 'develop-coding-conventions',
+                'develop-triage',
                 'develop-labels',
                 'develop-semantic-title'
             ]
