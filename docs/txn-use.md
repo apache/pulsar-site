@@ -164,3 +164,7 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
     Receive transaction message: Hello Pulsar! count : 1
     Receive transaction message: Hello Pulsar! count : 2
     ```
+
+## Related topics
+
+- To learn more features that can be used with transactions, see [Pulsar transactions - Advanced features](txn-advanced-features.md).

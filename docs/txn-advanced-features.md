@@ -39,3 +39,7 @@ If you want to enable authentication with transactions, follow the steps below.
 ## Guarantee exactly-once semantics
 
 If you want to guarantee exactly-once semantics with transactions, you can [enable message deduplication at the broker, namespace, or topic level](cookbooks-deduplication.md#enable-message-deduplication-at-namespace-or-topic-level).
+
+## Related topics
+
+- To get up quickly, see [Pulsar transactions - Get started](txn-use.md).
