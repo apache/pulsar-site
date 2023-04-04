@@ -23,7 +23,7 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
     //mandatory configuration, used to enable transaction coordinator
     transactionCoordinatorEnabled=true
 
-    //mandtory configuration, used to create systemTopic used for transaction buffer snapshot
+    //mandatory configuration, used to create systemTopic used for transaction buffer snapshot
     systemTopicEnabled=true
     ```
 
@@ -33,7 +33,7 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
 
     :::
 
-2. Initialize transaction coordinator metadata
+2. Initialize transaction coordinator metadata.
 
     The transaction coordinator can leverage the advantages of partitioned topics (such as load balance).
 
