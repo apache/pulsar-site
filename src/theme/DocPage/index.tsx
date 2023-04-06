@@ -13,6 +13,7 @@ import SearchMetadata from '@theme/SearchMetadata';
 import type {Props} from '@theme/DocPage';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import semver from "semver/preload";
 
 function createCanonicalHref(props: Props): string {
   const {siteConfig} = useDocusaurusContext();
@@ -25,6 +26,16 @@ function createCanonicalHref(props: Props): string {
   const basename = location.pathname.replace(match.path, '');
   return siteConfig.url + useBaseUrl(`/docs/${basename}`);
 }
+
+function shouldNotIndex(props: Props): boolean {
+  const {versionMetadata} = props;
+  if (versionMetadata.version == 'current') {
+    return false;
+  }
+  let version = semver.coerce(versionMetadata.version);
+  return version.compareMain('2.10.0') < 0;
+}
+
 function DocPageMetadata(props: Props): JSX.Element {
   const {versionMetadata} = props;
   return (
@@ -37,7 +48,7 @@ function DocPageMetadata(props: Props): JSX.Element {
         )}
       />
       <PageMetadata>
-        {versionMetadata.noIndex && (
+        {(versionMetadata.noIndex || shouldNotIndex(props)) && (
           <meta name="robots" content="noindex, nofollow" />
         )}
         <link rel="canonical" href={createCanonicalHref(props)}/>
