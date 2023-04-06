@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-This guide walks you through the quickest way to get started with the following methods to manage topics.
+This guide walks you through the quickest way to get started with the following methods to manage topics. 
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -54,7 +54,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
 5. Check the stats of the topic.
 
-6. Delete the topic.
+6. Delete the topic. 
 
 **Prerequisites**
 
@@ -461,7 +461,7 @@ This tutorial guides you through every step of using Java admin API to manage to
         .build();
 
     Producer<String> producer = client.newProducer(Schema.STRING)
-        .topic(topic)
+        .topic("test-topic-1")
         .blockIfQueueFull(true)
         .create();
 
@@ -476,9 +476,16 @@ This tutorial guides you through every step of using Java admin API to manage to
 
     **Input**
 
+    ```java
+    PartitionedTopicStats stats = admin.topics().getPartitionedStats("persistent://public/default/test-topic-1",false);
+    System.out.println(stats.getMsgInCounter());
     ```
-    admin.topics().getPartitionedStats("persistent://public/default/test-topic-1", false)
-    ````
+    
+    **Output**
+
+    ```java
+    100
+    ```
 
 6. Delete the topic _test-topic-1_.
 
