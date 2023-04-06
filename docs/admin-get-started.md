@@ -150,7 +150,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
     **Output**
 
-    Below is a part of the output. For detailed explanations of topic stats, see Pulsar statistics).
+    Below is a part of the output. For detailed explanations of topic stats, see Pulsar statistics.
 
     ```bash
     {
