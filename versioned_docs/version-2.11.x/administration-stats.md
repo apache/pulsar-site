@@ -10,10 +10,9 @@ The following table outlines the stats of a topic. For more details about how to
 
 :::note
 
-All metrics below are *reset* to 0 upon broker restart, *except* gauges marked as "Not reset upon restart".
+All stats below are **reset** to 0 upon broker restart or topic unloading, **except** the stats marked with asterisks * (the values of them **keep unchanged**).
 
 :::
-
 
 | Stat                                             | Description                                                                                                                     |
 |--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
@@ -22,15 +21,15 @@ All metrics below are *reset* to 0 upon broker restart, *except* gauges marked a
 | msgRateOut                                       | The sum of all local and replication consumers' dispatch rates (message per second).                                            |
 | msgThroughputOut                                 | The sum of all local and replication consumers' dispatch rates (byte per second).                                               |
 | averageMsgSize                                   | The average size (bytes) of messages published within the last interval.                                                        |
-| storageSize                                      | The sum of the ledgers' storage size for this topic. The space used to store the messages for the topic. Not reset upon restart |
-| earliestMsgPublishTimeInBacklogs                 | The publish time of the earliest message in the backlog (in milliseconds). Not reset upon restart                               |
+| storageSize*                                      | The sum of the ledgers' storage size **in BookKeeper** for a topic (in bytes). <br/><br/>**Note**: the `total storage size of a topic` = `storageSize` + `offloadedStorageSize`.  |
+| offloadedStorageSize*                             | The sum of the storage size **in tiered storage** for a topic (in bytes).<br/><br/>**Note**: the `total storage size of a topic` = `storageSize` + `offloadedStorageSize`. 
+| earliestMsgPublishTimeInBacklogs*                 | The publish time of the earliest message in the backlog (in milliseconds).                               |
 | bytesInCounter                                   | The total bytes published to the topic.                                                                                         |
 | msgInCounter                                     | The total messages published to the topic.                                                                                      |
 | bytesOutCounter                                  | The total bytes delivered to consumers.                                                                                         |
 | msgOutCounter                                    | The total messages delivered to consumers.                                                                                      |
 | msgChunkPublished                                | The topics that have chunked messages published on it.                                                                          |
-| backlogSize                                      | The estimated total unconsumed or backlog size (in bytes). Not reset upon restart                                               |
-| offloadedStorageSize                             | Space that is used to store the offloaded messages for the topic (in bytes). Not reset upon restart                             |
+| backlogSize*                                      | The estimated total unconsumed or backlog size (in bytes).                                              |
 | waitingPublishers                                | The number of publishers waiting in a queue in exclusive access mode.                                                           |
 | deduplicationStatus                              | The status of message deduplication for the topic.                                                                              |
 | topicEpoch                                       | The topic epoch or empty if not set.                                                                                            |
@@ -74,7 +73,7 @@ All metrics below are *reset* to 0 upon broker restart, *except* gauges marked a
 | lastAckedTimestamp                               | The latest timestamp of all the acknowledged timestamps of the consumers.                                                                                                                                                                                            |
 | msgRateRedeliver                                 | The total rate of messages redelivered on this subscription (message per second).                                                                                                                                                                                    |
 | chunkedMessageRate                               | The chunked message dispatch rate.                                                                                                                                                                                                                                   |
-| earliestMsgPublishTimeInBacklog                  | The publish time of the earliest message in the backlog for the subscription (in milliseconds). Note that **this metric is not reset upon restart**.                                                                                                                                               |
+| earliestMsgPublishTimeInBacklog*                  | The publish time of the earliest message in the backlog for the subscription (in milliseconds).                                                                                                        |
 | msgBacklogNoDelayed                              | The number of messages in the subscription backlog that do not contain the delay messages.                                                                                                                                                                           |
 | blockedSubscriptionOnUnackedMsgs                 | The flag to verify if a subscription is blocked due to reaching the threshold of unacked messages.                                                                                                                                                                   |
 | msgDelayed                                       | The number of delayed messages that are currently tracked.                                                                                                                                                                                                           |
@@ -93,7 +92,7 @@ All metrics below are *reset* to 0 upon broker restart, *except* gauges marked a
 | filterRescheduledMsgCount                        | The number of messages rescheduled by `EntryFilter`.                                                                                                                                                                                                                 |
 | bytesOutCounter                                  | The total bytes delivered to a consumer.                                                                                                                                                                                                                             |
 | msgOutCounter                                    | The total messages delivered to a consumer.                                                                                                                                                                                                                          |
-| backlogSize                                      | The size of backlog for this subscription (in bytes). Note that **this metric is not reset upon restart**.                                                                                                                                                                                          |
+| backlogSize*                                      | The size of backlog for this subscription (in bytes).                                                                                                                                                                                           |
 | nonContiguousDeletedMessagesRanges               | The number of non-contiguous deleted messages ranges.                                                                                                                                                                                                                |
 | nonContiguousDeletedMessagesRangesSerializedSize | The serialized size of non-contiguous deleted messages ranges.                                                                                                                                                                                                       |
 | [consumers](#consumer-stats)                     | The list of connected consumers for this subscription.                                                                                                                                                                                                               |
