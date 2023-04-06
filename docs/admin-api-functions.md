@@ -30,7 +30,7 @@ You can create a Pulsar function in cluster mode (deploy it on a Pulsar cluster)
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`create`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=create) subcommand.
@@ -54,7 +54,7 @@ pulsar-admin functions create \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName|operation/registerFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 FunctionConfig functionConfig = new FunctionConfig();
@@ -84,7 +84,7 @@ You can update a Pulsar function that has been deployed to a Pulsar cluster usin
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`update`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=update) subcommand.
@@ -106,7 +106,7 @@ pulsar-admin functions update \
 {@inject: endpoint|PUT|/admin/v3/functions/:tenant/:namespace/:functionName|operation/updateFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 FunctionConfig functionConfig = new FunctionConfig();
@@ -136,7 +136,7 @@ You can start a stopped function instance with `instance-id` using Admin CLI, RE
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`start`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=start) subcommand.
@@ -155,7 +155,7 @@ pulsar-admin functions start \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/:instanceId/start|operation/startFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().startFunction(tenant, namespace, functionName, Integer.parseInt(instanceId));
@@ -173,7 +173,7 @@ You can start all stopped function instances using Admin CLI, REST API or Java A
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`start`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=start) subcommand.
@@ -193,7 +193,7 @@ pulsar-admin functions start \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/start|operation/startFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().startFunction(tenant, namespace, functionName);
@@ -215,7 +215,7 @@ You can stop a function instance with `instance-id` using Admin CLI, REST API or
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`stop`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=stop) subcommand.
@@ -236,7 +236,7 @@ pulsar-admin functions stop \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/:instanceId/stop|operation/stopFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().stopFunction(tenant, namespace, functionName, Integer.parseInt(instanceId));
@@ -254,7 +254,7 @@ You can stop all function instances using Admin CLI, REST API or Java Admin API.
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`stop`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=stop) subcommand.
@@ -274,7 +274,7 @@ pulsar-admin functions stop \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/stop|operation/stopFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().stopFunction(tenant, namespace, functionName);
@@ -296,7 +296,7 @@ Restart a function instance with `instance-id` using Admin CLI, REST API or Java
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`restart`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=restart) subcommand.
@@ -317,7 +317,7 @@ pulsar-admin functions restart \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/:instanceId/restart|operation/restartFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().restartFunction(tenant, namespace, functionName, Integer.parseInt(instanceId));
@@ -335,7 +335,7 @@ You can restart all function instances using Admin CLI, REST API or Java admin A
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`restart`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=restart) subcommand.
@@ -355,7 +355,7 @@ pulsar-admin functions restart \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/restart|operation/restartFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().restartFunction(tenant, namespace, functionName);
@@ -373,7 +373,7 @@ You can list all Pulsar functions running under a specific tenant and namespace 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`list`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=list) subcommand.
@@ -392,7 +392,7 @@ pulsar-admin functions list \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace|operation/listFunctions?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunctions(tenant, namespace);
@@ -410,7 +410,7 @@ You can delete a Pulsar function that is running on a Pulsar cluster using Admin
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`delete`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=delete) subcommand.
@@ -430,7 +430,7 @@ pulsar-admin functions delete \
 {@inject: endpoint|DELETE|/admin/v3/functions/:tenant/:namespace/:functionName|operation/deregisterFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().deleteFunction(tenant, namespace, functionName);
@@ -448,7 +448,7 @@ You can get information about a Pulsar function currently running in cluster mod
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`get`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=get) subcommand.
@@ -468,7 +468,7 @@ pulsar-admin functions get \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace/:functionName|operation/getFunctionInfo?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunction(tenant, namespace, functionName);
@@ -489,7 +489,7 @@ You can get the current status of a Pulsar function instance with `instance-id` 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`status`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=status) subcommand.
@@ -510,7 +510,7 @@ pulsar-admin functions status \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace/:functionName/:instanceId/status|operation/getFunctionInstanceStatus?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunctionStatus(tenant, namespace, functionName, Integer.parseInt(instanceId));
@@ -528,7 +528,7 @@ You can get the current status of a Pulsar function instance using Admin CLI, RE
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`status`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=status) subcommand.
@@ -548,7 +548,7 @@ pulsar-admin functions status \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace/:functionName/status|operation/getFunctionStatus?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunctionStatus(tenant, namespace, functionName);
@@ -569,7 +569,7 @@ You can get the current stats of a Pulsar Function instance with `instance-id` u
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`stats`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=stats) subcommand.
@@ -590,7 +590,7 @@ pulsar-admin functions stats \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace/:functionName/:instanceId/stats|operation/getFunctionInstanceStats?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunctionStats(tenant, namespace, functionName, Integer.parseInt(instanceId));
@@ -608,7 +608,7 @@ You can get the current stats of a Pulsar function using Admin CLI, REST API or 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`stats`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=stats) subcommand.
@@ -628,7 +628,7 @@ pulsar-admin functions stats \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace/:functionName/stats|operation/getFunctionStats?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunctionStats(tenant, namespace, functionName);
@@ -646,7 +646,7 @@ You can trigger a specified Pulsar function with a supplied value using Admin CL
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`trigger`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=trigger) subcommand.
@@ -669,7 +669,7 @@ pulsar-admin functions trigger \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/trigger|operation/triggerFunction?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().triggerFunction(tenant, namespace, functionName, topic, triggerValue, triggerFile);
@@ -689,7 +689,7 @@ You can put the state associated with a Pulsar function using Admin CLI, REST AP
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`putstate`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=putstate) subcommand.
@@ -710,7 +710,7 @@ pulsar-admin functions putstate \
 {@inject: endpoint|POST|/admin/v3/functions/:tenant/:namespace/:functionName/state/:key|operation/putFunctionState?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 TypeReference<FunctionState> typeRef = new TypeReference<FunctionState>() {};
@@ -730,7 +730,7 @@ You can fetch the current state associated with a Pulsar function using Admin CL
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
 Use the [`querystate`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=querystate) subcommand.
@@ -751,7 +751,7 @@ pulsar-admin functions querystate \
 {@inject: endpoint|GET|/admin/v3/functions/:tenant/:namespace/:functionName/state/:key|operation/getFunctionState?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 admin.functions().getFunctionState(tenant, namespace, functionName, key);
