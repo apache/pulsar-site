@@ -58,7 +58,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
 **Prerequisites**
 
-- [Install and start Pulsar standalone](getting-started-standalone.md). This tutorial runs Pulsar 2.11 as an example.
+- Install and start Pulsar standalone. This tutorial runs Pulsar 2.11 as an example.
 
 **Steps**
 
@@ -150,7 +150,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
     **Output**
 
-    Below is a part of the output. For detailed explanations of topic stats, see [Pulsar statistics](administration-stats.md).
+    Below is a part of the output. For detailed explanations of topic stats, see Pulsar statistics).
 
     ```bash
     {
@@ -267,7 +267,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
 **Prerequisites**
 
-- [Install and start Pulsar standalone](getting-started-standalone.md). This tutorial runs Pulsar 2.11 as an example.
+- Install and start Pulsar standalone. This tutorial runs Pulsar 2.11 as an example.
 
 **Steps**
 
@@ -375,7 +375,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
     **Output**
 
-    For detailed explanations of topic stats, see [Pulsar statistics](administration-stats.md).
+    For detailed explanations of topic stats, see Pulsar statistics.
 
     ```bash
     {"metadata":{"partitions":5},"partitions":{"persistent://public/default/test-topic-2-partition-3":{"entriesAddedCounter":47087,"numberOfEntries":47087,"totalSize":80406959,"currentLedgerEntries":47087,"currentLedgerSize":80406959,"lastLedgerCreatedTimestamp":"2023-03-08T15:47:07.273+08:00","waitingCursorsCount":0,"pendingAddEntriesCount":0,"lastConfirmedEntry":"117:47086","state":"LedgerOpened","ledgers":[{"ledgerId":117,"entries":0,"size":0,"offloaded":false,"underReplicated":false}],"cursors":{},"schemaLedgers":[],"compactedLedger":{"ledgerId":-1,"entries":-1,"size":-1,"offloaded":false,"underReplicated":false}},"persistent://public/default/test-topic-2-partition-2":{"entriesAddedCounter":46995,"numberOfEntries":46995,"totalSize":80445417,"currentLedgerEntries":46995,"currentLedgerSize":80445417,"lastLedgerCreatedTimestamp":"2023-03-08T15:47:07.43+08:00","waitingCursorsCount":0,"pendingAddEntriesCount":0,"lastConfirmedEntry":"118:46994","state":"LedgerOpened","ledgers":[{"ledgerId":118,"entries":0,"size":0,"offloaded":false,"underReplicated":false}],...
