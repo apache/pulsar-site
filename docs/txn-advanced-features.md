@@ -34,7 +34,7 @@ If you want to enable authentication with transactions, follow the steps below.
 
 1. [Grant "consume" permission](admin-api-topics.md#grant-permission) to the `persistent://pulsar/system/transaction_coordinator_assign` topic.
 
-2. [Configure authentication](security-oauth2.md##configure-oauth2-authentication-in-pulsar-clients) in a Pulsar client.
+2. [Configure authentication](security-overview/#authentication) in a Pulsar client.
 
 ## Guarantee exactly-once semantics
 

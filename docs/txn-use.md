@@ -125,12 +125,12 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
                     // Step 7: the consumers acknowledge the input message with the transactions *individually*.
                     inputConsumer.acknowledgeAsync(message.getMessageId(), txn).get();
                     // Step 8: commit transactions.
-                    txn.commit();
+                    txn.commit().get();
                 } catch (ExecutionException e) {
                     if (!(e.getCause() instanceof PulsarClientException.TransactionConflictException)) {
                         // If TransactionConflictException is not thrown,
                         // you need to redeliver or negativeAcknowledge this message,
-                        // or else this message will not be received.
+                        // or else this message will not be received again.
                         inputConsumer.negativeAcknowledge(message);
                     }
 
