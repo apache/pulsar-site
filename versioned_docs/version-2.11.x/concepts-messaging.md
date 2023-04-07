@@ -1123,7 +1123,7 @@ Delayed message delivery enables you to consume a message later. In this mechani
 
 :::note
 
-Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+Only shared and key-shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
 
 :::
 
