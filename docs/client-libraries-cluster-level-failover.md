@@ -27,7 +27,7 @@ For more information about cluster-level failover, including concepts, benefits,
   * The number of ZooKeeper nodes should be equal to or greater than 3.
 * **Turn on geo-replication** between the primary cluster and any dependent cluster (primary to backup or backup to backup) to prevent data loss.
 * Set `enableReplicatedSubscriptions` to `true` in [`broker.conf`](https://github.com/apache/pulsar/blob/470b674016c8718f2dfd0a0f93cf02d49af0fead/conf/broker.conf#L592).
-* [Set `replicateSubscriptionState` to `true` when creating consumers](administration-geo/#enable-replicated-subscription).
+* Set `replicateSubscriptionState` to `true` when creating consumers.
 
 ## Configure cluster-level failover
 
