@@ -69,7 +69,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
     brokerServiceUrl=pulsar://localhost:6650/
     ```
 
-2. Create a persistent topic named test-topic-1 with 6 partitions.
+2. Create a persistent topic named _test-topic-1_ with 6 partitions.
 
     **Input**
 
@@ -97,7 +97,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
     There is no output. You can check the number of partitions in Step 5.
 
-4. Produce some messages to the partitioned topic test-topic-1.
+4. Produce some messages to the partitioned topic _test-topic-1_.
 
     **Input**
 
@@ -420,7 +420,15 @@ This tutorial guides you through every step of using Java admin API to manage to
 
 **Prerequisites**
 
-- Prepare a Java project. You can download one from [Apache Pulsar examples and demos](https://github.com/streamnative/examples).
+- Prepare a Java project and add the following dependency to your POM file.
+
+  ```java
+  <dependency>
+        <groupId>org.apache.pulsar</groupId>
+        <artifactId>pulsar-client-admin</artifactId>
+        <version>2.11.0</version>
+    </dependency>
+  ```
 
 **Steps**
 
