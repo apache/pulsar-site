@@ -16,7 +16,7 @@ Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish
 
 When a subscription is created, Pulsar [retains](concepts-architecture-overview.md#persistent-storage) all messages, even if the consumer is disconnected. The retained messages are discarded only when a consumer acknowledges that all these messages are processed successfully.
 
-If the consumption of a message fails and you want this message to be consumed again, you can enable [message redelivery mechanism](#message-redelivery) to request the broker to resend this message.
+If the consumption of a message fails and you want this message to be consumed again, you can enable the [message redelivery mechanism](#message-redelivery) to request the broker to resend this message.
 
 ## Messages
 
@@ -35,7 +35,7 @@ Messages are the basic "unit" of Pulsar. The following table lists the component
 | Publish time         | The timestamp of when the message is published. The timestamp is automatically applied by the producer.                                                                                                                                                                                                                                                                                                                    |
 | Event time           | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.                                                                                                                                                                                                                             |
 
-The default size of a message is 5 MB. You can configure the max size of a message with the following configurations.
+The default max size of a message is 5 MB. You can configure the max size of a message with the following configuration options.
 
 - In the `broker.conf` file.
 
