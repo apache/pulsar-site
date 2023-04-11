@@ -331,7 +331,7 @@ This section guides you through every step on how to configure cluster-level fai
 
 * **Turn on geo-replication** between the primary cluster and any dependent cluster (primary to backup or backup to backup) to prevent data loss.
 
-* Set `replicateSubscriptionState` to `true` when creating consumers.
+* [Enable replicated subscription](administration-geo.md#enable-replicated-subscription).
 
 ````mdx-code-block
 <Tabs
