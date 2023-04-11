@@ -29,7 +29,7 @@ Alternatively, you can specify `--name`, `--namespace` and `--tenant` as follows
     --name ExclamationFunctio6
 ```
 
-As shown below, the `get` command shows input, output, runtime, and other information about the `_ExclamationFunctio6_` function.
+As shown below, the `get` command shows input, output, runtime, and other information about the `ExclamationFunction` function.
 
 ```json
 {
