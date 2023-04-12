@@ -229,17 +229,19 @@ In case of failover, a consumer can restart consuming from the failure point in 
 
 ### Enable replicated subscription
 
-Replicated subscription is disabled by default. You can enable replicated subscription when creating a consumer.
+If you want to use replicated subscriptions in Pulsar:
 
-```java
+- For broker side: set `enableReplicatedSubscriptions` to `true` in [`broker.conf`](https://github.com/apache/pulsar/blob/470b674016c8718f2dfd0a0f93cf02d49af0fead/conf/broker.conf#L592).
 
-Consumer<String> consumer = client.newConsumer(Schema.STRING)
-            .topic("my-topic")
-            .subscriptionName("my-subscription")
-            .replicateSubscriptionState(true)
-            .subscribe();
+- For consumer side: replicated subscription is disabled by default. You can enable replicated subscriptions when creating a consumer.
 
-```
+  ```java
+  Consumer<String> consumer = client.newConsumer(Schema.STRING)
+              .topic("my-topic")
+              .subscriptionName("my-subscription")
+              .replicateSubscriptionState(true)
+              .subscribe();
+  ```
 
 ### Advantages
 
