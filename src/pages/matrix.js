@@ -8,6 +8,7 @@ import {
   producer,
   reader,
   consumer,
+  tableview,
 } from "../../data/matrix.js";
 
 const _key = (language) => language.replace(".", "").replace(" ", "");
@@ -17,7 +18,7 @@ const genColomns = () => {
       key: _key(language),
       dataKey: _key(language),
       title: language === "Sub" ? "" : language,
-      width: index > 1 ? 132 : 154,
+      width: index > 1 ? 126 : 180,
       dataGetter: ({ column, rowData }) => {
         if (parseInt(rowData[column.dataKey]) === 0) {
           return "🚫";
@@ -82,8 +83,15 @@ const genCount = (values) => {
   return count;
 };
 
-const getHeigh = (values) => {
-  return "h-[" + genCount(values) * 50 + "px]";
+const titles = ["Client", "Producer", "Consumer", "Reader", "TableView"];
+const getHeight = (values, index) => {
+  console.log("h-[" + genCount(values) * 50 + "px]");
+  if (index === 0) return "h-[700px]";
+  if (index === 1) return "h-[950px]";
+  if (index === 2) return "h-[700px]";
+  if (index === 3) return "h-[700px]";
+  if (index === 4) return "h-[700px]";
+  return "h-[700px]";
 };
 
 const columns = genColomns();
@@ -113,33 +121,51 @@ const rowRenderer = ({ rowData, rowIndex, cells, columns }) => {
   return cells;
 };
 
-const titles = ["Client", "Producer", "Consumer", "Reader"];
 export default function Matrix() {
   return (
     <Layout>
       <div className="tailwind">
         <div className="my-12 container">
-          {[client, producer, consumer, reader].map((values, index) => {
-            return (
-              <div className="mb-8" key={index}>
-                <div className="font-bold text-xl mb-4">{titles[index]}</div>
-                <div className={`w-full ${getHeigh(values)}`}>
-                  <AutoResizer>
-                    {({ width, height }) => (
-                      <BaseTable
-                        fixed
-                        width={width}
-                        height={height}
-                        columns={fixedColumns}
-                        data={genData(values)}
-                        rowRenderer={rowRenderer}
-                      />
-                    )}
-                  </AutoResizer>
+          {/* <div className="mb-8">
+            <div className="font-bold text-xl mb-4">Client</div>
+            <div className={clsx("w-full", getHeigh(client))}>
+              <AutoResizer>
+                {({ width, height }) => (
+                  <BaseTable
+                    fixed
+                    width={width}
+                    height={height}
+                    columns={fixedColumns}
+                    data={genData(client)}
+                    rowRenderer={rowRenderer}
+                  />
+                )}
+              </AutoResizer>
+            </div>
+          </div> */}
+          {[client, producer, consumer, reader, tableview].map(
+            (values, index) => {
+              return (
+                <div className="mb-8" key={index}>
+                  <div className="font-bold text-xl mb-4">{titles[index]}</div>
+                  <div className={`w-full ${getHeight(values, index)}`}>
+                    <AutoResizer>
+                      {({ width, height }) => (
+                        <BaseTable
+                          fixed
+                          width={width}
+                          height={height}
+                          columns={fixedColumns}
+                          data={genData(values)}
+                          rowRenderer={rowRenderer}
+                        />
+                      )}
+                    </AutoResizer>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
         </div>
       </div>
     </Layout>
