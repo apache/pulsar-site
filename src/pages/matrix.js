@@ -2,7 +2,13 @@ import Layout from "@theme/Layout";
 import React from "react";
 import "react-base-table/styles.css";
 import BaseTable, { Column, AutoResizer } from "react-base-table";
-import { languages, client, producer, reader } from "../../data/matrix.js";
+import {
+  languages,
+  client,
+  producer,
+  reader,
+  consumer,
+} from "../../data/matrix.js";
 
 const _key = (language) => language.replace(".", "").replace(" ", "");
 const genColomns = () => {
@@ -11,7 +17,7 @@ const genColomns = () => {
       key: _key(language),
       dataKey: _key(language),
       title: language === "Sub" ? "" : language,
-      width: index > 1 ? 120 : 150,
+      width: index > 1 ? 132 : 154,
       dataGetter: ({ column, rowData }) => {
         if (parseInt(rowData[column.dataKey]) === 0) {
           return "🚫";
@@ -22,13 +28,14 @@ const genColomns = () => {
         }
         return rowData[column.dataKey];
       },
+      align: index > 1 ? "center" : "left",
     };
   });
 };
 
-const genData = () => {
+const genData = (values) => {
   const datas = [];
-  client.forEach((feature) => {
+  values.forEach((feature) => {
     if (feature.Children) {
       feature.Children.forEach((child, index) => {
         const data = {
@@ -63,8 +70,23 @@ const genData = () => {
   return datas;
 };
 
+const genCount = (values) => {
+  let count = 1;
+  values.forEach((feature) => {
+    if (feature.Children) {
+      count = count + feature.Children.length;
+    } else {
+      count = count + 1;
+    }
+  });
+  return count;
+};
+
+const getHeigh = (values) => {
+  return "h-[" + genCount(values) * 50 + "px]";
+};
+
 const columns = genColomns();
-const data = genData();
 
 const fixedColumns = columns.map((column, columnIndex) => {
   let frozen;
@@ -91,25 +113,33 @@ const rowRenderer = ({ rowData, rowIndex, cells, columns }) => {
   return cells;
 };
 
+const titles = ["Client", "Producer", "Consumer", "Reader"];
 export default function Matrix() {
   return (
     <Layout>
       <div className="tailwind">
         <div className="my-12 container">
-          <div className="w-full h-[60vh]">
-            <AutoResizer>
-              {({ width, height }) => (
-                <BaseTable
-                  fixed
-                  width={width}
-                  height={height}
-                  columns={fixedColumns}
-                  data={data}
-                  rowRenderer={rowRenderer}
-                />
-              )}
-            </AutoResizer>
-          </div>
+          {[client, producer, consumer, reader].map((values, index) => {
+            return (
+              <div className="mb-8" key={index}>
+                <div className="font-bold text-xl mb-4">{titles[index]}</div>
+                <div className={`w-full ${getHeigh(values)}`}>
+                  <AutoResizer>
+                    {({ width, height }) => (
+                      <BaseTable
+                        fixed
+                        width={width}
+                        height={height}
+                        columns={fixedColumns}
+                        data={genData(values)}
+                        rowRenderer={rowRenderer}
+                      />
+                    )}
+                  </AutoResizer>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Layout>
