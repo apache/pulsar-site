@@ -24,7 +24,7 @@ Edgaras Petovradzius, Senior Engineer, the LEGO Group
 
 Mathias Ravn Tversted, Engineer, the LEGO Group 
 
-This talk will explore the challenges the LEGO Group encountered to host and manage Pulsar-as-a-Service across multiple domains, and how they collaborated with StreamNative in the process. It will highlight how the organization used OAuth2 for authentication and its self-service management platform for access control of Pulsar resources. The speakers will also discuss their observability tooling, incorporating cloud-native tools like Prometheus and OTel collectors, as well as internal tools for metrics and an ELK stack. Finally, the presentation will share best practices for using Pulsar clients in various programming languages and explore alternative methods of producing and consuming messages. 
+This talk will explore the challenges the LEGO Group encountered in hosting and managing Pulsar-as-a-Service across multiple domains, and how they collaborated with StreamNative in the process. It will highlight how the organization used OAuth2 for authentication and its self-service management platform for access control of Pulsar resources. The speakers will also discuss their observability tooling, incorporating cloud-native tools like Prometheus and OTel collectors, as well as internal tools for metrics and an ELK stack. Finally, the presentation will share best practices for using Pulsar clients in various programming languages and explore alternative methods of producing and consuming messages. 
 
 ### Pulsar Observability in High-Topic Cardinality Deployments for Telco
 
