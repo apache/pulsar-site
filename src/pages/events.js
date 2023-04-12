@@ -52,10 +52,10 @@ export default function Events() {
                 <FeaturedEvent
                   hidden="false" // use true to hide and false to show the featured event card
                   title="Pulsar Virtual Summit Europe 2023"
-                  description="Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! The CFP is now open!"
+                  description="Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! Don't miss this free one-day event!"
                   date=""
-                  link="https://sessionize.com/pulsar-virtual-summit-europe-2023/"
-                  linkText="Submit your session"
+                  link="https://events.zoom.us/ev/Ap6rsDg9LeVfmdajJ_eB13HH026J1d_o8OoTKkQnl_jzVl-srhwB~AggLXsr32QYFjq8BlYLZ5I06Dg"
+                  linkText="Register"
                 />
               </div>
             </div>
