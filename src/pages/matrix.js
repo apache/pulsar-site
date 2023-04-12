@@ -1,18 +1,8 @@
 import Layout from "@theme/Layout";
 import React from "react";
 import "react-base-table/styles.css";
-import BaseTable, {
-  Column,
-  SortOrder,
-  AutoResizer,
-  normalizeColumns,
-  callOrReturn,
-  unflatten,
-  TableHeader as BaseTableHeader,
-  TableRow as BaseTableRow,
-} from "react-base-table";
-
-import { languages, client } from "../../data/matrix.js";
+import BaseTable, { Column, AutoResizer } from "react-base-table";
+import { languages, client, producer, reader } from "../../data/matrix.js";
 
 const _key = (language) => language.replace(".", "").replace(" ", "");
 const genColomns = () => {

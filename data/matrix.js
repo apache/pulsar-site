@@ -77,4 +77,7 @@ module.exports = {
       "NET(C#/F#/VB)": 2,
     },
   ],
+  producer: [],
+  consumer: [],
+  reader: [],
 };
