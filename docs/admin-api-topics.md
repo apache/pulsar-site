@@ -1675,7 +1675,7 @@ admin.topics().getPartitionedTopicMetadata(topicName);
 
 ### Update
 
-You can update the number of partitions for an existing partitioned topic *if* the topic is non-global. However, you can only add the partition number. Decrementing the number of partitions would delete the topic, which is not supported in Pulsar.
+You can update the number of partitions for an existing partitioned topic. However, you can only increase the number of partitions. Decrementing the number of partitions would delete the topic, which is not supported in Pulsar.
 
 Producers and consumers can find the newly created partitions automatically.
 
