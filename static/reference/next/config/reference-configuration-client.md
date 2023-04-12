@@ -72,6 +72,13 @@ Number of connections established between the client and each Broker. A value of
 
 **Default**: `1`
 
+### description
+The extra description of the client version. The length cannot exceed 64.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
 ### dnsLookupBindAddress
 The Pulsar client dns lookup bind address, default behavior is bind on 0.0.0.0
 

@@ -119,10 +119,13 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 3. The consumer buffers the chunked messages and aggregates them into the receiver queue when it receives all the chunks of a message.
 4. The client consumes the aggregated message from the receiver queue.
 
-**Limitations:**
-- Chunking is only available for persisted topics.
+:::note
+
+- Chunking is only available for persistent topics.
 - Chunking is only available for the exclusive and failover subscription types.
-- Chunking cannot be enabled simultaneously with batching.
+- Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
+
+:::
 
 #### Handle consecutive chunked messages with one ordered consumer
 
@@ -572,10 +575,13 @@ In *shared* or *round robin* type, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-> **Limitations of Shared type**
-> When using Shared type, be aware that:
-> * Message ordering is not guaranteed.
-> * You cannot use cumulative acknowledgment with Shared type.
+:::note
+
+When using Shared type, be aware that:
+* Message ordering is not guaranteed.
+* You cannot use cumulative acknowledgment with Shared type.
+
+:::
 
 ![Shared subscriptions](/assets/pulsar-shared-subscriptions.png)
 
@@ -634,10 +640,13 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </Tabs>
 ````
 
-> **Limitations of Key_Shared type**
-> When you use Key_Shared type, be aware that:
-> * You need to specify a key or orderingKey for messages.
-> * You cannot use cumulative acknowledgment with Key_Shared type.
+:::note
+
+When you use Key_Shared type, be aware that:
+* You need to specify a key or orderingKey for messages.
+* You cannot use cumulative acknowledgment with Key_Shared type.
+
+:::
 
 ### Subscription modes
 
@@ -818,7 +827,7 @@ In non-persistent topics, brokers immediately deliver messages to all connected 
 
 > With non-persistent topics, message data lives only in memory. If a message broker fails or message data can otherwise not be retrieved from memory, your message data may be lost. Use non-persistent topics only if you're *certain* that your use case requires it and can sustain it.
 
-By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 ### Performance
 
@@ -933,12 +942,15 @@ The following diagram illustrates what happens when message deduplication is dis
 
 ![Pulsar message deduplication](/assets/message-deduplication.png)
 
-
 Message deduplication is disabled in the scenario shown at the top. Here, a producer publishes message 1 on a topic; the message reaches a Pulsar broker and is [persisted](concepts-architecture-overview.md#persistent-storage) to BookKeeper. The producer then sends message 1 again (in this case due to some retry logic), and the message is received by the broker and stored in BookKeeper again, which means that duplication has occurred.
 
 In the second scenario at the bottom, the producer publishes message 1, which is received by the broker and persisted, as in the first scenario. When the producer attempts to publish the message again, however, the broker knows that it has already seen message 1 and thus does not persist the message.
 
-> Message deduplication is handled at the namespace level or the topic level. For more instructions, see the [message deduplication cookbook](cookbooks-deduplication.md).
+:::tip
+
+Message deduplication is handled at the namespace level or the topic level. For more instructions, see the [message deduplication cookbook](cookbooks-deduplication.md).
+
+:::
 
 
 ### Producer idempotency
@@ -954,7 +966,11 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 ## Delayed message delivery
 Delayed message delivery enables you to consume a message later. In this mechanism, a message is stored in BookKeeper. The `DelayedDeliveryTracker` maintains the time index (time -> messageId) in memory after the message is published to a broker. This message will be delivered to a consumer once the specified delay is over.
 
-Delayed message delivery only works in Shared subscription type. In Exclusive and Failover subscription types, the delayed message is dispatched immediately.
+:::note
+
+Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+
+:::
 
 The diagram below illustrates the concept of delayed message delivery:
 

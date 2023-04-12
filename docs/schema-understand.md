@@ -61,7 +61,7 @@ The following table outlines the primitive types that Pulsar schema supports, an
 | `INSTANT`| A single instantaneous point on the timeline with nanoseconds precision. | java.time.Instant | N/A | N/A | N/A | N/A |
 | `LOCAL_DATE` | An immutable date-time object that represents a date, often viewed as year-month-day. | java.time.LocalDate | N/A | N/A | N/A | N/A |
 | `LOCAL_TIME` | An immutable date-time object that represents a time, often viewed as hour-minute-second. Time is represented to nanosecond precision. | java.time.LocalDateTime | N/A | N/A  | N/A | N/A |
-| LOCAL_DATE_TIME | An immutable date-time object that represents a date-time, often viewed as year-month-day-hour-minute-second. | java.time.LocalTime | N/A | N/A | N/A | N/A |
+| `LOCAL_DATE_TIME` | An immutable date-time object that represents a date-time, often viewed as year-month-day-hour-minute-second. | java.time.LocalTime | N/A | N/A | N/A | N/A |
 
 :::note
 

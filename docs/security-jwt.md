@@ -38,21 +38,27 @@ JWT authentication supports two different kinds of keys to generate and validate
 
 The administrators create the secret key and use it to generate the client tokens. You can also configure this key for brokers to validate the clients.
 
-The output file is generated in the root of your Pulsar installation directory. You can also provide an absolute path for the output file using the command below.
+The output file is generated in the root of your Pulsar installation directory.
 
 ```shell
 bin/pulsar tokens create-secret-key --output my-secret.key
 ```
 
+You can also provide an absolute path for the output file using the command below.
+
+```shell
+bin/pulsar tokens create-secret-key --output /opt/my-secret.key
+```
+
 To generate a base64-encoded private key, enter the following command.
 
 ```shell
-bin/pulsar tokens create-secret-key --output  /opt/my-secret.key --base64
+bin/pulsar tokens create-secret-key --output my-secret.key --base64
 ```
 
 ### Create a key pair
 
-To use asymmetric key encryption, you need to create a pair of keys. The output file is generated in the root of your Pulsar installation directory. You can also provide an absolute path for the output file using the command below.
+To use asymmetric key encryption, you need to create a pair of keys. The output file is generated in the root of your Pulsar installation directory.
 
 ```shell
 bin/pulsar tokens create-key-pair --output-private-key my-private.key --output-public-key my-public.key
@@ -119,7 +125,7 @@ tokenSecretKey=file:///path/to/secret.key
 
 ## Configure JWT authentication in CLI Tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_origin@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_origin@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_reference@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
 
 You need to add the following parameters to the `conf/client.conf` config file to use the JWT authentication with CLI tools of Pulsar:
 

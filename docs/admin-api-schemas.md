@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 This page only shows **some frequently used operations**.
 
-- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+- For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
@@ -31,7 +31,7 @@ To upload (register) a new schema for a topic, you can use one of the following 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -67,7 +67,7 @@ The post payload is in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 void createSchema(String topic, PostSchemaPayload schemaPayload)
@@ -119,7 +119,7 @@ To get the latest schema for a topic, you can use one of the following methods.
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -162,7 +162,7 @@ Here is an example of a response, which is returned in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 SchemaInfo createSchema(String topic)
@@ -187,7 +187,7 @@ To get a specific version of a schema, you can use one of the following methods.
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -215,7 +215,7 @@ Here is an example of a response, which is returned in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 SchemaInfo createSchema(String topic, long version)
@@ -267,7 +267,7 @@ To delete a schema for a topic, you can use one of the following methods.
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -291,7 +291,7 @@ Here is an example of a response returned in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 void deleteSchema(String topic)
@@ -318,7 +318,7 @@ To enable/enforce schema auto-update at the namespace level, you can use one of 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -342,7 +342,7 @@ The post payload is in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 Here is an example to enable schema auto-update for a tenant/namespace.
 
@@ -367,7 +367,7 @@ To disable schema auto-update at the **namespace** level, you can use one of the
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -391,7 +391,7 @@ The post payload is in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 Here is an example to enable schema auto-unpdate of a tenant/namespace.
 
@@ -414,7 +414,7 @@ To enable schema validation enforcement at the **namespace** level, you can use 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -438,7 +438,7 @@ The post payload is in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 Here is an example to enable schema validation enforcement for a tenant/namespace.
 
@@ -457,7 +457,7 @@ To disable schema validation enforcement at the **namespace** level, you can use
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
@@ -481,7 +481,7 @@ The post payload is in JSON format.
 ```
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 Here is an example to enable schema validation enforcement for a tenant/namespace.
 
@@ -508,11 +508,11 @@ To set a schema compatibility check strategy at the topic level, you can use one
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command.
+Use the [`pulsar-admin topicPolicies set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/topicPolicies?id=set-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicName>
@@ -524,7 +524,7 @@ pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicNa
 Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 void setSchemaCompatibilityStrategy(String topic, SchemaCompatibilityStrategy strategy)
@@ -549,11 +549,11 @@ To set schema compatibility check strategy at the namespace level, you can use o
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=set-schema-compatibility-strategy) command.
+Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=set-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin namespaces set-schema-compatibility-strategy options
@@ -565,7 +565,7 @@ pulsar-admin namespaces set-schema-compatibility-strategy options
 Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 Use the [`setSchemaCompatibilityStrategy`](/api/admin/) method.
 
@@ -596,11 +596,11 @@ To get the topic-level schema compatibility check strategy, you can use one of t
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command.
+Use the [`pulsar-admin topicPolicies get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/topicPolicies?id=get-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
@@ -612,7 +612,7 @@ pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
 Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 ```java
 SchemaCompatibilityStrategy getSchemaCompatibilityStrategy(String topic, boolean applied)
@@ -641,11 +641,11 @@ You can get schema compatibility check strategy at namespace level using one of 
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Admin CLI"
-  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java Admin API","value":"Java Admin API"}]}>
+  values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 
 <TabItem value="Admin CLI">
 
-Use the [`pulsar-admin namespaces get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/namespaces?id=get-schema-compatibility-strategy) command.
+Use the [`pulsar-admin namespaces get-schema-compatibility-strategy`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=get-schema-compatibility-strategy) command.
 
 ```shell
 pulsar-admin namespaces get-schema-compatibility-strategy options
@@ -657,7 +657,7 @@ pulsar-admin namespaces get-schema-compatibility-strategy options
 Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
-<TabItem value="Java Admin API">
+<TabItem value="Java">
 
 Use the [`getSchemaCompatibilityStrategy`](/api/admin/) method.
 

@@ -115,6 +115,20 @@
             },
             "type": "object"
         },
+        "AuthenticationParameters": {
+            "properties": {
+                "clientAuthenticationDataSource": {
+                    "$ref": "#/definitions/AuthenticationDataSource"
+                },
+                "clientRole": {
+                    "type": "string"
+                },
+                "originalPrincipal": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "AutoFailoverPolicyData": {
             "properties": {
                 "parameters": {
@@ -1259,6 +1273,12 @@
                 "k8Uri": {
                     "type": "string"
                 },
+                "kubernetesFunctionAuthProviderConfig": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
                 "memoryOverCommitRatio": {
                     "format": "double",
                     "type": "number"
@@ -1720,6 +1740,12 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "bucketDelayedIndexStats": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicMetricBean"
+                    },
+                    "type": "object"
+                },
                 "bytesInCounter": {
                     "format": "int64",
                     "type": "integer"
@@ -2137,6 +2163,12 @@
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
+                },
+                "bucketDelayedIndexStats": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicMetricBean"
+                    },
+                    "type": "object"
                 },
                 "bytesInCounter": {
                     "format": "int64",
@@ -2579,6 +2611,12 @@
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
+                },
+                "bucketDelayedIndexStats": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicMetricBean"
+                    },
+                    "type": "object"
                 },
                 "bytesInCounter": {
                     "format": "int64",
@@ -3657,7 +3695,7 @@
         "RetentionPolicies": {
             "properties": {
                 "retentionSizeInMB": {
-                    "format": "int32",
+                    "format": "int64",
                     "type": "integer"
                 },
                 "retentionTimeInMinutes": {
@@ -3927,8 +3965,10 @@
             "type": "object"
         },
         "TenantInfo": {
+            "description": "Information of adminRoles and allowedClusters for tenant",
             "properties": {
                 "adminRoles": {
+                    "description": "Comma separated list of auth principal allowed to administrate the tenant.",
                     "items": {
                         "type": "string"
                     },
@@ -3936,6 +3976,7 @@
                     "uniqueItems": true
                 },
                 "allowedClusters": {
+                    "description": "Comma separated allowed clusters.",
                     "items": {
                         "type": "string"
                     },
@@ -3952,6 +3993,24 @@
                 },
                 "threadGroupName": {
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TopicMetricBean": {
+            "properties": {
+                "labelsAndValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "format": "double",
+                    "type": "number"
                 }
             },
             "type": "object"
@@ -4287,6 +4346,13 @@
                         "type": "string"
                     },
                     "type": "object"
+                },
+                "proxyRoles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
                 },
                 "pulsarFunctionsCluster": {
                     "type": "string"

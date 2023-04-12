@@ -16,7 +16,7 @@ It's great for quickly switching between different clusters, and can modify clus
 
 ## Use case
 - Administration: find all the [Admin API](admin-api-overview.md) features under the `admin` command.
-- Client: find all the [pulsar-client](pathname:///reference/#/@pulsar:version_origin@/pulsar-client/) features under the `client` command.
+- Client: find all the [pulsar-client](pathname:///reference/#/@pulsar:version_reference@/pulsar-client/) features under the `client` command.
 
 
 ## Install Pulsar Shell

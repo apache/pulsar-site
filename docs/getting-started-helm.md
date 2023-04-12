@@ -153,7 +153,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
    :::tip
 
-   To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_origin@/pulsar-admin/).
+   To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
    :::
 
