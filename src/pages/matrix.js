@@ -22,6 +22,16 @@ const genColomns = () => {
       dataKey: _key(language),
       title: language === "Sub" ? "" : language,
       width: index > 1 ? 120 : 150,
+      dataGetter: ({ column, rowData }) => {
+        if (parseInt(rowData[column.dataKey]) === 0) {
+          return "🚫";
+        } else if (parseInt(rowData[column.dataKey]) === 1) {
+          return "✔️";
+        } else if (parseInt(rowData[column.dataKey]) === 2) {
+          return "✅";
+        }
+        return rowData[column.dataKey];
+      },
     };
   });
 };
