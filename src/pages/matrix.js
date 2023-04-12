@@ -85,12 +85,11 @@ const genCount = (values) => {
 
 const titles = ["Client", "Producer", "Consumer", "Reader", "TableView"];
 const getHeight = (values, index) => {
-  console.log("h-[" + genCount(values) * 50 + "px]");
   if (index === 0) return "h-[700px]";
   if (index === 1) return "h-[950px]";
-  if (index === 2) return "h-[700px]";
-  if (index === 3) return "h-[700px]";
-  if (index === 4) return "h-[700px]";
+  if (index === 2) return "h-[1450px]";
+  if (index === 3) return "h-[400px]";
+  if (index === 4) return "h-[200px]";
   return "h-[700px]";
 };
 
@@ -126,28 +125,16 @@ export default function Matrix() {
     <Layout>
       <div className="tailwind">
         <div className="my-12 container">
-          {/* <div className="mb-8">
-            <div className="font-bold text-xl mb-4">Client</div>
-            <div className={clsx("w-full", getHeigh(client))}>
-              <AutoResizer>
-                {({ width, height }) => (
-                  <BaseTable
-                    fixed
-                    width={width}
-                    height={height}
-                    columns={fixedColumns}
-                    data={genData(client)}
-                    rowRenderer={rowRenderer}
-                  />
-                )}
-              </AutoResizer>
-            </div>
-          </div> */}
           {[client, producer, consumer, reader, tableview].map(
             (values, index) => {
               return (
                 <div className="mb-8" key={index}>
-                  <div className="font-bold text-xl mb-4">{titles[index]}</div>
+                  <div
+                    id={titles[index].toLowerCase()}
+                    className="font-bold text-xl mb-4"
+                  >
+                    {titles[index]}
+                  </div>
                   <div className={`w-full ${getHeight(values, index)}`}>
                     <AutoResizer>
                       {({ width, height }) => (
