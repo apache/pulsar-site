@@ -529,7 +529,7 @@ The broker tries to evenly assign partitions to consumers with the highest prior
 
 A consumer is selected by running a module operation `mod (partition index, consumer index)`.
 
-- If the number of a partitioned topic is **less** than the number of consumers:
+- If the number of partitions in a partitioned topic is **less** than the number of consumers:
   
   For example, in the diagram below, this partitioned topic has 2 partitions and there are 4 consumers. 
   
@@ -541,7 +541,7 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-4.svg)
 
-- If the number of a partitioned topic is **greater** than the number of consumers:
+- If the number of partitions in a partitioned topic is **greater** than the number of consumers:
   
   For example, in the diagram below, this partitioned topic has 9 partitions and 3 consumers. 
   
