@@ -535,9 +535,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   Each partition has 1 active consumer and 1 stand-by consumer. 
   
-    - For p0, Consumer A is the master consumer, while Consumer B would be the next consumer in line to receive messages if Consumer A is disconnected.
+    - For p0, consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
 
-    - For p1, Consumer C is the master consumer, while Consumer D would be the next consumer in line to receive messages if Consumer C is disconnected.
+    - For p1, consumer C is the master consumer, while consumer D would be the next consumer in line to receive messages if consumer C is disconnected.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-4.svg)
 
@@ -560,7 +560,7 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   The topic has 1 active consumer and 1 stand-by consumer. 
   
-  Consumer A is the master consumer, while Consumer B would be the next consumer in line to receive messages if Consumer A is disconnected.
+  Consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-2.svg)
 
@@ -568,9 +568,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
   
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to Consumer B. 
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
   
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to Consumer A.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
 
