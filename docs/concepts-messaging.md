@@ -523,9 +523,9 @@ When the master consumer disconnects, all (non-acknowledged and subsequent) mess
 
 ##### Failover | Partitioned topics
 
-For partitioned topics, the broker sorts consumers by priority level and lexicographical order of consumer name. 
+For partitioned topics, the broker sorts consumers by priority and lexicographical order of consumer name. 
 
-The broker tries to evenly assign partitions to consumers with the highest priority level. 
+The broker tries to evenly assign partitions to consumers with the highest priority. 
 
 A consumer is selected by running a module operation `mod (partition index, consumer index)`.
 
