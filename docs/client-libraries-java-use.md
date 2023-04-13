@@ -70,7 +70,7 @@ while (true) {
       // Do something with the message
       System.out.println("Message received: " + new String(msg.getData()));
 
-      // Acknowledge the message so that it can be deleted by the message broker
+      // Acknowledge the message
       consumer.acknowledge(msg);
   } catch (Exception e) {
       // Message failed to process, redeliver later
@@ -79,7 +79,7 @@ while (true) {
 }
 ```
 
-If you don't want to block your main thread and rather listen constantly for new messages, consider using a `MessageListener`.
+If you don't want to block your main thread and rather listen constantly for new messages, consider using a `MessageListener`. The `MessageListener` will use a thread pool inside the PulsarClient. You can set the number of threads to use for message listeners in the ClientBuilder.
 
 ```java
 MessageListener myMessageListener = (consumer, msg) -> {
