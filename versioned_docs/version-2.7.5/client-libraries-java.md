@@ -299,7 +299,7 @@ while (true) {
       // Do something with the message
       System.out.printf("Message received: %s", new String(msg.getData()));
 
-      // Acknowledge the message so that it can be deleted by the message broker
+      // Acknowledge the message
       consumer.acknowledge(msg);
   } catch (Exception e) {
       // Message failed to process, redeliver later
@@ -309,7 +309,7 @@ while (true) {
 
 ```
 
-If you don't want to block your main thread and rather listen constantly for new messages, consider using a `MessageListener`.
+If you don't want to block your main thread but constantly listen for new messages, consider using a `MessageListener`. The `MessageListener` uses a thread pool inside the client. You can set the number of threads for message listeners in the ClientBuilder.
 
 ```java
 
