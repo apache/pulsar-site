@@ -21,10 +21,20 @@ The following example creates a Python client using multiple advertised listener
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
   <TabItem value="Java">
 
   ```java
+  PulsarClient client = PulsarClient.builder()
+    .serviceUrl("pulsar://xxxx:6650")
+    .listenerName("external")
+    .build();
+  ```
+
+  </TabItem>
+  <TabItem value="C++">
+
+  ```cpp
   PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar://xxxx:6650")
     .listenerName("external")

@@ -242,6 +242,21 @@ The maximum amount of data that will be buffered for incoming http requests so t
 
 **Category**: HTTP
 
+### httpMaxRequestHeaderSize
+  The maximum size in bytes of the request header.
+  Larger headers will allow for more and/or larger cookies plus larger form content encoded in a URL.
+  However, larger headers consume more memory and can make a server more vulnerable to denial of service
+  attacks.
+
+
+**Type**: `int`
+
+**Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpNumThreads
 Number of threads to use for HTTP requests processing
 
@@ -557,6 +572,17 @@ Authentication provider name list (a comma-separated list of class names
 **Type**: `java.util.Set`
 
 **Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Proxy Authentication
+
+### authenticationRefreshCheckSeconds
+Interval of time for checking for expired authentication credentials. Disable by setting to 0.
+
+**Type**: `int`
+
+**Default**: `60`
 
 **Dynamic**: `false`
 

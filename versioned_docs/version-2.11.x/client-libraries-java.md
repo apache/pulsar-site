@@ -438,7 +438,7 @@ while (true) {
       // Do something with the message
       System.out.println("Message received: " + new String(msg.getData()));
 
-      // Acknowledge the message so that it can be deleted by the message broker
+      // Acknowledge the message
       consumer.acknowledge(msg);
   } catch (Exception e) {
       // Message failed to process, redeliver later
@@ -447,7 +447,7 @@ while (true) {
 }
 ```
 
-If you don't want to block your main thread and rather listen constantly for new messages, consider using a `MessageListener`.
+If you don't want to block your main thread but constantly listen for new messages, consider using a `MessageListener`. The `MessageListener` uses a thread pool inside the client. You can set the number of threads for message listeners in the ClientBuilder.
 
 ```java
 MessageListener myMessageListener = (consumer, msg) -> {
@@ -1193,7 +1193,7 @@ For more concepts and reference information about cluster-level failover, includ
 
 * **Turn on geo-replication** between the primary cluster and any dependent cluster (primary to backup or backup to backup) to prevent data loss.
 
-* Set `replicateSubscriptionState` to `true` when creating consumers.
+* [Enable replicated subscription](administration-geo.md#enable-replicated-subscription).
 
 ````mdx-code-block
 <Tabs groupId="failover-choice"

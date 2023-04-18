@@ -299,7 +299,7 @@ while (true) {
       // Do something with the message
       System.out.printf("Message received: %s", new String(msg.getData()));
 
-      // Acknowledge the message so that it can be deleted by the message broker
+      // Acknowledge the message
       consumer.acknowledge(msg);
   } catch (Exception e) {
       // Message failed to process, redeliver later

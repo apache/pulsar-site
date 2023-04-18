@@ -5,6 +5,7 @@ sidebar_label: "Debug with Functions CLI"
 ---
 
 With [Pulsar Functions CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), you can debug Pulsar Functions with the following subcommands:
+
 * `get`
 * `status`
 * `stats`
@@ -28,7 +29,7 @@ Alternatively, you can specify `--name`, `--namespace` and `--tenant` as follows
     --name ExclamationFunctio6
 ```
 
-As shown below, the `get` command shows input, output, runtime, and other information about the `_ExclamationFunctio6_` function.
+As shown below, the `get` command shows input, output, runtime, and other information about the `ExclamationFunctio6` function.
 
 ```json
 {
@@ -80,7 +81,7 @@ To check the current status of a function:
     --name ExclamationFunctio6
 ```
 
-As shown below, the `status` command shows the number of instances, running instances, the instance running under the `_ExclamationFunctio6_` function, received messages, successfully processed messages, system exceptions, the average latency and so on.
+As shown below, the `status` command shows the number of instances, running instances, the instance running under the `ExclamationFunctio6` function, received messages, successfully processed messages, system exceptions, the average latency and so on.
 
 ```json
 {

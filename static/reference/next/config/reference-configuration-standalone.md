@@ -278,6 +278,21 @@ If true, the broker will reject all HTTP requests using the TRACE and TRACK verb
 
 **Category**: HTTP
 
+### httpMaxRequestHeaderSize
+  The maximum size in bytes of the request header.
+  Larger headers will allow for more and/or larger cookies plus larger form content encoded in a URL.
+  However, larger headers consume more memory and can make a server more vulnerable to denial of service
+  attacks.
+
+
+**Type**: `int`
+
+**Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpMaxRequestSize
 If \>0, it will reject all HTTP requests with bodies larged than the configured limit
 
