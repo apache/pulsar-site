@@ -87,7 +87,8 @@ const titles = ["Client", "Producer", "Consumer", "Reader", "TableView"];
 const getHeight = (values, index) => {
   if (index === 0) return "h-[700px]";
   if (index === 1) return "h-[950px]";
-  if (index === 2) return "h-[1450px]";
+  // if (index === 2) return "h-[1450px]";
+  if (index === 2) return "h-[950px]";
   if (index === 3) return "h-[400px]";
   if (index === 4) return "h-[200px]";
   return "h-[700px]";
@@ -125,7 +126,7 @@ export default function Matrix() {
     <Layout>
       <div className="tailwind">
         <div className="my-12 container">
-          {[client, producer, consumer, reader, tableview].map(
+          {[client, producer, consumer].map(
             (values, index) => {
               return (
                 <div className="mb-8" key={index}>
