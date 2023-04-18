@@ -42,10 +42,11 @@ jobs:
         with:
           python-version: '3.8'
           cache: 'poetry'
-      - name: Set Node.js 16
+      - name: Set Node.js 18
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
+      - run: corepack enable
       - name: Update generated docs
         working-directory: tools/pytools
         run: |
