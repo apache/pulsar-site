@@ -93,24 +93,14 @@ sidebar_label: Apache Pulsar 2.10.4
 * [fix][fn] Fix k8s merge runtime opts bug (#19481)
 * [refactor][fn] Use AuthorizationServer more in Function Worker API (#19975)
 
-
-
-### Tiered Storage
-
-
-
-### Pulsar SQL
-
-
 ### CLI
-[fix] [cli] Fix Broker crashed by too much memory usage of pulsar tools (#20031)
+* [fix] [cli] Fix Broker crashed by too much memory usage of pulsar tools (#20031)
 
 ## Admin
 * [fix][admin] Fix validatePersistencePolicies that Namespace/Topic persistent policies cannot set to < 0 (#18999)
 * [improve][admin][branch-2.10] Unset namespace policy to improve deleting namespace (#17033) (#19865)
 * [fix] [admin] fix incorrect state replication.connected on API partitioned-topic stat (#19942)
 * [fix] [admin] Make response code to 400 instead of 500 when delete topic fails due to enabled geo-replication (#19879)
-
 
 ### Security
 * [fix][sec] Upgrade jettison to 1.5.3 (#19038)
@@ -126,20 +116,10 @@ sidebar_label: Apache Pulsar 2.10.4
 * [fix][sec] Fix transitive critical CVEs in file-system tiered storage (#19957)
 * [fix][sec] Fix transitive critical CVEs in file-system tiered storage (#19957)
 
-
-
-
-### Dependency & Library updates
-
-
-
 ### CI & Test
-[fix][test] ProxyWithAuthorizationTest remove SAN from test certs (#19594)
-[branch-2.10][test]Run and fix tests (#19636)
-[test] Fix ServerCnxTest failing after merge of #19830
-
-
-
+* [fix][test] ProxyWithAuthorizationTest remove SAN from test certs (#19594)
+* [branch-2.10][test]Run and fix tests (#19636)
+* [test] Fix ServerCnxTest failing after merge of #19830
 
 ### Others
 * [fix][build] Resolve OWASP Dependency Check false positives (#19120)
@@ -154,5 +134,3 @@ sidebar_label: Apache Pulsar 2.10.4
 * [improve] Simplify enabling Broker, WS Proxy hostname verification (#19674)
 * [cherry-pick][branch-2.10] KCA: picking fixes from master (#19788)
 * [Build] Make the test JVM exit if OOME occurs (#14509)
-
-

@@ -14,9 +14,3 @@ sidebar_label: Client Java 2.10.4
 * [fix][client] Set authentication when using loadConf in client and admin client (#18358)
 * [fix] [client] fix memory leak if enabled pooled messages (#19585)
 * [fix][client][branch-2.10]Return local thread for the newThread (#19779)
-
-
-
-
-
-
