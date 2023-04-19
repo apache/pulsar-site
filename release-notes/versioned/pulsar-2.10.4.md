@@ -5,7 +5,7 @@ sidebar_label: Apache Pulsar 2.10.4
 ---
 
 
-#### 2023-1-4
+#### 2023-4-19
 
 ### Broker
 * [improve][broker] Add ref count for sticky hash to optimize the performance of Key_Shared subscription (#19167)
@@ -96,7 +96,7 @@ sidebar_label: Apache Pulsar 2.10.4
 ### CLI
 * [fix] [cli] Fix Broker crashed by too much memory usage of pulsar tools (#20031)
 
-## Admin
+### Admin
 * [fix][admin] Fix validatePersistencePolicies that Namespace/Topic persistent policies cannot set to < 0 (#18999)
 * [improve][admin][branch-2.10] Unset namespace policy to improve deleting namespace (#17033) (#19865)
 * [fix] [admin] fix incorrect state replication.connected on API partitioned-topic stat (#19942)
