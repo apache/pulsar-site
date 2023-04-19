@@ -96,10 +96,9 @@ You should ask a PMC member to complete this step.
 
 ```shell
 # Checkout the SVN folder containing the KEYS file
-svn co https://dist.apache.org/repos/dist/release/pulsar pulsar-dist-release-keys --depth empty
+svn co https://dist.apache.org/repos/dist/release/pulsar pulsar-dist-release-keys --depth files
 cd pulsar-dist-release-keys
 svn up KEYS
-curl -O -L https://dist.apache.org/repos/dist/release/pulsar/KEYS
 
 APACHEID=apacheid
 # Export the key in ascii format and append it to the file
