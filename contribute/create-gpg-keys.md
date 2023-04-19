@@ -86,26 +86,7 @@ New **RSA** keys generated should be at least **4096** bits.
 
 ## Appending the key to KEYS files
 
-The GPG key needs to be appended to `KEYS` file that is stored in 2 SVN locations, one for proper releases and one for the release candidates.
-
-The credentials for SVN are the usual Apache account credentials.
-
-```shell
-# Checkout the SVN folder containing the KEYS file
-svn co https://dist.apache.org/repos/dist/dev/pulsar pulsar-dist-dev-keys --depth empty
-cd pulsar-dist-dev-keys
-svn up KEYS
-
-APACHEID=apacheid
-# Export the key in ascii format and append it to the file
-( gpg --list-sigs $APACHEID@apache.org
-  gpg --export --armor $APACHEID@apache.org ) >> KEYS
-
-# Commit to SVN
-svn ci -m "Added gpg key for $APACHEID"
-```
-
-Repeat the same operation for the release KEYS file:
+The GPG key needs to be appended to `KEYS` file for the release candidates.
 
 :::warning
 
@@ -115,7 +96,7 @@ You should ask a PMC member to complete this step.
 
 ```shell
 # Checkout the SVN folder containing the KEYS file
-svn co https://dist.apache.org/repos/dist/release/pulsar pulsar-dist-release-keys --depth empty
+svn co https://dist.apache.org/repos/dist/release/pulsar pulsar-dist-release-keys --depth files
 cd pulsar-dist-release-keys
 svn up KEYS
 
