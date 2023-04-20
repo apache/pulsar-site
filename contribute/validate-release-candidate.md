@@ -42,7 +42,7 @@ gpg --verify apache-pulsar-<release>-bin.tar.gz.asc
 Open a terminal to start a standalone service:
 
 ```shell
-bin/pulsar standalone
+PULSAR_STANDALONE_USE_ZOOKEEPER=1 bin/pulsar standalone
 ```
 
 When you start a standalone cluster, there are a few things to check.
