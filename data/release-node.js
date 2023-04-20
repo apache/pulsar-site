@@ -1,5 +1,6 @@
 module.exports = [
-{tagName: "v1.8.1",releaseNotes:"/release-notes/versioned/pulsar-client-node-1.8.1/",doc:"/docs/client-libraries-node",version:"v1.8.x"},
+{tagName: "v1.8.2",releaseNotes:"/release-notes/versioned/pulsar-client-node-1.8.2/",doc:"/docs/client-libraries-node",version:"v1.8.x"},
+{tagName: "v1.8.1",releaseNotes:"/release-notes/versioned/pulsar-client-node-1.8.1/",doc:"/docs/client-libraries-node",version:""},
 {tagName: "v1.8.0",releaseNotes:"/release-notes/versioned/pulsar-client-node-1.8.0/",doc:"/docs/client-libraries-node",version:""},
 {tagName: "v1.6.2",releaseNotes:"/release-notes/versioned/pulsar-client-node-1.6.2/",doc:"/docs/client-libraries-node",version:"v1.6.x"},
 {tagName: "v1.5.0",releaseNotes:"/release-notes/versioned/pulsar-client-node-1.5.0/",doc:"/docs/client-libraries-node",version:"v1.5.x"},
