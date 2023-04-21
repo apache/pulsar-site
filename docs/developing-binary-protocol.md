@@ -145,7 +145,7 @@ Fields:
  * `original_principal`: Added by the proxy. Regular clients are not expected to supply this value. When set and when authorization is enabled, the `auth_data` must map to one of the `proxyRoles` in the broker.conf.
  * `original_auth_method`: Added by the proxy. Regular clients are not expected to supply this value.
  * `original_auth_data`: Added by the proxy when configured to do so. Regular clients are not expected to supply this value.
- * `proxy_version`: Added by the proxy. The proxy rejects `Connect` commands with this field present. Regular clients are not expected to supply this value. When authentication and authorization are enabled in the broker, only one of the configured `proxyRoles` has permission to supply this field. In order to be backwards compatible, the broker does not require a `proxyRole` to supply this field.
+ * `proxy_version`: Added by the proxy. The proxy rejects `Connect` commands with this field present. Regular clients are not expected to supply this value. When authentication and authorization are enabled in the broker, only one of the configured `proxyRoles` has permission to supply this field. To be backward compatible, the broker does not require a `proxyRole` to supply this field.
 
 ```protobuf
 message CommandConnected {
