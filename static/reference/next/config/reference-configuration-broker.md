@@ -2647,11 +2647,11 @@ The max number of delayed message index in per bucket snapshot segment, -1 means
 **Category**: Server
 
 ### delayedDeliveryMaxNumBuckets
-The max number of delayed message index bucket, after reaching the max buckets limitation, the adjacent buckets will be merged.
+The max number of delayed message index bucket, after reaching the max buckets limitation, the adjacent buckets will be merged.(disable with value -1)
 
 **Type**: `int`
 
-**Default**: `50`
+**Default**: `-1`
 
 **Dynamic**: `false`
 
