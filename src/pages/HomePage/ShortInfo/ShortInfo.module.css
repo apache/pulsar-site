@@ -5,14 +5,14 @@
   flex-direction: column;
   width: 100%;
   height: 200vh;
-  max-height: 1595px;
-  padding-left: 3.2rem;
+  /* max-height: 1595px; */
   color: #282826;
 
   background: url('./pictures/fon.svg');
   background-repeat: no-repeat;
-  background-position: top;
-  background-size: 150%;
+  background-position: 50% 11.5%;
+  background-size: 200%;
+  background-attachment: fixed;
 }
 
 .fullsize_container {
@@ -28,10 +28,13 @@
   max-width: 1280px;
   display: flex;
   align-items: center;
+  z-index: 1;
+  box-sizing: content-box;
 }
 
 .short_container {
   height: 50%;
+  width: 100%;
 }
 
 .docs_container {
@@ -42,6 +45,15 @@
   flex-direction: column;
   letter-spacing: -0.04em;
   line-height: 2.4rem;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(-150%); /* сдвигаем блок на 150% вверх, чтобы он прокрутился на 50% меньше, чем основной блок */
+  }
 }
 
 .info_container {
@@ -76,7 +88,7 @@
   display: flex;
 }
 
-.buttons > button {
+.buttons > a {
   margin-right: 0.8rem; 
 }
 
@@ -86,4 +98,54 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+}
+
+@media (max-width: 1280px) {
+  .info_container {
+    width: 100vw;
+  }
+
+  .container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 0.8rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .docs_container > .title {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    letter-spacing: -0.025em;
+    align-self: stretch;
+  }
+
+  .docs_container > .subtitle {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    letter-spacing: -0.04em;
+    align-self: stretch;
+  }
+
+  .text {
+    font-size: 0.8rem;
+  }
+
+  .info_container {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.3rem;
+    letter-spacing: -0.025em;
+    align-self: stretch;
+  }
+
+  b {
+    font-weight: normal;
+  }
+}
+
+@media (max-width: 27.5rem) {
+  .docs_container {
+    width: 100%;
+  }
 }

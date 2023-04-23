@@ -1,5 +1,7 @@
 import React from 'react';
-import LinkButton from '../../shared/LinkButton/LinkButton';
+
+import LinkButton from '../../../components/LinkButton/LinkButton';
+import Parallax from '../../../components/Parallax/Parallax';
 
 import s from './ShortInfo.module.css';
 
@@ -8,25 +10,26 @@ const ShortInfo = () => {
   return (
     <div className={s.block}>
       <div className={`${s.container} ${s.short_container}`}>
-        <div className={s.docs_container}>
-          <span className={s.title}> Apache Pulsar </span>
-          <span className={s.subtitle}> Cloud-Native, Distributed Messaging and Streaming </span>
-          <span className={s.text}> Apache® Pulsar™ is an open-source, distributed messaging and streaming platform built for the cloud. </span>
+        <Parallax>
+          <div className={s.docs_container}>
+            <span className={s.title}> Apache Pulsar </span>
+            <span className={s.subtitle}> Cloud-Native, Distributed Messaging and Streaming </span>
+            <span className={s.text}> Apache® Pulsar™ is an open-source, distributed messaging and streaming platform built for the cloud. </span>
 
-          <div className={s.buttons}>
-            <LinkButton
-              title='Explore docs'
-              filled={true}
-              link='./'
-            />
-
-            <LinkButton
-              title='Quickstart'
-              filled={false}
-              link='./'  
-            />
+            <div className={s.buttons}>
+              <LinkButton
+                title='Explore docs'
+                filled={true}
+                link='./'
+              />
+              <LinkButton
+                title='Quickstart'
+                filled={false}
+                link='./'  
+              />
+            </div>
           </div>
-        </div>
+        </Parallax>
       </div>
 
       <div className={s.fullsize_container}>

@@ -8,7 +8,7 @@ from "react";
 // import SubHeroBlock from "../components/SubHeroBlock";
 // import PromoCallout from "../components/PromoCallout";
 // import PillButton from "../components/PillButton";
-import HomePage from "../components/HomePage/HomePage";
+import HomePage from "./HomePage/HomePage";
 
 // var startWaves = function () {
 //   if (!SineWaves) {
