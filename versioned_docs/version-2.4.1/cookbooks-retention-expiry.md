@@ -47,7 +47,7 @@ When you set a retention policy on topics in a namespace, you must set **both** 
 | -1       | -1       | Infinite retention  |
 | -1       | >0       | Based on the size limit  |
 | >0       | -1       | Based on the time limit  |
-| 0        | 0        | Disable message retention (by default) |
+| 0        | 0        | Disable message retention, which means messages are not reserved (by default) |
 | 0        | >0       | Invalid  |
 | >0       | 0        | Invalid  |
 | >0       | >0       | Acknowledged messages or messages with no active subscription will not be retained when either time or size reaches the limit. |
