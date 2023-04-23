@@ -1,5 +1,14 @@
 module.exports = [
     {
+      "author": "coderzc-",
+      "tagName": "v2.9.5",
+      "publishedAt": "2023-04-20T02:38:21Z",
+      "vtag": "2.9.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.9.5/",
+      "doc": "/docs/2.9.x",
+      "version": "v2.9.x"
+    },
+    {
         "author": "Technoboy-",
         "tagName": "v2.11.1",
         "publishedAt": "2023-04-19T16:53:34Z",
