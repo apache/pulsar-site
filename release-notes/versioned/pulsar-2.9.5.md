@@ -91,7 +91,7 @@ sidebar_label: Apache Pulsar 2.9.5
 ## Admin
 
 * [improve][admin] Unset namespace policy to improve deleting namespace. (#17033)
-* [fix] [admin] Make response code to 400 instead of 500 when delete topic fails due to enabled geo-replication #19879
+* [fix] [admin] Make response code 400 instead of 500 when deleting topic fails due to enabled geo-replication #19879
 
 ### Security
 
