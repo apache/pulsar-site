@@ -103,7 +103,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix][broker] Make authentication refresh threadsafe (#19506)
 * [fix][broker] Allow proxy to pass same role for authRole and originalRole (#19557)
 * [improve][sec] Suppress false positive OWASP reports (#19105)
-* [improve] Upgrade wildfly-eytron (used by debezium) to fix CVE-2022-3143 (#19333)
+* [improve] Upgrade wildfly-elytron (used by debezium) to fix CVE-2022-3143 (#19333)
 * [improve] Simplify enabling Broker, WS Proxy hostname verification (#19674)
 
 ### Dependency & Library updates
