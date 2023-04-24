@@ -23,7 +23,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [improve][websocket][branch-2.9] Add ping support (#19245)
 * [fix][ml] Topics stats shows msgBacklog but there reality no backlog (#19275)
 * [fix][websocket][branch-2.9] Fix webSocketPingDurationSeconds config (#19293)
-* [fix] [ml] Fix the incorrect total size if use ML intercepto (#19404)
+* [fix] [ml] Fix the incorrect total size if using ML interceptor (#19404)
 * [fix][broker] Expect msgs after server initiated CloseProducer (#19446)
 * [cleanup][broker] Validate originalPrincipal earlier in ServerCnx (#19270)
 * [fix][Branch-2.9] Fix bookie JVM param BOOKIE_MEM, BOOKIE_GC miss problem. #19441
