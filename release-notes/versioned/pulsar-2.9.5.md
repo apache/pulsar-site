@@ -34,7 +34,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix] [ml] topic load fail by ledger lost (#19444)
 * [fix] [broker] getLastMessageId returns a wrong batch index of last message if enabled read compacted (#18877)
 * [fix][broker] Remove timestamp from broker metrics (#17419)
-* [fix][broker]fix multi invocation for ledger createComplete (#18975)
+* [fix][broker]Fix multi invocation for ledger createComplete (#18975)
 * [improve][broker] Use shrink map for trackerCache (#19534)
 * [fix] [broker] Incorrect service name selection logic (#19505)
 * [fix] [broker] Make the service name resolver cache of PulsarWebResource expire after access (#19532)
