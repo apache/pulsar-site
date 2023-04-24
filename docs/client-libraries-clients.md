@@ -35,10 +35,9 @@ The following example creates a Python client using multiple advertised listener
   <TabItem value="C++">
 
   ```cpp
-  PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://xxxx:6650")
-    .listenerName("external")
-    .build();
+  ClientConfiguration clientConfiguration;
+  clientConfiguration.setListenerName("external");
+  Client client("pulsar://xxxx:6650", clientConfiguration);
   ```
 
   </TabItem>
