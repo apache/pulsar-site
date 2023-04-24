@@ -785,3 +785,40 @@ This example shows how to set the `EnforceUnencrypted` encryption policy.
   </TabItem>
 </Tabs>
 ````
+
+## Configure Access mode
+
+Access mode allow applications to require exclusive producer access on a topic in order to achieve a "single-writer" situation.
+
+More information about access mode can be found [concepts-clients](concepts-clients.md#access-mode).
+
+This example shows how to set producer accessmode.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
+<TabItem value="Java">
+
+   ```java
+   Producer<byte[]> producer = client.newProducer()
+        .topic(topic)
+        .accessMode(ProducerAccessMode.Exclusive)
+        .create();
+   ```
+
+  </TabItem>
+
+<TabItem value="C++">
+
+   ```cpp
+    Producer producer;
+    ProducerConfiguration producerConfiguration;
+    producerConfiguration.setAccessMode(ProducerConfiguration::Exclusive);
+    client.createProducer(topicName, producerConfiguration, producer);
+   ```
+
+  </TabItem>
+
+</Tabs>
+````
