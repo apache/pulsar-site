@@ -48,7 +48,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix] [broker] Topic close failure leaves subscription in a permanent fence state (#19692)
 * [fix][meta] Fix deadlock causes session notification not to work (#19754)
 * [improve][misc] Upgrade Netty to 4.1.87.Final (#19417)
-* [fix][broker] Fix potential exception cause the policy service init fail. (#19746)
+* [fix][broker] Fix potential exception causing the policy service init to fail. (#19746)
 * [improve][broker] Authorize originalPrincipal when provided (#19830)
 * [fix] [broker] Counter of pending send messages in Replicator incorrect if schema future not complete #19242
 * [branch-2.9][fix][broker] Fix index generator is not rollback after entries are failed added #19978
