@@ -39,7 +39,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix] [broker] Incorrect service name selection logic (#19505)
 * [fix] [broker] Make the service name resolver cache of PulsarWebResource expire after access (#19532)
 * [fix][branch-2.9] Support zookeeper read-only config (#19693)
-* [fix][branch-2.9] Fix validatePersistencePolicies that Namespace/Topic persistent policies cannot set to < 0 #19687
+* [fix][branch-2.9] Fix validatePersistencePolicies that Namespace/Topic persistent policies cannot be set to < 0 #19687
 * [fix][branch-2.9] fix txn coordinator recover handle committing and aborting txn race condition. #19699
 * [fix][branch-2.9] Fix race condition while updating partition number (#19691)
 * [improve] upgrade the bookkeeper version to 4.14.7 (#19178)
