@@ -10,6 +10,7 @@ import './styles.css';
 
 type SliderProps = {
   children: React.ReactNode;
+  centerMode?: boolean;
 }
 
 const Slider = (props: SliderProps) => {
@@ -40,12 +41,12 @@ const Slider = (props: SliderProps) => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    className: "center",
     centerPadding: "60px",
-    centerMode: true,
-    nextArrow: window.innerWidth > 800 && <SampleNextArrow />,
-    prevArrow: window.innerWidth > 800 && <SamplePrevArrow />,
+    centerMode: props.centerMode || false,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     dots: window.innerWidth < 800,
+    arrows: window.innerWidth > 800,
     responsive: [
       {
         breakpoint: 800,

@@ -51,7 +51,7 @@ const Features = () => {
                       </span>
                     </div>
 
-                    <Picture className={s.feature_picture} />
+                    <Picture className={s.feature_picture} viewBox={feature.viewBox} />
                   </div>
                 </div>
               )

@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
 
           <div className={`${s.column} ${s.external_links}`}>
-            <a href='./'> Community </a>
+            <a href='./'> Contribute </a>
             <div>
               <Slack className={s.logo_slack} />
               <Github className={s.logo_github} />
