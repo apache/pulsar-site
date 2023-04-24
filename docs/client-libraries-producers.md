@@ -792,7 +792,7 @@ Access mode allow applications to require exclusive producer access on a topic i
 
 More information about access mode can be found [concepts-clients](concepts-clients.md#access-mode).
 
-This example shows how to set producer accessmode.
+This example shows how to set producer access mode.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
