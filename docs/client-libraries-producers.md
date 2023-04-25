@@ -798,7 +798,11 @@ This example shows how to set producer access mode.
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
-  This feature is supported after Java client version 2.8.0.
+::: note
+
+This feature is supported in Java client 2.8.0 or later versions.
+
+:::
 
    ```java
    Producer<byte[]> producer = client.newProducer()
@@ -811,7 +815,11 @@ This example shows how to set producer access mode.
 
 <TabItem value="C++">
 
-  This feature is supported after CPP client version 3.1.0.
+::: note
+
+This feature is supported in C++ client 3.1.0 or later versions.
+
+:::
 
    ```cpp
     Producer producer;
