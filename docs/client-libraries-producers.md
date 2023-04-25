@@ -786,11 +786,9 @@ This example shows how to set the `EnforceUnencrypted` encryption policy.
 </Tabs>
 ````
 
-## Configure Access mode
+## Configure access mode
 
-Access mode allow applications to require exclusive producer access on a topic in order to achieve a "single-writer" situation.
-
-More information about access mode can be found [concepts-clients](concepts-clients.md#access-mode).
+[Access mode](concepts-clients.md#access-mode) allows applications to require exclusive producer access on a topic to achieve a "single-writer" situation.
 
 This example shows how to set producer access mode.
 
