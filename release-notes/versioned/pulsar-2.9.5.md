@@ -14,7 +14,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix][broker] Fix deadlock in PendingAckHandleImpl (#18989)
 * [fix][broker]Update interceptor handler exception (#18940)
 * [improve][broker] Make Consumer#equals more effective (#18662)
-* [fix][broker]add test case for deleting namespace fail when has partitioned system topic (#17338)
+* [fix][broker]Add test case for deleting namespace fail when has partitioned system topic (#17338)
 * [fix][broker] Fix open cursor with null-initialPosition result with earliest position (#18416)
 * [improve][broker] Add ref count for sticky hash to optimize the performance of Key_Shared subscription (#19167)
 * [fix][broker] Support deleting partitioned topics with the keyword -partition- (#19230)
@@ -29,10 +29,10 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix][Branch-2.9] Fix bookie JVM param BOOKIE_MEM, BOOKIE_GC miss problem. #19441
 * [improve][broker] ServerCnx: go to Failed state when auth fails (#19312)
 * [fix][broker][branch-2.9] Fix geo-replication admin (#19614)
-* [fix] [ml] messagesConsumedCounter of NonDurableCursor was initialized incorrectly (#19355)
+* [fix] [ml] MessagesConsumedCounter of NonDurableCursor was initialized incorrectly (#19355)
 * [fix][ml] Fix potential NPE cause future never complete. (#19415)
-* [fix] [ml] topic load fail by ledger lost (#19444)
-* [fix] [broker] getLastMessageId returns a wrong batch index of last message if enabled read compacted (#18877)
+* [fix] [ml] Topic load fail by ledger lost (#19444)
+* [fix] [broker] The getLastMessageId returns a wrong batch index of last message if enabled read compacted (#18877)
 * [fix][broker] Remove timestamp from broker metrics (#17419)
 * [fix][broker]Fix multi invocation for ledger createComplete (#18975)
 * [improve][broker] Use shrink map for trackerCache (#19534)
@@ -42,7 +42,7 @@ sidebar_label: Apache Pulsar 2.9.5
 * [fix][branch-2.9] Fix validatePersistencePolicies that Namespace/Topic persistent policies cannot be set to < 0 #19687
 * [fix][branch-2.9] fix txn coordinator recover handle committing and aborting txn race condition. #19699
 * [fix][branch-2.9] Fix race condition while updating partition number (#19691)
-* [improve] upgrade the bookkeeper version to 4.14.7 (#19178)
+* [improve] Upgrade the bookkeeper version to 4.14.7 (#19178)
 * [improve] Upgrade lombok to 1.8.26 (#19426)
 * [fix][cli][branch-2.9] Fix release tool (#19712)
 * [fix] [broker] Topic close failure leaves subscription in a permanent fence state (#19692)
@@ -115,9 +115,9 @@ sidebar_label: Apache Pulsar 2.9.5
 
 * [improve][broker] Add test to verify authRole cannot change (#19430)
 * [fix][test] ProxyWithAuthorizationTest remove SAN from test certs (#19594)
-* [test][admin]add test case: delete namespace when has partitioned system topic #17338
+* [test][admin]Add test case: delete namespace when has partitioned system topic #17338
 * [improve][broker] Authorize originalPrincipal when provided (#19830)
 
 ### Others
 
-* [fix][metrics] fixed ProxyStats to use common.stats.JvmMetrics (#15692)
+* [fix][metrics] Fixed ProxyStats to use common.stats.JvmMetrics (#15692)
