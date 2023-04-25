@@ -45,11 +45,11 @@ const Slider = (props: SliderProps) => {
     centerMode: props.centerMode || false,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    dots: window.innerWidth < 800,
+    dots: window.innerWidth <= 800,
     arrows: window.innerWidth > 800,
     responsive: [
       {
-        breakpoint: 800,
+        breakpoint: 801,
         settings: {
           slidesToShow: 1,
         }
