@@ -1,18 +1,9 @@
-import Layout from "@theme/Layout";
 import React from "react";
 import "react-base-table/styles.css";
-import BaseTable, { Column, AutoResizer } from "react-base-table";
-import {
-  languages,
-  client,
-  producer,
-  reader,
-  consumer,
-  tableview,
-} from "../../data/matrix.js";
-
+import { Column } from "react-base-table";
+import { languages } from "../../../data/matrix.js";
 const _key = (language) => language.replace(".", "").replace(" ", "");
-const genColomns = () => {
+export const genColomns = () => {
   return ["Feature", "Sub"].concat(languages).map((language, index) => {
     return {
       key: _key(language),
@@ -34,7 +25,7 @@ const genColomns = () => {
   });
 };
 
-const genData = (values) => {
+export const genData = (values) => {
   const datas = [];
   values.forEach((feature) => {
     if (feature.Children) {
@@ -71,7 +62,7 @@ const genData = (values) => {
   return datas;
 };
 
-const genCount = (values) => {
+export const genCount = (values) => {
   let count = 1;
   values.forEach((feature) => {
     if (feature.Children) {
@@ -84,19 +75,19 @@ const genCount = (values) => {
 };
 
 const titles = ["Client", "Producer", "Consumer", "Reader", "TableView"];
-const getHeight = (values, index) => {
-  if (index === 0) return "h-[700px]";
-  if (index === 1) return "h-[950px]";
-  // if (index === 2) return "h-[1450px]";
-  if (index === 2) return "h-[950px]";
-  if (index === 3) return "h-[400px]";
-  if (index === 4) return "h-[200px]";
+export const getHeight = (name) => {
+  if (name === "client") return "h-[700px]";
+  if (name === "producer") return "h-[950px]";
+  // if (name === 'consumer') return "h-[1450px]";
+  if (name === "consumer") return "h-[950px]";
+  if (name === "reader") return "h-[400px]";
+  if (name === "tableview") return "h-[200px]";
   return "h-[700px]";
 };
 
 const columns = genColomns();
 
-const fixedColumns = columns.map((column, columnIndex) => {
+export const fixedColumns = columns.map((column, columnIndex) => {
   let frozen;
   if (columnIndex < 2) frozen = Column.FrozenDirection.LEFT;
   if (columnIndex === 0) {
@@ -105,7 +96,7 @@ const fixedColumns = columns.map((column, columnIndex) => {
   return { ...column, frozen };
 });
 
-const rowRenderer = ({ rowData, rowIndex, cells, columns }) => {
+export const rowRenderer = ({ rowData, rowIndex, cells, columns }) => {
   const rowSpan = columns[0].rowSpan({ rowData, rowIndex });
   if (rowData.Sub.length > 0 && !rowData.isLast) {
     const cell = cells[0];
@@ -120,42 +111,3 @@ const rowRenderer = ({ rowData, rowIndex, cells, columns }) => {
   }
   return cells;
 };
-
-export default function Matrix() {
-  return (
-    <Layout>
-      <div className="tailwind">
-        <div className="my-12 container">
-          {[client, producer, consumer].map(
-            (values, index) => {
-              return (
-                <div className="mb-8" key={index}>
-                  <div
-                    id={titles[index].toLowerCase()}
-                    className="font-bold text-xl mb-4"
-                  >
-                    {titles[index]}
-                  </div>
-                  <div className={`w-full ${getHeight(values, index)}`}>
-                    <AutoResizer>
-                      {({ width, height }) => (
-                        <BaseTable
-                          fixed
-                          width={width}
-                          height={height}
-                          columns={fixedColumns}
-                          data={genData(values)}
-                          rowRenderer={rowRenderer}
-                        />
-                      )}
-                    </AutoResizer>
-                  </div>
-                </div>
-              );
-            }
-          )}
-        </div>
-      </div>
-    </Layout>
-  );
-}
