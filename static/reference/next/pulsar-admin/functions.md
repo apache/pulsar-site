@@ -58,6 +58,7 @@ $ pulsar-admin functions localrun options
 | `--web-service-url` | The URL for Pulsar web service|null|Java, Python|
 | `--retain-ordering` | Function consumes and processes messages in order|null|Java|
 | `--state-storage-service-url` | The URL for the state storage service (the default is Apache BookKeeper)|null|Java, Python|
+| `--cleanup-subscription` | Whether delete the subscription when function is deleted|null||
 | `-st, --schema-type` | The builtin schema type or custom schema class name to be used for messages output by the function||Java|
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker|null|Java, Python|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
@@ -127,6 +128,7 @@ $ pulsar-admin functions create options
 | `-o, --output` | The output topic of a Pulsar Function (If none is specified, no output is written)|null|Java, Python, Go|
 | `--jar` | Path to the JAR file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.|null|Java|
 | `--retain-ordering` | Function consumes and processes messages in order|null|Java|
+| `--cleanup-subscription` | Whether delete the subscription when function is deleted|null||
 | `-st, --schema-type` | The builtin schema type or custom schema class name to be used for messages output by the function||Java|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
 | `--retain-key-ordering` | Function consumes and processes messages in key order|null|Java|
@@ -210,6 +212,7 @@ $ pulsar-admin functions update options
 | `-o, --output` | The output topic of a Pulsar Function (If none is specified, no output is written)|null|Java, Python, Go|
 | `--jar` | Path to the JAR file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.|null|Java|
 | `--retain-ordering` | Function consumes and processes messages in order|null|Java|
+| `--cleanup-subscription` | Whether delete the subscription when function is deleted|null||
 | `-st, --schema-type` | The builtin schema type or custom schema class name to be used for messages output by the function||Java|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
 | `--retain-key-ordering` | Function consumes and processes messages in key order|null|Java|
