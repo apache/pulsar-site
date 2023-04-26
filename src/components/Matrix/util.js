@@ -74,7 +74,6 @@ export const genCount = (values) => {
   return count;
 };
 
-const titles = ["Client", "Producer", "Consumer", "Reader", "TableView"];
 export const getHeight = (name) => {
   if (name === "client") return "h-[700px]";
   if (name === "producer") return "h-[950px]";
