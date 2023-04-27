@@ -9,7 +9,18 @@ export const genColomns = () => {
       key: _key(language),
       dataKey: _key(language),
       title: language === "Sub" ? "" : language,
-      width: index > 1 ? 126 : 180,
+      width:
+        index === 0
+          ? 180
+          : index === 1
+          ? 150
+          : index === 7
+          ? 120
+          : index === 8
+          ? 90
+          : index === 10
+          ? 126
+          : 74,
       dataGetter: ({ column, rowData }) => {
         if (parseInt(rowData[column.dataKey]) === 0) {
           return "🚫";
