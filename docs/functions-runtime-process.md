@@ -27,7 +27,7 @@ For more details, see [code](https://github.com/apache/pulsar/blob/master/pulsar
 
 Pulsar Functions now supports setting runtime parameters using a configuration file **in Python**. 
 
-Example
+**Example**
 
 You can start a Python runtime using the configuration file `config.ini` with the following command.
 
@@ -44,20 +44,16 @@ pulsar-admin functions localrun \
 
 ` --config-file` is the path to the configuration file. Note that:
 
-- The ` --config-file` should be written in `.ini` format, with each parameter being configured as `key = value`. Here is an example:
+- The ` --config-file` should be written in `.ini` format, with each parameter being configured as `key = value`. 
 
-```ini
-[DEFAULT]
-logging_level = info
-max_pending_async_requests = 1000
-max_concurrent_requests = 50
-```
-- The parameters in the ` --config-file` will override those of the same name specified on the command line.
+    **Example**
 
-- When starting with the ` --config-file`, all parameters can be set in the ` --config-file`. If you specify parameters on the command line that are also present in the ` --config-file`, the values of the parameters on the command line will take precedence over the values in the ` --config-file`. Like in the example above, the `logging_level` will be set to `debug`.
+    ```ini
+    [DEFAULT]
+    logging_level = info
+    max_pending_async_requests = 1000
+    max_concurrent_requests = 50
+    ```
+- The parameters in the ` --config-file` **override** those of the same name specified on the command line.
 
-
-
-
-
-
+- When starting with the ` --config-file`, all parameters can be set in the ` --config-file`. If you specify parameters on the command line that are also present in the ` --config-file`, the values of the parameters on the command line will **take precedence over** the values in the ` --config-file`. Like in the example above, the `logging_level` is set to `debug`.
