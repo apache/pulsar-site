@@ -6,7 +6,7 @@ sidebar_label: "Use"
 
 ## Create a producer
 
-Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object, you can create a {@inject: javadoc:Producer:/client/org/apache/pulsar/client/api/Producer} for a specific Pulsar [topic](reference-terminology.md#topic).
+Once you've instantiated a [PulsarClient](api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Producer](api/client/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](reference-terminology.md#topic).
 
 ```java
 Producer<byte[]> producer = client.newProducer()
@@ -48,9 +48,9 @@ stringProducer.send("My message");
 
 ## Create a consumer
 
-In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
+In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a [PulsarClient](api/client/org/apache/pulsar/client/api/PulsarClient) object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
 
-Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object, you can create a {@inject: javadoc:Consumer:/client/org/apache/pulsar/client/api/Consumer} by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
+Once you've instantiated a [PulsarClient](api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](api/client/org/apache/pulsar/client/api/Consumer) by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
 
 ```java
 Consumer consumer = client.newConsumer()
@@ -100,7 +100,7 @@ Consumer consumer = client.newConsumer()
 
 ## Create a reader
 
-With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic and a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}.
+With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create [Reader](api/client/org/apache/pulsar/client/api/Reader) objects by specifying a topic and a [MessageId](api/client/org/apache/pulsar/client/api/MessageId).
 
 The following is an example.
 
