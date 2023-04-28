@@ -5,7 +5,7 @@ sidebar_label: "Initialize"
 ---
 
 
-You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
+You can instantiate a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
 
 ```java
 PulsarClient client = PulsarClient.builder()
