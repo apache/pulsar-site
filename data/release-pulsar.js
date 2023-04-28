@@ -1,13 +1,32 @@
 module.exports = [
     {
         "author": "Technoboy-",
-        "tagName": "v2.11.0",
-        "publishedAt": "2023-01-11T01:53:34Z",
+        "tagName": "v2.11.1",
+        "publishedAt": "2023-04-19T16:53:34Z",
         "vtag": "2.11.x",
-        "releaseNotes": "/release-notes/versioned/pulsar-2.11.0/",
-        "releaseBlog": "/blog/2023/01/20/Apache-Pulsar-2-11-0",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.1/",
         "doc": "/docs/2.11.x",
         "version": "v2.11.x"
+    },
+    {
+      "author": "Technoboy-",
+      "tagName": "v2.11.0",
+      "publishedAt": "2023-01-11T01:53:34Z",
+      "vtag": "2.11.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.11.0/",
+      "releaseBlog": "/blog/2023/01/20/Apache-Pulsar-2-11-0",
+      "doc": "/docs/2.11.x",
+      "version": "v2.11.x"
+    },
+    {
+        "author": "liangyepianzhou",
+        "tagName": "v2.10.4",
+        "publishedAt": "2023-04-18T01:53:34Z",
+        "vtag": "2.10.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.10.4/",
+        "releaseBlog": "",
+        "doc": "/docs/2.10.x",
+        "version": "v2.10.x"
     },
     {
         "author": "liangyepianzhou",
@@ -17,7 +36,7 @@ module.exports = [
         "releaseNotes": "/release-notes/versioned/pulsar-2.10.3/",
         "releaseBlog": "/blog/2023/01/09/Apache-Pulsar-2-10-3",
         "doc": "/docs/2.10.x",
-        "version": "v2.10.x"
+        "version": ""
     },
     {
         "author": "Jason918",
@@ -48,6 +67,15 @@ module.exports = [
         "releaseBlog": "",
         "doc": "/docs/2.10.x",
         "version": ""
+    },
+    {
+      "author": "coderzc",
+      "tagName": "v2.9.5",
+      "publishedAt": "2023-04-20T02:38:21Z",
+      "vtag": "2.9.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.9.5/",
+      "doc": "/docs/2.9.x",
+      "version": "v2.9.x"
     },
     {
         "author": "congbobo184",
