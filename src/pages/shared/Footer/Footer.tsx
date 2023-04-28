@@ -15,7 +15,9 @@ const Footer = () => {
 
         <div className={`${s.row} ${s.first_row}`}>
           <div className={s.column}>
-            <Logo className={s.logo_pulsar} />
+            <a href='./' className={s.link}>
+              <Logo className={s.logo_pulsar} />
+            </a>
           </div>
 
           <div className={`${s.column} ${s.links_columns}`}>
@@ -33,8 +35,12 @@ const Footer = () => {
           <div className={`${s.column} ${s.external_links}`}>
             <a href='./'> Contribute </a>
             <div>
-              <Slack className={s.logo_slack} />
-              <Github className={s.logo_github} />
+              <a href='./' className={s.link}>
+                <Slack className={s.logo_slack} />
+              </a>
+              <a href='./' className={s.link}>
+                <Github className={s.logo_github} />
+              </a>
             </div>
           </div>
         </div>
@@ -63,7 +69,6 @@ const Footer = () => {
             </span>
           </div>
         </div>
-
       </div>
     </div>
   )

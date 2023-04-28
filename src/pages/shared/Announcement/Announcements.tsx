@@ -8,7 +8,7 @@ import s from './Announcement.module.css';
 const Announcement = () => {
 
   return (
-    <div className={s.block}>
+    <a className={s.block} href='./'>
       <svg className={s.icon}>
         <Bolt />
       </svg>
@@ -20,7 +20,7 @@ const Announcement = () => {
       <svg className={s.icon}>
         <Arrow />
       </svg>
-    </div>
+    </a>
   )
 }
 

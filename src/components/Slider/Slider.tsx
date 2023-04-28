@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SlickSlider from 'react-slick';
 
 import LeftButton from './picture/leftButton.svg';
@@ -6,6 +6,7 @@ import RightButton from './picture/rightButton.svg';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import s from './Slider.module.css';
 import './styles.css';
 
 type SliderProps = {
@@ -14,12 +15,14 @@ type SliderProps = {
 }
 
 const Slider = (props: SliderProps) => {
+  const [smallScreen, setSmallScreen] = useState(true)
+
   const SampleNextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
       <RightButton
-        className={className}
-        style={{ ...style, top: '102.5%', left: '60', width: '48px', height: '48px' }}
+        className={`${className} ${s.arrow_button}`}
+        style={{ ...style, left: '60' }}
         onClick={onClick}
       />
     );
@@ -29,12 +32,26 @@ const Slider = (props: SliderProps) => {
     const { className, style, onClick } = props;
     return (
       <LeftButton
-        className={className}
-        style={{ ...style, top: '102.5%', left: '0', width: '48px', height: '48px' }}
+        className={`${className} ${s.arrow_button}`}
+        style={{ ...style, left: '0' }}
         onClick={onClick}
       />
     );
   }
+
+  const handleResize = () => {
+    setSmallScreen(window.innerWidth <= 800);
+    console.log(window.innerWidth <= 800)
+  };
+
+  useEffect(() => {
+    handleResize()
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const settings = {
     infinite: true,
@@ -45,8 +62,8 @@ const Slider = (props: SliderProps) => {
     centerMode: props.centerMode || false,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    dots: window.innerWidth <= 800,
-    arrows: window.innerWidth > 800,
+    dots: smallScreen,
+    arrows: !smallScreen,
     responsive: [
       {
         breakpoint: 801,

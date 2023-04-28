@@ -1,6 +1,9 @@
 import * as React from "react";
+
 import Layout from "@theme/Layout";
-import { getVersion, getApiVersion } from "../utils/index.js";
+import { getVersion, getApiVersion } from "../../utils/index.js";
+
+import s from './RestApi.module.css';
 
 function parseVersion(pathName) {
   let swagger = "swagger";
@@ -109,7 +112,7 @@ class RestApi extends React.Component {
   render() {
     return (
       <Layout>
-        <div className="tailwind">
+        <div className={s.container}>
           <div className="my-12 container"></div>
         </div>
       </Layout>

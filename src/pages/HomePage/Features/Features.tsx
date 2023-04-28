@@ -3,7 +3,7 @@ import React from 'react';
 import featuresList from './featuresList';
 
 import s from './Features.module.css';
-import Slider from '../../shared/Slider/Slider';
+import Slider from '../../../components/Slider/Slider';
 
 const Features = () => {
 
@@ -14,26 +14,26 @@ const Features = () => {
           Pulsar features
         </span>
 
-        {window.innerWidth > 800 ?
-          <div className={s.features_container}>
-            {featuresList.map(feature => {
-              const Picture = feature.picture
+        <div className={s.features_container}>
+          {featuresList.map(feature => {
+            const Picture = feature.picture
 
-              return (
-                <div className={s.feature_block}>
-                  <Picture className={s.feature_picture} />
-                  <span className={s.feature_title}>
-                    {feature.title}
-                  </span>
+            return (
+              <div className={s.feature_block}>
+                <Picture className={s.feature_picture} />
+                <span className={s.feature_title}>
+                  {feature.title}
+                </span>
 
-                  <span className={s.feature_text}>
-                    {feature.text}
-                  </span>
-                </div>
-              )
-            })}
-          </div> :
-
+                <span className={s.feature_text}>
+                  {feature.text}
+                </span>
+              </div>
+            )
+          })}
+        </div>
+        
+        <div className={s.slider}>
           <Slider>
             {featuresList.map(feature => {
               const Picture = feature.picture;
@@ -57,7 +57,7 @@ const Features = () => {
               )
             })}
           </Slider>
-        }
+        </div>
       </div>
     </div>
   )

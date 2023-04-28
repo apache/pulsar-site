@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+
 import Layout from "@theme/Layout";
-import CaseStudyCards from "../components/CaseStudyCards";
-import PropTypes from 'prop-types';
+import CaseStudyCards from "../../components/CaseStudyCards";
 import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
@@ -415,7 +415,7 @@ const Paragraph = styled('p')(
   `,
 );
 
-function CustomSelect(props) {
+const CustomSelect = (props) => {
   const components = {
     Root: StyledButton,
     Listbox: StyledListbox,
@@ -426,21 +426,7 @@ function CustomSelect(props) {
   return <SelectUnstyled {...props} components={components} />;
 }
 
-CustomSelect.propTypes = {
-  /**
-   * The components used for each slot inside the Select.
-   * Either a string to use a HTML element or a component.
-   * @default {}
-   */
-  components: PropTypes.shape({
-    Listbox: PropTypes.elementType,
-    Popper: PropTypes.func,
-    Root: PropTypes.elementType,
-  }),
-};
-
-
-export default function CaseStudies() {
+const CaseStudies = () => {
   const [value, setValue] = React.useState(0);
   const [searchString, setSearch] = useState('');
   return (
@@ -448,7 +434,7 @@ export default function CaseStudies() {
       title={`Case Studies`}
       description="Pulsar Case Stdies"
     >
-      <div className="page-wrap tailwind">
+      <div className="page-wrap">
         <section className="hero">
           <div className="inner text--left">
             <div className="row">
@@ -493,3 +479,5 @@ export default function CaseStudies() {
     </Layout>
   );
 }
+
+export default CaseStudies;
