@@ -477,7 +477,7 @@ Here are the most noteworthy changes in this release.
 - Add docs for supporting reading config options from files in Python runner [#544](https://github.com/apache/pulsar-site/pull/544)
 - Add docs for enabling replicated subscription [#510](https://github.com/apache/pulsar-site/pull/510)
 - Add docs for env variables (CLI) [#422](https://github.com/apache/pulsar-site/pull/422)
--  Add docs for schema support (Python functions) [#486](https://github.com/apache/pulsar-site/pull/486)
+- Add docs for schema support (Python functions) [#486](https://github.com/apache/pulsar-site/pull/486)
 - Add docs for message dispatch throttling [#386](https://github.com/apache/pulsar-site/pull/386) 
 - Add docs for proxy version protocol [#531](https://github.com/apache/pulsar-site/pull/531)
 
@@ -487,3 +487,5 @@ For the complete list, including all features, enhancements, and bug fixes, chec
 
 - [Documentation merged in 3.0 (pulsar repo)](https://github.com/apache/pulsar/pulls?page=1&q=is%3Apr+is%3Aclosed+milestone%3A3.0.0+label%3Adoc%2Cdoc-complete)
 
+> A special thanks to the following contributors (alphabetic Github IDs) who contributed to Pulsar 3.0.0:
+> 0xflotus, Abhilash Mandaliya, Alexander Preuß, Ali Ahmed, AloysZhang, Alvaro, AlvaroStream, Andras Beni, Andrey Yegorov, Anonymitaet, Apurva007, Asaf Mesika, Ayman Khalil, Baodi Shi, Chris Bono, Christophe Bornet, Clay Johnson, Cong Zhao, Dave Duggins, Dave Fisher, Dave Maughan, David Dieruf, Dawn Leamon, Dezhi LIiu, Dianjin Wang, Elliot West, Enrico Olivelli, Eric Shen, Ethan Waldo, Fangbin Sun, Flowermin, GitHub, Guangning E, Hang Chen, Heesung Sohn, Hongten, HuangWei, HuangZeGui, Huanli Meng, JiangHaiting, Jiaqi Shen, Jiwei Guo, Kai, Kai Wang, Kengo Seki, Lan, Lari Hotari, Lei Zhiyuan, Leo fu, Leona Yoda, Li Li, Lin Zhao, LinChen, Lishen Yao, Mark Silcox, Marvin Cai, Masahiro Sakamoto, Mathieu Grenonville, Matteo Merli, Max Xu, Melker Narikka, Mendon Kissling, Mercurio, Michael Marshall, Naresh, Neng Lu, Nicolò Boschi, Nihar Rathod, Paul Gier, Penghui Li, Pradhyumnakashyap, Qiang Huang, Qiang Zhao, Rajan Dhabalia, Robert Barbey, Ruguo Yu, Rui Fu, SeasonPan, Shen Liu, Sherlock Xu, StevenLuMT, Tao Jiuming, Tuấn Vương, WJL3333, WangJialing, Xiangying Meng, Xiaoyu Hou, YANGLiiN, Yan Zhao, Yang Yang, YingQun Zhong, Yong Zhang, Yuanhao Ji, Yunze Xu, Yuri Mizushima, Zac Bentley, ZhangJian He, Zhangao, Zike Yang, Zixuan Liu, caption, codertmy, coderzc, congbo, crossoverJie, fengyubiao, feynmanlin, gaozhangmin, grayson, guan46, houxiaoyu, hrsakai, hzh0425, jiangpengcheng, ken, komalatammal, labuladong, laminar, laminar (Tian Fang), leixin, lifepuzzlefun, lixinyang, maheshnikam, mans2singh, mipper, momo-jun, nullscript, penghui, presenth7s, ran, sinan liu, thetumbled, tison, vineeth1995, wenbingshen, xiaokang, xiaolong ran, yangyijun, yingchang, youzipi, yws-tracy, zhaohaidao, zzccctv and 萧易客.
