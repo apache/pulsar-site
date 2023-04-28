@@ -20,6 +20,9 @@ Category|Method|If you want to manage clusters...
 [Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `clusters` command
 [Pulsar admin APIs](admin-api-overview.md)| {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.|See the `/admin/v2/clusters` endpoint
 [Pulsar admin APIs](admin-api-overview.md)|[Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.|See the `clusters` method of the `PulsarAdmin` object
+
+You can perform the following operations on [clusters](reference-terminology.md#cluster).
+
 ## Provision cluster
 
 You can provision new clusters using the admin interface.
@@ -259,33 +262,3 @@ admin.clusters().deleteCluster(clusterName);
 
 </Tabs>
 ````
-
-
-
-:::tip
-
-This page only shows **some frequently used operations**. For the latest and complete information, see the **reference docs** below.
-
- - [Pulsar CLI](reference-cli-tools.md)
-
-   - [pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.
-
- - [Pulsar admin APIs](admin-api-overview.md)
-
-   - {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.
-
-   - [Java admin API](/api/admin/), which lists all classes, methods, descriptions, and more.
-
-:::
-
-You can manage [clusters](reference-terminology.md#cluster) via one of the following methods:
-
-* [Pulsar CLI](reference-cli-tools.md)
-
-  * [pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/): the `clusters` command
-
-* [Pulsar admin APIs](admin-api-overview.md)
-
-  * {@inject: rest:REST API:/}: the `/admin/v2/clusters` endpoint
-
-  * [Java admin API](/api/admin/): the `clusters` method of the `PulsarAdmin` object

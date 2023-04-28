@@ -16,7 +16,7 @@ Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish
 
 When a subscription is created, Pulsar [retains](concepts-architecture-overview.md#persistent-storage) all messages, even if the consumer is disconnected. The retained messages are discarded only when a consumer acknowledges that all these messages are processed successfully.
 
-If the consumption of a message fails and you want this message to be consumed again, you can enable [message redelivery mechanism](#message-redelivery) to request the broker to resend this message.
+If the consumption of a message fails and you want this message to be consumed again, you can enable the [message redelivery mechanism](#message-redelivery) to request the broker to resend this message.
 
 ## Messages
 
@@ -35,7 +35,7 @@ Messages are the basic "unit" of Pulsar. The following table lists the component
 | Publish time         | The timestamp of when the message is published. The timestamp is automatically applied by the producer.                                                                                                                                                                                                                                                                                                                    |
 | Event time           | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.                                                                                                                                                                                                                             |
 
-The default size of a message is 5 MB. You can configure the max size of a message with the following configurations.
+The default max size of a message is 5 MB. You can configure the max size of a message with the following configuration options.
 
 - In the `broker.conf` file.
 
@@ -515,16 +515,64 @@ Exclusive is the default subscription type.
 
 #### Failover
 
-In the *Failover* type, multiple consumers can attach to the same subscription. A master consumer is picked for a non-partitioned topic or each partition of a partitioned topic and receives messages. When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
+In the *Failover* type, multiple consumers can attach to the same subscription. 
 
-* For partitioned topics, the broker will sort consumers by priority level and lexicographical order of consumer name. The broker will try to evenly assign partitions to consumers with the highest priority level.
-* For non-partitioned topics, the broker will pick consumers in the order they subscribe to the non-partitioned topics.
+A master consumer is picked for a non-partitioned topic or each partition of a partitioned topic and receives messages. 
 
-For example, a partitioned topic has 3 partitions, and 15 consumers. Each partition will have 1 active consumer and 4 stand-by consumers.
+When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
 
-In the diagram below, **Consumer A** is the master consumer while **Consumer B** would be the next consumer in line to receive messages if **Consumer A** is disconnected.
+##### Failover | Partitioned topics
 
-![Failover subscriptions](/assets/pulsar-failover-subscriptions.svg)
+For partitioned topics, the broker sorts consumers by priority and lexicographical order of consumer name. 
+
+The broker tries to evenly assign partitions to consumers with the highest priority. 
+
+A consumer is selected by running a module operation `mod (partition index, consumer index)`.
+
+- If the number of partitions in a partitioned topic is **less** than the number of consumers:
+  
+  For example, in the diagram below, this partitioned topic has 2 partitions and there are 4 consumers. 
+  
+  Each partition has 1 active consumer and 1 stand-by consumer. 
+  
+    - For p0, consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
+
+    - For p1, consumer C is the master consumer, while consumer D would be the next consumer in line to receive messages if consumer C is disconnected.
+
+  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-4.svg)
+
+- If the number of partitions in a partitioned topic is **greater** than the number of consumers:
+  
+  For example, in the diagram below, this partitioned topic has 9 partitions and 3 consumers. 
+  
+  - p0, p3, and p6 are assigned to consumer A.
+  
+  - p1, p4, and p7 are assigned to consumer B.
+  
+  - p2, p5, and p8 are assigned to consumer C.
+  
+  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-1.svg)
+##### Failover | Non-partitioned topics
+
+- If there is one non-partitioned topic. The broker picks consumers in the order they subscribe to non-partitioned topics. 
+
+  For example, in the diagram below, this non-partitioned topic has 1 topic and there are 2 consumers. 
+  
+  The topic has 1 active consumer and 1 stand-by consumer. 
+  
+  Consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
+
+  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-2.svg)
+
+- If there are multiple non-partitioned topics, a consumer is selected based on **consumer name hash** and **topic name hash**. The client uses the same consumer name to subscribe to all the topics.
+
+  For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
+  
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
+  
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
+
+  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
 
 #### Shared
 
@@ -881,19 +929,19 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines which partition---that is, which internal topic---each message should be published to.
 
-There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} available:
+There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
 | Mode                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. |
 | `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.                                                                                                                                                                                                |
-| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.                                                                                                                                  |
+| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -1068,7 +1116,7 @@ Delayed message delivery enables you to consume a message later. In this mechani
 
 :::note
 
-Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+Only shared and key-shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
 
 :::
 

@@ -38,21 +38,27 @@ JWT authentication supports two different kinds of keys to generate and validate
 
 The administrators create the secret key and use it to generate the client tokens. You can also configure this key for brokers to validate the clients.
 
-The output file is generated in the root of your Pulsar installation directory. You can also provide an absolute path for the output file using the command below.
+The output file is generated in the root of your Pulsar installation directory.
 
 ```shell
 bin/pulsar tokens create-secret-key --output my-secret.key
 ```
 
+You can also provide an absolute path for the output file using the command below.
+
+```shell
+bin/pulsar tokens create-secret-key --output /opt/my-secret.key
+```
+
 To generate a base64-encoded private key, enter the following command.
 
 ```shell
-bin/pulsar tokens create-secret-key --output  /opt/my-secret.key --base64
+bin/pulsar tokens create-secret-key --output my-secret.key --base64
 ```
 
 ### Create a key pair
 
-To use asymmetric key encryption, you need to create a pair of keys. The output file is generated in the root of your Pulsar installation directory. You can also provide an absolute path for the output file using the command below.
+To use asymmetric key encryption, you need to create a pair of keys. The output file is generated in the root of your Pulsar installation directory.
 
 ```shell
 bin/pulsar tokens create-key-pair --output-private-key my-private.key --output-public-key my-public.key

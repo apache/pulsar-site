@@ -34,10 +34,10 @@ def execute(asf_site: Path):
         print(f"{file} was modified")
 
     # # 2. Install and build
-    npm = find_command('npm', msg="npm is required")
+    yarn = find_command('yarn', msg="yarn is required")
     node = find_command('node', msg="node is required")
     bash = find_command('bash', msg="bash is required")
-    run(npm, 'install', cwd=site_path())
+    run(yarn, 'install', cwd=site_path())
     run(node, 'scripts/replace.js', cwd=site_path())
     run(bash, 'scripts/split-version-build.sh', *modified_files, cwd=site_path())
     latest_content = site_path() / 'build'
