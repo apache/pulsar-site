@@ -461,3 +461,42 @@ sidebar_label: Apache Pulsar 3.0.0
 - Upgrade to latest docbot action by @maxsxu in [#17266](https://github.com/apache/pulsar/pull/17266)
 - Upgrade hadoop client to 3.3.3 and 2.10.2 by @codelipenghui in [#17727](https://github.com/apache/pulsar/pull/17727)
 - Upgrade PrestoSQL to the first Trino version by @tisonkun in [#16683](https://github.com/apache/pulsar/pull/16683)
+
+### Documentation
+
+Here are the most noteworthy changes in this release. 
+
+- Add fresh new docs for Pulsar admin API [#504](https://github.com/apache/pulsar-site/pull/504), [#498](https://github.com/apache/pulsar-site/pull/498), [#493](https://github.com/apache/pulsar-site/pull/493), [#490](https://github.com/apache/pulsar-site/pull/490), [#471](https://github.com/apache/pulsar-site/pull/471), [#462](https://github.com/apache/pulsar-site/pull/462), [#403](https://github.com/apache/pulsar-site/pull/403)
+
+- Refactor the information architecture of client library docs [#393](https://github.com/apache/pulsar-site/pull/393)
+
+- Refactor the information architecture of Schema topics [#18242](https://github.com/apache/pulsar/pull/18242)
+
+- Add docs for deploying a Pulsar cluster on the IBM cloud [#399](https://github.com/apache/pulsar-site/pull/399)
+  
+- Add observability docs [#502](https://github.com/apache/pulsar-site/pull/502)
+
+- Add get started for transaction [#501](https://github.com/apache/pulsar-site/pull/501)
+
+- Add docs and illustrations for failover [#514](https://github.com/apache/pulsar-site/pull/514)
+
+- Add docs for access mode (producer) [#537](https://github.com/apache/pulsar-site/pull/537)
+
+- Add docs for supporting reading config options from files in Python runner [#544](https://github.com/apache/pulsar-site/pull/544)
+
+- Add docs for enabling replicated subscription [#510](https://github.com/apache/pulsar-site/pull/510)
+
+- Add docs for env variables (CLI) [#422](https://github.com/apache/pulsar-site/pull/422)
+
+-  Add docs for schema support (Python functions) [#486](https://github.com/apache/pulsar-site/pull/486)
+
+- Add docs for message dispatch throttling [#386](https://github.com/apache/pulsar-site/pull/386) 
+
+- Add docs for proxy version protocol [#531](https://github.com/apache/pulsar-site/pull/531)
+
+For the complete list, including all features, enhancements, and bug fixes, check out the following resources.
+
+- [Documentation merged in 3.0 (pulsar-site repo)](https://github.com/apache/pulsar-site/pulls?q=is%3Apr+is%3Aclosed+milestone%3A3.0.0)
+
+- [Documentation merged in 3.0 (pulsar repo)](https://github.com/apache/pulsar/pulls?page=1&q=is%3Apr+is%3Aclosed+milestone%3A3.0.0+label%3Adoc%2Cdoc-complete)
+
