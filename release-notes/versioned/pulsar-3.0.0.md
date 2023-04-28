@@ -35,13 +35,13 @@ sidebar_label: Apache Pulsar 3.0.0
 - PIP-160 Metrics stats of Transaction buffered writer [#15370](https://github.com/apache/pulsar/issues/15370)
 - PIP-167 Make it Configurable to Require Subscription Permission [#15576](https://github.com/apache/pulsar/pull/15576)
 - PIP-169 Support split bundle by flow or qps [#16782](https://github.com/apache/pulsar/pull/16782)
-- PIP-188: Cluster migration or Blue-Green cluster deployment support in Pulsar [#16551]((https://github.com/apache/pulsar/pull/16551))
+- PIP-188: Cluster migration or Blue-Green cluster deployment support in Pulsar [#16551](https://github.com/apache/pulsar/pull/16551)
 - PIP-192: New Pulsar Broker Load Balancer [#16691](https://github.com/apache/pulsar/pull/16691)
 - PIP-214: Add broker level metrics statistics and expose to prometheus [#18056](https://github.com/apache/pulsar/pull/18056)
 - PIP-218: Consumer batchReceive() single partition every receive [#18182](https://github.com/apache/pulsar/pull/18182)
 - PIP-229: Add a common interface to get fields of the MessageIdData #18950(https://github.com/apache/pulsar/pull/18950)
 - PIP-250: Add proxyVersion to CommandConnect #19623(https://github.com/apache/pulsar/pull/19623)
-- PIP-257: Add Open ID Connect Support to Server Components [#19771](https://github.com/apache/pulsar/pull/19771)```
+- PIP-257: Add Open ID Connect Support to Server Components [#19771](https://github.com/apache/pulsar/pull/19771)
 
 ### Broker
 
