@@ -7,7 +7,6 @@ sidebar_label: Apache Pulsar 3.0.0
 #### 2023-05-02
 
 ### Important notice
-
 - Upgrade the RocksDB version to 7.9.2 to keep sync with BookKeeper's RocksDB dependency in [#20072](https://github.com/apache/pulsar/pull/20072)
 - Introduce consistent hash ring to distribute the load of multiple topics subscription in [#19502](https://github.com/apache/pulsar/pull/19502)
 - Remove default 30s ackTimeout when setting DLQ policy on java consumer in [#19486](https://github.com/apache/pulsar/pull/19486)
@@ -28,10 +27,7 @@ sidebar_label: Apache Pulsar 3.0.0
 - Fix producer/consume permission can’t get v1/schema in [#16018](https://github.com/apache/pulsar/pull/16018)
 - Autorecovery default reppDnsResolverClass to ZkBookieRackAffinityMapping in [#15640](https://github.com/apache/pulsar/pull/15640)
 
-
-
 ### PIPs
-
 - PIP-160 Metrics stats of Transaction buffered writer [#15370](https://github.com/apache/pulsar/issues/15370)
 - PIP-167 Make it Configurable to Require Subscription Permission [#15576](https://github.com/apache/pulsar/pull/15576)
 - PIP-169 Support split bundle by flow or qps [#16782](https://github.com/apache/pulsar/pull/16782)
@@ -44,7 +40,6 @@ sidebar_label: Apache Pulsar 3.0.0
 - PIP-257: Add Open ID Connect Support to Server Components [#19771](https://github.com/apache/pulsar/pull/19771)
 
 ### Broker
-
 - [Broker] incomplete PIP-97: Asynchronous Authentication Provider [#12105](https://github.com/apache/pulsar/pull/12105)
   - Implement for ServerCnx by @michaeljmarshall in [#19409](https://github.com/apache/pulsar/pull/19409)
   - Implement for ProxyConnection by @michaeljmarshall in [#19292](https://github.com/apache/pulsar/pull/19292)
@@ -278,7 +273,6 @@ sidebar_label: Apache Pulsar 3.0.0
 - [Broker] Remove unused code by @lordcheng10 in [#17036](https://github.com/apache/pulsar/pull/17036)
 
 ### Clients
-
 - [Client] PIP-224: Add getLastMessageIds API by @BewareMyPower in [#20040](https://github.com/apache/pulsar/pull/20040)
 - [Client] Refactor client version format by @RobertIndie in [#19643](https://github.com/apache/pulsar/pull/19643)
 - [Client] Fix authentication not update after changing the serviceUrl by @hangc0276 in [#19510](https://github.com/apache/pulsar/pull/19510)
@@ -316,9 +310,7 @@ sidebar_label: Apache Pulsar 3.0.0
 - [Client] Messages with inconsistent consumer epochs are not filtered when using batch receive and trigger timeout. by @shibd in [#17318](https://github.com/apache/pulsar/pull/17318)
 - [Client] Improve docs and code quality about KeyValueSchema usages by @BewareMyPower in [#17256](https://github.com/apache/pulsar/pull/17256)
 
-
 ### Pulsar IO and Pulsar Functions
-
 - [Functions] Supply download auth params when provided for k8s runtime by @michaeljmarshall in [#20144](https://github.com/apache/pulsar/pull/20144)
 - [Functions] Make /version return correct version by @michaeljmarshall in [#20047](https://github.com/apache/pulsar/pull/20047)
 - [Functions] Use AuthorizationServer more in Function Worker API by @michaeljmarshall in [#19975](https://github.com/apache/pulsar/pull/19975)
@@ -357,10 +349,7 @@ sidebar_label: Apache Pulsar 3.0.0
 - [Connectors] KCA: handle kafka's logical schemas by @dlg99 in [#16485](https://github.com/apache/pulsar/pull/16485)
 - [Connectors] Add support for full message synchronization by @shink in [#16003](https://github.com/apache/pulsar/pull/16003)
 
-
-
 ### Observability
-
 - [Metrics] Fix the partitioned publisher topic stat aggregation bug by @heesung-sn in [#18807](https://github.com/apache/pulsar/pull/18807)
 - [Metrics] Fix reporting pulsar_subscription_blocked_on_unacked_messages metric by @aymkhalil in [#18621](https://github.com/apache/pulsar/pull/18621)
 - [Metrics] Correctly set byte and message out totals per subscription by @pgier in [#18451](https://github.com/apache/pulsar/pull/18451)
@@ -375,7 +364,6 @@ sidebar_label: Apache Pulsar 3.0.0
 
 
 ### CLI
-
 - [Pulsar Admin] Use AuthenticationParameters for rest producer by @michaeljmarshall in [#20046](https://github.com/apache/pulsar/pull/20046)
 - [Pulsar Admin] Use AuthorizationServer more in Function Worker API by @michaeljmarshall in [#19975](https://github.com/apache/pulsar/pull/19975)
 - [Pulsar Admin] Fix incorrect state replication.connected on API partitioned-topic stat by @poorbarcode in [#19942](https://github.com/apache/pulsar/pull/19942)
@@ -417,10 +405,7 @@ sidebar_label: Apache Pulsar 3.0.0
 - [Client Tool] Pulsar-perf produce add possibility to set eventTime on messages by @eolivelli in [#17189](https://github.com/apache/pulsar/pull/17189)
 - [Client Tool] Pulsar-perf consume, do not fail in case of reading data older than 10 days by @eolivelli in [#17160](https://github.com/apache/pulsar/pull/17160)
 
-
-
 ### Others
-
 - [Proxy] Refresh auth data if ProxyLookupRequests by @michaeljmarshall in [#20067](https://github.com/apache/pulsar/pull/20067)
 - [Proxy] Only create ConnectionPool when needed by @michaeljmarshall in [#20062](https://github.com/apache/pulsar/pull/20062)
 - [Proxy] Fix connection read timeout handling in Pulsar Proxy by @lhotari in [#20014](https://github.com/apache/pulsar/pull/20014)
@@ -450,7 +435,6 @@ sidebar_label: Apache Pulsar 3.0.0
 
 
 ### Library updates
-
 - Upgrade the BookKeeper dependency to 4.16.1 by @hangc0276 in [#20127](https://github.com/apache/pulsar/pull/20127)
 - Upgrade snakeyaml version to 2.0 by @Technoboy- in [#20085](https://github.com/apache/pulsar/pull/20085)
 - Upgrade the RocksDB version to 7.9.2 to keep sync with BookKeeper's RocksDB dependency by @hangc0276 in [#20072](https://github.com/apache/pulsar/pull/20072)
