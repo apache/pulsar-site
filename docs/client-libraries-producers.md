@@ -260,7 +260,7 @@ producer.sendAsync(msg, [](Result result, MessageId messageId) {
 </Tabs>
 ````
 
-As you can see from the example above, async send operations return a [MessageId](api/client/org/apache/pulsar/client/api/MessageId) wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+As you can see from the example above, async send operations return a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId) wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ## Publish messages to partitioned topics
 
@@ -380,7 +380,7 @@ The following is an example:
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
-To use a custom message router, you need to provide an implementation of the [MessageRouter](api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
+To use a custom message router, you need to provide an implementation of the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
 
 ```java
 public interface MessageRouter extends Serializable {
