@@ -54,6 +54,5 @@ pulsar-admin functions localrun \
     max_pending_async_requests = 1000
     max_concurrent_requests = 50
     ```
-- The parameters in the ` --config-file` **override** those of the same name specified on the command line.
 
 - When starting with the ` --config-file`, all parameters can be set in the ` --config-file`. If you specify parameters on the command line that are also present in the ` --config-file`, the values of the parameters on the command line will **take precedence over** the values in the ` --config-file`. Like in the example above, the `logging_level` is set to `debug`.
