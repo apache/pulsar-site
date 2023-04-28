@@ -26,10 +26,10 @@ You can use a Pulsar C++ client to create Pulsar [producers](concepts-clients.md
   - [Producer configurations](@pulsar:apidoc:cpp@/classpulsar_1_1_producer_configuration.html)
   - [Consumer configurations](@pulsar:apidoc:cpp@/classpulsar_1_1_consumer_configuration.html)
   - [Reader configurations](@pulsar:apidoc:cpp@/classpulsar_1_1_reader_configuration.html)
-- [Release notes](pathname:///release-notes/client-cpp)
+- [Release notes](/release-notes/client-cpp)
 - [Code examples](https://github.com/apache/pulsar-client-cpp/tree/main/examples)
 - [Supported schema types](https://github.com/apache/pulsar-client-cpp/blob/main/include/pulsar/Schema.h)
-- [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
+- [Client feature matrix](/client-feature-matrix/)
 
 ## Changes for 3.0.0 and later versions
 

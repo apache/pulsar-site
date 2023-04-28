@@ -36,5 +36,5 @@ Package | Description | Maven Artifact
 #### More reference
 
 - [Java client configurations](pathname:///reference/#/@pulsar:version_reference@/client/)
-- [Release notes](pathname:///release-notes/client-java)
-- [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
+- [Release notes](/release-notes/client-java)
+- [Client feature matrix](/client-feature-matrix/)
