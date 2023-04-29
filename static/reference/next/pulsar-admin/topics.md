@@ -498,7 +498,7 @@ $ pulsar-admin topics create options
 
 ## <em>update-partitioned-topic</em>
 
-Update existing non-global partitioned topic. New updating number of partitions must be greater than existing number of partitions.
+Update existing partitioned topic. New updating number of partitions must be greater than existing number of partitions.
 
 **Command:**
 

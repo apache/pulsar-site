@@ -59,6 +59,16 @@ poetry run bin/cpp-apidoc-generator.py <VERSION>
 
 ... where the `VERSION` is released semantic version like `2.10.2` or `3.0.0`.
 
+### [js-apidoc-generator](bin/js-apidoc-generator.py)
+
+This executable generates API docs for Pulsar Node.js Client using [`typedoc`](https://typedoc.org/):
+
+```bash
+poetry run bin/js-apidoc-generator.py <VERSION>
+```
+
+... where the `VERSION` is released semantic version like `1.8.2`.
+
 ### [py-apidoc-generator](bin/py-apidoc-generator.py)
 
 This executable generates API docs for Pulsar Python Client:

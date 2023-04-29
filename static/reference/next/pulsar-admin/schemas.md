@@ -81,3 +81,20 @@ $ pulsar-admin schemas extract options
 | `-a, --always-allow-null` | set schema whether always allow null or not|true||
 | `-t, --type` | type avro or json|null||
 
+
+## <em>compatibility</em>
+
+Test schema compatibility
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas compatibility options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `-f, --filename` | filename|null||
+

@@ -11,7 +11,7 @@ type LinkButtonProps = {
 const LinkButton = (props: LinkButtonProps) => {
 
   return (
-    <a className={`${s.button} ${props.filled && s.filled_button}`} href={props.link}>
+    <a className={`${s.button} ${props.filled ? s.filled_button : s.unfilled_button}`} href={props.link}>
       {props.title}
     </a>
   )

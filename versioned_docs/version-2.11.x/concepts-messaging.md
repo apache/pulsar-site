@@ -16,7 +16,7 @@ Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish
 
 When a subscription is created, Pulsar [retains](concepts-architecture-overview.md#persistent-storage) all messages, even if the consumer is disconnected. The retained messages are discarded only when a consumer acknowledges that all these messages are processed successfully.
 
-If the consumption of a message fails and you want this message to be consumed again, you can enable [message redelivery mechanism](#message-redelivery) to request the broker to resend this message.
+If the consumption of a message fails and you want this message to be consumed again, you can enable the [message redelivery mechanism](#message-redelivery) to request the broker to resend this message.
 
 ## Messages
 
@@ -35,7 +35,7 @@ Messages are the basic "unit" of Pulsar. The following table lists the component
 | Publish time         | The timestamp of when the message is published. The timestamp is automatically applied by the producer.                                                                                                                                                                                                                                                                                                                    |
 | Event time           | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.                                                                                                                                                                                                                             |
 
-The default size of a message is 5 MB. You can configure the max size of a message with the following configurations.
+The default max size of a message is 5 MB. You can configure the max size of a message with the following configuration options.
 
 - In the `broker.conf` file.
 
@@ -200,7 +200,7 @@ Messages are received from [brokers](reference-terminology.md#broker) either syn
 
 ### Listeners
 
-Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a {@inject: javadoc:MesssageListener:/client/org/apache/pulsar/client/api/MessageListener} interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ### Acknowledgment
 
@@ -936,19 +936,19 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines which partition---that is, which internal topic---each message should be published to.
 
-There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} available:
+There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
 | Mode                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. |
 | `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.                                                                                                                                                                                                |
-| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.                                                                                                                                  |
+| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter)interface.                                                                                                                                  |
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -1123,7 +1123,7 @@ Delayed message delivery enables you to consume a message later. In this mechani
 
 :::note
 
-Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
+Only shared and key-shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
 
 :::
 

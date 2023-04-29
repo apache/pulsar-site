@@ -18,7 +18,7 @@ This example shows how to create a producer.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 
   <TabItem value="Java">
 
@@ -26,6 +26,15 @@ This example shows how to create a producer.
 Producer<String> producer = pulsarClient.newProducer(Schema.STRING)
                 .topic("my-topic")
                 .create();
+  ```
+
+  </TabItem>
+
+  <TabItem value="C++">
+
+  ```cpp
+  Producer producer;
+  Result result = client.createProducer("my-topic", producer);
   ```
 
   </TabItem>
@@ -39,21 +48,32 @@ This example shows how to send messages using producers.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"}]}>
 <TabItem value="Java">
 
    ```java
   producer.newMessage()
           .key("my-message-key")
-          .value("my-async-message")
-          .property("my-key", "my-value")
-          .property("my-other-key", "my-other-value")
+          .value("my-sync-message")
           .send();
    ```
 
    You can terminate the builder chain with `sendAsync()` and get a future return.
 
   </TabItem>
+
+  <TabItem value="C++">
+
+  ```cpp
+  Message msg = MessageBuilder()
+                      .setContent("content")
+                      .setPartitionKey("my-message-key")
+                      .build();
+  Result res = producer.send(msg);
+  ```
+
+  </TabItem>
+
   <TabItem value="Go">
 
    ```go
@@ -165,7 +185,33 @@ await producer.Send(data);
   ````mdx-code-block
   <Tabs groupId="lang-choice"
     defaultValue="C#"
-    values={[{"label":"C#","value":"C#"}]}>
+    values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"C#","value":"C#"}]}>
+
+  <TabItem value="Java">
+
+    ```java
+    producer.newMessage()
+            .value("my-sync-message")
+            .property("my-key", "my-value")
+            .property("my-other-key", "my-other-value")
+            .send();
+    ```
+
+  </TabItem>
+
+  <TabItem value="C++">
+
+    ```cpp
+    Message msg = MessageBuilder()
+                      .setContent("content")
+                      .setProperty("my-key", "my-value")
+                      .setProperty("my-other-key", "my-other-value")
+                      .build();
+    Result res = producer.send(msg);
+    ```
+
+  </TabItem>
+
   <TabItem value="C#">
 
     ```csharp
@@ -178,25 +224,6 @@ await producer.Send(data);
   </Tabs>
   ````
 
-- Send messages with customized metadata without using the builder.
-
-  ````mdx-code-block
-  <Tabs groupId="lang-choice"
-    defaultValue="C#"
-    values={[{"label":"C#","value":"C#"}]}>
-  <TabItem value="C#">
-
-  ```csharp
-  var data = Encoding.UTF8.GetBytes("Hello World");
-  var metadata = new MessageMetadata();
-  metadata["SomeKey"] = "SomeValue";
-  var messageId = await producer.Send(metadata, data));
-  ```
-
-  </TabItem>
-  </Tabs>
-  ````
-
 ## Async send messages
 
 You can publish messages [asynchronously](concepts-clients.md#send-modes) using the Java client. With async send, the producer puts the message in a blocking queue and returns it immediately. Then the client library sends the message to the broker in the background. If the queue is full (max size configurable), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer.
@@ -206,7 +233,7 @@ The following is an example.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
 ```java
@@ -216,10 +243,24 @@ producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
 ```
 
 </TabItem>
+
+<TabItem value="C++">
+
+```cpp
+Message msg = MessageBuilder()
+                  .setContent("content")
+                  .build();
+producer.sendAsync(msg, [](Result result, MessageId messageId) {
+    std::cout << "Result: " << result << "; Message ID:" << messageId;
+});
+```
+
+</TabItem>
+
 </Tabs>
 ````
 
-As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+As you can see from the example above, async send operations return a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId) wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ## Publish messages to partitioned topics
 
@@ -236,7 +277,7 @@ The following is an example:
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
   <TabItem value="Java">
 
    ```java
@@ -252,6 +293,22 @@ The following is an example:
    ```
 
   </TabItem>
+
+  <TabItem value="C++">
+
+   ```cpp
+   #include "lib/RoundRobinMessageRouter.h" // Make sure include this header file
+
+    Producer producer;
+    Result result = client.createProducer(
+        "persistent://public/default/my-topic",
+        ProducerConfiguration().setMessageRouter(std::make_shared<RoundRobinMessageRouter>(
+            ProducerConfiguration::BoostHash, true, 1000, 100000, boost::posix_time::seconds(1))),
+        producer);
+   ```
+
+  </TabItem>
+
   <TabItem value="Go">
 
    ```go
@@ -317,18 +374,36 @@ The following is an example:
 
 ### Customize message router
 
-To use a custom message router, you need to provide an implementation of the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface, which has just one `choosePartition` method:
-
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
+
+To use a custom message router, you need to provide an implementation of the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
 
 ```java
 public interface MessageRouter extends Serializable {
     int choosePartition(Message msg);
 }
+```
+
+  </TabItem>
+
+  <TabItem value="C++">
+
+To use a custom message router, you need to provide an implementation of the ``MessageRoutingPolicy interface, which has just one `getPartition` method:
+
+```cpp
+class MessageRouter : public MessageRoutingPolicy {
+   public:
+    MessageRouter() : {}
+
+    int getPartition(const Message& msg, const TopicMetadata& topicMetadata) {
+        // The implementation of getPartition
+    }
+
+};
 ```
 
   </TabItem>
@@ -340,7 +415,7 @@ The following router routes every message to partition 10:
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
 ```java
@@ -352,6 +427,20 @@ public class AlwaysTenRouter implements MessageRouter {
 ```
 
   </TabItem>
+  <TabItem value="C++">
+
+```cpp
+class MessageRouter : public MessageRoutingPolicy {
+   public:
+    MessageRouter() {}
+
+    int getPartition(const Message& msg, const TopicMetadata& topicMetadata) {
+        return 10;
+    }
+};
+```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -360,7 +449,7 @@ With that implementation, you can send messages to partitioned topics as below.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
 ```java
@@ -376,18 +465,27 @@ producer.send("Partitioned topic message".getBytes());
 ```
 
   </TabItem>
+
+
+<TabItem value="C++">
+
+```cpp
+Producer producer;
+Result result = client.createProducer(
+    "persistent://public/default/my-topic",
+    ProducerConfiguration().setMessageRouter(std::make_shared<MessageRouter>()),
+    producer);
+Message msg = MessageBuilder().setContent("content").build();
+result = producer.send(msg);
+```
+
+  </TabItem>
 </Tabs>
 ````
 
 ### Choose partitions when using a key
 
-If a message has a key, it supersedes the round robin routing policy. The following example illustrates how to choose the partition when using a key.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
-<TabItem value="Java">
+If a message has a key, it supersedes the round robin routing policy. The following java example code illustrates how to choose the partition when using a key.
 
 ```java
 // If the message has a key, it supersedes the round robin routing policy
@@ -402,10 +500,6 @@ If a message has a key, it supersedes the round robin routing policy. The follow
             return signSafeMod(PARTITION_INDEX_UPDATER.getAndIncrement(this), topicMetadata.numPartitions());
         }
 ```
-
-  </TabItem>
-</Tabs>
-````
 
 ## Enable chunking
 
@@ -496,12 +590,22 @@ The following is an example of how to configure delayed message delivery for a p
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
    ```java
    // message to be delivered at the configured delay interval
    producer.newMessage().deliverAfter(3L, TimeUnit.Minute).value("Hello Pulsar!").send();
+   ```
+
+  </TabItem>
+  <TabItem value="C++">
+
+   ```cpp
+   Message msg = MessageBuilder().setContent("content")
+                      .setDeliverAfter(std::chrono::minutes(3))
+                      .build();
+   producer.send(msg);
    ```
 
   </TabItem>
@@ -580,7 +684,7 @@ To intercept messages, you can add a `ProducerInterceptor` or multiple ones when
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
    ```java
@@ -603,6 +707,42 @@ To intercept messages, you can add a `ProducerInterceptor` or multiple ones when
 			}
         })
         .create();
+   ```
+
+  </TabItem>
+
+  <TabItem value="C++">
+    Implement the custom interceptor:
+
+   ```cpp
+    class MyInterceptor : public ProducerInterceptor {
+      public:
+        MyInterceptor() {}
+
+        Message beforeSend(const Producer& producer, const Message& message) override {
+          // Your implementation code
+          return message;
+        }
+
+        void onSendAcknowledgement(const Producer& producer, Result result, const Message& message,
+                                  const MessageId& messageID) override {
+          // Your implementation code
+        }
+
+        void close() override { 
+          // Your implementation code
+        }
+    };
+   ```
+
+   Configue the producer:
+
+   ```cpp
+    ProducerConfiguration conf;
+    conf.intercept({std::make_shared<MyInterceptor>(),
+                    std::make_shared<MyInterceptor>()}); // You can add multiple interceptors to the same producer
+    Producer producer;
+    client.createProducer(topic, conf, producer);
    ```
 
   </TabItem>
@@ -641,5 +781,52 @@ This example shows how to set the `EnforceUnencrypted` encryption policy.
    ```
 
   </TabItem>
+</Tabs>
+````
+
+## Configure access mode
+
+[Access mode](concepts-clients.md#access-mode) allows applications to require exclusive producer access on a topic to achieve a "single-writer" situation.
+
+This example shows how to set producer access mode.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
+<TabItem value="Java">
+
+::: note
+
+This feature is supported in Java client 2.8.0 or later versions.
+
+:::
+
+   ```java
+   Producer<byte[]> producer = client.newProducer()
+        .topic(topic)
+        .accessMode(ProducerAccessMode.Exclusive)
+        .create();
+   ```
+
+  </TabItem>
+
+<TabItem value="C++">
+
+::: note
+
+This feature is supported in C++ client 3.1.0 or later versions.
+
+:::
+
+   ```cpp
+    Producer producer;
+    ProducerConfiguration producerConfiguration;
+    producerConfiguration.setAccessMode(ProducerConfiguration::Exclusive);
+    client.createProducer(topicName, producerConfiguration, producer);
+   ```
+
+  </TabItem>
+
 </Tabs>
 ````

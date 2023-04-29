@@ -142,7 +142,7 @@ module.exports = {
         /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         announcementBar: {
             id: "summit",
-            content: `🚀 Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! <a target="_blank" href="https://sessionize.com/pulsar-virtual-summit-europe-2023/">Submit your session now</a>!`,
+            content: `🚀 Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! <a target="_blank" href="https://events.zoom.us/ev/Ap6rsDg9LeVfmdajJ_eB13HH026J1d_o8OoTKkQnl_jzVl-srhwB~AggLXsr32QYFjq8BlYLZ5I06Dg">Register now for free</a>!`,
             backgroundColor: "#198fff",
             textColor: "#fff",
             isCloseable: true,

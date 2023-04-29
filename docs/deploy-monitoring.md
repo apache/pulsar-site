@@ -1,7 +1,7 @@
 ---
 id: deploy-monitoring
 title: Monitor
-sidebar_label: "Monitor"
+sidebar_label: "Monitoring"
 ---
 
 You can use different ways to monitor a Pulsar cluster, exposing both metrics related to the usage of topics and the overall health of the individual components of the cluster.

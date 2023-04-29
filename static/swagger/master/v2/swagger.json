@@ -115,6 +115,20 @@
             },
             "type": "object"
         },
+        "AuthenticationParameters": {
+            "properties": {
+                "clientAuthenticationDataSource": {
+                    "$ref": "#/definitions/AuthenticationDataSource"
+                },
+                "clientRole": {
+                    "type": "string"
+                },
+                "originalPrincipal": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "AutoFailoverPolicyData": {
             "properties": {
                 "parameters": {
@@ -1259,6 +1273,12 @@
                 "k8Uri": {
                     "type": "string"
                 },
+                "kubernetesFunctionAuthProviderConfig": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
                 "memoryOverCommitRatio": {
                     "format": "double",
                     "type": "number"
@@ -1410,6 +1430,9 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "loadManagerClassName": {
+                    "type": "string"
+                },
                 "loadReportType": {
                     "type": "string"
                 },
@@ -1495,6 +1518,10 @@
                 },
                 "pulsarServiceUrlTls": {
                     "type": "string"
+                },
+                "startTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "systemResourceUsage": {
                     "$ref": "#/definitions/SystemResourceUsage"
@@ -1719,6 +1746,12 @@
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
+                },
+                "bucketDelayedIndexStats": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicMetricBean"
+                    },
+                    "type": "object"
                 },
                 "bytesInCounter": {
                     "format": "int64",
@@ -2137,6 +2170,12 @@
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
+                },
+                "bucketDelayedIndexStats": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicMetricBean"
+                    },
+                    "type": "object"
                 },
                 "bytesInCounter": {
                     "format": "int64",
@@ -2579,6 +2618,12 @@
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
+                },
+                "bucketDelayedIndexStats": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TopicMetricBean"
+                    },
+                    "type": "object"
                 },
                 "bytesInCounter": {
                     "format": "int64",
@@ -3959,6 +4004,24 @@
             },
             "type": "object"
         },
+        "TopicMetricBean": {
+            "properties": {
+                "labelsAndValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
         "TopicStats": {
             "properties": {
                 "averageMsgSize": {
@@ -4221,6 +4284,9 @@
                     "format": "int32",
                     "type": "integer"
                 },
+                "ignoreUnknownConfigFields": {
+                    "type": "boolean"
+                },
                 "includeStandardPrometheusMetrics": {
                     "type": "boolean"
                 },
@@ -4290,6 +4356,13 @@
                         "type": "string"
                     },
                     "type": "object"
+                },
+                "proxyRoles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
                 },
                 "pulsarFunctionsCluster": {
                     "type": "string"
@@ -17495,7 +17568,7 @@
                 ]
             },
             "post": {
-                "description": "It only increments partitions of existing non-global partitioned-topic",
+                "description": "It increments partitions of existing partitioned-topic",
                 "operationId": "PersistentTopics_updatePartitionedTopic",
                 "parameters": [
                     {
@@ -27328,7 +27401,7 @@
                 ]
             },
             "post": {
-                "description": "It only increments partitions of existing non-global partitioned-topic",
+                "description": "It increments partitions of existing partitioned-topic",
                 "operationId": "PersistentTopics_updatePartitionedTopic",
                 "parameters": [
                     {

@@ -41,7 +41,7 @@ If you want to test REST APIs in postman, you can use the REST API JSON files [h
 </TabItem>
 <TabItem value="Java">
 
-To use the Java admin API, instantiate a {@inject: javadoc:PulsarAdmin:/admin/org/apache/pulsar/client/admin/PulsarAdmin} object, and specify a URL for a Pulsar broker and a {@inject: javadoc:PulsarAdminBuilder:/admin/org/apache/pulsar/client/admin/PulsarAdminBuilder}. The following is a minimal example using `localhost`.
+To use the Java admin API, instantiate a [PulsarAdmin](/api/admin/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](/api/admin/org/apache/pulsar/client/admin/PulsarAdminBuilder) object. The following is a minimal example using `localhost`.
 
 ```java
 String url = "http://localhost:8080";

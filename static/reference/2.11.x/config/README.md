@@ -4,15 +4,15 @@ Pulsar offers several command-line tools that you can use for managing Pulsar in
 
 You can manage Pulsar configurations through configuration files in the [`conf`](https://github.com/apache/pulsar/tree/master/conf) directory of a Pulsar installation.
 
-- [BookKeeper](/next/config/reference-configuration-bookkeeper)
-- [Broker](/next/config/reference-configuration-broker)
-- [Client](/next/config/reference-configuration-client)
-- [Log4j](/next/config/reference-configuration-log4j)
-- [Log4j shell](/next/config/reference-configuration-log4j-shell)
-- [Standalone](/next/config/reference-configuration-standalone)
-- [WebSocket](/next/config/reference-configuration-websocket)
-- [Pulsar proxy](/next/config/reference-configuration-pulsar-proxy)
-- [ZooKeeper](/next/config/reference-configuration-zookeeper)
+- [BookKeeper](/@pulsar:version_reference@/config/reference-configuration-bookkeeper)
+- [Broker](/@pulsar:version_reference@/config/reference-configuration-broker)
+- [Client](/@pulsar:version_reference@/config/reference-configuration-client)
+- [Log4j](/@pulsar:version_reference@/config/reference-configuration-log4j)
+- [Log4j shell](/@pulsar:version_reference@/config/reference-configuration-log4j-shell)
+- [Standalone](/@pulsar:version_reference@/config/reference-configuration-standalone)
+- [WebSocket](/@pulsar:version_reference@/config/reference-configuration-websocket)
+- [Pulsar proxy](/@pulsar:version_reference@/config/reference-configuration-pulsar-proxy)
+- [ZooKeeper](/@pulsar:version_reference@/config/reference-configuration-zookeeper)
 
 ### Override client configurations
 
