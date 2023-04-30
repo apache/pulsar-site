@@ -42,7 +42,7 @@ With the new release model, the Pulsar community looks to release LTS versions e
 
 ![](/img/pulsar-new-release-model.png)
 
-For more information, see [PIP-175](https://github.com/apache/pulsar/issues/15966) and the [Release policy](https://pulsar.apache.org/contribute/release-policy/).
+For more information, see [PIP-175](https://github.com/apache/pulsar/issues/15966) and the [Release policy](pathname:///contribute/release-policy/).
 
 ## What’s new in Apache Pulsar 3.0?
 
@@ -132,7 +132,7 @@ Starting from 3.0, users can perform live upgrades or downgrades between two con
 
 ## Getting started
 
-Pulsar 3.0.0 is now available for download on GitHub. To get started with Pulsar, you can run a Pulsar cluster [on your local machine, Docker, or Kubernetes](https://pulsar.apache.org/docs/next/getting-started-home/).
+Pulsar 3.0.0 is now available for download on GitHub. To get started with Pulsar, you can run a Pulsar cluster [on your local machine, Docker, or Kubernetes](pathname:///docs/3.0.x/getting-started-home/).
 
 To upgrade Apache Pulsar from 2.11.x to 3.0.0, see the upgrade documentation.
 
@@ -152,6 +152,6 @@ Apache Pulsar is one of the fastest-growing open-source projects, recognized by 
 
 - Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! [Register now for free](https://events.zoom.us/ev/Ap6rsDg9LeVfmdajJ_eB13HH026J1d_o8OoTKkQnl_jzVl-srhwB~AggLXsr32QYFjq8BlYLZ5I06Dg) and follow @PulsarSummit on Twitter for updates and details of this much-anticipated one-day event.
 
-- Read the [Apache Pulsar Contribution Guide](https://pulsar.apache.org/contribute/) to start your first contribution.
+- Read the [Apache Pulsar Contribution Guide](pathname:///contribute/) to start your first contribution.
 
 - Visit the [Pulsar GitHub repository](https://github.com/apache/pulsar), follow the project on Twitter [@apache_pulsar](https://twitter.com/apache_pulsar), and join the [Pulsar community on Slack](https://apache-pulsar.slack.com/).
