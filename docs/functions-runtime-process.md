@@ -36,7 +36,7 @@ pulsar-admin functions localrun \
   --py /path/to/python_instance.py \
   --config-file /path/to/config.ini \
   --classname MyFunction \
-  --logging_leve debug \
+  --logging_level debug \
   --inputs persistent://public/default/my-input-topic \
   --output persistent://public/default/my-output-topic \
   --log-topic persistent://public/default/functions-logs
@@ -55,4 +55,4 @@ pulsar-admin functions localrun \
     max_concurrent_requests = 50
     ```
 
-- When starting with the ` --config-file`, all parameters can be set in the ` --config-file`. If you specify parameters on the command line that are also present in the ` --config-file`, the values of the parameters on the command line will **take precedence over** the values in the ` --config-file`. Like in the example above, the `logging_level` is set to `debug`.
+- When you set a parameter through both the configuration file and the command line, like `logging_level` in the example above, the value set through the command line will **take precedence over** the one set through the configuration file. As a result, the value of `logging_level` is `debug`.
