@@ -94,7 +94,9 @@ def execute(master: Path, version: str):
     ]
 
     for config in configs:
-        with (reference / config.type / config.filename).open('w') as f:
+        p = (reference / config.type / config.filename)
+        p.parent.mkdir(exist_ok=True, parents=True)
+        with p.open('w') as f:
             run(java, '-cp', classpath, config.generator, '-c', config.classname, stdout=f)
 
     shutil.copy2(

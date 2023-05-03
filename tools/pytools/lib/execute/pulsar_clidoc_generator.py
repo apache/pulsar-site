@@ -43,7 +43,9 @@ def execute(basedir: Path, version: str):
     ]
 
     for command in commands:
-        with (reference / f'{command[0]}.md').open('w') as f:
+        p = (reference / f'{command[0]}.md')
+        p.parent.mkdir(exist_ok=True, parents=True)
+        with p.open('w') as f:
             run(str(pulsar.absolute()), *command, codes={0, 255}, stdout=f, env={
                 'PULSAR_BROKER_CONF': 'conf/broker.conf',
                 'PULSAR_WORKER_CONF': 'conf/functions_worker.yml',
