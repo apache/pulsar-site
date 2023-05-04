@@ -26,6 +26,7 @@ sidebar_label: Apache Pulsar 3.0.0
 - Revert 5895: fix redeliveryCount in [#17060](https://github.com/apache/pulsar/pull/17060)
 - Fix producer/consume permission can’t get v1/schema in [#16018](https://github.com/apache/pulsar/pull/16018)
 - Autorecovery default reppDnsResolverClass to ZkBookieRackAffinityMapping in [#15640](https://github.com/apache/pulsar/pull/15640)
+- Allow to build and push multi-arch Docker images in [#19432](https://github.com/apache/pulsar/pull/19432)
 
 ### PIPs
 - PIP-160 Metrics stats of Transaction buffered writer [#15370](https://github.com/apache/pulsar/issues/15370)
