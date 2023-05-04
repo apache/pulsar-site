@@ -6,6 +6,8 @@ author: Apache Pulsar Community
 
 **The Apache Pulsar community today announces the release of Apache Pulsar 3.0, the first Long-Term Support (LTS) version!** This is a remarkable community effort, with over 140 contributors submitting about 1500 commits for feature enhancements and bug fixes. We would like to thank all of them for their contributions!
 
+![](/img/annoucing-pulsar-3-0.jpeg)
+
 <!--truncate-->
 
 ## Introducing Long-Term Support releases
@@ -38,7 +40,7 @@ For more information, see [PIP-175](https://github.com/apache/pulsar/issues/1596
 
 ## What’s new in Apache Pulsar 3.0?
 
-Apache Pulsar 3.0 is a major release with a number of important features, enhancements, and fixes. Here are some of the highlighted ones.
+Apache Pulsar 3.0 is an LTS release with a number of important features, enhancements, and fixes. Here are some of the highlighted ones.
 
 ### New Pulsar broker load balancer
 
@@ -101,7 +103,7 @@ Blue-green deployment is a widely-used solution for migrating live traffic from 
 
 With such capability introduced in Pulsar 3.0, users can achieve seamless traffic migration between clusters without causing downtime for topics.
 
-For more information about the Pulsar 3.0 release, see the release notes.
+For more information about the Pulsar 3.0 release, see the [release notes](pathname:///release-notes/versioned/pulsar-3.0.0/).
 
 ## Compatibility between releases
 
@@ -122,13 +124,13 @@ Pulsar 3.0.0 is now available for download on GitHub. To get started with Pulsar
 
 ## Looking forward
 
-With Pulsar 3.0 LTS model, it will be easier for users to choose to stay on LTS stable releases or newer releases with the latest feature and improvements, all with the guarantee of longer support and a path to a live upgrade to next LTS.  
+With Pulsar 3.0 LTS model, it will be easier for users to choose to stay on LTS stable releases or newer releases with the latest feature and improvements, all with the guarantee of longer support and a path to a live upgrade to the next LTS version.
 
-At the same time, several of the features introduced are setting the stage for further improvements. One such example is the new load balancer (PIP-192): while immediately useful and a marked improvement as it is, it also opens the possibility in a lot more optimizations in the way that topics are transferred from one broker to another, with the goal of minimizing the latency impact of such operations.
+At the same time, several features introduced in 3.0 sets the stage for further improvements. One such example is the new load balancer (PIP-192): while immediately useful and a marked improvement as it is, it also paves the way for many more optimizations in how topics are transferred from one broker to another, with the goal of minimizing the latency impact of such operations.
 
-Another exciting area of development is the proposal around rehauling the metric collection and aggregation system, described in [PIP-264](https://github.com/apache/pulsar/issues/20197).
+Another exciting area of development is the proposal to rehaul the metric collection and aggregation system described in [PIP-264](https://github.com/apache/pulsar/issues/20197).
 
-Finally, Pulsar 3.0 is benefitting from a lot of the performance improvements introduced in Apache BookKeeper 4.16. We are seeing a lot of potential to further improve BookKeeper performance for an ever faster Pulsar!
+Finally, Pulsar 3.0 is benefitting from the performance improvements introduced in Apache BookKeeper 4.16. We see a lot of potential to further improve BookKeeper performance for an even faster Pulsar!
 
 ## Getting involved
 
