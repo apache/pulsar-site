@@ -49,5 +49,7 @@ def execute(basedir: Path, version: str):
     ]
 
     for command in commands:
-        with (reference / f'{command}.md').open('w') as f:
+        p = (reference / f'{command}.md')
+        p.parent.mkdir(exist_ok=True, parents=True)
+        with p.open('w') as f:
             run(str(admin.absolute()), 'documents', 'generate', command, stdout=f)
