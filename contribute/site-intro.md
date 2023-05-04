@@ -1,6 +1,6 @@
 # Introduction
 
-The Pulsar site is built with [Docusaurus](http://docusaurus.io/) framework. You can find all technical details on [its docs](https://docusaurus.io/docs).
+The Pulsar site is built with [Docusaurus](http://docusaurus.io/) framework. You can find all the technical details on [its docs](https://docusaurus.io/docs).
 
 Specifically, this chapter provides a [writing syntax](document-syntax.md) guide selecting knowledge for writing content of the site.
 
@@ -14,14 +14,15 @@ Docusaurus provides three kinds of pages out-of-the-box: [docs](https://docusaur
 
 The Pulsar site pages are of:
 
-| Page                                       | Type      | Source                                                                                            |
-|--------------------------------------------|-----------|---------------------------------------------------------------------------------------------------|
-| [User docs](pathname:///docs)              | docs      | <ul><li>docs/</li><li>versioned_docs/</li><li>versioned_sidebars/</li><li>sidebars.json</li></ul> |
-| [Contribution guides](about.md)                 | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
-| [Release notes](pathname:///release-notes) | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  | 
-| [Security](pathname:///security)           | docs      | <ul><li>security/</li></ul>                                                                       |                    
-| [Blogs](pathname:///blog)                  | blog      | <ul><li>blog/</li></ul>                                                                           |
-| Other pages                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
+| Page                                                       | Type      | Source                                                                                            |
+|------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------|
+| [User docs](pathname:///docs)                              | docs      | <ul><li>docs/</li><li>versioned_docs/</li><li>versioned_sidebars/</li><li>sidebars.json</li></ul> |
+| [Contribution guides](about.md)                            | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
+| [Release notes](pathname:///release-notes)                 | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  |
+| [Security](pathname:///security)                           | docs      | <ul><li>security/</li></ul>                                                                       |
+| [Blogs](pathname:///blog)                                  | blog      | <ul><li>blog/</li></ul>                                                                           |
+| [Client feature matrix](pathname:///client-feature-matrix) | docs      | <ul><li>client-feature-matrix/</li><li>data/matrix.js</li></ul>                                   |
+| Other pages                                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
 
 Besides, the site serves multiple static pages generated outside the framework, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
 
@@ -39,7 +40,7 @@ See the [previewing content](document-preview.md) guide for more details.
 
 ### docker-compose.yaml
 
-The `preview.sh` script use the Docusaurus dev server for testing, which is different from the real Apache Web Server based env that serves the site online.
+The `preview.sh` script uses the Docusaurus dev server for testing, which is different from the real Apache Web Server based env that serves the site online.
 
 To emulate the server-side logics, like `.htaccess` rewrite rules, you can run:
 
@@ -74,7 +75,7 @@ If you're gonna to update the content, read the [update reference docs](document
 
 If you're gonna to debug the reference generation process, read the [reference-doc-generator](https://github.com/apache/pulsar-site/tree/main/tools/pytools#reference-doc-generator) usage section and its source code.
 
-### How to update data driven pages?
+### How to update data-driven pages?
 
 The following pages contain data-driven tables:
 
@@ -106,5 +107,8 @@ The following pages contain data-driven tables:
 * [Team](pathname:///team)
   * data/team.js
   * src/pages/team.js
+* [Client feature matrix](pathname:///client-feature-matrix)
+  * data/matrix.js
+  * client-feature-matrix/index.mdx
 
 Additionally, PMC members can generate the `team.js` file as @lhotari did in https://github.com/apache/pulsar-site/pull/387.
