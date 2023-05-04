@@ -393,6 +393,16 @@ module.exports = {
                 sidebarPath: false,
             }),
         ],
+        [
+          "content-docs",
+          /** @type {import('@docusaurus/plugin-content-docs').Options} */
+          ({
+            id: "client-feature-matrix",
+            path: "client-feature-matrix",
+            routeBasePath: "client-feature-matrix",
+            sidebarPath: false,
+          }),
+        ],
     ],
     scripts: [
         {src: "/js/sine-waves.min.js", async: true},
