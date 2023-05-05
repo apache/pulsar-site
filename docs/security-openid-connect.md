@@ -4,11 +4,6 @@ title: Authentication using OpenID Connect
 sidebar_label: "Authentication using OpenID Connect"
 ---
 
-````mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-````
-
 Apache Pulsar supports authenticating clients using [OpenID Connect](https://openid.net/connect), which is an implementation of the OAuth 2.0 Protocol. Using an access token obtained from an OpenID Connect compliant Identity Provider service acting as the token issuer, you can identify a Pulsar client and associate it with a "principal" (or "role") that is permitted to do some actions, such as publishing messages to a topic or performing some admin operation.
 
 The source code for the OpenID Connect implementation is in the [pulsar-broker-auth-oidc](https://github.com/apache/pulsar/blob/master/pulsar-broker-auth-oidc/) submodule in the Apache Pulsar git repo.
