@@ -8,6 +8,10 @@ Apache Pulsar supports authenticating clients using [OpenID Connect](https://ope
 
 The source code for the OpenID Connect implementation is in the [pulsar-broker-auth-oidc](https://github.com/apache/pulsar/blob/master/pulsar-broker-auth-oidc/) submodule in the Apache Pulsar git repo.
 
+:::note
+Pulsar's OpenID Connect integration was introduced in Pulsar 3.0.0. As always, if you encounter any issues, please ask questions on Pulsar channels and open issues in GitHub.
+:::
+
 ## OpenID Connect Authentication Flow
 
 After authenticating with the Identity Provider, the Pulsar client gets an access token from the server and passes this access token to Pulsar Server (Broker, Proxy, WebSocket Proxy, or Function Worker) for authentication. When using the `AuthenticationProviderOpenID` class, the Pulsar Server performs the following validations in order:
@@ -21,9 +25,9 @@ After authenticating with the Identity Provider, the Pulsar client gets an acces
 7. When token validation is successful, the Pulsar Server extracts the `sub` claim from the token (or the configured `openIDRoleClaim`) and uses it as the principal for authorization.
 8. When the token expires, the Pulsar Server challenges the client to re-authenticate with the Identity Provider and provide a new access token. If the client fails to re-authenticate, the Pulsar Server closes the connection.
 
-## Enable OpenID Connect Authentication in the Brokers, Proxies, and WebSocket Proxies
+## Enable OpenID Connect Authentication in the Broker and Proxy
 
-To configure Pulsar Servers to authenticate clients using OpenID Connect, add the following parameters to the `conf/broker.conf`, the `conf/proxy.conf`, and the `conf/websocket.conf` files. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
+To configure Pulsar Servers to authenticate clients using OpenID Connect, add the following parameters to the `conf/broker.conf` and the `conf/proxy.conf`. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
 
 ```properties
 # Configuration to enable authentication
@@ -66,6 +70,10 @@ PULSAR_PREFIX_openIDFallbackDiscoveryMode=DISABLED
 
 When using OIDC for a client connecting through the proxy to the broker, it is necessary to set the broker's `openIDAcceptedTimeLeewaySeconds` to double the proxy's `authenticationRefreshCheckSeconds` configuration because the proxy caches the client's token and only refreshes it when it is expired. As such, in certain cases, when the proxy initiates a new connection to the broker, the token may not yet be expired in the proxy, but may be expired when it reaches the broker. You can mitigate this edge case by setting the broker's `openIDAcceptedTimeLeewaySeconds` correctly.
 
+:::
+
+:::note
+The Pulsar WebSocket Proxy does not yet support OpenID Connect authentication. Here is an issue tracking this feature: [#20236](https://github.com/apache/pulsar/issues/20236).
 :::
 
 ## Enable OpenID Connect Authentication in the Function Worker
