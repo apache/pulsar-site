@@ -67,6 +67,10 @@ PULSAR_PREFIX_openIDRequireIssuersUseHttps=true
 PULSAR_PREFIX_openIDFallbackDiscoveryMode=DISABLED
 ```
 
+::: note
+When using OIDC for a client connecting through the proxy to the broker, it is necessary to set the broker's `openIDAcceptedTimeLeewaySeconds` to double the proxy's `authenticationRefreshCheckSeconds` configuration because the proxy caches the client's token and only refreshes it when it is expired. As such, in certain cases, when the proxy initiates a new connection to the broker, the token may not yet be expired in the proxy, but may be expired when it reaches the broker. You can mitigate this edge case by setting the broker's `openIDAcceptedTimeLeewaySeconds` correctly.
+:::
+
 ## Enable OpenID Connect Authentication in the Function Worker
 
 To configure the Pulsar Function Worker to authenticate clients using OpenID Connect, add the following parameters to the `conf/functions_worker.yml` file. The documentation for these settings is [above](#enable-openid-connect-authentication-in-the-brokers-proxies-and-websocket-proxies).
