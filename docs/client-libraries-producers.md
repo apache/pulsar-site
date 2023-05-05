@@ -796,7 +796,7 @@ This example shows how to set producer access mode.
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
-::: note
+:::note
 
 This feature is supported in Java client 2.8.0 or later versions.
 
@@ -813,7 +813,7 @@ This feature is supported in Java client 2.8.0 or later versions.
 
 <TabItem value="C++">
 
-::: note
+:::note
 
 This feature is supported in C++ client 3.1.0 or later versions.
 
