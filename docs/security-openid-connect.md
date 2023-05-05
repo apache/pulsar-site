@@ -72,10 +72,6 @@ When using OIDC for a client connecting through the proxy to the broker, it is n
 
 :::
 
-:::note
-The Pulsar WebSocket Proxy does not yet support OpenID Connect authentication. Here is an issue tracking this feature: [#20236](https://github.com/apache/pulsar/issues/20236).
-:::
-
 ## Enable OpenID Connect Authentication in the Function Worker
 
 To configure the Pulsar Function Worker to authenticate clients using OpenID Connect, add the following parameters to the `conf/functions_worker.yml` file. The documentation for these settings is [above](#enable-openid-connect-authentication-in-the-brokers-proxies-and-websocket-proxies).
