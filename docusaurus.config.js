@@ -264,41 +264,41 @@ module.exports = {
                     position: "right",
                     className: "download-btn pill-btn grey",
                 },
-                // {
-                //     href: "https://github.com/apache/pulsar",
-                //     label: "Github",
-                //     position: "right",
-                //     className: "github-nav",
-                // },
             ],
         },
         footer: {
             logo: {alt: "Pulsar Logo", src: "img/pulsar-white.svg", href: "/"},
             links: [
                 {
-                    title: "Apache Foundation.",
                     items: [
-                        {html: `<img class="footer-apache-logo" src="/img/Apache_Feather_Logo.svg" alt="" width="20">`},
                         {label: "Foundation", href: "https://www.apache.org/"},
                         {label: "Events", href: "https://www.apache.org/events/current-event.html"},
-                        {label: "License", href: "https://www.apache.org/licenses/"},
-                        {label: "Thanks", href: "https://www.apache.org/foundation/thanks"},
-                        {label: "Security", href: "https://www.apache.org/security"},
-                        {label: "Sponsorship", href: "https://www.apache.org/foundation/sponsorship"},
-                        {label: "Privacy", href: "https://www.apache.org/foundation/policies/privacy.html"},
+                    ]
+                },
+                {
+                    items: [
+                        {label: "Foundation", href: "https://www.apache.org/"},
+                        {label: "Events", href: "https://www.apache.org/events/current-event.html"},
                     ],
                 },
                 {
                     items: [
+                        {label: "Foundation", href: "https://www.apache.org/"},
+                    ]
+                },
+                {
+                    items: [
                         {
-                            html: `<div><small><strong>Apache Pulsar is available under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, version 2.0.</a></strong></small></div>
-                            <div>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</div>`,
+                            html: `<div class="social-icons"><a href="https://www.slack.com"><img src="/img/slack-white.svg" width="26"></a><a href="https://www.github.com"><img src="/img/github-white.svg" width="26"></a></div>`
                         },
                     ],
                 },
             ],
-            copyright: `<p>Apache Pulsar is available under the Apache License, version 2.0.</p>
-                        <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>`,
+            copyright: `
+                            <div><img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">Apache Foundation</div>,
+                            <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+                            <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
+                        `,
         },
         prism: {
             theme: require("prism-react-renderer/themes/dracula"),

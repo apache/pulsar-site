@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Layout from "@theme/Layout";
-import Footer from '../shared/Footer/Footer';
 import Features from './Features/Features';
 import ShortInfo from './ShortInfo/ShortInfo';
 import Users from './Users/Users';
@@ -19,7 +18,6 @@ const HomePage = () => {
         <ShortInfo />
         <Features />
         <Users />
-        <Footer />
       </div>
     </Layout>
   )
