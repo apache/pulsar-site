@@ -21,7 +21,7 @@ To get the list of available built-in Functions, use the `available-functions` c
 bin/pulsar-admin functions available-functions
 ```
 
-If you add or delete a nar file in a `functions` folder, reload the available built-in functions before using it.
+If you add or delete a NAR file in a `functions` folder, reload the available built-in functions before using it.
 
 ```bash
 bin/pulsar-admin functions reload
