@@ -143,24 +143,24 @@ module.exports = {
         announcementBar: {
             id: "summit",
             content: `🚀 Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! <a target="_blank" href="https://events.zoom.us/ev/Ap6rsDg9LeVfmdajJ_eB13HH026J1d_o8OoTKkQnl_jzVl-srhwB~AggLXsr32QYFjq8BlYLZ5I06Dg">Register now for free</a>!`,
-            backgroundColor: "#198fff",
+            backgroundColor: "#282826",
             textColor: "#fff",
-            isCloseable: true,
+            isCloseable: false,
         },
         colorMode: {
-            disableSwitch: false,
+            disableSwitch: true,
         },
         navbar: {
             title: "",
             logo: {
                 alt: "pulsar logo",
-                src: "img/logo.svg",
+                src: "img/logo-black.svg",
             },
             items: [
                 {
                     type: "dropdown",
                     label: "Get Started",
-                    position: "right",
+                    position: "left",
                     items: [
                         {
                             type: 'doc',
@@ -181,18 +181,18 @@ module.exports = {
                 {
                     type: 'doc',
                     docId: 'about',
-                    position: "right",
+                    position: "left",
                     label: "Docs",
                 },
                 {
                     to: "/contribute/",
-                    position: "right",
+                    position: "left",
                     label: "Contribute",
                 },
                 {
                     type: "dropdown",
                     label: "Community",
-                    position: "right",
+                    position: "left",
                     className: "community-dropdown",
                     items: [
                         {
@@ -238,7 +238,7 @@ module.exports = {
                 {
                     type: "dropdown",
                     label: "Learn",
-                    position: "right",
+                    position: "left",
                     items: [
                         {
                             to: "/blog",
@@ -262,14 +262,14 @@ module.exports = {
                     to: "/download",
                     label: "Download",
                     position: "right",
-                    className: "download-btn pill-btn",
+                    className: "download-btn pill-btn grey",
                 },
-                {
-                    href: "https://github.com/apache/pulsar",
-                    label: "Github",
-                    position: "right",
-                    className: "github-nav",
-                },
+                // {
+                //     href: "https://github.com/apache/pulsar",
+                //     label: "Github",
+                //     position: "right",
+                //     className: "github-nav",
+                // },
             ],
         },
         footer: {
@@ -349,7 +349,14 @@ module.exports = {
                     editUrl: `${githubSiteUrl}/edit/main/`,
                 },
                 theme: {
-                    customCss: require.resolve("./src/css/custom.css"),
+                    customCss: [
+                        require.resolve("./src/css/custom.css"),
+                        require.resolve("./src/css/fonts.css"),
+                        require.resolve("./src/css/announcement-bar.css"),
+                        require.resolve("./src/css/navbar.css"),
+                        require.resolve("./src/css/footer.css"),
+                        require.resolve("./src/css/variables.css"),
+                    ],
                 },
                 googleAnalytics: {
                     trackingID: "UA-102219959-1",
