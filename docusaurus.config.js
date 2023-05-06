@@ -277,13 +277,15 @@ module.exports = {
                 },
                 {
                     items: [
-                        {label: "Foundation", href: "https://www.apache.org/"},
-                        {label: "Events", href: "https://www.apache.org/events/current-event.html"},
+                        {label: "License", href: "https://www.apache.org/licenses/"},
+                        {label: "Thanks", href: "https://www.apache.org/foundation/thanks"},
+                        {label: "Sponsorship", href: "https://www.apache.org/foundation/sponsorship"},
                     ],
                 },
                 {
                     items: [
-                        {label: "Foundation", href: "https://www.apache.org/"},
+                        {label: "Security", href: "https://www.apache.org/security"},
+                        {label: "Privacy", href: "https://www.apache.org/foundation/policies/privacy.html"},
                     ]
                 },
                 {

@@ -43,8 +43,8 @@ const ShortInfo = () => {
 
             <span>
               <b> Apache Pulsar is an all-in-one messaging and streaming platform. </b>
-              Messages can be consumed and acknowledged individually or consumed as streams with <b> less than 5ms of latency </b>.
-              Its layered architecture allows <b> rapid scaling </b> across hundreds of nodes, <b> without data reshuffling </b>.
+              Messages can be consumed and acknowledged individually or consumed as streams with <b> less than 5ms of latency</b>.
+              Its layered architecture allows <b> rapid scaling </b> across hundreds of nodes, <b> without data reshuffling</b>.
               Its features include <b> multi-tenancy </b> with resource separation and access control, <b> geo-replication </b> across regions, <b> tiered storage </b> and support for five official client languages.
               It supports up to one million unique topics and is designed to simplify your application architecture. 
             </span>
