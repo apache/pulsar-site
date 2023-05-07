@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LinkButton from '../../../LinkButton/LinkButton';
-import Slider from '../../../Slider/Slider';
+import LinkButton from '../../../ui/LinkButton/LinkButton';
+import Slider from '../../../ui/Slider/Slider';
 import slides from './reviews';
 
 import Quote from './picture/quote.svg';

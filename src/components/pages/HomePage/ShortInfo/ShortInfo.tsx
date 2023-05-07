@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LinkButton from '../../../LinkButton/LinkButton';
+import LinkButton from '../../../ui/LinkButton/LinkButton';
 import Parallax from './Parallax/Parallax';
 
 import s from './ShortInfo.module.css';

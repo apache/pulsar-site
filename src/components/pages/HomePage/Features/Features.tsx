@@ -3,7 +3,7 @@ import React from 'react';
 import featuresList from './featuresList';
 
 import s from './Features.module.css';
-import Slider from '../../../Slider/Slider';
+import Slider from '../../../ui/Slider/Slider';
 
 const Features = () => {
 
