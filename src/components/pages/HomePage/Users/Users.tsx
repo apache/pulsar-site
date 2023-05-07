@@ -6,8 +6,11 @@ import testimonials from '@site/data/testimonials';
 
 import Quote from './img/quote.svg';
 import s from './Users.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const Users: React.FC = () => {
+  const { siteConfig } = useDocusaurusContext();
+
   return (
     <div className={s.block}>
       <div className={s.container}>
@@ -25,7 +28,7 @@ const Users: React.FC = () => {
             <LinkButton
               title='See case studies'
               appearance='regular'
-              href='./'
+              href={`${siteConfig.baseUrl}case-studies`}
             />
           </div>
         </div>

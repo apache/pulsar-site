@@ -4,8 +4,10 @@ import Button from '../../../ui/Button/Button';
 import Parallax from './Parallax/Parallax';
 
 import s from './ShortInfo.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-const ShortInfo = () => {
+const ShortInfo: React.FC = () => {
+  const { siteConfig } = useDocusaurusContext();
 
   return (
     <div className={s.block}>
@@ -22,12 +24,12 @@ const ShortInfo = () => {
               <Button
                 title='Explore docs'
                 appearance='action'
-                href='./'
+                href={`${siteConfig.baseUrl}docs`}
               />
               <Button
                 title='Quickstart'
                 appearance='regular'
-                href='./'
+                href={`${siteConfig.baseUrl}docs/concepts-overview`}
               />
             </div>
           </div>
