@@ -11,7 +11,7 @@ type CategoryFilterOption = data.Category | 'any';
 const categoryFilterOptions = ['any', ...data.categories] as const;
 
 const EcosystemPage: React.FC = () => {
-  const [searchString, setSearch] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('any');
 
   return (
@@ -39,14 +39,14 @@ const EcosystemPage: React.FC = () => {
                 }))}
               />
 
-              <Input placeholder="Search" value={searchString} onChange={setSearch} clearable />
+              <Input placeholder="Search" value={searchQuery} onChange={setSearchQuery} clearable />
             </div>
 
             <div>
-              {categoryFilter === 'any' && <Cards search={searchString} resources={Object.values(data.resources).flat()} />}
+              {categoryFilter === 'any' && <Cards search={searchQuery} resources={Object.values(data.resources).flat()} />}
               {data.categories.map((category) => {
                 if (categoryFilter === category) {
-                  return <Cards key={category} search={searchString} resources={data.resources[category]} />
+                  return <Cards key={category} search={searchQuery} resources={data.resources[category]} />
                 }
               })}
             </div>

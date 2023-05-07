@@ -1,58 +1,59 @@
 import React, { useState } from "react";
 import Layout from "@theme/Layout";
 import Cards from "./Cards/Cards";
-import * as data from '@site/data/events';
+import * as data from '@site/data/resources';
 import Page from "@site/src/components/ui/Page/Page";
-import s from './EventsPage.module.css';
+import s from './ResourcesPage.module.css';
 import Button from "@site/src/components/ui/Button/Button";
-import FeaturedEvent from "./FeaturedEvent/FeaturedEvent";
+import Input from "@site/src/components/ui/Input/Input";
 
-type CategoryFilterOption = data.Category;
+type CategoryFilterOption = 'any' | data.Category;
+const categoryFilterOptions = ['any', ...data.categories] as const;
 
 const CaseStudiesPage: React.FC = () => {
-  const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('events');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('any');
 
   return (
     <Layout
-      title={`Events`}
-      description="Apache Pulsar Events"
+      title={`Resources`}
+      description="Learn about the basics of using Apache Pulsar"
     >
       <Page>
         <div className={s.TopBlock}>
           <section className={s.Header}>
-            <h1>Events</h1>
+            <h1>Resources</h1>
             <p>
-              Below is a list of key industry events hosted by Pulsar contributors,
-              as well as local meetups around the globe.
-              If you have one to add, learn more about submitting a pull request <a target="_blank" href="https://github.com/apache/pulsar/pulls">here</a>.
+              Find Apache Pulsar tutorials, how-tos and other technical content by searching with keywords.
             </p>
           </section>
-
-          <div className={s.FeaturedEvent}>
-            <FeaturedEvent />
-          </div>
         </div>
+
         <section>
           <form>
             <div className={s.Filters}>
               <div className={s.CategorySwitcher}>
-                {data.categories.map((category) => {
+                {categoryFilterOptions.map((category) => {
                   return (
                     <Button
                       key={category}
                       appearance={categoryFilter === category ? 'action' : 'regular'}
                       onClick={() => setCategoryFilter(category)}
-                      title={data.categoryLabels[category]}
+                      title={category === 'any' ? 'All' : data.categoryLabels[category]}
                     />
                   );
                 })}
               </div>
+              <div>
+                <Input placeholder="Search" value={searchQuery} onChange={setSearchQuery} clearable />
+              </div>
             </div>
 
             <div>
+              {categoryFilter === 'any' && <Cards search={searchQuery} resources={Object.values(data.resources).flat()} />}
               {data.categories.map((category) => {
                 if (categoryFilter === category) {
-                  return <Cards key={category} resources={data.resources[category]} />
+                  return <Cards key={category} search={searchQuery} resources={data.resources[category]} />
                 }
               })}
             </div>
