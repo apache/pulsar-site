@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LinkButton from '../../../components/LinkButton/LinkButton';
-import Slider from '../../../components/Slider/Slider';
+import LinkButton from '../../../LinkButton/LinkButton';
+import Slider from '../../../Slider/Slider';
 import slides from './reviews';
 
 import Quote from './picture/quote.svg';
@@ -17,7 +17,7 @@ const Users = () => {
           <span className={s.title}>
             Pulsar Users
           </span>
-            
+
           <span className={s.text}>
             Run in production at scale with millions of messages per second across millions of topics,
             Pulsar is now used by thousands of companies for real-time workloads.
@@ -40,7 +40,7 @@ const Users = () => {
                 <span className={s.slider_text}>
                   {slide.text}
                 </span>
-                
+
                 <span className={s.author}>
                   {slide.author}
                 </span>

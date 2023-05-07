@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LinkButton from '../../../components/LinkButton/LinkButton';
-import Parallax from '../../../components/Parallax/Parallax';
+import LinkButton from '../../../LinkButton/LinkButton';
+import Parallax from './Parallax/Parallax';
 
 import s from './ShortInfo.module.css';
 
@@ -25,7 +25,7 @@ const ShortInfo = () => {
               <LinkButton
                 title='Quickstart'
                 filled={false}
-                link='./'  
+                link='./'
               />
             </div>
           </div>
@@ -46,7 +46,7 @@ const ShortInfo = () => {
               Messages can be consumed and acknowledged individually or consumed as streams with <b> less than 5ms of latency</b>.
               Its layered architecture allows <b> rapid scaling </b> across hundreds of nodes, <b> without data reshuffling</b>.
               Its features include <b> multi-tenancy </b> with resource separation and access control, <b> geo-replication </b> across regions, <b> tiered storage </b> and support for five official client languages.
-              It supports up to one million unique topics and is designed to simplify your application architecture. 
+              It supports up to one million unique topics and is designed to simplify your application architecture.
             </span>
 
             <span>

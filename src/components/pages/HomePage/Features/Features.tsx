@@ -3,7 +3,7 @@ import React from 'react';
 import featuresList from './featuresList';
 
 import s from './Features.module.css';
-import Slider from '../../../components/Slider/Slider';
+import Slider from '../../../Slider/Slider';
 
 const Features = () => {
 
@@ -32,7 +32,7 @@ const Features = () => {
             )
           })}
         </div>
-        
+
         <div className={s.slider}>
           <Slider>
             {featuresList.map(feature => {

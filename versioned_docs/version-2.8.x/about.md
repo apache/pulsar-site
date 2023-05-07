@@ -5,8 +5,8 @@ title: Welcome to the Apache Pulsar documentation portal
 sidebar_label: "About"
 ---
 
-import BlockLinks from "@site/src/components/BlockLinks";
-import BlockLink from "@site/src/components/BlockLink";
+import BlockLinks from "@site/src/components/ui/BlockLinks";
+import BlockLink from "@site/src/components/ui/BlockLink";
 import { docUrl } from "@site/src/utils/index";
 
 
