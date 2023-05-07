@@ -14,6 +14,10 @@
   background-attachment: fixed;
 }
 
+.header {
+  margin: 0;
+}
+
 .fullsize_container {
   display: flex;
   justify-content: center;
@@ -38,7 +42,7 @@
 
 .docs_container {
   font-size: 2.5rem;
-  width: 30rem;
+  max-width: 32rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -51,7 +55,7 @@
     transform: translateY(-50%);
   }
   100% {
-    transform: translateY(-150%); /* сдвигаем блок на 150% вверх, чтобы он прокрутился на 50% меньше, чем основной блок */
+    transform: translateY(-150%); /* move the block 150% up so that it scrolls 50% less than the main block */
   }
 }
 
@@ -144,7 +148,12 @@
   }
 }
 
-@media (max-width: 27.5rem) {
+@media (max-width: 800px) {
+  .block {
+    background-position: 55% -5%;
+    background-size: 250%;
+  }
+
   .docs_container {
     width: 100%;
   }

@@ -12,9 +12,11 @@ const ShortInfo = () => {
       <div className={`${s.container} ${s.short_container}`}>
         <Parallax>
           <div className={s.docs_container}>
-            <span className={s.title}> Apache Pulsar </span>
-            <span className={s.subtitle}> Cloud-Native, Distributed Messaging and Streaming </span>
-            <span className={s.text}> Apache® Pulsar™ is an open-source, distributed messaging and streaming platform built for the cloud. </span>
+            <h1 className={s.header}>
+              <span className={s.title}> Apache Pulsar</span><br />
+              <span className={s.subtitle}> Cloud-Native, Distributed Messaging and Streaming </span>
+            </h1>
+            <span className={s.text}>Apache® Pulsar™ is an open-source, distributed messaging and streaming platform built for the cloud. </span>
 
             <div className={s.buttons}>
               <LinkButton

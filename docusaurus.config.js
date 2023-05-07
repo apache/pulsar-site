@@ -291,7 +291,12 @@ module.exports = {
                 {
                     items: [
                         {
-                            html: `<div class="social-icons"><a href="https://www.slack.com"><img src="/img/slack-white.svg" width="26"></a><a href="https://www.github.com"><img src="/img/github-white.svg" width="26"></a></div>`
+                            html: `
+                              <div class="social-icons">
+                                <a target="__blank" href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"><img src="/img/slack-white.svg" width="26"></a>
+                                <a target="__blank" href="https://github.com/apache/pulsar/"><img src="/img/github-white.svg" width="26"></a>
+                              </div>
+                              `
                         },
                     ],
                 },
@@ -353,7 +358,7 @@ module.exports = {
                 theme: {
                     customCss: [
                         require.resolve("./src/css/custom.css"),
-                        require.resolve("./src/css/fonts.css"),
+                        require.resolve("./src/css/typography.css"),
                         require.resolve("./src/css/announcement-bar.css"),
                         require.resolve("./src/css/navbar.css"),
                         require.resolve("./src/css/footer.css"),
