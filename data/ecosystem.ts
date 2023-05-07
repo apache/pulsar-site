@@ -1,4 +1,40 @@
-module.exports = {
+export const categories = [
+  'client_api',
+  'client_wrapper',
+  'database_integration',
+  'io',
+  'logging',
+  'observability',
+  'protocol_handlers',
+  'search_and_query',
+  'security_plugins',
+  'stream_processing',
+  'tools'
+] as const;
+export type Category = typeof categories[number];
+
+export const categoryLabels: Record<Category, string> = {
+  client_api: 'Client API',
+  client_wrapper: 'Client Wrapper',
+  database_integration: 'Database Integration',
+  io: 'IO',
+  logging: 'Logging',
+  observability: 'Observability',
+  protocol_handlers: 'Protocol Handlers',
+  search_and_query: 'Search and Query',
+  security_plugins: 'Security Plugins',
+  stream_processing: 'Stream Processing',
+  tools: 'Tools'
+};
+
+export type Resource = {
+  name: string;
+  description: string;
+  link: string;
+  source_or_sink: string;
+};
+
+export const resources: Record<Category, Resource[]> = {
     client_api: [
       {
         name: 'Starlight for JMS',

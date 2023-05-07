@@ -1,3 +1,3 @@
-import CaseStudies from "./CaseStudies/CaseStudies";
+import CaseStudiesPage from "@site/src/components/pages/CaseStudiesPage/CaseStudiesPage";
 
-export default CaseStudies;
+export default CaseStudiesPage;

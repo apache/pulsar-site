@@ -1,14 +1,14 @@
 import React from "react";
 import s from './Cards.module.css';
-import * as data from '@site/data/ecosystem';
+import * as data from '@site/data/case-studies';
 
 const Card: React.FC<data.Resource> = (props) => {
   return (
     <div className={s.Card}>
-      <h3><a href={props.link}>{props.name}</a></h3>
+      <div className={s.CardImage} style={{ backgroundImage: `url(${props.image})` }}></div>
+      <h3><a href={props.link}>{props.company}</a></h3>
       {props.description && <p>{props.description}</p>}
-      <h5>{props.source_or_sink}</h5>
-      <a href={props.link} target="_blank">See Details</a>
+      <a href={props.link} target="_blank">See Case Study</a>
     </div>
   );
 };
@@ -19,11 +19,11 @@ export type CardsProps = {
 };
 
 const Cards: React.FC<CardsProps> = (props) => {
-  props.resources.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+  props.resources.sort((a, b) => a.company.localeCompare(b.company, 'en', { sensitivity: 'base' }));
 
   // we only want to return cards who's title includes the search string.
   const filteredRes = props.resources.filter((r) => {
-    return (r.name && r.name.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));
+    return (r.company && r.company.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));
   });
 
   if (filteredRes.length) {

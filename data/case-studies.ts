@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+export const categories = [
+  'financial_services',
+  'healthcare',
+  'software_it',
+  'telecom',
+  'retail',
+  'transportation_logistics',
+  'apparel_manufacturing'
+] as const;
+export type Category = typeof categories[number];
 
-import Layout from "@theme/Layout";
-import CaseStudyCards from "../../components/CaseStudyCards";
-import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
-import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
-import PopperUnstyled from '@mui/base/PopperUnstyled';
-import { styled } from '@mui/system';
-const csObj = 
+export const categoryLabels: Record<Category, string> = {
+  financial_services: 'Financial Services',
+  healthcare: 'Healthcare',
+  software_it: 'Software & IT',
+  telecom: 'Telecom',
+  retail: 'Retail',
+  transportation_logistics: 'Transportation & Logistics',
+  apparel_manufacturing: 'Apparel Manufacturing'
+};
+
+export type Resource = {
+  company: string;
+  link: string;
+  image: string;
+  description: string;
+};
+
+export const resources: Record<Category, Resource[]> =
   {
 
     financial_services:  [
@@ -273,7 +293,7 @@ const csObj =
         description: "Keytop redesigned its messaging system by using Apache Pulsar as the backbone of its architecture. Its geo-replication feature helps Keytop securely store mission-critical data across multiple data centers."
       },
     ],
-    apprel_manufacturing: [
+    apparel_manufacturing: [
       {
         company: "Dada Group",
         link: 'https://www.youtube.com/watch?v=F402mUTmOIc',
@@ -281,203 +301,5 @@ const csObj =
         description: "Apache Pulsar has attracted our attention with its excellent features and great architecture."
       },
     ]
-  
-};
 
-let allArr = [];
-Object.keys(csObj).forEach(key => {
-  allArr = [...allArr, ...csObj[key]];
-});
-
-const blue = {
-  100: '#DAECFF',
-  200: '#99CCF3',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  900: '#003A75',
-};
-
-const grey = {
-  100: '#E7EBF0',
-  200: '#E0E3E7',
-  300: '#CDD2D7',
-  400: '#B2BAC2',
-  500: '#A0AAB4',
-  600: '#6F7E8C',
-  700: '#3E5060',
-  800: '#2D3843',
-  900: '#1A2027',
-};
-
-const StyledButton = styled('button')(
-  ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  min-height: calc(1.5em + 22px);
-  min-width: 320px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
-  border-radius: 0.75em;
-  margin-top: 0.5em;
-  padding: 10px;
-  text-align: left;
-  line-height: 1.5;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-
-  &:hover {
-    background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-  }
-
-  &.${selectUnstyledClasses.focusVisible} {
-    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
-  }
-
-  &.${selectUnstyledClasses.expanded} {
-    &::after {
-      content: '▴';
-    }
-  }
-
-  &::after {
-    content: '▾';
-    float: right;
-  }
-  `,
-);
-
-const StyledListbox = styled('ul')(
-  ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  padding: 5px;
-  margin: 10px 0;
-  min-width: 320px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
-  border-radius: 0.75em;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  overflow: auto;
-  outline: 0px;
-  `,
-);
-
-const StyledOption = styled(OptionUnstyled)(
-  ({ theme }) => `
-  list-style: none;
-  padding: 8px;
-  border-radius: 0.45em;
-  cursor: default;
-
-  &:last-of-type {
-    border-bottom: none;
-  }
-
-  &.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-  }
-
-  &.${optionUnstyledClasses.highlighted} {
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  }
-
-  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-  }
-
-  &.${optionUnstyledClasses.disabled} {
-    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-  }
-
-  &:hover:not(.${optionUnstyledClasses.disabled}) {
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  }
-  `,
-);
-
-const StyledPopper = styled(PopperUnstyled)`
-  z-index: 10;
-`;
-
-const Paragraph = styled('p')(
-  ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.875rem;
-  margin: 10px 0;
-  color: ${theme.palette.mode === 'dark' ? grey[400] : grey[700]};
-  `,
-);
-
-const CustomSelect = (props) => {
-  const components = {
-    Root: StyledButton,
-    Listbox: StyledListbox,
-    Popper: StyledPopper,
-    ...props.components,
-  };
-
-  return <SelectUnstyled {...props} components={components} />;
 }
-
-const CaseStudies = () => {
-  const [value, setValue] = React.useState(0);
-  const [searchString, setSearch] = useState('');
-  return (
-    <Layout
-      title={`Case Studies`}
-      description="Pulsar Case Stdies"
-    >
-      <div className="page-wrap">
-        <section className="hero">
-          <div className="inner text--left">
-            <div className="row">
-              <div className="col col--8">
-                <h1>Case Studies</h1>
-                <p>Organizations around the globe rely on Apache Pulsar to manage their most demanding real-time requirements.</p>
-
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="main-content waves-bg pt-12 pb-48 mb-24">
-          <div className="block text--center tabs-bar py-8 px-4">
-          </div>
-          <form className="search-form relative z10 text--center">
-          <div className="my-12 relative z-5">
-          <div className="ml-2 px-2">
-                <CustomSelect className="inline-block px-4 cursor-pointer ml-4 underline-offset-1 text-sm" name="search" defaultValue={0} value={value} onChange={setValue}>
-                  <StyledOption value={0}>Filter by Industry</StyledOption>
-                  <StyledOption value={1}>Healthcare</StyledOption>
-                  <StyledOption value={2}>Financial Services</StyledOption>
-                  <StyledOption value={3}>Retail</StyledOption>
-                  <StyledOption value={4}>Software/IT</StyledOption>
-                  <StyledOption value={5}>Telecom</StyledOption>
-                  <StyledOption value={6}>Transportation/Logistics</StyledOption>
-                </CustomSelect>
-                <input type="text" placeholder="Search" className="ml-2 px-2" name="search" value={searchString} onChange={e => setSearch(e.target.value)} />
-                <Paragraph>
-                  {value == 0 && <CaseStudyCards search={searchString} cards={allArr} />}
-                  {value == 1 && <CaseStudyCards search={searchString} cards={csObj.healthcare} />}
-                  {value == 2 && <CaseStudyCards search={searchString} cards={csObj.financial_services} />}
-                  {value == 3 && <CaseStudyCards search={searchString} cards={csObj.retail} />}
-                  {value == 4 && <CaseStudyCards search={searchString} cards={csObj.software_it} />}
-                  {value == 5 && <CaseStudyCards search={searchString} cards={csObj.telecom} />}
-                  {value == 6 && <CaseStudyCards search={searchString} cards={csObj.transportation_logistics} />}
-                </Paragraph>
-              </div>
-          </div>
-          </form>
-        </section>
-      </div>
-    </Layout>
-  );
-}
-
-export default CaseStudies;

@@ -1,15 +1,13 @@
 import React from 'react';
 
-import LinkButton from '../../../ui/LinkButton/LinkButton';
-import Slider from '../../../ui/Slider/Slider';
-import slides from './reviews';
+import LinkButton from '@site/src/components/ui/LinkButton/LinkButton';
+import Slider from '@site/src/components/ui/Slider/Slider';
+import testimonials from '@site/data/testimonials';
 
-import Quote from './picture/quote.svg';
-
+import Quote from './img/quote.svg';
 import s from './Users.module.css';
 
-const Users = () => {
-
+const Users: React.FC = () => {
   return (
     <div className={s.block}>
       <div className={s.container}>
@@ -32,21 +30,21 @@ const Users = () => {
           </div>
         </div>
         <Slider centerMode={window.innerWidth > 800}>
-          {slides.map((slide) => (
+          {Object.values(testimonials).flat().map((caseStudy) => (
             <div className={s.slide}>
               <div className={s.slide_container}>
                 <Quote className={s.quote} />
 
                 <span className={s.slider_text}>
-                  {slide.text}
+                  {caseStudy.text}
                 </span>
 
                 <span className={s.author}>
-                  {slide.author}
+                  {caseStudy.author}
                 </span>
 
                 <span className={s.platform}>
-                  {slide.platform}
+                  {caseStudy.company}
                 </span>
               </div>
             </div>

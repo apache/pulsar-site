@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SlickSlider from 'react-slick';
 
-import LeftButton from './picture/leftButton.svg';
-import RightButton from './picture/rightButton.svg';
+import LeftButton from './img/leftButton.svg';
+import RightButton from './img/rightButton.svg';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -17,7 +17,7 @@ type SliderProps = {
 const Slider = (props: SliderProps) => {
   const [smallScreen, setSmallScreen] = useState(true)
 
-  const SampleNextArrow = (props) => {
+  const NextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
       <RightButton
@@ -28,7 +28,7 @@ const Slider = (props: SliderProps) => {
     );
   }
 
-  const SamplePrevArrow = (props) => {
+  const PrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
       <LeftButton
@@ -39,10 +39,9 @@ const Slider = (props: SliderProps) => {
     );
   }
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setSmallScreen(window.innerWidth <= 800);
-    console.log(window.innerWidth <= 800)
-  };
+  }, []);
 
   useEffect(() => {
     handleResize()
@@ -60,8 +59,8 @@ const Slider = (props: SliderProps) => {
     slidesToScroll: 1,
     centerPadding: "60px",
     centerMode: props.centerMode || false,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     dots: smallScreen,
     arrows: !smallScreen,
     responsive: [
