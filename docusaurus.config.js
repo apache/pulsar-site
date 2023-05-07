@@ -152,7 +152,6 @@ module.exports = {
         },
         navbar: {
             title: "",
-            hideOnScroll: true,
             logo: {
                 alt: "pulsar logo",
                 src: "img/logo-black.svg",

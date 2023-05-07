@@ -19,10 +19,9 @@ export type CardsProps = {
 };
 
 const Cards: React.FC<CardsProps> = (props) => {
-  props.resources.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+  const resources = props.resources.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
 
-  // we only want to return cards who's title includes the search string.
-  const filteredRes = props.resources.filter((r) => {
+  const filteredRes = resources.filter((r) => {
     return (r.name && r.name.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));
   });
 

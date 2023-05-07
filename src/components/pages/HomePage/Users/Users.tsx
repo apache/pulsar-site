@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LinkButton from '@site/src/components/ui/LinkButton/LinkButton';
+import LinkButton from '@site/src/components/ui/Button/Button';
 import Slider from '@site/src/components/ui/Slider/Slider';
 import testimonials from '@site/data/testimonials';
 
@@ -24,14 +24,14 @@ const Users: React.FC = () => {
           <div className={s.link_button}>
             <LinkButton
               title='See case studies'
-              filled={false}
-              link='./'
+              appearance='regular'
+              href='./'
             />
           </div>
         </div>
         <Slider centerMode={window.innerWidth > 800}>
-          {Object.values(testimonials).flat().map((caseStudy) => (
-            <div className={s.slide}>
+          {Object.values(testimonials).flat().map((caseStudy, i) => (
+            <div key={i} className={s.slide}>
               <div className={s.slide_container}>
                 <Quote className={s.quote} />
 

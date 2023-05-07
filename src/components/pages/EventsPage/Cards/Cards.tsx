@@ -1,14 +1,14 @@
 import React from "react";
 import s from './Cards.module.css';
-import * as data from '@site/data/case-studies';
+import * as data from '@site/data/events';
 
 const Card: React.FC<data.Resource> = (props) => {
   return (
     <div className={s.Card}>
-      <div className={s.CardImage} style={{ backgroundImage: `url(${props.image})` }}></div>
-      <h3><a href={props.link}>{props.company}</a></h3>
+      {props.previewImg && <div className={s.CardImage} style={{ backgroundImage: `url(${props.previewImg})` }}></div>}
+      <h3><a href={props.link}>{props.title}</a></h3>
       {props.description && <p>{props.description}</p>}
-      <a href={props.link} target="_blank">See Case Study</a>
+      <a href={props.link} target="_blank">Learn more</a>
     </div>
   );
 };
@@ -19,10 +19,8 @@ export type CardsProps = {
 };
 
 const Cards: React.FC<CardsProps> = (props) => {
-  const resources = props.resources.sort((a, b) => a.company.localeCompare(b.company, 'en', { sensitivity: 'base' }));
-
-  const filteredRes = resources.filter((r) => {
-    return (r.company && r.company.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));
+  const filteredRes = props.resources.filter((r) => {
+    return (r.title && r.title.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));
   });
 
   if (filteredRes.length) {

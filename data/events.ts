@@ -1,4 +1,26 @@
-module.exports = {
+export const categories = [
+  'events',
+  'meetups',
+  'playlists',
+] as const;
+export type Category = typeof categories[number];
+
+export const categoryLabels: Record<Category, string> = {
+  events: 'Events',
+  meetups: 'Meetups',
+  playlists: 'Playlists',
+};
+
+export type Resource = {
+  title: string;
+  description: string;
+  link: string;
+  previewImg?: string;
+  displayDate?: string;
+  startDate?: string;
+};
+
+export const resources: Record<Category, Resource[]> = {
     events: [
       {
         title: 'Pulsar Summit San Francisco 2022',
@@ -117,4 +139,4 @@ module.exports = {
       },
     ]
   }
-  
+

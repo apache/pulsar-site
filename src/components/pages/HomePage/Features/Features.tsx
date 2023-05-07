@@ -15,11 +15,11 @@ const Features = () => {
         </span>
 
         <div className={s.features_container}>
-          {featuresList.map(feature => {
+          {featuresList.map((feature, i) => {
             const Picture = feature.picture
 
             return (
-              <div className={s.feature_block}>
+              <div key={i} className={s.feature_block}>
                 <Picture className={s.feature_picture} />
                 <span className={s.feature_title}>
                   {feature.title}
@@ -35,11 +35,11 @@ const Features = () => {
 
         <div className={s.slider}>
           <Slider>
-            {featuresList.map(feature => {
+            {featuresList.map((feature, i) => {
               const Picture = feature.picture;
 
               return (
-                <div>
+                <div key={i}>
                   <div className={s.feature_block}>
                     <div className={s.text_container}>
                       <span className={s.feature_title}>

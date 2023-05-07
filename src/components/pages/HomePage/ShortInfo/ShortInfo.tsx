@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LinkButton from '../../../ui/LinkButton/LinkButton';
+import Button from '../../../ui/Button/Button';
 import Parallax from './Parallax/Parallax';
 
 import s from './ShortInfo.module.css';
@@ -19,15 +19,15 @@ const ShortInfo = () => {
             <span className={s.text}>Apache® Pulsar™ is an open-source, distributed messaging and streaming platform built for the cloud. </span>
 
             <div className={s.buttons}>
-              <LinkButton
+              <Button
                 title='Explore docs'
-                filled={true}
-                link='./'
+                appearance='action'
+                href='./'
               />
-              <LinkButton
+              <Button
                 title='Quickstart'
-                filled={false}
-                link='./'
+                appearance='regular'
+                href='./'
               />
             </div>
           </div>
