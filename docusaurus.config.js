@@ -293,8 +293,8 @@ module.exports = {
                         {
                             html: `
                               <div class="social-icons">
-                                <a target="__blank" href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"><img src="/img/slack-white.svg" width="26"></a>
-                                <a target="__blank" href="https://github.com/apache/pulsar/"><img src="/img/github-white.svg" width="26"></a>
+                                <a target="_blank" href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"><img src="/img/slack-white.svg" width="26"></a>
+                                <a target="_blank" href="https://github.com/apache/pulsar/"><img src="/img/github-white.svg" width="26"></a>
                               </div>
                               `
                         },

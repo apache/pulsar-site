@@ -25,21 +25,21 @@ const Cards: React.FC<CardsProps> = (props) => {
     return (r.company && r.company.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));
   });
 
-  if (filteredRes.length) {
-    return (
-      <section className={s.Cards}>
-        {filteredRes.map((props, idx) => (
-          <Card key={idx} {...props} />
-        ))}
-      </section>
-    );
-  } else {
+  if (!filteredRes.length) {
     return (
       <section>
         <h3>Sorry, no resources match your search.</h3>
       </section>
-    )
+    );
   }
+
+  return (
+    <section className={s.Cards}>
+      {filteredRes.map((props, idx) => (
+        <Card key={idx} {...props} />
+      ))}
+    </section>
+  );
 }
 
 export default Cards;
