@@ -6,16 +6,24 @@ type ParallaxProps = {
   children: React.ReactNode
 }
 
-const ParallaxComponent = (props: ParallaxProps) => {
+const Parallax = (props: ParallaxProps) => {
   const { children } = props;
+  const isBrowser = typeof window !== 'undefined';
 
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  const handleScroll = () => setScrollPosition(window.scrollY);
+  const handleScroll = () => setScrollPosition(isBrowser ? window.scrollY : 0);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (isBrowser) {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (isBrowser) {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, []);
 
   return (
@@ -24,7 +32,7 @@ const ParallaxComponent = (props: ParallaxProps) => {
         className={s.component}
         style={{
           transform: `translateY(${scrollPosition * 0.5}px)`,
-          opacity: 1 - scrollPosition / window.innerHeight
+          opacity: 1 - scrollPosition / (isBrowser ? window.innerHeight : 1)
         }}
       >
         {children}
@@ -33,4 +41,4 @@ const ParallaxComponent = (props: ParallaxProps) => {
   );
 };
 
-export default ParallaxComponent;
+export default Parallax;
