@@ -358,6 +358,7 @@ module.exports = {
                 theme: {
                     customCss: [
                         require.resolve("./src/css/custom.css"),
+                        require.resolve("./src/css/base-table.css"),
                         require.resolve("./src/css/typography.css"),
                         require.resolve("./src/css/announcement-bar.css"),
                         require.resolve("./src/css/navbar.css"),
@@ -392,6 +393,16 @@ module.exports = {
                 routeBasePath: "security",
                 sidebarPath: false,
             }),
+        ],
+        [
+          "content-docs",
+          /** @type {import('@docusaurus/plugin-content-docs').Options} */
+          ({
+            id: "client-feature-matrix",
+            path: "client-feature-matrix",
+            routeBasePath: "client-feature-matrix",
+            sidebarPath: false,
+          }),
         ],
     ],
     scripts: [

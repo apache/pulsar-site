@@ -25,5 +25,6 @@ def execute(basedir: Path, version: str):
     client = basedir / 'bin' / 'pulsar-client'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-client'
 
+    reference.mkdir(exist_ok=True, parents=True)
     with (reference / 'pulsar-client.md').open('w') as f:
         run(str(client.absolute()), 'generate_documentation', stdout=f)
