@@ -163,13 +163,13 @@ module.exports = {
                     position: "left",
                     items: [
                         {
-                            type: 'doc',
-                            docId: 'concepts-overview',
+                            to: '/docs/next/concepts-overview/',
+                            activeBaseRegex: "docs/next/concepts-overview/$",
                             label: "Pulsar Concepts",
                         },
                         {
-                            type: 'doc',
-                            docId: 'about',
+                            to: '/docs/next/',
+                            activeBaseRegex: "docs/next/$",
                             label: "Quickstart",
                         },
                         {
@@ -197,30 +197,35 @@ module.exports = {
                     items: [
                         {
                             to: "/community#section-welcome",
+                            activeBaseRegex: "^$",
                             label: "Welcome",
                             className: "scroll-link scroll-welcome",
                             id: "scroll-welcome",
                         },
                         {
                             to: "/community#section-discussions",
+                            activeBaseRegex: "^$",
                             label: "Discussions",
                             className: "scroll-link scroll-discussions",
                             id: "scroll-discussions",
                         },
                         {
                             to: "/community#section-governance",
+                            activeBaseRegex: "^$",
                             label: "Governance",
                             className: "scroll-link",
                             id: "scroll-governance",
                         },
                         {
                             to: "/community#section-community",
+                            activeBaseRegex: "^$",
                             label: "Meet the Community",
                             className: "scroll-link",
                             id: "scroll-community",
                         },
                         {
                             to: "/community#section-contribute",
+                            activeBaseRegex: "^$",
                             label: "Contribute",
                             className: "scroll-link",
                             id: "scroll-contribute",
