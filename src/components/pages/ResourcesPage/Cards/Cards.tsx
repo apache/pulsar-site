@@ -6,7 +6,7 @@ const Card: React.FC<data.Resource> = (props) => {
   return (
     <div className={s.Card}>
       <p>
-        <a target="_blank" href={props.forum_link}>{props.forum}</a>
+        <a className={s.ForumLink} target="_blank" href={props.forum_link}><strong>{props.forum}</strong></a>
       </p>
       <h3><a href={props.link}>{props.title}</a></h3>
       <p>
