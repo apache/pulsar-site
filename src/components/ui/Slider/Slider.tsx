@@ -22,7 +22,7 @@ const Slider = (props: SliderProps) => {
     return (
       <RightButton
         className={`${className} ${s.arrow_button}`}
-        style={{ ...style, left: '60' }}
+        style={{ ...style, left: '70' }}
         onClick={onClick}
       />
     );
@@ -33,7 +33,7 @@ const Slider = (props: SliderProps) => {
     return (
       <LeftButton
         className={`${className} ${s.arrow_button}`}
-        style={{ ...style, left: '0' }}
+        style={{ ...style, left: '10' }}
         onClick={onClick}
       />
     );
@@ -55,7 +55,7 @@ const Slider = (props: SliderProps) => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     centerPadding: "60px",
     centerMode: props.centerMode || false,
