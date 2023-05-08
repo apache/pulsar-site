@@ -22,6 +22,6 @@ You can use a Pulsar Node.js client to create Pulsar [producers](concepts-client
 ## Reference doc
 
 - [Node.js client configurations](client-libraries-node-configs.md)
-- [Release notes](pathname://release-notes/client-node/)
-- [Client feature matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914)
+- [Release notes](/release-notes/client-node)
+- [Client feature matrix](/client-feature-matrix/)
 - [Type definitions](https://github.com/apache/pulsar-client-node/blob/master/index.d.ts) used in TypeScript (for 1.3.0 or later versions).

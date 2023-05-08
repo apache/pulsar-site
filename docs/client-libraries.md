@@ -34,7 +34,7 @@ Pulsar supports the following language-agnostic client libraries:
 
 ## Feature matrix
 
-Pulsar client feature matrix for different languages is listed on [Pulsar Feature Matrix (Client and Function)](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914) page.
+The [Client Feature Matrix](/client-feature-matrix/) page provides an overview of the latest feature supportability on language-specific clients.
 
 ## Third-party clients
 

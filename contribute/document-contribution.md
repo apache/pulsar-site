@@ -77,21 +77,23 @@ Docs for external command-line tools or bare scripts are updated **manually**:
 | pulsar-daemon | [pulsar-daemon.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/pulsar-daemon/pulsar-daemon.md) |
 | bookkeeper    | [bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/bookkeeper/bookkeeper.md)          |
 
-## Update client/function matrix
+## Update feature matrix
 
-[Pulsar Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914) outlines every feature supported by the Pulsar client and function.
+Pulsar feature matrix introduces the features supported by language-specific clients and functions. It includes:
+* [Client Feature Matrix](pathname:///client-feature-matrix)
+* [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194)
+
+You need to update the feature matrix as soon as your related commits get merged. The workflow is illustrated as follows.
+
+![Client Feature Matrix Workflow](media/client-matrix-workflow.png)
+
+1. Submit your code and doc PRs.
+2. Get your PRs reviewed and merged.
+3. Update the feature matrix to flag your contribution.
 
 :::note
 
-* It's public and everyone has access to edit it. You can reach out to `dev@pulsar.apache.org` if you have problems in editing.
-* This matrix will be moved to the Pulsar website (instead of the spreadsheet) in the future.
+* [Client Feature Matrix](pathname:///client-feature-matrix) is in the transition phase from the spreadsheet to the webpage. For how to update it, see [How to update data-driven pages](site-intro.md#how-to-update-data-driven-pages).
+* If you have problems in editing the spreadsheet of [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194), you can reach out to `dev@pulsar.apache.org`.
 
 :::
-
-If you want to update the Pulsar Feature Matrix, follow the steps below.
-
-1. Submit your code and doc PRs.
-2. Get your PR reviewed and merged.
-3. In the [Pulsar Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=1784579914), check the box in the corresponding cell with the links of PRs and doc site.
-
-![Client Feature Matrix Workflow](media/client-matrix-workflow.png)
