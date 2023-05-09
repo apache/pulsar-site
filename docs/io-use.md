@@ -468,7 +468,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 ## Run a Pulsar Function before a sink connector
 
-You can run a [Pulsar Function](functions-overview.md) in memory before a sink connector. For details, see [[PIP 193: Sink preprocessing Function](https://github.com/apache/pulsar/issues/16739).
+You can run a [Pulsar Function](functions-overview.md) in memory before a sink connector. For details, see [PIP 193: Sink preprocessing Function](https://github.com/apache/pulsar/issues/16739).
 Running a Pulsar Function in memory before a sink connector provides lower latency, less I/O, and disk consumption than going through an intermediate topic.
 Use the `--transform-function`, `--transform-function-classname` and `--transform-function-config` options when creating the sink connector to configure the transform Function to run.
 
