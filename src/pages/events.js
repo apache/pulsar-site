@@ -1,10 +1,10 @@
 import * as React from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import TabsUnstyled from '@mui/base/TabsUnstyled';
-import TabsListUnstyled from '@mui/base/TabsListUnstyled';
-import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import TabUnstyled from '@mui/base/TabUnstyled';
+import Tabs from '@mui/base/Tabs';
+import TabsList from '@mui/base/TabsList';
+import TabPanel from '@mui/base/TabPanel';
+import Tab from '@mui/base/Tab';
 import EventCards from "../components/EventCards";
 import FeaturedEvent from "../components/FeaturedEvent";
 const resObj = require("../../data/events.js");
@@ -62,41 +62,41 @@ export default function Events() {
           </div>
         </section>
         <section className="main-content waves-bg pt-12 pb-48 mb-24">
-          <TabsUnstyled
+          <Tabs
             defaultValue={0}
             className="tabs tabs--resources block my-24 relative z-5"
           >
-            <TabsListUnstyled className="block text--center tabs-bar py-8 px-4">
-              <TabUnstyled className="mx-2">Meetups</TabUnstyled>
-              <TabUnstyled className="mx-2">Playlists</TabUnstyled>
+            <TabsList className="block text--center tabs-bar py-8 px-4">
+              <Tab className="mx-2">Meetups</Tab>
+              <Tab className="mx-2">Playlists</Tab>
               {futureEvents.length && (
-                <TabUnstyled className="mx-2">Upcoming Events</TabUnstyled>
+                <Tab className="mx-2">Upcoming Events</Tab>
               )}
 
-              <TabUnstyled className="mx-2">Past Events</TabUnstyled>
-            </TabsListUnstyled>
-            <TabPanelUnstyled value={0}>
+              <Tab className="mx-2">Past Events</Tab>
+            </TabsList>
+            <TabPanel value={0}>
               <EventCards type="meetups" events={resObj.meetups} />
-            </TabPanelUnstyled>
-            <TabPanelUnstyled value={1}>
+            </TabPanel>
+            <TabPanel value={1}>
               <EventCards type="playlists" events={resObj.playlists} />
-            </TabPanelUnstyled>
+            </TabPanel>
             {futureEvents.length ? (
               <>
-                <TabPanelUnstyled value={2}>
+                <TabPanel value={2}>
                   {" "}
                   <EventCards type="upcoming events" events={futureEvents} />
-                </TabPanelUnstyled>
-                <TabPanelUnstyled value={3}>
+                </TabPanel>
+                <TabPanel value={3}>
                   <EventCards type="past events" events={pastEvents} />
-                </TabPanelUnstyled>
+                </TabPanel>
               </>
             ) : (
-              <TabPanelUnstyled value={2}>
+              <TabPanel value={2}>
                 <EventCards type="past events" events={pastEvents} />
-              </TabPanelUnstyled>
+              </TabPanel>
             )}
-          </TabsUnstyled>
+          </Tabs>
         </section>
       </div>
     </Layout>
