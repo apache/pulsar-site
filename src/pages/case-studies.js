@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Layout from "@theme/Layout";
 import CaseStudyCards from "../components/CaseStudyCards";
 import PropTypes from 'prop-types';
-import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
-import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
-import PopperUnstyled from '@mui/base/PopperUnstyled';
+import Select, { selectClasses } from '@mui/base/Select';
+import Option, { optionClasses } from '@mui/base/Option';
+import Popper from '@mui/base/Popper';
 import { styled } from '@mui/system';
-const csObj = 
+const csObj =
   {
 
     financial_services:  [
@@ -281,7 +281,7 @@ const csObj =
         description: "Apache Pulsar has attracted our attention with its excellent features and great architecture."
       },
     ]
-  
+
 };
 
 let allArr = [];
@@ -331,11 +331,11 @@ const StyledButton = styled('button')(
     border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
   }
 
-  &.${selectUnstyledClasses.focusVisible} {
+  &.${selectClasses.focusVisible} {
     outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
   }
 
-  &.${selectUnstyledClasses.expanded} {
+  &.${selectClasses.expanded} {
     &::after {
       content: '▴';
     }
@@ -365,7 +365,7 @@ const StyledListbox = styled('ul')(
   `,
 );
 
-const StyledOption = styled(OptionUnstyled)(
+const StyledOption = styled(Option)(
   ({ theme }) => `
   list-style: none;
   padding: 8px;
@@ -376,33 +376,33 @@ const StyledOption = styled(OptionUnstyled)(
     border-bottom: none;
   }
 
-  &.${optionUnstyledClasses.selected} {
+  &.${optionClasses.selected} {
     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
     color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
   }
 
-  &.${optionUnstyledClasses.highlighted} {
+  &.${optionClasses.highlighted} {
     background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   }
 
-  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+  &.${optionClasses.highlighted}.${optionClasses.selected} {
     background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
     color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
   }
 
-  &.${optionUnstyledClasses.disabled} {
+  &.${optionClasses.disabled} {
     color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
   }
 
-  &:hover:not(.${optionUnstyledClasses.disabled}) {
+  &:hover:not(.${optionClasses.disabled}) {
     background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   }
   `,
 );
 
-const StyledPopper = styled(PopperUnstyled)`
+const StyledPopper = styled(Popper)`
   z-index: 10;
 `;
 
@@ -423,7 +423,7 @@ function CustomSelect(props) {
     ...props.components,
   };
 
-  return <SelectUnstyled {...props} components={components} />;
+  return <Select {...props} components={components} />;
 }
 
 CustomSelect.propTypes = {
