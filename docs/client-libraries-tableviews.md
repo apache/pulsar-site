@@ -57,7 +57,7 @@ values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
   | Name | Type| Required? |  <div>Description</div> | Default
   |---|---|---|---|---
   | `topic` | string | yes | The topic name of the TableView. | N/A
-  | `schemaInfo` | struct | no | Declare the schema of the data that this table view will be accepting. The schema will be checked against the schema of the topic, and the table view creation will fail if it's not compatible. | N/A
+  | `schemaInfo` | struct | no | Declare the schema of the data that this TableView can accept. The schema will be checked against the schema of the topic, and the TableView creation will fail if it's incompatible. | N/A
   | `subscriptionName` | string | no | The subscription name of the TableView. | reader-{random string}
   | `partititionsUpdateInterval` | int | no | Topic partitions update interval in seconds. In **C++ client**, `partititionsUpdateInterval` is global within the same client.  | 60
 
