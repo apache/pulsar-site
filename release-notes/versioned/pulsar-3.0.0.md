@@ -89,7 +89,7 @@ sidebar_label: Apache Pulsar 3.0.0
   - Clear delayed message when unsubscribe &  Make clear operation asynchronous by @coderzc in [#19901](https://github.com/apache/pulsar/pull/19901)
   - Merge multiple buckets at once by @coderzc in [#19927](https://github.com/apache/pulsar/pull/19927)
   - Ensure previous delayed index be removed from snapshotSegmentLastIndexTable & Make load operate asynchronous by @coderzc in [#20086](https://github.com/apache/pulsar/pull/20086)
-  - Fix avoid future of clear delayed message can't complete by @coderzc in [#20075](https://github.com/apache/pulsar/pull/20075)
+  - Fix the issue which the `future` of clean up delayed messages can't be completed by @coderzc in [#20075](https://github.com/apache/pulsar/pull/20075)
   - Support disabling delayed bucket merging. by @mattisonchao in [#20155](https://github.com/apache/pulsar/pull/20155)
 - [Broker] Pip-257: Add AuthenticationProviderOpenID by @michaeljmarshall in [#19849](https://github.com/apache/pulsar/pull/19849)
 - [Broker] Make `LeastResourceUsageWithWeight` thread safe by @lifepuzzlefun in [#20159](https://github.com/apache/pulsar/pull/20159)
