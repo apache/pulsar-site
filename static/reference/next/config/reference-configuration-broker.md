@@ -2979,7 +2979,7 @@ Enable cluster's failure-domain which can distribute brokers into logical region
 **Category**: Server
 
 ### haProxyProtocolEnabled
-Enable or disable the proxy protocol.
+Enable or disable the proxy protocol. If true, the real IP addresses of consumers and producers can be obtained when getting topic statistics data.
 
 **Type**: `boolean`
 
