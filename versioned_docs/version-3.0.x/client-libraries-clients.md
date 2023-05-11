@@ -52,3 +52,35 @@ The following example creates a Python client using multiple advertised listener
   </TabItem>
 </Tabs>
 ````
+
+## Set memory limits
+
+You can uses memory limits param to control client overall memory usage,
+the producers and consumers under this client will compete for the memory assigned. See [PIP 74: Pulsar client memory limits](https://github.com/apache/pulsar/wiki/PIP-74%3A-Pulsar-client-memory-limits)
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+defaultValue="Java"
+values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
+<TabItem value="Java">
+
+  ```java
+  PulsarClient client = PulsarClient.builder()
+  .serviceUrl("pulsar://xxxx:6650")
+  .memoryLimit(64, SizeUnit.MEGA_BYTES)
+  .build();
+  ```
+
+</TabItem>
+<TabItem value="Go">
+
+  ```go
+  client, err := pulsar.NewClient(pulsar.ClientOptions{
+    URL: "pulsar://xxxx:6650",
+    MemoryLimitBytes: 64 * 1024 * 1024, // Unit: byte
+  })
+  ```
+
+</TabItem>
+</Tabs>
+````
