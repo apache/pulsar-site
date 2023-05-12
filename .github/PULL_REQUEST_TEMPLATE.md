@@ -8,11 +8,11 @@
 
 <!-- Either this PR adds a doc for a code PR, -->
 
-Add doc for #xyz
+This PR adds doc for #xyz
 
 <!-- or fixes a doc issue -->
 
-Fixes #xyz 
+This PR fixes #xyz 
 
 <!-- DO NOT REMOVE THIS SECTION. CHECK THE PROPER BOX ONLY. -->
 
