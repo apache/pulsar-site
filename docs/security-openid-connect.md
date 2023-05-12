@@ -9,7 +9,7 @@ Apache Pulsar supports authenticating clients using [OpenID Connect](https://ope
 The source code for the OpenID Connect implementation is in the [pulsar-broker-auth-oidc](https://github.com/apache/pulsar/blob/master/pulsar-broker-auth-oidc/) submodule in the Apache Pulsar git repo.
 
 :::note
-Pulsar's OpenID Connect integration was introduced in Pulsar 3.0.0. As always, if you encounter any issues, please ask questions on Pulsar channels and open issues in GitHub.
+Pulsar's OpenID Connect integration is available from 3.0.0. 
 :::
 
 ## OpenID Connect Authentication Flow
@@ -27,7 +27,7 @@ After authenticating with the Identity Provider, the Pulsar client gets an acces
 
 ## Enable OpenID Connect Authentication in the Broker and Proxy
 
-To configure Pulsar Servers to authenticate clients using OpenID Connect, add the following parameters to the `conf/broker.conf` and the `conf/proxy.conf`. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
+To configure Pulsar servers to authenticate clients using OpenID Connect, add the following parameters to the `conf/broker.conf` and the `conf/proxy.conf`. If you use a standalone Pulsar, add these parameters to the `conf/standalone.conf` file:
 
 ```properties
 # Configuration to enable authentication
