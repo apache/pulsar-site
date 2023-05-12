@@ -131,4 +131,4 @@ In order to simplify migration from Static JWTs to OIDC Authentication, it is po
 
 ## Configure OIDC authentication in Pulsar Clients and CLI Tools
 
-The Pulsar OAuth2 client plugin can be used to for clients that rely on the Client Credentials Flow for OIDC. See the [OAuth2 Client](security-oauth2.md#configure-oauth2-authentication-in-pulsar-clients) documentation for configuring clients to integrate with Pulsar Servers running with the OIDC Authentication Provider.
+The Pulsar OAuth2 client plugin can be used for clients that rely on the Client Credentials Flow for OIDC. See the [OAuth2 Client](security-oauth2.md#configure-oauth2-authentication-in-pulsar-clients) documentation for configuring clients to integrate with Pulsar Servers running with the OIDC Authentication Provider.
