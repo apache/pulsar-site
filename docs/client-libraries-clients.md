@@ -55,8 +55,8 @@ The following example creates a Python client using multiple advertised listener
 
 ## Set memory limits
 
-You can uses memory limits param to control client overall memory usage,
-the producers and consumers under this client will compete for the memory assigned. See [PIP 74: Pulsar client memory limits](https://github.com/apache/pulsar/wiki/PIP-74%3A-Pulsar-client-memory-limits)
+You can use memory limits parameters to control the total client memory usage,
+the producers and consumers under this client will compete for the memory assigned. For implementation details, see [PIP 74: Pulsar client memory limits](https://github.com/apache/pulsar/wiki/PIP-74%3A-Pulsar-client-memory-limits).
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
