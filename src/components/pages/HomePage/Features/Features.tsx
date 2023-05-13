@@ -4,15 +4,15 @@ import featuresList from './featuresList';
 
 import s from './Features.module.css';
 import Slider from '../../../ui/Slider/Slider';
+import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
 
 const Features = () => {
-
   return (
     <div className={s.block}>
       <div className={s.container}>
-        <span className={s.features_title}>
+        <ScreenTitle>
           Pulsar features
-        </span>
+        </ScreenTitle>
 
         <div className={s.features_container}>
           {featuresList.map((feature, i) => {

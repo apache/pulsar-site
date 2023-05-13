@@ -5,6 +5,7 @@ import Parallax from './Parallax/Parallax';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import s from './ShortInfo.module.css';
+import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
 
 // The background SVG animation looks bad in Firefox, so we use a static image.
 // Regex is copied from:
@@ -47,9 +48,9 @@ const ShortInfo: React.FC = () => {
 
         <div className={s.container}>
           <div className={s.info_container}>
-            <h2 className={s.title}>
+            <ScreenTitle>
               What is Pulsar
-            </h2>
+            </ScreenTitle>
 
             <p>
               Apache Pulsar is an all-in-one messaging and streaming platform.

@@ -8,6 +8,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import Quote from './img/quote.svg';
 import s from './Users.module.css';
+import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
 
 const Users: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -16,9 +17,9 @@ const Users: React.FC = () => {
     <div className={s.block}>
       <div className={s.container}>
         <div className={s.title_container}>
-          <span className={s.title}>
+          <ScreenTitle>
             Pulsar Users
-          </span>
+          </ScreenTitle>
 
           <span className={s.text}>
             Run in production at scale with millions of messages per second across millions of topics,
