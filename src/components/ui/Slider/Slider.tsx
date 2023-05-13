@@ -21,7 +21,7 @@ const Slider = (props: SliderProps) => {
     const { className, style, onClick } = props;
     return (
       <RightButton
-        className={`${className} ${s.arrow_button}`}
+        className={`${className} ${s.arrow_button} ${s.next_button}`}
         style={{ ...style, left: '70' }}
         onClick={onClick}
       />
@@ -32,7 +32,7 @@ const Slider = (props: SliderProps) => {
     const { className, style, onClick } = props;
     return (
       <LeftButton
-        className={`${className} ${s.arrow_button}`}
+        className={`${className} ${s.arrow_button} ${s.prev_button}`}
         style={{ ...style, left: '10' }}
         onClick={onClick}
       />
