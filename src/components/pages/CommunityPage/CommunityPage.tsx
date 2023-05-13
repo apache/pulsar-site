@@ -12,6 +12,7 @@ import Section from "./shared/Section/Section";
 import ProjectGovernance from "./sections/project-governance/ProjectGovernance";
 import Slider from '@site/src/components/ui/Slider/Slider';
 import Page from "@site/src/components/ui/Page/Page";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 export default function CommunityPage(): JSX.Element {
   return (
@@ -48,40 +49,44 @@ export default function CommunityPage(): JSX.Element {
             </p>
 
             <div className={s.Slider}>
-              <Slider centerMode={window.innerWidth > 800} slidesToShow={3}>
-                {[
-                  {
-                    img: useBaseUrl("/img/community-image-6.jpg"),
-                    alt: "Apache Pulsar community photo",
-                  },
-                  {
-                    img: useBaseUrl("/img/community-image-1.jpg"),
-                    alt: "Apache Pulsar community photo",
-                  },
+              <BrowserOnly>
+                {() => (
+                  <Slider centerMode={window.innerWidth > 800} slidesToShow={3}>
+                    {[
+                      {
+                        img: useBaseUrl("/img/community-image-6.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
+                      {
+                        img: useBaseUrl("/img/community-image-1.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
 
-                  {
-                    img: useBaseUrl("/img/community-image-4.jpg"),
-                    alt: "Apache Pulsar community photo",
-                  },
-                  {
-                    img: useBaseUrl("/img/community-image-3.jpg"),
-                    alt: "Apache Pulsar community photo",
-                  },
+                      {
+                        img: useBaseUrl("/img/community-image-4.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
+                      {
+                        img: useBaseUrl("/img/community-image-3.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
 
-                  {
-                    img: useBaseUrl("/img/community-image-2.jpg"),
-                    alt: "Apache Pulsar community photo",
-                  },
-                  {
-                    img: useBaseUrl("/img/community-image-5.jpg"),
-                    alt: "Apache Pulsar community photo",
-                  },
-                ].map((slide, i) => (
-                  <div key={i} className={s.Slide}>
-                    <img className={s.SlideImage} alt={slide.alt} src={slide.img} />
-                  </div>
-                ))}
-              </Slider>
+                      {
+                        img: useBaseUrl("/img/community-image-2.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
+                      {
+                        img: useBaseUrl("/img/community-image-5.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
+                    ].map((slide, i) => (
+                      <div key={i} className={s.Slide}>
+                        <img className={s.SlideImage} alt={slide.alt} src={slide.img} />
+                      </div>
+                    ))}
+                  </Slider>
+                )}
+              </BrowserOnly>
             </div>
           </div>
 
