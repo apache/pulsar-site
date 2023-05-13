@@ -3,11 +3,11 @@ import React from 'react';
 import LinkButton from '@site/src/components/ui/Button/Button';
 import Slider from '@site/src/components/ui/Slider/Slider';
 import testimonials from '@site/data/testimonials';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import Quote from './img/quote.svg';
 import s from './Users.module.css';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const Users: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();

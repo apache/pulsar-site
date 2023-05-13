@@ -1,4 +1,11 @@
-module.exports = [
+type Users = {
+  name: string,
+  url: string,
+  logo: string,
+  logo_white?: boolean,
+}
+
+const users: Users[] = [
   {
     name: "Kingsoft Cloud",
     url: "https://www.ksyun.com/",
@@ -66,7 +73,7 @@ module.exports = [
   {
     name: "Turtlequeue",
     url: "https://turtlequeue.com",
-    logo: "https://turtlequeue.com/logo_black.png",
+    logo: "https://i.ibb.co/28MHsWV/Turtle-Queue.png",
   },
   {
     name: "ProxyClick",
@@ -122,8 +129,8 @@ module.exports = [
   },
   {
     name: "Vivy",
-    url: "https://www.vivy.com/de/startseite/",
-    logo: "https://www.vivy.com/fileadmin/vivy-startpage/vivy_logo.svg",
+    url: "https://www.vivy.com/",
+    logo: "https://uploads-ssl.webflow.com/62a1bf609247c3abc6b62738/62a1c3b4294f88b6a9d748f9_vivy-logo.svg",
   },
   {
     name: "IoTium",
@@ -147,11 +154,6 @@ module.exports = [
     logo: "https://www.chinatelecom-h.com/en/images/global/logo.png",
   },
   {
-    name: "Kafkaesque",
-    url: "https://kafkaesque.io/",
-    logo: "https://kafkaesque.io/wp-content/uploads/2019/04/color_logo_with_background.svg",
-  },
-  {
     name: "OKCoin",
     url: "https://www.okcoin.com/",
     logo: "https://i0.wp.com/blog.okcoin.com/wp-content/uploads/2019/08/OKCoin-Logo-Spring2019-250x60px-01.png?fit=251%2C62&ssl=1",
@@ -159,7 +161,7 @@ module.exports = [
   {
     name: "BestPay",
     url: "https://www.bestpay.com.cn/",
-    logo: "https://www.bestpay.com.cn/global/oig/images/logo.png",
+    logo: "https://www.bestpay.com.cn/assets/newindex/images/logo-78d1d51487.png",
   },
   {
     name: "360",
@@ -198,11 +200,11 @@ module.exports = [
     logo: "https://cdn.xiaoduoai.com/official-site/dist/assets/img/indexPage/xiaoduo_logo_en_white.843927.png",
     logo_white: true,
   },
-  {
-    name: "Shihong",
-    url: "https://shihong.net.cn",
-    logo: "https://www.shihong.net.cn/website/static/src/img/shihong1.png",
-  },
+  // {
+  //   name: "Shihong",
+  //   url: "https://shihong.net.cn",
+  //   logo: "https://www.shihong.net.cn/website/static/src/img/shihong1.png",
+  // },
   {
     name: "CleverCloud",
     url: "https://www.clever-cloud.com/en/",
@@ -221,7 +223,7 @@ module.exports = [
   {
     name: "Max Kelsen",
     url: "https://maxkelsen.com/",
-    logo: "https://maxkelsen.com/imgs/logo/Max-Kelsen-logo-black.png",
+    logo: "https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/modified/87278353-03a7-4a1e-be1f-e4257312bded.png?w=3840",
   },
   {
     name: "HSL Developer Community of Helsinki Regional Transport Authority",
@@ -292,8 +294,8 @@ module.exports = [
   {
     name: "DataStax",
     url: "https://datastax.com",
-    logo: "https://www.datastax.com/sites/default/files/inline-images/datastax-logotype-negative.png",
-    logo_white: false,
+    logo: "https://cdn.sanity.io/images/bbnkhnhl/production/5c1de73e536af727ee06e88cb370d2fea510b792-400x38.png?w=640&q=75&fit=clip&auto=format",
+    logo_white: true,
   },
   {
     name: "KAISA",
@@ -314,7 +316,7 @@ module.exports = [
   {
     name: "Appen",
     url: "https://www.appen.com.cn/",
-    logo: "https://resources.appen.com/wp-content/uploads/2020/03/no-tagline.svg",
+    logo: "https://www.appen.com.cn/wp-content/uploads/2020/03/no-tagline.svg",
   },
   {
     name: "Pandio",
@@ -350,6 +352,7 @@ module.exports = [
     name: "MGTV",
     url: "https://www.mgtv.com",
     logo: "http://honey.mgtv.com/klyg.official/images/nav/logo.png",
+    logo_white: true,
   },
   {
     name: "AsiaInfo",
@@ -357,3 +360,5 @@ module.exports = [
     logo: "https://www.asiainfo.com/include/images/logo.svg",
   },
 ].sort((a, b) => (a.name > b.name ? 1 : -1));
+
+export default users;
