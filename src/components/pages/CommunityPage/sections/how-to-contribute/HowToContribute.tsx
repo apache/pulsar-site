@@ -23,7 +23,7 @@ const HowToContribute: React.FC = () => {
           type: "primary",
         },
         {
-          id: "contributing-to-the-project",
+          id: "develop-coding-conventions",
           href: useBaseUrl("/contribute/develop-coding-conventions"),
           text: "Coding conventions",
           type: "normal",

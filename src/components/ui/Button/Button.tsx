@@ -2,16 +2,18 @@ import React from 'react';
 
 import s from './Button.module.css';
 
-type LinkButtonProps = {
+export type ButtonVariant = 'action' | 'regular';
+
+type Button = {
   title: string,
-  appearance?: 'action' | 'regular',
+  variant?: ButtonVariant,
   href?: string,
   target?: string,
   onClick?: () => void
 }
 
-const LinkButton = (props: LinkButtonProps) => {
-  const contentClassName = `${s.content} ${props.appearance === 'action' ? s.action : s.regular}`;
+const Button = (props: Button) => {
+  const contentClassName = `${s.content} ${props.variant === 'action' ? s.action : s.regular}`;
   const content = <div className={contentClassName}>{props.title}</div>;
 
   if (props.href) {
@@ -29,4 +31,4 @@ const LinkButton = (props: LinkButtonProps) => {
   );
 }
 
-export default LinkButton;
+export default Button;

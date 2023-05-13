@@ -40,7 +40,7 @@ const CaseStudiesPage: React.FC = () => {
                   return (
                     <Button
                       key={category}
-                      appearance={categoryFilter === category ? 'action' : 'regular'}
+                      variant={categoryFilter === category ? 'action' : 'regular'}
                       onClick={() => setCategoryFilter(category)}
                       title={data.categoryLabels[category]}
                     />

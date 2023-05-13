@@ -8,9 +8,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import s from './Slider.module.css';
 import './styles.css';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type SliderProps = {
   children: React.ReactNode;
+  slidesToShow: number;
   centerMode?: boolean;
 }
 
@@ -55,7 +57,7 @@ const Slider = (props: SliderProps) => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: props.slidesToShow,
     slidesToScroll: 1,
     centerPadding: "60px",
     centerMode: props.centerMode || false,
@@ -74,9 +76,13 @@ const Slider = (props: SliderProps) => {
   };
 
   return (
-    <SlickSlider {...settings}>
-      {props.children}
-    </SlickSlider>
+    <BrowserOnly>
+      {() => (
+        <SlickSlider {...settings}>
+          {props.children}
+        </SlickSlider>
+      )}
+    </BrowserOnly>
   )
 }
 

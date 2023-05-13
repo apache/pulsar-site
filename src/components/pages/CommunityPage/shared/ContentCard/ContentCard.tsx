@@ -1,5 +1,5 @@
 import React from "react";
-import PillButton, { PillButtonVariant } from "@site/src/components/PillButton";
+import Button, { ButtonVariant } from "@site/src/components/ui/Button/Button";
 import s from "./ContentCard.module.css";
 
 type ActionButtonProps = {
@@ -46,24 +46,26 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
   if (props.type === "link") {
   }
 
-  let pillButtonVariant: PillButtonVariant;
+  let buttonVariant: ButtonVariant;
   switch (props.type) {
     case "primary":
-      pillButtonVariant = "primary";
+      buttonVariant = "action";
       break;
     case "normal":
-      pillButtonVariant = "grey";
+      buttonVariant = "regular";
       break;
   }
 
   return (
-    <PillButton
-      variant={pillButtonVariant}
-      target={props.isExternal ? "_blank" : undefined}
-      href={props.href}
-    >
-      {props.text}
-    </PillButton>
+    <div className={s.ActionButton}>
+      <Button
+        variant={buttonVariant}
+        target={props.isExternal ? "_blank" : undefined}
+        href={props.href}
+        title={props.text}
+      />
+    </div>
+
   );
 };
 

@@ -30,12 +30,12 @@ const ShortInfo: React.FC = () => {
             <div className={s.buttons}>
               <Button
                 title='Explore docs'
-                appearance='action'
+                variant='action'
                 href={`${siteConfig.baseUrl}docs`}
               />
               <Button
                 title='Quickstart'
-                appearance='regular'
+                variant='regular'
                 href={`${siteConfig.baseUrl}docs/concepts-overview`}
               />
             </div>
