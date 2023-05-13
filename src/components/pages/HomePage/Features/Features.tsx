@@ -34,7 +34,7 @@ const Features = () => {
         </div>
 
         <div className={s.slider}>
-          <Slider>
+          <Slider slidesToShow={1}>
             {featuresList.map((feature, i) => {
               const Picture = feature.picture;
 

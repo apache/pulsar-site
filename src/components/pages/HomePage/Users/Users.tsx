@@ -8,6 +8,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Quote from './img/quote.svg';
 import s from './Users.module.css';
 import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const Users: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -33,27 +34,31 @@ const Users: React.FC = () => {
             />
           </div>
         </div>
-        <Slider centerMode={window.innerWidth > 800} slidesToShow={3}>
-          {Object.values(testimonials).flat().map((caseStudy, i) => (
-            <div key={i} className={s.slide}>
-              <div className={s.slide_container}>
-                <Quote className={s.quote} />
+        <BrowserOnly>
+          {() => (
+            <Slider centerMode={window.innerWidth > 800} slidesToShow={3}>
+              {Object.values(testimonials).flat().map((caseStudy, i) => (
+                <div key={i} className={s.slide}>
+                  <div className={s.slide_container}>
+                    <Quote className={s.quote} />
 
-                <span className={s.slider_text}>
-                  {caseStudy.text}
-                </span>
+                    <span className={s.slider_text}>
+                      {caseStudy.text}
+                    </span>
 
-                <span className={s.author}>
-                  {caseStudy.author}
-                </span>
+                    <span className={s.author}>
+                      {caseStudy.author}
+                    </span>
 
-                <span className={s.platform}>
-                  {caseStudy.company}
-                </span>
-              </div>
-            </div>
-          ))}
-        </Slider>
+                    <span className={s.platform}>
+                      {caseStudy.company}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          )}
+        </BrowserOnly>
       </div>
     </div>
   )
