@@ -50,8 +50,9 @@ const Features = () => {
                         {feature.text}
                       </span>
                     </div>
-
-                    <Picture className={s.feature_picture} viewBox={feature.viewBox} />
+                    <div className={s.picture_container}>
+                      <Picture className={s.feature_picture} viewBox={feature.viewBox} />
+                    </div>
                   </div>
                 </div>
               )
