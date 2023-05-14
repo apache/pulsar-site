@@ -24,8 +24,8 @@ const testimonials: Testimonial[] = [
       "Among the features we considered were tiered storage, as we planned to have unlimited retention (for event sourcing that matters a lot), flexible subscription model (we use exclusive at the moment, however we want to try per-key subscription), authorization via different methods including certificates and JWT (JSON Web Token), and an easy way to get it up and running.",
   },
   {
-    author: "Kirill Merkushev",
-    company: "Jowanza Joseph, One Click Retail",
+    author: "Jowanza Joseph",
+    company: "One Click Retail",
     text:
       "Because of Pulsar’s unique combination of messaging and stream processing, we’ve been able to replace multiple systems with one solution that works seamlessly in our Kubernetes environment.",
   },
