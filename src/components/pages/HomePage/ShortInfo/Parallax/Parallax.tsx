@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import s from './Parallax.module.css';
 
@@ -12,7 +12,9 @@ const Parallax = (props: ParallaxProps) => {
 
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  const handleScroll = () => setScrollPosition(isBrowser ? window.scrollY : 0);
+  const handleScroll = useCallback(() => {
+    setScrollPosition(isBrowser ? window.scrollY : 0)
+  }, []);
 
   useEffect(() => {
     if (isBrowser) {
@@ -31,7 +33,7 @@ const Parallax = (props: ParallaxProps) => {
       <div
         className={s.component}
         style={{
-          transform: `translateY(${scrollPosition * 0.5}px)`,
+          transform: `translateY(-${scrollPosition * 0.5}px)`,
           opacity: 1 - scrollPosition / (isBrowser ? window.innerHeight : 1)
         }}
       >

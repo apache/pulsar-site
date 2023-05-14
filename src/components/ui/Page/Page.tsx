@@ -7,11 +7,11 @@ export type PageProps = {
 
 const Page: React.FC<PageProps> = (props) => {
   return (
-    <div className={s.Page}>
+    <section className={s.Page}>
       <div className={s.PageContent}>
         {props.children}
         </div>
-      </div>
+      </section>
   )
 };
 

@@ -196,7 +196,7 @@ module.exports = {
                     className: "community-dropdown",
                     items: [
                         {
-                            to: "/community#section-welcome",
+                            to: "/community",
                             activeBaseRegex: "^$",
                             label: "Welcome",
                             className: "scroll-link scroll-welcome",

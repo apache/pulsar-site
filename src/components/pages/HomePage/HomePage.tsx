@@ -14,10 +14,15 @@ const HomePage = () => {
       title={"Apache Pulsar"}
       description={"Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud."}
     >
-      <div className={s.block}>
-        <ShortInfo />
-        <Features />
-        <Users />
+      <div className={s.Page}>
+        <div className={s.Background}></div>
+        <div className={s.FirstScreen}>
+          <ShortInfo />
+        </div>
+        <div className={s.OtherScreens}>
+          <Features />
+          <Users />
+        </div>
       </div>
     </Layout>
   )

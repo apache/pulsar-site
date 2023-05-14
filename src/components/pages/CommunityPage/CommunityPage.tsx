@@ -61,11 +61,6 @@ export default function CommunityPage(): JSX.Element {
                         img: useBaseUrl("/img/community-image-1.jpg"),
                         alt: "Apache Pulsar community photo",
                       },
-
-                      {
-                        img: useBaseUrl("/img/community-image-4.jpg"),
-                        alt: "Apache Pulsar community photo",
-                      },
                       {
                         img: useBaseUrl("/img/community-image-3.jpg"),
                         alt: "Apache Pulsar community photo",
@@ -77,6 +72,10 @@ export default function CommunityPage(): JSX.Element {
                       },
                       {
                         img: useBaseUrl("/img/community-image-5.jpg"),
+                        alt: "Apache Pulsar community photo",
+                      },
+                      {
+                        img: useBaseUrl("/img/community-image-4.jpg"),
                         alt: "Apache Pulsar community photo",
                       },
                     ].map((slide, i) => (
