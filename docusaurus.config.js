@@ -380,6 +380,7 @@ module.exports = {
         theme: {
           customCss: [
             require.resolve("./src/css/custom.css"),
+            require.resolve("./src/css/docs.css"),
             require.resolve("./src/css/base-table.css"),
             require.resolve("./src/css/typography.css"),
             require.resolve("./src/css/announcement-bar.css"),
