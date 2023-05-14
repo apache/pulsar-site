@@ -9,10 +9,10 @@ const Card: React.FC<data.Resource> = (props) => {
         <a className={s.ForumLink} target="_blank" href={props.forum_link}><strong>{props.forum}</strong></a>
       </p>
       <h3><a href={props.link}>{props.title}</a></h3>
-      <p>
+      <div className={s.AdditionalInfo}>
         {props.date && <div><small className={s.Date}>{props.date}</small></div>}
         {props.tags && <div><small>Tags: {props.tags}</small></div>}
-      </p>
+      </div>
       {props.presenter && <p>Presented by <strong>{props.presenter}</strong></p>}
       <a href={props.link} target="_blank">Learn more</a>
     </div>

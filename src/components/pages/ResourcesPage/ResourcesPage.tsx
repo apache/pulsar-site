@@ -44,7 +44,7 @@ const CaseStudiesPage: React.FC = () => {
                   );
                 })}
               </div>
-              <div>
+              <div className={s.SearchQueryInput}>
                 <Input placeholder="Search" value={searchQuery} onChange={setSearchQuery} clearable />
               </div>
             </div>

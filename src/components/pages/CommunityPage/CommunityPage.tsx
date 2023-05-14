@@ -3,8 +3,6 @@ import Layout from "@theme/Layout";
 import s from "./CommunityPage.module.css";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import TeamTable from "@site/src/components/pages/CommunityPage/TeamTable";
-import PromoCallout from "@site/src/components/PromoCallout";
-import WavySeparatorFive from "@site/static/img/separator-5.svg";
 import team from "@site/data/team";
 import DiscussionPlatforms from "./sections/discussions/DiscussionPlatforms";
 import HowToContribute from "./sections/how-to-contribute/HowToContribute";
@@ -13,6 +11,7 @@ import ProjectGovernance from "./sections/project-governance/ProjectGovernance";
 import Slider from '@site/src/components/ui/Slider/Slider';
 import Page from "@site/src/components/ui/Page/Page";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import Button from "@site/src/components/ui/Button/Button";
 
 export default function CommunityPage(): JSX.Element {
   return (
@@ -125,26 +124,25 @@ export default function CommunityPage(): JSX.Element {
           </div>
         </section>
 
-        <WavySeparatorFive />
-
         <Section title="Discussions" anchor="section-discussions">
           <DiscussionPlatforms />
         </Section>
 
-        <Section title="Project Governance" anchor="section-governance">
-          <ProjectGovernance />
-        </Section>
+        <div className={s.SectionWithBackground}>
+          <Section title="Project Governance" anchor="section-governance">
+            <ProjectGovernance />
+          </Section>
 
-        <Section title="How to Contribute" anchor="section-contribute">
-          <HowToContribute />
-        </Section>
+          <Section title="How to Contribute" anchor="section-contribute">
+            <HowToContribute />
+          </Section>
+        </div>
 
         <Section anchor="section-community" title="Meet the Community">
           <p>
             Pulsar community consists of PMC members, committers and
             contributors.{" "}
-          </p>
-          <p>
+            <br />
             For the complete and up-to-date list, see{" "}
             <a
               className="secondary-cta"
@@ -155,21 +153,19 @@ export default function CommunityPage(): JSX.Element {
             </a>
             .
           </p>
-          <h3>PMC members</h3>
+          <br />
+          <h3>PMC members ({team.pmc.length})</h3>
           <div>
-            <TeamTable data={team.pmc.slice(0, (team.pmc.length + 1) / 2)} />
-            <TeamTable data={team.pmc.slice((team.pmc.length + 1) / 2)} />
+            <TeamTable data={team.pmc} />
           </div>
-          <h3>Committers</h3>
+          <br />
+          <h3>Committers ({team.committers.length})</h3>
           <div>
             <TeamTable
-              data={team.committers.slice(0, (team.committers.length + 1) / 2)}
-            />
-            <TeamTable
-              data={team.committers.slice((team.committers.length + 1) / 2)}
+              data={team.committers}
             />
           </div>
-          <div>
+          <div className={s.StatTables}>
             <img
               src="https://contributor-overtime-api.git-contributor.com/contributors-svg?chart=contributorOverTime&repo=apache/pulsar"
               alt={"Contributors over time"}
@@ -181,11 +177,14 @@ export default function CommunityPage(): JSX.Element {
           </div>
         </Section>
 
-        <PromoCallout
-          url="/blog"
-          linkText="Read Now"
-          text="Get up-to-date Pulsar insights on the blog"
-        />
+        <div className={s.PromoCallout}>
+          <h3>Get up-to-date Pulsar insights on the blog.</h3>
+          <Button
+            title="Read Now"
+            variant="action"
+            href={`${useBaseUrl("blog")}`}
+          />
+        </div>
       </Page>
     </Layout>
   );

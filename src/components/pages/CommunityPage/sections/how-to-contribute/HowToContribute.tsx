@@ -29,10 +29,6 @@ const HowToContribute: React.FC = () => {
           type: "normal",
         },
       ],
-      image: {
-        src: useBaseUrl("img/contribute.svg"),
-        size: "big",
-      },
     },
     {
       title: "Reporting Bugs",
@@ -49,10 +45,6 @@ const HowToContribute: React.FC = () => {
           running and on which environment.
         </>
       ),
-      image: {
-        src: useBaseUrl("img/report-bugs.svg"),
-        size: "big",
-      },
     },
     {
       title: "Reporting a Vulnerability",
@@ -78,10 +70,6 @@ const HowToContribute: React.FC = () => {
           This is a private mailing list.
         </>
       ),
-      image: {
-        src: useBaseUrl("img/report-vulnerability.svg"),
-        size: "big",
-      },
     },
   ];
 
