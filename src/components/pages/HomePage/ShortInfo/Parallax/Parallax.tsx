@@ -33,7 +33,7 @@ const Parallax = (props: ParallaxProps) => {
       <div
         className={s.component}
         style={{
-          transform: `translateY(-${scrollPosition * 0.5}px)`,
+          transform: `translateY(-${scrollPosition * 0.5}px) translateZ(0)`,
           opacity: 1 - scrollPosition / (isBrowser ? window.innerHeight : 1)
         }}
       >
