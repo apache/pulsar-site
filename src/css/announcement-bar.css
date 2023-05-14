@@ -22,7 +22,7 @@ div[class^="announcementBar"][role="banner"] .announcement-bar {
   justify-content: flex-start;
   align-items: center;
   height: 2.4rem;
-  padding: 0 4rem;
+  padding: 0 1rem;
   background-color: #282826;
   color: #F6F6F6;
   margin: 0 auto;
@@ -38,6 +38,7 @@ div[class^="announcementBar"][role="banner"] .announcement-bar:hover {
 div[class^="announcementBar"][role="banner"] .announcement-bar__icon {
   width: 1.6rem;
   height: 1.6rem;
+  padding: 1px; /* Fix icon crop in Safari */
 }
 
 div[class^="announcementBar"][role="banner"] .announcement-bar__icon:first-child {
@@ -46,4 +47,10 @@ div[class^="announcementBar"][role="banner"] .announcement-bar__icon:first-child
 
 div[class^="announcementBar"][role="banner"] .announcement-bar__icon:last-child {
   margin-left: 1rem;
+}
+
+@media (max-width: 480px) {
+  div[class^="announcementBar"][role="banner"] .announcement-bar {
+    font-size: 0.75rem;
+  }
 }
