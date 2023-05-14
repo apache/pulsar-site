@@ -22,17 +22,19 @@ const arrowIcon = `
 function renderAnnouncementBar(html, href) {
   return `
     <a class="announcement-bar" href="${href}" target="_blank">
-      <svg class="announcement-bar__icon">
-        ${boltIcon}
-      </svg>
+      <div class="announcement-bar__content">
+        <svg class="announcement-bar__icon">
+          ${boltIcon}
+        </svg>
 
-      <span>
-        ${html}
-      </span>
+        <span>
+          ${html}
+        </span>
 
-      <svg class="announcement-bar__icon">
-        ${arrowIcon}
-      </svg>
+        <svg class="announcement-bar__icon">
+          ${arrowIcon}
+        </svg>
+      </div>
     </a>
   `;
 }
