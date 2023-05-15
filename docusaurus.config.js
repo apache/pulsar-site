@@ -400,6 +400,19 @@ module.exports = {
       "content-docs",
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
       ({
+        id: "contribute",
+        path: "contribute",
+        routeBasePath: "contribute",
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+        sidebarPath: require.resolve("./sidebarsDevelopment.js"),
+        editUrl: `${githubSiteUrl}/edit/main`,
+      }),
+    ],
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
         id: "release-notes",
         path: "release-notes",
         routeBasePath: "release-notes",
