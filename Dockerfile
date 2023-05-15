@@ -21,9 +21,7 @@ WORKDIR /bulid-site
 
 COPY . .
 
-RUN corepack enable
-RUN yarn install
-RUN yarn build
+RUN corepack enable && yarn install && yarn build
 
 FROM httpd:2.4.54-alpine
 

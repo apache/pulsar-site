@@ -17,11 +17,10 @@
 
 version: "3.1"
 services:
-  web:
-    image: httpd:2.4.54-alpine
+  site:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
-      - "80:80"
-    volumes:
-      - ./build:/usr/local/apache2/htdocs
-      - ./tools/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - "3000:80"
     container_name: pulsar_site
