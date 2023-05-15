@@ -87,7 +87,7 @@ export const genCount = (values) => {
 
 export const getStyle = (name) => {
   if (name === "client") return { height: '45rem' };
-  if (name === "producer") return { height: '60rem' };
+  if (name === "producer") return { height: '62rem' };
   // if (name === 'consumer') return "h-[1450px]";
   if (name === "consumer") return { height: '60rem' };
   if (name === "reader") return { height: '25rem' };
