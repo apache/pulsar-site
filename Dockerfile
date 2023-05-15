@@ -15,12 +15,17 @@
 # specific language governing permissions and limitations
 # under the License.
 
-version: "3.1"
-services:
-  site:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:80"
-    container_name: pulsar_site
+FROM node:20-bullseye as build
+
+WORKDIR /bulid-site
+
+COPY . .
+
+RUN corepack enable && yarn install && yarn build
+
+FROM httpd:2.4.54-alpine
+
+COPY --from=build /bulid-site/build /usr/local/apache2/htdocs
+COPY tools/conf/httpd.conf /usr/local/apache2/conf/httpd.conf
+
+EXPOSE 80
