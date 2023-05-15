@@ -22,31 +22,34 @@ const ArticleThumb = () => {
         thumb_style['cursor'] = "pointer"
     }
     return (
-        <div className="border">
-            <div style={{color: 'var(--ifm-toc-link-color)'}}>
-                Was this helpful?
-            </div>
-            <div style={card_style}>
-                <div style={{
-                    ...thumb_style,
-                    background: activeKey === 'up' ? "#84bef5" : "",
-                    color: activeKey === 'up' ? "#e9f1f2" : "",
-                }}
-                     onClick={() => handleThumbClick('up')}
-                >
-                    <ThumbUp/>
-                </div>
-                <div style={{
-                    ...thumb_style, marginLeft: '30px',
-                    background: activeKey === 'down' ? "#84bef5" : "",
-                    color: activeKey === 'down' ? "#e9f1f2" : "",
-                }}
-                     onClick={() => handleThumbClick('down')}
-                >
-                    <ThumbDown/>
-                </div>
-            </div>
+      <div className="border">
+        <div style={{ color: "var(--ifm-toc-link-color)" }}>
+          Was this helpful?
         </div>
+        <div style={card_style}>
+          <div
+            style={{
+              ...thumb_style,
+              background: activeKey === "up" ? "var(--text-color)" : "",
+              color: activeKey === "up" ? "#fff" : "",
+            }}
+            onClick={() => handleThumbClick("up")}
+          >
+            <ThumbUp />
+          </div>
+          <div
+            style={{
+              ...thumb_style,
+              marginLeft: "30px",
+              background: activeKey === "down" ? "var(--text-color)" : "",
+              color: activeKey === "down" ? "#fff" : "",
+            }}
+            onClick={() => handleThumbClick("down")}
+          >
+            <ThumbDown />
+          </div>
+        </div>
+      </div>
     );
 };
 
