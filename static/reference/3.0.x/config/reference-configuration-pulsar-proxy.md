@@ -262,7 +262,7 @@ Number of threads to use for HTTP requests processing
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `20`
 
 **Dynamic**: `false`
 
@@ -849,7 +849,7 @@ The directory where nar Extraction happens
 
 **Type**: `java.lang.String`
 
-**Default**: `/var/folders/sx/ws7wtlmn3t1bhrdlsfbmlv6r0000gn/T/`
+**Default**: `/var/folders/n2/rnpcrm6x3mb2c1jn1dkdb33c0000gn/T/`
 
 **Dynamic**: `false`
 
@@ -871,7 +871,7 @@ Number of threads used for Netty IO. Default is set to `2 * Runtime.getRuntime()
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `20`
 
 **Dynamic**: `false`
 

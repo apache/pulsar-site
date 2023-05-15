@@ -3150,7 +3150,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `2048`
+**Default**: `4096`
 
 **Dynamic**: `true`
 
@@ -3429,7 +3429,7 @@ Number of threads to use for pulsar broker service. The executor in thread pool 
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -3440,7 +3440,7 @@ Number of threads to use for HTTP requests processing Default is set to `2 * Run
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `20`
 
 **Dynamic**: `false`
 
@@ -3451,7 +3451,7 @@ Number of threads to use for Netty IO. Default is set to `2 * Runtime.getRuntime
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `20`
 
 **Dynamic**: `false`
 
@@ -3473,7 +3473,7 @@ Number of worker threads to serve non-persistent topic
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -3962,7 +3962,7 @@ Number of BookKeeper client IO threads. Default is Runtime.getRuntime().availabl
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `20`
 
 **Dynamic**: `false`
 
@@ -3973,7 +3973,7 @@ Number of BookKeeper client worker threads. Default is Runtime.getRuntime().avai
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -4341,7 +4341,7 @@ The directory where nar Extraction of offloaders happens
 
 **Type**: `java.lang.String`
 
-**Default**: `/var/folders/sx/ws7wtlmn3t1bhrdlsfbmlv6r0000gn/T/`
+**Default**: `/var/folders/n2/rnpcrm6x3mb2c1jn1dkdb33c0000gn/T/`
 
 **Dynamic**: `false`
 
@@ -4511,7 +4511,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `819`
+**Default**: `1638`
 
 **Dynamic**: `true`
 
@@ -4832,7 +4832,7 @@ Number of threads to be used for managed ledger scheduled tasks
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -5074,7 +5074,7 @@ Number of threads to use for pulsar transaction replay PendingAckStore or Transa
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -5217,7 +5217,7 @@ Number of connections per Broker in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -5239,7 +5239,7 @@ Number of IO threads in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 **Dynamic**: `false`
 

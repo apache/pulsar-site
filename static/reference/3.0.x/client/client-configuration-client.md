@@ -175,14 +175,14 @@ Number of IO threads.
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 ### numListenerThreads
 Number of consumer listener threads.
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `10`
 
 ### operationTimeoutMs
 Client operation timeout (in milliseconds).
