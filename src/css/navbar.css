@@ -52,7 +52,15 @@
   flex-direction: row-reverse;
 }
 
-.pill-btn {
+.navbar_download_button {
+  background-color: var(--ifm-color-primary);
+  color: #fff !important;
+  padding: 6px 24px;
+  font-weight: 500;
+  height: 3rem;
+  justify-content: center;
+  white-space: nowrap;
+  background-color: var(--text-color);
   margin-bottom: 0;
   margin-right: 0;
   margin-left: 0.8rem;
@@ -64,14 +72,9 @@
   display: inline-flex;
   font-size: 1rem;
 }
-.pill-btn:hover {
-  opacity: 0.5;
-}
 
-.navbar-download-button {
-  color: var(--color-primary);
-  font-weight: bold;
-  margin-right: 0.7rem;
+.navbar_download_button:hover {
+  opacity: 0.5;
 }
 
 .DocSearch-Button-Keys {
@@ -129,12 +132,17 @@
   .DocSearch-Button {
     display: none !important;
   }
-  .download-btn {
+  .navbar_download_button {
     display: none;
   }
-  .navbar-sidebar .download-btn {
+  .navbar-sidebar .navbar_download_button {
     display: inline-flex;
     margin-top: 1rem;
     margin-left: 0.5rem;
+  }
+
+  li:has(> .navbar_download_button) {
+    position: absolute;
+    bottom: 2rem;
   }
 }

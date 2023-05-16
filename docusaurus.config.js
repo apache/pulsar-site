@@ -272,7 +272,7 @@ module.exports = {
           to: "/download",
           label: "Download",
           position: "right",
-          className: "download-btn pill-btn grey",
+          className: "navbar_download_button",
         },
       ],
     },
