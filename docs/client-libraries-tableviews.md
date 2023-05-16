@@ -28,7 +28,7 @@ values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
     .create()
   ```
 
-You can use the available parameters in the `loadConf` configuration or the API [`TableViewBuilder`](/api/client/@pulsar:version_number@/org/apache/pulsar/client/api/TableViewBuilder.html) to customize your TableView.
+You can use the available parameters in the `loadConf` configuration or the API [`TableViewBuilder`](/api/client/org/apache/pulsar/client/api/TableViewBuilder.html) to customize your TableView.
 
   | Name | Type| Required? |  <div>Description</div> | Default
   |---|---|---|---|---
