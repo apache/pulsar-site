@@ -14,7 +14,7 @@ const Users: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <div className={s.block}>
+    <section className={s.block}>
       <div className={s.container}>
         <div className={s.title_container}>
           <ScreenTitle>
@@ -60,7 +60,7 @@ const Users: React.FC = () => {
           )}
         </BrowserOnly>
       </div>
-    </div>
+    </section>
   )
 }
 

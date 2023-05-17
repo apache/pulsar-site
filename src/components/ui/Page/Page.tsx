@@ -10,8 +10,8 @@ const Page: React.FC<PageProps> = (props) => {
     <section className={s.Page}>
       <div className={s.PageContent}>
         {props.children}
-        </div>
-      </section>
+      </div>
+    </section>
   )
 };
 

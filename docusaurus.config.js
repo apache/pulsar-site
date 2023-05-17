@@ -160,6 +160,8 @@ module.exports = {
       logo: {
         alt: "Apache Pulsar logo",
         src: "img/logo-black.svg",
+        width: 127,
+        height: 25
       },
       items: [
         {

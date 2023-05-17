@@ -11,7 +11,7 @@ const ShortInfo: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <div className={`${s.block}`}>
+    <section className={`${s.block}`}>
       <div className={`${s.container} ${s.short_container}`}>
         <Parallax>
           <div className={s.docs_container}>
@@ -63,7 +63,7 @@ const ShortInfo: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

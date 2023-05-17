@@ -8,7 +8,7 @@ import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
 
 const Features = () => {
   return (
-    <div className={s.block}>
+    <section className={s.block}>
       <div className={s.container}>
         <ScreenTitle>
           Pulsar features
@@ -60,7 +60,7 @@ const Features = () => {
           </Slider>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
