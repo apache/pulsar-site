@@ -314,20 +314,35 @@ module.exports = {
           items: [
             {
               html: `
-                              <div class="social-icons">
-                                <a target="_blank" href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"><img src="/img/slack-white.svg" width="26"></a>
-                                <a target="_blank" href="https://github.com/apache/pulsar/"><img src="/img/github-white.svg" width="26"></a>
-                              </div>
-                              `,
+                <div class="social-icons">
+                  <a
+                    target="_blank"
+                    href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"
+                    aria-label="Join the Apache Pulsar Slack workspace"
+                  >
+                    <img alt="Slack logo" src="/img/slack-white.svg" width="26">
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://github.com/apache/pulsar/"
+                    aria-label="View the Apache Pulsar project on GitHub"
+                  >
+                    <img alt="GitHub logo" src="/img/github-white.svg" width="26">
+                  </a>
+                </div>
+              `,
             },
           ],
         },
       ],
       copyright: `
-                            <div><img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">Apache Foundation</div>
-                            <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
-                            <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
-                        `,
+        <div>
+          <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
+          Apache Foundation
+        </div>
+        <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+        <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
+      `,
     },
     prism: {
       theme: require("prism-react-renderer/themes/dracula"),
@@ -454,7 +469,7 @@ module.exports = {
         "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
       crossorigin: "anonymous",
       media: "print", // load CSS asynchronously to increase performance of page first load
-      onload: "this.media='all'" // load CSS asynchronously to increase performance of page first load
+      onload: "this.media='all'", // load CSS asynchronously to increase performance of page first load
     },
   ],
 };
