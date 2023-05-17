@@ -7,7 +7,6 @@ import RightButton from './img/rightButton.svg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import s from './Slider.module.css';
-import './styles.css';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type SliderProps = {
@@ -23,7 +22,7 @@ const Slider = (props: SliderProps) => {
     const { className, style, onClick } = props;
     return (
       <RightButton
-        className={`${className} ${s.arrow_button} ${s.next_button}`}
+        className={`${className} ${s.ArrowButton} ${s.NextButton}`}
         style={{ ...style, left: '70' }}
         onClick={onClick}
       />
@@ -34,7 +33,7 @@ const Slider = (props: SliderProps) => {
     const { className, style, onClick } = props;
     return (
       <LeftButton
-        className={`${className} ${s.arrow_button} ${s.prev_button}`}
+        className={`${className} ${s.ArrowButton} ${s.PrevButton}`}
         style={{ ...style, left: '10' }}
         onClick={onClick}
       />
@@ -60,6 +59,8 @@ const Slider = (props: SliderProps) => {
     slidesToShow: props.slidesToShow,
     slidesToScroll: 1,
     centerPadding: "60px",
+    swipeToSlide: true,
+    touchThreshold: 3,
     centerMode: props.centerMode || false,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -78,9 +79,11 @@ const Slider = (props: SliderProps) => {
   return (
     <BrowserOnly>
       {() => (
-        <SlickSlider {...settings}>
-          {props.children}
-        </SlickSlider>
+        <div className={s.Slider}>
+          <SlickSlider {...settings}>
+            {props.children}
+          </SlickSlider>
+        </div>
       )}
     </BrowserOnly>
   )

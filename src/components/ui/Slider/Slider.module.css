@@ -1,27 +1,40 @@
-.arrow_button {
+.Slider :global(.slick-track) {
+  display: flex;
+  align-items: center;
+}
+
+.ArrowButton {
   top: 102.5%;
   width: 48px;
   height: 48px;
 }
 
-.prev_button {
+.PrevButton {
   right: unset !important;
   left: 0 !important;
 }
 
-.next_button {
+.NextButton {
   right: unset !important;
   left: 4rem !important;
 }
 
-
-.arrow_button:hover {
+.ArrowButton:hover {
   opacity: 0.5;
 }
 
+:global(.slick-dots li.slick-active button:before) {
+  color: var(--text-color);
+  opacity: 1;
+}
 
-@media (max-width: 1000px) {
-  .arrow_button {
+:global(.slick-dots li button:before) {
+  font-size: 0.6rem;
+  opacity: 0.2;
+}
+
+@media (max-width: 1300px) {
+  .ArrowButton {
     transform: translate(1rem, 0);
   }
 }

@@ -9,7 +9,7 @@ const testimonials: Testimonial[] = [
     author: "Greg Methvin",
     company: "Iterable",
     text:
-      "Pulsar is unique in that it supports both streaming and queueing use cases, while also supporting a wide feature set that makes it a viable alternative to many other distributed messaging technologies currently being used in our architecture. Pulsar covers all of our use cases for Kafka, RabbitMQ, and SQS. This lets us focus on building expertise and tooling around a single unified system",
+      "Pulsar is unique in that it supports both streaming and queueing use cases, while also supporting a wide feature set that makes it a viable alternative to many other distributed messaging technologies currently being used in our architecture. Pulsar covers all of our use cases for Kafka, RabbitMQ, and SQS. This lets us focus on building expertise and tooling around a single unified system.",
   },
   {
     author: "Weisheng Xie",
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     author: "Bin Liu",
     company: "Ksyun",
     text:
-      "With Pulsar, we can scale up partitions and merge partitions easily, and process millions of topics",
+      "With Pulsar, we can scale up partitions and merge partitions easily, and process millions of topics.",
   },
 ];
 
