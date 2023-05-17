@@ -453,6 +453,8 @@ module.exports = {
       integrity:
         "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
       crossorigin: "anonymous",
+      media: "print", // load CSS asynchronously to increase performance of page first load
+      onload: "this.media='all'" // load CSS asynchronously to increase performance of page first load
     },
   ],
 };
