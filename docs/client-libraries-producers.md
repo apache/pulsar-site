@@ -41,9 +41,9 @@ Producer<String> producer = pulsarClient.newProducer(Schema.STRING)
 </Tabs>
 ````
 
-## Send messages
+## Publish messages
 
-This example shows how to send messages using producers.
+This example shows how to publish messages synchronously using producers. The call will be blocked until the broker tells us that the message has been successfully published.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -53,12 +53,9 @@ This example shows how to send messages using producers.
 
    ```java
   producer.newMessage()
-          .key("my-message-key")
           .value("my-sync-message")
           .send();
    ```
-
-   You can terminate the builder chain with `sendAsync()` and get a future return.
 
   </TabItem>
 
@@ -66,8 +63,7 @@ This example shows how to send messages using producers.
 
   ```cpp
   Message msg = MessageBuilder()
-                      .setContent("content")
-                      .setPartitionKey("my-message-key")
+                      .setContent("my-sync-message")
                       .build();
   Result res = producer.send(msg);
   ```
@@ -78,13 +74,7 @@ This example shows how to send messages using producers.
 
    ```go
     msg := pulsar.ProducerMessage{
-        Payload: []byte("Here is some message data"),
-        Key: "message-key",
-        Properties: map[string]string{
-            "foo": "bar",
-        },
-        EventTime: time.Now(),
-        ReplicationClusters: []string{"cluster1", "cluster3"},
+        Payload: []byte("my-sync-message"),
     }
 
     if _, err := producer.send(msg); err != nil {
@@ -99,16 +89,7 @@ This example shows how to send messages using producers.
 
    ```javascript
    const msg = {
-   data: Buffer.from('Hello, Pulsar'),
-   partitionKey: 'key1',
-   properties: {
-       'foo': 'bar',
-   },
-   eventTimestamp: Date.now(),
-   replicationClusters: [
-       'cluster1',
-       'cluster2',
-   ],
+   data: Buffer.from('my-sync-message'),
    }
 
    await producer.send(msg);
