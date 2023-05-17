@@ -91,7 +91,7 @@ When using mTLS authentication, clients connect via TLS transport. You need to c
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"C++","value":"C++"},{"label":"Node.js","value":"Node.js"},{"label":"Go","value":"Go"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"C++","value":"C++"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"}]}>
 <TabItem value="Java">
 
 ```java
@@ -154,17 +154,6 @@ const Pulsar = require('pulsar-client');
     tlsTrustCertsFilePath: '/path/to/ca.cert.pem',
   });
 })();
-```
-
-</TabItem>
-<TabItem value="Go">
-
-```go
-client, err := pulsar.NewClient(ClientOptions{
-		URL:                   "pulsar+ssl://broker.example.com:6651/",
-		TLSTrustCertsFilePath: "/path/to/ca.cert.pem",
-		Authentication:        pulsar.NewAuthenticationTLS("/path/to/my-role.cert.pem", "/path/to/my-role.key-pk8.pem"),
-	})
 ```
 
 </TabItem>
