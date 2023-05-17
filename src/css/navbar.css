@@ -5,6 +5,7 @@
   --ifm-navbar-shadow: none;
   --ifm-navbar-height: 6rem;
   --ifm-dropdown-hover-background-color: var(--surface-color);
+  --ifm-menu-link-padding-horizontal: 1rem;
 }
 
 .navbar {
@@ -18,6 +19,10 @@
   align-items: center;
   width: 100%;
   max-width: var(--max-content-width);
+}
+
+.menu__list-item-collapsible {
+  border-radius: 0;
 }
 
 .navbar .navbar__item {
@@ -38,10 +43,9 @@
 .navbar .navbar__item .dropdown__link {
   font-size: 1rem;
   font-weight: 500;
-  height: 3rem;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0.75rem 1rem;
   margin: 0;
   border-radius: 0;
 }
@@ -57,19 +61,23 @@
 }
 
 .navbar .menu__link {
-  height: 3rem;
   font-weight: 600;
   font-size: 1.25rem;
   color: var(--text-color);
   border-radius: 0;
-  padding: 0 1rem;
+  padding: 0.75rem 1rem;
 }
 
 .navbar .menu__link:hover {
-  background-color: #fff !important;
   color: var(--text-color);
 }
 
+.navbar .menu__link,
+.navbar .menu__caret {
+  border-radius: 0;
+}
+
+.navbar .menu__caret:before,
 .navbar .menu__link--sublist-caret:after {
   content: '';
   border: none !important;
@@ -89,6 +97,11 @@
 
 .navbar .menu__list .menu__list {
   padding-left: 0rem;
+  margin-top: 0;
+}
+
+.navbar .menu__list-item:not(:first-child) {
+  margin-top: 0;
 }
 
 .navbar .menu__list .menu__list .menu__link {
@@ -120,7 +133,6 @@
   background-repeat: no-repeat;
   width: 1.5rem;
   height: 1.5rem;
-
 }
 
 .navbar__items:first-of-type .navbar__item:first-of-type {
@@ -141,7 +153,6 @@
   color: #fff !important;
   padding: 6px 24px;
   font-weight: 500;
-  height: 3rem;
   justify-content: center;
   white-space: nowrap;
   background-color: var(--text-color);
@@ -160,6 +171,12 @@
 .navbar .navbar_download_button:hover {
   background-color: var(--text-color) !important;
   opacity: 0.5 !important;
+}
+
+.navbar .navbar-sidebar__back {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0;
+  top: 0;
 }
 
 .DocSearch-Button-Keys {
