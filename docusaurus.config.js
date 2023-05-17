@@ -158,7 +158,7 @@ module.exports = {
     navbar: {
       title: "",
       logo: {
-        alt: "pulsar logo",
+        alt: "Apache Pulsar logo",
         src: "img/logo-black.svg",
       },
       items: [
