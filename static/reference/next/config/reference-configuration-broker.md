@@ -3578,17 +3578,6 @@ Path for the file used to determine the rotation status for the broker when resp
 
 **Category**: Server
 
-### streamingDispatch
-Whether to use streaming read dispatcher. Currently is in preview and can be changed in subsequent release.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### strictBookieAffinityEnabled
 Enable or disable strict bookie affinity.
 
