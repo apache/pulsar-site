@@ -48,7 +48,7 @@ const ShortInfo: React.FC = () => {
 
             <p>
               Apache Pulsar is an all-in-one messaging and streaming platform.
-              Messages can be consumed and acknowledged individually or consumed as streams with <strong>less than 5ms of latency</strong>.
+              Messages can be consumed and acknowledged individually or consumed as streams with <strong>less than 10ms of latency</strong>.
               Its layered architecture allows <strong>rapid scaling</strong> across hundreds of nodes, <strong>without data reshuffling</strong>.
             </p>
 
