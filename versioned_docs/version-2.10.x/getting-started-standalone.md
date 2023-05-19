@@ -24,7 +24,7 @@ By default, Pulsar allocates 2G JVM heap memory to start. It can be changed in `
 
 :::
 
-:::note
+:::info
 
 Broker is only supported on 64-bit JVM.
 
@@ -151,7 +151,7 @@ pulsar-io-aerospike-@pulsar:version@.nar
 ...
 ```
 
-:::note
+:::info
 
 * If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker (or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
 * If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or [DC/OS](https://dcos.io/), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled [all built-in connectors](io-overview.md#working-with-connectors).
@@ -199,7 +199,7 @@ tiered-storage-jcloud-@pulsar:version@.nar
 
 For more information on how to configure tiered storage, see [Tiered storage cookbook](cookbooks-tiered-storage.md).
 
-:::note
+:::info
 
 * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's pulsar directory.
 * If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md) or DC/OS), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.

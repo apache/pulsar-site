@@ -8,7 +8,7 @@ Apache Pulsar supports authenticating clients using [OpenID Connect](https://ope
 
 The source code for the OpenID Connect implementation is in the [pulsar-broker-auth-oidc](https://github.com/apache/pulsar/blob/master/pulsar-broker-auth-oidc/) submodule in the Apache Pulsar git repo.
 
-:::note
+:::info
 Pulsar's OpenID Connect integration was introduced in Pulsar 3.0.0. As always, if you encounter any issues, please ask questions on Pulsar channels and open issues in GitHub.
 :::
 
@@ -66,13 +66,13 @@ PULSAR_PREFIX_openIDRequireIssuersUseHttps=true
 PULSAR_PREFIX_openIDFallbackDiscoveryMode=DISABLED
 ```
 
-:::note
+:::info
 
 When using OIDC for a client connecting through the proxy to the broker, it is necessary to set the broker's `openIDAcceptedTimeLeewaySeconds` to double the proxy's `authenticationRefreshCheckSeconds` configuration because the proxy caches the client's token and only refreshes it when it is expired. As such, in certain cases, when the proxy initiates a new connection to the broker, the token may not yet be expired in the proxy, but may be expired when it reaches the broker. You can mitigate this edge case by setting the broker's `openIDAcceptedTimeLeewaySeconds` correctly.
 
 :::
 
-:::note
+:::info
 The Pulsar WebSocket Proxy does not yet support OpenID Connect authentication. Here is an issue tracking this feature: [#20236](https://github.com/apache/pulsar/issues/20236).
 :::
 
@@ -111,7 +111,7 @@ The available values for `openIDFallbackDiscoveryMode` are: `DISABLED`, `KUBERNE
 2. `KUBERNETES_DISCOVER_TRUSTED_ISSUER`: The Kubernetes API Server will be used to discover an additional trusted issuer by getting the issuer at the API Server's `/.well-known/openid-configuration` endpoint, verifying that issuer matches the `iss` claim on the supplied token, then treating that issuer as a trusted issuer by discovering the `jwks_uri` via that issuer's `/.well-known/openid-configuration` endpoint. This mode can be helpful in EKS environments where the API Server's public keys served at the `/openid/v1/jwks` endpoint are not the same as the public keys served at the issuer's `jwks_uri`. It fails to be OIDC compliant because the URL used to discover the provider configuration is not the same as the issuer claim on the token.
 3. `KUBERNETES_DISCOVER_PUBLIC_KEYS`: The Kubernetes API Server will be used to discover an additional set of valid public keys by getting the issuer at the API Server's `/.well-known/openid-configuration` endpoint, verifying that issuer matches the `iss` claim on the supplied token, then calling the API Server endpoint to get the public keys using a Kubernetes client. This mode is currently useful for getting the public keys from the API Server because the API Server requires custom TLS and authentication, and the Kubernetes client automatically handles those. It fails to be OIDC compliant because the URL used to discover the provider configuration is not the same as the issuer claim on the token.
 
-:::note
+:::info
 
 When deploying with either `KUBERNETES_DISCOVER_TRUSTED_ISSUER` or `KUBERNETES_DISCOVER_PUBLIC_KEYS`, you will likely encounter an error like the following `forbidden: User \"system:serviceaccount:pulsar:superuser\" cannot get path \"/.well-known/openid-configuration/\"`. That error is a result of https://github.com/kubernetes/kubernetes/issues/117455, which happens because the `AuthenticationProviderOpenID` plugin uses the Java Kubernetes client to connect to the Kubernetes API Server. The solution, which is minimally invasive, is to run the following command against your target Kubernetes cluster:
 

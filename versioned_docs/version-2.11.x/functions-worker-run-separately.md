@@ -8,7 +8,7 @@ The following diagram illustrates how function workers run as a separate process
 
 ![assets/functions-worker-separated.svg](/assets/function-workers-separated.svg)
 
-:::note
+:::info
 
 The `Service URLs` in the illustration represent Pulsar service URLs that Pulsar client and Pulsar admin use to connect to a Pulsar cluster.
 
@@ -21,7 +21,7 @@ To set up function workers that run separately, complete the following steps:
 
 ## Configure function workers to run separately
 
-:::note
+:::info
 
 To run function workers separately, you need to keep `functionsWorkerEnabled` as its default value (`false`) in the `conf/broker.conf` file.
 
@@ -35,7 +35,7 @@ Configure the required parameters for workers in the `conf/functions_worker.yml`
 - `workerPort`: The port that the worker server listens on. Keep it as default if you don't customize it. Set it to `null` to disable the plaintext port.
 - `workerPortTls`: The TLS port that the worker server listens on. Keep it as default if you don't customize it. For more information about TLS encryption settings, refer to [settings](#enable-tls-encryption).
 
-:::note
+:::info
 
 When accessing function workers to manage functions, the `pulsar-admin` CLI or any of the clients should use the configured `workerHostname` and `workerPort` to generate an `--admin-url`.
 
@@ -45,7 +45,7 @@ When accessing function workers to manage functions, the `pulsar-admin` CLI or a
 
 Configure the `numFunctionPackageReplicas` parameter in the `conf/functions_worker.yml` file. It indicates the number of replicas to store function packages.
 
-:::note
+:::info
 
 To ensure high availability in a production deployment, set `numFunctionPackageReplicas` to equal the number of bookies. The default value `1` is only for one-node cluster deployment.
 
@@ -67,7 +67,7 @@ If authentication is enabled on your broker cluster, you must configure the foll
 
 When you run a function worker separately in a cluster configured with authentication, your function worker needs to communicate with the broker and authenticate incoming requests. Thus you need to configure the properties that the broker requires for authentication and authorization.
 
-:::note
+:::info
 
 You must configure both the function worker authentication and authorization for the server to authenticate incoming requests and configure the client to be authenticated to communicate with the broker.
 
@@ -155,7 +155,7 @@ properties:
   # tokenPublicKey:     file://path/to/public.key
 ```
 
-:::note
+:::info
 
 Key files must be DER (Distinguished Encoding Rules)-encoded.
 
@@ -191,7 +191,7 @@ If authentication is enabled on the BookKeeper cluster, you need to configure th
 
 ## Start function workers
 
-:::note
+:::info
 
 Before starting function workers, make sure [function runtime](functions-runtime.md) is configured.
 

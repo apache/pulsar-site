@@ -4,7 +4,7 @@ title: Flume source connector
 sidebar_label: "Flume source connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

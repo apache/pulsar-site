@@ -35,7 +35,7 @@ $ npm install pulsar-client
 
 ```
 
-:::note
+:::info
 
 Also, this library works only in Node.js 10.x or later because it uses the [`node-addon-api`](https://github.com/nodejs/node-addon-api) module to wrap the C++ library.
 

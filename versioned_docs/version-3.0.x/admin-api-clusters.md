@@ -27,7 +27,7 @@ You can perform the following operations on [clusters](reference-terminology.md#
 
 You can provision new clusters using the admin interface.
 
-:::note
+:::info
 
 - This operation requires superuser privileges.
 

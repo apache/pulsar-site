@@ -110,7 +110,7 @@ This hands-on tutorial provides step-by-step instructions and examples on how to
 
 ## Start functions
 
-:::note
+:::info
 
 Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) and [create a test namespace](#create-a-namespace-for-test).
 
@@ -284,7 +284,7 @@ The standalone mode of Pulsar enables BookKeeper table service for stateful func
 
 The following example provides instructions to validate counter functions.
 
-:::note
+:::info
 
 Before starting stateful functions, you need to [start Pulsar](#start-standalone-pulsar) and [create a test namespace](#create-a-namespace-for-test).
 
@@ -469,7 +469,7 @@ Window functions are a special form of Pulsar Functions. For more information, s
 
 The following example provides instructions to start a window function to calculate the sum in a window.
 
-:::note
+:::info
 
 Before starting window functions, you need to [start Pulsar](#start-standalone-pulsar)  and [create a test namespace](#create-a-namespace-for-test).
 

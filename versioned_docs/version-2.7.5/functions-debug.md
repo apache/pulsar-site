@@ -97,7 +97,7 @@ When you run a Pulsar Function in localrun mode, it launches an instance of the 
 
 In this mode, a Pulsar Function consumes and produces actual data to a Pulsar cluster, and mirrors how the function actually runs in a Pulsar cluster.
 
-:::note
+:::info
 
 Currently, debugging with localrun mode is only supported by Pulsar Functions written in Java. You need Pulsar version 2.4.0 or later to do the following. Even though localrun is available in versions earlier than Pulsar 2.4.0, you cannot debug with localrun mode programmatically or run Functions as threads.
 
@@ -160,7 +160,7 @@ To use localrun mode programmatically, add the following dependency.
 
 For complete code samples, see [here](https://github.com/jerrypeng/pulsar-functions-demos/tree/master/debugging).
 
-:::note
+:::info
 
 Debugging with localrun mode for Pulsar Functions written in other languages will be supported soon.
 
@@ -518,7 +518,7 @@ This is my function!
 
 ```
 
-:::note
+:::info
 
 You must specify the [entire topic name](getting-started-pulsar.md#topic-names) when using the `--topic` option. Otherwise, the following error occurs.
 

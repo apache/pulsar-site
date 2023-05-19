@@ -77,7 +77,7 @@ You can have different types of access modes on topics for producers.
 `Exclusive`|Only one producer can publish on a topic. <br /><br />If there is already a producer connected, other producers trying to publish on this topic get errors immediately.<br /><br />The "old" producer is evicted and a "new" producer is selected to be the next exclusive producer if the "old" producer experiences a network partition with the broker.
 `WaitForExclusive`|If there is already a producer connected, the producer creation is pending (rather than timing out) until the producer gets the `Exclusive` access.<br /><br />The producer that succeeds in becoming the exclusive one is treated as the leader. Consequently, if you want to implement the leader election scheme for your application, you can use this access mode.
 
-:::note
+:::info
 
 Once an application creates a producer with `Exclusive` or `WaitForExclusive` access mode successfully, the instance of this application is guaranteed to be the **only writer** to the topic. Any other producers trying to produce messages on this topic will either get errors immediately or have to wait until they get the `Exclusive` access.
 For more information, see [PIP 68: Exclusive Producer](https://github.com/apache/pulsar/wiki/PIP-68:-Exclusive-Producer).
@@ -110,7 +110,7 @@ By default, batch index acknowledgement is disabled (`acknowledgmentAtBatchIndex
 
 ### Chunking
 
-:::note
+:::info
 
 - Chunking is only available for persistent topics.
 - Chunking is only available for the exclusive and failover subscription types.
@@ -182,7 +182,7 @@ consumer.acknowledgeCumulative(msg);
 
 ```
 
-:::note
+:::info
 
 Cumulative acknowledgement cannot be used in the [shared subscription mode](#subscription-modes), because the shared subscription mode involves multiple consumers who have access to the same subscription. In the shared subscription mode, messages are acknowledged individually.
 
@@ -209,7 +209,7 @@ consumer.negativeAcknowledge(msg);
 
 ```
 
-:::note
+:::info
 
 If batching is enabled, all messages in one batch are redelivered to the consumer.
 
@@ -219,7 +219,7 @@ If batching is enabled, all messages in one batch are redelivered to the consume
 
 If a message is not consumed successfully, and you want the broker to redeliver this message automatically, then you can enable automatic redelivery mechanism for  unacknowledged messages. With automatic redelivery enabled, the client tracks the unacknowledged messages within the entire `acktimeout` time range, and sends a `redeliver unacknowledged messages` request to the broker automatically when the acknowledgement timeout is specified.
 
-:::note
+:::info
 
 - If batching is enabled, all messages in one batch are redelivered to the consumer.
 - The negative acknowledgement is preferable over the acknowledgement timeout, since negative acknowledgement controls the redelivery of individual messages more precisely and avoids invalid redeliveries when the message processing time exceeds the acknowledgement timeout.
@@ -271,7 +271,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 Dead letter topic depends on message redelivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout.
 
-:::note
+:::info
 
 Currently, dead letter topic is enabled in the Shared and Key_Shared subscription modes.
 
@@ -378,7 +378,7 @@ In *shared* or *round robin* mode, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer-C-1** and **Consumer-C-2** are able to subscribe to the topic, but **Consumer-C-3** and others could as well.
 
-:::note
+:::info
 
 When using shared mode, be aware that:
 * Message ordering is not guaranteed.
@@ -443,7 +443,7 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </Tabs>
 ````
 
-:::note
+:::info
 
 When you use Key_Shared mode, be aware that:
 * You need to specify a key or orderingKey for messages.
@@ -624,7 +624,7 @@ There are diverse system topics depending on namespaces. The following table out
 | User-defined-ns | `__transaction_buffer_snapshot` | Persistent | One per namespace | Transaction buffer snapshots |
 | User-defined-ns | `${topicName}__transaction_pending_ack` | Persistent | One per every topic subscription acknowledged with transactions | Acknowledgements with transactions |
 
-:::note
+:::info
 
 * You cannot create any system topics.
 * By default, system topics are disabled. To enable system topics, you need to change the following configurations in the `conf/broker.conf` or `conf/standalone.conf` file.
@@ -688,7 +688,7 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 ## Delayed message delivery
 Delayed message delivery enables you to consume a message later rather than immediately. In this mechanism, a message is stored in BookKeeper, `DelayedDeliveryTracker` maintains the time index(time -> messageId) in memory after published to a broker, and it is delivered to a consumer once the specific delayed time is passed.
 
-:::note
+:::info
 
 Only shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
 

@@ -4,7 +4,7 @@ title: Kinesis sink connector
 sidebar_label: "Kinesis sink connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

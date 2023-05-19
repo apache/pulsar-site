@@ -23,7 +23,7 @@ persistent://tenant/namespace/topic
 Non-partitioned topics in Pulsar must be explicitly created. When creating a new non-partitioned topic you
 need to provide a name for the topic.
 
-:::note
+:::info
 
 By default, after 60 seconds of creation, topics are considered inactive and deleted automatically to prevent from generating trash data.
 To disable this feature, set `brokerDeleteInactiveTopicsEnabled`  to `false`.
@@ -45,7 +45,7 @@ $ bin/pulsar-admin topics create \
 
 ```
 
-:::note
+:::info
 
 It's only allowed to create non partitioned topic of name contains suffix '-partition-' followed by numeric value like
 'xyz-topic-partition-10', if there's already a partitioned topic with same name, in this case 'xyz-topic', and has

@@ -4,7 +4,7 @@ title: HTTTP sink connector
 sidebar_label: "HTTP sink connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

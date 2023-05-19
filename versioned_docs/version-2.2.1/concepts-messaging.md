@@ -78,7 +78,7 @@ Access mode | Description
 `Exclusive`        | Only one producer can publish on a topic. <br /><br />If there is already a producer connected, other producers trying to publish on this topic get errors immediately.<br /><br />The "old" producer is evicted and a "new" producer is selected to be the next exclusive producer if the "old" producer experiences a network partition with the broker.
 `WaitForExclusive` | If there is already a producer connected, the producer creation is pending (rather than timing out) until the producer gets the `Exclusive` access.<br /><br />The producer that succeeds in becoming the exclusive one is treated as the leader. Consequently, if you want to implement a leader election scheme for your application, you can use this access mode. Note that the leader pattern scheme mentioned refers to using Pulsar as a Write-Ahead Log (WAL) which means the leader writes its "decisions" to the topic. On error cases, the leader will get notified it is no longer the leader *only* when it tries to write a message and fails on appropriate error, by the broker.
 
-:::note
+:::info
 
 Once an application creates a producer with `Exclusive` or `WaitForExclusive` access mode successfully, the instance of this application is guaranteed to be the **only writer** to the topic. Any other producers trying to produce messages on this topic will either get errors immediately or have to wait until they get the `Exclusive` access.
 For more information, see [PIP 68: Exclusive Producer](https://github.com/apache/pulsar/wiki/PIP-68:-Exclusive-Producer).
@@ -135,7 +135,7 @@ When multiple producers publish chunked messages into a single topic, the broker
 
 ![](/assets/chunking-02.png)
 
-:::note
+:::info
 
 In this case, interwoven chunked messages may bring some memory pressure to the consumer because the consumer keeps a separate buffer for each large message to aggregate all its chunks in one message. You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `maxPendingChunkedMessage` parameter. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later, optimizing memory utilization.
 
@@ -148,7 +148,7 @@ In this case, interwoven chunked messages may bring some memory pressure to the 
 The message chunking feature is OFF by default.
 To enable message chunking, set the `chunkingEnabled` parameter to `true` when creating a producer.
 
-:::note
+:::info
 
 If the consumer fails to receive all chunks of a message within a specified time period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](https://pulsar.apache.org/api/client/).
 
@@ -200,7 +200,7 @@ consumer.acknowledgeCumulative(msg);
 
 ```
 
-:::note
+:::info
 
 Cumulative acknowledgement cannot be used in [Shared subscription type](#subscription-types), because Shared subscription type involves multiple consumers which have access to the same subscription. In Shared subscription type, messages are acknowledged individually.
 
@@ -270,7 +270,7 @@ Redelivery count | Redelivery delay
 6 | 10 + 32 seconds
 7 | 10 + 60 seconds
 8 | 10 + 60 seconds
-:::note
+:::info
 
 If batching is enabled, all messages in one batch are redelivered to the consumer.
 
@@ -310,7 +310,7 @@ Redelivery count | Redelivery delay
 7 | 10 + 60 seconds
 8 | 10 + 60 seconds
 
-:::note
+:::info
 
 - If batching is enabled, all messages in one batch are redelivered to the consumer.
 - Compared with acknowledgement timeout, negative acknowledgement is preferred. First, it is difficult to set a timeout value. Second, a broker resends messages when the message processing time exceeds the acknowledgement timeout, but these messages might not need to be re-consumed.
@@ -427,7 +427,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 
 ```
 
-:::note
+:::info
 
 *  Currently, retry letter topic is enabled in Shared subscription types.
 *  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a large number of retries with a configurable retry interval. Because messages in the retry letter topic are persisted to BookKeeper, while messages that need to be retried due to negative acknowledgment are cached on the client side.
@@ -495,7 +495,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 ```
 
 Dead letter topic serves message redelivery, which is triggered by [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement) or [retry letter topic](#retry-letter-topic) .
-:::note
+:::info
 
 * Currently, dead letter topic is enabled in Shared and Key_Shared subscription types.
 

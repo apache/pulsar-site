@@ -77,7 +77,7 @@ public void testExclamationFunction() {
 
 ## Debug with localrun mode
 
-:::note
+:::info
 
 Currently, debugging with localrun mode only supports Pulsar Functions written in Java. Users need Pulsar version 2.4.0 or later to do the following. Even though localrun is available in versions earlier than Pulsar 2.4.0, it does not have the functionality to be executed programmatically and run Functions as threads.
 
@@ -499,7 +499,7 @@ This is my function!
 
 ```
 
-:::note
+:::info
 
 You must specify the entire topic name when using the `--topic` option. Otherwise, the following error is raised.
 

@@ -144,7 +144,7 @@ pulsar::Client client("pulsar://broker.example.com:6650/", config);
     })();
 ```
 
-:::note
+:::info
 
 The support for OAuth2 authentication is only available in Node.js client 1.6.2 and later versions.
 

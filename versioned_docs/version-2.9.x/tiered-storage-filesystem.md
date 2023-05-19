@@ -45,7 +45,7 @@ This example uses Pulsar 2.5.1.
 
    ```
 
-   :::note
+   :::info
 
    * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you are running Pulsar in Docker or deploying Pulsar using a Docker image (such as K8S and DCOS), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -71,7 +71,7 @@ This example uses Pulsar 2.5.1.
 
    ```
 
-   :::note
+   :::info
 
    * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you are running Pulsar in Docker or deploying Pulsar using a Docker image (such as K8s and DCOS), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -80,7 +80,7 @@ This example uses Pulsar 2.5.1.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to filesystem, you need to configure some properties of the filesystem offloader driver.
 

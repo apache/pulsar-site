@@ -124,7 +124,7 @@ Pulsar supports the following types of automatic load shedding strategies.
 * [OverloadShedder](#overloadshedder)
 * [UniformLoadShedder](#uniformloadshedder)
 
-:::note
+:::info
 
 * From Pulsar 2.10, the **default** shedding strategy is `ThresholdShedder`.
 * You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md#dynamic-broker-configuration).
@@ -185,7 +185,7 @@ To use the `OverloadShedder` strategy, configure brokers with this value.
 
 The determination of when a broker is overloaded is based on the threshold of CPU, network, and memory usage. Whenever either of those metrics reaches the threshold, the system triggers the shedding (if enabled).
 
-:::note
+:::info
 
 The overload threshold `loadBalancerBrokerOverloadedThresholdPercentage` only applies to the [`OverloadShedder`](#overloadshedder) shedding strategy. By default, it is set to 85%.
 
@@ -254,7 +254,7 @@ The load manager follows an even distribution policy across failure domains to a
 
 ### Create a failure domain and register brokers
 
-:::note
+:::info
 
 One broker can only be registered to a single failure domain.
 

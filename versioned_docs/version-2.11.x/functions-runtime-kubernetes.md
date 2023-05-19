@@ -59,7 +59,7 @@ To enable the authentication for your Pulsar cluster, you need to specify a mech
 
 * For TLS or custom authentication, you can either implement the `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface or use an alternative mechanism.
 
-:::note
+:::info
 
 If the token you use to deploy the function has an expiration date, you may need to deploy the function again after it expires.
 
@@ -73,7 +73,7 @@ To customize Kubernetes runtime, you can set `runtimeCustomizerClassName` in the
 
 The function API provides a flag named `customRuntimeOptions`, which is passed to the `org.apache.pulsar.functions.runtime.kubernetes.KubernetesManifestCustomizer` interface. To initialize `KubernetesManifestCustomizer`, you can set `runtimeCustomizerConfig` in the `conf/functions-worker.yml` file.
 
-:::note
+:::info
 
 `runtimeCustomizerConfig` is the same across all functions. If you provide both `runtimeCustomizerConfig` and `customRuntimeOptions`, you need to decide how to manage these two configurations in your implementation of the `KubernetesManifestCustomizer` interface.
 

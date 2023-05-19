@@ -4,7 +4,7 @@ title: File source connector
 sidebar_label: "File source connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

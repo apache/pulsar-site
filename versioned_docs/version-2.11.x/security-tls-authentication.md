@@ -284,7 +284,7 @@ For example:
            .build();
    ```
 
-:::note
+:::info
 
 Configure `tlsTrustStorePath` when you set `useKeyStoreTls` to `true`.
 

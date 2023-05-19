@@ -35,7 +35,7 @@ Currently, you can produce messages to the following destinations with tools lik
 
 - Specific partitions of partitioned topics
 
-:::note
+:::info
 
 You can only produce messages to **topics that already exist** in Pulsar via REST.
 

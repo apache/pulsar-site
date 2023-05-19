@@ -131,7 +131,7 @@ $ pulsar-admin namespaces set-retention my-tenant/my-ns \
 
 {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/retention|operation/setRetention?version=@pulsar:version_number@}
 
-:::note
+:::info
 
 To disable the retention policy, you need to set both the size and time limit to `0`. Set either size or time limit to `0` is invalid.
 

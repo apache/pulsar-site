@@ -187,7 +187,7 @@ If the client does not receive a response indicating producer creation success o
 the client should first send a command to close the original producer before sending a
 command to re-attempt producer creation.
 
-:::note
+:::info
 
 Before creating or connecting a producer, you need to perform [topic lookup](#topic-lookup) first.
 
@@ -284,7 +284,7 @@ Fields:
 
 ##### Command CloseProducer
 
-:::note
+:::info
 
 This command can be sent by either producer or broker.
 
@@ -315,7 +315,7 @@ subscription is not already there, a new one will be created.
 
 ![Consumer](/assets/binary-protocol-consumer.png)
 
-:::note
+:::info
 
 Before creating or connecting a consumer, you need to perform [topic lookup](#topic-lookup) first.
 
@@ -453,7 +453,7 @@ message CommandAckResponse {
 
 ##### Command CloseConsumer
 
-:::note
+:::info
 
 This command can be sent by either producer or broker.
 

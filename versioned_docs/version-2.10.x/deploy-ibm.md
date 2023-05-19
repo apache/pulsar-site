@@ -126,7 +126,7 @@ Deploying a Pulsar cluster on IBM cloud consists of the following steps:
 3. Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) 1.23 or later versions.
 4. Install [Helm](https://helm.sh/docs/intro/install/).
 
-:::note
+:::info
 
 Please install all the above things before running the below commands
 
@@ -148,7 +148,7 @@ Output
     $ibmcloud ks cluster config --cluster ccql163t064kpvg5gg10
 ```
 
-:::note
+:::info
 
 This step is showing during creation of Kubernetes Cluster.
 
@@ -190,7 +190,7 @@ cd pulsar-helm-chart
 
 3. Run the script`prepare_helm_release.sh`to create secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
 
-:::note
+:::info
 
 When running the script, you can use `-n` to specify the Kubernetes namespace where the Pulsar Helm chart is installed,`-k`to define the Pulsar Helm release name, and `-c` to create the Kubernetes namespace. For more information about the script, run `./scripts/pulsar/prepare_helm_release.sh --help`.
 
@@ -209,7 +209,7 @@ Output
 helm install --values examples/values-minikube.yaml --set initialize=true asia apache/pulsar
 ```
 
-:::note
+:::info
 
 You need to specify `--set initialize=true` when installing Pulsar the first time. This command installs and starts Apache Pulsar.
 

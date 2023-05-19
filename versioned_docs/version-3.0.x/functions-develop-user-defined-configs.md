@@ -17,7 +17,7 @@ When you run or update functions created via SDK, you can pass arbitrary key/val
   values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
-:::note
+:::info
 
 For all key/value pairs passed to Java functions, both keys and values are `string`. To set the value to be a different type, you need to deserialize it from the `string` type.
 

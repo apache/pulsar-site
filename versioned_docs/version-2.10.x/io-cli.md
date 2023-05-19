@@ -5,7 +5,7 @@ sidebar_label: "CLI"
 original_id: io-cli
 ---
 
-:::note
+:::info
 
 **Important**
 

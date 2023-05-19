@@ -492,7 +492,7 @@ $ pulsar-admin schemas extract --classname <class-name> --jar <jar-path> --type 
 
 To delete a schema for a topic, you can use one of the following methods.
 
-:::note
+:::info
 
 In any case, the **delete** action deletes **all versions** of a schema registered for a topic.
 

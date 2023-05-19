@@ -21,7 +21,7 @@ Follow the steps below to install the Aliyun OSS offloader.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to Aliyun OSS, you need to configure some properties of the Aliyun OSS offload driver. Besides, you can also configure the Aliyun OSS offloader to run it automatically or trigger it manually.
 
@@ -91,7 +91,7 @@ export ALIYUN_OSS_ACCESS_KEY_ID=ABC123456789
 export ALIYUN_OSS_ACCESS_KEY_SECRET=ded7db27a4558e2ea8bbf0bf37ae0e8521618f366c
 ```
 
-:::note
+:::info
 
 Exporting these environment variables makes them available in the environment of spawned processes.
 

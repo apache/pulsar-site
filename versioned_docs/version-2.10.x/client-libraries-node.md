@@ -41,7 +41,7 @@ $ npm install pulsar-client
 
 ```
 
-:::note
+:::info
 
 Also, this library works only in Node.js 10.x or later because it uses the [`node-addon-api`](https://github.com/nodejs/node-addon-api) module to wrap the C++ library.
 
@@ -314,7 +314,7 @@ const consumer = await client.subscribe({
 
 ```
 
-:::note
+:::info
 
 Pulsar Node.js client uses [AsyncWorker](https://github.com/nodejs/node-addon-api/blob/main/doc/async_worker). Asynchronous operations such as creating consumers/producers and receiving/sending messages are performed in worker threads.
 Until completion of these operations, worker threads are blocked.

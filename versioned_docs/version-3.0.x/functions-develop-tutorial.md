@@ -6,7 +6,7 @@ sidebar_label: "Tutorials"
 
 ## Write a function for word count
 
-:::note
+:::info
 
 The following example is a stateful function. By default, the state of a function is disabled. See [Enable stateful functions](functions-worker-stateful.md) for more instructions.
 
@@ -90,7 +90,7 @@ The following example is a stateful function. By default, the state of a functio
 
 ## Write a window function for word count
 
-:::note
+:::info
 
 Currently, window functions are only available in Java.
 

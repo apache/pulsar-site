@@ -4,7 +4,7 @@ title: Redis sink connector
 sidebar_label: "Redis sink connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

@@ -21,7 +21,7 @@ Follow the steps below to install the Azure BlobStore offloader.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to Azure BlobStore, you need to configure some properties of the Azure BlobStore offload driver.
 

@@ -49,7 +49,7 @@ This example uses Pulsar 2.5.1.
 
    ```
 
-   :::note
+   :::info
 
    * If you run Pulsar in a bare metal cluster, ensure that the `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you run Pulsar in Docker or deploying Pulsar using a Docker image (such as K8S and DCOS), you can use the `apachepulsar/pulsar-all` image. The `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -75,7 +75,7 @@ This example uses Pulsar 2.5.1.
 
    ```
 
-   :::note
+   :::info
 
    * If you run Pulsar in a bare metal cluster, ensure that `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you run Pulsar in Docker or deploying Pulsar using a Docker image (such as K8s and DCOS), you can use the `apachepulsar/pulsar-all` image. The `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -84,7 +84,7 @@ This example uses Pulsar 2.5.1.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to filesystem, you need to configure some properties of the filesystem offloader driver.
 
@@ -371,7 +371,7 @@ fileSystemProfilePath=conf/filesystem_offload_core_site.xml
 
 ```
 
-:::note
+:::info
 
 For testing purposes, you can set the following two configurations to speed up ledger rollover, but it is not recommended that you set them in the production environment.
 
@@ -387,7 +387,7 @@ managedLedgerMaxEntriesPerLedger=100
 </TabItem>
 <TabItem value="NFS">
 
-:::note
+:::info
 
 In this section, it is assumed that you have enabled NFS service and set the shared path of your NFS service. In this section, `/Users/test` is used as the shared path of NFS service.
 

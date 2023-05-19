@@ -139,7 +139,7 @@ Now, you can see Pulsar C++ client libraries installed under the `/usr/lib` dire
 
 Now, you can see Pulsar C++ client libraries installed under the `/usr/lib` directory.
 
-:::note
+:::info
 
 If you get an error like "libpulsar.so: cannot open shared object file: No such file or directory" when starting a Pulsar client, you need to run `ldconfig` first.
 
@@ -325,7 +325,7 @@ Producer producer;
 client.createProducer("my-topic", conf, producer);
 ```
 
-:::note
+:::info
 
 To enable chunking, you need to disable batching (`setBatchingEnabled`=`false`) concurrently.
 

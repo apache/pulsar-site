@@ -5,7 +5,7 @@ sidebar_label: "Dashboard"
 original_id: administration-dashboard
 ---
 
-:::note
+:::info
 
 Pulsar dashboard is deprecated. If you want to manage and monitor the stats of your topics, use [Pulsar Manager](administration-pulsar-manager.md).
 

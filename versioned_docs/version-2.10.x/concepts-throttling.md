@@ -37,7 +37,7 @@ The process of message dispatch throttling can be divided into the following ste
 2. The broker reads the messages from the bookies.
 3. The broker dispatches the messages to the client and updates the counter to decrease the quota. A scheduled task refreshes the quota when a throttling period ends.
 
-:::note
+:::info
 
 - The quota cannot be decreased before step 3, because the broker doesn't know the actual number of messages per entry or the actual entry size until it reads the data.
 - Operations like `seek` or `redeliver` may deliver messages to a client multiple times. The broker counts them as different messages and updates the counter.
@@ -56,7 +56,7 @@ Per broker | All subscriptions in a single broker share the quota.
 Per topic | All subscriptions in the same topic share the quota.<br /><li>If it's a non-partitioned topic, the quota equals the maximum number of messages the topic can deliver per unit of time.</li><li>If a topic has multiple partitions, the quota refers to the maximum number of messages each partition can deliver per unit of time. In other words, the actual dispatch rate limit of a [partitioned topic](concepts-messaging.md#partitioned-topics) is N times the configured one (N is the number of partitions inside the topic). For example, the topic `t0` has two partitions. If you set the quota to `10/s`, then the rate limit of both `t0-p0` and `t0-p1` is `10/s`, while the total rate limit of `t0` is `20/s`. Note that the quota cannot be shared among partitions, but can be shared among subscriptions inside a partition.</li>
 Per subscription | <li>If it's a non-partitioned topic, the rate limit refers to the maximum number of messages a subscription can deliver to clients per unit of time.</li><li>If the subscribed topic has multiple partitions, the rate limit refers to the maximum number of messages the subscription can deliver per partition per unit of time. In other words, a subscription's actual dispatch rate limit for a [partitioned topic](concepts-messaging.md#partitioned-topics) is N times the configured one (N is the number of partitions inside the topic). For example, the topic `t1` has two partitions with the subscription `s1`. If you set the rate limit to `10/s`, then the rate limit for `s1` in both `t1-p0` and `t1-p1` is `10/s`, while the total rate limit of `s1` is `20/s`.</li>
 
-:::note
+:::info
 
 The dispatch rate limits configured at multiple levels take effect simultaneously (logical AND).
 
@@ -72,7 +72,7 @@ Set [broker configurations](#throttling-configurations) or [dynamic broker confi
 Set namespace policies | N/A | Refer to [Configure dispatch throttling for topics](admin-api-namespaces.md#configure-dispatch-throttling-for-topics). | Refer to [Configure dispatch throttling for subscriptions](admin-api-namespaces.md#configure-dispatch-throttling-for-subscription).
 Set topic policies | N/A | Refer to [Set topic-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/PersistentTopics_setDispatchRate). | Refer to [Set subscription-level dispatch rate](pathname:///admin-rest-api/?version=@pulsar:version_number@/#operation/PersistentTopics_setSubscriptionDispatchRate).<br />It applies to all subscriptions in a topic.
 
-:::note
+:::info
 
 The dispatch rate limits configured through the above three approaches take effect with priorities, which is "topic policies" > "namespace policies" > "broker configurations". For example, if you have configured the dispatch rate limit for a subscription using all these three approaches, only the one configured through "topic policies" takes effect.
 
@@ -91,7 +91,7 @@ preciseDispatcherFlowControl | Whether to apply a precise control on the dispatc
 dispatchThrottlingOnBatchMessageEnabled | Whether to count messages by entry (batch). By default, it's disabled.<br /><br />Note that setting it to `true` may lead to an inaccurate approximation of total message count but maximize Pulsar's throughput while keeping stable read requests to the bookies. For example, assume you've set the rate limit to `10/s`, if you set `dispatchThrottlingOnBatchMessageEnabled` to `true`, the broker only reads 10 entries and delivers them to the client per second, despite the number of messages per entry. | false
 dispatchThrottlingOnNonBacklogConsumerEnabled | Whether the dispatch throttling on non-backlog consumers is enabled. By default, it's enabled.<br />When it is set to `false`:<br /><li>If all the consumers in one subscription have no backlog, the message dispatch throttling is turned off automatically even if `dispatchThrottlingRateInMsg` and `dispatchThrottlingRateInByte` are configured.</li><li>If at least one consumer has a backlog, the throttling is turned on automatically.</li> | true
 
-:::note
+:::info
 
 - You can use `dispatchThrottlingRateInMsg` and `dispatchThrottlingRateInByte` simultaneously (logical AND).
 - Ensure that only one of `preciseDispatcherFlowControl` and `dispatchThrottlingOnBatchMessageEnabled` is enabled at one time since they are mutually exclusive. Both parameters can be used to improve the over-delivery issues (see [Limitations](#limitations)). The difference between them is:
@@ -158,7 +158,7 @@ Message dispatch throttling may cause messages over-delivered per unit of time d
 
    As a result, the total number of dispatched messages may exceed the quota.
 
-   :::note
+   :::info
 
    When over-delivery happens, and the delivered message count exceeds the quota in the current period, then the quota for the next period will be reduced accordingly. For example, if the rate limit is set to `10/s`, and `11` messages have been delivered to the client in the first period, then only up to `9` messages can be delivered to the client in the next period; if 30 messages have been delivered in the last period, the count of messages to deliver in the next two periods is `0`.
 

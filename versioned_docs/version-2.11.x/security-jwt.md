@@ -19,7 +19,7 @@ The application specifies the token when you create the client instance. The use
 eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ.ipevRNuRP6HflG8cFKnmUPtypruRC4fb1DWtoLL62SY
 ```
 
-:::note
+:::info
 
 Always use [TLS encryption](security-tls-transport.md) when connecting to the Pulsar service, because sending a token is equivalent to sending a password over the wire.
 

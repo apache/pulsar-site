@@ -7,7 +7,7 @@ original_id: administration-pulsar-manager
 
 Pulsar Manager is a web-based GUI management and monitoring tool that helps administrators and users manage and monitor tenants, namespaces, topics, subscriptions, brokers, clusters, and so on, and supports dynamic configuration of multiple environments.
 
-:::note
+:::info
 
 If you monitor your current stats with Pulsar dashboard, you can try to use Pulsar Manager instead. Pulsar dashboard is deprecated.
 

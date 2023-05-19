@@ -10,7 +10,7 @@ The metadata store of each Pulsar instance should contain the following two comp
 * A local metadata store ensemble (`metadataStoreUrl`) that stores cluster-specific configuration and coordination, such as which brokers are responsible for which topics as well as ownership metadata, broker load reports, and BookKeeper ledger metadata.
 * A configuration store quorum (`configurationMetadataStoreUrl`) stores configuration for clusters, tenants, namespaces, topics, and other entities that need to be globally consistent.
 
-:::note
+:::info
 
 If you are using a standalone Pulsar or a single Pulsar cluster, you only need to configure one metadata store (via `metadataStoreUrl`) and it also serves as a configuration store.
 
@@ -22,7 +22,7 @@ Pulsar supports the following metadata store services:
 * [RocksDB](http://rocksdb.org/)
 * Local memory
 
-:::note
+:::info
 
 RocksDB and local memory are only applicable to standalone Pulsar or single-node Pulsar clusters.
 

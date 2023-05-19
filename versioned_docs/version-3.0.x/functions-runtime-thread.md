@@ -25,7 +25,7 @@ functionRuntimeFactoryConfigs:
 #   percentOfMaxDirectMemory:
 ```
 
-:::note
+:::info
 
 If `absoluteValue` and `percentOfMaxDirectMemory` are both set, the smaller value is used.
 

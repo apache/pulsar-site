@@ -6,7 +6,7 @@ sidebar_label: "Package Java Functions"
 
 There are two methods to package Java Functions, that is [uber JAR](#package-as-jar) and [NAR](#package-as-nar).
 
-:::note
+:::info
 
 If you plan to package and distribute your function for others to use, you are obligated to
 license and copyright your own code properly. Remember to add the license and copyright to

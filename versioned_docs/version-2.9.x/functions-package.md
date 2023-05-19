@@ -7,7 +7,7 @@ original_id: functions-package
 
 You can package Pulsar functions in Java, Python, and Go. Packaging the window function in Java is the same as [packaging a function in Java](#java).
 
-:::note
+:::info
 
 Currently, the window function is not available in Python and Go.
 

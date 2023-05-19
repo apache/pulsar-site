@@ -5,7 +5,7 @@ sidebar_label: "Pulsar statistics"
 original_id: administration-stats
 ---
 
-:::note
+:::info
 
 All stats below are **reset** to 0 upon broker restart or topic unloading, **except** the stats marked with asterisks * (the values of them **keep unchanged**).
 

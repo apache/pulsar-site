@@ -4,7 +4,7 @@ title: Develop Pulsar Functions
 sidebar_label: "How to develop"
 ---
 
-:::note
+:::info
 
 You can develop functions in Java, Python, or Go. 
 * For supported Java versions, see [Pulsar runtime Java version recommendation](https://github.com/apache/pulsar#pulsar-runtime-java-version-recommendation).

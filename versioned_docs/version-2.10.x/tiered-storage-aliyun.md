@@ -34,7 +34,7 @@ This example uses Pulsar 2.8.0.
 
    ```
 
-   :::note
+   :::info
 
    * If you are running Pulsar in a bare-metal cluster, make sure that `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you are running Pulsar in Docker or deploying Pulsar using a Docker image (such as K8s and DCOS), you can use the `apachepulsar/pulsar-all` image. The `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -43,7 +43,7 @@ This example uses Pulsar 2.8.0.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to Aliyun OSS, you need to configure some properties of the Aliyun OSS offload driver.
 

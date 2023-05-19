@@ -61,7 +61,7 @@ When you use proxies between clients and brokers, there are two authentication d
   - [HTTP basic authentication](security-basic-auth.md)
 - To customize an authentication plugin, read [extended authentication](security-extending.md).
 
-:::note
+:::info
 
 Starting from 2.11.0, you can configure [TLS encryption](security-tls-transport.md) with any one of the above authentication providers.
 

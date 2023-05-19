@@ -295,7 +295,7 @@ You can access all logs produced by `LoggingFunction` via the `persistent://publ
 
 Pulsar window functions can publish arbitrary metrics to the metrics interface which can be queried.
 
-:::note
+:::info
 
 If a Pulsar window function uses the language-native interface for Java, that function is not able to publish metrics and stats to Pulsar.
 

@@ -4,7 +4,7 @@ title: Customize Java runtime options
 sidebar_label: "Customize Java runtime options"
 ---
 
-:::note
+:::info
 
 This setting **only** applies to process runtime and Kubernetes runtime.
 

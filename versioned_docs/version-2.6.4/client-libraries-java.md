@@ -384,7 +384,7 @@ consumer.acknowledge(messages)
 
 ```
 
-:::note
+:::info
 
 Batch receive policy limits the number and bytes of messages in a single batch. You can specify a timeout to wait for enough messages.
 The batch receive is completed if any of the following condition is met: enough number of messages, bytes of messages, wait timeout.
@@ -539,7 +539,7 @@ Consumer consumer = client.newConsumer()
 
 Only the first consumer is allowed to the subscription, other consumers receive an error. The first consumer receives all 10 messages, and the consuming order is the same as the producing order.
 
-:::note
+:::info
 
 If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
@@ -592,7 +592,7 @@ consumer2 will receive:
 
 ```
 
-:::note
+:::info
 
 If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers.
 
@@ -716,7 +716,7 @@ Producer producer = client.newProducer()
 
 ```
 
-:::note
+:::info
 
 If the message key is not specified, messages without key are dispatched to one consumer in order by default.
 

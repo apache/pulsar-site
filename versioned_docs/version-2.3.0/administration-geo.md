@@ -271,7 +271,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 
 7. Move your consumers and producers to the new cluster by modifying the values of `serviceURL`.
 
-:::note
+:::info
 
 * The replication starts from step 4, which means existing messages in your old cluster are not replicated.
 * If you have some older messages to migrate, you can pre-create the replication subscriptions for each topic and set it at the earliest position by using `pulsar-admin topics create-subscription -s pulsar.repl.new-cluster -m earliest <topic>`.

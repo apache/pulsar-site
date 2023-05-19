@@ -415,7 +415,7 @@ Consumer consumer = client.newConsumer()
 
 Only the first consumer is allowed to the subscription, other consumers receive an error. The first consumer receives all 10 messages, and the consuming order is the same as the producing order.
 
-:::note
+:::info
 
 If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
@@ -468,7 +468,7 @@ consumer2 will receive:
 
 ```
 
-:::note
+:::info
 
 If a topic is a partitioned topic, each partition only has one active consumer, messages of one partition only distributed to one consumer, messages of multiple partitions are distributed to multiple consumers.
 
@@ -570,7 +570,7 @@ consumer 2 will receive:
 
 ```
 
-:::note
+:::info
 
 If the message key is not specified, messages without key will be dispatched to one consumer in order by default.
 

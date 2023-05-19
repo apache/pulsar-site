@@ -56,7 +56,7 @@ Batches are tracked and stored by Pulsar as batches rather than as individual me
 
 Scheduled messages (using `deliverAt` or `deliverAfter`) are always sent as individual messages even when batching is enabled.
 
-:::note
+:::info
 
 Since batches are tracked as single units, a batch will only be considered acknowledged when all its messages are acknowledged by the consumer. This means unexpected failures, negative acknowledgements, and acknowledgement timeouts can result in redelivery of all messages in the batch, even if some of the messages have already been acknowledged.
 
@@ -104,7 +104,7 @@ In the shared and Key_Shared subscription types, you can negatively acknowledge 
 
 Be aware that negative acknowledgment on ordered subscription types, such as Exclusive, Failover and Key_Shared, can cause failed messages to arrive consumers out of the original order.
 
-:::note
+:::info
 
 If batching is enabled, other messages in the same batch may be redelivered to the consumer as well as the negatively acknowledged messages.
 
@@ -114,13 +114,13 @@ If batching is enabled, other messages in the same batch may be redelivered to t
 
 When a message is not consumed successfully, and you want to trigger the broker to redeliver the message automatically, you can adopt the unacknowledged message automatic re-delivery mechanism. Client will track the unacknowledged messages within the entire `acktimeout` time range, and send a `redeliver unacknowledged messages` request to the broker automatically when the acknowledgement timeout is specified.
 
-:::note
+:::info
 
 If batching is enabled, other messages in the same batch may be redelivered to the consumer as well as the unacknowledged messages.
 
 :::
 
-:::note
+:::info
 
 Prefer negative acknowledgements over acknowledgement timeout. Negative acknowledgement controls the re-delivery of individual messages with more precision, and avoids invalid redeliveries when the message processing time exceeds the acknowledgement timeout.
 
@@ -172,7 +172,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 Dead letter topic depends on message re-delivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout.
 
-:::note
+:::info
 
 Currently, dead letter topic is enabled only in Shared subscription type.
 

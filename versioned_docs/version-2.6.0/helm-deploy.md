@@ -68,7 +68,7 @@ To use local persistent volumes as the persistent storage for Helm release, you 
 
 ```
 
-:::note
+:::info
 
 Before installing the production instance of Pulsar, ensure to plan the storage settings to avoid extra storage migration work. Because after initial installation, you must edit Kubernetes objects manually if you want to change storage settings.
 
@@ -402,7 +402,7 @@ helm install pulsar apache/pulsar \
 
 ```
 
-:::note
+:::info
 
 For the first deployment, add `--set initialize=true` option to initialize bookie and Pulsar cluster metadata.
 

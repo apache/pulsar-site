@@ -14,7 +14,7 @@ Before deploying a function, you need to have a Pulsar cluster running first. Yo
 * Run a [standalone cluster](getting-started-standalone.md) locally on your own machine.
 * Run a Pulsar cluster on [Kubernetes](deploy-kubernetes.md), [Amazon Web Services](deploy-aws.md), [bare metal](deploy-bare-metal.md), and so on.
 
-:::note
+:::info
 
 If you want to deploy user-defined functions in Python, you need to install the [python client](client-libraries-python.md) on all the machines running [function workers](functions-concepts.md#function-worker).
 

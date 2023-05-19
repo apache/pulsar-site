@@ -4,7 +4,7 @@ title: Netty source connector
 sidebar_label: "Netty source connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

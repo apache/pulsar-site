@@ -52,7 +52,7 @@ $ wget pulsar:binary_release_url
 
 Since Pulsar SQL is powered by [Presto](https://prestosql.io), the configuration for deployment is the same for the Pulsar SQL worker.
 
-:::note
+:::info
 
 For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md).
 

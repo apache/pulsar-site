@@ -510,7 +510,7 @@ public class ConfigMapFunction implements Function<String, Void> {
 
 You can [trigger](functions-deploying.md#triggering-pulsar-functions) a Pulsar Function running in the [cluster mode](#cluster-mode) with the [command line](#command-line-interface). When triggering a Pulsar Function, you can pass a specific value to the Function and get the return value *without* creating a client. Triggering is useful for, but not limited to, testing and debugging purposes.
 
-:::note
+:::info
 
 Triggering a function is no different from invoking a function by producing a message on one of the function input topics. The [`pulsar-admin functions trigger`](reference-pulsar-admin.md#trigger) command is a convenient mechanism for sending messages to functions without using the [`pulsar-client`](reference-cli-tools.md#pulsar-client) tool or a language-specific client library.
 
@@ -539,7 +539,7 @@ $ bin/pulsar-admin functions trigger \
 
 And then `welcome to Pulsar Functions` is displayed in the console output.
 
-:::note
+:::info
 
 Instead of passing a string via the CLI, you can trigger Pulsar Functions with the contents of a file using the `--triggerFile` flag.
 

@@ -49,7 +49,7 @@ ls offloaders
 
 For more information on how to configure tiered storage, see [Tiered storage cookbook](cookbooks-tiered-storage.md).
 
-:::note
+:::info
 
 * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's pulsar directory.
 * If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md)), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.

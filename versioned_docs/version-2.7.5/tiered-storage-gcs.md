@@ -43,7 +43,7 @@ This example uses Pulsar 2.5.1.
 
    ```
 
-   :::note
+   :::info
 
    * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you are running Pulsar in Docker or deploying Pulsar using a Docker image (such as K8S and DCOS), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -73,7 +73,7 @@ This example uses Pulsar 2.5.1.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to GCS, you need to configure some properties of the GCS offloader driver.
 
@@ -161,7 +161,7 @@ To generate service account credentials or view the public credentials that you'
 
 5. Click **Create**.
 
-   :::note
+   :::info
 
    Make sure the service account you create has permission to operate GCS, you need to assign **Storage Admin** permission to your service account [here](https://cloud.google.com/storage/docs/access-control/iam).
 

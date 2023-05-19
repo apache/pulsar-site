@@ -140,7 +140,7 @@ $ wget pulsar:binary_release_url
 
 Since Pulsar SQL is powered by [Trino (formerly Presto SQL)](https://trino.io), the configuration for deployment is the same for the Pulsar SQL worker.
 
-:::note
+:::info
 
 For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md).
 
@@ -269,7 +269,7 @@ presto> SELECT * FROM system.runtime.nodes;
 
 For more information about deployment in Presto, refer to [Presto deployment](https://trino.io/docs/current/installation/deployment.html).
 
-:::note
+:::info
 
 The broker does not advance LAC, so when Pulsar SQL bypass broker to query data, it can only read entries up to the LAC that all the bookies learned. You can enable periodically write LAC on the broker by setting "bookkeeperExplicitLacIntervalInMills" in the broker.conf.
 

@@ -28,7 +28,7 @@ A Pulsar instance consists of multiple Pulsar clusters working in unison. You ca
 Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK.
 For the runtime Java version, please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
 
-:::note
+:::info
 
 Broker is only supported on 64-bit JVM.
 

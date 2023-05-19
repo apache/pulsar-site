@@ -11,7 +11,7 @@ You can use the following methods to run functions.
 - *Process*: Invoke functions in processes forked by functions worker.
 - *Kubernetes*: Submit functions as Kubernetes StatefulSets by functions worker.
 
-:::note
+:::info
 
 Pulsar supports adding labels to the Kubernetes StatefulSets and services while launching functions, which facilitates selecting the target Kubernetes objects.
 
@@ -277,7 +277,7 @@ For token authentication, the functions worker captures the token that is used t
 
 For custom authentication or TLS, you need to implement this interface or use an alternative mechanism to provide authentication. If you use token authentication and TLS encryption to secure the communication with the cluster, Pulsar passes your certificate authority (CA) to the client, so the client obtains what it needs to authenticate the cluster, and trusts the cluster with your signed certificate.
 
-:::note
+:::info
 
 If you use tokens that expire when deploying functions, these tokens will expire.
 
@@ -307,7 +307,7 @@ properties:
 
 ```
 
-:::note
+:::info
 
 You must configure both the Function Worker authorization or authentication for the server to authenticate requests and configure the client to be authenticated to communicate with the broker.
 

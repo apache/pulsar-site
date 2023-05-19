@@ -17,7 +17,7 @@ This library allows you to authenticate the Pulsar client by using an access tok
 
 The authentication type determines how to obtain an access token through an OAuth 2.0 authorization flow.
 
-:::note
+:::info
 
 Currently, the Pulsar Java client only supports the `client_credentials` authentication type.
 

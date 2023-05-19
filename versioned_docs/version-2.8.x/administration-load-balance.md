@@ -227,7 +227,7 @@ The load manager follows an even distribution policy across failure domains to a
 
 #### Create a failure domain and register brokers
 
-:::note
+:::info
 
 One broker can only be registered to a single failure domain.
 

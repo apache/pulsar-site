@@ -4,7 +4,7 @@ title: Debezium source connector
 sidebar_label: "Debezium source connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

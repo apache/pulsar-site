@@ -182,7 +182,7 @@ Key | Type | Required? | Explanation
 `negativeAckRedeliveryDelay` | int | no | When a message is negatively acknowledged, the delay time before the message is redelivered (in milliseconds). The default value is 60000.
 `token` | string | no | Authentication token, this is used for the browser javascript client
 
-:::note
+:::info
 
 These parameters (except `pullMode`) apply to the internal consumers of the WebSocket service.
 So messages will be subject to the redelivery settings as soon as they get into the receive queue,

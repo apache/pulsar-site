@@ -283,7 +283,7 @@ This example shows how a consumer unsubscribes from a topic.
 await consumer.Unsubscribe();
 ```
 
-:::note
+:::info
 
 A consumer cannot be used and is disposed once the consumer unsubscribes from a topic.
 

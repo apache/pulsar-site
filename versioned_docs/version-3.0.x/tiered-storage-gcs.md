@@ -21,7 +21,7 @@ Follow the steps below to install the GCS offloader.
 
 ## Configuration
 
-:::note
+:::info
 
 Before offloading data from BookKeeper to GCS, you need to configure some properties of the GCS offloader driver.
 
@@ -104,7 +104,7 @@ To generate service account credentials or view the public credentials that you'
 
 5. Click **Create**.
 
-   :::note
+   :::info
 
    Make sure the service account you create has permission to operate GCS, you need to assign **Storage Admin** permission to your service account [here](https://cloud.google.com/storage/docs/access-control/iam).
 

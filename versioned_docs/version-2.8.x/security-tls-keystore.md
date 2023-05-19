@@ -146,7 +146,7 @@ brokerClientTlsTrustStorePassword=clientpw
 
 ```
 
-:::note
+:::info
 
 It is important to restrict access to the store files via filesystem permissions.
 

@@ -39,7 +39,7 @@ ls connectors
 # ...
 ```
 
-:::note
+:::info
 
 * If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker (or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
 * If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md)), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. The `apachepulsar/pulsar-all` image has already bundled all built-in connectors.
@@ -124,7 +124,7 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
    docker run -d --rm --name=cassandra -p 9042:9042 cassandra
    ```
 
-   :::note
+   :::info
 
    Before moving to the next steps, make sure the Cassandra cluster is running.
 
@@ -229,7 +229,7 @@ You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_re
 
 Run the following command to create a Cassandra sink connector with sink type _cassandra_ and the config file _examples/cassandra-sink.yml_ created previously.
 
-:::note
+:::info
 
 The `sink-type` parameter of the currently built-in connectors is determined by the setting of the `name` parameter specified in the _pulsar-io.yaml_ file.
 

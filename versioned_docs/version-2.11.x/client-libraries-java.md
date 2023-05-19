@@ -103,7 +103,7 @@ PulsarClient client = PulsarClient.builder()
         .build();
 ```
 
-:::note
+:::info
 
 If you run a cluster in [standalone mode](getting-started-standalone.md), the broker is available at the `pulsar://localhost:6650` URL by default.
 
@@ -369,7 +369,7 @@ Producer<byte[]> producer = client.newProducer()
 
 By default, producer chunks the large message based on max message size (`maxMessageSize`) configured at broker (eg: 5MB). However, client can also configure max chunked size using producer configuration `chunkMaxMessageSize`.
 
-:::note
+:::info
 
 To enable chunking, you need to disable batching (`enableBatching`=`false`) concurrently.
 
@@ -408,7 +408,7 @@ Producer<byte[]> producer = client.newProducer()
         .create();
 ```
 
-:::note
+:::info
 
 Multiple interceptors apply in the order they are passed to the `intercept` method.
 
@@ -541,7 +541,7 @@ for (Object message : messages) {
 consumer.acknowledge(messages)
 ```
 
-:::note
+:::info
 
 Batch receive policy limits the number and bytes of messages in a single batch. You can specify a timeout to wait for enough messages.
 The batch receive is completed if any of the following conditions are met: enough number of messages, bytes of messages, wait timeout.
@@ -631,7 +631,7 @@ Redelivery count | Redelivery delay
 7 | 10 + 60 seconds
 8 | 10 + 60 seconds
 
-:::note
+:::info
 
 - The `negativeAckRedeliveryBackoff` does not work with `consumer.negativeAcknowledge(MessageId messageId)` because you are not able to get the redelivery count from the message ID.
 - If a consumer crashes, it triggers the redelivery of unacked messages. In this case, `RedeliveryBackoff` does not take effect and the messages might get redelivered earlier than the delay time from the backoff.
@@ -679,7 +679,7 @@ pulsarClient.newConsumer()
         .subscribe();
 ```
 
-:::note
+:::info
 
 By default, the `subscriptionTopicsMode` of the consumer is `PersistentOnly`. Available options of `subscriptionTopicsMode` are `PersistentOnly`, `NonPersistentOnly`, and `AllTopics`.
 
@@ -767,7 +767,7 @@ Consumer consumer = client.newConsumer()
 
 Only the first consumer is allowed to the subscription, other consumers receive an error. The first consumer receives all 10 messages, and the consuming order is the same as the producing order.
 
-:::note
+:::info
 
 If topic is a partitioned topic, the first consumer subscribes to all partitioned topics, other consumers are not assigned with partitions and receive an error.
 
@@ -814,7 +814,7 @@ consumer2 will receive:
 ("key-4", "message-4-2")
 ```
 
-:::note
+:::info
 
 If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers.
 
@@ -922,7 +922,7 @@ Producer producer = client.newProducer()
         .create();
 ```
 
-:::note
+:::info
 
 If the message key is not specified, messages without keys are dispatched to one consumer in order by default.
 
@@ -982,7 +982,7 @@ Consumer<String> consumer = client.newConsumer()
 
 ```
 
-:::note
+:::info
 
 If you are using multiple interceptors, they apply in the order they are passed to the `intercept` method.
 
@@ -1104,7 +1104,7 @@ The TableView interface serves an encapsulated access pattern, providing a conti
 
 With TableView, Pulsar clients can fetch all the message updates from a topic and construct a map with the latest values of each key. These values can then be used to build a local cache of data. In addition, you can register consumers with the TableView by specifying a listener to perform a scan of the map and then receive notifications when new messages are received. Consequently, event handling can be triggered to serve use cases, such as event-driven applications and message monitoring.
 
-:::note
+:::info
 
 Each TableView uses one Reader instance per partition, and reads the topic starting from the compacted view by default. It is highly recommended to enable automatic compaction by [configuring the topic compaction policies](cookbooks-compaction.md#configure-compaction-to-run-automatically) for the given topic or namespace. More frequent compaction results in shorter startup times because less data is replayed to reconstruct the TableView of the topic.
 Starting from Pulsar 2.11.0, TableView also supports reading non-persistent topics, but it does not guarantee data consistency.

@@ -18,7 +18,7 @@ bin/pulsar-admin functions localrun \
   --output persistent://public/default/output-1
 ```
 
-:::note
+:::info
 
 In localrun mode, Java functions use thread runtime; Python and Go functions use process runtime.
 

@@ -4,7 +4,7 @@ title: AWS DynamoDB source connector
 sidebar_label: "AWS DynamoDB source connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
