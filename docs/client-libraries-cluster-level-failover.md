@@ -83,7 +83,7 @@ Parameter|Default value|Required?|Description
 
 This is an example of how to construct a Java Pulsar client to use controlled cluster-level failover. The switchover is triggered by administrators manually.
 
-:::note
+:::info
 You can have one or several backup clusters but can only specify one.
 :::
 
@@ -131,7 +131,7 @@ Assume that you want to connect Pulsar client 1 to cluster A.
 
    The URL provider service manages all tokens and credentials. It returns different credentials based on different tokens and different target cluster URLs to different Pulsar clients.
 
-   :::note
+   :::info
 
    The credential must be in a JSON file and contain parameters as shown.
 

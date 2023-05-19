@@ -176,7 +176,7 @@ This command simulates the execution process of a function and verifies it. As s
 This is my function!
 ```
 
-:::note
+:::info
 
 When using the `--topic` option, you must specify the entire topic name. Otherwise, the following error occurs.
 

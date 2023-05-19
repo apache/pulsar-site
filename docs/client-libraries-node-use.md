@@ -22,7 +22,7 @@ await producer.send({
 await producer.close();
 ```
 
-:::note
+:::info
 
 When you create a new Pulsar producer, the operation returns `Promise` object and get producer instance or an error through executor function. In the above example, use `await` operator instead of executor function.
 
@@ -92,7 +92,7 @@ consumer.acknowledge(msg);
 await consumer.close();
 ```
 
-:::note
+:::info
 When you create a new Pulsar consumer, the operation returns `Promise` object and get consumer instance or an error through executor function. In this example, use `await` operator instead of executor function.
 :::
 
@@ -160,7 +160,7 @@ const consumer = await client.subscribe({
 });
 ```
 
-:::note
+:::info
 
 Pulsar Node.js client uses [AsyncWorker](https://github.com/nodejs/node-addon-api/blob/main/doc/async_worker). Asynchronous operations such as creating consumers/producers and receiving/sending messages are performed in worker threads.
 Until completion of these operations, worker threads are blocked.

@@ -4,7 +4,7 @@ title: RabbitMQ sink connector
 sidebar_label: "RabbitMQ sink connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

@@ -14,7 +14,7 @@ The following table outlines the supported programming languages for each type o
 | [Process runtime](functions-runtime-process.md)       | Java, Python, Go                             |
 | [Kubernetes runtime](functions-runtime-kubernetes.md) | Java, Python, Go                             |
 
-:::note
+:::info
 
 For the runtime Java version, refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
 

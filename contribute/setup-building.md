@@ -12,7 +12,7 @@ title: Setup and building
 | Maven      | The source code of Pulsar is managed by [Apache Maven](https://maven.apache.org/) The required Maven version is 3.6.1+.                                                                                          |
 | Zip        | The build process requires Zip as a utility tool.                                                                                                                                                                |
 
-:::note
+:::info
 
 This project includes a [Maven Wrapper](https://maven.apache.org/wrapper/) that can be used instead of a system installed Maven. Use it by replacing `mvn` with `./mvnw` on Linux and `mvnw.cmd` on Windows in the commands below.
 

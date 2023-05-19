@@ -21,7 +21,7 @@ PulsarClient client = PulsarClient.builder()
         .build();
 ```
 
-:::note
+:::info
 
 If you run a cluster in [standalone mode](getting-started-standalone.md), the broker is available at the `pulsar://localhost:6650` URL by default.
 

@@ -70,7 +70,7 @@ It must be one of the following.
 | refactor | [type/refactor](https://github.com/apache/pulsar/labels/type%2Frefactor)       | Restructure existing code while preserving its external behavior. |
 | revert   | N/A                                                                            | Revert changes                                                    |
 
-:::note
+:::info
 
 Choose correct labels for your PR so that your PR will automatically go to the correct chapter in release notes. If you do not specify a type label, the PR might go to the wrong place or not be included in the release notes at all.
 
@@ -100,7 +100,7 @@ Avoid some common bad cases:
 * Do not append period at the end.
 * Do not use [GitHub keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) followed by an issue number. This information should be provided in PR descriptions or commit messages rather than in PR titles.
 
-:::note
+:::info
 
 If you cherry-pick changes to branches, name your PR title the same as the original PR title and label your PR with cherry-pick related labels.
 

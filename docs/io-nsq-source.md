@@ -4,7 +4,7 @@ title: NSQ source connector
 sidebar_label: "NSQ source connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

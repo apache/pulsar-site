@@ -577,7 +577,7 @@ The message chunking feature is OFF by default. The following is an example of h
 
 By default, producer chunks the large message based on max message size (`maxMessageSize`) configured at broker (eg: 5MB). However, client can also configure max chunked size using producer configuration `chunkMaxMessageSize`.
 
-:::note
+:::info
 
 To enable chunking, you need to disable batching (`enableBatching`=`false`) concurrently.
 
@@ -749,7 +749,7 @@ To intercept messages, you can add a `ProducerInterceptor` or multiple ones when
 </Tabs>
 ````
 
-:::note
+:::info
 
 Multiple interceptors apply in the order they are passed to the `intercept` method.
 
@@ -796,7 +796,7 @@ This example shows how to set producer access mode.
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
 <TabItem value="Java">
 
-:::note
+:::info
 
 This feature is supported in Java client 2.8.0 or later versions.
 
@@ -813,7 +813,7 @@ This feature is supported in Java client 2.8.0 or later versions.
 
 <TabItem value="C++">
 
-:::note
+:::info
 
 This feature is supported in C++ client 3.1.0 or later versions.
 

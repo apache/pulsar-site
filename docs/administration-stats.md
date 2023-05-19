@@ -8,7 +8,7 @@ sidebar_label: "Statistics"
 
 The following table outlines the stats of a topic. For more details about how to get these stats, see [Get stats](admin-api-topics.md#get-stats).
 
-:::note
+:::info
 
 All stats below are **reset** to 0 upon broker restart or topic unloading, **except** the stats marked with asterisks * (the values of them **keep unchanged**).
 

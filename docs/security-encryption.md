@@ -24,7 +24,7 @@ The following figure illustrates how Pulsar encrypts messages on the producer si
 3. The consumer reads the message header and decrypts the session key using its private key.
 4. The consumer uses the decrypted session key to decrypt the message payload.
 
-:::note
+:::info
 
 * The consumer's public key is shared with the producer, but only the consumer has the access to the private key.
 * Pulsar does not store the encryption key anywhere in the Pulsar service. If you lose or delete the private key, your message is irretrievably lost and unrecoverable.
@@ -359,7 +359,7 @@ If the produced messages are consumed across application boundaries, you need to
 
 ### Encrypt a message with multiple keys
 
-:::note
+:::info
 
 This is only available for Java clients.
 

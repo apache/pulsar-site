@@ -292,7 +292,7 @@ test-messages-Thu Jul 19 11:59:15 PDT 2018!
 
 ### Validate Connectors
 
-:::note
+:::info
 
 Make sure you have docker available at your laptop. If you haven't installed docker, you can skip this section.
 

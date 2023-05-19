@@ -30,7 +30,7 @@ Function instances use the `org.apache.pulsar.functions.secretsprovider.SecretsP
 
 You can also implement your own `SecretsProviderConfigurator` if you want to use different `SecretsProvider` for function instances.
 
-:::note
+:::info
 
 Currently, only Java and Python runtime support `SecretsProvider`. The Java and Python Runtime have the following two providers:
 - ClearTextSecretsProvider (default for `DefaultSecretsProviderConfigurator`)

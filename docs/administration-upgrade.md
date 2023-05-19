@@ -23,7 +23,7 @@ Read the following guidelines before upgrading a Pulsar cluster.
 - Upgrade a small subset of nodes of each type to canary test the new version before upgrading all nodes of that type in the cluster. When you have upgraded the canary nodes, run for a while to ensure that they work correctly.
 - Upgrade one data center to verify the new version before upgrading all data centers if your cluster runs in multi-cluster replicated mode.
 
-:::note
+:::info
 
 Currently, Apache Pulsar is compatible between versions.
 

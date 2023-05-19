@@ -4,7 +4,7 @@ title: Kafka sink connector
 sidebar_label: "Kafka sink connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

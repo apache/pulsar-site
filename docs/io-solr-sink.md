@@ -4,7 +4,7 @@ title: Solr sink connector
 sidebar_label: "Solr sink connector"
 ---
 
-:::note
+:::info
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

@@ -72,7 +72,7 @@ You can use the command line tools, REST API, or the Java client to manage your 
 
 To use package management service, ensure that the package management service has been enabled in your cluster by setting the following properties in `broker.conf`.
 
-:::note
+:::info
 
 Package management service is not enabled by default.
 

@@ -6,7 +6,7 @@ sidebar_label: "Debug with localrun mode"
 
 In localrun mode, a function consumes and produces actual data to a Pulsar cluster, and mirrors how the function runs in a Pulsar cluster. This provides a way to test your function and allows you to launch a function instance on your local machine as a thread for easy debugging.
 
-:::note
+:::info
 
 Debugging with localrun mode is only available for Java functions in Pulsar 2.4.0 or later versions.
 

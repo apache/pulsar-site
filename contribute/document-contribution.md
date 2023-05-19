@@ -20,7 +20,7 @@ For versions start from 2.8, Pulsar release versioned docs for each minor releas
 For example, if you want to add docs for an improvement introduced in 2.8.2, you can add the following instructions:
 
 ```
-:::note
+:::info
 
 This <fix / improvment> is available for 2.8.2 and later versions.
 
@@ -91,7 +91,7 @@ You need to update the feature matrix as soon as your related commits get merged
 2. Get your PRs reviewed and merged.
 3. Update the feature matrix to flag your contribution.
 
-:::note
+:::info
 
 * [Client Feature Matrix](pathname:///client-feature-matrix) is in the transition phase from the spreadsheet to the webpage. For how to update it, see [How to update data-driven pages](site-intro.md#how-to-update-data-driven-pages).
 * If you have problems in editing the spreadsheet of [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194), you can reach out to `dev@pulsar.apache.org`.

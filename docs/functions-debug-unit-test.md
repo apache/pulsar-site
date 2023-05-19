@@ -7,7 +7,7 @@ sidebar_label: "Debug with unit test"
 
 Like any function with inputs and outputs, you can test Pulsar Functions in a similar way as you test any other function.
 
-:::note
+:::info
 
 Pulsar uses TestNG for testing.
 

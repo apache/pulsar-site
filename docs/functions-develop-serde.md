@@ -77,7 +77,7 @@ The following is an example of using the `create` command to deploy a function b
   # Other function attributes
 ```
 
-:::note
+:::info
 
 Custom SerDe classes must be packaged with your function JARs.
 
@@ -103,7 +103,7 @@ bin/pulsar-admin functions create \
 
 This case contains two input topics: `input-topic-1` and `input-topic-2`, each of which is mapped to a different SerDe class (the mapping must be specified as a JSON string). The output topic `output-topic-1` uses the `Serde3` class for SerDe.
 
-:::note
+:::info
 
 All function-related logic, including processing and SerDe classes, must be contained within a single Python file.
 

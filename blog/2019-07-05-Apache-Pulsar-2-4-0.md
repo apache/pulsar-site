@@ -28,7 +28,7 @@ producer.newMessage().value("delayed message").deliverAfter(10, TimeUnit.SECONDS
 
 ```
 
-:::note
+:::info
 
 1. Messages are only delayed on shared subscriptions, other subscriptions will deliver immediately.
 2. Delayed messages are sent individually even if you enable message batching on producer.
