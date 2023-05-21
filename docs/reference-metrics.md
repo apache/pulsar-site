@@ -624,9 +624,9 @@ All the metadata store metrics are labeled with the following labels:
 | jvm_memory_pool_bytes_committed            | Gauge                                  | Committed bytes of a given JVM memory pool.                                                |
 | jvm_memory_pool_bytes_max                  | Gauge                                  | Max bytes of a given JVM memory pool.                                                      |
 | jvm_memory_pool_bytes_init                 | Gauge                                  | Initial bytes of a given JVM memory pool.                                                  |
-| jvm_memory_pool_collection_used_bytes      | Gauge                                  | Used bytes after last collection of a given JVM memory pool.                               |
+| jvm_memory_pool_collection_used_bytes      | Gauge                                  | Used bytes after the last collection of a given JVM memory pool.                           |
 | jvm_memory_pool_collection_committed_bytes | Gauge                                  | Committed after last collection bytes of a given JVM memory pool.                          |
-| jvm_memory_pool_collection_max_bytes       | Gauge                                  | Max bytes after last collection of a given JVM memory pool.                                |
+| jvm_memory_pool_collection_max_bytes       | Gauge                                  | Max bytes after the last collection of a given JVM memory pool.                            |
 | jvm_memory_pool_collection_init_bytes      | Gauge                                  | Initial after last collection bytes of a given JVM memory pool.                            |
 | jvm_memory_pool_allocated_bytes_total      | Counter                                | Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously. |
 
