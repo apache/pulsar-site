@@ -38,6 +38,7 @@ $ pulsar-client consume [options]
 |---|---|---|
 | `-t, --subscription-type` | Subscription type.|Exclusive|
 | `--hide-content` | Do not write the message to console.|false|
+| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `-n, --num-messages` | Number of messages to consume, 0 means to consume forever.|1|
 | `-r, --rate` | Rate (in msg/sec) at which to consume, value 0 means to consume messages as fast as possible.|0.0|
 | `-ekv, --encryption-key-value` | The URI of private key to decrypt payload, for example file:///path/to/private.key or data:application/x-pem-file;base64,*****|null|

@@ -8,6 +8,10 @@ Apache Pulsar supports authenticating clients using [OpenID Connect](https://ope
 
 The source code for the OpenID Connect implementation is in the [pulsar-broker-auth-oidc](https://github.com/apache/pulsar/blob/master/pulsar-broker-auth-oidc/) submodule in the Apache Pulsar git repo.
 
+:::note
+Pulsar's OpenID Connect integration was introduced in Pulsar 3.0.0. As always, if you encounter any issues, please ask questions on Pulsar channels and open issues in GitHub.
+:::
+
 ## OpenID Connect Authentication Flow
 
 After authenticating with the Identity Provider, the Pulsar client gets an access token from the server and passes this access token to Pulsar Server (Broker, Proxy, WebSocket Proxy, or Function Worker) for authentication. When using the `AuthenticationProviderOpenID` class, the Pulsar Server performs the following validations in order:
@@ -21,9 +25,9 @@ After authenticating with the Identity Provider, the Pulsar client gets an acces
 7. When token validation is successful, the Pulsar Server extracts the `sub` claim from the token (or the configured `openIDRoleClaim`) and uses it as the principal for authorization.
 8. When the token expires, the Pulsar Server challenges the client to re-authenticate with the Identity Provider and provide a new access token. If the client fails to re-authenticate, the Pulsar Server closes the connection.
 
-## Enable OpenID Connect Authentication in the Brokers, Proxies, and WebSocket Proxies
+## Enable OpenID Connect Authentication in the Broker and Proxy
 
-To configure Pulsar Servers to authenticate clients using OpenID Connect, add the following parameters to the `conf/broker.conf`, the `conf/proxy.conf`, and the `conf/websocket.conf` files. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
+To configure Pulsar Servers to authenticate clients using OpenID Connect, add the following parameters to the `conf/broker.conf` and the `conf/proxy.conf`. If you use a standalone Pulsar, you need to add these parameters to the `conf/standalone.conf` file:
 
 ```properties
 # Configuration to enable authentication
@@ -68,6 +72,10 @@ When using OIDC for a client connecting through the proxy to the broker, it is n
 
 :::
 
+:::note
+The Pulsar WebSocket Proxy does not yet support OpenID Connect authentication. Here is an issue tracking this feature: [#20236](https://github.com/apache/pulsar/issues/20236).
+:::
+
 ## Enable OpenID Connect Authentication in the Function Worker
 
 To configure the Pulsar Function Worker to authenticate clients using OpenID Connect, add the following parameters to the `conf/functions_worker.yml` file. The documentation for these settings is [above](#enable-openid-connect-authentication-in-the-brokers-proxies-and-websocket-proxies).
@@ -101,7 +109,7 @@ The available values for `openIDFallbackDiscoveryMode` are: `DISABLED`, `KUBERNE
 
 1. `DISABLED`: There will be no discovery of additional trusted issuers or public keys. This setting requires that operators explicitly allow all issuers that will be trusted. For the Kubernetes Service Account Token Projections to work, the operator must explicitly trust the issuer on the token's `iss` claim. This is the default setting because it is the only mode that explicitly follows the OIDC spec for verification of discovered provider configuration.
 2. `KUBERNETES_DISCOVER_TRUSTED_ISSUER`: The Kubernetes API Server will be used to discover an additional trusted issuer by getting the issuer at the API Server's `/.well-known/openid-configuration` endpoint, verifying that issuer matches the `iss` claim on the supplied token, then treating that issuer as a trusted issuer by discovering the `jwks_uri` via that issuer's `/.well-known/openid-configuration` endpoint. This mode can be helpful in EKS environments where the API Server's public keys served at the `/openid/v1/jwks` endpoint are not the same as the public keys served at the issuer's `jwks_uri`. It fails to be OIDC compliant because the URL used to discover the provider configuration is not the same as the issuer claim on the token.
-3. `KUBERNETES_DISCOVER_PUBLIC_KEYS`: The Kubernetes API Server will be used to discover an additional set of valid public keys by getting the issuer at the API Server's `/.well-known/openid-configuration` endpoint, verifying that issuer matches the `iss` claim on the supplied token, then calling the API Server endpoint to get the public keys using a kubernetes client. This mode is currently useful getting the public keys from the API Server because the API Server requires custom TLS and authentication, and the kubernetes client automatically handles those. It fails to be OIDC compliant because the URL used to discover the provider configuration is not the same as the issuer claim on the token.
+3. `KUBERNETES_DISCOVER_PUBLIC_KEYS`: The Kubernetes API Server will be used to discover an additional set of valid public keys by getting the issuer at the API Server's `/.well-known/openid-configuration` endpoint, verifying that issuer matches the `iss` claim on the supplied token, then calling the API Server endpoint to get the public keys using a Kubernetes client. This mode is currently useful for getting the public keys from the API Server because the API Server requires custom TLS and authentication, and the Kubernetes client automatically handles those. It fails to be OIDC compliant because the URL used to discover the provider configuration is not the same as the issuer claim on the token.
 
 :::note
 
@@ -115,7 +123,7 @@ kubectl patch clusterrole system:service-account-issuer-discovery --patch '{"rul
 
 ## Configuring Pulsar Components and Applications to use Projected Service Account Tokens to Authenticate with other Pulsar Components
 
-To leverage [Service Account Token Volume Projections](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) in your pulsar components, update your it is sufficient to follow the Kubernetes documentation on mounting service account tokens and then configuring the pulsar components to use the token with the following config:
+To leverage [Service Account Token Volume Projections](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) in your pulsar components, follow the Kubernetes documentation on mounting service account tokens and then configure the pulsar components to use the token with the following config:
 
 ```properties
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationToken
@@ -131,4 +139,4 @@ In order to simplify migration from Static JWTs to OIDC Authentication, it is po
 
 ## Configure OIDC authentication in Pulsar Clients and CLI Tools
 
-See the [OAuth2](security-oauth2.md) documentation for configuring clients to use OAuth2 authentication.
+The Pulsar OAuth2 client plugin can be used for clients that rely on the Client Credentials Flow for OIDC. See the [OAuth2 Client](security-oauth2.md#configure-oauth2-authentication-in-pulsar-clients) documentation for configuring clients to integrate with Pulsar Servers running with the OIDC Authentication Provider.
