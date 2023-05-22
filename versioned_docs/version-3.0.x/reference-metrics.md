@@ -201,7 +201,12 @@ All the namespace metrics are labeled with the following labels:
 | pulsar_subscription_delayed | Gauge | The total message batches (entries) are delayed for dispatching. |
 | pulsar_storage_write_latency_le_* | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: <= 0.5ms </li><li>pulsar_storage_write_latency_le_1: <= 1ms</li><li>pulsar_storage_write_latency_le_5: <= 5ms</li><li>pulsar_storage_write_latency_le_10: <= 10ms</li><li>pulsar_storage_write_latency_le_20: <= 20ms</li><li>pulsar_storage_write_latency_le_50: <= 50ms</li><li>pulsar_storage_write_latency_le_100: <= 100ms</li><li>pulsar_storage_write_latency_le_200: <= 200ms</li><li>pulsar_storage_write_latency_le_1000: <= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul> |
 | pulsar_entry_size_le_* | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: <= 128 bytes </li><li>pulsar_entry_size_le_512: <= 512 bytes</li><li>pulsar_entry_size_le_1_kb: <= 1 KB</li><li>pulsar_entry_size_le_2_kb: <= 2 KB</li><li>pulsar_entry_size_le_4_kb: <= 4 KB</li><li>pulsar_entry_size_le_16_kb: <= 16 KB</li><li>pulsar_entry_size_le_100_kb: <= 100 KB</li><li>pulsar_entry_size_le_1_mb: <= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul> |
-| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `InMemoryDelayedDeliveryTracker` of the namespace owned by this broker (in bytes). |
+| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `DelayedDeliveryTracker` of the namespace owned by this broker (in bytes). |
+| pulsar_delayed_message_index_bucket_total | Gauge | The number of delayed message index buckets (immutable buckets + LastMutableBucket ) |
+| pulsar_delayed_message_index_loaded | Gauge | The total number of delayed message indexes for in the memory. |
+| pulsar_delayed_message_index_bucket_snapshot_size_bytes | Gauge | The total size of delayed message index bucket snapshot (in bytes). |
+| pulsar_delayed_message_index_bucket_op_count | Counter | The total number of operation delayed message index bucket snapshots. The `state` label can be `succeed`,`failed`, and`all` (`all` means the total number of all states) and the `type` label can be `create`,`load`,`delete`, and `merge`. |
+| pulsar_delayed_message_index_bucket_op_latency_ms | Histogram | The latency of delayed message index bucket snapshot operation with a given quantile (threshold). The `type` label can be `create`,`load`,`delete`, and `merge`<br/>The label `quantile` can be:<ul><li>quantile="50" is operation latency between (0ms, 50ms]</li><li>quantile="100" is operation latency between (50ms, 100ms]</li><li>quantile="500" is operation latency between (100ms, 500ms]</li><li>quantile="1000" is operation latency between (500ms, 1s]</li><li>quantile="5000" is operation latency between (1s, 5s]</li><li>quantile="30000" is operation latency between (5s, 30s]</li><li>quantile="60000" is operation latency between (30s, 60s]</li><li>quantile="overflow" is operation latency > 1m</li></ul> |
 
 ### Topic metrics
 
@@ -247,10 +252,15 @@ All the topic metrics are labeled with the following labels:
 | pulsar_compaction_latency_le_* | Histogram | The compaction latency with given quantile. <br /> Available thresholds: <br /><ul><li>pulsar_compaction_latency_le_0_5: <= 0.5ms </li><li>pulsar_compaction_latency_le_1: <= 1ms</li><li>pulsar_compaction_latency_le_5: <= 5ms</li><li>pulsar_compaction_latency_le_10: <= 10ms</li><li>pulsar_compaction_latency_le_20: <= 20ms</li><li>pulsar_compaction_latency_le_50: <= 50ms</li><li>pulsar_compaction_latency_le_100: <= 100ms</li><li>pulsar_compaction_latency_le_200: <= 200ms</li><li>pulsar_compaction_latency_le_1000: <= 1s</li><li>pulsar_compaction_latency_le_overflow: > 1s</li></ul> |
 | pulsar_compaction_compacted_entries_count | Gauge | The total number of the compacted entries. |
 | pulsar_compaction_compacted_entries_size |Gauge  | The total size of the compacted entries. |
-| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `InMemoryDelayedDeliveryTracker` of the topic owned by this broker (in bytes). |
 | pulsar_txn_tb_active_total | Gauge | The number of active transactions on this topic. |
 | pulsar_txn_tb_aborted_total | Counter | The number of aborted transactions on the topic. |
 | pulsar_txn_tb_committed_total | Counter | The number of committed transactions on the topic. |
+| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `DelayedDeliveryTracker` of the topic owned by this broker (in bytes). |
+| pulsar_delayed_message_index_bucket_total | Gauge | The number of delayed message index buckets (immutable buckets + LastMutableBucket ) |
+| pulsar_delayed_message_index_loaded | Gauge | The total number of delayed message indexes for in the memory. |
+| pulsar_delayed_message_index_bucket_snapshot_size_bytes | Gauge | The total size of delayed message index bucket snapshot (in bytes). |
+| pulsar_delayed_message_index_bucket_op_count | Counter | The total number of operation delayed message index bucket snapshots. The `state` label can be `succeed`,`failed`, and`all` (`all` means the total number of all states) and the `type` label can be `create`,`load`,`delete`, and `merge`. |
+| pulsar_delayed_message_index_bucket_op_latency_ms | Histogram | The latency of delayed message index bucket snapshot operation with a given quantile (threshold). The label`type` label can be `create`,`load`,`delete`, and `merge`<br/>The label `quantile` can be:<ul><li>quantile="50" is operation latency between (0ms, 50ms]</li><li>quantile="100" is operation latency between (50ms, 100ms]</li><li>quantile="500" is operation latency between (100ms, 500ms]</li><li>quantile="1000" is operation latency between (500ms, 1s]</li><li>quantile="5000" is operation latency between (1s, 5s]</li><li>quantile="30000" is operation latency between (5s, 30s]</li><li>quantile="60000" is operation latency between (30s, 60s]</li><li>quantile="overflow" is operation latency > 1m</li></ul> |
 
 ### Replication metrics
 
@@ -418,6 +428,12 @@ All the subscription metrics are labeled with the following labels:
 | pulsar_subscription_filter_accepted_msg_count | Counter | The number of messages accepted by `EntryFilter`. |
 | pulsar_subscription_filter_rejected_msg_count | Counter | The number of messages rejected by `EntryFilter`. |
 | pulsar_subscription_filter_rescheduled_msg_count | Counter | The number of messages rescheduled by `EntryFilter`. |
+| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `DelayedDeliveryTracker` of the subscription owned by this broker (in bytes). |
+| pulsar_delayed_message_index_bucket_total | Gauge | The number of delayed message index buckets (immutable buckets + LastMutableBucket ) |
+| pulsar_delayed_message_index_loaded | Gauge | The total number of delayed message indexes for in the memory. |
+| pulsar_delayed_message_index_bucket_snapshot_size_bytes | Gauge | The total size of delayed message index bucket snapshot (in bytes). |
+| pulsar_delayed_message_index_bucket_op_count | Counter | The total number of operation delayed message index bucket snapshots. The `state` label can be `succeed`,`failed`, and`all` (`all` means the total number of all states) and the `type` label can be `create`,`load`,`delete`, and `merge`. |
+| pulsar_delayed_message_index_bucket_op_latency_ms | Histogram | The latency of delayed message index bucket snapshot operation with a given quantile (threshold). The label`type` label can be `create`,`load`,`delete`, and `merge`<br/>The label `quantile` can be:<ul><li>quantile="50" is operation latency between (0ms, 50ms]</li><li>quantile="100" is operation latency between (50ms, 100ms]</li><li>quantile="500" is operation latency between (100ms, 500ms]</li><li>quantile="1000" is operation latency between (500ms, 1s]</li><li>quantile="5000" is operation latency between (1s, 5s]</li><li>quantile="30000" is operation latency between (5s, 30s]</li><li>quantile="60000" is operation latency between (30s, 60s]</li><li>quantile="overflow" is operation latency > 1m</li></ul> |
 
 ### Consumer metrics
 
