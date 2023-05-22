@@ -59,7 +59,7 @@ To enable the authentication for your Pulsar cluster, you need to specify a mech
 
 * For TLS or custom authentication, you can either implement the `org.apache.pulsar.functions.auth.KubernetesFunctionAuthProvider` interface or use an alternative mechanism.
 
-:::info
+:::note
 
 If the token you use to deploy the function has an expiration date, you may need to deploy the function again after it expires.
 
@@ -69,7 +69,7 @@ If the token you use to deploy the function has an expiration date, you may need
 
 The `KubernetesServiceAccountTokenAuthProvider` uses [service account token volume projections](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) to mount a token into the function's pod. The function worker and broker can verify this token using OpenID Connect. The primary benefit of this integration is that tokens have a short time to live, are managed by Kubernetes, and do not inherit the permission used to create the function.
 
-:::info
+:::note
 
 This feature requires that the broker and the function worker are configured to use the `AuthenticationProviderOpenID`. Documentation to enable this provider can be found [here](security-openid-connect.md).
 
@@ -127,7 +127,7 @@ To customize Kubernetes runtime, you can set `runtimeCustomizerClassName` in the
 
 The function API provides a flag named `customRuntimeOptions`, which is passed to the `org.apache.pulsar.functions.runtime.kubernetes.KubernetesManifestCustomizer` interface. To initialize `KubernetesManifestCustomizer`, you can set `runtimeCustomizerConfig` in the `conf/functions-worker.yml` file.
 
-:::info
+:::note
 
 `runtimeCustomizerConfig` is the same across all functions. If you provide both `runtimeCustomizerConfig` and `customRuntimeOptions`, you need to decide how to manage these two configurations in your implementation of the `KubernetesManifestCustomizer` interface.
 

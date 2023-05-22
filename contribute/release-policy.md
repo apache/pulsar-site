@@ -72,7 +72,7 @@ From the code-freeze point, to minimize the risk of delaying the release, only b
 
 For patch releases, the process is the same while there is no code-freeze period and strict timeline. Basically, patch release is out "when it is ready".
 
-:::info
+:::note
 
 For example, the next release of Pulsar is 3.0.0, and it has the planned timeline as:
 

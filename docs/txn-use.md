@@ -6,7 +6,7 @@ sidebar_label: "Get started"
 
 Pulsar transaction is primarily a server-side and protocol-level feature. This tutorial guides you through every step of how to use the [Pulsar transaction API](/api/admin/) to send and receive messages in a Java client. 
 
-:::info
+:::note
 
 Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java** clients. 
 
@@ -27,7 +27,7 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
     systemTopicEnabled=true
     ```
 
-    :::info
+    :::note
 
     **By default**, Pulsar transactions are **disabled**.
 
@@ -59,7 +59,7 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
 
 7. Produce and ack messages with transactions.
 
-    :::info
+    :::note
 
     Currently, messages can be acked individually rather than cumulatively.
 

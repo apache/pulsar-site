@@ -120,7 +120,7 @@ After the build, you should find the following tarballs, zip files, and the conn
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
 * directory `distribution/io/target/apache-pulsar-io-connectors-2.X.0-bin`
 
-:::info
+:::note
 
 The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.0.
 
@@ -199,7 +199,7 @@ mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
 mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
 ```
 
-:::info
+:::note
 
 The `GPG_TTY` environment variable must be set for all the following steps. Otherwise, some operations might fail by "gpg failed to sign the data".
 
@@ -352,7 +352,7 @@ Release a new version of libpulsar for Homebrew, You can follow the example [her
 
 For 2.8, 2.9 and 2.10 releases, you should release the Python client.
 
-:::info
+:::note
 
 1. You need to create an account on PyPI: https://pypi.org/account/register/
 2. Ask anyone that has been a release manager before to add you as a maintainer for pulsar-docker on PyPI
@@ -544,7 +544,7 @@ yarn run version <release-version>
 
 After you run this command, a new folder `version-<release-version>` is added in the `versioned_docs` directory, a new sidebar file `version-<release-version>-sidebars.json` is added in the `versioned_sidebars` directory, and the new version is added in the `versions.json` file.
 
-:::info
+:::note
 
 You can move the latest version under the old version in the `versions.json` file. Make sure the Algolia index works before moving 2.X.0 as the current stable.
 

@@ -21,7 +21,7 @@ Follow the steps below to install the AWS S3 offloader.
 
 ## Configuration
 
-:::info
+:::note
 
 Before offloading data from BookKeeper to AWS S3, you need to configure some properties of the AWS S3 offload driver.
 

@@ -76,7 +76,7 @@ If you want to acknowledge messages cumulatively, you can use the following API.
 consumer.acknowledgeCumulative(msg);
 ```
 
-:::info
+:::note
 
 Cumulative acknowledgment cannot be used in [Shared subscription type](#subscription-types), because Shared subscription type involves multiple consumers which have access to the same subscription. In Shared subscription type, messages are acknowledged individually.
 
@@ -144,7 +144,7 @@ The message redelivery behavior should be as follows.
 | 7                | 60 seconds       |
 | 8                | 60 seconds       |
 
-:::info
+:::note
 
 If batching is enabled, all messages in one batch are redelivered to the consumer.
 
@@ -152,7 +152,7 @@ If batching is enabled, all messages in one batch are redelivered to the consume
 
 ### Acknowledgment timeout
 
-:::info
+:::note
 
 By default, the acknowledge timeout is disabled and that means that messages delivered to a consumer will not be re-delivered unless the consumer crashes.
 
@@ -188,7 +188,7 @@ The message redelivery behavior should be as follows.
 | 7                | 10 + 60 seconds  |
 | 8                | 10 + 60 seconds  |
 
-:::info
+:::note
 
 - If batching is enabled, all messages in one batch are redelivered to the consumer.
 - Compared with acknowledgment timeout, negative acknowledgment is preferred. First, it is difficult to set a timeout value. Second, a broker resends messages when the message processing time exceeds the acknowledgment timeout, but these messages might not need to be re-consumed.
@@ -292,7 +292,7 @@ customProperties.put("custom-key-2", "custom-value-2");
 consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 ```
 
-:::info
+:::note
 
 *  Currently, retry letter topic is enabled in Shared subscription types.
 *  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a large number of retries with a configurable retry interval. Because messages in the retry letter topic are persisted to BookKeeper, while messages that need to be retried due to negative acknowledgment are cached on the client side.
@@ -353,7 +353,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 Dead letter topic serves message redelivery, which is triggered by [acknowledgment timeout](#acknowledgment-timeout) or [negative acknowledgment](#negative-acknowledgment) or [retry letter topic](#retry-letter-topic).
 
-:::info
+:::note
 
 Currently, dead letter topic is enabled in Shared and Key_Shared subscription types.
 
@@ -415,7 +415,7 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 3. The consumer buffers the chunked messages and aggregates them into the receiver queue when it receives all the chunks of a message.
 4. The client consumes the aggregated message from the receiver queue.
 
-:::info
+:::note
 
 - Chunking is only available for persistent topics.
 - Chunking cannot be enabled simultaneously with batching. Before enabling chunking, you need to disable batching.
@@ -434,7 +434,7 @@ When multiple producers publish chunked messages into a single topic, the broker
 
 ![](/assets/chunking-02.png)
 
-:::info
+:::note
 
 In this case, interwoven chunked messages may bring some memory pressure to the consumer because the consumer keeps a separate buffer for each large message to aggregate all its chunks in one message. You can limit the maximum number of chunked messages a consumer maintains concurrently by configuring the `maxPendingChunkedMessage` parameter. When the threshold is reached, the consumer drops pending messages by silently acknowledging them or asking the broker to redeliver them later, optimizing memory utilization.
 
@@ -447,7 +447,7 @@ In this case, interwoven chunked messages may bring some memory pressure to the 
 The message chunking feature is OFF by default.
 To enable message chunking, set the `chunkingEnabled` parameter to `true` when creating a producer.
 
-:::info
+:::note
 
 If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](/api/client/).
 
@@ -468,7 +468,7 @@ As in other pub-sub systems, topics in Pulsar are named channels for transmittin
 | `namespace`                     | The administrative unit of the topic, which acts as a grouping mechanism for related topics. Most topic configuration is performed at the [namespace](#namespaces) level. Each tenant has one or more namespaces.                                                                                                                                                                                                                                                                                               |
 | `topic`                         | The final part of the name. Topic names have no special meaning in a Pulsar instance.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
-:::info
+:::note
 
 You do not need to explicitly create topics in Pulsar. If a client attempts to write or receive messages to/from a topic that does not yet exist, Pulsar creates that topic under the namespace provided in the [topic name](#topics) automatically.
 If no tenant or namespace is specified when a client creates a topic, the topic is created in the default tenant and namespace. You can also create a topic in a specified tenant and namespace, such as `persistent://my-tenant/my-namespace/my-topic`. `persistent://my-tenant/my-namespace/my-topic` means the `my-topic` topic is created in the `my-namespace` namespace of the `my-tenant` tenant.
@@ -580,7 +580,7 @@ In *shared* or *round robin* type, multiple consumers can attach to the same sub
 
 In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all able to subscribe to the topic.
 
-:::info
+:::note
 
 Shared subscriptions do not guarantee message ordering or support cumulative acknowledgment.
 
@@ -741,7 +741,7 @@ That requirement can be relaxed by enabling `allowOutOfOrderDelivery` via the Co
 
 ##### Batching for Key Shared Subscriptions
 
-:::info
+:::note
 
 When the consumers are using the Key_Shared subscription type, you need to **disable batching** or **use key-based batching** for the producers.
 :::
@@ -789,7 +789,7 @@ producer = client.create_producer(topic='my-topic', batching_type=pulsar.Batchin
 </Tabs>
 ````
 
-:::info
+:::note
 
 When you use Key_Shared subscriptions, be aware that:
   * You need to specify a key or ordering key for messages.
@@ -863,7 +863,7 @@ When a consumer subscribes to a Pulsar topic, by default it subscribes to one sp
 * On the basis of a [**reg**ular **ex**pression](https://en.wikipedia.org/wiki/Regular_expression) (regex), for example, `persistent://public/default/finance-.*`
 * By explicitly defining a list of topics
 
-:::info
+:::note
 
 When subscribing to multiple topics by regex, all topics must be in the same [namespace](#namespaces).
 
@@ -871,7 +871,7 @@ When subscribing to multiple topics by regex, all topics must be in the same [na
 
 When subscribing to multiple topics, the Pulsar client automatically makes a call to the Pulsar API to discover the topics that match the regex pattern/list, and then subscribe to all of them. If any of the topics do not exist, the consumer auto-subscribes to them once the topics are created.
 
-:::info
+:::note
 
  **No ordering guarantees across multiple topics**
  When a producer sends messages to a single topic, all messages are guaranteed to be read from that topic in the same order. However, these guarantees do not hold across multiple topics. So when a producer sends messages to multiple topics, the order in which messages are read from those topics is not guaranteed to be the same.
@@ -1029,7 +1029,7 @@ The following table outlines the available system topics for each specific names
 | User-defined-ns | `__transaction_buffer_snapshot` | Persistent | One per namespace | Transaction buffer snapshots |
 | User-defined-ns | `${topicName}__transaction_pending_ack` | Persistent | One per every topic subscription acknowledged with transactions | Acknowledgments with transactions |
 
-:::info
+:::note
 
 * You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
@@ -1114,7 +1114,7 @@ Message deduplication makes Pulsar an ideal messaging system to be used in conju
 ## Delayed message delivery
 Delayed message delivery enables you to consume a message later. In this mechanism, a message is stored in BookKeeper. The `DelayedDeliveryTracker` maintains the time index (time -> messageId) in memory after the message is published to a broker. This message will be delivered to a consumer once the specified delay is over.
 
-:::info
+:::note
 
 Only shared and key-shared subscriptions support delayed message delivery. In other subscriptions, delayed messages are dispatched immediately.
 

@@ -256,7 +256,7 @@ pulsar-admin schemas extract --classname <class-name> --jar <jar-path> --type <t
 
 ### Delete a schema
 
-:::info
+:::note
 
 In any case, the `delete` action deletes **all versions** of a schema registered for a topic.
 
@@ -356,7 +356,7 @@ admin.namespaces().setIsAllowAutoUpdateSchema("my-namspace", true);
 
 ### Disable schema AutoUpdate
 
-:::info
+:::note
 
 When schema auto-update is disabled, you can only [register a new schema](#upload-a-schema).
 

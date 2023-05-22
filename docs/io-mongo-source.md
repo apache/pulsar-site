@@ -4,7 +4,7 @@ title: MongoDB source connector
 sidebar_label: "MongoDB source connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

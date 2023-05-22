@@ -23,7 +23,7 @@ Follow the steps below to install the S3 offloader.
 
 ## Configuration
 
-:::info
+:::note
 
 Before offloading data from BookKeeper to S3-compatible storage, you need to configure some properties of the S3 offload driver. Besides, you can also configure the S3 offloader to run it automatically or trigger it manually.
 
@@ -88,7 +88,7 @@ export ACCESS_KEY_ID=ABC123456789
 export ACCESS_KEY_SECRET=ded7db27a4558e2ea8bbf0bf37ae0e8521618f366c
 ```
 
-:::info
+:::note
 
 Exporting these environment variables makes them available in the environment of spawned processes.
 

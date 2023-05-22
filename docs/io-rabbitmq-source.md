@@ -4,7 +4,7 @@ title: RabbitMQ source connector
 sidebar_label: "RabbitMQ source connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

@@ -107,7 +107,7 @@ Read more about how to use syntax highlighting and supported languages at [Synta
 Docusaurus supports these admonitions:
 
 ```markdown
-:::info
+:::note
 
 Some **content** with _Markdown_ `syntax`.
 
@@ -138,7 +138,7 @@ Some **content** with _Markdown_ `syntax`.
 :::
 ```
 
-:::info
+:::note
 
 Some **content** with _Markdown_ `syntax`.
 

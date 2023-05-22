@@ -25,7 +25,7 @@ bin/pulsar-admin functions create \
   --disk 10737418240
 ```
 
-:::info
+:::note
 
 The resources allocated to a given function are applied to each instance of the function. For example, if you apply 8GB of RAM to a function with a [parallelism](functions-deploy-cluster-parallelism.md) of 5, you are applying 40GB of RAM for the function in total.
 

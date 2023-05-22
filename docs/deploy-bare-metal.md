@@ -39,7 +39,7 @@ To run Pulsar on bare metal, the following configuration is recommended:
   * 3 for running a Pulsar broker, and a [BookKeeper](https://bookkeeper.apache.org) bookie
 * A single [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) name covering all of the Pulsar broker hosts (optional)
 
-:::info
+:::note
 
 * Broker is only supported on 64-bit JVM.
 * If you do not have enough machines, or you want to test Pulsar in cluster mode (and expand the cluster later), You can fully deploy Pulsar on a node on which ZooKeeper, bookie and broker run.
@@ -187,7 +187,7 @@ For more details of how to configure tiered storage feature, you can refer to th
 
 ## Deploy a ZooKeeper cluster
 
-:::info
+:::note
 
 If you already have an existing zookeeper cluster and want to use it, you can skip this section.
 
@@ -239,7 +239,7 @@ bin/pulsar-daemon start zookeeper
 
 ## Initialize cluster metadata
 
-:::info
+:::note
 
 When provisioning a new cluster, you need to initialize the cluster metadata on the metadata store (e.g., ZooKeeper). You need to initialize it **only once**.
 
@@ -271,7 +271,7 @@ Flag | Description
 `--broker-service-url`* | A broker service URL enabling interaction with the brokers in the cluster. This URL should not use the same DNS name as the web service URL but should use the `pulsar` scheme instead. The default port is 6650 (you had better not use a different port).
 `--broker-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster as well as a TLS broker service URL for the brokers in the cluster. The default port is 6651 (you had better not use a different port).
 
-:::info
+:::note
 
 If you do not have a DNS server, you can use multi-host format in the service URL with the following settings:
 
@@ -428,7 +428,7 @@ webServiceUrl=http://us-west.example.com:8080
 brokerServiceurl=pulsar://us-west.example.com:6650
 ```
 
-:::info
+:::note
 
 If you do not have a DNS server, you can specify multi-host in service URL as follows:
 ```properties

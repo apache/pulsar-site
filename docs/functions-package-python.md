@@ -129,7 +129,7 @@ To package a Python function into a **ZIP file**, complete the following steps.
 
 ## PIP
 
-:::info
+:::note
 
 The PIP method is only supported in Kubernetes runtime.
 

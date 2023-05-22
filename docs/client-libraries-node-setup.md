@@ -14,7 +14,7 @@ npm install pulsar-client
 
 For more information, see [README](https://github.com/apache/pulsar-client-node/blob/master/README.md).
 
-:::info
+:::note
 
 This library only works in Node.js 10.x or later versions because it uses the [`node-addon-api`](https://github.com/nodejs/node-addon-api) module.
 

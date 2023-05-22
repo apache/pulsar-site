@@ -78,7 +78,7 @@ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 <Enter passphrase>
 ```
 
-:::info
+:::note
 
 New **RSA** keys generated should be at least **4096** bits.
 
