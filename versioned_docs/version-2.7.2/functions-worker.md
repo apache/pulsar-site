@@ -10,7 +10,7 @@ Pulsar `functions-worker` is a logic component to run Pulsar Functions in cluste
 - [run with brokers](#run-functions-worker-with-brokers)
 - [run it separately](#run-functions-worker-separately) in a different broker
 
-:::info
+:::note
 
 The `--- Service Urls---` lines in the following diagrams represent Pulsar service URLs that Pulsar client and admin use to connect to a Pulsar cluster.
 
@@ -119,7 +119,7 @@ This section illustrates how to run `functions-worker` as a separate process in 
 
 ![assets/functions-worker-separated.png](/assets/functions-worker-separated.png)
 
-:::info
+:::note
 
 In this mode, make sure `functionsWorkerEnabled` is set to `false`, so you won't start `functions-worker` with brokers by mistake.
 
@@ -186,7 +186,7 @@ For details on TLS encryption, refer to [Transport Encryption using TLS](securit
 
 To enable authentication on Functions Worker, you need to configure the following settings.
 
-:::info
+:::note
 
 Substitute the *providers list* with the providers you want to enable.
 

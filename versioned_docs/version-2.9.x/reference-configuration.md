@@ -370,7 +370,7 @@ In 2.9.3 and later versions, you can configure some clients by using the appropr
 |brokerClient_| Configure **all** the broker's Pulsar Clients and Pulsar Admin Clients. These configurations are applied after hard coded configuration and before the above broker client configurations named above.|
 |bookkeeper_| Configure the broker's BookKeeper clients used by managed ledgers and the BookkeeperPackagesStorage bookkeeper client. Takes precedence over most other configuration values.|
 
-:::info
+:::note
 
 When running the function worker within the broker, these prefixed configurations do not apply to any of those clients. You must configure those clients using the `functions_worker.yml` file.
 
@@ -425,7 +425,7 @@ You can set the log level and configuration in the  [log4j2.yaml](https://github
 |log4j.appender.TRACEFILE.layout| org.apache.log4j.PatternLayout|
 |log4j.appender.TRACEFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L][%x] - %m%n|
 
-:::info
+:::note
 
 'topic' in log4j2.appender is configurable.
 - If you want to append all logs to a single topic, set the same topic name.

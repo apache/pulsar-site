@@ -56,7 +56,7 @@ def process(input):
 
 For complete code, see [here](https://github.com/apache/pulsar/blob/master/pulsar-functions/python-examples/native_exclamation_function.py).
 
-:::info
+:::note
 
 You can write Pulsar Functions in python2 or python3. However, Pulsar only looks for `python` as the interpreter.
 If you're running Pulsar Functions on an Ubuntu system that only supports python3, you might fail to
@@ -968,7 +968,7 @@ States are key-value pairs, where the key is a string and the value is arbitrary
 
 You can access states within Pulsar Functions using the `putState`, `getState`, `incrCounter`, `getCounter` and `deleteState` calls on the context object. You can also manage states using the [querystate](#query-state) and [putstate](#putstate) options to `pulsar-admin functions`.
 
-:::info
+:::note
 
 State storage is not available in Go.
 

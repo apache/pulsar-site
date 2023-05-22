@@ -101,7 +101,7 @@ rpm -ivh apache-pulsar-client*.rpm
 
 Now, you can see Pulsar C++ client libraries installed under the `/usr/lib` directory.
 
-:::info
+:::note
 
 If you get an error like "libpulsar.so: cannot open shared object file: No such file or directory" when starting a Pulsar client, you need to run `ldconfig` first.
 
@@ -433,7 +433,7 @@ The following example shows how to create a producer and a consumer with a Proto
 ​
 1. Generate the `User` class using Protobuf3.
 
-   :::info
+   :::note
 
    You need to use Protobuf3 or later versions.
 

@@ -4,7 +4,7 @@ title: InfluxDB sink connector
 sidebar_label: "InfluxDB sink connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

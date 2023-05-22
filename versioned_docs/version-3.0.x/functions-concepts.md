@@ -142,7 +142,7 @@ Pulsar Functions take byte arrays as inputs and spit out byte arrays as output. 
 
 ## Window function
 
-:::info
+:::note
 
 Currently, window functions are only available in Java, and do not support `MANUAL` and  `Effectively-once` delivery semantics.
 

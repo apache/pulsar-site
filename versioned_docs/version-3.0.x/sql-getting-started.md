@@ -21,7 +21,7 @@ To query data in Pulsar with Pulsar SQL, complete the following steps.
 PULSAR_STANDALONE_USE_ZOOKEEPER=1 ./bin/pulsar standalone
 ```
 
-:::info
+:::note
 
 Starting the Pulsar standalone cluster from scratch doesn't enable ZooKeeper by default. However, the Pulsar SQL depends on ZooKeeper. Therefore, you need to set `PULSAR_STANDALONE_USE_ZOOKEEPER=1` to enable ZooKeeper.
 

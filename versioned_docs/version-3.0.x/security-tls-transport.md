@@ -16,7 +16,7 @@ Transport Layer Security (TLS) is a form of [public key cryptography](https://en
 
 This section introduces how to configure TLS encryption in Pulsar. For how to configure mTLS authentication in Pulsar, refer to [mTLS authentication](security-tls-authentication.md). Alternatively, you can use another [Athenz authentication](security-athenz.md) on top of TLS transport encryption.
 
-:::info
+:::note
 
 Enabling TLS encryption may impact the performance due to encryption overhead.
 
@@ -33,7 +33,7 @@ TLS certificates include the following three types. Each certificate (key pair) 
 
 For both server and client certificates, the private key with a certificate request is generated first, and the public key (the certificate) is generated after the **trust cert** signs the certificate request. When [mTLS authentication](security-tls-authentication.md) is enabled, the server uses the **trust cert** to verify that the client has a key pair that the certificate authority signs. The Common Name (CN) of a client certificate is used as the client's role token, while the Subject Alternative Name (SAN) of a server certificate is used for [Hostname verification](#hostname-verification).
 
-:::info
+:::note
 
 The validity of these certificates is 365 days. It's highly recommended to use `sha256` or `sha512` as the signature algorithm, while `sha1` is not supported.
 
@@ -78,7 +78,7 @@ openssl genrsa -out ca.key.pem 2048
 openssl req -x509 -new -nodes -key ca.key.pem -subj "/CN=CARoot" -days 365 -out ca.cert.pem
 ```
 
-:::info
+:::note
 
 The default `openssl` on macOS doesn't work for the commands above. You need to upgrade `openssl` via Homebrew:
 
@@ -333,7 +333,7 @@ var client = PulsarClient.Builder()
                          .Build();
 ```
 
-:::info
+:::note
 
 `VerifyCertificateName` refers to the configuration of hostname verification in the C# client.
 
@@ -384,7 +384,7 @@ async def test():
 asyncio.run(test())
 ```
 
-:::info
+:::note
 
 In addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md#security-settings).
 
@@ -435,7 +435,7 @@ keytool -importcert -keystore client.truststore.jks ${CLIENT_COMMON_PARAMS} -fil
 keytool -importcert -keystore broker.truststore.jks ${BROKER_COMMON_PARAMS} -file client.cer -alias truststore
 ```
 
-:::info
+:::note
 
 To configure [hostname verification](#hostname-verification), you need to append ` -ext SAN=IP:127.0.0.1,IP:192.168.20.2,DNS:broker.example.com` to the value of `BROKER_COMMON_PARAMS` as the Subject Alternative Name (SAN).
 
@@ -480,7 +480,7 @@ brokerClientTlsKeyStorePassword=clientpw
 
 To disable non-TLS ports, you need to set the values of `brokerServicePort` and `webServicePort` to empty.
 
-:::info
+:::note
 
 The default value of `tlsRequireTrustedClientCertOnConnect` is `false`, which represents one-way TLS. When it's set to `true` (mutual TLS is enabled), brokers/proxies require trusted client certificates; otherwise, brokers/proxies reject connection requests from clients.
 
@@ -547,7 +547,7 @@ The following is an example.
         .build();
 ```
 
-:::info
+:::note
 
 If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
 

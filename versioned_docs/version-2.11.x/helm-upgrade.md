@@ -17,7 +17,7 @@ To upgrade Apache Pulsar Helm to a newer version, complete the following steps:
    helm get values <release-name> > pulsar.yaml
    ```
 
-   :::info
+   :::note
 
    It's highly recommended to provide all values using the `helm upgrade --set key=value` syntax or the `-f values.yml` instead of using `--reuse-values`, because some of the current values might be deprecated.
 

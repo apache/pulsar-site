@@ -63,7 +63,7 @@ The following table outlines the primitive types that Pulsar schema supports, an
 | `LOCAL_TIME` | An immutable date-time object that represents a time, often viewed as hour-minute-second. Time is represented to nanosecond precision. | java.time.LocalDateTime | N/A | N/A  | N/A | N/A |
 | LOCAL_DATE_TIME | An immutable date-time object that represents a date-time, often viewed as year-month-day-hour-minute-second. | java.time.LocalTime | N/A | N/A | N/A | N/A |
 
-:::info
+:::note
 
 Pulsar does not store any schema data in `SchemaInfo` for primitive types. Some of the primitive schema implementations can use the `properties` parameter to store implementation-specific tunable settings. For example, a string schema can use `properties` to store the encoding charset to serialize and deserialize strings.
 
@@ -258,7 +258,7 @@ For how to enable schema validation enforcement, see [Manage schema validation](
 
 Schemas store the details of attributes and types. To satisfy new business needs, schemas undergo evolution over time with [versioning](#schema-versioning).
 
-:::info
+:::note
 
 Schema evolution only applies to Avro, JSON, Protobuf, and ProtobufNative schemas.
 

@@ -10,7 +10,7 @@ Pulsar `functions-worker` is a logic component to run Pulsar Functions in cluste
 - [run with brokers](#run-Functions-worker-with-brokers)
 - [run it separately](#run-Functions-worker-separately) in a different broker
 
-:::info
+:::note
 
 The `--- Service Urls---` lines in the following diagrams represent Pulsar service URLs that Pulsar client and admin use to connect to a Pulsar cluster.
 

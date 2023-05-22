@@ -4,7 +4,7 @@ title: Debezium source connector
 sidebar_label: "Debezium source connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
@@ -182,7 +182,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
            --source-config '{"database.hostname": "localhost","database.port": "3306","database.user": "debezium","database.password": "dbz","database.server.id": "184054","database.server.name": "dbserver1","database.whitelist": "inventory","database.history": "org.apache.pulsar.io.debezium.PulsarDatabaseHistory","database.history.pulsar.topic": "history-topic","database.history.pulsar.service.url": "pulsar://127.0.0.1:6650","key.converter": "org.apache.kafka.connect.json.JsonConverter","value.converter": "org.apache.kafka.connect.json.JsonConverter","pulsar.service.url": "pulsar://127.0.0.1:6650","offset.storage.topic": "offset-topic"}'
        ```
 
-     :::info
+     :::note
 
      The Debezium connector saves data in the following 4 types of topics:
 
@@ -323,7 +323,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
            --source-config '{"database.hostname": "localhost","database.port": "5432","database.user": "postgres","database.password": "changeme","database.dbname": "postgres","database.server.name": "dbserver1","schema.whitelist": "public","table.whitelist": "public.users","pulsar.service.url": "pulsar://127.0.0.1:6650"}'
        ```
 
-     :::info
+     :::note
 
      The Debezium connector saves data in the following 4 types of topics:
 
@@ -483,7 +483,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
            --source-config '{"mongodb.hosts": "rs0/mongodb:27017","mongodb.name": "dbserver1","mongodb.user": "debezium","mongodb.password": "dbz","mongodb.task.id": "1","database.whitelist": "inventory","database.history.pulsar.service.url": "pulsar://127.0.0.1:6650"}'
        ```
 
-     :::info
+     :::note
 
      The Debezium connector saves data in the following 4 types of topics:
 

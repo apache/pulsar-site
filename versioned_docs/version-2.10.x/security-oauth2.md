@@ -17,7 +17,7 @@ This library allows you to authenticate the Pulsar client by using an access tok
 
 The authentication type determines how to obtain an access token through an OAuth 2.0 authorization flow.
 
-:::info
+:::note
 
 Currently, the Pulsar Java client only supports the `client_credentials` authentication type.
 
@@ -216,7 +216,7 @@ This example shows how to configure OAuth2 authentication in Node.js client.
 
 ```
 
-:::info
+:::note
 
 The support for OAuth2 authentication is only available in Node.js client 1.6.2 and later versions.
 

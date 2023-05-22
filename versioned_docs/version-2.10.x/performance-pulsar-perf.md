@@ -85,7 +85,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
   **Input**
 
-  :::info
+  :::note
 
   If you have not created a topic (in this example, it is _my-topic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf consume`, make sure your topic has enough messages to consume.
 
@@ -128,7 +128,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
   ```
 
-  :::info
+  :::note
 
   If you have not created a topic (in this example, it is _my-topic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf consume`, make sure your topic has enough messages to consume.
 
@@ -167,7 +167,7 @@ bin/pulsar-perf transaction --topics-c myConsumerTopic --topics-p MyproduceTopic
 
 ```
 
-:::info
+:::note
 
 If you have not created a topic (in this example, it is _myConsumerTopic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf transaction`, make sure your topic has enough messages to consume.
 
@@ -197,7 +197,7 @@ bin/pulsar-perf transaction --topics-c myConsumerTopic --topics-p myproduceTopic
 
 ```
 
-:::info
+:::note
 
 If you have not created a topic (in this example, it is _myConsumerTopic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf transaction --txn-disEnable`, make sure your topic has enough messages to consume.
 

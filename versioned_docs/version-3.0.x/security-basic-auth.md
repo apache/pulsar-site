@@ -29,7 +29,7 @@ Install [`htpasswd`](https://httpd.apache.org/docs/2.4/programs/htpasswd.html) i
 
 ## Create your authentication file
 
-:::info
+:::note
 
 Currently, you can use MD5 (recommended) and CRYPT encryption to authenticate your password.
 
@@ -75,7 +75,7 @@ brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.Authenticati
 brokerClientAuthenticationParameters={"userId":"superuser","password":"admin"}
 ```
 
-:::info
+:::note
 
 You can also set an environment variable named `PULSAR_EXTRA_OPTS` and the value is `-Dpulsar.auth.basic.conf=/path/to/.htpasswd`. Pulsar reads this environment variable to implement HTTP basic authentication.
 

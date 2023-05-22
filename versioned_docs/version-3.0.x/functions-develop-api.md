@@ -57,7 +57,7 @@ def process(input):
 
 For more details, see [code example](https://github.com/apache/pulsar/blob/master/pulsar-functions/python-examples/native_exclamation_function.py).
 
-:::info
+:::note
 
 Write Pulsar Functions in Python 3. To make sure your functions can run, you need to have Python 3 installed for functions workers and set Python 3 as the default interpreter.
 
@@ -180,7 +180,7 @@ This extended Pulsar Functions SDK provides two additional interfaces to initial
 - By using the `initialize` interface, you can initialize external resources which only need one-time initialization when the function instance starts.
 - By using the `close` interface, you can close the referenced external resources when the function instance closes.
 
-:::info
+:::note
 
 The extended Pulsar Functions SDK for Java is only available in Pulsar 2.10.0 or later versions. Before using it, you need to [set up function workers](functions-worker.md) in Pulsar 2.10.0 or later versions.
 

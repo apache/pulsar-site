@@ -783,7 +783,7 @@ admin.namespaces().getRetention(namespace)
 It sets the message dispatch rate for all the topics under a given namespace. The dispatch rate can be restricted by the number of messages per X seconds (`msg-dispatch-rate`) or by the number of message-bytes per X second (`byte-dispatch-rate`). The dispatch rate is in second and it can be configured with `dispatch-rate-period`. The default value of `msg-dispatch-rate` and `byte-dispatch-rate` is -1 which
 disables the throttling.
 
-:::info
+:::note
 
 - If neither `clusterDispatchRate` nor `topicDispatchRate` is configured, dispatch throttling is disabled.
 - If `topicDispatchRate` is not configured, `clusterDispatchRate` takes effect.

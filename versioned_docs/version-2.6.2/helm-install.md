@@ -25,7 +25,7 @@ Install [`helm`](helm-tools.md) and [`kubectl`](helm-tools.md) on your computer.
 
 ## Cloud cluster preparation
 
-:::info
+:::note
 
 Kubernetes 1.14 or higher is required.
 

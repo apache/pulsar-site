@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 To ensure that running functions are healthy at any time, you can configure functions to publish arbitrary metrics to the `metrics` interface that can be queried.
 
-:::info
+:::note
 
 Using the language-native interface for Java or Python is **not** able to publish metrics and stats to Pulsar.
 

@@ -49,7 +49,7 @@ volumes:
   persistence: true
 ```
 
-:::info
+:::note
 
 Before installing the production instance of Pulsar, ensure to plan the storage settings to avoid extra storage migration work. Because after initial installation, you must edit Kubernetes objects manually if you want to change storage settings.
 

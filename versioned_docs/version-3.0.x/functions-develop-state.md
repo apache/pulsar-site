@@ -14,7 +14,7 @@ Pulsar Functions use [Apache BookKeeper](https://bookkeeper.apache.org) as a sta
 
 States are key-value pairs, where a key is a string and its value is arbitrary binary data - counters are stored as 64-bit big-endian binary values. Keys are scoped to an individual function and shared between instances of that function.
 
-:::info
+:::note
 
 State storage is **not** available for Go functions.
 
@@ -217,7 +217,7 @@ To asynchronously retrieve the state of a given `key`, you can use `getStateAsyn
 
 ### Delete state
 
-:::info
+:::note
 
 Both counters and binary values share the same keyspace, so this API deletes either type.
 

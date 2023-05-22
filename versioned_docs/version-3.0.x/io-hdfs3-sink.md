@@ -4,7 +4,7 @@ title: HDFS3 sink connector
 sidebar_label: "HDFS3 sink connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

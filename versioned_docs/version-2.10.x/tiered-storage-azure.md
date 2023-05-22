@@ -63,7 +63,7 @@ This example uses Pulsar 2.6.2.
 
    ```
 
-   :::info
+   :::note
 
    * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's Pulsar directory.
    * If you are running Pulsar in Docker or deploying Pulsar using a Docker image (such as K8s and DCOS), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
@@ -72,7 +72,7 @@ This example uses Pulsar 2.6.2.
 
 ## Configuration
 
-:::info
+:::note
 
 Before offloading data from BookKeeper to Azure BlobStore, you need to configure some properties of the Azure BlobStore offload driver.
 

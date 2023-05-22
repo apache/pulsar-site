@@ -8,7 +8,7 @@ sidebar_label: "Authentication using Kerberos"
 
 In Pulsar, you can use Kerberos with [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) as a choice for authentication. Since Pulsar uses the [Java Authentication and Authorization Service (JAAS)](https://en.wikipedia.org/wiki/Java_Authentication_and_Authorization_Service) for SASL configuration, you need to provide JAAS configurations for Kerberos authentication.
 
-:::info
+:::note
 
 Kerberos authentication uses the authenticated principal as the role token for [Pulsar authorization](security-authorization.md). If you've enabled `authorizationEnabled`, you need to set `superUserRoles` in `broker.conf` that corresponds to the name registered in KDC. For example:
 
@@ -101,7 +101,7 @@ You need to set the `pulsar_jaas.conf` file path as a JVM parameter. For example
 
 ### Connect to KDC
 
-:::info
+:::note
 
 If your machines configured with Kerberos already have a system-wide configuration, you can skip this configuration.
 
@@ -185,7 +185,7 @@ Add a new section for proxies in the `pulsar_jaas.conf` file. Here is an example
 
 ## Configure Kerberos authentication in Java clients
 
-:::info
+:::note
 
 Ensure that the operating system user who starts Pulsar clients can access the keytabs configured in the `pulsar_jaas.conf` file and the KDC server configured in the `krb5.conf` file.
 
@@ -224,7 +224,7 @@ Ensure that the operating system user who starts Pulsar clients can access the k
             .build();
     ```
 
-   :::info
+   :::note
 
    - To configure clients for proxies, you need to set `serverType` to `proxy` instead of `broker`.
    - The first two lines in the above example are hard-coded. Alternatively, you can set additional JVM parameters for `pulsar_jaas.conf` and `krb5.conf` files when you run the application like below:

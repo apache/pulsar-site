@@ -37,7 +37,7 @@ Clusters can be managed via:
 
 New clusters can be provisioned using the admin interface.
 
-:::info
+:::note
 
 This operation requires superuser privileges.
 

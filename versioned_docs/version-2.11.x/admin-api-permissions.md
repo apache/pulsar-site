@@ -68,7 +68,7 @@ pulsar-admin namespaces grant-permission test-tenant/namespace1 \
 
 Then, roles `1.role.my`, `2.role.my`, `foo.role.my`, `bar.role.my`, etc. can produce and consume.
 
-:::info
+:::note
 
 A wildcard matching works at **the beginning or end of the role name only**.
 

@@ -897,7 +897,7 @@ The dispatch rate can be restricted by the number of messages per X seconds (`ms
 dispatch rate is in second and it can be configured with `dispatch-rate-period`. Default value of `msg-dispatch-rate` and `byte-dispatch-rate` is -1 which
 disables the throttling.
 
-:::info
+:::note
 
 - If neither `clusterDispatchRate` nor `topicDispatchRate` is configured, dispatch throttling is disabled.
 

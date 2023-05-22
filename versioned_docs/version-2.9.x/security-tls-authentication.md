@@ -45,7 +45,7 @@ $ openssl req -config openssl.cnf \
 
 ```
 
-:::info
+:::note
 
 If openssl.cnf is not specified, read [Certificate authority](security-tls-transport.md#certificate-authority) to get the openssl.cnf.
 
@@ -63,7 +63,7 @@ $ openssl ca -config openssl.cnf -extensions usr_cert \
 
 You can get a cert, `admin.cert.pem`, and a key, `admin.key-pk8.pem` from this command. With `ca.cert.pem`, clients can use this cert and this key to authenticate themselves to brokers and proxies as the role token ``admin``.
 
-:::info
+:::note
 
 If the "unable to load CA private key" error occurs and the reason of this error is "No such file or directory: /etc/pki/CA/private/cakey.pem" in this step. Try the command below:
 

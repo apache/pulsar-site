@@ -39,7 +39,7 @@ Here are some key points for understanding how it works:
 - Each Pulsar cluster has one or multiple brokers and bookies.
 - Each Pulsar cluster has one metadata store, which can be separated into [Pulsar metadata store](concepts-architecture-overview.md#metadata-store) and [BookKeeper metadata store](https://bookkeeper.apache.org/docs/latest/getting-started/concepts/#metadata-storage).
 
-:::info
+:::note
 
 When using this approach, if you want to achieve namespace isolation, you need to specify a cluster for a namespace. The cluster must be in the allowed cluster list of the tenant. Topics under the namespace are assigned to this cluster.
 

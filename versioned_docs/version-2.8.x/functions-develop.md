@@ -56,7 +56,7 @@ def process(input):
 
 For complete code, see [here](https://github.com/apache/pulsar/blob/master/pulsar-functions/python-examples/native_exclamation_function.py).
 
-:::info
+:::note
 
 You can write Pulsar Functions in python2 or python3. However, Pulsar only looks for `python` as the interpreter.
 If you're running Pulsar Functions on an Ubuntu system that only supports python3, you might fail to
@@ -1134,7 +1134,7 @@ $ bin/pulsar-admin functions localrun \
 
 Pulsar Functions allows you to deploy and manage processing functions that consume messages from and publish messages to Pulsar topics easily. It is important to ensure that the running functions are healthy at any time. Pulsar Functions can publish arbitrary metrics to the metrics interface which can be queried.
 
-:::info
+:::note
 
 If a Pulsar Function uses the language-native interface for Java or Python, that function is not able to publish metrics and stats to Pulsar.
 
@@ -1297,7 +1297,7 @@ States are key-value pairs, where the key is a string and the value is arbitrary
 
 You can access states within Pulsar Java Functions using the `putState`, `putStateAsync`, `getState`, `getStateAsync`, `incrCounter`, `incrCounterAsync`,  `getCounter`, `getCounterAsync` and `deleteState` calls on the context object. You can access states within Pulsar Python Functions using the `putState`, `getState`, `incrCounter`, `getCounter` and `deleteState` calls on the context object. You can also manage states using the [querystate](#query-state) and [putstate](#putstate) options to `pulsar-admin functions`.
 
-:::info
+:::note
 
 State storage is not available in Go.
 

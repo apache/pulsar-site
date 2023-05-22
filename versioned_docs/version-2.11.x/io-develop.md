@@ -260,7 +260,7 @@ to a [Pulsar Functions](functions-overview.md) cluster.
 There are two methods to
 work with Pulsar Functions' runtime, that is, [NAR](#nar) and [uber JAR](#uber-jar).
 
-:::info
+:::note
 
 If you plan to package and distribute your connector for others to use, you are obligated to
 license and copyright your own code properly. Remember to add the license and copyright to

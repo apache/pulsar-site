@@ -31,7 +31,7 @@ If you want to deploy a single Pulsar cluster, see [Clusters and Brokers](gettin
 
 Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK 8 or later versions, JRE/JDK 11 is recommended.
 
-:::info
+:::note
 
 Broker is only supported on 64-bit JVM.
 

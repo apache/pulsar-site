@@ -4,7 +4,7 @@ title: Kinesis source connector
 sidebar_label: "Kinesis source connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
@@ -14,7 +14,7 @@ The Kinesis source connector pulls data from Amazon Kinesis and persists data in
 
 This connector uses the [Kinesis Consumer Library](https://github.com/awslabs/amazon-kinesis-client) (KCL) to do the actual consumption of messages. The KCL uses DynamoDB to track the state of consumers.
 
-:::info
+:::note
 
 Currently, the Kinesis source connector only supports raw messages. If you use KMS encrypted messages, the encrypted messages are sent to downstream. This connector will support decrypting messages in future releases.
 

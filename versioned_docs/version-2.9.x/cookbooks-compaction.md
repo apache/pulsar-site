@@ -43,7 +43,7 @@ $ bin/pulsar-admin namespaces set-compaction-threshold \
 
 ```
 
-:::info
+:::note
 
 To configure the compaction policy at the topic level, you need to enable [topic-level policy](concepts-multi-tenancy.md#namespace-change-events-and-topic-level-policies) first.
 

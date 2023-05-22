@@ -336,7 +336,7 @@ class Example(Record):
 
 ##### Set namespace for Avro schema
 
-:::info
+:::note
 
 This setting is only available in 2.8.2 and later versions.
 

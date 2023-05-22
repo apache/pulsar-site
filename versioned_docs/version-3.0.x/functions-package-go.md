@@ -4,7 +4,7 @@ title: Package Go Functions
 sidebar_label: "Package Go Functions"
 ---
 
-:::info
+:::note
 
 Currently, Go functions can be implemented only using SDK and the interface of functions is exposed in the form of SDK. Before using Go functions, you need to import `github.com/apache/pulsar/pulsar-function-go/pf`.
 

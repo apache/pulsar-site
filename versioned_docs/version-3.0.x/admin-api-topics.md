@@ -37,7 +37,7 @@ non-persistent://tenant/namespace/topic
 ## Manage topic resources
 Whether it is a persistent or non-persistent topic, you can obtain the topic resources through `pulsar-admin` tool, REST API and Java.
 
-:::info
+:::note
 
 In REST API, `:schema` stands for persistent or non-persistent. `:tenant`, `:namespace`, `:x` are variables, replace them with the real tenant, namespace, and `x` names when using them.
 Take {@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getList?version=@pulsar:version_number@} as an example, to get the list of persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/persistent/my-tenant/my-namespace`. To get the list of non-persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/non-persistent/my-tenant/my-namespace`.
@@ -1300,7 +1300,7 @@ pulsar-admin topics create \
     persistent://my-tenant/my-namespace/my-topic
 ```
 
-:::info
+:::note
 
 When you create a non-partitioned topic with the suffix '-partition-' followed by numeric value like 'xyz-topic-partition-x' for the topic name, if a partitioned topic with same suffix 'xyz-topic-partition-y' exists, then the numeric value(x) for the non-partitioned topic must be larger than the number of partitions(y) of the partitioned topic. Otherwise, you cannot create such a non-partitioned topic.
 
@@ -1541,7 +1541,7 @@ You can use Pulsar [admin API](admin-api-overview.md) to create, update, delete 
 
 When creating a new partitioned topic, you need to provide a name and the number of partitions for the topic.
 
-:::info
+:::note
 
 By default, if there are no messages 60 seconds after creation, topics are considered inactive and deleted automatically to avoid generating trash data. To disable this feature, set `brokerDeleteInactiveTopicsEnabled` to `false`. To change the frequency of checking inactive topics, set `brokerDeleteInactiveTopicsFrequencySeconds` to a specific value.
 
@@ -1565,7 +1565,7 @@ pulsar-admin topics create-partitioned-topic \
     --partitions 4
 ```
 
-:::info
+:::note
 
 If a non-partitioned topic with the suffix '-partition-' followed by a numeric value like 'xyz-topic-partition-10', you can not create a partitioned topic with name 'xyz-topic', because the partitions of the partitioned topic could override the existing non-partitioned topic. To create such partitioned topic, you have to delete that non-partitioned topic first.
 

@@ -48,7 +48,7 @@ default(localhost)>
 By default, the shell tries to connect to a local Pulsar instance.
 To connect to a different cluster, you have to register the cluster with Pulsar shell. You can do this in a few different ways depending on where your config file is located:
 
-:::info
+:::note
 
 The configuration file must be a valid `client.conf` file, the same one you use for `pulsar-admin`, `pulsar-client` and other client tools.
 

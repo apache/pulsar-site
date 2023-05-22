@@ -4,7 +4,7 @@ title: Enable stateful functions
 sidebar_label: "Enable stateful functions"
 ---
 
-:::info
+:::note
 
 When the stateful APIs of Pulsar Functions are required – for example, `putState()` and `queryState()` related interfaces – you need to enable the stateful function feature in function workers.
 

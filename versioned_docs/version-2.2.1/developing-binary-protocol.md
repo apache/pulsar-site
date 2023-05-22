@@ -272,7 +272,7 @@ Fields:
 
 ##### Command CloseProducer
 
-:::info
+:::note
 
 This command can be sent by either producer or broker.
 
@@ -441,7 +441,7 @@ message CommandAckResponse {
 
 ##### Command CloseConsumer
 
-:::info
+:::note
 
 This command can be sent by either producer or broker.
 

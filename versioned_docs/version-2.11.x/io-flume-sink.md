@@ -4,7 +4,7 @@ title: Flume sink connector
 sidebar_label: "Flume sink connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

@@ -2207,7 +2207,7 @@ Options
 ### `create-partitioned-topic`
 Create a partitioned topic. A partitioned topic must be created before producers can publish to it.
 
-:::info
+:::note
 
 By default, after 60 seconds of creation, topics are considered inactive and deleted automatically to prevent from generating trash data.
 To disable this feature, set `brokerDeleteInactiveTopicsEnabled` to `false`.
@@ -2250,7 +2250,7 @@ pulsar-admin topics delete-partitioned-topic {persistent|non-persistent}
 ### `create`
 Creates a non-partitioned topic. A non-partitioned topic must explicitly be created by the user if allowAutoTopicCreation or createIfMissing is disabled.
 
-:::info
+:::note
 
 By default, after 60 seconds of creation, topics are considered inactive and deleted automatically to prevent from generating trash data.
 To disable this feature, set `brokerDeleteInactiveTopicsEnabled`  to `false`.
@@ -2456,7 +2456,7 @@ Options
 |`-sbs`,` --get-subscription-backlog-size`| Set to `true` to get backlog size for each subscription, locking required | false |
 
 
-:::info
+:::note
 
 The unit of `storageSize` and `averageMsgSize` is Byte.
 

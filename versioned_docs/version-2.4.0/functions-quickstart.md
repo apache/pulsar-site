@@ -371,7 +371,7 @@ If you see `Created successfully`, the function is ready to accept incoming mess
 
 The `--classname` parameter is not specified when running Go function, because there is no `Class` concept in Go, which is different from Java and Python.
 
-:::info
+:::note
 
 When you use the `--go` command to specify an executable file, make sure you have executable permissions.
 
@@ -428,7 +428,7 @@ Successfully downloaded sh
 
 ```
 
-:::info
+:::note
 
 `pulsar-client` is not needed as a dependency as it has already installed in the worker node.
 

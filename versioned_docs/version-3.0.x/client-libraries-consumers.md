@@ -73,7 +73,7 @@ Consumer consumer = client.newConsumer()
 
 Only the first consumer is allowed to the subscription, and other consumers receive an error. The first consumer receives all 10 messages, and the consuming order is the same as the producing order.
 
-:::info
+:::note
 
 If the topic is partitioned, the first consumer subscribes to all partitioned topics, and other consumers are not assigned with partitions and receive an error.
 
@@ -130,7 +130,7 @@ consumer2 will receive:
 ("key-4", "message-4-2")
 ```
 
-:::info
+:::note
 
 If a topic is a partitioned topic, each partition has only one active consumer, messages of one partition are distributed to only one consumer, and messages of multiple partitions are distributed to multiple consumers.
 
@@ -278,7 +278,7 @@ Producer producer = client.newProducer()
 </Tabs>
 ````
 
-:::info
+:::note
 
 If the message key is not specified, messages without keys are dispatched to one consumer in order by default.
 
@@ -331,7 +331,7 @@ pulsarClient.newConsumer()
         .subscribe();
 ```
 
-:::info
+:::note
 
 By default, the `subscriptionTopicsMode` of the consumer is `PersistentOnly`. Available options of `subscriptionTopicsMode` are `PersistentOnly`, `NonPersistentOnly`, and `AllTopics`.
 
@@ -448,7 +448,7 @@ This example shows how a consumer unsubscribes from a topic.
 </Tabs>
 ````
 
-:::info
+:::note
 
 A consumer cannot be used and is disposed once the consumer unsubscribes from a topic.
 
@@ -582,7 +582,7 @@ consumer.acknowledge(messages)
 </Tabs>
 ````
 
-:::info
+:::note
 
 Batch receive policy limits the number and bytes of messages in a single batch. You can specify a timeout to wait for enough messages.
 The batch receive is completed if any of the following conditions are met: enough number of messages, bytes of messages, wait timeout.
@@ -727,7 +727,7 @@ Redelivery count | Redelivery delay
 7 | 10 + 60 seconds
 8 | 10 + 60 seconds
 
-:::info
+:::note
 
 - The `negativeAckRedeliveryBackoff` does not work with `consumer.negativeAcknowledge(MessageId messageId)` because you are not able to get the redelivery count from the message ID.
 - If a consumer crashes, it triggers the redelivery of unacked messages. In this case, `RedeliveryBackoff` does not take effect and the messages might get redelivered earlier than the delay time from the backoff.
@@ -977,7 +977,7 @@ To intercept messages, you can add one or multiple `ConsumerInterceptor`s when c
 </Tabs>
 ````
 
-:::info
+:::note
 
 If you are using multiple interceptors, they apply in the order they are passed to the `intercept` method.
 

@@ -10,7 +10,7 @@ Pulsar `functions-worker` is a logic component to run Pulsar Functions in cluste
 - [run with brokers](#run-functions-worker-with-brokers)
 - [run it separately](#run-functions-worker-separately) in a different broker
 
-:::info
+:::note
 
 The `--- Service Urls---` lines in the following diagrams represent Pulsar service URLs that Pulsar client and admin use to connect to a Pulsar cluster.
 
@@ -118,7 +118,7 @@ This section illustrates how to run `functions-worker` as a separate process in 
 
 ![assets/functions-worker-separated.png](/assets/functions-worker-separated.png)
 
-:::info
+:::note
 
 In this mode, make sure `functionsWorkerEnabled` is set to `false`, so you won't start `functions-worker` with brokers by mistake. Also, while accessing the `functions-worker` to manage any of the functions, the `pulsar-admin` CLI tool or any of the clients should use the `workerHostname` and `workerPort` that you set in [Worker parameters](#worker-parameters) to generate an `--admin-url`.
 
@@ -165,7 +165,7 @@ This is very useful in case you want to:
 - add JMV flags, like `-XX:+ExitOnOutOfMemoryError`
 - pass custom system properties, like `-Dlog4j2.formatMsgNoLookups`
 
-:::info
+:::note
 
 This feature applies only to Process and Kubernetes runtimes.
 
@@ -205,7 +205,7 @@ For details on TLS encryption, refer to [Transport Encryption using TLS](securit
 
 To enable authentication on Functions Worker, you need to configure the following settings.
 
-:::info
+:::note
 
 Substitute the *providers list* with the providers you want to enable.
 

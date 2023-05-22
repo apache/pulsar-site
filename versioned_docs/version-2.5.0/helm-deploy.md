@@ -408,7 +408,7 @@ helm upgrade --install pulsar charts/pulsar \
 
 ```
 
-:::info
+:::note
 
 For the first deployment, add `--set initialize=true` option to initialize bookie and Pulsar cluster metadata.
 

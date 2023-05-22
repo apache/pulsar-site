@@ -125,7 +125,7 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
 
    ```
 
-   :::info
+   :::note
 
    Before moving to the next steps, make sure the Cassandra cluster is running.
 

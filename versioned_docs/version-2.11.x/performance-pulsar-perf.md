@@ -76,7 +76,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
   **Input**
 
-  :::info
+  :::note
 
   If you have not created a topic (in this example, it is _my-topic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf consume`, make sure your topic has enough messages to consume.
 
@@ -113,7 +113,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
   bin/pulsar-perf consume my-topic -r 10 -txn -ss mysubName -st Exclusive -sp Earliest -ntxn 10
   ```
 
-  :::info
+  :::note
 
   If you have not created a topic (in this example, it is _my-topic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf consume`, make sure your topic has enough messages to consume.
 
@@ -148,7 +148,7 @@ This example executes 50 transactions. Each transaction sends and receives 1 mes
 bin/pulsar-perf transaction --topics-c myConsumerTopic --topics-p MyproduceTopic -threads 1 -ntxn 50 -ss testSub  -nmp 1 -nmc 1
 ```
 
-:::info
+:::note
 
 If you have not created a topic (in this example, it is _myConsumerTopic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf transaction`, make sure your topic has enough messages to consume.
 
@@ -174,7 +174,7 @@ This example disables transactions.
 bin/pulsar-perf transaction --topics-c myConsumerTopic --topics-p myproduceTopic -threads 1 -ntxn 50 -ss testSub --txn-disEnable
 ```
 
-:::info
+:::note
 
 If you have not created a topic (in this example, it is _myConsumerTopic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf transaction --txn-disEnable`, make sure your topic has enough messages to consume.
 

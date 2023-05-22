@@ -170,7 +170,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```
 
-    :::info
+    :::note
 
     Currently, the destination topic (specified by the `destination-topic-name` option ) is a required configuration but it is not used for the Debezium connector to save data. The Debezium connector saves data in the following 4 types of topics:
 
@@ -331,7 +331,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```
 
-    :::info
+    :::note
 
     Currently, the destination topic (specified by the `destination-topic-name` option ) is a required configuration but it is not used for the Debezium connector to save data. The Debezium connector saves data in the following 4 types of topics:
 
@@ -516,7 +516,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```
 
-    :::info
+    :::note
 
     Currently, the destination topic (specified by the `destination-topic-name` option ) is a required configuration but it is not used for the Debezium connector to save data. The Debezium connector saves data in the following 4 types of topics:
 

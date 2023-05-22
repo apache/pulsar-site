@@ -60,7 +60,7 @@ Each namespace has a [system topic](concepts-messaging.md#system-topic) named `_
 4. Each broker applies the change events to its policy cache.
 5. Once the policy cache is updated, the broker sends the response back to the Pulsar Admin clients.
 
-:::info
+:::note
 
 By default, the system topic is disabled. To enable topic-level policy (`topicLevelPoliciesEnabled`=`true`), you need to enable the system topic by setting `systemtopicenabled` to `true` in the `conf/broker.conf` or `conf/standalone.conf` file.
 

@@ -138,7 +138,7 @@ pulsar.zookeeper-uri=localhost1,localhost2:2181
 
 ### Get the last message in a topic
 
-:::info
+:::note
 
 By default, Pulsar SQL **does not get the last message in a topic**. It is by design and controlled by settings. By default, BookKeeper LAC only advances when subsequent entries are added. If there is no subsequent entry added, the last written entry is not visible to readers until the ledger is closed. This is not a problem for Pulsar which uses managed ledger, but Pulsar SQL directly reads from BookKeeper ledger.
 
@@ -164,7 +164,7 @@ wget pulsar:binary_release_url
 
 Since Pulsar SQL is powered by Trino, the configuration for deployment is the same for the Pulsar SQL worker.
 
-:::info
+:::note
 
 For how to set up a standalone single node environment, refer to [Query data](sql-getting-started.md).
 
@@ -247,7 +247,7 @@ trino> SELECT * FROM system.runtime.nodes;
 
 For more information about the deployment in Trino, refer to [Trino deployment](https://trino.io/docs/363/installation/deployment.html).
 
-:::info
+:::note
 
 The broker does not advance LAC, so when Pulsar SQL bypasses brokers to query data, it can only read entries up to the LAC that all the bookies learned. You can enable periodically write LAC on the broker by setting "bookkeeperExplicitLacIntervalInMills" in the `broker.conf` file.
 

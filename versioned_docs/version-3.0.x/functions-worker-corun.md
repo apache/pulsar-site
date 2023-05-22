@@ -8,7 +8,7 @@ The following diagram illustrates the deployment of function workers running alo
 
 ![assets/functions-worker-corun.svg](/assets/function-workers-corun.svg)
 
-:::info
+:::note
 
 The `Service URLs` in the illustration represent Pulsar service URLs that Pulsar client and Pulsar admin use to connect to a Pulsar cluster.
 

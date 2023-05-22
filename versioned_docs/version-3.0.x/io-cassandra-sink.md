@@ -4,7 +4,7 @@ title: Cassandra sink connector
 sidebar_label: "Cassandra sink connector"
 ---
 
-:::info
+:::note
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 

@@ -94,7 +94,7 @@ In the shared and Key_Shared subscription types, you can negatively acknowledge 
 
 When a message is not consumed successfully, and you want to trigger the broker to redeliver the message automatically, you can adopt the unacknowledged message automatic re-delivery mechanism. Client will track the unacknowledged messages within the entire `acktimeout` time range, and send a `redeliver unacknowledged messages` request to the broker automatically when the acknowledgement timeout is specified.
 
-:::info
+:::note
 
 Use negative acknowledgement prior to acknowledgement timeout. Negative acknowledgement controls re-delivery of individual messages with more precise, and avoids invalid redeliveries when the message processing time exceeds the acknowledgement timeout.
 
@@ -121,7 +121,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 Dead letter topic depends on message re-delivery. You need to confirm message re-delivery method: negative acknowledgement or acknowledgement timeout. Use negative acknowledgement prior to acknowledgement timeout.
 
-:::info
+:::note
 
 Currently, dead letter topic is enabled only in Shared subscription type.
 

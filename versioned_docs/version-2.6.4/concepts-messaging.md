@@ -114,7 +114,7 @@ Messages can be acknowledged in the following two ways:
 - Messages are acknowledged individually. With individual acknowledgement, the consumer needs to acknowledge each message and sends an acknowledgement request to the broker.
 - Messages are acknowledged cumulatively. With cumulative acknowledgement, the consumer only needs to acknowledge the last message it received. All messages in the stream up to (and including) the provided message are not re-delivered to that consumer.
 
-:::info
+:::note
 
 Cumulative acknowledgement cannot be used in [Shared subscription type](#subscription-types), because this subscription type involves multiple consumers which have access to the same subscription. In Shared subscription type, messages are acknowledged individually.
 
@@ -130,7 +130,7 @@ In the exclusive and failover subscription types, consumers only negatively ackn
 
 In the shared and Key_Shared subscription types, you can negatively acknowledge messages individually.
 
-:::info
+:::note
 
 If batching is enabled, other messages and the negatively acknowledged messages in the same batch are redelivered to the consumer.
 
@@ -140,13 +140,13 @@ If batching is enabled, other messages and the negatively acknowledged messages 
 
 If a message is not consumed successfully, and you want to trigger the broker to redeliver the message automatically, you can adopt the unacknowledged message automatic re-delivery mechanism. Client tracks the unacknowledged messages within the entire `acktimeout` time range, and sends a `redeliver unacknowledged messages` request to the broker automatically when the acknowledgement timeout is specified.
 
-:::info
+:::note
 
 If batching is enabled, other messages and the unacknowledged messages in the same batch are redelivered to the consumer.
 
 :::
 
-:::info
+:::note
 
 Prefer negative acknowledgements over acknowledgement timeout. Negative acknowledgement controls the re-delivery of individual messages with more precision, and avoids invalid redeliveries when the message processing time exceeds the acknowledgement timeout.
 
@@ -198,7 +198,7 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 
 Dead letter topic depends on message re-delivery. Messages are redelivered either due to [acknowledgement timeout](#acknowledgement-timeout) or [negative acknowledgement](#negative-acknowledgement). If you are going to use negative acknowledgement on a message, make sure it is negatively acknowledged before the acknowledgement timeout.
 
-:::info
+:::note
 
 Currently, dead letter topic is enabled only in Shared subscription type.
 

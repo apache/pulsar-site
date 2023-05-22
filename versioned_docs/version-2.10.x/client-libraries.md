@@ -17,7 +17,7 @@ Pulsar supports the following client libraries:
 | Node.js   | [User doc](client-libraries-node.md)                                                     | [Here](https://github.com/apache/pulsar-client-node/releases)            | [Here](https://github.com/apache/pulsar-client-node)                  |
 | C#        | [User doc](client-libraries-dotnet.md)                                                   | [Here](https://github.com/apache/pulsar-dotpulsar/blob/master/CHANGELOG) | [Here](https://github.com/apache/pulsar-dotpulsar)                    |
 
-:::info
+:::note
 
 - The code repos of **Java, C++, Python,** and **WebSocket** clients are hosted in the [Pulsar main repo](https://github.com/apache/pulsar) and these clients are released with Pulsar, so their release notes are parts of [Pulsar release note](/release-notes/).
 - The code repos of **Go, Node.js,** and **C#** clients are hosted outside of the [Pulsar main repo](https://github.com/apache/pulsar) and these clients are not released with Pulsar, so they have independent release notes.
