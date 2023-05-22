@@ -351,7 +351,7 @@ If the produced messages are consumed across application boundaries, you need to
    </TabItem>
    <TabItem value="Node.js">
 
-   Currently, customizing the `CryptoKeyReader` implementation is not supported in Python. However, you can use the default implementation by specifying the path of the private key and public keys.
+   Currently, customizing the `CryptoKeyReader` implementation is not supported in Node.js client. However, you can use the default implementation by specifying the path of the private key and public keys.
 
    </TabItem>
    </Tabs>
