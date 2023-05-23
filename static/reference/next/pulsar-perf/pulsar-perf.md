@@ -14,7 +14,7 @@ $ pulsar-perf produce [options]
 | `--separator` | Separator between the topic and topic number|-|
 | `-au, --admin-url` | Pulsar Admin URL|null|
 | `-db, --disable-batching` | Disable batching if true|false|
-| `-cf, --conf-file` | Configuration file|null|
+| `-cf, --conf-file` | Pulsar configuration file|null|
 | `-pn, --producer-name` | Producer Name|null|
 | `-fc, --format-class` | Custom Formatter class name|org.apache.pulsar.testclient.DefaultMessageFormatter|
 | `-k, --encryption-key-name` | The public key name to encrypt payload|null|
@@ -27,7 +27,7 @@ $ pulsar-perf produce [options]
 | `-txn, --txn-enable` | Enable or disable the transaction|false|
 | `-fp, --format-payload` | Format %i as a message index in the stream from producer and/or %t as the timestamp nanoseconds.|false|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-t, --num-topic` | Number of topics|1|
+| `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-v, --encryption-key-value-file` | The file which contains the public key to encrypt payload|null|
 | `-bb, --batch-max-bytes` | Maximum number of bytes per batch|4194304|
 | `-u, --service-url` | Pulsar Service URL|null|
@@ -61,7 +61,7 @@ $ pulsar-perf produce [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--histogram-file` | HdrHistogram output file|null|
 | `--listener-name` | Listener name for the broker.|null|
-| `-h, --help` | Help message|false|
+| `-h, --help` | Print help message|false|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
 ## consume
@@ -81,11 +81,10 @@ $ pulsar-perf consume [options]
 | `-nmt, --numMessage-perTransaction` | The number of messages acknowledged by a transaction. (After --txn-enable setting to true, -numMessage-perTransaction takes effect|50|
 | `-st, --subscription-type` | Subscription type|Exclusive|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
-| `-t, --num-topics` | Number of topics|1|
 | `-r, --rate` | Simulate a slow message consumer (rate in msg/s)|0.0|
 | `-txn, --txn-enable` | Enable or disable the transaction|false|
 | `-e, --expire_time_incomplete_chunked_messages` | Expire time in ms for incomplete chunk messages|0|
-| `-cf, --conf-file` | Configuration file|null|
+| `-cf, --conf-file` | Pulsar configuration file|null|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--acks-delay-millis` | Acknowledgements grouping delay in millis|100|
@@ -103,6 +102,7 @@ $ pulsar-perf consume [options]
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `-ss, --subscriptions` | A list of subscriptions to consume (for example, sub1,sub2)|[sub]|
 | `-pm, --pool-messages` | Use the pooled message|true|
+| `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--batch-index-ack` | Enable or disable the batch index acknowledgment|false|
@@ -115,7 +115,7 @@ $ pulsar-perf consume [options]
 | `-v, --encryption-key-value-file` | The file which contains the private key to decrypt payload|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `--listener-name` | Listener name for the broker.|null|
-| `-h, --help` | Help message|false|
+| `-h, --help` | Print help message|false|
 | `-ac, --auto_ack_chunk_q_full` | Auto ack for oldest message on queue is full|false|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
@@ -137,7 +137,7 @@ $ pulsar-perf transaction [options]
 | `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `-nmp, --numMessage-perTransaction-produce` | Set the number of messages produced in  a transaction.If transaction disabled, it means the number of messages produced in a task.|1|
 | `-threads, --num-test-threads` | Number of test threads.This thread is for a new transaction to ack messages from consumer topics and produce message to producer topics, and then commit or abort this transaction. Increasing the number of threads increases the parallelism of the performance test, thereby increasing the intensity of the stress test.|1|
-| `-cf, --conf-file` | Configuration file|null|
+| `-cf, --conf-file` | Pulsar configuration file|null|
 | `-time, --test-duration` | Test duration (in second). 0 means keeping publishing|0|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
@@ -163,7 +163,7 @@ $ pulsar-perf transaction [options]
 | `-u, --service-url` | Pulsar Service URL|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `--listener-name` | Listener name for the broker.|null|
-| `-h, --help` | Help message|false|
+| `-h, --help` | Print help message|false|
 | `-au, --admin-url` | Pulsar Admin URL|null|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
@@ -178,29 +178,29 @@ $ pulsar-perf read [options]
 
 |Flag|Description|Default|
 |---|---|---|
-| `-time, --test-duration` | Test duration in secs. If <= 0, it will keep consuming|0|
-| `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
-| `-n, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
-| `-m, --start-message-id` | Start message id. This can be either 'earliest', 'latest' or a specific message id by using 'lid:eid'|earliest|
-| `--trust-cert-file` | Path for the trusted TLS certificate file||
-| `--proxy-url` | Proxy-server URL to which to connect.|null|
-| `-cf, --conf-file` | Configuration file|null|
-| `--auth-plugin` | Authentication plugin class name|null|
+| `-cf, --conf-file` | Pulsar configuration file|null|
 | `--use-tls` | Use TLS encryption on the connection|false|
-| `-u, --service-url` | Pulsar Service URL|null|
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-bw, --busy-wait` | Enable Busy-Wait on the Pulsar client|false|
-| `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
+| `-time, --test-duration` | Test duration in secs. If <= 0, it will keep consuming|0|
+| `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
+| `-n, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
+| `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
+| `-m, --start-message-id` | Start message id. This can be either 'earliest', 'latest' or a specific message id by using 'lid:eid'|earliest|
+| `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
+| `--auth-plugin` | Authentication plugin class name|null|
+| `-u, --service-url` | Pulsar Service URL|null|
+| `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `--listener-name` | Listener name for the broker.|null|
-| `-t, --num-topics` | Number of topics|1|
-| `-h, --help` | Help message|false|
+| `-h, --help` | Print help message|false|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 
 ## monitor-brokers
