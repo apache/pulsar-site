@@ -114,6 +114,8 @@ const injectLinkParseForEndpoint = ([, info]) => {
     if (suffix.indexOf("?version=") >= 0) {
         const suffixAndVersion = suffix.split("?version=")
         restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" + suffixAndVersion[0];
+        const method = suffixAndVersion[0].split("/");
+        path = path + "/" + method[1];
     } else {
         restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
     }
