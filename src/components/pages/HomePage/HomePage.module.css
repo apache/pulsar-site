@@ -1,0 +1,56 @@
+.Page {
+  position: relative;
+  background: #fff;
+}
+
+.OtherScreens {
+  position: relative;
+  z-index: 1; /* Fix first screen overlap */
+}
+
+.Background {
+  position: fixed;
+  top: 0;
+  height: 200vh;
+  width: 100vw;
+  pointer-events: none;
+
+  background-image: url('./img/background.svg');
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+@media (orientation: landscape) and (min-width: 1001px) {
+  .Background {
+    background-position: 30% calc(15% + var(--ifm-navbar-height) + var(--docusaurus-announcement-bar-height));
+    background-size: 140%;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 1000px) {
+  .Background {
+    background-position: 50% calc(0% + var(--ifm-navbar-height) + var(--docusaurus-announcement-bar-height));
+    background-size: 200%;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 1001px) {
+  .Background {
+    background-position: 57% calc(-25% + var(--ifm-navbar-height) + var(--docusaurus-announcement-bar-height));
+    background-size: 200%;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 1000px) {
+  .Background {
+    background-position: 57% calc(50% + var(--ifm-navbar-height) + var(--docusaurus-announcement-bar-height));
+    background-size: 200%;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 480px) {
+  .Background {
+    background-position: 69% calc(-26% + var(--ifm-navbar-height) + var(--docusaurus-announcement-bar-height));
+    background-size: 350%;
+  }
+}

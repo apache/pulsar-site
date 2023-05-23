@@ -85,14 +85,14 @@ export const genCount = (values) => {
   return count;
 };
 
-export const getHeight = (name) => {
-  if (name === "client") return "h-[700px]";
-  if (name === "producer") return "h-[950px]";
+export const getStyle = (name) => {
+  if (name === "client") return { height: '45rem' };
+  if (name === "producer") return { height: '62rem' };
   // if (name === 'consumer') return "h-[1450px]";
-  if (name === "consumer") return "h-[950px]";
-  if (name === "reader") return "h-[400px]";
-  if (name === "tableview") return "h-[200px]";
-  return "h-[700px]";
+  if (name === "consumer") return { height: '60rem' };
+  if (name === "reader") return { height: '25rem' };
+  if (name === "tableview") return { height: '14rem' };
+  return { height: '45rem' };
 };
 
 const columns = genColomns();
