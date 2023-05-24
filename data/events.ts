@@ -23,6 +23,13 @@ export type Resource = {
 export const resources: Record<Category, Resource[]> = {
     events: [
       {
+        title: 'Pulsar Summit Europe 2023',
+        description: '',
+        link: 'https://pulsar-summit.org/event/europe-2023',
+        displayDate: '23 May 2023',
+        startDate: '2023-05-23' // year-month-day
+      },
+      {
         title: 'Pulsar Summit San Francisco 2022',
         description: '',
         link: 'https://pulsar-summit.org/event/san-francisco-2022',

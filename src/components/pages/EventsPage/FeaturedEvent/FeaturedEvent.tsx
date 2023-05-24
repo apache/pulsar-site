@@ -11,13 +11,18 @@ const FeaturedEvent: React.FC = () => {
 
   return (
     <div className={s.FeaturedEvent}>
-      <div>Featured event</div>
-      <h2>Pulsar Virtual Summit Europe 2023</h2>
-      <p>Pulsar Virtual Summit Europe 2023 will take place on Tuesday, May 23rd, 2023! Don't miss this free one-day event!</p>
+      {/* <div>Featured event</div> */}
+      <h2>Pulsar Summit</h2>
+      <p>
+        Pulsar Summit is the conference for Apache Pulsar and event processing communities that takes place multiple times a year.
+      </p>
+      <p>
+        This summit provides a diverse platform to explore, learn and exchange ideas. From captivating keynotes to insightful panel discussions, hands-on workshops, and unparalleled networking opportunities.
+      </p>
       <a
-        href="https://events.zoom.us/ev/Ap6rsDg9LeVfmdajJ_eB13HH026J1d_o8OoTKkQnl_jzVl-srhwB~AggLXsr32QYFjq8BlYLZ5I06Dg"
+        href="https://pulsar-summit.org/"
         target='_blank'
-      >Register</a>
+      >Learn more</a>
     </div>
   );
 }
