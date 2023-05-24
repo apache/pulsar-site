@@ -406,9 +406,9 @@ module.exports = {
             require.resolve("./src/css/variables.css"),
           ],
         },
-        googleAnalytics: {
-          trackingID: "UA-102219959-1",
-        },
+        //googleAnalytics: {
+        //  trackingID: "UA-102219959-1",
+        //},
       },
     ],
   ],
