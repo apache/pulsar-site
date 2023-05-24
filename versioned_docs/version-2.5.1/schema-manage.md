@@ -661,7 +661,7 @@ You can set schema compatibility check strategy at namespace level using one of 
 
 <TabItem value="pulsar-admin">
 
-Use the [`pulsar-admin namespaces set-schema-compatibility-strategy`](https://pulsar.apache.org/tools/pulsar-admin/) command.
+Use the `pulsar-admin namespaces set-schema-compatibility-strategy` command.
 
 ```shell
 
