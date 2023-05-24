@@ -57,6 +57,10 @@ PULSAR_PREFIX_openIDCacheExpirationSeconds=86400
 PULSAR_PREFIX_openIDHttpConnectionTimeoutMillis=10000
 PULSAR_PREFIX_openIDHttpReadTimeoutMillis=10000
 
+# The number of seconds to wait before refreshing the JWKS when a token presents a key ID (kid claim) that is not
+# in the cache. This setting is available from Pulsar 3.0.1 and is documented below.
+PULSAR_PREFIX_openIDKeyIdCacheMissRefreshSeconds=300
+
 # Whether to require that issuers use HTTPS. It is part of the OIDC spec to use HTTPS, so the default is true.
 # This setting is for testing purposes and is not recommended for any production environment.
 PULSAR_PREFIX_openIDRequireIssuersUseHttps=true
@@ -75,6 +79,16 @@ When using OIDC for a client connecting through the proxy to the broker, it is n
 :::note
 The Pulsar WebSocket Proxy does not yet support OpenID Connect authentication. Here is an issue tracking this feature: [#20236](https://github.com/apache/pulsar/issues/20236).
 :::
+
+### Signing Key Rotation
+
+:::note
+
+This feature is available from Pulsar 3.0.1.
+
+:::
+
+The [OpenID Connect Discovery 1.0](https://openid.net/specs/openid-connect-discovery-1_0.html) spec gives the `AuthenticationProviderOpenID` a way to discover trusted public keys. The public keys are formatted as a [JSON Web Key (JWK)](https://www.rfc-editor.org/rfc/rfc7517) set, also known as a JWKS. When the Identity Provider rotates signing keys, there is a chance that the Identity Provider will start signing tokens with the new key before the JWKS cache has been refreshed. To avoid rejecting tokens signed with the new key, the OIDC Authentication Provider will attempt to refresh the JWKS when a token has a trusted issuer claim but the key ID (kid claim) is not in the issuer's cached JWKS. The `openIDKeyIdCacheMissRefreshSeconds` setting determines how long the OIDC Authentication Provider will wait before attempting to refresh the JWKS. The default value is 300 seconds. It means that a JWKS must have been in the cache for at least 300 seconds before a missing key ID triggers cache invalidation. The `openIDKeyIdCacheMissRefreshSeconds` setting protects the OIDC Authentication Provider from a malicious client that presents a token with a new key ID every time it connects.
 
 ## Enable OpenID Connect Authentication in the Function Worker
 
