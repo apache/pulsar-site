@@ -187,10 +187,6 @@ module.exports = {
               label: "Books",
             },
             {
-              to: "/videos",
-              label: "Videos",
-            },
-            {
               to: "/ecosystem/",
               label: "Ecosystem",
             },
