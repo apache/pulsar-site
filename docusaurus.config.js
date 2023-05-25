@@ -175,12 +175,20 @@ module.exports = {
             {
               to: "/docs/next/concepts-overview/",
               activeBaseRegex: "docs/next/concepts-overview/$",
-              label: "Pulsar Concepts",
+              label: "Concepts",
             },
             {
               to: "/docs/next/",
               activeBaseRegex: "docs/next/$",
               label: "Quickstart",
+            },
+            {
+              to: "/books",
+              label: "Books",
+            },
+            {
+              to: "/videos",
+              label: "Videos",
             },
             {
               to: "/ecosystem/",
