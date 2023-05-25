@@ -14,7 +14,7 @@ const CaseStudiesPage: React.FC = () => {
       <Page>
         <section className={s.Header}>
           <h1>Books</h1>
-          <p>The next collection of books will offer a guided learning experience into Apache Pulsar and its related subjects.</p>
+          <p>The next collection of books offers a guided learning experience into Apache Pulsar and related subjects.</p>
         </section>
 
         <div className={s.Categories}>
