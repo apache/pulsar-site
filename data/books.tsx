@@ -77,6 +77,19 @@ export const resources: Record<Category, Resource[]> =
       ),
       publisher: 'Apress',
       released_at: 'November 2021'
+    },
+    {
+      name: 'Building Event-Driven Microservices',
+      link: 'https://www.oreilly.com/library/view/building-event-driven-microservices/9781492057888/',
+      author: 'Adam Bellemare',
+      cover_image: '/img/books/building-event-driven-microservices.jpg',
+      description: (
+        <span>
+          Author Adam Bellemare takes you through the process of building an event-driven microservice-powered organization. You’ll reconsider how data is produced, accessed, and propagated across your organization. Learn powerful yet simple patterns for unlocking the value of this data. Incorporate event-driven design and architectural principles into your own systems. And completely rethink how your organization delivers value by unlocking near-real-time access to data at scale.
+        </span>
+      ),
+      publisher: 'O’Reilly Media',
+      released_at: 'July 2020'
     }
   ]
 }
