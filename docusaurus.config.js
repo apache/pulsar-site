@@ -144,16 +144,16 @@ module.exports = {
   trailingSlash: true,
   themeConfig: {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    announcementBar: {
-      id: "summit",
-      content: renderAnnouncementBar(
-        "Pulsar Virtual Summit Europe 2023",
-        "https://pulsar-summit.org/event/europe-2023"
-      ),
-      backgroundColor: "#282826",
-      textColor: "#fff",
-      isCloseable: false,
-    },
+    // announcementBar: {
+    //   id: "summit",
+    //   content: renderAnnouncementBar(
+    //     "Pulsar Virtual Summit Europe 2023",
+    //     "https://pulsar-summit.org/event/europe-2023"
+    //   ),
+    //   backgroundColor: "#282826",
+    //   textColor: "#fff",
+    //   isCloseable: false,
+    // },
     colorMode: {
       disableSwitch: true,
     },
@@ -408,9 +408,9 @@ module.exports = {
             require.resolve("./src/css/variables.css"),
           ],
         },
-        googleAnalytics: {
-          trackingID: "UA-102219959-1",
-        },
+        //googleAnalytics: {
+        //  trackingID: "UA-102219959-1",
+        //},
       },
     ],
   ],

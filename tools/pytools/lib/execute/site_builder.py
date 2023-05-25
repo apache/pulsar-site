@@ -51,7 +51,7 @@ def execute(asf_site: Path):
     is_build_all = is_build_all == "1"
     print(f'is_build_all: {is_build_all}')
     if is_build_all:
-        whitelist = ['api', 'charts', 'css', 'tools']
+        whitelist = ['api', 'charts']
         old_files = [f for f in published_content.glob('*') if f.name not in whitelist]
         print(f'clean all the old content： {list(map(str, old_files))}')
         for old_file in old_files:
