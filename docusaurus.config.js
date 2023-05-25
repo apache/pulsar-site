@@ -89,36 +89,37 @@ const injectLinkParse = ([, prefix, , name, path]) => {
 
 const injectLinkParseForEndpoint = ([, info]) => {
     let [method, path, suffix] = info.split("|");
+
     if (!suffix) {
-        suffix = path;
+        suffix = "";
     }
 
     let restPath = path.split("/");
     const restApiVersion = restPath[2];
     const restApiType = restPath[3];
-    let restBaseUrl = restApiUrl;
-    if (restApiType == "functions") {
-        restBaseUrl = functionsApiUrl;
-    } else if (restApiType == "source") {
-        restBaseUrl = sourceApiUrl;
-    } else if (restApiType == "sink") {
-        restBaseUrl = sinkApiUrl;
-    } else if (restApiType == "packages") {
-        restBaseUrl = packagesApiUrl;
-    } else if (restApiType == "transactions") {
-        restBaseUrl = transactionsApiUrl;
-    } else if (restApiType == "lookup") {
-        restBaseUrl = lookupApiUrl;
-    }
-    let restUrl = "";
+    const restBaseUrl = {
+      functions: functionsApiUrl,
+      source: sourceApiUrl,
+      sink: sinkApiUrl,
+      packages: packagesApiUrl,
+      transactions: transactionsApiUrl,
+      lookup: lookupApiUrl
+    }[restApiType] || restApiUrl;
+
+    let restUrl;
     if (suffix.indexOf("?version=") >= 0) {
         const suffixAndVersion = suffix.split("?version=")
         restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" + suffixAndVersion[0];
-        const method = suffixAndVersion[0].split("/");
-        path = path + "/" + method[1];
+        if (suffixAndVersion[0].startsWith("operation/")) {
+          path += suffixAndVersion[0].slice("operation".length)
+        }
     } else {
         restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
+        if (suffix[0].startsWith("operation/")) {
+          path += suffix[0].slice("operation".length)
+        }
     }
+
     return {
         text: method + " " + path,
         link: restBaseUrl + "?" + restUrl,
