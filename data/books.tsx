@@ -30,7 +30,7 @@ export const resources: Record<Category, Resource[]> =
       cover_image: '/img/books/pulsar-in-action.jpg',
       description: (
         <span>
-          Apache Pulsar in Action is a comprehensive and practical guide to building high-traffic applications with Pulsar.You’ll learn to use this mature and battle- tested platform to deliver extreme levels of speed and durability to your messaging.Apache Pulsar committer David Kjerrumgaard teaches you to apply Pulsar’s seamless scalability through hands-on case studies, including IOT analytics applications and a microservices app based on Pulsar functions.
+          Apache Pulsar in Action is a comprehensive and practical guide to building high-traffic applications with Pulsar. You’ll learn to use this mature and battle-tested platform to deliver extreme levels of speed and durability to your messaging. Apache Pulsar committer David Kjerrumgaard teaches you to apply Pulsar’s seamless scalability through hands-on case studies, including IOT analytics applications and a microservices app based on Pulsar functions.
         </span>
       ),
       link: 'https://www.manning.com/books/apache-pulsar-in-action',
