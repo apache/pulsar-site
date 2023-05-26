@@ -4,6 +4,7 @@ const _ = require("lodash");
 const linkifyRegex = require("./plugins/remark-linkify-regex");
 const { renderAnnouncementBar } = require("./src/components/ui/renderAnnouncementBar");
 const versions = require("./versions.json");
+const latestStableVersion = versions[0];
 const versionsMap = {
     ..._.keyBy(
         versions.map((item) => {
@@ -172,14 +173,14 @@ module.exports = {
           label: "Get Started",
           position: "left",
           items: [
-            {
-              type: 'doc',
-              docId: 'concepts-overview',
+               {
+              to: `/docs/${latestStableVersion}/concepts-overview/`,
+              activeBaseRegex: `docs/(${versions.join('|')})/concepts-overview/$`,
               label: "Concepts",
             },
             {
-              type: 'doc',
-              docId: 'about',
+              to: `/docs/${latestStableVersion}/`,
+              activeBaseRegex: `docs/(${versions.join('|')})/$`,
               label: "Quickstart",
             },
             {
