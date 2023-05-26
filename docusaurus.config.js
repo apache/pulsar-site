@@ -173,13 +173,13 @@ module.exports = {
           position: "left",
           items: [
             {
-              to: "/docs/next/concepts-overview/",
-              activeBaseRegex: "docs/next/concepts-overview/$",
+              type: 'doc',
+              docId: 'concepts-overview',
               label: "Concepts",
             },
             {
-              to: "/docs/next/",
-              activeBaseRegex: "docs/next/$",
+              type: 'doc',
+              docId: 'about',
               label: "Quickstart",
             },
             {
