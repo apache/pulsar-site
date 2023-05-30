@@ -10,7 +10,7 @@ The Apache Pulsar community welcomes contributions from anyone with a passion fo
 
 ## Channels
 
-To engage the Pulsar developers community, you can join the following channels. 
+To engage the Pulsar developers community, you can join the following channels.
 
 ### Mailing lists
 
@@ -30,12 +30,12 @@ For moderate or large contributions, you should not start coding or writing a de
 
 ### Pulsar Improvement Proposal (PIP)
 
-On any change which is either significant (e.g., new features), or changes any public-facing component of Pulsar (API, configuration, metric ...), you need to write a design document known as a *Pulsar Improvement Proposal (PIP)*. Before starting to write a PIP, make sure you follow the process [here](https://github.com/apache/pulsar/blob/master/wiki/proposals/PIP.md)
+On any change which is either significant (e.g., new features), or changes any public-facing component of Pulsar (API, configuration, metric ...), you need to write a design document known as a *Pulsar Improvement Proposal (PIP)*. Before starting to write a PIP, make sure you follow the process [here](https://github.com/apache/pulsar/blob/master/pip/README.md)
 
 ### Online discussions
 
 Pulsar users and developers use [Apache Pulsar Slack channel](https://apache-pulsar.slack.com/) for online discussions. You can self-invite yourself by accessing [this link](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
 
-Slack channels are great for quick questions or discussions on specialized topics. Remember that it's strongly encouraged to communicate via the mailing lists, and you should prefer to discuss more complex subjects by email. 
+Slack channels are great for quick questions or discussions on specialized topics. Remember that it's strongly encouraged to communicate via the mailing lists, and you should prefer to discuss more complex subjects by email.
 
 Developers should be careful to move or duplicate all the official or useful discussions on GitHub or the dev mailing list.
