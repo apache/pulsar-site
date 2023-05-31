@@ -2704,7 +2704,7 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 **Category**: Server
 
 ### disableBrokerInterceptors
-Enable or disable the broker interceptor, which is only used for testing for now
+Enable or disable the broker interceptor
 
 **Type**: `boolean`
 
