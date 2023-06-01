@@ -3927,7 +3927,7 @@ whether limit per_channel_bookie_client metrics of bookkeeper client stats
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -4415,6 +4415,19 @@ The number of partitioned topics that is allowed to be automatically created if 
 
 **Category**: Storage (Managed Ledger)
 
+### managedCursorInfoCompressionThresholdInBytes
+ManagedCursorInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
+0 means compression will always apply.
+
+
+**Type**: `long`
+
+**Default**: `16384`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedCursorInfoCompressionType
 ManagedCursorInfo compression type, option values (NONE, LZ4, ZLIB, ZSTD, SNAPPY). 
 If value is NONE, then save the ManagedCursorInfo bytes data directly.
@@ -4627,6 +4640,19 @@ Time to rollover ledger for inactive topic (duration without any publish on that
 **Default**: `0`
 
 **Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerInfoCompressionThresholdInBytes
+ManagedLedgerInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
+0 means compression will always apply.
+
+
+**Type**: `long`
+
+**Default**: `16384`
+
+**Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
 
