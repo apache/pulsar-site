@@ -1,11 +1,14 @@
 import React from 'react';
 
-import Button from '../../../ui/Button/Button';
+import Button from '@site/src/components/ui/Button/Button';
 import Parallax from './Parallax/Parallax';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import s from './ShortInfo.module.css';
 import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
+
+const versions = require("@site/versions.json");
+const latestVersion = versions[0];
 
 const ShortInfo: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -25,12 +28,12 @@ const ShortInfo: React.FC = () => {
               <Button
                 title='Explore docs'
                 variant='action'
-                href={`${siteConfig.baseUrl}docs/next`}
+                href={`${siteConfig.baseUrl}docs/${latestVersion}`}
               />
               <Button
                 title='Quickstart'
                 variant='regular'
-                href={`${siteConfig.baseUrl}docs/next/concepts-overview`}
+                href={`${siteConfig.baseUrl}docs/${latestVersion}/concepts-overview`}
               />
             </div>
           </div>
