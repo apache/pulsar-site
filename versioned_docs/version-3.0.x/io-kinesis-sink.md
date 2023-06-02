@@ -8,7 +8,7 @@ sidebar_label: "Kinesis sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Kinesis sink connector pulls data from Pulsar and persists data into Amazon Kinesis.
 

@@ -8,7 +8,7 @@ sidebar_label: "Canal source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Canal source connector pulls messages from MySQL to Pulsar topics.
 
