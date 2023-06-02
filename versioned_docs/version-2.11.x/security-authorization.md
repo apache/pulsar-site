@@ -35,12 +35,6 @@ By default, the broker treats the connection between a proxy and the broker as a
 
 Pulsar uses *Proxy roles* to enable the authentication. Proxy roles are specified in the broker configuration file, [`conf/broker.conf`](reference-configuration.md#broker). If a client that is authenticated with a broker is one of its `proxyRoles`, all requests from that client must also carry information about the role of the client that is authenticated with the proxy. This information is called the *original principal*. If the *original principal* is absent, the client is not able to access anything.
 
-:::note
-
-Starting from 2.11.1, if a Proxy is not correctly configured to use a role that is in the `proxyRoles`, the connection will get rejected.
-
-:::
-
 You must authorize both the *proxy role* and the *original principal* to access a resource to ensure that the resource is accessible via the proxy. Administrators can take two approaches to authorize the *proxy role* and the *original principal*.
 
 The more secure approach is to grant access to the proxy roles each time you grant access to a resource. For example, if you have a proxy role named `proxy1`, when the superuser creates a tenant, you should specify `proxy1` as one of the admin roles. When a role is granted permission to produce or consume from a namespace, if that client wants to produce or consume through a proxy, you should also grant `proxy1` the same permissions.
