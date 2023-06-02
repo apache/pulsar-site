@@ -8,7 +8,7 @@ sidebar_label: "Elasticsearch sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Elasticsearch sink connector pulls messages from Pulsar topics and persists the messages to indexes.
 
@@ -22,7 +22,7 @@ To deploy an Elasticsearch sink connector, the following are required:
 ## Feature
 
 ### Handle data
-		
+
 Since Pulsar 2.9.0, the Elasticsearch sink connector has the following ways of working. You can choose one of them.
 
 Name | Description

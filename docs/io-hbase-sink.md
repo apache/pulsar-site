@@ -8,7 +8,7 @@ sidebar_label: "HBase sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The HBase sink connector pulls the messages from Pulsar topics and persists the messages to HBase tables
 

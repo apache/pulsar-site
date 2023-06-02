@@ -8,7 +8,7 @@ sidebar_label: "File source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The File source connector pulls messages from files in directories and persists the messages to Pulsar topics.
 

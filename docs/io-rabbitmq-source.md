@@ -8,7 +8,7 @@ sidebar_label: "RabbitMQ source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The RabbitMQ source connector receives messages from RabbitMQ clusters and writes messages to Pulsar topics.
 

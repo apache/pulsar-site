@@ -8,7 +8,7 @@ sidebar_label: "Kafka source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Kafka source connector pulls messages from Kafka topics and persists the messages to Pulsar topics.
 
