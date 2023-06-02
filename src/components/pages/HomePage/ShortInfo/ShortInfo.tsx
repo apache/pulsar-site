@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Button from '../../../ui/Button/Button';
+import Button from '@site/src/components/ui/Button/Button';
 import Parallax from './Parallax/Parallax';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import s from './ShortInfo.module.css';
 import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
 
-const versions = require("../../../../../versions.json");
+const versions = require("@site/versions.json");
 const latestVersion = versions[0];
 
 const ShortInfo: React.FC = () => {
