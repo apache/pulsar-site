@@ -73,11 +73,11 @@ The acknowledgment state is persistent to the ledger first. When the acknowledgm
 
 ```
 
-brk_ml_cursor_persistLedgerSucceed(namespace=", ledger_name="", cursor_name:")
-brk_ml_cursor_persistLedgerErrors(namespace="", ledger_name="", cursor_name:"")
-brk_ml_cursor_persistZookeeperSucceed(namespace="", ledger_name="", cursor_name:"")
-brk_ml_cursor_persistZookeeperErrors(namespace="", ledger_name="", cursor_name:"")
-brk_ml_cursor_nonContiguousDeletedMessagesRange(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_persistLedgerSucceed(namespace=", ledger_name="", cursor_name:")
+pulsar_ml_cursor_persistLedgerErrors(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_persistZookeeperSucceed(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_persistZookeeperErrors(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_nonContiguousDeletedMessagesRange(namespace="", ledger_name="", cursor_name:"")
 
 ```
 
