@@ -9,7 +9,7 @@ $ pulsar-admin namespaces subcommand
 
 
 
-## <em>list</em>
+## list
 
 Get the namespaces for a tenant
 
@@ -25,7 +25,7 @@ $ pulsar-admin namespaces list options
 |---|---|---|
 
 
-## <em>list-cluster</em>
+## list-cluster
 
 Get the namespaces for a tenant in a cluster
 
@@ -41,7 +41,7 @@ $ pulsar-admin namespaces list-cluster options
 |---|---|---|
 
 
-## <em>topics</em>
+## topics
 
 Get the list of topics for a namespace
 
@@ -59,7 +59,7 @@ $ pulsar-admin namespaces topics options
 | `-ist, --include-system-topic` | Include system topic|false||
 
 
-## <em>bundles</em>
+## bundles
 
 Get the list of bundles for a namespace
 
@@ -75,7 +75,7 @@ $ pulsar-admin namespaces bundles options
 |---|---|---|
 
 
-## <em>destinations</em>
+## destinations
 
 Get the list of destinations for a namespace
 
@@ -91,7 +91,7 @@ $ pulsar-admin namespaces destinations options
 |---|---|---|
 
 
-## <em>policies</em>
+## policies
 
 Get the configuration policies of a namespace
 
@@ -107,7 +107,7 @@ $ pulsar-admin namespaces policies options
 |---|---|---|
 
 
-## <em>create</em>
+## create
 
 Creates a new namespace
 
@@ -125,7 +125,7 @@ $ pulsar-admin namespaces create options
 | `--bundles, -b` | number of bundles to activate|0||
 
 
-## <em>delete</em>
+## delete
 
 Deletes a namespace.
 
@@ -142,7 +142,7 @@ $ pulsar-admin namespaces delete options
 | `-f, --force` | Delete namespace forcefully by force deleting all topics under it|false||
 
 
-## <em>permissions</em>
+## permissions
 
 Get the permissions on a namespace
 
@@ -158,7 +158,7 @@ $ pulsar-admin namespaces permissions options
 |---|---|---|
 
 
-## <em>grant-permission</em>
+## grant-permission
 
 Grant permissions on a namespace
 
@@ -176,7 +176,7 @@ $ pulsar-admin namespaces grant-permission options
 | `--role` | Client role to which grant permissions|null||
 
 
-## <em>revoke-permission</em>
+## revoke-permission
 
 Revoke permissions on a namespace
 
@@ -193,7 +193,7 @@ $ pulsar-admin namespaces revoke-permission options
 | `--role` | Client role to which revoke permissions|null||
 
 
-## <em>subscription-permission</em>
+## subscription-permission
 
 Get permissions to access subscription admin-api
 
@@ -209,7 +209,7 @@ $ pulsar-admin namespaces subscription-permission options
 |---|---|---|
 
 
-## <em>grant-subscription-permission</em>
+## grant-subscription-permission
 
 Grant permissions to access subscription admin-api
 
@@ -227,7 +227,7 @@ $ pulsar-admin namespaces grant-subscription-permission options
 | `-s, --subscription` | Subscription name for which permission will be granted to roles|null||
 
 
-## <em>revoke-subscription-permission</em>
+## revoke-subscription-permission
 
 Revoke permissions to access subscription admin-api
 
@@ -245,7 +245,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 | `-r, --role` | Client role to which revoke permissions|null||
 
 
-## <em>set-clusters</em>
+## set-clusters
 
 Set replication clusters for a namespace
 
@@ -262,7 +262,7 @@ $ pulsar-admin namespaces set-clusters options
 | `--clusters, -c` | Replication Cluster Ids list (comma separated values)|null||
 
 
-## <em>get-clusters</em>
+## get-clusters
 
 Get replication clusters for a namespace
 
@@ -278,7 +278,7 @@ $ pulsar-admin namespaces get-clusters options
 |---|---|---|
 
 
-## <em>set-subscription-types-enabled</em>
+## set-subscription-types-enabled
 
 Set subscription types enabled for a namespace
 
@@ -295,7 +295,7 @@ $ pulsar-admin namespaces set-subscription-types-enabled options
 | `--types, -t` | Subscription types enabled list (comma separated values). Possible values: (Exclusive, Shared, Failover, Key_Shared).|null||
 
 
-## <em>get-subscription-types-enabled</em>
+## get-subscription-types-enabled
 
 Get subscription types enabled for a namespace
 
@@ -311,7 +311,7 @@ $ pulsar-admin namespaces get-subscription-types-enabled options
 |---|---|---|
 
 
-## <em>remove-subscription-types-enabled</em>
+## remove-subscription-types-enabled
 
 Remove subscription types enabled for a namespace
 
@@ -327,7 +327,7 @@ $ pulsar-admin namespaces remove-subscription-types-enabled options
 |---|---|---|
 
 
-## <em>get-backlog-quotas</em>
+## get-backlog-quotas
 
 Get the backlog quota policies for a namespace
 
@@ -343,7 +343,7 @@ $ pulsar-admin namespaces get-backlog-quotas options
 |---|---|---|
 
 
-## <em>set-backlog-quota</em>
+## set-backlog-quota
 
 Set a backlog quota policy for a namespace
 
@@ -363,7 +363,7 @@ $ pulsar-admin namespaces set-backlog-quota options
 | `-p, --policy` | Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]|null||
 
 
-## <em>remove-backlog-quota</em>
+## remove-backlog-quota
 
 Remove a backlog quota policy from a namespace
 
@@ -380,7 +380,7 @@ $ pulsar-admin namespaces remove-backlog-quota options
 | `-t, --type` | Backlog quota type to remove. Valid options are: destination_storage, message_age|destination_storage||
 
 
-## <em>get-persistence</em>
+## get-persistence
 
 Get the persistence policies for a namespace
 
@@ -396,7 +396,7 @@ $ pulsar-admin namespaces get-persistence options
 |---|---|---|
 
 
-## <em>set-persistence</em>
+## set-persistence
 
 Set the persistence policies for a namespace
 
@@ -416,7 +416,7 @@ $ pulsar-admin namespaces set-persistence options
 | `-r, --ml-mark-delete-max-rate` | Throttling rate of mark-delete operation (0 means no throttle)|0.0||
 
 
-## <em>remove-persistence</em>
+## remove-persistence
 
 Remove the persistence policies for a namespace
 
@@ -432,7 +432,7 @@ $ pulsar-admin namespaces remove-persistence options
 |---|---|---|
 
 
-## <em>get-message-ttl</em>
+## get-message-ttl
 
 Get message TTL for a namespace
 
@@ -448,7 +448,7 @@ $ pulsar-admin namespaces get-message-ttl options
 |---|---|---|
 
 
-## <em>set-message-ttl</em>
+## set-message-ttl
 
 Set Message TTL for a namespace
 
@@ -465,7 +465,7 @@ $ pulsar-admin namespaces set-message-ttl options
 | `--messageTTL, -ttl` | Message TTL in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w). When the value is set to `0`, TTL is disabled.|null||
 
 
-## <em>remove-message-ttl</em>
+## remove-message-ttl
 
 Remove Message TTL for a namespace
 
@@ -481,7 +481,7 @@ $ pulsar-admin namespaces remove-message-ttl options
 |---|---|---|
 
 
-## <em>get-max-subscriptions-per-topic</em>
+## get-max-subscriptions-per-topic
 
 Get max subscriptions per topic for a namespace
 
@@ -497,7 +497,7 @@ $ pulsar-admin namespaces get-max-subscriptions-per-topic options
 |---|---|---|
 
 
-## <em>set-max-subscriptions-per-topic</em>
+## set-max-subscriptions-per-topic
 
 Set max subscriptions per topic for a namespace
 
@@ -514,7 +514,7 @@ $ pulsar-admin namespaces set-max-subscriptions-per-topic options
 | `--max-subscriptions-per-topic, -m` | Max subscriptions per topic|0||
 
 
-## <em>remove-max-subscriptions-per-topic</em>
+## remove-max-subscriptions-per-topic
 
 Remove max subscriptions per topic for a namespace
 
@@ -530,7 +530,7 @@ $ pulsar-admin namespaces remove-max-subscriptions-per-topic options
 |---|---|---|
 
 
-## <em>get-subscription-expiration-time</em>
+## get-subscription-expiration-time
 
 Get subscription expiration time for a namespace
 
@@ -546,7 +546,7 @@ $ pulsar-admin namespaces get-subscription-expiration-time options
 |---|---|---|
 
 
-## <em>set-subscription-expiration-time</em>
+## set-subscription-expiration-time
 
 Set subscription expiration time for a namespace
 
@@ -563,7 +563,7 @@ $ pulsar-admin namespaces set-subscription-expiration-time options
 | `-t, --time` | Subscription expiration time in minutes|0||
 
 
-## <em>remove-subscription-expiration-time</em>
+## remove-subscription-expiration-time
 
 Remove subscription expiration time for a namespace
 
@@ -579,7 +579,7 @@ $ pulsar-admin namespaces remove-subscription-expiration-time options
 |---|---|---|
 
 
-## <em>get-anti-affinity-group</em>
+## get-anti-affinity-group
 
 Get Anti-affinity group name for a namespace
 
@@ -595,7 +595,7 @@ $ pulsar-admin namespaces get-anti-affinity-group options
 |---|---|---|
 
 
-## <em>set-anti-affinity-group</em>
+## set-anti-affinity-group
 
 Set Anti-affinity group name for a namespace
 
@@ -612,7 +612,7 @@ $ pulsar-admin namespaces set-anti-affinity-group options
 | `--group, -g` | Anti-affinity group name|null||
 
 
-## <em>get-anti-affinity-namespaces</em>
+## get-anti-affinity-namespaces
 
 Get Anti-affinity namespaces grouped with the given anti-affinity group name
 
@@ -631,7 +631,7 @@ $ pulsar-admin namespaces get-anti-affinity-namespaces options
 | `--tenant, -p` | tenant is only used for authorization. Client has to be admin of any of the tenant to access this api|null||
 
 
-## <em>delete-anti-affinity-group</em>
+## delete-anti-affinity-group
 
 Remove Anti-affinity group name for a namespace
 
@@ -647,7 +647,7 @@ $ pulsar-admin namespaces delete-anti-affinity-group options
 |---|---|---|
 
 
-## <em>set-deduplication</em>
+## set-deduplication
 
 Enable or disable deduplication for a namespace
 
@@ -665,7 +665,7 @@ $ pulsar-admin namespaces set-deduplication options
 | `--disable, -d` | Disable deduplication|false||
 
 
-## <em>get-deduplication</em>
+## get-deduplication
 
 Get Deduplication for a namespace
 
@@ -681,7 +681,7 @@ $ pulsar-admin namespaces get-deduplication options
 |---|---|---|
 
 
-## <em>remove-deduplication</em>
+## remove-deduplication
 
 Remove Deduplication for a namespace
 
@@ -697,7 +697,7 @@ $ pulsar-admin namespaces remove-deduplication options
 |---|---|---|
 
 
-## <em>set-auto-topic-creation</em>
+## set-auto-topic-creation
 
 Enable or disable autoTopicCreation for a namespace, overriding broker settings
 
@@ -717,7 +717,7 @@ $ pulsar-admin namespaces set-auto-topic-creation options
 | `--type, -t` | Type of topic to be auto-created. Possible values: (partitioned, non-partitioned). Default value: non-partitioned|non-partitioned||
 
 
-## <em>get-auto-topic-creation</em>
+## get-auto-topic-creation
 
 Get autoTopicCreation info for a namespace
 
@@ -733,7 +733,7 @@ $ pulsar-admin namespaces get-auto-topic-creation options
 |---|---|---|
 
 
-## <em>remove-auto-topic-creation</em>
+## remove-auto-topic-creation
 
 Remove override of autoTopicCreation for a namespace
 
@@ -749,7 +749,7 @@ $ pulsar-admin namespaces remove-auto-topic-creation options
 |---|---|---|
 
 
-## <em>set-auto-subscription-creation</em>
+## set-auto-subscription-creation
 
 Enable autoSubscriptionCreation for a namespace, overriding broker settings
 
@@ -766,7 +766,7 @@ $ pulsar-admin namespaces set-auto-subscription-creation options
 | `--enable, -e` | Enable allowAutoSubscriptionCreation on namespace|false||
 
 
-## <em>get-auto-subscription-creation</em>
+## get-auto-subscription-creation
 
 Get the autoSubscriptionCreation for a namespace
 
@@ -782,7 +782,7 @@ $ pulsar-admin namespaces get-auto-subscription-creation options
 |---|---|---|
 
 
-## <em>remove-auto-subscription-creation</em>
+## remove-auto-subscription-creation
 
 Remove override of autoSubscriptionCreation for a namespace
 
@@ -798,7 +798,7 @@ $ pulsar-admin namespaces remove-auto-subscription-creation options
 |---|---|---|
 
 
-## <em>get-retention</em>
+## get-retention
 
 Get the retention policy for a namespace
 
@@ -814,7 +814,7 @@ $ pulsar-admin namespaces get-retention options
 |---|---|---|
 
 
-## <em>set-retention</em>
+## set-retention
 
 Set the retention policy for a namespace
 
@@ -832,7 +832,7 @@ $ pulsar-admin namespaces set-retention options
 | `--time, -t` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 sets retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null||
 
 
-## <em>remove-retention</em>
+## remove-retention
 
 Remove the retention policy for a namespace
 
@@ -848,7 +848,7 @@ $ pulsar-admin namespaces remove-retention options
 |---|---|---|
 
 
-## <em>set-bookie-affinity-group</em>
+## set-bookie-affinity-group
 
 Set the bookie-affinity group name
 
@@ -866,7 +866,7 @@ $ pulsar-admin namespaces set-bookie-affinity-group options
 | `--secondary-group, -sg` | Bookie-affinity secondary-group (comma separated) name where namespace messages should be written. If you want to verify whether there are enough bookies in groups, use `--secondary-group` flag. Messages in this namespace are stored in secondary groups. If a group does not contain enough bookies, a topic cannot be created.|null||
 
 
-## <em>get-bookie-affinity-group</em>
+## get-bookie-affinity-group
 
 Get the bookie-affinity group name
 
@@ -882,7 +882,7 @@ $ pulsar-admin namespaces get-bookie-affinity-group options
 |---|---|---|
 
 
-## <em>delete-bookie-affinity-group</em>
+## delete-bookie-affinity-group
 
 Set the bookie-affinity group name
 
@@ -898,7 +898,7 @@ $ pulsar-admin namespaces delete-bookie-affinity-group options
 |---|---|---|
 
 
-## <em>unload</em>
+## unload
 
 Unload a namespace from the current serving broker
 
@@ -916,7 +916,7 @@ $ pulsar-admin namespaces unload options
 | `--destinationBroker, -d` | Target brokerWebServiceAddress to which the bundle has to be allocated to|null||
 
 
-## <em>split-bundle</em>
+## split-bundle
 
 Split a namespace-bundle from the current serving broker
 
@@ -937,7 +937,7 @@ $ pulsar-admin namespaces split-bundle options
 | `--bundle, -b` | {start-boundary}_{end-boundary} (mutually exclusive with --bundle-type)|null||
 
 
-## <em>get-topic-positions</em>
+## get-topic-positions
 
 Get the positions for one or more topic(s) in a namespace bundle
 
@@ -955,7 +955,7 @@ $ pulsar-admin namespaces get-topic-positions options
 | `--bundle, -b` | {start-boundary}_{end-boundary} format namespace bundle|null||
 
 
-## <em>set-dispatch-rate</em>
+## set-dispatch-rate
 
 Set message-dispatch-rate for all topics of the namespace
 
@@ -975,7 +975,7 @@ $ pulsar-admin namespaces set-dispatch-rate options
 | `--byte-dispatch-rate, -bd` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1||
 
 
-## <em>remove-dispatch-rate</em>
+## remove-dispatch-rate
 
 Remove configured message-dispatch-rate for all topics of the namespace
 
@@ -991,7 +991,7 @@ $ pulsar-admin namespaces remove-dispatch-rate options
 |---|---|---|
 
 
-## <em>get-dispatch-rate</em>
+## get-dispatch-rate
 
 Get configured message-dispatch-rate for all topics of the namespace (Disabled if value < 0)
 
@@ -1007,7 +1007,7 @@ $ pulsar-admin namespaces get-dispatch-rate options
 |---|---|---|
 
 
-## <em>set-subscribe-rate</em>
+## set-subscribe-rate
 
 Set subscribe-rate per consumer for all topics of the namespace
 
@@ -1025,7 +1025,7 @@ $ pulsar-admin namespaces set-subscribe-rate options
 | `--subscribe-rate-period, -st` | subscribe-rate-period in second type (default 30 second will be overwrite if not passed)|30||
 
 
-## <em>get-subscribe-rate</em>
+## get-subscribe-rate
 
 Get configured subscribe-rate per consumer for all topics of the namespace
 
@@ -1041,7 +1041,7 @@ $ pulsar-admin namespaces get-subscribe-rate options
 |---|---|---|
 
 
-## <em>remove-subscribe-rate</em>
+## remove-subscribe-rate
 
 Remove configured subscribe-rate per consumer for all topics of the namespace
 
@@ -1057,7 +1057,7 @@ $ pulsar-admin namespaces remove-subscribe-rate options
 |---|---|---|
 
 
-## <em>set-subscription-dispatch-rate</em>
+## set-subscription-dispatch-rate
 
 Set subscription message-dispatch-rate for all subscription of the namespace
 
@@ -1077,7 +1077,7 @@ $ pulsar-admin namespaces set-subscription-dispatch-rate options
 | `--msg-dispatch-rate, -md` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1||
 
 
-## <em>get-subscription-dispatch-rate</em>
+## get-subscription-dispatch-rate
 
 Get subscription configured message-dispatch-rate for all topics of the namespace (Disabled if value < 0)
 
@@ -1093,7 +1093,7 @@ $ pulsar-admin namespaces get-subscription-dispatch-rate options
 |---|---|---|
 
 
-## <em>remove-subscription-dispatch-rate</em>
+## remove-subscription-dispatch-rate
 
 Remove subscription configured message-dispatch-rate for all topics of the namespace
 
@@ -1109,7 +1109,7 @@ $ pulsar-admin namespaces remove-subscription-dispatch-rate options
 |---|---|---|
 
 
-## <em>set-publish-rate</em>
+## set-publish-rate
 
 Set publish-rate for all topics of the namespace
 
@@ -1127,7 +1127,7 @@ $ pulsar-admin namespaces set-publish-rate options
 | `--msg-publish-rate, -m` | message-publish-rate (default -1 will be overwrite if not passed)|-1||
 
 
-## <em>get-publish-rate</em>
+## get-publish-rate
 
 Get configured message-publish-rate for all topics of the namespace (Disabled if value < 0)
 
@@ -1143,7 +1143,7 @@ $ pulsar-admin namespaces get-publish-rate options
 |---|---|---|
 
 
-## <em>remove-publish-rate</em>
+## remove-publish-rate
 
 Remove publish-rate for all topics of the namespace
 
@@ -1159,7 +1159,7 @@ $ pulsar-admin namespaces remove-publish-rate options
 |---|---|---|
 
 
-## <em>set-replicator-dispatch-rate</em>
+## set-replicator-dispatch-rate
 
 Set replicator message-dispatch-rate for all topics of the namespace
 
@@ -1178,7 +1178,7 @@ $ pulsar-admin namespaces set-replicator-dispatch-rate options
 | `--msg-dispatch-rate, -md` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1||
 
 
-## <em>get-replicator-dispatch-rate</em>
+## get-replicator-dispatch-rate
 
 Get replicator configured message-dispatch-rate for all topics of the namespace (Disabled if value < 0)
 
@@ -1194,7 +1194,7 @@ $ pulsar-admin namespaces get-replicator-dispatch-rate options
 |---|---|---|
 
 
-## <em>remove-replicator-dispatch-rate</em>
+## remove-replicator-dispatch-rate
 
 Remove replicator configured message-dispatch-rate for all topics of the namespace
 
@@ -1210,7 +1210,7 @@ $ pulsar-admin namespaces remove-replicator-dispatch-rate options
 |---|---|---|
 
 
-## <em>clear-backlog</em>
+## clear-backlog
 
 Clear backlog for a namespace
 
@@ -1229,7 +1229,7 @@ $ pulsar-admin namespaces clear-backlog options
 | `--force, -force` | Whether to force clear backlog without prompt|false||
 
 
-## <em>unsubscribe</em>
+## unsubscribe
 
 Unsubscribe the given subscription on all topics on a namespace
 
@@ -1247,7 +1247,7 @@ $ pulsar-admin namespaces unsubscribe options
 | `--sub, -s` | subscription name|null||
 
 
-## <em>set-encryption-required</em>
+## set-encryption-required
 
 Enable or disable message encryption required for a namespace
 
@@ -1265,7 +1265,7 @@ $ pulsar-admin namespaces set-encryption-required options
 | `--enable, -e` | Enable message encryption required|false||
 
 
-## <em>get-encryption-required</em>
+## get-encryption-required
 
 Get encryption required for a namespace
 
@@ -1281,7 +1281,7 @@ $ pulsar-admin namespaces get-encryption-required options
 |---|---|---|
 
 
-## <em>set-subscription-auth-mode</em>
+## set-subscription-auth-mode
 
 Set subscription auth mode on a namespace
 
@@ -1298,7 +1298,7 @@ $ pulsar-admin namespaces set-subscription-auth-mode options
 | `-m, --subscription-auth-mode` | Subscription authorization mode for Pulsar policies. Valid options are: [None, Prefix]|null||
 
 
-## <em>get-subscription-auth-mode</em>
+## get-subscription-auth-mode
 
 Get subscriptionAuthMod for a namespace
 
@@ -1314,7 +1314,7 @@ $ pulsar-admin namespaces get-subscription-auth-mode options
 |---|---|---|
 
 
-## <em>set-delayed-delivery</em>
+## set-delayed-delivery
 
 Set the delayed delivery policy on a namespace
 
@@ -1333,7 +1333,7 @@ $ pulsar-admin namespaces set-delayed-delivery options
 | `--enable, -e` | Enable delayed delivery messages|false||
 
 
-## <em>get-delayed-delivery</em>
+## get-delayed-delivery
 
 Get the delayed delivery policy for a namespace
 
@@ -1349,7 +1349,7 @@ $ pulsar-admin namespaces get-delayed-delivery options
 |---|---|---|
 
 
-## <em>remove-delayed-delivery</em>
+## remove-delayed-delivery
 
 Remove delayed delivery policies from a namespace
 
@@ -1365,7 +1365,7 @@ $ pulsar-admin namespaces remove-delayed-delivery options
 |---|---|---|
 
 
-## <em>get-inactive-topic-policies</em>
+## get-inactive-topic-policies
 
 Get the inactive topic policy for a namespace
 
@@ -1381,7 +1381,7 @@ $ pulsar-admin namespaces get-inactive-topic-policies options
 |---|---|---|
 
 
-## <em>set-inactive-topic-policies</em>
+## set-inactive-topic-policies
 
 Set the inactive topic policies on a namespace
 
@@ -1401,7 +1401,7 @@ $ pulsar-admin namespaces set-inactive-topic-policies options
 | `--delete-mode, -m` | Mode of delete inactive topic, Valid options are: [delete_when_no_subscriptions, delete_when_subscriptions_caught_up]|null||
 
 
-## <em>remove-inactive-topic-policies</em>
+## remove-inactive-topic-policies
 
 Remove inactive topic policies from a namespace
 
@@ -1417,7 +1417,7 @@ $ pulsar-admin namespaces remove-inactive-topic-policies options
 |---|---|---|
 
 
-## <em>get-max-producers-per-topic</em>
+## get-max-producers-per-topic
 
 Get maxProducersPerTopic for a namespace
 
@@ -1433,7 +1433,7 @@ $ pulsar-admin namespaces get-max-producers-per-topic options
 |---|---|---|
 
 
-## <em>set-max-producers-per-topic</em>
+## set-max-producers-per-topic
 
 Set maxProducersPerTopic for a namespace
 
@@ -1450,7 +1450,7 @@ $ pulsar-admin namespaces set-max-producers-per-topic options
 | `--max-producers-per-topic, -p` | maxProducersPerTopic for a namespace|0||
 
 
-## <em>remove-max-producers-per-topic</em>
+## remove-max-producers-per-topic
 
 Remove max producers per topic for a namespace
 
@@ -1466,7 +1466,7 @@ $ pulsar-admin namespaces remove-max-producers-per-topic options
 |---|---|---|
 
 
-## <em>get-max-consumers-per-topic</em>
+## get-max-consumers-per-topic
 
 Get maxConsumersPerTopic for a namespace
 
@@ -1482,7 +1482,7 @@ $ pulsar-admin namespaces get-max-consumers-per-topic options
 |---|---|---|
 
 
-## <em>set-max-consumers-per-topic</em>
+## set-max-consumers-per-topic
 
 Set maxConsumersPerTopic for a namespace
 
@@ -1499,7 +1499,7 @@ $ pulsar-admin namespaces set-max-consumers-per-topic options
 | `--max-consumers-per-topic, -c` | maxConsumersPerTopic for a namespace|0||
 
 
-## <em>remove-max-consumers-per-topic</em>
+## remove-max-consumers-per-topic
 
 Remove max consumers per topic for a namespace
 
@@ -1515,7 +1515,7 @@ $ pulsar-admin namespaces remove-max-consumers-per-topic options
 |---|---|---|
 
 
-## <em>get-max-consumers-per-subscription</em>
+## get-max-consumers-per-subscription
 
 Get maxConsumersPerSubscription for a namespace
 
@@ -1531,7 +1531,7 @@ $ pulsar-admin namespaces get-max-consumers-per-subscription options
 |---|---|---|
 
 
-## <em>set-max-consumers-per-subscription</em>
+## set-max-consumers-per-subscription
 
 Set maxConsumersPerSubscription for a namespace
 
@@ -1548,7 +1548,7 @@ $ pulsar-admin namespaces set-max-consumers-per-subscription options
 | `--max-consumers-per-subscription, -c` | maxConsumersPerSubscription for a namespace|0||
 
 
-## <em>remove-max-consumers-per-subscription</em>
+## remove-max-consumers-per-subscription
 
 Remove maxConsumersPerSubscription for a namespace
 
@@ -1564,7 +1564,7 @@ $ pulsar-admin namespaces remove-max-consumers-per-subscription options
 |---|---|---|
 
 
-## <em>get-max-unacked-messages-per-subscription</em>
+## get-max-unacked-messages-per-subscription
 
 Get maxUnackedMessagesPerSubscription for a namespace
 
@@ -1580,7 +1580,7 @@ $ pulsar-admin namespaces get-max-unacked-messages-per-subscription options
 |---|---|---|
 
 
-## <em>set-max-unacked-messages-per-subscription</em>
+## set-max-unacked-messages-per-subscription
 
 Set maxUnackedMessagesPerSubscription for a namespace
 
@@ -1597,7 +1597,7 @@ $ pulsar-admin namespaces set-max-unacked-messages-per-subscription options
 | `--max-unacked-messages-per-subscription, -c` | maxUnackedMessagesPerSubscription for a namespace|0||
 
 
-## <em>remove-max-unacked-messages-per-subscription</em>
+## remove-max-unacked-messages-per-subscription
 
 Remove maxUnackedMessagesPerSubscription for a namespace
 
@@ -1613,7 +1613,7 @@ $ pulsar-admin namespaces remove-max-unacked-messages-per-subscription options
 |---|---|---|
 
 
-## <em>get-max-unacked-messages-per-consumer</em>
+## get-max-unacked-messages-per-consumer
 
 Get maxUnackedMessagesPerConsumer for a namespace
 
@@ -1629,7 +1629,7 @@ $ pulsar-admin namespaces get-max-unacked-messages-per-consumer options
 |---|---|---|
 
 
-## <em>set-max-unacked-messages-per-consumer</em>
+## set-max-unacked-messages-per-consumer
 
 Set maxUnackedMessagesPerConsumer for a namespace
 
@@ -1646,7 +1646,7 @@ $ pulsar-admin namespaces set-max-unacked-messages-per-consumer options
 | `--max-unacked-messages-per-topic, -c` | maxUnackedMessagesPerConsumer for a namespace|0||
 
 
-## <em>remove-max-unacked-messages-per-consumer</em>
+## remove-max-unacked-messages-per-consumer
 
 Remove maxUnackedMessagesPerConsumer for a namespace
 
@@ -1662,7 +1662,7 @@ $ pulsar-admin namespaces remove-max-unacked-messages-per-consumer options
 |---|---|---|
 
 
-## <em>get-compaction-threshold</em>
+## get-compaction-threshold
 
 Get compactionThreshold for a namespace
 
@@ -1678,7 +1678,7 @@ $ pulsar-admin namespaces get-compaction-threshold options
 |---|---|---|
 
 
-## <em>set-compaction-threshold</em>
+## set-compaction-threshold
 
 Set compactionThreshold for a namespace
 
@@ -1695,7 +1695,7 @@ $ pulsar-admin namespaces set-compaction-threshold options
 | `--threshold, -t` | Maximum number of bytes in a topic backlog before compaction is triggered (eg: 10M, 16G, 3T). 0 disables automatic compaction|0||
 
 
-## <em>remove-compaction-threshold</em>
+## remove-compaction-threshold
 
 Remove compactionThreshold for a namespace
 
@@ -1711,7 +1711,7 @@ $ pulsar-admin namespaces remove-compaction-threshold options
 |---|---|---|
 
 
-## <em>get-offload-threshold</em>
+## get-offload-threshold
 
 Get offloadThreshold for a namespace
 
@@ -1727,7 +1727,7 @@ $ pulsar-admin namespaces get-offload-threshold options
 |---|---|---|
 
 
-## <em>set-offload-threshold</em>
+## set-offload-threshold
 
 Set offloadThreshold for a namespace
 
@@ -1744,7 +1744,7 @@ $ pulsar-admin namespaces set-offload-threshold options
 | `--size, -s` | Maximum number of bytes stored in the pulsar cluster for a topic before data will start being automatically offloaded to longterm storage (eg: 10M, 16G, 3T, 100). -1 falls back to the cluster's namespace default. Negative values disable automatic offload. 0 triggers offloading as soon as possible.|-1||
 
 
-## <em>get-offload-deletion-lag</em>
+## get-offload-deletion-lag
 
 Get offloadDeletionLag, in minutes, for a namespace
 
@@ -1760,7 +1760,7 @@ $ pulsar-admin namespaces get-offload-deletion-lag options
 |---|---|---|
 
 
-## <em>set-offload-deletion-lag</em>
+## set-offload-deletion-lag
 
 Set offloadDeletionLag for a namespace
 
@@ -1777,7 +1777,7 @@ $ pulsar-admin namespaces set-offload-deletion-lag options
 | `--lag, -l` | Duration to wait after offloading a ledger segment, before deleting the copy of that segment from cluster local storage. (eg: 10m, 5h, 3d, 2w).|-1||
 
 
-## <em>clear-offload-deletion-lag</em>
+## clear-offload-deletion-lag
 
 Clear offloadDeletionLag for a namespace
 
@@ -1793,7 +1793,7 @@ $ pulsar-admin namespaces clear-offload-deletion-lag options
 |---|---|---|
 
 
-## <em>get-schema-autoupdate-strategy</em>
+## get-schema-autoupdate-strategy
 
 Get the schema auto-update strategy for a namespace
 
@@ -1809,7 +1809,7 @@ $ pulsar-admin namespaces get-schema-autoupdate-strategy options
 |---|---|---|
 
 
-## <em>set-schema-autoupdate-strategy</em>
+## set-schema-autoupdate-strategy
 
 Set the schema auto-update strategy for a namespace
 
@@ -1827,7 +1827,7 @@ $ pulsar-admin namespaces set-schema-autoupdate-strategy options
 | `--disabled, -d` | Disable automatic schema updates|false||
 
 
-## <em>get-schema-compatibility-strategy</em>
+## get-schema-compatibility-strategy
 
 Get the schema compatibility strategy for a namespace
 
@@ -1843,7 +1843,7 @@ $ pulsar-admin namespaces get-schema-compatibility-strategy options
 |---|---|---|
 
 
-## <em>set-schema-compatibility-strategy</em>
+## set-schema-compatibility-strategy
 
 Set the schema compatibility strategy for a namespace
 
@@ -1860,7 +1860,7 @@ $ pulsar-admin namespaces set-schema-compatibility-strategy options
 | `--compatibility, -c` | Compatibility level required for new schemas created via a Producer. Possible values (FULL, BACKWARD, FORWARD, UNDEFINED, BACKWARD_TRANSITIVE, FORWARD_TRANSITIVE, FULL_TRANSITIVE, ALWAYS_INCOMPATIBLE,ALWAYS_COMPATIBLE).|null||
 
 
-## <em>get-is-allow-auto-update-schema</em>
+## get-is-allow-auto-update-schema
 
 Get the namespace whether allow auto update schema
 
@@ -1876,7 +1876,7 @@ $ pulsar-admin namespaces get-is-allow-auto-update-schema options
 |---|---|---|
 
 
-## <em>set-is-allow-auto-update-schema</em>
+## set-is-allow-auto-update-schema
 
 Set the namespace whether allow auto update schema
 
@@ -1894,7 +1894,7 @@ $ pulsar-admin namespaces set-is-allow-auto-update-schema options
 | `--enable, -e` | Enable schema validation enforced|false||
 
 
-## <em>get-schema-validation-enforce</em>
+## get-schema-validation-enforce
 
 Get the schema validation enforced
 
@@ -1911,7 +1911,7 @@ $ pulsar-admin namespaces get-schema-validation-enforce options
 | `-ap, --applied` | Get the applied policy of the namespace|false||
 
 
-## <em>set-schema-validation-enforce</em>
+## set-schema-validation-enforce
 
 Set the schema whether open schema validation enforced
 
@@ -1929,7 +1929,7 @@ $ pulsar-admin namespaces set-schema-validation-enforce options
 | `--enable, -e` | Enable schema validation enforced|false||
 
 
-## <em>set-offload-policies</em>
+## set-offload-policies
 
 Set the offload policies for a namespace
 
@@ -1959,7 +1959,7 @@ $ pulsar-admin namespaces set-offload-policies options
 | `--offloadedReadPriority, -orp` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null||
 
 
-## <em>remove-offload-policies</em>
+## remove-offload-policies
 
 Remove the offload policies for a namespace
 
@@ -1975,7 +1975,7 @@ $ pulsar-admin namespaces remove-offload-policies options
 |---|---|---|
 
 
-## <em>get-offload-policies</em>
+## get-offload-policies
 
 Get the offload policies for a namespace
 
@@ -1991,7 +1991,7 @@ $ pulsar-admin namespaces get-offload-policies options
 |---|---|---|
 
 
-## <em>set-deduplication-snapshot-interval</em>
+## set-deduplication-snapshot-interval
 
 Set deduplicationSnapshotInterval for a namespace
 
@@ -2008,7 +2008,7 @@ $ pulsar-admin namespaces set-deduplication-snapshot-interval options
 | `--interval, -i` | deduplicationSnapshotInterval for a namespace|0||
 
 
-## <em>get-deduplication-snapshot-interval</em>
+## get-deduplication-snapshot-interval
 
 Get deduplicationSnapshotInterval for a namespace
 
@@ -2024,7 +2024,7 @@ $ pulsar-admin namespaces get-deduplication-snapshot-interval options
 |---|---|---|
 
 
-## <em>remove-deduplication-snapshot-interval</em>
+## remove-deduplication-snapshot-interval
 
 Remove deduplicationSnapshotInterval for a namespace
 
@@ -2040,7 +2040,7 @@ $ pulsar-admin namespaces remove-deduplication-snapshot-interval options
 |---|---|---|
 
 
-## <em>set-max-topics-per-namespace</em>
+## set-max-topics-per-namespace
 
 Set max topics per namespace
 
@@ -2057,7 +2057,7 @@ $ pulsar-admin namespaces set-max-topics-per-namespace options
 | `--max-topics-per-namespace, -t` | max topics per namespace|0||
 
 
-## <em>get-max-topics-per-namespace</em>
+## get-max-topics-per-namespace
 
 Get max topics per namespace
 
@@ -2073,7 +2073,7 @@ $ pulsar-admin namespaces get-max-topics-per-namespace options
 |---|---|---|
 
 
-## <em>remove-max-topics-per-namespace</em>
+## remove-max-topics-per-namespace
 
 Remove max topics per namespace
 
@@ -2089,7 +2089,7 @@ $ pulsar-admin namespaces remove-max-topics-per-namespace options
 |---|---|---|
 
 
-## <em>set-property</em>
+## set-property
 
 Set property for a namespace
 
@@ -2107,7 +2107,7 @@ $ pulsar-admin namespaces set-property options
 | `--value, -v` | Value of the property|null||
 
 
-## <em>get-property</em>
+## get-property
 
 Get property for a namespace
 
@@ -2124,7 +2124,7 @@ $ pulsar-admin namespaces get-property options
 | `--key, -k` | Key of the property|null||
 
 
-## <em>remove-property</em>
+## remove-property
 
 Remove property for a namespace
 
@@ -2141,7 +2141,7 @@ $ pulsar-admin namespaces remove-property options
 | `--key, -k` | Key of the property|null||
 
 
-## <em>set-properties</em>
+## set-properties
 
 Set properties of a namespace
 
@@ -2158,7 +2158,7 @@ $ pulsar-admin namespaces set-properties options
 | `--properties, -p` | key value pair properties(a=a,b=b,c=c)|null||
 
 
-## <em>get-properties</em>
+## get-properties
 
 Get properties of a namespace
 
@@ -2174,7 +2174,7 @@ $ pulsar-admin namespaces get-properties options
 |---|---|---|
 
 
-## <em>clear-properties</em>
+## clear-properties
 
 Clear all properties for a namespace
 
@@ -2190,7 +2190,7 @@ $ pulsar-admin namespaces clear-properties options
 |---|---|---|
 
 
-## <em>get-resource-group</em>
+## get-resource-group
 
 Get ResourceGroup for a namespace
 
@@ -2206,7 +2206,7 @@ $ pulsar-admin namespaces get-resource-group options
 |---|---|---|
 
 
-## <em>set-resource-group</em>
+## set-resource-group
 
 Set ResourceGroup for a namespace
 
@@ -2223,7 +2223,7 @@ $ pulsar-admin namespaces set-resource-group options
 | `--resource-group-name, -rgn` | ResourceGroup name|null||
 
 
-## <em>remove-resource-group</em>
+## remove-resource-group
 
 Remove ResourceGroup from a namespace
 
@@ -2239,7 +2239,7 @@ $ pulsar-admin namespaces remove-resource-group options
 |---|---|---|
 
 
-## <em>get-entry-filters</em>
+## get-entry-filters
 
 Get entry filters for a namespace
 
@@ -2255,7 +2255,7 @@ $ pulsar-admin namespaces get-entry-filters options
 |---|---|---|
 
 
-## <em>set-entry-filters</em>
+## set-entry-filters
 
 Set entry filters for a namespace
 
@@ -2272,7 +2272,7 @@ $ pulsar-admin namespaces set-entry-filters options
 | `--entry-filters-name, -efn` | The class name for the entry filter.|||
 
 
-## <em>remove-entry-filters</em>
+## remove-entry-filters
 
 Remove entry filters for a namespace
 

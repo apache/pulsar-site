@@ -9,7 +9,7 @@ $ pulsar-admin transactions subcommand
 
 
 
-## <em>coordinator-internal-stats</em>
+## coordinator-internal-stats
 
 Get transaction coordinator internal stats
 
@@ -27,7 +27,7 @@ $ pulsar-admin transactions coordinator-internal-stats options
 | `-m, --metadata` | Flag to include ledger metadata|false||
 
 
-## <em>pending-ack-internal-stats</em>
+## pending-ack-internal-stats
 
 Get pending ack internal stats
 
@@ -46,7 +46,7 @@ $ pulsar-admin transactions pending-ack-internal-stats options
 | `-t, --topic` | Topic name|null||
 
 
-## <em>coordinator-stats</em>
+## coordinator-stats
 
 Get transaction coordinator stats
 
@@ -63,7 +63,7 @@ $ pulsar-admin transactions coordinator-stats options
 | `-c, --coordinator-id` | The coordinator id|null||
 
 
-## <em>transaction-buffer-stats</em>
+## transaction-buffer-stats
 
 Get transaction buffer stats
 
@@ -81,7 +81,7 @@ $ pulsar-admin transactions transaction-buffer-stats options
 | `-t, --topic` | The topic|null||
 
 
-## <em>pending-ack-stats</em>
+## pending-ack-stats
 
 Get transaction pending ack stats
 
@@ -100,7 +100,7 @@ $ pulsar-admin transactions pending-ack-stats options
 | `-l, --low-water-mark` | Whether to get information about lowWaterMarks stored in transaction pending ack.|false||
 
 
-## <em>transaction-in-buffer-stats</em>
+## transaction-in-buffer-stats
 
 Get transaction in buffer stats
 
@@ -119,7 +119,7 @@ $ pulsar-admin transactions transaction-in-buffer-stats options
 | `-m, --most-sig-bits` | The most sig bits|0||
 
 
-## <em>transaction-in-pending-ack-stats</em>
+## transaction-in-pending-ack-stats
 
 Get transaction in pending ack stats
 
@@ -139,7 +139,7 @@ $ pulsar-admin transactions transaction-in-pending-ack-stats options
 | `-l, --least-sig-bits` | The least sig bits|0||
 
 
-## <em>transaction-metadata</em>
+## transaction-metadata
 
 Get transaction metadata
 
@@ -157,7 +157,7 @@ $ pulsar-admin transactions transaction-metadata options
 | `-l, --least-sig-bits` | The least sig bits|0||
 
 
-## <em>slow-transactions</em>
+## slow-transactions
 
 Get slow transactions.
 
@@ -175,7 +175,7 @@ $ pulsar-admin transactions slow-transactions options
 | `-t, --time` | The transaction timeout time. (eg: 1s, 10s, 1m, 5h, 3d)|1s||
 
 
-## <em>scale-transactionCoordinators</em>
+## scale-transactionCoordinators
 
 Update the scale of transaction coordinators
 
@@ -192,7 +192,7 @@ $ pulsar-admin transactions scale-transactionCoordinators options
 | `-r, --replicas` | The scale of the transaction coordinators|0||
 
 
-## <em>position-stats-in-pending-ack</em>
+## position-stats-in-pending-ack
 
 Get the position stats in transaction pending ack
 
@@ -213,7 +213,7 @@ $ pulsar-admin transactions position-stats-in-pending-ack options
 | `-s, --subscription-name` | Subscription name|null||
 
 
-## <em>coordinators-list</em>
+## coordinators-list
 
 List transaction coordinators
 
