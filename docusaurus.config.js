@@ -184,10 +184,6 @@ module.exports = {
               label: "Quickstart",
             },
             {
-              to: "/books",
-              label: "Books",
-            },
-            {
               to: "/ecosystem/",
               label: "Ecosystem",
             },
@@ -263,6 +259,10 @@ module.exports = {
             {
               to: "/blog",
               label: "Blog",
+            },
+            {
+              to: "/books",
+              label: "Books",
             },
             {
               to: "/case-studies",
