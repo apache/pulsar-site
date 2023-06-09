@@ -56,7 +56,7 @@ This example shows how to create a producer.
 
 This example shows how to publish messages using producers. The publish operation will be done until the broker tells us that the message has been successfully published. It will return the message id after the message is published successfully.
 
-Pulsar supports both synchronous and asynchronous publishing of messages in most language clients. In some languages client(`Node.js` and `C#`), it is easy to publish messages synchronously based on the asynchronous method using language-specific mechanisms(like `await`).
+Pulsar supports both synchronous and asynchronous publishing of messages in most clients. In some language-specific clients, such as Node.js and C#, you can publish messages synchronously based on the asynchronous method using language-specific mechanisms (like `await`).
 
 With async publishment, the producer puts the message in a blocking queue and returns it immediately. Then the client library sends the message to the broker in the background. If the queue is full (max size configurable), the producer is blocked or fails immediately when calling the API, depending on arguments passed to the producer.
 
@@ -109,7 +109,7 @@ With async publishment, the producer puts the message in a blocking queue and re
     }
    ```
 
-  For all methods of the `ProducerMessage` object, see [here](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerMessage).
+  For all methods of the `ProducerMessage` object, see [Go API doc](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ProducerMessage).
 
   </TabItem>
   <TabItem value="Node.js">
@@ -188,7 +188,7 @@ await producer.Send(data);
 
 ## Configure messages
 
-There are various properties of Pulsar's messages that we can set. The values of these properties will be stored in the metadata of the message.
+You can set various properties of Pulsar's messages. The values of these properties are stored in the metadata of a message.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -211,7 +211,7 @@ There are various properties of Pulsar's messages that we can set. The values of
                 .send();
   ```
 
-  For the Java client, we can also use `loadConf` to configure the message metadata. Here is the example:
+  For the Java client, you can also use `loadConf` to configure the message metadata. Here is an example:
   ```java
   Map<String, Object> conf = new HashMap<>();
   conf.put("key", "my-key");
@@ -363,7 +363,7 @@ producer.send("Partitioned topic message".getBytes());
 
   <TabItem value="C++">
 
-To use a custom message router, you need to provide an implementation of the `MessageRoutingPolicy· interface, which has just one `getPartition` method:
+To use a custom message router, you need to provide an implementation of the `MessageRoutingPolicy` interface, which has one `getPartition` method:
 
 ```cpp
 class MessageRouter : public MessageRoutingPolicy {
@@ -403,7 +403,7 @@ result = producer.send(msg);
 
   <TabItem value="Go">
 
-  In the Go client, we can configure the customize message router by passing a funciton.
+  In the Go client, you can configure a customized message router by passing a function.
    ```go
     producer, err := client.CreateProducer(pulsar.ProducerOptions{
         Topic: "my-topic",
