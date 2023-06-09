@@ -32,6 +32,14 @@ Pulsar supports the following language-agnostic client libraries:
 | REST      | [User doc](client-libraries-rest.md)      | [Bundled](pathname:///release-notes/)             | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-broker)    |
 | WebSocket | [User doc](client-libraries-websocket.md) | [Standalone](pathname:///release-notes/client-ws) | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-websocket) |
 
+:::note 
+
+**Client / Broker compatibility**
+
+A design goal of Pulsar is to ensure full compatibility between all versions of the client and the broker. When a client connects to a broker they agree upon a version of the protocol to use. As a result, new features that rely on an updates to the protocol are only available when using both newer clients and newer brokers.
+
+:::
+
 ## Feature matrix
 
 The [Client Feature Matrix](/client-feature-matrix/) page provides an overview of the latest feature supportability on language-specific clients.
