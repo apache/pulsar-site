@@ -26,7 +26,7 @@ Pulsar supports the following language-agnostic client libraries:
 
 **Client / Broker compatibility**
 
-A design goal of Pulsar is to ensure full compatibility between the same major version clients and brokers, e.g. 2.x clients are compatible with all 2.x brokers, etc.
+A design goal of Pulsar is to ensure full compatibility between all versions of the client and the broker. When a client connects to a broker they agree upon a version of the protocol to use. As a result, new features that rely on an updates to the protocol are only available when using both newer clients and newer brokers.
 
 :::
 
