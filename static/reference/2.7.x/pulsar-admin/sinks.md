@@ -27,7 +27,7 @@ $ pulsar-admin sinks subcommand
 * `available-sinks`
 * `reload`
 
-## <em>create</em>
+## create
 
 Submit a Pulsar IO sink connector to run in a Pulsar cluster
 
@@ -80,7 +80,7 @@ Options
 | `--max-redeliver-count`              | Maximum number of times that a message will be redelivered before being sent to the dead letter queue                                                                                                                                   | null    |
 | `-a, --archive`                      | Path to the archive file for the sink. It also supports url-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package.                                          | null    |
 
-## <em>update</em>
+## update
 
 Update a Pulsar IO sink connector
 
@@ -134,7 +134,7 @@ Options
 | `--max-redeliver-count`              | Maximum number of times that a message will be redelivered before being sent to the dead letter queue                                                                                                                                   | null    |
 | `-a, --archive`                      | Path to the archive file for the sink. It also supports url-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package.                                          | null    |
 
-## <em>delete</em>
+## delete
 
 Stops a Pulsar IO sink connector
 
@@ -154,7 +154,7 @@ Options
 | `--namespace` | The sink's namespace | null    |
 | `--tenant`    | The sink's tenant    | null    |
 
-## <em>list</em>
+## list
 
 List all running Pulsar IO sink connectors
 
@@ -173,7 +173,7 @@ Options
 | `--tenant`    | The sink's tenant    | null    |
 | `--namespace` | The sink's namespace | null    |
 
-## <em>get</em>
+## get
 
 Gets the information about a Pulsar IO sink connector
 
@@ -193,7 +193,7 @@ Options
 | `--namespace` | The sink's namespace | null    |
 | `--tenant`    | The sink's tenant    | null    |
 
-## <em>status</em>
+## status
 
 Check the current status of a Pulsar Sink
 
@@ -214,7 +214,7 @@ Options
 | `--instance-id` | The sink instanceId (Get-status of all instances if instance-id is not provided | null    |
 | `--tenant`      | The sink's tenant                                                               | null    |
 
-## <em>stop</em>
+## stop
 
 Stops sink instance
 
@@ -235,7 +235,7 @@ Options
 | `--tenant`      | The sink's tenant                                                      | null    |
 | `--instance-id` | The sink instanceId (stop all instances if instance-id is not provided | null    |
 
-## <em>start</em>
+## start
 
 Starts sink instance
 
@@ -256,7 +256,7 @@ Options
 | `--tenant`      | The sink's tenant                                                       | null    |
 | `--instance-id` | The sink instanceId (start all instances if instance-id is not provided | null    |
 
-## <em>restart</em>
+## restart
 
 Restart sink instance
 
@@ -277,7 +277,7 @@ Options
 | `--namespace`   | The sink's namespace                                                      | null    |
 | `--tenant`      | The sink's tenant                                                         | null    |
 
-## <em>localrun</em>
+## localrun
 
 Run a Pulsar IO sink connector locally (rather than deploying it to the Pulsar cluster)
 
@@ -348,7 +348,7 @@ Options
 | `--metrics-port-start`               | The starting port range for metrics server                                                                                                                                                                                              | null    |
 | `--auto-ack`                         | Whether or not the framework will automatically acknowledge messages                                                                                                                                                                    | null    |
 
-## <em>available-sinks</em>
+## available-sinks
 
 Get the list of Pulsar IO connector sinks supported by Pulsar cluster
 
@@ -360,7 +360,7 @@ Get the list of Pulsar IO connector sinks supported by Pulsar cluster
 $ pulsar-admin sinks available-sinks options
 ```
 
-## <em>reload</em>
+## reload
 
 Reload the available built-in connectors
 

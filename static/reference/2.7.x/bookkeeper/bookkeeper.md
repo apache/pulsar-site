@@ -1,4 +1,4 @@
-## `bookkeeper`
+# bookkeeper
 
 A tool for managing BookKeeper.
 
@@ -16,7 +16,7 @@ The table below lists the environment variables that you can use to configure th
 | BOOKIE_PID_DIR         | Folder where the BookKeeper server PID file should be stored                                             ||
 | BOOKIE_STOP_TIMEOUT    | Wait time before forcefully killing the Bookie server instance if attempts to stop it are not successful ||
 
-### `auto-recovery`
+### auto-recovery
 
 Runs an auto-recovery service daemon
 
@@ -32,7 +32,7 @@ Options
 |----------------|--------------------------------------------|---------|
 | `-c`, `--conf` | Configuration for the auto-recovery daemon ||
 
-### `bookie`
+### bookie
 
 Starts up a BookKeeper server (aka bookie)
 
@@ -50,7 +50,7 @@ Options
 | -readOnly         | Force start a read-only bookie server      | false   |
 | -withAutoRecovery | Start auto-recovery service bookie server  | false   |
 
-### `localbookie`
+### localbookie
 
 Runs a test ensemble of N bookies locally
 
@@ -60,7 +60,7 @@ Usage
 $ bookkeeper localbookie N
 ```
 
-### `upgrade`
+### upgrade
 
 Upgrade the bookie’s filesystem
 
@@ -77,7 +77,7 @@ Options
 | `-c`, `--conf`    | Configuration for the auto-recovery daemon ||
 | `-u`, `--upgrade` | Upgrade the bookie’s directories           ||
 
-### `shell`
+### shell
 
 Run shell for admin commands. To see a full listing of those commands, run bookkeeper shell without an argument.
 
