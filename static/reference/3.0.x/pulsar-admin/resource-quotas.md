@@ -9,7 +9,7 @@ $ pulsar-admin resource-quotas subcommand
 
 
 
-## <em>get</em>
+## get
 
 Get the resource quota for specified namespace bundle, or default quota if no namespace/bundle specified.
 
@@ -27,7 +27,7 @@ $ pulsar-admin resource-quotas get options
 | `--bundle, -b` | {start-boundary}_{end-boundary}, must be specified together with '--namespace'|null||
 
 
-## <em>set</em>
+## set
 
 Set the resource quota for specified namespace bundle, or default quota if no namespace/bundle specified.
 
@@ -51,7 +51,7 @@ $ pulsar-admin resource-quotas set options
 | `--bandwidthOut, -bo` | expected outbound bandwidth (bytes/second)|0||
 
 
-## <em>reset-namespace-bundle-quota</em>
+## reset-namespace-bundle-quota
 
 Reset the specified namespace bundle's resource quota to default value.
 
