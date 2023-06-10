@@ -1,4 +1,4 @@
-## `pulsar-daemon`
+## pulsar-daemon
 
 A wrapper around the pulsar tool that’s used to start and stop processes, such as ZooKeeper, bookies, and Pulsar
 brokers, in the background using nohup.
@@ -6,7 +6,7 @@ brokers, in the background using nohup.
 pulsar-daemon has a similar interface to the pulsar command but adds start and stop commands for various services. For a
 listing of those services, run pulsar-daemon to see the help output or see the documentation for the pulsar command.
 
-### `start`
+### start
 
 Start a service in the background using nohup.
 
@@ -16,7 +16,7 @@ Usage
 $ pulsar-daemon start service
 ```
 
-### `stop`
+### stop
 
 Stop a service that’s already been started using start.
 
@@ -32,7 +32,7 @@ Options
 |--------|----------------------------------------------------------------|---------|
 | -force | Stop the service forcefully if not stopped by normal shutdown. | false   |
 
-### `restart`
+### restart
 
 Restart a service that has already been started.
 
