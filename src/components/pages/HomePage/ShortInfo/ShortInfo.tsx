@@ -41,8 +41,6 @@ const ShortInfo: React.FC = () => {
       </div>
 
       <div className={s.fullsize_container}>
-        <div className={s.blur} />
-
         <div className={s.container}>
           <div className={s.info_container}>
             <ScreenTitle>

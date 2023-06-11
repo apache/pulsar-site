@@ -6,8 +6,10 @@ import ShortInfo from './ShortInfo/ShortInfo';
 import Users from './Users/Users';
 
 import s from './HomePage.module.css';
+import useScrollPosition from './useScrollPosition';
 
 const HomePage = () => {
+  const scrollPosition = useScrollPosition();
 
   return (
     <Layout
@@ -15,7 +17,13 @@ const HomePage = () => {
       description={"Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud."}
     >
       <div className={s.Page}>
-        <div className={s.Background}></div>
+        <div
+          className={s.Background}
+          style={{
+            filter: `blur(${scrollPosition * 0.1}px)`,
+            willChange: 'filter'
+          }}
+        />
         <div className={s.FirstScreen}>
           <ShortInfo />
         </div>
