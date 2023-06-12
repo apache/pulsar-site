@@ -9,7 +9,7 @@ $ pulsar-admin packages subcommand
 
 
 
-## <em>get-metadata</em>
+## get-metadata
 
 Get a package metadata information.
 
@@ -25,7 +25,7 @@ $ pulsar-admin packages get-metadata options
 |---|---|---|
 
 
-## <em>update-metadata</em>
+## update-metadata
 
 Update a package metadata information.
 
@@ -44,7 +44,7 @@ $ pulsar-admin packages update-metadata options
 | `-c, --contact` | contact info of a package|null||
 
 
-## <em>upload</em>
+## upload
 
 Upload a package
 
@@ -64,7 +64,7 @@ $ pulsar-admin packages upload options
 | `--description` | descriptions of a package|null||
 
 
-## <em>download</em>
+## download
 
 Download a package
 
@@ -81,7 +81,7 @@ $ pulsar-admin packages download options
 | `--path` | download destiny path of the package|null||
 
 
-## <em>list</em>
+## list
 
 List all packages with given type in the specified namespace
 
@@ -98,7 +98,7 @@ $ pulsar-admin packages list options
 | `--type` | type of the package|null||
 
 
-## <em>list-versions</em>
+## list-versions
 
 List all versions of the given package
 
@@ -114,7 +114,7 @@ $ pulsar-admin packages list-versions options
 |---|---|---|
 
 
-## <em>delete</em>
+## delete
 
 Delete a package
 

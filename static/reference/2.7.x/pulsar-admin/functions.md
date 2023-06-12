@@ -31,7 +31,7 @@ $ pulsar-admin functions subcommand
 * `upload`
 * `download`
 
-## <em>localrun</em>
+## localrun
 
 Run a Pulsar Function locally, rather than deploy to a Pulsar cluster)
 
@@ -128,7 +128,7 @@ Options
 | `--sliding-interval-duration-ms`    | The time duration after which the window slides                                                                                                                                                                                                                                                                         | null    |
 | `--namespace`                       | The namespace of a Pulsar Function                                                                                                                                                                                                                                                                                      | null    |
 
-## <em>create</em>
+## create
 
 Create a Pulsar Function in cluster mode (deploy it on a Pulsar cluster)
 
@@ -202,7 +202,7 @@ Options
 | `--sliding-interval-duration-ms`    | The time duration after which the window slides                                                                                                                                                                                                                                                                         | null    |
 | `--namespace`                       | The namespace of a Pulsar Function                                                                                                                                                                                                                                                                                      | null    |
 
-## <em>delete</em>
+## delete
 
 Delete a Pulsar Function that is running on a Pulsar cluster
 
@@ -223,7 +223,7 @@ Options
 | `--namespace` | The namespace of a Pulsar Function                        | null    |
 | `--tenant`    | The tenant of a Pulsar Function                           | null    |
 
-## <em>update</em>
+## update
 
 Update a Pulsar Function that has been deployed to a Pulsar cluster
 
@@ -298,7 +298,7 @@ Options
 | `--sliding-interval-duration-ms`    | The time duration after which the window slides                                                                                                                                                                                                                                                                         | null    |
 | `--namespace`                       | The namespace of a Pulsar Function                                                                                                                                                                                                                                                                                      | null    |
 
-## <em>get</em>
+## get
 
 Fetch information about a Pulsar Function
 
@@ -319,7 +319,7 @@ Options
 | `--namespace` | The namespace of a Pulsar Function                        | null    |
 | `--tenant`    | The tenant of a Pulsar Function                           | null    |
 
-## <em>restart</em>
+## restart
 
 Restart function instance
 
@@ -341,7 +341,7 @@ Options
 | `--tenant`      | The tenant of a Pulsar Function                                                | null    |
 | `--instance-id` | The function instanceId (restart all instances if instance-id is not provided) | null    |
 
-## <em>stop</em>
+## stop
 
 Stops function instance
 
@@ -363,7 +363,7 @@ Options
 | `--instance-id` | The function instanceId (stop all instances if instance-id is not provided) | null    |
 | `--tenant`      | The tenant of a Pulsar Function                                             | null    |
 
-## <em>start</em>
+## start
 
 Starts a stopped function instance
 
@@ -385,7 +385,7 @@ Options
 | `--namespace`   | The namespace of a Pulsar Function                                           | null    |
 | `--tenant`      | The tenant of a Pulsar Function                                              | null    |
 
-## <em>status</em>
+## status
 
 Check the current status of a Pulsar Function
 
@@ -407,7 +407,7 @@ Options
 | `--tenant`      | The tenant of a Pulsar Function                                                      | null    |
 | `--instance-id` | The function instanceId (Get-status of all instances if instance-id is not provided) | null    |
 
-## <em>stats</em>
+## stats
 
 Get the current stats of a Pulsar Function
 
@@ -429,7 +429,7 @@ Options
 | `--namespace`   | The namespace of a Pulsar Function                                                  | null    |
 | `--tenant`      | The tenant of a Pulsar Function                                                     | null    |
 
-## <em>list</em>
+## list
 
 List all Pulsar Functions running under a specific tenant and namespace
 
@@ -448,7 +448,7 @@ Options
 | `--namespace` | The namespace of a Pulsar Function | null    |
 | `--tenant`    | The tenant of a Pulsar Function    | null    |
 
-## <em>querystate</em>
+## querystate
 
 Fetch the current state associated with a Pulsar Function
 
@@ -471,7 +471,7 @@ Options
 | `-w, --watch` | Watch for changes in the value associated with a key for a Pulsar Function | false   |
 | `--tenant`    | The tenant of a Pulsar Function                                            | null    |
 
-## <em>putstate</em>
+## putstate
 
 Put the state associated with a Pulsar Function
 
@@ -493,7 +493,7 @@ Options
 | `--tenant`    | The tenant of a Pulsar Function                           | null    |
 | `-s, --state` | The FunctionState that needs to be put                    | null    |
 
-## <em>trigger</em>
+## trigger
 
 Trigger the specified Pulsar Function with a supplied value
 
@@ -519,7 +519,7 @@ Options
 | `--tenant`        | The tenant of a Pulsar Function                                                             | null    |
 | `--triggerValue`  | The value with which you want to trigger the function                                       | null    |
 
-## <em>upload</em>
+## upload
 
 Upload File Data to Pulsar
 
@@ -539,7 +539,7 @@ Options
 | `--sourceFile`  | The file whose contents need to be uploaded | null    |
 | `--path`        | Path where the contents need to be stored   | null    |
 
-## <em>download</em>
+## download
 
 Download File Data from Pulsar
 
