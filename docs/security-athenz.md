@@ -182,7 +182,7 @@ client, err := pulsar.NewClient(pulsar.ClientOptions{
 
 Athenz has a mechanism called [Copper Argos](https://github.com/AthenZ/athenz/blob/master/docs/copper_argos.md). This means that ZTS distributes an X.509 certificate and private key pair to each service, which it can use to identify itself to other services within the organization.
 
-Pulsar currently supports Copper Argos only in Java, C++ and Go. When using Copper Argos, you need to provide at least the following four parameters:
+Currently, Pulsar supports Copper Argos in Java, C++, and Go. When using Copper Argos, you need to provide at least the following four parameters:
 * `providerDomain`
 * `x509CertChain`
 * `privateKey`
