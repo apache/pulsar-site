@@ -61,7 +61,7 @@ public class GetSecretValueFunction implements Function<String, Void> {
         String secretValue = context.getSecret(input);
 
         if (!secretValue.isEmpty()) {
-            LOG.info("The secret {} has value {}", intput, secretValue);
+            LOG.info("The secret {} has value {}", input, secretValue);
         } else {
             LOG.warn("No secret with key {}", input);
         }
