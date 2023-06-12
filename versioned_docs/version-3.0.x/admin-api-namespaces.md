@@ -241,7 +241,7 @@ You can get the list of replication clusters for a given namespace.
 <TabItem value="pulsar-admin">
 
 ```shell
-pulsar-admin namespaces get-clusters test-tenant/cluster1/namespace1
+pulsar-admin namespaces get-clusters test-tenant/namespace1
 ```
 
 Example output:
