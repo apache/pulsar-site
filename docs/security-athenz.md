@@ -182,7 +182,7 @@ client, err := pulsar.NewClient(pulsar.ClientOptions{
 
 Athenz has a mechanism called [Copper Argos](https://github.com/AthenZ/athenz/blob/master/docs/copper_argos.md). This means that ZTS distributes an X.509 certificate and private key pair to each service, which it can use to identify itself to other services within the organization.
 
-Pulsar currently supports Copper Argos only in Java and Go. When using Copper Argos, you need to provide at least the following four parameters:
+Currently, Pulsar supports Copper Argos in Java, C++, and Go. When using Copper Argos, you need to provide at least the following four parameters:
 * `providerDomain`
 * `x509CertChain`
 * `privateKey`
@@ -193,7 +193,7 @@ In this case, `tenantDomain`, `tenantService` and `keyId` are ignored.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
 ```java
@@ -211,6 +211,23 @@ PulsarClient client = PulsarClient.builder()
         .serviceUrl("pulsar://my-broker.com:6650")
         .authentication(athenzAuth)
         .build();
+```
+
+</TabItem>
+<TabItem value="C++">
+
+```cpp
+std::string params = R"({
+        "ztsUrl": "http://localhost:9998",
+        "providerDomain": "pulsar",
+        "x509CertChain": "file:///path/to/x509cert.pem",
+        "privateKey": "file:///path/to/private.pem",
+        "caCert": "file:///path/to/cacert.pem"
+    })";
+pulsar::AuthenticationPtr auth = pulsar::AuthAthenz::create(params);
+ClientConfiguration config = ClientConfiguration();
+config.setAuth(auth);
+Client client("pulsar://my-broker.com:6650", config);
 ```
 
 </TabItem>
