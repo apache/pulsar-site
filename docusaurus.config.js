@@ -116,8 +116,8 @@ const injectLinkParseForEndpoint = ([, info]) => {
         }
     } else {
         restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
-        if (suffix[0].startsWith("operation/")) {
-          path += suffix[0].slice("operation".length)
+        if (suffix.startsWith("operation/")) {
+          path += suffix.slice("operation".length)
         }
     }
 
