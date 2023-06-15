@@ -4,14 +4,16 @@ title: Pulsar for Developers
 sidebar_label: "Pulsar for Developers"
 ---
 
-Developing applications for Pulsar can be a fun and rewarding experience. With Pulsar, you can quickly create, deploy, and manage your services using a powerful CLI tool and a comprehensive set of libraries. The topics below will get you started!
+## Advanced topics
+
+If you want to learn how to develop Pulsar related components, check out the following guides.
 
 - [Develop simulation tools](develop-tools.md)
 - [Develop binary protocol](developing-binary-protocol.md)
 - [Develop load manager](develop-load-manager.md)
 - [Develop Pulsar plugin](develop-plugin.md)
 
-## Populsar topics
+## Popular topics
 
 If you want to read top-viewed docs for developers, check out the following concepts, examples, and tutorials.
 
