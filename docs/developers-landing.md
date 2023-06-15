@@ -18,11 +18,8 @@ If you want to learn how to develop Pulsar related components, check out the fol
 If you want to read top-viewed docs for developers, check out the following concepts, examples, and tutorials.
 
 - [Pulsar concepts](concepts-messaging.md)
-
 - [Pulsar clients](client-libraries.md)
-
 - [Pulsar APIs](pulsar-api-overview.md)
     - [Pulsar admin APIs](admin-api-overview.md)
     - [Pulsar REST APIs](reference-rest-api-overview.md)
-
 - [Pulsar contribution guide](../../contribute)
