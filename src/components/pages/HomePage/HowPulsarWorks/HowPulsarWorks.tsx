@@ -4,6 +4,7 @@ import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
 
 // SVGO breaks the illustration. To fix it, we import it as is.
 import illustrationDesktop from '!!raw-loader!./img/illustration-desktop.svg';
+import illustrationMobile from '!!raw-loader!./img/illustration-mobile.svg';
 
 import BookkeeperIcon from './img/bookkeeper.svg';
 import BrokersIcon from './img/brokers.svg';
@@ -68,7 +69,8 @@ const HowPulsarWorks: React.FC = () => {
       <div className={s.Container}>
         <ScreenTitle>How does Pulsar work</ScreenTitle>
 
-        <div dangerouslySetInnerHTML={{ __html: illustrationDesktop }} className={s.Illustration} />
+        <div dangerouslySetInnerHTML={{ __html: illustrationDesktop }} className={s.IllustrationDesktop} />
+        <div dangerouslySetInnerHTML={{ __html: illustrationMobile }} className={s.IllustrationMobile} />
 
         <div className={s.CardsDesktop}>
           {cards.map((card, index) => (
