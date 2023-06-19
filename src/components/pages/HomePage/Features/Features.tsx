@@ -21,9 +21,9 @@ const Features = () => {
             return (
               <div key={i} className={s.feature_block}>
                 <Picture className={s.feature_picture} />
-                <span className={s.feature_title}>
+                <h3 className={s.feature_title}>
                   {feature.title}
-                </span>
+                </h3>
 
                 <span className={s.feature_text}>
                   {feature.text}
@@ -42,9 +42,9 @@ const Features = () => {
                 <div key={i}>
                   <div className={s.feature_block}>
                     <div className={s.text_container}>
-                      <span className={s.feature_title}>
+                      <h3 className={s.feature_title}>
                         {feature.title}
-                      </span>
+                      </h3>
 
                       <span className={s.feature_text}>
                         {feature.text}
