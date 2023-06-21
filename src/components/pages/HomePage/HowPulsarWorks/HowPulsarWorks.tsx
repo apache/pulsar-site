@@ -30,7 +30,7 @@ const cards: CardProps[] = [
     children: (
       <p>
         Pulsar and BookKeeper use Apache ZooKeeper to save metadata coordinated between nodes,
-        such as a list of ledgers per topic, segments per ledger, and mapping of topic bundles to a Broker.
+        such as a list of ledgers per topic, segments per ledger, and mapping of topic bundles to a broker.
         It’s a cluster of highly available and replicated servers (usually 3).
       </p>
     )
