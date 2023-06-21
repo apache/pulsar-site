@@ -54,7 +54,7 @@ const cards: CardProps[] = [
     children: (
       <p>
         Apache BookKeeper is a cluster of nodes called bookies.
-        Each virtual file (a.k.a ledger) is divided into consecutive segments, and each segment is kept on 3 Bookies by default
+        Each virtual file (a.k.a ledger) is divided into consecutive segments, and each segment is kept on 3 bookies by default
         (replicated by the client - i.e., the broker).
         Operators can add bookies rapidly since no data reshuffling (moving) between them is required.
         They immediately share the incoming write load.
