@@ -19,7 +19,7 @@ const cards: CardProps[] = [
     children: (
       <p>
         A Pulsar client contains a consumer and a producer.
-        A Producer writes messages on a topic.
+        A producer writes messages on a topic.
         A consumer reads messages from a topic and acknowledges specific messages or all up to a specific message.
       </p>
     )
