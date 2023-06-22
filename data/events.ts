@@ -25,7 +25,7 @@ export const resources: Record<Category, Resource[]> = {
       {
         title: 'Pulsar Summit Europe 2023',
         description: '',
-        link: 'https://pulsar-summit.org/event/europe-2023',
+        link: 'https://streamnative.io/blog/pulsar-virtual-summit-europe-2023-on-demand-videos-available-now',
         displayDate: '23 May 2023',
         startDate: '2023-05-23' // year-month-day
       },
