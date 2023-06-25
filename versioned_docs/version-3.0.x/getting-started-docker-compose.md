@@ -22,7 +22,8 @@ services:
     networks:
       - pulsar
     volumes:
-      - ./data/zookeeper:/pulsar/data/zookeeper
+      - ./data/zookeeper:/var/lib/zookeeper/data
+      - ./log/zookeeper:/var/lib/zookeeper/log
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
@@ -76,7 +77,7 @@ services:
         condition: service_completed_successfully
     # Map the local directory to the container to avoid bookie startup failure due to insufficient container disks.
     volumes:
-      - ./data/bookkeeper:/pulsar/data/bookkeeper
+      - ./data/bookkeeper:/var/lib/bookkeeper/data
     command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
 
   # Start broker
