@@ -6,7 +6,7 @@ sidebar_label: "Pulsar for Developers"
 
 ## Popular topics
 
-If you want to read top-viewed docs for developers, check out the following concepts, examples, and tutorials.
+If you want to read top-viewed documents for developers, check out the following concepts, examples, and tutorials.
 
 - [Pulsar concepts](concepts-messaging.md)
 - [Pulsar clients](client-libraries.md)
@@ -17,9 +17,9 @@ If you want to read top-viewed docs for developers, check out the following conc
 
 ## Advanced topics
 
-If you want to learn how to develop Pulsar related components, check out the following guides.
+If you want to learn how to develop Pulsar-related components, check out the following documents.
 
-- [Develop simulation tools](develop-tools.md)
-- [Develop binary protocol](developing-binary-protocol.md)
+- [Create a test environment](develop-tools.md)
+- [Develop with the binary protocol](developing-binary-protocol.md)
 - [Develop load manager](develop-load-manager.md)
-- [Develop Pulsar plugin](develop-plugin.md)
+- [Develop plugins for Pulsar](develop-plugin.md)
