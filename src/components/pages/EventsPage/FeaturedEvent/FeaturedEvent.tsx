@@ -20,7 +20,7 @@ const FeaturedEvent: React.FC = () => {
         Over the past few years, Pulsar Summit has featured 100+ speakers and brought together more than 2,0000 Pulsar community members for engaging and insightful sessions.
       </p>
       <p>
-        <a href="https://sessionize.com/pulsar-summit-north-america-2023/?utm_campaign=Pulsar%20Summit%20North%20America%202023" target='_blank'><strong>CFPs are now open!</strong></a>
+        <a href="https://sessionize.com/pulsar-summit-north-america-2023/" target='_blank'><strong>CFPs are now open!</strong></a>
       </p>
     </div>
   );
