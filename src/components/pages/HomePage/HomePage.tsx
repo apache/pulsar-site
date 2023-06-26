@@ -6,6 +6,7 @@ import ShortInfo from './ShortInfo/ShortInfo';
 import Users from './Users/Users';
 
 import s from './HomePage.module.css';
+import HowPulsarWorks from './HowPulsarWorks/HowPulsarWorks';
 
 const HomePage = () => {
 
@@ -21,6 +22,7 @@ const HomePage = () => {
         </div>
         <div className={s.OtherScreens}>
           <Features />
+          <HowPulsarWorks />
           <Users />
         </div>
       </div>
