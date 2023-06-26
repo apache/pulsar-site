@@ -150,7 +150,7 @@ module.exports = {
       id: "summit",
       content: renderAnnouncementBar(
         "Pulsar Summit North America 2023 CFP is open!",
-        "https://sessionize.com/pulsar-summit-north-america-2023/?utm_campaign=Pulsar%20Summit%20North%20America%202023"
+        "https://sessionize.com/pulsar-summit-north-america-2023/"
       ),
       backgroundColor: "#282826",
       textColor: "#fff",
