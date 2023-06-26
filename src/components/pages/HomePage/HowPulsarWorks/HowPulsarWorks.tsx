@@ -43,8 +43,8 @@ const cards: CardProps[] = [
         Topics (i.e., partitions) are divided among Pulsar brokers.
         A broker receives messages for a topic and appends them to the topic’s active virtual file (a.k.a ledger),
         hosted on the Bookkeeper cluster. Brokers read messages from the cache (mostly) or BookKeeper and dispatch them to the consumers.
-        Brokers also receive message acknowledgments and persist them to the BookKeeper as well.
-        They are stateless (don’t use/need a disk).
+        Brokers also receive message acknowledgments and persist them to the BookKeeper cluster as well.
+        Brokers are stateless (don't use/need a disk).
       </p>
     )
   },
