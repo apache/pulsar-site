@@ -3468,17 +3468,6 @@ Number of threads to use for orderedExecutor. The ordered executor is used to op
 
 **Category**: Server
 
-### numWorkerThreadsForNonPersistentTopic
-Number of worker threads to serve non-persistent topic
-
-**Type**: `int`
-
-**Default**: `2`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### preciseDispatcherFlowControl
 Precise dispatcher flow control according to history message number of each entry
 
@@ -3658,6 +3647,17 @@ Amount of seconds to timeout when loading a topic. In situations with many geo-r
 **Type**: `long`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicOrderedExecutorThreadNum
+Number of worker threads to serve topic ordered executor
+
+**Type**: `int`
+
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -5389,6 +5389,18 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### numWorkerThreadsForNonPersistentTopic
+Number of worker threads to serve non-persistent topic.
+@deprecated - use topicOrderedExecutorThreadNum instead.
+
+**Type**: `int`
+
+**Default**: `-1`
 
 **Dynamic**: `false`
 
