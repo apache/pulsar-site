@@ -14,7 +14,7 @@ const FeaturedEvent: React.FC = () => {
       <div>Featured event</div>
       <h2>Pulsar Summit North America 2023</h2>
       <p>
-        Mark your calendars! Pulsar Summit North America is coming back to Hotel Nikko in San Francisco, California on Wednesday, October 25th, 2023
+        Mark your calendars! Pulsar Summit North America is coming back to Hotel Nikko in San Francisco, California on Wednesday, October 25th, 2023.
       </p>
       <p>
         Over the past few years, Pulsar Summit has featured 100+ speakers and brought together more than 2,0000 Pulsar community members for engaging and insightful sessions.
