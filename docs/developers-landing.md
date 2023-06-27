@@ -21,5 +21,5 @@ If you want to learn how to develop Pulsar-related components, check out the fol
 
 - [Create a test environment](develop-tools.md)
 - [Develop with the binary protocol](developing-binary-protocol.md)
-- [Develop load manager](develop-load-manager.md)
+- [Develop broker load balancer](develop-load-manager.md)
 - [Develop plugins for Pulsar](develop-plugin.md)
