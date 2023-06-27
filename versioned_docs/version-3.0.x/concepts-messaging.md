@@ -1073,7 +1073,7 @@ Pulsar has two features, however, that enable you to override this default behav
 
 :::tip
 
-All message retention and expiry are managed at the [namespace](#namespaces) level or at [topic]($topic) level from Pulsar `2.6.0` activating `topicLevelPoliciesEnabled=true` at broker.conf. Since `2.11` that default value is `true`. For a how-to, see the [Message retention and expiry](cookbooks-retention-expiry.md) cookbook.
+All message retention and expiry are managed at the [namespace](#namespaces) level or at topic level from Pulsar `2.6.0` activating `topicLevelPoliciesEnabled=true` at broker.conf. Since `2.11` that default value is `true`. For a how-to, see the [Message retention and expiry](cookbooks-retention-expiry.md) cookbook.
 
 :::
 
