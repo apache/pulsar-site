@@ -1208,6 +1208,12 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
     String primaryUrl = "pulsar+ssl://localhost:6651";
     String secondaryUrl = "pulsar+ssl://localhost:6661";
 
+    String primaryTlsTrustCertsFilePath = "primary/path";
+    Authentication primaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/primary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/primary-role.key-pk8.pem");
+
     String secondaryTlsTrustCertsFilePath = "secondary/path";
     Authentication secondaryAuthentication = AuthenticationFactory.create(
         "org.apache.pulsar.client.impl.auth.AuthenticationTls",
@@ -1248,6 +1254,8 @@ Parameter|Default value|Required?|Description
 `failoverDelay`|N/A|Yes|The delay before the Pulsar client switches from the primary cluster to the backup cluster.<br /><br />Automatic failover is controlled by a probe task: <br />1) The probe task first checks the health status of the primary cluster. <br /> 2) If the probe task finds the continuous failure time of the primary cluster exceeds `failoverDelayMs`, it switches the Pulsar client to the backup cluster.
 `switchBackDelay`|N/A|Yes|The delay before the Pulsar client switches from the backup cluster to the primary cluster.<br /><br />Automatic failover switchover is controlled by a probe task: <br /> 1) After the Pulsar client switches from the primary cluster to the backup cluster, the probe task continues to check the status of the primary cluster. <br /> 2) If the primary cluster functions well and continuously remains active longer than `switchBackDelay`, the Pulsar client switches back to the primary cluster.
 `checkInterval`|30s|No|Frequency of performing a probe task (in seconds).
+`primaryTlsTrustCertsFilePath` |N/A|No|Path to the trusted TLS certificate file of the primary cluster.
+`primaryAuthentication`|N/A|No|Authentication of the primary cluster.
 `secondaryTlsTrustCertsFilePath`|N/A|No|A map of certificate file. Keys are service urls of backup cluster. Values are paths to the trusted TLS certificate file of the backup cluster.
 `secondaryAuthentication`|N/A|No|A map of Authentication config. Keys are service urls of backup cluster. Values are Authentication object of the backup cluster.
 
