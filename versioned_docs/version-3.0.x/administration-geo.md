@@ -227,6 +227,12 @@ If you want to use replicated subscriptions in Pulsar:
               .replicateSubscriptionState(true)
               .subscribe();
   ```
+:::note
+
+* Replication type is not replicated between clusters but determined by the first consumer that connects to the subscription.
+
+:::
+
 
 ### Advantages
 
@@ -239,6 +245,7 @@ If you want to use replicated subscriptions in Pulsar:
 
 * When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
 * Only the base line cursor position is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
+
 
 ## Migrate data between clusters using geo-replication
 
