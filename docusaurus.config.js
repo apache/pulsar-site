@@ -146,16 +146,16 @@ module.exports = {
   trailingSlash: true,
   themeConfig: {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    // announcementBar: {
-    //   id: "summit",
-    //   content: renderAnnouncementBar(
-    //     "Pulsar Virtual Summit Europe 2023",
-    //     "https://pulsar-summit.org/event/europe-2023"
-    //   ),
-    //   backgroundColor: "#282826",
-    //   textColor: "#fff",
-    //   isCloseable: false,
-    // },
+    announcementBar: {
+      id: "summit",
+      content: renderAnnouncementBar(
+        "Pulsar Summit North America 2023 CFP is open!",
+        "https://sessionize.com/pulsar-summit-north-america-2023/"
+      ),
+      backgroundColor: "#282826",
+      textColor: "#fff",
+      isCloseable: false,
+    },
     colorMode: {
       disableSwitch: true,
     },
