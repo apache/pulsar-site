@@ -42,7 +42,7 @@ Our theme this year is "Why Pulsar?" and we are looking for stories that are inn
 
 ## Important Dates:
 
-* CFP opens: Tuesday, June 21st, 2023
+* CFP opens: Wednesday, June 21st, 2023
 * CFP closes: Friday, July 7th, 2023
 * Speaker notifications sent: Friday, July 28th, 2023
 * Schedule announcement: Friday, August 4th, 2023
