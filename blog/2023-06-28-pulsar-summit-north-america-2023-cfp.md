@@ -45,7 +45,7 @@ Our theme this year is "Why Pulsar?" and we are looking for stories that are inn
 * CFP opens: Tuesday, June 21st, 2023
 * CFP closes: Friday, July 7th, 2023
 * Speaker notifications sent: Friday, July 28th, 2023
-* Schedule announcement: August 4th, 2023
+* Schedule announcement: Friday, August 4th, 2023
 
 Submissions are open until Friday, July 7th, 2023. If you want some advice or feedback on your proposal or have any questions about the summit, please do not hesitate to contact us at organizers@pulsar-summit.org. We are happy to help!
 
