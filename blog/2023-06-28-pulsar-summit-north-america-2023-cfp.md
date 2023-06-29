@@ -29,8 +29,8 @@ Our theme this year is "Why Pulsar?" and we are looking for stories that are inn
 #### As a speaker, you will receive:
 
 * Free conference pass.
-* Your headshot, bio and session featured on the Pulsar Summit website.
-* Your session will be promoted on YouTube, Twitter and LinkedIn.
+* Your headshot, bio, and session featured on the Pulsar Summit website.
+* Your session will be promoted on YouTube, Twitter, and LinkedIn.
 * The opportunity to share your knowledge and engage with the vibrant Pulsar community!
 
 **To speak at the summit, please submit an abstract about your presentation.** Remember to keep your proposal short, relevant, and engaging. All levels of talks (beginner, intermediate, and advanced) are welcome. We invite you to submit your talk proposals and share your unique experience in one of the following themes:
