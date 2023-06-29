@@ -240,7 +240,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 
 ```shell
 
-  bin/pulsar-admin cluster create new-cluster
+  bin/pulsar-admin clusters create new-cluster
 
 ```
 
