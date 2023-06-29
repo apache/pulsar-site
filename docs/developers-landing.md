@@ -13,7 +13,7 @@ If you want to read top-viewed documents for developers, check out the following
 - [Pulsar APIs](pulsar-api-overview.md)
     - [Pulsar admin APIs](admin-api-overview.md)
     - [Pulsar REST APIs](reference-rest-api-overview.md)
-- [Pulsar contribution guide](../../contribute)
+- [Pulsar contribution guide](/contribute)
 
 ## Advanced topics
 
