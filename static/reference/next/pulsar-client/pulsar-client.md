@@ -14,10 +14,12 @@ $ pulsar-client produce [options]
 | `-m, --messages` | Messages to send, either -m or -f must be specified. Specify -m for each message.|[]|
 | `-s, --separator` | Character to split messages string on default is comma|,|
 | `-n, --num-produce` | Number of times to send message(s), the count of messages/files * num-produce should below than 1000.|1|
-| `-k, --key` | message key to add |null|
+| `-k, --key` | Partitioning key to add to each message|null|
+| `-kvkf, --key-value-key-file` | Path to file containing the value to add as message key in KeyValue schema. JSON and AVRO files are supported.|null|
 | `-dr, --disable-replication` | Disable geo-replication for messages.|false|
 | `-c, --chunking` | Should split the message and publish in chunks if message size is larger than allowed max size|false|
 | `-ekn, --encryption-key-name` | The public key name to encrypt payload|null|
+| `-kvk, --key-value-key` | Value to add as message key in KeyValue schema|null|
 | `-p, --properties` | Properties to add, Comma separated key=value string, like k1=v1,k2=v2.|[]|
 | `-kvet, --key-value-encoding-type` | Key Value Encoding Type (it can be separated or inline)|null|
 | `-ekv, --encryption-key-value` | The URI of public key to encrypt payload, for example file:///path/to/public.key or data:application/x-pem-file;base64,*****|null|

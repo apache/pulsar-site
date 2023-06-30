@@ -1245,15 +1245,15 @@ $ pulsar-admin topics set-offload-policies options
 | `-r, --region` | ManagedLedger offload region, s3 and google-cloud-storage requires this parameter|null||
 | `--s3-role-session-name, -rsn` | S3 role session name used for STSAssumeRoleSessionCredentialsProvider|null||
 | `--offloadedReadPriority, -orp` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null||
+| `-rb, --readBufferSizeInBytes, --readBufferSize, -rbs` | Read buffer size (eg: 1M, 5M), default is 1MBs3 and google-cloud-storage requires this parameter|null||
 | `-e, --endpoint` | ManagedLedger offload service endpoint, only s3 requires this parameter|null||
-| `-dl, --offloadDeletionLagInMillis` | ManagedLedger offload deletion lag in bytes|null||
-| `-rb, --readBufferSizeInBytes` | ManagedLedger offload read buffer size in bytes,s3 and google-cloud-storage requires this parameter|0||
+| `-m, --maxBlockSizeInBytes, --maxBlockSize, -mbs` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|null||
+| `-dl, --offloadDeletionLagInMillis, --offloadAfterElapsed, -oae` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null||
+| `-ts, --offloadThresholdInSeconds, --offloadAfterThresholdInSeconds, -oats` | Offload after threshold seconds (or minutes,hours,days,weeks eg: 100m, 3h, 2d, 5w).|null||
 | `-i, --aws-id` | AWS Credential Id to use when using driver S3 or aws-s3|null||
-| `-ts, --offloadThresholdInSeconds` | ManagedLedger offload threshold in seconds|null||
 | `-d, --driver` | ManagedLedger offload driver|null||
 | `--ro, --s3-role` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null||
-| `-m, --maxBlockSizeInBytes` | ManagedLedger offload max block Size in bytes,s3 and google-cloud-storage requires this parameter|0||
-| `-t, --offloadThresholdInBytes` | ManagedLedger offload threshold in bytes|0||
+| `-t, --offloadThresholdInBytes, --offloadAfterThreshold, -oat` | Offload after threshold size (eg: 1M, 5M)|null||
 | `-s, --aws-secret` | AWS Credential Secret to use when using driver S3 or aws-s3|null||
 
 
