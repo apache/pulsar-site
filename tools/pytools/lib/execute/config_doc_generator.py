@@ -39,9 +39,9 @@ def execute(master: Path, version: str):
     classpath = master / 'distribution' / 'server' / 'target' / 'classpath.txt'
     classpath = classpath.read_text()
 
-    broker_doc_generator = 'org.apache.pulsar.docs.tools.CmdGenerateDocumentation'
-    client_doc_generator = 'org.apache.pulsar.docs.tools.CmdGenerateDocumentation'
-    proxy_doc_generator = 'org.apache.pulsar.docs.tools.CmdGenerateDocumentation'
+    broker_doc_generator = 'org.apache.pulsar.proxy.util.CmdGenerateDocumentation'
+    client_doc_generator = 'org.apache.pulsar.proxy.util.CmdGenerateDocumentation'
+    proxy_doc_generator = 'org.apache.pulsar.proxy.util.CmdGenerateDocumentation'
 
     # FIXME(*) b/w compatibility - removed if they are no longer maintained
     if version != "next" and semver.VersionInfo.parse(version[:-2] + ".0") <= "3.0.0":
