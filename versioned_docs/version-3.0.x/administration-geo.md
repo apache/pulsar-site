@@ -229,7 +229,7 @@ If you want to use replicated subscriptions in Pulsar:
   ```
 :::note
 
-* Replication type is not replicated between clusters but determined by the first consumer that connects to the subscription.
+* Replication type is not replicated between clusters. However, it's determined by the first consumer that connects to the subscription.
 
 :::
 
