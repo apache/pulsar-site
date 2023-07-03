@@ -248,7 +248,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 2. Add the new cluster to your old cluster.
 
    ```shell
-   bin/pulsar-admin cluster create new-cluster
+   bin/pulsar-admin clusters create new-cluster
    ```
 
 3. Add the new cluster to your tenant.
