@@ -10,7 +10,7 @@ This section lists resources that make up the Trino REST API v1.
 
 All requests for Trino services should use Trino REST API v1 version.
 
-To request services, use the explicit URL `http://trino.service:8081/v1``. You need to update `trino.service:8081` with your real Trino address before sending requests.
+To request services, use the explicit URL `http://trino.service:8081/v1`. You need to update `trino.service:8081` with your real Trino address before sending requests.
 
 `POST` requests require the `X-Trino-User` header. If you use authentication, you must use the same `username` that is specified in the authentication configuration. If you do not use authentication, you can specify anything for `username`.
 
