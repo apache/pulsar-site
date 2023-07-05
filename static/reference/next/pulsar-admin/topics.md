@@ -243,7 +243,7 @@ $ pulsar-admin topics create-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-s, --subscription` | Subscription to reset position on|null||
+| `-s, --subscription` | Name of subscription to be created|null||
 | `-m, --messageId` | messageId where to create the subscription. It can be either 'latest', 'earliest' or (ledgerId:entryId)|latest||
 | `-r, --replicated` | replicated subscriptions|false||
 | `--property, -p` | key value pair properties(-p a=b -p c=d)|null||

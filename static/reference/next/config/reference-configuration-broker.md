@@ -1150,6 +1150,17 @@ Supported algorithms name for namespace bundle split
 
 **Category**: Load Balancer
 
+### topicBundleAssignmentStrategy
+Name of topic bundle assignment strategy to use
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.naming.ConsistentHashingTopicBundleAssigner`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### aggregatePublisherStatsByProducerName
 If true, aggregate publisher stats of PartitionedTopicStats by producerName
 
@@ -2580,6 +2591,17 @@ Interval between checks to see if cluster is migrated and marks topic migrated  
 
 **Category**: Server
 
+### compactionServiceFactoryClassName
+The class name of the factory that implements the topic compaction service.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.compaction.PulsarCompactionServiceFactory`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### configurationMetadataStoreUrl
 The metadata store URL for the configuration data. If empty, we fall back to use metadataStoreUrl
 
@@ -2704,7 +2726,7 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 **Category**: Server
 
 ### disableBrokerInterceptors
-Enable or disable the broker interceptor
+Enable or disable the broker interceptor, which is only used for testing for now
 
 **Type**: `boolean`
 
