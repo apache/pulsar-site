@@ -140,7 +140,8 @@ All the broker metrics are labeled with the following labels:
 | pulsar_ml_cache_pool_used | Gauge  | The total used memory of chunk lists in direct arena. |
 | pulsar_ml_cache_used_size | Gauge  | The size used to store the payloads of entries (in bytes). |
 | pulsar_ml_count | Gauge  | The number of currently opened managed ledgers. |
-| topic_load_times | Summary | The topic load latency calculated in milliseconds. |
+| ~~topic_load_times (deprecated)~~ | ~~Summary~~ | ~~The topic load latency calculated in milliseconds.~~ |
+| pulsar_topic_load_times | Summary | The topic load latency calculated in milliseconds. |
 | pulsar_active_connections| Gauge | The number of active connections. |
 | pulsar_connection_created_total_count | Gauge | The total number of connections. |
 | pulsar_connection_create_success_count | Gauge | The number of successfully created connections. |
