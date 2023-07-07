@@ -102,7 +102,7 @@ authenticationProviders: ["org.apache.pulsar.broker.authentication.oidc.Authenti
 properties:
   openIDAllowedTokenIssuers: "https://my-issuer-1.com,https://my-issuer-2.com"
   openIDAllowedAudiences: "audience-1,audience-2"
-  # Only include when using a custom trust store
+  # Note: for 3.0.0, only include when using a custom trust store
   openIDTokenIssuerTrustCertsFilePath: "/my/custom/trust/store"
   openIDRoleClaim: "sub"
   openIDAcceptedTimeLeewaySeconds: 0
