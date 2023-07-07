@@ -533,25 +533,32 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   For example, in the diagram below, this partitioned topic has 2 partitions and there are 4 consumers. 
   
-  Each partition has 1 active consumer and 1 stand-by consumer. 
+  Each partition has 1 active consumer and 3 stand-by consumers. 
   
-    - For p0, consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
+    - For P0, Consumer A is the master consumer, while Consumer B, Consumer C, and Consumer D would be the next consumer in line to receive messages if consumer A is disconnected.
 
-    - For p1, consumer C is the master consumer, while consumer D would be the next consumer in line to receive messages if consumer C is disconnected.
+    - For P1, Consumer B is the master consumer, while Consumer A, Consumer C, and Consumer D would be the next consumer in line to receive messages if consumer B is disconnected.
 
-  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-4.svg)
+    - Moreover, if Consumer A and consumer B are disconnected, then 
+    
+      - for P0: Consumer C is the active consumer and Consumer D is the stand-by consumer.
+      
+      - for P1: Consumer D is the active consumer and Consumer C is the stand-by consumer.
+
+  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-5.png)
 
 - If the number of partitions in a partitioned topic is **greater** than the number of consumers:
   
   For example, in the diagram below, this partitioned topic has 9 partitions and 3 consumers. 
   
-  - p0, p3, and p6 are assigned to consumer A.
+  - P0, P3, and P6 are assigned to Consumer A. Consumer A is their active consumer. Consumer B and Consumer C are their stand-by consumers.
   
-  - p1, p4, and p7 are assigned to consumer B.
+  - P1, P4, and P7 are assigned to Consumer B. Consumer B is their active consumer. Consumer A and Consumer C are their stand-by consumers.
   
-  - p2, p5, and p8 are assigned to consumer C.
+  - P2, P5, and P8 are assigned to Consumer C. Consumer C is their active consumer. Consumer A and Consumer B are their stand-by consumers.
   
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-1.svg)
+
 ##### Failover | Non-partitioned topics
 
 - If there is one non-partitioned topic. The broker picks consumers in the order they subscribe to non-partitioned topics. 
@@ -568,9 +575,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
   
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. Consumer A is their stand-by consumer.
   
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A. Consumer B is their stand-by consumer.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
 
