@@ -1238,6 +1238,8 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
+        .authentication(primaryAuthentication) 
+        .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
     failover.initialize(pulsarClient);
