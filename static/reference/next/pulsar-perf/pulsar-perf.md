@@ -27,7 +27,7 @@ $ pulsar-perf produce [options]
 | `-txn, --txn-enable` | Enable or disable the transaction|false|
 | `-fp, --format-payload` | Format %i as a message index in the stream from producer and/or %t as the timestamp nanoseconds.|false|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-dr, --delay-range` | Mark messages with a given delay by a random number of seconds. this value between the specified origin (inclusive) and the specified bound (exclusive). e.g. "1,300"|null|
+| `-dr, --delay-range` | Mark messages with a given delay by a random number of seconds. this value between the specified origin (inclusive) and the specified bound (exclusive). e.g. 1,300|null|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-v, --encryption-key-value-file` | The file which contains the public key to encrypt payload|null|
 | `-bb, --batch-max-bytes` | Maximum number of bytes per batch|4194304|
