@@ -630,14 +630,6 @@ export const resources: Record<Category, Resource[]> = {
       link: 'https://debezium.io/blog/2019/05/23/tutorial-using-debezium-connectors-with-apache-pulsar/',
       tags: ''
     },
-    {
-      forum: 'Pulsar in Action',
-      forum_link: 'https://www.manning.com/books/pulsar-in-action',
-      title: "Pulsar in Action",
-      link: 'https://www.manning.com/books/pulsar-in-action',
-      tags: ''
-    }
-
   ],
 
   /******************************
