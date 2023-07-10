@@ -7,12 +7,11 @@ import s from './ResourcesPage.module.css';
 import Button from "@site/src/components/ui/Button/Button";
 import Input from "@site/src/components/ui/Input/Input";
 
-type CategoryFilterOption = 'any' | data.Category;
-const categoryFilterOptions = ['any', ...data.categories] as const;
+const categoryFilterOptions = [...data.categories] as const;
 
 const CaseStudiesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('any');
+  const [categoryFilter, setCategoryFilter] = React.useState<data.Category>(data.categories[0]);
 
   return (
     <Layout
@@ -39,7 +38,7 @@ const CaseStudiesPage: React.FC = () => {
                       key={category}
                       variant={categoryFilter === category ? 'action' : 'regular'}
                       onClick={() => setCategoryFilter(category)}
-                      title={category === 'any' ? 'All' : data.categoryLabels[category]}
+                      title={data.categoryLabels[category]}
                     />
                   );
                 })}
@@ -50,7 +49,6 @@ const CaseStudiesPage: React.FC = () => {
             </div>
 
             <div>
-              {categoryFilter === 'any' && <Cards search={searchQuery} resources={Object.values(data.resources).flat()} />}
               {data.categories.map((category) => {
                 if (categoryFilter === category) {
                   return <Cards key={category} search={searchQuery} resources={data.resources[category]} />
