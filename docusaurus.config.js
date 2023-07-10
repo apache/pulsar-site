@@ -399,6 +399,8 @@ module.exports = {
           onlyIncludeVersions: buildVersions || ["current"],
         },
         blog: {
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
           showReadingTime: true,
           editUrl: `${githubSiteUrl}/edit/main/`,
         },
