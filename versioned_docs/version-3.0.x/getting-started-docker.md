@@ -15,7 +15,7 @@ If you have not installed Docker, download it following [the instructions](https
 
 ## Start Pulsar in Docker
 
-For macOS, Linux, and Windows, run the following command to start Pulsar within a Docker container.
+For macOS, Linux, and Windows, run the following command to start Pulsar within a **Docker** container.
 
 ````mdx-code-block
 <Tabs groupId="os-choice"
@@ -52,7 +52,7 @@ bin/pulsar standalone
 </Tabs>
 ````
 
-If you want to change Pulsar configurations and start Pulsar, run the following command by passing environment variables with the `PULSAR_PREFIX_` prefix. See [default configuration file](https://github.com/apache/pulsar/blob/e6b12c64b043903eb5ff2dc5186fe8030f157cfc/conf/standalone.conf) for more details.
+If you want to **change Pulsar configurations and start Pulsar**, run the following command by passing environment variables with the `PULSAR_PREFIX_` prefix. See [default configuration file](https://github.com/apache/pulsar/blob/e6b12c64b043903eb5ff2dc5186fe8030f157cfc/conf/standalone.conf) for more details.
 
 ````mdx-code-block
 <Tabs groupId="os-choice"
