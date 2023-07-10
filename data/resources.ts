@@ -167,82 +167,8 @@ export const resources: Record<Category, Resource[]> = {
 
   ],
 
-  /******************************
-   * Presentations
-   *
-   ******************************/
-  presentations: [
-    {
-      forum: 'P99Conf',
-      forum_link: 'https://www.p99conf.io/',
-      presenter: 'Karthik Ramasamy',
-      date: 'Oct 2021',
-      title: "Scaling Apache Pulsar to 10 PB/day",
-      link: 'https://www.youtube.com/watch?v=x76sX4BU2mA'
-    },
-    {
-      forum: 'Apache Pulsar Summit',
-      forum_link: 'https://pulsar-summit.org/',
-      presenter: 'Many',
-      date: 'Oct 2021',
-      title: "Apache Pulsar Summit Europe 2021 Playlist",
-      link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWh7zes7mNeTUCr2iU-2C1jB'
-    },
-
-    {
-      forum: 'ApacheCon @Home 2021',
-      forum_link: 'https://www.apachecon.com/acah2021/',
-      presenter: 'Many',
-      date: 'Sept 2021',
-      title: "Apache Pulsar Playlist",
-      link: 'https://www.youtube.com/watch?v=igwxegspSGw&list=PLIt9PL1-3shvC0dGjaPyd0Rqfg1_PZLvS'
-    },
-    {
-      forum: 'Apache Pulsar Neighborhood YouTube',
-      forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
-      presenter: 'Enrico Olivelli',
-      date: 'Sept 2021',
-      title: "Apache Pulsar Deep Dive- an End-to-end view of the Data Flow",
-      link: 'https://www.youtube.com/watch?v=oLXCCCGsrWM'
-    },
-    {
-      forum: 'Apache Pulsar Neighborhood YouTube',
-      forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
-      presenter: 'Simba Khadder',
-      date: 'Sept 2021',
-      title: "Apache Pulsar and Machine Learning",
-      link: 'https://youtu.be/K2WXDwo1y0k'
-    },
-    {
-      forum: 'Apache Pulsar Neighborhood YouTube',
-      forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
-      presenter: 'Enrico Olivelli',
-      date: 'Sept 2021',
-      title: "Leveraging Pulsar's Next Gen Streaming Capabilities from a JavaEE Application",
-      link: 'https://www.youtube.com/watch?v=0NA0BIvkQrs'
-    },
-    {
-      forum: 'Devin Bost\'s YouTube',
-      forum_link: 'https://www.youtube.com/channel/UCz_Y86AT4G15xU3IojhX2Kw',
-      presenter: 'Devin Bost',
-      date: 'Aug 2021',
-      title: "Streaming Patterns and Best Practices with Apache Pulsar for Enabling Machine Learning and Analytics",
-      link: 'https://www.youtube.com/watch?v=Fdqre_hTnUI'
-    },
-
-    {
-      forum: 'Pulsar Summit NA 2021',
-      forum_link: 'https://pulsar-summit.org/',
-      presenter: '',
-      date: 'June 2021',
-      title: "Pulsar Summit NA 2021 Playlist",
-      link: 'https://www.youtube.com/watch?v=-Bm1h508oIQ&list=PLqRma1oIkcWjyezVodJHcp8GSypvGuc1C'
-    }
-  ],
   /***************************
    * Older Articles
-   *
-   *
    * *************************/
   older_articles: [
     {
@@ -634,9 +560,74 @@ export const resources: Record<Category, Resource[]> = {
 
   /******************************
    * Presentations
-   *
    ******************************/
   presentations: [
+    {
+      forum: 'P99Conf',
+      forum_link: 'https://www.p99conf.io/',
+      presenter: 'Karthik Ramasamy',
+      date: 'Oct 2021',
+      title: "Scaling Apache Pulsar to 10 PB/day",
+      link: 'https://www.youtube.com/watch?v=x76sX4BU2mA'
+    },
+    {
+      forum: 'Apache Pulsar Summit',
+      forum_link: 'https://pulsar-summit.org/',
+      presenter: 'Many',
+      date: 'Oct 2021',
+      title: "Apache Pulsar Summit Europe 2021 Playlist",
+      link: 'https://www.youtube.com/playlist?list=PLqRma1oIkcWh7zes7mNeTUCr2iU-2C1jB'
+    },
+
+    {
+      forum: 'ApacheCon @Home 2021',
+      forum_link: 'https://www.apachecon.com/acah2021/',
+      presenter: 'Many',
+      date: 'Sept 2021',
+      title: "Apache Pulsar Playlist",
+      link: 'https://www.youtube.com/watch?v=igwxegspSGw&list=PLIt9PL1-3shvC0dGjaPyd0Rqfg1_PZLvS'
+    },
+    {
+      forum: 'Apache Pulsar Neighborhood YouTube',
+      forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
+      presenter: 'Enrico Olivelli',
+      date: 'Sept 2021',
+      title: "Apache Pulsar Deep Dive- an End-to-end view of the Data Flow",
+      link: 'https://www.youtube.com/watch?v=oLXCCCGsrWM'
+    },
+    {
+      forum: 'Apache Pulsar Neighborhood YouTube',
+      forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
+      presenter: 'Simba Khadder',
+      date: 'Sept 2021',
+      title: "Apache Pulsar and Machine Learning",
+      link: 'https://youtu.be/K2WXDwo1y0k'
+    },
+    {
+      forum: 'Apache Pulsar Neighborhood YouTube',
+      forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
+      presenter: 'Enrico Olivelli',
+      date: 'Sept 2021',
+      title: "Leveraging Pulsar's Next Gen Streaming Capabilities from a JavaEE Application",
+      link: 'https://www.youtube.com/watch?v=0NA0BIvkQrs'
+    },
+    {
+      forum: 'Devin Bost\'s YouTube',
+      forum_link: 'https://www.youtube.com/channel/UCz_Y86AT4G15xU3IojhX2Kw',
+      presenter: 'Devin Bost',
+      date: 'Aug 2021',
+      title: "Streaming Patterns and Best Practices with Apache Pulsar for Enabling Machine Learning and Analytics",
+      link: 'https://www.youtube.com/watch?v=Fdqre_hTnUI'
+    },
+
+    {
+      forum: 'Pulsar Summit NA 2021',
+      forum_link: 'https://pulsar-summit.org/',
+      presenter: '',
+      date: 'June 2021',
+      title: "Pulsar Summit NA 2021 Playlist",
+      link: 'https://www.youtube.com/watch?v=-Bm1h508oIQ&list=PLqRma1oIkcWjyezVodJHcp8GSypvGuc1C'
+    },
     {
       forum: 'Apache Pulsar Neighborhood YouTube',
       forum_link: 'https://www.youtube.com/apachepulsarneighborhood',
