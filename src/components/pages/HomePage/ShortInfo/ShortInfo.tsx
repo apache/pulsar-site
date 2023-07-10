@@ -56,7 +56,7 @@ const ShortInfo: React.FC = () => {
             </p>
 
             <p>
-              Its features include <strong>multi-tenancy</strong> with resource separation and access control, <strong>geo-replication</strong> across regions, <strong>tiered storage</strong> and support for five official client languages.
+              Its features include <strong>multi-tenancy</strong> with resource separation and access control, <strong>geo-replication</strong> across regions, <strong>tiered storage</strong> and support for six official client languages.
               It supports up to one million unique topics and is designed to simplify your application architecture.
             </p>
 
