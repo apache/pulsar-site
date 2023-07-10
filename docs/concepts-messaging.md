@@ -521,6 +521,12 @@ A master consumer is picked for a non-partitioned topic or each partition of a p
 
 When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
 
+::: note
+
+In some cases, a partition may have an older active consumer processing messages while a newly switched over active consumer starts receiving new messages. This may lead to message duplication or out-of-order.
+
+:::
+
 ##### Failover | Partitioned topics
 
 For partitioned topics, the broker sorts consumers by priority and lexicographical order of consumer name. 
@@ -601,6 +607,18 @@ In the *Key_Shared* type, multiple consumers can attach to the same subscription
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
 
+:::note
+
+If there is a newly switched over active consumer, it will start reading messages from the position where messages are acked by the old inactive consumer.
+
+For example, if P0 is assigned to Consumer A. Consumer A is the active consumer and Consumer B is the stand-by consumer. 
+
+- If Consumer A gets disconnected without reading any messages from P0, when Consumer C is added and becomes the new active consumer, then Consumer C will start reading messages directly from P0.
+
+- If Consumer A gets disconnected after reading messages (0,1,2,3) from P0, when Consumer C is added and becomes the active consumer, then Consumer C will start reading messages (4,5,6,7) from P0.
+
+:::
+
 There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key): Sticky, Auto-split Hash Range, and Auto-split Consistent Hashing. The steps for all algorithms are:
 1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash.
 2. That hash number is fed to the algorithm to select a consumer from the existing connected consumers.
@@ -659,7 +677,7 @@ C1 is disconnected:
 |------- C3 ------|-------------------------- C2 -----------------------|
 ```
 
-The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around.
+The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. This means some consumers gets more keys that others. The next algorithm does the other way around.
 
 ##### Auto-split Consistent Hashing
 
