@@ -521,6 +521,12 @@ A master consumer is picked for a non-partitioned topic or each partition of a p
 
 When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
 
+::: note
+
+In some cases, a partition may have an older active consumer processing messages while a newly switched over active consumer starts receiving new messages. This may lead to message duplication or out-of-order.
+
+:::
+
 ##### Failover | Partitioned topics
 
 For partitioned topics, the broker sorts consumers by priority and lexicographical order of consumer name. 
@@ -533,25 +539,32 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   For example, in the diagram below, this partitioned topic has 2 partitions and there are 4 consumers. 
   
-  Each partition has 1 active consumer and 1 stand-by consumer. 
+  Each partition has 1 active consumer and 3 stand-by consumers. 
   
-    - For p0, consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
+    - For P0, Consumer A is the master consumer, while Consumer B, Consumer C, and Consumer D would be the next consumer in line to receive messages if consumer A is disconnected.
 
-    - For p1, consumer C is the master consumer, while consumer D would be the next consumer in line to receive messages if consumer C is disconnected.
+    - For P1, Consumer B is the master consumer, while Consumer A, Consumer C, and Consumer D would be the next consumer in line to receive messages if consumer B is disconnected.
 
-  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-4.svg)
+    - Moreover, if Consumer A and consumer B are disconnected, then 
+    
+      - for P0: Consumer C is the active consumer and Consumer D is the stand-by consumer.
+      
+      - for P1: Consumer D is the active consumer and Consumer C is the stand-by consumer.
+
+  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-5.png)
 
 - If the number of partitions in a partitioned topic is **greater** than the number of consumers:
   
   For example, in the diagram below, this partitioned topic has 9 partitions and 3 consumers. 
   
-  - p0, p3, and p6 are assigned to consumer A.
+  - P0, P3, and P6 are assigned to Consumer A. Consumer A is their active consumer. Consumer B and Consumer C are their stand-by consumers.
   
-  - p1, p4, and p7 are assigned to consumer B.
+  - P1, P4, and P7 are assigned to Consumer B. Consumer B is their active consumer. Consumer A and Consumer C are their stand-by consumers.
   
-  - p2, p5, and p8 are assigned to consumer C.
+  - P2, P5, and P8 are assigned to Consumer C. Consumer C is their active consumer. Consumer A and Consumer B are their stand-by consumers.
   
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-1.svg)
+
 ##### Failover | Non-partitioned topics
 
 - If there is one non-partitioned topic. The broker picks consumers in the order they subscribe to non-partitioned topics. 
@@ -568,9 +581,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
   
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. Consumer A is their stand-by consumer.
   
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A. Consumer B is their stand-by consumer.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
 
@@ -593,6 +606,18 @@ Shared subscriptions do not guarantee message ordering or support cumulative ack
 In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
 
 ![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
+
+:::note
+
+If there is a newly switched over active consumer, it will start reading messages from the position where messages are acked by the old inactive consumer.
+
+For example, if P0 is assigned to Consumer A. Consumer A is the active consumer and Consumer B is the stand-by consumer. 
+
+- If Consumer A gets disconnected without reading any messages from P0, when Consumer C is added and becomes the new active consumer, then Consumer C will start reading messages directly from P0.
+
+- If Consumer A gets disconnected after reading messages (0,1,2,3) from P0, when Consumer C is added and becomes the active consumer, then Consumer C will start reading messages (4,5,6,7) from P0.
+
+:::
 
 There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key): Sticky, Auto-split Hash Range, and Auto-split Consistent Hashing. The steps for all algorithms are:
 1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash.
@@ -652,7 +677,7 @@ C1 is disconnected:
 |------- C3 ------|-------------------------- C2 -----------------------|
 ```
 
-The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. Thi means some consumers gets more keys that others. The next algorithm does the other way around.
+The advantages of this algorithm is that it affects only a single existing consumer upon add/delete consumer, at the expense of regions not evenly sized. This means some consumers gets more keys that others. The next algorithm does the other way around.
 
 ##### Auto-split Consistent Hashing
 
