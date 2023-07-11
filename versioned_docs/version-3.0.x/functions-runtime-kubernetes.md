@@ -79,7 +79,7 @@ Here is an example configuration for the function worker to utilize this feature
 
 ```yaml
 functionAuthProviderClassName: "org.apache.pulsar.functions.auth.KubernetesServiceAccountTokenAuthProvider"
-kubernetesContainerFactory:
+functionRuntimeFactoryConfigs:
   kubernetesFunctionAuthProviderConfig:
     # Required
     serviceAccountTokenExpirationSeconds: "600"
