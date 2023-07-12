@@ -87,7 +87,7 @@ To configure the Pulsar Function Worker to authenticate clients using OpenID Con
 ```yaml
 # Configuration to enable authentication
 authenticationEnabled: true
-authenticationProviders: "org.apache.pulsar.broker.authentication.oidc.AuthenticationProviderOpenID"
+authenticationProviders: ["org.apache.pulsar.broker.authentication.oidc.AuthenticationProviderOpenID"]
 properties:
   openIDAllowedTokenIssuers: "https://my-issuer-1.com,https://my-issuer-2.com"
   openIDAllowedAudiences: "audience-1,audience-2"

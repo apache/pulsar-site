@@ -43,7 +43,8 @@ PULSAR_PREFIX_openIDAllowedAudiences=audience-1,audience-2
 
 # Optional settings (values shown are the defaults)
 # The path to the file containing the trusted certificate(s) of the token issuer(s). If not set, uses the default
-# trust store of the JVM.
+# trust store of the JVM. Note: in version 3.0.0, the default only applies when this setting is not an environment
+# variable and is not in the configuration file.
 PULSAR_PREFIX_openIDTokenIssuerTrustCertsFilePath=
 # The JWT's claim to use for the role/principal during authorization.
 PULSAR_PREFIX_openIDRoleClaim=sub
@@ -97,11 +98,12 @@ To configure the Pulsar Function Worker to authenticate clients using OpenID Con
 ```yaml
 # Configuration to enable authentication
 authenticationEnabled: true
-authenticationProviders: "org.apache.pulsar.broker.authentication.oidc.AuthenticationProviderOpenID"
+authenticationProviders: ["org.apache.pulsar.broker.authentication.oidc.AuthenticationProviderOpenID"]
 properties:
   openIDAllowedTokenIssuers: "https://my-issuer-1.com,https://my-issuer-2.com"
   openIDAllowedAudiences: "audience-1,audience-2"
-  openIDTokenIssuerTrustCertsFilePath: ""
+  # Note: for 3.0.0, only include when using a custom trust store
+  openIDTokenIssuerTrustCertsFilePath: "/my/custom/trust/store"
   openIDRoleClaim: "sub"
   openIDAcceptedTimeLeewaySeconds: 0
   openIDCacheSize: 5
