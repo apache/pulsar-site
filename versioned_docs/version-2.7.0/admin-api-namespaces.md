@@ -697,7 +697,7 @@ N/A
 
 ```java
 
-admin.namespaces().splitNamespaceBundle(namespace, bundle)
+admin.namespaces().splitNamespaceBundle(namespace, bundle, unloadSplitBundles, splitAlgorithmName)
 
 ```
 
