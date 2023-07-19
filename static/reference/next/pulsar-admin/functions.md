@@ -58,7 +58,7 @@ $ pulsar-admin functions localrun options
 | `--web-service-url` | The URL for Pulsar web service|null|Java, Python|
 | `--retain-ordering` | Function consumes and processes messages in order|null|Java|
 | `--state-storage-service-url` | The URL for the state storage service (the default is Apache BookKeeper)|null|Java, Python|
-| `--cleanup-subscription` | Whether delete the subscription when function is deleted|null||
+| `--cleanup-subscription` | Whether delete the subscription when function is deleted|null|Java, Python, Go|
 | `-st, --schema-type` | The builtin schema type or custom schema class name to be used for messages output by the function||Java|
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker|null|Java, Python|
 | `--fqfn` | The Fully Qualified Function Name (FQFN) for the function|null|Java, Python|
