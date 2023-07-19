@@ -53,7 +53,7 @@ For example,
 
 - Topic load statistics (e.g., message rates) are aggregated at the **bundle** layer, which reduces the cardinality of load samples to monitor.
 
-- For dynamic topic-broker assignments, Pulsar persists these mappings at the **bundle **level, which decreases the space for storing dynamic topic-broker ownerships.
+- For dynamic topic-broker assignments, Pulsar persists these mappings at the **bundle**level, which decreases the space for storing dynamic topic-broker ownerships.
 
 Pulsar allows you to dynamically scale the number of brokers, producers, and consumers to adapt to changing workloads. As brokers are added or removed, Pulsar handles the redistribution of partitions and bundles automatically.
 
@@ -122,7 +122,7 @@ Manual|Bundles are split manually based on specified positions.|Manual bundle sp
 
 ### Workflow
 
-Below is the workflow for splitting bundles automaticaly or manually.
+Below is the workflow for splitting bundles automatically or manually.
 
 ````mdx-code-block
 <Tabs groupId="bundle-splitting-workflow"
@@ -226,7 +226,7 @@ For implementation details, see [PR-6241: support evenly distribute topics count
 
 specified_positions_divide splits bundles into several parts by specified positions.
 
-For example, if you have 2 large topics and there are on the same bundle. Topic1 is on at 0x30000000, Topic2 is on at 0x35000000, and the bundle range is [0x00000000, 0x40000000), then you can set the bundle split boundary as 0x33000000.
+For example, if you have 2 large topics and there are on the same bundle. Topic1 is at 0x30000000, topic2 is at 0x35000000, and the bundle range is [0x00000000, 0x40000000), then you can set the bundle split boundary as 0x33000000.
 
 For implementation details, see [PIP-143: support split bundle by specified boundaries](https://github.com/apache/pulsar/issues/13761).
 
@@ -420,7 +420,7 @@ Bundle unloading methods | Definition | When to use
 Automatic|When the load balancer recognizes a particular broker is overloaded, it forcefully unloads some bundles' traffic from the overloaded broker, so that the unloaded bundles (topics) can be reassigned to less-loaded brokers by the assignment process.|Use when there is fluctuating traffic that varies over time.
 Manual| You can manually trigger bundle unloading at any time. | Manual bundle unloading serves as a **supplementary** approach to automatic bundle unloading. <br/><br/>If the automatic unloading does not kick in (e.g., due to misconfiguration), you can trigger manual unloading to mitigate the load-imbalance issue. To avoid manual unload operations, you need to correctly tune load balance configs according to the cluster's traffic. 
 
-#### Workflow
+### Workflow
 
 Below is the workflow for unloading bundles automatically or manually.
 
@@ -444,7 +444,7 @@ The unloaded bundles are assigned to less loaded brokers, and the clients connec
 
 - For the modular load balancer, bundles will be post-assigned to available brokers when clients send lookup requests.
 
-- For thhe extensible load balancer, bundles will be pre-assigned to available brokers when unloading.
+- For the extensible load balancer, bundles will be pre-assigned to available brokers when unloading.
 
 When unloading happens, the client experiences a small latency blip while the topic is reassigned. 
 
