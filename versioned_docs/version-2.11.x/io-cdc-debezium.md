@@ -170,6 +170,25 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
 6. A MySQL client pops out.
 
+   Change the connection mode to `mysql_native_password`
+   ```
+   mysql> show variables like "caching_sha2_password_auto_generate_rsa_keys";
+   +----------------------------------------------+-------+
+   | Variable_name                                | Value |
+   +----------------------------------------------+-------+
+   | caching_sha2_password_auto_generate_rsa_keys | ON    |
+   +----------------------------------------------+-------+
+   # if the value of "caching_sha2_password_auto_generate_rsa_keys" is ON, set connection mode to "mysql_native_password".
+   alter user '{user}'@'{host}' identified with mysql_native_password by {password};
+   # check the modified result
+   mysql> SELECT Host, User, plugin from mysql.user where user={user};
+   +-----------+------+-----------------------+
+   | Host      | User | plugin                |
+   +-----------+------+-----------------------+
+   | localhost | root | mysql_native_password |
+   +-----------+------+-----------------------+
+   ```
+
    Use the following commands to change the data of the table _products_.
 
    ```
