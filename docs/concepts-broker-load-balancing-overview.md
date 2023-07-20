@@ -17,7 +17,7 @@ Due to the unpredictable topic volume and physical distance among distributed br
 
 - When topics are redistributed to other brokers, the cluster ensures the topics are instantaneously available to clients. The topics continue to guarantee the system performance, such as persistence, [ordering](./concepts-messaging.md#ordering-guarantee), [deduplication](./concepts-messaging.md#message-deduplication), [subscription type](./concepts-messaging.md#subscription-types), etc.
 
-## Load balancing in Pulsar
+## Broker load balancing in Pulsar
 
 Because Pulsar uses a [segment-centric architecture](./concepts-architecture-overview.md) and separates the message serving and storage layer, it is designed to benefit load balancing. 
 

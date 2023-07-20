@@ -521,7 +521,7 @@ A master consumer is picked for a non-partitioned topic or each partition of a p
 
 When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
 
-::: note
+:::note
 
 In some cases, a partition may have an older active consumer processing messages while a newly switched over active consumer starts receiving new messages. This may lead to message duplication or out-of-order.
 
