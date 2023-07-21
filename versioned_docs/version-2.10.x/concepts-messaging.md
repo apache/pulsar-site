@@ -377,6 +377,11 @@ The default retry letter topic uses this format:
 
 ```
 
+Note: In versions `2.6.x` and `2.7.x`, the default retry letter topic uses this format is `<subscriptionname>-RETRY`.
+If you are upgrading from version `2.6.x~2.7.x` to version `2.8.x` or greater, then you need to manually delete
+the historical retry letter topics and retry letter partitioned topics. Otherwise, Pulsar will continue to use the
+original topics, which were formatted with `<subscriptionname>-RETRY`.
+
 Use the Java client to specify the name of the retry letter topic.
 
 ```java
@@ -465,6 +470,11 @@ The default dead letter topic uses this format:
 <topicname>-<subscriptionname>-DLQ
 
 ```
+
+Note: In versions `2.6.x` and `2.7.x`, the default dead letter topic uses this format is `<subscriptionname>-DLQ`.
+If you are upgrading from version `2.6.x~2.7.x` to version `2.8.x` or greater, then you need to manually delete
+the historical dead letter topics and dead letter partitioned topics. Otherwise, Pulsar will continue to use the
+original topics, which were formatted with `<subscriptionname>-DLQ`.
 
 Use the Java client to specify the name of the dead letter topic.
 
