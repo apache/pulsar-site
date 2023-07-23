@@ -29,4 +29,13 @@ Pulsar uses automatic broker load balancing to monitor the brokers' load interna
 
 ## Related topics
 
-- To learn essential fundamentals, see [broker load balancing | concepts](./concepts-broker-load-balancing-concepts.md).
+- To discover different usage scenarios, see [Broker load balancing | Use cases](./concepts-broker-load-balancing-use-cases.md).
+  
+- To explore functionalities, see [Broker load balancing | Features](./concepts-broker-load-balancing-features.md).
+
+- To understand advantages, see [Broker load balancing | Benefits](./concepts-broker-load-balancing-benefits.md).
+
+- To learn essential fundamentals, see [Broker load balancing | Concepts](./concepts-broker-load-balancing-concepts.md).
+
+- To review various versions of broker load balancers, see [Broker load balancing | Types](./concepts-broker-load-balancing-types.md).
+
