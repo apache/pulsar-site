@@ -2231,12 +2231,34 @@ replicator prefix used for replicator producer name and cursor name
 
 **Category**: Replication
 
+### inflightSaslContextExpiryMs
+how often the broker expires the inflight SASL context.
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: SASL Authentication Provider
+
 ### kinitCommand
 kerberos kinit command.
 
 **Type**: `java.lang.String`
 
 **Default**: `/usr/bin/kinit`
+
+**Dynamic**: `false`
+
+**Category**: SASL Authentication Provider
+
+### maxInflightSaslContext
+Maximum number of inflight sasl context.
+
+**Type**: `long`
+
+**Default**: `50000`
 
 **Dynamic**: `false`
 

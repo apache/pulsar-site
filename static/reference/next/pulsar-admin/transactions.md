@@ -46,6 +46,24 @@ $ pulsar-admin transactions pending-ack-internal-stats options
 | `-t, --topic` | Topic name|null||
 
 
+## buffer-snapshot-internal-stats
+
+Get transaction buffer internal stats
+
+**Command:**
+
+```shell
+$ pulsar-admin transactions buffer-snapshot-internal-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `-m, --metadata` | Flag to include ledger metadata|false||
+| `-t, --topic` | Topic name|null||
+
+
 ## coordinator-stats
 
 Get transaction coordinator stats
@@ -79,6 +97,7 @@ $ pulsar-admin transactions transaction-buffer-stats options
 |---|---|---|
 | `-l, --low-water-mark` | Whether to get information about lowWaterMarks stored in transaction buffer.|false||
 | `-t, --topic` | The topic|null||
+| `-s, --segment-stats` | Whether to get segment statistics.|false||
 
 
 ## pending-ack-stats
