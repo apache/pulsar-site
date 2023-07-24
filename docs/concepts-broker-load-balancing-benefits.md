@@ -10,7 +10,7 @@ The broker load balancer plays a key role in preventing downtime and lost produc
 
 It efficiently distributes the load to maximize broker resources since it allows you to:
 
-- Reduce idle brokers and save cluster resources
+- Reduce idle brokers and save cluster resources.
 
 - Distribute data loads evenly and efficiently.  
 
