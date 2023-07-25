@@ -554,4 +554,12 @@ For implementation details, see [PIP-220: TransferShedder](https://github.com/ap
 
 ## Related topics
 
-- To get a comprehensive understanding and discover the key insights, see [broker load balancing | overview](./concepts-broker-load-balancing-overview.md). 
+- To get a comprehensive understanding and discover the key insights, see [Broker load balancing | Overview](./concepts-broker-load-balancing-overview.md). 
+
+- To discover different usage scenarios, see [Broker load balancing | Use cases](./concepts-broker-load-balancing-use-cases.md).
+  
+- To explore functionalities, see [Broker load balancing | Features](./concepts-broker-load-balancing-features.md).
+
+- To understand advantages, see [Broker load balancing | Benefits](./concepts-broker-load-balancing-benefits.md).
+
+- To review various versions of broker load balancers, see [Broker load balancing | Types](./concepts-broker-load-balancing-types.md).
