@@ -544,9 +544,9 @@ TransferShedder strategy unloads bundles from the **highest** load brokers to th
 
     - No broker's load < avgLoad * min(0.5, loadBalancerBrokerLoadTargetStd / 2)
 
-    - There is no significant overloaded brokers
+- There is no significant overloaded brokers
 
-      - No broker’s load > loadBalancerBrokerOverloadedThresholdPercentage && load > avgLoad + loadBalancerBrokerLoadTargetStd
+    - No broker’s load > loadBalancerBrokerOverloadedThresholdPercentage && load > avgLoad + loadBalancerBrokerLoadTargetStd
 
 Pulsar introduced TransferShedder to utilize the bundle transfer protocol from the extensible load balancer. With this bundle transfer protocol, the bundle ownership can be gracefully transferred from the source broker to the destination broker. This means that TransferShedder pre-assigns the destination brokers at the unloading time instead of client lookups. Hence, after unloading, clients can bypass the assignment process as the new owner is already assigned.
 
