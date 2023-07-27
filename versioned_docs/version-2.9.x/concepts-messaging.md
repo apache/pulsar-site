@@ -256,7 +256,9 @@ The default dead letter topic uses this format:
 Note: In versions `2.6.x` and `2.7.x`, the default dead letter topic uses this format is `<subscriptionname>-DLQ`.
 If you are upgrading from version `2.6.x~2.7.x` to version `2.8.x` or greater, then you need to manually delete
 the historical dead letter topics and dead letter partitioned topics. Otherwise, Pulsar will continue to use the
-original topics, which were formatted with `<subscriptionname>-DLQ`.
+original topics, which were formatted with `<subscriptionname>-DLQ`. Rule `<subscriptionname>-DLQ` should be avoided
+to use, because if multiple topics under the same namespace have the same subscription, the dead letter topic names
+for multiple topics will be the same, resulting in mutual consumption.
 
 If you want to specify the name of the dead letter topic, use this Java client example:
 
