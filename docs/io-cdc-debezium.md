@@ -187,7 +187,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
    | localhost | root | caching_sha2_password |
    +-----------+------+-----------------------+
 
-   # if the plugin of mysql.user is is "caching_sha2_password", set it to "mysql_native_password".
+   # If the plugin of mysql.user is is "caching_sha2_password", set it to "mysql_native_password".
    alter user '{user}'@'{host}' identified with mysql_native_password by {password};
 
    # check the plugin of mysql.user.
