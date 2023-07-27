@@ -190,7 +190,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
    # If the plugin of mysql.user is is "caching_sha2_password", set it to "mysql_native_password".
    alter user '{user}'@'{host}' identified with mysql_native_password by {password};
 
-   # check the plugin of mysql.user.
+   # Check the plugin of mysql.user.
    mysql> SELECT Host, User, plugin from mysql.user where user={user};
    +-----------+------+-----------------------+
    | Host      | User | plugin                |
