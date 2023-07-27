@@ -179,7 +179,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
    | caching_sha2_password_auto_generate_rsa_keys | ON    |
    +----------------------------------------------+-------+
 
-   # if the value of "caching_sha2_password_auto_generate_rsa_keys" is ON, ensure the plugin of mysql.user is "mysql_native_password".
+   # If the value of "caching_sha2_password_auto_generate_rsa_keys" is ON, ensure the plugin of mysql.user is "mysql_native_password".
    mysql> SELECT Host, User, plugin from mysql.user where user={user};
    +-----------+------+-----------------------+
    | Host      | User | plugin                |
