@@ -31,7 +31,7 @@ TransferShedder|Extensible|3.0 and later
 
 You can migrate from the simple to the modular broker load balancer, by manually changing the configuration settings in the broker.conf file or by using the pulsar-admin tool. 
 
-### Manually change broker.conf file 
+### Change broker.conf file 
 
 1. Access to the broker.conf file.
 
