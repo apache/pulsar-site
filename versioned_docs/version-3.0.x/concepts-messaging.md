@@ -247,6 +247,7 @@ The default retry letter topic uses this format:
 :::note
 - For Pulsar 2.6.x and 2.7.x, the default retry letter topic uses the format of `<subscriptionname>-RETRY`. If you upgrade from 2.6.x~2.7.x to 2.8.x or later, you need to delete historical retry letter topics and retry letter partitioned topics. Otherwise, Pulsar continues to use original topics, which are formatted with `<subscriptionname>-RETRY`.
 - It is not recommended to use `<subscriptionname>-RETRY` because if multiple topics under the same namespace have the same subscription, then retry message topic names for multiple topics might be the same, which will result in mutual consumptions.
+:::
 
 Use the Java client to specify the name of the retry letter topic.
 
@@ -329,6 +330,7 @@ The default dead letter topic uses this format:
 :::note
 - For Pulsar 2.6.x and 2.7.x, the default dead letter topic uses the format of `<subscriptionname>-DLQ`. If you upgrade from 2.6.x~2.7.x to 2.8.x or later, you need to delete historical dead letter topics and retry letter partitioned topics. Otherwise, Pulsar continues to use original topics, which are formatted with `<subscriptionname>-DLQ`.
 - It is not recommended to use `<subscriptionname>-DLQ` because if multiple topics under the same namespace have the same subscription, then dead message topic names for multiple topics might be the same, which will result in mutual consumptions.
+:::
 
 Use the Java client to specify the name of the dead letter topic.
 
