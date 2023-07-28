@@ -631,7 +631,7 @@ This section shows all metrics related to [broker load balancing](./concepts-bro
 
 :::note
 
-- In standalone Pulsar, load balancing metrics are not exposed by default. If you want to access load balancing metrics, you can expose load balancing metrics by setting the following configurations in the `standalone.conf` file and ensure that your cluster has an active producer or consumer.
+- Load balancing metrics are **not exposed by default**. If you want to access load balancing metrics, you need to expose load balancing metrics by setting the following configurations in the `broker.conf` or `standalone.conf` file and ensure that your cluster has an active producer or consumer.
 
   ```
   loadManagerClassName=org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
