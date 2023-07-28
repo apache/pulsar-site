@@ -8,14 +8,12 @@ sidebar_label: "Metrics"
 
 Pulsar exposes the following metrics in Prometheus format. You can monitor your clusters with those metrics.
 
-* [ZooKeeper](#zookeeper)
-* [BookKeeper](#bookkeeper)
-* [Broker](#broker)
-* [Pulsar Functions](#pulsar-functions)
-* [Connectors](#connectors)
-* [Proxy](#proxy)
-* [Pulsar SQL Worker](#pulsar-sql-worker)
-* [Pulsar transaction](#pulsar-transaction)
+- [](#)
+  - [Pulsar Functions](#pulsar-functions)
+  - [Connectors](#connectors)
+  - [Proxy](#proxy)
+  - [Pulsar SQL Worker](#pulsar-sql-worker)
+  - [Pulsar transaction](#pulsar-transaction)
 
 The following types of metrics are available:
 
@@ -344,126 +342,6 @@ pulsar_ml_cursor_writeLedgerSize|Gauge|The size of write to ledger.
 pulsar_ml_cursor_writeLedgerLogicalSize|Gauge|The size of write to ledger (accounting for without replicas).
 pulsar_ml_cursor_readLedgerSize|Gauge|The size of read from ledger.
 
-### LoadBalancing metrics
-All the loadbalancing metrics are labeled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker
-- metric: metric="loadBalancing".
-
-:::note
-
-Metrics with an asterisk (*) are only available in the **extensible** load balancer.
-
-:::
-
-| Name | Type | Description |
-| --- | --- | --- |
-| pulsar_lb_bandwidth_in_usage | Gauge | The broker inbound bandwidth usage (in percent). |
-| pulsar_lb_bandwidth_out_usage | Gauge | The broker outbound bandwidth usage (in percent). |
-| pulsar_lb_cpu_usage | Gauge | The broker cpu usage (in percent). |
-| pulsar_lb_directMemory_usage | Gauge | The broker process direct memory usage (in percent). |
-| pulsar_lb_memory_usage | Gauge | The broker process memory usage (in percent). |
-| pulsar_lb_resource_usage {feature=max}* |Gauge|The max resource usage of the bandwidth, CPU, memory, and direct_memory.|
-| pulsar_lb_resource_usage {feature=max_ema}* | Gauge | The broker load score (WeightedMaxEMA).|
-
-### BundleUnloading metrics
-All the bundleUnloading metrics are labeled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
-- metric: metric="bundleUnloading".
-
-:::note
-
-Metrics with an asterisk (*) are only available in the **extensible** load balancer.
-
-:::
-
-| Name                          | Type    | Description                                  |
-|-------------------------------|---------|----------------------------------------------|
-| pulsar_lb_unload_broker_total | Counter | Unload broker count in this bundle unloading |
-| pulsar_lb_unload_bundle_total | Counter | Bundle unload count in this bundle unloading |
-| pulsar_lb_unload_broker_breakdown_total{result, reason}* | Counter | Unload broker breakdown count grouped by result and reason labels.|
-| pulsar_lb_resource_usage_stats{feature=max_ema, stat=avg}* | Gauge | The average of brokers' load scores.|
-| pulsar_lb_resource_usage_stats{feature=max_ema, stat=std}*   | Gauge | The standard deviation of brokers' load scores. |
-
-### BundleSplit metrics
-All the bundleUnloading metrics are labeled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
-- metric: metric="bundlesSplit".
-
-:::note
-
-Metrics with an asterisk (*) are only available in the **extensible** load balancer.
-
-:::
-
-| Name                          | Type    | Description                                                |
-|-------------------------------|---------|------------------------------------------------------------|
-| pulsar_lb_bundles_split_total | Counter | The total count of bundle split in this leader broker |
-| pulsar_lb_bundles_split_breakdown_total{result, reason}* | Counter | Bundle split breakdown count grouped by the result and reason labels.|
-
-
-### Bundle metrics
-All the bundle metrics are labeled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker
-- metric: metric="bundle".
-
-| Name | Type | Description |
-| --- | --- | --- |
-| pulsar_bundle_msg_rate_in | Gauge | The total message rate coming into the topics in this bundle  (message per second). |
-| pulsar_bundle_msg_rate_out | Gauge | The total message rate going out from the topics in this bundle  (message per second).  |
-| pulsar_bundle_topics_count | Gauge | The topic count in this bundle.  |
-| pulsar_bundle_consumer_count | Gauge | The consumer count of the topics in this bundle. |
-| pulsar_bundle_producer_count | Gauge | The producer count of the topics in this bundle. |
-| pulsar_bundle_msg_throughput_in | Gauge | The total throughput coming into the topics in this bundle (byte per second). |
-| pulsar_bundle_msg_throughput_out | Gauge | The total throughput going out from the topics in this bundle (byte per second). |
-
-### Bundle assign metrics
-
-All the bundle assign metrics are labeled with the following labels:
-
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker.
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
-- metric: metric="assign".
-
-:::note
-
-Metrics with an asterisk (*) are only available in the **extensible** load balancer.
-
-:::
-
-Name | Type | Description
-|---|---|---
-pulsar_lb_assign_broker_breakdown_total{result, reason}*|Counter| Assign broker breakdown count grouped by result and reason labels.|
-
-### Service unit state channel metrics
-
-All the service unit state channel metrics are labeled with the following labels:
-
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name you have configured in the `broker.conf` file.
-- metric: metric="sunitStateChn".
-
-:::note
-
-Metrics with an asterisk (*) are only available in the **extensible** load balancer.
-
-:::
-
-Name | Type | Description
-|---|---|---
-pulsar_sunit_state_chn_owner_lookup_total{result, state}*|Counter|The owner broker lookup counts grouped by the result and state labels.
-pulsar_sunit_state_chn_event_publish_ops_total{result, event}*|Counter|The published message count of service unit (e.g., bundle) state changes grouped by the result and event labels
-pulsar_sunit_state_chn_subscribe_ops_total{result, event}*|Counter|The subscribed message count of service unit (e.g., bundle) state changes grouped by the result and event labels.
-pulsar_sunit_state_chn_inactive_broker_cleanup_ops_total{result}*|Counter|The counts of inactive broker cleanup operations grouped by the result label.
-pulsar_sunit_state_chn_orphan_su_cleanup_ops_total*|Counter|The total count of orphan service unit (e.g., bundle) cleanup operations.
-pulsar_sunit_state_chn_owned_su_total*|Gauge|The number of owned bundles.
-pulsar_sunit_state_chn_su_tombstone_cleanup_ops_total*|Counter|The total count of deleted service units (e.g., bundles) tombstone operations.
-pulsar_sunit_state_chn_cleanup_ops_total{result=Failure}*|Counter|The total count of cleanup operation failures.
-
 ### Subscription metrics
 
 > Subscription metrics are only exposed when `exposeTopicLevelMetricsInPrometheus` is set to `true`.
@@ -747,6 +625,121 @@ All the metadata store metrics are labeled with the following labels:
 | jvm_classes_loaded_total     | Counter | The total number of classes that have been loaded since the JVM has started execution   |
 | jvm_classes_unloaded_total   | Counter | The total number of classes that have been unloaded since the JVM has started execution |
 
+## Load balancing
+
+This section shows all metrics related to [broker load balancing](./concepts-broker-load-balancing-overview.md).
+
+:::note
+
+- Load balancing metrics are **not exposed by default**. If you want to access load balancing metrics, you need to expose them by setting the following configurations in the `broker.conf` or `standalone.conf` file and ensure that your cluster has an active producer or consumer.
+
+  ```conf
+  loadManagerClassName=org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
+  loadBalancerEnabled=true
+  exposeBundlesMetricsInPrometheus=true // Add this configuration to standalone.conf
+  ``````
+
+- Metrics with an asterisk (*) are only available in the **extensible** load balancer.
+
+:::
+
+### LoadBalancing metrics
+
+All the loadbalancing metrics are labeled with the following labels:
+
+- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- broker: broker=${broker}. ${broker} is the IP address of the broker
+- metric: metric="loadBalancing".
+
+| Name | Type | Description |
+| --- | --- | --- |
+| pulsar_lb_bandwidth_in_usage | Gauge | The broker inbound bandwidth usage (in percent). |
+| pulsar_lb_bandwidth_out_usage | Gauge | The broker outbound bandwidth usage (in percent). |
+| pulsar_lb_cpu_usage | Gauge | The broker cpu usage (in percent). |
+| pulsar_lb_directMemory_usage | Gauge | The broker process direct memory usage (in percent). |
+| pulsar_lb_memory_usage | Gauge | The broker process memory usage (in percent). |
+| pulsar_lb_resource_usage {feature=max}* |Gauge|The max resource usage of the bandwidth, CPU, memory, and direct_memory.|
+| pulsar_lb_resource_usage {feature=max_ema}* | Gauge | The broker load score (WeightedMaxEMA).|
+
+### BundleUnloading metrics
+
+All the bundleUnloading metrics are labeled with the following labels:
+
+- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
+- metric: metric="bundleUnloading".
+
+| Name                          | Type    | Description                                  |
+|-------------------------------|---------|----------------------------------------------|
+| pulsar_lb_unload_broker_total | Counter | Unload broker count in this bundle unloading |
+| pulsar_lb_unload_bundle_total | Counter | Bundle unload count in this bundle unloading |
+| pulsar_lb_unload_broker_breakdown_total{result, reason}* | Counter | Unload broker breakdown count grouped by result and reason labels.|
+| pulsar_lb_resource_usage_stats{feature=max_ema, stat=avg}* | Gauge | The average of brokers' load scores.|
+| pulsar_lb_resource_usage_stats{feature=max_ema, stat=std}*   | Gauge | The standard deviation of brokers' load scores. |
+
+### BundleSplit metrics
+
+All the bundleUnloading metrics are labeled with the following labels:
+
+- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
+- metric: metric="bundlesSplit".
+
+| Name                          | Type    | Description                                                |
+|-------------------------------|---------|------------------------------------------------------------|
+| pulsar_lb_bundles_split_total | Counter | The total count of bundle split in this leader broker |
+| pulsar_lb_bundles_split_breakdown_total{result, reason}* | Counter | Bundle split breakdown count grouped by the result and reason labels.|
+
+
+### Bundle metrics
+
+All the bundle metrics are labeled with the following labels:
+
+- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- broker: broker=${broker}. ${broker} is the IP address of the broker
+- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker
+- metric: metric="bundle".
+
+| Name | Type | Description |
+| --- | --- | --- |
+| pulsar_bundle_msg_rate_in | Gauge | The total message rate coming into the topics in this bundle  (message per second). |
+| pulsar_bundle_msg_rate_out | Gauge | The total message rate going out from the topics in this bundle  (message per second).  |
+| pulsar_bundle_topics_count | Gauge | The topic count in this bundle.  |
+| pulsar_bundle_consumer_count | Gauge | The consumer count of the topics in this bundle. |
+| pulsar_bundle_producer_count | Gauge | The producer count of the topics in this bundle. |
+| pulsar_bundle_msg_throughput_in | Gauge | The total throughput coming into the topics in this bundle (byte per second). |
+| pulsar_bundle_msg_throughput_out | Gauge | The total throughput going out from the topics in this bundle (byte per second). |
+
+### Bundle assign metrics
+
+All the bundle assign metrics are labeled with the following labels:
+
+- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name you have configured in the `broker.conf` file.
+- broker: broker=${broker}. ${broker} is the IP address of the broker.
+- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
+- metric: metric="assign".
+
+Name | Type | Description
+|---|---|---
+pulsar_lb_assign_broker_breakdown_total{result, reason}*|Counter| Assign broker breakdown count grouped by result and reason labels.|
+
+### Service unit state channel metrics
+
+All the service unit state channel metrics are labeled with the following labels:
+
+- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name you have configured in the `broker.conf` file.
+- metric: metric="sunitStateChn".
+
+Name | Type | Description
+|---|---|---
+pulsar_sunit_state_chn_owner_lookup_total{result, state}*|Counter|The owner broker lookup counts grouped by the result and state labels.
+pulsar_sunit_state_chn_event_publish_ops_total{result, event}*|Counter|The published message count of service unit (e.g., bundle) state changes grouped by the result and event labels
+pulsar_sunit_state_chn_subscribe_ops_total{result, event}*|Counter|The subscribed message count of service unit (e.g., bundle) state changes grouped by the result and event labels.
+pulsar_sunit_state_chn_inactive_broker_cleanup_ops_total{result}*|Counter|The counts of inactive broker cleanup operations grouped by the result label.
+pulsar_sunit_state_chn_orphan_su_cleanup_ops_total*|Counter|The total count of orphan service unit (e.g., bundle) cleanup operations.
+pulsar_sunit_state_chn_owned_su_total*|Gauge|The number of owned bundles.
+pulsar_sunit_state_chn_su_tombstone_cleanup_ops_total*|Counter|The total count of deleted service units (e.g., bundles) tombstone operations.
+pulsar_sunit_state_chn_cleanup_ops_total{result=Failure}*|Counter|The total count of cleanup operation failures.
 
 ## Pulsar Functions
 
