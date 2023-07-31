@@ -25,7 +25,7 @@ Download the tarball from the [download page](pathname:///download) and extract 
 ```shell
 wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-shell-@pulsar:version@-bin.tar.gz
 tar xzvf apache-pulsar-shell-@pulsar:version@-bin.tar.gz
-cd apache-pulsar-shell-@pulsar:version@-bin.tar.gz
+cd apache-pulsar-shell-@pulsar:version@/
 ```
 
 Now you can enter Pulsar shell's interactive mode:
