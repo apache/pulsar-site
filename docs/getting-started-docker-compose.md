@@ -2,6 +2,7 @@
 id: getting-started-docker-compose
 title: Run a Pulsar cluster locally with Docker Compose
 sidebar_label: "Run Pulsar locally with Docker Compose"
+description: To get up and run a Pulsar cluster locally with Docker Compose, let’s follow this tutorial! Just one command is all you need.
 ---
 
 ## Configure the `compose.yml` template
