@@ -3,6 +3,7 @@ slug: /
 id: about
 title: Welcome to the Apache Pulsar documentation portal
 sidebar_label: "About"
+description: Welcome to the Apache Pulsar documentation portal, and welcome to join the active and knowledgeable Pulsar community. Let’s begin your Pulsar journey here.
 ---
 
 import BlockLinks from "@site/src/components/ui/BlockLinks";
