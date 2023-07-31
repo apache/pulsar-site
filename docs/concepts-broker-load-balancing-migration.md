@@ -4,11 +4,22 @@ title: Migration
 sidebar_label: "Migration"
 ---
 
-Pulsar has 3 types of broker load balancers, that is, simple, modular, and extensible. You can perform the following migrations:
+Pulsar has 3 types of broker load balancers, that is, simple, modular, and extensible. 
 
-Migrate from simple to modular: ??
-Migrate from modular to extensible: if you want to use the bundle unloading strategy of TransferShedder.
-Migrate from extensible to modular: if you want to use the unloading strategy of OverloadShedder, ThresholdShedder, or UniformLoadShedder
+You can perform the following migrations.
+
+Migration|When to use
+|---|---
+[Migrate from simple to modular](#migrate-from-simple-to-modular-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of OverloadShedder, ThresholdShedder, or UniformLoadShedder.
+[Migrate from modular to extensible](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of TransferShedder.
+[Migrate from extensible to modular](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of OverloadShedder, ThresholdShedder, or UniformLoadShedder.
+
+:::note
+
+It is not recommended to migrate from the modular or extensible to the simple broker load balancer since the simple broker load balancer is deprecated and no longer in use.
+
+:::
+
 
 ## Considerations
 
@@ -39,7 +50,7 @@ You can migrate from the simple to the modular broker load balancer, by manually
     vim apache-pulsar-@pulsar:version@/conf/broker.conf
     ``````
 
-2. Change the broker load balancer by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to ModularLoadManagerImpl in the broker.conf file.
+2. Change the broker load balancer by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to `ModularLoadManagerImpl` in the broker.conf file.
 
     ```conf
     loadManagerClassName=org.apache.pulsar.broker.loadbalance.extensions.ModularLoadManagerImpl
@@ -69,6 +80,14 @@ You can migrate from the simple to the modular broker load balancer, by manually
 
 You can migrate from the modular to the extensible broker load balancer, by manually changing settings in the broker.conf file.
 
+:::note
+
+The pulsar-admin tool is not supported for this migration.
+
+:::
+
+### Change broker.conf file 
+
 1. [Upgrade the Pulsar cluster](./helm-upgrade.md) to 3.0.x.
 
 2. Access to the broker.conf file.
@@ -89,11 +108,26 @@ You can migrate from the modular to the extensible broker load balancer, by manu
     loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.extensions.scheduler.TransferShedder
     ```
 
+    :::note
+
+      - The [extensible broker load balancer](./concepts-broker-load-balancing-types.md) is **available in Pulsar 3.0.0** or later.
+      - The [TransferShedder unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) is **only available** in the [extensible load balancer](./concepts-broker-load-balancing-types.md).
+  
+    :::
+
 4. Restart the Pulsar cluster. The new settings will take effect after the restart.  
 
 ## Migrate from extensible to modular broker load balancer
 
 You can migrate from the extensible to the modular broker load balancer, by manually changing the setting in the broker.conf file.
+
+:::note
+
+The pulsar-admin tool is not supported for this migration.
+
+:::
+
+### Change broker.conf file 
 
 1. Access to the broker.conf file.
 
@@ -112,6 +146,12 @@ You can migrate from the extensible to the modular broker load balancer, by manu
 
     loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder
     ```
+
+    :::note
+
+    [TransferShedder](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) is **only supported** in the extensible broker load balancer, so you need to change TransferShedder to other [bundle unloading strategies](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies).
+
+    :::
 
 3. Restart the Pulsar cluster. The new settings will take effect after the restart.  
 
