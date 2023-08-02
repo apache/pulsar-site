@@ -1,149 +1,45 @@
 ---
 id: develop-load-manager
-title: Modular load manager
-sidebar_label: "Modular load manager"
+title: Broker load balancer
+sidebar_label: "Broker load balancer"
 ---
 
-The *modular load manager*, implemented in  [`ModularLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/ModularLoadManagerImpl.java), is a flexible alternative to the previously implemented load manager, [`SimpleLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/SimpleLoadManagerImpl.java), which attempts to simplify how the load is managed while also providing abstractions so that complex load management strategies may be implemented.
+If you want to develop a broker load balancer, check out the following docs.
 
-## Usage
+Pulsar has the following types of load managers:
 
-There are two ways that you can enable the modular load manager:
+- Simple load manager, implemented in [`SimpleLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/SimpleLoadManagerImpl.java), which attempts to simplify how the load is managed while also providing abstractions so that complex load management strategies may be implemented.
 
-1. Change the value of the `loadManagerClassName` parameter in `conf/broker.conf` from `org.apache.pulsar.broker.loadbalance.impl.SimpleLoadManagerImpl` to `org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl`.
-2. Using the `pulsar-admin` tool. Here's an example:
+- Modular load manager, implemented in [`ModularLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/ModularLoadManagerImpl.java), which is a flexible alternative to the [`SimpleLoadManagerImpl`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/SimpleLoadManagerImpl.java).
 
-   ```shell
-   pulsar-admin update-dynamic-config \
-   --config loadManagerClassName \
-   --value org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
-   ```
+- Extensible load manager, implemented in 
 
-   You can use the same method to change back to the original value. In either case, any mistake in specifying the load manager will cause Pulsar to default to `SimpleLoadManagerImpl`.
+## Concepts
 
-## Verification
+Before starting the impelemtation, make sure you understand the following basics.
 
-There are a few different ways to determine which load manager is being used:
+:::note
 
-1. Use `pulsar-admin` to examine the `loadManagerClassName` element:
+The following concepts are only availabe for the modular load manager.
 
-   ```shell
-   bin/pulsar-admin brokers get-all-dynamic-config
-   {
-    "loadManagerClassName" : "org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl"
-   }
-   ```
-
-   If there is no `loadManagerClassName` element, then the default load manager is used.
-
-2. Consult a ZooKeeper load report. With the module load manager, the load report in `/loadbalance/brokers/...` will have many differences. For example, the `systemResourceUsage` sub-elements (`bandwidthIn`, `bandwidthOut`, etc.) are now all at the top level. Here is an example load report from the module load manager:
-
-   ```json
-   {
-     "bandwidthIn": {
-       "limit": 10240000.0,
-       "usage": 4.256510416666667
-     },
-     "bandwidthOut": {
-       "limit": 10240000.0,
-       "usage": 5.287239583333333
-     },
-     "bundles": [],
-     "cpu": {
-       "limit": 2400.0,
-       "usage": 5.7353247655435915
-     },
-     "directMemory": {
-       "limit": 16384.0,
-       "usage": 1.0
-     }
-   }
-   ```
-
-   With the simple load manager, the load report in `/loadbalance/brokers/...` looks like this:
-
-   ```json
-   {
-     "systemResourceUsage": {
-       "bandwidthIn": {
-         "limit": 10240000.0,
-         "usage": 0.0
-       },
-       "bandwidthOut": {
-         "limit": 10240000.0,
-         "usage": 0.0
-       },
-       "cpu": {
-         "limit": 2400.0,
-         "usage": 0.0
-       },
-       "directMemory": {
-         "limit": 16384.0,
-         "usage": 1.0
-       },
-       "memory": {
-         "limit": 8192.0,
-         "usage": 3903.0
-       }
-     }
-   }
-   ```
-
-3. The command-line [broker monitor](reference-cli-tools.md) will have a different output format depending on which load manager implementation is being used.
-
-   Here is an example from the modular load manager:
-
-   ```
-
-   ===================================================================================================================
-   ||SYSTEM         |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
-   ||               |0.00           |48.33          |0.01           |0.00           |0.00           |48.33          ||
-   ||COUNT          |TOPIC          |BUNDLE         |PRODUCER       |CONSUMER       |BUNDLE +       |BUNDLE -       ||
-   ||               |4              |4              |0              |2              |4              |0              ||
-   ||LATEST         |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
-   ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
-   ||SHORT          |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
-   ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
-   ||LONG           |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
-   ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
-   ===================================================================================================================
-
-   ```
-
-   Here is an example from the simple load manager:
-
-   ```
-
-   ===================================================================================================================
-   ||COUNT          |TOPIC          |BUNDLE         |PRODUCER       |CONSUMER       |BUNDLE +       |BUNDLE -       ||
-   ||               |4              |4              |0              |2              |0              |0              ||
-   ||RAW SYSTEM     |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
-   ||               |0.25           |47.94          |0.01           |0.00           |0.00           |47.94          ||
-   ||ALLOC SYSTEM   |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
-   ||               |0.20           |1.89           |               |1.27           |3.21           |3.21           ||
-   ||RAW MSG        |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
-   ||               |0.00           |0.00           |0.00           |0.01           |0.01           |0.01           ||
-   ||ALLOC MSG      |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
-   ||               |54.84          |134.48         |189.31         |126.54         |320.96         |447.50         ||
-   ===================================================================================================================
-
-   ```
-
-It is important to note that the module load manager is _centralized_, meaning that all requests to assign a bundle---whether it's been seen before or whether this is the first time---only get handled by the _lead_ broker (which can change over time). To determine the current lead broker, examine the `/loadbalance/leader` node in ZooKeeper.
-
-## Implementation
+:::
 
 ### Data
 
 The data monitored by the modular load manager is contained in the [`LoadData`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/LoadData.java) class.
 Here, the available data is subdivided into the bundle data and the broker data.
 
-#### Broker
+### Broker
 
 The broker data is contained in the [`BrokerData`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/BrokerData.java) class. It is further subdivided into two parts,
 one being the local data that every broker individually writes to ZooKeeper, and the other being the historical broker data that is written to ZooKeeper by the leader broker.
 
-##### Local Broker Data
+### Lead broker
+
+The module load manager is _centralized_, meaning that all requests to assign a bundle---whether it's been seen before or whether this is the first time---only get handled by the lead broker (which can change over time). To determine the current lead broker, examine the `/loadbalance/leader` node in ZooKeeper.
+
+### Local broker data
+
 The local broker data is contained in the class [`LocalBrokerData`](https://github.com/apache/pulsar/blob/master/pulsar-common/src/main/java/org/apache/pulsar/policies/data/loadbalancer/LocalBrokerData.java) and provides information about the following resources:
 
 * CPU usage
@@ -160,7 +56,7 @@ The local broker data is updated periodically according to the service configura
 receive the update immediately via a ZooKeeper watch, where the local data is read from the ZooKeeper node
 `/loadbalance/brokers/<broker host/port>`
 
-##### Historical Broker Data
+### Historical broker data
 
 The historical broker data is contained in the [`TimeAverageBrokerData`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/TimeAverageBrokerData.java) class.
 
@@ -173,7 +69,7 @@ Unlike the bundle data, the broker data does not maintain samples for the global
 
 The historical broker data is updated for each broker in memory by the leader broker whenever any broker writes their local data to ZooKeeper. Then, the historical data is written to ZooKeeper by the leader broker periodically according to the configuration `loadBalancerResourceQuotaUpdateIntervalMinutes`.
 
-##### Bundle Data
+### Bundle data
 
 The bundle data is contained in the [`BundleData`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/BundleData.java). Like the historical broker data, the bundle data is split into a short-term and long-term time frame. The information maintained in each time frame:
 
@@ -189,11 +85,11 @@ The time frames are implemented by maintaining the average of these values over 
 The bundle data is updated in memory on the leader broker whenever any broker writes their local data to ZooKeeper.
 Then, the bundle data is written to ZooKeeper by the leader broker periodically at the same time as the historical broker data, according to the configuration `loadBalancerResourceQuotaUpdateIntervalMinutes`.
 
-### Traffic Distribution
+### Traffic distribution
 
 The modular load manager uses the abstraction provided by [`ModularLoadManagerStrategy`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/ModularLoadManagerStrategy.java) to make decisions about bundle assignments. The strategy makes a decision by considering the service configuration, the entire load data, and the bundle data for the bundle to be assigned. Currently, the only supported strategy is [`LeastLongTermMessageRate`](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/main/java/org/apache/pulsar/broker/loadbalance/impl/LeastLongTermMessageRate.java), though soon users will have the ability to inject their own strategies if desired.
 
-#### Least Long Term Message Rate Strategy
+### Least long term message rate strategy
 
 As its name suggests, the least long-term message rate strategy attempts to distribute bundles across brokers so that
 the message rate in the long-term time window for each broker is roughly the same. However, simply balancing load based
@@ -207,3 +103,216 @@ then all machines are approximately overloaded. In the case in which a broker's 
 threshold, that broker is not considered for bundle assignment. If all brokers are overloaded, the bundle is randomly
 assigned.
 
+## Enablement
+
+You can enable a simple, modular, or extensible load manager by following the steps below.
+
+### Enable simple load manager
+
+You can enable the simple load manager using one of the following methods: 
+
+- Method 1
+
+  Update the value of [loadManagerClassName](https://github.com/apache/pulsar/blob/782e91fe327efe2c9c9107d6c679c2837d43935b/conf/broker.conf#L1309) to `org.apache.pulsar.broker.loadbalance.impl.SimpleLoadManagerImpl` in `conf/broker.conf`.
+
+- Method 2
+  
+  Use the `pulsar-admin` tool. 
+
+   ```shell
+   pulsar-admin brokers update-dynamic-config \
+   --config loadManagerClassName \
+   --value org.apache.pulsar.broker.loadbalance.impl.SimpleLoadManagerImpl
+   ``` 
+
+  :::note 
+  
+  Any mistakes in specifying the load manager will cause Pulsar to default to `SimpleLoadManagerImpl`.
+
+  :::
+
+### Enable modular load manager
+
+You can enable the modular load manager using one of the following methods: 
+
+- Method 1
+
+  Update the value of [loadManagerClassName](https://github.com/apache/pulsar/blob/782e91fe327efe2c9c9107d6c679c2837d43935b/conf/broker.conf#L1309) to `org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl` in `conf/broker.conf`.
+
+- Method 2
+  
+  Use the `pulsar-admin` tool. 
+
+   ```shell
+   pulsar-admin brokers update-dynamic-config \
+   --config loadManagerClassName \
+   --value org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
+   ```
+
+  :::note 
+  
+  Any mistakes in specifying the load manager will cause Pulsar to default to `SimpleLoadManagerImpl`.
+
+  :::
+
+### Enable extensible load manager
+
+You can enable the extensible load manager by updating the value of [loadManagerClassName](https://github.com/apache/pulsar/blob/782e91fe327efe2c9c9107d6c679c2837d43935b/conf/broker.conf#L1309) to `org.apache.pulsar.broker.loadbalance.impl.ExtensibleLoadManagerImpl` in `conf/broker.conf`.
+
+:::note
+
+The pulsar-admin tool is not supported for enabling the extensible load manager.
+
+:::
+
+## Verification
+
+If you want to verify which load manager is used, follow the steps below.
+
+### Step 1: check loadManagerClassName
+
+You can use the `pulsar-admin` tool to examine the `loadManagerClassName` element.
+
+**Input**
+
+```bash
+bin/pulsar-admin brokers get-all-dynamic-config
+```
+
+**Output**
+
+```bash
+{
+"loadManagerClassName" : "org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl"
+}
+```
+
+If there is no `loadManagerClassName` element, then the value of [loadManagerClassName](https://github.com/apache/pulsar/blob/782e91fe327efe2c9c9107d6c679c2837d43935b/conf/broker.conf#L1309) in the `conf/broker.conf` file is used.
+
+### Step 2: verify load manager (optional) 
+
+To double-check which load manager is used, you can [check the ZooKeeper load report](#method-1-check-zookeeper-load-report) or [check monitor-brokers output](#method-2-check-monitor-brokers-output).  
+
+#### Method 1: check ZooKeeper load report
+
+Check the ZooKeeper load report. The load report in `/loadbalance/brokers/...`.
+
+```bash
+tbd
+```
+   
+Different load managers have different ZooKeeper load reports. 
+
+- [Simple load manager](./concepts-broker-load-balancing-types.md)
+
+  ```json
+  {
+    "systemResourceUsage": {
+      "bandwidthIn": {
+        "limit": 10240000.0,
+        "usage": 0.0
+      },
+      "bandwidthOut": {
+        "limit": 10240000.0,
+        "usage": 0.0
+      },
+      "cpu": {
+        "limit": 2400.0,
+        "usage": 0.0
+      },
+      "directMemory": {
+        "limit": 16384.0,
+        "usage": 1.0
+      },
+      "memory": {
+        "limit": 8192.0,
+        "usage": 3903.0
+      }
+    }
+  }
+  ```
+
+- [Modular load manager](./concepts-broker-load-balancing-types.md)
+
+   Modular load manager has different ZooKeeper load report from that of the simple load manager. For example, the `systemResourceUsage` sub-elements (`bandwidthIn`, `bandwidthOut`, etc.) are now all at the top level. 
+
+  ```json
+  {
+    "bandwidthIn": {
+      "limit": 10240000.0,
+      "usage": 4.256510416666667
+    },
+    "bandwidthOut": {
+      "limit": 10240000.0,
+      "usage": 5.287239583333333
+    },
+    "bundles": [],
+    "cpu": {
+      "limit": 2400.0,
+      "usage": 5.7353247655435915
+    },
+    "directMemory": {
+      "limit": 16384.0,
+      "usage": 1.0
+    }
+  }
+  ```
+
+- Extensible load manager
+
+  :::note
+
+  [Extensible load manager](./concepts-broker-load-balancing-types.md) does not have the ZooKeepr load report because its internal stats are stored in system topics rather than ZooKeeper.
+
+  :::
+   
+
+#### Method 2: check monitor-brokers output
+
+You can use the [pulsar-perf tool](reference-cli-tools.md) to start a broker monitor. 
+  
+```bash
+pulsar-perf monitor-brokers --connect-string <zookeeper host:port>
+````
+
+Different load managers have different outputs. This output is the same as the output of the [Method 1: check ZooKeeper load report](#method-1-check-zookeeper-load-report), but it is well formatted for better readability.
+
+- Simple load manager
+
+  ```bash
+  ===================================================================================================================
+  ||COUNT          |TOPIC          |BUNDLE         |PRODUCER       |CONSUMER       |BUNDLE +       |BUNDLE -       ||
+  ||               |4              |4              |0              |2              |0              |0              ||
+  ||RAW SYSTEM     |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
+  ||               |0.25           |47.94          |0.01           |0.00           |0.00           |47.94          ||
+  ||ALLOC SYSTEM   |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
+  ||               |0.20           |1.89           |               |1.27           |3.21           |3.21           ||
+  ||RAW MSG        |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
+  ||               |0.00           |0.00           |0.00           |0.01           |0.01           |0.01           ||
+  ||ALLOC MSG      |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
+  ||               |54.84          |134.48         |189.31         |126.54         |320.96         |447.50         ||
+  ===================================================================================================================
+  ```
+
+  - Modular load manager
+
+  ```bash
+  ===================================================================================================================
+  ||SYSTEM         |CPU %          |MEMORY %       |DIRECT %       |BW IN %        |BW OUT %       |MAX %          ||
+  ||               |0.00           |48.33          |0.01           |0.00           |0.00           |48.33          ||
+  ||COUNT          |TOPIC          |BUNDLE         |PRODUCER       |CONSUMER       |BUNDLE +       |BUNDLE -       ||
+  ||               |4              |4              |0              |2              |4              |0              ||
+  ||LATEST         |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
+  ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
+  ||SHORT          |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
+  ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
+  ||LONG           |MSG/S IN       |MSG/S OUT      |TOTAL          |KB/S IN        |KB/S OUT       |TOTAL          ||
+  ||               |0.00           |0.00           |0.00           |0.00           |0.00           |0.00           ||
+  ===================================================================================================================
+  ```
+
+ - Extensible load manager
+   
+   ```bash
+   tbd
+   ````
