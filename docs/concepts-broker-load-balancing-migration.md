@@ -69,7 +69,7 @@ You can migrate from the simple to the modular broker load balancer, by manually
 2. Set `--config` to `loadManagerClassName` and `--value` to `org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl`.
 
     ```bash
-    pulsar-admin update-dynamic-config \
+    pulsar-admin brokers update-dynamic-config \
     --config loadManagerClassName \
     --value org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
     ```
@@ -78,7 +78,7 @@ You can migrate from the simple to the modular broker load balancer, by manually
 
 ## Migrate from modular to extensible broker load balancer
 
-You can migrate from the modular to the extensible broker load balancer, by manually changing settings in the broker.conf file.
+You can migrate from the modular to the extensible broker load balancer, by manually changing settings in the broker.conf file. During the migration, the lookup and assignment will be redirected to the brokers with the extensible load balancer.
 
 :::note
 
@@ -88,7 +88,7 @@ The pulsar-admin tool is not supported for this migration.
 
 ### Change broker.conf file 
 
-1. [Upgrade the Pulsar cluster](./helm-upgrade.md) to 3.0.x.
+1. [Upgrade the Pulsar cluster](./helm-upgrade.md) to 3.0.0 or later versions.
 
 2. Access to the broker.conf file.
 
@@ -119,7 +119,7 @@ The pulsar-admin tool is not supported for this migration.
 
 ## Migrate from extensible to modular broker load balancer
 
-You can migrate from the extensible to the modular broker load balancer, by manually changing the setting in the broker.conf file.
+You can migrate from the extensible to the modular broker load balancer, by manually changing the setting in the broker.conf file. During the migration, the lookup and assignment will be redirected to the brokers with the modular load balancer.
 
 :::note
 
