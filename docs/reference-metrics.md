@@ -672,7 +672,7 @@ All the bundleUnloading metrics are labeled with the following labels:
 | Name                          | Type    | Description                                  |
 |-------------------------------|---------|----------------------------------------------|
 | pulsar_lb_unload_broker_total | Counter | Unload broker count in this bundle unloading |
-| pulsar_lb_unload_bundle_total | Counter | Bundle unload count in this bundle unloading |
+| pulsar_lb_unload_bundle_total | Counter | Bundle unload count in this bundle unloading. If the value of `pulsar_lb_unload_bundle_total is greater than zero, it means that the bundle has been unloaded. |
 | pulsar_lb_unload_broker_breakdown_total{result, reason}* | Counter | Unload broker breakdown count grouped by result and reason labels.|
 | pulsar_lb_resource_usage_stats{feature=max_ema, stat=avg}* | Gauge | The average of brokers' load scores.|
 | pulsar_lb_resource_usage_stats{feature=max_ema, stat=std}*   | Gauge | The standard deviation of brokers' load scores. |
