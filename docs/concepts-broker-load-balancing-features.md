@@ -23,3 +23,5 @@ In general, the main features of the broker load balancer are:
 - To learn essential fundamentals, see [Broker load balancing | Concepts](./concepts-broker-load-balancing-concepts.md).
 
 - To review various versions of broker load balancers, see [Broker load balancing | Types](./concepts-broker-load-balancing-types.md).
+
+- To migrate one broker load balancer type to another, see [Broker load balancing | Migration](./concepts-broker-load-balancing-migration.md).
