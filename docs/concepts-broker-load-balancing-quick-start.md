@@ -365,7 +365,7 @@ The output shows that the bundle has been split into 3 ranges.
 
 :::note
 
-The number of bundles may vary depending on the time. For example, if you wait longer than 5 minutes, the number of bundles may increase; otherwise, the number of bundles may decrease. If the number of bundles is equal to or greater than 2, it means that the bundle has been split.
+The number of bundles may vary depending on the time. For example, if you wait longer than 5 minutes, the number of bundles may increase. If the number of bundles is equal to or greater than 2, it means that the bundle has been split.
 :::
 
 ### Step 6. Unload bundles
