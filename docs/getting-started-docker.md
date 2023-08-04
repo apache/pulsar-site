@@ -5,6 +5,11 @@ sidebar_label: "Run Pulsar in Docker"
 description: One command to run Pulsar in Docker. This tutorial guides you on how to start Pulsar in Docker and successfully produce and consume your first message.
 ---
 
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
+
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
 If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
