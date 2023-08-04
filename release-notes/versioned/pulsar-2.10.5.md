@@ -1,0 +1,118 @@
+---
+id: pulsar-2.10.5
+title: Apache Pulsar 2.10.5
+sidebar_label: Apache Pulsar 2.10.5
+---
+
+#### 2023-7-30
+
+### Broker
+* [fix][broker] In replication scenario, remote consumer could not be registered if there has no message was sent (#20888)
+* [improve] [broker] Print warn log if compaction failure (#19405)
+* [branch-2.10][fix][broker] Fix inconsensus namespace policies by getPoliciesIfCached (#20873)
+* [branch-2.10][fix][broker] Inconsistent behaviour for topic auto_creation (#20872)
+* [fix] [broker] Can not receive any messages after switching to standby cluster (#20767)
+* [improve] [broker] Add consumer-id into the log when doing subscribe. (#20568)
+* [fix][broker][branch-2.10] Fix NPE when resetting Replicator's cursor by position. (#20597) (#20781)
+* [fix][broker] Fix namespace deletion if __change_events topic has not been created yet (#18804)
+* [fix][schema] Only handle exception when there has (#20730)
+* [fix][broker] Topic policy can not work well if replay policy message has any exception. (#20613)
+* [fix][broker] Fix return the earliest position when query position by timestamp. (#20457)
+* [fix][broker] Return if AbstractDispatcherSingleActiveConsumer closed (#19934)
+* [broker] clean inactive bundle from bundleData in loadData and bundlesCache (#13974)
+* [fix][branch-2.10] Fix compilation issue introduced by fixing Repeated messages of shared dispatcher (#16812)
+* Issue 16802: fix Repeated messages of shared dispatcher (#16812)
+* [fix][branch-2.10]Fix compilation issue introduced by Save createIfMissing in TopicLoadingContext (#19993)
+* [improve][broker] Save createIfMissing in TopicLoadingContext (#19993)
+* [fix][broker] Invalidate metadata children cache after key deleted (#20363)
+* [improve] [broker] Avoid PersistentSubscription.expireMessages logic check backlog twice. (#20416)
+* [fix][broker]fix the publish latency spike issue with large number of producers (#20607)
+* [fix][branch-2.10] Fix duplicated deleting topics (#20685)
+* [improve][broker][branch-2.10] Backport Linux metrics changes from master branch (#20659)
+* [cleanup][broker] Validate authz earlier in delete subscription logic (#20549)
+* [fix][broker] release orphan replicator after topic closed (#20567)
+* [fix][broker] REST Client Producer fails with TLS only (#20535)
+* [fix][broker] Restore solution for certain topic unloading race conditions (#20527)
+* [fix][ml] There are two same-named managed ledgers in the one broker (#18688)
+* [fix][broker] Fix skip message API when hole messages exists (#20326)
+* [fix][broker] If ledger lost, cursor mark delete position can not forward (#18620)
+* [fix][broker] partitioned __change_events topic is policy topic (#20392)
+* [fix][ml] Fix ledger left in OPEN state when enabling `inactiveLedgerRollOverTimeMs` (#20276)
+* [fix][broker] Fix default bundle size used while setting bookie affinity (#20250)
+* [fix][broker] Fix the behavior of delayed message in Key_Shared mode (#20233)
+* [improve][broker] Get lowest PositionImpl from NavigableSet (#18278)
+* [fix] [broker] error TimeUnit to record publish latency (#20074)
+* [fix] [broker] In Key_Shared mode: remove unnecessary mechanisms of message skip to avoid unnecessary consumption stuck (#20335)
+* [fix][broker]Fix deadlock of metadata store (#20189)
+* [fix] [broker] [branch-2.10] Upgrade rocksDB version to 6.16.4 to keep sync with BookKeeper 4.14.7 (#20312)
+* [improve] [broker] Skip split bundle if only one broker (#20190)
+* [fix][monitor] topic with double quote breaks the prometheus format (#20230)
+* [fix][broker] Fix RoaringBitmap.contains can't check value 65535 (#20176)
+* [fix][broker] Fix the reason label of authentication metrics (#20030)
+* [fix] [broker] Fix infinite ack of Replicator after topic is closed (#20232)
+* [fix] [broker] Producer created by replicator is not displayed in topic stats (#20229)
+* [fix] [broker] delete topic failed if disabled system topic (#19735)
+* [fix] [ml] make the result of delete cursor is success if cursor is deleted (#19825)
+* [fix] [broker] Fast fix infinite HTTP call getSubscriptions caused by wrong topicName (#20131)
+* [fix][broker] Fix issue where msgRateExpired may not refresh forever (#19759)
+* [fix][broker] Fix can't send ErrorCommand when message is null value (#19899)
+* [fix][broker] Fix Return value of getPartitionedStats doesn't contain subscription type (#20210)
+* [branch-2.10][fix][build] Upgrade swagger version to fix CVE-2022-1471 (#20172)
+* [fix][broker] Fix getPartitionedStats miss subscription's messageAckRate (#19870)
+* [fix] Use scheduled executor in BinaryProtoLookupService (#20043)
+* [improve] [broker] Fix broker restart logic (#20113)
+
+### Transaction
+* [fix] [txn] fix consumer can receive aborted txn message when readType is replay (#19815)
+
+### Pulsar IO and Pulsar Functions
+* [fix][io][branch-2.10] Not restart instance when kafka source poll exception. (#20816)
+* [fix][offload] Filesystem offloader class not found hadoop-hdfs-client (#20365)
+* [fix][fn] Make KubernetesRuntime translate characters in function tenant, namespace, and name during function removal to avoid label errors (#19584)
+* [fix][fn] Fix JavaInstanceStarter inferring type class name error (#19896)
+* [fix][io] Close the kafka source connector got stuck (#20698)
+* [fix][fn] Exit JVM when main thread throws exception (#20689)
+* Optimize conusmer pause (#14566)
+* [fix][broker] Fix the publish latency spike from the contention of MessageDeduplication (#20647)
+* [fix][fn] Configure pulsar admin for TLS (#20533)
+* [fix][fn] Go functions must retrieve consumers by non-particioned topic ID (#20413)
+* [fix][io] Close the kafka source connector if there is uncaught exception (#20479)
+* [fix][fn] Go functions need to use static grpcPort in k8s runtime (#20404)
+* [fix][fn] Make pulsar-admin support update py/go with package url (#19897)
+* [fix][txn] Fix transaction is not aborted when send or ACK failed (#20240)
+
+### CLI
+* [fix] [cli] the variable producerName of BatchMsgContainer is null (#20819)
+* [fix][ci] Update nar maven plugin version to fix excessive downloads (#20410)
+
+### Admin
+* [improve][admin] Return BAD_REQUEST on cluster data is null for createCluster (#20346)
+### Security
+* [fix][sec] Upgrade snappy-java to address multiple CVEs (#20604)
+* [fix][sec] Upgrade Guava to 32.0.0 to address CVE-2023-2976 (#20459)
+* [improve][misc] Upgrade Netty to 4.1.93.Final (#20423)
+* [improve][misc] Upgrade Netty to 4.1.89.Final (#19649)
+* [fix][sec] Upgrade sqlite-jdbc to resolve CVE-2023-32697 (#20411)
+### CI & Test
+* [fix][test] Replace test call to Auth0 with call to WireMock (#20465)
+* [fix][test] Fix flaky testCreateTopicWithZombieReplicatorCursor (#20037)
+*[fix][flaky-test]NamespaceServiceTest.flaky/testModularLoadManagerRemoveBundleAndLoad (#17487)
+* [improve][test][branch-2.10] Backport disabling disk usage threshold for Elastic Testcontainers (#20676)
+
+### Others
+* [fix][build]Fix compatibility issue caused by #20819 (#20834)
+* [fix][build] Mongo is fixed for 2.10.5 (#20810)
+* [fix][meta] Bookie Info lost by notification race condition. (#20642)
+* [fix] [meta]Switch to the metadata store thread after zk operation (#20303)
+* [fix][ws] Remove unnecessary ping/pong implementation (#20733)
+* fix: bundle-data metadata leak because of bundlestats was not clean (#17095)
+* [fix] [Perf] PerformanceProducer do not produce expected number of messages. (#19775)
+* [fix][meta] Adding the missed bookie id in the registration manager. (#20641)
+* [fix][build] Don't publish docker image with "latest" tag to docker repository
+* [fix][build][branch-2.10] Fix ci-license check (#20505)
+* [improve][monitor] Add JVM start time metric (#20381)
+* [fix][build] update the zookeeper version to 3.6.4 (#20333)
+* [fix][monitor] Fix the partitioned publisher topic stat aggregation bug (#18807)
+* [fix][meta] deadlock of zkSessionWatcher when zkConnection loss (#20122)
+* [improve][build] Upgrade dependencies to reduce CVE. (#20162)
+* [branch-2.10][improve][build] Upgrade snakeyaml version to 2.0 (#20118)

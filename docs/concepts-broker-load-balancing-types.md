@@ -44,3 +44,4 @@ However, for bundle ownership and load data stores, the modular load balancer us
 
 - To learn essential fundamentals, see [Broker load balancing | Concepts](./concepts-broker-load-balancing-concepts.md).
 
+- To migrate one broker load balancer type to another, see [Broker load balancing | Migration](./concepts-broker-load-balancing-migration.md).
