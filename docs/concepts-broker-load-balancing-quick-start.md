@@ -37,7 +37,7 @@ networks:
 services:
   # Start ZooKeeper
   zookeeper:
-    image: streamnative/pulsar:3.1.0-SNAPSHOT
+    image: apachepulsar/pulsar:3.0.1
     container_name: zookeeper
     restart: on-failure
     networks:
@@ -61,7 +61,7 @@ services:
   pulsar-init:
     container_name: pulsar-init
     hostname: pulsar-init
-    image: streamnative/pulsar:3.1.0-SNAPSHOT
+    image: apachepulsar/pulsar:3.0.1
     networks:
       - pulsar
     command: >
@@ -77,7 +77,7 @@ services:
 
   # Start bookie
   bookie:
-    image: streamnative/pulsar:3.1.0-SNAPSHOT
+    image: apachepulsar/pulsar:3.0.1
     container_name: bookie
     restart: on-failure
     networks:
@@ -99,7 +99,7 @@ services:
 
   # Start broker 1
   broker-1:
-    image: streamnative/pulsar:3.1.0-SNAPSHOT
+    image: apachepulsar/pulsar:3.0.1
     container_name: broker-1
     hostname: broker-1
     restart: on-failure
@@ -131,7 +131,7 @@ services:
 
   # Start broker 2
   broker-2:
-    image: streamnative/pulsar:3.1.0-SNAPSHOT
+    image: apachepulsar/pulsar:3.0.1
     container_name: broker-2
     hostname: broker-2
     restart: on-failure
@@ -528,12 +528,12 @@ persistent://public/default/topic-manual-2-partition-19    pulsar://broker-1:665
 
 ### Step 6. Unload bundles
 
-6.1 Specify the range `public/default/0x10000000_0x20000000` to be unloaded. 
+6.1 Unload the bundle range `public/default/0x10000000_0x20000000` and allocate bundles to broker 1.
 
 **Input**
 
 ```bash
-bin/pulsar-admin namespaces unload public/default -b 0x10000000_0x20000000
+bin/pulsar-admin namespaces unload public/default -b 0x10000000_0x20000000 -d http://broker-1:8080
 ```
 
 **Output**
