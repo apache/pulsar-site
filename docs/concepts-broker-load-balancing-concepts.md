@@ -564,4 +564,7 @@ For implementation details, see [PIP-220: TransferShedder](https://github.com/ap
 
 - To review various versions of broker load balancers, see [Broker load balancing | Types](./concepts-broker-load-balancing-types.md).
 
+- To get up quickly, see [Broker load balancing | Quick start](./concepts-broker-load-balancing-quick-start.md).
+
 - To migrate one broker load balancer type to another, see [Broker load balancing | Migration](./concepts-broker-load-balancing-migration.md).
+
