@@ -3,7 +3,10 @@ id: client-libraries-schema
 title: Work with schema
 sidebar_label: "Work with schema"
 ---
-
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
 
 ## Get started with schema
 
@@ -148,9 +151,16 @@ while True:
 Working with Go schema has slight differences from Java schema.
 This part will introduce the schema compatibility between Go client and Java client.
 
-#### Avro Schema
-Avro schema in Go and Java are compatible, but there are some differences in how the schemas are defined. Go typically uses schema definitions, a string JSON, to create schemas. However, Java often uses class types for schema creation. As a result, Java allows non-primitive fields to be nullable by default, while in Go's schema definition, the nullability of fields needs to be explicitly stated.
-GO:
+### Avro/JSON Schema
+AVRO and JSON schema in Go and Java are compatible, but there are some differences in how the schemas are defined.
+````mdx-code-block
+<Tabs
+  defaultValue="AVRO"
+  values={[{"label":"AVRO","value":"AVRO"},{"label":"JSON","value":"JSON"}]}>
+
+<TabItem value="AVRO">
+Go typically uses schema definitions, a string JSON, to create schemas. However, Java often uses class types for schema creation. As a result, Java allows non-primitive fields to be nullable by default, while in Go's schema definition, the nullability of fields needs to be explicitly stated.
+
 ```go
 // Compatible with defining a schema in Java
 exampleSchemaDefCompatible := NewAvroSchema(`{"fields":
@@ -167,7 +177,6 @@ exampleSchemaDefIncompatible := NewAvroSchema(`{"fields":
 Producer := NewAvroSchema(exampleSchemaDef, nil)
 
 ```
-JAVA:
 ```java
 @AllArgsConstructor
 @NoArgsConstructor
@@ -179,9 +188,19 @@ public static class Example {
 Producer<Example> producer = pulsarClient.newProducer(Schema.AVRO(Example.class))
                 .topic(topic).create();
 ```
+And another way to keep compatible is use schema definition to create schema in the JAVA client too.
+```java
+    SchemaDefinition<Example> schemaDefinition =
+                     SchemaDefinition.builder().withPojo(Example.class).withAlwaysAllowNull(false).build();
+    Schema schema = Schema.AVRO(schemaDefinition);
 
-#### JSON Schema
-The situation with JSON schema is similar to Avro Schema.
+    Producer<Example> producer = pulsarClient.newProducer(schema)
+                .topic(topic).create();
+```
+</TabItem>
+<TabItem value="JSON">
+Go typically uses schema definitions, a string JSON, to create schemas. However, Java often uses class types for schema creation. As a result, Java allows non-primitive fields to be nullable by default, while in Go's schema definition, the nullability of fields needs to be explicitly stated.
+
 ```go
 // Compatible with defining a schema in Java
 exampleSchemaDefCompatible := "{\"type\":\"record\",\"name\":\"Example\",\"namespace\":\"test\"," +
@@ -195,9 +214,33 @@ exampleSchemaDefIncompatible := "{\"type\":\"record\",\"name\":\"Example\",\"nam
 consumerJSIncompatible := NewJSONSchema(exampleSchemaDefIncompatible, nil)
 ```
 
-To achieve compatibility, modify the `exampleSchemaDefIncompatible` to allow null fields and ensure that the variable names in the Java Example class match the schema definition.
+```java
+@AllArgsConstructor
+@NoArgsConstructor
+public static class Example {
+    public String name;
+    public int id;
+}
 
-#### Proto Schema
+Producer<Example> producer = pulsarClient.newProducer(Schema.AVRO(Example.class))
+                .topic(topic).create();
+```
+
+And another way to keep compatible is use schema definition to create schema in the JAVA client too.
+```java
+    SchemaDefinition<Example> schemaDefinition =
+                     SchemaDefinition.builder().withPojo(Example.class).withAlwaysAllowNull(false).build();
+    Schema schema = Schema.AVRO(schemaDefinition);
+
+    Producer<Example> producer = pulsarClient.newProducer(schema)
+                .topic(topic).create();
+```
+
+</TabItem>
+</Tabs>
+````
+
+### Proto Schema
 Proto and ProtoNative schemas exhibit some incompatibility between Go and Java clients. This is because Avro Proto currently does not provide full compatibility between Java and Go.
 
 ```proto
@@ -233,5 +276,5 @@ message TestMessage {
 }
 ```
 
-#### ProtoNative Schema
+### ProtoNative Schema
 Similar to the Proto schema, ProtoNative schemas are also incompatible between Java and Go clients. To address this, you can use a unified schema define and add `[(avro_java_string) = "String"]` extension to the Go client's Proto message.
