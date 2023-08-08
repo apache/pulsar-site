@@ -7,23 +7,15 @@ description: Want to run Pulsar quickly? This section guides you through every s
 
 For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode runs all components inside a single Java Virtual Machine (JVM) process.
 
-To run a standalone Pulsar cluster locally, include the following steps:
-
-1. Download Pulsar distribution
-2. Start a Pulsar standalone cluster
-3. Create a topic
-4. Write messages to the topic
-5. Read messages from the topic
-6. Write some more messages
-7. Stop the Pulsar cluster
-
 :::tip
 
 If you're looking to run a full production Pulsar installation, see the [Deploying a Pulsar instance](deploy-bare-metal.md) guide.
 
 :::
 
-## Prerequisites
+To run Pulsar in standalone mode on your machine:
+
+## Step 0: Prerequisites
 
 - JRE (64-bit). Different Pulsar versions rely on different JRE versions. For how to choose the JRE version, see [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
 
