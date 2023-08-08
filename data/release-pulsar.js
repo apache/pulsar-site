@@ -37,6 +37,15 @@ module.exports = [
       "version": "v2.11.x"
     },
     {
+      "author": "liangyepianzhou",
+      "tagName": "v2.10.5",
+      "publishedAt": "2023-07-30T01:53:34Z",
+      "vtag": "2.10.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.10.5/",
+      "doc": "/docs/2.10.x",
+      "version": "v2.10.x"
+    },
+    {
         "author": "liangyepianzhou",
         "tagName": "v2.10.4",
         "publishedAt": "2023-04-18T01:53:34Z",

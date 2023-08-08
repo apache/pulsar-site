@@ -1,0 +1,319 @@
+{
+    "basePath": "/lookup",
+    "definitions": {
+        "AuthenticationDataSource": {
+            "properties": {
+                "commandData": {
+                    "type": "string"
+                },
+                "httpAuthType": {
+                    "type": "string"
+                },
+                "peerAddress": {
+                    "$ref": "#/definitions/SocketAddress"
+                },
+                "subscription": {
+                    "type": "string"
+                },
+                "tlsCertificates": {
+                    "items": {
+                        "$ref": "#/definitions/Certificate"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "AuthenticationParameters": {
+            "properties": {
+                "clientAuthenticationDataSource": {
+                    "$ref": "#/definitions/AuthenticationDataSource"
+                },
+                "clientRole": {
+                    "type": "string"
+                },
+                "originalPrincipal": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Certificate": {
+            "properties": {
+                "encoded": {
+                    "items": {
+                        "format": "byte",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "publicKey": {
+                    "$ref": "#/definitions/PublicKey"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CompletableFuture": {
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "CompletableFutureByteBuf": {
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "CompletableFutureClusterData": {
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "CompletableFutureVoid": {
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "LookupData": {
+            "properties": {
+                "brokerUrl": {
+                    "type": "string"
+                },
+                "brokerUrlSsl": {
+                    "type": "string"
+                },
+                "brokerUrlTls": {
+                    "type": "string"
+                },
+                "httpUrl": {
+                    "type": "string"
+                },
+                "httpUrlTls": {
+                    "type": "string"
+                },
+                "nativeUrl": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PublicKey": {
+            "properties": {
+                "algorithm": {
+                    "type": "string"
+                },
+                "encoded": {
+                    "items": {
+                        "format": "byte",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SocketAddress": {
+            "type": "object"
+        }
+    },
+    "info": {
+        "description": "This provides the REST API for lookup operations",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "title": "Pulsar Lookup REST API",
+        "version": "v2"
+    },
+    "paths": {
+        "/v2/topic/{topic-domain}/{tenant}/{namespace}/{topic}": {
+            "get": {
+                "description": "",
+                "operationId": "TopicLookup_lookupTopicAsync",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "topic-domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "query",
+                        "name": "listenerName",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "X-Pulsar-ListenerName",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/LookupData"
+                        }
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    }
+                },
+                "summary": "Get the owner broker of the given topic.",
+                "tags": [
+                    "lookup"
+                ]
+            }
+        },
+        "/v2/topic/{topic-domain}/{tenant}/{namespace}/{topic}/bundle": {
+            "get": {
+                "description": "",
+                "operationId": "TopicLookup_getNamespaceBundle",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "topic-domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "405": {
+                        "description": "Invalid topic domain type"
+                    }
+                },
+                "summary": "Get the namespace bundle which the given topic belongs to.",
+                "tags": [
+                    "lookup"
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "tags": [
+        {
+            "name": "lookup"
+        }
+    ]
+}
