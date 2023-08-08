@@ -45,7 +45,7 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Broker] Fix class name typo `PrecisPublishLimiter` to "Precise" by @JooHyukKim in [#20310](https://github.com/apache/pulsar/pull/20310)
 - [Broker] Allow Access to System Topic Metadata for Reader Creation Post-Namespace Deletion by @liangyepianzhou in [#20304](https://github.com/apache/pulsar/pull/20304)
 - [Broker] Fix NPE caused by topic publish rate limiter. by @dragonls in [#20302](https://github.com/apache/pulsar/pull/20302)
-- [Broker] Fix `UnsupportedOperationException` when update topic properties. by @liangyepianzhou in [#20261](https://github.com/apache/pulsar/pull/20261)
+- [Broker] Fix `UnsupportedOperationException` when updating topic properties. by @liangyepianzhou in [#20261](https://github.com/apache/pulsar/pull/20261)
 - [Broker] Fix ledger cachemiss size metric by @AnonHxy in [#20257](https://github.com/apache/pulsar/pull/20257)
 - [Broker] Fix default bundle size used while setting bookie affinity by @syk-coder in [#20250](https://github.com/apache/pulsar/pull/20250)
 - [Broker] Fix the behavior of delayed message in Key_Shared mode by @codelipenghui in [#20233](https://github.com/apache/pulsar/pull/20233)
@@ -80,7 +80,7 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Client] Java Client's Seek Logic Not Threadsafe #1 by @JooHyukKim in [#20242](https://github.com/apache/pulsar/pull/20242)
 
 ### Pulsar IO and Pulsar Functions
-- [Functions] Exit JVM when main thread throws exception by @michaeljmarshall in [#20689](https://github.com/apache/pulsar/pull/20689)
+- [Functions] Exit JVM when the main thread throws an exception by @michaeljmarshall in [#20689](https://github.com/apache/pulsar/pull/20689)
 - [Functions] TLS args admin download command use zero arity by @michaeljmarshall in [#20513](https://github.com/apache/pulsar/pull/20513)
 - [Functions] Support customizing TLS config for function download command by @michaeljmarshall in [#20482](https://github.com/apache/pulsar/pull/20482)
 - [Functions] Reset idle timer correctly by @flowchartsman in [#20450](https://github.com/apache/pulsar/pull/20450)
@@ -94,8 +94,8 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Functions] Fix JavaInstanceStarter inferring type class name error by @jiangpengcheng in [#19896](https://github.com/apache/pulsar/pull/19896)
 - [Functions] Fix function update error by @jiangpengcheng in [#19895](https://github.com/apache/pulsar/pull/19895)
 - [Functions] Make KubernetesRuntime translate characters in function tenant, namespace, and name during function removal to avoid label errors by @csthomas1 in [#19584](https://github.com/apache/pulsar/pull/19584)
-- [Connectors] Close the kafka source connector got stuck by @poorbarcode in [#20698](https://github.com/apache/pulsar/pull/20698)
-- [Connectors] Close the kafka source connector if there is uncaught exception by @RobertIndie in [#20424](https://github.com/apache/pulsar/pull/20424)
+- [Connectors] Close the Kafka source connector that got stuck by @poorbarcode in [#20698](https://github.com/apache/pulsar/pull/20698)
+- [Connectors] Close the Kafka source connector if there is an uncaught exception by @RobertIndie in [#20424](https://github.com/apache/pulsar/pull/20424)
 - [Connectors] Add protobuf ByteString to pulsar-io jdbc core by @bpereto in [#20259](https://github.com/apache/pulsar/pull/20259)
 - [Connectors] KCA: handle kafka sources that use commitRecord by @dlg99 in [#20121](https://github.com/apache/pulsar/pull/20121)
 
