@@ -12,24 +12,6 @@ Here is a glossary of terms related to Apache Pulsar:
 
 Pulsar is a distributed messaging system originally created by Yahoo but now under the stewardship of the Apache Software Foundation.
 
-### Message
-
-Messages are the basic unit of Pulsar. They're what [producers](#producer) publish to [topics](#topic)
-and what [consumers](#consumer) then consume from topics.
-
-### Topic
-
-A named channel used to pass messages published by [producers](#producer) to [consumers](#consumer) who
-process those [messages](#message).
-
-### Partitioned Topic
-
-A topic that is served by multiple Pulsar [brokers](#broker), which enables higher throughput.
-
-### Namespace
-
-A grouping mechanism for related [topics](#topic).
-
 ### Namespace Bundle
 
 A virtual group of [topics](#topic) that belong to the same [namespace](#namespace). A namespace bundle
@@ -39,10 +21,6 @@ is defined as a range between two 32-bit hashes, such as 0x00000000 and 0xffffff
 
 An administrative unit for allocating capacity and enforcing an authentication/authorization scheme.
 
-### Subscription
-
-A lease on a [topic](#topic) established by a group of [consumers](#consumer). Pulsar has four subscription
-modes (exclusive, shared, failover and key_shared).
 
 ### Pub-Sub
 
@@ -69,19 +47,6 @@ Pulsar readers are message processors much like Pulsar [consumers](#consumer) bu
 ### Cursor
 
 The subscription position for a [consumer](#consumer).
-
-### Acknowledgment (ack)
-
-A message sent to a Pulsar broker by a [consumer](#consumer) that a message has been successfully processed.
-An acknowledgment (ack) is Pulsar's way of knowing that the message can be deleted from the system;
-if no acknowledgment, then the message will be retained until it's processed.
-
-### Negative Acknowledgment (nack)
-
-When an application fails to process a particular message, it can send a "negative ack" to Pulsar
-to signal that the message should be replayed at a later timer. (By default, failed messages are
-replayed after a 1-minute delay). Be aware that negative acknowledgment on ordered subscription types,
-such as Exclusive, Failover and Key_Shared, can cause failed messages to arrive to consumers out of the original order.
 
 ### Unacknowledged
 
