@@ -2,7 +2,7 @@
 id: getting-started-standalone
 title: Run a standalone Pulsar cluster locally
 sidebar_label: "Run Pulsar locally"
-description: Want to run Pulsar quickly? This section guides you through every step of running Pulsar in standalone mode on your machine. Come and give it a try!
+description: Get started with Apache Pulsar on your local machine.
 ---
 
 For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode runs all components inside a single Java Virtual Machine (JVM) process.
