@@ -2,6 +2,7 @@
 id: concepts-messaging
 title: Messaging
 sidebar_label: "Messaging"
+description: Apache Pulsar is built on the publish-subscribe pattern. Producers, messages, topics, brokers, and consumers together constitute this messaging system.
 ---
 
 ````mdx-code-block
@@ -10,9 +11,9 @@ import TabItem from '@theme/TabItem';
 ````
 
 
-Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) pattern (often abbreviated to pub-sub). In this pattern, [producers](#producers) publish messages to [topics](#topics); [consumers](#consumers) [subscribe](#subscription-types) to those topics, process incoming messages, and send [acknowledgments](#acknowledgment) to the broker when processing is finished.
+Pulsar is built on the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) pattern (often abbreviated to pub-sub). In this pattern, [producers](concepts-clients.md#producer) publish messages to [topics](#topics); [consumers](concepts-clients.md#consumer) [subscribe](#subscriptions) to those topics, process incoming messages, and send [acknowledgments](#acknowledgment) to the broker when processing is finished.
 
-![Pub-Sub](/assets/pub-sub-border.svg)
+![publish-subscribe pattern in Pulsar](/assets/pub-sub-border.svg)
 
 When a subscription is created, Pulsar [retains](concepts-architecture-overview.md#persistent-storage) all messages, even if the consumer is disconnected. The retained messages are discarded only when a consumer acknowledges that all these messages are processed successfully.
 
@@ -20,7 +21,7 @@ If the consumption of a message fails and you want this message to be consumed a
 
 ## Messages
 
-Messages are the basic "unit" of Pulsar. The following table lists the components of messages.
+Messages are the basic "unit" of Pulsar. They're what producers publish to topics and what consumers then consume from topics. The following table lists the components of messages.
 
 | Component            | Description                                                                                                                                                                                                                                                                                                                                                                                                                |
 |:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -55,14 +56,19 @@ The default max size of a message is 5 MB. You can configure the max size of a m
 
 ### Acknowledgment
 
-The consumer sends an acknowledgment request to the broker after it consumes a message successfully. Then, this consumed message will be permanently stored, and deleted only after all the subscriptions have acknowledged it. If you want to store the messages that have been acknowledged by a consumer, you need to configure the [message retention policy](concepts-messaging.md#message-retention-and-expiry).
+A message Acknowledgment is sent by the consumer to the broker after it consumes a message successfully. Then, this consumed message will be permanently stored, and deleted only after all the subscriptions have acknowledged it. An acknowledgment (ack) is Pulsar's way of knowing that the message can be deleted from the system. If you want to store the messages that have been acknowledged by a consumer, you need to configure the [message retention policy](concepts-messaging.md#message-retention-and-expiry).
 
 For batch messages, you can enable batch index acknowledgment to avoid dispatching acknowledged messages to the consumer. For details about batch index acknowledgment, see [batching](#batching).
 
 Messages can be acknowledged in one of the following two ways:
 
-- Being acknowledged individually. With individual acknowledgment, the consumer acknowledges each message and sends an acknowledgment request to the broker.
-- Being acknowledged cumulatively. With cumulative acknowledgment, the consumer **only** acknowledges the last message it received. All messages in the stream up to (and including) the provided message are not redelivered to that consumer.
+- Being acknowledged individually
+  
+With individual acknowledgment, the consumer acknowledges each message and sends an acknowledgment request to the broker.
+
+- Being acknowledged cumulatively
+  
+  With cumulative acknowledgment, the consumer **only** acknowledges the last message it received. All messages in the stream up to (and including) the provided message are not redelivered to that consumer.
 
 If you want to acknowledge messages individually, you can use the following API.
 
@@ -218,7 +224,7 @@ consumer.acknowledge(message);
 Retry letter topic allows you to store the messages that failed to be consumed and retry consuming them later. With this method, you can customize the interval at which the messages are redelivered. Consumers on the original topic are automatically subscribed to the retry letter topic as well. Once the maximum number of retries has been reached, the unconsumed messages are moved to a [dead letter topic](#dead-letter-topic) for manual processing. The functionality of a retry letter topic is implemented by consumers.
 
 The diagram below illustrates the concept of the retry letter topic.
-![](/assets/retry-letter-topic.svg)
+![The concept of the retry letter topic](/assets/retry-letter-topic.svg)
 
 The intention of using retry letter topic is different from using [delayed message delivery](#delayed-message-delivery), even though both are aiming to consume a message later. Retry letter topic serves failure handling through message redelivery to ensure critical data is not lost, while delayed message delivery is intended to deliver a message with a specified time delay.
 
@@ -389,9 +395,9 @@ client.newProducer()
 
 ### Batching
 
-When batching is enabled, the producer accumulates and sends a batch of messages in a single request. The batch size is defined by the maximum number of messages and the maximum publish latency. Therefore, the backlog size represents the total number of batches instead of the total number of messages.
+In Pulsar, batching means the producer accumulates and sends a batch of messages in a single request. The batch size is defined by the maximum number of messages and the maximum publish latency. Therefore, the backlog size represents the total number of batches instead of the total number of messages.
 
-![Batching](/assets/batching.svg)
+![Batching mechanism in Pulsar](/assets/batching.svg)
 
 In Pulsar, batches are tracked and stored as single units rather than as individual messages. Consumers unbundle a batch into individual messages. However, scheduled messages (configured through the `deliverAt` or the `deliverAfter` parameter) are always sent as individual messages even when batching is enabled.
 
@@ -435,13 +441,13 @@ With message chunking enabled, when the size of a message exceeds the allowed ma
 
 The following figure shows a topic with one producer that publishes a large message payload in chunked messages along with regular non-chunked messages. The producer publishes message M1 in three chunks labeled M1-C1, M1-C2 and M1-C3. The broker stores all the three chunked messages in the [managed ledger](concepts-architecture-overview.md#managed-ledgers) and dispatches them to the ordered (exclusive/failover) consumer in the same order. The consumer buffers all the chunked messages in memory until it receives all the chunked messages, aggregates them into one message and then hands over the original message M1 to the client.
 
-![](/assets/chunking-01.png)
+![How Broker stores chunked message when there is only one producer](/assets/chunking-01.png)
 
 #### Handle interwoven chunked messages with one ordered consumer
 
 When multiple producers publish chunked messages into a single topic, the broker stores all the chunked messages coming from different producers in the same [managed ledger](concepts-architecture-overview.md#managed-ledgers). The chunked messages in the managed ledger can be interwoven with each other. As shown below, Producer 1 publishes message M1 in three chunks M1-C1, M1-C2 and M1-C3. Producer 2 publishes message M2 in three chunks M2-C1, M2-C2 and M2-C3. All chunked messages of the specific message are still in order but might not be consecutive in the managed ledger.
 
-![](/assets/chunking-02.png)
+![How Broker stores chunked message when there are mutiple producers](/assets/chunking-02.png)
 
 :::note
 
@@ -464,7 +470,7 @@ If the consumer fails to receive all chunks of a message within a specified peri
 
 ## Topics
 
-As in other pub-sub systems, topics in Pulsar are named channels for transmitting messages from producers to consumers. Topic names are URLs that have a well-defined structure:
+A Pulsar topic is a unit of storage that organizes messages into a stream. As in other pub-sub systems, topics in Pulsar are named channels for transmitting messages from producers to consumers. Topic names are URLs that have a well-defined structure:
 
 ```http
 {persistent|non-persistent}://tenant/namespace/topic
@@ -486,13 +492,20 @@ If no tenant or namespace is specified when a client creates a topic, the topic 
 
 ## Namespaces
 
-A namespace is a logical nomenclature within a tenant. A tenant creates namespaces via the [admin API](admin-api-namespaces.md#create-namespaces). For instance, a tenant with different applications can create a separate namespace for each application. A namespace allows the application to create and manage a hierarchy of topics. The topic `my-tenant/app1` is a namespace for the application `app1` for `my-tenant`. You can create any number of [topics](#topics) under the namespace.
+Pulsar namespaces are logical groupings of topics. A namespace is a logical nomenclature within a tenant. A tenant creates namespaces via the [admin API](admin-api-namespaces.md#create-namespaces). For instance, a tenant with different applications can create a separate namespace for each application. A namespace allows the application to create and manage a hierarchy of topics. The topic `my-tenant/app1` is a namespace for the application `app1` for `my-tenant`. You can create any number of [topics](#topics) under the namespace.
 
 ## Subscriptions
 
-A subscription is a named configuration rule that determines how messages are delivered to consumers. Four subscription types are available in Pulsar: [exclusive](#exclusive), [shared](#shared), [failover](#failover), and [key_shared](#key_shared). These types are illustrated in the figure below.
+A Pulsar subscription is a lease on a topic established by a group of consumers, it is a named configuration rule that determines how messages are delivered to consumers. There are four available subscription types in Pulsar:
 
-![Subscription types](/assets/pulsar-subscription-types.png)
+- [exclusive](#exclusive)
+- [shared](#shared)
+- [failover](#failover)
+- [key_shared](#key_shared) 
+
+These types are illustrated in the figure below.
+
+![Four Subscription types in Pulsar](/assets/pulsar-subscription-types.png)
 
 :::tip
 
@@ -510,7 +523,7 @@ When a subscription has no consumers, its subscription type is undefined. The ty
 
 #### Exclusive
 
-In the *Exclusive* type, only a single consumer is allowed to attach to the subscription. If multiple consumers subscribe to a topic using the same subscription, an error occurs. Note that if the topic is partitioned, all partitions will be consumed by the single consumer allowed to be connected to the subscription.
+The Exclusive type is a subscription mode that only allows a single consumer to attach to the subscription. If multiple consumers subscribe to a topic using the same subscription, an error occurs. Note that if the topic is partitioned, all partitions will be consumed by the single consumer allowed to be connected to the subscription.
 
 In the diagram below, only **Consumer A** is allowed to consume messages.
 
@@ -520,11 +533,11 @@ Exclusive is the default subscription type.
 
 :::
 
-![Exclusive subscriptions](/assets/pulsar-exclusive-subscriptions.svg)
+![Pulsar Exclusive subscriptions](/assets/pulsar-exclusive-subscriptions.svg)
 
 #### Failover
 
-In the *Failover* type, multiple consumers can attach to the same subscription. 
+The Failover type is a subscription mode that multiple consumers can attach to the same subscription. 
 
 A master consumer is picked for a non-partitioned topic or each partition of a partitioned topic and receives messages. 
 
@@ -560,7 +573,7 @@ A consumer is selected by running a module operation `mod (partition index, cons
       
       - for P1: Consumer D is the active consumer and Consumer C is the stand-by consumer.
 
-  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-5.png)
+  ![Workflow of Pulsar Failover subscriptions when the number of partitions in a partitioned topic is less than the number of consumers](/assets/pulsar-failover-subscriptions-5.png)
 
 - If the number of partitions in a partitioned topic is **greater** than the number of consumers:
   
@@ -572,7 +585,7 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   - P2, P5, and P8 are assigned to Consumer C. Consumer C is their active consumer. Consumer A and Consumer B are their stand-by consumers.
   
-  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-1.svg)
+  ![Workflow of Pulsar Failover subscriptions when the number of partitions in a partitioned topic is greater than the number of consumers](/assets/pulsar-failover-subscriptions-1.svg)
 
 ##### Failover | Non-partitioned topics
 
@@ -584,7 +597,7 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   Consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
 
-  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-2.svg)
+  ![Workflow of Pulsar Failover subscriptions when there is one non-partitioned topic](/assets/pulsar-failover-subscriptions-2.svg)
 
 - If there are multiple non-partitioned topics, a consumer is selected based on **consumer name hash** and **topic name hash**. The client uses the same consumer name to subscribe to all the topics.
 
@@ -594,11 +607,11 @@ A consumer is selected by running a module operation `mod (partition index, cons
   
   - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A. Consumer B is their stand-by consumer.
 
-  ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
+  ![Workflow of Pulsar Failover subscriptions when there are multiple non-partitioned topics](/assets/pulsar-failover-subscriptions-3.svg)
 
 #### Shared
 
-In *shared* or *round robin* type, multiple consumers can attach to the same subscription. Messages are delivered in a round-robin distribution across consumers, and any given message is delivered to only one consumer. When a consumer disconnects, all the messages that were sent to it and not acknowledged will be rescheduled for sending to the remaining consumers.
+The Pulsar Shared subscriptions allow multiple consumers attach to the same subscription. Messages are delivered in a round-robin distribution across consumers, and any given message is delivered to only one consumer. When a consumer disconnects, all the messages that were sent to it and not acknowledged will be rescheduled for sending to the remaining consumers.
 
 In the diagram below, **Consumer A**, **Consumer B** and **Consumer C** are all able to subscribe to the topic.
 
@@ -608,13 +621,13 @@ Shared subscriptions do not guarantee message ordering or support cumulative ack
 
 :::
 
-![Shared subscriptions](/assets/pulsar-shared-subscriptions.svg)
+![Pulsar Shared subscriptions](/assets/pulsar-shared-subscriptions.svg)
 
 #### Key_Shared
 
-In the *Key_Shared* type, multiple consumers can attach to the same subscription. Messages are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
+The Pulsar Key_Shared subscriptions allow multiple consumers attach to the same subscription. But different with the Shared type, messages in Key_Shared type are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
 
-![Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
+![Pulsar Key_Shared subscriptions](/assets/pulsar-key-shared-subscriptions.svg)
 
 :::note
 
@@ -628,7 +641,13 @@ For example, if P0 is assigned to Consumer A. Consumer A is the active consumer 
 
 :::
 
-There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key): Sticky, Auto-split Hash Range, and Auto-split Consistent Hashing. The steps for all algorithms are:
+There are three types of mapping algorithms dictating how to select a consumer for a given message key (or ordering key):
+
+- Auto-split Hash Range
+- Auto-split Consistent Hashing
+- Sticky
+
+The steps for all mapping algorithms are:
 1. The message key (or ordering key) is passed to a hash function (e.g., Murmur3 32-bit), yielding a 32-bit integer hash.
 2. That hash number is fed to the algorithm to select a consumer from the existing connected consumers.
 
@@ -643,7 +662,7 @@ When a new consumer is connected and thus added to the list of connected consume
 
 ##### Auto-split Hash Range
 
-The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped into a single region in this range, so all mapped regions cover the entire range, and no regions overlap. A consumer is selected for a given key by running a modulo operation on the message hash by the range size (65,536). The number received ( 0 <= i < 65,536) is contained within a single region. The consumer mapped to that region is the one selected.
+Auto-split Hash Range assumes each consumer is mapped into a single region in a range of numbers between 0 to 2^16 (65,536). So all mapped regions cover the entire range, and no regions overlap. A consumer is selected for a given key by running a modulo operation on the message hash by the range size (65,536). The number received ( 0 <= i < 65,536) is contained within a single region. The consumer mapped to that region is the one selected.
 
 Example:
 
@@ -690,7 +709,7 @@ The advantages of this algorithm is that it affects only a single existing consu
 
 ##### Auto-split Consistent Hashing
 
-This algorithm uses a Hash Ring. It's a range of number from 0 to MAX_INT (32-bit) in which if you traverse the range, when reaching MAX_INT, the next number would be zero. It is as if you took a line starting from 0 ending at MAX_INT and bent into a circle such that the end glues to the start:
+Auto-split Consistent Hashing assumes each consumer is mapped into a Hash Ring. It's a range of number from 0 to MAX_INT (32-bit) in which if you traverse the range, when reaching MAX_INT, the next number would be zero. It is as if you took a line starting from 0 ending at MAX_INT and bent into a circle such that the end glues to the start:
 
 ```
  MAX_INT -----++--------- 0
@@ -740,7 +759,8 @@ When a consumer is added, we add 100 marking points to the circle as explained b
 
 ##### Sticky
 
-The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped to a multiple regions in this range and there is no overlap between regions. The consumer is selected by running a modulo operation on the message hash by the range size (65,536), the number received (0 <= i < 65,536), is contained within a single region. The consumer mapped to the region is the one selected.
+Sticky assumes each consumer is mapped to a multiple regions in a range of numbers between 0 to 2^16 (65,536) and there is no overlap between regions. The consumer is selected by running a modulo operation on the message hash by the range size (65,536), the number received (0 <= i < 65,536), is contained within a single region. The consumer mapped to the region is the one selected.
+
 In this algorithm you have full control. Every newly added consumer specifies the ranges it wishes to be mapped to by using Consumer API. When the consumer object is constructed, you can specify the list of ranges. It's your responsibility to make sure there are no overlaps and all the range is covered by regions.
 
 Example:
@@ -759,9 +779,9 @@ Given a message key `Order-3459134`, it's hash would be `murmur32("Order-3459134
 
 If the newly connected consumer didn't supply their ranges, or they overlap with existing consumer ranges, it's disconnected, removed from the consumers list and reverted as if it never tried to connect.
 
-##### How to use them?
+##### How to use mapping algorithms?
 
-When building the consumer, you can specify the Key Shared Mode:
+To use a mapping algorithm mentioned above, you can specify the Key Shared Mode when building the consumer:
 * AUTO_SPLIT - Auto-split Hash Range
 * STICKY - Sticky
 
@@ -836,7 +856,7 @@ When you use Key_Shared subscriptions, be aware that:
 
 #### What is a subscription mode
 
-The subscription mode indicates the cursor type.
+The subscription mode indicates the cursor belongs to durable type or non-durable type.
 
 - When a subscription is created, an associated cursor is created to record the last consumed position.
 
@@ -941,13 +961,13 @@ For code examples, see [Java](client-libraries-java.md#multi-topic-subscriptions
 
 ## Partitioned topics
 
-Normal topics are served only by a single broker, which limits the maximum throughput of the topic. *Partitioned topics* are a special type of topic handled by multiple brokers, thus allowing for higher throughput.
+Normal topics are served only by a single broker, which limits the maximum throughput of the topic. Partitioned topic is a special type of topic handled by multiple brokers, thus allowing for higher throughput.
 
 A partitioned topic is implemented as N internal topics, where N is the number of partitions. When publishing messages to a partitioned topic, each message is routed to one of several brokers. The distribution of partitions across brokers is handled automatically by Pulsar.
 
 The diagram below illustrates this:
 
-![](/assets/partitioning.png)
+![How Pulsar handles the distribution of partitions across brokers](/assets/partitioning.png)
 
 The **Topic1** topic has five partitions (**P0** through **P4**) split across three brokers. Because there are more partitions than brokers, two brokers handle two partitions a piece, while the third handles only one (again, Pulsar handles this distribution of partitions automatically).
 
@@ -961,7 +981,7 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 ### Routing modes
 
-When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines which partition---that is, which internal topic---each message should be published to.
+When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines each message should be published to which partition or which internal topic.
 
 There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
@@ -984,9 +1004,13 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[Hashing Scheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
-There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
+There are 2 types of standard hashing functions available: 
+
+- JavaStringHash
+- Murmur3_32Hash
+
 The default hashing function for producers is `JavaStringHash`.
 Please pay attention that `JavaStringHash` is not useful when producers can be from different multiple language clients, under this use case, it is recommended to use `Murmur3_32Hash`.
 
@@ -996,7 +1020,7 @@ Please pay attention that `JavaStringHash` is not useful when producers can be f
 
 By default, Pulsar persistently stores *all* unacknowledged messages on multiple [BookKeeper](concepts-architecture-overview.md#persistent-storage) bookies (storage nodes). Data for messages on persistent topics can thus survive broker restarts and subscriber failover.
 
-Pulsar also, however, supports **non-persistent topics**, which are topics on which messages are *never* persisted to disk and live only in memory. When using non-persistent delivery, killing a Pulsar broker or disconnecting a subscriber to a topic means that all in-transit messages are lost on that (non-persistent) topic, meaning that clients may see message loss.
+Pulsar also, however, supports **non-persistent topics**. Non-persistent topics are Pulsar topics in which message data is *never* [persistently stored](concepts-architecture-overview.md#persistent-storage) to disk and kept only in memory. When using non-persistent delivery, killing a Pulsar broker or disconnecting a subscriber to a topic means that all in-transit messages are lost on that (non-persistent) topic, meaning that clients may see message loss.
 
 Non-persistent topics have names of this form (note the `non-persistent` in the name):
 
@@ -1016,7 +1040,7 @@ Currently, non-persistent topics which are not partitioned are not persisted to 
 
 ### Performance
 
-Non-persistent messaging is usually faster than persistent messaging because brokers don't persist messages and immediately send acks back to the producer as soon as that message is delivered to connected brokers. Producers thus see comparatively low publish latency with non-persistent topic.
+With persistent topics, all messages are durably persisted on disks, whereas with non-persistent topics, brokers don't persist messages and immediately send acks back to the producer as soon as that message is delivered to connected brokers, so Non-persistent messaging is usually faster than persistent messaging. Producers thus see comparatively low publish latency with non-persistent topic.
 
 ### Client API
 
@@ -1084,7 +1108,7 @@ Apache Pulsar supports graceful failure handling and ensures critical data is no
 - Consumers get disconnected from the database or the HTTP server. When this happens, the database is temporarily offline while the consumer is writing the data to it and the external HTTP server that the consumer calls are momentarily unavailable.
 - Consumers get disconnected from a broker due to consumer crashes, broken connections, etc. As a consequence, unacknowledged messages are delivered to other available consumers.
 
-Apache Pulsar avoids these and other message delivery failures using at-least-once delivery semantics that ensure Pulsar processes a message more than once.
+Message redelivery in Apache Pulsar avoids these and other message delivery failures using at-least-once delivery semantics that ensure Pulsar processes a message more than once.
 
 To utilize message redelivery, you need to enable this mechanism before the broker can resend the unacknowledged messages in Apache Pulsar client. You can activate the message redelivery mechanism in Apache Pulsar using three methods.
 
@@ -1119,7 +1143,7 @@ With message expiry, shown at the bottom, some messages are deleted, even though
 
 ## Message deduplication
 
-Message duplication occurs when a message is [persisted](concepts-architecture-overview.md#persistent-storage) by Pulsar more than once. Message deduplication is an optional Pulsar feature that prevents unnecessary message duplication by processing each message only once, even if the message is received more than once.
+Message duplication occurs when a message is [persisted](concepts-architecture-overview.md#persistent-storage) by Pulsar more than once. Message deduplication ensures that each message produced on Pulsar topics is persisted to disk only once, even if the message is produced more than once. Message deduplication is handled automatically on the server side.
 
 The following diagram illustrates what happens when message deduplication is disabled vs. enabled:
 
@@ -1138,7 +1162,7 @@ In the second scenario at the bottom, the producer publishes message 1, which is
 
 ### Producer idempotency
 
-The other available approach to message deduplication is to ensure that each message is *only produced once*. This approach is typically called **producer idempotency**. The drawback of this approach is that it defers the work of message deduplication to the application. In Pulsar, this is handled at the [broker](reference-terminology.md#broker) level, so you do not need to modify your Pulsar client code. Instead, you only need to make administrative changes. For details, see [Managing message deduplication](cookbooks-deduplication.md).
+The other available approach is typically called **producer idempotency**, that is, each message is *only produced once* without data loss and duplicatuion. The drawback of this approach is that it defers the work of message deduplication to the application. In Pulsar, this is handled at the [broker](reference-terminology.md#broker) level, so you do not need to modify your Pulsar client code. Instead, you only need to make administrative changes. For details, see [Managing message deduplication](cookbooks-deduplication.md).
 
 ### Deduplication and effectively-once semantics
 
