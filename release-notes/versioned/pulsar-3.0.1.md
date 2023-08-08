@@ -18,8 +18,8 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Broker] Make ExtensibleLoadManagerImpl's broker filter pure async by @Demogorgon314 in [#20666](https://github.com/apache/pulsar/pull/20666)
 - [Broker] Fix the publish latency spike from the contention of MessageDeduplication by @codelipenghui in [#20647](https://github.com/apache/pulsar/pull/20647)
 - [Broker] Fix get owned service units NPE by @Demogorgon314 in [#20625](https://github.com/apache/pulsar/pull/20625)
-- [Broker] Topic policy can not be work well if replay policy message has any exception. by @zhanghaou in [#20613](https://github.com/apache/pulsar/pull/20613)
-- [Broker] Fix the publish latency spike issue with large number of producers by @codelipenghui in [#20607](https://github.com/apache/pulsar/pull/20607)
+- [Broker] Topic policy can not work well if replay policy message has any exception. by @zhanghaou in [#20613](https://github.com/apache/pulsar/pull/20613)
+- [Broker] Fix the publish latency spike issue with a large number of producers by @codelipenghui in [#20607](https://github.com/apache/pulsar/pull/20607)
 - [Broker] New load balancer system topic should not be auto-created now by @heesung-sn in [#20566](https://github.com/apache/pulsar/pull/20566)
 - [Broker] Handle get owned namespaces admin API in ExtensibleLoadManager by @Demogorgon314 in [#20552](https://github.com/apache/pulsar/pull/20552)
 - [Broker] Handle heartbeat namespace in ExtensibleLoadManager by @Demogorgon314 in [#20551](https://github.com/apache/pulsar/pull/20551)
@@ -40,11 +40,11 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Broker] Fix broker load manager class filter NPE by @Demogorgon314 in [#20350](https://github.com/apache/pulsar/pull/20350)
 - [Broker] In Key_Shared mode: remove unnecessary mechanisms of message skip to avoid unnecessary consumption stuck by @poorbarcode in [#20335](https://github.com/apache/pulsar/pull/20335)
 - [Broker] When creating a namespace anti-affinity group with the default local policies, use the bundle size supplied by the user. by @syk-coder in [#20327](https://github.com/apache/pulsar/pull/20327)
-- [Broker] Fix skip message API when hole messages exists by @crossoverJie in [#20326](https://github.com/apache/pulsar/pull/20326)
-- [Broker] Gracefully shut down load balancer extension by @heesung-sn in [#20315](https://github.com/apache/pulsar/pull/20315)
+- [Broker] Fix skip message API when hole messages exist by @crossoverJie in [#20326](https://github.com/apache/pulsar/pull/20326)
+- [Broker] Gracefully shut download balancer extension by @heesung-sn in [#20315](https://github.com/apache/pulsar/pull/20315)
 - [Broker] Fix class name typo `PrecisPublishLimiter` to "Precise" by @JooHyukKim in [#20310](https://github.com/apache/pulsar/pull/20310)
 - [Broker] Allow Access to System Topic Metadata for Reader Creation Post-Namespace Deletion by @liangyepianzhou in [#20304](https://github.com/apache/pulsar/pull/20304)
-- [Broker] Fix NPE cause by topic publish rate limiter. by @dragonls in [#20302](https://github.com/apache/pulsar/pull/20302)
+- [Broker] Fix NPE caused by topic publish rate limiter. by @dragonls in [#20302](https://github.com/apache/pulsar/pull/20302)
 - [Broker] Fix `UnsupportedOperationException` when update topic properties. by @liangyepianzhou in [#20261](https://github.com/apache/pulsar/pull/20261)
 - [Broker] Fix ledger cachemiss size metric by @AnonHxy in [#20257](https://github.com/apache/pulsar/pull/20257)
 - [Broker] Fix default bundle size used while setting bookie affinity by @syk-coder in [#20250](https://github.com/apache/pulsar/pull/20250)
@@ -52,7 +52,7 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Broker] Fix Return value of getPartitionedStats doesn't contain subscription type by @1Jack2 in [#20210](https://github.com/apache/pulsar/pull/20210)
 - [Broker] Skip split bundle if only one broker by @poorbarcode in [#20190](https://github.com/apache/pulsar/pull/20190)
 - [Broker] Fix `RoaringBitmap.contains` can't check value 65535 by @coderzc in [#20176](https://github.com/apache/pulsar/pull/20176)
-- [Broker] Release EntryBuffer after parse proto object by @coderzc in [#20170](https://github.com/apache/pulsar/pull/20170)
+- [Broker] Release EntryBuffer after parsing proto object by @coderzc in [#20170](https://github.com/apache/pulsar/pull/20170)
 - [Broker] Remove useless field in the DelayedMessageIndexBucketSegment.proto by @coderzc in [#20166](https://github.com/apache/pulsar/pull/20166)
 - [Broker] Optimization protobuf code in the bucket delayed tracker by @coderzc in [#20158](https://github.com/apache/pulsar/pull/20158)
 - [Broker] Move bitmap from lastMutableBucket to ImmutableBucket by @coderzc in [#20156](https://github.com/apache/pulsar/pull/20156)
@@ -111,12 +111,12 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Pulsar Admin] Fast fix infinite HTTP call getSubscriptions caused by wrong topicName by @poorbarcode in [#20131](https://github.com/apache/pulsar/pull/20131)
 - [Pulsar Admin] Report earliest msg in partitioned backlog by @teabot in [#19465](https://github.com/apache/pulsar/pull/19465)
 - [Pulsar CLI] The variable producerName of BatchMsgContainer is null by @poorbarcode in [#20819](https://github.com/apache/pulsar/pull/20819)
-- [Pulsar CLI] Allow pulser-client consume create a replicated subscription by @JooHyukKim in [#20316](https://github.com/apache/pulsar/pull/20316)
+- [Pulsar CLI] Allow pulser-client consume to create a replicated subscription by @JooHyukKim in [#20316](https://github.com/apache/pulsar/pull/20316)
 - [Pulsar CLI] Fix logging noise while admin tool exit by @rdhabalia in [#19884](https://github.com/apache/pulsar/pull/19884)
-- [Client Tool] PerformanceProducer do not produce expected number of messages. by @thetumbled in [#19775](https://github.com/apache/pulsar/pull/19775)
+- [Client Tool] PerformanceProducer does not produce the expected number of messages. by @thetumbled in [#19775](https://github.com/apache/pulsar/pull/19775)
 
 ### Others
-- [Schema] Add admin cli for testCompatibility by @congbobo184 in [#19974](https://github.com/apache/pulsar/pull/19974)
+- [Schema] Add admin CLI for testCompatibility by @congbobo184 in [#19974](https://github.com/apache/pulsar/pull/19974)
 
 ### Library updates
 - Upgrade PyYaml version to 6.0.1 by @yaalsn in [#20831](https://github.com/apache/pulsar/pull/20831)
@@ -128,4 +128,4 @@ sidebar_label: Apache Pulsar 3.0.1
 - Upgrade sqlite-jdbc to resolve CVE-2023-32697 by @lhotari in [#20411](https://github.com/apache/pulsar/pull/20411)
 - Upgrade Guava to 32.0.0 to address CVE-2023-2976 by @lhotari in [#20459](https://github.com/apache/pulsar/pull/20459)
 
-For the complete changelog, please check: https://github.com/apache/pulsar/pulls?q=is%3Apr+label%3Arelease%2F3.0.1+
+For the complete list, check the [Pulsar 3.0.1 changelog](https://github.com/apache/pulsar/pulls?q=is%3Apr+label%3Arelease%2F3.0.1+).
