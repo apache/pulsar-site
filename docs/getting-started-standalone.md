@@ -13,7 +13,7 @@ If you're looking to run a full production Pulsar installation, see the [Deployi
 
 :::
 
-To run Pulsar in standalone mode on your machine:
+To run Pulsar in standalone mode on your machine, follow the steps below.
 
 ## Step 0: Prerequisites
 

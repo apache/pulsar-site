@@ -21,7 +21,7 @@ For the following steps, step 2 and step 3 are for **developers** and step 4 and
 
 :::
 
-To run Pulsar with Helm on Kubernetes:
+To run Pulsar with Helm on Kubernetes, follow the steps below.
 
 ## Step 0: Prepare a Kubernetes cluster
 
