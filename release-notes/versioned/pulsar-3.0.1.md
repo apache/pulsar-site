@@ -73,7 +73,7 @@ sidebar_label: Apache Pulsar 3.0.1
 - [Broker] Support cgroup v2 by using `jdk.internal.platform.Metrics` in Pulsar Loadbalancer by @coderzc in [#16832](https://github.com/apache/pulsar/pull/16832)
 
 ## Clients
-- [Client] Fix deadlock issue of consumer while using multiple IO threads by @codelipenghui in [#20669](https://github.com/apache/pulsar/pull/20669)
+- [Client] Fix the deadlock issue of consumers while using multiple IO threads by @codelipenghui in [#20669](https://github.com/apache/pulsar/pull/20669)
 - [Client] Make the whole grabCnx() progress atomic by @BewareMyPower in [#20595](https://github.com/apache/pulsar/pull/20595)
 - [Client] Thread-safe seek by @tisonkun in [#20321](https://github.com/apache/pulsar/pull/20321)
 - [Client] Fix  where the function getMsgNumInReceiverQueue always returns 0 when using message listener by @crossoverJie in [#20245](https://github.com/apache/pulsar/pull/20245)
