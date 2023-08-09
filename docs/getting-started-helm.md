@@ -2,15 +2,10 @@
 id: getting-started-helm
 title: Run a standalone Pulsar cluster in Kubernetes
 sidebar_label: "Run Pulsar in Kubernetes"
+description: Get started with Apache Pulsar on your local machine using Kubernetes.
 ---
 
-This section guides you through every step of installing and running Apache Pulsar with Helm on Kubernetes quickly, including the following sections:
-
-- Install the Apache Pulsar on Kubernetes using Helm
-- Start and stop Apache Pulsar
-- Create topics using `pulsar-admin`
-- Produce and consume messages using Pulsar clients
-- Monitor Apache Pulsar status with Prometheus and Grafana
+This section guides you through every step of installing and running Apache Pulsar with Helm on Kubernetes quickly.
 
 For deploying a Pulsar cluster for production usage, read the documentation on [how to configure and install a Pulsar Helm chart](helm-deploy.md).
 
@@ -25,6 +20,8 @@ For deploying a Pulsar cluster for production usage, read the documentation on [
 For the following steps, step 2 and step 3 are for **developers** and step 4 and step 5 are for **administrators**.
 
 :::
+
+To run Pulsar with Helm on Kubernetes, follow the steps below.
 
 ## Step 0: Prepare a Kubernetes cluster
 
