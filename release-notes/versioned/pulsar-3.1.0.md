@@ -260,10 +260,28 @@ sidebar_label: Apache Pulsar 3.1.0
 - Upgrade Kotlin version from 1.4.32 to 1.8.20. (targeted for master) [#20114](https://github.com/apache/pulsar/pull/20114)
 
 ### Documentation
-
-
-Here are the most noteworthy changes in this release.
-
+- [feat][doc] add overview for broker load balancing [#621](https://github.com/apache/pulsar-site/pull/621)
+- [feat][doc] add concepts for broker load balancing [#644](https://github.com/apache/pulsar-site/pull/644)
+- [feat][doc] add use cases + features + benefits + types for broker load balancing [#652](https://github.com/apache/pulsar-site/pull/652)
+- [feat][doc] add Quick Start for broker load balancing [#660](https://github.com/apache/pulsar-site/pull/660)
+- [feat][doc] add migration tutorials for broker load balancing [#657](https://github.com/apache/pulsar-site/pull/657)
+- [feat][doc] add metrics for broker load balancing [#646](https://github.com/apache/pulsar-site/pull/646)
+- [feat][doc] add configurations for broker load balancing [#661](https://github.com/apache/pulsar-site/pull/661)
+- [feat][doc] add development docs for broker load balancing [#662](https://github.com/apache/pulsar-site/pull/662)
+- [improve][doc] clarify detailed behaviors for failover subscription type [#633](https://github.com/apache/pulsar-site/pull/633/files)
+- [improve][doc] add docs for supporting reading config options from files in Python runner [#544](https://github.com/apache/pulsar-site/pull/544)
+- [improve][doc] add solutions for debezium-source-mysql connection errors [#649](https://github.com/apache/pulsar-site/pull/649)
+- [feat][doc] add docs for OpenID Connect Auth Provider [#555](https://github.com/apache/pulsar-site/pull/555)
+- [feat][doc] add docs for openIDKeyIdCacheMissRefreshSeconds setting [#580](https://github.com/apache/pulsar-site/pull/580)
+- [feat][doc] add docs for KubernetesServiceAccountTokenAuthProvider [#570](https://github.com/apache/pulsar-site/pull/570/)
+- [feat][doc] add client matrix page [#513](https://github.com/apache/pulsar-site/pull/513)
+- [feature][doc] add docs for client memory limits [#571](https://github.com/apache/pulsar-site/pull/571)
+- [feature][doc] add docs for CPP client table view [#565](https://github.com/apache/pulsar-site/pull/565)
+- [improve] [doc] add compatibility reminders for retry queues [#651](https://github.com/apache/pulsar-site/pull/651)
+- [feat][doc] add docs for JVM metrics in Pulsar broker [#567](https://github.com/apache/pulsar-site/pull/567)
+- [feat][doc] add docs for bucket delayed message tracker metrics [#564](https://github.com/apache/pulsar-site/pull/564)
+- [fix][doc] exclude outdated versions of API documentation from search engine results [#623](https://github.com/apache/pulsar-site/pull/623)
+- [feat][website] implement 'How does Pulsar work' homepage screen [#614](https://github.com/apache/pulsar-site/pull/614)
 
 
 For the complete list, including all features, enhancements, and bug fixes, check out the following resources.
