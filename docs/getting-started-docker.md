@@ -2,25 +2,102 @@
 id: getting-started-docker
 title: Run a standalone Pulsar cluster in Docker
 sidebar_label: "Run Pulsar in Docker"
+description: Get started with Apache Pulsar on your local machine using Docker.
 ---
+
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
 
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
 If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
 
-## Start Pulsar in Docker
+To run Pulsar in Docker, follow the steps below.
+
+## Step1: Start Pulsar in Docker
 
 For macOS, Linux, and Windows, run the following command to start Pulsar within a Docker container.
 
+````mdx-code-block
+<Tabs groupId="os-choice"
+  defaultValue="macOS & Linux"
+  values={[{"label":"macOS & Linux","value":"macOS & Linux"},{"label":"Windows","value":"Windows"}]}>
+
+<TabItem value="macOS & Linux">
+
 ```shell
-docker run -it -p 6650:6650 -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
+-p 6650:6650 \
+-p 8080:8080 \
+--mount source=pulsardata,target=/pulsar/data \
+--mount source=pulsarconf,target=/pulsar/conf \
+apachepulsar/pulsar:@pulsar:version@ \
+bin/pulsar standalone
 ```
+
+</TabItem>
+
+<TabItem value="Windows">
+
+```shell
+docker run -it ^
+-p 6650:6650 ^
+-p 8080:8080 ^
+--mount source=pulsardata,target=/pulsar/data ^
+--mount source=pulsarconf,target=/pulsar/conf ^
+apachepulsar/pulsar:@pulsar:version@ ^
+bin/pulsar standalone
+```
+
+</TabItem>
+
+</Tabs>
+````
 
 If you want to change Pulsar configurations and start Pulsar, run the following command by passing environment variables with the `PULSAR_PREFIX_` prefix. See [default configuration file](https://github.com/apache/pulsar/blob/e6b12c64b043903eb5ff2dc5186fe8030f157cfc/conf/standalone.conf) for more details.
 
+````mdx-code-block
+<Tabs groupId="os-choice"
+  defaultValue="macOS & Linux"
+  values={[{"label":"macOS & Linux","value":"macOS & Linux"},{"label":"Windows","value":"Windows"}]}>
+
+<TabItem value="macOS & Linux">
+
 ```shell
-docker run -it -e PULSAR_PREFIX_xxx=yyy -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:2.10.0 sh -c "bin/apply-config-from-env.py conf/standalone.conf && bin/pulsar standalone"
+docker run -it \
+-e PULSAR_PREFIX_xxx=yyy \
+-p 6650:6650  \
+-p 8080:8080 \
+--mount source=pulsardata,target=/pulsar/data \
+--mount source=pulsarconf,target=/pulsar/conf \
+apachepulsar/pulsar:2.10.0 sh \
+-c "bin/apply-config-from-env.py \
+conf/standalone.conf && \
+bin/pulsar standalone"
 ```
+
+</TabItem>
+
+<TabItem value="Windows">
+
+```shell
+docker run -it ^
+-e PULSAR_PREFIX_xxx=yyy ^
+-p 6650:6650  ^
+-p 8080:8080 ^
+--mount source=pulsardata,target=/pulsar/data ^
+--mount source=pulsarconf,target=/pulsar/conf ^
+apachepulsar/pulsar:2.10.0 sh ^
+-c "bin/apply-config-from-env.py ^
+conf/standalone.conf && ^
+bin/pulsar standalone"
+```
+
+</TabItem>
+
+</Tabs>
+````
 
 :::tip
 
@@ -46,7 +123,7 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 :::
 
-## Use Pulsar in Docker
+## Step 2: Use Pulsar in Docker
 
 Pulsar offers a variety of [client libraries](client-libraries.md), such as [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md).
 
@@ -96,7 +173,7 @@ for i in range(10):
 client.close()
 ```
 
-## Get the topic statistics
+## Step 3: Get the topic statistics
 
 In Pulsar, you can use REST API, Java, or command-line tools to control every aspect of the system. For details on APIs, refer to [Admin API Overview](admin-api-overview.md).
 

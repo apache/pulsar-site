@@ -2,9 +2,12 @@
 id: getting-started-docker-compose
 title: Run a Pulsar cluster locally with Docker Compose
 sidebar_label: "Run Pulsar locally with Docker Compose"
+description: Get started with Apache Pulsar on your local machine using Docker Compose.
 ---
 
-## Configure the `compose.yml` template
+To run Pulsar loccally with Docker Compose, follow the steps below.
+
+## Step 1: Configure the `compose.yml` template
 
 To get up and run a Pulsar cluster quickly, you can use the following template to create a `compose.yml` file by modifying or adding the configurations in the **environment** section.
 
@@ -108,13 +111,15 @@ services:
     command: bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
 
-## Create a Pulsar cluster
+## Step 2: Create a Pulsar cluster
 
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 
 ```bash
 docker compose up -d
 ```
+
+## Step 3: Destroy the Pulsar cluster
 
 If you want to destroy the Pulsar cluster with all the containers, run the following command. It will also delete the network that the containers are connected to.
 

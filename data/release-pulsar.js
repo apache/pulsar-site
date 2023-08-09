@@ -1,5 +1,14 @@
 module.exports = [
     {
+      "author": "RobertIndie",
+      "tagName": "v3.0.1",
+      "publishedAt": "2023-08-07T15:00:00Z",
+      "vtag": "3.0.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-3.0.1/",
+      "doc": "/docs/3.0.x",
+      "version": "v3.0.x"
+    },
+    {
         "author": "RobertIndie",
         "tagName": "v3.0.0",
         "publishedAt": "2023-05-02T16:37:40Z",
