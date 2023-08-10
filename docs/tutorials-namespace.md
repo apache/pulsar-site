@@ -5,9 +5,7 @@ sidebar_label: "Create a namespace"
 ---
 
 
-Pulsar namespaces are logical groupings of topics.
-
-Namespaces can be managed via:
+[Namespaces](concepts-messaging.md#namespaces) can be managed via:
 
 - The namespaces command of the pulsar-admin tool
 - The /admin/v2/namespaces endpoint of the admin {@inject: rest:REST:/} API
