@@ -7,11 +7,12 @@ sidebar_label: Apache Pulsar 3.1.0
 #### 2023-08-10
 
 ### Important notice
--
+- Fix the reason label of authentication metrics [#20030](https://github.com/apache/pulsar/pull/20504)
 
 ### PIPs
-- PIP-275:Introduce topicOrderedExecutorThreadNum to deprecate numWorkerThreadsForNonPersistentTopic [#20504](https://github.com/apache/pulsar/pull/20504)
-- PIP-255 Part-2: Make the partition assignment strategy pluggable [#20537](https://github.com/apache/pulsar/pull/20537)
+- PIP-275: Introduce topicOrderedExecutorThreadNum to deprecate numWorkerThreadsForNonPersistentTopic [#20504](https://github.com/apache/pulsar/pull/20504)
+- PIP-255: Make the partition assignment strategy pluggable [#20537](https://github.com/apache/pulsar/pull/20537)
+- PIP-278: Support pluggable topic compaction service [#20624](https://github.com/apache/pulsar/pull/20624)
 
 ### Broker
 - Fix MessageDeduplication throw NPE when enabling broker deduplication and disabling namespace deduplication [#20905](https://github.com/apache/pulsar/pull/20905)
