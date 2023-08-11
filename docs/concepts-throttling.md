@@ -2,6 +2,7 @@
 id: concepts-throttling
 title: Message dispatch throttling
 sidebar_label: "Message throttling"
+description: Get a comprehensive understanding of message dispatch throttling in Pulsar.
 ---
 
 ## Overview
@@ -12,9 +13,9 @@ Large message payloads can cause memory usage spikes that lead to performance de
 
 For example, when you configure the dispatch rate limit to 10 messages per second, then the number of messages that can be delivered to the client per second is up to 10.
 
-![Rate-limit dispatch throttling](/assets/throttling-dispatch.svg 'message throttling')
+![Rate-limit dispatch throttling in Pulsar](/assets/throttling-dispatch.svg 'message throttling')
 
-### Why use it?
+### Why use message dispatch throttling?
 
 Message dispatch throttling brings the following benefits in detail:
 
@@ -30,7 +31,7 @@ Message dispatch throttling brings the following benefits in detail:
 
   When there is a large backlog of messages to consume, clients may receive a large amount of data in a short period of time, which monopolizes their computing resources. Since the client has no mechanisms to proactively limit the consumption rate, using the message dispatch throttling feature can also regulate the allocation of the client's hardware resources.
 
-### How it works?
+### How message dispatch throttling works?
 
 The process of message dispatch throttling can be divided into the following steps:
 1. The broker approximates the number of entries to read from the bookies by calculating the remaining quota.
@@ -48,7 +49,7 @@ The process of message dispatch throttling can be divided into the following ste
 
 ### Throttling levels
 
-The following table outlines the three levels that you can throttle message dispatch.
+Configuring throttling levels allows you to throttle message dispatch rate limits at multiple levels. The following table outlines the three throttling levels.
 
 Level | Description
 :-----|:------------
@@ -64,7 +65,7 @@ The dispatch rate limits configured at multiple levels take effect simultaneousl
 
 ### Throttling approaches
 
-The following table outlines multiple approaches to configure the dispatch rate limits at different levels.
+The following table outlines multiple throttling approaches to configure the dispatch rate limits at different levels.
 
 Approach | Per cluster | Per topic | Per subscription
 :--------|:------------|:----------|:----------------
@@ -100,7 +101,7 @@ dispatchThrottlingOnNonBacklogConsumerEnabled | Whether the dispatch throttling 
 
 :::
 
-## Limitations
+## Limitations of message dispatch throttling
 
 Message dispatch throttling may cause messages over-delivered per unit of time due to the following reasons:
 
@@ -124,7 +125,7 @@ Message dispatch throttling may cause messages over-delivered per unit of time d
 
      The broker uses the average publish size in preference to the average dispatch size. If the average publish size is unavailable, then it uses the average dispatch size. When none of the two metrics are available, the broker only reads one entry at the first attempt.
 
-   **b) The number of messages delivered to the client may exceed the configured threshold.**
+   b) **The number of messages delivered to the client may exceed the configured threshold.**
 
      When you set the dispatch rate limit in message-count/throttling-period (`dispatchThrottlingRateInMsg`/`ratePeriodInSecond`) and batching (`batch-send`) is enabled, the broker counts an entry as one message (despite the message count per entry) and calculates $$the \ number \ of \ entries \ to \ read \ from \ bookies$$ through the following equation:
 
@@ -162,6 +163,6 @@ Message dispatch throttling may cause messages over-delivered per unit of time d
 
    When over-delivery happens, and the delivered message count exceeds the quota in the current period, then the quota for the next period will be reduced accordingly. For example, if the rate limit is set to `10/s`, and `11` messages have been delivered to the client in the first period, then only up to `9` messages can be delivered to the client in the next period; if 30 messages have been delivered in the last period, the count of messages to deliver in the next two periods is `0`.
 
-   ![An example of over-delivery occurred within a throttling period](/assets/throttling-limitation.svg)
+   ![Over-delivery occurred within a throttling period in Pulsar](/assets/throttling-limitation.svg)
 
    :::
