@@ -2,11 +2,12 @@
 id: concepts-architecture-overview
 title: Architecture Overview
 sidebar_label: "Architecture"
+description: Get a comprehensive understanding of the architecture of Apache Pulsar
 ---
 
 At the highest level, a Pulsar instance is composed of one or more Pulsar clusters. Clusters within an instance can [replicate](concepts-replication.md) data amongst themselves.
 
-In a Pulsar cluster:
+A Pulsar cluster consists of the following components:
 
 * One or more brokers handles and [load balances](administration-load-balance.md) incoming messages from producers, dispatches messages to consumers, communicates with the Pulsar configuration store to handle various coordination tasks, stores messages in BookKeeper instances (aka bookies), relies on a cluster-specific ZooKeeper cluster for certain tasks, and more.
 * A BookKeeper cluster consisting of one or more bookies handles [persistent storage](#persistent-storage) of messages.
@@ -56,7 +57,7 @@ In a Pulsar instance:
 
 ## Configuration store
 
-The configuration store maintains all the configurations of a Pulsar instance, such as clusters, tenants, namespaces, partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
+The Configuration store is a ZooKeeper quorum that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, tenants, namespaces, partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
 
 ## Persistent storage
 
@@ -75,7 +76,7 @@ Pulsar uses a system called [Apache BookKeeper](http://bookkeeper.apache.org/) f
 * It's horizontally scalable in both capacity and throughput. Capacity can be immediately increased by adding more bookies to a cluster.
 * Bookies are designed to handle thousands of ledgers with concurrent reads and writes. By using multiple disk devices---one for journal and another for general storage--bookies can isolate the effects of reading operations from the latency of ongoing write operations.
 
-In addition to message data, *cursors* are also persistently stored in BookKeeper. Cursors are [subscription](reference-terminology.md#subscription) positions for [consumers](reference-terminology.md#consumer). BookKeeper enables Pulsar to store consumer position in a scalable fashion.
+In addition to message data, *cursors* are also persistently stored in BookKeeper. Cursors are [subscription](concepts-messaging.md#subscriptions) positions for [consumers](concepts-clients.md#consumer). BookKeeper enables Pulsar to store consumer position in a scalable fashion.
 
 At the moment, Pulsar supports persistent message storage. This accounts for the `persistent` in all topic names. Here's an example:
 
@@ -83,12 +84,12 @@ At the moment, Pulsar supports persistent message storage. This accounts for the
 persistent://my-tenant/my-namespace/my-topic
 ```
 
-> Pulsar also supports ephemeral ([non-persistent](concepts-messaging.md#non-persistent-topics) message storage.
+> Pulsar also supports ephemeral [non-persistent](concepts-messaging.md#non-persistent-topics) message storage.
 
 
 You can see an illustration of how brokers and bookies interact in the diagram below:
 
-![Brokers and bookies](/assets/broker-bookie.png)
+![Brokers and bookies in Pulsar](/assets/broker-bookie.png)
 
 
 ### Ledgers
@@ -144,13 +145,13 @@ Some important things to know about the Pulsar proxy:
 
 ## Service discovery
 
-[Clients](concepts-clients.md) connecting to Pulsar brokers need to be able to communicate with an entire Pulsar instance using a single URL.
+Service discovery is a mechanism provided by Pulsar that enables connecting [clients](concepts-clients.md) to use just a single URL to interact with an entire Pulsar instance.
 
 You can use your own service discovery system if you'd like. If you use your own system, there is just one requirement: when a client performs an HTTP request to an endpoint, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to *some* active broker in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
 
 The diagram below illustrates Pulsar service discovery:
 
-![alt-text](/assets/pulsar-service-discovery.png)
+![Service discovery in Pulsar](/assets/pulsar-service-discovery.png)
 
 In this diagram, the Pulsar cluster is addressable via a single DNS name: `pulsar-cluster.acme.com`. A [Python client](client-libraries-python.md), for example, could access this Pulsar cluster like this:
 
