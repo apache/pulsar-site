@@ -137,7 +137,7 @@ client = Client("pulsar+ssl://ats-proxy:443",
 ````
 
 ### Pulsar geo-replication with SNI routing
-You can use the ATS proxy for geo-replication. Pulsar brokers can connect to brokers in geo-replication by using SNI routing. To enable SNI routing for broker connection cross clusters, you need to configure SNI proxy URL to the cluster metadata. If you have configured SNI proxy URL in the cluster metadata, you can connect to broker cross clusters through the proxy over SNI routing.
+You can use the ATS proxy for geo-replication. Pulsar brokers can connect to brokers in geo-replication by using SNI routing. To enable SNI routing for broker connection cross clusters to implement geo-replication, you need to configure SNI proxy URL to the cluster metadata. If you have configured SNI proxy URL in the cluster metadata, you can connect to broker cross clusters through the proxy over SNI routing.
 
 ![Pulsar geo-replication with SNI routing](/assets/pulsar-sni-geo.png)
 
