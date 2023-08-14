@@ -2,12 +2,13 @@
 id: schema-overview
 title: Overview
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of Pulsar schema.
 ---
 
 This section introduces the following content:
 * [What is Pulsar Schema](#what-is-pulsar-schema)
-* [Why use it](#why-use-it)
-* [How it works](#how-it-works)
+* [Why use it](#why-use-Pulsar-Schema)
+* [How it works](#how-Pulsar-Schema-works)
 * [Use case](#use-case)
 * [What's next?](#whats-next)
 
@@ -27,7 +28,7 @@ Currently, Pulsar schema is available for [Java clients](client-libraries-java.m
 
 :::
 
-## Why use it
+## Why use Pulsar Schema
 
 Type safety is extremely important in any application built around a messaging and streaming system. Raw bytes are flexible for data transfer, but the flexibility and neutrality come with a cost: you have to overlay data type checking and serialization/deserialization to ensure that the bytes fed into the system can be read and successfully consumed. In other words, you need to make sure the data is intelligible and usable to applications.
 
@@ -38,15 +39,17 @@ Pulsar schema resolves the pain points with the following capabilities:
 * keeps data compatibility on-track between schema versions. When new schemas are uploaded, the new versions can be read by old consumers.
 * stored in the existing storage layer BookKeeper, without additional system required.
 
-## How it works
+## How Pulsar Schema works
 
 Pulsar schemas are applied and enforced at the **topic** level. Producers and consumers can upload schemas to brokers, so Pulsar schemas work on both sides.
 
 ### Producer side
 
-This diagram illustrates how Pulsar schema works on the Producer side.
+This diagram illustrates how Pulsar schema works on the producer side.
 
-![How Pulsar schema works on the producer side](/assets/schema-producer.svg)
+![Workflow of Pulsar schema on the producer side](/assets/schema-producer.svg)
+
+Pulsar schema works on the Producer side in the following steps:
 
 1. The application uses a schema instance to construct a producer instance.
    The schema instance defines the schema for the data being produced using the producer instance. Take Avro as an example, Pulsar extracts the schema definition from the POJO class and constructs the `SchemaInfo`.
@@ -69,7 +72,9 @@ This diagram illustrates how Pulsar schema works on the Producer side.
 
 This diagram illustrates how schema works on the consumer side.
 
-![How Pulsar schema works on the consumer side](/assets/schema-consumer.svg)
+![Workflow of Pulsar schema on the consumer side](/assets/schema-consumer.svg)
+
+Pulsar schema works on the consumer side in the following steps:
 
 1. The application uses a schema instance to construct a consumer instance.
 
