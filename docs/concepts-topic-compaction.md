@@ -2,7 +2,7 @@
 id: concepts-topic-compaction
 title: Topic Compaction
 sidebar_label: "Topic Compaction"
-descriptions: Get a comprehensive understanding of the concept, features and functioning of topic compaction in Apache Pulsar.
+descriptions: Get a comprehensive understanding of concepts, features, and workflow of topic compaction in Apache Pulsar.
 ---
 
 Pulsar was built with highly scalable [persistent storage](concepts-architecture-overview.md#persistent-storage) of message data as a primary objective. Pulsar topics enable you to persistently store as many unacknowledged messages as you need while preserving message ordering. By default, Pulsar stores *all* unacknowledged/unprocessed messages produced on a topic. Accumulating many unacknowledged messages on a topic is necessary for many Pulsar use cases but it can also be very time intensive for Pulsar consumers to "rewind" through the entire log of messages.
@@ -32,7 +32,7 @@ When topic compaction is triggered [via the CLI](cookbooks-compaction.md), it wo
 
 2. After that, the broker will create a new [BookKeeper ledger](concepts-architecture-overview.md#ledgers) and make a second iteration through each message on the topic. For each message:
 
-    - if the key matches the latest occurrence of that key, then the key's data payload, message ID, and metadata will be written to the newly created ledger. 
+    - If the key matches the latest occurrence of that key, then the key's data payload, message ID, and metadata will be written to the newly created ledger. 
   
     - If the key doesn't match the latest then the message will be skipped and left alone. 
   
@@ -40,8 +40,8 @@ When topic compaction is triggered [via the CLI](cookbooks-compaction.md), it wo
   
 3. At the end of this second iteration through the topic, the newly created BookKeeper ledger is closed and two things are written to the topic's metadata: 
 
-    - the ID of the BookKeeper ledger
-    - the message ID of the last compacted message (this is known as the **compaction horizon** of the topic). 
+    - The ID of the BookKeeper ledger
+    - The message ID of the last compacted message (this is known as the **compaction horizon** of the topic). 
   
   Once this metadata is written compaction is complete.
 

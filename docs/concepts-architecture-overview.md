@@ -57,7 +57,7 @@ In a Pulsar instance:
 
 ## Configuration store
 
-The Configuration store is a ZooKeeper quorum that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, tenants, namespaces, partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
+The configuration store is a ZooKeeper quorum that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, tenants, namespaces, partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
 
 ## Persistent storage
 
@@ -89,7 +89,7 @@ persistent://my-tenant/my-namespace/my-topic
 
 You can see an illustration of how brokers and bookies interact in the diagram below:
 
-![Brokers and bookies in Pulsar](/assets/broker-bookie.png)
+![Brokers and bookies in a Pulsar cluster](/assets/broker-bookie.png)
 
 
 ### Ledgers
@@ -145,7 +145,7 @@ Some important things to know about the Pulsar proxy:
 
 ## Service discovery
 
-Service discovery is a mechanism provided by Pulsar that enables connecting [clients](concepts-clients.md) to use just a single URL to interact with an entire Pulsar instance.
+Service discovery is a mechanism that enables connecting [clients](concepts-clients.md) to use just a single URL to interact with an entire Pulsar instance.
 
 You can use your own service discovery system if you'd like. If you use your own system, there is just one requirement: when a client performs an HTTP request to an endpoint, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to *some* active broker in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
 

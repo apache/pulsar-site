@@ -17,7 +17,7 @@ As you can see, the tenant is the most basic unit of categorization for topics (
 
 ## Tenants
 
-A Pulsar tenant is an administrative unit for allocating capacity and enforcing an authentication/authorization scheme. To each tenant in a Pulsar instance you can assign:
+A Pulsar tenant is an administrative unit for allocating capacity and enforcing an authentication or authorization scheme. To each tenant in a Pulsar instance, you can assign:
 
 * An [authorization](security-authorization.md) scheme
 * The set of [clusters](reference-terminology.md#cluster) to which the tenant's configuration applies

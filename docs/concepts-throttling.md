@@ -49,7 +49,7 @@ The process of message dispatch throttling can be divided into the following ste
 
 ### Throttling levels
 
-Configuring throttling levels allows you to throttle message dispatch rate limits at multiple levels. The following table outlines the three throttling levels.
+You can set throttle message dispatch at different levels.
 
 Level | Description
 :-----|:------------
@@ -65,7 +65,7 @@ The dispatch rate limits configured at multiple levels take effect simultaneousl
 
 ### Throttling approaches
 
-The following table outlines multiple throttling approaches to configure the dispatch rate limits at different levels.
+You can use multiple throttling approaches to configure dispatch rate limits at different levels.
 
 Approach | Per cluster | Per topic | Per subscription
 :--------|:------------|:----------|:----------------

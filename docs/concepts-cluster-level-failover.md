@@ -2,7 +2,7 @@
 id: concepts-cluster-level-failover
 title: Cluster-level failover
 sidebar_label: "Cluster-level failover"
-description: Get a comprehensive understanding of the concept, benefits, use cases and more information about the cluster-level failover in Pulsar.
+description: Get a comprehensive understanding of concepts, benefits, and use cases about the cluster-level failover in Pulsar.
 ---
 
 ````mdx-code-block
@@ -44,15 +44,15 @@ The cluster-level failover provides fault tolerance, continuous availability, an
 
 * Reduced cost
 
-   services can be switched and recovered automatically with no data loss.
+   Services can be switched and recovered automatically with no data loss.
 
 * Simplified management
 
-   businesses can operate on an "always-on" basis since no immediate user intervention is required.
+   Businesses can operate on an "always-on" basis since no immediate user intervention is required.
 
 * Improved stability and robustness
 
-   it ensures continuous performance and minimizes service downtime.
+   It ensures continuous performance and minimizes service downtime.
 
 ### When to use cluster-level failover?
 
@@ -60,11 +60,11 @@ The cluster-level failover protects your environment in a number of ways, includ
 
 * Disaster recovery
    
-   cluster-level failover can automatically and seamlessly transfer the production workload on a primary cluster to one or several backup clusters, which ensures minimum data loss and reduced recovery time.
+   Cluster-level failover can automatically and seamlessly transfer the production workload on a primary cluster to one or several backup clusters, which ensures minimum data loss and reduced recovery time.
 
 * Planned migration
    
-   if you want to migrate production workloads from an old cluster to a new cluster, you can improve the migration efficiency with cluster-level failover. For example, you can test whether the data migration goes smoothly in case of a failover event, identify possible issues and risks before the migration.
+   If you want to migrate production workloads from an old cluster to a new cluster, you can improve the migration efficiency with cluster-level failover. For example, you can test whether the data migration goes smoothly in case of a failover event, identify possible issues and risks before the migration.
 
 ### When cluster-level failover is triggered?
 
@@ -78,19 +78,19 @@ Automatic cluster-level failover is triggered when Pulsar clients cannot connect
 
 * Network failure
    
-   internet connection is lost.
+   Internet connection is lost.
 
 * Power failure
 
-   shutdown time of a primary cluster exceeds time limits.
+   Shutdown time of a primary cluster exceeds time limits.
 
 * Service error
 
-   errors occur on a primary cluster (for example, the primary cluster does not function because of time limits).
+   Errors occur on a primary cluster (for example, the primary cluster does not function because of time limits).
 
 * Crashed storage space
 
-   the primary cluster does not have enough storage space, but the corresponding storage space on the backup server functions normally.
+   The primary cluster does not have enough storage space, but the corresponding storage space on the backup server functions normally.
 
 </TabItem>
 <TabItem value="Controlled cluster-level failover">
@@ -104,15 +104,15 @@ Controlled cluster-level failover is triggered when administrators set the switc
 
 ### Why does cluster-level failover fail?
 
-Obviously, the cluster-level failover will fail if the backup cluster is unreachable by active Pulsar clients. This can happen for many reasons, including but not limited to:
+Obviously, the cluster-level failover does not succeed if the backup cluster is unreachable by active Pulsar clients. This can happen for many reasons, including but not limited to:
 
 * Power failure
 
-   the backup cluster is shut down or does not function normally.
+   The backup cluster is shut down or does not function normally.
 
 * Crashed storage space
 
-   primary and backup clusters do not have enough storage space.
+   Primary and backup clusters do not have enough storage space.
 
 * If the failover is initiated, but no cluster can assume the role of an available cluster due to errors, and the primary cluster is not able to provide service normally.
 

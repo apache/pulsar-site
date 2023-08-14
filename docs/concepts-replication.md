@@ -42,7 +42,7 @@ Synchronous geo-replication provides the highest availability and also guarantee
 
 Pulsar provides a great degree of flexibility for customizing your replication strategy. You can set up different replication patterns to serve your replication strategy for an application between multiple data centers. 
 
-Pulsar supports the following three replication patterns:
+Pulsar supports the following replication patterns:
 
 ### Full-mesh replication
 

@@ -15,7 +15,7 @@ Before an application creates a producer/consumer, the Pulsar client library nee
 
 1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker. 
 
-    The request could reach one of the active brokers which, by looking at the (cached) zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
+    The request could reach one of the active brokers which, by looking at the (cached) Zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
 
 2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. 
     
@@ -29,7 +29,7 @@ A producer is a process that attaches to a topic and publishes messages to a Pul
 
 ### Send mode
 
-Send mode determines whether producers send messages to brokers synchronously (sync) or asynchronously (async).
+Send mode is a mechanism determining whether producers send messages to brokers synchronously (sync) or asynchronously (async).
 
 | Mode       | Description                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -38,7 +38,7 @@ Send mode determines whether producers send messages to brokers synchronously (s
 
 ### Access mode
 
-Access mode determines the permissions of producers on topics.
+Access mode is a mechanism determining the permissions of producers on topics.
 
 | Access mode            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -61,13 +61,13 @@ You can set producer access mode through [Java Client API](/api/client/). For mo
 
 A consumer is a process that attaches to a topic via a subscription and then receives messages.
 
-![Message processing workflow in Pulsar](/assets/consumer.svg)
+![Message processing workflow of a consumer in Pulsar](/assets/consumer.svg)
 
 A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](pathname:///reference/#/@pulsar:version_reference@/client/client-configuration-consumer?id=receiverqueuesize) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive mode
 
-Receive mode determines whether messages are received from [brokers](concepts-architecture-overview.md#brokers) synchronously (sync) or asynchronously (async).
+Receive mode is a mechanism determining whether messages are received from [brokers](concepts-architecture-overview.md#brokers) synchronously (sync) or asynchronously (async).
 
 | Mode          | Description                                                                                                                                                                                                   |
 |:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -100,7 +100,7 @@ Please also note that a reader can have a "backlog", but the metric is only used
 
 :::
 
-![consumer and reader interfaces in Pulsar](/assets/pulsar-reader-consumer-interfaces.png)
+![Consumer and reader interfaces in Pulsar](/assets/pulsar-reader-consumer-interfaces.png)
 
 ## TableView
 

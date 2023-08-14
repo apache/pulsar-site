@@ -5,7 +5,7 @@ sidebar_label: "Set up a tenant"
 ---
 
 
-Pulsar is a powerful messaging system you can use to process and route high volumes of data. Each t[enant](concepts-multi-tenancy.md#tenants) provides a distinct unit of isolation with its own set of roles, permissions, configuration settings, and bookmarks. 
+Pulsar is a powerful messaging system you can use to process and route high volumes of data. Each [tenant](concepts-multi-tenancy.md#tenants) provides a distinct unit of isolation with its own set of roles, permissions, configuration settings, and bookmarks. 
 
 In this tutorial, you will create a new tenant, named "apache" in your Pulsar cluster, hosted in K8s helm. 
 
