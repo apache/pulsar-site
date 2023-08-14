@@ -104,7 +104,7 @@ Controlled cluster-level failover is triggered when administrators set the switc
 
 ### Why does cluster-level failover fail?
 
-Obviously, the cluster-level failover will fail if the backup cluster is unreachable by active Pulsar clients. This can happen for many reasons, including but not limited to:
+Obviously, the cluster-level failover does not succeed if the backup cluster is unreachable by active Pulsar clients. This can happen for many reasons, including but not limited to:
 
 * Power failure
 
