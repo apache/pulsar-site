@@ -2,6 +2,7 @@
 id: sql-rest-api
 title: Pulsar SQL REST APIs
 sidebar_label: "REST APIs"
+description: Get a comprehensive understanding of the Trino REST API v1.
 ---
 
 This section lists resources that make up the Trino REST API v1.
