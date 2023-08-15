@@ -2,6 +2,7 @@
 id: io-overview
 title: Pulsar connector overview
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of Pulsar IO connectors.
 ---
 
 ````mdx-code-block
@@ -17,7 +18,10 @@ Messaging systems are most powerful when you can easily use them with external s
 
 ## Concept
 
-Pulsar IO connectors come in two types: **source** and **sink**.
+Pulsar IO connectors come in two types: 
+
+- Source
+- Sink
 
 This diagram illustrates the relationship between source, Pulsar, and sink:
 
@@ -26,17 +30,17 @@ This diagram illustrates the relationship between source, Pulsar, and sink:
 
 ### Source
 
-> Sources **feed data from external systems into Pulsar**.
+Source connectors **feed data from external systems into Pulsar**.
 
-Common sources include other messaging systems and firehose-style data pipeline APIs.
+Common source connectors include other messaging systems and firehose-style data pipeline APIs.
 
 For the complete list of Pulsar built-in source connectors, see [source connector](io-connectors.md#source-connector).
 
 ### Sink
 
-> Sinks **feed data from Pulsar into external systems**.
+Sink connectors **feed data from Pulsar into external systems**.
 
-Common sinks include other messaging systems and SQL and NoSQL databases.
+Common sink connectors include other messaging systems and SQL and NoSQL databases.
 
 For the complete list of Pulsar built-in sink connectors, see [sink connector](io-connectors.md#sink-connector).
 
@@ -52,13 +56,17 @@ Delivery semantic | Description
 `at-least-once`  | Each message sent to a connector is to be **processed once** or **more than once**.
 `effectively-once` | Each message sent to a connector has **one output associated** with it.
 
-> Processing guarantees for connectors not just rely on Pulsar guarantee but also **relate to external systems**, that is, **the implementation of source and sink**.
+Processing guarantees for connectors not just rely on Pulsar guarantee but also **relate to external systems**, that is, **the implementation of source and sink**.
 
-* Source: Pulsar ensures that writing messages to Pulsar topics respects the processing guarantees. It is within Pulsar's control.
+* Source
 
-* Sink: the processing guarantees rely on the sink implementation. If the sink implementation does not handle retries in an idempotent way, the sink does not respect the processing guarantees.
+  Pulsar ensures that writing messages to Pulsar topics respects the processing guarantees. It is within Pulsar's control.
 
-### Set
+* Sink
+
+  The processing guarantees rely on the sink implementation. If the sink implementation does not handle retries in an idempotent way, the sink does not respect the processing guarantees.
+
+### How to set the processing guarantee
 
 When creating a connector, you can set the processing guarantee with the following semantics:
 
@@ -103,7 +111,7 @@ For more information about the options of `pulsar-admin sinks create`, see [here
 </Tabs>
 ````
 
-### Update
+### How to update the processing guarantee
 
 After creating a connector, you can update the processing guarantee with the following semantics:
 
@@ -149,7 +157,7 @@ For more information about the options of `pulsar-admin sinks update`, see [here
 
 ## Work with connector
 
-You can manage Pulsar connectors (for example, create, update, start, stop, restart, reload, delete and perform other operations on connectors) via the `Connector Admin CLI` with sources and sinks subcommands. For the latest and complete information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+To manage Pulsar connectors (for example, create, update, start, stop, restart, reload, delete and perform other operations on connectors), you can use the `Connector Admin CLI` with sources and sinks subcommands. For the latest and complete information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 Connectors (sources and sinks) and Functions are components of instances, and they all run on Functions workers. When managing a source, sink or function via the `Connector Admin CLI` or `Functions Admin CLI`, an instance is started on a worker. For more information, see [Functions worker](functions-worker.md).
 

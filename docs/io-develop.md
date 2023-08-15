@@ -2,6 +2,7 @@
 id: io-develop
 title: How to develop Pulsar connectors
 sidebar_label: "Develop"
+description: Get started to develop Pulsar connectors to move data between Pulsar and other systems.
 ---
 
 ````mdx-code-block
@@ -29,8 +30,7 @@ You can develop Pulsar source connectors and sink connectors.
 
 ### Source
 
-Developing a source connector is to implement the {@inject: github:Source:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java}
-interface, which means you need to implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method and the {@inject: github:read:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method.
+To develop a source connector, you need to implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method and the {@inject: github:read:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method, essentially implementing the {@inject: github:Source:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} interface.
 
 1. Implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method.
 
@@ -140,7 +140,7 @@ For more information about **how to create a source connector**, see {@inject: g
 
 ### Sink
 
-Developing a sink connector **is similar to** developing a source connector, that is, you need to implement the {@inject: github:Sink:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} interface, which means implementing the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method and the {@inject: github:write:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method.
+To develop a sink connector, you need to implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method and the {@inject: github:write:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method, essentially implementing the {@inject: github:Sink:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} interface.
 
 1. Implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method.
 
@@ -257,8 +257,9 @@ For more information about **how to create integration tests for Pulsar connecto
 Once you've developed and tested your connector, you need to package it so that it can be submitted
 to a [Pulsar Functions](functions-overview.md) cluster.
 
-There are two methods to
-work with Pulsar Functions' runtime, that is, [NAR](#nar) and [uber JAR](#uber-jar).
+There are two methods to package a connector:
+- [NAR](#nar)
+- [Uber JAR](#uber-jar)
 
 :::note
 
