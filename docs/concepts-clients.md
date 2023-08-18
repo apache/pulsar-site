@@ -2,6 +2,7 @@
 id: concepts-clients
 title: Pulsar Clients
 sidebar_label: "Clients"
+description: Get a comprehensive understanding of client APIs with language bindings for Java, C++, Go, Python, Node.js and C# in Pulsar.
 ---
 
 Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [C++](client-libraries-cpp.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [Node.js](client-libraries-node.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
@@ -12,18 +13,23 @@ Pulsar client libraries support transparent reconnection and/or connection failo
 
 Before an application creates a producer/consumer, the Pulsar client library needs to initiate a setup phase including two steps:
 
-1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker. The request could reach one of the active brokers which, by looking at the (cached) zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
-2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. Within this connection, the client and broker exchange binary commands from a custom protocol. At this point, the client sends a command to create producer/consumer to the broker, which will comply after having validated the authorization policy.
+1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker. 
+
+    The request could reach one of the active brokers which, by looking at the (cached) Zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
+
+2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. 
+    
+    Within this connection, the client and broker exchange binary commands from a custom protocol. At this point, the client sends a command to create producer/consumer to the broker, which will comply after having validated the authorization policy.
 
 Whenever the TCP connection breaks, the client immediately re-initiates this setup phase and keeps trying with exponential backoff to re-establish the producer or consumer until the operation succeeds.
 
 ## Producer
 
-A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](reference-terminology.md#broker). The Pulsar broker processes the messages.
+A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](concepts-architecture-overview.md#broker). The Pulsar broker processes the messages.
 
 ### Send mode
 
-Producers send messages to brokers synchronously (sync) or asynchronously (async).
+Send mode is a mechanism determining whether producers send messages to brokers synchronously (sync) or asynchronously (async).
 
 | Mode       | Description                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -32,7 +38,7 @@ Producers send messages to brokers synchronously (sync) or asynchronously (async
 
 ### Access mode
 
-You can have different types of access modes on topics for producers.
+Access mode is a mechanism determining the permissions of producers on topics.
 
 | Access mode            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -55,13 +61,13 @@ You can set producer access mode through [Java Client API](/api/client/). For mo
 
 A consumer is a process that attaches to a topic via a subscription and then receives messages.
 
-![Consumer](/assets/consumer.svg)
+![Message processing workflow of a consumer in Pulsar](/assets/consumer.svg)
 
 A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](pathname:///reference/#/@pulsar:version_reference@/client/client-configuration-consumer?id=receiverqueuesize) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive mode
 
-Messages are received from [brokers](reference-terminology.md#broker) either synchronously (sync) or asynchronously (async).
+Receive mode is a mechanism determining whether messages are received from [brokers](concepts-architecture-overview.md#brokers) synchronously (sync) or asynchronously (async).
 
 | Mode          | Description                                                                                                                                                                                                   |
 |:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -74,7 +80,7 @@ Client libraries provide listener implementation for consumers. For example, the
 
 ## Reader
 
-In Pulsar, the "standard" [consumer interface](#consumer) involves using consumers to listen on [topics](reference-terminology.md#topic), process incoming messages, and finally acknowledge those messages when they are processed. Whenever a new subscription is created, it is initially positioned at the end of the topic (by default), and consumers associated with that subscription begin reading with the first message created afterward.  Whenever a consumer connects to a topic using a pre-existing subscription, it begins reading from the earliest message un-acked within that subscription. In summary, with the consumer interface, subscription cursors are automatically managed by Pulsar in response to [message acknowledgments](concepts-messaging.md#acknowledgment).
+In Pulsar, the "standard" [consumer interface](#consumer) involves using consumers to listen on [topics](concepts-messaging.md#topics), process incoming messages, and finally acknowledge those messages when they are processed. Whenever a new subscription is created, it is initially positioned at the end of the topic (by default), and consumers associated with that subscription begin reading with the first message created afterward.  Whenever a consumer connects to a topic using a pre-existing subscription, it begins reading from the earliest message un-acked within that subscription. In summary, with the consumer interface, subscription cursors are automatically managed by Pulsar in response to [message acknowledgments](concepts-messaging.md#acknowledgment).
 
 The **reader interface** for Pulsar enables applications to manually manage cursors. When you use a reader to connect to a topic---rather than a consumer---you need to specify *which* message the reader begins reading from when it connects to a topic. When connecting to a topic, the reader interface enables you to begin with:
 
@@ -94,7 +100,7 @@ Please also note that a reader can have a "backlog", but the metric is only used
 
 :::
 
-![The Pulsar consumer and reader interfaces](/assets/pulsar-reader-consumer-interfaces.png)
+![Consumer and reader interfaces in Pulsar](/assets/pulsar-reader-consumer-interfaces.png)
 
 ## TableView
 
@@ -110,4 +116,4 @@ Each TableView uses one Reader instance per partition, and reads the topic start
 
 The following figure illustrates the dynamic construction of a TableView updated with newer values of each key.
 
-![TableView](/assets/tableview.png)
+![Dynamic construction of a TableView in Pulsar](/assets/tableview.png)
