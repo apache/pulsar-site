@@ -1066,9 +1066,9 @@ $ pulsar-admin topicPolicies set-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-t, --offloadThresholdInBytes` | ManagedLedger offload threshold in bytes|0||
+| `-t, --offloadThresholdInBytes` | ManagedLedger offload threshold in bytes|null||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
-| `-m, --maxBlockSizeInBytes` | ManagedLedger offload max block Size in bytes,s3 and google-cloud-storage requires this parameter|0||
+| `-m, --maxBlockSizeInBytes` | ManagedLedger offload max block Size in bytes,s3 and google-cloud-storage requires this parameter|67108864||
 | `-b, --bucket` | ManagedLedger offload bucket, s3 and google-cloud-storage requires this parameter|null||
 | `-dl, --offloadDeletionLagInMillis` | ManagedLedger offload deletion lag in bytes|null||
 | `-r, --region` | ManagedLedger offload region, s3 and google-cloud-storage requires this parameter|null||
@@ -1080,7 +1080,7 @@ $ pulsar-admin topicPolicies set-offload-policies options
 | `-d, --driver` | ManagedLedger offload driver|null||
 | `-e, --endpoint` | ManagedLedger offload service endpoint, only s3 requires this parameter|null||
 | `-s, --aws-secret` | AWS Credential Secret to use when using driver S3 or aws-s3|null||
-| `-rb, --readBufferSizeInBytes` | ManagedLedger offload read buffer size in bytes,s3 and google-cloud-storage requires this parameter|0||
+| `-rb, --readBufferSizeInBytes` | ManagedLedger offload read buffer size in bytes,s3 and google-cloud-storage requires this parameter|1048576||
 
 
 ## remove-offload-policies
