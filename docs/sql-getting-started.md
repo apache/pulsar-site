@@ -2,7 +2,7 @@
 id: sql-getting-started
 title: Query data with Pulsar SQL
 sidebar_label: "Query data"
-description: Get started to query data with Pulsar SQL.
+description: Query data with Pulsar SQL.
 ---
 
 Before querying data in Pulsar, you need to install Pulsar and built-in connectors.
@@ -16,7 +16,7 @@ Before querying data in Pulsar, you need to install Pulsar and built-in connecto
 
 To query data in Pulsar with Pulsar SQL, you need to complete the following steps:
 
-### Step 1: Start a Pulsar standalone cluster
+### Step 1: Start a Pulsar cluster
 
 ```bash
 PULSAR_STANDALONE_USE_ZOOKEEPER=1 ./bin/pulsar standalone
@@ -34,7 +34,7 @@ Starting the Pulsar standalone cluster from scratch doesn't enable ZooKeeper by 
 ./bin/pulsar sql-worker run
 ```
 
-### Step 3: After initializing Pulsar standalone cluster and the SQL worker, run SQL CLI
+### Step 3: Run SQL CLI
 
 ```bash
 ./bin/pulsar sql
@@ -80,7 +80,7 @@ Splits: 19 total, 19 done (100.00%)
 
 Since there is no data in Pulsar, no records are returned.
 
-### Step 5: Start the built-in connector `DataGeneratorSource` and ingest some mock data
+### Step 5: Ingest some mock data
 
 ```bash
 ./bin/pulsar-admin sources create --name generator --destinationTopicName generator_test --source-type data-generator

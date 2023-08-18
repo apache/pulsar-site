@@ -2,7 +2,7 @@
 id: sql-deployment-configurations
 title: Pulsar SQL configuration and deployment
 sidebar_label: "Configuration and deployment"
-description: Get started to configure the Pulsar Trino plugin and deploy a Pulsar SQL cluster.
+description: Configure the Pulsar Trino plugin and deploy a Pulsar SQL cluster.
 ---
 
 You can configure the Pulsar Trino plugin and deploy a cluster with the following instruction.
@@ -127,8 +127,8 @@ By default, the authentication and authorization between Pulsar and Pulsar SQL a
 
 ### Connect Trino to Pulsar with multiple hosts
 
-* To connect Trino with multiple hosts for Pulsar brokers, you need to add multiple URLs to `pulsar.web-service-url`.
-* To connect Trino with multiple hosts for Pulsar ZooKeeper, you need to add multiple URIs to `pulsar.zookeeper-uri`.
+To configure multiple hosts for brokers, add multiple URLs to `pulsar.web-service-url`.
+To configure multiple hosts for brokers, add multiple URLs to `pulsar.web-service-url`.
 
 The following is an example.
 
@@ -191,7 +191,7 @@ You can start the worker as daemon process.
 
 You can deploy a Pulsar SQL cluster or Trino cluster on multiple nodes. The following steps shows how to deploy a cluster on three-node cluster.
 
-#### Step 1: Copy the Pulsar binary distribution to three nodes.
+Step 1: Copy the Pulsar binary distribution to three nodes.
 
 The first node runs as Trino coordinator. The minimal configuration required in the `${project.root}/trino/conf/config.properties` file is as follows.
 
@@ -215,27 +215,27 @@ query.max-memory-per-node=1GB
 discovery.uri=<coordinator-url>
 ```
 
-#### step 2: Modify `pulsar.web-service-url` and  `pulsar.zookeeper-uri` configuration in the `${project.root}/trino/conf/catalog/pulsar.properties` file accordingly for the three nodes.
+step 2: Modify `pulsar.web-service-url` and  `pulsar.zookeeper-uri` configuration in the `${project.root}/trino/conf/catalog/pulsar.properties` file accordingly for the three nodes.
 
-#### Step 3: Start the coordinator node:
-
-```bash
-./bin/pulsar sql-worker run
-```
-
-#### Step 4: Start worker nodes:
+Step 3: Start the coordinator node:
 
 ```bash
 ./bin/pulsar sql-worker run
 ```
 
-#### Step 5: Start the SQL CLI and check the status of your cluster:
+Step 4: Start worker nodes:
+
+```bash
+./bin/pulsar sql-worker run
+```
+
+Step 5: Start the SQL CLI and check the status of your cluster:
 
 ```bash
 ./bin/pulsar sql --server <coordinate_url>
 ```
 
-#### Step 6: Check the status of your nodes:
+Step 6: Check the status of your nodes:
 
 ```bash
 trino> SELECT * FROM system.runtime.nodes;
