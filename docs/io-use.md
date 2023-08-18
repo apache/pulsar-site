@@ -31,11 +31,11 @@ After the setup, the built-in connector is automatically discovered by Pulsar br
 
 You can configure the following information:
 
-* [Configure a default storage location for built-in connectors](#configure-a-default-storage-location-for-built-in-connectors)
+* [Configure a default storage location for a built-in connector](#configure-a-default-storage-location-for-built-in-connectors)
 
 * [Configure a connector with a YAML file](#configure-a-connector-with-a-yaml-file)
 
-### Configure a default storage location for built-in connectors
+### Configure a default storage location for a built-in connector
 
 To configure a default folder for built-in connectors, set the `connectorsDirectory` parameter in the `./conf/functions_worker.yml` configuration file.
 
@@ -110,11 +110,11 @@ configs:
 
 Before starting using connectors, you can perform the following operations:
 
-* [Reload connectors](#reload-connectors)
+* [Reload connectors](#reload)
 
-* [Get a list of available connectors](#get-a-list-of-available-connectors)
+* [Get a list of available connectors](#available)
 
-### Reload connectors
+### `reload`
 
 If you add or delete a nar file in a connector folder, reload the available built-in connector before using it.
 
@@ -138,7 +138,7 @@ pulsar-admin sinks reload
 
 For the latest and complete information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
 
-### Get a list of available connectors
+### `available`
 
 After reloading connectors (optional), you can get a list of available connectors.
 
@@ -162,13 +162,13 @@ pulsar-admin sinks available-sinks
 
 To run a connector, you can perform the following operations:
 
-* [Create a connector](#create-a-connector)
+* [Create a connector](#creat)
 
-* [Start a connector](#start-a-connector)
+* [Start a connector](#start)
 
-* [Run a connector locally](#run-a-connector-locally)
+* [Run a connector locally](#localrun)
 
-### Create a connector
+### `creat`
 
 To create a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
@@ -342,7 +342,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
 </Tabs>
 ````
 
-### Start a connector
+### `start`
 
 To start a connector, you can use **Admin CLI** or **REST API**.
 
@@ -416,7 +416,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </Tabs>
 ````
 
-### Run a connector locally
+### `localrun`
 
 To run a connector locally rather than deploying it on a Pulsar cluster, you can use **Admin CLI**
 
@@ -479,13 +479,13 @@ For the latest and complete information, see [Pulsar admin sinks command docs](p
 
 To monitor a connector, you can perform the following operations:
 
-* [Get the information of a connector](#get-the-information-of-a-connector)
+* [Get the information of a connector](#get)
 
-* [Get the list of all running connectors](#get-the-list-of-all-running-connectors)
+* [Get the list of all running connectors](#list)
 
-* [Get the current status of a connector](#get-the-current-status-of-a-connector)
+* [Get the current status of a connector](#status)
 
-### Get the information of a connector
+### `get`
 
 To get the information of a connector, You can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
@@ -692,7 +692,7 @@ For more information, see [`getSink`](/api/admin/org/apache/pulsar/client/admin/
 </Tabs>
 ````
 
-### Get the list of all running connectors
+### `list`
 
 To get the list of all running connectors, You can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
@@ -802,7 +802,7 @@ For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/adm
 </Tabs>
 ````
 
-### Get the current status of a connector
+### `status`
 
 To get the current status of a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
@@ -990,7 +990,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 ### `update`
 
-To update a running connector, You can use **Admin CLI**, **REST API** or **JAVA admin API**.
+To update a running connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 

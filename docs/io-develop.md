@@ -2,7 +2,7 @@
 id: io-develop
 title: How to develop Pulsar connectors
 sidebar_label: "Develop"
-description: Get started to develop Pulsar connectors to move data between Pulsar and other systems.
+description: Learn how to develop Pulsar connectors to move data between Pulsar and other systems.
 ---
 
 ````mdx-code-block
@@ -140,7 +140,7 @@ For more information about **how to create a source connector**, see {@inject: g
 
 ### Sink
 
-To develop a sink connector, you need to implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method and the {@inject: github:write:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method, essentially implementing the {@inject: github:Sink:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} interface.
+Developing a sink connector **is similar to** developing a source connector, that is, you need to implement the {@inject: github:Sink:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} interface, which means implementing the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method and the {@inject: github:write:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method.
 
 1. Implement the {@inject: github:open:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Sink.java} method.
 

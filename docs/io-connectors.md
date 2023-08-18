@@ -2,7 +2,7 @@
 id: io-connectors
 title: Built-in connector
 sidebar_label: "Built-in connector"
-description: Get a comprehensive understanding of configuration, example, and Java class of Pulsar IO connectors.
+description: Learn configuration, examples, and Java classes of Pulsar IO connectors.
 ---
 
 Pulsar distribution includes a set of common connectors that have been packaged and tested with the rest of Apache Pulsar. These built-in connectors import and export data from some of the most commonly used data systems.

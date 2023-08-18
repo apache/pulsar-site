@@ -20,8 +20,8 @@ Messaging systems are most powerful when you can easily use them with external s
 
 Pulsar IO connectors come in two types: 
 
-- Source
-- Sink
+- [Source](#source)
+- [Sink](#sink)
 
 This diagram illustrates the relationship between source, Pulsar, and sink:
 
@@ -32,7 +32,7 @@ This diagram illustrates the relationship between source, Pulsar, and sink:
 
 Source connectors **feed data from external systems into Pulsar**.
 
-Common source connectors include other messaging systems and firehose-style data pipeline APIs.
+Common sources include other messaging systems and firehose-style data pipeline APIs.
 
 For the complete list of Pulsar built-in source connectors, see [source connector](io-connectors.md#source-connector).
 
@@ -40,7 +40,7 @@ For the complete list of Pulsar built-in source connectors, see [source connecto
 
 Sink connectors **feed data from Pulsar into external systems**.
 
-Common sink connectors include other messaging systems and SQL and NoSQL databases.
+Common sinks include other messaging systems and SQL and NoSQL databases.
 
 For the complete list of Pulsar built-in sink connectors, see [sink connector](io-connectors.md#sink-connector).
 
@@ -66,7 +66,7 @@ Processing guarantees for connectors not just rely on Pulsar guarantee but also 
 
   The processing guarantees rely on the sink implementation. If the sink implementation does not handle retries in an idempotent way, the sink does not respect the processing guarantees.
 
-### How to set the processing guarantee
+### Set processing guarantees
 
 When creating a connector, you can set the processing guarantee with the following semantics:
 
@@ -111,7 +111,7 @@ For more information about the options of `pulsar-admin sinks create`, see [here
 </Tabs>
 ````
 
-### How to update the processing guarantee
+### Update processing guarantees
 
 After creating a connector, you can update the processing guarantee with the following semantics:
 

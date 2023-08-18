@@ -2,7 +2,7 @@
 id: io-debug
 title: How to debug Pulsar connectors
 sidebar_label: "Debug"
-description: Get started to debug Pulsar connectors.
+description: Learn how to debug Pulsar connectors.
 ---
 This guide explains how to debug connectors in localrun or cluster mode and gives a debugging checklist.
 To better demonstrate how to debug Pulsar connectors, take the Mongo sink connector as an example.
