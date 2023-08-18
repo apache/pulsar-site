@@ -5,7 +5,9 @@ sidebar_label: "Create a namespace"
 ---
 
 
-[Namespaces](concepts-messaging.md#namespaces) can be managed via:
+
+
+[Namespaces](concepts-multi-tenancy.md#namespaces) can be managed via:
 
 - The namespaces command of the pulsar-admin tool
 - The /admin/v2/namespaces endpoint of the admin {@inject: rest:REST:/} API
