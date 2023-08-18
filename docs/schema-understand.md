@@ -2,7 +2,7 @@
 id: schema-understand
 title: Understand schema
 sidebar_label: "Understand schema"
-description: Get a comprehensive understanding of concepts of Pulsar schema.
+description: Get a comprehensive understanding of Pulsar schemas.
 ---
 
 ````mdx-code-block
