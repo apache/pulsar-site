@@ -2,6 +2,7 @@
 id: schema-get-started
 title: Get started
 sidebar_label: "Get started"
+description: Get started to construct Pulsar schemas and customize Pulsar schema storage.
 ---
 
 
