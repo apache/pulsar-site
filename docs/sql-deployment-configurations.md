@@ -215,7 +215,7 @@ query.max-memory-per-node=1GB
 discovery.uri=<coordinator-url>
 ```
 
-step 2: Modify `pulsar.web-service-url` and  `pulsar.zookeeper-uri` configuration in the `${project.root}/trino/conf/catalog/pulsar.properties` file accordingly for the three nodes.
+step 2: Modify `pulsar.web-service-url` and `pulsar.zookeeper-uri` configuration in the `${project.root}/trino/conf/catalog/pulsar.properties` file accordingly for the three nodes.
 
 Step 3: Start the coordinator node.
 
