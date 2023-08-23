@@ -223,7 +223,7 @@ Step 3: Start the coordinator node.
 ./bin/pulsar sql-worker run
 ```
 
-Step 4: Start worker nodes:
+Step 4: Start worker nodes.
 
 ```bash
 ./bin/pulsar sql-worker run
