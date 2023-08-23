@@ -2747,17 +2747,6 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 
 **Category**: Server
 
-### disableBrokerInterceptors
-Enable or disable the broker interceptor, which is only used for testing for now
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### dispatchThrottlingForFilteredEntriesEnabled
 Whether the broker should count filtered entries in dispatch rate limit calculations. When disabled, only messages sent to a consumer count towards a dispatch rate limit at the broker, topic, and subscription level. When enabled, messages filtered out due to entry filter logic are counted towards each relevant rate limit.
 
