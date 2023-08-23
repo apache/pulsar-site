@@ -235,7 +235,7 @@ Step 5: Start the SQL CLI and check the status of your cluster.
 ./bin/pulsar sql --server <coordinate_url>
 ```
 
-Step 6: Check the status of your nodes:
+Step 6: Check the status of your nodes.
 
 ```bash
 trino> SELECT * FROM system.runtime.nodes;
