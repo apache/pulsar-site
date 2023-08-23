@@ -128,7 +128,7 @@ By default, the authentication and authorization between Pulsar and Pulsar SQL a
 ### Connect Trino to Pulsar with multiple hosts
 
 To connect Trino with multiple hosts for brokers, add multiple URLs to `pulsar.web-service-url`.
-To configure multiple hosts for brokers, add multiple URLs to `pulsar.web-service-url`.
+To connect Trino with multiple hosts for ZooKeeper, add multiple URLs to `pulsar.web-service-url`.
 
 The following is an example.
 
