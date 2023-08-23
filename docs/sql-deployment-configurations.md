@@ -229,7 +229,7 @@ Step 4: Start worker nodes.
 ./bin/pulsar sql-worker run
 ```
 
-Step 5: Start the SQL CLI and check the status of your cluster:
+Step 5: Start the SQL CLI and check the status of your cluster.
 
 ```bash
 ./bin/pulsar sql --server <coordinate_url>
