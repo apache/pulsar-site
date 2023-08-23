@@ -168,7 +168,7 @@ To run a connector, you can perform the following operations:
 
 * [Run a connector locally](#localrun)
 
-### `creat`
+### `create`
 
 To create a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
