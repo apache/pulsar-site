@@ -2,6 +2,7 @@
 id: functions-quickstart
 title: Getting started with Pulsar Functions
 sidebar_label: "Get started"
+description: Get started to create and validate Pulsar functions.
 ---
 
 This hands-on tutorial provides step-by-step instructions and examples on how to create and validate functions in a [standalone Pulsar](getting-started-standalone.md), including stateful functions and window functions.
@@ -11,7 +12,7 @@ This hands-on tutorial provides step-by-step instructions and examples on how to
 - JDK 8+. For more details, refer to [Pulsar runtime Java version recommendation](https://github.com/apache/pulsar#pulsar-runtime-java-version-recommendation).
 - Windows OS is not supported.
 
-## Start standalone Pulsar
+## Step 1: Start standalone Pulsar
 
 1. Enable pulsar function in `conf/standalone.conf` (add this field if not exists):
 
@@ -85,7 +86,7 @@ This hands-on tutorial provides step-by-step instructions and examples on how to
    Escape character is '^]'.
    ```
 
-## Create a namespace for test
+## Step 2: Create a namespace for test
 
 1. Create a tenant and a namespace.
 
@@ -108,7 +109,7 @@ This hands-on tutorial provides step-by-step instructions and examples on how to
    "test/test-namespace"
    ```
 
-## Start functions
+## Step 3: Start functions
 
 :::note
 
@@ -278,17 +279,17 @@ Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) 
    test-messages-Thu Jul 19 11:59:15 PDT 2021!
    ```
 
-## Start stateful functions
+### Start stateful functions
 
 The standalone mode of Pulsar enables BookKeeper table service for stateful functions. For more information, see [Configure state storage](functions-develop-state.md).
-
-The following example provides instructions to validate counter functions.
 
 :::note
 
 Before starting stateful functions, you need to [start Pulsar](#start-standalone-pulsar) and [create a test namespace](#create-a-namespace-for-test).
 
 :::
+
+The following example provides instructions to start a stateful function to validate counter functions.
 
 1. Create a function using `examples/example-stateful-function-config.yaml`.
 
@@ -463,17 +464,17 @@ Before starting stateful functions, you need to [start Pulsar](#start-standalone
    }
    ```
 
-## Start window functions
+### Start window functions
 
 Window functions are a special form of Pulsar Functions. For more information, see [concepts](functions-concepts.md#window-function).
-
-The following example provides instructions to start a window function to calculate the sum in a window.
 
 :::note
 
 Before starting window functions, you need to [start Pulsar](#start-standalone-pulsar)  and [create a test namespace](#create-a-namespace-for-test).
 
 :::
+
+The following example provides instructions to start a window function to calculate the sum in a window.
 
 1. Create a function using `example-window-function-config.yaml`.
 

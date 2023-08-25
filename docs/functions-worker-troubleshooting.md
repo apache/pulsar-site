@@ -2,6 +2,7 @@
 id: functions-worker-troubleshooting
 title: Troubleshooting
 sidebar_label: "Troubleshooting"
+description: Troubleshooting function worker configuration in Pulsar.
 ---
 
 **Error message: Namespace missing local cluster name in clusters list**

@@ -2,6 +2,7 @@
 id: functions-develop-log
 title: Produce function logs
 sidebar_label: "Produce function logs"
+description: Learn to produce logs for functions in Pulsar.
 ---
 
 ## Produce logs for Java functions

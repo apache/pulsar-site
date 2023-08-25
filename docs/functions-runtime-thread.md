@@ -2,6 +2,7 @@
 id: functions-runtime-thread
 title: Configure thread runtime
 sidebar_label: "Configure thread runtime"
+description: Configure thread runtime for functions in Pulsar.
 ---
 
 You can use the default configurations of thread runtime in the `conf/functions_worker.yml` file.

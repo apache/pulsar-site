@@ -2,6 +2,7 @@
 id: functions-deploy-cluster-parallelism
 title: Enable parallel processing
 sidebar_label: "Enable parallel processing"
+description: Enable parallel processing for a function in Pulsar.
 ---
 
 In cluster mode, you can specify the **parallelism** (the number of instances to run) to enable parallel processing for a function.
