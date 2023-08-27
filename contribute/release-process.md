@@ -471,48 +471,6 @@ Once the docs are generated, you can add them and submit them in a PR. The expec
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
-### C++ client docs
-
-:::caution
-
-This step is for feature releases only, unless you're sure that significant doc fixes are made against the patch release.
-
-:::
-
-After publishing the C++ client, run the following script from the main branch of apache/pulsar-site repo:
-
-```shell
-cd tools/pytools
-poetry install
-poetry run bin/cpp-apidoc-generator.py 2.X.0
-```
-
-Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/api/cpp`.
-
-Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
-
-### Python client docs
-
-:::caution
-
-This step is for feature releases only, unless you're sure that significant doc fixes are made against the patch release.
-
-:::
-
-After publishing the Python client, run the following script from the main branch of apache/pulsar-site repo:
-
-```shell
-cd tools/pytools
-poetry install
-poetry run bin/py-apidoc-generator.py 2.X.0
-```
-
-Note that before version 3.0.0, it builds the docs within a docker image, so you'll need to have docker running.
-
-Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/api/python`.
-
-Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
-
 ## Update the site
 
 Clone the apache/site repo:

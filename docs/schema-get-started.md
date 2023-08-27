@@ -2,6 +2,7 @@
 id: schema-get-started
 title: Get started
 sidebar_label: "Get started"
+description: Get started to construct Pulsar schemas and customize Pulsar schema storage.
 ---
 
 
@@ -27,7 +28,7 @@ This example demonstrates how to construct a [bytes schema](schema-understand.md
 <TabItem value="Java">
 
 ```java
-Producer<byte[]> producer = PulsarClient.newProducer(Schema.BYTES)
+Producer<byte[]> producer = pulsarClient.newProducer(Schema.BYTES)
        .topic("my-topic")
        .create();
 Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)

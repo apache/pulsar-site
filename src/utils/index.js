@@ -1,12 +1,11 @@
-const users = require(`../../data/users.js`);
-const featuredUsers = users.filter((x) => x.hasOwnProperty("featured"));
-featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
+import compareVersions from 'compare-versions';
 
-const versions = require("../../versions.json");
-const restApiVersions = require("../../static/swagger/restApiVersions.json");
-
-const siteConfig = require(`../../docusaurus.config.js`);
-const compareVersions = require("compare-versions");
+import users from '../../data/users';
+// const featuredUsers = users.filter((x) => x.hasOwnProperty("featured"));
+// featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
+import versions from '../../versions.json';
+import restApiVersions from '../../static/swagger/restApiVersions.json';
+import siteConfig from '../../docusaurus.config';
 
 export const latestStableVersion = versions[0];
 
@@ -85,6 +84,12 @@ export function getApiVersion(anchor) {
     })[0];
     _restApiVs[key] = restApiVersions[_tKey];
   }
+  // Object.keys(_vsGroups).map(key => {
+  //   let _tKey = _vsGroups[key].sort((a, b) => {
+  //     return -compareVersions.compare(b, a, "<");
+  //   })[0];
+  //   _restApiVs[key] = restApiVersions[_tKey];
+  // })
 
   if (_restApiVs[version][0]["fileName"].indexOf(anchor) == 0) {
     apiVersion = _restApiVs[version][0]["version"];

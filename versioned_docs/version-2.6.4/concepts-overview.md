@@ -29,3 +29,4 @@ Key features of Pulsar are listed below:
 - [Authentication and Authorization](concepts-authentication.md)
 - [Topic Compaction](concepts-topic-compaction.md)
 - [Tiered Storage](concepts-tiered-storage.md)
+- [Proxy support with SNI routing](concepts-proxy-sni-routing.md)

@@ -43,7 +43,7 @@ export function CurrentPulsarDownloadTable(): JSX.Element {
             sha512: `${latestSrcArchiveUrl}.sha512`,
         },
     ]
-    return <div className="tailwind">
+    return <div>
         <ReleaseTable data={data}></ReleaseTable>
     </div>
 }

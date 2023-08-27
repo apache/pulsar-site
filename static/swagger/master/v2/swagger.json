@@ -1747,12 +1747,6 @@
                     "format": "int64",
                     "type": "integer"
                 },
-                "bucketDelayedIndexStats": {
-                    "additionalProperties": {
-                        "$ref": "#/definitions/TopicMetricBean"
-                    },
-                    "type": "object"
-                },
                 "bytesInCounter": {
                     "format": "int64",
                     "type": "integer"
@@ -2171,12 +2165,6 @@
                     "format": "int64",
                     "type": "integer"
                 },
-                "bucketDelayedIndexStats": {
-                    "additionalProperties": {
-                        "$ref": "#/definitions/TopicMetricBean"
-                    },
-                    "type": "object"
-                },
                 "bytesInCounter": {
                     "format": "int64",
                     "type": "integer"
@@ -2443,6 +2431,12 @@
                 "gcsManagedLedgerOffloadServiceAccountKeyFile": {
                     "type": "string"
                 },
+                "managedLedgerExtraConfigurations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
                 "managedLedgerOffloadBucket": {
                     "type": "string"
                 },
@@ -2618,12 +2612,6 @@
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
-                },
-                "bucketDelayedIndexStats": {
-                    "additionalProperties": {
-                        "$ref": "#/definitions/TopicMetricBean"
-                    },
-                    "type": "object"
                 },
                 "bytesInCounter": {
                     "format": "int64",
@@ -4004,24 +3992,6 @@
             },
             "type": "object"
         },
-        "TopicMetricBean": {
-            "properties": {
-                "labelsAndValues": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "value": {
-                    "format": "double",
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
         "TopicStats": {
             "properties": {
                 "averageMsgSize": {
@@ -4283,6 +4253,9 @@
                 "httpServerThreadPoolQueueSize": {
                     "format": "int32",
                     "type": "integer"
+                },
+                "ignoreUnknownConfigFields": {
+                    "type": "boolean"
                 },
                 "includeStandardPrometheusMetrics": {
                     "type": "boolean"
@@ -8775,7 +8748,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "Namespaces_setInactiveTopicPolicies",
+                "operationId": "Namespaces_removeMaxTopicsPerNamespace",
                 "parameters": [
                     {
                         "in": "path",
@@ -8801,7 +8774,7 @@
                         "description": "Tenant or namespace doesn't exist"
                     }
                 },
-                "summary": "Set maxTopicsPerNamespace config on a namespace.",
+                "summary": "Remove maxTopicsPerNamespace config on a namespace.",
                 "tags": [
                     "namespaces"
                 ]
@@ -8847,7 +8820,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "Namespaces_setInactiveTopicPolicies",
+                "operationId": "Namespaces_setMaxTopicsPerNamespace",
                 "parameters": [
                     {
                         "in": "path",
@@ -21088,7 +21061,7 @@
                         "type": "string"
                     },
                     {
-                        "description": "Subscription to create position on",
+                        "description": "Name of subscription to be created",
                         "in": "path",
                         "name": "subscriptionName",
                         "required": true,
@@ -30921,7 +30894,7 @@
                         "type": "string"
                     },
                     {
-                        "description": "Subscription to create position on",
+                        "description": "Name of subscription to be created",
                         "in": "path",
                         "name": "subscriptionName",
                         "required": true,

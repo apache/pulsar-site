@@ -150,7 +150,7 @@ To package a Java function as NAR, complete the following steps.
                 <plugin>
                     <groupId>org.apache.nifi</groupId>
                     <artifactId>nifi-nar-maven-plugin</artifactId>
-                    <version>1.2.0</version>
+                    <version>1.5.0</version>
                     </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

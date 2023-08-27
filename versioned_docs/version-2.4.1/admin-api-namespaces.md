@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](https://pulsar.apache.org/tools/pulsar-admin/).
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see Pulsar admin doc.
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
@@ -24,7 +24,7 @@ Pulsar [namespaces](reference-terminology.md#namespace) are logical groupings of
 
 Namespaces can be managed via:
 
-* The `namespaces` command of the [`pulsar-admin`](https://pulsar.apache.org/tools/pulsar-admin/) tool
+* The `namespaces` command of the `pulsar-admin` tool
 * The `/admin/v2/namespaces` endpoint of the admin {@inject: rest:REST:/} API
 * The `namespaces` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
 
@@ -612,7 +612,7 @@ $ pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenan
 
 ```java
 
-admin.namespaces().splitNamespaceBundle(namespace, bundle)
+admin.namespaces().splitNamespaceBundle(namespace, bundle, unloadSplitBundles)
 
 ```
 

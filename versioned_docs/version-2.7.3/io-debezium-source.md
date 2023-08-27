@@ -201,6 +201,35 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
 6. A MySQL client pops out.
 
+   Change the connection mode to `mysql_native_password`.
+   ```
+   mysql> show variables like "caching_sha2_password_auto_generate_rsa_keys";
+   +----------------------------------------------+-------+
+   | Variable_name                                | Value |
+   +----------------------------------------------+-------+
+   | caching_sha2_password_auto_generate_rsa_keys | ON    |
+   +----------------------------------------------+-------+
+
+   # If the value of "caching_sha2_password_auto_generate_rsa_keys" is ON, ensure the plugin of mysql.user is "mysql_native_password".
+   mysql> SELECT Host, User, plugin from mysql.user where user={user};
+   +-----------+------+-----------------------+
+   | Host      | User | plugin                |
+   +-----------+------+-----------------------+
+   | localhost | root | caching_sha2_password |
+   +-----------+------+-----------------------+
+
+   # If the plugin of mysql.user is is "caching_sha2_password", set it to "mysql_native_password".
+   alter user '{user}'@'{host}' identified with mysql_native_password by {password};
+
+   # Check the plugin of mysql.user.
+   mysql> SELECT Host, User, plugin from mysql.user where user={user};
+   +-----------+------+-----------------------+
+   | Host      | User | plugin                |
+   +-----------+------+-----------------------+
+   | localhost | root | mysql_native_password |
+   +-----------+------+-----------------------+
+   ```
+
    Use the following commands to change the data of the table _products_.
 
    ```
@@ -314,7 +343,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
        --destination-topic-name debezium-postgres-topic \
        --tenant public \
        --namespace default \
-       --source-config '{"database.hostname": "localhost","database.port": "5432","database.user": "postgres","database.password": "changeme","database.dbname": "postgres","database.server.name": "dbserver1","schema.whitelist": "public","table.whitelist": "public.users","pulsar.service.url": "pulsar://127.0.0.1:6650"}'
+       --source-config '{"database.hostname": "localhost","database.port": "5432","database.user": "postgres","database.password": "changeme","database.dbname": "postgres","database.server.name": "dbserver1","plugin.name": "pgoutput","schema.whitelist": "public","table.whitelist": "public.users","pulsar.service.url": "pulsar://127.0.0.1:6650"}'
 
        ```
 

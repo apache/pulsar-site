@@ -1,0 +1,85 @@
+.Input {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.InputIcon {
+  position: absolute;
+  opacity: 0.5;
+  height: 100%;
+  width: 2.65rem;
+  display: flex;
+  align-items: center;
+  padding-left: 0.75em;
+  pointer-events: none;
+  padding-top: 0.25rem; /* Fix svg align. */
+}
+
+.InputIcon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: var(--text-color);
+}
+
+.InputInput {
+  position: relative;
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  padding: 0 1.2rem;
+  height: 3rem;
+  display: flex;
+  flex: 1 0 auto;
+  font-size: 1rem;
+  color: var(--text-color);
+  caret-color: var(--text-color);
+  transition: var(--transition-short);
+  width: 100%;
+}
+
+.InputInput.SmallInputInput {
+  height: 1.75rem;
+}
+
+.InputInput.InputInputWithError,
+.InputInput.InputInputWithError:focus {
+  border-color: var(--accent-color-red);
+}
+
+.InputInputWithIcon {
+  padding: 0.75rem 2.625rem;
+}
+
+.InputInput:focus {
+  border-color: var(--border-color-focused);
+  transition: var(--transition-short);
+}
+
+.InputInput:focus {
+  outline: none;
+}
+
+.InputInput::placeholder {
+  opacity: 0.5;
+  color: var(--text-color);
+}
+
+.InputInputClearable {
+  padding-right: 2rem;
+}
+
+.Clear {
+  position: absolute;
+  right: 1rem;
+  opacity: 0.5;
+}
+.Clear:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.Clear svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: var(--text-color);
+}

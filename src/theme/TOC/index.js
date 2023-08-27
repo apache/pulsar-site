@@ -8,7 +8,7 @@ import React from 'react';
 import clsx from 'clsx';
 import TOCItems from '@theme/TOCItems';
 import styles from './styles.module.css';
-import ArticleThumb from "@site/src/components/ArticleThumb/ArticleThumb";
+import ArticleThumb from "@site/src/components/ui/ArticleThumb/ArticleThumb";
 // Using a custom className
 // This prevents TOCInline/TOCCollapsible getting highlighted by mistake
 const LINK_CLASS_NAME = 'table-of-contents__link toc-highlight';

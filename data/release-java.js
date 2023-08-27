@@ -1,4 +1,7 @@
 module.exports = [
+{tagName: "v3.1.0",vtag:"3.1.x",releaseNotes:"/release-notes/versioned/client-java-3.1.0/",doc:"/docs/3.1.x/client-libraries-java",version:"v3.1.x"},
+{tagName: "v3.0.0",vtag:"3.0.x",releaseNotes:"/release-notes/versioned/client-java-3.0.0/",doc:"/docs/3.0.x/client-libraries-java",version:"v3.0.x"},
+{tagName: "v2.11.2",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.2/",doc:"/docs/2.11.x/client-libraries-java",version:"v2.11.x"},
 {tagName: "v2.11.1",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.1/",doc:"/docs/2.11.x/client-libraries-java",version:"v2.11.x"},
 {tagName: "v2.11.0",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.0/",doc:"/docs/2.11.x/client-libraries-java",version:""},
 {tagName: "v2.10.4",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.4/",doc:"/docs/2.10.x/client-libraries-java",version:"v2.10.x"},
@@ -6,7 +9,8 @@ module.exports = [
 {tagName: "v2.10.2",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.2/",doc:"/docs/2.10.x/client-libraries-java",version:""},
 {tagName: "v2.10.1",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.1/",doc:"/docs/2.10.x/client-libraries-java",version:""},
 {tagName: "v2.10.0",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.0/",doc:"/docs/2.10.x/client-libraries-java",version:""},
-{tagName: "v2.9.4",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-java-2.9.4/",doc:"/docs/2.9.x/client-libraries-java",version:"v2.9.x"},
+{tagName: "v2.9.5",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-java-2.9.5/",doc:"/docs/2.9.x/client-libraries-java",version:"v2.9.x"},
+{tagName: "v2.9.4",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-java-2.9.4/",doc:"/docs/2.9.x/client-libraries-java",version:""},
 {tagName: "v2.9.3",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-java-2.9.3/",doc:"/docs/2.9.x/client-libraries-java",version:""},
 {tagName: "v2.9.2",vtag:"2.9.x",releaseNotes:"/release-notes/versioned/client-java-2.9.2/",doc:"/docs/2.9.x/client-libraries-java",version:""},
 {tagName: "v2.8.4",vtag:"2.8.x",releaseNotes:"/release-notes/versioned/client-java-2.8.4/",doc:"/docs/2.8.x/client-libraries-java",version:"v2.8.x"},

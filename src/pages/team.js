@@ -1,6 +1,6 @@
 import * as React from "react";
 import Layout from "@theme/Layout";
-import TeamTable from "../components/TeamTable";
+import TeamTable from "../components/pages/CommunityPage/TeamTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate, { translate } from "@docusaurus/Translate";
 import team from "../../data/team";

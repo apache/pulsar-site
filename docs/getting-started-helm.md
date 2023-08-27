@@ -2,15 +2,10 @@
 id: getting-started-helm
 title: Run a standalone Pulsar cluster in Kubernetes
 sidebar_label: "Run Pulsar in Kubernetes"
+description: Get started with Apache Pulsar on your local machine using Kubernetes.
 ---
 
-This section guides you through every step of installing and running Apache Pulsar with Helm on Kubernetes quickly, including the following sections:
-
-- Install the Apache Pulsar on Kubernetes using Helm
-- Start and stop Apache Pulsar
-- Create topics using `pulsar-admin`
-- Produce and consume messages using Pulsar clients
-- Monitor Apache Pulsar status with Prometheus and Grafana
+This section guides you through every step of installing and running Apache Pulsar with Helm on Kubernetes quickly.
 
 For deploying a Pulsar cluster for production usage, read the documentation on [how to configure and install a Pulsar Helm chart](helm-deploy.md).
 
@@ -25,6 +20,8 @@ For deploying a Pulsar cluster for production usage, read the documentation on [
 For the following steps, step 2 and step 3 are for **developers** and step 4 and step 5 are for **administrators**.
 
 :::
+
+To run Pulsar with Helm on Kubernetes, follow the steps below.
 
 ## Step 0: Prepare a Kubernetes cluster
 
@@ -96,6 +93,20 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
        --namespace pulsar \
        pulsar-mini apache/pulsar
    ```
+
+:::tip
+
+Make sure the `values-minikube.yaml` file contains the following lines:
+
+```yaml
+pulsar_manager:
+  configData:
+    ENV_SPRING_CONFIGURATION_FILE: "/pulsar-manager/pulsar-manager/application.properties"
+    SPRING_CONFIGURATION_FILE: "/pulsar-manager/pulsar-manager/application.properties"
+    PULSAR_MANAGER_OPTS: " -Dlog4j2.formatMsgNoLookups=true"
+```
+
+:::
 
 5. Check the status of all pods.
 
@@ -343,22 +354,36 @@ Then you can proceed with the following steps:
 
 [Pulsar Manager](administration-pulsar-manager.md) is a web-based GUI management tool for managing and monitoring Pulsar.
 
-1. By default, the `Pulsar Manager` is exposed as a separate `LoadBalancer`. You can open the Pulsar Manager UI using the following command:
+1. To create a superuser account, connect to the pulsar-manager pod and create the account:
+
+```bash
+kubectl exec -it YOUR_PULSAR_MANAGER_POD_NAME -n pulsar -- /bin/bash
+CSRF_TOKEN=$(curl http://localhost:7750/pulsar-manager/csrf-token)
+curl \
+    -H "X-XSRF-TOKEN: $CSRF_TOKEN" \
+    -H "Cookie: XSRF-TOKEN=$CSRF_TOKEN;" \
+    -H 'Content-Type: application/json' \
+    -X PUT http://localhost:7750/pulsar-manager/users/superuser \
+    -d '{"name": "pulsar", "password": "pulsar", "description": "test", "email": "username@test.org"}'
+```
+
+2. By default, the `Pulsar Manager` is exposed as a separate `LoadBalancer`. You can open the Pulsar Manager UI using the following command:
 
    ```bash
    minikube service -n pulsar pulsar-mini-pulsar-manager
    ```
 
-2. The Pulsar Manager UI will be open in your browser. You can use the username `pulsar` and password `pulsar` to log into Pulsar Manager.
+3. The Pulsar Manager UI will be open in your browser. You can use the username `pulsar` and password `pulsar` to log into Pulsar Manager.
 
-3. In Pulsar Manager UI, you can create an environment.
+4. In Pulsar Manager UI, you can create an environment.
 
    - Click **New Environment** in the upper-left corner.
    - Type `pulsar-mini` for the field `Environment Name` in the pop-up window.
    - Type `http://pulsar-mini-broker:8080` for the field `Service URL` in the pop-up window.
+   - Type `http://pulsar-mini-bookie:8080` for the field `Bookie URL` in the pop-up window.
    - Click **Confirm** in the pop-up window.
 
-4. After successfully creating an environment, you are redirected to the `tenants` page of that environment. Then you can create `tenants`, `namespaces`, and `topics` using the Pulsar Manager.
+5. After successfully creating an environment, you can create `tenants`, `namespaces`, and `topics` using the Pulsar Manager.
 
 ## Step 5: Use Prometheus and Grafana to monitor cluster
 

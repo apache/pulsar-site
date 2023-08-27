@@ -1150,6 +1150,17 @@ Supported algorithms name for namespace bundle split
 
 **Category**: Load Balancer
 
+### topicBundleAssignmentStrategy
+Name of topic bundle assignment strategy to use
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.naming.ConsistentHashingTopicBundleAssigner`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### aggregatePublisherStatsByProducerName
 If true, aggregate publisher stats of PartitionedTopicStats by producerName
 
@@ -2220,12 +2231,34 @@ replicator prefix used for replicator producer name and cursor name
 
 **Category**: Replication
 
+### inflightSaslContextExpiryMs
+how often the broker expires the inflight SASL context.
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: SASL Authentication Provider
+
 ### kinitCommand
 kerberos kinit command.
 
 **Type**: `java.lang.String`
 
 **Default**: `/usr/bin/kinit`
+
+**Dynamic**: `false`
+
+**Category**: SASL Authentication Provider
+
+### maxInflightSaslContext
+Maximum number of inflight sasl context.
+
+**Type**: `long`
+
+**Default**: `50000`
 
 **Dynamic**: `false`
 
@@ -2580,6 +2613,17 @@ Interval between checks to see if cluster is migrated and marks topic migrated  
 
 **Category**: Server
 
+### compactionServiceFactoryClassName
+The class name of the factory that implements the topic compaction service.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.compaction.PulsarCompactionServiceFactory`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### configurationMetadataStoreUrl
 The metadata store URL for the configuration data. If empty, we fall back to use metadataStoreUrl
 
@@ -2625,7 +2669,7 @@ Whether to enable the delayed delivery for messages.
 **Category**: Server
 
 ### delayedDeliveryFixedDelayDetectionLookahead
-Size of the lookahead window to use when detecting if all the messages in the topic have a fixed delay. Default is 50,000. Setting the lookahead window to 0 will disable the logic to handle fixed delays in messages in a different way.
+Size of the lookahead window to use when detecting if all the messages in the topic have a fixed delay for InMemoryDelayedDeliveryTracker (the default DelayedDeliverTracker). Default is 50,000. Setting the lookahead window to 0 will disable the logic to handle fixed delays in messages in a different way.
 
 **Type**: `long`
 
@@ -2680,7 +2724,7 @@ The delayed message index bucket min index count. When the index count of the cu
 **Category**: Server
 
 ### delayedDeliveryTickTimeMillis
-Control the tick time for when retrying on delayed delivery, affecting the accuracy of the delivery time compared to the scheduled time. Default is 1 second. Note that this time is used to configure the HashedWheelTimer's tick time for the InMemoryDelayedDeliveryTrackerFactory.
+Control the tick time for when retrying on delayed delivery, affecting the accuracy of the delivery time compared to the scheduled time. Default is 1 second. Note that this time is used to configure the HashedWheelTimer's tick time.
 
 **Type**: `long`
 
@@ -2698,17 +2742,6 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.delayed.InMemoryDelayedDeliveryTrackerFactory`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### disableBrokerInterceptors
-Enable or disable the broker interceptor, which is only used for testing for now
-
-**Type**: `boolean`
-
-**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -2979,7 +3012,7 @@ Enable cluster's failure-domain which can distribute brokers into logical region
 **Category**: Server
 
 ### haProxyProtocolEnabled
-Enable or disable the proxy protocol.
+Enable or disable the proxy protocol. If true, the real IP addresses of consumers and producers can be obtained when getting topic statistics data.
 
 **Type**: `boolean`
 
@@ -3023,7 +3056,7 @@ Used to specify the internal listener name for the broker.The listener name must
 **Category**: Server
 
 ### isDelayedDeliveryDeliverAtTimeStrict
-When using the InMemoryDelayedDeliveryTrackerFactory (the default DelayedDeliverTrackerFactory), whether the deliverAt time is strictly followed. When false (default), messages may be sent to consumers before the deliverAt time by as much as the tickTimeMillis. This can reduce the overhead on the broker of maintaining the delayed index for a potentially very short time period. When true, messages will not be sent to consumer until the deliverAt time has passed, and they may be as late as the deliverAt time plus the tickTimeMillis for the topic plus the delayedDeliveryTickTimeMillis.
+Whether the deliverAt time is strictly followed. When false (default), messages may be sent to consumers before the deliverAt time by as much as the tickTimeMillis. This can reduce the overhead on the broker of maintaining the delayed index for a potentially very short time period. When true, messages will not be sent to consumer until the deliverAt time has passed, and they may be as late as the deliverAt time plus the tickTimeMillis for the topic plus the delayedDeliveryTickTimeMillis.
 
 **Type**: `boolean`
 
@@ -3150,7 +3183,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `868`
+**Default**: `867`
 
 **Dynamic**: `true`
 
@@ -3468,17 +3501,6 @@ Number of threads to use for orderedExecutor. The ordered executor is used to op
 
 **Category**: Server
 
-### numWorkerThreadsForNonPersistentTopic
-Number of worker threads to serve non-persistent topic
-
-**Type**: `int`
-
-**Default**: `2`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### preciseDispatcherFlowControl
 Precise dispatcher flow control according to history message number of each entry
 
@@ -3578,17 +3600,6 @@ Path for the file used to determine the rotation status for the broker when resp
 
 **Category**: Server
 
-### streamingDispatch
-Whether to use streaming read dispatcher. Currently is in preview and can be changed in subsequent release.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### strictBookieAffinityEnabled
 Enable or disable strict bookie affinity.
 
@@ -3669,6 +3680,17 @@ Amount of seconds to timeout when loading a topic. In situations with many geo-r
 **Type**: `long`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicOrderedExecutorThreadNum
+Number of worker threads to serve topic ordered executor
+
+**Type**: `int`
+
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -3938,7 +3960,7 @@ whether limit per_channel_bookie_client metrics of bookkeeper client stats
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -4426,6 +4448,19 @@ The number of partitioned topics that is allowed to be automatically created if 
 
 **Category**: Storage (Managed Ledger)
 
+### managedCursorInfoCompressionThresholdInBytes
+ManagedCursorInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
+0 means compression will always apply.
+
+
+**Type**: `long`
+
+**Default**: `16384`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedCursorInfoCompressionType
 ManagedCursorInfo compression type, option values (NONE, LZ4, ZLIB, ZSTD, SNAPPY). 
 If value is NONE, then save the ManagedCursorInfo bytes data directly.
@@ -4511,7 +4546,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `347`
+**Default**: `346`
 
 **Dynamic**: `true`
 
@@ -4638,6 +4673,19 @@ Time to rollover ledger for inactive topic (duration without any publish on that
 **Default**: `0`
 
 **Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerInfoCompressionThresholdInBytes
+ManagedLedgerInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
+0 means compression will always apply.
+
+
+**Type**: `long`
+
+**Default**: `16384`
+
+**Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5374,6 +5422,18 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### numWorkerThreadsForNonPersistentTopic
+Number of worker threads to serve non-persistent topic.
+@deprecated - use topicOrderedExecutorThreadNum instead.
+
+**Type**: `int`
+
+**Default**: `-1`
 
 **Dynamic**: `false`
 

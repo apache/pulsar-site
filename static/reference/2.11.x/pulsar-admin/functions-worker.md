@@ -9,7 +9,7 @@ $ pulsar-admin functions-worker subcommand
 
 
 
-## <em>function-stats</em>
+## function-stats
 
 Dump all functions stats running on this broker
 
@@ -25,7 +25,7 @@ $ pulsar-admin functions-worker function-stats options
 |---|---|---|
 
 
-## <em>monitoring-metrics</em>
+## <em>monitoring-metrics
 
 Dump metrics for Monitoring
 
@@ -41,7 +41,7 @@ $ pulsar-admin functions-worker monitoring-metrics options
 |---|---|---|
 
 
-## <em>get-cluster</em>
+## <em>get-cluster
 
 Get all workers belonging to this cluster
 
@@ -57,7 +57,7 @@ $ pulsar-admin functions-worker get-cluster options
 |---|---|---|
 
 
-## <em>get-cluster-leader</em>
+## <em>get-cluster-leader
 
 Get the leader of the worker cluster
 
@@ -73,7 +73,7 @@ $ pulsar-admin functions-worker get-cluster-leader options
 |---|---|---|
 
 
-## <em>get-function-assignments</em>
+## <em>get-function-assignments
 
 Get the assignments of the functions across the worker cluster
 
@@ -89,7 +89,7 @@ $ pulsar-admin functions-worker get-function-assignments options
 |---|---|---|
 
 
-## <em>rebalance</em>
+## <em>rebalance
 
 Triggers a rebalance of functions to workers
 

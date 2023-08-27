@@ -1,6 +1,42 @@
 module.exports = [
     {
         "author": "Technoboy-",
+        "tagName": "v3.1.0",
+        "publishedAt": "2023-08-10T16:37:40Z",
+        "vtag": "3.1.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.1.0/",
+        "doc": "/docs/3.1.x",
+        "version": "v3.1.x"
+    },
+    {
+        "author": "RobertIndie",
+        "tagName": "v3.0.1",
+        "publishedAt": "2023-08-07T15:00:00Z",
+        "vtag": "3.0.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.0.1/",
+        "doc": "/docs/3.0.x",
+        "version": "v3.0.x"
+    },
+    {
+        "author": "RobertIndie",
+        "tagName": "v3.0.0",
+        "publishedAt": "2023-05-02T16:37:40Z",
+        "vtag": "3.0.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.0.0/",
+        "doc": "/docs/3.0.x",
+        "version": "v3.0.x"
+    },
+    {
+        "author": "Technoboy-",
+        "tagName": "v2.11.2",
+        "publishedAt": "2023-07-18T16:53:34Z",
+        "vtag": "2.11.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.2/",
+        "doc": "/docs/2.11.x",
+        "version": "v2.11.x"
+    },
+    {
+        "author": "Technoboy-",
         "tagName": "v2.11.1",
         "publishedAt": "2023-04-19T16:53:34Z",
         "vtag": "2.11.x",
@@ -19,12 +55,21 @@ module.exports = [
       "version": "v2.11.x"
     },
     {
+      "author": "liangyepianzhou",
+      "tagName": "v2.10.5",
+      "publishedAt": "2023-07-30T01:53:34Z",
+      "vtag": "2.10.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.10.5/",
+      "doc": "/docs/2.10.x",
+      "version": "v2.10.x"
+    },
+    {
         "author": "liangyepianzhou",
         "tagName": "v2.10.4",
         "publishedAt": "2023-04-18T01:53:34Z",
         "vtag": "2.10.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.10.4/",
-        "releaseBlog": "",
+        "releaseBlog": "/blog/2023-04-19-Apache-Pulsar-2-10-4.md",
         "doc": "/docs/2.10.x",
         "version": "v2.10.x"
     },
@@ -67,6 +112,15 @@ module.exports = [
         "releaseBlog": "",
         "doc": "/docs/2.10.x",
         "version": ""
+    },
+    {
+      "author": "coderzc",
+      "tagName": "v2.9.5",
+      "publishedAt": "2023-04-20T02:38:21Z",
+      "vtag": "2.9.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.9.5/",
+      "doc": "/docs/2.9.x",
+      "version": "v2.9.x"
     },
     {
         "author": "congbobo184",

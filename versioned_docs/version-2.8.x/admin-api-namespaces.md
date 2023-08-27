@@ -17,7 +17,7 @@ Namespaces can be managed via:
 
 * The [`namespaces`](reference-pulsar-admin.md#clusters) command of the [`pulsar-admin`](reference-pulsar-admin.md) tool
 * The `/admin/v2/namespaces` endpoint of the admin {@inject: rest:REST:/} API
-* The `namespaces` method of the {@inject: javadoc:PulsarAdmin:/admin/org/apache/pulsar/client/admin/PulsarAdmin} object in the [Java API](client-libraries-java.md)
+* The `namespaces` method of the [PulsarAdmin](/api/admin/org/apache/pulsar/client/admin/PulsarAdmin) object in the [Java API](client-libraries-java.md)
 
 ## Namespaces resources
 
@@ -582,7 +582,7 @@ N/A
 
 ```java
 
-admin.namespaces().splitNamespaceBundle(namespace, bundle)
+admin.namespaces().splitNamespaceBundle(namespace, bundle, unloadSplitBundles, splitAlgorithmName)
 
 ```
 

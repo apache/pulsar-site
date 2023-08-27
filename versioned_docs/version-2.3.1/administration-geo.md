@@ -49,7 +49,7 @@ This section guides you through the steps to configure geo-replicated clusters.
 
 ### Connect replication clusters
 
-To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](https://pulsar.apache.org/tools/pulsar-admin/) tool to create a connection.
+To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the `pulsar-admin` tool to create a connection.
 
 **Example**
 
@@ -70,7 +70,7 @@ $ bin/pulsar-admin clusters create \
 
    :::tip
 
-   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](https://pulsar.apache.org/tools/pulsar-admin/).
+   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see pulsar-admin clusters create.
    - Different clusters may have different authentications. You can use the authentication flag `--auth-plugin` and `--auth-parameters` together to set cluster authentication, which overrides `brokerClientAuthenticationPlugin` and `brokerClientAuthenticationParameters` if `authenticationEnabled` sets to `true` in `broker.conf` and `standalone.conf`. For more information, see [authentication and authorization](concepts-authentication.md).
 
    :::
@@ -135,7 +135,7 @@ $ bin/pulsar-admin namespaces set-clusters my-tenant/my-namespace \
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example for the [Java API](client-libraries-java.md). Note the use of the `setReplicationClusters` method when you construct the {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} object:
+The following is an example for the [Java API](client-libraries-java.md). Note the use of the `replicationClusters` method when you construct the {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} object:
 
 ```java
 
@@ -150,7 +150,7 @@ Producer producer = client.newProducer()
 
 producer.newMessage()
         .value("my-payload".getBytes())
-        .setReplicationClusters(restrictReplicationTo)
+        .replicationClusters(restrictReplicationTo)
         .send();
 
 ```
@@ -165,7 +165,7 @@ You can check topic-specific statistics for geo-replication topics using one of 
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"}]}>
 <TabItem value="pulsar-admin">
 
-Use the [`pulsar-admin topics stats`](https://pulsar.apache.org/tools/pulsar-admin/) command.
+Use the `pulsar-admin topics stats` command.
 
 ```shell
 
@@ -240,7 +240,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 
 ```shell
 
-  bin/pulsar-admin cluster create new-cluster
+  bin/pulsar-admin clusters create new-cluster
 
 ```
 

@@ -2,6 +2,7 @@
 id: concepts-overview
 title: Pulsar Overview
 sidebar_label: "Overview"
+description: Key features of Pulsar.
 ---
 
 Pulsar is a multi-tenant, high-performance solution for server-to-server messaging. Originally developed by Yahoo, Pulsar is under the stewardship of the [Apache Software Foundation](https://www.apache.org/).
@@ -26,7 +27,10 @@ A serverless lightweight computing framework [Pulsar Functions](functions-overvi
 - [Architecture Overview](concepts-architecture-overview.md)
 - [Pulsar Clients](concepts-clients.md)
 - [Geo Replication](concepts-replication.md)
+- [Cluster-level failover](concepts-cluster-level-failover.md)
 - [Multi Tenancy](concepts-multi-tenancy.md)
 - [Authentication and Authorization](concepts-authentication.md)
 - [Topic Compaction](concepts-topic-compaction.md)
-- [Tiered Storage](concepts-tiered-storage.md)
+- [Message throttling](concepts-throttling.md)
+- [Proxy support with SNI routing](concepts-proxy-sni-routing.md)
+- [Multiple advertised listeners](concepts-multiple-advertised-listeners.md)

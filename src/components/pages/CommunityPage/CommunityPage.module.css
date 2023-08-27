@@ -1,0 +1,89 @@
+.Slider {
+  margin-bottom: 4rem;
+}
+
+.Slider:global(.slick-track) {
+  display: flex;
+}
+
+.Slider:global(.slick-track .slick-slide) {
+  display: flex;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.Slide {
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 28rem;
+  overflow: hidden;
+}
+
+.SlideImage {
+  object-fit: cover;
+  border-radius: 0.65rem;
+}
+
+.Paragraph {
+  max-width: var(--max-readable-content-width);
+}
+
+.PromoCallout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.SectionWithBackground {
+  position: relative;
+}
+
+.SectionWithBackground:after {
+  content: "";
+  background-color: #fff;
+  background-image: radial-gradient(var(--text-color) 1px, #fff 1px);
+  background-size: 1.2rem 1.2rem;
+  bottom: 0;
+  height: 100%;
+  opacity: 0.8;
+  position: absolute;
+  right: 0;
+  width: 30%;
+  z-index: -1;
+}
+
+.StatTables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 1150px) {
+  .SectionWithBackground:after {
+    width: 20%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .SectionWithBackground:after {
+    display: none;
+  }
+
+  .StatTables {
+    grid-template-columns: 1fr;
+  }
+
+  .PromoCallout {
+    align-items: center;
+  }
+
+  .PromoCallout > * {
+    flex: 1;
+    width: 100%;
+  }
+}

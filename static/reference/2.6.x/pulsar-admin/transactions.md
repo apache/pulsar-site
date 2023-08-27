@@ -24,7 +24,7 @@ $ pulsar-admin transactions subcommand
 * `transaction-metadata`
 * `slow-transactions`
 
-## <em>coordinator-internal-stats</em>
+## coordinator-internal-stats
 
 Get transaction coordinator internal stats
 
@@ -43,7 +43,7 @@ Options
 | `-c, --coordinator-id` | The coordinator id              | 0       |
 | `-m, --metadata`       | Flag to include ledger metadata | false   |
 
-## <em>pending-ack-internal-stats</em>
+## pending-ack-internal-stats
 
 Get pending ack internal stats
 
@@ -63,7 +63,7 @@ Options
 | `-m, --metadata` | Flag to include ledger metadata | false   |
 | `-t, --topic`    | the topic name                  | null    |
 
-## <em>coordinator-stats</em>
+## coordinator-stats
 
 Get transaction coordinator stats
 
@@ -81,7 +81,7 @@ Options
 |------------------------|--------------------|---------|
 | `-c, --coordinator-id` | the coordinator id | null    |
 
-## <em>transaction-buffer-stats</em>
+## transaction-buffer-stats
 
 Get transaction buffer stats
 
@@ -99,7 +99,7 @@ Options
 |---------------|-------------|---------|
 | `-t, --topic` | the topic   | null    |
 
-## <em>pending-ack-stats</em>
+## pending-ack-stats
 
 Get transaction pending ack stats
 
@@ -118,7 +118,7 @@ Options
 | `-t, --topic`    | the topic             | null    |
 | `-s, --sub-name` | the subscription name | null    |
 
-## <em>transaction-in-buffer-stats</em>
+## transaction-in-buffer-stats
 
 Get transaction in buffer stats
 
@@ -138,7 +138,7 @@ Options
 | `-t, --topic`          | the topic          | null    |
 | `-m, --most-sig-bits`  | the most sig bits  | 0       |
 
-## <em>transaction-in-pending-ack-stats</em>
+## transaction-in-pending-ack-stats
 
 Get transaction in pending ack stats
 
@@ -159,7 +159,7 @@ Options
 | `-m, --most-sig-bits`  | the most sig bits     | 0       |
 | `-l, --least-sig-bits` | the least sig bits    | 0       |
 
-## <em>transaction-metadata</em>
+## transaction-metadata
 
 Get transaction metadata
 
@@ -178,7 +178,7 @@ Options
 | `-m, --most-sig-bits`  | the most sig bits  | 0       |
 | `-l, --least-sig-bits` | the least sig bits | 0       |
 
-## <em>slow-transactions</em>
+## slow-transactions
 
 Get slow transactions.
 

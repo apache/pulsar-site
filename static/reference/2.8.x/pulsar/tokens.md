@@ -18,7 +18,7 @@ $ pulsar tokens subcommand
 * `show`
 * `validate`
 
-## <em>create-secret-key</em>
+## create-secret-key
 
 Create a new secret key
 
@@ -38,7 +38,7 @@ Options
 | `-o, --output`              | Write the secret key to a file instead of stdout | null    |
 | `-b, --base64`              | Encode the key in base64                         | false   |
 
-## <em>create-key-pair</em>
+## create-key-pair
 
 Create a new or pair of keys public/private
 
@@ -58,7 +58,7 @@ Options
 | `--output-private-key`      | File where to write the private key           | null    |
 | `--output-public-key`       | File where to write the public key            | null    |
 
-## <em>create</em>
+## create
 
 Create a new token
 
@@ -80,7 +80,7 @@ Options
 | `-sk, --secret-key`         | Pass the secret key for signing the token. This can either be: data:, file:, etc..       | null    |
 | `-a, --signature-algorithm` | The signature algorithm for the new key pair.                                            | RS256   |
 
-## <em>show</em>
+## show
 
 Show the content of token
 
@@ -99,7 +99,7 @@ Options
 | `-i, --stdin`      | Read token from standard input | false   |
 | `-f, --token-file` | Read token from a file         | null    |
 
-## <em>validate</em>
+## validate
 
 Validate a token against a key
 
