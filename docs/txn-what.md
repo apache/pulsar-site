@@ -2,9 +2,10 @@
 id: txn-what
 title: What are transactions?
 sidebar_label: "Concept"
+escription: Get a comprehensive understanding of transactions in Pulsar.
 ---
 
-Transactions strengthen the message delivery semantics of Apache Pulsar and [processing guarantees of Pulsar Functions](functions-concepts.md#processing-guarantees-and-subscription-types). The Pulsar Transaction API supports atomic writes and acknowledgments across multiple topics.
+Transactions strengthen the message delivery semantics of Apache Pulsar and [processing guarantees of Pulsar Functions](functions-concepts.md#processing-guarantees-and-subscription-types). The Pulsar transaction API supports atomic writes and acknowledgments across multiple topics.
 
 Transactions allow:
 
@@ -42,7 +43,7 @@ Stream processing on Pulsar is a `consume-process-produce` operation on Pulsar t
 
 * `Produce`: a sink operator that runs a Pulsar producer writes the resulting messages to one or multiple Pulsar topics.
 
-![](/assets/txn-2.png)
+![Stream processing on Pulsar](/assets/txn-2.png)
 
 Pulsar transactions support end-to-end exactly-once stream processing, which means messages are not lost from a source operator and messages are not duplicated to a sink operator.
 

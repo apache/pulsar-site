@@ -2,6 +2,7 @@
 id: txn-why
 title: Why transactions?
 sidebar_label: "Why transactions?"
+description: Get a comprehensive understanding of why develop transaction feature in Pulsar.
 ---
 
 Pulsar transactions (txn) enable event streaming applications to consume, process, and produce messages in one atomic operation. The reason for developing this feature can be summarized as below.
@@ -15,7 +16,7 @@ produces the result as a message B (B = f(A)), then exactly-once processing
 guarantee means that A can only be marked as consumed if and only if B is
 successfully produced, and vice versa.
 
-![](/assets/txn-1.png)
+![Transaction in Pulsar](/assets/txn-1.png)
 
 The Pulsar transactions API strengthens the message delivery semantics and the processing guarantees for stream processing. It enables stream processing applications to consume, process, and produce messages in one atomic operation. That means, a batch of messages in a transaction can be received from, produced to and acknowledged by many topic partitions. All the operations involved in a transaction succeed or fail as one single unit.
 

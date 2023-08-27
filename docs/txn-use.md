@@ -2,6 +2,7 @@
 id: txn-use
 title: Get started
 sidebar_label: "Get started"
+description: Get started to use Pulsar transaction API.
 ---
 
 Pulsar transaction is primarily a server-side and protocol-level feature. This tutorial guides you through every step of how to use the [Pulsar transaction API](/api/admin/) to send and receive messages in a Java client. 
@@ -17,7 +18,11 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
 
 ## Steps
 
-1. Enable transactions. You can set the following configurations in the [`broker.conf`](https://github.com/apache/pulsar/blob/master/conf/broker.conf) or [`standalone.conf`](https://github.com/apache/pulsar/blob/master/conf/standalone.conf) file.
+To use Pulsar transaction API, complete the following steps.
+
+1. Enable transactions. 
+
+    You can set the following configurations in the [`broker.conf`](https://github.com/apache/pulsar/blob/master/conf/broker.conf) or [`standalone.conf`](https://github.com/apache/pulsar/blob/master/conf/standalone.conf) file.
 
     ```conf
     //mandatory configuration, used to enable transaction coordinator

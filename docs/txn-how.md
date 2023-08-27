@@ -2,6 +2,7 @@
 id: txn-how
 title: How transactions work?
 sidebar_label: "Working principles"
+description: Get a comprehensive understanding of how transactions work in Pulsar.
 ---
 
 This section describes transaction components and how the components work together. For the complete design details, see [PIP-31: Transactional Streaming](https://docs.google.com/document/d/145VYp09JKTw9jAT-7yNyFU255FptB2_B2Fye100ZXDI/edit#heading=h.bm5ainqxosrx).
@@ -42,17 +43,9 @@ The pending acknowledge state is persisted in the pending acknowledge log (curso
 
 ## Data flow
 
-At a high level, the data flow can be split into several steps:
-
-1. Begin a transaction.
-
-2. Publish messages with a transaction.
-
-3. Acknowledge messages with a transaction.
-
-4. End a transaction.
-
 To help you debug or tune the transaction for better performance, review the following diagrams and descriptions.
+
+The data flow of a transaction can be split into several steps.
 
 ### 1. Begin a transaction
 
@@ -73,7 +66,7 @@ Let's walk through the steps for _beginning a transaction_.
 
 In this stage, the Pulsar client enters a transaction loop, repeating the `consume-process-produce` operation for all the messages that comprise the transaction. This is a long phase and is potentially composed of multiple produce and acknowledgment requests.
 
-![](/assets/txn-4.png)
+![Workflow of publishing messages with a transaction in Pulsar](/assets/txn-4.png)
 
 Let's walk through the steps for _publishing messages with a transaction_.
 
@@ -90,7 +83,7 @@ Let's walk through the steps for _publishing messages with a transaction_.
 
 In this phase, the Pulsar client sends a request to the transaction coordinator and a new subscription is acknowledged as a part of a transaction.
 
-![](/assets/txn-5.png)
+![Workflow of acknowledging messages with a transaction in Pulsar](/assets/txn-5.png)
 
 Let's walk through the steps for _acknowledging messages with a transaction_.
 
@@ -111,7 +104,7 @@ At the end of a transaction, the Pulsar client decides to commit or abort the tr
 
 When the Pulsar client finishes a transaction, it issues an end transaction request.
 
-![](/assets/txn-6.png)
+![Workflow of ending a transaction request in Pulsar](/assets/txn-6.png)
 
 Let's walk through the steps for _ending the transaction_.
 
@@ -125,7 +118,7 @@ Let's walk through the steps for _ending the transaction_.
 
 The transaction coordinator starts the process of committing or aborting messages to all the partitions involved in this transaction.
 
-![](/assets/txn-7.png)
+![Workflow of finalizing a transaction in Pulsar](/assets/txn-7.png)
 
 Let's walk through the steps for _finalizing a transaction_.
 
@@ -139,7 +132,7 @@ Let's walk through the steps for _finalizing a transaction_.
 
 The transaction coordinator writes the final transaction status to the transaction log to complete the transaction.
 
-![](/assets/txn-8.png)
+![Workflow of marking a transaction request in Pulsar](/assets/txn-8.png)
 
 Let's walk through the steps for _marking a transaction as COMMITTED or ABORTED_.
 
