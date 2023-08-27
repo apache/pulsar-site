@@ -294,10 +294,9 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-postgres-source"
-  inputs: [ "debezium-postgres-topic" ]
+  topicName: "debezium-postgres-topic"
   archive: "connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar"
   parallelism: 1
-  topicName: "public/default/log-debezium-postgres"
 
   configs:
       ## config for postgres version 10+, official docker image: postgres:<10+>
