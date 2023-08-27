@@ -2,14 +2,12 @@
 id: deploy-docker
 title: Deploy a cluster on Docker
 sidebar_label: "Docker"
+description: Learn to deploy a Pulsar cluster on Docker.
 ---
 
-To deploy a Pulsar cluster on Docker using Docker commands, you need to complete the following steps:
-1. Pull a Pulsar Docker image.
-2. Create a network.
-3. Create and start the ZooKeeper, bookie, and broker containers.
+To deploy a Pulsar cluster on Docker using Docker commands, you need to complete the following steps.
 
-## Pull a Pulsar image
+## 1. Pull a Pulsar image
 
 To run Pulsar on Docker, you need to create a container for each Pulsar component: ZooKeeper, bookie, and the broker. You can pull the images of ZooKeeper and bookie separately on Docker Hub, and pull the Pulsar image for the broker. You can also pull only one Pulsar image and create three containers with this image. This tutorial takes the second option as an example.
 
@@ -18,7 +16,7 @@ You can pull a Pulsar image from Docker Hub with the following command. If you d
 docker pull apachepulsar/pulsar-all:latest
 ```
 
-## Create a network
+## 2. Create a network
 
 To deploy a Pulsar cluster on Docker, you need to create a network and connect the containers of ZooKeeper, bookie, and broker to this network.
 Use the following command to create the network `pulsar`:
@@ -27,7 +25,7 @@ Use the following command to create the network `pulsar`:
 docker network create pulsar
 ```
 
-## Create and start containers
+## 3. Create and start containers
 
 ### Create a ZooKeeper container
 

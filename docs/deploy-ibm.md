@@ -3,6 +3,7 @@ id: deploy-ibm
 title: Apache Pulsar Installation on IBM Kubernetes Cluster through Helm chart
 sidebar_label: "IBM Cloud Services"
 original_id: deploy-ibm
+description: Learn to deploy a Pulsar cluster on IBM cloud.
 ---
 
 :::tip
@@ -12,13 +13,7 @@ This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pul
 :::
 
 
-Deploying a Pulsar cluster on IBM cloud consists of the following steps:
-
-1. [Create VM on IBM Cloud.](#create-vm-on-ibm-cloud)
-2. [Create Kubernete cluster on IBM Cloud.](#create-kubernetes-cluster-on-ibm)
-3. [Prepare VM for connecting to Kubernetes cluster and deploy Pulsar Helm chart on Kubernetes cluster.](#prepare-vm-for-connecting-to-kubernetes-cluster-and-deploy-pulsar-helm-chart-on-kubernetes-cluster)
-4. [Verify the deployment.](#run-kubectl-commands-to-verify-the-deployment)
-
+Deploying a Pulsar cluster on IBM cloud consists of the following steps.
 
 ## 1. Create VM on IBM Cloud
 
