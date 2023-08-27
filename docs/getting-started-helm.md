@@ -381,7 +381,7 @@ curl \
    - Type `pulsar-mini` for the field `Environment Name` in the pop-up window.
    - Type `http://pulsar-mini-broker:8080` for the field `Service URL` in the pop-up window.
    - Type `http://pulsar-mini-bookie:8080` for the field `Bookie URL` in the pop-up window.
-  - Click **Confirm** in the pop-up window.
+   - Click **Confirm** in the pop-up window.
 
 5. After successfully creating an environment, you can create `tenants`, `namespaces`, and `topics` using the Pulsar Manager.
 
