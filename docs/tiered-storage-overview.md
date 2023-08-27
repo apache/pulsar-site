@@ -2,6 +2,7 @@
 id: tiered-storage-overview
 title: Overview of tiered storage
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of concepts and install methods of Pulsar tiered storage.
 ---
 
 Pulsar's **Tiered Storage** feature allows older backlog data to be moved from BookKeeper to long-term and cheaper storage, while still allowing clients to access the backlog as if nothing has changed.
@@ -30,13 +31,15 @@ For example, if you have a topic containing user actions that you use to train y
 
 ## How to install tiered storage offloaders?
 
-Pulsar releases a separate binary distribution, containing the tiered storage offloaders. To enable those offloaders, you need to download the offloaders tarball release:
+Pulsar releases a separate binary distribution, containing the tiered storage offloaders. To enable those offloaders, you need to complete the following steps.
+
+1. download the offloaders tarball release
 
 ```bash
 wget pulsar:offloader_release_url
 ```
 
-After you download the tarball, untar the offloaders package and copy the offloaders as `offloaders` in the pulsar directory:
+2. Untar the offloaders package and copy the offloaders as `offloaders` in the pulsar directory
 
 ```bash
 tar xvfz apache-pulsar-offloaders-@pulsar:version@-bin.tar.gz
@@ -60,14 +63,26 @@ For more information on how to configure tiered storage, see [Tiered storage coo
 
 A topic in Pulsar is backed by a **log**, known as a **managed ledger**. This log is composed of an ordered list of segments. Pulsar only writes to the final segment of the log. All previous segments are sealed. The data within the segment is immutable. This is known as a **segment-oriented architecture**.
 
-![Tiered storage](/assets/pulsar-tiered-storage.png "Tiered Storage")
+![Tiered storage in Pulsar](/assets/pulsar-tiered-storage.png "Tiered Storage")
 
-The tiered storage offloading mechanism takes advantage of the segment-oriented architecture. When offloading is requested, the segments of the log are copied one by one to tiered storage. All segments of the log (apart from the current segment) written to tiered storage can be offloaded.
+Tiered storage works as follows:
 
-Data written to BookKeeper is replicated to 3 physical machines by default. However, once a segment is sealed in BookKeeper, it becomes immutable and can be copied to long-term storage. Long-term storage has the potential to achieve significant cost savings.
+1. The tiered storage offloading mechanism takes advantage of the segment-oriented architecture. 
 
-Before offloading ledgers to long-term storage, you need to configure buckets, credentials, and other properties for the cloud storage service. Additionally, Pulsar uses multi-part objects to upload the segment data and brokers may crash while uploading the data. It is recommended that you add a life cycle rule for your bucket to expire incomplete multi-part upload after a day or two days to avoid getting charged for incomplete uploads. Moreover, you can trigger the offloading operation manually (via REST API or CLI) or automatically (via CLI).
+  When offloading is requested, the segments of the log are copied one by one to tiered storage. All segments of the log (apart from the current segment) written to tiered storage can be offloaded.
 
-After offloading ledgers to long-term storage, you can still query data in the offloaded ledgers with Pulsar SQL.
+2. Data written to BookKeeper is replicated to 3 physical machines by default. 
+  
+  However, once a segment is sealed in BookKeeper, it becomes immutable and can be copied to long-term storage. Long-term storage has the potential to achieve significant cost savings.
+
+3. Before offloading ledgers to long-term storage, you need to configure buckets, credentials, and other properties for the cloud storage service. 
+
+4. Additionally, Pulsar uses multi-part objects to upload the segment data and brokers may crash while uploading the data. 
+
+  It is recommended that you add a life cycle rule for your bucket to expire incomplete multi-part upload after a day or two days to avoid getting charged for incomplete uploads. 
+
+5. Moreover, you can trigger the offloading operation manually (via REST API or CLI) or automatically (via CLI).
+
+6. After offloading ledgers to long-term storage, you can still query data in the offloaded ledgers with Pulsar SQL.
 
 For more information about tiered storage for Pulsar topics, see [PIP-17](https://github.com/apache/pulsar/wiki/PIP-17:-Tiered-storage-for-Pulsar-topics) and [offload metrics](reference-metrics.md#offload-metrics).

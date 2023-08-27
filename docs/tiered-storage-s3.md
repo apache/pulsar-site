@@ -2,6 +2,7 @@
 id: tiered-storage-s3
 title: Use S3 offloader with Pulsar
 sidebar_label: "S3 offloader"
+description: Learn to install and configure S3 offloader with Pulsar.
 ---
 
 S3 offloader is introduced to serve S3-compatible storage, which means that the storage employs the S3 API as its "language" and applications that speak the S3 API are able to plug and play with S3-compatible storage.
@@ -10,13 +11,13 @@ This chapter guides you through every step of installing and configuring the S3 
 
 ## Installation
 
-Follow the steps below to install the S3 offloader.
-
 ### Prerequisite
 
 - Pulsar: 2.9.3 or later versions
 
 ### Steps
+
+Follow the steps below to install the S3 offloader.
 
 1. [Download the Pulsar tarball](getting-started-standalone.md#download-pulsar-distribution).
 2. Download and untar the Pulsar offloaders package, then copy the Pulsar offloaders as `offloaders` in the Pulsar directory. See [Install tiered storage offloaders](tiered-storage-overview.md#how-to-install-tiered-storage-offloaders).
