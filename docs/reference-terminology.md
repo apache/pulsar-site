@@ -12,29 +12,35 @@ Here is a glossary of terms related to Apache Pulsar:
 
 Pulsar is a distributed messaging system originally created by Yahoo but now under the stewardship of the Apache Software Foundation.
 
+### Message
+
+Messages are the basic unit of Pulsar. They're what [producers](#producer) publish to [topics](#topic)
+and what [consumers](#consumer) then consume from topics.
+
+### Topic
+
+A named channel used to pass messages published by [producers](#producer) to [consumers](#consumer) who
+process those [messages](#message).
+
+### Partitioned Topic
+
+A topic that is served by multiple Pulsar [brokers](#broker), which enables higher throughput.
+
 ### Namespace Bundle
 
 A virtual group of [topics](#topic) that belong to the same [namespace](#namespace). A namespace bundle
 is defined as a range between two 32-bit hashes, such as 0x00000000 and 0xffffffff.
 
-### Tenant
+### Subscription
 
-An administrative unit for allocating capacity and enforcing an authentication/authorization scheme.
-
+A lease on a [topic](#topic) established by a group of [consumers](#consumer). Pulsar has four subscription
+modes (exclusive, shared, failover and key_shared).
 
 ### Pub-Sub
 
 A messaging pattern in which [producer](#producer) processes publish messages on [topics](#topic) that
 are then consumed (processed) by [consumer](#consumer) processes.
 
-### Producer
-
-A process that publishes [messages](#message) to a Pulsar [topic](#topic).
-
-### Consumer
-
-A process that establishes a subscription to a Pulsar [topic](#topic) and processes messages published
-to that topic by [producers](#producer).
 
 ### Reader
 
@@ -78,18 +84,6 @@ A group of namespaces that have anti-affinity to each other.
 A lightweight Pulsar broker in which all components run in a single Java Virtual Machine (JVM) process. Standalone
 clusters can be run on a single machine and are useful for development purposes.
 
-### Cluster
-
-A Pulsar cluster consists of the following components:
-
-- One or more Pulsar [brokers](reference-terminology.md#broker)
-  
-- One or more [BookKeeper](reference-terminology.md#bookkeeper) servers (aka [bookies](reference-terminology.md#bookie))
-  
-- A [ZooKeeper](https://zookeeper.apache.org) cluster that provides configuration and coordination management
-
-Clusters can reside in different geographical regions and replicate messages to one another in a process called [geo-replication](#geo-replication).
-
 ### Instance
 
 A group of Pulsar [clusters](#cluster) that act together as a single unit.
@@ -99,33 +93,11 @@ A group of Pulsar [clusters](#cluster) that act together as a single unit.
 Replication of messages across Pulsar [clusters](#cluster), potentially in different datacenters
 or geographical regions.
 
-### Configuration Store
-
-Pulsar's configuration store (previously known as configuration store) is a ZooKeeper quorum that
-is used for configuration-specific tasks. A multi-cluster Pulsar installation requires just one
-configuration store across all [clusters](#cluster).
-
 ### Topic Lookup
 
 A service provided by Pulsar [brokers](#broker) that enables connecting clients to automatically determine
 which Pulsar [cluster](#cluster) is responsible for a [topic](#topic) (and thus where message traffic for
 the topic needs to be routed).
-
-### Service Discovery
-
-A mechanism provided by Pulsar that enables connecting clients to use just a single URL to interact
-with all the [brokers](#broker) in a [cluster](#cluster).
-
-### Broker
-
-A broker is a stateless component of Pulsar [clusters](#cluster). It consists of two components: 
-
-
-- An HTTP server exposing a REST interface for administration and topic lookup.
-
-- A [dispatcher](#dispatcher) that handles all message transfers. 
-
-Pulsar clusters typically consist of multiple brokers.
 
 ### Dispatcher
 
@@ -143,9 +115,6 @@ service that Pulsar uses to store data.
 
 Bookie is the name of an individual BookKeeper server. It is effectively the storage server of Pulsar.
 
-### Ledger
-
-An append-only data structure in [BookKeeper](#bookkeeper) that is used to persistently store messages in Pulsar [topics](#topic).
 
 ### Functions
 

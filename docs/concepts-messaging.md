@@ -64,7 +64,7 @@ Messages can be acknowledged in one of the following two ways:
 
 - Being acknowledged individually
   
-With individual acknowledgment, the consumer acknowledges each message and sends an acknowledgment request to the broker.
+  With individual acknowledgment, the consumer acknowledges each message and sends an acknowledgment request to the broker.
 
 - Being acknowledged cumulatively
   

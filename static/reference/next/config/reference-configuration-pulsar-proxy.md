@@ -229,6 +229,17 @@ When enabled, checks that the target broker is active before connecting. zookeep
 
 **Category**: Broker Proxy
 
+### enableProxyStatsEndpoints
+Whether to enable the proxy's /metrics, /proxy-stats, and /status.html http endpoints
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpInputMaxReplayBufferSize
 Http input buffer max size.
 
