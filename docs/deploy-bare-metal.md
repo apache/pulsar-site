@@ -48,7 +48,7 @@ To run Pulsar on bare metal, the following configuration is recommended:
 
 The following is a diagram showing the basic setup:
 
-![alt-text](/assets/pulsar-basic-setup.png)
+![Basic setup of Pulsar cluster](/assets/pulsar-basic-setup.png)
 
 In this diagram, connecting clients need to communicate with the Pulsar cluster using a single URL. In this case, `pulsar-cluster.acme.com` abstracts over all of the message-handling brokers. Pulsar message brokers run on machines alongside BookKeeper bookies; brokers and bookies, in turn, rely on ZooKeeper.
 
