@@ -10,11 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-If you want to enable security on functions, complete the following steps:
+If you want to enable security on functions, complete the following steps.
 
 ## Prerequisites
 
-- you need to [enable security settings](functions-worker.md) on function workers first.
+- If you want to enable security on functions, you need to [enable security settings](functions-worker.md) on function workers first.
 
 
 ## Step 1: Configure function workers

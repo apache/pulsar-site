@@ -13,7 +13,7 @@ The following example is a stateful function. By default, the state of a functio
 
 :::
 
-To write a function for word count, complete the following steps:
+To write a function for word count, complete the following steps.
 
 1. Write the function in Java using the [SDK for Java](functions-develop-api.md).
 
@@ -53,7 +53,7 @@ To write a function for word count, complete the following steps:
 
 ## Write a function for content-based routing
 
-To write a function for content-based routing, complete the following steps:
+To write a function for content-based routing, complete the following steps.
 
 1. Write the function in Python using the [SDK for Python](functions-develop-api.md).
 
