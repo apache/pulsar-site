@@ -163,13 +163,21 @@ All the broker metrics are labeled with the following labels:
 
 ### BookKeeper client metrics
 
+The BookKeeper client metrics is disabled by default. Set `bookkeeperClientExposeStatsToPrometheus=true` in `broker.conf` to expose the BookKeeper client metrics. Suppose you want to expose PerChannel BookKeeper client metrics, which allows you to get the metrics for each bookie that the BookKeeper client connected. You can set `bookkeeperClientLimitStatsLogging=true` in `broker.conf`. Note that enabling the PerChannel BookKeeper client metrics might introduce performance issues in high-load situations. 
+
 All the BookKeeper client metrics are labeled with the following label:
 
 - *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
 
 | Name | Type | Description |
 |---|---|---|
-| pulsar_managedLedger_client_bookkeeper_client_BOOKIE_QUARANTINE | Counter | The number of bookie clients to be quarantined.<br /><br />If you want to expose this metric, set `bookkeeperClientExposeStatsToPrometheus` to `true` in the `broker.conf` file.|
+| pulsar_managedLedger_client_bookkeeper_client_BOOKIE_QUARANTINE | Counter | The number of bookie clients to be quarantined. |
+| pulsar_managedLedger_client_BookKeeperClientWorker_task_execution | Summary | The task execution latency calculated in milliseconds |
+| pulsar_managedLedger_client_BookKeeperClientWorker_task_queued | Summary | The task queued latency calculated in milliseconds |
+| pulsar_managedLedger_client_bookkeeper_client_ADD_ENTRY | Summary | Add entry latency calculated in milliseconds |
+| pulsar_managedLedger_client_bookkeeper_client_READ_ENTRY | Summary | Read entry latency calculated in milliseconds |
+| pulsar_managedLedger_client_bookkeeper_client_READ_LAC | Summary | Read Last Add Confirmed request latency calculated in milliseconds |
+| pulsar_managedLedger_client_bookkeeper_client_WRITE_LAC | Summary | Write Last Add Confirmed request latency calculated in milliseconds |
 
 ### Namespace metrics
 
