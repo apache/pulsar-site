@@ -160,7 +160,7 @@ You can enable the modular load manager using one of the following methods:
 
 ### Enable extensible load manager
 
-You can enable the extensible load manager by updating the value of [loadManagerClassName](https://github.com/apache/pulsar/blob/782e91fe327efe2c9c9107d6c679c2837d43935b/conf/broker.conf#L1309) to `org.apache.pulsar.broker.loadbalance.impl.ExtensibleLoadManagerImpl` in `conf/broker.conf`.
+You can enable the extensible load manager by updating the value of [loadManagerClassName](https://github.com/apache/pulsar/blob/782e91fe327efe2c9c9107d6c679c2837d43935b/conf/broker.conf#L1309) to `org.apache.pulsar.broker.loadbalance.extensions.ExtensibleLoadManagerImpl` in `conf/broker.conf`.
 
 :::note
 
