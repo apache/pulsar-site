@@ -88,8 +88,5 @@ When submitting an issue or PR, you must [choose one of the documentation checkb
 | `release/blocker`          | Indicate the PR or issue that should block the release until it gets resolved                                                       |
 | `release/<version>`        | The labels are indicating which version the issue/PR has been fixed or will be fixed depending on if the version is released or not |
 
-### release/\<version\>
-The labels are indicating which version the issue/PR has been fixed or will be fixed depending on if the version is released or not.
-
 ## cherry-picked/*
 The cherry-picked/* labels are more mainly for Pulsar committers to ensure the fixes are cherry-picked to the release branches. The label only can be added after the cherry-picking is done for a corresponding branch. So that the release manager can have a list of PRs that should to be cherry-picked.
