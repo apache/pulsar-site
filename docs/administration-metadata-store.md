@@ -2,6 +2,7 @@
 id: administration-metadata-store
 title: Configure metadata store
 sidebar_label: "Configure metadata store"
+description: Get a comprehensive understanding of metadata store in Pulsar.
 ---
 
 Pulsar metadata store maintains all the metadata, configuration, and coordination of a Pulsar cluster, such as topic metadata, schema, broker load data, and so on.

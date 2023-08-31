@@ -2,6 +2,7 @@
 id: administration-anti-affinity-namespaces
 title: Anti-affinity namespaces
 sidebar_label: "Anti-affinity namespaces"
+description: Get a comprehensive understanding of anti-affinity namespaces in Pulsar.
 ---
 
 ## Distribute anti-affinity namespaces across failure domains

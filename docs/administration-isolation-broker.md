@@ -2,6 +2,7 @@
 id: administration-isolation-broker
 title: Isolate brokers
 sidebar_label: "Isolate brokers"
+description: Learn to set a namespace isolation policy for a broker cluster in Pulsar.
 ---
 
 ````mdx-code-block

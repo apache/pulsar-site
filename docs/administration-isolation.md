@@ -2,6 +2,7 @@
 id: administration-isolation
 title: Pulsar isolation
 sidebar_label: "Pulsar isolation"
+description: Get a comprehensive understanding of Pulsar isolation.
 ---
 
 
@@ -16,7 +17,7 @@ Pulsar supports isolation at either of the following two levels or both.
 * [Broker-level isolation](administration-isolation-broker.md) divides brokers into different groups and assigns broker groups to different namespaces. In this way, you can bind topics in a namespace to a set of brokers that belong to specific groups.
 * [Bookie-level isolation](administration-isolation-bookie.md) divides bookies into different racks/regions and assigns data replicas to bookies based on a specified data placement policy for disaster tolerance.
 
-![Isolation levels](/assets/admin-isolation.svg)
+![Broker-level isolation and bookie-level isolation in Pulsar](/assets/admin-isolation.svg)
 
 :::tip
 

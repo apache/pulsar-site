@@ -106,16 +106,6 @@ dispatcher uses a custom binary protocol for all communications.
 
 ## Storage
 
-### BookKeeper
-
-[Apache BookKeeper](http://bookkeeper.apache.org/) is a scalable, low-latency persistent log storage
-service that Pulsar uses to store data.
-
 ### Bookie
 
 Bookie is the name of an individual BookKeeper server. It is effectively the storage server of Pulsar.
-
-
-### Functions
-
-Pulsar Functions are lightweight functions that can consume messages from Pulsar topics, apply custom processing logic, and, if desired, publish results to topics.

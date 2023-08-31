@@ -2,6 +2,7 @@
 id: administration-isolation-bookie
 title: Isolate bookies
 sidebar_label: "Isolate bookies"
+description: Get a comprehensive understanding of bookie data isolation policy in Pulsar.
 ---
 
 ````mdx-code-block
@@ -54,7 +55,7 @@ When the available rack size of bookies can meet the requirements configured on 
 For example, the BookKeeper cluster has 4 racks and 13 bookie instances as shown in the following diagram. When a topic is configured with `EnsembleSize=3, WriteQuorum=3, AckQuorum=2`, the BookKeeper client chooses one bookie instance from three different racks to write data to, such as Bookie2, Bookie8, and Bookie12.
 
 
-![Rack-aware placement policy](/assets/rack-aware-placement-policy-1.svg)
+![Rack-aware placement policy in Pulsar](/assets/rack-aware-placement-policy-1.svg)
 
 #### Enforced minimum rack size of bookies
 
@@ -80,7 +81,7 @@ Region-aware placement policy enforces different data replicas to be placed in d
 
 For example, the BookKeeper cluster has 4 regions, and each region has several racks with their bookie instances, as shown in the following diagram. If a topic is configured with `EnsembleSize=3, WriteQuorum=3, and AckQuorum=2`, the BookKeeper client chooses three different regions, such as Region A, Region C and Region D. For each region, it chooses one bookie on a single rack, such as Bookie5 on Rack2, Bookie17 on Rack6, and Bookie21 on Rack8.
 
-![Region-aware placement policy](/assets/region-aware-placement-policy-1.svg)
+![Region-aware placement policy in Pulsar](/assets/region-aware-placement-policy-1.svg)
 
 When two regions fail, such as Region B and Region C, as shown in the following diagram, the BookKeeper client chooses one bookie from Region A or Region D to replace the failed Bookie17 for recovering old ledgers. And it also chooses Region A and Region D to write replicas for creating new ledgers. In Region A, it falls back to rack-aware placement policy and chooses one bookie from Rack1 and Rack2, such as Bookie4 and Bookie7. For Region D, it has to choose one bookie from Rack8, such as Bookie22.
 
@@ -92,7 +93,7 @@ By default, the rack-aware placement policy is enabled on both broker and bookie
 
 ### Enable region-aware placement policy on broker
 
-Configure the following field in the `conf/broker.conf` file.
+To enable region-aware placement policy on broker, configure the following field in the `conf/broker.conf` file.
 
 ```properties
 bookkeeperClientRegionawarePolicyEnabled=true
@@ -112,7 +113,7 @@ bookkeeperDiskWeightBasedPlacementEnabled=true
 ```
 ### Enable region-aware placement policy on the auto-recovery instances (pods)
 
-Configure the following fields in the `conf/bookkeeper.conf` file.
+To enable region-aware placement policy on the auto-recovery instances, configure the following fields in the `conf/bookkeeper.conf` file.
 
 ```properties
 ensemblePlacementPolicy=org.apache.bookkeeper.client.RegionAwareEnsemblePlacementPolicy
