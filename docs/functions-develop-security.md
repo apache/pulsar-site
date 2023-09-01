@@ -2,6 +2,7 @@
 id: functions-develop-security
 title: Enable security on functions
 sidebar_label: "Enable security on functions"
+description: Learn to enable security on functions in Pulsar.
 ---
 
 ````mdx-code-block
@@ -9,12 +10,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
+If you want to enable security on functions, complete the following steps.
+
 ## Prerequisites
 
-If you want to enable security on functions, you need to [enable security settings](functions-worker.md) on function workers first.
+- If you want to enable security on functions, you need to [enable security settings](functions-worker.md) on function workers first.
 
 
-## Configure function workers
+## Step 1: Configure function workers
 
 To use the secret APIs from the context, you need to set the following two parameters for function workers.
 * `secretsProviderConfiguratorClassName`
@@ -38,7 +41,7 @@ Currently, only Java and Python runtime support `SecretsProvider`. The Java and 
 
 :::
 
-## Get the secret
+## Step 2: Get the secret
 
 Once `SecretsProviderConfigurator` is set, you can get the secret using the [`Context`](functions-concepts.md#context) object as follows.
 

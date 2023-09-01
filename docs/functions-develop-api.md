@@ -2,6 +2,7 @@
 id: functions-develop-api
 title: Use APIs
 sidebar_label: "Use APIs"
+description: Learn to develop functions using Pulsar APIs.
 ---
 
 ````mdx-code-block

@@ -2,6 +2,7 @@
 id: functions-develop-tutorial
 title: Tutorials
 sidebar_label: "Tutorials"
+description: Tutorial examples for developing functions in Pulsar.
 ---
 
 ## Write a function for word count
@@ -11,6 +12,8 @@ sidebar_label: "Tutorials"
 The following example is a stateful function. By default, the state of a function is disabled. See [Enable stateful functions](functions-worker-stateful.md) for more instructions.
 
 :::
+
+To write a function for word count, complete the following steps.
 
 1. Write the function in Java using the [SDK for Java](functions-develop-api.md).
 
@@ -49,6 +52,8 @@ The following example is a stateful function. By default, the state of a functio
    ```
 
 ## Write a function for content-based routing
+
+To write a function for content-based routing, complete the following steps.
 
 1. Write the function in Python using the [SDK for Python](functions-develop-api.md).
 

@@ -2,6 +2,7 @@
 id: functions-runtime-java-options
 title: Customize Java runtime options
 sidebar_label: "Customize Java runtime options"
+description: Customize Java runtime options in Pulsar.
 ---
 
 :::note

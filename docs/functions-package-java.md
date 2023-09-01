@@ -2,9 +2,8 @@
 id: functions-package-java
 title: Package Java Functions
 sidebar_label: "Package Java Functions"
+description: Learn to package Java functions in Pulsar.
 ---
-
-There are two methods to package Java Functions, that is [uber JAR](#package-as-jar) and [NAR](#package-as-nar).
 
 :::note
 
@@ -19,6 +18,8 @@ licensing and copyrights of all libraries of your function.
 For the runtime Java version, refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
 
 :::
+
+There are two methods to package Java Functions:
 
 ## Package as JAR
 
