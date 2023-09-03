@@ -2,7 +2,7 @@
 id: tiered-storage-overview
 title: Overview of tiered storage
 sidebar_label: "Overview"
-description: Get a comprehensive understanding of concepts and install methods of Pulsar tiered storage.
+description: Get a comprehensive understanding of use cases, installation methods, and working principles of Pulsar tiered storage.
 ---
 
 Pulsar's **Tiered Storage** feature allows older backlog data to be moved from BookKeeper to long-term and cheaper storage, while still allowing clients to access the backlog as if nothing has changed.
