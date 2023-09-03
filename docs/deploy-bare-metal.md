@@ -13,13 +13,11 @@ description: Learn to deploy a Pulsar cluster on bare metal.
 
 :::
 
-## Procedures
-
 Deploying a Pulsar cluster on bare metal consists of the following steps.
 
-### Preparation
+## Preparation
 
-#### Requirements
+### Requirements
 
 Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK.
 For the runtime Java version, please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
@@ -52,7 +50,7 @@ The following is a diagram showing the basic setup:
 
 In this diagram, connecting clients need to communicate with the Pulsar cluster using a single URL. In this case, `pulsar-cluster.acme.com` abstracts over all of the message-handling brokers. Pulsar message brokers run on machines alongside BookKeeper bookies; brokers and bookies, in turn, rely on ZooKeeper.
 
-#### Hardware considerations
+### Hardware considerations
 
 If you deploy a Pulsar cluster, keep in mind the following basic better choices when you do the capacity planning.
 
@@ -89,7 +87,7 @@ A cluster consists of 3 broker nodes, 3 bookie nodes, and 3 ZooKeeper nodes. The
    Bookie|4|8GB|Journal: 256 GB<br /><br />PD-SSDLedger: 2 TB, PD-STANDARD|Write throughput: 75 MB/s<br /><br />Read throughput: 75 MB/s<br /><br />|Write rate: 7,500 entries/s<br /><br />Read rate: 7,500 entries/s
    ZooKeeper|1|2 GB|Log: 64 GB, PD-SSD<br /><br />Data: 256 GB, PD-STANDARD|/|/
 
-#### Install the Pulsar binary package
+### Install the Pulsar binary package
 
 > You need to install the Pulsar binary package on each machine in the cluster, including machines running ZooKeeper and BookKeeper.
 
@@ -122,7 +120,7 @@ Directory | Contains
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses
 `logs` | Logs that the installation creates
 
-#### Install Built-in Connectors (optional)
+### Install Built-in Connectors (optional)
 
 To use `built-in` connectors, you need to download the connectors tarball release on every broker node in one of the following ways :
 
@@ -150,7 +148,7 @@ pulsar-io-aerospike-@pulsar:version@.nar
 ...
 ```
 
-#### Install Tiered Storage Offloaders (optional)
+### Install Tiered Storage Offloaders (optional)
 
 To use tiered storage offloaders, you need to download the offloaders tarball release on every broker node in one of the following ways:
 
@@ -183,7 +181,7 @@ tiered-storage-jcloud-@pulsar:version@.nar
 For more details of how to configure tiered storage feature, you can refer to the [Tiered storage cookbook](cookbooks-tiered-storage.md)
 
 
-### 1. Deploy a ZooKeeper cluster
+## Step 1: Deploy a ZooKeeper cluster
 
 :::note
 
@@ -235,7 +233,7 @@ bin/pulsar-daemon start zookeeper
 > If you plan to deploy Zookeeper with the Bookie on the same node, you need to start zookeeper by using different stats
 > port by configuring the `metricsProvider.httpPort` in zookeeper.conf.
 
-### 2. Initialize cluster metadata
+## Step 2: Initialize cluster metadata
 
 :::note
 
@@ -294,7 +292,7 @@ You can obtain the metadata service URI of the existing BookKeeper cluster by us
 
 :::
 
-### 3. Deploy a BookKeeper cluster
+## Step 3: Deploy a BookKeeper cluster
 
 [BookKeeper](https://bookkeeper.apache.org) handles all persistent data storage in Pulsar. You need to deploy a cluster of BookKeeper bookies to use Pulsar. You can choose to run a **3-bookie BookKeeper cluster**.
 
@@ -337,11 +335,11 @@ bin/bookkeeper shell simpletest --ensemble <num-bookies> --writeQuorum <num-book
 This command creates a `num-bookies` sized ledger on the cluster, writes a few entries, and finally deletes the ledger.
 
 
-### 4. Deploy Pulsar brokers
+## Step 4: Deploy Pulsar brokers
 
 Pulsar brokers are the last thing you need to deploy in your Pulsar cluster. Brokers handle Pulsar messages and provide the administrative interface of Pulsar. A good choice is to run **3 brokers**, one for each machine that already runs a BookKeeper bookie.
 
-#### Configure Brokers
+### Configure Brokers
 
 You can configure brokers using the `conf/broker.conf` configuration file. The most important element of broker configuration is ensuring that each broker is aware of the ZooKeeper cluster that you have deployed. Ensure that the [`metadataStoreUrl`](reference-configuration.md#broker) and [`configurationMetadataStoreUrl`](reference-configuration.md#broker) parameters are correct. In this case, since you only have 1 cluster and no configuration store setup, the `configurationMetadataStoreUrl` point to the same `metadataStoreUrl`.
 
@@ -379,7 +377,7 @@ webServicePortTls=8443
 > ```
 
 
-#### Enable Pulsar Functions (optional)
+### Enable Pulsar Functions (optional)
 
 If you want to enable [Pulsar Functions](functions-overview.md), you can follow the instructions as below:
 
@@ -397,7 +395,7 @@ If you want to enable [Pulsar Functions](functions-overview.md), you can follow 
 
 If you want to learn more options about deploying the functions worker, check out [Deploy and manage functions worker](functions-worker.md).
 
-#### Start Brokers
+### Start Brokers
 
 You can then provide any other configuration changes that you want in the [`conf/broker.conf`](reference-configuration.md#broker) file. Once you decide on a configuration, you can start up the brokers for your Pulsar cluster. Like ZooKeeper and BookKeeper, you can start brokers either in the foreground or in the background, using nohup.
 

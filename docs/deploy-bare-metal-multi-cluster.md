@@ -18,13 +18,9 @@ A Pulsar instance consists of multiple Pulsar clusters working in unison. You ca
 > #### Run Pulsar locally or on Kubernetes?
 > This guide shows you how to deploy Pulsar in production in a non-Kubernetes environment. If you want to run a standalone Pulsar cluster on a single machine for development purposes, see the [Setting up a local cluster](getting-started-standalone.md) guide. If you want to run Pulsar on [Kubernetes](https://kubernetes.io), see the [Pulsar on Kubernetes](deploy-kubernetes.md) guide, which includes sections on running Pulsar on Kubernetes, on Google Kubernetes Engine and on Amazon Web Services.
 
-## Procedures
-
 Deploying a multi-cluster Pulsar instance on bare metal consists of the following steps.
 
-### Preparation
-
-#### System requirement
+## System requirement
 
 Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK.
 For the runtime Java version, please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
@@ -35,7 +31,7 @@ Broker is only supported on 64-bit JVM.
 
 :::
 
-#### Install Pulsar
+## Install Pulsar
 
 To get started running Pulsar, download a binary tarball release in one of the following ways:
 
@@ -77,7 +73,7 @@ Directory | Contains
 `logs` | Logs that the installation creates
 
 
-### 1. Deploy ZooKeeper
+## Step 1: Deploy ZooKeeper
 
 Each Pulsar instance relies on two separate ZooKeeper quorums.
 
@@ -87,7 +83,7 @@ Each Pulsar instance relies on two separate ZooKeeper quorums.
 You can use an independent cluster of machines or the same machines used by local ZooKeeper to provide the configuration store quorum.
 
 
-#### Deploy local ZooKeeper
+### Deploy local ZooKeeper
 
 ZooKeeper manages a variety of essential coordination-related and configuration-related tasks for Pulsar.
 
@@ -124,13 +120,13 @@ Once you add each server to the `zookeeper.conf` configuration and each server h
 bin/pulsar-daemon start zookeeper
 ```
 
-#### Deploy the configuration store
+### Deploy the configuration store
 
 The ZooKeeper cluster configured and started up in the section above is a local ZooKeeper cluster that you can use to manage a single Pulsar cluster. In addition to a local cluster, however, a full Pulsar instance also requires a configuration store for handling some instance-level configuration and coordination tasks.
 
 If you deploy a single-cluster instance, you do not need a separate cluster for the configuration store. If, however, you deploy a multi-cluster instance, you should stand up a separate ZooKeeper cluster for configuration tasks.
 
-##### Single-cluster Pulsar instance
+#### Single-cluster Pulsar instance
 
 If your Pulsar instance consists of just one cluster, then you can deploy a configuration store on the same machines as the local ZooKeeper quorum but run on different TCP ports.
 
@@ -145,7 +141,7 @@ server.3=zk3.us-west.example.com:2185:2186
 
 As before, create the `myid` files for each server on `data/global-zookeeper/myid`.
 
-##### Multi-cluster Pulsar instance
+#### Multi-cluster Pulsar instance
 
 When you deploy a global Pulsar instance, with clusters distributed across different geographical regions, the configuration store serves as a highly available and strongly consistent metadata store that can tolerate failures and partitions spanning whole regions.
 
@@ -190,7 +186,7 @@ Additionally, ZK observers need to have the following parameters:
 peerType=observer
 ```
 
-###### Start the service
+##### Start the service
 
 Once your configuration store configuration is in place, you can start up the service using [`pulsar-daemon`](reference-cli-tools.md)
 
@@ -198,7 +194,7 @@ Once your configuration store configuration is in place, you can start up the se
 bin/pulsar-daemon start configuration-store
 ```
 
-### 2. Cluster metadata initialization
+## Step 2: Cluster metadata initialization
 
 Once you set up the cluster-specific ZooKeeper and configuration store quorums for your instance, you need to write some metadata to ZooKeeper for each cluster in your instance. **you only need to write these metadata once**.
 
@@ -227,17 +223,17 @@ If you use [TLS](security-tls-transport.md), you also need to specify a TLS web 
 
 Make sure to run `initialize-cluster-metadata` for each cluster in your instance.
 
-### 3. Deploy BookKeeper
+## Step 3: Deploy BookKeeper
 
 BookKeeper provides [persistent message storage](concepts-architecture-overview.md#persistent-storage) for Pulsar.
 
 Each Pulsar broker needs its own cluster of bookies. The BookKeeper cluster shares a local ZooKeeper quorum with the Pulsar cluster.
 
-#### Configure bookies
+### Configure bookies
 
 You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important aspect of configuring each bookie is ensuring that the [`zkServers`](reference-configuration.md#bookkeeper-zkServers) parameter is set to the connection string for the local ZooKeeper of Pulsar cluster.
 
-#### Start bookies
+### Start bookies
 
 You can start a bookie in two ways: in the foreground or as a background daemon.
 
@@ -274,11 +270,11 @@ designed to use multiple devices:
 
 
 
-### 4. Deploy brokers
+## Step 4: Deploy brokers
 
 Once you set up ZooKeeper, initialize cluster metadata, and spin up BookKeeper bookies, you can deploy brokers.
 
-#### Broker configuration
+### Broker configuration
 
 You can configure brokers using the [`conf/broker.conf`](reference-configuration.md#broker) configuration file.
 
@@ -310,11 +306,11 @@ webServicePort=8080
 webServicePortTls=8443
 ```
 
-#### Broker hardware
+### Broker hardware
 
 Pulsar brokers do not require any special hardware since they do not use the local disk. You had better choose fast CPUs and 10Gbps [NIC](https://en.wikipedia.org/wiki/Network_interface_controller) so that the software can take full advantage of that.
 
-#### Start the broker service
+### Start the broker service
 
 You can start a broker in the background by using [nohup](https://en.wikipedia.org/wiki/Nohup) with the [`pulsar-daemon`](reference-cli-tools.md) CLI tool:
 
