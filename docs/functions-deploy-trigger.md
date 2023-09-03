@@ -2,6 +2,7 @@
 id: functions-deploy-trigger
 title: Trigger a function
 sidebar_label: "Trigger a function"
+description: Learn to trigger a function in Pulsar.
 ---
 
 Triggering a function means that you invoke a function by producing a message to one of the input topics via the CLI. You can use the `trigger` command to trigger a function at any time.

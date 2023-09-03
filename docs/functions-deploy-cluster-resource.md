@@ -2,6 +2,7 @@
 id: functions-deploy-cluster-resource
 title: Allocate resources to function instance
 sidebar_label: "Allocate resources to function instance"
+description: Allocate resources to function instance in Pulsar.
 ---
 
 When running functions in cluster mode, you can specify the resources that can be allocated to each function instance.

@@ -2,6 +2,7 @@
 id: functions-package-go
 title: Package Go Functions
 sidebar_label: "Package Go Functions"
+description: Learn to package Go functions in Pulsar.
 ---
 
 :::note

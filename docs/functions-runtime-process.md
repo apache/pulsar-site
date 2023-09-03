@@ -2,6 +2,7 @@
 id: functions-runtime-process
 title: Configure process runtime
 sidebar_label: "Configure process runtime"
+description: Configure process runtime for functions in Pulsar.
 ---
 
 You can use the default configurations of process runtime in the `conf/functions_worker.yml` file.
