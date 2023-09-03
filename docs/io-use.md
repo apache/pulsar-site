@@ -2,6 +2,7 @@
 id: io-use
 title: How to use Pulsar connectors
 sidebar_label: "Use"
+description: Get started to use Pulsar connectors.
 ---
 
 ````mdx-code-block
@@ -30,11 +31,11 @@ After the setup, the built-in connector is automatically discovered by Pulsar br
 
 You can configure the following information:
 
-* [Configure a default storage location for a connector](#configure-a-default-storage-location-for-a-connector)
+* [Configure a default storage location for a built-in connector](#configure-a-default-storage-location-for-built-in-connectors)
 
 * [Configure a connector with a YAML file](#configure-a-connector-with-a-yaml-file)
 
-### Configure a default storage location for a connector
+### Configure a default storage location for a built-in connector
 
 To configure a default folder for built-in connectors, set the `connectorsDirectory` parameter in the `./conf/functions_worker.yml` configuration file.
 
@@ -105,13 +106,13 @@ configs:
    tableName: "test_jdbc"
 ```
 
-## Get available connectors
+## Prepare a connector
 
 Before starting using connectors, you can perform the following operations:
 
 * [Reload connectors](#reload)
 
-* [Get a list of available connectors](#get-available-connectors)
+* [Get a list of available connectors](#available)
 
 ### `reload`
 
@@ -119,7 +120,7 @@ If you add or delete a nar file in a connector folder, reload the available buil
 
 #### Source
 
-Use the `reload` subcommand.
+To reload source connectors, you can use the `reload` subcommand.
 
 ```shell
 pulsar-admin sources reload
@@ -129,7 +130,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 #### Sink
 
-Use the `reload` subcommand.
+To reload sink connectors, you can use the `reload` subcommand.
 
 ```shell
 pulsar-admin sinks reload
@@ -143,7 +144,7 @@ After reloading connectors (optional), you can get a list of available connector
 
 #### Source
 
-Use the `available-sources` subcommand.
+To get a list of source connectors, you can use the `available-sources` subcommand.
 
 ```shell
 pulsar-admin sources available-sources
@@ -151,7 +152,7 @@ pulsar-admin sources available-sources
 
 #### Sink
 
-Use the `available-sinks` subcommand.
+To get a list of sink connectors, you can use the `available-sinks` subcommand.
 
 ```shell
 pulsar-admin sinks available-sinks
@@ -161,7 +162,7 @@ pulsar-admin sinks available-sinks
 
 To run a connector, you can perform the following operations:
 
-* [Create a connector](#create)
+* [Create a connector](#creat)
 
 * [Start a connector](#start)
 
@@ -169,11 +170,11 @@ To run a connector, you can perform the following operations:
 
 ### `create`
 
-You can create a connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To create a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Create a source connector.
+To create a source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -258,7 +259,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
 
 #### Sink
 
-Create a sink connector.
+To create a sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -343,11 +344,11 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
 
 ### `start`
 
-You can start a connector using **Admin CLI** or **REST API**.
+To start a connector, you can use **Admin CLI** or **REST API**.
 
 #### Source
 
-Start a source connector.
+To start a source connector, you can use the following commands.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -382,7 +383,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 #### Sink
 
-Start a sink connector.
+To start a sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -417,11 +418,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 ### `localrun`
 
-You can run a connector locally rather than deploying it on a Pulsar cluster using **Admin CLI**.
+To run a connector locally rather than deploying it on a Pulsar cluster, you can use **Admin CLI**
 
 #### Source
 
-Run a source connector locally.
+To run a source connector locally, you can use the following command:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -445,7 +446,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 #### Sink
 
-Run a sink connector locally.
+To run a sink connector locally, you can use the following command:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -486,11 +487,11 @@ To monitor a connector, you can perform the following operations:
 
 ### `get`
 
-You can get the information of a connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To get the information of a connector, You can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Get the information of a source connector.
+To get the information of a source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -595,7 +596,7 @@ For more information, see [`getSource`](/api/admin/org/apache/pulsar/client/admi
 
 #### Sink
 
-Get the information of a sink connector.
+To get the information of a sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -693,11 +694,11 @@ For more information, see [`getSink`](/api/admin/org/apache/pulsar/client/admin/
 
 ### `list`
 
-You can get the list of all running connectors using **Admin CLI**, **REST API** or **JAVA admin API**.
+To get the list of all running connectors, You can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Get the list of all running source connectors.
+To get the list of all running source connectors, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -750,7 +751,7 @@ For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/adm
 
 #### Sink
 
-Get the list of all running sink connectors.
+To get the list of all running sink connectors, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -803,11 +804,11 @@ For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/adm
 
 ### `status`
 
-You can get the current status of a connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To get the current status of a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Get the current status of a source connector.
+To get the current status of a source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -897,7 +898,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 #### Sink
 
-Get the current status of a Pulsar sink connector.
+To get the current status of a Pulsar sink connector, you can use the following commads:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -989,11 +990,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 ### `update`
 
-You can update a running connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To update a running connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Update a running Pulsar source connector.
+To update a running Pulsar source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1082,7 +1083,7 @@ For more information, see [`createSourceWithUrl`](/api/admin/org/apache/pulsar/c
 
 #### Sink
 
-Update a running Pulsar sink connector.
+To update a running Pulsar sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1173,11 +1174,11 @@ For more information, see [`updateSinkWithUrl`](/api/admin/org/apache/pulsar/cli
 
 ### `stop`
 
-You can stop a connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To stop a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Stop a source connector.
+To stop a source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1267,7 +1268,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 #### Sink
 
-Stop a sink connector.
+To stop a sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1359,11 +1360,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 ### `restart`
 
-You can restart a connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To restart a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Restart a source connector.
+To restart a source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1453,7 +1454,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 #### Sink
 
-Restart a sink connector.
+To restart a sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1545,11 +1546,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 ### `delete`
 
-You can delete a connector using **Admin CLI**, **REST API** or **JAVA admin API**.
+To delete a connector, you can use **Admin CLI**, **REST API** or **JAVA admin API**.
 
 #### Source
 
-Delete a source connector.
+To delete a source connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1611,7 +1612,7 @@ For more information, see [`deleteSource`](/api/admin/org/apache/pulsar/client/a
 
 #### Sink
 
-Delete a sink connector.
+To delete a sink connector, you can use the following commands:
 
 ````mdx-code-block
 <Tabs groupId="api-choice"

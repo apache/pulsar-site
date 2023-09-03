@@ -2,6 +2,7 @@
 id: functions-deploy-cluster
 title: Deploy a function in cluster mode
 sidebar_label: "Deploy a function in cluster mode"
+description: Deploy a Pulsar function in cluster mode.
 ---
 
 Deploying a function in cluster mode uploads the function to a function worker, which means the function is scheduled by the worker.

@@ -2,12 +2,10 @@
 id: functions-package-python
 title: Package Python Functions
 sidebar_label: "Package Python Functions"
+description: Learn to package Python functions in Pulsar.
 ---
 
 Python functions support the following three packaging formats:
-- One Python file
-- ZIP file
-- PIP
 
 ## One Python file
 

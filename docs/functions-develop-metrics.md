@@ -2,6 +2,7 @@
 id: functions-develop-metrics
 title: Use metrics to monitor functions
 sidebar_label: "Use metrics to monitor functions"
+description: Use metrics to monitor functions in Pulsar.
 ---
 
 ````mdx-code-block

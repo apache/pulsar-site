@@ -2,6 +2,7 @@
 id: functions-develop-admin-api
 title: Call Pulsar admin APIs
 sidebar_label: "Call Pulsar admin APIs"
+description: Learn to call Pulsar admin APIs.
 ---
 
 Pulsar Functions that use the Java SDK have access to the Pulsar admin client, which allows the Pulsar admin client to manage API calls to your Pulsar clusters.

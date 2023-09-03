@@ -2,6 +2,7 @@
 id: io-debug
 title: How to debug Pulsar connectors
 sidebar_label: "Debug"
+description: Learn how to debug Pulsar connectors.
 ---
 This guide explains how to debug connectors in localrun or cluster mode and gives a debugging checklist.
 To better demonstrate how to debug Pulsar connectors, take the Mongo sink connector as an example.
@@ -73,7 +74,7 @@ For more information about the `localrun` command, see [`localrun`](reference-co
 ```
 
 ### Use connector log
-Use one of the following methods to get a connector log in localrun mode:
+To debug a connector in localrun mode, you can use one of the following methods to get a connector log:
 * After executing the `localrun` command, the **log is automatically printed on the console**.
 * The log is located at:
 
@@ -198,7 +199,7 @@ To clearly explain the log information, the following is a breakdown into smalle
   ```
 
 ## Debug in cluster mode
-You can use the following methods to debug a connector in cluster mode:
+To debug a connector in cluster mode, you can use the following methods:
 * [Use connector log](#use-connector-log)
 * [Use admin CLI](#use-admin-cli)
 
