@@ -2,11 +2,12 @@
 id: functions-worker-run-separately
 title: Run function workers separately
 sidebar_label: "Run function workers separately"
+description: Run Pulsar function workers separately.
 ---
 
 The following diagram illustrates how function workers run as a separate process in separate machines.
 
-![assets/functions-worker-separated.svg](/assets/function-workers-separated.svg)
+![Function workers run separately in Pulsar](/assets/function-workers-separated.svg)
 
 :::note
 
@@ -15,11 +16,8 @@ The `Service URLs` in the illustration represent Pulsar service URLs that Pulsar
 :::
 
 To set up function workers that run separately, complete the following steps:
-1. [Configure function workers](#configure-function-workers-to-run-separately)
-2. [Start function workers](#start-function-workers)
-3. [Configure proxies for function workers](#configure-proxies-for-standalone-function-workers)
 
-## Configure function workers to run separately
+## Step 1: Configure function workers to run separately
 
 :::note
 
@@ -189,7 +187,7 @@ If authentication is enabled on the BookKeeper cluster, you need to configure th
 - `bookkeeperClientAuthenticationParametersName`: the authentication plugin parameters of BookKeeper client, including names and values.
 - `bookkeeperClientAuthenticationParameters`: the authentication plugin parameters of BookKeeper client.
 
-## Start function workers
+## Step 2: Start function workers
 
 :::note
 
@@ -209,7 +207,7 @@ Before starting function workers, make sure [function runtime](functions-runtime
   bin/pulsar functions-worker
   ```
 
-## Configure proxies for standalone function workers
+## Step 3: Configure proxies for standalone function workers
 
 When you are running function workers in a separate cluster, the admin rest endpoints are split into two clusters as shown in the following figure. The `functions`, `function-worker`, `source`, and `sink` endpoints are now served by the worker cluster, while all the other remaining endpoints are served by the broker cluster. This requires you to use the right service URL accordingly in the `pulsar-admin` CLI. To address this inconvenience, you can start a proxy cluster that serves as the central entry point of the admin service for routing admin rest requests.
 

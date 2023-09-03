@@ -2,11 +2,12 @@
 id: functions-worker-corun
 title: Run function workers with brokers
 sidebar_label: "Run function workers with brokers"
+description: Run Pulsar function workers with brokers.
 ---
 
 The following diagram illustrates the deployment of function workers running along with brokers.
 
-![assets/functions-worker-corun.svg](/assets/function-workers-corun.svg)
+![Deployment of function workers in Pulsar](/assets/function-workers-corun.svg)
 
 :::note
 
@@ -15,12 +16,8 @@ The `Service URLs` in the illustration represent Pulsar service URLs that Pulsar
 :::
 
 To set up function workers to run with brokers, complete the following steps:
-1. [Enable function workers](#enable-function-workers-to-run-with-brokers)
-2. [Configure function workers](#configure-function-workers-to-run-with-brokers)
-3. [Start function workers](#start-function-workers-to-run-with-brokers)
 
-
-### Enable function workers to run with brokers
+### Step 1: Enable function workers to run with brokers
 
 In the `conf/broker.conf` file (`conf/standalone.conf` for Pulsar standalone), set `functionsWorkerEnabled` to `true`.
 
@@ -28,7 +25,7 @@ In the `conf/broker.conf` file (`conf/standalone.conf` for Pulsar standalone), s
 functionsWorkerEnabled=true
 ```
 
-### Configure function workers to run with brokers
+### Step 2: Configure function workers to run with brokers
 
 In the `run-with-brokers` mode, most settings of function workers are inherited from your broker configuration (for example, configuration store settings, authentication settings, and so on). You can customize other worker settings by configuring the `conf/functions_worker.yml` file based on your needs.
 
@@ -44,7 +41,7 @@ When authentication is enabled on the BookKeeper cluster, you need to configure 
 - `bookkeeperClientAuthenticationParametersName`: the authentication plugin parameters of BookKeeper client, including names and values.
 - `bookkeeperClientAuthenticationParameters`: the authentication plugin parameters of BookKeeper client.
 
-### Start function workers to run with brokers
+### Step 3: Start function workers to run with brokers
 
 Once function workers are configured properly, you can start the brokers (function workers are running with the brokers).
 

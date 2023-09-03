@@ -2,6 +2,7 @@
 id: functions-develop-serde
 title: Use SerDe
 sidebar_label: "Use SerDe"
+description: Learn to develop functions using Serialization and Deserialization in Pulsar.
 ---
 
 Pulsar Functions use SerDe (**Ser**ialization and **De**serialization) when publishing data to or consuming data from Pulsar topics. How SerDe works by default depends on the language you use (Java or Python) for a particular function. In both languages, however, you can write custom SerDe logic for more complex, application-specific types.

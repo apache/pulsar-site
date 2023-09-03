@@ -2,6 +2,7 @@
 id: functions-concepts
 title: Pulsar Functions concepts
 sidebar_label: "Concepts"
+description: Get a comprehensive understanding of concepts of Pulsar functions.
 ---
 
 
@@ -24,7 +25,7 @@ Function instance is the core element of the function execution framework, consi
 
 The following figure illustrates the internal workflow of a function instance.
 
-![Function instance](/assets/function-instance.svg)
+![Workflow of a function instance in Pulsar](/assets/function-instance.svg)
 
 A function can have multiple instances, and each instance executes one copy of a function. You can specify the number of instances in the configuration file.
 
@@ -41,7 +42,7 @@ Within function workers, each [function instance](#function-instance) can be exe
 
 The following figure illustrates the internal architecture and workflow of function workers.
 
-![Function worker workflow](/assets/function-worker-workflow.svg)
+![Workflow of function workers in Pulsar](/assets/function-worker-workflow.svg)
 
 Function workers form a cluster of worker nodes and the workflow is described as follows.
 1. User sends a request to the REST server to execute a function instance.

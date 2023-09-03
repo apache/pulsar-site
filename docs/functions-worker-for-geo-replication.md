@@ -2,6 +2,7 @@
 id: functions-worker-for-geo-replication
 title: Configure function workers for geo-replicated clusters
 sidebar_label: "Configure function workers for geo-replicated clusters"
+description: Configure function workers for geo-replicated clusters in Pulsar.
 ---
 
 When running multiple clusters tied together with [geo replication](concepts-replication.md), you need to use a different function namespace for each cluster. Otherwise, all functions share one namespace and potentially schedule assignments across clusters.

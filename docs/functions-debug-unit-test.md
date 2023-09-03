@@ -2,6 +2,7 @@
 id: functions-debug-unit-test
 title: Debug with unit test
 sidebar_label: "Debug with unit test"
+description: Learn to debug functions with unit test in Pulsar.
 ---
 
 
