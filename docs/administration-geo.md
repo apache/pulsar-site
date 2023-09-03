@@ -44,7 +44,7 @@ All messages produced in any of the three clusters are delivered to all subscrip
 
 To configure geo-replicated clusters, complete the following steps.
 
-### 1. Connect replication clusters
+### Step 1: Connect replication clusters
 
 To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool to create a connection.
 
@@ -83,7 +83,7 @@ Suppose that you have 3 replication clusters: `us-west`, `us-cent`, and `us-east
 
 3. Run similar commands on `us-east` and `us-cent` to create connections among clusters.
 
-### 2. Grant permissions to properties
+### Step 2: Grant permissions to properties
 
 To replicate to a cluster, the tenant needs permission to use that cluster. You can grant permission to the tenant when you create the tenant or grant it later.
 
@@ -97,7 +97,7 @@ bin/pulsar-admin tenants create my-tenant \
 
 To update permissions of an existing tenant, use `update` instead of `create`.
 
-### 3. Enable geo-replication
+### Step 3: Enable geo-replication
 
 You can enable geo-replication at **namespace** or **topic** level.
 
@@ -137,7 +137,7 @@ topicLevelPoliciesEnabled=true
 
 :::
 
-### 4. Use topics with geo-replication
+### Step 4: Use topics with geo-replication
 
 #### Selective replication
 
