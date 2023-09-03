@@ -33,7 +33,7 @@ For example, if you have a topic containing user actions that you use to train y
 
 Pulsar releases a separate binary distribution, containing the tiered storage offloaders. To enable those offloaders, you need to complete the following steps.
 
-1. download the offloaders tarball release
+1. Download the offloaders tarball release.
 
 ```bash
 wget pulsar:offloader_release_url
