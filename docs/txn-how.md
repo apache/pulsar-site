@@ -2,7 +2,7 @@
 id: txn-how
 title: How transactions work?
 sidebar_label: "Working principles"
-description: Get a comprehensive understanding of how transactions work in Pulsar.
+description: Learn the working principles of transactions in Pulsar.
 ---
 
 This section describes transaction components and how the components work together. For the complete design details, see [PIP-31: Transactional Streaming](https://docs.google.com/document/d/145VYp09JKTw9jAT-7yNyFU255FptB2_B2Fye100ZXDI/edit#heading=h.bm5ainqxosrx).
