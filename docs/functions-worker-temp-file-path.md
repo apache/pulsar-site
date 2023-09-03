@@ -2,6 +2,7 @@
 id: functions-worker-temp-file-path
 title: Configure temporary file path
 sidebar_label: "Configure temporary file path"
+description: Configure temporary file path for function workers in Pulsar.
 ---
 
 Function workers use `java.io.tmpdir` in the JVM as the default temporary file path, which is also used as the default extraction file path for each NAR package. NAR packages require a local file path to extract and load to the Java class loader.

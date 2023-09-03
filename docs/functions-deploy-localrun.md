@@ -2,6 +2,7 @@
 id: functions-deploy-localrun
 title: Deploy a function in localrun mode
 sidebar_label: "Deploy a function in localrun mode"
+description: Deploy a Pulsar function in localrun mode.
 ---
 
 When you deploy a function in localrun mode, it runs on the machine where you enter the commands – on your laptop, for example, or in an [AWS EC2](https://aws.amazon.com/ec2/) instance.

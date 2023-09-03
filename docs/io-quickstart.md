@@ -2,6 +2,7 @@
 id: io-quickstart
 title: How to connect Pulsar to database
 sidebar_label: "Get started"
+description: Get started to connect Pulsar to database.
 ---
 
 This tutorial provides a hands-on look at how you can move data out of Pulsar without writing a single line of code.
@@ -114,7 +115,9 @@ This section demonstrates how to connect Pulsar to Cassandra.
 
 :::
 
-### Set up a Cassandra cluster
+To connect Pulsar to Cassandra, you can follow the steps below:
+
+### Step 1: Set up a Cassandra cluster
 
 This example uses `cassandra` Docker image to start a single-node Cassandra cluster in Docker.
 
@@ -186,7 +189,7 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
    cqlsh:pulsar_test_keyspace> CREATE TABLE pulsar_test_table (key text PRIMARY KEY, col text);
    ```
 
-### Configure a Cassandra sink
+### Step 2: Configure a Cassandra sink
 
 Now that we have a Cassandra cluster running locally.
 
@@ -223,7 +226,7 @@ You can create a configuration file through one of the following methods.
 
 For more information, see [Cassandra sink connector](io-cassandra-sink.md).
 
-### Create a Cassandra sink
+### Step 3: Create a Cassandra sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to create a sink connector and perform other operations on them.
 
@@ -249,7 +252,7 @@ Once the command is executed, Pulsar creates the sink connector _cassandra-test-
 
 This sink connector runs as a Pulsar Function and writes the messages produced in the topic _test_cassandra_ to the Cassandra table _pulsar_test_table_.
 
-### Inspect a Cassandra sink
+### Step 4: Inspect a Cassandra sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to monitor a connector and perform other operations on it.
 
@@ -324,7 +327,7 @@ You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_re
   }
   ```
 
-### Verify a Cassandra sink
+### Step 5: Verify a Cassandra sink
 
 1. Produce some messages to the input topic of the Cassandra sink _test_cassandra_.
 
@@ -394,7 +397,7 @@ You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_re
     key-8 |  key-8
    ```
 
-### Delete a Cassandra Sink
+### Step 6: Delete a Cassandra Sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
 to delete a connector and perform other operations on it.
@@ -417,8 +420,9 @@ This section demonstrates how to connect Pulsar to PostgreSQL.
 
 :::
 
+To connect Pulsar to PostgreSQL, you can follow the steps below:
 
-### Set up a PostgreSQL cluster
+### Step 1: Set up a PostgreSQL cluster
 
 This example uses the PostgreSQL 12 docker image to start a single-node PostgreSQL cluster in Docker.
 
@@ -478,7 +482,7 @@ This example uses the PostgreSQL 12 docker image to start a single-node PostgreS
    );
    ```
 
-### Configure a JDBC sink
+### Step 2: Configure a JDBC sink
 
 Now we have a PostgreSQL running locally.
 
@@ -538,7 +542,7 @@ In this section, you need to configure a JDBC sink connector.
    {"name":"pulsar-postgres-jdbc-sink-topic","schema":"{\"type\":\"record\",\"name\":\"Test\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"int\"]},{\"name\":\"name\",\"type\":[\"null\",\"string\"]}]}","type":"AVRO","properties":{}}
    ```
 
-### Create a JDBC sink
+### Step 3: Create a JDBC sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
 to create a sink connector and perform other operations on it.
@@ -580,7 +584,7 @@ The sink has been created successfully if the following message appears.
 Created successfully
 ```
 
-### Inspect a JDBC sink
+### Step 4: Inspect a JDBC sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
 to monitor a connector and perform other operations on it.
@@ -688,7 +692,7 @@ to monitor a connector and perform other operations on it.
   }
   ```
 
-### Stop a JDBC sink
+### Step 5: Stop a JDBC sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to stop a connector and perform other operations on it.
 
@@ -711,7 +715,7 @@ The sink instance has been stopped successfully if the following message disappe
 Stopped successfully
 ```
 
-### Restart a JDBC sink
+### Step 6: Restart a JDBC sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to restart a connector and perform other operations on it.
 
@@ -742,7 +746,7 @@ Note that `pulsar-admin sinks localrun options` **runs a sink connector locally*
 
 :::
 
-### Update a JDBC sink
+### Step 7: Update a JDBC sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to update a connector and perform other operations on it.
 
@@ -801,7 +805,7 @@ The result shows that the parallelism is 2.
 }
 ```
 
-### Delete a JDBC sink
+### Step 8: Delete a JDBC sink
 
 You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
 to delete a connector and perform other operations on it.

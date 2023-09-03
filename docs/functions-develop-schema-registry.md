@@ -2,6 +2,7 @@
 id: functions-develop-schema-registry
 title: Use schema registry
 sidebar_label: "Use schema registry"
+description: Learn to develop functions using schema registry in Pulsar.
 ---
 
 Pulsar has a built-in [schema registry](schema-overview.md) and is bundled with popular [schema types](schema-understand.md#schema-type). Pulsar Functions can leverage the existing schema information from input topics and derive the input type. The schema registry applies to output topics as well.

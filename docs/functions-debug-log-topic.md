@@ -2,6 +2,7 @@
 id: functions-debug-log-topic
 title: Debug with log topic
 sidebar_label: "Debug with log topic"
+description: Learn to debug functions with log topic in Pulsar.
 ---
 
 When using Pulsar Functions, you can generate logs predefined in functions to a specified log topic and configure consumers to consume messages from the log topic.
