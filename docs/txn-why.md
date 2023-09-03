@@ -2,7 +2,7 @@
 id: txn-why
 title: Why transactions?
 sidebar_label: "Why transactions?"
-description: Get a comprehensive understanding of why develop transaction feature in Pulsar.
+description: Learn the use cases and limitations of transactions in Pulsar.
 ---
 
 Pulsar transactions (txn) enable event streaming applications to consume, process, and produce messages in one atomic operation. The reason for developing this feature can be summarized as below.
