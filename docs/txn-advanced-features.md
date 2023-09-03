@@ -2,7 +2,7 @@
 id: txn-advanced-features
 title: Advanced features
 sidebar_label: "Advanced features"
-description: Get a comprehensive understanding of advanced features with transactions in Pulsar.
+description: Get a comprehensive understanding of advanced features of transactions in Pulsar.
 ---
 
 You can use the following advanced features with transactions in Pulsar.
