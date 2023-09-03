@@ -2,6 +2,7 @@
 id: functions-worker-stateful
 title: Enable stateful functions
 sidebar_label: "Enable stateful functions"
+description: Enable stateful function feature in Pulsar function workers.
 ---
 
 :::note
@@ -9,6 +10,8 @@ sidebar_label: "Enable stateful functions"
 When the stateful APIs of Pulsar Functions are required – for example, `putState()` and `queryState()` related interfaces – you need to enable the stateful function feature in function workers.
 
 :::
+
+To enable the stateful function feature in function workers, complete the following steps.
 
 1. Enable the `streamStorage` service in BookKeeper.
    Currently, the service uses the NAR package, so you need to set the configuration in the `conf/bookkeeper.conf` file.

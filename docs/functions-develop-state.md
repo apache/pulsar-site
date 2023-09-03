@@ -2,6 +2,7 @@
 id: functions-develop-state
 title: Configure state storage
 sidebar_label: "Configure state storage"
+description: Configure state storage for functions in Pulsar.
 ---
 
 ````mdx-code-block

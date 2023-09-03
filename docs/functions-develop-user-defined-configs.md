@@ -2,6 +2,7 @@
 id: functions-develop-user-defined-configs
 title: Pass user-defined configurations
 sidebar_label: "Pass user-defined configurations"
+description: Learn to pass user-defined configurations to a function in Pulsar.
 ---
 
 ````mdx-code-block

@@ -2,6 +2,7 @@
 id: functions-deploy-cluster-builtin
 title: Use built-in functions
 sidebar_label: "Use built-in functions"
+description: Use built-in functions in Pulsar.
 ---
 
 Similar to built-in connectors, the code of Java functions [packaged as NAR](functions-package-java.md) that are placed in the `functions` directory of the function worker are loaded at startup and can be referenced when creating a function.

@@ -2,14 +2,8 @@
 id: functions-overview
 title: Pulsar Functions overview
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of Pulsar functions.
 ---
-
-This section introduces the following content:
-* [What are Pulsar Functions](#what-are-pulsar-functions)
-* [Why use Pulsar Functions](#why-use-pulsar-functions)
-* [Use cases](#use-cases)
-* [What's next?](#whats-next)
-
 
 ## What are Pulsar Functions
 
@@ -20,7 +14,7 @@ Pulsar Functions are a serverless computing framework that runs on top of Pulsar
 
 The diagram below illustrates the three steps in the functions computing process.
 
-![Pulsar Functions execute user-defined code on data published to Pulsar topics](/assets/function-overview.svg)
+![Workflow of a Pulsar function](/assets/function-overview.svg)
 
 Each time a function receives a message, it completes the following consume-apply-publish steps.
 1. Consumes the message from one or more **input topics**.
