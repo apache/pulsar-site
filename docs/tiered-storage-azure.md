@@ -2,19 +2,20 @@
 id: tiered-storage-azure
 title: Use Azure BlobStore offloader with Pulsar
 sidebar_label: "Azure BlobStore offloader"
+description: Learn to install and configure Azure BlobStore offloader with Pulsar.
 ---
 
 This chapter guides you through every step of installing and configuring the Azure BlobStore offloader and using it with Pulsar.
 
 ## Installation
 
-Follow the steps below to install the Azure BlobStore offloader.
-
 ### Prerequisite
 
 - Pulsar: 2.6.2 or later versions
 
 ### Steps
+
+Follow the steps below to install the Azure BlobStore offloader.
 
 1. [Download the Pulsar tarball](getting-started-standalone.md#download-pulsar-distribution).
 2. Download and untar the Pulsar offloaders package, then copy the Pulsar offloaders as `offloaders` in the Pulsar directory. See [Install tiered storage offloaders](tiered-storage-overview.md#how-to-install-tiered-storage-offloaders).
