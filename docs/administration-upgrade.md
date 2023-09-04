@@ -2,6 +2,7 @@
 id: administration-upgrade
 title: Upgrade Guide
 sidebar_label: "Upgrade"
+description: Learn to upgrade a Pulsar cluster.
 ---
 
 ````mdx-code-block

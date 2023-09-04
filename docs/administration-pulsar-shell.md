@@ -2,6 +2,7 @@
 id: administration-pulsar-shell
 title: Pulsar Shell
 sidebar_label: "Pulsar Shell"
+description: Get a comprehensive understanding of Pulsar Shell.
 ---
 
 ````mdx-code-block

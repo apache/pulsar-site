@@ -2,6 +2,7 @@
 id: administration-proxy
 title: Pulsar proxy
 sidebar_label: "Pulsar proxy"
+description: Get a comprehensive understanding of Pulsar proxy.
 ---
 
 Pulsar proxy is an optional gateway. Pulsar proxy is used when direct connections between clients and Pulsar brokers are either infeasible or undesirable. For example, when you run Pulsar in a cloud environment or on [Kubernetes](https://kubernetes.io) or an analogous platform, you can run Pulsar proxy.
@@ -97,7 +98,7 @@ brokerProxyAllowedIPAddresses=10.10.0.0/16,192.168.1.100-120,172.16.2.*,10.1.2.3
 
 ## Start the proxy
 
-To start the proxy:
+To start the proxy, run the following commands.
 
 ```bash
 cd /path/to/pulsar/directory

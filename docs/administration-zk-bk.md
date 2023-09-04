@@ -2,7 +2,13 @@
 id: administration-zk-bk
 title: ZooKeeper and BookKeeper administration
 sidebar_label: "ZooKeeper and BookKeeper"
+description: Get a comprehensive understanding of ZooKeeper and BookKeeper in Pulsar.
 ---
+
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
 
 Pulsar relies on two external systems for essential tasks:
 
@@ -12,7 +18,7 @@ Pulsar relies on two external systems for essential tasks:
 ZooKeeper and BookKeeper are both open-source [Apache](https://www.apache.org/) projects.
 This diagram illustrates the role of ZooKeeper and BookKeeper in a Pulsar cluster:
 
-![ZooKeeper and BookKeeper](/assets/pulsar-system-architecture.png)
+![Role of ZooKeeper and BookKeeper in Pulsar cluster](/assets/pulsar-system-architecture.png)
 
 Each Pulsar cluster consists of one or more message brokers. Each broker relies on an ensemble of bookies.
 
@@ -147,7 +153,7 @@ To enable batching operations, set the [`metadataStoreBatchingEnabled`](referenc
 
 ## BookKeeper
 
-BookKeeper stores all durable messages in Pulsar. BookKeeper is a distributed [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) WAL system that guarantees read consistency of independent message logs calls ledgers. Individual BookKeeper servers are also called *bookies*.
+BookKeeper is a scalable, low-latency persistent log storage service that Pulsar uses to store all durable data. BookKeeper is a distributed [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) WAL system that guarantees read consistency of independent message logs calls ledgers. Individual BookKeeper servers are also called *bookies*.
 
 > To manage message persistence, retention, and expiry in Pulsar, refer to [cookbook](cookbooks-retention-expiry.md).
 
@@ -268,7 +274,12 @@ In Pulsar, you can set *persistence policies* at the namespace level, which dete
 
 You can set persistence policies for BookKeeper at the [namespace](reference-terminology.md#namespace) level.
 
-#### Pulsar-admin
+````mdx-code-block
+<Tabs groupId="policies"
+  defaultValue="Pulsar-admin"
+  values={[{"label":"Pulsar-admin","value":"Pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+
+<TabItem value="Pulsar-admin">
 
 Use the [`set-persistence`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=set-persistence) subcommand and specify a namespace as well as any policies that you want to apply. The available flags are:
 
@@ -304,12 +315,15 @@ Short example:
 pulsar-admin namespaces set-persistence my-tenant/my-ns -e 3 -w 3 -a 3
 ```
 
+</TabItem>
 
-#### REST API
+<TabItem value="REST API">
 
 {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/setPersistence?version=@pulsar:version_number@}
 
-#### Java
+</TabItem>
+
+<TabItem value="Java">
 
 ```java
 // The following must be true: bkEnsemble >= bkWriteQuorum >= bkAckQuorum
@@ -323,11 +337,21 @@ PersistencePolicies policies =
 admin.namespaces().setPersistence(namespace, policies);
 ```
 
+</TabItem>
+
+</Tabs>
+````
+
 ### List persistence policies
 
 You can see which persistence policy currently applies to a namespace.
 
-#### Pulsar-admin
+````mdx-code-block
+<Tabs groupId="policies"
+  defaultValue="Pulsar-admin"
+  values={[{"label":"Pulsar-admin","value":"Pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+
+<TabItem value="Pulsar-admin">
 
 Use the [`get-persistence`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=get-persistence) subcommand and specify the namespace.
 
@@ -343,12 +367,22 @@ pulsar-admin namespaces get-persistence my-tenant/my-ns
 }
 ```
 
-#### REST API
+</TabItem>
+
+
+<TabItem value="REST API">
 
 {@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/getPersistence?version=@pulsar:version_number@}
 
-#### Java
+</TabItem>
+
+<TabItem value="Java">
 
 ```java
 PersistencePolicies policies = admin.namespaces().getPersistence(namespace);
 ```
+
+</TabItem>
+
+</Tabs>
+````

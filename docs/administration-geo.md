@@ -2,6 +2,7 @@
 id: administration-geo
 title: Pulsar geo-replication
 sidebar_label: "Geo-replication"
+description: Get a comprehensive understanding of geo-replication in Pulsar.
 ---
 
 ````mdx-code-block
@@ -33,7 +34,7 @@ Applications can create producers and consumers in any of the clusters, even whe
 
 Producers and consumers can publish messages to and consume messages from any cluster in a Pulsar instance. However, subscriptions cannot only be local to the cluster where the subscriptions are created but also can be transferred between clusters after the replicated subscription is enabled. Once the replicated subscription is enabled, you can keep the subscription state in synchronization. Therefore, a topic can be asynchronously replicated across multiple geographical regions. In case of failover, a consumer can restart consuming messages from the failure point in a different cluster.
 
-![A typical geo-replication example with a full-mesh pattern](/assets/geo-replication.png)
+![Geo-replication example with a full-mesh pattern](/assets/geo-replication.png)
 
 In the aforementioned example, the **T1** topic is replicated among three clusters, **Cluster-A**, **Cluster-B**, and **Cluster-C**.
 
@@ -41,13 +42,9 @@ All messages produced in any of the three clusters are delivered to all subscrip
 
 ## Configure replication
 
-This section guides you through the steps to configure geo-replicated clusters.
-1. [Connect replication clusters](#connect-replication-clusters)
-2. [Grant permissions to properties](#grant-permissions-to-properties)
-3. [Enable geo-replication](#enable-geo-replication)
-4. [Use topics with geo-replication](#use-topics-with-geo-replication)
+To configure geo-replicated clusters, complete the following steps.
 
-### Connect replication clusters
+### Step 1: Connect replication clusters
 
 To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool to create a connection.
 
@@ -86,7 +83,7 @@ Suppose that you have 3 replication clusters: `us-west`, `us-cent`, and `us-east
 
 3. Run similar commands on `us-east` and `us-cent` to create connections among clusters.
 
-### Grant permissions to properties
+### Step 2: Grant permissions to properties
 
 To replicate to a cluster, the tenant needs permission to use that cluster. You can grant permission to the tenant when you create the tenant or grant it later.
 
@@ -100,7 +97,7 @@ bin/pulsar-admin tenants create my-tenant \
 
 To update permissions of an existing tenant, use `update` instead of `create`.
 
-### Enable geo-replication
+### Step 3: Enable geo-replication
 
 You can enable geo-replication at **namespace** or **topic** level.
 
@@ -140,7 +137,7 @@ topicLevelPoliciesEnabled=true
 
 :::
 
-### Use topics with geo-replication
+### Step 4: Use topics with geo-replication
 
 #### Selective replication
 
@@ -230,12 +227,16 @@ If you want to use replicated subscriptions in Pulsar:
 
 ### Advantages
 
+The advantages of replicated subscription are as follows.
+
  * It is easy to implement the logic.
  * You can choose to enable or disable replicated subscription.
  * When you enable it, the overhead is low, and it is easy to configure.
  * When you disable it, the overhead is zero.
 
 ### Limitations
+
+The limitations of replicated subscription are as follows.
 
 * When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
 * Only the base line cursor position is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
