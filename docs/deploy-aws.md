@@ -2,11 +2,14 @@
 id: deploy-aws
 title: Deploy a Pulsar cluster on AWS using Terraform and Ansible
 sidebar_label: "Terraform (AWS)"
+description: Learn to deploy a Pulsar cluster on AWS using Terraform and Ansible.
 ---
 
 > For instructions on deploying a single Pulsar cluster manually rather than using Terraform and Ansible, see [Deploying a Pulsar cluster on bare metal](deploy-bare-metal.md). For instructions on manually deploying a multi-cluster Pulsar instance, see [Deploying a Pulsar instance on bare metal](deploy-bare-metal-multi-cluster.md).
 
 One of the easiest ways to get a Pulsar [cluster](reference-terminology.md#cluster) running on [Amazon Web Services](https://aws.amazon.com/) (AWS) is to use the [Terraform](https://terraform.io) infrastructure provisioning tool and the [Ansible](https://www.ansible.com) server automation tool. Terraform can create the resources necessary for running the Pulsar cluster---[EC2](https://aws.amazon.com/ec2/) instances, networking and security infrastructure, etc.---While Ansible can install and run Pulsar on the provisioned resources.
+
+To deploy a Pulsar cluster on AWS, complete the following steps.
 
 ## Requirements and setup
 
@@ -22,7 +25,7 @@ You also need to make sure that you are currently logged into your AWS account v
 aws configure
 ```
 
-## Installation
+## Step 1: Installation
 
 You can install Ansible on Linux or macOS using pip.
 
@@ -39,7 +42,7 @@ git clone https://github.com/apache/pulsar
 cd pulsar/deployment/terraform-ansible/aws
 ```
 
-## SSH setup
+## Step 2: SSH setup
 
 > If you already have an SSH key and want to use it, you can skip the step of generating an SSH key and update `private_key_file` setting in `ansible.cfg` file and `public_key_path` setting in `terraform.tfvars` file.
 >
@@ -74,7 +77,7 @@ ls ~/.ssh
 id_rsa               id_rsa.pub
 ```
 
-## Create AWS resources using Terraform
+## Step 3: Create AWS resources using Terraform
 
 To start building AWS resources with Terraform, you need to install all Terraform dependencies. Enter the following command:
 
@@ -157,7 +160,7 @@ At any point, you can destroy all AWS resources associated with your cluster usi
 terraform destroy
 ```
 
-## Setup Disks
+## Step 4: Setup Disks
 
 Before you run the Pulsar playbook, you need to mount the disks to the correct directories on those bookie nodes. Since different types of machines have different disk layouts, you need to update the task defined in the `setup-disk.yaml` file after changing the `instance_types` in your terraform config,
 
@@ -173,7 +176,7 @@ setup-disk.yaml
 After that, the disks are mounted under `/mnt/journal` as journal disk, and `/mnt/storage` as ledger disk.
 Remember to enter this command just only once. If you attempt to enter this command again after you have run the Pulsar playbook, your disks might potentially be erased again, causing the bookies to fail to start up.
 
-## Run the Pulsar playbook
+## Step 5: Run the Pulsar playbook
 
 Once you have created the necessary AWS resources using Terraform, you can install and run Pulsar on the Terraform-created EC2 instances using Ansible.
 
@@ -198,7 +201,7 @@ ansible-playbook \
 ../deploy-pulsar.yaml
 ```
 
-## Access the cluster
+## Step 6: Access the cluster
 
 You can now access your running Pulsar using the unique Pulsar connection URL for your cluster, which you can obtain following the instructions [above](#fetch-your-pulsar-connection-url).
 

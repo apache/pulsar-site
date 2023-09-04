@@ -2,6 +2,7 @@
 id: deploy-bare-metal-multi-cluster
 title: Deploying a multi-cluster on bare metal
 sidebar_label: "Bare metal multi-cluster"
+description: Learn to deploy a multi-cluster Pulsar instance on bare metal.
 ---
 
 :::tip
@@ -12,16 +13,12 @@ sidebar_label: "Bare metal multi-cluster"
 
 :::
 
-A Pulsar instance consists of multiple Pulsar clusters working in unison. You can distribute clusters across data centers or geographical regions and replicate the clusters amongst themselves using [geo-replication](administration-geo.md). Deploying a  multi-cluster Pulsar instance consists of the following steps:
-
-1. Deploying two separate ZooKeeper quorums: a local quorum for each cluster in the instance and a configuration store quorum for instance-wide tasks
-2. Initializing cluster metadata for each cluster
-3. Deploying a BookKeeper cluster of bookies in each Pulsar cluster
-4. Deploying brokers in each Pulsar cluster
-
+A Pulsar instance consists of multiple Pulsar clusters working in unison. You can distribute clusters across data centers or geographical regions and replicate the clusters amongst themselves using [geo-replication](administration-geo.md). 
 
 > #### Run Pulsar locally or on Kubernetes?
 > This guide shows you how to deploy Pulsar in production in a non-Kubernetes environment. If you want to run a standalone Pulsar cluster on a single machine for development purposes, see the [Setting up a local cluster](getting-started-standalone.md) guide. If you want to run Pulsar on [Kubernetes](https://kubernetes.io), see the [Pulsar on Kubernetes](deploy-kubernetes.md) guide, which includes sections on running Pulsar on Kubernetes, on Google Kubernetes Engine and on Amazon Web Services.
+
+Deploying a multi-cluster Pulsar instance on bare metal consists of the following steps.
 
 ## System requirement
 
@@ -76,7 +73,7 @@ Directory | Contains
 `logs` | Logs that the installation creates
 
 
-## Deploy ZooKeeper
+## Step 1: Deploy ZooKeeper
 
 Each Pulsar instance relies on two separate ZooKeeper quorums.
 
@@ -197,7 +194,7 @@ Once your configuration store configuration is in place, you can start up the se
 bin/pulsar-daemon start configuration-store
 ```
 
-## Cluster metadata initialization
+## Step 2: Cluster metadata initialization
 
 Once you set up the cluster-specific ZooKeeper and configuration store quorums for your instance, you need to write some metadata to ZooKeeper for each cluster in your instance. **you only need to write these metadata once**.
 
@@ -226,7 +223,7 @@ If you use [TLS](security-tls-transport.md), you also need to specify a TLS web 
 
 Make sure to run `initialize-cluster-metadata` for each cluster in your instance.
 
-## Deploy BookKeeper
+## Step 3: Deploy BookKeeper
 
 BookKeeper provides [persistent message storage](concepts-architecture-overview.md#persistent-storage) for Pulsar.
 
@@ -273,7 +270,7 @@ designed to use multiple devices:
 
 
 
-## Deploy brokers
+## Step 4: Deploy brokers
 
 Once you set up ZooKeeper, initialize cluster metadata, and spin up BookKeeper bookies, you can deploy brokers.
 

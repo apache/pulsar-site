@@ -2,15 +2,12 @@
 id: helm-deploy
 title: Deploy a Pulsar cluster on Kubernetes
 sidebar_label: "Deploy"
+description: Learn to deploy a Pulsar cluster on Kubernetes.
 ---
 
 Before deploying a Pulsar cluster, you need to [prepare Kubernetes resources](helm-prepare.md) and then continue with the following steps.
-1. Select configuration options
-2. Install dependent charts
-3. Prepare Helm release
-4. Deploy your Pulsar cluster using Helm
 
-## Select configuration options
+## Step 1: Select configuration options
 
 Specify how to run Pulsar using Helm's `--set option.name=value` command line option. In each section, collect the options that are combined to use with the `helm install` command.
 
@@ -276,7 +273,7 @@ By default, the resource requests and the number of replicas for the Pulsar comp
 
 Once you have all of your configuration options collected, you can install dependent charts before installing the Pulsar Helm Chart.
 
-## Install dependent charts
+## Step 2: Install dependent charts
 
 ### Install storage provisioner
 
@@ -300,7 +297,7 @@ cd pulsar-helm-chart
 ./scripts/cert-manager/install-cert-manager.sh
 ```
 
-## Prepare Helm release
+## Step 3: Prepare Helm release
 
 Once you have installed all the dependent charts and collected all of your configuration options, you can run [prepare_helm_release.sh](https://github.com/apache/pulsar-helm-chart/blob/master/scripts/pulsar/prepare_helm_release.sh) to prepare the Helm release.
 
@@ -318,7 +315,7 @@ The `prepare_helm_release` creates the following resources:
   - the `proxy-admin` role is used for proxies to communicate with brokers.
   - the `admin` role is used by the admin tools.
 
-## Deploy Pulsar cluster using Helm
+## Step 4: Deploy Pulsar cluster using Helm
 
 Once you have finished the above steps, you can install a Helm release.
 
