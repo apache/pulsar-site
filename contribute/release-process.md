@@ -323,6 +323,12 @@ done
 
 If you don't have the permission, you can ask someone with access to apachepulsar org to do that.
 
+### Update project version
+After the release process, you should reset the project version with `-SNAPSHOT`.
+```
+./src/set-project-version.sh 2.10.x-SNAPSHOT
+```
+
 ### Release Helm Chart
 
 :::caution
