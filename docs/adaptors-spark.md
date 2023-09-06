@@ -2,6 +2,7 @@
 id: adaptors-spark
 title: Pulsar adaptor for Apache Spark
 sidebar_label: "Apache Spark"
+description: Get a comprehensive understanding of concepts, configuration methods, and usage of Pulsar adaptor for Apache Spark.
 ---
 
 ## Spark Streaming receiver
