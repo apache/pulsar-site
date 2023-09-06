@@ -2,6 +2,7 @@
 id: security-oauth2
 title: Authentication using OAuth 2.0 access tokens
 sidebar_label: "Authentication using OAuth 2.0 access tokens"
+description: Get a comprehensive understanding of concepts and configuration methods of OAuth authentication in Pulsar.
 ---
 
 ````mdx-code-block

@@ -2,6 +2,7 @@
 id: security-basic-auth
 title: Authentication using HTTP basic
 sidebar_label: "Authentication using HTTP basic"
+description: Get a comprehensive understanding of concepts and configuration methods of HTTP basic authentication in Pulsar.
 ---
 
 ````mdx-code-block
@@ -35,7 +36,8 @@ Currently, you can use MD5 (recommended) and CRYPT encryption to authenticate yo
 
 :::
 
-Create a password file named `.htpasswd` with a user account `superuser/admin`:
+To create a password file named `.htpasswd` with a user account `superuser/admin`, you can use the following methods.
+
 * Use MD5 encryption (recommended):
 
    ```bash
@@ -93,7 +95,7 @@ authParams={"userId":"superuser","password":"admin"}
 
 ## Configure basic authentication in Pulsar clients
 
-The following example shows how to configure basic authentication when using Pulsar clients.
+To configure basic authentication when using Pulsar clients, you can follow the example below.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"

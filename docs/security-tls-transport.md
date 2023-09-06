@@ -2,6 +2,7 @@
 id: security-tls-transport
 title: TLS Encryption
 sidebar_label: "TLS Encryption"
+description: Get a comprehensive understanding of TLS concepts, debugging methods and mTLS configuration methods in Pulsar.
 ---
 
 
@@ -63,7 +64,9 @@ Moreover, as the administrator has full control of the CA, a bad actor is unlike
 
 By default, Pulsar uses [netty-tcnative](https://github.com/netty/netty-tcnative). It includes two implementations, `OpenSSL` (default) and `JDK`. When `OpenSSL` is unavailable, `JDK` is used.
 
-### Create TLS certificates
+To configure mTLS encryption with PEM, complete the following steps.
+
+### Step 1: Create TLS certificates
 
 Creating TLS certificates involves creating a [certificate authority](#create-a-certificate-authority), a [server certificate](#create-a-server-certificate), and a [client certificate](#create-a-client-certificate).
 
@@ -181,7 +184,7 @@ At this point, you have a cert, `broker.cert.pem`, and a key, `broker.key-pk8.pe
 
 At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your clients.
 
-### Configure brokers
+### Step 2: Configure brokers
 
 To configure a Pulsar [broker](reference-terminology.md#broker) to use TLS encryption, you need to add these values to `broker.conf` in the `conf` directory of your Pulsar installation. Substitute the appropriate certificate paths where necessary.
 
@@ -227,7 +230,7 @@ For JDK 11, you can obtain a list of supported values from the documentation:
 - [TLS protocol](https://docs.oracle.com/en/java/javase/11/security/oracle-providers.html#GUID-7093246A-31A3-4304-AC5F-5FB6400405E2__SUNJSSEPROVIDERPROTOCOLPARAMETERS-BBF75009)
 - [Ciphers](https://docs.oracle.com/en/java/javase/11/security/oracle-providers.html#GUID-7093246A-31A3-4304-AC5F-5FB6400405E2__SUNJSSE_CIPHER_SUITES)
 
-### Configure proxies
+### Step 3: Configure proxies
 
 Configuring mTLS on proxies includes two directions of connections, from clients to proxies, and from proxies to brokers.
 
@@ -251,7 +254,7 @@ brokerClientCertificateFilePath=/path/to/client.cert.pem
 brokerClientKeyFilePath=/path/to/client.key-pk8.pem
 ```
 
-### Configure clients
+### Step 4: Configure clients
 
 To enable TLS encryption, you need to configure the clients to use `https://` with port 8443 for the web service URL, and `pulsar+ssl://` with port 6651 for the broker service URL.
 
@@ -394,7 +397,7 @@ In addition to the required configurations in the `conf/client.conf` file, you n
 </Tabs>
 ````
 
-### Configure CLI tools
+### Step 5: Configure CLI tools
 
 [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_reference@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
 
@@ -411,7 +414,9 @@ authParams=tlsCertFile:/path/to/client.cert.pem,tlsKeyFile:/path/to/client.key-p
 
 By default, Pulsar uses [Conscrypt](https://github.com/google/conscrypt) for both broker service and Web service.
 
-### Generate JKS certificate
+To configure mTLS encryption with KeyStore, complete the following steps:
+
+### Step 1: Generate JKS certificate
 
 You can use Java's `keytool` utility to generate the key and certificate for each machine in the cluster.
 
@@ -442,7 +447,7 @@ To configure [hostname verification](#hostname-verification), you need to append
 :::
 
 
-### Configure brokers
+### Step 2: Configure brokers
 
 Configure the following parameters in the `conf/broker.conf` file and restrict access to the store files via filesystem permissions.
 
@@ -486,7 +491,7 @@ The default value of `tlsRequireTrustedClientCertOnConnect` is `false`, which re
 
 :::
 
-### Configure proxies
+### Step 3: Configure proxies
 
 Configuring mTLS on proxies includes two directions of connections, from clients to proxies, and from proxies to brokers.
 
@@ -518,7 +523,7 @@ brokerClientTlsKeyStore=/var/private/tls/client.keystore.jks
 brokerClientTlsKeyStorePassword=clientpw
 ```
 
-### Configure clients
+### Step 4: Configure clients
 
 Similar to [Configure mTLS encryption with PEM](#configure-clients), you need to provide the TrustStore information for a minimal configuration.
 
@@ -573,7 +578,7 @@ If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
 </Tabs>
 ````
 
-### Configure CLI tools
+### Step 5: Configure CLI tools
 
 For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_reference@/pulsar-client/), use the `conf/client.conf` config file in a Pulsar installation.
 

@@ -2,6 +2,7 @@
 id: security-openid-connect
 title: Authentication using OpenID Connect
 sidebar_label: "Authentication using OpenID Connect"
+description: Get a comprehensive understanding of concepts and configuration methods of OpenID Connect authentication in Pulsar.
 ---
 
 Apache Pulsar supports authenticating clients using [OpenID Connect](https://openid.net/connect), which is an implementation of the OAuth 2.0 Protocol. Using an access token obtained from an OpenID Connect compliant Identity Provider service acting as the token issuer, you can identify a Pulsar client and associate it with a "principal" (or "role") that is permitted to do some actions, such as publishing messages to a topic or performing some admin operation.

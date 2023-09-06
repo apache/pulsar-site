@@ -2,6 +2,7 @@
 id: security-tls-authentication
 title: Authentication using mTLS
 sidebar_label: "Authentication using mTLS"
+description: Get a comprehensive understanding of concepts and configuration methods of mTLS authentication in Pulsar.
 ---
 
 ````mdx-code-block
@@ -194,9 +195,11 @@ authParams=tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key
 
 ## Configure mTLS authentication with KeyStore
 
-Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration. This section describes how to use the [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) type to configure mTLS authentication.
+Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration. 
 
-### Configure brokers
+To configure mTLS authentication with [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore), complete the following steps.
+
+### Step 1: Configure brokers
 
 Configure the `broker.conf` file as follows.
 
@@ -232,7 +235,7 @@ tlsRequireTrustedClientCertOnConnect=true
 tlsAllowInsecureConnection=false
 ```
 
-### Configure clients
+### Step 2: Configure clients
 
 Besides configuring [TLS encryption](security-tls-transport.md), you need to configure the KeyStore, which contains a valid CN as client role, for clients.
 

@@ -2,6 +2,7 @@
 id: security-authorization
 title: Authentication and authorization in Pulsar
 sidebar_label: "Authorization and ACLs"
+description: Get a comprehensive understanding of authentication and authorization in Pulsar.
 ---
 
 
@@ -60,7 +61,7 @@ You can manage tenants using the [`pulsar-admin`](pathname:///reference/#/@pulsa
 
 ### Create a new tenant
 
-The following is an example tenant creation command:
+You can create a new tenant using the following command.
 
 ```shell
 bin/pulsar-admin tenants create my-tenant \
