@@ -2,6 +2,7 @@
 id: cookbooks-non-persistent
 title: Non-persistent messaging
 sidebar_label: "Non-persistent messaging"
+description: Get a comprehensive understanding of concepts, usage methods and management methods of non-persistent messaging in Pulsar.
 ---
 
 This cookbook provides:
