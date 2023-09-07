@@ -8,7 +8,7 @@ The [CommunityOverCode Asia 2023](https://apachecon.com/acasia2023/) conference 
 
 The conference gathers adopters, developers, engineers, and technologists from some of the most influential open-source communities in the world. To date, there has been a total of over 100 proposals submitted by presenters from AWS, Huawei, Tencent Cloud, StreamNative, WeBank, and many more.
 
-We are excited to have various Apache Pulsar-related sessions on this conference, including integrations with IoT technologies, applications on cloud, the Pulsar community development, and so on.
+We are excited to have various Apache Pulsar-related sessions on this conference, including the milestone achieved by our first LTS release, integrations with applications on cloud, the Pulsar community development, and so on.
 
 <!--truncate-->
 
@@ -27,12 +27,6 @@ The Apache Pulsar community recently launched [Apache Pulsar 3.0](https://pulsar
 Lin Lin, SDE Expert, Huawei
 
 Apache Pulsar is a cloud-native message queue that, based on its storage separation architecture, can often shrink the compute layer to save resources during periods of low traffic. We made a lot of optimizations for Apache Pulsar in containerization scenarios. For example, at present, the Pulsar load balancing algorithm relies on the past load data of nodes, and the process of achieving balance is relatively slow. When HPA is enabled, node capacity expansion may be triggered during load balancing, and capacity expansion triggers new load balancing. How can we optimize to make Pulsar more cloud-native?
-
-### Build iot streaming data platform based on Apache StreamPipes and Apache Pulsar
-
-Zhenlu Wu, Professional teacher of the Department of Internet of Things Engineering, Guangdong Ocean University
-
-Apache StreamPipes is an industrial IoT streaming data development toolbox for non-technical users to build message transfer between pipeline components based on various message queue systems. This talk will explore how to implement the message transport layer of Apache StreamPipes using Apache Pulsar so that Apache StreamPipes can take advantage of Pulsar's advantages, including flexible scalability, high-performance message transport, low end-to-end latency, and more. At the same time, this talk also introduces the practical case of this solution in the field of industrial Internet of Things.
 
 ### Apache Pulsar current-limiting principle and application practice
 
