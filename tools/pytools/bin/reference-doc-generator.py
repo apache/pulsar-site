@@ -53,11 +53,13 @@ if __name__ == '__main__':
         ver = semver.VersionInfo.parse(version)
         version = f"{ver.major}.{ver.minor}.x"
 
-    if Kind.all in kinds:
-        kinds = {Kind.config, Kind.admin, Kind.pulsar, Kind.client, Kind.perf}
+    if version != 'next' and Kind.all in kinds:
         src = site_path() / 'static' / 'reference' / 'next'
         dst = site_path() / 'static' / 'reference' / version
         shutil.copytree(src, dst)
+
+    if Kind.all in kinds:
+        kinds = {Kind.config, Kind.admin, Kind.pulsar, Kind.client, Kind.perf}
 
     for kind in kinds:
         if kind == Kind.config:
