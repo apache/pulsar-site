@@ -37,7 +37,7 @@ Pulsar's [admin interface](admin-api-overview.md) enables you to manage both ret
 By default, when a Pulsar message arrives at a broker, the message is stored until it has been acknowledged on all subscriptions, at which point it is marked for deletion. You can override this behavior and retain messages that have already been acknowledged on all subscriptions by setting a *retention policy* for all topics in a given namespace. Retention is based on both a *size limit* and a *time limit*.
 
 The diagram below illustrates the concept of message retention.
-![concept of message retention in Pulsar.](/assets/retention.svg)
+![Concept of message retention in Pulsar.](/assets/retention.svg)
 
 Retention policies are useful when you use the Reader interface. The Reader interface does not use acknowledgments, and messages do not exist within backlogs. It is required to configure retention for Reader-only use cases.
 
