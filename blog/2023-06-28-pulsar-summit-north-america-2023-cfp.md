@@ -1,5 +1,5 @@
 ---
-author: "tison"
+author: tison
 title: "Pulsar Summit North America 2023: CFP Is Open Now!"
 date: 2023-06-28
 ---
@@ -8,7 +8,7 @@ date: 2023-06-28
 
 We're excited to announce that Pulsar Summit North America 2023 will take place on **Wednesday, October 25, 2023**!
 
-We welcome your participation to help make the event a success, by submitting a talk for the event or offering sponsorship. 
+We welcome your participation to help make the event a success, by submitting a talk for the event or offering sponsorship.
 
 <!--truncate-->
 
@@ -22,7 +22,7 @@ Since 2020, seven global Pulsar Summit Events have featured 170+ interactive ses
 
 [Submit your session abstract](https://sessionize.com/pulsar-summit-north-america-2023)
 
-Share your Pulsar story and speak at the summit! Pulsar Summit offers a unique opportunity to connect with your peers and raise your profile in the rapidly growing Apache Pulsar community. 
+Share your Pulsar story and speak at the summit! Pulsar Summit offers a unique opportunity to connect with your peers and raise your profile in the rapidly growing Apache Pulsar community.
 
 Our theme this year is "Why Pulsar?" and we are looking for stories that are innovative, informative, or thought-provoking. Join us to speak at the summit! You will be on stage with all the top Pulsar thought-leaders. It is a great way to participate and raise your profile in the rapidly growing Apache Pulsar community.
 
