@@ -2,6 +2,7 @@
 id: adaptors-kafka
 title: Pulsar adaptor for Apache Kafka
 sidebar_label: "Kafka client wrapper"
+description: Learn to use the Pulsar Kafka compatibility wrapper and configure Pulsar authentication provider.
 ---
 
 
@@ -9,7 +10,9 @@ Pulsar provides an easy option for applications that are currently written using
 
 ## Use the Pulsar Kafka compatibility wrapper
 
-In an existing application, change the regular Kafka client dependency and replace it with the Pulsar Kafka wrapper. Remove the following dependency in `pom.xml`:
+To use the Pulsar Kafka compatibility wrapper, complete the following steps.
+
+**Step 1:** In an existing application, change the regular Kafka client dependency and replace it with the Pulsar Kafka wrapper. Remove the following dependency in `pom.xml`:
 
 ```xml
 <dependency>
@@ -19,7 +22,7 @@ In an existing application, change the regular Kafka client dependency and repla
 </dependency>
 ```
 
-Then include this dependency for the Pulsar Kafka wrapper:
+**Step 2:** Then include this dependency for the Pulsar Kafka wrapper:
 
 ```xml
 <dependency>
