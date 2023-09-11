@@ -2,7 +2,8 @@
 Id: tutorials-tenant
 title: How to set up a tenant
 sidebar_label: "Set up a tenant"
-description: Learn to set up a tenant in Pulsar.
+description: Learn how to set up a tenant in Pulsar.
+
 ---
 
 
