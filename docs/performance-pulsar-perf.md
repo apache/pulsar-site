@@ -2,7 +2,7 @@
 id: performance-pulsar-perf
 title: Pulsar Perf
 sidebar_label: "Pulsar Perf"
-description: Learn ow to use Pulsar Perf for performance testing and HdrHistogram Plotter for visualizing test results.
+description: Learn how to use Pulsar Perf for performance testing and HdrHistogram Plotter for visualizing test results.
 ---
 
 The Pulsar Perf is a built-in performance test tool for Apache Pulsar. You can use the Pulsar Perf to test message writing or reading performance. For detailed information about performance tuning, see [here](https://streamnative.io/en/blog/tech/2021-01-14-pulsar-architecture-performance-tuning).
