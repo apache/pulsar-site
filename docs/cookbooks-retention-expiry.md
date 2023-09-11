@@ -189,7 +189,7 @@ admin.namespaces().getRetention(namespace);
 You can control the allowable size and/or time of backlogs, at the namespace level, using *backlog quotas*. Pulsar uses a quota to enforce a hard limit on the logical size of the backlogs in a topic. Backlog quota triggers an alert policy (for example, producer exception) once the quota limit is reached.
 
 The diagram below illustrates the concept of backlog quota.
-![concept of backlog quota i Pulsar](/assets/backlog-quota.svg)
+![Concept of backlog quota in Pulsar](/assets/backlog-quota.svg)
 
 Setting a backlog quota involves setting:
 
