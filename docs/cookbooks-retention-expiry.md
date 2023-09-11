@@ -351,7 +351,7 @@ By default, Pulsar stores all unacknowledged messages forever. This can lead to 
 The TTL parameter is like a stopwatch attached to each message that defines the amount of time a message is allowed to stay unacknowledged. When the TTL expires, Pulsar automatically moves the message to the acknowledged state (and thus makes it ready for deletion).
 
 The diagram below illustrates the concept of TTL.
-![concept of TTL in Pulsar](/assets/ttl.svg)
+![Concept of TTL in Pulsar](/assets/ttl.svg)
 
 ### Set the TTL for a namespace
 
