@@ -2,6 +2,7 @@
 id: adaptors-storm
 title: Pulsar adaptor for Apache Storm
 sidebar_label: "Apache Storm"
+description: Get a comprehensive understanding of Pulsar adaptor for Apache Storm.
 ---
 
 Pulsar Storm is an adaptor for integrating with [Apache Storm](http://storm.apache.org/) topologies. It provides core Storm implementations for sending and receiving data.
@@ -10,7 +11,7 @@ An application can inject data into a Storm topology via a generic Pulsar spout,
 
 ## Using the Pulsar Storm Adaptor
 
-Include dependency for Pulsar Storm Adaptor:
+To use the Pulsar Storm Adaptor, you need to include dependency for Pulsar Storm Adaptor:
 
 ```xml
 <dependency>

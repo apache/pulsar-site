@@ -132,6 +132,7 @@ $ pulsar-admin clusters list options
 
 |Flag|Description|Default|
 |---|---|---|
+| `-c, --current` | Print the current cluster with (*)|false||
 
 
 ## update-peer-clusters
