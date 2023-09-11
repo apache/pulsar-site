@@ -2,7 +2,7 @@
 id: security-extending
 title: Extend Authentication and Authorization in Pulsar
 sidebar_label: "Extend Authentication and Authorization"
-description: Learn to use custom authentication and authorization mechanisms.
+description: Learn how to use custom authentication and authorization mechanisms.
 ---
 
 Pulsar provides a way to use custom authentication and authorization mechanisms.
