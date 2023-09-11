@@ -12,29 +12,10 @@ Here is a glossary of terms related to Apache Pulsar:
 
 Pulsar is a distributed messaging system originally created by Yahoo but now under the stewardship of the Apache Software Foundation.
 
-### Message
-
-Messages are the basic unit of Pulsar. They're what [producers](#producer) publish to [topics](#topic)
-and what [consumers](#consumer) then consume from topics.
-
-### Topic
-
-A named channel used to pass messages published by [producers](#producer) to [consumers](#consumer) who
-process those [messages](#message).
-
-### Partitioned Topic
-
-A topic that is served by multiple Pulsar [brokers](#broker), which enables higher throughput.
-
 ### Namespace Bundle
 
 A virtual group of [topics](#topic) that belong to the same [namespace](#namespace). A namespace bundle
 is defined as a range between two 32-bit hashes, such as 0x00000000 and 0xffffffff.
-
-### Subscription
-
-A lease on a [topic](#topic) established by a group of [consumers](#consumer). Pulsar has four subscription
-modes (exclusive, shared, failover and key_shared).
 
 ### Pub-Sub
 

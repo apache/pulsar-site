@@ -2,6 +2,7 @@
 id: admin-api-tools
 title: Pulsar admin interfaces - Tools
 sidebar_label: "Tools"
+description: Get a comprehensive understanding of concepts and difference of Pulsar admin CLI and Pulsar admin APIs.
 ---
 
 ````mdx-code-block
@@ -21,7 +22,7 @@ You can manage Pulsar entities through the Pulsar admin layer via one of the fol
 
 - [pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/): It’s a command-line tool and is available in the bin folder of your Pulsar installation.
 
-![Pulsar admin APIs - tools](/assets/admin-api-tools.svg)
+![Tools of Pulsar admin layer](/assets/admin-api-tools.svg)
 
 Here are the explanations and comparisons of these tools.
 
