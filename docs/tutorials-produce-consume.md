@@ -2,7 +2,8 @@
 Id: tutorials-produce-consume
 title: Produce and consume messages
 sidebar_label: "Produce and consume messages"
-description: Learn to produce and consume messages in Pulsar.
+description: Learn how to produce and consume messages in Pulsar.
+
 ---
 
 In this tutorial, we will:
