@@ -2,7 +2,8 @@
 Id: tutorials-namespace
 title: Create a namespace
 sidebar_label: "Create a namespace"
-description: Learn to create and verify a namespace in Pulsar.
+description: Learn how to create and verify a namespace in Pulsar.
+
 ---
 
 
