@@ -2,7 +2,8 @@
 Id: tutorials-topic
 title: How to create a topic
 sidebar_label: "Create a topic"
-description: Learn to create a topic in Pulsar.
+description: Learn how to create a topic in Pulsar.
+
 ---
 
 
