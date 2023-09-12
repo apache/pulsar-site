@@ -2,6 +2,8 @@
 Id: tutorials-tenant
 title: How to set up a tenant
 sidebar_label: "Set up a tenant"
+description: Learn how to set up a tenant in Pulsar.
+
 ---
 
 
@@ -9,7 +11,7 @@ Pulsar is a powerful messaging system you can use to process and route high volu
 
 In this tutorial, you will create a new tenant, named "apache" in your Pulsar cluster, hosted in K8s helm. 
 
-To create a tenant:
+To create a tenant, complete the following steps.
 
 1. Enter the toolset container.
 

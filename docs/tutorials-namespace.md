@@ -2,6 +2,8 @@
 Id: tutorials-namespace
 title: Create a namespace
 sidebar_label: "Create a namespace"
+description: Learn how to create and verify a namespace in Pulsar.
+
 ---
 
 
@@ -15,13 +17,13 @@ sidebar_label: "Create a namespace"
 
 In this tutorial, we create a namespace called pulsar in the tenant apache. Then we list namespaces of tenant apache to see if the namespace is created successfully.
 
-Create the namespace.
+To create the namespace, use the following command.
 
 ```bash
 bin/pulsar-admin namespaces create apache/pulsar
 ```
 
-Verify the namespace.
+To verify the namespace, use the following command.
 
 ```bash
 bin/pulsar-admin namespaces list apache

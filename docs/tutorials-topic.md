@@ -2,6 +2,8 @@
 Id: tutorials-topic
 title: How to create a topic
 sidebar_label: "Create a topic"
+description: Learn how to create a topic in Pulsar.
+
 ---
 
 
@@ -11,6 +13,8 @@ Apache Pulsar is a distributed messaging system that supports high performance a
 [Publish to partitioned topics](admin-api-topics.md#publish-to-partitioned-topics)
 
 ## Create a topic
+
+To create a topic, complete the following steps.
 
 1. Create `test-topic` with 4 partitions in the namespace `apache/pulsar`.
 

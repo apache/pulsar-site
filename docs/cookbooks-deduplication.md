@@ -2,6 +2,7 @@
 id: cookbooks-deduplication
 title: Message deduplication
 sidebar_label: "Message deduplication "
+description: Get a comprehensive understanding of working principle and configuration methods of message deduplication in Pulsar.
 ---
 
 
@@ -16,7 +17,7 @@ Message deduplication could affect the performance of the brokers during informa
 
 To use message deduplication in Pulsar, you need to configure your Pulsar brokers, namespaces, or topics. It is recommended to modify the configuration in the clients, for example, setting send timeout to infinity.
 
-## How it works
+## How message deduplication works
 
 You can enable or disable message deduplication at broker, namespace, or topic level. By default, it is disabled on all brokers, namespaces, or topics. You can enable it in the following ways:
 

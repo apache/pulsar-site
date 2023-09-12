@@ -2,6 +2,7 @@
 id: security-overview
 title: Pulsar security overview
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of Pulsar security, including encryption, authentication, and authorization.
 ---
 
 As the central message bus for a business, Apache Pulsar is frequently used for storing mission-critical data. Therefore, enabling security features in Pulsar is crucial. This chapter describes the main security controls that Pulsar uses to help protect your data.
@@ -28,7 +29,7 @@ Encryption ensures that if an attacker gets access to your data, the attacker ca
 
 Authentication is the process of verifying the identity of clients. In Pulsar, the authentication provider is responsible for properly identifying clients and associating them with role tokens. Note that if you only enable authentication, an authenticated role token can access all resources in the cluster.
 
-### How it works in Pulsar
+### How authentication works in Pulsar
 
 Pulsar provides a pluggable authentication framework, and Pulsar brokers/proxies use this mechanism to authenticate clients.
 
