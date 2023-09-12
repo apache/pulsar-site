@@ -2,6 +2,7 @@
 id: reference-cli-tools
 title: Pulsar command-line tools
 sidebar_label: "Pulsar CLI tools"
+description: Learn how to use Pulsar command-line tools.
 ---
 
 Pulsar offers several command-line tools that you can use for managing Pulsar installations, performance testing, using command-line producers and consumers, and more.

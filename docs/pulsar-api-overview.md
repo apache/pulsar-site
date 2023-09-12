@@ -2,6 +2,7 @@
 id: pulsar-api-overview
 title: Pulsar APIs
 sidebar_label: "Pulsar APIs"
+description: Get a comprehensive understanding of concepts, functionalities, and distinctions of Pulsar APIs.
 ---
 
 ````mdx-code-block
@@ -16,7 +17,7 @@ As the core building blocks of Pulsar, Pulsar APIs allow you to:
 - build applications with Pulsar using client APIs
 - administer Pulsar clusters using admin APIs
 
-![Pulsar APIs - Definition](/assets/pulsar-api-definition.svg)
+![Definition of Pulsar APIs](/assets/pulsar-api-definition.svg)
 
 ## Pulsar client APIs
 
