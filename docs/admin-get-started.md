@@ -45,9 +45,23 @@ Check the detailed steps below.
 
 To manage topics using pulsar-admin CLI, complte the following steps.
 
+1. Set the service URL.
+
+2. Create a partitioned topic.
+
+3. Update the number of a partition.
+
+4. Produce messages to the topic.
+
+5. Check the stats of the topic.
+
+6. Delete the topic.
+
 **Prerequisites**
 
 - Install and start Pulsar standalone. This tutorial runs Pulsar 2.11 as an example.
+
+**Steps**
 
 **Step 1:** Set the service URLs to point to the broker service in [client.conf](https://github.com/apache/pulsar/blob/master/conf/client.conf).
 
@@ -242,9 +256,21 @@ To manage topics using pulsar-admin CLI, complte the following steps.
 
 To manage topics using REST API, complete the following steps.
 
+1. Create a partitioned topic
+
+2. Update the number of a partition.
+
+3. Produce messages to the topic.
+
+4. Check the stats of the topic.
+
+5. Delete the topic.
+
 **Prerequisites**
 
 - Install and start Pulsar standalone. This tutorial runs Pulsar 2.11 as an example.
+
+**Steps**
 
 **Step 1:** Create a persistent topic named _test-topic-2_ with 4 partitions.
 
@@ -381,6 +407,18 @@ To manage topics using REST API, complete the following steps.
 
 To manage topics using Java admin API, complete following steps.
 
+1. Initiate a Pulsar Java client.
+
+2. Create a partitioned topic
+
+3. Update the number of a partition.
+
+4. Produce messages to the topic.
+
+5. Check the stats of the topic.
+
+6. Delete the topic.
+
 **Prerequisites**
 
 - Prepare a Java project and add the following dependency to your POM file.
@@ -392,6 +430,8 @@ To manage topics using Java admin API, complete following steps.
         <version>2.11.0</version>
     </dependency>
   ```
+
+**Steps**
 
 **Step 1:** Initiate a Pulsar Java client in your Java project.
 

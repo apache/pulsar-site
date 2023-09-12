@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Pulsar admin APIs enable you to administer clusters programmatically. For example, you can create, update, delete, and manage all the entities within Pulsar instances (such as clusters, namespaces, tenants, topics, schemas, connectors, functions, and so on), and set various policies for data, resources, and security.
 
-![Usage of Pulsar admin APIs](/assets/admin-api-definition.svg)
+![Defination of Pulsar admin APIs](/assets/admin-api-definition.svg)
 
 ### Related topics
 
