@@ -2,6 +2,8 @@
 Id: tutorials-produce-consume
 title: Produce and consume messages
 sidebar_label: "Produce and consume messages"
+description: Learn how to produce and consume messages in Pulsar.
+
 ---
 
 In this tutorial, we will:
@@ -18,6 +20,8 @@ In this tutorial, we will:
 - [Create a topic](tutorials-topic.md)
 
 ## Produce and consume messages
+
+To produce and consume messages, complete the following steps.
 
 1. In the `${PULSAR_HOME}/conf/client.conf` file, replace `webServiceUrl` and `brokerServiceUrl` with your service URL.
 

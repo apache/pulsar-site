@@ -2,6 +2,7 @@
 id: cookbooks-retention-expiry
 title: Message retention and expiry
 sidebar_label: "Message retention and expiry"
+description: Get a comprehensive understanding of message retention and expiry in Pulsar.
 ---
 
 ````mdx-code-block
@@ -36,7 +37,7 @@ Pulsar's [admin interface](admin-api-overview.md) enables you to manage both ret
 By default, when a Pulsar message arrives at a broker, the message is stored until it has been acknowledged on all subscriptions, at which point it is marked for deletion. You can override this behavior and retain messages that have already been acknowledged on all subscriptions by setting a *retention policy* for all topics in a given namespace. Retention is based on both a *size limit* and a *time limit*.
 
 The diagram below illustrates the concept of message retention.
-![](/assets/retention.svg)
+![Concept of message retention in Pulsar.](/assets/retention.svg)
 
 Retention policies are useful when you use the Reader interface. The Reader interface does not use acknowledgments, and messages do not exist within backlogs. It is required to configure retention for Reader-only use cases.
 
@@ -188,7 +189,7 @@ admin.namespaces().getRetention(namespace);
 You can control the allowable size and/or time of backlogs, at the namespace level, using *backlog quotas*. Pulsar uses a quota to enforce a hard limit on the logical size of the backlogs in a topic. Backlog quota triggers an alert policy (for example, producer exception) once the quota limit is reached.
 
 The diagram below illustrates the concept of backlog quota.
-![](/assets/backlog-quota.svg)
+![Concept of backlog quota in Pulsar](/assets/backlog-quota.svg)
 
 Setting a backlog quota involves setting:
 
@@ -350,7 +351,7 @@ By default, Pulsar stores all unacknowledged messages forever. This can lead to 
 The TTL parameter is like a stopwatch attached to each message that defines the amount of time a message is allowed to stay unacknowledged. When the TTL expires, Pulsar automatically moves the message to the acknowledged state (and thus makes it ready for deletion).
 
 The diagram below illustrates the concept of TTL.
-![](/assets/ttl.svg)
+![Concept of TTL in Pulsar](/assets/ttl.svg)
 
 ### Set the TTL for a namespace
 
@@ -471,6 +472,6 @@ The entry log rollover period is configurable but is purely based on the entry l
 - **Garbage collection interval**: because entry logs have interleaved ledgers, to free up space, the entry logs need to be rewritten. The garbage collection interval is how often BookKeeper performs garbage collection. which is related to minor compaction and major compaction of entry logs. For details, see [here](https://bookkeeper.apache.org/docs/4.11.1/reference/config/#entry-log-compaction-settings).
 
 The diagram below illustrates one of the cases that the consumed storage size is larger than the given limits for backlog and retention. Messages over the retention limit are kept because other messages in the same segment are still within retention period.
-![](/assets/retention-storage-size.svg)
+![Message expiry and retention in Pulsar](/assets/retention-storage-size.svg)
 
 If you do not have any retention period and you never have much of a backlog, the upper limit for retained messages, which are acknowledged, equals the Pulsar segment rollover period + entry log rollover period + (garbage collection interval * garbage collection ratios).
