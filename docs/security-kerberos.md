@@ -2,6 +2,7 @@
 id: security-kerberos
 title: Authentication using Kerberos
 sidebar_label: "Authentication using Kerberos"
+description: Get a comprehensive understanding of concepts and configuration methods of Kerberos authentication in Pulsar.
 ---
 
 [Kerberos](https://web.mit.edu/kerberos/) is a network authentication protocol designed to provide strong authentication for client applications and server applications by using secret-key cryptography.
@@ -27,7 +28,9 @@ superUserRoles=client/{clientIp}@EXAMPLE.COM
 
 ## Enable Kerberos authentication on brokers
 
-### Create Kerberos principals
+To enable Kerberos authentication on brokers, complete the following steps.
+
+### Step 1: Create Kerberos principals
 
 If you use the existing Kerberos system, ask your Kerberos administrator to obtain a principal for each broker in your cluster and for every operating system user that accesses Pulsar with Kerberos authentication (via clients and CLI tools).
 
@@ -46,7 +49,7 @@ The first part of broker principal (for example, `broker` in `broker/{hostname}@
 
 Note that *Kerberos* requires that all your hosts can be resolved with their FQDNs.
 
-### Configure brokers
+### Step 2: Configure brokers
 
 In the `broker.conf` file, set Kerberos-related configurations. Here is an example:
 
@@ -65,7 +68,7 @@ To make Pulsar internal admin client work properly, you need to:
 - Set `brokerClientAuthenticationPlugin` to client plugin `AuthenticationSasl`;
 - Set `brokerClientAuthenticationParameters` to value in JSON string `{"saslJaasClientSectionName":"PulsarClient", "serverType":"broker"}`, in which `PulsarClient` is the section name in the `pulsar_jaas.conf` file, and `"serverType":"broker"` indicates that the internal admin client connects to a broker.
 
-### Configure JAAS
+### Step 3: Configure JAAS
 
 JAAS configuration file provides the information to connect KDC. Here is an example named `pulsar_jaas.conf`:
 
@@ -99,7 +102,7 @@ You need to set the `pulsar_jaas.conf` file path as a JVM parameter. For example
     -Djava.security.auth.login.config=/etc/pulsar/pulsar_jaas.conf
 ```
 
-### Connect to KDC
+### Step 4: Connect to KDC
 
 :::note
 
@@ -135,7 +138,9 @@ In the above example:
 
 If you want to use proxies between brokers and clients, Pulsar proxies (as a SASL server in Kerberos) will authenticate clients (as a SASL client in Kerberos) before brokers authenticate proxies.
 
-### Create Kerberos principals
+To enable Kerberos authentication on proxies, complete the following steps.
+
+### Step 1: Create Kerberos principals
 
 Add new principals for Pulsar proxies.
 
@@ -147,7 +152,7 @@ sudo /usr/sbin/kadmin.local -q "ktadd -k /etc/security/keytabs/{proxy-keytabname
 
 For principals set for brokers and clients, see [here](#create-kerberos-principals).
 
-### Configure proxies
+### Step 2: Configure proxies
 
 In the `proxy.conf` file, set Kerberos-related configuration.
 
@@ -168,7 +173,7 @@ In the above example:
 - The first part relates to the authentication between clients and proxies. In this phase, clients work as SASL clients, while proxies work as SASL servers.
 - The second part relates to the authentication between proxies and brokers. In this phase, proxies work as SASL clients, while brokers work as SASL servers.
 
-### Configure JAAS
+### Step 3: Configure JAAS
 
 Add a new section for proxies in the `pulsar_jaas.conf` file. Here is an example:
 
