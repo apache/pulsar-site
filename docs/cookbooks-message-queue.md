@@ -2,6 +2,7 @@
 id: cookbooks-message-queue
 title: Use Pulsar as a message queue
 sidebar_label: "Message queue"
+description: Learn how to use Pulsar as a message queue.
 ---
 
 ````mdx-code-block

@@ -2,6 +2,7 @@
 id: security-bouncy-castle
 title: Bouncy Castle Providers
 sidebar_label: "Bouncy Castle Providers"
+description: Get a comprehensive understanding of concepts and packaging methods of BouncyCastle in Pulsar.
 ---
 
 ## BouncyCastle Introduce

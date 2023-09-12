@@ -2,6 +2,7 @@
 id: security-athenz
 title: Authentication using Athenz
 sidebar_label: "Authentication using Athenz"
+description: Get a comprehensive understanding of concepts and configuration methods of Athenz authentication in Pulsar.
 ---
 
 ````mdx-code-block

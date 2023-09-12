@@ -2,6 +2,7 @@
 id: security-jwt
 title: Authentication using tokens based on JSON Web Tokens
 sidebar_label: "Authentication using JWT"
+description: Get a comprehensive understanding of concepts and configuration methods of JWT authentication in Pulsar.
 ---
 
 ````mdx-code-block
@@ -38,7 +39,7 @@ JWT authentication supports two different kinds of keys to generate and validate
 
 The administrators create the secret key and use it to generate the client tokens. You can also configure this key for brokers to validate the clients.
 
-The output file is generated in the root of your Pulsar installation directory.
+You can use the following command to create a secret key. The output file is generated in the root of your Pulsar installation directory.
 
 ```shell
 bin/pulsar tokens create-secret-key --output my-secret.key
@@ -58,7 +59,7 @@ bin/pulsar tokens create-secret-key --output my-secret.key --base64
 
 ### Create a key pair
 
-To use asymmetric key encryption, you need to create a pair of keys. The output file is generated in the root of your Pulsar installation directory.
+To use asymmetric key encryption, you need to create a pair of keys using the following command. The output file is generated in the root of your Pulsar installation directory.
 
 ```shell
 bin/pulsar tokens create-key-pair --output-private-key my-private.key --output-public-key my-public.key
