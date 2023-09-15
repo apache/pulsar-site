@@ -720,11 +720,11 @@ Option to enable the debug mode for the load balancer logics. The debug mode pri
 **Category**: Load Balancer
 
 ### loadBalancerDirectMemoryResourceWeight
-Direct Memory Resource Usage Weight
+Direct Memory Resource Usage Weight. Direct memory usage cannot accurately reflect the machine's load, and it is not recommended to use it to score the machine's load.
 
 **Type**: `double`
 
-**Default**: `1.0`
+**Default**: `0.0`
 
 **Dynamic**: `true`
 
