@@ -2,6 +2,7 @@
 id: admin-api-namespaces
 title: Managing Namespaces
 sidebar_label: "Namespaces"
+description: Learn how to manage namespaces using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

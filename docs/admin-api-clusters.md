@@ -2,6 +2,7 @@
 id: admin-api-clusters
 title: Managing Clusters
 sidebar_label: "Clusters"
+description: Learn how to manage clusters using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

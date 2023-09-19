@@ -2,6 +2,7 @@
 id: admin-api-transactions
 title: Manage transactions
 sidebar_label: "Transactions"
+description: Learn how to manage transactions using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

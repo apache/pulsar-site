@@ -2,6 +2,7 @@
 id: admin-api-brokers
 title: Managing Brokers
 sidebar_label: "Brokers"
+description: Learn how to manage brokers using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

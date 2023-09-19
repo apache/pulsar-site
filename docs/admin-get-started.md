@@ -2,6 +2,7 @@
 id: admin-api-get-started
 title: Get started
 sidebar_label: "Get started"
+description: Learn how to manage topics in Pulsar using the Pulsar admin CLI or Pulsar admin APIs.
 ---
 
 ````mdx-code-block
@@ -17,17 +18,17 @@ This guide walks you through the quickest way to get started with the following 
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-[pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/): it’s a command-line tool and is available in the bin folder of your Pulsar installation.
+[pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) is a command-line tool and is available in the bin folder of your Pulsar installation.
 
 </TabItem>
 <TabItem value="REST API">
 
-[REST API](pathname:///admin-rest-api/?version=@pulsar:version_number@): HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
+[REST API](pathname:///admin-rest-api/?version=@pulsar:version_number@) belongs to HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
 
 </TabItem>
 <TabItem value="Java">
 
-[Java admin API](/api/admin/): it’s a programmable interface written in Java.
+[Java admin API](/api/admin/) is a programmable interface written in Java.
 
 </TabItem>
 
@@ -42,7 +43,7 @@ Check the detailed steps below.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-This tutorial guides you through every step of using pulsar-admin CLI to manage topics. It includes the following steps:
+To manage topics using pulsar-admin CLI, complte the following steps.
 
 1. Set the service URL.
 
@@ -54,7 +55,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
 5. Check the stats of the topic.
 
-6. Delete the topic. 
+6. Delete the topic.
 
 **Prerequisites**
 
@@ -62,14 +63,14 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
 **Steps**
 
-1. Set the service URLs to point to the broker service in [client.conf](https://github.com/apache/pulsar/blob/master/conf/client.conf).
+**Step 1:** Set the service URLs to point to the broker service in [client.conf](https://github.com/apache/pulsar/blob/master/conf/client.conf).
 
     ```bash
     webServiceUrl=http://localhost:8080/
     brokerServiceUrl=pulsar://localhost:6650/
     ```
 
-2. Create a persistent topic named _test-topic-1_ with 6 partitions.
+**Step 2:** Create a persistent topic named _test-topic-1_ with 6 partitions.
 
     **Input**
 
@@ -83,7 +84,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
     There is no output. You can check the status of the topic in Step 5.
 
-3. Update the number of the partition to 8.
+**Step 3:** Update the number of the partition to 8.
 
     **Input**
 
@@ -97,7 +98,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
     There is no output. You can check the number of partitions in Step 5.
 
-4. Produce some messages to the partitioned topic _test-topic-1_.
+**Step 4:** Produce some messages to the partitioned topic _test-topic-1_.
 
     **Input**
 
@@ -139,7 +140,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
     2023-03-07T15:35:03,769+0800 [Thread-0] INFO  org.apache.pulsar.testclient.PerformanceProducer - Aggregated latency stats --- Latency: mean:   8.931 ms - med:   3.775 - 95pct:  32.144 - 99pct:  98.432 - 99.9pct: 216.088 - 99.99pct: 304.807 - 99.999pct: 349.391 - Max: 351.235
     ```
 
-5. Check the internal stats of the partitioned topic _test-topic-1_.
+**Step 5:** Check the internal stats of the partitioned topic _test-topic-1_.
 
     **Input**
 
@@ -230,7 +231,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
     ...
     ```
 
-6. Delete the topic _test-topic-1_.
+**Step 6:** Delete the topic _test-topic-1_.
 
     **Input**
 
@@ -253,7 +254,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 </TabItem>
 <TabItem value="REST API">
 
-This tutorial guides you through every step of using REST API to manage topics. It includes the following steps:
+To manage topics using REST API, complete the following steps.
 
 1. Create a partitioned topic
 
@@ -271,7 +272,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
 **Steps**
 
-1. Create a persistent topic named _test-topic-2_ with 4 partitions.
+**Step 1:** Create a persistent topic named _test-topic-2_ with 4 partitions.
 
     **Input**
 
@@ -283,7 +284,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
     There is no output. You can check the topic in Step 4.
 
-2. Update the number of the partition to 5.
+**Step 2:** Update the number of the partition to 5.
 
     **Input**
 
@@ -295,7 +296,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 
     There is no output. You can check the status of the topic in Step 4.
 
-3. Produce some messages to the partitioned topic _test-topic-2_.
+**Step 3:** Produce some messages to the partitioned topic _test-topic-2_.
 
     **Input**
 
@@ -365,7 +366,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
     2023-03-08T15:53:28,178+0800 [Thread-0] INFO  org.apache.pulsar.testclient.PerformanceProducer - Aggregated latency stats --- Latency: mean:   4.481 ms - med:   2.918 - 95pct:  10.710 - 99pct:  38.928 - 99.9pct: 112.689 - 99.99pct: 154.241 - 99.999pct: 193.249 - Max: 241.717
     ```
 
-4. Check the internal stats of the topic _test-topic-2_.
+**Step 4:** Check the internal stats of the topic _test-topic-2_.
 
     **Input**
 
@@ -381,7 +382,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
     {"metadata":{"partitions":5},"partitions":{"persistent://public/default/test-topic-2-partition-3":{"entriesAddedCounter":47087,"numberOfEntries":47087,"totalSize":80406959,"currentLedgerEntries":47087,"currentLedgerSize":80406959,"lastLedgerCreatedTimestamp":"2023-03-08T15:47:07.273+08:00","waitingCursorsCount":0,"pendingAddEntriesCount":0,"lastConfirmedEntry":"117:47086","state":"LedgerOpened","ledgers":[{"ledgerId":117,"entries":0,"size":0,"offloaded":false,"underReplicated":false}],"cursors":{},"schemaLedgers":[],"compactedLedger":{"ledgerId":-1,"entries":-1,"size":-1,"offloaded":false,"underReplicated":false}},"persistent://public/default/test-topic-2-partition-2":{"entriesAddedCounter":46995,"numberOfEntries":46995,"totalSize":80445417,"currentLedgerEntries":46995,"currentLedgerSize":80445417,"lastLedgerCreatedTimestamp":"2023-03-08T15:47:07.43+08:00","waitingCursorsCount":0,"pendingAddEntriesCount":0,"lastConfirmedEntry":"118:46994","state":"LedgerOpened","ledgers":[{"ledgerId":118,"entries":0,"size":0,"offloaded":false,"underReplicated":false}],...
     ```
 
-5. Delete the topic _test-topic-2_.
+**Step 5:** Delete the topic _test-topic-2_.
 
     **Input**
 
@@ -404,7 +405,7 @@ This tutorial guides you through every step of using REST API to manage topics. 
 </TabItem>
 <TabItem value="Java">
 
-This tutorial guides you through every step of using Java admin API to manage topics. It includes the following steps:
+To manage topics using Java admin API, complete following steps.
 
 1. Initiate a Pulsar Java client.
 
@@ -432,7 +433,7 @@ This tutorial guides you through every step of using Java admin API to manage to
 
 **Steps**
 
-1. Initiate a Pulsar Java client in your Java project.
+**Step 1:** Initiate a Pulsar Java client in your Java project.
 
     **Input**
 
@@ -443,7 +444,7 @@ This tutorial guides you through every step of using Java admin API to manage to
         .build();
     ```
 
-2. Create a partitioned topic _test-topic-1_ with 4 partitions.
+**Step 2:** Create a partitioned topic _test-topic-1_ with 4 partitions.
 
     **Input**
 
@@ -451,7 +452,7 @@ This tutorial guides you through every step of using Java admin API to manage to
     admin.topics().createPartitionedTopic("persistent://public/default/test-topic-1", 4);
     ```
 
-3. Update the number of the partition to 5.
+**Step 3:** Update the number of the partition to 5.
 
     **Input**
 
@@ -459,7 +460,7 @@ This tutorial guides you through every step of using Java admin API to manage to
     admin.topics().updatePartitionedTopic("test-topic-1", 5);
     ```
 
-4. Produce some messages to the topic _test-topic-1_.
+**Step 4:** Produce some messages to the topic _test-topic-1_.
 
     **Input**
 
@@ -480,7 +481,7 @@ This tutorial guides you through every step of using Java admin API to manage to
     client.close();
     ```
 
-5. Check the stats of the topic _test-topic-1_.
+**Step 5:** Check the stats of the topic _test-topic-1_.
 
     **Input**
 
@@ -495,7 +496,7 @@ This tutorial guides you through every step of using Java admin API to manage to
     100
     ```
 
-6. Delete the topic _test-topic-1_.
+**Step 6:** Delete the topic _test-topic-1_.
 
     **Input**
 

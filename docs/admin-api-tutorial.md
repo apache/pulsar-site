@@ -2,6 +2,7 @@
 id: admin-api-tutorial
 title: Tutorial
 sidebar_label: "Tutorial"
+description: Learn how to configure Pulsar admin interfaces if authentication is enabled in your Pulsar instance.
 ---
 
 ````mdx-code-block

@@ -2,6 +2,7 @@
 id: admin-api-tenants
 title: Managing Tenants
 sidebar_label: "Tenants"
+description: Learn how to manage tenants using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

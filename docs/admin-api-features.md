@@ -2,6 +2,7 @@
 id: admin-api-features
 title: Pulsar admin interfaces - Features
 sidebar_label: "Features"
+description: Get a comprehensive understanding of features of Pulsar admin APIs.
 ---
 
 ````mdx-code-block
@@ -11,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Below are the most common tasks you may want to do. For the exhaustive lists of tasks and the method to perform these tasks, see [Tools](admin-api-tools.md).
 
-![Pulsar admin APIs - features](/assets/admin-api-features.svg)
+![Features of Pulsar admin APIs](/assets/admin-api-features.svg)
 
 These administrative tasks are categorized based on Pulsar components.
 
