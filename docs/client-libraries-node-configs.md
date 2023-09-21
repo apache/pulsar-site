@@ -2,6 +2,7 @@
 id: client-libraries-node-configs
 title: Pulsar Node.js client configurations
 sidebar_label: "Configs"
+description: Get a comprehensive understanding of configurable parameters for Pulsar Node.js clients.  
 ---
 
 

@@ -2,6 +2,7 @@
 id: client-libraries-node-use
 title: Usee Node.js client
 sidebar_label: "Use"
+description: Learn how to use Node.js client in Pulsar.
 ---
 
 ## Create a producer

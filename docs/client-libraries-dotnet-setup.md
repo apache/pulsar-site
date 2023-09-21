@@ -2,9 +2,12 @@
 id: client-libraries-dotnet-setup
 title: Set up C# client
 sidebar_label: "Set up"
+description: Learn how to set up C# client library in Pulsar.
 ---
 
-## Install C# client library
+To set up C# client library in Pulsar, complete the following steps.
+
+## Step 1: Install C# client library
 
 This section describes how to install the Pulsar C# client library through the dotnet CLI.
 
@@ -44,7 +47,7 @@ To install the Pulsar C# client library using the dotnet CLI, follow these steps
        </ItemGroup>
        ```
 
-## Connect to Pulsar cluster
+## Step 2: Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

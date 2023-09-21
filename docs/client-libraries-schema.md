@@ -2,6 +2,7 @@
 id: client-libraries-schema
 title: Work with schema
 sidebar_label: "Work with schema"
+description: Learn how to work with Pyhton schema in Pulsar.
 ---
 
 

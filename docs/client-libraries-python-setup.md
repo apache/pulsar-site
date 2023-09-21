@@ -2,9 +2,12 @@
 id: client-libraries-python-setup
 title: Set up Python client
 sidebar_label: "Set up"
+description: Learn how to set up Python client library in Pulsar.
 ---
 
-## Install Python client library
+To set up Python client library in Pulsar, complete the following steps.
+
+## Step 1: Install Python client library
 
 Use [pip](https://pip.pypa.io/) to install the latest version:
 
@@ -32,7 +35,7 @@ Installation via PyPi is available for the following Python versions:
 | macOS (>= 11.0)                | 3.7, 3.8, 3.9 and 3.10    |
 | Linux (including Alpine Linux) | 3.7, 3.8, 3.9 and 3.10    |
 
-## Connect to Pulsar cluster
+## Step 2: Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

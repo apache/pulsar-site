@@ -2,6 +2,7 @@
 id: client-libraries-clients
 title: Work with clients
 sidebar_label: "Work with clients"
+description: Learn how to work with clients in Pulsar.
 ---
 
 ````mdx-code-block

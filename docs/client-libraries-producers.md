@@ -2,6 +2,7 @@
 id: client-libraries-producers
 title: Work with producer
 sidebar_label: "Work with producer"
+description: Learn how to work with producers in Pulsar.
 ---
 
 ````mdx-code-block

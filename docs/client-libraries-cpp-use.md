@@ -2,6 +2,7 @@
 id: client-libraries-cpp-use
 title: Use C++ client
 sidebar_label: "Use"
+description: Learn how to use C++ client in Pulsar.
 ---
 
 ## Create a producer

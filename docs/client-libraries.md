@@ -2,6 +2,7 @@
 id: client-libraries
 title: Pulsar client libraries
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of Pulsar client libraries.  
 ---
 
 ## Language-specific client libraries

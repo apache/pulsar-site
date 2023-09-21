@@ -2,9 +2,12 @@
 id: client-libraries-cpp-setup
 title: Set up Pulsar C++ client
 sidebar_label: "Set up"
+description: Learn how to set up C++ client library in Pulsar.
 ---
 
-## Install C++ client library
+To set up C++ client library in Pulsar, complete the following steps.
+
+## Step 1: Install C++ client library
 
 Use one of the following methods to install a Pulsar C++ client.
 
@@ -103,7 +106,7 @@ If you get an error like "libpulsar.so: cannot open shared object file: No such 
 apk add --allow-untrusted ./apache-pulsar-client-*.apk
 ```
 
-## Connect to Pulsar cluster
+## Step 2: Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 
