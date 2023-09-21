@@ -23,6 +23,7 @@ module.exports = [
         "publishedAt": "2023-05-02T16:37:40Z",
         "vtag": "3.0.x",
         "releaseNotes": "/release-notes/versioned/pulsar-3.0.0/",
+        "releaseBlog": "/blog/2023/05/02/announcing-apache-pulsar-3-0",
         "doc": "/docs/3.0.x",
         "version": ""
     },
