@@ -2,6 +2,7 @@
 id: admin-api-topics
 title: Manage topics
 sidebar_label: "Topics"
+description: Learn how to manage topics using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

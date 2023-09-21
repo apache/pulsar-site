@@ -2,6 +2,7 @@
 id: admin-api-packages
 title: Manage packages
 sidebar_label: "Packages"
+description: Learn how to manage packages using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

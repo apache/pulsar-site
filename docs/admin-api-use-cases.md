@@ -2,6 +2,7 @@
 id: admin-api-use-cases
 title: Pulsar admin interfaces - Use cases
 sidebar_label: "Use cases"
+description: Get a comprehensive understanding of use cases of Pulsar admin APIs.
 ---
 
 ````mdx-code-block
@@ -17,7 +18,7 @@ Pulsar admin APIs are one of the best productivity tools. You can perform variou
 
 - Facilitating the workflow of application development by implementing admin interface clients using your preferred languages (e.g., Go, Python, C++) based on REST APIs, which enhances developer experiences.
 
-![Pulsar admin APIs - use cases](/assets/admin-api-use-cases.svg)
+![Use cases of Pulsar admin APIs](/assets/admin-api-use-cases.svg)
 
 ### Related topics
 

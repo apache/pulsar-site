@@ -2,6 +2,7 @@
 id: admin-api-schemas
 title: Manage Schemas
 sidebar_label: "Schemas"
+description: Learn how to manage schemas using Pulsar CLI and admin APIs.
 ---
 
 

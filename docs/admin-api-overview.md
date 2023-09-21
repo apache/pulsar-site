@@ -2,6 +2,7 @@
 id: admin-api-overview
 title: Pulsar admin interfaces
 sidebar_label: "Overview"
+description: Get a comprehensive understanding of usage of Pulsar admin APIs.
 ---
 
 ````mdx-code-block
@@ -11,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Pulsar admin APIs enable you to administer clusters programmatically. For example, you can create, update, delete, and manage all the entities within Pulsar instances (such as clusters, namespaces, tenants, topics, schemas, connectors, functions, and so on), and set various policies for data, resources, and security.
 
-![Pulsar admin APIs - definition](/assets/admin-api-definition.svg)
+![Defination of Pulsar admin APIs](/assets/admin-api-definition.svg)
 
 ### Related topics
 

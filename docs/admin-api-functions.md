@@ -2,6 +2,7 @@
 id: admin-api-functions
 title: Manage Functions
 sidebar_label: "Functions"
+description: Learn how to manage functions using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

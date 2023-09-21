@@ -2,6 +2,7 @@
 id: admin-api-permissions
 title: Managing permissions
 sidebar_label: "Permissions"
+description: Learn how to manage permissions using Pulsar CLI and admin APIs.
 ---
 
 ````mdx-code-block

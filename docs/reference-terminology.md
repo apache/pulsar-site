@@ -18,11 +18,6 @@ Pulsar is a distributed messaging system originally created by Yahoo but now und
 Namespace bundle is a virtual group of [topics](concepts-messaging.md#topics) that belong to the same [namespace](concepts-multi-tenancy.md#namespaces). A namespace bundle
 is defined as a range between two 32-bit hashes, such as 0x00000000 and 0xffffffff.
 
-### Subscription
-
-Subscription is a lease on a [topic](concepts-messaging.md#topics) established by a group of [consumers](concepts-clients.md#consumer). Pulsar has four subscription
-modes (exclusive, shared, failover and key_shared).
-
 ### Pub-Sub
 
 Pub-sub is a messaging pattern in which [producer](concepts-clients.md#producer) processes publish messages on [topics](concepts-messaging.md#topics) that
