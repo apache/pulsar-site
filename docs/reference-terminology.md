@@ -2,7 +2,7 @@
 id: reference-terminology
 title: Pulsar Terminology
 sidebar_label: "Terminology"
-description: Get a comprehensive understanding of additional terminology definitions in Pulsar.
+description: Get a comprehensive understanding of Pulsar terminologies.
 ---
 
 Here is a glossary of terms related to Apache Pulsar:
