@@ -24,7 +24,7 @@ module.exports = [
         "vtag": "3.0.x",
         "releaseNotes": "/release-notes/versioned/pulsar-3.0.0/",
         "doc": "/docs/3.0.x",
-        "version": "v3.0.x"
+        "version": ""
     },
     {
         "author": "Technoboy-",
@@ -42,7 +42,7 @@ module.exports = [
         "vtag": "2.11.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.11.1/",
         "doc": "/docs/2.11.x",
-        "version": "v2.11.x"
+        "version": ""
     },
     {
       "author": "Technoboy-",
@@ -52,7 +52,7 @@ module.exports = [
       "releaseNotes": "/release-notes/versioned/pulsar-2.11.0/",
       "releaseBlog": "/blog/2023/01/20/Apache-Pulsar-2-11-0",
       "doc": "/docs/2.11.x",
-      "version": "v2.11.x"
+      "version": ""
     },
     {
       "author": "liangyepianzhou",
@@ -71,7 +71,7 @@ module.exports = [
         "releaseNotes": "/release-notes/versioned/pulsar-2.10.4/",
         "releaseBlog": "/blog/2023-04-19-Apache-Pulsar-2-10-4.md",
         "doc": "/docs/2.10.x",
-        "version": "v2.10.x"
+        "version": ""
     },
     {
         "author": "liangyepianzhou",
@@ -130,7 +130,7 @@ module.exports = [
         "releaseNotes": "/release-notes/versioned/pulsar-2.9.4/",
         "releaseBlog": "",
         "doc": "/docs/2.9.x",
-        "version": "v2.9.x"
+        "version": ""
     },
     {
         "author": "mattisonchao",
