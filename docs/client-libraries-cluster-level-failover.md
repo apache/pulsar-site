@@ -2,6 +2,7 @@
 id: client-libraries-cluster-level-failover
 title: Configure cluster-level failover
 sidebar_label: "Configure cluster-level failover"
+description: Learn how to configure cluster-level failover in Pulsar.
 ---
 
 ````mdx-code-block
@@ -128,7 +129,7 @@ Parameter|Default value|Required?|Description
 
 Here is an example of how `urlProviderHeader` works.
 
-![How urlProviderHeader works](/assets/cluster-level-failover-3.png)
+![Workflow of urlProviderHeader in Pulsar](/assets/cluster-level-failover-3.png)
 
 Assume that you want to connect Pulsar client 1 to cluster A.
 

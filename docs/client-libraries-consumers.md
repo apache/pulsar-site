@@ -2,6 +2,7 @@
 id: client-libraries-consumers
 title: Work with consumer
 sidebar_label: "Work with consumer"
+description: Learn how to work with consumers in Pulsar.
 ---
 
 ````mdx-code-block

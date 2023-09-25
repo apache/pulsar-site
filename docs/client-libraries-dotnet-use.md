@@ -2,6 +2,7 @@
 id: client-libraries-dotnet-use
 title: Use C# client
 sidebar_label: "Use"
+description: Learn how to use C# client in Pulsar.
 ---
 
 This section introduces some hands-on examples to get started with using the Pulsar C# client.

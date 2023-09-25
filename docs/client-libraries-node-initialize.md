@@ -2,6 +2,7 @@
 id: client-libraries-node-initialize
 title: Initialize Node.js client
 sidebar_label: "Initialize"
+description: Learn how to initialize Node.js client in Pulsar.
 ---
 
 

@@ -2,6 +2,7 @@
 id: client-libraries-java-initialize
 title: Initialize a Java client
 sidebar_label: "Initialize"
+description: Learn how to initialize Java client in Pulsar.
 ---
 
 

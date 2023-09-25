@@ -2,6 +2,7 @@
 id: client-libraries-go-use
 title: Use Pulsar Go client
 sidebar_label: "Use"
+description: Learn how to use Go client in Pulsar.
 ---
 
 

@@ -2,6 +2,7 @@
 id: client-libraries-python-use
 title: Use Python client
 sidebar_label: "Use"
+description: Learn how to use Python client in Pulsar.
 ---
 
 ## Create a producer

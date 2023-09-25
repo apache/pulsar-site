@@ -2,6 +2,7 @@
 id: client-libraries-readers
 title: Work with reader
 sidebar_label: "Work with reader"
+description: Learn how to work with readers in Pulsar.
 ---
 
 ````mdx-code-block
@@ -249,7 +250,7 @@ Reader<byte[]> reader = pulsarClient.newReader()
 
 Pulsar reader interceptor intercepts and possibly mutates messages with user-defined processing before [Pulsar reader](concepts-clients.md#reader-interface) reads them. With reader interceptors, you can apply unified messaging processes before messages can be read, such as modifying messages, adding properties, collecting statistics and etc, without creating similar mechanisms respectively.
 
-![Reader interceptor](/assets/reader-interceptor.svg)
+![Reader interceptor in Pulsar](/assets/reader-interceptor.svg)
 
 Pulsar reader interceptor works on top of Pulsar consumer interceptor. The plugin interface `ReaderInterceptor` can be treated as a subset of `ConsumerInterceptor` and it has two main events.
 * `beforeRead` is triggered before readers read messages. You can modify messages within this event.

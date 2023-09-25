@@ -2,6 +2,7 @@
 id: client-libraries-go-initialize
 title: Initialize Pulsar Go client
 sidebar_label: "Initialize"
+description: Learn how to initialize Go client in Pulsar.
 ---
 
 To interact with Pulsar, you need a [`Client`](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#Client) object first.

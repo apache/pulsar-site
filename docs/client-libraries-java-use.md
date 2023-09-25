@@ -2,6 +2,7 @@
 id: client-libraries-java-use
 title: Use a Java client
 sidebar_label: "Use"
+description: Learn how to use Java client in Pulsar.
 ---
 
 ## Create a producer

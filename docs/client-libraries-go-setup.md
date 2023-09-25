@@ -2,9 +2,12 @@
 id: client-libraries-go-setup
 title: Set up Pulsar Go client library
 sidebar_label: "Set up"
+description: Learn how to set up Go client library in Pulsar.
 ---
 
-## Install Go client library
+To set up Go client library in Pulsar, complete the following steps.
+
+## Step 1: Install Go client library
 
 You can install the `pulsar` library by using either `go get` or `go module`.
 
@@ -39,7 +42,7 @@ You can install the `pulsar` library by using either `go get` or `go module`.
    ./test_example
    ```
 
-## Connect to Pulsar cluster
+## Step 2: Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

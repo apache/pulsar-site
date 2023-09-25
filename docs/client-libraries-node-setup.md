@@ -2,9 +2,12 @@
 id: client-libraries-node-setup
 title: Set up Pulsar Node.js client
 sidebar_label: "Set up"
+description: Learn how to set up Node.js client library in Pulsar.
 ---
 
-## Install Node.js client library
+To set up Java client library in Pulsar, complete the following steps.
+
+## Step 1: Install Node.js client library
 
 Install the [`pulsar-client`](https://www.npmjs.com/package/pulsar-client) library via [npm](https://www.npmjs.com/):
 
@@ -20,7 +23,7 @@ This library only works in Node.js 10.x or later versions because it uses the [`
 
 :::
 
-## Connect to Pulsar cluster
+## Step 2: Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

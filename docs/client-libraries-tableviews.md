@@ -2,6 +2,7 @@
 id: client-libraries-tableviews
 title: Work with TableView
 sidebar_label: "Work with TableView"
+description: Learn how to work with TableView in Pulsar.
 ---
 
 ````mdx-code-block

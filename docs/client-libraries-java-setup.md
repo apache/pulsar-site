@@ -2,9 +2,12 @@
 id: client-libraries-java-setup
 title: Set up Java client
 sidebar_label: "Set up"
+description: Learn how to set up Java client library in Pulsar.
 ---
 
-## Install Java client library
+To set up Java client in Pulsar, complete the following steps.
+
+## Step 1: Install Java client library
 
 The latest version of the Pulsar Java client library is available via [Maven Central](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version@%7Cjar). To use the latest version, add the `pulsar-client` library to your build configuration.
 
@@ -43,7 +46,7 @@ dependencies {
 }
 ```
 
-## Connect to Pulsar cluster
+## Step 2: Connect to Pulsar cluster
 
 To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
 

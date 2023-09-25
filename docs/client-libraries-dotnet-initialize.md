@@ -2,6 +2,7 @@
 id: client-libraries-dotnet-initialize
 title: Initialize C# client
 sidebar_label: "Initialize"
+description: Learn how to initialize C# client in Pulsar.
 ---
 
 
