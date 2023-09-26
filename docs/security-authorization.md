@@ -19,7 +19,7 @@ You can enable the authorization and assign the superusers in the broker ([`conf
 
 ```conf
 authorizationEnabled=true
-superUserRoles=my-super-user-1,my-super-user-2
+superUserRoles=broker_client,admin,<custom-super-user-1>,<custom-super-user-2>
 ```
 
 > A full list of parameters is available in the `conf/broker.conf` or `conf/standalone.conf` file.
@@ -47,10 +47,10 @@ Another approach is to make the proxy role a superuser. This allows the proxy to
 You can specify the roles as proxy roles in [`conf/broker.conf`](reference-configuration.md#broker).
 
 ```properties
-proxyRoles=my-proxy-role
+proxyRoles=proxy,<my-proxy-role>
 
 # if you want to allow superusers to use the proxy (see above)
-superUserRoles=my-super-user-1,my-super-user-2,my-proxy-role
+superUserRoles=broker_client,admin,<custom-super-user-1>,<custom-super-user-2>
 ```
 
 ## Administer tenants
