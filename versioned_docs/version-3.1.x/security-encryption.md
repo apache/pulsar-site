@@ -51,7 +51,7 @@ If the produced messages are consumed across application boundaries, you need to
    ````mdx-code-block
    <Tabs groupId="lang-choice"
      defaultValue="ECDSA"
-     values={[{"label":"ECDSA (for Java and Go clients)","value":"ECDSA"},{"label":"RSA (for Python, C++ and Node.js clients)","value":"RSA"}]}>
+     values={[{"label":"ECDSA (for Java clients)","value":"ECDSA"},{"label":"RSA (for Python, C++, Go and Node.js clients)","value":"RSA"}]}>
    <TabItem value="ECDSA">
 
      ```shell
