@@ -184,7 +184,7 @@ At this point, you have a cert, `server.cert.pem`, and a key, `server.key-pk8.pe
 
 At this point, you have a cert `broker_client.cert.pem` and a key `broker_client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your broker client.
 
-#### Create a Admin certificate
+#### Create a admin certificate
 
 1. Generate the admin's private key.
 
@@ -212,7 +212,7 @@ At this point, you have a cert `broker_client.cert.pem` and a key `broker_client
 
 At this point, you have a cert `admin.cert.pem` and a key `admin.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your pulsar admin.
 
-#### Create a Client certificate
+#### Create a client certificate
 
 1. Generate the client's private key.
 
@@ -242,7 +242,7 @@ At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`,
 
 #### Create a proxy certificate (Optional)
 
-1. Generate the broker_client's private key.
+1. Generate the proxy's private key.
 
    ```bash
    openssl genrsa -out proxy.key.pem 2048
