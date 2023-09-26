@@ -51,7 +51,7 @@ If the produced messages are consumed across application boundaries, you need to
    ````mdx-code-block
    <Tabs groupId="lang-choice"
      defaultValue="ECDSA"
-     values={[{"label":"ECDSA (for Java and Go clients)","value":"ECDSA"},{"label":"RSA (for Python, C++ and Node.js clients)","value":"RSA"}]}>
+     values={[{"label":"ECDSA (for Java clients)","value":"ECDSA"},{"label":"RSA (for Python, C++, Go and Node.js clients)","value":"RSA"}]}>
    <TabItem value="ECDSA">
 
      ```shell
@@ -64,7 +64,7 @@ If the produced messages are consumed across application boundaries, you need to
 
      ```shell
      openssl genrsa -out test_rsa_privkey.pem 2048
-     openssl rsa -in test_rsa_privkey.pem -pubout -outform pkcs8 -out test_rsa_pubkey.pem
+     openssl rsa -in test_rsa_privkey.pem -pubout -outform PEM -out test_rsa_pubkey.pem
      ```
 
    </TabItem>
