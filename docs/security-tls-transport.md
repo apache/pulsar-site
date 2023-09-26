@@ -101,16 +101,16 @@ Once you have created a CA, you can create certificate requests and sign them wi
 1. Generate the server's private key.
 
    ```bash
-   openssl genrsa -out broker.key.pem 2048
+   openssl genrsa -out server.key.pem 2048
    ```
 
-   The broker expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   The server expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
 
    ```bash
-   openssl pkcs8 -topk8 -inform PEM -outform PEM -in broker.key.pem -out broker.key-pk8.pem -nocrypt
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in server.key.pem -out server.key-pk8.pem -nocrypt
    ```
 
-2. Create a `broker.conf` file with the following content:
+2. Create a `server.conf` file with the following content:
 
    ```properties
    [ req ]
@@ -127,7 +127,7 @@ Once you have created a CA, you can create certificate requests and sign them wi
    subjectAltName=@alt_names
 
    [ dn ]
-   CN = broker
+   CN = server
 
    [ alt_names ]
    DNS.1 = pulsar
@@ -138,51 +138,55 @@ Once you have created a CA, you can create certificate requests and sign them wi
 
    :::tip
 
-   To configure [hostname verification](#hostname-verification), you need to enter the hostname of the broker in `alt_names` as the Subject Alternative Name (SAN). To ensure that multiple machines can reuse the same certificate, you can also use a wildcard to match a group of broker hostnames, for example, `*.broker.usw.example.com`.
+   To configure [hostname verification](#hostname-verification), you need to enter the hostname of the server in `alt_names` as the Subject Alternative Name (SAN). To ensure that multiple machines can reuse the same certificate, you can also use a wildcard to match a group of server hostnames, for example, `*.server.usw.example.com`.
 
    :::
 
 3. Generate the certificate request.
 
    ```bash
-   openssl req -new -config broker.conf -key broker.key.pem -out broker.csr.pem -sha256
+   openssl req -new -config server.conf -key server.key.pem -out server.csr.pem -sha256
    ```
 
 4. Sign the certificate with the CA.
 
    ```bash
-   openssl x509 -req -in broker.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out broker.cert.pem -days 365 -extensions v3_ext -extfile broker.conf -sha256
+   openssl x509 -req -in server.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out server.cert.pem -days 365 -extensions v3_ext -extfile server.conf -sha256
    ```
 
-At this point, you have a cert, `broker.cert.pem`, and a key, `broker.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your brokers and proxies.
+At this point, you have a cert, `server.cert.pem`, and a key, `server.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your brokers and proxies.
 
-#### Create a client certificate
+#### Create a broker client certificate
 
-1. Generate the client's private key.
+1. Generate the broker_client's private key.
 
    ```bash
-   openssl genrsa -out client.key.pem 2048
+   openssl genrsa -out broker_client.key.pem 2048
    ```
 
-   The client expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   The broker_client expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
 
    ```bash
-   openssl pkcs8 -topk8 -inform PEM -outform PEM -in client.key.pem -out client.key-pk8.pem -nocrypt
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in broker_client.key.pem -out broker_client.key-pk8.pem -nocrypt
    ```
 
 2. Generate the certificate request. Note that the value of `CN` is used as the client's role token.
 
    ```bash
-   openssl req -new -subj "/CN=client" -key client.key.pem -out client.csr.pem -sha256
+   openssl req -new -subj "/CN=broker_client" -key broker_client.key.pem -out broker_client.csr.pem -sha256
    ```
 
 3. Sign the certificate with the CA.
 
    ```bash
-   openssl x509 -req -in client.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out client.cert.pem -days 365 -sha256
+   openssl x509 -req -in broker_client.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out broker_client.cert.pem -days 365 -sha256
    ```
 
-At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your clients.
+At this point, you have a cert `broker_client.cert.pem` and a key `broker_client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your clients.
+
+#### Create a proxy certificate (Optional)
+
+
 
 ### Step 2: Configure brokers
 
