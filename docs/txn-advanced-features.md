@@ -37,6 +37,25 @@ If you want to enable authentication with transactions, follow the steps below.
 
 2. [Configure authentication](security-overview/#authentication) in a Pulsar client.
 
+## Select transaction isolation level
+
+In order to enhance the flexibility of pulsar transactions, pulsar transactions support two different isolation levels, the default isolation level is Read Committed:
+- READ_COMMITTED, Consumer can only consume all transactional messages which have been committed.
+- READ_UNCOMMITTED, Consumer can consume all messages, even transactional messages which have been aborted.
+
+Note that this is a subscription dimension configuration, and all consumers under the same subscription need to be configured with the same IsolationLevel.
+This example selects READ_UNCOMMITTED Isolation level in the consumer builder:
+
+```java
+Consumer<String> consumer = client
+  .newConsumer(Schema.STRING)
+  .topic("persistent://my-tenant/my-namespace/my-topic")
+  .subscriptionName("my-subscription")
+  .subscriptionType(SubscriptionType.Shared)
+  .subscriptionIsolationLevel(SubscriptionIsolationLevel.READ_COMMITTED) // Adding the isolation level configuration
+  .subscribe();
+```
+
 ## Guarantee exactly-once semantics
 
 If you want to guarantee exactly-once semantics with transactions, you can [enable message deduplication at the broker, namespace, or topic level](cookbooks-deduplication.md#enable-message-deduplication-at-namespace-or-topic-level).
