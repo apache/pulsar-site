@@ -43,7 +43,12 @@ In order to enhance the flexibility of pulsar transactions, pulsar transactions 
 - READ_COMMITTED, Consumer can only consume all transactional messages which have been committed.
 - READ_UNCOMMITTED, Consumer can consume all messages, even transactional messages which have been aborted.
 
+For different scenarios, they use different subscriptions and choose different isolation levels. One needs transaction, one does not. In general, multiple subscriptions of the same topic do not all
+require transaction guarantees. Some want low latency without the exact-once semantic guarantee(like Real-time monitoring system), and some must require the exactly-once guarantee(like Business Processing System).
+Users can freely choose different isolation levels according to different scenarios.
+
 Note that this is a subscription dimension configuration, and all consumers under the same subscription need to be configured with the same IsolationLevel.
+
 This example selects READ_UNCOMMITTED Isolation level in the consumer builder:
 
 ```java
