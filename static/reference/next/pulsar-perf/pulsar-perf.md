@@ -45,6 +45,7 @@ $ pulsar-perf produce [options]
 | `-b, --batch-time-window` | Batch messages in 'x' ms window (Default: 1ms)|1.0|
 | `-am, --access-mode` | Producer access mode|Shared|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep publishing|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
 | `-n, --num-producers` | Number of producers (per topic)|1|
@@ -86,6 +87,7 @@ $ pulsar-perf consume [options]
 | `-txn, --txn-enable` | Enable or disable the transaction|false|
 | `-e, --expire_time_incomplete_chunked_messages` | Expire time in ms for incomplete chunk messages|0|
 | `-cf, --conf-file` | Pulsar configuration file|null|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--acks-delay-millis` | Acknowledgements grouping delay in millis|100|
@@ -140,6 +142,7 @@ $ pulsar-perf transaction [options]
 | `-threads, --num-test-threads` | Number of test threads.This thread is for a new transaction to ack messages from consumer topics and produce message to producer topics, and then commit or abort this transaction. Increasing the number of threads increases the parallelism of the performance test, thereby increasing the intensity of the stress test.|1|
 | `-cf, --conf-file` | Pulsar configuration file|null|
 | `-time, --test-duration` | Test duration (in second). 0 means keeping publishing|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
@@ -182,6 +185,7 @@ $ pulsar-perf read [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
 | `-cf, --conf-file` | Pulsar configuration file|null|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `--use-tls` | Use TLS encryption on the connection|false|
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
@@ -231,6 +235,7 @@ $ pulsar-perf simulation-client [options]
 
 |Flag|Description|Default|
 |---|---|---|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `-h, --help` | Help message|false|
 | `--port` | Port to listen on for controller|0|
 | `--service-url` | Pulsar Service URL|null|
