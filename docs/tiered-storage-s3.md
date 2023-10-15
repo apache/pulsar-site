@@ -19,7 +19,7 @@ This chapter guides you through every step of installing and configuring the S3 
 
 Follow the steps below to install the S3 offloader.
 
-1. [Download the Pulsar tarball](getting-started-standalone.md#download-pulsar-distribution).
+1. [Download the Pulsar tarball](getting-started-standalone.md#step-1-download-pulsar-distribution).
 2. Download and untar the Pulsar offloaders package, then copy the Pulsar offloaders as `offloaders` in the Pulsar directory. See [Install tiered storage offloaders](tiered-storage-overview.md#how-to-install-tiered-storage-offloaders).
 
 ## Configuration
@@ -30,28 +30,27 @@ Before offloading data from BookKeeper to S3-compatible storage, you need to con
 
 :::
 
-
 ### Configure S3 offloader driver
 
 You can configure the S3 offloader driver in the configuration file `broker.conf` or `standalone.conf`.
 
 - **Required** configurations are as below.
 
-  | Required configuration | Description | Example value |
-  | --- | --- |--- |
-  | `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive. | S3 |
-  | `offloadersDirectory` | Offloader directory | offloaders |
-  | `managedLedgerOffloadBucket` | [Bucket](#bucket-required) | pulsar-topic-offload |
-  | `managedLedgerOffloadServiceEndpoint` | [Endpoint](#endpoint-required) | http://localhost:9000 |
+  | Required configuration                | Description                                       | Example value         |
+  |---------------------------------------|---------------------------------------------------|-----------------------|
+  | `managedLedgerOffloadDriver`          | Offloader driver name, which is case-insensitive. | S3                    |
+  | `offloadersDirectory`                 | Offloader directory                               | offloaders            |
+  | `managedLedgerOffloadBucket`          | [Bucket](#bucket-required)                        | pulsar-topic-offload  |
+  | `managedLedgerOffloadServiceEndpoint` | [Endpoint](#endpoint-required)                    | http://localhost:9000 |
 
 - **Optional** configurations are as below.
 
-  | Optional | Description | Default value |
-  | --- | --- | --- |
-  | `managedLedgerOffloadReadBufferSizeInBytes` | Block size for each individual read when reading back data from S3-compatible storage. | 1 MB |
-  | `managedLedgerOffloadMaxBlockSizeInBytes` | Maximum block size sent during a multi-part upload to S3-compatible storage. It **cannot** be smaller than 5 MB. | 64 MB |
-  | `managedLedgerMinLedgerRolloverTimeMinutes` | Minimum time between ledger rollover for a topic.<br /><br />**Note**: It's **not** recommended to change the default value in a production environment. | 10 |
-  | `managedLedgerMaxEntriesPerLedger` | Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: It's **not** recommended to change the default value in a production environment. | 50000 |
+  | Optional                                    | Description                                                                                                                                                                          | Default value |
+  |---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+  | `managedLedgerOffloadReadBufferSizeInBytes` | Block size for each individual read when reading back data from S3-compatible storage.                                                                                               | 1 MB          |
+  | `managedLedgerOffloadMaxBlockSizeInBytes`   | Maximum block size sent during a multi-part upload to S3-compatible storage. It **cannot** be smaller than 5 MB.                                                                     | 64 MB         |
+  | `managedLedgerMinLedgerRolloverTimeMinutes` | Minimum time between ledger rollover for a topic.<br /><br />**Note**: It's **not** recommended to change the default value in a production environment.                             | 10            |
+  | `managedLedgerMaxEntriesPerLedger`          | Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: It's **not** recommended to change the default value in a production environment. | 50000         |
 
 #### Bucket (required)
 
@@ -68,7 +67,6 @@ managedLedgerOffloadBucket=pulsar-topic-offload
 #### Endpoint (required)
 
 The endpoint is the region where a bucket is located.
-
 
 ##### Example
 
@@ -99,11 +97,11 @@ Exporting these environment variables makes them available in the environment of
 
 Namespace policy can be configured to offload data automatically once a threshold is reached. The threshold is based on the size of data that a topic has stored in a Pulsar cluster. Once the topic reaches the threshold, an offloading operation is triggered automatically.
 
-| Threshold value | Action |
-| --- | --- |
-| &gt; 0 | It triggers the offloading operation if the topic storage reaches its threshold. |
-| = 0 | It causes a broker to offload data as soon as possible. |
-| &lt; 0 | It disables automatic offloading operation. |
+| Threshold value | Action                                                                           |
+|-----------------|----------------------------------------------------------------------------------|
+| &gt; 0          | It triggers the offloading operation if the topic storage reaches its threshold. |
+| = 0             | It causes a broker to offload data as soon as possible.                          |
+| &lt; 0          | It disables automatic offloading operation.                                      |
 
 Automatic offloading runs when a new segment is added to a topic log. If you set the threshold for a namespace, but few messages are being produced to the topic, the offloader does not work until the current segment is full.
 
