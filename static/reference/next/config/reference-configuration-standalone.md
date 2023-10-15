@@ -2602,6 +2602,17 @@ Enable check for minimum allowed client library version
 
 **Category**: Server
 
+### clusterMigrationAutoResourceCreation
+Flag to start cluster migration for topic only after creating all topic's resources such as tenant, namespaces, subscriptions at new green cluster. (Default disabled).
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### clusterMigrationCheckDurationSeconds
 Interval between checks to see if cluster is migrated and marks topic migrated  if cluster is marked migrated. Disable with value 0. (Default disabled).
 

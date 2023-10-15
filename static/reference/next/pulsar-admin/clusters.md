@@ -166,7 +166,9 @@ $ pulsar-admin clusters update-cluster-migration options
 
 |Flag|Description|Default|
 |---|---|---|
+| `--service-url` | New migrated cluster service url|null||
 | `--migrated` | Is cluster migrated|false||
+| `--service-url-secure` | New migrated cluster service url secure|null||
 | `--broker-url` | New migrated cluster broker service url|null||
 | `--broker-url-secure` | New migrated cluster broker service url secure|null||
 
