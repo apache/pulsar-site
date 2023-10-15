@@ -101,16 +101,16 @@ Once you have created a CA, you can create certificate requests and sign them wi
 1. Generate the server's private key.
 
    ```bash
-   openssl genrsa -out broker.key.pem 2048
+   openssl genrsa -out server.key.pem 2048
    ```
 
-   The broker expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   The server expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
 
    ```bash
-   openssl pkcs8 -topk8 -inform PEM -outform PEM -in broker.key.pem -out broker.key-pk8.pem -nocrypt
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in server.key.pem -out server.key-pk8.pem -nocrypt
    ```
 
-2. Create a `broker.conf` file with the following content:
+2. Create a `server.conf` file with the following content:
 
    ```properties
    [ req ]
@@ -127,7 +127,7 @@ Once you have created a CA, you can create certificate requests and sign them wi
    subjectAltName=@alt_names
 
    [ dn ]
-   CN = broker
+   CN = server
 
    [ alt_names ]
    DNS.1 = pulsar
@@ -138,23 +138,79 @@ Once you have created a CA, you can create certificate requests and sign them wi
 
    :::tip
 
-   To configure [hostname verification](#hostname-verification), you need to enter the hostname of the broker in `alt_names` as the Subject Alternative Name (SAN). To ensure that multiple machines can reuse the same certificate, you can also use a wildcard to match a group of broker hostnames, for example, `*.broker.usw.example.com`.
+   To configure [hostname verification](#hostname-verification), you need to enter the hostname of the server in `alt_names` as the Subject Alternative Name (SAN). To ensure that multiple machines can reuse the same certificate, you can also use a wildcard to match a group of server hostnames, for example, `*.server.usw.example.com`.
 
    :::
 
 3. Generate the certificate request.
 
    ```bash
-   openssl req -new -config broker.conf -key broker.key.pem -out broker.csr.pem -sha256
+   openssl req -new -config server.conf -key server.key.pem -out server.csr.pem -sha256
    ```
 
 4. Sign the certificate with the CA.
 
    ```bash
-   openssl x509 -req -in broker.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out broker.cert.pem -days 365 -extensions v3_ext -extfile broker.conf -sha256
+   openssl x509 -req -in server.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out server.cert.pem -days 365 -extensions v3_ext -extfile server.conf -sha256
    ```
 
-At this point, you have a cert, `broker.cert.pem`, and a key, `broker.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your brokers and proxies.
+At this point, you have a cert, `server.cert.pem`, and a key, `server.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your brokers and proxies.
+
+#### Create a broker client certificate
+
+1. Generate the broker_client's private key.
+
+   ```bash
+   openssl genrsa -out broker_client.key.pem 2048
+   ```
+
+   The broker_client expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+
+   ```bash
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in broker_client.key.pem -out broker_client.key-pk8.pem -nocrypt
+   ```
+
+2. Generate the certificate request. Note that the value of `CN` is used as the broker client's role token.
+
+   ```bash
+   openssl req -new -subj "/CN=broker_client" -key broker_client.key.pem -out broker_client.csr.pem -sha256
+   ```
+
+3. Sign the certificate with the CA.
+
+   ```bash
+   openssl x509 -req -in broker_client.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out broker_client.cert.pem -days 365 -sha256
+   ```
+
+At this point, you have a cert `broker_client.cert.pem` and a key `broker_client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your broker client.
+
+#### Create a admin certificate
+
+1. Generate the admin's private key.
+
+   ```bash
+   openssl genrsa -out admin.key.pem 2048
+   ```
+
+   The admin expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+
+   ```bash
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in admin.key.pem -out admin.key-pk8.pem -nocrypt
+   ```
+
+2. Generate the certificate request. Note that the value of `CN` is used as the admin's role token.
+
+   ```bash
+   openssl req -new -subj "/CN=admin" -key admin.key.pem -out admin.csr.pem -sha256
+   ```
+
+3. Sign the certificate with the CA.
+
+   ```bash
+   openssl x509 -req -in admin.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out admin.cert.pem -days 365 -sha256
+   ```
+
+At this point, you have a cert `admin.cert.pem` and a key `admin.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your pulsar admin.
 
 #### Create a client certificate
 
@@ -182,7 +238,36 @@ At this point, you have a cert, `broker.cert.pem`, and a key, `broker.key-pk8.pe
    openssl x509 -req -in client.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out client.cert.pem -days 365 -sha256
    ```
 
-At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your clients.
+At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your client.
+
+#### Create a proxy certificate (Optional)
+
+1. Generate the proxy's private key.
+
+   ```bash
+   openssl genrsa -out proxy.key.pem 2048
+   ```
+
+   The proxy expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+
+   ```bash
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in proxy.key.pem -out proxy.key-pk8.pem -nocrypt
+   ```
+
+2. Generate the certificate request. Note that the value of `CN` is used as the proxy's role token.
+
+   ```bash
+   openssl req -new -subj "/CN=proxy" -key proxy.key.pem -out proxy.csr.pem -sha256
+   ```
+
+3. Sign the certificate with the CA.
+
+   ```bash
+   openssl x509 -req -in proxy.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out proxy.cert.pem -days 365 -sha256
+   ```
+
+At this point, you have a cert `proxy.cert.pem` and a key `proxy.key-pk8.pem`, which you can use along with `ca.cert.pem` to configure TLS encryption for your proxy.
+
 
 ### Step 2: Configure brokers
 
@@ -196,9 +281,9 @@ webServicePortTls=8081
 # configure CA certificate
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 # configure server certificate
-tlsCertificateFilePath=/path/to/broker.cert.pem
+tlsCertificateFilePath=/path/to/server.cert.pem
 # configure server's priviate key
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+tlsKeyFilePath=/path/to/server.key-pk8.pem
 
 # enable mTLS
 tlsRequireTrustedClientCertOnConnect=true
@@ -206,8 +291,8 @@ tlsRequireTrustedClientCertOnConnect=true
 # configure mTLS for the internal client
 brokerClientTlsEnabled=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
-brokerClientCertificateFilePath=/path/to/client.cert.pem
-brokerClientKeyFilePath=/path/to/client.key-pk8.pem
+brokerClientCertificateFilePath=/path/to/broker_client.cert.pem
+brokerClientKeyFilePath=/path/to/broker_client.key-pk8.pem
 ```
 
 #### Configure TLS Protocol Version and Cipher
@@ -240,8 +325,8 @@ servicePortTls=6651
 webServicePortTls=8081
 
 # configure certificates for clients to connect proxy
-tlsCertificateFilePath=/path/to/broker.cert.pem
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+tlsCertificateFilePath=/path/to/server.cert.pem
+tlsKeyFilePath=/path/to/server.key-pk8.pem
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 
 # enable mTLS
@@ -250,8 +335,8 @@ tlsRequireTrustedClientCertOnConnect=true
 # configure TLS for proxy to connect brokers
 tlsEnabledWithBroker=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
-brokerClientCertificateFilePath=/path/to/client.cert.pem
-brokerClientKeyFilePath=/path/to/client.key-pk8.pem
+brokerClientCertificateFilePath=/path/to/proxy.cert.pem
+brokerClientKeyFilePath=/path/to/proxy.key-pk8.pem
 ```
 
 ### Step 4: Configure clients
@@ -407,7 +492,7 @@ To use mTLS encryption with Pulsar CLI tools, you need to add the following para
 webServiceUrl=https://localhost:8081/
 brokerServiceUrl=pulsar+ssl://localhost:6651/
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
-authParams=tlsCertFile:/path/to/client.cert.pem,tlsKeyFile:/path/to/client.key-pk8.pem
+authParams=tlsCertFile:/path/to/admin.cert.pem,tlsKeyFile:/path/to/admin.key-pk8.pem
 ```
 
 ## Configure mTLS encryption with KeyStore

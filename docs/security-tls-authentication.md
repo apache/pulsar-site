@@ -32,7 +32,7 @@ authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationPr
 brokerClientTlsEnabled=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
-brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/admin.cert.pem","tlsKeyFile":"/path/to/admin.key-pk8.pem"}
+brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/broker_client.cert.pem","tlsKeyFile":"/path/to/broker_client.key-pk8.pem"}
 
 # configure TLS ports
 brokerServicePortTls=6651
@@ -41,9 +41,9 @@ webServicePortTls=8081
 # configure CA certificate
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 # configure server certificate
-tlsCertificateFilePath=/path/to/broker.cert.pem
+tlsCertificateFilePath=/path/to/server.cert.pem
 # configure server's private key
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+tlsKeyFilePath=/path/to/server.key-pk8.pem
 
 # enable mTLS
 tlsRequireTrustedClientCertOnConnect=true
@@ -67,7 +67,7 @@ authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationPr
 tlsEnabledWithBroker=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
-brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/admin.cert.pem","tlsKeyFile":"/path/to/admin.key-pk8.pem"}
+brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/proxy.cert.pem","tlsKeyFile":"/path/to/proxy.key-pk8.pem"}
 
 # configure TLS ports
 brokerServicePortTls=6651
@@ -76,9 +76,9 @@ webServicePortTls=8081
 # configure CA certificate
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 # configure server certificate
-tlsCertificateFilePath=/path/to/proxy.cert.pem
+tlsCertificateFilePath=/path/to/server.cert.pem
 # configure server's private key
-tlsKeyFilePath=/path/to/proxy.key-pk8.pem
+tlsKeyFilePath=/path/to/server.key-pk8.pem
 
 # enable mTLS
 tlsRequireTrustedClientCertOnConnect=true
@@ -102,7 +102,7 @@ PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar+ssl://broker.example.com:6651/")
     .tlsTrustCertsFilePath("/path/to/ca.cert.pem")
     .authentication("org.apache.pulsar.client.impl.auth.AuthenticationTls",
-                    "tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem")
+                    "tlsCertFile:/path/to/client.cert.pem,tlsKeyFile:/path/to/client.key-pk8.pem")
     .build();
 ```
 
@@ -112,7 +112,7 @@ PulsarClient client = PulsarClient.builder()
 ```python
 from pulsar import Client, AuthenticationTLS
 
-auth = AuthenticationTLS("/path/to/my-role.cert.pem", "/path/to/my-role.key-pk8.pem")
+auth = AuthenticationTLS("/path/to/client.cert.pem", "/path/to/client.key-pk8.pem")
 client = Client("pulsar+ssl://broker.example.com:6651/",
                 tls_trust_certs_file_path="/path/to/ca.cert.pem",
                 tls_allow_insecure_connection=False,
@@ -130,8 +130,8 @@ config.setUseTls(true);
 config.setTlsTrustCertsFilePath("/path/to/ca.cert.pem");
 config.setTlsAllowInsecureConnection(false);
 
-pulsar::AuthenticationPtr auth = pulsar::AuthTls::create("/path/to/my-role.cert.pem",
-                                                         "/path/to/my-role.key-pk8.pem")
+pulsar::AuthenticationPtr auth = pulsar::AuthTls::create("/path/to/client.cert.pem",
+                                                         "/path/to/client.key-pk8.pem")
 config.setAuth(auth);
 
 pulsar::Client client("pulsar+ssl://broker.example.com:6651/", config);
@@ -145,8 +145,8 @@ const Pulsar = require('pulsar-client');
 
 (async () => {
   const auth = new Pulsar.AuthenticationTls({
-    certificatePath: '/path/to/my-role.cert.pem',
-    privateKeyPath: '/path/to/my-role.key-pk8.pem',
+    certificatePath: '/path/to/client.cert.pem',
+    privateKeyPath: '/path/to/client.key-pk8.pem',
   });
 
   const client = new Pulsar.Client({
@@ -164,7 +164,7 @@ const Pulsar = require('pulsar-client');
 client, err := pulsar.NewClient(ClientOptions{
 		URL:                   "pulsar+ssl://broker.example.com:6651/",
 		TLSTrustCertsFilePath: "/path/to/ca.cert.pem",
-		Authentication:        pulsar.NewAuthenticationTLS("/path/to/my-role.cert.pem", "/path/to/my-role.key-pk8.pem"),
+		Authentication:        pulsar.NewAuthenticationTLS("/path/to/client.cert.pem", "/path/to/client.key-pk8.pem"),
 	})
 ```
 
@@ -189,13 +189,15 @@ var client = PulsarClient.Builder()
 To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configurations to enable mTLS encryption](security-tls-transport.md#configure-mtls-encryption-in-cli-tools):
 
 ```properties
+webServiceUrl=https://localhost:8081/
+brokerServiceUrl=pulsar+ssl://localhost:6651/
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
-authParams=tlsCertFile:/path/to/my-role.cert.pem,tlsKeyFile:/path/to/my-role.key-pk8.pem
+authParams=tlsCertFile:/path/to/admin.cert.pem,tlsKeyFile:/path/to/admin.key-pk8.pem
 ```
 
 ## Configure mTLS authentication with KeyStore
 
-Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration. 
+Apache Pulsar supports [TLS encryption](security-tls-transport.md) and [mTLS authentication](security-tls-authentication.md) between clients and Apache Pulsar service. By default, it uses PEM format file configuration.
 
 To configure mTLS authentication with [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore), complete the following steps.
 
