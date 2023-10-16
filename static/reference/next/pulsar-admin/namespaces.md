@@ -2287,3 +2287,20 @@ $ pulsar-admin namespaces remove-entry-filters options
 |Flag|Description|Default|
 |---|---|---|
 
+
+## update-migration-state
+
+Update migration state for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces update-migration-state options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--migrated` | Is namespace migrated|false||
+
