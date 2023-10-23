@@ -4,6 +4,11 @@ export default [
         experimentalSince: "",
         betaSince: "",
         stableSince: "2.2.0",
-        document: [],
-    }
+        document: [
+            {
+                text: "Concept",
+                link: "concepts-clients/#access-mode",
+            },
+        ],
+    },
 ]

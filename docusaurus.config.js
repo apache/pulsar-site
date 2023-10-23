@@ -467,16 +467,6 @@ module.exports = {
         sidebarPath: false,
       }),
     ],
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "broker-feature-matrix",
-        path: "broker-feature-matrix",
-        routeBasePath: "broker-feature-matrix",
-        sidebarPath: false,
-      }),
-    ],
   ],
   scripts: [
     { src: "/js/sine-waves.min.js", async: true },

@@ -1,10 +1,13 @@
 ---
 id: pulsar-broker-feature-matrix
 title: Pulsar Broker Feature Matrix
-sidebar_label: Pulsar Broker Feature Matrix
 ---
 
-import brokerFeatures from "../data/broker-features";
+# Pulsar Broker Feature Matrix
+
+import versions from "../../versions.json";
+import {docUrl} from "../utils";
+import brokerFeatures from "../../data/broker-features";
 
 <table>
     <thead>
@@ -24,11 +27,9 @@ import brokerFeatures from "../data/broker-features";
             <td>{data.betaSince}</td>
             <td>{data.stableSince}</td>
             <td>
-                <ul>
-                    {data.document.map(doc => {
-                        <li>{doc}</li>
-                    })}
-                </ul>
+                <ul>{data.document.map(doc => (
+                    <li><a href={docUrl(doc.link, "", versions[0])}>{doc.text}</a></li>
+                ))}</ul>
             </td>
         </tr>
     ))}
