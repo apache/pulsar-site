@@ -1,40 +1,36 @@
 ---
-id: pulsar-client-feature-matrix
-title: Pulsar Client Feature Matrix
-sidebar_label: Pulsar Client Feature Matrix
+id: pulsar-broker-feature-matrix
+title: Pulsar Broker Feature Matrix
+sidebar_label: Pulsar Broker Feature Matrix
 ---
 
-import Matrix from "../src/components/Matrix/matrix";
-import {
-  languages,
-  client,
-  producer,
-  reader,
-  consumer,
-  tableview,
-} from "../data/matrix.js";
+import brokerFeatures from "../data/broker-features";
 
-### Client
-
-<Matrix data={client} name="client" />
-
-### Producer
-
-<Matrix data={producer} name="producer" />
-
-### Consumer
-
-<Matrix data={consumer} name="consumer" />
-
-### Reader
-
-<Matrix data={reader} name="reader" />
-
-### TableView
-
-<Matrix data={tableview} name="tableview" />
-
-<br />
-<br />
-
-For how to update this page, see [Pulsar Contribution Guide](/contribute/site-intro/#how-to-update-reference-pages).
+<table>
+    <thead>
+    <tr>
+        <th><b>Feature</b></th>
+        <th><b>Experimental Since</b></th>
+        <th><b>Beta Since</b></th>
+        <th><b>Stable Since</b></th>
+        <th><b>Document</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    {brokerFeatures.map(data => (
+        <tr key={data.feature}>
+            <td>{data.feature}</td>
+            <td>{data.experimentalSince}</td>
+            <td>{data.betaSince}</td>
+            <td>{data.stableSince}</td>
+            <td>
+                <ul>
+                    {data.document.map(doc => {
+                        <li>{doc}</li>
+                    })}
+                </ul>
+            </td>
+        </tr>
+    ))}
+    </tbody>
+</table>
