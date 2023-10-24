@@ -163,7 +163,7 @@ All the broker metrics are labeled with the following labels:
 
 ### BookKeeper client metrics
 
-The BookKeeper client metrics is disabled by default. Set `bookkeeperClientExposeStatsToPrometheus=true` in `broker.conf` to expose the BookKeeper client metrics. Suppose you want to expose PerChannel BookKeeper client metrics, which allows you to get the metrics for each bookie that the BookKeeper client connected. You can set `bookkeeperClientLimitStatsLogging=true` in `broker.conf`. Note that enabling the PerChannel BookKeeper client metrics might introduce performance issues in high-load situations. 
+The BookKeeper client metrics is disabled by default. Set `bookkeeperClientExposeStatsToPrometheus=true` in `broker.conf` to expose the BookKeeper client metrics. Suppose you want to expose PerChannel BookKeeper client metrics, which allows you to get the metrics for each bookie that the BookKeeper client connected. You can set `bookkeeperClientLimitStatsLogging=true` in `broker.conf`. Note that enabling the PerChannel BookKeeper client metrics might introduce performance issues in high-load situations.
 
 All the BookKeeper client metrics are labeled with the following label:
 
@@ -363,11 +363,11 @@ All the subscription metrics are labeled with the following labels:
 
 | Name | Type | Description |
 |---|---|---|
-| pulsar_subscription_back_log | Gauge | The total backlog of a subscription (entries). |
+| pulsar_subscription_back_log | Gauge | The number of entries (messages/batched-messages) in unacknowledged state for a subscription |
 | pulsar_subscription_back_log_no_delayed | Gauge | The backlog of a subscription that does not contain the delay messages (entries). |
 | pulsar_subscription_delayed | Gauge | The total number of messages are delayed to be dispatched for a subscription (messages). |
 | pulsar_subscription_msg_rate_redeliver | Gauge | The total message rate for message being redelivered (message per second). |
-| pulsar_subscription_unacked_messages | Gauge | The total number of unacknowledged messages of a subscription (messages). |
+| pulsar_subscription_unacked_messages | Gauge | The number of entries (messages/batched-messages) dispatched to consumers and are still unacknowledged |
 | pulsar_subscription_blocked_on_unacked_messages | Gauge | Indicate whether a subscription is blocked on unacknowledged messages or not. <br /> <ul><li>1 means the subscription is blocked on waiting for unacknowledged messages to be acked.</li><li>0 means the subscription is not blocked on waiting for unacknowledged messages to be acked.</li></ul> |
 | pulsar_subscription_msg_rate_out | Gauge | The total message dispatch rate for a subscription (message per second). |
 | pulsar_subscription_msg_throughput_out | Gauge | The total message dispatch throughput for a subscription (byte per second). |
