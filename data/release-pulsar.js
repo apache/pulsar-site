@@ -1,12 +1,12 @@
 module.exports = [
     {
-      "author": "Technoboy-",
-      "tagName": "v3.1.1",
-      "publishedAt": "2023-10-24T16:37:40Z",
-      "vtag": "3.1.x",
-      "releaseNotes": "/release-notes/versioned/pulsar-3.1.1/",
-      "doc": "/docs/3.1.x",
-      "version": "v3.1.x"
+        "author": "Technoboy-",
+        "tagName": "v3.1.1",
+        "publishedAt": "2023-10-24T16:37:40Z",
+        "vtag": "3.1.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.1.1/",
+        "doc": "/docs/3.1.x",
+        "version": "v3.1.x"
     },
     {
         "author": "Technoboy-",
@@ -15,7 +15,7 @@ module.exports = [
         "vtag": "3.1.x",
         "releaseNotes": "/release-notes/versioned/pulsar-3.1.0/",
         "doc": "/docs/3.1.x",
-        "version": "v3.1.x"
+        "version": ""
     },
     {
         "author": "RobertIndie",
