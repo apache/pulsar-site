@@ -93,6 +93,13 @@ The Pulsar client dns lookup bind port, takes effect when dnsLookupBindAddress i
 
 **Default**: `0`
 
+### dnsServerAddresses
+The Pulsar client dns lookup server address
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
 ### enableBusyWait
 Whether to enable BusyWait for EpollEventLoopGroup.
 
