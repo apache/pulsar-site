@@ -398,15 +398,6 @@
                     "description": "listenerName when client would like to connect to cluster",
                     "type": "string"
                 },
-                "migrated": {
-                    "description": "flag to check if cluster is migrated to different cluster",
-                    "example": false,
-                    "type": "boolean"
-                },
-                "migratedClusterUrl": {
-                    "$ref": "#/definitions/ClusterUrl",
-                    "description": "url of cluster where current cluster is migrated"
-                },
                 "peerClusterNames": {
                     "description": "A set of peer cluster names",
                     "items": {
@@ -3077,9 +3068,6 @@
                 "inactive_topic_policies": {
                     "$ref": "#/definitions/InactiveTopicPolicies"
                 },
-                "isMigrated": {
-                    "type": "boolean"
-                },
                 "is_allow_auto_update_schema": {
                     "type": "boolean"
                 },
@@ -3121,6 +3109,9 @@
                 "message_ttl_in_seconds": {
                     "format": "int32",
                     "type": "integer"
+                },
+                "migrated": {
+                    "type": "boolean"
                 },
                 "offload_deletion_lag_ms": {
                     "format": "int64",
@@ -5804,6 +5795,43 @@
             }
         },
         "/clusters/{cluster}/migrate": {
+            "get": {
+                "description": "This operation requires Pulsar superuser privileges.",
+                "operationId": "ClustersBase_getClusterMigration",
+                "parameters": [
+                    {
+                        "description": "The cluster name",
+                        "in": "path",
+                        "name": "cluster",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return the cluster data.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterData"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission."
+                    },
+                    "404": {
+                        "description": "Cluster doesn't exist."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                },
+                "summary": "Get the cluster migration configuration for the specified cluster.",
+                "tags": [
+                    "clusters"
+                ]
+            },
             "post": {
                 "description": "This operation requires Pulsar superuser privileges.",
                 "operationId": "ClustersBase_updateClusterMigration",
