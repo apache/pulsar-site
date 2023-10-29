@@ -632,7 +632,7 @@ BandwithOut Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBrokerLoadDataTTLInSeconds
-Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default is loadBalancerReportUpdateMaxIntervalMinutes * 2. (only used in load balancer extension TransferSheddeer)
+Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default value is loadBalancerReportUpdateMaxIntervalMinutes * 120, reflecting twice the duration in seconds. (only used in load balancer extension TransferSheddeer)
 
 **Type**: `long`
 
@@ -929,7 +929,7 @@ Option to override the auto-detected network interfaces max speed
 **Category**: Load Balancer
 
 ### loadBalancerReportUpdateMaxIntervalMinutes
-Min delay of load report to collect, in milli-seconds
+Min delay of load report to collect, in minutes
 
 **Type**: `int`
 
