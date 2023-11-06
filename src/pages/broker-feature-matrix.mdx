@@ -28,7 +28,7 @@ import brokerFeatures from "../../data/broker-features";
             <td>{data.stableSince}</td>
             <td>
                 <ul>{data.document.map(doc => (
-                    <li><a href={docUrl(doc.link, "", versions[0])}>{doc.text}</a></li>
+                    <li><a href={doc.link.startsWith("https://") ? doc.link: docUrl(doc.link, "", versions[0])}>{doc.text}</a></li>
                 ))}</ul>
             </td>
         </tr>

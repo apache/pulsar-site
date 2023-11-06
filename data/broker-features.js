@@ -1,12 +1,18 @@
 export default [
     {
         feature: "Produce / Exclusive",
-        stableSince: "2.2.0",
+        experimentalSince: "2.11.0",
+        betaSince: "3.0.0",
+        stableSince: "3.0.0",
         document: [
             {
                 "text": "Concept",
                 "link": "concepts-clients/#access-mode",
             },
+            {
+                "text": "PIP-161",
+                "link": "https://github.com/apache/pulsar/issues/15528",
+            }
         ],
     },
     {
