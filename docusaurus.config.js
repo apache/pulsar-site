@@ -147,7 +147,7 @@ module.exports = {
   themeConfig: 
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   ({
-    image: 'img/pulsar-white.svg',
+    image: 'img/pulsar_highres.png',
     announcementBar: {
       id: "summit",
       content: renderAnnouncementBar(
