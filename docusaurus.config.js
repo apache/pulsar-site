@@ -144,10 +144,10 @@ module.exports = {
     oldUrl,
   },
   trailingSlash: true,
-  themeConfig: 
+  themeConfig:
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   ({
-    image: 'img/pulsar_highres.png',
+    image: 'img/pulsar-social-media-card.png',
     // announcementBar: {
     //   id: "summit",
     //   content: renderAnnouncementBar(
