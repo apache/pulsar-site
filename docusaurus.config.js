@@ -144,8 +144,10 @@ module.exports = {
     oldUrl,
   },
   trailingSlash: true,
-  themeConfig: {
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  themeConfig: 
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  ({
+    image: 'img/pulsar-white.svg',
     announcementBar: {
       id: "summit",
       content: renderAnnouncementBar(
@@ -373,7 +375,8 @@ module.exports = {
       apiKey: "42d24d221fbd8eb59804a078208aaec0",
       indexName: "apache_pulsar",
     },
-  },
+  }),
+
   presets: [
     [
       "@docusaurus/preset-classic",
