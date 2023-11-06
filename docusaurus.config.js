@@ -28,8 +28,8 @@ try {
     //do nothing
 }
 
-const oldUrl = "https://pulsar.apache.org";
-const url = "https://pulsar.apache.org";
+const oldUrl = "https://pulsar-site-git-social-media-image-aspect-ratio-teal-tools.vercel.app";
+const url = "https://pulsar-site-git-social-media-image-aspect-ratio-teal-tools.vercel.app";
 const javadocUrl = url + "/api";
 const restApiUrl = url + "/admin-rest-api";
 const functionsApiUrl = url + "/functions-rest-api";
@@ -132,7 +132,7 @@ module.exports = {
   title: "Apache Pulsar",
   tagline:
     "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
-  url: "https://pulsar.apache.org",
+  url: "https://pulsar-site-git-social-media-image-aspect-ratio-teal-tools.vercel.app",
   baseUrl: baseUrl,
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
