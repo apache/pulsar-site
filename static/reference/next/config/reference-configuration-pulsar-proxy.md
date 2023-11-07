@@ -882,7 +882,7 @@ Number of threads used for Netty IO. Default is set to `2 * Runtime.getRuntime()
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `8`
 
 **Dynamic**: `false`
 
