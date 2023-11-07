@@ -63,9 +63,9 @@ export default [
     },
     {
         feature: "Subscription / KeyShared",
-        experimentalSince: "",
-        betaSince: "",
-        stableSince: "",
+        experimentalSince: "2.4.0",
+        betaSince: "2.6.0",
+        stableSince: "2.9.5",
         document: [
             {
                 "text": "Concept",
@@ -87,9 +87,9 @@ export default [
     },
     {
         feature: "Messaging / Dead Letter Topic",
-        experimentalSince: "",
-        betaSince: "",
-        stableSince: "",
+        experimentalSince: "2.2.0",
+        betaSince: "2.3.0",
+        stableSince: "2.4.0",
         document: [
             {
                 "text": "Concept",
@@ -99,9 +99,9 @@ export default [
     },
     {
         feature: "Messaging / Delay Message Delivery",
-        experimentalSince: "",
-        betaSince: "",
-        stableSince: "",
+        experimentalSince: "2.4.0",
+        betaSince: "2.5.0",
+        stableSince: "2.6.0",
         document: [
             {
                 "text": "Concept",
@@ -113,7 +113,7 @@ export default [
         feature: "Messaging / Batching",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.2.0",
         document: [
             {
                 "text": "Concept",
@@ -142,9 +142,9 @@ export default [
     },
     {
         feature: "Transaction / Shared Subscription",
-        experimentalSince: "",
-        betaSince: "",
-        stableSince: "",
+        experimentalSince: "2.8.0",
+        betaSince: "2.9.0",
+        stableSince: "2.9.3",
         document: [],
     },
     {
@@ -158,7 +158,7 @@ export default [
         feature: "Schema / KeyValue",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.6.0",
         document: [
             {
                 "text": "Quickstart",
@@ -170,7 +170,7 @@ export default [
         feature: "Schema / Avro",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.6.0",
         document: [
             {
                 "text": "Quickstart",
@@ -182,7 +182,7 @@ export default [
         feature: "Schema / JSON",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.6.0",
         document: [
             {
                 "text": "Quickstart",
@@ -194,7 +194,7 @@ export default [
         feature: "Functions / Java",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.8.0",
         document: [
             {
                 "text": "Concept",
@@ -234,7 +234,7 @@ export default [
         feature: "Multitenancy",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.2.0",
         document: [
             {
                 "text": "Concept",
@@ -246,7 +246,7 @@ export default [
         feature: "Geo Replication",
         experimentalSince: "",
         betaSince: "",
-        stableSince: "",
+        stableSince: "2.2.0",
         document: [
             {
                 "text": "Concept",
