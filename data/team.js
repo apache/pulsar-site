@@ -129,6 +129,10 @@ module.exports = {
       "apacheId": "technoboy"
     },
     {
+      "name": "Zili Chen",
+      "apacheId": "tison"
+    },
+    {
       "name": "Francis Christopher Liu",
       "apacheId": "toffer"
     },
@@ -139,6 +143,10 @@ module.exports = {
     {
       "name": "Yunze Xu",
       "apacheId": "xyz"
+    },
+    {
+      "name": "Yubiao Feng",
+      "apacheId": "yubiao"
     },
     {
       "name": "Yuki Shiga",
@@ -203,6 +211,14 @@ module.exports = {
       "apacheId": "guangning"
     },
     {
+      "name": "Heesung Sohn",
+      "apacheId": "heesung"
+    },
+    {
+      "name": "Yan Zhao",
+      "apacheId": "horizonzy"
+    },
+    {
       "name": "Xiaoyu Hou",
       "apacheId": "houxiaoyu"
     },
@@ -255,12 +271,12 @@ module.exports = {
       "apacheId": "sunfangbin"
     },
     {
-      "name": "Zili Chen",
-      "apacheId": "tison"
-    },
-    {
       "name": "Li Li",
       "apacheId": "urfree"
+    },
+    {
+      "name": "Vineeth Polamreddy",
+      "apacheId": "vpolamreddy"
     },
     {
       "name": "Xiangying Meng",
@@ -277,10 +293,6 @@ module.exports = {
     {
       "name": "Yong Zhang",
       "apacheId": "yong"
-    },
-    {
-      "name": "Yubiao Feng",
-      "apacheId": "yubiao"
     },
     {
       "name": "Ruguo Yu",
