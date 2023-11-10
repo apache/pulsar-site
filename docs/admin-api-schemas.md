@@ -95,11 +95,11 @@ If the schema is a **struct** schema, this field must be a JSON string of the Av
 
 The payload includes the following fields:
 
-| Field |  Description |
-| --- | --- |
-|  `type`  |   The schema type. |
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
-|  `properties`  |  The additional properties associated with the schema. |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`       | <li>Allowed values for primitive-type schemas are listed on the following page: [Primitive types](schema-understand.md#primitive-type)</li><li>Allowed values for struct-type schemas are **AVRO**, **PROTOBUF**, **PROTOBUF_NATIVE** and **JSON**.</li>                                                                                                                                                                                           |
+| `schema`     | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema type is **AVRO**, **PROTOBUF** or **JSON** schema, this field should be an <a href="https://avro.apache.org/docs/1.11.1/specification/" target="blank">Avro schema definition</a> in JSON format.</li><li>If the schema type is **PROTOBUF_NATIVE** schema, this field should contain a Protobuf descriptor. </li><li>Otherwise, this field should be blank.</li> |
+| `properties` | The additional properties associated with the schema.                                                                                                                                                                                                                                                                                                                                                                                              |
 
 The following is an example for a JSON schema.
 
