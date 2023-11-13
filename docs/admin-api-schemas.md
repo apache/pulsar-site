@@ -55,7 +55,13 @@ The `schema-definition-file` is in JSON format.
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/uploadSchema?version=@pulsar:version_number@}
+Send a `POST` request to the endpoint documented here: {@inject: endpoint|POST|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/uploadSchema?version=@pulsar:version_number@}
+
+Below is an example with CURL with a payload stored on the `schema.json` file, Pulsar broker running on `localhost` and the topic `my-tenant/my-ns/my-topic`:
+
+```bash
+curl -X POST -H 'Content-Type: application/json' -d @schema.json http://localhost:8080/admin/v2/schemas/my-tenant/my-ns/my-topic/schema
+```
 
 The post payload is in JSON format.
 
@@ -70,6 +76,7 @@ The post payload is in JSON format.
 </TabItem>
 <TabItem value="Java">
 
+The method on `PulsarAdmin` client is:
 ```java
 void createSchema(String topic, PostSchemaPayload schemaPayload)
 ```
