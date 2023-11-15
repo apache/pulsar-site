@@ -55,7 +55,13 @@ The `schema-definition-file` is in JSON format.
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/uploadSchema?version=@pulsar:version_number@}
+Send a `POST` request to the endpoint documented here: {@inject: endpoint|POST|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/SchemasResource_postSchema?version=@pulsar:version_number@}
+
+Below is an example with CURL with a payload stored on the `schema.json` file, Pulsar broker running on `localhost` and the topic `my-tenant/my-ns/my-topic`:
+
+```bash
+curl -X POST -H 'Content-Type: application/json' -d @schema.json http://localhost:8080/admin/v2/schemas/my-tenant/my-ns/my-topic/schema
+```
 
 The post payload is in JSON format.
 
@@ -70,6 +76,7 @@ The post payload is in JSON format.
 </TabItem>
 <TabItem value="Java">
 
+The method on `PulsarAdmin` client is:
 ```java
 void createSchema(String topic, PostSchemaPayload schemaPayload)
 ```
@@ -95,11 +102,11 @@ If the schema is a **struct** schema, this field must be a JSON string of the Av
 
 The payload includes the following fields:
 
-| Field |  Description |
-| --- | --- |
-|  `type`  |   The schema type. |
-|  `schema`  |   The schema definition data, which is encoded in UTF 8 charset. <li>If the schema is a **primitive** schema, this field should be blank. </li><li>If the schema is a **struct** schema, this field should be a JSON string of the Avro schema definition. </li> |
-|  `properties`  |  The additional properties associated with the schema. |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`       | <li>Allowed values for primitive-type schemas are listed on the following page: [Primitive types](schema-understand.md#primitive-type)</li><li>Allowed values for struct-type schemas are **AVRO**, **PROTOBUF**, **PROTOBUF_NATIVE** and **JSON**.</li>                                                                                                                                                                                           |
+| `schema`     | The schema definition data, which is encoded in UTF 8 charset. <li>If the schema type is **AVRO**, **PROTOBUF** or **JSON** schema, this field should be an <a href="https://avro.apache.org/docs/1.11.1/specification/" target="blank">Avro schema definition</a> in JSON format.</li><li>If the schema type is **PROTOBUF_NATIVE** schema, this field should contain a Protobuf descriptor. </li><li>Otherwise, this field should be blank.</li> |
+| `properties` | The additional properties associated with the schema.                                                                                                                                                                                                                                                                                                                                                                                              |
 
 The following is an example for a JSON schema.
 
@@ -148,7 +155,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/getSchema?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/SchemasResource_getSchema?version=@pulsar:version_number@}
 
 Here is an example of a response, which is returned in JSON format.
 
@@ -201,7 +208,7 @@ pulsar-admin schemas get <topic-name> --version=<version>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to a schema endpoint: {@inject: endpoint|GET|/admin/v2/schemas/:tenant/:namespace/:topic/schema/:version|operation/getSchema?version=@pulsar:version_number@}
+Send a `GET` request to a schema endpoint: {@inject: endpoint|GET|/admin/v2/schemas/:tenant/:namespace/:topic/schema/:version|operation/SchemasResource_getSchema?version=@pulsar:version_number@}
 
 Here is an example of a response, which is returned in JSON format.
 
@@ -281,7 +288,7 @@ pulsar-admin schemas delete <topic-name>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `DELETE` request to a schema endpoint: {@inject: endpoint|DELETE|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/deleteSchema?version=@pulsar:version_number@}
+Send a `DELETE` request to a schema endpoint: {@inject: endpoint|DELETE|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/SchemasResource_deleteSchema?version=@pulsar:version_number@}
 
 Here is an example of a response returned in JSON format.
 
@@ -332,7 +339,7 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --enable tenant/name
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/isAllowAutoUpdateSchema|operation/isAllowAutoUpdateSchema?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/isAllowAutoUpdateSchema|operation/Namespaces_setIsAllowAutoUpdateSchema?version=@pulsar:version_number@}
 
 The post payload is in JSON format.
 
@@ -381,7 +388,7 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --disable tenant/nam
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/isAllowAutoUpdateSchema|operation/isAllowAutoUpdateSchema?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/isAllowAutoUpdateSchema|operation/Namespaces_setIsAllowAutoUpdateSchema?version=@pulsar:version_number@}
 
 The post payload is in JSON format.
 
@@ -428,7 +435,7 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --enable tenant/namesp
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/schemaValidationEnforced|operation/schemaValidationEnforced?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/schemaValidationEnforced|operation/Namespaces_setSchemaValidationEnforced?version=@pulsar:version_number@}
 
 The post payload is in JSON format.
 
@@ -471,7 +478,7 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --disable tenant/names
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/schemaValidationEnforced|operation/schemaValidationEnforced?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/schemaValidationEnforced|operation/Namespaces_setSchemaValidationEnforced?version=@pulsar:version_number@}
 
 The post payload is in JSON format.
 
@@ -522,7 +529,7 @@ pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicNa
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/topics/:tenant/:namespace/:topic|operation/PersistentTopics_setSchemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -563,7 +570,7 @@ pulsar-admin namespaces set-schema-compatibility-strategy options
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/schemaCompatibilityStrategy|operation/Namespaces_setSchemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -610,7 +617,7 @@ pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/schemaCompatibilityStrategy|operation/PersistentTopics_getSchemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -655,7 +662,7 @@ pulsar-admin namespaces get-schema-compatibility-strategy options
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace|operation/schemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/schemaCompatibilityStrategy|operation/Namespaces_getSchemaCompatibilityStrategy?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
