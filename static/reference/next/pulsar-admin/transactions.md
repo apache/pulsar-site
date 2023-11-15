@@ -191,7 +191,7 @@ $ pulsar-admin transactions slow-transactions options
 |Flag|Description|Default|
 |---|---|---|
 | `-c, --coordinator-id` | The coordinator id|null||
-| `-t, --time` | The transaction timeout time. (eg: 1s, 10s, 1m, 5h, 3d)|1s||
+| `-t, --time` | The transaction timeout time. (eg: 1s, 10s, 1m, 5h, 3d)|1||
 
 
 ## scale-transactionCoordinators
