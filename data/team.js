@@ -5,6 +5,10 @@ module.exports = {
       "apacheId": "andrews"
     },
     {
+      "name": "Daniel Blankensteiner",
+      "apacheId": "blankensteiner"
+    },
+    {
       "name": "Bo Cong",
       "apacheId": "bogong"
     },
@@ -179,10 +183,6 @@ module.exports = {
       "apacheId": "baodi"
     },
     {
-      "name": "Daniel Blankensteiner",
-      "apacheId": "blankensteiner"
-    },
-    {
       "name": "Christophe Bornet",
       "apacheId": "cbornet"
     },
@@ -249,6 +249,10 @@ module.exports = {
     {
       "name": "Neng Lu",
       "apacheId": "nlu90"
+    },
+    {
+      "name": "Chris Bono",
+      "apacheId": "onobc"
     },
     {
       "name": "Rui Fu",
