@@ -3662,6 +3662,17 @@ Enable or disable system topic.
 
 **Category**: Server
 
+### topicCompactionRemainNullKey
+Whether retain null-key message during topic compaction.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### topicFencingTimeoutSeconds
 If a topic remains fenced for this number of seconds, it will be closed forcefully.
  If it is set to 0 or a negative number, the fenced topic will not be closed.
