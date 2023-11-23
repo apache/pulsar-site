@@ -133,9 +133,7 @@ const DiscussionPlatforms: React.FC = () => {
           Use it for instant messaging and real-time discussions.
           <br />
           <br />
-          Keep in mind that asking questions in Slack makes it harder to find
-          the answers later, due to Slack history isn&apos;t indexable by search
-          engines like Google.
+          You can search the Slack discussions history on <a href="https://www.linen.dev/s/apache-pulsar" target="_blank">Linen</a>.
         </>
       ),
       actions: [
@@ -150,6 +148,13 @@ const DiscussionPlatforms: React.FC = () => {
           id: "launch-slack",
           text: "Launch Slack",
           href: "https://apache-pulsar.slack.com/",
+          type: "normal",
+          isExternal: true,
+        },
+        {
+          id: "discussions-history",
+          text: "Browse discussions",
+          href: "https://www.linen.dev/s/apache-pulsar",
           type: "normal",
           isExternal: true,
         },
