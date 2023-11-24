@@ -203,6 +203,10 @@ module.exports = {
       "apacheId": "dezhiliu"
     },
     {
+      "name": "David Jensen",
+      "apacheId": "djensen"
+    },
+    {
       "name": "Yuri Mizushima",
       "apacheId": "equanz"
     },
