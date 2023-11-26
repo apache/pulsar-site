@@ -262,7 +262,7 @@ v2.X.0-candidate-1 (21f4a4cffefaa9391b79d79a7849da9c539af834)
 https://github.com/apache/pulsar/releases/tag/v2.X.0-candidate-1
 
 Pulsar's KEYS file containing PGP keys you use to sign the release:
-https://dist.apache.org/repos/dist/dev/pulsar/KEYS
+https://dist.apache.org/repos/dist/release/pulsar/KEYS
 
 Docker images:
 
