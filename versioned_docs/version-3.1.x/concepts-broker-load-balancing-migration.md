@@ -53,7 +53,7 @@ You can migrate from the simple to the modular broker load balancer, by manually
 2. Change the broker load balancer by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to `ModularLoadManagerImpl` in the broker.conf file.
 
     ```conf
-    loadManagerClassName=org.apache.pulsar.broker.loadbalance.extensions.ModularLoadManagerImpl
+    loadManagerClassName=org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
     ```
 
 3. Restart the Pulsar cluster. The new setting will take effect after the restart.  
