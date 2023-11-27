@@ -219,8 +219,21 @@ Run the following commands:
 
 ```shell
 cd $PULSAR_HOME/docker
+
+# Release before Pulsar 3.0
 ./build.sh
-DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-username> ./publish.sh
+DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
+
+# Release Pulsar 3.0 and later
+DOCKER_USER=<your-username>
+DOCKER_ORG=<docker-organization>
+docker login $DOCKER_ORG -u $DOCKER_USER -p <your-password>
+mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
+    -DskipTests \
+    -Pmain,docker -Pdocker-push \
+    -Ddocker.platforms=linux/amd64,linux/arm64 \
+    -Ddocker.organization=$DOCKER_ORG \
+    -pl docker/pulsar,docker/pulsar-all
 ```
 
 After that, the following images will be built and pushed to your own DockerHub account:
