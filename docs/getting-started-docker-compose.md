@@ -113,6 +113,12 @@ services:
 
 ## Step 2: Create a Pulsar cluster
 
+To authorize volumes for default uid(10000) in Pulsar dockerfile.
+```bash
+sudo mkdir -p ./data/zookeeper ./data/bookkeeper
+sudo chown 10000 -R data
+```
+
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 
 ```bash
