@@ -53,7 +53,7 @@ For example,
 
 - Topic load statistics (e.g., message rates) are aggregated at the **bundle** layer, which reduces the cardinality of load samples to monitor.
 
-- For dynamic topic-broker assignments, Pulsar persists these mappings at the **bundle**level, which decreases the space for storing dynamic topic-broker ownerships.
+- For dynamic topic-broker assignments, Pulsar persists these mappings at the **bundle** level, which decreases the space for storing dynamic topic-broker ownerships.
 
 Pulsar allows you to dynamically scale the number of brokers, producers, and consumers to adapt to changing workloads. As brokers are added or removed, Pulsar handles the redistribution of partitions and bundles automatically.
 
