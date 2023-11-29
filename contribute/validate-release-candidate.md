@@ -18,8 +18,8 @@ cd apache-pulsar-<release>
 Check the bookkeeper libs are complied on Linux:
 
 ```shell
-unzip -t ./lib/org.apache.bookkeeper-circe-checksum-<version>.jar | grep lib
-unzip -t ./lib/org.apache.bookkeeper-cpu-affinity-<version>.jar | grep lib
+unzip -t ./lib/org.apache.bookkeeper-circe-checksum-*.jar | grep lib
+unzip -t ./lib/org.apache.bookkeeper-cpu-affinity-*.jar | grep lib
 ```
 
 The output should look like:
