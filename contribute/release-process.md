@@ -320,7 +320,9 @@ Promote the Maven staging repository for release. Login to `https://repository.a
 
 ### Release Docker images
 
-Copy the approved candidate docker images from your personal account to apachepulsar org.
+Please ensure that the regctl tools have been properly installed. They can be obtained from the following link: https://github.com/regclient/regclient/blob/main/docs/install.md
+
+Copy the approved candidate Docker images from your personal account to the apachepulsar organization:
 
 ```bash
 PULSAR_VERSION=3.x.x
