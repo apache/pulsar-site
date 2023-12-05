@@ -4065,7 +4065,7 @@ Enable/disable reordering read sequence on reading entries
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
