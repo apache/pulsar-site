@@ -774,6 +774,17 @@ Frequency of report to collect, in minutes
 
 **Category**: Load Balancer
 
+### loadBalancerInFlightServiceUnitStateWaitingTimeInMillis
+Time to wait before fixing any stuck in-flight service unit states. The leader monitor fixes any in-flight service unit(bundle) states by reassigning the ownerships if stuck too long, longer than this period.(only used in load balancer extension logics)
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerLoadPlacementStrategy
 load balance placement strategy
 
@@ -967,6 +978,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 **Type**: `int`
 
 **Default**: `15`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
+### loadBalancerServiceUnitStateMonitorIntervalInSeconds
+Interval between service unit state monitor checks. The service unit(bundle) state channel is periodically monitored by the leader broker at this interval to fix any orphan bundle ownerships, stuck in-flight states, and other cleanup jobs.`loadBalancerServiceUnitStateTombstoneDelayTimeInSeconds` * 1000 must be bigger than `loadBalancerInFlightServiceUnitStateWaitingTimeInMillis`.(only used in load balancer extension logics)
+
+**Type**: `long`
+
+**Default**: `60`
 
 **Dynamic**: `false`
 
