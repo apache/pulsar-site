@@ -1,14 +1,5 @@
 module.exports = [
     {
-        "author": "poorbarcode",
-        "tagName": "v3.0.2",
-        "publishedAt": "2023-12-3T11:17:000",
-        "vtag": "3.0.x",
-        "releaseNotes": "/release-notes/versioned/pulsar-3.0.2/",
-        "doc": "/docs/3.0.x",
-        "version": "v3.0.x"
-    },
-    {
         "author": "Technoboy-",
         "tagName": "v3.1.1",
         "publishedAt": "2023-10-24T16:37:40Z",
@@ -27,13 +18,22 @@ module.exports = [
         "version": ""
     },
     {
+      "author": "poorbarcode",
+      "tagName": "v3.0.2",
+      "publishedAt": "2023-12-03T11:17:00Z",
+      "vtag": "3.0.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-3.0.2/",
+      "doc": "/docs/3.0.x",
+      "version": "v3.0.x"
+    },
+    {
         "author": "RobertIndie",
         "tagName": "v3.0.1",
         "publishedAt": "2023-08-07T15:00:00Z",
         "vtag": "3.0.x",
         "releaseNotes": "/release-notes/versioned/pulsar-3.0.1/",
         "doc": "/docs/3.0.x",
-        "version": "v3.0.x"
+        "version": ""
     },
     {
         "author": "RobertIndie",
