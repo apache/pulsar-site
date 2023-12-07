@@ -152,6 +152,22 @@ $ pulsar-admin clusters update-peer-clusters options
 | `--peer-clusters` | Comma separated peer-cluster names [Pass empty string "" to delete list]|null||
 
 
+## get-cluster-migration
+
+Get the cluster migration configuration data for the specified cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin clusters get-cluster-migration options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
 ## update-cluster-migration
 
 Update cluster migration
