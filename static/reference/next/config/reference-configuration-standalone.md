@@ -3684,7 +3684,7 @@ Enable or disable system topic.
 
 **Category**: Server
 
-### topicCompactionRemainNullKey
+### topicCompactionRetainNullKey
 Whether retain null-key message during topic compaction.
 
 **Type**: `boolean`
