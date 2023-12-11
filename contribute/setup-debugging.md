@@ -1,11 +1,11 @@
 ---
-id: admin-api-debugging
-title: Debugging Admin API
+id: setup-debugging
+title: Debugging Pulsar source code in IDE
 sidebar_label: "Debugging"
-description: Getting started to debugging Pulsar admin API.
+description: Getting started to debugging Pulsar in IDE.
 ---
 
-Debugging the Pulsar Admin API can be essential for identifying and resolving issues during development. This documentation provides step-by-step instructions on debugging Pulsar in standalone mode and debugging the source version of Apache Pulsar.
+Debugging the Pulsar source code can be essential for identifying and resolving issues during development. This documentation provides step-by-step instructions on debugging Pulsar in standalone mode and debugging the source version of Apache Pulsar.
 
 ## Debugging Pulsar in Standalone Mode 
 
