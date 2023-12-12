@@ -5,7 +5,7 @@ sidebar_label: "Debugging"
 description: Getting started to debugging Pulsar in IDE.
 ---
 
-Debugging the Pulsar source code can be essential for identifying and resolving issues during development. This documentation provides step-by-step instructions on debugging Pulsar in standalone mode and debugging the source version of Apache Pulsar.
+Debugging the Pulsar with its source code can be essential for identifying and resolving issues during development. This page provides step-by-step instructions on debugging Pulsar in standalone mode and debugging the source version of Apache Pulsar.
 
 ## Debugging Pulsar in Standalone Mode 
 
@@ -23,45 +23,44 @@ OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005" ./bi
 
 :::note
 
-`suspend=n` allows the process to start without waiting for the debugger to connect immediately.
-You can change `suspend=n` to `suspend=y` if you want the process to wait for the debugger to connect.
+`suspend=n` allows the process to start without waiting for the debugger to connect immediately. You can change `suspend=n` to `suspend=y` if you want the process to wait for the debugger to connect.
 
 :::
 
 :::note
 
-In your IDE, follow the instructions at [Setting up an IDE](https://pulsar.apache.org/contribute/setup-ide/)
-to configure your IDE for Pulsar development.
+In your IDE, follow the instructions at [Setting up an IDE](setup-ide.md) to configure your IDE for Pulsar development.
 
 :::
 
-## Configure Your IDE
+## Configure IntelliJ IDEA for Remote Debugging
 
-### Configure IntelliJ for Remote Debugging
+First, Open Your Pulsar Project in IntelliJ IDEA:
     
-1. Open Your Pulsar Project in IntelliJ: 
-2. Open IntelliJ IDEA.
-3. Go to File > Open and navigate to your Pulsar project.
-4. Create a Remote Debugger Configuration:
-5. Open the Run/Debug Configurations dialog by clicking on the dropdown near the top-right corner (next to the Run/Debug button) and 
-selecting Edit Configurations....
-6. Click the + button to add a new configuration and choose Remote from the list.
-7. Provide a name for your configuration (e.g., "Pulsar Remote Debugger"). 
-8. Set the Debugger mode to Attach to remote JVM.
-9. Set the Host to localhost or the IP address of the machine running Pulsar.
-10. Set the Port to the same port number used in your Pulsar startup command (e.g., 5005). Click Ok to save the configuration.
+1. Open IntelliJ IDEA.
+2. Go to `File > Open` and navigate to your Pulsar project.
+
+
+Then, create a Remote Debugger Configuration:
+
+1. Open the `Run/Debug Configurations` dialog by clicking on the dropdown near the top-right corner (next to the `Run/Debug` button) and selecting `Edit Configurations`.
+2. Click the `+` button to add a new configuration and choose `Remote` from the list.
+3. Provide a name for your configuration (e.g., "Pulsar Remote Debugger"). 
+4. Set `Debugger mode` to `Attach to remote JVM`.
+5. Set `Host` to localhost or the IP address of the machine running Pulsar.
+6. Set `Port` to the same port number used in your Pulsar startup command (e.g., 5005).
+7. Click `Ok` to save the configuration.
 
 
 :::note
 
-To reset the persistent state, you can remove `data/*` before starting. `rm -rf data/*`.
+To reset the persistent state, you can remove data under the `data` folder before starting, with: `rm -rf data`.
 
 :::
 
-## Debugging the Source Version of Pulsar
+## Debugging the source version of Pulsar
 
-### Clone and Compile Pulsar Source and Run Pulsar in Standalone Mode with Debugger Options
-
+Clone and compile Pulsar from source code and run Pulsar in standalone mode with debugger options:
 
 ```bash
 git clone https://github.com/apache/pulsar
@@ -70,7 +69,7 @@ mvn -Pcore-modules,-main -T 1C install -DskipTests -Dspotbugs.skip=true
 OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005" ./bin/pulsar standalone -nss -nfw
 ```
 
-## Debugging Pulsar-Shell and Pulsar Client 
+## Debugging pulsar-shell and pulsar-client 
 
 ```bash
 # For Pulsar-Shell
@@ -81,11 +80,7 @@ OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005" ./bi
 # Producer
 OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005" ./bin/pulsar-client produce apache/pulsar/test-topic  -m "---------hello apache pulsar-------" -n 10
 ```
+
 Ensure that the debugger is configured in your IDE to connect to the specified port.
 
-By following these steps, you can effectively debug both the standalone mode and the source version of Apache Pulsar, including Pulsar-Shell and Pulsar Client processes.
-
-
-
-
-
+By following these steps, you can effectively debug both the standalone mode and the source version of Apache Pulsar, including pulsar-shell and pulsar-client processes.
