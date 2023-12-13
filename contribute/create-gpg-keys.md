@@ -7,27 +7,38 @@ This page provides instructions for Pulsar committers on how to do the initial G
 
 This is a condensed version of instructions available at http://apache.org/dev/openpgp.html.
 
+Create ~/.gnupg directory with proper permissions before adding custom config:
+```shell
+mkdir ~/.gnupg
+chmod 0700 ~/.gnupg
+```
+
 Install GnuPG. For example on macOS:
 
 ```shell
 brew install gnupg
 # On MacOS, install keychain integration
 brew install pinentry-mac
-mkdir ~/.gnupg
-chmod 0700 ~/.gnupg
 echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" | tee -a ~/.gnupg/gpg-agent.conf
+```
+
+Configure gnupg to use standard DNS resolution:
+
+```shell
+# resolves common "gpg: keyserver receive failed: Network is unreachable" and 
+# "gpg: keyserver receive failed: No keyserver available" errors
+echo "standard-resolver" >  ~/.gnupg/dirmngr.conf
+sudo pkill dirmngr
 ```
 
 Set configuration to use `SHA512` keys by default:
 
 ```shell
-mkdir ~/.gnupg
 cat <<EOL >> ~/.gnupg/gpg.conf
 personal-digest-preferences SHA512
 cert-digest-algo SHA512
 default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
 EOL
-chmod 700 ~/.gnupg/gpg.conf
 ```
 
 Check the version:
