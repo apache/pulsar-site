@@ -14,7 +14,7 @@ title: Setup and building
 
 :::note
 
-This project includes a [Maven Wrapper](https://maven.apache.org/wrapper/) that can be used instead of a system installed Maven. Use it by replacing `mvn` with `./mvnw` on Linux and `mvnw.cmd` on Windows in the commands below.
+On Widndows, replace `./mvnw` with `mvnw.cmd` on Windows in the commands below.
 
 :::
 
