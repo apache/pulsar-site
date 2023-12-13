@@ -41,6 +41,15 @@ gpg --version
 
 Generate new GPG key:
 
+:::note
+
+New **RSA** keys generated should be at least **4096** bits.
+
+The requested passphrase is for your GPG private key. The passphrase should be a strong password, and you should store it securely in your personal password manager.
+
+:::
+
+
 ```shell
 # For 1.x or 2.0.x
 gpg --gen-key
@@ -82,12 +91,6 @@ You selected this USER-ID:
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 <Enter passphrase>
 ```
-
-:::note
-
-New **RSA** keys generated should be at least **4096** bits.
-
-:::
 
 ## Upload the key to a public key server
 
