@@ -11,6 +11,11 @@ Install GnuPG. For example on macOS:
 
 ```shell
 brew install gnupg
+# On MacOS, install keychain integration
+brew install pinentry-mac
+mkdir ~/.gnupg
+chmod 0700 ~/.gnupg
+echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" | tee ~/.gnupg/gpg-agent.conf
 ```
 
 Set configuration to use `SHA512` keys by default:
@@ -84,13 +89,29 @@ New **RSA** keys generated should be at least **4096** bits.
 
 :::
 
+## Upload the key to a public key server
+
+Use the key id to publish it to several public key servers:
+
+```shell
+# find out your key id
+APACHEID=your_asf_id
+KEY_ID=$(gpg --list-keys --with-colons $APACHEID@apache.org | egrep "^pub" | awk -F: '{print $5}')
+echo "key id: $KEY_ID"
+# send the public key to multiple servers
+gpg --send-key $KEY_ID
+gpg --send-key --keyserver=keys.openpgp.org $KEY_ID
+gpg --send-key --keyserver=keyserver.ubuntu.com $KEY_ID
+```
+
 ## Appending the key to KEYS files
 
 The GPG key needs to be appended to `KEYS` file for the release candidates.
 
-:::warning
+:::note
 
-You should ask a PMC member to complete this step.
+A PMC member should complete this step. 
+Please provide your GPG key id to the PMC member to verify that it matches the one uploaded to the key servers.
 
 :::
 
@@ -102,19 +123,10 @@ svn up KEYS
 
 APACHEID=apacheid
 # Export the key in ascii format and append it to the file
+# Make sure that the GPG key id matches the one from the committer
 ( gpg --list-sigs $APACHEID@apache.org
-  gpg --export --armor $APACHEID@apache.org ) >> KEYS
+  gpg --export --armor $APACHEID@apache.org ) | tee -a KEYS
 
 # Commit to SVN
 svn ci -m "Added gpg key for $APACHEID"
-```
-
-## Upload the key to a public key server
-
-Use the key id to publish it to several public key servers:
-
-```shell
-gpg --send-key 8C75C738C33372AE198FD10CC238A8CAAC055FD2
-gpg --send-key --keyserver=keys.openpgp.org 8C75C738C33372AE198FD10CC238A8CAAC055FD2
-gpg --send-key --keyserver=keyserver.ubuntu.com 8C75C738C33372AE198FD10CC238A8CAAC055FD2
 ```
