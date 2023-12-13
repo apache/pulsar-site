@@ -15,7 +15,7 @@ brew install gnupg
 brew install pinentry-mac
 mkdir ~/.gnupg
 chmod 0700 ~/.gnupg
-echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" | tee ~/.gnupg/gpg-agent.conf
+echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" | tee -a ~/.gnupg/gpg-agent.conf
 ```
 
 Set configuration to use `SHA512` keys by default:
