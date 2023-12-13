@@ -14,7 +14,7 @@ title: Setup and building
 
 :::note
 
-On Widndows, replace `./mvnw` with `mvnw.cmd` on Windows in the commands below.
+On Windows, replace `./mvnw` with `mvnw.cmd` on Windows in the commands below.
 
 :::
 
