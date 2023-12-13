@@ -14,7 +14,7 @@ title: Setup and building
 
 :::note
 
-This project includes a [Maven Wrapper](https://maven.apache.org/wrapper/) that can be used instead of a system installed Maven. Use it by replacing `mvn` with `./mvnw` on Linux and `mvnw.cmd` on Windows in the commands below.
+On Windows, replace `./mvnw` with `mvnw.cmd` in the commands below.
 
 :::
 
@@ -37,7 +37,7 @@ cd pulsar
 Compile and install to local Maven repository:
 
 ```bash
-mvn clean install -DskipTests
+./mvnw clean install -DskipTests
 ```
 
 ## Run
