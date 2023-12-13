@@ -37,7 +37,7 @@ cd pulsar
 Compile and install to local Maven repository:
 
 ```bash
-mvn clean install -DskipTests
+./mvnw clean install -DskipTests
 ```
 
 ## Run
