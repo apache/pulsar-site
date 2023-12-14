@@ -136,6 +136,12 @@ cd pulsar-dist-release-keys
 svn up KEYS
 
 APACHEID=apacheid
+
+# import the key from the keyserver, ensure that the key id matches the one provided by the committer
+gpg --search-keys $APACHEID@apache.org
+KEY_ID=$(gpg --list-keys --with-colons $APACHEID@apache.org | egrep "^pub" | awk -F: '{print $5}')
+echo "key id: $KEY_ID"
+
 # Export the key in ascii format and append it to the file
 # Make sure that the GPG key id matches the one from the committer
 ( gpg --list-sigs $APACHEID@apache.org
