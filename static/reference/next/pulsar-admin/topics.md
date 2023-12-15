@@ -160,6 +160,8 @@ $ pulsar-admin topics delete options
 |Flag|Description|Default|
 |---|---|---|
 | `-f, --force` | Close all producer/consumer/replicator and delete topic forcefully|false||
+| `--from-file` | Read a list of topics from a file for deletion.|false||
+| `-r, regex` | Use a regex expression to match multiple topics for deletion.|false||
 
 
 ## truncate
