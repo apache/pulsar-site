@@ -16,7 +16,7 @@ Pulsar supports the following language-specific client libraries:
 | Python    | [User doc](client-libraries-python.md) <br/> [API doc](@pulsar:apidoc:python@)                                     | [Standalone](pathname:///release-notes/client-python) | [Standalone](https://github.com/apache/pulsar-client-python)          |
 | Go client | [User doc](client-libraries-go.md)   <br/> [API doc](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar) | [Standalone](pathname:///release-notes/client-go)     | [Standalone](https://github.com/apache/pulsar-client-go)              |
 | Node.js   | [User doc](client-libraries-node.md)  <br/> [API doc](@pulsar:apidoc:js@)                                          | [Standalone](pathname:///release-notes/client-node)   | [Standalone](https://github.com/apache/pulsar-client-node)            |
-| C#        | [User doc](client-libraries-dotnet.md)                                                                             | [Standalone](pathname:///release-notes/client-cs)     | [Standalone](https://github.com/apache/pulsar-dotpulsar)              |
+| C#/DotPulsar | [User doc](client-libraries-dotnet.md)                                                                             | [Standalone](pathname:///release-notes/client-cs)     | [Standalone](https://github.com/apache/pulsar-dotpulsar)              |
 
 :::tip
 
@@ -55,7 +55,7 @@ Want your repository listed here? Click the "Edit this page" button at the botto
 
 :::
 
-#### .NET
+#### .NET (C#/F#/VB)
 
 | Project                                                                    | Description                                     | License                                    | Badges                                                                                                                                                                                                                                                   |
 |----------------------------------------------------------------------------|-------------------------------------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

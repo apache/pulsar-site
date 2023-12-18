@@ -6,9 +6,9 @@ module.exports = {
     "Python",
     "Node.js",
     "C#/DotPulsar",
+    ".NET (C#/F#/VB)",
     "Websocket",
     "REST",
-    ".NET (C#/F#/VB)",
   ],
   client: [
     {

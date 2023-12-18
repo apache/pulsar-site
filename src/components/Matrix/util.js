@@ -15,11 +15,13 @@ export const genColumns = () => {
           ? 180
           : index === 1
           ? 150
-          : index === 7
+          : index === 7 // DotPulsar
           ? 120
-          : index === 8
+          : index === 8 // .NET
+          ? 100
+          : index === 9 // WS
           ? 90
-          : index === 10
+          : index === 11 // REST
           ? 126
           : 74,
       dataGetter: ({ column, rowData }) => {
