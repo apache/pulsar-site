@@ -230,7 +230,7 @@ When enabled, checks that the target broker is active before connecting. zookeep
 **Category**: Broker Proxy
 
 ### enableProxyStatsEndpoints
-Whether to enable the proxy's /metrics, /proxy-stats, and /status.html http endpoints
+Whether to enable the proxy's /metrics and /proxy-stats http endpoints
 
 **Type**: `boolean`
 
