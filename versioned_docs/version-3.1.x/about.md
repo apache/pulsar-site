@@ -10,7 +10,7 @@ import BlockLink from "@site/src/components/ui/BlockLink";
 import { docUrl } from "@site/src/utils/index";
 
 
-# Welcome to the Apache Pulsar documentation portal
+# Welcome to the Apache Pulsar™ documentation portal
 ***
 
 This portal holds a variety of topics, tutorials, guides, and reference material to help you work with Pulsar.
