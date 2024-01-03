@@ -325,7 +325,7 @@ Copy the approved candidate docker images from your personal account to apachepu
 ```bash
 PULSAR_VERSION=2.x.x
 OTHER_DOCKER_USER=otheruser
-for image in pulsar pulsar-all pulsar-grafana pulsar-standalone; do
+for image in pulsar pulsar-all; do
     docker pull "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" && {
       docker tag "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" "apachepulsar/$image:${PULSAR_VERSION}"
       echo "Pushing apachepulsar/$image:${PULSAR_VERSION}"
@@ -424,6 +424,10 @@ The wheel files will be generated at each platform directory under `pulsar-clien
 ### Release notes
 
 This step is for every release. Read the specific guide for [writing release notes](release-note-guide.md).
+
+### Older download
+
+To display the historical version download content on [this page](https://pulsar.apache.org/download/#older-releases), you need to add versions to the [release.json](https://github.com/apache/pulsar-site/blob/main/releases.json).
 
 ### Swagger files
 
