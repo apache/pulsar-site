@@ -1,3 +1,9 @@
+---
+id: client-python-3.4.0
+title: Client Python 3.4.0
+sidebar_label: Client Python 3.4.0
+---
+
 ## What's Changed
 * Added missing publish option `ordering_key` by @sbreatnach in https://github.com/apache/pulsar-client-python/pull/152
 * Remove useless sleep on test_seek by @shibd in https://github.com/apache/pulsar-client-python/pull/154
