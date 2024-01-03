@@ -1,3 +1,9 @@
+---
+id: client-python-3.2.0
+title: Client Python 3.2.0
+sidebar_label: Client Python 3.2.0
+---
+
 ## What's Changed
 * Bumped version to 3.2.0a1 by @BewareMyPower in https://github.com/apache/pulsar-client-python/pull/105
 * Upgrade fastavro to 1.7.3 by @BewareMyPower in https://github.com/apache/pulsar-client-python/pull/110
