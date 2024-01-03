@@ -46,13 +46,22 @@ module.exports = [
         "version": ""
     },
     {
+      "author": "shibd",
+      "tagName": "v2.11.3",
+      "publishedAt": "2024-01-03T11:20:34Z",
+      "vtag": "2.11.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.11.3/",
+      "doc": "/docs/2.11.x",
+      "version": "v2.11.x"
+    },
+    {
         "author": "Technoboy-",
         "tagName": "v2.11.2",
         "publishedAt": "2023-07-18T16:53:34Z",
         "vtag": "2.11.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.11.2/",
         "doc": "/docs/2.11.x",
-        "version": "v2.11.x"
+        "version": ""
     },
     {
         "author": "Technoboy-",
