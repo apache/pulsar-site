@@ -990,7 +990,7 @@ A broker saves a message without any check. When a consumer consumes a message, 
 
 :::note
 
-In Pulsar, the ledger will be deleted automatically after the messages in this ledger has been consumed. Pulsar will delete the front ledgers of a topic, it will not delete from the middle of a topic. It means that if you send a message that is delayed for a long time, the messages will not be consumed util it reach the specified time. Which leading all the ledgers of this topic could not be deleted, even if some subsequent ledgers are fully consumed.
+In Pulsar, the ledger will be deleted automatically after the messages in this ledger have been consumed. Pulsar will delete the front ledgers of a topic but will not delete ledgers from the middle of a topic. It means that if you send a message that is delayed for a long time, the message will not be consumed until it reaches the delay time. This means all the ledgers on this topic could not be deleted until the delayed message is consumed, even if some subsequent ledgers are fully consumed.
 
 :::
 
