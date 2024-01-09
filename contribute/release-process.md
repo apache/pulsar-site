@@ -114,7 +114,6 @@ mvn clean install -DskipTests
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
 
 * `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
-* `target/apache-pulsar-2.X.0-src.tar.gz`
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
