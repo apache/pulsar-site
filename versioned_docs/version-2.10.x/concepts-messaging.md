@@ -988,6 +988,12 @@ The diagram below illustrates the concept of delayed message delivery:
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
 
+:::note
+
+In Pulsar, the ledger will be deleted automatically after the messages in this ledger have been consumed. Pulsar will delete the front ledgers of a topic but will not delete ledgers from the middle of a topic. It means that if you send a message that is delayed for a long time, the message will not be consumed until it reaches the delay time. This means all the ledgers on this topic could not be deleted until the delayed message is consumed, even if some subsequent ledgers are fully consumed.
+
+:::
+
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:
 
