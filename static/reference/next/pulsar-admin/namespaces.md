@@ -913,7 +913,7 @@ $ pulsar-admin namespaces unload options
 |Flag|Description|Default|
 |---|---|---|
 | `--bundle, -b` | {start-boundary}_{end-boundary}|null||
-| `--destinationBroker, -d` | Target brokerWebServiceAddress to which the bundle has to be allocated to|null||
+| `--destinationBroker, -d` | Target brokerWebServiceAddress to which the bundle has to be allocated to. --destinationBroker cannot be set when --bundle is not specified.|null||
 
 
 ## split-bundle
