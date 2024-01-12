@@ -862,6 +862,17 @@ Message-throughput threshold between highest and least loaded brokers for unifor
 
 **Category**: Load Balancer
 
+### loadBalancerMultiPhaseBundleUnload
+Enables the multi-phase unloading of bundles. Set to true, forwards destination broker information to consumers and producers during bundle unload, allowing them to quickly reconnect to the broker without performing an additional topic lookup.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerNamespaceBundleMaxBandwidthMbytes
 maximum bandwidth (in + out) in a bundle, otherwise bundle split will be triggered
 
