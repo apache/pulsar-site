@@ -13,8 +13,14 @@ To use compaction:
 * Compaction can be configured to run [automatically](#configure-compaction-to-run-automatically), or you can manually [trigger](#trigger-compaction-manually) compaction using the Pulsar administrative API.
 * Your consumers must be [configured](#configure-consumers) to read from compacted topics (Java consumers, for example, have a `readCompacted` setting that must be set to `true`). If this configuration is not set, consumers will still be able to read from the non-compacted topic.
 
+:::tip
 
-> Compaction only works on messages that have keys (as in the stock ticker example the stock symbol serves as the key for each message). Keys can thus be thought of as the axis along which compaction is applied. Messages that don't have keys are simply ignored by compaction.
+Compaction only works on messages that have keys (as in the stock ticker example the stock symbol serves as the key for each message). Keys can thus be thought of as the axis along which compaction is applied. Messages that don't have keys are simply ignored by compaction.
+
+PIP-318 introduced the `topicCompactionRetainNullKey` configuration on broker side, which allows you to configure whether to retain messages without keys during compaction. And since 3.2.0+ version, the default don't retain null-key message during topic compaction.
+For more information, see [PIP-318](https://github.com/apache/pulsar/blob/master/pip/pip-318.md).
+
+:::
 
 ## When should I use compacted topics?
 
