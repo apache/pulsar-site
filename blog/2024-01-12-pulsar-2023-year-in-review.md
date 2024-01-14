@@ -49,7 +49,7 @@ The Apache Pulsar website has a fresh look! Thanks to Emidio Cardeira, Asaf Mesi
 
 ## Spring for Apache Pulsar 1.0.0 goes GA
 
-[Spring for Apache Pulsar](https://spring.io/blog/2023/11/21/spring-for-apache-pulsar-1-0-0-goes-ga/) provides a `PulsarTemplate` for publishing to a Pulsar topic and a `PulsarListener` annotation for consuming from a Pulsar topic. In addition, it also provides various convenience APIs for Spring developers to ramp up their development journey into Apache Pulsar.
+[Spring for Apache Pulsar](https://spring.io/blog/2023/11/21/spring-for-apache-pulsar-1-0-0-goes-ga/) provides a `PulsarTemplate` for publishing to a Pulsar topic and a `PulsarListener` annotation for consuming from a Pulsar topic, as well as various convenience APIs for Spring developers to ramp up their development journey into Apache Pulsar. Support is also included in Spring Boot via [auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#messaging.pulsar).
 
 ## Pulsar Admin Go Library
 
