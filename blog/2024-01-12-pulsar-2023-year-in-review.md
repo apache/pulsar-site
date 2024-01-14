@@ -11,7 +11,7 @@ date: 2024-01-12
 
 Since Pulsar’s graduation as a Top-Level Project (TLP) in September 2018, it has been driven by an active global community, with **12K+** commits from **639** contributors, **12.2K+** stars, **3.5K** forks, and **10K+** Slack users.
 
-We are grateful to all of our community members and those in the broader open-source community who contributed to the Apache Pulasr project. They are the reasons behind every step Apache Pulsar has made over the past years.
+We are grateful to all of our community members and those in the broader open-source community who contributed to the Apache Pulsar project. They are the reasons behind every step Apache Pulsar has made over the past years.
 
 Now, let’s take a look at some of the highlights in 2023.
 
