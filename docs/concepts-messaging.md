@@ -336,7 +336,7 @@ The default dead letter topic uses this format:
 The dead letter producerName uses this format:
 
 ```
-<topicname>-<subscriptionname>-DLQ
+<topicname>-<subscriptionname>-<consumername>-DLQ
 ```
 
 :::note
