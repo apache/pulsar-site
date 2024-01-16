@@ -122,7 +122,13 @@ For more information, see the [Clients Release Notes page](pathname:///release-n
 # What’s next in 2024
 
 ## Community Improvements
-The Pulsar community seeks to further improve the project from different aspects. For example, made the proposal to drop Pulsar SQL (Trino/Presto) in the 3.2.0 release. Start docker image vulnerability scans soon. 
+The Pulsar community seeks to further improve the project from different aspects. 
+
+For example, Pulsar SQL (Trino/Presto) will be moved from the main repository to a separate repository. This change will offer the following benefits:
+- A significant reduction in the size of the TGZ and Docker image, saving approximately 400MB.
+- Reduced build time.
+
+Docker image vulnerability scans will also start soon. 
 
 ## Events
 We will also have more events coming for 2024, including Pulsar Summit North America and Pulsar Summit APAC. If you missed or want to relive the Pulsar Summit North America 2023, you can check out the videos of our amazing speakers here!
