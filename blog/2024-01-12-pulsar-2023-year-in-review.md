@@ -63,6 +63,13 @@ The Apache Pulsar website has a fresh look! Thanks to Emidio Cardeira, Asaf Mesi
 
 [PIP-264](https://github.com/apache/pulsar/blob/master/pip/pip-264.md) was completed, approved by the community, and started development. It will solve a big pain point for Pulsar users with a large number of topics - 50k up to 1M topics: observability. The Apache Pulsar community has taken a large undertaking to make OpenTelemetry Java SDK ready for very low latency systems such as Pulsar with two big features it currently develops: [Near-zero memory allocations](https://github.com/open-telemetry/opentelemetry-java/issues/5105) and [metric filtering upon collection](https://github.com/open-telemetry/opentelemetry-java/issues/6107), which was also added to [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/issues/3324).
 
+## Oxia
+
+Currently, the practical limit for the number of topics manageable by a single Pulsar cluster is around 1 million topics. 
+The lack of horizontal scalability in Zookeeper is one of the reasons for this limit. 
+[Oxia](https://github.com/streamnative/oxia), released this year, is a scalable metadata store and coordination system.
+Replacing Zookeeper with Oxia in a Pulsar cluster allows for exceeding this 1M topics limit, although it is not the only prerequisite. This contributes to the goal of reaching 100M topics.
+
 ## Key events recap
 
 In 2023, the Apache Pulsar community put together a number of meetups and events across the globe to share the latest messaging and streaming technologies. Among others, three summits received the most attention from community members.
