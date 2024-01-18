@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-After setting up your clients, you can explore more to start working with [consumers](concepts-clients.md#consumers).
+After setting up your clients, you can explore more to start working with [consumers](concepts-clients.md#consumer).
 
 ## Subscribe to topics
 
