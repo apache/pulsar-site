@@ -47,28 +47,13 @@ For more information, see [PIP-175](https://github.com/apache/pulsar/issues/1596
 
 The Apache Pulsar website has a fresh look! Thanks to Emidio Cardeira, Asaf Mesika, Tison Chen and Kiryl Valkovich for creating an engaging design that captures the future feel of our thriving community and next-gen solution.
 
-## Spring for Apache Pulsar
-
-[Spring for Apache Pulsar](https://spring.io/blog/2023/11/21/spring-for-apache-pulsar-1-0-0-goes-ga/) provides a `PulsarTemplate` for publishing to a Pulsar topic and a `PulsarListener` annotation for consuming from a Pulsar topic, as well as various convenience APIs for Spring developers to ramp up their development journey into Apache Pulsar. Support is also included in Spring Boot via [auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#messaging.pulsar).
-
 ## Pulsar Admin Go Library
 
 [Pulsar Admin Go Library](https://github.com/apache/pulsar-client-go/tree/master/pulsaradmin) provides a unified Go API for managing Pulsar resources such as tenants, namespaces, topics, etc.
 
-## Quarkus Extension for Apache Pulsar
-
-[Quarkus Extension for Apache Pulsar](https://quarkus.io/guides/pulsar) provides support for Apache Pulsar through SmallRye Reactive Messaging framework. Based on Eclipse MicroProfile Reactive Messaging specification 3.0, it proposes a flexible programming model bridging CDI and event-driven.
-
 ## Enhanced OTel-based metric system
 
 [PIP-264](https://github.com/apache/pulsar/blob/master/pip/pip-264.md) was completed, approved by the community, and started development. It will solve a big pain point for Pulsar users with a large number of topics - 50k up to 1M topics: observability. The Apache Pulsar community has taken a large undertaking to make OpenTelemetry Java SDK ready for very low latency systems such as Pulsar with two big features it currently develops: [Near-zero memory allocations](https://github.com/open-telemetry/opentelemetry-java/issues/5105) and [metric filtering upon collection](https://github.com/open-telemetry/opentelemetry-java/issues/6107), which was also added to [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/issues/3324).
-
-## Oxia
-
-Currently, the practical limit for the number of topics manageable by a single Pulsar cluster is around 1 million topics. 
-The lack of horizontal scalability in Zookeeper is one of the reasons for this limit. 
-[Oxia](https://github.com/streamnative/oxia), released this year, is a scalable metadata store and coordination system.
-Replacing Zookeeper with Oxia in a Pulsar cluster allows for exceeding this 1M topics limit, although it is not the only prerequisite. This contributes to the goal of reaching 100M topics.
 
 ## Key events recap
 
@@ -118,6 +103,18 @@ Updates about clients, Pulsar Manager, and Pulsar Helm Chart are listed below:
 - [Reactive Client for Apache Pulsar 0.1.0](https://github.com/apache/pulsar-client-reactive/releases/tag/v0.5.1)
 
 For more information, see the [Clients Release Notes page](pathname:///release-notes/clients/).
+
+## Pulsar ecosystem
+
+In 2023, the Pulsar community worked with other open-source communities to add more integrations to the Pulsar ecosystem. Notable integrations include:
+
+- [Quarkus Extension for Apache Pulsar](https://quarkus.io/guides/pulsar) provides support for Apache Pulsar through SmallRye Reactive Messaging framework. Based on Eclipse MicroProfile Reactive Messaging specification 3.0, it proposes a flexible programming model bridging CDI and event-driven.
+
+- [Spring for Apache Pulsar](https://spring.io/blog/2023/11/21/spring-for-apache-pulsar-1-0-0-goes-ga/) provides a `PulsarTemplate` for publishing to a Pulsar topic and a `PulsarListener` annotation for consuming from a Pulsar topic, as well as various convenience APIs for Spring developers to ramp up their development journey into Apache Pulsar. Support is also included in Spring Boot via [auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#messaging.pulsar).
+
+- [Oxia](https://github.com/streamnative/oxia): currently, the practical limit for the number of topics manageable by a single Pulsar cluster is around 1 million topics. The lack of horizontal scalability in Zookeeper is one of the reasons for this limit. [Oxia](https://github.com/streamnative/oxia), released this year, is a scalable metadata store and coordination system. Replacing Zookeeper with Oxia in a Pulsar cluster allows for exceeding this 1M topics limit, although it is not the only prerequisite. This contributes to the goal of reaching 100M topics.
+
+For more information, see the [Ecosystem page](pathname:///ecosystem/).
 
 # What’s next in 2024
 
