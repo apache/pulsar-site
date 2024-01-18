@@ -63,6 +63,8 @@ In 2023, the Apache Pulsar community put together a number of meetups and events
 
 - [CommunityOverCode Asia 2023](https://pulsar.apache.org/blog/2023/08/28/pulsar-sessions-in-communityovercode-aisa-2023/) conference (previously known as ApacheCon Asia) has been held from August 18th to August 20th. The conference gathers adopters, developers, engineers, and technologists from some of the most influential open-source communities in the world. 
 
+- [CommunityOverCode NA 2023](https://communityovercode.org/past-sessions/community-over-code-na-2023/) conference (previously known as ApacheCon NA) has been held from October 7th to October 10th. The conference gathers adopters, developers, engineers, and technologists from some of the most influential open-source communities in the world. In 2023, CommunityOverCode introduced a Streaming track featuring three talks on Pulsar. If you missed the conference, you can still check out the slide decks!
+
 - [Pulsar Summit NA 2023](https://streamnative.io/blog/pulsar-summit-north-america-2023-a-deep-dive-into-the-on-demand-summit-videos): Hosted in person at the famous Hotel Nikko (with after parties overlooking the city!) in San Francisco, the summit featured nearly 200 attendees and showcased 20 carefully curated sessions, each a testament to the vibrancy and innovation within the Pulsar ecosystem. They came from companies like Cisco, Discord, Iterable, Attentive, VMware, Flipkart, Boomi and others.  We are so grateful for the opportunity to spend a full day sharing knowledge and witnessing the community members connecting and inspiring each other. [Watch the sessions](https://www.youtube.com/playlist?list=PLqRma1oIkcWhOZ6W-g4D_3JNxJzYnwLNX).
 
 ## Community growth
