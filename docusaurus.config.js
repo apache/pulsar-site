@@ -188,7 +188,7 @@ module.exports = {
             {
               to: "/ecosystem/",
               label: "Ecosystem",
-            },
+            }
           ],
         },
         {
@@ -198,9 +198,9 @@ module.exports = {
           label: "Docs",
         },
         {
-          to: "/contribute/",
+          to: "/features/",
           position: "left",
-          label: "Contribute",
+          label: "Features",
         },
         {
           type: "dropdown",
@@ -242,6 +242,10 @@ module.exports = {
               label: "Contribute",
               className: "scroll-link",
               id: "scroll-contribute",
+            },
+            {
+              to: "/contribute/",
+              label: "Contribution Guide",
             },
             {
               to: "https://github.com/apache/pulsar/wiki",
