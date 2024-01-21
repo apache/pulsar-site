@@ -2,6 +2,9 @@ import React from 'react';
 import s from './FeaturesPage.module.css'
 import Card, { CardProps } from './Card/Card';
 import Layout from '@theme/Layout';
+const versions = require("@site/versions.json");
+import Button from '@site/src/components/ui/Button/Button';
+const latestVersion = versions[0];
 
 const cards: CardProps[] = [
   {
@@ -270,15 +273,21 @@ const cards: CardProps[] = [
   {
     className: s.SeparateComputeFromStorageCard,
     leftContent: (
-      <div>
+      <div className={s.SeparateComputeFromStorageCardMain}>
         <h3>Separate Compute from Storage</h3>
         <p style={{ marginBottom: '2rem' }}>Choose the best instance types for storage and CPU separately due to Pulsar's unique architecture. Support massive parallel query engines by a direct read from Bookkeeper.</p>
-        <p className={s.SmallText}>
-          Pulsar architecture comprises a broker handling read and writes and Apache Bookkeeper as the storage layer. This allows you to select the best instance type for Pulsar brokers - CPU optimized, and the best instance type for Bookkeeper nodes - I/O optimized machine.<br />
-          This architecture also enables Big Data support by reading the data directly from Bookkeeper without going through Pulsar brokers - great for massive parallel query engines.
-        </p>
       </div>
-    )
+    ),
+    showMore: {
+      position: 'left',
+      leftContent: (
+        <p className={s.SmallText}>
+          Pulsar has a built-in framework called <a href="https://pulsar.apache.org/docs/3.0.x/io-overview/" target="_blank" title="Pulsar IO">Pulsar IO</a>, which simplifies authoring and executing Connectors, which enables reading data from a third-party system into a Pulsar topic or writing messages stored in Pulsar topics to a third-party system.<br /><br />
+          Pulsar has several officially maintained connectors of popular 3rd parties: MySQL, Elasticsearch, Cassandra, and more. The complete list is available <a href='https://pulsar.apache.org/docs/3.0.x/io-connectors/' target='_blank' title='here'>here</a>.<br /><br />
+          Pulsar IO was written on top of Pulsar Functions, so a Connector (be it Sink or Source) is a Pulsar Function. The connector runs using Pulsar Function Worker based on the runtime chosen (thread, process, or K8s pod). This means it also supports parallelism (increasing the number of instances running the connector and dividing the work among them).
+        </p>
+      )
+    }
   },
   {
     className: s.AdditionalProtocolsCard,
@@ -346,6 +355,85 @@ const cards: CardProps[] = [
       )
     }
   },
+  {
+    className: s.SupportLargeMsgsCard,
+    leftContent: (
+      <div className={s.SupportLargeMsgsCardMain}>
+        <h3>Support very large messages.</h3>
+        <p>
+        Very large messages are welcomed in Pulsar, using client-side chunking.
+        </p>
+      </div>
+    ),
+    showMore: {
+      position: 'left',
+      leftContent: (
+        <p className={s.SmallText}>
+          A large message is not rejected. Instead, Pulsar clients support chunking: very large messages are split into chunks, which are assembled back into the original message by the consumer (part of the Pulsar client).
+        </p>
+      )
+    }
+  },
+  {
+    className: s.DelayedMsgCard,
+    leftContent: (
+      <div className={s.DelayedMsgCardMain}>
+        <h3>Delayed messaging</h3>
+        <p>
+        Write a message with a given delay before it is available for consumption. Great for scheduled tasks and exponential back-off retries.
+        </p>
+      </div>
+    ),
+    showMore: {
+      position: 'left',
+      leftContent: (
+        <p className={s.SmallText}>
+          Pulsar supports writing a message with a <a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#delayed-message-delivery' target='_blank' title='given delay'>given delay</a>, which means it will be available for consumption only after the delay defined expires. It also supports providing an exact date and time for the message to become available for consumption. This is great for scheduling a task using a delayed message.<br />
+          Pulsar clients utilize that feature to provide client-side retry with exponential back-off.
+        </p>
+      )
+    }
+  },
+  {
+    className: s.LargeConnectedCard,
+    leftContent: <h3>Supports a Large Number of Connected Consumers</h3>,
+    rightContent: <p>Supports a large number of concurrently connected consumers to a topic, regardless of partition count.</p>,
+    showMore: {
+      position: 'right',
+      rightContent: (
+        <p className={s.SmallText}>
+          Scale up the handling of writes of messages to a partitioned topic by <a href='https://pulsar.apache.org/docs/3.0.x/admin-api-topics/#update' target='_blank' title='increasing the number of partitions'>increasing the number of partitions</a>. Scale up consumption of messages by increasing the number of consumers, which is entirely independent of the number of partitions in a topic. This can be done both for <a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#shared' target='_blank' title='out-of-order consumption'>out-of-order consumption</a> or <a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#key_shared' target='_blank' title='ordered-by-message-key consumption'>ordered-by-message-key consumption</a>.
+        </p>
+      )
+    }
+  },
+  {
+    className: s.Easy2OperateCard,
+    leftContent: <h3>Easy to operate Coordination Metadata store</h3>,
+    rightContent: <p>Zookeeper is just one of the plugins for the metadata store. Quickly isolate metadata-related issues as the system is separated from Pulsar itself. Allows future scalable metadata stores.</p>,
+    showMore: {
+      position: 'right',
+      rightContent: (
+        <p className={s.SmallText}>
+          Pulsar Metadata stores are pluggable, with official support for Zookeeper and etcd, and potentially future community contributions. Zookeeper and etcd are rock-solid products with over a decade of production experience.<br />
+          This design lets you quickly isolate metadata-related issues as the system is separated from Pulsar.
+        </p>
+      )
+    }
+  },
+  {
+    className: s.EasyCard,
+    leftContent: <h3>Easy to Operate</h3>,
+    rightContent: <p>Built-in REST API and CLI for administrative operations</p>,
+    showMore: {
+      position: 'right',
+      rightContent: (
+        <p className={s.SmallText}>
+          Pulsar has a built-in <a href='https://pulsar.apache.org/docs/3.0.x/admin-api-features/' target='_blank' title='REST API'>REST API</a> for administrative operations such as creating topics, deleting namespace, and more. It is also bundled with an Admin CLI providing an easy-to-use wrapper on top of the REST API.
+        </p>
+      )
+    }
+  },
 ];
 
 const FeaturesPage: React.FC = () => {
@@ -374,13 +462,61 @@ const FeaturesPage: React.FC = () => {
             </div>
           ))}
         </div>
-
-        {/* <div>
-          <Card
-            className={s.LargeMessagesCard}
-
-          />
-        </div> */}
+        <section className={s.MoreFeats}>
+          <div>
+            <h2>More Features</h2>
+            <div>
+              <div className={s.FlexibleMessageContent}>
+                <p><strong>Flexible message retention</strong><br />
+                By time, size, or unacknowledge size</p>
+              </div>
+            </div>
+            <div>
+              <div className={s.TopicCompactionContent}>
+                <p><strong>Topic compaction</strong><br />
+                Keep only the last of the same key messages.</p>
+              </div>
+            </div>
+            <div>
+              <div className={s.MessageDeduplicationContent}>
+                <p><strong>Message deduplication</strong><br />
+                Achieve Exactly Once when producing.</p>
+              </div>
+            </div>
+            <div>
+              <div className={s.TransactionsContent}>
+                <p><strong>Transactions</strong><br />
+                Produce and acknowledge as an atomic operation</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className={s.LinkBarFooter}>
+          <div>
+            <div className={s.LinkBarFooterLeft}>
+              <p>
+                <strong>Ready to start?</strong><br />
+                Explore documentation to get more insights on how pulsar works
+              </p>
+            </div>
+            <div className={s.LinkBarFooterRight}>
+              <div>
+                <Button
+                  title='Explore docs'
+                  variant='negative'
+                  href={`/docs/${latestVersion}`}
+                />
+              </div>
+              <div>
+                <Button
+                  title='See case studies'
+                  variant='action'
+                  href='/case-studies'
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './Button.module.css';
 
-export type ButtonVariant = 'action' | 'regular';
+export type ButtonVariant = 'action' | 'regular' | 'negative' | 'clean';
 
 type Button = {
   title: string,
@@ -13,7 +13,13 @@ type Button = {
 }
 
 const Button = (props: Button) => {
-  const contentClassName = `${s.content} ${props.variant === 'action' ? s.action : s.regular}`;
+  let contentClassName = '';
+  switch(props.variant){
+    case 'action': contentClassName = `${s.content} ${s.action}`; break;
+    case 'regular': contentClassName = `${s.content} ${s.regular}`; break;
+    case 'negative': contentClassName = `${s.content} ${s.negative}`; break;
+    case 'clean': contentClassName = `${s.content} ${s.clean}`; break;
+  }
   const content = <div className={contentClassName}>{props.title}</div>;
 
   if (props.href) {
