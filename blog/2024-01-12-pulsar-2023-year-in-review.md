@@ -120,14 +120,32 @@ For more information, see the [Ecosystem page](pathname:///ecosystem/).
 
 # What’s next in 2024
 
-## Community Improvements
 The Pulsar community seeks to further improve the project from different aspects. 
 
-For example, Pulsar SQL (Trino/Presto) will be moved from the main repository to a separate repository. This change will offer the following benefits:
+## Enhanced OTel-based metric system
+
+As stated above, [PIP-264](https://github.com/apache/pulsar/blob/master/pip/pip-264.md) is designed to enhance observability in scenarios where a single cluster manages a large number of topics, ranging from 50k up to 1M topics. Currently, there are two major features under development to support this functionality: 
+- [Near-zero memory allocations](https://github.com/open-telemetry/opentelemetry-java/issues/5105) 
+- [metric filtering upon collection](https://github.com/open-telemetry/opentelemetry-java/issues/6107), which was also added to [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/issues/3324).
+
+
+## Pulsar Rate Limiting
+
+An increasing number of messaging-as-a-service platform teams are adopting Apache Pulsar as their main building block for providing messaging services across their organizations. This is clear validation that the value of Apache Pulsar’s truly multi-tenant architecture is delivering results, making Apache Pulsar a cost-efficient and reliable solution for messaging-as-a-service platform teams in very demanding application environments.
+
+In the Apache Pulsar project, we are committed to delivering further improvements to the existing multi-tenancy features. One area of improvement is the service level management and capacity management of a large Pulsar system. This is also a key concern of messaging-as-a-service platform teams.
+
+In December 2023, [PIP-322 Pulsar Rate Limiting Refactoring](https://github.com/apache/pulsar/blob/master/pip/pip-322.md) was accepted and completed and will be release as part of Pulsar 3.2.0 release. Rate limiters act as a conduit to more extensive capacity management and Quality of Service (QoS) controls in Pulsar. They are integral to Pulsar's core multi-tenancy features. This refactoring will pave the way for future enhancements in this area.
+
+## Pulsar SQL removal from the main repo
+
+Pulsar SQL (Trino/Presto) will be moved from the main repository to a separate repository. This change will offer the following benefits:
 - A significant reduction in the size of the TGZ and Docker image, saving approximately 400MB.
 - Reduced build time.
 
-Docker image vulnerability scans will also start soon. 
+## Security
+
+Docker image vulnerability scans will start soon. 
 
 ## Events
 We will also have more events coming for 2024, including Pulsar Summit North America and Pulsar Summit APAC. If you missed or want to relive the Pulsar Summit North America 2023, you can check out the videos of our amazing speakers here!
