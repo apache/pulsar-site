@@ -126,7 +126,7 @@ The Pulsar community seeks to further improve the project from different aspects
 
 As stated above, [PIP-264](https://github.com/apache/pulsar/blob/master/pip/pip-264.md) is designed to enhance observability in scenarios where a single cluster manages a large number of topics, ranging from 50k up to 1M topics. Currently, there are two major features under development to support this functionality: 
 - [Near-zero memory allocations](https://github.com/open-telemetry/opentelemetry-java/issues/5105) 
-- [metric filtering upon collection](https://github.com/open-telemetry/opentelemetry-java/issues/6107), which was also added to [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/issues/3324).
+- [Metric filtering upon collection](https://github.com/open-telemetry/opentelemetry-java/issues/6107), which was also added to [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/issues/3324).
 
 
 ## Pulsar Rate Limiting
