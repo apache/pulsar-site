@@ -262,6 +262,9 @@
         },
         "BrokerInfo": {
             "properties": {
+                "brokerId": {
+                    "type": "string"
+                },
                 "serviceUrl": {
                     "type": "string"
                 }
@@ -1342,22 +1345,23 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "isOffloaded": {
+                    "type": "boolean"
+                },
                 "ledgerId": {
                     "format": "int64",
                     "type": "integer"
                 },
-                "metadata": {
+                "offloadedContextUuid": {
                     "type": "string"
-                },
-                "offloaded": {
-                    "type": "boolean"
                 },
                 "size": {
                     "format": "int64",
                     "type": "integer"
                 },
-                "underReplicated": {
-                    "type": "boolean"
+                "timestamp": {
+                    "format": "int64",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -3117,6 +3121,9 @@
                     "$ref": "#/definitions/DelayedDeliveryPolicies"
                 },
                 "deleted": {
+                    "type": "boolean"
+                },
+                "dispatcherPauseOnAckStatePersistentEnabled": {
                     "type": "boolean"
                 },
                 "encryption_required": {
@@ -5042,7 +5049,7 @@
                         "description": "This operation requires super-user access"
                     }
                 },
-                "summary": "Get the list of active brokers (web service addresses) in the local cluster.If authorization is not enabled",
+                "summary": "Get the list of active brokers (broker ids) in the local cluster.If authorization is not enabled",
                 "tags": [
                     "brokers"
                 ]
@@ -5390,7 +5397,7 @@
                 ]
             }
         },
-        "/brokers/{clusterName}/{broker-webserviceurl}/ownedNamespaces": {
+        "/brokers/{clusterName}/{brokerId}/ownedNamespaces": {
             "get": {
                 "description": "",
                 "operationId": "BrokersBase_getOwnedNamespaces",
@@ -5403,7 +5410,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "broker-webserviceurl",
+                        "name": "brokerId",
                         "required": true,
                         "type": "string"
                     }
@@ -5431,7 +5438,7 @@
                         "description": "Cluster doesn't exist"
                     }
                 },
-                "summary": "Get the list of namespaces served by the specific broker",
+                "summary": "Get the list of namespaces served by the specific broker id",
                 "tags": [
                     "brokers"
                 ]
@@ -5476,7 +5483,7 @@
                         "description": "Cluster does not exist: cluster={clustername}"
                     }
                 },
-                "summary": "Get the list of active brokers (web service addresses) in the cluster.If authorization is not enabled, any cluster name is valid.",
+                "summary": "Get the list of active brokers (broker ids) in the cluster.If authorization is not enabled, any cluster name is valid.",
                 "tags": [
                     "brokers"
                 ]
@@ -7905,6 +7912,122 @@
                     }
                 },
                 "summary": "Set dispatch-rate throttling for all topics of the namespace",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/{tenant}/{namespace}/dispatcherPauseOnAckStatePersistent": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_removeDispatcherPauseOnAckStatePersistent",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Remove dispatcher pause on ack state persistent configuration for specified namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_getDispatcherPauseOnAckStatePersistent",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace doesn't exist"
+                    }
+                },
+                "summary": "Get dispatcher pause on ack state persistent config on a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_setDispatcherPauseOnAckStatePersistent",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Set dispatcher pause on ack state persistent configuration for specified namespace.",
                 "tags": [
                     "namespaces"
                 ]

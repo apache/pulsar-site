@@ -2304,3 +2304,51 @@ $ pulsar-admin namespaces update-migration-state options
 |---|---|---|
 | `--migrated` | Is namespace migrated|false||
 
+
+## set-dispatcher-pause-on-ack-state-persistent
+
+Enable dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## get-dispatcher-pause-on-ack-state-persistent
+
+Get the dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## remove-dispatcher-pause-on-ack-state-persistent
+
+Remove dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces remove-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
