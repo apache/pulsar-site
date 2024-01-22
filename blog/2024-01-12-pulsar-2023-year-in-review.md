@@ -148,7 +148,7 @@ Pulsar SQL (Trino/Presto) will be moved from the main repository to a separate r
 Docker image vulnerability scans will start soon. 
 
 ## Events
-We will also have more events coming for 2024, including Pulsar Summit North America and Pulsar Summit APAC. If you missed or want to relive the Pulsar Summit North America 2023, you can check out the videos of our amazing speakers here!
+We will also have more events coming for 2024, including Pulsar Summit North America and Pulsar Summit APAC. If you missed or want to relive the Pulsar Summit North America 2023, you can check out the videos of our amazing speakers [here](https://youtube.com/playlist?list=PLqRma1oIkcWhOZ6W-g4D_3JNxJzYnwLNX&si=o6G-fRcNgW9zqHGa)!
 
 ## Stay in touch!
 To stay up to date with community news and discuss hot topics with other members, you can subscribe to the Pulsar mailing lists for [users](mailto:users-subscribe@pulsar.apache.org) and [developers](mailto:dev-subscribe@pulsar.apache.org), follow us on [X](https://twitter.com/apache_pulsar), and join the [Pulsar Slack workspace](https://communityinviter.com/apps/apache-pulsar/apache-pulsar) and [Pulsar community meetings](https://github.com/apache/pulsar/wiki/Community-Meetings) that happen online.
