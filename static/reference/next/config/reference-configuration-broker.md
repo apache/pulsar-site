@@ -2569,7 +2569,7 @@ Interval between checks to see if topics with compaction policies need to be com
 **Category**: Server
 
 ### brokerServiceCompactionPhaseOneLoopTimeInSeconds
-Timeout for the compaction phase one loop, If the execution time of the compaction phase one loop exceeds this time, the compaction will not proceed.
+Timeout for each read request in the compaction phase one loop, If the execution time of one single message read operation exceeds this time, the compaction will not proceed.
 
 **Type**: `long`
 
