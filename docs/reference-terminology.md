@@ -18,6 +18,12 @@ Pulsar is a distributed messaging system originally created by Yahoo but now und
 Namespace bundle is a virtual group of [topics](concepts-messaging.md#topics) that belong to the same [namespace](concepts-multi-tenancy.md#namespaces). A namespace bundle
 is defined as a range between two 32-bit hashes, such as 0x00000000 and 0xffffffff.
 
+### Namespace
+
+Namespace is a virtual grouping of [topics](concepts-messaging.md#topics), under a specific
+[tenant](concepts-multi-tenancy.md#tenants). A namespace is defined
+by a string name, such as `my-tenant/my-namespace`.
+
 ### Pub-Sub
 
 Pub-sub is a messaging pattern in which [producer](concepts-clients.md#producer) processes publish messages on [topics](concepts-messaging.md#topics) that
@@ -76,6 +82,11 @@ the topic needs to be routed).
 
 Dispatcher is an asynchronous TCP server used for all data transfers in and out of a Pulsar [broker](concepts-architecture-overview.md#brokers). The Pulsar
 dispatcher uses a custom binary protocol for all communications.
+
+### Broker
+
+Broker is a Pulsar server that receives, acknowledges, and delivers messages to consumers.
+A Pulsar cluster can have one or more brokers.
 
 ## Storage
 
