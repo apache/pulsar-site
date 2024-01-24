@@ -113,9 +113,10 @@ services:
 
 ## Step 2: Create a Pulsar cluster
 
-To authorize volumes for default uid(10000) in Pulsar dockerfile.
+To create data directories and change the ownership to uid(10000) which is the default user id used in the Pulsar Docker container.
 ```bash
 sudo mkdir -p ./data/zookeeper ./data/bookkeeper
+# this step might not be necessary on other than Linux platforms
 sudo chown 10000 -R data
 ```
 
