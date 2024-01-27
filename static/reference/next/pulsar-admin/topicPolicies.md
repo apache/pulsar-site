@@ -956,6 +956,7 @@ $ pulsar-admin topicPolicies set-delayed-delivery options
 |Flag|Description|Default|
 |---|---|---|
 | `--enable, -e` | Enable delayed delivery messages|false||
+| `--maxDelay, -md` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0||
 | `--disable, -d` | Disable delayed delivery messages|false||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 | `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000||

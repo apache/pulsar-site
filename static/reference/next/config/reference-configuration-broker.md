@@ -2723,6 +2723,17 @@ Size of the lookahead window to use when detecting if all the messages in the to
 
 **Category**: Server
 
+### delayedDeliveryMaxDelayInMillis
+The max allowed delay for delayed delivery (in milliseconds). If the broker receives a message which exceeds this max delay, then it will return an error to the producer. The default value is 0 which means there is no limit on the max delivery delay.
+
+**Type**: `long`
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### delayedDeliveryMaxIndexesPerBucketSnapshotSegment
 The max number of delayed message index in per bucket snapshot segment, -1 means no limitation, after reaching the max number limitation, the snapshot segment will be cut off.
 
