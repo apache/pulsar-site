@@ -350,7 +350,7 @@ module.exports = {
       copyright: `
         <div>
           <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
-          Apache Foundation
+          The Apache Software Foundation
         </div>
         <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
         <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
