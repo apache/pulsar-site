@@ -23,13 +23,10 @@ const PresentationsPage: React.FC = () => {
             </p>
           </section>
         </div>
-
         <section>
-          
             <div>
               <Cards key={'presentations'} resources={data.resources['presentations']} />
             </div>
-
         </section>
       </Page>
     </Layout>

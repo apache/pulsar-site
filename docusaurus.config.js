@@ -429,6 +429,7 @@ module.exports = {
             require.resolve("./src/css/navbar.css"),
             require.resolve("./src/css/footer.css"),
             require.resolve("./src/css/variables.css"),
+            require.resolve("./src/css/blog.css"),
           ],
         },
         //googleAnalytics: {
