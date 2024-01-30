@@ -1,4 +1,5 @@
 import * as React from "react";
+/*
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -26,5 +27,19 @@ export default function VersionsTable(props) {
         ))}
       </TableBody>
     </Table>
+  );
+}*/
+
+export default function VersionsTable(props) {
+  return (
+    <div>
+      {props.data.map((row, index) => (
+          <div>
+            <div>{row.name}</div>
+            <div>{row.apacheId}</div>
+            <div><img src={'https://github.com/'+row.apacheId+'.png'} /></div>
+          </div>
+      ))}
+    </div>
   );
 }

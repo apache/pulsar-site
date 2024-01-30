@@ -1,11 +1,83 @@
-.DiscussionPlatforms {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px 24px;
+.DiscussionPlatformsDesktop{
+  display: none;
+}
+.DiscussionPlatformsMobile{
+  display: block;
 }
 
-@media (max-width: 1000px) {
-  .DiscussionPlatforms {
-    grid-template-columns: 1fr;
+@media (min-width: 1000px) {
+  .DiscussionPlatformsDesktop{
+    display: block;
+  }
+  .DiscussionPlatformsMobile{
+    display: none;
+  }
+}
+
+.DiscussionPlatformCard{
+  width: 100%;
+  background-color: var(--green-6);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+}
+.DiscussionPlatformCardImage{
+  box-sizing: border-box;
+  width: 100%;
+}
+.DiscussionPlatformCardImage img{
+  width: 48px;
+  height: 48px;
+}
+.DiscussionPlatformCardText{
+  box-sizing: border-box;
+  width: 100%;
+}
+.DiscussionPlatformCardText h3, .DiscussionPlatformCardText div{
+  line-height: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+}
+.DiscussionPlatformCardText a {
+  text-decoration: underline;
+  color: var(--text-color);
+}
+.DiscussionPlatformCardText h3{
+  font-weight: 700;
+}
+.DiscussionPlatformCardActions{
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 6rem;
+  display: flex;
+}
+
+@media(min-width:1000px){
+  .DiscussionPlatformCard{
+    background-color: var(--green-4);
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-direction: row;
+  }
+  .DiscussionPlatformCardImage{
+    width: 50%;
+  }
+  .DiscussionPlatformCardText{
+    width: 50%;
+  }
+  .DiscussionPlatformCardText h3, .DiscussionPlatformCardText div{
+    line-height: 1.75rem;
+    font-size: 1.5rem;
+  }
+  .DiscussionPlatformCardActions{
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 3rem;
   }
 }

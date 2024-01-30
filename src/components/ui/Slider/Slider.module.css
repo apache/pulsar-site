@@ -1,4 +1,4 @@
-.Slider :global(.slick-track) {
+.Slider :global(.slick-track), .SliderInvert :global(.slick-track) {
   display: flex;
   align-items: center;
 }
@@ -11,12 +11,12 @@
 
 .PrevButton {
   right: unset !important;
-  left: 0 !important;
+  left: calc(50% - 54px) !important;
 }
 
 .NextButton {
   right: unset !important;
-  left: 4rem !important;
+  left: calc(50% + 6px) !important;
 }
 
 .ArrowButton:hover {
@@ -28,13 +28,16 @@
   opacity: 1;
 }
 
+.SliderInvert  :global(.slick-dots li button:before) {
+  color: var(--white);
+}
+
+.SliderInvert  :global(.slick-dots li.slick-active button:before) {
+  color: var(--white);
+  opacity: 1;
+}
+
 :global(.slick-dots li button:before) {
   font-size: 0.6rem;
   opacity: 0.2;
-}
-
-@media (max-width: 1300px) {
-  .ArrowButton {
-    transform: translate(1rem, 0);
-  }
 }

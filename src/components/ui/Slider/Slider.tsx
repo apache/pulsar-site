@@ -13,6 +13,7 @@ type SliderProps = {
   children: React.ReactNode;
   slidesToShow: number;
   centerMode?: boolean;
+  invertMode?: boolean;
 }
 
 const Slider = (props: SliderProps) => {
@@ -68,7 +69,7 @@ const Slider = (props: SliderProps) => {
     arrows: !smallScreen,
     responsive: [
       {
-        breakpoint: 801,
+        breakpoint: 1000,
         settings: {
           slidesToShow: 1,
         }
@@ -79,7 +80,7 @@ const Slider = (props: SliderProps) => {
   return (
     <BrowserOnly>
       {() => (
-        <div className={s.Slider}>
+        <div className={props.invertMode ? s.SliderInvert : s.Slider}>
           <SlickSlider {...settings}>
             {props.children}
           </SlickSlider>

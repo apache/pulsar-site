@@ -4,7 +4,7 @@ import ContentCard, { ContentCardProps } from "./ContentCard";
 
 export type LayoutProps = {
   cards: ContentCardProps[];
-  columns: 1 | 2;
+  columns: 1 | 2 | 3;
 };
 
 const ContentCardsLayout: React.FC<LayoutProps> = (props) => {
@@ -15,6 +15,9 @@ const ContentCardsLayout: React.FC<LayoutProps> = (props) => {
       break;
     case 2:
       className = s.TwoColumnsLayout;
+      break;
+    case 3:
+      className = s.ThreeColumnsLayout;
       break;
   }
 
