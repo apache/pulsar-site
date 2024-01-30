@@ -1,15 +1,18 @@
 import React from "react";
 import s from './Cards.module.css';
 import * as data from '@site/data/case-studies';
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 const Card: React.FC<data.Resource> = (props) => {
   return (
-    <div className={s.Card}>
-      <div className={s.CardImage} style={{ backgroundImage: `url(${props.image})` }}></div>
-      <h3><a href={props.link}>{props.company}</a></h3>
+    <a href={props.link} target="_blank" className={s.Card}>
+      <div className={s.CardImage}>
+        <div style={{ backgroundImage: `url(${props.image})` }}></div>
+        <img src={useBaseUrl('/img/goto.svg')} />
+      </div>
+      <h3>{props.company}</h3>
       {props.description && <p>{props.description}</p>}
-      <a href={props.link} target="_blank">See Case Study</a>
-    </div>
+    </a>
   );
 };
 

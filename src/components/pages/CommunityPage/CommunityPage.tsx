@@ -190,7 +190,7 @@ export default function CommunityPage(): JSX.Element {
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMorePMCButton}
-                    <Button title="Go to Github" variant="cleaninvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotogithub.svg")}/>
+                    <Button title="Go to Github" variant="cleaninvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")}/>
                   </div>
                 </div>
                 <div className={s.CommunityMembersMobile}>
@@ -239,7 +239,7 @@ export default function CommunityPage(): JSX.Element {
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMoreCmtrsButton}
-                    <Button title="Go to Github" variant="cleaninvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotogithub.svg")}/>
+                    <Button title="Go to Github" variant="cleaninvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")}/>
                   </div>
                 </div>
                 <div className={s.CommunityMembersMobile}>

@@ -9,7 +9,7 @@ import FeaturedEvent from "./FeaturedEvent/FeaturedEvent";
 
 type CategoryFilterOption = data.Category;
 
-const CaseStudiesPage: React.FC = () => {
+const EventsPage: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('events');
 
   return (
@@ -63,4 +63,4 @@ const CaseStudiesPage: React.FC = () => {
   );
 }
 
-export default CaseStudiesPage;
+export default EventsPage;

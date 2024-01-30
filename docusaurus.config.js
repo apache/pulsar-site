@@ -203,6 +203,11 @@ module.exports = {
           label: "Features",
         },
         {
+          to: "/use-cases/",
+          position: "left",
+          label: "Use Cases",
+        },
+        {
           type: "dropdown",
           label: "Community",
           position: "left",
@@ -275,8 +280,12 @@ module.exports = {
               label: "Case Studies",
             },
             {
-              to: "/resources",
-              label: "Resources",
+              to: "/articles",
+              label: "Articles",
+            },
+            {
+              to: "/presentations",
+              label: "Presentations",
             },
             {
               to: "/events",

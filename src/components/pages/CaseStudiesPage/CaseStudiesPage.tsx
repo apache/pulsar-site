@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Layout from "@theme/Layout";
 import Cards from "./Cards/Cards";
 import * as data from '@site/data/case-studies';
-import Input from "@site/src/components/ui/Input/Input";
 import Select from "@site/src/components/ui/Select/Select";
 import Page from "@site/src/components/ui/Page/Page";
 import s from './CaseStudiesPage.module.css';
@@ -13,6 +12,15 @@ const categoryFilterOptions = ['any', ...data.categories] as const;
 const CaseStudiesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('any');
+
+  const updateCategoryLinks = (newoption) => {
+    setCategoryFilter(newoption);
+    let allfilterlinks = document.querySelectorAll('.'+s.CategoryFilterLink);
+    allfilterlinks.forEach((el) => {
+      if(el.dataset.option == newoption) el.classList.add(s.active);
+      else el.classList.remove(s.active);
+    })
+  }
 
   return (
     <Layout
@@ -37,8 +45,13 @@ const CaseStudiesPage: React.FC = () => {
                   title: option === 'any' ? 'All Industries' : data.categoryLabels[option]
                 }))}
               />
-
-              <Input placeholder="Search" value={searchQuery} onChange={setSearchQuery} clearable />
+            </div>
+            <div className={s.FiltersMobile}>
+              <div>
+              {categoryFilterOptions.map((option) => (
+                <button type="button" data-option={option} onClick={() => updateCategoryLinks(option)} className={s.CategoryFilterLink+(option === 'any' ? ' '+s.active : '')}>{option === 'any' ? 'All Industries' : data.categoryLabels[option]}</button>
+              ))}
+              </div>
             </div>
 
             <div>

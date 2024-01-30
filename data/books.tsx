@@ -7,8 +7,8 @@ export const categories = [
 export type Category = typeof categories[number];
 
 export const categoryLabels: Record<Category, string> = {
-  pulsar: 'About Pulsar',
-  related_topics: 'About related subjects'
+  pulsar: 'Pulsar',
+  related_topics: 'Related subjects'
 };
 
 export type Resource = {
