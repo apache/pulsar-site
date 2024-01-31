@@ -4,6 +4,9 @@ import SlickSlider from 'react-slick';
 import LeftButton from './img/leftButton.svg';
 import RightButton from './img/rightButton.svg';
 
+import LeftButtonInvert from './img/leftButtonInvert.svg';
+import RightButtonInvert from './img/rightButtonInvert.svg';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import s from './Slider.module.css';
@@ -41,6 +44,28 @@ const Slider = (props: SliderProps) => {
     );
   }
 
+  const NextArrowInvert = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <RightButtonInvert
+        className={`${className} ${s.ArrowButton} ${s.NextButton}`}
+        style={{ ...style, left: '70' }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  const PrevArrowInvert = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <LeftButtonInvert
+        className={`${className} ${s.ArrowButton} ${s.PrevButton}`}
+        style={{ ...style, left: '10' }}
+        onClick={onClick}
+      />
+    );
+  }
+
   const handleResize = useCallback(() => {
     setSmallScreen(window.innerWidth <= 800);
   }, []);
@@ -63,8 +88,8 @@ const Slider = (props: SliderProps) => {
     swipeToSlide: true,
     touchThreshold: 3,
     centerMode: props.centerMode || false,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: props.invertMode ? <NextArrowInvert /> : <NextArrow />,
+    prevArrow: props.invertMode ? <PrevArrowInvert /> : <PrevArrow />,
     dots: smallScreen,
     arrows: !smallScreen,
     responsive: [

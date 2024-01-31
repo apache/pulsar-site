@@ -9,6 +9,7 @@ export type CaseProps = {
     icon: string,
     title: string;
     text: string;
+    smalltext: string;
     docslink: string;
     caselink: boolean;
 };
@@ -24,7 +25,7 @@ const Case: React.FC<CaseProps> = (props) => {
     const docsLink = (props.docslink) ? (<Button
         title='Read docs'
         variant='regular'
-        href={`/docs/${latestVersion}/{props.docslink}`}
+        href={`/docs/${latestVersion}/${props.docslink}`}
       />) : ('');
       const caseLink = (props.caselink) ? (<Button
         title='Explore case studies'

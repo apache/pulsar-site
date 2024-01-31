@@ -19,7 +19,7 @@ const HowToContribute: React.FC = () => {
       },
       description: (
         <div>
-          Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more."
+          Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more.
         </div>
       ),
       actions: [

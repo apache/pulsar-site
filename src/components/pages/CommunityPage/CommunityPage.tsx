@@ -279,7 +279,7 @@ export default function CommunityPage(): JSX.Element {
           <div className={s.CommunityContent}>
             <div>
               <h2>Pulsar trusted community</h2>
-              <p>Join us and get start contributing</p>
+              <p>Join us and start contributing</p>
             </div>
           </div>
           <div className={s.CommunityContent}>

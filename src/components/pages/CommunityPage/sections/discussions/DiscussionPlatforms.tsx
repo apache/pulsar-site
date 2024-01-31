@@ -73,35 +73,39 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
 const DiscussionPlatforms: React.FC = () => {
   const platforms: ContentCardProps[] = [
     {
-      title: "User Mailing List",
+      title: "Slack",
       description: (
-        <div>
-          General mailing list for user-related discussions.
-        </div>
+        <span>
+          Use it for instant messaging and real-time discussions.
+          <br />
+          You can search the Slack discussions history on <a href="https://www.linen.dev/s/apache-pulsar" target="_blank">Linen</a>.
+        </span>
       ),
       actions: [
-        {
-          id: "subscribe",
-          text: "Subscribe",
-          href: "mailto:users-subscribe@pulsar.apache.org",
+        /*{
+          id: "sign-up",
+          text: "Sign-up",
+          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
           type: "primary",
-        },
-        {
-          id: "showarchives",
-          text: "Show Archives",
-          href: "https://lists.apache.org/list.html?users@pulsar.apache.org",
           isExternal: true,
+        },*/
+        {
+          id: "launch-slack",
+          text: "Go to Slack",
+          href: "https://apache-pulsar.slack.com/",
           type: "normal",
+          isExternal: true,
         },
         /*{
-          id: "unsubscribe",
-          text: "Unsubscribe",
-          href: "mailto:users-unsubscribe@pulsar.apache.org",
+          id: "discussions-history",
+          text: "Browse discussions",
+          href: "https://www.linen.dev/s/apache-pulsar",
           type: "normal",
+          isExternal: true,
         },*/
       ],
       image: {
-        src: useBaseUrl("/img/community_email.svg"),
+        src: useBaseUrl("/img/community_sl.svg"),
       },
     },
     {
@@ -128,6 +132,27 @@ const DiscussionPlatforms: React.FC = () => {
       ],
       image: {
         src: useBaseUrl("/img/community_email.svg"),
+      },
+    },
+    {
+      title: "Community Meetings",
+      description: (
+        <span>
+          The community meeting occurs biweekly on Tuesdays and Thursdays to
+          discuss new proposals, open pull requests, and host open discussions.
+        </span>
+      ),
+      actions: [
+        {
+          id: "learnmore",
+          text: "Learn More",
+          href: "https://github.com/apache/pulsar/wiki/Community-Meetings",
+          type: "primary",
+          isExternal: true,
+        },
+      ],
+      image: {
+        src: useBaseUrl("/img/community_grp.svg"),
       },
     },
     {
@@ -187,39 +212,35 @@ const DiscussionPlatforms: React.FC = () => {
       },
     },
     {
-      title: "Slack",
+      title: "User Mailing List",
       description: (
-        <span>
-          Use it for instant messaging and real-time discussions.
-          <br />
-          You can search the Slack discussions history on <a href="https://www.linen.dev/s/apache-pulsar" target="_blank">Linen</a>.
-        </span>
+        <div>
+          General mailing list for user-related discussions.
+        </div>
       ),
       actions: [
-        /*{
-          id: "sign-up",
-          text: "Sign-up",
-          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
-          type: "primary",
-          isExternal: true,
-        },*/
         {
-          id: "launch-slack",
-          text: "Go to Slack",
-          href: "https://apache-pulsar.slack.com/",
-          type: "normal",
+          id: "subscribe",
+          text: "Subscribe",
+          href: "mailto:users-subscribe@pulsar.apache.org",
+          type: "primary",
+        },
+        {
+          id: "showarchives",
+          text: "Show Archives",
+          href: "https://lists.apache.org/list.html?users@pulsar.apache.org",
           isExternal: true,
+          type: "normal",
         },
         /*{
-          id: "discussions-history",
-          text: "Browse discussions",
-          href: "https://www.linen.dev/s/apache-pulsar",
+          id: "unsubscribe",
+          text: "Unsubscribe",
+          href: "mailto:users-unsubscribe@pulsar.apache.org",
           type: "normal",
-          isExternal: true,
         },*/
       ],
       image: {
-        src: useBaseUrl("/img/community_sl.svg"),
+        src: useBaseUrl("/img/community_email.svg"),
       },
     },
     {
@@ -239,27 +260,6 @@ const DiscussionPlatforms: React.FC = () => {
       }],
       image: {
         src: useBaseUrl("/img/community_wc.svg"),
-      },
-    },
-    {
-      title: "Community Meetings",
-      description: (
-        <span>
-          The community meeting occurs biweekly on Tuesdays and Thursdays to
-          discuss new proposals, open pull requests, and host open discussions.
-        </span>
-      ),
-      actions: [
-        {
-          id: "learnmore",
-          text: "Learn More",
-          href: "https://github.com/apache/pulsar/wiki/Community-Meetings",
-          type: "primary",
-          isExternal: true,
-        },
-      ],
-      image: {
-        src: useBaseUrl("/img/community_grp.svg"),
       },
     },
   ];
