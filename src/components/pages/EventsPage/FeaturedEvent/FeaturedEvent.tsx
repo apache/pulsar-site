@@ -31,7 +31,7 @@ const FeaturedEvent: React.FC = () => {
     <div className={s.FeaturedEvent}>
       <h2>
         <small>September 2024</small>
-        Pulsar Summit USA 2023
+        Pulsar Summit USA 2024
       </h2>
       <div>
         <p>

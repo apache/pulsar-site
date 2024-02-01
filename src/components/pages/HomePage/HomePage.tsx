@@ -60,7 +60,7 @@ const HomePage = () => {
                             <h3>{scase.title}</h3>
                             <div className={s.SlideMB}>{scase.smalltext}</div>
                             <div>
-                                <Button title='Read more' href={'/use-cases#case-'+i} variant='transparentblack' />
+                                <Button title='Read more' href={'/use-cases#case'+i} variant='transparentblack' />
                             </div>
                           </div>
                         </div>
