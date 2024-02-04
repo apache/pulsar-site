@@ -2569,7 +2569,7 @@ Interval between checks to see if topics with compaction policies need to be com
 **Category**: Server
 
 ### brokerServiceCompactionPhaseOneLoopTimeInSeconds
-Timeout for the compaction phase one loop, If the execution time of the compaction phase one loop exceeds this time, the compaction will not proceed.
+Timeout for each read request in the compaction phase one loop, If the execution time of one single message read operation exceeds this time, the compaction will not proceed.
 
 **Type**: `long`
 
@@ -2718,6 +2718,17 @@ Size of the lookahead window to use when detecting if all the messages in the to
 **Type**: `long`
 
 **Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### delayedDeliveryMaxDelayInMillis
+The max allowed delay for delayed delivery (in milliseconds). If the broker receives a message which exceeds this max delay, then it will return an error to the producer. The default value is 0 which means there is no limit on the max delivery delay.
+
+**Type**: `long`
+
+**Default**: `0`
 
 **Dynamic**: `false`
 

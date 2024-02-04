@@ -61,7 +61,7 @@ When a retention limit on a topic is exceeded, the oldest message is marked for 
 
 You can set message retention at instance level with the following two parameters: `defaultRetentionTimeInMinutes` and `defaultRetentionSizeInMB`. By default, both parameters are set to `0`, which means disabling message retention.
 
-For more information on the two parameters, refer to the [`broker.conf`](reference-configuration.md#broker) configuration file.
+For more information on the two parameters, refer to the [`broker.conf`](reference-configuration.md) configuration file.
 
 ### Set retention policy
 
@@ -198,12 +198,11 @@ Setting a backlog quota involves setting:
 
 The following retention policies are available:
 
-Policy | Action
-:------|:------
-`producer_request_hold` | The producer holds the message and retris until client configuration `sendTimeoutMs` is exceeded.
-`producer_exception` | The producer throws an exception when trying to send a message
-`consumer_backlog_eviction` | The broker will begin discarding backlog messages
-
+| Policy                      | Action                                                                                            |
+|:----------------------------|:--------------------------------------------------------------------------------------------------|
+| `producer_request_hold`     | The producer holds the message and retris until client configuration `sendTimeoutMs` is exceeded. |
+| `producer_exception`        | The producer throws an exception when trying to send a message                                    |
+| `consumer_backlog_eviction` | The broker will begin discarding backlog messages                                                 |
 
 > #### Beware the distinction between retention policy types
 > As you may have noticed, there are two definitions of the term "retention policy" in Pulsar, one that applies to persistent storage of messages not in backlogs, and one that applies to messages within backlogs.
@@ -213,7 +212,7 @@ Backlog quotas are handled at the namespace level. They can be managed via:
 
 ### Set size/time thresholds and backlog retention policies
 
-You can set a size and/or time threshold and backlog retention policy for all of the topics in a [namespace](reference-terminology.md#namespace) by specifying the namespace, a size limit and/or a time limit in second, and a policy by name.
+You can set a size and/or time threshold and backlog retention policy for all the topics in a [namespace](reference-terminology.md#namespace) by specifying the namespace, a size limit and/or a time limit in second, and a policy by name.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -298,6 +297,12 @@ Map<BacklogQuota.BacklogQuotaType,BacklogQuota> quotas =
 
 </Tabs>
 ````
+### Monitoring backlog quota usage
+
+The backlog quota limit and usage are exposed both through [metrics](./reference-metrics.md#topic-metrics),
+and [topic stats](./administration-stats.md#topic-stats). This allows to define, for example to define alerts
+to know ahead of time if a backlog quota is about to reach its limit.
+
 
 ### Remove backlog quotas
 
