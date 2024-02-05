@@ -4,7 +4,7 @@ title: Apache Pulsar 3.2.0
 sidebar_label: Apache Pulsar 3.2.0
 ---
 
-#### 2024-01-04
+#### 2024-02-05
 
 ### Important notice
 -
@@ -269,11 +269,5 @@ sidebar_label: Apache Pulsar 3.2.0
 - Upgrade Kotlin version from 1.4.32 to 1.8.20. (targeted for master) [#20114](https://github.com/apache/pulsar/pull/20114)
 
 
-
-For the complete list, including all features, enhancements, and bug fixes, check out the following resources.
-
-- [Documentation merged in 3.1 (pulsar-site repo)](https://github.com/apache/pulsar-site/pulls?q=is%3Apr+is%3Amerged+milestone%3A3.1.0+)
-
-
 > A special thanks to the following contributors (alphabetic Github IDs) who contributed to Pulsar 3.2.0:
-> Technoboy-, crossoverJie, lifepuzzlefun, poorbarcode, coderzc, liangyepianzhou, Demogorgon314, mattisonchao, BewareMyPower, yaalsn, zymap, lhotari, daziz, shibd, rdhabalia, eltociear, tisonkun, aloyszhang, michaeljmarshall, 315157973, JooHyukKim, zhanghaou, heesung-sn, codelipenghui, eolivelli, ethqunzhong, massakam, StevenLuMT, gaoran10, ericsyh, zuobiao-zhou, AnonHxy, xiaotongwang1, maanders-tibco, yuruguo, vineeth1995, flowchartsman, hanmz, nicoloboschi, Shawyeok, RobertIndie, nodece, TakaHiR07, hleecs, MMirelli, thetumbled, pgier, syk-coder, dragonls, bpereto, liqiangcc, clayburn, 1Jack2, asafm, tiny-rain, dlg99, gmiklos-ltg, cbornet, aymkhalil, jiangpengcheng, congbobo184, wangjialing218, dao-jun, csthomas1, teabot, labuladong, tjiuming, ziang123, shashrath.
+> lhotari, jiangpengcheng, merlimat, poorbarcode, nodece, thetumbled, hrzzzz, BewareMyPower, RobertIndie, onobc, Technoboy-, wenbingshen, aloyszhang, heesung-sn, massakam, liangyepianzhou, coderzc, asafm, crossoverJie, TakaHiR07, zymap, yaalsn, rdhabalia, dragosvictor, pandalee99, AnonHxy, hangc0276, pengxiangrui127, mattisonchao, Denovo1998, 1Jack2, shibd, horizonzy, liudezhi2098, KevinLiLu, hanmz, erobot, Demogorgon314, tisonkun, diegosalvi, liangyuanpeng, kecona, alpreu, tuteng, frankjkelly, lifepuzzlefun, Shawyeok, Apurva007, Crispy-fried-chicken, michaeljmarshall, chenhongSZ, eolivelli, vineeth1995, codelipenghui, zhanghaou, JooHyukKim, klevy-toast.
