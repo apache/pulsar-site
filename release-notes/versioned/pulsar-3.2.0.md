@@ -36,7 +36,16 @@ sidebar_label: Apache Pulsar 3.2.0
 - PIP-264: Enhanced OTel-based metric system [#21080](https://github.com/apache/pulsar/pull/21080)
 
 ### Broker
+- Replication stopped due to unload topic failed [#21947](https://github.com/apache/pulsar/pull/21947)
+- Fix getMessageById throws 500 [#21919](https://github.com/apache/pulsar/pull/21919)
+- Fix write all compacted out entry into compacted topic [#21917](https://github.com/apache/pulsar/pull/21917)
+- Fix deadlock while skip non-recoverable ledgers [#21915](https://github.com/apache/pulsar/pull/21915)
+- Fix leader broker cannot be determined when the advertised address and advertised listeners are configured [#21894](https://github.com/apache/pulsar/pull/21894)
+- Fix DLQ producer name conflicts when multiples consumers send messages to DLQ [#21890](https://github.com/apache/pulsar/pull/21890)
+- Fix break change: could not subscribe partitioned topic with a suffix-matched regexp due to a mistake of PIP-145 [#21885](https://github.com/apache/pulsar/pull/21885)
+- Fix NonPersistentDispatcherMultipleConsumers ArrayIndexOutOfBoundsException [#21856](https://github.com/apache/pulsar/pull/21856)
 - Fix returns wrong webServiceUrl when both webServicePort and webServicePortTls are set [#21842](https://github.com/apache/pulsar/pull/21842)
+- Fix the wrong value of BrokerSrevice.maxUnackedMsgsPerDispatcher [#21765](https://github.com/apache/pulsar/pull/21765)
 - Fix the ExtensibleLoadManagerImpl internal system getTopic failure when the leadership changes [#21764](https://github.com/apache/pulsar/pull/21764)
 - Fix closing of AbstractDispatcherSingleActiveConsumer and reduce flakiness of test [#21736](https://github.com/apache/pulsar/pull/21736)
 - Skip topic auto-creation for ExtensibleLoadManager internal topics [#21729](https://github.com/apache/pulsar/pull/21729)
@@ -157,6 +166,8 @@ sidebar_label: Apache Pulsar 3.2.0
 - [IO] Fix the wrong format of the logs [#20907](https://github.com/apache/pulsar/pull/20907)
 - [IO] Remove useless configuration for Pulsar SQL [#20605](https://github.com/apache/pulsar/pull/20605)
 - [IO] Some optimized points in 9224 [#19027](https://github.com/apache/pulsar/pull/19027)
+- [FN] Add missing version field back to querystate API [#21966](https://github.com/apache/pulsar/pull/21966)
+- [FN] Throw 404 RestException when state key not found [#21921](https://github.com/apache/pulsar/pull/21921)
 - [FN] Exit JVM when the main thread throws exceptions [#20689](https://github.com/apache/pulsar/pull/20689)
 - [FN] TLS args admin download command use zero arity [#20513](https://github.com/apache/pulsar/pull/20513)
 - [FN] Optimize string concatenation in user metrics gen [#20499](https://github.com/apache/pulsar/pull/20499)
@@ -245,6 +256,7 @@ sidebar_label: Apache Pulsar 3.2.0
 - [Build] Capture local build scans on ge.apache.org to benefit from deep build insights [#20187](https://github.com/apache/pulsar/pull/20187)
 
 ### Library updates
+- Upgrade pulsar-client-python to 3.4.0 to avoid CVE-2023-1428 [#21899](https://github.com/apache/pulsar/pull/21899)
 - Upgrade Guava to 32.1.1 to address CVE-2023-2976 [#20699](https://github.com/apache/pulsar/pull/20699)
 - Upgrade snappy-java to address multiple CVEs [#20604](https://github.com/apache/pulsar/pull/20604)
 - Upgrade Jetty to address CVEs [#20461](https://github.com/apache/pulsar/pull/20461)
@@ -256,29 +268,6 @@ sidebar_label: Apache Pulsar 3.2.0
 - Upgrade to jetcd to 0.7.5 [#20339](https://github.com/apache/pulsar/pull/20339)
 - Upgrade Kotlin version from 1.4.32 to 1.8.20. (targeted for master) [#20114](https://github.com/apache/pulsar/pull/20114)
 
-### Documentation
-- [feat][doc] add overview for broker load balancing [#621](https://github.com/apache/pulsar-site/pull/621)
-- [feat][doc] add concepts for broker load balancing [#644](https://github.com/apache/pulsar-site/pull/644)
-- [feat][doc] add use cases + features + benefits + types for broker load balancing [#652](https://github.com/apache/pulsar-site/pull/652)
-- [feat][doc] add Quick Start for broker load balancing [#660](https://github.com/apache/pulsar-site/pull/660)
-- [feat][doc] add migration tutorials for broker load balancing [#657](https://github.com/apache/pulsar-site/pull/657)
-- [feat][doc] add metrics for broker load balancing [#646](https://github.com/apache/pulsar-site/pull/646)
-- [feat][doc] add configurations for broker load balancing [#661](https://github.com/apache/pulsar-site/pull/661)
-- [feat][doc] add development docs for broker load balancing [#662](https://github.com/apache/pulsar-site/pull/662)
-- [improve][doc] clarify detailed behaviors for failover subscription type [#633](https://github.com/apache/pulsar-site/pull/633/files)
-- [improve][doc] add docs for supporting reading config options from files in Python runner [#544](https://github.com/apache/pulsar-site/pull/544)
-- [improve][doc] add solutions for debezium-source-mysql connection errors [#649](https://github.com/apache/pulsar-site/pull/649)
-- [feat][doc] add docs for OpenID Connect Auth Provider [#555](https://github.com/apache/pulsar-site/pull/555)
-- [feat][doc] add docs for openIDKeyIdCacheMissRefreshSeconds setting [#580](https://github.com/apache/pulsar-site/pull/580)
-- [feat][doc] add docs for KubernetesServiceAccountTokenAuthProvider [#570](https://github.com/apache/pulsar-site/pull/570/)
-- [feat][doc] add client matrix page [#513](https://github.com/apache/pulsar-site/pull/513)
-- [feature][doc] add docs for client memory limits [#571](https://github.com/apache/pulsar-site/pull/571)
-- [feature][doc] add docs for CPP client table view [#565](https://github.com/apache/pulsar-site/pull/565)
-- [improve] [doc] add compatibility reminders for retry queues [#651](https://github.com/apache/pulsar-site/pull/651)
-- [feat][doc] add docs for JVM metrics in Pulsar broker [#567](https://github.com/apache/pulsar-site/pull/567)
-- [feat][doc] add docs for bucket delayed message tracker metrics [#564](https://github.com/apache/pulsar-site/pull/564)
-- [fix][doc] exclude outdated versions of API documentation from search engine results [#623](https://github.com/apache/pulsar-site/pull/623)
-- [feat][website] implement 'How does Pulsar work' homepage screen [#614](https://github.com/apache/pulsar-site/pull/614)
 
 
 For the complete list, including all features, enhancements, and bug fixes, check out the following resources.
@@ -286,5 +275,5 @@ For the complete list, including all features, enhancements, and bug fixes, chec
 - [Documentation merged in 3.1 (pulsar-site repo)](https://github.com/apache/pulsar-site/pulls?q=is%3Apr+is%3Amerged+milestone%3A3.1.0+)
 
 
-> A special thanks to the following contributors (alphabetic Github IDs) who contributed to Pulsar 3.1.0:
+> A special thanks to the following contributors (alphabetic Github IDs) who contributed to Pulsar 3.2.0:
 > Technoboy-, crossoverJie, lifepuzzlefun, poorbarcode, coderzc, liangyepianzhou, Demogorgon314, mattisonchao, BewareMyPower, yaalsn, zymap, lhotari, daziz, shibd, rdhabalia, eltociear, tisonkun, aloyszhang, michaeljmarshall, 315157973, JooHyukKim, zhanghaou, heesung-sn, codelipenghui, eolivelli, ethqunzhong, massakam, StevenLuMT, gaoran10, ericsyh, zuobiao-zhou, AnonHxy, xiaotongwang1, maanders-tibco, yuruguo, vineeth1995, flowchartsman, hanmz, nicoloboschi, Shawyeok, RobertIndie, nodece, TakaHiR07, hleecs, MMirelli, thetumbled, pgier, syk-coder, dragonls, bpereto, liqiangcc, clayburn, 1Jack2, asafm, tiny-rain, dlg99, gmiklos-ltg, cbornet, aymkhalil, jiangpengcheng, congbobo184, wangjialing218, dao-jun, csthomas1, teabot, labuladong, tjiuming, ziang123, shashrath.
