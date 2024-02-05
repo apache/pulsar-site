@@ -6,9 +6,6 @@ sidebar_label: Apache Pulsar 3.2.0
 
 #### 2024-02-05
 
-### Important notice
--
-
 ### PIPs
 - PIP-323: Complete Backlog Quota Telemetry [#21709](https://github.com/apache/pulsar/pull/21709)
 - PIP-322: Pulsar Rate Limiting Refactoring [#21680](https://github.com/apache/pulsar/pull/21680)
