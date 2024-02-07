@@ -28,6 +28,7 @@ For macOS, Linux, and Windows, run the following command to start Pulsar within 
 <TabItem value="macOS & Linux">
 
 ```shell
+docker run -it \
 -p 6650:6650 \
 -p 8080:8080 \
 --mount source=pulsardata,target=/pulsar/data \
