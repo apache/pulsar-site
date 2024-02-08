@@ -31,17 +31,17 @@ export const resources: Record<Category, Resource[]> = {
     },
     {
       title: "Pulsar Summit North America 2024",
-      description: "",
+      description: "Comming soon",
       link: "",
-      displayDate: "Comming soon",
-      startDate: "", // year-month-day
+      displayDate: "October 29th, 2024",
+      startDate: "2024-10-29", // year-month-day
     },
     {
       title: "Pulsar Summit Asia 2024",
-      description: "",
+      description: "Comming soon",
       link: "",
-      displayDate: "Comming soon",
-      startDate: "", // year-month-day
+      displayDate: "November 22nd, 2024",
+      startDate: "2024-11-22", // year-month-day
     },
     {
       title: "Pulsar Summit Europe 2023",
