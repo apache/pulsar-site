@@ -8,7 +8,7 @@ export default function BlogLayout(props) {
   const hasSidebar = sidebar && sidebar.items.length > 0;
   return (
     <Layout {...layoutProps}>
-      <div className="container margin-vert--lg">
+      <div className="container margin-top--lg">
         <div className="row">
           <main
             className={clsx('col', {
@@ -20,7 +20,7 @@ export default function BlogLayout(props) {
             {header && 
               <section className={s.BlogHeader}>
                 <h1>Blog</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Read about the latest releases, explore new features, discover upcoming events, and gain insights through articles on the Apache Pulsar Blog.</p>
               </section>
             }
             {children}

@@ -4,13 +4,21 @@ import Cards from "./Cards/Cards";
 import * as data from '@site/data/events';
 import Page from "@site/src/components/ui/Page/Page";
 import s from './EventsPage.module.css';
-import Button from "@site/src/components/ui/Button/Button";
 import FeaturedEvent from "./FeaturedEvent/FeaturedEvent";
 
 type CategoryFilterOption = data.Category;
 
 const EventsPage: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('events');
+  let currcat = categoryFilter;
+  /*const changeCategoryButtons = (category) => {
+    let allfilterlinks = document.querySelectorAll('.'+s.CategoryFilterLink);
+    allfilterlinks.forEach((el) => {
+      if(el.dataset.option == category) el.classList.add(s.active);
+      else el.classList.remove(s.active);
+    })
+  }*/
+
 
   return (
     <Layout
@@ -35,15 +43,10 @@ const EventsPage: React.FC = () => {
         <section>
           <form>
             <div className={s.Filters}>
-              <div className={s.CategorySwitcher}>
+              <div className={s.FiltersMobile}>
                 {data.categories.map((category) => {
                   return (
-                    <Button
-                      key={category}
-                      variant={categoryFilter === category ? 'action' : 'regular'}
-                      onClick={() => setCategoryFilter(category)}
-                      title={data.categoryLabels[category]}
-                    />
+                    <button type="button" key={category} data-option={category} onClick={() => setCategoryFilter(category)} className={s.CategoryFilterLink+(category === currcat ? ' '+s.active : '')}>{data.categoryLabels[category]}</button>
                   );
                 })}
               </div>

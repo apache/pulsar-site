@@ -6,7 +6,7 @@ export default function BlogListPaginator(props) {
   const {previousPage, nextPage} = metadata;
   return (
     <nav
-      className="pagination-nav blog-pagination-nav"
+      className="pagination-nav blog-pagination-nav margin-bottom--lg"
       aria-label={translate({
         id: 'theme.blog.paginator.navAriaLabel',
         message: 'Blog list page navigation',

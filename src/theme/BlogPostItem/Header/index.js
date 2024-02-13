@@ -5,9 +5,11 @@ import BlogPostItemHeaderAuthors from '@theme/BlogPostItem/Header/Authors';
 export default function BlogPostItemHeader() {
   return (
     <header>
-      <BlogPostItemHeaderTitle />
-      <BlogPostItemHeaderAuthors />
-      <BlogPostItemHeaderInfo />
+      <div>
+        <BlogPostItemHeaderTitle />
+        <BlogPostItemHeaderAuthors />
+        <BlogPostItemHeaderInfo />
+      </div>
     </header>
   );
 }

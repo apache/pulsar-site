@@ -32,7 +32,7 @@ const CaseStudiesPage: React.FC = () => {
         <div className={s.FiltersMobile}>
           <div>
           {categoryFilterOptions.map((option) => (
-            <button type="button" data-option={option} onClick={() => updateCategoryLinks(option)} className={s.CategoryFilterLink+(option === 'any' ? ' '+s.active : '')}>{option === 'any' ? 'All' : data.categoryLabels[option]}</button>
+            <button type="button" key={option} data-option={option} onClick={() => updateCategoryLinks(option)} className={s.CategoryFilterLink+(option === 'any' ? ' '+s.active : '')}>{option === 'any' ? 'All' : data.categoryLabels[option]}</button>
           ))}
           </div>
         </div>
