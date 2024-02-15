@@ -3,7 +3,12 @@ import clsx from 'clsx';
 import {blogPostContainerID} from '@docusaurus/utils-common';
 import {useBlogPost} from '@docusaurus/theme-common/internal';
 import MDXContent from '@theme/MDXContent';
-export default function BlogPostItemContent({children, className}) {
+import type {Props} from '@theme/BlogPostItem/Content';
+
+export default function BlogPostItemContent({
+  children,
+  className,
+}: Props): JSX.Element {
   const {isBlogPostPage} = useBlogPost();
   return (
     <div

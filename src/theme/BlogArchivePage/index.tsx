@@ -3,10 +3,20 @@ import Link from '@docusaurus/Link';
 import {translate} from '@docusaurus/Translate';
 import {PageMetadata} from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
-function Year({year, posts}) {
+import type {ArchiveBlogPost, Props} from '@theme/BlogArchivePage';
+import Heading from '@theme/Heading';
+
+type YearProp = {
+  year: string;
+  posts: ArchiveBlogPost[];
+};
+
+function Year({year, posts}: YearProp) {
   return (
     <>
-      <h3>{year}</h3>
+      <Heading as="h3" id={year}>
+        {year}
+      </Heading>
       <ul>
         {posts.map((post) => (
           <li key={post.metadata.date}>
@@ -19,7 +29,8 @@ function Year({year, posts}) {
     </>
   );
 }
-function YearsSection({years}) {
+
+function YearsSection({years}: {years: YearProp[]}) {
   return (
     <section className="margin-vert--lg">
       <div className="container">
@@ -34,18 +45,21 @@ function YearsSection({years}) {
     </section>
   );
 }
-function listPostsByYears(blogPosts) {
-  const postsByYear = blogPosts.reduceRight((posts, post) => {
-    const year = post.metadata.date.split('-')[0];
+
+function listPostsByYears(blogPosts: readonly ArchiveBlogPost[]): YearProp[] {
+  const postsByYear = blogPosts.reduce((posts, post) => {
+    const year = post.metadata.date.split('-')[0]!;
     const yearPosts = posts.get(year) ?? [];
     return posts.set(year, [post, ...yearPosts]);
-  }, new Map());
+  }, new Map<string, ArchiveBlogPost[]>());
+
   return Array.from(postsByYear, ([year, posts]) => ({
     year,
     posts,
   }));
 }
-export default function BlogArchive({archive}) {
+
+export default function BlogArchive({archive}: Props): JSX.Element {
   const title = translate({
     id: 'theme.blog.archive.title',
     message: 'Archive',
@@ -63,7 +77,9 @@ export default function BlogArchive({archive}) {
       <Layout>
         <header className="hero hero--primary">
           <div className="container">
-            <h1 className="hero__title">{title}</h1>
+            <Heading as="h1" className="hero__title">
+              {title}
+            </Heading>
             <p className="hero__subtitle">{description}</p>
           </div>
         </header>

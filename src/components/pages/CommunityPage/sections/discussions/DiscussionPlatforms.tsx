@@ -50,7 +50,7 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
   let buttonVariant: ButtonVariant;
   switch (props.type) {
     case "primary":
-      buttonVariant = "transparentblack";
+      buttonVariant = "transparentBlack";
       break;
     case "normal":
       buttonVariant = "clean";
@@ -82,13 +82,6 @@ const DiscussionPlatforms: React.FC = () => {
         </span>
       ),
       actions: [
-        /*{
-          id: "sign-up",
-          text: "Sign-up",
-          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
-          type: "primary",
-          isExternal: true,
-        },*/
         {
           id: "launch-slack",
           text: "Go to Slack",
@@ -96,13 +89,6 @@ const DiscussionPlatforms: React.FC = () => {
           type: "normal",
           isExternal: true,
         },
-        /*{
-          id: "discussions-history",
-          text: "Browse discussions",
-          href: "https://www.linen.dev/s/apache-pulsar",
-          type: "normal",
-          isExternal: true,
-        },*/
       ],
       image: {
         src: useBaseUrl("/img/community_sl.svg"),
@@ -232,12 +218,6 @@ const DiscussionPlatforms: React.FC = () => {
           isExternal: true,
           type: "normal",
         },
-        /*{
-          id: "unsubscribe",
-          text: "Unsubscribe",
-          href: "mailto:users-unsubscribe@pulsar.apache.org",
-          type: "normal",
-        },*/
       ],
       image: {
         src: useBaseUrl("/img/community_email.svg"),

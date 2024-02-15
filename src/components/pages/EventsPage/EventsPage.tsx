@@ -11,14 +11,6 @@ type CategoryFilterOption = data.Category;
 const EventsPage: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('events');
   let currcat = categoryFilter;
-  /*const changeCategoryButtons = (category) => {
-    let allfilterlinks = document.querySelectorAll('.'+s.CategoryFilterLink);
-    allfilterlinks.forEach((el) => {
-      if(el.dataset.option == category) el.classList.add(s.active);
-      else el.classList.remove(s.active);
-    })
-  }*/
-
 
   return (
     <Layout

@@ -40,7 +40,7 @@ const FeaturedEvent: React.FC = () => {
         <p>
           This summit provides a diverse platform to explore, learn and exchange ideas. From captivating keynotes to insightful panel discussions, hands-on workshops, and unparalleled networking opportunities.
         </p>
-        <Button href='https://pulsar-summit.org/' target='_blank' title='Learn More' variant='cleaninvert' icon='/img/gotoi.svg' />
+        <Button href='https://pulsar-summit.org/' target='_blank' title='Learn More' variant='cleanInvert' icon='/img/gotoi.svg' />
       </div>
     </div>
   );

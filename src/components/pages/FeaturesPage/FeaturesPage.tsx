@@ -463,27 +463,27 @@ const FeaturesPage: React.FC = () => {
           ))}
         </div>
         <section className={s.MoreFeats}>
-          <div>
+          <div className={s.MoreFeatsChild}>
             <h2>More Features</h2>
-            <div>
+            <div className={s.MoreFeatsGrandChild}>
               <div className={s.FlexibleMessageContent}>
                 <p><strong>Flexible message retention</strong><br />
                 By time, size, or unacknowledge size</p>
               </div>
             </div>
-            <div>
+            <div className={s.MoreFeatsGrandChild}>
               <div className={s.TopicCompactionContent}>
                 <p><strong>Topic compaction</strong><br />
                 Keep only the last of the same key messages.</p>
               </div>
             </div>
-            <div>
+            <div className={s.MoreFeatsGrandChild}>
               <div className={s.MessageDeduplicationContent}>
                 <p><strong>Message deduplication</strong><br />
                 Achieve Exactly Once when producing.</p>
               </div>
             </div>
-            <div>
+            <div className={s.MoreFeatsGrandChild}>
               <div className={s.TransactionsContent}>
                 <p><strong>Transactions</strong><br />
                 Produce and acknowledge as an atomic operation</p>

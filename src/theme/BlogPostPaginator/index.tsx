@@ -1,8 +1,11 @@
 import React from 'react';
 import Translate, {translate} from '@docusaurus/Translate';
 import PaginatorNavLink from '@theme/PaginatorNavLink';
-export default function BlogPostPaginator(props) {
+import type {Props} from '@theme/BlogPostPaginator';
+
+export default function BlogPostPaginator(props: Props): JSX.Element {
   const {nextItem, prevItem} = props;
+
   return (
     <nav
       className="pagination-nav blog-post-pagination-nav docusaurus-mt-lg"

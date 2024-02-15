@@ -1,20 +1,32 @@
 import React from 'react';
 import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-function MaybeLink(props) {
+import Link, {type Props as LinkProps} from '@docusaurus/Link';
+
+import type {Props} from '@theme/BlogPostItem/Header/Author';
+
+function MaybeLink(props: LinkProps): JSX.Element {
   if (props.href) {
     return <Link {...props} />;
   }
   return <>{props.children}</>;
 }
-export default function BlogPostItemHeaderAuthor({author, className}) {
+
+export default function BlogPostItemHeaderAuthor({
+  author,
+  className,
+}: Props): JSX.Element {
   const {name, title, url, imageURL, email} = author;
   const link = url || (email && `mailto:${email}`) || undefined;
   return (
     <div className={clsx('avatar', className)}>
       {imageURL && (
         <MaybeLink href={link} className="avatar__photo-link">
-          <img className="avatar__photo" src={imageURL} alt={name} />
+          <img
+            className="avatar__photo"
+            src={imageURL}
+            alt={name}
+            itemProp="image"
+          />
         </MaybeLink>
       )}
 
@@ -26,12 +38,12 @@ export default function BlogPostItemHeaderAuthor({author, className}) {
           itemType="https://schema.org/Person">
           <div className="avatar__name">
             <MaybeLink href={link} itemProp="url">
-              <strong itemProp="name">{name}</strong>
+              <span itemProp="name">{name}</span>
             </MaybeLink>
           </div>
           {title && (
             <small className="avatar__subtitle" itemProp="description">
-              <strong>{title}</strong>
+              {title}
             </small>
           )}
         </div>

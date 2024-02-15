@@ -1,9 +1,11 @@
 import React from 'react';
 import {PageMetadata} from '@docusaurus/theme-common';
 import {useBlogPost} from '@docusaurus/theme-common/internal';
-export default function BlogPostPageMetadata() {
+
+export default function BlogPostPageMetadata(): JSX.Element {
   const {assets, metadata} = useBlogPost();
   const {title, description, date, tags, authors, frontMatter} = metadata;
+
   const {keywords} = frontMatter;
   const image = assets.image ?? frontMatter.image;
   return (

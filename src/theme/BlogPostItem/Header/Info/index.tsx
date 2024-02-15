@@ -3,11 +3,14 @@ import clsx from 'clsx';
 import {translate} from '@docusaurus/Translate';
 import {usePluralForm} from '@docusaurus/theme-common';
 import {useBlogPost} from '@docusaurus/theme-common/internal';
+import type {Props} from '@theme/BlogPostItem/Header/Info';
+
 import styles from './styles.module.css';
+
 // Very simple pluralization: probably good enough for now
 function useReadingTimePlural() {
   const {selectMessage} = usePluralForm();
-  return (readingTimeFloat) => {
+  return (readingTimeFloat: number) => {
     const readingTime = Math.ceil(readingTimeFloat);
     return selectMessage(
       readingTime,
@@ -23,23 +26,30 @@ function useReadingTimePlural() {
     );
   };
 }
-function ReadingTime({readingTime}) {
+
+function ReadingTime({readingTime}: {readingTime: number}) {
   const readingTimePlural = useReadingTimePlural();
   return <>{readingTimePlural(readingTime)}</>;
 }
-function Date({date, formattedDate}) {
+
+function Date({date, formattedDate}: {date: string; formattedDate: string}) {
   return (
     <time dateTime={date} itemProp="datePublished">
       {formattedDate}
     </time>
   );
 }
+
 function Spacer() {
   return <>{' · '}</>;
 }
-export default function BlogPostItemHeaderInfo({className}) {
+
+export default function BlogPostItemHeaderInfo({
+  className,
+}: Props): JSX.Element {
   const {metadata} = useBlogPost();
   const {date, formattedDate, readingTime} = metadata;
+
   return (
     <div className={clsx(styles.container, className)}>
       <Date date={date} formattedDate={formattedDate} />

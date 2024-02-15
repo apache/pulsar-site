@@ -6,7 +6,7 @@ type ActionButtonProps = {
   id: string;
   text: string;
   href: string;
-  type: "primary" | "normal" | "link" | "transparentwhite" | "transparentblack";
+  type: "primary" | "normal" | "link" | "transparentWhite" | "transparentBlack";
   isExternal?: boolean;
 };
 
@@ -22,10 +22,8 @@ export type ContentCardProps = {
 };
 
 const ContentCard: React.FC<ContentCardProps> = (props) => {
-  let theclass = s.ContentCard;
-  if(props.format == 'column') theclass = s.ContentCardColumn;
   return (
-    <div className={theclass}>
+    <div className={props.format == 'column' ? s.ContentCardColumn : s.ContentCard}>
       {props.image && (
         <img
           className={`${props.image.size === "big" ? s.BigImage : s.NormalImage}`}
@@ -57,11 +55,11 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
     case "normal":
       buttonVariant = "regular";
       break;
-    case "transparentblack":
-      buttonVariant = "transparentblack";
+    case "transparentBlack":
+      buttonVariant = "transparentBlack";
       break;
-    case "transparentwhite":
-      buttonVariant = "transparentblack";
+    case "transparentWhite":
+      buttonVariant = "transparentWhite";
       break;
   }
 

@@ -19,37 +19,6 @@ const ProjectGovernance: React.FC = () => {
           </p>
         </div>
       ),
-      /*
-      actions: [
-        {
-          id: "project-independence-overview",
-          text: "Project independence overview",
-          href: "https://community.apache.org/projectIndependence",
-          type: "primary",
-          isExternal: true,
-        },
-        {
-          id: "pmcs",
-          text: "PMCs",
-          href: "https://www.apache.org/foundation/governance/pmcs.html",
-          type: "normal",
-          isExternal: true,
-        },
-        {
-          id: "voting-process",
-          text: "Voting process",
-          href: "https://www.apache.org/foundation/voting.html",
-          type: "normal",
-          isExternal: true,
-        },
-        {
-          id: "apache-way",
-          text: "The Apache way",
-          href: "https://www.apache.org/theapacheway/index.html",
-          type: "normal",
-          isExternal: true,
-        },
-      ],*/
     },
   ];
 

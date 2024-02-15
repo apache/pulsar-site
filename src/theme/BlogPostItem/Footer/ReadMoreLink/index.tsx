@@ -1,16 +1,23 @@
 import React from 'react';
 import Translate, {translate} from '@docusaurus/Translate';
 import Link from '@docusaurus/Link';
+import type {Props} from '@theme/BlogPostItem/Footer/ReadMoreLink';
+
 function ReadMoreLabel() {
   return (
+    <b>
       <Translate
         id="theme.blog.post.readMore"
         description="The label used in blog post item excerpts to link to full blog posts">
         read →
       </Translate>
+    </b>
   );
 }
-export default function BlogPostItemFooterReadMoreLink(props) {
+
+export default function BlogPostItemFooterReadMoreLink(
+  props: Props,
+): JSX.Element {
   const {blogPostTitle, ...linkProps} = props;
   return (
     <Link

@@ -13,15 +13,6 @@ const CaseStudiesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('any');
 
-  const updateCategoryLinks = (newoption) => {
-    setCategoryFilter(newoption);
-    let allfilterlinks = document.querySelectorAll('.'+s.CategoryFilterLink);
-    allfilterlinks.forEach((el) => {
-      if(el.dataset.option == newoption) el.classList.add(s.active);
-      else el.classList.remove(s.active);
-    })
-  }
-
   return (
     <Layout
       title={`Ecosystem`}
@@ -48,8 +39,8 @@ const CaseStudiesPage: React.FC = () => {
             </div>
             <div className={s.FiltersMobile}>
               <div>
-              {categoryFilterOptions.map((option) => (
-                <button type="button" data-option={option} onClick={() => updateCategoryLinks(option)} className={s.CategoryFilterLink+(option === 'any' ? ' '+s.active : '')}>{option === 'any' ? 'All Industries' : data.categoryLabels[option]}</button>
+              {categoryFilterOptions.map((option, idx) => (
+                <button type="button" key={idx} onClick={() => {setCategoryFilter(option)}} className={s.CategoryFilterLink+(option == categoryFilter ? ' '+s.active : '')}>{option === 'any' ? 'All Industries' : data.categoryLabels[option]}</button>
               ))}
               </div>
             </div>

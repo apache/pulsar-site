@@ -1,10 +1,20 @@
 import React from 'react';
 import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 import {useBlogPost} from '@docusaurus/theme-common/internal';
+import type {Props} from '@theme/BlogPostItem/Container';
+
 import s from './index.module.css';
 
-export default function BlogPostItemContainer({children, className}) {
-  const {frontMatter, assets, isBlogPostPage} = useBlogPost();
+export default function BlogPostItemContainer({
+  children,
+  className,
+}: Props): JSX.Element {
+  const {
+    frontMatter,
+    assets,
+    isBlogPostPage,
+    metadata: {description},
+  } = useBlogPost();
   const {withBaseUrl} = useBaseUrlUtils();
   const image = assets.image ?? frontMatter.image;
   return (
@@ -12,9 +22,9 @@ export default function BlogPostItemContainer({children, className}) {
       className={className+' '+(isBlogPostPage ? s.BlogContainerPost : s.BlogContainer)}
       itemProp="blogPost"
       itemScope
-      itemType="http://schema.org/BlogPosting">
+      itemType="https://schema.org/BlogPosting">
       {image && (
-        <meta itemProp="image" content={withBaseUrl(image, {absolute: true})} />
+        <link itemProp="image" href={withBaseUrl(image, {absolute: true})} />
       )}
       {children}
     </article>

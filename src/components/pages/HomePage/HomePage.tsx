@@ -54,13 +54,13 @@ const HomePage = () => {
                   {() => (
                     <Slider centerMode={window.innerWidth > 1000} slidesToShow={2} invertMode={true}>
                       {cases.map((scase, i) => (
-                        <div key={i} className={s.Slide}>
+                        <div key={i} className={s.Slide+' '+s.SlideCommunity}>
                           <div>
                             <div className={makeiconclass(scase.icon)}></div>
                             <h3>{scase.title}</h3>
-                            <div className={s.SlideMB}>{scase.smalltext}</div>
+                            <div className={s.SlideMB}>{scase.smallText}</div>
                             <div>
-                                <Button title='Read more' href={'/use-cases#case'+i} variant='transparentblack' />
+                                <Button title='Read more' href={'/use-cases#case'+i} variant='transparentBlack' />
                             </div>
                           </div>
                         </div>
@@ -83,9 +83,10 @@ const HomePage = () => {
             <div className={s.CommunityContent}>
               <div className={s.CommunityNumbersContainer}>
               {communityNumbers.map((number, i) => (
-                <div>
+                <div key={i}>
                   <div className={s.CommunityNumbersBig}>{number.number}{(number.icon) ? <img src={useBaseUrl(number.icon)} /> : null}</div>
                   <strong>{number.title}</strong>
+                  {number.linkTitle ? <div className="margin-top--lg"><Button title={number.linkTitle} href={number.link} target='_blank' variant='transparentBlack' /></div> : ''}
                 </div>
               ))}
               </div>

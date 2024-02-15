@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   PageMetadata,
@@ -9,8 +10,10 @@ import {
 import BlogLayout from '@theme/BlogLayout';
 import BlogListPaginator from '@theme/BlogListPaginator';
 import SearchMetadata from '@theme/SearchMetadata';
+import type {Props} from '@theme/BlogListPage';
 import BlogPostItems from '@theme/BlogPostItems';
-function BlogListPageMetadata(props) {
+
+function BlogListPageMetadata(props: Props): JSX.Element {
   const {metadata} = props;
   const {
     siteConfig: {title: siteTitle},
@@ -25,7 +28,8 @@ function BlogListPageMetadata(props) {
     </>
   );
 }
-function BlogListPageContent(props) {
+
+function BlogListPageContent(props: Props): JSX.Element {
   const {metadata, items, sidebar} = props;
   return (
     <BlogLayout header={true} sidebar={sidebar}>
@@ -34,7 +38,8 @@ function BlogListPageContent(props) {
     </BlogLayout>
   );
 }
-export default function BlogListPage(props) {
+
+export default function BlogListPage(props: Props): JSX.Element {
   return (
     <HtmlClassNameProvider
       className={clsx(

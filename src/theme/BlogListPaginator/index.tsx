@@ -1,9 +1,12 @@
 import React from 'react';
 import Translate, {translate} from '@docusaurus/Translate';
 import PaginatorNavLink from '@theme/PaginatorNavLink';
-export default function BlogListPaginator(props) {
+import type {Props} from '@theme/BlogListPaginator';
+
+export default function BlogListPaginator(props: Props): JSX.Element {
   const {metadata} = props;
   const {previousPage, nextPage} = metadata;
+
   return (
     <nav
       className="pagination-nav blog-pagination-nav margin-bottom--lg"

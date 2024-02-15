@@ -16,12 +16,12 @@ export default function CommunityPage(): JSX.Element {
 
   const [isShowMorePMC, setIsShowMorePMC] = useState(false);
   const showMorePMCButton = (
-    <Button title={isShowMorePMC ? 'Show less' : 'Show more'} variant="transparentwhite" onClick={() => setIsShowMorePMC(!isShowMorePMC)}/>
+    <Button title={isShowMorePMC ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMorePMC(!isShowMorePMC)}/>
   );
 
   const [isShowMoreCmtrs, setIsShowMoreCmtrs] = useState(false);
   const showMoreCmtrsButton = (
-    <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentwhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
+    <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
   );
   
   let teamPMCSets = new Array(Math.ceil(team.pmc.length/5));
@@ -190,7 +190,7 @@ export default function CommunityPage(): JSX.Element {
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMorePMCButton}
-                    <Button title="Go to Github" variant="cleaninvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")}/>
+                    <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")}/>
                   </div>
                 </div>
                 <div className={s.CommunityMembersMobile}>
@@ -239,7 +239,7 @@ export default function CommunityPage(): JSX.Element {
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMoreCmtrsButton}
-                    <Button title="Go to Github" variant="cleaninvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")}/>
+                    <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")}/>
                   </div>
                 </div>
                 <div className={s.CommunityMembersMobile}>
@@ -288,6 +288,7 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={s.CommunityNumbersBig}>{number.number}{(number.icon) ? <img src={useBaseUrl(number.icon)} /> : null}</div>
                 <strong>{number.title}</strong>
+                {number.linkTitle ? <div className="margin-top--lg"><Button title={number.linkTitle} href={number.link} target='_blank' variant='transparentBlack' /></div> : ''}
               </div>
             ))}
             </div>
@@ -301,7 +302,7 @@ export default function CommunityPage(): JSX.Element {
               Get up-to-date Pulsar insights.
             </div>
             <div>
-              <Button title="Explore" variant="transparentblack" href={`${useBaseUrl("blog")}`} />
+              <Button title="Explore" variant="transparentBlack" href={`${useBaseUrl("blog")}`} />
             </div>
           </div>
         </div>

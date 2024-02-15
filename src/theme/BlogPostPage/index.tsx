@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {type ReactNode} from 'react';
 import clsx from 'clsx';
 import {HtmlClassNameProvider, ThemeClassNames} from '@docusaurus/theme-common';
 import {BlogPostProvider, useBlogPost} from '@docusaurus/theme-common/internal';
@@ -7,7 +7,17 @@ import BlogPostItem from '@theme/BlogPostItem';
 import BlogPostPaginator from '@theme/BlogPostPaginator';
 import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
 import TOC from '@theme/TOC';
-function BlogPostPageContent({sidebar, children}) {
+import type {Props} from '@theme/BlogPostPage';
+import Unlisted from '@theme/Unlisted';
+import type {BlogSidebar} from '@docusaurus/plugin-content-blog';
+
+function BlogPostPageContent({
+  sidebar,
+  children,
+}: {
+  sidebar: BlogSidebar;
+  children: ReactNode;
+}): JSX.Element {
   const {metadata, toc} = useBlogPost();
   const {nextItem, prevItem, frontMatter} = metadata;
   const {
@@ -28,7 +38,8 @@ function BlogPostPageContent({sidebar, children}) {
     </BlogLayout>
   );
 }
-export default function BlogPostPage(props) {
+
+export default function BlogPostPage(props: Props): JSX.Element {
   const BlogPostContent = props.content;
   return (
     <BlogPostProvider content={props.content} isBlogPostPage>

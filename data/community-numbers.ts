@@ -1,22 +1,30 @@
 export type CommunityNumber = {
     title: string;
     number: string;
-    icon?: string
+    icon?: string;
+    link?: string;
+    linkTitle?: string;
   };
   
   const communityNumbers: CommunityNumber[] = [
     {
       title: "GitHub",
-      number: "12900",
-      icon: "img/star.svg"
+      number: "13600",
+      icon: "img/star.svg",
+      linkTitle: 'View',
+      link: 'https://github.com/apache/pulsar-site'
     },
     {
         title: "Contributors",
         number: "600+",
+        linkTitle: 'View',
+        link: 'https://github.com/apache/pulsar-site'
     },
     {
         title: "Slack members",
-        number: "9000+",
+        number: "10000+",
+        linkTitle: 'Join',
+        link: 'https://apache-pulsar.slack.com'
     },
   ];
   

@@ -3,8 +3,8 @@ import s from './Cards.module.css';
 import * as data from '@site/data/resources';
 
 const Card: React.FC<data.Resource> = (props) => {
-  let tagsArray = new Array();
-  if(props.tags) tagsArray = props.tags.split(", ");
+  /*let tagsArray = new Array();
+  if(props.tags) tagsArray = props.tags.split(", ");*/
   return (
     <div className={s.Card}>
       <h3><a href={props.link}>{props.title}</a></h3>
@@ -12,7 +12,7 @@ const Card: React.FC<data.Resource> = (props) => {
         <a className={s.ForumLink} target="_blank" href={props.forum_link}><strong>{props.forum}</strong></a>
       </div>
       {props.date && <div className={s.Date}>{props.date}</div>}
-      {props.tags && <div className={s.Tags}>{tagsArray.map((tag)=>( <small>{tag}</small> ))}</div>}
+      {props.tags && <div className={s.Tags}>{props.tags.map((tag, idx)=>( <small key={idx}>{tag}</small> ))}</div>}
       {props.presenter && <p>Presented by <strong>{props.presenter}</strong></p>}
     </div>
   );
