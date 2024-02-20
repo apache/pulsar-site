@@ -319,19 +319,19 @@ Promote the Maven staging repository for release. Login to `https://repository.a
 
 ### Release Docker images
 
-Copy the approved candidate docker images from your personal account to apachepulsar org.
+Please ensure that the regctl tools have been properly installed. They can be obtained from the following link: https://github.com/regclient/regclient/blob/main/docs/install.md
+
+Copy the approved candidate Docker images from your personal account to the apachepulsar organization:
 
 ```bash
-PULSAR_VERSION=2.x.x
+PULSAR_VERSION=3.x.x
 OTHER_DOCKER_USER=otheruser
-for image in pulsar pulsar-all pulsar-grafana pulsar-standalone; do
-    docker pull "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" && {
-      docker tag "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" "apachepulsar/$image:${PULSAR_VERSION}"
-      echo "Pushing apachepulsar/$image:${PULSAR_VERSION}"
-      docker push "apachepulsar/$image:${PULSAR_VERSION}"
-    }
-done
+CANDIDATE_TAG=3.x.x-80fb390
+regctl image copy ${OTHER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:${PULSAR_VERSION}
+regctl image copy ${OTHER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:${PULSAR_VERSION}
 ```
+
+If this release is a feature release or a patch release of the last feature release, you should also push these images to the `latest` tag.
 
 If you don't have the permission, you can ask someone with access to apachepulsar org to do that.
 
