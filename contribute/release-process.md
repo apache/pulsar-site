@@ -334,8 +334,6 @@ regctl image copy ${OTHER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/
 
 If this release is a feature release or a patch release of the last feature release, you should also push these images to the `latest` tag.
 
-If this release is a LTS release or a patch release of the last LTS release, you should also push these images to the `lts` tag.
-
 If you don't have the permission, you can ask someone with access to apachepulsar org to do that.
 
 ### Update project version
