@@ -12,13 +12,13 @@ export type CommunityNumber = {
       number: "13600",
       icon: "img/star.svg",
       linkTitle: 'View',
-      link: 'https://github.com/apache/pulsar-site'
+      link: 'https://github.com/apache/pulsar'
     },
     {
         title: "Contributors",
         number: "600+",
         linkTitle: 'View',
-        link: 'https://github.com/apache/pulsar-site'
+        link: 'https://github.com/apache/pulsar/graphs/contributors'
     },
     {
         title: "Slack members",

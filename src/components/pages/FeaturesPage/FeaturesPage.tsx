@@ -48,17 +48,17 @@ const cards: CardProps[] = [
           <div className={s.LowLatencyCardSingleColumn}>
             <ul>
               <li>
-                <p className={s.SmallText}><span className={s.LowLatencyCardUnderline}>Streaming:</span> In order, by partition, and acknowledge them cumulatively (up to a specific message ID for a specific partition), similar to the way Apache Kafka works.</p>
+                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/3.1.x/concepts-messaging/' target='_blank' title='Streaming'>Streaming:</a> In order, by partition, and acknowledge them cumulatively (up to a specific message ID for a specific partition), similar to the way Apache Kafka works.</p>
               </li>
               <li style={{ paddingTop: '2rem'}}>
-                <p className={s.SmallText}><span className={s.LowLatencyCardUnderline}>Messaging:</span> Out of order, acknowledging each message individually, similar to the way RabbitMQ works. This enables having vast amounts of consumers concurrently regardless of partition count. Perfect for distributed work queues (i.e., jobs) and accelerating machine learning workloads.</p>
+                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/3.1.x/concepts-messaging/' target='_blank' title='Messaging'>Messaging:</a> Out of order, acknowledging each message individually, similar to the way RabbitMQ works. This enables having vast amounts of consumers concurrently regardless of partition count. Perfect for distributed work queues (i.e., jobs) and accelerating machine learning workloads.</p>
               </li>
-              <li style={{ paddingTop: '2rem'}}>
-                <p className={s.SmallText}><span className={s.LowLatencyCardUnderline}>Messaging in-order:</span> In order, by key. You can have as many consumers as needed concurrently. The broker divides the keys equally between the consumers, and all messages for a particular key will arrive at the same single consumer associated with that key. This preserves the ordering of message processing by key.</p>
+              <li style={{ paddingTop: '2rem' }}>
+                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/3.1.x/concepts-messaging/' target='_blank' title='Messaging in-order'>Messaging in-order:</a> In order, by key. You can have as many consumers as needed concurrently. The broker divides the keys equally between the consumers, and all messages for a particular key will arrive at the same single consumer associated with that key. This preserves the ordering of message processing by key.</p>
               </li>
             </ul>
           </div>
-          <div className={s.LowLatencyCardSingleColumn} style={{ marginTop: '2rem'}}>
+          <div className={s.LowLatencyCardSingleColumn} style={{ marginTop: '2rem', paddingBottom: '7rem'}}>
             <p className={s.SmallText}>
               All of this is supported at very low latency (&lt;10 ms), both for producing messages and end-to-end latency, and large scale (hundreds of nodes) cluster.
             </p>

@@ -23,6 +23,16 @@ export default function CommunityPage(): JSX.Element {
   const showMoreCmtrsButton = (
     <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
   );
+
+  const forbiddenUsers = ['jianghaiting', 'technoboy', 'linlin']
+  const currectUsers = ['Jason918', 'Technoboy-', '315157973']
+
+  const correctUsersExceptions = (element) => {
+    if(forbiddenUsers.indexOf(element.apacheId) !== -1){
+      element.apacheId = currectUsers[forbiddenUsers.indexOf(element.apacheId)];
+    }
+    return element
+  }
   
   let teamPMCSets = new Array(Math.ceil(team.pmc.length/5));
   let teamCtrsSets = new Array(Math.ceil(team.committers.length/5));
@@ -33,6 +43,7 @@ export default function CommunityPage(): JSX.Element {
     countTheSet++;
     if((countTheSet-1)%5 == 0){ countTheSets++; }
     if(!Array.isArray(teamPMCSets[countTheSets])) teamPMCSets[countTheSets] = new Array();
+    element = correctUsersExceptions(element)
     teamPMCSets[countTheSets].push(element);
   });
 
@@ -42,8 +53,10 @@ export default function CommunityPage(): JSX.Element {
     countTheSet++;
     if((countTheSet-1)%5 == 0){ countTheSets++; }
     if(!Array.isArray(teamCtrsSets[countTheSets])) teamCtrsSets[countTheSets] = new Array();
+    element = correctUsersExceptions(element)
     teamCtrsSets[countTheSets].push(element);
   });
+
 
   return (
     <Layout title={"Community"} description={"Learn about the basics of using Apache Pulsar"} >
