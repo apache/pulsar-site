@@ -24,14 +24,12 @@ export default function CommunityPage(): JSX.Element {
     <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
   );
 
-  const forbiddenUsers = ['jianghaiting', 'technoboy', 'linlin']
-  const currectUsers = ['Jason918', 'Technoboy-', '315157973']
-
-  const correctUsersExceptions = (element) => {
-    if(forbiddenUsers.indexOf(element.apacheId) !== -1){
-      element.apacheId = currectUsers[forbiddenUsers.indexOf(element.apacheId)];
-    }
-    return element
+  type apacheId = string
+  type githubId = string
+  const githubUsers: Record<apacheId, githubId> = {
+    "jianghaiting": "Jason918",
+    "technoboy": "Technoboy-",
+    "linlin": "315157973"
   }
   
   let teamPMCSets = new Array(Math.ceil(team.pmc.length/5));
@@ -43,7 +41,6 @@ export default function CommunityPage(): JSX.Element {
     countTheSet++;
     if((countTheSet-1)%5 == 0){ countTheSets++; }
     if(!Array.isArray(teamPMCSets[countTheSets])) teamPMCSets[countTheSets] = new Array();
-    element = correctUsersExceptions(element)
     teamPMCSets[countTheSets].push(element);
   });
 
@@ -53,7 +50,6 @@ export default function CommunityPage(): JSX.Element {
     countTheSet++;
     if((countTheSet-1)%5 == 0){ countTheSets++; }
     if(!Array.isArray(teamCtrsSets[countTheSets])) teamCtrsSets[countTheSets] = new Array();
-    element = correctUsersExceptions(element)
     teamCtrsSets[countTheSets].push(element);
   });
 
@@ -189,14 +185,14 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={(isShowMorePMC ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
                   {(team.pmc || []).map((member,i) => (
-                    <a href={'https://github.com/'+member.apacheId} target="_blank" key={i} className={s.CommunityMembersMember}>
+                    <a href={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'m'+i} className={s.CommunityMembersMember}>
                       <div>
                         <div className={s.CommunityMembersMemberPic}>
-                          <img src={'https://github.com/'+member.apacheId+'.png'} alt={member.apacheId} />
+                          <img src={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId) + '.png'} alt={githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId} />
                         </div>
                         <div className={s.CommunityMembersMemberName}>
                           <strong>{member.name}</strong><br />
-                          {member.apacheId}
+                          {githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId}
                         </div>
                       </div>
                     </a>
@@ -213,11 +209,11 @@ export default function CommunityPage(): JSX.Element {
                         <Slider centerMode={window.innerWidth > 800} slidesToShow={1} invertMode={true}>
                           {teamPMCSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
-                              {set.map((member) => (
-                                <a href={'https://github.com/'+member.apacheId} target="_blank" key={i} className={s.CommunityMembersMember}>
+                              {set.map((member, i) => (
+                                <a href={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'ms'+i} className={s.CommunityMembersMember}>
                                   <div>
                                     <div className={s.CommunityMembersMemberPic}>
-                                      <img src={'https://github.com/'+member.apacheId+'.png'} alt={member.apacheId} />
+                                      <img src={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId) + '.png'} alt={githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId} />
                                     </div>
                                     <div className={s.CommunityMembersMemberName}>
                                       <strong>{member.name}</strong><br />
@@ -238,10 +234,10 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={(isShowMoreCmtrs ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
                   {(team.committers || []).map((member,i) => (
-                    <a href={'https://github.com/'+member.apacheId} target="_blank" key={i} className={s.CommunityMembersMember}>
+                    <a href={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'c'+i} className={s.CommunityMembersMember}>
                       <div>
                         <div className={s.CommunityMembersMemberPic}>
-                          <img src={'https://github.com/'+member.apacheId+'.png'} alt={member.apacheId} />
+                          <img src={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId) + '.png'} alt={githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId} />
                         </div>
                         <div className={s.CommunityMembersMemberName}>
                           <strong>{member.name}</strong><br />
@@ -262,11 +258,11 @@ export default function CommunityPage(): JSX.Element {
                         <Slider centerMode={window.innerWidth > 800} slidesToShow={1} invertMode={true}>
                           {teamCtrsSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
-                              {set.map((member) => (
-                                <a href={'https://github.com/'+member.apacheId} target="_blank" key={i} className={s.CommunityMembersMember}>
+                              {set.map((member, i) => (
+                                <a href={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'cs'+i} className={s.CommunityMembersMember}>
                                   <div>
                                     <div className={s.CommunityMembersMemberPic}>
-                                      <img src={'https://github.com/'+member.apacheId+'.png'} alt={member.apacheId} />
+                                      <img src={'https://github.com/' + (githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId) + '.png'} alt={githubUsers[member.apacheId] ? githubUsers[member.apacheId] : member.apacheId} />
                                     </div>
                                     <div className={s.CommunityMembersMemberName}>
                                       <strong>{member.name}</strong><br />
@@ -298,7 +294,7 @@ export default function CommunityPage(): JSX.Element {
           <div className={s.CommunityContent}>
             <div className={s.CommunityNumbersContainer}>
             {communityNumbers.map((number, i) => (
-              <div>
+              <div key={'num'+i}>
                 <div className={s.CommunityNumbersBig}>{number.number}{(number.icon) ? <img src={useBaseUrl(number.icon)} /> : null}</div>
                 <strong>{number.title}</strong>
                 {number.linkTitle ? <div className="margin-top--lg"><Button title={number.linkTitle} href={number.link} target='_blank' variant='transparentBlack' /></div> : ''}

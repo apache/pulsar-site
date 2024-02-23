@@ -23,8 +23,8 @@ const ContentCardsLayout: React.FC<LayoutProps> = (props) => {
 
   return (
     <div className={className}>
-      {(props.cards || []).map((card) => (
-        <div key={card.title} className={s.Card}>
+      {(props.cards || []).map((card, i) => (
+        <div key={card.title+i} className={s.Card}>
           <ContentCard {...card} />
         </div>
       ))}
