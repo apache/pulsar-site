@@ -287,6 +287,10 @@ module.exports = {
       "apacheId": "urfree"
     },
     {
+      "name": "Kiryl Valkovich",
+      "apacheId": "visortelle"
+    },
+    {
       "name": "Vineeth Polamreddy",
       "apacheId": "vpolamreddy"
     },
