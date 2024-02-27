@@ -1,14 +1,12 @@
 # Apache Pulsar Site
 
-![apache-pulsar-logo](https://pulsar.apache.org/img/logo-black.svg)
+<img alt="apache-pulsar-logo" src="./static/img/pulsar-social-media-card.png" width="600px" />
 
 This repository contains the [Apache Pulsar website](https://pulsar.apache.org) source code.
 
-Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.
-
 # How to contribute?
 
-You can read the full details explaining how this website is built, how to make changes, preview them and more [here](https://pulsar.apache.org/contribute/site-intro/).
+You can read the full details explaining how this website is built, how to make changes, preview them, and more [here](https://pulsar.apache.org/contribute/site-intro/).
 
 ## Contact Us
 
