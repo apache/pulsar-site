@@ -25,7 +25,7 @@ export const resources: Record<Category, Resource[]> =
 {
   pulsar: [
     {
-      name: 'Apache Pulsar in Action ',
+      name: 'Apache Pulsar in Action2 ',
       author: 'David Kjerrumgaard',
       cover_image: '/img/books/pulsar-in-action.jpg',
       description: (
