@@ -1743,6 +1743,7 @@ $ pulsar-admin namespaces set-offload-threshold options
 |Flag|Description|Default|
 |---|---|---|
 | `--size, -s` | Maximum number of bytes stored in the pulsar cluster for a topic before data will start being automatically offloaded to longterm storage (eg: 10M, 16G, 3T, 100). -1 falls back to the cluster's namespace default. Negative values disable automatic offload. 0 triggers offloading as soon as possible.|-1||
+| `--time, -t` | Maximum number of seconds stored on the pulsar cluster for a topic before the broker will start offloading to longterm storage (eg: 10m, 5h, 3d, 2w).|-1||
 
 
 ## get-offload-deletion-lag
