@@ -148,16 +148,16 @@ module.exports = {
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   ({
     image: 'img/pulsar-social-media-card.png',
-    // announcementBar: {
-    //   id: "summit",
-    //   content: renderAnnouncementBar(
-    //     "Register Now for Pulsar Summit North America 2023",
-    //     "https://registration.socio.events/e/pulsarsummitna2023?utm_source=pulsar&utm_medium=website&utm_campaign=banner"
-    //   ),
-    //   backgroundColor: "#282826",
-    //   textColor: "#fff",
-    //   isCloseable: false,
-    // },
+    announcementBar: {
+      id: "summit",
+      content: renderAnnouncementBar(
+        "Submit your stories to Pulsar Summit EMEA! 📣",
+        "https://sessionize.com/pulsar-virtual-summit-europe-2024"
+      ),
+      backgroundColor: "#282826",
+      textColor: "#fff",
+      isCloseable: false,
+    },
     colorMode: {
       disableSwitch: true,
     },
