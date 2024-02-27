@@ -4,7 +4,7 @@ This repository will be used to store the generated Apache Pulsar website in the
 
 # How to contribute?
 
-You can the full details explaining how this website is built, how to make changes, preview them and more [here](https://pulsar.apache.org/contribute/site-intro/).
+You can read the full details explaining how this website is built, how to make changes, preview them and more [here](https://pulsar.apache.org/contribute/site-intro/).
 
 ## Contact Us
 
