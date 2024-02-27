@@ -478,11 +478,8 @@ module.exports = {
   clientModules: [require.resolve("./matomoClientModule.ts")],
   stylesheets: [
     {
-      href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
+      href: "/css/katex-0.13.24.min.css",
       type: "text/css",
-      integrity:
-        "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
-      crossorigin: "anonymous",
       media: "print", // load CSS asynchronously to increase performance of page first load
       onload: "this.media='all'", // load CSS asynchronously to increase performance of page first load
     },

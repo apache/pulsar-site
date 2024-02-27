@@ -32,6 +32,8 @@ Starting from 3.0, additionally, live upgrade/downgrade between one LTS and the 
 * 3.0 -> 4.0 -> 3.0 is OK;
 * 3.2 -> 4.0 -> 3.2 is OK;
 * 3.2 -> 4.4 -> 3.2 is OK;
+* 3.0 -> 3.1 -> 3.0 is OK;
+* 3.0 -> 3.2 -> 3.0 is OK;
 * 3.2 -> 5.0 is _not_ OK.
 
 ## Release frequency and support expectation
