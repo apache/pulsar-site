@@ -1,6 +1,10 @@
 # Apache Pulsar Site
 
-This repository will be used to store the generated Apache Pulsar website in the asf-site-next branch.
+![apache-pulsar-logo](https://pulsar.apache.org/img/logo-black.svg)
+
+This repository contains the [Apache Pulsar website](https://pulsar.apache.org) source code.
+
+Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.
 
 # How to contribute?
 
