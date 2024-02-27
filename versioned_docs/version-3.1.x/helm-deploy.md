@@ -290,7 +290,7 @@ If you want to use **local** [persistent volumes](#persistence) as the persisten
 
 The Pulsar Helm Chart uses the [cert-manager](https://github.com/jetstack/cert-manager) to provision and manage TLS certificates automatically. To enable TLS encryption for brokers or proxies, you need to install the cert-manager in advance.
 
-For details about how to install the cert-manager, follow the [official instructions](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm).
+For details about how to install the cert-manager, follow the [official instructions](https://cert-manager.io/docs/installation/helm/).
 
 Alternatively, we provide a bash script [install-cert-manager.sh](https://github.com/apache/pulsar-helm-chart/blob/master/scripts/cert-manager/install-cert-manager.sh) to install a cert-manager release to the namespace `cert-manager`.
 

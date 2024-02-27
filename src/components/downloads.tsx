@@ -87,22 +87,20 @@ export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
 
 export function CurrentPulsarShellDownloadTable(): JSX.Element {
     const latestVersion = pulsarReleases[0]
-    const latestArchiveUrl = distShellUrl(latestVersion, "tar.gz")
-    const latestArchiveUrlZip = distShellUrl(latestVersion, "zip")
     const data = [
         {
             release: "Linux / MacOS",
-            link: latestArchiveUrl,
+            link: getLatestShellMirrorUrl(latestVersion, "tar.gz"),
             linkText: `apache-pulsar-shell-${latestVersion}-bin.tar.gz`,
-            asc: `${latestArchiveUrl}.asc`,
-            sha512: `${latestArchiveUrl}.sha512`,
+            asc: `${distShellUrl(latestVersion, "tar.gz")}.asc`,
+            sha512: `${distShellUrl(latestVersion, "tar.gz")}.sha512`,
         },
         {
             release: "Windows",
-            link: latestArchiveUrlZip,
+            link: getLatestShellMirrorUrl(latestVersion, "zip"),
             linkText: `apache-pulsar-shell-${latestVersion}-bin.zip`,
-            asc: `${latestArchiveUrl}.asc`,
-            sha512: `${latestArchiveUrl}.sha512`,
+            asc: `${distShellUrl(latestVersion, "zip")}.asc`,
+            sha512: `${distShellUrl(latestVersion, "zip")}.sha512`,
         }
     ]
     return <div className="tailwind">
@@ -294,15 +292,19 @@ export function ArchivedPulsarManagerDownloadTable(): JSX.Element {
 }
 
 function getLatestArchiveMirrorUrl(version, type) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz`;
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-${version}/apache-pulsar-${version}-${type}.tar.gz?action=download`;
 }
 
 function getLatestOffloadersMirrorUrl(version) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-${version}/apache-pulsar-offloaders-${version}-bin.tar.gz`;
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-${version}/apache-pulsar-offloaders-${version}-bin.tar.gz?action=download`;
 }
 
 function getLatestAdaptersMirrorUrl(version) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-adapters-${version}/apache-pulsar-adapters-${version}-src.tar.gz`;
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-adapters-${version}/apache-pulsar-adapters-${version}-src.tar.gz?action=download`;
+}
+
+function getLatestShellMirrorUrl(version, ext) {
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-${version}/apache-pulsar-shell-${version}-bin.${ext}?action=download`;
 }
 
 function distUrl(version, type) {
@@ -338,11 +340,11 @@ function connectorDistUrl(name, version) {
 }
 
 function connectorDownloadUrl(name, version) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-${version}/connectors/pulsar-io-${name}-${version}.nar`;
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-${version}/connectors/pulsar-io-${name}-${version}.nar?action=download`;
 }
 
 function getLatestPulsarManagerArchiveMirrorUrl(version, type) {
-    return `https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz?action=download`;
 }
 
 function pulsarManagerDistUrl(version, type) {

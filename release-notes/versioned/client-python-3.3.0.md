@@ -1,3 +1,9 @@
+---
+id: client-python-3.3.0
+title: Client Python 3.3.0
+sidebar_label: Client Python 3.3.0
+---
+
 ## What's Changed
 * Added support for KeySharedPolicy for the consumer when in KeyShared mode by @hyperevo https://github.com/apache/pulsar-client-python/pull/109
 * Bumped version to 3.3.0a1 @BewareMyPower https://github.com/apache/pulsar-client-python/pull/130

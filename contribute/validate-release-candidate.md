@@ -13,26 +13,49 @@ Download the server distribution `apache-pulsar-<release>-bin.tar.gz` and extrac
 
 ```shell
 cd apache-pulsar-<release>
+```
+
+Check the bookkeeper libs are complied on Linux:
+
+```shell
+unzip -t ./lib/org.apache.bookkeeper-circe-checksum-*.jar | grep lib
+unzip -t ./lib/org.apache.bookkeeper-cpu-affinity-*.jar | grep lib
+```
+
+The output should look like:
+
+```shell
+testing: lib/                     OK
+testing: lib/libcirce-checksum.so   OK
+testing: lib/                     OK
+testing: lib/libcpu-affinity.so   OK
+```
+
+Download the Cassandra connector:
+
+```shell
 mkdir connectors
+mv pulsar-io-cassandra-<release>.nar connectors
 ```
-
-Download the Pulsar IO Connector files:
-
-```
-pulsar-io-aerospike-<release>.nar
-pulsar-io-cassandra-<release>.nar
-pulsar-io-kafka-<release>.nar
-pulsar-io-kinesis-<release>.nar
-pulsar-io-rabbitmq-<release>.nar
-pulsar-io-twitter-<release>.nar
-```
-
-and place them in the `connectors` directory.
 
 Download the `*.asc` file and verify the GPG signature:
 
 ```bash
 gpg --verify apache-pulsar-<release>-bin.tar.gz.asc
+```
+
+### Download And Verify the source tarball
+
+Before you start to validate the source tarball, make sure you have installed these software:
+
+- JDK 17 (for Pulsar version >= 2.11) or JDK 11 (for earlier versions)
+- Maven 3.8.6 or later
+
+Download the source tarball and extract it. The extracted files are in a directory called `apache-pulsar-<release>-src`
+
+```shell
+cd apache-pulsar-<release>-src
+mvn clean install -DskipTests
 ```
 
 ### Validate Pub/Sub and Java Functions
@@ -301,7 +324,7 @@ Make sure you have docker available at your laptop. If you haven't installed doc
 1. Set up a cassandra cluster.
 
 ```shell
-docker run -d --rm  --name=cassandra -p 9042:9042 cassandra
+docker run -d --rm  --name=cassandra -p 9042:9042 cassandra:3.11
 ```
 
 Make sure that the cassandra cluster is running.
@@ -506,6 +529,12 @@ cqlsh:pulsar_test_keyspace> exit
 ```shell
 bin/pulsar-admin sink delete --tenant public --namespace default --name cassandra-test-sink
 # "Deleted successfully"
+```
+
+9. Stop the Cassandra container
+
+```shell
+docker stop cassandra
 ```
 
 ### Validate Stateful Functions

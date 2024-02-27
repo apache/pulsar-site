@@ -357,10 +357,10 @@ $ pulsar-admin namespaces set-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-lt, --limitTime` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|null||
-| `-l, --limit` | Size limit (eg: 10M, 16G)|null||
+| `-l, --limit` | Size limit (eg: 10M, 16G)|0||
 | `-t, --type` | Backlog quota type to set. Valid options are: destination_storage (default) and message_age. destination_storage limits backlog by size. message_age limits backlog by time, that is, message timestamp (broker or publish timestamp). You can set size or time to control the backlog, or combine them together to control the backlog. |destination_storage||
 | `-p, --policy` | Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]|null||
+| `-lt, --limitTime` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|null||
 
 
 ## remove-backlog-quota
@@ -828,8 +828,8 @@ $ pulsar-admin namespaces set-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--size, -s` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null||
 | `--time, -t` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 sets retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null||
+| `--size, -s` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null||
 
 
 ## remove-retention
@@ -913,7 +913,7 @@ $ pulsar-admin namespaces unload options
 |Flag|Description|Default|
 |---|---|---|
 | `--bundle, -b` | {start-boundary}_{end-boundary}|null||
-| `--destinationBroker, -d` | Target brokerWebServiceAddress to which the bundle has to be allocated to|null||
+| `--destinationBroker, -d` | Target brokerWebServiceAddress to which the bundle has to be allocated to. --destinationBroker cannot be set when --bundle is not specified.|null||
 
 
 ## split-bundle
@@ -1329,8 +1329,9 @@ $ pulsar-admin namespaces set-delayed-delivery options
 |Flag|Description|Default|
 |---|---|---|
 | `--disable, -d` | Disable delayed delivery messages|false||
-| `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1s||
 | `--enable, -e` | Enable delayed delivery messages|false||
+| `--maxDelay, -md` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0||
+| `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000||
 
 
 ## get-delayed-delivery
@@ -1395,10 +1396,10 @@ $ pulsar-admin namespaces set-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--max-inactive-duration, -t` | Max duration of topic inactivity in seconds, topics that are inactive for longer than this value will be deleted (eg: 1s, 10s, 1m, 5h, 3d)|null||
 | `--disable-delete-while-inactive, -d` | Disable delete while inactive|false||
 | `--enable-delete-while-inactive, -e` | Enable delete while inactive|false||
 | `--delete-mode, -m` | Mode of delete inactive topic, Valid options are: [delete_when_no_subscriptions, delete_when_subscriptions_caught_up]|null||
+| `--max-inactive-duration, -t` | Max duration of topic inactivity in seconds, topics that are inactive for longer than this value will be deleted (eg: 1s, 10s, 1m, 5h, 3d)|null||
 
 
 ## remove-inactive-topic-policies
@@ -1742,6 +1743,7 @@ $ pulsar-admin namespaces set-offload-threshold options
 |Flag|Description|Default|
 |---|---|---|
 | `--size, -s` | Maximum number of bytes stored in the pulsar cluster for a topic before data will start being automatically offloaded to longterm storage (eg: 10M, 16G, 3T, 100). -1 falls back to the cluster's namespace default. Negative values disable automatic offload. 0 triggers offloading as soon as possible.|-1||
+| `--time, -t` | Maximum number of seconds stored on the pulsar cluster for a topic before the broker will start offloading to longterm storage (eg: 10m, 5h, 3d, 2w).|-1||
 
 
 ## get-offload-deletion-lag
@@ -1943,18 +1945,18 @@ $ pulsar-admin namespaces set-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--offloadAfterThreshold, -oat` | Offload after threshold size (eg: 1M, 5M)|null||
+| `--maxBlockSize, -mbs` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|67108864||
 | `--s3-role-session-name, -rsn` | S3 role session name used for STSAssumeRoleSessionCredentialsProvider|null||
 | `--bucket, -b` | Bucket to place offloaded ledger into|null||
 | `--aws-secret, -s` | AWS Credential Secret to use when using driver S3 or aws-s3|null||
-| `--offloadAfterElapsed, -oae` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null||
 | `--region, -r` | The long term storage region, default is s3ManagedLedgerOffloadRegion or gcsManagedLedgerOffloadRegion in broker.conf|null||
+| `--offloadAfterThreshold, -oat` | Offload after threshold size (eg: 1M, 5M)|null||
+| `--readBufferSize, -rbs` | Read buffer size (eg: 1M, 5M), default is 1MB|1048576||
 | `--s3-role, -ro` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null||
-| `--maxBlockSize, -mbs` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|null||
-| `--readBufferSize, -rbs` | Read buffer size (eg: 1M, 5M), default is 1MB|null||
 | `--driver, -d` | Driver to use to offload old data to long term storage, (Possible values: S3, aws-s3, google-cloud-storage, filesystem, azureblob)|null||
 | `--endpoint, -e` | Alternative endpoint to connect to, s3 default is s3ManagedLedgerOffloadServiceEndpoint in broker.conf|null||
 | `--aws-id, -i` | AWS Credential Id to use when using driver S3 or aws-s3|null||
+| `--offloadAfterElapsed, -oae` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null||
 | `--offloadAfterThresholdInSeconds, -oats` | Offload after threshold seconds (or minutes,hours,days,weeks eg: 100m, 3h, 2d, 5w).|null||
 | `--offloadedReadPriority, -orp` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null||
 
@@ -2280,6 +2282,71 @@ Remove entry filters for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-entry-filters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## update-migration-state
+
+Update migration state for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces update-migration-state options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--migrated` | Is namespace migrated|false||
+
+
+## set-dispatcher-pause-on-ack-state-persistent
+
+Enable dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## get-dispatcher-pause-on-ack-state-persistent
+
+Get the dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## remove-dispatcher-pause-on-ack-state-persistent
+
+Remove dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces remove-dispatcher-pause-on-ack-state-persistent options
 ```
 
 **Options:**

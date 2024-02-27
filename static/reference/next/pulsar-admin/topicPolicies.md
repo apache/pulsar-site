@@ -252,8 +252,8 @@ $ pulsar-admin topicPolicies set-retention options
 |Flag|Description|Default|
 |---|---|---|
 | `--size, -s` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null||
-| `--time, -t` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 sets retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy is replicated to other clusters asynchronously, If set to false or not set, the topic retention policy is replicated to local clusters.|false||
+| `--time, -t` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 sets retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null||
 
 
 ## remove-retention
@@ -305,9 +305,9 @@ $ pulsar-admin topicPolicies set-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
+| `-lt, --limitTime` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|null||
 | `-t, --type` | Backlog quota type to set. Valid options are: destination_storage (default) and message_age. destination_storage limits backlog by size. message_age limits backlog by time, that is, message timestamp (broker or publish timestamp). You can set size or time to control the backlog, or combine them together to control the backlog. |destination_storage||
 | `-p, --policy` | Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]|null||
-| `-lt, --limitTime` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|null||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 | `-l, --limit` | Size limit (eg: 10M, 16G)|null||
 
@@ -795,8 +795,8 @@ $ pulsar-admin topicPolicies set-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--threshold, -t` | Maximum number of bytes in a topic backlog before compaction is triggered (eg: 10M, 16G, 3T). 0 disables automatic compaction|0||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
+| `--threshold, -t` | Maximum number of bytes in a topic backlog before compaction is triggered (eg: 10M, 16G, 3T). 0 disables automatic compaction|0||
 
 
 ## remove-compaction-threshold
@@ -956,9 +956,10 @@ $ pulsar-admin topicPolicies set-delayed-delivery options
 |Flag|Description|Default|
 |---|---|---|
 | `--enable, -e` | Enable delayed delivery messages|false||
+| `--maxDelay, -md` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0||
 | `--disable, -d` | Disable delayed delivery messages|false||
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
-| `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1s||
+| `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000||
 
 
 ## remove-delayed-delivery
@@ -1408,6 +1409,58 @@ Remove override of autoSubscriptionCreation for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-auto-subscription-creation options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--global, -g` | Whether to remove this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
+
+
+## set-dispatcher-pause-on-ack-state-persistent
+
+Enable dispatcherPauseOnAckStatePersistent for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
+
+
+## get-dispatcher-pause-on-ack-state-persistent
+
+Get the dispatcherPauseOnAckStatePersistent for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `--applied, -a` | Get the applied policy of the topic|false||
+| `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
+
+
+## remove-dispatcher-pause-on-ack-state-persistent
+
+Remove dispatcherPauseOnAckStatePersistent for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-dispatcher-pause-on-ack-state-persistent options
 ```
 
 **Options:**

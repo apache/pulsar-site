@@ -5,6 +5,10 @@ module.exports = {
       "apacheId": "andrews"
     },
     {
+      "name": "Daniel Blankensteiner",
+      "apacheId": "blankensteiner"
+    },
+    {
       "name": "Bo Cong",
       "apacheId": "bogong"
     },
@@ -15,6 +19,10 @@ module.exports = {
     {
       "name": "Hang Chen",
       "apacheId": "chenhang"
+    },
+    {
+      "name": "David Jensen",
+      "apacheId": "djensen"
     },
     {
       "name": "Enrico Olivelli",
@@ -129,6 +137,10 @@ module.exports = {
       "apacheId": "technoboy"
     },
     {
+      "name": "Zili Chen",
+      "apacheId": "tison"
+    },
+    {
       "name": "Francis Christopher Liu",
       "apacheId": "toffer"
     },
@@ -139,6 +151,10 @@ module.exports = {
     {
       "name": "Yunze Xu",
       "apacheId": "xyz"
+    },
+    {
+      "name": "Yubiao Feng",
+      "apacheId": "yubiao"
     },
     {
       "name": "Yuki Shiga",
@@ -163,16 +179,16 @@ module.exports = {
       "apacheId": "aloyszhang"
     },
     {
+      "name": "Asaf Mesika",
+      "apacheId": "amesika"
+    },
+    {
       "name": "Andrey Yegorov",
       "apacheId": "ayegorov"
     },
     {
       "name": "Baodi Shi",
       "apacheId": "baodi"
-    },
-    {
-      "name": "Daniel Blankensteiner",
-      "apacheId": "blankensteiner"
     },
     {
       "name": "Christophe Bornet",
@@ -201,6 +217,14 @@ module.exports = {
     {
       "name": "Guangning E",
       "apacheId": "guangning"
+    },
+    {
+      "name": "Heesung Sohn",
+      "apacheId": "heesung"
+    },
+    {
+      "name": "Yan Zhao",
+      "apacheId": "horizonzy"
     },
     {
       "name": "Xiaoyu Hou",
@@ -235,6 +259,10 @@ module.exports = {
       "apacheId": "nlu90"
     },
     {
+      "name": "Chris Bono",
+      "apacheId": "onobc"
+    },
+    {
       "name": "Rui Fu",
       "apacheId": "rfu"
     },
@@ -255,12 +283,16 @@ module.exports = {
       "apacheId": "sunfangbin"
     },
     {
-      "name": "Zili Chen",
-      "apacheId": "tison"
-    },
-    {
       "name": "Li Li",
       "apacheId": "urfree"
+    },
+    {
+      "name": "Kiryl Valkovich",
+      "apacheId": "visortelle"
+    },
+    {
+      "name": "Vineeth Polamreddy",
+      "apacheId": "vpolamreddy"
     },
     {
       "name": "Xiangying Meng",
@@ -277,10 +309,6 @@ module.exports = {
     {
       "name": "Yong Zhang",
       "apacheId": "yong"
-    },
-    {
-      "name": "Yubiao Feng",
-      "apacheId": "yubiao"
     },
     {
       "name": "Ruguo Yu",

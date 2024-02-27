@@ -114,7 +114,6 @@ mvn clean install -DskipTests
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
 
 * `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
-* `target/apache-pulsar-2.X.0-src.tar.gz`
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
@@ -219,8 +218,21 @@ Run the following commands:
 
 ```shell
 cd $PULSAR_HOME/docker
+
+# Release before Pulsar 3.0
 ./build.sh
-DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-username> ./publish.sh
+DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
+
+# Release Pulsar 3.0 and later
+DOCKER_USER=<your-username>
+DOCKER_ORG=<docker-organization>
+docker login $DOCKER_ORG -u $DOCKER_USER -p <your-password>
+mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
+    -DskipTests \
+    -Pmain,docker -Pdocker-push \
+    -Ddocker.platforms=linux/amd64,linux/arm64 \
+    -Ddocker.organization=$DOCKER_ORG \
+    -pl docker/pulsar,docker/pulsar-all
 ```
 
 After that, the following images will be built and pushed to your own DockerHub account:
@@ -262,7 +274,7 @@ v2.X.0-candidate-1 (21f4a4cffefaa9391b79d79a7849da9c539af834)
 https://github.com/apache/pulsar/releases/tag/v2.X.0-candidate-1
 
 Pulsar's KEYS file containing PGP keys you use to sign the release:
-https://dist.apache.org/repos/dist/dev/pulsar/KEYS
+https://downloads.apache.org/pulsar/KEYS
 
 Docker images:
 
@@ -307,19 +319,19 @@ Promote the Maven staging repository for release. Login to `https://repository.a
 
 ### Release Docker images
 
-Copy the approved candidate docker images from your personal account to apachepulsar org.
+Please ensure that the regctl tools have been properly installed. They can be obtained from the following link: https://github.com/regclient/regclient/blob/main/docs/install.md
+
+Copy the approved candidate Docker images from your personal account to the apachepulsar organization:
 
 ```bash
-PULSAR_VERSION=2.x.x
+PULSAR_VERSION=3.x.x
 OTHER_DOCKER_USER=otheruser
-for image in pulsar pulsar-all pulsar-grafana pulsar-standalone; do
-    docker pull "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" && {
-      docker tag "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" "apachepulsar/$image:${PULSAR_VERSION}"
-      echo "Pushing apachepulsar/$image:${PULSAR_VERSION}"
-      docker push "apachepulsar/$image:${PULSAR_VERSION}"
-    }
-done
+CANDIDATE_TAG=3.x.x-80fb390
+regctl image copy ${OTHER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:${PULSAR_VERSION}
+regctl image copy ${OTHER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:${PULSAR_VERSION}
 ```
+
+If this release is a feature release or a patch release of the last feature release, you should also push these images to the `latest` tag.
 
 If you don't have the permission, you can ask someone with access to apachepulsar org to do that.
 

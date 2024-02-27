@@ -160,6 +160,8 @@ $ pulsar-admin topics delete options
 |Flag|Description|Default|
 |---|---|---|
 | `-f, --force` | Close all producer/consumer/replicator and delete topic forcefully|false||
+| `--from-file` | Read a list of topics from a file for deletion.|false||
+| `-r, regex` | Use a regex expression to match multiple topics for deletion.|false||
 
 
 ## truncate
@@ -423,8 +425,8 @@ $ pulsar-admin topics expire-messages options
 |Flag|Description|Default|
 |---|---|---|
 | `-e, --exclude-reset-position` | Exclude the reset position, start consume messages from the next position.|false||
+| `-t, --expireTime` | Expire messages older than time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|-1||
 | `-s, --subscription` | Subscription to be skip messages on|null||
-| `-t, --expireTime` | Expire messages older than time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|null||
 | `--position, -p` | message position to reset back to (ledgerId:entryId)|null||
 
 
@@ -684,8 +686,8 @@ $ pulsar-admin topics reset-cursor options
 |Flag|Description|Default|
 |---|---|---|
 | `-e, --exclude-reset-position` | Exclude the reset position, start consume messages from the next position.|false||
-| `--time, -t` | time in minutes to reset back to (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|null||
 | `-s, --subscription` | Subscription to reset position on|null||
+| `--time, -t` | time in minutes to reset back to (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|null||
 | `--messageId, -m` | messageId to reset back to ('latest', 'earliest', or 'ledgerId:entryId')|null||
 
 
@@ -835,10 +837,10 @@ $ pulsar-admin topics set-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-l, --limit` | Size limit (eg: 10M, 16G)|-1||
 | `-p, --policy` | Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]|null||
 | `-t, --type` | Backlog quota type to set. Valid options are: destination_storage and message_age. destination_storage limits backlog by size (in bytes). message_age limits backlog by time, that is, message timestamp (broker or publish timestamp). You can set size or time to control the backlog, or combine them together to control the backlog. |destination_storage||
-| `-lt, --limitTime` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|null||
+| `-l, --limit` | Size limit (eg: 10M, 16G)|-1||
+| `-lt, --limitTime` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|-1||
 
 
 ## remove-backlog-quota
@@ -939,8 +941,8 @@ $ pulsar-admin topics set-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--size, -s` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null||
 | `--time, -t` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 will set retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null||
+| `--size, -s` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null||
 
 
 ## remove-retention
@@ -1139,7 +1141,8 @@ $ pulsar-admin topics set-delayed-delivery options
 |---|---|---|
 | `--disable, -d` | Disable delayed delivery messages|false||
 | `--enable, -e` | Enable delayed delivery messages|false||
-| `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1s||
+| `--maxDelay, -md` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0||
+| `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000||
 
 
 ## remove-delayed-delivery
@@ -1245,15 +1248,15 @@ $ pulsar-admin topics set-offload-policies options
 | `-r, --region` | ManagedLedger offload region, s3 and google-cloud-storage requires this parameter|null||
 | `--s3-role-session-name, -rsn` | S3 role session name used for STSAssumeRoleSessionCredentialsProvider|null||
 | `--offloadedReadPriority, -orp` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null||
-| `-rb, --readBufferSizeInBytes, --readBufferSize, -rbs` | Read buffer size (eg: 1M, 5M), default is 1MBs3 and google-cloud-storage requires this parameter|null||
 | `-e, --endpoint` | ManagedLedger offload service endpoint, only s3 requires this parameter|null||
-| `-m, --maxBlockSizeInBytes, --maxBlockSize, -mbs` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|null||
-| `-dl, --offloadDeletionLagInMillis, --offloadAfterElapsed, -oae` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null||
-| `-ts, --offloadThresholdInSeconds, --offloadAfterThresholdInSeconds, -oats` | Offload after threshold seconds (or minutes,hours,days,weeks eg: 100m, 3h, 2d, 5w).|null||
-| `-i, --aws-id` | AWS Credential Id to use when using driver S3 or aws-s3|null||
-| `-d, --driver` | ManagedLedger offload driver|null||
-| `--ro, --s3-role` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null||
 | `-t, --offloadThresholdInBytes, --offloadAfterThreshold, -oat` | Offload after threshold size (eg: 1M, 5M)|null||
+| `-rb, --readBufferSizeInBytes, --readBufferSize, -rbs` | Read buffer size (eg: 1M, 5M), default is 1MBs3 and google-cloud-storage requires this parameter|1048576||
+| `-i, --aws-id` | AWS Credential Id to use when using driver S3 or aws-s3|null||
+| `-ts, --offloadThresholdInSeconds, --offloadAfterThresholdInSeconds, -oats` | Offload after threshold seconds (or minutes,hours,days,weeks eg: 100m, 3h, 2d, 5w).|null||
+| `-d, --driver` | ManagedLedger offload driver|null||
+| `-dl, --offloadDeletionLagInMillis, --offloadAfterElapsed, -oae` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null||
+| `--ro, --s3-role` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null||
+| `-m, --maxBlockSizeInBytes, --maxBlockSize, -mbs` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|67108864||
 | `-s, --aws-secret` | AWS Credential Secret to use when using driver S3 or aws-s3|null||
 
 
