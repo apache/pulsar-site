@@ -65,7 +65,9 @@ When upgrading an existing Pulsar installation, it's crucial to perform componen
 
 Starting from version 3.0, users have the option to perform live upgrades or downgrades between two consecutive LTS versions or two consecutive feature versions (which also include LTS versions).
 
-For the 3.2 series, you should be able to upgrade from version 3.1 or downgrade from the subsequently released version 3.3. If you are currently using an earlier version, please ensure that you upgrade to version 3.1 before proceeding further.
+For the 3.2 series, you should be able to upgrade from version 3.x. 
+
+Please refer to the [release policy](/contribute/release-policy/) to learn more about the compatibility between releases.
 
 ## Getting started
 
