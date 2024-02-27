@@ -324,7 +324,7 @@ Make sure you have docker available at your laptop. If you haven't installed doc
 1. Set up a cassandra cluster.
 
 ```shell
-docker run -d --rm  --name=cassandra -p 9042:9042 cassandra
+docker run -d --rm  --name=cassandra -p 9042:9042 cassandra:3.11
 ```
 
 Make sure that the cassandra cluster is running.

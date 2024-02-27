@@ -1330,6 +1330,7 @@ $ pulsar-admin namespaces set-delayed-delivery options
 |---|---|---|
 | `--disable, -d` | Disable delayed delivery messages|false||
 | `--enable, -e` | Enable delayed delivery messages|false||
+| `--maxDelay, -md` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0||
 | `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000||
 
 
@@ -1742,6 +1743,7 @@ $ pulsar-admin namespaces set-offload-threshold options
 |Flag|Description|Default|
 |---|---|---|
 | `--size, -s` | Maximum number of bytes stored in the pulsar cluster for a topic before data will start being automatically offloaded to longterm storage (eg: 10M, 16G, 3T, 100). -1 falls back to the cluster's namespace default. Negative values disable automatic offload. 0 triggers offloading as soon as possible.|-1||
+| `--time, -t` | Maximum number of seconds stored on the pulsar cluster for a topic before the broker will start offloading to longterm storage (eg: 10m, 5h, 3d, 2w).|-1||
 
 
 ## get-offload-deletion-lag
@@ -2303,4 +2305,52 @@ $ pulsar-admin namespaces update-migration-state options
 |Flag|Description|Default|
 |---|---|---|
 | `--migrated` | Is namespace migrated|false||
+
+
+## set-dispatcher-pause-on-ack-state-persistent
+
+Enable dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## get-dispatcher-pause-on-ack-state-persistent
+
+Get the dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+
+
+## remove-dispatcher-pause-on-ack-state-persistent
+
+Remove dispatcherPauseOnAckStatePersistent for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces remove-dispatcher-pause-on-ack-state-persistent options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
 

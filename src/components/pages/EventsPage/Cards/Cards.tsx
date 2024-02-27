@@ -9,7 +9,13 @@ const Card: React.FC<data.Resource> = (props) => {
       <h3><a href={props.link}>{props.title}</a></h3>
       {props.displayDate && <p>{props.displayDate}</p>}
       {props.description && <p>{props.description}</p>}
-      <a href={props.link} target="_blank">Learn more</a>
+      {props.link ? (
+        <a href={props.link} target="_blank">
+          Learn more
+        </a>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

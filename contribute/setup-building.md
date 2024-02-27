@@ -18,6 +18,13 @@ On Windows, replace `./mvnw` with `mvnw.cmd` in the commands below.
 
 :::
 
+:::note
+
+Pulsar does not support running server on Windows yet, you have to use Docker to run Pulsar. 
+Please consider checking [Run Pulsar In Docker](https://pulsar.apache.org/docs/3.1.x/getting-started-docker/)
+
+:::
+
 ## Clone
 
 Clone the source code to your development machine:
