@@ -64,7 +64,7 @@ If the produced messages are consumed across application boundaries, you need to
 
      ```shell
      openssl genrsa -out test_rsa_privkey.pem 2048
-     openssl rsa -in test_rsa_privkey.pem -pubout -outform pkcs8 -out test_rsa_pubkey.pem
+     openssl rsa -in test_rsa_privkey.pem -pubout -outform PEM -out test_rsa_pubkey.pem
      ```
 
    </TabItem>

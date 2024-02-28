@@ -69,7 +69,7 @@ To enable end-to-end encryption in Puslar, complete the following steps.
 
      ```shell
      openssl genrsa -out test_rsa_privkey.pem 2048
-     openssl rsa -in test_rsa_privkey.pem -outform PEM -pubout -out test_rsa_pubkey.pem
+     openssl rsa -in test_rsa_privkey.pem -pubout -outform PEM -out test_rsa_pubkey.pem
      ```
 
    </TabItem>
