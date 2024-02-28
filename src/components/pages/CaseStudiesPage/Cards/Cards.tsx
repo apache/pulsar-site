@@ -7,7 +7,12 @@ import SvgIcon from "@site/src/components/ui/SvgIcon/SvgIcon";
 const Card: React.FC<data.Resource> = (props) => {
   return (
     <div className={s.Card}>
-      <a className={s.CardImage} href={props.link} style={{ backgroundImage: `url(${props.image})`, ...props.extraStyles }}>
+      <a
+        target="_blank"
+        className={s.CardImage}
+        href={props.link}
+        style={{ backgroundImage: `url(${props.image})`, ...props.extraStyles }}
+      >
         <div className={s.LinkIcon}>
           <SvgIcon svg={linkIcon} />
         </div>
