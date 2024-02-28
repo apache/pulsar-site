@@ -148,16 +148,16 @@ module.exports = {
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   ({
     image: 'img/pulsar-social-media-card.png',
-    // announcementBar: {
-    //   id: "summit",
-    //   content: renderAnnouncementBar(
-    //     "Register Now for Pulsar Summit North America 2023",
-    //     "https://registration.socio.events/e/pulsarsummitna2023?utm_source=pulsar&utm_medium=website&utm_campaign=banner"
-    //   ),
-    //   backgroundColor: "#282826",
-    //   textColor: "#fff",
-    //   isCloseable: false,
-    // },
+    announcementBar: {
+      id: "summit",
+      content: renderAnnouncementBar(
+        "Submit your stories to Pulsar Summit EMEA! 📣",
+        "https://sessionize.com/pulsar-virtual-summit-europe-2024"
+      ),
+      backgroundColor: "#282826",
+      textColor: "#fff",
+      isCloseable: false,
+    },
     colorMode: {
       disableSwitch: true,
     },
@@ -350,7 +350,7 @@ module.exports = {
       copyright: `
         <div>
           <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
-          Apache Foundation
+          The Apache Software Foundation
         </div>
         <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
         <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
@@ -478,11 +478,8 @@ module.exports = {
   clientModules: [require.resolve("./matomoClientModule.ts")],
   stylesheets: [
     {
-      href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
+      href: "/css/katex-0.13.24.min.css",
       type: "text/css",
-      integrity:
-        "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
-      crossorigin: "anonymous",
       media: "print", // load CSS asynchronously to increase performance of page first load
       onload: "this.media='all'", // load CSS asynchronously to increase performance of page first load
     },

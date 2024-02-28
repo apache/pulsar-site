@@ -103,6 +103,58 @@ git push origin v2.X.0-candidate-1
 
 For patch releases, the tag is like `2.3.1`.
 
+### Cherry-picking changes scheduled for the release
+
+Use a search such as `is:merged is:pr label:release/3.0.3 -label:cherry-picked/branch-3.0` to search for merged PRs that are scheduled for the release, but haven't yet been cherry-picked.
+It is necessary to handle cherry-picks in the same order as they have been merged in the master branch. Otherwise there will be unnecessary merge conflicts to resolve.
+
+Here's a shell script where the output that will ease cherry-picking from master branch:
+assumes `gawk` is gnu awk. install `brew install gawk` or `alias gawk=awk` on Linux.
+```
+UPSTREAM=origin
+git fetch $UPSTREAM
+RELEASE_NUMBER=3.0.3
+RELEASE_BRANCH=branch-3.0
+PR_QUERY="is:merged label:release/$RELEASE_NUMBER -label:cherry-picked/$RELEASE_BRANCH"
+PR_NUMBERS=$(gh pr list --search "$PR_QUERY" --json number --jq '["#"+(.[].number|tostring)] | join("|")')
+ALREADY_PICKED=$(git log --oneline -P --grep="$PR_NUMBERS" --reverse $RELEASE_BRANCH | gawk 'match($0, /\(#([0-9]+)\)/, a) {print substr(a[0], 2, length(a[0])-2)}' | tr '\n' '|' | sed 's/|$//')
+if [[ -n "$ALREADY_PICKED" ]]; then
+  echo "** Already picked but not tagged as cherry-picked **"
+  git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $RELEASE_BRANCH | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
+fi
+echo "** Not cherry-picked from $UPSTREAM/master **"
+git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $UPSTREAM/master | grep --color -v -E "$ALREADY_PICKED" | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
+```
+
+this produces an output such as:
+```
+** Already picked but not tagged as cherry-picked **
+744b7af5fc4 [improve][broker] Support not retaining null-key message during topic compaction (#21578) (#21662) https://github.com/apache/pulsar/pull/21578
+b41013ba45c [improve][broker] defer the ownership checks if the owner is inactive (ExtensibleLoadManager) (#21857) https://github.com/apache/pulsar/pull/21857
+a6fd517ee39 [improve][build] Add a default username in the image (#21695) https://github.com/apache/pulsar/pull/21695
+bbf6ddf9244 [fix] [client] Do no retrying for error subscription not found when disabled allowAutoSubscriptionCreation (#22078) https://github.com/apache/pulsar/pull/22078
+** Not cherry-picked from origin/master **
+ecd16d68e29 [fix][client] fix negative message re-delivery twice issue (#20750) https://github.com/apache/pulsar/pull/20750
+50007c343ad [fix][txn] Fix getting last message ID when there are ongoing transactions (#21466) https://github.com/apache/pulsar/pull/21466
+e81a20d667a [fix][broker] Avoid consumers receiving acknowledged messages from compacted topic after reconnection (#21187) https://github.com/apache/pulsar/pull/21187
+09559c5e661 [fix] [broker] Fix reader stuck when read from compacted topic with read compact mode disable (#21969) https://github.com/apache/pulsar/pull/21969
+48b4481969c [improve] [broker] Do not print an Error log when responding to `HTTP-404` when calling `Admin API` and the topic does not exist. (#21995) https://github.com/apache/pulsar/pull/21995
+861618a8120 [fix] [broker] Expire messages according to ledger close time to avoid client clock skew (#21940) https://github.com/apache/pulsar/pull/21940
+48c7e322fec [improve][admin] Expose the offload threshold in seconds to the amdin (#22101) https://github.com/apache/pulsar/pull/22101
+1c652f5519e [improve] [broker] Do not try to open ML when the topic meta does not exist and do not expect to create a new one. #21995 (#22004) https://github.com/apache/pulsar/pull/22004
+86079059890 [improve][broker] Cache the internal writer when sent to system topic. (#22099) https://github.com/apache/pulsar/pull/22099
+1b1cfb58f4e [fix] [broker] Enabling batch causes negative unackedMessages due to ack and delivery concurrency (#22090) https://github.com/apache/pulsar/pull/22090
+0c49cac105e [fix] [client] fix huge permits if acked a half batched message (#22091) https://github.com/apache/pulsar/pull/22091
+31ed115d0b5 [fix][sec] Add a check for the input time value (#22023) https://github.com/apache/pulsar/pull/22023
+30134966a18 [fix][test] fix test testSyncNormalPositionWhenTBRecover (#22120) https://github.com/apache/pulsar/pull/22120
+91de98ad456 [fix][test] Fix test testAsyncFunctionMaxPending (#22121) https://github.com/apache/pulsar/pull/22121
+```
+
+It will speed up cherry-picking since you commit ids are there and there's also links to the PRs.
+A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`. 
+It's possible that some dependent commits are necessary to be cherry-picked when you encounter a lot of merge conflicts in a case where they aren't expected.
+
+
 ### Build release artifacts
 
 Run the following command to build the artifacts:
@@ -114,7 +166,6 @@ mvn clean install -DskipTests
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
 
 * `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
-* `target/apache-pulsar-2.X.0-src.tar.gz`
 * `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
@@ -320,19 +371,19 @@ Promote the Maven staging repository for release. Login to `https://repository.a
 
 ### Release Docker images
 
-Copy the approved candidate docker images from your personal account to apachepulsar org.
+Please ensure that the regctl tools have been properly installed. They can be obtained from the following link: https://github.com/regclient/regclient/blob/main/docs/install.md
+
+Copy the approved candidate Docker images from your personal account to the apachepulsar organization:
 
 ```bash
-PULSAR_VERSION=2.x.x
+PULSAR_VERSION=3.x.x
 OTHER_DOCKER_USER=otheruser
-for image in pulsar pulsar-all pulsar-grafana pulsar-standalone; do
-    docker pull "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" && {
-      docker tag "${OTHER_DOCKER_USER}/$image:${PULSAR_VERSION}" "apachepulsar/$image:${PULSAR_VERSION}"
-      echo "Pushing apachepulsar/$image:${PULSAR_VERSION}"
-      docker push "apachepulsar/$image:${PULSAR_VERSION}"
-    }
-done
+CANDIDATE_TAG=3.x.x-80fb390
+regctl image copy ${OTHER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:${PULSAR_VERSION}
+regctl image copy ${OTHER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:${PULSAR_VERSION}
 ```
+
+If this release is a feature release or a patch release of the last feature release, you should also push these images to the `latest` tag.
 
 If you don't have the permission, you can ask someone with access to apachepulsar org to do that.
 
