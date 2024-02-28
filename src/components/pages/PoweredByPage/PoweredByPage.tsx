@@ -5,6 +5,7 @@ import Translate from "@docusaurus/Translate";
 import users from "../../../../data/users";
 
 import s from './PoweredByPage.module.css';
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 const PoweredByPage = () => {
   return (
@@ -24,11 +25,21 @@ const PoweredByPage = () => {
             {users.map((c) => (
               <div className={`${s.logo_box}`}>
                 <a href={c.url} title={c.name} target="_blank" className={c.logo_white && s.logo_black_background}>
-                  <img
-                    src={c.logo}
-                    alt={c.name}
-                    className={c.logo.endsWith(".svg") && s.logo_svg}
-                  />
+                  <BrowserOnly>
+                    {() => (
+                      <>
+                        {c.logo === undefined ? (
+                          <span>{c.name}</span>
+                        ) : (
+                          <img
+                            src={c.logo}
+                            alt={c.name}
+                            className={c.logo.endsWith(".svg") && s.logo_svg}
+                          />
+                        )}
+                      </>
+                    )}
+                  </BrowserOnly>
                 </a>
               </div>
             ))}
