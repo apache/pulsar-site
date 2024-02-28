@@ -16,12 +16,12 @@ const CaseStudiesPage: React.FC = () => {
 
   return (
     <Layout
-      title={`Ecosystem`}
+      title={`Case studies`}
       description="Learn about the basics of using Apache Pulsar"
     >
       <Page>
         <section className={s.Header}>
-          <h1>Case Studies</h1>
+          <h1 style={{ color: 'var(--color-primary-dark)', marginBottom: '0'}}>Case Studies</h1>
           <p>Organizations around the globe rely on Apache Pulsar to manage their most demanding real-time requirements.</p>
         </section>
 

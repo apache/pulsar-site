@@ -208,7 +208,7 @@ const users: Users[] = [
   {
     name: "CleverCloud",
     url: "https://www.clever-cloud.com/en/",
-    logo: "https://www.clever-cloud.com/app/themes/cc-wp-theme/assets/img/brand-assets/logo_on_white.png",
+    logo: '/img/clever-cloud.svg'
   },
   {
     name: "OVHcloud",
@@ -303,10 +303,8 @@ const users: Users[] = [
     logo: "https://www.kaisafin.com/images/logo.svg",
   },
   {
-    name: "Bairong.Inc",
+    name: "Bairong Inc.",
     url: "http://www.brgroup.com",
-    logo: "http://www.brgroup.com/_nuxt/img/d2a976e.png",
-    logo_white: true,
   },
   {
     name: "Itcast.cn",
@@ -324,9 +322,9 @@ const users: Users[] = [
     logo: "https://pandio-public-assets.s3-us-west-2.amazonaws.com/pandio_225-05.png",
   },
   {
-    name: "Deposit-Solutions",
+    name: "Deposit Solutions",
     url: "https://www.deposit-solutions.com/",
-    logo: "https://www.altfi.com/images/companies/deposit-solutions.png",
+    logo: "/img/deposit-solutions.png",
   },
   {
     name: "Macrometa",
@@ -346,7 +344,7 @@ const users: Users[] = [
   {
     name: "Dominos-Pizza",
     url: "https://www.dominos.com.cn/home",
-    logo: "https://www.dominos.com.cn/assets/img/logo.087b3fea.png",
+    logo: "/img/dominos-pizza.svg",
   },
   {
     name: "MGTV",
