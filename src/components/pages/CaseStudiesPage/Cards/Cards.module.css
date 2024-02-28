@@ -4,8 +4,7 @@
   grid-gap: 1rem;
 }
 
-.Card {
-}
+.Card {}
 
 .CompanyName {
   font-size: 2rem;
@@ -14,6 +13,7 @@
 }
 
 .CardImage {
+  position: relative;
   display: block;
   height: 16rem;
   padding: 2rem;
@@ -32,8 +32,26 @@
   transition: var(--transition-short);
 }
 
+.LinkIcon {
+  fill: var(--text-color);
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: none;
+}
+
+.LinkIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.CardImage:hover .LinkIcon {
+  display: inline-flex;
+}
+
 @media (max-width: 800px) {
   .Cards {
     grid-template-columns: 1fr;
+    gap: 4rem;
   }
 }

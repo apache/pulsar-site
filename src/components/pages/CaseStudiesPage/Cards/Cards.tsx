@@ -1,11 +1,17 @@
 import React from "react";
 import s from './Cards.module.css';
 import * as data from '@site/data/case-studies';
+import linkIcon from '!!raw-loader!./link.svg';
+import SvgIcon from "@site/src/components/ui/SvgIcon/SvgIcon";
 
 const Card: React.FC<data.Resource> = (props) => {
   return (
     <div className={s.Card}>
-      <a className={s.CardImage} href={props.link} style={{ backgroundImage: `url(${props.image})`, ...props.extraStyles }}></a>
+      <a className={s.CardImage} href={props.link} style={{ backgroundImage: `url(${props.image})`, ...props.extraStyles }}>
+        <div className={s.LinkIcon}>
+          <SvgIcon svg={linkIcon} />
+        </div>
+      </a>
       <h3 className={s.CompanyName}>{props.company}</h3>
       {props.description && <p>{props.description}</p>}
     </div >

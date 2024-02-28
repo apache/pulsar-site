@@ -181,8 +181,7 @@ const users: Users[] = [
   },
   {
     name: "CTWing",
-    url: "https://www.ctwing.cn/",
-    logo: "https://www.ctwing.cn/r/cms/www/default/images/public/logo.png",
+    url: "https://www.ctwing.cn/"
   },
   //   {
   //     name: "Globalegrow E-Commerce",
