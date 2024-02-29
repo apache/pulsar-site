@@ -56,7 +56,7 @@ Consumer<String> consumer = client
   .topic("persistent://my-tenant/my-namespace/my-topic")
   .subscriptionName("my-subscription")
   .subscriptionType(SubscriptionType.Shared)
-  .subscriptionIsolationLevel(SubscriptionIsolationLevel.READ_COMMITTED) // Adding the isolation level configuration
+  .subscriptionIsolationLevel(SubscriptionIsolationLevel.READ_UNCOMMITTED) // Adding the isolation level configuration
   .subscribe();
 ```
 
