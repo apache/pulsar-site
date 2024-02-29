@@ -40,7 +40,7 @@ If you want to enable authentication with transactions, follow the steps below.
 ## Select transaction isolation level
 
 To enhance the flexibility of Pulsar transactions, they support two distinct isolation levels:
-- READ_COMMITTED, Consumer can only consume all transactional messages which have been committed.
+- `READ_COMMITTED`(default): The consumer can only consume all transactional messages that have been committed.
 - READ_UNCOMMITTED, Consumer can consume all messages, even transactional messages which have been aborted.
 
 For different scenarios, they use different subscriptions and choose different isolation levels. One needs transaction, one does not. In general, multiple subscriptions of the same topic do not all
