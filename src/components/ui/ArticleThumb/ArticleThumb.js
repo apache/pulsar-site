@@ -54,7 +54,7 @@ const ArticleThumb = () => {
         className={s.RequestImprovementButton}
         href="https://github.com/apache/pulsar/issues/new?assignees=&labels=doc-required&projects=&template=doc.yml&title=%5BDoc%5D+"
       >
-        Request page improvement
+        🛟 I don't understand it
       </a>
     </div>
   );
