@@ -43,8 +43,7 @@ To enhance the flexibility of Pulsar transactions, they support two distinct iso
 - `READ_COMMITTED`(default): The consumer can only consume all transactional messages that have been committed.
 - `READ_UNCOMMITTED`: The consumer can consume all messages, even transactional messages that have been aborted.
 
-For different scenarios, they use different subscriptions and choose different isolation levels. One needs transaction, one does not. In general, multiple subscriptions of the same topic do not all
-require transaction guarantees. Some want low latency without the exact-once semantic guarantee (like a real-time monitoring system), and some must require the exactly-once guarantee (e.g., business processing systems).
+For different scenarios, they use different subscriptions and choose different isolation levels. One scenario might require transactions, while another might not. In general, not all subscriptions of the same topic require transaction guarantees. Some want low latency without the exact-once semantic guarantee (like a real-time monitoring system), and some must require the exactly-once guarantee (e.g., business processing systems).
 Users can freely choose different isolation levels according to different scenarios.
 
 Note that this is a subscription dimension configuration, and all consumers under the same subscription need to be configured with the same IsolationLevel.
