@@ -49,7 +49,7 @@ Users can freely choose different isolation levels according to different scenar
 
 Note that this is a subscription dimension configuration, and all consumers under the same subscription need to be configured with the same IsolationLevel.
 
-This example selects READ_UNCOMMITTED Isolation level in the consumer builder:
+This example selects `READ_UNCOMMITTED` Isolation level in the consumer builder:
 
 ```java
 Consumer<String> consumer = client
