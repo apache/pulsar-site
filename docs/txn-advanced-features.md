@@ -46,7 +46,7 @@ To enhance the flexibility of Pulsar transactions, they support two distinct iso
 For different scenarios, they use different subscriptions and choose different isolation levels. One scenario might require transactions, while another might not. In general, not all subscriptions of the same topic require transaction guarantees. Some want low latency without the exact-once semantic guarantee (like a real-time monitoring system), and some must require the exactly-once guarantee (e.g., business processing systems).
 Users can freely choose different isolation levels according to different scenarios.
 
-Note that this is a subscription-level configuration, and all consumers under the same subscription must be configured with the same `IsolationLevel`.
+Note that this is a subscription-level configuration, and all consumers under the same subscription must be configured with the same isolation level.
 
 In this example, the consumer builder uses the `READ_UNCOMMITTED` isolation level.
 
