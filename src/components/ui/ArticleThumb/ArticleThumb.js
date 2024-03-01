@@ -49,13 +49,23 @@ const ArticleThumb = () => {
           <ThumbDown />
         </div>
       </div>
-      <a
-        target='_blank'
-        className={s.RequestHelpButton}
-        href="https://github.com/apache/pulsar/discussions/new?category=q-a"
-      >
-        🛟 I don't understand it
-      </a>
+
+      <div className={s.Actions}>
+        <a
+          target='_blank'
+          className={s.Action}
+          href="https://github.com/apache/pulsar/issues/new?assignees=&labels=doc-required&projects=&template=doc.yml&title=%5BDoc%5D+"
+        >
+          💡 Suggest changes
+        </a>
+        <a
+          target='_blank'
+          className={s.Action}
+          href="https://github.com/apache/pulsar/discussions/new?category=q-a"
+        >
+          🛟 Get support
+        </a>
+      </div>
     </div>
   );
 };
