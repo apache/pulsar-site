@@ -38,9 +38,9 @@ const ShortInfo: React.FC = () => {
             </div>
 
             <p className={s.case_studies}>
-              Pulsar is proven at scale by <strong>Yahoo!</strong>, <strong>Discord</strong>, <strong>Cisco</strong>, <strong>Intuit</strong>, <strong>Tencent</strong>, and many other companies.
+              Pulsar is proven at scale by hundreds of companies of different sizes, serving millions of messages per second.
               <br />
-              <a href="/case-studies">See the list</a>
+              <a href="/case-studies">See case studies</a>
             </p>
           </div>
         </Parallax>
