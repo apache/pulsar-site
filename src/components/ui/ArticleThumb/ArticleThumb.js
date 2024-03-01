@@ -51,8 +51,8 @@ const ArticleThumb = () => {
       </div>
       <a
         target='_blank'
-        className={s.RequestImprovementButton}
-        href="https://github.com/apache/pulsar/issues/new?assignees=&labels=doc-required&projects=&template=doc.yml&title=%5BDoc%5D+"
+        className={s.RequestHelpButton}
+        href="https://github.com/apache/pulsar/discussions/new?category=q-a"
       >
         🛟 I don't understand it
       </a>
