@@ -68,6 +68,6 @@ Data written to BookKeeper is replicated to 3 physical machines by default. Howe
 
 Before offloading ledgers to long-term storage, you need to configure buckets, credentials, and other properties for the cloud storage service. Additionally, Pulsar uses multi-part objects to upload the segment data and brokers may crash while uploading the data. It is recommended that you add a life cycle rule for your bucket to expire incomplete multi-part upload after a day or two days to avoid getting charged for incomplete uploads. Moreover, you can trigger the offloading operation manually (via REST API or CLI) or automatically (via CLI).
 
-After offloading ledgers to long-term storage, you can still query data in the offloaded ledgers with Pulsar SQL.
+After transferring ledgers to long-term storage, the messages within these ledgers remain accessible to Pulsar consumers and readers, ensuring transparency in data retrieval. Additionally, you can query data in the offloaded ledgers using Pulsar SQL..
 
 For more information about tiered storage for Pulsar topics, see [PIP-17](https://github.com/apache/pulsar/wiki/PIP-17:-Tiered-storage-for-Pulsar-topics) and [offload metrics](reference-metrics.md#offload-metrics).
