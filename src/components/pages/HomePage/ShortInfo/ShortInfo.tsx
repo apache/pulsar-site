@@ -19,7 +19,7 @@ const ShortInfo: React.FC = () => {
         <Parallax>
           <div className={s.docs_container}>
             <h1 className={s.header}>
-              <span className={s.title}>Apache Pulsar™</span><br/>
+              <span className={s.title}>Apache Pulsar™</span><br />
               <span className={s.subtitle}>Cloud-Native, Distributed Messaging and Streaming</span>
             </h1>
             <span className={s.text}>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud. </span>
@@ -36,6 +36,12 @@ const ShortInfo: React.FC = () => {
                 href={`${siteConfig.baseUrl}docs/${latestVersion}/concepts-overview`}
               />
             </div>
+
+            <p className={s.case_studies}>
+              Pulsar is proven at scale by <strong>Yahoo!</strong>, <strong>Discord</strong>, <strong>Cisco</strong>, <strong>Intuit</strong>, <strong>Tencent</strong>, and many other companies.
+              <br />
+              <a href="/case-studies">See the list</a>
+            </p>
           </div>
         </Parallax>
       </div>
