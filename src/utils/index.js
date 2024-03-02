@@ -1,6 +1,6 @@
 import compareVersions from 'compare-versions';
 
-import users from '../../data/users';
+import users from '../../data/powered-by';
 // const featuredUsers = users.filter((x) => x.hasOwnProperty("featured"));
 // featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
 import versions from '../../versions.json';
