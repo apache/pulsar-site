@@ -1,11 +1,11 @@
-type Users = {
+type PoweredByUser = {
   name: string,
   url: string,
-  logo: string,
+  logo?: string,
   logo_white?: boolean,
 }
 
-const users: Users[] = [
+const users: PoweredByUser[] = [
   {
     name: "Kingsoft Cloud",
     url: "https://www.ksyun.com/",

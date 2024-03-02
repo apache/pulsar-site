@@ -6,6 +6,7 @@ import Input from "@site/src/components/ui/Input/Input";
 import Select from "@site/src/components/ui/Select/Select";
 import Page from "@site/src/components/ui/Page/Page";
 import s from './EcosystemPage.module.css';
+import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/ContributeDataDrivenPage";
 
 type CategoryFilterOption = data.Category | 'any';
 const categoryFilterOptions = ['any', ...data.categories] as const;
@@ -24,6 +25,7 @@ const EcosystemPage: React.FC = () => {
           <h1>Ecosystem</h1>
           <p>To build better streaming data pipelines and event-driven applications, you can use the powerful extensions to Pulsar, including <a href="/docs/next/io-overview">connectors</a>, protocol handlers, tools, and more. Additionally, you can develop applications using <a href="/docs/next/client-libraries">client libraries</a>.</p>
           <p>This page lists both built-in and third-party tools. Note that some of the third-party tools were not tested throughly by the community, and may not work as expected. Only open source components with an <a href="https://opensource.org/licenses">OSI&nbsp;approved licenses</a> are allowed. </p>
+          <ContributeDataDrivenPage />
         </section>
 
         <section>

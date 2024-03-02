@@ -1,8 +1,7 @@
 import * as React from "react";
 import Layout from "@theme/Layout";
 import TeamTable from "../components/pages/CommunityPage/TeamTable";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Translate, { translate } from "@docusaurus/Translate";
+import ContributeDataDrivenPage from '../components/ui/ContributeDataDrivenPage/ContributeDataDrivenPage';
 import team from "../../data/team";
 
 export default function page(props) {
@@ -33,6 +32,10 @@ export default function page(props) {
               project is unbounded. Get involved today. All contributions to the
               project are greatly appreciated.
             </translate>
+          </p>
+
+          <p>
+            <ContributeDataDrivenPage />
           </p>
 
           <h2>

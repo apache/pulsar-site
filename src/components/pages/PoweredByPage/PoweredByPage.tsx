@@ -2,10 +2,11 @@ import * as React from "react";
 
 import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
-import users from "../../../../data/users";
+import users from "../../../../data/powered-by";
 
 import s from './PoweredByPage.module.css';
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/ContributeDataDrivenPage";
 
 const PoweredByPage = () => {
   return (
@@ -18,6 +19,7 @@ const PoweredByPage = () => {
                 Companies using or contributing to Apache Pulsar
               </Translate>
             </h2>
+            <ContributeDataDrivenPage />
             <hr />
           </header>
 
