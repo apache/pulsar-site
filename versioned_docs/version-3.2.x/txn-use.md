@@ -5,22 +5,22 @@ sidebar_label: "Get started"
 description: Get started to use Pulsar transaction API.
 ---
 
-Pulsar transaction is primarily a server-side and protocol-level feature. This tutorial guides you through every step of how to use the [Pulsar transaction API](/api/admin/) to send and receive messages in a Java client. 
+Pulsar transaction is primarily a server-side and protocol-level feature. This tutorial guides you through every step of how to use the [Pulsar transaction API](/api/admin/) to send and receive messages in a Java client.
 
 :::note
 
-Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java** clients. 
+Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java** clients.
 
 :::
 ## Prerequisites
 
-- [Start Pulsar 2.8.0 or later versions](#getting-started-standalone.md)
+- [Start Pulsar 2.8.0 or later versions](getting-started-standalone.md)
 
 ## Steps
 
 To use Pulsar transaction API, complete the following steps.
 
-1. Enable transactions. 
+1. Enable transactions.
 
     You can set the following configurations in the [`broker.conf`](https://github.com/apache/pulsar/blob/master/conf/broker.conf) or [`standalone.conf`](https://github.com/apache/pulsar/blob/master/conf/standalone.conf) file.
 
@@ -55,7 +55,7 @@ To use Pulsar transaction API, complete the following steps.
     ```
 
 3. Create a Pulsar client and enable transactions.
-   
+
 4. Create producers and consumers.
 
 5. Produce and receive messages.
@@ -111,11 +111,11 @@ To use Pulsar transaction API, complete the following steps.
             // Step 5: consume messages and produce them to output topics with transactions.
             for (int i = 0; i < count; i++) {
 
-                // Step 5: the consumer successfully receives messages. 
+                // Step 5: the consumer successfully receives messages.
                 Message<String> message = inputConsumer.receive();
-        
-                // Step 6: create transactions. 
-                // The transaction timeout is specified as 10 seconds. 
+
+                // Step 6: create transactions.
+                // The transaction timeout is specified as 10 seconds.
                 // If the transaction is not committed within 10 seconds, the transaction is automatically aborted.
                 Transaction txn = null;
                 try {
