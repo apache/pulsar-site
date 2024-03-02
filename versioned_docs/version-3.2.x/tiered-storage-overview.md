@@ -83,6 +83,6 @@ Tiered storage works as follows:
 
 5. Moreover, you can trigger the offloading operation manually (via REST API or CLI) or automatically (via CLI).
 
-6. After offloading ledgers to long-term storage, you can still query data in the offloaded ledgers with Pulsar SQL.
+6. After transferring ledgers to long-term storage, the messages within these ledgers remain accessible to Pulsar consumers and readers, ensuring transparency in data retrieval.
 
 For more information about tiered storage for Pulsar topics, see [PIP-17](https://github.com/apache/pulsar/wiki/PIP-17:-Tiered-storage-for-Pulsar-topics) and [offload metrics](reference-metrics.md#offload-metrics).
