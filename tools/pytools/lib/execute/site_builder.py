@@ -37,7 +37,7 @@ def execute(asf_site: Path):
     yarn = find_command('yarn', msg="yarn is required")
     node = find_command('node', msg="node is required")
     bash = find_command('bash', msg="bash is required")
-    run(yarn, '--version', cwd=site_path())
+    run(bash, '-c', 'echo yarn_version && yarn --version', cwd=site_path())
     run(yarn, 'install', '--immutable', cwd=site_path())
     run(node, 'scripts/replace.js', cwd=site_path())
     run(bash, 'scripts/split-version-build.sh', *modified_files, cwd=site_path())
