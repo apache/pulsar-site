@@ -22,7 +22,7 @@ Deploying a multi-cluster Pulsar instance on bare metal consists of the followin
 
 ## System requirement
 
-Currently, Pulsar is available for 64-bit **macOS**, **Linux** and Pulsar is usable through Docker in **Windows**. See [Running Pulsar In Docker](https://pulsar.apache.org/docs/next/getting-started-docker/) for deeper understanding. To use Pulsar, you need to install 64-bit JRE/JDK.
+Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK.
 For the runtime Java version, please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
 
 :::note
