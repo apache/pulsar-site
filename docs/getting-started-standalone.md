@@ -17,7 +17,9 @@ To run Pulsar in standalone mode on your machine, follow the steps below.
 
 ## Step 0: Prerequisites
 
-- JRE (64-bit). Different Pulsar versions rely on different JRE versions. For how to choose the JRE version, see [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
+Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**.
+
+Also, you need the proper 64-bit JRE/JDK version installed. Please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
 
 ## Step 1: Download Pulsar distribution
 
