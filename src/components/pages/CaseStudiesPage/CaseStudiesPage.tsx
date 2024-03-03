@@ -19,6 +19,7 @@ const CaseStudiesPage: React.FC = () => {
     <Layout
       title={`Case studies`}
       description="Learn about the basics of using Apache Pulsar"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <section className={s.Header}>

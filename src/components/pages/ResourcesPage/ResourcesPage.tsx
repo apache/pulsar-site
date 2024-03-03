@@ -18,6 +18,7 @@ const CaseStudiesPage: React.FC = () => {
     <Layout
       title={`Resources`}
       description="Learn about the basics of using Apache Pulsar"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <div className={s.TopBlock}>

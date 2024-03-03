@@ -14,6 +14,7 @@ const HomePage = () => {
     <Layout
       title={"Apache Pulsar"}
       description={"Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud."}
+      wrapperClassName="LandingPage"
     >
       <div className={s.Page}>
         <div className={s.Background}></div>

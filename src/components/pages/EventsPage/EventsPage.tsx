@@ -17,6 +17,7 @@ const CaseStudiesPage: React.FC = () => {
     <Layout
       title={`Events`}
       description="Apache Pulsar Events"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <div className={s.TopBlock}>
