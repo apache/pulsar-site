@@ -6,26 +6,26 @@ const { renderAnnouncementBar } = require("./src/components/ui/renderAnnouncemen
 const versions = require("./versions.json");
 const latestVersion = versions[0];
 const versionsMap = {
-    ..._.keyBy(
-        versions.map((item) => {
-            return {
-                label: item,
-                path: item,
-            };
-        }),
-        "label"
-    ),
-    current: {
-        label: "Next",
-        path: "next",
-    },
+  ..._.keyBy(
+    versions.map((item) => {
+      return {
+        label: item,
+        path: item,
+      };
+    }),
+    "label"
+  ),
+  current: {
+    label: "Next",
+    path: "next",
+  },
 };
 
 let buildVersions = ["current"];
 try {
-    buildVersions = require("./.build-versions.json");
+  buildVersions = require("./.build-versions.json");
 } catch (error) {
-    //do nothing
+  //do nothing
 }
 
 const oldUrl = "https://pulsar.apache.org";
@@ -45,86 +45,86 @@ const math = require('remark-math');
 const katex = require('rehype-katex');
 
 const injectLinkParse = ([, prefix, , name, path]) => {
-    if (prefix == "javadoc") {
-        return {
-            link: javadocUrl + path,
-            text: name,
-        };
-    } else if (prefix == "github") {
-        return {
-            link: githubUrl + "/tree/master/" + path,
-            text: name,
-        };
-    } else if (prefix == "rest") {
-        return {
-            link: restApiUrl + "#" + path,
-            text: name,
-        };
-    } else if (prefix == "functions") {
-        return {
-            link: functionsApiUrl + "#" + path,
-            text: name,
-        };
-    } else if (prefix == "source") {
-        return {
-            link: sourceApiUrl + "#" + path,
-            text: name,
-        };
-    } else if (prefix == "sink") {
-        return {
-            link: sinkApiUrl + "#" + path,
-            text: name,
-        };
-    } else if (prefix == "packages") {
-        return {
-            link: packagesApiUrl + "#" + path,
-            text: name,
-        };
-    }
-
+  if (prefix == "javadoc") {
     return {
-        link: path,
-        text: name,
+      link: javadocUrl + path,
+      text: name,
     };
+  } else if (prefix == "github") {
+    return {
+      link: githubUrl + "/tree/master/" + path,
+      text: name,
+    };
+  } else if (prefix == "rest") {
+    return {
+      link: restApiUrl + "#" + path,
+      text: name,
+    };
+  } else if (prefix == "functions") {
+    return {
+      link: functionsApiUrl + "#" + path,
+      text: name,
+    };
+  } else if (prefix == "source") {
+    return {
+      link: sourceApiUrl + "#" + path,
+      text: name,
+    };
+  } else if (prefix == "sink") {
+    return {
+      link: sinkApiUrl + "#" + path,
+      text: name,
+    };
+  } else if (prefix == "packages") {
+    return {
+      link: packagesApiUrl + "#" + path,
+      text: name,
+    };
+  }
+
+  return {
+    link: path,
+    text: name,
+  };
 };
 
 const injectLinkParseForEndpoint = ([, info]) => {
-    let [method, path, suffix] = info.split("|");
+  let [method, path, suffix] = info.split("|");
 
-    if (!suffix) {
-        suffix = "";
+  if (!suffix) {
+    suffix = "";
+  }
+
+  let restPath = path.split("/");
+  const restApiVersion = restPath[2];
+  const restApiType = restPath[3];
+  const restBaseUrl = {
+    functions: functionsApiUrl,
+    source: sourceApiUrl,
+    sink: sinkApiUrl,
+    packages: packagesApiUrl,
+    transactions: transactionsApiUrl,
+    lookup: lookupApiUrl
+  }[restApiType] || restApiUrl;
+
+  let restUrl;
+  if (suffix.indexOf("?version=") >= 0) {
+    const suffixAndVersion = suffix.split("?version=")
+    restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" + suffixAndVersion[0];
+    if (suffixAndVersion[0].startsWith("operation/")) {
+      path += suffixAndVersion[0].slice("operation".length)
     }
-
-    let restPath = path.split("/");
-    const restApiVersion = restPath[2];
-    const restApiType = restPath[3];
-    const restBaseUrl = {
-      functions: functionsApiUrl,
-      source: sourceApiUrl,
-      sink: sinkApiUrl,
-      packages: packagesApiUrl,
-      transactions: transactionsApiUrl,
-      lookup: lookupApiUrl
-    }[restApiType] || restApiUrl;
-
-    let restUrl;
-    if (suffix.indexOf("?version=") >= 0) {
-        const suffixAndVersion = suffix.split("?version=")
-        restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" + suffixAndVersion[0];
-        if (suffixAndVersion[0].startsWith("operation/")) {
-          path += suffixAndVersion[0].slice("operation".length)
-        }
-    } else {
-        restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
-        if (suffix.startsWith("operation/")) {
-          path += suffix.slice("operation".length)
-        }
+  } else {
+    restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
+    if (suffix.startsWith("operation/")) {
+      path += suffix.slice("operation".length)
     }
+  }
 
-    return {
-        text: method + " " + path,
-        link: restBaseUrl + "?" + restUrl,
-    };
+  return {
+    text: method + " " + path,
+    link: restBaseUrl + "?" + restUrl,
+  };
 };
 
 /** @type {import('@docusaurus/types').Config} */
@@ -160,6 +160,16 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: true,
+    },
+    zoom: {
+      selector: '.markdown img',
+      background: {
+        light: '#fff',
+        dark: '#111'
+      },
+      config: {
+        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+      }
     },
     navbar: {
       title: "",
@@ -343,11 +353,11 @@ module.exports = {
                   </a>
                 </div>
               `,
-            },
-          ],
-        },
-      ],
-      copyright: `
+              },
+            ],
+          },
+        ],
+        copyright: `
         <div>
           <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
           The Apache Software Foundation
@@ -413,6 +423,7 @@ module.exports = {
             require.resolve("./src/css/docs.css"),
             require.resolve("./src/css/base-table.css"),
             require.resolve("./src/css/typography.css"),
+            require.resolve("./src/css/image-zoom.css"),
             require.resolve("./src/css/announcement-bar.css"),
             require.resolve("./src/css/navbar.css"),
             require.resolve("./src/css/footer.css"),
@@ -426,6 +437,7 @@ module.exports = {
     ],
   ],
   plugins: [
+    'docusaurus-plugin-image-zoom',
     [
       "content-docs",
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
