@@ -10,7 +10,7 @@ import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/Contribu
 
 const PoweredByPage = () => {
   return (
-    <Layout>
+    <Layout wrapperClassName="LandingPage">
       <div className="tailwind">
         <div className="my-12 container">
           <header>

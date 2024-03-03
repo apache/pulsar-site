@@ -19,6 +19,7 @@ const EcosystemPage: React.FC = () => {
     <Layout
       title={`Ecosystem`}
       description="Learn about the basics of using Apache Pulsar"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <section className={s.Header}>
