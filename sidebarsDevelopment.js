@@ -58,6 +58,7 @@ const sidebars = {
                     items: [
                         'create-gpg-keys',
                         'release-note-guide',
+                        'setup-mergetool'
                     ]
                 },
                 'validate-release-candidate',
