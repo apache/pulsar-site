@@ -80,6 +80,7 @@ Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 
                     // Step 3: create a Pulsar client and enable transactions.
                     .enableTransaction(true)
                     .serviceUrl(jct.serviceUrl)
+                    .build();
 
             // Step 4: create three producers to produce messages to input and output topics.
             ProducerBuilder<String> producerBuilder = client.newProducer(Schema.STRING);
