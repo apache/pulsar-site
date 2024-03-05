@@ -90,6 +90,78 @@ sudo apt install git-gui
 
 There are many tools available for this purpose, but `git gui` is one of the simplest and most effective.
 
+### Additional Git tuning
+
+#### Git configuration
+
+Increase default renamed file detection limit with mergetool and difftool
+```shell
+git config --global merge.renameLimit 2048
+git config --global diff.renameLimit 2048
+```
+
+Enable [rerere](https://git-scm.com/book/en/v2/Git-Tools-Rerere), "reuse recorded resolution" for Git.
+```shell
+git config --global rerere.enabled true
+```
+Notice! In some cases, it might be useful to disable rerere after an invalid merge resolution. In that case you will need to use `git rerere forget file` to forget the merge result.
+
+#### Install `tig` command line UI for git.
+
+`tig` is handy for viewing the git log and it can also be used for staging files and assisting with `git` command line usage.
+
+MacOS
+```shell
+brew install tig
+```
+
+Ubuntu Linux
+```shell
+sudo apt install tig
+```
+
+There are also other more feature rich alternatives such as [`gitui`](https://github.com/extrawurst/gitui) or [`lazygit`](https://github.com/jesseduffield/lazygit).
+
+#### Install `gh` command line tool for GitHub.
+
+Installing with `brew`, for other package managers, follow instructions at https://cli.github.com/. 
+
+```shell
+brew install gh
+```
+
+After installing authenticate to GitHub
+```shell
+gh auth login
+```
+
+#### Checking out each maintenance branch in a separate working directory
+
+For maintaining Pulsar, it is handy to have all maintenance branches checked out in separate working directories
+
+Check out Pulsar repository
+```shell
+# assuming that GitHub autentication has been configured with "gh auth login"
+git checkout https://github.com/apache/pulsar
+cd pulsar
+```
+
+Add separate working directories that share the local git repository in the checked out directory
+```shell
+for branch in branch-3.2 branch-3.1 branch-3.0; do 
+   git worktree add ../pulsar-$branch $branch
+done
+```
+
+After this you would have these directories in the same level as the original checked out `pulsar` directory:
+```
+pulsar-branch-3.2
+pulsar-branch-3.1
+pulsar-branch-3.0
+```
+
+There a limitation that each branch can only be checked out in one working directory at a time. If that becomes a problem you could temporarily detach the current branch in the working directory with `git commit --detach HEAD` command.
+
 ### Using IntelliJ for cherry-picking and merge conflict resolution.
 
 - [Cherry-pick separate commits](https://www.jetbrains.com/help/idea/apply-changes-from-one-branch-to-another.html#cherry-pick)
