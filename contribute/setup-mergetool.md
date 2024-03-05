@@ -8,7 +8,10 @@ title: Setting up Git mergetool
 For Apache Pulsar core developers, handling git merge conflict resolution is necessary. 
 To efficiently resolve merge conflicts, setting up tools that assist in visualizing these conflicts and resolving them is essential. 
 
-Here's an example of how to set up kdiff3 as a mergetool.
+For developers starting to use automated tools to resolve merge conflicts during cherry-picking, IntelliJ is a recommended option. It offers excellent tooling, but its integration with a command-line workflow is not seamless. It performs well when you initiate the cherry-picking process in IntelliJ and handle the merge conflict resolution within the same environment. However, resolving a merge conflict often involves multiple steps, including reverting and amending changes until a satisfactory resolution is achieved. In many cases, using a combination of tools may be more effective than relying solely on IntelliJ for all required operations.
+
+For more advanced users who use `git` on the command line, setting up the `git mergetool` is recommended. 
+Here's an example of how to set up `kdiff3` as a mergetool.
 
 ### kdiff3 configuration on MacOS
 
@@ -57,9 +60,19 @@ One of the advantages of `kdiff3` is that it contains a custom merge algorithm w
 without requiring a choice. In some cases, there may be chances for mistakes, but these are rare and could also occur when
 manually choosing the resolution. The resolution will need to be verified in any case.
 
+Tips for Using `kdiff3`
+- When the merge conflict resolution process begins, a view with three panes and a split pane at the bottom of the window will appear.
+    - The left pane displays the diff from the common version of the file. This can be confusing and is often not very useful. You can hide it by deselecting "Window -> Show Window A".
+    - The middle pane shows the local version.
+    - The right pane shows the remote version.
+    - The bottom pane is the output, which is the result of the merge. You can also make manual edits in this pane to resolve conflicts manually.
+- It's beneficial to learn how to navigate to the next and previous merge conflict and how to choose the resolution using keyboard shortcuts.
+    - On MacOS, you may need to remap some of the keyboard shortcuts to improve usability. This is especially necessary when using an external keyboard.
+
 ### Git revert and commit amending tooling
 
-When resolving merge conflicts, using merge tooling might be more tedious than reverting some changes and making modifications to the original source code in an IDE.
+Resolving merge conflicts can sometimes be more complex with merge tools than simply reverting some changes and modifying the original source code in an IDE. This process may involve multiple steps, including reverting and amending changes to the merge commit. The merge commit should also incorporate the necessary changes for backporting.
+In many cases, it is also necessary to fix the import statements in an IDE and amending those changes to the merge commit.
 
 For this purpose, the `git gui` tool is excellent. It allows for partial reverts to previous commits and makes it easy to amend additional changes to the latest commit, all with clear visualization.
 
@@ -77,10 +90,13 @@ sudo apt install git-gui
 
 There are many tools available for this purpose, but `git gui` is one of the simplest and most effective.
 
+### Using IntelliJ for cherry-picking and merge conflict resolution.
+
+- [Cherry-pick separate commits](https://www.jetbrains.com/help/idea/apply-changes-from-one-branch-to-another.html#cherry-pick)
+- [Resolving Git Merge Conflicts: The Easy Way](https://www.youtube.com/watch?v=mSfq1SoMocg)
+
 ### Useful links
 
 - [Comparison of git mergetools](https://www.eseth.org/2020/mergetools.html)
 - [Comparison of file comparison tools](https://en.wikipedia.org/wiki/Comparison_of_file_comparison_tools#General)
 - [Git GUI Clients](https://git-scm.com/downloads/guis)
-
-
