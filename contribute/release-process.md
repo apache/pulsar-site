@@ -118,14 +118,15 @@ git fetch $UPSTREAM
 RELEASE_NUMBER=3.0.3
 RELEASE_BRANCH=branch-3.0
 PR_QUERY="is:merged label:release/$RELEASE_NUMBER -label:cherry-picked/$RELEASE_BRANCH"
-PR_NUMBERS=$(gh pr list --search "$PR_QUERY" --json number --jq '["#"+(.[].number|tostring)] | join("|")')
+PR_NUMBERS=$(gh pr list -L 100 --search "$PR_QUERY" --json number --jq '["#"+(.[].number|tostring)] | join("|")')
 ALREADY_PICKED=$(git log --oneline -P --grep="$PR_NUMBERS" --reverse $RELEASE_BRANCH | gawk 'match($0, /\(#([0-9]+)\)/, a) {print substr(a[0], 2, length(a[0])-2)}' | tr '\n' '|' | sed 's/|$//')
 if [[ -n "$ALREADY_PICKED" ]]; then
   echo "** Already picked but not tagged as cherry-picked **"
   git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $RELEASE_BRANCH | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
 fi
 echo "** Not cherry-picked from $UPSTREAM/master **"
-git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $UPSTREAM/master | grep --color -v -E "$ALREADY_PICKED" | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
+git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $UPSTREAM/master | { [ -n "$ALREADY_PICKED" ] && grep --color -v -E "$ALREADY_PICKED" || cat; } | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
+echo "Check https://github.com/apache/pulsar/pulls?q=is:pr+$(echo "$PR_QUERY" | tr ' ' '+')"
 ```
 
 this produces an output such as:
