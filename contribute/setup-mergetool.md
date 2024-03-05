@@ -7,7 +7,6 @@ title: Setting up Git mergetool
 
 For Apache Pulsar core developers, handling git merge conflict resolution is necessary. 
 To efficiently resolve merge conflicts, setting up tools that assist in visualizing these conflicts and resolving them is essential. 
-A great comparison of various mergetools can be found [in this blog post](https://www.eseth.org/2020/mergetools.html).
 
 Here's an example of how to set up kdiff3 as a mergetool.
 
@@ -80,6 +79,7 @@ There are many tools available for this purpose, but `git gui` is one of the sim
 
 ### Useful links
 
+- [Comparison of git mergetools](https://www.eseth.org/2020/mergetools.html)
 - [Comparison of file comparison tools](https://en.wikipedia.org/wiki/Comparison_of_file_comparison_tools#General)
 - [Git GUI Clients](https://git-scm.com/downloads/guis)
 
