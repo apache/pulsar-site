@@ -7,7 +7,7 @@ title: Setup and building
 
 | Dependency | Description                                                                                                                                                                                                         |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Git        | The source code of Pulsar is hosted on GitHub as a git repository. To work with the git repository, please [install git](https://git-scm.com/downloads).                                                            |
+| Git        | The source code of Pulsar is hosted on GitHub as a git repository. To work with the git repository, please [install git](https://git-scm.com/downloads). We highly recommend that you also [set up a Git mergetool](setup-mergetool.md) for resolving merge conflicts. |
 | JDK        | The source code of Pulsar is primarily written in Java. Therefore, you need a working Java Development Kit (JDK) to build it. Pulsar requires [JDK 17](https://adoptium.net/temurin/releases/?version=17) to build. |
 | Maven      | The source code of Pulsar is managed by [Apache Maven](https://maven.apache.org/) The required Maven version is 3.6.1+.                                                                                             |
 | Zip        | The build process requires Zip as a utility tool.                                                                                                                                                                   |

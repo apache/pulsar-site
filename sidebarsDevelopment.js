@@ -8,6 +8,7 @@ const sidebars = {
             items: [
                 'setup-building',
                 'setup-ide',
+                'setup-mergetool',
                 'setup-debugging'
             ]
         },
@@ -58,7 +59,6 @@ const sidebars = {
                     items: [
                         'create-gpg-keys',
                         'release-note-guide',
-                        'setup-mergetool'
                     ]
                 },
                 'validate-release-candidate',
