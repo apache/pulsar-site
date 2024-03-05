@@ -30,7 +30,7 @@ git config --global merge.tool kdiff3
 git config --global difftool.kdiff3.path /Applications/kdiff3.app/Contents/MacOS/kdiff3
 git config --global difftool.kdiff3.args '$base $local $other -o $output'
 git config --global difftool.kdiff3.trustExistCode false
-git config --global diff.guitool=kdiff3
+git config --global diff.guitool kdiff3
 ```
 
 ### kdiff3 configuration on Linux
@@ -45,7 +45,7 @@ Configure `kdiff3` as the mergetool and difftool of git
 git config --global mergetool.kdiff3.path /usr/bin/kdiff3
 git config --global merge.tool kdiff3
 git config --global difftool.kdiff3.path /usr/bin/kdiff3
-git config --global diff.guitool=kdiff3
+git config --global diff.guitool kdiff3
 ```
 
 ### Using the mergetool kdiff3
