@@ -25,11 +25,11 @@ Configure `kdiff3` as the mergetool and difftool of git
 ```shell
 git config --global mergetool.kdiff3.path /Applications/kdiff3.app/Contents/MacOS/kdiff3
 git config --global mergetool.kdiff3.args '$base $local $other -o $output'
-git config --global mergetool.kdiff3.trustExistCode false
+git config --global mergetool.kdiff3.trustExitCode false
 git config --global merge.tool kdiff3
 git config --global difftool.kdiff3.path /Applications/kdiff3.app/Contents/MacOS/kdiff3
 git config --global difftool.kdiff3.args '$base $local $other -o $output'
-git config --global difftool.kdiff3.trustExistCode false
+git config --global difftool.kdiff3.trustExitCode false
 git config --global diff.guitool kdiff3
 ```
 
