@@ -78,13 +78,9 @@ sudo apt install git-gui
 
 There are many tools available for this purpose, but `git gui` is one of the simplest and most effective.
 
+### Useful links
 
-
-
-
-
-
-
-
+- [Comparison of file comparison tools](https://en.wikipedia.org/wiki/Comparison_of_file_comparison_tools#General)
+- [Git GUI Clients](https://git-scm.com/downloads/guis)
 
 
