@@ -6,6 +6,7 @@ import Page from "@site/src/components/ui/Page/Page";
 import s from './ResourcesPage.module.css';
 import Button from "@site/src/components/ui/Button/Button";
 import Input from "@site/src/components/ui/Input/Input";
+import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/ContributeDataDrivenPage";
 
 const categoryFilterOptions = [...data.categories] as const;
 
@@ -17,6 +18,7 @@ const CaseStudiesPage: React.FC = () => {
     <Layout
       title={`Resources`}
       description="Learn about the basics of using Apache Pulsar"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <div className={s.TopBlock}>
@@ -25,6 +27,7 @@ const CaseStudiesPage: React.FC = () => {
             <p>
               Find Apache Pulsar tutorials, how-tos and other technical content by searching with keywords.
             </p>
+            <ContributeDataDrivenPage />
           </section>
         </div>
 

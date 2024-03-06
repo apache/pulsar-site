@@ -6,6 +6,7 @@ import Page from "@site/src/components/ui/Page/Page";
 import s from './EventsPage.module.css';
 import Button from "@site/src/components/ui/Button/Button";
 import FeaturedEvent from "./FeaturedEvent/FeaturedEvent";
+import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/ContributeDataDrivenPage";
 
 type CategoryFilterOption = data.Category;
 
@@ -16,6 +17,7 @@ const CaseStudiesPage: React.FC = () => {
     <Layout
       title={`Events`}
       description="Apache Pulsar Events"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <div className={s.TopBlock}>
@@ -24,8 +26,8 @@ const CaseStudiesPage: React.FC = () => {
             <p>
               Below is a list of key industry events hosted by Pulsar contributors,
               as well as local meetups around the globe.
-              If you have one to add, learn more about submitting a pull request <a target="_blank" href="https://github.com/apache/pulsar/pulls">here</a>.
             </p>
+            <ContributeDataDrivenPage />
           </section>
 
           <div className={s.FeaturedEvent}>

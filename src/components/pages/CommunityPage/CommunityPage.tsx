@@ -18,6 +18,7 @@ export default function CommunityPage(): JSX.Element {
     <Layout
       title={"Community"}
       description={"Learn about the basics of using Apache Pulsar"}
+      wrapperClassName="LandingPage"
     >
       <Page>
         <section id="section-welcome">

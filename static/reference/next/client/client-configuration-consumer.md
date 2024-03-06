@@ -273,7 +273,7 @@ Using an higher `tickDurationMillis` reduces the memory overhead to track messag
 **Default**: `1000`
 
 ### topicsPattern
-Topic pattern
+The regexp for the topic name(not contains partition suffix).
 
 **Type**: `java.util.regex.Pattern`
 

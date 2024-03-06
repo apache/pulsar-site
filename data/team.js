@@ -21,6 +21,10 @@ module.exports = {
       "apacheId": "chenhang"
     },
     {
+      "name": "David Jensen",
+      "apacheId": "djensen"
+    },
+    {
       "name": "Enrico Olivelli",
       "apacheId": "eolivelli"
     },
@@ -175,6 +179,10 @@ module.exports = {
       "apacheId": "aloyszhang"
     },
     {
+      "name": "Asaf Mesika",
+      "apacheId": "amesika"
+    },
+    {
       "name": "Andrey Yegorov",
       "apacheId": "ayegorov"
     },
@@ -201,10 +209,6 @@ module.exports = {
     {
       "name": "Dezhi Liu",
       "apacheId": "dezhiliu"
-    },
-    {
-      "name": "David Jensen",
-      "apacheId": "djensen"
     },
     {
       "name": "Yuri Mizushima",
@@ -281,6 +285,10 @@ module.exports = {
     {
       "name": "Li Li",
       "apacheId": "urfree"
+    },
+    {
+      "name": "Kiryl Valkovich",
+      "apacheId": "visortelle"
     },
     {
       "name": "Vineeth Polamreddy",

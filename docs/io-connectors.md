@@ -147,6 +147,14 @@ Pulsar has various sink connectors, which are sorted alphabetically as below.
 
 * [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/alluxio/src/main/java/org/apache/pulsar/io/alluxio/sink/AlluxioSink.java)
 
+### Azure Data Explorer
+
+* [Configuration](io-azuredataexplorer-sink.md#configuration)
+
+* [Example](io-azuredataexplorer-sink.md#example)
+
+* [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/azure-data-explorer/src/main/java/org/apache/pulsar/io/azuredataexplorer/ADXSink.java)
+
 ### Cassandra
 
 * [Configuration](io-cassandra-sink.md#configuration)
