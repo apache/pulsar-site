@@ -419,7 +419,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
    ```bash
 
-   $ docker exec -it pulsar-postgresql /bin/bash
+   $ docker exec -it pulsar-postgres /bin/bash
 
    ```
 
