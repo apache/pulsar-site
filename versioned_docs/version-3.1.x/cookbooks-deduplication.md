@@ -73,7 +73,7 @@ If you enable message deduplication in Pulsar brokers, namespaces, or topics, it
 
 So you need to complete the following tasks for your client producers:
 
-1. Specify a name for the producer.
+1. Specify a name for the producer (this is a requirement, Pulsar will use the producer name to filter duplicated messages).
 1. Set the message timeout to `0` (namely, no timeout).
 
 The instructions for Java, Python, and C++ clients are different.
