@@ -237,8 +237,8 @@ servicePortTls=6651
 webServicePortTls=8081
 
 # configure certificates for clients to connect proxy
-tlsCertificateFilePath=/path/to/broker.cert.pem
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+tlsCertificateFilePath=/path/to/proxy.cert.pem
+tlsKeyFilePath=/path/to/proxy.key-pk8.pem
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 
 # enable mTLS

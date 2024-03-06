@@ -174,8 +174,8 @@ Proxies need to configure TLS in two directions, for clients connecting to the p
 
 # For clients connecting to the proxy
 tlsEnabledInProxy=true
-tlsCertificateFilePath=/path/to/broker.cert.pem
-tlsKeyFilePath=/path/to/broker.key-pk8.pem
+tlsCertificateFilePath=/path/to/proxy.cert.pem
+tlsKeyFilePath=/path/to/proxy.key-pk8.pem
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 
 # For the proxy to connect to brokers

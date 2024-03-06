@@ -85,6 +85,7 @@ To use Pulsar transaction API, complete the following steps.
                     // Step 3: create a Pulsar client and enable transactions.
                     .enableTransaction(true)
                     .serviceUrl(jct.serviceUrl)
+                    .build();
 
             // Step 4: create three producers to produce messages to input and output topics.
             ProducerBuilder<String> producerBuilder = client.newProducer(Schema.STRING);

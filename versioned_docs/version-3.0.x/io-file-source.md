@@ -47,7 +47,7 @@ Before using the File source connector, you need to create a configuration file 
         "recurse": true,
         "keepFile": true,
         "fileFilter": "[^\\.].*",
-        "pathFilter": "*",
+        "pathFilter": ".*",
         "minimumFileAge": 0,
         "maximumFileAge": 9999999999,
         "minimumSize": 1,
@@ -68,7 +68,7 @@ Before using the File source connector, you need to create a configuration file 
       recurse: true
       keepFile: true
       fileFilter: "[^\\.].*"
-      pathFilter: "*"
+      pathFilter: ".*"
       minimumFileAge: 0
       maximumFileAge: 9999999999
       minimumSize: 1
