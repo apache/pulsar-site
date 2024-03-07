@@ -212,14 +212,15 @@ default-key <key fingerprint>
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
 ```shell
-svn co https://dist.apache.org/repos/dist/dev/pulsar pulsar-dist-dev
-cd pulsar-dist-dev
-
 # '-candidate-1' needs to be incremented in case of multiple iteration in getting
 #    to the final release)
-svn mkdir pulsar-2.X.0-candidate-1
+RCVERSION=2.11.4-candidate-1
+APACHEID=your_apache_id
 
-cd pulsar-2.X.0-candidate-1
+svn mkdir --username $APACHEID -m "Add directory for pulsar $RCVERSION release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
+svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
+cd pulsar-$RCVERSION
+
 $PULSAR_PATH/src/stage-release.sh .
 
 # Verify the artifacts are correctly signed have correct checksums:
@@ -230,7 +231,7 @@ $PULSAR_PATH/src/stage-release.sh .
 # If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
 # may be too large to be unable to upload.
 svn add *
-svn ci -m 'Staging artifacts and signature for Pulsar release 2.X.0'
+svn ci -m 'Staging artifacts and signature for Pulsar release $RCVERSION'
 ```
 
 ### Stage Maven modules
