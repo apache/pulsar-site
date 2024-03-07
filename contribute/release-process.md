@@ -269,16 +269,28 @@ Use the "Close" button to close the repository. This operation will take few min
 
 ### Stage Docker images
 
-Run the following commands:
+After that, the following images will be built and pushed to your own DockerHub account:
+
+* pulsar
+* pulsar-all
+
+#### Release before Pulsar 3.0
+
+This is supported only on Linux amd64 platforms. On Mac Apple Silicon, you can run Linux amd64 in a virtual machine and use `export DOCKER_HOST=tcp://x.x.x.x:port` to use the Linux VM for building the docker image. Don't forward the TCP/IP connection over an unencrypted channel. You could also install the [free VMWare Fusion Player](https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13) to create VMs with [Vagrant](https://www.vagrantup.com/) and it's [support for VMWare Fusion](https://developer.hashicorp.com/vagrant/docs/providers/vmware). You can start a socket proxy with `socat TCP-LISTEN:2375,bind=0.0.0.0,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock` inside the Linux VM.
+
+Run the following commands on a Linux machine (or with Mac where DOCKER_HOST points to a Linux machine):
 
 ```shell
 cd $PULSAR_HOME/docker
-
-# Release before Pulsar 3.0
 ./build.sh
 DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
+```
 
-# Release Pulsar 3.0 and later
+### Release Pulsar 3.0 and later
+
+Run the following commands:
+
+```
 DOCKER_USER=<your-username>
 DOCKER_ORG=<docker-organization>
 docker login $DOCKER_ORG -u $DOCKER_USER -p <your-password>
@@ -290,10 +302,6 @@ mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
     -pl docker/pulsar,docker/pulsar-all
 ```
 
-After that, the following images will be built and pushed to your own DockerHub account:
-
-* pulsar
-* pulsar-all
 
 ## Vote for the release candidate
 
