@@ -71,38 +71,6 @@ If you created a new branch, update the [CI - OWASP Dependency Check](https://gi
 
 Note that you should also stop the workflow for previous Pulsar versions that are EOL.
 
-### Update project version and tag
-
-During the release process, you are going to initially create "candidate" tags, that after verification and approval will get promoted to the "real" final tag.
-
-In this process, the maven version of the project will always be the final one.
-
-```shell
-# Bump to the release version
-./src/set-project-version.sh 2.X.0
-
-# Some version may not update the right parent version of `protobuf-shaded/pom.xml`, please double check it.
-
-# Commit
-git commit -m 'Release 2.X.0' -a
-
-# Create a "candidate" tag
-# If you don't sign your commits already, use the following
-export GPG_TTY=$(tty)
-git tag -u $USER@apache.org v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
-# If you already sign your commits using your apache.org email, use the following
-git tag -s v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
-
-# Verify that you signed your tag before pushing it:
-git tag -v v2.X.0-candidate-1
-
-# Push both the branch and the tag to Github repo
-git push origin branch-2.X
-git push origin v2.X.0-candidate-1
-```
-
-For patch releases, the tag is like `2.3.1`.
-
 ### Cherry-picking changes scheduled for the release
 
 Before proceeding, ensure that you have [set up a Git mergetool](setup-mergetool.md). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.
@@ -157,6 +125,37 @@ It will speed up cherry-picking since you commit ids are there and there's also 
 A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`. 
 It's possible that some dependent commits are necessary to be cherry-picked when you encounter a lot of merge conflicts in a case where they aren't expected.
 
+### Update project version and tag
+
+During the release process, you are going to initially create "candidate" tags, that after verification and approval will get promoted to the "real" final tag.
+
+In this process, the maven version of the project will always be the final one.
+
+```shell
+# Bump to the release version
+./src/set-project-version.sh 2.X.0
+
+# Some version may not update the right parent version of `protobuf-shaded/pom.xml`, please double check it.
+
+# Commit
+git commit -m 'Release 2.X.0' -a
+
+# Create a "candidate" tag
+# If you don't sign your commits already, use the following
+export GPG_TTY=$(tty)
+git tag -u $USER@apache.org v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
+# If you already sign your commits using your apache.org email, use the following
+git tag -s v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
+
+# Verify that you signed your tag before pushing it:
+git tag -v v2.X.0-candidate-1
+
+# Push both the branch and the tag to Github repo
+git push origin branch-2.X
+git push origin v2.X.0-candidate-1
+```
+
+For patch releases, the tag is like `2.3.1`.
 
 ### Build release artifacts
 
