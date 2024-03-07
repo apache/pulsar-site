@@ -86,7 +86,7 @@ const DiscussionPlatforms: React.FC = () => {
           id: "launch-slack",
           text: "Go to Slack",
           href: "https://apache-pulsar.slack.com/",
-          type: "normal",
+          type: "primary",
           isExternal: true,
         },
       ],

@@ -75,7 +75,7 @@ const HowToContribute: React.FC = () => {
       <div className={s.Slider}>
         <BrowserOnly>
           {() => (
-            <Slider centerMode={window.innerWidth > 800} slidesToShow={2}>
+            <Slider slidesToShow={1}>
               {(contentCards || []).map((card) => (
                 <div key={card.title} className={s.Card}>
                   <ContentCard {...card} />
