@@ -276,9 +276,12 @@ After that, the following images will be built and pushed to your own DockerHub 
 
 #### Release before Pulsar 3.0
 
-This is supported only on Linux amd64 platforms. On Mac Apple Silicon, you can run Linux amd64 in a virtual machine and use `export DOCKER_HOST=tcp://x.x.x.x:port` to use the Linux VM for building the docker image. Don't forward the TCP/IP connection over an unencrypted channel. You could also install the [free VMWare Fusion Player](https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13) to create VMs with [Vagrant](https://www.vagrantup.com/) and it's [support for VMWare Fusion](https://developer.hashicorp.com/vagrant/docs/providers/vmware). You can start a socket proxy with `socat TCP-LISTEN:2375,bind=0.0.0.0,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock` inside the Linux VM.
+This is supported only on Intel platforms. On Mac Apple Silicon, you can run Linux amd64 in a virtual machine or a physical machine outside the Apple laptop and use `export DOCKER_HOST=tcp://x.x.x.x:port` to use use the remote docker engine for building the docker image. Don't forward the TCP/IP connection over an unencrypted channel. 
+You can start a socket proxy with `socat TCP-LISTEN:2375,bind=0.0.0.0,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock` inside the Linux Intel machine.
+For running the Linux Intel VM on Mac Apple Silicon, you could use `limactl create --name=linux_amd64 --rosetta --arch x86_64` to create a VM using https://lima-vm.io/. 
+However, it is simpler to do the release on a Linux arm64 / x86_64 VM directly.
 
-Run the following commands on a Linux machine (or with Mac where DOCKER_HOST points to a Linux machine):
+Run the following commands on a Linux machine (or with Mac where DOCKER_HOST points to a Linux amd64/Intel machine):
 
 ```shell
 cd $PULSAR_HOME/docker
