@@ -393,7 +393,7 @@ echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 6. Unselect "Set as the latest release" (that should be only selected for the actual latest release of Pulsar)
 7. Click "Publish release".  
 
-The [Writing release notes](release-note-guide.md) guide should be followed to generate a proper release notes.
+The [Writing release notes](release-note-guide.md) guide should be followed to generate a proper release notes. That is covered in the "Update the document" section.
 
 
 ### Release the artifacts on SVN
@@ -408,7 +408,9 @@ svn move -m "Release Apache Pulsar $VERSION_WITHOUT_RC" \
 
 ### Release Maven modules
 
-Promote the Maven staging repository for release. Login to `https://repository.apache.org` and select the staging repository associated with the RC candidate that was approved. The naming will be like `orgapachepulsar-XYZ`. Select the repository and click on "Release". Artifacts will now be made available on Maven central.
+Promote the Maven staging repository for release. Login to https://repository.apache.org and select the staging repository associated with the RC candidate that was approved.
+Double check the staging repository name from the release vote email.
+Select the repository and click on "Release". Artifacts will now be made available on Maven central.
 
 ### Release Docker images
 
@@ -438,6 +440,8 @@ Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images
 :::caution
 
 This step is for the latest release only.
+
+:::
 
 ```
 docker tag apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
