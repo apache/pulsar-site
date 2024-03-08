@@ -416,19 +416,14 @@ Select the repository and click on "Release". Artifacts will now be made availab
 
 This step is performed by a Apache Pulsar PMC member. Please request help from a PMC member for completing this step.
 
+`regctl` from [regclient](https://github.com/regclient/regclient) is needed for copying multi-arch images. Install with `brew install regclient` or with [other installation options](https://github.com/regclient/regclient/blob/main/docs/install.md) of regclient. The benefit of `regctl` over using `docker pull/tag/push` is that it will handle copying both `amd64` and the `arm64` image.
+
 ```bash
 RELEASE_MANAGER_DOCKER_USER=otheruser
 CANDIDATE_TAG=$VERSION_WITHOUT_RC
 
-# pulsar image
-docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG}
-docker tag ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
-docker push apachepulsar/pulsar:${PULSAR_VERSION}
-
-# pulsar-all image
-docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG}
-docker tag ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
-docker push apachepulsar/pulsar-all:${PULSAR_VERSION}
+regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
+regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
 ```
 
 Go to check the result:
@@ -444,11 +439,8 @@ This step is for the latest release only.
 :::
 
 ```
-docker tag apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
-docker push apachepulsar/pulsar:latest
-
-docker tag apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
-docker push apachepulsar/pulsar-all:latest
+regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
+regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
 ```
 
 ### Update project version
