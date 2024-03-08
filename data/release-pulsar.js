@@ -88,7 +88,7 @@ module.exports = [
       "vtag": "2.11.x",
       "releaseNotes": "/release-notes/versioned/pulsar-2.11.3/",
       "doc": "/docs/2.11.x",
-      "version": "v2.11.x"
+      "version": ""
     },
     {
         "author": "Technoboy-",
