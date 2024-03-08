@@ -6,7 +6,7 @@ module.exports = [
     "vtag": "3.2.x",
     "releaseNotes": "/release-notes/versioned/pulsar-3.2.1/",
     "doc": "/docs/3.2.x",
-    "version": ""
+    "version": "v3.2.x"
   },
     {
     "author": "Technoboy-",
@@ -15,7 +15,7 @@ module.exports = [
     "vtag": "3.2.x",
     "releaseNotes": "/release-notes/versioned/pulsar-3.2.0/",
     "doc": "/docs/3.2.x",
-    "version": "v3.2.x"
+    "version": ""
     },
     {
         "author": "AnonHxy",
