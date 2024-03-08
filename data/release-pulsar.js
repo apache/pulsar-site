@@ -73,6 +73,15 @@ module.exports = [
         "version": ""
     },
     {
+        "author": "lhotari",
+        "tagName": "v2.11.4",
+        "publishedAt": "2024-03-08T11:47:28Z",
+        "vtag": "2.11.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.4/",
+        "doc": "/docs/2.11.x",
+        "version": "v2.11.x"
+    },
+    {
       "author": "shibd",
       "tagName": "v2.11.3",
       "publishedAt": "2024-01-03T11:20:34Z",

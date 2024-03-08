@@ -7,6 +7,7 @@ module.exports = [
 {tagName: "v3.0.2",vtag:"3.0.x",releaseNotes:"/release-notes/versioned/client-java-3.0.2/",doc:"/docs/3.0.x/client-libraries-java",version:"v3.0.x"},
 {tagName: "v3.0.1",vtag:"3.0.x",releaseNotes:"/release-notes/versioned/client-java-3.0.1/",doc:"/docs/3.0.x/client-libraries-java",version:"v3.0.x"},
 {tagName: "v3.0.0",vtag:"3.0.x",releaseNotes:"/release-notes/versioned/client-java-3.0.0/",doc:"/docs/3.0.x/client-libraries-java",version:"v3.0.x"},
+{tagName: "v2.11.4",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.4/",doc:"/docs/2.11.x/client-libraries-java",version:"v2.11.x"},
 {tagName: "v2.11.3",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.3/",doc:"/docs/2.11.x/client-libraries-java",version:"v2.11.x"},
 {tagName: "v2.11.2",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.2/",doc:"/docs/2.11.x/client-libraries-java",version:""},
 {tagName: "v2.11.1",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.1/",doc:"/docs/2.11.x/client-libraries-java",version:""},
