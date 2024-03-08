@@ -373,7 +373,7 @@ Create and push the final Git tag:
 
 ```shell
 git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC -m "Release v$VERSION_WITHOUT_RC"
-git push origin $VERSION_WITHOUT_RC
+git push origin v$VERSION_WITHOUT_RC
 ```
 
 Then, you can [create a GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) based on the tag.
