@@ -39,10 +39,30 @@ gh release view "v2.10.2" -R apache/pulsar --json author,tagName,publishedAt
 gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
 ```
 
+
+## Generate release notes
+
+There isn't a definite way yet. 
+
+Here are 2 approaches:
+
+Using "git log"
+
+```bash
+git log --reverse  --oneline v2.11.3..v2.11.4 | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | sort
+```
+
+Alternatively using "gh pr list"
+
+```bash
+gh pr list -L 1000 --search "is:pr is:merged label:release/2.10.6 label:cherry-picked/branch-2.10" --json title,number,url | jq -r '.[] | "\(.title) [\(.number)](\(.url))"'
+```
+
 ## Update the release note page
 
 1. Copy the related release notes entries and add a [versioned release note file](https://github.com/apache/pulsar-site/tree/main/release-notes/versioned).
-2. Update the [version metadata files](https://github.com/apache/pulsar-site/tree/main/data) (`release-*.js`).
+2. Update the [version metadata files](https://github.com/apache/pulsar-site/tree/main/data) (`release-*.js`). For apache/pulsar releases, this means updating `release-java.js` (Java client) and `release-pulsar.js` (Pulsar).
+3. For every apache/pulsar release, you should add a `<release-version>` entry to the corresponding place in the `releases.json` file.
 
 To preview the result, follow the instructions for [previewing content](document-preview.md#preview-changes).
 

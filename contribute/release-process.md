@@ -599,47 +599,6 @@ Once the docs are generated, you can add them and submit them in a PR. The expec
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
-## Update the site
-
-Clone the apache/site repo:
-
-```shell
-git clone git@github.com:apache/pulsar-site.git
-```
-
-Create a new branch from the main branch:
-
-```shell
-git checkout -b doc_release_<release-version>
-```
-
-For every release, you should add a `<release-version>` entry to the corresponding place in the `releases.json` file.
-
-:::caution
-
-The following steps are for feature releases only.
-
-:::
-
-1. Generate a new version of the documentation.
-
-```shell
-yarn install
-yarn run version <release-version>
-```
-
-After you run this command, a new folder `version-<release-version>` is added in the `versioned_docs` directory, a new sidebar file `version-<release-version>-sidebars.json` is added in the `versioned_sidebars` directory, and the new version is added in the `versions.json` file.
-
-:::note
-
-You can move the latest version under the old version in the `versions.json` file. Make sure the Algolia index works before moving 2.X.0 as the current stable.
-
-:::
-
-2. Send out a PR request for review. After your PR is approved and merged to main, the website is published automatically after the new website is built. The website is built every 6 hours.
-
-3. Check the new website after the website is built. Open https://pulsar.apache.org in your browsers to verify all the changes are alive. If the website build succeeds but the website is not updated, you can try to sync the git repository. Navigate to https://selfserve.apache.org/ and click the "Synchronize Git Repositories" and then select apache/pulsar-site.
-
 ## Announce the release
 
 Once the release artifacts are available in the Apache Mirrors and the website is updated, you need to announce the release. You should email to dev@pulsar.apache.org, users@pulsar.apache.org, and announce@apache.org. Here is a sample content:
