@@ -358,13 +358,22 @@ If the release is approved here with 3 +1 binding votes, you can then proceed to
 
 ## Promote the release
 
+For commands below, you need to set these to the environment
+```
+# Set Version
+export VERSION_RC=2.11.4-candidate-1
+export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+# set your ASF user id
+export APACHE_USER=<your ASF userid>
+```
+
 ### Publish the final tag
 
 Create and push the final Git tag:
 
 ```shell
-git tag -u $USER@apache.org v2.X.0 -m 'Release v2.X.0'
-git push origin v2.X.0
+git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC -m "Release v$VERSION_WITHOUT_RC"
+git push origin $VERSION_WITHOUT_RC
 ```
 
 Then, you can [create a GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) based on the tag.
@@ -374,9 +383,9 @@ Then, you can [create a GitHub release](https://docs.github.com/en/repositories/
 Promote the artifacts on the release SVN repo https://dist.apache.org/repos/dist/release. Note that this repo is limited to PMC members, You may need a PMC member's help if you are not one:
 
 ```shell
-svn move -m "Release Apache Pulsar 2.X.Y" \
-  https://dist.apache.org/repos/dist/dev/pulsar/pulsar-2.X.0-candidate-1 \
-  https://dist.apache.org/repos/dist/release/pulsar/pulsar-2.X.0
+svn move -m "Release Apache Pulsar $VERSION_WITHOUT_RC" \
+  https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC \
+  https://dist.apache.org/repos/dist/release/pulsar/pulsar-$VERSION_WITHOUT_RC
 ```
 
 ### Release Maven modules
@@ -385,33 +394,54 @@ Promote the Maven staging repository for release. Login to `https://repository.a
 
 ### Release Docker images
 
-Please ensure that the regctl tools have been properly installed. They can be obtained from the following link: https://github.com/regclient/regclient/blob/main/docs/install.md
-
-Copy the approved candidate Docker images from your personal account to the apachepulsar organization:
+This step is performed by a Apache Pulsar PMC member. Please request help from a PMC member for completing this step.
 
 ```bash
-PULSAR_VERSION=3.x.x
-OTHER_DOCKER_USER=otheruser
-CANDIDATE_TAG=3.x.x-80fb390
-regctl image copy ${OTHER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:${PULSAR_VERSION}
-regctl image copy ${OTHER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:${PULSAR_VERSION}
+RELEASE_MANAGER_DOCKER_USER=otheruser
+CANDIDATE_TAG=$VERSION_WITHOUT_RC
+
+# pulsar image
+docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
+docker tag ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
+docker push apachepulsar/pulsar:${PULSAR_VERSION}
+
+# pulsar-all image
+docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+docker tag ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+docker push apachepulsar/pulsar-all:${PULSAR_VERSION}
 ```
 
-If this release is a feature release or a patch release of the last feature release, you should also push these images to the `latest` tag.
+Go to check the result:
+- https://hub.docker.com/r/apachepulsar/pulsar/tags
+- https://hub.docker.com/r/apachepulsar/pulsar-all/tags
 
-If you don't have the permission, you can ask someone with access to apachepulsar org to do that.
+Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images should be amd64 only. 
+
+:::caution
+
+This step is for the latest release only.
+
+```
+docker tag apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
+docker push apachepulsar/pulsar:latest
+
+docker tag apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
+docker push apachepulsar/pulsar-all:latest
+```
 
 ### Update project version
-After the release process, you should reset the project version with `-SNAPSHOT`.
+After the release process, you should bump the project version and append it with `-SNAPSHOT`.
 ```
-./src/set-project-version.sh 2.10.x-SNAPSHOT
+./src/set-project-version.sh x.x.x-SNAPSHOT
+git add -u
+git commit -m "Bump version to next snapshot version"
 ```
 
 ### Release Helm Chart
 
 :::caution
 
-This step is for the latest release only.
+This step is for the latest *LTS* release only
 
 :::
 
