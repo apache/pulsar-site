@@ -134,7 +134,7 @@ module.exports = [
       "vtag": "2.10.x",
       "releaseNotes": "/release-notes/versioned/pulsar-2.10.5/",
       "doc": "/docs/2.10.x",
-      "version": "v2.10.x"
+      "version": ""
     },
     {
         "author": "liangyepianzhou",
