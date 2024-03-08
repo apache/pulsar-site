@@ -1,4 +1,13 @@
 module.exports = [
+  {
+    "author": "Technoboy-",
+    "tagName": "v3.2.1",
+    "publishedAt": "2024-03-08T21:11:40Z",
+    "vtag": "3.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.2.1/",
+    "doc": "/docs/3.2.x",
+    "version": ""
+  },
     {
     "author": "Technoboy-",
     "tagName": "v3.2.0",
