@@ -193,8 +193,6 @@ Then, run Apache RAT to verify the license headers in the src package:
 tar -xvzf target/apache-pulsar-2.X.0-src.tar.gz
 cd apache-pulsar-2.X.0-src
 mvn apache-rat:check
-cd ..
-rm apache-pulsar-2.X.0-src
 ```
 
 Finally, use instructions in [verifying release candidates](validate-release-candidate.md) page to do some sanity checks on the produced binary distributions.
