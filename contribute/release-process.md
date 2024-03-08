@@ -376,7 +376,20 @@ git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC -m "Release v$VERSION_WI
 git push origin v$VERSION_WITHOUT_RC
 ```
 
+### Create release notes in GitHub
+
 Then, you can [create a GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) based on the tag.
+
+```shell 
+# open this URL and create release notes by clicking "Create release from tag"
+echo https://github.com/apache/pulsar/releases/tag/pulsar-${VERSION_WITHOUT_RC}
+```
+
+1. Open the above URL in a browser and create release notes by clicking "Create release from tag".
+2. Find "Previous tag: auto" in the UI above the text box and choose the previous release there.
+3. Click "Generate release notes".
+4. Review the generated release notes.
+5. Click "Publish release".  
 
 ### Release the artifacts on SVN
 
