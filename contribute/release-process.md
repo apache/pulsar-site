@@ -212,6 +212,7 @@ default-key <key fingerprint>
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
 ```shell
+cd $PULSAR_PATH
 # '-candidate-1' needs to be incremented in case of multiple iteration in getting
 #    to the final release)
 RCVERSION=2.11.4-candidate-1
