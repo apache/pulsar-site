@@ -12,6 +12,8 @@ module.exports = [
 {tagName: "v2.11.2",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.2/",doc:"/docs/2.11.x/client-libraries-java",version:""},
 {tagName: "v2.11.1",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.1/",doc:"/docs/2.11.x/client-libraries-java",version:""},
 {tagName: "v2.11.0",vtag:"2.11.x",releaseNotes:"/release-notes/versioned/client-java-2.11.0/",doc:"/docs/2.11.x/client-libraries-java",version:""},
+{tagName: "v2.10.6",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.6/",doc:"/docs/2.10.x/client-libraries-java",version:"v2.10.x"},
+{tagName: "v2.10.5",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.5/",doc:"/docs/2.10.x/client-libraries-java",version:"v2.10.x"},
 {tagName: "v2.10.4",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.4/",doc:"/docs/2.10.x/client-libraries-java",version:"v2.10.x"},
 {tagName: "v2.10.3",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.3/",doc:"/docs/2.10.x/client-libraries-java",version:""},
 {tagName: "v2.10.2",vtag:"2.10.x",releaseNotes:"/release-notes/versioned/client-java-2.10.2/",doc:"/docs/2.10.x/client-libraries-java",version:""},
