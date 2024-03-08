@@ -389,7 +389,12 @@ echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 2. Find "Previous tag: auto" in the UI above the text box and choose the previous release there.
 3. Click "Generate release notes".
 4. Review the generated release notes.
-5. Click "Publish release".  
+5. Since changes are cherry-picked, you will have to include a link such as [Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F2.11.4+label%3Acherry-picked%2Fbranch-2.11+sort%3Acreated-asc). There's a [separate guide for generating automated release notes](release-note-guide.md).
+6. Unselect "Set as the latest release" (that should be only selected for the actual latest release of Pulsar)
+7. Click "Publish release".  
+
+The [Writing release notes](release-note-guide.md) guide should be followed to generate a proper release notes.
+
 
 ### Release the artifacts on SVN
 
