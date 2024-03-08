@@ -382,7 +382,7 @@ Then, you can [create a GitHub release](https://docs.github.com/en/repositories/
 
 ```shell 
 # open this URL and create release notes by clicking "Create release from tag"
-echo https://github.com/apache/pulsar/releases/tag/pulsar-${VERSION_WITHOUT_RC}
+echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 ```
 
 1. Open the above URL in a browser and create release notes by clicking "Create release from tag".
