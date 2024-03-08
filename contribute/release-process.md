@@ -58,6 +58,7 @@ It is recommended to create a fresh clone of the repository to avoid any local f
 ```shell
 git clone git@github.com:apache/pulsar.git
 cd pulsar
+PULSAR_PATH=$(pwd)
 git checkout -b branch-2.X origin/master
 ```
 
@@ -133,6 +134,7 @@ In this process, the maven version of the project will always be the final one.
 
 ```shell
 # Bump to the release version
+cd $PULSAR_PATH
 ./src/set-project-version.sh 2.X.0
 
 # Some version may not update the right parent version of `protobuf-shaded/pom.xml`, please double check it.
@@ -162,6 +164,7 @@ For patch releases, the tag is like `2.3.1`.
 Run the following command to build the artifacts:
 
 ```shell
+cd $PULSAR_PATH
 mvn clean install -DskipTests
 ```
 
@@ -184,12 +187,9 @@ The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
 
 ```shell
+cd $PULSAR_PATH
 src/check-binary-license.sh distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz
-```
-
-Then, run Apache RAT to verify the license headers in the src package:
-
-```shell
+# Then, run Apache RAT to verify the license headers in the src package:
 tar -xvzf target/apache-pulsar-2.X.0-src.tar.gz
 cd apache-pulsar-2.X.0-src
 mvn apache-rat:check
@@ -285,7 +285,7 @@ However, it is simpler to do the release on a Linux arm64 / x86_64 VM directly.
 Run the following commands on a Linux machine (or with Mac where DOCKER_HOST points to a Linux amd64/Intel machine):
 
 ```shell
-cd $PULSAR_HOME/docker
+cd $PULSAR_PATH/docker
 ./build.sh
 DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
 ```
@@ -294,7 +294,8 @@ DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-org
 
 Run the following commands:
 
-```
+```shell
+cd $PULSAR_PATH
 DOCKER_USER=<your-username>
 DOCKER_ORG=<docker-organization>
 docker login $DOCKER_ORG -u $DOCKER_USER -p <your-password>
