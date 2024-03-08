@@ -401,12 +401,12 @@ RELEASE_MANAGER_DOCKER_USER=otheruser
 CANDIDATE_TAG=$VERSION_WITHOUT_RC
 
 # pulsar image
-docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
+docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG}
 docker tag ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 docker push apachepulsar/pulsar:${PULSAR_VERSION}
 
 # pulsar-all image
-docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+docker pull ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG}
 docker tag ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
 docker push apachepulsar/pulsar-all:${PULSAR_VERSION}
 ```
