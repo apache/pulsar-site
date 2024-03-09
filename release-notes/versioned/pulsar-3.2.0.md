@@ -227,5 +227,5 @@ sidebar_label: Apache Pulsar 3.2.0
 - Upgrade Apache ZooKeeper to 3.9.1 [#20933](https://github.com/apache/pulsar/pull/20933)
 
 
-> A special thanks to the following contributors (alphabetic Github IDs) who contributed to Pulsar 3.2.0:
+> A special thanks to the following contributors who contributed to Pulsar 3.2.0:
 > lhotari, jiangpengcheng, merlimat, poorbarcode, nodece, thetumbled, hrzzzz, BewareMyPower, RobertIndie, onobc, Technoboy-, wenbingshen, aloyszhang, heesung-sn, massakam, liangyepianzhou, coderzc, asafm, crossoverJie, TakaHiR07, zymap, yaalsn, rdhabalia, dragosvictor, pandalee99, AnonHxy, hangc0276, pengxiangrui127, mattisonchao, Denovo1998, 1Jack2, shibd, horizonzy, liudezhi2098, KevinLiLu, hanmz, erobot, Demogorgon314, tisonkun, diegosalvi, liangyuanpeng, kecona, alpreu, tuteng, frankjkelly, lifepuzzlefun, Shawyeok, Apurva007, Crispy-fried-chicken, michaeljmarshall, chenhongSZ, eolivelli, vineeth1995, codelipenghui, zhanghaou, JooHyukKim, klevy-toast.
