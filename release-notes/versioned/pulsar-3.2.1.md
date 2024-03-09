@@ -64,5 +64,5 @@ sidebar_label: Apache Pulsar 3.2.1
 - Upgrade BookKeeper dependency to 4.16.4 [#21983](https://github.com/apache/pulsar/pull/21983)
 
 
-> A special thanks to the following contributors (alphabetic Github IDs) who contributed to Pulsar 3.2.1:
+> A special thanks to the following contributors who contributed to Pulsar 3.2.1:
 > mattisonchao, lhotari, poorbarcode, Technoboy-, jiangpengcheng, dragosvictor, freeznet, liangyepianzhou, heesung-sn, zymap, massakam, thetumbled, BewareMyPower, chenhongSZ, Shawyeok, hangc0276, 315157973, coderzc, dao-jun.
