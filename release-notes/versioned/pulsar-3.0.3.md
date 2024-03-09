@@ -13,7 +13,7 @@ sidebar_label: Apache Pulsar 3.0.3
 - [improve][broker] Add an error log to troubleshoot the failure of starting broker registry. [22065](https://github.com/apache/pulsar/pull/22065)
 - [improve][broker] Do not retain the data in the system topic [22022](https://github.com/apache/pulsar/pull/22022)
 - [improve] [broker] Do not try to open ML when the topic meta does not exist and do not expect to create a new one. #21995 [22004](https://github.com/apache/pulsar/pull/22004)
-- [improve] [broker] Do not print an Error log when responding to `HTTP-404` when calling `Admin API` and the topic does not exist. [21995](https://github.com/apache/pulsar/pull/- 21995)
+- [improve] [broker] Do not print an Error log when responding to `HTTP-404` when calling `Admin API` and the topic does not exist. [21995](https://github.com/apache/pulsar/pull/21995)
 - [improve][broker] Do not close the socket if lookup failed due to LockBusyException [21993](https://github.com/apache/pulsar/pull/21993)
 - [improve][broker] Don't rollover empty ledgers based on inactivity [21893](https://github.com/apache/pulsar/pull/21893)
 - [improve][broker] Improve NamespaceUnloadStrategy error message [21880](https://github.com/apache/pulsar/pull/21880)
@@ -29,7 +29,7 @@ sidebar_label: Apache Pulsar 3.0.3
 
 - [fix] [broker] print non log when delete partitioned topic failed [22153](https://github.com/apache/pulsar/pull/22153)
 - [fix][broker] Fix broker not starting when both transactions and the Extensible Load Manager are enabled [22139](https://github.com/apache/pulsar/pull/22139)
-- [fix][broker] Return getOwnerAsync without waiting on source broker upon Assigning and Releasing and handle role change during role init [22112](https://github.com/apache/pulsar- /pull/22112)
+- [fix][broker] Return getOwnerAsync without waiting on source broker upon Assigning and Releasing and handle role change during role init [22112](https://github.com/apache/pulsar/pull/22112)
 - [fix] [broker] Enabling batch causes negative unackedMessages due to ack and delivery concurrency [22090](https://github.com/apache/pulsar/pull/22090)
 - [fix][broker] Support running docker container with gid != 0 [22081](https://github.com/apache/pulsar/pull/22081)
 - [fix][broker] Set ServiceUnitStateChannel topic compaction threshold explicitly, improve getOwnerAsync, and fix other bugs [22064](https://github.com/apache/pulsar/pull/22064)
@@ -50,7 +50,7 @@ sidebar_label: Apache Pulsar 3.0.3
 - [fix] [broker] fix write all compacted out entry into compacted topic [21917](https://github.com/apache/pulsar/pull/21917)
 - [fix][broker] Fix deadlock while skip non-recoverable ledgers. [21915](https://github.com/apache/pulsar/pull/21915)
 - [fix][broker] Fix leader broker cannot be determined when the advertised address and advertised listeners are configured [21894](https://github.com/apache/pulsar/pull/21894)
-- [fix] [broker] Fix break change: could not subscribe partitioned topic with a suffix-matched regexp due to a mistake of PIP-145 [21885](https://github.com/apache/pulsar/pull/- 21885)
+- [fix] [broker] Fix break change: could not subscribe partitioned topic with a suffix-matched regexp due to a mistake of PIP-145 [21885](https://github.com/apache/pulsar/pull/21885)
 - [fix][broker] Fix compaction/replication data loss when expire messages [21865](https://github.com/apache/pulsar/pull/21865)
 - [fix][broker]Fix NonPersistentDispatcherMultipleConsumers ArrayIndexOutOfBoundsException [21856](https://github.com/apache/pulsar/pull/21856)
 - [fix][broker] Fix returns wrong webServiceUrl when both webServicePort and webServicePortTls are set [21842](https://github.com/apache/pulsar/pull/21842)
@@ -111,7 +111,7 @@ sidebar_label: Apache Pulsar 3.0.3
 ## Clients
 - [fix] [client] fix huge permits if acked a half batched message [22091](https://github.com/apache/pulsar/pull/22091)
 - [fix] [client] Do no retrying for error subscription not found when disabled allowAutoSubscriptionCreation [22078](https://github.com/apache/pulsar/pull/22078)
-- [fix][client] Fix ConsumerBuilderImpl#subscribe silent stuck when using pulsar-client:3.0.x with jackson-annotations prior to 2.12.0 [21985](https://github.com/apache/pulsar/- pull/21985)
+- [fix][client] Fix ConsumerBuilderImpl#subscribe silent stuck when using pulsar-client:3.0.x with jackson-annotations prior to 2.12.0 [21985](https://github.com/apache/pulsar/pull/21985)
 - [fix][client] Fix multi-topics consumer could receive old messages after seek [21945](https://github.com/apache/pulsar/pull/21945)
 - [cleanup][client] Fix inconsistent API annotations of `getTopicName` [21620]
 - [fix][client] fix negative message re-delivery twice issue [20750](https://github.com/apache/pulsar/pull/20750)
