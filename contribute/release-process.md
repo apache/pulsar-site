@@ -605,7 +605,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 <https://pulsar.apache.org/docs> should redirect to the latest feature release documentation.
 
-If you're working on a patch release for older feature version, you can skip this step.
+If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
 Otherwise, you should update the version in this file: https://github.com/apache/pulsar-site/blob/26671a6ce02ed529eb26072846aedf14e4ab31a5/static/.htaccess#L19
 
