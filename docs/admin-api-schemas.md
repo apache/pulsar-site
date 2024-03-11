@@ -202,7 +202,7 @@ To get a specific version of a schema, you can use one of the following methods.
 Use the `get` subcommand.
 
 ```bash
-pulsar-admin schemas get <topic-name> --version <version>
+pulsar-admin schemas get <topic-name> --version=<version>
 ```
 
 </TabItem>
