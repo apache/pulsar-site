@@ -123,7 +123,7 @@ e81a20d667a [fix][broker] Avoid consumers receiving acknowledged messages from c
 ```
 
 It will speed up cherry-picking since you commit ids are there and there's also links to the PRs.
-A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`. 
+A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`.
 It's possible that some dependent commits are necessary to be cherry-picked when you encounter a lot of merge conflicts in a case where they aren't expected.
 
 ### Update project version and tag
@@ -277,9 +277,9 @@ After that, the following images will be built and pushed to your own DockerHub 
 
 #### Release before Pulsar 3.0
 
-This is supported only on Intel platforms. On Mac Apple Silicon, you can run Linux amd64 in a virtual machine or a physical machine outside the Apple laptop and use `export DOCKER_HOST=tcp://x.x.x.x:port` to use use the remote docker engine for building the docker image. Don't forward the TCP/IP connection over an unencrypted channel. 
+This is supported only on Intel platforms. On Mac Apple Silicon, you can run Linux amd64 in a virtual machine or a physical machine outside the Apple laptop and use `export DOCKER_HOST=tcp://x.x.x.x:port` to use use the remote docker engine for building the docker image. Don't forward the TCP/IP connection over an unencrypted channel.
 You can start a socket proxy with `socat TCP-LISTEN:2375,bind=0.0.0.0,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock` inside the Linux Intel machine.
-For running the Linux Intel VM on Mac Apple Silicon, you could use `limactl create --name=linux_amd64 --rosetta --arch x86_64` to create a VM using https://lima-vm.io/. 
+For running the Linux Intel VM on Mac Apple Silicon, you could use `limactl create --name=linux_amd64 --rosetta --arch x86_64` to create a VM using https://lima-vm.io/.
 However, it is simpler to do the release on a Linux arm64 / x86_64 VM directly.
 
 Run the following commands on a Linux machine (or with Mac where DOCKER_HOST points to a Linux amd64/Intel machine):
@@ -382,7 +382,7 @@ git push origin v$VERSION_WITHOUT_RC
 
 Then, you can [create a GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) based on the tag.
 
-```shell 
+```shell
 # open this URL and create release notes by clicking "Create release from tag"
 echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 ```
@@ -393,7 +393,7 @@ echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 4. Review the generated release notes.
 5. Since changes are cherry-picked, you will have to include a link such as [Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F2.11.4+label%3Acherry-picked%2Fbranch-2.11+sort%3Acreated-asc). There's a [separate guide for generating automated release notes](release-note-guide.md).
 6. Unselect "Set as the latest release" (that should be only selected for the actual latest release of Pulsar)
-7. Click "Publish release".  
+7. Click "Publish release".
 
 The [Writing release notes](release-note-guide.md) guide should be followed to generate a proper release notes. That is covered in the "Update the document" section.
 
@@ -432,7 +432,7 @@ Go to check the result:
 - https://hub.docker.com/r/apachepulsar/pulsar/tags
 - https://hub.docker.com/r/apachepulsar/pulsar-all/tags
 
-Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images should be amd64 only. 
+Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images should be amd64 only.
 
 :::caution
 
@@ -600,6 +600,14 @@ poetry run bin/reference-doc-generator.py --master-path=/path/to/pulsar-2.X.0 --
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/reference/2.X.x`
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
+
+## Update `/docs` redirect
+
+<https://pulsar.apache.org/docs> should redirect to the latest feature release documentation.
+
+If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
+
+Otherwise, you should update the version in this file: https://github.com/apache/pulsar-site/blob/26671a6ce02ed529eb26072846aedf14e4ab31a5/static/.htaccess#L19
 
 ## Announce the release
 
