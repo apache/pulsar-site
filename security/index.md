@@ -4,12 +4,12 @@
 
 ### 2024
 
-* [CVE-2022-34321](CVE-2022-34321.md) Improper Authentication for Pulsar Proxy Statistics Endpoint
-* [CVE-2024-27135](CVE-2024-27135.md) Improper Input Validation in Pulsar Function Worker allows Remote Code Execution
-* [CVE-2024-27317](CVE-2024-27317.md) Pulsar Functions Worker's Archive Extraction Vulnerability Allows Unauthorized File Modification
-* [CVE-2024-27894](CVE-2024-27894.md) Pulsar Functions Worker Allows Unauthorized File Access and Unauthorized HTTP/HTTPS Proxying
-* [CVE-2024-28098](CVE-2024-28098.md) Improper Authorization For Topic-Level Policy Management
-* [CVE-2023-51437](CVE-2023-51437.md) Timing attack in SASL token signature verification
+* 2024-03-12 [CVE-2022-34321](CVE-2022-34321.md) Improper Authentication for Pulsar Proxy Statistics Endpoint
+* 2024-03-12 [CVE-2024-27135](CVE-2024-27135.md) Improper Input Validation in Pulsar Function Worker allows Remote Code Execution
+* 2024-03-12 [CVE-2024-27317](CVE-2024-27317.md) Pulsar Functions Worker's Archive Extraction Vulnerability Allows Unauthorized File Modification
+* 2024-03-12 [CVE-2024-27894](CVE-2024-27894.md) Pulsar Functions Worker Allows Unauthorized File Access and Unauthorized HTTP/HTTPS Proxying
+* 2024-03-12 [CVE-2024-28098](CVE-2024-28098.md) Improper Authorization For Topic-Level Policy Management
+* 2024-02-07 [CVE-2023-51437](CVE-2023-51437.md) Timing attack in SASL token signature verification
 
 ### 2023
 
