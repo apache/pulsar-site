@@ -112,7 +112,7 @@ This example describes how to use the RabbitMQ source connector to feed data fro
     cp pulsar-io-rabbitmq-@pulsar:version@.nar ./connectors
     ```
 
-3. Set the retention of the namespace, otherwise the messages into the Pulsar's topic which have not the subscription have been immediately deleted.
+3. Messages published to a topic lacking at least one durable subscription are automatically marked as ready for deletion by default. We can set a retention policy at the namespace level to prevent this.
 
    ```bash
    ./bin/pulsar-admin namespaces set-retention -s 100M -t 3d public/default
