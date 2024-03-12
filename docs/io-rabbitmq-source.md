@@ -114,7 +114,7 @@ This example describes how to use the RabbitMQ source connector to feed data fro
     cp pulsar-io-rabbitmq-@pulsar:version@.nar ./connectors
     ```
 
-3. Set the retention of the namespace, otherwise the messages into the Pulsar's topic which have not the subscription been immediately deleted.
+3. Set the retention of the namespace, otherwise the messages into the Pulsar's topic which have not the subscription have been immediately deleted.
 
    ```bash
    ./bin/pulsar-admin namespaces set-retention -s 100M -t 3d public/default
