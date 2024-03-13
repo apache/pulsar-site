@@ -4,7 +4,7 @@ title: Pulsar OpenTelemetry Metrics
 sidebar_label: "OpenTelemetry Metrics"
 ---
 
-Pulsar exposes the folowing OpenTelemetry metrics.
+Pulsar exposes the following OpenTelemetry metrics.
 
 ## Broker
 
