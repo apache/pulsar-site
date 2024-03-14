@@ -11,24 +11,28 @@ import { useActiveDocContext, useLatestVersion, } from "@docusaurus/plugin-conte
 import { useDocsPreferredVersion } from "@docusaurus/theme-common";
 import { translate } from "@docusaurus/Translate";
 
-const versions = [{ name: "current", label: "Next", path: "/docs/next" }]
-  .concat([
-    {
-      label: '3.2.x',
-      name: '3.2.x',
-      path: `/docs/3.2.x`,
-    },
-    {
-      label: '3.0.x LTS',
-      name: '3.0.x',
-      path: `/docs/3.0.x`,
-    },
-    {
-      name: "others",
-      label: "Others",
-      path: "/versions",
-    }
-  ]);
+const versions = [
+  {
+    name: "current",
+    label: "Next",
+    path: "/docs/next"
+  },
+  {
+    label: '3.2.x',
+    name: '3.2.x',
+    path: `/docs/3.2.x`,
+  },
+  {
+    label: '3.0.x LTS',
+    name: '3.0.x',
+    path: `/docs/3.0.x`,
+  },
+  {
+    name: "others",
+    label: "Others",
+    path: "/versions",
+  }
+];
 
 const getVersionMainDoc = (version) =>
   version.docs.find((doc) => doc.id === version.mainDocId);
