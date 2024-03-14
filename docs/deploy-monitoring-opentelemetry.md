@@ -10,7 +10,7 @@ Pulsar. OpenTelemetry support is currently **experimental** and complements the 
 with the goal of eventually replacing it. The metrics it exposes are semantically equivalent to the Prometheus metrics.
 
 # Scope
-Pulsar OpenTelemetry metrics are currently available for the broker only. Support for the proxy and function worker is
+Pulsar OpenTelemetry metrics are gradually being added for the broker only. Support for the proxy and function worker is
 planned for a future release.
 
 # OpenTelemetry Configuration
