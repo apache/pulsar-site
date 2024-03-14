@@ -5,6 +5,12 @@ sidebar_label: "Overview"
 description: Get a comprehensive understanding of Pulsar security, including encryption, authentication, and authorization.
 ---
 
+:::note
+
+There's a separate page for Apache Pulsar [Security advisories and Security policy](https://pulsar.apache.org/security/).
+
+:::
+
 As the central message bus for a business, Apache Pulsar is frequently used for storing mission-critical data. Therefore, enabling security features in Pulsar is crucial. This chapter describes the main security controls that Pulsar uses to help protect your data.
 
 Pulsar security is based on the following core pillars.

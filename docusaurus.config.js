@@ -151,8 +151,8 @@ module.exports = {
     announcementBar: {
       id: "summit",
       content: renderAnnouncementBar(
-        "Submit your stories to Pulsar Summit EMEA! 📣",
-        "https://sessionize.com/pulsar-virtual-summit-europe-2024"
+        "Get your free pass for Pulsar Virtual Summit Europe 2024 on May 14, 2024 🗓️",
+        "https://registration.socio.events/e/pulsarvirtualsummiteurope2024"
       ),
       backgroundColor: "#282826",
       textColor: "#fff",
@@ -325,10 +325,14 @@ module.exports = {
         },
         {
           items: [
-            { label: "Security", href: "https://pulsar.apache.org/security/" },
+            { label: "Security", to: "/security" },
             {
               label: "Privacy",
               href: "https://www.apache.org/foundation/policies/privacy.html",
+            },
+            {
+              label: "Contact",
+              to: "/contact",
             },
           ],
         },

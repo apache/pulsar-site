@@ -11,7 +11,11 @@ Currently, the source of documents and website (where the docs are finally publi
 
 ## Update versioned docs
 
-If you want to update versioned docs, go to [versioned_docs folder](https://github.com/apache/pulsar-site/tree/main/versioned_docs) to find your desired one.
+Documentation should be up to date for all [actively supported versions](https://pulsar.apache.org/contribute/release-policy/#supported-versions).
+
+No need to update documentation for versions that are not actively maintained unless the documentation is incorrect.
+
+To update versioned docs, go to [versioned_docs folder](https://github.com/apache/pulsar-site/tree/main/versioned_docs).
 
 For versions prior to 2.8, Pulsar releases versioned docs for each patch release. You can update the exact versioned doc.
 
