@@ -40,7 +40,7 @@ represent the location of the OpenTelemetry [Collector](https://opentelemetry.io
 gRPC and HTTP endpoints.
 
 Additional parameters that can be configured, such as authentication, compression, and timeout, are described in the
-exporter [documentation](https://opentelemetry.io/docs/specs/otel/protocol/exporter/).
+exporter [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#otlp-exporter-span-metric-and-log-exporters).
 
 ### Prometheus
 
