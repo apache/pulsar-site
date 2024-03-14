@@ -1,15 +1,8 @@
+### ✅ Contribution Checklist
+
 <!--
-
-### Contribution Checklist
-
-  - PR title format should be *[type][component] summary*. For details, see *[Guideline - Pulsar PR Naming Convention](https://pulsar.apache.org/contribute/develop-semantic-title/)*.
-
+Feel free to remove the checklist if it does not apply to your PR
 -->
 
-<!-- Either this PR adds a doc for a code PR, -->
-
-This PR adds doc for #xyz
-
-<!-- or fixes a doc issue -->
-
-This PR fixes #xyz
+- [ ] I read the [contribution guide](https://pulsar.apache.org/contribute/document-contribution/)
+- [ ] I updated the [versioned docs](https://pulsar.apache.org/contribute/document-contribution/#update-versioned-docs)
