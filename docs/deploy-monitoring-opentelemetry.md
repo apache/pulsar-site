@@ -39,6 +39,9 @@ To use the exporter, set environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` to t
 represent the location of the OpenTelemetry [Collector](https://opentelemetry.io/docs/collector/). Pulsar supports both
 gRPC and HTTP endpoints.
 
+By default, metrics are exported at 60 second intervals. This is controlled by environment variable
+`OTEL_METRIC_EXPORT_INTERVAL`.
+
 Additional parameters that can be configured, such as authentication, compression, and timeout, are described in the
 exporter [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#otlp-exporter-span-metric-and-log-exporters).
 
