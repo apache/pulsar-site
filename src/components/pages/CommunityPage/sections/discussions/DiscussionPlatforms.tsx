@@ -23,13 +23,13 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "subscribe",
           text: "Subscribe",
-          href: "mailto:users-subscribe@pulsar.apache.org",
+          href: "mailto:users-subscribe@pulsar.apache.org?subject=subscribe&body=subscribe",
           type: "primary",
         },
         {
           id: "unsubscribe",
           text: "Unsubscribe",
-          href: "mailto:users-unsubscribe@pulsar.apache.org",
+          href: "mailto:users-unsubscribe@pulsar.apache.org?subject=unsubscribe&body=unsubscribe",
           type: "normal",
         },
       ],
@@ -55,13 +55,13 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "subscribe",
           text: "Subscribe",
-          href: "mailto:dev-subscribe@pulsar.apache.org",
+          href: "mailto:dev-subscribe@pulsar.apache.org?subject=subscribe&body=subscribe",
           type: "primary",
         },
         {
           id: "unsubscribe",
           text: "Unsubscribe",
-          href: "mailto:dev-unsubscribe@pulsar.apache.org",
+          href: "mailto:dev-unsubscribe@pulsar.apache.org?subject=unsubscribe&body=unsubscribe",
           type: "normal",
         },
       ],
