@@ -73,10 +73,11 @@ Pulsar automatically sets the following resource attributes:
 | `service.name`    | The name of the Pulsar service. For the broker, this defaults to `pulsar-broker`. |
 | `service.version` | The version of the Pulsar service.                                                |
 
-Any of these attributes can be overriden by means of environment variable `OTEL_RESOURCE_ATTRIBUTES`:
+Any of these attributes can be overridden by means of environment variable `OTEL_RESOURCE_ATTRIBUTES`. Additional
+attributes can be added too. For example:
 
 ```shell
-OTEL_RESOURCE_ATTRIBUTES=pulsar.cluster=my-cluster,service.name=my-broker,service.version=1.0.0
+OTEL_RESOURCE_ATTRIBUTES=pulsar.cluster=my-cluster,service.name=my-broker,service.version=1.0.0,custom.attr=custom-value
 ```
 
 Additional runtime resource attributes, such as hostname, process ID, or operating system, are automatically inferred by
