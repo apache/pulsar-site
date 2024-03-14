@@ -80,6 +80,6 @@ OTEL_RESOURCE_ATTRIBUTES=pulsar.cluster=my-cluster,service.name=my-broker,servic
 ```
 
 Additional runtime resource attributes, such as hostname, process ID, or operating system, are automatically inferred by
-the SDK. For a description of these attributes, refer to the respective [documentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/resources/library).
+the SDK using Resource Providers. For a description of these attributes, refer to the respective [documentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/resources/library).
 
 For further details on configuring resource attributes, refer to the SDK [documentation](https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/autoconfigure#opentelemetry-resource-attributes).
