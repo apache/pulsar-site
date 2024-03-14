@@ -80,7 +80,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mysql-source"
-  inputs: [ "debezium-mysql-topic" ]
+  topicName: "debezium-mysql-topic"
   archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar"
   parallelism: 1
 
@@ -378,7 +378,7 @@ You need to create a configuration file before using the Pulsar Debezium connect
   tenant: "public"
   namespace: "default"
   name: "debezium-mongodb-source"
-  inputs: [ "debezium-mongodb-topic" ]
+  topicName: "debezium-mongodb-topic"
   archive: "connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar"
   parallelism: 1
 

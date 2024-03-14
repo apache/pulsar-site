@@ -28,6 +28,7 @@ $ pulsar-admin sources create options
 | `--producer-config` | The custom producer configuration (as a JSON string)|null||
 | `--batch-builder` | BatchBuilder provides two types of batch construction methods, DEFAULT and KEY_BASED. The default value is: DEFAULT|null||
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null||
+| `--log-topic` | The topic to which the logs of a Pulsar Sink are produced|null||
 | `--source-config` | Source config key/values|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per source instance (applicable only to the process and Docker runtimes)|null||
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null||
@@ -65,6 +66,7 @@ $ pulsar-admin sources update options
 | `--producer-config` | The custom producer configuration (as a JSON string)|null||
 | `--batch-builder` | BatchBuilder provides two types of batch construction methods, DEFAULT and KEY_BASED. The default value is: DEFAULT|null||
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null||
+| `--log-topic` | The topic to which the logs of a Pulsar Sink are produced|null||
 | `--source-config` | Source config key/values|null||
 | `--ram` | The RAM (in bytes) that need to be allocated per source instance (applicable only to the process and Docker runtimes)|null||
 | `--secrets` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null||
@@ -241,6 +243,7 @@ $ pulsar-admin sources localrun options
 | `--custom-runtime-options` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null||
 | `--broker-service-url` | The URL for the Pulsar broker|null||
 | `--tls-allow-insecure` | Allow insecure tls connection|false||
+| `--log-topic` | The topic to which the logs of a Pulsar Sink are produced|null||
 | `--secrets-provider-classname` | Whats the classname for secrets provider|null||
 | `--secrets-provider-config` | Config that needs to be passed to secrets provider|null||
 | `--source-config` | Source config key/values|null||
