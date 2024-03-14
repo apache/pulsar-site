@@ -126,6 +126,11 @@ export default function CommunityPage(): JSX.Element {
         </section>
 
         <Section title="Discussions" anchor="section-discussions">
+          <p>
+            Please notice that security-related issues or concerns should not be reported in public channels.<br/>
+            Please follow the instructions in the <a href={`${useBaseUrl("security")}#security-policy`}>Security Policy</a> to contact the <a href="https://www.apache.org/security/">ASF Security Team</a>.<br/>
+            <br/>
+          </p>
           <DiscussionPlatforms />
         </Section>
 
