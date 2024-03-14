@@ -607,7 +607,22 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
-Otherwise, you should update the version in this file: https://github.com/apache/pulsar-site/blob/26671a6ce02ed529eb26072846aedf14e4ab31a5/static/.htaccess#L19
+Otherwise, you should update the version in this file: <https://github.com/apache/pulsar-site/blob/26671a6ce02ed529eb26072846aedf14e4ab31a5/static/.htaccess#L19>
+
+## Update `/docs` version list dropdown
+
+The dropdown should have the following items:
+- Next
+- Active versions [still in support](/contribute/release-policy/#supported-versions)
+- Others
+
+LTS versions should be labeled this way: `<version> LTS`.
+
+<img alt="docs version dropdown" src="/img/version-dropdown.png" width="320px" />
+
+If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
+
+Otherwise, you should update the dropdown version list in this file: <https://github.com/apache/pulsar-site/blob/main/src/theme/DocsVersionDropdownNavbarItem.js>
 
 ## Announce the release
 
