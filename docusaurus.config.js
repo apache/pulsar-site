@@ -151,8 +151,8 @@ module.exports = {
     announcementBar: {
       id: "summit",
       content: renderAnnouncementBar(
-        "Submit your stories to Pulsar Summit EMEA! 📣",
-        "https://sessionize.com/pulsar-virtual-summit-europe-2024"
+        "Join Pulsar Virtual Summit Europe 2024 🗓️",
+        "https://registration.socio.events/e/pulsarvirtualsummiteurope2024"
       ),
       backgroundColor: "#282826",
       textColor: "#fff",
