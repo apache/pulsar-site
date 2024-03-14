@@ -325,10 +325,14 @@ module.exports = {
         },
         {
           items: [
-            { label: "Security", href: "https://pulsar.apache.org/security/" },
+            { label: "Security", to: "/security" },
             {
               label: "Privacy",
               href: "https://www.apache.org/foundation/policies/privacy.html",
+            },
+            {
+              label: "Contact",
+              to: "/contact",
             },
           ],
         },
