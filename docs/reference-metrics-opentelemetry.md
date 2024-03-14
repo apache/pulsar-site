@@ -1,5 +1,5 @@
 ---
-id: reference-opentelemetry-metrics
+id: reference-metrics-opentelemetry
 title: Pulsar OpenTelemetry Metrics
 sidebar_label: "OpenTelemetry Metrics"
 ---
