@@ -54,6 +54,7 @@ $ pulsar-admin sinks create options
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null||
 | `--auto-ack` | Whether or not the framework will automatically acknowledge messages|null||
 | `--max-redeliver-count` | Maximum number of times that a message will be redelivered before being sent to the dead letter queue|null||
+| `--log-topic` | The topic to which the logs of a Pulsar Sink are produced|null||
 | `--cleanup-subscription` | Whether delete the subscription when sink is deleted|null||
 | `-a, --archive` | Path to the archive file for the sink. It also supports url-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package.|null||
 
@@ -104,6 +105,7 @@ $ pulsar-admin sinks update options
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null||
 | `--auto-ack` | Whether or not the framework will automatically acknowledge messages|null||
 | `--max-redeliver-count` | Maximum number of times that a message will be redelivered before being sent to the dead letter queue|null||
+| `--log-topic` | The topic to which the logs of a Pulsar Sink are produced|null||
 | `--cleanup-subscription` | Whether delete the subscription when sink is deleted|null||
 | `-a, --archive` | Path to the archive file for the sink. It also supports url-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package.|null||
 
@@ -301,6 +303,7 @@ $ pulsar-admin sinks localrun options
 | `--tls-trust-cert-path` | tls trust cert file path|null||
 | `--metrics-port-start` | The starting port range for metrics server|null||
 | `--auto-ack` | Whether or not the framework will automatically acknowledge messages|null||
+| `--log-topic` | The topic to which the logs of a Pulsar Sink are produced|null||
 | `--cleanup-subscription` | Whether delete the subscription when sink is deleted|null||
 
 
