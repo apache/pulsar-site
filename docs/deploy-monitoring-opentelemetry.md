@@ -5,9 +5,9 @@ sidebar_label: "OpenTelemetry Monitoring"
 ---
 
 # Status
-Pulsar emits OpenTelemetry metrics starting from version 3.3.0. OpenTelemetry support is currently **experimental** and
-complements the pre-existing Prometheus metric system, with the goal of eventually replacing it. The metrics it exposes
-are semantically equivalent to the Prometheus metrics.
+Pulsar emits OpenTelemetry metrics starting from version 3.3.0. OpenTelemetry log and trace signals are not exposed by
+Pulsar. OpenTelemetry support is currently **experimental** and complements the pre-existing Prometheus metric system,
+with the goal of eventually replacing it. The metrics it exposes are semantically equivalent to the Prometheus metrics.
 
 # Scope
 Pulsar OpenTelemetry metrics are currently available for the broker only. Support for the proxy and function worker is
