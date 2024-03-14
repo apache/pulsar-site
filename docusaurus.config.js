@@ -151,7 +151,7 @@ module.exports = {
     announcementBar: {
       id: "summit",
       content: renderAnnouncementBar(
-        "Join Pulsar Virtual Summit Europe 2024 🗓️",
+        "Get your free pass for Pulsar Virtual Summit Europe 2024 on May 14, 2024 🗓️",
         "https://registration.socio.events/e/pulsarvirtualsummiteurope2024"
       ),
       backgroundColor: "#282826",
