@@ -55,5 +55,6 @@ Participation is not only welcomed – it's essential!
 
 The Pulsar community on GitHub is active, passionate, and knowledgeable.  Join discussions, voice opinions, suggest features, and dive into the code itself. Find your Pulsar family here at [apache/pulsar](https://github.com/apache/pulsar).
 
-* Please go to [/community/#section-discussions](the community page) to find the contact information for joining various communication channels.
-* The main communication channel for the Apache Pulsar project are [/contact](the mailing lists).
+* Please go to [the community page](pathname:///community/#section-discussions) to find the contact information for joining various communication channels.
+* The main communication channel for the Apache Pulsar project are [the mailing lists](pathname:///contact/).
+* There's a separate page for Apache Pulsar [Security advisories and Security policy](pathname:///security/).
