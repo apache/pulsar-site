@@ -23,8 +23,36 @@ $ pulsar-admin schemas get options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-a, --all-version` | all version|false||
-| `-v, --version` | version|null||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# schemas
+
+Operations about schemas
+
+
+```shell
+$ pulsar-admin schemas subcommand
+```
+
+
+
+## get
+
+Get the schema for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## delete
@@ -41,7 +69,54 @@ $ pulsar-admin schemas delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-f, --force` | whether to delete schema completely. If true, delete all resources (including metastore and ledger), otherwise only do a mark deletion and not remove any resources indeed|false||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# schemas
+
+Operations about schemas
+
+
+```shell
+$ pulsar-admin schemas subcommand
+```
+
+
+
+## get
+
+Get the schema for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## delete
+
+Delete all versions schema of a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## upload
@@ -58,7 +133,72 @@ $ pulsar-admin schemas upload options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-f, --filename` | filename|null||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# schemas
+
+Operations about schemas
+
+
+```shell
+$ pulsar-admin schemas subcommand
+```
+
+
+
+## get
+
+Get the schema for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## delete
+
+Delete all versions schema of a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## upload
+
+Update the schema for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas upload options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## extract
@@ -75,11 +215,90 @@ $ pulsar-admin schemas extract options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-n, --dry-run` | dost not apply to schema registry, just prints the post schema payload|false||
-| `-c, --classname` | class name of pojo|null||
-| `-j, --jar` | jar filepath|null||
-| `-a, --always-allow-null` | set schema whether always allow null or not|true||
-| `-t, --type` | type avro or json|null||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# schemas
+
+Operations about schemas
+
+
+```shell
+$ pulsar-admin schemas subcommand
+```
+
+
+
+## get
+
+Get the schema for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## delete
+
+Delete all versions schema of a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## upload
+
+Update the schema for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas upload options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## extract
+
+Provide the schema via a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas extract options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## compatibility
@@ -96,5 +315,6 @@ $ pulsar-admin schemas compatibility options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-f, --filename` | filename|null||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
