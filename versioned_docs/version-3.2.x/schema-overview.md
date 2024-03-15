@@ -5,12 +5,6 @@ sidebar_label: "Overview"
 description: Get a comprehensive understanding of Pulsar schema.
 ---
 
-:::note
-
-There's a separate page for Apache Pulsar [Security advisories and Security policy](https://pulsar.apache.org/security/).
-
-:::
-
 ## Definitions
 
 Pulsar messages are stored as unstructured byte arrays and the data structure (as known as schema) is applied to this data only when it's read. So both the producer and consumer need to agree upon the data structure of the messages, including the fields and their associated types.
