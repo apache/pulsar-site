@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './Button.module.css';
 
-export type ButtonVariant = 'action' | 'regular' | 'negative' | 'clean' | 'cleanInvert' | 'transparentWhite' | 'transparentBlack';
+export type ButtonVariant = 'action' | 'regular' | 'negative' | 'negativefull' | 'clean' | 'cleanInvert' | 'transparentWhite' | 'transparentBlack';
 
 type Button = {
   title: string,
@@ -19,6 +19,7 @@ const Button = (props: Button) => {
     case 'action': contentClassName = `${s.content} ${s.action}`; break;
     case 'regular': contentClassName = `${s.content} ${s.regular}`; break;
     case 'negative': contentClassName = `${s.content} ${s.negative}`; break;
+    case 'negativefull': contentClassName = `${s.content} ${s.negativefull}`; break;
     case 'clean': contentClassName = `${s.content} ${s.clean}`; break;
     case 'cleanInvert': contentClassName = `${s.content} ${s.cleanInvert}`; break;
     case 'transparentWhite': contentClassName = `${s.content} ${s.transparentWhite}`; break;

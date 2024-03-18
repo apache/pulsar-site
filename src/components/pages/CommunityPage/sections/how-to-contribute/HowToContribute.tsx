@@ -7,9 +7,66 @@ import ContentCardsLayout from "../../shared/ContentCard/ContentCardsLayout";
 import Slider from '@site/src/components/ui/Slider/Slider';
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
+import Button, { ButtonVariant } from "@site/src/components/ui/Button/Button";
+
 import s from "./HowToContribute.module.css";
 
+type ActionButtonProps = {
+  id: string;
+  text: string;
+  href: string;
+  type: "primary" | "normal" | "link" | "transparentWhite" | "transparentBlack";
+  isExternal?: boolean;
+};
+
+const ActionButton: React.FC<ActionButtonProps> = (props) => {
+  if (props.type === "link") {
+  }
+
+  let buttonVariant: ButtonVariant;
+  switch (props.type) {
+    case "primary":
+      buttonVariant = "action";
+      break;
+    case "normal":
+      buttonVariant = "regular";
+      break;
+    case "transparentBlack":
+      buttonVariant = "transparentBlack";
+      break;
+    case "transparentWhite":
+      buttonVariant = "transparentWhite";
+      break;
+  }
+
+  return (
+    <div className={s.ActionButton}>
+      <Button
+        variant={buttonVariant}
+        target={props.isExternal ? "_blank" : undefined}
+        href={props.href}
+        title={props.text}
+      />
+    </div>
+
+  );
+};
+
 const HowToContribute: React.FC = () => {
+  const actions: ActionButtonProps[] = [
+    {
+      id: "contributing-to-the-project",
+      href: useBaseUrl("/contribute"),
+      text: "Contribution guide",
+      type: "transparentBlack",
+    },
+    {
+      id: "develop-coding-conventions",
+      href: useBaseUrl("/contribute/develop-coding-conventions"),
+      text: "Coding conventions",
+      type: "transparentBlack",
+    },
+  ];
   const contentCards: ContentCardProps[] = [
     {
       format: "column",
@@ -19,23 +76,9 @@ const HowToContribute: React.FC = () => {
       },
       description: (
         <div>
-          Pulsar has many different opportunities for contributions -- you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more.
+          Pulsar has many different opportunities for contributions — you can write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, participate in documentation, and more.
         </div>
       ),
-      actions: [
-        {
-          id: "contributing-to-the-project",
-          href: useBaseUrl("/contribute"),
-          text: "Contribution guide",
-          type: "transparentBlack",
-        },
-        {
-          id: "develop-coding-conventions",
-          href: useBaseUrl("/contribute/develop-coding-conventions"),
-          text: "Coding conventions",
-          type: "transparentBlack",
-        },
-      ],
     },
     {
       format: "column",
@@ -85,6 +128,11 @@ const HowToContribute: React.FC = () => {
           )}
         </BrowserOnly>
       </div>
+    </div>
+    <div className={s.Actions}>
+      {(actions || []).map((action) => (
+        <ActionButton key={action.id} {...action} />
+      ))}
     </div>
   </div>;
 };

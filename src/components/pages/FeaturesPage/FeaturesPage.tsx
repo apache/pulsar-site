@@ -503,7 +503,7 @@ const FeaturesPage: React.FC = () => {
               <div>
                 <Button
                   title='Explore docs'
-                  variant='negative'
+                  variant='negativefull'
                   href={`/docs/${latestVersion}`}
                 />
               </div>

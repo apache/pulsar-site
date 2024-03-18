@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import SlickSlider from 'react-slick';
 
-import LeftButton from './img/leftButton.svg';
-import RightButton from './img/rightButton.svg';
+import LeftButton from './img/lbutton.svg';
+import RightButton from './img/rbutton.svg';
 
 import LeftButtonInvert from './img/leftButtonInvert.svg';
 import RightButtonInvert from './img/rightButtonInvert.svg';

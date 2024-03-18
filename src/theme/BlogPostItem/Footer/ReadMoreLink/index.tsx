@@ -3,15 +3,15 @@ import Translate, {translate} from '@docusaurus/Translate';
 import Link from '@docusaurus/Link';
 import type {Props} from '@theme/BlogPostItem/Footer/ReadMoreLink';
 
+import ReadArrow from './readArrow.svg';
+
 function ReadMoreLabel() {
   return (
-    <b>
       <Translate
         id="theme.blog.post.readMore"
         description="The label used in blog post item excerpts to link to full blog posts">
-        read →
+        read
       </Translate>
-    </b>
   );
 }
 
@@ -31,7 +31,7 @@ export default function BlogPostItemFooterReadMoreLink(
         {title: blogPostTitle},
       )}
       {...linkProps}>
-      <ReadMoreLabel />
+      <ReadMoreLabel /> <ReadArrow />
     </Link>
   );
 }

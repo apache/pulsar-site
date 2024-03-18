@@ -33,6 +33,7 @@ const HomePage = () => {
     <Layout
       title={"Apache Pulsar"}
       description={"Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud."}
+      wrapperClassName="LandingPage"
     >
       <div className={s.Page}>
         <div className={s.Background}></div>
@@ -84,8 +85,12 @@ const HomePage = () => {
               <div className={s.CommunityNumbersContainer}>
               {communityNumbers.map((number, i) => (
                 <div key={i}>
-                  <div className={s.CommunityNumbersBig}>{number.number}{(number.icon) ? <img src={useBaseUrl(number.icon)} /> : null}</div>
-                  <strong>{number.title}</strong>
+                  {(number.isLink) ? 
+                    <a title={number.linkTitle} href={number.link} target='_blank' className={s.CommunityNumbersBig}>{number.number}{(number.icon) ? <img src={useBaseUrl(number.icon)} /> : <span className={s.CommunityNumbersBigSymbol}>+</span>}</a>
+                    :
+                    <div className={s.CommunityNumbersBig}>{number.number}{(number.icon) ? <img src={useBaseUrl(number.icon)} /> : <span className={s.CommunityNumbersBigSymbol}>+</span>}</div>
+                  }
+                  <span className={s.CommunityNumbersBigTitle}>{number.title}</span>
                   {number.linkTitle ? <div className="margin-top--lg"><Button title={number.linkTitle} href={number.link} target='_blank' variant='transparentBlack' /></div> : ''}
                 </div>
               ))}

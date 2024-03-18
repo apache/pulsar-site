@@ -124,7 +124,7 @@ export default function CommunityPage(): JSX.Element {
               </div>
             </div>
 
-            <div>
+            <div className={s.AfterCommunitySlider}>
               <div>
                 <h3>
                   A successful project requires many people to play many roles.

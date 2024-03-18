@@ -105,7 +105,7 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "subscribe",
           text: "Subscribe",
-          href: "mailto:dev-subscribe@pulsar.apache.org",
+          href: "mailto:dev-subscribe@pulsar.apache.org?subject=subscribe&body=subscribe",
           type: "primary",
         },
         {
@@ -208,7 +208,7 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "subscribe",
           text: "Subscribe",
-          href: "mailto:users-subscribe@pulsar.apache.org",
+          href: "mailto:users-subscribe@pulsar.apache.org?subject=subscribe&body=subscribe",
           type: "primary",
         },
         {
