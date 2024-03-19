@@ -11,6 +11,7 @@ import ProjectGovernance from "./sections/project-governance/ProjectGovernance";
 import Slider from '@site/src/components/ui/Slider/Slider';
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Button from "@site/src/components/ui/Button/Button";
+import _ from 'lodash'
 
 export default function CommunityPage(): JSX.Element {
 
@@ -24,23 +25,9 @@ export default function CommunityPage(): JSX.Element {
     <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
   );
 
-  function shuffleArray(array) {
-    let currentIndex = array.length;
-    // While there remain elements to shuffle
-    while (0 !== currentIndex) {
-      // Pick a remaining element
-      const randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      // And swap it with the current element.
-      const temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  }
-
   // Shuffle the team members so that the order is different each time the page is loaded
-  shuffleArray(team.pmc);
-  shuffleArray(team.committers);
+  team.pmc = _.shuffle(team.pmc);
+  team.committers = _.shuffle(team.committers);
 
   let TeamPMCSets = new Array(Math.ceil(team.pmc.length/5));
   let teamCtrsSets = new Array(Math.ceil(team.committers.length/5));
