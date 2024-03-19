@@ -307,7 +307,9 @@ module.exports = {
     {
       "name": "Asaf Mesika",
       "apacheId": "amesika",
-      "githubUsername": []
+      "githubUsername": [
+        "asafm"
+      ]
     },
     {
       "name": "Andrey Yegorov",
