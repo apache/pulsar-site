@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Layout from "@theme/Layout";
 import s from "./CommunityPage.module.css";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -26,15 +26,15 @@ export default function CommunityPage(): JSX.Element {
   );
 
   // Shuffle the team members so that the order is different each time the page is loaded
-  team.pmc = _.shuffle(team.pmc);
-  team.committers = _.shuffle(team.committers);
+  const pmcMembers = useMemo(() => _.shuffle(team.pmc), [team.pmc]);
+  const committers = useMemo(() => _.shuffle(team.committers), [team.committers]);
 
-  let TeamPMCSets = new Array(Math.ceil(team.pmc.length/5));
-  let teamCtrsSets = new Array(Math.ceil(team.committers.length/5));
+  let TeamPMCSets = new Array(Math.ceil(pmcMembers.length/5));
+  let teamCtrsSets = new Array(Math.ceil(committers.length/5));
 
   let CountTheSet = 0;
   let CountTheSets = 0;
-  team.pmc.forEach(element => {
+  pmcMembers.forEach(element => {
     CountTheSet++;
     if((CountTheSet-1)%5 == 0){ CountTheSets++; }
     if(!Array.isArray(TeamPMCSets[CountTheSets])) TeamPMCSets[CountTheSets] = new Array();
@@ -43,7 +43,7 @@ export default function CommunityPage(): JSX.Element {
 
   CountTheSet = CountTheSets = 0;
 
-  team.committers.forEach(element => {
+  committers.forEach(element => {
     CountTheSet++;
     if((CountTheSet-1)%5 == 0){ CountTheSets++; }
     if(!Array.isArray(teamCtrsSets[CountTheSets])) teamCtrsSets[CountTheSets] = new Array();
@@ -57,7 +57,7 @@ export default function CommunityPage(): JSX.Element {
     const githubUsername = member.githubUsername?.[0];
     const href = githubUsername ? ('https://github.com/' + githubUsername) : "#";
     const target = githubUsername ? "_blank" : "_self";
-  
+
     return (
       <a href={href} target={target} key={'m'+index} className={s.CommunityMembersMember}>
         <div>
@@ -165,7 +165,7 @@ export default function CommunityPage(): JSX.Element {
             </div>
           </div>
         </section>
-        
+
         <section className={s.CommunityDiscussions}>
           <div className={s.CommunityDiscussionsBlur} />
           <div className={s.CommunityContent}>
@@ -188,7 +188,7 @@ export default function CommunityPage(): JSX.Element {
           </div>
         </div>
 
-        
+
         <div className={s.CommunityProjectGovernance}>
           <div className={s.CommunityContent}>
             <Section title="Project Governance" anchor="section-governance">
@@ -207,11 +207,11 @@ export default function CommunityPage(): JSX.Element {
                 For the complete and up-to-date list, see <a href="https://projects.apache.org/committee.html?pulsar" target="_blank" >Apache Pulsar Committee</a>.
               </p>
               <br />
-              <h4>{team.pmc.length} PMC members</h4>
+              <h4>{pmcMembers.length} PMC members</h4>
               <div>
                 <div className={(isShowMorePMC ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
-                  {(team.pmc || []).map((member,i) => (
-                    <MemberCard member={member} index={i} />
+                  {(pmcMembers || []).map((member) => (
+                    <MemberCard key={member.apacheId} member={member} index={member.apacheId} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMorePMCButton}
@@ -226,7 +226,7 @@ export default function CommunityPage(): JSX.Element {
                           {TeamPMCSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
                               {set.map((member, i) => (
-                                  <MemberCard member={member} index={i} />
+                                  <MemberCard key={member.apacheId} member={member} index={i} />
                                 ))}
                             </div>
                           ))}
@@ -236,11 +236,11 @@ export default function CommunityPage(): JSX.Element {
                   </div>
                 </div>
               </div>
-              <h4>{team.committers.length} Committers</h4>
+              <h4>{committers.length} Committers</h4>
               <div>
                 <div className={(isShowMoreCmtrs ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
-                  {(team.committers || []).map((member,i) => (
-                    <MemberCard member={member} index={i} />
+                  {(committers || []).map((member,i) => (
+                    <MemberCard key={member.apacheId} member={member} index={i} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMoreCmtrsButton}
@@ -255,7 +255,7 @@ export default function CommunityPage(): JSX.Element {
                           {teamCtrsSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
                               {set.map((member, i) => (
-                                <MemberCard member={member} index={i} />
+                                <MemberCard key={member.apacheId} member={member} index={i} />
                               ))}
                             </div>
                           ))}
