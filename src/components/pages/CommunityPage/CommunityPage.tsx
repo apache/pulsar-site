@@ -62,7 +62,7 @@ export default function CommunityPage(): JSX.Element {
       <a href={href} target={target} key={'m'+index} className={s.CommunityMembersMember}>
         <div>
           <div className={s.CommunityMembersMemberPic}>
-            { member.githubUsername && member.githubUsername.length > 0 && (
+            { githubUsername && (
             <img src={'https://github.com/' + githubUsername + '.png'} alt={githubUsername} />
             )}
           </div>
