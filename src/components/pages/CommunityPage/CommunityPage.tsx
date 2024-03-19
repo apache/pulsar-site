@@ -26,15 +26,15 @@ export default function CommunityPage(): JSX.Element {
   );
 
   // Shuffle the team members so that the order is different each time the page is loaded
-  team.pmc = _.shuffle(team.pmc);
-  team.committers = _.shuffle(team.committers);
+  const pmcmembers = _.shuffle(team.pmc);
+  const committers = _.shuffle(team.committers);
 
-  let TeamPMCSets = new Array(Math.ceil(team.pmc.length/5));
-  let teamCtrsSets = new Array(Math.ceil(team.committers.length/5));
+  let TeamPMCSets = new Array(Math.ceil(pmcmembers.length/5));
+  let teamCtrsSets = new Array(Math.ceil(committers.length/5));
 
   let CountTheSet = 0;
   let CountTheSets = 0;
-  team.pmc.forEach(element => {
+  pmcmembers.forEach(element => {
     CountTheSet++;
     if((CountTheSet-1)%5 == 0){ CountTheSets++; }
     if(!Array.isArray(TeamPMCSets[CountTheSets])) TeamPMCSets[CountTheSets] = new Array();
@@ -43,7 +43,7 @@ export default function CommunityPage(): JSX.Element {
 
   CountTheSet = CountTheSets = 0;
 
-  team.committers.forEach(element => {
+  committers.forEach(element => {
     CountTheSet++;
     if((CountTheSet-1)%5 == 0){ CountTheSets++; }
     if(!Array.isArray(teamCtrsSets[CountTheSets])) teamCtrsSets[CountTheSets] = new Array();
@@ -207,10 +207,10 @@ export default function CommunityPage(): JSX.Element {
                 For the complete and up-to-date list, see <a href="https://projects.apache.org/committee.html?pulsar" target="_blank" >Apache Pulsar Committee</a>.
               </p>
               <br />
-              <h4>{team.pmc.length} PMC members</h4>
+              <h4>{pmcmembers.length} PMC members</h4>
               <div>
                 <div className={(isShowMorePMC ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
-                  {(team.pmc || []).map((member,i) => (
+                  {(pmcmembers || []).map((member,i) => (
                     <MemberCard member={member} index={i} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
@@ -236,10 +236,10 @@ export default function CommunityPage(): JSX.Element {
                   </div>
                 </div>
               </div>
-              <h4>{team.committers.length} Committers</h4>
+              <h4>{committers.length} Committers</h4>
               <div>
                 <div className={(isShowMoreCmtrs ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
-                  {(team.committers || []).map((member,i) => (
+                  {(committers || []).map((member,i) => (
                     <MemberCard member={member} index={i} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
