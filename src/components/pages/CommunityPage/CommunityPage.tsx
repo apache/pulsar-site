@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import Layout from "@theme/Layout";
 import s from "./CommunityPage.module.css";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -144,69 +144,71 @@ export default function CommunityPage(): JSX.Element {
       </div>
 
       <div className={s.CommunityMembers}>
-        <BrowserOnly>
-          {() => (
-            <div className={s.CommunityContent}>
-              <Section anchor="section-community" title="Meet the Community">
-                <p className={s.CommunityMembersBig}>
-                  Pulsar community consists of PMC members, committers and contributors.
-                </p>
-                <p className={s.CommunityMembersSmall}>
-                  For the complete and up-to-date list, see <a href="https://projects.apache.org/committee.html?pulsar" target="_blank" >Apache Pulsar Committee</a>.
-                </p>
-                <br />
-                <h4>{pmcMembers.length} PMC members</h4>
-                <div>
-                  <div className={s.CommunityMembersDesktop}>
-                    {(pmcMembers || []).map((member) => (
-                      <MemberCard key={member.apacheId} member={member} />
-                    ))}
-                    <div className={s.CommunityMembersShowMore}>
-                      <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")} />
+        <div className={s.CommunityContent}>
+          <Section anchor="section-community" title="Meet the Community">
+            <BrowserOnly>
+              {() => (
+                <>
+                  <p className={s.CommunityMembersBig}>
+                    Pulsar community consists of PMC members, committers and contributors.
+                  </p>
+                  <p className={s.CommunityMembersSmall}>
+                    For the complete and up-to-date list, see <a href="https://projects.apache.org/committee.html?pulsar" target="_blank" >Apache Pulsar Committee</a>.
+                  </p>
+                  <br />
+                  <h4>{pmcMembers.length} PMC members</h4>
+                  <div>
+                    <div className={s.CommunityMembersDesktop}>
+                      {(pmcMembers || []).map((member) => (
+                        <MemberCard key={member.apacheId} member={member} />
+                      ))}
+                      <div className={s.CommunityMembersShowMore}>
+                        <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")} />
+                      </div>
+                    </div>
+                    <div className={s.CommunityMembersMobile}>
+                      <div className={s.Slider}>
+                        <Slider centerMode={window.innerWidth > 800} slidesToShow={1} invertMode={true}>
+                          {teamPmcSets.map((set, i) => (
+                            <div key={i} className={s.SlideTeam}>
+                              {set.map((member) => (
+                                <MemberCard key={member.apacheId} member={member} />
+                              ))}
+                            </div>
+                          ))}
+                        </Slider>
+                      </div>
                     </div>
                   </div>
-                  <div className={s.CommunityMembersMobile}>
-                    <div className={s.Slider}>
-                      <Slider centerMode={window.innerWidth > 800} slidesToShow={1} invertMode={true}>
-                        {teamPmcSets.map((set, i) => (
-                          <div key={i} className={s.SlideTeam}>
-                            {set.map((member) => (
-                              <MemberCard key={member.apacheId} member={member} />
-                            ))}
-                          </div>
-                        ))}
-                      </Slider>
+                  <h4>{committers.length} Committers</h4>
+                  <div>
+                    <div className={s.CommunityMembersDesktop}>
+                      {(committers || []).map((member, i) => (
+                        <MemberCard key={member.apacheId} member={member} />
+                      ))}
+                      <div className={s.CommunityMembersShowMore}>
+                        <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")} />
+                      </div>
+                    </div>
+                    <div className={s.CommunityMembersMobile}>
+                      <div className={s.Slider}>
+                        <Slider centerMode={window.innerWidth > 800} slidesToShow={1} invertMode={true}>
+                          {teamCtrsSets.map((set, i) => (
+                            <div key={i} className={s.SlideTeam}>
+                              {set.map((member) => (
+                                <MemberCard key={member.apacheId} member={member} />
+                              ))}
+                            </div>
+                          ))}
+                        </Slider>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <h4>{committers.length} Committers</h4>
-                <div>
-                  <div className={s.CommunityMembersDesktop}>
-                    {(committers || []).map((member, i) => (
-                      <MemberCard key={member.apacheId} member={member} />
-                    ))}
-                    <div className={s.CommunityMembersShowMore}>
-                      <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")} />
-                    </div>
-                  </div>
-                  <div className={s.CommunityMembersMobile}>
-                    <div className={s.Slider}>
-                      <Slider centerMode={window.innerWidth > 800} slidesToShow={1} invertMode={true}>
-                        {teamCtrsSets.map((set, i) => (
-                          <div key={i} className={s.SlideTeam}>
-                            {set.map((member) => (
-                              <MemberCard key={member.apacheId} member={member} />
-                            ))}
-                          </div>
-                        ))}
-                      </Slider>
-                    </div>
-                  </div>
-                </div>
-              </Section>
-            </div>
-          )}
-        </BrowserOnly>
+                </>
+              )}
+            </BrowserOnly>
+          </Section>
+        </div>
       </div>
 
       <div className={s.CommunityNumbers}>
