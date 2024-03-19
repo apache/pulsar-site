@@ -65,7 +65,7 @@ export default function CommunityPage(): JSX.Element {
 
   function MemberCard({ member, index }) {
     const githubUsername = member.githubUsername?.[0] || member.apacheId;
-    const href = member.githubUsername && member.githubUsername.length > 0 ? ('https://github.com/' + githubUsername) : "#";
+    const href = githubUsername ? ('https://github.com/' + githubUsername) : "#";
     const target = member.githubUsername && member.githubUsername.length > 0 ? "_blank" : "_self";
   
     return (
