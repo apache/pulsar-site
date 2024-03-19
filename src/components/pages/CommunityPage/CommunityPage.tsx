@@ -14,16 +14,6 @@ import Button from "@site/src/components/ui/Button/Button";
 import _ from 'lodash'
 
 export default function CommunityPage(): JSX.Element {
-  const [isShowMorePMC, setIsShowMorePMC] = useState(false);
-  const showMorePMCButton = (
-    <Button title={isShowMorePMC ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMorePMC(!isShowMorePMC)} />
-  );
-
-  const [isShowMoreCmtrs, setIsShowMoreCmtrs] = useState(false);
-  const showMoreCmtrsButton = (
-    <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)} />
-  );
-
   // Shuffle the team members so that the order is different each time the page is loaded
   const pmcMembers = useMemo(() => _.shuffle(team.pmc), [team.pmc]);
   const committers = useMemo(() => _.shuffle(team.committers), [team.committers]);
@@ -167,12 +157,11 @@ export default function CommunityPage(): JSX.Element {
                 <br />
                 <h4>{pmcMembers.length} PMC members</h4>
                 <div>
-                  <div className={(isShowMorePMC ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
+                  <div className={s.CommunityMembersDesktop}>
                     {(pmcMembers || []).map((member) => (
                       <MemberCard key={member.apacheId} member={member} />
                     ))}
                     <div className={s.CommunityMembersShowMore}>
-                      {showMorePMCButton}
                       <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")} />
                     </div>
                   </div>
@@ -192,12 +181,11 @@ export default function CommunityPage(): JSX.Element {
                 </div>
                 <h4>{committers.length} Committers</h4>
                 <div>
-                  <div className={(isShowMoreCmtrs ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
+                  <div className={s.CommunityMembersDesktop}>
                     {(committers || []).map((member, i) => (
                       <MemberCard key={member.apacheId} member={member} />
                     ))}
                     <div className={s.CommunityMembersShowMore}>
-                      {showMoreCmtrsButton}
                       <Button title="Go to Github" variant="cleanInvert" href="https://github.com/apache/pulsar" target="_blank" icon={useBaseUrl("/img/gotoi.svg")} />
                     </div>
                   </div>
