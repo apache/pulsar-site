@@ -50,7 +50,7 @@ export default function CommunityPage(): JSX.Element {
     teamCtrsSets[CountTheSets].push(element);
   });
 
-  function MemberCard({ member, index }) {
+  function MemberCard({ member }) {
     // require the member to have "GitHub username(s) (user-provided)" field information in Whimsy
     // the user can go to Whimsy url https://whimsy.apache.org/roster/committer/__self__ to update the information
     // since it's possible to have multiple GitHub usernames, we only take the first one
@@ -59,7 +59,7 @@ export default function CommunityPage(): JSX.Element {
     const target = githubUsername ? "_blank" : "_self";
 
     return (
-      <a href={href} target={target} key={'m'+index} className={s.CommunityMembersMember}>
+      <a href={href} target={target} key={member.apacheId} className={s.CommunityMembersMember}>
         <div>
           <div className={s.CommunityMembersMemberPic}>
             { githubUsername && (
@@ -211,7 +211,7 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={(isShowMorePMC ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
                   {(pmcMembers || []).map((member) => (
-                    <MemberCard key={member.apacheId} member={member} index={member.apacheId} />
+                    <MemberCard key={member.apacheId} member={member} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMorePMCButton}
@@ -226,7 +226,7 @@ export default function CommunityPage(): JSX.Element {
                           {TeamPMCSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
                               {set.map((member, i) => (
-                                  <MemberCard key={member.apacheId} member={member} index={i} />
+                                  <MemberCard key={member.apacheId} member={member} />
                                 ))}
                             </div>
                           ))}
@@ -240,7 +240,7 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={(isShowMoreCmtrs ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
                   {(committers || []).map((member,i) => (
-                    <MemberCard key={member.apacheId} member={member} index={i} />
+                    <MemberCard key={member.apacheId} member={member} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMoreCmtrsButton}
@@ -255,7 +255,7 @@ export default function CommunityPage(): JSX.Element {
                           {teamCtrsSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
                               {set.map((member, i) => (
-                                <MemberCard key={member.apacheId} member={member} index={i} />
+                                <MemberCard key={member.apacheId} member={member} />
                               ))}
                             </div>
                           ))}
