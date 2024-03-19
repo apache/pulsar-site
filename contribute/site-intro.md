@@ -77,38 +77,35 @@ If you're gonna to debug the reference generation process, read the [reference-d
 
 ### How to update data-driven pages?
 
-The following pages contain data-driven tables:
+You can update it by clicking on one of the **✍️ Edit <file_name>** links below and submitting a Pull Request.
 
-* [Case studies](pathname:///case-studies)
-  * data/users.js
-  * src/pages/case-studies.js
-* [Downloads](pathname:///download)
-  * releases.json
-  * data/connectors.js
-  * data/release-cpp.js
-  * data/release-pulsar-manager.js
-  * data/release-pulsar-adapters.js
-  * src/components/download.tsx
-  * src/pages/download.mdx
-* [Ecosystem](pathname:///ecosystem)
-  * data/ecosystem.js
-  * src/pages/ecosystem.js
-* [Events](pathname:///events)
-  * data/events.js
-  * src/pages/events.js
-* [Release notes](pathname:///release-notes)
+* **Case Studies** [/case-studies](pathname:///case-studies)
+  * [✍️ Edit case-studies.ts](https://github.com/apache/pulsar-site/edit/main/data/case-studies.ts)
+* **Powered by** [/powered-by](pathname:///powered-by)
+  * [✍️ Edit powered-by.ts](https://github.com/apache/pulsar-site/edit/main/data/powered-by.ts)
+* **Ecosystem** [/ecosystem](pathname:///ecosystem)
+  * [✍️ Edit ecosystem.ts](https://github.com/apache/pulsar-site/edit/main/data/ecosystem.ts)
+* **Events** [/events](pathname:///events)
+  * [✍️ Edit events.ts](https://github.com/apache/pulsar-site/edit/main/data/events.ts)
+* **Resources** [/resources](pathname:///resources)
+  * [✍️ Edit resources.ts](https://github.com/apache/pulsar-site/edit/main/data/resources.ts)
+* **Team** [/team](pathname:///team)
+  * [✍️ Edit team.js](https://github.com/apache/pulsar-site/edit/main/data/team.js)
+
+    PMC members can generate the `team.js` file as [lhotari](https://github.com/lhotari) did in https://github.com/apache/pulsar-site/pull/387.
+* **Downloads** [/downloads](pathname:///download)
+  * [✍️ Edit releases.json](https://github.com/apache/pulsar-site/edit/main/releases.json)
+  * [✍️ Edit connectors.js](https://github.com/apache/pulsar-site/edit/main/data/connectors.js)
+  * [✍️ Edit release-cpp.js](https://github.com/apache/pulsar-site/edit/main/data/release-cpp.js)
+  * [✍️ Edit release-pulsar-manager.js](https://github.com/apache/pulsar-site/edit/main/data/release-pulsar-manager.js)
+  * [✍️ Edit release-pulsar-adapters.js](https://github.com/apache/pulsar-site/edit/main/data/release-pulsar-adapters.js)
+  * [✍️ Edit download.tsx](https://github.com/apache/pulsar-site/edit/main/src/components/download.tsx)
+  * [✍️ Edit download.mdx](https://github.com/apache/pulsar-site/edit/main/src/pages/download.mdx)
+* **Release notes** [/release-notes](pathname:///release-notes)
   * data/release-*.js
   * release-notes/
   * src/components/ClientReleaseTable.js
   * src/components/PulsarReleaseTable.js
-* [Resources](pathname:///resources)
-  * data/resources.js
-  * src/pages/resources.js
-* [Team](pathname:///team)
-  * data/team.js
-  * src/pages/team.js
-* [Client feature matrix](pathname:///client-feature-matrix)
-  * data/matrix.js
-  * client-feature-matrix/index.mdx
-
-Additionally, PMC members can generate the `team.js` file as @lhotari did in https://github.com/apache/pulsar-site/pull/387.
+* **Client feature matrix** [/client-feature-matrix](pathname:///client-feature-matrix)
+  * [✍️ Edit matrix.js](https://github.com/apache/pulsar-site/edit/main/data/matrix.js)
+  * [✍️ Edit client-feature-matrix/index.mdx](https://github.com/apache/pulsar-site/edit/main/client-feature-matrix/index.mdx)

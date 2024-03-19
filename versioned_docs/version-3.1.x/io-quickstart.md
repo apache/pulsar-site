@@ -121,7 +121,7 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
 1. Start a Cassandra cluster.
 
    ```bash
-   docker run -d --rm --name=cassandra -p 9042:9042 cassandra
+   docker run -d --rm --name=cassandra -p 9042:9042 cassandra:3.11
    ```
 
    :::note

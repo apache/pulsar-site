@@ -101,7 +101,7 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
         ),
       }}
     >
-      {"We recommend you use the {latestVersionLink} ({versionLabel})."}
+      {"We recommend you use the {latestVersionLink}."}
     </Translate>
   );
 }

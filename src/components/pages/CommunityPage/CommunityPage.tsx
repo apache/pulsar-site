@@ -55,7 +55,7 @@ export default function CommunityPage(): JSX.Element {
 
 
   return (
-    <Layout title={"Community"} description={"Learn about the basics of using Apache Pulsar"} >
+    <Layout title={"Community"} description={"Learn about the basics of using Apache Pulsar"} wrapperClassName="LandingPage">
         <section className={s.CommunityHeader}>
           <div className={s.CommunityContent}>
             <h1>Welcome to the Pulsar Community</h1>
@@ -149,6 +149,11 @@ export default function CommunityPage(): JSX.Element {
           <div className={s.CommunityDiscussionsBlur} />
           <div className={s.CommunityContent}>
             <Section title="Discussions" anchor="section-discussions">
+          <p>
+            Please notice that security-related issues or concerns should not be reported in public channels.<br/>
+            Please follow the instructions in the <a href={`${useBaseUrl("security")}#security-policy`}>Security Policy</a> to contact the <a href="https://www.apache.org/security/">ASF Security Team</a>.<br/>
+            <br/>
+          </p>
               <DiscussionPlatforms />
             </Section>
           </div>

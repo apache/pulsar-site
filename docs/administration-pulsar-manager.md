@@ -16,11 +16,11 @@ To install Pulsar Manager, complete the following steps.
 The easiest way to use the Pulsar Manager is to run it inside a Docker container.
 
 ```shell
-docker pull apachepulsar/pulsar-manager:v0.3.0
+docker pull apachepulsar/pulsar-manager:latest
 docker run -it \
   -p 9527:9527 -p 7750:7750 \
   -e SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties \
-  apachepulsar/pulsar-manager:v0.3.0
+  apachepulsar/pulsar-manager:latest
 ```
 
 * Pulsar Manager is divided into front-end and back-end, the front-end service port is `9527` and the back-end service port is `7750`.

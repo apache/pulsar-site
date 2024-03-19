@@ -120,7 +120,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mysql-source"
-  inputs: [ "debezium-mysql-topic" ]
+  topicName: "debezium-mysql-topic"
   archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar"
   parallelism: 1
 
@@ -381,7 +381,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 5. Start a PostgreSQL client in docker.
 
    ```bash
-   docker exec -it pulsar-postgresql /bin/bash
+   docker exec -it pulsar-postgres /bin/bash
    ```
 
 6. A PostgreSQL client pops out.
@@ -454,7 +454,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mongodb-source"
-  inputs: [ "debezium-mongodb-topic" ]
+  topicName: "debezium-mongodb-topic"
   archive: "connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar"
   parallelism: 1
 
@@ -607,7 +607,7 @@ Using YAML as an example, you can create a `debezium-oracle-source-config.yaml` 
 tenant: "public"
 namespace: "default"
 name: "debezium-oracle-source"
-inputs: [ "debezium-oracle-topic" ]
+topicName: "debezium-oracle-topic"
 parallelism: 1
 
 className: "org.apache.pulsar.io.debezium.oracle.DebeziumOracleSource"
@@ -676,7 +676,7 @@ Similarly to other connectors, you can use JSON or YAML to configure the connect
 tenant: "public"
 namespace: "default"
 name: "debezium-mssql-source"
-inputs: [ "debezium-mssql-topic" ]
+topicName: "debezium-mssql-topic"
 parallelism: 1
 
 className: "org.apache.pulsar.io.debezium.mssql.DebeziumMsSqlSource"

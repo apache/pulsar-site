@@ -1,18 +1,25 @@
 import React from "react";
 import s from './Cards.module.css';
 import * as data from '@site/data/case-studies';
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import linkIcon from '!!raw-loader!./link.svg';
+import SvgIcon from "@site/src/components/ui/SvgIcon/SvgIcon";
 
 const Card: React.FC<data.Resource> = (props) => {
   return (
-    <a href={props.link} target="_blank" className={s.Card}>
-      <div className={s.CardImage}>
-        <div style={{ backgroundImage: `url(${props.image})` }}></div>
-        <img src={useBaseUrl('/img/goto.svg')} />
-      </div>
-      <h3>{props.company}</h3>
+    <div className={s.Card}>
+      <a
+        target="_blank"
+        className={s.CardImage}
+        href={props.link}
+        style={{ backgroundImage: `url(${props.image})`, ...props.extraStyles }}
+      >
+        <div className={s.LinkIcon}>
+          <SvgIcon svg={linkIcon} />
+        </div>
+      </a>
+      <h3 className={s.CompanyName}>{props.company}</h3>
       {props.description && <p>{props.description}</p>}
-    </a>
+    </div >
   );
 };
 
