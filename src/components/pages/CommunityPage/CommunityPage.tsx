@@ -29,10 +29,10 @@ export default function CommunityPage(): JSX.Element {
     // While there remain elements to shuffle
     while (0 !== currentIndex) {
       // Pick a remaining element
-      let randomIndex = Math.floor(Math.random() * currentIndex);
+      const randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
       // And swap it with the current element.
-      let temporaryValue = array[currentIndex];
+      const temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
