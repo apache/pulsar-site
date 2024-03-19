@@ -1,64 +1,57 @@
 .Cards {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 1.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
 }
 
-.Card {
-  padding-bottom: 1rem;
-  color: var(--text-color);
-}
-.Card:hover{
-  color: var(--text-color);
-  text-decoration: none;
+.Card {}
+
+.CompanyName {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 2.625rem;
 }
 
 .CardImage {
-  transition: all .35s ease-in-out;
-  height: 15rem;
-  margin-bottom: 1rem;
-  border-radius: 1rem;
-  border: 1px solid var(--border-color);
   position: relative;
-}
-
-.Card:hover .CardImage{
-  border-color: var(--gray-1);
-}
-
-.CardImage > div{
+  display: block;
+  height: 16rem;
+  padding: 2rem;
+  background-origin: content-box;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  width: calc(100% - 4rem);
-  height: calc(100% - 4rem);
-  position: absolute;
-  left: 2rem;
-  top: 2rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
 }
 
-.CardImage > img{
-  transition: all .35s ease-in-out;
-  display: block;
+.CardImage:hover {
+  border: 1px solid var(--input-border-color);
+  transition: var(--transition-short);
+}
+
+.LinkIcon {
+  fill: var(--text-color);
   position: absolute;
-  width: 16px;
-  height: 16px;
   bottom: 1rem;
   right: 1rem;
-  opacity: 0;
-}
-.Card:hover img{
-  opacity: 1;
+  display: none;
 }
 
-.Card h3{
-  font-size: 1.75rem;
-  line-height: 2rem;
-  font-weight: 400;
+.LinkIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
-@media (min-width: 1000px) {
+.CardImage:hover .LinkIcon {
+  display: inline-flex;
+}
+
+@media (max-width: 800px) {
   .Cards {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 4rem;
   }
 }
