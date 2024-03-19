@@ -11,6 +11,7 @@ import ProjectGovernance from "./sections/project-governance/ProjectGovernance";
 import Slider from '@site/src/components/ui/Slider/Slider';
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Button from "@site/src/components/ui/Button/Button";
+import _ from 'lodash'
 
 export default function CommunityPage(): JSX.Element {
 
@@ -24,14 +25,10 @@ export default function CommunityPage(): JSX.Element {
     <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
   );
 
-  type ApacheId = string
-  type GithubId = string
-  const GithubUsers: Record<ApacheId, GithubId> = {
-    "jianghaiting": "Jason918",
-    "technoboy": "Technoboy-",
-    "linlin": "315157973"
-  }
-  
+  // Shuffle the team members so that the order is different each time the page is loaded
+  team.pmc = _.shuffle(team.pmc);
+  team.committers = _.shuffle(team.committers);
+
   let TeamPMCSets = new Array(Math.ceil(team.pmc.length/5));
   let teamCtrsSets = new Array(Math.ceil(team.committers.length/5));
 
@@ -53,6 +50,30 @@ export default function CommunityPage(): JSX.Element {
     teamCtrsSets[CountTheSets].push(element);
   });
 
+  function MemberCard({ member, index }) {
+    // require the member to have "GitHub username(s) (user-provided)" field information in Whimsy
+    // the user can go to Whimsy url https://whimsy.apache.org/roster/committer/__self__ to update the information
+    // since it's possible to have multiple GitHub usernames, we only take the first one
+    const githubUsername = member.githubUsername?.[0];
+    const href = githubUsername ? ('https://github.com/' + githubUsername) : "#";
+    const target = githubUsername ? "_blank" : "_self";
+  
+    return (
+      <a href={href} target={target} key={'m'+index} className={s.CommunityMembersMember}>
+        <div>
+          <div className={s.CommunityMembersMemberPic}>
+            { githubUsername && (
+            <img src={'https://github.com/' + githubUsername + '.png'} alt={githubUsername} />
+            )}
+          </div>
+          <div className={s.CommunityMembersMemberName}>
+            <strong>{member.name}</strong><br />
+            {githubUsername ? githubUsername : member.apacheId}
+          </div>
+        </div>
+      </a>
+    );
+  }
 
   return (
     <Layout title={"Community"} description={"Learn about the basics of using Apache Pulsar"} wrapperClassName="LandingPage">
@@ -190,17 +211,7 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={(isShowMorePMC ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
                   {(team.pmc || []).map((member,i) => (
-                    <a href={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'m'+i} className={s.CommunityMembersMember}>
-                      <div>
-                        <div className={s.CommunityMembersMemberPic}>
-                          <img src={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId) + '.png'} alt={GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId} />
-                        </div>
-                        <div className={s.CommunityMembersMemberName}>
-                          <strong>{member.name}</strong><br />
-                          {GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId}
-                        </div>
-                      </div>
-                    </a>
+                    <MemberCard member={member} index={i} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMorePMCButton}
@@ -215,18 +226,8 @@ export default function CommunityPage(): JSX.Element {
                           {TeamPMCSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
                               {set.map((member, i) => (
-                                <a href={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'ms'+i} className={s.CommunityMembersMember}>
-                                  <div>
-                                    <div className={s.CommunityMembersMemberPic}>
-                                      <img src={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId) + '.png'} alt={GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId} />
-                                    </div>
-                                    <div className={s.CommunityMembersMemberName}>
-                                      <strong>{member.name}</strong><br />
-                                      {member.apacheId}
-                                    </div>
-                                  </div>
-                                </a>
-                              ))}
+                                  <MemberCard member={member} index={i} />
+                                ))}
                             </div>
                           ))}
                         </Slider>
@@ -239,17 +240,7 @@ export default function CommunityPage(): JSX.Element {
               <div>
                 <div className={(isShowMoreCmtrs ? s.CommunityMembersDesktopOpen : s.CommunityMembersDesktop)}>
                   {(team.committers || []).map((member,i) => (
-                    <a href={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'c'+i} className={s.CommunityMembersMember}>
-                      <div>
-                        <div className={s.CommunityMembersMemberPic}>
-                          <img src={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId) + '.png'} alt={GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId} />
-                        </div>
-                        <div className={s.CommunityMembersMemberName}>
-                          <strong>{member.name}</strong><br />
-                          {member.apacheId}
-                        </div>
-                      </div>
-                    </a>
+                    <MemberCard member={member} index={i} />
                   ))}
                   <div className={s.CommunityMembersShowMore}>
                     {showMoreCmtrsButton}
@@ -264,17 +255,7 @@ export default function CommunityPage(): JSX.Element {
                           {teamCtrsSets.map((set, i) => (
                             <div key={i} className={s.SlideTeam}>
                               {set.map((member, i) => (
-                                <a href={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId)} target="_blank" key={'cs'+i} className={s.CommunityMembersMember}>
-                                  <div>
-                                    <div className={s.CommunityMembersMemberPic}>
-                                      <img src={'https://github.com/' + (GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId) + '.png'} alt={GithubUsers[member.apacheId] ? GithubUsers[member.apacheId] : member.apacheId} />
-                                    </div>
-                                    <div className={s.CommunityMembersMemberName}>
-                                      <strong>{member.name}</strong><br />
-                                      {member.apacheId}
-                                    </div>
-                                  </div>
-                                </a>
+                                <MemberCard member={member} index={i} />
                               ))}
                             </div>
                           ))}
