@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import SlickSlider from 'react-slick';
 
-import LeftButton from './img/leftButton.svg';
-import RightButton from './img/rightButton.svg';
+import LeftButton from './img/lbutton.svg';
+import RightButton from './img/rbutton.svg';
+
+import LeftButtonInvert from './img/leftButtonInvert.svg';
+import RightButtonInvert from './img/rightButtonInvert.svg';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -13,6 +16,7 @@ type SliderProps = {
   children: React.ReactNode;
   slidesToShow: number;
   centerMode?: boolean;
+  invertMode?: boolean;
 }
 
 const Slider = (props: SliderProps) => {
@@ -33,6 +37,28 @@ const Slider = (props: SliderProps) => {
     const { className, style, onClick } = props;
     return (
       <LeftButton
+        className={`${className} ${s.ArrowButton} ${s.PrevButton}`}
+        style={{ ...style, left: '10' }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  const NextArrowInvert = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <RightButtonInvert
+        className={`${className} ${s.ArrowButton} ${s.NextButton}`}
+        style={{ ...style, left: '70' }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  const PrevArrowInvert = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <LeftButtonInvert
         className={`${className} ${s.ArrowButton} ${s.PrevButton}`}
         style={{ ...style, left: '10' }}
         onClick={onClick}
@@ -62,13 +88,13 @@ const Slider = (props: SliderProps) => {
     swipeToSlide: true,
     touchThreshold: 3,
     centerMode: props.centerMode || false,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: props.invertMode ? <NextArrowInvert /> : <NextArrow />,
+    prevArrow: props.invertMode ? <PrevArrowInvert /> : <PrevArrow />,
     dots: smallScreen,
     arrows: !smallScreen,
     responsive: [
       {
-        breakpoint: 801,
+        breakpoint: 1000,
         settings: {
           slidesToShow: 1,
         }
@@ -79,7 +105,7 @@ const Slider = (props: SliderProps) => {
   return (
     <BrowserOnly>
       {() => (
-        <div className={s.Slider}>
+        <div className={props.invertMode ? s.SliderInvert : s.Slider}>
           <SlickSlider {...settings}>
             {props.children}
           </SlickSlider>

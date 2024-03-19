@@ -5,6 +5,7 @@ import featuresList from './featuresList';
 import s from './Features.module.css';
 import Slider from '../../../ui/Slider/Slider';
 import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
+import Button from '@site/src/components/ui/Button/Button';
 
 const Features = () => {
   return (
@@ -59,6 +60,9 @@ const Features = () => {
             })}
           </Slider>
         </div>
+      </div>
+      <div className={s.ButtonContainer}>
+        <Button title='Explore more features' variant='action' href='/features' />
       </div>
     </section>
   )

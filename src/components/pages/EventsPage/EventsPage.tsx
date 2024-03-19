@@ -4,14 +4,14 @@ import Cards from "./Cards/Cards";
 import * as data from '@site/data/events';
 import Page from "@site/src/components/ui/Page/Page";
 import s from './EventsPage.module.css';
-import Button from "@site/src/components/ui/Button/Button";
 import FeaturedEvent from "./FeaturedEvent/FeaturedEvent";
 import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/ContributeDataDrivenPage";
 
 type CategoryFilterOption = data.Category;
 
-const CaseStudiesPage: React.FC = () => {
+const EventsPage: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = React.useState<CategoryFilterOption>('events');
+  let currcat = categoryFilter;
 
   return (
     <Layout
@@ -37,15 +37,10 @@ const CaseStudiesPage: React.FC = () => {
         <section>
           <form>
             <div className={s.Filters}>
-              <div className={s.CategorySwitcher}>
+              <div className={s.FiltersMobile}>
                 {data.categories.map((category) => {
                   return (
-                    <Button
-                      key={category}
-                      variant={categoryFilter === category ? 'action' : 'regular'}
-                      onClick={() => setCategoryFilter(category)}
-                      title={data.categoryLabels[category]}
-                    />
+                    <button type="button" key={category} data-option={category} onClick={() => setCategoryFilter(category)} className={s.CategoryFilterLink+(category === currcat ? ' '+s.active : '')}>{data.categoryLabels[category]}</button>
                   );
                 })}
               </div>
@@ -65,4 +60,4 @@ const CaseStudiesPage: React.FC = () => {
   );
 }
 
-export default CaseStudiesPage;
+export default EventsPage;

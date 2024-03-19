@@ -36,7 +36,7 @@ const Users: React.FC = () => {
         </div>
         <BrowserOnly>
           {() => (
-            <Slider centerMode={window.innerWidth > 800} slidesToShow={2}>
+            <Slider centerMode={window.innerWidth > 1000} slidesToShow={2}>
               {Object.values(testimonials).flat().map((caseStudy, i) => (
                 <div key={i} className={s.slide}>
                   <div className={s.slide_container}>

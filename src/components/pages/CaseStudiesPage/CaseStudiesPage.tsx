@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Layout from "@theme/Layout";
 import Cards from "./Cards/Cards";
 import * as data from '@site/data/case-studies';
-import Input from "@site/src/components/ui/Input/Input";
 import Select from "@site/src/components/ui/Select/Select";
 import Page from "@site/src/components/ui/Page/Page";
 import s from './CaseStudiesPage.module.css';
@@ -41,8 +40,13 @@ const CaseStudiesPage: React.FC = () => {
                   title: option === 'any' ? 'All Industries' : data.categoryLabels[option]
                 }))}
               />
-
-              <Input placeholder="Search" value={searchQuery} onChange={setSearchQuery} clearable />
+            </div>
+            <div className={s.FiltersMobile}>
+              <div>
+              {categoryFilterOptions.map((option, idx) => (
+                <button type="button" key={idx} onClick={() => {setCategoryFilter(option)}} className={s.CategoryFilterLink+(option == categoryFilter ? ' '+s.active : '')}>{option === 'any' ? 'All Industries' : data.categoryLabels[option]}</button>
+              ))}
+              </div>
             </div>
 
             <div>
