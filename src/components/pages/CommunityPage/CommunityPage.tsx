@@ -64,7 +64,10 @@ export default function CommunityPage(): JSX.Element {
   });
 
   function MemberCard({ member, index }) {
-    const githubUsername = member.githubUsername?.[0] || member.apacheId;
+    // require the member to have "GitHub username(s) (user-provided)" field information in Whimsy
+    // the user can go to Whimsy url https://whimsy.apache.org/roster/committer/__self__ to update the information
+    // since it's possible to have multiple GitHub usernames, we only take the first one
+    const githubUsername = member.githubUsername?.[0];
     const href = githubUsername ? ('https://github.com/' + githubUsername) : "#";
     const target = githubUsername ? "_blank" : "_self";
   
@@ -78,7 +81,7 @@ export default function CommunityPage(): JSX.Element {
           </div>
           <div className={s.CommunityMembersMemberName}>
             <strong>{member.name}</strong><br />
-            {githubUsername}
+            {githubUsername ? githubUsername : member.apacheId}
           </div>
         </div>
       </a>
