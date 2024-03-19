@@ -486,7 +486,9 @@ module.exports = {
     {
       "name": "Kiryl Valkovich",
       "apacheId": "visortelle",
-      "githubUsername": []
+      "githubUsername": [
+        "visortelle"
+      ]
     },
     {
       "name": "Vineeth Polamreddy",
