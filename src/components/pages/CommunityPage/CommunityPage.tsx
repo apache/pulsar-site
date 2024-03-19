@@ -24,6 +24,24 @@ export default function CommunityPage(): JSX.Element {
     <Button title={isShowMoreCmtrs ? 'Show less' : 'Show more'} variant="transparentWhite" onClick={() => setIsShowMoreCmtrs(!isShowMoreCmtrs)}/>
   );
 
+  function shuffleArray(array) {
+    let currentIndex = array.length;
+    // While there remain elements to shuffle
+    while (0 !== currentIndex) {
+      // Pick a remaining element
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      let temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  }
+
+  // Shuffle the team members so that the order is different each time the page is loaded
+  shuffleArray(team.pmc);
+  shuffleArray(team.committers);
+
   let TeamPMCSets = new Array(Math.ceil(team.pmc.length/5));
   let teamCtrsSets = new Array(Math.ceil(team.committers.length/5));
 
