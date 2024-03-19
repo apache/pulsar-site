@@ -83,11 +83,25 @@ const DiscussionPlatforms: React.FC = () => {
       ),
       actions: [
         {
+          id: "join-slack",
+          text: "Join Slack",
+          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
+          type: "primary",
+          isExternal: true,
+        },
+        {
           id: "launch-slack",
           text: "Go to Slack",
           href: "https://apache-pulsar.slack.com/",
-          type: "primary",
+          type: "normal",
           isExternal: true,
+        },
+        {
+          id: "history-slack",
+          text: "Show History",
+          href: "https://www.linen.dev/s/apache-pulsar",
+          isExternal: true,
+          type: "normal",
         },
       ],
       image: {
@@ -124,7 +138,7 @@ const DiscussionPlatforms: React.FC = () => {
       title: "Community Meetings",
       description: (
         <span>
-          The community meeting occurs biweekly on Tuesdays and Thursdays to
+          The community meeting occurs biweekly on Thursdays to
           discuss new proposals, open pull requests, and host open discussions.
         </span>
       ),

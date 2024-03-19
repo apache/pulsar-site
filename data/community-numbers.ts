@@ -26,7 +26,7 @@ export type CommunityNumber = {
         title: "Slack members",
         number: "10000",
         linkTitle: 'Join',
-        link: 'https://apache-pulsar.slack.com'
+        link: 'https://communityinviter.com/apps/apache-pulsar/apache-pulsar'
     },
   ];
   
