@@ -153,7 +153,7 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "new-discussion",
           text: "New discussion",
-          href: "https://github.com/apache/pulsar/discussions/new",
+          href: "https://github.com/apache/pulsar/discussions/new/choose",
           type: "primary",
           isExternal: true,
         },
