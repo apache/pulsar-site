@@ -267,7 +267,32 @@ function MemberCard({ member }) {
         </div>
         <div className={s.CommunityMembersMemberName}>
           <strong>{member.name}</strong><br />
-          {githubUsername ? githubUsername : member.apacheId}
+          {githubUsername ? (
+            githubUsername === member.apacheId ? (
+              <span>
+                <img alt="GitHub" src="/img/github-white.svg" />
+                <img alt="ASF" className={s.CommunityMembersMemberASFIdLogo} src="/img/feather.svg" />
+                {githubUsername}
+              </span>
+            ) : (
+              <>
+                <span>
+                  <img alt="GitHub" src="/img/github-white.svg" />
+                  {githubUsername}
+                  &nbsp;&nbsp;
+                </span>
+                <span>
+                  <img alt="ASF" className={s.CommunityMembersMemberASFIdLogo} src="/img/feather.svg" />
+                  {member.apacheId}
+                </span>
+              </>
+            )
+          ) : (
+            <span>
+              <img alt="ASF" className={s.CommunityMembersMemberASFIdLogo} src="/img/feather.svg" />
+              {member.apacheId}
+            </span>
+          )}        
         </div>
       </div>
     </a>
