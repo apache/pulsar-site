@@ -19,7 +19,8 @@ of OpenTelemetry to manage the SDK configuration. The extension allows parameter
 Java system properties. The instructions below rely on environment variables, but can be adapted to use system
 properties too. These variables must be exposed to the Pulsar process via the respective deployment method.
 
-Note that the experimental file based configuration is not currently supported by Pulsar.
+Note that the experimental [file based configuration](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#file-configuration)
+is not currently supported by Pulsar.
 
 ## Telemetry Enablement
 The OpenTelemetry pipeline is disabled by default. Set environment variable `OTEL_SDK_DISABLED=false` to allow the
