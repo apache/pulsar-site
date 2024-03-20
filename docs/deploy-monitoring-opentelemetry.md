@@ -84,3 +84,10 @@ Additional runtime resource attributes, such as hostname, process ID, or operati
 the SDK using Resource Providers. For a description of these attributes, refer to the respective [documentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/resources/library).
 
 For further details on configuring resource attributes, refer to the SDK [documentation](https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/autoconfigure#opentelemetry-resource-attributes).
+
+## Attribute Cardinality Configuration
+
+OpenTelemetry provides an experimental mechanism to control the maximum cardinality of attributes. This is useful for
+limiting the resource usage of the exporter. Pulsar sets the value to 10000 attributes by default. For brokers with a
+large number of topics, this can prove insufficient. The value is controlled by environment variable
+`OTEL_EXPERIMENTAL_METRICS_CARDINALITY_LIMIT`.
