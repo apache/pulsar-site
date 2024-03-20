@@ -118,18 +118,18 @@ The following are some Grafana dashboards examples:
 ## Alerting rules
 You can set alerting rules according to your Pulsar environment. To configure alerting rules for Apache Pulsar, refer to [alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/).
 
-# OpenTelemetry
+## OpenTelemetry
 
-## Status
+### Status
 Pulsar emits OpenTelemetry metrics starting from version 3.3.0. OpenTelemetry log and trace signals are not exposed by
 Pulsar. OpenTelemetry support is currently **experimental** and complements the pre-existing Prometheus metric system,
 with the goal of eventually replacing it. The metrics it exposes are semantically equivalent to the Prometheus metrics.
 
-## Scope
+### Scope
 Pulsar OpenTelemetry metrics are gradually being added for the broker only. Support for the proxy and function worker is
 planned for a future release.
 
-## OpenTelemetry Configuration
+### OpenTelemetry Configuration
 Pulsar natively supports OpenTelemetry via manual instrumentation, instead of relying on the OpenTelemetry automatic
 instrumentation agent. Pulsar uses the auto-configuration [extension](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md)
 of OpenTelemetry to manage the SDK configuration. The extension allows parameter input from environment variables and
@@ -139,16 +139,16 @@ properties too. These variables must be exposed to the Pulsar process via the re
 Note that the experimental [file based configuration](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#file-configuration)
 is not currently supported by Pulsar.
 
-### Telemetry Enablement
+#### Telemetry Enablement
 The experimental OpenTelemetry feature is explicitly disabled by default in Pulsar. Set environment variable `OTEL_SDK_DISABLED=false` to enable the SDK. When disabled, metrics will not be collected nor exported.
 collection of metrics.
 
-### Exporter Configuration
+#### Exporter Configuration
 
 Exporters using the native OpenTelemetry Protocol and Prometheus are included in the Pulsar distribution assembly by
 default and can be used out-of-the-box. Other exporters are not currently supported.
 
-#### OTLP
+##### OTLP
 
 The native OTLP exporter is the recommended way to obtain metrics out of Pulsar. Pulsar defaults to using the OTLP
 exporter unless otherwise overridden by environment variable `OTEL_METRICS_EXPORTER`.
@@ -163,7 +163,7 @@ controlled by changing environment variable `OTEL_METRIC_EXPORT_INTERVAL`.
 Additional parameters that can be configured, such as authentication, compression, and timeout, are described in the
 exporter [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#otlp-exporter-span-metric-and-log-exporters).
 
-##### Remote Collector Considerations
+###### Remote Collector Considerations
 
 If the remote OTLP collector sends data downstream to Prometheus or a Prometheus like-system, it is recommended to copy
 OpenTelemetry resource attributes (such as `pulsar.cluster`) to Prometheus labels on each time-series (metric). This can
@@ -178,7 +178,7 @@ metrics:
   set(attributes["pulsar_cluster"], resource.attributes["pulsar.cluster"])
 ```
 
-#### Prometheus
+##### Prometheus
 
 Pulsar supports exporting OpenTelemetry metrics in Prometheus format. This exporter is pull based and operates by
 opening up a server in the local Pulsar process. To use it, set `OTEL_METRICS_EXPORTER=prometheus` and the Prometheus
@@ -202,7 +202,7 @@ Pulsar.
 For further configuration details, refer to the exporter
 [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#prometheus-exporter).
 
-### Resource Attributes Configuration
+#### Resource Attributes Configuration
 
 Pulsar automatically sets the following resource attributes:
 
@@ -225,7 +225,7 @@ Additional runtime resource attributes, such as hostname, process ID, or operati
 the SDK using Resource Providers. For a description of these attributes, refer to the respective [documentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/resources/library).
 Further details regarding the configuration of Resource Providers can be obtained via the [documentation](https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/autoconfigure#resource-provider-spi).
 
-### Attribute Cardinality Configuration
+#### Attribute Cardinality Configuration
 
 OpenTelemetry provides an experimental mechanism to control the maximum cardinality of attributes. This is useful for
 limiting the resource usage of the exporter. Pulsar sets the value to 10000 attributes by default. For brokers with a
