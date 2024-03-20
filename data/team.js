@@ -443,7 +443,9 @@ module.exports = {
     {
       "name": "Chris Bono",
       "apacheId": "onobc",
-      "githubUsername": []
+      "githubUsername": [
+        "onobc"
+      ]
     },
     {
       "name": "Rui Fu",
