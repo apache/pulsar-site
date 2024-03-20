@@ -125,6 +125,8 @@ Pulsar emits OpenTelemetry metrics starting from version 3.3.0. OpenTelemetry lo
 Pulsar. OpenTelemetry support is currently **experimental** and complements the pre-existing Prometheus metric system,
 with the goal of eventually replacing it. The metrics it exposes are semantically equivalent to the Prometheus metrics.
 
+For a detailed list of OpenTelemetry metrics exposed by Pulsar, refer to [OpenTelemetry Metrics](reference-metrics-opentelemetry.md).
+
 ### Scope
 Pulsar OpenTelemetry metrics are gradually being added for the broker only. Support for the proxy and function worker is
 planned for a future release.
