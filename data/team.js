@@ -36,7 +36,9 @@ module.exports = {
     {
       "name": "David Jensen",
       "apacheId": "djensen",
-      "githubUsername": []
+      "githubUsername": [
+        "entvex"
+      ]
     },
     {
       "name": "Enrico Olivelli",
