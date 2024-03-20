@@ -121,8 +121,22 @@ const injectLinkParseForEndpoint = ([, info]) => {
     }
   }
 
+  /**
+   * Removes class name from the REST API docs URL
+   * /admin/v2/<anything>/ClassName_methodName => /admin/v2/<anything>/methodName
+   * Context:
+   * - https://github.com/apache/pulsar/issues/21573
+   * - https://github.com/apache/pulsar/pull/19193
+  */
+  function getCurlUrl(path) {
+    const parts = path.split('/');
+    const last = parts[parts.length - 1];
+    const [_, methodName] = last.split('_');
+    return [...parts.slice(0, parts.length - 1), methodName].join('/');
+  }
+
   return {
-    text: method + " " + path,
+    text: method + " " + getCurlUrl(path),
     link: restBaseUrl + "?" + restUrl,
   };
 };
