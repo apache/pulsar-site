@@ -46,6 +46,21 @@ controlled by changing environment variable `OTEL_METRIC_EXPORT_INTERVAL`.
 Additional parameters that can be configured, such as authentication, compression, and timeout, are described in the
 exporter [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#otlp-exporter-span-metric-and-log-exporters).
 
+#### Remote Collector Considerations
+
+If the remote OTLP collector sends data downstream to Prometheus or a Prometheus like-system, it is recommended to copy
+OpenTelemetry resource attributes (such as `pulsar.cluster`) to Prometheus labels on each time-series (metric). This can
+be done using [collector transformations](https://opentelemetry.io/docs/collector/transforming-telemetry/).
+
+The example below leverages the [OpenTelemetry Transformation Language](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/ottl)
+and the [transform processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor)
+to achieve this.
+
+```
+metrics:
+  set(attributes["pulsar_cluster"], resource.attributes["pulsar.cluster"])
+```
+
 ### Prometheus
 
 Pulsar supports exporting OpenTelemetry metrics in Prometheus format. This exporter is pull based and operates by
@@ -58,8 +73,14 @@ OTEL_EXPORTER_PROMETHEUS_PORT
 ```
 
 This endpoint must be accessible by the remote Prometheus scrape server. Note that the exporter is less resource
-efficient than the OTLP exporter. Due to divergent feature sets, the metrics emitted by this exporter are not identical
-to those emitted by the OTLP exporter.
+efficient than the OTLP exporter.
+
+Prometheus currently exports the resource attributes in metric `target_info`. In practice, if you have more than one
+cluster, it forces you to use PromQL joins to obtain the cluster ID label.
+
+The Pulsar community has added the option to the OpenTelemetry Java SDK Prometheus Exporter to embed (copy) the cluster
+ID label (`pulsar.cluster`) to each outgoing time series labels. Once this is finalized it will be added by default into
+Pulsar.
 
 For further configuration details, refer to the exporter
 [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#prometheus-exporter).
