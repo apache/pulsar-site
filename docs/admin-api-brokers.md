@@ -45,7 +45,7 @@ localhost:8080
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/brokers/:cluster|operation/getActiveBrokers?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/brokers/:cluster|operation/BrokersBase_getActiveBrokers?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -90,7 +90,7 @@ public/default/0x80000000_0xc0000000    [broker_assignment=shared is_controlled=
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/brokers/:cluster/:broker/ownedNamespaces|operation/getOwnedNamespaes?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/brokers/:cluster/:broker/ownedNamespaces|operation/BrokersBase_getOwnedNamespaces?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -104,7 +104,7 @@ admin.brokers().getOwnedNamespaces(cluster,brokerUrl);
 </Tabs>
 ````
 
-## Update broker conf 
+## Update broker conf
 
 You can update broker configurations using one of the following ways:
 
@@ -144,7 +144,7 @@ resourceUsageTransportPublishIntervalInSecs
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/brokers/configuration|operation/getDynamicConfigurationName?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/brokers/configuration|operation/BrokersBase_getDynamicConfigurationName?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -175,7 +175,7 @@ pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --va
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/brokers/configuration/:configName/:configValue|operation/updateDynamicConfiguration?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/brokers/configuration/:configName/:configValue|operation/BrokersBase_updateDynamicConfiguration?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -211,7 +211,7 @@ brokerShutdownTimeoutMs    100
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/brokers/configuration/values|operation/getAllDynamicConfigurations?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/brokers/configuration/values|operation/BrokersBase_getAllDynamicConfigurations?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -250,7 +250,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/brokers/leaderBroker|operation/getLeaderBroker?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/brokers/leaderBroker|operation/BrokersBase_getLeaderBroker?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
