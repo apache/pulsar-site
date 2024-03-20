@@ -14,7 +14,8 @@ Pulsar OpenTelemetry metrics are gradually being added for the broker only. Supp
 planned for a future release.
 
 # OpenTelemetry Configuration
-Pulsar use the auto-configuration [extension](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md)
+Pulsar natively supports OpenTelemetry via manual instrumentation, instead of relying on the OpenTelemetry automatic
+instrumentation agent. Pulsar uses the auto-configuration [extension](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md)
 of OpenTelemetry to manage the SDK configuration. The extension allows parameter input from environment variables and
 Java system properties. The instructions below rely on environment variables, but can be adapted to use system
 properties too. These variables must be exposed to the Pulsar process via the respective deployment method.
