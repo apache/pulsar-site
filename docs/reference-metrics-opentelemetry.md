@@ -6,11 +6,11 @@ sidebar_label: "OpenTelemetry Metrics"
 
 Pulsar exposes the following OpenTelemetry metrics.
 
-# Broker
+## Broker
 
-## Topic Lookup metrics
+### Topic Lookup metrics
 
-### pulsar.broker.lookup.request.duration
+#### pulsar.broker.lookup.request.duration
 The duration of topic lookup requests (either binary or HTTP)
 * Type: Histogram
 * Unit: `second`
@@ -20,22 +20,22 @@ The duration of topic lookup requests (either binary or HTTP)
     * `broker`
     * `redirect`
 
-### pulsar.broker.request.topic.lookup.concurrent.usage
+#### pulsar.broker.request.topic.lookup.concurrent.usage
 The number of pending lookup operations in the broker. When it reaches threshold "maxConcurrentLookupRequest" defined in broker.conf, new requests are rejected.
 * Type: UpDownCounter
 * Unit: `{operation}`
 
-### pulsar.broker.request.topic.lookup.concurrent.limit
+#### pulsar.broker.request.topic.lookup.concurrent.limit
 The maximum number of pending lookup operations in the broker. Equal to "maxConcurrentLookupRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
 
-### pulsar.broker.topic.load.concurrent.usage
+#### pulsar.broker.topic.load.concurrent.usage
 The number of pending topic load operations in the broker. When it reaches threshold "maxConcurrentTopicLoadRequest" defined in broker.conf, new requests are rejected.
 * Type: UpDownCounter
 * Unit: `{operation}`
 
-### pulsar.broker.topic.load.concurrent.limit
+#### pulsar.broker.topic.load.concurrent.limit
 The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
