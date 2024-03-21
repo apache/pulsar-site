@@ -198,7 +198,7 @@ module.exports = {
             {
               to: "/ecosystem/",
               label: "Ecosystem",
-            },
+            }
           ],
         },
         {
@@ -208,9 +208,14 @@ module.exports = {
           label: "Docs",
         },
         {
-          to: "/contribute/",
+          to: "/features/",
           position: "left",
-          label: "Contribute",
+          label: "Features",
+        },
+        {
+          to: "/use-cases/",
+          position: "left",
+          label: "Use Cases",
         },
         {
           type: "dropdown",
@@ -254,6 +259,10 @@ module.exports = {
               id: "scroll-contribute",
             },
             {
+              to: "/contribute/",
+              label: "Contribution Guide",
+            },
+            {
               to: "https://github.com/apache/pulsar/wiki",
               label: "Wiki",
             },
@@ -281,8 +290,12 @@ module.exports = {
               label: "Case Studies",
             },
             {
-              to: "/resources",
-              label: "Resources",
+              to: "/articles",
+              label: "Articles",
+            },
+            {
+              to: "/presentations",
+              label: "Presentations",
             },
             {
               to: "/events",
@@ -416,8 +429,7 @@ module.exports = {
           onlyIncludeVersions: buildVersions || ["current"],
         },
         blog: {
-          blogSidebarTitle: 'All posts',
-          blogSidebarCount: 'ALL',
+          blogSidebarCount: 0,
           showReadingTime: true,
           editUrl: `${githubSiteUrl}/edit/main/`,
         },
@@ -432,6 +444,7 @@ module.exports = {
             require.resolve("./src/css/navbar.css"),
             require.resolve("./src/css/footer.css"),
             require.resolve("./src/css/variables.css"),
+            require.resolve("./src/css/blog.css"),
           ],
         },
         //googleAnalytics: {

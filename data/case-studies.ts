@@ -69,7 +69,7 @@ export const resources: Record<Category, Resource[]> =
       company: "Cisco",
       link: 'https://youtu.be/nNUKnxfJeeo?si=XKzv73RDAzRyWWpQ',
       image: '/img/cisco.svg',
-      description: "Cisco IoT Control Center is among the world's largest IoT platforms, with numerous data centers spread across continents, hosting thousands of applications for the management of hundreds of millions of IoT devices, including connected cars and wireless phones. This presentation outlines the two-year process of transforming this platform into a cloud-native GitOps platform, where Pulsar is replacing legacy message queue services and is deployed across multiple Kubernetes clusters."
+      description: "Cisco IoT Control Center is among the world's largest IoT platforms, with numerous data centers spread across continents, hosting thousands of applications for the management of hundreds of millions of IoT devices, including connected cars and wireless phones. Cisco underwent a two-year process of transforming their platform into a cloud-native GitOps platform, where Pulsar replaced legacy message queue services and is deployed across multiple Kubernetes clusters."
     },
     {
       company: "Clever Cloud",

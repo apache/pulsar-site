@@ -24,6 +24,10 @@ on:
       - '.github/workflows/ci-dummy-sync.yml'
       - 'tools/pytools/**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
 jobs:
   sync-without-push:
     name: Check synchronize content

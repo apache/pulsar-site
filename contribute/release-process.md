@@ -199,7 +199,7 @@ Finally, use instructions in [verifying release candidates](validate-release-can
 
 ### Sign and stage the artifacts on SVN
 
-The src and bin artifacts need to be signed and uploaded to the dist SVN repository for staging.
+The src and bin artifacts need to be signed and uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
 
 Before running the script, make sure that the `<yourname>@apache.org` code signing key is the default gpg signing key.
 
@@ -212,11 +212,14 @@ default-key <key fingerprint>
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
 ```shell
-cd $PULSAR_PATH
 # '-candidate-1' needs to be incremented in case of multiple iteration in getting
 #    to the final release)
 RCVERSION=2.11.4-candidate-1
 APACHEID=your_apache_id
+
+# make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
+mkdir ~/pulsar-svn-release-$RCVERSION
+cd ~/pulsar-svn-release-$RCVERSION
 
 svn mkdir --username $APACHEID -m "Add directory for pulsar $RCVERSION release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
 svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
@@ -240,8 +243,13 @@ svn ci -m 'Staging artifacts and signature for Pulsar release $RCVERSION'
 Upload the artifacts to ASF Nexus:
 
 ```shell
+# Remove the new dirs or files in the $PULSAR_PATH from the previous steps.
 cd $PULSAR_PATH
 rm -rf apache-pulsar-2.X.0-src
+
+# Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
+git status
+
 
 export APACHE_USER=$USER
 export APACHE_PASSWORD=$MY_PASSWORD
