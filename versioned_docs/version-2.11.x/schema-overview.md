@@ -23,7 +23,7 @@ Pulsar uses a schema registry as a central repository to store the registered sc
 
 :::note
 
-Currently, Pulsar schema is available for [Java clients](client-libraries-java.md), [Go clients](client-libraries-go.md), [Python clients](client-libraries-python.md), [C++ clients](client-libraries-cpp.md), and [C# clients](client-libraries-dotnet.md).
+Currently, Pulsar schema is available for [Java clients](client-libraries-java.md), [Go clients](client-libraries-go.md), [Python clients](client-libraries-python.md), [Node.js clients](client-libraries-node.md), [C++ clients](client-libraries-cpp.md), and [C# clients](client-libraries-dotnet.md).
 
 :::
 
