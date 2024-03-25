@@ -17,7 +17,7 @@ Pulsar uses a schema registry as a central repository to store the registered sc
 
 :::note
 
-Currently, Pulsar schema is available for [Java clients](client-libraries-java.md), [Go clients](client-libraries-go.md), [Python clients](client-libraries-python.md), [C++ clients](client-libraries-cpp.md), and [C# clients](client-libraries-dotnet.md).
+Currently, Pulsar schema is available for [Java clients](client-libraries-java.md), [Go clients](client-libraries-go.md), [Python clients](client-libraries-python.md), [Node.js clients](client-libraries-node.md), [C++ clients](client-libraries-cpp.md), and [C# clients](client-libraries-dotnet.md).
 
 :::
 
@@ -42,7 +42,7 @@ This diagram illustrates how Pulsar schema works on the producer side.
 
 ![Workflow of Pulsar schema on the producer side](/assets/schema-producer.svg)
 
-Below are explanations for each step. 
+Below are explanations for each step.
 
 1. The application uses a schema instance to construct a producer instance.
    The schema instance defines the schema for the data being produced using the producer instance. Take Avro as an example, Pulsar extracts the schema definition from the POJO class and constructs the `SchemaInfo`.
@@ -67,7 +67,7 @@ This diagram illustrates how schema works on the consumer side.
 
 ![Workflow of Pulsar schema on the consumer side](/assets/schema-consumer.svg)
 
-Below are explanations for each step. 
+Below are explanations for each step.
 
 1. The application uses a schema instance to construct a consumer instance.
 
