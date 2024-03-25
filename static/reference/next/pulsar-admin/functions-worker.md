@@ -9,7 +9,7 @@ $ pulsar-admin functions-worker subcommand
 
 
 
-## <em>function-stats</em>
+## function-stats
 
 Dump all functions stats running on this broker
 
@@ -23,9 +23,39 @@ $ pulsar-admin functions-worker function-stats options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# functions-worker
+
+Operations to collect function-worker statistics
 
 
-## <em>monitoring-metrics</em>
+```shell
+$ pulsar-admin functions-worker subcommand
+```
+
+
+
+## function-stats
+
+Dump all functions stats running on this broker
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker function-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## monitoring-metrics
 
 Dump metrics for Monitoring
 
@@ -39,9 +69,57 @@ $ pulsar-admin functions-worker monitoring-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# functions-worker
+
+Operations to collect function-worker statistics
 
 
-## <em>get-cluster</em>
+```shell
+$ pulsar-admin functions-worker subcommand
+```
+
+
+
+## function-stats
+
+Dump all functions stats running on this broker
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker function-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## monitoring-metrics
+
+Dump metrics for Monitoring
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker monitoring-metrics options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster
 
 Get all workers belonging to this cluster
 
@@ -55,9 +133,75 @@ $ pulsar-admin functions-worker get-cluster options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# functions-worker
+
+Operations to collect function-worker statistics
 
 
-## <em>get-cluster-leader</em>
+```shell
+$ pulsar-admin functions-worker subcommand
+```
+
+
+
+## function-stats
+
+Dump all functions stats running on this broker
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker function-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## monitoring-metrics
+
+Dump metrics for Monitoring
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker monitoring-metrics options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster
+
+Get all workers belonging to this cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker get-cluster options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster-leader
 
 Get the leader of the worker cluster
 
@@ -71,9 +215,93 @@ $ pulsar-admin functions-worker get-cluster-leader options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# functions-worker
+
+Operations to collect function-worker statistics
 
 
-## <em>get-function-assignments</em>
+```shell
+$ pulsar-admin functions-worker subcommand
+```
+
+
+
+## function-stats
+
+Dump all functions stats running on this broker
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker function-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## monitoring-metrics
+
+Dump metrics for Monitoring
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker monitoring-metrics options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster
+
+Get all workers belonging to this cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker get-cluster options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster-leader
+
+Get the leader of the worker cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker get-cluster-leader options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-function-assignments
 
 Get the assignments of the functions across the worker cluster
 
@@ -87,9 +315,111 @@ $ pulsar-admin functions-worker get-function-assignments options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# functions-worker
+
+Operations to collect function-worker statistics
 
 
-## <em>rebalance</em>
+```shell
+$ pulsar-admin functions-worker subcommand
+```
+
+
+
+## function-stats
+
+Dump all functions stats running on this broker
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker function-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## monitoring-metrics
+
+Dump metrics for Monitoring
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker monitoring-metrics options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster
+
+Get all workers belonging to this cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker get-cluster options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-cluster-leader
+
+Get the leader of the worker cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker get-cluster-leader options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-function-assignments
+
+Get the assignments of the functions across the worker cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin functions-worker get-function-assignments options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## rebalance
 
 Triggers a rebalance of functions to workers
 
@@ -103,4 +433,6 @@ $ pulsar-admin functions-worker rebalance options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 

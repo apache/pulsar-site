@@ -6,12 +6,13 @@ type ActionButtonProps = {
   id: string;
   text: string;
   href: string;
-  type: "primary" | "normal" | "link";
+  type: "primary" | "normal" | "link" | "transparentWhite" | "transparentBlack";
   isExternal?: boolean;
 };
 
 export type ContentCardProps = {
-  title: string;
+  format?: "column" | "row";
+  title?: string;
   description: React.ReactNode;
   image?: {
     src: string;
@@ -22,7 +23,7 @@ export type ContentCardProps = {
 
 const ContentCard: React.FC<ContentCardProps> = (props) => {
   return (
-    <div className={s.ContentCard}>
+    <div className={props.format == 'column' ? s.ContentCardColumn : s.ContentCard}>
       {props.image && (
         <img
           className={`${props.image.size === "big" ? s.BigImage : s.NormalImage}`}
@@ -30,8 +31,8 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
         />
       )}
       <div>
-        <h3>{props.title}</h3>
-        <div>{props.description}</div>
+        {props.title && <h3>{props.title}</h3>}
+        <div className={s.Texts}>{props.description}</div>
         <div className={s.Actions}>
           {(props.actions || []).map((action) => (
             <ActionButton key={action.id} {...action} />
@@ -53,6 +54,12 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
       break;
     case "normal":
       buttonVariant = "regular";
+      break;
+    case "transparentBlack":
+      buttonVariant = "transparentBlack";
+      break;
+    case "transparentWhite":
+      buttonVariant = "transparentWhite";
       break;
   }
 

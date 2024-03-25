@@ -18,11 +18,13 @@
 # under the License.
 
 import enum
+import shutil
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from pathlib import Path
 
 import semver
 
+from constant import site_path
 from execute import config_doc_generator, pulsar_admin_clidoc_generator, pulsar_clidoc_generator
 from execute import pulsar_client_clidoc_generator, pulsar_perf_clidoc_generator
 
@@ -45,14 +47,19 @@ if __name__ == '__main__':
     args = parser.parse_args()
     master_path = Path(args.master_path)
     kinds = set(args.kind)
+    version = args.version
+
+    if version != 'next':
+        ver = semver.VersionInfo.parse(version)
+        version = f"{ver.major}.{ver.minor}.x"
+
+    if version != 'next' and Kind.all in kinds:
+        src = site_path() / 'static' / 'reference' / 'next'
+        dst = site_path() / 'static' / 'reference' / version
+        shutil.copytree(src, dst)
+
     if Kind.all in kinds:
         kinds = {Kind.config, Kind.admin, Kind.pulsar, Kind.client, Kind.perf}
-
-    if args.version != 'next':
-        ver = semver.VersionInfo.parse(args.version)
-        version = f"{ver.major}.{ver.minor}.x"
-    else:
-        version = args.version
 
     for kind in kinds:
         if kind == Kind.config:

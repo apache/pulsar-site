@@ -19,10 +19,10 @@ const ShortInfo: React.FC = () => {
         <Parallax>
           <div className={s.docs_container}>
             <h1 className={s.header}>
-              <span className={s.title}> Apache Pulsar</span><br />
-              <span className={s.subtitle}> Cloud-Native, Distributed Messaging and Streaming </span>
+              <span className={s.title}>Apache Pulsar™</span><br />
+              <span className={s.subtitle}>Cloud-Native, Distributed Messaging and Streaming</span>
             </h1>
-            <span className={s.text}>Apache® Pulsar™ is an open-source, distributed messaging and streaming platform built for the cloud. </span>
+            <span className={s.text}>Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud. </span>
 
             <div className={s.buttons}>
               <Button
@@ -36,6 +36,12 @@ const ShortInfo: React.FC = () => {
                 href={`${siteConfig.baseUrl}docs/${latestVersion}/concepts-overview`}
               />
             </div>
+
+            <p className={s.case_studies}>
+              Pulsar is proven at scale by hundreds of companies of different sizes, serving millions of messages per second.
+              <br />
+              <a href="/case-studies">See case studies</a>
+            </p>
           </div>
         </Parallax>
       </div>
@@ -56,7 +62,7 @@ const ShortInfo: React.FC = () => {
             </p>
 
             <p>
-              Its features include <strong>multi-tenancy</strong> with resource separation and access control, <strong>geo-replication</strong> across regions, <strong>tiered storage</strong> and support for five official client languages.
+              Its features include <strong>multi-tenancy</strong> with resource separation and access control, <strong>geo-replication</strong> across regions, <strong>tiered storage</strong> and support for six official client languages.
               It supports up to one million unique topics and is designed to simplify your application architecture.
             </p>
 

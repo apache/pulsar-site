@@ -1,5 +1,5 @@
 import lodash from 'lodash'
-import React from 'react'
+import React, { FC } from 'react'
 import semver from "semver/preload"
 import {Stack, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material"
 
@@ -116,7 +116,11 @@ function renderLatestVersionCell(d: SupportedVersionData): JSX.Element {
   </TableCell>
 }
 
-export default function SupportedVersionsTable(): JSX.Element {
+type SupportedVersionsTableProps = {
+  isHideUnmaintained?: boolean
+};
+
+const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
   let releaseList: SimpleReleaseData[] = releases.map(r => ({
     version: semver.coerce(r.tagName),
     released: moment(r.publishedAt),
@@ -147,6 +151,13 @@ export default function SupportedVersionsTable(): JSX.Element {
     })
   }
 
+  if (props.isHideUnmaintained) {
+    supportedVersionList = supportedVersionList.filter(v =>
+      v.activeSupport.isAfter(new Date()) ||
+      v.securitySupport.isAfter(new Date())
+    );
+  }
+
   const TableHeaderCell = styled(TableCell)({fontWeight: "bold"})
 
   return <>
@@ -162,8 +173,8 @@ export default function SupportedVersionsTable(): JSX.Element {
       </TableHead>
       <TableBody>
         {
-          supportedVersionList.map(r => <>
-            <TableRow>
+          supportedVersionList.map((r, i) => <>
+            <TableRow key={i}>
               {renderVersionCell(r.version)}
               {renderReleasedCell(r.released)}
               {renderSupportCell(r.activeSupport)}
@@ -176,3 +187,5 @@ export default function SupportedVersionsTable(): JSX.Element {
     </Table>
   </>
 }
+
+export default SupportedVersionsTable;

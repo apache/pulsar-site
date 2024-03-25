@@ -1,16 +1,16 @@
 import React from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import s from './Cards.module.css';
 import * as data from '@site/data/events';
 
 const Card: React.FC<data.Resource> = (props) => {
   return (
-    <div className={s.Card}>
-      {props.previewImg && <div className={s.CardImage} style={{ backgroundImage: `url(${props.previewImg})` }}></div>}
-      <h3><a href={props.link}>{props.title}</a></h3>
+    <a href={props.link} className={s.Card}>
       {props.displayDate && <p>{props.displayDate}</p>}
       {props.description && <p>{props.description}</p>}
-      <a href={props.link} target="_blank">Learn more</a>
-    </div>
+      <h3>{props.title}</h3>
+      <img src={useBaseUrl('/img/goto.svg')} />
+    </a>
   );
 };
 

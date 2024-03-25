@@ -9,7 +9,7 @@ $ pulsar-admin tenants subcommand
 
 
 
-## <em>list</em>
+## list
 
 List the existing tenants
 
@@ -23,9 +23,39 @@ $ pulsar-admin tenants list options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# tenants
+
+Operations about tenants
 
 
-## <em>get</em>
+```shell
+$ pulsar-admin tenants subcommand
+```
+
+
+
+## list
+
+List the existing tenants
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get
 
 Gets the configuration of a tenant
 
@@ -39,9 +69,57 @@ $ pulsar-admin tenants get options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# tenants
+
+Operations about tenants
 
 
-## <em>create</em>
+```shell
+$ pulsar-admin tenants subcommand
+```
+
+
+
+## list
+
+List the existing tenants
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get
+
+Gets the configuration of a tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## create
 
 Creates a new tenant
 
@@ -55,11 +133,75 @@ $ pulsar-admin tenants create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--allowed-clusters, -c` | Comma separated allowed clusters. If empty, the tenant will have access to all clusters|null||
-| `--admin-roles, -r` | Comma separated list of auth principal allowed to administrate the tenant|null||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# tenants
+
+Operations about tenants
 
 
-## <em>update</em>
+```shell
+$ pulsar-admin tenants subcommand
+```
+
+
+
+## list
+
+List the existing tenants
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get
+
+Gets the configuration of a tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## create
+
+Creates a new tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants create options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## update
 
 Updates the configuration for a tenant
 
@@ -73,11 +215,93 @@ $ pulsar-admin tenants update options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--allowed-clusters, -c` | Comma separated allowed clusters. If omitted, the current set of clusters will be preserved|null||
-| `--admin-roles, -r` | Comma separated list of auth principal allowed to administrate the tenant. If empty the current set of roles won't be modified|null||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# tenants
+
+Operations about tenants
 
 
-## <em>delete</em>
+```shell
+$ pulsar-admin tenants subcommand
+```
+
+
+
+## list
+
+List the existing tenants
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get
+
+Gets the configuration of a tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants get options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## create
+
+Creates a new tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants create options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## update
+
+Updates the configuration for a tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin tenants update options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## delete
 
 Deletes an existing tenant
 
@@ -91,5 +315,6 @@ $ pulsar-admin tenants delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-f, --force` | Delete a tenant forcefully by deleting all namespaces under it.|false||
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 

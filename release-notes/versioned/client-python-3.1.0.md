@@ -1,3 +1,9 @@
+---
+id: client-python-3.1.0
+title: Client Python 3.1.0
+sidebar_label: Client Python 3.1.0
+---
+
 ## What's Changed
 * Wrap the interruption to a custom exception when a blocking API is interrupted by @BewareMyPower in https://github.com/apache/pulsar-client-python/pull/99
 * Upgrade to pulsar-client-cpp 3.1.2 by @BewareMyPower in https://github.com/apache/pulsar-client-python/pull/96

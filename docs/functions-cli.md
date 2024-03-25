@@ -2,6 +2,7 @@
 id: functions-cli
 title: Pulsar Functions CLI and YAML configs
 sidebar_label: "CLI and YAML configs"
+description: Get a comprehensive understanding of admin CLI and YAML configurations for Pulsar Functions
 ---
 
 ````mdx-code-block

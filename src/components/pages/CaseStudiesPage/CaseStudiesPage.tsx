@@ -6,6 +6,7 @@ import Input from "@site/src/components/ui/Input/Input";
 import Select from "@site/src/components/ui/Select/Select";
 import Page from "@site/src/components/ui/Page/Page";
 import s from './CaseStudiesPage.module.css';
+import ContributeDataDrivenPage from "../../ui/ContributeDataDrivenPage/ContributeDataDrivenPage";
 
 type CategoryFilterOption = data.Category | 'any';
 const categoryFilterOptions = ['any', ...data.categories] as const;
@@ -16,13 +17,16 @@ const CaseStudiesPage: React.FC = () => {
 
   return (
     <Layout
-      title={`Ecosystem`}
+      title={`Case studies`}
       description="Learn about the basics of using Apache Pulsar"
+      wrapperClassName="LandingPage"
     >
       <Page>
         <section className={s.Header}>
-          <h1>Case Studies</h1>
+          <h1 style={{ color: 'var(--color-primary-dark)', marginBottom: '0'}}>Case Studies</h1>
           <p>Organizations around the globe rely on Apache Pulsar to manage their most demanding real-time requirements.</p>
+
+          <ContributeDataDrivenPage />
         </section>
 
         <section>

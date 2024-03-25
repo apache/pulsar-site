@@ -2,6 +2,7 @@
 id: txn-advanced-features
 title: Advanced features
 sidebar_label: "Advanced features"
+description: Get a comprehensive understanding of advanced features of transactions in Pulsar.
 ---
 
 You can use the following advanced features with transactions in Pulsar.
@@ -35,6 +36,29 @@ If you want to enable authentication with transactions, follow the steps below.
 1. [Grant "consume" permission](admin-api-topics.md#grant-permission) to the `persistent://pulsar/system/transaction_coordinator_assign` topic.
 
 2. [Configure authentication](security-overview/#authentication) in a Pulsar client.
+
+## Select transaction isolation level
+
+To enhance the flexibility of Pulsar transactions, they support two distinct isolation levels:
+- `READ_COMMITTED`(default): The consumer can only consume all transactional messages that have been committed.
+- `READ_UNCOMMITTED`: The consumer can consume all messages, even transactional messages that have been aborted.
+
+For different scenarios, they use different subscriptions and choose different isolation levels. One scenario might require transactions, while another might not. In general, not all subscriptions of the same topic require transaction guarantees. Some want low latency without the exact-once semantic guarantee (like a real-time monitoring system), and some must require the exactly-once guarantee (e.g., business processing systems).
+Users can freely choose different isolation levels according to different scenarios.
+
+Note that this is a subscription-level configuration, and all consumers under the same subscription must be configured with the same isolation level.
+
+In this example, the consumer builder uses the `READ_UNCOMMITTED` isolation level.
+
+```java
+Consumer<String> consumer = client
+  .newConsumer(Schema.STRING)
+  .topic("persistent://my-tenant/my-namespace/my-topic")
+  .subscriptionName("my-subscription")
+  .subscriptionType(SubscriptionType.Shared)
+  .subscriptionIsolationLevel(SubscriptionIsolationLevel.READ_UNCOMMITTED) // Adding the isolation level configuration
+  .subscribe();
+```
 
 ## Guarantee exactly-once semantics
 

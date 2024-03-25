@@ -5,6 +5,7 @@ import featuresList from './featuresList';
 import s from './Features.module.css';
 import Slider from '../../../ui/Slider/Slider';
 import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
+import Button from '@site/src/components/ui/Button/Button';
 
 const Features = () => {
   return (
@@ -21,9 +22,9 @@ const Features = () => {
             return (
               <div key={i} className={s.feature_block}>
                 <Picture className={s.feature_picture} />
-                <span className={s.feature_title}>
+                <h3 className={s.feature_title}>
                   {feature.title}
-                </span>
+                </h3>
 
                 <span className={s.feature_text}>
                   {feature.text}
@@ -42,9 +43,9 @@ const Features = () => {
                 <div key={i}>
                   <div className={s.feature_block}>
                     <div className={s.text_container}>
-                      <span className={s.feature_title}>
+                      <h3 className={s.feature_title}>
                         {feature.title}
-                      </span>
+                      </h3>
 
                       <span className={s.feature_text}>
                         {feature.text}
@@ -59,6 +60,9 @@ const Features = () => {
             })}
           </Slider>
         </div>
+      </div>
+      <div className={s.ButtonContainer}>
+        <Button title='Explore more features' variant='action' href='/features' />
       </div>
     </section>
   )

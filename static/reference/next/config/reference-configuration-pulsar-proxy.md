@@ -69,7 +69,7 @@ Whether TLS is enabled when communicating with Pulsar brokers
 **Category**: Broker Client Authorization
 
 ### brokerServiceURL
-The service url points to the broker cluster. URL must have the pulsar:// prefix.
+If does not set metadataStoreUrl or configurationMetadataStoreUrl, this url should point to the discovery service provider. URL must have the pulsar:// prefix. And does not support multi url yet.
 
 **Type**: `java.lang.String`
 
@@ -80,7 +80,7 @@ The service url points to the broker cluster. URL must have the pulsar:// prefix
 **Category**: Broker Discovery
 
 ### brokerServiceURLTLS
-The tls service url points to the broker cluster. URL must have the pulsar+ssl:// prefix.
+If does not set metadataStoreUrl or configurationMetadataStoreUrl, this url should point to the discovery service provider. URL must have the pulsar+ssl:// prefix. And does not support multi url yet.
 
 **Type**: `java.lang.String`
 
@@ -91,7 +91,7 @@ The tls service url points to the broker cluster. URL must have the pulsar+ssl:/
 **Category**: Broker Discovery
 
 ### brokerWebServiceURL
-The web service url points to the broker cluster
+The web service url points to the discovery service provider of the broker cluster, and does not support multi url yet.
 
 **Type**: `java.lang.String`
 
@@ -102,7 +102,7 @@ The web service url points to the broker cluster
 **Category**: Broker Discovery
 
 ### brokerWebServiceURLTLS
-The tls web service url points to the broker cluster
+The tls web service url points to the discovery service provider of the broker cluster, and does not support multi url yet.
 
 **Type**: `java.lang.String`
 
@@ -124,7 +124,7 @@ The metadata store URL for the configuration data. If empty, we fall back to use
 **Category**: Broker Discovery
 
 ### functionWorkerWebServiceURL
-The web service url points to the function worker cluster. Only configure it when you setup function workers in a separate cluster
+The web service url points to the discovery service provider of the function worker cluster, and does not support multi url yet. Only configure it when you setup function workers in a separate cluster
 
 **Type**: `java.lang.String`
 
@@ -135,7 +135,7 @@ The web service url points to the function worker cluster. Only configure it whe
 **Category**: Broker Discovery
 
 ### functionWorkerWebServiceURLTLS
-The tls web service url points to the function worker cluster. Only configure it when you setup function workers in a separate cluster
+The tls web service url points to the discovery service provider of the function worker cluster, and does not support multi url yet. Only configure it when you setup function workers in a separate cluster
 
 **Type**: `java.lang.String`
 
@@ -228,6 +228,17 @@ When enabled, checks that the target broker is active before connecting. zookeep
 **Dynamic**: `false`
 
 **Category**: Broker Proxy
+
+### enableProxyStatsEndpoints
+Whether to enable the proxy's /metrics and /proxy-stats http endpoints
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
 
 ### httpInputMaxReplayBufferSize
 Http input buffer max size.
@@ -871,7 +882,7 @@ Number of threads used for Netty IO. Default is set to `2 * Runtime.getRuntime()
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `8`
 
 **Dynamic**: `false`
 

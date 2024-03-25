@@ -21,7 +21,7 @@ $ pulsar-admin ns-isolation-policy subcommand
 * `brokers`
 * `broker`
 
-## <em>set</em>
+## set
 
 Create/Update a namespace isolation policy for a cluster. This operation requires Pulsar super-user privileges
 
@@ -43,7 +43,7 @@ Options
 | `--secondary`                   | comma separated secondary-broker-regex list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | []      |
 | `--auto-failover-policy-params` | comma separated name=value auto failover policy parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | null    |
 
-## <em>get</em>
+## get
 
 Get namespace isolation policy of a cluster. This operation requires Pulsar super-user privileges
 
@@ -55,7 +55,7 @@ Get namespace isolation policy of a cluster. This operation requires Pulsar supe
 $ pulsar-admin ns-isolation-policy get options
 ```
 
-## <em>list</em>
+## list
 
 List all namespace isolation policies of a cluster. This operation requires Pulsar super-user privileges
 
@@ -67,7 +67,7 @@ List all namespace isolation policies of a cluster. This operation requires Puls
 $ pulsar-admin ns-isolation-policy list options
 ```
 
-## <em>delete</em>
+## delete
 
 Delete namespace isolation policy of a cluster. This operation requires Pulsar super-user privileges
 
@@ -79,7 +79,7 @@ Delete namespace isolation policy of a cluster. This operation requires Pulsar s
 $ pulsar-admin ns-isolation-policy delete options
 ```
 
-## <em>brokers</em>
+## brokers
 
 List all brokers with namespace-isolation policies attached to it. This operation requires Pulsar super-user privileges
 
@@ -91,7 +91,7 @@ List all brokers with namespace-isolation policies attached to it. This operatio
 $ pulsar-admin ns-isolation-policy brokers options
 ```
 
-## <em>broker</em>
+## broker
 
 Get broker with namespace-isolation policies attached to it. This operation requires Pulsar super-user privileges
 

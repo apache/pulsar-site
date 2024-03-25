@@ -8,8 +8,8 @@ $ pulsar compact-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-g, --generate-docs` | Generate docs|true|
 | `-c, --broker-conf` | Configuration file for Broker|conf/broker.conf|
-| `-h, --help` | Show this help message|false|
 | `-t, --topic` | Topic to compact|tmp|
+| `-h, --help` | Show this help message|false|
+| `-g, --generate-docs` | Generate docs|true|
 

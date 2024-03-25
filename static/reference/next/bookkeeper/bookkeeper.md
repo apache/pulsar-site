@@ -1,4 +1,4 @@
-## `bookkeeper`
+# bookkeeper
 A tool for managing BookKeeper.
 
 ### Environment variables
@@ -17,7 +17,7 @@ The table below lists the environment variables that you can use to configure th
 |BOOKIE_GC_LOG|Gc options to be passed to the jvm||
 
 
-### `autorecovery`
+### autorecovery
 Runs an auto-recovery service
 
 Usage
@@ -33,7 +33,7 @@ Options
 |`-c`, `--conf`|Configuration for the auto-recovery||
 
 
-### `bookie`
+### bookie
 Starts up a BookKeeper server (aka bookie)
 
 Usage
@@ -51,7 +51,7 @@ Options
 |-withAutoRecovery|Start auto-recovery service bookie server|false|
 
 
-### `localbookie`
+### localbookie
 Runs a test ensemble of N bookies locally
 
 Usage
@@ -60,7 +60,7 @@ Usage
 bookkeeper localbookie N
 ```
 
-### `upgrade`
+### upgrade
 Upgrade the bookie’s filesystem
 
 Usage
@@ -77,7 +77,7 @@ Options
 |`-u`, `--upgrade`|Upgrade the bookie’s directories||
 
 
-### `shell`
+### shell
 Run shell for admin commands. To see a full listing of those commands, run bookkeeper shell without an argument.
 
 Usage

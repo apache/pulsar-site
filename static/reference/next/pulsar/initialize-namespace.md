@@ -8,9 +8,9 @@ $ pulsar initialize-namespace options
 
 |Flag|Description|Default|
 |---|---|---|
-| `-cs, --configuration-store` | Configuration Store connection string|cs|
-| `-h, --help` | Show this help message|false|
-| `-g, --generate-docs` | Generate docs|true|
-| `-c, --cluster` | Cluster name|c|
+| `-c, --cluster` | Cluster name|null|
+| `-cs, --configuration-store` | Configuration Store connection string|null|
 | `--zookeeper-session-timeout-ms` | Local zookeeper session timeout ms|30000|
+| `-h, --help` | Show this help message|false|
+| `-g, --generate-docs` | Generate docs|false|
 

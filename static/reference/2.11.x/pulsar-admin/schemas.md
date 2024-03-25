@@ -9,7 +9,7 @@ $ pulsar-admin schemas subcommand
 
 
 
-## <em>get</em>
+## get
 
 Get the schema for a topic
 
@@ -27,7 +27,7 @@ $ pulsar-admin schemas get options
 | `-v, --version` | version|null||
 
 
-## <em>delete</em>
+## delete
 
 Delete the latest schema for a topic
 
@@ -44,7 +44,7 @@ $ pulsar-admin schemas delete options
 | `-f, --force` | whether to delete schema completely. If true, delete all resources (including metastore and ledger), otherwise only do a mark deletion and not remove any resources indeed|false||
 
 
-## <em>upload</em>
+## upload
 
 Update the schema for a topic
 
@@ -61,7 +61,7 @@ $ pulsar-admin schemas upload options
 | `-f, --filename` | filename|null||
 
 
-## <em>extract</em>
+## extract
 
 Provide the schema via a topic
 

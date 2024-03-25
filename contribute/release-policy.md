@@ -3,6 +3,16 @@ id: release-policy
 title: Release policy
 ---
 
+## Supported Versions
+
+Please plan your Pulsar deployment updates according to the dates provided below. However, note that the Apache Pulsar project may provide ad hoc releases for some older patch versions, depending on resource availability, time constraints, or the severity of an issue, such as a significant CVE. These releases would be provided on a 'best-effort' basis. For supported versions, the Apache Pulsar project follows the [Security policy](/security).
+
+````mdx-code-block
+import SupportedVersionsTable from "@site/src/components/SupportedVersionsTable";
+
+<SupportedVersionsTable />
+````
+
 ## Release semantics
 
 The Pulsar project follows a variant of Semantic Versioning (semver), which replacing `major.minor.patch` with `LTS.feature.patch`.
@@ -32,6 +42,8 @@ Starting from 3.0, additionally, live upgrade/downgrade between one LTS and the 
 * 3.0 -> 4.0 -> 3.0 is OK;
 * 3.2 -> 4.0 -> 3.2 is OK;
 * 3.2 -> 4.4 -> 3.2 is OK;
+* 3.0 -> 3.1 -> 3.0 is OK;
+* 3.0 -> 3.2 -> 3.0 is OK;
 * 3.2 -> 5.0 is _not_ OK.
 
 ## Release frequency and support expectation
@@ -48,14 +60,6 @@ This can be translated into:
 * Security patches are provided for the past 3 LTS releases and 2 feature releases
 
 Therefore, users can choose between stay in an LTS release until they are ready to jump into the next LTS, or try the latest releases which contains required features.
-
-## Supported Versions
-
-````mdx-code-block
-import SupportedVersionsTable from "@site/src/components/SupportedVersionsTable";
-
-<SupportedVersionsTable />
-````
 
 ## Release cycles
 

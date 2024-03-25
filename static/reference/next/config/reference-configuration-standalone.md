@@ -632,7 +632,7 @@ BandwithOut Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBrokerLoadDataTTLInSeconds
-Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default is loadBalancerReportUpdateMaxIntervalMinutes * 2. (only used in load balancer extension TransferSheddeer)
+Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default value is loadBalancerReportUpdateMaxIntervalMinutes * 120, reflecting twice the duration in seconds. (only used in load balancer extension TransferSheddeer)
 
 **Type**: `long`
 
@@ -720,11 +720,11 @@ Option to enable the debug mode for the load balancer logics. The debug mode pri
 **Category**: Load Balancer
 
 ### loadBalancerDirectMemoryResourceWeight
-Direct Memory Resource Usage Weight
+Direct Memory Resource Usage Weight. Direct memory usage cannot accurately reflect the machine's load, and it is not recommended to use it to score the machine's load.
 
 **Type**: `double`
 
-**Default**: `1.0`
+**Default**: `0.0`
 
 **Dynamic**: `true`
 
@@ -771,6 +771,17 @@ Frequency of report to collect, in minutes
 **Default**: `1`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerInFlightServiceUnitStateWaitingTimeInMillis
+Time to wait before fixing any stuck in-flight service unit states. The leader monitor fixes any in-flight service unit(bundle) states by reassigning the ownerships if stuck too long, longer than this period.(only used in load balancer extension logics)
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
@@ -848,6 +859,17 @@ Message-throughput threshold between highest and least loaded brokers for unifor
 **Default**: `4.0`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerMultiPhaseBundleUnload
+Enables the multi-phase unloading of bundles. Set to true, forwards destination broker information to consumers and producers during bundle unload, allowing them to quickly reconnect to the broker without performing an additional topic lookup.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
@@ -929,7 +951,7 @@ Option to override the auto-detected network interfaces max speed
 **Category**: Load Balancer
 
 ### loadBalancerReportUpdateMaxIntervalMinutes
-Min delay of load report to collect, in milli-seconds
+Min delay of load report to collect, in minutes
 
 **Type**: `int`
 
@@ -967,6 +989,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 **Type**: `int`
 
 **Default**: `15`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
+### loadBalancerServiceUnitStateMonitorIntervalInSeconds
+Interval between service unit state monitor checks. The service unit(bundle) state channel is periodically monitored by the leader broker at this interval to fix any orphan bundle ownerships, stuck in-flight states, and other cleanup jobs.`loadBalancerServiceUnitStateTombstoneDelayTimeInSeconds` * 1000 must be bigger than `loadBalancerInFlightServiceUnitStateWaitingTimeInMillis`.(only used in load balancer extension logics)
+
+**Type**: `long`
+
+**Default**: `60`
 
 **Dynamic**: `false`
 
@@ -1147,6 +1180,17 @@ Supported algorithms name for namespace bundle split
 **Default**: `[range_equally_divide, topic_count_equally_divide, specified_positions_divide, flow_or_qps_equally_divide]`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### topicBundleAssignmentStrategy
+Name of topic bundle assignment strategy to use
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.naming.ConsistentHashingTopicBundleAssigner`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
@@ -2220,12 +2264,34 @@ replicator prefix used for replicator producer name and cursor name
 
 **Category**: Replication
 
+### inflightSaslContextExpiryMs
+how often the broker expires the inflight SASL context.
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: SASL Authentication Provider
+
 ### kinitCommand
 kerberos kinit command.
 
 **Type**: `java.lang.String`
 
 **Default**: `/usr/bin/kinit`
+
+**Dynamic**: `false`
+
+**Category**: SASL Authentication Provider
+
+### maxInflightSaslContext
+Maximum number of inflight sasl context.
+
+**Type**: `long`
+
+**Default**: `50000`
 
 **Dynamic**: `false`
 
@@ -2503,7 +2569,7 @@ Interval between checks to see if topics with compaction policies need to be com
 **Category**: Server
 
 ### brokerServiceCompactionPhaseOneLoopTimeInSeconds
-Timeout for the compaction phase one loop, If the execution time of the compaction phase one loop exceeds this time, the compaction will not proceed.
+Timeout for each read request in the compaction phase one loop, If the execution time of one single message read operation exceeds this time, the compaction will not proceed.
 
 **Type**: `long`
 
@@ -2569,12 +2635,34 @@ Enable check for minimum allowed client library version
 
 **Category**: Server
 
+### clusterMigrationAutoResourceCreation
+Flag to start cluster migration for topic only after creating all topic's resources such as tenant, namespaces, subscriptions at new green cluster. (Default disabled).
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### clusterMigrationCheckDurationSeconds
 Interval between checks to see if cluster is migrated and marks topic migrated  if cluster is marked migrated. Disable with value 0. (Default disabled).
 
 **Type**: `int`
 
 **Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### compactionServiceFactoryClassName
+The class name of the factory that implements the topic compaction service.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.compaction.PulsarCompactionServiceFactory`
 
 **Dynamic**: `false`
 
@@ -2630,6 +2718,17 @@ Size of the lookahead window to use when detecting if all the messages in the to
 **Type**: `long`
 
 **Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### delayedDeliveryMaxDelayInMillis
+The max allowed delay for delayed delivery (in milliseconds). If the broker receives a message which exceeds this max delay, then it will return an error to the producer. The default value is 0 which means there is no limit on the max delivery delay.
+
+**Type**: `long`
+
+**Default**: `0`
 
 **Dynamic**: `false`
 
@@ -2698,17 +2797,6 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.delayed.InMemoryDelayedDeliveryTrackerFactory`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### disableBrokerInterceptors
-Enable or disable the broker interceptor
-
-**Type**: `boolean`
-
-**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -3150,7 +3238,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `868`
+**Default**: `1998`
 
 **Dynamic**: `true`
 
@@ -3429,7 +3517,7 @@ Number of threads to use for pulsar broker service. The executor in thread pool 
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -3451,7 +3539,7 @@ Number of threads to use for Netty IO. Default is set to `2 * Runtime.getRuntime
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `8`
 
 **Dynamic**: `false`
 
@@ -3463,17 +3551,6 @@ Number of threads to use for orderedExecutor. The ordered executor is used to op
 **Type**: `int`
 
 **Default**: `8`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### numWorkerThreadsForNonPersistentTopic
-Number of worker threads to serve non-persistent topic
-
-**Type**: `int`
-
-**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -3629,6 +3706,17 @@ Enable or disable system topic.
 
 **Category**: Server
 
+### topicCompactionRetainNullKey
+Whether retain null-key message during topic compaction.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### topicFencingTimeoutSeconds
 If a topic remains fenced for this number of seconds, it will be closed forcefully.
  If it is set to 0 or a negative number, the fenced topic will not be closed.
@@ -3658,6 +3746,17 @@ Amount of seconds to timeout when loading a topic. In situations with many geo-r
 **Type**: `long`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicOrderedExecutorThreadNum
+Number of worker threads to serve topic ordered executor
+
+**Type**: `int`
+
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -3951,7 +4050,7 @@ Number of BookKeeper client IO threads. Default is Runtime.getRuntime().availabl
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `8`
 
 **Dynamic**: `false`
 
@@ -3962,7 +4061,7 @@ Number of BookKeeper client worker threads. Default is Runtime.getRuntime().avai
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -4010,7 +4109,7 @@ Enable/disable reordering read sequence on reading entries
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -4415,6 +4514,17 @@ The number of partitioned topics that is allowed to be automatically created if 
 
 **Category**: Storage (Managed Ledger)
 
+### dispatcherPauseOnAckStatePersistentEnabled
+After enabling this feature, Pulsar will stop delivery messages to clients if the cursor metadata is too large to persist, it will help to reduce the duplicates caused by the ack state that can not be fully persistent. Default false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedCursorInfoCompressionThresholdInBytes
 ManagedCursorInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
 0 means compression will always apply.
@@ -4513,7 +4623,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `347`
+**Default**: `799`
 
 **Dynamic**: `true`
 
@@ -4847,7 +4957,7 @@ Number of threads to be used for managed ledger scheduled tasks
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -5089,7 +5199,7 @@ Number of threads to use for pulsar transaction replay PendingAckStore or Transa
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -5232,7 +5342,7 @@ Number of connections per Broker in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -5254,7 +5364,7 @@ Number of IO threads in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 **Dynamic**: `false`
 
@@ -5389,6 +5499,18 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### numWorkerThreadsForNonPersistentTopic
+Number of worker threads to serve non-persistent topic.
+@deprecated - use topicOrderedExecutorThreadNum instead.
+
+**Type**: `int`
+
+**Default**: `-1`
 
 **Dynamic**: `false`
 

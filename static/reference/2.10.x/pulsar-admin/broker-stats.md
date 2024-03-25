@@ -20,7 +20,7 @@ $ pulsar-admin broker-stats subcommand
 * `allocator-stats`
 * `load-report`
 
-## <em>monitoring-metrics</em>
+## monitoring-metrics
 
 dump metrics for Monitoring
 
@@ -38,7 +38,7 @@ Options
 |----------------|--------------------|---------|
 | `-i, --indent` | Indent JSON output | false   |
 
-## <em>mbeans</em>
+## mbeans
 
 dump mbean stats
 
@@ -56,7 +56,7 @@ Options
 |----------------|--------------------|---------|
 | `-i, --indent` | Indent JSON output | false   |
 
-## <em>topics</em>
+## topics
 
 dump topics stats
 
@@ -74,7 +74,7 @@ Options
 |----------------|--------------------|---------|
 | `-i, --indent` | Indent JSON output | false   |
 
-## <em>allocator-stats</em>
+## allocator-stats
 
 dump allocator stats
 
@@ -86,7 +86,7 @@ dump allocator stats
 $ pulsar-admin broker-stats allocator-stats options
 ```
 
-## <em>load-report</em>
+## load-report
 
 dump broker load-report
 

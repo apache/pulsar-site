@@ -2,11 +2,12 @@
 id: io-connectors
 title: Built-in connector
 sidebar_label: "Built-in connector"
+description: Learn configuration, examples, and Java classes of Pulsar IO connectors.
 ---
 
-Pulsar distribution includes a set of common connectors that have been packaged and tested with the rest of Apache Pulsar. These connectors import and export data from some of the most commonly used data systems.
+Pulsar distribution includes a set of common connectors that have been packaged and tested with the rest of Apache Pulsar. These built-in connectors import and export data from some of the most commonly used data systems.
 
-Using any of these connectors is as easy as writing a simple connector and running the connector locally or submitting the connector to a Pulsar Functions cluster.
+Using any of these built-in connectors is as easy as writing a simple connector and running the connector locally or submitting the connector to a Pulsar Functions cluster.
 
 ## Source connector
 
@@ -145,6 +146,14 @@ Pulsar has various sink connectors, which are sorted alphabetically as below.
 * [Configuration](io-alluxio.md#configuration)
 
 * [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/alluxio/src/main/java/org/apache/pulsar/io/alluxio/sink/AlluxioSink.java)
+
+### Azure Data Explorer
+
+* [Configuration](io-azuredataexplorer-sink.md#configuration)
+
+* [Example](io-azuredataexplorer-sink.md#example)
+
+* [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/azure-data-explorer/src/main/java/org/apache/pulsar/io/azuredataexplorer/ADXSink.java)
 
 ### Cassandra
 

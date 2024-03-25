@@ -116,7 +116,7 @@ We are using `cassandra` docker image to start a single-node cassandra cluster i
 
 ```bash
 
-docker run -d --rm --name=cassandra -p 9042:9042 cassandra
+docker run -d --rm --name=cassandra -p 9042:9042 cassandra:3.11
 
 ```
 
