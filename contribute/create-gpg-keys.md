@@ -118,6 +118,16 @@ gpg --send-key --keyserver=keys.openpgp.org $KEY_ID
 gpg --send-key --keyserver=keyserver.ubuntu.com $KEY_ID
 ```
 
+## Make your the Apache key the default key for GPG
+
+This is required for signing the release artifacts
+
+```shell
+APACHEID=your_asf_id
+KEY_ID=$(gpg --list-keys --with-colons $APACHEID@apache.org | egrep "^pub" | awk -F: '{print $5}')
+echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
+```
+
 ## Appending the key to KEYS files
 
 The GPG key needs to be appended to `KEYS` file for the release candidates.

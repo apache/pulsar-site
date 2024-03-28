@@ -40,6 +40,29 @@ Before you start the next release steps, make sure you have installed these soft
 
 Also, you need to **clean up the bookkeeper's local compiled** to make sure the bookkeeper dependency is fetched from the Maven repository, details to see [this mailing list thread](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2).
 
+
+## Set environment variables to be used across the commands
+
+Set version
+```shell
+export VERSION_RC=3.0.4-candidate-1
+export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+export VERSION_BRANCH=branch-3.0
+export UPSTREAM_REMOTE=origin
+```
+
+Set your ASF user id
+```shell
+export APACHE_USER=<your ASF userid>
+```
+
+In addition, you will need to set `PULSAR_PATH` to point to the cleanly checked out working directory for the release branch.
+
+If you run into problems with GPG signing set this
+```
+export GPG_TTY=$(tty)
+```
+
 ## Create a release candidate
 
 ### Create the release branch
@@ -58,14 +81,21 @@ It is recommended to create a fresh clone of the repository to avoid any local f
 ```shell
 git clone git@github.com:apache/pulsar.git
 cd pulsar
-PULSAR_PATH=$(pwd)
-git checkout -b branch-2.X origin/master
+export PULSAR_PATH=$(pwd)
+git checkout -b $VERSION_BRANCH origin/master
 ```
 
 Alternatively, you can use a git workspace to create a new, clean directory on your machine without needing to re-download the project.
 
 ```shell
-git worktree add ../pulsar.branch-2.X branch-2.X
+git worktree add ../pulsar-release-$VERSION_BRANCH $VERSION_BRANCH
+cd pulsar-release-$VERSION_BRANCH
+export PULSAR_PATH=$(pwd)
+```
+
+if you get an error that the branch is already checked out, go to that directory detach it from the branch. After this the above command should succeed
+```shell 
+git checkout --detach HEAD
 ```
 
 If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch.
@@ -126,6 +156,8 @@ It will speed up cherry-picking since you commit ids are there and there's also 
 A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`.
 It's possible that some dependent commits are necessary to be cherry-picked when you encounter a lot of merge conflicts in a case where they aren't expected.
 
+
+
 ### Update project version and tag
 
 During the release process, you are going to initially create "candidate" tags, that after verification and approval will get promoted to the "real" final tag.
@@ -135,26 +167,22 @@ In this process, the maven version of the project will always be the final one.
 ```shell
 # Bump to the release version
 cd $PULSAR_PATH
-./src/set-project-version.sh 2.X.0
+./src/set-project-version.sh $VERSION_WITHOUT_RC
 
 # Some version may not update the right parent version of `protobuf-shaded/pom.xml`, please double check it.
 
 # Commit
-git commit -m 'Release 2.X.0' -a
+git commit -m "Release $VERSION_WITHOUT_RC" -a
 
 # Create a "candidate" tag
-# If you don't sign your commits already, use the following
-export GPG_TTY=$(tty)
-git tag -u $USER@apache.org v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
-# If you already sign your commits using your apache.org email, use the following
-git tag -s v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
+git tag -u $APACHE_USER@apache.org v$VERSION_RC -m "Release $VERSION_RC"
 
 # Verify that you signed your tag before pushing it:
-git tag -v v2.X.0-candidate-1
+git tag -v v$VERSION_RC
 
 # Push both the branch and the tag to Github repo
-git push origin branch-2.X
-git push origin v2.X.0-candidate-1
+git push $UPSTREAM_REMOTE $VERSION_BRANCH
+git push $UPSTREAM_REMOTE v$VERSION_RC
 ```
 
 For patch releases, the tag is like `2.3.1`.
@@ -188,10 +216,16 @@ First, check that the `LICENSE` and `NOTICE` files cover all included jars for t
 
 ```shell
 cd $PULSAR_PATH
-src/check-binary-license.sh distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz
-# Then, run Apache RAT to verify the license headers in the src package:
-tar -xvzf target/apache-pulsar-2.X.0-src.tar.gz
-cd apache-pulsar-2.X.0-src
+src/check-binary-license.sh distribution/server/target/apache-pulsar-*-bin.tar.gz
+```
+In some older branches, the script is called `src/check-binary-license` instead of `src/check-binary-license.sh`.
+
+
+ Then, run Apache RAT to verify the license headers in the src package:
+```shell
+cd /tmp
+tar -xvzf $PULSAR_PATH/target/apache-pulsar-*-src.tar.gz
+cd apache-pulsar-$VERSION_WITHOUT_RC-src
 mvn apache-rat:check
 ```
 
@@ -201,7 +235,9 @@ Finally, use instructions in [verifying release candidates](validate-release-can
 
 The src and bin artifacts need to be signed and uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
 
-Before running the script, make sure that the `<yourname>@apache.org` code signing key is the default gpg signing key.
+If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
+
+Before running the script below, make sure that the `<yourname>@apache.org` code signing key is the default gpg signing key.
 
 One way to ensure this is to create/edit file `~/.gnupg/gpg.conf` and add a line:
 
@@ -211,19 +247,21 @@ default-key <key fingerprint>
 
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
+This can be automated with this command:
 ```shell
-# '-candidate-1' needs to be incremented in case of multiple iteration in getting
-#    to the final release)
-RCVERSION=2.11.4-candidate-1
-APACHEID=your_apache_id
+KEY_ID=$(gpg --list-keys --with-colons $APACHE_USER@apache.org | egrep "^pub" | awk -F: '{print $5}')
+echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
+```
 
+
+```shell
 # make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
-mkdir ~/pulsar-svn-release-$RCVERSION
-cd ~/pulsar-svn-release-$RCVERSION
+mkdir ~/pulsar-svn-release-$VERSION_RC
+cd ~/pulsar-svn-release-$VERSION_RC
 
-svn mkdir --username $APACHEID -m "Add directory for pulsar $RCVERSION release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
-svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
-cd pulsar-$RCVERSION
+svn mkdir --username $APACHE_USER -m "Add directory for pulsar $VERSION_RC release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+cd pulsar-$VERSION_RC
 
 $PULSAR_PATH/src/stage-release.sh .
 
@@ -235,7 +273,7 @@ $PULSAR_PATH/src/stage-release.sh .
 # If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
 # may be too large to be unable to upload.
 svn add *
-svn ci -m 'Staging artifacts and signature for Pulsar release $RCVERSION'
+svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 ```
 
 ### Stage Maven modules
@@ -243,16 +281,12 @@ svn ci -m 'Staging artifacts and signature for Pulsar release $RCVERSION'
 Upload the artifacts to ASF Nexus:
 
 ```shell
-# Remove the new dirs or files in the $PULSAR_PATH from the previous steps.
 cd $PULSAR_PATH
-rm -rf apache-pulsar-2.X.0-src
-
 # Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
 git status
 
-
-export APACHE_USER=$USER
-export APACHE_PASSWORD=$MY_PASSWORD
+# add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
+ export APACHE_PASSWORD="<MY_PASSWORD>"
 export GPG_TTY=$(tty)
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
 curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
@@ -368,14 +402,8 @@ If the release is approved here with 3 +1 binding votes, you can then proceed to
 
 ## Promote the release
 
-For commands below, you need to set these to the environment
-```
-# Set Version
-export VERSION_RC=2.11.4-candidate-1
-export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-# set your ASF user id
-export APACHE_USER=<your ASF userid>
-```
+For commands below, you need to set the environment variables VERSION_RC, VERSION_WITHOUT_RC and APACHE_USER.
+Please check the previous step for doing that.
 
 ### Publish the final tag
 
