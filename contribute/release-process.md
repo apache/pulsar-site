@@ -412,24 +412,41 @@ PULSAR_IMAGE_URL="<looked up in previous step>"
 PULSAR_ALL_IMAGE_URL="<looked up in previous step>"
 ```
 
+Set also these
+```shell
+PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+# validate pulling, will take some time, you can skip this if you have a slow internet connection
+docker pull $PULSAR_IMAGE_NAME
+docker pull $PULSAR_ALL_IMAGE_NAME
+# check that images are about right, you can skip this if you have a slow internet connection
+docker run --rm  $PULSAR_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+docker run --rm  $PULSAR_ALL_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+```
+
 Now you can render the template to the clipboard
 ```shell
 tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org
-Subject: [VOTE] Pulsar Release $VERSION_RC
+Subject: [VOTE] Release Apache Pulsar $VERSION_WITHOUT_RC based on $VERSION_RC
 
-This is $VERSION_RC for Apache Pulsar, version $VERSION_WITHOUT_RC.
+Hello Apache Pulsar Community,
 
-Changes since previous release:
+This is a call for the vote to release the Apache Pulsar version $VERSION_WITHOUT_RC based on $VERSION_RC.
+
+Included changes since the previous release:
 https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
 
 *** Please download, test and vote on this release. This vote will stay open
 for at least 72 hours ***
 
+Only votes from PMC members are binding, but members of the community are
+encouraged to test the release and vote with "(non-binding)".
+
 Note that we are voting upon the source (tag), binaries are provided for
 convenience.
 
-Source and binary files:
+The release candidate is available at:
 https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC/
 
 SHA-512 checksums:
@@ -440,15 +457,16 @@ Maven staging repo:
 $STAGING_REPO
 
 The tag to be voted upon:
-v$VERSION_RC ($(git rev-parse v$VERSION_RC))
+v$VERSION_RC (commit $(git rev-parse v$VERSION_RC^{commit}))
 https://github.com/apache/pulsar/releases/tag/v$VERSION_RC
 
 Pulsar's KEYS file containing PGP keys you use to sign the release:
 https://downloads.apache.org/pulsar/KEYS
 
 Docker images:
-
+docker pull $PULSAR_IMAGE_NAME
 $PULSAR_IMAGE_URL
+docker pull $PULSAR_ALL_IMAGE_NAME
 $PULSAR_ALL_IMAGE_URL
 
 Please download the source package, and follow the README to build
