@@ -63,6 +63,16 @@ If you run into problems with GPG signing set this
 export GPG_TTY=$(tty)
 ```
 
+For some commands, a template is copied to the clipboard using `pbcopy`. 
+This is already available on MacOS. For Linux, create a shell alias:
+
+```shell
+# Linux only
+# install xsel if it is missing
+sudo apt install xsel
+# create alias pbcopy for copying stdin to clipboard
+alias pbcopy="xsel --clipboard --input"
+```
 ## Create a release candidate
 
 ### Create the release branch
@@ -89,13 +99,18 @@ Alternatively, you can use a git workspace to create a new, clean directory on y
 
 ```shell
 git worktree add ../pulsar-release-$VERSION_BRANCH $VERSION_BRANCH
-cd pulsar-release-$VERSION_BRANCH
+cd ../pulsar-release-$VERSION_BRANCH
 export PULSAR_PATH=$(pwd)
 ```
 
 if you get an error that the branch is already checked out, go to that directory detach it from the branch. After this the above command should succeed
 ```shell 
 git checkout --detach HEAD
+```
+
+After the release, you can cleanup the worktree in the main repository directory
+```shell
+git worktree remove ../pulsar-release-$VERSION_BRANCH
 ```
 
 If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch.
@@ -185,6 +200,16 @@ git push $UPSTREAM_REMOTE $VERSION_BRANCH
 git push $UPSTREAM_REMOTE v$VERSION_RC
 ```
 
+If there's a need to restart the release with more commits, you can delete the tag.
+
+```shell
+# only if you restart the release before it has been published for voting. Don't run this after that!
+# delete local tag
+git tag -d v$VERSION_RC
+# delete tag in remote
+git push $UPSTREAM_REMOTE :v$VERSION_RC
+```
+
 For patch releases, the tag is like `2.3.1`.
 
 ### Build release artifacts
@@ -253,7 +278,6 @@ KEY_ID=$(gpg --list-keys --with-colons $APACHE_USER@apache.org | egrep "^pub" | 
 echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
 ```
 
-
 ```shell
 # make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
 mkdir ~/pulsar-svn-release-$VERSION_RC
@@ -308,7 +332,17 @@ Log in to the ASF Nexus repository at https://repository.apache.org
 
 Click on "Staging Repositories" on the left sidebar and then select the current Pulsar staging repo. This should be called something like `orgapachepulsar-XYZ`.
 
-Use the "Close" button to close the repository. This operation will take few minutes. Once complete click "Refresh" and now a link to the staging repository should be available, something like https://repository.apache.org/content/repositories/orgapachepulsar-XYZ
+Add a version string such as "Apache Pulsar 3.0.4-candidate-1" to the clipboard with this command:
+
+```shell
+printf "Apache Pulsar $VERSION_RC" |pbcopy
+```
+
+Use the "Close" button to close the repository.
+
+Enter the version string in the description field before clicking "Confirm".
+
+This operation will take few minutes. Once complete click "Refresh" and now a link to the staging repository should be available, something like https://repository.apache.org/content/repositories/orgapachepulsar-XYZ
 
 ### Stage Docker images
 
@@ -337,31 +371,57 @@ DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-org
 Run the following commands:
 
 ```shell
+# ensure that you have the most recent base image locally
+docker pull ubuntu:22.04
+
 cd $PULSAR_PATH
-DOCKER_USER=<your-username>
-DOCKER_ORG=<docker-organization>
-docker login $DOCKER_ORG -u $DOCKER_USER -p <your-password>
+DOCKER_USER=<your-dockerhub-username>
+DOCKER_ORG=<your-dockerhub-username>
+docker login -u $DOCKER_USER
 mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
     -DskipTests \
+    -Dmaven.gitcommitid.nativegit=true \
     -Pmain,docker -Pdocker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
     -Ddocker.organization=$DOCKER_ORG \
     -pl docker/pulsar,docker/pulsar-all
 ```
 
-
 ## Vote for the release candidate
 
-Start a voting thread on the dev mailing list. Here is a sample content:
+Start a voting thread on the dev mailing list. 
 
+Here is a way to render the template for the voting email.
+
+Set these shell variables
+```shell
+DOCKER_USER=<your-dockerhub-username>
+STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
+MY_NAME="Firstname Lastname"
+PREVIOUS_VERSION_WITHOUT_RC="3.0.3"
 ```
+
+```shell
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar/tags to find the layer URL for the pulsar image"
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-all/tags to find the layer URL for the pulsar image"
+```
+
+Set these additional shell variable after looking up the URLs
+```shell
+PULSAR_IMAGE_URL="<looked up in previous step>"
+PULSAR_ALL_IMAGE_URL="<looked up in previous step>"
+```
+
+Now you can render the template to the clipboard
+```shell
+tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org
-Subject: [VOTE] Pulsar Release 2.X.0 Candidate 1
+Subject: [VOTE] Pulsar Release $VERSION_RC
 
-This is the first release candidate for Apache Pulsar, version 2.X.0.
+This is $VERSION_RC for Apache Pulsar, version $VERSION_WITHOUT_RC.
 
-It fixes the following issues:
-https://github.com/apache/pulsar/milestone/8?closed=1
+Changes since previous release:
+https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
 
 *** Please download, test and vote on this release. This vote will stay open
 for at least 72 hours ***
@@ -370,30 +430,37 @@ Note that we are voting upon the source (tag), binaries are provided for
 convenience.
 
 Source and binary files:
-https://dist.apache.org/repos/dist/dev/pulsar/pulsar-2.X.0-candidate-1/
+https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC/
 
 SHA-512 checksums:
-028313cbbb24c5647e85a6df58a48d3c560aacc9  apache-pulsar-2.X.0-SNAPSHOT-bin.tar.gz
-f7cc55137281d5257e3c8127e1bc7016408834b1  apache-pulsar-2.x.0-SNAPSHOT-src.tar.gz
+$(cat $HOME/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC/apache-pulsar-$VERSION_WITHOUT_RC-src.tar.gz.sha512 | sed 's|\./||g')
+$(cat $HOME/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC/apache-pulsar-$VERSION_WITHOUT_RC-bin.tar.gz.sha512 | sed 's|\./||g')
 
 Maven staging repo:
-https://repository.apache.org/content/repositories/orgapachepulsar-169/
+$STAGING_REPO
 
 The tag to be voted upon:
-v2.X.0-candidate-1 (21f4a4cffefaa9391b79d79a7849da9c539af834)
-https://github.com/apache/pulsar/releases/tag/v2.X.0-candidate-1
+v$VERSION_RC ($(git rev-parse v$VERSION_RC))
+https://github.com/apache/pulsar/releases/tag/v$VERSION_RC
 
 Pulsar's KEYS file containing PGP keys you use to sign the release:
 https://downloads.apache.org/pulsar/KEYS
 
 Docker images:
 
-<link of the pulsar images>
-
-<link of the pulsar-all image>
+$PULSAR_IMAGE_URL
+$PULSAR_ALL_IMAGE_URL
 
 Please download the source package, and follow the README to build
 and run the Pulsar standalone service.
+
+More advanced release validation instructions can be found at
+https://pulsar.apache.org/contribute/validate-release-candidate/
+
+Thanks,
+
+$MY_NAME
+EOF
 ```
 
 The vote should be open for at least 72 hours (3 days). Votes from Pulsar PMC members will be considered binding, while anyone else is encouraged to verify the release and vote as well.
