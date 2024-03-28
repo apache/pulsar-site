@@ -235,7 +235,7 @@ The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.
 
 :::
 
-### Inspect the artifacts
+### Check licenses
 
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
 
@@ -245,20 +245,7 @@ src/check-binary-license.sh distribution/server/target/apache-pulsar-*-bin.tar.g
 ```
 In some older branches, the script is called `src/check-binary-license` instead of `src/check-binary-license.sh`.
 
-
- Then, run Apache RAT to verify the license headers in the src package:
-```shell
-cd /tmp
-tar -xvzf $PULSAR_PATH/target/apache-pulsar-*-src.tar.gz
-cd apache-pulsar-$VERSION_WITHOUT_RC-src
-mvn apache-rat:check
-```
-
-Finally, use instructions in [verifying release candidates](validate-release-candidate.md) page to do some sanity checks on the produced binary distributions.
-
-### Sign and stage the artifacts on SVN
-
-The src and bin artifacts need to be signed and uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
+### Create and publish the GPG key if you haven't already done this
 
 If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
 
@@ -274,28 +261,59 @@ default-key <key fingerprint>
 
 This can be automated with this command:
 ```shell
+# KEY_ID is in short format, subset key id visible in gpg -K
 KEY_ID=$(gpg --list-keys --with-colons $APACHE_USER@apache.org | egrep "^pub" | awk -F: '{print $5}')
 echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
 ```
+
+### Sign and stage the artifacts to local SVN directory
+
+The src and bin artifacts need to be signed and finally uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
 
 ```shell
 # make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
 mkdir ~/pulsar-svn-release-$VERSION_RC
 cd ~/pulsar-svn-release-$VERSION_RC
 
+# create an empty directory in the SVN server
 svn mkdir --username $APACHE_USER -m "Add directory for pulsar $VERSION_RC release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+# checkout the empty directory
 svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+# cd into the directory
 cd pulsar-$VERSION_RC
 
+# stage the release artifacts
 $PULSAR_PATH/src/stage-release.sh .
+
+# Please check the size of the files in the `pulsar-2.X.0-candidate-1`.
+# If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
+# may be too large to be unable to upload.
+ls -ltra
+du -ms *
 
 # Verify the artifacts are correctly signed have correct checksums:
 ( for i in **/*.(tar.gz|zip|nar); do echo $i; gpg --verify $i.asc $i || exit 1 ; done )
 ( for i in **/*.(tar.gz|zip|nar); do echo $i; shasum -a 512 -c $i.sha512 || exit 1 ; done )
 
-# Please check the size of the files in the `pulsar-2.X.0-candidate-1`.
-# If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
-# may be too large to be unable to upload.
+# don't commit and upload yet, there's a separate step for handling that
+```
+
+### Validate the release files
+
+Then use instructions in [verifying release candidates](validate-release-candidate.md) page to do some sanity checks on the produced binary distributions.
+
+ Make sure to run Apache RAT to verify the license headers in the src package:
+```shell
+cd /tmp
+tar -xvzf ~/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
+cd apache-pulsar-$VERSION_WITHOUT_RC-src
+mvn apache-rat:check
+```
+
+### Commit and upload the staged files in the local SVN directory to ASF SVN server
+
+```shell
+cd  ~/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC
 svn add *
 svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 ```
@@ -368,7 +386,25 @@ DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-org
 
 ### Release Pulsar 3.0 and later
 
-Run the following commands:
+If you are using a git worktree, the git hash won't get properly applied to the docker image tag.
+the workaround is to replace the `.git` file in the directory with a symbolic link to the worktree git directory
+
+```shell
+# only when using git worktree
+cd $PULSAR_PATH
+if [[ -f .git ]]; then
+  REAL_GITDIR=$(cat .git |awk '{ print $2 }')
+  if [[ -d "$REAL_GITDIR" ]]; then
+    mv .git .git~
+    ln -s $REAL_GITDIR .git
+    echo "Workaround in place"
+  else
+    echo "Could find gitdir in .git file"
+  fi
+fi
+```
+
+For creating and publishing the docker images, run the following commands:
 
 ```shell
 # ensure that you have the most recent base image locally
@@ -376,18 +412,17 @@ docker pull ubuntu:22.04
 
 cd $PULSAR_PATH
 DOCKER_USER=<your-dockerhub-username>
-DOCKER_ORG=<your-dockerhub-username>
 docker login -u $DOCKER_USER
 mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
     -DskipTests \
     -Dmaven.gitcommitid.nativegit=true \
     -Pmain,docker -Pdocker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
-    -Ddocker.organization=$DOCKER_ORG \
+    -Ddocker.organization=$DOCKER_USER \
     -pl docker/pulsar,docker/pulsar-all
 ```
 
-## Vote for the release candidate
+## Call for the vote to release a version based on the release candidate
 
 Start a voting thread on the dev mailing list. 
 
