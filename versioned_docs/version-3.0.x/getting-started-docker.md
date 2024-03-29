@@ -18,7 +18,7 @@ docker run -it -p 6650:6650 -p 8080:8080 --mount source=pulsardata,target=/pulsa
 
 :::tip
 
-You may encounter issues with the default RocksDB metadata store after restarting Pulsar standalone.
+You may encounter issues with the default RocksDB metadata store.
 
 We recommend you consider using the following environment variable to use ZooKeeper as the metadata store:
 
