@@ -56,6 +56,24 @@ bin/pulsar standalone
 </Tabs>
 ````
 
+:::tip
+
+You may encounter issues with the default RocksDB metadata store after restarting Pulsar standalone.
+
+Tracking issue: [#21421](https://github.com/apache/pulsar/issues/21421)
+
+We recommend you consider using the following environment variable to use ZooKeeper as the metadata store:
+
+```
+...
+-e PULSAR_STANDALONE_USE_ZOOKEEPER=1 \
+...
+```
+
+Don't apply this fix for existing Pulsar standalone instances if you don't want to loose your data.
+
+:::
+
 If you want to change Pulsar configurations and start Pulsar, run the following command by passing environment variables with the `PULSAR_PREFIX_` prefix. See [default configuration file](https://github.com/apache/pulsar/blob/e6b12c64b043903eb5ff2dc5186fe8030f157cfc/conf/standalone.conf) for more details.
 
 ````mdx-code-block
