@@ -60,8 +60,6 @@ bin/pulsar standalone
 
 You may encounter issues with the default RocksDB metadata store after restarting Pulsar standalone.
 
-Tracking issue: [#21421](https://github.com/apache/pulsar/issues/21421)
-
 We recommend you consider using the following environment variable to use ZooKeeper as the metadata store:
 
 ```
