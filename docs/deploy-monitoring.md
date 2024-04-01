@@ -142,8 +142,8 @@ Note that the experimental [file based configuration](https://github.com/open-te
 is not currently supported by Pulsar.
 
 #### Telemetry Enablement
-The experimental OpenTelemetry feature is explicitly disabled by default in Pulsar. Set environment variable `OTEL_SDK_DISABLED=false` to enable the SDK. When disabled, metrics will not be collected nor exported.
-collection of metrics.
+The experimental OpenTelemetry feature is explicitly disabled by default in Pulsar. Set environment variable
+`OTEL_SDK_DISABLED=false` to enable the SDK. When disabled, metrics will not be collected nor exported.
 
 #### Exporter Configuration
 
