@@ -168,8 +168,8 @@ exporter [documentation](https://github.com/open-telemetry/opentelemetry-java/bl
 ###### Remote Collector Considerations
 
 If the remote OTLP collector sends data downstream to Prometheus or a Prometheus like-system, it is recommended to copy
-OpenTelemetry resource attributes (such as `pulsar.cluster`) to Prometheus labels on each time-series (metric). This can
-be done using [collector transformations](https://opentelemetry.io/docs/collector/transforming-telemetry/).
+OpenTelemetry resource attribute `pulsar.cluster` to Prometheus labels on each time-series (metric). This can be done
+using [collector transformations](https://opentelemetry.io/docs/collector/transforming-telemetry/).
 
 The example below leverages the [OpenTelemetry Transformation Language](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/ottl)
 and the [transform processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor)
