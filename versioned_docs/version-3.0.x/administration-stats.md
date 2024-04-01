@@ -15,32 +15,32 @@ All stats below are **reset** to 0 upon broker restart or topic unloading, **exc
 :::
 
 
-| Stat                                             | Description                                                                                                                     |
-|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| msgRateIn                                        | The sum of all local and replication publishers' publish rates (message per second).                                            |
-| msgThroughputIn                                  | The sum of all local and replication publishers' publish rates (byte per second).                                               |
-| msgRateOut                                       | The sum of all local and replication consumers' dispatch rates (message per second).                                            |
-| msgThroughputOut                                 | The sum of all local and replication consumers' dispatch rates (byte per second).                                               |
-| averageMsgSize                                   | The average size (bytes) of messages published within the last interval.                                                        |
-| storageSize*                                      | The sum of the ledgers' storage size **in BookKeeper** for a topic (in bytes). <br/><br/>**Note**: the `total storage size of a topic` = `storageSize` + `offloadedStorageSize`.  |
-| offloadedStorageSize*                             | The sum of the storage size **in tiered storage** for a topic (in bytes).<br/><br/>**Note**: the `total storage size of a topic` = `storageSize` + `offloadedStorageSize`. 
-| earliestMsgPublishTimeInBacklogs*                 | The publish time of the earliest message in the backlog (in milliseconds).                        |
-| bytesInCounter                                   | The total bytes published to the topic.                                                                                         |
-| msgInCounter                                     | The total messages published to the topic.                                                                                      |
-| bytesOutCounter                                  | The total bytes delivered to consumers.                                                                                         |
-| msgOutCounter                                    | The total messages delivered to consumers.                                                                                      |
-| msgChunkPublished                                | The topics that have chunked messages published on it.                                                                          |
-| backlogSize*                                      | The estimated total unconsumed or backlog size (in bytes).                            |
-| waitingPublishers                                | The number of publishers waiting in a queue in exclusive access mode.                                                           |
-| deduplicationStatus                              | The status of message deduplication for the topic.                                                                              |
-| topicEpoch                                       | The topic epoch or empty if not set.                                                                                            |
-| filteredEntriesCount                             | The count of skipped entries for the topic.                                                                                     |
-| nonContiguousDeletedMessagesRanges               | The number of non-contiguous deleted messages ranges.                                                                           |
-| nonContiguousDeletedMessagesRangesSerializedSize | The serialized size of non-contiguous deleted messages ranges.                                                                  |
-| ownerBroker                                      | The broker that owns this topic.                                                                                                |
-| [publishers](#producer-stats)                    | The list of all local publishers on the topic, ranging from zero to thousands.                                                  |
-| [subscriptions](#subscription-stats)             | The list of all local subscriptions to the topic.                                                                               |
-| [replication](#replication-stats)                | This section gives the stats for cross-colo replication of this topic.                                                          |
+| Stat                                             | Description                                                                                                                                                                        |
+|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| msgRateIn                                        | The sum of all local and replication publishers' publish rates (message per second).                                                                                               |
+| msgThroughputIn                                  | The sum of all local and replication publishers' publish rates (byte per second).                                                                                                  |
+| msgRateOut                                       | The sum of all local and replication consumers' dispatch rates (message per second).                                                                                               |
+| msgThroughputOut                                 | The sum of all local and replication consumers' dispatch rates (byte per second).                                                                                                  |
+| averageMsgSize                                   | The average size (bytes) of messages published within the last interval.                                                                                                           |
+| storageSize*                                     | The sum of the ledgers' storage size **in BookKeeper** and **in tiered storage** for a topic (in bytes).                                                                           |
+| offloadedStorageSize*                            | The sum of the storage size **in tiered storage** for a topic (in bytes).<br/><br/>**Note**: the `total storage size of a topic` = `storageSize`, includes `offloadedStorageSize`. |
+| earliestMsgPublishTimeInBacklogs*                | The publish time of the earliest message in the backlog (in milliseconds).                                                                                                         |
+| bytesInCounter                                   | The total bytes published to the topic.                                                                                                                                            |
+| msgInCounter                                     | The total messages published to the topic.                                                                                                                                         |
+| bytesOutCounter                                  | The total bytes delivered to consumers.                                                                                                                                            |
+| msgOutCounter                                    | The total messages delivered to consumers.                                                                                                                                         |
+| msgChunkPublished                                | The topics that have chunked messages published on it.                                                                                                                             |
+| backlogSize*                                     | The estimated total unconsumed or backlog size (in bytes).                                                                                                                         |
+| waitingPublishers                                | The number of publishers waiting in a queue in exclusive access mode.                                                                                                              |
+| deduplicationStatus                              | The status of message deduplication for the topic.                                                                                                                                 |
+| topicEpoch                                       | The topic epoch or empty if not set.                                                                                                                                               |
+| filteredEntriesCount                             | The count of skipped entries for the topic.                                                                                                                                        |
+| nonContiguousDeletedMessagesRanges               | The number of non-contiguous deleted messages ranges.                                                                                                                              |
+| nonContiguousDeletedMessagesRangesSerializedSize | The serialized size of non-contiguous deleted messages ranges.                                                                                                                     |
+| ownerBroker                                      | The broker that owns this topic.                                                                                                                                                   |
+| [publishers](#producer-stats)                    | The list of all local publishers on the topic, ranging from zero to thousands.                                                                                                     |
+| [subscriptions](#subscription-stats)             | The list of all local subscriptions to the topic.                                                                                                                                  |
+| [replication](#replication-stats)                | This section gives the stats for cross-colo replication of this topic.                                                                                                             |
 
 ### Producer stats
 

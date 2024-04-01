@@ -7,6 +7,13 @@ This page contains manual instructions for reviewing and verifying a release can
 
 ## Validate the binary distribution
 
+:::note
+
+There's a bash script [validate_pulsar_release.sh](https://github.com/lhotari/pulsar-contributor-toolbox/blob/master/scripts/validate_pulsar_release.sh) available for assisting in semi-automated validation for the following steps.
+
+:::
+
+
 ### Download And Verify the binary distributions
 
 Download the server distribution `apache-pulsar-<release>-bin.tar.gz` and extract it. The extracted files are in a directory called `apache-pulsar-<release>`. All the operations below happen within that directory:

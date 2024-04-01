@@ -8,11 +8,11 @@ $ pulsar delete-cluster-metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `--bookkeeper-metadata-service-uri` | Metadata service uri of BookKeeper|null|
+| `-zk, --zookeeper` | Local ZooKeeper quorum connection string|null|
+| `--zookeeper-session-timeout-ms` | Local zookeeper session timeout ms|30000|
 | `-c, -cluster, --cluster` | Cluster name|null|
 | `-cs, --configuration-store` | Configuration Store connection string|null|
-| `-g, --generate-docs` | Generate docs|true|
+| `--bookkeeper-metadata-service-uri` | Metadata service uri of BookKeeper|null|
 | `-h, --help` | Show this help message|false|
-| `-zk, --zookeeper` | Local ZooKeeper quorum connection string|zk|
-| `--zookeeper-session-timeout-ms` | Local zookeeper session timeout ms|30000|
+| `-g, --generate-docs` | Generate docs|false|
 
