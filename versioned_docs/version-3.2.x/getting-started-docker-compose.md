@@ -117,7 +117,7 @@ As preparation, create data directories and change the data directory ownership 
 ```bash
 sudo mkdir -p ./data/zookeeper ./data/bookkeeper
 # this step might not be necessary on other than Linux platforms
-sudo chown 10000 -R data
+sudo chown -R 10000 data
 ```
 
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
