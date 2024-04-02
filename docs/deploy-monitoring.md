@@ -152,8 +152,9 @@ default and can be used out-of-the-box. Other exporters are not currently suppor
 
 ##### OTLP
 
-The native OTLP exporter is the recommended way to obtain metrics out of Pulsar. Pulsar defaults to using the OTLP
-exporter unless otherwise overridden by environment variable `OTEL_METRICS_EXPORTER`.
+The native OTLP exporter is the recommended way to obtain metrics out of Pulsar as the Apache Pulsar community is
+working on modifying it (and not Prometheus) to be highly performant. Pulsar defaults to using the OTLP exporter unless
+otherwise overridden by environment variable `OTEL_METRICS_EXPORTER`.
 
 To use the exporter, set environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` to the respective URL endpoint. This should
 represent the location of the OpenTelemetry [Collector](https://opentelemetry.io/docs/collector/). Pulsar supports both
