@@ -4,6 +4,7 @@
 
 ### 2024
 
+* 2024-04-02 [CVE-2024-29834](CVE-2024-29834.md) Improper Authorization For Namespace and Topic Management Endpoints
 * 2024-03-12 [CVE-2022-34321](CVE-2022-34321.md) Improper Authentication for Pulsar Proxy Statistics Endpoint
 * 2024-03-12 [CVE-2024-27135](CVE-2024-27135.md) Improper Input Validation in Pulsar Function Worker allows Remote Code Execution
 * 2024-03-12 [CVE-2024-27317](CVE-2024-27317.md) Pulsar Functions Worker's Archive Extraction Vulnerability Allows Unauthorized File Modification
