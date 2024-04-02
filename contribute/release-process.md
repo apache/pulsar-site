@@ -41,7 +41,7 @@ Before you start the next release steps, make sure you have installed these soft
 Also, you need to **clean up the bookkeeper's local compiled** to make sure the bookkeeper dependency is fetched from the Maven repository, details to see [this mailing list thread](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2).
 
 
-## Set environment variables to be used across the commands
+## Set environment variables to be used across the commands {#env-vars}
 
 Set version
 ```shell
@@ -553,16 +553,16 @@ EOF
 
 ## Promote the release
 
-For commands below, you need to set the environment variables VERSION_RC, VERSION_WITHOUT_RC and APACHE_USER.
-Please check the previous step for doing that.
+For commands below, you need to set the environment variables `VERSION_RC`, `VERSION_WITHOUT_RC`, `UPSTREAM_REMOTE` and `APACHE_USER`.
+Please check the [environment variables step](#env-vars) for doing that.
 
 ### Publish the final tag
 
 Create and push the final Git tag:
 
 ```shell
-git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC -m "Release v$VERSION_WITHOUT_RC"
-git push origin v$VERSION_WITHOUT_RC
+git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC v$VERSION_RC^{} -m "Release v$VERSION_WITHOUT_RC"
+git push $UPSTREAM_REMOTE v$VERSION_WITHOUT_RC
 ```
 
 ### Create release notes in GitHub
@@ -572,6 +572,9 @@ Then, you can [create a GitHub release](https://docs.github.com/en/repositories/
 ```shell
 # open this URL and create release notes by clicking "Create release from tag"
 echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
+
+# cherry-picked changes template
+echo "[Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F${VERSION_WITHOUT_RC}+label%3Acherry-picked%2F${VERSION_BRANCH}+sort%3Acreated-asc)"
 ```
 
 1. Open the above URL in a browser and create release notes by clicking "Create release from tag".
@@ -738,7 +741,16 @@ Now, run the following script from the main branch of apache/pulsar-site repo:
 ```shell
 cd tools/pytools
 poetry install
-poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar-2.X.Y --version=2.X.Y
+poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
+```
+
+```shell
+# commit files
+# move to pulsar-site root
+cd ../..
+git add -u
+git add static/swagger/$VERSION_WITHOUT_RC
+git commit -m "update rest-apidoc for $VERSION_WITH_RC"
 ```
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
@@ -756,7 +768,7 @@ After publish Java libraries, run the following script from the main branch of a
 ```shell
 cd tools/pytools
 poetry install
-poetry run bin/java-apidoc-generator.py 2.X.0
+poetry run bin/java-apidoc-generator.py $VERSION_WITHOUT_RC
 ```
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is:
@@ -781,7 +793,7 @@ You can generate references of config and command-line tool by running the follo
 # build Pulsar distributions under /path/to/pulsar-2.X.0
 cd tools/pytools
 poetry install
-poetry run bin/reference-doc-generator.py --master-path=/path/to/pulsar-2.X.0 --version=2.X.0
+poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/reference/2.X.x`
@@ -815,11 +827,12 @@ Otherwise, you should update the dropdown version list in this file: <https://gi
 
 Once the release artifacts are available in the Apache Mirrors and the website is updated, you need to announce the release. You should email to dev@pulsar.apache.org, users@pulsar.apache.org, and announce@apache.org. Here is a sample content:
 
-```
+```shell
+tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org, users@pulsar.apache.org, announce@apache.org
-Subject: [ANNOUNCE] Apache Pulsar 2.X.0 released
+Subject: [ANNOUNCE] Apache Pulsar $VERSION_WITHOUT_RC released
 
-The Apache Pulsar team is proud to announce Apache Pulsar version 2.X.0.
+The Apache Pulsar team is proud to announce Apache Pulsar version $VERSION_WITHOUT_RC.
 
 Pulsar is a highly scalable, low latency messaging platform running on
 commodity hardware. It provides simple pub-sub semantics over topics,
@@ -831,13 +844,14 @@ For Pulsar release details and downloads, visit:
 https://pulsar.apache.org/download
 
 Release Notes are at:
-https://pulsar.apache.org/release-notes
+https://pulsar.apache.org/release-notes/versioned/pulsar-$VERSION_WITHOUT_RC/
 
 We would like to thank the contributors that made the release possible.
 
 Regards,
 
 The Pulsar Team
+EOF
 ```
 
 Send the email in plain text mode since the announce@apache.org mailing list will reject messages with text/html content.
@@ -859,7 +873,7 @@ Remove the old releases (if any). You only need the latest release there, and ol
 svn ls https://dist.apache.org/repos/dist/release/pulsar
 
 # Delete each release (except for the last one)
-svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-2.Y.0
+svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-3.X.X
 ```
 
 ## Move master branch to next version
@@ -874,8 +888,8 @@ You need to move the master version to the next iteration `Y` (`X + 1`).
 
 ```shell
 git checkout master
-./src/set-project-version.sh 2.Y.0-SNAPSHOT
-git commit -a -s -m "[cleanup][build] Bumped version to 2.Y.0-SNAPSHOT'
+./src/set-project-version.sh 3.Y.0-SNAPSHOT
+git commit -a -s -m "[cleanup][build] Bumped version to 3.Y.0-SNAPSHOT'
 ```
 
 Since this needs to be merged into `master`, you need to follow the regular process and create a Pull Request on GitHub.
