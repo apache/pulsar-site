@@ -108,19 +108,19 @@ handle non-retryable messages in the dead letter topic.
 ![img_2.png](../static/img/blog-consume-best-practice/DLQ.png)
 ```java
         Consumer<Integer> consumer = pulsarClient.newConsumer(Schema.INT32)
-        .deadLetterPolicy(DeadLetterPolicy.builder()
-                .maxRedeliverCount(maxRedeliverCount)
-                .deadLetterTopic(deadLetterTopic)
-                .retryLetterTopic(retryLetterTopic)
-                .initialSubscriptionName(initialSubscriptionName)
-                .build())
-        .subscriptionType(SubscriptionType.Shared)
-        .enableRetry(true)
-        .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
-        .topic(topic)
-        .subscriptionName(sub)
-        .subscribe();
-Message<Integer> message = consumer.receive();
+               .deadLetterPolicy(DeadLetterPolicy.builder()
+                 .maxRedeliverCount(maxRedeliverCount)
+                 .deadLetterTopic(deadLetterTopic)
+                 .retryLetterTopic(retryLetterTopic)
+                 .initialSubscriptionName(initialSubscriptionName)
+                 .build())
+              .subscriptionType(SubscriptionType.Shared)
+              .enableRetry(true)
+              .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
+              .topic(topic)
+              .subscriptionName(sub)
+              .subscribe();
+        Message<Integer> message = consumer.receive();
         try{
             // Process message
             consumer.acknowledge(message);
@@ -143,12 +143,12 @@ it may result in duplicate message consumption.
 ![img_3.png](../static/img/blog-consume-best-practice/AckTimeout.png)
 ```java
         Consumer<Integer> consumer = pulsarClient.newConsumer(Schema.INT32)
-        .ackTimeout(tiemout, timeunit)
-        .subscriptionType(SubscriptionType.Shared)
-        .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
-        .topic(topic)
-        .subscriptionName(sub)
-        .subscribe();
+                .ackTimeout(tiemout, timeunit)
+                .subscriptionType(SubscriptionType.Shared)
+                .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
+                .topic(topic)
+                .subscriptionName(sub)
+                .subscribe();
 ```
 
 For case 3, there are no effective preventive measures. This is because all methods of redelivery are triggered by the
