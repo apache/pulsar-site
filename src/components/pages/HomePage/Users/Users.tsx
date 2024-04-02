@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash'
 
 import Button from '@site/src/components/ui/Button/Button';
 import Slider from '@site/src/components/ui/Slider/Slider';
@@ -37,7 +38,7 @@ const Users: React.FC = () => {
         <BrowserOnly>
           {() => (
             <Slider centerMode={window.innerWidth > 1000} slidesToShow={2}>
-              {Object.values(testimonials).flat().map((caseStudy, i) => (
+              {Object.values(_.shuffle(testimonials)).flat().map((caseStudy, i) => (
                 <div key={i} className={s.slide}>
                   <div className={s.slide_container}>
                     <Quote className={s.quote} />
