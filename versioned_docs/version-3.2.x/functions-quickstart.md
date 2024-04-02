@@ -129,8 +129,8 @@ Before starting functions, you need to [start Pulsar](#start-standalone-pulsar) 
 
    ```bash
    bin/pulsar-admin functions create \
-      --function-config-file examples/example-function-config.yaml \
-      --jar examples/api-examples.jar
+      --function-config-file $PWD/examples/example-function-config.yaml \
+      --jar $PWD/examples/api-examples.jar
    ```
 
    **Output**
@@ -295,8 +295,8 @@ The following example provides instructions to start a stateful function to vali
 
    ```bash
    bin/pulsar-admin functions create \
-      --function-config-file examples/example-stateful-function-config.yaml \
-      --jar examples/api-examples.jar
+      --function-config-file $PWD/examples/example-stateful-function-config.yaml \
+      --jar $PWD/examples/api-examples.jar
    ```
 
    **Output**
@@ -480,8 +480,8 @@ The following example provides instructions to start a window function to calcul
 
    ```bash
    bin/pulsar-admin functions create \
-      --function-config-file examples/example-window-function-config.yaml \
-      --jar examples/api-examples.jar
+      --function-config-file $PWD/examples/example-window-function-config.yaml \
+      --jar $PWD/examples/api-examples.jar
    ```
 
    **Output**

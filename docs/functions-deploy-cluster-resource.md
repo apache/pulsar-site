@@ -19,7 +19,7 @@ For example, the following command allocates 8 cores, 8GB of RAM, and 10GB of di
 
 ```bash
 bin/pulsar-admin functions create \
-  --jar target/my-functions.jar \
+  --jar $PWD/target/my-functions.jar \
   --classname org.example.functions.MyFunction \
   --cpu 8 \
   --ram 8589934592 \
