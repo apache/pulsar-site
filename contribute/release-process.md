@@ -520,6 +520,37 @@ The vote should be open for at least 72 hours (3 days). Votes from Pulsar PMC me
 
 If the release is approved here with 3 +1 binding votes, you can then proceed to the next step. Otherwise, you should repeat the previous steps and prepare another release candidate to vote.
 
+
+## Summarize the voting for the release
+
+Once the vote has been passed, you will need to send a result vote to [dev@pulsar.apache.org](mailto:dev@pulsar.apache.org) on the voting thread.
+
+Message:
+
+```shell
+tee >(pbcopy) <<EOF
+Hello all,
+
+The vote to release Apache Pulsar version ${VERSION_WITHOUT_RC} based on ${VERSION_RC} is now closed.
+
+The vote PASSED with X binding "+1", Y non-binding "+1" and 0 "-1" votes:
+
+"+1" Binding votes:
+
+  - <name>
+
+"+1" Non-Binding votes:
+
+  - <name>
+
+I'll continue with the release process and the release announcement will follow shortly.
+
+Thanks,
+<your name>
+EOF
+```
+
+
 ## Promote the release
 
 For commands below, you need to set the environment variables VERSION_RC, VERSION_WITHOUT_RC and APACHE_USER.
