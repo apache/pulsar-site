@@ -726,6 +726,7 @@ First, build swagger files from apache/pulsar repo at the released tag:
 
 ```shell
 mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+PULSAR_PATH=$(pwd)
 ```
 
 Now, run the following script from the main branch of apache/pulsar-site repo:
@@ -742,7 +743,7 @@ poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VE
 cd ../..
 git add -u
 git add static/swagger/$VERSION_WITHOUT_RC
-git commit -m "update rest-apidoc for $VERSION_WITH_RC"
+git commit -m "update rest-apidoc for $VERSION_WITHOUT_RC"
 ```
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
