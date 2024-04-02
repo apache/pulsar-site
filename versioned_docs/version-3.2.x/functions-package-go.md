@@ -20,18 +20,11 @@ To package a Go function, complete the following steps.
     go build <your Go function filename>.go
    ```
 
-3. Copy the Go function file to the Pulsar image.
-
-   ```bash
-    docker exec -it [CONTAINER ID] /bin/bash
-    docker cp <your go function path>  CONTAINER ID:/pulsar
-   ```
-
-  4. Run the Go function with the following command.
+3. Run the Go function with the following command.
 
    ```bash
     bin/pulsar-admin functions localrun \
-        --go [your go function path]
+        --go [absolute path to your go function]
         --inputs [input topics] \
         --output [output topic] \
         --tenant [default:public] \
