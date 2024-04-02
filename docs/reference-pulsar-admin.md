@@ -3017,5 +3017,5 @@ Options
 |Flag|Description|Default|
 |----|---|---|
 |`-c`, `--classname`|The Java class name||
-|`-j`, `--jar`|A path to the JAR file which contains the above Java class||
+|`-j`, `--jar`|Absolute path to the JAR file which contains the above Java class||
 |`-t`, `--type`|The type of the schema (avro or json)||
