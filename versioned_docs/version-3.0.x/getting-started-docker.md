@@ -16,6 +16,22 @@ For macOS, Linux, and Windows, run the following command to start Pulsar within 
 docker run -it -p 6650:6650 -p 8080:8080 --mount source=pulsardata,target=/pulsar/data --mount source=pulsarconf,target=/pulsar/conf apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
 ```
 
+:::tip
+
+You may encounter issues with the default RocksDB metadata store.
+
+We recommend you consider using the following environment variable to use ZooKeeper as the metadata store:
+
+```
+...
+-e PULSAR_STANDALONE_USE_ZOOKEEPER=1 \
+...
+```
+
+Don't apply this fix for existing Pulsar standalone instances if you don't want to loose your data.
+
+:::
+
 If you want to change Pulsar configurations and start Pulsar, run the following command by passing environment variables with the `PULSAR_PREFIX_` prefix. See [default configuration file](https://github.com/apache/pulsar/blob/e6b12c64b043903eb5ff2dc5186fe8030f157cfc/conf/standalone.conf) for more details.
 
 ```shell
