@@ -50,7 +50,7 @@ pulsar-admin sources create options
 |Flag|Description|
 |----|---|
 | `-a`, `--archive` | The absolute path to the NAR archive for the source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
-| `--classname` | The source's class name. Mandatory if `archive` doesn't reference a NAR file.
+| `--classname` | The source's class name.
 | `--cpu` | The CPU (in cores) that needs to be allocated per source instance (applicable only to Docker runtime).
 | `--deserialization-classname` | The SerDe classname for the source.
 | `--destination-topic-name` | The Pulsar topic to which data is sent.
@@ -82,7 +82,7 @@ pulsar-admin sources update options
 |Flag|Description|
 |----|---|
 | `-a`, `--archive` | The absolute path to the NAR archive for the source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
-| `--classname` | The source's class name. Mandatory if `archive` doesn't reference a NAR file.
+| `--classname` | The source's class name.
 | `--cpu` | The CPU (in cores) that needs to be allocated per source instance (applicable only to Docker runtime).
 | `--deserialization-classname` | The SerDe classname for the source.
 | `--destination-topic-name` | The Pulsar topic to which data is sent.
@@ -247,7 +247,7 @@ pulsar-admin sources localrun options
 |----|---|
 | `-a`, `--archive` | The absolute path to the NAR archive for the Source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--broker-service-url` | The URL for the Pulsar broker.
-|`--classname`|The source's class name. Mandatory if `archive` doesn't reference a NAR file.
+|`--classname`|The source's class name.
 | `--client-auth-params` | Client authentication parameter.
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker.
 |`--cpu`|The CPU (in cores) that needs to be allocated per source instance (applicable only to the Docker runtime).|
@@ -328,7 +328,7 @@ pulsar-admin sinks create options
 |----|---|
 | `-a`, `--archive` | The absolute path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--auto-ack` |  Whether or not the framework will automatically acknowledge messages.
-| `--classname` | The sink's class name. Mandatory if `archive` doesn't reference a NAR file.
+| `--classname` | The sink's class name.
 | `--cpu` | The CPU (in cores) that needs to be allocated per sink instance (applicable only to Docker runtime).
 | `--custom-schema-inputs` | The map of input topics to schema types or class names (as a JSON string).
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string).
@@ -364,7 +364,7 @@ pulsar-admin sinks update options
 |----|---|
 | `-a`, `--archive` | The absolute path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--auto-ack` |  Whether or not the framework will automatically acknowledge messages.
-| `--classname` | The sink's class name. Mandatory if `archive` doesn't reference a NAR file.
+| `--classname` | The sink's class name.
 | `--cpu` | The CPU (in cores) that needs to be allocated per sink instance (applicable only to Docker runtime).
 | `--custom-schema-inputs` | The map of input topics to schema types or class names (as a JSON string).
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string).
@@ -535,7 +535,7 @@ pulsar-admin sinks localrun options
 | `-a`, `--archive` | The absolute path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--auto-ack` | Whether or not the framework will automatically acknowledge messages.
 | `--broker-service-url` | The URL for the Pulsar broker.
-|`--classname`|The sink's class name. Mandatory if `archive` doesn't reference a NAR file.
+|`--classname`|The sink's class name.
 | `--client-auth-params` | Client authentication parameter.
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker.
 |`--cpu`|The CPU (in cores) that needs to be allocated per sink instance (applicable only to the Docker runtime).
