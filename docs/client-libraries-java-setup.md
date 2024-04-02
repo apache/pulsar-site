@@ -42,9 +42,52 @@ If you use Gradle, add the following information to the `build.gradle` file.
 def pulsarVersion = '@pulsar:version@'
 
 dependencies {
-    compile group: 'org.apache.pulsar', name: 'pulsar-client', version: pulsarVersion
+	implementation "org.apache.pulsar:pulsar-client:${pulsarVersion}"
 }
 ```
+
+### Pulsar BOM
+
+While the above dependencies are sufficient to obtain the Pulsar Java client, it is recommended to also use the [Pulsar BOM](https://github.com/apache/pulsar/blob/master/pip/pip-326.md) to ensure that all Pulsar dependencies (both direct and transitive) are at the same expected version.
+In order to use the BOM, the previous directions are modified slightly as follows:
+
+#### Maven
+
+If you use Maven, add the following information to the `pom.xml` file.
+
+```xml
+<!-- in your <properties> block -->
+<pulsar.version>@pulsar:version@</pulsar.version>
+
+<!-- in your <dependencyManagement>/<dependencies> block -->
+<dependency>
+  <groupId>org.apache.pulsar</groupId>
+  <artifactId>pulsar-bom</artifactId>
+  <version>${pulsar.version}</version>
+  <type>pom</type>
+  <scope>import</scope>
+</dependency>
+
+<!-- in your <dependencies> block -->
+<dependency>
+  <groupId>org.apache.pulsar</groupId>
+  <artifactId>pulsar-client</artifactId>
+</dependency>
+```
+
+#### Gradle
+
+If you use Gradle, add the following information to the `build.gradle` file.
+
+```groovy
+def pulsarVersion = '@pulsar:version@'
+
+dependencies {
+  implementation enforcedPlatform("org.apache.pulsar:pulsar-bom:${pulsarVersion}")
+  implementation 'org.apache.pulsar:pulsar-client'
+}
+```
+Note that the version is number for the `pulsar-client` dependency is now omitted as the Pulsar BOM dictates which version is used.
 
 ## Step 2: Connect to Pulsar cluster
 
