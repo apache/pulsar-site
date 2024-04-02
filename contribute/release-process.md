@@ -635,14 +635,6 @@ regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:la
 regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
 ```
 
-### Update project version
-After the release process, you should bump the project version and append it with `-SNAPSHOT`.
-```
-./src/set-project-version.sh x.x.x-SNAPSHOT
-git add -u
-git commit -m "Bump version to next snapshot version"
-```
-
 ### Release Helm Chart
 
 :::caution
@@ -876,13 +868,9 @@ svn ls https://dist.apache.org/repos/dist/release/pulsar
 svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-3.X.X
 ```
 
-## Move master branch to next version
+## Move to next version in pom.xml
 
-:::caution
-
-This step is for feature releases only.
-
-:::
+### Feature releases (master branch)
 
 You need to move the master version to the next iteration `Y` (`X + 1`).
 
@@ -893,3 +881,13 @@ git commit -a -s -m "[cleanup][build] Bumped version to 3.Y.0-SNAPSHOT'
 ```
 
 Since this needs to be merged into `master`, you need to follow the regular process and create a Pull Request on GitHub.
+
+### For maintenance branches
+
+After the release process, you should bump the project version and append it with `-SNAPSHOT`.
+
+```shell
+./src/set-project-version.sh x.x.x-SNAPSHOT
+git add -u
+git commit -m "Bump version to next snapshot version"
+```
