@@ -49,8 +49,8 @@ pulsar-admin sources create options
 
 |Flag|Description|
 |----|---|
-| `-a`, `--archive` | The path to the NAR archive for the source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
-| `--classname` | The source's class name if `archive` is file-url-path (file://).
+| `-a`, `--archive` | The absolute path to the NAR archive for the source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
+| `--classname` | The source's class name. Mandatory if `archive` doesn't reference a NAR file.
 | `--cpu` | The CPU (in cores) that needs to be allocated per source instance (applicable only to Docker runtime).
 | `--deserialization-classname` | The SerDe classname for the source.
 | `--destination-topic-name` | The Pulsar topic to which data is sent.
@@ -62,7 +62,7 @@ pulsar-admin sources create options
 | `--ram` | The RAM (in bytes) that needs to be allocated per source instance (applicable only to the process and Docker runtimes).
 | `-st`, `--schema-type` | The schema type.<br /> Either a built-in schema (for example, AVRO and JSON) or custom schema class name to be used to encode messages emitted from source.
 | `--source-config` | Source config key/values.
-| `--source-config-file` | The path to a YAML config file specifying the source's configuration.
+| `--source-config-file` | The absolute path to a YAML config file specifying the source's configuration.
 | `-t`, `--source-type` | The source's connector provider.
 | `--tenant` | The source's tenant.
 |`--producer-config`| The custom producer configuration (as a JSON string).
@@ -81,8 +81,8 @@ pulsar-admin sources update options
 
 |Flag|Description|
 |----|---|
-| `-a`, `--archive` | The path to the NAR archive for the source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
-| `--classname` | The source's class name if `archive` is file-url-path (file://).
+| `-a`, `--archive` | The absolute path to the NAR archive for the source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
+| `--classname` | The source's class name. Mandatory if `archive` doesn't reference a NAR file.
 | `--cpu` | The CPU (in cores) that needs to be allocated per source instance (applicable only to Docker runtime).
 | `--deserialization-classname` | The SerDe classname for the source.
 | `--destination-topic-name` | The Pulsar topic to which data is sent.
@@ -94,7 +94,7 @@ pulsar-admin sources update options
 | `--ram` | The RAM (in bytes) that needs to be allocated per source instance (applicable only to the process and Docker runtimes).
 | `-st`, `--schema-type` | The schema type.<br /> Either a built-in schema (for example, AVRO and JSON) or custom schema class name to be used to encode messages emitted from source.
 | `--source-config` | Source config key/values.
-| `--source-config-file` | The path to a YAML config file specifying the source's configuration.
+| `--source-config-file` | The absolute path to a YAML config file specifying the source's configuration.
 | `-t`, `--source-type` | The source's connector provider. The `source-type` parameter of the currently built-in connectors is determined by the setting of the `name` parameter specified in the pulsar-io.yaml file.
 | `--tenant` | The source's tenant.
 | `--update-auth-data` | Whether or not to update the auth data.<br />**Default value: false.**
@@ -245,9 +245,9 @@ pulsar-admin sources localrun options
 
 |Flag|Description|
 |----|---|
-| `-a`, `--archive` | The path to the NAR archive for the Source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
+| `-a`, `--archive` | The absolute path to the NAR archive for the Source. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--broker-service-url` | The URL for the Pulsar broker.
-|`--classname`|The source's class name if `archive` is file-url-path (file://).
+|`--classname`|The source's class name. Mandatory if `archive` doesn't reference a NAR file.
 | `--client-auth-params` | Client authentication parameter.
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker.
 |`--cpu`|The CPU (in cores) that needs to be allocated per source instance (applicable only to the Docker runtime).|
@@ -262,7 +262,7 @@ pulsar-admin sources localrun options
 |`--ram`|The RAM (in bytes) that needs to be allocated per source instance (applicable only to the Docker runtime).|
 | `-st`, `--schema-type` | The schema type.<br /> Either a built-in schema (for example, AVRO and JSON) or custom schema class name to be used to encode messages emitted from source.
 |`--source-config`|Source config key/values.
-|`--source-config-file`|The path to a YAML config file specifying the source's configuration.
+|`--source-config-file`|The absolute path to a YAML config file specifying the source's configuration.
 |`--source-type`|The source's connector provider.
 |`--tenant`|The source's tenant.
 |`--tls-allow-insecure`|Allow insecure tls connection.<br />**Default value: false**.
@@ -326,9 +326,9 @@ pulsar-admin sinks create options
 
 |Flag|Description|
 |----|---|
-| `-a`, `--archive` | The path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
+| `-a`, `--archive` | The absolute path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--auto-ack` |  Whether or not the framework will automatically acknowledge messages.
-| `--classname` | The sink's class name if `archive` is file-url-path (file://).
+| `--classname` | The sink's class name. Mandatory if `archive` doesn't reference a NAR file.
 | `--cpu` | The CPU (in cores) that needs to be allocated per sink instance (applicable only to Docker runtime).
 | `--custom-schema-inputs` | The map of input topics to schema types or class names (as a JSON string).
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string).
@@ -341,7 +341,7 @@ pulsar-admin sinks create options
 | `--ram` | The RAM (in bytes) that needs to be allocated per sink instance (applicable only to the process and Docker runtimes).
 | `--retain-ordering` | Sink consumes and sinks messages in order.
 | `--sink-config` | sink config key/values.
-| `--sink-config-file` | The path to a YAML config file specifying the sink's configuration.
+| `--sink-config-file` | The absolute path to a YAML config file specifying the sink's configuration.
 | `-t`, `--sink-type` | The sink's connector provider. The `sink-type` parameter of the currently built-in connectors is determined by the setting of the `name` parameter specified in the pulsar-io.yaml file.
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer.
 | `--tenant` | The sink's tenant.
@@ -362,9 +362,9 @@ pulsar-admin sinks update options
 
 |Flag|Description|
 |----|---|
-| `-a`, `--archive` | The path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
+| `-a`, `--archive` | The absolute path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--auto-ack` |  Whether or not the framework will automatically acknowledge messages.
-| `--classname` | The sink's class name if `archive` is file-url-path (file://).
+| `--classname` | The sink's class name. Mandatory if `archive` doesn't reference a NAR file.
 | `--cpu` | The CPU (in cores) that needs to be allocated per sink instance (applicable only to Docker runtime).
 | `--custom-schema-inputs` | The map of input topics to schema types or class names (as a JSON string).
 | `--custom-serde-inputs` | The map of input topics to SerDe class names (as a JSON string).
@@ -377,7 +377,7 @@ pulsar-admin sinks update options
 | `--ram` | The RAM (in bytes) that needs to be allocated per sink instance (applicable only to the process and Docker runtimes).
 | `--retain-ordering` | Sink consumes and sinks messages in order.
 | `--sink-config` | sink config key/values.
-| `--sink-config-file` | The path to a YAML config file specifying the sink's configuration.
+| `--sink-config-file` | The absolute path to a YAML config file specifying the sink's configuration.
 | `-t`, `--sink-type` | The sink's connector provider.
 | `--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer.
 | `--tenant` | The sink's tenant.
@@ -532,10 +532,10 @@ pulsar-admin sinks localrun options
 
 |Flag|Description|
 |----|---|
-| `-a`, `--archive` | The path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
+| `-a`, `--archive` | The absolute path to the archive file for the sink. <br /> It also supports url-path (http/https/file [file protocol assumes that file already exists on worker host]) from which worker can download the package.
 | `--auto-ack` | Whether or not the framework will automatically acknowledge messages.
 | `--broker-service-url` | The URL for the Pulsar broker.
-|`--classname`|The sink's class name if `archive` is file-url-path (file://).
+|`--classname`|The sink's class name. Mandatory if `archive` doesn't reference a NAR file.
 | `--client-auth-params` | Client authentication parameter.
 | `--client-auth-plugin` | Client authentication plugin using which function-process can connect to broker.
 |`--cpu`|The CPU (in cores) that needs to be allocated per sink instance (applicable only to the Docker runtime).
@@ -553,7 +553,7 @@ pulsar-admin sinks localrun options
 |`--ram`|The RAM (in bytes) that needs to be allocated per sink instance (applicable only to the Docker runtime).|
 |`--retain-ordering` | Sink consumes and sinks messages in order.
 |`--sink-config`|sink config key/values.
-|`--sink-config-file`|The path to a YAML config file specifying the sink's configuration.
+|`--sink-config-file`|The absolute path to a YAML config file specifying the sink's configuration.
 |`--sink-type`|The sink's connector provider.
 |`--subs-name` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer.
 |`--tenant`|The sink's tenant.
