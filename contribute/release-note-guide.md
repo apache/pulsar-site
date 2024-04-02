@@ -49,7 +49,15 @@ Here are 2 approaches:
 Using "git log"
 
 ```bash
-git log --reverse  --oneline v2.11.3..v2.11.4 | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | sort
+PREVIOUS_VERSION=3.0.3
+VERSION_WITHOUT_RC=3.0.4
+git log --reverse  --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | awk -F ']' '{
+    if ($1 ~ /^\[/) {
+        print $1 "]" $2, $0
+    } else {
+        print "[zzz]", $0
+    }
+}' | sort | cut -d ' ' -f2- | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /'
 ```
 
 Alternatively using "gh pr list"

@@ -401,6 +401,15 @@
                     "description": "listenerName when client would like to connect to cluster",
                     "type": "string"
                 },
+                "migrated": {
+                    "description": "flag to check if cluster is migrated to different cluster",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "migratedClusterUrl": {
+                    "$ref": "#/definitions/ClusterUrl",
+                    "description": "url of cluster where current cluster is migrated"
+                },
                 "peerClusterNames": {
                     "description": "A set of peer cluster names",
                     "items": {
@@ -449,12 +458,6 @@
                 },
                 "empty": {
                     "type": "boolean"
-                },
-                "serviceUrl": {
-                    "type": "string"
-                },
-                "serviceUrlTls": {
-                    "type": "string"
                 }
             },
             "type": "object"
@@ -906,10 +909,6 @@
             "properties": {
                 "active": {
                     "type": "boolean"
-                },
-                "maxDeliveryDelayInMillis": {
-                    "format": "int64",
-                    "type": "integer"
                 },
                 "tickTime": {
                     "format": "int64",
@@ -1478,7 +1477,7 @@
                     "type": "integer"
                 },
                 "numTopics": {
-                    "format": "int64",
+                    "format": "int32",
                     "type": "integer"
                 },
                 "overLoaded": {
@@ -1747,14 +1746,6 @@
                     "format": "double",
                     "type": "number"
                 },
-                "backlogQuotaLimitSize": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "backlogQuotaLimitTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
@@ -1842,13 +1833,6 @@
                 "offloadedStorageSize": {
                     "format": "int64",
                     "type": "integer"
-                },
-                "oldestBacklogMessageAgeSeconds": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "oldestBacklogMessageSubscriptionName": {
-                    "type": "string"
                 },
                 "ongoingTxnCount": {
                     "format": "int64",
@@ -2034,8 +2018,8 @@
                     "type": "integer"
                 },
                 "chunkedMessageRate": {
-                    "format": "double",
-                    "type": "number"
+                    "format": "int32",
+                    "type": "integer"
                 },
                 "consumers": {
                     "items": {
@@ -2180,14 +2164,6 @@
                     "format": "double",
                     "type": "number"
                 },
-                "backlogQuotaLimitSize": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "backlogQuotaLimitTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
@@ -2272,13 +2248,6 @@
                 "offloadedStorageSize": {
                     "format": "int64",
                     "type": "integer"
-                },
-                "oldestBacklogMessageAgeSeconds": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "oldestBacklogMessageSubscriptionName": {
-                    "type": "string"
                 },
                 "ongoingTxnCount": {
                     "format": "int64",
@@ -2643,14 +2612,6 @@
                     "format": "double",
                     "type": "number"
                 },
-                "backlogQuotaLimitSize": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "backlogQuotaLimitTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
@@ -2734,13 +2695,6 @@
                 "offloadedStorageSize": {
                     "format": "int64",
                     "type": "integer"
-                },
-                "oldestBacklogMessageAgeSeconds": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "oldestBacklogMessageSubscriptionName": {
-                    "type": "string"
                 },
                 "ongoingTxnCount": {
                     "format": "int64",
@@ -2961,14 +2915,6 @@
                     "format": "double",
                     "type": "number"
                 },
-                "backlogQuotaLimitSize": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "backlogQuotaLimitTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
                 "backlogSize": {
                     "format": "int64",
                     "type": "integer"
@@ -3033,13 +2979,6 @@
                 "offloadedStorageSize": {
                     "format": "int64",
                     "type": "integer"
-                },
-                "oldestBacklogMessageAgeSeconds": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "oldestBacklogMessageSubscriptionName": {
-                    "type": "string"
                 },
                 "ownerBroker": {
                     "type": "string"
@@ -3126,9 +3065,6 @@
                 "deleted": {
                     "type": "boolean"
                 },
-                "dispatcherPauseOnAckStatePersistentEnabled": {
-                    "type": "boolean"
-                },
                 "encryption_required": {
                     "type": "boolean"
                 },
@@ -3179,9 +3115,6 @@
                 "message_ttl_in_seconds": {
                     "format": "int32",
                     "type": "integer"
-                },
-                "migrated": {
-                    "type": "boolean"
                 },
                 "offload_deletion_lag_ms": {
                     "format": "int64",
@@ -3877,8 +3810,8 @@
                     "type": "integer"
                 },
                 "chunkedMessageRate": {
-                    "format": "double",
-                    "type": "number"
+                    "format": "int32",
+                    "type": "integer"
                 },
                 "consumers": {
                     "items": {
@@ -4030,10 +3963,8 @@
             "type": "object"
         },
         "TenantInfo": {
-            "description": "Information of adminRoles and allowedClusters for tenant",
             "properties": {
                 "adminRoles": {
-                    "description": "Comma separated list of auth principal allowed to administrate the tenant.",
                     "items": {
                         "type": "string"
                     },
@@ -4041,7 +3972,6 @@
                     "uniqueItems": true
                 },
                 "allowedClusters": {
-                    "description": "Comma separated allowed clusters.",
                     "items": {
                         "type": "string"
                     },
@@ -4067,14 +3997,6 @@
                 "averageMsgSize": {
                     "format": "double",
                     "type": "number"
-                },
-                "backlogQuotaLimitSize": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "backlogQuotaLimitTime": {
-                    "format": "int64",
-                    "type": "integer"
                 },
                 "backlogSize": {
                     "format": "int64",
@@ -4140,13 +4062,6 @@
                 "offloadedStorageSize": {
                     "format": "int64",
                     "type": "integer"
-                },
-                "oldestBacklogMessageAgeSeconds": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "oldestBacklogMessageSubscriptionName": {
-                    "type": "string"
                 },
                 "ownerBroker": {
                     "type": "string"
@@ -4362,9 +4277,6 @@
                 "httpServerThreadPoolQueueSize": {
                     "format": "int32",
                     "type": "integer"
-                },
-                "ignoreUnknownConfigFields": {
-                    "type": "boolean"
                 },
                 "includeStandardPrometheusMetrics": {
                     "type": "boolean"
@@ -5904,43 +5816,6 @@
             }
         },
         "/clusters/{cluster}/migrate": {
-            "get": {
-                "description": "This operation requires Pulsar superuser privileges.",
-                "operationId": "ClustersBase_getClusterMigration",
-                "parameters": [
-                    {
-                        "description": "The cluster name",
-                        "in": "path",
-                        "name": "cluster",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Return the cluster data.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterData"
-                        }
-                    },
-                    "403": {
-                        "description": "Don't have admin permission."
-                    },
-                    "404": {
-                        "description": "Cluster doesn't exist."
-                    },
-                    "500": {
-                        "description": "Internal server error."
-                    }
-                },
-                "summary": "Get the cluster migration configuration for the specified cluster.",
-                "tags": [
-                    "clusters"
-                ]
-            },
             "post": {
                 "description": "This operation requires Pulsar superuser privileges.",
                 "operationId": "ClustersBase_updateClusterMigration",
@@ -7944,122 +7819,6 @@
                 ]
             }
         },
-        "/namespaces/{tenant}/{namespace}/dispatcherPauseOnAckStatePersistent": {
-            "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_removeDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Tenant or cluster or namespace doesn't exist"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Remove dispatcher pause on ack state persistent configuration for specified namespace.",
-                "tags": [
-                    "namespaces"
-                ]
-            },
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_getDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Tenant or cluster or namespace doesn't exist"
-                    }
-                },
-                "summary": "Get dispatcher pause on ack state persistent config on a namespace.",
-                "tags": [
-                    "namespaces"
-                ]
-            },
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_setDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Tenant or cluster or namespace doesn't exist"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Set dispatcher pause on ack state persistent configuration for specified namespace.",
-                "tags": [
-                    "namespaces"
-                ]
-            }
-        },
         "/namespaces/{tenant}/{namespace}/encryptionRequired": {
             "get": {
                 "consumes": [
@@ -9010,7 +8769,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "Namespaces_removeMaxTopicsPerNamespace",
+                "operationId": "Namespaces_setInactiveTopicPolicies",
                 "parameters": [
                     {
                         "in": "path",
@@ -9036,7 +8795,7 @@
                         "description": "Tenant or namespace doesn't exist"
                     }
                 },
-                "summary": "Remove maxTopicsPerNamespace config on a namespace.",
+                "summary": "Set maxTopicsPerNamespace config on a namespace.",
                 "tags": [
                     "namespaces"
                 ]
@@ -9082,7 +8841,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "Namespaces_setMaxTopicsPerNamespace",
+                "operationId": "Namespaces_setInactiveTopicPolicies",
                 "parameters": [
                     {
                         "in": "path",
@@ -14699,199 +14458,6 @@
                 ]
             }
         },
-        "/non-persistent/{tenant}/{namespace}/{topic}/dispatcherPauseOnAckStatePersistent": {
-            "delete": {
-                "description": "",
-                "operationId": "PersistentTopics_removeDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "isGlobal",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
-                        "in": "query",
-                        "name": "authoritative",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace or topic doesn't exist"
-                    },
-                    "405": {
-                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Remove dispatcher pause on ack state persistent configuration for specified topic.",
-                "tags": [
-                    "non-persistent topic"
-                ]
-            },
-            "get": {
-                "description": "",
-                "operationId": "PersistentTopics_getDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "applied",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "isGlobal",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
-                        "in": "query",
-                        "name": "authoritative",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    },
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Tenant or cluster or namespace or topic doesn't exist"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "summary": "Get dispatcher pause on ack state persistent config on a topic.",
-                "tags": [
-                    "non-persistent topic"
-                ]
-            },
-            "post": {
-                "description": "",
-                "operationId": "PersistentTopics_setDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "default": false,
-                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
-                        "in": "query",
-                        "name": "authoritative",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "isGlobal",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace or topic doesn't exist"
-                    },
-                    "405": {
-                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Set dispatcher pause on ack state persistent configuration for specified topic.",
-                "tags": [
-                    "non-persistent topic"
-                ]
-            }
-        },
         "/non-persistent/{tenant}/{namespace}/{topic}/entryFilters": {
             "delete": {
                 "description": "",
@@ -17805,22 +17371,6 @@
                         "name": "getEarliestTimeInBacklog",
                         "required": false,
                         "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the publishers",
-                        "in": "query",
-                        "name": "excludePublishers",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the consumers",
-                        "in": "query",
-                        "name": "excludeConsumers",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "produces": [
@@ -19034,6 +18584,16 @@
                         "type": "string"
                     },
                     {
+                        "enum": [
+                            "destination_storage",
+                            "message_age"
+                        ],
+                        "in": "query",
+                        "name": "backlogQuotaType",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
@@ -20173,22 +19733,6 @@
                         "description": "If return time of the earliest message in backlog",
                         "in": "query",
                         "name": "getEarliestTimeInBacklog",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the publishers",
-                        "in": "query",
-                        "name": "excludePublishers",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the consumers",
-                        "in": "query",
-                        "name": "excludeConsumers",
                         "required": false,
                         "type": "boolean"
                     }
@@ -21538,7 +21082,7 @@
                         "type": "string"
                     },
                     {
-                        "description": "Name of subscription to be created",
+                        "description": "Subscription to create position on",
                         "in": "path",
                         "name": "subscriptionName",
                         "required": true,
@@ -24732,199 +24276,6 @@
                 ]
             }
         },
-        "/persistent/{tenant}/{namespace}/{topic}/dispatcherPauseOnAckStatePersistent": {
-            "delete": {
-                "description": "",
-                "operationId": "PersistentTopics_removeDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "isGlobal",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
-                        "in": "query",
-                        "name": "authoritative",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace or topic doesn't exist"
-                    },
-                    "405": {
-                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Remove dispatcher pause on ack state persistent configuration for specified topic.",
-                "tags": [
-                    "persistent topic"
-                ]
-            },
-            "get": {
-                "description": "",
-                "operationId": "PersistentTopics_getDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "applied",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "isGlobal",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
-                        "in": "query",
-                        "name": "authoritative",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    },
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Tenant or cluster or namespace or topic doesn't exist"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "summary": "Get dispatcher pause on ack state persistent config on a topic.",
-                "tags": [
-                    "persistent topic"
-                ]
-            },
-            "post": {
-                "description": "",
-                "operationId": "PersistentTopics_setDispatcherPauseOnAckStatePersistent",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "default": false,
-                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
-                        "in": "query",
-                        "name": "authoritative",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "in": "query",
-                        "name": "isGlobal",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace or topic doesn't exist"
-                    },
-                    "405": {
-                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Set dispatcher pause on ack state persistent configuration for specified topic.",
-                "tags": [
-                    "persistent topic"
-                ]
-            }
-        },
         "/persistent/{tenant}/{namespace}/{topic}/entryFilters": {
             "delete": {
                 "description": "",
@@ -27847,22 +27198,6 @@
                         "name": "getEarliestTimeInBacklog",
                         "required": false,
                         "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the publishers",
-                        "in": "query",
-                        "name": "excludePublishers",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the consumers",
-                        "in": "query",
-                        "name": "excludeConsumers",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "produces": [
@@ -29082,6 +28417,16 @@
                         "type": "string"
                     },
                     {
+                        "enum": [
+                            "destination_storage",
+                            "message_age"
+                        ],
+                        "in": "query",
+                        "name": "backlogQuotaType",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
@@ -30221,22 +29566,6 @@
                         "description": "If return time of the earliest message in backlog",
                         "in": "query",
                         "name": "getEarliestTimeInBacklog",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the publishers",
-                        "in": "query",
-                        "name": "excludePublishers",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "default": false,
-                        "description": "If exclude the consumers",
-                        "in": "query",
-                        "name": "excludeConsumers",
                         "required": false,
                         "type": "boolean"
                     }
@@ -31586,7 +30915,7 @@
                         "type": "string"
                     },
                     {
-                        "description": "Name of subscription to be created",
+                        "description": "Subscription to create position on",
                         "in": "path",
                         "name": "subscriptionName",
                         "required": true,
