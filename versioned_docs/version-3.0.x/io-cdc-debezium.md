@@ -31,7 +31,7 @@ The configuration of the Debezium source connector has the following properties.
 | `database.history` | true | null | The name of the database history class. |
 | `database.history.pulsar.topic` | true | null | The name of the database history topic where the connector writes and recovers DDL statements. <br /><br />**Note: this topic is for internal use only and should not be used by consumers.** |
 | `database.history.pulsar.service.url` | false| null | Pulsar cluster service URL for history topic. <br /><br />**Note**: If `database.history.pulsar.service.url` is not set, then the database history Pulsar client will use the same client settings as those of the source connector, such as `client_auth_plugin` and `client_auth_params`.|
-| `pulsar.service.url` | true | null | Pulsar cluster service URL for the offset topic used in Debezium. You can use the `bin/pulsar-admin --admin-url http://pulsar:8080 sources localrun --source-config-file configs/pg-pulsar-config.yaml` command to point to the target Pulsar cluster.|
+| `pulsar.service.url` | true | null | Pulsar cluster service URL for the offset topic used in Debezium. You can use the `bin/pulsar-admin --admin-url http://pulsar:8080 sources localrun --source-config-file $PWD/configs/pg-pulsar-config.yaml` command to point to the target Pulsar cluster.|
 | `offset.storage.topic` | true | null | Record the last committed offsets that the connector successfully completes. |
 | `mongodb.hosts` | true | null | The comma-separated list of hostname and port pairs (in the form 'host' or 'host:port') of the MongoDB servers in the replica set. The list contains a single hostname and a port pair. If mongodb.members.auto.discover is set to false, the host and port pair are prefixed with the replica set name (e.g., rs0/localhost:27017). |
 | `mongodb.name` | true | null | A unique name that identifies the connector and/or MongoDB replica set or shared cluster that this connector monitors. Each server should be monitored by at most one Debezium connector, since this server name prefixes all persisted Kafka topics emanating from the MongoDB replica set or cluster. |
@@ -138,7 +138,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```bash
        bin/pulsar-admin source localrun \
-       --archive connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
        --name debezium-mysql-source \
        --tenant public \
        --namespace default \
@@ -149,7 +149,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```bash
        bin/pulsar-admin source localrun \
-       --source-config-file debezium-mysql-source-config.yaml
+       --source-config-file $PWD/debezium-mysql-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the table _inventory.products_.
@@ -289,7 +289,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```bash
        bin/pulsar-admin source localrun \
-       --archive connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
        --name debezium-postgres-source \
        --tenant public \
        --namespace default \
@@ -300,7 +300,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```bash
        bin/pulsar-admin source localrun  \
-       --source-config-file debezium-postgres-source-config.yaml
+       --source-config-file $PWD/debezium-postgres-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the _inventory.products_ table.
@@ -431,7 +431,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```bash
        bin/pulsar-admin source localrun \
-       --archive connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
        --name debezium-mongodb-source \
        --tenant public \
        --namespace default \
@@ -442,7 +442,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```bash
        bin/pulsar-admin source localrun  \
-       --source-config-file debezium-mongodb-source-config.yaml
+       --source-config-file $PWD/debezium-mongodb-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the _inventory.products_ table.

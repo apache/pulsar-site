@@ -175,7 +175,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```bash
        bin/pulsar-admin source localrun \
-           --archive connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
            --name debezium-mysql-source \
            --tenant public \
            --namespace default \
@@ -199,7 +199,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```bash
        bin/pulsar-admin source localrun \
-          --source-config-file debezium-mysql-source-config.yaml
+          --source-config-file $PWD/debezium-mysql-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the table _inventory.products_.
@@ -345,7 +345,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```bash
        bin/pulsar-admin source localrun \
-           --archive connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
            --name debezium-postgres-source \
            --tenant public \
            --namespace default \
@@ -369,7 +369,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```bash
        bin/pulsar-admin source localrun  \
-          --source-config-file debezium-postgres-source-config.yaml
+          --source-config-file $PWD/debezium-postgres-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-users_ for the _public.users_ table.
@@ -505,7 +505,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```bash
        bin/pulsar-admin source localrun \
-           --archive connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
            --name debezium-mongodb-source \
            --tenant public \
            --namespace default \
@@ -529,7 +529,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```bash
        bin/pulsar-admin source localrun  \
-       --source-config-file debezium-mongodb-source-config.yaml
+       --source-config-file $PWD/debezium-mongodb-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the _inventory.products_ table.

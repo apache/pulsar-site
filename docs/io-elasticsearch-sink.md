@@ -190,7 +190,7 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 
        ```bash
        bin/pulsar-admin sinks localrun \
-           --archive connectors/pulsar-io-elastic-search-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-elastic-search-@pulsar:version@.nar \
            --tenant public \
            --namespace default \
            --name elasticsearch-test-sink \
@@ -202,11 +202,11 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 
        ```bash
        bin/pulsar-admin sinks localrun \
-           --archive connectors/pulsar-io-elastic-search-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-elastic-search-@pulsar:version@.nar \
            --tenant public \
            --namespace default \
            --name elasticsearch-test-sink \
-           --sink-config-file elasticsearch-sink.yml \
+           --sink-config-file $PWD/elasticsearch-sink.yml \
            --inputs elasticsearch_test
        ```
 

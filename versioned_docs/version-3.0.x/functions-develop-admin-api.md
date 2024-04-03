@@ -42,7 +42,7 @@ To enable your function to get access to the Pulsar admin client, you need to se
 
 ```bash
 bin/pulsar-admin functions localrun \
- --jar my-functions.jar \
+ --jar $PWD/my-functions.jar \
  --classname my.package.CursorManagementFunction \
  --web-service-url http://pulsar-web-service:8080 \
  # Other function configs

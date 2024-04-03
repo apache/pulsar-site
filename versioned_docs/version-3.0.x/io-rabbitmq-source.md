@@ -150,8 +150,8 @@ This example describes how to use the RabbitMQ source connector to feed data fro
 
    ```bash
    ./bin/pulsar-admin source localrun \
-    --source-config-file conf/rabbitmq-source-queue-name.yaml \
-    --archive connectors/pulsar-io-rabbitmq-@pulsar:version@.nar \
+    --source-config-file $PWD/conf/rabbitmq-source-queue-name.yaml \
+    --archive $PWD/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar \
     --name rabbitmq-source \
     --destination-topic-name pulsar-rabbitmq-test-topic \
     --broker-service-url pulsar://{ip}:{port}

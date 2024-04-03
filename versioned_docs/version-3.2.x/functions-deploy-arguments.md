@@ -25,7 +25,7 @@ Take the `create` command for example. The following function has default values
 
 ```bash
 bin/pulsar-admin functions create \
-  --jar my-pulsar-functions.jar \
+  --jar $PWD/my-pulsar-functions.jar \
   --classname org.example.MyFunction \
   --inputs my-function-input-topic1,my-function-input-topic2
 ```
