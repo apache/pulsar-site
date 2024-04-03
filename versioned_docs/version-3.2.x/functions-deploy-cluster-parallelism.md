@@ -41,6 +41,6 @@ For an existing function, you can adjust the parallelism by using the `update` c
 
 ```bash
 bin/pulsar-admin functions update \
-  --function-config-file function-config.yaml
+  --function-config-file $PWD/function-config.yaml
 ```
 

@@ -39,7 +39,7 @@ The following example is a stateful function. By default, the state of a functio
 
    ```bash
    bin/pulsar-admin functions create \
-      --jar target/my-jar-with-dependencies.jar \
+      --jar $PWD/target/my-jar-with-dependencies.jar \
       --classname org.example.functions.WordCountFunction \
       --tenant public \
       --namespace default \

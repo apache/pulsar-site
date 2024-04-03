@@ -36,7 +36,7 @@ To enable your function to produce logs, you need to specify a log topic when cr
 
 ```bash
 bin/pulsar-admin functions create \
-  --jar my-functions.jar \
+  --jar $PWD/my-functions.jar \
   --classname my.package.LoggingFunction \
   --log-topic persistent://public/default/logging-function-logs \
   # Other function configs

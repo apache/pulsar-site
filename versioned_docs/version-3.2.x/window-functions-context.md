@@ -259,7 +259,7 @@ If you need your function to produce logs, specify a log topic when creating or 
 
 ```bash
 bin/pulsar-admin functions create \
-  --jar my-functions.jar \
+  --jar $PWD/my-functions.jar \
   --classname my.package.LoggingFunction \
   --log-topic persistent://public/default/logging-function-logs \
   # Other function configs

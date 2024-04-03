@@ -93,19 +93,12 @@ To package a Java function as JAR, complete the following steps.
 
    After the Java function is packaged, a `target` directory is created automatically. Open the `target` directory to check if there is a JAR package similar to `java-function-1.0-SNAPSHOT.jar`.
 
-3. Copy the packaged jar file to the Pulsar image.
-
-   ```bash
-    docker exec -it [CONTAINER ID] /bin/bash
-    docker cp <path of java-function-1.0-SNAPSHOT.jar>  CONTAINER ID:/pulsar
-   ```
-
-4. Run the Java function using the following command.
+3. Run the Java function using the following command.
 
    ```bash
     ./bin/pulsar-admin functions localrun \
        --classname org.example.test.ExclamationFunction \
-       --jar java-function-1.0-SNAPSHOT.jar \
+       --jar $PWD/target/java-function-1.0-SNAPSHOT.jar \
        --inputs persistent://public/default/my-topic-1 \
        --output persistent://public/default/test-1 \
        --tenant public \
@@ -183,17 +176,11 @@ To package a Java function as NAR, complete the following steps.
 
    After the Java function is packaged, a `target` directory is created automatically. Open the `target` directory to check if there is a NAR package similar to `java-function-1.0-SNAPSHOT.nar`.
 
-3. Copy the packaged NAR file to the Pulsar image.
-
-   ```bash
-    docker cp <path of java-function-1.0-SNAPSHOT.nar>  CONTAINER ID:/pulsar
-   ```
-
-4. Run the Java function using the following command.
+3. Run the Java function using the following command.
 
    ```bash
     ./bin/pulsar-admin functions localrun \
-       --jar java-function-1.0-SNAPSHOT.nar \
+       --jar $PWD/target/java-function-1.0-SNAPSHOT.nar \
        --inputs persistent://public/default/my-topic-1 \
        --output persistent://public/default/test-1 \
        --tenant public \

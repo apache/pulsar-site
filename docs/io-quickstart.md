@@ -244,7 +244,7 @@ bin/pulsar-admin sinks create \
     --namespace default \
     --name cassandra-test-sink \
     --sink-type cassandra \
-    --sink-config-file examples/cassandra-sink.yml \
+    --sink-config-file $PWD/examples/cassandra-sink.yml \
     --inputs test_cassandra
 ```
 
@@ -551,10 +551,10 @@ This example creates a sink connector and specifies the desired information.
 
 ```bash
 bin/pulsar-admin sinks create \
-    --archive ./connectors/pulsar-io-jdbc-postgres-@pulsar:version@.nar \
+    --archive $PWD/connectors/pulsar-io-jdbc-postgres-@pulsar:version@.nar \
     --inputs pulsar-postgres-jdbc-sink-topic \
     --name pulsar-postgres-jdbc-sink \
-    --sink-config-file ./connectors/pulsar-postgres-jdbc-sink.yaml \
+    --sink-config-file $PWD/connectors/pulsar-postgres-jdbc-sink.yaml \
     --parallelism 1
 ```
 
@@ -566,10 +566,10 @@ This sink connector runs as a Pulsar Function and writes the messages produced i
 
  Flag | Description | Example
  ---|---|---|
- `--archive` | The path to the archive file for the sink. | pulsar-io-jdbc-postgres-@pulsar:version@.nar |
+ `--archive` | The absolute path to the archive file for the sink. | $PWD/pulsar-io-jdbc-postgres-@pulsar:version@.nar |
  `--inputs` | The input topic(s) of the sink. <br /><br /> Multiple topics can be specified as a comma-separated list.||
  `--name` | The name of the sink. | pulsar-postgres-jdbc-sink |
- `--sink-config-file` | The path to a YAML config file specifying the configuration of the sink. | pulsar-postgres-jdbc-sink.yaml |
+ `--sink-config-file` | The absolute path to a YAML config file specifying the configuration of the sink. | $PWD/pulsar-postgres-jdbc-sink.yaml |
  `--parallelism` | The parallelism factor of the sink. <br /><br /> For example, the number of sink instances to run. |  1 |
 
 :::tip

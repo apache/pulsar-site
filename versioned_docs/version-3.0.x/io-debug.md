@@ -64,11 +64,11 @@ For more information about the `localrun` command, see [`localrun`](reference-co
 
 ```bash
 ./bin/pulsar-admin sinks localrun \
-    --archive connectors/pulsar-io-mongo-@pulsar:version@.nar \
+    --archive $PWD/connectors/pulsar-io-mongo-@pulsar:version@.nar \
     --tenant public --namespace default \
     --inputs test-mongo \
     --name pulsar-mongo-sink \
-    --sink-config-file mongo-sink-config.yaml \
+    --sink-config-file $PWD/mongo-sink-config.yaml \
     --parallelism 1
 ```
 
@@ -215,12 +215,12 @@ Pulsar admin CLI helps you debug Pulsar connectors with the following subcommand
 
 ```bash
 ./bin/pulsar-admin sinks create \
-    --archive pulsar-io-mongo-2.4.0.nar \
+    --archive $PWD/pulsar-io-mongo-2.4.0.nar \
     --tenant public \
     --namespace default \
     --inputs test-mongo \
     --name pulsar-mongo-sink \
-    --sink-config-file mongo-sink-config.yaml \
+    --sink-config-file $PWD/mongo-sink-config.yaml \
     --parallelism 1
 ```
 

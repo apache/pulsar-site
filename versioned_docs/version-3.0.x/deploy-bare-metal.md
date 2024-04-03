@@ -473,7 +473,7 @@ Create an ExclamationFunction `exclamation`.
 
 ```bash
 bin/pulsar-admin functions create \
-    --jar examples/api-examples.jar \
+    --jar $PWD/examples/api-examples.jar \
     --classname org.apache.pulsar.functions.api.examples.ExclamationFunction \
     --inputs persistent://public/default/exclamation-input \
     --output persistent://public/default/exclamation-output \
