@@ -140,7 +140,6 @@ It is for the purpose of reducing the latency of sending messages and preventing
 
 :::
 
-
 ### Chunking
 Message chunking enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
 
