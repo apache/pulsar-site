@@ -415,6 +415,12 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer()
         .subscribe();
 ```
 
+:::note
+
+Send messages by synchronous API `send` will disable batching, and the message will be sent individually.
+It is for the purpose of reducing the latency of sending messages and preventing blocking of the producer thread.
+
+:::
 
 ### Chunking
 Message chunking enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
@@ -525,26 +531,26 @@ Exclusive is the default subscription type.
 
 #### Failover
 
-In the *Failover* type, multiple consumers can attach to the same subscription. 
+In the *Failover* type, multiple consumers can attach to the same subscription.
 
-A master consumer is picked for a non-partitioned topic or each partition of a partitioned topic and receives messages. 
+A master consumer is picked for a non-partitioned topic or each partition of a partitioned topic and receives messages.
 
 When the master consumer disconnects, all (non-acknowledged and subsequent) messages are delivered to the next consumer in line.
 
 ##### Failover | Partitioned topics
 
-For partitioned topics, the broker sorts consumers by priority and lexicographical order of consumer name. 
+For partitioned topics, the broker sorts consumers by priority and lexicographical order of consumer name.
 
-The broker tries to evenly assign partitions to consumers with the highest priority. 
+The broker tries to evenly assign partitions to consumers with the highest priority.
 
 A consumer is selected by running a module operation `mod (partition index, consumer index)`.
 
 - If the number of partitions in a partitioned topic is **less** than the number of consumers:
-  
-  For example, in the diagram below, this partitioned topic has 2 partitions and there are 4 consumers. 
-  
-  Each partition has 1 active consumer and 1 stand-by consumer. 
-  
+
+  For example, in the diagram below, this partitioned topic has 2 partitions and there are 4 consumers.
+
+  Each partition has 1 active consumer and 1 stand-by consumer.
+
     - For p0, consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
 
     - For p1, consumer C is the master consumer, while consumer D would be the next consumer in line to receive messages if consumer C is disconnected.
@@ -552,34 +558,34 @@ A consumer is selected by running a module operation `mod (partition index, cons
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-4.svg)
 
 - If the number of partitions in a partitioned topic is **greater** than the number of consumers:
-  
-  For example, in the diagram below, this partitioned topic has 9 partitions and 3 consumers. 
-  
+
+  For example, in the diagram below, this partitioned topic has 9 partitions and 3 consumers.
+
   - p0, p3, and p6 are assigned to consumer A.
-  
+
   - p1, p4, and p7 are assigned to consumer B.
-  
+
   - p2, p5, and p8 are assigned to consumer C.
-  
+
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-1.svg)
 ##### Failover | Non-partitioned topics
 
-- If there is one non-partitioned topic. The broker picks consumers in the order they subscribe to non-partitioned topics. 
+- If there is one non-partitioned topic. The broker picks consumers in the order they subscribe to non-partitioned topics.
 
-  For example, in the diagram below, this non-partitioned topic has 1 topic and there are 2 consumers. 
-  
-  The topic has 1 active consumer and 1 stand-by consumer. 
-  
+  For example, in the diagram below, this non-partitioned topic has 1 topic and there are 2 consumers.
+
+  The topic has 1 active consumer and 1 stand-by consumer.
+
   Consumer A is the master consumer, while consumer B would be the next consumer in line to receive messages if consumer A is disconnected.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-2.svg)
 
 - If there are multiple non-partitioned topics, a consumer is selected based on **consumer name hash** and **topic name hash**. The client uses the same consumer name to subscribe to all the topics.
 
-  For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
-  
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
-  
+  For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers.
+
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B.
+
   - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
@@ -1083,9 +1089,9 @@ Pulsar has two features, however, that enable you to override this default behav
 
 :::tip
 
-Since Pulsar 2.7.0, all message retention and expiry can be managed at the [namespace](#namespaces) level or at the topic level. For example, you can set `topicLevelPoliciesEnabled=true` at `broker.conf`. 
+Since Pulsar 2.7.0, all message retention and expiry can be managed at the [namespace](#namespaces) level or at the topic level. For example, you can set `topicLevelPoliciesEnabled=true` at `broker.conf`.
 
-Since Pulsaer 2.11.0, the default value of  `topicLevelPoliciesEnabled` is `true`. 
+Since Pulsaer 2.11.0, the default value of  `topicLevelPoliciesEnabled` is `true`.
 
 For how to set policies for message retention and expiry, see [message retention and expiry](cookbooks-retention-expiry.md).
 
