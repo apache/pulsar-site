@@ -2946,7 +2946,7 @@ Option to enable busy-wait settings. Default is false. WARNING: This option will
 **Category**: Server
 
 ### enableNamespaceIsolationUpdateOnTime
-Enable namespaceIsolation policy update take effect ontime or not, if set to ture, then the related namespaces will be unloaded after reset policy to make it take effect.
+This config never takes effect and will be removed in the next release
 
 **Type**: `boolean`
 
