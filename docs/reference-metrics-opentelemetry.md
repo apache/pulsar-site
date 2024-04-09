@@ -71,23 +71,28 @@ The total backlog size of the topics of this topic owned by this broker.
 * Unit: `{byte}`
 
 #### pulsar.broker.topic.storage.offloaded.size
-The total amount of the data in this topic offloaded to the tiered storage (bytes).
+The total amount of the data in this topic offloaded to the tiered storage.
 * Type: UpDownCounter
 * Unit: `{byte}`
 
-#### pulsar.broker.topic.storage.backlog.quota.limit
-The total amount of the data in this topic that limit the backlog quota.
-* Type: UpDownCounter
+#### pulsar.broker.topic.storage.backlog.quota.limit.size
+The size based backlog quota limit for this topic.
+* Type: Gauge
 * Unit: `{byte}`
 
-#### pulsar.broker.topic.storage.backlog.quota.exceeded.eviction.count
-The number of times a backlog was evicted since it has exceeded its quota. Includes label `quota_type = (time \| size)`
+#### pulsar.broker.topic.storage.backlog.quota.limit.time
+The time based backlog quota limit for this topic.
+* Type: Gauge
+* Unit: `{second}`
+
+#### pulsar.broker.topic.storage.backlog.quota.eviction.count
+The number of times a backlog was evicted since it has exceeded its quota.
 * Type: Counter
 * Unit: `{eviction}`
 
 #### pulsar.broker.topic.storage.backlog.age
 The age of the oldest unacknowledged message (backlog).
-* Type: UpDownCounter
+* Type: Gauge
 * Unit: `{second}`
 
 #### pulsar.broker.topic.storage.outgoing
@@ -114,6 +119,31 @@ The total number of successes of the compaction.
 The total number of failures of the compaction.
 * Type: UpDownCounter
 * Unit: `{event}`
+
+#### pulsar.broker.topic.compaction.duration
+The total time duration of compaction operations on the topic.
+* Type: DoubleUpDownCounter
+* Unit: `{second}`
+
+#### pulsar.broker.topic.compaction.incoming
+The total count of bytes read by the compaction process for this topic.
+* Type: UpDownCounter
+* Unit: `{byte}`
+
+#### pulsar.broker.topic.compaction.outgoing
+The total count of bytes written by the compaction process for this topic.
+* Type: UpDownCounter
+* Unit: `{byte}`
+
+#### pulsar.broker.topic.compaction.compacted.entries.count
+The total number of compacted entries.
+* Type: UpDownCounter
+* Unit: `{entry}`
+
+#### pulsar.broker.topic.compaction.compacted.entries.size
+The total size of the compacted entries.
+* Type: UpDownCounter
+* Unit: `{byte}`
 
 #### pulsar.broker.topic.transaction
 The number of transactions on this topic.
