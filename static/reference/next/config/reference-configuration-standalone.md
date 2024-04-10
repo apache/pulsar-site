@@ -3258,6 +3258,7 @@ Max size of messages.
 ### maxNumPartitionsPerPartitionedTopic
 The number of partitions per partitioned topic.
 If try to create or update partitioned topics by exceeded number of partitions, then fail.
+Use 0 or negative number to disable the check.
 
 **Type**: `int`
 
