@@ -133,7 +133,13 @@ Pulsar supports the following types of automatic load shedding strategies.
 
 ### ThresholdShedder
 
-This strategy tends to shed the bundles if any broker's usage is above the configured threshold. It does this by first computing the average resource usage per broker for the whole cluster. The resource usage for each broker is calculated using the following method `LocalBrokerData#getMaxResourceUsageWithWeight`. Historical observations are included in the running average based on the broker's setting for `loadBalancerHistoryResourcePercentage`. Once the average resource usage is calculated, a broker's current/historical usage is compared to the average broker usage. If a broker's usage is greater than the average usage per broker plus the `loadBalancerBrokerThresholdShedderPercentage`, this load shedder proposes removing enough bundles to bring the unloaded broker 5% below the current average broker usage. Note that recently unloaded bundles are not unloaded again. Also, `loadBalancerBundleUnloadMinThroughputThreshold` must be correctly adjusted based on the broker's throughputs. If the computed throughput to unload is smaller than this, unloading will not be triggered.
+This strategy sheds bundles from brokers whose resource usage exceeds the average resource usage of brokers in the cluster by a specified threshold.
+
+Current usage for a broker is defined as the maximum usage among CPU, direct memory, throughput in and throughput out values. This value is exponentially smoothed out with historical observations to yield the computed resource usage for broker load balancing purposes.
+
+A broker is considered overloaded if its resource usage exceeds the average resource usage of all brokers in the cluster by at least threshold value `loadBalancerBrokerThresholdShedderPercentage`. Bundles from overloaded brokers are transferred until the expected throughput of the broker is 5% below the cluster average. Furthermore, a broker must have a total current throughput (in + out) sufficiently high in order to be eligible for bundle unloading. If the expected throughput reduction on the broker does not exceed absolute value `loadBalancerBundleUnloadMinThroughputThreshold`, it will not be unloaded.
+
+Note that recently unloaded bundles are not unloaded again.
 
 ![Shedding strategy - ThresholdShedder](/assets/shedding-strategy-thresholdshedder.svg)
 
