@@ -173,7 +173,7 @@ Based on the broker resource usage (for example, the number of topics or session
 
 Step 3: split bundles at the specific boundaries from step 2.
 
-For how to split bundles manually, please refer to [split-bundle](https://pulsar.apache.org/reference/#/3.2.x/pulsar-admin/namespaces?id=split-bundle) admin command.
+For how to split bundles manually, please refer to [`split-bundle`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle) admiin command.
 
 Example:
 
