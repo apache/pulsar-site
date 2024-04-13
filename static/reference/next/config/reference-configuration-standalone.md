@@ -3088,6 +3088,23 @@ Capacity for accept queue in the HTTP server Default is set to 8192.
 
 **Category**: Server
 
+### httpServerGzipCompressionExcludedPaths
+Gzip compression is enabled by default. Specific paths can be excluded from compression.
+There are 2 syntaxes supported, Servlet url-pattern based, and Regex based.
+If the spec starts with '^' the spec is assumed to be a regex based path spec and will match with normal Java regex rules.
+If the spec starts with '/' then spec is assumed to be a Servlet url-pattern rules path spec for either an exact match or prefix based match.
+If the spec starts with '*.' then spec is assumed to be a Servlet url-pattern rules path spec for a suffix based match.
+All other syntaxes are unsupported.
+Disable all compression with ^.* or ^.*$
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### httpServerThreadPoolQueueSize
 Capacity for thread pool queue in the HTTP server Default is set to 8192.
 
