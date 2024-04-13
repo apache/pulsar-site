@@ -129,7 +129,7 @@ Below is the workflow for splitting bundles automatically or manually.
   defaultValue="Automatic bundle splitting"
   values={[{"label":"Automatic bundle splitting","value":"Automatic bundle splitting"},{"label":"Manual bundle splitting","value":"Manual bundle splitting"}]}>
 <TabItem value="Automatic bundle splitting">
-
+xf
 #### Step 1: find target bundles
 
 If the auto bundle split is enabled, 
@@ -173,7 +173,7 @@ Based on the broker resource usage (for example, the number of topics or session
 
 Step 3: split bundles at the specific boundaries from step 2.
 
-For how to split bundles manually, please refer to [`split-bundle`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle) admiin command.
+For how to split bundles manually, please refer to [`split-bundle`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle) admin command.
 
 Example:
 
