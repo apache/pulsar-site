@@ -338,6 +338,18 @@ Http directs to redirect to non-pulsar services
 
 **Category**: HTTP
 
+### metricsServletTimeoutMs
+Time in milliseconds that metrics endpoint would time out. Default is 30s.
+ Set it to 0 to disable timeout.
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### brokerClientSslProvider
 The TLS Provider used by the Pulsar proxy to authenticate with Pulsar brokers
 
