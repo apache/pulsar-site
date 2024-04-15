@@ -129,7 +129,7 @@ Below is the workflow for splitting bundles automatically or manually.
   defaultValue="Automatic bundle splitting"
   values={[{"label":"Automatic bundle splitting","value":"Automatic bundle splitting"},{"label":"Manual bundle splitting","value":"Manual bundle splitting"}]}>
 <TabItem value="Automatic bundle splitting">
-xf
+
 #### Step 1: find target bundles
 
 If the auto bundle split is enabled, 
@@ -175,13 +175,15 @@ Step 3: split bundles at the specific boundaries from step 2.
 
 For how to split bundles manually, please refer to [`split-bundle`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle) admin command.
 
-Example:
+Examples:
 
-`pulsar-admin namespaces split-bundle -b LARGEST -san topic_count_equally_divide -u tenant/largest_namespace`
+Split the largest bundle at the position that equality divides the topic count, and unload the child bundles immediately.
 
-If you already know the target bundle to split, you can specify it using the `-b` flag:
+`pulsar-admin namespaces split-bundle -b LARGEST -san topic_count_equally_divide -u my-tenant/my-namespace`
 
-`pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenant/namespace1`
+If you already know the target bundle to split, you can specify it using the `--bundle(-b)` flag:
+
+`pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff my-tenant/my-namespace`
 
 </TabItem>
 
@@ -421,7 +423,7 @@ You can unload bundles in the following ways:
 
 - Automatic: enable Pulsar's automatic bundle unloading process when a broker is overloaded.
 
-- Manual: trigger bundle splitting manually, to unload a bundle from one broker to another broker within a Pulsar cluster. 
+- Manual: trigger bundle unloading manually, to unload a bundle from one broker to another broker within a Pulsar cluster. 
 
 Bundle unloading methods | Definition | When to use
 |---|---|---
@@ -456,7 +458,21 @@ The unloaded bundles are assigned to less loaded brokers, and the clients connec
 
 When unloading happens, the client experiences a small latency blip while the topic is reassigned. 
 
-For how to unload bundles automatically, see TBD (the docs is WIP, stay tuned!).
+For how to unload bundles manually, please refer to [`unload`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=unload) admin command.
+
+Examples:
+
+Unload a specific bundle (future topic lookup will assign the bundle to a new owner broker)
+
+`pulsar-admin namespaces unload my-tenant/my-namespace -b 0x00000000_0xffffffff
+
+Unload a specific bundle to a destination broker
+
+`pulsar-admin namespaces unload my-tenant/my-namespace -b 0x00000000_0xffffffff -d broker-1
+
+Unload all bundles in a namespace
+
+`pulsar-admin namespaces unload my-tenant/my-namespace`
 
 </TabItem>
 <TabItem value="Manual bundle unloading">
