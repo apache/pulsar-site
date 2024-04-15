@@ -464,11 +464,11 @@ Examples:
 
 Unload a specific bundle (future topic lookup will assign the bundle to a new owner broker)
 
-`pulsar-admin namespaces unload my-tenant/my-namespace -b 0x00000000_0xffffffff
+`pulsar-admin namespaces unload my-tenant/my-namespace -b 0x00000000_0xffffffff`
 
 Unload a specific bundle to a destination broker
 
-`pulsar-admin namespaces unload my-tenant/my-namespace -b 0x00000000_0xffffffff -d broker-1
+`pulsar-admin namespaces unload my-tenant/my-namespace -b 0x00000000_0xffffffff -d broker-1`
 
 Unload all bundles in a namespace
 
