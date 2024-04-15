@@ -179,8 +179,9 @@ Example:
 
 `pulsar-admin namespaces split-bundle -b LARGEST -san topic_count_equally_divide -u tenant/largest_namespace`
 
-* Specify a specific bundle at -b, if you already know the target bundle to split.
+If you already know the target bundle to split, you can specify it using the `-b` flag:
 
+`pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenant/namespace1`
 
 </TabItem>
 
