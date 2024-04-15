@@ -177,7 +177,7 @@ For how to split bundles manually, please refer to [`split-bundle`](pathname:///
 
 Examples:
 
-Split the largest bundle at the position that equality divides the topic count, and unload the child bundles immediately.
+Split the largest bundle at the position that equally divides the topic count, and unload the child bundles immediately.
 
 `pulsar-admin namespaces split-bundle -b LARGEST -san topic_count_equally_divide -u my-tenant/my-namespace`
 
