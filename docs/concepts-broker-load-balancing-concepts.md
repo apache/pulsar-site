@@ -458,6 +458,17 @@ The unloaded bundles are assigned to less loaded brokers, and the clients connec
 
 When unloading happens, the client experiences a small latency blip while the topic is reassigned. 
 
+</TabItem>
+<TabItem value="Manual bundle unloading">
+
+#### Step 1: find target bundles
+
+Based on the broker resource usage (for example, CPU, network, and memory usage), you can choose hot bundles to unload.
+
+#### Step 2: unload hot bundles
+
+Unload hot bundles to available brokers. Target bundles' ownerships will be transferred, and topic connections will be closed.
+
 For how to unload bundles manually, please refer to [`unload`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=unload) admin command.
 
 Examples:
@@ -473,19 +484,6 @@ Unload a specific bundle to a destination broker
 Unload all bundles in a namespace
 
 `pulsar-admin namespaces unload my-tenant/my-namespace`
-
-</TabItem>
-<TabItem value="Manual bundle unloading">
-
-#### Step 1: find target bundles
-
-Based on the broker resource usage (for example, CPU, network, and memory usage), you can choose hot bundles to unload.
-
-#### Step 2: unload hot bundles
-
-Unload hot bundles to available brokers. Target bundles' ownerships will be transferred, and topic connections will be closed.
-
-For how to unload bundles manually, see TBD (the docs is WIP, stay tuned!).
 
 </TabItem>
 
