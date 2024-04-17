@@ -1330,7 +1330,7 @@ Classname of Pluggable JVM GC metrics logger that can log GC specific metrics
 **Category**: Metrics
 
 ### metricsBufferResponse
-If true, export buffered metrics
+Set to true to enable the broker to cache the metrics response; the default is false. The caching period is defined by `managedLedgerStatsPeriodSeconds`. The broker returns the same response for subsequent requests within the same period. Ensure that the scrape interval of your monitoring system matches the caching period.
 
 **Type**: `boolean`
 
