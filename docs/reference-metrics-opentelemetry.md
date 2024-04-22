@@ -97,52 +97,52 @@ The age of the oldest unacknowledged message (backlog).
 
 #### pulsar.broker.topic.storage.outgoing
 The total message batches (entries) written to the storage for this topic.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{message batch}`
 
 #### pulsar.broker.topic.storage.incoming
 The total message batches (entries) read from the storage for this topic.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{message batch}`
 
 #### pulsar.broker.topic.compaction.removed.event.count
 The total number of removed events of the compaction.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{event}`
 
 #### pulsar.broker.topic.compaction.succeed.count
 The total number of successes of the compaction.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{event}`
 
 #### pulsar.broker.topic.compaction.failed.count
 The total number of failures of the compaction.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{event}`
 
 #### pulsar.broker.topic.compaction.duration
 The total time duration of compaction operations on the topic.
-* Type: DoubleUpDownCounter
+* Type: DoubleCounter
 * Unit: `{second}`
 
 #### pulsar.broker.topic.compaction.incoming
 The total count of bytes read by the compaction process for this topic.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{byte}`
 
 #### pulsar.broker.topic.compaction.outgoing
 The total count of bytes written by the compaction process for this topic.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{byte}`
 
 #### pulsar.broker.topic.compaction.compacted.entries.count
 The total number of compacted entries.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{entry}`
 
 #### pulsar.broker.topic.compaction.compacted.entries.size
 The total size of the compacted entries.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{byte}`
 
 #### pulsar.broker.topic.transaction
