@@ -100,10 +100,10 @@ The total message batches (entries) read from the storage for this topic.
 * Type: Counter
 * Unit: `{message batch}`
 
-#### pulsar.broker.topic.compaction.removed.event.count
-The total number of removed events of the compaction.
+#### pulsar.broker.topic.compaction.removed.message.count
+The total number of messages removed by compaction.
 * Type: Counter
-* Unit: `{event}`
+* Unit: `{message}`
 
 #### pulsar.broker.topic.compaction.succeed.count
 The total number of successes of the compaction.
