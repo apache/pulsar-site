@@ -50,11 +50,6 @@ The number of times the publish rate limit is triggered.
 * Type: Counter
 * Unit: `{event}`
 
-#### pulsar.broker.topic.consumer.msg.ack
-The total number of message acknowledgments received for this topic.
-* Type: Counter
-* Unit: `{ack}`
-
 #### pulsar.broker.topic.storage.size
 The total storage size of the messages in this topic.
 * Type: UpDownCounter
