@@ -51,17 +51,17 @@ The number of times the publish rate limit is triggered.
 * Unit: `{event}`
 
 #### pulsar.broker.topic.storage.size
-The total storage size of the messages in this topic.
+The total storage size of the messages in this topic, including storage used by replicas.
 * Type: UpDownCounter
 * Unit: `{byte}`
 
 #### pulsar.broker.topic.storage.logical.size
-The storage size of topics in the namespace owned by the broker without replicas.
+The storage size of the messages in this topic, excluding storage used by replicas.
 * Type: UpDownCounter
 * Unit: `{byte}`
 
 #### pulsar.broker.topic.storage.backlog.size
-The total backlog size of the topics of this topic owned by this broker.
+The size of the backlog storage for this topic.
 * Type: UpDownCounter
 * Unit: `{byte}`
 
