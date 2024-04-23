@@ -3868,6 +3868,29 @@ If enabled the feature that transaction pending ack log batch, this attribute me
 
 **Category**: Server
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### webServicePort
 The port for serving http requests
 
@@ -3896,6 +3919,18 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 **Type**: `java.lang.String`
 
 **Default**: `Conscrypt`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 

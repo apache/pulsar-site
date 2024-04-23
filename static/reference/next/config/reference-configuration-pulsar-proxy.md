@@ -955,6 +955,29 @@ Path for the file used to determine the rotation status for the proxy instance w
 
 **Category**: Server
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### webServicePort
 The port for serving http requests
 
@@ -972,6 +995,18 @@ The port for serving https requests
 **Type**: `java.util.Optional`
 
 **Default**: `Optional.empty`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
