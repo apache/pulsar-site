@@ -105,15 +105,10 @@ The total number of messages removed by compaction.
 * Type: Counter
 * Unit: `{message}`
 
-#### pulsar.broker.topic.compaction.succeed.count
-The total number of successes of the compaction.
+#### pulsar.broker.topic.compaction.operation.count
+The total number of compaction operations.
 * Type: Counter
-* Unit: `{event}`
-
-#### pulsar.broker.topic.compaction.failed.count
-The total number of failures of the compaction.
-* Type: Counter
-* Unit: `{event}`
+* Unit: `{operation}`
 
 #### pulsar.broker.topic.compaction.duration
 The total time duration of compaction operations on the topic.
