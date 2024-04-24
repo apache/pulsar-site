@@ -38,12 +38,12 @@ The total number of messages read from this topic.
 #### pulsar.broker.topic.message.incoming.size
 The total number of messages bytes received for this topic.
 * Type: Counter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.message.outgoing.size
 The total number of messages bytes read from this topic.
 * Type: Counter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.publish.rate.limit.count
 The number of times the publish rate limit is triggered.
@@ -53,32 +53,32 @@ The number of times the publish rate limit is triggered.
 #### pulsar.broker.topic.storage.size
 The total storage size of the messages in this topic, including storage used by replicas.
 * Type: UpDownCounter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.storage.logical.size
 The storage size of the messages in this topic, excluding storage used by replicas.
 * Type: UpDownCounter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.storage.backlog.size
 The size of the backlog storage for this topic.
 * Type: UpDownCounter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.storage.offloaded.size
 The total amount of the data in this topic offloaded to the tiered storage.
 * Type: UpDownCounter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.storage.backlog.quota.limit.size
 The size based backlog quota limit for this topic.
 * Type: Gauge
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.storage.backlog.quota.limit.time
 The time based backlog quota limit for this topic.
 * Type: Gauge
-* Unit: `{second}`
+* Unit: `s`
 
 #### pulsar.broker.topic.storage.backlog.quota.eviction.count
 The number of times a backlog was evicted since it has exceeded its quota.
@@ -88,7 +88,7 @@ The number of times a backlog was evicted since it has exceeded its quota.
 #### pulsar.broker.topic.storage.backlog.age
 The age of the oldest unacknowledged message (backlog).
 * Type: Gauge
-* Unit: `{second}`
+* Unit: `s`
 
 #### pulsar.broker.topic.storage.entry.outgoing.count
 The total message batches (entries) written to the storage for this topic.
@@ -113,17 +113,17 @@ The total number of compaction operations.
 #### pulsar.broker.topic.compaction.duration
 The total time duration of compaction operations on the topic.
 * Type: DoubleCounter
-* Unit: `{second}`
+* Unit: `s`
 
 #### pulsar.broker.topic.compaction.incoming.size
 The total count of bytes read by the compaction process for this topic.
 * Type: Counter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.compaction.outgoing.size
 The total count of bytes written by the compaction process for this topic.
 * Type: Counter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.compaction.compacted.entry.count
 The total number of compacted entries.
@@ -133,7 +133,7 @@ The total number of compacted entries.
 #### pulsar.broker.topic.compaction.compacted.entry.size
 The total size of the compacted entries.
 * Type: Counter
-* Unit: `{byte}`
+* Unit: `By`
 
 #### pulsar.broker.topic.transaction.count
 The number of transactions on this topic.
