@@ -140,7 +140,7 @@ The total size of the compacted entries.
 * Type: Counter
 * Unit: `{byte}`
 
-#### pulsar.broker.topic.transaction
+#### pulsar.broker.topic.transaction.count
 The number of transactions on this topic.
 * Type: UpDownCounter
 * Unit: `{transaction}`
