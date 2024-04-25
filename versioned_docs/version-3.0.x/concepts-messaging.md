@@ -578,9 +578,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
   
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer A. 
   
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer B.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
 
