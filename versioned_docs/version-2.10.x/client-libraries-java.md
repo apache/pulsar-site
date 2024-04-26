@@ -376,7 +376,8 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
-        .authentication(primaryAuthentication) 
+        .serviceUrlProvider(failover)
+        .authentication(primaryAuthentication)
         .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
@@ -419,7 +420,9 @@ public PulsarClient getControlledFailoverClient() throws IOException {
         .urlProviderHeader(header)
         .build();
 
-    PulsarClient pulsarClient = PulsarClient.builder().build();
+    PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(provider)
+        .build();
 
     provider.initialize(pulsarClient);
     return pulsarClient;
