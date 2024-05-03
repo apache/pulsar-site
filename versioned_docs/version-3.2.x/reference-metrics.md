@@ -140,13 +140,6 @@ All the broker metrics are labeled with the following labels:
 | pulsar_ml_count                                              | Gauge       | The number of currently opened managed ledgers.                                                                             |
 | ~~topic_load_times (deprecated)~~                            | ~~Summary~~ | ~~The topic load latency calculated in milliseconds.~~                                                                      |
 | pulsar_topic_load_times                                      | Summary     | The topic load latency calculated in milliseconds.                                                                          |
-| pulsar_active_connections                                    | Gauge       | The number of active connections.                                                                                           |
-| pulsar_connection_created_total_count                        | Gauge       | The total number of connections.                                                                                            |
-| pulsar_connection_create_success_count                       | Gauge       | The number of successfully created connections.                                                                             |
-| pulsar_connection_create_fail_count                          | Gauge       | The number of failed connections.                                                                                           |
-| pulsar_connection_closed_total_count                         | Gauge       | The total number of closed connections.                                                                                     |
-| pulsar_broker_throttled_connections                          | Gauge       | The number of throttled connections.                                                                                        |
-| pulsar_broker_throttled_connections_global_limit             | Gauge       | The number of throttled connections due to per-connection limit.                                                            |
 | pulsar_broker_topics_count                                   | Gauge       | The number of Pulsar topics in this broker.                                                                                 |
 | pulsar_broker_subscriptions_count                            | Gauge       | The number of Pulsar subscriptions in this broker.                                                                          |
 | pulsar_broker_producers_count                                | Gauge       | The number of active producers connected to this broker.                                                                    |
@@ -467,15 +460,14 @@ All the connection metrics are labelled with the following labels:
 - *broker*: `broker=${advertised_address}`. `${advertised_address}` is the advertised address of the broker.
 - *metric*: `metric=${metric}`. `${metric}` is the connection metric collective name.
 
-| Name | Type | Description |
-|---|---|---|
-| pulsar_active_connections| Gauge | The number of active connections. |
-| pulsar_connection_created_total_count | Gauge | The total number of connections. |
+| Name                                   | Type  | Description                                     |
+|----------------------------------------|-------|-------------------------------------------------|
+| pulsar_active_connections              | Gauge | The number of active connections.               |
+| pulsar_connection_created_total_count  | Gauge | The total number of connections.                |
 | pulsar_connection_create_success_count | Gauge | The number of successfully created connections. |
-| pulsar_connection_create_fail_count | Gauge | The number of failed connections. |
-| pulsar_connection_closed_total_count | Gauge | The total number of closed connections. |
-| pulsar_broker_throttled_connections | Gauge | The number of throttled connections. |
-| pulsar_broker_throttled_connections_global_limit | Gauge | The number of throttled connections because of per-connection limit. |
+| pulsar_connection_create_fail_count    | Gauge | The number of failed connections.               |
+| pulsar_connection_closed_total_count   | Gauge | The total number of closed connections.         |
+| pulsar_broker_throttled_connections    | Gauge | The number of throttled connections.            |
 
 ### Jetty metrics
 
