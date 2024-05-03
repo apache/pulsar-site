@@ -460,14 +460,14 @@ All the connection metrics are labelled with the following labels:
 - *broker*: `broker=${advertised_address}`. `${advertised_address}` is the advertised address of the broker.
 - *metric*: `metric=${metric}`. `${metric}` is the connection metric collective name.
 
-| Name | Type | Description |
-|---|---|---|
-| pulsar_active_connections| Gauge | The number of active connections. |
-| pulsar_connection_created_total_count | Gauge | The total number of connections. |
+| Name                                   | Type  | Description                                     |
+|----------------------------------------|-------|-------------------------------------------------|
+| pulsar_active_connections              | Gauge | The number of active connections.               |
+| pulsar_connection_created_total_count  | Gauge | The total number of connections.                |
 | pulsar_connection_create_success_count | Gauge | The number of successfully created connections. |
-| pulsar_connection_create_fail_count | Gauge | The number of failed connections. |
-| pulsar_connection_closed_total_count | Gauge | The total number of closed connections. |
-| pulsar_broker_throttled_connections | Gauge | The number of throttled connections. |
+| pulsar_connection_create_fail_count    | Gauge | The number of failed connections.               |
+| pulsar_connection_closed_total_count   | Gauge | The total number of closed connections.         |
+| pulsar_broker_throttled_connections    | Gauge | The number of throttled connections.            |
 
 ### Jetty metrics
 
