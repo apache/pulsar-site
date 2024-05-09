@@ -402,3 +402,125 @@ The number of pending topic load operations in the broker. When it reaches thres
 The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
+
+### Consumer metrics
+
+#### pulsar.broker.consumer.message.outgoing.count
+The total number of messages dispatched to this consumer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
+  * `pulsar.consumer.metadata` - The consumer metadata properties.
+  * `pulsar.client.address` - The address of the client.
+  * `pulsar.client.version` - The version of the client.
+
+#### pulsar.broker.consumer.message.outgoing.size
+The total number of messages bytes dispatched to this consumer.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
+  * `pulsar.consumer.metadata` - The consumer metadata properties.
+  * `pulsar.client.address` - The address of the client.
+  * `pulsar.client.version` - The version of the client.
+
+#### pulsar.broker.consumer.message.ack.count
+The total number of message acknowledgments received from this consumer.
+* Type: Counter
+* Unit: `{ack}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
+  * `pulsar.consumer.metadata` - The consumer metadata properties.
+  * `pulsar.client.address` - The address of the client.
+  * `pulsar.client.version` - The version of the client.
+
+#### pulsar.broker.consumer.message.redeliver.count
+The total number of messages that have been redelivered to this consumer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
+  * `pulsar.consumer.metadata` - The consumer metadata properties.
+  * `pulsar.client.address` - The address of the client.
+  * `pulsar.client.version` - The version of the client.
+
+#### pulsar.broker.consumer.message.unack.count
+The number of messages currently unacknowledged by this consumer.
+* Type: UpDownCounter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
+  * `pulsar.consumer.metadata` - The consumer metadata properties.
+  * `pulsar.client.address` - The address of the client.
+  * `pulsar.client.version` - The version of the client.
+
+#### pulsar.broker.consumer.permit.count
+The number of permits currently available for this consumer.
+* Type: UpDownCounter
+* Unit: `{permit}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
+  * `pulsar.consumer.metadata` - The consumer metadata properties.
+  * `pulsar.client.address` - The address of the client.
+  * `pulsar.client.version` - The version of the client.
