@@ -5445,6 +5445,17 @@ Interval of time to sending the ping to keep alive in WebSocket proxy. This valu
 
 **Category**: WebSocket
 
+### webSocketPulsarClientMemoryLimitInMB
+Memory limit in MBs for direct memory in Pulsar Client used in WebSocket proxy
+
+**Type**: `int`
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
 ### webSocketServiceEnabled
 Enable the WebSocket API service in broker
 

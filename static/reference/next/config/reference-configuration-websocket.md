@@ -613,6 +613,17 @@ Interval of time to sending the ping to keep alive. This value greater than 0 me
 
 **Category**: 
 
+### webSocketPulsarClientMemoryLimitInMB
+Memory limit in MBs for direct memory in Pulsar Client used in WebSocket proxy
+
+**Type**: `int`
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### webSocketSessionIdleTimeoutMillis
 Timeout of idling WebSocket session (in milliseconds)
 
