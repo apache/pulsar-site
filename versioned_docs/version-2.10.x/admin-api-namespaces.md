@@ -561,7 +561,7 @@ $ pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenan
 
 ```java
 
-admin.namespaces().splitNamespaceBundle(namespace, bundle)
+admin.namespaces().splitNamespaceBundle(namespace, bundle, unloadSplitBundles, splitAlgorithmName)
 
 ```
 

@@ -11,7 +11,11 @@ Currently, the source of documents and website (where the docs are finally publi
 
 ## Update versioned docs
 
-If you want to update versioned docs, go to [versioned_docs folder](https://github.com/apache/pulsar-site/tree/main/versioned_docs) to find your desired one.
+Documentation should be up to date for all [actively supported versions](https://pulsar.apache.org/contribute/release-policy/#supported-versions).
+
+No need to update documentation for versions that are not actively maintained unless the documentation is incorrect.
+
+To update versioned docs, go to [versioned_docs folder](https://github.com/apache/pulsar-site/tree/main/versioned_docs).
 
 For versions prior to 2.8, Pulsar releases versioned docs for each patch release. You can update the exact versioned doc.
 
@@ -31,15 +35,15 @@ This <fix / improvment> is available for 2.8.2 and later versions.
 
 If you want to update [Pulsar reference docs](pathname:///reference/), you should update the corresponding source files.
 
-* Some reference docs are generated from code **automatically**. If you want to update the docs, you need to update the source code files.
-* Some configuration docs are updated **manually** using markdown files.
+- Some reference docs are generated from code **automatically**. If you want to update the docs, you need to update the source code files.
+- Some configuration docs are updated **manually** using markdown files.
 
 ### Update configuration docs
 
 Docs for configs of bundled components are generated from command-line tools **automatically**:
 
 | Components | Update where ...                                                                                                                                                                                                    |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Broker     | [org.apache.pulsar.broker.ServiceConfiguration](https://github.com/apache/pulsar/blob/master/pulsar-broker-common/src/main/java/org/apache/pulsar/broker/ServiceConfiguration.java)                                 |
 | WebSocket  | [org.apache.pulsar.websocket.service.WebSocketProxyConfiguration](https://github.com/apache/pulsar/blob/master/pulsar-websocket/src/main/java/org/apache/pulsar/websocket/service/WebSocketProxyConfiguration.java) |
 | Proxy      | [org.apache.pulsar.proxy.server.ProxyConfiguration](https://github.com/apache/pulsar/blob/master/pulsar-proxy/src/main/java/org/apache/pulsar/proxy/server/ProxyConfiguration.java)                                 |
@@ -52,7 +56,7 @@ Docs for configs of bundled components are generated from command-line tools **a
 Docs for configs of external components (whose source code is hosted outside the Pulsar repositories) are updated **manually**:
 
 | Components  | Update where ...                                                                                                                                              |
-|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | BookKeeper  | [reference-configuration-bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-bookkeeper.md)   |
 | Log4j       | [reference-configuration-log4j.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-log4j.md)             |
 | Log4j shell | [reference-configuration-log4j-shell.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/config/reference-configuration-log4j-shell.md) |
@@ -63,7 +67,7 @@ Docs for configs of external components (whose source code is hosted outside the
 Docs for bundled Java-based command-line tools are generated **automatically**:
 
 | Components    | Update where…                                                                                                                                                                                                                                                                                             |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pulsar        | Different subcommands of [bin/pulsar](https://github.com/apache/pulsar/blob/master/bin/pulsar) are updated in different code files                                                                                                                                                                        |
 | pulsar-admin  | [Classes under the admin command-line folder](https://github.com/apache/pulsar/tree/master/pulsar-client-tools/src/main/java/org/apache/pulsar/admin/cli)                                                                                                                                                 |
 | pulsar-client | [Classes under the client command-line folder](https://github.com/apache/pulsar/tree/master/pulsar-client-tools/src/main/java/org/apache/pulsar/client/cli)                                                                                                                                               |
@@ -72,7 +76,7 @@ Docs for bundled Java-based command-line tools are generated **automatically**:
 Docs for external command-line tools or bare scripts are updated **manually**:
 
 | Components    | Update where…                                                                                                            |
-|---------------|--------------------------------------------------------------------------------------------------------------------------|
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | pulsar-shell  | [pulsar-shell.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/pulsar-shell/pulsar-shell.md)    |
 | pulsar-daemon | [pulsar-daemon.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/pulsar-daemon/pulsar-daemon.md) |
 | bookkeeper    | [bookkeeper.md](https://github.com/apache/pulsar-site/blob/main/static/reference/next/bookkeeper/bookkeeper.md)          |
@@ -80,8 +84,9 @@ Docs for external command-line tools or bare scripts are updated **manually**:
 ## Update feature matrix
 
 Pulsar feature matrix introduces the features supported by language-specific clients and functions. It includes:
-* [Client Feature Matrix](pathname:///client-feature-matrix)
-* [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194)
+
+- [Client Feature Matrix](pathname:///client-feature-matrix)
+- [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194)
 
 You need to update the feature matrix as soon as your related commits get merged. The workflow is illustrated as follows.
 
@@ -93,7 +98,7 @@ You need to update the feature matrix as soon as your related commits get merged
 
 :::note
 
-* [Client Feature Matrix](pathname:///client-feature-matrix) is in the transition phase from the spreadsheet to the webpage. For how to update it, see [How to update data-driven pages](site-intro.md#how-to-update-data-driven-pages).
-* If you have problems in editing the spreadsheet of [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194), you can reach out to `dev@pulsar.apache.org`.
+- For how to update the [Client Feature Matrix](pathname:///client-feature-matrix), see [How to update data-driven pages](site-intro.md#how-to-update-data-driven-pages).
+- If you have problems in editing the spreadsheet of [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194), you can reach out to `dev@pulsar.apache.org`.
 
 :::

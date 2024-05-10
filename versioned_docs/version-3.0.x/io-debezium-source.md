@@ -30,7 +30,7 @@ The configuration of the Debezium source connector has the following properties.
 | `value.converter` | true | null | The converter provided by Kafka Connect to convert record value.  |
 | `database.history` | true | null | The name of the database history class. |
 | `database.history.pulsar.topic` | true | null | The name of the database history topic where the connector writes and recovers DDL statements. <br /><br />**Note: this topic is for internal use only and should not be used by consumers.** |
-| `database.history.pulsar.service.url` | true | null | Pulsar cluster service URL for history topic. |
+| `database.history.pulsar.service.url` | false| null | Pulsar cluster service URL for history topic. <br /><br />**Note**: If `database.history.pulsar.service.url` is not set, then the database history Pulsar client will use the same client settings as those of the source connector, such as `client_auth_plugin` and `client_auth_params`.|
 | `offset.storage.topic` | true | null | Record the last committed offsets that the connector successfully completes. |
 | `json-with-envelope` | false | false | Present the message that only consists of payload. |
 | `database.history.pulsar.reader.config` | false | null | The configs of the reader for the database schema history topic, in the form of a JSON string with key-value pairs. |
@@ -120,7 +120,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mysql-source"
-  inputs: [ "debezium-mysql-topic" ]
+  topicName: "debezium-mysql-topic"
   archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar"
   parallelism: 1
 
@@ -175,7 +175,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```bash
        bin/pulsar-admin source localrun \
-           --archive connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
            --name debezium-mysql-source \
            --tenant public \
            --namespace default \
@@ -199,7 +199,7 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
        ```bash
        bin/pulsar-admin source localrun \
-          --source-config-file debezium-mysql-source-config.yaml
+          --source-config-file $PWD/debezium-mysql-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the table _inventory.products_.
@@ -219,6 +219,35 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
     ```
 
 6. A MySQL client pops out.
+
+   Change the connection mode to `mysql_native_password`.
+   ```
+   mysql> show variables like "caching_sha2_password_auto_generate_rsa_keys";
+   +----------------------------------------------+-------+
+   | Variable_name                                | Value |
+   +----------------------------------------------+-------+
+   | caching_sha2_password_auto_generate_rsa_keys | ON    |
+   +----------------------------------------------+-------+
+
+   # If the value of "caching_sha2_password_auto_generate_rsa_keys" is ON, ensure the plugin of mysql.user is "mysql_native_password".
+   mysql> SELECT Host, User, plugin from mysql.user where user={user};
+   +-----------+------+-----------------------+
+   | Host      | User | plugin                |
+   +-----------+------+-----------------------+
+   | localhost | root | caching_sha2_password |
+   +-----------+------+-----------------------+
+
+   # If the plugin of mysql.user is is "caching_sha2_password", set it to "mysql_native_password".
+   alter user '{user}'@'{host}' identified with mysql_native_password by {password};
+
+   # Check the plugin of mysql.user.
+   mysql> SELECT Host, User, plugin from mysql.user where user={user};
+   +-----------+------+-----------------------+
+   | Host      | User | plugin                |
+   +-----------+------+-----------------------+
+   | localhost | root | mysql_native_password |
+   +-----------+------+-----------------------+
+   ```
 
    Use the following commands to change the data of the table _products_.
 
@@ -265,7 +294,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-postgres-source"
-  inputs: [ "debezium-postgres-topic" ]
+  topicName: "debezium-postgres-topic"
   archive: "connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar"
   parallelism: 1
 
@@ -316,11 +345,11 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```bash
        bin/pulsar-admin source localrun \
-           --archive connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
            --name debezium-postgres-source \
            --tenant public \
            --namespace default \
-           --source-config '{"database.hostname": "localhost","database.port": "5432","database.user": "postgres","database.password": "changeme","database.dbname": "postgres","database.server.name": "dbserver1","schema.whitelist": "public","table.whitelist": "public.users","pulsar.service.url": "pulsar://127.0.0.1:6650"}'
+           --source-config '{"database.hostname": "localhost","database.port": "5432","database.user": "postgres","database.password": "changeme","database.dbname": "postgres","database.server.name": "dbserver1","plugin.name": "pgoutput","schema.whitelist": "public","table.whitelist": "public.users","pulsar.service.url": "pulsar://127.0.0.1:6650"}'
        ```
 
      :::note
@@ -340,7 +369,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
        ```bash
        bin/pulsar-admin source localrun  \
-          --source-config-file debezium-postgres-source-config.yaml
+          --source-config-file $PWD/debezium-postgres-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-users_ for the _public.users_ table.
@@ -352,7 +381,7 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 5. Start a PostgreSQL client in docker.
 
    ```bash
-   docker exec -it pulsar-postgresql /bin/bash
+   docker exec -it pulsar-postgres /bin/bash
    ```
 
 6. A PostgreSQL client pops out.
@@ -425,7 +454,7 @@ You can use one of the following methods to create a configuration file.
   tenant: "public"
   namespace: "default"
   name: "debezium-mongodb-source"
-  inputs: [ "debezium-mongodb-topic" ]
+  topicName: "debezium-mongodb-topic"
   archive: "connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar"
   parallelism: 1
 
@@ -476,7 +505,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```bash
        bin/pulsar-admin source localrun \
-           --archive connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
            --name debezium-mongodb-source \
            --tenant public \
            --namespace default \
@@ -500,7 +529,7 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
        ```bash
        bin/pulsar-admin source localrun  \
-       --source-config-file debezium-mongodb-source-config.yaml
+       --source-config-file $PWD/debezium-mongodb-source-config.yaml
        ```
 
 4. Subscribe to the topic _sub-products_ for the _inventory.products_ table.
@@ -578,7 +607,7 @@ Using YAML as an example, you can create a `debezium-oracle-source-config.yaml` 
 tenant: "public"
 namespace: "default"
 name: "debezium-oracle-source"
-inputs: [ "debezium-oracle-topic" ]
+topicName: "debezium-oracle-topic"
 parallelism: 1
 
 className: "org.apache.pulsar.io.debezium.oracle.DebeziumOracleSource"
@@ -647,7 +676,7 @@ Similarly to other connectors, you can use JSON or YAML to configure the connect
 tenant: "public"
 namespace: "default"
 name: "debezium-mssql-source"
-inputs: [ "debezium-mssql-topic" ]
+topicName: "debezium-mssql-topic"
 parallelism: 1
 
 className: "org.apache.pulsar.io.debezium.mssql.DebeziumMsSqlSource"

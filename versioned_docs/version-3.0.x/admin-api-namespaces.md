@@ -241,7 +241,7 @@ You can get the list of replication clusters for a given namespace.
 <TabItem value="pulsar-admin">
 
 ```shell
-pulsar-admin namespaces get-clusters test-tenant/cluster1/namespace1
+pulsar-admin namespaces get-clusters test-tenant/namespace1
 ```
 
 Example output:
@@ -523,7 +523,7 @@ pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenant/
 <TabItem value="Java">
 
 ```java
-admin.namespaces().splitNamespaceBundle(namespace, bundle)
+admin.namespaces().splitNamespaceBundle(namespace, bundle, unloadSplitBundles, splitAlgorithmName)
 ```
 
 </TabItem>

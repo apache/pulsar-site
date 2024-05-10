@@ -194,7 +194,7 @@ To get a specific version of a schema, you can use one of the following methods.
 Use the `get` subcommand.
 
 ```bash
-pulsar-admin schemas get <topic-name> --version=<version>
+pulsar-admin schemas get <topic-name> --version <version>
 ```
 
 </TabItem>
@@ -247,7 +247,7 @@ To extract (provide) a schema via a topic, use the following method.
 Use the `extract` subcommand.
 
 ```bash
-pulsar-admin schemas extract --classname <class-name> --jar <jar-path> --type <type-name>
+pulsar-admin schemas extract --classname <class-name> --jar <absolute-jar-path> --type <type-name>
 ```
 
 </TabItem>

@@ -85,3 +85,104 @@ Before using the RabbitMQ source connector, you need to create a configuration f
       passive: "false"
   ```
 
+## Usage
+
+
+### Standalone mode
+
+This example describes how to use the RabbitMQ source connector to feed data from RabbitMQ and write data to Pulsar topics in the standalone mode.
+
+#### Prerequisites
+
+- There is a RabbitMQ server with some history messages in the queue.
+
+#### Steps
+
+1. Get a Pulsar package and start Pulsar in standalone mode.
+
+   ```bash
+   wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz
+   tar xvfz apache-pulsar-@pulsar:version@-bin.tar.gz
+   cd apache-pulsar-@pulsar:version@
+   bin/pulsar standalone
+   ```
+
+2. Download the [nar package](https://archive.apache.org/dist/pulsar/) corresponding to Pulsar's version and copy the following file to Pulsar's directory.
+
+    ```bash
+    wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar
+    cp pulsar-io-rabbitmq-@pulsar:version@.nar ./connectors
+    ```
+
+3. Set the retention of the namespace, otherwise the messages into the Pulsar's topic which have not the subscription have been immediately deleted.
+
+   ```bash
+   ./bin/pulsar-admin namespaces set-retention -s 100M -t 3d public/default
+   ```
+
+
+4. Prepare a configuration file with name is _rabbitmq-source-queue-name.yaml_.
+   ```yaml
+    configs:
+      host: "localhost"
+      port: 5672
+      virtualHost: "/"
+      username: "guest"
+      password: "guest"
+      queueName: "test-queue"
+      connectionName: "test-connection"
+      requestedChannelMax: 0
+      requestedFrameMax: 0
+      connectionTimeout: 60000
+      handshakeTimeout: 10000
+      requestedHeartbeat: 60
+      prefetchCount: 0
+      prefetchGlobal: "false"
+      passive: "false"
+    ```
+
+   Copy the configuration file to Pulsar‘s conf directory.
+    ```bash
+    cp rabbitmq-source-queue-name.yaml ./conf
+    ```
+
+5. Open a new terminal window and start the connector in local run mode.
+
+   ```bash
+   ./bin/pulsar-admin source localrun \
+    --source-config-file $PWD/conf/rabbitmq-source-queue-name.yaml \
+    --archive $PWD/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar \
+    --name rabbitmq-source \
+    --destination-topic-name pulsar-rabbitmq-test-topic \
+    --broker-service-url pulsar://{ip}:{port}
+   ```
+
+6. Open a new terminal window and check the topic is created automatically.
+
+   ```bash
+   ./bin/pulsar-admin topics list public/default \
+   ```
+
+   This topic is created automatically as follows:
+
+    ```bash
+    persistent://public/default/pulsar-rabbitmq-test-topic-partition-0
+    ```
+
+7. Consume this topic.
+
+    ```bash
+    ./bin/pulsar-client consume persistent://public/default/pulsar-rabbitmq-test-topic-partition-0 -s s1 -n 0 -p Earliest
+    ```
+
+   The following information appears on the consumer terminal window.
+
+    ```bash
+       ----- got message -----
+       key:[quick.orange.pulsar], properties:[], content:message-topic-O(range) 0
+       ----- got message -----
+       key:[quick.orange.pulsar], properties:[], content:message-topic-O(range) 1
+
+       ... ...
+
+    ```

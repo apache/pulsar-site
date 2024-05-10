@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash'
 
 import Button from '@site/src/components/ui/Button/Button';
 import Slider from '@site/src/components/ui/Slider/Slider';
@@ -12,6 +13,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const Users: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const shuffledTestimonials = React.useMemo(() => _.shuffle(testimonials), [testimonials]);
 
   return (
     <section className={s.block}>
@@ -36,8 +38,8 @@ const Users: React.FC = () => {
         </div>
         <BrowserOnly>
           {() => (
-            <Slider centerMode={window.innerWidth > 800} slidesToShow={2}>
-              {Object.values(testimonials).flat().map((caseStudy, i) => (
+            <Slider centerMode={window.innerWidth > 1000} slidesToShow={2}>
+              {Object.values(shuffledTestimonials).flat().map((caseStudy, i) => (
                 <div key={i} className={s.slide}>
                   <div className={s.slide_container}>
                     <Quote className={s.quote} />

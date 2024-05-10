@@ -346,6 +346,12 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
     String primaryUrl = "pulsar+ssl://localhost:6651";
     String secondaryUrl = "pulsar+ssl://localhost:6661";
 
+    String primaryTlsTrustCertsFilePath = "primary/path";
+    Authentication primaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/primary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/primary-role.key-pk8.pem");
+
     String secondaryTlsTrustCertsFilePath = "secondary/path";
     Authentication secondaryAuthentication = AuthenticationFactory.create(
         "org.apache.pulsar.client.impl.auth.AuthenticationTls",
@@ -370,6 +376,9 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(failover)
+        .authentication(primaryAuthentication)
+        .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
     failover.initialize(pulsarClient);
@@ -411,7 +420,9 @@ public PulsarClient getControlledFailoverClient() throws IOException {
         .urlProviderHeader(header)
         .build();
 
-    PulsarClient pulsarClient = PulsarClient.builder().build();
+    PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(provider)
+        .build();
 
     provider.initialize(pulsarClient);
     return pulsarClient;

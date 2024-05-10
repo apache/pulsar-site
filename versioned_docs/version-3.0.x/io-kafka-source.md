@@ -164,12 +164,12 @@ This example describes how to use the Kafka source connector to feed data from K
    docker exec -it pulsar-kafka-standalone /bin/bash
 
    ./bin/pulsar-admin source localrun \
-      --archive ./pulsar-io-kafka.nar \
+      --archive $PWD/pulsar-io-kafka.nar \
       --tenant public \
       --namespace default \
       --name kafka \
       --destination-topic-name my-topic \
-      --source-config-file ./conf/kafkaSourceConfig.yaml \
+      --source-config-file $PWD/conf/kafkaSourceConfig.yaml \
       --parallelism 1
    ```
 
@@ -217,6 +217,6 @@ This example explains how to create a Kafka source connector in an on-premises c
 
    ```bash
    PULSAR_HOME/bin/pulsar-admin sources create \
-   --source-config-file <kafka-source-config.yaml>
+   --source-config-file <absolute path to kafka-source-config.yaml>
    ```
 

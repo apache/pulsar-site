@@ -18,7 +18,7 @@ const featuresList = [
   {
     picture: MessagingAndStreaming,
     title: 'Low-latency messaging and streaming',
-    text: 'Acknowledge messages individually (RabbitMQ style) or cumulative per partition (i.e., offset-like). Enables use cases such as distributed work queues or order-preserving data streams at very large scales (hundreds of nodes) and low latency (<5ms).',
+    text: 'Acknowledge messages individually (RabbitMQ style) or cumulative per partition (i.e., offset-like). Enables use cases such as distributed work queues or order-preserving data streams at very large scales (hundreds of nodes) and low latency (<10ms).',
     viewBox: '0 0 300 128',
   },
   {

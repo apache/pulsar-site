@@ -2,6 +2,7 @@
 id: security-encryption
 title: End-to-End Encryption
 sidebar_label: "End-to-End Encryption"
+description: Get a comprehensive understanding of the workflow, usage, and troubleshooting of end-to-end encryption in Pulsar.
 ---
 
 ````mdx-code-block
@@ -11,13 +12,15 @@ import TabItem from '@theme/TabItem';
 
 Applications can use Pulsar end-to-end encryption (E2EE) to encrypt messages on the producer side and decrypt messages on the consumer side. You can use the public and private key pair that the application configures to perform encryption and decryption. Only the consumers with a valid key can decrypt the encrypted messages.
 
-## How it works in Pulsar
+## How end-to-end encryption works in Pulsar
 
 Pulsar uses a dynamically generated symmetric session key to encrypt messages (data). You can use the application-provided ECDSA (Elliptic Curve Digital Signature Algorithm) or RSA (Rivest–Shamir–Adleman) key pair to encrypt the session key (data key), so you do not have to share the secret with everyone.
 
 The following figure illustrates how Pulsar encrypts messages on the producer side and decrypts messages on the consumer side.
 
-![Pulsar end-to-end encryption](/assets/pulsar-encryption.svg)
+![End-to-end encryption in Pulsar](/assets/pulsar-encryption.svg)
+
+The workflow of end-to-end encryption in Pulsar is as follows.
 
 1. The producer generates a session key regularly (every 4 hours or after publishing a certain number of messages) to encrypt the message payload using a symmetric algorithm, such as AES, and fetches the asymmetric public key every 4 hours. The ciphertext is packed as the message body.
 2. The producer uses the consumer’s public key to encrypt the session key using an asymmetric algorithm, such as RSA, and adds an alias with the encrypted secret to the message header.
@@ -39,12 +42,14 @@ If the produced messages are consumed across application boundaries, you need to
 
 ## Get started
 
+To enable end-to-end encryption in Puslar, complete the following steps.
+
 ### Prerequisites
 
 * Pulsar Java/Python/C++/Node.js client 2.7.1 or later versions.
 * Pulsar Go client 0.6.0 or later versions.
 
-### Configure end-to-end encryption
+### Step 1: Configure end-to-end encryption
 
 1. Create both public and private key pairs.
 
@@ -64,7 +69,7 @@ If the produced messages are consumed across application boundaries, you need to
 
      ```shell
      openssl genrsa -out test_rsa_privkey.pem 2048
-     openssl rsa -in test_rsa_privkey.pem -pubout -outform pkcs8 -out test_rsa_pubkey.pem
+     openssl rsa -in test_rsa_privkey.pem -pubout -outform PEM -out test_rsa_pubkey.pem
      ```
 
    </TabItem>
@@ -357,7 +362,7 @@ If the produced messages are consumed across application boundaries, you need to
    </Tabs>
    ````
 
-### Encrypt a message with multiple keys
+### Step 2: Encrypt a message with multiple keys
 
 :::note
 

@@ -9,7 +9,7 @@ $ pulsar-admin sinks subcommand
 
 
 
-## <em>create</em>
+## create
 
 Submit a Pulsar IO sink connector to run in a Pulsar cluster
 
@@ -57,7 +57,7 @@ $ pulsar-admin sinks create options
 | `-a, --archive` | Path to the archive file for the sink. It also supports url-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package.|null||
 
 
-## <em>update</em>
+## update
 
 Update a Pulsar IO sink connector
 
@@ -106,7 +106,7 @@ $ pulsar-admin sinks update options
 | `-a, --archive` | Path to the archive file for the sink. It also supports url-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package.|null||
 
 
-## <em>delete</em>
+## delete
 
 Stops a Pulsar IO sink connector
 
@@ -125,7 +125,7 @@ $ pulsar-admin sinks delete options
 | `--tenant` | The sink's tenant|null||
 
 
-## <em>list</em>
+## list
 
 List all running Pulsar IO sink connectors
 
@@ -143,7 +143,7 @@ $ pulsar-admin sinks list options
 | `--namespace` | The sink's namespace|null||
 
 
-## <em>get</em>
+## get
 
 Gets the information about a Pulsar IO sink connector
 
@@ -162,7 +162,7 @@ $ pulsar-admin sinks get options
 | `--tenant` | The sink's tenant|null||
 
 
-## <em>status</em>
+## status
 
 Check the current status of a Pulsar Sink
 
@@ -182,7 +182,7 @@ $ pulsar-admin sinks status options
 | `--tenant` | The sink's tenant|null||
 
 
-## <em>stop</em>
+## stop
 
 Stops sink instance
 
@@ -202,7 +202,7 @@ $ pulsar-admin sinks stop options
 | `--instance-id` | The sink instanceId (stop all instances if instance-id is not provided|null||
 
 
-## <em>start</em>
+## start
 
 Starts sink instance
 
@@ -222,7 +222,7 @@ $ pulsar-admin sinks start options
 | `--instance-id` | The sink instanceId (start all instances if instance-id is not provided|null||
 
 
-## <em>restart</em>
+## restart
 
 Restart sink instance
 
@@ -242,7 +242,7 @@ $ pulsar-admin sinks restart options
 | `--tenant` | The sink's tenant|null||
 
 
-## <em>localrun</em>
+## localrun
 
 Run a Pulsar IO sink connector locally (rather than deploying it to the Pulsar cluster)
 
@@ -301,7 +301,7 @@ $ pulsar-admin sinks localrun options
 | `--auto-ack` | Whether or not the framework will automatically acknowledge messages|null||
 
 
-## <em>available-sinks</em>
+## available-sinks
 
 Get the list of Pulsar IO connector sinks supported by Pulsar cluster
 
@@ -317,7 +317,7 @@ $ pulsar-admin sinks available-sinks options
 |---|---|---|
 
 
-## <em>reload</em>
+## reload
 
 Reload the available built-in connectors
 

@@ -23,8 +23,9 @@ Deploying a Pulsar cluster consists of the following steps:
 
 ### Requirements
 
-Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK.
-For the runtime Java version, please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
+Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**.
+
+Also, you need the proper 64-bit JRE/JDK version installed. Please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
 
 :::tip
 
@@ -472,7 +473,7 @@ Create an ExclamationFunction `exclamation`.
 
 ```bash
 bin/pulsar-admin functions create \
-    --jar examples/api-examples.jar \
+    --jar $PWD/examples/api-examples.jar \
     --classname org.apache.pulsar.functions.api.examples.ExclamationFunction \
     --inputs persistent://public/default/exclamation-input \
     --output persistent://public/default/exclamation-output \

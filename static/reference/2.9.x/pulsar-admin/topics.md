@@ -137,7 +137,7 @@ $ pulsar-admin topics subcommand
 * `set-replicated-subscription-status`
 * `get-backlog-size`
 
-## <em>list</em>
+## <em>list
 
 Get the list of topics under a namespace.
 
@@ -155,7 +155,7 @@ Options
 |-----------------------|----------------------------------------------------|---------|
 | `-td, --topic-domain` | Allowed topic domain (persistent, non_persistent). | null    |
 
-## <em>list-partitioned-topics</em>
+## <em>list-partitioned-topics
 
 Get the list of partitioned topics under a namespace.
 
@@ -167,7 +167,7 @@ Get the list of partitioned topics under a namespace.
 $ pulsar-admin topics list-partitioned-topics options
 ```
 
-## <em>permissions</em>
+## <em>permissions
 
 Get the permissions on a topic. Retrieve the effective permissions for a topic. These permissions are defined by the
 permissions set at the namespace level combined (union) with any eventual specific permission set on the topic.
@@ -180,7 +180,7 @@ permissions set at the namespace level combined (union) with any eventual specif
 $ pulsar-admin topics permissions options
 ```
 
-## <em>grant-permission</em>
+## <em>grant-permission
 
 Grant a new permission to a client role on a single topic.
 
@@ -199,7 +199,7 @@ Options
 | `--role`    | Client role to which grant permissions  | null    |
 | `--actions` | Actions to be granted (produce,consume) | null    |
 
-## <em>revoke-permission</em>
+## <em>revoke-permission
 
 Revoke permissions on a topic. Revoke permissions to a client role on a single topic. If the permission was not set at
 the topic level, but rather at the namespace level, this operation will return an error (HTTP status code 412).
@@ -218,7 +218,7 @@ Options
 |----------|-----------------------------------------|---------|
 | `--role` | Client role to which revoke permissions | null    |
 
-## <em>lookup</em>
+## <em>lookup
 
 Lookup a topic from the current serving broker
 
@@ -230,7 +230,7 @@ Lookup a topic from the current serving broker
 $ pulsar-admin topics lookup options
 ```
 
-## <em>partitioned-lookup</em>
+## <em>partitioned-lookup
 
 Lookup a partitioned topic from the current serving broker
 
@@ -242,7 +242,7 @@ Lookup a partitioned topic from the current serving broker
 $ pulsar-admin topics partitioned-lookup options
 ```
 
-## <em>bundle-range</em>
+## <em>bundle-range
 
 Get Namespace bundle range of a topic
 
@@ -254,7 +254,7 @@ Get Namespace bundle range of a topic
 $ pulsar-admin topics bundle-range options
 ```
 
-## <em>delete</em>
+## <em>delete
 
 Delete a topic. The topic cannot be deleted if there's any active subscription or producers connected to it.
 
@@ -273,7 +273,7 @@ Options
 | `-f, --force`        | Close all producer/consumer/replicator and delete topic forcefully | false   |
 | `-d, --deleteSchema` | Delete schema while deleting topic                                 | false   |
 
-## <em>truncate</em>
+## <em>truncate
 
 Truncate a topic.
 The truncate operation will move all cursors to the end of the topic and delete all inactive ledgers.
@@ -286,7 +286,7 @@ The truncate operation will move all cursors to the end of the topic and delete 
 $ pulsar-admin topics truncate options
 ```
 
-## <em>unload</em>
+## <em>unload
 
 Unload a topic.
 
@@ -298,7 +298,7 @@ Unload a topic.
 $ pulsar-admin topics unload options
 ```
 
-## <em>subscriptions</em>
+## <em>subscriptions
 
 Get the list of subscriptions on the topic
 
@@ -310,7 +310,7 @@ Get the list of subscriptions on the topic
 $ pulsar-admin topics subscriptions options
 ```
 
-## <em>unsubscribe</em>
+## <em>unsubscribe
 
 Delete a durable subscriber from a topic. The subscription cannot be deleted if there are any active consumers attached
 to it
@@ -330,7 +330,7 @@ Options
 | `-f, --force`        | Disconnect and close all consumers and delete subscription forcefully | false   |
 | `-s, --subscription` | Subscription to be deleted                                            | null    |
 
-## <em>create-subscription</em>
+## <em>create-subscription
 
 Create a new subscription on a topic
 
@@ -349,7 +349,7 @@ Options
 | `-s, --subscription` | Subscription to reset position on                                                                       | null    |
 | `--messageId, -m`    | messageId where to create the subscription. It can be either 'latest', 'earliest' or (ledgerId:entryId) | latest  |
 
-## <em>stats</em>
+## <em>stats
 
 Get the stats for the topic and its connected producers and consumers. All the rates are computed over a 1 minute window
 and are relative the last completed 1 minute period.
@@ -369,7 +369,7 @@ Options
 | `-sbs, --get-subscription-backlog-size` | Set true to get backlog size for each subscription, locking required. | false   |
 | `-gpb, --get-precise-backlog`           | Set true to get precise backlog                                       | false   |
 
-## <em>stats-internal</em>
+## <em>stats-internal
 
 Get the internal stats for the topic
 
@@ -387,7 +387,7 @@ Options
 |------------------|---------------------------------|---------|
 | `-m, --metadata` | Flag to include ledger metadata | false   |
 
-## <em>info-internal</em>
+## <em>info-internal
 
 Get the internal metadata info for the topic
 
@@ -399,7 +399,7 @@ Get the internal metadata info for the topic
 $ pulsar-admin topics info-internal options
 ```
 
-## <em>partitioned-stats</em>
+## <em>partitioned-stats
 
 Get the stats for the partitioned topic and its connected producers and consumers. All the rates are computed over a 1
 minute window and are relative the last completed 1 minute period.
@@ -420,7 +420,7 @@ Options
 | `-sbs, --get-subscription-backlog-size` | Set true to get backlog size for each subscription, locking required. | false   |
 | `--per-partition`                       | Get per partition stats                                               | false   |
 
-## <em>partitioned-stats-internal</em>
+## <em>partitioned-stats-internal
 
 Get the internal stats for the partitioned topic and its connected producers and consumers. All the rates are computed
 over a 1 minute window and are relative the last completed 1 minute period.
@@ -433,7 +433,7 @@ over a 1 minute window and are relative the last completed 1 minute period.
 $ pulsar-admin topics partitioned-stats-internal options
 ```
 
-## <em>skip</em>
+## <em>skip
 
 Skip some messages for the subscription
 
@@ -452,7 +452,7 @@ Options
 | `-s, --subscription` | Subscription to be skip messages on | null    |
 | `-n, --count`        | Number of messages to skip          | 0       |
 
-## <em>clear-backlog</em>
+## <em>clear-backlog
 
 Skip all the messages for the subscription
 
@@ -470,7 +470,7 @@ Options
 |----------------------|----------------------------|---------|
 | `-s, --subscription` | Subscription to be cleared | null    |
 
-## <em>expire-messages</em>
+## <em>expire-messages
 
 Expire messages that older than given expiry time (in seconds) for the subscription
 
@@ -491,7 +491,7 @@ Options
 | `-s, --subscription`           | Subscription to be skip messages on                                        | null    |
 | `--position, -p`               | message position to reset back to (ledgerId:entryId)                       | null    |
 
-## <em>expire-messages-all-subscriptions</em>
+## <em>expire-messages-all-subscriptions
 
 Expire messages that older than given expiry time (in seconds) for all subscriptions
 
@@ -509,7 +509,7 @@ Options
 |--------------------|--------------------------------------------|---------|
 | `-t, --expireTime` | Expire messages older than time in seconds | 0       |
 
-## <em>create-partitioned-topic</em>
+## <em>create-partitioned-topic
 
 Create a partitioned topic. The partitioned topic has to be created before creating a producer on it.
 
@@ -527,7 +527,7 @@ Options
 |--------------------|------------------------------------|---------|
 | `-p, --partitions` | Number of partitions for the topic | 0       |
 
-## <em>create-missed-partitions</em>
+## <em>create-missed-partitions
 
 Try to create partitions for partitioned topic. The partitions of partition topic has to be created, can be used by
 repair partitions when topic auto creation is disabled
@@ -540,7 +540,7 @@ repair partitions when topic auto creation is disabled
 $ pulsar-admin topics create-missed-partitions options
 ```
 
-## <em>create</em>
+## <em>create
 
 Create a non-partitioned topic.
 
@@ -552,7 +552,7 @@ Create a non-partitioned topic.
 $ pulsar-admin topics create options
 ```
 
-## <em>update-partitioned-topic</em>
+## <em>update-partitioned-topic
 
 Update existing non-global partitioned topic. New updating number of partitions must be greater than existing number of
 partitions.
@@ -572,7 +572,7 @@ Options
 | `-p, --partitions` | Number of partitions for the topic                              | 0       |
 | `-f, --force`      | Update forcefully without validating existing partitioned topic | false   |
 
-## <em>get-partitioned-topic-metadata</em>
+## <em>get-partitioned-topic-metadata
 
 Get the partitioned topic metadata. If the topic is not created or is a non-partitioned topic, it returns empty topic
 with 0 partitions
@@ -585,7 +585,7 @@ with 0 partitions
 $ pulsar-admin topics get-partitioned-topic-metadata options
 ```
 
-## <em>delete-partitioned-topic</em>
+## <em>delete-partitioned-topic
 
 Delete a partitioned topic. It will also delete all the partitions of the topic if it exists.
 
@@ -604,7 +604,7 @@ Options
 | `-d, --deleteSchema` | Delete schema while deleting topic                                 | false   |
 | `-f, --force`        | Close all producer/consumer/replicator and delete topic forcefully | false   |
 
-## <em>peek-messages</em>
+## <em>peek-messages
 
 Peek some messages for the subscription
 
@@ -623,7 +623,7 @@ Options
 | `-n, --count`        | Number of messages (default 1)    | 1       |
 | `-s, --subscription` | Subscription to get messages from | null    |
 
-## <em>examine-messages</em>
+## <em>examine-messages
 
 Examine a specific message on a topic by position relative to the earliest or the latest message.
 
@@ -642,7 +642,7 @@ Options
 | `-i, --initialPosition` | Relative start position to examine message.It can be 'latest' or 'earliest', default is latest | latest  |
 | `-m, --messagePosition` | The position of messages (default 1)                                                           | 1       |
 
-## <em>get-message-by-id</em>
+## <em>get-message-by-id
 
 Get message by its ledgerId and entryId
 
@@ -661,7 +661,7 @@ Options
 | `-l, --ledgerId` | ledger id pointing to the desired ledger | 0       |
 | `-e, --entryId`  | entry id pointing to the desired entry   | 0       |
 
-## <em>get-message-id</em>
+## <em>get-message-id
 
 Get message ID
 
@@ -679,7 +679,7 @@ Options
 |------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `-d, --datetime` | datetime at or before this messageId. This datetime is in format of ISO_OFFSET_DATE_TIME, e.g. 2021-06-28T16:53:08Z or 2021-06-28T16:53:08.123456789+08:00 | null    |
 
-## <em>reset-cursor</em>
+## <em>reset-cursor
 
 Reset position for subscription to a position that is closest to timestamp or messageId.
 
@@ -700,7 +700,7 @@ Options
 | `-s, --subscription`           | Subscription to reset position on                                                    | null    |
 | `--messageId, -m`              | messageId to reset back to (ledgerId:entryId)                                        | null    |
 
-## <em>terminate</em>
+## <em>terminate
 
 Terminate a topic and don't allow any more messages to be published
 
@@ -712,7 +712,7 @@ Terminate a topic and don't allow any more messages to be published
 $ pulsar-admin topics terminate options
 ```
 
-## <em>compact</em>
+## <em>compact
 
 Compact a topic
 
@@ -724,7 +724,7 @@ Compact a topic
 $ pulsar-admin topics compact options
 ```
 
-## <em>compaction-status</em>
+## <em>compaction-status
 
 Status of compaction on a topic
 
@@ -742,7 +742,7 @@ Options
 |-----------------------|---------------------------------|---------|
 | `-w, --wait-complete` | Wait for compaction to complete | false   |
 
-## <em>offload</em>
+## <em>offload
 
 Trigger offload of data from a topic to long-term storage (e.g. Amazon S3)
 
@@ -760,7 +760,7 @@ Options
 |------------------------|--------------------------------------------------------------------------------------|---------|
 | `-s, --size-threshold` | Maximum amount of data to keep in BookKeeper for the specified topic (e.g. 10M, 5G). | null    |
 
-## <em>offload-status</em>
+## <em>offload-status
 
 Check the status of data offloading from a topic to long-term storage
 
@@ -778,7 +778,7 @@ Options
 |-----------------------|---------------------------------|---------|
 | `-w, --wait-complete` | Wait for offloading to complete | false   |
 
-## <em>last-message-id</em>
+## <em>last-message-id
 
 get the last commit message id of topic
 
@@ -790,7 +790,7 @@ get the last commit message id of topic
 $ pulsar-admin topics last-message-id options
 ```
 
-## <em>get-backlog-quotas</em>
+## <em>get-backlog-quotas
 
 Get the backlog quota policies for a topic
 
@@ -808,7 +808,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-backlog-quota</em>
+## <em>set-backlog-quota
 
 Set a backlog quota policy for a topic
 
@@ -829,7 +829,7 @@ Options
 | `-lt, --limitTime` | Time limit in second, non-positive number for disabling time limit.                                                                              | -1                  |
 | `-t, --type`       | Backlog quota type to set                                                                                                                        | destination_storage |
 
-## <em>remove-backlog-quota</em>
+## <em>remove-backlog-quota
 
 Remove a backlog quota policy from a topic
 
@@ -847,7 +847,7 @@ Options
 |--------------|------------------------------|---------------------|
 | `-t, --type` | Backlog quota type to remove | destination_storage |
 
-## <em>get-message-ttl</em>
+## <em>get-message-ttl
 
 Get the message TTL for a topic
 
@@ -865,7 +865,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-message-ttl</em>
+## <em>set-message-ttl
 
 Set message TTL for a topic
 
@@ -883,7 +883,7 @@ Options
 |-------------|----------------------------------------------------------------------------|---------|
 | `-t, --ttl` | Message TTL for topic in second, allowed range from 1 to Integer.MAX_VALUE | 0       |
 
-## <em>remove-message-ttl</em>
+## <em>remove-message-ttl
 
 Remove message TTL for a topic
 
@@ -895,7 +895,7 @@ Remove message TTL for a topic
 $ pulsar-admin topics remove-message-ttl options
 ```
 
-## <em>get-retention</em>
+## <em>get-retention
 
 Get the retention policy for a topic
 
@@ -913,7 +913,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-retention</em>
+## <em>set-retention
 
 Set the retention policy for a topic
 
@@ -932,7 +932,7 @@ Options
 | `--size, -s` | Retention size limit (eg: 10M, 16G, 3T). 0 or less than 1MB means no retention and -1 means infinite size retention                      | null    |
 | `--time, -t` | Retention time in minutes (or minutes, hours,days,weeks eg: 100m, 3h, 2d, 5w). 0 means no retention and -1 means infinite time retention | null    |
 
-## <em>remove-retention</em>
+## <em>remove-retention
 
 Remove the retention policy for a topic
 
@@ -944,7 +944,7 @@ Remove the retention policy for a topic
 $ pulsar-admin topics remove-retention options
 ```
 
-## <em>enable-deduplication</em>
+## <em>enable-deduplication
 
 Enable the deduplication policy for a topic
 
@@ -956,7 +956,7 @@ Enable the deduplication policy for a topic
 $ pulsar-admin topics enable-deduplication options
 ```
 
-## <em>disable-deduplication</em>
+## <em>disable-deduplication
 
 Disable the deduplication policy for a topic
 
@@ -968,7 +968,7 @@ Disable the deduplication policy for a topic
 $ pulsar-admin topics disable-deduplication options
 ```
 
-## <em>get-deduplication-enabled</em>
+## <em>get-deduplication-enabled
 
 Get the deduplication policy for a topic
 
@@ -980,7 +980,7 @@ Get the deduplication policy for a topic
 $ pulsar-admin topics get-deduplication-enabled options
 ```
 
-## <em>set-deduplication</em>
+## <em>set-deduplication
 
 Enable or disable deduplication for a topic
 
@@ -999,7 +999,7 @@ Options
 | `--disable, -d` | Disable deduplication | false   |
 | `--enable, -e`  | Enable deduplication  | false   |
 
-## <em>get-deduplication</em>
+## <em>get-deduplication
 
 Get the deduplication policy for a topic
 
@@ -1011,7 +1011,7 @@ Get the deduplication policy for a topic
 $ pulsar-admin topics get-deduplication options
 ```
 
-## <em>remove-deduplication</em>
+## <em>remove-deduplication
 
 Remove the deduplication policy for a topic
 
@@ -1023,7 +1023,7 @@ Remove the deduplication policy for a topic
 $ pulsar-admin topics remove-deduplication options
 ```
 
-## <em>get-deduplication-snapshot-interval</em>
+## <em>get-deduplication-snapshot-interval
 
 Get deduplication snapshot interval for a topic
 
@@ -1035,7 +1035,7 @@ Get deduplication snapshot interval for a topic
 $ pulsar-admin topics get-deduplication-snapshot-interval options
 ```
 
-## <em>set-deduplication-snapshot-interval</em>
+## <em>set-deduplication-snapshot-interval
 
 Set deduplication snapshot interval for a topic
 
@@ -1053,7 +1053,7 @@ Options
 |------------------|------------------------------------------------------------------------------------------------|---------|
 | `-i, --interval` | Deduplication snapshot interval for topic in second, allowed range from 0 to Integer.MAX_VALUE | 0       |
 
-## <em>remove-deduplication-snapshot-interval</em>
+## <em>remove-deduplication-snapshot-interval
 
 Remove deduplication snapshot interval for a topic
 
@@ -1065,7 +1065,7 @@ Remove deduplication snapshot interval for a topic
 $ pulsar-admin topics remove-deduplication-snapshot-interval options
 ```
 
-## <em>get-delayed-delivery</em>
+## <em>get-delayed-delivery
 
 Get the delayed delivery policy for a topic
 
@@ -1083,7 +1083,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-delayed-delivery</em>
+## <em>set-delayed-delivery
 
 Set the delayed delivery policy on a topic
 
@@ -1103,7 +1103,7 @@ Options
 | `--enable, -e`  | Enable delayed delivery messages                                                                                                                                    | false   |
 | `--time, -t`    | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d) | 1s      |
 
-## <em>remove-delayed-delivery</em>
+## <em>remove-delayed-delivery
 
 Remove the delayed delivery policy on a topic
 
@@ -1115,7 +1115,7 @@ Remove the delayed delivery policy on a topic
 $ pulsar-admin topics remove-delayed-delivery options
 ```
 
-## <em>get-persistence</em>
+## <em>get-persistence
 
 Get the persistence policies for a topic
 
@@ -1127,7 +1127,7 @@ Get the persistence policies for a topic
 $ pulsar-admin topics get-persistence options
 ```
 
-## <em>set-persistence</em>
+## <em>set-persistence
 
 Set the persistence policies for a topic
 
@@ -1148,7 +1148,7 @@ Options
 | `-r, --ml-mark-delete-max-rate` | Throttling rate of mark-delete operation (0 means no throttle) | 0.0     |
 | `-w, --bookkeeper-write-quorum` | How many writes to make of each entry                          | 0       |
 
-## <em>remove-persistence</em>
+## <em>remove-persistence
 
 Remove the persistence policy for a topic
 
@@ -1160,7 +1160,7 @@ Remove the persistence policy for a topic
 $ pulsar-admin topics remove-persistence options
 ```
 
-## <em>get-offload-policies</em>
+## <em>get-offload-policies
 
 Get the offload policies for a topic
 
@@ -1178,7 +1178,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-offload-policies</em>
+## <em>set-offload-policies
 
 Set the offload policies for a topic
 
@@ -1208,7 +1208,7 @@ Options
 | `-t, --offloadThresholdInBytes`     | ManagedLedger offload threshold in bytes                                                                                                                                                                                                                                                                                                                                                                         | 0       |
 | `-s, --aws-secret`                  | AWS Credential Secret to use when using driver S3 or aws-s3                                                                                                                                                                                                                                                                                                                                                      | null    |
 
-## <em>remove-offload-policies</em>
+## <em>remove-offload-policies
 
 Remove the offload policies for a topic
 
@@ -1220,7 +1220,7 @@ Remove the offload policies for a topic
 $ pulsar-admin topics remove-offload-policies options
 ```
 
-## <em>get-dispatch-rate</em>
+## <em>get-dispatch-rate
 
 Get message dispatch rate for a topic
 
@@ -1238,7 +1238,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-dispatch-rate</em>
+## <em>set-dispatch-rate
 
 Set message dispatch rate for a topic
 
@@ -1259,7 +1259,7 @@ Options
 | `--dispatch-rate-period, -dt`     | dispatch-rate-period in second type (default 1 second will be overwrite if not passed)                                                                 | 1       |
 | `--relative-to-publish-rate, -rp` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate)) | false   |
 
-## <em>remove-dispatch-rate</em>
+## <em>remove-dispatch-rate
 
 Remove message dispatch rate for a topic
 
@@ -1271,7 +1271,7 @@ Remove message dispatch rate for a topic
 $ pulsar-admin topics remove-dispatch-rate options
 ```
 
-## <em>get-subscription-dispatch-rate</em>
+## <em>get-subscription-dispatch-rate
 
 Get subscription message-dispatch-rate for a topic
 
@@ -1289,7 +1289,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-subscription-dispatch-rate</em>
+## <em>set-subscription-dispatch-rate
 
 Set subscription message-dispatch-rate for a topic
 
@@ -1310,7 +1310,7 @@ Options
 | `--byte-dispatch-rate, -bd`       | byte-dispatch-rate (default -1 will be overwrite if not passed)                                                                                        | -1      |
 | `--msg-dispatch-rate, -md`        | message-dispatch-rate (default -1 will be overwrite if not passed)                                                                                     | -1      |
 
-## <em>remove-subscription-dispatch-rate</em>
+## <em>remove-subscription-dispatch-rate
 
 Remove subscription message-dispatch-rate for a topic
 
@@ -1322,7 +1322,7 @@ Remove subscription message-dispatch-rate for a topic
 $ pulsar-admin topics remove-subscription-dispatch-rate options
 ```
 
-## <em>get-replicator-dispatch-rate</em>
+## <em>get-replicator-dispatch-rate
 
 Get replicator message-dispatch-rate for a topic
 
@@ -1340,7 +1340,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-replicator-dispatch-rate</em>
+## <em>set-replicator-dispatch-rate
 
 Set replicator message-dispatch-rate for a topic
 
@@ -1361,7 +1361,7 @@ Options
 | `--msg-dispatch-rate, -md`        | message-dispatch-rate (default -1 will be overwrite if not passed)                                                                                     | -1      |
 | `--relative-to-publish-rate, -rp` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate)) | false   |
 
-## <em>remove-replicator-dispatch-rate</em>
+## <em>remove-replicator-dispatch-rate
 
 Remove replicator message-dispatch-rate for a topic
 
@@ -1373,7 +1373,7 @@ Remove replicator message-dispatch-rate for a topic
 $ pulsar-admin topics remove-replicator-dispatch-rate options
 ```
 
-## <em>get-compaction-threshold</em>
+## <em>get-compaction-threshold
 
 Get compaction threshold for a topic
 
@@ -1391,7 +1391,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-compaction-threshold</em>
+## <em>set-compaction-threshold
 
 Set compaction threshold for a topic
 
@@ -1409,7 +1409,7 @@ Options
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------|---------|
 | `--threshold, -t` | Maximum number of bytes in a topic backlog before compaction is triggered (eg: 10M, 16G, 3T). 0 disables automatic compaction | 0       |
 
-## <em>remove-compaction-threshold</em>
+## <em>remove-compaction-threshold
 
 Remove compaction threshold for a topic
 
@@ -1421,7 +1421,7 @@ Remove compaction threshold for a topic
 $ pulsar-admin topics remove-compaction-threshold options
 ```
 
-## <em>get-max-unacked-messages-on-consumer</em>
+## <em>get-max-unacked-messages-on-consumer
 
 Get max unacked messages policy on consumer for a topic
 
@@ -1439,7 +1439,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-max-unacked-messages-on-consumer</em>
+## <em>set-max-unacked-messages-on-consumer
 
 Set max unacked messages policy on consumer for a topic
 
@@ -1457,7 +1457,7 @@ Options
 |----------------|--------------------------------------|---------|
 | `-m, --maxNum` | max unacked messages num on consumer | 0       |
 
-## <em>remove-max-unacked-messages-on-consumer</em>
+## <em>remove-max-unacked-messages-on-consumer
 
 Remove max unacked messages policy on consumer for a topic
 
@@ -1469,7 +1469,7 @@ Remove max unacked messages policy on consumer for a topic
 $ pulsar-admin topics remove-max-unacked-messages-on-consumer options
 ```
 
-## <em>get-max-unacked-messages-on-subscription</em>
+## <em>get-max-unacked-messages-on-subscription
 
 Get max unacked messages policy on subscription for a topic
 
@@ -1487,7 +1487,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-max-unacked-messages-on-subscription</em>
+## <em>set-max-unacked-messages-on-subscription
 
 Set max unacked messages policy on subscription for a topic
 
@@ -1505,7 +1505,7 @@ Options
 |----------------|------------------------------------------|---------|
 | `-m, --maxNum` | max unacked messages num on subscription | 0       |
 
-## <em>remove-max-unacked-messages-on-subscription</em>
+## <em>remove-max-unacked-messages-on-subscription
 
 Remove max unacked messages policy on subscription for a topic
 
@@ -1517,7 +1517,7 @@ Remove max unacked messages policy on subscription for a topic
 $ pulsar-admin topics remove-max-unacked-messages-on-subscription options
 ```
 
-## <em>get-max-unacked-messages-per-consumer</em>
+## <em>get-max-unacked-messages-per-consumer
 
 Get max unacked messages policy on consumer for a topic
 
@@ -1535,7 +1535,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-max-unacked-messages-per-consumer</em>
+## <em>set-max-unacked-messages-per-consumer
 
 Set max unacked messages policy on consumer for a topic
 
@@ -1553,7 +1553,7 @@ Options
 |----------------|--------------------------------------|---------|
 | `-m, --maxNum` | max unacked messages num on consumer | 0       |
 
-## <em>remove-max-unacked-messages-per-consumer</em>
+## <em>remove-max-unacked-messages-per-consumer
 
 Remove max unacked messages policy on consumer for a topic
 
@@ -1565,7 +1565,7 @@ Remove max unacked messages policy on consumer for a topic
 $ pulsar-admin topics remove-max-unacked-messages-per-consumer options
 ```
 
-## <em>get-max-unacked-messages-per-subscription</em>
+## <em>get-max-unacked-messages-per-subscription
 
 Get max unacked messages policy on subscription for a topic
 
@@ -1583,7 +1583,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-max-unacked-messages-per-subscription</em>
+## <em>set-max-unacked-messages-per-subscription
 
 Set max unacked messages policy on subscription for a topic
 
@@ -1601,7 +1601,7 @@ Options
 |----------------|------------------------------------------|---------|
 | `-m, --maxNum` | max unacked messages num on subscription | 0       |
 
-## <em>remove-max-unacked-messages-per-subscription</em>
+## <em>remove-max-unacked-messages-per-subscription
 
 Remove max unacked messages policy on subscription for a topic
 
@@ -1613,7 +1613,7 @@ Remove max unacked messages policy on subscription for a topic
 $ pulsar-admin topics remove-max-unacked-messages-per-subscription options
 ```
 
-## <em>get-publish-rate</em>
+## <em>get-publish-rate
 
 Get publish rate for a topic
 
@@ -1625,7 +1625,7 @@ Get publish rate for a topic
 $ pulsar-admin topics get-publish-rate options
 ```
 
-## <em>set-publish-rate</em>
+## <em>set-publish-rate
 
 Set publish rate for a topic
 
@@ -1644,7 +1644,7 @@ Options
 | `--byte-publish-rate, -b` | byte-publish-rate (default -1 will be overwrite if not passed)    | -1      |
 | `--msg-publish-rate, -m`  | message-publish-rate (default -1 will be overwrite if not passed) | -1      |
 
-## <em>remove-publish-rate</em>
+## <em>remove-publish-rate
 
 Remove publish rate for a topic
 
@@ -1656,7 +1656,7 @@ Remove publish rate for a topic
 $ pulsar-admin topics remove-publish-rate options
 ```
 
-## <em>set-subscription-types-enabled</em>
+## <em>set-subscription-types-enabled
 
 Set subscription types enabled for a topic
 
@@ -1674,7 +1674,7 @@ Options
 |---------------|----------------------------------------------------------|---------|
 | `--types, -t` | Subscription types enabled list (comma separated values) | null    |
 
-## <em>get-subscription-types-enabled</em>
+## <em>get-subscription-types-enabled
 
 Get subscription types enabled for a topic
 
@@ -1686,7 +1686,7 @@ Get subscription types enabled for a topic
 $ pulsar-admin topics get-subscription-types-enabled options
 ```
 
-## <em>get-maxProducers</em>
+## <em>get-maxProducers
 
 Get max number of producers for a topic
 
@@ -1704,7 +1704,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-maxProducers</em>
+## <em>set-maxProducers
 
 Set max number of producers for a topic
 
@@ -1722,7 +1722,7 @@ Options
 |-----------------------|---------------------------|---------|
 | `--max-producers, -p` | Max producers for a topic | 0       |
 
-## <em>remove-maxProducers</em>
+## <em>remove-maxProducers
 
 Remove max number of producers for a topic
 
@@ -1734,7 +1734,7 @@ Remove max number of producers for a topic
 $ pulsar-admin topics remove-maxProducers options
 ```
 
-## <em>get-max-producers</em>
+## <em>get-max-producers
 
 Get max number of producers for a topic
 
@@ -1752,7 +1752,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-max-producers</em>
+## <em>set-max-producers
 
 Set max number of producers for a topic
 
@@ -1770,7 +1770,7 @@ Options
 |-----------------------|---------------------------|---------|
 | `--max-producers, -p` | Max producers for a topic | 0       |
 
-## <em>remove-max-producers</em>
+## <em>remove-max-producers
 
 Remove max number of producers for a topic
 
@@ -1782,7 +1782,7 @@ Remove max number of producers for a topic
 $ pulsar-admin topics remove-max-producers options
 ```
 
-## <em>get-max-subscriptions</em>
+## <em>get-max-subscriptions
 
 Get max number of subscriptions for a topic
 
@@ -1794,7 +1794,7 @@ Get max number of subscriptions for a topic
 $ pulsar-admin topics get-max-subscriptions options
 ```
 
-## <em>set-max-subscriptions</em>
+## <em>set-max-subscriptions
 
 Set max number of subscriptions for a topic
 
@@ -1812,7 +1812,7 @@ Options
 |-------------------------------------|----------------------------------------|---------|
 | `--max-subscriptions-per-topic, -m` | Maximum subscription limit for a topic | 0       |
 
-## <em>remove-max-subscriptions</em>
+## <em>remove-max-subscriptions
 
 Remove max number of subscriptions for a topic
 
@@ -1824,7 +1824,7 @@ Remove max number of subscriptions for a topic
 $ pulsar-admin topics remove-max-subscriptions options
 ```
 
-## <em>get-max-message-size</em>
+## <em>get-max-message-size
 
 Get max message size for a topic
 
@@ -1836,7 +1836,7 @@ Get max message size for a topic
 $ pulsar-admin topics get-max-message-size options
 ```
 
-## <em>set-max-message-size</em>
+## <em>set-max-message-size
 
 Set max message size for a topic
 
@@ -1854,7 +1854,7 @@ Options
 |--------------------------|------------------------------|---------|
 | `--max-message-size, -m` | Max message size for a topic | 0       |
 
-## <em>remove-max-message-size</em>
+## <em>remove-max-message-size
 
 Remove max message size for a topic
 
@@ -1866,7 +1866,7 @@ Remove max message size for a topic
 $ pulsar-admin topics remove-max-message-size options
 ```
 
-## <em>get-max-consumers-per-subscription</em>
+## <em>get-max-consumers-per-subscription
 
 Get max consumers per subscription for a topic
 
@@ -1878,7 +1878,7 @@ Get max consumers per subscription for a topic
 $ pulsar-admin topics get-max-consumers-per-subscription options
 ```
 
-## <em>set-max-consumers-per-subscription</em>
+## <em>set-max-consumers-per-subscription
 
 Set max consumers per subscription for a topic
 
@@ -1896,7 +1896,7 @@ Options
 |----------------------------------------|---------------------------------------------|---------|
 | `--max-consumers-per-subscription, -c` | maxConsumersPerSubscription for a namespace | 0       |
 
-## <em>remove-max-consumers-per-subscription</em>
+## <em>remove-max-consumers-per-subscription
 
 Remove max consumers per subscription for a topic
 
@@ -1908,7 +1908,7 @@ Remove max consumers per subscription for a topic
 $ pulsar-admin topics remove-max-consumers-per-subscription options
 ```
 
-## <em>get-inactive-topic-policies</em>
+## <em>get-inactive-topic-policies
 
 Get the inactive topic policies on a topic
 
@@ -1926,7 +1926,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-inactive-topic-policies</em>
+## <em>set-inactive-topic-policies
 
 Set the inactive topic policies on a topic
 
@@ -1947,7 +1947,7 @@ Options
 | `--disable-delete-while-inactive, -d` | Disable delete while inactive                                                                                                             | false   |
 | `--max-inactive-duration, -t`         | Max duration of topic inactivity in seconds,topics that are inactive for longer than this value will be deleted (eg: 1s, 10s, 1m, 5h, 3d) | null    |
 
-## <em>remove-inactive-topic-policies</em>
+## <em>remove-inactive-topic-policies
 
 Remove inactive topic policies from a topic
 
@@ -1959,7 +1959,7 @@ Remove inactive topic policies from a topic
 $ pulsar-admin topics remove-inactive-topic-policies options
 ```
 
-## <em>get-max-consumers</em>
+## <em>get-max-consumers
 
 Get max number of consumers for a topic
 
@@ -1977,7 +1977,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-max-consumers</em>
+## <em>set-max-consumers
 
 Set max number of consumers for a topic
 
@@ -1995,7 +1995,7 @@ Options
 |-----------------------|---------------------------|---------|
 | `--max-consumers, -c` | Max consumers for a topic | 0       |
 
-## <em>remove-max-consumers</em>
+## <em>remove-max-consumers
 
 Remove max number of consumers for a topic
 
@@ -2007,7 +2007,7 @@ Remove max number of consumers for a topic
 $ pulsar-admin topics remove-max-consumers options
 ```
 
-## <em>get-subscribe-rate</em>
+## <em>get-subscribe-rate
 
 Get consumer subscribe rate for a topic
 
@@ -2025,7 +2025,7 @@ Options
 |------------------|-------------------------------------|---------|
 | `-ap, --applied` | Get the applied policy of the topic | false   |
 
-## <em>set-subscribe-rate</em>
+## <em>set-subscribe-rate
 
 Set consumer subscribe rate for a topic
 
@@ -2044,7 +2044,7 @@ Options
 | `--subscribe-rate-period, -st` | subscribe-rate-period in second type (default 30 second will be overwrite if not passed) | 30      |
 | `--subscribe-rate, -sr`        | subscribe-rate (default -1 will be overwrite if not passed)                              | -1      |
 
-## <em>remove-subscribe-rate</em>
+## <em>remove-subscribe-rate
 
 Remove consumer subscribe rate for a topic
 
@@ -2056,7 +2056,7 @@ Remove consumer subscribe rate for a topic
 $ pulsar-admin topics remove-subscribe-rate options
 ```
 
-## <em>set-replicated-subscription-status</em>
+## <em>set-replicated-subscription-status
 
 Enable or disable a replicated subscription on a topic
 
@@ -2076,7 +2076,7 @@ Options
 | `-s, --subscription` | Subscription name to enable or disable replication | null    |
 | `--enable, -e`       | Enable replication                                 | false   |
 
-## <em>get-backlog-size</em>
+## <em>get-backlog-size
 
 Calculate backlog size by a message ID (in bytes).
 

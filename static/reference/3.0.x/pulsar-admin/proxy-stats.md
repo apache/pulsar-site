@@ -9,7 +9,7 @@ $ pulsar-admin proxy-stats subcommand
 
 
 
-## <em>connections</em>
+## connections
 
 dump connections metrics for Monitoring
 
@@ -26,7 +26,7 @@ $ pulsar-admin proxy-stats connections options
 | `-i, --indent` | Indent JSON output|false||
 
 
-## <em>topics</em>
+## topics
 
 dump topics metrics for Monitoring
 

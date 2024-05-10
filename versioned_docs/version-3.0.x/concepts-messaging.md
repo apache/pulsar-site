@@ -244,6 +244,11 @@ The default retry letter topic uses this format:
 <topicname>-<subscriptionname>-RETRY
 ```
 
+:::note
+- For Pulsar 2.6.x and 2.7.x, the default retry letter topic uses the format of `<subscriptionname>-RETRY`. If you upgrade from 2.6.x~2.7.x to 2.8.x or later, you need to delete historical retry letter topics and retry letter partitioned topics. Otherwise, Pulsar continues to use original topics, which are formatted with `<subscriptionname>-RETRY`.
+- It is not recommended to use `<subscriptionname>-RETRY` because if multiple topics under the same namespace have the same subscription, then retry message topic names for multiple topics might be the same, which will result in mutual consumptions.
+:::
+
 Use the Java client to specify the name of the retry letter topic.
 
 ```java
@@ -321,6 +326,11 @@ The default dead letter topic uses this format:
 ```
 <topicname>-<subscriptionname>-DLQ
 ```
+
+:::note
+- For Pulsar 2.6.x and 2.7.x, the default dead letter topic uses the format of `<subscriptionname>-DLQ`. If you upgrade from 2.6.x~2.7.x to 2.8.x or later, you need to delete historical dead letter topics and retry letter partitioned topics. Otherwise, Pulsar continues to use original topics, which are formatted with `<subscriptionname>-DLQ`.
+- It is not recommended to use `<subscriptionname>-DLQ` because if multiple topics under the same namespace have the same subscription, then dead message topic names for multiple topics might be the same, which will result in mutual consumptions.
+:::
 
 Use the Java client to specify the name of the dead letter topic.
 
@@ -568,9 +578,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
   
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. 
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer A. 
   
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer B.
 
   ![Failover subscriptions](/assets/pulsar-failover-subscriptions-3.svg)
 
@@ -1073,15 +1083,19 @@ Pulsar has two features, however, that enable you to override this default behav
 
 :::tip
 
-All message retention and expiry are managed at the [namespace](#namespaces) level. For a how-to, see the [Message retention and expiry](cookbooks-retention-expiry.md) cookbook.
+Since Pulsar 2.7.0, all message retention and expiry can be managed at the [namespace](#namespaces) level or at the topic level. For example, you can set `topicLevelPoliciesEnabled=true` at `broker.conf`. 
+
+Since Pulsaer 2.11.0, the default value of  `topicLevelPoliciesEnabled` is `true`. 
+
+For how to set policies for message retention and expiry, see [message retention and expiry](cookbooks-retention-expiry.md).
 
 :::
 
 ![Message retention and expiry](/assets/retention-expiry.svg)
 
-With message retention, shown at the top, a <span style={{color: " #89b557"}}>retention policy</span> applied to all topics in a namespace dictates that some messages are durably stored in Pulsar even though they've already been acknowledged. Acknowledged messages that are not covered by the retention policy are <span style={{color: " #bb3b3e"}}>deleted</span>. Without a retention policy, all of the <span style={{color: " #19967d"}}>acknowledged messages</span> would be deleted.
+With message retention, shown at the top, a retention policy applied to all topics in a namespace dictates that some messages are durably stored in Pulsar even though they've already been acknowledged. Acknowledged messages that are not covered by the retention policy are deleted. Without a retention policy, all of the acknowledged messages would be deleted.
 
-With message expiry, shown at the bottom, some messages are <span style={{color: " #bb3b3e"}}>deleted</span>, even though they <span style={{color: " #337db6"}}>haven't been acknowledged</span>, because they've expired according to the <span style={{color: " #e39441"}}>TTL applied to the namespace</span> (for example because a TTL of 5 minutes has been applied and the messages haven't been acknowledged but are 10 minutes old).
+With message expiry, shown at the bottom, some messages are deleted, even though they haven't been acknowledged, because they've expired according to the TTL applied to the namespace (for example because a TTL of 5 minutes has been applied and the messages haven't been acknowledged but are 10 minutes old).
 
 ## Message deduplication
 
@@ -1125,6 +1139,16 @@ The diagram below illustrates the concept of delayed message delivery:
 ![Delayed Message Delivery](/assets/message-delay.svg)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
+
+:::note
+
+Work with retention policy: In Pulsar, the ledger will be deleted automatically after the messages in this ledger have been consumed. Pulsar will delete the front ledgers of a topic but will not delete ledgers from the middle of a topic. It means that if you send a message that is delayed for a long time, the message will not be consumed until it reaches the delay time. This means all the ledgers on this topic could not be deleted until the delayed message is consumed, even if some subsequent ledgers are fully consumed.
+
+Work with backlog quota policy: After using delayed messages, it is advisable to exercise caution when using the Backlog Quota strategy. This is because delayed messages can result in not being consumed for an extended period, triggering the Backlog Quota strategy and causing subsequent message sends to be rejected.
+
+Work with backlog TTL policy: When the TTL expires, Pulsar automatically moves the message to the acknowledged state (and thus makes it ready for deletion) even if the messages are delayed messages and does not care about when the expected delayed time is.
+
+:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:

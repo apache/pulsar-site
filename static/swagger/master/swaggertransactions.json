@@ -142,6 +142,63 @@
         "version": "v3"
     },
     "paths": {
+        "/transactions/abortTransaction/{mostSigBits}/{leastSigBits}": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Transactions_abortTransaction",
+                "parameters": [
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "path",
+                        "name": "mostSigBits",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "leastSigBits",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "401": {
+                        "description": "This operation requires super-user access"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or coordinator or transaction doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Abort transaction",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
         "/transactions/coordinatorInternalStats/{coordinatorId}": {
             "get": {
                 "consumes": [
@@ -573,6 +630,79 @@
                 ]
             }
         },
+        "/transactions/transactionBufferInternalStats/{tenant}/{namespace}/{topic}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Transactions_getTransactionBufferInternalStats",
+                "parameters": [
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "metadata",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Transaction buffer don't use managedLedger!"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not enable transaction"
+                    }
+                },
+                "summary": "Get transaction buffer internal stats.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
         "/transactions/transactionBufferStats/{tenant}/{namespace}/{topic}": {
             "get": {
                 "consumes": [
@@ -610,6 +740,13 @@
                         "default": false,
                         "in": "query",
                         "name": "lowWaterMarks",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "segmentStats",
                         "required": false,
                         "type": "boolean"
                     }

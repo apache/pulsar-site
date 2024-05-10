@@ -1,9 +1,10 @@
 import React from "react";
 import "react-base-table/styles.css";
 import { Column } from "react-base-table";
-import { languages } from "../../../data/matrix.js";
+import { languages } from "@site/data/matrix";
+
 const _key = (language) => language.replace(".", "").replace(" ", "");
-export const genColomns = () => {
+export const genColumns = () => {
   return ["Feature", "Sub"].concat(languages).map((language, index) => {
     return {
       key: _key(language),
@@ -14,11 +15,13 @@ export const genColomns = () => {
           ? 180
           : index === 1
           ? 150
-          : index === 7
+          : index === 7 // DotPulsar
           ? 120
-          : index === 8
+          : index === 8 // .NET
+          ? 100
+          : index === 9 // WS
           ? 90
-          : index === 10
+          : index === 11 // REST
           ? 126
           : 74,
       dataGetter: ({ column, rowData }) => {
@@ -88,14 +91,13 @@ export const genCount = (values) => {
 export const getStyle = (name) => {
   if (name === "client") return { height: '45rem' };
   if (name === "producer") return { height: '62rem' };
-  // if (name === 'consumer') return "h-[1450px]";
   if (name === "consumer") return { height: '60rem' };
   if (name === "reader") return { height: '25rem' };
   if (name === "tableview") return { height: '14rem' };
   return { height: '45rem' };
 };
 
-const columns = genColomns();
+const columns = genColumns();
 
 export const fixedColumns = columns.map((column, columnIndex) => {
   let frozen;
