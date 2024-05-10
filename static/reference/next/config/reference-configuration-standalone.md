@@ -1447,6 +1447,17 @@ How long to delay rewinding cursor and dispatching messages when active consumer
 
 **Category**: Policies
 
+### additionalSystemCursorNames
+Additional system subscriptions that will be ignored by ttl check. The cursor names are comma separated. Default is empty.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### backlogQuotaCheckEnabled
 Enable backlog quota check. Enforces actions on topic when the quota is reached
 
