@@ -1734,7 +1734,7 @@ pulsar-admin topics delete-partitioned-topic \
 <TabItem value="Java">
 
 ```java
-admin.topics().delete(topic);
+admin.topics().deletePartitionedTopic(topic);
 ```
 
 </TabItem>
