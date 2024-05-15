@@ -135,8 +135,8 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer()
 
 :::note
 
-Send messages by synchronous API `send` will disable batching, and the message will be sent individually.
-It is for the purpose of reducing the latency of sending messages and preventing blocking of the producer thread.
+Send messages by synchronous API `send` will trigger the batch to be sent immediately, even the batch is not full.
+It is for the purpose of reducing the latency of sending messages and preventing block the caller's thread.
 
 :::
 
