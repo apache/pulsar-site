@@ -46,7 +46,6 @@ persistent://tenant/app1/topic-3
 Pulsar is a multi-tenant event streaming system. Administrators can manage the tenants and namespaces by setting policies at different levels. However, the policies, such as retention policy and storage quota policy, are only available at a namespace level. In many use cases, users need to set a policy at the topic level. The namespace change events approach is proposed for supporting topic-level policies in an efficient way. In this approach, Pulsar is used as an event log to store namespace change events (such as topic policy changes). The namespace change events approach has a few benefits:
 - Avoid using ZooKeeper and introduce more loads to ZooKeeper.
 - Use Pulsar as an event log for propagating the policy cache. It can scale efficiently.
-- Use Pulsar SQL to query the namespace changes and audit the system.
 
 Each namespace has a [system topic](concepts-messaging.md#system-topic) named `__change_events`. This system topic stores change events for a given namespace. The following figure illustrates how to leverage the system topic to update topic-level policies.
 
