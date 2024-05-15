@@ -84,7 +84,7 @@ consumer.acknowledgeCumulative(msg);
 
 :::note
 
-Cumulative acknowledgment cannot be used in [Shared subscription type](#subscription-types), because Shared subscription type involves multiple consumers which have access to the same subscription. In Shared subscription type, messages are acknowledged individually.
+Cumulative acknowledgment cannot be used in [Shared or Key_shared subscription type](#subscription-types), because Shared or Key_Shared subscription type involves multiple consumers which have access to the same subscription. In Shared subscription type, messages are acknowledged individually.
 
 :::
 
@@ -617,9 +617,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers. 
   
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. Consumer A is their stand-by consumer.
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer A. Consumer B is their stand-by consumer.
   
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A. Consumer B is their stand-by consumer.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer B. Consumer A is their stand-by consumer.
 
   ![Workflow of failover subscription type in Pulsar](/assets/pulsar-failover-subscriptions-3.svg)
 

@@ -8,6 +8,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Baodi Shi",
+      "apacheId": "baodi",
+      "githubUsername": [
+        "shibd"
+      ]
+    },
+    {
       "name": "Daniel Blankensteiner",
       "apacheId": "blankensteiner",
       "githubUsername": [
@@ -282,6 +289,13 @@ module.exports = {
         "jiazhai",
         "zhaijack"
       ]
+    },
+    {
+      "name": "Zike Yang",
+      "apacheId": "zike",
+      "githubUsername": [
+        "RobertIndie"
+      ]
     }
   ],
   "committers": [
@@ -321,13 +335,6 @@ module.exports = {
       ]
     },
     {
-      "name": "Baodi Shi",
-      "apacheId": "baodi",
-      "githubUsername": [
-        "shibd"
-      ]
-    },
-    {
       "name": "Christophe Bornet",
       "apacheId": "cbornet",
       "githubUsername": [
@@ -363,7 +370,9 @@ module.exports = {
     {
       "name": "Yuri Mizushima",
       "apacheId": "equanz",
-      "githubUsername": []
+      "githubUsername": [
+        "equanz"
+      ]
     },
     {
       "name": "Guangning E",
@@ -548,13 +557,6 @@ module.exports = {
       "apacheId": "zhaocong",
       "githubUsername": [
         "coderzc"
-      ]
-    },
-    {
-      "name": "Zike Yang",
-      "apacheId": "zike",
-      "githubUsername": [
-        "RobertIndie"
       ]
     },
     {

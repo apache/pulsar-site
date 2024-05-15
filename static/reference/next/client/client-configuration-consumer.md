@@ -154,7 +154,7 @@ When an application uses {@link Consumer#negativeAcknowledge(Message)}, failed m
 ### patternAutoDiscoveryPeriod
 Topic auto discovery period when using a pattern for topic's consumer.
 
-The default and minimum value is 1 minute.
+The default value is 1 minute, with a minimum of 1 second.
 
 **Type**: `int`
 

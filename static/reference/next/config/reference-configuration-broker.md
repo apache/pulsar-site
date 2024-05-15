@@ -1330,7 +1330,7 @@ Classname of Pluggable JVM GC metrics logger that can log GC specific metrics
 **Category**: Metrics
 
 ### metricsBufferResponse
-If true, export buffered metrics
+Set to true to enable the broker to cache the metrics response; the default is false. The caching period is defined by `managedLedgerStatsPeriodSeconds`. The broker returns the same response for subsequent requests within the same period. Ensure that the scrape interval of your monitoring system matches the caching period.
 
 **Type**: `boolean`
 
@@ -1442,6 +1442,17 @@ How long to delay rewinding cursor and dispatching messages when active consumer
 **Type**: `int`
 
 **Default**: `1000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### additionalSystemCursorNames
+Additional system subscriptions that will be ignored by ttl check. The cursor names are comma separated. Default is empty.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
 
 **Dynamic**: `false`
 
@@ -2946,7 +2957,7 @@ Option to enable busy-wait settings. Default is false. WARNING: This option will
 **Category**: Server
 
 ### enableNamespaceIsolationUpdateOnTime
-Enable namespaceIsolation policy update take effect ontime or not, if set to ture, then the related namespaces will be unloaded after reset policy to make it take effect.
+This config never takes effect and will be removed in the next release
 
 **Type**: `boolean`
 
@@ -3083,6 +3094,23 @@ Capacity for accept queue in the HTTP server Default is set to 8192.
 **Type**: `int`
 
 **Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### httpServerGzipCompressionExcludedPaths
+Gzip compression is enabled by default. Specific paths can be excluded from compression.
+There are 2 syntaxes supported, Servlet url-pattern based, and Regex based.
+If the spec starts with '^' the spec is assumed to be a regex based path spec and will match with normal Java regex rules.
+If the spec starts with '/' then spec is assumed to be a Servlet url-pattern rules path spec for either an exact match or prefix based match.
+If the spec starts with '*.' then spec is assumed to be a Servlet url-pattern rules path spec for a suffix based match.
+All other syntaxes are unsupported.
+Disable all compression with ^.* or ^.*$
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
 
 **Dynamic**: `false`
 
@@ -3258,6 +3286,7 @@ Max size of messages.
 ### maxNumPartitionsPerPartitionedTopic
 The number of partitions per partitioned topic.
 If try to create or update partitioned topics by exceeded number of partitions, then fail.
+Use 0 or negative number to disable the check.
 
 **Type**: `int`
 
@@ -3850,6 +3879,29 @@ If enabled the feature that transaction pending ack log batch, this attribute me
 
 **Category**: Server
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### webServicePort
 The port for serving http requests
 
@@ -3878,6 +3930,18 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 **Type**: `java.lang.String`
 
 **Default**: `Conscrypt`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -5387,6 +5451,17 @@ Interval of time to sending the ping to keep alive in WebSocket proxy. This valu
 **Type**: `int`
 
 **Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
+### webSocketPulsarClientMemoryLimitInMB
+Memory limit in MBs for direct memory in Pulsar Client used in WebSocket proxy
+
+**Type**: `int`
+
+**Default**: `0`
 
 **Dynamic**: `false`
 

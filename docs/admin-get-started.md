@@ -427,7 +427,7 @@ To manage topics using Java admin API, complete following steps.
   <dependency>
         <groupId>org.apache.pulsar</groupId>
         <artifactId>pulsar-client-admin</artifactId>
-        <version>2.11.0</version>
+        <version>@pulsar:version@</version>
     </dependency>
   ```
 

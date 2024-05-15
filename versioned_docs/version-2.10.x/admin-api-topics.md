@@ -2114,7 +2114,7 @@ $ bin/pulsar-admin topics delete-partitioned-topic \
 
 ```java
 
-admin.topics().delete(topic);
+admin.topics().deletePartitionedTopic(topic);
 
 ```
 

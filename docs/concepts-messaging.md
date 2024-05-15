@@ -84,7 +84,7 @@ consumer.acknowledgeCumulative(msg);
 
 :::note
 
-Cumulative acknowledgment cannot be used in [Shared subscription type](#subscription-types), because Shared subscription type involves multiple consumers which have access to the same subscription. In Shared subscription type, messages are acknowledged individually.
+Cumulative acknowledgment cannot be used in [Shared or Key_shared subscription type](#subscription-types), because Shared or Key_Shared subscription type involves multiple consumers which have access to the same subscription. In Shared and Key_Shared subscription types, messages should be acknowledged individually.
 
 :::
 

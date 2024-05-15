@@ -426,7 +426,7 @@ This tutorial guides you through every step of using Java admin API to manage to
   <dependency>
         <groupId>org.apache.pulsar</groupId>
         <artifactId>pulsar-client-admin</artifactId>
-        <version>2.11.0</version>
+        <version>@pulsar:version@</version>
     </dependency>
   ```
 

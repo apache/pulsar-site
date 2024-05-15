@@ -79,5 +79,14 @@ docker run -d -e clusterName=cluster-a \
 Create a broker container and start the broker service.
 
 ```bash
-docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar  -e metadataStoreUrl=zk:zookeeper:2181  -e zookeeperServers=zookeeper:2181 -e clusterName=cluster-a  -e managedLedgerDefaultEnsembleSize=1 -e managedLedgerDefaultWriteQuorum=1   -e managedLedgerDefaultAckQuorum=1 --name broker --hostname broker apachepulsar/pulsar-all:latest bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
+docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar \
+    -e metadataStoreUrl=zk:zookeeper:2181 \
+    -e zookeeperServers=zookeeper:2181 \
+    -e clusterName=cluster-a \
+    -e managedLedgerDefaultEnsembleSize=1 \
+    -e managedLedgerDefaultWriteQuorum=1 \
+    -e managedLedgerDefaultAckQuorum=1 \
+    --name broker --hostname broker \
+    apachepulsar/pulsar-all:latest \
+    bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
