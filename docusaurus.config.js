@@ -155,7 +155,6 @@ module.exports = {
         "https://pulsar.apache.org/community/#section-discussions"
       ),
       backgroundColor: "#282826",
-      // backgroundColor: "#FFCD4B",
       textColor: "#fff",
       isCloseable: false,
     },
