@@ -152,7 +152,7 @@ module.exports = {
       id: "summit",
       content: renderAnnouncementBar(
         "👋 Start your Pulsar journey by becoming a member of our community",
-        "https://pulsar.apache.org/community/#section-discussions"
+        "/community/#section-discussions"
       ),
       backgroundColor: "#282826",
       textColor: "#fff",
