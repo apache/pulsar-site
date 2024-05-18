@@ -4510,6 +4510,17 @@ The directory to locate offloaders
 
 **Category**: Storage (Ledger Offloading)
 
+### triggerOffloadOnTopicLoad
+Trigger offload on topic load or not. Default is false
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
 ### allowAutoSubscriptionCreation
 Allow automated creation of subscriptions if set to true (default value).
 
