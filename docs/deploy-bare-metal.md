@@ -300,14 +300,6 @@ You can obtain the metadata service URI of the existing BookKeeper cluster by us
 You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important step in configuring bookies for our purposes here is ensuring that `metadataServiceUri` is set to the URI for the ZooKeeper cluster. The following is an example:
 
 ```properties
-metadataServiceUri=zk://zk1.us-west.example.com:2181/ledgers
-```
-
-:::note
-
-If you want to use multiple ZooKeeper servers, you can use as follow format:
-
-```properties
 metadataServiceUri=zk://zk1.us-west.example.com:2181;zk2.us-west.example.com:2181;zk3.us-west.example.com:2181/ledgers
 ```
 
