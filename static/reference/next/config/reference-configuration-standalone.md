@@ -566,7 +566,7 @@ In FlowOrQpsEquallyDivideBundleSplitAlgorithm, if msgRate \>= loadBalancerNamesp
 **Category**: Load Balancer
 
 ### loadBalanceSheddingDelayInSeconds
-Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferSheddeer)
+Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferShedder)
 
 **Type**: `long`
 
@@ -632,7 +632,7 @@ BandwithOut Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBrokerLoadDataTTLInSeconds
-Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default value is loadBalancerReportUpdateMaxIntervalMinutes * 120, reflecting twice the duration in seconds. (only used in load balancer extension TransferSheddeer)
+Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default value is loadBalancerReportUpdateMaxIntervalMinutes * 120, reflecting twice the duration in seconds. (only used in load balancer extension TransferShedder)
 
 **Type**: `long`
 
@@ -643,7 +643,7 @@ Broker load data time to live (TTL in seconds). The logic tries to avoid (possib
 **Category**: Load Balancer
 
 ### loadBalancerBrokerLoadTargetStd
-The target standard deviation of the resource usage across brokers (100% resource usage is 1.0 load). The shedder logic tries to distribute bundle load across brokers to meet this target std. The smaller value will incur load balancing more frequently. (only used in load balancer extension TransferSheddeer)
+The target standard deviation of the resource usage across brokers (100% resource usage is 1.0 load). The shedder logic tries to distribute bundle load across brokers to meet this target std. The smaller value will incur load balancing more frequently. (only used in load balancer extension TransferShedder)
 
 **Type**: `double`
 
@@ -808,7 +808,7 @@ load balance load shedding strategy (It requires broker restart if value is chan
 **Category**: Load Balancer
 
 ### loadBalancerMaxNumberOfBrokerSheddingPerCycle
-Maximum number of brokers to unload bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferSheddeer)
+Maximum number of brokers to unload bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferShedder)
 
 **Type**: `int`
 
@@ -1028,7 +1028,7 @@ Option to automatically unload namespace bundles with affinity(isolation) or ant
 **Category**: Load Balancer
 
 ### loadBalancerSheddingConditionHitCountThreshold
-Threshold to the consecutive count of fulfilled shedding(unload) conditions. If the unload scheduler consecutively finds bundles that meet unload conditions many times bigger than this threshold, the scheduler will shed the bundles. The bigger value will incur less bundle unloading/transfers. (only used in load balancer extension TransferSheddeer)
+Threshold to the consecutive count of fulfilled shedding(unload) conditions. If the unload scheduler consecutively finds bundles that meet unload conditions many times bigger than this threshold, the scheduler will shed the bundles. The bigger value will incur less bundle unloading/transfers. (only used in load balancer extension TransferShedder)
 
 **Type**: `int`
 
@@ -1085,7 +1085,7 @@ Service units'(bundles) split interval. Broker periodically checks whether some 
 **Category**: Load Balancer
 
 ### loadBalancerTransferEnabled
-Option to enable the bundle transfer mode when distributing bundle loads. On: transfer bundles from overloaded brokers to underloaded -- pre-assigns the destination broker upon unloading). Off: unload bundles from overloaded brokers -- post-assigns the destination broker upon lookups). (only used in load balancer extension TransferSheddeer)
+Option to enable the bundle transfer mode when distributing bundle loads. On: transfer bundles from overloaded brokers to underloaded -- pre-assigns the destination broker upon unloading). Off: unload bundles from overloaded brokers -- post-assigns the destination broker upon lookups). (only used in load balancer extension TransferShedder)
 
 **Type**: `boolean`
 
