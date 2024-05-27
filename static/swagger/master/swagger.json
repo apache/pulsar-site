@@ -4788,6 +4788,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -4832,22 +4835,36 @@
                 "operationId": "Bookies_updateBookieRackInfo",
                 "parameters": [
                     {
+                        "description": "The bookie address",
                         "in": "path",
                         "name": "bookie",
                         "required": true,
                         "type": "string"
                     },
                     {
+                        "description": "The group",
                         "in": "query",
                         "name": "group",
-                        "required": false,
+                        "required": true,
                         "type": "string"
+                    },
+                    {
+                        "description": "The bookie info",
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BookieInfo"
+                        }
                     }
                 ],
                 "produces": [
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -4892,7 +4909,7 @@
         },
         "/broker-stats/bookieops": {
             "get": {
-                "description": "",
+                "description": "Returns a nested map structure which Swagger does not fully support for display. Structure: Map<String, Map<String, PendingBookieOpsStats>>. Please refer to this structure for details.",
                 "operationId": "BrokerStatsBase_getPendingBookieOpsStats",
                 "produces": [
                     "application/json"
@@ -4940,7 +4957,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Returns broker resource availability as Map<Long, List<ResourceUnit>>.Since `ResourceUnit` is an interface, its specific content is not determinable via class reflection. Refer to the source code or interface tests for detailed type definitions.",
                         "schema": {
                             "additionalProperties": {
                                 "$ref": "#/definitions/ResourceUnit"
@@ -5102,7 +5119,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Everything is OK"
                     },
                     "403": {
@@ -5126,6 +5143,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "You don't have admin permission to get configuration"
                     }
@@ -5144,6 +5170,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -5162,6 +5197,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "You don't have admin permission to view configuration"
                     },
@@ -5195,7 +5239,7 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Service configuration updated successfully"
+                        "description": "Service configuration delete successfully"
                     },
                     "403": {
                         "description": "You don't have admin permission to update service-configuration"
@@ -5263,6 +5307,7 @@
                 "operationId": "BrokersBase_healthCheck",
                 "parameters": [
                     {
+                        "description": "Topic Version",
                         "enum": [
                             "V1",
                             "V2"
@@ -5421,7 +5466,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Everything is OK",
+                        "description": "The Pulsar version",
                         "schema": {
                             "type": "string"
                         }
@@ -5659,7 +5704,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Cluster has been updated."
                     },
                     "400": {
@@ -5708,7 +5753,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Cluster has been created."
                     },
                     "400": {
@@ -5796,6 +5841,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Delete the failure domain of the cluster successfully"
+                    },
                     "403": {
                         "description": "Don't have admin permission or policy is read only"
                     },
@@ -5893,6 +5941,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Set the failure domain of the cluster successfully."
+                    },
                     "403": {
                         "description": "Don't have admin permission."
                     },
@@ -5988,7 +6039,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Cluster has been updated."
                     },
                     "400": {
@@ -6172,6 +6223,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Delete namespace isolation policy successfully."
+                    },
                     "403": {
                         "description": "Don't have admin permission or policies are read only."
                     },
@@ -6269,6 +6323,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Set namespace isolation policy successfully."
+                    },
                     "400": {
                         "description": "Namespace isolation policy data is invalid."
                     },
