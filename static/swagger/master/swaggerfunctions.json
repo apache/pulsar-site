@@ -110,6 +110,29 @@
             },
             "type": "object"
         },
+        "ConnectorDefinition": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sinkClass": {
+                    "type": "string"
+                },
+                "sinkConfigClass": {
+                    "type": "string"
+                },
+                "sourceClass": {
+                    "type": "string"
+                },
+                "sourceConfigClass": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "ConsumerConfig": {
             "properties": {
                 "consumerProperties": {
@@ -177,63 +200,6 @@
                         "SEND"
                     ],
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "EncryptionContext": {
-            "properties": {
-                "algorithm": {
-                    "type": "string"
-                },
-                "batchSize": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "compressionType": {
-                    "enum": [
-                        "NONE",
-                        "LZ4",
-                        "ZLIB",
-                        "ZSTD",
-                        "SNAPPY"
-                    ],
-                    "type": "string"
-                },
-                "keys": {
-                    "additionalProperties": {
-                        "$ref": "#/definitions/EncryptionKey"
-                    },
-                    "type": "object"
-                },
-                "param": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "uncompressedMessageSize": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "EncryptionKey": {
-            "properties": {
-                "keyValue": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "metadata": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "type": "object"
                 }
             },
             "type": "object"
@@ -736,99 +702,6 @@
         "InputStream": {
             "type": "object"
         },
-        "Message": {
-            "properties": {
-                "brokerPublishTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "data": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "encryptionCtx": {
-                    "$ref": "#/definitions/EncryptionContext"
-                },
-                "eventTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "index": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "key": {
-                    "type": "string"
-                },
-                "keyBytes": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "messageId": {
-                    "$ref": "#/definitions/MessageId"
-                },
-                "orderingKey": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "producerName": {
-                    "type": "string"
-                },
-                "properties": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "type": "object"
-                },
-                "publishTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "readerSchema": {
-                    "$ref": "#/definitions/SchemaObject"
-                },
-                "redeliveryCount": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "replicated": {
-                    "type": "boolean"
-                },
-                "replicatedFrom": {
-                    "type": "string"
-                },
-                "schemaVersion": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "sequenceId": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "topicName": {
-                    "type": "string"
-                },
-                "value": {
-                    "type": "object"
-                }
-            },
-            "type": "object"
-        },
-        "MessageId": {
-            "type": "object"
-        },
         "ProducerConfig": {
             "properties": {
                 "batchBuilder": {
@@ -892,86 +765,6 @@
                 "ram": {
                     "format": "int64",
                     "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "Schema": {
-            "properties": {
-                "nativeSchema": {
-                    "type": "object"
-                },
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
-                }
-            },
-            "type": "object"
-        },
-        "SchemaInfo": {
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "properties": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "type": "object"
-                },
-                "schema": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "schemaDefinition": {
-                    "type": "string"
-                },
-                "timestamp": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "type": {
-                    "enum": [
-                        "NONE",
-                        "STRING",
-                        "JSON",
-                        "PROTOBUF",
-                        "AVRO",
-                        "BOOLEAN",
-                        "INT8",
-                        "INT16",
-                        "INT32",
-                        "INT64",
-                        "FLOAT",
-                        "DOUBLE",
-                        "DATE",
-                        "TIME",
-                        "TIMESTAMP",
-                        "KEY_VALUE",
-                        "INSTANT",
-                        "LOCAL_DATE",
-                        "LOCAL_TIME",
-                        "LOCAL_DATE_TIME",
-                        "PROTOBUF_NATIVE",
-                        "BYTES",
-                        "AUTO",
-                        "AUTO_CONSUME",
-                        "AUTO_PUBLISH"
-                    ],
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "SchemaObject": {
-            "properties": {
-                "nativeSchema": {
-                    "type": "object"
-                },
-                "schemaInfo": {
-                    "$ref": "#/definitions/SchemaInfo"
                 }
             },
             "type": "object"
@@ -1092,6 +885,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "401": {
                         "description": "This operation requires super-user access"
                     },
@@ -1124,7 +920,7 @@
                         "description": "successful operation",
                         "schema": {
                             "items": {
-                                "type": "object"
+                                "$ref": "#/definitions/ConnectorDefinition"
                             },
                             "type": "array"
                         }
@@ -1470,6 +1266,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -1520,6 +1319,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -1637,6 +1439,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -1808,6 +1613,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -1888,7 +1696,7 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "$ref": "#/definitions/Message"
+                            "type": "string"
                         }
                     },
                     "400": {
@@ -1951,6 +1759,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this function"
                     },
@@ -2011,6 +1822,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -2200,6 +2014,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
