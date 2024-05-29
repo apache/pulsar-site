@@ -819,7 +819,7 @@ Maximum number of brokers to unload bundle load for each unloading cycle. The bi
 **Category**: Load Balancer
 
 ### loadBalancerMaxNumberOfBundlesInBundleLoadReport
-Max number of bundles in bundle load report from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. (only used in load balancer extension logics)
+Max number of bundles in bundle load report from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. Used for ExtensibleLoadManagerImpl and ModularLoadManagerImpl, default value is 10. User can disable the bundle filtering feature of ModularLoadManagerImpl by setting to -1.Enabling this feature can reduce the pressure on the zookeeper when doing load report.WARNING: too small value could result in a long load balance time.
 
 **Type**: `int`
 
