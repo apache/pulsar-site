@@ -402,3 +402,26 @@ The number of pending topic load operations in the broker. When it reaches thres
 The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
+
+### Web Executor Service metrics
+
+#### pulsar.web.executor.thread.limit
+The number of threads available for the pulsar-web thread pool.
+* Type: UpDownCounter
+* Unit: `{thread}`
+* Attributes:
+  * `pulsar.web.executor.thread.limit.type` - The limit type for the thread pool.
+    * `max`
+    * `min`
+
+#### pulsar.web.executor.thread.usage
+The number of threads currently in use.
+* Type: UpDownCounter
+* Unit: `{thread}`
+* Attributes:
+  * `pulsar.web.executor.thread.usage.type` - The usage type for the thread pool.
+    * `active` - Indicates the number of threads actively serving requests.
+    * `current` - Indicates the total number of threads currently associated with the pool.
+    * `idle` - Indicates the number of threads available to serve requests.
+
+
