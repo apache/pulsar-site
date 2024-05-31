@@ -406,7 +406,7 @@ The maximum number of pending topic load operations in the broker. Equal to "max
 ### Web Executor Service metrics
 
 #### pulsar.web.executor.thread.limit
-The number of threads available for the pulsar-web thread pool.
+The thread limits for the pulsar-web executor pool.
 * Type: UpDownCounter
 * Unit: `{thread}`
 * Attributes:
@@ -415,7 +415,7 @@ The number of threads available for the pulsar-web thread pool.
     * `min`
 
 #### pulsar.web.executor.thread.usage
-The number of threads currently in use.
+The current usage of threads in the pulsar-web executor pool.
 * Type: UpDownCounter
 * Unit: `{thread}`
 * Attributes:
