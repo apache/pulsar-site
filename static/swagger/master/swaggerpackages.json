@@ -204,7 +204,10 @@
                     "200": {
                         "description": "Return all the specified type package names in the specified namespace.",
                         "schema": {
-                            "$ref": "#/definitions/PackageMetadata"
+                            "items": {
+                                "$ref": "#/definitions/PackageMetadata"
+                            },
+                            "type": "array"
                         }
                     },
                     "412": {
@@ -331,7 +334,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Delete the specified package successfully."
                     },
                     "404": {
@@ -460,7 +463,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Upload the specified package successfully."
                     },
                     "412": {
@@ -588,7 +591,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Update the metadata of the specified package successfully."
                     },
                     "404": {

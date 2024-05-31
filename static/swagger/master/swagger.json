@@ -177,6 +177,21 @@
             },
             "type": "object"
         },
+        "AutoTopicCreationOverrideImpl": {
+            "properties": {
+                "allowAutoTopicCreation": {
+                    "type": "boolean"
+                },
+                "defaultNumPartitions": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "topicType": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "BacklogQuota": {
             "properties": {
                 "limit": {
@@ -227,7 +242,26 @@
             },
             "type": "object"
         },
+        "BitSet": {
+            "properties": {
+                "empty": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "BookieAffinityGroupData": {
+            "properties": {
+                "bookkeeperAffinityGroupPrimary": {
+                    "type": "string"
+                },
+                "bookkeeperAffinityGroupSecondary": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "BookieAffinityGroupDataImpl": {
             "properties": {
                 "bookkeeperAffinityGroupPrimary": {
                     "type": "string"
@@ -298,6 +332,21 @@
             "type": "object"
         },
         "BundlesData": {
+            "properties": {
+                "boundaries": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "numBundles": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "BundlesDataImpl": {
             "properties": {
                 "boundaries": {
                     "items": {
@@ -707,6 +756,9 @@
         "ConsumerStats": {
             "properties": {
                 "address": {
+                    "type": "string"
+                },
+                "appId": {
                     "type": "string"
                 },
                 "availablePermits": {
@@ -1617,6 +1669,40 @@
                 "percentOfMaxDirectMemory": {
                     "format": "double",
                     "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "MessageId": {
+            "type": "object"
+        },
+        "MessageIdAdv": {
+            "properties": {
+                "ackSet": {
+                    "$ref": "#/definitions/BitSet"
+                },
+                "batchIndex": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "batchSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "entryId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "firstChunkMessageId": {
+                    "$ref": "#/definitions/MessageIdAdv"
+                },
+                "ledgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "partitionIndex": {
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -2551,6 +2637,26 @@
                     "type": "string"
                 },
                 "s3ManagedLedgerOffloadServiceEndpoint": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "OffloadProcessStatus": {
+            "properties": {
+                "firstUnoffloadedMessage": {
+                    "$ref": "#/definitions/MessageId"
+                },
+                "lastError": {
+                    "type": "string"
+                },
+                "status": {
+                    "enum": [
+                        "NOT_RUN",
+                        "RUNNING",
+                        "SUCCESS",
+                        "ERROR"
+                    ],
                     "type": "string"
                 }
             },
@@ -4062,6 +4168,24 @@
             },
             "type": "object"
         },
+        "TopicHashPositions": {
+            "properties": {
+                "bundle": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "topicHashPositions": {
+                    "additionalProperties": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
         "TopicStats": {
             "properties": {
                 "averageMsgSize": {
@@ -4785,6 +4909,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -4829,22 +4956,36 @@
                 "operationId": "Bookies_updateBookieRackInfo",
                 "parameters": [
                     {
+                        "description": "The bookie address",
                         "in": "path",
                         "name": "bookie",
                         "required": true,
                         "type": "string"
                     },
                     {
+                        "description": "The group",
                         "in": "query",
                         "name": "group",
-                        "required": false,
+                        "required": true,
                         "type": "string"
+                    },
+                    {
+                        "description": "The bookie info",
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BookieInfo"
+                        }
                     }
                 ],
                 "produces": [
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -4889,7 +5030,7 @@
         },
         "/broker-stats/bookieops": {
             "get": {
-                "description": "",
+                "description": "Returns a nested map structure which Swagger does not fully support for display. Structure: Map<String, Map<String, PendingBookieOpsStats>>. Please refer to this structure for details.",
                 "operationId": "BrokerStatsBase_getPendingBookieOpsStats",
                 "produces": [
                     "application/json"
@@ -4937,7 +5078,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Returns broker resource availability as Map<Long, List<ResourceUnit>>.Since `ResourceUnit` is an interface, its specific content is not determinable via class reflection. Refer to the source code or interface tests for detailed type definitions.",
                         "schema": {
                             "additionalProperties": {
                                 "$ref": "#/definitions/ResourceUnit"
@@ -5099,7 +5240,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Everything is OK"
                     },
                     "403": {
@@ -5123,6 +5264,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "You don't have admin permission to get configuration"
                     }
@@ -5141,6 +5291,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -5159,6 +5318,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "You don't have admin permission to view configuration"
                     },
@@ -5192,7 +5360,7 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Service configuration updated successfully"
+                        "description": "Service configuration delete successfully"
                     },
                     "403": {
                         "description": "You don't have admin permission to update service-configuration"
@@ -5260,6 +5428,7 @@
                 "operationId": "BrokersBase_healthCheck",
                 "parameters": [
                     {
+                        "description": "Topic Version",
                         "enum": [
                             "V1",
                             "V2"
@@ -5418,7 +5587,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Everything is OK",
+                        "description": "The Pulsar version",
                         "schema": {
                             "type": "string"
                         }
@@ -5656,7 +5825,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Cluster has been updated."
                     },
                     "400": {
@@ -5705,7 +5874,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Cluster has been created."
                     },
                     "400": {
@@ -5793,6 +5962,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Delete the failure domain of the cluster successfully"
+                    },
                     "403": {
                         "description": "Don't have admin permission or policy is read only"
                     },
@@ -5890,6 +6062,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Set the failure domain of the cluster successfully."
+                    },
                     "403": {
                         "description": "Don't have admin permission."
                     },
@@ -5985,7 +6160,7 @@
                     "application/json"
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Cluster has been updated."
                     },
                     "400": {
@@ -6169,6 +6344,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Delete namespace isolation policy successfully."
+                    },
                     "403": {
                         "description": "Don't have admin permission or policies are read only."
                     },
@@ -6266,6 +6444,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Set namespace isolation policy successfully."
+                    },
                     "400": {
                         "description": "Namespace isolation policy data is invalid."
                     },
@@ -6461,6 +6642,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -6503,7 +6687,7 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "$ref": "#/definitions/BookieAffinityGroupData"
+                            "$ref": "#/definitions/BookieAffinityGroupDataImpl"
                         }
                     },
                     "307": {
@@ -6606,6 +6790,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -6702,6 +6889,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -6746,6 +6936,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -6836,6 +7029,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -6877,6 +7073,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -6913,6 +7112,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/AutoSubscriptionCreationOverrideImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -6958,6 +7163,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid autoSubscriptionCreation override"
                     },
@@ -6999,6 +7207,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7035,6 +7246,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/AutoTopicCreationOverrideImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7080,6 +7297,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid autoTopicCreation override"
                     },
@@ -7134,6 +7354,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7192,6 +7415,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7236,6 +7462,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "$ref": "#/definitions/BacklogQuotaImpl"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7274,6 +7509,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/BundlesDataImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7322,6 +7563,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin or operate permission on the namespace"
                     },
@@ -7373,6 +7617,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin or operate permission on the namespace"
                     },
@@ -7411,6 +7658,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7450,6 +7700,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7496,6 +7753,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7540,6 +7800,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7576,6 +7839,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7621,6 +7890,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7659,6 +7931,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7705,6 +7984,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7743,6 +8025,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7779,6 +8064,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DelayedDeliveryPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7827,6 +8118,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7865,6 +8159,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -7898,6 +8195,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -7943,6 +8246,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -7978,6 +8284,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8017,6 +8326,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8053,6 +8368,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8094,6 +8412,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8139,6 +8463,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8180,6 +8507,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8219,6 +8549,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/EntryFilters"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8264,6 +8600,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Specified entry filters are not valid"
                     },
@@ -8305,6 +8644,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8344,6 +8686,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/InactiveTopicPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8392,6 +8740,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8430,6 +8781,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8478,6 +8835,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8519,6 +8879,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8561,6 +8924,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8607,6 +8977,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8651,6 +9024,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8690,6 +9066,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8736,6 +9119,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8780,6 +9166,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8819,6 +9208,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8865,6 +9261,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8909,6 +9308,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8948,6 +9350,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -8994,6 +9403,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9038,6 +9450,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9074,6 +9489,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9120,6 +9542,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9158,6 +9583,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9194,6 +9622,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9240,6 +9675,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9284,6 +9722,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9320,6 +9761,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9366,6 +9814,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9410,6 +9861,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9502,6 +9956,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9543,6 +10000,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9582,6 +10042,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9628,6 +10095,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9672,6 +10142,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/OffloadPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9717,6 +10193,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9730,7 +10209,7 @@
                         "description": "OffloadPolicies is empty or driver is not supported or bucket is not valid"
                     }
                 },
-                "summary": " Set offload configuration on a namespace.",
+                "summary": "Set offload configuration on a namespace.",
                 "tags": [
                     "namespaces"
                 ]
@@ -9761,6 +10240,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9807,6 +10293,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9851,6 +10340,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9887,6 +10383,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9911,7 +10410,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "Returns a nested map structure which Swagger does not fully support for display. Structure: Map<String, Set<AuthAction>>. Please refer to this structure for details.",
                 "operationId": "Namespaces_getPermissions",
                 "parameters": [
                     {
@@ -9931,6 +10430,23 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "enum": [
+                                    "produce",
+                                    "consume",
+                                    "functions",
+                                    "sources",
+                                    "sinks",
+                                    "packages"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -9952,7 +10468,7 @@
                 "consumes": [
                     "application/json"
                 ],
-                "description": "",
+                "description": "Returns a nested map structure which Swagger does not fully support for display. Structure: Map<String, Set<String>>. Please refer to this structure for details.",
                 "operationId": "Namespaces_getPermissionOnSubscription",
                 "parameters": [
                     {
@@ -9972,6 +10488,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10019,6 +10544,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10081,6 +10609,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10125,6 +10656,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -10158,6 +10692,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistencePolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10206,6 +10746,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid persistence policies"
                     },
@@ -10259,6 +10802,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -10303,6 +10849,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10339,6 +10888,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10387,6 +10945,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10431,6 +10992,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10473,6 +11037,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10523,6 +11093,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10561,6 +11134,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10611,7 +11187,8 @@
                             "items": {
                                 "type": "string"
                             },
-                            "type": "array"
+                            "type": "array",
+                            "uniqueItems": true
                         }
                     },
                     "403": {
@@ -10665,6 +11242,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10709,6 +11289,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -10742,6 +11325,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRateImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10787,6 +11376,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -10822,6 +11414,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10861,6 +11456,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10905,6 +11506,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10955,6 +11559,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -10997,6 +11604,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/RetentionPolicies"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11042,6 +11655,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11086,6 +11702,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successful get of offloaded ledger data"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11188,6 +11807,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11229,6 +11851,23 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "enum": [
+                                "UNDEFINED",
+                                "ALWAYS_INCOMPATIBLE",
+                                "ALWAYS_COMPATIBLE",
+                                "BACKWARD",
+                                "FORWARD",
+                                "FULL",
+                                "BACKWARD_TRANSITIVE",
+                                "FORWARD_TRANSITIVE",
+                                "FULL_TRANSITIVE"
+                            ],
+                            "type": "string"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11277,6 +11916,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11325,6 +11967,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11370,6 +12018,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11411,6 +12062,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -11444,6 +12098,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SubscribeRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11489,6 +12149,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -11524,6 +12187,16 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "enum": [
+                                "None",
+                                "Prefix"
+                            ],
+                            "type": "string"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11569,6 +12242,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11610,6 +12286,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -11643,6 +12322,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11688,6 +12373,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     }
@@ -11723,6 +12411,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11759,6 +12450,13 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11805,6 +12503,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11885,6 +12586,22 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "enum": [
+                                    "Exclusive",
+                                    "Shared",
+                                    "Failover",
+                                    "Key_Shared"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -11942,6 +12659,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -12050,6 +12770,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -12107,6 +12830,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin or operate permission on the namespacen"
                     },
@@ -12165,6 +12891,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -12222,6 +12951,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -12282,6 +13014,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -12362,6 +13097,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -12419,6 +13157,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TopicHashPositions"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -12476,6 +13220,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -12536,6 +13283,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin or operate permission on the namespace"
                     },
@@ -12795,6 +13545,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -12869,6 +13622,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -12948,6 +13704,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -13022,6 +13781,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13088,6 +13850,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/AutoSubscriptionCreationOverrideImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13156,6 +13924,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13289,6 +14060,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13368,6 +14142,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13572,6 +14349,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/LongRunningProcessStatus"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -13640,6 +14423,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -13717,6 +14503,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13861,6 +14650,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -13911,6 +14703,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -13982,6 +14777,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14121,6 +14919,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14180,6 +14981,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14308,6 +15112,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14364,6 +15171,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14497,6 +15307,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14553,6 +15366,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14620,6 +15436,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRateImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14689,6 +15511,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14751,6 +15576,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14882,6 +15710,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -14944,6 +15775,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15014,6 +15848,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/EntryFilters"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15077,6 +15917,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15156,6 +15999,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the message. The response is a binary byte stream containing the message data. Clients need to parse this binary stream based on the message metadata provided in the response headers."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -15224,6 +16070,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15357,6 +16206,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15486,6 +16338,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PersistentTopicInternalStats"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -15550,6 +16408,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/MessageIdAdv"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -15636,6 +16500,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the message. The response is a binary byte stream containing the message data. Clients need to parse this binary stream based on the message metadata provided in the response headers."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -15710,6 +16577,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15854,6 +16724,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -15919,6 +16792,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16056,6 +16932,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16118,6 +16997,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16255,6 +17137,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16320,6 +17205,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16464,6 +17352,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16529,6 +17420,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16666,6 +17560,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16731,6 +17628,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16866,6 +17766,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -16922,6 +17825,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17057,6 +17963,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17113,6 +18022,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Not authenticate to perform the request or policy is read only"
                     },
@@ -17252,6 +18164,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Not authenticate to perform the request or policy is read only"
                     },
@@ -17318,6 +18233,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/MessageIdAdv"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -17388,6 +18309,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/OffloadProcessStatus"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -17456,6 +18383,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -17536,6 +18466,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17597,6 +18530,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/OffloadPoliciesImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17663,6 +18602,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -17917,6 +18859,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -17990,6 +18935,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PartitionedTopicMetadata"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18158,6 +19109,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18194,7 +19148,7 @@
         },
         "/non-persistent/{tenant}/{namespace}/{topic}/permissions": {
             "get": {
-                "description": "Retrieve the effective permissions for a topic. These permissions are defined by the permissions set at thenamespace level combined (union) with any eventual specific permission set on the topic.",
+                "description": "Retrieve the effective permissions for a topic. These permissions are defined by the permissions set at thenamespace level combined (union) with any eventual specific permission set on the topic.Returns a nested map structure which Swagger does not fully support for display. Structure: Map<String, Set<AuthAction>>. Please refer to this structure for details.",
                 "operationId": "PersistentTopics_getPermissionsOnTopic",
                 "parameters": [
                     {
@@ -18223,6 +19177,23 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "enum": [
+                                    "produce",
+                                    "consume",
+                                    "functions",
+                                    "sources",
+                                    "sinks",
+                                    "packages"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"
                     },
@@ -18283,6 +19254,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18364,6 +19338,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18435,6 +19412,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -18577,6 +19557,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid persistence policies"
                     },
@@ -18643,6 +19626,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18794,6 +19780,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -18865,6 +19854,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19000,6 +19992,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19055,6 +20050,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19186,6 +20184,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19251,6 +20252,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19393,6 +20397,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19458,6 +20465,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19603,6 +20613,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19673,6 +20686,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -19818,6 +20834,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -19883,6 +20902,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19941,6 +20966,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -19993,6 +21021,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20046,6 +21077,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20108,6 +21148,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20292,6 +21335,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20434,6 +21480,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -20507,6 +21556,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -20590,6 +21642,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -20673,6 +21728,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -20756,6 +21814,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -20839,6 +21900,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the message. The response is a binary byte stream containing the message data. Clients need to parse this binary stream based on the message metadata provided in the response headers."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -20916,6 +21980,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21000,6 +22073,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21158,6 +22234,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21244,6 +22323,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21329,6 +22411,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21415,6 +22500,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21489,6 +22577,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21582,6 +22673,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -21656,6 +22750,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -21798,6 +22895,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -21860,6 +22960,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22013,6 +23116,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22147,6 +23253,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation terminated successfully. The response includes the 'lastMessageId', which is the identifier of the last message processed.",
+                        "schema": {
+                            "$ref": "#/definitions/MessageIdAdv"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -22220,6 +23332,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant orsubscriber is not authorized to access this operation"
                     },
@@ -22287,6 +23402,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -22357,6 +23475,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "412": {
                         "description": "NonPersistentTopic does not support truncate."
                     }
@@ -22406,6 +23527,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -22483,6 +23607,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22556,6 +23683,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22631,6 +23764,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -22828,6 +23964,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -22902,6 +24041,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -22981,6 +24123,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -23055,6 +24200,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23121,6 +24269,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/AutoSubscriptionCreationOverrideImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23189,6 +24343,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23322,6 +24479,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23401,6 +24561,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23605,6 +24768,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/LongRunningProcessStatus"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -23673,6 +24842,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -23750,6 +24922,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23894,6 +25069,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -23944,6 +25122,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -24015,6 +25196,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24154,6 +25338,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24213,6 +25400,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24341,6 +25531,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24397,6 +25590,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24530,6 +25726,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24586,6 +25785,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24653,6 +25855,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRateImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24722,6 +25930,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24784,6 +25995,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24915,6 +26129,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -24977,6 +26194,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25047,6 +26267,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/EntryFilters"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25110,6 +26336,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25189,6 +26418,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the message. The response is a binary byte stream containing the message data. Clients need to parse this binary stream based on the message metadata provided in the response headers."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -25257,6 +26489,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25390,6 +26625,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25592,6 +26830,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/MessageIdAdv"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -25678,6 +26922,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the message. The response is a binary byte stream containing the message data. Clients need to parse this binary stream based on the message metadata provided in the response headers."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -25752,6 +26999,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25896,6 +27146,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -25961,6 +27214,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26098,6 +27354,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26160,6 +27419,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26297,6 +27559,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26362,6 +27627,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26506,6 +27774,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26571,6 +27842,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26708,6 +27982,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26773,6 +28050,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26908,6 +28188,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -26964,6 +28247,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27099,6 +28385,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27155,6 +28444,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Not authenticate to perform the request or policy is read only"
                     },
@@ -27294,6 +28586,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Not authenticate to perform the request or policy is read only"
                     },
@@ -27360,6 +28655,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/MessageIdAdv"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -27430,6 +28731,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/OffloadProcessStatus"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -27498,6 +28805,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -27578,6 +28888,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27639,6 +28952,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/OffloadPoliciesImpl"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27705,6 +29024,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -27959,6 +29281,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28206,6 +29531,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28242,7 +29570,7 @@
         },
         "/persistent/{tenant}/{namespace}/{topic}/permissions": {
             "get": {
-                "description": "Retrieve the effective permissions for a topic. These permissions are defined by the permissions set at thenamespace level combined (union) with any eventual specific permission set on the topic.",
+                "description": "Retrieve the effective permissions for a topic. These permissions are defined by the permissions set at thenamespace level combined (union) with any eventual specific permission set on the topic.Returns a nested map structure which Swagger does not fully support for display. Structure: Map<String, Set<AuthAction>>. Please refer to this structure for details.",
                 "operationId": "PersistentTopics_getPermissionsOnTopic",
                 "parameters": [
                     {
@@ -28271,6 +29599,23 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "enum": [
+                                    "produce",
+                                    "consume",
+                                    "functions",
+                                    "sources",
+                                    "sinks",
+                                    "packages"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"
                     },
@@ -28331,6 +29676,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28412,6 +29760,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28483,6 +29834,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -28625,6 +29979,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid persistence policies"
                     },
@@ -28691,6 +30048,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28842,6 +30202,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -28913,6 +30276,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29048,6 +30414,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29103,6 +30472,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29234,6 +30606,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29299,6 +30674,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29441,6 +30819,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29506,6 +30887,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29651,6 +31035,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29721,6 +31108,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -29866,6 +31256,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -29931,6 +31324,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -29989,6 +31388,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30041,6 +31443,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30094,6 +31499,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30156,6 +31570,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30340,6 +31757,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30482,6 +31902,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -30555,6 +31978,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -30638,6 +32064,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -30721,6 +32150,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -30804,6 +32236,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -30887,6 +32322,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the message. The response is a binary byte stream containing the message data. Clients need to parse this binary stream based on the message metadata provided in the response headers."
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -30964,6 +32402,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31048,6 +32495,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31206,6 +32656,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31292,6 +32745,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31377,6 +32833,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31463,6 +32922,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31537,6 +32999,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31630,6 +33095,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -31704,6 +33172,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -31846,6 +33317,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -31908,6 +33382,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -32061,6 +33538,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -32195,6 +33675,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Operation terminated successfully. The response includes the 'lastMessageId', which is the identifier of the last message processed.",
+                        "schema": {
+                            "$ref": "#/definitions/MessageIdAdv"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -32268,6 +33754,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant orsubscriber is not authorized to access this operation"
                     },
@@ -32335,6 +33824,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -32405,6 +33897,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
@@ -32466,6 +33961,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"
                     },
@@ -32543,6 +34041,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -32616,6 +34117,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/DispatchRate"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -32691,6 +34198,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -32815,6 +34325,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -32863,6 +34376,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceQuota"
+                        }
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -32920,6 +34439,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Current broker doesn't serve the namespace"
                     },
@@ -32986,6 +34508,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -33064,6 +34589,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -33662,6 +35190,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "The requester doesn't have admin permissions"
                     },
@@ -33745,6 +35276,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "The requester doesn't have admin permissions"
                     },
@@ -33791,6 +35325,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "403": {
                         "description": "The requester doesn't have admin permissions"
                     },
@@ -33863,7 +35400,7 @@
         },
         "/worker/assignments": {
             "get": {
-                "description": "",
+                "description": "Returns a nested map structure which Swagger does not fully support for display.Structure: Map<String, Set<String>>. Please refer to this structure for details.",
                 "operationId": "Worker_getAssignments",
                 "produces": [
                     "application/json"
@@ -33969,7 +35506,7 @@
                         "description": "successful operation",
                         "schema": {
                             "items": {
-                                "type": "object"
+                                "$ref": "#/definitions/ConnectorDefinition"
                             },
                             "type": "array"
                         }
@@ -34011,6 +35548,9 @@
                 "description": "",
                 "operationId": "Worker_drain",
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -34070,6 +35610,9 @@
                     }
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },
@@ -34094,6 +35637,9 @@
                 "description": "",
                 "operationId": "Worker_rebalance",
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "400": {
                         "description": "Invalid request"
                     },

@@ -23,9 +23,9 @@ function renderAnnouncementBar(html, href) {
   return `
     <a class="announcement-bar" href="${href}" target="_blank">
       <div class="announcement-bar__content">
-        <svg class="announcement-bar__icon">
+        <!-- <svg class="announcement-bar__icon">
           ${boltIcon}
-        </svg>
+        </svg> -->
 
         <span>
           ${html}
