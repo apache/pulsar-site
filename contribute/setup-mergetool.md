@@ -33,6 +33,9 @@ git config --global difftool.kdiff3.trustExitCode false
 git config --global diff.guitool kdiff3
 ```
 
+`kdiff3` version 1.11.1 contains [bug #487338](https://bugs.kde.org/show_bug.cgi?id=487338). You might want to install kdiff3 1.10.7 from https://download.kde.org/stable/kdiff3/ until the issue is resolved.
+
+
 ### kdiff3 configuration on Linux
 
 Install `kdiff3` from your package manager. For example, on Ubuntu:
