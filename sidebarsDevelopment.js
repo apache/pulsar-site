@@ -8,7 +8,7 @@ const sidebars = {
             items: [
                 'setup-building',
                 'setup-ide',
-                'setup-mergetool',
+                'setup-git',
                 'setup-debugging'
             ]
         },
