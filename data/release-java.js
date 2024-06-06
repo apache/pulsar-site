@@ -1,4 +1,5 @@
 module.exports = [
+{tagName: "v3.3.0",vtag:"3.3.x",releaseNotes:"/release-notes/versioned/client-java-3.3.0/",doc:"/docs/3.2.x/client-libraries-java",version:"v3.3.x"},
 {tagName: "v3.2.3",vtag:"3.2.x",releaseNotes:"/release-notes/versioned/client-java-3.2.3/",doc:"/docs/3.2.x/client-libraries-java",version:"v3.2.x"},
 {tagName: "v3.2.2",vtag:"3.2.x",releaseNotes:"/release-notes/versioned/client-java-3.2.2/",doc:"/docs/3.2.x/client-libraries-java",version:""},
 {tagName: "v3.2.1",vtag:"3.2.x",releaseNotes:"/release-notes/versioned/client-java-3.2.1/",doc:"/docs/3.2.x/client-libraries-java",version:""},
