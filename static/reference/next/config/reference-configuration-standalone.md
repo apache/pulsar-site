@@ -5528,7 +5528,7 @@ Memory Resource Usage Weight. Deprecated: Memory is no longer used as a load bal
 
 **Type**: `double`
 
-**Default**: `1.0`
+**Default**: `0.0`
 
 **Dynamic**: `true`
 
