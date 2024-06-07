@@ -454,6 +454,17 @@ module.exports = {
     ],
   ],
   plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/contribute/setup-mergetool',
+            to: '/contribute/setup-git',
+          },
+        ],
+      },
+    ],    
     'docusaurus-plugin-image-zoom',
     [
       "content-docs",
@@ -498,7 +509,7 @@ module.exports = {
         routeBasePath: "client-feature-matrix",
         sidebarPath: false,
       }),
-    ],
+    ]
   ],
   scripts: [
     { src: "/js/sine-waves.min.js", async: true },

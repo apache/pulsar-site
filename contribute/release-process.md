@@ -119,7 +119,7 @@ Note that you should also stop the workflow for previous Pulsar versions that ar
 
 ### Cherry-picking changes scheduled for the release
 
-Before proceeding, ensure that you have [set up a Git mergetool](setup-mergetool.md). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.
+Before proceeding, ensure that you have [set up a Git mergetool](setup-git.md#mergetool). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.
 
 Use a search such as `is:merged is:pr label:release/3.0.3 -label:cherry-picked/branch-3.0` to search for merged PRs that are scheduled for the release, but haven't yet been cherry-picked.
 It is necessary to handle cherry-picks in the same order as they have been merged in the master branch. Otherwise there will be unnecessary merge conflicts to resolve.
