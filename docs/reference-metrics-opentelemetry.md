@@ -402,3 +402,62 @@ The number of pending topic load operations in the broker. When it reaches thres
 The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
+
+### Producer metrics
+
+#### pulsar.broker.producer.message.incoming.count
+The total number of messages received from this producer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.producer.name` - The name of the producer.
+  * `pulsar.producer.id` - The ID of the producer.
+  * `pulsar.producer.access_mode` - The access mode of the producer. Can be one of:
+    * `shared`
+    * `exclusive`
+    * `wait_for_exclusive`
+    * `exclusive_with_fencing`
+
+#### pulsar.broker.producer.message.incoming.size
+The total number of messages bytes received from this producer.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.producer.name` - The name of the producer.
+  * `pulsar.producer.id` - The ID of the producer.
+  * `pulsar.producer.access_mode` - The access mode of the producer. Can be one of:
+    * `shared`
+    * `exclusive`
+    * `wait_for_exclusive`
+    * `exclusive_with_fencing`
+
+#### pulsar.broker.producer.message.drop.count
+The total number of messages dropped from this producer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.producer.name` - The name of the producer.
+  * `pulsar.producer.id` - The ID of the producer.
+  * `pulsar.producer.access_mode` - The access mode of the producer. Can be one of:
+    * `shared`
+    * `exclusive`
+    * `wait_for_exclusive`
+    * `exclusive_with_fencing`
