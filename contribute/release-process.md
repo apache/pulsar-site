@@ -386,24 +386,6 @@ DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-org
 
 ### Release Pulsar 3.0 and later
 
-If you are using a git worktree, the git hash won't get properly applied to the docker image tag.
-the workaround is to replace the `.git` file in the directory with a symbolic link to the worktree git directory
-
-```shell
-# only when using git worktree
-cd $PULSAR_PATH
-if [[ -f .git ]]; then
-  REAL_GITDIR=$(cat .git |awk '{ print $2 }')
-  if [[ -d "$REAL_GITDIR" ]]; then
-    mv .git .git~
-    ln -s $REAL_GITDIR .git
-    echo "Workaround in place"
-  else
-    echo "Could find gitdir in .git file"
-  fi
-fi
-```
-
 For creating and publishing the docker images, run the following commands:
 
 ```shell
