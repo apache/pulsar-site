@@ -48,15 +48,15 @@ def execute(version: str):
 
         # client
         dst = site_path() / 'static' / 'api' / 'client' / v
-        run(mvn, '-pl', 'pulsar-client-api', 'javadoc:javadoc', cwd=src)
+        run(mvn, '-Dlocale=en_US', '-pl', 'pulsar-client-api', 'javadoc:javadoc', cwd=src)
         shutil.copytree(src / 'pulsar-client-api' / 'target' / 'site' / 'apidocs', dst)
 
         # admin
         dst = site_path() / 'static' / 'api' / 'admin' / v
-        run(mvn, '-pl', 'pulsar-client-admin-api', 'javadoc:javadoc', cwd=src)
+        run(mvn, '-Dlocale=en_US', '-pl', 'pulsar-client-admin-api', 'javadoc:javadoc', cwd=src)
         shutil.copytree(src / 'pulsar-client-admin-api' / 'target' / 'site' / 'apidocs', dst)
 
         # function
         dst = site_path() / 'static' / 'api' / 'pulsar-functions' / v
-        run(mvn, '-pl', 'api-java', 'javadoc:javadoc', cwd=(src / 'pulsar-functions'))
+        run(mvn, '-Dlocale=en_US', '-pl', 'api-java', 'javadoc:javadoc', cwd=(src / 'pulsar-functions'))
         shutil.copytree(src / 'pulsar-functions' / 'api-java' / 'target' / 'site' / 'apidocs', dst)
