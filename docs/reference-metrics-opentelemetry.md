@@ -402,3 +402,67 @@ The number of pending topic load operations in the broker. When it reaches thres
 The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
+
+### Managed Ledger Cache metrics
+
+#### pulsar.broker.managed_ledger.count
+The total number of managed ledgers.
+* Type: UpDownCounter
+* Unit: `{managed_ledger}`
+
+#### pulsar.broker.managed_ledger.cache.eviction.count
+The total number of cache eviction operations.
+* Type: Counter
+* Unit: `{eviction}`
+
+#### pulsar.broker.managed_ledger.cache.entry.count
+The number of entries in the entry cache.
+* Type: UpDownCounter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.managed_ledger.cache.entry.status` - The status of the cache entry. Can be one of:
+    * `active` - Indicates the number of entries currently in the cache. Equal to the `evicted - inserted`.
+    * `inserted` - Indicates the total number of entries inserted into the cache.
+    * `evicted` - Indicates the total number of entries evicted from the cache.
+
+#### pulsar.broker.managed_ledger.cache.entry.size
+The byte amount of entries stored in the entry cache.
+* Type: UpDownCounter
+* Unit: `{By}`
+
+#### pulsar.broker.managed_ledger.cache.operation.count
+The number of cache operations.
+* Type: Counter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.managed_ledger.cache.operation.status` - The cache operation result. Can be one of:
+    * `hit` - Indicates a successful cache lookup operation.
+    * `miss` - Indicates a failed cache lookup operation.
+
+#### pulsar.broker.managed_ledger.cache.operation.size
+The byte amount of data retrieved from cache operations.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.managed_ledger.cache.operation.status` - The cache operation result. Can be one of:
+    * `hit` - Indicates a successful cache lookup operation.
+    * `miss` - Indicates a failed cache lookup operation.
+
+#### pulsar.broker.managed_ledger.cache.pool.allocation.active.count
+The number of currently active allocations in the direct arena.
+* Type: UpDownCounter
+* Unit: `{allocation}`
+* Attributes:
+  * `pulsar.managed_ledger.pool.arena.type` - The arena type. Can be one of:
+    * `small`
+    * `normal`
+    * `huge`
+
+#### pulsar.broker.managed_ledger.cache.pool.allocation.size
+The memory allocated in the direct arena.
+* Type: UpDownCounter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.managed_ledger.pool.chunk.allocation.type` - The chunk allocation type. Can be one of:
+    * `allocated`
+    * `used`
