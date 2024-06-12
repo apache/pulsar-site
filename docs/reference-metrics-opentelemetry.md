@@ -402,3 +402,30 @@ The number of pending topic load operations in the broker. When it reaches thres
 The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.
 * Type: UpDownCounter
 * Unit: `{operation}`
+
+### Schema Registry Metrics
+
+#### pulsar.broker.request.schema_registry.duration
+The duration of Schema Registry requests
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The namespace referred by the Schema Registry request
+  * `pulsar.schema_registry.request` - The Schema Registry request type
+    * `get`
+    * `list`
+    * `put`
+    * `delete`
+  * `pulsar.schema_registry.response` - The Schema Registry response type
+    * `success`
+    * `failure`
+
+#### pulsar.broker.operation.schema_registry.compatibility_check.count
+The number of Schema Registry compatibility check operations performed by the broker.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The namespace referred by the compatibility check operation
+  * `pulsar.schema_registry.compatibility_check.response` - The compatibility check response type
+    * `compatible`
+    * `incompatible`
