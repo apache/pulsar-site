@@ -609,8 +609,30 @@ Average resource usage difference threshold to determine a broker whether to be 
 
 **Category**: Load Balancer
 
+### loadBalancerBandwidthInResourceWeight
+BandwidthIn Resource Usage Weight
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBandwidthOutResourceWeight
+BandwidthOut Resource Usage Weight
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBandwithInResourceWeight
-BandwithIn Resource Usage Weight
+BandwidthIn Resource Usage Weight, Deprecated: Use loadBalancerBandwidthInResourceWeight
 
 **Type**: `double`
 
@@ -621,7 +643,7 @@ BandwithIn Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBandwithOutResourceWeight
-BandwithOut Resource Usage Weight
+BandwidthOut Resource Usage Weight, Deprecated: Use loadBalancerBandwidthOutResourceWeight
 
 **Type**: `double`
 
