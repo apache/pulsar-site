@@ -8,6 +8,27 @@ Pulsar exposes the following OpenTelemetry metrics.
 
 ## Broker
 
+### Connection Metrics
+
+#### pulsar.broker.connection.count
+The number of connections.
+* Type: UpDownCounter
+* Unit: `{connection}`
+* Attributes:
+  * `pulsar.connection.status` - The status of the connection. Can be one of:
+    * `active`
+    * `opened`
+    * `closed`
+
+#### pulsar.broker.connection.create.operation.count
+The number of connection create operations.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.connection.create.operation.status` - The status of the create operation. Can be one of:
+    * `success`
+    * `failure`
+
 ### Topic Messaging metrics
 
 #### pulsar.broker.topic.subscription.count
