@@ -17,8 +17,8 @@ The number of connections.
 * Attributes:
   * `pulsar.connection.status` - The status of the connection. Can be one of:
     * `active`
-    * `opened`
-    * `closed`
+    * `open`
+    * `close`
 
 #### pulsar.broker.connection.create.operation.count
 The number of connection create operations.
