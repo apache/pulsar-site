@@ -41,7 +41,7 @@ Whether it is a persistent or non-persistent topic, you can obtain the topic res
 :::note
 
 In REST API, `:schema` stands for persistent or non-persistent. `:tenant`, `:namespace`, `:x` are variables, replace them with the real tenant, namespace, and `x` names when using them.
-Take {@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getList?version=@pulsar:version_number@} as an example, to get the list of persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/persistent/my-tenant/my-namespace`. To get the list of non-persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/non-persistent/my-tenant/my-namespace`.
+Take {@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/PersistentTopics_getList?version=@pulsar:version_number@} as an example, to get the list of persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/persistent/my-tenant/my-namespace`. To get the list of non-persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/non-persistent/my-tenant/my-namespace`.
 
 :::
 

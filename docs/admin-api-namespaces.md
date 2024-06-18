@@ -52,7 +52,7 @@ pulsar-admin namespaces create test-tenant/test-namespace
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace|operation/createNamespace?version=@pulsar:version_number@}
+{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace|operation/Namespaces_createNamespace?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -111,7 +111,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace|operation/getPolicies?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace|operation/Namespaces_getPolicies?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -151,7 +151,7 @@ test-tenant/namespace2
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant|operation/getTenantNamespaces?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant|operation/Namespaces_getTenantNamespaces?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -184,7 +184,7 @@ pulsar-admin namespaces delete test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace|operation/deleteNamespace?version=@pulsar:version_number@}
+{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace|operation/Namespaces_deleteNamespace?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -217,7 +217,7 @@ pulsar-admin namespaces set-clusters test-tenant/namespace1 --clusters cl1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/replication|operation/setNamespaceReplicationClusters?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/replication|operation/Namespaces_setNamespaceReplicationClusters?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -254,7 +254,7 @@ cluster2
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/replication|operation/getNamespaceReplicationClusters?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/replication|operation/Namespaces_getNamespaceReplicationClusters?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -298,7 +298,7 @@ pulsar-admin namespaces set-backlog-quota --limit 10G \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/backlogQuota|operation/setBacklogQuota?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/backlogQuota|operation/Namespaces_setBacklogQuota?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -335,7 +335,7 @@ destination_storage    BacklogQuotaImpl(limit=10737418240, limitSize=10737418240
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/backlogQuotaMap|operation/getBacklogQuotaMap?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/backlogQuotaMap|operation/Namespaces_getBacklogQuotaMap?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -366,7 +366,7 @@ pulsar-admin namespaces remove-backlog-quota test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/backlogQuota|operation/removeBacklogQuota?version=@pulsar:version_number@}
+{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/backlogQuota|operation/Namespaces_removeBacklogQuota?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -410,7 +410,7 @@ pulsar-admin namespaces set-persistence \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/setPersistence?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/Namespaces_setPersistence?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -452,7 +452,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/getPersistence?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/Namespaces_getPersistence?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -487,7 +487,7 @@ pulsar-admin namespaces unload --bundle 0x00000000_0xffffffff --destinationBroke
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/:bundle/unload|operation/unloadNamespaceBundle?version=@pulsar:version_number@&destinationBroker=broker1.use.org.com:8080}
+{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/:bundle/unload|operation/Namespaces_unloadNamespaceBundle?version=@pulsar:version_number@&destinationBroker=broker1.use.org.com:8080}
 
 </TabItem>
 <TabItem value="Java">
@@ -518,7 +518,7 @@ pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenant/
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/:bundle/split|operation/splitNamespaceBundle?version=@pulsar:version_number@}
+{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/:bundle/split|operation/Namespaces_splitNamespaceBundle?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -551,7 +551,7 @@ pulsar-admin namespaces set-message-ttl --messageTTL 100 test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/setNamespaceMessageTTL?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/Namespaces_setNamespaceMessageTTL?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -587,7 +587,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/getNamespaceMessageTTL?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/Namespaces_getNamespaceMessageTTL?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -622,7 +622,7 @@ pulsar-admin namespaces remove-message-ttl test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/removeNamespaceMessageTTL?version=@pulsar:version_number@}
+{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/Namespaces_removeNamespaceMessageTTL?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -656,7 +656,7 @@ pulsar-admin namespaces clear-backlog --sub my-subscription test-tenant/namespac
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/clearBacklog|operation/clearNamespaceBacklogForSubscription?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/clearBacklog|operation/Namespaces_clearNamespaceBacklogForSubscription?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -690,7 +690,7 @@ pulsar-admin namespaces clear-backlog \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/:bundle/clearBacklog|operation/clearNamespaceBundleBacklogForSubscription?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/:bundle/clearBacklog|operation/Namespaces_clearNamespaceBundleBacklogForSubscription?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -725,7 +725,7 @@ pulsar-admin namespaces set-retention --size 100M --time 10m test-tenant/namespa
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/retention|operation/setRetention?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/retention|operation/Namespaces_setRetention?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -763,7 +763,7 @@ pulsar-admin namespaces get-retention test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/retention|operation/getRetention?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/retention|operation/Namespaces_getRetention?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -808,7 +808,7 @@ pulsar-admin namespaces set-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/dispatchRate|operation/setDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/dispatchRate|operation/Namespaces_setDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -850,7 +850,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/dispatchRate|operation/getDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/dispatchRate|operation/Namespaces_getDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -887,7 +887,7 @@ pulsar-admin namespaces set-subscription-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/setSubscriptionDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/Namespaces_setSubscriptionDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -929,7 +929,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/getSubscriptionDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/subscriptionDispatchRate|operation/Namespaces_getSubscriptionDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -965,7 +965,7 @@ pulsar-admin namespaces set-replicator-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/replicatorDispatchRate|operation/setDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/replicatorDispatchRate|operation/Namespaces_setDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -1004,7 +1004,7 @@ pulsar-admin namespaces get-replicator-dispatch-rate test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/replicatorDispatchRate|operation/getDispatchRate?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/replicatorDispatchRate|operation/Namespaces_getDispatchRate?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -1037,7 +1037,7 @@ pulsar-admin namespaces get-deduplication-snapshot-interval test-tenant/namespac
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/deduplicationSnapshotInterval|operation/getDeduplicationSnapshotInterval?version=@pulsar:version_number@}
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/deduplicationSnapshotInterval|operation/Namespaces_getDeduplicationSnapshotInterval?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -1068,7 +1068,7 @@ pulsar-admin namespaces set-deduplication-snapshot-interval test-tenant/namespac
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/deduplicationSnapshotInterval|operation/setDeduplicationSnapshotInterval?version=@pulsar:version_number@}
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/deduplicationSnapshotInterval|operation/Namespaces_setDeduplicationSnapshotInterval?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -1099,7 +1099,7 @@ pulsar-admin namespaces remove-deduplication-snapshot-interval test-tenant/names
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/deduplicationSnapshotInterval|operation/deleteDeduplicationSnapshotInterval?version=@pulsar:version_number@}
+{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/deduplicationSnapshotInterval|operation/Namespaces_deleteDeduplicationSnapshotInterval?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -1138,7 +1138,7 @@ pulsar-admin namespaces unload my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/unload|operation/unloadNamespace?version=@pulsar:version_number@}
+{@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/unload|operation/Namespaces_unloadNamespace?version=@pulsar:version_number@}
 
 </TabItem>
 <TabItem value="Java">
@@ -1174,7 +1174,7 @@ pulsar-admin namespaces set-entry-filters \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/entryFilters|operation/setEntryFilters?
+{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/entryFilters|operation/Namespaces_setEntryFilters?
 version=@pulsar:version_number@}
 
 </TabItem>
@@ -1206,7 +1206,7 @@ pulsar-admin namespaces get-entry-filters test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/entryFilters|operation/getEntryFilters?
+{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/entryFilters|operation/Namespaces_getEntryFilters?
 version=@pulsar:version_number@}
 
 </TabItem>
@@ -1238,7 +1238,7 @@ pulsar-admin namespaces remove-entry-filters test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/entryFilters|operation/removeEntryFilters?
+{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/entryFilters|operation/Namespaces_removeEntryFilters?
 version=@pulsar:version_number@}
 
 </TabItem>
