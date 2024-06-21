@@ -3673,6 +3673,17 @@ Timeout for building a consistent snapshot for tracking replicated subscriptions
 
 **Category**: Server
 
+### replicationStartAt
+The position that replication task start at, it can be set to earliest or latest (default).
+
+**Type**: `java.lang.String`
+
+**Default**: `latest`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### retentionCheckIntervalInSeconds
 Check between intervals to see if consumed ledgers need to be trimmed
 

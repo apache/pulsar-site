@@ -482,7 +482,7 @@
                     "type": "string"
                 },
                 "tlsAllowInsecureConnection": {
-                    "description": "Allow TLS connections to servers whose certificate cannot be be verified to have been signed by a trusted certificate authority.",
+                    "description": "Allow TLS connections to servers whose certificate cannot be verified to have been signed by a trusted certificate authority.",
                     "type": "boolean"
                 }
             },
@@ -1853,6 +1853,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "bytesOutInternalCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "committedTxnCount": {
                     "format": "int64",
                     "type": "integer"
@@ -1977,6 +1981,10 @@
                     },
                     "readOnly": true,
                     "type": "object"
+                },
+                "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "topicEpoch": {
                     "format": "int64",
@@ -2286,6 +2294,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "bytesOutInternalCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "committedTxnCount": {
                     "format": "int64",
                     "type": "integer"
@@ -2401,6 +2413,10 @@
                     },
                     "readOnly": true,
                     "type": "object"
+                },
+                "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "topicEpoch": {
                     "format": "int64",
@@ -2769,6 +2785,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "bytesOutInternalCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "committedTxnCount": {
                     "format": "int64",
                     "type": "integer"
@@ -2886,6 +2906,10 @@
                         "$ref": "#/definitions/SubscriptionStats"
                     },
                     "type": "object"
+                },
+                "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "topicEpoch": {
                     "format": "int64",
@@ -3185,6 +3209,13 @@
         },
         "Policies": {
             "properties": {
+                "allowed_clusters": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
                 "auth_policies": {
                     "$ref": "#/definitions/AuthPolicies"
                 },
@@ -6906,6 +6937,113 @@
                     }
                 },
                 "summary": "Creates a new namespace with the specified policies",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/{tenant}/{namespace}/allowedClusters": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_getNamespaceAllowedClusters",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace doesn't exist"
+                    },
+                    "412": {
+                        "description": "Namespace is not global"
+                    }
+                },
+                "summary": "Get the allowed clusters for a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_setNamespaceAllowedClusters",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "List of allowed clusters",
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "The list of allowed clusters should include all replication clusters."
+                    },
+                    "403": {
+                        "description": "The requester does not have admin permissions."
+                    },
+                    "404": {
+                        "description": "The specified tenant, cluster, or namespace does not exist."
+                    },
+                    "409": {
+                        "description": "A peer-cluster cannot be part of an allowed-cluster."
+                    },
+                    "412": {
+                        "description": "The namespace is not global or the provided cluster IDs are invalid."
+                    }
+                },
+                "summary": "Set the allowed clusters for a namespace.",
                 "tags": [
                     "namespaces"
                 ]
