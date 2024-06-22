@@ -125,8 +125,8 @@ To use Pulsar transaction API, complete the following steps.
                     // Step 6: you can process the received message with your use case and business logic.
 
                     // Step 7: the producers produce messages to output topics with transactions
-                    outputProducerOne.newMessage(txn).value("Hello Pulsar! outputTopicOne count : " + i).send();
-                    outputProducerTwo.newMessage(txn).value("Hello Pulsar! outputTopicTwo count : " + i).send();
+                    outputProducerOne.newMessage(txn).value(message.getValue()).send();
+                    outputProducerTwo.newMessage(txn).value(message.getValue()).send();
 
                     // Step 7: the consumers acknowledge the input message with the transactions *individually*.
                     inputConsumer.acknowledgeAsync(message.getMessageId(), txn).get();
