@@ -104,7 +104,7 @@ module.exports = {
       Feature: "Transaction",
       Java: 2,
       "C++": 0,
-      Go: 0,
+      Go: 2,
       Python: 0,
       Nodejs: 0,
       "C#/DotPulsar": 0,
