@@ -413,7 +413,7 @@ The total amount of data written to the metadata store.
   * `pulsar.metadata.store.name` - The name of the metadata store.
 
 #### pulsar.broker.metadata.store.executor.queue.size
-The number of blocking operations in the metadata store executor queue.
+The number of batch operations in the metadata store executor queue.
 * Type: UpDownCounter
 * Unit: `{operation}`
 * Attributes:
