@@ -478,6 +478,120 @@ The total number of messages dropped from this producer.
     * `wait_for_exclusive`
     * `exclusive_with_fencing`
 
+### Replicator metrics
+
+#### pulsar.broker.replication.message.incoming.count
+The total number of messages received from the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.outgoing.count
+The total number of messages sent to the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.incoming.size
+The total number of messages bytes received from the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.outgoing.size
+The total number of messages bytes sent to the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.backlog.count
+The total number of messages in the backlog for this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.backlog.age
+The age of the oldest message in the replicator backlog.
+* Type: Gauge
+* Unit: `s`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.expired.count
+The total number of messages that expired for this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.dropped.count
+The total number of messages dropped by this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
 ### Schema Registry Metrics
 
 #### pulsar.broker.request.schema_registry.duration
