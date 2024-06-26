@@ -8,7 +8,7 @@ Pulsar transaction is primarily a server-side and protocol-level feature. This t
 
 :::note
 
-Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java** clients.
+Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java**, **Go** and **.NET** clients.
 
 :::
 ## Prerequisites

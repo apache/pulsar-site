@@ -424,6 +424,22 @@ The maximum number of pending topic load operations in the broker. Equal to "max
 * Type: UpDownCounter
 * Unit: `{operation}`
 
+### Metadata Store metrics
+
+#### pulsar.broker.metadata.store.outgoing.size
+The total amount of data written to the metadata store.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.metadata.store.name` - The name of the metadata store.
+
+#### pulsar.broker.metadata.store.executor.queue.size
+The number of batch operations in the metadata store executor queue.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.metadata.store.name` - The name of the metadata store.
+
 ### Producer metrics
 
 #### pulsar.broker.producer.message.incoming.count
