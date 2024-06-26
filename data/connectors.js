@@ -180,12 +180,6 @@ module.exports = [
     link: 'https://lucene.apache.org/solr/'
   },
   {
-    name: 'netty',
-    longName: 'TCP/UDP with Netty source',
-    type: 'Source',
-    link: 'https://netty.io/'
-  },
-  {
     name: 'data-generator',
     longName: 'Test Data Generator source',
     type: 'Source',

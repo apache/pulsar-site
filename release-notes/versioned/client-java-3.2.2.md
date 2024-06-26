@@ -1,7 +1,7 @@
 ---
-id: client-java-3.2.1
-title: Client Java 3.2.1
-sidebar_label: Client Java 3.2.1
+id: client-java-3.2.2
+title: Client Java 3.2.2
+sidebar_label: Client Java 3.2.2
 ---
 
 - [fix][client] Consumer lost message ack due to race condition in acknowledge with batch message ([#22353](https://github.com/apache/pulsar/pull/22353))

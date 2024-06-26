@@ -12,7 +12,6 @@ Pulsar exposes the following metrics in Prometheus format. You can monitor your 
   - [Pulsar Functions](#pulsar-functions)
   - [Connectors](#connectors)
   - [Proxy](#proxy)
-  - [Pulsar SQL Worker](#pulsar-sql-worker)
   - [Pulsar transaction](#pulsar-transaction)
 
 The following types of metrics are available:
@@ -140,13 +139,6 @@ All the broker metrics are labeled with the following labels:
 | pulsar_ml_count                                              | Gauge       | The number of currently opened managed ledgers.                                                                             |
 | ~~topic_load_times (deprecated)~~                            | ~~Summary~~ | ~~The topic load latency calculated in milliseconds.~~                                                                      |
 | pulsar_topic_load_times                                      | Summary     | The topic load latency calculated in milliseconds.                                                                          |
-| pulsar_active_connections                                    | Gauge       | The number of active connections.                                                                                           |
-| pulsar_connection_created_total_count                        | Gauge       | The total number of connections.                                                                                            |
-| pulsar_connection_create_success_count                       | Gauge       | The number of successfully created connections.                                                                             |
-| pulsar_connection_create_fail_count                          | Gauge       | The number of failed connections.                                                                                           |
-| pulsar_connection_closed_total_count                         | Gauge       | The total number of closed connections.                                                                                     |
-| pulsar_broker_throttled_connections                          | Gauge       | The number of throttled connections.                                                                                        |
-| pulsar_broker_throttled_connections_global_limit             | Gauge       | The number of throttled connections due to per-connection limit.                                                            |
 | pulsar_broker_topics_count                                   | Gauge       | The number of Pulsar topics in this broker.                                                                                 |
 | pulsar_broker_subscriptions_count                            | Gauge       | The number of Pulsar subscriptions in this broker.                                                                          |
 | pulsar_broker_producers_count                                | Gauge       | The number of active producers connected to this broker.                                                                    |
@@ -467,15 +459,14 @@ All the connection metrics are labelled with the following labels:
 - *broker*: `broker=${advertised_address}`. `${advertised_address}` is the advertised address of the broker.
 - *metric*: `metric=${metric}`. `${metric}` is the connection metric collective name.
 
-| Name | Type | Description |
-|---|---|---|
-| pulsar_active_connections| Gauge | The number of active connections. |
-| pulsar_connection_created_total_count | Gauge | The total number of connections. |
+| Name                                   | Type  | Description                                     |
+|----------------------------------------|-------|-------------------------------------------------|
+| pulsar_active_connections              | Gauge | The number of active connections.               |
+| pulsar_connection_created_total_count  | Gauge | The total number of connections.                |
 | pulsar_connection_create_success_count | Gauge | The number of successfully created connections. |
-| pulsar_connection_create_fail_count | Gauge | The number of failed connections. |
-| pulsar_connection_closed_total_count | Gauge | The total number of closed connections. |
-| pulsar_broker_throttled_connections | Gauge | The number of throttled connections. |
-| pulsar_broker_throttled_connections_global_limit | Gauge | The number of throttled connections because of per-connection limit. |
+| pulsar_connection_create_fail_count    | Gauge | The number of failed connections.               |
+| pulsar_connection_closed_total_count   | Gauge | The total number of closed connections.         |
+| pulsar_broker_throttled_connections    | Gauge | The number of throttled connections.            |
 
 ### Jetty metrics
 
@@ -833,33 +824,6 @@ All the proxy metrics are labeled with the following labels:
 | pulsar_proxy_rejected_connections | Counter | Counter for connections rejected due to throttling. |
 | pulsar_proxy_binary_ops | Counter | Counter of proxy operations. |
 | pulsar_proxy_binary_bytes | Counter | Counter of proxy bytes. |
-
-## Pulsar SQL Worker
-
-| Name | Type | Description |
-|---|---|---|
-| split_bytes_read | Counter | Number of bytes read from BookKeeper. |
-| split_num_messages_deserialized | Counter | Number of messages deserialized. |
-| split_num_record_deserialized | Counter | Number of records deserialized. |
-| split_bytes_read_per_query | Summary | Total number of bytes read per query. |
-| split_entry_deserialize_time | Summary | Time spent on deserializing entries. |
-| split_entry_deserialize_time_per_query | Summary | Time spent on deserializing entries per query. |
-| split_entry_queue_dequeue_wait_time | Summary | Time spend on waiting to get entry from entry queue because it is empty. |
-| split_entry_queue_dequeue_wait_time_per_query | Summary | Total time spent waiting to get entry from entry queue per query. |
-| split_message_queue_dequeue_wait_time_per_query | Summary | Time spent waiting to dequeue from message queue because is is empty per query. |
-| split_message_queue_enqueue_wait_time | Summary | Time spent waiting for message queue enqueue because the message queue is full. |
-| split_message_queue_enqueue_wait_time_per_query | Summary | Time spent waiting for message queue enqueue because the message queue is full per query. |
-| split_num_entries_per_batch | Summary | Number of entries per batch. |
-| split_num_entries_per_query | Summary | Number of entries per query. |
-| split_num_messages_deserialized_per_entry | Summary | Number of messages deserialized per entry. |
-| split_num_messages_deserialized_per_query | Summary | Number of messages deserialized per query. |
-| split_read_attempts | Summary | Number of reading attempts (fail if queues are full). |
-| split_read_attempts_per_query | Summary | Number of reading attempts per query. |
-| split_read_latency_per_batch | Summary | Latency of reads per batch. |
-| split_read_latency_per_query | Summary | Total read latency per query. |
-| split_record_deserialize_time | Summary | Time spent deserializing message to record. For example, Avro, JSON, and so on. |
-| split_record_deserialize_time_per_query | Summary | Time spent deserializing message to record per query. |
-| split_total_execution_time | Summary | The total execution time. |
 
 ## Pulsar transaction
 

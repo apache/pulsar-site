@@ -151,8 +151,8 @@ module.exports = {
     announcementBar: {
       id: "summit",
       content: renderAnnouncementBar(
-        "Get your free pass for Pulsar Virtual Summit Europe 2024 on May 14, 2024 🗓️",
-        "https://registration.socio.events/e/pulsarvirtualsummiteurope2024"
+        "👋 Start your Pulsar journey by becoming a member of our community",
+        "/community/#section-discussions"
       ),
       backgroundColor: "#282826",
       textColor: "#fff",
@@ -454,6 +454,17 @@ module.exports = {
     ],
   ],
   plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/contribute/setup-mergetool',
+            to: '/contribute/setup-git',
+          },
+        ],
+      },
+    ],    
     'docusaurus-plugin-image-zoom',
     [
       "content-docs",
@@ -498,7 +509,7 @@ module.exports = {
         routeBasePath: "client-feature-matrix",
         sidebarPath: false,
       }),
-    ],
+    ]
   ],
   scripts: [
     { src: "/js/sine-waves.min.js", async: true },

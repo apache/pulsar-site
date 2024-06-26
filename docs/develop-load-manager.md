@@ -433,4 +433,3 @@ pulsar-perf monitor-brokers --connect-string pulsar://<host:port> --extensions
 </TabItem>
 
 </Tabs>
-````

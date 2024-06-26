@@ -403,6 +403,22 @@ The maximum number of pending topic load operations in the broker. Equal to "max
 * Type: UpDownCounter
 * Unit: `{operation}`
 
+### Metadata Store metrics
+
+#### pulsar.broker.metadata.store.outgoing.size
+The total amount of data written to the metadata store.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.metadata.store.name` - The name of the metadata store.
+
+#### pulsar.broker.metadata.store.executor.queue.size
+The number of batch operations in the metadata store executor queue.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.metadata.store.name` - The name of the metadata store.
+
 ### Consumer metrics
 
 #### pulsar.broker.consumer.message.outgoing.count
@@ -420,10 +436,6 @@ The total number of messages dispatched to this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
-  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
-  * `pulsar.consumer.metadata` - The consumer metadata properties.
-  * `pulsar.client.address` - The address of the client.
-  * `pulsar.client.version` - The version of the client.
 
 #### pulsar.broker.consumer.message.outgoing.size
 The total number of messages bytes dispatched to this consumer.
@@ -440,10 +452,6 @@ The total number of messages bytes dispatched to this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
-  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
-  * `pulsar.consumer.metadata` - The consumer metadata properties.
-  * `pulsar.client.address` - The address of the client.
-  * `pulsar.client.version` - The version of the client.
 
 #### pulsar.broker.consumer.message.ack.count
 The total number of message acknowledgments received from this consumer.
@@ -460,10 +468,6 @@ The total number of message acknowledgments received from this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
-  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
-  * `pulsar.consumer.metadata` - The consumer metadata properties.
-  * `pulsar.client.address` - The address of the client.
-  * `pulsar.client.version` - The version of the client.
 
 #### pulsar.broker.consumer.message.redeliver.count
 The total number of messages that have been redelivered to this consumer.
@@ -480,10 +484,6 @@ The total number of messages that have been redelivered to this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
-  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
-  * `pulsar.consumer.metadata` - The consumer metadata properties.
-  * `pulsar.client.address` - The address of the client.
-  * `pulsar.client.version` - The version of the client.
 
 #### pulsar.broker.consumer.message.unack.count
 The number of messages currently unacknowledged by this consumer.
@@ -500,10 +500,6 @@ The number of messages currently unacknowledged by this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
-  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
-  * `pulsar.consumer.metadata` - The consumer metadata properties.
-  * `pulsar.client.address` - The address of the client.
-  * `pulsar.client.version` - The version of the client.
 
 #### pulsar.broker.consumer.permit.count
 The number of permits currently available for this consumer.
@@ -520,7 +516,89 @@ The number of permits currently available for this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
-  * `pulsar.consumer.connected_since` - The UTC timestamp of the consumer creation.
-  * `pulsar.consumer.metadata` - The consumer metadata properties.
-  * `pulsar.client.address` - The address of the client.
-  * `pulsar.client.version` - The version of the client.
+
+### Producer metrics
+
+#### pulsar.broker.producer.message.incoming.count
+The total number of messages received from this producer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.producer.name` - The name of the producer.
+  * `pulsar.producer.id` - The ID of the producer.
+  * `pulsar.producer.access_mode` - The access mode of the producer. Can be one of:
+    * `shared`
+    * `exclusive`
+    * `wait_for_exclusive`
+    * `exclusive_with_fencing`
+
+#### pulsar.broker.producer.message.incoming.size
+The total number of messages bytes received from this producer.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.producer.name` - The name of the producer.
+  * `pulsar.producer.id` - The ID of the producer.
+  * `pulsar.producer.access_mode` - The access mode of the producer. Can be one of:
+    * `shared`
+    * `exclusive`
+    * `wait_for_exclusive`
+    * `exclusive_with_fencing`
+
+#### pulsar.broker.producer.message.drop.count
+The total number of messages dropped from this producer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.producer.name` - The name of the producer.
+  * `pulsar.producer.id` - The ID of the producer.
+  * `pulsar.producer.access_mode` - The access mode of the producer. Can be one of:
+    * `shared`
+    * `exclusive`
+    * `wait_for_exclusive`
+    * `exclusive_with_fencing`
+
+### Schema Registry Metrics
+
+#### pulsar.broker.request.schema_registry.duration
+The duration of Schema Registry requests
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The namespace referred by the Schema Registry request
+  * `pulsar.schema_registry.request` - The Schema Registry request type
+    * `get`
+    * `list`
+    * `put`
+    * `delete`
+  * `pulsar.schema_registry.response` - The Schema Registry response type
+    * `success`
+    * `failure`
+
+#### pulsar.broker.operation.schema_registry.compatibility_check.count
+The number of Schema Registry compatibility check operations performed by the broker.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The namespace referred by the compatibility check operation
+  * `pulsar.schema_registry.compatibility_check.response` - The compatibility check response type
+    * `compatible`
+    * `incompatible`

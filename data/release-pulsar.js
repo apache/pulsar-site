@@ -1,12 +1,30 @@
 module.exports = [
   {
+    "author": "coderzc",
+    "tagName": "v3.3.0",
+    "publishedAt": "2024-06-05T16:26:09Z",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.3.0/",
+    "doc": "/docs/3.3.x",
+    "version": "v3.3.x"
+  },
+  {
+    "author": "lhotari",
+    "tagName": "v3.2.3",
+    "publishedAt": "2024-05-17T13:12:43Z",
+    "vtag": "3.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.2.3/",
+    "doc": "/docs/3.2.x",
+    "version": "v3.2.x"
+  },
+  {
     "author": "lhotari",
     "tagName": "v3.2.2",
     "publishedAt": "2024-04-02T06:08:51Z",
     "vtag": "3.2.x",
     "releaseNotes": "/release-notes/versioned/pulsar-3.2.2/",
     "doc": "/docs/3.2.x",
-    "version": "v3.2.x"
+    "version": ""
   },
   {
     "author": "Technoboy-",
@@ -63,13 +81,22 @@ module.exports = [
         "version": ""
     },
     {
+        "author": "lhotari",
+        "tagName": "v3.0.5",
+        "publishedAt": "2024-05-17T13:08:06Z",
+        "vtag": "3.0.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.0.5/",
+        "doc": "/docs/3.0.x",
+        "version": "v3.0.x"
+    },
+    {
       "author": "lhotari",
       "tagName": "v3.0.4",
       "publishedAt": "2024-04-02T04:56:15Z",
       "vtag": "3.0.x",
       "releaseNotes": "/release-notes/versioned/pulsar-3.0.4/",
       "doc": "/docs/3.0.x",
-      "version": "v3.0.x"
+      "version": ""
     },
     {
       "author": "heesung-sn",

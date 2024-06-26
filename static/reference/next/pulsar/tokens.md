@@ -50,6 +50,7 @@ $ pulsar tokens create options
 | `-e, --expiry-time` | Relative expiry time for the token (eg: 1h, 3d, 10y). (m=minutes) Default: no expiration|null|
 | `-sk, --secret-key` | Pass the secret key for signing the token. This can either be: data:, file:, etc..|null|
 | `-pk, --private-key` | Pass the private key for signing the token. This can either be: data:, file:, etc..|null|
+| `-hs, --headers` | Additional headers to token. Format: --headers key1=value1|null|
 
 
 ## show

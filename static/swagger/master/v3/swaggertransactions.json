@@ -110,6 +110,167 @@
             },
             "type": "object"
         },
+        "CursorStats": {
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "cursorLedger": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cursorLedgerLastEntry": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "individuallyDeletedMessages": {
+                    "type": "string"
+                },
+                "lastLedgerSwitchTimestamp": {
+                    "type": "string"
+                },
+                "markDeletePosition": {
+                    "type": "string"
+                },
+                "messagesConsumedCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "numberOfEntriesSinceFirstNotAckedMessage": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "pendingReadOps": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "object"
+                },
+                "readPosition": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "subscriptionHavePendingRead": {
+                    "type": "boolean"
+                },
+                "subscriptionHavePendingReplayRead": {
+                    "type": "boolean"
+                },
+                "totalNonContiguousDeletedMessagesRange": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "waitingReadOp": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "LedgerInfo": {
+            "properties": {
+                "entries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ledgerId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "metadata": {
+                    "type": "string"
+                },
+                "offloaded": {
+                    "type": "boolean"
+                },
+                "size": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "underReplicated": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "ManagedLedgerInternalStats": {
+            "properties": {
+                "currentLedgerEntries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "currentLedgerSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "cursors": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/CursorStats"
+                    },
+                    "type": "object"
+                },
+                "entriesAddedCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastConfirmedEntry": {
+                    "type": "string"
+                },
+                "lastLedgerCreatedTimestamp": {
+                    "type": "string"
+                },
+                "lastLedgerCreationFailureTimestamp": {
+                    "type": "string"
+                },
+                "ledgers": {
+                    "items": {
+                        "$ref": "#/definitions/LedgerInfo"
+                    },
+                    "type": "array"
+                },
+                "numberOfEntries": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "pendingAddEntriesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "totalSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "waitingCursorsCount": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "PositionInPendingAckStats": {
+            "properties": {
+                "state": {
+                    "enum": [
+                        "PendingAck",
+                        "MarkDelete",
+                        "NotInPendingAck",
+                        "PendingAckNotReady",
+                        "InvalidPosition"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "PublicKey": {
             "properties": {
                 "algorithm": {
@@ -128,7 +289,267 @@
             },
             "type": "object"
         },
+        "SegmentStats": {
+            "properties": {
+                "lastTxnID": {
+                    "type": "string"
+                },
+                "persistentPosition": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SegmentsStats": {
+            "properties": {
+                "currentSegmentCapacity": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lastTookSnapshotSegmentTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "segmentStats": {
+                    "items": {
+                        "$ref": "#/definitions/SegmentStats"
+                    },
+                    "type": "array"
+                },
+                "segmentsSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "unsealedAbortTxnIDSize": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "SnapshotSystemTopicInternalStats": {
+            "properties": {
+                "managedLedgerInternalStats": {
+                    "$ref": "#/definitions/ManagedLedgerInternalStats"
+                },
+                "managedLedgerName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "SocketAddress": {
+            "type": "object"
+        },
+        "TransactionBufferInternalStats": {
+            "properties": {
+                "segmentIndexInternalStats": {
+                    "$ref": "#/definitions/SnapshotSystemTopicInternalStats"
+                },
+                "segmentInternalStats": {
+                    "$ref": "#/definitions/SnapshotSystemTopicInternalStats"
+                },
+                "singleSnapshotSystemTopicInternalStats": {
+                    "$ref": "#/definitions/SnapshotSystemTopicInternalStats"
+                },
+                "snapshotType": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionBufferStats": {
+            "properties": {
+                "lastSnapshotTimestamps": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lowWaterMarks": {
+                    "additionalProperties": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "object"
+                },
+                "maxReadPosition": {
+                    "type": "string"
+                },
+                "ongoingTxnSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recoverEndTime": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recoverStartTime": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "segmentsStats": {
+                    "$ref": "#/definitions/SegmentsStats"
+                },
+                "snapshotType": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "totalAbortedTransactions": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionCoordinatorInfo": {
+            "properties": {
+                "brokerServiceUrl": {
+                    "type": "string"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionCoordinatorInternalStats": {
+            "properties": {
+                "transactionLogStats": {
+                    "$ref": "#/definitions/TransactionLogStats"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionCoordinatorStats": {
+            "properties": {
+                "leastSigBits": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "lowWaterMark": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ongoingTxnSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recoverEndTime": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recoverStartTime": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "state": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionInBufferStats": {
+            "properties": {
+                "aborted": {
+                    "type": "boolean"
+                },
+                "startPosition": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionInPendingAckStats": {
+            "properties": {
+                "cumulativeAckPosition": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionLogStats": {
+            "properties": {
+                "managedLedgerInternalStats": {
+                    "$ref": "#/definitions/ManagedLedgerInternalStats"
+                },
+                "managedLedgerName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionMetadata": {
+            "properties": {
+                "ackedPartitions": {
+                    "additionalProperties": {
+                        "additionalProperties": {
+                            "$ref": "#/definitions/TransactionInPendingAckStats"
+                        },
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "openTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "producedPartitions": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TransactionInBufferStats"
+                    },
+                    "type": "object"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timeoutAt": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "txnId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionPendingAckInternalStats": {
+            "properties": {
+                "pendingAckLogStats": {
+                    "$ref": "#/definitions/TransactionLogStats"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionPendingAckStats": {
+            "properties": {
+                "lowWaterMarks": {
+                    "additionalProperties": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "object"
+                },
+                "ongoingTxnSize": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recoverEndTime": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recoverStartTime": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "state": {
+                    "type": "string"
+                }
+            },
             "type": "object"
         }
     },
@@ -174,6 +595,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -232,6 +656,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionCoordinatorInternalStats"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -281,6 +711,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionCoordinatorStats"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -311,6 +747,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/TransactionCoordinatorInfo"
+                            },
+                            "type": "array"
+                        }
+                    },
                     "403": {
                         "description": "Don't have admin permission"
                     },
@@ -375,6 +820,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionPendingAckInternalStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -454,6 +905,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionPendingAckStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -544,6 +1001,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PositionInPendingAckStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -605,6 +1068,15 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "additionalProperties": {
+                                "$ref": "#/definitions/TransactionMetadata"
+                            },
+                            "type": "object"
+                        }
+                    },
                     "307": {
                         "description": "Topic don't owner by this broker!"
                     },
@@ -675,6 +1147,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionBufferInternalStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -755,6 +1233,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionBufferStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -790,6 +1274,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
                     "401": {
                         "description": "This operation requires super-user access"
                     },
@@ -855,6 +1342,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionInBufferStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -936,6 +1429,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionInPendingAckStats"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
@@ -993,6 +1492,12 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionMetadata"
+                        }
+                    },
                     "307": {
                         "description": "Topic is not owned by this broker!"
                     },
