@@ -597,6 +597,28 @@ The total number of messages dropped from this producer.
     * `wait_for_exclusive`
     * `exclusive_with_fencing`
 
+### Web Executor Service metrics
+
+#### pulsar.web.executor.thread.limit
+The thread limits for the pulsar-web executor pool.
+* Type: UpDownCounter
+* Unit: `{thread}`
+* Attributes:
+  * `pulsar.web.executor.thread.limit.type` - The limit type for the thread pool.
+    * `max`
+    * `min`
+
+#### pulsar.web.executor.thread.usage
+The current usage of threads in the pulsar-web executor pool.
+* Type: UpDownCounter
+* Unit: `{thread}`
+* Attributes:
+  * `pulsar.web.executor.thread.usage.type` - The usage type for the thread pool.
+    * `active` - Indicates the number of threads actively serving requests.
+    * `current` - Indicates the total number of threads currently associated with the pool.
+    * `idle` - Indicates the number of threads available to serve requests.
+      =======
+
 ### Schema Registry Metrics
 
 #### pulsar.broker.request.schema_registry.duration
