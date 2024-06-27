@@ -597,6 +597,78 @@ The total number of messages dropped from this producer.
     * `wait_for_exclusive`
     * `exclusive_with_fencing`
 
+### Managed Ledger metrics
+
+#### pulsar.broker.managed_ledger.message.outgoing.count
+The number of write operations to this ledger.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.operation.status` - The status of the managed ledger operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.message.outgoing.logical.size
+The total number of messages bytes written to this ledger, excluding replicas.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.outgoing.replicated.size
+The total number of messages bytes written to this ledger, including replicas.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.backlog.count
+The number of messages in backlog for all consumers from this ledger.
+* Type: UpDownCounter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.incoming.count
+The number of read operations from this ledger.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.operation.status` - The status of the managed ledger operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.message.incoming.size
+The total number of messages bytes read from this ledger.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.incoming.cache.miss.count
+The number of cache misses during read operations from this ledger.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.mark_delete.count
+The total number of mark delete operations for this ledger.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
 ### Schema Registry Metrics
 
 #### pulsar.broker.request.schema_registry.duration
