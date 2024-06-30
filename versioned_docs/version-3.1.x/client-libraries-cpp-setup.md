@@ -27,7 +27,7 @@ brew install libpulsar
    wget @pulsar:deb:client@
    ```
 
-   This package contains shared libraries `libpulsar.so` and `libpulsarnossl.so`.
+   This package contains shared library `libpulsar.so`.
 
    </TabItem>
    <TabItem value="client-devel">
@@ -60,7 +60,7 @@ Now, you can see Pulsar C++ client libraries installed under the `/usr/lib` dire
    wget @pulsar:dist_rpm:client@
    ```
 
-   This package contains shared libraries: `libpulsar.so` and `libpulsarnossl.so`.
+   This package contains shared library `libpulsar.so`.
 
    </TabItem>
    <TabItem value="client-debuginfo">
