@@ -349,6 +349,11 @@ module.exports = {
       ]
     },
     {
+      "name": "Jie Chen",
+      "apacheId": "crossoverjie",
+      "githubUsername": []
+    },
+    {
       "name": "Tao Jiuming",
       "apacheId": "daojun",
       "githubUsername": []
@@ -481,7 +486,7 @@ module.exports = {
       "name": "ZhangJian He",
       "apacheId": "shoothzj",
       "githubUsername": [
-        "Shoothzj"
+        "shoothzj"
       ]
     },
     {
@@ -490,6 +495,11 @@ module.exports = {
       "githubUsername": [
         "murong00"
       ]
+    },
+    {
+      "name": "WenZhi Feng",
+      "apacheId": "thetumbled",
+      "githubUsername": []
     },
     {
       "name": "Li Li",
