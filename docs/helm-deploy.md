@@ -100,15 +100,27 @@ components:
   toolset: true
   # pulsar manager
   pulsar_manager: true
+```
 
+##### Monitoring Components
+
+The Pulsar Helm Chart installs monitoring components using a dependent Helm chart, [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts). You can customize this Helm chart to specify which monitoring components to install. These components are enabled by default.
+
+```yaml
 ## Monitoring Components
 ##
-## Control what components of the monitoring stack to deploy for the cluster
-monitoring:
-  # monitoring - prometheus
-  prometheus: true
-  # monitoring - grafana
-  grafana: true
+## Control what components of the kube-prometheus-stack Helm chart to deploy for the cluster
+kube-prometheus-stack:
+  # Control deployment of this Helm chart entirely
+  enabled: true
+  # prometheus
+  prometheus:
+    enabled: true
+  promtheus-node-exporter:
+    enabled: true
+  # grafana
+  grafana:
+    enabled: true
 ```
 
 #### Docker images
@@ -149,6 +161,26 @@ images:
     pullPolicy: IfNotPresent
     hasCommand: false
 ```
+
+The Pulsar Helm Chart also lets you specify the image versions used by initialization containers used to coordinate creation and connection of dependent Pulsar resources.
+
+```yaml
+## Images
+##
+## Control what image to use for Pulsar init containers
+pulsar_metadata:
+  component: pulsar-init
+  image:
+    repository: apachepulsar/pulsar-all
+    tag: @pulsar:version@
+    pullPolicy: IfNotPresent
+```
+
+:::tip
+
+If using a private Docker repository or pull-thru cache, the `repository` configuration option must be changed accordingly for all component defintions including the `pulsar_metadata` component.
+
+:::
 
 #### TLS
 
@@ -351,6 +383,17 @@ To find the IP addresses of those components, run the following command:
 
 ```bash
 kubectl get service -n <k8s-namespace>
+```
+
+You can configure the Proxy and the Pulsar Manager as a `NodePort` instead of a `ClusterIP`.
+
+```yaml
+proxy:
+  service:
+    type: NodePort
+pulsar_manager:
+  service:
+    type: NodePort
 ```
 
 ## Troubleshoot

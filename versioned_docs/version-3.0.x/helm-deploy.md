@@ -103,15 +103,27 @@ components:
   toolset: true
   # pulsar manager
   pulsar_manager: true
+```
 
+##### Monitoring Components
+
+The Pulsar Helm Chart installs monitoring components using a dependent Helm chart, [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts). You can customize this Helm chart to specify which monitoring components to install. These components are enabled by default.
+
+```yaml
 ## Monitoring Components
 ##
-## Control what components of the monitoring stack to deploy for the cluster
-monitoring:
-  # monitoring - prometheus
-  prometheus: true
-  # monitoring - grafana
-  grafana: true
+## Control what components of the kube-prometheus-stack Helm chart to deploy for the cluster
+kube-prometheus-stack:
+  # Control deployment of this Helm chart entirely
+  enabled: true
+  # prometheus
+  prometheus:
+    enabled: true
+  promtheus-node-exporter:
+    enabled: true
+  # grafana
+  grafana:
+    enabled: true
 ```
 
 #### Docker images
