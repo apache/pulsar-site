@@ -499,7 +499,9 @@ module.exports = {
     {
       "name": "WenZhi Feng",
       "apacheId": "thetumbled",
-      "githubUsername": []
+      "githubUsername": [
+        "thetumbled"
+      ]
     },
     {
       "name": "Li Li",
