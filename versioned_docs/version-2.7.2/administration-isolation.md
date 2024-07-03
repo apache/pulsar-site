@@ -34,7 +34,7 @@ pulsar-admin ns-isolation-policy set options
 
 ```
 
-For more information about the command `pulsar-admin ns-isolation-policy set options`, see [here](https://pulsar.apache.org/tools/pulsar-admin/).
+For more information about the command `pulsar-admin ns-isolation-policy set options`, see here.
 
 **Example**
 
@@ -82,7 +82,7 @@ pulsar-admin namespaces set-bookie-affinity-group options
 
 ```
 
-For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see [here](https://pulsar.apache.org/tools/pulsar-admin/).
+For more information about the command `pulsar-admin namespaces set-bookie-affinity-group options`, see here.
 
 **Example**
 

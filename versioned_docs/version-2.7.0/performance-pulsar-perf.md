@@ -212,6 +212,6 @@ To check test results through the HdrHistogram Plotter, follow these steps:
 
 5. You will get two output files. Upload the output file with the filename extension of .hgrm to the [HdrHistogram Plotter](https://hdrhistogram.github.io/HdrHistogram/plotFiles.html).
 
-6. Check the test result through the Graphical User Interface of the HdrHistogram Plotter, as shown blow.
+6. Check the test result through the Graphical User Interface of the HdrHistogram Plotter, as shown below.
 
    ![](/assets/perf-produce.png)

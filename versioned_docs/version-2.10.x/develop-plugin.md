@@ -75,7 +75,7 @@ For how to create a Maven project, see [here](https://maven.apache.org/guides/ge
          <plugin>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-nar-maven-plugin</artifactId>
-            <version>1.2.0</version>
+            <version>1.5.0</version>
             <extensions>true</extensions>
             <configuration>
                <finalName>${project.artifactId}-${project.version}</finalName>
@@ -198,7 +198,7 @@ For how to create a Maven project, see [here](https://maven.apache.org/guides/ge
                <plugin>
                    <groupId>org.apache.nifi</groupId>
                    <artifactId>nifi-nar-maven-plugin</artifactId>
-                   <version>1.2.0</version>
+                   <version>1.5.0</version>
                    <extensions>true</extensions>
                    <configuration>
                        <finalName>${project.artifactId}-${project.version}</finalName>

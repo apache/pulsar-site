@@ -1,4 +1,167 @@
 module.exports = [
+  {
+    "author": "coderzc",
+    "tagName": "v3.3.0",
+    "publishedAt": "2024-06-05T16:26:09Z",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.3.0/",
+    "doc": "/docs/3.3.x",
+    "version": "v3.3.x"
+  },
+  {
+    "author": "lhotari",
+    "tagName": "v3.2.3",
+    "publishedAt": "2024-05-17T13:12:43Z",
+    "vtag": "3.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.2.3/",
+    "doc": "/docs/3.2.x",
+    "version": "v3.2.x"
+  },
+  {
+    "author": "lhotari",
+    "tagName": "v3.2.2",
+    "publishedAt": "2024-04-02T06:08:51Z",
+    "vtag": "3.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.2.2/",
+    "doc": "/docs/3.2.x",
+    "version": ""
+  },
+  {
+    "author": "Technoboy-",
+    "tagName": "v3.2.1",
+    "publishedAt": "2024-03-08T21:11:40Z",
+    "vtag": "3.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.2.1/",
+    "doc": "/docs/3.2.x",
+    "version": ""
+  },
+    {
+    "author": "Technoboy-",
+    "tagName": "v3.2.0",
+    "publishedAt": "2024-02-05T18:34:40Z",
+    "vtag": "3.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.2.0/",
+    "doc": "/docs/3.2.x",
+    "version": ""
+    },
+    {
+        "author": "gaoran10",
+        "tagName": "v3.1.3",
+        "publishedAt": "2024-03-08T19:50:40Z",
+        "vtag": "3.1.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.1.3/",
+        "doc": "/docs/3.1.x",
+        "version": "v3.1.x"
+    },
+    {
+        "author": "AnonHxy",
+        "tagName": "v3.1.2",
+        "publishedAt": "2024-01-02T18:37:40Z",
+        "vtag": "3.1.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.1.2/",
+        "doc": "/docs/3.1.x",
+        "version": ""
+    },
+    {
+        "author": "Technoboy-",
+        "tagName": "v3.1.1",
+        "publishedAt": "2023-10-24T16:37:40Z",
+        "vtag": "3.1.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.1.1/",
+        "doc": "/docs/3.1.x",
+        "version": ""
+    },
+    {
+        "author": "Technoboy-",
+        "tagName": "v3.1.0",
+        "publishedAt": "2023-08-10T16:37:40Z",
+        "vtag": "3.1.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.1.0/",
+        "doc": "/docs/3.1.x",
+        "version": ""
+    },
+    {
+        "author": "lhotari",
+        "tagName": "v3.0.5",
+        "publishedAt": "2024-05-17T13:08:06Z",
+        "vtag": "3.0.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.0.5/",
+        "doc": "/docs/3.0.x",
+        "version": "v3.0.x"
+    },
+    {
+      "author": "lhotari",
+      "tagName": "v3.0.4",
+      "publishedAt": "2024-04-02T04:56:15Z",
+      "vtag": "3.0.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-3.0.4/",
+      "doc": "/docs/3.0.x",
+      "version": ""
+    },
+    {
+      "author": "heesung-sn",
+      "tagName": "v3.0.3",
+      "publishedAt": "2024-03-09T16:53:02Z",
+      "vtag": "3.0.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-3.0.3/",
+      "doc": "/docs/3.0.x",
+      "version": ""
+    },
+    {
+      "author": "poorbarcode",
+      "tagName": "v3.0.2",
+      "publishedAt": "2023-12-03T11:17:00Z",
+      "vtag": "3.0.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-3.0.2/",
+      "doc": "/docs/3.0.x",
+      "version": ""
+    },
+    {
+        "author": "RobertIndie",
+        "tagName": "v3.0.1",
+        "publishedAt": "2023-08-07T15:00:00Z",
+        "vtag": "3.0.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.0.1/",
+        "doc": "/docs/3.0.x",
+        "version": ""
+    },
+    {
+        "author": "RobertIndie",
+        "tagName": "v3.0.0",
+        "publishedAt": "2023-05-02T16:37:40Z",
+        "vtag": "3.0.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-3.0.0/",
+        "releaseBlog": "/blog/2023/05/02/announcing-apache-pulsar-3-0",
+        "doc": "/docs/3.0.x",
+        "version": ""
+    },
+    {
+        "author": "lhotari",
+        "tagName": "v2.11.4",
+        "publishedAt": "2024-03-08T11:47:28Z",
+        "vtag": "2.11.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.4/",
+        "doc": "/docs/2.11.x",
+        "version": "v2.11.x"
+    },
+    {
+      "author": "shibd",
+      "tagName": "v2.11.3",
+      "publishedAt": "2024-01-03T11:20:34Z",
+      "vtag": "2.11.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.11.3/",
+      "doc": "/docs/2.11.x",
+      "version": ""
+    },
+    {
+        "author": "Technoboy-",
+        "tagName": "v2.11.2",
+        "publishedAt": "2023-07-18T16:53:34Z",
+        "vtag": "2.11.x",
+        "releaseNotes": "/release-notes/versioned/pulsar-2.11.2/",
+        "doc": "/docs/2.11.x",
+        "version": ""
+    },
     {
         "author": "Technoboy-",
         "tagName": "v2.11.1",
@@ -6,7 +169,7 @@ module.exports = [
         "vtag": "2.11.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.11.1/",
         "doc": "/docs/2.11.x",
-        "version": "v2.11.x"
+        "version": ""
     },
     {
       "author": "Technoboy-",
@@ -16,7 +179,25 @@ module.exports = [
       "releaseNotes": "/release-notes/versioned/pulsar-2.11.0/",
       "releaseBlog": "/blog/2023/01/20/Apache-Pulsar-2-11-0",
       "doc": "/docs/2.11.x",
-      "version": "v2.11.x"
+      "version": ""
+    },
+    {
+      "author": "liangyepianzhou",
+      "tagName": "v2.10.6",
+      "publishedAt": "2024-03-08T01:53:34Z",
+      "vtag": "2.10.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.10.6/",
+      "doc": "/docs/2.10.x",
+      "version": "v2.10.x"
+    },
+    {
+      "author": "liangyepianzhou",
+      "tagName": "v2.10.5",
+      "publishedAt": "2023-07-30T01:53:34Z",
+      "vtag": "2.10.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.10.5/",
+      "doc": "/docs/2.10.x",
+      "version": ""
     },
     {
         "author": "liangyepianzhou",
@@ -24,9 +205,9 @@ module.exports = [
         "publishedAt": "2023-04-18T01:53:34Z",
         "vtag": "2.10.x",
         "releaseNotes": "/release-notes/versioned/pulsar-2.10.4/",
-        "releaseBlog": "",
+        "releaseBlog": "/blog/2023-04-19-Apache-Pulsar-2-10-4.md",
         "doc": "/docs/2.10.x",
-        "version": "v2.10.x"
+        "version": ""
     },
     {
         "author": "liangyepianzhou",
@@ -69,6 +250,15 @@ module.exports = [
         "version": ""
     },
     {
+      "author": "coderzc",
+      "tagName": "v2.9.5",
+      "publishedAt": "2023-04-20T02:38:21Z",
+      "vtag": "2.9.x",
+      "releaseNotes": "/release-notes/versioned/pulsar-2.9.5/",
+      "doc": "/docs/2.9.x",
+      "version": "v2.9.x"
+    },
+    {
         "author": "congbobo184",
         "tagName": "v2.9.4",
         "publishedAt": "2022-12-28T01:12:20Z",
@@ -76,7 +266,7 @@ module.exports = [
         "releaseNotes": "/release-notes/versioned/pulsar-2.9.4/",
         "releaseBlog": "",
         "doc": "/docs/2.9.x",
-        "version": "v2.9.x"
+        "version": ""
     },
     {
         "author": "mattisonchao",

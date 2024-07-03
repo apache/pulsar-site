@@ -311,14 +311,14 @@ All the cursor acknowledgment state metrics are labeled with the following label
 
 Name	|Type	|Description
 |---|---|---
-brk_ml_cursor_persistLedgerSucceed|Gauge|The number of acknowledgment states that is persistent to a ledger.|
-brk_ml_cursor_persistLedgerErrors|Gauge|The number of ledger errors occurred when acknowledgment states fail to be persistent to the ledger.|
-brk_ml_cursor_persistZookeeperSucceed|Gauge|The number of acknowledgment states that is persistent to ZooKeeper.
-brk_ml_cursor_persistZookeeperErrors|Gauge|The number of ledger errors occurred when acknowledgment states fail to be persistent to ZooKeeper.
-brk_ml_cursor_nonContiguousDeletedMessagesRange|Gauge|The number of non-contiguous deleted messages ranges.
-brk_ml_cursor_writeLedgerSize|Gauge|The size of write to ledger.
-brk_ml_cursor_writeLedgerLogicalSize|Gauge|The size of write to ledger (accounting for without replicas).
-brk_ml_cursor_readLedgerSize|Gauge|The size of read from ledger.
+pulsar_ml_cursor_persistLedgerSucceed|Gauge|The number of acknowledgment states that is persistent to a ledger.|
+pulsar_ml_cursor_persistLedgerErrors|Gauge|The number of ledger errors occurred when acknowledgment states fail to be persistent to the ledger.|
+pulsar_ml_cursor_persistZookeeperSucceed|Gauge|The number of acknowledgment states that is persistent to ZooKeeper.
+pulsar_ml_cursor_persistZookeeperErrors|Gauge|The number of ledger errors occurred when acknowledgment states fail to be persistent to ZooKeeper.
+pulsar_ml_cursor_nonContiguousDeletedMessagesRange|Gauge|The number of non-contiguous deleted messages ranges.
+pulsar_ml_cursor_writeLedgerSize|Gauge|The size of write to ledger.
+pulsar_ml_cursor_writeLedgerLogicalSize|Gauge|The size of write to ledger (accounting for without replicas).
+pulsar_ml_cursor_readLedgerSize|Gauge|The size of read from ledger.
 
 ### LoadBalancing metrics
 All the loadbalancing metrics are labeled with the following labels:
@@ -383,11 +383,11 @@ All the subscription metrics are labeled with the following labels:
 
 | Name | Type | Description |
 |---|---|---|
-| pulsar_subscription_back_log | Gauge | The total backlog of a subscription (entries). |
+| pulsar_subscription_back_log | Gauge | The number of entries (messages/batched-messages) in unacknowledged state for a subscription |
 | pulsar_subscription_back_log_no_delayed | Gauge | The backlog of a subscription that does not contain the delay messages (entries). |
 | pulsar_subscription_delayed | Gauge | The total number of messages are delayed to be dispatched for a subscription (messages). |
 | pulsar_subscription_msg_rate_redeliver | Gauge | The total message rate for message being redelivered (message per second). |
-| pulsar_subscription_unacked_messages | Gauge | The total number of unacknowledged messages of a subscription (messages). |
+| pulsar_subscription_unacked_messages | Gauge | The number of entries (messages/batched-messages) dispatched to consumers and are still unacknowledged |
 | pulsar_subscription_blocked_on_unacked_messages | Gauge | Indicate whether a subscription is blocked on unacknowledged messages or not. <br /> <ul><li>1 means the subscription is blocked on waiting for unacknowledged messages to be acked.</li><li>0 means the subscription is not blocked on waiting for unacknowledged messages to be acked.</li></ul> |
 | pulsar_subscription_msg_rate_out | Gauge | The total message dispatch rate for a subscription (message per second). |
 | pulsar_subscription_msg_throughput_out | Gauge | The total message dispatch throughput for a subscription (byte per second). |
@@ -542,17 +542,17 @@ All the offload metrics are labeled with the following labels:
 - *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
 - *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
 
-| Name                                           | Type    | Description                                                                     |
-|------------------------------------------------|---------|---------------------------------------------------------------------------------|
-| brk_ledgeroffloader_offload_error              | Counter | The number of failed operations to offload.                                     |
-| brk_ledgeroffloader_offload_rate               | Gauge   | The rate of offloading(byte per second).                                        |
-| brk_ledgeroffloader_read_offload_error         | Counter | The number of failed operations to read offload ledgers.                        |
-| brk_ledgeroffloader_read_offload_rate          | Gauge   | The rate of reading entries from offload ledgers(byte per second).              |
-| brk_ledgeroffloader_write_storage_error        | Counter | The number of failed operations to write to storage.                            |
-| brk_ledgeroffloader_read_offload_index_latency | Summary | The latency of reading index from offload ledgers.                              |
-| brk_ledgeroffloader_read_offload_data_latency  | Summary | The latency of reading data from offload ledgers.                               |
-| brk_ledgeroffloader_read_ledger_latency        | Summary | The latency of reading entries from BookKeeper.                                 |
-| brk_ledgeroffloader_delete_offload_ops         | Counter | The total number of successful and failed operations to delete offload ledgers. |
+| Name                                | Type    | Description                                                                     |
+|-------------------------------------|---------|---------------------------------------------------------------------------------|
+| pulsar_ledgeroffloader_offload_error | Counter | The number of failed operations to offload.                                     |
+| pulsar_ledgeroffloader_offload_rate | Gauge   | The rate of offloading(byte per second).                                        |
+| pulsar_ledgeroffloader_read_offload_error | Counter | The number of failed operations to read offload ledgers.                        |
+| pulsar_ledgeroffloader_read_offload_rate | Gauge   | The rate of reading entries from offload ledgers(byte per second).              |
+| pulsar_ledgeroffloader_write_storage_error | Counter | The number of failed operations to write to storage.                            |
+| pulsar_ledgeroffloader_read_offload_index_latency | Summary | The latency of reading index from offload ledgers.                              |
+| pulsar_ledgeroffloader_read_offload_data_latency | Summary | The latency of reading data from offload ledgers.                               |
+| pulsar_ledgeroffloader_read_ledger_latency | Summary | The latency of reading entries from BookKeeper.                                 |
+| pulsar_ledgeroffloader_delete_offload_ops | Counter | The total number of successful and failed operations to delete offload ledgers. |
 
 
 ### Web service executor metrics
@@ -586,6 +586,67 @@ All the metadata store metrics are labeled with the following labels:
 | pulsar_batch_metadata_store_queue_wait_time_ms     | Histogram | The waiting time of batch operations.                                                        |
 | pulsar_batch_metadata_store_batch_execute_time_ms  | Histogram | The duration of the batch execution in milliseconds.                                         |
 | pulsar_batch_metadata_store_batch_size             | Histogram | The number of read/write operations in the batch.                                            |
+
+### JVM Metrics
+
+#### Process Metrics
+| Name                          | Type    | Description                                            |
+|-------------------------------|---------|--------------------------------------------------------|
+| process_cpu_seconds_total     | Counter | Total user and system CPU time spent in seconds.       |
+| process_start_time_seconds    | Gauge   | Start time of the process since unix epoch in seconds. |
+| process_open_fds              | Gauge   | Number of open file descriptors.                       |
+| process_max_fds               | Gauge   | Maximum number of open file descriptors.               |
+| process_virtual_memory_bytes  | Gauge   | Virtual memory size in bytes.                          |
+| process_resident_memory_bytes | Gauge   | Resident memory size in bytes.                         |
+
+#### Memory Metrics
+| Name                                       | Type                                   | Description                                                                                |
+|--------------------------------------------|----------------------------------------|--------------------------------------------------------------------------------------------|
+| jvm_memory_objects_pending_finalization    | Gauge                                  | The number of objects waiting in the finalizer queue.                                      |
+| jvm_memory_bytes_used                      | Gauge                                  | Used bytes of a given JVM memory area.                                                     |
+| jvm_memory_bytes_committed                 | Gauge                                  | Committed (bytes) of a given JVM memory area.                                              |
+| jvm_memory_bytes_max                       | Gauge                                  | Max (bytes) of a given JVM memory area.                                                    |
+| jvm_memory_bytes_init                      | Gauge                                  | Initial bytes of a given JVM memory area.                                                  |
+| jvm_memory_pool_bytes_used                 | Used bytes of a given JVM memory pool. |
+| jvm_memory_pool_bytes_committed            | Gauge                                  | Committed bytes of a given JVM memory pool.                                                |
+| jvm_memory_pool_bytes_max                  | Gauge                                  | Max bytes of a given JVM memory pool.                                                      |
+| jvm_memory_pool_bytes_init                 | Gauge                                  | Initial bytes of a given JVM memory pool.                                                  |
+| jvm_memory_pool_collection_used_bytes      | Gauge                                  | Used bytes after the last collection of a given JVM memory pool.                           |
+| jvm_memory_pool_collection_committed_bytes | Gauge                                  | Committed after last collection bytes of a given JVM memory pool.                          |
+| jvm_memory_pool_collection_max_bytes       | Gauge                                  | Max bytes after the last collection of a given JVM memory pool.                            |
+| jvm_memory_pool_collection_init_bytes      | Gauge                                  | Initial after last collection bytes of a given JVM memory pool.                            |
+| jvm_memory_pool_allocated_bytes_total      | Counter                                | Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously. |
+
+#### Buffer Pools Metrics
+| Name                           | Type  | Description                                |
+|--------------------------------|-------|--------------------------------------------|
+| jvm_buffer_pool_used_bytes     | Gauge | Used bytes of a given JVM buffer pool.     |
+| jvm_buffer_pool_capacity_bytes | Gauge | Bytes capacity of a given JVM buffer pool. |
+| jvm_buffer_pool_used_buffers   | Gauge | Used buffers of a given JVM buffer pool.   |
+
+#### Garbage Collectors Metrics
+| Name                      | Type    | Description                                             |
+|---------------------------|---------|---------------------------------------------------------|
+| jvm_gc_collection_seconds | Summary | Time spent in a given JVM garbage collector in seconds. |
+
+#### Threads Metrics
+| Name                           | Type    | Description                                                                                            |
+|--------------------------------|---------|--------------------------------------------------------------------------------------------------------|
+| jvm_threads_current            | Gauge   | Current thread count of a JVM                                                                          |
+| jvm_threads_daemon             | Gauge   | Daemon thread count of a JVM                                                                           |
+| jvm_threads_peak               | Gauge   | Peak thread count of a JVM                                                                             |
+| jvm_threads_started_total      | Counter | Started thread count of a JVM                                                                          |
+| jvm_threads_deadlocked         | Gauge   | Cycles of JVM-threads that are in deadlock waiting to acquire object monitors or ownable synchronizers |
+| jvm_threads_deadlocked_monitor | Gauge   | Cycles of JVM-threads that are in deadlock waiting to acquire object monitors                          |
+| jvm_threads_state              | Gauge   | Current count of threads by state                                                                      |
+
+#### Classloaders Metrics
+| Name                         | Type    | Description                                                                             |
+|------------------------------|---------|-----------------------------------------------------------------------------------------|
+| jvm_classes_currently_loaded | Gauge   | The number of classes that are currently loaded in the JVM                              |
+| jvm_classes_loaded_total     | Counter | The total number of classes that have been loaded since the JVM has started execution   |
+| jvm_classes_unloaded_total   | Counter | The total number of classes that have been unloaded since the JVM has started execution |
+
 
 ## Pulsar Functions
 

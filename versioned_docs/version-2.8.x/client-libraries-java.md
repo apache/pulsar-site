@@ -93,7 +93,7 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 
 ## Client
 
-You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
+You can instantiate a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
 
 ```java
 
@@ -141,13 +141,13 @@ int|`requestTimeoutMs`|Maximum duration for completing a request |60000
 int|`defaultBackoffIntervalNanos`| Default duration for a backoff interval | TimeUnit.MILLISECONDS.toNanos(100);
 long|`maxBackoffIntervalNanos`|Maximum duration for a backoff interval|TimeUnit.SECONDS.toNanos(30)
 
-Check out the Javadoc for the {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} class for a full list of configurable parameters.
+Check out the Javadoc for the [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) class for a full list of configurable parameters.
 
 > In addition to client-level configuration, you can also apply [producer](#configuring-producers) and [consumer](#configuring-consumers) specific configuration as described in sections below.
 
 ## Producer
 
-In Pulsar, producers write messages to topics. Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object (as in the section [above](#client-configuration)), you can create a {@inject: javadoc:Producer:/client/org/apache/pulsar/client/api/Producer} for a specific Pulsar [topic](reference-terminology.md#topic).
+In Pulsar, producers write messages to topics. Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object (as in the section [above](#client-configuration)), you can create a [Producer](/api/client/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](reference-terminology.md#topic).
 
 ```java
 
@@ -222,7 +222,7 @@ CompressionType|`compressionType`|Message data compression type used by a produc
 
 You can configure parameters if you do not want to use the default configuration.
 
-For a full list, see the Javadoc for the {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder} class. The following is an example.
+For a full list, see the Javadoc for the [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder) class. The following is an example.
 
 ```java
 
@@ -253,7 +253,7 @@ producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
 
 ```
 
-As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+As you can see from the example above, async send operations return a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId) wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Configure messages
 
@@ -274,9 +274,9 @@ You can terminate the builder chain with `sendAsync()` and get a future return.
 
 ## Consumer
 
-In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
+In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
 
-Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object, you can create a {@inject: javadoc:Consumer:/client/org/apache/pulsar/client/api/Consumer} by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-modes).
+Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](/api/client/org/apache/pulsar/client/api/Consumer) by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-modes).
 
 ```java
 
@@ -360,7 +360,7 @@ DeadLetterPolicy|`deadLetterPolicy`|Dead letter policy for consumers.<br /><br /
 boolean|`autoUpdatePartitions`|If `autoUpdatePartitions` is enabled, a consumer subscribes to partition increasement automatically.<br /><br />**Note**: this is only for partitioned consumers.|true
 boolean|`replicateSubscriptionState`|If `replicateSubscriptionState` is enabled, a subscription state is replicated to geo-replicated clusters.|false
 
-You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class.
+You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the [ConsumerBuilder](/api/client/org/apache/pulsar/client/api/ConsumerBuilder) class.
 
 The following is an example.
 
@@ -387,7 +387,7 @@ CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
 
 ```
 
-Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+Async receive operations return a [Message](/api/client/org/apache/pulsar/client/api/Message) wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Batch receive
 
@@ -764,7 +764,7 @@ If the message key is not specified, messages without keys are dispatched to one
 
 ## Reader
 
-With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic and a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}.
+With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create [Reader](/api/client/org/apache/pulsar/client/api/Reader) objects by specifying a topic and a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId).
 
 The following is an example.
 

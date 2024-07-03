@@ -146,7 +146,7 @@ topicLevelPoliciesEnabled=true
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example of the [Java API](client-libraries-java.md). Note the use of the `setReplicationClusters` method when you construct the {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} object:
+The following is an example of the [Java API](client-libraries-java.md). Note the use of the `replicationClusters` method when you construct the [Message](/api/client/org/apache/pulsar/client/api/Message) object:
 
 ```java
 List<String> restrictReplicationTo = Arrays.asList(
@@ -160,7 +160,7 @@ Producer producer = client.newProducer()
 
 producer.newMessage()
         .value("my-payload".getBytes())
-        .setReplicationClusters(restrictReplicationTo)
+        .replicationClusters(restrictReplicationTo)
         .send();
 ```
 
@@ -248,7 +248,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 2. Add the new cluster to your old cluster.
 
    ```shell
-   bin/pulsar-admin cluster create new-cluster
+   bin/pulsar-admin clusters create new-cluster
    ```
 
 3. Add the new cluster to your tenant.

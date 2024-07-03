@@ -2,305 +2,579 @@ module.exports = {
   "pmc": [
     {
       "name": "Sahaya Andrews",
-      "apacheId": "andrews"
+      "apacheId": "andrews",
+      "githubUsername": [
+        "saandrews"
+      ]
+    },
+    {
+      "name": "Baodi Shi",
+      "apacheId": "baodi",
+      "githubUsername": [
+        "shibd"
+      ]
+    },
+    {
+      "name": "Daniel Blankensteiner",
+      "apacheId": "blankensteiner",
+      "githubUsername": [
+        "blankensteiner"
+      ]
     },
     {
       "name": "Bo Cong",
-      "apacheId": "bogong"
+      "apacheId": "bogong",
+      "githubUsername": [
+        "congbobo184"
+      ]
     },
     {
       "name": "Brad McMillen",
-      "apacheId": "bradtm"
+      "apacheId": "bradtm",
+      "githubUsername": []
     },
     {
       "name": "Hang Chen",
-      "apacheId": "chenhang"
+      "apacheId": "chenhang",
+      "githubUsername": [
+        "hangc0276"
+      ]
+    },
+    {
+      "name": "David Jensen",
+      "apacheId": "djensen",
+      "githubUsername": [
+        "entvex"
+      ]
     },
     {
       "name": "Enrico Olivelli",
-      "apacheId": "eolivelli"
+      "apacheId": "eolivelli",
+      "githubUsername": [
+        "eolivelli"
+      ]
     },
     {
       "name": "Jennifer Huang",
-      "apacheId": "hjf"
+      "apacheId": "hjf",
+      "githubUsername": [
+        "jennifer88huang",
+        "Jennifer88huang-zz"
+      ]
     },
     {
       "name": "Hiroyuki Sakai",
-      "apacheId": "hrsakai"
+      "apacheId": "hrsakai",
+      "githubUsername": [
+        "hrsakai"
+      ]
     },
     {
       "name": "Ivan Brendan Kelly",
-      "apacheId": "ivank"
+      "apacheId": "ivank",
+      "githubUsername": [
+        "ivankelly"
+      ]
     },
     {
       "name": "Jai Asher",
-      "apacheId": "jai1"
+      "apacheId": "jai1",
+      "githubUsername": [
+        "jai1"
+      ]
     },
     {
       "name": "Boyang Jerry Peng",
-      "apacheId": "jerrypeng"
+      "apacheId": "jerrypeng",
+      "githubUsername": [
+        "jerrypeng"
+      ]
     },
     {
       "name": "Haiting Jiang",
-      "apacheId": "jianghaiting"
+      "apacheId": "jianghaiting",
+      "githubUsername": [
+        "Jason918"
+      ]
     },
     {
       "name": "Jim Jagielski",
-      "apacheId": "jim"
+      "apacheId": "jim",
+      "githubUsername": [
+        "jimjag"
+      ]
     },
     {
       "name": "Joe Francis",
-      "apacheId": "joef"
+      "apacheId": "joef",
+      "githubUsername": [
+        "joefk"
+      ]
     },
     {
       "name": "Lari Hotari",
-      "apacheId": "lhotari"
+      "apacheId": "lhotari",
+      "githubUsername": [
+        "lhotari"
+      ]
     },
     {
       "name": "Lin Lin",
-      "apacheId": "linlin"
+      "apacheId": "linlin",
+      "githubUsername": [
+        "315157973"
+      ]
     },
     {
       "name": "Liu Yu",
-      "apacheId": "liuyu"
+      "apacheId": "liuyu",
+      "githubUsername": [
+        "Anonymitaet"
+      ]
     },
     {
       "name": "Ludwig Pummer",
-      "apacheId": "ludwigp"
+      "apacheId": "ludwigp",
+      "githubUsername": []
     },
     {
       "name": "Masakazu Kitajo",
-      "apacheId": "maskit"
+      "apacheId": "maskit",
+      "githubUsername": [
+        "maskit"
+      ]
     },
     {
       "name": "Masahiro Sakamoto",
-      "apacheId": "massakam"
+      "apacheId": "massakam",
+      "githubUsername": [
+        "massakam"
+      ]
     },
     {
       "name": "Qiang Zhao",
-      "apacheId": "mattisonchao"
+      "apacheId": "mattisonchao",
+      "githubUsername": [
+        "mattisonchao"
+      ]
     },
     {
       "name": "Michael Marshall",
-      "apacheId": "mmarshall"
+      "apacheId": "mmarshall",
+      "githubUsername": [
+        "michaeljmarshall"
+      ]
     },
     {
       "name": "Matteo Merli",
-      "apacheId": "mmerli"
+      "apacheId": "mmerli",
+      "githubUsername": [
+        "merlimat"
+      ]
     },
     {
       "name": "Nicolò Boschi",
-      "apacheId": "nicoloboschi"
+      "apacheId": "nicoloboschi",
+      "githubUsername": [
+        "nicoloboschi"
+      ]
     },
     {
       "name": "Nozomi Kurihara",
-      "apacheId": "nkurihar"
+      "apacheId": "nkurihar",
+      "githubUsername": [
+        "nkurihar"
+      ]
     },
     {
       "name": "Penghui Li",
-      "apacheId": "penghui"
+      "apacheId": "penghui",
+      "githubUsername": [
+        "codelipenghui"
+      ]
     },
     {
       "name": "P. Taylor Goetz",
-      "apacheId": "ptgoetz"
+      "apacheId": "ptgoetz",
+      "githubUsername": [
+        "ptgoetz"
+      ]
     },
     {
       "name": "Rajan Dhabalia",
-      "apacheId": "rdhabalia"
+      "apacheId": "rdhabalia",
+      "githubUsername": [
+        "rdhabalia"
+      ]
     },
     {
       "name": "Sanjeev Kulkarni",
-      "apacheId": "sanjeevrk"
+      "apacheId": "sanjeevrk",
+      "githubUsername": [
+        "srkukarni"
+      ]
     },
     {
       "name": "Siddharth Boobna",
-      "apacheId": "sboobna"
+      "apacheId": "sboobna",
+      "githubUsername": [
+        "sboobna"
+      ]
     },
     {
       "name": "Sijie Guo",
-      "apacheId": "sijie"
+      "apacheId": "sijie",
+      "githubUsername": [
+        "sijie"
+      ]
     },
     {
       "name": "Sebastián Schepens",
-      "apacheId": "sschepens"
+      "apacheId": "sschepens",
+      "githubUsername": [
+        "sschepens"
+      ]
     },
     {
       "name": "Guo Jiwei",
-      "apacheId": "technoboy"
+      "apacheId": "technoboy",
+      "githubUsername": [
+        "Technoboy-"
+      ]
+    },
+    {
+      "name": "Zili Chen",
+      "apacheId": "tison",
+      "githubUsername": [
+        "tisonkun"
+      ]
     },
     {
       "name": "Francis Christopher Liu",
-      "apacheId": "toffer"
+      "apacheId": "toffer",
+      "githubUsername": [
+        "francisliu"
+      ]
     },
     {
       "name": "David Fisher",
-      "apacheId": "wave"
+      "apacheId": "wave",
+      "githubUsername": [
+        "dave2wave"
+      ]
     },
     {
       "name": "Yunze Xu",
-      "apacheId": "xyz"
+      "apacheId": "xyz",
+      "githubUsername": [
+        "BewareMyPower"
+      ]
+    },
+    {
+      "name": "Yubiao Feng",
+      "apacheId": "yubiao",
+      "githubUsername": []
     },
     {
       "name": "Yuki Shiga",
-      "apacheId": "yushiga"
+      "apacheId": "yushiga",
+      "githubUsername": [
+        "yush1ga"
+      ]
     },
     {
       "name": "Jia Zhai",
-      "apacheId": "zhaijia"
+      "apacheId": "zhaijia",
+      "githubUsername": [
+        "jiazhai",
+        "zhaijack"
+      ]
+    },
+    {
+      "name": "Zike Yang",
+      "apacheId": "zike",
+      "githubUsername": [
+        "RobertIndie"
+      ]
     }
   ],
   "committers": [
     {
       "name": "Ali Ahmed",
-      "apacheId": "aahmed"
+      "apacheId": "aahmed",
+      "githubUsername": [
+        "aahmed-se"
+      ]
     },
     {
       "name": "Addison Higham",
-      "apacheId": "addisonj"
+      "apacheId": "addisonj",
+      "githubUsername": [
+        "addisonj"
+      ]
     },
     {
       "name": "Aloys Zhang",
-      "apacheId": "aloyszhang"
+      "apacheId": "aloyszhang",
+      "githubUsername": [
+        "aloyszhang"
+      ]
+    },
+    {
+      "name": "Asaf Mesika",
+      "apacheId": "amesika",
+      "githubUsername": [
+        "asafm"
+      ]
     },
     {
       "name": "Andrey Yegorov",
-      "apacheId": "ayegorov"
-    },
-    {
-      "name": "Baodi Shi",
-      "apacheId": "baodi"
-    },
-    {
-      "name": "Daniel Blankensteiner",
-      "apacheId": "blankensteiner"
+      "apacheId": "ayegorov",
+      "githubUsername": [
+        "dlg99"
+      ]
     },
     {
       "name": "Christophe Bornet",
-      "apacheId": "cbornet"
+      "apacheId": "cbornet",
+      "githubUsername": [
+        "cbornet"
+      ]
     },
     {
       "name": "Chris Kellogg",
-      "apacheId": "cckellogg"
+      "apacheId": "cckellogg",
+      "githubUsername": [
+        "cckellogg"
+      ]
+    },
+    {
+      "name": "Jie Chen",
+      "apacheId": "crossoverjie",
+      "githubUsername": []
     },
     {
       "name": "Tao Jiuming",
-      "apacheId": "daojun"
+      "apacheId": "daojun",
+      "githubUsername": []
     },
     {
       "name": "davidkj",
-      "apacheId": "davekj"
+      "apacheId": "davekj",
+      "githubUsername": [
+        "david-streamlio"
+      ]
     },
     {
       "name": "Dezhi Liu",
-      "apacheId": "dezhiliu"
+      "apacheId": "dezhiliu",
+      "githubUsername": [
+        "liudezhi2098"
+      ]
     },
     {
       "name": "Yuri Mizushima",
-      "apacheId": "equanz"
+      "apacheId": "equanz",
+      "githubUsername": [
+        "equanz"
+      ]
     },
     {
       "name": "Guangning E",
-      "apacheId": "guangning"
+      "apacheId": "guangning",
+      "githubUsername": [
+        "tuteng"
+      ]
+    },
+    {
+      "name": "Heesung Sohn",
+      "apacheId": "heesung",
+      "githubUsername": [
+        "heesung-sn"
+      ]
+    },
+    {
+      "name": "Yan Zhao",
+      "apacheId": "horizonzy",
+      "githubUsername": [
+        "horizonzy"
+      ]
     },
     {
       "name": "Xiaoyu Hou",
-      "apacheId": "houxiaoyu"
+      "apacheId": "houxiaoyu",
+      "githubUsername": [
+        "AnonHxy"
+      ]
     },
     {
       "name": "Qiang Huang",
-      "apacheId": "huangqiang"
+      "apacheId": "huangqiang",
+      "githubUsername": [
+        "hqebupt"
+      ]
     },
     {
       "name": "Huanli Meng",
-      "apacheId": "huanlimeng"
+      "apacheId": "huanlimeng",
+      "githubUsername": [
+        "Huanli-Meng"
+      ]
     },
     {
       "name": "Jun Ma",
-      "apacheId": "junma"
+      "apacheId": "junma",
+      "githubUsername": []
     },
     {
       "name": "Yuto Furuta",
-      "apacheId": "k2la"
+      "apacheId": "k2la",
+      "githubUsername": [
+        "k2la"
+      ]
     },
     {
       "name": "Kai Wang",
-      "apacheId": "kwang"
+      "apacheId": "kwang",
+      "githubUsername": [
+        "Demogorgon314"
+      ]
     },
     {
       "name": "Lin Chen",
-      "apacheId": "lordcheng10"
+      "apacheId": "lordcheng10",
+      "githubUsername": [
+        "lordcheng10"
+      ]
     },
     {
       "name": "Neng Lu",
-      "apacheId": "nlu90"
+      "apacheId": "nlu90",
+      "githubUsername": [
+        "nlu90"
+      ]
+    },
+    {
+      "name": "Chris Bono",
+      "apacheId": "onobc",
+      "githubUsername": [
+        "onobc"
+      ]
     },
     {
       "name": "Rui Fu",
-      "apacheId": "rfu"
+      "apacheId": "rfu",
+      "githubUsername": [
+        "freeznet"
+      ]
     },
     {
       "name": "Ran Gao",
-      "apacheId": "rgao"
+      "apacheId": "rgao",
+      "githubUsername": [
+        "gaoran10"
+      ]
     },
     {
       "name": "Xiaolong Ran",
-      "apacheId": "rxl"
+      "apacheId": "rxl",
+      "githubUsername": [
+        "wolfstudy"
+      ]
     },
     {
       "name": "ZhangJian He",
-      "apacheId": "shoothzj"
+      "apacheId": "shoothzj",
+      "githubUsername": [
+        "shoothzj"
+      ]
     },
     {
       "name": "Fangbin Sun",
-      "apacheId": "sunfangbin"
+      "apacheId": "sunfangbin",
+      "githubUsername": [
+        "murong00"
+      ]
     },
     {
-      "name": "Zili Chen",
-      "apacheId": "tison"
+      "name": "WenZhi Feng",
+      "apacheId": "thetumbled",
+      "githubUsername": []
     },
     {
       "name": "Li Li",
-      "apacheId": "urfree"
+      "apacheId": "urfree",
+      "githubUsername": [
+        "urfreespace"
+      ]
+    },
+    {
+      "name": "Kiryl Valkovich",
+      "apacheId": "visortelle",
+      "githubUsername": [
+        "visortelle"
+      ]
+    },
+    {
+      "name": "Vineeth Polamreddy",
+      "apacheId": "vpolamreddy",
+      "githubUsername": []
     },
     {
       "name": "Xiangying Meng",
-      "apacheId": "xiangying"
+      "apacheId": "xiangying",
+      "githubUsername": [
+        "liangyepianzhou"
+      ]
     },
     {
       "name": "Marvin Cai",
-      "apacheId": "xxc"
+      "apacheId": "xxc",
+      "githubUsername": [
+        "MarvinCai"
+      ]
     },
     {
       "name": "Yijie Shen",
-      "apacheId": "yjshen"
+      "apacheId": "yjshen",
+      "githubUsername": [
+        "yjshen"
+      ]
     },
     {
       "name": "Yong Zhang",
-      "apacheId": "yong"
-    },
-    {
-      "name": "Yubiao Feng",
-      "apacheId": "yubiao"
+      "apacheId": "yong",
+      "githubUsername": [
+        "zymap"
+      ]
     },
     {
       "name": "Ruguo Yu",
-      "apacheId": "yuruguo"
+      "apacheId": "yuruguo",
+      "githubUsername": [
+        "yuruguo"
+      ]
     },
     {
       "name": "Gavin Gao",
-      "apacheId": "zhangmingao"
+      "apacheId": "zhangmingao",
+      "githubUsername": [
+        "gaozhangmin"
+      ]
     },
     {
       "name": "Cong Zhao",
-      "apacheId": "zhaocong"
-    },
-    {
-      "name": "Zike Yang",
-      "apacheId": "zike"
+      "apacheId": "zhaocong",
+      "githubUsername": [
+        "coderzc"
+      ]
     },
     {
       "name": "Zixuan Liu",
-      "apacheId": "zixuan"
+      "apacheId": "zixuan",
+      "githubUsername": [
+        "nodece"
+      ]
     }
   ]
 };

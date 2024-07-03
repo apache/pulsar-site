@@ -87,7 +87,7 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 
 ## Client
 
-You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
+You can instantiate a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
 
 ```java
 PulsarClient client = PulsarClient.builder()
@@ -138,7 +138,7 @@ If you create a client, you can use the `loadConf` configuration. The following 
 `socks5ProxyPassword`|string|SOCKS5 proxy password | None
 `connectionMaxIdleSeconds`|int|Release the connection if it is not used for more than `connectionMaxIdleSeconds` seconds.If `connectionMaxIdleSeconds` < 0, disabled the feature that auto release the idle connection|180
 
-Check out the Javadoc for the {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} class for a full list of configurable parameters.
+Check out the Javadoc for the [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) class for a full list of configurable parameters.
 
 > In addition to client-level configuration, you can also apply [producer](#configure-producer) and [consumer](#configure-consumer) specific configuration as described in sections below.
 
@@ -163,7 +163,7 @@ Dpulsar.allocator.out_of_memory_policy=ThrowException
 
 ## Producer
 
-In Pulsar, producers write messages to topics. Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object (as in the section [above](#client-configuration)), you can create a {@inject: javadoc:Producer:/client/org/apache/pulsar/client/api/Producer} for a specific Pulsar [topic](reference-terminology.md#topic).
+In Pulsar, producers write messages to topics. Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object (as in the section [above](#client-configuration)), you can create a [Producer](/api/client/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](reference-terminology.md#topic).
 
 ```java
 Producer<byte[]> producer = client.newProducer()
@@ -230,7 +230,7 @@ Name| Type |  <div>Description</div>|  Default
 
 You can configure parameters if you do not want to use the default configuration.
 
-For a full list, see the Javadoc for the {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder} class. The following is an example.
+For a full list, see the Javadoc for the [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder) class. The following is an example.
 
 ```java
 Producer<byte[]> producer = client.newProducer()
@@ -251,13 +251,13 @@ You can publish messages to partitioned topics using Pulsar client libraries. Wh
 
 You can specify the routing mode in the `ProducerConfiguration` object used to configure your producer. The routing mode determines which partition (internal topic) each message should be published to.
 
-The following {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} options are available.
+The following [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) options are available.
 
 Mode     | Description
 :--------|:------------
 `RoundRobinPartition` | If no key is provided, the producer publishes messages across all partitions in the round-robin policy to achieve the maximum throughput. Round-robin is not done per individual message. It is set to the same boundary of batching delay to ensure that batching is effective. If a key is specified on the message, the partitioned producer hashes the key and assigns the message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer picks a single partition randomly and publishes all messages into that partition. If a key is specified on the message, the partitioned producer hashes the key and assigns the message to a particular partition.
-`CustomPartition`     | Use custom message router implementation that is called to determine the partition for a particular message. You can create a custom routing mode by using the Java client and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
+`CustomPartition`     | Use custom message router implementation that is called to determine the partition for a particular message. You can create a custom routing mode by using the Java client and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.
 
 The following is an example:
 
@@ -275,7 +275,7 @@ producer.send("Partitioned topic message".getBytes());
 
 #### Custom message router
 
-To use a custom message router, you need to provide an implementation of the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface, which has just one `choosePartition` method:
+To use a custom message router, you need to provide an implementation of the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
 
 ```java
 public interface MessageRouter extends Serializable {
@@ -336,7 +336,7 @@ producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
 });
 ```
 
-As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+As you can see from the example above, async send operations return a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId) wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Configure messages
 
@@ -416,9 +416,9 @@ Multiple interceptors apply in the order they are passed to the `intercept` meth
 
 ## Consumer
 
-In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
+In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
 
-Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object, you can create a {@inject: javadoc:Consumer:/client/org/apache/pulsar/client/api/Consumer} by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
+Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](/api/client/org/apache/pulsar/client/api/Consumer) by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
 
 ```java
 Consumer consumer = client.newConsumer()
@@ -502,7 +502,7 @@ When you create a consumer, you can use the `loadConf` configuration. The follow
 `expireTimeOfIncompleteChunkedMessageMillis`|long|The time interval to expire incomplete chunks if a consumer fails to receive all the chunks in the specified time period. The default value is 1 minute. | 60000
 `ackReceiptEnabled`|boolean| If `ackReceiptEnabled` is enabled, ACK returns a receipt. The client got the ack receipt means the broker has processed the ack request, but if without transaction, the broker does not guarantee persistence of acknowledgments, which means the messages still have a chance to be redelivered after the broker crashes. With the transaction, the client can only get the receipt after the acknowledgments have been persistent. | false
 
-You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class.
+You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the [ConsumerBuilder](/api/client/org/apache/pulsar/client/api/ConsumerBuilder) class.
 
 The following is an example.
 
@@ -525,7 +525,7 @@ The following is an example.
 CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
 ```
 
-Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+Async receive operations return a [Message](/api/client/org/apache/pulsar/client/api/Message) wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Batch receive
 
@@ -990,7 +990,7 @@ If you are using multiple interceptors, they apply in the order they are passed 
 
 ## Reader
 
-With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic and a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}.
+With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create [Reader](/api/client/org/apache/pulsar/client/api/Reader) objects by specifying a topic and a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId).
 
 The following is an example.
 
@@ -1208,6 +1208,12 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
     String primaryUrl = "pulsar+ssl://localhost:6651";
     String secondaryUrl = "pulsar+ssl://localhost:6661";
 
+    String primaryTlsTrustCertsFilePath = "primary/path";
+    Authentication primaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/primary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/primary-role.key-pk8.pem");
+
     String secondaryTlsTrustCertsFilePath = "secondary/path";
     Authentication secondaryAuthentication = AuthenticationFactory.create(
         "org.apache.pulsar.client.impl.auth.AuthenticationTls",
@@ -1232,6 +1238,9 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(failover)
+        .authentication(primaryAuthentication)
+        .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
     failover.initialize(pulsarClient);
@@ -1273,7 +1282,9 @@ public PulsarClient getControlledFailoverClient() throws IOException {
         .urlProviderHeader(header)
         .build();
 
-    PulsarClient pulsarClient = PulsarClient.builder().build();
+    PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(provider)
+        .build();
 
     provider.initialize(pulsarClient);
     return pulsarClient;

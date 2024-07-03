@@ -16,8 +16,9 @@ RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.\d+|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.\d+/.*|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x/.*|"
-RewriteRule "^docs/(.*)$" "/docs/2.11.x/$1" [R=301,DPI,L]
+RewriteRule "^docs/(.*)$" "/docs/3.3.x/$1" [R=301,DPI,L]
 
+RewriteRule "^docs/(.+/)?deploy-dcos/?$" "/docs/$1install-deploy-upgrade-landing" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?develop-binary-protocol/?$" "/docs/$1developing-binary-protocol" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?administration-dashboard/?$" "/docs/$1administration-pulsar-manager" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?security-tls-keystore/?$" "/docs/$1security-tls-authentication" [R=301,DPI,L]

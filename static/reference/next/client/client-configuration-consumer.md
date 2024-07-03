@@ -154,7 +154,7 @@ When an application uses {@link Consumer#negativeAcknowledge(Message)}, failed m
 ### patternAutoDiscoveryPeriod
 Topic auto discovery period when using a pattern for topic's consumer.
 
-The default and minimum value is 1 minute.
+The default value is 1 minute, with a minimum of 1 second.
 
 **Type**: `int`
 
@@ -273,7 +273,7 @@ Using an higher `tickDurationMillis` reduces the memory overhead to track messag
 **Default**: `1000`
 
 ### topicsPattern
-Topic pattern
+The regexp for the topic name(not contains partition suffix).
 
 **Type**: `java.util.regex.Pattern`
 

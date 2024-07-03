@@ -131,13 +131,16 @@ message CommandConnect {
 ```
 
 Fields:
- * `client_version` → String based identifier. Format is not enforced
+ * `client_version` → String based identifier. Format is not enforced.
  * `auth_method_name` → *(optional)* Name of the authentication plugin if auth
-   enabled
- * `auth_data` → *(optional)* Plugin specific authentication data
+   enabled.
+ * `auth_data` → *(optional)* Plugin specific authentication data.
  * `protocol_version` → Indicates the protocol version supported by the
    client. Broker will not send commands introduced in newer revisions of the
-   protocol. Broker might be enforcing a minimum version
+   protocol. Broker might be enforcing a minimum version.
+ * `original_principal`: Added by the proxy. Regular clients are not expected to supply this value. When set and when authorization is enabled, the `auth_data` must map to one of the `proxyRoles` in the `broker.conf` file.
+ * `original_auth_method`: Added by the proxy. Regular clients are not expected to supply this value.
+ * `original_auth_data`: Added by the proxy when configured to do so. Regular clients are not expected to supply this value.
 
 ```protobuf
 

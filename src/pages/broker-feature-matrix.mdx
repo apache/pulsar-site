@@ -1,0 +1,37 @@
+---
+id: pulsar-broker-feature-matrix
+title: Pulsar Broker Feature Matrix
+---
+
+# Pulsar Broker Feature Matrix
+
+import versions from "../../versions.json";
+import {docUrl} from "../utils";
+import brokerFeatures from "../../data/broker-features";
+
+<table>
+    <thead>
+    <tr>
+        <th><b>Feature</b></th>
+        <th><b>Experimental Since</b></th>
+        <th><b>Beta Since</b></th>
+        <th><b>Stable Since</b></th>
+        <th><b>Document</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    {brokerFeatures.map(data => (
+        <tr key={data.feature}>
+            <td>{data.feature}</td>
+            <td>{data.experimentalSince}</td>
+            <td>{data.betaSince}</td>
+            <td>{data.stableSince}</td>
+            <td>
+                <ul>{data.document.map(doc => (
+                    <li><a href={doc.link.startsWith("https://") ? doc.link: docUrl(doc.link, "", versions[0])}>{doc.text}</a></li>
+                ))}</ul>
+            </td>
+        </tr>
+    ))}
+    </tbody>
+</table>

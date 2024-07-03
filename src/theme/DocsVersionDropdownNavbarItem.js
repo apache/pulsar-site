@@ -7,27 +7,37 @@
 import React from "react";
 import DefaultNavbarItem from "@theme/NavbarItem/DefaultNavbarItem";
 import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
-import {useActiveDocContext, useLatestVersion,} from "@docusaurus/plugin-content-docs/client";
-import {useDocsPreferredVersion} from "@docusaurus/theme-common";
-import {translate} from "@docusaurus/Translate";
+import { useActiveDocContext, useLatestVersion, } from "@docusaurus/plugin-content-docs/client";
+import { useDocsPreferredVersion } from "@docusaurus/theme-common";
+import { translate } from "@docusaurus/Translate";
 
-let versions = require("../../versions.json");
-versions = [{ name: "current", label: "Next", path: "/docs/next" }]
-  .concat(
-    versions.map((item) => {
-      return {
-        label: item,
-        name: item,
-        path: "/docs/" + item,
-      };
-    })
-  )
-  .slice(0, 5)
-  .concat({
+const versions = [
+  {
+    name: "current",
+    label: "Next",
+    path: "/docs/next"
+  },
+  {
+    label: '3.3.x',
+    name: '3.3.x',
+    path: `/docs/3.3.x`,
+  },
+  {
+    label: '3.2.x',
+    name: '3.2.x',
+    path: `/docs/3.2.x`,
+  },
+  {
+    label: '3.0.x LTS',
+    name: '3.0.x',
+    path: `/docs/3.0.x`,
+  },
+  {
     name: "others",
     label: "Others",
     path: "/versions",
-  });
+  }
+];
 
 const getVersionMainDoc = (version) =>
   version.docs.find((doc) => doc.id === version.mainDocId);
@@ -74,11 +84,11 @@ export default function DocsVersionDropdownNavbarItem({
   const dropdownLabel =
     mobile && items.length > 1
       ? translate({
-          id: "theme.navbar.mobileVersionsDropdown.label",
-          message: "Versions",
-          description:
-            "The label for the navbar versions dropdown on mobile view",
-        })
+        id: "theme.navbar.mobileVersionsDropdown.label",
+        message: "Versions",
+        description:
+          "The label for the navbar versions dropdown on mobile view",
+      })
       : dropdownVersion.label;
   const dropdownTo =
     mobile && items.length > 1

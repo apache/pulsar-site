@@ -19,7 +19,7 @@ $ pulsar-admin schemas subcommand
 * `upload`
 * `extract`
 
-## <em>get</em>
+## get
 
 Get the schema for a topic
 
@@ -38,7 +38,7 @@ Options
 | `-a, --all-version` | all version | false   |
 | `-v, --version`     | version     | null    |
 
-## <em>delete</em>
+## delete
 
 Delete the latest schema for a topic
 
@@ -50,7 +50,7 @@ Delete the latest schema for a topic
 $ pulsar-admin schemas delete options
 ```
 
-## <em>upload</em>
+## upload
 
 Update the schema for a topic
 
@@ -68,7 +68,7 @@ Options
 |------------------|-------------|---------|
 | `-f, --filename` | filename    | null    |
 
-## <em>extract</em>
+## extract
 
 Provide the schema via a topic
 

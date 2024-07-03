@@ -1,8 +1,8 @@
-## `pulsar-shell`
+# `pulsar-shell`
 
 [Pulsar shell](https://pulsar.apache.org/docs/next/administration-pulsar-shell) tool.
 
-### Interactive mode
+## Interactive mode
 
 Usage
 
@@ -17,7 +17,7 @@ pulsar-shell
 | `-h`, `--help`     | Show this help.                                                            | |
 
 
-### Non interactive mode
+## Non interactive mode
 
 Usage
 
@@ -44,11 +44,11 @@ Commands
 * `config`
 
 
-### `config`
+## config
 
 Manage shell configurations.
 
-#### `use`
+### use
 
 Use a specific configuration for next commands.
 
@@ -56,7 +56,7 @@ Use a specific configuration for next commands.
 default(localhost)> config use mycluster
 ```
 
-#### `create`
+### create
 
 Create a new configuration.
 
@@ -70,7 +70,7 @@ default(localhost)> config create --file ./conf/client.conf mycluster
 | `--url`  | URL of the config.       |  |
 | `--value`  | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |  |
 
-#### `clone`
+### clone
 
 Create a new configuration cloning an existing one.
 
@@ -82,7 +82,7 @@ default(localhost)> config clone mycluster --name mycluster2
 |----------|--------------------------|-----------------|
 | `--name` | Name of the new config.  |                 | 
 
-#### `update`
+### update
 
 Update an existing configuration.
 
@@ -96,7 +96,7 @@ default(localhost)> config update --file ./conf/client.conf mycluster
 | `--url`  | URL of the config.       |  |
 | `--value`  | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |  |
 
-#### `set-property`
+### set-property
 
 Set a value for a specified configuration property.
 
@@ -110,7 +110,7 @@ default(localhost)> config set-property -p webServiceUrl -v http://<cluster-host
 | `-v`, `--value`    | New value for the property. |  |
 
 
-#### `get-property`
+### get-property
 
 Get the value for a specified configuration property.
 
@@ -123,7 +123,7 @@ default(localhost)> config get-property -p webServiceUrl mycluster
 | `-p`, `--property` | Property name to update.    |  | 
 
 
-#### `view`
+### view
 
 View details of a config.
 
@@ -131,7 +131,7 @@ View details of a config.
 default(localhost)> config view mycluster
 ```
 
-#### `delete`
+### delete
 
 Delete a config. You can't delete a config if it's currently used.
 
@@ -140,7 +140,7 @@ default(localhost)> config delete mycluster
 ```
 
 
-#### `list`
+### list
 
 List all the configuration names.
 

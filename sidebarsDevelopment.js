@@ -8,6 +8,8 @@ const sidebars = {
             items: [
                 'setup-building',
                 'setup-ide',
+                'setup-git',
+                'setup-debugging'
             ]
         },
         {

@@ -2,6 +2,7 @@
 id: deploy-bare-metal
 title: Deploy a cluster on bare metal
 sidebar_label: "Bare metal"
+description: Learn to deploy a Pulsar cluster on bare metal.
 ---
 
 :::tip
@@ -12,19 +13,15 @@ sidebar_label: "Bare metal"
 
 :::
 
-Deploying a Pulsar cluster consists of the following steps:
-
-1. Deploy a [ZooKeeper](#deploy-a-zookeeper-cluster) cluster (optional)
-2. Initialize [cluster metadata](#initialize-cluster-metadata)
-3. Deploy a [BookKeeper](#deploy-a-bookkeeper-cluster) cluster
-4. Deploy one or more Pulsar [brokers](#deploy-pulsar-brokers)
+Deploying a Pulsar cluster on bare metal consists of the following steps.
 
 ## Preparation
 
 ### Requirements
 
-Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK.
-For the runtime Java version, please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
+Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**.
+
+Also, you need the proper 64-bit JRE/JDK version installed. Please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
 
 :::tip
 
@@ -50,7 +47,7 @@ To run Pulsar on bare metal, the following configuration is recommended:
 
 The following is a diagram showing the basic setup:
 
-![alt-text](/assets/pulsar-basic-setup.png)
+![Basic setup of Pulsar cluster](/assets/pulsar-basic-setup.png)
 
 In this diagram, connecting clients need to communicate with the Pulsar cluster using a single URL. In this case, `pulsar-cluster.acme.com` abstracts over all of the message-handling brokers. Pulsar message brokers run on machines alongside BookKeeper bookies; brokers and bookies, in turn, rely on ZooKeeper.
 
@@ -58,18 +55,18 @@ In this diagram, connecting clients need to communicate with the Pulsar cluster 
 
 If you deploy a Pulsar cluster, keep in mind the following basic better choices when you do the capacity planning.
 
-#### ZooKeeper
+##### ZooKeeper
 
 For machines running ZooKeeper, it is recommended to use less powerful machines or VMs. Pulsar uses ZooKeeper only for periodic coordination-related and configuration-related tasks, not for basic operations. If you run Pulsar on [Amazon Web Services](https://aws.amazon.com/) (AWS), for example, a [t2.small](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html) instance might likely suffice.
 
-#### Bookies and Brokers
+##### Bookies and Brokers
 
 For machines running a bookie and a Pulsar broker, more powerful machines are required. For an AWS deployment, for example, [i3.4xlarge](https://aws.amazon.com/blogs/aws/now-available-i3-instances-for-demanding-io-intensive-applications/) instances may be appropriate. On those machines you can use the following:
 
 * Fast CPUs and 10Gbps [NIC](https://en.wikipedia.org/wiki/Network_interface_controller) (for Pulsar brokers)
 * Small and fast [solid-state drives](https://en.wikipedia.org/wiki/Solid-state_drive) (SSDs) or [hard disk drives](https://en.wikipedia.org/wiki/Hard_disk_drive) (HDDs) with a [RAID](https://en.wikipedia.org/wiki/RAID) controller and a battery-backed write cache (for BookKeeper bookies)
 
-#### Hardware recommendations
+##### Hardware recommendations
 
 To start a Pulsar instance, below are the minimum and the recommended hardware settings.
 
@@ -91,7 +88,7 @@ A cluster consists of 3 broker nodes, 3 bookie nodes, and 3 ZooKeeper nodes. The
    Bookie|4|8GB|Journal: 256 GB<br /><br />PD-SSDLedger: 2 TB, PD-STANDARD|Write throughput: 75 MB/s<br /><br />Read throughput: 75 MB/s<br /><br />|Write rate: 7,500 entries/s<br /><br />Read rate: 7,500 entries/s
    ZooKeeper|1|2 GB|Log: 64 GB, PD-SSD<br /><br />Data: 256 GB, PD-STANDARD|/|/
 
-## Install the Pulsar binary package
+### Install the Pulsar binary package
 
 > You need to install the Pulsar binary package on each machine in the cluster, including machines running ZooKeeper and BookKeeper.
 
@@ -124,7 +121,7 @@ Directory | Contains
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses
 `logs` | Logs that the installation creates
 
-## Install Built-in Connectors (optional)
+### Install Built-in Connectors (optional)
 
 To use `built-in` connectors, you need to download the connectors tarball release on every broker node in one of the following ways :
 
@@ -152,7 +149,7 @@ pulsar-io-aerospike-@pulsar:version@.nar
 ...
 ```
 
-## Install Tiered Storage Offloaders (optional)
+### Install Tiered Storage Offloaders (optional)
 
 To use tiered storage offloaders, you need to download the offloaders tarball release on every broker node in one of the following ways:
 
@@ -185,7 +182,7 @@ tiered-storage-jcloud-@pulsar:version@.nar
 For more details of how to configure tiered storage feature, you can refer to the [Tiered storage cookbook](cookbooks-tiered-storage.md)
 
 
-## Deploy a ZooKeeper cluster
+## Step 1: Deploy a ZooKeeper cluster
 
 :::note
 
@@ -237,7 +234,7 @@ bin/pulsar-daemon start zookeeper
 > If you plan to deploy Zookeeper with the Bookie on the same node, you need to start zookeeper by using different stats
 > port by configuring the `metricsProvider.httpPort` in zookeeper.conf.
 
-## Initialize cluster metadata
+## Step 2: Initialize cluster metadata
 
 :::note
 
@@ -296,15 +293,19 @@ You can obtain the metadata service URI of the existing BookKeeper cluster by us
 
 :::
 
-## Deploy a BookKeeper cluster
+## Step 3: Deploy a BookKeeper cluster
 
 [BookKeeper](https://bookkeeper.apache.org) handles all persistent data storage in Pulsar. You need to deploy a cluster of BookKeeper bookies to use Pulsar. You can choose to run a **3-bookie BookKeeper cluster**.
 
 You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important step in configuring bookies for our purposes here is ensuring that `metadataServiceUri` is set to the URI for the ZooKeeper cluster. The following is an example:
 
 ```properties
-metadataServiceUri=zk://zk1.us-west.example.com:2181/ledgers
+metadataServiceUri=zk://zk1.us-west.example.com:2181;zk2.us-west.example.com:2181;zk3.us-west.example.com:2181/ledgers
 ```
+
+Which using `;` as separator in `metadataServiceUri`
+
+:::
 
 Once you appropriately modify the `metadataServiceUri` parameter, you can make any other configuration changes that you require. You can find a full listing of the available BookKeeper configuration parameters [here](reference-configuration.md#bookkeeper). However, consulting the [BookKeeper documentation](https://bookkeeper.apache.org/docs/next/reference/config/) for a more in-depth guide might be a better choice.
 
@@ -339,7 +340,7 @@ bin/bookkeeper shell simpletest --ensemble <num-bookies> --writeQuorum <num-book
 This command creates a `num-bookies` sized ledger on the cluster, writes a few entries, and finally deletes the ledger.
 
 
-## Deploy Pulsar brokers
+## Step 4: Deploy Pulsar brokers
 
 Pulsar brokers are the last thing you need to deploy in your Pulsar cluster. Brokers handle Pulsar messages and provide the administrative interface of Pulsar. A good choice is to run **3 brokers**, one for each machine that already runs a BookKeeper bookie.
 
@@ -472,7 +473,7 @@ Create an ExclamationFunction `exclamation`.
 
 ```bash
 bin/pulsar-admin functions create \
-    --jar examples/api-examples.jar \
+    --jar $PWD/examples/api-examples.jar \
     --classname org.apache.pulsar.functions.api.examples.ExclamationFunction \
     --inputs persistent://public/default/exclamation-input \
     --output persistent://public/default/exclamation-output \

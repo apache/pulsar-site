@@ -8,7 +8,7 @@ sidebar_label: Alluxio sink connector
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 ## Sink
 

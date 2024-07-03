@@ -8,7 +8,7 @@ sidebar_label: "AWS DynamoDB source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The DynamoDB source connector pulls data from DynamoDB table streams and persists data into Pulsar.
 

@@ -106,7 +106,7 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 
 ## Client
 
-You can instantiate a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
+You can instantiate a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object using just a URL for the target Pulsar [cluster](reference-terminology.md#cluster) like this:
 
 ```java
 
@@ -157,7 +157,7 @@ If you create a client, you can use the `loadConf` configuration. The following 
 `socks5ProxyUsername`|string|SOCKS5 proxy username | None
 `socks5ProxyPassword`|string|SOCKS5 proxy password | None
 
-Check out the Javadoc for the {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} class for a full list of configurable parameters.
+Check out the Javadoc for the [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) class for a full list of configurable parameters.
 
 > In addition to client-level configuration, you can also apply [producer](#configure-producer) and [consumer](#configure-consumer) specific configuration as described in sections below.
 
@@ -346,6 +346,12 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
     String primaryUrl = "pulsar+ssl://localhost:6651";
     String secondaryUrl = "pulsar+ssl://localhost:6661";
 
+    String primaryTlsTrustCertsFilePath = "primary/path";
+    Authentication primaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/primary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/primary-role.key-pk8.pem");
+
     String secondaryTlsTrustCertsFilePath = "secondary/path";
     Authentication secondaryAuthentication = AuthenticationFactory.create(
         "org.apache.pulsar.client.impl.auth.AuthenticationTls",
@@ -370,6 +376,9 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(failover)
+        .authentication(primaryAuthentication)
+        .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
     failover.initialize(pulsarClient);
@@ -411,7 +420,9 @@ public PulsarClient getControlledFailoverClient() throws IOException {
         .urlProviderHeader(header)
         .build();
 
-    PulsarClient pulsarClient = PulsarClient.builder().build();
+    PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(provider)
+        .build();
 
     provider.initialize(pulsarClient);
     return pulsarClient;
@@ -510,7 +521,7 @@ In automatic failover cluster, the primary cluster and backup cluster are aware 
 
 ## Producer
 
-In Pulsar, producers write messages to topics. Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object (as in the section [above](#client-configuration)), you can create a {@inject: javadoc:Producer:/client/org/apache/pulsar/client/api/Producer} for a specific Pulsar [topic](reference-terminology.md#topic).
+In Pulsar, producers write messages to topics. Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object (as in the section [above](#client-configuration)), you can create a [Producer](/api/client/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](reference-terminology.md#topic).
 
 ```java
 
@@ -587,7 +598,7 @@ Name| Type |  <div>Description</div>|  Default
 
 You can configure parameters if you do not want to use the default configuration.
 
-For a full list, see the Javadoc for the {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder} class. The following is an example.
+For a full list, see the Javadoc for the [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder) class. The following is an example.
 
 ```java
 
@@ -618,7 +629,7 @@ producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
 
 ```
 
-As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+As you can see from the example above, async send operations return a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId) wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Configure messages
 
@@ -699,9 +710,9 @@ If you are using multiple interceptors, they apply in the order they are passed 
 
 ## Consumer
 
-In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
+In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
 
-Once you've instantiated a {@inject: javadoc:PulsarClient:/client/org/apache/pulsar/client/api/PulsarClient} object, you can create a {@inject: javadoc:Consumer:/client/org/apache/pulsar/client/api/Consumer} by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
+Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](/api/client/org/apache/pulsar/client/api/Consumer) by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
 
 ```java
 
@@ -790,7 +801,7 @@ When you create a consumer, you can use the `loadConf` configuration. The follow
 `maxPendingChunkedMessage`|int| The maximum size of a queue holding pending chunked messages. When the threshold is reached, the consumer drops pending messages to optimize memory utilization.|10
 `expireTimeOfIncompleteChunkedMessageMillis`|long|The time interval to expire incomplete chunks if a consumer fails to receive all the chunks in the specified time period. The default value is 1 minute. | 60000
 
-You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the {@inject: javadoc:ConsumerBuilder:/client/org/apache/pulsar/client/api/ConsumerBuilder} class.
+You can configure parameters if you do not want to use the default configuration. For a full list, see the Javadoc for the [ConsumerBuilder](/api/client/org/apache/pulsar/client/api/ConsumerBuilder) class.
 
 The following is an example.
 
@@ -817,7 +828,7 @@ CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
 
 ```
 
-Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+Async receive operations return a [Message](/api/client/org/apache/pulsar/client/api/Message) wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Batch receive
 
@@ -1329,7 +1340,7 @@ If you are using multiple interceptors, they apply in the order they are passed 
 
 ## Reader
 
-With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic and a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}.
+With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create [Reader](/api/client/org/apache/pulsar/client/api/Reader) objects by specifying a topic and a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId).
 
 The following is an example.
 

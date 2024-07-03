@@ -14,7 +14,7 @@ $ pulsar broker-tool subcommand
 
 * `load-report`
 
-## <em>load-report</em>
+## load-report
 
 ### Usage
 

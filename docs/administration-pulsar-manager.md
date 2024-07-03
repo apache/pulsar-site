@@ -2,29 +2,34 @@
 id: administration-pulsar-manager
 title: Pulsar Manager
 sidebar_label: "Pulsar Manager"
+description: Get a comprehensive understanding of concepts, installation, and configuration of Pulsar Manager.
 ---
 
 Pulsar Manager is a web-based GUI management and monitoring tool that helps administrators and users manage and monitor tenants, namespaces, topics, subscriptions, brokers, clusters, and so on, and supports dynamic configuration of multiple environments.
 
 ## Install
 
-### Quick Install
+To install Pulsar Manager, complete the following steps.
+
+### 1. Quick Install
+
 The easiest way to use the Pulsar Manager is to run it inside a Docker container.
 
 ```shell
-docker pull apachepulsar/pulsar-manager:v0.3.0
+docker pull apachepulsar/pulsar-manager:latest
 docker run -it \
   -p 9527:9527 -p 7750:7750 \
   -e SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties \
-  apachepulsar/pulsar-manager:v0.3.0
+  apachepulsar/pulsar-manager:latest
 ```
 
 * Pulsar Manager is divided into front-end and back-end, the front-end service port is `9527` and the back-end service port is `7750`.
 * `SPRING_CONFIGURATION_FILE`: Default configuration file for spring.
 * By default, Pulsar Manager uses the `herddb` database. HerdDB is a SQL distributed database implemented in Java and can be found at [herddb.org](https://herddb.org/) for more information.
 
-### Configure Database or JWT authentication
-####  Configure Database (optional)
+### 2. Configure Database or JWT authentication
+
+#### Configure Database (optional)
 
 If you have a large amount of data, you can use a custom database. Otherwise, some display errors may occur. For example, the topic information cannot be displayed when the topic exceeds 10000.
 The following is an example of PostgreSQL.
@@ -50,7 +55,7 @@ docker run -it \
     apachepulsar/pulsar-manager:v0.3.0
 ```
 
-####  Enable JWT authentication (optional)
+#### Enable JWT authentication (optional)
 
 If you want to turn on JWT authentication, configure the `application.properties` file.
 
@@ -85,7 +90,7 @@ docker run -it \
   apachepulsar/pulsar-manager:v0.3.0
 ```
 
-### Set the administrator account and password
+### 3. Set the administrator account and password
 
 ```bash
 CSRF_TOKEN=$(curl http://localhost:7750/pulsar-manager/csrf-token)
@@ -107,7 +112,7 @@ The request parameter in curl command:
 - `password` is the password of the current user of Pulsar Manager, currently `apachepulsar`. The password should be more than or equal to 6 digits.
 
 
-### Configure the environment
+### 4. Configure the environment
 
 1. Login to the system, Visit http://localhost:9527 to login. The current default account is  `admin/apachepulsar`
 
@@ -119,6 +124,9 @@ The request parameter in curl command:
 
 
 ## Other Installation
+
+There are some other installation methods.
+
 ### Bare-metal installation
 
 When using binary packages for direct deployment, you can follow these steps.

@@ -15,7 +15,8 @@ import {
 import BrowserOnly from "@docusaurus/BrowserOnly";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
-const _maintainedVersions = [versions[1], versions[2]];
+const _ltsVersion = '3.0.x';
+const _maintainedVersions = ['3.2.x', '3.0.x'];
 function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
   return (
     <Translate
@@ -26,7 +27,7 @@ function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}
     >
-      {"This is unreleased documentation for Next."}
+      {"This is documentation for the next unreleased version of Pulsar."}
     </Translate>
   );
 }
@@ -40,7 +41,7 @@ function MaintainedVersionLabel({ siteTitle, versionMetadata }) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}
     >
-      {"This is the documentation for {versionLabel}."}
+      {"This is documentation for Pulsar {versionLabel}."}
     </Translate>
   );
 }
@@ -55,7 +56,7 @@ function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
       }}
     >
       {
-        "This is the documentation for {versionLabel}, which is no longer actively maintained."
+        "This is documentation for Pulsar {versionLabel}, which is no longer actively maintained."
       }
     </Translate>
   );
@@ -101,7 +102,7 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
         ),
       }}
     >
-      {"We recommend you use the {latestVersionLink} ({versionLabel})."}
+      {"We recommend that you use the {latestVersionLink} documentation."}
     </Translate>
   );
 }
@@ -138,8 +139,7 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
       <div className="margin-top--md">
         <LatestVersionSuggestionLabel
           versionLabel={_latestVersion}
-          // versionLabel={latestVersionSuggestion.label}
-          // to={latestVersionSuggestedDoc.path}
+          to={path}
           onClick={() => {
             savePreferredVersionName(latestVersionSuggestion.name);
             window.location.href = path;
@@ -155,6 +155,7 @@ export default function DocVersionBanner({ className }) {
     <BrowserOnly>
       {() => {
         return versionMetadata.version != _latestVersion &&
+          versionMetadata.version != _ltsVersion &&
           location.pathname.startsWith("/docs") ? (
           <DocVersionBannerEnabled
             className={className}

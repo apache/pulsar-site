@@ -3,19 +3,19 @@ slug: /
 id: about
 title: Welcome to the Apache Pulsar documentation portal
 sidebar_label: "About"
+description: Explore the Apache Pulsar documentation and join the knowledgeable Pulsar community.
 ---
 
-import BlockLinks from "@site/src/components/BlockLinks";
-import BlockLink from "@site/src/components/BlockLink";
+import BlockLinks from "@site/src/components/ui/BlockLinks";
+import BlockLink from "@site/src/components/ui/BlockLink";
 import { docUrl } from "@site/src/utils/index";
 
-
-# Welcome to the Apache Pulsar documentation portal
+# Welcome to the Apache Pulsar™ documentation portal
 ***
 
 This portal holds a variety of topics, tutorials, guides, and reference material to help you work with Pulsar.
 
-## Choose your path....
+## Choose your path
 Select one of the content blocks below to begin your Pulsar journey. If you ...
 * Are new to Pulsar, start with **About Pulsar** to learn about features and concepts.
 * Want to jump to the quickstart, select **Get Started**.
@@ -41,17 +41,20 @@ As you probably know, we are working on a new user experience for our documentat
 ## Help Improve These Documents
 ***
 
-You'll notice an Edit button at the bottom and top of each page. Click it to open a landing page with instructions for requesting changes to posted documents. These are your resources. Participation is not only welcomed – it's essential!
+Participation is not only welcomed – it's essential!
 
-:::tip
+📚 There are multiple ways you can help to make the Pulsar documentation better:
 
-For how to make contributions to documentation, see [Pulsar Documentation Contribution Guide](pathname:///contribute/document-intro).
+- **Submit a Pull Request**: You'll find the "Edit this page" link at the bottom of each page. Click the link and follow the [Pulsar Documentation Contribution Guide](pathname:///contribute/document-intro).
 
-:::
+- **💡 Suggest changes**: If you found a mistake, the documentation is incomplete, but for any reason you're not ready to submit a PR, or you have any other suggestion, please click the appropriate link at the top right of any documentation page.
+- **🛟 Get support**: If something isn't clear for you in the documentation, or you have general questions about Pulsar, you can ask the community by clicking the appropriate link at the top right of any documentation page. This way you will help people searching for the answer to this question in the future after someone from the community answers your question.
 
 ## Join the Community!
 ***
 
 The Pulsar community on GitHub is active, passionate, and knowledgeable.  Join discussions, voice opinions, suggest features, and dive into the code itself. Find your Pulsar family here at [apache/pulsar](https://github.com/apache/pulsar).
 
-An equally passionate community can be found in the [Pulsar Slack channel](https://apache-pulsar.slack.com/). You'll need an invitation to join, but many Github Pulsar community members are Slack members too.  Join, hang out, learn, and make some new friends.
+* Please go to [the community page](pathname:///community/#section-discussions) to find the contact information for joining various communication channels.
+* The main communication channel for the Apache Pulsar project are [the mailing lists](pathname:///contact/).
+* There's a separate page for Apache Pulsar [Security advisories and Security policy](pathname:///security/).

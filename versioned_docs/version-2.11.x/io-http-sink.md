@@ -8,7 +8,7 @@ sidebar_label: "HTTP sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The HTTP sink connector pulls the records from Pulsar topics and makes a POST request to a configurable HTTP URL (webhook).
 

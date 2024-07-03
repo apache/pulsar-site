@@ -8,7 +8,7 @@ sidebar_label: "NSQ source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The NSQ source connector receives messages from NSQ topics
 and writes messages to Pulsar topics.
