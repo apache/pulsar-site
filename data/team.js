@@ -351,7 +351,9 @@ module.exports = {
     {
       "name": "Jie Chen",
       "apacheId": "crossoverjie",
-      "githubUsername": []
+      "githubUsername": [
+        "crossoverjie"
+      ]
     },
     {
       "name": "Tao Jiuming",
