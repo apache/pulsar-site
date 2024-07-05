@@ -195,12 +195,7 @@ OTEL_EXPORTER_PROMETHEUS_PORT
 This endpoint must be accessible by the remote Prometheus scrape server. Note that the exporter is less resource
 efficient than the OTLP exporter.
 
-Prometheus currently exports the resource attributes in metric `target_info`. In practice, if you have more than one
-cluster, it forces you to use PromQL joins to obtain the cluster ID label.
-
-The Pulsar community has added the option to the OpenTelemetry Java SDK Prometheus Exporter to embed (copy) the cluster
-ID label (`pulsar.cluster`) to each outgoing time series labels. Once this is finalized it will be added by default into
-Pulsar.
+All OpenTelemetry resource attributes are automatically copied to Prometheus labels on each time series.
 
 For further configuration details, refer to the exporter
 [documentation](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#prometheus-exporter).
