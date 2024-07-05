@@ -229,3 +229,11 @@ OpenTelemetry provides an experimental mechanism to control the maximum cardinal
 limiting the resource usage of the exporter. Pulsar sets the value to 10000 attributes by default. For brokers with a
 large number of topics, this can prove insufficient. The value is controlled by environment variable
 `OTEL_EXPERIMENTAL_METRICS_CARDINALITY_LIMIT`.
+
+#### Memory Reuse Configuration
+
+OpenTelemetry provides an experimental mechanism to control the reuse of metric attributes. This is particularly useful
+for systems with high cardinality metrics, as it reduces the number of memory allocations caused by collector runs. The
+mechanism is enabled by default in Pulsar, and can be overridden by environment variable
+`OTEL_JAVA_EXPERIMENTAL_EXPORTER_MEMORY_MODE`. For further details and valid configuration values, refer to the
+exporter configuration [documentation](https://opentelemetry.io/docs/languages/java/configuration/#exporters).
