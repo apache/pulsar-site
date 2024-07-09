@@ -695,3 +695,29 @@ The number of Schema Registry compatibility check operations performed by the br
   * `pulsar.schema_registry.compatibility_check.response` - The compatibility check response type
     * `compatible`
     * `incompatible`
+
+### Authentication Metrics
+
+#### pulsar.authentication.operation.count
+The number of authentication operations.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.authentication.provider` - The name of the authentication provider class.
+  * `pulsar.authentication.method` - The name of the authentication method.
+  * `pulsar.authentication.result` - The authentication result. Can be one of:
+    * `success`
+    * `failure`
+  * `pulsar.authentication.error` - The authentication error, if the result is `failure`.
+
+### Token Metrics
+
+#### pulsar.authentication.token.expired.count
+The total number of expired tokens.
+* Type: Counter
+* Unit: `{token}`
+
+#### pulsar.authentication.token.expiry.duration
+The remaining time of expiring token in seconds.
+* Type: Histogram
+* Unit: `s`
