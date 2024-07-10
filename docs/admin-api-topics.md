@@ -34,6 +34,10 @@ Non-persistent topics are used in applications that only consume real-time publi
 non-persistent://tenant/namespace/topic
 ```
 
+:::note
+
+Topic naming: due to backward compability, some special characters, eg., "/", is allowed as a part of topic name. But we recommended that you should avoid using special characters as a part of topic name.
+
 ## Manage topic resources
 Whether it is a persistent or non-persistent topic, you can obtain the topic resources through `pulsar-admin` tool, REST API and Java.
 
