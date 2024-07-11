@@ -695,3 +695,19 @@ The number of Schema Registry compatibility check operations performed by the br
   * `pulsar.schema_registry.compatibility_check.response` - The compatibility check response type
     * `compatible`
     * `incompatible`
+
+### Replication Subscription Metrics
+
+#### pulsar.broker.replication.subscription.snapshot.operation.count
+The number of snapshot operations attempted.
+* Type: Counter
+* Unit: `{operation}`
+
+#### pulsar.broker.replication.subscription.snapshot.operation.duration
+Time taken to complete a consistent snapshot operation across clusters.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.replication.subscription.snapshot.operation.result` - The result of the snapshot operation. Can be one of:
+    * `success`
+    * `timeout`
