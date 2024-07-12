@@ -10,9 +10,9 @@ This tutorial guides you through the steps for getting started with broker load 
 
 ## Prerequisites
 
-- [Install Pulsar](./getting-started-standalone.md): 
+- [Install Pulsar](./getting-started-standalone.md):
 
-  - If you want to run the modular load balancer, use Pulsar 1.7.0 or later versions. 
+  - If you want to run the modular load balancer, use Pulsar 1.7.0 or later versions.
 
   - If you want to run the extensible load balancer, use Pulsar 3.0.0 or later versions.
 
@@ -25,7 +25,7 @@ If you want to use broker load balancing automatically, follow the steps below.
 
 ### Step 1. Start ZooKeeper, bookie, and broker
 
-Create a `docker-compose.yaml` file and copy the following code to that file. 
+Create a `docker-compose.yaml` file and copy the following code to that file.
 
 This example starts a ZooKeeper server, a bookie, and 2 brokers, sets the load balancer type to extensible, sets the unloading strategy to [TransferShedder](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies), and enables debug mode.
 
@@ -165,9 +165,9 @@ services:
 
 :::tip
 
-If you use other ways instead of using a yaml file as above, you can choose a broker load balancer type or set an unloading strategy by updating [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C7-L1309C7) or [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324) in the broker.conf file 
+If you use other ways instead of using a yaml file as above, you can choose a broker load balancer type or set an unloading strategy by updating [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C7-L1309C7) or [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324) in the broker.conf file
 
-It is not recommended to use the [pulsar-admin update-dynamic-config]((pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config)) because it will throw an exception if the Pulsar version and the unloading strategy are incompatible. 
+It is not recommended to use the [pulsar-admin update-dynamic-config]((pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config)) because it will throw an exception if the Pulsar version and the unloading strategy are incompatible.
 :::
 
 ### Step 2. Start a Pulsar cluster
@@ -214,7 +214,7 @@ The output shows that the broker 1 and broker 2 are running.
  ! broker-2 The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested             0.0s
 ```
 
-### Step 3. Check the status of broker and load balancer (Optional) 
+### Step 3. Check the status of broker and load balancer (Optional)
 
 In terminal tab 1, execute the following commands.
 
@@ -290,8 +290,9 @@ This example simplifies the task by only specifying 1 bundle. For details on how
 **Input**
 
 ```bash
-bin/pulsar-admin tenants create my-tenant-1 
-bin/pulsar-admin namespaces create my-tenant-1/my-namespace-1 --bundles 1 bin/pulsar-admin topics create-partitioned-topic persistent://my-tenant-1/my-namespace-1/my-topic-1 -p 2000
+bin/pulsar-admin tenants create my-tenant-1
+bin/pulsar-admin namespaces create my-tenant-1/my-namespace-1 --bundles 1
+bin/pulsar-admin topics create-partitioned-topic persistent://my-tenant-1/my-namespace-1/my-topic-1 -p 2000
 ```
 
 **Output**
@@ -311,7 +312,7 @@ bin/pulsar-perf produce persistent://my-tenant-1/my-namespace-1/my-topic-1 -r 40
 The output shows that messages have been produced.
 
 ```bash
-2023-07-21T05:08:24,261+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - JVM args [-Dlog4j.configurationFile=log4j2.yaml, -Djava.net.preferIPv4Stack=true, --add-opens=java.base/sun.net=ALL-UNNAMED, --add-opens=java.base/java.lang=ALL-UNNAMED, -Dpulsar.allocator.exit_on_oom=true, -Dio.netty.recycler.maxCapacityPerThread=4096, -Dpulsar.log.appender=Console, -Dpulsar.log.level=info, -Dpulsar.log.root.level=info, -Dpulsar.log.immediateFlush=false, -Dpulsar.log.dir=/pulsar/logs, -Dpulsar.log.file=pulsar-perftest.log] 2023-07-21T05:08:24,305+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - Netty max memory (PlatformDependent.maxDirectMemory()) 1 GB 2023-07-21T05:08:24,305+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - JVM max heap memory (Runtime.getRuntime().maxMemory()) 1 GB 2023-07-21T05:08:24,409+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: { 
+2023-07-21T05:08:24,261+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - JVM args [-Dlog4j.configurationFile=log4j2.yaml, -Djava.net.preferIPv4Stack=true, --add-opens=java.base/sun.net=ALL-UNNAMED, --add-opens=java.base/java.lang=ALL-UNNAMED, -Dpulsar.allocator.exit_on_oom=true, -Dio.netty.recycler.maxCapacityPerThread=4096, -Dpulsar.log.appender=Console, -Dpulsar.log.level=info, -Dpulsar.log.root.level=info, -Dpulsar.log.immediateFlush=false, -Dpulsar.log.dir=/pulsar/logs, -Dpulsar.log.file=pulsar-perftest.log] 2023-07-21T05:08:24,305+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - Netty max memory (PlatformDependent.maxDirectMemory()) 1 GB 2023-07-21T05:08:24,305+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - JVM max heap memory (Runtime.getRuntime().maxMemory()) 1 GB 2023-07-21T05:08:24,409+0000 [main] INFO org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: {
 ...
 ```
 
@@ -335,15 +336,15 @@ If there is no output, the operation is successful.
 
 :::tip
 
-- The automatic bundle splitting is **enabled by default**. To disable it, update the following configurations to false in the broker.conf file. 
-  
+- The automatic bundle splitting is **enabled by default**. To disable it, update the following configurations to false in the broker.conf file.
+
     - [loadBalancerAutoBundleSplitEnabled](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1278)
-  
-    - [loadBalancerAutoUnloadSplitBundlesEnabled](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1281C4-L1281C4) 
 
-- The default bundle splitting algorithm is `range_equally_divide`. You can change it to other [bundle splitting algorithms](./concepts-broker-load-balancing-concepts.md#bundle-splitting-algorithms) by updating [defaultNamespaceBundleSplitAlgorithm](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1321C18-L1321C18) in the broker.conf file. 
+    - [loadBalancerAutoUnloadSplitBundlesEnabled](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1281C4-L1281C4)
 
-- For bundle splitting thresholds, you can set more configurations in the broker.conf file. Any existing bundle that exceeds any of the thresholds is a candidate to be split. 
+- The default bundle splitting algorithm is `range_equally_divide`. You can change it to other [bundle splitting algorithms](./concepts-broker-load-balancing-concepts.md#bundle-splitting-algorithms) by updating [defaultNamespaceBundleSplitAlgorithm](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1321C18-L1321C18) in the broker.conf file.
+
+- For bundle splitting thresholds, you can set more configurations in the broker.conf file. Any existing bundle that exceeds any of the thresholds is a candidate to be split.
 :::
 
 **Input**
@@ -374,11 +375,11 @@ You can verify if a bundle has been unloaded using the metric [pulsar_lb_unload_
 
 :::tip
 
-- The automatic bundle unloading is **enabled by default**. To disable it, update [loadBalancerSheddingEnabled](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1259C14-L1259C14) to false in the broker.conf file. 
+- The automatic bundle unloading is **enabled by default**. To disable it, update [loadBalancerSheddingEnabled](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1259C14-L1259C14) to false in the broker.conf file.
 
-- The **default** bundle unloading strategy is TransferShedder (for the extensible broker load balancer) or ThresholdShedder (for the modular broker load balancer). You can change it to other [bundle unloading strategies](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) by updating [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324C52-L1324C52) in the broker.conf file. 
+- The **default** bundle unloading strategy is TransferShedder (for the extensible broker load balancer) or ThresholdShedder (for the modular broker load balancer). You can change it to other [bundle unloading strategies](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) by updating [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324C52-L1324C52) in the broker.conf file.
 
-- For bundle unloading conditions, you can set more configurations in the broker.conf file. 
+- For bundle unloading conditions, you can set more configurations in the broker.conf file.
 :::
 
 ## Configure broker load balancer to run manually
@@ -440,12 +441,12 @@ The output shows that the number of bundles is 17.
 }
 ```
 
-4.2 Specify the range `public/default/0x00000000_0x8000000` to be split.
+4.2 Specify the range `public/default/0x00000000_0x08000000` to be split.
 
 **Input**
 
 ```bash
-bin/pulsar-admin namespaces split-bundle --bundle 0x00000000_0x10000000 public/default
+bin/pulsar-admin namespaces split-bundle --bundle 0x00000000_0x08000000 public/default
 ```
 
 **Output**
@@ -455,9 +456,9 @@ If there is no output, the operation is successful.
 :::tip
 
 - The **default** bundle splitting algorithm is `range_equally_divide`. You can change it to other [bundle splitting algorithms](./concepts-broker-load-balancing-concepts.md#bundle-splitting-algorithms) using one of the following methods:
-  
-  - Update [defaultNamespaceBundleSplitAlgorithm](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1321C18-L1321C18) in the broker.conf file 
- 
+
+  - Update [defaultNamespaceBundleSplitAlgorithm](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1321C18-L1321C18) in the broker.conf file
+
   - Use [pulsar-admin namespaces split-bundle](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle)
 
 - For bundle splitting thresholds, you can set more configurations in the broker.conf file. Any existing bundle that exceeds any of the thresholds is a candidate to be split.
@@ -540,7 +541,7 @@ bin/pulsar-admin namespaces unload public/default -b 0x10000000_0x20000000 -d ht
 
 If there is no output, the operation is successful.
 
-6.2 Verify if this range has been unloaded by checking the ownerships between topics (partitions) and brokers. 
+6.2 Verify if this range has been unloaded by checking the ownerships between topics (partitions) and brokers.
 
 **Input**
 
