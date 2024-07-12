@@ -609,6 +609,50 @@ Average resource usage difference threshold to determine a broker whether to be 
 
 **Category**: Load Balancer
 
+### loadBalancerAvgShedderHighThreshold
+The high threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `40`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountHighThreshold
+The number of times the high threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountLowThreshold
+The number of times the low threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `8`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderLowThreshold
+The low threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `15`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBandwidthInResourceWeight
 BandwidthIn Resource Usage Weight
 
@@ -1151,7 +1195,7 @@ For each uniform balanced unload, the maximum number of bundles that can be unlo
 **Category**: Load Balancer
 
 ### maxUnloadPercentage
-In the UniformLoadShedder strategy, the maximum unload ratio.
+In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio.For AvgShedder, recommend to set to 0.5, so that it will distribute the load evenly between the highest and lowest brokers.
 
 **Type**: `double`
 
@@ -1162,7 +1206,7 @@ In the UniformLoadShedder strategy, the maximum unload ratio.
 **Category**: Load Balancer
 
 ### minUnloadMessage
-In the UniformLoadShedder strategy, the minimum message that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum message that triggers unload.
 
 **Type**: `int`
 
@@ -1173,7 +1217,7 @@ In the UniformLoadShedder strategy, the minimum message that triggers unload.
 **Category**: Load Balancer
 
 ### minUnloadMessageThroughput
-In the UniformLoadShedder strategy, the minimum throughput that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum throughput that triggers unload.
 
 **Type**: `int`
 
