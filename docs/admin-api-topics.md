@@ -36,7 +36,7 @@ non-persistent://tenant/namespace/topic
 
 :::note
 
-Topic naming: due to backward compability, some special characters, eg., "/", is allowed as a part of topic name. But we recommended that you should avoid using special characters as a part of topic name.
+Topic naming: due to backward compatibility, some special characters, e.g., "/," are allowed as a part of the topic name. But it's recommended not to use special characters as a part of the topic name.
 
 :::
 
