@@ -8,6 +8,27 @@ Pulsar exposes the following OpenTelemetry metrics.
 
 ## Broker
 
+### Connection Metrics
+
+#### pulsar.broker.connection.count
+The number of connections.
+* Type: UpDownCounter
+* Unit: `{connection}`
+* Attributes:
+  * `pulsar.connection.status` - The status of the connection. Can be one of:
+    * `active`
+    * `open`
+    * `close`
+
+#### pulsar.broker.connection.create.operation.count
+The number of connection create operations.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.connection.create.operation.status` - The status of the create operation. Can be one of:
+    * `success`
+    * `failure`
+
 ### Topic Messaging metrics
 
 #### pulsar.broker.topic.subscription.count
@@ -403,6 +424,120 @@ The maximum number of pending topic load operations in the broker. Equal to "max
 * Type: UpDownCounter
 * Unit: `{operation}`
 
+### Metadata Store metrics
+
+#### pulsar.broker.metadata.store.outgoing.size
+The total amount of data written to the metadata store.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.metadata.store.name` - The name of the metadata store.
+
+#### pulsar.broker.metadata.store.executor.queue.size
+The number of batch operations in the metadata store executor queue.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.metadata.store.name` - The name of the metadata store.
+
+### Consumer metrics
+
+#### pulsar.broker.consumer.message.outgoing.count
+The total number of messages dispatched to this consumer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+
+#### pulsar.broker.consumer.message.outgoing.size
+The total number of messages bytes dispatched to this consumer.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+
+#### pulsar.broker.consumer.message.ack.count
+The total number of message acknowledgments received from this consumer.
+* Type: Counter
+* Unit: `{ack}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+
+#### pulsar.broker.consumer.message.redeliver.count
+The total number of messages that have been redelivered to this consumer.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+
+#### pulsar.broker.consumer.message.unack.count
+The number of messages currently unacknowledged by this consumer.
+* Type: UpDownCounter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+
+#### pulsar.broker.consumer.permit.count
+The number of permits currently available for this consumer.
+* Type: UpDownCounter
+* Unit: `{permit}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.subscription.name` - The topic subscription name.
+  * `pulsar.subscription.type` - The subscription type.
+  * `pulsar.consumer.name` - The name of the consumer.
+  * `pulsar.consumer.id` - The ID of the consumer.
+
 ### Producer metrics
 
 #### pulsar.broker.producer.message.incoming.count
@@ -461,6 +596,78 @@ The total number of messages dropped from this producer.
     * `exclusive`
     * `wait_for_exclusive`
     * `exclusive_with_fencing`
+
+### Managed Ledger metrics
+
+#### pulsar.broker.managed_ledger.message.outgoing.count
+The number of write operations to this ledger.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.operation.status` - The status of the managed ledger operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.message.outgoing.logical.size
+The total number of messages bytes written to this ledger, excluding replicas.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.outgoing.replicated.size
+The total number of messages bytes written to this ledger, including replicas.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.backlog.count
+The number of messages in backlog for all consumers from this ledger.
+* Type: UpDownCounter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.incoming.count
+The number of read operations from this ledger.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.operation.status` - The status of the managed ledger operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.message.incoming.size
+The total number of messages bytes read from this ledger.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.incoming.cache.miss.count
+The number of cache misses during read operations from this ledger.
+* Type: UpDownCounter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.mark_delete.count
+The total number of mark delete operations for this ledger.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
 
 ### Schema Registry Metrics
 
