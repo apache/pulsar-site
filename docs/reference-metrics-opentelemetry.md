@@ -29,6 +29,17 @@ The number of connection create operations.
     * `success`
     * `failure`
 
+#### pulsar.broker.connection.rate_limit.count
+The number of times a connection has been rate limited.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.connection.rate_limit.operation.name` - The name of the rate limiting operation performed. Can be one of:
+    * `paused`
+    * `resumed`
+    * `throttled`
+    * `unthrottled`
+
 ### Topic Messaging metrics
 
 #### pulsar.broker.topic.subscription.count
