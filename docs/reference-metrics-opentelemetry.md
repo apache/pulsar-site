@@ -669,6 +669,20 @@ The total number of mark delete operations for this ledger.
   * `pulsar.namespace` - The managed ledger namespace.
   * `pulsar.managed_ledger.name` - The name of the managed ledger.
 
+#### pulsar.broker.managed_ledger.inflight.read.limit
+Maximum number of bytes that can be retained by managed ledger data read from storage or cache.
+* Type: Counter
+* Unit: `By`
+
+#### pulsar.broker.managed_ledger.inflight.read.usage
+Estimated number of bytes retained by managed ledger data read from storage or cache.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.managed_ledger.inflight.read.usage.state` - Indicates managed ledger memory limiter usage state. Can be one of:
+    * `used`
+    * `free`
+
 ### Schema Registry Metrics
 
 #### pulsar.broker.request.schema_registry.duration
