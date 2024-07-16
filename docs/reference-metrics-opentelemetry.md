@@ -695,3 +695,15 @@ The number of Schema Registry compatibility check operations performed by the br
   * `pulsar.schema_registry.compatibility_check.response` - The compatibility check response type
     * `compatible`
     * `incompatible`
+
+### HTTP Request Filter Metrics
+
+#### pulsar.web.filter.rate_limit.request.count
+Counter of HTTP requests processed by the rate limiting filter.
+* Type: Counter
+* Unit: `{request}`
+* Attributes:
+  * `pulsar.web.filter.rate_limit.result` - The result of the rate limiting operation. Can be one of:
+    * `accepted`
+    * `rejected`
+
