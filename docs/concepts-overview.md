@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 description: Key features of Pulsar.
 ---
 
-Pulsar is a multi-tenant, high-performance solution for server-to-server messaging. Originally developed by Yahoo, Pulsar is under the stewardship of the [Apache Software Foundation](https://www.apache.org/).
+Pulsar is a multi-tenant, high-performance solution for distributed streaming and server-to-server messaging. Originally developed by Yahoo, Pulsar is under the stewardship of the [Apache Software Foundation](https://www.apache.org/).
 
 ## Key features
 
