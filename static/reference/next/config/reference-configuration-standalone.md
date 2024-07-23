@@ -1969,6 +1969,17 @@ Max pending publish requests per connection to avoid keeping large number of pen
 
 **Category**: Policies
 
+### maxSecondsToClearTopicNameCache
+A Specifies the minimum number of seconds that the topic name stays in memory, to avoid clear cache frequently when there are too many topics are in use.
+
+**Type**: `int`
+
+**Default**: `7200`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### maxTopicsPerNamespace
 Max number of topics allowed to be created in the namespace. When the topics reach the max topics of the namespace, the broker should reject the new topic request(include topic auto-created by the producer or consumer) until the number of connected consumers decrease.  Using a value of 0, is disabling maxTopicsPerNamespace-limit check.
 
@@ -2202,6 +2213,17 @@ Enable subscription types (default is all type enabled)
 **Type**: `java.util.Set`
 
 **Default**: `[Failover, Shared, Key_Shared, Exclusive]`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### topicNameCacheMaxCapacity
+Max capacity of the topic name cache. -1 means unlimited cache; 0 means broker will clear all cache per maxSecondsToClearTopicNameCache, it does not mean broker will not cache TopicName.
+
+**Type**: `int`
+
+**Default**: `100000`
 
 **Dynamic**: `true`
 
