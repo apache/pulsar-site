@@ -1,12 +1,21 @@
 module.exports = [
   {
+    "author": "lhotari",
+    "tagName": "v3.3.1",
+    "publishedAt": "2024-08-01T17:40:57Z",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-3.3.1/",
+    "doc": "/docs/3.3.x",
+    "version": "v3.3.x"
+  },
+  {
     "author": "coderzc",
     "tagName": "v3.3.0",
     "publishedAt": "2024-06-05T16:26:09Z",
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/pulsar-3.3.0/",
     "doc": "/docs/3.3.x",
-    "version": "v3.3.x"
+    "version": ""
   },
   {
     "author": "lhotari",
