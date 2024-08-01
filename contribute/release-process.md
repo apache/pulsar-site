@@ -594,7 +594,7 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 
 ```bash
 RELEASE_MANAGER_DOCKER_USER=otheruser
-CANDIDATE_TAG=$VERSION_WITHOUT_RC
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
