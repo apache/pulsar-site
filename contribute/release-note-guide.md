@@ -26,19 +26,29 @@ gh auth login
 ## Fetch the release metadata
 
 ```bash
-# Replace v2.10.2 with the target version tag
+# Replace 3.0.6 with the target version tag
+VERSION_WITHOUT_RC=3.0.6
 # Replace apache/pulsar with the component repo
-gh release view "v2.10.2" -R apache/pulsar --json author,tagName,publishedAt
+gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,tagName,publishedAt
 ```
 
 ## Fetch the release note
 
 ```bash
-# Replace v2.10.2 with the target version tag
+# Replace 3.0.6 with the target version tag
+VERSION_WITHOUT_RC=3.0.6
 # Replace apache/pulsar with the component repo
-gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
+gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json body --jq .body
 ```
 
+## Register the new released version to releases.json, data/release-pulsar.js and data/release-java.js files
+
+```bash
+# Replace 3.0.6 with the target version tag
+VERSION_WITHOUT_RC=3.0.6
+# Replace apache/pulsar with the component repo
+./scripts/register_new_version.py $VERSION_WITHOUT_RC $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
+```
 
 ## Generate release notes
 
