@@ -543,7 +543,7 @@ Please check the [environment variables step](#env-vars) for doing that.
 Create and push the final Git tag:
 
 ```shell
-git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC v$VERSION_RC^{} -m "Release v$VERSION_WITHOUT_RC"
+git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC $(git rev-parse v$VERSION_RC^{}) -m "Release v$VERSION_WITHOUT_RC"
 git push $UPSTREAM_REMOTE v$VERSION_WITHOUT_RC
 ```
 
