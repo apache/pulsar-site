@@ -211,10 +211,6 @@ This strategy tends to distribute load uniformly across all brokers. This strate
 To use the `UniformLoadShedder` strategy, configure brokers with this value.
 `loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.UniformLoadShedder`
 
-### AvgShedder
-
-
-
 ## Unload topics and bundles
 
 You can "unload" a topic in Pulsar manual admin operations. Unloading means closing topics, releasing ownership, and reassigning topics to a new broker, based on the current load.
