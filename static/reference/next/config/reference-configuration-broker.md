@@ -2789,6 +2789,17 @@ Event topic to sync configuration-metadata between separate pulsar clusters on d
 
 **Category**: Server
 
+### configurationStoreConfigPath
+Configuration file path for configuration metadata store.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### connectionLivenessCheckTimeoutMillis
 Timeout for connection liveness check used to check liveness of possible consumer or producer duplicates. Helps prevent ProducerFencedException with exclusive producer, ConsumerAssignException with range conflict for Key Shared with sticky hash ranges or ConsumerBusyException in the case of an exclusive consumer. Set to 0 to disable connection liveness check.
 
@@ -3548,7 +3559,7 @@ Metadata store cache expiry time in seconds.
 **Category**: Server
 
 ### metadataStoreConfigPath
-Configuration file path for local metadata store. It's supported by RocksdbMetadataStore for now.
+Configuration file path for local metadata store.
 
 **Type**: `java.lang.String`
 
