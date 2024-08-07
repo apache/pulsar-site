@@ -609,8 +609,74 @@ Average resource usage difference threshold to determine a broker whether to be 
 
 **Category**: Load Balancer
 
+### loadBalancerAvgShedderHighThreshold
+The high threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `40`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountHighThreshold
+The number of times the high threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountLowThreshold
+The number of times the low threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `8`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderLowThreshold
+The low threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `15`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBandwidthInResourceWeight
+BandwidthIn Resource Usage Weight
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBandwidthOutResourceWeight
+BandwidthOut Resource Usage Weight
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBandwithInResourceWeight
-BandwithIn Resource Usage Weight
+BandwidthIn Resource Usage Weight, Deprecated: Use loadBalancerBandwidthInResourceWeight
 
 **Type**: `double`
 
@@ -621,7 +687,7 @@ BandwithIn Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBandwithOutResourceWeight
-BandwithOut Resource Usage Weight
+BandwidthOut Resource Usage Weight, Deprecated: Use loadBalancerBandwidthOutResourceWeight
 
 **Type**: `double`
 
@@ -1129,7 +1195,7 @@ For each uniform balanced unload, the maximum number of bundles that can be unlo
 **Category**: Load Balancer
 
 ### maxUnloadPercentage
-In the UniformLoadShedder strategy, the maximum unload ratio.
+In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio.For AvgShedder, recommend to set to 0.5, so that it will distribute the load evenly between the highest and lowest brokers.
 
 **Type**: `double`
 
@@ -1140,7 +1206,7 @@ In the UniformLoadShedder strategy, the maximum unload ratio.
 **Category**: Load Balancer
 
 ### minUnloadMessage
-In the UniformLoadShedder strategy, the minimum message that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum message that triggers unload.
 
 **Type**: `int`
 
@@ -1151,7 +1217,7 @@ In the UniformLoadShedder strategy, the minimum message that triggers unload.
 **Category**: Load Balancer
 
 ### minUnloadMessageThroughput
-In the UniformLoadShedder strategy, the minimum throughput that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum throughput that triggers unload.
 
 **Type**: `int`
 
@@ -1903,6 +1969,17 @@ Max pending publish requests per connection to avoid keeping large number of pen
 
 **Category**: Policies
 
+### maxSecondsToClearTopicNameCache
+A Specifies the minimum number of seconds that the topic name stays in memory, to avoid clear cache frequently when there are too many topics are in use.
+
+**Type**: `int`
+
+**Default**: `7200`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### maxTopicsPerNamespace
 Max number of topics allowed to be created in the namespace. When the topics reach the max topics of the namespace, the broker should reject the new topic request(include topic auto-created by the producer or consumer) until the number of connected consumers decrease.  Using a value of 0, is disabling maxTopicsPerNamespace-limit check.
 
@@ -2136,6 +2213,17 @@ Enable subscription types (default is all type enabled)
 **Type**: `java.util.Set`
 
 **Default**: `[Failover, Shared, Key_Shared, Exclusive]`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### topicNameCacheMaxCapacity
+Max capacity of the topic name cache. -1 means unlimited cache; 0 means broker will clear all cache per maxSecondsToClearTopicNameCache, it does not mean broker will not cache TopicName.
+
+**Type**: `int`
+
+**Default**: `100000`
 
 **Dynamic**: `true`
 
@@ -2698,6 +2786,17 @@ Event topic to sync configuration-metadata between separate pulsar clusters on d
 **Default**: `null`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### configurationStoreConfigPath
+Configuration file path for configuration metadata store.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
 
 **Category**: Server
 
@@ -3460,7 +3559,7 @@ Metadata store cache expiry time in seconds.
 **Category**: Server
 
 ### metadataStoreConfigPath
-Configuration file path for local metadata store. It's supported by RocksdbMetadataStore for now.
+Configuration file path for local metadata store.
 
 **Type**: `java.lang.String`
 
@@ -3648,6 +3747,17 @@ Timeout for building a consistent snapshot for tracking replicated subscriptions
 **Default**: `30`
 
 **Dynamic**: `false`
+
+**Category**: Server
+
+### replicationStartAt
+The position that replication task start at, it can be set to earliest or latest (default).
+
+**Type**: `java.lang.String`
+
+**Default**: `latest`
+
+**Dynamic**: `true`
 
 **Category**: Server
 
@@ -5528,7 +5638,7 @@ Memory Resource Usage Weight. Deprecated: Memory is no longer used as a load bal
 
 **Type**: `double`
 
-**Default**: `1.0`
+**Default**: `0.0`
 
 **Dynamic**: `true`
 

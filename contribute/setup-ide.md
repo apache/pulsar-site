@@ -50,7 +50,7 @@ Some configuration in the Maven build is conditional based on the JDK version. I
 
 1. Install the Checkstyle-IDEA plugin.
 2. Open Checkstyle Settings. Click **Settings** → **Tools** → **Checkstyle**.
-3. Set **Checkstyle version** to **8.37**.
+3. Set **Checkstyle version** to **10.14.2**.
 4. Set **Scan scope** to **Only Java sources (including tests)**.
 5. Click **+** button in the **Configuration** section to open a dialog to choose the checkstyle config file.
    1. Enter a **Description**. For example, Pulsar.

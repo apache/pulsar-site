@@ -241,6 +241,12 @@ The limitations of replicated subscription are as follows.
 * When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
 * Only the base line cursor position is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
 
+:::note
+
+* This replicated subscription will add a new special message every second, it will contains the [snapshot](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions#storing-snapshots) of the subscription. That means,  if there are inactive subscriptions over the topic there can be an increase in backlog in source and destination clusters.
+
+:::
+
 ## Migrate data between clusters using geo-replication
 
 Using geo-replication to migrate data between clusters is a special use case of the [active-active replication pattern](concepts-replication.md#active-active-replication) when you don't have a large amount of data.
@@ -275,6 +281,6 @@ Using geo-replication to migrate data between clusters is a special use case of 
 :::note
 
 * The replication starts from step 4, which means existing messages in your old cluster are not replicated.
-* If you have some older messages to migrate, you can pre-create the replication subscriptions for each topic and set it at the earliest position by using `pulsar-admin topics create-subscription -s pulsar.repl.new-cluster -m earliest <topic>`.
+* If you have some older messages to migrate, you can pre-create the replication subscriptions for each topic and set it at the earliest position by using `pulsar-admin topics create-subscription -s pulsar.repl.new-cluster -m earliest <topic>`. Until [PIP-356](https://github.com/apache/pulsar/blob/master/pip/pip-356.md) is merged you will need to unload the topic to start georeplication.
 
 :::

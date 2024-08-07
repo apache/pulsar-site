@@ -119,7 +119,7 @@ Note that you should also stop the workflow for previous Pulsar versions that ar
 
 ### Cherry-picking changes scheduled for the release
 
-Before proceeding, ensure that you have [set up a Git mergetool](setup-mergetool.md). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.
+Before proceeding, ensure that you have [set up a Git mergetool](setup-git.md#mergetool). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.
 
 Use a search such as `is:merged is:pr label:release/3.0.3 -label:cherry-picked/branch-3.0` to search for merged PRs that are scheduled for the release, but haven't yet been cherry-picked.
 It is necessary to handle cherry-picks in the same order as they have been merged in the master branch. Otherwise there will be unnecessary merge conflicts to resolve.
@@ -386,24 +386,6 @@ DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-org
 
 ### Release Pulsar 3.0 and later
 
-If you are using a git worktree, the git hash won't get properly applied to the docker image tag.
-the workaround is to replace the `.git` file in the directory with a symbolic link to the worktree git directory
-
-```shell
-# only when using git worktree
-cd $PULSAR_PATH
-if [[ -f .git ]]; then
-  REAL_GITDIR=$(cat .git |awk '{ print $2 }')
-  if [[ -d "$REAL_GITDIR" ]]; then
-    mv .git .git~
-    ln -s $REAL_GITDIR .git
-    echo "Workaround in place"
-  else
-    echo "Could find gitdir in .git file"
-  fi
-fi
-```
-
 For creating and publishing the docker images, run the following commands:
 
 ```shell
@@ -561,7 +543,7 @@ Please check the [environment variables step](#env-vars) for doing that.
 Create and push the final Git tag:
 
 ```shell
-git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC v$VERSION_RC^{} -m "Release v$VERSION_WITHOUT_RC"
+git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC $(git rev-parse v$VERSION_RC^{}) -m "Release v$VERSION_WITHOUT_RC"
 git push $UPSTREAM_REMOTE v$VERSION_WITHOUT_RC
 ```
 
@@ -612,7 +594,7 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 
 ```bash
 RELEASE_MANAGER_DOCKER_USER=otheruser
-CANDIDATE_TAG=$VERSION_WITHOUT_RC
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC

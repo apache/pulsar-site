@@ -3961,6 +3961,800 @@ $ pulsar-admin namespaces remove-subscription-types-enabled options
 | `[-v, --version]` | Print version information and exit.|null||
 
 
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# namespaces
+
+Operations about namespaces
+
+
+```shell
+$ pulsar-admin namespaces subcommand
+```
+
+
+
+## list
+
+Get the namespaces for a tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## list-cluster
+
+Get the namespaces for a tenant in a cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces list-cluster options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## topics
+
+Get the list of topics for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces topics options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## bundles
+
+Get the list of bundles for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces bundles options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## destinations
+
+Get the list of destinations for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces destinations options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## policies
+
+Get the configuration policies of a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces policies options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## create
+
+Creates a new namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces create options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## delete
+
+Deletes a namespace.
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## permissions
+
+Get the permissions on a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces permissions options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## grant-permission
+
+Grant permissions on a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces grant-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## revoke-permission
+
+Revoke permissions on a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces revoke-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## subscription-permission
+
+Get permissions to access subscription admin-api
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces subscription-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## grant-subscription-permission
+
+Grant permissions to access subscription admin-api
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces grant-subscription-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## revoke-subscription-permission
+
+Revoke permissions to access subscription admin-api
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces revoke-subscription-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-clusters
+
+Set replication clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-clusters
+
+Get replication clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-types-enabled
+
+Set subscription types enabled for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-types-enabled
+
+Get subscription types enabled for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-types-enabled
+
+Remove subscription types enabled for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# namespaces
+
+Operations about namespaces
+
+
+```shell
+$ pulsar-admin namespaces subcommand
+```
+
+
+
+## list
+
+Get the namespaces for a tenant
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## list-cluster
+
+Get the namespaces for a tenant in a cluster
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces list-cluster options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## topics
+
+Get the list of topics for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces topics options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## bundles
+
+Get the list of bundles for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces bundles options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## destinations
+
+Get the list of destinations for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces destinations options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## policies
+
+Get the configuration policies of a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces policies options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## create
+
+Creates a new namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces create options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## delete
+
+Deletes a namespace.
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## permissions
+
+Get the permissions on a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces permissions options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## grant-permission
+
+Grant permissions on a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces grant-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## revoke-permission
+
+Revoke permissions on a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces revoke-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## subscription-permission
+
+Get permissions to access subscription admin-api
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces subscription-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## grant-subscription-permission
+
+Grant permissions to access subscription admin-api
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces grant-subscription-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## revoke-subscription-permission
+
+Revoke permissions to access subscription admin-api
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces revoke-subscription-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-clusters
+
+Set replication clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-clusters
+
+Get replication clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-types-enabled
+
+Set subscription types enabled for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-types-enabled
+
+Get subscription types enabled for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-types-enabled
+
+Remove subscription types enabled for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
 ## get-backlog-quotas
 
 Get the backlog quota policies for a namespace
@@ -4321,6 +5115,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -4709,6 +5539,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -5115,6 +5981,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -5539,6 +6441,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -5981,6 +6919,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -6441,6 +7415,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -6919,6 +7929,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -7415,6 +8461,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -7929,6 +9011,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -8461,6 +9579,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -9011,6 +10165,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -9579,6 +10769,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -10165,6 +11391,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -10769,6 +12031,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -11391,6 +12689,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -12031,6 +13365,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -12689,6 +14059,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -13365,6 +14771,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -14059,6 +15501,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -14771,6 +16249,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -15501,6 +17015,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -16249,6 +17799,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -17015,6 +18601,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -17799,6 +19421,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -18601,6 +20259,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -19421,6 +21115,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -20259,6 +21989,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -21115,6 +22881,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -21989,6 +23791,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -22881,6 +24719,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -23791,6 +25665,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -24719,6 +26629,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -25665,6 +27611,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -26629,6 +28611,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -27611,6 +29629,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -28611,6 +30665,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -29629,6 +31719,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -30665,6 +32791,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -31719,6 +33881,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -32791,6 +34989,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -33881,6 +36115,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -34989,6 +37259,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -36115,6 +38421,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -37259,6 +39601,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -38421,6 +40799,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -39601,6 +42015,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -40799,6 +43249,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -42015,6 +44501,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -43249,6 +45771,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -44501,6 +47059,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -45771,6 +48365,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -47059,6 +49689,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -48365,6 +51031,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -49689,6 +52391,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -51031,6 +53769,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -52391,6 +55165,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -53769,6 +56579,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -55165,6 +58011,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -56579,6 +59461,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -58011,6 +60929,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -59461,6 +62415,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -60929,6 +63919,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -62415,6 +65441,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -63919,6 +66981,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -65441,6 +68539,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -66981,6 +70115,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -68539,6 +71709,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -70115,6 +73321,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -71709,6 +74951,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -73321,6 +76599,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -74951,6 +78265,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -76599,6 +79949,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -78265,6 +81651,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -79949,6 +83371,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -81651,6 +85109,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -83371,6 +86865,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -85109,6 +88639,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -86865,6 +90431,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -88639,6 +92241,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -90431,6 +94069,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -92241,6 +95915,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -94069,6 +97779,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -95915,6 +99661,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -97779,6 +101561,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -99661,6 +103479,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -101561,6 +105415,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -103479,6 +107369,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -105415,6 +109341,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -107369,6 +111331,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -109341,6 +113339,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -111331,6 +115365,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -113339,6 +117409,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -115365,6 +119471,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -117409,6 +121551,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -119471,6 +123649,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -121551,6 +125765,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -123649,6 +127899,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -125765,6 +130051,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -127899,6 +132221,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -130051,6 +134409,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -132221,6 +136615,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -134409,6 +138839,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -136615,6 +141081,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -138839,6 +143341,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -141081,6 +145619,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -143341,6 +147915,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -145619,6 +150229,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -147915,6 +152561,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -150229,6 +154911,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -152561,6 +157279,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -154911,6 +159665,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -157279,6 +162069,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -159665,6 +164491,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -162069,6 +166931,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -164491,6 +169389,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -166931,6 +171865,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -169389,6 +174359,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -171865,6 +176871,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**
@@ -174359,6 +179401,42 @@ Remove subscription types enabled for a namespace
 
 ```shell
 $ pulsar-admin namespaces remove-subscription-types-enabled options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-allowed-clusters
+
+Set allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces set-allowed-clusters options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-allowed-clusters
+
+Get allowed clusters for a namespace
+
+**Command:**
+
+```shell
+$ pulsar-admin namespaces get-allowed-clusters options
 ```
 
 **Options:**

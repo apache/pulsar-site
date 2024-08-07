@@ -14,6 +14,9 @@ $ pulsar initialize-cluster-metadata options
 | `-tw, --web-service-url-tls` | Web-service URL for new cluster with TLS encryption|null|
 | `-ub, --broker-service-url` | Broker-service URL for new cluster|null|
 | `-tb, --broker-service-url-tls` | Broker-service URL for new cluster with TLS encryption|null|
+| `-te, --tls-enable` | Enable TLS connection for new cluster|null|
+| `--auth-plugin` | The authentication plugin for new cluster|null|
+| `--auth-parameters` | The authentication parameters for new cluster|null|
 | `-md, --metadata-store` | Metadata Store service url. eg: zk:my-zk:2181|null|
 | `--zookeeper-session-timeout-ms` | Local zookeeper session timeout ms|30000|
 | `-cms, --configuration-metadata-store` | Configuration Metadata Store connection string|null|
