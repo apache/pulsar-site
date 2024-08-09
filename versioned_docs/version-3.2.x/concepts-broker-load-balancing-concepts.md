@@ -566,9 +566,9 @@ maxUnloadPercentage = 0.5
 - AvgShedder binds shedding and placement strategies together to **avoid incorrect shedding and placement**. We need to ensure the configuration of `loadBalancerLoadSheddingStrategy` and `loadBalancerLoadPlacementStrategy` are the same.
 - Setting `maxUnloadPercentage` to 0.5 means that AvgShedder will first pick out the highest and lowest loaded brokers, and then evenly distribute the traffic between them.
 
-For example, if the broker rating of the current cluster is 20,30,52,70,80, and the message rate of the highest loaded broker is 1000,
-the message rate of the lowest loaded broker is 500. We introduce a threshold to determine whether trigger the bundle unload, for example,
-the threshold is 40. As the difference between the score of the highest and lowest loaded brokers is 100-50=50>40,
+For example, if the broker rating of the current cluster is 20,30,52,70,80, and the message rate of the highest loaded broker(score 80) is 1000, and
+the message rate of the lowest loaded broker(score 20) is 500. We introduce a threshold to determine whether trigger the bundle unload, for example,
+the threshold is 40. As the difference between the score of the highest and lowest loaded brokers is 80-20=60, which is greater than the threshold 40,
 the shedding strategy will be triggered.
 
 To achieve the goal of evenly distributing the traffic between the highest and lowest loaded brokers, the shedding strategy will
