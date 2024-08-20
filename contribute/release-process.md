@@ -543,7 +543,7 @@ Please check the [environment variables step](#env-vars) for doing that.
 Create and push the final Git tag:
 
 ```shell
-git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC v$VERSION_RC^{} -m "Release v$VERSION_WITHOUT_RC"
+git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC $(git rev-parse v$VERSION_RC^{}) -m "Release v$VERSION_WITHOUT_RC"
 git push $UPSTREAM_REMOTE v$VERSION_WITHOUT_RC
 ```
 
@@ -594,7 +594,7 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 
 ```bash
 RELEASE_MANAGER_DOCKER_USER=otheruser
-CANDIDATE_TAG=$VERSION_WITHOUT_RC
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
