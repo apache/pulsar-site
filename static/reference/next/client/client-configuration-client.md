@@ -254,6 +254,20 @@ User name of SOCKS5 proxy.
 
 **Default**: `null`
 
+### sslFactoryPlugin
+SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultPulsarSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+### sslFactoryPluginParams
+SSL Factory plugin configuration parameters.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
 ### sslProvider
 The TLS provider used by an internal client to authenticate with other Pulsar brokers.
 

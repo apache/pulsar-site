@@ -12,6 +12,8 @@ $ pulsar-perf produce [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
+| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
@@ -80,6 +82,8 @@ $ pulsar-perf consume [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
+| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
@@ -136,6 +140,8 @@ $ pulsar-perf transaction [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
+| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
@@ -185,6 +191,8 @@ $ pulsar-perf read [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
+| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
