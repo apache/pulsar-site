@@ -788,7 +788,7 @@ If the newly connected consumer didn't supply their ranges, or they overlap with
 
 ##### How to use mapping algorithms?
 
-To use a mapping algorithm mentioned above, you can specify the Key Shared Mode when building the consumer:
+To use a mapping algorithm mentioned above, you can specify the Key_Shared Mode when building the consumer:
 * AUTO_SPLIT - Auto-split Hash Range
 * STICKY - Sticky
 
@@ -796,11 +796,11 @@ Consistent Hashing will be used instead of Hash Range for Auto-split if the brok
 
 ##### Preserving order of processing
 
-Key Shared Subscription type guarantees a key will be processed by a *single* consumer at any given time. When a new consumer is connected, some keys will change their mapping from existing consumers to the new consumer. Once the connection has been established, the broker will record the current read position and associate it with the new consumer. The read position is a marker indicating that messages have been dispatched to the consumers up to this point, and after it, no messages have been dispatched yet. The broker will start delivering messages to the new consumer *only* when all messages up to the read position have been acknowledged. This will guarantee that a certain key is processed by a single consumer at any given time. The trade-off is that if one of the existing consumers is stuck and no time-out was defined (acknowledging for you), the new consumer won't receive any messages until the stuck consumer resumes or gets disconnected.
+Key_Shared Subscription type guarantees a key will be processed by a *single* consumer at any given time. When a new consumer is connected, some keys will change their mapping from existing consumers to the new consumer. Once the connection has been established, the broker will record the current `lastSentPosition` and associate it with the new consumer. The `lastSentPosition` is a marker indicating that messages have been dispatched to the consumers up to this point. The broker will start delivering messages to the new consumer *only* when all messages up to the `lastSentPosition` have been acknowledged. This will guarantee that a certain key is processed by a single consumer at any given time. The trade-off is that if one of the existing consumers is stuck and no time-out was defined (acknowledging for you), the new consumer won't receive any messages until the stuck consumer resumes or gets disconnected.
 
 That requirement can be relaxed by enabling `allowOutOfOrderDelivery` via the Consumer API. If set on the new consumer, then when it is connected, the broker will allow it to receive messages knowing some messages of that key may be still be processing in other consumers at the time, thus order may be affected for that short period of adding a new consumer.
 
-##### Batching for Key Shared Subscriptions
+##### Batching for Key_Shared Subscriptions
 
 :::note
 
