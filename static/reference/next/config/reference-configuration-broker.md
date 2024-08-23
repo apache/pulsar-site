@@ -2306,6 +2306,17 @@ Enable TLS when talking with other brokers in the same cluster (admin operation)
 
 **Category**: Replication
 
+### createTopicToRemoteClusterForReplication
+Whether the internal replicator will trigger topic auto-creation on the remote cluster.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Replication
+
 ### replicationConnectionsPerBroker
 Max number of connections to open for each broker in a remote cluster.
 
