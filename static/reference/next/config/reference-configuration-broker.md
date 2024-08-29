@@ -3282,6 +3282,17 @@ The caveat is now when recovered ledger is ready to write we're not sure if all 
 
 **Category**: Server
 
+### lookupPropertyPrefix
+The properties whose name starts with this prefix will be uploaded to the metadata store for  the topic lookup
+
+**Type**: `java.lang.String`
+
+**Default**: `lookup.`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### maxConcurrentHttpRequests
 Max concurrent web requests
 
