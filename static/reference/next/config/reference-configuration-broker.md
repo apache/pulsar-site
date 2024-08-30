@@ -1892,6 +1892,28 @@ Dispatch rate-limiting relative to publish rate. (Enabling flag will make broker
 
 **Category**: Policies
 
+### dispatcherRetryBackoffInitialTimeInMs
+On Shared and KeyShared subscriptions, if all available messages in the subscription are filtered out and not dispatched to any consumer, message dispatching will be rescheduled with a backoff delay. This parameter sets the initial backoff delay in milliseconds.
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### dispatcherRetryBackoffMaxTimeInMs
+On Shared and KeyShared subscriptions, if all available messages in the subscription are filtered out and not dispatched to any consumer, message dispatching will be rescheduled with a backoff delay. This parameter sets the maximum backoff delay in milliseconds.
+
+**Type**: `int`
+
+**Default**: `1000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### enableBrokerSideSubscriptionPatternEvaluation
 Enables evaluating subscription pattern on broker side.
 
