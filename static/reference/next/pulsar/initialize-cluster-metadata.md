@@ -20,6 +20,8 @@ $ pulsar initialize-cluster-metadata options
 | `-md, --metadata-store` | Metadata Store service url. eg: zk:my-zk:2181|null|
 | `--zookeeper-session-timeout-ms` | Local zookeeper session timeout ms|30000|
 | `-cms, --configuration-metadata-store` | Configuration Metadata Store connection string|null|
+| `-mscp, --metadata-store-config-path` | Metadata Store config path|null|
+| `-cmscp, --configuration-metadata-store-config-path` | Configuration Metadata Store config path|null|
 | `--initial-num-stream-storage-containers` | Num storage containers of BookKeeper stream storage|16|
 | `--initial-num-transaction-coordinators` | Num transaction coordinators will assigned in cluster|16|
 | `--existing-bk-metadata-service-uri` | The metadata service URI of the existing BookKeeper cluster that you want to use|null|
