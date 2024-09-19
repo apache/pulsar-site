@@ -1958,6 +1958,34 @@ Allow schema to be auto updated at broker level. User can override this by 'is_a
 
 **Category**: Policies
 
+### keySharedLookAheadMsgInReplayThresholdPerConsumer
+For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
+Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
+Setting this value to 0 will disable the limit calculated per consumer.
+
+**Type**: `int`
+
+**Default**: `2000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### keySharedLookAheadMsgInReplayThresholdPerSubscription
+For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
+Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
+This value should be set to a value less than 2 * managedLedgerMaxUnackedRangesToPersist.
+Setting this value to 0 will disable the limit calculated per subscription.
+
+
+**Type**: `int`
+
+**Default**: `20000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### maxConsumerMetadataSize
 Maximum size of Consumer metadata
 
@@ -3409,7 +3437,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1998`
+**Default**: `1999`
 
 **Dynamic**: `true`
 
