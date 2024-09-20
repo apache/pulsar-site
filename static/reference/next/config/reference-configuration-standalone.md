@@ -3973,6 +3973,17 @@ Number of worker threads to serve topic ordered executor
 
 **Category**: Server
 
+### topicPoliciesServiceClassName
+The class name of the topic policies service. The default config only takes affect when the systemTopicEnable config is true
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### transactionLogBatchedWriteEnabled
 Provide a mechanism allowing the Transaction Log Store to aggregate multiple records into a batched record and persist into a single BK entry. This will make Pulsar transactions work more efficiently, aka batched log. see: https://github.com/apache/pulsar/issues/15370. Default false
 
