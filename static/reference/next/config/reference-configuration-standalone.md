@@ -1082,6 +1082,17 @@ After this delay, the service-unit state channel tombstones any service units (e
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitTableViewSyncer
+Specify ServiceUnitTableViewSyncer to sync service unit(bundle) states between metadata store and system topic table views during migration from one to the other. One could enable this syncer before migration and disable it after the migration finishes. It accepts `MetadataStoreToSystemTopicSyncer` or `SystemTopicToMetadataStoreSyncer` to enable it. It accepts `None` to disable it.
+
+**Type**: `org.apache.pulsar.broker.ServiceConfiguration.ServiceUnitTableViewSyncerType`
+
+**Default**: `None`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingBundlesWithPoliciesEnabled
 Option to automatically unload namespace bundles with affinity(isolation) or anti-affinity group policies.Such bundles are not ideal targets to auto-unload as destination brokers are limited.(only used in load balancer extension logics)
 
@@ -1169,6 +1180,17 @@ Name of load manager to use
 **Default**: `org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadManagerServiceUnitStateTableViewClassName
+Name of ServiceUnitStateTableView implementation class to use
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.loadbalance.extensions.channel.ServiceUnitStateTableViewImpl`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
