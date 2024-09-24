@@ -1919,7 +1919,7 @@ On Shared and KeyShared subscriptions, if all available messages in the subscrip
 
 **Type**: `int`
 
-**Default**: `100`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -1930,7 +1930,7 @@ On Shared and KeyShared subscriptions, if all available messages in the subscrip
 
 **Type**: `int`
 
-**Default**: `1000`
+**Default**: `10`
 
 **Dynamic**: `false`
 
