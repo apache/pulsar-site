@@ -91,6 +91,10 @@ $ pulsar-client consume [options]
 |
 | `[-rs, --replicated]` | Whether the subscription status should be replicated|null|
 |
+| `[-ca, --crypto-failure-action]` | Crypto Failure Action|null|
+|
+| `[-mp, --print-metadata]` | Message metadata|null|
+|
 | `[-h, --help]` | Show this help message and exit.|null|
 |
 | `[-v, --version]` | Print version information and exit.|null|
@@ -130,6 +134,10 @@ $ pulsar-client read [options]
 | `[-st, --schema-type]` | Set a schema type on the reader, it can be 'bytes' or 'auto_consume'|null|
 |
 | `[-pm, --pool-messages]` | Use the pooled message|null|
+|
+| `[-ca, --crypto-failure-action]` | Crypto Failure Action|null|
+|
+| `[-mp, --print-metadata]` | Message metadata|null|
 |
 | `[-h, --help]` | Show this help message and exit.|null|
 |
