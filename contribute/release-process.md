@@ -9,12 +9,15 @@ The term feature/patch releases used throughout this document is defined as foll
 
 * Feature releases contain 2.10.0, 2.11.0, 3.0.0, and so on.
 * Patch releases refer to bug-fix releases, such as 2.10.1, 2.10.2, and so on.
+* Preview release refer to LTS release preview releases that happen in the releasing of a LTS version. 
 
 ## Preparation
 
 Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
 
-For feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
+For LTS and feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
+
+For preview releases of a LTS release, a branch `branch-X.0-preview` is created. This branch will is used to hold the commit to change the version to the preview version. Preview releases will be tagged in this branch.
 
 For patch releases, if there are no disagreements, you should cherry-pick all merged PRs labeled with `release/X.Y.Z` into `branch-X.Y`. After these PRs are cherry-picked, you should add the `cherry-picked/branch-X.Y` labels.
 
@@ -22,24 +25,27 @@ Sometimes some PRs cannot be cherry-picked cleanly, you might need to create a s
 
 For PRs that are still open, you can choose to delay them to the next release or ping others to review so that they can be merged.
 
-To verify the release branch is not broken, you can synchronize the branch in your personal repo and open a PR to trigger the CI.
-
-You can use the following command to catch basic compilation, checkstyle or spotbugs errors in your local env before cherry-picking.
-
-```bash
-mvn clean install -DskipTests
-```
+To verify the release branch is not broken, you should trigger a Pulsar CI builds for the [pulsar-ci.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci.yaml) and [pulsar-ci-flaky.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci-flaky.yaml) workflows. The builds must pass before a release is performed.
 
 If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
 
 Before you start the next release steps, make sure you have installed these software:
 
 * JDK 17 (for Pulsar version >= 2.11) or JDK 11 (for earlier versions)
-* Maven 3.8.6
+* Maven 3.9.9 (most recent stable Maven 3.9.x version)
 * Zip
 
-Also, you need to **clean up the bookkeeper's local compiled** to make sure the bookkeeper dependency is fetched from the Maven repository, details to see [this mailing list thread](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2).
+## Cleaning up locally compiled BookKeeper artifacts
 
+It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
+
+Cleaning up the local Maven repository Bookkeeper artifacts for the version used by Pulsar:
+
+```shell
+BOOKKEEPER_VERSION=$(mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
+echo "BookKeeper version is $BOOKKEEPER_VERSION"
+[ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
+```
 
 ## Set environment variables to be used across the commands {#env-vars}
 
@@ -48,6 +54,14 @@ Set version
 export VERSION_RC=3.0.4-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
 export VERSION_BRANCH=branch-3.0
+export UPSTREAM_REMOTE=origin
+```
+
+Example for preview releases:
+```shell
+export VERSION_RC=4.0.0-preview.1
+export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+export VERSION_BRANCH=branch-4.0-preview
 export UPSTREAM_REMOTE=origin
 ```
 
@@ -73,23 +87,21 @@ sudo apt install xsel
 # create alias pbcopy for copying stdin to clipboard
 alias pbcopy="xsel --clipboard --input"
 ```
+
 ## Create a release candidate
 
 ### Create the release branch
 
-We are going to create a branch from `master` to `branch-v2.X` where the tag will be generated and where new fixes will be applied as part of the maintenance for the release.
+We are going to create a release branch where the tag will be generated and where new fixes will be applied as part of the maintenance for the release.
 
-The branch needs only to be created for feature releases, and not for patch releases like `2.3.1`. For patch releases, go to the next step.
+The branch needs only to be created for feature releases, and not for patch releases like `3.3.2`. For patch releases, go to the next step.
 
-For example, when you create the `v2.3.0` release, the branch `branch-2.3` will be created; but for `v2.3.1`, we
-keep using the old `branch-2.3`.
-
-In these instructions, a fictitious release `2.X.0` is referred. Change the release version in the examples accordingly with the real version.
+For example, when working on `3.3.0` release, the branch `branch-3.3` will be created; but for `3.3.1`, the existing `branch-3.3` will be used.
 
 It is recommended to create a fresh clone of the repository to avoid any local files interfering in the process:
 
 ```shell
-git clone git@github.com:apache/pulsar.git
+git clone https://github.com/apache/pulsar
 cd pulsar
 export PULSAR_PATH=$(pwd)
 git checkout -b $VERSION_BRANCH origin/master
@@ -113,9 +125,7 @@ After the release, you can cleanup the worktree in the main repository directory
 git worktree remove ../pulsar-release-$VERSION_BRANCH
 ```
 
-If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch.
-
-Note that you should also stop the workflow for previous Pulsar versions that are EOL.
+If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch. Note that you should also remove the branches for previous Pulsar versions that are no longer [supported for security updates](https://pulsar.apache.org/contribute/release-policy/#supported-versions).
 
 ### Cherry-picking changes scheduled for the release
 
@@ -171,8 +181,6 @@ It will speed up cherry-picking since you commit ids are there and there's also 
 A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`.
 It's possible that some dependent commits are necessary to be cherry-picked when you encounter a lot of merge conflicts in a case where they aren't expected.
 
-
-
 ### Update project version and tag
 
 During the release process, you are going to initially create "candidate" tags, that after verification and approval will get promoted to the "real" final tag.
@@ -223,11 +231,11 @@ mvn clean install -DskipTests
 
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
 
-* `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
-* `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
-* directory `distribution/io/target/apache-pulsar-io-connectors-2.X.0-bin`
+* `distribution/server/target/apache-pulsar-3.X.Y-bin.tar.gz`
+* `distribution/offloaders/target/apache-pulsar-offloaders-3.X.Y-bin.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.zip`
+* directory `distribution/io/target/apache-pulsar-io-connectors-3.X.Y-bin`
 
 :::note
 
@@ -242,7 +250,9 @@ First, check that the `LICENSE` and `NOTICE` files cover all included jars for t
 ```shell
 cd $PULSAR_PATH
 src/check-binary-license.sh distribution/server/target/apache-pulsar-*-bin.tar.gz
+src/check-binary-license.sh distribution/shell/target/apache-pulsar-*-bin.tar.gz
 ```
+
 In some older branches, the script is called `src/check-binary-license` instead of `src/check-binary-license.sh`.
 
 ### Create and publish the GPG key if you haven't already done this
@@ -260,6 +270,7 @@ default-key <key fingerprint>
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
 This can be automated with this command:
+
 ```shell
 # KEY_ID is in short format, subset key id visible in gpg -K
 KEY_ID=$(gpg --list-keys --with-colons $APACHE_USER@apache.org | egrep "^pub" | awk -F: '{print $5}')
@@ -279,14 +290,15 @@ cd ~/pulsar-svn-release-$VERSION_RC
 svn mkdir --username $APACHE_USER -m "Add directory for pulsar $VERSION_RC release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
 # checkout the empty directory
 svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+
 # cd into the directory
 cd pulsar-$VERSION_RC
 
 # stage the release artifacts
 $PULSAR_PATH/src/stage-release.sh .
 
-# Please check the size of the files in the `pulsar-2.X.0-candidate-1`.
-# If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
+# Please check the size of the files in the `pulsar-3.X.Y-candidate-1`.
+# If you build the artifacts without a clean workspace, the `apache-pulsar-3.X.Y-src.tar.gz` files
 # may be too large to be unable to upload.
 ls -ltra
 du -ms *
@@ -303,9 +315,10 @@ du -ms *
 Then use instructions in [verifying release candidates](validate-release-candidate.md) page to do some sanity checks on the produced binary distributions.
 
  Make sure to run Apache RAT to verify the license headers in the src package:
+
 ```shell
 cd /tmp
-tar -xvzf ~/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
+tar -xvzf ~/pulsar-svn-release-${VERSION_RC}/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
 cd apache-pulsar-$VERSION_WITHOUT_RC-src
 mvn apache-rat:check
 ```
@@ -390,7 +403,8 @@ For creating and publishing the docker images, run the following commands:
 
 ```shell
 # ensure that you have the most recent base image locally
-docker pull ubuntu:22.04
+docker pull ubuntu:22.04 # for 3.0.x
+docker pull alpine:3.20 # for 3.3.x+
 
 cd $PULSAR_PATH
 DOCKER_USER=<your-dockerhub-username>
@@ -437,8 +451,11 @@ PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-par
 docker pull $PULSAR_IMAGE_NAME
 docker pull $PULSAR_ALL_IMAGE_NAME
 # check that images are about right, you can skip this if you have a slow internet connection
-docker run --rm  $PULSAR_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
-docker run --rm  $PULSAR_ALL_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+docker run --rm $PULSAR_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+docker run --rm $PULSAR_ALL_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+# check that Pulsar standalone starts too (use CTRL-C to terminate)
+docker run --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
 ```
 
 Now you can render the template to the clipboard
@@ -502,6 +519,67 @@ The vote should be open for at least 72 hours (3 days). Votes from Pulsar PMC me
 
 If the release is approved here with 3 +1 binding votes, you can then proceed to the next step. Otherwise, you should repeat the previous steps and prepare another release candidate to vote.
 
+## LTS Preview release steps (this only applies to preview releases such as 4.0.0-preview.1)
+
+For preview releases there is no release voting. The preview release is directly announced on Pulsar user and dev mailing lists to get release feedback before the official LTS release.
+
+A preview release is not an official Apache release and it's comparable to a nightly build of a project.
+The preview release artifacts will be made available on Maven central and Docker Hub so that users can practically use the artifacts in their existing build pipelines and provide feedback to the project. Binaries are complementary in Apache projects and don't state an official ASF release.
+
+Before continuing, perform a local [release validation](validate-release-candidate.md) for the artifacts.
+After this, follow the steps "Release Maven modules" and "Release Docker images" to publish the preview release in Maven central and DockerHub. The preview release isn't an official release and therefore the sources should NOT be released on SVN.
+
+Set the environment variables:
+
+```shell
+PULSAR_IMAGE_NAME=apachepulsar/pulsar:$VERSION_WITHOUT_RC
+PULSAR_ALL_IMAGE_NAME=apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+LTS_RELEASE=4.0
+```
+
+To announce a LTS preview release, you can use this template:
+
+```shell
+tee >(pbcopy) <<EOF
+To: dev@pulsar.apache.org, users@pulsar.apache.org
+Subject: Apache Pulsar $VERSION_WITHOUT_RC available for testing - Feedback requested
+
+Dear Apache Pulsar Community,
+
+We're excited to announce the availability of Apache Pulsar $VERSION_WITHOUT_RC, a preview release aimed at gathering user feedback for the upcoming Pulsar $LTS_RELEASE LTS release. This preview is not an official Apache release but provides an early look at the new features and changes.
+
+Preview artifacts are now available on Maven Central and Docker Hub, enabling users to integrate and test them in their build pipelines and environments. You can find downloadable artifacts at https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC/.
+
+Repository tag: v$VERSION_RC (commit $(git rev-parse v$VERSION_RC^{commit}))
+https://github.com/apache/pulsar/releases/tag/v$VERSION_RC
+
+Changes since $PREVIOUS_VERSION_WITHOUT_RC:
+https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
+
+Docker images: $PULSAR_IMAGE_NAME and $PULSAR_ALL_IMAGE_NAME.
+Docker image tag is "$VERSION_WITHOUT_RC".
+
+For Java client testing, we recommend using the Pulsar BOM in Maven or Gradle builds with version "$VERSION_WITHOUT_RC".
+Pulsar BOM usage is explained at https://pulsar.apache.org/docs/next/client-libraries-java-setup/#pulsar-bom.
+
+We urge you to test this preview in your environments and provide feedback. Please report any issues on our GitHub issue tracker at https://github.com/apache/pulsar/issues, checking for existing reports first.
+Known blockers are tracked with the "release/blocker" label at https://github.com/apache/pulsar/labels/release%2Fblocker.
+
+Pulsar $LTS_RELEASE timeline:
+$(date -I): $LTS_RELEASE preview 1
+$(date --date="10 days" -I): Target for $LTS_RELEASE preview 2
+$(date --date="10 days" -I): Code freeze for $LTS_RELEASE by branching branch-$LTS_RELEASE from the master branch
+$(date --date="13 days" -I): Target for $LTS_RELEASE release candidate 1
+$(date --date="18 days" -I): Reserved for $LTS_RELEASE release candidate 2 if needed
+$(date --date="20 days" -I): Planned $LTS_RELEASE.0 announcement (if release candidate 1 passes)
+
+Your participation is crucial in shaping the quality of Pulsar $LTS_RELEASE. We appreciate your support and feedback.
+
+Best regards,
+
+$MY_NAME
+EOF
+```
 
 ## Summarize the voting for the release
 
@@ -765,7 +843,7 @@ This step is for feature releases only, unless you're sure that significant refe
 You can generate references of config and command-line tool by running the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-# build Pulsar distributions under /path/to/pulsar-2.X.0
+# build Pulsar distributions under /path/to/pulsar-3.X.Y
 cd tools/pytools
 poetry install
 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
