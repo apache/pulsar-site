@@ -399,6 +399,13 @@ DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-org
 
 ### Release Pulsar 3.0 and later
 
+Before building docker images, clean up build history so that you don't run out of diskspace in the middle of the build.
+Docker buildx in Docker Desktop limits the build history size to 20GB by default.
+
+```shell
+docker buildx prune
+```
+
 For creating and publishing the docker images, run the following commands:
 
 ```shell
