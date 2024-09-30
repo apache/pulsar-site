@@ -416,13 +416,13 @@ docker pull alpine:3.20 # for 3.3.x+
 cd $PULSAR_PATH
 DOCKER_USER=<your-dockerhub-username>
 docker login -u $DOCKER_USER
-mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
+mvn install -pl docker/pulsar,docker/pulsar-all \
     -DskipTests \
-    -Dmaven.gitcommitid.nativegit=true \
-    -Pmain,docker -Pdocker-push \
+    -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
     -Ddocker.organization=$DOCKER_USER \
-    -pl docker/pulsar,docker/pulsar-all
+    -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
+    -Dmaven.gitcommitid.nativegit=true
 ```
 
 ## Call for the vote to release a version based on the release candidate
