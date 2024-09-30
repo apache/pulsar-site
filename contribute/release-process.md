@@ -421,6 +421,7 @@ mvn install -pl docker/pulsar,docker/pulsar-all \
     -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
     -Ddocker.organization=$DOCKER_USER \
+    -Ddocker.noCache=true \
     -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
     -Dmaven.gitcommitid.nativegit=true
 ```
