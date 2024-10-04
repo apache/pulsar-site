@@ -11,6 +11,7 @@ sidebar_label: Apache Pulsar 3.3.2
 - [fix][sec] Upgrade Avro to 1.11.4 to address CVE-2024-47561 ([#23394](https://github.com/apache/pulsar/pull/23394))
 - [fix][sec] Upgrade vertx to 4.5.10 to address CVE-2024-8391 ([#23338](https://github.com/apache/pulsar/pull/23338))
 - [fix][sec][branch-3.3] Upgrade protobuf-java to 3.25.5 ([#23356](https://github.com/apache/pulsar/pull/23356)) ([#23358](https://github.com/apache/pulsar/pull/23358))
+- [improve][misc] Upgrade Netty to 4.1.113 and netty-tcnative to 2.0.66 ([#23255](https://github.com/apache/pulsar/pull/23255))
 - [fix] Bump commons-io:commons-io from 2.8.0 to 2.14.0 ([#23393](https://github.com/apache/pulsar/pull/23393))
 - [fix] Bump io.grpc from 1.56.0 to 1.56.1 ([#23276](https://github.com/apache/pulsar/pull/23276))
 - [fix][metadata] Upgrade Oxia to 0.3.2 ([#23140](https://github.com/apache/pulsar/pull/23140))
@@ -58,7 +59,7 @@ sidebar_label: Apache Pulsar 3.3.2
 - [improve][broker] Support to specify auth-plugin, auth-parameters and tls-enable arguments when init cluster metadata ([#23087](https://github.com/apache/pulsar/pull/23087))
 - [improve][broker] Reuse method getAvailableBrokersAsync ([#23099](https://github.com/apache/pulsar/pull/23099))
 - [improve][admin] PIP-369 Introduce `unload` flag in `ns-isolation-policy set` call ([#23120](https://github.com/apache/pulsar/pull/23120))
-- [fix] StatsOutputStream: add string write function ([#308](https://github.com/apache/pulsar/pull/308)) ([#23227](https://github.com/apache/pulsar/pull/23227))
+- [fix] StatsOutputStream: add string write function ([#23227](https://github.com/apache/pulsar/pull/23227))
 
 ### Client
 
@@ -87,7 +88,6 @@ sidebar_label: Apache Pulsar 3.3.2
 - [fix][misc] Log Conscrypt security provider initialization warnings at debug level ([#23364](https://github.com/apache/pulsar/pull/23364))
 - [improve][misc] Improve AES-GCM cipher performance ([#23122](https://github.com/apache/pulsar/pull/23122))
 - [improve][misc] Optimize TLS performance by omitting extra buffer copies ([#23115](https://github.com/apache/pulsar/pull/23115))
-- [improve][misc] Upgrade Netty to 4.1.113 and netty-tcnative to 2.0.66 ([#23255](https://github.com/apache/pulsar/pull/23255))
 - [improve][pip] PIP-366: Support to specify different config for Configuration and Local Metadata Store ([#23041](https://github.com/apache/pulsar/pull/23041))
 - [improve][proxy] Reuse authentication instance in pulsar-proxy ([#23113](https://github.com/apache/pulsar/pull/23113))
 
