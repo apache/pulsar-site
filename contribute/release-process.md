@@ -31,8 +31,50 @@ If you haven't already done it, [create and publish the GPG key](create-gpg-keys
 
 Before you start the next release steps, make sure you have installed these software:
 
-* JDK 17 (for Pulsar version >= 2.11) or JDK 11 (for earlier versions)
+* Amazon Corretto OpenJDK
+  * JDK 21 for Pulsar version >= 3.3
+    * code will be compiled for Java 17 with Java 21
+    * Pulsar docker images are running Java 21 since 3.3.0
+  * JDK 17 for Pulsar version >= 2.11
+  * JDK 11 for earlier versions
+
+Make sure to install the latest stable Amazon Corretto OpenJDK version.
+The recommended installation method is [sdkman](https://sdkman.io/install/).
+
+```shell
+# find out most recent Amazon Corretto release
+sdk l java |grep amzn
+# install
+sdk i java 21.0.4-amzn
+sdk i java 17.0.12-amzn
+# switching between versions
+sdk u java 17.0.12-amzn
+sdk u java 21.0.4-amzn
+# adding aliases
+cd ~/.sdkman/candidates/java
+ln -s 17.0.12-amzn 17
+ln -s 21.0.4-amzn 21
+# switching between versions using aliases
+sdk u java 17
+sdk u java 21
+```
+
+Setting up Java version auto-switching with sdkman so that a `.sdkmanrc` file in a directory switches the Java version.
+
+```shell
+# enable sdkman_auto_env
+echo sdkman_auto_env=true >> ~/.sdkman/etc/config
+# ignore .sdkmanrc files by default
+echo .sdkmanrc >> ~/.gitignore_global
+# enable the global ~/.gitignore_global file
+git config --global core.excludesfile $HOME/.gitignore_global
+
+# now you can add .sdkmanrc files to repository directories for automatically switching the JDK version
+echo java=21 > .sdkmanrc && cd $PWD
+```
+
 * Maven 3.9.9 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.9`
 * Zip
 
 ## Cleaning up locally compiled BookKeeper artifacts
@@ -49,12 +91,12 @@ echo "BookKeeper version is $BOOKKEEPER_VERSION"
 
 ## Set environment variables to be used across the commands {#env-vars}
 
-Set version
 ```shell
 export VERSION_RC=3.0.4-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
 export VERSION_BRANCH=branch-3.0
 export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=17
 ```
 
 Example for preview releases:
@@ -63,6 +105,7 @@ export VERSION_RC=4.0.0-preview.1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
 export VERSION_BRANCH=branch-4.0-preview
 export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=21
 ```
 
 Set your ASF user id
@@ -113,6 +156,8 @@ Alternatively, you can use a git workspace to create a new, clean directory on y
 git worktree add ../pulsar-release-$VERSION_BRANCH $VERSION_BRANCH
 cd ../pulsar-release-$VERSION_BRANCH
 export PULSAR_PATH=$(pwd)
+# if you are using sdkman_auto_env to ensure that the correct JDK version is used for the release
+echo java=$SDKMAN_JAVA_VERSION > .sdkmanrc && cd $PWD
 ```
 
 if you get an error that the branch is already checked out, go to that directory detach it from the branch. After this the above command should succeed
