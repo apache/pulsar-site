@@ -77,18 +77,6 @@ echo java=21 > .sdkmanrc && cd $PWD
   * Install using `sdkman i maven 3.9.9`
 * Zip
 
-## Cleaning up locally compiled BookKeeper artifacts
-
-It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
-
-Cleaning up the local Maven repository Bookkeeper artifacts for the version used by Pulsar:
-
-```shell
-BOOKKEEPER_VERSION=$(mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
-echo "BookKeeper version is $BOOKKEEPER_VERSION"
-[ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
-```
-
 ## Set environment variables to be used across the commands {#env-vars}
 
 ```shell
@@ -156,8 +144,6 @@ Alternatively, you can use a git workspace to create a new, clean directory on y
 git worktree add ../pulsar-release-$VERSION_BRANCH $VERSION_BRANCH
 cd ../pulsar-release-$VERSION_BRANCH
 export PULSAR_PATH=$(pwd)
-# if you are using sdkman_auto_env to ensure that the correct JDK version is used for the release
-echo java=$SDKMAN_JAVA_VERSION > .sdkmanrc && cd $PWD
 ```
 
 if you get an error that the branch is already checked out, go to that directory detach it from the branch. After this the above command should succeed
@@ -237,8 +223,6 @@ In this process, the maven version of the project will always be the final one.
 cd $PULSAR_PATH
 ./src/set-project-version.sh $VERSION_WITHOUT_RC
 
-# Some version may not update the right parent version of `protobuf-shaded/pom.xml`, please double check it.
-
 # Commit
 git commit -m "Release $VERSION_WITHOUT_RC" -a
 
@@ -263,7 +247,18 @@ git tag -d v$VERSION_RC
 git push $UPSTREAM_REMOTE :v$VERSION_RC
 ```
 
-For patch releases, the tag is like `2.3.1`.
+## Cleaning up locally compiled BookKeeper artifacts
+
+It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
+
+Cleaning up the local Maven repository Bookkeeper artifacts for the version used by Pulsar:
+
+```shell
+cd $PULSAR_PATH
+BOOKKEEPER_VERSION=$(mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
+echo "BookKeeper version is $BOOKKEEPER_VERSION"
+[ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
+```
 
 ### Build release artifacts
 
@@ -271,6 +266,9 @@ Run the following command to build the artifacts:
 
 ```shell
 cd $PULSAR_PATH
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
+# build the binaries
 mvn clean install -DskipTests
 ```
 
@@ -281,12 +279,6 @@ After the build, you should find the following tarballs, zip files, and the conn
 * `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.tar.gz`
 * `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.zip`
 * directory `distribution/io/target/apache-pulsar-io-connectors-3.X.Y-bin`
-
-:::note
-
-The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.0.
-
-:::
 
 ### Check licenses
 
@@ -382,6 +374,8 @@ Upload the artifacts to ASF Nexus:
 
 ```shell
 cd $PULSAR_PATH
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
 # Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
 git status
 
@@ -438,6 +432,8 @@ Run the following commands on a Linux machine (or with Mac where DOCKER_HOST poi
 
 ```shell
 cd $PULSAR_PATH/docker
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
 ./build.sh
 DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
 ```
@@ -448,6 +444,10 @@ Before building docker images, clean up build history so that you don't run out 
 Docker buildx in Docker Desktop limits the build history size to 20GB by default.
 
 ```shell
+# check total size
+docker buildx du
+# cleanup disk space
+# this is mandatory, if usage shown in previous step is over 10GB
 docker buildx prune
 ```
 
@@ -459,6 +459,8 @@ docker pull ubuntu:22.04 # for 3.0.x
 docker pull alpine:3.20 # for 3.3.x+
 
 cd $PULSAR_PATH
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
 DOCKER_USER=<your-dockerhub-username>
 docker login -u $DOCKER_USER
 mvn install -pl docker/pulsar,docker/pulsar-all \
