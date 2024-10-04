@@ -5558,6 +5558,12 @@
                         "name": "topicVersion",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "brokerId",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "produces": [
@@ -5566,6 +5572,9 @@
                 "responses": {
                     "200": {
                         "description": "Everything is OK"
+                    },
+                    "307": {
+                        "description": "Current broker is not the target broker"
                     },
                     "403": {
                         "description": "Don't have admin permission"
