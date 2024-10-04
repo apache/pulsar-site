@@ -689,7 +689,7 @@ Then, you can [create a GitHub release](https://docs.github.com/en/repositories/
 echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 
 # cherry-picked changes template
-echo "[Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F${VERSION_WITHOUT_RC}+label%3Acherry-picked%2F${VERSION_BRANCH}+sort%3Acreated-asc)"
+echo "[""Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F${VERSION_WITHOUT_RC}+label%3Acherry-picked%2F${VERSION_BRANCH}+sort%3Acreated-asc)"|pbcopy
 ```
 
 1. Open the above URL in a browser and create release notes by clicking "Create release from tag".
