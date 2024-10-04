@@ -1,10 +1,17 @@
 module.exports = [
   {
+    "tagName": "v3.3.2",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.2/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": "v3.3.x"
+  },
+  {
     "tagName": "v3.3.1",
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.3.1/",
     "doc": "/docs/3.3.x/client-libraries-java",
-    "version": "v3.3.x"
+    "version": ""
   },
   {
     "tagName": "v3.3.0",
