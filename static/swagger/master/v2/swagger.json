@@ -710,6 +710,24 @@
             },
             "type": "object"
         },
+        "CompletableFutureSchemaMetadata": {
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "CompletableFutureSchemaVersion": {
             "properties": {
                 "cancelled": {
@@ -34918,6 +34936,72 @@
                     }
                 },
                 "summary": "test the schema compatibility",
+                "tags": [
+                    "schemas"
+                ]
+            }
+        },
+        "/schemas/{tenant}/{namespace}/{topic}/metadata": {
+            "get": {
+                "description": "",
+                "operationId": "SchemasResource_getSchemaMetadata",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllVersionsSchemaResponse"
+                        }
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Client is not authorized or Don't have admin permission"
+                    },
+                    "403": {
+                        "description": "Client is not authenticated"
+                    },
+                    "404": {
+                        "description": "Tenant or Namespace or Topic doesn't exist; or Schema is not found for this topic"
+                    },
+                    "412": {
+                        "description": "Failed to find the ownership for the topic"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Get the schema metadata of a topic",
                 "tags": [
                     "schemas"
                 ]

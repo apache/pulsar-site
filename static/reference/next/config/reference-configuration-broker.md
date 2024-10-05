@@ -5032,6 +5032,17 @@ Default is `CRC32C`. Other possible options are `CRC32`, `MAC` or `DUMMY` (no ch
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerForceRecovery
+Skip managed ledger failure to forcefully recover managed ledger.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerInactiveLedgerRolloverTimeSeconds
 Time to rollover ledger for inactive topic (duration without any publish on that topic). Disable rollover with value 0 (Default value 0)
 
@@ -5329,6 +5340,17 @@ If enabled, the maximum "acknowledgment holes" will not be limited and "acknowle
 **Default**: `false`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### schemaLedgerForceRecovery
+Skip schema ledger failure to forcefully recover topic successfully.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
