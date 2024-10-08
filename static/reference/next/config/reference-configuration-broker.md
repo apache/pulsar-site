@@ -1406,6 +1406,17 @@ If true, export topic level metrics otherwise namespace level
 
 **Category**: Metrics
 
+### healthCheckMetricsUpdateTimeInSeconds
+HealthCheck update frequency in seconds. Disable health check with value -1 (Default value -1)
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### jvmGCMetricsLoggerClassName
 Classname of Pluggable JVM GC metrics logger that can log GC specific metrics
 
