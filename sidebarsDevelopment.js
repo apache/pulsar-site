@@ -61,6 +61,7 @@ const sidebars = {
                         'release-note-guide',
                     ]
                 },
+                'maintenance-process',
                 'validate-release-candidate',
             ]
         },
