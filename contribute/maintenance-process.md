@@ -9,11 +9,15 @@ The following maintenance tasks are performed by Apache Pulsar committers since 
 
 Before merging a PR, please ensure you label the releases where the PR should also be applied. Our current process involves adding release labels for the next pending releases so that we also cherry-pick fixes to maintenance branches.
 
-Always label non-breaking fixes to the supported maintenance version branches. Check the supported versions to find out the currently supported branches and current versions. Pick the label for the next release. If the label is missing in GitHub, you should first add it.
+Always label non-breaking fixes to the supported maintenance version branches. Check the [supported Pulsar versions page](https://pulsar.apache.org/contribute/release-policy/#supported-versions) to find out the currently supported branches and current versions. Pick the label for the next release. If the label is missing in GitHub, you should first add it.
 
 For example, when the last release is `3.0.7` for `branch-3.0`, the respective PR label for the next release is `release/3.0.8`.
 
 These labels are crucial for searching PRs that need to be cherry-picked during the release process. Picking an outdated release label could cause the PR to be missed.
+
+A bug fix PR should always be included in all maintenance branches of the [supported Pulsar versions](https://pulsar.apache.org/contribute/release-policy/#supported-versions). For example, it should be avoided to cherry-pick a fix to `branch-3.0` but skip it for `branch-3.3`.
+
+New features (typically PIP implementations) should only be cherry-picked to a maintenance branch after opening a discussion on the [Pulsar dev mailing list](https://pulsar.apache.org/contact/#mailing-lists) and waiting for at least a lazy consensus decision. The [Pulsar Improvement Process (PIP)](https://github.com/apache/pulsar/tree/master/pip#pulsar-improvement-proposal-pip) mentions 48 hours as the voting time. The same minimum time should be held for lazy consensus decisions for adding PIPs to maintenance branches. There should be a clear reason why a feature needs to be added to a maintenance branch.
 
 ## Cherry-picking Process
 
