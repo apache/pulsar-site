@@ -2019,6 +2019,17 @@ Setting this value to 0 will disable the limit calculated per subscription.
 
 **Category**: Policies
 
+### keySharedUnblockingIntervalMs
+For Key_Shared subscriptions, when a blocked key hash gets unblocked, a redelivery will be attempted after a delay. This setting controls the delay. The reason to have the delay is to batch multiple unblocking events instead of triggering redelivery for each unblocking event.
+
+**Type**: `long`
+
+**Default**: `10`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### maxConsumerMetadataSize
 Maximum size of Consumer metadata
 
