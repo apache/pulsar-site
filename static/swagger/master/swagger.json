@@ -841,9 +841,6 @@
                     "format": "int64",
                     "type": "integer"
                 },
-                "lastSentPositionWhenJoining": {
-                    "type": "string"
-                },
                 "messageAckRate": {
                     "format": "double",
                     "type": "number"
@@ -869,6 +866,9 @@
                 "msgThroughputOut": {
                     "format": "double",
                     "type": "number"
+                },
+                "readPositionWhenJoining": {
+                    "type": "string"
                 },
                 "unackedMessages": {
                     "format": "int32",
@@ -2204,6 +2204,12 @@
                         "$ref": "#/definitions/ConsumerStats"
                     },
                     "type": "array"
+                },
+                "consumersAfterMarkDeletePosition": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 },
                 "delayedMessageIndexSizeInBytes": {
                     "format": "int64",
@@ -4111,6 +4117,12 @@
                         "$ref": "#/definitions/ConsumerStats"
                     },
                     "type": "array"
+                },
+                "consumersAfterMarkDeletePosition": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 },
                 "delayedMessageIndexSizeInBytes": {
                     "format": "int64",
