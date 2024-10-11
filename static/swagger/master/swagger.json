@@ -823,6 +823,34 @@
                 "consumerName": {
                     "type": "string"
                 },
+                "drainingHashes": {
+                    "items": {
+                        "$ref": "#/definitions/DrainingHash"
+                    },
+                    "type": "array"
+                },
+                "drainingHashesClearedTotal": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "drainingHashesUnackedMessages": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "keyHashRangeArrays": {
+                    "items": {
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "type": "array"
+                },
                 "keyHashRanges": {
                     "items": {
                         "type": "string"
@@ -1049,6 +1077,23 @@
                 },
                 "relativeToPublishRate": {
                     "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "DrainingHash": {
+            "properties": {
+                "blockedAttempts": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "hash": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "unackMsgs": {
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -2213,6 +2258,18 @@
                 },
                 "delayedMessageIndexSizeInBytes": {
                     "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesClearedTotal": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "drainingHashesUnackedMessages": {
+                    "format": "int32",
                     "type": "integer"
                 },
                 "durable": {
@@ -4126,6 +4183,18 @@
                 },
                 "delayedMessageIndexSizeInBytes": {
                     "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesClearedTotal": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "drainingHashesUnackedMessages": {
+                    "format": "int32",
                     "type": "integer"
                 },
                 "durable": {
@@ -6700,6 +6769,72 @@
                 "summary": "Update peer-cluster-list for a cluster.",
                 "tags": [
                     "clusters"
+                ]
+            }
+        },
+        "/namespaces/grantPermissionsOnTopics": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_grantPermissionsOnTopics",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "tenant/namespace/topic doesn't exit"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Grant new permissions to a role on multi-topics.",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/revokePermissionsOnTopics": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_revokePermissionsOnTopics",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "tenant/namespace/topic doesn't exit"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Revoke new permissions to a role on multi-topics.",
+                "tags": [
+                    "namespaces"
                 ]
             }
         },
