@@ -9,7 +9,9 @@ sidebar_label: Apache Pulsar 4.0.0
 Changes in 4.0.0 release since 3.3.0 release preparation was started.
 For the complete list, check the [full changelog](https://github.com/apache/pulsar/compare/188355b...v4.0.0) and [full PR list](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+milestone%3A4.0.0+sort%3Acreated-asc).
 
-### PIPs since 3.3.0 release
+### PIPs accepted since 3.0.0 release
+
+#### PIPs accepted in 4.0.0 release
 
 - [PIP-327](https://github.com/apache/pulsar/blob/master/pip/pip-327.md): Support force topic loading for unrecoverable errors ([#21752](https://github.com/apache/pulsar/pull/21752))
 - [PIP-337](https://github.com/apache/pulsar/blob/master/pip/pip-337.md): SSL Factory Plugin to customize SSL Context and SSL Engine generation ([#22016](https://github.com/apache/pulsar/pull/22016))
@@ -40,6 +42,53 @@ For the complete list, check the [full changelog](https://github.com/apache/puls
 - [PIP-379](https://github.com/apache/pulsar/blob/master/pip/pip-379.md): Key_Shared Draining Hashes for Improved Message Ordering ([#23309](https://github.com/apache/pulsar/pull/23309))
 - [PIP-381](https://github.com/apache/pulsar/blob/master/pip/pip-381-large-positioninfo.md): Handle large PositionInfo state ([#23328](https://github.com/apache/pulsar/pull/23328))
 - [PIP-383](https://github.com/apache/pulsar/blob/master/pip/pip-383.md): Support granting/revoking permissions for multiple topics ([#23355](https://github.com/apache/pulsar/pull/23355))
+- [PIP-384](https://github.com/apache/pulsar/blob/master/pip/pip-384.md): ManagedLedger interface decoupling ([#23363](https://github.com/apache/pulsar/pull/23363))
+
+#### PIPs accepted in 3.3.0 release
+
+- [PIP-315](https://github.com/apache/pulsar/blob/master/pip/pip-315.md): Configurable max delay limit for delayed delivery ([\#21798](https://github.com/apache/pulsar/pull/21798))
+- [PIP-321](https://github.com/apache/pulsar/blob/master/pip/pip-321.md): Introduce allowed-cluster at the namespace level ([\#21648](https://github.com/apache/pulsar/pull/21648))
+- [PIP-324](https://github.com/apache/pulsar/blob/master/pip/pip-324-Alpine%20Docker%20images.md): Alpine Docker images ([\#21716](https://github.com/apache/pulsar/pull/21716))
+- [PIP-325](https://github.com/apache/pulsar/blob/master/pip/pip-325.md): Add command to abort transaction ([\#21731](https://github.com/apache/pulsar/pull/21731))
+- [PIP-326](https://github.com/apache/pulsar/blob/master/pip/pip-326.md): Create a BOM to ease dependency management ([\#21747](https://github.com/apache/pulsar/pull/21747))
+- [PIP-329](https://github.com/apache/pulsar/blob/master/pip/pip-329.md): Strategy for maintaining the latest tag to Pulsar docker images ([\#21872](https://github.com/apache/pulsar/pull/21872))
+- [PIP-330](https://github.com/apache/pulsar/blob/master/pip/pip-330.md): getMessagesById gets all messages ([\#21873](https://github.com/apache/pulsar/pull/21873))
+- [PIP-342](https://github.com/apache/pulsar/blob/master/pip/pip-342%20OTel%20client%20metrics%20support.md): Support OpenTelemetry metrics in Pulsar client ([\#22178](https://github.com/apache/pulsar/pull/22178))
+- [PIP-343](https://github.com/apache/pulsar/blob/master/pip/pip-343.md): Use picocli instead of jcommander ([\#22181](https://github.com/apache/pulsar/pull/22181))
+- [PIP-344](https://github.com/apache/pulsar/blob/master/pip/pip-344.md): Correct the behavior of the public API pulsarClient.getPartitionsForTopic(topicName) ([\#22182](https://github.com/apache/pulsar/pull/22182))
+- [PIP-335](https://github.com/apache/pulsar/blob/master/pip/pip-335%20Oxia%20metadata%20plugin.md): Oxia metadata plugin ([\#22009](https://github.com/apache/pulsar/pull/22009))
+- [PIP-339](https://github.com/apache/pulsar/blob/master/pip/pip-339.md): Introducing the \--log-topic Option for Pulsar Sinks and Sources ([\#22071](https://github.com/apache/pulsar/pull/22071))
+- [PIP-282](https://github.com/apache/pulsar/blob/master/pip/pip-282.md): Change definition of the recently joined consumers position ([\#20776](https://github.com/apache/pulsar/pull/20776))
+
+#### PIPs accepted in 3.2.0 release
+
+- [PIP-323](https://github.com/apache/pulsar/blob/master/pip/pip-323.md): Complete Backlog Quota Telemetry ([\#21709](https://github.com/apache/pulsar/pull/21709))
+- [PIP-322](https://github.com/apache/pulsar/blob/master/pip/pip-322.md): Pulsar Rate Limiting Refactoring ([\#21680](https://github.com/apache/pulsar/pull/21680))
+- [PIP-320](https://github.com/apache/pulsar/blob/master/pip/pip-320.md): OpenTelemetry Scaffolding ([\#21635](https://github.com/apache/pulsar/pull/21635))
+- [PIP-318](https://github.com/apache/pulsar/blob/master/pip/pip-318.md): Don't retain null-key messages during topic compaction ([\#21541](https://github.com/apache/pulsar/pull/21541))
+- [PIP-315](https://github.com/apache/pulsar/blob/master/pip/pip-315.md): Configurable max delay limit for delayed delivery ([\#21490](https://github.com/apache/pulsar/pull/21490))
+- [PIP-313](https://github.com/apache/pulsar/blob/master/pip/pip-313.md): Support force unsubscribe using consumer api ([\#21452](https://github.com/apache/pulsar/pull/21452))
+- [PIP-312](https://github.com/apache/pulsar/blob/master/pip/pip-312.md): Use StateStoreProvider to manage state in Pulsar Functions endpoints ([\#21438](https://github.com/apache/pulsar/pull/21438))
+- [PIP-307](https://github.com/apache/pulsar/blob/master/pip/pip-307.md): Optimize Bundle Unload(Transfer) Protocol for ExtensibleLoadManager ([\#20748](https://github.com/apache/pulsar/pull/20748))
+- [PIP-307-dup](https://github.com/apache/pulsar/blob/master/pip/pip_307.md): Support subscribing multi topics for WebSocket ([\#21390](https://github.com/apache/pulsar/pull/21390))
+- [PIP-305](https://github.com/apache/pulsar/blob/master/pip/pip-305.md): Customize DNS servers to use for Pulsar Client ([\#21352](https://github.com/apache/pulsar/pull/21352))
+- [PIP-303](https://github.com/apache/pulsar/blob/master/pip/pip-303.md): Add optional parameters for getPartitionedStats ([\#21228](https://github.com/apache/pulsar/pull/21228))
+- [PIP-302](https://github.com/apache/pulsar/blob/master/pip/pip-302.md): Introduce refreshAsync API for TableView ([\#21271](https://github.com/apache/pulsar/pull/21271))
+- [PIP-301](https://github.com/apache/pulsar/blob/master/pip/pip-301.md): Introduce LoadBalanceResources to unify the load-date CRUD ([\#21129](https://github.com/apache/pulsar/pull/21129))
+- [PIP-300](https://github.com/apache/pulsar/blob/master/pip/pip-300.md): Add custom dynamic configuration for plugins ([\#21127](https://github.com/apache/pulsar/pull/21127))
+- [PIP-299](https://github.com/apache/pulsar/blob/master/pip/pip-299.md): Stop dispatch messages if the individual acks will be lost in the persistent storage ([\#21118](https://github.com/apache/pulsar/pull/21118))
+- [PIP-297](https://github.com/apache/pulsar/blob/master/pip/pip-297.md): Support terminating Function & Connector with the fatal exception ([\#21079](https://github.com/apache/pulsar/pull/21079))
+- [PIP-293](https://github.com/apache/pulsar/blob/master/pip/pip-293.md): Delete config disableBrokerInterceptors ([\#20993](https://github.com/apache/pulsar/pull/20993))
+- [PIP-290](https://github.com/apache/pulsar/blob/master/pip/pip-290.md): Provide a way to implement WSS E2E encryption and not need to expose the private key to the WebSocket Proxy ([\#20923](https://github.com/apache/pulsar/pull/20923))
+- [PIP-286](https://github.com/apache/pulsar/blob/master/pip/pip-286.md): Make the TopicCompactionService to support find entry based on publishTime or index ([\#20867](https://github.com/apache/pulsar/pull/20867))
+- [PIP-277](https://github.com/apache/pulsar/blob/master/pip/pip-277.md): Add current option in the Clusters list cmd ([\#20614](https://github.com/apache/pulsar/pull/20614))
+- [PIP-264](https://github.com/apache/pulsar/blob/master/pip/pip-264.md): Enhanced OTel-based metric system [\#21080](https://github.com/apache/pulsar/pull/21080)
+
+#### PIPs accepted in 3.1.0 release
+
+- [PIP-275](https://github.com/apache/pulsar/blob/master/pip/pip-275.md): Introduce topicOrderedExecutorThreadNum to deprecate numWorkerThreadsForNonPersistentTopic ([\#20504](https://github.com/apache/pulsar/pull/20504))
+- [PIP-255](https://github.com/apache/pulsar/issues/19806): Make the partition assignment strategy pluggable ([\#19806](https://github.com/apache/pulsar/issues/19806))
+- [PIP-278](https://github.com/apache/pulsar/blob/master/pip/pip-278.md): Support pluggable topic compaction service ([\#20624](https://github.com/apache/pulsar/pull/20624))
 
 ### Library updates and dependency changes
 
@@ -97,7 +146,6 @@ For the complete list, check the [full changelog](https://github.com/apache/puls
 - [feat][misc] PIP-264: Add OpenTelemetry authentication and token metrics ([#23016](https://github.com/apache/pulsar/pull/23016))
 - [feat][misc] PIP-264: Add OpenTelemetry messaging rate limit metrics ([#23035](https://github.com/apache/pulsar/pull/23035))
 - [feat][misc] PIP-264: Copy OpenTelemetry resource attributes to Prometheus labels ([#23005](https://github.com/apache/pulsar/pull/23005))
-- [improve] PIP-384: ManagedLedger interface decoupling ([#23363](https://github.com/apache/pulsar/pull/23363))
 - [improve][broker] PIP-327: Support force topic loading for unrecoverable errors ([#21759](https://github.com/apache/pulsar/pull/21759))
 - [improve][broker] PIP-347: Add role field in consumer's stat ([#22562](https://github.com/apache/pulsar/pull/22562))
 - [improve][broker] PIP-355: Enhancing Broker-Level Metrics for Pulsar ([#22779](https://github.com/apache/pulsar/pull/22779))
