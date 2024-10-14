@@ -12,4 +12,5 @@ $ pulsar compact-topic options
 | `-t, --topic` | Topic to compact|tmp|
 | `-h, --help` | Show this help message|false|
 | `-g, --generate-docs` | Generate docs|true|
+| `-ct, --compactor-type` | Choose compactor type, valid types are [PUBLISHING, EVENT_TIME]|PUBLISHING|
 
