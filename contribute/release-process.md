@@ -801,7 +801,7 @@ After publish Java libraries, run the following script from the main branch of a
 ```shell
 cd tools/pytools
 poetry install
-poetry run bin/java-apidoc-generator.py $VERSION_WITHOUT_RC
+poetry run bin/java-apidoc-generator.py $PULSAR_PATH
 ```
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is:
