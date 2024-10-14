@@ -37,45 +37,11 @@ Before you start the next release steps, make sure you have installed these soft
     * Pulsar docker images are running Java 21 since 3.3.0
   * JDK 17 for Pulsar version >= 2.11
   * JDK 11 for earlier versions
-
-Make sure to install the latest stable Amazon Corretto OpenJDK version.
-The recommended installation method is [sdkman](https://sdkman.io/install/).
-
-```shell
-# find out most recent Amazon Corretto release
-sdk l java |grep amzn
-# install
-sdk i java 21.0.4-amzn
-sdk i java 17.0.12-amzn
-# switching between versions
-sdk u java 17.0.12-amzn
-sdk u java 21.0.4-amzn
-# adding aliases
-cd ~/.sdkman/candidates/java
-ln -s 17.0.12-amzn 17
-ln -s 21.0.4-amzn 21
-# switching between versions using aliases
-sdk u java 17
-sdk u java 21
-```
-
-Setting up Java version auto-switching with sdkman so that a `.sdkmanrc` file in a directory switches the Java version.
-
-```shell
-# enable sdkman_auto_env
-echo sdkman_auto_env=true >> ~/.sdkman/etc/config
-# ignore .sdkmanrc files by default
-echo .sdkmanrc >> ~/.gitignore_global
-# enable the global ~/.gitignore_global file
-git config --global core.excludesfile $HOME/.gitignore_global
-
-# now you can add .sdkmanrc files to repository directories for automatically switching the JDK version
-echo java=21 > .sdkmanrc && cd $PWD
-```
-
 * Maven 3.9.9 (most recent stable Maven 3.9.x version)
   * Install using `sdkman i maven 3.9.9`
 * Zip
+
+Please refer to [setup-buildtools.md](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
 
 ## Set environment variables to be used across the commands {#env-vars}
 

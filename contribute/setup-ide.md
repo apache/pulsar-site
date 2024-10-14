@@ -10,8 +10,8 @@ Apache Pulsar is using [lombok](https://projectlombok.org/), so you have to ensu
 ### Configure Project JDK to JDK 17
 
 1. Open **Project Settings**. Click **File** → **Project Structure** → **Project Settings** → **Project**.
-2. Select the JDK version. From the JDK version drop-down list, select **Download JDK...** or choose an existing recent Java 17 JDK version.
-3. In the download dialog, select version **17** and vendor **Eclipse Temurin (AdoptOpenJDK HotSpot)**.
+2. Select the JDK version. From the JDK version drop-down list, select **Download JDK...** or choose an existing recent Java 17 JDK version [installed by SDKMAN](setup-buildtools.md).
+3. In the download dialog, select version **17** and vendor **Amazon Corretto**.
 
 ### Configure Java version for Maven
 
