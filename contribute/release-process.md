@@ -810,6 +810,12 @@ Once the docs are generated, you can add them and submit them in a PR. The expec
 * `static/api/client`
 * `static/api/pulsar-functions`
 
+```shell
+cd ../..
+git add static/api/*
+git commit -m "update java-apidoc for $VERSION_WITHOUT_RC"
+```
+
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
 ### Reference
@@ -829,6 +835,12 @@ poetry install
 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
+```shell
+cd ../..
+git add static/reference/*
+git commit -m "update reference for $VERSION_WITHOUT_RC"
+```
+
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/reference/2.X.x`
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
@@ -839,7 +851,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
-Otherwise, you should update the version in this file: <https://github.com/apache/pulsar-site/blob/26671a6ce02ed529eb26072846aedf14e4ab31a5/static/.htaccess#L19>
+Otherwise, you should update the version in this file: `static/.htaccess`
 
 ## Update `/docs` version list dropdown
 
@@ -855,7 +867,7 @@ LTS versions should be labeled this way: `<version> LTS`.
 
 If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
-Otherwise, you should update the dropdown version list in this file: <https://github.com/apache/pulsar-site/blob/main/src/theme/DocsVersionDropdownNavbarItem.js>
+Otherwise, you should update the dropdown version list in this file: `src/theme/DocsVersionDropdownNavbarItem.js`
 
 ## Announce the release
 

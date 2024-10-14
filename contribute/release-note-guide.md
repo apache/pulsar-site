@@ -50,6 +50,13 @@ VERSION_WITHOUT_RC=3.0.6
 ./scripts/register_new_version.py $VERSION_WITHOUT_RC $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
 ```
 
+Alternatively, for a tag instead of a release:
+
+```bash
+# For a tag instead of a release
+./scripts/register_new_version.py $VERSION_WITHOUT_RC $(cd $PULSAR_PATH && git show -s --format="%ae %aI" "v$VERSION_RC" | tail -n 1 | sed 's/@.* / /')
+```
+
 ## Generate release notes
 
 There isn't a definite way yet. 
@@ -73,7 +80,13 @@ git log --reverse  --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 
 Alternatively using "gh pr list"
 
 ```bash
-gh pr list -L 1000 --search "is:pr is:merged label:release/2.10.6 label:cherry-picked/branch-2.10" --json title,number,url | jq -r '.[] | "\(.title) [\(.number)](\(.url))"'
+gh pr list -L 1000 --search "is:pr is:merged label:release/2.10.6 label:cherry-picked/branch-2.10" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
+```
+
+For feature releases, using the milestone:
+
+```bash
+gh pr list -L 1000 --search "is:pr is:merged milestone:4.0.0" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
 ```
 
 ## Update the release note page
