@@ -13,7 +13,7 @@ The term feature/patch releases used throughout this document is defined as foll
 
 ## Preparation
 
-Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
+Open a discussion on <dev@pulsar.apache.org> to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
 
 For LTS and feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
 
@@ -41,7 +41,7 @@ Before you start the next release steps, make sure you have installed these soft
   * Install using `sdkman i maven 3.9.9`
 * Zip
 
-Please refer to [setup-buildtools.md](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
+Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
 
 ## Set environment variables to be used across the commands {#env-vars}
 
@@ -54,6 +54,7 @@ export SDKMAN_JAVA_VERSION=17
 ```
 
 Example for preview releases:
+
 ```shell
 export VERSION_RC=4.0.0-preview.1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
@@ -63,6 +64,7 @@ export SDKMAN_JAVA_VERSION=21
 ```
 
 Set your ASF user id
+
 ```shell
 export APACHE_USER=<your ASF userid>
 ```
@@ -70,11 +72,12 @@ export APACHE_USER=<your ASF userid>
 In addition, you will need to set `PULSAR_PATH` to point to the cleanly checked out working directory for the release branch.
 
 If you run into problems with GPG signing set this
-```
+
+```shell
 export GPG_TTY=$(tty)
 ```
 
-For some commands, a template is copied to the clipboard using `pbcopy`. 
+For some commands, a template is copied to the clipboard using `pbcopy`.
 This is already available on MacOS. For Linux, create a shell alias:
 
 ```shell
@@ -360,7 +363,9 @@ Before building docker images, clean up build history so that you don't run out 
 Docker buildx in Docker Desktop limits the build history size to 20GB by default.
 
 ```shell
-# check total size
+# check total docker disk usage
+docker system df
+# check total size of build cache
 docker buildx du
 # cleanup disk space
 # this is mandatory, if usage shown in previous step is over 10GB
@@ -396,6 +401,7 @@ Start a voting thread on the dev mailing list.
 Here is a way to render the template for the voting email.
 
 Set these shell variables
+
 ```shell
 DOCKER_USER=<your-dockerhub-username>
 STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
@@ -409,12 +415,14 @@ echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-all/tags to find the la
 ```
 
 Set these additional shell variable after looking up the URLs
+
 ```shell
 PULSAR_IMAGE_URL="<looked up in previous step>"
 PULSAR_ALL_IMAGE_URL="<looked up in previous step>"
 ```
 
 Set also these
+
 ```shell
 PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
 PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
@@ -430,6 +438,7 @@ docker run --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
 ```
 
 Now you can render the template to the clipboard
+
 ```shell
 tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org
@@ -618,7 +627,6 @@ echo "[""Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr
 
 The [Writing release notes](release-note-guide.md) guide should be followed to generate a proper release notes. That is covered in the "Update the document" section.
 
-
 ### Release the artifacts on SVN
 
 Promote the artifacts on the release SVN repo https://dist.apache.org/repos/dist/release. Note that this repo is limited to PMC members, You may need a PMC member's help if you are not one:
@@ -650,8 +658,9 @@ regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apa
 ```
 
 Go to check the result:
-- https://hub.docker.com/r/apachepulsar/pulsar/tags
-- https://hub.docker.com/r/apachepulsar/pulsar-all/tags
+
+* https://hub.docker.com/r/apachepulsar/pulsar/tags
+* https://hub.docker.com/r/apachepulsar/pulsar-all/tags
 
 Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images should be amd64 only.
 
@@ -661,7 +670,7 @@ This step is for the latest release only.
 
 :::
 
-```
+```shell
 regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
 regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
 ```
@@ -835,9 +844,10 @@ Otherwise, you should update the version in this file: <https://github.com/apach
 ## Update `/docs` version list dropdown
 
 The dropdown should have the following items:
-- Next
-- Active versions [still in support](/contribute/release-policy/#supported-versions)
-- Others
+
+* Next
+* Active versions [still in support](/contribute/release-policy/#supported-versions)
+* Others
 
 LTS versions should be labeled this way: `<version> LTS`.
 
