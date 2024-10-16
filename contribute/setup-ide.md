@@ -86,6 +86,52 @@ Some configuration in the Maven build is conditional based on the JDK version. I
     1. Verify Maven is using a supported version. Currently, the supported version of Maven is specified in the `<requireMavenVersion>` section of the root `pom.xml` file.
     2. Try "restart and clear caches" in IntelliJ and repeat the above steps to reload projects and generate sources.
 
+## Visual Studio Code (VS Code)
+
+Before starting, make sure you have installed the [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) in VS Code.
+
+Since multiple versions of Java are used for Pulsar development, it is recommended to use [SDKMAN](https://sdkman.io/installation) to manage different versions of Java. The separate guide [how to setup build tools](setup-buildtools.md) explains how to install Java 17 and 21 using SDKMAN.
+
+Once you have installed the Java versions using SDKMAN, you can add (or modify) the following settings to your VS Code User level `settings.json` file. Please check [VS Code documentation](https://code.visualstudio.com/docs/getstarted/settings) for more details. The simplest way to open the settings file is to run the `Preferences: Open Settings (JSON)` command from the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac).
+
+```json
+{
+    "java.jdt.ls.vmargs": "-Xmx6g -XX:+UseZGC -XX:+ZGenerational -Dsun.zip.disableMemoryMapping=true",
+    "java.jdt.ls.java.home": "~/.sdkman/candidates/java/21",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "~/.sdkman/candidates/java/21",
+            "default": true
+        },
+        {
+            "name": "JavaSE-17",
+            "path": "~/.sdkman/candidates/java/17"
+        }
+    ],
+    "java.autobuild.enabled": false,
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
+```
+
+If the `java.jdt.ls.java.home` setting doesn't point to a Java 21 JDK, you must remove `-XX:+ZGenerational` from `java.jdt.ls.vmargs` setting since Java 21 is the first version that supports generational ZGC.
+
+The `java.autobuild.enabled` setting is set to `false` since building the Pulsar project in VS Code takes very long time.
+
+The `java.debug.settings.onBuildFailureProceed` is set to `true` so that tests can be run even when there are individual build failures.
+
+Before running tests, you need to build the project manually at least once using the following command:
+
+```shell
+mvn -Pcore-modules,-main -T 1C clean install -DskipTests -Dspotbugs.skip=true -Dcheckstyle.skip=true -Dlicense.skip=true -DnarPluginPhase=none
+```
+
+This will make the protobuf / lightproto generated classes available to the tests run in the IDE. Without this there will be errors at runtime about missing classes or Mockito related errors.
+
+For troubleshooting, please check [Language support for Java extension documentation](https://github.com/redhat-developer/vscode-java/wiki/Troubleshooting). Adding `"java.transport": "stdio"` to the settings can help display errors in the error log if the problem is related to the language server.
+
 ## Eclipse
 
 Follow [these instructions](https://howtodoinjava.com/automation/lombok-eclipse-installation-examples/) to configure your Eclipse setup.
