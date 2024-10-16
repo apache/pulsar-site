@@ -55,8 +55,17 @@ gpg --verify apache-pulsar-<release>-bin.tar.gz.asc
 
 Before you start to validate the source tarball, make sure you have installed these software:
 
-- JDK 17 (for Pulsar version >= 2.11) or JDK 11 (for earlier versions)
-- Maven 3.8.6 or later
+* Amazon Corretto OpenJDK
+  * JDK 21 for Pulsar version >= 3.3
+    * code will be compiled for Java 17 with Java 21
+    * Pulsar docker images are running Java 21 since 3.3.0
+  * JDK 17 for Pulsar version >= 2.11
+  * JDK 11 for earlier versions
+* Maven 3.9.9 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.9`
+* Zip
+
+Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
 
 Download the source tarball and extract it. The extracted files are in a directory called `apache-pulsar-<release>-src`
 
