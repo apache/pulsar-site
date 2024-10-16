@@ -936,6 +936,19 @@ git commit -a -s -m "[cleanup][build] Bumped version to 3.Y.0-SNAPSHOT'
 
 Since this needs to be merged into `master`, you need to follow the regular process and create a Pull Request on GitHub.
 
+For feature releases, since a new branch is created for the release, the new branch needs to be protected against force pushes to prevent corrupting the commit history. This is done by adding a rule to the branch protection settings for the new branch in `.asf.yaml`.
+
+```yaml
+export RELEASE_BRANCH="branch-X.Y"
+# use yq to add the new branch to the .asf.yaml file
+yq -i '.github.protected_branches[strenv(RELEASE_BRANCH)]={}' .asf.yaml
+# commit the change to .asf.yaml
+git add .asf.yaml
+git commit -m "[improve][ci] Protect $RELEASE_BRANCH from force pushes'
+```
+
+This will prevent force pushing to the release branch, which is important to maintain the integrity of the commit history.
+
 ### For maintenance branches
 
 After the release process, you should bump the project version and append it with `-SNAPSHOT`.
