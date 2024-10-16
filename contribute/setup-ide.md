@@ -7,16 +7,16 @@ Apache Pulsar is using [lombok](https://projectlombok.org/), so you have to ensu
 
 ## IntelliJ IDEA
 
-### Configure Project JDK to JDK 17
+### Configure Project JDK to JDK 21
 
 1. Open **Project Settings**. Click **File** → **Project Structure** → **Project Settings** → **Project**.
-2. Select the JDK version. From the JDK version drop-down list, select **Download JDK...** or choose an existing recent Java 17 JDK version [installed by SDKMAN](setup-buildtools.md).
+2. Select the JDK version. From the JDK version drop-down list, select **Download JDK...** or choose an existing recent Java 21 JDK version [installed by SDKMAN](setup-buildtools.md).
 3. In the download dialog, select version **17** and vendor **Amazon Corretto**.
 
 ### Configure Java version for Maven
 
 1. Open Maven Importing Settings. Click **Settings** → **Build, Execution, Deployment** → **Build Tools** → **Maven** → **Importing**.
-2. For **JDK for Importer** setting, select **Use Project JDK**. This uses the Java 17 JDK for running Maven when importing the project.
+2. For **JDK for Importer** setting, select **Use Project JDK**. This uses the Java 21 JDK for running Maven when importing the project.
 3. Ensure that the JRE setting in **Maven** → **Runner** dialog is set to **Use Project JDK**.
 
 :::caution
