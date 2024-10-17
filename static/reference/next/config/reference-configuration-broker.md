@@ -3503,7 +3503,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `1998`
 
 **Dynamic**: `true`
 
