@@ -716,10 +716,10 @@ The advantages of this algorithm is that it affects only a single existing consu
 
 ##### Auto-split Consistent Hashing
 
-Auto-split Consistent Hashing assumes each consumer is mapped into a Hash Ring. It's a range of number from 0 to MAX_INT (32-bit) in which if you traverse the range, when reaching MAX_INT, the next number would be zero. It is as if you took a line starting from 0 ending at MAX_INT and bent into a circle such that the end glues to the start:
+Auto-split Consistent Hashing assumes each consumer is mapped into a Hash Ring. It's a range of number from 0 to 65,535 in which if you traverse the range, when reaching 65,535, the next number would be zero. It is as if you took a line starting from 0 ending at 65,535 and bent into a circle such that the end glues to the start:
 
 ```
- MAX_INT -----++--------- 0
+ 65,535 ------++--------- 0
               ||
          , - ~ ~ ~ - ,
      , '               ' ,
@@ -735,32 +735,33 @@ Auto-split Consistent Hashing assumes each consumer is mapped into a Hash Ring. 
 ```
 
 When adding a consumer, we mark 100 points on that circle and associate them to the newly added consumer. For each number between 1 and 100, we concatenate the consumer name to that number and run the hash function on it to get the location of the point on the circle that will be marked. For Example, if the consumer name is "orders-aggregator-pod-2345-consumer" then we would mark 100 points on that circle:
+
 ```
-    murmur32("orders-aggregator-pod-2345-consumer1") = 1003084738
-    murmur32("orders-aggregator-pod-2345-consumer2") = 373317202
+    murmur32("orders-aggregator-pod-2345-consumer␀0␀1") = 1003084738 % 65535 = 6028
+    murmur32("orders-aggregator-pod-2345-consumer␀0␀2") = 373317202 % 65535 = 29842
     ...
-    murmur32("orders-aggregator-pod-2345-consumer100") = 320276078
+    murmur32("orders-aggregator-pod-2345-consumer␀0␀100") = 320276078 % 65535 = 6533
 ```
 
-Since the hash function has the uniform distribution attribute, those points would be uniformly distributed across the circle.
+Since the hash function has the uniform distribution attribute, those points would be uniformly distributed across the circle in random order.
 
 ```
-    C1-100
-         , - ~ ~ ~ - ,   C1-1
+    C1-33
+         , - ~ ~ ~ - ,   C1-3
      , '               ' ,
    ,                       ,
-  ,                         , C1-2
+  ,                         , C1-45
  ,                           ,
  ,                           ,
  ,                           ,
-  ,                         ,  C1-3
+  ,                         ,  C1-23
    ,                       ,
      ,                  , '
        ' - , _ _ _ ,  '      ...
 
 ```
 
-A consumer is selected for a given message key by putting its hash on the circle then continue clock-wise on the circle until you reach a marking point. The point might have more than one consumer on it (hash function might have collisions) there for, we run the following operation to get a position within the list of consumers for that point, then we take the consumer in that position: `hash % consumer_list_size = index`.
+A consumer is selected for a given message key by putting its hash on the circle then continue clock-wise on the circle until you reach a marking point. The point might have more than one consumer on it (hash function might have collisions). In the case of collisions, the first added consumer will handle the hash range. When it leaves, the next consumer in the colliding consumers for the particular hash ring point will take over.
 
 When a consumer is added, we add 100 marking points to the circle as explained before. Due to the uniform distribution of the hash function, those 100 points act as if the new consumer takes a small slice of keys out of each existing consumer. It maintains the even distribution, on the trade-off that it impacts all existing consumers. [This video](https://www.youtube.com/watch?v=zaRkONvyGr8) explains the concept of Consistent Hashing quite well (the only difference is that in Pulsar's case we used K points instead of K hash functions as noted in the comments)
 
@@ -789,16 +790,188 @@ If the newly connected consumer didn't supply their ranges, or they overlap with
 ##### How to use mapping algorithms?
 
 To use a mapping algorithm mentioned above, you can specify the Key_Shared Mode when building the consumer:
-* AUTO_SPLIT - Auto-split Hash Range
-* STICKY - Sticky
+
+- `AUTO_SPLIT` - Auto-split Hash Range
+- `STICKY` - Sticky
 
 Consistent Hashing will be used instead of Hash Range for Auto-split if the broker configuration `subscriptionKeySharedUseConsistentHashing` is enabled.
 
-##### Preserving order of processing
+##### Preserving order of message delivery by key
 
-Key_Shared Subscription type guarantees a key will be processed by a *single* consumer at any given time. When a new consumer is connected, some keys will change their mapping from existing consumers to the new consumer. Once the connection has been established, the broker will record the current `lastSentPosition` and associate it with the new consumer. The `lastSentPosition` is a marker indicating that messages have been dispatched to the consumers up to this point. The broker will start delivering messages to the new consumer *only* when all messages up to the `lastSentPosition` have been acknowledged. This will guarantee that a certain key is processed by a single consumer at any given time. The trade-off is that if one of the existing consumers is stuck and no time-out was defined (acknowledging for you), the new consumer won't receive any messages until the stuck consumer resumes or gets disconnected.
+In Pulsar 4.0.0, Key_Shared Subscription has been improved to preserve the order of message delivery with the same key when using the `AUTO_SPLIT` mode. The message delivery will no longer be blocked completely when new consumers join or leave.
 
-That requirement can be relaxed by enabling `allowOutOfOrderDelivery` via the Consumer API. If set on the new consumer, then when it is connected, the broker will allow it to receive messages knowing some messages of that key may be still be processing in other consumers at the time, thus order may be affected for that short period of adding a new consumer.
+For Key_Shared subscriptions, messages with the same key are delivered and allowed to be in unacknowledged state to only one consumer at a time. This ensures that the order of message delivery by key is preserved.
+
+When new consumers join or leave, the consumer handling a message key can change when the default `AUTO_SPLIT` mode is used, but only after all unacknowledged messages for a particular key are acknowledged or the original consumer disconnects.
+
+:::note
+
+The Key_Shared subscription doesn't prevent using any methods in the consumer API. For example, the application might call `negativeAcknowledge` or the `redeliverUnacknowledgedMessages` method. When messages are scheduled for delivery due to these methods, they will get redelivered as soon as possible. There's no ordering guarantee in these cases, however the guarantee of delivering a message key to a single consumer at a time will continue to be preserved.
+
+:::
+
+##### Troubleshooting issues when message delivery is blocked for a key in Key_Shared subscriptions `AUTO_SPLIT` mode
+
+Pulsar 4.0.0 added consumer-level topic stats to observe unacknowledged messages that block message delivery for a key in Key_Shared subscriptions using the `AUTO_SPLIT` mode.
+
+- `drainingHashesCount` - the current number of hashes in the draining state for this consumer
+- `drainingHashesClearedTotal` - the total number of hashes cleared from the draining state since the consumer connected
+- `drainingHashesUnackedMessages` - the total number of unacknowledged messages for all draining hashes for this consumer
+- `drainingHashes` - draining hashes information for this consumer
+  - `hash` - the sticky key hash which is draining
+  - `unackMsgs` - the number of unacknowledged messages for this hash
+  - `blockedAttempts` - the number of times the hash has blocked an attempted delivery of a message
+
+Instead of tracking individual blocked keys, the `drainingHashes` field tracks the hashes that are in the draining state and being blocked by unacknowledged messages. The reason to track the hashes instead of the keys is to avoid the overhead of tracking individual keys so that the broker can scale better when there are a large number of keys. The hash space has been reduced to 2^16 (65,536) in Pulsar 4.0.0, down from 2^32 in previous Pulsar versions.
+
+It's possible to calculate the hash for a key by using the Murmur3 32-bit hash function. The pseudo code to calculate the hash for a key is:
+
+```
+hash = murmur32("key") % 65536 + 1
+```
+
+In addition, the consumer-level topic stats contains the following fields:
+
+- `keyHashRangeArrays` - the consumer's hash range assignments in a list of lists where each item contains the start and end as elements.
+  - example `[ [ 2960, 5968 ], [ 22258, 43033 ], [ 49261, 54464 ], [ 55155, 61273 ] ]`
+
+This field `keyHashRangeArrays` replaces `keyHashRange` field available in earlier Pulsar versions. The format of the field is different.
+
+Example of both fields where the difference is visible:
+
+```json
+{
+        "keyHashRangeArrays" : [ [ 2960, 5968 ], [ 22258, 43033 ], [ 49261, 54464 ], [ 55155, 61273 ] ],
+        "keyHashRanges" : [ "[2960, 5968]", "[22258, 43033]", "[49261, 54464]", "[55155, 61273]" ],
+}
+```
+
+The field `keyHashRanges` contained the information as a list of string values, which isn't very usable for most use cases since it would need to be parsed before it can be used.
+
+Example of the consumer stats part of the topic stats for a subscription:
+
+```json
+{      
+      "consumers" : [ {
+        "msgRateOut" : 0.0,
+        "msgThroughputOut" : 0.0,
+        "bytesOutCounter" : 1560,
+        "msgOutCounter" : 30,
+        "msgRateRedeliver" : 0.0,
+        "messageAckRate" : 0.0,
+        "chunkedMessageRate" : 0.0,
+        "consumerName" : "c1",
+        "availablePermits" : 70,
+        "unackedMessages" : 30,
+        "avgMessagesPerEntry" : 1,
+        "blockedConsumerOnUnackedMsgs" : false,
+        "drainingHashesCount" : 5,
+        "drainingHashesClearedTotal" : 0,
+        "drainingHashesUnackedMessages" : 10,
+        "drainingHashes" : [ {
+          "hash" : 2862,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 5
+        }, {
+          "hash" : 11707,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 9
+        }, {
+          "hash" : 15786,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 6
+        }, {
+          "hash" : 43539,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 6
+        }, {
+          "hash" : 45436,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 9
+        } ],
+        "address" : "/127.0.0.1:55829",
+        "connectedSince" : "2024-10-21T05:39:39.077284+03:00",
+        "clientVersion" : "Pulsar-Java-v4.0.0",
+        "lastAckedTimestamp" : 0,
+        "lastConsumedTimestamp" : 1728527979411,
+        "lastConsumedFlowTimestamp" : 1728527979106,
+        "keyHashRangeArrays" : [ [ 2960, 5968 ], [ 22258, 43033 ], [ 49261, 54464 ], [ 55155, 61273 ] ],
+        "metadata" : { },
+        "lastAckedTime" : "1970-01-01T02:00:00+02:00",
+        "lastConsumedTime" : "2024-10-21T05:39:39.411+03:00"
+      }, {
+        "msgRateOut" : 0.0,
+        "msgThroughputOut" : 0.0,
+        "bytesOutCounter" : 0,
+        "msgOutCounter" : 0,
+        "msgRateRedeliver" : 0.0,
+        "messageAckRate" : 0.0,
+        "chunkedMessageRate" : 0.0,
+        "consumerName" : "c2",
+        "availablePermits" : 1000,
+        "unackedMessages" : 0,
+        "avgMessagesPerEntry" : 0,
+        "blockedConsumerOnUnackedMsgs" : false,
+        "drainingHashesCount" : 0,
+        "drainingHashesClearedTotal" : 0,
+        "drainingHashesUnackedMessages" : 0,
+        "drainingHashes" : [ ],
+        "address" : "/127.0.0.1:55829",
+        "connectedSince" : "2024-10-21T05:39:39.294216+03:00",
+        "clientVersion" : "Pulsar-Java-v4.0.0",
+        "lastAckedTimestamp" : 0,
+        "lastConsumedTimestamp" : 0,
+        "lastConsumedFlowTimestamp" : 1728527979297,
+        "keyHashRangeArrays" : [ [ 1, 2959 ], [ 5969, 22257 ], [ 43034, 49260 ], [ 54465, 55154 ], [ 61274, 65535 ] ],
+        "metadata" : { },
+        "lastAckedTime" : "1970-01-01T02:00:00+02:00",
+        "lastConsumedTime" : "1970-01-01T02:00:00+02:00"
+      } ]
+}
+```
+
+Relevant information for consumer c1:
+
+```json
+{
+        "drainingHashesCount" : 5,
+        "drainingHashesClearedTotal" : 0,
+        "drainingHashesUnackedMessages" : 10,
+        "drainingHashes" : [ {
+          "hash" : 2862,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 5
+        }, {
+          "hash" : 11707,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 9
+        }, {
+          "hash" : 15786,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 6
+        }, {
+          "hash" : 43539,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 6
+        }, {
+          "hash" : 45436,
+          "unackMsgs" : 2,
+          "blockedAttempts" : 9
+        } ],
+}
+```
+
+Relevant information in this case about consumer c2:
+
+```json
+{
+        "keyHashRangeArrays" : [ [ 1, 2959 ], [ 5969, 22257 ], [ 43034, 49260 ], [ 54465, 55154 ], [ 61274, 65535 ] ],
+}
+```
+
+In Pulsar 4.0.0, the Key_Shared implementation only blocks hashes that are necessary. For each hash, there is a way to obtain detailed information to determine why the delivery is blocked. The major difference from the previous `readPositionWhenJoining` solution is that it is now possible to automate and build CLI and web user interface tools to assist users, making it very easy to troubleshoot issues when message delivery is blocked by unacknowledged messages in Key_Shared `AUTO_SPLIT` subscriptions.
+
+A future improvement will be to add a REST API for retrieving the unacknowledged message ID information of the unacknowledged message for a hash. Using this information, it will be possible to find out the details of the message that is blocking a particular hash from being delivered to a consumer. The REST API could also have additional features, such as searching by key or calculating the hash for a given key.
 
 ##### Batching for Key_Shared Subscriptions
 
