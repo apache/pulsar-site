@@ -40,6 +40,7 @@ For the complete list, check the [full changelog](https://github.com/apache/puls
 - [PIP-376](https://github.com/apache/pulsar/blob/master/pip/pip-376-Topic-Policies-Service-Pluggable.md): Make topic policies service pluggable ([#23248](https://github.com/apache/pulsar/pull/23248))
 - [PIP-378](https://github.com/apache/pulsar/blob/master/pip/pip-378.md): Add ServiceUnitStateTableView abstraction (ExtensibleLoadMangerImpl only) ([#23300](https://github.com/apache/pulsar/pull/23300))
 - [PIP-379](https://github.com/apache/pulsar/blob/master/pip/pip-379.md): Key_Shared Draining Hashes for Improved Message Ordering ([#23309](https://github.com/apache/pulsar/pull/23309))
+  - [Documentation: Preserving order of message delivery by key](https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#preserving-order-of-message-delivery-by-key)
 - [PIP-381](https://github.com/apache/pulsar/blob/master/pip/pip-381-large-positioninfo.md): Handle large PositionInfo state ([#23328](https://github.com/apache/pulsar/pull/23328))
 - [PIP-383](https://github.com/apache/pulsar/blob/master/pip/pip-383.md): Support granting/revoking permissions for multiple topics ([#23355](https://github.com/apache/pulsar/pull/23355))
 - [PIP-384](https://github.com/apache/pulsar/blob/master/pip/pip-384.md): ManagedLedger interface decoupling ([#23363](https://github.com/apache/pulsar/pull/23363))
