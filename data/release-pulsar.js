@@ -2,7 +2,7 @@ module.exports = [
   {
     "author": "lhotari",
     "tagName": "v4.0.0",
-    "publishedAt": "2024-10-14T17:03:07+03:00",
+    "publishedAt": "2024-10-21T18:07:26Z",
     "vtag": "4.0.x",
     "releaseNotes": "/release-notes/versioned/pulsar-4.0.0/",
     "doc": "/docs/4.0.x",

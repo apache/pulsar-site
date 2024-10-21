@@ -4,7 +4,7 @@ title: Apache Pulsar 4.0.0
 sidebar_label: Apache Pulsar 4.0.0
 ---
 
-#### 2024-10-14
+#### 2024-10-21
 
 Changes in 4.0.0 release since 3.3.0 release preparation was started.
 For the complete list, check the [full changelog](https://github.com/apache/pulsar/compare/188355b...v4.0.0) and [full PR list](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+milestone%3A4.0.0+sort%3Acreated-asc).
