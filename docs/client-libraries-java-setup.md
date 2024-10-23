@@ -79,6 +79,12 @@ If you use Maven, add the following information to the `pom.xml` file.
 
 If you use Gradle, add the following information to the `build.gradle` file.
 
+:::note
+
+Please notice that when using Spring Boot and the default Gradle  build with the Spring Dependency Management plugin (`io.spring.dependency-management`), it is necessary to use Spring Dependency Management plugin features to configure the Pulsar version. Please refer to the next section for more details.
+
+:::
+
 ```groovy
 def pulsarVersion = '@pulsar:version@'
 
@@ -87,7 +93,26 @@ dependencies {
   implementation 'org.apache.pulsar:pulsar-client'
 }
 ```
+
 Note that the version is number for the `pulsar-client` dependency is now omitted as the Pulsar BOM dictates which version is used.
+
+#### Gradle with Spring Boot, using Spring Dependency Management plugin
+
+Please notice that when using the Spring Dependency Management plugin (`io.spring.dependency-management`) in Gradle, it is necessary to use Spring Dependency Management plugin features to configure the Pulsar version.
+The Spring Boot [Dependency Version properties](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-dependency-versions.html) define `pulsar.version` and `pulsar-reactive.version` for controlling the Pulsar Java client version and Pulsar Reactive client version.
+
+To use a specific Pulsar version for the Pulsar Java client in a Spring Boot application using Gradle, add the following to your `build.gradle` file in a Spring Boot project:
+
+```groovy
+ext['pulsar.version'] = '@pulsar:version@'
+
+// The Pulsar Java client will be automatically added to dependencies as a transitive dependency of the spring-boot-starter-pulsar dependency
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-pulsar'
+}
+```
+
+You can find more information about Spring Pulsar in the [Spring for Apache Pulsar documentation](https://spring.io/projects/spring-pulsar).
 
 ## Step 2: Connect to Pulsar cluster
 
