@@ -174,6 +174,7 @@ By default Java applications have a limit for direct memory allocations. The all
 The Pulsar Java client uses [Netty](https://netty.io/) under the hood and uses Netty direct buffers for data transport.
 
 Netty has a feature that allows optimized direct memory buffer access. This feature enables Netty to use low level APIs such as `sun.misc.Unsafe` for direct memory operations, which provides faster allocation and deallocation of direct buffers.
+The faster deallocation can help avoid direct memory exhaustion and `java.lang.OutOfMemoryError: Direct buffer memory` errors. These errors can occur when the Netty memory pool and memory allocator cannot release memory back to the operating system quickly enough.
 
 To enable this feature in Java clients since Java 11, you need to add the following JVM options to the application that uses the Java client:
 
