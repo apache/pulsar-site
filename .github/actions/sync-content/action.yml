@@ -20,20 +20,19 @@ description: Synchronize website content from the main repo
 runs:
   using: composite
   steps:
-    - name: Install poetry
-      run: pipx install poetry
-      shell: bash
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-        cache: 'poetry'
-
     - uses: actions/checkout@v4
       with:
         repository: apache/pulsar
         path: tmp/pulsar
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'poetry'
+    - name: Install poetry
+      run: pipx install poetry
+      shell: bash
     - name: Cache local Maven repository
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.m2/repository/*/*/*
@@ -54,7 +53,6 @@ runs:
         MAVEN_OPTS: -Xss1500k -Xmx1500m -Daether.connector.http.reuseConnections=false -Daether.connector.requestTimeout=60000 -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.http.retryHandler.requestSentEnabled=true -Dmaven.wagon.http.serviceUnavailableRetryStrategy.class=standard -Dmaven.wagon.rto=60000
       run: mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
       shell: bash
-
     - name: Update generated docs
       working-directory: tools/pytools
       run: |
