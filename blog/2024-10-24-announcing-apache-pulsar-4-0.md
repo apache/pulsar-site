@@ -37,14 +37,13 @@ The Docker images now include Java 21 with Generational ZGC, bringing significan
 
 These improvements make Pulsar 4.0's Docker runtime an even more compelling choice for organizations requiring both security and performance in their messaging infrastructure. The combination of Alpine Linux's minimal attack surface and Java 21's advanced garbage collection provides a robust foundation for running Pulsar in containerized environments.
 
-
 ### Enhanced Quality of Service (QoS) Controls
 
 Multi-tenancy in messaging systems presents unique architectural challenges, particularly around resource isolation and predictable performance. Apache Pulsar's approach to this has centered on providing granular control over system resources while maintaining consistency across tenant workloads.
 
 The core advancement in Pulsar 4.0 comes through [PIP-322 Pulsar Rate Limiting Refactoring](https://github.com/apache/pulsar/blob/master/pip/pip-322.md). At its foundation is a token bucket algorithm implementation that unifies rate limiting across broker, topic, and resource group levels. This eliminates the previous split between "default" and "precise" rate limiters—a design choice that had introduced unnecessary CPU overhead and lock contention in IO threads.
 
-The practical impact is straightforward: more predictable performance in multi-tenant deployments, especially when multiple rate limiting conditions intersect. The community is already building on this foundation with [PIP-385](https://lists.apache.org/thread/9wddmj4o5mrdst427r40rr7phqb05y6s), which addresses producer flow control — a key piece in completing Pulsar's end-to-end QoS capabilities.
+The practical impact is straightforward: more predictable performance in multi-tenant deployments, especially when multiple rate limiting conditions intersect. While Pulsar already supports producer rate limiting, the community is building on this foundation with [PIP-385](https://lists.apache.org/thread/9wddmj4o5mrdst427r40rr7phqb05y6s) to improve producer flow control —a key piece in completing Pulsar's end-to-end QoS capabilities.
 
 #### Rate Limiting and Capacity Management in Modern Messaging Platforms
 
@@ -103,4 +102,4 @@ We extend our deepest gratitude to:
 
 The project faces typical open-source challenges — we're operating with a volunteer workforce and currently experiencing a backlog in pull request reviews. While this is a common scenario in successful Apache projects, we're actively working on processes to handle contributions more efficiently.
 
-Apache Pulsar's strength lies in its community-driven development. Whether you're running Pulsar in production or evaluating it for your technology stack, we encourage you to join the conversation on the [dev@pulsar.apache.org](mailto:dev@pulsar.apache.org) mailing list or the [Pulsar Slack community](https://apache-pulsar.slack.com/). Your experience and feedback help shape the future of this platform.
+Apache Pulsar's strength lies in its community-driven development. Whether you're running Pulsar in production or evaluating it for your technology stack, we encourage you to join the conversation on the [dev@pulsar.apache.org](https://pulsar.apache.org/contact/#mailing-lists) mailing list or the [Pulsar Slack community](https://pulsar.apache.org/community/#section-discussions). Your experience and feedback help shape the future of this platform.
