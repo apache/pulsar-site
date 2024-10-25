@@ -2,7 +2,7 @@ const replace = require("replace-in-file");
 
 const semver = require("semver");
 const CWD = process.cwd();
-const siteConfig = require(`${CWD}/docusaurus.config.js`);
+const siteConfig = {url: "https://pulsar.apache.org", baseUrl: "/"};
 const nextDocsDir = `${CWD}/docs`;
 const docsDir = `${CWD}/versioned_docs`;
 const restApiVersions = require("../static/swagger/restApiVersions.json");

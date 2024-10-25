@@ -144,7 +144,7 @@ sidebar_label: Apache Pulsar 2.11.1
 - [IO Connector] Update Elasticsearch sink idle cnx timeout to 30s [#19377](https://github.com/apache/pulsar/pull/19377)
 - [IO Connector] DBC sink: allow any jdbc driver [#17951](https://github.com/apache/pulsar/pull/17951)
 - [IO Connector] ElasticSearch sink: align null fields behaviour [#18577](https://github.com/apache/pulsar/pull/18577)
-- [IO Connector] KCA sink: handle null values with KeyValue<Avro,Avro> schema [#19861](https://github.com/apache/pulsar/pull/19861)
+- [IO Connector] KCA sink: handle null values with KeyValue&lt;Avro,Avro&gt; schema [#19861](https://github.com/apache/pulsar/pull/19861)
 - [IO Connector] KCA: option to collapse partitioned topics [#19923](https://github.com/apache/pulsar/pull/19923)
 - [IO Connector] KCA: flag to force optional primitive schemas [#19951](https://github.com/apache/pulsar/pull/19951)
 -

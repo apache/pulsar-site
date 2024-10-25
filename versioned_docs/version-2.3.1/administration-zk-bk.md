@@ -250,7 +250,7 @@ When you use this command, you create a new ledger on the local bookie, write a 
 
 Before you decommission a bookie, you need to check your environment and meet the following requirements.
 
-1. Ensure the state of your cluster supports decommissioning the target bookie. Check if `EnsembleSize >= Write Quorum >= Ack Quorum` is `true` with one less bookie.
+1. Ensure the state of your cluster supports decommissioning the target bookie. Check if `EnsembleSize &gt;= Write Quorum &gt;= Ack Quorum` is `true` with one less bookie.
 
 2. Ensure the target bookie is listed after using the `listbookies` command.
 

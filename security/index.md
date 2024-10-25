@@ -17,7 +17,7 @@ For instructions on how to subscribe, please see https://pulsar.apache.org/conta
 
 * 2024-10-04 [Apache Pulsar 3.3.2 released with important security fix for CVE-2024-47561](https://lists.apache.org/thread/o7xg4odt1ms1g46f3mjn39bw5kq3hks0)
 * 2024-10-04 [Apache Pulsar 3.0.7 released with important security fix for CVE-2024-47561](https://lists.apache.org/thread/8ogktnsjns3r9oq1gfwkp0xnmph0qm0m)
-* 2024-10-04 [Expediting Pulsar releases 3.0.7 and 3.3.2 due to critical RCE vulnerability in Avro Java SDK <1.11.4, CVE-2024-47561](https://lists.apache.org/thread/ptb227lw8lljw5zv7z2qo2mx9xxoyl5c)
+* 2024-10-04 [Expediting Pulsar releases 3.0.7 and 3.3.2 due to critical RCE vulnerability in Avro Java SDK &lt;1.11.4, CVE-2024-47561](https://lists.apache.org/thread/ptb227lw8lljw5zv7z2qo2mx9xxoyl5c)
 * 2024-04-02 [CVE-2024-29834](CVE-2024-29834.md) Improper Authorization For Namespace and Topic Management Endpoints
 * 2024-03-12 [CVE-2022-34321](CVE-2022-34321.md) Improper Authentication for Pulsar Proxy Statistics Endpoint
 * 2024-03-12 [CVE-2024-27135](CVE-2024-27135.md) Improper Input Validation in Pulsar Function Worker allows Remote Code Execution
