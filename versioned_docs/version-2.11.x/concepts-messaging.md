@@ -723,7 +723,7 @@ When a consumer is added, we add 100 marking points to the circle as explained b
 
 ##### Sticky
 
-The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped to a multiple regions in this range and there is no overlap between regions. The consumer is selected by running a modulo operation on the message hash by the range size (65,536), the number received (0 &lt;= i < 65,536), is contained within a single region. The consumer mapped to the region is the one selected.
+The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped to multiple regions in this range and there is no overlap between regions. The consumer is selected by running a modulo operation on the message hash by the range size (65,536), the number received (0 &lt;= i < 65,536), is contained within a single region. The consumer mapped to the region is the one selected.
 In this algorithm you have full control. Every newly added consumer specifies the ranges it wishes to be mapped to by using Consumer API. When the consumer object is constructed, you can specify the list of ranges. It's your responsibility to make sure there are no overlaps and all the range is covered by regions.
 
 Example:
