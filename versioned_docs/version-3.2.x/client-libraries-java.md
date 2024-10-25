@@ -12,6 +12,12 @@ You can use a Pulsar Java client to create Pulsar [producers](concepts-clients.m
 2. [Initialize a Java client](client-libraries-java-initialize.md)
 3. [Use a Java client](client-libraries-java-use.md)
 
+:::note
+
+Please refer to [Java client Performance considerations](client-libraries-java-setup.md#java-client-performance) for more information on how to improve the performance of the Java client and tune the Java JVM options to avoid `java.lang.OutOfMemoryError: Direct buffer memory` errors in high-throughput applications.
+
+:::
+
 ## What's next?
 
 - [Work with clients](client-libraries-clients.md)

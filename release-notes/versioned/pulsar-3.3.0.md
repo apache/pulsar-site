@@ -123,7 +123,7 @@ sidebar_label: Apache Pulsar 3.3.0
 - [fix][broker] Support running docker container with gid != 0 [#22081](https://github.com/apache/pulsar/pull/22081)
 - [fix][broker] Unify topic-level policies enable judgment conditions [#19501](https://github.com/apache/pulsar/pull/19501)
 - [fix][broker] Update TransferShedder underloaded broker check to consider max loaded broker's msgThroughputEMA and update IsExtensibleLoadBalancerImpl check [#22321](https://github.com/apache/pulsar/pull/22321)
-- [fix][broker] Update topic partition failed when config maxNumPartitionsPerPartitionedTopic<0 [#22397](https://github.com/apache/pulsar/pull/22397)
+- [fix][broker] Update topic partition failed when config maxNumPartitionsPerPartitionedTopic&lt;0 [#22397](https://github.com/apache/pulsar/pull/22397)
 - [fix][broker] Update topic policies as much as possible when some ex was thrown [#21810](https://github.com/apache/pulsar/pull/21810)
 - [fix][broker] add timeout for health check read. [#21990](https://github.com/apache/pulsar/pull/21990)
 - [fix][broker] avoid offload system topic [#22497](https://github.com/apache/pulsar/pull/22497)

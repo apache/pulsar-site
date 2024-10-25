@@ -1082,6 +1082,17 @@ After this delay, the service-unit state channel tombstones any service units (e
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitTableViewSyncer
+Specify ServiceUnitTableViewSyncer to sync service unit(bundle) states between metadata store and system topic table views during migration from one to the other. One could enable this syncer before migration and disable it after the migration finishes. It accepts `MetadataStoreToSystemTopicSyncer` or `SystemTopicToMetadataStoreSyncer` to enable it. It accepts `None` to disable it.
+
+**Type**: `org.apache.pulsar.broker.ServiceConfiguration.ServiceUnitTableViewSyncerType`
+
+**Default**: `None`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingBundlesWithPoliciesEnabled
 Option to automatically unload namespace bundles with affinity(isolation) or anti-affinity group policies.Such bundles are not ideal targets to auto-unload as destination brokers are limited.(only used in load balancer extension logics)
 
@@ -1169,6 +1180,17 @@ Name of load manager to use
 **Default**: `org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadManagerServiceUnitStateTableViewClassName
+Name of ServiceUnitStateTableView implementation class to use
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.loadbalance.extensions.channel.ServiceUnitStateTableViewImpl`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
@@ -1379,6 +1401,17 @@ If true, export topic level metrics otherwise namespace level
 **Type**: `boolean`
 
 **Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
+### healthCheckMetricsUpdateTimeInSeconds
+HealthCheck update frequency in seconds. Disable health check with value -1 (Default value -1)
+
+**Type**: `int`
+
+**Default**: `-1`
 
 **Dynamic**: `false`
 
@@ -1892,6 +1925,28 @@ Dispatch rate-limiting relative to publish rate. (Enabling flag will make broker
 
 **Category**: Policies
 
+### dispatcherRetryBackoffInitialTimeInMs
+On Shared and KeyShared subscriptions, if all available messages in the subscription are filtered out and not dispatched to any consumer, message dispatching will be rescheduled with a backoff delay. This parameter sets the initial backoff delay in milliseconds.
+
+**Type**: `int`
+
+**Default**: `1`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### dispatcherRetryBackoffMaxTimeInMs
+On Shared and KeyShared subscriptions, if all available messages in the subscription are filtered out and not dispatched to any consumer, message dispatching will be rescheduled with a backoff delay. This parameter sets the maximum backoff delay in milliseconds.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### enableBrokerSideSubscriptionPatternEvaluation
 Enables evaluating subscription pattern on broker side.
 
@@ -1931,6 +1986,45 @@ Allow schema to be auto updated at broker level. User can override this by 'is_a
 **Type**: `boolean`
 
 **Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### keySharedLookAheadMsgInReplayThresholdPerConsumer
+For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
+Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
+Setting this value to 0 will disable the limit calculated per consumer.
+
+**Type**: `int`
+
+**Default**: `2000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### keySharedLookAheadMsgInReplayThresholdPerSubscription
+For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
+Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
+This value should be set to a value less than 2 * managedLedgerMaxUnackedRangesToPersist.
+Setting this value to 0 will disable the limit calculated per subscription.
+
+
+**Type**: `int`
+
+**Default**: `20000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### keySharedUnblockingIntervalMs
+For Key_Shared subscriptions, when a blocked key hash gets unblocked, a redelivery will be attempted after a delay. This setting controls the delay. The reason to have the delay is to batch multiple unblocking events instead of triggering redelivery for each unblocking event.
+
+**Type**: `long`
+
+**Default**: `10`
 
 **Dynamic**: `true`
 
@@ -2174,6 +2268,17 @@ Enable Key_Shared subscription (default is enabled).
 
 **Category**: Policies
 
+### subscriptionKeySharedUseClassicPersistentImplementation
+For persistent Key_Shared subscriptions, enables the use of the classic implementation of the Key_Shared subscription that was used before Pulsar 4.0.0 and PIP-379.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### subscriptionKeySharedUseConsistentHashing
 On KeyShared subscriptions, with default AUTO_SPLIT mode, use splitting ranges or consistent hashing to reassign keys to new consumers (default is consistent hashing)
 
@@ -2202,6 +2307,17 @@ Enable subscription message redelivery tracker to send redelivery count to consu
 **Type**: `boolean`
 
 **Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### subscriptionSharedUseClassicPersistentImplementation
+For persistent Shared subscriptions, enables the use of the classic implementation of the Shared subscription that was used before Pulsar 4.0.0.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -3282,6 +3398,17 @@ The caveat is now when recovered ledger is ready to write we're not sure if all 
 
 **Category**: Server
 
+### lookupPropertyPrefix
+The properties whose name starts with this prefix will be uploaded to the metadata store for  the topic lookup
+
+**Type**: `java.lang.String`
+
+**Default**: `lookup.`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### maxConcurrentHttpRequests
 Max concurrent web requests
 
@@ -3907,6 +4034,17 @@ Number of worker threads to serve topic ordered executor
 **Type**: `int`
 
 **Default**: `4`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicPoliciesServiceClassName
+The class name of the topic policies service. The default config only takes affect when the systemTopicEnable config is true
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService`
 
 **Dynamic**: `false`
 
@@ -4938,6 +5076,17 @@ Default is `CRC32C`. Other possible options are `CRC32`, `MAC` or `DUMMY` (no ch
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerForceRecovery
+Skip managed ledger failure to forcefully recover managed ledger.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerInactiveLedgerRolloverTimeSeconds
 Time to rollover ledger for inactive topic (duration without any publish on that topic). Disable rollover with value 0 (Default value 0)
 
@@ -5235,6 +5384,17 @@ If enabled, the maximum "acknowledgment holes" will not be limited and "acknowle
 **Default**: `false`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### schemaLedgerForceRecovery
+Skip schema ledger failure to forcefully recover topic successfully.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 

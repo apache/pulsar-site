@@ -439,7 +439,7 @@ public class LoggerFunction implements Function<String, Void> {
     @Override
     public Void process(String input, Context context) {
         Logger LOG = context.getLogger();
-        if (input.length() <= 100) {
+        if (input.length() &lt;= 100) {
             LOG.info("This string has a length of {}", input);
         } else {
             LOG.warn("This string is getting too long! It has {} characters", input);
@@ -461,7 +461,7 @@ import (
 )
 
 func loggerFunc(ctx context.Context, input []byte) {
-	if len(input) <= 100 {
+	if len(input) &lt;= 100 {
 		log.Infof("This input has a length of: %d", len(input))
 	} else {
 		log.Warnf("This input is getting too long! It has {%d} characters", len(input))

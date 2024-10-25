@@ -57,7 +57,7 @@ The following table outlines the primitive types that Pulsar schema supports, an
 | `INT64` | A 64-bit signed integer. | int | int | int64 | int64_t | long |
 | `FLOAT` | A single precision (32-bit) IEEE 754 floating-point number. | float | float | float32 | float | float |
 | `DOUBLE` | A double-precision (64-bit) IEEE 754 floating-point number. | double | double | float64| double | double |
-| `BYTES` | A sequence of 8-bit unsigned bytes. | byte[], ByteBuffer, ByteBuf | bytes | []byte | void * | byte[], ReadOnlySequence<byte\> |
+| `BYTES` | A sequence of 8-bit unsigned bytes. | byte[], ByteBuffer, ByteBuf | bytes | []byte | void * | byte[], ReadOnlySequence&lt;byte&gt; |
 | `STRING` | An Unicode character sequence. | string | str | string| std::string | string |
 | `TIMESTAMP` (`DATE`, `TIME`) |  A logic type represents a specific instant in time with millisecond precision. <br />It stores the number of milliseconds since `January 1, 1970, 00:00:00 GMT` as an `INT64` value. |  java.sql.Timestamp (java.sql.Time, java.util.Date) | N/A | N/A | N/A | DateTime,TimeSpan |
 | `INSTANT`| A single instantaneous point on the timeline with nanoseconds precision. | java.time.Instant | N/A | N/A | N/A | N/A |
@@ -123,7 +123,7 @@ Pulsar gets the schema definition from the predefined `struct` using an Avro lib
 
 1. Create the _User_ class to define the messages sent to Pulsar topics.
 
-   ```java
+```java
    # If you use Lombok
 
    @Builder
@@ -142,22 +142,21 @@ Pulsar gets the schema definition from the predefined `struct` using an Avro lib
    #    public User() { }
    #    public User(String name, int age) { this.name = name; this.age = age; } }
    #}
-
-   ```
+```
 
 2. Create a producer with a `struct` schema and send messages.
 
-   ```java
+```java
    Producer<User> producer = client.newProducer(Schema.AVRO(User.class)).create();
    producer.newMessage().value(new User("pulsar-user", 1)).send();
-   ```
+```
 
 3. Create a consumer with a `struct` schema and receive messages
 
-   ```java
+```java
    Consumer<User> consumer = client.newConsumer(Schema.AVRO(User.class)).subscribe();
    User user = consumer.receive().getValue();
-   ```
+```
 
 </TabItem>
 <TabItem value="generic">

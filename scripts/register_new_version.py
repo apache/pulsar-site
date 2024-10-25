@@ -32,7 +32,7 @@ def add_version_to_releases_json(new_version):
     new_major, new_minor, _ = new_version.split('.')
 
     # Find the position to insert the new version
-    insert_index = len(versions)
+    insert_index = 0
     for i, version in enumerate(versions):
         major, minor, _ = version.split('.')
         if major == new_major and minor == new_minor:
@@ -80,7 +80,7 @@ def add_version_to_release_pulsar_js(new_version, author, published_at):
     }
 
     # Find the position to insert the new version
-    insert_index = len(releases)
+    insert_index = 0
     for i, release in enumerate(releases):
         major, minor, _ = release['tagName'][1:].split('.')
         if major == new_major and minor == new_minor:
@@ -139,7 +139,7 @@ def add_version_to_release_java_js(new_version):
     }
 
     # Find the position to insert the new version
-    insert_index = len(releases)
+    insert_index = 0
     for i, release in enumerate(releases):
         major, minor, _ = release['tagName'][1:].split('.')
         if major == new_major and minor == new_minor:

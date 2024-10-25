@@ -24,7 +24,7 @@ from execute import javadoc_generator
 if __name__ == '__main__':
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.set_defaults(func=javadoc_generator.execute)
-    parser.add_argument('version', metavar='VERSION', help='version of Apache Pulsar')
+    parser.add_argument('dir_or_version', metavar='DIR_OR_VERSION', help='directory or version of Apache Pulsar')
 
     args = parser.parse_args()
     fn = args.func
