@@ -96,7 +96,7 @@ This example shows how to write records to a Redis database using the Pulsar Red
 
    ```bash
    bin/pulsar-admin sinks localrun \
-       --archive connectors/pulsar-io-redis-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-redis-@pulsar:version@.nar \
        --tenant public \
        --namespace default \
        --name my-redis-sink \
@@ -108,11 +108,11 @@ This example shows how to write records to a Redis database using the Pulsar Red
 
     ```bash
     bin/pulsar-admin sinks localrun \
-        --archive connectors/pulsar-io-redis-@pulsar:version@.nar \
+        --archive $PWD/connectors/pulsar-io-redis-@pulsar:version@.nar \
         --tenant public \
         --namespace default \
         --name my-redis-sink \
-        --sink-config-file redis-sink-config.yaml \
+        --sink-config-file $PWD/redis-sink-config.yaml \
         --inputs my-redis-topic
     ```
 

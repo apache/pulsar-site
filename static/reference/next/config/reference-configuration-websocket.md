@@ -475,6 +475,29 @@ TLS TrustStore type configuration in WebSocket: JKS, PKCS12
 
 **Category**: 
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### webServicePort
 Port to use to server HTTP request
 
@@ -518,6 +541,18 @@ Example:- [TLSv1.3, TLSv1.2]
 **Type**: `java.util.Set`
 
 **Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -573,6 +608,17 @@ Interval of time to sending the ping to keep alive. This value greater than 0 me
 **Type**: `int`
 
 **Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### webSocketPulsarClientMemoryLimitInMB
+Memory limit in MBs for direct memory in Pulsar Client used in WebSocket proxy
+
+**Type**: `int`
+
+**Default**: `0`
 
 **Dynamic**: `false`
 

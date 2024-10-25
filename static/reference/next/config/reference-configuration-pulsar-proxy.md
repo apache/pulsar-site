@@ -338,6 +338,18 @@ Http directs to redirect to non-pulsar services
 
 **Category**: HTTP
 
+### metricsServletTimeoutMs
+Time in milliseconds that metrics endpoint would time out. Default is 30s.
+ Set it to 0 to disable timeout.
+
+**Type**: `long`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### brokerClientSslProvider
 The TLS Provider used by the Pulsar proxy to authenticate with Pulsar brokers
 
@@ -943,6 +955,29 @@ Path for the file used to determine the rotation status for the proxy instance w
 
 **Category**: Server
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### webServicePort
 The port for serving http requests
 
@@ -964,6 +999,62 @@ The port for serving https requests
 **Dynamic**: `false`
 
 **Category**: Server
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### brokerClientSslFactoryPlugin
+SSL Factory Plugin class used by internal client to provide SSLEngine and SSLContext objects. The default class used is DefaultSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### brokerClientSslFactoryPluginParams
+SSL Factory plugin configuration parameters used by internal client.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### sslFactoryPlugin
+SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### sslFactoryPluginParams
+SSL Factory plugin configuration parameters.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
 
 ### tlsAllowInsecureConnection
 Accept untrusted TLS certificate from client.

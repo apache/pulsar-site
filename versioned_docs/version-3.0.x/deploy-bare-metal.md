@@ -304,8 +304,10 @@ You can obtain the metadata service URI of the existing BookKeeper cluster by us
 You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important step in configuring bookies for our purposes here is ensuring that `metadataServiceUri` is set to the URI for the ZooKeeper cluster. The following is an example:
 
 ```properties
-metadataServiceUri=zk://zk1.us-west.example.com:2181/ledgers
+metadataServiceUri=zk://zk1.us-west.example.com:2181;zk2.us-west.example.com:2181;zk3.us-west.example.com:2181/ledgers
 ```
+
+Which using `;` as separator in `metadataServiceUri`
 
 Once you appropriately modify the `metadataServiceUri` parameter, you can make any other configuration changes that you require. You can find a full listing of the available BookKeeper configuration parameters [here](reference-configuration.md#bookkeeper). However, consulting the [BookKeeper documentation](https://bookkeeper.apache.org/docs/next/reference/config/) for a more in-depth guide might be a better choice.
 
@@ -473,7 +475,7 @@ Create an ExclamationFunction `exclamation`.
 
 ```bash
 bin/pulsar-admin functions create \
-    --jar examples/api-examples.jar \
+    --jar $PWD/examples/api-examples.jar \
     --classname org.apache.pulsar.functions.api.examples.ExclamationFunction \
     --inputs persistent://public/default/exclamation-input \
     --output persistent://public/default/exclamation-output \

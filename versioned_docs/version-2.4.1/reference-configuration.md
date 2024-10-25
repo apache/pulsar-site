@@ -283,21 +283,21 @@ The [`pulsar-client`](reference-cli-tools.md#pulsar-client) CLI tool can be used
 |pulsar.root.logger|  WARN,CONSOLE|
 |pulsar.log.dir|  logs|
 |pulsar.log.file| pulsar.log|
-|log4j.rootLogger|  ${pulsar.root.logger}|
+|log4j.rootLogger|  \$\{pulsar.root.logger\}|
 |log4j.appender.CONSOLE|  org.apache.log4j.ConsoleAppender|
 |log4j.appender.CONSOLE.Threshold|  DEBUG|
 |log4j.appender.CONSOLE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.CONSOLE.layout.ConversionPattern| %d{ISO8601} - %-5p - [%t:%C{1}@%L] - %m%n|
+|log4j.appender.CONSOLE.layout.ConversionPattern| %d\{ISO8601\} - %-5p - [%t:%C\{1\}@%L] - %m%n|
 |log4j.appender.ROLLINGFILE|  org.apache.log4j.DailyRollingFileAppender|
 |log4j.appender.ROLLINGFILE.Threshold|  DEBUG|
-|log4j.appender.ROLLINGFILE.File| ${pulsar.log.dir}/${pulsar.log.file}|
+|log4j.appender.ROLLINGFILE.File| \$\{pulsar.log.dir\}/\$\{pulsar.log.file\}|
 |log4j.appender.ROLLINGFILE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.ROLLINGFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L] - %m%n|
+|log4j.appender.ROLLINGFILE.layout.ConversionPattern| %d\{ISO8601\} - %-5p [%t:%C\{1\}@%L] - %m%n|
 |log4j.appender.TRACEFILE|  org.apache.log4j.FileAppender|
 |log4j.appender.TRACEFILE.Threshold|  TRACE|
 |log4j.appender.TRACEFILE.File| pulsar-trace.log|
 |log4j.appender.TRACEFILE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.TRACEFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L][%x] - %m%n|
+|log4j.appender.TRACEFILE.layout.ConversionPattern| %d\{ISO8601\} - %-5p [%t:%C\{1\}@%L][%x] - %m%n|
 
 
 ## Log4j shell
@@ -305,11 +305,11 @@ The [`pulsar-client`](reference-cli-tools.md#pulsar-client) CLI tool can be used
 |Name|Default|
 |---|---|
 |bookkeeper.root.logger|  ERROR,CONSOLE|
-|log4j.rootLogger|  ${bookkeeper.root.logger}|
+|log4j.rootLogger|  \$\{bookkeeper.root.logger\}|
 |log4j.appender.CONSOLE|  org.apache.log4j.ConsoleAppender|
 |log4j.appender.CONSOLE.Threshold|  DEBUG|
 |log4j.appender.CONSOLE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.CONSOLE.layout.ConversionPattern| %d{ABSOLUTE} %-5p %m%n|
+|log4j.appender.CONSOLE.layout.ConversionPattern| %d\{ABSOLUTE\} %-5p %m%n|
 |log4j.logger.org.apache.zookeeper| ERROR|
 |log4j.logger.org.apache.bookkeeper|  ERROR|
 |log4j.logger.org.apache.bookkeeper.bookie.BookieShell| INFO|

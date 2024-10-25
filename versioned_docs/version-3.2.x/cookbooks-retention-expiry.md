@@ -65,7 +65,7 @@ For more information on the two parameters, refer to the [`broker.conf`](referen
 
 ### Set retention policy
 
-You can set a retention policy for a namespace by specifying the namespace, a size limit and a time limit in `pulsar-admin`, REST API and Java.
+You can set a retention policy for a namespace by specifying the namespace, a size limit and a time limit in `pulsar-admin`, REST API and Java. And all the non-partitioned topics and topic partitions will apply the specified data retention policy for the namespace unless you overwrite the data retention policy for the specific topic by using topic level policies.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"

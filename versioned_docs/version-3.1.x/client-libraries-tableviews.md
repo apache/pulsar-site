@@ -59,7 +59,7 @@ You can use the available parameters in the `loadConf` configuration or the API 
   |---|---|---|---|---
   | `topic` | string | yes | The topic name of the TableView. | N/A
   | `schemaInfo` | struct | no | Declare the schema of the data that this TableView can accept. The schema is checked against the schema of the topic, and the TableView creation fails if it's incompatible. | N/A
-  | `subscriptionName` | string | no | The subscription name of the TableView. | reader-{random string}
+  | `subscriptionName` | string | no | The subscription name of the TableView. | reader-\{random string\}
   | `partititionsUpdateInterval` | int | no | Topic partitions update interval in seconds. In the C++ client, `partititionsUpdateInterval` is global within the same client.  | 60
 
 

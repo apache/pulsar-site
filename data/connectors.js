@@ -90,12 +90,6 @@ module.exports = [
     link: 'https://hbase.apache.org/'
   },
   {
-    name: 'hdfs2',
-    longName: 'HDFS2 sink',
-    type: 'Sink',
-    link: 'https://hadoop.apache.org/'
-  },
-  {
     name: 'hdfs3',
     longName: 'HDFS3 sink',
     type: 'Sink',
@@ -178,12 +172,6 @@ module.exports = [
     longName: 'Solr sink',
     type: 'Sink',
     link: 'https://lucene.apache.org/solr/'
-  },
-  {
-    name: 'netty',
-    longName: 'TCP/UDP with Netty source',
-    type: 'Source',
-    link: 'https://netty.io/'
   },
   {
     name: 'data-generator',

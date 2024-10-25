@@ -42,7 +42,7 @@ To write a function for word count, complete the following steps.
 
    ```bash
    bin/pulsar-admin functions create \
-      --jar target/my-jar-with-dependencies.jar \
+      --jar $PWD/target/my-jar-with-dependencies.jar \
       --classname org.example.functions.WordCountFunction \
       --tenant public \
       --namespace default \

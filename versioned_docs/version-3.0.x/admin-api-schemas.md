@@ -247,7 +247,7 @@ To extract (provide) a schema via a topic, use the following method.
 Use the `extract` subcommand.
 
 ```bash
-pulsar-admin schemas extract --classname <class-name> --jar <jar-path> --type <type-name>
+pulsar-admin schemas extract --classname <class-name> --jar <absolute-jar-path> --type <type-name>
 ```
 
 </TabItem>

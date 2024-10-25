@@ -26,19 +26,36 @@ gh auth login
 ## Fetch the release metadata
 
 ```bash
-# Replace v2.10.2 with the target version tag
+# Replace 3.0.6 with the target version tag
+VERSION_WITHOUT_RC=3.0.6
 # Replace apache/pulsar with the component repo
-gh release view "v2.10.2" -R apache/pulsar --json author,tagName,publishedAt
+gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,tagName,publishedAt
 ```
 
 ## Fetch the release note
 
 ```bash
-# Replace v2.10.2 with the target version tag
+# Replace 3.0.6 with the target version tag
+VERSION_WITHOUT_RC=3.0.6
 # Replace apache/pulsar with the component repo
-gh release view "v2.10.2" -R apache/pulsar --json body --jq .body
+gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json body --jq .body
 ```
 
+## Register the new released version to releases.json, data/release-pulsar.js and data/release-java.js files
+
+```bash
+# Replace 3.0.6 with the target version tag
+VERSION_WITHOUT_RC=3.0.6
+# Replace apache/pulsar with the component repo
+./scripts/register_new_version.py $VERSION_WITHOUT_RC $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
+```
+
+Alternatively, for a tag instead of a release:
+
+```bash
+# For a tag instead of a release
+./scripts/register_new_version.py $VERSION_WITHOUT_RC $(cd $PULSAR_PATH && git show -s --format="%ae %aI" "v$VERSION_RC" | tail -n 1 | sed 's/@.* / /')
+```
 
 ## Generate release notes
 
@@ -49,13 +66,27 @@ Here are 2 approaches:
 Using "git log"
 
 ```bash
-git log --reverse  --oneline v2.11.3..v2.11.4 | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | sort
+PREVIOUS_VERSION=3.0.3
+VERSION_WITHOUT_RC=3.0.4
+git log --reverse  --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | awk -F ']' '{
+    if ($1 ~ /^\[/) {
+        print $1 "]" $2, $0
+    } else {
+        print "[zzz]", $0
+    }
+}' | sort | cut -d ' ' -f2- | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /'
 ```
 
 Alternatively using "gh pr list"
 
 ```bash
-gh pr list -L 1000 --search "is:pr is:merged label:release/2.10.6 label:cherry-picked/branch-2.10" --json title,number,url | jq -r '.[] | "\(.title) [\(.number)](\(.url))"'
+gh pr list -L 1000 --search "is:pr is:merged label:release/2.10.6 label:cherry-picked/branch-2.10" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
+```
+
+For feature releases, using the milestone:
+
+```bash
+gh pr list -L 1000 --search "is:pr is:merged milestone:4.0.0" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
 ```
 
 ## Update the release note page

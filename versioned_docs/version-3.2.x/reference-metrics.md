@@ -12,7 +12,6 @@ Pulsar exposes the following metrics in Prometheus format. You can monitor your 
   - [Pulsar Functions](#pulsar-functions)
   - [Connectors](#connectors)
   - [Proxy](#proxy)
-  - [Pulsar SQL Worker](#pulsar-sql-worker)
   - [Pulsar transaction](#pulsar-transaction)
 
 The following types of metrics are available:
@@ -44,7 +43,7 @@ in the `bookkeeper.conf` configuration file.
 | bookie_READ_BYTES | Counter | The total number of bytes read from the bookie. |
 | bookkeeper_server_ADD_ENTRY_REQUEST | Summary | The summary of request latency of ADD_ENTRY requests at the bookie. The `success` label is used to distinguish between successes and failures. |
 | bookkeeper_server_READ_ENTRY_REQUEST | Summary | The summary of request latency of READ_ENTRY requests at the bookie. The `success` label is used to distinguish between successes and failures. |
-| bookkeeper_server_BookieReadThreadPool_queue_{thread_id}|Gauge|The number of requests to be processed in a read thread queue.|
+| bookkeeper_server_BookieReadThreadPool_queue_\{thread_id\}|Gauge|The number of requests to be processed in a read thread queue.|
 | bookkeeper_server_BookieReadThreadPool_task_queued|Summary | The waiting time of a task to be processed in a read thread queue. |
 | bookkeeper_server_BookieReadThreadPool_task_execution|Summary | The execution time of a task in a read thread queue.|
 
@@ -114,11 +113,11 @@ in the `bookkeeper.conf` configuration file.
 The broker metrics are exposed under "/metrics/" at port `8080`. You can change the port by updating `webServicePort` to a different port
 in the `broker.conf` configuration file.
 
-All the metrics exposed by a broker are labeled with `cluster=${pulsar_cluster}`. The name of Pulsar cluster is the value of `${pulsar_cluster}`, which you have configured in the `broker.conf` file.
+All the metrics exposed by a broker are labeled with `cluster=\$\{pulsar_cluster\}`. The name of Pulsar cluster is the value of `\$\{pulsar_cluster\}`, which you have configured in the `broker.conf` file.
 
 ### Broker metrics
 All the broker metrics are labeled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
 
 | Name                                                         | Type        | Description                                                                                                                 |
 |--------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------|
@@ -140,13 +139,6 @@ All the broker metrics are labeled with the following labels:
 | pulsar_ml_count                                              | Gauge       | The number of currently opened managed ledgers.                                                                             |
 | ~~topic_load_times (deprecated)~~                            | ~~Summary~~ | ~~The topic load latency calculated in milliseconds.~~                                                                      |
 | pulsar_topic_load_times                                      | Summary     | The topic load latency calculated in milliseconds.                                                                          |
-| pulsar_active_connections                                    | Gauge       | The number of active connections.                                                                                           |
-| pulsar_connection_created_total_count                        | Gauge       | The total number of connections.                                                                                            |
-| pulsar_connection_create_success_count                       | Gauge       | The number of successfully created connections.                                                                             |
-| pulsar_connection_create_fail_count                          | Gauge       | The number of failed connections.                                                                                           |
-| pulsar_connection_closed_total_count                         | Gauge       | The total number of closed connections.                                                                                     |
-| pulsar_broker_throttled_connections                          | Gauge       | The number of throttled connections.                                                                                        |
-| pulsar_broker_throttled_connections_global_limit             | Gauge       | The number of throttled connections due to per-connection limit.                                                            |
 | pulsar_broker_topics_count                                   | Gauge       | The number of Pulsar topics in this broker.                                                                                 |
 | pulsar_broker_subscriptions_count                            | Gauge       | The number of Pulsar subscriptions in this broker.                                                                          |
 | pulsar_broker_producers_count                                | Gauge       | The number of active producers connected to this broker.                                                                    |
@@ -169,7 +161,7 @@ The BookKeeper client metrics is disabled by default. Set `bookkeeperClientExpos
 
 All the BookKeeper client metrics are labeled with the following label:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
 
 | Name | Type | Description |
 |---|---|---|
@@ -187,8 +179,8 @@ All the BookKeeper client metrics are labeled with the following label:
 
 All the namespace metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
 
 | Name                                                    | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |---------------------------------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -209,8 +201,8 @@ All the namespace metrics are labeled with the following labels:
 | pulsar_storage_write_rate                               | Gauge     | The total message batches (entries) written to the storage for this namespace (message batch per second).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | pulsar_storage_read_rate                                | Gauge     | The total message batches (entries) read from the storage for this namespace (message batch per second).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | pulsar_subscription_delayed                             | Gauge     | The total message batches (entries) are delayed for dispatching.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| pulsar_storage_write_latency_le_*                       | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: <= 0.5ms </li><li>pulsar_storage_write_latency_le_1: <= 1ms</li><li>pulsar_storage_write_latency_le_5: <= 5ms</li><li>pulsar_storage_write_latency_le_10: <= 10ms</li><li>pulsar_storage_write_latency_le_20: <= 20ms</li><li>pulsar_storage_write_latency_le_50: <= 50ms</li><li>pulsar_storage_write_latency_le_100: <= 100ms</li><li>pulsar_storage_write_latency_le_200: <= 200ms</li><li>pulsar_storage_write_latency_le_1000: <= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul>                                           |
-| pulsar_entry_size_le_*                                  | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: <= 128 bytes </li><li>pulsar_entry_size_le_512: <= 512 bytes</li><li>pulsar_entry_size_le_1_kb: <= 1 KB</li><li>pulsar_entry_size_le_2_kb: <= 2 KB</li><li>pulsar_entry_size_le_4_kb: <= 4 KB</li><li>pulsar_entry_size_le_16_kb: <= 16 KB</li><li>pulsar_entry_size_le_100_kb: <= 100 KB</li><li>pulsar_entry_size_le_1_mb: <= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul>                                                                                                                                                                               |
+| pulsar_storage_write_latency_le_*                       | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: &lt;= 0.5ms </li><li>pulsar_storage_write_latency_le_1: &lt;= 1ms</li><li>pulsar_storage_write_latency_le_5: &lt;= 5ms</li><li>pulsar_storage_write_latency_le_10: &lt;= 10ms</li><li>pulsar_storage_write_latency_le_20: &lt;= 20ms</li><li>pulsar_storage_write_latency_le_50: &lt;= 50ms</li><li>pulsar_storage_write_latency_le_100: &lt;= 100ms</li><li>pulsar_storage_write_latency_le_200: &lt;= 200ms</li><li>pulsar_storage_write_latency_le_1000: &lt;= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul>                                           |
+| pulsar_entry_size_le_*                                  | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: &lt;= 128 bytes </li><li>pulsar_entry_size_le_512: &lt;= 512 bytes</li><li>pulsar_entry_size_le_1_kb: &lt;= 1 KB</li><li>pulsar_entry_size_le_2_kb: &lt;= 2 KB</li><li>pulsar_entry_size_le_4_kb: &lt;= 4 KB</li><li>pulsar_entry_size_le_16_kb: &lt;= 16 KB</li><li>pulsar_entry_size_le_100_kb: &lt;= 100 KB</li><li>pulsar_entry_size_le_1_mb: &lt;= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul>                                                                                                                                                                               |
 | pulsar_delayed_message_index_size_bytes                 | Gauge     | The total memory size allocated by `DelayedDeliveryTracker` of the namespace owned by this broker (in bytes).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | pulsar_delayed_message_index_bucket_total               | Gauge     | The number of delayed message index buckets (immutable buckets + LastMutableBucket )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | pulsar_delayed_message_index_loaded                     | Gauge     | The total number of delayed message indexes for in the memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -224,9 +216,9 @@ All the namespace metrics are labeled with the following labels:
 
 All the topic metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
 
 | Name                                                    | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |---------------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -249,8 +241,8 @@ All the topic metrics are labeled with the following labels:
 | pulsar_storage_write_rate                               | Gauge     | The total message batches (entries) written to the storage for this topic (message batch per second).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | pulsar_storage_read_rate                                | Gauge     | The total message batches (entries) read from the storage for this topic (message batch per second).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | pulsar_subscription_delayed                             | Gauge     | The total message batches (entries) are delayed for dispatching.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| pulsar_storage_write_latency_le_*                       | Histogram | The entry rate of a topic that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: <= 0.5ms </li><li>pulsar_storage_write_latency_le_1: <= 1ms</li><li>pulsar_storage_write_latency_le_5: <= 5ms</li><li>pulsar_storage_write_latency_le_10: <= 10ms</li><li>pulsar_storage_write_latency_le_20: <= 20ms</li><li>pulsar_storage_write_latency_le_50: <= 50ms</li><li>pulsar_storage_write_latency_le_100: <= 100ms</li><li>pulsar_storage_write_latency_le_200: <= 200ms</li><li>pulsar_storage_write_latency_le_1000: <= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul>                                                    |
-| pulsar_entry_size_le_*                                  | Histogram | The entry rate of a topic that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: <= 128 bytes </li><li>pulsar_entry_size_le_512: <= 512 bytes</li><li>pulsar_entry_size_le_1_kb: <= 1 KB</li><li>pulsar_entry_size_le_2_kb: <= 2 KB</li><li>pulsar_entry_size_le_4_kb: <= 4 KB</li><li>pulsar_entry_size_le_16_kb: <= 16 KB</li><li>pulsar_entry_size_le_100_kb: <= 100 KB</li><li>pulsar_entry_size_le_1_mb: <= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul>                                                                                                                                                                                        |
+| pulsar_storage_write_latency_le_*                       | Histogram | The entry rate of a topic that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: &lt;= 0.5ms </li><li>pulsar_storage_write_latency_le_1: &lt;= 1ms</li><li>pulsar_storage_write_latency_le_5: &lt;= 5ms</li><li>pulsar_storage_write_latency_le_10: &lt;= 10ms</li><li>pulsar_storage_write_latency_le_20: &lt;= 20ms</li><li>pulsar_storage_write_latency_le_50: &lt;= 50ms</li><li>pulsar_storage_write_latency_le_100: &lt;= 100ms</li><li>pulsar_storage_write_latency_le_200: &lt;= 200ms</li><li>pulsar_storage_write_latency_le_1000: &lt;= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul>                                                    |
+| pulsar_entry_size_le_*                                  | Histogram | The entry rate of a topic that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: &lt;= 128 bytes </li><li>pulsar_entry_size_le_512: &lt;= 512 bytes</li><li>pulsar_entry_size_le_1_kb: &lt;= 1 KB</li><li>pulsar_entry_size_le_2_kb: &lt;= 2 KB</li><li>pulsar_entry_size_le_4_kb: &lt;= 4 KB</li><li>pulsar_entry_size_le_16_kb: &lt;= 16 KB</li><li>pulsar_entry_size_le_100_kb: &lt;= 100 KB</li><li>pulsar_entry_size_le_1_mb: &lt;= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul>                                                                                                                                                                                        |
 | pulsar_in_bytes_total                                   | Counter   | The total number of messages in bytes received for this topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | pulsar_in_messages_total                                | Counter   | The total number of messages received for this topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | pulsar_out_bytes_total                                  | Counter   | The total number of messages in bytes read from this topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -261,7 +253,7 @@ All the topic metrics are labeled with the following labels:
 | pulsar_compaction_duration_time_in_mills                | Gauge     | The duration time of the compaction.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | pulsar_compaction_read_throughput                       | Gauge     | The read throughput of the compaction.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | pulsar_compaction_write_throughput                      | Gauge     | The write throughput of the compaction.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| pulsar_compaction_latency_le_*                          | Histogram | The compaction latency with given quantile. <br /> Available thresholds: <br /><ul><li>pulsar_compaction_latency_le_0_5: <= 0.5ms </li><li>pulsar_compaction_latency_le_1: <= 1ms</li><li>pulsar_compaction_latency_le_5: <= 5ms</li><li>pulsar_compaction_latency_le_10: <= 10ms</li><li>pulsar_compaction_latency_le_20: <= 20ms</li><li>pulsar_compaction_latency_le_50: <= 50ms</li><li>pulsar_compaction_latency_le_100: <= 100ms</li><li>pulsar_compaction_latency_le_200: <= 200ms</li><li>pulsar_compaction_latency_le_1000: <= 1s</li><li>pulsar_compaction_latency_le_overflow: > 1s</li></ul>                                                                                                                                 |
+| pulsar_compaction_latency_le_*                          | Histogram | The compaction latency with given quantile. <br /> Available thresholds: <br /><ul><li>pulsar_compaction_latency_le_0_5: &lt;= 0.5ms </li><li>pulsar_compaction_latency_le_1: &lt;= 1ms</li><li>pulsar_compaction_latency_le_5: &lt;= 5ms</li><li>pulsar_compaction_latency_le_10: &lt;= 10ms</li><li>pulsar_compaction_latency_le_20: &lt;= 20ms</li><li>pulsar_compaction_latency_le_50: &lt;= 50ms</li><li>pulsar_compaction_latency_le_100: &lt;= 100ms</li><li>pulsar_compaction_latency_le_200: &lt;= 200ms</li><li>pulsar_compaction_latency_le_1000: &lt;= 1s</li><li>pulsar_compaction_latency_le_overflow: > 1s</li></ul>                                                                                                                                 |
 | pulsar_compaction_compacted_entries_count               | Gauge     | The total number of the compacted entries.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | pulsar_compaction_compacted_entries_size                | Gauge     | The total size of the compacted entries.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | pulsar_txn_tb_active_total                              | Gauge     | The number of active transactions on this topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -278,7 +270,7 @@ All the topic metrics are labeled with the following labels:
 
 If a namespace is configured to be replicated among multiple Pulsar clusters, the corresponding replication metrics is also exposed when `replicationMetricsEnabled` is enabled.
 
-All the replication metrics are also labelled with `remoteCluster=${pulsar_remote_cluster}`.
+All the replication metrics are also labelled with `remoteCluster=\$\{pulsar_remote_cluster\}`.
 
 | Name | Type | Description |
 |---|---|---|
@@ -305,9 +297,9 @@ All the replication metrics are also labelled with `remoteCluster=${pulsar_remot
 
 ### ManagedLedger metrics
 All the managedLedger metrics are labeled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- namespace: namespace=${pulsar_namespace}. ${pulsar_namespace} is the namespace name.
-- quantile: quantile=${quantile}. Quantile is only for `Histogram` type metric, and represents the threshold for given Buckets.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- namespace: namespace=\$\{pulsar_namespace\}. \$\{pulsar_namespace\} is the namespace name.
+- quantile: quantile=\$\{quantile\}. Quantile is only for `Histogram` type metric, and represents the threshold for given Buckets.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -338,11 +330,11 @@ The acknowledgment state is persistent to the ledger first. When the acknowledgm
 
 All the cursor acknowledgment state metrics are labeled with the following labels:
 
-- namespace: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
+- namespace: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
 
-- ledger_name: `ledger_name=${pulsar_ledger_name}`. `${pulsar_ledger_name}` is the ledger name.
+- ledger_name: `ledger_name=\$\{pulsar_ledger_name\}`. `\$\{pulsar_ledger_name\}` is the ledger name.
 
-- cursor_name: `ledger_name=${pulsar_cursor_name}`. `${pulsar_cursor_name}` is the cursor name.
+- cursor_name: `ledger_name=\$\{pulsar_cursor_name\}`. `\$\{pulsar_cursor_name\}` is the cursor name.
 
 | Name	                                              | Type	 | Description                                                                                          |
 |----------------------------------------------------|-------|------------------------------------------------------------------------------------------------------|
@@ -361,10 +353,10 @@ All the cursor acknowledgment state metrics are labeled with the following label
 
 All the subscription metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
-- *subscription*: `subscription=${subscription}`. `${subscription}` is the topic subscription name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
+- *subscription*: `subscription=\$\{subscription\}`. `\$\{subscription\}` is the topic subscription name.
 
 | Name | Type | Description |
 |---|---|---|
@@ -403,12 +395,12 @@ All the subscription metrics are labeled with the following labels:
 
 All the consumer metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
-- *subscription*: `subscription=${subscription}`. `${subscription}` is the topic subscription name.
-- *consumer_name*: `consumer_name=${consumer_name}`. `${consumer_name}` is the topic consumer name.
-- *consumer_id*: `consumer_id=${consumer_id}`. `${consumer_id}` is the topic consumer id.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
+- *subscription*: `subscription=\$\{subscription\}`. `\$\{subscription\}` is the topic subscription name.
+- *consumer_name*: `consumer_name=\$\{consumer_name\}`. `\$\{consumer_name\}` is the topic consumer name.
+- *consumer_id*: `consumer_id=\$\{consumer_id\}`. `\$\{consumer_id\}` is the topic consumer id.
 
 | Name | Type | Description |
 |---|---|---|
@@ -424,7 +416,7 @@ All the consumer metrics are labeled with the following labels:
 
 All the managed ledger bookie client metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -438,7 +430,7 @@ All the managed ledger bookie client metrics are labeled with the following labe
 
 All the token metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 |---|---|---|
@@ -449,10 +441,10 @@ All the token metrics are labeled with the following labels:
 
 All the authentication metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *provider_name*: `provider_name=${provider_name}`. `${provider_name}` is the class name of the authentication provider.
-- *auth_method*: `auth_method=${auth_method}`. `${auth_method}` is the authentication method of the authentication provider.
-- *reason*: `reason=${reason}`. `${reason}` is the reason for failing authentication operation. (This label is only for `pulsar_authentication_failures_total`.)
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *provider_name*: `provider_name=\$\{provider_name\}`. `\$\{provider_name\}` is the class name of the authentication provider.
+- *auth_method*: `auth_method=\$\{auth_method\}`. `\$\{auth_method\}` is the authentication method of the authentication provider.
+- *reason*: `reason=\$\{reason\}`. `\$\{reason\}` is the reason for failing authentication operation. (This label is only for `pulsar_authentication_failures_total`.)
 
 | Name | Type | Description |
 |---|---|---|
@@ -463,19 +455,18 @@ All the authentication metrics are labeled with the following labels:
 
 All the connection metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *broker*: `broker=${advertised_address}`. `${advertised_address}` is the advertised address of the broker.
-- *metric*: `metric=${metric}`. `${metric}` is the connection metric collective name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *broker*: `broker=\$\{advertised_address\}`. `\$\{advertised_address\}` is the advertised address of the broker.
+- *metric*: `metric=\$\{metric\}`. `\$\{metric\}` is the connection metric collective name.
 
-| Name | Type | Description |
-|---|---|---|
-| pulsar_active_connections| Gauge | The number of active connections. |
-| pulsar_connection_created_total_count | Gauge | The total number of connections. |
+| Name                                   | Type  | Description                                     |
+|----------------------------------------|-------|-------------------------------------------------|
+| pulsar_active_connections              | Gauge | The number of active connections.               |
+| pulsar_connection_created_total_count  | Gauge | The total number of connections.                |
 | pulsar_connection_create_success_count | Gauge | The number of successfully created connections. |
-| pulsar_connection_create_fail_count | Gauge | The number of failed connections. |
-| pulsar_connection_closed_total_count | Gauge | The total number of closed connections. |
-| pulsar_broker_throttled_connections | Gauge | The number of throttled connections. |
-| pulsar_broker_throttled_connections_global_limit | Gauge | The number of throttled connections because of per-connection limit. |
+| pulsar_connection_create_fail_count    | Gauge | The number of failed connections.               |
+| pulsar_connection_closed_total_count   | Gauge | The total number of closed connections.         |
+| pulsar_broker_throttled_connections    | Gauge | The number of throttled connections.            |
 
 ### Jetty metrics
 
@@ -483,7 +474,7 @@ All the connection metrics are labelled with the following labels:
 
 All the jetty metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 |---|---|---|
@@ -512,7 +503,7 @@ All the jetty metrics are labeled with the following labels:
 
 All the schema metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name                               | Type    | Description                                         |
 |------------------------------------|---------|-----------------------------------------------------|
@@ -529,9 +520,9 @@ All the schema metrics are labeled with the following labels:
 
 All the offload metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
 
 | Name                                | Type    | Description                                                                     |
 |-------------------------------------|---------|---------------------------------------------------------------------------------|
@@ -552,7 +543,7 @@ All the offload metrics are labeled with the following labels:
 
 All the web service executor metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 |---|---|---|
@@ -566,8 +557,8 @@ All the web service executor metrics are labeled with the following labels:
 
 All the metadata store metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
-- *name*: `name=${metadata-store|configuration-metadata-store|state-metadata-store}`. `${name}` is the metadata store name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
+- *name*: `name=\$\{metadata-store\|configuration-metadata-store\|state-metadata-store\}`. `\$\{name\}` is the metadata store name.
 
 | Name                                               | Type      | Description                                                                                  |
 |----------------------------------------------------|-----------|----------------------------------------------------------------------------------------------|
@@ -660,8 +651,8 @@ This section shows all metrics related to [broker load balancing](./concepts-bro
 
 All the loadbalancing metrics are labeled with the following labels:
 
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- broker: broker=\$\{broker\}. \$\{broker\} is the IP address of the broker
 - metric: metric="loadBalancing".
 
 | Name | Type | Description |
@@ -671,46 +662,46 @@ All the loadbalancing metrics are labeled with the following labels:
 | pulsar_lb_cpu_usage | Gauge | The broker cpu usage (in percent). |
 | pulsar_lb_directMemory_usage | Gauge | The broker process direct memory usage (in percent). |
 | pulsar_lb_memory_usage | Gauge | The broker process memory usage (in percent). |
-| pulsar_lb_resource_usage {feature=max}* |Gauge|The max resource usage of the bandwidth, CPU, memory, and direct_memory.|
-| pulsar_lb_resource_usage {feature=max_ema}* | Gauge | The broker load score (WeightedMaxEMA).|
+| pulsar_lb_resource_usage \{feature=max\}* |Gauge|The max resource usage of the bandwidth, CPU, memory, and direct_memory.|
+| pulsar_lb_resource_usage \{feature=max_ema\}* | Gauge | The broker load score (WeightedMaxEMA).|
 
 ### BundleUnloading metrics
 
 All the bundleUnloading metrics are labeled with the following labels:
 
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- bundle: bundle=\$\{bundle\}. \$\{bundle\} is the bundle range on this broker.
 - metric: metric="bundleUnloading".
 
 | Name                          | Type    | Description                                  |
 |-------------------------------|---------|----------------------------------------------|
 | pulsar_lb_unload_broker_total | Counter | Unload broker count in this bundle unloading |
 | pulsar_lb_unload_bundle_total | Counter | Bundle unload count in this bundle unloading. If the value of `pulsar_lb_unload_bundle_total` is greater than zero, it means that the bundle has been unloaded. |
-| pulsar_lb_unload_broker_breakdown_total{result, reason}* | Counter | Unload broker breakdown count grouped by result and reason labels.|
-| pulsar_lb_resource_usage_stats{feature=max_ema, stat=avg}* | Gauge | The average of brokers' load scores.|
-| pulsar_lb_resource_usage_stats{feature=max_ema, stat=std}*   | Gauge | The standard deviation of brokers' load scores. |
+| pulsar_lb_unload_broker_breakdown_total\{result, reason\}* | Counter | Unload broker breakdown count grouped by result and reason labels.|
+| pulsar_lb_resource_usage_stats\{feature=max_ema, stat=avg\}* | Gauge | The average of brokers' load scores.|
+| pulsar_lb_resource_usage_stats\{feature=max_ema, stat=std\}*   | Gauge | The standard deviation of brokers' load scores. |
 
 ### BundleSplit metrics
 
 All the bundleUnloading metrics are labeled with the following labels:
 
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- bundle: bundle=\$\{bundle\}. \$\{bundle\} is the bundle range on this broker.
 - metric: metric="bundlesSplit".
 
 | Name                          | Type    | Description                                                |
 |-------------------------------|---------|------------------------------------------------------------|
 | pulsar_lb_bundles_split_total | Counter | The total count of bundle split in this leader broker |
-| pulsar_lb_bundles_split_breakdown_total{result, reason}* | Counter | Bundle split breakdown count grouped by the result and reason labels.|
+| pulsar_lb_bundles_split_breakdown_total\{result, reason\}* | Counter | Bundle split breakdown count grouped by the result and reason labels.|
 
 
 ### Bundle metrics
 
 All the bundle metrics are labeled with the following labels:
 
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- broker: broker=\$\{broker\}. \$\{broker\} is the IP address of the broker
+- bundle: bundle=\$\{bundle\}. \$\{bundle\} is the bundle range on this broker
 - metric: metric="bundle".
 
 | Name | Type | Description |
@@ -727,39 +718,39 @@ All the bundle metrics are labeled with the following labels:
 
 All the bundle assign metrics are labeled with the following labels:
 
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker.
-- bundle: bundle=${bundle}. ${bundle} is the bundle range on this broker.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name you have configured in the `broker.conf` file.
+- broker: broker=\$\{broker\}. \$\{broker\} is the IP address of the broker.
+- bundle: bundle=\$\{bundle\}. \$\{bundle\} is the bundle range on this broker.
 - metric: metric="assign".
 
 | Name                                                     | Type    | Description                                                        |
 |----------------------------------------------------------|---------|--------------------------------------------------------------------|
-| pulsar_lb_assign_broker_breakdown_total{result, reason}* | Counter | Assign broker breakdown count grouped by result and reason labels. |
+| pulsar_lb_assign_broker_breakdown_total\{result, reason\}* | Counter | Assign broker breakdown count grouped by result and reason labels. |
 
 ### Service unit state channel metrics
 
 All the service unit state channel metrics are labeled with the following labels:
 
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name you have configured in the `broker.conf` file.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name you have configured in the `broker.conf` file.
 - metric: metric="sunitStateChn".
 
 | Name                                                              | Type    | Description                                                                                                       |
 |-------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------|
-| pulsar_sunit_state_chn_owner_lookup_total{result, state}*         | Counter | The owner broker lookup counts grouped by the result and state labels.                                            |
-| pulsar_sunit_state_chn_event_publish_ops_total{result, event}*    | Counter | The published message count of service unit (e.g., bundle) state changes grouped by the result and event labels   |
-| pulsar_sunit_state_chn_subscribe_ops_total{result, event}*        | Counter | The subscribed message count of service unit (e.g., bundle) state changes grouped by the result and event labels. |
-| pulsar_sunit_state_chn_inactive_broker_cleanup_ops_total{result}* | Counter | The counts of inactive broker cleanup operations grouped by the result label.                                     |
+| pulsar_sunit_state_chn_owner_lookup_total\{result, state\}*         | Counter | The owner broker lookup counts grouped by the result and state labels.                                            |
+| pulsar_sunit_state_chn_event_publish_ops_total\{result, event\}*    | Counter | The published message count of service unit (e.g., bundle) state changes grouped by the result and event labels   |
+| pulsar_sunit_state_chn_subscribe_ops_total\{result, event\}*        | Counter | The subscribed message count of service unit (e.g., bundle) state changes grouped by the result and event labels. |
+| pulsar_sunit_state_chn_inactive_broker_cleanup_ops_total\{result\}* | Counter | The counts of inactive broker cleanup operations grouped by the result label.                                     |
 | pulsar_sunit_state_chn_orphan_su_cleanup_ops_total*               | Counter | The total count of orphan service unit (e.g., bundle) cleanup operations.                                         |
 | pulsar_sunit_state_chn_owned_su_total*                            | Gauge   | The number of owned bundles.                                                                                      |
 | pulsar_sunit_state_chn_su_tombstone_cleanup_ops_total*            | Counter | The total count of deleted service units (e.g., bundles) tombstone operations.                                    |
-| pulsar_sunit_state_chn_cleanup_ops_total{result=Failure}*         | Counter | The total count of cleanup operation failures.                                                                    |
+| pulsar_sunit_state_chn_cleanup_ops_total\{result=Failure\}*         | Counter | The total count of cleanup operation failures.                                                                    |
 
 ## Pulsar Functions
 
 All the Pulsar Functions metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
 
 | Name                                              | Type    | Description                                                               |
 |---------------------------------------------------|---------|---------------------------------------------------------------------------|
@@ -780,8 +771,8 @@ All the Pulsar Functions metrics are labeled with the following labels:
 
 All the Pulsar connector metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
 
 Connector metrics contain **source** metrics and **sink** metrics.
 
@@ -823,8 +814,8 @@ Connector metrics contain **source** metrics and **sink** metrics.
 
 All the proxy metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *kubernetes_pod_name*: `kubernetes_pod_name=${kubernetes_pod_name}`. `${kubernetes_pod_name}` is the Kubernetes pod name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *kubernetes_pod_name*: `kubernetes_pod_name=\$\{kubernetes_pod_name\}`. `\$\{kubernetes_pod_name\}` is the Kubernetes pod name.
 
 | Name | Type | Description |
 |---|---|---|
@@ -834,39 +825,12 @@ All the proxy metrics are labeled with the following labels:
 | pulsar_proxy_binary_ops | Counter | Counter of proxy operations. |
 | pulsar_proxy_binary_bytes | Counter | Counter of proxy bytes. |
 
-## Pulsar SQL Worker
-
-| Name | Type | Description |
-|---|---|---|
-| split_bytes_read | Counter | Number of bytes read from BookKeeper. |
-| split_num_messages_deserialized | Counter | Number of messages deserialized. |
-| split_num_record_deserialized | Counter | Number of records deserialized. |
-| split_bytes_read_per_query | Summary | Total number of bytes read per query. |
-| split_entry_deserialize_time | Summary | Time spent on deserializing entries. |
-| split_entry_deserialize_time_per_query | Summary | Time spent on deserializing entries per query. |
-| split_entry_queue_dequeue_wait_time | Summary | Time spend on waiting to get entry from entry queue because it is empty. |
-| split_entry_queue_dequeue_wait_time_per_query | Summary | Total time spent waiting to get entry from entry queue per query. |
-| split_message_queue_dequeue_wait_time_per_query | Summary | Time spent waiting to dequeue from message queue because is is empty per query. |
-| split_message_queue_enqueue_wait_time | Summary | Time spent waiting for message queue enqueue because the message queue is full. |
-| split_message_queue_enqueue_wait_time_per_query | Summary | Time spent waiting for message queue enqueue because the message queue is full per query. |
-| split_num_entries_per_batch | Summary | Number of entries per batch. |
-| split_num_entries_per_query | Summary | Number of entries per query. |
-| split_num_messages_deserialized_per_entry | Summary | Number of messages deserialized per entry. |
-| split_num_messages_deserialized_per_query | Summary | Number of messages deserialized per query. |
-| split_read_attempts | Summary | Number of reading attempts (fail if queues are full). |
-| split_read_attempts_per_query | Summary | Number of reading attempts per query. |
-| split_read_latency_per_batch | Summary | Latency of reads per batch. |
-| split_read_latency_per_query | Summary | Total read latency per query. |
-| split_record_deserialize_time | Summary | Time spent deserializing message to record. For example, Avro, JSON, and so on. |
-| split_record_deserialize_time_per_query | Summary | Time spent deserializing message to record per query. |
-| split_total_execution_time | Summary | The total execution time. |
-
 ## Pulsar transaction
 
 All the transaction metrics are labeled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *coordinator_id*: `coordinator_id=${coordinator_id}`. `${coordinator_id}` is the coordinator id.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *coordinator_id*: `coordinator_id=\$\{coordinator_id\}`. `\$\{coordinator_id\}` is the coordinator id.
 
 | Name                              | Type | Description |
 |-----------------------------------|---|---|

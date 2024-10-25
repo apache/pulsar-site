@@ -173,7 +173,7 @@ sidebar_label: Apache Pulsar 2.8.1
 - Fix broker init transaction related topic. [#11022](https://github.com/apache/pulsar/pull/11022)
 
 ### Pulsar Admin
-- Fix pulsar admin method:getMessageById[#11852](https://github.com/apache/pulsar/pull/11852)
+- Fix pulsar admin method\:getMessageById[#11852](https://github.com/apache/pulsar/pull/11852)
 - Allow create functions with package URL [#11666](https://github.com/apache/pulsar/pull/11666)
 - Add compacted topic metrics for TopicStats in CLI [#11564](https://github.com/apache/pulsar/pull/11564)
 - Fix time based backlog quota. [#11509](https://github.com/apache/pulsar/pull/11509)

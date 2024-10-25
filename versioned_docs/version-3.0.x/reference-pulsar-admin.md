@@ -505,20 +505,20 @@ Options
 |`--custom-schema-inputs`|The map of input topics to Schema class names (as a JSON string)||
 |`--client-auth-params`|Client authentication param||
 |`--client-auth-plugin`|Client authentication plugin using which function-process can connect to broker||
-|`--function-config-file`|The path to a YAML config file specifying the function's configuration||
+|`--function-config-file`|The absolute path to a YAML config file specifying the function's configuration||
 |`--hostname-verification-enabled`|Enable hostname verification|false|
 |`--instance-id-offset`|Start the instanceIds from this offset|0|
 |`--inputs`|The function's input topic or topics (multiple topics can be specified as a comma-separated list)||
 |`--log-topic`|The topic to which the function's logs are produced||
-|`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--jar`|Absolute path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
 |`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
 |`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
-|`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
-|`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--py`|Absolute path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--go`|Absolute path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
@@ -561,18 +561,18 @@ Options
 |`--classname`|The function's class name||
 |`--custom-serde-inputs`|The map of input topics to SerDe class names (as a JSON string)||
 |`--custom-schema-inputs`|The map of input topics to Schema class names (as a JSON string)||
-|`--function-config-file`|The path to a YAML config file specifying the function's configuration||
+|`--function-config-file`|The absolute path to a YAML config file specifying the function's configuration||
 |`--inputs`|The function's input topic or topics (multiple topics can be specified as a comma-separated list)||
 |`--log-topic`|The topic to which the function's logs are produced||
-|`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--jar`|Absolute path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
 |`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
 |`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
-|`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
-|`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--py`|Absolute path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--go`|Absolute path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
@@ -630,18 +630,18 @@ Options
 |`--classname`|The function's class name||
 |`--custom-serde-inputs`|The map of input topics to SerDe class names (as a JSON string)||
 |`--custom-schema-inputs`|The map of input topics to Schema class names (as a JSON string)||
-|`--function-config-file`|The path to a YAML config file specifying the function's configuration||
+|`--function-config-file`|The absolute path to a YAML config file specifying the function's configuration||
 |`--inputs`|The function's input topic or topics (multiple topics can be specified as a comma-separated list)||
 |`--log-topic`|The topic to which the function's logs are produced||
-|`--jar`|Path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--jar`|Absolute path to the jar file for the function (if the function is written in Java). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--name`|The function's name||
 |`--namespace`|The function's namespace||
 |`--output`|The function's output topic (If none is specified, no output is written)||
 |`--output-serde-classname`|The SerDe class to be used for messages output by the function||
 |`--parallelism`|The function's parallelism factor, i.e. the number of instances of the function to run|1|
 |`--processing-guarantees`|The processing guarantees (aka delivery semantics) applied to the function. Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]|ATLEAST_ONCE|
-|`--py`|Path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
-|`--go`|Path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--py`|Absolute path to the main Python file/Python Wheel file for the function (if the function is written in Python). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
+|`--go`|Absolute path to the main Go executable binary for the function (if the function is written in Go). It also supports URL path [http/https/file (file protocol assumes that file already exists on worker host)/function (package URL from packages management service)] from which worker can download the package.||
 |`--schema-type`|The built-in schema type or custom schema class name to be used for messages output by the function||
 |`--sliding-interval-count`|The number of messages after which the window slides||
 |`--sliding-interval-duration-ms`|The time duration after which the window slides||
@@ -1428,7 +1428,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 
 ### `split-bundle`
 Split a namespace-bundle from the current serving broker
@@ -1443,7 +1443,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 |`-u`, `--unload`|Unload newly split bundles after splitting old bundle|false|
 
 ### `set-dispatch-rate`
@@ -1562,7 +1562,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 |`-force`, `--force`|Whether to force a clear backlog without prompt|false|
 |`-s`, `--sub`|The subscription name||
 
@@ -1580,7 +1580,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 |`-s`, `--sub`|The subscription name||
 
 ### `set-encryption-required`
@@ -2902,7 +2902,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-n`, `--namespace`|The namespace||
 
 
@@ -2921,7 +2921,7 @@ Options
 |----|---|---|
 |`-bi`, `--bandwidthIn`|The expected inbound bandwidth (in bytes/second)|0|
 |`-bo`, `--bandwidthOut`|Expected outbound bandwidth (in bytes/second)0|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-d`, `--dynamic`|Allow to be dynamically re-calculated (or not)|false|
 |`-mem`, `--memory`|Expectred memory usage (in megabytes)|0|
 |`-mi`, `--msgRateIn`|Expected incoming messages per second|0|
@@ -2942,7 +2942,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-n`, `--namespace`|The namespace||
 
 
@@ -3017,5 +3017,5 @@ Options
 |Flag|Description|Default|
 |----|---|---|
 |`-c`, `--classname`|The Java class name||
-|`-j`, `--jar`|A path to the JAR file which contains the above Java class||
+|`-j`, `--jar`|Absolute path to the JAR file which contains the above Java class||
 |`-t`, `--type`|The type of the schema (avro or json)||

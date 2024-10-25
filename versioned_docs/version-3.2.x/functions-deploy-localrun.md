@@ -13,7 +13,7 @@ The following is an example of how to use the `localrun` command.
 
 ```bash
 bin/pulsar-admin functions localrun \
-  --py myfunc.py \
+  --py $PWD/myfunc.py \
   --classname myfunc.SomeFunction \
   --inputs persistent://public/default/input-1 \
   --output persistent://public/default/output-1

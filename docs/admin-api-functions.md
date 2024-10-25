@@ -46,7 +46,7 @@ pulsar-admin functions create \
     --inputs test-input-topic \
     --output persistent://public/default/test-output-topic \
     --classname org.apache.pulsar.functions.api.examples.ExclamationFunction \
-    --jar /examples/api-examples.jar
+    --jar $PWD/examples/api-examples.jar
 ```
 
 </TabItem>

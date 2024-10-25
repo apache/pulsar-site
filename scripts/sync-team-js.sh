@@ -16,4 +16,6 @@ curl -b "$COOKIES_FILE" -L -u "$APACHE_USER:$APACHE_PASSWORD" -X GET https://whi
 { 
   echo -n "module.exports = " && cat "$PULSAR_JSON" \
     | jq '{"pmc": [.roster| to_entries | sort_by(.key) | .[] | select(.value.role|startswith("PMC")) | {"name":.value.name, "apacheId": .key, "githubUsername": (.value.githubUsername|split(", "))}], "committers": [.roster| to_entries | sort_by(.key) | .[] | select(.value.role=="Committer") | {"name":.value.name, "apacheId": .key, "githubUsername": (.value.githubUsername|split(", "))}]}'
-} | perl -pe 's/$/;\n/ if eof' > data/team.js
+} | perl -pe 's/$/;\n/ if eof' > data/team.js && echo "Updated data/team.js"
+echo -n "Accounts without githubUsername: "
+cat "$PULSAR_JSON" | jq -r '[.roster | to_entries | .[] | select(.value.githubUsername == "") | (.key + "@apache.org")] | join(", ")'

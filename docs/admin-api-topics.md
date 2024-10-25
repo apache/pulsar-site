@@ -35,6 +35,12 @@ Non-persistent topics are used in applications that only consume real-time publi
 non-persistent://tenant/namespace/topic
 ```
 
+:::note
+
+Topic naming: due to backward compatibility, some special characters, e.g., "/," are allowed as a part of the topic name. But it's recommended not to use special characters as a part of the topic name.
+
+:::
+
 ## Manage topic resources
 Whether it is a persistent or non-persistent topic, you can obtain the topic resources through `pulsar-admin` tool, REST API and Java.
 
@@ -1734,7 +1740,7 @@ pulsar-admin topics delete-partitioned-topic \
 <TabItem value="Java">
 
 ```java
-admin.topics().delete(topic);
+admin.topics().deletePartitionedTopic(topic);
 ```
 
 </TabItem>

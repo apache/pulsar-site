@@ -18,15 +18,19 @@ Pulsar documentation is built using [Docusaurus](https://docusaurus.io/). To pre
 To verify docs are built correctly before submitting a contribution, you should set up your local environment to build and display the docs locally.
 
 * Node >= 20.0.0 (latest LTS recommended)
-* Corepack enabled (`corepack enable`)
+* Corepack available and enabled (`corepack enable`)
 * Although you can use Linux, macOS, or Windows to build locally the Pulsar documentation, macOS is the preferred build environment as it offers the most complete support for documentation building.
 
 Installing prerequisites with [homebrew](https://brew.sh/) on MacOS or Linux:
 
 ```shell
 brew install node
+brew install corepack || brew link corepack
 corepack enable
 ```
+
+Sometimes homebrew has corepack installed, but it's not available. In that case, `brew link corepack` fixes the problem.
+Don't install `yarn` separately since it's part of `corepack`.
 
 ### Preview changes
 

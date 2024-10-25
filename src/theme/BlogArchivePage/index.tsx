@@ -2,9 +2,9 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import {translate} from '@docusaurus/Translate';
 import {PageMetadata} from '@docusaurus/theme-common';
+import {useDateTimeFormat} from '@docusaurus/theme-common/internal';
 import Layout from '@theme/Layout';
 import type {ArchiveBlogPost, Props} from '@theme/BlogArchivePage';
-import Heading from '@theme/Heading';
 
 type YearProp = {
   year: string;
@@ -12,16 +12,23 @@ type YearProp = {
 };
 
 function Year({year, posts}: YearProp) {
+  const dateTimeFormat = useDateTimeFormat({
+    day: 'numeric',
+    month: 'long',
+    timeZone: 'UTC',
+  });
+
+  const formatDate = (lastUpdated: string) =>
+    dateTimeFormat.format(new Date(lastUpdated));
+
   return (
     <>
-      <Heading as="h3" id={year}>
-        {year}
-      </Heading>
+      <h3>{year}</h3>
       <ul>
         {posts.map((post) => (
           <li key={post.metadata.date}>
             <Link to={post.metadata.permalink}>
-              {post.metadata.formattedDate} - {post.metadata.title}
+              {formatDate(post.metadata.date)} - {post.metadata.title}
             </Link>
           </li>
         ))}
@@ -47,7 +54,7 @@ function YearsSection({years}: {years: YearProp[]}) {
 }
 
 function listPostsByYears(blogPosts: readonly ArchiveBlogPost[]): YearProp[] {
-  const postsByYear = blogPosts.reduce((posts, post) => {
+  const postsByYear = blogPosts.reduceRight((posts, post) => {
     const year = post.metadata.date.split('-')[0]!;
     const yearPosts = posts.get(year) ?? [];
     return posts.set(year, [post, ...yearPosts]);
@@ -77,9 +84,7 @@ export default function BlogArchive({archive}: Props): JSX.Element {
       <Layout>
         <header className="hero hero--primary">
           <div className="container">
-            <Heading as="h1" className="hero__title">
-              {title}
-            </Heading>
+            <h1 className="hero__title">{title}</h1>
             <p className="hero__subtitle">{description}</p>
           </div>
         </header>

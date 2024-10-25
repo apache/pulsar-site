@@ -58,7 +58,7 @@ To package a Python function into **one Python file**, complete the following st
    ```bash
    ./bin/pulsar-admin functions localrun \
        --classname <Python Function file name>.<Python Function class name> \
-       --py <path of Python Function file> \
+       --py <absolute path of Python Function file> \
        --inputs persistent://public/default/my-topic-1 \
        --output persistent://public/default/test-1 \
        --tenant public \
@@ -109,7 +109,7 @@ To package a Python function into a **ZIP file**, complete the following steps.
    ```shell
    ./bin/pulsar-admin functions localrun \
        --classname exclamation \
-       --py <path of ZIP file> \
+       --py <absolute path of ZIP file> \
        --inputs persistent://public/default/in-topic \
        --output persistent://public/default/out-topic \
        --tenant public \

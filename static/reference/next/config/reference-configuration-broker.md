@@ -566,7 +566,7 @@ In FlowOrQpsEquallyDivideBundleSplitAlgorithm, if msgRate \>= loadBalancerNamesp
 **Category**: Load Balancer
 
 ### loadBalanceSheddingDelayInSeconds
-Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferSheddeer)
+Delay (in seconds) to the next unloading cycle after unloading. The logic tries to give enough time for brokers to recompute load after unloading. The bigger value will delay the next unloading cycle longer. (only used in load balancer extension TransferShedder)
 
 **Type**: `long`
 
@@ -609,8 +609,74 @@ Average resource usage difference threshold to determine a broker whether to be 
 
 **Category**: Load Balancer
 
+### loadBalancerAvgShedderHighThreshold
+The high threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `40`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountHighThreshold
+The number of times the high threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountLowThreshold
+The number of times the low threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `8`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderLowThreshold
+The low threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `15`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBandwidthInResourceWeight
+BandwidthIn Resource Usage Weight
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerBandwidthOutResourceWeight
+BandwidthOut Resource Usage Weight
+
+**Type**: `double`
+
+**Default**: `1.0`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBandwithInResourceWeight
-BandwithIn Resource Usage Weight
+BandwidthIn Resource Usage Weight, Deprecated: Use loadBalancerBandwidthInResourceWeight
 
 **Type**: `double`
 
@@ -621,7 +687,7 @@ BandwithIn Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBandwithOutResourceWeight
-BandwithOut Resource Usage Weight
+BandwidthOut Resource Usage Weight, Deprecated: Use loadBalancerBandwidthOutResourceWeight
 
 **Type**: `double`
 
@@ -632,7 +698,7 @@ BandwithOut Resource Usage Weight
 **Category**: Load Balancer
 
 ### loadBalancerBrokerLoadDataTTLInSeconds
-Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default value is loadBalancerReportUpdateMaxIntervalMinutes * 120, reflecting twice the duration in seconds. (only used in load balancer extension TransferSheddeer)
+Broker load data time to live (TTL in seconds). The logic tries to avoid (possibly unavailable) brokers with out-dated load data, and those brokers will be ignored in the load computation. When tuning this value, please consider loadBalancerReportUpdateMaxIntervalMinutes. The current default value is loadBalancerReportUpdateMaxIntervalMinutes * 120, reflecting twice the duration in seconds. (only used in load balancer extension TransferShedder)
 
 **Type**: `long`
 
@@ -643,7 +709,7 @@ Broker load data time to live (TTL in seconds). The logic tries to avoid (possib
 **Category**: Load Balancer
 
 ### loadBalancerBrokerLoadTargetStd
-The target standard deviation of the resource usage across brokers (100% resource usage is 1.0 load). The shedder logic tries to distribute bundle load across brokers to meet this target std. The smaller value will incur load balancing more frequently. (only used in load balancer extension TransferSheddeer)
+The target standard deviation of the resource usage across brokers (100% resource usage is 1.0 load). The shedder logic tries to distribute bundle load across brokers to meet this target std. The smaller value will incur load balancing more frequently. (only used in load balancer extension TransferShedder)
 
 **Type**: `double`
 
@@ -808,7 +874,7 @@ load balance load shedding strategy (It requires broker restart if value is chan
 **Category**: Load Balancer
 
 ### loadBalancerMaxNumberOfBrokerSheddingPerCycle
-Maximum number of brokers to unload bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferSheddeer)
+Maximum number of brokers to unload bundle load for each unloading cycle. The bigger value will incur more unloading/transfers for each unloading cycle. (only used in load balancer extension TransferShedder)
 
 **Type**: `int`
 
@@ -819,7 +885,7 @@ Maximum number of brokers to unload bundle load for each unloading cycle. The bi
 **Category**: Load Balancer
 
 ### loadBalancerMaxNumberOfBundlesInBundleLoadReport
-Max number of bundles in bundle load report from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. (only used in load balancer extension logics)
+Max number of bundles in bundle load report from each broker. The load balancer distributes bundles across brokers, based on topK bundle load data and other broker load data.The bigger value will increase the overhead of reporting many bundles in load data. Used for ExtensibleLoadManagerImpl and ModularLoadManagerImpl, default value is 10. User can disable the bundle filtering feature of ModularLoadManagerImpl by setting to -1.Enabling this feature can reduce the pressure on the zookeeper when doing load report.WARNING: too small value could result in a long load balance time.
 
 **Type**: `int`
 
@@ -1016,6 +1082,17 @@ After this delay, the service-unit state channel tombstones any service units (e
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitTableViewSyncer
+Specify ServiceUnitTableViewSyncer to sync service unit(bundle) states between metadata store and system topic table views during migration from one to the other. One could enable this syncer before migration and disable it after the migration finishes. It accepts `MetadataStoreToSystemTopicSyncer` or `SystemTopicToMetadataStoreSyncer` to enable it. It accepts `None` to disable it.
+
+**Type**: `org.apache.pulsar.broker.ServiceConfiguration.ServiceUnitTableViewSyncerType`
+
+**Default**: `None`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingBundlesWithPoliciesEnabled
 Option to automatically unload namespace bundles with affinity(isolation) or anti-affinity group policies.Such bundles are not ideal targets to auto-unload as destination brokers are limited.(only used in load balancer extension logics)
 
@@ -1028,7 +1105,7 @@ Option to automatically unload namespace bundles with affinity(isolation) or ant
 **Category**: Load Balancer
 
 ### loadBalancerSheddingConditionHitCountThreshold
-Threshold to the consecutive count of fulfilled shedding(unload) conditions. If the unload scheduler consecutively finds bundles that meet unload conditions many times bigger than this threshold, the scheduler will shed the bundles. The bigger value will incur less bundle unloading/transfers. (only used in load balancer extension TransferSheddeer)
+Threshold to the consecutive count of fulfilled shedding(unload) conditions. If the unload scheduler consecutively finds bundles that meet unload conditions many times bigger than this threshold, the scheduler will shed the bundles. The bigger value will incur less bundle unloading/transfers. (only used in load balancer extension TransferShedder)
 
 **Type**: `int`
 
@@ -1085,7 +1162,7 @@ Service units'(bundles) split interval. Broker periodically checks whether some 
 **Category**: Load Balancer
 
 ### loadBalancerTransferEnabled
-Option to enable the bundle transfer mode when distributing bundle loads. On: transfer bundles from overloaded brokers to underloaded -- pre-assigns the destination broker upon unloading). Off: unload bundles from overloaded brokers -- post-assigns the destination broker upon lookups). (only used in load balancer extension TransferSheddeer)
+Option to enable the bundle transfer mode when distributing bundle loads. On: transfer bundles from overloaded brokers to underloaded -- pre-assigns the destination broker upon unloading). Off: unload bundles from overloaded brokers -- post-assigns the destination broker upon lookups). (only used in load balancer extension TransferShedder)
 
 **Type**: `boolean`
 
@@ -1103,6 +1180,17 @@ Name of load manager to use
 **Default**: `org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl`
 
 **Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadManagerServiceUnitStateTableViewClassName
+Name of ServiceUnitStateTableView implementation class to use
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.loadbalance.extensions.channel.ServiceUnitStateTableViewImpl`
+
+**Dynamic**: `false`
 
 **Category**: Load Balancer
 
@@ -1129,7 +1217,7 @@ For each uniform balanced unload, the maximum number of bundles that can be unlo
 **Category**: Load Balancer
 
 ### maxUnloadPercentage
-In the UniformLoadShedder strategy, the maximum unload ratio.
+In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio.For AvgShedder, recommend to set to 0.5, so that it will distribute the load evenly between the highest and lowest brokers.
 
 **Type**: `double`
 
@@ -1140,7 +1228,7 @@ In the UniformLoadShedder strategy, the maximum unload ratio.
 **Category**: Load Balancer
 
 ### minUnloadMessage
-In the UniformLoadShedder strategy, the minimum message that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum message that triggers unload.
 
 **Type**: `int`
 
@@ -1151,7 +1239,7 @@ In the UniformLoadShedder strategy, the minimum message that triggers unload.
 **Category**: Load Balancer
 
 ### minUnloadMessageThroughput
-In the UniformLoadShedder strategy, the minimum throughput that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum throughput that triggers unload.
 
 **Type**: `int`
 
@@ -1318,6 +1406,17 @@ If true, export topic level metrics otherwise namespace level
 
 **Category**: Metrics
 
+### healthCheckMetricsUpdateTimeInSeconds
+HealthCheck update frequency in seconds. Disable health check with value -1 (Default value -1)
+
+**Type**: `int`
+
+**Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### jvmGCMetricsLoggerClassName
 Classname of Pluggable JVM GC metrics logger that can log GC specific metrics
 
@@ -1330,7 +1429,7 @@ Classname of Pluggable JVM GC metrics logger that can log GC specific metrics
 **Category**: Metrics
 
 ### metricsBufferResponse
-If true, export buffered metrics
+Set to true to enable the broker to cache the metrics response; the default is false. The caching period is defined by `managedLedgerStatsPeriodSeconds`. The broker returns the same response for subsequent requests within the same period. Ensure that the scrape interval of your monitoring system matches the caching period.
 
 **Type**: `boolean`
 
@@ -1442,6 +1541,17 @@ How long to delay rewinding cursor and dispatching messages when active consumer
 **Type**: `int`
 
 **Default**: `1000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### additionalSystemCursorNames
+Additional system subscriptions that will be ignored by ttl check. The cursor names are comma separated. Default is empty.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
 
 **Dynamic**: `false`
 
@@ -1815,6 +1925,28 @@ Dispatch rate-limiting relative to publish rate. (Enabling flag will make broker
 
 **Category**: Policies
 
+### dispatcherRetryBackoffInitialTimeInMs
+On Shared and KeyShared subscriptions, if all available messages in the subscription are filtered out and not dispatched to any consumer, message dispatching will be rescheduled with a backoff delay. This parameter sets the initial backoff delay in milliseconds.
+
+**Type**: `int`
+
+**Default**: `1`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### dispatcherRetryBackoffMaxTimeInMs
+On Shared and KeyShared subscriptions, if all available messages in the subscription are filtered out and not dispatched to any consumer, message dispatching will be rescheduled with a backoff delay. This parameter sets the maximum backoff delay in milliseconds.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### enableBrokerSideSubscriptionPatternEvaluation
 Enables evaluating subscription pattern on broker side.
 
@@ -1859,6 +1991,45 @@ Allow schema to be auto updated at broker level. User can override this by 'is_a
 
 **Category**: Policies
 
+### keySharedLookAheadMsgInReplayThresholdPerConsumer
+For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
+Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
+Setting this value to 0 will disable the limit calculated per consumer.
+
+**Type**: `int`
+
+**Default**: `2000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### keySharedLookAheadMsgInReplayThresholdPerSubscription
+For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
+Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
+This value should be set to a value less than 2 * managedLedgerMaxUnackedRangesToPersist.
+Setting this value to 0 will disable the limit calculated per subscription.
+
+
+**Type**: `int`
+
+**Default**: `20000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### keySharedUnblockingIntervalMs
+For Key_Shared subscriptions, when a blocked key hash gets unblocked, a redelivery will be attempted after a delay. This setting controls the delay. The reason to have the delay is to batch multiple unblocking events instead of triggering redelivery for each unblocking event.
+
+**Type**: `long`
+
+**Default**: `10`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### maxConsumerMetadataSize
 Maximum size of Consumer metadata
 
@@ -1887,6 +2058,17 @@ Max pending publish requests per connection to avoid keeping large number of pen
 **Type**: `int`
 
 **Default**: `1000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### maxSecondsToClearTopicNameCache
+A Specifies the minimum number of seconds that the topic name stays in memory, to avoid clear cache frequently when there are too many topics are in use.
+
+**Type**: `int`
+
+**Default**: `7200`
 
 **Dynamic**: `false`
 
@@ -2086,6 +2268,17 @@ Enable Key_Shared subscription (default is enabled).
 
 **Category**: Policies
 
+### subscriptionKeySharedUseClassicPersistentImplementation
+For persistent Key_Shared subscriptions, enables the use of the classic implementation of the Key_Shared subscription that was used before Pulsar 4.0.0 and PIP-379.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### subscriptionKeySharedUseConsistentHashing
 On KeyShared subscriptions, with default AUTO_SPLIT mode, use splitting ranges or consistent hashing to reassign keys to new consumers (default is consistent hashing)
 
@@ -2119,12 +2312,34 @@ Enable subscription message redelivery tracker to send redelivery count to consu
 
 **Category**: Policies
 
+### subscriptionSharedUseClassicPersistentImplementation
+For persistent Shared subscriptions, enables the use of the classic implementation of the Shared subscription that was used before Pulsar 4.0.0.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### subscriptionTypesEnabled
 Enable subscription types (default is all type enabled)
 
 **Type**: `java.util.Set`
 
 **Default**: `[Failover, Shared, Key_Shared, Exclusive]`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### topicNameCacheMaxCapacity
+Max capacity of the topic name cache. -1 means unlimited cache; 0 means broker will clear all cache per maxSecondsToClearTopicNameCache, it does not mean broker will not cache TopicName.
+
+**Type**: `int`
+
+**Default**: `100000`
 
 **Dynamic**: `true`
 
@@ -2204,6 +2419,17 @@ Enable TLS when talking with other brokers in the same cluster (admin operation)
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Replication
+
+### createTopicToRemoteClusterForReplication
+Whether the internal replicator will trigger topic auto-creation on the remote cluster.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
 
 **Category**: Replication
 
@@ -2690,6 +2916,17 @@ Event topic to sync configuration-metadata between separate pulsar clusters on d
 
 **Category**: Server
 
+### configurationStoreConfigPath
+Configuration file path for configuration metadata store.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### connectionLivenessCheckTimeoutMillis
 Timeout for connection liveness check used to check liveness of possible consumer or producer duplicates. Helps prevent ProducerFencedException with exclusive producer, ConsumerAssignException with range conflict for Key Shared with sticky hash ranges or ConsumerBusyException in the case of an exclusive consumer. Set to 0 to disable connection liveness check.
 
@@ -2946,7 +3183,7 @@ Option to enable busy-wait settings. Default is false. WARNING: This option will
 **Category**: Server
 
 ### enableNamespaceIsolationUpdateOnTime
-Enable namespaceIsolation policy update take effect ontime or not, if set to ture, then the related namespaces will be unloaded after reset policy to make it take effect.
+This config never takes effect and will be removed in the next release
 
 **Type**: `boolean`
 
@@ -3088,6 +3325,23 @@ Capacity for accept queue in the HTTP server Default is set to 8192.
 
 **Category**: Server
 
+### httpServerGzipCompressionExcludedPaths
+Gzip compression is enabled by default. Specific paths can be excluded from compression.
+There are 2 syntaxes supported, Servlet url-pattern based, and Regex based.
+If the spec starts with '^' the spec is assumed to be a regex based path spec and will match with normal Java regex rules.
+If the spec starts with '/' then spec is assumed to be a Servlet url-pattern rules path spec for either an exact match or prefix based match.
+If the spec starts with '*.' then spec is assumed to be a Servlet url-pattern rules path spec for a suffix based match.
+All other syntaxes are unsupported.
+Disable all compression with ^.* or ^.*$
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### httpServerThreadPoolQueueSize
 Capacity for thread pool queue in the HTTP server Default is set to 8192.
 
@@ -3139,6 +3393,17 @@ The caveat is now when recovered ledger is ready to write we're not sure if all 
 **Type**: `boolean`
 
 **Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### lookupPropertyPrefix
+The properties whose name starts with this prefix will be uploaded to the metadata store for  the topic lookup
+
+**Type**: `java.lang.String`
+
+**Default**: `lookup.`
 
 **Dynamic**: `false`
 
@@ -3258,6 +3523,7 @@ Max size of messages.
 ### maxNumPartitionsPerPartitionedTopic
 The number of partitions per partitioned topic.
 If try to create or update partitioned topics by exceeded number of partitions, then fail.
+Use 0 or negative number to disable the check.
 
 **Type**: `int`
 
@@ -3431,7 +3697,7 @@ Metadata store cache expiry time in seconds.
 **Category**: Server
 
 ### metadataStoreConfigPath
-Configuration file path for local metadata store. It's supported by RocksdbMetadataStore for now.
+Configuration file path for local metadata store.
 
 **Type**: `java.lang.String`
 
@@ -3622,6 +3888,17 @@ Timeout for building a consistent snapshot for tracking replicated subscriptions
 
 **Category**: Server
 
+### replicationStartAt
+The position that replication task start at, it can be set to earliest or latest (default).
+
+**Type**: `java.lang.String`
+
+**Default**: `latest`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### retentionCheckIntervalInSeconds
 Check between intervals to see if consumed ledgers need to be trimmed
 
@@ -3762,6 +4039,17 @@ Number of worker threads to serve topic ordered executor
 
 **Category**: Server
 
+### topicPoliciesServiceClassName
+The class name of the topic policies service. The default config only takes affect when the systemTopicEnable config is true
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### transactionLogBatchedWriteEnabled
 Provide a mechanism allowing the Transaction Log Store to aggregate multiple records into a batched record and persist into a single BK entry. This will make Pulsar transactions work more efficiently, aka batched log. see: https://github.com/apache/pulsar/issues/15370. Default false
 
@@ -3850,6 +4138,29 @@ If enabled the feature that transaction pending ack log batch, this attribute me
 
 **Category**: Server
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### webServicePort
 The port for serving http requests
 
@@ -3878,6 +4189,18 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 **Type**: `java.lang.String`
 
 **Default**: `Conscrypt`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -4446,6 +4769,17 @@ The directory to locate offloaders
 
 **Category**: Storage (Ledger Offloading)
 
+### triggerOffloadOnTopicLoad
+Trigger offload on topic load or not. Default is false
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
 ### allowAutoSubscriptionCreation
 Allow automated creation of subscriptions if set to true (default value).
 
@@ -4739,6 +5073,17 @@ Default is `CRC32C`. Other possible options are `CRC32`, `MAC` or `DUMMY` (no ch
 **Default**: `CRC32C`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerForceRecovery
+Skip managed ledger failure to forcefully recover managed ledger.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5041,6 +5386,61 @@ If enabled, the maximum "acknowledgment holes" will not be limited and "acknowle
 **Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
+
+### schemaLedgerForceRecovery
+Skip schema ledger failure to forcefully recover topic successfully.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### brokerClientSslFactoryPlugin
+SSL Factory Plugin class used by internal client to provide SSLEngine and SSLContext objects. The default class used is DefaultSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### brokerClientSslFactoryPluginParams
+SSL Factory plugin configuration parameters used by internal client.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### sslFactoryPlugin
+SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### sslFactoryPluginParams
+SSL Factory plugin configuration parameters.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
 
 ### tlsAllowInsecureConnection
 Accept untrusted TLS certificate from client
@@ -5392,6 +5792,17 @@ Interval of time to sending the ping to keep alive in WebSocket proxy. This valu
 
 **Category**: WebSocket
 
+### webSocketPulsarClientMemoryLimitInMB
+Memory limit in MBs for direct memory in Pulsar Client used in WebSocket proxy
+
+**Type**: `int`
+
+**Default**: `0`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
 ### webSocketServiceEnabled
 Enable the WebSocket API service in broker
 
@@ -5442,7 +5853,7 @@ Memory Resource Usage Weight. Deprecated: Memory is no longer used as a load bal
 
 **Type**: `double`
 
-**Default**: `1.0`
+**Default**: `0.0`
 
 **Dynamic**: `true`
 

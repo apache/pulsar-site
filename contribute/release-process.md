@@ -9,12 +9,15 @@ The term feature/patch releases used throughout this document is defined as foll
 
 * Feature releases contain 2.10.0, 2.11.0, 3.0.0, and so on.
 * Patch releases refer to bug-fix releases, such as 2.10.1, 2.10.2, and so on.
+* Preview release refer to LTS release preview releases that happen in the releasing of a LTS version. 
 
 ## Preparation
 
 Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
 
-For feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
+For LTS and feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
+
+For preview releases of a LTS release, a branch `branch-X.0-preview` is created. This branch will is used to hold the commit to change the version to the preview version. Preview releases will be tagged in this branch.
 
 For patch releases, if there are no disagreements, you should cherry-pick all merged PRs labeled with `release/X.Y.Z` into `branch-X.Y`. After these PRs are cherry-picked, you should add the `cherry-picked/branch-X.Y` labels.
 
@@ -22,109 +25,111 @@ Sometimes some PRs cannot be cherry-picked cleanly, you might need to create a s
 
 For PRs that are still open, you can choose to delay them to the next release or ping others to review so that they can be merged.
 
-To verify the release branch is not broken, you can synchronize the branch in your personal repo and open a PR to trigger the CI.
-
-You can use the following command to catch basic compilation, checkstyle or spotbugs errors in your local env before cherry-picking.
-
-```bash
-mvn clean install -DskipTests
-```
+To verify the release branch is not broken, you should trigger a Pulsar CI builds for the [pulsar-ci.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci.yaml) and [pulsar-ci-flaky.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci-flaky.yaml) workflows. The builds must pass before a release is performed.
 
 If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
 
 Before you start the next release steps, make sure you have installed these software:
 
-* JDK 17 (for Pulsar version >= 2.11) or JDK 11 (for earlier versions)
-* Maven 3.8.6
+* Amazon Corretto OpenJDK
+  * JDK 21 for Pulsar version >= 3.3
+    * code will be compiled for Java 17 with Java 21
+    * Pulsar docker images are running Java 21 since 3.3.0
+  * JDK 17 for Pulsar version >= 2.11
+  * JDK 11 for earlier versions
+* Maven 3.9.9 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.9`
 * Zip
 
-Also, you need to **clean up the bookkeeper's local compiled** to make sure the bookkeeper dependency is fetched from the Maven repository, details to see [this mailing list thread](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2).
+Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
+
+## Set environment variables to be used across the commands {#env-vars}
+
+```shell
+export VERSION_RC=3.0.4-candidate-1
+export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+export VERSION_BRANCH=branch-3.0
+export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=17
+```
+
+Example for preview releases:
+
+```shell
+export VERSION_RC=4.0.0-preview.1
+export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+export VERSION_BRANCH=branch-4.0-preview
+export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=21
+```
+
+Set your ASF user id
+
+```shell
+export APACHE_USER=<your ASF userid>
+```
+
+In addition, you will need to set `PULSAR_PATH` to point to the cleanly checked out working directory for the release branch.
+
+If you run into problems with GPG signing set this
+
+```shell
+export GPG_TTY=$(tty)
+```
+
+For some commands, a template is copied to the clipboard using `pbcopy`.
+This is already available on MacOS. For Linux, create a shell alias:
+
+```shell
+# Linux only
+# install xsel if it is missing
+sudo apt install xsel
+# create alias pbcopy for copying stdin to clipboard
+alias pbcopy="xsel --clipboard --input"
+```
 
 ## Create a release candidate
 
 ### Create the release branch
 
-We are going to create a branch from `master` to `branch-v2.X` where the tag will be generated and where new fixes will be applied as part of the maintenance for the release.
+We are going to create a release branch where the tag will be generated and where new fixes will be applied as part of the maintenance for the release.
 
-The branch needs only to be created for feature releases, and not for patch releases like `2.3.1`. For patch releases, go to the next step.
+The branch needs only to be created for feature releases, and not for patch releases like `3.3.2`. For patch releases, go to the next step.
 
-For example, when you create the `v2.3.0` release, the branch `branch-2.3` will be created; but for `v2.3.1`, we
-keep using the old `branch-2.3`.
-
-In these instructions, a fictitious release `2.X.0` is referred. Change the release version in the examples accordingly with the real version.
+For example, when working on `3.3.0` release, the branch `branch-3.3` will be created; but for `3.3.1`, the existing `branch-3.3` will be used.
 
 It is recommended to create a fresh clone of the repository to avoid any local files interfering in the process:
 
 ```shell
-git clone git@github.com:apache/pulsar.git
+git clone https://github.com/apache/pulsar
 cd pulsar
-PULSAR_PATH=$(pwd)
-git checkout -b branch-2.X origin/master
+export PULSAR_PATH=$(pwd)
+git checkout -b $VERSION_BRANCH origin/master
 ```
 
 Alternatively, you can use a git workspace to create a new, clean directory on your machine without needing to re-download the project.
 
 ```shell
-git worktree add ../pulsar.branch-2.X branch-2.X
+git worktree add ../pulsar-release-$VERSION_BRANCH $VERSION_BRANCH
+cd ../pulsar-release-$VERSION_BRANCH
+export PULSAR_PATH=$(pwd)
 ```
 
-If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch.
+if you get an error that the branch is already checked out, go to that directory detach it from the branch. After this the above command should succeed
+```shell 
+git checkout --detach HEAD
+```
 
-Note that you should also stop the workflow for previous Pulsar versions that are EOL.
+After the release, you can cleanup the worktree in the main repository directory
+```shell
+git worktree remove ../pulsar-release-$VERSION_BRANCH
+```
+
+If you created a new branch, update the [CI - OWASP Dependency Check](https://github.com/apache/pulsar/blob/master/.github/workflows/ci-owasp-dependency-check.yaml) workflow so that it will run on the new branch. Note that you should also remove the branches for previous Pulsar versions that are no longer [supported for security updates](https://pulsar.apache.org/contribute/release-policy/#supported-versions).
 
 ### Cherry-picking changes scheduled for the release
 
-Before proceeding, ensure that you have [set up a Git mergetool](setup-mergetool.md). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.
-
-Use a search such as `is:merged is:pr label:release/3.0.3 -label:cherry-picked/branch-3.0` to search for merged PRs that are scheduled for the release, but haven't yet been cherry-picked.
-It is necessary to handle cherry-picks in the same order as they have been merged in the master branch. Otherwise there will be unnecessary merge conflicts to resolve.
-
-Here's a shell script where the output that will ease cherry-picking from master branch:
-assumes `gawk` is gnu awk. install `brew install gawk` or `alias gawk=awk` on Linux.
-```
-UPSTREAM=origin
-git fetch $UPSTREAM
-RELEASE_NUMBER=3.0.3
-RELEASE_BRANCH=branch-3.0
-PR_QUERY="is:merged label:release/$RELEASE_NUMBER -label:cherry-picked/$RELEASE_BRANCH"
-PR_NUMBERS=$(gh pr list -L 100 --search "$PR_QUERY" --json number --jq '["#"+(.[].number|tostring)] | join("|")')
-ALREADY_PICKED=$(git log --oneline -P --grep="$PR_NUMBERS" --reverse $RELEASE_BRANCH | gawk 'match($0, /\(#([0-9]+)\)/, a) {print substr(a[0], 2, length(a[0])-2)}' | tr '\n' '|' | sed 's/|$//')
-if [[ -n "$ALREADY_PICKED" ]]; then
-  echo "** Already picked but not tagged as cherry-picked **"
-  git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $RELEASE_BRANCH | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
-fi
-echo "** Not cherry-picked from $UPSTREAM/master **"
-git log --color --oneline -P --grep="$PR_NUMBERS" --reverse $UPSTREAM/master | { [ -n "$ALREADY_PICKED" ] && grep --color -v -E "$ALREADY_PICKED" || cat; } | gawk 'match($0, /\(#([0-9]+)\)/, a) {print $0 " https://github.com/apache/pulsar/pull/" substr(a[0], 3, length(a[0])-3)}'
-echo "Check https://github.com/apache/pulsar/pulls?q=is:pr+$(echo "$PR_QUERY" | tr ' ' '+')"
-```
-
-this produces an output such as:
-```
-** Already picked but not tagged as cherry-picked **
-744b7af5fc4 [improve][broker] Support not retaining null-key message during topic compaction (#21578) (#21662) https://github.com/apache/pulsar/pull/21578
-b41013ba45c [improve][broker] defer the ownership checks if the owner is inactive (ExtensibleLoadManager) (#21857) https://github.com/apache/pulsar/pull/21857
-a6fd517ee39 [improve][build] Add a default username in the image (#21695) https://github.com/apache/pulsar/pull/21695
-bbf6ddf9244 [fix] [client] Do no retrying for error subscription not found when disabled allowAutoSubscriptionCreation (#22078) https://github.com/apache/pulsar/pull/22078
-** Not cherry-picked from origin/master **
-ecd16d68e29 [fix][client] fix negative message re-delivery twice issue (#20750) https://github.com/apache/pulsar/pull/20750
-50007c343ad [fix][txn] Fix getting last message ID when there are ongoing transactions (#21466) https://github.com/apache/pulsar/pull/21466
-e81a20d667a [fix][broker] Avoid consumers receiving acknowledged messages from compacted topic after reconnection (#21187) https://github.com/apache/pulsar/pull/21187
-09559c5e661 [fix] [broker] Fix reader stuck when read from compacted topic with read compact mode disable (#21969) https://github.com/apache/pulsar/pull/21969
-48b4481969c [improve] [broker] Do not print an Error log when responding to `HTTP-404` when calling `Admin API` and the topic does not exist. (#21995) https://github.com/apache/pulsar/pull/21995
-861618a8120 [fix] [broker] Expire messages according to ledger close time to avoid client clock skew (#21940) https://github.com/apache/pulsar/pull/21940
-48c7e322fec [improve][admin] Expose the offload threshold in seconds to the amdin (#22101) https://github.com/apache/pulsar/pull/22101
-1c652f5519e [improve] [broker] Do not try to open ML when the topic meta does not exist and do not expect to create a new one. #21995 (#22004) https://github.com/apache/pulsar/pull/22004
-86079059890 [improve][broker] Cache the internal writer when sent to system topic. (#22099) https://github.com/apache/pulsar/pull/22099
-1b1cfb58f4e [fix] [broker] Enabling batch causes negative unackedMessages due to ack and delivery concurrency (#22090) https://github.com/apache/pulsar/pull/22090
-0c49cac105e [fix] [client] fix huge permits if acked a half batched message (#22091) https://github.com/apache/pulsar/pull/22091
-31ed115d0b5 [fix][sec] Add a check for the input time value (#22023) https://github.com/apache/pulsar/pull/22023
-30134966a18 [fix][test] fix test testSyncNormalPositionWhenTBRecover (#22120) https://github.com/apache/pulsar/pull/22120
-91de98ad456 [fix][test] Fix test testAsyncFunctionMaxPending (#22121) https://github.com/apache/pulsar/pull/22121
-```
-
-It will speed up cherry-picking since you commit ids are there and there's also links to the PRs.
-A cherry-pick should be done in this order with `git cherry-pick -x COMMIT_ID`.
-It's possible that some dependent commits are necessary to be cherry-picked when you encounter a lot of merge conflicts in a case where they aren't expected.
+Please read the [separate guide about maintenance tasks and cherry-picking](maintenance-process.md).
 
 ### Update project version and tag
 
@@ -135,29 +140,44 @@ In this process, the maven version of the project will always be the final one.
 ```shell
 # Bump to the release version
 cd $PULSAR_PATH
-./src/set-project-version.sh 2.X.0
-
-# Some version may not update the right parent version of `protobuf-shaded/pom.xml`, please double check it.
+./src/set-project-version.sh $VERSION_WITHOUT_RC
 
 # Commit
-git commit -m 'Release 2.X.0' -a
+git commit -m "Release $VERSION_WITHOUT_RC" -a
 
 # Create a "candidate" tag
-# If you don't sign your commits already, use the following
-export GPG_TTY=$(tty)
-git tag -u $USER@apache.org v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
-# If you already sign your commits using your apache.org email, use the following
-git tag -s v2.X.0-candidate-1 -m 'Release v2.X.0-candidate-1'
+git tag -u $APACHE_USER@apache.org v$VERSION_RC -m "Release $VERSION_RC"
 
 # Verify that you signed your tag before pushing it:
-git tag -v v2.X.0-candidate-1
+git tag -v v$VERSION_RC
 
 # Push both the branch and the tag to Github repo
-git push origin branch-2.X
-git push origin v2.X.0-candidate-1
+git push $UPSTREAM_REMOTE $VERSION_BRANCH
+git push $UPSTREAM_REMOTE v$VERSION_RC
 ```
 
-For patch releases, the tag is like `2.3.1`.
+If there's a need to restart the release with more commits, you can delete the tag.
+
+```shell
+# only if you restart the release before it has been published for voting. Don't run this after that!
+# delete local tag
+git tag -d v$VERSION_RC
+# delete tag in remote
+git push $UPSTREAM_REMOTE :v$VERSION_RC
+```
+
+## Cleaning up locally compiled BookKeeper artifacts
+
+It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
+
+Cleaning up the local Maven repository Bookkeeper artifacts for the version used by Pulsar:
+
+```shell
+cd $PULSAR_PATH
+BOOKKEEPER_VERSION=$(mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
+echo "BookKeeper version is $BOOKKEEPER_VERSION"
+[ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
+```
 
 ### Build release artifacts
 
@@ -165,43 +185,37 @@ Run the following command to build the artifacts:
 
 ```shell
 cd $PULSAR_PATH
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
+# build the binaries
 mvn clean install -DskipTests
 ```
 
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
 
-* `distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz`
-* `distribution/offloaders/target/apache-pulsar-offloaders-2.X.0-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-2.X.0-bin.zip`
-* directory `distribution/io/target/apache-pulsar-io-connectors-2.X.0-bin`
+* `distribution/server/target/apache-pulsar-3.X.Y-bin.tar.gz`
+* `distribution/offloaders/target/apache-pulsar-offloaders-3.X.Y-bin.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.tar.gz`
+* `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.zip`
+* directory `distribution/io/target/apache-pulsar-io-connectors-3.X.Y-bin`
 
-:::note
-
-The _apache-pulsar-shell_ artifacts are distributed beginning with release 2.11.0.
-
-:::
-
-### Inspect the artifacts
+### Check licenses
 
 First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
 
 ```shell
 cd $PULSAR_PATH
-src/check-binary-license.sh distribution/server/target/apache-pulsar-2.X.0-bin.tar.gz
-# Then, run Apache RAT to verify the license headers in the src package:
-tar -xvzf target/apache-pulsar-2.X.0-src.tar.gz
-cd apache-pulsar-2.X.0-src
-mvn apache-rat:check
+src/check-binary-license.sh distribution/server/target/apache-pulsar-*-bin.tar.gz
+src/check-binary-license.sh distribution/shell/target/apache-pulsar-*-bin.tar.gz
 ```
 
-Finally, use instructions in [verifying release candidates](validate-release-candidate.md) page to do some sanity checks on the produced binary distributions.
+In some older branches, the script is called `src/check-binary-license` instead of `src/check-binary-license.sh`.
 
-### Sign and stage the artifacts on SVN
+### Create and publish the GPG key if you haven't already done this
 
-The src and bin artifacts need to be signed and uploaded to the dist SVN repository for staging.
+If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
 
-Before running the script, make sure that the `<yourname>@apache.org` code signing key is the default gpg signing key.
+Before running the script below, make sure that the `<yourname>@apache.org` code signing key is the default gpg signing key.
 
 One way to ensure this is to create/edit file `~/.gnupg/gpg.conf` and add a line:
 
@@ -211,28 +225,66 @@ default-key <key fingerprint>
 
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
+This can be automated with this command:
+
 ```shell
-cd $PULSAR_PATH
-# '-candidate-1' needs to be incremented in case of multiple iteration in getting
-#    to the final release)
-RCVERSION=2.11.4-candidate-1
-APACHEID=your_apache_id
+# KEY_ID is in short format, subset key id visible in gpg -K
+KEY_ID=$(gpg --list-keys --with-colons $APACHE_USER@apache.org | egrep "^pub" | awk -F: '{print $5}')
+echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
+```
 
-svn mkdir --username $APACHEID -m "Add directory for pulsar $RCVERSION release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
-svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$RCVERSION
-cd pulsar-$RCVERSION
+### Sign and stage the artifacts to local SVN directory
 
+The src and bin artifacts need to be signed and finally uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
+
+```shell
+# make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
+mkdir ~/pulsar-svn-release-$VERSION_RC
+cd ~/pulsar-svn-release-$VERSION_RC
+
+# create an empty directory in the SVN server
+svn mkdir --username $APACHE_USER -m "Add directory for pulsar $VERSION_RC release" https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+# checkout the empty directory
+svn co https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC
+
+# cd into the directory
+cd pulsar-$VERSION_RC
+
+# stage the release artifacts
 $PULSAR_PATH/src/stage-release.sh .
+
+# Please check the size of the files in the `pulsar-3.X.Y-candidate-1`.
+# If you build the artifacts without a clean workspace, the `apache-pulsar-3.X.Y-src.tar.gz` files
+# may be too large to be unable to upload.
+ls -ltra
+du -ms *
 
 # Verify the artifacts are correctly signed have correct checksums:
 ( for i in **/*.(tar.gz|zip|nar); do echo $i; gpg --verify $i.asc $i || exit 1 ; done )
 ( for i in **/*.(tar.gz|zip|nar); do echo $i; shasum -a 512 -c $i.sha512 || exit 1 ; done )
 
-# Please check the size of the files in the `pulsar-2.X.0-candidate-1`.
-# If you build the artifacts without a clean workspace, the `apache-pulsar-2.X.0-src.tar.gz` files
-# may be too large to be unable to upload.
+# don't commit and upload yet, there's a separate step for handling that
+```
+
+### Validate the release files
+
+Then use instructions in [verifying release candidates](validate-release-candidate.md) page to do some sanity checks on the produced binary distributions.
+
+ Make sure to run Apache RAT to verify the license headers in the src package:
+
+```shell
+cd /tmp
+tar -xvzf ~/pulsar-svn-release-${VERSION_RC}/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
+cd apache-pulsar-$VERSION_WITHOUT_RC-src
+mvn apache-rat:check
+```
+
+### Commit and upload the staged files in the local SVN directory to ASF SVN server
+
+```shell
+cd  ~/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC
 svn add *
-svn ci -m 'Staging artifacts and signature for Pulsar release $RCVERSION'
+svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 ```
 
 ### Stage Maven modules
@@ -241,10 +293,13 @@ Upload the artifacts to ASF Nexus:
 
 ```shell
 cd $PULSAR_PATH
-rm -rf apache-pulsar-2.X.0-src
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
+# Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
+git status
 
-export APACHE_USER=$USER
-export APACHE_PASSWORD=$MY_PASSWORD
+# add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
+ export APACHE_PASSWORD="<MY_PASSWORD>"
 export GPG_TTY=$(tty)
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
 curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
@@ -266,7 +321,17 @@ Log in to the ASF Nexus repository at https://repository.apache.org
 
 Click on "Staging Repositories" on the left sidebar and then select the current Pulsar staging repo. This should be called something like `orgapachepulsar-XYZ`.
 
-Use the "Close" button to close the repository. This operation will take few minutes. Once complete click "Refresh" and now a link to the staging repository should be available, something like https://repository.apache.org/content/repositories/orgapachepulsar-XYZ
+Add a version string such as "Apache Pulsar 3.0.4-candidate-1" to the clipboard with this command:
+
+```shell
+printf "Apache Pulsar $VERSION_RC" |pbcopy
+```
+
+Use the "Close" button to close the repository.
+
+Enter the version string in the description field before clicking "Confirm".
+
+This operation will take few minutes. Once complete click "Refresh" and now a link to the staging repository should be available, something like https://repository.apache.org/content/repositories/orgapachepulsar-XYZ
 
 ### Stage Docker images
 
@@ -286,96 +351,258 @@ Run the following commands on a Linux machine (or with Mac where DOCKER_HOST poi
 
 ```shell
 cd $PULSAR_PATH/docker
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
 ./build.sh
 DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
 ```
 
 ### Release Pulsar 3.0 and later
 
-Run the following commands:
+Before building docker images, clean up build history so that you don't run out of diskspace in the middle of the build.
+Docker buildx in Docker Desktop limits the build history size to 20GB by default.
 
 ```shell
+# check total docker disk usage
+docker system df
+# check total size of build cache
+docker buildx du
+# cleanup disk space
+# this is mandatory, if usage shown in previous step is over 10GB
+docker buildx prune
+```
+
+For creating and publishing the docker images, run the following commands:
+
+```shell
+# ensure that you have the most recent base image locally
+docker pull ubuntu:22.04 # for 3.0.x
+docker pull alpine:3.20 # for 3.3.x+
+
 cd $PULSAR_PATH
-DOCKER_USER=<your-username>
-DOCKER_ORG=<docker-organization>
-docker login $DOCKER_ORG -u $DOCKER_USER -p <your-password>
-mvn install -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
+DOCKER_USER=<your-dockerhub-username>
+docker login -u $DOCKER_USER
+mvn install -pl docker/pulsar,docker/pulsar-all \
     -DskipTests \
-    -Pmain,docker -Pdocker-push \
+    -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
-    -Ddocker.organization=$DOCKER_ORG \
-    -pl docker/pulsar,docker/pulsar-all
+    -Ddocker.organization=$DOCKER_USER \
+    -Ddocker.noCache=true \
+    -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
+    -Dmaven.gitcommitid.nativegit=true
 ```
 
+## Call for the vote to release a version based on the release candidate
 
-## Vote for the release candidate
+Start a voting thread on the dev mailing list. 
 
-Start a voting thread on the dev mailing list. Here is a sample content:
+Here is a way to render the template for the voting email.
 
+Set these shell variables
+
+```shell
+DOCKER_USER=<your-dockerhub-username>
+STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
+MY_NAME="Firstname Lastname"
+PREVIOUS_VERSION_WITHOUT_RC="3.0.3"
 ```
+
+```shell
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar/tags to find the layer URL for the pulsar image"
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-all/tags to find the layer URL for the pulsar image"
+```
+
+Set these additional shell variable after looking up the URLs
+
+```shell
+PULSAR_IMAGE_URL="<looked up in previous step>"
+PULSAR_ALL_IMAGE_URL="<looked up in previous step>"
+```
+
+Set also these
+
+```shell
+PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+# validate pulling, will take some time, you can skip this if you have a slow internet connection
+docker pull $PULSAR_IMAGE_NAME
+docker pull $PULSAR_ALL_IMAGE_NAME
+# check that images are about right, you can skip this if you have a slow internet connection
+docker run --rm $PULSAR_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+docker run --rm $PULSAR_ALL_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
+# check that Pulsar standalone starts too (use CTRL-C to terminate)
+docker run --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+```
+
+Now you can render the template to the clipboard
+
+```shell
+tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org
-Subject: [VOTE] Pulsar Release 2.X.0 Candidate 1
+Subject: [VOTE] Release Apache Pulsar $VERSION_WITHOUT_RC based on $VERSION_RC
 
-This is the first release candidate for Apache Pulsar, version 2.X.0.
+Hello Apache Pulsar Community,
 
-It fixes the following issues:
-https://github.com/apache/pulsar/milestone/8?closed=1
+This is a call for the vote to release the Apache Pulsar version $VERSION_WITHOUT_RC based on $VERSION_RC.
+
+Included changes since the previous release:
+https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
 
 *** Please download, test and vote on this release. This vote will stay open
 for at least 72 hours ***
 
+Only votes from PMC members are binding, but members of the community are
+encouraged to test the release and vote with "(non-binding)".
+
 Note that we are voting upon the source (tag), binaries are provided for
 convenience.
 
-Source and binary files:
-https://dist.apache.org/repos/dist/dev/pulsar/pulsar-2.X.0-candidate-1/
+The release candidate is available at:
+https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC/
 
 SHA-512 checksums:
-028313cbbb24c5647e85a6df58a48d3c560aacc9  apache-pulsar-2.X.0-SNAPSHOT-bin.tar.gz
-f7cc55137281d5257e3c8127e1bc7016408834b1  apache-pulsar-2.x.0-SNAPSHOT-src.tar.gz
+$(cat $HOME/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC/apache-pulsar-$VERSION_WITHOUT_RC-src.tar.gz.sha512 | sed 's|\./||g')
+$(cat $HOME/pulsar-svn-release-$VERSION_RC/pulsar-$VERSION_RC/apache-pulsar-$VERSION_WITHOUT_RC-bin.tar.gz.sha512 | sed 's|\./||g')
 
 Maven staging repo:
-https://repository.apache.org/content/repositories/orgapachepulsar-169/
+$STAGING_REPO
 
 The tag to be voted upon:
-v2.X.0-candidate-1 (21f4a4cffefaa9391b79d79a7849da9c539af834)
-https://github.com/apache/pulsar/releases/tag/v2.X.0-candidate-1
+v$VERSION_RC (commit $(git rev-parse v$VERSION_RC^{commit}))
+https://github.com/apache/pulsar/releases/tag/v$VERSION_RC
 
 Pulsar's KEYS file containing PGP keys you use to sign the release:
 https://downloads.apache.org/pulsar/KEYS
 
 Docker images:
-
-<link of the pulsar images>
-
-<link of the pulsar-all image>
+docker pull $PULSAR_IMAGE_NAME
+$PULSAR_IMAGE_URL
+docker pull $PULSAR_ALL_IMAGE_NAME
+$PULSAR_ALL_IMAGE_URL
 
 Please download the source package, and follow the README to build
 and run the Pulsar standalone service.
+
+More advanced release validation instructions can be found at
+https://pulsar.apache.org/contribute/validate-release-candidate/
+
+Thanks,
+
+$MY_NAME
+EOF
 ```
 
 The vote should be open for at least 72 hours (3 days). Votes from Pulsar PMC members will be considered binding, while anyone else is encouraged to verify the release and vote as well.
 
 If the release is approved here with 3 +1 binding votes, you can then proceed to the next step. Otherwise, you should repeat the previous steps and prepare another release candidate to vote.
 
+## LTS Preview release steps (this only applies to preview releases such as 4.0.0-preview.1)
+
+For preview releases there is no release voting. The preview release is directly announced on Pulsar user and dev mailing lists to get release feedback before the official LTS release.
+
+A preview release is not an official Apache release and it's comparable to a nightly build of a project.
+The preview release artifacts will be made available on Maven central and Docker Hub so that users can practically use the artifacts in their existing build pipelines and provide feedback to the project. Binaries are complementary in Apache projects and don't state an official ASF release.
+
+Before continuing, perform a local [release validation](validate-release-candidate.md) for the artifacts.
+After this, follow the steps "Release Maven modules" and "Release Docker images" to publish the preview release in Maven central and DockerHub. The preview release isn't an official release and therefore the sources should NOT be released on SVN.
+
+Set the environment variables:
+
+```shell
+PULSAR_IMAGE_NAME=apachepulsar/pulsar:$VERSION_WITHOUT_RC
+PULSAR_ALL_IMAGE_NAME=apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+LTS_RELEASE=4.0
+```
+
+To announce a LTS preview release, you can use this template:
+
+```shell
+tee >(pbcopy) <<EOF
+To: dev@pulsar.apache.org, users@pulsar.apache.org
+Subject: Apache Pulsar $VERSION_WITHOUT_RC available for testing - Feedback requested
+
+Dear Apache Pulsar Community,
+
+We're excited to announce the availability of Apache Pulsar $VERSION_WITHOUT_RC, a preview release aimed at gathering user feedback for the upcoming Pulsar $LTS_RELEASE LTS release. This preview is not an official Apache release but provides an early look at the new features and changes.
+
+Preview artifacts are now available on Maven Central and Docker Hub, enabling users to integrate and test them in their build pipelines and environments. You can find downloadable artifacts at https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC/.
+
+Repository tag: v$VERSION_RC (commit $(git rev-parse v$VERSION_RC^{commit}))
+https://github.com/apache/pulsar/releases/tag/v$VERSION_RC
+
+Changes since $PREVIOUS_VERSION_WITHOUT_RC:
+https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
+
+Docker images: $PULSAR_IMAGE_NAME and $PULSAR_ALL_IMAGE_NAME.
+Docker image tag is "$VERSION_WITHOUT_RC".
+
+For Java client testing, we recommend using the Pulsar BOM in Maven or Gradle builds with version "$VERSION_WITHOUT_RC".
+Pulsar BOM usage is explained at https://pulsar.apache.org/docs/next/client-libraries-java-setup/#pulsar-bom.
+
+We urge you to test this preview in your environments and provide feedback. Please report any issues on our GitHub issue tracker at https://github.com/apache/pulsar/issues, checking for existing reports first.
+Known blockers are tracked with the "release/blocker" label at https://github.com/apache/pulsar/labels/release%2Fblocker.
+
+Pulsar $LTS_RELEASE timeline:
+$(date -I): $LTS_RELEASE preview 1
+$(date --date="10 days" -I): Target for $LTS_RELEASE preview 2
+$(date --date="10 days" -I): Code freeze for $LTS_RELEASE by branching branch-$LTS_RELEASE from the master branch
+$(date --date="13 days" -I): Target for $LTS_RELEASE release candidate 1
+$(date --date="18 days" -I): Reserved for $LTS_RELEASE release candidate 2 if needed
+$(date --date="20 days" -I): Planned $LTS_RELEASE.0 announcement (if release candidate 1 passes)
+
+Your participation is crucial in shaping the quality of Pulsar $LTS_RELEASE. We appreciate your support and feedback.
+
+Best regards,
+
+$MY_NAME
+EOF
+```
+
+## Summarize the voting for the release
+
+Once the vote has been passed, you will need to send a result vote to [dev@pulsar.apache.org](mailto:dev@pulsar.apache.org) on the voting thread.
+
+Message:
+
+```shell
+tee >(pbcopy) <<EOF
+Hello all,
+
+The vote to release Apache Pulsar version ${VERSION_WITHOUT_RC} based on ${VERSION_RC} is now closed.
+
+The vote PASSED with X binding "+1", Y non-binding "+1" and 0 "-1" votes:
+
+"+1" Binding votes:
+
+  - <name>
+
+"+1" Non-Binding votes:
+
+  - <name>
+
+I'll continue with the release process and the release announcement will follow shortly.
+
+Thanks,
+<your name>
+EOF
+```
+
+
 ## Promote the release
 
-For commands below, you need to set these to the environment
-```
-# Set Version
-export VERSION_RC=2.11.4-candidate-1
-export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-# set your ASF user id
-export APACHE_USER=<your ASF userid>
-```
+For commands below, you need to set the environment variables `VERSION_RC`, `VERSION_WITHOUT_RC`, `UPSTREAM_REMOTE` and `APACHE_USER`.
+Please check the [environment variables step](#env-vars) for doing that.
 
 ### Publish the final tag
 
 Create and push the final Git tag:
 
 ```shell
-git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC -m "Release v$VERSION_WITHOUT_RC"
-git push origin v$VERSION_WITHOUT_RC
+git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC $(git rev-parse v$VERSION_RC^{}) -m "Release v$VERSION_WITHOUT_RC"
+git push $UPSTREAM_REMOTE v$VERSION_WITHOUT_RC
 ```
 
 ### Create release notes in GitHub
@@ -385,6 +612,9 @@ Then, you can [create a GitHub release](https://docs.github.com/en/repositories/
 ```shell
 # open this URL and create release notes by clicking "Create release from tag"
 echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
+
+# cherry-picked changes template
+echo "[""Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F${VERSION_WITHOUT_RC}+label%3Acherry-picked%2F${VERSION_BRANCH}+sort%3Acreated-asc)"|pbcopy
 ```
 
 1. Open the above URL in a browser and create release notes by clicking "Create release from tag".
@@ -396,7 +626,6 @@ echo https://github.com/apache/pulsar/releases/tag/v${VERSION_WITHOUT_RC}
 7. Click "Publish release".
 
 The [Writing release notes](release-note-guide.md) guide should be followed to generate a proper release notes. That is covered in the "Update the document" section.
-
 
 ### Release the artifacts on SVN
 
@@ -422,15 +651,16 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 
 ```bash
 RELEASE_MANAGER_DOCKER_USER=otheruser
-CANDIDATE_TAG=$VERSION_WITHOUT_RC
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
 ```
 
 Go to check the result:
-- https://hub.docker.com/r/apachepulsar/pulsar/tags
-- https://hub.docker.com/r/apachepulsar/pulsar-all/tags
+
+* https://hub.docker.com/r/apachepulsar/pulsar/tags
+* https://hub.docker.com/r/apachepulsar/pulsar-all/tags
 
 Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images should be amd64 only.
 
@@ -440,17 +670,9 @@ This step is for the latest release only.
 
 :::
 
-```
+```shell
 regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
 regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
-```
-
-### Update project version
-After the release process, you should bump the project version and append it with `-SNAPSHOT`.
-```
-./src/set-project-version.sh x.x.x-SNAPSHOT
-git add -u
-git commit -m "Bump version to next snapshot version"
 ```
 
 ### Release Helm Chart
@@ -544,6 +766,7 @@ First, build swagger files from apache/pulsar repo at the released tag:
 
 ```shell
 mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+PULSAR_PATH=$(pwd)
 ```
 
 Now, run the following script from the main branch of apache/pulsar-site repo:
@@ -551,7 +774,16 @@ Now, run the following script from the main branch of apache/pulsar-site repo:
 ```shell
 cd tools/pytools
 poetry install
-poetry run bin/rest-apidoc-generator.py --master-path=/path/to/pulsar-2.X.Y --version=2.X.Y
+poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
+```
+
+```shell
+# commit files
+# move to pulsar-site root
+cd ../..
+git add -u
+git add static/swagger/$VERSION_WITHOUT_RC
+git commit -m "update rest-apidoc for $VERSION_WITHOUT_RC"
 ```
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
@@ -569,7 +801,7 @@ After publish Java libraries, run the following script from the main branch of a
 ```shell
 cd tools/pytools
 poetry install
-poetry run bin/java-apidoc-generator.py 2.X.0
+poetry run bin/java-apidoc-generator.py $PULSAR_PATH
 ```
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is:
@@ -577,6 +809,12 @@ Once the docs are generated, you can add them and submit them in a PR. The expec
 * `static/api/admin`
 * `static/api/client`
 * `static/api/pulsar-functions`
+
+```shell
+cd ../..
+git add static/api/*
+git commit -m "update java-apidoc for $VERSION_WITHOUT_RC"
+```
 
 Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md).
 
@@ -591,10 +829,16 @@ This step is for feature releases only, unless you're sure that significant refe
 You can generate references of config and command-line tool by running the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-# build Pulsar distributions under /path/to/pulsar-2.X.0
+# build Pulsar distributions under /path/to/pulsar-3.X.Y
 cd tools/pytools
 poetry install
-poetry run bin/reference-doc-generator.py --master-path=/path/to/pulsar-2.X.0 --version=2.X.0
+poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
+```
+
+```shell
+cd ../..
+git add static/reference/*
+git commit -m "update reference for $VERSION_WITHOUT_RC"
 ```
 
 Once the docs are generated, you can add them and submit them in a PR. The expected doc output is `static/reference/2.X.x`
@@ -603,18 +847,19 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 ## Update `/docs` redirect
 
-<https://pulsar.apache.org/docs> should redirect to the latest feature release documentation.
+https://pulsar.apache.org/docs should redirect to the latest feature release documentation.
 
 If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
-Otherwise, you should update the version in this file: <https://github.com/apache/pulsar-site/blob/26671a6ce02ed529eb26072846aedf14e4ab31a5/static/.htaccess#L19>
+Otherwise, you should update the version in this file: `static/.htaccess`
 
 ## Update `/docs` version list dropdown
 
 The dropdown should have the following items:
-- Next
-- Active versions [still in support](/contribute/release-policy/#supported-versions)
-- Others
+
+* Next
+* Active versions [still in support](/contribute/release-policy/#supported-versions)
+* Others
 
 LTS versions should be labeled this way: `<version> LTS`.
 
@@ -622,17 +867,18 @@ LTS versions should be labeled this way: `<version> LTS`.
 
 If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
-Otherwise, you should update the dropdown version list in this file: <https://github.com/apache/pulsar-site/blob/main/src/theme/DocsVersionDropdownNavbarItem.js>
+Otherwise, you should update the dropdown version list in this file: `src/theme/DocsVersionDropdownNavbarItem.js`
 
 ## Announce the release
 
 Once the release artifacts are available in the Apache Mirrors and the website is updated, you need to announce the release. You should email to dev@pulsar.apache.org, users@pulsar.apache.org, and announce@apache.org. Here is a sample content:
 
-```
+```shell
+tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org, users@pulsar.apache.org, announce@apache.org
-Subject: [ANNOUNCE] Apache Pulsar 2.X.0 released
+Subject: [ANNOUNCE] Apache Pulsar $VERSION_WITHOUT_RC released
 
-The Apache Pulsar team is proud to announce Apache Pulsar version 2.X.0.
+The Apache Pulsar team is proud to announce Apache Pulsar version $VERSION_WITHOUT_RC.
 
 Pulsar is a highly scalable, low latency messaging platform running on
 commodity hardware. It provides simple pub-sub semantics over topics,
@@ -644,13 +890,14 @@ For Pulsar release details and downloads, visit:
 https://pulsar.apache.org/download
 
 Release Notes are at:
-https://pulsar.apache.org/release-notes
+https://pulsar.apache.org/release-notes/versioned/pulsar-$VERSION_WITHOUT_RC/
 
 We would like to thank the contributors that made the release possible.
 
 Regards,
 
 The Pulsar Team
+EOF
 ```
 
 Send the email in plain text mode since the announce@apache.org mailing list will reject messages with text/html content.
@@ -672,23 +919,42 @@ Remove the old releases (if any). You only need the latest release there, and ol
 svn ls https://dist.apache.org/repos/dist/release/pulsar
 
 # Delete each release (except for the last one)
-svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-2.Y.0
+svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-3.X.X
 ```
 
-## Move master branch to next version
+## Move to next version in pom.xml
 
-:::caution
-
-This step is for feature releases only.
-
-:::
+### Feature releases (master branch)
 
 You need to move the master version to the next iteration `Y` (`X + 1`).
 
 ```shell
 git checkout master
-./src/set-project-version.sh 2.Y.0-SNAPSHOT
-git commit -a -s -m "[cleanup][build] Bumped version to 2.Y.0-SNAPSHOT'
+./src/set-project-version.sh 3.Y.0-SNAPSHOT
+git commit -a -s -m "[cleanup][build] Bumped version to 3.Y.0-SNAPSHOT'
 ```
 
 Since this needs to be merged into `master`, you need to follow the regular process and create a Pull Request on GitHub.
+
+For feature releases, since a new branch is created for the release, the new branch needs to be protected against force pushes to prevent corrupting the commit history. This is done by adding a rule to the branch protection settings for the new branch in `.asf.yaml`.
+
+```yaml
+export RELEASE_BRANCH="branch-X.Y"
+# use yq to add the new branch to the .asf.yaml file
+yq -i '.github.protected_branches[strenv(RELEASE_BRANCH)]={}' .asf.yaml
+# commit the change to .asf.yaml
+git add .asf.yaml
+git commit -m "[improve][ci] Protect $RELEASE_BRANCH from force pushes'
+```
+
+This will prevent force pushing to the release branch, which is important to maintain the integrity of the commit history.
+
+### For maintenance branches
+
+After the release process, you should bump the project version and append it with `-SNAPSHOT`.
+
+```shell
+./src/set-project-version.sh x.x.x-SNAPSHOT
+git add -u
+git commit -m "Bump version to next snapshot version"
+```

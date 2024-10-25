@@ -8,6 +8,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Baodi Shi",
+      "apacheId": "baodi",
+      "githubUsername": [
+        "shibd"
+      ]
+    },
+    {
       "name": "Daniel Blankensteiner",
       "apacheId": "blankensteiner",
       "githubUsername": [
@@ -36,7 +43,9 @@ module.exports = {
     {
       "name": "David Jensen",
       "apacheId": "djensen",
-      "githubUsername": []
+      "githubUsername": [
+        "entvex"
+      ]
     },
     {
       "name": "Enrico Olivelli",
@@ -280,6 +289,13 @@ module.exports = {
         "jiazhai",
         "zhaijack"
       ]
+    },
+    {
+      "name": "Zike Yang",
+      "apacheId": "zike",
+      "githubUsername": [
+        "RobertIndie"
+      ]
     }
   ],
   "committers": [
@@ -319,13 +335,6 @@ module.exports = {
       ]
     },
     {
-      "name": "Baodi Shi",
-      "apacheId": "baodi",
-      "githubUsername": [
-        "shibd"
-      ]
-    },
-    {
       "name": "Christophe Bornet",
       "apacheId": "cbornet",
       "githubUsername": [
@@ -337,6 +346,13 @@ module.exports = {
       "apacheId": "cckellogg",
       "githubUsername": [
         "cckellogg"
+      ]
+    },
+    {
+      "name": "Jie Chen",
+      "apacheId": "crossoverjie",
+      "githubUsername": [
+        "crossoverjie"
       ]
     },
     {
@@ -361,7 +377,9 @@ module.exports = {
     {
       "name": "Yuri Mizushima",
       "apacheId": "equanz",
-      "githubUsername": []
+      "githubUsername": [
+        "equanz"
+      ]
     },
     {
       "name": "Guangning E",
@@ -441,7 +459,9 @@ module.exports = {
     {
       "name": "Chris Bono",
       "apacheId": "onobc",
-      "githubUsername": []
+      "githubUsername": [
+        "onobc"
+      ]
     },
     {
       "name": "Rui Fu",
@@ -468,7 +488,7 @@ module.exports = {
       "name": "ZhangJian He",
       "apacheId": "shoothzj",
       "githubUsername": [
-        "Shoothzj"
+        "shoothzj"
       ]
     },
     {
@@ -476,6 +496,13 @@ module.exports = {
       "apacheId": "sunfangbin",
       "githubUsername": [
         "murong00"
+      ]
+    },
+    {
+      "name": "WenZhi Feng",
+      "apacheId": "thetumbled",
+      "githubUsername": [
+        "thetumbled"
       ]
     },
     {
@@ -544,13 +571,6 @@ module.exports = {
       "apacheId": "zhaocong",
       "githubUsername": [
         "coderzc"
-      ]
-    },
-    {
-      "name": "Zike Yang",
-      "apacheId": "zike",
-      "githubUsername": [
-        "RobertIndie"
       ]
     },
     {

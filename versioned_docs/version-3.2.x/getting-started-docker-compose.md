@@ -114,10 +114,11 @@ services:
 ## Step 2: Create a Pulsar cluster
 
 As preparation, create data directories and change the data directory ownership to uid(10000) which is the default user id used in the Pulsar Docker container.
+
 ```bash
 sudo mkdir -p ./data/zookeeper ./data/bookkeeper
 # this step might not be necessary on other than Linux platforms
-sudo chown 10000 -R data
+sudo chown -R 10000 data
 ```
 
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
