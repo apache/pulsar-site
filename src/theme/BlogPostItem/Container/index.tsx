@@ -1,6 +1,6 @@
 import React from 'react';
 import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
-import {useBlogPost} from '@docusaurus/theme-common/internal';
+import {useBlogPost} from '@docusaurus/plugin-content-blog/client';
 import type {Props} from '@theme/BlogPostItem/Container';
 
 import s from './index.module.css';
@@ -14,7 +14,7 @@ export default function BlogPostItemContainer({
     assets,
     isBlogPostPage,
     metadata: {description},
-  } = useBlogPost();
+  } = useBlogPost();  
   const {withBaseUrl} = useBaseUrlUtils();
   const image = assets.image ?? frontMatter.image;
   return (

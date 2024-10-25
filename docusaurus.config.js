@@ -1,7 +1,6 @@
 // @ts-check
 
 const _ = require("lodash");
-const linkifyRegex = require("./plugins/remark-linkify-regex");
 const { renderAnnouncementBar } = require("./src/components/ui/renderAnnouncementBar");
 const versions = require("./versions.json");
 const latestVersion = versions[0];
@@ -41,10 +40,10 @@ const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
 const githubSiteUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
-const math = require('remark-math');
-const katex = require('rehype-katex');
+const remarkMath = require('remark-math');
+const rehypeKatex = require('rehype-katex');
 
-const injectLinkParse = ([, prefix, , name, path]) => {
+const injectLinkParse = (prefix, name, path) => {
   if (prefix == "javadoc") {
     return {
       link: javadocUrl + path,
@@ -88,8 +87,8 @@ const injectLinkParse = ([, prefix, , name, path]) => {
   };
 };
 
-const injectLinkParseForEndpoint = ([, info]) => {
-  let [method, path, suffix] = info.split("|");
+const injectLinkParseForEndpoint = (info) => {
+  let [ method, path, suffix ] = info.split("|");
 
   if (!suffix) {
     suffix = "";
@@ -144,6 +143,22 @@ module.exports = {
     oldUrl,
   },
   trailingSlash: true,
+  markdown: {
+    preprocessor: ({filePath, fileContent}) => {
+      return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
+        const p1Trimmed = p1.trim();
+        const endpointPrefix = 'endpoint|';
+        let link, text;
+        if (p1Trimmed.startsWith(endpointPrefix)) {
+          // @ts-ignore
+          ({ link, text } = injectLinkParseForEndpoint(p1Trimmed.substring(endpointPrefix.length)));
+        } else {
+          ({ link, text } = injectLinkParse(...p1Trimmed.split(':')));
+        }
+        return `[${text}](${link})`; // Format as a markdown link
+      });
+    },
+  },
   themeConfig:
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   ({
@@ -384,8 +399,12 @@ module.exports = {
       `,
     },
     prism: {
-      theme: require("prism-react-renderer/themes/dracula"),
+      theme: require("prism-react-renderer").themes.dracula,
       additionalLanguages: [
+        "bash",
+        "diff",
+        "json",
+        "go",
         "csharp",
         "groovy",
         "http",
@@ -413,18 +432,8 @@ module.exports = {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `${githubSiteUrl}/edit/main`,
-          remarkPlugins: [
-            linkifyRegex(
-              /{\@inject\:\s?(((?!endpoint)[^}])+):([^}]+):([^}]+)}/,
-              injectLinkParse
-            ),
-            linkifyRegex(
-              /{\@inject\:\s?endpoint\|([^}]+)}/,
-              injectLinkParseForEndpoint
-            ),
-            math,
-          ],
-          rehypePlugins: [katex],
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
           versions: versionsMap,
           onlyIncludeVersions: buildVersions || ["current"],
         },
@@ -432,6 +441,7 @@ module.exports = {
           blogSidebarCount: 0,
           showReadingTime: true,
           editUrl: `${githubSiteUrl}/edit/main/`,
+          onInlineAuthors: 'ignore',
         },
         theme: {
           customCss: [
@@ -525,3 +535,4 @@ module.exports = {
     },
   ],
 };
+

@@ -13,7 +13,7 @@ The term feature/patch releases used throughout this document is defined as foll
 
 ## Preparation
 
-Open a discussion on <dev@pulsar.apache.org> to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
+Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
 
 For LTS and feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
 
@@ -847,7 +847,7 @@ Read more on the manual of [pytools](https://github.com/apache/pulsar-site/tree/
 
 ## Update `/docs` redirect
 
-<https://pulsar.apache.org/docs> should redirect to the latest feature release documentation.
+https://pulsar.apache.org/docs should redirect to the latest feature release documentation.
 
 If you're working on a patch release for an older feature version of Pulsar, you can skip this step.
 
