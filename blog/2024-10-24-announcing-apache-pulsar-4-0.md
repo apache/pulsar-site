@@ -43,7 +43,7 @@ Multi-tenancy in messaging systems presents unique architectural challenges, par
 
 The core advancement in Pulsar 4.0 comes through [PIP-322 Pulsar Rate Limiting Refactoring](https://github.com/apache/pulsar/blob/master/pip/pip-322.md). At its foundation is a token bucket algorithm implementation that unifies rate limiting across broker, topic, and resource group levels. This eliminates the previous split between "default" and "precise" rate limiters—a design choice that had introduced unnecessary CPU overhead and lock contention in IO threads.
 
-The practical impact is straightforward: more predictable performance in multi-tenant deployments, especially when multiple rate limiting conditions intersect. While Pulsar already supports producer rate limiting, the community is building on this foundation with [PIP-385](https://lists.apache.org/thread/9wddmj4o5mrdst427r40rr7phqb05y6s) to improve producer flow control —a key piece in completing Pulsar's end-to-end QoS capabilities.
+The practical impact is straightforward: more predictable performance in multi-tenant deployments, especially when multiple rate limiting conditions intersect. While Pulsar already supports producer rate limiting, the community is building on this foundation with [PIP-385](https://lists.apache.org/thread/9wddmj4o5mrdst427r40rr7phqb05y6s) to improve producer flow control — a key piece in completing Pulsar's end-to-end QoS capabilities.
 
 #### Rate Limiting and Capacity Management in Modern Messaging Platforms
 
