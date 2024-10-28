@@ -152,7 +152,8 @@ module.exports = async function createConfigAsync() {
             // @ts-ignore
             ({ link, text } = injectLinkParseForEndpoint(p1Trimmed.substring(endpointPrefix.length)));
           } else {
-            ({ link, text } = injectLinkParse(...p1Trimmed.split(':')));
+            const [prefix, name, path] = p1Trimmed.split(':');
+            ({ link, text } = injectLinkParse(prefix, name, path));
           }
           return `[${text}](${link})`; // Format as a markdown link
         });
