@@ -109,19 +109,9 @@ export const resources: Record<Category, Resource[]> = {
   ],
   meetups: [
     {
-      title: "NorCal Apache Pulsar Neighborhood Meetup Group",
+      title: "SF Bay Area Apache Pulsar Meetup",
       description: "",
-      link: "https://www.meetup.com/nor-cal-apache-pulsar-meetup-group/",
-    },
-    {
-      title: "Netherlands Apache Pulsar Meetup Group",
-      description: "",
-      link: "https://www.meetup.com/netherlands-apache-pulsar-meetup/",
-    },
-    {
-      title: "SoCal Apache Pulsar Neighborhood Meetup Group",
-      description: "",
-      link: "https://www.meetup.com/socal-apache-pulsar-meetup-group/",
+      link: "https://www.meetup.com/SF-Bay-Area-Apache-Pulsar-Meetup/",
     },
     {
       title: "New York City Apache Pulsar Meetup",
@@ -129,19 +119,19 @@ export const resources: Record<Category, Resource[]> = {
       link: "https://www.meetup.com/new-york-city-apache-pulsar-meetup/",
     },
     {
-      title: "Beijing Apache Pulsar® Meetup by StreamNative",
-      description: "",
-      link: "https://www.meetup.com/beijing-apache-pulsar-meetup-by-streamnative/",
-    },
-    {
-      title: "SF Bay Area Apache Pulsar Meetup",
-      description: "",
-      link: "https://www.meetup.com/SF-Bay-Area-Apache-Pulsar-Meetup/",
-    },
-    {
       title: "Japan Pulsar User Group",
       description: "",
       link: "https://japan-pulsar-user-group.connpass.com/",
+    },
+    {
+      title: "Netherlands Apache Pulsar Meetup Group",
+      description: "",
+      link: "https://www.meetup.com/netherlands-apache-pulsar-meetup/",
+    },
+    {
+      title: "Beijing Apache Pulsar Meetup by StreamNative",
+      description: "",
+      link: "https://www.meetup.com/beijing-apache-pulsar-meetup-by-streamnative/",
     },
   ],
   playlists: [
