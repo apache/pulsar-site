@@ -194,7 +194,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_deregisterSource)
+Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_registerSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -279,7 +279,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_deregisterSink)
+Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_registerSink)
 
 </TabItem>
 <TabItem value="Java Admin API">
