@@ -55,7 +55,7 @@ The `schema-definition-file` is in JSON format.
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to the endpoint documented here: {@inject: endpoint|POST|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/SchemasResource_postSchema?version=@pulsar:version_number@}
+Send a `POST` request to the endpoint documented here: [](swagger:/admin/v2/SchemasResource_postSchema)
 
 Below is an example with CURL with a payload stored on the `schema.json` file, Pulsar broker running on `localhost` and the topic `my-tenant/my-ns/my-topic`:
 
@@ -155,7 +155,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/SchemasResource_getSchema?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/SchemasResource_getSchema?summary=!version)
 
 Here is an example of a response, which is returned in JSON format.
 
@@ -208,7 +208,7 @@ pulsar-admin schemas get <topic-name> --version <version>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to a schema endpoint: {@inject: endpoint|GET|/admin/v2/schemas/:tenant/:namespace/:topic/schema/:version|operation/SchemasResource_getSchema?version=@pulsar:version_number@}
+Send a `GET` request to a schema endpoint: [](swagger:/admin/v2/SchemasResource_getSchema?summary=version)
 
 Here is an example of a response, which is returned in JSON format.
 
@@ -288,7 +288,7 @@ pulsar-admin schemas delete <topic-name>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `DELETE` request to a schema endpoint: {@inject: endpoint|DELETE|/admin/v2/schemas/:tenant/:namespace/:topic/schema|operation/SchemasResource_deleteSchema?version=@pulsar:version_number@}
+Send a `DELETE` request to a schema endpoint: [](swagger:/admin/v2/SchemasResource_deleteSchema)
 
 Here is an example of a response returned in JSON format.
 
@@ -339,13 +339,13 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --enable tenant/name
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/isAllowAutoUpdateSchema|operation/Namespaces_setIsAllowAutoUpdateSchema?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setIsAllowAutoUpdateSchema)
 
 The post payload is in JSON format.
 
 ```json
 {
-“isAllowAutoUpdateSchema”: “true”
+"isAllowAutoUpdateSchema": "true"
 }
 ```
 
@@ -388,13 +388,13 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --disable tenant/nam
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/isAllowAutoUpdateSchema|operation/Namespaces_setIsAllowAutoUpdateSchema?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setIsAllowAutoUpdateSchema)
 
 The post payload is in JSON format.
 
 ```json
 {
-“isAllowAutoUpdateSchema”: “false”
+"isAllowAutoUpdateSchema": "false"
 }
 ```
 
@@ -435,13 +435,13 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --enable tenant/namesp
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/schemaValidationEnforced|operation/Namespaces_setSchemaValidationEnforced?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setSchemaValidationEnforced)
 
 The post payload is in JSON format.
 
 ```json
 {
-“schemaValidationEnforced”: “true”
+"schemaValidationEnforced": "true"
 }
 ```
 
@@ -478,13 +478,13 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --disable tenant/names
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: {@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/schemaValidationEnforced|operation/Namespaces_setSchemaValidationEnforced?version=@pulsar:version_number@}
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setSchemaValidationEnforced)
 
 The post payload is in JSON format.
 
 ```json
 {
-“schemaValidationEnforced”: “false”
+"schemaValidationEnforced": "false"
 }
 ```
 
@@ -529,7 +529,7 @@ pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicNa
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/topics/:tenant/:namespace/:topic|operation/PersistentTopics_setSchemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `PUT` request to this endpoint: [](swagger:/admin/v2/PersistentTopics_setSchemaCompatibilityStrategy)
 
 </TabItem>
 <TabItem value="Java">
@@ -570,7 +570,7 @@ pulsar-admin namespaces set-schema-compatibility-strategy options
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/namespaces/:tenant/:namespace/schemaCompatibilityStrategy|operation/Namespaces_setSchemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `PUT` request to this endpoint: [](swagger:/admin/v2/Namespaces_setSchemaCompatibilityStrategy)
 
 </TabItem>
 <TabItem value="Java">
@@ -617,7 +617,7 @@ pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/schemaCompatibilityStrategy|operation/PersistentTopics_getSchemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/PersistentTopics_getSchemaCompatibilityStrategy)
 
 </TabItem>
 <TabItem value="Java">
@@ -662,7 +662,7 @@ pulsar-admin namespaces get-schema-compatibility-strategy options
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/schemaCompatibilityStrategy|operation/Namespaces_getSchemaCompatibilityStrategy?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/Namespaces_getSchemaCompatibilityStrategy)
 
 </TabItem>
 <TabItem value="Java">

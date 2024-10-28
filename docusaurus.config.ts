@@ -40,6 +40,15 @@ const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
 const githubSiteUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
+const restApiBaseUrlMapping = {
+  default: restApiUrl,
+  functions: functionsApiUrl,
+  source: sourceApiUrl,
+  sink: sinkApiUrl,
+  packages: packagesApiUrl,
+  transactions: transactionsApiUrl,
+  lookup: lookupApiUrl
+};
 
 const injectLinkParse = (prefix, name, path) => {
   if (prefix == "javadoc") {
@@ -95,14 +104,7 @@ const injectLinkParseForEndpoint = (info) => {
   let restPath = path.split("/");
   const restApiVersion = restPath[2];
   const restApiType = restPath[3];
-  const restBaseUrl = {
-    functions: functionsApiUrl,
-    source: sourceApiUrl,
-    sink: sinkApiUrl,
-    packages: packagesApiUrl,
-    transactions: transactionsApiUrl,
-    lookup: lookupApiUrl
-  }[restApiType] || restApiUrl;
+  const restBaseUrl = restApiBaseUrlMapping[restApiType] || restApiUrl;
 
   let restUrl;
   if (suffix.indexOf("?version=") >= 0) {
@@ -432,6 +434,9 @@ module.exports = async function createConfigAsync() {
             path: "docs",
             sidebarPath: require.resolve("./sidebars.js"),
             editUrl: `${githubSiteUrl}/edit/main`,
+            beforeDefaultRemarkPlugins: [
+              [(await import('./src/server/remarkPlugins/swagger')).default, {baseDir: __dirname, restApiBaseUrlMapping: restApiBaseUrlMapping}],
+            ],
             remarkPlugins: [(await import('remark-math')).default],
             rehypePlugins: [(await import('rehype-katex')).default],
             versions: versionsMap,
@@ -519,7 +524,24 @@ module.exports = async function createConfigAsync() {
           routeBasePath: "client-feature-matrix",
           sidebarPath: false,
         }),
-      ]
+      ],
+      function customWebpackPlugin(context, options) {
+        return {
+          name: 'custom-webpack-plugin',
+          configureWebpack(config, isServer, utils) {
+            return {
+              module: {
+                rules: [
+                  {
+                    test: /\/src\/server\/.*$/,
+                    use: 'null-loader'
+                  }
+                ]
+              }
+            };
+          },
+        };
+      },
     ],
     scripts: [
       { src: "/js/sine-waves.min.js", async: true },
