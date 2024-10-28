@@ -40,8 +40,6 @@ const lookupApiUrl = url + "/lookup-rest-api";
 const githubUrl = "https://github.com/apache/pulsar";
 const githubSiteUrl = "https://github.com/apache/pulsar-site";
 const baseUrl = "/";
-const remarkMath = require('remark-math');
-const rehypeKatex = require('rehype-katex');
 
 const injectLinkParse = (prefix, name, path) => {
   if (prefix == "javadoc") {
@@ -88,7 +86,7 @@ const injectLinkParse = (prefix, name, path) => {
 };
 
 const injectLinkParseForEndpoint = (info) => {
-  let [ method, path, suffix ] = info.split("|");
+  let [method, path, suffix] = info.split("|");
 
   if (!suffix) {
     suffix = "";
@@ -127,247 +125,248 @@ const injectLinkParseForEndpoint = (info) => {
 };
 
 /** @type {import('@docusaurus/types').Config} */
-module.exports = {
-  title: "Apache Pulsar",
-  tagline:
-    "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
-  url: "https://pulsar.apache.org",
-  baseUrl: baseUrl,
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
-  organizationName: "apache",
-  projectName: "pulsar",
-  customFields: {
-    githubUrl,
-    oldUrl,
-  },
-  trailingSlash: true,
-  markdown: {
-    preprocessor: ({filePath, fileContent}) => {
-      return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
-        const p1Trimmed = p1.trim();
-        const endpointPrefix = 'endpoint|';
-        let link, text;
-        if (p1Trimmed.startsWith(endpointPrefix)) {
-          // @ts-ignore
-          ({ link, text } = injectLinkParseForEndpoint(p1Trimmed.substring(endpointPrefix.length)));
-        } else {
-          ({ link, text } = injectLinkParse(...p1Trimmed.split(':')));
-        }
-        return `[${text}](${link})`; // Format as a markdown link
-      });
+module.exports = async function createConfigAsync() {
+  return {
+    title: "Apache Pulsar",
+    tagline:
+      "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
+    url: "https://pulsar.apache.org",
+    baseUrl: baseUrl,
+    onBrokenLinks: "warn",
+    onBrokenMarkdownLinks: "warn",
+    favicon: "img/favicon.ico",
+    organizationName: "apache",
+    projectName: "pulsar",
+    customFields: {
+      githubUrl,
+      oldUrl,
     },
-  },
-  themeConfig:
-  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-  ({
-    image: 'img/pulsar-social-media-card.png',
-    announcementBar: {
-      id: "summit",
-      content: renderAnnouncementBar(
-        "✨ Apache Pulsar 4.0 LTS is here! ✨",
-        "/blog/2024/10/24/announcing-apache-pulsar-4-0/"
-      ),
-      backgroundColor: "#282826",
-      textColor: "#fff",
-      isCloseable: false,
-    },
-    colorMode: {
-      disableSwitch: true,
-    },
-    zoom: {
-      selector: '.markdown img',
-      background: {
-        light: '#fff',
-        dark: '#111'
+    trailingSlash: true,
+    markdown: {
+      preprocessor: ({ filePath, fileContent }) => {
+        return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
+          const p1Trimmed = p1.trim();
+          const endpointPrefix = 'endpoint|';
+          let link, text;
+          if (p1Trimmed.startsWith(endpointPrefix)) {
+            // @ts-ignore
+            ({ link, text } = injectLinkParseForEndpoint(p1Trimmed.substring(endpointPrefix.length)));
+          } else {
+            ({ link, text } = injectLinkParse(...p1Trimmed.split(':')));
+          }
+          return `[${text}](${link})`; // Format as a markdown link
+        });
       },
-      config: {
-        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
-      }
     },
-    navbar: {
-      title: "",
-      logo: {
-        alt: "Apache Pulsar logo",
-        src: "img/logo-black.svg",
-        width: 127,
-        height: 25
-      },
-      items: [
-        {
-          type: "dropdown",
-          label: "Get Started",
-          position: "left",
-          items: [
-               {
-              to: `/docs/${latestVersion}/concepts-overview/`,
-              activeBaseRegex: `docs/(${versions.join('|')})/concepts-overview/$`,
-              label: "Concepts",
-            },
-            {
-              to: `/docs/${latestVersion}/`,
-              activeBaseRegex: `docs/(${versions.join('|')})/$`,
-              label: "Quickstart",
-            },
-            {
-              to: "/ecosystem/",
-              label: "Ecosystem",
-            }
-          ],
+    themeConfig:
+      /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+      ({
+        image: 'img/pulsar-social-media-card.png',
+        announcementBar: {
+          id: "summit",
+          content: renderAnnouncementBar(
+            "✨ Apache Pulsar 4.0 LTS is here! ✨",
+            "/blog/2024/10/24/announcing-apache-pulsar-4-0/"
+          ),
+          backgroundColor: "#282826",
+          textColor: "#fff",
+          isCloseable: false,
         },
-        {
-          type: "doc",
-          docId: "about",
-          position: "left",
-          label: "Docs",
+        colorMode: {
+          disableSwitch: true,
         },
-        {
-          to: "/features/",
-          position: "left",
-          label: "Features",
+        zoom: {
+          selector: '.markdown img',
+          background: {
+            light: '#fff',
+            dark: '#111'
+          },
+          config: {
+            // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+          }
         },
-        {
-          to: "/use-cases/",
-          position: "left",
-          label: "Use Cases",
-        },
-        {
-          type: "dropdown",
-          label: "Community",
-          position: "left",
-          className: "community-dropdown",
+        navbar: {
+          title: "",
+          logo: {
+            alt: "Apache Pulsar logo",
+            src: "img/logo-black.svg",
+            width: 127,
+            height: 25
+          },
           items: [
             {
-              to: "/community",
-              activeBaseRegex: "^$",
-              label: "Welcome",
-              className: "scroll-link scroll-welcome",
-              id: "scroll-welcome",
+              type: "dropdown",
+              label: "Get Started",
+              position: "left",
+              items: [
+                {
+                  to: `/docs/${latestVersion}/concepts-overview/`,
+                  activeBaseRegex: `docs/(${versions.join('|')})/concepts-overview/$`,
+                  label: "Concepts",
+                },
+                {
+                  to: `/docs/${latestVersion}/`,
+                  activeBaseRegex: `docs/(${versions.join('|')})/$`,
+                  label: "Quickstart",
+                },
+                {
+                  to: "/ecosystem/",
+                  label: "Ecosystem",
+                }
+              ],
             },
             {
-              to: "/community#section-discussions",
-              activeBaseRegex: "^$",
-              label: "Discussions",
-              className: "scroll-link scroll-discussions",
-              id: "scroll-discussions",
+              type: "doc",
+              docId: "about",
+              position: "left",
+              label: "Docs",
             },
             {
-              to: "/community#section-governance",
-              activeBaseRegex: "^$",
-              label: "Governance",
-              className: "scroll-link",
-              id: "scroll-governance",
+              to: "/features/",
+              position: "left",
+              label: "Features",
             },
             {
-              to: "/community#section-community",
-              activeBaseRegex: "^$",
-              label: "Meet the Community",
-              className: "scroll-link",
-              id: "scroll-community",
+              to: "/use-cases/",
+              position: "left",
+              label: "Use Cases",
             },
             {
-              to: "/community#section-contribute",
-              activeBaseRegex: "^$",
-              label: "Contribute",
-              className: "scroll-link",
-              id: "scroll-contribute",
+              type: "dropdown",
+              label: "Community",
+              position: "left",
+              className: "community-dropdown",
+              items: [
+                {
+                  to: "/community",
+                  activeBaseRegex: "^$",
+                  label: "Welcome",
+                  className: "scroll-link scroll-welcome",
+                  id: "scroll-welcome",
+                },
+                {
+                  to: "/community#section-discussions",
+                  activeBaseRegex: "^$",
+                  label: "Discussions",
+                  className: "scroll-link scroll-discussions",
+                  id: "scroll-discussions",
+                },
+                {
+                  to: "/community#section-governance",
+                  activeBaseRegex: "^$",
+                  label: "Governance",
+                  className: "scroll-link",
+                  id: "scroll-governance",
+                },
+                {
+                  to: "/community#section-community",
+                  activeBaseRegex: "^$",
+                  label: "Meet the Community",
+                  className: "scroll-link",
+                  id: "scroll-community",
+                },
+                {
+                  to: "/community#section-contribute",
+                  activeBaseRegex: "^$",
+                  label: "Contribute",
+                  className: "scroll-link",
+                  id: "scroll-contribute",
+                },
+                {
+                  to: "/contribute/",
+                  label: "Contribution Guide",
+                },
+                {
+                  to: "https://github.com/apache/pulsar/wiki",
+                  label: "Wiki",
+                },
+                {
+                  to: "https://github.com/apache/pulsar/issues",
+                  label: "Issue Tracking",
+                },
+              ],
             },
             {
-              to: "/contribute/",
-              label: "Contribution Guide",
+              type: "dropdown",
+              label: "Learn",
+              position: "left",
+              items: [
+                {
+                  to: "/blog",
+                  label: "Blog",
+                },
+                {
+                  to: "/books",
+                  label: "Books",
+                },
+                {
+                  to: "/case-studies",
+                  label: "Case Studies",
+                },
+                {
+                  to: "/articles",
+                  label: "Articles",
+                },
+                {
+                  to: "/presentations",
+                  label: "Presentations",
+                },
+                {
+                  to: "/events",
+                  label: "Events",
+                },
+              ],
             },
             {
-              to: "https://github.com/apache/pulsar/wiki",
-              label: "Wiki",
-            },
-            {
-              to: "https://github.com/apache/pulsar/issues",
-              label: "Issue Tracking",
-            },
-          ],
-        },
-        {
-          type: "dropdown",
-          label: "Learn",
-          position: "left",
-          items: [
-            {
-              to: "/blog",
-              label: "Blog",
-            },
-            {
-              to: "/books",
-              label: "Books",
-            },
-            {
-              to: "/case-studies",
-              label: "Case Studies",
-            },
-            {
-              to: "/articles",
-              label: "Articles",
-            },
-            {
-              to: "/presentations",
-              label: "Presentations",
-            },
-            {
-              to: "/events",
-              label: "Events",
-            },
-          ],
-        },
-        {
-          to: "/download",
-          label: "Download",
-          position: "right",
-          className: "navbar_download_button",
-        },
-      ],
-    },
-    footer: {
-      logo: { alt: "Pulsar Logo", src: "img/pulsar-white.svg", href: "/" },
-      links: [
-        {
-          items: [
-            { label: "Foundation", href: "https://www.apache.org/" },
-            {
-              label: "Events",
-              href: "https://www.apache.org/events/current-event.html",
-            },
-          ],
-        },
-        {
-          items: [
-            { label: "License", href: "https://www.apache.org/licenses/" },
-            {
-              label: "Thanks",
-              href: "https://www.apache.org/foundation/thanks",
-            },
-            {
-              label: "Sponsorship",
-              href: "https://www.apache.org/foundation/sponsorship",
-            },
-          ],
-        },
-        {
-          items: [
-            { label: "Security", to: "/security" },
-            {
-              label: "Privacy",
-              href: "https://www.apache.org/foundation/policies/privacy.html",
-            },
-            {
-              label: "Contact",
-              to: "/contact",
+              to: "/download",
+              label: "Download",
+              position: "right",
+              className: "navbar_download_button",
             },
           ],
         },
-        {
-          items: [
+        footer: {
+          logo: { alt: "Pulsar Logo", src: "img/pulsar-white.svg", href: "/" },
+          links: [
             {
-              html: `
+              items: [
+                { label: "Foundation", href: "https://www.apache.org/" },
+                {
+                  label: "Events",
+                  href: "https://www.apache.org/events/current-event.html",
+                },
+              ],
+            },
+            {
+              items: [
+                { label: "License", href: "https://www.apache.org/licenses/" },
+                {
+                  label: "Thanks",
+                  href: "https://www.apache.org/foundation/thanks",
+                },
+                {
+                  label: "Sponsorship",
+                  href: "https://www.apache.org/foundation/sponsorship",
+                },
+              ],
+            },
+            {
+              items: [
+                { label: "Security", to: "/security" },
+                {
+                  label: "Privacy",
+                  href: "https://www.apache.org/foundation/policies/privacy.html",
+                },
+                {
+                  label: "Contact",
+                  to: "/contact",
+                },
+              ],
+            },
+            {
+              items: [
+                {
+                  html: `
                 <div class="social-icons">
                   <a
                     target="_blank"
@@ -385,11 +384,11 @@ module.exports = {
                   </a>
                 </div>
               `,
-              },
-            ],
-          },
-        ],
-        copyright: `
+                },
+              ],
+            },
+          ],
+          copyright: `
         <div>
           <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
           The Apache Software Foundation
@@ -397,142 +396,142 @@ module.exports = {
         <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
         <p>Copyright © ${new Date().getFullYear()} The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
       `,
-    },
-    prism: {
-      theme: require("prism-react-renderer").themes.dracula,
-      additionalLanguages: [
-        "bash",
-        "diff",
-        "json",
-        "go",
-        "csharp",
-        "groovy",
-        "http",
-        "ini",
-        "java",
-        "powershell",
-        "properties",
-        "protobuf",
-        "yaml",
-      ],
-    },
-    algolia: {
-      appId: "WK2YL0SALL",
-      apiKey: "42d24d221fbd8eb59804a078208aaec0",
-      indexName: "apache_pulsar",
-    },
-  }),
-
-  presets: [
-    [
-      "@docusaurus/preset-classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      {
-        docs: {
-          path: "docs",
-          sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: `${githubSiteUrl}/edit/main`,
-          remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
-          versions: versionsMap,
-          onlyIncludeVersions: buildVersions || ["current"],
         },
-        blog: {
-          blogSidebarCount: 0,
-          showReadingTime: true,
-          editUrl: `${githubSiteUrl}/edit/main/`,
-          onInlineAuthors: 'ignore',
-        },
-        theme: {
-          customCss: [
-            require.resolve("./src/css/custom.css"),
-            require.resolve("./src/css/docs.css"),
-            require.resolve("./src/css/base-table.css"),
-            require.resolve("./src/css/typography.css"),
-            require.resolve("./src/css/image-zoom.css"),
-            require.resolve("./src/css/announcement-bar.css"),
-            require.resolve("./src/css/navbar.css"),
-            require.resolve("./src/css/footer.css"),
-            require.resolve("./src/css/variables.css"),
-            require.resolve("./src/css/blog.css"),
+        prism: {
+          theme: require("prism-react-renderer").themes.dracula,
+          additionalLanguages: [
+            "bash",
+            "diff",
+            "json",
+            "go",
+            "csharp",
+            "groovy",
+            "http",
+            "ini",
+            "java",
+            "powershell",
+            "properties",
+            "protobuf",
+            "yaml",
           ],
         },
-        //googleAnalytics: {
-        //  trackingID: "UA-102219959-1",
-        //},
-      },
-    ],
-  ],
-  plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        redirects: [
-          {
-            from: '/contribute/setup-mergetool',
-            to: '/contribute/setup-git',
-          },
-        ],
-      },
-    ],    
-    'docusaurus-plugin-image-zoom',
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "contribute",
-        path: "contribute",
-        routeBasePath: "contribute",
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-        sidebarPath: require.resolve("./sidebarsDevelopment.js"),
-        editUrl: `${githubSiteUrl}/edit/main`,
+        algolia: {
+          appId: "WK2YL0SALL",
+          apiKey: "42d24d221fbd8eb59804a078208aaec0",
+          indexName: "apache_pulsar",
+        },
       }),
-    ],
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "release-notes",
-        path: "release-notes",
-        routeBasePath: "release-notes",
-        editUrl: `${githubSiteUrl}/edit/main`,
-        sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
-      }),
-    ],
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "security",
-        path: "security",
-        routeBasePath: "security",
-        sidebarPath: false,
-      }),
-    ],
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "client-feature-matrix",
-        path: "client-feature-matrix",
-        routeBasePath: "client-feature-matrix",
-        sidebarPath: false,
-      }),
-    ]
-  ],
-  scripts: [
-    { src: "/js/sine-waves.min.js", async: true },
-    "/js/matomo-agent.js",
-  ],
-  clientModules: [require.resolve("./matomoClientModule.ts")],
-  stylesheets: [
-    {
-      href: "/css/katex-0.13.24.min.css",
-      type: "text/css",
-      media: "print", // load CSS asynchronously to increase performance of page first load
-      onload: "this.media='all'", // load CSS asynchronously to increase performance of page first load
-    },
-  ],
-};
 
+    presets: [
+      [
+        "@docusaurus/preset-classic",
+        /** @type {import('@docusaurus/preset-classic').Options} */
+        {
+          docs: {
+            path: "docs",
+            sidebarPath: require.resolve("./sidebars.js"),
+            editUrl: `${githubSiteUrl}/edit/main`,
+            remarkPlugins: [(await import('remark-math')).default],
+            rehypePlugins: [(await import('rehype-katex')).default],
+            versions: versionsMap,
+            onlyIncludeVersions: buildVersions || ["current"],
+          },
+          blog: {
+            blogSidebarCount: 0,
+            showReadingTime: true,
+            editUrl: `${githubSiteUrl}/edit/main/`,
+            onInlineAuthors: 'ignore',
+          },
+          theme: {
+            customCss: [
+              require.resolve("./src/css/custom.css"),
+              require.resolve("./src/css/docs.css"),
+              require.resolve("./src/css/base-table.css"),
+              require.resolve("./src/css/typography.css"),
+              require.resolve("./src/css/image-zoom.css"),
+              require.resolve("./src/css/announcement-bar.css"),
+              require.resolve("./src/css/navbar.css"),
+              require.resolve("./src/css/footer.css"),
+              require.resolve("./src/css/variables.css"),
+              require.resolve("./src/css/blog.css"),
+            ],
+          },
+          //googleAnalytics: {
+          //  trackingID: "UA-102219959-1",
+          //},
+        },
+      ],
+    ],
+    plugins: [
+      [
+        '@docusaurus/plugin-client-redirects',
+        {
+          redirects: [
+            {
+              from: '/contribute/setup-mergetool',
+              to: '/contribute/setup-git',
+            },
+          ],
+        },
+      ],
+      'docusaurus-plugin-image-zoom',
+      [
+        "content-docs",
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: "contribute",
+          path: "contribute",
+          routeBasePath: "contribute",
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          sidebarPath: require.resolve("./sidebarsDevelopment.js"),
+          editUrl: `${githubSiteUrl}/edit/main`,
+        }),
+      ],
+      [
+        "content-docs",
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: "release-notes",
+          path: "release-notes",
+          routeBasePath: "release-notes",
+          editUrl: `${githubSiteUrl}/edit/main`,
+          sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
+        }),
+      ],
+      [
+        "content-docs",
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: "security",
+          path: "security",
+          routeBasePath: "security",
+          sidebarPath: false,
+        }),
+      ],
+      [
+        "content-docs",
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: "client-feature-matrix",
+          path: "client-feature-matrix",
+          routeBasePath: "client-feature-matrix",
+          sidebarPath: false,
+        }),
+      ]
+    ],
+    scripts: [
+      { src: "/js/sine-waves.min.js", async: true },
+      "/js/matomo-agent.js",
+    ],
+    clientModules: [require.resolve("./matomoClientModule.ts")],
+    stylesheets: [
+      {
+        href: "/css/katex-0.13.24.min.css",
+        type: "text/css",
+        media: "print", // load CSS asynchronously to increase performance of page first load
+        onload: "this.media='all'", // load CSS asynchronously to increase performance of page first load
+      },
+    ],
+  };
+};
