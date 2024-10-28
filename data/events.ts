@@ -30,15 +30,15 @@ export const resources: Record<Category, Resource[]> = {
       startDate: "2024-05-14", // year-month-day
     },
     {
-      title: "Pulsar Summit North America 2024",
-      description: "Comming soon",
-      link: "",
+      title: "Data Streaming Summit 2024",
+      description: "The Data Streaming Summit 2024 is taking place on October 28-29, 2024 Grand Hyatt SFO.",
+      link: "https://datastreaming-summit.org/",
       displayDate: "October 29th, 2024",
       startDate: "2024-10-29", // year-month-day
     },
     {
       title: "Pulsar Summit Asia 2024",
-      description: "Comming soon",
+      description: "",
       link: "",
       displayDate: "November 22nd, 2024",
       startDate: "2024-11-22", // year-month-day
