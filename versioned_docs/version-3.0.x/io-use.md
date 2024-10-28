@@ -369,11 +369,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Start **all** source connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_startSource?summary=all)
 
 * Start a **specified** source connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_startSource?summary=!all)
 
 </TabItem>
 
@@ -404,11 +404,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Start **all** sink connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_restartSink?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_startSink?summary=all)
 
 * Start a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_restartSink?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_startSink?summary=!all)
 
 </TabItem>
 
