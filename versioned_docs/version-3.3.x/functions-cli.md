@@ -28,12 +28,12 @@ You can configure a function by using a predefined YAML file. The following tabl
 | name                 | String                     | `--name`                   | The name of a function.|
 | className            | String                     | `--classname`              | The class name of a function. |
 | functionType         | String                     | `--function-type`          | The built-in function type. |
-| inputs               | List<String\>               | `-i`, `--inputs`           | The input topics of a function. Multiple topics can be specified as a comma-separated list. |
-| customSerdeInputs    | Map<String,String\>         | `--custom-serde-inputs`    | The mapping from input topics to SerDe class names. |
+| inputs               | List&lt;String&gt;               | `-i`, `--inputs`           | The input topics of a function. Multiple topics can be specified as a comma-separated list. |
+| customSerdeInputs    | Map&lt;String,String&gt;         | `--custom-serde-inputs`    | The mapping from input topics to SerDe class names. |
 | topicsPattern        | String                     | `--topics-pattern`         | The topic pattern to consume from a list of topics under a namespace. <br />**Note:** `--input` and `--topic-pattern` are mutually exclusive. For Java functions, you need to add the SerDe class name for a pattern in `--custom-serde-inputs`. |
-| customSchemaInputs   | Map<String,String\>         | `--custom-schema-inputs`   | The mapping from input topics to schema properties. |
-| customSchemaOutputs  | Map<String,String\>         | `--custom-schema-outputs`  | The mapping from output topics to schema properties.|
-| inputSpecs           | Map<String,[ConsumerConfig](#consumerconfig)\> | `--input-specs` | The mapping from inputs to custom configurations.|
+| customSchemaInputs   | Map&lt;String,String&gt;         | `--custom-schema-inputs`   | The mapping from input topics to schema properties. |
+| customSchemaOutputs  | Map&lt;String,String&gt;         | `--custom-schema-outputs`  | The mapping from output topics to schema properties.|
+| inputSpecs           | Map&lt;String,[ConsumerConfig](#consumerconfig)&gt; | `--input-specs` | The mapping from inputs to custom configurations.|
 | output               | String                     | `-o`, `--output`           | The output topic of a function. If none is specified, no output is written.  |
 | producerConfig       | [ProducerConfig](#producerconfig)  | `--producer-config` | The custom configurations for producers.  |
 | outputSchemaType     | String                     | `-st`, `--schema-type`     | The built-in schema type or custom schema class name used for message outputs.   |
@@ -44,8 +44,8 @@ You can configure a function by using a predefined YAML file. The following tabl
 | retainKeyOrdering    | Boolean                    | `--retain-key-ordering`    | Whether functions consume and process messages in key order or not. |
 | batchBuilder         | String           | `--batch-builder` | Use `producerConfig.batchBuilder` instead. <br />**Note**: `batchBuilder` will be deprecated in code soon. |
 | forwardSourceMessageProperty | Boolean  | `--forward-source-message-property`  | Whether the properties of input messages are forwarded to output topics or not during processing. When the value is set to `false`, the forwarding is disabled. |
-| userConfig           | Map<String,Object\>         | `--user-config`         	 | User-defined config key/values. |
-| secrets       | Map<String,Object\> | `--secrets`	| The mapping from secretName to objects that encapsulate how the secret is fetched by the underlying secrets provider. |
+| userConfig           | Map&lt;String,Object&gt;         | `--user-config`         	 | User-defined config key/values. |
+| secrets       | Map&lt;String,Object&gt; | `--secrets`	| The mapping from secretName to objects that encapsulate how the secret is fetched by the underlying secrets provider. |
 | runtime       | String             | N/A          | The runtime of a function. Available values: `java`,`python`, `go`. |
 | autoAck       | Boolean            | `--auto-ack` | Whether the framework acknowledges messages automatically or not. <br /><br />**Note**: This configuration will be deprecated in future releases. If you specify a delivery semantic, the framework automatically acknowledges messages. If you do not want the framework to auto-ack messages, set the `processingGuarantees` to `MANUAL`. |
 | maxMessageRetries    | Int      |	`--max-message-retries` | The number of retries to process a message before giving up. |
@@ -75,8 +75,8 @@ The following table outlines the nested fields and related arguments under the `
 | schemaType           | String                     | N/A                        | N/A |
 | serdeClassName       | String                     | N/A                        | N/A |
 | isRegexPattern       | Boolean                    | N/A                        | N/A |
-| schemaProperties     | Map<String,String\>         | N/A                        | N/A |
-| consumerProperties   | Map<String,String\>         | N/A                        | N/A |
+| schemaProperties     | Map&lt;String,String&gt;         | N/A                        | N/A |
+| consumerProperties   | Map&lt;String,String&gt;         | N/A                        | N/A |
 | receiverQueueSize    | Int                        | N/A                        | N/A |
 | cryptoConfig         | [CryptoConfig](#cryptoconfig)   | N/A                   |Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java). |
 | poolMessages         | Boolean                    | N/A                        | N/A |
@@ -127,7 +127,7 @@ The following table outlines the nested fields and related arguments under the `
 | Field Name                  | Type                        | Related Command Argument | Description   |
 |-----------------------------|-----------------------------|--------------------------|---------------|
 | cryptoKeyReaderClassName    | String                      | N/A                      | Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java).   |
-| cryptoKeyReaderConfig       | Map<String, Object\>         | N/A                      | N/A   |
+| cryptoKeyReaderConfig       | Map&lt;String,Object&gt;         | N/A                      | N/A   |
 | encryptionKeys              | String[]                      | N/A                      | N/A   |
 | producerCryptoFailureAction | ProducerCryptoFailureAction | N/A                      | N/A   |
 | consumerCryptoFailureAction | ConsumerCryptoFailureAction | N/A                      | N/A   |

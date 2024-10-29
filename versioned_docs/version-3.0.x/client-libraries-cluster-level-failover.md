@@ -70,7 +70,6 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
-    failover.initialize(pulsarClient);
     return pulsarClient;
 }
 ```
@@ -116,7 +115,6 @@ public PulsarClient getControlledFailoverClient() throws IOException {
                     .serviceUrlProvider(provider)
                     .build();
 
-    provider.initialize(pulsarClient);
     return pulsarClient;
 }
 ```

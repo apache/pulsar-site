@@ -1,10 +1,24 @@
 module.exports = [
   {
+    "tagName": "v4.0.0",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.0/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": "v4.0.x"
+  },
+  {
+    "tagName": "v3.3.2",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.2/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": "v3.3.x"
+  },
+  {
     "tagName": "v3.3.1",
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.3.1/",
     "doc": "/docs/3.3.x/client-libraries-java",
-    "version": "v3.3.x"
+    "version": ""
   },
   {
     "tagName": "v3.3.0",
@@ -77,11 +91,18 @@ module.exports = [
     "version": ""
   },
   {
+    "tagName": "v3.0.7",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.7/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": "v3.0.x"
+  },
+  {
     "tagName": "v3.0.6",
     "vtag": "3.0.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.0.6/",
     "doc": "/docs/3.0.x/client-libraries-java",
-    "version": "v3.0.x"
+    "version": ""
   },
   {
     "tagName": "v3.0.5",
