@@ -1,6 +1,6 @@
 ---
 id: io-http-sink
-title: HTTTP sink connector
+title: HTTP sink connector
 sidebar_label: "HTTP sink connector"
 ---
 

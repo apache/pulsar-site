@@ -398,7 +398,7 @@ public class LoggerFunction implements Function<String, Void> {
     @Override
     public Void process(String input, Context context) {
         Logger LOG = context.getLogger();
-        if (input.length() <= 100) {
+        if (input.length() &lt;= 100) {
             LOG.info("This string has a length of {}", input);
         } else {
             LOG.warn("This string is getting too long! It has {} characters", input);

@@ -40,7 +40,7 @@ bin/pulsar-admin ns-isolation-policy set \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/:namespace/:tenant/:namespace|operation/createNamespace?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_createNamespace)
 
 </TabItem>
 <TabItem value="Java admin API">

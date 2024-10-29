@@ -88,7 +88,7 @@ Roles `my.1.role`, `my.2.role`, `my.foo.role`, `my.bar.role`, etc. **cannot** pr
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/permissions/:role|operation/grantPermissionOnNamespace?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_grantPermissionOnNamespace)
 
 </TabItem>
 <TabItem value="Java">
@@ -127,7 +127,7 @@ my.role.*    [produce, consume]
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/permissions|operation/getPermissions?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getPermissions)
 
 </TabItem>
 <TabItem value="Java">
@@ -161,7 +161,7 @@ pulsar-admin namespaces revoke-permission test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/permissions/:role|operation/revokePermissionsOnNamespace?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_revokePermissionsOnNamespace)
 
 </TabItem>
 <TabItem value="Java">

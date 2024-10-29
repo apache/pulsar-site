@@ -210,7 +210,7 @@ sidebar_label: Apache Pulsar 2.9.4
 * [fix][storage] Autorecovery default reppDnsResolverClass to ZkBookieRackAffinityMapping [#15640](https://github.com/apache/pulsar/pull/15640)
 * [fix][broker][functions-worker] Ensure prometheus metrics are grouped by type [#15558](https://github.com/apache/pulsar/pull/15558)
 * [fix][broker] Fixed key-shared delivery of messages with interleaved delays [#15409](https://github.com/apache/pulsar/pull/15409)
-* [fix][function]Pulsar Functions: allow a Function<GenericObject?> to access the original Schema of the Message and use it [#14847](https://github.com/apache/pulsar/pull/14847)
+* [fix][function]Pulsar Functions: allow a Function&lt;GenericObject?&gt; to access the original Schema of the Message and use it [#14847](https://github.com/apache/pulsar/pull/14847)
 * [improve][security] Add load multiple certificates support [#14798](https://github.com/apache/pulsar/pull/14798)
 * [improve][client] Optimize pause when creating sub consumers in multi-topic consumer [#14566](https://github.com/apache/pulsar/pull/14566)
 * [improve][broker] refactor ManagedLedger cacheEvictionTask implement [#14488](https://github.com/apache/pulsar/pull/14488)

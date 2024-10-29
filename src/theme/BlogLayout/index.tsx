@@ -8,6 +8,7 @@ import type {Props} from '@theme/BlogLayout';
 import s from './index.module.css';
 
 export default function BlogLayout(props: Props): JSX.Element {
+  // @ts-ignore
   const {header, sidebar, toc, children, ...layoutProps} = props;
   const hasSidebar = sidebar && sidebar.items.length > 0;
 

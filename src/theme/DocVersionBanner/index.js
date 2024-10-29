@@ -1,23 +1,23 @@
-import React from "react";
-import clsx from "clsx";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Link from "@docusaurus/Link";
-import Translate from "@docusaurus/Translate";
+import React from 'react';
+import clsx from 'clsx';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
 import {
   useActivePlugin,
   useDocVersionSuggestions,
-} from "@docusaurus/plugin-content-docs/client";
-import { ThemeClassNames } from "@docusaurus/theme-common";
+} from '@docusaurus/plugin-content-docs/client';
+import {ThemeClassNames} from '@docusaurus/theme-common';
 import {
   useDocsPreferredVersion,
   useDocsVersion,
-} from "@docusaurus/theme-common/internal";
+} from '@docusaurus/plugin-content-docs/client';
 import BrowserOnly from "@docusaurus/BrowserOnly";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
-const _ltsVersion = '3.0.x';
-const _maintainedVersions = ['3.2.x', '3.0.x'];
-function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
+const _ltsVersion = '4.0.x';
+const _maintainedVersions = ['4.0.x', '3.3.x', '3.0.x'];
+function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate
       id="theme.docs.versions.unreleasedVersionLabel"
@@ -149,21 +149,19 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
     </div>
   );
 }
-export default function DocVersionBanner({ className }) {
+export default function DocVersionBanner({className}) {
   const versionMetadata = useDocsVersion();
   return (
     <BrowserOnly>
       {() => {
-        return versionMetadata.version != _latestVersion &&
-          versionMetadata.version != _ltsVersion &&
+        return versionMetadata.version !== _latestVersion &&
+          versionMetadata.version !== _ltsVersion &&
           location.pathname.startsWith("/docs") ? (
           <DocVersionBannerEnabled
             className={className}
             versionMetadata={versionMetadata}
           />
-        ) : (
-          <></>
-        );
+        ) : null;
       }}
     </BrowserOnly>
   );

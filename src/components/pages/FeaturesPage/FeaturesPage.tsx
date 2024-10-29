@@ -48,13 +48,13 @@ const cards: CardProps[] = [
           <div className={s.LowLatencyCardSingleColumn}>
             <ul>
               <li>
-                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#failover--partitioned-topics' target='_blank' title='Streaming'>Streaming:</a> In order, by partition, and acknowledge them cumulatively (up to a specific message ID for a specific partition), similar to the way Apache Kafka works.</p>
+                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#failover--partitioned-topics' target='_blank' title='Streaming'>Streaming:</a> In order, by partition, and acknowledge them cumulatively (up to a specific message ID for a specific partition), similar to the way Apache Kafka works.</p>
               </li>
               <li style={{ paddingTop: '2rem'}}>
-                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#shared' target='_blank' title='Messaging'>Messaging:</a> Out of order, acknowledging each message individually, similar to the way RabbitMQ works. This enables having vast amounts of consumers concurrently regardless of partition count. Perfect for distributed work queues (i.e., jobs) and accelerating machine learning workloads.</p>
+                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#shared' target='_blank' title='Messaging'>Messaging:</a> Out of order, acknowledging each message individually, similar to the way RabbitMQ works. This enables having vast amounts of consumers concurrently regardless of partition count. Perfect for distributed work queues (i.e., jobs) and accelerating machine learning workloads.</p>
               </li>
               <li style={{ paddingTop: '2rem' }}>
-                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#key_shared' target='_blank' title='Messaging in-order'>Messaging in-order:</a> In order, by key. You can have as many consumers as needed concurrently. The broker divides the keys equally between the consumers, and all messages for a particular key will arrive at the same single consumer associated with that key. This preserves the ordering of message processing by key.</p>
+                <p className={s.SmallText}><a href='https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#key_shared' target='_blank' title='Messaging in-order'>Messaging in-order:</a> In order, by key. You can have as many consumers as needed concurrently. The broker divides the keys equally between the consumers, and all messages for a particular key will arrive at the same single consumer associated with that key. This preserves the ordering of message processing by key.</p>
               </li>
             </ul>
           </div>
@@ -219,7 +219,7 @@ const cards: CardProps[] = [
       rightContent: (
         <p className={s.SmallText}>
           A pulsar topic is a list of ledgers (as explained above). Only the latest ledger is considered open for writing; the other ledgers are closed - i.e., immutable.<br />
-          Pulsar <a target='_blank' href="https://pulsar.apache.org/docs/tiered-storage-overview/">supports</a> offloading those immutable ledgers into Tiered Storage such as S3, GCS, Azure BlobStore, and more. You can optionally <a target='_blank' href='https://pulsar.apache.org/reference/#/3.0.x/config/reference-configuration-broker?id=managedledgeroffloaddeletionlagms'>configure</a> how long to retain the ledgers in Bookkeeper after they have been offloaded successfully.<br />
+          Pulsar <a target='_blank' href="https://pulsar.apache.org/docs/tiered-storage-overview/">supports</a> offloading those immutable ledgers into Tiered Storage such as S3, GCS, Azure BlobStore, and more. You can optionally <a target='_blank' href='https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=managedledgeroffloaddeletionlagms'>configure</a> how long to retain the ledgers in Bookkeeper after they have been offloaded successfully.<br />
           This feature allows you to have unlimited retention at a low cost.<br />
           Pulsar seamlessly switches between reading from Bookkeeper or a tiered storage system based on the ledger location, making it transparent to the client. It’s perfect for offloading “cold” data into a low-cost system, as it is assumed this data will be accessed less frequently and demand less read performance (due to the nature of tiered storage systems).<br />
         </p>
@@ -234,7 +234,7 @@ const cards: CardProps[] = [
       position: 'right',
       rightContent: (
         <p className={s.SmallText}>
-          Pulsar has a built-in <a target='_blank' href='https://pulsar.apache.org/docs/schema-overview/'>schema registry</a>. This provides the ability to specify a schema for the messages stored in a topic. The registry supports evolving the schema with baked-in forward and backward <a target='_blank' href='https://pulsar.apache.org/docs/3.0.x/schema-understand/#schema-compatibility-check'>compatibility checks</a> to prevent making grave mistakes when producing or consuming messages with incompatible schema.
+          Pulsar has a built-in <a target='_blank' href='https://pulsar.apache.org/docs/schema-overview/'>schema registry</a>. This provides the ability to specify a schema for the messages stored in a topic. The registry supports evolving the schema with baked-in forward and backward <a target='_blank' href='https://pulsar.apache.org/docs/4.0.x/schema-understand/#schema-compatibility-check'>compatibility checks</a> to prevent making grave mistakes when producing or consuming messages with incompatible schema.
           Several schema languages are supported, including Avro and Protobuf.
         </p>
       )
@@ -248,7 +248,7 @@ const cards: CardProps[] = [
       position: 'right',
       rightContent: (
         <p className={s.SmallText}>
-          Pulsar has the notion of <a target="_blank" href="https://pulsar.apache.org/docs/security-overview/">users</a> and a list of permissions they each have for a given namespace or topic. There is a <a target='_blank' href='https://pulsar.apache.org/reference/#/3.0.x/config/reference-configuration-broker?id=superuserroles'>configured</a> list of users assigned the unique role of Super Admin, granting them access to everything. Each tenant has such a <a target="_blank" href="https://pulsar.apache.org/docs/admin-api-tenants/#update">list</a> for the role of Tenant Admin, giving users the ability to <a target='_blank' href='https://pulsar.apache.org/docs/admin-api-permissions/'>grant permissions</a> for namespaces and topics contained within the tenant.<br />
+          Pulsar has the notion of <a target="_blank" href="https://pulsar.apache.org/docs/security-overview/">users</a> and a list of permissions they each have for a given namespace or topic. There is a <a target='_blank' href='https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=superuserroles'>configured</a> list of users assigned the unique role of Super Admin, granting them access to everything. Each tenant has such a <a target="_blank" href="https://pulsar.apache.org/docs/admin-api-tenants/#update">list</a> for the role of Tenant Admin, giving users the ability to <a target='_blank' href='https://pulsar.apache.org/docs/admin-api-permissions/'>grant permissions</a> for namespaces and topics contained within the tenant.<br />
           The permissions include: producing messages, consuming messages, running functions, and installing connectors, sinks, or sources.<br />
           This enables an organization to empower teams to self-manage access to their application's data (typically contained within a tenant).
         </p>
@@ -264,7 +264,7 @@ const cards: CardProps[] = [
       rightContent: (
         <p className={s.SmallText}>
           When Pulsar receives a message, it writes it to Bookkeeper using its client, which writes to 3 Bookkeeper nodes in parallel by default. The write is considered a success only if 2 Bookkeeper nodes write it successfully. Only then Pulsar acknowledge the write to the client.<br />
-          Bookkeeper, by default, writes the message to the disk, into a write-ahead-log called a <a target='_blank' href='https://bookkeeper.apache.org/docs/4.8.2/getting-started/concepts/#journals'>journal</a>, then to the memory, and only then reports the write as a success back to the client. The vital feature of Bookkeeper is that it ensures the write to disk has been flushed (written to the disk guaranteed - a.k.a. fsync) before considering the write as a success. Performance is regarded by calling the expensive fsync operation once per batch of messages.<br />
+          Bookkeeper, by default, writes the message to the disk, into a write-ahead-log called a <a target='_blank' href='https://bookkeeper.apache.org/docs/getting-started/concepts#journals'>journal</a>, then to the memory, and only then reports the write as a success back to the client. The vital feature of Bookkeeper is that it ensures the write to disk has been flushed (written to the disk guaranteed - a.k.a. fsync) before considering the write as a success. Performance is regarded by calling the expensive fsync operation once per batch of messages.<br />
           This default behavior is perfect for cases where you simply can’t lose a written message. You can turn it <a target='_blank' href='https://github.com/apache/bookkeeper/blob/f8d81f7eb861235d5516f7781f6eac70702b3c69/conf/bk_server.conf#L354-L360'>off</a> and thereby gain a performance gain and rely on the other replica to survive, while a Bookkeeper “repair” mechanism fixes the other replicas in the background.
         </p>
       )
@@ -282,8 +282,8 @@ const cards: CardProps[] = [
       position: 'left',
       leftContent: (
         <p className={s.SmallText}>
-          Pulsar has a built-in framework called <a href="https://pulsar.apache.org/docs/3.0.x/io-overview/" target="_blank" title="Pulsar IO">Pulsar IO</a>, which simplifies authoring and executing Connectors, which enables reading data from a third-party system into a Pulsar topic or writing messages stored in Pulsar topics to a third-party system.<br /><br />
-          Pulsar has several officially maintained connectors of popular 3rd parties: MySQL, Elasticsearch, Cassandra, and more. The complete list is available <a href='https://pulsar.apache.org/docs/3.0.x/io-connectors/' target='_blank' title='here'>here</a>.<br /><br />
+          Pulsar has a built-in framework called <a href="https://pulsar.apache.org/docs/4.0.x/io-overview/" target="_blank" title="Pulsar IO">Pulsar IO</a>, which simplifies authoring and executing Connectors, which enables reading data from a third-party system into a Pulsar topic or writing messages stored in Pulsar topics to a third-party system.<br /><br />
+          Pulsar has several officially maintained connectors of popular 3rd parties: MySQL, Elasticsearch, Cassandra, and more. The complete list is available <a href='https://pulsar.apache.org/docs/4.0.x/io-connectors/' target='_blank' title='here'>here</a>.<br /><br />
           Pulsar IO was written on top of Pulsar Functions, so a Connector (be it Sink or Source) is a Pulsar Function. The connector runs using Pulsar Function Worker based on the runtime chosen (thread, process, or K8s pod). This means it also supports parallelism (increasing the number of instances running the connector and dividing the work among them).
         </p>
       )
@@ -325,7 +325,7 @@ const cards: CardProps[] = [
           Pulsar offers a lightweight stream processing framework called <a target='_blank' href='https://pulsar.apache.org/docs/functions-overview/'>Pulsar&nbsp;Functions</a>. It enables you to author a function in a single file in Java, Go, or Python and deploy it to Pulsar Functions, which runs that function for you. Functions will run on each message in the topic defined and have the option to write a message on any topic. It’s perfect for simple message transformations: Read a message from a topic, transform it, and write it to another topic. It’s also been used for various bigger tasks, such as ML training.
           <br />
           <br />
-          Pulsar Functions support <a target='_blank' href='https://pulsar.apache.org/docs/functions-deploy-cluster-parallelism/'>parallelism</a> by allowing you to specify how many instances of the function it will run. It has a unique process for coordinating and executing those functions called <a target='_blank' href='https://pulsar.apache.org/docs/functions-concepts/#function-worker'>Pulsar Function Worker</a>. It <a target='_blank' href='https://pulsar.apache.org/docs/3.0.x/functions-concepts/#function-runtime'>supports</a> running functions in a thread, a dedicated process, or a pod in K8s.
+          Pulsar Functions support <a target='_blank' href='https://pulsar.apache.org/docs/functions-deploy-cluster-parallelism/'>parallelism</a> by allowing you to specify how many instances of the function it will run. It has a unique process for coordinating and executing those functions called <a target='_blank' href='https://pulsar.apache.org/docs/functions-concepts/#function-worker'>Pulsar Function Worker</a>. It <a target='_blank' href='https://pulsar.apache.org/docs/4.0.x/functions-concepts/#function-runtime'>supports</a> running functions in a thread, a dedicated process, or a pod in K8s.
         </p>
       )
     }
@@ -388,7 +388,7 @@ const cards: CardProps[] = [
       position: 'left',
       leftContent: (
         <p className={s.SmallText}>
-          Pulsar supports writing a message with a <a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#delayed-message-delivery' target='_blank' title='given delay'>given delay</a>, which means it will be available for consumption only after the delay defined expires. It also supports providing an exact date and time for the message to become available for consumption. This is great for scheduling a task using a delayed message.<br />
+          Pulsar supports writing a message with a <a href='https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#delayed-message-delivery' target='_blank' title='given delay'>given delay</a>, which means it will be available for consumption only after the delay defined expires. It also supports providing an exact date and time for the message to become available for consumption. This is great for scheduling a task using a delayed message.<br />
           Pulsar clients utilize that feature to provide client-side retry with exponential back-off.
         </p>
       )
@@ -402,7 +402,7 @@ const cards: CardProps[] = [
       position: 'right',
       rightContent: (
         <p className={s.SmallText}>
-          Scale up the handling of writes of messages to a partitioned topic by <a href='https://pulsar.apache.org/docs/3.0.x/admin-api-topics/#update' target='_blank' title='increasing the number of partitions'>increasing the number of partitions</a>. Scale up consumption of messages by increasing the number of consumers, which is entirely independent of the number of partitions in a topic. This can be done both for <a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#shared' target='_blank' title='out-of-order consumption'>out-of-order consumption</a> or <a href='https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#key_shared' target='_blank' title='ordered-by-message-key consumption'>ordered-by-message-key consumption</a>.
+          Scale up the handling of writes of messages to a partitioned topic by <a href='https://pulsar.apache.org/docs/4.0.x/admin-api-topics/#update' target='_blank' title='increasing the number of partitions'>increasing the number of partitions</a>. Scale up consumption of messages by increasing the number of consumers, which is entirely independent of the number of partitions in a topic. This can be done both for <a href='https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#shared' target='_blank' title='out-of-order consumption'>out-of-order consumption</a> or <a href='https://pulsar.apache.org/docs/4.0.x/concepts-messaging/#key_shared' target='_blank' title='ordered-by-message-key consumption'>ordered-by-message-key consumption</a>.
         </p>
       )
     }
@@ -429,7 +429,7 @@ const cards: CardProps[] = [
       position: 'right',
       rightContent: (
         <p className={s.SmallText}>
-          Pulsar has a built-in <a href='https://pulsar.apache.org/docs/3.0.x/admin-api-features/' target='_blank' title='REST API'>REST API</a> for administrative operations such as creating topics, deleting namespace, and more. It is also bundled with an Admin CLI providing an easy-to-use wrapper on top of the REST API.
+          Pulsar has a built-in <a href='https://pulsar.apache.org/docs/4.0.x/admin-api-features/' target='_blank' title='REST API'>REST API</a> for administrative operations such as creating topics, deleting namespace, and more. It is also bundled with an Admin CLI providing an easy-to-use wrapper on top of the REST API.
         </p>
       )
     }
