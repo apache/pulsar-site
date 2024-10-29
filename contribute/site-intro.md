@@ -33,7 +33,13 @@ Besides, the site serves multiple static pages generated outside the framework, 
 The most commonly used tool is `preview.sh`. You can preview your local changes by:
 
 ```shell
-./preview.sh 2.11.x
+./preview.sh
+```
+
+If you'd like to preview the site for a specific versions, you can pass the versions as an argument:
+
+```shell
+./preview.sh 4.0.x
 ```
 
 See the [previewing content](document-preview.md) guide for more details.
