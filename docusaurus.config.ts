@@ -27,28 +27,21 @@ try {
   //do nothing
 }
 
-const oldUrl = "https://pulsar.apache.org";
-const url = "https://pulsar.apache.org";
-const javadocUrl = url + "/api";
-const restApiUrl = url + "/admin-rest-api";
-const functionsApiUrl = url + "/functions-rest-api";
-const sourceApiUrl = url + "/source-rest-api";
-const sinkApiUrl = url + "/sink-rest-api";
-const packagesApiUrl = url + "/packages-rest-api";
-const transactionsApiUrl = url + "/transactions-rest-api";
-const lookupApiUrl = url + "/lookup-rest-api";
-const githubUrl = "https://github.com/apache/pulsar";
-const githubSiteUrl = "https://github.com/apache/pulsar-site";
-const baseUrl = "/";
-const restApiBaseUrlMapping = {
-  default: restApiUrl,
-  functions: functionsApiUrl,
-  source: sourceApiUrl,
-  sink: sinkApiUrl,
-  packages: packagesApiUrl,
-  transactions: transactionsApiUrl,
-  lookup: lookupApiUrl
-};
+const {
+  siteUrl,
+  javadocUrl,
+  restApiUrl,
+  functionsApiUrl,
+  sourceApiUrl,
+  sinkApiUrl,
+  packagesApiUrl,
+  transactionsApiUrl,
+  lookupApiUrl,
+  githubUrl,
+  githubSiteUrl,
+  baseUrl,
+  restApiBaseUrlMapping
+} = require("./site-baseurls");
 
 const injectLinkParse = (prefix, name, path) => {
   if (prefix == "javadoc") {
@@ -139,10 +132,6 @@ module.exports = async function createConfigAsync() {
     favicon: "img/favicon.ico",
     organizationName: "apache",
     projectName: "pulsar",
-    customFields: {
-      githubUrl,
-      oldUrl,
-    },
     trailingSlash: true,
     markdown: {
       preprocessor: ({ filePath, fileContent }) => {
