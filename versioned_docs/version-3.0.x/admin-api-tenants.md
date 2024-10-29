@@ -55,7 +55,7 @@ my-tenant-2
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/tenants|operation/getTenants?version=@pulsar:version_number@}
+[](swagger:/admin/v2/TenantsBase_getTenants)
 
 </TabItem>
 <TabItem value="Java">
@@ -104,7 +104,7 @@ pulsar-admin tenants create my-tenant \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/tenants/:tenant|operation/createTenant?version=@pulsar:version_number@}
+[](swagger:/admin/v2/TenantsBase_createTenant)
 
 </TabItem>
 <TabItem value="Java">
@@ -150,7 +150,7 @@ pulsar-admin tenants get my-tenant
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/tenants/:tenant|operation/getTenant?version=@pulsar:version_number@}
+[](swagger:/admin/v2/TenantsBase_getTenantAdmin)
 
 </TabItem>
 <TabItem value="Java">
@@ -183,7 +183,7 @@ pulsar-admin tenants delete my-tenant
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/tenants/:tenant|operation/deleteTenant?version=@pulsar:version_number@}
+[](swagger:/admin/v2/TenantsBase_deleteTenant)
 
 </TabItem>
 <TabItem value="Java">
@@ -218,7 +218,7 @@ pulsar-admin tenants update my-tenant \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/tenants/:tenant|operation/updateTenant?version=@pulsar:version_number@}
+[](swagger:/admin/v2/TenantsBase_updateTenant)
 
 </TabItem>
 <TabItem value="Java">

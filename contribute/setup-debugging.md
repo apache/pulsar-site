@@ -84,3 +84,58 @@ OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005" ./bi
 Ensure that the debugger is configured in your IDE to connect to the specified port.
 
 By following these steps, you can effectively debug both the standalone mode and the source version of Apache Pulsar, including pulsar-shell and pulsar-client processes.
+
+## Enabling debug logging for specific classes when running unit tests in IDE or locally
+
+When working on Pulsar unit tests, you sometimes want to enable debug logging for a specific class, a set of classes, or a certain package to observe what the code is doing while you're running it. Stepping through with a debugger isn't a feasible approach for different race conditions and when timings and timeouts are involved. In those cases, you could add debug log statements to the code if they don't already exist. This helps understand the behavior of a failing test case.
+
+For tests in the pulsar-broker module, you need to edit the [`pulsar-broker/src/test/resources/log4j2.xml` file](https://github.com/apache/pulsar/blob/master/pulsar-broker/src/test/resources/log4j2.xml) to enable logging. Adding a `Logger` element in `Loggers` can be used to enable debug logging for a complete package tree or specific classes.
+
+```xml
+    <Logger name="<<package or classname>>" level="DEBUG" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+    </Logger>
+```
+
+Here's an example:
+
+```xml
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config https://logging.apache.org/log4j/2.0/log4j-core.xsd">
+  <Appenders>
+    <!-- setting follow="true" is required for using ConsoleCaptor to validate log messages -->
+    <Console name="CONSOLE" target="SYSTEM_OUT" follow="true">
+      <PatternLayout pattern="%d{ISO8601} - %-5p - [%t:%c{1}] - %m%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="CONSOLE"/>
+    </Root>
+    <Logger name="org.apache.pulsar.broker.service.persistent.PersistentStickyKeyDispatcherMultipleConsumers" level="DEBUG" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+    </Logger>
+    <!-- loggers for debugging Key_Shared / PIP-379 -->
+    <Logger name="org.apache.pulsar.broker.service.persistent.PersistentStickyKeyDispatcherMultipleConsumers" level="DEBUG" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+    </Logger>
+    <Logger name="org.apache.pulsar.broker.service.DrainingHashesTracker" level="DEBUG" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+    </Logger>
+    <Logger name="org.apache.pulsar.broker.service.persistent.RescheduleReadHandler" level="DEBUG" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+    </Logger>
+  </Loggers>
+</Configuration>
+```
+
+You can also set debugging at a package level to debug and exclude classes that are causing verbose logging. In those cases, you'd set the log level to `WARN` for the classes that are too verbose for your debugging case.
+
+```xml
+    <Logger name="org.apache.pulsar.client.impl.ClientCnx" level="WARN" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+    </Logger>
+```
+
+The same approach can be used to modify Pulsar standalone's logging configuration available at `conf/log4j2.yaml` when you are debugging Pulsar standalone instead of debugging a Pulsar unit test failure. The main difference is that the syntax is in YAML. The default config file contains examples for over logger-specific configuration.

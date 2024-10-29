@@ -44,8 +44,8 @@ sidebar_label: Apache Pulsar 2.5.2
 * [Schema] Pulsar SQL Support Avro Schema `ByteBuffer` Type [#6925](https://github.com/apache/pulsar/pull/6925) 
 
 ##### Pulsar Functions
-* [Functions] Support function with format: `Function<I, CompletableFuture<O>>`[#6684](https://github.com/apache/pulsar/pull/6684)
-* [Functions] Function endpoint admin/v3/functions/{tenant}/{namespace} always returns 404 [#6767](https://github.com/apache/pulsar/pull/6767)
+* [Functions] Support function with format: `Function&lt;I, CompletableFuture&lt;O&gt;&gt;`[#6684](https://github.com/apache/pulsar/pull/6684)
+* [Functions] Function endpoint admin/v3/functions/\{tenant\}/\{namespace\} always returns 404 [#6767](https://github.com/apache/pulsar/pull/6767)
 * [Functions] Ensure that all dangling consumers are cleaned up during failures [#6778](https://github.com/apache/pulsar/pull/6778)
 * [Functions] Fix localrunner netty dependency issue [#6779](https://github.com/apache/pulsar/pull/6779)
 * [Functions] Fix SerDe validation of function's update [#6888](https://github.com/apache/pulsar/pull/6888)

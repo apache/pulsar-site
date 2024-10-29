@@ -6,7 +6,7 @@ import Button from '@site/src/components/ui/Button/Button';
 const isShow = false;
 
 const FeaturedEvent: React.FC = () => {
-  if (isShow) {
+  if (!isShow) {
     return null;
   }
 

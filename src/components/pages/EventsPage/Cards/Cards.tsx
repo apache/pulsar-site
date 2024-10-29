@@ -4,13 +4,28 @@ import s from './Cards.module.css';
 import * as data from '@site/data/events';
 
 const Card: React.FC<data.Resource> = (props) => {
-  return (
-    <a href={props.link} className={s.Card}>
+  const content = (
+    <>
       {props.displayDate && <p>{props.displayDate}</p>}
-      {props.description && <p>{props.description}</p>}
       <h3>{props.title}</h3>
-      <img src={useBaseUrl('/img/goto.svg')} />
+      {props.description && <p>{props.description}</p>}
+      {props.link && <img src={useBaseUrl('/img/goto.svg')} />}
+    </>
+  );
+
+  return props.link ? (
+    <a 
+      href={props.link} 
+      className={s.Card}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {content}
     </a>
+  ) : (
+    <div className={s.Card}>
+      {content}
+    </div>
   );
 };
 
@@ -27,9 +42,14 @@ const Cards: React.FC<CardsProps> = (props) => {
     );
   }
 
+  const resources = props.resources.sort((a, b) => {
+    if (!a.startDate || !b.startDate) return 0;
+    return b.startDate.localeCompare(a.startDate, 'en', { sensitivity: 'base' });
+  });
+
   return (
     <section className={s.Cards}>
-      {props.resources.map((props, idx) => (
+      {resources.map((props, idx) => (
         <Card key={idx} {...props} />
       ))}
     </section>

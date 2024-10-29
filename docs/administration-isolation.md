@@ -38,7 +38,7 @@ Here are some key points for understanding how it works:
 - Separate Pulsar clusters use a shared [configuration store](concepts-architecture-overview.md#configuration-store).
 - Each cluster exposes its service through a DNS entry point and makes sure a client can access the cluster through the DNS entry point. Clients can use one or multiple Pulsar URLs that the Pulsar cluster exposes as the service URL.
 - Each Pulsar cluster has one or multiple brokers and bookies.
-- Each Pulsar cluster has one metadata store, which can be separated into [Pulsar metadata store](concepts-architecture-overview.md#metadata-store) and [BookKeeper metadata store](https://bookkeeper.apache.org/docs/latest/getting-started/concepts/#metadata-storage).
+- Each Pulsar cluster has one metadata store, which can be separated into [Pulsar metadata store](concepts-architecture-overview.md#metadata-store) and [BookKeeper metadata store](https://bookkeeper.apache.org/docs/getting-started/concepts/#metadata-storage).
 
 :::note
 

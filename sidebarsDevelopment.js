@@ -7,6 +7,7 @@ const sidebars = {
             label: "Getting started",
             items: [
                 'setup-building',
+                'setup-buildtools',
                 'setup-ide',
                 'setup-git',
                 'setup-debugging'
@@ -61,6 +62,7 @@ const sidebars = {
                         'release-note-guide',
                     ]
                 },
+                'maintenance-process',
                 'validate-release-candidate',
             ]
         },

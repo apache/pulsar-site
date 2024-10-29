@@ -5,39 +5,34 @@ import users from '../../data/powered-by';
 // featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
 import versions from '../../versions.json';
 import restApiVersions from '../../static/swagger/restApiVersions.json';
-import siteConfig from '../../docusaurus.config';
+import urlConfig from '../../site-baseurls.js';
+
+const {
+  baseUrl,
+} = urlConfig;
 
 export const latestStableVersion = versions[0];
 
 export function imgUrl(img) {
-  return siteConfig.baseUrl + "img/" + img;
+  return baseUrl + "img/" + img;
 }
 
 export function docUrl(doc, language, version) {
-  // if (version == "" || version == "next") {
   return (
-    siteConfig.baseUrl +
+    baseUrl +
     (language ? language + "/" : "") +
     "docs/" +
     (version ? version + "/" : "") +
     (doc ? doc : "")
   );
-  // }
-  // return (
-  //   siteConfig.customFields.oldUrl +
-  //   "/docs/" +
-  //   (language ? language + "/" : "en/") +
-  //   (version ? version + "/" : "") +
-  //   (doc ? doc : "standalone/")
-  // );
 }
 
 export function pageUrl(page, language) {
-  return siteConfig.baseUrl + (language ? language + "/" : "") + page;
+  return baseUrl + (language ? language + "/" : "") + page;
 }
 
 export function githubUrl() {
-  return siteConfig.customFields.githubUrl;
+  return urlConfig.githubUrl;
 }
 
 export function getCache() {

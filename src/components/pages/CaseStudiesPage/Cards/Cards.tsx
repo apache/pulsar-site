@@ -25,11 +25,12 @@ const Card: React.FC<data.Resource> = (props) => {
 
 export type CardsProps = {
   search: string,
-  resources: data.Resource[]
+  resources: data.Resource[],
+  sort?: boolean
 };
 
 const Cards: React.FC<CardsProps> = (props) => {
-  const resources = props.resources.sort((a, b) => a.company.localeCompare(b.company, 'en', { sensitivity: 'base' }));
+  const resources = props.sort ? props.resources.sort((a, b) => a.company.localeCompare(b.company, 'en', { sensitivity: 'base' })) : props.resources;
 
   const filteredRes = resources.filter((r) => {
     return (r.company && r.company.toLowerCase().includes(props.search.toLowerCase())) || (r.description && r.description.toLowerCase().includes(props.search.toLowerCase()));

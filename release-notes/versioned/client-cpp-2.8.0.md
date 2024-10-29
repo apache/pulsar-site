@@ -22,7 +22,7 @@ sidebar_label: Client CPP 2.8.0
 - Allow configuring memory limit from C API [#10145](https://github.com/apache/pulsar/pull/10145)
 - Fix use-after-free undefined behavior due to object lifetime problem [#10220](https://github.com/apache/pulsar/pull/10220)
 - Support enable replicate subscription [#10243](https://github.com/apache/pulsar/pull/10243)
-- Fix C++ client cannot be built with Boost <=1.53 [#10307](https://github.com/apache/pulsar/pull/10307)
+- Fix C++ client cannot be built with Boost &;lt;=1.53 [#10307](https://github.com/apache/pulsar/pull/10307)
 - Support check connect state [#10349](https://github.com/apache/pulsar/pull/10349)
 - Avoid sending flow requests with zero permits [#10506](https://github.com/apache/pulsar/pull/10506)
 - Add single file logger factory [#10712](https://github.com/apache/pulsar/pull/10712)
