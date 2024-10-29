@@ -40,7 +40,7 @@ Whether it is a persistent or non-persistent topic, you can obtain the topic res
 :::note
 
 In REST API, `:schema` stands for persistent or non-persistent. `:tenant`, `:namespace`, `:x` are variables, replace them with the real tenant, namespace, and `x` names when using them.
-Take {@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getList?version=@pulsar:version_number@} as an example, to get the list of persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/persistent/my-tenant/my-namespace`. To get the list of non-persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/non-persistent/my-tenant/my-namespace`.
+Take [](swagger:/admin/v2/PersistentTopics_getList) as an example, to get the list of persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/persistent/my-tenant/my-namespace`. To get the list of non-persistent topics in REST API, use `https://pulsar.apache.org/admin/v2/non-persistent/my-tenant/my-namespace`.
 
 :::
 
@@ -61,7 +61,7 @@ pulsar-admin topics list my-tenant/my-namespace
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getList?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_getList)
 
 </TabItem>
 <TabItem value="Java">
@@ -96,7 +96,7 @@ pulsar-admin topics grant-permission \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/:schema/:tenant/:namespace/:topic/permissions/:role|operation/grantPermissionsOnTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_grantPermissionsOnTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -136,7 +136,7 @@ application1    [consume, produce]
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/permissions|operation/getPermissionsOnTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getPermissionsOnTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -170,7 +170,7 @@ pulsar-admin topics revoke-permission \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/:schema/:tenant/:namespace/:topic/permissions/:role|operation/revokePermissionsOnTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_revokePermissionsOnTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -203,7 +203,7 @@ pulsar-admin topics delete persistent://test-tenant/ns1/tp1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/:schema/:tenant/:namespace/:topic|operation/deleteTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_deleteTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -235,7 +235,7 @@ pulsar-admin topics unload persistent://test-tenant/ns1/tp1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/:schema/:tenant/:namespace/:topic/unload|operation/unloadTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_unloadTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -365,7 +365,7 @@ pulsar-admin topics stats persistent://test-tenant/ns1/tp1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/stats|operation/getStats?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -461,7 +461,7 @@ pulsar-admin topics stats-internal persistent://test-tenant/ns1/tp1
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/internalStats|operation/getInternalStats?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_getInternalStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -508,7 +508,7 @@ Event time: 0
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/subscription/:subName/position/:messagePosition|operation/peekNthMessage?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_peekNthMessage)
 
 </TabItem>
 <TabItem value="Java">
@@ -543,7 +543,7 @@ pulsar-admin topics get-message-by-id \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/ledger/:ledgerId/entry/:entryId|operation/getMessageById?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getMessageById)
 
 </TabItem>
 <TabItem value="Java">
@@ -578,7 +578,7 @@ pulsar-admin topics examine-messages \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/examinemessage?initialPosition=:initialPosition&messagePosition=:messagePosition|operation/examineMessage?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_examineMessage)
 
 </TabItem>
 <TabItem value="Java">
@@ -612,7 +612,7 @@ pulsar-admin topics get-message-id \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/messageid/:timestamp|operation/getMessageIdByTimestamp?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getMessageIdByTimestamp)
 
 </TabItem>
 <TabItem value="Java">
@@ -648,7 +648,7 @@ pulsar-admin topics skip \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/:schema/:tenant/:namespace/:topic/subscription/:subName/skip/:numMessages|operation/skipMessages?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_skipMessages)
 
 </TabItem>
 <TabItem value="Java">
@@ -684,7 +684,7 @@ pulsar-admin topics clear-backlog \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/:schema/:tenant/:namespace/:topic/subscription/:subName/skip_all|operation/skipAllMessages?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_skipAllMessages)
 
 </TabItem>
 <TabItem value="Java">
@@ -719,7 +719,7 @@ pulsar-admin topics reset-cursor \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/:schema/:tenant/:namespace/:topic/subscription/:subName/resetcursor/:timestamp|operation/resetCursor?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_resetCursor)
 
 </TabItem>
 <TabItem value="Java">
@@ -761,7 +761,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/lookup/v2/topic/:topic-domain/:tenant/:namespace/:topic|operation/lookupTopicAsync?version=@pulsar:version_number@}
+[](swagger:/admin/v2/lookup/TopicLookup_lookupTopicAsync)
 
 </TabItem>
 <TabItem value="Java">
@@ -848,7 +848,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/lookup/v2/topic/:topic_domain/:tenant/:namespace/:topic/bundle|operation/getNamespaceBundle?version=@pulsar:version_number@}
+[](swagger:/admin/v2/lookup/TopicLookup_getNamespaceBundle)
 
 </TabItem>
 <TabItem value="Java">
@@ -886,7 +886,7 @@ my-subscription
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/subscriptions|operation/getSubscriptions?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getSubscriptions)
 
 </TabItem>
 <TabItem value="Java">
@@ -928,7 +928,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|Get|/admin/v2/:schema/:tenant/:namespace/:topic/lastMessageId|operation/getLastMessageId?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getLastMessageId)
 
 </TabItem>
 <TabItem value="Java">
@@ -962,7 +962,7 @@ pulsar-admin topics get-backlog-size \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/:schema/:tenant/:namespace/:topic/backlogSize|operation/getBacklogSizeByMessageId?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getBacklogSizeByMessageId)
 
 </TabItem>
 <TabItem value="Java">
@@ -998,7 +998,7 @@ pulsar-admin topics get-deduplication-snapshot-interval my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/deduplicationSnapshotInterval|operation/getDeduplicationSnapshotInterval?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getDeduplicationSnapshotInterval)
 
 </TabItem>
 <TabItem value="Java">
@@ -1031,7 +1031,7 @@ pulsar-admin topics set-deduplication-snapshot-interval my-topic -i 1000
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/topics/:tenant/:namespace/:topic/deduplicationSnapshotInterval|operation/setDeduplicationSnapshotInterval?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_setDeduplicationSnapshotInterval)
 
 ```json
 {
@@ -1068,7 +1068,7 @@ pulsar-admin topics remove-deduplication-snapshot-interval my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic/deduplicationSnapshotInterval|operation/deleteDeduplicationSnapshotInterval?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_deleteDeduplicationSnapshotInterval)
 
 </TabItem>
 <TabItem value="Java">
@@ -1102,7 +1102,7 @@ pulsar-admin topics get-inactive-topic-policies my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/inactiveTopicPolicies|operation/getInactiveTopicPolicies?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getInactiveTopicPolicies)
 
 </TabItem>
 <TabItem value="Java">
@@ -1133,7 +1133,7 @@ pulsar-admin topics set-inactive-topic-policies my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/topics/:tenant/:namespace/:topic/inactiveTopicPolicies|operation/setInactiveTopicPolicies?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_setInactiveTopicPolicies?summary=inactive)
 
 </TabItem>
 <TabItem value="Java">
@@ -1164,7 +1164,7 @@ pulsar-admin topics remove-inactive-topic-policies my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic/inactiveTopicPolicies|operation/removeInactiveTopicPolicies?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_removeInactiveTopicPolicies)
 
 </TabItem>
 <TabItem value="Java">
@@ -1198,7 +1198,7 @@ pulsar-admin topics get-offload-policies my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/topics/:tenant/:namespace/:topic/offloadPolicies|operation/getOffloadPolicies?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getOffloadPolicies)
 
 </TabItem>
 <TabItem value="Java">
@@ -1229,7 +1229,7 @@ pulsar-admin topics set-offload-policies my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/topics/:tenant/:namespace/:topic/offloadPolicies|operation/setOffloadPolicies?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_setOffloadPolicies)
 
 </TabItem>
 <TabItem value="Java">
@@ -1260,7 +1260,7 @@ pulsar-admin topics remove-offload-policies my-topic
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/topics/:tenant/:namespace/:topic/offloadPolicies|operation/removeOffloadPolicies?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_removeOffloadPolicies)
 
 </TabItem>
 <TabItem value="Java">
@@ -1309,7 +1309,7 @@ When you create a non-partitioned topic with the suffix '-partition-' followed b
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/:schema/:tenant/:namespace/:topic|operation/createNonPartitionedTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_createNonPartitionedTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1342,7 +1342,7 @@ pulsar-admin topics delete \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/:schema/:tenant/:namespace/:topic|operation/deleteTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_deleteTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1380,7 +1380,7 @@ persistent://tenant/namespace/topic2
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getList?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_getList)
 
 </TabItem>
 <TabItem value="Java">
@@ -1414,7 +1414,7 @@ pulsar-admin topics stats \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/stats|operation/getStats?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -1520,7 +1520,7 @@ pulsar-admin topics stats-internal \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/internalStats|operation/getInternalStats?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_getInternalStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -1574,7 +1574,7 @@ If a non-partitioned topic with the suffix '-partition-' followed by a numeric v
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/:schema/:tenant/:namespace/:topic/partitions|operation/createPartitionedTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_createPartitionedTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1610,7 +1610,7 @@ pulsar-admin topics create-missed-partitions \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/:schema/:tenant/:namespace/:topic|operation/createMissedPartitions?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_createMissedPartitions)
 
 </TabItem>
 <TabItem value="Java">
@@ -1658,7 +1658,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/partitions|operation/getPartitionedMetadata?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_getPartitionedMetadata)
 
 </TabItem>
 <TabItem value="Java">
@@ -1696,7 +1696,7 @@ pulsar-admin topics update-partitioned-topic \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/:schema/:tenant/:cluster/:namespace/:destination/partitions|operation/updatePartitionedTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_updatePartitionedTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1727,7 +1727,7 @@ pulsar-admin topics delete-partitioned-topic \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/:schema/:topic/:namespace/:destination/partitions|operation/deletePartitionedTopic?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_deletePartitionedTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1765,7 +1765,7 @@ persistent://tenant/namespace/topic2
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace|operation/getPartitionedTopicList?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getPartitionedTopicList)
 
 </TabItem>
 <TabItem value="Java">
@@ -1798,7 +1798,7 @@ pulsar-admin topics partitioned-stats \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/partitioned-stats|operation/getPartitionedStats?version=@pulsar:version_number@}
+[](swagger:/admin/v2/NonPersistentTopics_getPartitionedStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -1926,7 +1926,7 @@ pulsar-admin topics partitioned-stats-internal \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/partitioned-internalStats|operation/getPartitionedInternalStats?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getPartitionedStatsInternal)
 
 </TabItem>
 <TabItem value="Java">
@@ -1965,7 +1965,7 @@ pulsar-admin topics create-subscription \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|PUT|/admin/v2/persistent/:tenant/:namespace/:topic/subscription/:subscription|operation/createSubscriptions?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_createSubscription)
 
 </TabItem>
 <TabItem value="Java">
@@ -2005,7 +2005,7 @@ my-subscription
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/subscriptions|operation/getSubscriptions?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_getSubscriptions)
 
 </TabItem>
 <TabItem value="Java">
@@ -2040,7 +2040,7 @@ pulsar-admin topics unsubscribe \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/:topic/subscription/:subscription|operation/deleteSubscription?version=@pulsar:version_number@}
+[](swagger:/admin/v2/PersistentTopics_deleteSubscription)
 
 </TabItem>
 <TabItem value="Java">

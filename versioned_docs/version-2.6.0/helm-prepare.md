@@ -49,7 +49,7 @@ The following table describes all variables.
 | ------------ | --------------- | ----------------- |
 | PROJECT      | ID of your GCP project | No default value. It requires to be set. |
 | CLUSTER_NAME | Name of the GKE cluster | `pulsar-dev` |
-| CONFDIR | Configuration directory to store Kubernetes configuration | ${HOME}/.config/streamnative |
+| CONFDIR | Configuration directory to store Kubernetes configuration | \$\{HOME\}/.config/streamnative |
 | INT_NETWORK | IP space to use within this cluster | `default` |
 | LOCAL_SSD_COUNT | Number of local SSD counts | 4 |
 | MACHINE_TYPE | Type of machine to use for nodes | `n1-standard-4` |

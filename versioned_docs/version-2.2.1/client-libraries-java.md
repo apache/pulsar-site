@@ -140,7 +140,7 @@ stringProducer.send("My message");
 >
 > Close operations can also be asynchronous:
 
-> ```java
+>```java
 >
 > producer.closeAsync()
 >    .thenRun(() -> System.out.println("Producer closed"));
@@ -150,12 +150,12 @@ stringProducer.send("My message");
 >    });
 >
 >
-> ```
+>```
 
 
 ### Configuring producers
 
-If you instantiate a `Producer` object specifying only a topic name, as in the example above, the producer will use the default configuration. To use a non-default configuration, there's a variety of configurable parameters that you can set. For a full listing, see the Javadoc for the {@inject javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder} class. Here's an example:
+If you instantiate a `Producer` object specifying only a topic name, as in the example above, the producer will use the default configuration. To use a non-default configuration, there's a variety of configurable parameters that you can set. For a full listing, see the Javadoc for the {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder} class. Here's an example:
 
 ```java
 
@@ -186,7 +186,7 @@ producer.sendAsync("my-async-message".getBytes()).thenAccept(msgId -> {
 
 ```
 
-As you can see from the example above, async send operations return a {@inject javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+As you can see from the example above, async send operations return a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId} wrapped in a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Configuring messages
 
@@ -266,7 +266,7 @@ CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
 
 ```
 
-Async receive operations return a {@inject javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+Async receive operations return a {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
 ### Multi-topic subscriptions
 
@@ -348,7 +348,7 @@ consumerBuilder
 
 ## Reader interface {#readers}
 
-With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic, reading all messages from a specified message onward. The Pulsar API for Java enables you to create  {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic, a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}, and {@inject javadoc:ReaderConfiguration:/client/org/apache/pulsar/client/api/ReaderConfiguration}.
+With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic, reading all messages from a specified message onward. The Pulsar API for Java enables you to create  {@inject: javadoc:Reader:/client/org/apache/pulsar/client/api/Reader} objects by specifying a topic, a {@inject: javadoc:MessageId:/client/org/apache/pulsar/client/api/MessageId}, and {@inject: javadoc:ReaderConfiguration:/client/org/apache/pulsar/client/api/ReaderConfiguration}.
 
 Here's an example:
 
