@@ -4,7 +4,7 @@
 * Avoid copying OpSendMsg when sending messages by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/308
 * Avoid calling serializeSingleMessageInBatchWithPayload each time a message is added by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/309
 * Avoid double attempt at reconnecting by @merlimat in https://github.com/apache/pulsar-client-cpp/pull/310
-* Fix the visibility compilation error for GCC <= 7 by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/312
+* Fix the visibility compilation error for GCC &lt;= 7 by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/312
 * [fix] Add the curl wrapper to avoid inconsistent curl options by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/313
 * Fix broken cpp-build-windows workflow by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/316
 * Fix broken wireshark build workflow on macOS by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/318

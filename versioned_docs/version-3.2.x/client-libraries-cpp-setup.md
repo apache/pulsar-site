@@ -5,6 +5,11 @@ sidebar_label: "Set up"
 description: Learn how to set up C++ client library in Pulsar.
 ---
 
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
+
 To set up C++ client library in Pulsar, complete the following steps.
 
 ## Step 1: Install C++ client library
@@ -30,7 +35,7 @@ brew install libpulsar
    wget @pulsar:deb:client@
    ```
 
-   This package contains shared libraries `libpulsar.so` and `libpulsarnossl.so`.
+   This package contains shared library `libpulsar.so`.
 
    </TabItem>
    <TabItem value="client-devel">
@@ -63,7 +68,7 @@ Now, you can see Pulsar C++ client libraries installed under the `/usr/lib` dire
    wget @pulsar:dist_rpm:client@
    ```
 
-   This package contains shared libraries: `libpulsar.so` and `libpulsarnossl.so`.
+   This package contains shared library `libpulsar.so`.
 
    </TabItem>
    <TabItem value="client-debuginfo">

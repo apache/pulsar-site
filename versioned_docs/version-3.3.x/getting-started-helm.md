@@ -11,9 +11,9 @@ For deploying a Pulsar cluster for production usage, read the documentation on [
 
 ## Prerequisite
 
-- Kubernetes server 1.14.0+
-- kubectl 1.14.0+
-- Helm 3.0+
+- Kubernetes server 1.21.0+
+- kubectl 1.21.0+
+- Helm 3.10+
 
 :::tip
 
@@ -56,7 +56,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 1. Add Pulsar charts repo.
 
    ```bash
-   helm repo add apache https://pulsar.apache.org/charts
+   helm repo add pulsar https://pulsar.apache.org/charts
    ```
 
    ```bash

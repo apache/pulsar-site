@@ -619,7 +619,7 @@ When a new consumer is connected and thus added to the list of connected consume
 
 ##### Auto-split Hash Range
 
-The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped into a single region in this range, so all mapped regions cover the entire range, and no regions overlap. A consumer is selected for a given key by running a modulo operation on the message hash by the range size (65,536). The number received ( 0 <= i < 65,536) is contained within a single region. The consumer mapped to that region is the one selected.
+The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped into a single region in this range, so all mapped regions cover the entire range, and no regions overlap. A consumer is selected for a given key by running a modulo operation on the message hash by the range size (65,536). The number received ( 0 &lt;= i < 65,536) is contained within a single region. The consumer mapped to that region is the one selected.
 
 Example:
 
@@ -716,7 +716,7 @@ When a consumer is added, we add 100 marking points to the circle as explained b
 
 ##### Sticky
 
-The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped to a multiple regions in this range and there is no overlap between regions. The consumer is selected by running a modulo operation on the message hash by the range size (65,536), the number received (0 <= i < 65,536), is contained within a single region. The consumer mapped to the region is the one selected.
+The algorithm assumes there is a range of numbers between 0 to 2^16 (65,536). Each consumer is mapped to multiple regions in this range and there is no overlap between regions. The consumer is selected by running a modulo operation on the message hash by the range size (65,536), the number received (0 &lt;= i < 65,536), is contained within a single region. The consumer mapped to the region is the one selected.
 In this algorithm you have full control. Every newly added consumer specifies the ranges it wishes to be mapped to by using Consumer API. When the consumer object is constructed, you can specify the list of ranges. It's your responsibility to make sure there are no overlaps and all the range is covered by regions.
 
 Example:
@@ -1031,13 +1031,13 @@ The following table outlines the available system topics for each specific names
 
 | Namespace | TopicName | Domain | Count | Usage |
 |-----------|-----------|--------|-------|-------|
-| pulsar/system | `transaction_coordinator_assign_${id}` | Persistent | Default 16 | Transaction coordinator |
-| pulsar/system | `__transaction_log_${tc_id}` | Persistent | Default 16 | Transaction log |
+| pulsar/system | `transaction_coordinator_assign_\${id}` | Persistent | Default 16 | Transaction coordinator |
+| pulsar/system | `__transaction_log_\${tc_id}` | Persistent | Default 16 | Transaction log |
 | pulsar/system | `resource-usage` | Non-persistent | Default 4 | Resource group service |
 | host/port | `heartbeat` | Persistent | 1 | Heartbeat detection |
 | User-defined-ns | [`__change_events`](concepts-multi-tenancy.md#namespace-change-events-and-topic-level-policies) | Persistent | Default 4 | Topic events |
 | User-defined-ns | `__transaction_buffer_snapshot` | Persistent | One per namespace | Transaction buffer snapshots |
-| User-defined-ns | `${topicName}__transaction_pending_ack` | Persistent | One per every topic subscription acknowledged with transactions | Acknowledgments with transactions |
+| User-defined-ns | `\${topicName}__transaction_pending_ack` | Persistent | One per every topic subscription acknowledged with transactions | Acknowledgments with transactions |
 
 :::note
 

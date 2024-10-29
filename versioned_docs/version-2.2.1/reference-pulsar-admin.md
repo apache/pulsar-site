@@ -2106,7 +2106,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-n`, `--namespace`|The namespace||
 
 
@@ -2127,7 +2127,7 @@ Options
 |----|---|---|
 |`-bi`, `--bandwidthIn`|The expected inbound bandwidth (in bytes/second)|0|
 |`-bo`, `--bandwidthOut`|Expected outbound bandwidth (in bytes/second)0|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-d`, `--dynamic`|Allow to be dynamically re-calculated (or not)|false|
 |`-mem`, `--memory`|Expectred memory usage (in megabytes)|0|
 |`-mi`, `--msgRateIn`|Expected incoming messages per second|0|
@@ -2150,7 +2150,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-n`, `--namespace`|The namespace||
 
 

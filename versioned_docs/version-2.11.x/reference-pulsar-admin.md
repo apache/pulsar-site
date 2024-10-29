@@ -1425,7 +1425,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 
 ### `split-bundle`
 Split a namespace-bundle from the current serving broker
@@ -1440,7 +1440,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 |`-u`, `--unload`|Unload newly split bundles after splitting old bundle|false|
 
 ### `set-dispatch-rate`
@@ -1559,7 +1559,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 |`-force`, `--force`|Whether to force a clear backlog without prompt|false|
 |`-s`, `--sub`|The subscription name||
 
@@ -1577,7 +1577,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|{start-boundary}_{end-boundary} (e.g. 0x00000000_0xffffffff)||
+|`-b`, `--bundle`|\{start-boundary\}_\{end-boundary\} (e.g. 0x00000000_0xffffffff)||
 |`-s`, `--sub`|The subscription name||
 
 ### `set-encryption-required`
@@ -2899,7 +2899,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-n`, `--namespace`|The namespace||
 
 
@@ -2918,7 +2918,7 @@ Options
 |----|---|---|
 |`-bi`, `--bandwidthIn`|The expected inbound bandwidth (in bytes/second)|0|
 |`-bo`, `--bandwidthOut`|Expected outbound bandwidth (in bytes/second)0|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-d`, `--dynamic`|Allow to be dynamically re-calculated (or not)|false|
 |`-mem`, `--memory`|Expectred memory usage (in megabytes)|0|
 |`-mi`, `--msgRateIn`|Expected incoming messages per second|0|
@@ -2939,7 +2939,7 @@ Options
 
 |Flag|Description|Default|
 |----|---|---|
-|`-b`, `--bundle`|A bundle of the form {start-boundary}_{end_boundary}. This must be specified together with -n/--namespace.||
+|`-b`, `--bundle`|A bundle of the form \{start-boundary\}_\{end_boundary\}. This must be specified together with -n/--namespace.||
 |`-n`, `--namespace`|The namespace||
 
 

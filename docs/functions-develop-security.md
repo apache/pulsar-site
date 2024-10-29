@@ -35,7 +35,7 @@ You can also implement your own `SecretsProviderConfigurator` if you want to use
 
 :::note
 
-Currently, only Java and Python runtime support `SecretsProvider`. The Java and Python Runtime have the following two providers:
+The Java, Python and Go Runtimes have the following two providers:
 - ClearTextSecretsProvider (default for `DefaultSecretsProviderConfigurator`)
 - EnvironmentBasedSecretsProvider (default for `KubernetesSecretsProviderConfigurator`)
 
@@ -48,7 +48,7 @@ Once `SecretsProviderConfigurator` is set, you can get the secret using the [`Co
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
 ```java
@@ -88,6 +88,26 @@ class GetSecretValueFunction(Function):
             logger.warn('No secret with key {0} '.format(input))
         else:
             logger.info("The secret {0} has value {1}".format(input, secret_value))
+```
+
+</TabItem>
+<TabItem value="Go">
+
+```go
+func secretLoggerFunc(ctx context.Context, input []byte) {
+    fc, ok := pf.FromContext(ctx)
+    if !ok {
+        logutil.Fatal("Function context is not defined")
+    }
+
+    secretValue := fc.GetSecretValue(string(input))
+
+    if secretValue == nil {
+        logutil.Warnf("No secret with key %s", input)
+    } else {
+        logutil.Infof("The secret %s has value %s", input, secretValue)
+    }
+}
 ```
 
 </TabItem>
