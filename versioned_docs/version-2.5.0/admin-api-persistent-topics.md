@@ -712,7 +712,7 @@ pulsar-admin topics last-message-id topic-name
 ```
 
 #### REST API
-{% endpoint Get /admin/v2/:schema/:tenant/:namespace/:topic/lastMessageId %}
+{@inject: endpoint|GET|/admin/v2/:schema/:tenant/:namespace/:topic/lastMessageId}
 
 #### Java
 
