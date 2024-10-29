@@ -194,7 +194,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/registerSource?version=@pulsar:version_number@}
+Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_registerSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -279,7 +279,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/:tenant/:namespace/:sinkName|operation/registerSink?version=@pulsar:version_number@}
+Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_registerSink)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -370,11 +370,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Start **all** source connectors.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/start|operation/startSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_startSource?summary=all)
 
 * Start a **specified** source connector.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/:instanceId/start|operation/startSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_startSource?summary=!all)
 
 </TabItem>
 
@@ -405,11 +405,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Start **all** sink connectors.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkName/start|operation/startSink?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_startSink?summary=all)
 
 * Start a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/:tenant/:namespace/:sourceName/:instanceId/start|operation/startSink?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_startSink?summary=!all)
 
 </TabItem>
 
@@ -511,7 +511,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/getSourceInfo?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_getSourceInfo)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -616,7 +616,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sinks/:tenant/:namespace/:sinkName|operation/getSinkInfo?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_getSinkInfo)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -718,7 +718,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sources/:tenant/:namespace|operation/listSources?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_listSources)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -771,7 +771,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sinks/:tenant/:namespace|operation/listSinks?version=@pulsar:version_number@}
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_listSinks)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -830,11 +830,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Get the current status of **all** source connectors.
 
-  Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sources/:tenant/:namespace/:sourceName/status|operation/getSourceStatus?version=@pulsar:version_number@}
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_getSourceStatus)
 
 * Gets the current status of a **specified** source connector.
 
-  Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sources/:tenant/:namespace/:sourceName/:instanceId/status|operation/getSourceStatus?version=@pulsar:version_number@}
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_getSourceStatus)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -920,11 +920,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Get the current status of **all** sink connectors.
 
-  Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sinks/:tenant/:namespace/:sinkName/status|operation/getSinkStatus?version=@pulsar:version_number@}
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_getSinkStatus)
 
 * Gets the current status of a **specified** sink connector.
 
-  Send a `GET` request to this endpoint: {@inject: endpoint|GET|/admin/v3/sinks/:tenant/:namespace/:sourceName/:instanceId/status|operation/getSinkInstanceStatus?version=@pulsar:version_number@}
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_getSinkInstanceStatus)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1014,7 +1014,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/updateSource?version=@pulsar:version_number@}
+Send a `PUT` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_updateSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1103,7 +1103,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:tenant/:namespace/:sinkName|operation/updateSink?version=@pulsar:version_number@}
+Send a `PUT` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_updateSink)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1200,11 +1200,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Stop **all** source connectors.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/stopSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_stopSource?summary=all)
 
 * Stop a **specified** source connector.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/:instanceId|operation/stopSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_stopSource?summary=!all)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1290,11 +1290,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Stop **all** sink connectors.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/:tenant/:namespace/:sinkName/stop|operation/stopSink?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_stopSink?summary=all)
 
 * Stop a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkeName/:instanceId/stop|operation/stopSink?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_stopSink?summary=!all)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1386,11 +1386,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Restart **all** source connectors.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/restart|operation/restartSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=all)
 
 * Restart a **specified** source connector.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sourceName/:instanceId/restart|operation/restartSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=!all)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1476,11 +1476,11 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 * Restart **all** sink connectors.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkName/restart|operation/restartSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=all)
 
 * Restart a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sources/:tenant/:namespace/:sinkName/:instanceId/restart|operation/restartSource?version=@pulsar:version_number@}
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=!all)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1572,7 +1572,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 Delete al Pulsar source connector.
 
-Send a `DELETE` request to this endpoint: {@inject: endpoint|DELETE|/admin/v3/sources/:tenant/:namespace/:sourceName|operation/deregisterSource?version=@pulsar:version_number@}
+Send a `DELETE` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_deregisterSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1634,7 +1634,7 @@ For the latest and complete information, see [Pulsar admin docs](pathname:///ref
 
 Delete a sink connector.
 
-Send a `DELETE` request to this endpoint: {@inject: endpoint|DELETE|/admin/v3/sinks/:tenant/:namespace/:sinkName|operation/deregisterSink?version=@pulsar:version_number@}
+Send a `DELETE` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_deregisterSink)
 
 </TabItem>
 <TabItem value="Java Admin API">

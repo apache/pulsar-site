@@ -307,7 +307,7 @@ pulsar-admin namespaces set-persistence my-tenant/my-ns -e 3 -w 3 -a 3
 
 #### REST API
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/setPersistence?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_setPersistence)
 
 #### Java
 
@@ -345,7 +345,7 @@ pulsar-admin namespaces get-persistence my-tenant/my-ns
 
 #### REST API
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/persistence|operation/getPersistence?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getPersistence)
 
 #### Java
 
