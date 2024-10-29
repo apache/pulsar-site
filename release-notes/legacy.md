@@ -391,7 +391,7 @@ https://github.com/apache/pulsar/releases/tag/v2.4.0
 
  * Fixed C++ batch acks tracker to evict message from sendList array. This was causing a slowdown in
    C++ consumers [#3618](https://github.com/apache/pulsar/pull/3618)
- * Allow publishing messages >5MB with batching (when they compress to <5MB) [#3673](https://github.com/apache/pulsar/pull/3673) and [#3718](https://github.com/apache/pulsar/pull/3718)
+ * Allow publishing messages &gt;5MB with batching (when they compress to &lt;5MB) [#3673](https://github.com/apache/pulsar/pull/3673) and [#3718](https://github.com/apache/pulsar/pull/3718)
  * Use at least 8 threads in Jetty thread pool. This fixed deadlocks in Jetty requests handling [#3776](https://github.com/apache/pulsar/pull/3776)
  * Fixed Reader.HasNext() in Go client [#3764](https://github.com/apache/pulsar/pull/3764)
  * Fixed increasing consumer permits after ack dedup operation. [#3787](https://github.com/apache/pulsar/pull/3787)
@@ -704,7 +704,7 @@ There are several new features and major improvements:
    snapshot with last published message for each message key.
  * Upgraded to [Apache BookKeeper](https://bookkeeper.apache.org/) 4.7.0
  * Performance improvements &mdash; Up to 3x throughput improvements compared to Pulsar-1.22 and
-   99.9 Pct publish latencies <10ms
+   99.9 Pct publish latencies &lt;10ms
  * [Simplified terminology](http://pulsar.apache.org/docs/v2.0.0-rc1-incubating/getting-started/Pulsar-2.0/#Propertiesversustenants-gh1amh) and admin tools
    - Renamed "property" into "tenants"
    - Short topic names: `my-topic`

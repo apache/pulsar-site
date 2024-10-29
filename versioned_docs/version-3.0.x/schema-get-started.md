@@ -550,7 +550,7 @@ To declare a `JSON` schema using C++, do the following:
 </TabItem>
 <TabItem value="Python">
 
-You can declare a `JsonSchema` by passing a class that inherits from `pulsar.schema.Record` and defines the fields as class variables. This is similar to using `AvroSchema`. The only difference is to use  `JsonSchema` instead of `AvroSchema` when defining schema type, as shown below. For how to use `AvroSchema` via record, see [#method-1-record).
+You can declare a `JsonSchema` by passing a class that inherits from `pulsar.schema.Record` and defines the fields as class variables. This is similar to using `AvroSchema`. The only difference is to use  `JsonSchema` instead of `AvroSchema` when defining schema type, as shown below. For how to use `AvroSchema` via record, see (#method-1-record).
 
 ```python
 producer = client.create_producer(
@@ -577,14 +577,14 @@ type jsonExampleStruct struct {
 
 1. Add a `jsonSchemaDef` like this:
 
-   ```go
+```go
    jsonSchemaDef = "{\"type\":\"record\",\"name\":\"Example\",\"namespace\":\"test\"," +
   "\"fields\":[{\"name\":\"ID\",\"type\":\"int\"},{\"name\":\"Name\",\"type\":\"string\"}]}"
-   ```
+```
 
 2. Create a producer/consumer to send/receive messages:
 
-   ```go
+```go
    //Create producer and send message
    producer, err := client.CreateProducer(pulsar.ProducerOptions{
        Topic:  "my-topic",
@@ -606,7 +606,7 @@ type jsonExampleStruct struct {
        Type:             pulsar.Exclusive,
    })
    message, err := consumer.Receive(context.Background())
-   ```
+```
 
 </TabItem>
 </Tabs>

@@ -231,7 +231,7 @@ When you use this command, you create a new ledger on the local bookie, write a 
 
 Before you decommission a bookie, you need to check your environment and meet the following requirements.
 
-1. Ensure the state of your cluster supports decommissioning the target bookie. Check if `EnsembleSize >= Write Quorum >= Ack Quorum` is `true` with one less bookie.
+1. Ensure the state of your cluster supports decommissioning the target bookie. Check if `EnsembleSize &gt;= Write Quorum &gt;= Ack Quorum` is `true` with one less bookie.
 
 2. Ensure the target bookie is listed after using the `listbookies` command.
 
@@ -296,7 +296,7 @@ Some rules for choosing the values:
 
 Rule | Description |
 :----|:------------|
-E >= Q<sub>w</sub> >= Q<sub>a</sub>|Ensemble size must be larger or equal than write quorum size, write quorum size must be larger or equal than ack quorum size.
+E &gt;= Q<sub>w</sub> &gt;= Q<sub>a</sub>|Ensemble size must be larger or equal than write quorum size, write quorum size must be larger or equal than ack quorum size.
 Max bookie failures = Q<sub>a</sub>-1, |This rule must be fulfilled if data durability is desired in case of bookie failures. To safely tolerate at least one bookie failure at a time in the ensemble, Q<sub>a</sub> must be set to a value at least 2.
 E == Q<sub>w</sub> | Sticky reads enabled by `bookkeeperEnableStickyReads=true` aren't used unless ensemble size (E) equals write quorum (Q<sub>w</sub>) size.
 
@@ -326,7 +326,7 @@ pulsar-admin namespaces set-persistence my-tenant/my-ns -e 3 -w 3 -a 3
 <TabItem value="Java">
 
 ```java
-// The following must be true: bkEnsemble >= bkWriteQuorum >= bkAckQuorum
+// The following must be true: bkEnsemble &gt;= bkWriteQuorum &gt;= bkAckQuorum
 // Please notice that sticky reads cannot be used unless bkEnsemble == bkWriteQuorum.
 int bkEnsemble = 3;
 int bkWriteQuorum = 3;

@@ -193,7 +193,7 @@ cl2
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/replication|operation/getNamespaceReplicationClusters}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/replication|operation/getNamespaceReplicationClusters}
 
 ```
 
@@ -235,7 +235,7 @@ N/A
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/backlogQuota|operation/setBacklogQuota}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/backlogQuota|operation/setBacklogQuota}
 
 ```
 
@@ -274,7 +274,7 @@ $ pulsar-admin namespaces get-backlog-quotas test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/backlogQuotaMap|operation/getBacklogQuotaMap}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/backlogQuotaMap|operation/getBacklogQuotaMap}
 
 ```
 
@@ -308,7 +308,7 @@ N/A
 
 ```
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/{tenant}/{namespace}/backlogQuota|operation/removeBacklogQuota}
+{@inject: endpoint|DELETE|/admin/v2/namespaces/\{tenant\}/\{namespace\}/backlogQuota|operation/removeBacklogQuota}
 
 ```
 
@@ -350,7 +350,7 @@ N/A
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/persistence|operation/setPersistence}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/persistence|operation/setPersistence}
 
 ```
 
@@ -389,7 +389,7 @@ $ pulsar-admin namespaces get-persistence test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/persistence|operation/getPersistence}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/persistence|operation/getPersistence}
 
 ```
 
@@ -423,7 +423,7 @@ N/A
 
 ```
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/{tenant}/{namespace}/{bundle}/unload|operation/unloadNamespaceBundle}
+{@inject: endpoint|PUT|/admin/v2/namespaces/\{tenant\}/\{namespace\}/{bundle}/unload|operation/unloadNamespaceBundle}
 
 ```
 
@@ -457,7 +457,7 @@ N/A
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/messageTTL|operation/setNamespaceMessageTTL}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/messageTTL|operation/setNamespaceMessageTTL}
 
 ```
 
@@ -491,7 +491,7 @@ $ pulsar-admin namespaces get-message-ttl test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/messageTTL|operation/getNamespaceMessageTTL}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/messageTTL|operation/getNamespaceMessageTTL}
 
 ```
 
@@ -525,7 +525,7 @@ N/A
 
 ```
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/{tenant}/{namespace}/{bundle}/split|operation/splitNamespaceBundle}
+{@inject: endpoint|PUT|/admin/v2/namespaces/\{tenant\}/\{namespace\}/{bundle}/split|operation/splitNamespaceBundle}
 
 ```
 
@@ -559,7 +559,7 @@ N/A
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/clearBacklog|operation/clearNamespaceBacklogForSubscription}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/clearBacklog|operation/clearNamespaceBacklogForSubscription}
 
 ```
 
@@ -593,7 +593,7 @@ N/A
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/{bundle}/clearBacklog|operation/clearNamespaceBundleBacklogForSubscription}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/{bundle}/clearBacklog|operation/clearNamespaceBundleBacklogForSubscription}
 
 ```
 
@@ -627,7 +627,7 @@ N/A
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/retention|operation/setRetention}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/retention|operation/setRetention}
 
 ```
 
@@ -664,7 +664,7 @@ $ pulsar-admin namespaces get-retention test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/retention|operation/getRetention}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/retention|operation/getRetention}
 
 ```
 
@@ -705,7 +705,7 @@ $ pulsar-admin namespaces set-dispatch-rate test-tenant/ns1 \
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/dispatchRate|operation/setDispatchRate}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/dispatchRate|operation/setDispatchRate}
 
 ```
 
@@ -743,7 +743,7 @@ $ pulsar-admin namespaces get-dispatch-rate test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/dispatchRate|operation/getDispatchRate}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/dispatchRate|operation/getDispatchRate}
 
 ```
 
@@ -777,7 +777,7 @@ $ pulsar-admin namespaces set-subscription-dispatch-rate test-tenant/ns1 \
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/subscriptionDispatchRate|operation/setDispatchRate}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/subscriptionDispatchRate|operation/setDispatchRate}
 
 ```
 
@@ -815,7 +815,7 @@ $ pulsar-admin namespaces get-subscription-dispatch-rate test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/subscriptionDispatchRate|operation/getDispatchRate}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/subscriptionDispatchRate|operation/getDispatchRate}
 
 ```
 
@@ -849,7 +849,7 @@ $ pulsar-admin namespaces set-replicator-dispatch-rate test-tenant/ns1 \
 
 ```
 
-{@inject: endpoint|POST|/admin/v2/namespaces/{tenant}/{namespace}/replicatorDispatchRate|operation/setDispatchRate}
+{@inject: endpoint|POST|/admin/v2/namespaces/\{tenant\}/\{namespace\}/replicatorDispatchRate|operation/setDispatchRate}
 
 ```
 
@@ -887,7 +887,7 @@ $ pulsar-admin namespaces get-replicator-dispatch-rate test-tenant/ns1
 
 ```
 
-{@inject: endpoint|GET|/admin/v2/namespaces/{tenant}/{namespace}/replicatorDispatchRate|operation/getDispatchRate}
+{@inject: endpoint|GET|/admin/v2/namespaces/\{tenant\}/\{namespace\}/replicatorDispatchRate|operation/getDispatchRate}
 
 ```
 
@@ -919,7 +919,7 @@ $ pulsar-admin namespaces unload my-tenant/my-ns
 
 ```
 
-{@inject: endpoint|PUT|/admin/v2/namespaces/{tenant}/{namespace}/unload|operation/unloadNamespace}
+{@inject: endpoint|PUT|/admin/v2/namespaces/\{tenant\}/\{namespace\}/unload|operation/unloadNamespace}
 
 ```
 

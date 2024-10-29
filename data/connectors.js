@@ -90,12 +90,6 @@ module.exports = [
     link: 'https://hbase.apache.org/'
   },
   {
-    name: 'hdfs2',
-    longName: 'HDFS2 sink',
-    type: 'Sink',
-    link: 'https://hadoop.apache.org/'
-  },
-  {
     name: 'hdfs3',
     longName: 'HDFS3 sink',
     type: 'Sink',
