@@ -565,6 +565,68 @@ The number of permits currently available for this consumer.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
 
+### Managed Ledger Cursor metrics
+
+#### pulsar.broker.managed_ledger.persist.operation.count
+The number of acknowledgment operations on the ledger.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.managed_ledger.cursor.operation.status` - The status of the managed cursor operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.persist.mds.operation.count
+The number of acknowledgment operations in the metadata store.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.managed_ledger.cursor.operation.status` - The status of the managed cursor operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.message_range.count
+The number of non-contiguous deleted messages ranges.
+* Type: UpDownCounter
+* Unit: `{range}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.outgoing.size
+The total amount of data written to the ledger.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.outgoing.logical.size
+The total amount of data written to the ledger, not including replicas.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.incoming.size
+The total amount of data read from the ledger.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
 ### Managed Ledger Cache metrics
 
 #### pulsar.broker.managed_ledger.count
@@ -993,4 +1055,3 @@ The number of transactions handled by the persistent ack store.
   * `pulsar.transaction.pending.ack.store.operation.status` - The status of the pending acknowledgment store operation. Can be one of:
     * `failure`
     * `success`
-
