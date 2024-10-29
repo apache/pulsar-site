@@ -390,6 +390,22 @@ The number of transactions on this topic.
     * `committed`
     * `aborted`
 
+#### pulsar.broker.topic.transaction.buffer.client.operation.count
+The number of operations on the transaction buffer client.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.transaction.status` - The status of the Pulsar transaction. Can be one of:
+    * `aborted`
+    * `committed`
+  * `pulsar.transaction.buffer.client.operation.status` - The status of the Pulsar transaction buffer client operation. Can be one of:
+    * `failure`
+    * `success`
+
 #### pulsar.broker.topic.subscription.delayed.entry.count
 The total number of message batches (entries) delayed for dispatching.
 * Type: UpDownCounter
@@ -778,7 +794,6 @@ The current usage of threads in the pulsar-web executor pool.
     * `active` - Indicates the number of threads actively serving requests.
     * `current` - Indicates the total number of threads currently associated with the pool.
     * `idle` - Indicates the number of threads available to serve requests.
-      =======
 
 ### Schema Registry Metrics
 
@@ -817,4 +832,51 @@ Counter of HTTP requests processed by the rate limiting filter.
   * `pulsar.web.filter.rate_limit.result` - The result of the rate limiting operation. Can be one of:
     * `accepted`
     * `rejected`
+
+### Transaction Coordinator Metrics
+
+#### pulsar.broker.transaction.coordinator.transaction.count
+The number of transactions handled by the coordinator.
+* Type: UpDownCounter
+* Unit: `{transaction}`
+* Attributes:
+  * `pulsar.transaction.coordinator.id` - The ID of the Pulsar transaction coordinator.
+  * `pulsar.transaction.status` - The status of the Pulsar transaction. Can be one of:
+    * `aborted`
+    * `active`
+    * `created`
+    * `committed`
+    * `timeout`
+
+#### pulsar.broker.transaction.coordinator.append.log.count
+The number of transaction metadata entries appended by the coordinator.
+* Type: Counter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.transaction.coordinator.id` - The ID of the Pulsar transaction coordinator.
+  * `pulsar.transaction.status` - The status of the Pulsar transaction. Can be one of:
+    * `aborted`
+    * `active`
+    * `created`
+    * `committed`
+    * `timeout`
+
+### Transaction Pending Acknowledgment Store Metrics
+
+#### pulsar.broker.transaction.pending.ack.store.transaction.count
+The number of transactions handled by the persistent ack store.
+* Type: Counter
+* Unit: `{transaction}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription.name` - The name of the Pulsar subscription.
+  * `pulsar.transaction.status` - The Pulsar transaction status. Can be one of:
+    * `aborted`
+    * `committed`
+  * `pulsar.transaction.pending.ack.store.operation.status` - The status of the pending acknowledgment store operation. Can be one of:
+    * `failure`
+    * `success`
 
