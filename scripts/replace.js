@@ -2,7 +2,7 @@ const replace = require("replace-in-file");
 
 const semver = require("semver");
 const CWD = process.cwd();
-const siteConfig = require(`${CWD}/docusaurus.config.js`);
+const urlConfig = require("../site-baseurls.js");
 const nextDocsDir = `${CWD}/docs`;
 const docsDir = `${CWD}/versioned_docs`;
 const restApiVersions = require("../static/swagger/restApiVersions.json");
@@ -30,7 +30,7 @@ function getRealVersion(version) {
 }
 
 function downloadPageUrl() {
-  return `${siteConfig.baseUrl}download`;
+  return `${urlConfig.baseUrl}download`;
 }
 
 function binaryReleaseUrl(version) {
@@ -115,33 +115,33 @@ function clientPythonVersion(version) {
 
 function clientPythonVersionUrl(version) {
   if (version === "2.6.4") {
-    return `${siteConfig.url}/api/python/2.6.3`;
+    return `${urlConfig.siteUrl}/api/python/2.6.3`;
   }
   let v = semver.coerce(version);
   if (v.compareMain("2.8.0") < 0) {
-    return `${siteConfig.url}/api/python/${version}`;
+    return `${urlConfig.siteUrl}/api/python/${version}`;
   }
   if (v.compareMain("2.11.0") < 0) {
-    return `${siteConfig.url}/api/python/${v.major}.${v.minor}.x`;
+    return `${urlConfig.siteUrl}/api/python/${v.major}.${v.minor}.x`;
   }
   let versions = require(`${CWD}/data/release-python`);
-  return `${siteConfig.url}/api/python/${versions[0].vtag}`;
+  return `${urlConfig.siteUrl}/api/python/${versions[0].vtag}`;
 }
 
 function clientCPPVersionUrl(version) {
   let v = semver.coerce(version);
   if (v.compareMain("2.8.0") < 0) {
-    return `${siteConfig.url}/api/cpp/${version}`;
+    return `${urlConfig.siteUrl}/api/cpp/${version}`;
   }
   if (v.compareMain("2.11.0") < 0) {
-    return `${siteConfig.url}/api/cpp/${v.major}.${v.minor}.x`;
+    return `${urlConfig.siteUrl}/api/cpp/${v.major}.${v.minor}.x`;
   }
   let versions = require(`${CWD}/data/release-cpp`);
-  return `${siteConfig.url}/api/cpp/${versions[0].vtag}`;
+  return `${urlConfig.siteUrl}/api/cpp/${versions[0].vtag}`;
 }
 
 function javadocVersionUrl(version, type) {
-  return `(${siteConfig.url}/api/${type}/${version}`
+  return `(${urlConfig.siteUrl}/api/${type}/${version}`
 }
 
 function referenceVersion(version) {

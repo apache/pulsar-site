@@ -4,6 +4,11 @@ title: Set up Pulsar C++ client
 sidebar_label: "Set up"
 ---
 
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
+
 ## Install C++ client library
 
 Use one of the following methods to install a Pulsar C++ client.

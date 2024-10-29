@@ -51,7 +51,7 @@ bin/pulsar-admin ns-isolation-policy set \
 </TabItem>
 <TabItem value="REST API">
 
-[PUT /admin/v2/namespaces/{tenant}/{namespace}](pathname:///admin-rest-api/?version=@pulsar:version_number@&apiversion=v2#operation/createNamespace)
+[PUT /admin/v2/namespaces/\{tenant\}/\{namespace\}](pathname:///admin-rest-api/?version=@pulsar:version_number@&apiversion=v2#operation/createNamespace)
 
 </TabItem>
 <TabItem value="Java admin API">
@@ -102,7 +102,7 @@ bin/pulsar-admin namespaces set-bookie-affinity-group public/default \
 </TabItem>
 <TabItem value="REST API">
 
-[POST /admin/v2/namespaces/{tenant}/{namespace}/persistence/bookieAffinity](pathname:///admin-rest-api/?version=@pulsar:version_number@&apiversion=v2#operation/setBookieAffinityGroup)
+[POST /admin/v2/namespaces/\{tenant\}/\{namespace\}/persistence/bookieAffinity](pathname:///admin-rest-api/?version=@pulsar:version_number@&apiversion=v2#operation/setBookieAffinityGroup)
 
 </TabItem>
 <TabItem value="Java admin API">

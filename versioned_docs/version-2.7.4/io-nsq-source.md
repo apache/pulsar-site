@@ -18,4 +18,4 @@ The configuration of the NSQ source connector has the following properties.
 |------|----------|----------|---------|-------------|
 | `lookupds` |String| true | " " (empty string) | A comma-separated list of nsqlookupds to connect to. |
 | `topic` | String|true | " " (empty string) | The NSQ topic to transport. |
-| `channel` | String |false | pulsar-transport-{$topic} | The channel to consume from on the provided NSQ topic. |
+| `channel` | String |false | pulsar-transport-\{\$topic\} | The channel to consume from on the provided NSQ topic. |
