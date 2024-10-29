@@ -17,27 +17,55 @@ Pulsar documentation is built using [Docusaurus](https://docusaurus.io/). To pre
 
 To verify docs are built correctly before submitting a contribution, you should set up your local environment to build and display the docs locally.
 
-* Node >= 20.0.0 (latest LTS recommended)
+* Node v20 LTS (there are compatibility issues with Node v23)
 * Corepack available and enabled (`corepack enable`)
 * Although you can use Linux, macOS, or Windows to build locally the Pulsar documentation, macOS is the preferred build environment as it offers the most complete support for documentation building.
 
 Installing prerequisites with [Homebrew](https://brew.sh/) on macOS or Linux:
 
 ```shell
-brew install node
+# uninstall any existing node installation
+brew uninstall node
+# install node v20 LTS
+brew install node@20
+# link node v20
+brew link node@20
+# enable corepack
 corepack enable
 ```
 
 #### Troubleshooting Corepack installation - Homebrew installations on macOS or Linux
 
-Sometimes Homebrew has Corepack installed, but it's not available. You might need to run `brew unlink node; brew link node; corepack enable` to fix the installation.
+Docusaurus supports Node v18 LTS and v20 LTS so ensure you have one of these versions installed.
+Sometimes Homebrew has Corepack installed, but it's not available.
+
+Some commands to fix the `corepack` installation:
+
+```shell
+# delete node symlinks if they exist
+brew unlink node
+# uninstall default node version
+brew uninstall node
+# uninstall yarn
+brew uninstall yarn
+# upgrade packages
+brew upgrade
+# delete node@20 symlinks
+brew unlink node@20
+# install node v20 LTS if not already installed
+brew install node@20
+# recreate symlinks
+brew link node@20
+# enable corepack, if the command fails, remove the conflicting files from `/opt/homebrew/bin` and try again
+corepack enable
+```
+
 Please also ensure that you have upgraded Homebrew packages to the latest versions. Run `brew upgrade` to upgrade all installed packages.
 
-Don't install `yarn` separately from a package manager since it's included with `corepack`, which is bundled with `node`. If you're using Homebrew, uninstall any existing `yarn` installation with `brew uninstall yarn` to avoid conflicts.
+Don't install `yarn` separately from a package manager since it's included with `corepack`, which is bundled with `node@20`. If you're using Homebrew, uninstall any existing `yarn` installation with `brew uninstall yarn` to avoid conflicts.
 
-If `corepack enable` fails due to file conflicts, verify that no legacy `corepack` or `yarn` package is already installed. If found, remove them. Removing `corepack` on updated Homebrew installations is not recommended since it uninstalls `node`.
-
-If issues persist, run `brew unlink node; brew link node; corepack enable`. If `corepack enable` continues to fail due to conflicting files, manually remove the conflicting files from `/opt/homebrew/bin` and try again.
+If `corepack enable` fails due to file conflicts, verify that no legacy `corepack` or `yarn` package is already installed. If found, remove them. Removing `corepack` on updated Homebrew installations is not recommended since it uninstalls the `node@20` package.
+If `corepack enable` continues to fail due to conflicting files, manually remove the conflicting files from `/opt/homebrew/bin` and try again.
 
 ### Preview changes
 
