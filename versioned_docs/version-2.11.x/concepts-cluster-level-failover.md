@@ -4,6 +4,11 @@ title: Cluster-level failover
 sidebar_label: "Cluster-level failover"
 ---
 
+````mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+````
+
 This chapter describes the concept, benefits, use cases, constraints, usage, working principles, and more information about the cluster-level failover.
 
 ### Concept of cluster-level failover

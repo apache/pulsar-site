@@ -51,7 +51,7 @@ The following table lists configuration options available for the `pulsar-perf p
 
 | Option | Description | Default value|
 |----|----|----|
-| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}". | N/A |
+| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "\{"key1":"val1","key2":"val2"\}". | N/A |
 | auth_plugin | Set the authentication plugin class name. | N/A |
 | batch-max-bytes | Set the maximum number of bytes for each batch. | 4194304 |
 | batch-max-messages | Set the maximum number of messages for each batch. | 1000 |
@@ -121,7 +121,7 @@ The following table lists configuration options available for the `pulsar-perf c
 | Option | Description | Default value |
 |----|----|----|
 | acks-delay-millis | Set the acknowledgment grouping delay in milliseconds. | 100 ms |
-| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}". | N/A |
+| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "\{"key1":"val1","key2":"val2"\}". | N/A |
 | auth_plugin | Set the authentication plugin class name. | N/A |
 | auto_ack_chunk_q_full | Configure whether to automatically ack for the oldest message in receiver queue if the queue is full. | false |
 | conf-file | Set the configuration file. | N/A |

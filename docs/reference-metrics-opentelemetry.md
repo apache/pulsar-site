@@ -29,6 +29,17 @@ The number of connection create operations.
     * `success`
     * `failure`
 
+#### pulsar.broker.connection.rate_limit.count
+The number of times a connection has been rate limited.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.connection.rate_limit.operation.name` - The name of the rate limiting operation performed. Can be one of:
+    * `paused`
+    * `resumed`
+    * `throttled`
+    * `unthrottled`
+
 ### Topic Messaging metrics
 
 #### pulsar.broker.topic.subscription.count
@@ -379,6 +390,22 @@ The number of transactions on this topic.
     * `committed`
     * `aborted`
 
+#### pulsar.broker.topic.transaction.buffer.client.operation.count
+The number of operations on the transaction buffer client.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.transaction.status` - The status of the Pulsar transaction. Can be one of:
+    * `aborted`
+    * `committed`
+  * `pulsar.transaction.buffer.client.operation.status` - The status of the Pulsar transaction buffer client operation. Can be one of:
+    * `failure`
+    * `success`
+
 #### pulsar.broker.topic.subscription.delayed.entry.count
 The total number of message batches (entries) delayed for dispatching.
 * Type: UpDownCounter
@@ -538,6 +565,132 @@ The number of permits currently available for this consumer.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
 
+### Managed Ledger Cursor metrics
+
+#### pulsar.broker.managed_ledger.persist.operation.count
+The number of acknowledgment operations on the ledger.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.managed_ledger.cursor.operation.status` - The status of the managed cursor operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.persist.mds.operation.count
+The number of acknowledgment operations in the metadata store.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.managed_ledger.cursor.operation.status` - The status of the managed cursor operation. Can be one of:
+    * `success`
+    * `failure`
+
+#### pulsar.broker.managed_ledger.message_range.count
+The number of non-contiguous deleted messages ranges.
+* Type: UpDownCounter
+* Unit: `{range}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.outgoing.size
+The total amount of data written to the ledger.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.outgoing.logical.size
+The total amount of data written to the ledger, not including replicas.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.incoming.size
+The total amount of data read from the ledger.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+### Managed Ledger Cache metrics
+
+#### pulsar.broker.managed_ledger.count
+The total number of managed ledgers.
+* Type: UpDownCounter
+* Unit: `{managed_ledger}`
+
+#### pulsar.broker.managed_ledger.cache.eviction.count
+The total number of cache eviction operations.
+* Type: Counter
+* Unit: `{eviction}`
+
+#### pulsar.broker.managed_ledger.cache.entry.count
+The number of entries in the entry cache.
+* Type: UpDownCounter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.managed_ledger.cache.entry.status` - The status of the cache entry. Can be one of:
+    * `active` - Indicates the number of entries currently in the cache. Equal to the `evicted - inserted`.
+    * `inserted` - Indicates the total number of entries inserted into the cache.
+    * `evicted` - Indicates the total number of entries evicted from the cache.
+
+#### pulsar.broker.managed_ledger.cache.entry.size
+The byte amount of entries stored in the entry cache.
+* Type: UpDownCounter
+* Unit: `{By}`
+
+#### pulsar.broker.managed_ledger.cache.operation.count
+The number of cache operations.
+* Type: Counter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.managed_ledger.cache.operation.status` - The cache operation result. Can be one of:
+    * `hit` - Indicates a successful cache lookup operation.
+    * `miss` - Indicates a failed cache lookup operation.
+
+#### pulsar.broker.managed_ledger.cache.operation.size
+The byte amount of data retrieved from cache operations.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.managed_ledger.cache.operation.status` - The cache operation result. Can be one of:
+    * `hit` - Indicates a successful cache lookup operation.
+    * `miss` - Indicates a failed cache lookup operation.
+
+#### pulsar.broker.managed_ledger.cache.pool.allocation.active.count
+The number of currently active allocations in the direct arena.
+* Type: UpDownCounter
+* Unit: `{allocation}`
+* Attributes:
+  * `pulsar.managed_ledger.pool.arena.type` - The arena type. Can be one of:
+    * `small`
+    * `normal`
+    * `huge`
+
+#### pulsar.broker.managed_ledger.cache.pool.allocation.size
+The memory allocated in the direct arena.
+* Type: UpDownCounter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.managed_ledger.pool.chunk.allocation.type` - The chunk allocation type. Can be one of:
+    * `allocated`
+    * `used`
+
 ### Producer metrics
 
 #### pulsar.broker.producer.message.incoming.count
@@ -669,6 +822,155 @@ The total number of mark delete operations for this ledger.
   * `pulsar.namespace` - The managed ledger namespace.
   * `pulsar.managed_ledger.name` - The name of the managed ledger.
 
+#### pulsar.broker.managed_ledger.inflight.read.limit
+Maximum number of bytes that can be retained by managed ledger data read from storage or cache.
+* Type: Counter
+* Unit: `By`
+
+#### pulsar.broker.managed_ledger.inflight.read.usage
+Estimated number of bytes retained by managed ledger data read from storage or cache.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.managed_ledger.inflight.read.usage.state` - Indicates managed ledger memory limiter usage state. Can be one of:
+    * `used`
+    * `free`
+
+### Web Executor Service metrics
+
+#### pulsar.web.executor.thread.limit
+The thread limits for the pulsar-web executor pool.
+* Type: UpDownCounter
+* Unit: `{thread}`
+* Attributes:
+  * `pulsar.web.executor.thread.limit.type` - The limit type for the thread pool.
+    * `max`
+    * `min`
+
+#### pulsar.web.executor.thread.usage
+The current usage of threads in the pulsar-web executor pool.
+* Type: UpDownCounter
+* Unit: `{thread}`
+* Attributes:
+  * `pulsar.web.executor.thread.usage.type` - The usage type for the thread pool.
+    * `active` - Indicates the number of threads actively serving requests.
+    * `current` - Indicates the total number of threads currently associated with the pool.
+    * `idle` - Indicates the number of threads available to serve requests.
+
+### Replicator metrics
+
+#### pulsar.broker.replication.message.incoming.count
+The total number of messages received from the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.outgoing.count
+The total number of messages sent to the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.incoming.size
+The total number of messages bytes received from the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.outgoing.size
+The total number of messages bytes sent to the remote cluster through this replicator.
+* Type: Counter
+* Unit: `{By}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.backlog.count
+The total number of messages in the backlog for this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.backlog.age
+The age of the oldest message in the replicator backlog.
+* Type: Gauge
+* Unit: `s`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.expired.count
+The total number of messages that expired for this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
+#### pulsar.broker.replication.message.dropped.count
+The total number of messages dropped by this replicator.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.domain` - The domain of the topic. Can be one of:
+    * `persistent`
+    * `non-persistent`
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.replication.remote.cluster.name` - The name of the remote cluster.
+
 ### Schema Registry Metrics
 
 #### pulsar.broker.request.schema_registry.duration
@@ -696,64 +998,60 @@ The number of Schema Registry compatibility check operations performed by the br
     * `compatible`
     * `incompatible`
 
-### Managed Ledger Cursor metrics
+### HTTP Request Filter Metrics
 
-#### pulsar.broker.managed_ledger.persist.operation.count
-The number of acknowledgment operations on the ledger.
+#### pulsar.web.filter.rate_limit.request.count
+Counter of HTTP requests processed by the rate limiting filter.
 * Type: Counter
-* Unit: `{operation}`
+* Unit: `{request}`
 * Attributes:
-  * `pulsar.namespace` - The topic namespace.
-  * `pulsar.managed_ledger.name` - The name of the managed ledger.
-  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
-  * `pulsar.managed_ledger.cursor.operation.status` - The status of the managed cursor operation. Can be one of:
-    * `success`
-    * `failure`
+  * `pulsar.web.filter.rate_limit.result` - The result of the rate limiting operation. Can be one of:
+    * `accepted`
+    * `rejected`
 
-#### pulsar.broker.managed_ledger.persist.mds.operation.count
-The number of acknowledgment operations in the metadata store.
-* Type: Counter
-* Unit: `{operation}`
-* Attributes:
-  * `pulsar.namespace` - The topic namespace.
-  * `pulsar.managed_ledger.name` - The name of the managed ledger.
-  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
-  * `pulsar.managed_ledger.cursor.operation.status` - The status of the managed cursor operation. Can be one of:
-    * `success`
-    * `failure`
+### Transaction Coordinator Metrics
 
-#### pulsar.broker.managed_ledger.message_range.count
-The number of non-contiguous deleted messages ranges.
+#### pulsar.broker.transaction.coordinator.transaction.count
+The number of transactions handled by the coordinator.
 * Type: UpDownCounter
-* Unit: `{range}`
+* Unit: `{transaction}`
 * Attributes:
-  * `pulsar.namespace` - The topic namespace.
-  * `pulsar.managed_ledger.name` - The name of the managed ledger.
-  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.transaction.coordinator.id` - The ID of the Pulsar transaction coordinator.
+  * `pulsar.transaction.status` - The status of the Pulsar transaction. Can be one of:
+    * `aborted`
+    * `active`
+    * `created`
+    * `committed`
+    * `timeout`
 
-#### pulsar.broker.managed_ledger.cursor.outgoing.size
-The total amount of data written to the ledger.
+#### pulsar.broker.transaction.coordinator.append.log.count
+The number of transaction metadata entries appended by the coordinator.
 * Type: Counter
-* Unit: `{By}`
+* Unit: `{entry}`
 * Attributes:
-  * `pulsar.namespace` - The topic namespace.
-  * `pulsar.managed_ledger.name` - The name of the managed ledger.
-  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.transaction.coordinator.id` - The ID of the Pulsar transaction coordinator.
+  * `pulsar.transaction.status` - The status of the Pulsar transaction. Can be one of:
+    * `aborted`
+    * `active`
+    * `created`
+    * `committed`
+    * `timeout`
 
-#### pulsar.broker.managed_ledger.cursor.outgoing.logical.size
-The total amount of data written to the ledger, not including replicas.
-* Type: Counter
-* Unit: `{By}`
-* Attributes:
-  * `pulsar.namespace` - The topic namespace.
-  * `pulsar.managed_ledger.name` - The name of the managed ledger.
-  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+### Transaction Pending Acknowledgment Store Metrics
 
-#### pulsar.broker.managed_ledger.cursor.incoming.size
-The total amount of data read from the ledger.
+#### pulsar.broker.transaction.pending.ack.store.transaction.count
+The number of transactions handled by the persistent ack store.
 * Type: Counter
-* Unit: `{By}`
+* Unit: `{transaction}`
 * Attributes:
+  * `pulsar.tenant` - The topic tenant.
   * `pulsar.namespace` - The topic namespace.
-  * `pulsar.managed_ledger.name` - The name of the managed ledger.
-  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription.name` - The name of the Pulsar subscription.
+  * `pulsar.transaction.status` - The Pulsar transaction status. Can be one of:
+    * `aborted`
+    * `committed`
+  * `pulsar.transaction.pending.ack.store.operation.status` - The status of the pending acknowledgment store operation. Can be one of:
+    * `failure`
+    * `success`

@@ -1,0 +1,37 @@
+---
+id: client-java-4.0.0
+title: Client Java 4.0.0
+sidebar_label: Client Java 4.0.0
+---
+
+- [cleanup][client] Remove unneeded sync scope in TransactionImpl ([#22932](https://github.com/apache/pulsar/pull/22932))
+- [fix] DLQ to handle bytes key properly ([#23172](https://github.com/apache/pulsar/pull/23172))
+- [fix][client] Add more info while throwing reader creation exception ([#23401](https://github.com/apache/pulsar/pull/23401))
+- [fix][client] Copy orderingKey to retry letter topic and DLQ messages and fix bug in copying ([#23182](https://github.com/apache/pulsar/pull/23182))
+- [fix][client] Create the retry producer async ([#23157](https://github.com/apache/pulsar/pull/23157))
+- [fix][client] Fix ReaderBuilder doest not give illegalArgument on connection failure retry ([#22639](https://github.com/apache/pulsar/pull/22639))
+- [fix][client] Fix broker/Client CPU reaching 100% during retriable connection failure ([#23251](https://github.com/apache/pulsar/pull/23251))
+- [fix][client] Fix client handle unknown exception during message-decryption and apply decryption action accordingly ([#23256](https://github.com/apache/pulsar/pull/23256))
+- [fix][client] Fix client to handle permits for discarded and failed decrypt batch-message ([#23068](https://github.com/apache/pulsar/pull/23068))
+- [fix][client] Fix concurrent lookup with properties might have different results ([#23260](https://github.com/apache/pulsar/pull/23260))
+- [fix][client] Fix failover consumer-listener stuck with cumulative ack and epoch time ([#23345](https://github.com/apache/pulsar/pull/23345))
+- [fix][client] Fix for early hit `beforeConsume` for MultiTopicConsumer ([#23141](https://github.com/apache/pulsar/pull/23141))
+- [fix][client] Fix negative acknowledgement by messageId ([#23060](https://github.com/apache/pulsar/pull/23060))
+- [fix][client] Fix orphan consumer when reconnection and closing are concurrency executing ([#22958](https://github.com/apache/pulsar/pull/22958))
+- [fix][client] Fix pattern consumer create crash if a part of partitions of a topic have been deleted ([#22854](https://github.com/apache/pulsar/pull/22854))
+- [fix][client] Fix resource leak in Pulsar Client since HttpLookupService doesn't get closed ([#22858](https://github.com/apache/pulsar/pull/22858))
+- [fix][client] Fix the javadoc for ConsumerBuilder.isAckReceiptEnabled ([#23452](https://github.com/apache/pulsar/pull/23452))
+- [fix][client] Fix timeout handling in Pulsar Admin client ([#23128](https://github.com/apache/pulsar/pull/23128))
+- [fix][client] PIP-344 Do not create partitioned metadata when calling pulsarClient.getPartitionsForTopic(topicName) ([#22206](https://github.com/apache/pulsar/pull/22206))
+- [fix][client] TransactionCoordinatorClient support retry ([#23081](https://github.com/apache/pulsar/pull/23081))
+- [fix][client] the nullValue in msgMetadata should be true by default ([#22372](https://github.com/apache/pulsar/pull/22372))
+- [improve][client] Add exception handle for client send error ([#23038](https://github.com/apache/pulsar/pull/23038))
+- [improve][client] Add log when can't add message to the container ([#21924](https://github.com/apache/pulsar/pull/21924))
+- [improve][client] Add maxConnectionsPerHost and connectionMaxIdleSeconds to PulsarAdminBuilder ([#22541](https://github.com/apache/pulsar/pull/22541))
+- [improve][client] Deprecate `MessageIdUtils.getOffset` and `MessageIdUtils.getMessageId` ([#22747](https://github.com/apache/pulsar/pull/22747))
+- [improve][client] Don't print info logs for each schema loaded by client ([#23206](https://github.com/apache/pulsar/pull/23206))
+- [improve][client] Increase default Java client connectionMaxIdleSeconds to 60 seconds ([#23430](https://github.com/apache/pulsar/pull/23430))
+- [improve][client] PIP-344 support feature flag supportsGetPartitionedMetadataWithoutAutoCreation ([#22773](https://github.com/apache/pulsar/pull/22773))
+- [improve][client] improve the class GetTopicsResult ([#22766](https://github.com/apache/pulsar/pull/22766))
+- [improve][client] Add new ServiceUrlProvider implementation: SameAuthParamsAutoClusterFailover ([#23129](https://github.com/apache/pulsar/pull/23129))
+- [improve][client] PIP-359:Support custom message listener executor for specific subscription ([#22861](https://github.com/apache/pulsar/pull/22861))

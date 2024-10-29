@@ -372,7 +372,7 @@ Options
 
 |Flag|Description|Default|
 |---|---|---|
-|`--auth-params`|Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{\"key1\":\"val1\",\"key2\":\"val2\"}"|{"saslJaasClientSectionName":"PulsarClient", "serverType":"broker"}|
+|`--auth-params`|Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "\{\"key1\":\"val1\",\"key2\":\"val2\"\}"|\{"saslJaasClientSectionName":"PulsarClient", "serverType":"broker"\}|
 |`--auth-plugin`|Authentication plugin class name|org.apache.pulsar.client.impl.auth.AuthenticationSasl|
 |`--url`|Broker URL to which to connect|pulsar://localhost:6650/ <br /> ws://localhost:8080 |
 |`-h`, `--help`|Show this help

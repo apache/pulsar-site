@@ -34,6 +34,14 @@
                 "smallCacheSize": {
                     "format": "int32",
                     "type": "integer"
+                },
+                "usedDirectMemory": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "usedHeapMemory": {
+                    "format": "int64",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -399,6 +407,14 @@
                     "description": "TLS private key file for internal client, used by the internal client to authenticate with Pulsar brokers",
                     "type": "string"
                 },
+                "brokerClientSslFactoryPlugin": {
+                    "description": "SSL Factory plugin used by internal client to generate the SSL Context and Engine",
+                    "type": "string"
+                },
+                "brokerClientSslFactoryPluginParams": {
+                    "description": "Parameters used by the internal client's SSL factory plugin to generate the SSL Context and Engine",
+                    "type": "string"
+                },
                 "brokerClientTlsEnabled": {
                     "description": "Enable TLS when talking with other brokers in the same cluster (admin operation) or different clusters (replication)",
                     "type": "boolean"
@@ -455,8 +471,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "type": "array",
-                    "uniqueItems": true
+                    "type": "array"
                 },
                 "proxyProtocol": {
                     "description": "protocol to decide type of proxy routing eg: SNI-routing",
@@ -694,6 +709,24 @@
             },
             "type": "object"
         },
+        "CompletableFutureSchemaMetadata": {
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "completedExceptionally": {
+                    "type": "boolean"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "numberOfDependents": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "CompletableFutureSchemaVersion": {
             "properties": {
                 "cancelled": {
@@ -788,6 +821,34 @@
                 },
                 "consumerName": {
                     "type": "string"
+                },
+                "drainingHashes": {
+                    "items": {
+                        "$ref": "#/definitions/DrainingHash"
+                    },
+                    "type": "array"
+                },
+                "drainingHashesClearedTotal": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "drainingHashesUnackedMessages": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "keyHashRangeArrays": {
+                    "items": {
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "type": "array"
                 },
                 "keyHashRanges": {
                     "items": {
@@ -1015,6 +1076,23 @@
                 },
                 "relativeToPublishRate": {
                     "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "DrainingHash": {
+            "properties": {
+                "blockedAttempts": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "hash": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "unackMsgs": {
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -1800,6 +1878,16 @@
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "unload_scope": {
+                    "description": "The type of unload to perform while applying the new isolation policy.",
+                    "enum": [
+                        "all_matching",
+                        "none",
+                        "changed"
+                    ],
+                    "example": "'changed' (default) for unloading only the namespaces whose placement is actually changing. 'all_matching' for unloading all matching namespaces. 'none' for not unloading any namespaces.",
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -2171,6 +2259,18 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "drainingHashesClearedTotal": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "drainingHashesUnackedMessages": {
+                    "format": "int32",
+                    "type": "integer"
+                },
                 "durable": {
                     "type": "boolean"
                 },
@@ -2236,6 +2336,10 @@
                 "msgDropRate": {
                     "format": "double",
                     "type": "number"
+                },
+                "msgInReplay": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "msgOutCounter": {
                     "format": "int64",
@@ -3000,6 +3104,9 @@
                 "managedLedgerMaxMarkDeleteRate": {
                     "format": "double",
                     "type": "number"
+                },
+                "managedLedgerStorageClassName": {
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -4077,6 +4184,18 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "drainingHashesClearedTotal": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "drainingHashesCount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "drainingHashesUnackedMessages": {
+                    "format": "int32",
+                    "type": "integer"
+                },
                 "durable": {
                     "type": "boolean"
                 },
@@ -4136,6 +4255,10 @@
                     "type": "integer"
                 },
                 "msgDelayed": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "msgInReplay": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -5512,6 +5635,12 @@
                         "name": "topicVersion",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "brokerId",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "produces": [
@@ -5520,6 +5649,9 @@
                 "responses": {
                     "200": {
                         "description": "Everything is OK"
+                    },
+                    "307": {
+                        "description": "Current broker is not the target broker"
                     },
                     "403": {
                         "description": "Don't have admin permission"
@@ -6636,6 +6768,72 @@
                 "summary": "Update peer-cluster-list for a cluster.",
                 "tags": [
                     "clusters"
+                ]
+            }
+        },
+        "/namespaces/grantPermissionsOnTopics": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_grantPermissionsOnTopics",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "tenant/namespace/topic doesn't exit"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Grant new permissions to a role on multi-topics.",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/revokePermissionsOnTopics": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_revokePermissionsOnTopics",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "tenant/namespace/topic doesn't exit"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Revoke new permissions to a role on multi-topics.",
+                "tags": [
+                    "namespaces"
                 ]
             }
         },
@@ -34863,6 +35061,72 @@
                     }
                 },
                 "summary": "test the schema compatibility",
+                "tags": [
+                    "schemas"
+                ]
+            }
+        },
+        "/schemas/{tenant}/{namespace}/{topic}/metadata": {
+            "get": {
+                "description": "",
+                "operationId": "SchemasResource_getSchemaMetadata",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllVersionsSchemaResponse"
+                        }
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Client is not authorized or Don't have admin permission"
+                    },
+                    "403": {
+                        "description": "Client is not authenticated"
+                    },
+                    "404": {
+                        "description": "Tenant or Namespace or Topic doesn't exist; or Schema is not found for this topic"
+                    },
+                    "412": {
+                        "description": "Failed to find the ownership for the topic"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Get the schema metadata of a topic",
                 "tags": [
                     "schemas"
                 ]
