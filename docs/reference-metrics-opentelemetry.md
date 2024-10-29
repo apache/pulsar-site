@@ -1081,3 +1081,19 @@ The total number of expired tokens.
 The remaining time of expiring token in seconds.
 * Type: Histogram
 * Unit: `s`
+
+### Replication Subscription Metrics
+
+#### pulsar.broker.replication.subscription.snapshot.operation.count
+The number of snapshot operations attempted.
+* Type: Counter
+* Unit: `{operation}`
+
+#### pulsar.broker.replication.subscription.snapshot.operation.duration
+Time taken to complete a consistent snapshot operation across clusters.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.replication.subscription.snapshot.operation.result` - The result of the snapshot operation. Can be one of:
+    * `success`
+    * `timeout`
