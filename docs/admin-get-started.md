@@ -507,6 +507,7 @@ To manage topics using Java admin API, complete following steps.
 </TabItem>
 
 </Tabs>
+````
 
 ## Related topics
 
