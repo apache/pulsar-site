@@ -1055,3 +1055,29 @@ The number of transactions handled by the persistent ack store.
   * `pulsar.transaction.pending.ack.store.operation.status` - The status of the pending acknowledgment store operation. Can be one of:
     * `failure`
     * `success`
+
+### Authentication Metrics
+
+#### pulsar.authentication.operation.count
+The number of authentication operations.
+* Type: Counter
+* Unit: `{operation}`
+* Attributes:
+  * `pulsar.authentication.provider` - The name of the authentication provider class.
+  * `pulsar.authentication.method` - The name of the authentication method.
+  * `pulsar.authentication.result` - The authentication result. Can be one of:
+    * `success`
+    * `failure`
+  * `pulsar.authentication.error` - The authentication error, if the result is `failure`.
+
+### Token Metrics
+
+#### pulsar.authentication.token.expired.count
+The total number of expired tokens.
+* Type: Counter
+* Unit: `{token}`
+
+#### pulsar.authentication.token.expiry.duration
+The remaining time of expiring token in seconds.
+* Type: Histogram
+* Unit: `s`
