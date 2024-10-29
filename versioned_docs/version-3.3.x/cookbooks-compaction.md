@@ -128,29 +128,28 @@ compactedTopicProducer.newMessage()
 
 ## Remove compaction from a topic
 
-Since versions `2.11.4`, `3.0.3` and `3.1.0` that includes this [fix](https://github.com/apache/pulsar/pull/21745) you can remove  the subscription only with step 1 in next section.
+Since versions `2.11.4`, `3.0.3`, and `3.1.0` (with [PR 21745](https://github.com/apache/pulsar/pull/21745)), you can remove compaction by removing the `__compaction` subscription.
 
-1. Unsubscribe `__compaction` cursor
-
-```
+```shell
 bin/pulsar-admin topics unsubscribe {topic} -s __compaction
 ```
 
-Before versions `2.11.4`, `3.0.3` and `3.1.0` if you wanted to remove compaction from a topic you needed access to the bookkeeper shell to remove the compaction data, steps will be:
+Before versions `2.11.4`, `3.0.3`, and `3.1.0`, if you wanted to remove compaction from a topic, you needed access to the BookKeeper shell to remove the compaction data. The steps are:
 
-2. Get compacted ledgerId from compactedLedger of stats-internal
-```
-> bin/pulsar-admin topics stats-internal {topic}
-```
+1. Get the compacted ledgerId from the compactedLedger of stats-internal
 
-3. Delete compacted ledger
-```
-> bin/bookkeeper shell deleteledger {compacted_ledger}
+```shell
+bin/pulsar-admin topics stats-internal {topic}
 ```
 
-4. Unload topic to clean cache
-```
-> bin/pulsar-admin topics unload {topic}
+2. Delete the compacted ledger
+
+```shell
+bin/bookkeeper shell deleteledger {compacted_ledger}
 ```
 
+3. Unload the topic to clear the cache on the broker
 
+```shell
+bin/pulsar-admin topics unload {topic}
+```
