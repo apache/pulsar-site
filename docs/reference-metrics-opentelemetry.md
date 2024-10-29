@@ -794,7 +794,6 @@ The current usage of threads in the pulsar-web executor pool.
     * `active` - Indicates the number of threads actively serving requests.
     * `current` - Indicates the total number of threads currently associated with the pool.
     * `idle` - Indicates the number of threads available to serve requests.
-      =======
 
 ### Schema Registry Metrics
 
