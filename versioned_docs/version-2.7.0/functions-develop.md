@@ -841,7 +841,7 @@ import (
 )
 
 func loggerFunc(ctx context.Context, input []byte) {
-	if len(input) <= 100 {
+	if len(input) &lt;= 100 {
 		log.Infof("This input has a length of: %d", len(input))
 	} else {
 		log.Warnf("This input is getting too long! It has {%d} characters", len(input))

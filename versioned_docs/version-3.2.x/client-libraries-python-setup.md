@@ -32,7 +32,7 @@ Installation via PyPi is available for the following Python versions:
 
 | Platform                       | Supported Python versions |
 |:-------------------------------|:--------------------------|
-| macOS (>= 11.0)                | 3.7, 3.8, 3.9 and 3.10    |
+| macOS (&gt;= 11.0)                | 3.7, 3.8, 3.9 and 3.10    |
 | Linux (including Alpine Linux) | 3.7, 3.8, 3.9 and 3.10    |
 
 ## Step 2: Connect to Pulsar cluster

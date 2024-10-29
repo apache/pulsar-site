@@ -64,3 +64,28 @@ If you use [mTLS](security-tls-authentication.md) authentication, add `+ssl` in 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651
 ```
+
+## Java client Performance considerations {#java-client-performance}
+
+### Increasing the memory limit
+
+For high-throughput applications, you can increase the amount of memory with the Java client builder's [`memoryLimit` configuration option](https://pulsar.apache.org/api/client/4.0.x/org/apache/pulsar/client/api/ClientBuilder.html#memoryLimit(long,org.apache.pulsar.client.api.SizeUnit)). The default limit is 64MB which is usually too low for high-throughput applications.
+
+By default Java applications have a limit for direct memory allocations. The allocations are limited by the `-XX:MaxDirectMemorySize` JVM option. In many JVM implementations, this defaults to the maximum heap size unless explicitly set. Allocations happen outside of the Java heap.
+
+### Enabling optimized Netty direct memory buffer access
+
+The Pulsar Java client uses [Netty](https://netty.io/) under the hood and uses Netty direct buffers for data transport.
+
+Netty has a feature that allows optimized direct memory buffer access. This feature enables Netty to use low level APIs such as `sun.misc.Unsafe` for direct memory operations, which provides faster allocation and deallocation of direct buffers.
+The faster deallocation can help avoid direct memory exhaustion and `java.lang.OutOfMemoryError: Direct buffer memory` errors. These errors can occur when the Netty memory pool and memory allocator cannot release memory back to the operating system quickly enough.
+
+To enable this feature in Java clients since Java 11, you need to add the following JVM options to the application that uses the Java client:
+
+- `--add-opens java.base/java.nio=ALL-UNNAMED`
+- `--add-opens java.base/jdk.internal.misc=ALL-UNNAMED`
+
+In addition, you need to add one of the following JVM options:
+
+- `-Dorg.apache.pulsar.shade.io.netty.tryReflectionSetAccessible=true` for the default shaded Pulsar client
+- `-Dio.netty.tryReflectionSetAccessible=true` for the unshaded "original" Pulsar client

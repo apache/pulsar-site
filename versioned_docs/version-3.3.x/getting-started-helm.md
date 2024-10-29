@@ -56,7 +56,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 1. Add Pulsar charts repo.
 
    ```bash
-   helm repo add apache https://pulsar.apache.org/charts
+   helm repo add pulsar https://pulsar.apache.org/charts
    ```
 
    ```bash

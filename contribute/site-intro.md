@@ -77,7 +77,7 @@ If you're gonna to debug the reference generation process, read the [reference-d
 
 ### How to update data-driven pages?
 
-You can update it by clicking on one of the **✍️ Edit <file_name>** links below and submitting a Pull Request.
+You can update it by clicking on one of the **✍️ Edit &lt;file_name&gt;** links below and submitting a Pull Request.
 
 * **Case Studies** [/case-studies](pathname:///case-studies)
   * [✍️ Edit case-studies.ts](https://github.com/apache/pulsar-site/edit/main/data/case-studies.ts)

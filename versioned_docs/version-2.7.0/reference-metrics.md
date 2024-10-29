@@ -88,7 +88,7 @@ in the `bookkeeper.conf` configuration file.
 The broker metrics are exposed under "/metrics/" at port `8080`. You can change the port by updating `webServicePort` to a different port
 in the `broker.conf` configuration file.
 
-All the metrics exposed by a broker are labelled with `cluster=${pulsar_cluster}`. The name of Pulsar cluster is the value of `${pulsar_cluster}`, which you have configured in the `broker.conf` file.
+All the metrics exposed by a broker are labelled with `cluster=\$\{pulsar_cluster\}`. The name of Pulsar cluster is the value of `\$\{pulsar_cluster\}`, which you have configured in the `broker.conf` file.
 
 The following metrics are available for broker:
 
@@ -112,8 +112,8 @@ The following metrics are available for broker:
 
 All the namespace metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
 
 | Name | Type | Description |
 |---|---|---|
@@ -131,14 +131,14 @@ All the namespace metrics are labelled with the following labels:
 | pulsar_storage_write_rate | Gauge | The total message batches (entries) written to the storage for this namespace (message batches / second). |
 | pulsar_storage_read_rate | Gauge | The total message batches (entries) read from the storage for this namespace (message batches / second). |
 | pulsar_subscription_delayed | Gauge | The total message batches (entries) are delayed for dispatching. |
-| pulsar_storage_write_latency_le_* | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: <= 0.5ms </li><li>pulsar_storage_write_latency_le_1: <= 1ms</li><li>pulsar_storage_write_latency_le_5: <= 5ms</li><li>pulsar_storage_write_latency_le_10: <= 10ms</li><li>pulsar_storage_write_latency_le_20: <= 20ms</li><li>pulsar_storage_write_latency_le_50: <= 50ms</li><li>pulsar_storage_write_latency_le_100: <= 100ms</li><li>pulsar_storage_write_latency_le_200: <= 200ms</li><li>pulsar_storage_write_latency_le_1000: <= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul> |
-| pulsar_entry_size_le_* | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: <= 128 bytes </li><li>pulsar_entry_size_le_512: <= 512 bytes</li><li>pulsar_entry_size_le_1_kb: <= 1 KB</li><li>pulsar_entry_size_le_2_kb: <= 2 KB</li><li>pulsar_entry_size_le_4_kb: <= 4 KB</li><li>pulsar_entry_size_le_16_kb: <= 16 KB</li><li>pulsar_entry_size_le_100_kb: <= 100 KB</li><li>pulsar_entry_size_le_1_mb: <= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul> |
+| pulsar_storage_write_latency_le_* | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: &lt;= 0.5ms </li><li>pulsar_storage_write_latency_le_1: &lt;= 1ms</li><li>pulsar_storage_write_latency_le_5: &lt;= 5ms</li><li>pulsar_storage_write_latency_le_10: &lt;= 10ms</li><li>pulsar_storage_write_latency_le_20: &lt;= 20ms</li><li>pulsar_storage_write_latency_le_50: &lt;= 50ms</li><li>pulsar_storage_write_latency_le_100: &lt;= 100ms</li><li>pulsar_storage_write_latency_le_200: &lt;= 200ms</li><li>pulsar_storage_write_latency_le_1000: &lt;= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul> |
+| pulsar_entry_size_le_* | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: &lt;= 128 bytes </li><li>pulsar_entry_size_le_512: &lt;= 512 bytes</li><li>pulsar_entry_size_le_1_kb: &lt;= 1 KB</li><li>pulsar_entry_size_le_2_kb: &lt;= 2 KB</li><li>pulsar_entry_size_le_4_kb: &lt;= 4 KB</li><li>pulsar_entry_size_le_16_kb: &lt;= 16 KB</li><li>pulsar_entry_size_le_100_kb: &lt;= 100 KB</li><li>pulsar_entry_size_le_1_mb: &lt;= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul> |
 
 #### Replication metrics
 
 If a namespace is configured to be replicated among multiple Pulsar clusters, the corresponding replication metrics is also exposed when `replicationMetricsEnabled` is enabled.
 
-All the replication metrics are also labelled with `remoteCluster=${pulsar_remote_cluster}`.
+All the replication metrics are also labelled with `remoteCluster=\$\{pulsar_remote_cluster\}`.
 
 | Name | Type | Description |
 |---|---|---|
@@ -154,9 +154,9 @@ All the replication metrics are also labelled with `remoteCluster=${pulsar_remot
 
 All the topic metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you configured in `broker.conf`.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
 
 | Name | Type | Description |
 |---|---|---|
@@ -174,8 +174,8 @@ All the topic metrics are labelled with the following labels:
 | pulsar_storage_write_rate | Gauge | The total message batches (entries) written to the storage for this topic (message batches / second). |
 | pulsar_storage_read_rate | Gauge | The total message batches (entries) read from the storage for this topic (message batches / second). |
 | pulsar_subscription_delayed | Gauge | The total message batches (entries) are delayed for dispatching. |
-| pulsar_storage_write_latency_le_* | Histogram | The entry rate of a topic that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: <= 0.5ms </li><li>pulsar_storage_write_latency_le_1: <= 1ms</li><li>pulsar_storage_write_latency_le_5: <= 5ms</li><li>pulsar_storage_write_latency_le_10: <= 10ms</li><li>pulsar_storage_write_latency_le_20: <= 20ms</li><li>pulsar_storage_write_latency_le_50: <= 50ms</li><li>pulsar_storage_write_latency_le_100: <= 100ms</li><li>pulsar_storage_write_latency_le_200: <= 200ms</li><li>pulsar_storage_write_latency_le_1000: <= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul> |
-| pulsar_entry_size_le_* | Histogram | The entry rate of a topic that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: <= 128 bytes </li><li>pulsar_entry_size_le_512: <= 512 bytes</li><li>pulsar_entry_size_le_1_kb: <= 1 KB</li><li>pulsar_entry_size_le_2_kb: <= 2 KB</li><li>pulsar_entry_size_le_4_kb: <= 4 KB</li><li>pulsar_entry_size_le_16_kb: <= 16 KB</li><li>pulsar_entry_size_le_100_kb: <= 100 KB</li><li>pulsar_entry_size_le_1_mb: <= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul> |
+| pulsar_storage_write_latency_le_* | Histogram | The entry rate of a topic that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: &lt;= 0.5ms </li><li>pulsar_storage_write_latency_le_1: &lt;= 1ms</li><li>pulsar_storage_write_latency_le_5: &lt;= 5ms</li><li>pulsar_storage_write_latency_le_10: &lt;= 10ms</li><li>pulsar_storage_write_latency_le_20: &lt;= 20ms</li><li>pulsar_storage_write_latency_le_50: &lt;= 50ms</li><li>pulsar_storage_write_latency_le_100: &lt;= 100ms</li><li>pulsar_storage_write_latency_le_200: &lt;= 200ms</li><li>pulsar_storage_write_latency_le_1000: &lt;= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul> |
+| pulsar_entry_size_le_* | Histogram | The entry rate of a topic that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: &lt;= 128 bytes </li><li>pulsar_entry_size_le_512: &lt;= 512 bytes</li><li>pulsar_entry_size_le_1_kb: &lt;= 1 KB</li><li>pulsar_entry_size_le_2_kb: &lt;= 2 KB</li><li>pulsar_entry_size_le_4_kb: &lt;= 4 KB</li><li>pulsar_entry_size_le_16_kb: &lt;= 16 KB</li><li>pulsar_entry_size_le_100_kb: &lt;= 100 KB</li><li>pulsar_entry_size_le_1_mb: &lt;= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul> |
 | pulsar_in_bytes_total | Counter | The total number of bytes received for this topic |
 | pulsar_in_messages_total | Counter | The total number of messages received for this topic |
 | pulsar_out_bytes_total | Counter | The total number of bytes read from this topic |
@@ -185,7 +185,7 @@ All the topic metrics are labelled with the following labels:
 
 If a namespace that a topic belongs to is configured to be replicated among multiple Pulsar clusters, the corresponding replication metrics is also exposed when `replicationMetricsEnabled` is enabled.
 
-All the replication metrics are labelled with `remoteCluster=${pulsar_remote_cluster}`.
+All the replication metrics are labelled with `remoteCluster=\$\{pulsar_remote_cluster\}`.
 
 | Name | Type | Description |
 |---|---|---|
@@ -197,7 +197,7 @@ All the replication metrics are labelled with `remoteCluster=${pulsar_remote_clu
 
 ### ManagedLedgerCache metrics
 All the ManagedLedgerCache metrics are labelled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -218,9 +218,9 @@ All the ManagedLedgerCache metrics are labelled with the following labels:
 
 ### ManagedLedger metrics
 All the managedLedger metrics are labelled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- namespace: namespace=${pulsar_namespace}. ${pulsar_namespace} is the namespace name.
-- quantile: quantile=${quantile}. Quantile is only for `Histogram` type metric, and represents the threshold for given Buckets.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- namespace: namespace=\$\{pulsar_namespace\}. \$\{pulsar_namespace\} is the namespace name.
+- quantile: quantile=\$\{quantile\}. Quantile is only for `Histogram` type metric, and represents the threshold for given Buckets.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -246,8 +246,8 @@ All the managedLedger metrics are labelled with the following labels:
 
 ### LoadBalancing metrics
 All the loadbalancing metrics are labelled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
-- broker: broker=${broker}. ${broker} is the IP address of the broker
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
+- broker: broker=\$\{broker\}. \$\{broker\} is the IP address of the broker
 - metric: metric="loadBalancing".
 
 | Name | Type | Description |
@@ -260,7 +260,7 @@ All the loadbalancing metrics are labelled with the following labels:
 
 #### BundleUnloading metrics
 All the bundleUnloading metrics are labelled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
 - metric: metric="bundleUnloading".
 
 | Name | Type | Description |
@@ -270,7 +270,7 @@ All the bundleUnloading metrics are labelled with the following labels:
 
 #### BundleSplit metrics
 All the bundleUnloading metrics are labelled with the following labels:
-- cluster: cluster=${pulsar_cluster}. ${pulsar_cluster} is the cluster name that you have configured in the `broker.conf` file.
+- cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
 - metric: metric="bundlesSplit".
 
 | Name | Type | Description |
@@ -283,10 +283,10 @@ All the bundleUnloading metrics are labelled with the following labels:
 
 All the subscription metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
-- *subscription*: `subscription=${subscription}`. `${subscription}` is the topic subscription name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
+- *subscription*: `subscription=\$\{subscription\}`. `\$\{subscription\}` is the topic subscription name.
 
 | Name | Type | Description |
 |---|---|---|
@@ -304,12 +304,12 @@ All the subscription metrics are labelled with the following labels:
 
 All the consumer metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
-- *topic*: `topic=${pulsar_topic}`. `${pulsar_topic}` is the topic name.
-- *subscription*: `subscription=${subscription}`. `${subscription}` is the topic subscription name.
-- *consumer_name*: `consumer_name=${consumer_name}`. `${consumer_name}` is the topic consumer name.
-- *consumer_id*: `consumer_id=${consumer_id}`. `${consumer_id}` is the topic consumer id.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
+- *topic*: `topic=\$\{pulsar_topic\}`. `\$\{pulsar_topic\}` is the topic name.
+- *subscription*: `subscription=\$\{subscription\}`. `\$\{subscription\}` is the topic subscription name.
+- *consumer_name*: `consumer_name=\$\{consumer_name\}`. `\$\{consumer_name\}` is the topic consumer name.
+- *consumer_id*: `consumer_id=\$\{consumer_id\}`. `\$\{consumer_id\}` is the topic consumer id.
 
 | Name | Type | Description |
 |---|---|---|
@@ -324,7 +324,7 @@ All the consumer metrics are labelled with the following labels:
 
 All the managed ledger bookie client metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -345,7 +345,7 @@ All the managed ledger bookie client metrics are labelled with the following lab
 
 All the jetty metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 
 | Name | Type | Description |
 |---|---|---|
@@ -372,8 +372,8 @@ All the jetty metrics are labelled with the following labels:
 
 All the Pulsar Functions metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *namespace*: `namespace=${pulsar_namespace}`. `${pulsar_namespace}` is the namespace name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
 
 | Name | Type | Description |
 |---|---|---|
@@ -393,8 +393,8 @@ All the Pulsar Functions metrics are labelled with the following labels:
 
 All the proxy metrics are labelled with the following labels:
 
-- *cluster*: `cluster=${pulsar_cluster}`. `${pulsar_cluster}` is the cluster name that you have configured in the `broker.conf` file.
-- *kubernetes_pod_name*: `kubernetes_pod_name=${kubernetes_pod_name}`. `${kubernetes_pod_name}` is the Kubernetes pod name.
+- *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
+- *kubernetes_pod_name*: `kubernetes_pod_name=\$\{kubernetes_pod_name\}`. `\$\{kubernetes_pod_name\}` is the Kubernetes pod name.
 
 | Name | Type | Description |
 |---|---|---|

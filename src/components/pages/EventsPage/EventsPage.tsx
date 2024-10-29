@@ -30,9 +30,7 @@ const EventsPage: React.FC = () => {
             <ContributeDataDrivenPage />
           </section>
 
-          <div className={s.FeaturedEvent}>
-            <FeaturedEvent />
-          </div>
+          <FeaturedEvent />
         </div>
         <section>
           <form>
