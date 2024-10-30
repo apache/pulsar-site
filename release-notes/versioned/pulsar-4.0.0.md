@@ -9,6 +9,14 @@ sidebar_label: Apache Pulsar 4.0.0
 Changes in 4.0.0 release since 3.3.0 release preparation was started.
 For the complete list, check the [full changelog](https://github.com/apache/pulsar/compare/188355b...v4.0.0) and [full PR list](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+milestone%3A4.0.0+sort%3Acreated-asc).
 
+[What's New in Apache Pulsar 4.0?](https://pulsar.apache.org/blog/2024/10/24/announcing-apache-pulsar-4-0/) covers topics such as:
+* Enhanced Key_Shared subscription implementation
+* Secure Docker runtime based on Alpine Linux and Java 21
+* Enhanced Quality of Service controls for multi-tenant deployments
+* Rate limiting as a foundation for multi-tenant resource management
+* Upgrade paths from previous versions
+* Client compatibility and Importance of upgrading Java clients to address CVE-2024-47561
+
 ### PIPs accepted since 3.0.0 release
 
 #### PIPs accepted in 4.0.0 release
