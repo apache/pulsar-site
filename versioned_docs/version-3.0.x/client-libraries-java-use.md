@@ -79,7 +79,7 @@ while (true) {
 }
 ```
 
-If you don't want to block your main thread but constantly listen for new messages, consider using a `MessageListener`. The `MessageListener` uses a thread pool inside the client. You can set the number of threads for message listeners in the ClientBuilder. The `MessageListener` will use a thread pool inside the PulsarClient. You can set the number of threads to use for message listeners in the ClientBuilder.
+If you don't want to block your main thread but constantly listen for new messages, consider using a `MessageListener`. The `MessageListener` will use a thread pool inside the PulsarClient. You can set the number of threads to use for message listeners in the ClientBuilder.
 
 ```java
 MessageListener myMessageListener = (consumer, msg) -> {

@@ -21,14 +21,14 @@ sidebar_label: Pulsar DotPulsar
 
 ## Changed
 
-- MessageId.ToString() now returns a string matching that of other clients: "{LedgerId}:{EntryId}:{Partition}:{BatchIndex}"
+- MessageId.ToString() now returns a string matching that of other clients: "\{LedgerId\}:\{EntryId\}:\{Partition\}:\{BatchIndex\}"
 - A lot of methods were made into extension methods and now require a using statement for 'DotPulsar.Extensions'
     - Producer.StateChangedTo(ProducerState state, CancellationToken cancellationToken)
     - Producer.StateChangedFrom(ProducerState state, CancellationToken cancellationToken)
     - Producer.Send(byte[] data, CancellationToken cancellationToken)
-    - Producer.Send(ReadOnlyMemory\<byte\> data, CancellationToken cancellationToken)
+    - Producer.Send(ReadOnlyMemory&lt;byte&gt; data, CancellationToken cancellationToken)
     - Producer.Send(MessageMetadata metadata, byte[] data, CancellationToken cancellationToken)
-    - Producer.Send(MessageMetadata metadata, ReadOnlyMemory\<byte\> data, CancellationToken cancellationToken)
+    - Producer.Send(MessageMetadata metadata, ReadOnlyMemory&lt;byte&gt; data, CancellationToken cancellationToken)
     - Consumer.Acknowledge(Message message, CancellationToken cancellationToken)
     - Consumer.AcknowledgeCumulative(Message message, CancellationToken cancellationToken)
     - Consumer.StateChangedTo(ConsumerState state, CancellationToken cancellationToken)

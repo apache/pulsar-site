@@ -1012,6 +1012,50 @@ Default is false.
 
 **Category**: Server
 
+### brokerClientSslFactoryPlugin
+SSL Factory Plugin class used by internal client to provide SSLEngine and SSLContext objects. The default class used is DefaultSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### brokerClientSslFactoryPluginParams
+SSL Factory plugin configuration parameters used by internal client.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### sslFactoryPlugin
+SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### sslFactoryPluginParams
+SSL Factory plugin configuration parameters.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsAllowInsecureConnection
 Accept untrusted TLS certificate from client.
 

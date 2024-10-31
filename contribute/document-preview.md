@@ -17,16 +17,55 @@ Pulsar documentation is built using [Docusaurus](https://docusaurus.io/). To pre
 
 To verify docs are built correctly before submitting a contribution, you should set up your local environment to build and display the docs locally.
 
-* Node >= 20.0.0 (latest LTS recommended)
-* Corepack enabled (`corepack enable`)
+* Node v20 LTS (there are compatibility issues with Node v23)
+* Corepack available and enabled (`corepack enable`)
 * Although you can use Linux, macOS, or Windows to build locally the Pulsar documentation, macOS is the preferred build environment as it offers the most complete support for documentation building.
 
-Installing prerequisites with [homebrew](https://brew.sh/) on MacOS or Linux:
+Installing prerequisites with [Homebrew](https://brew.sh/) on macOS or Linux:
 
 ```shell
-brew install node
+# uninstall any existing node installation
+brew uninstall node
+# install node v20 LTS
+brew install node@20
+# link node v20
+brew link node@20
+# enable corepack
 corepack enable
 ```
+
+#### Troubleshooting Corepack installation - Homebrew installations on macOS or Linux
+
+Docusaurus supports Node v18 LTS and v20 LTS so ensure you have one of these versions installed.
+Sometimes Homebrew has Corepack installed, but it's not available.
+
+Some commands to fix the `corepack` installation:
+
+```shell
+# delete node symlinks if they exist
+brew unlink node
+# uninstall default node version
+brew uninstall node
+# uninstall yarn
+brew uninstall yarn
+# upgrade packages
+brew upgrade
+# delete node@20 symlinks
+brew unlink node@20
+# install node v20 LTS if not already installed
+brew install node@20
+# recreate symlinks
+brew link node@20
+# enable corepack, if the command fails, remove the conflicting files from `/opt/homebrew/bin` and try again
+corepack enable
+```
+
+Please also ensure that you have upgraded Homebrew packages to the latest versions. Run `brew upgrade` to upgrade all installed packages.
+
+Don't install `yarn` separately from a package manager since it's included with `corepack`, which is bundled with `node@20`. If you're using Homebrew, uninstall any existing `yarn` installation with `brew uninstall yarn` to avoid conflicts.
+
+If `corepack enable` fails due to file conflicts, verify that no legacy `corepack` or `yarn` package is already installed. If found, remove them. Removing `corepack` on updated Homebrew installations is not recommended since it uninstalls the `node@20` package.
+If `corepack enable` continues to fail due to conflicting files, manually remove the conflicting files from `/opt/homebrew/bin` and try again.
 
 ### Preview changes
 
@@ -50,15 +89,18 @@ Follow these steps to preview the website changes.
 2. Run the following command to preview changes:
 
    ```bash
-   # Preview changes on master
-   ./preview.sh current
+   # Preview changes on master (next version documentation)
+   ./preview.sh
 
    # preview changes on a specific version
-   ./preview.sh 2.10.x
+   ./preview.sh 4.0.x
 
    # preview changes on multiple versions
-   ./preview.sh 2.10.x 2.9.x ...
+   ./preview.sh 4.0.x 3.0.x current
    ```
+
+If you have content staleness issues, you can pass the `--clean` (or `-c`) flag to the `preview.sh` script to clean Docusaurus cache and start a fresh build.
+This runs `yarn run docusaurus clear` before starting the preview server.
 
 By default, a browser window will open at [http://localhost:3000](http://localhost:3000) to show the changes:
 

@@ -64,7 +64,7 @@ For more information on the two parameters, refer to the [`broker.conf`](referen
 
 ### Set retention policy
 
-You can set a retention policy for a namespace by specifying the namespace, a size limit and a time limit in `pulsar-admin`, REST API and Java.
+You can set a retention policy for a namespace by specifying the namespace, a size limit and a time limit in `pulsar-admin`, REST API and Java. And all the non-partitioned topics and topic partitions will apply the specified data retention policy for the namespace unless you overwrite the data retention policy for the specific topic by using topic level policies.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -119,7 +119,7 @@ pulsar-admin namespaces set-retention my-tenant/my-ns \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/retention|operation/setRetention?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_setRetention)
 
 :::note
 
@@ -167,7 +167,7 @@ pulsar-admin namespaces get-retention my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/retention|operation/getRetention?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getRetention)
 
 </TabItem>
 <TabItem value="Java">
@@ -240,7 +240,7 @@ pulsar-admin namespaces set-backlog-quota my-tenant/my-ns/my-topic \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/backlogQuota|operation/getBacklogQuotaMap?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getBacklogQuotaMap)
 
 </TabItem>
 <TabItem value="Java">
@@ -283,7 +283,7 @@ pulsar-admin namespaces get-backlog-quotas my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/backlogQuotaMap|operation/getBacklogQuotaMap?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getBacklogQuotaMap)
 
 </TabItem>
 <TabItem value="Java">
@@ -315,7 +315,7 @@ pulsar-admin namespaces remove-backlog-quota my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/backlogQuota|operation/removeBacklogQuota?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_removeBacklogQuota)
 
 </TabItem>
 <TabItem value="Java">
@@ -372,7 +372,7 @@ pulsar-admin namespaces set-message-ttl my-tenant/my-ns \
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|POST|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/setNamespaceMessageTTL?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_setNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -406,7 +406,7 @@ pulsar-admin namespaces get-message-ttl my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|GET|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/getNamespaceMessageTTL?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_getNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -439,7 +439,7 @@ pulsar-admin namespaces remove-message-ttl my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-{@inject: endpoint|DELETE|/admin/v2/namespaces/:tenant/:namespace/messageTTL|operation/removeNamespaceMessageTTL?version=@pulsar:version_number@}
+[](swagger:/admin/v2/Namespaces_removeNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">

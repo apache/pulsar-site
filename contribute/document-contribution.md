@@ -13,20 +13,27 @@ Currently, the source of documents and website (where the docs are finally publi
 
 Documentation should be up to date for all [actively supported versions](https://pulsar.apache.org/contribute/release-policy/#supported-versions).
 
+```shell
+# List all supported major.minor.x versions
+./scripts/docs-tool.sh supported_versions
+```
+
 No need to update documentation for versions that are not actively maintained unless the documentation is incorrect.
 
 To update versioned docs, go to [versioned_docs folder](https://github.com/apache/pulsar-site/tree/main/versioned_docs).
 
-For versions prior to 2.8, Pulsar releases versioned docs for each patch release. You can update the exact versioned doc.
+After committing the changes for the `docs` directory, you can use the `docs-tool` to apply the changes to the versioned docs. This tool is a wrapper around `git diff` and `patch`. If the patch is not applied correctly, you will have to manually apply the changes to the versioned docs.
 
-For versions start from 2.8, Pulsar release versioned docs for each minor release. Apart from updating the content, you should take care of adding specific instructions.
+```shell
+./scripts/docs-tool.sh apply_changes_to_versioned_docs
+```
 
-For example, if you want to add docs for an improvement introduced in 2.8.2, you can add the following instructions:
+For example, if you want to add docs for an improvement introduced in 4.0.1, you can add the following instructions:
 
 ```
 :::note
 
-This <fix / improvment> is available for 2.8.2 and later versions.
+This <fix / improvment> is available for 4.0.1 and later versions.
 
 :::
 ```

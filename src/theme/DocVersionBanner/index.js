@@ -1,22 +1,23 @@
-import React from "react";
-import clsx from "clsx";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Link from "@docusaurus/Link";
-import Translate from "@docusaurus/Translate";
+import React from 'react';
+import clsx from 'clsx';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
 import {
   useActivePlugin,
   useDocVersionSuggestions,
-} from "@docusaurus/plugin-content-docs/client";
-import { ThemeClassNames } from "@docusaurus/theme-common";
+} from '@docusaurus/plugin-content-docs/client';
+import {ThemeClassNames} from '@docusaurus/theme-common';
 import {
   useDocsPreferredVersion,
   useDocsVersion,
-} from "@docusaurus/theme-common/internal";
+} from '@docusaurus/plugin-content-docs/client';
 import BrowserOnly from "@docusaurus/BrowserOnly";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
-const _maintainedVersions = [versions[1], versions[2]];
-function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
+const _ltsVersion = '4.0.x';
+const _maintainedVersions = ['4.0.x', '3.3.x', '3.0.x'];
+function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate
       id="theme.docs.versions.unreleasedVersionLabel"
@@ -26,7 +27,7 @@ function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}
     >
-      {"This is unreleased documentation for Next."}
+      {"This is documentation for the next unreleased version of Pulsar."}
     </Translate>
   );
 }
@@ -40,7 +41,7 @@ function MaintainedVersionLabel({ siteTitle, versionMetadata }) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}
     >
-      {"This is the documentation for {versionLabel}."}
+      {"This is documentation for Pulsar {versionLabel}."}
     </Translate>
   );
 }
@@ -55,7 +56,7 @@ function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
       }}
     >
       {
-        "This is the documentation for {versionLabel}, which is no longer actively maintained."
+        "This is documentation for Pulsar {versionLabel}, which is no longer actively maintained."
       }
     </Translate>
   );
@@ -101,7 +102,7 @@ function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
         ),
       }}
     >
-      {"We recommend you use the {latestVersionLink}."}
+      {"We recommend that you use the {latestVersionLink} documentation."}
     </Translate>
   );
 }
@@ -138,8 +139,7 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
       <div className="margin-top--md">
         <LatestVersionSuggestionLabel
           versionLabel={_latestVersion}
-          // versionLabel={latestVersionSuggestion.label}
-          // to={latestVersionSuggestedDoc.path}
+          to={path}
           onClick={() => {
             savePreferredVersionName(latestVersionSuggestion.name);
             window.location.href = path;
@@ -149,20 +149,19 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
     </div>
   );
 }
-export default function DocVersionBanner({ className }) {
+export default function DocVersionBanner({className}) {
   const versionMetadata = useDocsVersion();
   return (
     <BrowserOnly>
       {() => {
-        return versionMetadata.version != _latestVersion &&
+        return versionMetadata.version !== _latestVersion &&
+          versionMetadata.version !== _ltsVersion &&
           location.pathname.startsWith("/docs") ? (
           <DocVersionBannerEnabled
             className={className}
             versionMetadata={versionMetadata}
           />
-        ) : (
-          <></>
-        );
+        ) : null;
       }}
     </BrowserOnly>
   );

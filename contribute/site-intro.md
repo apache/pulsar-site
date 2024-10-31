@@ -33,7 +33,13 @@ Besides, the site serves multiple static pages generated outside the framework, 
 The most commonly used tool is `preview.sh`. You can preview your local changes by:
 
 ```shell
-./preview.sh 2.11.x
+./preview.sh
+```
+
+If you'd like to preview the site for a specific versions, you can pass the versions as an argument:
+
+```shell
+./preview.sh 4.0.x
 ```
 
 See the [previewing content](document-preview.md) guide for more details.
@@ -77,7 +83,7 @@ If you're gonna to debug the reference generation process, read the [reference-d
 
 ### How to update data-driven pages?
 
-You can update it by clicking on one of the **✍️ Edit <file_name>** links below and submitting a Pull Request.
+You can update it by clicking on one of the **✍️ Edit &lt;file_name&gt;** links below and submitting a Pull Request.
 
 * **Case Studies** [/case-studies](pathname:///case-studies)
   * [✍️ Edit case-studies.ts](https://github.com/apache/pulsar-site/edit/main/data/case-studies.ts)
