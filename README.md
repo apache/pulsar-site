@@ -16,7 +16,20 @@ To preview the changes, run the following command ([prerequisites](https://pulsa
 
 This command starts a local web server on port 3000 and opens a browser window pointing to the website.
 
+### Updating versioned docs
+
 When your documentation changes apply to existing [supported versions](https://pulsar.apache.org/contribute/release-policy/#supported-versions), you should update both the versioned documentation in the `versioned_docs` directory and the documentation in the `docs` directory.
+
+```shell
+# List all supported major.minor.x versions
+./scripts/docs-tool.sh supported_versions
+```
+
+After committing the changes for the `docs` directory, you can use the `docs-tool` to apply the changes to the versioned docs. This tool is a wrapper around `git diff` and `patch`. If the patch is not applied correctly, you will have to manually apply the changes to the versioned docs.
+
+```shell
+./scripts/docs-tool.sh apply_changes_to_versioned_docs
+```
 
 ## More information
 
