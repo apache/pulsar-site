@@ -37,7 +37,7 @@ sidebar_label: Apache Pulsar 3.2.3
 - [fix][broker] Skip topic.close during unloading if the topic future fails with ownership check, and fix isBundleOwnedByAnyBroker to use ns.checkOwnershipPresentAsync for ExtensibleLoadBalancer ([#22379](https://github.com/apache/pulsar/pull/22379)) ([#22407](https://github.com/apache/pulsar/pull/22407))
 - [fix][broker] Support OIDC providers with JWK without alg field set in keys ([#22421](https://github.com/apache/pulsar/pull/22421))
 - [fix][broker] Update TransferShedder underloaded broker check to consider max loaded broker's msgThroughputEMA and update IsExtensibleLoadBalancerImpl check ([#22321](https://github.com/apache/pulsar/pull/22321)) ([#22418](https://github.com/apache/pulsar/pull/22418))
-- [fix][broker] Update topic partition failed when config maxNumPartitionsPerPartitionedTopic<0 ([#22397](https://github.com/apache/pulsar/pull/22397))
+- [fix][broker] Update topic partition failed when config maxNumPartitionsPerPartitionedTopic&lt;0 ([#22397](https://github.com/apache/pulsar/pull/22397))
 - [fix][broker] avoid offload system topic ([#22497](https://github.com/apache/pulsar/pull/22497))
 - [fix][broker] fix replicated subscriptions for transactional messages ([#22452](https://github.com/apache/pulsar/pull/22452))
 - [fix][broker] rename to changeMaxReadPositionCount ([#22656](https://github.com/apache/pulsar/pull/22656))
