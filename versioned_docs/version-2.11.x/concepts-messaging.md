@@ -133,12 +133,6 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer()
         .subscribe();
 ```
 
-:::note
-
-Send messages by synchronous API `send` will trigger the batch to be sent immediately, even the batch is not full.
-It is for the purpose of reducing the latency of sending messages and preventing block the caller's thread.
-
-:::
 
 ### Chunking
 Message chunking enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
