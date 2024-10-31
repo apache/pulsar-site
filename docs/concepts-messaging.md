@@ -429,6 +429,11 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer()
         .subscribe();
 ```
 
+:::note
+
+When using the synchronous `send` method for producing messages, the batch will be sent immediately even if it is not full. This helps reduce message sending latency and prevents blocking of the caller's thread. When producing messages in a single thread, you should use the asynchronous `sendAsync` method to send messages in batches.
+
+:::
 
 ### Chunking
 Message chunking enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages at the consumer side.
