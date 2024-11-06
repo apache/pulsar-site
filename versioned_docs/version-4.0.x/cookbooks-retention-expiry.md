@@ -37,7 +37,7 @@ Pulsar's [admin interface](admin-api-overview.md) enables you to manage both ret
 By default, when a Pulsar message arrives at a broker, the message is stored until it has been acknowledged on all subscriptions, at which point it is marked for deletion. You can override this behavior and retain messages that have already been acknowledged on all subscriptions by setting a *retention policy* for all topics in a given namespace. Retention is based on both a *size limit* and a *time limit*.
 
 The diagram below illustrates the concept of message retention.
-![Concept of message retention in Pulsar.](/assets/retention-new.png)
+![Concept of message retention in Pulsar.](/assets/retention-new.svg)
 
 Retention policies are useful when you use the Reader interface. The Reader interface does not use acknowledgments, and messages do not exist within backlogs. It is required to configure retention for Reader-only use cases.
 
@@ -189,7 +189,7 @@ admin.namespaces().getRetention(namespace);
 You can control the allowable size and/or time of backlogs, at the namespace level, using *backlog quotas*. Pulsar uses a quota to enforce a hard limit on the logical size of the backlogs in a topic. Backlog quota triggers an alert policy (for example, producer exception) once the quota limit is reached.
 
 The diagram below illustrates the concept of backlog quota.
-![Concept of backlog quota in Pulsar](/assets/backlog-quota-new.png)
+![Concept of backlog quota in Pulsar](/assets/backlog-quota-new.svg)
 
 Setting a backlog quota involves setting:
 
@@ -204,8 +204,9 @@ The following retention policies are available:
 | `producer_exception`        | The producer throws an exception when trying to send a message                                    |
 | `consumer_backlog_eviction` | The broker will begin discarding backlog messages                                                 |
 
-> #### Beware the distinction between retention policy types
-> As you may have noticed, the scope of retention includes the backlog, so retention must be greater than the backlog quota; otherwise, Pulsar will throw an error when set both.
+:::note
+The scope of retention includes the backlog, so retention must be greater than the backlog quota. Otherwise, Pulsar will throw an error when both are set.
+:::
 
 Backlog quotas are handled at the namespace level. They can be managed via:
 
