@@ -8,7 +8,7 @@ sidebar_label: "HDFS2 sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The HDFS2 sink connector pulls the messages from Pulsar topics and persists the messages to HDFS files.
 

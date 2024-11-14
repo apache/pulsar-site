@@ -1,11 +1,18 @@
 ---
 id: validate-release-candidate
-title: Verifying release candidates
+title: Validating release candidates
 ---
 
 This page contains manual instructions for reviewing and verifying a release candidate.
 
 ## Validate the binary distribution
+
+:::note
+
+There's a bash script [validate_pulsar_release.sh](https://github.com/lhotari/pulsar-contributor-toolbox/blob/master/scripts/validate_pulsar_release.sh) available for assisting in semi-automated validation for the following steps.
+
+:::
+
 
 ### Download And Verify the binary distributions
 
@@ -13,26 +20,58 @@ Download the server distribution `apache-pulsar-<release>-bin.tar.gz` and extrac
 
 ```shell
 cd apache-pulsar-<release>
+```
+
+Check the bookkeeper libs are complied on Linux:
+
+```shell
+unzip -t ./lib/org.apache.bookkeeper-circe-checksum-*.jar | grep lib
+unzip -t ./lib/org.apache.bookkeeper-cpu-affinity-*.jar | grep lib
+```
+
+The output should look like:
+
+```shell
+testing: lib/                     OK
+testing: lib/libcirce-checksum.so   OK
+testing: lib/                     OK
+testing: lib/libcpu-affinity.so   OK
+```
+
+Download the Cassandra connector:
+
+```shell
 mkdir connectors
+mv pulsar-io-cassandra-<release>.nar connectors
 ```
-
-Download the Pulsar IO Connector files:
-
-```
-pulsar-io-aerospike-<release>.nar
-pulsar-io-cassandra-<release>.nar
-pulsar-io-kafka-<release>.nar
-pulsar-io-kinesis-<release>.nar
-pulsar-io-rabbitmq-<release>.nar
-pulsar-io-twitter-<release>.nar
-```
-
-and place them in the `connectors` directory.
 
 Download the `*.asc` file and verify the GPG signature:
 
 ```bash
 gpg --verify apache-pulsar-<release>-bin.tar.gz.asc
+```
+
+### Download And Verify the source tarball
+
+Before you start to validate the source tarball, make sure you have installed these software:
+
+* Amazon Corretto OpenJDK
+  * JDK 21 for Pulsar version >= 3.3
+    * code will be compiled for Java 17 with Java 21
+    * Pulsar docker images are running Java 21 since 3.3.0
+  * JDK 17 for Pulsar version >= 2.11
+  * JDK 11 for earlier versions
+* Maven 3.9.9 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.9`
+* Zip
+
+Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
+
+Download the source tarball and extract it. The extracted files are in a directory called `apache-pulsar-<release>-src`
+
+```shell
+cd apache-pulsar-<release>-src
+mvn clean install -DskipTests
 ```
 
 ### Validate Pub/Sub and Java Functions
@@ -301,7 +340,7 @@ Make sure you have docker available at your laptop. If you haven't installed doc
 1. Set up a cassandra cluster.
 
 ```shell
-docker run -d --rm  --name=cassandra -p 9042:9042 cassandra
+docker run -d --rm  --name=cassandra -p 9042:9042 cassandra:3.11
 ```
 
 Make sure that the cassandra cluster is running.
@@ -506,6 +545,12 @@ cqlsh:pulsar_test_keyspace> exit
 ```shell
 bin/pulsar-admin sink delete --tenant public --namespace default --name cassandra-test-sink
 # "Deleted successfully"
+```
+
+9. Stop the Cassandra container
+
+```shell
+docker stop cassandra
 ```
 
 ### Validate Stateful Functions

@@ -8,7 +8,7 @@ sidebar_label: "MongoDB source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The MongoDB source connector pulls documents from MongoDB and persists the messages to Pulsar topics.
 

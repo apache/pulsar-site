@@ -1,6 +1,6 @@
 # Introduction
 
-The Pulsar site is built with [Docusaurus](http://docusaurus.io/) framework. You can find all technical details on [its docs](https://docusaurus.io/docs).
+The Pulsar site is built with [Docusaurus](http://docusaurus.io/) framework. You can find all the technical details on [its docs](https://docusaurus.io/docs).
 
 Specifically, this chapter provides a [writing syntax](document-syntax.md) guide selecting knowledge for writing content of the site.
 
@@ -14,14 +14,15 @@ Docusaurus provides three kinds of pages out-of-the-box: [docs](https://docusaur
 
 The Pulsar site pages are of:
 
-| Page                                       | Type      | Source                                                                                            |
-|--------------------------------------------|-----------|---------------------------------------------------------------------------------------------------|
-| [User docs](pathname:///docs)              | docs      | <ul><li>docs/</li><li>versioned_docs/</li><li>versioned_sidebars/</li><li>sidebars.json</li></ul> |
-| [Contribution guides](about.md)                 | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
-| [Release notes](pathname:///release-notes) | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  | 
-| [Security](pathname:///security)           | docs      | <ul><li>security/</li></ul>                                                                       |                    
-| [Blogs](pathname:///blog)                  | blog      | <ul><li>blog/</li></ul>                                                                           |
-| Other pages                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
+| Page                                                       | Type      | Source                                                                                            |
+|------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------|
+| [User docs](pathname:///docs)                              | docs      | <ul><li>docs/</li><li>versioned_docs/</li><li>versioned_sidebars/</li><li>sidebars.json</li></ul> |
+| [Contribution guides](about.md)                            | docs      | <ul><li>contribute/</li><li>sidebarsDevelopment.js</li></ul>                                      |
+| [Release notes](pathname:///release-notes)                 | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  |
+| [Security](pathname:///security)                           | docs      | <ul><li>security/</li></ul>                                                                       |
+| [Blogs](pathname:///blog)                                  | blog      | <ul><li>blog/</li></ul>                                                                           |
+| [Client feature matrix](pathname:///client-feature-matrix) | docs      | <ul><li>client-feature-matrix/</li><li>data/matrix.js</li></ul>                                   |
+| Other pages                                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
 
 Besides, the site serves multiple static pages generated outside the framework, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
 
@@ -32,14 +33,20 @@ Besides, the site serves multiple static pages generated outside the framework, 
 The most commonly used tool is `preview.sh`. You can preview your local changes by:
 
 ```shell
-./preview.sh 2.11.x
+./preview.sh
+```
+
+If you'd like to preview the site for a specific versions, you can pass the versions as an argument:
+
+```shell
+./preview.sh 4.0.x
 ```
 
 See the [previewing content](document-preview.md) guide for more details.
 
 ### docker-compose.yaml
 
-The `preview.sh` script use the Docusaurus dev server for testing, which is different from the real Apache Web Server based env that serves the site online.
+The `preview.sh` script uses the Docusaurus dev server for testing, which is different from the real Apache Web Server based env that serves the site online.
 
 To emulate the server-side logics, like `.htaccess` rewrite rules, you can run:
 
@@ -74,37 +81,37 @@ If you're gonna to update the content, read the [update reference docs](document
 
 If you're gonna to debug the reference generation process, read the [reference-doc-generator](https://github.com/apache/pulsar-site/tree/main/tools/pytools#reference-doc-generator) usage section and its source code.
 
-### How to update data driven pages?
+### How to update data-driven pages?
 
-The following pages contain data-driven tables:
+You can update it by clicking on one of the **✍️ Edit &lt;file_name&gt;** links below and submitting a Pull Request.
 
-* [Case studies](pathname:///case-studies)
-  * data/users.js
-  * src/pages/case-studies.js
-* [Downloads](pathname:///download)
-  * releases.json
-  * data/connectors.js
-  * data/release-cpp.js
-  * data/release-pulsar-manager.js
-  * data/release-pulsar-adapters.js
-  * src/components/download.tsx
-  * src/pages/download.mdx
-* [Ecosystem](pathname:///ecosystem)
-  * data/ecosystem.js
-  * src/pages/ecosystem.js
-* [Events](pathname:///events)
-  * data/events.js
-  * src/pages/events.js
-* [Release notes](pathname:///release-notes)
+* **Case Studies** [/case-studies](pathname:///case-studies)
+  * [✍️ Edit case-studies.ts](https://github.com/apache/pulsar-site/edit/main/data/case-studies.ts)
+* **Powered by** [/powered-by](pathname:///powered-by)
+  * [✍️ Edit powered-by.ts](https://github.com/apache/pulsar-site/edit/main/data/powered-by.ts)
+* **Ecosystem** [/ecosystem](pathname:///ecosystem)
+  * [✍️ Edit ecosystem.ts](https://github.com/apache/pulsar-site/edit/main/data/ecosystem.ts)
+* **Events** [/events](pathname:///events)
+  * [✍️ Edit events.ts](https://github.com/apache/pulsar-site/edit/main/data/events.ts)
+* **Resources** [/resources](pathname:///resources)
+  * [✍️ Edit resources.ts](https://github.com/apache/pulsar-site/edit/main/data/resources.ts)
+* **Team** [/team](pathname:///team)
+  * [✍️ Edit team.js](https://github.com/apache/pulsar-site/edit/main/data/team.js)
+
+    PMC members can generate the `team.js` file as [lhotari](https://github.com/lhotari) did in https://github.com/apache/pulsar-site/pull/387.
+* **Downloads** [/downloads](pathname:///download)
+  * [✍️ Edit releases.json](https://github.com/apache/pulsar-site/edit/main/releases.json)
+  * [✍️ Edit connectors.js](https://github.com/apache/pulsar-site/edit/main/data/connectors.js)
+  * [✍️ Edit release-cpp.js](https://github.com/apache/pulsar-site/edit/main/data/release-cpp.js)
+  * [✍️ Edit release-pulsar-manager.js](https://github.com/apache/pulsar-site/edit/main/data/release-pulsar-manager.js)
+  * [✍️ Edit release-pulsar-adapters.js](https://github.com/apache/pulsar-site/edit/main/data/release-pulsar-adapters.js)
+  * [✍️ Edit download.tsx](https://github.com/apache/pulsar-site/edit/main/src/components/download.tsx)
+  * [✍️ Edit download.mdx](https://github.com/apache/pulsar-site/edit/main/src/pages/download.mdx)
+* **Release notes** [/release-notes](pathname:///release-notes)
   * data/release-*.js
   * release-notes/
   * src/components/ClientReleaseTable.js
   * src/components/PulsarReleaseTable.js
-* [Resources](pathname:///resources)
-  * data/resources.js
-  * src/pages/resources.js
-* [Team](pathname:///team)
-  * data/team.js
-  * src/pages/team.js
-
-Additionally, PMC members can generate the `team.js` file as @lhotari did in https://github.com/apache/pulsar-site/pull/387.
+* **Client feature matrix** [/client-feature-matrix](pathname:///client-feature-matrix)
+  * [✍️ Edit matrix.js](https://github.com/apache/pulsar-site/edit/main/data/matrix.js)
+  * [✍️ Edit client-feature-matrix/index.mdx](https://github.com/apache/pulsar-site/edit/main/client-feature-matrix/index.mdx)

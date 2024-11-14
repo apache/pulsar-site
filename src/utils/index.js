@@ -1,44 +1,38 @@
-const users = require(`../../data/users.js`);
-const featuredUsers = users.filter((x) => x.hasOwnProperty("featured"));
-featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
+import compareVersions from 'compare-versions';
 
-const versions = require("../../versions.json");
-const restApiVersions = require("../../static/swagger/restApiVersions.json");
+import users from '../../data/powered-by';
+// const featuredUsers = users.filter((x) => x.hasOwnProperty("featured"));
+// featuredUsers.sort((a, b) => (a.featured > b.featured ? 1 : -1));
+import versions from '../../versions.json';
+import restApiVersions from '../../static/swagger/restApiVersions.json';
+import urlConfig from '../../site-baseurls.js';
 
-const siteConfig = require(`../../docusaurus.config.js`);
-const compareVersions = require("compare-versions");
+const {
+  baseUrl,
+} = urlConfig;
 
 export const latestStableVersion = versions[0];
 
 export function imgUrl(img) {
-  return siteConfig.baseUrl + "img/" + img;
+  return baseUrl + "img/" + img;
 }
 
 export function docUrl(doc, language, version) {
-  // if (version == "" || version == "next") {
   return (
-    siteConfig.baseUrl +
+    baseUrl +
     (language ? language + "/" : "") +
     "docs/" +
     (version ? version + "/" : "") +
     (doc ? doc : "")
   );
-  // }
-  // return (
-  //   siteConfig.customFields.oldUrl +
-  //   "/docs/" +
-  //   (language ? language + "/" : "en/") +
-  //   (version ? version + "/" : "") +
-  //   (doc ? doc : "standalone/")
-  // );
 }
 
 export function pageUrl(page, language) {
-  return siteConfig.baseUrl + (language ? language + "/" : "") + page;
+  return baseUrl + (language ? language + "/" : "") + page;
 }
 
 export function githubUrl() {
-  return siteConfig.customFields.githubUrl;
+  return urlConfig.githubUrl;
 }
 
 export function getCache() {
@@ -85,6 +79,12 @@ export function getApiVersion(anchor) {
     })[0];
     _restApiVs[key] = restApiVersions[_tKey];
   }
+  // Object.keys(_vsGroups).map(key => {
+  //   let _tKey = _vsGroups[key].sort((a, b) => {
+  //     return -compareVersions.compare(b, a, "<");
+  //   })[0];
+  //   _restApiVs[key] = restApiVersions[_tKey];
+  // })
 
   if (_restApiVs[version][0]["fileName"].indexOf(anchor) == 0) {
     apiVersion = _restApiVs[version][0]["version"];

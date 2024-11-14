@@ -69,19 +69,6 @@ poetry run bin/js-apidoc-generator.py <VERSION>
 
 ... where the `VERSION` is released semantic version like `1.8.2`.
 
-### [py-apidoc-generator](bin/py-apidoc-generator.py)
-
-This executable generates API docs for Pulsar Python Client:
-
-```bash
-poetry run bin/py-apidoc-generator.py <VERSION>
-```
-
-... where the `VERSION` is released semantic version like `2.10.2` or `3.0.0`.
-
-* Releases start from 3.0.0 uses [`pydoctor`](https://github.com/twisted/pydoctor) to generate API docs.
-* Releases before 3.0.0 uses [`pdoc`](https://github.com/mitmproxy/pdoc) to generate API docs.
-
 ### [java-apidoc-generator](bin/java-apidoc-generator.py)
 
 This executable generates API docs for Pulsar Java Client, Admin and Functions using Maven:

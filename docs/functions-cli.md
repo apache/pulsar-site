@@ -2,6 +2,7 @@
 id: functions-cli
 title: Pulsar Functions CLI and YAML configs
 sidebar_label: "CLI and YAML configs"
+description: Get a comprehensive understanding of admin CLI and YAML configurations for Pulsar Functions
 ---
 
 ````mdx-code-block
@@ -27,12 +28,12 @@ You can configure a function by using a predefined YAML file. The following tabl
 | name                 | String                     | `--name`                   | The name of a function.|
 | className            | String                     | `--classname`              | The class name of a function. |
 | functionType         | String                     | `--function-type`          | The built-in function type. |
-| inputs               | List<String\>               | `-i`, `--inputs`           | The input topics of a function. Multiple topics can be specified as a comma-separated list. |
-| customSerdeInputs    | Map<String,String\>         | `--custom-serde-inputs`    | The mapping from input topics to SerDe class names. |
-| topicsPattern        | String                     | `--topics-pattern`         | The topic pattern to consume from a list of topics under a namespace. <br />**Note:** `--input` and `--topic-pattern` are mutually exclusive. For Java functions, you need to add the SerDe class name for a pattern in `--custom-serde-inputs`. |
-| customSchemaInputs   | Map<String,String\>         | `--custom-schema-inputs`   | The mapping from input topics to schema properties. |
-| customSchemaOutputs  | Map<String,String\>         | `--custom-schema-outputs`  | The mapping from output topics to schema properties.|
-| inputSpecs           | Map<String,[ConsumerConfig](#consumerconfig)\> | `--input-specs` | The mapping from inputs to custom configurations.|
+| inputs               | List&lt;String&gt;               | `-i`, `--inputs`           | The input topics of a function. Multiple topics can be specified as a comma-separated list. |
+| customSerdeInputs    | Map&lt;String,String&gt;         | `--custom-serde-inputs`    | The mapping from input topics to SerDe class names. |
+| topicsPattern        | String                     | `--topics-pattern`         | The topic pattern to consume from a list of topics under a namespace.<br />**Note:** `--input` and `--topic-pattern` are mutually exclusive. For Java functions, you need to add the SerDe class name for a pattern in `--custom-serde-inputs`. |
+| customSchemaInputs   | Map&lt;String,String&gt;         | `--custom-schema-inputs`   | The mapping from input topics to schema properties. |
+| customSchemaOutputs  | Map&lt;String,String&gt;         | `--custom-schema-outputs`  | The mapping from output topics to schema properties.|
+| inputSpecs           | Map&lt;String,[ConsumerConfig](#consumerconfig)&gt; | `--input-specs` | The mapping from inputs to custom configurations.|
 | output               | String                     | `-o`, `--output`           | The output topic of a function. If none is specified, no output is written.  |
 | producerConfig       | [ProducerConfig](#producerconfig)  | `--producer-config` | The custom configurations for producers.  |
 | outputSchemaType     | String                     | `-st`, `--schema-type`     | The built-in schema type or custom schema class name used for message outputs.   |
@@ -41,10 +42,10 @@ You can configure a function by using a predefined YAML file. The following tabl
 | processingGuarantees | String | `--processing-guarantees` | The processing guarantees (delivery semantics) applied to a function. Available values: `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`, `MANUAL`.|
 | retainOrdering       | Boolean                    | `--retain-ordering`	     | Whether functions consume and process messages in order or not. |
 | retainKeyOrdering    | Boolean                    | `--retain-key-ordering`    | Whether functions consume and process messages in key order or not. |
-| batchBuilder         | String           | `--batch-builder` | Use `producerConfig.batchBuilder` instead. <br />**Note**: `batchBuilder` will be deprecated in code soon. |
+| batchBuilder         | String           | `--batch-builder` | Use `producerConfig.batchBuilder` instead.<br />**Note**: `batchBuilder` will be deprecated in code soon. |
 | forwardSourceMessageProperty | Boolean  | `--forward-source-message-property`  | Whether the properties of input messages are forwarded to output topics or not during processing. When the value is set to `false`, the forwarding is disabled. |
-| userConfig           | Map<String,Object\>         | `--user-config`         	 | User-defined config key/values. |
-| secrets       | Map<String,Object\> | `--secrets`	| The mapping from secretName to objects that encapsulate how the secret is fetched by the underlying secrets provider. |
+| userConfig           | Map&lt;String,Object&gt;         | `--user-config`         	 | User-defined config key/values. |
+| secrets       | Map&lt;String,Object&gt; | `--secrets`	| The mapping from secretName to objects that encapsulate how the secret is fetched by the underlying secrets provider. |
 | runtime       | String             | N/A          | The runtime of a function. Available values: `java`,`python`, `go`. |
 | autoAck       | Boolean            | `--auto-ack` | Whether the framework acknowledges messages automatically or not. <br /><br />**Note**: This configuration will be deprecated in future releases. If you specify a delivery semantic, the framework automatically acknowledges messages. If you do not want the framework to auto-ack messages, set the `processingGuarantees` to `MANUAL`. |
 | maxMessageRetries    | Int      |	`--max-message-retries` | The number of retries to process a message before giving up. |
@@ -55,10 +56,10 @@ You can configure a function by using a predefined YAML file. The following tabl
 | fqfn          | String          | `--fqfn`                | The Fully Qualified Function Name (FQFN) of a function. |
 | windowConfig  | [WindowConfig](#windowconfig) | N/A       | N/A |
 | timeoutMs     | Long            | `--timeout-ms`          | The message timeout (in milliseconds). |
-| jar           | String          | `--jar`                 | The path of the JAR file for a function (written in Java). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service). |
-| py            | String          | `--py`                  | The path of the main Python/Python wheel file for a function (written in Python). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service).  |
-| go            | String          | `--go`                  | Path to the main Go executable binary for the function (written in Go).  It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service). |
-| cleanupSubscription  | Boolean   | N/A            | Whether the subscriptions that a function creates or uses should be deleted or not when the function is deleted. |
+| jar           | String          | `--jar`                 | The absolute path of the JAR file for a function (written in Java). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service). |
+| py            | String          | `--py`                  | The absolute path of the main Python/Python wheel file for a function (written in Python). It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service).  |
+| go            | String          | `--go`                  | The absolute path of the main Go executable binary for the function (written in Go).  It also supports URL paths that workers can download the package from, including HTTP, HTTPS, file (file protocol assuming that file already exists on worker host), and function (package URL from packages management service). |
+| cleanupSubscription  | Boolean   | `--cleanup-subscription`   | Whether the subscriptions that a function creates or uses should be deleted or not when the function is deleted. The default value is `true` |
 | customRuntimeOptions | String    | `--custom-runtime-options` | A string that encodes options to customize the runtime. |
 | maxPendingAsyncRequests | Int    | `--max-message-retries`    | The max number of pending async requests per instance to avoid a large number of concurrent requests. |
 | exposePulsarAdminClientEnabled | Boolean | N/A                | Whether the Pulsar admin client is exposed to function context or not. By default, it is disabled. |
@@ -74,8 +75,8 @@ The following table outlines the nested fields and related arguments under the `
 | schemaType           | String                     | N/A                        | N/A |
 | serdeClassName       | String                     | N/A                        | N/A |
 | isRegexPattern       | Boolean                    | N/A                        | N/A |
-| schemaProperties     | Map<String,String\>         | N/A                        | N/A |
-| consumerProperties   | Map<String,String\>         | N/A                        | N/A |
+| schemaProperties     | Map&lt;String,String&gt;         | N/A                        | N/A |
+| consumerProperties   | Map&lt;String,String&gt;         | N/A                        | N/A |
 | receiverQueueSize    | Int                        | N/A                        | N/A |
 | cryptoConfig         | [CryptoConfig](#cryptoconfig)   | N/A                   |Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java). |
 | poolMessages         | Boolean                    | N/A                        | N/A |
@@ -126,7 +127,7 @@ The following table outlines the nested fields and related arguments under the `
 | Field Name                  | Type                        | Related Command Argument | Description   |
 |-----------------------------|-----------------------------|--------------------------|---------------|
 | cryptoKeyReaderClassName    | String                      | N/A                      | Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java).   |
-| cryptoKeyReaderConfig       | Map<String, Object\>         | N/A                      | N/A   |
+| cryptoKeyReaderConfig       | Map&lt;String, Object&gt;         | N/A                      | N/A   |
 | encryptionKeys              | String[]                      | N/A                      | N/A   |
 | producerCryptoFailureAction | ProducerCryptoFailureAction | N/A                      | N/A   |
 | consumerCryptoFailureAction | ConsumerCryptoFailureAction | N/A                      | N/A   |
@@ -190,3 +191,4 @@ userConfig:
 </TabItem>
 </Tabs>
 ````
+

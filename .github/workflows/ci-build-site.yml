@@ -21,6 +21,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
 jobs:
   build-website:
     if: ${{ github.repository == 'apache/pulsar-site' }}
@@ -28,24 +32,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 600
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: 'asf-site-next'
           path: tmp/asf-site-next
           token: ${{ secrets.PULSARBOT_TOKEN }}
       - name: Install poetry
         run: pipx install poetry
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.12'
           cache: 'poetry'
-      - name: Set Node.js 18
-        uses: actions/setup-node@v3
+      - name: Set Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - run: corepack enable
       - name: Update generated docs
         working-directory: tools/pytools

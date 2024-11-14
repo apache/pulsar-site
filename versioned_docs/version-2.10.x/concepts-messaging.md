@@ -377,6 +377,11 @@ The default retry letter topic uses this format:
 
 ```
 
+:::note
+- For Pulsar 2.6.x and 2.7.x, the default retry letter topic uses the format of `<subscriptionname>-RETRY`. If you upgrade from 2.6.x~2.7.x to 2.8.x or later, you need to delete historical retry letter topics and retry letter partitioned topics. Otherwise, Pulsar continues to use original topics, which are formatted with `<subscriptionname>-RETRY`.
+- It is not recommended to use `<subscriptionname>-RETRY` because if multiple topics under the same namespace have the same subscription, then retry message topic names for multiple topics might be the same, which will result in mutual consumptions.
+:::
+
 Use the Java client to specify the name of the retry letter topic.
 
 ```java
@@ -465,6 +470,11 @@ The default dead letter topic uses this format:
 <topicname>-<subscriptionname>-DLQ
 
 ```
+
+:::note
+- For Pulsar 2.6.x and 2.7.x, the default dead letter topic uses the format of `<subscriptionname>-DLQ`. If you upgrade from 2.6.x~2.7.x to 2.8.x or later, you need to delete historical dead letter topics and retry letter partitioned topics. Otherwise, Pulsar continues to use original topics, which are formatted with `<subscriptionname>-DLQ`.
+- It is not recommended to use `<subscriptionname>-DLQ` because if multiple topics under the same namespace have the same subscription, then dead message topic names for multiple topics might be the same, which will result in mutual consumptions.
+:::
 
 Use the Java client to specify the name of the dead letter topic.
 
@@ -777,19 +787,19 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines which partition---that is, which internal topic---each message should be published to.
 
-There are three {@inject: javadoc:MessageRoutingMode:/client/org/apache/pulsar/client/api/MessageRoutingMode} available:
+There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
 Mode     | Description
 :--------|:------------
 `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.
-`CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
+`CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 Ordering guarantee | Description | Routing Mode and Key
 :------------------|:------------|:------------
@@ -875,13 +885,13 @@ The following table outlines the available system topics for each specific names
 
 | Namespace | TopicName | Domain | Count | Usage |
 |-----------|-----------|--------|-------|-------|
-| pulsar/system | `transaction_coordinator_assign_${id}` | Persistent | Default 16 | Transaction coordinator |
-| pulsar/system | `_transaction_log${tc_id}` | Persistent | Default 16 | Transaction log |
+| pulsar/system | `transaction_coordinator_assign_\${id}` | Persistent | Default 16 | Transaction coordinator |
+| pulsar/system | `_transaction_log\${tc_id}` | Persistent | Default 16 | Transaction log |
 | pulsar/system | `resource-usage` | Non-persistent | Default 4 | Resource group service |
 | host/port | `heartbeat` | Persistent | 1 | Heartbeat detection |
 | User-defined-ns | [`__change_events`](concepts-multi-tenancy.md#namespace-change-events-and-topic-level-policies) | Persistent | Default 4 | Topic events |
 | User-defined-ns | `__transaction_buffer_snapshot` | Persistent | One per namespace | Transaction buffer snapshots |
-| User-defined-ns | `${topicName}__transaction_pending_ack` | Persistent | One per every topic subscription acknowledged with transactions | Acknowledgements with transactions |
+| User-defined-ns | `\${topicName}__transaction_pending_ack` | Persistent | One per every topic subscription acknowledged with transactions | Acknowledgements with transactions |
 
 :::note
 
@@ -930,9 +940,9 @@ The diagram below illustrates both concepts:
 
 ![Message retention and expiry](/assets/retention-expiry.png)
 
-With message retention, shown at the top, a <span style={{color: " #89b557"}}>retention policy</span> applied to all topics in a namespace dictates that some messages are durably stored in Pulsar even though they've already been acknowledged. Acknowledged messages that are not covered by the retention policy are <span style={{color: " #bb3b3e"}}>deleted</span>. Without a retention policy, *all* of the <span style={{color: " #19967d"}}>acknowledged messages</span> would be deleted.
+With message retention, shown at the top, a retention policy applied to all topics in a namespace dictates that some messages are durably stored in Pulsar even though they've already been acknowledged. Acknowledged messages that are not covered by the retention policy are deleted. Without a retention policy, all of the acknowledged messages would be deleted.
 
-With message expiry, shown at the bottom, some messages are <span style={{color: " #bb3b3e"}}>deleted</span>, even though they <span style={{color: " #337db6"}}>haven't been acknowledged</span>, because they've expired according to the <span style={{color: " #e39441"}}>TTL applied to the namespace</span> (for example because a TTL of 5 minutes has been applied and the messages haven't been acknowledged but are 10 minutes old).
+With message expiry, shown at the bottom, some messages are deleted, even though they haven't been acknowledged, because they've expired according to the TTL applied to the namespace (for example because a TTL of 5 minutes has been applied and the messages haven't been acknowledged but are 10 minutes old).
 
 ## Message deduplication
 
@@ -977,6 +987,16 @@ The diagram below illustrates the concept of delayed message delivery:
 ![Delayed Message Delivery](/assets/message_delay.png)
 
 A broker saves a message without any check. When a consumer consumes a message, if the message is set to delay, then the message is added to `DelayedDeliveryTracker`. A subscription checks and gets timeout messages from `DelayedDeliveryTracker`.
+
+:::note
+
+Work with retention policy: In Pulsar, the ledger will be deleted automatically after the messages in this ledger have been consumed. Pulsar will delete the front ledgers of a topic but will not delete ledgers from the middle of a topic. It means that if you send a message that is delayed for a long time, the message will not be consumed until it reaches the delay time. This means all the ledgers on this topic could not be deleted until the delayed message is consumed, even if some subsequent ledgers are fully consumed.
+
+Work with backlog quota policy: After using delayed messages, it is advisable to exercise caution when using the Backlog Quota strategy. This is because delayed messages can result in not being consumed for an extended period, triggering the Backlog Quota strategy and causing subsequent message sends to be rejected.
+
+Work with backlog TTL policy: When the TTL expires, Pulsar automatically moves the message to the acknowledged state (and thus makes it ready for deletion) even if the messages are delayed messages and does not care about when the expected delayed time is.
+
+:::
 
 ### Broker
 Delayed message delivery is enabled by default. You can change it in the broker configuration file as below:

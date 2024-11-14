@@ -443,21 +443,21 @@ You can set the log level and configuration in the  [log4j2.yaml](https://github
 |pulsar.root.logger|  WARN,CONSOLE|
 |pulsar.log.dir|  logs|
 |pulsar.log.file| pulsar.log|
-|log4j.rootLogger|  ${pulsar.root.logger}|
+|log4j.rootLogger|  \$\{pulsar.root.logger\}|
 |log4j.appender.CONSOLE|  org.apache.log4j.ConsoleAppender|
 |log4j.appender.CONSOLE.Threshold|  DEBUG|
 |log4j.appender.CONSOLE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.CONSOLE.layout.ConversionPattern| %d{ISO8601} - %-5p - [%t:%C{1}@%L] - %m%n|
+|log4j.appender.CONSOLE.layout.ConversionPattern| %d\{ISO8601\} - %-5p - [%t:%C\{1\}@%L] - %m%n|
 |log4j.appender.ROLLINGFILE|  org.apache.log4j.DailyRollingFileAppender|
 |log4j.appender.ROLLINGFILE.Threshold|  DEBUG|
-|log4j.appender.ROLLINGFILE.File| ${pulsar.log.dir}/${pulsar.log.file}|
+|log4j.appender.ROLLINGFILE.File| \$\{pulsar.log.dir\}/\$\{pulsar.log.file\}|
 |log4j.appender.ROLLINGFILE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.ROLLINGFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L] - %m%n|
+|log4j.appender.ROLLINGFILE.layout.ConversionPattern| %d\{ISO8601\} - %-5p [%t:%C\{1\}@%L] - %m%n|
 |log4j.appender.TRACEFILE|  org.apache.log4j.FileAppender|
 |log4j.appender.TRACEFILE.Threshold|  TRACE|
 |log4j.appender.TRACEFILE.File| pulsar-trace.log|
 |log4j.appender.TRACEFILE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.TRACEFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L][%x] - %m%n|
+|log4j.appender.TRACEFILE.layout.ConversionPattern| %d\{ISO8601\} - %-5p [%t:%C\{1\}@%L][%x] - %m%n|
 
 :::note
 
@@ -472,11 +472,11 @@ You can set the log level and configuration in the  [log4j2.yaml](https://github
 |Name|Default|
 |---|---|
 |bookkeeper.root.logger|  ERROR,CONSOLE|
-|log4j.rootLogger|  ${bookkeeper.root.logger}|
+|log4j.rootLogger|  \$\{bookkeeper.root.logger\}|
 |log4j.appender.CONSOLE|  org.apache.log4j.ConsoleAppender|
 |log4j.appender.CONSOLE.Threshold|  DEBUG|
 |log4j.appender.CONSOLE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.CONSOLE.layout.ConversionPattern| %d{ABSOLUTE} %-5p %m%n|
+|log4j.appender.CONSOLE.layout.ConversionPattern| %d\{ABSOLUTE\} %-5p %m%n|
 |log4j.logger.org.apache.zookeeper| ERROR|
 |log4j.logger.org.apache.bookkeeper|  ERROR|
 |log4j.logger.org.apache.bookkeeper.bookie.BookieShell| INFO|
@@ -537,7 +537,7 @@ You can set the log level and configuration in the  [log4j2.yaml](https://github
 | brokerPublisherThrottlingMaxMessageRate | Maximum rate (in 1 second) of messages allowed to publish for a broker if the message rate limiting is enabled. When the value is set to 0, message rate limiting is disabled. | 0|
 | brokerPublisherThrottlingMaxByteRate | Maximum rate (in 1 second) of bytes allowed to publish for a broker if the  byte rate limiting is enabled. When the value is set to 0, the byte rate limiting is disabled. | 0 |
 |subscribeThrottlingRatePerConsumer|Too many subscribe requests from a consumer can cause broker rewinding consumer cursors and loading data from bookies, hence causing high network bandwidth usage. When the positive value is set, broker will throttle the subscribe requests for one consumer. Otherwise, the throttling will be disabled. By default, throttling is disabled.|0|
-|subscribeRatePeriodPerConsumerInSecond|Rate period for {subscribeThrottlingRatePerConsumer}. By default, it is 30s.|30|
+|subscribeRatePeriodPerConsumerInSecond|Rate period for \{subscribeThrottlingRatePerConsumer\}. By default, it is 30s.|30|
 |dispatchThrottlingRateInMsg| Dispatch throttling-limit of messages for a broker (per second). 0 means the dispatch throttling-limit is disabled. |0|
 |dispatchThrottlingRateInByte| Dispatch throttling-limit of bytes for a broker (per second). 0 means the dispatch throttling-limit is disabled. |0|
 | dispatchThrottlingRatePerTopicInMsg | Default messages (per second) dispatch throttling-limit for every topic. When the value is set to 0, default message dispatch throttling-limit is disabled. |0 |

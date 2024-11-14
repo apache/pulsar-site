@@ -8,7 +8,7 @@ sidebar_label: "JDBC sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The JDBC sink connectors allow pulling messages from Pulsar topics and persist the messages to ClickHouse, MariaDB, PostgreSQL, and SQLite.
 

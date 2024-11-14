@@ -29,7 +29,7 @@ If you want to deploy a single Pulsar cluster, see [Clusters and Brokers](gettin
 
 ## System requirement
 
-Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK 8 or later versions, JRE/JDK 11 is recommended.
+Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**. To use Pulsar, you need to install 64-bit JRE/JDK 8 or later versions, JRE/JDK 11 is recommended.
 
 :::note
 

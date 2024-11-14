@@ -8,7 +8,7 @@ sidebar_label: "Solr sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Solr sink connector pulls messages from Pulsar topics and persists the messages to Solr collections.
 

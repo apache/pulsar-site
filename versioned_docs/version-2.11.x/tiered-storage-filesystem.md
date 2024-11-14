@@ -9,7 +9,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-
 This chapter guides you through every step of installing and configuring the filesystem offloader and using it with Pulsar.
 
 ## Installation
@@ -47,52 +46,54 @@ You can configure the filesystem offloader driver in the `broker.conf` or `stand
 
 - **Required** configurations are as below.
 
-  Parameter | Description | Example value
-  |---|---|---
-  `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive. | filesystem
-  `fileSystemURI` | Connection address, which is the URI to access the default Hadoop distributed file system. | hdfs://127.0.0.1:9000
-  `offloadersDirectory` | Offloader directory | offloaders
-  `fileSystemProfilePath` | Hadoop profile path. The configuration file is stored in the Hadoop profile path. It contains various settings for Hadoop performance tuning. | conf/filesystem_offload_core_site.xml
+  | Parameter                    | Description                                                                                                                                   | Example value                         |
+  |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|
+  | `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive.                                                                                             | filesystem                            |
+  | `fileSystemURI`              | Connection address, which is the URI to access the default Hadoop distributed file system.                                                    | hdfs://127.0.0.1:9000                 |
+  | `offloadersDirectory`        | Offloader directory                                                                                                                           | offloaders                            |
+  | `fileSystemProfilePath`      | Hadoop profile path. The configuration file is stored in the Hadoop profile path. It contains various settings for Hadoop performance tuning. | conf/filesystem_offload_core_site.xml |
 
 
 - **Optional** configurations are as below.
 
-  Parameter| Description | Example value
-  |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|10
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|50000
+  | Parameter                                   | Description                                                                                                                                                                   | Example value |
+  |---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+  | `managedLedgerMinLedgerRolloverTimeMinutes` | Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.                            | 10            |
+  | `managedLedgerMaxEntriesPerLedger`          | Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment. | 50000         |
+
 
 </TabItem>
 <TabItem value="NFS">
 
 - **Required** configurations are as below.
-  Parameter | Description | Example value
-  |---|---|---
-  `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive. | filesystem
-  `offloadersDirectory` | Offloader directory | offloaders
-  `fileSystemProfilePath` | NFS profile path. The configuration file is stored in the NFS profile path. It contains various settings for performance tuning. | conf/filesystem_offload_core_site.xml
+
+  | Parameter                    | Description                                                                                                                      | Example value                         |
+  |------------------------------|----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|
+  | `managedLedgerOffloadDriver` | Offloader driver name, which is case-insensitive.                                                                                | filesystem                            |
+  | `offloadersDirectory`        | Offloader directory                                                                                                              | offloaders                            |
+  | `fileSystemProfilePath`      | NFS profile path. The configuration file is stored in the NFS profile path. It contains various settings for performance tuning. | conf/filesystem_offload_core_site.xml |
 
 - **Optional** configurations are as below.
 
-  Parameter| Description | Example value
-  |---|---|---
-  `managedLedgerMinLedgerRolloverTimeMinutes`|Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.|10
-  `managedLedgerMaxEntriesPerLedger`|Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment.|50000
+  | Parameter                                   | Description                                                                                                                                                                   | Example value |
+  |---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+  | `managedLedgerMinLedgerRolloverTimeMinutes` | Minimum time between ledger rollover for a topic. <br /><br />**Note**: it is not recommended to set this parameter in the production environment.                            | 10            |
+  | `managedLedgerMaxEntriesPerLedger`          | Maximum number of entries to append to a ledger before triggering a rollover.<br /><br />**Note**: it is not recommended to set this parameter in the production environment. | 50000         |
 
 </TabItem>
-
 </Tabs>
 ````
+
 
 ### Run filesystem offloader automatically
 
 You can configure the namespace policy to offload data automatically once a threshold is reached. The threshold is based on the size of data that a topic has stored on a Pulsar cluster. Once the topic storage reaches the threshold, an offload operation is triggered automatically.
 
-Threshold value|Action
-|---|---
-| > 0 | It triggers the offloading operation if the topic storage reaches its threshold.
-= 0|It causes a broker to offload data as soon as possible.
-< 0 |It disables automatic offloading operation.
+| Threshold value | Action                                                                           |
+|-----------------|----------------------------------------------------------------------------------|
+| &gt; 0          | It triggers the offloading operation if the topic storage reaches its threshold. |
+| = 0             | It causes a broker to offload data as soon as possible.                          |
+| &lt; 0          | It disables automatic offloading operation.                                      |
 
 Automatic offload runs when a new segment is added to a topic log. If you set the threshold on a namespace, but few messages are being produced to the topic, the filesystem offloader does not work until the current segment is full.
 

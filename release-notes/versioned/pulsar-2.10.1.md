@@ -122,7 +122,7 @@ sidebar_label: Apache Pulsar 2.10.1
 - [improve][function] Refine file io connector [15250](https://github.com/apache/pulsar/pull/15250)
 - [fix][function] Check executor null when close the FileSource [15247](https://github.com/apache/pulsar/pull/15247)
 - [fix][function] Handle NPE when `getLeader` returns null [15058](https://github.com/apache/pulsar/pull/15058)
-- [fix][function] Allow a Function<GenericObject,?> to access the original Schema of the Message and use it [14847](https://github.com/apache/pulsar/pull/14847)
+- [fix][function] Allow a Function&lt;GenericObject,?&gt; to access the original Schema of the Message and use it [14847](https://github.com/apache/pulsar/pull/14847)
 - [fix][function] Fix pulsar-managed runtimes failed start function with package URL from package management service  [14814](https://github.com/apache/pulsar/pull/14814)
 - [improve][connector] Handle Kafka sinks that return immutable maps as configs [14780](https://github.com/apache/pulsar/pull/14780)
 - [improve][connector] Support event-time-based index name in ES Sink [14383](https://github.com/apache/pulsar/pull/14383)

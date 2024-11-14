@@ -2,6 +2,7 @@
 id: functions-develop-security
 title: Enable security on functions
 sidebar_label: "Enable security on functions"
+description: Learn to enable security on functions in Pulsar.
 ---
 
 ````mdx-code-block
@@ -9,12 +10,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
+If you want to enable security on functions, complete the following steps.
+
 ## Prerequisites
 
-If you want to enable security on functions, you need to [enable security settings](functions-worker.md) on function workers first.
+- If you want to enable security on functions, you need to [enable security settings](functions-worker.md) on function workers first.
 
 
-## Configure function workers
+## Step 1: Configure function workers
 
 To use the secret APIs from the context, you need to set the following two parameters for function workers.
 * `secretsProviderConfiguratorClassName`
@@ -32,20 +35,20 @@ You can also implement your own `SecretsProviderConfigurator` if you want to use
 
 :::note
 
-Currently, only Java and Python runtime support `SecretsProvider`. The Java and Python Runtime have the following two providers:
+The Java, Python and Go Runtimes have the following two providers:
 - ClearTextSecretsProvider (default for `DefaultSecretsProviderConfigurator`)
 - EnvironmentBasedSecretsProvider (default for `KubernetesSecretsProviderConfigurator`)
 
 :::
 
-## Get the secret
+## Step 2: Get the secret
 
 Once `SecretsProviderConfigurator` is set, you can get the secret using the [`Context`](functions-concepts.md#context) object as follows.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"},{"label":"Go","value":"Go"}]}>
 <TabItem value="Java">
 
 ```java
@@ -61,7 +64,7 @@ public class GetSecretValueFunction implements Function<String, Void> {
         String secretValue = context.getSecret(input);
 
         if (!secretValue.isEmpty()) {
-            LOG.info("The secret {} has value {}", intput, secretValue);
+            LOG.info("The secret {} has value {}", input, secretValue);
         } else {
             LOG.warn("No secret with key {}", input);
         }
@@ -85,6 +88,26 @@ class GetSecretValueFunction(Function):
             logger.warn('No secret with key {0} '.format(input))
         else:
             logger.info("The secret {0} has value {1}".format(input, secret_value))
+```
+
+</TabItem>
+<TabItem value="Go">
+
+```go
+func secretLoggerFunc(ctx context.Context, input []byte) {
+    fc, ok := pf.FromContext(ctx)
+    if !ok {
+        logutil.Fatal("Function context is not defined")
+    }
+
+    secretValue := fc.GetSecretValue(string(input))
+
+    if secretValue == nil {
+        logutil.Warnf("No secret with key %s", input)
+    } else {
+        logutil.Infof("The secret %s has value %s", input, secretValue)
+    }
+}
 ```
 
 </TabItem>

@@ -1,0 +1,152 @@
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 200vh;
+  color: #282826;
+  position: relative;
+}
+
+.header {
+  margin: 0;
+}
+
+.fullsize_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  box-sizing: content-box;
+}
+
+.short_container {
+  height: 50%;
+  width: 100%;
+}
+
+.docs_container {
+  max-width: 32rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  letter-spacing: -0.04em;
+  line-height: 3rem;
+}
+
+.case_studies {
+  line-height: 1.4;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--text-color);
+  border-radius: 1rem;
+  backdrop-filter: blur(20px);
+  color: var(--text-color);
+}
+
+.case_studies:hover {
+  color: var(--text-color);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(-150%); /* move the block 150% up so that it scrolls 50% less than the main block */
+  }
+}
+
+.info_container {
+  font-size: 2rem;
+  max-width: 64rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  z-index: 2;
+}
+
+.info_container > p {
+  margin-bottom: 1.75rem;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  color: #188FFF;
+}
+
+.text {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.625rem;
+  letter-spacing: -0.025em;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttons > * {
+  margin-right: 1rem;
+}
+
+.blur {
+  backdrop-filter: blur(3rem);
+  backface-visibility: hidden;
+  mask: linear-gradient(0deg, rgba(0,0,0,1) 80%, rgba(255,255,255,0) 100%);
+  transform: translate(0, -20%, 1);
+
+  position: absolute;
+  width: 100%;
+  height: 120%;
+  z-index: 1;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .docs_container {
+    width: 100%;
+  }
+
+  .info_container {
+    font-size: 1.25rem;
+  }
+
+  .header {
+    line-height: 1;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-height: 550px) and (orientation: portrait) {
+  .block {
+    height: 250vh;
+  }
+}

@@ -1,0 +1,75 @@
+.Cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1.5rem;
+}
+
+.Card {
+  padding-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.Card span{
+  display: block;
+}
+.Card span:nth-of-type(1), .Card span:nth-of-type(2){
+  font-weight: 700;
+}
+.Card span:nth-of-type(2), .Card span:nth-of-type(3){
+  color: var(--gray-1-)
+}
+
+.Card:hover{
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.CardImage {
+  transition: all .35s ease-in-out;
+  height: 20rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.Card:hover .CardImage{
+  border-color: var(--gray-1);
+}
+
+.CardImage > div{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+}
+
+.CardImage > img{
+  transition: all .35s ease-in-out;
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  bottom: 1rem;
+  right: 1rem;
+  opacity: 0;
+}
+.Card:hover img{
+  opacity: 1;
+}
+
+.Card h3{
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 400;
+}
+
+@media (min-width: 1000px) {
+  .Cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

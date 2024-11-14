@@ -146,7 +146,7 @@ topicLevelPoliciesEnabled=true
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example of the [Java API](client-libraries-java.md). Note the use of the `setReplicationClusters` method when you construct the {@inject: javadoc:Message:/client/org/apache/pulsar/client/api/Message} object:
+The following is an example of the [Java API](client-libraries-java.md). Note the use of the `replicationClusters` method when you construct the [Message](/api/client/org/apache/pulsar/client/api/Message) object:
 
 ```java
 List<String> restrictReplicationTo = Arrays.asList(
@@ -160,7 +160,7 @@ Producer producer = client.newProducer()
 
 producer.newMessage()
         .value("my-payload".getBytes())
-        .setReplicationClusters(restrictReplicationTo)
+        .replicationClusters(restrictReplicationTo)
         .send();
 ```
 
@@ -240,6 +240,12 @@ If you want to use replicated subscriptions in Pulsar:
 * When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
 * Only the base line cursor position is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
 
+:::note
+
+* This replicated subscription will add a new special message every second, it will contains the [snapshot](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions#storing-snapshots) of the subscription. That means,  if there are inactive subscriptions over the topic there can be an increase in backlog in source and destination clusters.
+
+:::
+
 ## Migrate data between clusters using geo-replication
 
 Using geo-replication to migrate data between clusters is a special use case of the [active-active replication pattern](concepts-replication.md#active-active-replication) when you don't have a large amount of data.
@@ -248,7 +254,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 2. Add the new cluster to your old cluster.
 
    ```shell
-   bin/pulsar-admin cluster create new-cluster
+   bin/pulsar-admin clusters create new-cluster
    ```
 
 3. Add the new cluster to your tenant.

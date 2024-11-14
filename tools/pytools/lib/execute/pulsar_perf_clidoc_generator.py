@@ -25,5 +25,6 @@ def execute(basedir: Path, version: str):
     perf = basedir / 'bin' / 'pulsar-perf'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-perf'
 
+    reference.mkdir(exist_ok=True, parents=True)
     with (reference / 'pulsar-perf.md').open('w') as f:
         run(str(perf.absolute()), 'gen-doc', stdout=f)

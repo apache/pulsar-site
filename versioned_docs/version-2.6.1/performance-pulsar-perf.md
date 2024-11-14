@@ -51,7 +51,7 @@ The following table lists configuration options available for the `pulsar-perf p
 
 | Option | Description | Default value|
 |----|----|----|
-| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}". | N/A |
+| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "\{"key1":"val1","key2":"val2"\}". | N/A |
 | auth_plugin | Set the authentication plugin class name. | N/A |
 | batch-max-bytes | Set the maximum number of bytes for each batch. | 4194304 |
 | batch-max-messages | Set the maximum number of messages for each batch. | 1000 |
@@ -123,7 +123,7 @@ The following table lists configuration options available for the `pulsar-perf c
 | Option | Description | Default value |
 |----|----|----|
 | acks-delay-millis | Set the acknowledgment grouping delay in milliseconds. | 100 ms |
-| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}". | N/A |
+| auth-params | Set the authentication parameters, whose format is determined by the implementation of the `configure` method in the authentication plugin class, such as "key1:val1,key2:val2" or "\{"key1":"val1","key2":"val2"\}". | N/A |
 | auth_plugin | Set the authentication plugin class name. | N/A |
 | auto_ack_chunk_q_full | Configure whether to automatically ack for the oldest message in receiver queue if the queue is full. | false |
 | listener-name | Set the listener name for the broker. | N/A |
@@ -209,6 +209,6 @@ To check test results through the HdrHistogram Plotter, follow these steps:
 
 5. You will get two output files. Upload the output file with the filename extension of .hgrm to the [HdrHistogram Plotter](https://hdrhistogram.github.io/HdrHistogram/plotFiles.html).
 
-6. Check the test result through the Graphical User Interface of the HdrHistogram Plotter, as shown blow.
+6. Check the test result through the Graphical User Interface of the HdrHistogram Plotter, as shown below.
 
    ![](/assets/perf-produce.png)

@@ -24,12 +24,16 @@ on:
       - '.github/workflows/ci-dummy-sync.yml'
       - 'tools/pytools/**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
 jobs:
   sync-without-push:
     name: Check synchronize content
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Sync content without push
         uses: ./.github/actions/sync-content

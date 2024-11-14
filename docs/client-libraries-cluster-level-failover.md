@@ -2,6 +2,7 @@
 id: client-libraries-cluster-level-failover
 title: Configure cluster-level failover
 sidebar_label: "Configure cluster-level failover"
+description: Learn how to configure cluster-level failover in Pulsar.
 ---
 
 ````mdx-code-block
@@ -38,7 +39,12 @@ This is an example of how to construct a Java Pulsar client to use automatic clu
 private PulsarClient getAutoFailoverClient() throws PulsarClientException {
     String primaryUrl = "pulsar+ssl://localhost:6651";
     String secondaryUrl = "pulsar+ssl://localhost:6661";
+    String primaryTlsTrustCertsFilePath = "primary/path";
     String secondaryTlsTrustCertsFilePath = "secondary/path";
+    Authentication primaryAuthentication = AuthenticationFactory.create(
+        "org.apache.pulsar.client.impl.auth.AuthenticationTls",
+        "tlsCertFile:/path/to/primary-my-role.cert.pem,"
+                + "tlsKeyFile:/path/to/primary-role.key-pk8.pem");
     Authentication secondaryAuthentication = AuthenticationFactory.create(
         "org.apache.pulsar.client.impl.auth.AuthenticationTls",
         "tlsCertFile:/path/to/secondary-my-role.cert.pem,"
@@ -60,9 +66,11 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .build();
 
     PulsarClient pulsarClient = PulsarClient.builder()
+        .serviceUrlProvider(failover)
+        .authentication(primaryAuthentication)
+        .tlsTrustCertsFilePath(primaryTlsTrustCertsFilePath)
         .build();
 
-    failover.initialize(pulsarClient);
     return pulsarClient;
 }
 ```
@@ -105,9 +113,9 @@ public PulsarClient getControlledFailoverClient() throws IOException {
 
     PulsarClient pulsarClient =
             PulsarClient.builder()
+                    .serviceUrlProvider(provider)
                     .build();
 
-    provider.initialize(pulsarClient);
     return pulsarClient;
 }
 ```
@@ -121,7 +129,7 @@ Parameter|Default value|Required?|Description
 
 Here is an example of how `urlProviderHeader` works.
 
-![How urlProviderHeader works](/assets/cluster-level-failover-3.png)
+![Workflow of urlProviderHeader in Pulsar](/assets/cluster-level-failover-3.png)
 
 Assume that you want to connect Pulsar client 1 to cluster A.
 

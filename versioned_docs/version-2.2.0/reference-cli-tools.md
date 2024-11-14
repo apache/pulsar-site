@@ -15,20 +15,11 @@ All Pulsar command-line tools can be run from the `bin` directory of your [insta
 * [`bookkeeper`](#bookkeeper)
 * [`broker-tool`](#broker-tool)
 
-> **Important**
->
-> - This page only shows **some frequently used commands**. For the latest information about `pulsar`, `pulsar-client`, and `pulsar-perf`, including commands, flags, descriptions, and more information, see [Pulsar tools](https://pulsar.apache.org/tools/).
->
-> - You can get help for any CLI tool, command, or subcommand using the `--help` flag, or `-h` for short. Here's an example:
->
+You can get help for any CLI tool, command, or subcommand using the `--help` flag, or `-h` for short. Here's an example:
 
-> ```shell
->
-> $ bin/pulsar broker --help
->
->
-> ```
-
+```shell
+$ bin/pulsar broker --help
+```
 
 ## `pulsar`
 
@@ -377,7 +368,7 @@ Options
 
 |Flag|Description|Default|
 |---|---|---|
-|`--auth-params`|Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{\"key1\":\"val1\",\"key2\":\"val2\"}"|{"saslJaasClientSectionName":"PulsarClient", "serverType":"broker"}|
+|`--auth-params`|Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "\{\"key1\":\"val1\",\"key2\":\"val2\"\}"|\{"saslJaasClientSectionName":"PulsarClient", "serverType":"broker"\}|
 |`--auth-plugin`|Authentication plugin class name|org.apache.pulsar.client.impl.auth.AuthenticationSasl|
 |`--listener-name`|Listener name for the broker||
 |`--proxy-protocol`|Proxy protocol to select type of routing at proxy||

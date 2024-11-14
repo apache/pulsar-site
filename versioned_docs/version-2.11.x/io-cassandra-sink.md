@@ -8,7 +8,7 @@ sidebar_label: "Cassandra sink connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Cassandra sink connector pulls messages from Pulsar topics to Cassandra clusters.
 

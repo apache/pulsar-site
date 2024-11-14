@@ -56,7 +56,7 @@ Release the connection if it is not used for more than [connectionMaxIdleSeconds
 
 **Type**: `int`
 
-**Default**: `180`
+**Default**: `60`
 
 ### connectionTimeoutMs
 Duration of waiting for a connection to a broker to be established.If the duration passes without a response from a broker, the connection attempt is dropped.
@@ -92,6 +92,13 @@ The Pulsar client dns lookup bind port, takes effect when dnsLookupBindAddress i
 **Type**: `int`
 
 **Default**: `0`
+
+### dnsServerAddresses
+The Pulsar client dns lookup server address
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
 
 ### enableBusyWait
 Whether to enable BusyWait for EpollEventLoopGroup.
@@ -175,14 +182,14 @@ Number of IO threads.
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 ### numListenerThreads
 Number of consumer listener threads.
 
 **Type**: `int`
 
-**Default**: `2`
+**Default**: `4`
 
 ### operationTimeoutMs
 Client operation timeout (in milliseconds).
@@ -246,6 +253,20 @@ User name of SOCKS5 proxy.
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+### sslFactoryPlugin
+SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultPulsarSslFactory.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+
+### sslFactoryPluginParams
+SSL Factory plugin configuration parameters.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
 
 ### sslProvider
 The TLS provider used by an internal client to authenticate with other Pulsar brokers.

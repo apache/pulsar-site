@@ -2,6 +2,7 @@
 id: schema-understand
 title: Understand schema
 sidebar_label: "Understand schema"
+description: Get a comprehensive understanding of Pulsar schemas.
 ---
 
 ````mdx-code-block
@@ -38,9 +39,10 @@ The following table outlines the fields that each `SchemaInfo` consists of.
 
 ## Schema type
 
-Pulsar supports various schema types, which are mainly divided into two categories:
+Pulsar supports various schema types, which are mainly divided into following categories:
 * [Primitive type](#primitive-type)
 * [Complex type](#complex-type)
+* [Auto schema](#auto-schema)
 
 ### Primitive type
 
@@ -55,7 +57,7 @@ The following table outlines the primitive types that Pulsar schema supports, an
 | `INT64` | A 64-bit signed integer. | int | int | int64 | int64_t | long |
 | `FLOAT` | A single precision (32-bit) IEEE 754 floating-point number. | float | float | float32 | float | float |
 | `DOUBLE` | A double-precision (64-bit) IEEE 754 floating-point number. | double | double | float64| double | double |
-| `BYTES` | A sequence of 8-bit unsigned bytes. | byte[], ByteBuffer, ByteBuf | bytes | []byte | void * | byte[], ReadOnlySequence<byte\> |
+| `BYTES` | A sequence of 8-bit unsigned bytes. | byte[], ByteBuffer, ByteBuf | bytes | []byte | void * | byte[], ReadOnlySequence&lt;byte&gt; |
 | `STRING` | An Unicode character sequence. | string | str | string| std::string | string |
 | `TIMESTAMP` (`DATE`, `TIME`) |  A logic type represents a specific instant in time with millisecond precision. <br />It stores the number of milliseconds since `January 1, 1970, 00:00:00 GMT` as an `INT64` value. |  java.sql.Timestamp (java.sql.Time, java.util.Date) | N/A | N/A | N/A | DateTime,TimeSpan |
 | `INSTANT`| A single instantaneous point on the timeline with nanoseconds precision. | java.time.Instant | N/A | N/A | N/A | N/A |
@@ -100,9 +102,9 @@ The following table outlines the `struct` types that Pulsar schema supports:
 | `NativeAvroBytesSchema` | [`NativeAvroBytesSchema`](schema-get-started.md#native-avro) wraps a native Avro schema type `org.apache.avro.Schema`. The result is a schema instance that accepts a serialized Avro payload without validating it against the wrapped Avro schema. <br /><br />When you migrate or ingest event or messaging data from external systems (such as Kafka and Cassandra), the data is often already serialized in Avro format. The applications producing the data typically have validated the data against their schemas (including compatibility checks) and stored them in a database or a dedicated service (such as schema registry). The schema of each serialized data record is usually retrievable by some metadata attached to that record. In such cases, a Pulsar producer doesn't need to repeat the schema validation when sending the ingested events to a topic. All it needs to do is pass each message or event with its schema to Pulsar. |
 
 Pulsar provides the following methods to use the `struct` schema.
-* `static`
-* `generic`
-* `SchemaDefinition`
+* static
+* generic
+* SchemaDefinition
 
 This example shows how to construct a `struct` schema with these methods and use it to produce and consume messages.
 
@@ -121,7 +123,7 @@ Pulsar gets the schema definition from the predefined `struct` using an Avro lib
 
 1. Create the _User_ class to define the messages sent to Pulsar topics.
 
-   ```java
+```java
    # If you use Lombok
 
    @Builder
@@ -140,22 +142,21 @@ Pulsar gets the schema definition from the predefined `struct` using an Avro lib
    #    public User() { }
    #    public User(String name, int age) { this.name = name; this.age = age; } }
    #}
-
-   ```
+```
 
 2. Create a producer with a `struct` schema and send messages.
 
-   ```java
+```java
    Producer<User> producer = client.newProducer(Schema.AVRO(User.class)).create();
    producer.newMessage().value(new User("pulsar-user", 1)).send();
-   ```
+```
 
 3. Create a consumer with a `struct` schema and receive messages
 
-   ```java
+```java
    Consumer<User> consumer = client.newConsumer(Schema.AVRO(User.class)).subscribe();
    User user = consumer.receive().getValue();
-   ```
+```
 
 </TabItem>
 <TabItem value="generic">

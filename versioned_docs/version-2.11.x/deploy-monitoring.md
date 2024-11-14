@@ -61,11 +61,11 @@ The default port for bookie is `8000`. You can change the port by configuring `p
 The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgment, you can configure the metrics for the managed cursor.
 
 ```
-brk_ml_cursor_persistLedgerSucceed(namespace=", ledger_name="", cursor_name:")
-brk_ml_cursor_persistLedgerErrors(namespace="", ledger_name="", cursor_name:"")
-brk_ml_cursor_persistZookeeperSucceed(namespace="", ledger_name="", cursor_name:"")
-brk_ml_cursor_persistZookeeperErrors(namespace="", ledger_name="", cursor_name:"")
-brk_ml_cursor_nonContiguousDeletedMessagesRange(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_persistLedgerSucceed(namespace=", ledger_name="", cursor_name:")
+pulsar_ml_cursor_persistLedgerErrors(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_persistZookeeperSucceed(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_persistZookeeperErrors(namespace="", ledger_name="", cursor_name:"")
+pulsar_ml_cursor_nonContiguousDeletedMessagesRange(namespace="", ledger_name="", cursor_name:"")
 ```
 
 Those metrics are added in the Prometheus interface, you can monitor and check the metrics stats in Grafana.

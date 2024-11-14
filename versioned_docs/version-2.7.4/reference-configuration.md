@@ -227,7 +227,7 @@ Pulsar brokers are responsible for handling incoming messages from producers, di
 |maxUnackedMessagesPerConsumer| Max number of unacknowledged messages allowed to receive messages by a consumer on a shared subscription. Broker will stop sending messages to consumer once, this limit reaches until consumer starts acknowledging messages back. Using a value of 0, is disabling unackeMessage limit check and consumer can receive messages without any restriction  |50000|
 |maxUnackedMessagesPerSubscription| Max number of unacknowledged messages allowed per shared subscription. Broker will stop dispatching messages to all consumers of the subscription once this limit reaches until consumer starts acknowledging messages back and unack count reaches to limit/2. Using a value of 0, is disabling unackedMessage-limit check and dispatcher can dispatch messages without any restriction  |200000|
 |subscriptionRedeliveryTrackerEnabled| Enable subscription message redelivery tracker |true|
-|subscriptionExpirationTimeMinutes | How long to delete inactive subscriptions from last consuming. <br /><br />Setting this configuration to a value **greater than 0** deletes inactive subscriptions automatically.<br />Setting this configuration to **0** does not delete inactive subscriptions automatically. <br /><br /> Since this configuration takes effect on all topics, if there is even one topic whose subscriptions should not be deleted automatically, you need to set it to 0. <br />Instead, you can set a subscription expiration time for each **namespace** using the [`pulsar-admin namespaces set-subscription-expiration-time options` command](https://pulsar.apache.org/tools/pulsar-admin/2.6.0-SNAPSHOT/#-em-set-subscription-expiration-time-em-). | 0 |
+|subscriptionExpirationTimeMinutes | How long to delete inactive subscriptions from last consuming. <br /><br />Setting this configuration to a value **greater than 0** deletes inactive subscriptions automatically.<br />Setting this configuration to **0** does not delete inactive subscriptions automatically. <br /><br /> Since this configuration takes effect on all topics, if there is even one topic whose subscriptions should not be deleted automatically, you need to set it to 0. <br />Instead, you can set a subscription expiration time for each **namespace** using the `pulsar-admin namespaces set-subscription-expiration-time options` command. | 0 |
 |maxConcurrentLookupRequest|  Max number of concurrent lookup request broker allows to throttle heavy incoming lookup traffic |50000|
 |maxConcurrentTopicLoadRequest| Max number of concurrent topic loading request broker allows to control number of zk-operations |5000|
 |authenticationEnabled| Enable authentication |false|
@@ -399,21 +399,21 @@ The [`pulsar-client`](reference-cli-tools.md#pulsar-client) CLI tool can be used
 |pulsar.root.logger|  WARN,CONSOLE|
 |pulsar.log.dir|  logs|
 |pulsar.log.file| pulsar.log|
-|log4j.rootLogger|  ${pulsar.root.logger}|
+|log4j.rootLogger|  \$\{pulsar.root.logger\}|
 |log4j.appender.CONSOLE|  org.apache.log4j.ConsoleAppender|
 |log4j.appender.CONSOLE.Threshold|  DEBUG|
 |log4j.appender.CONSOLE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.CONSOLE.layout.ConversionPattern| %d{ISO8601} - %-5p - [%t:%C{1}@%L] - %m%n|
+|log4j.appender.CONSOLE.layout.ConversionPattern| %d\{ISO8601\} - %-5p - [%t:%C\{1\}@%L] - %m%n|
 |log4j.appender.ROLLINGFILE|  org.apache.log4j.DailyRollingFileAppender|
 |log4j.appender.ROLLINGFILE.Threshold|  DEBUG|
-|log4j.appender.ROLLINGFILE.File| ${pulsar.log.dir}/${pulsar.log.file}|
+|log4j.appender.ROLLINGFILE.File| \$\{pulsar.log.dir\}/\$\{pulsar.log.file\}|
 |log4j.appender.ROLLINGFILE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.ROLLINGFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L] - %m%n|
+|log4j.appender.ROLLINGFILE.layout.ConversionPattern| %d\{ISO8601\} - %-5p [%t:%C\{1\}@%L] - %m%n|
 |log4j.appender.TRACEFILE|  org.apache.log4j.FileAppender|
 |log4j.appender.TRACEFILE.Threshold|  TRACE|
 |log4j.appender.TRACEFILE.File| pulsar-trace.log|
 |log4j.appender.TRACEFILE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.TRACEFILE.layout.ConversionPattern| %d{ISO8601} - %-5p [%t:%C{1}@%L][%x] - %m%n|
+|log4j.appender.TRACEFILE.layout.ConversionPattern| %d\{ISO8601\} - %-5p [%t:%C\{1\}@%L][%x] - %m%n|
 
 > Note: 'topic' in log4j2.appender is configurable.
 > - If you want to append all logs to a single topic, set the same topic name.
@@ -424,11 +424,11 @@ The [`pulsar-client`](reference-cli-tools.md#pulsar-client) CLI tool can be used
 |Name|Default|
 |---|---|
 |bookkeeper.root.logger|  ERROR,CONSOLE|
-|log4j.rootLogger|  ${bookkeeper.root.logger}|
+|log4j.rootLogger|  \$\{bookkeeper.root.logger\}|
 |log4j.appender.CONSOLE|  org.apache.log4j.ConsoleAppender|
 |log4j.appender.CONSOLE.Threshold|  DEBUG|
 |log4j.appender.CONSOLE.layout| org.apache.log4j.PatternLayout|
-|log4j.appender.CONSOLE.layout.ConversionPattern| %d{ABSOLUTE} %-5p %m%n|
+|log4j.appender.CONSOLE.layout.ConversionPattern| %d\{ABSOLUTE\} %-5p %m%n|
 |log4j.logger.org.apache.zookeeper| ERROR|
 |log4j.logger.org.apache.bookkeeper|  ERROR|
 |log4j.logger.org.apache.bookkeeper.bookie.BookieShell| INFO|
@@ -490,7 +490,7 @@ The [`pulsar-client`](reference-cli-tools.md#pulsar-client) CLI tool can be used
 | brokerPublisherThrottlingMaxMessageRate | Maximum rate (in 1 second) of messages allowed to publish for a broker if the message rate limiting is enabled. When the value is set to 0, message rate limiting is disabled. | 0|
 | brokerPublisherThrottlingMaxByteRate | Maximum rate (in 1 second) of bytes allowed to publish for a broker if the  byte rate limiting is enabled. When the value is set to 0, the byte rate limiting is disabled. | 0 |
 |subscribeThrottlingRatePerConsumer|Too many subscribe requests from a consumer can cause broker rewinding consumer cursors and loading data from bookies, hence causing high network bandwidth usage. When the positive value is set, broker will throttle the subscribe requests for one consumer. Otherwise, the throttling will be disabled. By default, throttling is disabled.|0|
-|subscribeRatePeriodPerConsumerInSecond|Rate period for {subscribeThrottlingRatePerConsumer}. By default, it is 30s.|30|
+|subscribeRatePeriodPerConsumerInSecond|Rate period for \{subscribeThrottlingRatePerConsumer\}. By default, it is 30s.|30|
 | dispatchThrottlingRatePerTopicInMsg | Default messages (per second) dispatch throttling-limit for every topic. When the value is set to 0, default message dispatch throttling-limit is disabled. |0 |
 | dispatchThrottlingRatePerTopicInByte | Default byte (per second) dispatch throttling-limit for every topic. When the value is set to 0, default byte dispatch throttling-limit is disabled. | 0|
 | dispatchThrottlingRateRelativeToPublishRate | Enable dispatch rate-limiting relative to publish rate. | false |

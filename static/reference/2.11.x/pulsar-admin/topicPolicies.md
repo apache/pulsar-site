@@ -9,7 +9,7 @@ $ pulsar-admin topicPolicies subcommand
 
 
 
-## <em>get-message-ttl</em>
+## get-message-ttl
 
 Get the message TTL for a topic
 
@@ -27,7 +27,7 @@ $ pulsar-admin topicPolicies get-message-ttl options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>set-message-ttl</em>
+## set-message-ttl
 
 Set message TTL for a topic
 
@@ -45,7 +45,7 @@ $ pulsar-admin topicPolicies set-message-ttl options
 | `--global, -g` | Whether to set this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>remove-message-ttl</em>
+## remove-message-ttl
 
 Remove message TTL for a topic
 
@@ -62,7 +62,7 @@ $ pulsar-admin topicPolicies remove-message-ttl options
 | `--global, -g` | Whether to remove this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>get-max-unacked-messages-per-consumer</em>
+## get-max-unacked-messages-per-consumer
 
 Get max unacked messages policy per consumer for a topic
 
@@ -80,7 +80,7 @@ $ pulsar-admin topicPolicies get-max-unacked-messages-per-consumer options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-max-unacked-messages-per-consumer</em>
+## set-max-unacked-messages-per-consumer
 
 Set max unacked messages policy per consumer for a topic
 
@@ -98,7 +98,7 @@ $ pulsar-admin topicPolicies set-max-unacked-messages-per-consumer options
 | `-m, --maxNum` | max unacked messages num on consumer|0||
 
 
-## <em>remove-max-unacked-messages-per-consumer</em>
+## remove-max-unacked-messages-per-consumer
 
 Remove max unacked messages policy per consumer for a topic
 
@@ -115,7 +115,7 @@ $ pulsar-admin topicPolicies remove-max-unacked-messages-per-consumer options
 | `--global, -g` | Whether to remove this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>get-max-consumers-per-subscription</em>
+## get-max-consumers-per-subscription
 
 Get max consumers per subscription for a topic
 
@@ -132,7 +132,7 @@ $ pulsar-admin topicPolicies get-max-consumers-per-subscription options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-max-consumers-per-subscription</em>
+## set-max-consumers-per-subscription
 
 Set max consumers per subscription for a topic
 
@@ -150,7 +150,7 @@ $ pulsar-admin topicPolicies set-max-consumers-per-subscription options
 | `--global, -g` | Whether to set this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>remove-max-consumers-per-subscription</em>
+## remove-max-consumers-per-subscription
 
 Remove max consumers per subscription for a topic
 
@@ -167,7 +167,7 @@ $ pulsar-admin topicPolicies remove-max-consumers-per-subscription options
 | `--global, -g` | Whether to remove this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-subscription-types-enabled</em>
+## set-subscription-types-enabled
 
 Set subscription types enabled for a topic
 
@@ -185,7 +185,7 @@ $ pulsar-admin topicPolicies set-subscription-types-enabled options
 | `--types, -t` | Subscription types enabled list (comma separated values). Possible values: (Exclusive, Shared, Failover, Key_Shared).|null||
 
 
-## <em>get-subscription-types-enabled</em>
+## get-subscription-types-enabled
 
 Get subscription types enabled for a topic
 
@@ -202,7 +202,7 @@ $ pulsar-admin topicPolicies get-subscription-types-enabled options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>remove-subscription-types-enabled</em>
+## remove-subscription-types-enabled
 
 Remove subscription types enabled for a topic
 
@@ -219,7 +219,7 @@ $ pulsar-admin topicPolicies remove-subscription-types-enabled options
 | `--global, -g` | Whether to set this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-retention</em>
+## get-retention
 
 Get the retention policy for a topic
 
@@ -237,7 +237,7 @@ $ pulsar-admin topicPolicies get-retention options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>set-retention</em>
+## set-retention
 
 Set the retention policy for a topic
 
@@ -256,7 +256,7 @@ $ pulsar-admin topicPolicies set-retention options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy is replicated to other clusters asynchronously, If set to false or not set, the topic retention policy is replicated to local clusters.|false||
 
 
-## <em>remove-retention</em>
+## remove-retention
 
 Remove the retention policy for a topic
 
@@ -273,7 +273,7 @@ $ pulsar-admin topicPolicies remove-retention options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation is replicated to other clusters asynchronouslyIf set to false or not set, the topic retention policy is replicated to local clusters.|false||
 
 
-## <em>get-backlog-quota</em>
+## get-backlog-quota
 
 Get the backlog quota policies for a topic
 
@@ -291,7 +291,7 @@ $ pulsar-admin topicPolicies get-backlog-quota options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-backlog-quota</em>
+## set-backlog-quota
 
 Set a backlog quota policy for a topic
 
@@ -312,7 +312,7 @@ $ pulsar-admin topicPolicies set-backlog-quota options
 | `-l, --limit` | Size limit (eg: 10M, 16G)|-1||
 
 
-## <em>remove-backlog-quota</em>
+## remove-backlog-quota
 
 Remove a backlog quota policy from a topic
 
@@ -330,7 +330,7 @@ $ pulsar-admin topicPolicies remove-backlog-quota options
 | `-t, --type` | Backlog quota type to remove|destination_storage||
 
 
-## <em>get-max-producers</em>
+## get-max-producers
 
 Get max number of producers for a topic
 
@@ -348,7 +348,7 @@ $ pulsar-admin topicPolicies get-max-producers options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-max-producers</em>
+## set-max-producers
 
 Set max number of producers for a topic
 
@@ -366,7 +366,7 @@ $ pulsar-admin topicPolicies set-max-producers options
 | `--max-producers, -p` | Max producers for a topic|0||
 
 
-## <em>remove-max-producers</em>
+## remove-max-producers
 
 Remove max number of producers for a topic
 
@@ -383,7 +383,7 @@ $ pulsar-admin topicPolicies remove-max-producers options
 | `--global, -g` | Whether to set this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-max-message-size</em>
+## get-max-message-size
 
 Get max message size for a topic
 
@@ -400,7 +400,7 @@ $ pulsar-admin topicPolicies get-max-message-size options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returns global topic policies|false||
 
 
-## <em>set-max-message-size</em>
+## set-max-message-size
 
 Set max message size for a topic
 
@@ -418,7 +418,7 @@ $ pulsar-admin topicPolicies set-max-message-size options
 | `--max-message-size, -m` | Max message size for a topic|0||
 
 
-## <em>remove-max-message-size</em>
+## remove-max-message-size
 
 Remove max message size for a topic
 
@@ -435,7 +435,7 @@ $ pulsar-admin topicPolicies remove-max-message-size options
 | `--global, -g` | Whether to remove this policy globally. |false||
 
 
-## <em>set-deduplication</em>
+## set-deduplication
 
 Enable or disable status for a topic
 
@@ -454,7 +454,7 @@ $ pulsar-admin topicPolicies set-deduplication options
 | `--enable, -e` | Enable deduplication|false||
 
 
-## <em>get-deduplication</em>
+## get-deduplication
 
 Get the deduplication status for a topic
 
@@ -471,7 +471,7 @@ $ pulsar-admin topicPolicies get-deduplication options
 | `--global, -g` | Whether to get this policy globally. |false||
 
 
-## <em>remove-deduplication</em>
+## remove-deduplication
 
 Remove the deduplication status for a topic
 
@@ -488,7 +488,7 @@ $ pulsar-admin topicPolicies remove-deduplication options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-deduplication-snapshot-interval</em>
+## get-deduplication-snapshot-interval
 
 Get deduplication snapshot interval for a topic
 
@@ -505,7 +505,7 @@ $ pulsar-admin topicPolicies get-deduplication-snapshot-interval options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returns global topic policies|false||
 
 
-## <em>set-deduplication-snapshot-interval</em>
+## set-deduplication-snapshot-interval
 
 Set deduplication snapshot interval for a topic
 
@@ -523,7 +523,7 @@ $ pulsar-admin topicPolicies set-deduplication-snapshot-interval options
 | `--global, -g` | Whether to set this policy globally.|false||
 
 
-## <em>remove-deduplication-snapshot-interval</em>
+## remove-deduplication-snapshot-interval
 
 Remove deduplication snapshot interval for a topic
 
@@ -540,7 +540,7 @@ $ pulsar-admin topicPolicies remove-deduplication-snapshot-interval options
 | `--global, -g` | Whether to remove this policy globally. |false||
 
 
-## <em>get-persistence</em>
+## get-persistence
 
 Get the persistence policies for a topic
 
@@ -557,7 +557,7 @@ $ pulsar-admin topicPolicies get-persistence options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-persistence</em>
+## set-persistence
 
 Set the persistence policies for a topic
 
@@ -578,7 +578,7 @@ $ pulsar-admin topicPolicies set-persistence options
 | `-e, --bookkeeper-ensemble` | Number of bookies to use for a topic|0||
 
 
-## <em>remove-persistence</em>
+## remove-persistence
 
 Remove the persistence policy for a topic
 
@@ -595,7 +595,7 @@ $ pulsar-admin topicPolicies remove-persistence options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-subscription-dispatch-rate</em>
+## get-subscription-dispatch-rate
 
 Get subscription message-dispatch-rate for a topic
 
@@ -614,7 +614,7 @@ $ pulsar-admin topicPolicies get-subscription-dispatch-rate options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-subscription-dispatch-rate</em>
+## set-subscription-dispatch-rate
 
 Set subscription message-dispatch-rate for a topic
 
@@ -636,7 +636,7 @@ $ pulsar-admin topicPolicies set-subscription-dispatch-rate options
 | `--relative-to-publish-rate, -rp` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false||
 
 
-## <em>remove-subscription-dispatch-rate</em>
+## remove-subscription-dispatch-rate
 
 Remove subscription message-dispatch-rate for a topic
 
@@ -654,7 +654,7 @@ $ pulsar-admin topicPolicies remove-subscription-dispatch-rate options
 | `--subscription, -s` | Remove message-dispatch-rate for a specific subscription|null||
 
 
-## <em>get-replicator-dispatch-rate</em>
+## get-replicator-dispatch-rate
 
 Get replicator message-dispatch-rate for a topic
 
@@ -672,7 +672,7 @@ $ pulsar-admin topicPolicies get-replicator-dispatch-rate options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>set-replicator-dispatch-rate</em>
+## set-replicator-dispatch-rate
 
 Set replicator message-dispatch-rate for a topic
 
@@ -693,7 +693,7 @@ $ pulsar-admin topicPolicies set-replicator-dispatch-rate options
 | `--relative-to-publish-rate, -rp` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false||
 
 
-## <em>remove-replicator-dispatch-rate</em>
+## remove-replicator-dispatch-rate
 
 Remove replicator message-dispatch-rate for a topic
 
@@ -710,7 +710,7 @@ $ pulsar-admin topicPolicies remove-replicator-dispatch-rate options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-publish-rate</em>
+## get-publish-rate
 
 Get publish rate for a topic
 
@@ -727,7 +727,7 @@ $ pulsar-admin topicPolicies get-publish-rate options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returns global topic policies|false||
 
 
-## <em>set-publish-rate</em>
+## set-publish-rate
 
 Set publish rate for a topic
 
@@ -746,7 +746,7 @@ $ pulsar-admin topicPolicies set-publish-rate options
 | `--byte-publish-rate, -b` | byte-publish-rate (default -1 will be overwrite if not passed)|-1||
 
 
-## <em>remove-publish-rate</em>
+## remove-publish-rate
 
 Remove publish rate for a topic
 
@@ -763,7 +763,7 @@ $ pulsar-admin topicPolicies remove-publish-rate options
 | `--global, -g` | Whether to remove this policy globally. |false||
 
 
-## <em>get-compaction-threshold</em>
+## get-compaction-threshold
 
 Get compaction threshold for a topic
 
@@ -781,7 +781,7 @@ $ pulsar-admin topicPolicies get-compaction-threshold options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-compaction-threshold</em>
+## set-compaction-threshold
 
 Set compaction threshold for a topic
 
@@ -799,7 +799,7 @@ $ pulsar-admin topicPolicies set-compaction-threshold options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>remove-compaction-threshold</em>
+## remove-compaction-threshold
 
 Remove compaction threshold for a topic
 
@@ -816,7 +816,7 @@ $ pulsar-admin topicPolicies remove-compaction-threshold options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-subscribe-rate</em>
+## get-subscribe-rate
 
 Get consumer subscribe rate for a topic
 
@@ -834,7 +834,7 @@ $ pulsar-admin topicPolicies get-subscribe-rate options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returns global topic policies|false||
 
 
-## <em>set-subscribe-rate</em>
+## set-subscribe-rate
 
 Set consumer subscribe rate for a topic
 
@@ -853,7 +853,7 @@ $ pulsar-admin topicPolicies set-subscribe-rate options
 | `--subscribe-rate-period, -st` | subscribe-rate-period in second type (default 30 second will be overwrite if not passed)|30||
 
 
-## <em>remove-subscribe-rate</em>
+## remove-subscribe-rate
 
 Remove consumer subscribe rate for a topic
 
@@ -870,7 +870,7 @@ $ pulsar-admin topicPolicies remove-subscribe-rate options
 | `--global, -g` | Whether to remove this policy globally. |false||
 
 
-## <em>get-max-consumers</em>
+## get-max-consumers
 
 Get max number of consumers for a topic
 
@@ -888,7 +888,7 @@ $ pulsar-admin topicPolicies get-max-consumers options
 | `--global, -g` | Whether to get this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>set-max-consumers</em>
+## set-max-consumers
 
 Set max number of consumers for a topic
 
@@ -906,7 +906,7 @@ $ pulsar-admin topicPolicies set-max-consumers options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>remove-max-consumers</em>
+## remove-max-consumers
 
 Remove max number of consumers for a topic
 
@@ -923,7 +923,7 @@ $ pulsar-admin topicPolicies remove-max-consumers options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-delayed-delivery</em>
+## get-delayed-delivery
 
 Get the delayed delivery policy for a topic
 
@@ -941,7 +941,7 @@ $ pulsar-admin topicPolicies get-delayed-delivery options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>set-delayed-delivery</em>
+## set-delayed-delivery
 
 Set the delayed delivery policy on a topic
 
@@ -961,7 +961,7 @@ $ pulsar-admin topicPolicies set-delayed-delivery options
 | `--time, -t` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1s||
 
 
-## <em>remove-delayed-delivery</em>
+## remove-delayed-delivery
 
 Remove the delayed delivery policy on a topic
 
@@ -978,7 +978,7 @@ $ pulsar-admin topicPolicies remove-delayed-delivery options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-dispatch-rate</em>
+## get-dispatch-rate
 
 Get message dispatch rate for a topic
 
@@ -996,7 +996,7 @@ $ pulsar-admin topicPolicies get-dispatch-rate options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-dispatch-rate</em>
+## set-dispatch-rate
 
 Set message dispatch rate for a topic
 
@@ -1017,7 +1017,7 @@ $ pulsar-admin topicPolicies set-dispatch-rate options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>remove-dispatch-rate</em>
+## remove-dispatch-rate
 
 Remove message dispatch rate for a topic
 
@@ -1034,7 +1034,7 @@ $ pulsar-admin topicPolicies remove-dispatch-rate options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-offload-policies</em>
+## get-offload-policies
 
 Get the offload policies for a topic
 
@@ -1052,7 +1052,7 @@ $ pulsar-admin topicPolicies get-offload-policies options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-offload-policies</em>
+## set-offload-policies
 
 Set the offload policies for a topic
 
@@ -1083,7 +1083,7 @@ $ pulsar-admin topicPolicies set-offload-policies options
 | `-rb, --readBufferSizeInBytes` | ManagedLedger offload read buffer size in bytes,s3 and google-cloud-storage requires this parameter|0||
 
 
-## <em>remove-offload-policies</em>
+## remove-offload-policies
 
 Remove the offload policies for a topic
 
@@ -1100,7 +1100,7 @@ $ pulsar-admin topicPolicies remove-offload-policies options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-max-unacked-messages-per-subscription</em>
+## get-max-unacked-messages-per-subscription
 
 Get max unacked messages policy per subscription for a topic
 
@@ -1118,7 +1118,7 @@ $ pulsar-admin topicPolicies get-max-unacked-messages-per-subscription options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>set-max-unacked-messages-per-subscription</em>
+## set-max-unacked-messages-per-subscription
 
 Set max unacked messages policy on subscription for a topic
 
@@ -1136,7 +1136,7 @@ $ pulsar-admin topicPolicies set-max-unacked-messages-per-subscription options
 | `-m, --maxNum` | max unacked messages num on subscription|0||
 
 
-## <em>remove-max-unacked-messages-per-subscription</em>
+## remove-max-unacked-messages-per-subscription
 
 Remove max unacked messages policy per subscription for a topic
 
@@ -1153,7 +1153,7 @@ $ pulsar-admin topicPolicies remove-max-unacked-messages-per-subscription option
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-inactive-topic-policies</em>
+## get-inactive-topic-policies
 
 Get the inactive topic policies on a topic
 
@@ -1171,7 +1171,7 @@ $ pulsar-admin topicPolicies get-inactive-topic-policies options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-inactive-topic-policies</em>
+## set-inactive-topic-policies
 
 Set the inactive topic policies on a topic
 
@@ -1192,7 +1192,7 @@ $ pulsar-admin topicPolicies set-inactive-topic-policies options
 | `--disable-delete-while-inactive, -d` | Disable delete while inactive|false||
 
 
-## <em>remove-inactive-topic-policies</em>
+## remove-inactive-topic-policies
 
 Remove inactive topic policies from a topic
 
@@ -1209,7 +1209,7 @@ $ pulsar-admin topicPolicies remove-inactive-topic-policies options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the removing operation will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-max-subscriptions-per-topic</em>
+## get-max-subscriptions-per-topic
 
 Get max subscriptions for a topic
 
@@ -1226,7 +1226,7 @@ $ pulsar-admin topicPolicies get-max-subscriptions-per-topic options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-max-subscriptions-per-topic</em>
+## set-max-subscriptions-per-topic
 
 Set max subscriptions for a topic
 
@@ -1244,7 +1244,7 @@ $ pulsar-admin topicPolicies set-max-subscriptions-per-topic options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>remove-max-subscriptions-per-topic</em>
+## remove-max-subscriptions-per-topic
 
 Remove max subscriptions for a topic
 
@@ -1261,7 +1261,7 @@ $ pulsar-admin topicPolicies remove-max-subscriptions-per-topic options
 | `--global, -g` | Whether to remove this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>remove-schema-compatibility-strategy</em>
+## remove-schema-compatibility-strategy
 
 Remove schema compatibility strategy on a topic
 
@@ -1277,7 +1277,7 @@ $ pulsar-admin topicPolicies remove-schema-compatibility-strategy options
 |---|---|---|
 
 
-## <em>set-schema-compatibility-strategy</em>
+## set-schema-compatibility-strategy
 
 Set schema compatibility strategy on a topic
 
@@ -1294,7 +1294,7 @@ $ pulsar-admin topicPolicies set-schema-compatibility-strategy options
 | `--strategy, -s` | Schema compatibility strategy: [UNDEFINED, ALWAYS_INCOMPATIBLE, ALWAYS_COMPATIBLE, BACKWARD, FORWARD, FULL, BACKWARD_TRANSITIVE, FORWARD_TRANSITIVE, FULL_TRANSITIVE]|null||
 
 
-## <em>get-schema-compatibility-strategy</em>
+## get-schema-compatibility-strategy
 
 Get schema compatibility strategy on a topic
 
@@ -1311,7 +1311,7 @@ $ pulsar-admin topicPolicies get-schema-compatibility-strategy options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>get-entry-filters-per-topic</em>
+## get-entry-filters-per-topic
 
 Get entry filters for a topic
 
@@ -1329,7 +1329,7 @@ $ pulsar-admin topicPolicies get-entry-filters-per-topic options
 | `-ap, --applied` | Get the applied policy of the topic|false||
 
 
-## <em>set-entry-filters-per-topic</em>
+## set-entry-filters-per-topic
 
 Set entry filters for a topic
 
@@ -1347,7 +1347,7 @@ $ pulsar-admin topicPolicies set-entry-filters-per-topic options
 | `--entry-filters-name, -efn` | The class name for the entry filter.|||
 
 
-## <em>remove-entry-filters-per-topic</em>
+## remove-entry-filters-per-topic
 
 Remove entry filters for a topic
 
@@ -1364,7 +1364,7 @@ $ pulsar-admin topicPolicies remove-entry-filters-per-topic options
 | `--global, -g` | Whether to remove this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>set-auto-subscription-creation</em>
+## set-auto-subscription-creation
 
 Enable autoSubscriptionCreation for a topic
 
@@ -1382,7 +1382,7 @@ $ pulsar-admin topicPolicies set-auto-subscription-creation options
 | `--global, -g` | Whether to set this policy globally. If set to true, the policy will be replicate to other clusters asynchronously|false||
 
 
-## <em>get-auto-subscription-creation</em>
+## get-auto-subscription-creation
 
 Get the autoSubscriptionCreation for a topic
 
@@ -1400,7 +1400,7 @@ $ pulsar-admin topicPolicies get-auto-subscription-creation options
 | `--global, -g` | Whether to get this policy globally. If set to true, broker returned global topic policies|false||
 
 
-## <em>remove-auto-subscription-creation</em>
+## remove-auto-subscription-creation
 
 Remove override of autoSubscriptionCreation for a topic
 

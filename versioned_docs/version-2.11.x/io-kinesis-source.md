@@ -8,7 +8,7 @@ sidebar_label: "Kinesis source connector"
 
 You can download all the Pulsar connectors on [download page](pathname:///download).
 
-::::
+:::
 
 The Kinesis source connector pulls data from Amazon Kinesis and persists data into Pulsar.
 
