@@ -16,7 +16,7 @@ In Pulsar, security and crypto have dependencies on BouncyCastle Jars. For the d
 
 `Bouncy Castle` provides both [FIPS](https://www.bouncycastle.org/fips_faq.html) and non-FIPS versions. But in a JVM, you can not include both of the 2 versions, and you need to exclude the current version before including the other.
 
-In Pulsar, the security and crypto methods of end to end encryption (JCE) also depend on `Bouncy Castle`.This document contains the configuration between BouncyCastle FIPS(BC-FIPS) and non-FIPS(BC-non-FIPS) version while using Pulsar.
+In Pulsar, the security and crypto methods of end to end encryption also depend on the Bouncy Castle library. This document contains the configuration between BouncyCastle FIPS (BC-FIPS) and non-FIPS (BC-non-FIPS) version while using Pulsar.
 
 ## How BouncyCastle modules packaged in Pulsar
 
