@@ -56,6 +56,8 @@ brew unlink node@20
 brew install node@20
 # recreate symlinks
 brew link node@20
+# delete broken symlinks in /opt/homebrew/bin
+find /opt/homebrew/bin -type l ! -exec test -e {} \; -delete
 # enable corepack, if the command fails, remove the conflicting files from `/opt/homebrew/bin` and try again
 corepack enable
 ```

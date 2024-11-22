@@ -22,7 +22,7 @@ show_yarn_installation_help() {
     echo "You will need to activate corepack by running:"
     echo "corepack enable"
     echo "Don't install yarn separately from a package manager. With Homebrew, uninstall any existing yarn installation with 'brew uninstall yarn'"
-    echo "You might have to run 'brew unlink node; brew link node; corepack enable' to fix the installation."
+    echo "You might have to run 'brew unlink node; brew link node; find /opt/homebrew/bin -type l ! -exec test -e {} \; -delete; corepack enable' to fix the installation."
     echo "If 'corepack enable' fails due to file conflicts, remove the conflictings files manually from /opt/homebrew/bin and try again."
 }
 
