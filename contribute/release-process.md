@@ -48,6 +48,7 @@ Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) 
 ```shell
 export VERSION_RC=3.0.4-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+export NEXT_VERSION_WITHOUT_RC=3.0.5
 export VERSION_BRANCH=branch-3.0
 export UPSTREAM_REMOTE=origin
 export SDKMAN_JAVA_VERSION=17
@@ -130,6 +131,18 @@ If you created a new branch, update the [CI - OWASP Dependency Check](https://gi
 ### Cherry-picking changes scheduled for the release
 
 Please read the [separate guide about maintenance tasks and cherry-picking](maintenance-process.md).
+
+### Create a GitHub label for the next release and move PRs labeled with the current release to the new label
+
+In the previous cherry-picking step, all PRs labeled with the current release were cherry-picked to the release branch.
+
+Now, we need to create a new label for the next release. From now on, PRs should be labeled with the new release label instead of the current release label.
+
+```shell
+gh label create "release/$NEXT_VERSION_WITHOUT_RC" --color "#1D76DB"
+```
+
+If there are any PRs that are still labeled with the current release label, you need to move them to the new release label. Please check the [cherry-picking guide](maintenance-process.md) to find out how to search for them.
 
 ### Update project version and tag
 
