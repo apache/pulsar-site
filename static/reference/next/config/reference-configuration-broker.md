@@ -1535,6 +1535,17 @@ control the number of replicas for storing the package
 
 **Category**: Packages Management
 
+### activeConsumerFailoverConsistentHashing
+Enable consistent hashing for selecting the active consumer in partitioned topics with Failover subscription type.For non-partitioned topics, consistent hashing is used by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### activeConsumerFailoverDelayTimeMillis
 How long to delay rewinding cursor and dispatching messages when active consumer is changed
 
