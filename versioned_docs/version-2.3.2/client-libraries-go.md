@@ -194,7 +194,7 @@ Method | Description | Return type
 `Topic()` | Fetches the producer's [topic](reference-terminology.md#topic)| `string`
 `Name()` | Fetches the producer's name | `string`
 `Send(context.Context, *ProducerMessage)` | Publishes a [message](#messages) to the producer's topic. This call will block until the message is successfully acknowledged by the Pulsar broker, or an error will be thrown if the timeout set using the `SendTimeout` in the producer's [configuration](#producer-configuration) is exceeded. | (MessageID, error)
-`SendAsync(context.Context, *ProducerMessage, func(MessageID, *ProducerMessage, error))`| Send a message, this call will be blocking until is successfully acknowledged by the Pulsar broker. |
+`SendAsync(context.Context, *ProducerMessage, func(MessageID, *ProducerMessage, error))`| Publishes a [message](#messages) to the producer's topic asynchronously. The callback will report back the message being published and the eventual error in publishing. |
 `LastSequenceID()` | Get the last sequence id that was published by this producer. his represent either the automatically assigned or custom sequence id (set on the ProducerMessage) that was published and acknowledged by the broker. | int64
 `Flush()`| Flush all the messages buffered in the client and wait until all messages have been successfully persisted. | error
 `Close()` | Closes the producer and releases all resources allocated to it. If `Close()` is called then no more messages will be accepted from the publisher. This method will block until all pending publish requests have been persisted by Pulsar. If an error is thrown, no pending writes will be retried. |
