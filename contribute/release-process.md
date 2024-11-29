@@ -312,10 +312,12 @@ sdk u java $SDKMAN_JAVA_VERSION
 git status
 
 # add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
- export APACHE_PASSWORD="<MY_PASSWORD>"
-export GPG_TTY=$(tty)
+# set your ASF password in the following line
+ export APACHE_PASSWORD=""
+
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
 curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
+
 # publish artifacts
 mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
 # publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
@@ -388,6 +390,9 @@ docker buildx prune
 For creating and publishing the docker images, run the following commands:
 
 ```shell
+# set your dockerhub username
+DOCKER_USER=<your-dockerhub-username>
+
 # ensure that you have the most recent base image locally
 docker pull ubuntu:22.04 # for 3.0.x
 docker pull alpine:3.20 # for 3.3.x+
@@ -395,16 +400,16 @@ docker pull alpine:3.20 # for 3.3.x+
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
-DOCKER_USER=<your-dockerhub-username>
+
+# login to dockerhub
 docker login -u $DOCKER_USER
+
 mvn install -pl docker/pulsar,docker/pulsar-all \
     -DskipTests \
     -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
     -Ddocker.organization=$DOCKER_USER \
-    -Ddocker.noCache=true \
-    -DUBUNTU_MIRROR=http://azure.archive.ubuntu.com/ubuntu/ \
-    -Dmaven.gitcommitid.nativegit=true
+    -Ddocker.noCache=true
 ```
 
 ## Call for the vote to release a version based on the release candidate
@@ -453,6 +458,7 @@ docker run --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
 Now you can render the template to the clipboard
 
 ```shell
+VOTE_DURATION=72
 tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org
 Subject: [VOTE] Release Apache Pulsar $VERSION_WITHOUT_RC based on $VERSION_RC
@@ -465,7 +471,7 @@ Included changes since the previous release:
 https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
 
 *** Please download, test and vote on this release. This vote will stay open
-for at least 72 hours ***
+for at least $VOTE_DURATION hours ***
 
 Only votes from PMC members are binding, but members of the community are
 encouraged to test the release and vote with "(non-binding)".
