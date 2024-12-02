@@ -91,11 +91,18 @@ module.exports = [
     "version": ""
   },
   {
+    "tagName": "v3.0.8",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.8/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": "v3.0.x"
+  },
+  {
     "tagName": "v3.0.7",
     "vtag": "3.0.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.0.7/",
     "doc": "/docs/3.0.x/client-libraries-java",
-    "version": "v3.0.x"
+    "version": ""
   },
   {
     "tagName": "v3.0.6",
