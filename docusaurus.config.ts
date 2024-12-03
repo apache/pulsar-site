@@ -490,6 +490,7 @@ module.exports = async function createConfigAsync() {
           id: "release-notes",
           path: "release-notes",
           routeBasePath: "release-notes",
+          numberPrefixParser: false,
           editUrl: `${githubSiteUrl}/edit/main`,
           sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
         }),
