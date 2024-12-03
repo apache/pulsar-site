@@ -1,5 +1,5 @@
 ---
-id: client-java-4.0.1
+id: client-java_4.0.1
 title: Client Java 4.0.1
 sidebar_label: Client Java 4.0.1
 ---
