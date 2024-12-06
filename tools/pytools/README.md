@@ -132,3 +132,26 @@ poetry run bin/site-publisher.py --site-path=<PATH> [--push={y|n|auto}]
 
 1. `site-path` is path to the site repo (of published branch `asf-site-next`);
 2. `push` specifies whether push to the remote published branch of site repo.
+
+## Troubleshooting website publishing problems
+
+If files don't get updated in the published website although site publishing is successful, one of the problems might be that the git history of `asf-site-next` branch is too large.
+
+This is how to clean the history of `asf-site-next` branch:
+
+```shell
+git clone --depth 1 --branch asf-site-next  https://github.com/apache/pulsar-site.git
+cd pulsar-site
+# create a new empty branch
+git checkout --orphan asf-site-next-temp
+# copy all files from asf-site-next branch
+git checkout asf-site-next -- .
+# add all files to the new branch
+git add .* *
+# reuse the commit message of asf-site-next branch
+git commit --reuse-message=asf-site-next --no-edit
+# force push the new branch to remote as asf-site-next branch
+git push --force origin asf-site-next-temp:asf-site-next
+```
+
+If push fails, you might need to remove branch protection of `asf-site-next` branch. This is handled in the `.asf.yaml` file of the `main` branch.
