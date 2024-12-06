@@ -35,7 +35,7 @@ function _buildVersion() {
     echo "..." $buildVersion "build done..."
 }
 
-COMMIT_MSG=$(git show -s --format=%s)
+COMMIT_MSG=$(git show -s --format="%s %B")
 FORCE_BUILD_ALL_VERSION=$(echo $COMMIT_MSG | sed 's/.*BUILD_ALL_VERSION=\([0-1]*\).*/\1/g')
 FORCE_BUILD_VERSIONS=$(echo $COMMIT_MSG | sed 's/.*BUILD_VERSIONS=\([0-9\.x,]*\).*/\1/g')
 if [[ $FORCE_BUILD_VERSIONS =~ ^[0-9\.x,]+$ ]]; then
