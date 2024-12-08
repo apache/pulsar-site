@@ -157,7 +157,7 @@ Method | Description | Return type
 `Topic()` | Fetches the producer's [topic](reference-terminology.md#topic)| `string`
 `Name()` | Fetches the producer's name | `string`
 `Send(context.Context, ProducerMessage)` | Publishes a [message](#messages) to the producer's topic. This call will block until the message is successfully acknowledged by the Pulsar broker, or an error will be thrown if the timeout set using the `SendTimeout` in the producer's [configuration](#producer-configuration) is exceeded. | `error`
-`SendAndGetMsgID(context.Context, ProducerMessage)`| Send a message, this call will be blocking until is successfully acknowledged by the Pulsar broker. | (MessageID, error)
+`SendAndGetMsgID(context.Context, ProducerMessage)`| Publishes a [message](#messages) to the producer's topic asynchronously. The callback will report back the message being published and the eventual error in publishing. | (MessageID, error)
 `SendAsync(context.Context, ProducerMessage, func(ProducerMessage, error))` | Publishes a [message](#messages) to the producer's topic asynchronously. The third argument is a callback function that specifies what happens either when the message is acknowledged or an error is thrown. |
 `SendAndGetMsgIDAsync(context.Context, ProducerMessage, func(MessageID, error))`| Send a message in asynchronous mode. The callback will report back the message being published and the eventual error in publishing |
 `LastSequenceID()` | Get the last sequence id that was published by this producer. his represent either the automatically assigned or custom sequence id (set on the ProducerMessage) that was published and acknowledged by the broker. | int64
