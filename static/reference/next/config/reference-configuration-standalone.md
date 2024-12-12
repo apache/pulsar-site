@@ -2662,6 +2662,17 @@ Used to specify multiple advertised listeners for the broker. The value must for
 
 **Category**: Server
 
+### allowAclChangesOnNonExistentTopics
+Opt-out of topic-existence check when setting permissions
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### allowOverrideEntryFilters
 Whether allow topic level entry filters policies overrides broker configuration.
 
@@ -3514,7 +3525,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1998`
+**Default**: `1999`
 
 **Dynamic**: `true`
 
