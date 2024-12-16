@@ -142,7 +142,7 @@ When using binary packages for direct deployment, you can follow these steps.
 
   ```bash
   	cd pulsar-manager
-  	tar -zxvf pulsar-manager.tar
+  	tar -xvf pulsar-manager.tar
   	cd pulsar-manager
   	cp -r ../dist ui
   ```
