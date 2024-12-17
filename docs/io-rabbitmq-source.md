@@ -110,7 +110,7 @@ This example describes how to use the RabbitMQ source connector to feed data fro
 2. Download the [nar package](https://downloads.apache.org/pulsar) corresponding to Pulsar's version and copy the following file to Pulsar's directory.
 
     ```bash
-    wget https://downloads.apache.org/pulsar/pulsar@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar
+    wget https://downloads.apache.org/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar
     cp pulsar-io-rabbitmq-@pulsar:version@.nar ./connectors
     ```
 
