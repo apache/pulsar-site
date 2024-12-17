@@ -47,12 +47,12 @@ spring.datasource.password=postgres
 3. Add a configuration mount and start with a docker image.
 
 ```bash
-docker pull apachepulsar/pulsar-manager:v0.3.0
+docker pull apachepulsar/pulsar-manager:v0.4.0
 docker run -it \
     -p 9527:9527 -p 7750:7750 \
     -v /your-path/application.properties:/pulsar-manager/pulsar-manager/application.properties
     -e SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties \
-    apachepulsar/pulsar-manager:v0.3.0
+    apachepulsar/pulsar-manager:v0.4.0
 ```
 
 #### Enable JWT authentication (optional)
@@ -81,13 +81,13 @@ For more information, see [Token Authentication Admin of Pulsar](security-token-
 Docker command to add profile and key files mount.
 
 ```bash
-docker pull apachepulsar/pulsar-manager:v0.3.0
+docker pull apachepulsar/pulsar-manager:v0.4.0
 docker run -it \
   -p 9527:9527 -p 7750:7750 \
   -v /your-path/application.properties:/pulsar-manager/pulsar-manager/application.properties
   -v /your-path/private.key:/pulsar-manager/private.key
   -e SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties \
-  apachepulsar/pulsar-manager:v0.3.0
+  apachepulsar/pulsar-manager:v0.4.0
 ```
 
 ### 3. Set the administrator account and password
@@ -134,8 +134,8 @@ When using binary packages for direct deployment, you can follow these steps.
 - Download and unzip the binary package, which is available on the [Pulsar Download](/download/) page.
 
   ```bash
-  	wget https://dist.apache.org/repos/dist/release/pulsar/pulsar-manager/pulsar-manager-0.3.0/apache-pulsar-manager-0.3.0-bin.tar.gz
-  	tar -zxvf apache-pulsar-manager-0.3.0-bin.tar.gz
+  	wget https://dist.apache.org/repos/dist/release/pulsar/pulsar-manager/pulsar-manager-0.4.0/apache-pulsar-manager-0.4.0-bin.tar.gz
+  	tar -zxvf apache-pulsar-manager-0.4.0-bin.tar.gz
   ```
 
 - Extract the back-end service binary package and place the front-end resources in the back-end service directory.
