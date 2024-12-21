@@ -233,9 +233,9 @@ When subscribing to a topic using a regular expression, you can pick a certain t
 ### replicateSubscriptionState
 If `replicateSubscriptionState` is enabled, a subscription state is replicated to geo-replicated clusters.
 
-**Type**: `boolean`
+**Type**: `java.lang.Boolean`
 
-**Default**: `false`
+**Default**: `null`
 
 ### subscriptionInitialPosition
 Initial position at which to set cursor when subscribing to a topic at first time.
