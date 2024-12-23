@@ -80,6 +80,7 @@ All exchanges via the WebSocket API use JSON.
 ### Authentication
 
 #### Browser javascript WebSocket client
+> For security reasons, we suggest passing the token as headers rather than as query parameters.
 
 Use the query param `token` to transport the authentication token.
 
