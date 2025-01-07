@@ -26,7 +26,7 @@ Also, you need the proper 64-bit JRE/JDK version installed. Please refer to [Pul
 Download the official Apache Pulsar distribution:
 
 ```bash
-wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz
+curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz?action=download"
 ```
 
 Once downloaded, unpack the tar file:
