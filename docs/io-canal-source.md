@@ -121,8 +121,8 @@ Here is an example of storing MySQL data using the configuration file as above.
 7. Start Pulsar standalone.
 
    ```bash
-   docker pull apachepulsar/pulsar:2.3.0
-   docker run -d -it --link pulsar-canal-server -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-standalone apachepulsar/pulsar:2.3.0 bin/pulsar standalone
+   docker pull apachepulsar/pulsar:@pulsar:version@
+   docker run --user 0 -d -it --link pulsar-canal-server -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-standalone apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
    ```
 
 8. Modify the configuration file `canal-mysql-source-config.yaml`.
@@ -167,9 +167,9 @@ Here is an example of storing MySQL data using the configuration file as above.
 
    ```bash
    docker exec -it pulsar-standalone /bin/bash
-   wget https://archive.apache.org/dist/pulsar/pulsar-2.3.0/connectors/pulsar-io-canal-2.3.0.nar -P connectors
+   curl -LO --output-dir connectors "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-canal-@pulsar:version@.nar?action=download"
    ./bin/pulsar-admin source localrun \
-      --archive $PWD/connectors/pulsar-io-canal-2.3.0.nar \
+      --archive $PWD/connectors/pulsar-io-canal-@pulsar:version@.nar \
       --classname org.apache.pulsar.io.canal.CanalStringSource \
       --tenant public \
       --namespace default \
