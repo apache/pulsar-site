@@ -2673,6 +2673,17 @@ Opt-out of topic-existence check when setting permissions
 
 **Category**: Server
 
+### allowAutoTopicCreationWithLegacyNamingScheme
+If 'allowAutoTopicCreation' is true and the name of the topic contains 'cluster',the topic cannot be automatically created.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### allowOverrideEntryFilters
 Whether allow topic level entry filters policies overrides broker configuration.
 
