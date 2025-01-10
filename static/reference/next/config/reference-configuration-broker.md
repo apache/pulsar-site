@@ -5029,6 +5029,17 @@ How frequently to flush the cursor positions that were accumulated due to rate l
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerCursorResetLedgerCloseTimestampMaxClockSkewMillis
+When resetting a subscription by timestamp, the broker will use the ledger closing timestamp metadata to determine the range of ledgers to search for the message where the subscription position is reset to.  Since by default, the search condition is based on the message publish time provided by the  client at the publish time, there will be some clock skew between the ledger closing timestamp  metadata and the publish time. This configuration is used to set the max clock skew between the ledger closing timestamp and the message publish time for finding the range of ledgers to open for searching. The default value is 60000 milliseconds (60 seconds). When set to -1, the broker will not use the ledger closing timestamp metadata to determine the range of ledgers to search for the message.
+
+**Type**: `int`
+
+**Default**: `60000`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerCursorRolloverTimeInSeconds
 Max time before triggering a rollover on a cursor ledger
 
