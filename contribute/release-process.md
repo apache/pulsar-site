@@ -25,7 +25,6 @@ Sometimes some PRs cannot be cherry-picked cleanly, you might need to create a s
 
 For PRs that are still open, you can choose to delay them to the next release or ping others to review so that they can be merged.
 
-To verify the release branch is not broken, you should trigger a Pulsar CI builds for the [pulsar-ci.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci.yaml) and [pulsar-ci-flaky.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci-flaky.yaml) workflows. The builds must pass before a release is performed.
 
 If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
 
@@ -42,6 +41,14 @@ Before you start the next release steps, make sure you have installed these soft
 * Zip
 
 Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
+
+## Prepare the release branch
+
+Before starting a release, besides handling the PRs, it's necessary to check that there aren't open critical security vulnerabilities in the dependencies. This can be checked from GitHub Security Alerts and the [OWASP Dependency Check workflow run logs](https://github.com/apache/pulsar/actions/workflows/ci-owasp-dependency-check.yaml).
+
+In addition, it's useful to check whether there's [a new release of Netty available](https://netty.io/news/index.html) with important fixes.
+
+To verify the release branch is not broken, you should trigger a Pulsar CI builds for the [pulsar-ci.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci.yaml) and [pulsar-ci-flaky.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci-flaky.yaml) workflows. The builds must pass before a release is performed.
 
 ## Set environment variables to be used across the commands {#env-vars}
 
@@ -157,7 +164,9 @@ cd $PULSAR_PATH
 
 # Commit
 git commit -m "Release $VERSION_WITHOUT_RC" -a
+```
 
+```shell
 # Create a "candidate" tag
 git tag -u $APACHE_USER@apache.org v$VERSION_RC -m "Release $VERSION_RC"
 
@@ -305,15 +314,17 @@ svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 Upload the artifacts to ASF Nexus:
 
 ```shell
+# add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
+# set your ASF password in the following line
+ export APACHE_PASSWORD=""
+```
+
+```shell
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 # Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
 git status
-
-# add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
-# set your ASF password in the following line
- export APACHE_PASSWORD=""
 
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
 curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
@@ -392,7 +403,14 @@ For creating and publishing the docker images, run the following commands:
 ```shell
 # set your dockerhub username
 DOCKER_USER=<your-dockerhub-username>
+```
 
+```shell
+# login to dockerhub
+docker login -u $DOCKER_USER
+```
+
+```shell
 # ensure that you have the most recent base image locally
 docker pull ubuntu:22.04 # for 3.0.x
 docker pull alpine:3.20 # for 3.3.x+
@@ -400,9 +418,6 @@ docker pull alpine:3.20 # for 3.3.x+
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
-
-# login to dockerhub
-docker login -u $DOCKER_USER
 
 mvn install -pl docker/pulsar,docker/pulsar-all \
     -DskipTests \
@@ -444,15 +459,14 @@ Set also these
 ```shell
 PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
 PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
-# validate pulling, will take some time, you can skip this if you have a slow internet connection
-docker pull $PULSAR_IMAGE_NAME
-docker pull $PULSAR_ALL_IMAGE_NAME
-# check that images are about right, you can skip this if you have a slow internet connection
-docker run --rm $PULSAR_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
-docker run --rm $PULSAR_ALL_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
-# check that Pulsar standalone starts too (use CTRL-C to terminate)
-docker run --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
-docker run --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+```
+
+```shell
+# check that Pulsar standalone starts (use CTRL-C to terminate) for both architectures
+docker run --platform linux/arm64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/arm64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
 ```
 
 Now you can render the template to the clipboard
