@@ -135,6 +135,16 @@ This setting reduces the receiver queue size for individual partitions if the to
 
 **Default**: `50000`
 
+### negativeAckPrecisionBitCnt
+The redelivery time precision bit count. The lower bits of the redelivery time will betrimmed to reduce the memory occupation.
+The default value is 8, which means theredelivery time will be bucketed by 256ms, the redelivery time could be earlier(no later)than the expected time, but no more than 256ms. 
+If set to k, the redelivery time will bebucketed by 2^k ms.
+If the value is 0, the redelivery time will be accurate to ms.
+
+**Type**: `int`
+
+**Default**: `8`
+
 ### negativeAckRedeliveryBackoff
 Interface for custom message is negativeAcked policy. You can specify `RedeliveryBackoff` for a consumer.
 

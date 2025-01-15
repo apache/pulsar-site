@@ -21,10 +21,10 @@ It's great for quickly switching between different clusters, and can modify clus
 
 
 ## Install Pulsar Shell
-Download the tarball from the [download page](pathname:///download) and extract it.
+Download the tarball from the [download page](pathname:///download#shell) and extract it.
 
 ```shell
-wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-shell-@pulsar:version@-bin.tar.gz
+curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/apache-pulsar-shell-@pulsar:version@-bin.tar.gz?action=download"
 tar xzvf apache-pulsar-shell-@pulsar:version@-bin.tar.gz
 cd apache-pulsar-shell-@pulsar:version@/
 ```

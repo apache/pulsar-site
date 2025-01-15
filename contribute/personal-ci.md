@@ -3,28 +3,39 @@ id: personal-ci
 title: Personal CI
 ---
 
-Pulsar CI is currently hosted on Apache Infra resources. Since we cannot add more resources to Pulsar CI, we need to find other ways to reduce the load on Pulsar CI.
+Pulsar CI is currently hosted on Apache Infrastructure resources. Since we cannot add more resources to Pulsar CI, we need to find alternative ways to reduce the load on the system.
 
-After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, any pull request directly sent to `apache/pulsar` won't be triggered anymore.
+After merging [PR-17693](https://github.com/apache/pulsar/pull/17693), pull requests sent directly to `apache/pulsar` will no longer trigger CI builds.
 
-That said, pull requests should be first tested in your own fork. GitHub Actions provides separate quota for pull requests that are executed in a forked repository.
+Therefore, pull requests should first be tested in your own fork. GitHub Actions provides a separate quota for pull requests that are executed in forked repositories.
 
 ## CI workflows in a fork
 
-Here are instructions to use your personal CI on GitHub:
+Before using personal CI workflows, ensure GitHub Actions is enabled for your fork in the GitHub UI. You can check this under your fork's "Settings" > "Actions" > "General" tab.
+Choose the "Allow all actions and reusable workflows" option.
 
-1. Push your intended pull request changes to a new branch in your fork (the usual way you do it).
-2. Open a pull request to your own fork.
+Here are the steps to use your personal CI on GitHub:
 
-Below are the instructions for command-line interface.
+1. Push your intended pull request changes to a new branch in your fork (following the standard process).
+2. Create a pull request targeting your own fork instead of the main repository.
 
-Firstly, install [GitHub CLI](https://cli.github.com/) and configure it. With GitHub CLI, there's an easy way to open the PR to your own fork with a single command:
+You can create the pull request in two ways:
+
+### Using GitHub CLI
+
+First, install and configure the [GitHub CLI](https://cli.github.com/). Then use this single command to create a PR to your fork:
 
 ```bash
 gh pr create --repo=<your-github-id>/pulsar --base master --head <your-pr-branch> -f
 ```
 
-Alternatively, you can also create a PR to your own fork in the GitHub UI when opening a new PR. To do so, first click on "compare across forks" and then choose your own fork as both the forked repository and head repository.
+### Using GitHub Web Interface
+
+Alternatively, you can create a PR to your own fork through the GitHub web interface:
+
+1. When creating a new PR, select your fork as both the "base repository" and "head repository" in the dropdown menus.
+2. Choose "master" as the "base" branch and your PR branch as the "compare" branch (should be the default)
+3. Complete the PR creation process as normal
 
 ## Stay in-sync with upstream
 
@@ -47,4 +58,4 @@ The additional benefit of the "Personal CI" is that you get SSH access to the bu
 
 Here is [the inline `ssh-access` composite action implementation](https://github.com/apache/pulsar/blob/master/.github/actions/ssh-access/action.yml).
 
-The SSH access is secured with the SSH key registered in GitHub. For example, your public keys are https://github.com/horizonzy.keys. You will first have to register an SSH public key in GitHub for that to work.
+The SSH access is secured with the SSH key registered in GitHub. For example, your public keys are https://github.com/YOUR_GITHUB_ID.keys. You will first have to register an SSH public key in GitHub for that to work.
