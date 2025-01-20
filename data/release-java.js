@@ -14,11 +14,18 @@ module.exports = [
     "version": ""
   },
   {
+    "tagName": "v3.3.4",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.4/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": ""
+  },
+  {
     "tagName": "v3.3.3",
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.3.3/",
     "doc": "/docs/3.3.x/client-libraries-java",
-    "version": "v3.3.x"
+    "version": ""
   },
   {
     "tagName": "v3.3.2",
