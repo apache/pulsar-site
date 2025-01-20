@@ -24,7 +24,7 @@ module.exports = [
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/pulsar-3.3.4/",
     "doc": "/docs/3.3.x",
-    "version": ""
+    "version": "v3.3.x"
   },
   {
     "author": "lhotari",

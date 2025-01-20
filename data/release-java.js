@@ -18,7 +18,7 @@ module.exports = [
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.3.4/",
     "doc": "/docs/3.3.x/client-libraries-java",
-    "version": ""
+    "version": "v3.3.x"
   },
   {
     "tagName": "v3.3.3",
