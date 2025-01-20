@@ -46,15 +46,16 @@ gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json body --jq .body
 ```bash
 # Replace 3.0.6 with the target version tag
 VERSION_WITHOUT_RC=3.0.6
+PREVIOUS_VERSION=3.0.5
 # Replace apache/pulsar with the component repo
-./scripts/register_new_version.py $VERSION_WITHOUT_RC $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
+./scripts/register_new_version.py $VERSION_WITHOUT_RC $PREVIOUS_VERSION $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
 ```
 
 Alternatively, for a tag instead of a release:
 
 ```bash
 # For a tag instead of a release
-./scripts/register_new_version.py $VERSION_WITHOUT_RC $(cd $PULSAR_PATH && git show -s --format="%ae %aI" "v$VERSION_RC" | tail -n 1 | sed 's/@.* / /')
+./scripts/register_new_version.py $VERSION_WITHOUT_RC $PREVIOUS_VERSION $(cd $PULSAR_PATH && git show -s --format="%ae %aI" "v$VERSION_RC" | tail -n 1 | sed 's/@.* / /')
 ```
 
 ## Generate release notes
