@@ -682,10 +682,12 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 
 `regctl` from [regclient](https://github.com/regclient/regclient) is needed for copying multi-arch images. Install with `brew install regclient` or with [other installation options](https://github.com/regclient/regclient/blob/main/docs/install.md) of regclient. The benefit of `regctl` over using `docker pull/tag/push` is that it will handle copying both `amd64` and the `arm64` image.
 
-```bash
+```shell
 RELEASE_MANAGER_DOCKER_USER=otheruser
-CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
+```
 
+```shell
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
 ```
@@ -798,6 +800,8 @@ This step is for every release.
 First, build swagger files from apache/pulsar repo at the released tag:
 
 ```shell
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
 mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 PULSAR_PATH=$(pwd)
 ```
