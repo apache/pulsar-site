@@ -23,24 +23,6 @@ brew install gh
 gh auth login
 ```
 
-## Fetch the release metadata
-
-```bash
-# Replace 3.0.6 with the target version tag
-VERSION_WITHOUT_RC=3.0.6
-# Replace apache/pulsar with the component repo
-gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,tagName,publishedAt
-```
-
-## Fetch the release note
-
-```bash
-# Replace 3.0.6 with the target version tag
-VERSION_WITHOUT_RC=3.0.6
-# Replace apache/pulsar with the component repo
-gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json body --jq .body
-```
-
 ## Register the new released version to releases.json, data/release-pulsar.js and data/release-java.js files
 
 ```bash
@@ -60,22 +42,27 @@ Alternatively, for a tag instead of a release:
 
 ## Generate release notes
 
-There isn't a definite way yet. 
+There isn't a definite way yet. You will need to categorize the PRs into different sections manually and edit the release note file. These commands are used to generate the release note entries.
 
 Here are 2 approaches:
 
-Using "git log"
+Using "git log" (copies output to clipboard using pbcopy)
 
-```bash
+```shell
 PREVIOUS_VERSION=3.0.3
 VERSION_WITHOUT_RC=3.0.4
+```
+
+```shell
+cd $PULSAR_PATH
 git log --reverse  --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | awk -F ']' '{
     if ($1 ~ /^\[/) {
         print $1 "]" $2, $0
     } else {
         print "[zzz]", $0
     }
-}' | sort | cut -d ' ' -f2- | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /'
+}' | sort | cut -d ' ' -f2- | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /' | sed 's/</\&lt;/g' | sed 's/>/\&gt;/g' \
+| pbcopy
 ```
 
 Alternatively using "gh pr list"
@@ -92,10 +79,13 @@ gh pr list -L 1000 --search "is:pr is:merged milestone:4.0.0" --json title,numbe
 
 ## Update the release note page
 
+The following steps are handled by the script `./scripts/generate_release_notes.py`.
+
 1. Copy the related release notes entries and add a [versioned release note file](https://github.com/apache/pulsar-site/tree/main/release-notes/versioned).
 2. Update the [version metadata files](https://github.com/apache/pulsar-site/tree/main/data) (`release-*.js`). For apache/pulsar releases, this means updating `release-java.js` (Java client) and `release-pulsar.js` (Pulsar).
 3. For every apache/pulsar release, you should add a `<release-version>` entry to the corresponding place in the `releases.json` file.
-4. Update swagger files. ref: [swagger files](https://pulsar.apache.org/contribute/release-process/#swagger-files)
+
+Update swagger files. ref: [swagger files](https://pulsar.apache.org/contribute/release-process/#swagger-files)
 
 To preview the result, follow the instructions for [previewing content](document-preview.md#preview-changes).
 
