@@ -5365,6 +5365,17 @@ Default is ``.
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerPersistIndividualAckAsLongArray
+Whether persist cursor ack stats as long arrays, which will compress the data and reduce GC rate
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerPrometheusStatsLatencyRolloverSeconds
 Managed ledger prometheus stats latency rollover seconds
 
