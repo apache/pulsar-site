@@ -5370,7 +5370,7 @@ Whether persist cursor ack stats as long arrays, which will compress the data an
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
