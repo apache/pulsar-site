@@ -5224,6 +5224,28 @@ Maximum time before forcing a ledger rollover for a topic
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerMaxReadsInFlightPermitsAcquireQueueSize
+Maximum number of reads that can be queued for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `int`
+
+**Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxReadsInFlightPermitsAcquireTimeoutMillis
+Maximum time to wait for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `long`
+
+**Default**: `60000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerMaxReadsInFlightSizeInMB
 Maximum buffer size for bytes read from storage. This is the memory retained by data read from storage (or cache) until it has been delivered to the Consumer Netty channel. Use O to disable
 
