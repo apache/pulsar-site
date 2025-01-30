@@ -6,6 +6,31 @@ sidebar_label: Apache Pulsar 4.0.2
 
 #### 2025-01-20
 
+### Known Major Issues in this Release
+
+This release contains a known issue impacting the `seek` method by timestamp. This issue was reported after the release was published.
+
+- [Bug] Seeking by timestamp causes the subscription to reset to the earliest position ([#23910](https://github.com/apache/pulsar/issues/23910))
+
+Workaround for the issue:
+
+The issue is caused by changes introduced in [#22792](https://github.com/apache/pulsar/pull/22792). To resolve this, disable the functionality by setting the following configuration:
+
+```properties
+managedLedgerCursorResetLedgerCloseTimestampMaxClockSkewMillis=-1
+```
+
+Workaround Configuration Notes:
+
+- This configuration key needs to be manually added to your `broker.conf` file as it doesn't exist by default
+- For Apache Pulsar Helm Chart Kubernetes deployments, add the following to your values.yaml file under the `broker`/`configData` section:
+
+```yaml
+broker:
+  configData:
+    PULSAR_PREFIX_managedLedgerCursorResetLedgerCloseTimestampMaxClockSkewMillis: "-1"
+```
+
 ### Library updates
 
 - [fix][sec] Bump commons-io version to 2.18.0 ([#23684](https://github.com/apache/pulsar/pull/23684))
