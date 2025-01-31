@@ -3,11 +3,27 @@ id: personal-ci
 title: Personal CI
 ---
 
-Pulsar CI is currently hosted on Apache Infrastructure resources. Since we cannot add more resources to Pulsar CI, we need to find alternative ways to reduce the load on the system.
+Apache Pulsar's CI infrastructure runs on limited Apache Infrastructure resources. To optimize these resources and reduce CI queue times, contributors are strongly encouraged to use "Personal CI" by testing pull requests in their own forks first.
 
-After merging [PR-17693](https://github.com/apache/pulsar/pull/17693), pull requests sent directly to `apache/pulsar` will no longer trigger CI builds.
+When you create a pull request from your fork, GitHub Actions provides a separate quota specifically for forked repository builds. This means:
 
-Therefore, pull requests should first be tested in your own fork. GitHub Actions provides a separate quota for pull requests that are executed in forked repositories.
+1. You get immediate CI feedback without waiting for maintainer approval
+2. Your CI runs don't consume the main Pulsar repository's CI resources
+3. You can iterate and fix issues faster in your own environment
+
+The workflow is simple:
+1. Test your changes thoroughly in your fork using Personal CI
+2. Once tests pass consistently, notify maintainers for final PR review
+
+Some important notes about testing:
+- Pulsar has known [flaky tests](https://github.com/apache/pulsar/issues?q=is%3Aissue%20state%3Aopen%20flaky-test) that may require multiple CI runs
+- Use the "Rerun failed jobs" button in GitHub Actions to retry failed workflows
+- For test failures related to your changes, debug locally by running specific tests in your IDE
+
+Critical requirement: Always create pull requests from a unique feature branch, not from your fork's `master` branch. The Personal CI process only works with feature branches.
+For example:
+- ✅ Create branch `feature-xyz` and open PR from it
+- ❌ Opening a PR directly from your fork's `master` branch will not work
 
 ## CI workflows in a fork
 
@@ -41,7 +57,7 @@ Alternatively, you can create a PR to your own fork through the GitHub web inter
 
 It's worth keeping your master branch in sync with apache/pulsar's master (the upstream) so that the diff of PR will be reasonable in your own fork.
 
-Read more about the instructions to sync a fork from the WebUI, from the GitHub CI, or from the command line at [Syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork). 
+Read more about the instructions to sync a fork from the WebUI, from the GitHub CI, or from the command line at [Syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork).
 
 ## SSH to CI jobs
 
