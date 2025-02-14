@@ -1290,6 +1290,17 @@ The directory to locate proxy extensions
 
 **Category**: proxy plugin
 
+### proxyHttpResponseHeadersJson
+Default http header map to add into http-proxy for the any security requirements eg: { "header1": "val1", "header2": "val2" }
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: proxy plugin
+
 ### useSeparateThreadPoolForProxyExtensions
 Use a separate ThreadPool for each Proxy Extension
 
