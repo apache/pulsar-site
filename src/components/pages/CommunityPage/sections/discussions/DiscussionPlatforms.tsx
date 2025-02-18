@@ -241,7 +241,7 @@ const DiscussionPlatforms: React.FC = () => {
       title: "WeChat",
       description: (
         <span>
-          Welcome to the Apache Pulsar Official Account at WeChat! The account
+          Welcome to the unofficial Apache Pulsar Account at WeChat! The account
           ID is ApachePulsar.
         </span>
       ),
