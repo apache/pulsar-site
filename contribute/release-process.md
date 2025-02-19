@@ -188,6 +188,14 @@ git tag -d v$VERSION_RC
 git push $UPSTREAM_REMOTE :v$VERSION_RC
 ```
 
+## Specify MAVEN_OPTS
+
+Set `MAVEN_OPTS` to avoid issues in the build process.
+
+```shell
+export MAVEN_OPTS="-Xss1500k -Xmx3072m -XX:+UnlockDiagnosticVMOptions -XX:GCLockerRetryAllocationCount=100"
+```
+
 ## Cleaning up locally compiled BookKeeper artifacts
 
 It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
@@ -196,7 +204,8 @@ Cleaning up the local Maven repository Bookkeeper artifacts for the version used
 
 ```shell
 cd $PULSAR_PATH
-BOOKKEEPER_VERSION=$(mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
+sdk u java $SDKMAN_JAVA_VERSION
+BOOKKEEPER_VERSION=$(command mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
 echo "BookKeeper version is $BOOKKEEPER_VERSION"
 [ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
 ```
@@ -210,7 +219,7 @@ cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 # build the binaries
-mvn clean install -DskipTests
+command mvn clean install -DskipTests
 ```
 
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
@@ -298,7 +307,7 @@ Then use instructions in [verifying release candidates](validate-release-candida
 cd /tmp
 tar -xvzf ~/pulsar-svn-release-${VERSION_RC}/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
 cd apache-pulsar-$VERSION_WITHOUT_RC-src
-mvn apache-rat:check
+command mvn apache-rat:check
 ```
 
 ### Commit and upload the staged files in the local SVN directory to ASF SVN server
@@ -330,9 +339,9 @@ git status
 curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
 
 # publish artifacts
-mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
+command mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
 # publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
-mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
+command mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
 ```
 
 :::note
@@ -413,13 +422,13 @@ docker login -u $DOCKER_USER
 ```shell
 # ensure that you have the most recent base image locally
 docker pull ubuntu:22.04 # for 3.0.x
-docker pull alpine:3.20 # for 3.3.x+
+docker pull alpine:3.21 # for 3.3.x+
 
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 
-mvn install -pl docker/pulsar,docker/pulsar-all \
+command mvn install -pl docker/pulsar,docker/pulsar-all \
     -DskipTests \
     -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
@@ -802,7 +811,7 @@ First, build swagger files from apache/pulsar repo at the released tag:
 ```shell
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
-mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+command mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 PULSAR_PATH=$(pwd)
 ```
 
