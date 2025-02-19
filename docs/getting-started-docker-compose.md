@@ -5,7 +5,7 @@ sidebar_label: "Run Pulsar locally with Docker Compose"
 description: Get started with Apache Pulsar on your local machine using Docker Compose.
 ---
 
-To run Pulsar loccally with Docker Compose, follow the steps below.
+To run Pulsar locally with Docker Compose, follow the steps below.
 
 ## Step 1: Configure the `compose.yml` template
 
