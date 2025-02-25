@@ -9,7 +9,7 @@ This page contains manual instructions for reviewing and verifying a release can
 
 :::note
 
-There's a bash script [validate_pulsar_release.sh](https://github.com/lhotari/pulsar-contributor-toolbox/blob/master/scripts/validate_pulsar_release.sh) available for assisting in semi-automated validation for the following steps.
+Automated scripts are available in [lhotari/pulsar-release-validation](https://github.com/lhotari/pulsar-release-validation) to assist with semi-automated validation for the following steps. The validation script runs in a containerized environment and requires only Docker and Bash on Linux & macOS, or PowerShell 7.x on Windows.
 
 :::
 
