@@ -55,13 +55,13 @@ VERSION_WITHOUT_RC=3.0.4
 
 ```shell
 cd $PULSAR_PATH
-git log --reverse  --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 12 | sed 's/\] \[/][/' | perl -p -e 's/^\s+//' | awk -F ']' '{
+git log --reverse --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 12 | sed 's/\] \[/][/' | sed 's/^[[:space:]]*//' | awk -F ']' '{
     if ($1 ~ /^\[/) {
-        print $1 "]" $2, $0
+        print $1 "]" $2 " | " $0
     } else {
-        print "[zzz]", $0
+        print "[zzz] | " $0
     }
-}' | sort | cut -d ' ' -f2- | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /' | sed 's/</\&lt;/g' | sed 's/>/\&gt;/g' \
+}' | sort | sed 's/^[^|]* | //' | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /' | sed 's/</\&lt;/g' | sed 's/>/\&gt;/g' \
 | pbcopy
 ```
 
