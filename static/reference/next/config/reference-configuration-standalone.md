@@ -4769,6 +4769,17 @@ Maximum prefetch rounds for ledger reading for offloading
 
 **Category**: Storage (Ledger Offloading)
 
+### managedLedgerOffloadReadThreads
+Maximum number of thread pool threads for offloaded ledger reading
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
 ### managedLedgerOffloadThresholdInSeconds
 The threshold to triggering automatic offload to long term storage
 
