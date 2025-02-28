@@ -29,7 +29,7 @@ services:
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
-    command: >
+    command: |
       bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
              bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
              exec bin/pulsar zookeeper"
@@ -46,7 +46,7 @@ services:
     image: apachepulsar/pulsar:latest
     networks:
       - pulsar
-    command: >
+    command: |
       bin/pulsar initialize-cluster-metadata \
                --cluster cluster-a \
                --zookeeper zookeeper:2181 \
