@@ -6,6 +6,10 @@ sidebar_label: Apache Pulsar 3.3.5
 
 #### 2025-02-27
 
+### Known issues
+
+There's a potential regression where consuming messages could fail due to https://github.com/apache/pulsar/pull/23931 changes. This is being addressed in https://github.com/apache/pulsar/pull/24055. No workarounds currently exist.
+
 ### Library updates
 
 - [feat][misc] upgrade oxia java client to 0.5.0 ([#23871](https://github.com/apache/pulsar/pull/23871))
