@@ -1602,7 +1602,7 @@ Default per-topic backlog quota limit by size, less than 0 means no limitation. 
 **Category**: Policies
 
 ### backlogQuotaDefaultLimitGB
-@deprecated - Use backlogQuotaDefaultLimitByte instead.
+@deprecated - Use backlogQuotaDefaultLimitBytes instead.
 
 **Type**: `double`
 
