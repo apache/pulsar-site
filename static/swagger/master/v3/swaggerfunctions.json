@@ -38,6 +38,33 @@
             },
             "type": "object"
         },
+        "BatchingConfig": {
+            "properties": {
+                "batchBuilder": {
+                    "type": "string"
+                },
+                "batchingMaxBytes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "batchingMaxMessages": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "batchingMaxPublishDelayMs": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "roundRobinRouterBatchingPartitionSwitchFrequency": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "Certificate": {
             "properties": {
                 "encoded": {
@@ -706,6 +733,9 @@
             "properties": {
                 "batchBuilder": {
                     "type": "string"
+                },
+                "batchingConfig": {
+                    "$ref": "#/definitions/BatchingConfig"
                 },
                 "compressionType": {
                     "enum": [
