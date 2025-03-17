@@ -8,7 +8,7 @@ sidebar_label: Apache Pulsar 3.3.5
 
 ### Known issues
 
-There's a potential regression where consuming messages could fail due to https://github.com/apache/pulsar/pull/23931 changes. This is being addressed in https://github.com/apache/pulsar/pull/24055. No workarounds currently exist.
+There's a potential regression where consuming messages could fail due to https://github.com/apache/pulsar/pull/23931 changes. This is being addressed in https://github.com/apache/pulsar/pull/24055 and https://github.com/apache/pulsar/pull/24089. No workarounds currently exist.
 
 ### Library updates
 
