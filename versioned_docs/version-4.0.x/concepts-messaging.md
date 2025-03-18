@@ -312,7 +312,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 
 :::note
 
-*  Currently, retry letter topic is enabled in Shared subscription types, because it relies on the delay message feature, which is only available in Shared subscription types.
+*  Currently, retry letter topic is enabled in Shared subscription types.
 *  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a large number of retries with a configurable retry interval. Because messages in the retry letter topic are persisted to BookKeeper, while messages that need to be retried due to negative acknowledgment are cached on the client side.
 
 :::
