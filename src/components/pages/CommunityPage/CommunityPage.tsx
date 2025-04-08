@@ -262,7 +262,7 @@ function MemberCard({ member }) {
       <div>
         <div className={s.CommunityMembersMemberPic}>
           {githubUsername && (
-            <img src={'https://github.com/' + githubUsername + '.png'} alt={githubUsername} />
+            <img src={'/img/team/' + githubUsername + '.png'} alt={githubUsername} />
           )}
         </div>
         <div className={s.CommunityMembersMemberName}>
