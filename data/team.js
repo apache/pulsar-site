@@ -396,6 +396,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Zhangjian He",
+      "apacheId": "hezhangjian",
+      "githubUsername": [
+        "hezhangjian"
+      ]
+    },
+    {
       "name": "Yan Zhao",
       "apacheId": "horizonzy",
       "githubUsername": [
@@ -482,13 +489,6 @@ module.exports = {
       "apacheId": "rxl",
       "githubUsername": [
         "wolfstudy"
-      ]
-    },
-    {
-      "name": "ZhangJian He",
-      "apacheId": "shoothzj",
-      "githubUsername": [
-        "shoothzj"
       ]
     },
     {
