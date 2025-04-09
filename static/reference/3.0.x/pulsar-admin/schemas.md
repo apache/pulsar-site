@@ -9,7 +9,7 @@ $ pulsar-admin schemas subcommand
 
 
 
-## get
+## <em>get</em>
 
 Get the schema for a topic
 
@@ -27,7 +27,7 @@ $ pulsar-admin schemas get options
 | `-v, --version` | version|null||
 
 
-## delete
+## <em>delete</em>
 
 Delete all versions schema of a topic
 
@@ -44,7 +44,7 @@ $ pulsar-admin schemas delete options
 | `-f, --force` | whether to delete schema completely. If true, delete all resources (including metastore and ledger), otherwise only do a mark deletion and not remove any resources indeed|false||
 
 
-## upload
+## <em>upload</em>
 
 Update the schema for a topic
 
@@ -61,7 +61,7 @@ $ pulsar-admin schemas upload options
 | `-f, --filename` | filename|null||
 
 
-## extract
+## <em>extract</em>
 
 Provide the schema via a topic
 
@@ -80,4 +80,21 @@ $ pulsar-admin schemas extract options
 | `-j, --jar` | jar filepath|null||
 | `-a, --always-allow-null` | set schema whether always allow null or not|true||
 | `-t, --type` | type avro or json|null||
+
+
+## <em>compatibility</em>
+
+Test schema compatibility
+
+**Command:**
+
+```shell
+$ pulsar-admin schemas compatibility options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `-f, --filename` | filename|null||
 

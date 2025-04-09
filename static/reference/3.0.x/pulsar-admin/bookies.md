@@ -9,7 +9,7 @@ $ pulsar-admin bookies subcommand
 
 
 
-## racks-placement
+## <em>racks-placement</em>
 
 Gets the rack placement information for all the bookies in the cluster
 
@@ -25,7 +25,7 @@ $ pulsar-admin bookies racks-placement options
 |---|---|---|
 
 
-## list-bookies
+## <em>list-bookies</em>
 
 List bookies
 
@@ -41,7 +41,7 @@ $ pulsar-admin bookies list-bookies options
 |---|---|---|
 
 
-## get-bookie-rack
+## <em>get-bookie-rack</em>
 
 Gets the rack placement information for a specific bookie in the cluster
 
@@ -58,7 +58,7 @@ $ pulsar-admin bookies get-bookie-rack options
 | `-b, --bookie` | Bookie address (format: `address:port`)|null||
 
 
-## delete-bookie-rack
+## <em>delete-bookie-rack</em>
 
 Remove rack placement information for a specific bookie in the cluster
 
@@ -75,7 +75,7 @@ $ pulsar-admin bookies delete-bookie-rack options
 | `-b, --bookie` | Bookie address (format: `address:port`)|null||
 
 
-## set-bookie-rack
+## <em>set-bookie-rack</em>
 
 Updates the rack placement information for a specific bookie in the cluster (note. bookie address format:`address:port`)
 

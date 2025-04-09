@@ -609,6 +609,50 @@ Average resource usage difference threshold to determine a broker whether to be 
 
 **Category**: Load Balancer
 
+### loadBalancerAvgShedderHighThreshold
+The high threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `40`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountHighThreshold
+The number of times the high threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderHitCountLowThreshold
+The number of times the low threshold is triggered before the bundle is unloaded.
+
+**Type**: `int`
+
+**Default**: `8`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerAvgShedderLowThreshold
+The low threshold for the difference between the highest and lowest loaded brokers.
+
+**Type**: `int`
+
+**Default**: `15`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerBandwithInResourceWeight
 BandwithIn Resource Usage Weight
 
@@ -1096,7 +1140,7 @@ For each uniform balanced unload, the maximum number of bundles that can be unlo
 **Category**: Load Balancer
 
 ### maxUnloadPercentage
-In the UniformLoadShedder strategy, the maximum unload ratio.
+In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio.For AvgShedder, recommend to set to 0.5, so that it will distribute the load evenly between the highest and lowest brokers.
 
 **Type**: `double`
 
@@ -1107,7 +1151,7 @@ In the UniformLoadShedder strategy, the maximum unload ratio.
 **Category**: Load Balancer
 
 ### minUnloadMessage
-In the UniformLoadShedder strategy, the minimum message that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum message that triggers unload.
 
 **Type**: `int`
 
@@ -1118,7 +1162,7 @@ In the UniformLoadShedder strategy, the minimum message that triggers unload.
 **Category**: Load Balancer
 
 ### minUnloadMessageThroughput
-In the UniformLoadShedder strategy, the minimum throughput that triggers unload.
+In the UniformLoadShedder and AvgShedder strategy, the minimum throughput that triggers unload.
 
 **Type**: `int`
 
@@ -1286,7 +1330,7 @@ Classname of Pluggable JVM GC metrics logger that can log GC specific metrics
 **Category**: Metrics
 
 ### metricsBufferResponse
-If true, export buffered metrics
+Set to true to enable the broker to cache the metrics response; the default is false. The caching period is defined by `managedLedgerStatsPeriodSeconds`. The broker returns the same response for subsequent requests within the same period. Ensure that the scrape interval of your monitoring system matches the caching period.
 
 **Type**: `boolean`
 
@@ -1391,6 +1435,17 @@ control the number of replicas for storing the package
 **Dynamic**: `false`
 
 **Category**: Packages Management
+
+### activeConsumerFailoverConsistentHashing
+Enable consistent hashing for selecting the active consumer in partitioned topics with Failover subscription type.For non-partitioned topics, consistent hashing is used by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
 
 ### activeConsumerFailoverDelayTimeMillis
 How long to delay rewinding cursor and dispatching messages when active consumer is changed
@@ -1848,6 +1903,17 @@ Max pending publish requests per connection to avoid keeping large number of pen
 
 **Category**: Policies
 
+### maxSecondsToClearTopicNameCache
+A Specifies the minimum number of seconds that the topic name stays in memory, to avoid clear cache frequently when there are too many topics are in use.
+
+**Type**: `int`
+
+**Default**: `7200`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### maxTopicsPerNamespace
 Max number of topics allowed to be created in the namespace. When the topics reach the max topics of the namespace, the broker should reject the new topic request(include topic auto-created by the producer or consumer) until the number of connected consumers decrease.  Using a value of 0, is disabling maxTopicsPerNamespace-limit check.
 
@@ -2086,6 +2152,17 @@ Enable subscription types (default is all type enabled)
 
 **Category**: Policies
 
+### topicNameCacheMaxCapacity
+Max capacity of the topic name cache. -1 means unlimited cache; 0 means broker will clear all cache per maxSecondsToClearTopicNameCache, it does not mean broker will not cache TopicName.
+
+**Type**: `int`
+
+**Default**: `100000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### topicPublisherThrottlingTickTimeMillis
 Tick time to schedule task that checks topic publish rate limiting across all topics  Reducing to lower value can give more accuracy while throttling publish but it uses more CPU to perform frequent check. (Disable publish throttling with value 0)
 
@@ -2160,6 +2237,17 @@ Enable TLS when talking with other brokers in the same cluster (admin operation)
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Replication
+
+### createTopicToRemoteClusterForReplication
+Whether the internal replicator will trigger topic auto-creation on the remote cluster.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
 
 **Category**: Replication
 
@@ -2354,6 +2442,17 @@ Used to specify multiple advertised listeners for the broker. The value must for
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### allowAclChangesOnNonExistentTopics
+Opt-out of topic-existence check when setting permissions
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -3000,6 +3099,23 @@ Capacity for accept queue in the HTTP server Default is set to 8192.
 
 **Category**: Server
 
+### httpServerGzipCompressionExcludedPaths
+Gzip compression is enabled by default. Specific paths can be excluded from compression.
+There are 2 syntaxes supported, Servlet url-pattern based, and Regex based.
+If the spec starts with '^' the spec is assumed to be a regex based path spec and will match with normal Java regex rules.
+If the spec starts with '/' then spec is assumed to be a Servlet url-pattern rules path spec for either an exact match or prefix based match.
+If the spec starts with '*.' then spec is assumed to be a Servlet url-pattern rules path spec for a suffix based match.
+All other syntaxes are unsupported.
+Disable all compression with ^.* or ^.*$
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### httpServerThreadPoolQueueSize
 Capacity for thread pool queue in the HTTP server Default is set to 8192.
 
@@ -3150,7 +3266,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `2048`
+**Default**: `4454`
 
 **Dynamic**: `true`
 
@@ -3170,6 +3286,7 @@ Max size of messages.
 ### maxNumPartitionsPerPartitionedTopic
 The number of partitions per partitioned topic.
 If try to create or update partitioned topics by exceeded number of partitions, then fail.
+Use 0 or negative number to disable the check.
 
 **Type**: `int`
 
@@ -3429,7 +3546,7 @@ Number of threads to use for pulsar broker service. The executor in thread pool 
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -3440,7 +3557,7 @@ Number of threads to use for HTTP requests processing Default is set to `2 * Run
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `8`
 
 **Dynamic**: `false`
 
@@ -3451,7 +3568,7 @@ Number of threads to use for Netty IO. Default is set to `2 * Runtime.getRuntime
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -3473,7 +3590,7 @@ Number of worker threads to serve non-persistent topic
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -3542,6 +3659,17 @@ Timeout for building a consistent snapshot for tracking replicated subscriptions
 **Default**: `30`
 
 **Dynamic**: `false`
+
+**Category**: Server
+
+### replicationStartAt
+The position that replication task start at, it can be set to earliest or latest (default).
+
+**Type**: `java.lang.String`
+
+**Default**: `latest`
+
+**Dynamic**: `true`
 
 **Category**: Server
 
@@ -3631,6 +3759,17 @@ Enable or disable strict bookie affinity.
 
 ### systemTopicEnabled
 Enable or disable system topic.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicCompactionRetainNullKey
+Whether retain null-key message during topic compaction.
 
 **Type**: `boolean`
 
@@ -3762,6 +3901,29 @@ If enabled the feature that transaction pending ack log batch, this attribute me
 
 **Category**: Server
 
+### webServiceHaProxyProtocolEnabled
+Enable or disable the use of HA proxy protocol for resolving the client IP for http/https requests. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceLogDetailedAddresses
+Add detailed client/remote and server/local addresses and ports to http/https request logging.
+Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrustXForwardedFor is enabled.
+
+**Type**: `java.lang.Boolean`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### webServicePort
 The port for serving http requests
 
@@ -3790,6 +3952,18 @@ Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
 **Type**: `java.lang.String`
 
 **Default**: `Conscrypt`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### webServiceTrustXForwardedFor
+Trust X-Forwarded-For header for resolving the client IP for http/https requests.
+Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -3962,7 +4136,7 @@ Number of BookKeeper client IO threads. Default is Runtime.getRuntime().availabl
 
 **Type**: `int`
 
-**Default**: `24`
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -3973,7 +4147,7 @@ Number of BookKeeper client worker threads. Default is Runtime.getRuntime().avai
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -4341,7 +4515,7 @@ The directory where nar Extraction of offloaders happens
 
 **Type**: `java.lang.String`
 
-**Default**: `/var/folders/sx/ws7wtlmn3t1bhrdlsfbmlv6r0000gn/T/`
+**Default**: `/var/folders/gt/xywq0qwd4cvdqfhy7t7js7b00000gn/T/`
 
 **Dynamic**: `false`
 
@@ -4511,7 +4685,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `819`
+**Default**: `1781`
 
 **Dynamic**: `true`
 
@@ -4710,6 +4884,28 @@ Maximum time before forcing a ledger rollover for a topic
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerMaxReadsInFlightPermitsAcquireQueueSize
+Maximum number of reads that can be queued for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `int`
+
+**Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxReadsInFlightPermitsAcquireTimeoutMillis
+Maximum time to wait for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `long`
+
+**Default**: `60000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerMaxReadsInFlightSizeInMB
 Maximum buffer size for bytes read from storage. This is the memory retained by data read from storage (or cache) until it has been delivered to the Consumer Netty channel. Use O to disable
 
@@ -4832,7 +5028,7 @@ Number of threads to be used for managed ledger scheduled tasks
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -4846,6 +5042,17 @@ Default is ``.
 **Type**: `java.lang.String`
 
 **Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerPersistIndividualAckAsLongArray
+Whether persist cursor ack stats as long arrays, which will compress the data and reduce GC rate
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -5074,7 +5281,7 @@ Number of threads to use for pulsar transaction replay PendingAckStore or Transa
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5217,7 +5424,7 @@ Number of connections per Broker in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5239,7 +5446,7 @@ Number of IO threads in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5262,6 +5469,17 @@ Interval of time to sending the ping to keep alive in WebSocket proxy. This valu
 **Type**: `int`
 
 **Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: WebSocket
+
+### webSocketPulsarClientMemoryLimitInMB
+Memory limit in MBs for direct memory in Pulsar Client used in WebSocket proxy
+
+**Type**: `int`
+
+**Default**: `0`
 
 **Dynamic**: `false`
 

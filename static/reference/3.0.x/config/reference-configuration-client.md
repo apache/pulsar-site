@@ -56,7 +56,7 @@ Release the connection if it is not used for more than [connectionMaxIdleSeconds
 
 **Type**: `int`
 
-**Default**: `180`
+**Default**: `60`
 
 ### connectionTimeoutMs
 Duration of waiting for a connection to a broker to be established.If the duration passes without a response from a broker, the connection attempt is dropped.
@@ -175,14 +175,14 @@ Number of IO threads.
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 ### numListenerThreads
 Number of consumer listener threads.
 
 **Type**: `int`
 
-**Default**: `12`
+**Default**: `1`
 
 ### operationTimeoutMs
 Client operation timeout (in milliseconds).

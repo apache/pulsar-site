@@ -1,6 +1,6 @@
 # pulsar-shell
 
-[Pulsar shell](https://pulsar.apache.org/docs/next/administration-pulsar-shell) tool.
+[Pulsar shell](pathname:///docs/@pulsar:version@/administration-pulsar-shell) tool.
 
 ### Interactive mode
 
@@ -10,14 +10,13 @@ Usage
 pulsar-shell
 ```
 
-| Flag               | Description                                                               | Default          |
-|--------------------|---------------------------------------------------------------------------|------------------|
-| `-c`, `--config`   | Client configuration file. It is used as a `default` config.           | conf/client.conf | 
-| `--fail-on-error` | If true, the shell is interrupted when a command throws an exception.  | false            | 
-| `-h`, `--help`     | Show this help.                                                            | |
+| Flag              | Description                                                           | Default          |
+|-------------------|-----------------------------------------------------------------------|------------------|
+| `-c`, `--config`  | Client configuration file. It is used as a `default` config.          | conf/client.conf |
+| `--fail-on-error` | If true, the shell is interrupted when a command throws an exception. | false            |
+| `-h`, `--help`    | Show this help.                                                       |                  |
 
-
-### Non interactive mode
+### Non-interactive mode
 
 Usage
 
@@ -27,22 +26,21 @@ pulsar-shell -e [COMMAND]
 echo "[COMMAND]" | pulsar-shell -
 ```
 
-| Flag                      | Description                                                                                         | Default         |
-|---------------------------|-----------------------------------------------------------------------------------------------------|-----------------|
-| `-c`, `--config`          | Client configuration file. It is used as a `default` config.                                     | conf/client.conf | 
-| `--fail-on-error`         | If true, the shell is interrupted when a command throws an exception.                            | false           | 
-| `-np`, `--no-progress`    | Display raw output of the commands without the fancy progress visualization.                        | false           | 
-| `-f`, `--filename`        | Input filename with a list of commands to be executed. Each command must be separated by a newline. |                 |
-| `-e`, `--execute-command` | Execute this command and exit.                                                                      | |
-| `-` | Read commands from the standard input.                                                              | |
-| `-h`, `--help`     | Show this help.                                                                                      | |
-
+| Flag                      | Description                                                                                         | Default          |
+|---------------------------|-----------------------------------------------------------------------------------------------------|------------------|
+| `-c`, `--config`          | Client configuration file. It is used as a `default` config.                                        | conf/client.conf |
+| `--fail-on-error`         | If true, the shell is interrupted when a command throws an exception.                               | false            |
+| `-np`, `--no-progress`    | Display raw output of the commands without the fancy progress visualization.                        | false            |
+| `-f`, `--filename`        | Input filename with a list of commands to be executed. Each command must be separated by a newline. |                  |
+| `-e`, `--execute-command` | Execute this command and exit.                                                                      |                  |
+| `-`                       | Read commands from the standard input.                                                              |                  |
+| `-h`, `--help`            | Show this help.                                                                                     |                  |
 
 Commands
-* `admin` - See [Admin API](admin-api-overview.md)
-* `client` - See [pulsar-client](#pulsar-client)
-* `config`
 
+* `admin` - See [Admin API](pathname:///docs/@pulsar:version@/admin-api-overview)
+* `client` - See [pulsar-client](../pulsar-client/README.md)
+* `config`
 
 ### config
 
@@ -64,11 +62,11 @@ Create a new configuration.
 default(localhost)> config create --file ./conf/client.conf mycluster
 ```
 
-| Flag     | Description              | Default         |
-|----------|--------------------------|-----------------|
-| `--file` | File path of the config. |  | 
-| `--url`  | URL of the config.       |  |
-| `--value`  | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |  |
+| Flag      | Description                                                                              | Default |
+|-----------|------------------------------------------------------------------------------------------|---------|
+| `--file`  | File path of the config.                                                                 |         |
+| `--url`   | URL of the config.                                                                       |         |
+| `--value` | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |         |
 
 #### clone
 
@@ -78,9 +76,9 @@ Create a new configuration cloning an existing one.
 default(localhost)> config clone mycluster --name mycluster2
 ```
 
-| Flag     | Description              | Default         |
-|----------|--------------------------|-----------------|
-| `--name` | Name of the new config.  |                 | 
+| Flag     | Description             | Default |
+|----------|-------------------------|---------|
+| `--name` | Name of the new config. |         |
 
 #### update
 
@@ -90,11 +88,11 @@ Update an existing configuration.
 default(localhost)> config update --file ./conf/client.conf mycluster
 ```
 
-| Flag     | Description              | Default         |
-|----------|--------------------------|-----------------|
-| `--file` | File path of the config. |  | 
-| `--url`  | URL of the config.       |  |
-| `--value`  | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |  |
+| Flag      | Description                                                                              | Default |
+|-----------|------------------------------------------------------------------------------------------|---------|
+| `--file`  | File path of the config.                                                                 |         |
+| `--url`   | URL of the config.                                                                       |         |
+| `--value` | Inline value of the config. Base64-encoded value is supported with the prefix `base64:`. |         |
 
 #### set-property
 
@@ -104,11 +102,10 @@ Set a value for a specified configuration property.
 default(localhost)> config set-property -p webServiceUrl -v http://<cluster-hostname> mycluster
 ```
 
-| Flag               | Description                 | Default         |
-|--------------------|-----------------------------|-----------------|
-| `-p`, `--property` | Property name to update.    |  | 
-| `-v`, `--value`    | New value for the property. |  |
-
+| Flag               | Description                 | Default |
+|--------------------|-----------------------------|---------|
+| `-p`, `--property` | Property name to update.    |         |
+| `-v`, `--value`    | New value for the property. |         |
 
 #### get-property
 
@@ -118,10 +115,9 @@ Get the value for a specified configuration property.
 default(localhost)> config get-property -p webServiceUrl mycluster
 ```
 
-| Flag               | Description                 | Default         |
-|--------------------|-----------------------------|-----------------|
-| `-p`, `--property` | Property name to update.    |  | 
-
+| Flag               | Description              | Default |
+|--------------------|--------------------------|---------|
+| `-p`, `--property` | Property name to update. |         |
 
 #### view
 
@@ -138,7 +134,6 @@ Delete a config. You can't delete a config if it's currently used.
 ```bash
 default(localhost)> config delete mycluster
 ```
-
 
 #### list
 

@@ -9,7 +9,7 @@ $ pulsar-admin tenants subcommand
 
 
 
-## list
+## <em>list</em>
 
 List the existing tenants
 
@@ -25,7 +25,7 @@ $ pulsar-admin tenants list options
 |---|---|---|
 
 
-## get
+## <em>get</em>
 
 Gets the configuration of a tenant
 
@@ -41,7 +41,7 @@ $ pulsar-admin tenants get options
 |---|---|---|
 
 
-## create
+## <em>create</em>
 
 Creates a new tenant
 
@@ -59,7 +59,7 @@ $ pulsar-admin tenants create options
 | `--admin-roles, -r` | Comma separated list of auth principal allowed to administrate the tenant|null||
 
 
-## update
+## <em>update</em>
 
 Updates the configuration for a tenant
 
@@ -77,7 +77,7 @@ $ pulsar-admin tenants update options
 | `--admin-roles, -r` | Comma separated list of auth principal allowed to administrate the tenant. If empty the current set of roles won't be modified|null||
 
 
-## delete
+## <em>delete</em>
 
 Deletes an existing tenant
 

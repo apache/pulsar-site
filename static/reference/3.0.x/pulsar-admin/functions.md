@@ -9,7 +9,7 @@ $ pulsar-admin functions subcommand
 
 
 
-## localrun
+## <em>localrun</em>
 
 Run a Pulsar Function locally, rather than deploy to a Pulsar cluster)
 
@@ -85,7 +85,7 @@ $ pulsar-admin functions localrun options
 | `--namespace` | The namespace of a Pulsar Function|null|Java, Python, Go|
 
 
-## create
+## <em>create</em>
 
 Create a Pulsar Function in cluster mode (deploy it on a Pulsar cluster)
 
@@ -147,7 +147,7 @@ $ pulsar-admin functions create options
 | `--namespace` | The namespace of a Pulsar Function|null|Java, Python, Go|
 
 
-## delete
+## <em>delete</em>
 
 Delete a Pulsar Function that is running on a Pulsar cluster
 
@@ -167,7 +167,7 @@ $ pulsar-admin functions delete options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## update
+## <em>update</em>
 
 Update a Pulsar Function that has been deployed to a Pulsar cluster
 
@@ -230,7 +230,7 @@ $ pulsar-admin functions update options
 | `--namespace` | The namespace of a Pulsar Function|null|Java, Python, Go|
 
 
-## get
+## <em>get</em>
 
 Fetch information about a Pulsar Function
 
@@ -250,7 +250,7 @@ $ pulsar-admin functions get options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## restart
+## <em>restart</em>
 
 Restart function instance
 
@@ -271,7 +271,7 @@ $ pulsar-admin functions restart options
 | `--instance-id` | The function instanceId (restart all instances if instance-id is not provided)|null||
 
 
-## stop
+## <em>stop</em>
 
 Stops function instance
 
@@ -292,7 +292,7 @@ $ pulsar-admin functions stop options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## start
+## <em>start</em>
 
 Starts a stopped function instance
 
@@ -313,7 +313,7 @@ $ pulsar-admin functions start options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## status
+## <em>status</em>
 
 Check the current status of a Pulsar Function
 
@@ -334,7 +334,7 @@ $ pulsar-admin functions status options
 | `--instance-id` | The function instanceId (Get-status of all instances if instance-id is not provided)|null||
 
 
-## stats
+## <em>stats</em>
 
 Get the current stats of a Pulsar Function
 
@@ -355,7 +355,7 @@ $ pulsar-admin functions stats options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## list
+## <em>list</em>
 
 List all Pulsar Functions running under a specific tenant and namespace
 
@@ -373,7 +373,7 @@ $ pulsar-admin functions list options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## querystate
+## <em>querystate</em>
 
 Fetch the current state associated with a Pulsar Function
 
@@ -395,7 +395,7 @@ $ pulsar-admin functions querystate options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## putstate
+## <em>putstate</em>
 
 Put the state associated with a Pulsar Function
 
@@ -416,7 +416,7 @@ $ pulsar-admin functions putstate options
 | `-s, --state` | The FunctionState that needs to be put|null||
 
 
-## trigger
+## <em>trigger</em>
 
 Trigger the specified Pulsar Function with a supplied value
 
@@ -439,7 +439,7 @@ $ pulsar-admin functions trigger options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## upload
+## <em>upload</em>
 
 Upload File Data to Pulsar
 
@@ -457,7 +457,7 @@ $ pulsar-admin functions upload options
 | `--path` | Path or functionPkgUrl where the contents need to be stored|null||
 
 
-## download
+## <em>download</em>
 
 Download File Data from Pulsar
 
@@ -479,7 +479,7 @@ $ pulsar-admin functions download options
 | `--tenant` | The tenant of a Pulsar Function|null||
 
 
-## reload
+## <em>reload</em>
 
 Reload the available built-in functions
 
@@ -495,7 +495,7 @@ $ pulsar-admin functions reload options
 |---|---|---|
 
 
-## available-functions
+## <em>available-functions</em>
 
 Get the list of Pulsar Functions supported by Pulsar cluster
 

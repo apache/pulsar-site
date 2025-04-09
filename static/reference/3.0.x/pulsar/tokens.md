@@ -8,7 +8,7 @@ $ pulsar tokens subcommand
 
 
 
-## create-secret-key
+## <em>create-secret-key</em>
 
 Create a new secret key
 ```shell
@@ -22,7 +22,7 @@ $ pulsar tokens create-secret-key options
 | `-b, --base64` | Encode the key in base64|false|
 
 
-## create-key-pair
+## <em>create-key-pair</em>
 
 Create a new or pair of keys public/private
 ```shell
@@ -36,7 +36,7 @@ $ pulsar tokens create-key-pair options
 | `--output-public-key` | File where to write the public key|null|
 
 
-## create
+## <em>create</em>
 
 Create a new token
 ```shell
@@ -52,7 +52,7 @@ $ pulsar tokens create options
 | `-a, --signature-algorithm` | The signature algorithm for the new key pair.|RS256|
 
 
-## show
+## <em>show</em>
 
 Show the content of token
 ```shell
@@ -65,7 +65,7 @@ $ pulsar tokens show options
 | `-f, --token-file` | Read token from a file|null|
 
 
-## validate
+## <em>validate</em>
 
 Validate a token against a key
 ```shell
