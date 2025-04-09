@@ -811,6 +811,7 @@ First, build swagger files from apache/pulsar repo at the released tag:
 ```shell
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
+git checkout v$VERSION_WITHOUT_RC
 command mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 PULSAR_PATH=$(pwd)
 ```
@@ -878,7 +879,8 @@ You can generate references of config and command-line tool by running the follo
 # build Pulsar distributions under /path/to/pulsar-3.X.Y
 cd tools/pytools
 poetry install
-poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
+# ensure that defaults using Runtime.getRuntime().availableProcessors() will be based on 1 as the number of CPUs
+_JAVA_OPTIONS=-XX:ActiveProcessorCount=1 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
 ```shell
