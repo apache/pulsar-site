@@ -1535,6 +1535,17 @@ control the number of replicas for storing the package
 
 **Category**: Packages Management
 
+### activeConsumerFailoverConsistentHashing
+Enable consistent hashing for selecting the active consumer in partitioned topics with Failover subscription type.For non-partitioned topics, consistent hashing is used by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### activeConsumerFailoverDelayTimeMillis
 How long to delay rewinding cursor and dispatching messages when active consumer is changed
 
@@ -2651,6 +2662,17 @@ Used to specify multiple advertised listeners for the broker. The value must for
 
 **Category**: Server
 
+### allowAclChangesOnNonExistentTopics
+Opt-out of topic-existence check when setting permissions
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### allowOverrideEntryFilters
 Whether allow topic level entry filters policies overrides broker configuration.
 
@@ -3034,6 +3056,17 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.delayed.InMemoryDelayedDeliveryTrackerFactory`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### dispatchRateLimiterFactoryClassName
+The class name of the factory that creates DispatchRateLimiter implementations. Current options are org.apache.pulsar.broker.service.persistent.DispatchRateLimiterFactoryAsyncTokenBucket (default, PIP-322 implementation) org.apache.pulsar.broker.service.persistent.DispatchRateLimiterFactoryClassic (legacy implementation)
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.service.persistent.DispatchRateLimiterFactoryAsyncTokenBucket`
 
 **Dynamic**: `false`
 
@@ -3503,7 +3536,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `4608`
+**Default**: `4454`
 
 **Dynamic**: `true`
 
@@ -3783,7 +3816,7 @@ Number of threads to use for pulsar broker service. The executor in thread pool 
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -3794,7 +3827,7 @@ Number of threads to use for HTTP requests processing Default is set to `2 * Run
 
 **Type**: `int`
 
-**Default**: `28`
+**Default**: `8`
 
 **Dynamic**: `false`
 
@@ -3805,7 +3838,7 @@ Number of threads to use for Netty IO. Default is set to `2 * Runtime.getRuntime
 
 **Type**: `int`
 
-**Default**: `28`
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -4033,7 +4066,7 @@ Number of worker threads to serve topic ordered executor
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -4373,7 +4406,7 @@ Number of BookKeeper client IO threads. Default is Runtime.getRuntime().availabl
 
 **Type**: `int`
 
-**Default**: `28`
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -4384,7 +4417,7 @@ Number of BookKeeper client worker threads. Default is Runtime.getRuntime().avai
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -4957,7 +4990,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `1843`
+**Default**: `1781`
 
 **Dynamic**: `true`
 
@@ -4993,6 +5026,17 @@ How frequently to flush the cursor positions that were accumulated due to rate l
 **Default**: `60`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerCursorResetLedgerCloseTimestampMaxClockSkewMillis
+When resetting a subscription by timestamp, the broker will use the ledger closing timestamp metadata to determine the range of ledgers to search for the message where the subscription position is reset to.  Since by default, the search condition is based on the message publish time provided by the  client at the publish time, there will be some clock skew between the ledger closing timestamp  metadata and the publish time. This configuration is used to set the max clock skew between the ledger closing timestamp and the message publish time for finding the range of ledgers to open for searching. The default value is 60000 milliseconds (60 seconds). When set to -1, the broker will not use the ledger closing timestamp metadata to determine the range of ledgers to search for the message.
+
+**Type**: `int`
+
+**Default**: `60000`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5180,6 +5224,28 @@ Maximum time before forcing a ledger rollover for a topic
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerMaxReadsInFlightPermitsAcquireQueueSize
+Maximum number of reads that can be queued for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `int`
+
+**Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxReadsInFlightPermitsAcquireTimeoutMillis
+Maximum time to wait for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `long`
+
+**Default**: `60000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerMaxReadsInFlightSizeInMB
 Maximum buffer size for bytes read from storage. This is the memory retained by data read from storage (or cache) until it has been delivered to the Consumer Netty channel. Use O to disable
 
@@ -5302,7 +5368,7 @@ Number of threads to be used for managed ledger scheduled tasks
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5316,6 +5382,17 @@ Default is ``.
 **Type**: `java.lang.String`
 
 **Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerPersistIndividualAckAsLongArray
+Whether persist cursor ack stats as long arrays, which will compress the data and reduce GC rate
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -5599,7 +5676,7 @@ Number of threads to use for pulsar transaction replay PendingAckStore or Transa
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5742,7 +5819,7 @@ Number of connections per Broker in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5764,7 +5841,7 @@ Number of IO threads in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 **Dynamic**: `false`
 
