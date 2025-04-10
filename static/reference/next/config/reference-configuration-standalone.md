@@ -1060,6 +1060,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitStateMaxConcurrentOverrides
+Specify the maximum number of concurrent orphan bundle ownership overrides. The leader broker triggers these overrides upon detecting orphaned bundles. It identifies orphan bundle ownerships by periodically scanning ownership data and monitoring for broker shutdowns or inactive states.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerServiceUnitStateMonitorIntervalInSeconds
 Interval between service unit state monitor checks. The service unit(bundle) state channel is periodically monitored by the leader broker at this interval to fix any orphan bundle ownerships, stuck in-flight states, and other cleanup jobs.`loadBalancerServiceUnitStateTombstoneDelayTimeInSeconds` * 1000 must be bigger than `loadBalancerInFlightServiceUnitStateWaitingTimeInMillis`.(only used in load balancer extension logics)
 
@@ -1710,8 +1721,10 @@ If this time interval is exceeded, a snapshot will be taken.It will run simultan
 
 ### brokerDeleteInactivePartitionedTopicMetadataEnabled
 Metadata of inactive partitioned topic will not be automatically cleaned up by default.
-Note: If `allowAutoTopicCreation` and this option are enabled at the same time,
+Note 1: If `allowAutoTopicCreation` and this option are enabled at the same time,
 it may appear that a partitioned topic has just been deleted but is automatically created as a non-partitioned topic.
+Note 2: Activating bidirectional geo-replication under global ZooKeeper configuration may lead to schema remnants and abnormal topic-level policies.
+Note 3: Activating bidirectional geo-replication under global configuration ZooKeeper may lead to a consumption issue.
 
 **Type**: `boolean`
 
