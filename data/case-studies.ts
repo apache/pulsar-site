@@ -1,6 +1,7 @@
 export const categories = [
   'financial_services',
   'healthcare',
+  'marketing',
   'software_it',
   'telecom',
   'retail',
@@ -12,6 +13,7 @@ export type Category = typeof categories[number];
 export const categoryLabels: Record<Category, string> = {
   financial_services: 'Financial Services',
   healthcare: 'Healthcare',
+  marketing: 'Marketing',
   software_it: 'Software & IT',
   telecom: 'Telecom',
   retail: 'Retail',
@@ -51,6 +53,14 @@ export const resources: Record<Category, Resource[]> =
       image: '/img/vivy.svg',
       description: "We found Pulsar, an alternative we really liked from the development point of view—the client is really nice, as well as from the operational point of view; it supports separate bookies and less load on ZooKeeper."
     },
+  ],
+  marketing: [
+    {
+      company: "Attentive",
+      link: 'https://tech.attentive.com/articles/goodbye-distributed-locks',
+      image: '/img/Attentive_Logo.svg',
+      description: "Attentive, a leading marketing platform, delivers billions of messages during peak events like BFCM by leveraging Apache Pulsar to power a messaging architecture designed for high throughput, reliability, fault tolerance, and mutual exclusivity. To support this scale, the team re-architected the system—replacing Redis-based distributed locks with Pulsar’s native subscription types to enforce mutual exclusion, while carefully balancing performance and scalability trade-offs."
+    }
   ],
   software_it: [
     {
