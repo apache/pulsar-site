@@ -59,7 +59,7 @@ export const resources: Record<Category, Resource[]> =
       company: "Attentive",
       link: 'https://tech.attentive.com/articles/goodbye-distributed-locks',
       image: '/img/Attentive_Logo.svg',
-      description: "Attentive, a leading marketing platform, delivers billions of messages during peak events like BFCM by leveraging Apache Pulsar to power a messaging architecture designed for high throughput, reliability, fault tolerance, and mutual exclusivity. To support this scale, the team re-architected the system—replacing Redis-based distributed locks with Pulsar’s native subscription types to enforce mutual exclusion, while carefully balancing performance and scalability trade-offs."
+      description: "Attentive, the AI marketing platform for leading brands, relies on Apache Pulsar as the backbone of its messaging system—ensuring the delivery of billions of messages with exceptional reliability and scale. Pulsar's built-in subscription types helped provide mutual exclusivity at scale, while maintaining high throughput and fault tolerance — and enabled us to meet critical business requirements without a massive infrastructure rehaul."
     }
   ],
   software_it: [
