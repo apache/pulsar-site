@@ -1,6 +1,7 @@
 export const categories = [
   'financial_services',
   'healthcare',
+  'marketing',
   'software_it',
   'telecom',
   'retail',
@@ -12,6 +13,7 @@ export type Category = typeof categories[number];
 export const categoryLabels: Record<Category, string> = {
   financial_services: 'Financial Services',
   healthcare: 'Healthcare',
+  marketing: 'Marketing',
   software_it: 'Software & IT',
   telecom: 'Telecom',
   retail: 'Retail',
@@ -51,6 +53,14 @@ export const resources: Record<Category, Resource[]> =
       image: '/img/vivy.svg',
       description: "We found Pulsar, an alternative we really liked from the development point of view—the client is really nice, as well as from the operational point of view; it supports separate bookies and less load on ZooKeeper."
     },
+  ],
+  marketing: [
+    {
+      company: "Attentive",
+      link: 'https://tech.attentive.com/articles/goodbye-distributed-locks',
+      image: '/img/Attentive_Logo.svg',
+      description: "Attentive, the AI marketing platform for leading brands, relies on Apache Pulsar as the backbone of its messaging system—ensuring the delivery of billions of messages with exceptional reliability and scale. Pulsar's built-in subscription types helped provide mutual exclusivity at scale, while maintaining high throughput and fault tolerance — and enabled us to meet critical business requirements without a massive infrastructure rehaul."
+    }
   ],
   software_it: [
     {
