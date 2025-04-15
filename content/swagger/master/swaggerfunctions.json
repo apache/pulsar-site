@@ -171,6 +171,9 @@
                 "cryptoConfig": {
                     "$ref": "#/definitions/CryptoConfig"
                 },
+                "messagePayloadProcessorConfig": {
+                    "$ref": "#/definitions/MessagePayloadProcessorConfig"
+                },
                 "poolMessages": {
                     "type": "boolean"
                 },
@@ -727,6 +730,20 @@
             "type": "object"
         },
         "InputStream": {
+            "type": "object"
+        },
+        "MessagePayloadProcessorConfig": {
+            "properties": {
+                "className": {
+                    "type": "string"
+                },
+                "config": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                }
+            },
             "type": "object"
         },
         "ProducerConfig": {
