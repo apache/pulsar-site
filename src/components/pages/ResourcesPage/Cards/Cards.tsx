@@ -6,18 +6,33 @@ const Card: React.FC<data.Resource> = (props) => {
   return (
     <div className={s.Card}>
       <p>
-        <a className={s.ForumLink} target="_blank" href={props.forum_link}><strong>{props.forum}</strong></a>
+        <a className={s.ForumLink} target="_blank" href={props.forum_link} rel="noopener noreferrer">
+          <strong>{props.forum}</strong>
+        </a>
       </p>
       <h3><a href={props.link}>{props.title}</a></h3>
       <div className={s.AdditionalInfo}>
         {props.date && <div><small className={s.Date}>{props.date}</small></div>}
-        {props.tags && <div><small>Tags: {props.tags}</small></div>}
+        {props.tags && props.tags.length > 0 && (
+          <div>
+            <small>
+              Tags:&nbsp;
+              {props.tags.map((tag, index) => (
+                <span key={index}>
+                  {tag}
+                  {index < props.tags.length - 1 && ', '}
+                </span>
+              ))}
+            </small>
+          </div>
+        )}
       </div>
       {props.presenter && <p>Presented by <strong>{props.presenter}</strong></p>}
-      <a href={props.link} target="_blank">Learn more</a>
+      <a href={props.link} target="_blank" rel="noopener noreferrer">Learn more</a>
     </div>
   );
 };
+
 
 export type CardsProps = {
   resources: data.Resource[]
