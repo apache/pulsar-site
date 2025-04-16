@@ -28,7 +28,7 @@ const Card: React.FC<data.Resource> = (props) => {
         )}
       </div>
       {props.presenter && <p>Presented by <strong>{props.presenter}</strong></p>}
-      <a href={props.link} target="_blank" rel="noopener noreferrer">Learn more</a>
+      <a href={props.link} target="_blank">Learn more</a>
     </div>
   );
 };
