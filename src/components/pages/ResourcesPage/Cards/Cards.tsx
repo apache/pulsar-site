@@ -33,7 +33,6 @@ const Card: React.FC<data.Resource> = (props) => {
   );
 };
 
-
 export type CardsProps = {
   resources: data.Resource[]
   search: string
