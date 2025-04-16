@@ -5,35 +5,134 @@ sidebar_label: "Multiple advertised listeners"
 description: Get a comprehensive understanding of advertised listeners in Pulsar.
 ---
 
-When a Pulsar cluster is deployed in the production environment, it may require to expose multiple advertised addresses for the broker. For example, when you deploy a Pulsar cluster in Kubernetes and want other clients, which are not in the same Kubernetes cluster, to connect to the Pulsar cluster, you need to assign a broker URL to external clients. But clients in the same Kubernetes cluster can still connect to the Pulsar cluster through the internal network of Kubernetes.
+In production environments, Pulsar clusters often need to serve clients from different networks. The traditional approach for handling external connections is to deploy a [Pulsar Proxy](administration-proxy.md), but in some cases, you might want direct client-to-broker connectivity without using the [Pulsar Proxy](administration-proxy.md). Multiple advertised listeners enable this by allowing brokers to advertise different addresses to different clients.
 
-## Advertised listeners
+## Lookup mechanism
 
-To ensure clients in both internal and external networks can connect to a Pulsar cluster, Pulsar introduces `advertisedListeners` and `internalListenerName` configuration options into the [broker configuration file](reference-configuration.md#broker) to ensure that the broker supports exposing multiple advertised listeners and support the separation of internal and external network traffic.
+When a client performs a lookup for a topic:
 
-- The `advertisedListeners` is used to specify multiple advertised listeners. The broker uses the listener as the broker identifier in the load manager and the bundle owner data. The `advertisedListeners` is formatted as `<listener_name>:pulsar://<host>:<port>, <listener_name>:pulsar+ssl://<host>:<port>`. You can set up the `advertisedListeners` like
-`advertisedListeners=internal:pulsar://192.168.1.11:6660,internal:pulsar+ssl://192.168.1.11:6651`.
+1. The client connects to a broker using the service URL.
+2. The broker processes the lookup request and determines which broker owns the topic.
+3. The broker returns the appropriate advertised address based on which listener the client connected through.
+4. The client connects directly to the topic owner using the returned address.
 
-- The `internalListenerName` is used to specify the internal service URL that the broker uses. You can specify the `internalListenerName` by choosing one of the `advertisedListeners`. The broker uses the listener name of the first advertised listener as the `internalListenerName` if the `internalListenerName` is absent.
+With proper configuration of `bindAddresses`, the broker automatically determines which advertised address to return based on which port the client connected to.
 
-After setting up the `advertisedListeners`, clients can choose one of the listeners as the service URL to create a connection to the broker as long as the network is accessible. However, if the client creates producers or consumers on a topic, the client must send a lookup request to the broker for getting the owner broker, then connect to the owner broker to publish messages or consume messages. Therefore, You must allow the client to get the corresponding service URL with the same advertised listener name as the one used by the client. This helps keep the client side simple and secure.
+For the service URL, there should be a load balancer that connects to any available broker.
 
-## Use multiple advertised listeners
+## Use case: Direct client-to-broker connection without Pulsar Proxy
 
-This example shows how a Pulsar client uses multiple advertised listeners.
+When clients need to connect directly to brokers (bypassing the Pulsar Proxy), multiple advertised listeners are essential. This approach is particularly useful for:
 
-1. Configure multiple advertised listeners in the broker configuration file.
+- Reducing network hops by eliminating the proxy layer
+- Simplifying deployment architecture in some scenarios
+- Potential performance improvements for certain workloads
+- Environments where direct broker connectivity is preferred
+
+## Network architecture considerations
+
+> **Note**: Pulsar deployments expect network perimeter security. This type of deployment should be used only in trusted networks with trusted clients while ensuring network security is handled properly.
+
+In typical deployments with multiple networks:
+
+1. **Internal network**: Within the private network, brokers are accessible via private addresses (like 10.x.x.x, 172.16.x.x, or 192.168.x.x) on standard ports.
+
+2. **External network**: For clients outside the private network, network address translation (NAT) maps external addresses/ports to internal broker addresses/ports.
+
+Without proper configuration, external clients would receive internal broker addresses during topic lookups, making successful connections impossible.
+
+## Advertised listeners configuration
+
+Pulsar introduces three key configuration options to solve this problem:
+
+- **advertisedListeners**: Specifies multiple addresses that the broker advertises to clients.
+- **bindAddresses**: Maps each advertised listener to a specific local binding address and port.
+- **internalListenerName**: Specifies which listener the broker uses for internal communication.
+
+### Configuration details
+
+- **advertisedListeners**: Formatted as `<listener_name>:<protocol>://<host>:<port>,...`. Example:
+  `advertisedListeners=internal:pulsar://192.168.1.11:6650,internal:pulsar+ssl://192.168.1.11:6651,external:pulsar://external-broker-1.example.com:6650,external:pulsar+ssl://external-broker-1.example.com:6651`
+
+- **bindAddresses**: Maps each listener name to a local binding address and port. Example:
+  `bindAddresses=internal:pulsar://0.0.0.0:6650,internal:pulsar+ssl://0.0.0.0:6651,external:pulsar://0.0.0.0:16650,external:pulsar+ssl://0.0.0.0:16651`
+
+- **internalListenerName**: Specifies which listener is used for internal communication. Example:
+  `internalListenerName=internal`
+
+## Configuration example
+
+Here's a complete example showing how to configure brokers with multiple advertised listeners:
 
 ```properties
-advertisedListeners={listenerName}:pulsar://xxxx:6650,{listenerName}:pulsar+ssl://xxxx:6651
+# Define advertised listeners for internal and external clients
+advertisedListeners=internal:pulsar://192.168.1.11:6650,internal:pulsar+ssl://192.168.1.11:6651,external:pulsar://external-broker-1.example.com:6650,external:pulsar+ssl://external-broker-1.example.com:6651
+
+# Define bind addresses for each listener
+bindAddresses=internal:pulsar://0.0.0.0:6650,internal:pulsar+ssl://0.0.0.0:6651,external:pulsar://0.0.0.0:16650,external:pulsar+ssl://0.0.0.0:16651
+
+# Specify the internal listener name
+internalListenerName=internal
 ```
 
-2. Specify the listener name for the client.
+### Network configuration
+
+To make this work:
+
+1. If you are using DNS names, register a unique name for each broker instance (for example, `external-broker-1.example.com`, `external-broker-2.example.com`, etc.).
+2. Configure your network gateway or firewall to handle proxying or NAT for each broker instance so that the external IP and port are proxied to the internal IP and external listener port.
+3. Add a load balancer that proxies to any healthy available broker on the external listener port.
+
+## Client configuration
+
+With a properly configured broker, clients can connect without specifying a listener name:
+
+In this example, "private-brokers.internal" is the internal load balancer for available brokers, and "external-brokers.example.com" is the external load balancer for available brokers, connecting to the bind address port of the external listener on each broker.
 
 ```java
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://xxxx:6650")
-    .listenerName("external")
+// Internal client using standard protocol
+PulsarClient internalClient = PulsarClient.builder()
+    .serviceUrl("pulsar://private-brokers.internal:6650")
+    .build();
+
+// Internal client using SSL
+PulsarClient internalSecureClient = PulsarClient.builder()
+    .serviceUrl("pulsar+ssl://private-brokers.internal:6651")
+    .build();
+
+// External client with SSL
+PulsarClient externalClient = PulsarClient.builder()
+    .serviceUrl("pulsar+ssl://external-brokers.example.com:6651")
     .build();
 ```
+
+> **Note**: While older Pulsar documentation suggested using the `listenerName` parameter in the client configuration, this approach is no longer necessary in cases when the `bindAddresses` is properly configured. The Pulsar lookup mechanism will return the appropriate advertised address based on the binding port.
+
+## Kubernetes deployment suggestions
+
+While Pulsar Proxy is generally recommended for Kubernetes deployments, multiple advertised listeners can be used when direct broker access is required.
+The Apache Pulsar Helm chart doesn't currently support this type of deployment. These instructions are provided as general guidance for using the `advertisedListeners` feature in Kubernetes deployments.
+There are multiple ways to handle this in Kubernetes deployments. Advertised listeners are also required in some service mesh configurations.
+
+NodePort deployment suggestions:
+
+- Create individual NodePort (or LoadBalancer) services for each broker pod in a broker stateful set, mapping to the external listener binding ports.
+- Create a single NodePort (or LoadBalancer) service for the cluster to be used as the serviceUrl for clients, mapping to the external listener binding ports.
+
+```properties
+# Advertised listeners for internal and external access
+advertisedListeners=internal:pulsar://192.168.1.11:6650,internal:pulsar+ssl://192.168.1.11:6651,external:pulsar://198.51.100.17:30650,external:pulsar+ssl://198.51.100.17:31650
+
+# Bind addresses with different ports for internal and external access
+bindAddresses=internal:pulsar://0.0.0.0:6650,internal:pulsar+ssl://0.0.0.0:6651,external:pulsar+ssl://0.0.0.0:16651
+
+# Specify the internal listener name
+internalListenerName=internal
+```
+
+In the above example:
+
+- `192.168.1.11` is the pod IP for the particular broker pod. The IP or hostname should be dynamically set in this configuration at broker startup.
+- `198.51.100.17` is the external IP of the k8s node. In some cases this can be dynamically set based on the `status.hostIP` Kubernetes information.
+- `30650` and `31650` are the specific NodePorts allocated for this broker pod. This can be dynamically calculated from a base port number by adding the StatefulSet pod index (`metadata.labels['statefulset.kubernetes.io/pod-index']`) to it.
 
