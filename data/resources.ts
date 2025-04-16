@@ -24,6 +24,14 @@ export type Resource = {
 export const resources: Record<Category, Resource[]> = {
   articles: [
     {
+      forum: 'Attentive Blog',
+      forum_link: 'https://tech.attentive.com/',
+      date: 'April 2025',
+      title: "Goodbye Distributed Locks: Message Orchestration at Scale with Apache Pulsar",
+      link: 'https://tech.attentive.com/articles/goodbye-distributed-locks',
+      tags: ['Pulsar', 'distributed lock', 'subscription types', 'tradeoffs']
+    },
+    {
       forum: 'StreamNative Blog',
       forum_link: 'https://streamnative.io/blogs/',
       date: 'August 2022',
