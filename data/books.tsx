@@ -56,7 +56,7 @@ export const resources: Record<Category, Resource[]> =
       cover_image: '/img/books/practical-optimization-of-apache-pulsar.jpg',
       description: (
           <span>
-            This book is a practical guide to optimizing Apache Pulsar for high performance and low latency. It covers various optimization techniques, including tuning the load balance algorithm, optimizing the storage layer, and improving the performance of various Pulsar features. The book is open source at github and available in Chinese and English.
+            This book is a practical guide to optimizing Apache Pulsar for high performance and low latency. It covers various optimization techniques, including tuning the load balancing algorithm, optimizing the storage layer, and improving the performance of various Pulsar features. The book is open - sourced on Github and available in Chinese and English.
           </span>
         ),
       link: 'https://tumbleds-library.gitbook.io/thetumbleds-library',
