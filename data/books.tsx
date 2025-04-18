@@ -49,6 +49,19 @@ export const resources: Record<Category, Resource[]> =
       link: 'https://www.oreilly.com/library/view/mastering-apache-pulsar/9781492084891/',
       publisher: 'O’Reilly Media',
       released_at: 'December 2021'
+    },
+    {
+      name: 'Practical Optimization of Apache Pulsar',
+      author: 'Feng Wenzhi',
+      cover_image: '/img/books/practical-optimization-of-apache-pulsar.jpg',
+      description: (
+          <span>
+            This book is a practical guide to optimizing Apache Pulsar for high performance and low latency. It covers various optimization techniques, including tuning the load balance algorithm, optimizing the storage layer, and improving the performance of various Pulsar features. The book is open source at github and available in Chinese and English.
+          </span>
+        ),
+      link: 'https://tumbleds-library.gitbook.io/thetumbleds-library',
+      publisher: 'Open Source at GitHub',
+      released_at: 'April 2025'
     }
   ],
   related_topics: [
