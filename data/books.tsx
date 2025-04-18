@@ -60,7 +60,7 @@ export const resources: Record<Category, Resource[]> =
           </span>
         ),
       link: 'https://tumbleds-library.gitbook.io/thetumbleds-library',
-      publisher: 'Open Source at GitHub',
+      publisher: 'Open Source',
       released_at: 'April 2025'
     }
   ],
