@@ -2647,7 +2647,7 @@ Whether to enable the acknowledge of batch local index
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
