@@ -296,6 +296,13 @@ module.exports = {
       "githubUsername": [
         "RobertIndie"
       ]
+    },
+    {
+      "name": "Zixuan Liu",
+      "apacheId": "zixuan",
+      "githubUsername": [
+        "nodece"
+      ]
     }
   ],
   "committers": [
@@ -571,13 +578,6 @@ module.exports = {
       "apacheId": "zhaocong",
       "githubUsername": [
         "coderzc"
-      ]
-    },
-    {
-      "name": "Zixuan Liu",
-      "apacheId": "zixuan",
-      "githubUsername": [
-        "nodece"
       ]
     }
   ]
