@@ -3890,17 +3890,6 @@ Precise dispatcher flow control according to history message number of each entr
 
 **Category**: Server
 
-### preciseTopicPublishRateLimiterEnable
-Enable precise rate limit for topic publish
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### preferLaterVersions
 If true, (and ModularLoadManagerImpl is being used), the load manager will attempt to use only brokers running the latest software version (to minimize impact to bundles)
 
