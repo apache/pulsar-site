@@ -3676,17 +3676,6 @@ The maximum number of tenants that each pulsar cluster can create.This configura
 
 **Category**: Server
 
-### messagePublishBufferCheckIntervalInMillis
-Interval between checks to see if message publish buffer size is exceed the max message publish buffer size
-
-**Type**: `int`
-
-**Default**: `100`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### metadataStoreAllowReadOnlyOperations
 Is metadata store read-only operations.
 
