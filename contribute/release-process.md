@@ -320,13 +320,17 @@ svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 
 ### Stage Maven modules
 
-Upload the artifacts to ASF Nexus:
+:::caution
+Make sure to run only one release at a time when working on multiple releases in parallel. Running multiple builds simultaneously will result in all releases being placed into a single staging repository. Close [the staging repository](https://repository.apache.org/#stagingRepositories) before performing another release.
+:::
+
+Set your ASF password in the following line. Add a space as the first character on the command line so that your password doesn't get recorded in shell history.
 
 ```shell
-# add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
-# set your ASF password in the following line
  export APACHE_PASSWORD=""
 ```
+
+Upload the artifacts to [ASF Nexus](https://repository.apache.org)
 
 ```shell
 cd $PULSAR_PATH
