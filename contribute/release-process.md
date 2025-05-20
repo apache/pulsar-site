@@ -437,7 +437,8 @@ command mvn install -pl docker/pulsar,docker/pulsar-all \
     -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
     -Ddocker.organization=$DOCKER_USER \
-    -Ddocker.noCache=true
+    -Ddocker.noCache=true \
+    -Ddocker.skip.tag=false
 ```
 
 ## Call for the vote to release a version based on the release candidate
