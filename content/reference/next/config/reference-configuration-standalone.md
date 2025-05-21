@@ -2708,17 +2708,6 @@ Whether allow topic level entry filters policies overrides broker configuration.
 
 **Category**: Server
 
-### autoShrinkForConsumerPendingAcksMap
-Whether to enable the automatic shrink of pendingAcks map, the default is false, which means it is not enabled. When there are a large number of share or key share consumers in the cluster, it can be enabled to reduce the memory consumption caused by pendingAcks.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### bindAddress
 Hostname or IP address the service binds on
 
