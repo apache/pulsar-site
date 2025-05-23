@@ -46,13 +46,13 @@ services:
     image: apachepulsar/pulsar:latest
     networks:
       - pulsar
-    command: |
+    command: >
       bash -c "bin/pulsar initialize-cluster-metadata \
-      --cluster cluster-a \
-      --zookeeper zookeeper:2181 \
-      --configuration-store zookeeper:2181 \
-      --web-service-url http://broker:8080 \
-      --broker-service-url pulsar://broker:6650"
+      --cluster=cluster-a \
+      --zookeeper=zookeeper:2181 \
+      --configuration-store=zookeeper:2181 \
+      --web-service-url=http://broker:8080 \
+      --broker-service-url=pulsar://broker:6650"
     depends_on:
       zookeeper:
         condition: service_healthy
