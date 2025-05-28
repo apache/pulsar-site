@@ -29,10 +29,13 @@ services:
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
-    command: |
-      bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
-             bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
-             exec bin/pulsar zookeeper"
+    command:
+      - bash
+      - -c 
+      - |
+        bin/apply-config-from-env.py conf/zookeeper.conf && \
+        bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
+        exec bin/pulsar zookeeper    
     healthcheck:
       test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
       interval: 10s
@@ -46,13 +49,16 @@ services:
     image: apachepulsar/pulsar:latest
     networks:
       - pulsar
-    command: |
-      bash -c "bin/pulsar initialize-cluster-metadata \
-      --cluster cluster-a \
-      --zookeeper zookeeper:2181 \
-      --configuration-store zookeeper:2181 \
-      --web-service-url http://broker:8080 \
-      --broker-service-url pulsar://broker:6650"
+    command:
+      - bash
+      - -c 
+      - |
+        bin/pulsar initialize-cluster-metadata \
+        --cluster cluster-a \
+        --zookeeper zookeeper:2181 \
+        --configuration-store zookeeper:2181 \
+        --web-service-url http://broker:8080 \
+        --broker-service-url pulsar://broker:6650
     depends_on:
       zookeeper:
         condition: service_healthy
