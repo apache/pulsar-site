@@ -102,7 +102,7 @@ PulsarClient internalSecureClient = PulsarClient.builder()
 
 // External client with SSL
 PulsarClient externalClient = PulsarClient.builder()
-    .serviceUrl("pulsar+ssl://external-brokers.example.com:6651")
+    .serviceUrl("pulsar+ssl://external-brokers.example.com:16651")
     .build();
 ```
 
