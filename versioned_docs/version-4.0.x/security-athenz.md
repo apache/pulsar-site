@@ -85,6 +85,7 @@ You can also set an optional `keyId`. The following is an example.
 ```java
 Map<String, String> authParams = new HashMap();
 authParams.put("ztsUrl", "http://localhost:9998");
+// authParams.put("ztsProxyUrl", "http://localhost:9999"); // Proxy for accessing ZTS (optional, since v3.0.10/v4.0.3/v4.1.0)
 authParams.put("tenantDomain", "shopping"); // Tenant domain name
 authParams.put("tenantService", "some_app"); // Tenant service name
 authParams.put("providerDomain", "pulsar"); // Provider domain name
@@ -162,6 +163,7 @@ const client = new Pulsar.Client({
 ```go
 provider := pulsar.NewAuthenticationAthenz(map[string]string{
 	"ztsUrl":         "http://localhost:9998",
+	// "ztsProxyUrl":    "http://localhost:9999", // Proxy for accessing ZTS (optional, since v0.16.0)
 	"providerDomain": "pulsar",
 	"tenantDomain":   "shopping",
 	"tenantService":  "some_app",
@@ -200,6 +202,7 @@ In this case, `tenantDomain`, `tenantService` and `keyId` are ignored.
 ```java
 Map<String, String> authParams = new HashMap();
 authParams.put("ztsUrl", "http://localhost:9998");
+// authParams.put("ztsProxyUrl", "http://localhost:9999"); // Proxy for accessing ZTS (optional, since v3.0.10/v4.0.3/v4.1.0)
 authParams.put("providerDomain", "pulsar"); // Provider domain name
 authParams.put("x509CertChain", "file:///path/to/x509cert.pem"); // Distributed X.509 certificate path
 authParams.put("privateKey", "file:///path/to/private.pem"); // Distributed private key path
@@ -276,6 +279,7 @@ const client = new Pulsar.Client({
 ```go
 provider := pulsar.NewAuthenticationAthenz(map[string]string{
 	"ztsUrl":         "http://localhost:9998",
+	// "ztsProxyUrl":    "http://localhost:9999", // Proxy for accessing ZTS (optional, since v0.16.0)
 	"providerDomain": "pulsar",
 	"x509CertChain":  "file:///path/to/x509cert.pem",
 	"privateKey":     "file:///path/to/private.pem",
