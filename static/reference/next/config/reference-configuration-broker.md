@@ -5144,6 +5144,17 @@ Time to rollover ledger for inactive topic (duration without any publish on that
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerInactiveOffloadedLedgerEvictionTimeSeconds
+Time to evict inactive offloaded ledger for inactive topic. Disable eviction with value 0 (Default value 600)
+
+**Type**: `int`
+
+**Default**: `600`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerInfoCompressionThresholdInBytes
 ManagedLedgerInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
 0 means compression will always apply.
