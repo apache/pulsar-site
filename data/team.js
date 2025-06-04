@@ -187,6 +187,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Chris Bono",
+      "apacheId": "onobc",
+      "githubUsername": [
+        "onobc"
+      ]
+    },
+    {
       "name": "Penghui Li",
       "apacheId": "penghui",
       "githubUsername": [
@@ -475,13 +482,6 @@ module.exports = {
       "apacheId": "nlu90",
       "githubUsername": [
         "nlu90"
-      ]
-    },
-    {
-      "name": "Chris Bono",
-      "apacheId": "onobc",
-      "githubUsername": [
-        "onobc"
       ]
     },
     {
