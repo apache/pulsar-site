@@ -264,6 +264,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Xiangying Meng",
+      "apacheId": "xiangying",
+      "githubUsername": [
+        "liangyepianzhou"
+      ]
+    },
+    {
       "name": "Yunze Xu",
       "apacheId": "xyz",
       "githubUsername": [
@@ -530,13 +537,6 @@ module.exports = {
       "name": "Vineeth Polamreddy",
       "apacheId": "vpolamreddy",
       "githubUsername": []
-    },
-    {
-      "name": "Xiangying Meng",
-      "apacheId": "xiangying",
-      "githubUsername": [
-        "liangyepianzhou"
-      ]
     },
     {
       "name": "Marvin Cai",
