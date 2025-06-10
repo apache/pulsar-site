@@ -4772,7 +4772,9 @@ The threshold to triggering automatic offload to long term storage
 **Category**: Storage (Ledger Offloading)
 
 ### managedLedgerUnackedRangesOpenCacheSetEnabled
-Use Open Range-Set to cache unacked messages (it is memory efficient but it can take more cpu)
+When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
+
+RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
 
 **Type**: `boolean`
 
@@ -5202,6 +5204,19 @@ Maximum backlog entry difference to prevent caching entries that can't be reused
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerMaxBatchDeletedIndexToPersist
+Maximum number of partially acknowledged batch messages per subscription that will have their batch deleted indexes persisted. Batch deleted index state is handled when acknowledgmentAtBatchIndexLevelEnabled=true.
+
+When this limit is exceeded, remaining batch message containing the batch deleted indexes will only be tracked in memory. In case of broker restarts or load balancing events, the batch deleted indexes will be cleared while redelivering the messages to consumers.
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerMaxEnsembleSize
 Max number of bookies to use when creating a ledger
 
@@ -5401,7 +5416,9 @@ Default is ``.
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerPersistIndividualAckAsLongArray
-Whether persist cursor ack stats as long arrays, which will compress the data and reduce GC rate
+When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
+
+NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
 
 **Type**: `boolean`
 
