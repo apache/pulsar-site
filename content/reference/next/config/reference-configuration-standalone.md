@@ -1137,6 +1137,17 @@ Enable/disable automatic bundle unloading for load-shedding
 
 **Category**: Load Balancer
 
+### loadBalancerSheddingExcludedNamespaces
+The namespaces to be excluded from load shedding
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerSheddingGracePeriodMinutes
 Prevent the same topics to be shed and moved to other broker more than once within this timeframe
 
@@ -3993,6 +4004,17 @@ Enable or disable strict bookie affinity.
 **Default**: `false`
 
 **Dynamic**: `false`
+
+**Category**: Server
+
+### strictlyVerifySubscriptionName
+If 'strictSubscriptionNameVerification' is true, the new subscription name can only contain (a-zA-Z_0-9) and these special chars -=:.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
 
 **Category**: Server
 
