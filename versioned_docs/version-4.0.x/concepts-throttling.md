@@ -25,7 +25,7 @@ Message dispatch throttling brings the following benefits in detail:
 
 - **Balance the allocation of broker's hardware resources at topic/subscription levels**
 
-  A broker instance serves multiple topics at one time. If a topic is overloaded with requests, it will occupy almost all of the I/O, CPU, and memory resources of the broker, causing other topics cannot be read. Using the message dispatch throttling feature can limit the allocation of broker’s hardware resources across topics.
+  A broker instance serves multiple topics at one time. If a topic is overloaded with requests, it will occupy almost all of the I/O, CPU, and memory resources of the broker, causing other topics to not be read. Using the message dispatch throttling feature can limit the allocation of broker’s hardware resources across topics.
 
 - **Limit the allocation of client's hardware resources at topic/subscription levels**
 
