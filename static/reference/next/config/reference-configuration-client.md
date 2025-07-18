@@ -233,6 +233,20 @@ The implementation class of ServiceUrlProvider used to generate ServiceUrl.
 
 **Default**: `null`
 
+### serviceUrlQuarantineInitDurationMs
+The initial duration (in milliseconds) to quarantine endpoints that fail to connect.A value of 0 means don't quarantine any endpoints even if they fail.
+
+**Type**: `long`
+
+**Default**: `60000`
+
+### serviceUrlQuarantineMaxDurationMs
+The max duration (in milliseconds) to quarantine endpoints that fail to connect.A value of 0 means don't quarantine any endpoints even if they fail.
+
+**Type**: `long`
+
+**Default**: `86400000`
+
 ### socks5ProxyAddress
 Address of SOCKS5 proxy.
 
