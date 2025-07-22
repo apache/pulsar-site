@@ -10,7 +10,8 @@ function resolveActiveSupport(ver, released) {
   } else if (ver.minor > 0) {
     return support.add(6, 'months');
   } else {
-    return support.add(24, 'months');
+    // 36 months for security updates
+    return support.add(36, 'months');
   }
 }
 
