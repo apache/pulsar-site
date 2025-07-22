@@ -185,3 +185,11 @@ In addition, you need to add one of the following JVM options:
 
 - `-Dorg.apache.pulsar.shade.io.netty.tryReflectionSetAccessible=true` for the default shaded Pulsar client
 - `-Dio.netty.tryReflectionSetAccessible=true` for the unshaded "original" Pulsar client
+
+### Enabling optimized checksum calculation when native library loading fails
+
+The Pulsar Java client uses `com.scurrilous.circe.checksum.Crc32cIntChecksum` class from the BookKeeper client for checksum calculation. For optimized checksum calculation Pulsar attempts to load `libcirce-checksum` native library. When that isn't available, `com.scurrilous.circe.checksum.Java9IntHash` class is used.
+This only works when `--add-opens java.base/java.util.zip=ALL-UNNAMED` is passed in the JVM options.
+The error message will be `Unable to use reflected methods:
+java.lang.reflect.InaccessibleObjectException: Unable to make private static int java.util.zip.CRC32C.updateBytes(int,byte[],int,int) accessible: module java.base does not "opens java.util.zip" to unnamed module` when the required JVM option is missing
+
