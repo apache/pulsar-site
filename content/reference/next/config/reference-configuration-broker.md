@@ -4096,6 +4096,21 @@ The class name of the topic policies service. The default config only takes affe
 
 **Category**: Server
 
+### topicsPatternRegexImplementation
+The regular expression implementation to use for topic pattern matching. 
+RE2J_WITH_JDK_FALLBACK is the default. It uses the RE2J implementation and falls back to the JDK implementation for backwards compatibility reasons when the pattern compilation fails with the RE2/j library.
+RE2J is more performant but does not support all regex features (e.g. negative lookaheads). 
+JDK uses the standard Java regex implementation which supports all features but can be slower.
+Bad or malicious regex patterns requiring extensive backtracing could cause high resource usage with RE2J_WITH_JDK_FALLBACK or JDK implementations.
+
+**Type**: `org.apache.pulsar.common.topics.TopicsPattern.RegexImplementation`
+
+**Default**: `RE2J_WITH_JDK_FALLBACK`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### transactionLogBatchedWriteEnabled
 Provide a mechanism allowing the Transaction Log Store to aggregate multiple records into a batched record and persist into a single BK entry. This will make Pulsar transactions work more efficiently, aka batched log. see: https://github.com/apache/pulsar/issues/15370. Default false
 
