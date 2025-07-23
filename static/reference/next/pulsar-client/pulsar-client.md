@@ -95,6 +95,10 @@ $ pulsar-client consume [options]
 |
 | `[-mp, --print-metadata]` | Message metadata|null|
 |
+| `[-stp, --start-timestamp]` | Start timestamp for consuming messages|null|
+|
+| `[-etp, --end-timestamp]` | End timestamp for consuming messages|null|
+|
 | `[-h, --help]` | Show this help message and exit.|null|
 |
 | `[-v, --version]` | Print version information and exit.|null|

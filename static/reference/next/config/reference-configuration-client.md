@@ -198,6 +198,13 @@ Client operation timeout (in milliseconds).
 
 **Default**: `30000`
 
+### originalPrincipal
+Original principal for proxy authentication scenarios.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
 ### proxyProtocol
 Protocol of proxy service. proxyServiceUrl and proxyProtocol must be mutually inclusive.
 
