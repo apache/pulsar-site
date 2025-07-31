@@ -77,6 +77,34 @@ For feature releases, using the milestone:
 gh pr list -L 1000 --search "is:pr is:merged milestone:4.0.0" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
 ```
 
+Copying from the clipboard to the release notes file
+
+First, move back to the pulsar-site directory, then:
+
+```shell
+pbpaste >> release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
+```
+
+## Categorizing the release note entries
+
+There is a separate script that can automatically categorize the release note items.
+
+```shell
+./scripts/release_notes_reorder_script.py release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
+```
+
+You need to check the results and sometimes manually reorder the entries.
+
+If you are releasing multiple maintenance versions at once, you can use another release as the reference for ordering, so you do not have to repeat the same manual reordering.
+
+```shell
+./scripts/release_notes_reorder_script.py release-notes/versioned/pulsar-X.Y.Z.md release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
+```
+
+## Creating Java client release notes
+
+Copy the "Client" and applicable entries from "Library updates" into the client-java release notes.
+
 ## Update the release note page
 
 The following steps are handled by the script `./scripts/generate_release_notes.py`.
