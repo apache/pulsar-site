@@ -65,7 +65,6 @@ sidebar_label: Apache Pulsar 3.3.8
 - [fix][broker] Fix NPE when getting delayed delivery policy ([#24512](https://github.com/apache/pulsar/pull/24512))
 - [fix][broker] Fix wrong backlog age metrics when the mark delete position point to a deleted ledger ([#24518](https://github.com/apache/pulsar/pull/24518))
 - [fix][broker][branch-3.3] Disable broken ExtensibleLoadManager tests and add closeInternalTopics in follower monitor ([#24557](https://github.com/apache/pulsar/pull/24557))
-- [fix][broker]Fix thread safety issues in BucketDelayedDeliveryTracker with StampedLock optimistic reads ([#24542](https://github.com/apache/pulsar/pull/24542))
 - [improve][broker] Phase 1 of PIP-370 support disable create topics on remote cluster through replication  ([#23169](https://github.com/apache/pulsar/pull/23169))
 - [improve][broker] Part 2 of PIP-370: add metrics "pulsar_replication_disconnected_count" ([#23213](https://github.com/apache/pulsar/pull/23213))
 

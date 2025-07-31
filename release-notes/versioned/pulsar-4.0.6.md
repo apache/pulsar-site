@@ -70,7 +70,6 @@ sidebar_label: Apache Pulsar 4.0.6
 - [fix][broker] Fix wrong backlog age metrics when the mark delete position point to a deleted ledger ([#24518](https://github.com/apache/pulsar/pull/24518))
 - [fix][broker][branch-4.0] Revert "[improve][broker] Reduce memory occupation of the delayed message queue ([#23611](https://github.com/apache/pulsar/pull/23611))" ([#24429](https://github.com/apache/pulsar/pull/24429))
 - [fix][broker]Data lost due to conflict loaded up a topic for two brokers, when enabled ServiceUnitStateMetadataStoreTableViewImpl ([#24478](https://github.com/apache/pulsar/pull/24478))
-- [fix][broker]Fix thread safety issues in BucketDelayedDeliveryTracker with StampedLock optimistic reads ([#24542](https://github.com/apache/pulsar/pull/24542))
 - [improve][broker] Enable concurrent processing of pending read Entries to avoid duplicate Reads ([#24346](https://github.com/apache/pulsar/pull/24346))
 - [improve][broker][branch-4.0] Update to Oxia 0.6.0 and use new group-id ([#24454](https://github.com/apache/pulsar/pull/24454))
 - [refactor][broker] Expose the managedLedger field for the sub class ([#24448](https://github.com/apache/pulsar/pull/24448))
