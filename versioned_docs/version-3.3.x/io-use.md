@@ -31,7 +31,7 @@ After the setup, the built-in connector is automatically discovered by Pulsar br
 
 You can configure the following information:
 
-* [Configure a default storage location for a built-in connector](#configure-a-default-storage-location-for-built-in-connectors)
+* [Configure a default storage location for a built-in connector](#configure-a-default-storage-location-for-a-built-in-connector)
 
 * [Configure a connector with a YAML file](#configure-a-connector-with-a-yaml-file)
 
@@ -162,7 +162,7 @@ pulsar-admin sinks available-sinks
 
 To run a connector, you can perform the following operations:
 
-* [Create a connector](#creat)
+* [Create a connector](#create)
 
 * [Start a connector](#start)
 
