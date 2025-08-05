@@ -19,6 +19,9 @@ name: CI - Precommit
 on:
   pull_request:
     branches: [main]
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
