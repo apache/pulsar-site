@@ -36,7 +36,13 @@ Some configuration in the Maven build is conditional based on the JDK version. I
    1. Set "Production sources directory:" to "generated-sources".
    2. Set "Test sources directory:" to "generated-test-sources".
 4. Click **OK**.
-5. Install the lombok plugin in intelliJ.
+5. Enable the lombok plugin in intelliJ.
+
+### Configure VM options for compiler process to avoid StackOverflowError with Lombok
+
+1. Open Compiler Settings. Click **Settings** → **Build, Execution, Deployment** → **Compiler**
+2. Under **Build Process**, set **Shared VM options** to `-Xss1500k`
+3. Click **OK**.
 
 ### Configure code style
 
