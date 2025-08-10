@@ -9,6 +9,52 @@ $ pulsar-admin topicPolicies subcommand
 
 
 
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# topicPolicies
+
+Operations on persistent topics
+
+
+```shell
+$ pulsar-admin topicPolicies subcommand
+```
+
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
 ## get-message-ttl
 
 Get the message TTL for a topic
@@ -35,6 +81,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -81,6 +145,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -145,6 +227,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -227,6 +327,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -327,6 +445,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -445,6 +581,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -581,6 +735,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -735,6 +907,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -907,6 +1097,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -1097,6 +1305,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -1305,6 +1531,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -1531,6 +1775,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -1775,6 +2037,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -2037,6 +2317,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -2317,6 +2615,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -2615,6 +2931,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -2931,6 +3265,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -3265,6 +3617,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -3617,6 +3987,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -3987,6 +4375,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -4375,6 +4781,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -4781,6 +5205,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -5205,6 +5647,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -5647,6 +6107,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -6107,6 +6585,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -6585,6 +7081,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -7081,6 +7595,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -7595,6 +8127,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -8127,6 +8677,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -8677,6 +9245,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -9245,6 +9831,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -9831,6 +10435,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -10435,6 +11057,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -11057,6 +11697,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -11697,6 +12355,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -12355,6 +13031,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -13031,6 +13725,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -13725,6 +14437,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -14437,6 +15167,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -15167,6 +15915,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -15915,6 +16681,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -16681,6 +17465,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -17465,6 +18267,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -18267,6 +19087,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -19087,6 +19925,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -19925,6 +20781,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -20781,6 +21655,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -21655,6 +22547,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -22547,6 +23457,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -23457,6 +24385,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -24385,6 +25331,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -25331,6 +26295,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -26295,6 +27277,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -27277,6 +28277,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -28277,6 +29295,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -29295,6 +30331,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -30331,6 +31385,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -31385,6 +32457,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -32457,6 +33547,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -33547,6 +34655,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -34655,6 +35781,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -35781,6 +36925,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -36925,6 +38087,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -38087,6 +39267,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -39267,6 +40465,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -40465,6 +41681,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -41681,6 +42915,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -42915,6 +44167,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -44167,6 +45437,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -45437,6 +46725,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -46725,6 +48031,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -48031,6 +49355,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -49355,6 +50697,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -50697,6 +52057,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -52057,6 +53435,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -53435,6 +54831,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -54831,6 +56245,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -56245,6 +57677,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -57677,6 +59127,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -59127,6 +60595,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -60595,6 +62081,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -62081,6 +63585,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
@@ -63585,6 +65107,24 @@ Operations on persistent topics
 $ pulsar-admin topicPolicies subcommand
 ```
 
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-message-ttl
