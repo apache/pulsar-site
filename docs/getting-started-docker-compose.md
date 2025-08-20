@@ -7,6 +7,13 @@ description: Get started with Apache Pulsar on your local machine using Docker C
 
 To run Pulsar locally with Docker Compose, follow the steps below.
 
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (version 20.10+ recommended)
+- [Docker Compose](https://docs.docker.com/compose/install/) (version 2.0+ recommended)
+- At least 8GB of available RAM for the cluster
+- At least 10GB of free disk space
+
 ## Step 1: Configure the `compose.yml` template
 
 To get up and run a Pulsar cluster quickly, you can use the following template to create a `compose.yml` file by modifying or adding the configurations in the **environment** section.
@@ -31,11 +38,11 @@ services:
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
     command:
       - bash
-      - -c 
+      - -c
       - |
         bin/apply-config-from-env.py conf/zookeeper.conf && \
         bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
-        exec bin/pulsar zookeeper    
+        exec bin/pulsar zookeeper
     healthcheck:
       test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
       interval: 10s
@@ -51,7 +58,7 @@ services:
       - pulsar
     command:
       - bash
-      - -c 
+      - -c
       - |
         bin/pulsar initialize-cluster-metadata \
         --cluster cluster-a \
