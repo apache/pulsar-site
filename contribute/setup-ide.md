@@ -63,9 +63,15 @@ Some configuration in the Maven build is conditional based on the JDK version. I
    2. Select **Use a local checkstyle file**.
    3. Set **File** to **buildtools/src/main/resources/pulsar/checkstyle.xml**.
    4. Select **Store relative to project location**.
-   5. Click **Next** → **Next** → **Finish**.
+   5. Click **Next**
+   6. For suppressions, set the absolute path of **buildtools/src/main/resources/pulsar/suppressions.xml** file. In the shell you can find it out with `echo $PWD/buildtools/src/main/resources/pulsar/suppressions.xml` command.
+   7. Click **Next** → **Finish**.
 6. Activate the configuration you just added by toggling the corresponding box.
 7. Click **OK**.
+
+You can scan individual files by activating CheckStyle UI in the left side bar. The icon is a pencil.
+
+![Checkstyle UI in IntelliJ](/assets/intellij-checkstyle.png)
 
 ### Further configuration
 
