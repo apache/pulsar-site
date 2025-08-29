@@ -14,12 +14,14 @@ Key features of Pulsar are listed below:
 * Native support for multiple clusters in a Pulsar instance, with seamless [geo-replication](administration-geo.md) of messages across clusters.
 * Very low publish and end-to-end latency.
 * Seamless scalability to over a million topics.
-* A simple [client API](concepts-clients.md) with bindings for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md) and [C++](client-libraries-cpp.md).
-* Multiple [subscription types](concepts-messaging.md#subscription-types) ([exclusive](concepts-messaging.md#exclusive), [shared](concepts-messaging.md#shared), and [failover](concepts-messaging.md#failover)) for topics.
+* A simple [client API](concepts-clients.md) with bindings for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md), [C#/.NET](client-libraries-dotnet.md), [Node.js](client-libraries-node.md), and [WebSocket](client-libraries-websocket.md).
+* Multiple [subscription types](concepts-messaging.md#subscription-types) ([exclusive](concepts-messaging.md#exclusive), [shared](concepts-messaging.md#shared), [failover](concepts-messaging.md#failover), and [key_shared](concepts-messaging.md#key_shared)) for topics.
 * Guaranteed message delivery with [persistent message storage](concepts-architecture-overview.md#persistent-storage) provided by [Apache BookKeeper](http://bookkeeper.apache.org/).
-A serverless lightweight computing framework [Pulsar Functions](functions-overview.md) offers the capability for stream-native data processing.
+* A serverless lightweight computing framework [Pulsar Functions](functions-overview.md) offers the capability for stream-native data processing.
 * A serverless connector framework [Pulsar IO](io-overview.md), which is built on Pulsar Functions, makes it easier to move data in and out of Apache Pulsar.
 * [Tiered Storage](tiered-storage-overview.md) offloads data from hot/warm storage to cold/long-term storage (such as S3 and GCS) when the data is aging out.
+* Native support for [transactions](concepts-transactions.md) enabling atomic operations across topics and partitions.
+* Flexible [authentication and authorization](concepts-authentication.md) with support for multiple providers including OAuth/OIDC.
 
 ## Contents
 
