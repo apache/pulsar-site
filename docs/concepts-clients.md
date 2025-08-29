@@ -117,3 +117,47 @@ Each TableView uses one Reader instance per partition, and reads the topic start
 The following figure illustrates the dynamic construction of a TableView updated with newer values of each key.
 
 ![Dynamic construction of a TableView in Pulsar](/assets/tableview.png)
+
+## Transactions
+
+Pulsar clients support transactions that enable atomic operations across multiple topics and partitions. Transactions provide exactly-once semantics and ensure that either all operations within a transaction succeed or fail together.
+
+With transactions, Pulsar clients can:
+
+* **Atomic message production**: Produce messages to multiple topics atomically within a transaction boundary.
+* **Atomic message acknowledgment**: Acknowledge messages within transaction boundaries, ensuring processed messages are only committed when the transaction succeeds.
+* **Cross-topic operations**: Perform operations spanning multiple topics as part of a single atomic transaction.
+
+### Transaction workflow
+
+1. **Begin transaction**: Create a new transaction with configurable timeout.
+2. **Perform operations**: Send messages and acknowledge consumed messages within the transaction context.
+3. **Commit or abort**: Either commit the transaction (making all operations permanent) or abort it (rolling back all operations).
+
+Example transaction usage:
+
+```java
+// Create a transaction
+Transaction txn = client.newTransaction()
+    .withTransactionTimeout(1, TimeUnit.MINUTES)
+    .build().get();
+
+try {
+    // Send messages within transaction
+    producer.newMessage(txn).value("message-1").send();
+    producer.newMessage(txn).value("message-2").send();
+    
+    // Acknowledge messages within transaction  
+    consumer.acknowledgeAsync(messageId, txn);
+    
+    // Commit transaction
+    txn.commit().get();
+} catch (Exception e) {
+    // Abort transaction on error
+    txn.abort().get();
+}
+```
+
+Transactions are particularly useful for building exactly-once processing pipelines, ensuring data consistency across multiple Pulsar topics, and implementing complex event processing patterns.
+
+For more details, see [Pulsar transactions](concepts-transactions.md).
