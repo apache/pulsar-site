@@ -2625,7 +2625,7 @@ The list compatibility checkers to be used in schema registry
 
 **Type**: `java.util.Set`
 
-**Default**: `[org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck]`
+**Default**: `[org.apache.pulsar.broker.service.schema.ExternalSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck]`
 
 **Dynamic**: `false`
 
