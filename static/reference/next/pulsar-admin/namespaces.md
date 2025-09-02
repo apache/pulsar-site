@@ -2293,7 +2293,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -2573,7 +2573,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -2871,7 +2871,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -3187,7 +3187,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -3521,7 +3521,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -3873,7 +3873,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -4243,7 +4243,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -4631,7 +4631,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -5037,7 +5037,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -5461,7 +5461,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -5903,7 +5903,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -6363,7 +6363,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -6841,7 +6841,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -7337,7 +7337,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -7851,7 +7851,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -8383,7 +8383,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -8933,7 +8933,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -9501,7 +9501,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -10087,7 +10087,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -10691,7 +10691,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -11313,7 +11313,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -11953,7 +11953,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -12611,7 +12611,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -13287,7 +13287,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -13981,7 +13981,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -14693,7 +14693,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -15423,7 +15423,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -16171,7 +16171,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -16937,7 +16937,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -17721,7 +17721,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -18523,7 +18523,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -19343,7 +19343,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -20181,7 +20181,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -21037,7 +21037,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -21911,7 +21911,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -22803,7 +22803,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -23713,7 +23713,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -24641,7 +24641,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -25587,7 +25587,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -26551,7 +26551,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -27533,7 +27533,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -28533,7 +28533,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -29551,7 +29551,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -30587,7 +30587,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -31641,7 +31641,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -32713,7 +32713,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -33803,7 +33803,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -34911,7 +34911,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -36037,7 +36037,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -37181,7 +37181,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -38343,7 +38343,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -39523,7 +39523,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -40721,7 +40721,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -41937,7 +41937,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -43171,7 +43171,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -44423,7 +44423,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -45693,7 +45693,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -46981,7 +46981,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -48287,7 +48287,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -49611,7 +49611,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -50953,7 +50953,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -52313,7 +52313,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -53691,7 +53691,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -55087,7 +55087,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -56501,7 +56501,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -57933,7 +57933,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -59383,7 +59383,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -60851,7 +60851,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -62337,7 +62337,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -63841,7 +63841,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -65363,7 +65363,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -66903,7 +66903,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -68461,7 +68461,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -70037,7 +70037,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -71631,7 +71631,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -73243,7 +73243,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -74873,7 +74873,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -76521,7 +76521,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -78187,7 +78187,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -79871,7 +79871,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -81573,7 +81573,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -83293,7 +83293,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -85031,7 +85031,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -86787,7 +86787,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -88561,7 +88561,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -90353,7 +90353,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -92163,7 +92163,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -93991,7 +93991,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -95837,7 +95837,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -97701,7 +97701,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -99583,7 +99583,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -101483,7 +101483,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -103401,7 +103401,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -105337,7 +105337,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -107291,7 +107291,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -109263,7 +109263,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -111253,7 +111253,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -113261,7 +113261,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -115287,7 +115287,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -117331,7 +117331,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -119393,7 +119393,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -121473,7 +121473,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -123571,7 +123571,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -125687,7 +125687,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -127821,7 +127821,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -129973,7 +129973,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -132143,7 +132143,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -134331,7 +134331,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -136537,7 +136537,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -138761,7 +138761,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -141003,7 +141003,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -143263,7 +143263,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -145541,7 +145541,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -147837,7 +147837,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -150151,7 +150151,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -152483,7 +152483,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -154833,7 +154833,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -157201,7 +157201,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -159587,7 +159587,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -161991,7 +161991,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -164413,7 +164413,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -166853,7 +166853,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -169311,7 +169311,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -171787,7 +171787,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -174281,7 +174281,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -176793,7 +176793,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
@@ -179323,7 +179323,7 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 ## set-clusters
 
-Set replication clusters for a namespace
+Set replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.
 
 **Command:**
 
