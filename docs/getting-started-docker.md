@@ -12,7 +12,11 @@ import TabItem from '@theme/TabItem';
 
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
-If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (version 20.10+ recommended)
+- At least 4GB of available RAM
+- At least 5GB of free disk space
 
 To run Pulsar in Docker, follow the steps below.
 
@@ -58,9 +62,9 @@ bin/pulsar standalone
 
 :::tip
 
-You may encounter issues with the default RocksDB metadata store.
+By default, Pulsar uses RocksDB as the metadata store, which is recommended for standalone instances. 
 
-We recommend you consider using the following environment variable to use ZooKeeper as the metadata store:
+If you encounter issues with RocksDB or need compatibility with existing ZooKeeper-based installations, you can use ZooKeeper as the metadata store by adding:
 
 ```
 ...
@@ -68,7 +72,7 @@ We recommend you consider using the following environment variable to use ZooKee
 ...
 ```
 
-Don't apply this fix for existing Pulsar standalone instances if you don't want to loose your data.
+Note: Switching metadata stores will create a new cluster. Don't apply this to existing instances unless you want to start fresh.
 
 :::
 
