@@ -448,7 +448,7 @@ sidebar_label: Apache Pulsar 4.1.0
 ### Tests & CI
 
 - [fix][build] Add develops for buildtools ([#23992](https://github.com/apache/pulsar/pull/23992))
-- [fix][build] Add missing <name> to submodules ([#24421](https://github.com/apache/pulsar/pull/24421))
+- [fix][build] Add missing `<name>` to submodules ([#24421](https://github.com/apache/pulsar/pull/24421))
 - [fix][build] Ensure that buildtools is Java 8 compatible and fix remaining compatibility issue ([#24307](https://github.com/apache/pulsar/pull/24307))
 - [fix][build] Fix docker image building by replacing deprecated and removed compress argument ([#24155](https://github.com/apache/pulsar/pull/24155))
 - [fix][build] Fix error "Element encoding is not allowed here" in pom.xml ([#23655](https://github.com/apache/pulsar/pull/23655))
