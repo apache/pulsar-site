@@ -348,7 +348,7 @@ sidebar_label: Apache Pulsar 4.1.0
 - [fix][io] Fix SyntaxWarning in Pulsar Python functions ([#24297](https://github.com/apache/pulsar/pull/24297))
 - [improve][fn] Implement PIP-412: Support setting messagePayloadProcessor in Pulsar Functions and Sinks ([#24163](https://github.com/apache/pulsar/pull/24163))
 - [improve][fn] Improve closing of producers in Pulsar Functions ProducerCache invalidation ([#23734](https://github.com/apache/pulsar/pull/23734))
-- [improve][fn] Improve implementation for maxPendingAsyncRequests async concurrency limit when return type is CompletableFuture<Void> ([#23708](https://github.com/apache/pulsar/pull/23708))
+- [improve][fn] Improve implementation for maxPendingAsyncRequests async concurrency limit when return type is `CompletableFuture<Void>` ([#23708](https://github.com/apache/pulsar/pull/23708))
 - [improve][fn] Introduce NewOutputMessageWithError to enable error handling ([#24122](https://github.com/apache/pulsar/pull/24122))
 - [improve][fn] Set default tenant and namespace for ListFunctions cmd ([#23881](https://github.com/apache/pulsar/pull/23881))
 - [improve][io] Add configuration parameter for disabling aggregation for Kinesis Producers ([#24289](https://github.com/apache/pulsar/pull/24289))
