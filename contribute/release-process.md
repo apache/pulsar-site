@@ -888,6 +888,16 @@ poetry install
 _JAVA_OPTIONS=-XX:ActiveProcessorCount=1 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
+For new feature releases, you will need to manually edit `src/static/reference/index.html` and add a new entry for the feature release (for example `4.1.x`) in 2 locations:
+
+```patch
++          '<option value="4.1.x">4.1.x</value>' +
+-            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "2.11.x", "3.0.x", "3.1.x", "3.2.x", "3.3.x", "4.0.x", "next"],
++            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "2.11.x", "3.0.x", "3.1.x", "3.2.x", "3.3.x", "4.0.x", "4.1.x", "next"],
+```
+
+Commit the changes:
+
 ```shell
 cd ../..
 git add static/reference/*
