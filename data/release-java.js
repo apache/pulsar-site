@@ -1,5 +1,12 @@
 module.exports = [
   {
+    "tagName": "v4.1.0",
+    "vtag": "4.1.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.1.0/",
+    "doc": "/docs/4.1.x/client-libraries-java",
+    "version": "v4.1.x"
+  },
+  {
     "tagName": "v4.0.6",
     "vtag": "4.0.x",
     "releaseNotes": "/release-notes/versioned/client-java-4.0.6/",
