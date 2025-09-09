@@ -1417,6 +1417,9 @@ delayedDeliveryTickTimeMillis=1000
 # has passed, and they may be as late as the deliverAt time plus the tickTimeMillis for the topic plus the
 # delayedDeliveryTickTimeMillis.
 isDelayedDeliveryDeliverAtTimeStrict=false
+
+# Maximum number of delayed messages per dispatcher. Once this limit is reached, no more delayed messages are allowed.
+maxNumDelayedDeliveryTrackerMemoryEntries=100000
 ```
 
 ### Producer
