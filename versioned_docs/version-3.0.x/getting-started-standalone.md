@@ -16,7 +16,13 @@ If you're looking to run a full production Pulsar installation, see the [Deployi
 
 Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**.
 
-Also, you need the proper 64-bit JRE/JDK version installed. Please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
+Also, you need the proper 64-bit JRE/JDK version installed:
+
+- **Java 17** is required for Pulsar 2.11+ and master branch
+- **Java 11** is required for Pulsar 2.8/2.9/2.10 
+- **Java 8** is required for Pulsar 2.7 and earlier
+
+For the latest Java version recommendations, see [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
 
 ## Download Pulsar distribution
 

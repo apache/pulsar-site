@@ -6,7 +6,11 @@ sidebar_label: "Run Pulsar in Docker"
 
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
-If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (version 20.10+ recommended)
+- At least 4GB of available RAM
+- At least 5GB of free disk space
 
 ## Start Pulsar in Docker
 
