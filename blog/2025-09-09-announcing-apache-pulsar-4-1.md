@@ -54,15 +54,15 @@ Pulsar 4.1 places a strong emphasis on security with multiple critical updates:
 
 ### Critical Vulnerability Fixes
 The release addresses several high-priority CVEs:
-- **CVE-2024-53990**: Upgraded async-http-client to 2.12.4 and disabled AsyncHttpClient CookieStore
-- **CVE-2025-8916**: Upgraded bouncycastle bcpkix-fips version to 1.79
-- **CVE-2024-6763**: Upgraded Jetty to 9.4.57.v20241219
-- **CVE-2025-30204**: Upgraded jwt/v5 to 5.2.2
-- **CVE-2025-27818**: Upgraded Kafka connector and clients version to 3.9.1
-- **CVE-2025-22868**: Upgraded pulsar-function-go dependencies
-- **CVE-2024-47535**: Upgraded to Netty 4.1.115.Final
-- **CVE-2025-55163**: Upgraded to Netty 4.1.124.Final
-- **CVE-2024-51504**: Upgraded ZooKeeper to 3.9.3
+- **<a href="https://github.com/advisories?query=CVE-2024-53990" target="_blank" class="blacklink">CVE-2024-53990</a>**: Upgraded async-http-client to 2.12.4 and disabled AsyncHttpClient CookieStore
+- **<a href="https://github.com/advisories?query=CVE-2025-8916" target="_blank" class="blacklink">CVE-2025-8916</a>**: Upgraded bouncycastle bcpkix-fips version to 1.79
+- **<a href="https://github.com/advisories?query=CVE-2024-6763" target="_blank" class="blacklink">CVE-2024-6763</a>**: Upgraded Jetty to 9.4.57.v20241219
+- **<a href="https://github.com/advisories?query=CVE-2025-30204" target="_blank" class="blacklink">CVE-2025-30204</a>**: Upgraded jwt/v5 to 5.2.2
+- **<a href="https://github.com/advisories?query=CVE-2025-27818" target="_blank" class="blacklink">CVE-2025-27818</a>**: Upgraded Kafka connector and clients version to 3.9.1
+- **<a href="https://github.com/advisories?query=CVE-2025-22868" target="_blank" class="blacklink">CVE-2025-22868</a>**: Upgraded pulsar-function-go dependencies
+- **<a href="https://github.com/advisories?query=CVE-2024-47535" target="_blank" class="blacklink">CVE-2024-47535</a>**: Upgraded to Netty 4.1.115.Final
+- **<a href="https://github.com/advisories?query=CVE-2025-55163" target="_blank" class="blacklink">CVE-2025-55163</a>**: Upgraded to Netty 4.1.124.Final
+- **<a href="https://github.com/advisories?query=CVE-2024-51504" target="_blank" class="blacklink">CVE-2024-51504</a>**: Upgraded ZooKeeper to 3.9.3
 
 ### Cryptographic Improvements
 - Upgraded golang.org/x/crypto from 0.21.0 to 0.31.0 in pulsar-function-go
