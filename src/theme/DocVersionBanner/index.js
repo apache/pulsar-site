@@ -16,7 +16,7 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
 const _ltsVersion = '4.0.x';
-const _maintainedVersions = ['4.0.x', '3.3.x', '3.0.x'];
+const _maintainedVersions = ['4.1.x', '4.0.x', '3.3.x', '3.0.x'];
 function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate

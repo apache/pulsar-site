@@ -9,11 +9,19 @@ This section guides you through every step of installing and running Apache Puls
 
 For deploying a Pulsar cluster for production usage, read the documentation on [how to configure and install a Pulsar Helm chart](helm-deploy.md).
 
-## Prerequisite
+:::warning Security Notice
 
-- Kubernetes server 1.21.0+
-- kubectl 1.21.0+
-- Helm 3.10+
+This quickstart guide uses default configurations suitable for development and testing only. The default Helm chart configuration **does not meet production security requirements**. For production deployments, you must review and customize security settings including authentication, authorization, TLS encryption, and network policies.
+
+:::
+
+## Prerequisites
+
+- Kubernetes server 1.25.0+ ([latest stable version](https://kubernetes.io/releases/patch-releases/#detailed-release-history-for-active-branches) recommended)
+- kubectl version that is compatible with your k8s server version ([+/- 1 minor release version](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#before-you-begin))
+- Helm 3.12+ (choose a [helm version that is compatible with your k8s server version](https://helm.sh/docs/topics/version_skew/#supported-version-skew))
+- At least 8GB of available RAM in your Kubernetes cluster
+- At least 20GB of persistent storage available
 
 :::tip
 
@@ -32,10 +40,9 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 1. Create a Kubernetes cluster on Minikube.
 
    ```bash
-   minikube start --memory=8192 --cpus=4 --kubernetes-version=<k8s-version>
+   minikube start --memory=8192 --cpus=4
    ```
 
-   The `<k8s-version>` can be any [Kubernetes version supported by your Minikube installation](https://minikube.sigs.k8s.io/docs/reference/configuration/kubernetes/), such as `v1.16.1`.
 
 2. Set `kubectl` to use Minikube.
 

@@ -9,9 +9,9 @@ At the highest level, a Pulsar instance is composed of one or more Pulsar cluste
 
 A Pulsar cluster consists of the following components:
 
-* One or more brokers handles and [load balances](administration-load-balance.md) incoming messages from producers, dispatches messages to consumers, communicates with the Pulsar configuration store to handle various coordination tasks, stores messages in BookKeeper instances (aka bookies), relies on a cluster-specific ZooKeeper cluster for certain tasks, and more.
+* One or more brokers handles and [load balances](administration-load-balance.md) incoming messages from producers, dispatches messages to consumers, communicates with the Pulsar metadata store to handle various coordination tasks, stores messages in BookKeeper instances (aka bookies), and coordinates cluster operations through the metadata store.
 * A BookKeeper cluster consisting of one or more bookies handles [persistent storage](#persistent-storage) of messages.
-* A ZooKeeper cluster specific to that cluster handles coordination tasks between Pulsar clusters.
+* A metadata store cluster (ZooKeeper, etcd, or other supported backend) handles coordination tasks and cluster-specific metadata storage.
 
 The diagram below illustrates a Pulsar cluster:
 
@@ -46,9 +46,36 @@ Clusters can replicate among themselves using [geo-replication](concepts-replica
 
 ## Metadata store
 
-The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such as topic metadata, schema, broker load data, and so on. Pulsar uses [Apache ZooKeeper](https://zookeeper.apache.org/) for metadata storage, cluster configuration, and coordination. The Pulsar metadata store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster. You can use one ZooKeeper cluster for both Pulsar metadata store and BookKeeper metadata store. If you want to deploy Pulsar brokers connected to an existing BookKeeper cluster, you need to deploy separate ZooKeeper clusters for Pulsar metadata store and BookKeeper metadata store respectively.
+The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such as topic metadata, schema, broker load data, and so on. Pulsar supports multiple metadata store backends to provide flexibility in deployment architectures and operational requirements:
 
-> Pulsar also supports more metadata backend services, including [etcd](https://etcd.io/) and [RocksDB](http://rocksdb.org/) (for standalone Pulsar only).
+### Supported Metadata Store Backends
+
+- **[Apache ZooKeeper](https://zookeeper.apache.org/)** - Default option, production-ready metadata store with strong consistency guarantees.
+- **[etcd](https://etcd.io/)** - Cloud-native distributed key-value store, ideal for Kubernetes environments and cloud deployments.
+- **[RocksDB](http://rocksdb.org/)** - Embedded key-value store for standalone Pulsar deployments, eliminating the need for external coordination services.
+- **[Oxia](https://github.com/oxia-db/oxia/)** - A robust, scalable metadata store and coordination system designed for large-scale distributed systems, with built-in support for stream index storage to optimize real-time data management.
+
+### Configuration
+
+You can configure the metadata store using the `metadataStoreUrl` parameter:
+
+```bash
+# ZooKeeper
+metadataStoreUrl=zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
+
+# etcd
+metadataStoreUrl=etcd:my-etcd-1:2379,my-etcd-2:2379,my-etcd-3:2379
+
+# RocksDB (standalone)
+metadataStoreUrl=rocksdb:///path/to/data
+
+# Oxia
+metadataStoreUrl=oxia:oxia-server:6648
+```
+
+### Deployment Considerations
+
+The Pulsar metadata store can be deployed on a separate cluster or integrated with existing infrastructure. You can use one ZooKeeper cluster for both Pulsar metadata store and BookKeeper metadata store. If you want to deploy Pulsar brokers connected to an existing BookKeeper cluster, you need to deploy separate clusters for Pulsar metadata store and BookKeeper metadata store respectively.
 
 In a Pulsar instance:
 
@@ -125,13 +152,19 @@ The **Pulsar proxy** provides a solution to this problem by acting as a single g
 
 > For the sake of performance and fault tolerance, you can run as many instances of the Pulsar proxy as you'd like.
 
-Architecturally, the Pulsar proxy gets all the information it requires from ZooKeeper. When starting the proxy on a machine, you only need to provide metadata store connection strings for the cluster-specific and instance-wide configuration store clusters. Here's an example:
+Architecturally, the Pulsar proxy gets all the information it requires from the metadata store. When starting the proxy on a machine, you only need to provide metadata store connection strings for the cluster-specific and instance-wide configuration store clusters. Here's an example:
 
 ```bash
 cd /path/to/pulsar/directory
+# Using ZooKeeper
 bin/pulsar proxy \
     --metadata-store zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181 \
     --configuration-metadata-store zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
+
+# Using etcd
+bin/pulsar proxy \
+    --metadata-store etcd:my-etcd-1:2379,my-etcd-2:2379 \
+    --configuration-metadata-store etcd:my-etcd-1:2379,my-etcd-2:2379
 ```
 
 > #### Pulsar proxy docs

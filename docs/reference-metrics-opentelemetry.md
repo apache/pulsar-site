@@ -1097,3 +1097,242 @@ Time taken to complete a consistent snapshot operation across clusters.
   * `pulsar.replication.subscription.snapshot.operation.result` - The result of the snapshot operation. Can be one of:
     * `success`
     * `timeout`
+
+## Java Client
+
+### Producer Metrics
+
+#### pulsar.client.producer.message.send.duration
+Publish latency experienced by the application, includes client batching time.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.response.status` - The response status. Can be one of:
+    * `success`
+    * `failed`
+
+#### pulsar.client.producer.rpc.send.duration
+Publish RPC latency experienced internally by the client when sending data to receiving an ack.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.response.status` - The response status. Can be one of:
+    * `success`
+    * `failed`
+
+#### pulsar.client.producer.message.send.size
+The number of bytes published.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+
+#### pulsar.client.producer.message.pending.count
+The number of messages in the producer internal send queue, waiting to be sent.
+* Type: UpDownCounter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+
+#### pulsar.client.producer.message.pending.size
+The size of the messages in the producer internal queue, waiting to be sent.
+* Type: UpDownCounter
+* Unit: `By`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+
+#### pulsar.client.producer.opened
+The number of producer sessions opened.
+* Type: Counter
+* Unit: `{session}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+
+#### pulsar.client.producer.closed
+The number of producer sessions closed.
+* Type: Counter
+* Unit: `{session}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+
+### Consumer Metrics
+
+#### pulsar.client.consumer.opened
+The number of consumer sessions opened.
+* Type: Counter
+* Unit: `{session}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.closed
+The number of consumer sessions closed.
+* Type: Counter
+* Unit: `{session}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.message.received.count
+The number of messages explicitly received by the consumer application.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.message.received.size
+The number of bytes explicitly received by the consumer application.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.receive_queue.count
+The number of messages currently sitting in the consumer receive queue.
+* Type: UpDownCounter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.receive_queue.size
+The total size in bytes of messages currently sitting in the consumer receive queue.
+* Type: UpDownCounter
+* Unit: `By`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.message.ack
+The number of acknowledged messages.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.message.nack
+The number of negatively acknowledged messages.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.message.dlq
+The number of messages sent to the dead letter queue.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+#### pulsar.client.consumer.message.ack.timeout
+The number of messages that were not acknowledged in the configured timeout period, hence, were requested by the client to be redelivered.
+* Type: Counter
+* Unit: `{message}`
+* Attributes:
+  * `pulsar.tenant` - The topic tenant.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.topic` - The topic name.
+  * `pulsar.partition` - The partition index of the topic. Present only if the topic is partitioned.
+  * `pulsar.subscription` - The subscription name.
+
+### Connection Metrics
+
+#### pulsar.client.connection.opened
+The number of connections opened.
+* Type: Counter
+* Unit: `{connection}`
+
+#### pulsar.client.connection.closed
+The number of connections closed.
+* Type: Counter
+* Unit: `{connection}`
+
+#### pulsar.client.connection.failed
+The number of failed connection attempts.
+* Type: Counter
+* Unit: `{connection}`
+* Attributes:
+  * `pulsar.failure.type` - The type of connection failure. Can be one of:
+    * `tcp-failed`
+    * `handshake`
+
+### Lookup Service Metrics
+
+#### pulsar.client.lookup.duration
+Duration of lookup operations.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.lookup.transport-type` - The transport type used for the lookup. Can be one of:
+    * `http`
+    * `binary`
+  * `pulsar.response.status` - The response status. Can be one of:
+    * `success`
+    * `failed`
+
+### Memory Buffer Metrics
+
+#### pulsar.client.memory.buffer.usage
+Current memory buffer usage by the client.
+* Type: UpDownCounter
+* Unit: `By`
+
+#### pulsar.client.memory.buffer.limit
+Memory buffer limit configured for the client.
+* Type: UpDownCounter
+* Unit: `By`

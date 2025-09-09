@@ -840,6 +840,14 @@
                     "format": "int32",
                     "type": "integer"
                 },
+                "firstConsumedFlowTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "firstMessagesSentTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "keyHashRangeArrays": {
                     "items": {
                         "items": {
@@ -1277,6 +1285,7 @@
                         "LOCAL_TIME",
                         "LOCAL_DATE_TIME",
                         "PROTOBUF_NATIVE",
+                        "EXTERNAL",
                         "BYTES",
                         "AUTO",
                         "AUTO_CONSUME",
@@ -1981,6 +1990,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "metadata": {
                     "$ref": "#/definitions/PartitionedTopicMetadata"
                 },
@@ -2077,6 +2090,10 @@
                     "type": "object"
                 },
                 "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicCreationTimeStamp": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -2486,6 +2503,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "msgChunkPublished": {
                     "type": "boolean"
                 },
@@ -2573,6 +2594,10 @@
                     "type": "object"
                 },
                 "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicCreationTimeStamp": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -2981,6 +3006,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "metadata": {
                     "$ref": "#/definitions/PartitionedTopicMetadata"
                 },
@@ -3070,6 +3099,10 @@
                     "type": "object"
                 },
                 "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicCreationTimeStamp": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -3290,6 +3323,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "msgChunkPublished": {
                     "type": "boolean"
                 },
@@ -3360,6 +3397,10 @@
                         "$ref": "#/definitions/SubscriptionStats"
                     },
                     "type": "object"
+                },
+                "topicCreationTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "topicEpoch": {
                     "format": "int64",
@@ -4482,6 +4523,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "msgChunkPublished": {
                     "type": "boolean"
                 },
@@ -4552,6 +4597,10 @@
                         "$ref": "#/definitions/SubscriptionStats"
                     },
                     "type": "object"
+                },
+                "topicCreationTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "topicEpoch": {
                     "format": "int64",
@@ -11699,7 +11748,7 @@
                         "description": "Namespace is not global or invalid cluster ids"
                     }
                 },
-                "summary": "Set the replication clusters for a namespace.",
+                "summary": "Set the replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.",
                 "tags": [
                     "namespaces"
                 ]
@@ -20023,6 +20072,70 @@
                 ]
             }
         },
+        "/non-persistent/{tenant}/{namespace}/{topic}/policies": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_deleteTopicPolicies",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Delete policies for a topic.",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            }
+        },
         "/non-persistent/{tenant}/{namespace}/{topic}/properties": {
             "delete": {
                 "description": "",
@@ -20480,6 +20593,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -20533,6 +20653,13 @@
                         "name": "topic",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
                     },
                     {
                         "default": false,
@@ -20602,6 +20729,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -20644,7 +20778,7 @@
                         "description": "Topic is not global or invalid cluster ids"
                     }
                 },
-                "summary": "Set the replication clusters for a topic.",
+                "summary": "Set the replication clusters for a topic. When removing a cluster: with shared configuration store, topic data will be deleted from the removed cluster; with separate configuration store, only replication stops but topic data is preserved.",
                 "tags": [
                     "non-persistent topic"
                 ]
@@ -30445,6 +30579,70 @@
                 ]
             }
         },
+        "/persistent/{tenant}/{namespace}/{topic}/policies": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_deleteTopicPolicies",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Delete policies for a topic.",
+                "tags": [
+                    "persistent topic"
+                ]
+            }
+        },
         "/persistent/{tenant}/{namespace}/{topic}/properties": {
             "delete": {
                 "description": "",
@@ -30902,6 +31100,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -30955,6 +31160,13 @@
                         "name": "topic",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
                     },
                     {
                         "default": false,
@@ -31024,6 +31236,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -31066,7 +31285,7 @@
                         "description": "Topic is not global or invalid cluster ids"
                     }
                 },
-                "summary": "Set the replication clusters for a topic.",
+                "summary": "Set the replication clusters for a topic. When removing a cluster: with shared configuration store, topic data will be deleted from the removed cluster; with separate configuration store, only replication stops but topic data is preserved.",
                 "tags": [
                     "persistent topic"
                 ]

@@ -2625,7 +2625,7 @@ The list compatibility checkers to be used in schema registry
 
 **Type**: `java.util.Set`
 
-**Default**: `[org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck]`
+**Default**: `[org.apache.pulsar.broker.service.schema.ExternalSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck]`
 
 **Dynamic**: `false`
 
@@ -4096,6 +4096,21 @@ The class name of the topic policies service. The default config only takes affe
 
 **Category**: Server
 
+### topicsPatternRegexImplementation
+The regular expression implementation to use for topic pattern matching. 
+RE2J_WITH_JDK_FALLBACK is the default. It uses the RE2J implementation and falls back to the JDK implementation for backwards compatibility reasons when the pattern compilation fails with the RE2/j library.
+RE2J is more performant but does not support all regex features (e.g. negative lookaheads). 
+JDK uses the standard Java regex implementation which supports all features but can be slower.
+Bad or malicious regex patterns requiring extensive backtracing could cause high resource usage with RE2J_WITH_JDK_FALLBACK or JDK implementations.
+
+**Type**: `org.apache.pulsar.common.topics.TopicsPattern.RegexImplementation`
+
+**Default**: `RE2J_WITH_JDK_FALLBACK`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### transactionLogBatchedWriteEnabled
 Provide a mechanism allowing the Transaction Log Store to aggregate multiple records into a batched record and persist into a single BK entry. This will make Pulsar transactions work more efficiently, aka batched log. see: https://github.com/apache/pulsar/issues/15370. Default false
 
@@ -4885,8 +4900,19 @@ Skip reading non-recoverable/unreadable data-ledger under managed-ledger's list.
 
 **Category**: Storage (Managed Ledger)
 
+### cacheEvictionByExpectedReadCount
+Evicting cache data by expected read count. Expected read count is calculated by the number of active cursors with a read position that is behind the position of the cached entry. This setting will override the cacheEvictionByMarkDeletedPosition setting.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### cacheEvictionByMarkDeletedPosition
-Evicting cache data by the slowest markDeletedPosition or readPosition. The default is to evict through readPosition.
+Evicting cache data by the slowest markDeletedPosition (true) or slowest read position (false).This setting is ignored when cacheEvictionByExpectedReadCount is true.
 
 **Type**: `boolean`
 
@@ -4965,6 +4991,47 @@ Whether we should make a copy of the entry payloads when inserting in cache
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerCacheEvictionExtendTTLOfEntriesWithRemainingExpectedReadsMaxTimes
+Maximum number of times the cache can extend
+the TTL of an entry that has remaining expected reads.
+Only takes effect when cacheEvictionByExpectedReadCount is enabled.
+This helps optimize cache efficiency for scenarios like:
+- Key_Shared subscription replays
+- Catch-up reads for lagging consumers
+- Consumers temporarily falling behind the tail
+Entries with remaining expected reads will have their TTL extended up to this many times
+before being eligible for eviction. The TTL will be extended by
+managedLedgerCacheEvictionTimeThresholdMillis each time.
+Default is 5.
+
+**Type**: `int`
+
+**Default**: `5`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerCacheEvictionExtendTTLOfRecentlyAccessed
+Controls whether recently accessed entries in the managed ledger cache should have their lifetime extended before cache eviction.
+When enabled:
+ - During eviction check, if an entry has been accessed since the last check, its expiration time will be extended by managedLedgerCacheEvictionTimeThresholdMillis
+ - Makes the cache behave like a Least Recently Used (LRU) cache by keeping frequently accessed entries longer
+ - Helps optimize performance for frequently accessed entries while still allowing old unused entries to be evicted
+ - Minimum eviction time is 2x managedLedgerCacheEvictionTimeThresholdMillis
+When disabled:
+ - Cache behaves more like a FIFO queue with time-based and size-based eviction
+ - Minimum eviction time is managedLedgerCacheEvictionTimeThresholdMillis
+Default is true, to behave like a LRU cache.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerCacheEvictionFrequency
 Configure the cache eviction frequency for the managed ledger cache.
 
@@ -4988,7 +5055,14 @@ Configure the cache eviction interval in milliseconds for the managed ledger cac
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerCacheEvictionTimeThresholdMillis
-All entries that have stayed in cache for more than the configured time, will be evicted
+Controls time-to-live (TTL) for entries in the managed ledger (broker) cache.
+The TTL can be extended in two ways:
+1. When cacheEvictionByExpectedReadCount is enabled: TTL is extended for entries with remaining
+expected reads. The maximum number of extensions is controlled by
+managedLedgerCacheEvictionExtendTTLOfEntriesWithRemainingExpectedReadsMaxTimes.
+2. When cacheEvictionExtendTTLOfRecentlyAccessed is enabled: TTL is extended for entries
+accessed since the last expiration check.
+Default value is 1000ms.
 
 **Type**: `long`
 
@@ -5022,8 +5096,21 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerContinueCachingAddedEntriesAfterLastActiveCursorLeavesMillis
+This setting configures the duration of continuing to cache added entries while there are no active cursors, when the last active cursor has left or immediately after initialization when the persistent topic and the managed ledger gets loaded. This setting is ignored unless cacheEvictionByExpectedReadCount is enabled.The default value is 2 * managedLedgerCacheEvictionTimeThresholdMillis.
+
+**Type**: `java.lang.Long`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerCursorBackloggedThreshold
 Configure the threshold (in number of entries) from where a cursor should be considered 'backlogged' and thus should be set as inactive.
+Set to -1 to disable this behavior.
+This setting has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `long`
 
@@ -5217,6 +5304,7 @@ Max number of guaranteed copies (acks to wait before write is complete)
 
 ### managedLedgerMaxBacklogBetweenCursorsForCaching
 Maximum backlog entry difference to prevent caching entries that can't be reused
+This has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `int`
 
@@ -5379,6 +5467,7 @@ Minimum time between ledger rollover for a topic
 
 ### managedLedgerMinimumBacklogCursorsForCaching
 Minimum cursors that must be in backlog state to cache and reuse the read entries.(Default =0 to disable backlog reach cache)
+This has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `int`
 
@@ -5390,6 +5479,7 @@ Minimum cursors that must be in backlog state to cache and reuse the read entrie
 
 ### managedLedgerMinimumBacklogEntriesForCaching
 Minimum backlog entries for any cursor before start caching reads
+This has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `int`
 

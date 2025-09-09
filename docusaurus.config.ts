@@ -466,6 +466,10 @@ module.exports = async function createConfigAsync() {
               from: '/contribute/setup-mergetool',
               to: '/contribute/setup-git',
             },
+            {
+              from: '/resources',
+              to: '/articles',
+            },
           ],
         },
       ],
