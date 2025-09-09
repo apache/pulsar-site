@@ -4,10 +4,198 @@
         <title>Apache Pulsar Blog</title>
         <link>https://pulsar.apache.org/blog/</link>
         <description>Apache Pulsar Blog</description>
-        <lastBuildDate>Thu, 24 Oct 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 09 Sep 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[What's New in Apache Pulsar 4.1]]></title>
+            <link>https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/</link>
+            <guid>https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/</guid>
+            <pubDate>Tue, 09 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[The Apache Pulsar community is thrilled to announce the launch of Apache Pulsar 4.1, a significant feature release!]]></description>
+            <content:encoded><![CDATA[<p>The Apache Pulsar community is thrilled to announce the launch of Apache Pulsar 4.1, a significant feature release!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-new-in-apache-pulsar-41-since-pulsar-40">What's new in Apache Pulsar 4.1 since Pulsar 4.0?<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#whats-new-in-apache-pulsar-41-since-pulsar-40" class="hash-link" aria-label="Direct link to What's new in Apache Pulsar 4.1 since Pulsar 4.0?" title="Direct link to What's new in Apache Pulsar 4.1 since Pulsar 4.0?">​</a></h2>
+<p>Pulsar 4.1 <a href="https://github.com/apache/pulsar/releases/tag/v4.1.0" target="_blank" rel="noopener noreferrer">includes numerous improvements and enhancements</a> since the previous release Pulsar 4.0 in October 2024. This release introduces 19 Pulsar Improvement Proposals (PIPs) and hundreds of bug fixes, security updates, and performance improvements that strengthen the platform's capabilities across multiple areas.</p>
+<p>Since there are many new features and improvements, this blog post will highlight the most significant updates. Apache Pulsar contributors are invited to contribute additional blog posts with more details about the new features and improvements.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-pulsar-improvement-proposals-pips">Key Pulsar Improvement Proposals (PIPs)<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#key-pulsar-improvement-proposals-pips" class="hash-link" aria-label="Direct link to Key Pulsar Improvement Proposals (PIPs)" title="Direct link to Key Pulsar Improvement Proposals (PIPs)">​</a></h2>
+<p>Pulsar 4.1 introduces 19 approved PIPs that enhance various aspects of the platform:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhanced-security-and-authentication">Enhanced Security and Authentication<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#enhanced-security-and-authentication" class="hash-link" aria-label="Direct link to Enhanced Security and Authentication" title="Direct link to Enhanced Security and Authentication">​</a></h3>
+<ul>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-292.md" class="blacklink" target="_blank">PIP-292</a></strong>: Enforce token expiration time in the WebSocket plugin, improving security for WebSocket connections</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-432.md" class="blacklink" target="_blank">PIP-432</a></strong>: Add isEncrypted field to EncryptionContext for better encryption handling</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-436.md" class="blacklink" target="_blank">PIP-436</a></strong>: Add decryptFailListener to Consumer for improved error handling in encrypted message scenarios</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="client-experience-and-configuration">Client Experience and Configuration<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#client-experience-and-configuration" class="hash-link" aria-label="Direct link to Client Experience and Configuration" title="Direct link to Client Experience and Configuration">​</a></h3>
+<ul>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-391.md" class="blacklink" target="_blank">PIP-391</a></strong>: Enable batch index ACK by default, improving acknowledgment efficiency and reducing memory usage</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-409.md" class="blacklink" target="_blank">PIP-409</a></strong>: Support producer configuration for retry/dead letter topic producer, providing better control over retry mechanisms</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-420.md" class="blacklink" target="_blank">PIP-420</a></strong>: Provide ability for Pulsar clients to integrate with third-party schema registry services, expanding schema management options</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-421.md" class="blacklink" target="_blank">PIP-421</a></strong>: Require Java 17 as the minimum for Pulsar Java client SDK, leveraging modern Java features</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-425.md" class="blacklink" target="_blank">PIP-425</a></strong>: Support connecting with next available endpoint for multi-endpoint serviceUrls, improving client resilience</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="operational-excellence-and-monitoring">Operational Excellence and Monitoring<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#operational-excellence-and-monitoring" class="hash-link" aria-label="Direct link to Operational Excellence and Monitoring" title="Direct link to Operational Excellence and Monitoring">​</a></h3>
+<ul>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-416.md" class="blacklink" target="_blank">PIP-416</a></strong>: Add a new topic method to implement trigger offload by size threshold, enhancing storage management</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-427.md" class="blacklink" target="_blank">PIP-427</a></strong>: Align pulsar-admin default for mark-delete rate with broker configuration for consistency</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-431.md" class="blacklink" target="_blank">PIP-431</a></strong>: Add creation and last publish timestamps to topic stats, improving observability</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-435.md" class="blacklink" target="_blank">PIP-435</a></strong>: Add startTimestamp and endTimestamp for consuming messages in client CLI, enabling precise time-based message consumption</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="advanced-features-and-performance">Advanced Features and Performance<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#advanced-features-and-performance" class="hash-link" aria-label="Direct link to Advanced Features and Performance" title="Direct link to Advanced Features and Performance">​</a></h3>
+<ul>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-422.md" class="blacklink" target="_blank">PIP-422</a></strong>: Support global topic-level policy: replicated clusters and new API to delete topic-level policies</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-428.md" class="blacklink" target="_blank">PIP-428</a></strong>: Change TopicPoliciesService interface to fix consistency issues in topic policy management</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-429.md" class="blacklink" target="_blank">PIP-429</a></strong>: Optimize handling of compacted last entry by skipping payload buffer parsing, improving compaction performance</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-430.md" class="blacklink" target="_blank">PIP-430</a></strong>: Pulsar broker cache improvements: refactoring eviction and adding a new cache strategy based on expected read count</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-433.md" class="blacklink" target="_blank">PIP-433</a></strong>: Optimize the conflicts of the replication and automatic creation mechanisms, including the automatic creation of topics and schemas</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="administrative-and-management-enhancements">Administrative and Management Enhancements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#administrative-and-management-enhancements" class="hash-link" aria-label="Direct link to Administrative and Management Enhancements" title="Direct link to Administrative and Management Enhancements">​</a></h3>
+<ul>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-373.md" class="blacklink" target="_blank">PIP-373</a></strong>: Add a topic's system prop that indicates whether users have published TXN messages before</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-375.md" class="blacklink" target="_blank">PIP-375</a></strong>: Expose the Admin client configs: readTimeout, requestTimeout, and connectionTimeout</li>
+<li><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-382.md" class="blacklink" target="_blank">PIP-382</a></strong>: Add a label named reason for topic_load_failed_total metric for better monitoring</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="security-enhancements">Security Enhancements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#security-enhancements" class="hash-link" aria-label="Direct link to Security Enhancements" title="Direct link to Security Enhancements">​</a></h2>
+<p>Pulsar 4.1 places a strong emphasis on security with multiple critical updates:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critical-vulnerability-fixes">Critical Vulnerability Fixes<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#critical-vulnerability-fixes" class="hash-link" aria-label="Direct link to Critical Vulnerability Fixes" title="Direct link to Critical Vulnerability Fixes">​</a></h3>
+<p>The release addresses several high-priority CVEs:</p>
+<ul>
+<li><strong><a href="https://github.com/advisories?query=CVE-2024-53990" target="_blank" class="blacklink">CVE-2024-53990</a></strong>: Upgraded async-http-client to 2.12.4 and disabled AsyncHttpClient CookieStore</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2025-8916" target="_blank" class="blacklink">CVE-2025-8916</a></strong>: Upgraded bouncycastle bcpkix-fips version to 1.79</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2024-6763" target="_blank" class="blacklink">CVE-2024-6763</a></strong>: Upgraded Jetty to 9.4.57.v20241219</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2025-30204" target="_blank" class="blacklink">CVE-2025-30204</a></strong>: Upgraded jwt/v5 to 5.2.2</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2025-27818" target="_blank" class="blacklink">CVE-2025-27818</a></strong>: Upgraded Kafka connector and clients version to 3.9.1</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2025-22868" target="_blank" class="blacklink">CVE-2025-22868</a></strong>: Upgraded pulsar-function-go dependencies</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2024-47535" target="_blank" class="blacklink">CVE-2024-47535</a></strong>: Upgraded to Netty 4.1.115.Final</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2025-55163" target="_blank" class="blacklink">CVE-2025-55163</a></strong>: Upgraded to Netty 4.1.124.Final</li>
+<li><strong><a href="https://github.com/advisories?query=CVE-2024-51504" target="_blank" class="blacklink">CVE-2024-51504</a></strong>: Upgraded ZooKeeper to 3.9.3</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cryptographic-improvements">Cryptographic Improvements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#cryptographic-improvements" class="hash-link" aria-label="Direct link to Cryptographic Improvements" title="Direct link to Cryptographic Improvements">​</a></h3>
+<ul>
+<li>Upgraded golang.org/x/crypto from 0.21.0 to 0.31.0 in pulsar-function-go</li>
+<li>Replaced bcprov-jdk15on dependency with bcprov-jdk18-on for better Java compatibility</li>
+<li>Upgraded commons-io to 2.18.0 and json-smart to 2.5.2</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="enhanced-client-reliability-and-performance">Enhanced Client Reliability and Performance<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#enhanced-client-reliability-and-performance" class="hash-link" aria-label="Direct link to Enhanced Client Reliability and Performance" title="Direct link to Enhanced Client Reliability and Performance">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="batch-processing-improvements">Batch Processing Improvements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#batch-processing-improvements" class="hash-link" aria-label="Direct link to Batch Processing Improvements" title="Direct link to Batch Processing Improvements">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-391.md" class="blacklink" target="_blank">PIP-391</a></strong> enables batch index ACK by default, significantly improving acknowledgment efficiency. This change reduces memory usage and provides better performance for high-throughput scenarios where batch processing is common.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="multi-endpoint-resilience">Multi-Endpoint Resilience<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#multi-endpoint-resilience" class="hash-link" aria-label="Direct link to Multi-Endpoint Resilience" title="Direct link to Multi-Endpoint Resilience">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-425.md" class="blacklink" target="_blank">PIP-425</a></strong> introduces support for connecting with the next available endpoint for multi-endpoint serviceUrls. This enhancement improves client resilience by automatically failover to alternative endpoints when the primary endpoint is unavailable.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="memory-management-and-resource-cleanup">Memory Management and Resource Cleanup<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#memory-management-and-resource-cleanup" class="hash-link" aria-label="Direct link to Memory Management and Resource Cleanup" title="Direct link to Memory Management and Resource Cleanup">​</a></h3>
+<p>The release includes comprehensive fixes for memory leaks and resource cleanup:</p>
+<ul>
+<li>Fixed memory leaks in ClientCnx.newLookup when encountering TooManyRequestsException</li>
+<li>Resolved memory leaks when message size exceeds maximum limits with batching enabled</li>
+<li>Improved handling of orphan producers and consumers when creation is interrupted</li>
+<li>Enhanced cleanup of retry and dead letter topic producers when sending fails</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="broker-and-messaging-improvements">Broker and Messaging Improvements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#broker-and-messaging-improvements" class="hash-link" aria-label="Direct link to Broker and Messaging Improvements" title="Direct link to Broker and Messaging Improvements">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="advanced-cache-strategy">Advanced Cache Strategy<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#advanced-cache-strategy" class="hash-link" aria-label="Direct link to Advanced Cache Strategy" title="Direct link to Advanced Cache Strategy">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-430.md" class="blacklink" target="_blank">PIP-430</a></strong> introduces significant broker cache improvements with refactored eviction algorithms and a new cache strategy based on expected read count. This enhancement optimizes memory usage and improves cache hit rates for frequently accessed data.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="message-processing-optimizations">Message Processing Optimizations<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#message-processing-optimizations" class="hash-link" aria-label="Direct link to Message Processing Optimizations" title="Direct link to Message Processing Optimizations">​</a></h3>
+<p>Several improvements enhance message processing efficiency:</p>
+<ul>
+<li>Fixed retry mechanism in MetadataCache#readModifyUpdateOrCreate</li>
+<li>Improved acknowledgeCumulativeAsync to prevent blocking when ackReceipt is enabled</li>
+<li>Enhanced cursor management with better position handling and lifecycle management</li>
+<li>Optimized message TTL checks and expiration processing</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="compaction-performance">Compaction Performance<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#compaction-performance" class="hash-link" aria-label="Direct link to Compaction Performance" title="Direct link to Compaction Performance">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-429.md" class="blacklink" target="_blank">PIP-429</a></strong> optimizes compacted last entry handling by skipping unnecessary payload buffer parsing, significantly improving compaction performance for topics with large payloads.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="administrative-and-operational-enhancements">Administrative and Operational Enhancements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#administrative-and-operational-enhancements" class="hash-link" aria-label="Direct link to Administrative and Operational Enhancements" title="Direct link to Administrative and Operational Enhancements">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="time-based-message-consumption">Time-Based Message Consumption<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#time-based-message-consumption" class="hash-link" aria-label="Direct link to Time-Based Message Consumption" title="Direct link to Time-Based Message Consumption">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-435.md" class="blacklink" target="_blank">PIP-435</a></strong> adds startTimestamp and endTimestamp parameters to the client CLI for consuming messages. This feature enables precise time-based message consumption, particularly useful for:</p>
+<ul>
+<li>Debugging and troubleshooting specific time windows</li>
+<li>Data recovery operations with temporal boundaries</li>
+<li>Time-based message processing and analysis</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="topic-statistics-and-monitoring">Topic Statistics and Monitoring<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#topic-statistics-and-monitoring" class="hash-link" aria-label="Direct link to Topic Statistics and Monitoring" title="Direct link to Topic Statistics and Monitoring">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-431.md" class="blacklink" target="_blank">PIP-431</a></strong> enhances topic statistics by adding creation and last publish timestamps. This improvement provides better visibility into topic lifecycle and usage patterns, enabling more informed operational decisions.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="global-topic-level-policies">Global Topic-Level Policies<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#global-topic-level-policies" class="hash-link" aria-label="Direct link to Global Topic-Level Policies" title="Direct link to Global Topic-Level Policies">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-422.md" class="blacklink" target="_blank">PIP-422</a></strong> introduces support for global topic-level replicated clusters policy and new APIs to delete topic-level policies. This enhancement provides more granular control over topic replication and policy management across clusters.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="function-and-connector-improvements">Function and Connector Improvements<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#function-and-connector-improvements" class="hash-link" aria-label="Direct link to Function and Connector Improvements" title="Direct link to Function and Connector Improvements">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="schema-registry-integration">Schema Registry Integration<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#schema-registry-integration" class="hash-link" aria-label="Direct link to Schema Registry Integration" title="Direct link to Schema Registry Integration">​</a></h3>
+<p><strong><a href="https://github.com/apache/pulsar/blob/master/pip/pip-420.md" class="blacklink" target="_blank">PIP-420</a></strong> provides the ability for Pulsar clients to integrate with third-party schema registry services. This enhancement expands schema management options beyond Pulsar's built-in schema registry, enabling integration with popular schema management platforms.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhanced-error-handling">Enhanced Error Handling<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#enhanced-error-handling" class="hash-link" aria-label="Direct link to Enhanced Error Handling" title="Direct link to Enhanced Error Handling">​</a></h3>
+<p>The release improves error handling in various scenarios:</p>
+<ul>
+<li>Added decryptFailListener to consumers for better encryption error handling</li>
+<li>Improved exception handling in Pulsar Functions and IO connectors</li>
+<li>Enhanced retry mechanisms and circuit breaker patterns</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="connector-updates">Connector Updates<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#connector-updates" class="hash-link" aria-label="Direct link to Connector Updates" title="Direct link to Connector Updates">​</a></h3>
+<p>Multiple IO connectors received improvements:</p>
+<ul>
+<li>Enhanced Kafka connector with better bootstrap server logging</li>
+<li>Improved Kinesis connector with better configuration support</li>
+<li>Updated RabbitMQ connector with proper message acknowledgment</li>
+<li>Enhanced monitoring and metrics for connector performance</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="infrastructure-and-performance">Infrastructure and Performance<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#infrastructure-and-performance" class="hash-link" aria-label="Direct link to Infrastructure and Performance" title="Direct link to Infrastructure and Performance">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="load-balancing-optimizations">Load Balancing Optimizations<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#load-balancing-optimizations" class="hash-link" aria-label="Direct link to Load Balancing Optimizations" title="Direct link to Load Balancing Optimizations">​</a></h3>
+<p>Enhanced the ExtensibleLoadManagerImpl with several optimizations:</p>
+<ul>
+<li>Skip unloading when bundle throughput is zero</li>
+<li>Improved service unit state management</li>
+<li>Better load distribution algorithms</li>
+<li>Reduced unnecessary load balancing operations</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="blue-green-migration-support">Blue-Green Migration Support<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#blue-green-migration-support" class="hash-link" aria-label="Direct link to Blue-Green Migration Support" title="Direct link to Blue-Green Migration Support">​</a></h3>
+<p>Added comprehensive support for blue-green cluster migrations:</p>
+<ul>
+<li>Validation for migration cluster existence</li>
+<li>Improved migration state handling</li>
+<li>Better error handling during migration processes</li>
+<li>Enhanced monitoring and metrics for migration progress</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="metrics-and-observability">Metrics and Observability<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#metrics-and-observability" class="hash-link" aria-label="Direct link to Metrics and Observability" title="Direct link to Metrics and Observability">​</a></h3>
+<p>Improved monitoring capabilities with:</p>
+<ul>
+<li>Fixed metric naming for delayed queues (<a href="https://github.com/apache/pulsar/blob/master/pip/pip-399.md" class="blacklink" target="_blank">PIP-399</a>)</li>
+<li>Added dispatch throttling metrics (<a href="https://github.com/apache/pulsar/blob/master/pip/pip-406.md" class="blacklink" target="_blank">PIP-406</a>)</li>
+<li>Enhanced topic statistics with timestamp information</li>
+<li>Better error categorization and monitoring</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="library-updates-and-dependency-management">Library Updates and Dependency Management<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#library-updates-and-dependency-management" class="hash-link" aria-label="Direct link to Library Updates and Dependency Management" title="Direct link to Library Updates and Dependency Management">​</a></h2>
+<p>Pulsar 4.1 includes extensive library updates to ensure security, performance, and compatibility:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="major-framework-updates">Major Framework Updates<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#major-framework-updates" class="hash-link" aria-label="Direct link to Major Framework Updates" title="Direct link to Major Framework Updates">​</a></h3>
+<ul>
+<li><strong>Apache BookKeeper</strong>: Upgraded to 4.17.2 with improved performance and stability</li>
+<li><strong>Netty</strong>: Updated to 4.1.122.Final with security fixes and performance improvements</li>
+<li><strong>Avro</strong>: Upgraded to 1.12.0 for better schema handling</li>
+<li><strong>OpenTelemetry</strong>: Updated to 1.45.0 for enhanced observability</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-and-development-tools">Build and Development Tools<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#build-and-development-tools" class="hash-link" aria-label="Direct link to Build and Development Tools" title="Direct link to Build and Development Tools">​</a></h3>
+<ul>
+<li><strong>Java 17 Requirement</strong>: <a href="https://github.com/apache/pulsar/blob/master/pip/pip-421.md" class="blacklink" target="_blank">PIP-421</a> establishes Java 17 as the minimum requirement for the Java client SDK</li>
+<li><strong>Caffeine</strong>: Upgraded from 2.9.1 to 3.2.1 for improved caching performance</li>
+<li><strong>Guava</strong>: Updated to 33.4.8 with JSpecify annotations</li>
+<li><strong>Spring Framework</strong>: Updated to 6.1.14 in IO connectors</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="start-using-pulsar-41">Start using Pulsar 4.1<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#start-using-pulsar-41" class="hash-link" aria-label="Direct link to Start using Pulsar 4.1" title="Direct link to Start using Pulsar 4.1">​</a></h2>
+<p>Pulsar 4.1.0 is now available for <a href="https://pulsar.apache.org/download/" target="_blank" rel="noopener noreferrer">download</a>. The download page also includes details about the Docker image. To get started with Pulsar, you can run a Pulsar cluster <a href="https://pulsar.apache.org/docs/4.1.x/getting-started-home/" target="_blank" rel="noopener noreferrer">on your local machine, Docker, or Kubernetes</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="upgrading-existing-clusters-to-pulsar-41">Upgrading existing clusters to Pulsar 4.1<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#upgrading-existing-clusters-to-pulsar-41" class="hash-link" aria-label="Direct link to Upgrading existing clusters to Pulsar 4.1" title="Direct link to Upgrading existing clusters to Pulsar 4.1">​</a></h2>
+<p>As a feature release within the 4.x series, Pulsar 4.1 maintains compatibility with Pulsar 4.0 deployments. Users running Pulsar 4.0.x can upgrade directly to Pulsar 4.1.0 following standard upgrade procedures.</p>
+<p>Pulsar changes in releases are designed to allow upgrading an existing Pulsar cluster to a newer release and then rolling back to the original release version if issues arise. This is considered when changes are made in Pulsar and the default BookKeeper configuration for Pulsar. Since Apache Pulsar is an open-source project, there is no guarantee that a specific configuration can be upgraded and downgraded.</p>
+<p>Each Pulsar user is responsible for operating their cluster, and Pulsar cluster upgrades should be tested in testing and staging environments to ensure that a specific configuration can be upgraded and downgraded. When something is supported in the Apache Project, it means that the project is committed to addressing reported issues. This also applies to release upgrade compatibility.</p>
+<p>For users upgrading from earlier versions, please follow the standard upgrade path: first upgrade to Pulsar 4.0.x, then proceed to Pulsar 4.1.0.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="upgrading-clients-to-use-pulsar-41">Upgrading clients to use Pulsar 4.1<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#upgrading-clients-to-use-pulsar-41" class="hash-link" aria-label="Direct link to Upgrading clients to use Pulsar 4.1" title="Direct link to Upgrading clients to use Pulsar 4.1">​</a></h2>
+<p>Pulsar 4.1 clients are compatible with Pulsar 4.0 clusters, and Pulsar 4.0 clients are compatible with Pulsar 4.1 clusters. When upgrading clients, you can upgrade directly to the latest supported version. It is recommended to keep the clients up-to-date with the latest security patches and bug fixes.</p>
+<p><strong>Important Note</strong>: <a href="https://github.com/apache/pulsar/blob/master/pip/pip-421.md" class="blacklink" target="_blank">PIP-421</a> establishes Java 17 as the minimum requirement for the Pulsar Java client SDK starting with 4.1. Please ensure your client applications are running on Java 17 or later before upgrading.</p>
+<p>When upgrading Java clients, it is a common problem that client module library versions are not aligned. It is recommended to use the <a href="https://pulsar.apache.org/docs/4.1.x/client-libraries-java-setup/#pulsar-bom" target="_blank" rel="noopener noreferrer">Pulsar BOM</a> to manage the Pulsar Java client version in Maven and Gradle builds. There are also specific instructions for <a href="https://pulsar.apache.org/docs/4.1.x/client-libraries-java-setup/#spring-boot" target="_blank" rel="noopener noreferrer">selecting the Pulsar client version in Spring Boot projects</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="thank-you-to-apache-pulsar-contributors">Thank You to Apache Pulsar Contributors<a href="https://pulsar.apache.org/blog/2025/09/09/announcing-apache-pulsar-4-1/#thank-you-to-apache-pulsar-contributors" class="hash-link" aria-label="Direct link to Thank You to Apache Pulsar Contributors" title="Direct link to Thank You to Apache Pulsar Contributors">​</a></h2>
+<p>Apache Pulsar 4.1 represents the continued collaborative effort of our vibrant open-source community. This release demonstrates the dedication of developers, organizations, and users worldwide who have contributed to making data streaming more reliable and accessible.</p>
+<p>We extend our deepest gratitude to:</p>
+<ul>
+<li>The individual contributors who developed new features, reported bugs, fixed bugs, and improved documentation</li>
+<li>The committers and PMC members who participated in Apache Pulsar project security issue handling, PIP decision making, and voting for releases</li>
+<li>The organizations that have deployed Pulsar in production and shared their valuable feedback</li>
+<li>The users who participated in testing and provided invaluable input during the release process</li>
+<li>The broader Apache Software Foundation community for their continued support</li>
+</ul>
+<p>The strength of Apache Pulsar lies in its community-driven development. Whether you're running Pulsar in production or evaluating it for your technology stack, we encourage you to join the conversation on the <a href="https://pulsar.apache.org/contact/#mailing-lists" target="_blank" rel="noopener noreferrer">dev@pulsar.apache.org</a> mailing list or the <a href="https://pulsar.apache.org/community/#section-discussions" target="_blank" rel="noopener noreferrer">Pulsar Slack community</a>. Your experience and feedback help shape the future of this platform.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[What's New in Apache Pulsar 4.0]]></title>
             <link>https://pulsar.apache.org/blog/2024/10/24/announcing-apache-pulsar-4-0/</link>
@@ -1112,48 +1300,6 @@ Copy the properties to the new mark delete entry while advancing the cursor, whi
 <p>For more information about the Apache Pulsar project and current progress, visit
 the <a href="https://pulsar.apache.org/" target="_blank" rel="noopener noreferrer">Pulsar website</a>, follow the project on Twitter
 <a href="https://twitter.com/apache_pulsar" target="_blank" rel="noopener noreferrer">@apache_pulsar</a>, and join <a href="https://apache-pulsar.herokuapp.com/" target="_blank" rel="noopener noreferrer">Pulsar Slack</a>!</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Apache Pulsar Sessions in ApacheCon Asia 2022: Join Us Now and Check the Schedule]]></title>
-            <link>https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/</link>
-            <guid>https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/</guid>
-            <pubDate>Tue, 26 Jul 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[We are excited to invite you to ApacheCon Asia 2022 to explore the newest tools and tips, and connect with subject-matter experts in various Apache Pulsar-related sessions. The Apache Software Foundation will be holding ApacheCon Asia 2022 online between July 29th and July 31st, 2022. Register now for free to join us for this inspiring three-day event of cutting-edge technologies.]]></description>
-            <content:encoded><![CDATA[<p>We are excited to invite you to <a href="https://apachecon.com/acasia2022/index.html" target="_blank" rel="noopener noreferrer">ApacheCon Asia 2022</a> to explore the newest tools and tips, and connect with subject-matter experts in various Apache Pulsar-related sessions. The Apache Software Foundation will be holding ApacheCon Asia 2022 online between July 29th and July 31st, 2022. <a href="https://apachecon.com/acasia2022/register.html" target="_blank" rel="noopener noreferrer">Register now for free</a> to join us for this inspiring three-day event of cutting-edge technologies.</p>
-<p>The conference gathers adopters, developers, engineers, and technologists from some of the most influential open source communities in the world. To date, there has been a total of over 200 proposals submitted by presenters from Intel, Huawei, Tencent Cloud, StreamNative, Sina Weibo, vivo, and many more. Nearly 50 of these sessions are related to streaming and messaging, 30 of which are focused on Apache Pulsar-based technologies.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="featured-sessions">Featured sessions<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#featured-sessions" class="hash-link" aria-label="Direct link to Featured sessions" title="Direct link to Featured sessions">​</a></h2>
-<p>Let’s have a quick look at some of the featured sessions in messaging and streaming, ranging from technical deep dives, best practices, to tutorials, and insights.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipn-awesome-streaming-with-open-source-english">FLiPN Awesome Streaming with Open Source (English)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#flipn-awesome-streaming-with-open-source-english" class="hash-link" aria-label="Direct link to FLiPN Awesome Streaming with Open Source (English)" title="Direct link to FLiPN Awesome Streaming with Open Source (English)">​</a></h3>
-<p>Timothy Spann, Developer Advocate, StreamNative</p>
-<p>In this talk, Tim will walk through how to build different types of streaming applications by using Apache NiFi, Apache Flink, Apache Spark, and Apache Pulsar together. The session will demonstrate how to ingest various data and REST feeds to enrich data and send them to Apache Pulsar. Applications will be built on top of the live streaming data with Web socket dashboards, Apache Spark SQL ETL, and Apache Flink continuous SQL.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="introducing-tableview-pulsars-database-table-abstraction-english">Introducing TableView: Pulsar's Database Table Abstraction (English)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#introducing-tableview-pulsars-database-table-abstraction-english" class="hash-link" aria-label="Direct link to Introducing TableView: Pulsar's Database Table Abstraction (English)" title="Direct link to Introducing TableView: Pulsar's Database Table Abstraction (English)">​</a></h3>
-<p>David Kjerrumgaard, Apache Pulsar Committer, Developer Advocate, StreamNative</p>
-<p>In many use cases, applications are using Pulsar consumers or readers to fetch all the updates from a topic and construct a map with the latest value of each key for the messages that were received. The new TableView consumer offers support for this access pattern directly in the Pulsar client API itself and encapsulates the complexities of manually constructing such local caches manually. This talk will demonstrate how to use the new TableView consumer using a simple application and discuss best practices and patterns for using the TableView consumer.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="route-to-the-next-generation-message-middleware-how-vivo-migrated-to-pulsar-mandarin">Route to the Next-Generation Message Middleware: How vivo Migrated to Pulsar (Mandarin)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#route-to-the-next-generation-message-middleware-how-vivo-migrated-to-pulsar-mandarin" class="hash-link" aria-label="Direct link to Route to the Next-Generation Message Middleware: How vivo Migrated to Pulsar (Mandarin)" title="Direct link to Route to the Next-Generation Message Middleware: How vivo Migrated to Pulsar (Mandarin)">​</a></h3>
-<p>Limin Quan, Jianbo Chen, Big Data Engineer, vivo</p>
-<p>vivo has used Kafka to support its business with over 1000 billion messages per day. Now, it has migrated to Apache Pulsar as its next-generation message middleware to handle an even larger amount of data. In this talk, Quan and Chen will share the reasons behind vivo’s choice of Apache Pulsar and how vivo has worked to put Pulsar into practice (for example, migrating plans and troubleshooting tips).</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="practice-and-optimization-apache-pulsar-in-tencent-cloud-mandarin">Practice and Optimization: Apache Pulsar in Tencent Cloud (Mandarin)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#practice-and-optimization-apache-pulsar-in-tencent-cloud-mandarin" class="hash-link" aria-label="Direct link to Practice and Optimization: Apache Pulsar in Tencent Cloud (Mandarin)" title="Direct link to Practice and Optimization: Apache Pulsar in Tencent Cloud (Mandarin)">​</a></h3>
-<p>Xiaolong Ran, Apache Pulsar Committer, Senior R&amp;D Engineer, Tencent Cloud</p>
-<p>As Apache Pulsar has been put into production at scale in Tencent Cloud, it is widely used in different scenarios supporting companies and organizations across industries. To bring the experience to another level, Tencent has worked out a series of strategies in terms of optimization and stability. In this talk, Ran will focus on Tencent Cloud's work on performance optimization and shed light upon some of the best practices and troubleshooting tips for using Apache Pulsar.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="apache-pulsar-as-lakehouse-introducing-the-lakehouse-tiered-storage-integration-for-apache-pulsar-mandarin">Apache Pulsar as Lakehouse: Introducing the Lakehouse Tiered Storage Integration for Apache Pulsar (Mandarin)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#apache-pulsar-as-lakehouse-introducing-the-lakehouse-tiered-storage-integration-for-apache-pulsar-mandarin" class="hash-link" aria-label="Direct link to Apache Pulsar as Lakehouse: Introducing the Lakehouse Tiered Storage Integration for Apache Pulsar (Mandarin)" title="Direct link to Apache Pulsar as Lakehouse: Introducing the Lakehouse Tiered Storage Integration for Apache Pulsar (Mandarin)">​</a></h3>
-<p>Hang Chen, Apache Pulsar PMC member, Software Engineer, StreamNative</p>
-<p>Currently, tiered storage is introduced to offload cold data, while they are managed by Apache Pulsar in a non-open format. Therefore, it is very difficult to integrate the data into other big data components, such as Flink SQL and Spark SQL. In this talk, Chen will explain how to use Lakehouse to manage offloaded data and integrate it with the cold data offloading mechanism.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-high-performance-apache-pulsar-with-intel-optane-persistent-memory-mandarin">Build High-Performance Apache Pulsar with Intel Optane Persistent Memory (Mandarin)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#build-high-performance-apache-pulsar-with-intel-optane-persistent-memory-mandarin" class="hash-link" aria-label="Direct link to Build High-Performance Apache Pulsar with Intel Optane Persistent Memory (Mandarin)" title="Direct link to Build High-Performance Apache Pulsar with Intel Optane Persistent Memory (Mandarin)">​</a></h3>
-<p>Fenghua Hu, Cloud Software Architect, Intel</p>
-<p>Intel Optane persistent memory (PMem) is a revolutionary memory product, which features high performance, large capacity, storage persistence, and more. In this talk, Hu will demonstrate how to use Intel Optane PMem to bring Apache Pulsar’s ability of high throughput and low latency to another level and effectively cope with performance-demanding scenarios.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-evolution-of-apache-pulsar-as-a-message-queue-in-huawei-device-mandarin">The Evolution of Apache Pulsar as A Message Queue in Huawei Device (Mandarin)<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#the-evolution-of-apache-pulsar-as-a-message-queue-in-huawei-device-mandarin" class="hash-link" aria-label="Direct link to The Evolution of Apache Pulsar as A Message Queue in Huawei Device (Mandarin)" title="Direct link to The Evolution of Apache Pulsar as A Message Queue in Huawei Device (Mandarin)">​</a></h3>
-<p>Lin Lin, Apache Pulsar PMC member, SDE Expert, Huawei Device</p>
-<p>Xiaotong Wang, Senior Engineer, Huawei Device</p>
-<p>In the cloud-native era, Huawei Device is faced with many challenges in message queue infrastructure, such as maintenance difficulties in different message queue solutions, high overheads, and disaster tolerance ability building. This talk will cover Huawei Device’s experience in redesigning its message queue architecture and present some solutions to these problems.</p>
-<p>To learn more about how companies and organizations today leverage Apache Pulsar for streaming and messaging, serverless computing, and mission-critical deployments in production, see other Apache Pulsar-related sessions in <a href="https://apachecon.com/acasia2022/tracks/streaming.html" target="_blank" rel="noopener noreferrer">streaming</a> and <a href="https://apachecon.com/acasia2022/tracks/messaging.html" target="_blank" rel="noopener noreferrer">messaging</a> tracks respectively.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-participate">How to participate<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#how-to-participate" class="hash-link" aria-label="Direct link to How to participate" title="Direct link to How to participate">​</a></h2>
-<p><a href="https://apachecon.com/acasia2022/register.html" target="_blank" rel="noopener noreferrer">Register</a> now for free.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-resources">More resources<a href="https://pulsar.apache.org/blog/2022/07/26/pulsar-sessions-in-apachecon-aisa-2022/#more-resources" class="hash-link" aria-label="Direct link to More resources" title="Direct link to More resources">​</a></h2>
-<p>As we can see from topics submitted to ApacheCon Asia 2022, Apache Pulsar has become <a href="https://blogs.apache.org/foundation/entry/apache-in-2021-by-the" target="_blank" rel="noopener noreferrer">one of the most active Apache projects</a> over the past few years, with a vibrant community that continues to drive innovation and improvements to the project.</p>
-<ol>
-<li>Save your spot at the Pulsar Summit San Francisco. The first in-person Pulsar Summit is taking place this August! <a href="https://pulsar-summit.org/" target="_blank" rel="noopener noreferrer">Sign up today</a> to join the Pulsar community and the messaging and event streaming community.</li>
-<li>Join the Apache Pulsar community. <a href="https://pulsar.apache.org/community#section-welcome" target="_blank" rel="noopener noreferrer">Subscribe to the Pulsar mailing lists</a> for user-related or Pulsar development discussions. You can also <a href="https://apache-pulsar.herokuapp.com/" target="_blank" rel="noopener noreferrer">join the Pulsar Slack</a> to ask quick questions or discuss specialized topics.</li>
-</ol>]]></content:encoded>
         </item>
     </channel>
 </rss>
