@@ -2,7 +2,7 @@
 title: "What's New in Apache Pulsar 4.1"
 authors: [pulsar-community]
 tags: [release, 4.1]
-date: 2025-01-17
+date: 2025-09-09
 ---
 
 # What's New in Apache Pulsar 4.1
