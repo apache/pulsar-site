@@ -26,7 +26,7 @@ export const resources: Record<Category, Resource[]> = {
       title: "Data Streaming Summit 2025",
       description: "The Data Streaming Summit 2025 is taking place on September 29-30, 2025 Grand Hyatt SFO.",
       link: "https://datastreaming-summit.org/",
-      displayDate: "September 30th, 2024",
+      displayDate: "September 30th, 2025",
       startDate: "2025-09-29", // year-month-day
     },
     {
