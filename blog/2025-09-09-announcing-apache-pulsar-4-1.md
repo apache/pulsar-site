@@ -1,6 +1,6 @@
 ---
 title: "What's New in Apache Pulsar 4.1"
-authors: David Kjerrumgaard
+author: David Kjerrumgaard
 date: 2025-09-09
 ---
 
