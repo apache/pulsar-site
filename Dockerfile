@@ -15,17 +15,17 @@
 # specific language governing permissions and limitations
 # under the License.
 
-FROM node:20-bullseye as build
+FROM node:22-bookworm as build
 
-WORKDIR /bulid-site
+WORKDIR /build-site
 
 COPY . .
 
 RUN corepack enable && yarn install && yarn build
 
-FROM httpd:2.4.54-alpine
+FROM httpd:2.4-alpine
 
-COPY --from=build /bulid-site/build /usr/local/apache2/htdocs
+COPY --from=build /build-site/build /usr/local/apache2/htdocs
 COPY tools/conf/httpd.conf /usr/local/apache2/conf/httpd.conf
 
 EXPOSE 80
