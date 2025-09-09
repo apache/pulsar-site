@@ -19,34 +19,34 @@ Since there are many new features and improvements, this blog post will highligh
 Pulsar 4.1 introduces 19 approved PIPs that enhance various aspects of the platform:
 
 ### Enhanced Security and Authentication
-- **PIP-292**: Enforce token expiration time in the WebSocket plugin, improving security for WebSocket connections
-- **PIP-432**: Add isEncrypted field to EncryptionContext for better encryption handling
-- **PIP-436**: Add decryptFailListener to Consumer for improved error handling in encrypted message scenarios
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-292.md" class="blacklink" target="_blank">PIP-292</a>**: Enforce token expiration time in the WebSocket plugin, improving security for WebSocket connections
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-432.md" class="blacklink" target="_blank">PIP-432</a>**: Add isEncrypted field to EncryptionContext for better encryption handling
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-436.md" class="blacklink" target="_blank">PIP-436</a>**: Add decryptFailListener to Consumer for improved error handling in encrypted message scenarios
 
 ### Client Experience and Configuration
-- **PIP-391**: Enable batch index ACK by default, improving acknowledgment efficiency and reducing memory usage
-- **PIP-409**: Support producer configuration for retry/dead letter topic producer, providing better control over retry mechanisms
-- **PIP-420**: Provide ability for Pulsar clients to integrate with third-party schema registry services, expanding schema management options
-- **PIP-421**: Require Java 17 as the minimum for Pulsar Java client SDK, leveraging modern Java features
-- **PIP-425**: Support connecting with next available endpoint for multi-endpoint serviceUrls, improving client resilience
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-391.md" class="blacklink" target="_blank">PIP-391</a>**: Enable batch index ACK by default, improving acknowledgment efficiency and reducing memory usage
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-409.md" class="blacklink" target="_blank">PIP-409</a>**: Support producer configuration for retry/dead letter topic producer, providing better control over retry mechanisms
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-420.md" class="blacklink" target="_blank">PIP-420</a>**: Provide ability for Pulsar clients to integrate with third-party schema registry services, expanding schema management options
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-421.md" class="blacklink" target="_blank">PIP-421</a>**: Require Java 17 as the minimum for Pulsar Java client SDK, leveraging modern Java features
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-425.md" class="blacklink" target="_blank">PIP-425</a>**: Support connecting with next available endpoint for multi-endpoint serviceUrls, improving client resilience
 
 ### Operational Excellence and Monitoring
-- **PIP-416**: Add a new topic method to implement trigger offload by size threshold, enhancing storage management
-- **PIP-427**: Align pulsar-admin default for mark-delete rate with broker configuration for consistency
-- **PIP-431**: Add creation and last publish timestamps to topic stats, improving observability
-- **PIP-435**: Add startTimestamp and endTimestamp for consuming messages in client CLI, enabling precise time-based message consumption
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-416.md" class="blacklink" target="_blank">PIP-416</a>**: Add a new topic method to implement trigger offload by size threshold, enhancing storage management
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-427.md" class="blacklink" target="_blank">PIP-427</a>**: Align pulsar-admin default for mark-delete rate with broker configuration for consistency
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-431.md" class="blacklink" target="_blank">PIP-431</a>**: Add creation and last publish timestamps to topic stats, improving observability
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-435.md" class="blacklink" target="_blank">PIP-435</a>**: Add startTimestamp and endTimestamp for consuming messages in client CLI, enabling precise time-based message consumption
 
 ### Advanced Features and Performance
-- **PIP-422**: Support global topic-level policy: replicated clusters and new API to delete topic-level policies
-- **PIP-428**: Change TopicPoliciesService interface to fix consistency issues in topic policy management
-- **PIP-429**: Optimize handling of compacted last entry by skipping payload buffer parsing, improving compaction performance
-- **PIP-430**: Pulsar broker cache improvements: refactoring eviction and adding a new cache strategy based on expected read count
-- **PIP-433**: Optimize the conflicts of the replication and automatic creation mechanisms, including the automatic creation of topics and schemas
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-422.md" class="blacklink" target="_blank">PIP-422</a>**: Support global topic-level policy: replicated clusters and new API to delete topic-level policies
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-428.md" class="blacklink" target="_blank">PIP-428</a>**: Change TopicPoliciesService interface to fix consistency issues in topic policy management
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-429.md" class="blacklink" target="_blank">PIP-429</a>**: Optimize handling of compacted last entry by skipping payload buffer parsing, improving compaction performance
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-430.md" class="blacklink" target="_blank">PIP-430</a>**: Pulsar broker cache improvements: refactoring eviction and adding a new cache strategy based on expected read count
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-433.md" class="blacklink" target="_blank">PIP-433</a>**: Optimize the conflicts of the replication and automatic creation mechanisms, including the automatic creation of topics and schemas
 
 ### Administrative and Management Enhancements
-- **PIP-373**: Add a topic's system prop that indicates whether users have published TXN messages before
-- **PIP-375**: Expose the Admin client configs: readTimeout, requestTimeout, and connectionTimeout
-- **PIP-382**: Add a label named reason for topic_load_failed_total metric for better monitoring
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-373.md" class="blacklink" target="_blank">PIP-373</a>**: Add a topic's system prop that indicates whether users have published TXN messages before
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-375.md" class="blacklink" target="_blank">PIP-375</a>**: Expose the Admin client configs: readTimeout, requestTimeout, and connectionTimeout
+- **<a href="https://github.com/apache/pulsar/blob/master/pip/pip-382.md" class="blacklink" target="_blank">PIP-382</a>**: Add a label named reason for topic_load_failed_total metric for better monitoring
 
 ## Security Enhancements
 
@@ -72,10 +72,10 @@ The release addresses several high-priority CVEs:
 ## Enhanced Client Reliability and Performance
 
 ### Batch Processing Improvements
-**PIP-391** enables batch index ACK by default, significantly improving acknowledgment efficiency. This change reduces memory usage and provides better performance for high-throughput scenarios where batch processing is common.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-391.md" class="blacklink" target="_blank">PIP-391</a>** enables batch index ACK by default, significantly improving acknowledgment efficiency. This change reduces memory usage and provides better performance for high-throughput scenarios where batch processing is common.
 
 ### Multi-Endpoint Resilience
-**PIP-425** introduces support for connecting with the next available endpoint for multi-endpoint serviceUrls. This enhancement improves client resilience by automatically failover to alternative endpoints when the primary endpoint is unavailable.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-425.md" class="blacklink" target="_blank">PIP-425</a>** introduces support for connecting with the next available endpoint for multi-endpoint serviceUrls. This enhancement improves client resilience by automatically failover to alternative endpoints when the primary endpoint is unavailable.
 
 ### Memory Management and Resource Cleanup
 The release includes comprehensive fixes for memory leaks and resource cleanup:
@@ -87,7 +87,7 @@ The release includes comprehensive fixes for memory leaks and resource cleanup:
 ## Broker and Messaging Improvements
 
 ### Advanced Cache Strategy
-**PIP-430** introduces significant broker cache improvements with refactored eviction algorithms and a new cache strategy based on expected read count. This enhancement optimizes memory usage and improves cache hit rates for frequently accessed data.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-430.md" class="blacklink" target="_blank">PIP-430</a>** introduces significant broker cache improvements with refactored eviction algorithms and a new cache strategy based on expected read count. This enhancement optimizes memory usage and improves cache hit rates for frequently accessed data.
 
 ### Message Processing Optimizations
 Several improvements enhance message processing efficiency:
@@ -97,26 +97,26 @@ Several improvements enhance message processing efficiency:
 - Optimized message TTL checks and expiration processing
 
 ### Compaction Performance
-**PIP-429** optimizes compacted last entry handling by skipping unnecessary payload buffer parsing, significantly improving compaction performance for topics with large payloads.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-429.md" class="blacklink" target="_blank">PIP-429</a>** optimizes compacted last entry handling by skipping unnecessary payload buffer parsing, significantly improving compaction performance for topics with large payloads.
 
 ## Administrative and Operational Enhancements
 
 ### Time-Based Message Consumption
-**PIP-435** adds startTimestamp and endTimestamp parameters to the client CLI for consuming messages. This feature enables precise time-based message consumption, particularly useful for:
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-435.md" class="blacklink" target="_blank">PIP-435</a>** adds startTimestamp and endTimestamp parameters to the client CLI for consuming messages. This feature enables precise time-based message consumption, particularly useful for:
 - Debugging and troubleshooting specific time windows
 - Data recovery operations with temporal boundaries
 - Time-based message processing and analysis
 
 ### Topic Statistics and Monitoring
-**PIP-431** enhances topic statistics by adding creation and last publish timestamps. This improvement provides better visibility into topic lifecycle and usage patterns, enabling more informed operational decisions.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-431.md" class="blacklink" target="_blank">PIP-431</a>** enhances topic statistics by adding creation and last publish timestamps. This improvement provides better visibility into topic lifecycle and usage patterns, enabling more informed operational decisions.
 
 ### Global Topic-Level Policies
-**PIP-422** introduces support for global topic-level replicated clusters policy and new APIs to delete topic-level policies. This enhancement provides more granular control over topic replication and policy management across clusters.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-422.md" class="blacklink" target="_blank">PIP-422</a>** introduces support for global topic-level replicated clusters policy and new APIs to delete topic-level policies. This enhancement provides more granular control over topic replication and policy management across clusters.
 
 ## Function and Connector Improvements
 
 ### Schema Registry Integration
-**PIP-420** provides the ability for Pulsar clients to integrate with third-party schema registry services. This enhancement expands schema management options beyond Pulsar's built-in schema registry, enabling integration with popular schema management platforms.
+**<a href="https://github.com/apache/pulsar/blob/master/pip/pip-420.md" class="blacklink" target="_blank">PIP-420</a>** provides the ability for Pulsar clients to integrate with third-party schema registry services. This enhancement expands schema management options beyond Pulsar's built-in schema registry, enabling integration with popular schema management platforms.
 
 ### Enhanced Error Handling
 The release improves error handling in various scenarios:
@@ -149,8 +149,8 @@ Added comprehensive support for blue-green cluster migrations:
 
 ### Metrics and Observability
 Improved monitoring capabilities with:
-- Fixed metric naming for delayed queues (PIP-399)
-- Added dispatch throttling metrics (PIP-406)
+- Fixed metric naming for delayed queues (<a href="https://github.com/apache/pulsar/blob/master/pip/pip-399.md" class="blacklink" target="_blank">PIP-399</a>)
+- Added dispatch throttling metrics (<a href="https://github.com/apache/pulsar/blob/master/pip/pip-406.md" class="blacklink" target="_blank">PIP-406</a>)
 - Enhanced topic statistics with timestamp information
 - Better error categorization and monitoring
 
@@ -165,7 +165,7 @@ Pulsar 4.1 includes extensive library updates to ensure security, performance, a
 - **OpenTelemetry**: Updated to 1.45.0 for enhanced observability
 
 ### Build and Development Tools
-- **Java 17 Requirement**: PIP-421 establishes Java 17 as the minimum requirement for the Java client SDK
+- **Java 17 Requirement**: <a href="https://github.com/apache/pulsar/blob/master/pip/pip-421.md" class="blacklink" target="_blank">PIP-421</a> establishes Java 17 as the minimum requirement for the Java client SDK
 - **Caffeine**: Upgraded from 2.9.1 to 3.2.1 for improved caching performance
 - **Guava**: Updated to 33.4.8 with JSpecify annotations
 - **Spring Framework**: Updated to 6.1.14 in IO connectors
@@ -188,7 +188,7 @@ For users upgrading from earlier versions, please follow the standard upgrade pa
 
 Pulsar 4.1 clients are compatible with Pulsar 4.0 clusters, and Pulsar 4.0 clients are compatible with Pulsar 4.1 clusters. When upgrading clients, you can upgrade directly to the latest supported version. It is recommended to keep the clients up-to-date with the latest security patches and bug fixes.
 
-**Important Note**: PIP-421 establishes Java 17 as the minimum requirement for the Pulsar Java client SDK starting with 4.1. Please ensure your client applications are running on Java 17 or later before upgrading.
+**Important Note**: <a href="https://github.com/apache/pulsar/blob/master/pip/pip-421.md" class="blacklink" target="_blank">PIP-421</a> establishes Java 17 as the minimum requirement for the Pulsar Java client SDK starting with 4.1. Please ensure your client applications are running on Java 17 or later before upgrading.
 
 When upgrading Java clients, it is a common problem that client module library versions are not aligned. It is recommended to use the [Pulsar BOM](https://pulsar.apache.org/docs/4.1.x/client-libraries-java-setup/#pulsar-bom) to manage the Pulsar Java client version in Maven and Gradle builds. There are also specific instructions for [selecting the Pulsar client version in Spring Boot projects](https://pulsar.apache.org/docs/4.1.x/client-libraries-java-setup/#spring-boot).
 
