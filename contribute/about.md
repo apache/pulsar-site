@@ -8,13 +8,19 @@ sidebar_position: 2
 
 The Apache Pulsar community welcomes contributions from anyone with a passion for distributed systems! Pulsar has many opportunities for contributions: write new examples/tutorials, add new user-facing libraries, write new Pulsar IO connectors, or participate on the documentation effort.
 
+:::note
+
+The content of the contribution guide can be found in the left sidebar menu.
+
+:::
+
 ## Channels
 
 To engage the Pulsar developers community, you can join the following channels.
 
 ### Mailing lists
 
-Pulsar developers discuss design and implementation issues on the dev@pulsar.apache.org mailing list, which is archived [here](https://lists.apache.org/list.html?dev@pulsar.apache.org). Join the list by emailing dev-subscribe@pulsar.apache.org.
+Pulsar developers discuss design and implementation issues on the [dev@pulsar.apache.org](https://pulsar.apache.org/contact/#mailing-lists) mailing list, which is archived [here](https://lists.apache.org/list.html?dev@pulsar.apache.org). Please follow [the instructions to join the mailing list](https://pulsar.apache.org/contact/#mailing-lists) before posting. Your email to the mailing list might be placed in a moderation queue if you haven't joined the mailing list before posting.
 
 ### GitHub issues
 
@@ -34,8 +40,7 @@ On any change which is either significant (e.g., new features), or changes any p
 
 ### Online discussions
 
-Pulsar users and developers use [Apache Pulsar Slack channel](https://apache-pulsar.slack.com/) for online discussions. You can self-invite yourself by accessing [this link](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
+Pulsar users and developers use the [Apache Pulsar Slack channel](https://apache-pulsar.slack.com/) for online discussions. You can invite yourself by accessing [this link](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
+Please join the #dev channel to interact with other Pulsar committers and contributors.
 
-Slack channels are great for quick questions or discussions on specialized topics. Remember that it's strongly encouraged to communicate via the mailing lists, and you should prefer to discuss more complex subjects by email.
-
-Developers should be careful to move or duplicate all the official or useful discussions on GitHub or the dev mailing list.
+Slack channels are great for quick questions or discussions on specialized topics. Remember that it is strongly encouraged to communicate via the mailing lists, and you should prefer to discuss more complex subjects by email.
