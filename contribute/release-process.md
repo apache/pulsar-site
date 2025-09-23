@@ -53,11 +53,18 @@ To verify the release branch is not broken, you should trigger a Pulsar CI build
 ## Set environment variables to be used across the commands {#env-vars}
 
 ```shell
-export VERSION_RC=3.0.4-candidate-1
+export VERSION_RC=4.0.7-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export NEXT_VERSION_WITHOUT_RC=3.0.5
-export VERSION_BRANCH=branch-3.0
+export NEXT_VERSION_WITHOUT_RC=4.0.8
+export VERSION_BRANCH=branch-4.0
 export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=21
+```
+
+for 3.x releases, use Java 17:
+
+```shell
+# for 3.x releases, use Java 17 instead of Java 21
 export SDKMAN_JAVA_VERSION=17
 ```
 
@@ -453,7 +460,7 @@ Set these shell variables
 DOCKER_USER=<your-dockerhub-username>
 STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
 MY_NAME="Firstname Lastname"
-PREVIOUS_VERSION_WITHOUT_RC="3.0.3"
+PREVIOUS_VERSION_WITHOUT_RC="4.0.6"
 ```
 
 ```shell
