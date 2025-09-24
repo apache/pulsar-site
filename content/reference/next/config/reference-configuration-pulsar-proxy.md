@@ -757,6 +757,17 @@ Hostname or IP address the service advertises to the outside world. If not set, 
 
 **Category**: Server
 
+### authenticationRoleLoggingAnonymizer
+Defines how the broker will anonymize the role and originalAuthRole before logging. Possible values are: NONE (no anonymization), REDACTED (replaces with '[REDACTED]'), hash:SHA256 (hashes using SHA-256), and hash:MD5 (hashes using MD5). Default is NONE.
+
+**Type**: `java.lang.String`
+
+**Default**: `NONE`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### bindAddress
 Hostname or IP address the service binds on
 
