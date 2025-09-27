@@ -110,9 +110,17 @@ If you are releasing multiple maintenance versions at once, you can use another 
 
 Copy the "Client" and applicable entries from "Library updates" into the client-java release notes.
 
+## Update release notes in GitHub releases
+
+Copy the file content to clipboard and paste to correct location by editing the release notes at https://github.com/apache/pulsar/releases
+
+```shell
+cat release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md | pbcopy
+```
+
 ## Update the release note page
 
-The following steps are handled by the script `./scripts/generate_release_notes.py`.
+The following steps were handled by the script `./scripts/register_new_version.py`.
 
 1. Copy the related release notes entries and add a [versioned release note file](https://github.com/apache/pulsar-site/tree/main/release-notes/versioned).
 2. Update the [version metadata files](https://github.com/apache/pulsar-site/tree/main/data) (`release-*.js`). For apache/pulsar releases, this means updating `release-java.js` (Java client) and `release-pulsar.js` (Pulsar).
