@@ -27,6 +27,20 @@ from command import find_command, run
 from constant import site_path
 
 
+def find_apidocs_path(base_path):
+    """Find the apidocs directory, checking common locations."""
+    candidates = [
+        base_path / 'target' / 'site' / 'apidocs',
+        base_path / 'target' / 'reports' / 'apidocs'
+    ]
+    
+    for path in candidates:
+        if path.exists():
+            return path
+    
+    raise FileNotFoundError(f"Could not find apidocs in any of: {candidates}")
+
+
 def execute(dir_or_version: str):
     mvn = find_command('mvn', msg="mvn is required")
     
@@ -60,14 +74,17 @@ def execute(dir_or_version: str):
     # client
     dst = site_path() / 'static' / 'api' / 'client' / v
     run(mvn, '-Dlocale=en_US', '-pl', 'pulsar-client-api', 'javadoc:javadoc', cwd=src)
-    shutil.copytree(src / 'pulsar-client-api' / 'target' / 'site' / 'apidocs', dst)
+    client_apidocs = find_apidocs_path(src / 'pulsar-client-api')
+    shutil.copytree(client_apidocs, dst)
 
     # admin
     dst = site_path() / 'static' / 'api' / 'admin' / v
     run(mvn, '-Dlocale=en_US', '-pl', 'pulsar-client-admin-api', 'javadoc:javadoc', cwd=src)
-    shutil.copytree(src / 'pulsar-client-admin-api' / 'target' / 'site' / 'apidocs', dst)
+    admin_apidocs = find_apidocs_path(src / 'pulsar-client-admin-api')
+    shutil.copytree(admin_apidocs, dst)
 
     # function
     dst = site_path() / 'static' / 'api' / 'pulsar-functions' / v
     run(mvn, '-Dlocale=en_US', '-pl', 'api-java', 'javadoc:javadoc', cwd=(src / 'pulsar-functions'))
-    shutil.copytree(src / 'pulsar-functions' / 'api-java' / 'target' / 'site' / 'apidocs', dst)
+    function_apidocs = find_apidocs_path(src / 'pulsar-functions' / 'api-java')
+    shutil.copytree(function_apidocs, dst)
