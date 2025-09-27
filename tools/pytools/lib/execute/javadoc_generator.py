@@ -75,16 +75,22 @@ def execute(dir_or_version: str):
     dst = site_path() / 'static' / 'api' / 'client' / v
     run(mvn, '-Dlocale=en_US', '-pl', 'pulsar-client-api', 'javadoc:javadoc', cwd=src)
     client_apidocs = find_apidocs_path(src / 'pulsar-client-api')
+    if dst.exists():
+        shutil.rmtree(dst)
     shutil.copytree(client_apidocs, dst)
 
     # admin
     dst = site_path() / 'static' / 'api' / 'admin' / v
     run(mvn, '-Dlocale=en_US', '-pl', 'pulsar-client-admin-api', 'javadoc:javadoc', cwd=src)
     admin_apidocs = find_apidocs_path(src / 'pulsar-client-admin-api')
+    if dst.exists():
+        shutil.rmtree(dst)
     shutil.copytree(admin_apidocs, dst)
 
     # function
     dst = site_path() / 'static' / 'api' / 'pulsar-functions' / v
     run(mvn, '-Dlocale=en_US', '-pl', 'api-java', 'javadoc:javadoc', cwd=(src / 'pulsar-functions'))
     function_apidocs = find_apidocs_path(src / 'pulsar-functions' / 'api-java')
+    if dst.exists():
+        shutil.rmtree(dst)
     shutil.copytree(function_apidocs, dst)

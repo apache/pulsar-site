@@ -855,12 +855,6 @@ This step is for feature releases only, unless you're sure that significant Java
 
 :::
 
-If you are re-generating docs, it's necessary to remove the javadoc directories before generating:
-
-```shell
-rm -rf static/api/{client,admin,pulsar-functions}/4.0.x
-```
-
 After publish Java libraries, run the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
