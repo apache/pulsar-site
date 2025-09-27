@@ -29,6 +29,9 @@ gh auth login
 # Replace 3.0.6 with the target version tag
 VERSION_WITHOUT_RC=3.0.6
 PREVIOUS_VERSION=3.0.5
+```
+
+```bash
 # Replace apache/pulsar with the component repo
 ./scripts/register_new_version.py $VERSION_WITHOUT_RC $PREVIOUS_VERSION $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
 ```
@@ -82,6 +85,8 @@ Copying from the clipboard to the release notes file
 First, move back to the pulsar-site directory, then:
 
 ```shell
+# don't copy this command to clipboard since it will replace the content there
+# write this to the command line
 pbpaste >> release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
 ```
 
