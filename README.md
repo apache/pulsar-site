@@ -39,6 +39,20 @@ After committing the changes for the `docs` directory, you can use the `docs-too
   * [Updating documentation](https://pulsar.apache.org/contribute/document-contribution/)
   * [Previewing content](https://pulsar.apache.org/contribute/document-preview/)
 
+
+## Website not getting updated?
+
+If the https://pulsar.apache.org website doesn't get updated, [check the latest GitHub Actions workflow run for the main branch](https://github.com/apache/pulsar-site/actions/workflows/ci-build-site.yml?query=branch%3Amain). If it succeeded, the problem could be that the [git history for the asf-site-next branch](https://github.com/apache/pulsar-site/commits/asf-site-next/) is too large and needs to be truncated. Here are the commands to perform that task:
+
+```shell
+git clone -b asf-site-next https://github.com/apache/pulsar-site pulsar-site-static
+cd pulsar-site-static
+git checkout --orphan asf-site-next-reset
+git add -A
+git commit -m "History resetted"
+git push -f HEAD:asf-site-next
+```
+
 ## Contact information
 
 * Submit [an issue](https://github.com/apache/pulsar/issues/new) on the [main apache/pulsar repo](http://github.com/apache/pulsar)
