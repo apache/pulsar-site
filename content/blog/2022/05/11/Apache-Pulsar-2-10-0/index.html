@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">What’s New in Apache Pulsar 2.10 | Apache Pulsar</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://pulsar.apache.org/img/pulsar-social-media-card.png"><meta data-rh="true" name="twitter:image" content="https://pulsar.apache.org/img/pulsar-social-media-card.png"><meta data-rh="true" property="og:url" content="https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="What’s New in Apache Pulsar 2.10 | Apache Pulsar"><meta data-rh="true" name="description" content="The Apache Pulsar community releases version 2.10. 99 contributors provided improvements and bug fixes that delivered over 800 commits."><meta data-rh="true" property="og:description" content="The Apache Pulsar community releases version 2.10. 99 contributors provided improvements and bug fixes that delivered over 800 commits."><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-05-11T00:00:00.000Z"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0/"><link data-rh="true" rel="alternate" href="https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0/" hreflang="en"><link data-rh="true" rel="alternate" href="https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://WK2YL0SALL-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0","mainEntityOfPage":"https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0","url":"https://pulsar.apache.org/blog/2022/05/11/Apache-Pulsar-2-10-0","headline":"What’s New in Apache Pulsar 2.10","name":"What’s New in Apache Pulsar 2.10","description":"The Apache Pulsar community releases version 2.10. 99 contributors provided improvements and bug fixes that delivered over 800 commits.","datePublished":"2022-05-11T00:00:00.000Z","author":{"@type":"Person","name":"Penghui Li, Dave Duggins"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://pulsar.apache.org/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Apache Pulsar RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Apache Pulsar Atom Feed">
+
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="Apache Pulsar" href="/opensearch.xml">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/katex-0.13.24.min.css" media="print" onload="this.media=&#39;all&#39;">
+<script src="/js/sine-waves.min.js" async></script>
+<script src="/js/matomo-agent.js"></script><link rel="stylesheet" href="/assets/css/styles.8505adb1.css">
+<script src="/assets/js/runtime~main.747ff725.js" defer="defer"></script>
+<script src="/assets/js/main.6ce85682.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}(),document.documentElement.setAttribute("data-announcement-bar-initially-dismissed",function(){try{return"true"===localStorage.getItem("docusaurus.announcement.dismiss")}catch(t){}return!1}())</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><div class="theme-announcement-bar announcementBar_mb4j" style="background-color:#282826;color:#fff" role="banner"><div class="content_knG7 announcementBarContent_xLdY">
+    <a class="announcement-bar" href="/blog/2025/09/09/announcing-apache-pulsar-4-1/" target="_blank">
+      <div class="announcement-bar__content">
+        <!-- <svg class="announcement-bar__icon">
+          
+<svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.5 19.6001H16.1L15.3 29.2001L26.5 12.4H17.06L18.1 2.80005L6.5 19.6001Z" stroke="#F7F7F7" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
+
+        </svg> -->
+
+        <span>
+          ✨ Apache Pulsar 4.1 is here! ✨
+        </span>
+
+        <svg class="announcement-bar__icon">
+          
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="20" height="20" transform="translate(6 6)" fill="white" fill-opacity="0.01"/>
+<path d="M17.6667 10.1667L23.5 16.0001M23.5 16.0001L17.6667 21.8334M23.5 16.0001L8.5 16.0001" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="white"/>
+</svg>
+
+        </svg>
+      </div>
+    </a>
+  </div></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo-black.svg" alt="Apache Pulsar logo" class="themedComponent_mlkZ themedComponent--light_NVdE" height="25" width="127"><img src="/img/logo-black.svg" alt="Apache Pulsar logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" height="25" width="127"></div><b class="navbar__title text--truncate"></b></a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Get Started</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/4.1.x/concepts-overview/">Concepts</a></li><li><a class="dropdown__link" href="/docs/4.1.x/">Quickstart</a></li><li><a class="dropdown__link" href="/ecosystem/">Ecosystem</a></li></ul></div><a class="navbar__item navbar__link" href="/docs/4.1.x/">Docs</a><a class="navbar__item navbar__link" href="/features/">Features</a><a class="navbar__item navbar__link" href="/use-cases/">Use Cases</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link community-dropdown">Community</a><ul class="dropdown__menu"><li><a class="dropdown__link scroll-link scroll-welcome" id="scroll-welcome" href="/community/">Welcome</a></li><li><a class="dropdown__link scroll-link scroll-discussions" id="scroll-discussions" href="/community/#section-discussions">Discussions</a></li><li><a class="dropdown__link scroll-link" id="scroll-governance" href="/community/#section-governance">Governance</a></li><li><a class="dropdown__link scroll-link" id="scroll-community" href="/community/#section-community">Meet the Community</a></li><li><a class="dropdown__link scroll-link" id="scroll-contribute" href="/community/#section-contribute">Contribute</a></li><li><a class="dropdown__link" href="/contribute/">Contribution Guide</a></li><li><a href="https://github.com/apache/pulsar/wiki" target="_blank" rel="noopener noreferrer" class="dropdown__link">Wiki</a></li><li><a href="https://github.com/apache/pulsar/issues" target="_blank" rel="noopener noreferrer" class="dropdown__link">Issue Tracking</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Learn</a><ul class="dropdown__menu"><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/blog/">Blog</a></li><li><a class="dropdown__link" href="/books/">Books</a></li><li><a class="dropdown__link" href="/case-studies/">Case Studies</a></li><li><a class="dropdown__link" href="/articles/">Articles</a></li><li><a class="dropdown__link" href="/presentations/">Presentations</a></li><li><a class="dropdown__link" href="/events/">Events</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link navbar_download_button" href="/download/">Download</a><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Command+K)"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="container margin-top--lg"><div class="row"><main class="col col--12" itemscope="" itemtype="https://schema.org/Blog"><article class="BlogContainerPost_N_n1" itemprop="blogPost" itemscope="" itemtype="https://schema.org/BlogPosting"><header><div><h1 class="title_xvU1">What’s New in Apache Pulsar 2.10</h1><div class="row"><div class="col authorCol_q4o9"><div class="avatar margin-bottom--sm"><div class="avatar__intro authorDetails_lV9A"><div class="avatar__name"><span class="authorName_yefp">Penghui Li, Dave Duggins</span></div><div class="authorSocials_rSDt"></div></div></div></div></div><div class="container_iJTo"><time datetime="2022-05-11T00:00:00.000Z">May 11, 2022</time> · <!-- -->6 min read</div></div></header><div id="__blog-post-container" class="markdown"><p>The Apache Pulsar community releases version 2.10. 99 contributors provided improvements and bug fixes that delivered over 800 commits.</p>
+<ul>
+<li>Pulsar provides automatic failure recovery between the primary and backup clusters. #13316<!-- -->
+<ul>
+<li>Original PIP <a href="https://www.google.com/url?q=https://github.com/apache/pulsar/issues/13315&amp;sa=D&amp;source=docs&amp;ust=1646058957138073&amp;usg=AOvVaw3mGki2sHW2QpIsoYf5pt3w" target="_blank" rel="noopener noreferrer">#13315</a></li>
+</ul>
+</li>
+<li>Fewer producers needed and more efficient use of broker memory with lazy-loading feature added to <code>PartitionedProducer</code>. #10279</li>
+<li>Topic map support added with new <code>TableView</code> type using key values in received messages.</li>
+</ul>
+<p>This blog documents the most noteworthy changes in this release. For the complete list including all features, enhancements, and bug fixes, check out the <a href="https://pulsar.apache.org/release-notes/#placeholder" target="_blank" rel="noopener noreferrer">Pulsar 2.10.1 Release Notes</a>.</p>
+<h1>Notable bug fixes and enhancements</h1>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="cluster">Cluster<a href="#cluster" class="hash-link" aria-label="Direct link to Cluster" title="Direct link to Cluster">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="pulsar-cluster-level-auto-failover-on-client-side-13316">Pulsar cluster level auto failover on client side #13316<a href="#pulsar-cluster-level-auto-failover-on-client-side-13316" class="hash-link" aria-label="Direct link to Pulsar cluster level auto failover on client side #13316" title="Direct link to Pulsar cluster level auto failover on client side #13316">​</a></h5>
+<p><strong>Issue:</strong> A Pulsar administrator must manually failover a cluster.</p>
+<p><strong>Resolution:</strong> Added Pulsar cluster-level auto-failover, which automatically and seamlessly switches from primary to one or more secondary clusters when a failover event is detected. When the primary cluster recovers, the client automatically switches back.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="topic-policy-across-multiple-clusters-12517">Topic policy across multiple clusters #12517<a href="#topic-policy-across-multiple-clusters-12517" class="hash-link" aria-label="Direct link to Topic policy across multiple clusters #12517" title="Direct link to Topic policy across multiple clusters #12517">​</a></h5>
+<p><strong>Issue:</strong> Some topic policies for a geo-replicated cluster affect the entire geo-replicated cluster while some only affect the local cluster.</p>
+<p><strong>Resolution:</strong> Topic policies now support cross-cluster replication.</p>
+<ul>
+<li>For local topic policies, set the <code>replicateTo</code> property of the message to avoid being replicated to the remote.</li>
+<li>Retention supports setting global parameters.</li>
+<li>Added global topic policies for <code>SystemTopicBasedTopicPoliciesService</code>.</li>
+</ul>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="producer">Producer<a href="#producer" class="hash-link" aria-label="Direct link to Producer" title="Direct link to Producer">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="add-lazy-loading-feature-to-partitionedproducer-10279">Add lazy-loading feature to PartitionedProducer #10279<a href="#add-lazy-loading-feature-to-partitionedproducer-10279" class="hash-link" aria-label="Direct link to Add lazy-loading feature to PartitionedProducer #10279" title="Direct link to Add lazy-loading feature to PartitionedProducer #10279">​</a></h5>
+<p><strong>Issue:</strong> With the number of partitions set according to the highest rate producer, the lowest rate producer does not always need to connect to every partition, so extra producers take up broker memory.</p>
+<p><strong>Resolution:</strong> Reduced the number of producers to use broker memory more efficiently by introducing lazy-loading for partitioned producers; also added round-robin routing mode class to limit the number of partitions.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="client-introduce-chunk-message-id-12403">[Client] Introduce chunk message ID #12403<a href="#client-introduce-chunk-message-id-12403" class="hash-link" aria-label="Direct link to [Client] Introduce chunk message ID #12403" title="Direct link to [Client] Introduce chunk message ID #12403">​</a></h5>
+<p><strong>Issue:</strong> When sending chunked messages, the producer returns the message-id of the last chunk, causing incorrect behaviors in some processes.</p>
+<p><strong>Resolution:</strong> Introduced the new <code>ChunkMessage-ID</code> type. The chunk message-id inherits from <code>MessageIdImpl</code> and adds two new methods: <code>getFirstChunkMessageId</code> and <code>getLastChunkMessageID</code>. For other method implementations, the <code>lastChunkMessageID</code> is called directly, which is compatible with much of the existing business logic.</p>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="broker">Broker<a href="#broker" class="hash-link" aria-label="Direct link to Broker" title="Direct link to Broker">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="broker-extensions-to-allow-operators-of-enterprise-wide-cluster-better-control-and-flexibility-12536">Broker extensions to allow operators of enterprise wide cluster better control and flexibility #12536<a href="#broker-extensions-to-allow-operators-of-enterprise-wide-cluster-better-control-and-flexibility-12536" class="hash-link" aria-label="Direct link to Broker extensions to allow operators of enterprise wide cluster better control and flexibility #12536" title="Direct link to Broker extensions to allow operators of enterprise wide cluster better control and flexibility #12536">​</a></h5>
+<p><strong>Issue:</strong> Operators of enterprise Pulsar cluster(s) need greater flexibility and control to intercept broker events (including ledger writes/reads) for template validations, observability and access control.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Enhanced org.apache.pulsar.broker.intercept.BrokerInterceptor interface to include additional events for tracing</li>
+<li>Created a new interface org.apache.pulsar.common.intercept.MessagePayloadProcessor to allow interception of ledger write/read operations</li>
+<li>Enhanced PulsarAdmin to give operators a control in managing super-users</li>
+</ul>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="consumer">Consumer<a href="#consumer" class="hash-link" aria-label="Direct link to Consumer" title="Direct link to Consumer">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="redeliver-command-add-epoch-10478">Redeliver command add epoch #10478<a href="#redeliver-command-add-epoch-10478" class="hash-link" aria-label="Direct link to Redeliver command add epoch #10478" title="Direct link to Redeliver command add epoch #10478">​</a></h5>
+<p><strong>Issue:</strong> Pull and redeliver operations are asynchronous, so the client consumer may receive a new message, execute a cumulative ack based on a new messageID, and fail to consume older messages.</p>
+<p><strong>Resolution:</strong> The Pulsar client synchronizes redeliver and pull messages operations using an incrementing epoch for the server and client consumer.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="support-pluggable-entry-filter-in-dispatcher-12269">Support pluggable entry filter in Dispatcher #12269<a href="#support-pluggable-entry-filter-in-dispatcher-12269" class="hash-link" aria-label="Direct link to Support pluggable entry filter in Dispatcher #12269" title="Direct link to Support pluggable entry filter in Dispatcher #12269">​</a></h5>
+<p><strong>Issue:</strong> Message tagging is not natively supported.</p>
+<p><strong>Resolution:</strong> Implemented an entry filter framework at the broker level.  Working to support namespace and topic level in an upcoming release.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="create-init-subscription-before-sending-message-to-dlq-13355">Create init subscription before sending message to DLQ #13355<a href="#create-init-subscription-before-sending-message-to-dlq-13355" class="hash-link" aria-label="Direct link to Create init subscription before sending message to DLQ #13355" title="Direct link to Create init subscription before sending message to DLQ #13355">​</a></h5>
+<p><strong>Issue:</strong> DLQ data in unprocessed messages is removed automatically without a data retention policy for the namespace or a subscription for the DLQ.</p>
+<p><strong>Resolution:</strong> Initial subscription is now created before sending messages to the DLQ.
+When <code>deadLetterProducer</code> is initialized, the consumer sets the initial subscription according to <code>DeadLetterPolicy</code>.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="apply-redelivery-backoff-policy-for-ack-timeout-13707">Apply redelivery backoff policy for ack timeout #13707<a href="#apply-redelivery-backoff-policy-for-ack-timeout-13707" class="hash-link" aria-label="Direct link to Apply redelivery backoff policy for ack timeout #13707" title="Direct link to Apply redelivery backoff policy for ack timeout #13707">​</a></h5>
+<p><strong>Issue:</strong> The redelivery backoff policy recently introduced in PIP 106 only applies to the negative acknowledgment API. If ack timeout is used to trigger the message
+redelivery instead of the negative acknowledgment API, the backoff policy is bypassed.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Applied message redelivery policy for ack timeout.</li>
+<li>Alerted <code>NegativeAckBackoff</code> interface to <code>RedeliveryBackoff</code>.</li>
+<li>Exposed <code>AckTimeoutRedeliveryBackoff</code> in <code>ConsumerBuilder</code>.</li>
+<li>Added unit test case.</li>
+</ul>
+<p>Currently only the Java client is modified.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="resolve-produce-chunk-messages-failed-when-topic-level-maxmessagesize-is-set-13599">Resolve produce chunk messages failed when topic level maxMessageSize is set #13599<a href="#resolve-produce-chunk-messages-failed-when-topic-level-maxmessagesize-is-set-13599" class="hash-link" aria-label="Direct link to Resolve produce chunk messages failed when topic level maxMessageSize is set #13599" title="Direct link to Resolve produce chunk messages failed when topic level maxMessageSize is set #13599">​</a></h5>
+<p><strong>Issue:</strong> Currently, chunk messages produce fails if topic level maxMessageSize is set to [1].</p>
+<p><strong>Resolution:</strong> Added <code>isChunked</code> in <code>PublishContext</code>. Skips the<code>maxMessageSize</code> check if it&#x27;s chunked.</p>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="function">Function<a href="#function" class="hash-link" aria-label="Direct link to Function" title="Direct link to Function">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="pulsar-functions-preload-and-release-external-resources-13205">Pulsar Functions: Preload and release external resources #13205<a href="#pulsar-functions-preload-and-release-external-resources-13205" class="hash-link" aria-label="Direct link to Pulsar Functions: Preload and release external resources #13205" title="Direct link to Pulsar Functions: Preload and release external resources #13205">​</a></h5>
+<p><strong>Issue:</strong>  External resource initialization and release was accomplished either manually or through use of a complicated initialization logic.</p>
+<p><strong>Resolution:</strong> Introduced <code>RichFunction</code> interface to extend <code>Function</code> by providing a setup and tearDown API.</p>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="update-authentication-interfaces-to-include-async-authentication-methods-12104">Update Authentication Interfaces to Include Async Authentication Methods #12104<a href="#update-authentication-interfaces-to-include-async-authentication-methods-12104" class="hash-link" aria-label="Direct link to Update Authentication Interfaces to Include Async Authentication Methods #12104" title="Direct link to Update Authentication Interfaces to Include Async Authentication Methods #12104">​</a></h5>
+<p><strong>Issue:</strong> Pulsar&#x27;s current <code>AuthenticationProvider</code> interface only exposes synchronous methods for authenticating a connection. To date, this has been sufficient because we do not have any providers that rely on network calls. However, in looking at the OAuth2.0 spec, there are some cases where network calls are necessary to verify a token.</p>
+<p><strong>Resolution:</strong></p>
+<h6 class="anchor anchorWithStickyNavbar_LWe7" id="authenticationprovider">AuthenticationProvider<a href="#authenticationprovider" class="hash-link" aria-label="Direct link to AuthenticationProvider" title="Direct link to AuthenticationProvider">​</a></h6>
+<ul>
+<li>Added <code>AuthenticationProvider#authenticateAsync</code>. Included a default implementation that calls the authenticate method.</li>
+<li>Deprecated <code>AuthenticationProvider#authenticate</code>.</li>
+<li>Added <code>AuthenticationProvider#authenticateHttpRequestAsync</code>.</li>
+<li>Deprecated <code>AuthenticationProvider#authenticateHttpRequest</code>.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="authenticationstate">AuthenticationState<a href="#authenticationstate" class="hash-link" aria-label="Direct link to AuthenticationState" title="Direct link to AuthenticationState">​</a></h5>
+<ul>
+<li>Added <code>AuthenticationState#authenticateAsync</code>.</li>
+<li>Deprecated <code>AuthenticationState#authenticate</code>. The preferred method is <code>AuthenticationState#authenticateAsync</code>.</li>
+<li>Deprecated <code>AuthenticationState#isComplete</code>. This method can be avoided by inferring authentication completeness from the result of <code>AuthenticationState#authenticateAsync</code>.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="authenticationdatasource">AuthenticationDataSource<a href="#authenticationdatasource" class="hash-link" aria-label="Direct link to AuthenticationDataSource" title="Direct link to AuthenticationDataSource">​</a></h5>
+<ul>
+<li>Deprecated <code>AuthenticationDataSource#authenticate</code>. There is no need for an async version of this method.</li>
+</ul>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="initial-commit-for-tableview-12838">Initial commit for TableView #12838<a href="#initial-commit-for-tableview-12838" class="hash-link" aria-label="Direct link to Initial commit for TableView #12838" title="Direct link to Initial commit for TableView #12838">​</a></h5>
+<p><strong>Issue:</strong> In many use cases, applications use Pulsar consumers or readers to fetch
+all the updates from a topic and construct a map with the latest value of each
+key for received messages. This is common when constructing a local cache of the data. We do not offer support for This access pattern was not included in the Pulsar client API.</p>
+<p><strong>Resolution:</strong> Added new <code>TableView</code> type and updated the PulsarClient.</p>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="topic">Topic<a href="#topic" class="hash-link" aria-label="Direct link to Topic" title="Direct link to Topic">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="support-topic-metadata---part-1-create-topic-with-properties-12818">Support Topic metadata - PART-1 create topic with properties #12818<a href="#support-topic-metadata---part-1-create-topic-with-properties-12818" class="hash-link" aria-label="Direct link to Support Topic metadata - PART-1 create topic with properties #12818" title="Direct link to Support Topic metadata - PART-1 create topic with properties #12818">​</a></h5>
+<p><strong>Issue:</strong> Can’t store topic metadata.</p>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Added new storage methods in topics.java.</li>
+<li>Added two new paths to REST API to reduce compatibility issues.</li>
+</ul>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="metadata-store">Metadata Store<a href="#metadata-store" class="hash-link" aria-label="Direct link to Metadata Store" title="Direct link to Metadata Store">​</a></h4>
+<hr>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="added-etcd-metadatastore-implementation-13225">Added Etcd MetadataStore implementation #13225<a href="#added-etcd-metadatastore-implementation-13225" class="hash-link" aria-label="Direct link to Added Etcd MetadataStore implementation #13225" title="Direct link to Added Etcd MetadataStore implementation #13225">​</a></h5>
+<p><strong>Issue:</strong> We’re working to add metadata backends that support non-Zookeeper implementations.</p>
+<p><strong>Resolution:</strong> Added Etcd support for:</p>
+<ul>
+<li>
+<p>Batching of read/write requests</p>
+</li>
+<li>
+<p>Session watcher</p>
+</li>
+<li>
+<p>Lease manager</p>
+</li>
+</ul></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><a href="https://github.com/apache/pulsar-site/edit/main/blog/2022-05-11-Apache-Pulsar-2-10-0.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav blog-post-pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><div><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2022/07/12/Apache-Pulsar-2-10-1/"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">What’s New in Apache Pulsar 2.10.1</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/2022/05/11/apache-pulsar-community-welcomes-500th-contributor/"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">The Apache Pulsar Community Welcomes 500th Contributor!</div></a><div class="blog-post-pagination-nav-more"><a href="/blog">Show All</a></div></div></nav></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.apache.org/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Foundation<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/events/current-event.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Events<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.apache.org/licenses/" target="_blank" rel="noopener noreferrer" class="footer__link-item">License<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/foundation/thanks" target="_blank" rel="noopener noreferrer" class="footer__link-item">Thanks<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/foundation/sponsorship" target="_blank" rel="noopener noreferrer" class="footer__link-item">Sponsorship<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/security/">Security</a></li><li class="footer__item"><a href="https://www.apache.org/foundation/policies/privacy.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/contact/">Contact</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item">
+                <div class="social-icons">
+                  <a target="_blank" href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar" aria-label="Join the Apache Pulsar Slack workspace">
+                    <img alt="Slack logo" src="/img/slack-white.svg" width="26">
+                  </a>
+                  <a target="_blank" href="https://github.com/apache/pulsar/" aria-label="View the Apache Pulsar project on GitHub">
+                    <img alt="GitHub logo" src="/img/github-white.svg" width="26">
+                  </a>
+                </div>
+              </li></ul></div></div><div class="footer__bottom text--center"><div class="margin-bottom--sm"><a class="footerLogoLink_BH7S" href="/"><img src="/img/pulsar-white.svg" alt="Pulsar Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/pulsar-white.svg" alt="Pulsar Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright">
+        <div>
+          <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
+          The Apache Software Foundation
+        </div>
+        <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+        <p>Copyright © 2025 The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
+      </div></div></div></footer></div>
+</body>
+</html>

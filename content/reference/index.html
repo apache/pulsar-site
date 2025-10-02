@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <meta name="description" content="Pulsar Configuration Docs" />
+    <title>Pulsar</title>
+
+    <!-- Themes (light + dark) -->
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme: dark)"
+      href="./css/docsify-themeable/theme-simple-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme: light)"
+      href="./css/docsify-themeable/theme-simple.min.css"
+    />
+
+    <!-- Plugins -->
+    <style>
+      @media only screen and (max-width: 1299px) and (prefers-color-scheme: light) {
+        aside.toc-nav {
+          max-width: 45px;
+          opacity: 0.6;
+          right: 0 !important;
+          margin-right: 0 !important;
+          background: #fff;
+        }
+
+        aside.toc-nav:hover {
+          max-width: inherit;
+          opacity: 1;
+        }
+      }
+
+      @media only screen and (max-width: 1299px) and (prefers-color-scheme: dark) {
+        aside.toc-nav {
+          max-width: 45px;
+          opacity: 0.6;
+          right: 0 !important;
+          margin-right: 0 !important;
+          background: #222;
+        }
+
+        aside.toc-nav:hover {
+          max-width: inherit;
+          opacity: 1;
+        }
+      }
+
+      @media only screen and (min-width: 1300px) {
+        section.content {
+          padding-right: 250px;
+        }
+      }
+
+      aside.toc-nav {
+        position: fixed;
+        top: 70px;
+        right: 3%;
+        margin-right: 20px;
+        width: 250px;
+        z-index: 999999;
+        align-self: flex-start;
+        flex: 0 0 auto;
+        overflow-y: hidden;
+        max-height: 90%;
+        /* For iOS */
+        cursor: pointer;
+        /* For Firefox */
+        scrollbar-width: thin;
+      }
+
+      aside.toc-nav:hover {
+        overflow-y: auto;
+      }
+
+      aside.toc-nav::-webkit-scrollbar {
+        width: 5px;
+        background-color: #e0e0e0;
+      }
+
+      aside.toc-nav::-webkit-scrollbar-thumb {
+        background: #9e9e9e;
+        border-radius: 5px;
+      }
+
+      aside.toc-nav.nothing {
+        width: 0;
+      }
+
+      .page_toc {
+        position: relative;
+        left: 0;
+        margin: 10px 0;
+        border: none;
+        font-size: 1em;
+      }
+
+      .page_toc p.title {
+        margin: 0;
+        padding-bottom: 5px;
+        font-weight: 600;
+        font-size: 1.2em;
+      }
+
+      .page_toc .anchor:hover:after {
+        content: "";
+      }
+      .page_toc div[class^="lv"] a:hover span {
+        color: var(--sidebar-nav-link-color--active, #42b983);
+      }
+
+      .page_toc div {
+        border-left: 2px solid #e8e8e8;
+        text-indent: 10px;
+        padding: 2px 0;
+        cursor: pointer;
+      }
+
+      .page_toc div.active {
+        border-left-color: var(--sidebar-nav-link-color--active, #42b983);
+        transition: border-left-color 0.23s;
+      }
+
+      .page_toc div.active a span {
+        color: var(--sidebar-nav-link-color--active, #42b983);
+        transition: color 0.23s;
+      }
+
+      .page_toc div[class^="lv"] a {
+        color: var(--text-color-base, black);
+        text-decoration: none;
+        font-weight: 300;
+        line-height: 2em;
+        display: block;
+      }
+
+      .page_toc div[class^="lv"] a span {
+        color: var(
+          --sidebar-nav-link-color--hover,
+          var(--sidebar-nav-link-color)
+        );
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .page_toc div.lv2 {
+        text-indent: 20px;
+      }
+
+      .page_toc div.lv3 {
+        text-indent: 30px;
+      }
+
+      .page_toc div.lv4 {
+        text-indent: 40px;
+      }
+    </style>
+    <style>
+      .select {
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        padding: 5px 8px;
+        margin: 0 5px;
+        background: #fff;
+        font-size: 14px;
+      }
+      .select:hover {
+        border-color: #cfcfcf;
+      }
+      .select:active {
+        border-color: #b3b3b3;
+      }
+      .select:focus {
+        border-color: #8c8c8c;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      // Docsify Configuration
+      window.$docsify = {
+        name:
+          '<a id="home-link" class="app-name-link" data-nosearch href="/reference">Pulsar Reference</a>' +
+          '<select id="ver-selector" name="v" class="select">' +
+          '<option value="2.6.x">2.6.x</value>' +
+          '<option value="2.7.x">2.7.x</value>' +
+          '<option value="2.8.x">2.8.x</value>' +
+          '<option value="2.9.x">2.9.x</value>' +
+          '<option value="2.10.x">2.10.x</value>' +
+          '<option value="2.11.x">2.11.x</value>' +
+          '<option value="3.0.x">3.0.x</value>' +
+          '<option value="3.1.x">3.1.x</value>' +
+          '<option value="3.2.x">3.2.x</value>' +
+          '<option value="3.3.x">3.3.x</value>' +
+          '<option value="4.0.x">4.0.x</value>' +
+          '<option value="4.1.x">4.1.x</value>' +
+          '<option value="next">next</value>' +
+          "</select>",
+        repo: "apache/pulsar",
+        loadSidebar: true,
+        auto2top: true,
+        toc: {
+          tocMaxLevel: 3,
+          target: "h2, h3, h4",
+        },
+        namespaces: [
+          {
+            id: "version",
+            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "2.11.x", "3.0.x", "3.1.x", "3.2.x", "3.3.x", "4.0.x", "4.1.x", "next"],
+            optional: true,
+            selector: "#ver-selector",
+            default: "next",
+          },
+        ],
+        subMaxLevel: 1,
+        sidebarDisplayLevel: 1,
+      };
+    </script>
+
+    <!-- Required -->
+    <script src="./js/docsify-4/lib/docsify.min.js"></script>
+    <script src="./js/docsify-themeable-0/dist/js/docsify-themeable.min.js"></script>
+
+    <!-- Recommended -->
+    <script src="./js/docsify-4/lib/plugins/search.js"></script>
+    <script src="./js/docsify-4/lib/plugins/zoom-image.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="./js/docsify-namespaced-0.1.1/dist/docsify-namespaced.min.js"></script>
+    <script src="./js/docsify-plugin-toc-1.3.1/dist/docsify-plugin-toc.min.js"></script>
+    <script src="./js/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  </body>
+</html>

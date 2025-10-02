@@ -1,0 +1,32 @@
+SetEnv CSP_PROJECT_DOMAINS "https://*.algolia.net/ https://*.algolianet.com/ https://*.algolia.io/ https://*.shields.io/"
+
+RewriteEngine On
+
+RewriteRule "^en/(.+)$" "/$1" [R=301,DPI,L]
+RewriteRule "^docs/en/(.+)$" "/docs/$1" [R=301,DPI,L]
+RewriteRule "^docs/(zh-CN|zh-TW|ja|ko|fr)/(.+)$" "/$1/docs/$2" [R=301,DPI,L]
+RewriteRule "^(zh-CN|zh-TW|ja|ko|fr)/docs/(.+)$" "/docs/$2" [R=301,DPI,L]
+RewriteRule "^docs/(.+)-incubating/(.+)$" "https://pulsar.staged.apache.org/docs/$1-incubating/$2" [R=301,DPI,L]
+
+# skip if file exists
+RewriteCond %{REQUEST_FILENAME}\/index\.html -f
+RewriteRule ^ - [L]
+
+RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/next|"
+RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/next\/.*|"
+RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.\d+|"
+RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.\d+/.*|"
+RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x|"
+RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x/.*|"
+RewriteRule "^docs/(.*)$" "/docs/4.1.x/$1" [R=301,DPI,L]
+
+RewriteRule "^docs/(.+/)?deploy-dcos/?$" "/docs/$1install-deploy-upgrade-landing" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?develop-binary-protocol/?$" "/docs/$1developing-binary-protocol" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?administration-dashboard/?$" "/docs/$1administration-pulsar-manager" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?security-tls-keystore/?$" "/docs/$1security-tls-authentication" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?security-policy-and-supported-versions/?$" "/contribute/release-policy" [R=301,DPI,L]
+RewriteRule "^contribute/version-policy/?$" "/contribute/release-policy" [R=301,DPI,L]
+
+RewriteRule "^coding-guide/?$" "/contribute/develop-coding-conventions" [R=301,DPI,L]
+RewriteRule "^contributing/?$" "/contribute" [R=301,DPI,L]
+RewriteRule "^pulsar-manager-release-notes/?$" "/release-notes" [R=301,DPI,L]

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-release-notes docs-version-current docs-doc-page docs-doc-id-versioned/pulsar-2.8.2" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">Apache Pulsar 2.8.2 | Apache Pulsar</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://pulsar.apache.org/img/pulsar-social-media-card.png"><meta data-rh="true" name="twitter:image" content="https://pulsar.apache.org/img/pulsar-social-media-card.png"><meta data-rh="true" property="og:url" content="https://pulsar.apache.org/release-notes/versioned/pulsar-2.8.2/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-release-notes-current"><meta data-rh="true" property="og:title" content="Apache Pulsar 2.8.2 | Apache Pulsar"><meta data-rh="true" name="description" content="2021-12-20"><meta data-rh="true" property="og:description" content="2021-12-20"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://pulsar.apache.org/release-notes/versioned/pulsar-2.8.2/"><link data-rh="true" rel="alternate" href="https://pulsar.apache.org/release-notes/versioned/pulsar-2.8.2/" hreflang="en"><link data-rh="true" rel="alternate" href="https://pulsar.apache.org/release-notes/versioned/pulsar-2.8.2/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://WK2YL0SALL-dsn.algolia.net" crossorigin="anonymous"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Apache Pulsar RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Apache Pulsar Atom Feed">
+
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="Apache Pulsar" href="/opensearch.xml">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/katex-0.13.24.min.css" media="print" onload="this.media=&#39;all&#39;">
+<script src="/js/sine-waves.min.js" async></script>
+<script src="/js/matomo-agent.js"></script><link rel="stylesheet" href="/assets/css/styles.8505adb1.css">
+<script src="/assets/js/runtime~main.747ff725.js" defer="defer"></script>
+<script src="/assets/js/main.6ce85682.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}(),document.documentElement.setAttribute("data-announcement-bar-initially-dismissed",function(){try{return"true"===localStorage.getItem("docusaurus.announcement.dismiss")}catch(t){}return!1}())</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><div class="theme-announcement-bar announcementBar_mb4j" style="background-color:#282826;color:#fff" role="banner"><div class="content_knG7 announcementBarContent_xLdY">
+    <a class="announcement-bar" href="/blog/2025/09/09/announcing-apache-pulsar-4-1/" target="_blank">
+      <div class="announcement-bar__content">
+        <!-- <svg class="announcement-bar__icon">
+          
+<svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.5 19.6001H16.1L15.3 29.2001L26.5 12.4H17.06L18.1 2.80005L6.5 19.6001Z" stroke="#F7F7F7" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
+
+        </svg> -->
+
+        <span>
+          ✨ Apache Pulsar 4.1 is here! ✨
+        </span>
+
+        <svg class="announcement-bar__icon">
+          
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="20" height="20" transform="translate(6 6)" fill="white" fill-opacity="0.01"/>
+<path d="M17.6667 10.1667L23.5 16.0001M23.5 16.0001L17.6667 21.8334M23.5 16.0001L8.5 16.0001" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="white"/>
+</svg>
+
+        </svg>
+      </div>
+    </a>
+  </div></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo-black.svg" alt="Apache Pulsar logo" class="themedComponent_mlkZ themedComponent--light_NVdE" height="25" width="127"><img src="/img/logo-black.svg" alt="Apache Pulsar logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" height="25" width="127"></div><b class="navbar__title text--truncate"></b></a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Get Started</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/4.1.x/concepts-overview/">Concepts</a></li><li><a class="dropdown__link" href="/docs/4.1.x/">Quickstart</a></li><li><a class="dropdown__link" href="/ecosystem/">Ecosystem</a></li></ul></div><a class="navbar__item navbar__link" href="/docs/4.1.x/">Docs</a><a class="navbar__item navbar__link" href="/features/">Features</a><a class="navbar__item navbar__link" href="/use-cases/">Use Cases</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link community-dropdown">Community</a><ul class="dropdown__menu"><li><a class="dropdown__link scroll-link scroll-welcome" id="scroll-welcome" href="/community/">Welcome</a></li><li><a class="dropdown__link scroll-link scroll-discussions" id="scroll-discussions" href="/community/#section-discussions">Discussions</a></li><li><a class="dropdown__link scroll-link" id="scroll-governance" href="/community/#section-governance">Governance</a></li><li><a class="dropdown__link scroll-link" id="scroll-community" href="/community/#section-community">Meet the Community</a></li><li><a class="dropdown__link scroll-link" id="scroll-contribute" href="/community/#section-contribute">Contribute</a></li><li><a class="dropdown__link" href="/contribute/">Contribution Guide</a></li><li><a href="https://github.com/apache/pulsar/wiki" target="_blank" rel="noopener noreferrer" class="dropdown__link">Wiki</a></li><li><a href="https://github.com/apache/pulsar/issues" target="_blank" rel="noopener noreferrer" class="dropdown__link">Issue Tracking</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Learn</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/blog/">Blog</a></li><li><a class="dropdown__link" href="/books/">Books</a></li><li><a class="dropdown__link" href="/case-studies/">Case Studies</a></li><li><a class="dropdown__link" href="/articles/">Articles</a></li><li><a class="dropdown__link" href="/presentations/">Presentations</a></li><li><a class="dropdown__link" href="/events/">Events</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link navbar_download_button" href="/download/">Download</a><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Command+K)"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Apache Pulsar 2.8.2</h1></header><h4 class="anchor anchorWithStickyNavbar_LWe7" id="2021-12-20">2021-12-20<a href="#2021-12-20" class="hash-link" aria-label="Direct link to 2021-12-20" title="Direct link to 2021-12-20">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="security">Security<a href="#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security">​</a></h3>
+<ul>
+<li>Upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105 <a href="https://github.com/apache/pulsar/pull/13392" target="_blank" rel="noopener noreferrer">#13392</a></li>
+<li>Upgrade Netty to 4.1.72 - CVE-2021-43797 <a href="https://github.com/apache/pulsar/pull/13328" target="_blank" rel="noopener noreferrer">#13328</a></li>
+<li>Bump log4j to 2.15.0 <a href="https://github.com/apache/pulsar/pull/13226" target="_blank" rel="noopener noreferrer">#13226</a></li>
+<li>Revert new AuthorizationProvider method <a href="https://github.com/apache/pulsar/pull/13133" target="_blank" rel="noopener noreferrer">#13133</a></li>
+<li>Support CLEAR_BACKLOG namespace op after enable auth <a href="https://github.com/apache/pulsar/pull/12963" target="_blank" rel="noopener noreferrer">#12963</a></li>
+<li>Upgrade netty to 4.1.68.Final <a href="https://github.com/apache/pulsar/pull/12218" target="_blank" rel="noopener noreferrer">#12218</a></li>
+<li>Support disabling non-TLS service ports <a href="https://github.com/apache/pulsar/pull/11681" target="_blank" rel="noopener noreferrer">#11681</a></li>
+<li>Upgrade Jetty to 9.4.43.v20210629 <a href="https://github.com/apache/pulsar/pull/11660" target="_blank" rel="noopener noreferrer">#11660</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="broker">Broker<a href="#broker" class="hash-link" aria-label="Direct link to Broker" title="Direct link to Broker">​</a></h3>
+<ul>
+<li>Fix and improve topic ownership assignment <a href="https://github.com/apache/pulsar/pull/13069" target="_blank" rel="noopener noreferrer">#13069</a></li>
+<li>Fix LeaderElectionService.getCurrentLeader and add support for empheralOwner in MockZooKeeper <a href="https://github.com/apache/pulsar/pull/13066" target="_blank" rel="noopener noreferrer">#13066</a></li>
+<li>Do not reuse the Failed OpAddEntry object which leads to the bundle unloading timeout. <a href="https://github.com/apache/pulsar/pull/12993" target="_blank" rel="noopener noreferrer">#12993</a></li>
+<li>Remove readerCaches and close reader when exception occurs in SystemTopicBasedTopicPoliciesService <a href="https://github.com/apache/pulsar/pull/12873" target="_blank" rel="noopener noreferrer">#12873</a></li>
+<li>Fix TopicPoliciesCacheNotInitException issue. <a href="https://github.com/apache/pulsar/pull/12773" target="_blank" rel="noopener noreferrer">#12773</a></li>
+<li>Support UNSUBSCRIBE namespace op after enabling auth <a href="https://github.com/apache/pulsar/pull/12742" target="_blank" rel="noopener noreferrer">#12742</a></li>
+<li>Fix race condition in PersistentTopic#addReplicationCluster <a href="https://github.com/apache/pulsar/pull/12729" target="_blank" rel="noopener noreferrer">#12729</a></li>
+<li>Even if always compatible is set, consumers cannot be created <a href="https://github.com/apache/pulsar/pull/12721" target="_blank" rel="noopener noreferrer">#12721</a></li>
+<li>Fix the incorrect total size when BrokerEntryMetadata is enabled <a href="https://github.com/apache/pulsar/pull/12714" target="_blank" rel="noopener noreferrer">#12714</a></li>
+<li>Fix lost compaction data due to compaction properties missed during reset-cursor <a href="https://github.com/apache/pulsar/pull/12698" target="_blank" rel="noopener noreferrer">#12698</a></li>
+<li>Fix TestRunMain test <a href="https://github.com/apache/pulsar/pull/12675" target="_blank" rel="noopener noreferrer">#12675</a></li>
+<li>Support GET_METADATA topic op after enabling auth <a href="https://github.com/apache/pulsar/pull/12656" target="_blank" rel="noopener noreferrer">#12656</a></li>
+<li>Fix false positive ownership check in OwnershipCache#checkOwnership <a href="https://github.com/apache/pulsar/pull/12650" target="_blank" rel="noopener noreferrer">#12650</a></li>
+<li>Optimize exception information for schemas <a href="https://github.com/apache/pulsar/pull/12647" target="_blank" rel="noopener noreferrer">#12647</a></li>
+<li>Add @Test annotation to test methods <a href="https://github.com/apache/pulsar/pull/12640" target="_blank" rel="noopener noreferrer">#12640</a></li>
+<li>Support retry when creating reader of Topic Policies <a href="https://github.com/apache/pulsar/pull/12622" target="_blank" rel="noopener noreferrer">#12622</a></li>
+<li>Fix String should use equals but not ==. <a href="https://github.com/apache/pulsar/pull/12619" target="_blank" rel="noopener noreferrer">#12619</a></li>
+<li>Fix 12614, waitingForPingResponse needs to be modified with volatile for concurrent sence  <a href="https://github.com/apache/pulsar/pull/12615" target="_blank" rel="noopener noreferrer">#12615</a></li>
+<li>Cleanup ProxyPublishConsumeTest <a href="https://github.com/apache/pulsar/pull/12607" target="_blank" rel="noopener noreferrer">#12607</a></li>
+<li>Avoid passing OpAddEntry across a thread boundary in asyncAddEntry <a href="https://github.com/apache/pulsar/pull/12606" target="_blank" rel="noopener noreferrer">#12606</a></li>
+<li>Do not move the non-durable cursor position when trimming ledgers while topic with compaction <a href="https://github.com/apache/pulsar/pull/12602" target="_blank" rel="noopener noreferrer">#12602</a></li>
+<li>Allow <code>GetTopicsOfNamespace</code> op with <code>consume</code> permission <a href="https://github.com/apache/pulsar/pull/12600" target="_blank" rel="noopener noreferrer">#12600</a></li>
+<li>Allow configuring schema compatibility policy for system topics <a href="https://github.com/apache/pulsar/pull/12598" target="_blank" rel="noopener noreferrer">#12598</a></li>
+<li>Cleanup already deleted namespace topics. <a href="https://github.com/apache/pulsar/pull/12597" target="_blank" rel="noopener noreferrer">#12597</a></li>
+<li>Fix additional servlets NAR might extract to null directory <a href="https://github.com/apache/pulsar/pull/12585" target="_blank" rel="noopener noreferrer">#12585</a></li>
+<li>Fix log typo in NamespaceService#checkHeartbeatNamespace  <a href="https://github.com/apache/pulsar/pull/12582" target="_blank" rel="noopener noreferrer">#12582</a></li>
+<li>Add OpAddEntry to pendingAddEntries after the state check <a href="https://github.com/apache/pulsar/pull/12570" target="_blank" rel="noopener noreferrer">#12570</a></li>
+<li>Cancel scheduled tasks when deleting ManagedLedgerImpl <a href="https://github.com/apache/pulsar/pull/12565" target="_blank" rel="noopener noreferrer">#12565</a></li>
+<li>Add git branch information for PulsarVersion <a href="https://github.com/apache/pulsar/pull/12541" target="_blank" rel="noopener noreferrer">#12541</a></li>
+<li>Websocket should pass the encryption context to consumers <a href="https://github.com/apache/pulsar/pull/12539" target="_blank" rel="noopener noreferrer">#12539</a></li>
+<li>The count of topics on the bundle is less than 2，skip split <a href="https://github.com/apache/pulsar/pull/12527" target="_blank" rel="noopener noreferrer">#12527</a></li>
+<li>Fix the reader skips compacted data which original ledger been removed <a href="https://github.com/apache/pulsar/pull/12522" target="_blank" rel="noopener noreferrer">#12522</a></li>
+<li>Fix <code>messageDedup</code> delete inactive producer name <a href="https://github.com/apache/pulsar/pull/12493" target="_blank" rel="noopener noreferrer">#12493</a></li>
+<li>Optimize the code: remove extra spaces <a href="https://github.com/apache/pulsar/pull/12470" target="_blank" rel="noopener noreferrer">#12470</a></li>
+<li>Future completed twice in the method of  impl.MLPendingAckStore#closeAsync <a href="https://github.com/apache/pulsar/pull/12362" target="_blank" rel="noopener noreferrer">#12362</a></li>
+<li>Fix the race of delete subscription and delete topic <a href="https://github.com/apache/pulsar/pull/12240" target="_blank" rel="noopener noreferrer">#12240</a></li>
+<li>Disable stats recorder for built-in PulsarClient <a href="https://github.com/apache/pulsar/pull/12217" target="_blank" rel="noopener noreferrer">#12217</a></li>
+<li>Fix delete authentication policies when deleting topics. <a href="https://github.com/apache/pulsar/pull/12215" target="_blank" rel="noopener noreferrer">#12215</a></li>
+<li>Optimize the memory usage of Cache Eviction <a href="https://github.com/apache/pulsar/pull/12045" target="_blank" rel="noopener noreferrer">#12045</a></li>
+<li>Avoid adding duplicated BrokerEntryMetadata <a href="https://github.com/apache/pulsar/pull/12018" target="_blank" rel="noopener noreferrer">#12018</a></li>
+<li>Fix update ledger list to znode version mismatch failed, ledger not delete <a href="https://github.com/apache/pulsar/pull/12015" target="_blank" rel="noopener noreferrer">#12015</a></li>
+<li>Fix messages in TopicPolicies will never be cleaned up <a href="https://github.com/apache/pulsar/pull/11928" target="_blank" rel="noopener noreferrer">#11928</a></li>
+<li>Fix returned wrong hash ranges for the consumer with the same consumer name <a href="https://github.com/apache/pulsar/pull/12212" target="_blank" rel="noopener noreferrer">#12212</a></li>
+<li>Add Key_Shared metadata to topic stats <a href="https://github.com/apache/pulsar/pull/11839" target="_blank" rel="noopener noreferrer">#11839</a></li>
+<li>Fix build from submodules (broker, transaction coordinator) <a href="https://github.com/apache/pulsar/pull/11795" target="_blank" rel="noopener noreferrer">#11795</a></li>
+<li>Add method to clear up transaction buffer snapshot <a href="https://github.com/apache/pulsar/pull/11934" target="_blank" rel="noopener noreferrer">#11934</a></li>
+<li>Increase the test stability of transactionTest <a href="https://github.com/apache/pulsar/pull/11541" target="_blank" rel="noopener noreferrer">#11541</a></li>
+<li>Add maven.restlet.org repository <a href="https://github.com/apache/pulsar/pull/13248" target="_blank" rel="noopener noreferrer">#13248</a></li>
+<li>Fix and improve topic ownership assignment (#13069) <a href="https://github.com/apache/pulsar/pull/13117" target="_blank" rel="noopener noreferrer">#13117</a></li>
+<li>Evaluate the current protocol version once <a href="https://github.com/apache/pulsar/pull/13045" target="_blank" rel="noopener noreferrer">#13045</a></li>
+<li>Revert &quot;Set default root log level to debug&quot; and make PULSAR_LOG_ROOT_LEVEL default to PULSAR_LOG_LEVEL <a href="https://github.com/apache/pulsar/pull/12941" target="_blank" rel="noopener noreferrer">#12941</a></li>
+<li>Catch exceptions in scheduled tasks to prevent unintended cancellation <a href="https://github.com/apache/pulsar/pull/12853" target="_blank" rel="noopener noreferrer">#12853</a></li>
+<li>Fix producer getting incorrectly removed from topic&#x27;s <code>producers</code> map <a href="https://github.com/apache/pulsar/pull/12846" target="_blank" rel="noopener noreferrer">#12846</a></li>
+<li>Synchronize updates to the inactiveProducers map in MessageD… <a href="https://github.com/apache/pulsar/pull/12820" target="_blank" rel="noopener noreferrer">#12820</a></li>
+<li>Close connection after receiving unexpected SendCommand <a href="https://github.com/apache/pulsar/pull/12780" target="_blank" rel="noopener noreferrer">#12780</a></li>
+<li>Fix namespace policy override ignored when creating subscription <a href="https://github.com/apache/pulsar/pull/12699" target="_blank" rel="noopener noreferrer">#12699</a></li>
+<li>Update lombok to 1.18.22 <a href="https://github.com/apache/pulsar/pull/12466" target="_blank" rel="noopener noreferrer">#12466</a></li>
+<li>Fix skips compacted data for reader/consumer <a href="https://github.com/apache/pulsar/pull/12464" target="_blank" rel="noopener noreferrer">#12464</a></li>
+<li>Remove data race in MultiTopicsConsumerImpl to ensure correct message order <a href="https://github.com/apache/pulsar/pull/12456" target="_blank" rel="noopener noreferrer">#12456</a></li>
+<li>Fix the retry topic&#x27;s <code>REAL_TOPIC</code> &amp; <code>ORIGIN_MESSAGE_ID</code> property <a href="https://github.com/apache/pulsar/pull/12451" target="_blank" rel="noopener noreferrer">#12451</a></li>
+<li>Change the producer fence error log to debug level <a href="https://github.com/apache/pulsar/pull/12447" target="_blank" rel="noopener noreferrer">#12447</a></li>
+<li>Reduce the readFailureBackoff time <a href="https://github.com/apache/pulsar/pull/12444" target="_blank" rel="noopener noreferrer">#12444</a></li>
+<li>Fix wrong property name in NamespaceIsolationDataImpl#secondary <a href="https://github.com/apache/pulsar/pull/12433" target="_blank" rel="noopener noreferrer">#12433</a></li>
+<li>Optimize SecurityUtility code flow <a href="https://github.com/apache/pulsar/pull/12431" target="_blank" rel="noopener noreferrer">#12431</a></li>
+<li>Fix compactor skips data from last compacted Ledger <a href="https://github.com/apache/pulsar/pull/12429" target="_blank" rel="noopener noreferrer">#12429</a></li>
+<li>Remove redundant code <a href="https://github.com/apache/pulsar/pull/12424" target="_blank" rel="noopener noreferrer">#12424</a></li>
+<li>Fix some tests not enabled in integration tests <a href="https://github.com/apache/pulsar/pull/12417" target="_blank" rel="noopener noreferrer">#12417</a></li>
+<li>Use weak ref to ClientConnection for timeout task <a href="https://github.com/apache/pulsar/pull/12409" target="_blank" rel="noopener noreferrer">#12409</a></li>
+<li>Fix cherry-pick issue <a href="https://github.com/apache/pulsar/pull/12397" target="_blank" rel="noopener noreferrer">#12397</a></li>
+<li>Fix the null point caused by deleting the system topic policy <a href="https://github.com/apache/pulsar/pull/12367" target="_blank" rel="noopener noreferrer">#12367</a></li>
+<li>Update delete inactive topic configuration documentation <a href="https://github.com/apache/pulsar/pull/12350" target="_blank" rel="noopener noreferrer">#12350</a></li>
+<li>Add log to print exception stack. <a href="https://github.com/apache/pulsar/pull/12345" target="_blank" rel="noopener noreferrer">#12345</a></li>
+<li>Avoid potentially blocking calls to metadata on critical threads <a href="https://github.com/apache/pulsar/pull/12339" target="_blank" rel="noopener noreferrer">#12339</a></li>
+<li>Fix NPE when removing cursor <a href="https://github.com/apache/pulsar/pull/12297" target="_blank" rel="noopener noreferrer">#12297</a></li>
+<li>Print log when configuration is failed to load <a href="https://github.com/apache/pulsar/pull/12280" target="_blank" rel="noopener noreferrer">#12280</a></li>
+<li>Fix incorrect returned last message ID while the <code>lastConfirmedEntry</code> with negative entry ID <a href="https://github.com/apache/pulsar/pull/12277" target="_blank" rel="noopener noreferrer">#12277</a></li>
+<li>Fix TTL expiry does not take effect <a href="https://github.com/apache/pulsar/pull/12266" target="_blank" rel="noopener noreferrer">#12266</a></li>
+<li>The loadbalancer should avoid offload the heartbeat namespace <a href="https://github.com/apache/pulsar/pull/12252" target="_blank" rel="noopener noreferrer">#12252</a></li>
+<li>Fix typo of the returned last message ID when the last message ID is from compacted ledger <a href="https://github.com/apache/pulsar/pull/12237" target="_blank" rel="noopener noreferrer">#12237</a></li>
+<li>Add support for splitting topics and partition labels in Prometheus <a href="https://github.com/apache/pulsar/pull/12225" target="_blank" rel="noopener noreferrer">#12225</a></li>
+<li>Fix lost message issues 12221 <a href="https://github.com/apache/pulsar/pull/12223" target="_blank" rel="noopener noreferrer">#12223</a></li>
+<li>Allow to config pulsar client allocator out of memory policy <a href="https://github.com/apache/pulsar/pull/12200" target="_blank" rel="noopener noreferrer">#12200</a></li>
+<li>Remove redundant parameters <a href="https://github.com/apache/pulsar/pull/12188" target="_blank" rel="noopener noreferrer">#12188</a></li>
+<li>Fix incorrect logger numbers in tests <a href="https://github.com/apache/pulsar/pull/12168" target="_blank" rel="noopener noreferrer">#12168</a></li>
+<li>Return the last position of the compacted data while the original data has been deleted <a href="https://github.com/apache/pulsar/pull/12161" target="_blank" rel="noopener noreferrer">#12161</a></li>
+<li>Improve exceptions thrown when handling the schema resource <a href="https://github.com/apache/pulsar/pull/12155" target="_blank" rel="noopener noreferrer">#12155</a></li>
+<li>Fix prefix setting in JWT authn and avoid multi calls for the getProperty <a href="https://github.com/apache/pulsar/pull/12132" target="_blank" rel="noopener noreferrer">#12132</a></li>
+<li>Fix used after recycle issue in OpAddEntry <a href="https://github.com/apache/pulsar/pull/12103" target="_blank" rel="noopener noreferrer">#12103</a></li>
+<li>Bugfix: Fix rackaware placement policy init error <a href="https://github.com/apache/pulsar/pull/12097" target="_blank" rel="noopener noreferrer">#12097</a></li>
+<li>Fix wrong key-hash selector used for new consumers after all the previous consumers disconnected <a href="https://github.com/apache/pulsar/pull/12035" target="_blank" rel="noopener noreferrer">#12035</a></li>
+<li>Fix cherry-pick issue on branch-2.8 <a href="https://github.com/apache/pulsar/pull/11982" target="_blank" rel="noopener noreferrer">#11982</a></li>
+<li>Remove unused variable and unnecessary box in NamespaceBundleFactory <a href="https://github.com/apache/pulsar/pull/11975" target="_blank" rel="noopener noreferrer">#11975</a></li>
+<li>Print position info when can&#x27;t find next valid position. <a href="https://github.com/apache/pulsar/pull/11969" target="_blank" rel="noopener noreferrer">#11969</a></li>
+<li>Fix NPE ZkBookieRackAffinityMapping <a href="https://github.com/apache/pulsar/pull/11947" target="_blank" rel="noopener noreferrer">#11947</a></li>
+<li>Avoid to infinitely split bundle <a href="https://github.com/apache/pulsar/pull/11937" target="_blank" rel="noopener noreferrer">#11937</a></li>
+<li>Improved logic for pausing replicated subscription snapshots when no traffic <a href="https://github.com/apache/pulsar/pull/11922" target="_blank" rel="noopener noreferrer">#11922</a></li>
+<li>Fix ZKSessionTest.testReacquireLocksAfterSessionLost <a href="https://github.com/apache/pulsar/pull/11886" target="_blank" rel="noopener noreferrer">#11886</a></li>
+<li>Schema compatibility strategy in broker level. <a href="https://github.com/apache/pulsar/pull/11856" target="_blank" rel="noopener noreferrer">#11856</a></li>
+<li>Use TestRetrySupport for BaseMetadataStoreTests to cleanup state between retries <a href="https://github.com/apache/pulsar/pull/11771" target="_blank" rel="noopener noreferrer">#11771</a></li>
+<li>Remove replace_maven-wagon-http-version.sh script <a href="https://github.com/apache/pulsar/pull/11718" target="_blank" rel="noopener noreferrer">#11718</a></li>
+<li>Check null or empty instead of catch NPE <a href="https://github.com/apache/pulsar/pull/11655" target="_blank" rel="noopener noreferrer">#11655</a></li>
+<li>Avoid duplicate deletion of schema <a href="https://github.com/apache/pulsar/pull/11640" target="_blank" rel="noopener noreferrer">#11640</a></li>
+<li>Fix subscribeRateLimiter cannot be disabled <a href="https://github.com/apache/pulsar/pull/11614" target="_blank" rel="noopener noreferrer">#11614</a></li>
+<li>Fix race condition in concurrent schema deletion <a href="https://github.com/apache/pulsar/pull/11606" target="_blank" rel="noopener noreferrer">#11606</a></li>
+<li>Use <code>get</code> instead of <code>join</code> to avoid getting stuck <a href="https://github.com/apache/pulsar/pull/11597" target="_blank" rel="noopener noreferrer">#11597</a></li>
+<li>Avoid to cal getMaximumRolloverTimeMs everytime <a href="https://github.com/apache/pulsar/pull/11513" target="_blank" rel="noopener noreferrer">#11513</a></li>
+<li>Fix improper class/method/field modifiers <a href="https://github.com/apache/pulsar/pull/10837" target="_blank" rel="noopener noreferrer">#10837</a></li>
+<li>Support max-connection and max-connection-per-IP <a href="https://github.com/apache/pulsar/pull/10754" target="_blank" rel="noopener noreferrer">#10754</a></li>
+<li>Allow Integration Tests Jar to be deployed to Maven central <a href="https://github.com/apache/pulsar/pull/12292" target="_blank" rel="noopener noreferrer">#12292</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h3>
+<ul>
+<li>K8s runtime: force deletion to avoid hung function worker during connector restart <a href="https://github.com/apache/pulsar/pull/12504" target="_blank" rel="noopener noreferrer">#12504</a></li>
+<li>Fix k8s pulsar functions containers not exposing metrics port for scraping <a href="https://github.com/apache/pulsar/pull/12065" target="_blank" rel="noopener noreferrer">#12065</a></li>
+<li>Enable protobuf-native schema support for function <a href="https://github.com/apache/pulsar/pull/11868" target="_blank" rel="noopener noreferrer">#11868</a></li>
+<li>Pass <code>SubscriptionPosition</code> from <code>FunctionDetails</code> to <code>FunctionConfig</code> / <code>SinkConfig</code> <a href="https://github.com/apache/pulsar/pull/11831" target="_blank" rel="noopener noreferrer">#11831</a></li>
+<li>Reorganize the context hierarchy for functions <a href="https://github.com/apache/pulsar/pull/10631" target="_blank" rel="noopener noreferrer">#10631</a></li>
+<li>Remove the deprecated API usage in HDFS <a href="https://github.com/apache/pulsar/pull/12080" target="_blank" rel="noopener noreferrer">#12080</a></li>
+<li>Stop OffsetStore when stopping the connector <a href="https://github.com/apache/pulsar/pull/12457" target="_blank" rel="noopener noreferrer">#12457</a></li>
+<li>Support set subscription position <a href="https://github.com/apache/pulsar/pull/11990" target="_blank" rel="noopener noreferrer">#11990</a></li>
+<li>Sync to the latest function proto <a href="https://github.com/apache/pulsar/pull/11853" target="_blank" rel="noopener noreferrer">#11853</a></li>
+<li>Fix classloader leaks <a href="https://github.com/apache/pulsar/pull/12973" target="_blank" rel="noopener noreferrer">#12973</a></li>
+<li>Add missing dependency <a href="https://github.com/apache/pulsar/pull/12246" target="_blank" rel="noopener noreferrer">#12246</a></li>
+<li>ConcurrentHashMap should be used for caching producers <a href="https://github.com/apache/pulsar/pull/11820" target="_blank" rel="noopener noreferrer">#11820</a></li>
+<li>Support KEY_BASED batch builder for Java based functions and sources <a href="https://github.com/apache/pulsar/pull/11706" target="_blank" rel="noopener noreferrer">#11706</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pulsar-admin">Pulsar Admin<a href="#pulsar-admin" class="hash-link" aria-label="Direct link to Pulsar Admin" title="Direct link to Pulsar Admin">​</a></h3>
+<ul>
+<li>Print topic internal info as formatted JSON <a href="https://github.com/apache/pulsar/pull/12709" target="_blank" rel="noopener noreferrer">#12709</a></li>
+<li>Fix last exit code storage <a href="https://github.com/apache/pulsar/pull/12581" target="_blank" rel="noopener noreferrer">#12581</a></li>
+<li>Fix the issue of failing to update partitions of topics <a href="https://github.com/apache/pulsar/pull/11683" target="_blank" rel="noopener noreferrer">#11683</a></li>
+<li>Perfect judgment conditions of pulsar-admin <a href="https://github.com/apache/pulsar/pull/12315" target="_blank" rel="noopener noreferrer">#12315</a></li>
+<li>Fix log level config for pulsar-admin, pulsar-client and pulsar-perf <a href="https://github.com/apache/pulsar/pull/12915" target="_blank" rel="noopener noreferrer">#12915</a></li>
+<li>Modify exception of set-properties for namespace <a href="https://github.com/apache/pulsar/pull/12436" target="_blank" rel="noopener noreferrer">#12436</a></li>
+<li>Get schema validation enforce add applied <a href="https://github.com/apache/pulsar/pull/12349" target="_blank" rel="noopener noreferrer">#12349</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tiered-storage">Tiered Storage<a href="#tiered-storage" class="hash-link" aria-label="Direct link to Tiered Storage" title="Direct link to Tiered Storage">​</a></h3>
+<ul>
+<li>Add retry to tolerate the offload index file read failure <a href="https://github.com/apache/pulsar/pull/12452" target="_blank" rel="noopener noreferrer">#12452</a></li>
+<li>Fix the read performance issue in the offload readAsync <a href="https://github.com/apache/pulsar/pull/12443" target="_blank" rel="noopener noreferrer">#12443</a></li>
+<li>Fix FileSystemManagedLedgerOffloader can not clean up outdated ledger <a href="https://github.com/apache/pulsar/pull/12309" target="_blank" rel="noopener noreferrer">#12309</a></li>
+<li>Fix the potential race condition in the BlobStore readhandler <a href="https://github.com/apache/pulsar/pull/12123" target="_blank" rel="noopener noreferrer">#12123</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pulsar-sql">Pulsar SQL<a href="#pulsar-sql" class="hash-link" aria-label="Direct link to Pulsar SQL" title="Direct link to Pulsar SQL">​</a></h3>
+<ul>
+<li>Handle message null schema version in PulsarRecordCursor <a href="https://github.com/apache/pulsar/pull/12809" target="_blank" rel="noopener noreferrer">#12809</a></li>
+<li>Pulsar SQL support query big entry data <a href="https://github.com/apache/pulsar/pull/12448" target="_blank" rel="noopener noreferrer">#12448</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cli">CLI<a href="#cli" class="hash-link" aria-label="Direct link to CLI" title="Direct link to CLI">​</a></h3>
+<ul>
+<li>Enable CLI to publish non-batched messages <a href="https://github.com/apache/pulsar/pull/12641" target="_blank" rel="noopener noreferrer">#12641</a></li>
+<li>Make it possible to disable poolMessages <a href="https://github.com/apache/pulsar/pull/12108" target="_blank" rel="noopener noreferrer">#12108</a></li>
+<li>Add total messages when periodic printing throughput <a href="https://github.com/apache/pulsar/pull/12084" target="_blank" rel="noopener noreferrer">#12084</a></li>
+<li>Make it possible to disable poolMessages <a href="https://github.com/apache/pulsar/pull/12090" target="_blank" rel="noopener noreferrer">#12090</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="unit-test">Unit Test<a href="#unit-test" class="hash-link" aria-label="Direct link to Unit Test" title="Direct link to Unit Test">​</a></h3>
+<ul>
+<li>Broker resource group test optimize fail msg <a href="https://github.com/apache/pulsar/pull/12438" target="_blank" rel="noopener noreferrer">#12438</a></li>
+<li>Fix windows test path problem <a href="https://github.com/apache/pulsar/pull/12398" target="_blank" rel="noopener noreferrer">#12398</a></li>
+<li>Make AuthenticationTokenTest to run on windows <a href="https://github.com/apache/pulsar/pull/12329" target="_blank" rel="noopener noreferrer">#12329</a></li>
+<li>Use correct line separator instead of \n <a href="https://github.com/apache/pulsar/pull/12143" target="_blank" rel="noopener noreferrer">#12143</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bookkeeper">BookKeeper<a href="#bookkeeper" class="hash-link" aria-label="Direct link to BookKeeper" title="Direct link to BookKeeper">​</a></h3>
+<ul>
+<li>Add readWorkerThreadsThrottlingEnabled to conf/bookkeeper.conf <a href="https://github.com/apache/pulsar/pull/12666" target="_blank" rel="noopener noreferrer">#12666</a></li>
+<li>UseV2WireProtocol for bookkeeper autorecovery <a href="https://github.com/apache/pulsar/pull/12311" target="_blank" rel="noopener noreferrer">#12311</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="proxy">Proxy<a href="#proxy" class="hash-link" aria-label="Direct link to Proxy" title="Direct link to Proxy">​</a></h3>
+<ul>
+<li>Reduce the severity of log &quot;refreshing key manager&quot; in KeyManagerProxy <a href="https://github.com/apache/pulsar/pull/12594" target="_blank" rel="noopener noreferrer">#12594</a></li>
+<li>Set default HTTP proxy request timeout <a href="https://github.com/apache/pulsar/pull/11971" target="_blank" rel="noopener noreferrer">#11971</a></li>
+<li>Set default httpProxyTimeout to 5 minutes <a href="https://github.com/apache/pulsar/pull/12299" target="_blank" rel="noopener noreferrer">#12299</a></li>
+<li>Fix Pulsar Proxy to re-use authentication instance <a href="https://github.com/apache/pulsar/pull/12245" target="_blank" rel="noopener noreferrer">#12245</a></li>
+<li>Fix NPE in ProxyConnection with no auth data <a href="https://github.com/apache/pulsar/pull/12111" target="_blank" rel="noopener noreferrer">#12111</a></li>
+<li>Fix ProxyConnection to check for existence of auth_data field <a href="https://github.com/apache/pulsar/pull/12057" target="_blank" rel="noopener noreferrer">#12057</a></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/apache/pulsar-site/edit/main/release-notes/versioned/pulsar-2.8.2.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_jeP5 thin-scrollbar theme-doc-toc-desktop"><div class="border"><div style="color:var(--ifm-toc-link-color)">Was this helpful?</div><div style="border-width:1px;padding:3px;display:flex"><div style="justify-content:center;display:flex;border-radius:99999px;width:2.5rem;height:2.5rem;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="24" fill="none" style="width:initial;height:initial" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.086 1.594A1 1 0 0 1 11 1a4 4 0 0 1 4 4v3h4.655a3 3 0 0 1 2.994 3.45l-1.38 9A3 3 0 0 1 18.275 23H4a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h2.35zM8 11.212l3.608-8.117A2 2 0 0 1 13 5v4a1 1 0 0 0 1 1h5.671a1 1 0 0 1 1 1.15l-1.38 9a1 1 0 0 1-1 .85H8zM6 21v-9H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1z" clip-rule="evenodd"></path></svg></div><div style="justify-content:center;display:flex;border-radius:99999px;width:2.5rem;height:2.5rem;cursor:pointer"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="24" fill="none" style="width:initial;height:initial" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M20.563 3.316A1.3 1.3 0 0 0 19.687 3h-1.688v9h1.688a1.31 1.31 0 0 0 1.312-1.077V4.077a1.3 1.3 0 0 0-.436-.761M16 12.788l-3.608 8.118A2 2 0 0 1 11 19v-4a1 1 0 0 0-1-1H4.328a1.002 1.002 0 0 1-1-1.15l1.38-9a1 1 0 0 1 1-.85h10.291zM19.661 1a3.31 3.31 0 0 1 3.329 2.866Q23 3.933 23 4v7q0 .068-.01.134A3.31 3.31 0 0 1 19.661 14h-2.012l-3.736 8.406a1 1 0 0 1-.914.594 4 4 0 0 1-4-4v-3H4.344a3 3 0 0 1-2.994-3.45l1.38-9A3 3 0 0 1 5.724 1z" clip-rule="evenodd"></path></svg></div></div><div class="Actions_uugI"><a target="_blank" class="Action_iBHd" href="https://github.com/apache/pulsar/issues/new?assignees=&amp;labels=doc-required&amp;projects=&amp;template=doc.yml&amp;title=%5BDoc%5D+">💡 Suggest changes</a><a target="_blank" class="Action_iBHd" href="https://github.com/apache/pulsar/discussions/new?category=q-a">🛟 Get support</a></div></div><ul class="table-of-contents table-of-contents__left-border"><li><a href="#security" class="table-of-contents__link toc-highlight">Security</a></li><li><a href="#broker" class="table-of-contents__link toc-highlight">Broker</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a></li><li><a href="#pulsar-admin" class="table-of-contents__link toc-highlight">Pulsar Admin</a></li><li><a href="#tiered-storage" class="table-of-contents__link toc-highlight">Tiered Storage</a></li><li><a href="#pulsar-sql" class="table-of-contents__link toc-highlight">Pulsar SQL</a></li><li><a href="#cli" class="table-of-contents__link toc-highlight">CLI</a></li><li><a href="#unit-test" class="table-of-contents__link toc-highlight">Unit Test</a></li><li><a href="#bookkeeper" class="table-of-contents__link toc-highlight">BookKeeper</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">Proxy</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.apache.org/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Foundation<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/events/current-event.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Events<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.apache.org/licenses/" target="_blank" rel="noopener noreferrer" class="footer__link-item">License<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/foundation/thanks" target="_blank" rel="noopener noreferrer" class="footer__link-item">Thanks<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/foundation/sponsorship" target="_blank" rel="noopener noreferrer" class="footer__link-item">Sponsorship<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/security/">Security</a></li><li class="footer__item"><a href="https://www.apache.org/foundation/policies/privacy.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/contact/">Contact</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title"></div><ul class="footer__items clean-list"><li class="footer__item">
+                <div class="social-icons">
+                  <a target="_blank" href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar" aria-label="Join the Apache Pulsar Slack workspace">
+                    <img alt="Slack logo" src="/img/slack-white.svg" width="26">
+                  </a>
+                  <a target="_blank" href="https://github.com/apache/pulsar/" aria-label="View the Apache Pulsar project on GitHub">
+                    <img alt="GitHub logo" src="/img/github-white.svg" width="26">
+                  </a>
+                </div>
+              </li></ul></div></div><div class="footer__bottom text--center"><div class="margin-bottom--sm"><a class="footerLogoLink_BH7S" href="/"><img src="/img/pulsar-white.svg" alt="Pulsar Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/pulsar-white.svg" alt="Pulsar Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright">
+        <div>
+          <img class="footer-apache-logo" src="/img/feather-logo-white.svg" alt="" width="20">
+          The Apache Software Foundation
+        </div>
+        <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+        <p>Copyright © 2025 The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
+      </div></div></div></footer></div>
+</body>
+</html>
