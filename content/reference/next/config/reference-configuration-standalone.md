@@ -2193,7 +2193,7 @@ Whether to enable precise time based backlog quota check. Enabling precise time 
 **Category**: Policies
 
 ### pulsarChannelPauseReceivingCooldownMs
-After the connection is recovered from an pause receiving state, the channel will be rate-limited for a of time window to avoid overwhelming due to the backlog of requests. This parameter defines how long the rate limiting should last, in millis. Once the bytes that are waiting to be sent out reach the "pulsarChannelWriteBufferHighWaterMark"， the timer will be reset. Setting a negative value will disable the rate limiting.
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a time window to avoid overwhelming due to the backlog of requests. This parameter defines how long the rate limiting should last, in millis. Once the bytes that are waiting to be sent out reach the "pulsarChannelWriteBufferHighWaterMark"， the timer will be reset. Setting a negative value will disable the rate limiting.
 
 **Type**: `int`
 
@@ -2204,7 +2204,7 @@ After the connection is recovered from an pause receiving state, the channel wil
 **Category**: Policies
 
 ### pulsarChannelPauseReceivingCooldownRateLimitPeriodMs
-After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time defined by pulsarChannelPauseReceivingCooldownMs to avoid overwhelming due to the backlog of requests. This parameter defines the period of the rate limiter in milliseconds. If the rate limit period is set to 1000, then the unit is requests per 1000 milli seconds. When it's 10, the unit is requests per every 10ms.
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time defined by pulsarChannelPauseReceivingCooldownMs to avoid overwhelming due to the backlog of requests. This parameter defines the period of the rate limiter in milliseconds. If the rate limit period is set to 1000, then the unit is requests per 1000 milliseconds. When it's 10, the unit is requests per every 10ms.
 
 **Type**: `int`
 

@@ -73,7 +73,7 @@ Delivered encrypted message contains {@link EncryptionContext} which contains en
 
 **Type**: `org.apache.pulsar.client.api.ConsumerCryptoFailureAction`
 
-**Default**: `FAIL`
+**Default**: `null`
 
 ### deadLetterPolicy
 Dead letter policy for consumers.
