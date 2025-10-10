@@ -19,11 +19,12 @@ The message decompression fails.
 
 If messages contain batch messages, a client is not be able to retrieve individual messages in batch.
 
-Delivered encrypted message contains {@link EncryptionContext} which contains encryption and compression information in it using which application can decrypt consumed message payload.
+Delivered encrypted message contains {@link EncryptionContext} which contains encryption and compression information in it using which application can decrypt consumed message payload.cannot set with {@link ReaderDecryptFailListener}, and if ReaderDecryptFailListener are set,
+application should responsible for handling decryption failure.
 
 **Type**: `org.apache.pulsar.client.api.ConsumerCryptoFailureAction`
 
-**Default**: `FAIL`
+**Default**: `null`
 
 ### cryptoKeyReader
 Interface that abstracts the access to a key store.
@@ -44,6 +45,13 @@ Attempting to enable it on subscriptions to non-persistent topics or on shared s
 **Type**: `boolean`
 
 **Default**: `false`
+
+### readerDecryptFailListener
+A listener that is called for encrypted message received and decrypt fail.
+
+**Type**: `org.apache.pulsar.client.api.ReaderDecryptFailListener`
+
+**Default**: `null`
 
 ### readerListener
 A listener that is called for message received.
