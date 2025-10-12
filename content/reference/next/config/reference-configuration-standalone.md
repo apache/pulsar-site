@@ -5297,6 +5297,17 @@ Write quorum (Qw) size, Replication factor for storing entries (messages) in a l
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerDeleteMaxConcurrentRequests
+Max number of concurrent requests for deleting ledgers at broker level
+
+**Type**: `int`
+
+**Default**: `1000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerDigestType
 Default type of checksum to use when writing to BookKeeper. 
 
