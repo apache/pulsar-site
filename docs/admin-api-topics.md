@@ -709,7 +709,7 @@ admin.topics().skipAllMessages(topic, subName);
 
 ### Reset cursor
 
-You can reset a subscription cursor position back to the position which is recorded X minutes before. It essentially calculates the time and position of the cursor at X minutes before and resets it at that position. You can reset the cursor in the following ways.
+You can reset a subscription cursor position back to the position which is recorded X seconds (or with other time units, e.g 100m, 3h, 2d, 5w) before. It essentially calculates the time and position of the cursor at X seconds before and resets it at that position. You can reset the cursor in the following ways.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
