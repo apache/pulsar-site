@@ -21,11 +21,14 @@ Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Puls
 
 Also, you need the proper 64-bit JRE/JDK version installed:
 
+- **Java 21** is required for Pulsar 4.0+ and master branch
 - **Java 17** is required for Pulsar 2.11+ and master branch
 - **Java 11** is required for Pulsar 2.8/2.9/2.10 
 - **Java 8** is required for Pulsar 2.7 and earlier
 
 For the latest Java version recommendations, see [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
+When using Java versions, it is recommended to use [a recent version of a particular Java release (17 or 21)](https://adoptium.net/en-GB/temurin/releases?version=21&os=linux&arch=any) with the most recent bug fixes and security patches.
+You can find Java installation instructions in [Setting up JDKs and Maven using SDKMAN](/contribute/setup-buildtools) or [download Temurin OpenJDK distribution from Adoptium](https://adoptium.net/en-GB/temurin/releases?version=21&os=any&arch=any).
 
 ## Step 1: Download Pulsar distribution
 
