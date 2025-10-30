@@ -604,7 +604,7 @@ export const resources: Record<Category, Resource[]> = {
         },
         {
           name: 'Dekaf UI',
-          description: 'Feature-rich open-source UI for Apache Pulsar',
+          description: 'Feature-rich open-source UI for Apache Pulsar.',
           link: 'https://github.com/visortelle/dekaf',
           source_or_sink: 'N/A'
         },
