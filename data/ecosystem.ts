@@ -603,6 +603,12 @@ export const resources: Record<Category, Resource[]> = {
           source_or_sink: 'N/A'
         },
         {
+          name: 'Dekaf UI',
+          description: 'Feature-rich open-source UI for Apache Pulsar',
+          link: 'https://github.com/visortelle/dekaf',
+          source_or_sink: 'N/A'
+        },
+        {
           name: 'Pulsarctl',
           description: '',
           link: 'https://github.com/streamnative/pulsarctl',
