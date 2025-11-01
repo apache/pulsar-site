@@ -2270,7 +2270,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
