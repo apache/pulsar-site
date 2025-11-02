@@ -10,7 +10,7 @@ It is helpful to review the [concepts](io-overview.md) for Pulsar I/O by running
 
 At the end of this tutorial, you can:
 
-- [Connect Pulsar to Cassandra](#connect-pulsar-to-cassandra)
+- [Connect Pulsar to Cassandra and ScyllaDB](#connect-pulsar-to-cassandra-and-scylladb)
 - [Connect Pulsar to PostgreSQL](#connect-pulsar-to-postgresql)
 
 :::tip
@@ -103,20 +103,23 @@ ls connectors
    If an error occurs when starting the Pulsar service, you may see an exception at the terminal running `pulsar/standalone`,
    or you can navigate to the `logs` directory under the Pulsar directory to view the logs.
 
-## Connect Pulsar to Cassandra
+## Connect Pulsar to Cassandra and ScyllaDB
 
-This section demonstrates how to connect Pulsar to Cassandra.
+This section demonstrates how to connect Pulsar to Cassandra and ScyllaDB.
 
 :::tip
 
 * Make sure you have Docker installed. If you do not have one, see [install Docker](https://docs.docker.com/docker-for-mac/install/). For more information about Docker commands, see [Docker CLI](https://docs.docker.com/engine/reference/commandline/run/).
-* The Cassandra sink connector reads messages from Pulsar topics and writes the messages into Cassandra tables. For more information, see [Cassandra sink connector](io-cassandra-sink.md).
+* The Cassandra sink connector reads messages from Pulsar topics and writes the messages into Cassandra or ScyllaDB tables. For more information, see [Cassandra sink connector](io-cassandra-sink.md).
+* **ScyllaDB compatibility**: [ScyllaDB](https://www.scylladb.com/) is a drop-in replacement for Cassandra that maintains full CQL protocol compatibility. The same `pulsar-io-cassandra` connector works with both databases without any modifications. For more information, see [Streaming Real-Time Chat Messages into ScyllaDB with Apache Pulsar](https://www.scylladb.com/2022/04/25/streaming-real-time-chat-messages-into-scylladb-with-apache-pulsar/).
 
 :::
 
-### Set up a Cassandra cluster
+### Set up a Cassandra or ScyllaDB cluster
 
-This example uses `cassandra` Docker image to start a single-node Cassandra cluster in Docker.
+This example uses `cassandra` Docker image to start a single-node Cassandra cluster in Docker. Alternatively, you can use ScyllaDB as shown below.
+
+#### Option A: Using Cassandra
 
 1. Start a Cassandra cluster.
 
@@ -186,11 +189,66 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
    cqlsh:pulsar_test_keyspace> CREATE TABLE pulsar_test_table (key text PRIMARY KEY, col text);
    ```
 
+#### Option B: Using ScyllaDB
+
+1. Start a ScyllaDB cluster.
+
+   ```bash
+   docker run -d --rm --name=scylladb -p 9042:9042 \
+       scylladb/scylla:latest \
+       --smp 1 --memory 750M --overprovisioned 1
+   ```
+
+   :::note
+
+   ScyllaDB requires specific flags when running in containers. The flags above configure it for single-core operation with limited resources.
+
+   :::
+
+2. Make sure the Docker process is running.
+
+   ```bash
+   docker ps
+   ```
+
+3. Check the ScyllaDB logs to make sure the ScyllaDB process is running as expected.
+
+   ```bash
+   docker logs scylladb
+   ```
+
+   Wait for ScyllaDB to be ready (this may take 30-60 seconds). Look for messages indicating the database is ready to accept CQL connections.
+
+4. Check the status of the ScyllaDB cluster.
+
+   ```bash
+   docker exec scylladb nodetool status
+   ```
+
+5. Use `cqlsh` to connect to the ScyllaDB cluster.
+
+   ```bash
+   docker exec -ti scylladb cqlsh
+   ```
+
+6. Create a keyspace `pulsar_test_keyspace`.
+
+   ```bash
+   cqlsh> CREATE KEYSPACE pulsar_test_keyspace WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
+   ```
+
+7. Create a table `pulsar_test_table`.
+
+   ```bash
+   cqlsh> USE pulsar_test_keyspace;
+   cqlsh:pulsar_test_keyspace> CREATE TABLE pulsar_test_table (key text PRIMARY KEY, col text);
+   ```
+
 ### Configure a Cassandra sink
 
-Now that we have a Cassandra cluster running locally.
+Now that we have a Cassandra or ScyllaDB cluster running locally.
 
-In this section, you need to configure a Cassandra sink connector.
+In this section, you need to configure a Cassandra sink connector. The same connector works for both Cassandra and ScyllaDB.
 
 To run a Cassandra sink connector, you need to prepare a configuration file including the information that Pulsar connector runtime needs to know.
 
@@ -220,6 +278,12 @@ You can create a configuration file through one of the following methods.
       keyname: "key"
       columnName: "col"
   ```
+
+:::note
+
+For ScyllaDB, the configuration is identical. If you used a different container name or hostname, update the `roots` parameter accordingly (e.g., `"scylladb:9042"` if connecting from within a Docker network).
+
+:::
 
 For more information, see [Cassandra sink connector](io-cassandra-sink.md).
 
