@@ -10,7 +10,13 @@ You can download all the Pulsar connectors on [download page](pathname:///downlo
 
 :::
 
-The Cassandra sink connector pulls messages from Pulsar topics to Cassandra clusters.
+The Cassandra sink connector pulls messages from Pulsar topics to Cassandra or ScyllaDB clusters.
+
+## ScyllaDB Compatibility
+
+The Cassandra sink connector is fully compatible with [ScyllaDB](https://www.scylladb.com/). ScyllaDB is a drop-in replacement for Cassandra that maintains full CQL protocol compatibility. You can use the same `pulsar-io-cassandra` connector with both Apache Cassandra and ScyllaDB without any modifications.
+
+The configuration is identical for both databases. For more information about using Pulsar with ScyllaDB, see [Streaming Real-Time Chat Messages into ScyllaDB with Apache Pulsar](https://www.scylladb.com/2022/04/25/streaming-real-time-chat-messages-into-scylladb-with-apache-pulsar/).
 
 ## Configuration
 
@@ -57,4 +63,4 @@ Before using the Cassandra sink connector, you need to create a configuration fi
 
 ## Usage
 
-For more information about **how to connect Pulsar with Cassandra**, see [here](io-quickstart.md#connect-pulsar-to-cassandra).
+For more information about **how to connect Pulsar with Cassandra and ScyllaDB**, see [here](io-quickstart.md#connect-pulsar-to-cassandra-and-scylladb).
