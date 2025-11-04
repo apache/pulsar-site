@@ -236,6 +236,9 @@ The following table outlines the parameters of the `client_credentials` authenti
 | `privateKey` | The URL to the JSON credentials file.  | Support the following pattern formats: <br /> <li> `file:///path/to/file` </li><li>`file:/path/to/file` </li><li> `data:application/json;base64,<base64-encoded value>` </li>| Required |
 | `audience`  | The OAuth 2.0 "resource server" identifier for a Pulsar cluster. | `https://broker.example.com` | Optional |
 | `scope` |  The scope of an access request. <br />For more information, see [access token scope](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3). | api://pulsar-cluster-1/.default | Optional |
+| `connectTimeout` | The connection timeout in milliseconds. Default value: 10s. Only implemented in java client. | 10000 | Optional |
+| `readTimeout` | The read timeout in milliseconds. Only implemented in java client. Default value: 30s. | 30000 | Optional |
+| `trustCertsFilePath` | The path to the file containing the trusted certificate(s) of the token issuer. If not set, uses the default trust store of the JVM. Only implemented in java client. | /path/to/file | Optional |
 
 The credentials file `credentials_file.json` contains the service account credentials used with the client authentication type. The following is an example of the credentials file. The authentication type is set to `client_credentials` by default. And the fields "client_id" and "client_secret" are required.
 
