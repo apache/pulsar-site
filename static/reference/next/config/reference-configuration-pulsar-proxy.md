@@ -699,6 +699,78 @@ Max concurrent lookup requests. The proxy will reject requests beyond that
 
 **Category**: RateLimiting
 
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
 ### kinitCommand
 kerberos kinit command.
 
