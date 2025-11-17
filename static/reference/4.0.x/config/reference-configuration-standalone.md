@@ -1060,6 +1060,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 
 **Category**: Load Balancer
 
+### loadBalancerServiceUnitStateMaxConcurrentOverrides
+Specify the maximum number of concurrent orphan bundle ownership overrides. The leader broker triggers these overrides upon detecting orphaned bundles. It identifies orphan bundle ownerships by periodically scanning ownership data and monitoring for broker shutdowns or inactive states.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadBalancerServiceUnitStateMonitorIntervalInSeconds
 Interval between service unit state monitor checks. The service unit(bundle) state channel is periodically monitored by the leader broker at this interval to fix any orphan bundle ownerships, stuck in-flight states, and other cleanup jobs.`loadBalancerServiceUnitStateTombstoneDelayTimeInSeconds` * 1000 must be bigger than `loadBalancerInFlightServiceUnitStateWaitingTimeInMillis`.(only used in load balancer extension logics)
 
@@ -1710,8 +1721,10 @@ If this time interval is exceeded, a snapshot will be taken.It will run simultan
 
 ### brokerDeleteInactivePartitionedTopicMetadataEnabled
 Metadata of inactive partitioned topic will not be automatically cleaned up by default.
-Note: If `allowAutoTopicCreation` and this option are enabled at the same time,
+Note 1: If `allowAutoTopicCreation` and this option are enabled at the same time,
 it may appear that a partitioned topic has just been deleted but is automatically created as a non-partitioned topic.
+Note 2: Activating bidirectional geo-replication under global ZooKeeper configuration may lead to schema remnants and abnormal topic-level policies.
+Note 3: Activating bidirectional geo-replication under global configuration ZooKeeper may lead to a consumption issue.
 
 **Type**: `boolean`
 
@@ -2168,6 +2181,72 @@ Whether to enable precise time based backlog quota check. Enabling precise time 
 
 **Category**: Policies
 
+### pulsarChannelPauseReceivingCooldownMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a time window to avoid overwhelming due to the backlog of requests. This parameter defines how long the rate limiting should last, in millis. Once the bytes that are waiting to be sent out reach the "pulsarChannelWriteBufferHighWaterMark"， the timer will be reset. Setting a negative value will disable the rate limiting.
+
+**Type**: `int`
+
+**Default**: `5000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPeriodMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time defined by pulsarChannelPauseReceivingCooldownMs to avoid overwhelming due to the backlog of requests. This parameter defines the period of the rate limiter in milliseconds. If the rate limit period is set to 1000, then the unit is requests per 1000 milliseconds. When it's 10, the unit is requests per every 10ms.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPermits
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time to avoid overwhelming due to the backlog of requests. This parameter defines how many requests should be allowed in the rate limiting period.
+
+**Type**: `int`
+
+**Default**: `5`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingRequestsIfUnwritable
+If enabled, the broker will pause reading from the channel to deal with new request once the writer buffer is full, until it is changed to writable.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferHighWaterMark
+It relates to configuration "WriteBufferHighWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer exceeds this value, channel writable state will start to return "false".
+
+**Type**: `int`
+
+**Default**: `65536`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferLowWaterMark
+It relates to configuration "WriteBufferLowWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer is smaller than this value, channel writable state will start to return "true".
+
+**Type**: `int`
+
+**Default**: `32768`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### resourceUsageTransportClassName
 Default policy for publishing usage reports to system topic is disabled.This enables publishing of usage reports
 
@@ -2180,7 +2259,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
@@ -2681,17 +2760,6 @@ Whether allow topic level entry filters policies overrides broker configuration.
 **Default**: `false`
 
 **Dynamic**: `true`
-
-**Category**: Server
-
-### autoShrinkForConsumerPendingAcksMap
-Whether to enable the automatic shrink of pendingAcks map, the default is false, which means it is not enabled. When there are a large number of share or key share consumers in the cluster, it can be enabled to reduce the memory consumption caused by pendingAcks.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
 
 **Category**: Server
 
@@ -3652,17 +3720,6 @@ The maximum number of tenants that each pulsar cluster can create.This configura
 
 **Category**: Server
 
-### messagePublishBufferCheckIntervalInMillis
-Interval between checks to see if message publish buffer size is exceed the max message publish buffer size
-
-**Type**: `int`
-
-**Default**: `100`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### metadataStoreAllowReadOnlyOperations
 Is metadata store read-only operations.
 
@@ -3866,17 +3923,6 @@ Precise dispatcher flow control according to history message number of each entr
 
 **Category**: Server
 
-### preciseTopicPublishRateLimiterEnable
-Enable precise rate limit for topic publish
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### preferLaterVersions
 If true, (and ModularLoadManagerImpl is being used), the load manager will attempt to use only brokers running the latest software version (to minimize impact to bundles)
 
@@ -4005,6 +4051,17 @@ Enable or disable strict bookie affinity.
 
 **Category**: Server
 
+### strictlyVerifySubscriptionName
+If 'strictSubscriptionNameVerification' is true, the new subscription name can only contain (a-zA-Z_0-9) and these special chars -=:.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### systemTopicEnabled
 Enable or disable system topic.
 
@@ -4078,6 +4135,21 @@ The class name of the topic policies service. The default config only takes affe
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicsPatternRegexImplementation
+The regular expression implementation to use for topic pattern matching. 
+RE2J_WITH_JDK_FALLBACK is the default. It uses the RE2J implementation and falls back to the JDK implementation for backwards compatibility reasons when the pattern compilation fails with the RE2/j library.
+RE2J is more performant but does not support all regex features (e.g. negative lookaheads). 
+JDK uses the standard Java regex implementation which supports all features but can be slower.
+Bad or malicious regex patterns requiring extensive backtracing could cause high resource usage with RE2J_WITH_JDK_FALLBACK or JDK implementations.
+
+**Type**: `org.apache.pulsar.common.topics.TopicsPattern.RegexImplementation`
+
+**Default**: `RE2J_WITH_JDK_FALLBACK`
 
 **Dynamic**: `false`
 
@@ -4758,6 +4830,17 @@ Maximum prefetch rounds for ledger reading for offloading
 
 **Category**: Storage (Ledger Offloading)
 
+### managedLedgerOffloadReadThreads
+Maximum number of thread pool threads for offloaded ledger reading
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
 ### managedLedgerOffloadThresholdInSeconds
 The threshold to triggering automatic offload to long term storage
 
@@ -4770,7 +4853,9 @@ The threshold to triggering automatic offload to long term storage
 **Category**: Storage (Ledger Offloading)
 
 ### managedLedgerUnackedRangesOpenCacheSetEnabled
-Use Open Range-Set to cache unacked messages (it is memory efficient but it can take more cpu)
+When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
+
+RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
 
 **Type**: `boolean`
 
@@ -5142,6 +5227,17 @@ Time to rollover ledger for inactive topic (duration without any publish on that
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerInactiveOffloadedLedgerEvictionTimeSeconds
+Time to evict inactive offloaded ledger for inactive topic. Disable eviction with value 0 (Default value 600)
+
+**Type**: `int`
+
+**Default**: `600`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerInfoCompressionThresholdInBytes
 ManagedLedgerInfo compression size threshold (bytes), only compress metadata when origin size more then this value.
 0 means compression will always apply.
@@ -5186,6 +5282,19 @@ Maximum backlog entry difference to prevent caching entries that can't be reused
 **Default**: `1000`
 
 **Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxBatchDeletedIndexToPersist
+Maximum number of partially acknowledged batch messages per subscription that will have their batch deleted indexes persisted. Batch deleted index state is handled when acknowledgmentAtBatchIndexLevelEnabled=true.
+
+When this limit is exceeded, remaining batch message containing the batch deleted indexes will only be tracked in memory. In case of broker restarts or load balancing events, the batch deleted indexes will be cleared while redelivering the messages to consumers.
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5388,7 +5497,9 @@ Default is ``.
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerPersistIndividualAckAsLongArray
-Whether persist cursor ack stats as long arrays, which will compress the data and reduce GC rate
+When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
+
+NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
 
 **Type**: `boolean`
 
