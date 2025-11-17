@@ -699,6 +699,78 @@ Max concurrent lookup requests. The proxy will reject requests beyond that
 
 **Category**: RateLimiting
 
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
 ### kinitCommand
 kerberos kinit command.
 
@@ -752,6 +824,17 @@ Hostname or IP address the service advertises to the outside world. If not set, 
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### authenticationRoleLoggingAnonymizer
+Defines how the broker will anonymize the role and originalAuthRole before logging. Possible values are: NONE (no anonymization), REDACTED (replaces with '[REDACTED]'), hash:SHA256 (hashes using SHA-256), and hash:MD5 (hashes using MD5). Default is NONE.
+
+**Type**: `java.lang.String`
+
+**Default**: `NONE`
 
 **Dynamic**: `false`
 
@@ -883,7 +966,7 @@ The directory where nar Extraction happens
 
 **Type**: `java.lang.String`
 
-**Default**: `/var/folders/xg/zwh2z0wx2zv294w3ys09f0q80000gn/T/`
+**Default**: `/var/folders/gt/xywq0qwd4cvdqfhy7t7js7b00000gn/T/`
 
 **Dynamic**: `false`
 
