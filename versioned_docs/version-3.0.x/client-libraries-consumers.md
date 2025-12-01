@@ -24,7 +24,7 @@ To better describe their differences, assume you have a topic named "my-topic", 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -46,6 +46,24 @@ producer.newMessage().key("key-4").value("message-4-2").send();
 ```
 
   </TabItem>
+  <TabItem value="Python">
+
+```python
+producer = client.create_producer('my-topic', batching_enabled=False)
+# 3 messages with "key-1", 3 messages with "key-2", 2 messages with "key-3" and 2 messages with "key-4"
+producer.send(b'message-1-1', partition_key='key-1')
+producer.send(b'message-1-2', partition_key='key-1')
+producer.send(b'message-1-3', partition_key='key-1')
+producer.send(b'message-2-1', partition_key='key-2')
+producer.send(b'message-2-2', partition_key='key-2')
+producer.send(b'message-2-3', partition_key='key-2')
+producer.send(b'message-3-1', partition_key='key-3')
+producer.send(b'message-3-2', partition_key='key-3')
+producer.send(b'message-4-1', partition_key='key-4')
+producer.send(b'message-4-2', partition_key='key-4')
+```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -56,7 +74,7 @@ Create a new consumer and subscribe with the `Exclusive` subscription type.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -65,6 +83,14 @@ Consumer consumer = client.newConsumer()
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Exclusive)
         .subscribe()
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+consumer = client.subscribe('my-topic', 'my-subscription',
+                             consumer_type=pulsar.ConsumerType.Exclusive)
 ```
 
   </TabItem>
@@ -86,7 +112,7 @@ Create new consumers and subscribe with the `Failover` subscription type.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -102,6 +128,16 @@ Consumer consumer2 = client.newConsumer()
         .subscribe()
 //conumser1 is the active consumer, consumer2 is the standby consumer.
 //consumer1 receives 5 messages and then crashes, consumer2 takes over as an  active consumer.
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+consumer1 = client.subscribe('my-topic', 'my-subscription',
+                              consumer_type=pulsar.ConsumerType.Failover)
+consumer2 = client.subscribe('my-topic', 'my-subscription',
+                              consumer_type=pulsar.ConsumerType.Failover)
 ```
 
   </TabItem>
@@ -143,7 +179,7 @@ Create new consumers and subscribe with `Shared` subscription type.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -159,6 +195,16 @@ Consumer consumer2 = client.newConsumer()
         .subscriptionType(SubscriptionType.Shared)
         .subscribe()
 //Both consumer1 and consumer2 are active consumers.
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+consumer1 = client.subscribe('my-topic', 'my-subscription',
+                              consumer_type=pulsar.ConsumerType.Shared)
+consumer2 = client.subscribe('my-topic', 'my-subscription',
+                              consumer_type=pulsar.ConsumerType.Shared)
 ```
 
   </TabItem>
@@ -196,7 +242,7 @@ This is a new subscription type since 2.4.0 release. Create new consumers and su
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -212,6 +258,16 @@ Consumer consumer2 = client.newConsumer()
         .subscriptionType(SubscriptionType.Key_Shared)
         .subscribe()
 //Both consumer1 and consumer2 are active consumers.
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+consumer1 = client.subscribe('my-topic', 'my-subscription',
+                              consumer_type=pulsar.ConsumerType.KeyShared)
+consumer2 = client.subscribe('my-topic', 'my-subscription',
+                              consumer_type=pulsar.ConsumerType.KeyShared)
 ```
 
   </TabItem>
@@ -245,7 +301,7 @@ If batching is enabled at the producer side, messages with different keys are ad
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -253,6 +309,14 @@ Producer producer = client.newProducer()
         .topic("my-topic")
         .batcherBuilder(BatcherBuilder.KEY_BASED)
         .create();
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+producer = client.create_producer('my-topic',
+                                   batching_type=pulsar.BatchingType.KeyBased)
 ```
 
   </TabItem>
@@ -264,7 +328,7 @@ Or the producer can disable batching.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -272,6 +336,13 @@ Producer producer = client.newProducer()
         .topic("my-topic")
         .enableBatching(false)
         .create();
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+producer = client.create_producer('my-topic', batching_enabled=False)
 ```
 
   </TabItem>
@@ -429,7 +500,7 @@ This example shows how a consumer unsubscribes from a topic.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -442,6 +513,14 @@ This example shows how a consumer unsubscribes from a topic.
 
    ```csharp
    await consumer.Unsubscribe();
+   ```
+
+  </TabItem>
+
+<TabItem value="Python">
+
+   ```python
+   consumer.unsubscribe()
    ```
 
   </TabItem>
@@ -461,7 +540,7 @@ This example shows how a consumer receives messages from a topic.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}, {"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"}, {"label":"C#","value":"C#"}, {"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -480,6 +559,14 @@ This example shows how a consumer receives messages from a topic.
    ```
 
  </TabItem>
+
+<TabItem value="Python">
+
+   ```python
+   msg = consumer.receive()
+   ```
+
+ </TabItem>
 </Tabs>
 ````
 
@@ -488,7 +575,7 @@ This example shows how a consumer receives messages from a topic.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}, {"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"}, {"label":"Go","value":"Go"}, {"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -533,6 +620,18 @@ This example shows how a consumer receives messages from a topic.
    ```
 
   </TabItem>
+
+  <TabItem value="Python">
+
+   ```python
+   # Receive with 10 second timeout (timeout in milliseconds)
+   try:
+       msg = consumer.receive(timeout_millis=10000)
+   except Exception:
+       print("No message received within timeout period")
+   ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -545,7 +644,7 @@ The following is an example.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -553,6 +652,22 @@ The following is an example.
    ```
 
    Async receive operations return a [Message](/api/client/org/apache/pulsar/client/api/Message) wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+
+ </TabItem>
+ <TabItem value="Python">
+
+   ```python
+   import asyncio
+
+   async def receive_messages():
+       msg = await consumer.receive_async()
+       return msg
+
+   # Use in async context
+   msg = asyncio.run(receive_messages())
+   ```
+
+   Async receive operations in Python use asyncio and return a coroutine that resolves to a Message.
 
  </TabItem>
 </Tabs>
@@ -567,7 +682,7 @@ The following is an example.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -575,6 +690,17 @@ Messages messages = consumer.batchReceive();
 for (Object message : messages) {
   // do something
 }
+consumer.acknowledge(messages)
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+messages = consumer.batch_receive()
+for msg in messages:
+    # do something
+    pass
 consumer.acknowledge(messages)
 ```
 
@@ -620,7 +746,7 @@ Messages can be acknowledged individually or cumulatively. For details about mes
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
   ```java
@@ -636,6 +762,13 @@ Messages can be acknowledged individually or cumulatively. For details about mes
   ```
 
   </TabItem>
+  <TabItem value="Python">
+
+  ```python
+  consumer.acknowledge(msg)
+  ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -644,7 +777,7 @@ Messages can be acknowledged individually or cumulatively. For details about mes
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C#","value":"C#"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
   ```java
@@ -659,6 +792,13 @@ Messages can be acknowledged individually or cumulatively. For details about mes
   ```
 
   </TabItem>
+  <TabItem value="Python">
+
+  ```python
+  consumer.acknowledge_cumulative(msg)
+  ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -669,7 +809,7 @@ The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can achie
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -684,6 +824,17 @@ Consumer consumer =  client.newConsumer()
 ```
 
   </TabItem>
+  <TabItem value="Python">
+
+```python
+consumer = client.subscribe(
+    'my-topic',
+    'my-subscription',
+    negative_ack_redelivery_delay_ms=1000
+)
+```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -694,7 +845,7 @@ The `RedeliveryBackoff` introduces a redelivery backoff mechanism. You can redel
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -708,6 +859,17 @@ Consumer consumer =  client.newConsumer()
                 .multiplier(2)
                 .build())
         .subscribe();
+```
+
+  </TabItem>
+  <TabItem value="Python">
+
+```python
+consumer = client.subscribe(
+    'my-topic',
+    'my-subscription',
+    unacked_messages_timeout_ms=10000
+)
 ```
 
   </TabItem>
@@ -792,7 +954,7 @@ You can avoid running a loop by blocking calls with an event-based style by usin
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 ```java
@@ -909,6 +1071,29 @@ func main() {
         consumer.Ack(msg)
     }
 }
+```
+
+  </TabItem>
+
+  <TabItem value="Python">
+
+```python
+def my_listener(consumer, message):
+    try:
+        print("Received message: '{}' id='{}'".format(
+            message.data(),
+            message.message_id()
+        ))
+        consumer.acknowledge(message)
+    except Exception as e:
+        consumer.negative_acknowledge(message)
+        print("Error processing message:", e)
+
+consumer = client.subscribe(
+    'persistent://my-property/my-ns/my-topic',
+    'my-subscription',
+    message_listener=my_listener
+)
 ```
 
   </TabItem>
