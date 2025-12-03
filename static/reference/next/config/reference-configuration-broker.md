@@ -1016,6 +1016,17 @@ Option to override the auto-detected network interfaces max speed
 
 **Category**: Load Balancer
 
+### loadBalancerOverrideBrokerNics
+Option to override the auto-detected network interfaces
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerReportUpdateMaxIntervalMinutes
 Min delay of load report to collect, in minutes
 
