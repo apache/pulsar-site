@@ -549,7 +549,7 @@ module.exports = async function createConfigAsync() {
         'data-project-name': 'Apache Pulsar',
         'data-project-logo': 'https://pbs.twimg.com/profile_images/875130220474359809/wFcLUbwd_400x400.jpg',
         'data-project-color': '#FFFFFF',
-        'data-modal-open-by-default': 'true',
+        'data-modal-open-by-default': 'false',
         'data-bot-protection-mechanism': 'hcaptcha',
         'data-modal-override-open-id': 'ask-ai-input',
         'data-modal-override-open-class': 'search-input',
