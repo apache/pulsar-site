@@ -540,6 +540,28 @@ module.exports = async function createConfigAsync() {
     scripts: [
       { src: "/js/sine-waves.min.js", async: true },
       "/js/matomo-agent.js",
+      '/js/custom-script.js',
+      {
+        async: true,
+        src: 'https://widget.kapa.ai/kapa-widget.bundle.js',
+        'data-website-id': '7da3a42b-98f7-4af5-85e9-771d51c21796',
+        'data-modal-title': 'Apache Pulsar AI Assistant',
+        'data-project-name': 'Apache Pulsar',
+        'data-project-logo': 'https://pbs.twimg.com/profile_images/875130220474359809/wFcLUbwd_400x400.jpg',
+        'data-project-color': '#FFFFFF',
+        'data-modal-open-by-default': 'true',
+        'data-bot-protection-mechanism': 'hcaptcha',
+        'data-modal-override-open-id': 'ask-ai-input',
+        'data-modal-override-open-class': 'search-input',
+        'data-user-analytics-fingerprint-enabled': 'true',
+        'data-button-text-color': '#136EC4',
+        'data-modal-example-questions-title': 'Try asking me...',
+        'data-modal-example-questions': 'How to create a topic?,How does message retention work?,What is a Pulsar broker?,How does geo-replication work?',
+        'data-modal-disclaimer': 'This is a custom LLM with access to all Pulsar documentation.',
+        'data-consent-required': true,
+        'data-consent-screen-disclaimer': "By clicking &quot;I agree, let's chat&quot;, you consent to the use of the AI assistant in accordance with kapa.ai's Privacy Policy. This service uses reCAPTCHA, which requires your consent to Google Privacy Policy and Terms of Service.",
+        'data-user-analytics-cookie-enabled': false,
+      }
     ],
     clientModules: [require.resolve("./matomoClientModule.ts")],
     stylesheets: [
