@@ -31,6 +31,10 @@ You can use a Pulsar C++ client to create Pulsar [producers](concepts-clients.md
 - [Supported schema types](https://github.com/apache/pulsar-client-cpp/blob/main/include/pulsar/Schema.h)
 - [Client feature matrix](/client-feature-matrix/)
 
+## Changes for 4.0.0 and later versions
+
+C++17 is now required for 4.0.0 and later versions.
+
 ## Changes for 3.0.0 and later versions
 
 The new version of the Pulsar C++ client starts from 3.0.0 and has been no longer consistent with Pulsar since 2.10.x. For the latest releases, see the [Download](/download/) page.
@@ -52,11 +56,11 @@ Here is an example to link these libraries for a C++ source file named `main.cc`
 
 ```bash
 # Link to libpulsar.so
-g++ -std=c++11 main.cc -lpulsar
+g++ -std=c++17 main.cc -lpulsar
 # Link to libpulsarwithdeps.a
-g++ -std=c++11 main.cc /usr/lib/libpulsarwithdeps.a -lpthread -ldl
+g++ -std=c++17 main.cc /usr/lib/libpulsarwithdeps.a -lpthread -ldl
 # Link to libpulsar.a
-g++ -std=c++11 main.cc /usr/lib/libpulsar.a \
+g++ -std=c++17 main.cc /usr/lib/libpulsar.a \
   -lprotobuf -lcurl -lssl -lcrypto -lz -lzstd -lsnappy -lpthread -ldl
 ```
 
