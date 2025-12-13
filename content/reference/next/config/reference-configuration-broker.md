@@ -4066,7 +4066,7 @@ Max number of snapshot to be cached per subscription.
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `30`
 
 **Dynamic**: `false`
 
