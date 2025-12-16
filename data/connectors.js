@@ -178,11 +178,5 @@ module.exports = [
     longName: 'Test Data Generator source',
     type: 'Source',
     link: 'https://github.com/apache/pulsar/tree/master/pulsar-io/data-generator'
-  },
-  {
-    name: 'twitter',
-    longName: 'Twitter Firehose source',
-    type: 'Source',
-    link: 'https://developer.twitter.com/en/docs'
   }
 ]
