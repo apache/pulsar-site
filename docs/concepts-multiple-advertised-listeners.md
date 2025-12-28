@@ -80,7 +80,7 @@ internalListenerName=internal
 To make this work:
 
 1. If you are using DNS names, register a unique name for each broker instance (for example, `external-broker-1.example.com`, `external-broker-2.example.com`, etc.).
-2. Configure your network gateway or firewall to handle proxying or NAT for each broker instance so that the external IP and port are proxied to the internal IP and external listener port.
+2. Configure your network gateway or firewall to handle proxying or NAT for each broker instance so that the external IP and port are proxied to the internal IP and external listener port. The port client connected must equal to external listener port.
 3. Add a load balancer that proxies to any healthy available broker on the external listener port.
 
 ## Client configuration
@@ -100,7 +100,8 @@ PulsarClient internalSecureClient = PulsarClient.builder()
     .serviceUrl("pulsar+ssl://private-brokers.internal:6651")
     .build();
 
-// External client with SSL
+// External client with SSL.
+// Client -> external-brokers.example.com:6651 -> private-brokers.internal:16651
 PulsarClient externalClient = PulsarClient.builder()
     .serviceUrl("pulsar+ssl://external-brokers.example.com:6651")
     .build();
