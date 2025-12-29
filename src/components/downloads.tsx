@@ -2,6 +2,9 @@ import React from 'react'
 import pulsarReleases from '@site/releases.json'
 import connectors from '@site/data/connectors'
 import cppReleases from '@site/data/release-cpp'
+import goReleases from '@site/data/release-go'
+import nodeReleases from '@site/data/release-node'
+import pythonReleases from '@site/data/release-python'
 import pulsarManagerReleases from '@site/data/release-pulsar-manager'
 import pulsarAdaptersReleases from '@site/data/release-pulsar-adapters'
 import ReleaseTable from "@site/src/components/ReleaseTable";
@@ -176,7 +179,7 @@ export function CppReleasesDownloadTable(): JSX.Element {
         .filter(version => Number(version.split('.')[0]) >= 3)
         .map(version => {
             const url = `https://archive.apache.org/dist/pulsar/pulsar-client-cpp-${version}/`
-            const tarPath = `${url}/apache-pulsar-client-cpp-${version}.tar.gz`
+            const tarPath = `${url}apache-pulsar-client-cpp-${version}.tar.gz`
             return {
                 release: version,
                 link: url,
@@ -188,6 +191,66 @@ export function CppReleasesDownloadTable(): JSX.Element {
     return <div className="tailwind">
         <ReleaseTable data={data}></ReleaseTable>
     </div>
+}
+
+export function GoReleasesDownloadTable(): JSX.Element {
+  const data = goReleases
+    .map(item => item.tagName.substring(1))
+    .map(version => {
+      const url = `https://archive.apache.org/dist/pulsar/pulsar-client-go-${version}/`
+      const tarPath = `${url}apache-pulsar-client-go-${version}-src.tar.gz`
+      return {
+        release: version,
+        link: url,
+        linkText: `apache-pulsar-go-${version}`,
+        asc: `${tarPath}.asc`,
+        sha512: `${tarPath}.sha512`
+      }
+    })
+  return <div className="tailwind">
+    <ReleaseTable data={data}></ReleaseTable>
+  </div>
+}
+
+export function NodeReleasesDownloadTable(): JSX.Element {
+  const excludedVersions = ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.3.1", "1.4.0", "1.3.2", "1.6.2", "1.5.0", "1.4.1"];
+  const data = nodeReleases
+    .map(item => item.tagName.substring(1))
+    .filter(version => !excludedVersions.includes(version))
+    .map(version => {
+      const url = `https://archive.apache.org/dist/pulsar/pulsar-client-node/pulsar-client-node-${version}/`
+      const tarPath = `${url}apache-pulsar-client-node-${version}.tar.gz`
+      return {
+        release: version,
+        link: url,
+        linkText: `apache-pulsar-node-${version}`,
+        asc: `${tarPath}.asc`,
+        sha512: `${tarPath}.sha512`
+      }
+    })
+  return <div className="tailwind">
+    <ReleaseTable data={data}></ReleaseTable>
+  </div>
+}
+
+export function PythonReleasesDownloadTable(): JSX.Element {
+  const data = pythonReleases
+    .map(item => item.tagName.substring(1))
+    .filter(version => Number(version.split('.')[0]) >= 3)
+    .map(version => {
+      const url = `https://archive.apache.org/dist/pulsar/pulsar-client-python-${version}/`
+      const tarPath = `${url}pulsar-client-python-${version}.tar.gz`
+      return {
+        release: version,
+        link: url,
+        linkText: `apache-pulsar-python-${version}`,
+        asc: `${tarPath}.asc`,
+        sha512: `${tarPath}.sha512`
+      }
+    })
+  return <div className="tailwind">
+    <ReleaseTable data={data}></ReleaseTable>
+  </div>
 }
 
 export function CurrentPulsarAdaptersDownloadTable(): JSX.Element {
