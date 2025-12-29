@@ -2,6 +2,7 @@ import React from 'react'
 import pulsarReleases from '@site/releases.json'
 import connectors from '@site/data/connectors'
 import cppReleases from '@site/data/release-cpp'
+import goReleases from '@site/data/release-go'
 import pulsarManagerReleases from '@site/data/release-pulsar-manager'
 import pulsarAdaptersReleases from '@site/data/release-pulsar-adapters'
 import ReleaseTable from "@site/src/components/ReleaseTable";
@@ -188,6 +189,25 @@ export function CppReleasesDownloadTable(): JSX.Element {
     return <div className="tailwind">
         <ReleaseTable data={data}></ReleaseTable>
     </div>
+}
+
+export function GoReleasesDownloadTable(): JSX.Element {
+  const data = goReleases
+    .map(item => item.tagName.substring(1))
+    .map(version => {
+      const url = `https://archive.apache.org/dist/pulsar/pulsar-client-go-${version}/`
+      const tarPath = `${url}/apache-pulsar-client-go-${version}-src.tar.gz`
+      return {
+        release: version,
+        link: url,
+        linkText: `apache-pulsar-go-${version}`,
+        asc: `${tarPath}.asc`,
+        sha512: `${tarPath}.sha512`
+      }
+    })
+  return <div className="tailwind">
+    <ReleaseTable data={data}></ReleaseTable>
+  </div>
 }
 
 export function CurrentPulsarAdaptersDownloadTable(): JSX.Element {
