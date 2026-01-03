@@ -524,6 +524,28 @@ admin.topics().peekMessages(topic, subName, numMessages);
 
 </Tabs>
 ````
+### Peek messages with Offset
+
+You can also start to peek number of messages for a specific subscription of a given topic from a particular offset position in the following ways.
+
+````mdx-code-block
+<Tabs groupId="api-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+
+<TabItem value="Java">
+
+```java
+String topic = "persistent://my-tenant/my-namespace/my-topic";
+String subName = "my-subscription";
+int numMessages = 5;
+int offset = 10;
+admin.topics().peekMessages(topic, subName, offset, numMessages);
+```
+
+</TabItem>
+</Tabs>
+````
 
 ### Get message by ID
 
