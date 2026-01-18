@@ -55,7 +55,7 @@ git push -f HEAD:asf-site-next
 
 ## Contact information
 
-* For Pulsar bug reports or any improvements, submit [an issue](https://github.com/apache/pulsar/issues/new) to the main repository.
 * For documentation improvements, submit [an issue](https://github.com/apache/pulsar-site/issues/new) to the site repository.
+* For Pulsar bug reports or any improvements, submit [an issue](https://github.com/apache/pulsar/issues/new) to the main repository.
 * Subscribe to the [dev@pulsar.apache.org mailing list](https://pulsar.apache.org/contact/#mailing-lists) and start a discussion.
 * Ask on the [#dev channel on Pulsar Slack](https://apache-pulsar.slack.com/channels/dev) ([join](https://pulsar.apache.org/community#section-discussions))
