@@ -18,7 +18,7 @@ This example shows how to create a producer.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
 
   <TabItem value="Java">
 
@@ -38,6 +38,14 @@ Producer<String> producer = pulsarClient.newProducer(Schema.STRING)
   ```
 
   </TabItem>
+
+  <TabItem value="Python">
+
+  ```python
+  producer = client.create_producer('my-topic')
+  ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -48,7 +56,7 @@ This example shows how to send messages using producers.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
    ```java
@@ -175,6 +183,14 @@ await producer.Send(data);
 ```
 
   </TabItem>
+
+  <TabItem value="Python">
+
+  ```python
+  producer.send('Hello World'.encode('utf-8'))
+  ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -277,7 +293,7 @@ The following is an example:
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
   <TabItem value="Java">
 
    ```java
@@ -366,6 +382,17 @@ The following is an example:
         fmt.Printf("Received message msgId: %#v -- content: '%s'\n", msg.ID(), string(msg.Payload()))
         consumer.Ack(msg)
     }
+   ```
+
+  </TabItem>
+
+  <TabItem value="Python">
+
+   ```python
+    producer = client.create_producer(
+        'my-topic',
+        message_routing_mode=PartitionsRoutingMode.SinglePartition
+    )
    ```
 
   </TabItem>

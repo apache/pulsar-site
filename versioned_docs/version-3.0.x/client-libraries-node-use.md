@@ -1,6 +1,6 @@
 ---
 id: client-libraries-node-use
-title: Usee Node.js client
+title: Use Node.js client
 sidebar_label: "Use"
 ---
 

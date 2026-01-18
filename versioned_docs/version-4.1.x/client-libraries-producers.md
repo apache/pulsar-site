@@ -19,7 +19,7 @@ This example shows how to create a producer.
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
 
   <TabItem value="Java">
 
@@ -50,6 +50,14 @@ This example shows how to create a producer.
   ```
 
   </TabItem>
+
+  <TabItem value="Python">
+
+  ```python
+  producer = client.create_producer('my-topic')
+  ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -64,7 +72,7 @@ This example shows how to publish messages using producers. The publish operatio
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Node.js","value":"Node.js"},{"label":"C#","value":"C#"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
   Publish messages synchronously:
@@ -183,6 +191,14 @@ await producer.Send(data);
 ```
 
   </TabItem>
+
+  <TabItem value="Python">
+
+  ```python
+  producer.send('Hello World'.encode('utf-8'))
+  ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -193,7 +209,7 @@ You can set various properties of Pulsar's messages. The values of these propert
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"C#","value":"C#"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"C#","value":"C#"},{"label":"Python","value":"Python"}]}>
 
 <TabItem value="Java">
 
@@ -261,6 +277,16 @@ You can set various properties of Pulsar's messages. The values of these propert
   ```
 
 </TabItem>
+
+<TabItem value="Python">
+
+  ```python
+  producer.send('content'.encode('utf-8'),
+                properties={'my-key': 'my-value', 'my-other-key': 'my-other-value'},
+                event_timestamp=int(time.time() * 1000))
+  ```
+
+</TabItem>
 </Tabs>
 ````
 
@@ -279,7 +305,7 @@ The following is an example:
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
   <TabItem value="Java">
 
    ```java
@@ -320,6 +346,17 @@ The following is an example:
    ```
 
   </TabItem>
+
+  <TabItem value="Python">
+
+   ```python
+    producer = client.create_producer(
+        'my-topic',
+        message_routing_mode=PartitionsRoutingMode.SinglePartition
+    )
+   ```
+
+  </TabItem>
 </Tabs>
 ````
 
@@ -328,7 +365,7 @@ The following is an example:
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
-  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"}]}>
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
 To use a custom message router, you need to provide an implementation of the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
@@ -413,6 +450,23 @@ result = producer.send(msg);
             return 10
         },
     })
+   ```
+
+  </TabItem>
+
+  <TabItem value="Python">
+
+  In the Python client, you can configure a customized message router by passing a function.
+   ```python
+    def custom_message_router(msg: pulsar.Message, num_partitions: int):
+        # always push msg to partition 10
+        return 10
+
+    producer = client.create_producer(
+        'my-topic',
+        message_router=custom_message_router
+    )
+    producer.send(b'content')
    ```
 
   </TabItem>

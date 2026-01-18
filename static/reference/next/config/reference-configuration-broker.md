@@ -1016,6 +1016,17 @@ Option to override the auto-detected network interfaces max speed
 
 **Category**: Load Balancer
 
+### loadBalancerOverrideBrokerNics
+Option to override the auto-detected network interfaces
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerReportUpdateMaxIntervalMinutes
 Min delay of load report to collect, in minutes
 
@@ -2270,7 +2281,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
@@ -3753,6 +3764,78 @@ The maximum number of tenants that each pulsar cluster can create.This configura
 
 **Category**: Server
 
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreAllowReadOnlyOperations
 Is metadata store read-only operations.
 
@@ -3983,7 +4066,7 @@ Max number of snapshot to be cached per subscription.
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `30`
 
 **Dynamic**: `false`
 

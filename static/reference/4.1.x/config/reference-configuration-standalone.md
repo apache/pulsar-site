@@ -2192,6 +2192,72 @@ Whether to enable precise time based backlog quota check. Enabling precise time 
 
 **Category**: Policies
 
+### pulsarChannelPauseReceivingCooldownMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a time window to avoid overwhelming due to the backlog of requests. This parameter defines how long the rate limiting should last, in millis. Once the bytes that are waiting to be sent out reach the "pulsarChannelWriteBufferHighWaterMark"， the timer will be reset. Setting a negative value will disable the rate limiting.
+
+**Type**: `int`
+
+**Default**: `5000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPeriodMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time defined by pulsarChannelPauseReceivingCooldownMs to avoid overwhelming due to the backlog of requests. This parameter defines the period of the rate limiter in milliseconds. If the rate limit period is set to 1000, then the unit is requests per 1000 milliseconds. When it's 10, the unit is requests per every 10ms.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPermits
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time to avoid overwhelming due to the backlog of requests. This parameter defines how many requests should be allowed in the rate limiting period.
+
+**Type**: `int`
+
+**Default**: `5`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingRequestsIfUnwritable
+If enabled, the broker will pause reading from the channel to deal with new request once the writer buffer is full, until it is changed to writable.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferHighWaterMark
+It relates to configuration "WriteBufferHighWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer exceeds this value, channel writable state will start to return "false".
+
+**Type**: `int`
+
+**Default**: `65536`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferLowWaterMark
+It relates to configuration "WriteBufferLowWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer is smaller than this value, channel writable state will start to return "true".
+
+**Type**: `int`
+
+**Default**: `32768`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### resourceUsageTransportClassName
 Default policy for publishing usage reports to system topic is disabled.This enables publishing of usage reports
 
@@ -2204,7 +2270,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
@@ -2716,6 +2782,17 @@ Whether allow topic level entry filters policies overrides broker configuration.
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### authenticationRoleLoggingAnonymizer
+Defines how the broker will anonymize the role and originalAuthRole before logging. Possible values are: NONE (no anonymization), REDACTED (replaces with '[REDACTED]'), hash:SHA256 (hashes using SHA-256), and hash:MD5 (hashes using MD5). Default is NONE.
+
+**Type**: `java.lang.String`
+
+**Default**: `NONE`
+
+**Dynamic**: `false`
 
 **Category**: Server
 
@@ -3560,7 +3637,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `3959`
+**Default**: `4454`
 
 **Dynamic**: `true`
 
@@ -3673,6 +3750,78 @@ The maximum number of tenants that each pulsar cluster can create.This configura
 **Default**: `0`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
 
 **Category**: Server
 
@@ -4826,7 +4975,7 @@ The directory where nar Extraction of offloaders happens
 
 **Type**: `java.lang.String`
 
-**Default**: `/var/folders/xg/zwh2z0wx2zv294w3ys09f0q80000gn/T/`
+**Default**: `/var/folders/gt/xywq0qwd4cvdqfhy7t7js7b00000gn/T/`
 
 **Dynamic**: `false`
 
@@ -5090,7 +5239,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `1583`
+**Default**: `1781`
 
 **Dynamic**: `true`
 

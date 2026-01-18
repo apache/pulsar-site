@@ -394,6 +394,13 @@ TLS TrustStore type configuration. You need to set this configuration when clien
 
 **Default**: `JKS`
 
+### tracingEnabled
+Whether to enable OpenTelemetry distributed tracing. When enabled, tracing interceptors are automatically added to producers and consumers.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
 ### useKeyStoreTls
 Set TLS using KeyStore way.
 
