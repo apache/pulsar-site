@@ -273,7 +273,7 @@ module.exports = async function createConfigAsync() {
                   label: "Wiki",
                 },
                 {
-                  to: "https://github.com/apache/pulsar/issues",
+                  to: "https://github.com/apache/pulsar-site/issues",
                   label: "Issue Tracking",
                 },
               ],
