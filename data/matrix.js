@@ -1,6 +1,3 @@
-// Pulsar Client Feature Matrix - CORRECTED WITH C++ CLIENT SUPPORT
-// Updated based on code verification: C++ client supports most advanced features!
-
 module.exports = {
   languages: [
     {
