@@ -1,5 +1,5 @@
-// Pulsar Client Feature Matrix - UPDATED WITH MISSING JAVA FEATURES
-// Added missing Java client features discovered through code verification
+// Pulsar Client Feature Matrix - CORRECTED WITH C++ CLIENT SUPPORT
+// Updated based on code verification: C++ client supports most advanced features!
 
 module.exports = {
   languages: [
@@ -245,8 +245,8 @@ module.exports = {
     {
       Feature: "Interceptors",
       Java: 2,
-      "C++": 0,
-      Go: 0,
+      "C++": 2,
+      Go: 1,
       Python: 0,
       Nodejs: 0,
       Rust: 0,
@@ -259,8 +259,8 @@ module.exports = {
     {
       Feature: "Memory Limit Controller",
       Java: 2,
-      "C++": 0,
-      Go: 0,
+      "C++": 2,
+      Go: 2,
       Python: 0,
       Nodejs: 0,
       Rust: 0,
@@ -273,8 +273,8 @@ module.exports = {
     {
       Feature: "Auto-update Partitions",
       Java: 2,
-      "C++": 0,
-      Go: 0,
+      "C++": 2,
+      Go: 2,
       Python: 0,
       Nodejs: 0,
       Rust: 0,
@@ -554,10 +554,10 @@ module.exports = {
         {
           Feature: "Shared",
           Java: 2,
-          "C++": 0,
+          "C++": 2,
           Go: 0,
-          Python: 0,
-          Nodejs: 0,
+          Python: 2,
+          Nodejs: 2, // Verified: All 4 access modes
           Rust: 0,
           "C#/DotPulsar": 0,
           "DotPulsar": 0,
@@ -568,10 +568,10 @@ module.exports = {
         {
           Feature: "Exclusive",
           Java: 2,
-          "C++": 0,
+          "C++": 2,
           Go: 0,
-          Python: 0,
-          Nodejs: 0,
+          Python: 2,
+          Nodejs: 2, // Verified: All 4 access modes
           Rust: 0,
           "C#/DotPulsar": 0,
           "DotPulsar": 0,
@@ -582,10 +582,24 @@ module.exports = {
         {
           Feature: "WaitForExclusive",
           Java: 2,
-          "C++": 0,
+          "C++": 2,
           Go: 0,
-          Python: 0,
-          Nodejs: 0,
+          Python: 2,
+          Nodejs: 2, // Verified: All 4 access modes
+          Rust: 0,
+          "C#/DotPulsar": 0,
+          "DotPulsar": 0,
+          "NET(C#/F#/VB)": 0,
+          Websocket: 0,
+          REST: 0,
+        },
+        {
+          Feature: "ExclusiveWithFencing",
+          Java: 2,
+          "C++": 2,
+          Go: 0,
+          Python: 2,
+          Nodejs: 2, // Verified: All 4 access modes
           Rust: 0,
           "C#/DotPulsar": 0,
           "DotPulsar": 0,
@@ -598,7 +612,7 @@ module.exports = {
     {
       Feature: "Message Pooling",
       Java: 2,
-      "C++": 0,
+      "C++": 2,
       Go: 0,
       Python: 0,
       Nodejs: 0,
@@ -659,7 +673,7 @@ module.exports = {
         {
           Feature: "NACK Backoff",
           Java: 2,
-          "C++": 0,
+          "C++": 1,
           Go: 2,
           Python: 2,
           Nodejs: 2,
@@ -673,7 +687,7 @@ module.exports = {
         {
           Feature: "Redelivery Backoff",
           Java: 2,
-          "C++": 0,
+          "C++": 1,
           Go: 0,
           Python: 0,
           Nodejs: 0,
@@ -703,10 +717,10 @@ module.exports = {
     {
       Feature: "Batch Receive Policy",
       Java: 2,
-      "C++": 0,
+      "C++": 2,
       Go: 0,
-      Python: 0,
-      Nodejs: 0,
+      Python: 2,
+      Nodejs: 2,
       Rust: 0,
       "C#/DotPulsar": 0,
       "DotPulsar": 0,
@@ -806,7 +820,7 @@ module.exports = {
     {
       Feature: "Priority Level",
       Java: 2,
-      "C++": 0,
+      "C++": 2,
       Go: 0,
       Python: 0,
       Nodejs: 0,
@@ -823,10 +837,10 @@ module.exports = {
         {
           Feature: "Sticky",
           Java: 2,
-          "C++": 0,
+          "C++": 2,
           Go: 0,
-          Python: 0,
-          Nodejs: 0,
+          Python: 2,
+          Nodejs: 2,
           Rust: 0,
           "C#/DotPulsar": 0,
           "DotPulsar": 0,
@@ -837,10 +851,10 @@ module.exports = {
         {
           Feature: "Auto",
           Java: 2,
-          "C++": 0,
+          "C++": 2,
           Go: 0,
-          Python: 0,
-          Nodejs: 0,
+          Python: 2,
+          Nodejs: 2,
           Rust: 0,
           "C#/DotPulsar": 0,
           "DotPulsar": 0,
@@ -851,7 +865,7 @@ module.exports = {
         {
           Feature: "Hash Range",
           Java: 2,
-          "C++": 0,
+          "C++": 2,
           Go: 0,
           Python: 0,
           Nodejs: 0,
