@@ -3648,7 +3648,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `2000`
 
 **Dynamic**: `true`
 
@@ -3919,6 +3919,17 @@ Metadata store operation timeout in seconds.
 **Type**: `int`
 
 **Default**: `30`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### metadataStoreSerDesThreads
+The number of threads used for serializing and deserializing data to and from the metadata store
+
+**Type**: `int`
+
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5250,7 +5261,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `800`
 
 **Dynamic**: `true`
 
