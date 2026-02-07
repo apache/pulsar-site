@@ -129,6 +129,17 @@ TLS trusted certificate file for internal client, used by the internal client to
 
 **Category**: Authentication
 
+### strictAuthMethod
+Strictly enforce authentication method. If specified, Pulsar will only attempt to authenticate with the provided method. If no method is provided, authentication fails.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Authentication
+
 ### anonymousUserRole
 When this parameter is not empty, unauthenticated users perform as anonymousUserRole
 
@@ -332,6 +343,17 @@ Max HTTP requests per seconds allowed. The excess of requests will be rejected w
 **Type**: `double`
 
 **Default**: `100.0`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpServerIdleTimeout
+Idle timeout for HTTP server connections in milliseconds.
+
+**Type**: `int`
+
+**Default**: `30000`
 
 **Dynamic**: `false`
 
