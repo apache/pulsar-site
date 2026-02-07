@@ -292,6 +292,19 @@ The amount of data that will be buffered for http requests before it is flushed 
 
 **Category**: HTTP
 
+### httpProxyIdleTimeout
+Http proxy idle timeout.
+
+The idle timeout value for HTTP proxy is in millisecond.
+
+**Type**: `int`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpProxyTimeout
 Http proxy timeout.
 
@@ -333,6 +346,17 @@ Http directs to redirect to non-pulsar services
 **Type**: `java.util.Set`
 
 **Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpServerIdleTimeout
+Idle timeout for HTTP server connections in milliseconds.
+
+**Type**: `int`
+
+**Default**: `30000`
 
 **Dynamic**: `false`
 
