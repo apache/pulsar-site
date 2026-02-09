@@ -36,9 +36,8 @@ Before you start the next release steps, make sure you have installed these soft
     * Pulsar docker images are running Java 21 since 3.3.0
   * JDK 17 for Pulsar version >= 2.11
   * JDK 11 for earlier versions
-* Maven 3.9.11 (most recent stable Maven 3.9.x version)
-  * Install using `sdkman i maven 3.9.11`
-  * Important: Maven 3.9.12 has an issue in uploading artifacts to ASF Nexus staging repository.
+* Maven 3.9.12 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.12`
 * Zip
 
 Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
@@ -332,17 +331,6 @@ svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 Make sure to run only one release at a time when working on multiple releases in parallel. Running multiple builds simultaneously will result in all releases being placed into a single staging repository. Close [the staging repository](https://repository.apache.org/#stagingRepositories) before performing another release.
 :::
 
-:::caution
-Check your maven version before proceeding
-
-```shell
-mvn --version
-```
-
-Ensure that the maven version is 3.9.11. Maven version 3.9.12 has a problem that it creates multiple staging repositories when artifacts are uploaded to ASF staging repository.
-
-:::
-
 Set your ASF password in the following line. Add a space as the first character on the command line so that your password doesn't get recorded in shell history.
 
 ```shell
@@ -362,9 +350,9 @@ git status
 curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
 
 # publish artifacts
-command mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
+command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
 # publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
-command mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
+command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
 ```
 
 :::note
