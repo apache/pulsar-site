@@ -36,8 +36,9 @@ Before you start the next release steps, make sure you have installed these soft
     * Pulsar docker images are running Java 21 since 3.3.0
   * JDK 17 for Pulsar version >= 2.11
   * JDK 11 for earlier versions
-* Maven 3.9.9 (most recent stable Maven 3.9.x version)
-  * Install using `sdkman i maven 3.9.9`
+* Maven 3.9.11 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.11`
+  * Important: Maven 3.9.12 has an issue in uploading artifacts to ASF Nexus staging repository.
 * Zip
 
 Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
@@ -329,6 +330,17 @@ svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 
 :::caution
 Make sure to run only one release at a time when working on multiple releases in parallel. Running multiple builds simultaneously will result in all releases being placed into a single staging repository. Close [the staging repository](https://repository.apache.org/#stagingRepositories) before performing another release.
+:::
+
+:::caution
+Check your maven version before proceeding
+
+```shell
+mvn --version
+```
+
+Ensure that the maven version is 3.9.11. Maven version 3.9.12 has a problem that it creates multiple staging repositories when artifacts are uploaded to ASF staging repository.
+
 :::
 
 Set your ASF password in the following line. Add a space as the first character on the command line so that your password doesn't get recorded in shell history.
