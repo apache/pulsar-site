@@ -2016,7 +2016,18 @@ On Shared and KeyShared subscriptions, if all available messages in the subscrip
 **Category**: Policies
 
 ### enableBrokerSideSubscriptionPatternEvaluation
-Enables evaluating subscription pattern on broker side.
+Enables evaluating subscription pattern on broker side. Note: This config no longer controls watching topic list. Please use `enableBrokerTopicListWatcher` to control that behavior.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### enableBrokerTopicListWatcher
+Enables watching topic add/remove events on broker side for subscription pattern evaluation.
 
 **Type**: `boolean`
 
@@ -4080,6 +4091,17 @@ If true, (and ModularLoadManagerImpl is being used), the load manager will attem
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### pulsarResourcesExtendedClassName
+The class name of the PulsarResourcesExtended implementation. This class must implement org.apache.pulsar.broker.PulsarResourcesExtended.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.DefaultPulsarResourcesExtended`
+
+**Dynamic**: `false`
 
 **Category**: Server
 
