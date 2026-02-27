@@ -23502,6 +23502,213 @@
                 ]
             }
         },
+        "/non-persistent/{tenant}/{namespace}/{topic}/subscriptionExpirationTime": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_removeSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Remove subscription expiration time for a topic",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "PersistentTopics_getSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "applied",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    }
+                },
+                "summary": "Get subscription expiration time in minutes for a topic",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            },
+            "post": {
+                "description": "",
+                "operationId": "PersistentTopics_setSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Subscription expiration time in minutes",
+                        "format": "int32",
+                        "in": "query",
+                        "name": "subscriptionExpirationTime",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Set subscription expiration time in minutes for a topic",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            }
+        },
         "/non-persistent/{tenant}/{namespace}/{topic}/subscriptionTypesEnabled": {
             "delete": {
                 "description": "",
@@ -34011,6 +34218,213 @@
                     }
                 },
                 "summary": "Set subscription message dispatch rate configuration for specified topic.",
+                "tags": [
+                    "persistent topic"
+                ]
+            }
+        },
+        "/persistent/{tenant}/{namespace}/{topic}/subscriptionExpirationTime": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_removeSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Remove subscription expiration time for a topic",
+                "tags": [
+                    "persistent topic"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "PersistentTopics_getSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "applied",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    }
+                },
+                "summary": "Get subscription expiration time in minutes for a topic",
+                "tags": [
+                    "persistent topic"
+                ]
+            },
+            "post": {
+                "description": "",
+                "operationId": "PersistentTopics_setSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Subscription expiration time in minutes",
+                        "format": "int32",
+                        "in": "query",
+                        "name": "subscriptionExpirationTime",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Set subscription expiration time in minutes for a topic",
                 "tags": [
                     "persistent topic"
                 ]
