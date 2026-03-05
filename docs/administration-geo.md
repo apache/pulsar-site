@@ -221,19 +221,31 @@ bin/pulsar-admin topics stats persistent://my-tenant/my-namespace/my-topic
 
 Each cluster reports its own local stats, including the incoming and outgoing replication rates and backlogs.
 
-#### Delete a geo-replication topic
+#### Geo-replication topic deletion
 
-Given that geo-replication topics exist in multiple regions, directly deleting a geo-replication topic is not possible. Instead, you should rely on automatic topic garbage collection.
+**Topic deletion**
 
-In Pulsar, a topic is automatically deleted when the topic meets the following three conditions:
-- no producers or consumers are connected to it;
-- no subscriptions to it;
-- no more messages are kept for retention.
-For geo-replication topics, each region uses a fault-tolerant mechanism to decide when deleting the topic locally is safe.
+The recommended procedure for deleting a geo-replication topic from all clusters is:
 
-You can explicitly disable topic garbage collection by setting `brokerDeleteInactiveTopicsEnabled` to `false` in your [broker configuration](reference-configuration.md#broker).
+1. Ensure there are no active producers or consumers on the topic across all clusters before proceeding. If any are present when the next step is performed, the topic will be forcefully deleted from under them. If auto-topic creation is also enabled, the topic may be immediately recreated.
+2. Set a global topic-level `clusters` policy to include only the local cluster. This triggers the cascading deletion mechanism to remove the topic's sub-topics and clean up schemas and local topic policies on all excluded clusters. Producers and consumers connected to an excluded cluster will be rejected from reconnecting. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+3. Delete the topic. Geo-replication is now disabled, so the deletion only affects the local cluster.
+4. Run `pulsar-admin topicPolicies delete <topic>` on each cluster to remove the remaining topic-level policy state.
 
-To delete a geo-replication topic, close all producers and consumers on the topic, and delete all of its local subscriptions in every replication cluster. When Pulsar determines that no valid subscription for the topic remains across the system, it will garbage collect the topic.
+Without this procedure, forcefully deleting a topic on one cluster leaves it orphaned — it still exists on peer clusters and geo-replication from those clusters remains active. If auto-topic creation is enabled on the cluster where the topic was deleted, the topic may be recreated through auto-creation or because `createTopicToRemoteClusterForReplication=true` is set on a peer cluster.
+
+When namespace or topic configuration is shared via a shared configuration store or synchronized via `configurationMetadataSyncEventTopic`, forcefully deleting a topic propagates the deletion to all clusters that share or receive the configuration. However, replication delays may cause the topic to be recreated before the deletion takes effect everywhere. For this reason, it is recommended to follow the procedure above.
+
+To remove a topic from a specific cluster only, set a global topic-level `clusters` policy that excludes that cluster. The broker automatically deletes the topic's sub-topics on the excluded cluster. Do not remove the global topic-level policy afterward, as this would allow the namespace-level `clusters` policy to take effect and potentially re-enable replication. To later delete the topic from all clusters, follow the full procedure above.
+
+**Garbage collection**
+
+A geo-replication topic is also automatically deleted by garbage collection when `brokerDeleteInactiveTopicsEnabled=true` and no producers or consumers are connected to it. The additional conditions depend on the `brokerDeleteInactiveTopicsMode` setting:
+
+- `delete_when_no_subscriptions`: the topic is deleted when there are no subscriptions.
+- `delete_when_subscriptions_caught_up`: the topic is deleted when all subscriptions have caught up and there is no backlog.
+
+Each region independently decides when it is safe to delete the topic locally. To trigger garbage collection, close all producers and consumers on the topic and delete all local subscriptions in every replication cluster. When Pulsar determines that no valid subscription remains across the system, it garbage collects the topic.
 
 ## Cascading topic deletions when modifying the replication clusters configuration
 
@@ -250,7 +262,9 @@ When a topic-level `clusters` policy is shared or synchronized across clusters a
 
 :::warning
 
-When the namespace `clusters` configuration is shared or synchronized across clusters, removing a cluster from the list automatically deletes all topics in that namespace on the excluded cluster. When a topic-level `clusters` policy is shared or synchronized, removing a cluster deletes that topic and all its partitions on the excluded cluster. It is not possible to stop replication to a cluster without triggering these deletions when the configuration is shared or synchronized.
+When the namespace `clusters` configuration is shared or synchronized across clusters, removing a cluster from the list automatically deletes all topics in that namespace on the excluded cluster. When a topic-level `clusters` policy is shared or synchronized, removing a cluster deletes that topic and all its partitions on the excluded cluster.
+
+To prevent a specific topic from being deleted when the namespace `clusters` configuration changes, set a global topic-level `clusters` policy for that topic listing the clusters where it should be retained. This overrides the namespace-level policy for that topic and is the only way to stop replication for a specific topic without triggering deletions on other clusters when namespace configuration is shared or synchronized.
 
 :::
 
