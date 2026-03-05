@@ -223,7 +223,7 @@ Each cluster reports its own local stats, including the incoming and outgoing re
 
 #### Geo-replication topic deletion
 
-**Topic deletion**
+**Explicit topic deletion**
 
 The recommended procedure for deleting a geo-replication topic from all clusters is:
 
@@ -240,7 +240,7 @@ To remove a topic from a specific cluster only, set a global topic-level `cluste
 
 To retain the topic in a specific cluster while removing it from all others, follow the procedure above on the cluster where the topic should be retained, but omit steps 3 and 4.
 
-**Garbage collection**
+**Deletion by garbage collection**
 
 A geo-replication topic is also automatically deleted by garbage collection when `brokerDeleteInactiveTopicsEnabled=true` and no producers or consumers are connected to it. The additional conditions depend on the `brokerDeleteInactiveTopicsMode` setting:
 
@@ -328,7 +328,7 @@ The limitations of replicated subscription are as follows.
 
 Replicated subscriptions use a periodic snapshotting mechanism to establish a consistent association between message positions across clusters. The design is described in [PIP-33: Replicated subscriptions](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot).
 
-Each snapshot requires either one or two rounds of round-trips between the participating clusters. When more than two clusters are involved, two rounds are always required. This increases the time needed for a snapshot to complete and makes snapshot timeout tuning more important.
+Each snapshot requires either one or two rounds of round-trips between the participating clusters. When more than two clusters are involved, two rounds are required. This increases the time needed for a snapshot to complete and makes snapshot timeout tuning more important.
 
 A known issue where the snapshot condition was not met under high message rates with shared or key-shared subscriptions using individual acknowledgments was fixed in Pulsar 4.0.9 and 4.1.3 by [PR #25044](https://github.com/apache/pulsar/pull/25044). In that scenario, the cursor's mark-delete position advances slowly because all acknowledgment gaps must be filled before it can move forward. Previously, if the mark-delete position did not advance before cached snapshots expired, the subscription state would stop being replicated even after the position eventually moved forward.
 
