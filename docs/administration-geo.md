@@ -22,7 +22,39 @@ Complete the following tasks to enable geo-replication for a namespace:
 * [Enable a geo-replication namespace](#enable-geo-replication-at-namespace-level)
 * [Configure that namespace to replicate across two or more provisioned clusters](admin-api-namespaces.md#configure-replication-clusters)
 
-Any message published on *any* topic in that namespace is replicated to all clusters in the specified set.
+### Replication configuration settings
+
+The target clusters for replication of a message are determined by a hierarchy of settings at the tenant, namespace, topic, and message level:
+
+* **Tenant `allowed-clusters`**: Specifies which clusters the tenant is permitted to use for replication. An empty value means all clusters are allowed. Note that this setting cannot be modified once the tenant has existing namespaces, so it must be configured before creating any namespaces under the tenant.
+
+* **Namespace `clusters`**: Defines the default set of clusters that messages in the namespace are replicated to.
+
+* **Namespace `allowed-clusters`**: Further restricts which clusters are permitted for replication at the namespace level, overriding the tenant-level setting. Introduced in [PIP-321](https://github.com/apache/pulsar/blob/master/pip/pip-321.md).
+
+* **Topic-level policies**: Can override the namespace-level `clusters` setting for a specific topic. Topic policies can be **local** (applying only to the local cluster) or **global** (replicated to all clusters in the geo-replication set, see [PIP-92](https://github.com/apache/pulsar/blob/master/pip/pip-92.md)). Note that `allowed-clusters` has not been implemented at the topic level; [PIP-321](https://github.com/apache/pulsar/blob/master/pip/pip-321.md) mentions that it could be added in the future.
+
+* **Message-level replication control**: Producers can override which clusters a specific message is replicated to using the [`replicationClusters`](/api/client/4.1.x/org/apache/pulsar/client/api/TypedMessageBuilder.html#replicationClusters(java.util.List)) method in the client API, or disable replication entirely for a message using [`disableReplication`](/api/client/4.1.x/org/apache/pulsar/client/api/TypedMessageBuilder.html#disableReplication()) (see [Selective replication](#selective-replication)). Note that these settings cannot override the `allowed-clusters` configuration — messages can only be routed to clusters that are permitted by the resolved `allowed-clusters` settings.
+
+The `clusters` and `allowed-clusters` settings are resolved hierarchically. When the tenant-level `allowed-clusters` is non-empty, all clusters specified in namespace-level `allowed-clusters` must be a subset of it — this is validated when `allowed-clusters` is modified at the namespace level. Namespace-level `allowed-clusters` can further restrict the tenant-level configuration, and topic-level policies can override the namespace-level `clusters` setting for a specific topic.
+
+### 1-way and 2-way geo-replication
+
+Geo-replication can be configured as 1-way or 2-way:
+
+* **2-way replication**: Messages flow in both directions (`us-west` ↔ `us-east`). For 2-way replication to work, the resolved hierarchical `allowed-clusters` configuration must include both clusters (so neither is blocked from replicating to the other), and the resolved hierarchical `clusters` configuration must include both clusters (so messages are sent to both by default).
+
+* **1-way replication**: Messages flow in one direction only (for example, `us-west` → `us-east`). Replication in the other direction can be prevented using two mechanisms:
+  * **`allowed-clusters`**: Forcefully prevents replication to clusters not in the resolved `allowed-clusters` configuration. This cannot be overridden by producers using the message-level `replicationClusters` setting.
+  * **`clusters`**: Sets the default replication targets. If the reverse direction cluster is not included, replication is 1-way by default, though producers can still override this per-message using the `replicationClusters` setting.
+
+  :::note
+  The [replicated subscription](#replicated-subscriptions) feature requires 2-way geo-replication and is not available when geo-replication is configured as 1-way.
+  :::
+
+When using a **shared configuration store**, tenant-level and namespace-level configuration is shared across all clusters. If both clusters are listed in the shared namespace `clusters` setting and neither is excluded by `allowed-clusters`, replication is 2-way.
+
+When using **separate metadata stores** (no shared configuration store), each cluster has its own metadata store and you must configure geo-replication independently on each cluster. To achieve 2-way replication, both clusters must be configured so that geo-replication is enabled for the topic on both sides — the tenant's `allowed-clusters`, the namespace `clusters`, and the namespace `allowed-clusters` must all include both clusters on each cluster.
 
 ## Local persistence and forwarding
 
@@ -203,6 +235,20 @@ You can explicitly disable topic garbage collection by setting `brokerDeleteInac
 
 To delete a geo-replication topic, close all producers and consumers on the topic, and delete all of its local subscriptions in every replication cluster. When Pulsar determines that no valid subscription for the topic remains across the system, it will garbage collect the topic.
 
+## Propagated deletions in geo-replication
+
+In a geo-replicated setup, topic and namespace deletions will propagate to peer clusters. The direction of propagation follows the direction of replication: in 1-way replication, deletions propagate in one direction; in 2-way replication, they propagate in both directions.
+
+When you remove a cluster from the `clusters` replication configuration at the namespace level, Pulsar automatically deletes the sub-topics on the excluded cluster. Since [PIP-422](https://github.com/apache/pulsar/blob/master/pip/pip-422.md), the same cascading deletion applies at the topic level when you remove a cluster from a topic-level `clusters` policy. Schemas and local topic policies are cleaned up after the last sub-topic is deleted.
+
+:::warning
+
+Removing a cluster from the `clusters` configuration will delete that cluster's sub-topics automatically. If you want to stop replication to a cluster without deleting its data, do not remove the cluster from the replication list.
+
+:::
+
+Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. A misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if data durability across accidental deletions is a requirement.
+
 ## Replicated subscriptions
 
 Pulsar supports replicated subscriptions, so you can keep the subscription state in sync, within a sub-second timeframe, in the context of a topic that is being asynchronously replicated across multiple geographical regions.
@@ -211,11 +257,17 @@ In case of failover, a consumer can restart consuming from the failure point in 
 
 ### Enable replicated subscription
 
+:::note
+
+Replicated subscriptions require [2-way geo-replication](#1-way-and-2-way-geo-replication) to be properly configured between all participating clusters. See [1-way and 2-way geo-replication](#1-way-and-2-way-geo-replication) for configuration requirements.
+
+:::
+
 If you want to use replicated subscriptions in Pulsar:
 
-- For broker side: set `enableReplicatedSubscriptions` to `true` in [`broker.conf`](https://github.com/apache/pulsar/blob/470b674016c8718f2dfd0a0f93cf02d49af0fead/conf/broker.conf#L592).
+* For broker side: set `enableReplicatedSubscriptions` to `true` in [`broker.conf`](https://github.com/apache/pulsar/blob/470b674016c8718f2dfd0a0f93cf02d49af0fead/conf/broker.conf#L592).
 
-- For consumer side: replicated subscription is disabled by default. You can enable replicated subscriptions when creating a consumer.
+* For consumer side: replicated subscription is disabled by default. You can enable replicated subscriptions when creating a consumer.
 
   ```java
   Consumer<String> consumer = client.newConsumer(Schema.STRING)
@@ -239,13 +291,48 @@ The advantages of replicated subscription are as follows.
 The limitations of replicated subscription are as follows.
 
 * When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
-* Only the base line cursor position is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
+* Only the base line cursor position ("mark delete position") is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
+* Replicated subscriptions do not support consistent behavior when consumers are active on multiple clusters simultaneously. Most messages would be processed in both clusters (duplicate processing), and some may not be processed at all if the replication snapshot reaches the other cluster before the messages are consumed there. It is recommended to route processing to a single active cluster when using replicated subscriptions.
+* Delayed delivery prevents subscription replication because the cursor's mark-delete position does not advance until delayed messages have been delivered and processed.
 
 :::note
 
-* This replicated subscription will add a new special message every second, it will contains the [snapshot](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions#storing-snapshots) of the subscription. That means,  if there are inactive subscriptions over the topic there can be an increase in backlog in source and destination clusters.
+* This replicated subscription will add a new special message every second, it will contains the [snapshot](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions#storing-snapshots) of the subscription. That means, if there are inactive subscriptions over the topic there can be an increase in backlog in source and destination clusters.
 
 :::
+
+### Replicated subscriptions snapshot configuration and tuning
+
+Replicated subscriptions use a periodic snapshotting mechanism to establish a consistent association between message positions across clusters. The design is described in [PIP-33: Replicated subscriptions](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions).
+
+Each snapshot requires either one or two rounds of round-trips between the participating clusters. When more than two clusters are involved, two rounds are always required. This increases the time needed for a snapshot to complete and makes snapshot timeout tuning more important.
+
+A known issue where the snapshot condition was not met under high message rates with shared or key-shared subscriptions using individual acknowledgments was fixed in Pulsar 4.0.9 and 4.1.3 by [PR #25044](https://github.com/apache/pulsar/pull/25044). In that scenario, the cursor's mark-delete position advances slowly because all acknowledgment gaps must be filled before it can move forward. Previously, if the mark-delete position did not advance before cached snapshots expired, the subscription state would stop being replicated even after the position eventually moved forward.
+
+After PR #25044, when the snapshot cache is full, snapshots are retained spread across the full range from just ahead of the current mark-delete position to the latest snapshot. This means that when the cursor eventually advances, a usable snapshot is always available nearby. With a larger cache, the gap between a usable snapshot and the actual mark-delete position is smaller, which reduces both the replication lag and the number of potential duplicate messages on failover.
+
+The following broker settings control snapshot behavior:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `replicatedSubscriptionsSnapshotFrequencyMillis` | `1000` | How often snapshots are taken. |
+| `replicatedSubscriptionsSnapshotTimeoutSeconds` | `30` | How long a snapshot can remain pending before it times out. |
+| `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` | `30` (increased from 10 in PR #25044) | Maximum number of snapshots cached per subscription. Each entry consumes approximately 200 bytes of memory. |
+
+For setups with more than two clusters, it is recommended to increase `replicatedSubscriptionsSnapshotTimeoutSeconds` to `60` and `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` to `50` to ensure that two-round snapshots complete before the timeout. The tradeoff is slightly higher memory consumption — with a value of `50`, the maximum heap memory consumed by the snapshot cache is approximately 10 KB per topic.
+
+### Observability
+
+Observability for replicated subscriptions is limited. For debugging, debug-level logs are available in `org.apache.pulsar.broker.service.persistent.ReplicatedSubscriptionsController`, though these are not suitable for production operations.
+
+The following broker-level metrics are available for monitoring snapshot health. Note that these metrics are aggregated across all topics on a broker and do not include per-topic labels.
+
+| Metric | OpenTelemetry name | Description |
+| --- | --- | --- |
+| `pulsar_replicated_subscriptions_pending_snapshots` | `pulsar.broker.replication.subscription.snapshot.operation.count` | Number of currently pending snapshots. |
+| `pulsar_replicated_subscriptions_timedout_snapshots` | `pulsar.broker.replication.subscription.snapshot.operation.duration` | Number of snapshots that have timed out. |
+
+Topic stats and internal stats can be used to inspect the state of subscriptions. The cursor's mark-delete position is particularly useful, as subscription state can only be replicated up to that position.
 
 ## Migrate data between clusters using geo-replication
 
