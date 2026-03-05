@@ -235,19 +235,26 @@ You can explicitly disable topic garbage collection by setting `brokerDeleteInac
 
 To delete a geo-replication topic, close all producers and consumers on the topic, and delete all of its local subscriptions in every replication cluster. When Pulsar determines that no valid subscription for the topic remains across the system, it will garbage collect the topic.
 
-## Propagated deletions in geo-replication
+## Cascading topic deletions when modifying the replication clusters configuration
 
-In a geo-replicated setup, topic and namespace deletions will propagate to peer clusters. The direction of propagation follows the direction of replication: in 1-way replication, deletions propagate in one direction; in 2-way replication, they propagate in both directions.
+Tenant, namespace, and topic configurations can be shared or synchronized across clusters in two ways:
 
-When you remove a cluster from the `clusters` replication configuration at the namespace level, Pulsar automatically deletes the sub-topics on the excluded cluster. Since [PIP-422](https://github.com/apache/pulsar/blob/master/pip/pip-422.md), the same cascading deletion applies at the topic level when you remove a cluster from a topic-level `clusters` policy. Schemas and local topic policies are cleaned up after the last sub-topic is deleted.
+* **Shared configuration store**: Tenant and namespace metadata is stored in a shared configuration store accessible to all clusters.
+* **`configurationMetadataSyncEventTopic`**: Tenant, namespace, and topic configuration changes are synchronized across clusters via geo-replication. The direction of synchronization follows the direction of replication — with 1-way replication, configuration updates flow in one direction only; with 2-way replication, they flow in both directions.
+
+Topic policies are also shared via geo-replication when the namespace has geo-replication enabled, with support for both local (single-cluster) and global (all-clusters) policies. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
+
+When the namespace `clusters` configuration is shared or synchronized across clusters and a cluster is removed from that list, Pulsar automatically deletes all topics for that namespace on the excluded cluster.
+
+When a topic-level `clusters` policy is shared or synchronized across clusters and a cluster is removed from that policy, Pulsar automatically deletes the topic and all its partitions on the excluded cluster. Since [PIP-422](https://github.com/apache/pulsar/blob/master/pip/pip-422.md), this cascading deletion is supported at the topic level in addition to the namespace level. Schemas and local topic policies are cleaned up after the last sub-topic is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, policy updates flow only toward the destination cluster.
 
 :::warning
 
-Removing a cluster from the `clusters` configuration will delete that cluster's sub-topics automatically. If you want to stop replication to a cluster without deleting its data, do not remove the cluster from the replication list.
+When the namespace `clusters` configuration is shared or synchronized across clusters, removing a cluster from the list automatically deletes all topics in that namespace on the excluded cluster. When a topic-level `clusters` policy is shared or synchronized, removing a cluster deletes that topic and all its partitions on the excluded cluster. It is not possible to stop replication to a cluster without triggering these deletions when the configuration is shared or synchronized.
 
 :::
 
-Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. A misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if data durability across accidental deletions is a requirement.
+Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. When namespace or topic configuration is shared or synchronized across clusters, a misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
 
 ## Replicated subscriptions
 
@@ -292,7 +299,7 @@ The limitations of replicated subscription are as follows.
 
 * When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
 * Only the base line cursor position ("mark delete position") is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
-* Replicated subscriptions do not support consistent behavior when consumers are active on multiple clusters simultaneously. Most messages would be processed in both clusters (duplicate processing), and some may not be processed at all if the replication snapshot reaches the other cluster before the messages are consumed there. It is recommended to route processing to a single active cluster when using replicated subscriptions.
+* Replicated subscriptions do not support consistent behavior when consumers are active on multiple clusters simultaneously. Most messages would be processed in both clusters (duplicate processing), and some may be processed in either cluster if the replication subscription update reaches the other cluster before the messages are consumed there. It is recommended to process messages in a single cluster when using replicated subscriptions.
 * Delayed delivery prevents subscription replication because the cursor's mark-delete position does not advance until delayed messages have been delivered and processed.
 
 :::note
