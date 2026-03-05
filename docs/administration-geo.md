@@ -238,6 +238,8 @@ When namespace or topic configuration is shared via a shared configuration store
 
 To remove a topic from a specific cluster only, set a global topic-level `clusters` policy that excludes that cluster. The broker automatically deletes the topic's sub-topics on the excluded cluster. Do not remove the global topic-level policy afterward, as this would allow the namespace-level `clusters` policy to take effect and potentially re-enable replication. To later delete the topic from all clusters, follow the full procedure above.
 
+To retain the topic in a specific cluster while removing it from all others, follow the procedure above on the cluster where the topic should be retained, but omit steps 3 and 4.
+
 **Garbage collection**
 
 A geo-replication topic is also automatically deleted by garbage collection when `brokerDeleteInactiveTopicsEnabled=true` and no producers or consumers are connected to it. The additional conditions depend on the `brokerDeleteInactiveTopicsMode` setting:
