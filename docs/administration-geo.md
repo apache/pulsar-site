@@ -304,13 +304,13 @@ The limitations of replicated subscription are as follows.
 
 :::note
 
-* This replicated subscription will add a new special message every second, it will contains the [snapshot](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions#storing-snapshots) of the subscription. That means, if there are inactive subscriptions over the topic there can be an increase in backlog in source and destination clusters.
+* This replicated subscription will add a new special message every second, it will contains the [snapshot](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot) of the subscription. That means, if there are inactive subscriptions over the topic there can be an increase in backlog in source and destination clusters. The snapshot is created only when new messages have been produced to the topic after the last snapshot creation begun.
 
 :::
 
 ### Replicated subscriptions snapshot configuration and tuning
 
-Replicated subscriptions use a periodic snapshotting mechanism to establish a consistent association between message positions across clusters. The design is described in [PIP-33: Replicated subscriptions](https://github.com/apache/pulsar/wiki/PIP-33:-Replicated-subscriptions).
+Replicated subscriptions use a periodic snapshotting mechanism to establish a consistent association between message positions across clusters. The design is described in [PIP-33: Replicated subscriptions](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot).
 
 Each snapshot requires either one or two rounds of round-trips between the participating clusters. When more than two clusters are involved, two rounds are always required. This increases the time needed for a snapshot to complete and makes snapshot timeout tuning more important.
 
