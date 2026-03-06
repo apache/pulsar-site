@@ -71,21 +71,25 @@ The `clusters` and `allowed-clusters` settings are resolved hierarchically. When
 
 ### 1-way (unidirectional) and 2-way (bidirectional) geo-replication
 
-Geo-replication can be configured as 1-way (unidirectional) or 2-way (bidirectional):
+Geo-replication can be configured as 1-way (unidirectional) or 2-way (bidirectional). The available options depend on whether a shared configuration store is used.
 
-* **2-way replication**: Messages flow in both directions (`us-west` ↔ `us-east`). For 2-way replication to work, the resolved hierarchical `allowed-clusters` configuration must include both clusters (so neither is blocked from replicating to the other), and the resolved hierarchical `clusters` configuration must include both clusters (so messages are sent to both by default).
+#### Replication direction with a shared configuration store
 
-* **1-way replication**: Messages flow in one direction only (for example, `us-west` → `us-east`). Replication in the other direction can be prevented using two mechanisms:
-  * **`allowed-clusters`**: Forcefully prevents replication to clusters not in the resolved `allowed-clusters` configuration. This cannot be overridden by producers using the message-level `replicationClusters` setting.
-  * **`clusters`**: Sets the default replication targets. If the reverse direction cluster is not included, replication is 1-way by default, though producers can still override this per-message using the `replicationClusters` setting.
+When a shared configuration store is used, namespace configuration is shared across all clusters, so geo-replication is always 2-way at the namespace level. Individual topics can be made unidirectional by adding a local topic-level `clusters` policy on a specific cluster that includes only the local cluster. This prevents messages produced on that cluster from being replicated to others. However, since topic policies do not include `allowed-clusters`, producers can still override this using the message-level `replicationClusters` setting, so true enforcement of 1-way replication is not possible with a shared configuration store.
 
-  :::note
-  The [replicated subscription](#replicated-subscriptions) feature requires 2-way geo-replication and is not available when geo-replication is configured as 1-way.
-  :::
+#### Replication direction with separate metadata stores
 
-When using a **shared configuration store**, tenant-level and namespace-level configuration is shared across all clusters. If both clusters are listed in the shared namespace `clusters` setting and neither is excluded by `allowed-clusters`, replication is 2-way.
+When each cluster uses its own metadata store, 1-way or 2-way replication is determined by the namespace `clusters` and `allowed-clusters` settings on each cluster:
 
-When using **separate metadata stores** (no shared configuration store), each cluster has its own metadata store and you must configure geo-replication independently on each cluster. To achieve 2-way replication, both clusters must be configured so that geo-replication is enabled for the topic on both sides — the tenant's `allowed-clusters`, the namespace `clusters`, and the namespace `allowed-clusters` must all include both clusters on each cluster.
+* **2-way replication**: Both clusters include each other in their namespace `clusters` and `allowed-clusters` settings, so messages flow in both directions.
+
+* **1-way replication**: On the cluster that should not replicate outbound, set both `clusters` and `allowed-clusters` to include only the local cluster. The remote cluster can still replicate inbound to this cluster if it is configured to do so.
+  * **`allowed-clusters`**: Forcefully prevents replication to any cluster not listed. This cannot be overridden by producers using the message-level `replicationClusters` setting.
+  * **`clusters`**: Sets the default replication targets. If only the local cluster is listed, outbound replication is disabled by default, though producers can still override this per-message using `replicationClusters` unless `allowed-clusters` also restricts it.
+
+:::note
+The [replicated subscription](#replicated-subscriptions) feature requires 2-way geo-replication and is not available when geo-replication is configured as 1-way.
+:::
 
 ## Local persistence and forwarding
 
