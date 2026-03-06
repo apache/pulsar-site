@@ -23,7 +23,7 @@ Complete the following tasks to enable geo-replication for a namespace:
 
 ### Configuration store and geo-replication setup
 
-Geo-replication setup — including cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies — is stored in the [configuration store](concepts-architecture-overview.md#configuration-store). Individual topic partitions and non-partitioned topics are not part of the configuration store; they are local to each cluster.
+Geo-replication setup — including cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies — is stored in the [configuration store](concepts-architecture-overview.md#configuration-store). Individual topic partitions and non-partitioned topics are not part of the configuration store; they are local to each cluster and the metadata is stored in the [metadata store](concepts-architecture-overview.md#metadata-store).
 
 There are three approaches for managing the configuration store in a geo-replicated setup:
 
