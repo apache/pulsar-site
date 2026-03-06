@@ -292,7 +292,7 @@ Each region independently decides when it is safe to delete the topic locally. T
 
 :::warning
 
-Modifying the `clusters` configuration at the namespace or topic level can automatically trigger topic deletions on excluded clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
+Modifying the `clusters` configuration at the namespace or topic policy level can automatically trigger topic deletions on excluded clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
 
 :::
 
@@ -405,7 +405,7 @@ Using geo-replication to migrate data between clusters is a special use case of 
 
 :::warning
 
-Please note that replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of keeping a snapshot of data — is not supported. Removing the cluster from the configuration will trigger cascading deletion of all topics in the namespace on that cluster. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+Replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of retaining an independent data snapshot — is not a supported use case. Removing the cluster from the configuration triggers cascading deletion of all topics on that cluster in certain cases, risking data loss when the goal is to keep an independent copy of the data. While it is possible to prevent cascading deletions, doing so has caveats. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
 
 :::
 
