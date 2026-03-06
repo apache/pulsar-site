@@ -507,6 +507,8 @@ The following broker-level metrics are available for monitoring snapshot health.
 
 Topic stats and internal stats can be used to inspect the state of subscriptions. The cursor's mark-delete position is particularly useful, as subscription state can only be replicated up to that position.
 
+A potential future improvement would be to expose pending snapshot attempt state including snapshot related topic-level counters in topic stats, and snapshot cache state in per-subscription stats. This would improve visibility when investigating replicated subscription issues.
+
 ## Migrate data between clusters using geo-replication
 
 Using geo-replication to migrate data between clusters is a special use case of the [active-active replication pattern](concepts-replication.md#active-active-replication) when you don't have a large amount of data.
