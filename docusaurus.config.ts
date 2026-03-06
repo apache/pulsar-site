@@ -170,7 +170,7 @@ module.exports = async function createConfigAsync() {
           disableSwitch: true,
         },
         zoom: {
-          selector: '.markdown img, .markdown svg',
+          selector: '.markdown img',
           background: {
             light: '#fff',
             dark: '#111'
