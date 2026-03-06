@@ -411,6 +411,11 @@ sequenceDiagram
         participant Repl_C2_to_C1 as Replicator_C2_to_C1
     end
 
+    %% --- Message Production on c1 & Replication to c2 ---
+    ProducerC1 ->> PT_C1: publishMessage(Msg1) (at Pos_M1_c1)
+    PT_C1 -->> Repl_C1_to_C2: Read Msg1
+    Repl_C1_to_C2 ->> PT_C2: Deliver Msg1 (writes to PT_C2 at Pos_M1_c2)
+
     %% --- Periodic Snapshot Cycle (replicatedSubscriptionsSnapshotFrequencyMillis) ---
     loop Snapshot Attempt (ID: S1)
         RSC_C1 ->> RSC_C1: startNewSnapshot()
@@ -438,11 +443,7 @@ sequenceDiagram
     Disp_C1 ->> PS_C1: processReplicatedSubscriptionSnapshot(S1)
     PS_C1 ->> RSCache_C1: addNewSnapshot(S1)
 
-    %% --- Message Production on c1 & Replication to c2 ---
-    ProducerC1 ->> PT_C1: publishMessage(Msg1) (at Pos_M1_c1)
-    PT_C1 -->> Repl_C1_to_C2: Read Msg1
-    Repl_C1_to_C2 ->> PT_C2: Deliver Msg1 (writes to PT_C2 at Pos_M1_c2)
-
+    %% --- Continued message Production on c1 & Replication to c2 ---
     ProducerC1 ->> PT_C1: publishMessage(Msg2) (at Pos_M2_c1)
     PT_C1 -->> Repl_C1_to_C2: Read Msg2
     Repl_C1_to_C2 ->> PT_C2: Deliver Msg2 (writes to PT_C2 at Pos_M2_c2)
