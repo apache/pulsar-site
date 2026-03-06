@@ -360,7 +360,7 @@ The limitations of replicated subscription are as follows.
 
 :::note
 
-* A [snapshot](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot) cycle is initiated every `replicatedSubscriptionsSnapshotFrequencyMillis` when new messages have been produced since the last cycle. Each cycle writes several marker messages to the topic — the snapshot request, the response from the remote cluster (replicated back), and the final snapshot marker. These markers increase the backlog for inactive subscriptions on both clusters.
+* A [snapshot attempt](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot) is initiated every `replicatedSubscriptionsSnapshotFrequencyMillis` when new messages have been produced since the last attempt. Each attempt writes several marker messages to the topic — the snapshot request, the response from the remote cluster (replicated back), and the final snapshot marker. These markers increase the backlog for inactive subscriptions on both clusters.
 
 :::
 
@@ -388,8 +388,8 @@ The following broker settings control snapshot behavior:
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| `replicatedSubscriptionsSnapshotFrequencyMillis` | `1000` | How often snapshots are taken. |
-| `replicatedSubscriptionsSnapshotTimeoutSeconds` | `30` | How long a snapshot request can remain pending before it times out. |
+| `replicatedSubscriptionsSnapshotFrequencyMillis` | `1000` | How often a snapshot attempt is started. A new attempt is initiated only when new messages have been produced since the last attempt completed. |
+| `replicatedSubscriptionsSnapshotTimeoutSeconds` | `30` | How long a snapshot attempt can remain in progress before it is abandoned. |
 | `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` | `30` (increased from 10 in PR #25044) | Maximum number of snapshots cached per subscription. Each entry consumes approximately 200 bytes of memory. |
 
 Tuning recommendations:
