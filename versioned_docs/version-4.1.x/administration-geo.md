@@ -10,7 +10,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-
 ## Enable geo-replication for a namespace
 
 You must enable geo-replication on a [per-tenant basis](#concepts-multi-tenancy) in Pulsar. For example, you can enable geo-replication between two specific clusters only when a tenant has access to both clusters.
@@ -21,6 +20,40 @@ Complete the following tasks to enable geo-replication for a namespace:
 
 * [Enable a geo-replication namespace](#enable-geo-replication-at-namespace-level)
 * [Configure that namespace to replicate across two or more provisioned clusters](admin-api-namespaces.md#configure-replication-clusters)
+
+### Sharing cluster configuration across geo-replicated clusters
+
+In a geo-replicated setup, tenants, namespaces, partitioned topic metadata, and their policies can be shared across clusters.
+
+The configuration approach also determines how changes to the replication clusters configuration propagate between clusters. In particular, certain configuration changes can trigger automatic topic deletions on remote clusters. Unintentional deletions due to misconfiguration can impact disaster recovery if topics are unexpectedly absent on a remote cluster. For example, replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of keeping a snapshot of data — is not supported. Removing the cluster from the configuration will trigger cascading deletion of all topics in the namespace on that cluster. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+
+Note that the configuration store contains tenants, namespaces, their policies, and partitioned topic metadata (the topic name and partition count), but not the individual topic partitions themselves. Topic partitions and non-partitioned topics are local to each cluster.
+
+There are three approaches for sharing configuration:
+
+#### No shared or synchronized configuration (default)
+
+By default, each Pulsar cluster uses its own [metadata store](concepts-architecture-overview.md#metadata-store) for both local cluster state and configuration data. Each cluster manages its tenants, namespaces, partitioned topic metadata, and their policies independently. Geo-replication is configured on a per-namespace basis by creating the namespace and setting the same replication policies explicitly on each participating cluster.
+
+#### Shared configuration store
+
+Clusters can share a dedicated [configuration store](concepts-architecture-overview.md#configuration-store) that is separate from each cluster's local metadata store. A shared configuration store is typically deployed across multiple regions or zones for fault tolerance. All clusters that reference it share the same tenants, namespaces, partitioned topic metadata, and their policies, so any change made on one cluster is immediately visible to all others.
+
+#### Synchronized configuration via `configurationMetadataSyncEventTopic`
+
+When a shared configuration store is not used, tenant, namespace, and partitioned topic configuration changes can still be synchronized across clusters using the `configurationMetadataSyncEventTopic` setting. When using this approach, geo-replication must be configured explicitly on every participating cluster for the namespace that holds the `configurationMetadataSyncEventTopic` topic. Once set up, configuration updates are synchronized across clusters via that topic.
+
+#### Creation of topics in geo-replication
+
+Topic partitions are local to each cluster and are not part of the configuration store. The following applies regardless of which configuration sharing approach is used.
+
+For **partitioned topics**, when `createTopicToRemoteClusterForReplication=true` (the default), it is sufficient to create the topic in a single cluster — Pulsar automatically creates the matching partitioned topic metadata in remote clusters. Despite its name, this setting applies only to partitioned topics. If `createTopicToRemoteClusterForReplication` is disabled and clusters do not share a configuration store, partitioned topics must be created explicitly in each cluster. In that case, partitioned topic metadata must exist on all clusters before any clients connect. If it is missing, a consumer may auto-create a non-partitioned topic on the cluster lacking the metadata, resulting in incompatible topic types across clusters. Additionally, replication may create individual topic partitions on the target cluster without the corresponding partitioned topic metadata, leaving those partitions orphaned. For this reason, keeping `createTopicToRemoteClusterForReplication` enabled is recommended.
+
+For **non-partitioned topics**, topic auto-creation must be enabled at the broker level (the default) or in the namespace policy, or the topic must be created explicitly in each cluster.
+
+#### Topic policies
+
+Topic policies are shared via geo-replication when the namespace has geo-replication enabled, regardless of which of the configuration store approaches is used. Both local (single-cluster) and global (all-clusters) policies are supported. Global topic policies apply to all clusters unless it has been overridden with a local topic policy in a specific cluster. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
 
 ### Replication configuration settings
 
@@ -38,23 +71,27 @@ The target clusters for replication of a message are determined by a hierarchy o
 
 The `clusters` and `allowed-clusters` settings are resolved hierarchically. When the tenant-level `allowed-clusters` is non-empty, all clusters specified in namespace-level `allowed-clusters` must be a subset of it — this is validated when `allowed-clusters` is modified at the namespace level. Namespace-level `allowed-clusters` can further restrict the tenant-level configuration, and topic-level policies can override the namespace-level `clusters` setting for a specific topic.
 
-### 1-way and 2-way geo-replication
+### 1-way (unidirectional) and 2-way (bidirectional) geo-replication
 
-Geo-replication can be configured as 1-way or 2-way:
+Geo-replication can be configured as 1-way (unidirectional) or 2-way (bidirectional). The available options depend on whether a shared configuration store is used.
 
-* **2-way replication**: Messages flow in both directions (`us-west` ↔ `us-east`). For 2-way replication to work, the resolved hierarchical `allowed-clusters` configuration must include both clusters (so neither is blocked from replicating to the other), and the resolved hierarchical `clusters` configuration must include both clusters (so messages are sent to both by default).
+#### Replication direction with a shared configuration store
 
-* **1-way replication**: Messages flow in one direction only (for example, `us-west` → `us-east`). Replication in the other direction can be prevented using two mechanisms:
-  * **`allowed-clusters`**: Forcefully prevents replication to clusters not in the resolved `allowed-clusters` configuration. This cannot be overridden by producers using the message-level `replicationClusters` setting.
-  * **`clusters`**: Sets the default replication targets. If the reverse direction cluster is not included, replication is 1-way by default, though producers can still override this per-message using the `replicationClusters` setting.
+When a shared configuration store is used, namespace configuration is shared across all clusters, so geo-replication is always 2-way at the namespace level. Individual topics can be made unidirectional by adding a local topic-level `clusters` policy on a specific cluster that includes only the local cluster. This prevents messages produced on that cluster from being replicated to others. However, since topic policies do not include `allowed-clusters`, producers can still override this using the message-level `replicationClusters` setting, so true enforcement of 1-way replication is not possible with a shared configuration store.
 
-  :::note
-  The [replicated subscription](#replicated-subscriptions) feature requires 2-way geo-replication and is not available when geo-replication is configured as 1-way.
-  :::
+#### Replication direction with separate metadata stores
 
-When using a **shared configuration store**, tenant-level and namespace-level configuration is shared across all clusters. If both clusters are listed in the shared namespace `clusters` setting and neither is excluded by `allowed-clusters`, replication is 2-way.
+When each cluster uses its own metadata store, 1-way or 2-way replication is determined by the namespace `clusters` and `allowed-clusters` settings on each cluster:
 
-When using **separate metadata stores** (no shared configuration store), each cluster has its own metadata store and you must configure geo-replication independently on each cluster. To achieve 2-way replication, both clusters must be configured so that geo-replication is enabled for the topic on both sides — the tenant's `allowed-clusters`, the namespace `clusters`, and the namespace `allowed-clusters` must all include both clusters on each cluster.
+* **2-way replication**: Both clusters include each other in their namespace `clusters` and `allowed-clusters` settings, so messages flow in both directions.
+
+* **1-way replication**: On the cluster that should not replicate outbound, set both `clusters` and `allowed-clusters` to include only the local cluster. The remote cluster can still replicate inbound to this cluster if it is configured to do so.
+  * **`allowed-clusters`**: Forcefully prevents replication to any cluster not listed. This cannot be overridden by producers using the message-level `replicationClusters` setting.
+  * **`clusters`**: Sets the default replication targets. If only the local cluster is listed, outbound replication is disabled by default, though producers can still override this per-message using `replicationClusters` unless `allowed-clusters` also restricts it.
+
+:::note
+The [replicated subscription](#replicated-subscriptions) feature requires 2-way geo-replication and is not available when geo-replication is configured as 1-way.
+:::
 
 ## Local persistence and forwarding
 
@@ -251,26 +288,29 @@ Each region independently decides when it is safe to delete the topic locally. T
 
 ## Cascading topic deletions when modifying the replication clusters configuration
 
-Tenant, namespace, and topic configurations can be shared or synchronized across clusters in two ways:
-
-* **Shared configuration store**: Tenant and namespace metadata is stored in a shared configuration store accessible to all clusters.
-* **`configurationMetadataSyncEventTopic`**: Tenant, namespace, and topic configuration changes are synchronized across clusters via geo-replication. The direction of synchronization follows the direction of replication — with 1-way replication, configuration updates flow in one direction only; with 2-way replication, they flow in both directions.
-
-Topic policies are also shared via geo-replication when the namespace has geo-replication enabled, with support for both local (single-cluster) and global (all-clusters) policies. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
-
-When the namespace `clusters` configuration is shared or synchronized across clusters and a cluster is removed from that list, Pulsar automatically deletes all topics for that namespace on the excluded cluster.
-
-When a topic-level `clusters` policy is shared or synchronized across clusters and a cluster is removed from that policy, Pulsar automatically deletes the topic and all its partitions on the excluded cluster. Since [PIP-422](https://github.com/apache/pulsar/blob/master/pip/pip-422.md), this cascading deletion is supported at the topic level in addition to the namespace level. Schemas and local topic policies are cleaned up after the last sub-topic is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, policy updates flow only toward the destination cluster.
-
 :::warning
 
-When the namespace `clusters` configuration is shared or synchronized across clusters, removing a cluster from the list automatically deletes all topics in that namespace on the excluded cluster. When a topic-level `clusters` policy is shared or synchronized, removing a cluster deletes that topic and all its partitions on the excluded cluster.
-
-To prevent a specific topic from being deleted when the namespace `clusters` configuration changes, set a global topic-level `clusters` policy for that topic listing the clusters where it should be retained. This overrides the namespace-level policy for that topic and is the only way to stop replication for a specific topic without triggering deletions on other clusters when namespace configuration is shared or synchronized.
+Modifying the `clusters` configuration at the namespace or topic level can automatically trigger topic deletions on excluded clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
 
 :::
 
-Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. When namespace or topic configuration is shared or synchronized across clusters, a misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
+### Namespace-level deletions
+
+When namespace configuration is shared or synchronized across clusters (via a shared configuration store or `configurationMetadataSyncEventTopic`, see [Sharing cluster configuration across geo-replicated clusters](#sharing-cluster-configuration-across-geo-replicated-clusters)), removing a cluster from the namespace `clusters` configuration automatically deletes all topics in that namespace on the excluded cluster. When namespace configuration is not shared or synchronized, namespace-level policy changes remain local and do not trigger cascading deletions on remote clusters.
+
+If the namespace-level `allowed-clusters` is modified to exclude a cluster, topics on that cluster are also deleted regardless of any topic-level `clusters` policy, since `clusters` must be a subset of `allowed-clusters`.
+
+### Topic-level deletions
+
+Since topic policies are always shared via geo-replication when the namespace has geo-replication enabled (see [Topic policies](#topic-policies)), updating a global topic-level `clusters` policy to exclude a cluster deletes that topic and all its partitions on the excluded cluster, regardless of whether namespace configuration is shared or synchronized. Schemas and local topic policies are cleaned up after the last sub-topic is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, updates flow only toward the destination cluster.
+
+### Retaining specific topics
+
+To prevent a specific topic from being deleted when the namespace `clusters` configuration changes, set a global topic-level `clusters` policy for that topic listing the clusters where it should be retained. This overrides the namespace-level `clusters` policy for that topic. Since it is not currently possible to override the namespace-level `allowed-clusters` in a topic policy, this protection does not apply if `allowed-clusters` is also changed to exclude a cluster.
+
+There is no single configuration that protects all topics in a namespace — the policy must be applied to each topic individually. For additional protection against the global topic-level policy itself being modified to exclude a cluster, a local topic-level `clusters` policy can also be set on that cluster to include only the local cluster.
+
+Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. A misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters.
 
 ## Replicated subscriptions
 
@@ -360,6 +400,12 @@ Topic stats and internal stats can be used to inspect the state of subscriptions
 ## Migrate data between clusters using geo-replication
 
 Using geo-replication to migrate data between clusters is a special use case of the [active-active replication pattern](concepts-replication.md#active-active-replication) when you don't have a large amount of data.
+
+:::warning
+
+Please note that replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of keeping a snapshot of data — is not supported. Removing the cluster from the configuration will trigger cascading deletion of all topics in the namespace on that cluster. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+
+:::
 
 1. Create your new cluster.
 2. Add the new cluster to your old cluster.
