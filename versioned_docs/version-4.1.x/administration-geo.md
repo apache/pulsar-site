@@ -267,7 +267,7 @@ The recommended procedure for deleting a geo-replication topic from all clusters
 1. Ensure there are no active producers or consumers on the topic across all clusters before proceeding. If any are present when the next step is performed, the topic will be forcefully deleted from under them. If auto-topic creation is also enabled, the topic may be immediately recreated.
 2. Set a global topic-level `clusters` policy to include only the local cluster. This triggers the cascading deletion mechanism to remove the topic's sub-topics and clean up schemas and local topic policies on all excluded clusters. Producers and consumers connected to an excluded cluster will be rejected from reconnecting. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
 3. Delete the topic. Geo-replication is now disabled, so the deletion only affects the local cluster.
-4. Run `pulsar-admin topicPolicies delete <topic>` on each cluster to remove the remaining topic-level policy state.
+4. Run `pulsar-admin topicPolicies delete <topic>` on each cluster to remove the remaining topic-level policy state. If active producers or consumers are still present at this point, the topic may be recreated and geo-replication re-enabled, which is why step 1 is a prerequisite.
 
 Without this procedure, forcefully deleting a topic on one cluster leaves it orphaned — it still exists on peer clusters and geo-replication from those clusters remains active. If auto-topic creation is enabled on the cluster where the topic was deleted, the topic may be recreated through auto-creation or because `createTopicToRemoteClusterForReplication=true` is set on a peer cluster.
 
