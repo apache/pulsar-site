@@ -360,7 +360,7 @@ The limitations of replicated subscription are as follows.
 
 :::note
 
-* Replicated subscriptions add a special snapshot message to the topic every second. If there are inactive subscriptions on the topic, this increases the backlog on both the source and destination clusters. The [snapshot](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot) is only created when new messages have been produced to the topic since the last snapshot was taken.
+* A [snapshot](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot) cycle is initiated every `replicatedSubscriptionsSnapshotFrequencyMillis` when new messages have been produced since the last cycle. Each cycle writes several marker messages to the topic — the snapshot request, the response from the remote cluster (replicated back), and the final snapshot marker. These markers increase the backlog for inactive subscriptions on both clusters.
 
 :::
 
