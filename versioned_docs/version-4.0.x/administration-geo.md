@@ -284,6 +284,8 @@ A geo-replication topic is also automatically deleted by garbage collection when
 - `delete_when_no_subscriptions`: the topic is deleted when there are no subscriptions.
 - `delete_when_subscriptions_caught_up`: the topic is deleted when all subscriptions have caught up and there is no backlog.
 
+The `brokerDeleteInactiveTopicsMode` setting can be overridden at the namespace level with the `inactive-topic-policies`.
+
 Each region independently decides when it is safe to delete the topic locally. To trigger garbage collection, close all producers and consumers on the topic and delete all local subscriptions in every replication cluster. When Pulsar determines that no valid subscription remains across the system, it garbage collects the topic.
 
 ## Cascading topic deletions when modifying the replication clusters configuration
