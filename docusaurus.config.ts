@@ -134,6 +134,7 @@ module.exports = async function createConfigAsync() {
     projectName: "pulsar",
     trailingSlash: true,
     markdown: {
+      mermaid: true,
       preprocessor: ({ filePath, fileContent }) => {
         return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
           const p1Trimmed = p1.trim();
@@ -150,6 +151,7 @@ module.exports = async function createConfigAsync() {
         });
       },
     },
+    themes: ['@docusaurus/theme-mermaid'],
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
@@ -168,7 +170,7 @@ module.exports = async function createConfigAsync() {
           disableSwitch: true,
         },
         zoom: {
-          selector: '.markdown img',
+          selector: '.markdown img, .markdown svg',
           background: {
             light: '#fff',
             dark: '#111'
