@@ -263,7 +263,7 @@ Each cluster reports its own local stats, including the incoming and outgoing re
 The recommended procedure for deleting a geo-replication topic from all clusters is:
 
 1. Ensure there are no active producers or consumers on the topic across all clusters before proceeding. If any are present when the next step is performed, the topic will be forcefully deleted from under them. If auto-topic creation is also enabled, the topic may be immediately recreated.
-2. Set a global topic-level `clusters` policy to include only the local cluster. This triggers the cascading deletion mechanism to remove the topic's sub-topics and clean up schemas and local topic policies on all excluded clusters. Producers and consumers connected to an excluded cluster will be rejected from reconnecting. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+2. Set a global topic-level `clusters` policy to include only the local cluster. This triggers the cascading deletion mechanism to remove the topic (including topic partitions in the case of a partitioned topic) and clean up schemas and local topic policies on all excluded clusters. Producers and consumers connected to an excluded cluster will be rejected from reconnecting. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
 3. Delete the topic. Geo-replication is now disabled, so the deletion only affects the local cluster.
 4. Run `pulsar-admin topicPolicies delete <topic>` on each cluster to remove the remaining topic-level policy state. If active producers or consumers are still present at this point, the topic may be recreated and geo-replication re-enabled, which is why step 1 is a prerequisite.
 
@@ -271,7 +271,7 @@ Without this procedure, forcefully deleting a topic on one cluster leaves it orp
 
 When namespace or topic configuration is shared via a shared configuration store or synchronized via `configurationMetadataSyncEventTopic`, forcefully deleting a topic propagates the deletion to all clusters that share or receive the configuration. However, replication delays may cause the topic to be recreated before the deletion takes effect everywhere. For this reason, it is recommended to follow the procedure above.
 
-To remove a topic from a specific cluster only, set a global topic-level `clusters` policy that excludes that cluster. The broker automatically deletes the topic's sub-topics on the excluded cluster. Do not remove the global topic-level policy afterward, as this would allow the namespace-level `clusters` policy to take effect and potentially re-enable replication. To later delete the topic from all clusters, follow the full procedure above.
+To remove a topic from a specific cluster only, set a global topic-level `clusters` policy that excludes that cluster. The broker automatically deletes the topic (including topic partitions in the case of a partitioned topic) on the excluded cluster. Do not remove the global topic-level policy afterward, as this would allow the namespace-level `clusters` policy to take effect and potentially re-enable replication. To later delete the topic from all clusters, follow the full procedure above.
 
 To retain the topic in a specific cluster while removing it from all others, follow the procedure above on the cluster where the topic should be retained, but omit steps 3 and 4.
 
@@ -296,13 +296,13 @@ Modifying the `clusters` configuration at the namespace or topic policy level ca
 
 ### Namespace-level deletions
 
-When namespace configuration is shared or synchronized across clusters (via a shared configuration store or `configurationMetadataSyncEventTopic`, see [Sharing cluster configuration across geo-replicated clusters](#sharing-cluster-configuration-across-geo-replicated-clusters)), removing a cluster from the namespace `clusters` configuration automatically deletes all topics in that namespace on the excluded cluster. When namespace configuration is not shared or synchronized, namespace-level policy changes remain local and do not trigger cascading deletions on remote clusters.
+When namespace configuration is shared or synchronized across clusters (via a shared configuration store or `configurationMetadataSyncEventTopic`, see [Configuration store and geo-replication setup](#configuration-store-and-geo-replication-setup)), removing a cluster from the namespace `clusters` configuration automatically deletes all topics in that namespace on the excluded cluster. When namespace configuration is not shared or synchronized, namespace-level policy changes remain local and do not trigger cascading deletions on remote clusters.
 
 If the namespace-level `allowed-clusters` is modified to exclude a cluster, topics on that cluster are also deleted regardless of any topic-level `clusters` policy, since `clusters` must be a subset of `allowed-clusters`.
 
 ### Topic-level deletions
 
-Since topic policies are always shared via geo-replication when the namespace has geo-replication enabled (see [Topic policies](#topic-policies)), updating a global topic-level `clusters` policy to exclude a cluster deletes that topic and all its partitions on the excluded cluster, regardless of whether namespace configuration is shared or synchronized. Schemas and local topic policies are cleaned up after the last sub-topic is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, updates flow only toward the destination cluster.
+Since topic policies are always shared via geo-replication when the namespace has geo-replication enabled (see [Topic policies](#topic-policies)), updating a global topic-level `clusters` policy to exclude a cluster deletes that topic and all its partitions on the excluded cluster, regardless of whether namespace configuration is shared or synchronized. Schemas and local topic policies are cleaned up after the last topic partition is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, updates flow only toward the destination cluster.
 
 ### Retaining specific topics
 
