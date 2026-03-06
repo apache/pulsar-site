@@ -282,26 +282,19 @@ Each region independently decides when it is safe to delete the topic locally. T
 
 ## Cascading topic deletions when modifying the replication clusters configuration
 
-Tenant, namespace, and topic configurations can be shared or synchronized across clusters in two ways:
+When namespace configuration is shared or synchronized across clusters (see [Sharing cluster configuration across geo-replicated clusters](#sharing-cluster-configuration-across-geo-replicated-clusters)), updating the namespace `clusters` configuration to remove a cluster automatically deletes all topics in that namespace on the excluded cluster.
 
-* **Shared configuration store**: Tenant and namespace metadata is stored in a shared configuration store accessible to all clusters.
-* **`configurationMetadataSyncEventTopic`**: Tenant, namespace, and topic configuration changes are synchronized across clusters via geo-replication. The direction of synchronization follows the direction of replication — with 1-way replication, configuration updates flow in one direction only; with 2-way replication, they flow in both directions.
-
-Topic policies are also shared via geo-replication when the namespace has geo-replication enabled, with support for both local (single-cluster) and global (all-clusters) policies. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
-
-When the namespace `clusters` configuration is shared or synchronized across clusters and a cluster is removed from that list, Pulsar automatically deletes all topics for that namespace on the excluded cluster.
-
-When a topic-level `clusters` policy is shared or synchronized across clusters and a cluster is removed from that policy, Pulsar automatically deletes the topic and all its partitions on the excluded cluster. Since [PIP-422](https://github.com/apache/pulsar/blob/master/pip/pip-422.md), this cascading deletion is supported at the topic level in addition to the namespace level. Schemas and local topic policies are cleaned up after the last sub-topic is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, policy updates flow only toward the destination cluster.
+When a topic-level `clusters` policy is set to a subset of the replication clusters, the topic and all its partitions are automatically deleted on any cluster excluded.
 
 :::warning
 
-When the namespace `clusters` configuration is shared or synchronized across clusters, removing a cluster from the list automatically deletes all topics in that namespace on the excluded cluster. When a topic-level `clusters` policy is shared or synchronized, removing a cluster deletes that topic and all its partitions on the excluded cluster.
+Removing a cluster from the namespace `clusters` configuration automatically deletes all topics in that namespace on the excluded cluster. Setting a topic-level `clusters` policy that excludes a cluster deletes that topic and all its partitions on the excluded cluster.
 
 To prevent a specific topic from being deleted when the namespace `clusters` configuration changes, set a global topic-level `clusters` policy for that topic listing the clusters where it should be retained. This overrides the namespace-level policy for that topic and is the only way to stop replication for a specific topic without triggering deletions on other clusters when namespace configuration is shared or synchronized.
 
 :::
 
-Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. When namespace or topic configuration is shared or synchronized across clusters, a misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
+Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. A misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
 
 ## Replicated subscriptions
 
