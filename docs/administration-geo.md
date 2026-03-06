@@ -328,7 +328,7 @@ Replicated subscriptions require [2-way geo-replication](#1-way-and-2-way-geo-re
 
 If you want to use replicated subscriptions in Pulsar:
 
-* For broker side: set `enableReplicatedSubscriptions` to `true` in [`broker.conf`](https://github.com/apache/pulsar/blob/470b674016c8718f2dfd0a0f93cf02d49af0fead/conf/broker.conf#L592).
+* Ensure that `enableReplicatedSubscriptions` is `true` in [`broker.conf`](https://github.com/apache/pulsar/blob/v4.1.3/conf/broker.conf#L728-L729). This is enabled by default.
 
 * For consumer side: replicated subscription is disabled by default. You can enable replicated subscriptions when creating a consumer.
 
