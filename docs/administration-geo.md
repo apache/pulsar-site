@@ -45,9 +45,9 @@ When a shared configuration store is not used, tenant, namespace, and partitione
 
 Topic partitions are local to each cluster and are not part of the configuration store. The following applies regardless of which configuration sharing approach is used.
 
-For **partitioned topics**, when `createTopicToRemoteClusterForReplication=true` (the default), it is sufficient to create the topic in a single cluster — Pulsar automatically creates the matching partitioned topic metadata in remote clusters. Despite its name, this setting applies only to partitioned topics. If `createTopicToRemoteClusterForReplication` is disabled and clusters do not share a configuration store, partitioned topics must be created explicitly in each cluster. In that case, it is important to ensure partitioned topic metadata exists on all clusters before producers connect, to avoid orphaned partitions being created without corresponding metadata.
+For **partitioned topics**, when `createTopicToRemoteClusterForReplication=true` (the default), it is sufficient to create the topic in a single cluster — Pulsar automatically creates the matching partitioned topic metadata in remote clusters. Despite its name, this setting applies only to partitioned topics. If `createTopicToRemoteClusterForReplication` is disabled and clusters do not share a configuration store, partitioned topics must be created explicitly in each cluster. In that case, partitioned topic metadata must exist on all clusters before any clients connect. If it is missing, a consumer may auto-create a non-partitioned topic on the cluster lacking the metadata, resulting in incompatible topic types across clusters. Additionally, replication may create individual topic partitions on the target cluster without the corresponding partitioned topic metadata, leaving those partitions orphaned. For this reason, keeping `createTopicToRemoteClusterForReplication` enabled is recommended.
 
-For **non-partitioned topics**, topic auto-creation must be enabled at the broker level (the default) or in the namespace policy, or the topic must be created explicitly in each cluster.
+For **non-partitioned topics**, there are two options: enable topic auto-creation at the broker level (the default) or in the namespace policy, or create the topic explicitly in each cluster.
 
 #### Topic policies
 
