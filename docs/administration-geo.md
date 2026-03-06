@@ -23,7 +23,9 @@ Complete the following tasks to enable geo-replication for a namespace:
 
 ### Sharing cluster configuration across geo-replicated clusters
 
-In a geo-replicated setup, tenants, namespaces, partitioned topic metadata, and their policies can be shared across clusters. The way this sharing is configured determines how configuration changes and deletions propagate between clusters, with important implications for replication behavior and topic lifecycle. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+In a geo-replicated setup, tenants, namespaces, partitioned topic metadata, and their policies can be shared across clusters.
+
+The configuration approach also determines how changes to the replication clusters configuration propagate between clusters. In particular, certain configuration changes can trigger automatic topic deletions on remote clusters. Unintentional deletions due to misconfiguration can impact disaster recovery if topics are unexpectedly absent on a remote cluster. For example, replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of keeping a snapshot of data — is not supported. Removing the cluster from the configuration will trigger cascading deletion of all topics in the namespace on that cluster. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
 
 Note that the configuration store contains tenants, namespaces, their policies, and partitioned topic metadata (the topic name and partition count), but not the individual topic partitions themselves. Topic partitions and non-partitioned topics are local to each cluster.
 
@@ -47,7 +49,7 @@ Topic partitions are local to each cluster and are not part of the configuration
 
 For **partitioned topics**, when `createTopicToRemoteClusterForReplication=true` (the default), it is sufficient to create the topic in a single cluster — Pulsar automatically creates the matching partitioned topic metadata in remote clusters. Despite its name, this setting applies only to partitioned topics. If `createTopicToRemoteClusterForReplication` is disabled and clusters do not share a configuration store, partitioned topics must be created explicitly in each cluster. In that case, partitioned topic metadata must exist on all clusters before any clients connect. If it is missing, a consumer may auto-create a non-partitioned topic on the cluster lacking the metadata, resulting in incompatible topic types across clusters. Additionally, replication may create individual topic partitions on the target cluster without the corresponding partitioned topic metadata, leaving those partitions orphaned. For this reason, keeping `createTopicToRemoteClusterForReplication` enabled is recommended.
 
-For **non-partitioned topics**, there are two options: enable topic auto-creation at the broker level (the default) or in the namespace policy, or create the topic explicitly in each cluster.
+For **non-partitioned topics**, topic auto-creation must be enabled at the broker level (the default) or in the namespace policy, or the topic must be created explicitly in each cluster.
 
 #### Topic policies
 
