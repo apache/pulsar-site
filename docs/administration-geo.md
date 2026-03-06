@@ -401,6 +401,12 @@ Topic stats and internal stats can be used to inspect the state of subscriptions
 
 Using geo-replication to migrate data between clusters is a special use case of the [active-active replication pattern](concepts-replication.md#active-active-replication) when you don't have a large amount of data.
 
+:::warning
+
+Please note that replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of keeping a snapshot of data — is not supported. Removing the cluster from the configuration will trigger cascading deletion of all topics in the namespace on that cluster. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+
+:::
+
 1. Create your new cluster.
 2. Add the new cluster to your old cluster.
 
