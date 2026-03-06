@@ -21,27 +21,27 @@ Complete the following tasks to enable geo-replication for a namespace:
 * [Enable a geo-replication namespace](#enable-geo-replication-at-namespace-level)
 * [Configure that namespace to replicate across two or more provisioned clusters](admin-api-namespaces.md#configure-replication-clusters)
 
-### Sharing cluster configuration across geo-replicated clusters
+### Configuration store and geo-replication setup
 
-In a geo-replicated setup, tenants, namespaces, partitioned topic metadata, and their policies can be shared across clusters.
+Geo-replication setup — including cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies — is stored in the [configuration store](concepts-architecture-overview.md#configuration-store). Individual topic partitions and non-partitioned topics are not part of the configuration store; they are local to each cluster.
 
-The configuration approach also determines how changes to the replication clusters configuration propagate between clusters. In particular, certain configuration changes can trigger automatic topic deletions on remote clusters. Unintentional deletions due to misconfiguration can impact disaster recovery if topics are unexpectedly absent on a remote cluster. For example, replicating data to a remote cluster and then removing that cluster from the namespace replication configuration — with the intention of retaining an independent data snapshot — is not a supported use case. Removing the cluster from the configuration triggers cascading deletion of all topics on that cluster in certain cases, risking data loss when the goal is to keep an independent copy of the data. While it is possible to prevent cascading deletions, doing so has caveats. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
+There are three approaches for managing the configuration store in a geo-replicated setup:
 
-Note that the configuration store contains tenants, namespaces, their policies, and partitioned topic metadata (the topic name and partition count), but not the individual topic partitions themselves. Topic partitions and non-partitioned topics are local to each cluster.
+#### Independent configuration stores (default)
 
-There are three approaches for sharing configuration:
-
-#### No shared or synchronized configuration (default)
-
-By default, each Pulsar cluster uses its own [metadata store](concepts-architecture-overview.md#metadata-store) for both local cluster state and configuration data. Each cluster manages its tenants, namespaces, partitioned topic metadata, and their policies independently. Geo-replication is configured on a per-namespace basis by creating the namespace and setting the same replication policies explicitly on each participating cluster.
+By default, each Pulsar cluster uses its own [metadata store](concepts-architecture-overview.md#metadata-store) for both local cluster state and configuration data. Each cluster independently manages its cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies. To set up geo-replication, each participating cluster must be registered and the tenant and namespace must be created with the same replication policies on every cluster.
 
 #### Shared configuration store
 
-Clusters can share a dedicated [configuration store](concepts-architecture-overview.md#configuration-store) that is separate from each cluster's local metadata store. A shared configuration store is typically deployed across multiple regions or zones for fault tolerance. All clusters that reference it share the same tenants, namespaces, partitioned topic metadata, and their policies, so any change made on one cluster is immediately visible to all others.
+Clusters can share a dedicated [configuration store](concepts-architecture-overview.md#configuration-store) that is separate from each cluster's local metadata store. A shared configuration store is typically deployed across multiple regions or zones for fault tolerance. All clusters that use it share the same cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies, so any change made on one cluster is immediately visible to all others.
 
-#### Synchronized configuration via `configurationMetadataSyncEventTopic`
+#### Configuration synchronization via `configurationMetadataSyncEventTopic`
 
-When a shared configuration store is not used, tenant, namespace, and partitioned topic configuration changes can still be synchronized across clusters using the `configurationMetadataSyncEventTopic` setting. When using this approach, geo-replication must be configured explicitly on every participating cluster for the namespace that holds the `configurationMetadataSyncEventTopic` topic. Once set up, configuration updates are synchronized across clusters via that topic.
+When independent configuration stores are used on each cluster, configuration store metadata can still be synchronized across clusters using the `configurationMetadataSyncEventTopic` setting. To bootstrap this setup, each participating cluster must be independently configured with its own cluster registration, plus a dedicated tenant and namespace to hold the sync topic. Once geo-replication is active for that namespace, configuration store metadata — including subsequent cluster registrations, tenants, namespaces, and their policies — is automatically synchronized across all participating clusters via that topic.
+
+#### Topic policies
+
+Topic policies are shared via geo-replication when the namespace has geo-replication enabled, regardless of which of the configuration store approaches is used. Both local (single-cluster) and global (all-clusters) policies are supported. Global topic policies apply to all clusters unless it has been overridden with a local topic policy in a specific cluster. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
 
 #### Creation of topics in geo-replication
 
@@ -51,9 +51,9 @@ For **partitioned topics**, when `createTopicToRemoteClusterForReplication=true`
 
 For **non-partitioned topics**, topic auto-creation must be enabled at the broker level (the default) or in the namespace policy, or the topic must be created explicitly in each cluster.
 
-#### Topic policies
+#### Cascading topic deletions
 
-Topic policies are shared via geo-replication when the namespace has geo-replication enabled, regardless of which of the configuration store approaches is used. Both local (single-cluster) and global (all-clusters) policies are supported. Global topic policies apply to all clusters unless it has been overridden with a local topic policy in a specific cluster. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
+The configuration approach also determines how changes to the replication clusters configuration propagate between clusters. In particular, certain configuration changes can trigger automatic topic deletions on remote clusters. See [Cascading topic deletions when modifying the replication clusters configuration](#cascading-topic-deletions-when-modifying-the-replication-clusters-configuration) for details.
 
 ### Replication configuration settings
 
