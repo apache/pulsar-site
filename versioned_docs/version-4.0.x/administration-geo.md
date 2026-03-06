@@ -353,10 +353,10 @@ The advantages of replicated subscription are as follows.
 
 The limitations of replicated subscription are as follows.
 
-* When you enable replicated subscriptions, you're creating a consistent distributed snapshot to establish an association between message ids from different clusters. The snapshots are taken periodically. The default value is `1 second`. It means that a consumer failing over to a different cluster can potentially receive 1 second of duplicates. You can also configure the frequency of the snapshot in the `broker.conf` file.
-* Only the base line cursor position ("mark delete position") is synced in replicated subscriptions while the individual acknowledgments are not synced. This means the messages acknowledged out-of-order could end up getting delivered again, in the case of a cluster failover.
-* Replicated subscriptions do not support consistent behavior when consumers are active on multiple clusters simultaneously. Most messages would be processed in both clusters (duplicate processing), and some may be processed in either cluster if the replication subscription update reaches the other cluster before the messages are consumed there. It is recommended to process messages in a single cluster when using replicated subscriptions.
-* Delayed delivery prevents subscription replication because the cursor's mark-delete position does not advance until delayed messages have been delivered and processed.
+* Replicated subscriptions use periodic snapshots to establish a consistent association between message positions across clusters. Snapshots are taken every `replicatedSubscriptionsSnapshotFrequencyMillis` milliseconds (default: 1000 ms), but the effective granularity of mark-delete position updates on the remote cluster depends on how many messages are produced between snapshots. See [Replicated subscriptions snapshot configuration and tuning](#replicated-subscriptions-snapshot-configuration-and-tuning) for details.
+* Only the mark-delete position (the baseline cursor position) is replicated — individual acknowledgments are not. Messages acknowledged out of order may be redelivered after a cluster failover.
+* Replicated subscriptions do not provide consistent behavior when consumers are active on multiple clusters simultaneously. Most messages will be processed on both clusters (duplicate processing), and some may be processed on either cluster depending on replication timing. To avoid this, process messages on a single cluster at a time when using replicated subscriptions.
+* Delayed message delivery impairs subscription replication. The mark-delete position does not advance until delayed messages have been delivered and acknowledged, so replication lags behind accordingly.
 
 :::note
 
@@ -368,7 +368,11 @@ The limitations of replicated subscription are as follows.
 
 Replicated subscriptions use a periodic snapshotting mechanism to establish a consistent association between message positions across clusters. The design is described in [PIP-33: Replicated subscriptions](https://github.com/apache/pulsar/blob/master/pip/pip-33.md#constructing-a-cursor-snapshot).
 
-Each snapshot requires one or two round-trips between the participating clusters — two when more than two clusters are involved. This increases the time needed for a snapshot to complete and makes snapshot timeout tuning more important.
+Each snapshot requires one or two round-trips between the participating clusters — two when more than two clusters are involved. This increases the time needed for a snapshot to complete and makes snapshot timeout tuning more important. If any participating cluster is offline, snapshots cannot be established and the mark-delete position will not be propagated until connectivity is restored.
+
+The effective granularity of mark-delete position updates on the remote cluster is determined by how many messages are written between consecutive snapshots, not by `replicatedSubscriptionsSnapshotFrequencyMillis` alone. A snapshot is only written to the topic once the full round-trip completes: the remote replicator must process all incoming messages up to the point where it receives the snapshot request, write a response, and have that response replicated back and processed on the originating cluster. With more than two clusters, two rounds of snapshotting are required, doubling the round-trip time. With bursty or high-rate message production, many messages can accumulate during this round-trip, resulting in much longer mark-delete position update intervals than the snapshot frequency setting suggests — and under high load, the total snapshot time can also push beyond the default `replicatedSubscriptionsSnapshotTimeoutSeconds` of `30` seconds, because the replicator must read through the high volume of regular messages in the topic before it reaches the snapshot response markers written by the remote cluster. The long interval between snapshots under bursty traffic is particularly problematic when consumption is much slower than production — for example, when a batch job produces a large volume of messages within 30 seconds but consuming and acknowledging those messages takes minutes or hours.
+
+A potential future improvement would be to process snapshot requests and responses at message publish time rather than waiting for the replicator to drain its backlog. This would significantly reduce the snapshot round-trip time and snapshot lag under high-rate message production.
 
 The subscription's mark-delete position can only be propagated to the remote cluster when there is a suitable snapshot in the snapshot cache. A snapshot is suitable when the mark-delete position has reached or passed the snapshot's local position — the position in the local cluster's topic at which the snapshot was created.
 
@@ -378,6 +382,8 @@ The improved snapshot cache expiration policy introduced by [PR #25044](https://
 
 [PR #25044](https://github.com/apache/pulsar/pull/25044) also reduced the memory footprint of each snapshot entry to approximately 200 bytes, making it practical to increase `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` well beyond the default of `30` when finer snapshot granularity is needed for large backlogs. The tradeoff is higher heap memory consumption, which should be accounted for when sizing the broker. The current implementation uses a fixed per-subscription limit rather than a global memory budget; a future improvement could cap total cache memory consumption and apply the same spread-based eviction strategy once the limit is reached.
 
+If geo-replication is enabled on a namespace that already contains messages, no snapshot markers will be present in the existing backlog. The mark-delete position cannot be propagated until the replicator has read past the pre-existing messages and new snapshots have been written and processed — regardless of the snapshot cache size. Similarly, neither the improved cache eviction policy nor increasing the cache size addresses the long interval between snapshots under bursty traffic; that continues to affect the lag of mark-delete position updates to remote clusters.
+
 The following broker settings control snapshot behavior:
 
 | Setting | Default | Description |
@@ -386,7 +392,10 @@ The following broker settings control snapshot behavior:
 | `replicatedSubscriptionsSnapshotTimeoutSeconds` | `30` | How long a snapshot request can remain pending before it times out. |
 | `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` | `30` (increased from 10 in PR #25044) | Maximum number of snapshots cached per subscription. Each entry consumes approximately 200 bytes of memory. |
 
-For setups with more than two clusters, it is recommended to increase `replicatedSubscriptionsSnapshotTimeoutSeconds` to `60` and `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` to `50` to ensure that two-round snapshots complete before the timeout. The tradeoff is slightly higher memory consumption — with a value of `50`, the maximum heap memory consumed by the snapshot cache is approximately 10 KB per topic.
+Tuning recommendations:
+
+* **More than two clusters:** Increase `replicatedSubscriptionsSnapshotTimeoutSeconds` to `60` to ensure that two-round snapshots complete before timing out.
+* **Large backlogs with slow mark-delete advancement** (shared or key-shared subscriptions with individual acknowledgments, or delayed message delivery): Increase `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` to at least `50` so that cached snapshots are spread more densely and a suitable snapshot is more likely to be close to the mark-delete position when it advances. At a value of `50`, the snapshot cache consumes approximately 10 KB of heap memory per subscription; with the default of `30`, the footprint is approximately 6 KB per subscription.
 
 ### Replicated subscriptions sequence diagrams
 
