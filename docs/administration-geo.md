@@ -374,6 +374,10 @@ A known issue where the snapshot condition was not met under high message rates 
 
 After PR #25044, when the snapshot cache is full, snapshots are retained spread across the full range from just ahead of the current mark-delete position to the latest snapshot. This means that when the cursor eventually advances, a usable snapshot is always available nearby. With a larger cache, the gap between a usable snapshot and the actual mark-delete position is smaller, which reduces both the replication lag and the number of potential duplicate messages on failover.
 
+The improve snapshot cache expiration policy introduced in [PR #25044](https://github.com/apache/pulsar/pull/25044) doesn't address the challenges with messaged delivered with the delayed message delivery feature. The reason for this is that replication snapshots are added to the cache when the replicator for the particular topic reads the replication snapshot marker messages from the topic. When delayed message delivery is used, there might be a very large backlog and the topic might have been unloaded or moved to another broker in the cluster due to broker restarts or load shedding. In that case, there won't be any entries in the replication snapshot cache and it won't get restored since the replication cursor has already moved further ahead.
+
+This is the reason why replicated subscriptions don't provide consistent behavior when using delayed message delivery. In the case of shared or key-shared subscriptions, the mark delete position moves ahead fairly frequently compared to delayed message delivery and that's why the problem is addressed with PR #25044 and the new snapshot cache expiration policy. After a topic unload or topic getting moved to another broker the replication snapshot cache would eventually fill with suitable snapshots which can be used to replicate the subscription state.
+
 The following broker settings control snapshot behavior:
 
 | Setting | Default | Description |
@@ -383,6 +387,100 @@ The following broker settings control snapshot behavior:
 | `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` | `30` (increased from 10 in PR #25044) | Maximum number of snapshots cached per subscription. Each entry consumes approximately 200 bytes of memory. |
 
 For setups with more than two clusters, it is recommended to increase `replicatedSubscriptionsSnapshotTimeoutSeconds` to `60` and `replicatedSubscriptionsSnapshotMaxCachedPerSubscription` to `50` to ensure that two-round snapshots complete before the timeout. The tradeoff is slightly higher memory consumption — with a value of `50`, the maximum heap memory consumed by the snapshot cache is approximately 10 KB per topic.
+
+### Replicated subscriptions sequence diagrams
+
+This sequence diagram describes the interactions of the replicated subscription solution. It could help understand the detail of why the mark delete position of a replicated subscription might not get updated to the remote cluster. The role of the replication snapshot cache is visible in the diagram.
+
+<div style={{overflowX: 'auto', overflowY: 'auto'}}>
+<div style={{width: '300%', height: '1000px'}}>
+```mermaid
+sequenceDiagram
+    actor ProducerC1
+    actor ConsumerC1
+
+    box Broker c1
+        participant PT_C1 as PersistentTopicC1
+        participant RSC_C1 as ReplicatedSubscriptionsControllerC1
+        participant Disp_C1 as DispatcherC1 (for my-sub)
+        participant PS_C1 as PersistentSubscriptionC1 (sub: my-sub)
+        participant RSCache_C1 as ReplicatedSubscriptionSnapshotCacheC1 (for my-sub)
+        participant Repl_C1_to_C2 as Replicator_C1_to_C2
+    end
+
+    box Broker c2
+        participant PT_C2 as PersistentTopicC2
+        participant RSC_C2 as ReplicatedSubscriptionsControllerC2
+        participant PS_C2 as PersistentSubscriptionC2 (sub: my-sub)
+        participant Repl_C2_to_C1 as Replicator_C2_to_C1
+    end
+
+    %% --- Periodic Snapshot Cycle (replicatedSubscriptionsSnapshotFrequencyMillis) ---
+    loop Snapshot Attempt (ID: S1)
+        RSC_C1 ->> RSC_C1: startNewSnapshot()
+        RSC_C1 ->> PT_C1: publishMessage(Marker: SNAPSHOT_REQUEST S1, from:c1)
+        PT_C1 -->> Repl_C1_to_C2: Read SNAPSHOT_REQUEST S1
+        Repl_C1_to_C2 ->> PT_C2: Deliver SNAPSHOT_REQUEST S1 (writes to PT_C2)
+
+        PT_C2 -->> RSC_C2: PT_C2.receivedReplicatedSubscriptionMarker(SNAPSHOT_REQUEST S1)
+        RSC_C2 ->> RSC_C2: receivedSnapshotRequest(S1)
+        RSC_C2 ->> PT_C2: PT_C2.publishMessage(Marker: SNAPSHOT_RESPONSE S1, cluster:c2, msgId:LastMsgID_c2_T0)
+
+        PT_C2 -->> Repl_C2_to_C1: Read SNAPSHOT_RESPONSE S1
+        Repl_C2_to_C1 ->> PT_C1: Deliver SNAPSHOT_RESPONSE S1 (writes to PT_C1)
+
+        PT_C1 -->> RSC_C1: receivedReplicatedSubscriptionMarker(SNAPSHOT_RESPONSE S1, Pos_Marker_c1_T1)
+        RSC_C1 ->> RSC_C1: receivedSnapshotResponse(S1, c2, LastMsgID_c2_T0, Pos_Marker_c1_T1)
+        opt All Responses Received
+            RSC_C1 ->> PT_C1: publishMessage(Marker: REPLICATED_SUBSCRIPTION_SNAPSHOT S1, local_pos:Pos_Marker_c1_T1, c2_remote_pos:LastMsgID_c2_T0)
+            RSC_C1 ->> RSC_C1: snapshotCompleted(S1)
+        end
+    end
+
+    PT_C1 -->> Disp_C1: Read REPLICATED_SUBSCRIPTION_SNAPSHOT S1
+    Disp_C1 ->> Disp_C1: filterEntriesForConsumer / processReplicatedSubscriptionSnapshot(S1)
+    Disp_C1 ->> PS_C1: processReplicatedSubscriptionSnapshot(S1)
+    PS_C1 ->> RSCache_C1: addNewSnapshot(S1)
+
+    %% --- Message Production on c1 & Replication to c2 ---
+    ProducerC1 ->> PT_C1: publishMessage(Msg1) (at Pos_M1_c1)
+    PT_C1 -->> Repl_C1_to_C2: Read Msg1
+    Repl_C1_to_C2 ->> PT_C2: Deliver Msg1 (writes to PT_C2 at Pos_M1_c2)
+
+    ProducerC1 ->> PT_C1: publishMessage(Msg2) (at Pos_M2_c1)
+    PT_C1 -->> Repl_C1_to_C2: Read Msg2
+    Repl_C1_to_C2 ->> PT_C2: Deliver Msg2 (writes to PT_C2 at Pos_M2_c2)
+
+    %% --- Consumption and Acknowledgement on c1 ---
+    PT_C1 -->> Disp_C1: Read Msg1 for dispatch
+    Disp_C1 -->> ConsumerC1: Dispatch Msg1 (Pos_M1_c1)
+    ConsumerC1 ->> PS_C1: acknowledgeMessage(Pos_M1_c1, Individual)
+    Note right of PS_C1: markDeletePosition may not advance yet
+
+    PT_C1 -->> Disp_C1: Read Msg2 for dispatch
+    Disp_C1 -->> ConsumerC1: Dispatch Msg2 (Pos_M2_c1)
+    ConsumerC1 ->> PS_C1: acknowledgeMessage(Pos_M2_c1, Individual)
+    PS_C1 ->> PS_C1: cursor markDeletePosition advances to Pos_MDP_c1
+
+    %% --- Subscription State Replication (triggered by markDeletePosition advance on c1) ---
+    PS_C1 ->> RSCache_C1: advancedMarkDeletePosition(Pos_MDP_c1)
+    RSCache_C1 -->> PS_C1: Return Snapshot S1 (if Pos_MDP_c1 >= S1.local_pos)
+    Note right of PS_C1: Suitable snapshot S1 may not be present in the cache.<br>In that case, the subscription update won't be replicated.
+
+    opt Snapshot S1 is present. This flow won't happen unless a suitable snapshot is present in the cache.
+        PS_C1 ->> RSC_C1: localSubscriptionUpdated("my-sub", S1)
+        RSC_C1 ->> PT_C1: publishMessage(Marker: REPLICATED_SUBSCRIPTION_UPDATE for "my-sub", c2_target_pos: S1.c2_remote_pos)
+        PT_C1 -->> Repl_C1_to_C2: Read SUBSCRIPTION_UPDATE
+        Repl_C1_to_C2 ->> PT_C2: Deliver SUBSCRIPTION_UPDATE (writes to PT_C2)
+
+        PT_C2 -->> RSC_C2: PT_C2.receivedReplicatedSubscriptionMarker(SUBSCRIPTION_UPDATE)
+        RSC_C2 ->> RSC_C2: receiveSubscriptionUpdated("my-sub", S1.c2_remote_pos)
+        RSC_C2 ->> PS_C2: acknowledgeMessage([S1.c2_remote_pos], Cumulative, ...)
+        Note right of PS_C2: markDeletePosition on c2 advances
+    end
+```
+</div>
+</div>
 
 ### Observability
 
