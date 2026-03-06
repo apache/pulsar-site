@@ -41,7 +41,7 @@ Clusters can share a dedicated [configuration store](concepts-architecture-overv
 
 When a shared configuration store is not used, tenant, namespace, and partitioned topic configuration changes can still be synchronized across clusters using the `configurationMetadataSyncEventTopic` setting. When using this approach, geo-replication must be configured explicitly on every participating cluster for the namespace that holds the `configurationMetadataSyncEventTopic` topic. Once set up, configuration updates are synchronized across clusters via that topic.
 
-#### Creation of topic partitions in geo-replication
+#### Creation of topics in geo-replication
 
 Topic partitions are local to each cluster and are not part of the configuration store. The following applies regardless of which configuration sharing approach is used.
 
@@ -51,7 +51,7 @@ For **non-partitioned topics**, topic auto-creation must be enabled at the broke
 
 #### Topic policies
 
-Topic policies are shared via geo-replication when the namespace has geo-replication enabled, regardless of which of the above approaches is used. Both local (single-cluster) and global (all-clusters) policies are supported. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
+Topic policies are shared via geo-replication when the namespace has geo-replication enabled, regardless of which of the configuration store approaches is used. Both local (single-cluster) and global (all-clusters) policies are supported. Global topic policies apply to all clusters unless it has been overridden with a local topic policy in a specific cluster. Topic policies require `topicLevelPoliciesEnabled=true` in broker configuration (enabled by default).
 
 ### Replication configuration settings
 
