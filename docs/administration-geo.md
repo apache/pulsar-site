@@ -286,19 +286,29 @@ Each region independently decides when it is safe to delete the topic locally. T
 
 ## Cascading topic deletions when modifying the replication clusters configuration
 
-When namespace configuration is shared or synchronized across clusters (see [Sharing cluster configuration across geo-replicated clusters](#sharing-cluster-configuration-across-geo-replicated-clusters)), updating the namespace `clusters` configuration to remove a cluster automatically deletes all topics in that namespace on the excluded cluster.
-
-When a topic-level `clusters` policy is set to a subset of the replication clusters, the topic and all its partitions are automatically deleted on any cluster excluded.
-
 :::warning
 
-Removing a cluster from the namespace `clusters` configuration automatically deletes all topics in that namespace on the excluded cluster. Setting a topic-level `clusters` policy that excludes a cluster deletes that topic and all its partitions on the excluded cluster.
-
-To prevent a specific topic from being deleted when the namespace `clusters` configuration changes, set a global topic-level `clusters` policy for that topic listing the clusters where it should be retained. This overrides the namespace-level policy for that topic and is the only way to stop replication for a specific topic without triggering deletions on other clusters when namespace configuration is shared or synchronized.
+Modifying the `clusters` configuration at the namespace or topic level can automatically trigger topic deletions on excluded clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
 
 :::
 
-Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. A misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters. Always maintain independent backups if protection against accidental deletions is a requirement.
+### Namespace-level deletions
+
+When namespace configuration is shared or synchronized across clusters (via a shared configuration store or `configurationMetadataSyncEventTopic`, see [Sharing cluster configuration across geo-replicated clusters](#sharing-cluster-configuration-across-geo-replicated-clusters)), removing a cluster from the namespace `clusters` configuration automatically deletes all topics in that namespace on the excluded cluster. When namespace configuration is not shared or synchronized, namespace-level policy changes remain local and do not trigger cascading deletions on remote clusters.
+
+If the namespace-level `allowed-clusters` is modified to exclude a cluster, topics on that cluster are also deleted regardless of any topic-level `clusters` policy, since `clusters` must be a subset of `allowed-clusters`.
+
+### Topic-level deletions
+
+Since topic policies are always shared via geo-replication when the namespace has geo-replication enabled (see [Topic policies](#topic-policies)), updating a global topic-level `clusters` policy to exclude a cluster deletes that topic and all its partitions on the excluded cluster, regardless of whether namespace configuration is shared or synchronized. Schemas and local topic policies are cleaned up after the last sub-topic is deleted. Topic-level policy updates follow the replication direction of the namespace — with 1-way replication, updates flow only toward the destination cluster.
+
+### Retaining specific topics
+
+To prevent a specific topic from being deleted when the namespace `clusters` configuration changes, set a global topic-level `clusters` policy for that topic listing the clusters where it should be retained. This overrides the namespace-level `clusters` policy for that topic. Since it is not currently possible to override the namespace-level `allowed-clusters` in a topic policy, this protection does not apply if `allowed-clusters` is also changed to exclude a cluster.
+
+There is no single configuration that protects all topics in a namespace — the policy must be applied to each topic individually. For additional protection against the global topic-level policy itself being modified to exclude a cluster, a local topic-level `clusters` policy can also be set on that cluster to include only the local cluster.
+
+Geo-replication is designed for high availability and disaster recovery, not as a substitute for backups. A misconfigured `clusters` policy can trigger cascading topic deletions on peer clusters.
 
 ## Replicated subscriptions
 
