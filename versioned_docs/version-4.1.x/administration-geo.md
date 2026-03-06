@@ -23,13 +23,13 @@ Complete the following tasks to enable geo-replication for a namespace:
 
 ### Configuration store and geo-replication setup
 
-Geo-replication setup — including cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies — is stored in the [configuration store](concepts-architecture-overview.md#configuration-store). Individual topic partitions and non-partitioned topics are not part of the configuration store; they are local to each cluster and the metadata is stored in the [metadata store](concepts-architecture-overview.md#metadata-store).
+Geo-replication setup — including cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies — is stored in the [configuration store](concepts-architecture-overview.md#configuration-store). Individual topic partitions and non-partitioned topics are not part of the configuration store; they are local to each cluster and tracked in the cluster's [metadata store](concepts-architecture-overview.md#metadata-store). A shared configuration store is not required for geo-replication.
 
 There are three approaches for managing the configuration store in a geo-replicated setup:
 
 #### Independent configuration stores (default)
 
-By default, each Pulsar cluster uses its own [metadata store](concepts-architecture-overview.md#metadata-store) for both local cluster state and configuration data. Each cluster independently manages its cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies. To set up geo-replication, each participating cluster must be registered and the tenant and namespace must be created with the same replication policies on every cluster.
+By default, each Pulsar cluster uses its [metadata store](concepts-architecture-overview.md#metadata-store) as the [configuration store](concepts-architecture-overview.md#configuration-store) as well, so each cluster independently manages its own cluster registrations, tenants, namespaces, partitioned topic metadata, and their policies. To set up geo-replication, all participating clusters must be registered in each other and the tenant and namespace must be created with matching replication policies on every cluster.
 
 #### Shared configuration store
 
