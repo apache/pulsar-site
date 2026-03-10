@@ -3422,6 +3422,13 @@
                     "type": "array",
                     "uniqueItems": true
                 },
+                "allowed_topic_property_keys_for_metrics": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
                 "auth_policies": {
                     "$ref": "#/definitions/AuthPolicies"
                 },
@@ -7399,6 +7406,150 @@
                     }
                 },
                 "summary": "Set the allowed clusters for a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/{tenant}/{namespace}/allowedTopicPropertyKeysForMetrics": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_removeAllowedTopicPropertyKeysForMetrics",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or Namespace does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Remove allowed topic property keys for metrics on a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_getAllowedTopicPropertyKeysForMetrics",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get allowed topic property keys for metrics for a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_setAllowedTopicPropertyKeysForMetrics",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Set of allowed topic property keys for metrics",
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Set allowed topic property keys for metrics for a namespace",
                 "tags": [
                     "namespaces"
                 ]
