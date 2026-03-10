@@ -1348,6 +1348,17 @@ If true, aggregate publisher stats of PartitionedTopicStats by producerName
 
 **Category**: Metrics
 
+### allowedTopicPropertyKeysForMetrics
+A comma-separated list of Topic Property keys that are allowed to be exposed as metrics.Only keys explicitly listed here will be exposed.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### authenticateMetricsEndpoint
 Whether the '/metrics' endpoint requires authentication. Defaults to false.'authenticationEnabled' must also be set for this to take effect.
 
@@ -1372,6 +1383,17 @@ Enable expose the broker bundles metrics.
 
 ### exposeConsumerLevelMetricsInPrometheus
 If true, export consumer level metrics otherwise namespace level
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
+### exposeCustomTopicMetricLabelsEnabled
+Enable or disable custom topic metric labels feature. If enabled, custom metric labels can be set on topics and will be exposed in metrics. Default is false.
 
 **Type**: `boolean`
 
@@ -3681,7 +3703,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `2000`
 
 **Dynamic**: `true`
 
@@ -5305,7 +5327,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `800`
 
 **Dynamic**: `true`
 
