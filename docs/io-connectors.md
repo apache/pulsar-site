@@ -77,12 +77,6 @@ Pulsar has various source connectors, which are sorted alphabetically as below.
 
 * [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/file/src/main/java/org/apache/pulsar/io/file/FileSource.java)
 
-### Flume
-
-* [Configuration](io-flume-source.md#configuration)
-
-* [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/flume/src/main/java/org/apache/pulsar/io/flume/FlumeConnector.java)
-
 ### Twitter firehose
 
 * [Configuration](io-twitter-source.md#configuration)
@@ -168,12 +162,6 @@ Pulsar has various sink connectors, which are sorted alphabetically as below.
 * [Configuration](io-elasticsearch-sink.md#configuration)
 
 * [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/elastic-search/src/main/java/org/apache/pulsar/io/elasticsearch/ElasticSearchSink.java)
-
-### Flume
-
-* [Configuration](io-flume-sink.md#configuration)
-
-* [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/flume/src/main/java/org/apache/pulsar/io/flume/sink/StringSink.java)
 
 ### HBase
 
