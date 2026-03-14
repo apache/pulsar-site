@@ -5740,17 +5740,6 @@
                 "operationId": "BrokersBase_healthCheck",
                 "parameters": [
                     {
-                        "description": "Topic Version",
-                        "enum": [
-                            "V1",
-                            "V2"
-                        ],
-                        "in": "query",
-                        "name": "topicVersion",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "in": "query",
                         "name": "brokerId",
                         "required": false,
@@ -7002,98 +6991,6 @@
                     }
                 },
                 "summary": "Get all namespaces that are grouped by given anti-affinity group in a given cluster. api can be only accessed by admin of any of the existing tenant",
-                "tags": [
-                    "namespaces"
-                ]
-            }
-        },
-        "/namespaces/{property}/{namespace}/persistence/bookieAffinity": {
-            "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_deleteBookieAffinityGroup",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "property",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Operation successful"
-                    },
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace does not exist"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Delete the bookie-affinity-group from namespace-local policy.",
-                "tags": [
-                    "namespaces"
-                ]
-            },
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_getBookieAffinityGroup",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "property",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/BookieAffinityGroupDataImpl"
-                        }
-                    },
-                    "307": {
-                        "description": "Current broker doesn't serve the namespace"
-                    },
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace does not exist"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Get the bookie-affinity-group from namespace-local policy.",
                 "tags": [
                     "namespaces"
                 ]
@@ -11410,6 +11307,96 @@
             }
         },
         "/namespaces/{tenant}/{namespace}/persistence/bookieAffinity": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_deleteBookieAffinityGroup",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Delete the bookie-affinity-group from namespace-local policy.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_getBookieAffinityGroup",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/BookieAffinityGroupDataImpl"
+                        }
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get the bookie-affinity-group from namespace-local policy.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
             "post": {
                 "consumes": [
                     "application/json"

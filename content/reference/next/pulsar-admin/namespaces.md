@@ -55,70 +55,6 @@ $ pulsar-admin namespaces list options
 | `[-v, --version]` | Print version information and exit.|null||
 
 
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-# namespaces
-
-Operations about namespaces
-
-
-```shell
-$ pulsar-admin namespaces subcommand
-```
-
-
-
-## list
-
-Get the namespaces for a tenant
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
 ## topics
 
 Get the list of topics for a namespace
@@ -155,24 +91,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -237,24 +155,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -337,24 +237,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -455,24 +337,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -591,24 +455,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -745,24 +591,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -917,24 +745,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -1107,24 +917,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -1315,24 +1107,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -1541,24 +1315,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -1785,24 +1541,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -2047,24 +1785,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -2327,24 +2047,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -2625,24 +2327,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -2941,24 +2625,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -3275,24 +2941,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -3627,24 +3275,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -3997,24 +3627,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -4385,24 +3997,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -4791,24 +4385,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -5215,24 +4791,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -5657,24 +5215,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -6117,24 +5657,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -6595,24 +6117,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -7091,24 +6595,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -7605,24 +7091,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -8137,24 +7605,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -8687,24 +8137,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -9255,24 +8687,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -9841,24 +9255,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -10445,24 +9841,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -11067,24 +10445,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -11707,24 +11067,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -12365,24 +11707,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -13041,24 +12365,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -13735,24 +13041,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -14447,24 +13735,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -15177,24 +14447,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -15925,24 +15177,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -16691,24 +15925,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -17475,24 +16691,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -18277,24 +17475,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -19097,24 +18277,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -19935,24 +19097,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -20791,24 +19935,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -21665,24 +20791,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -22557,24 +21665,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -23467,24 +22557,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -24395,24 +23467,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -25341,24 +24395,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -26305,24 +25341,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -27287,24 +26305,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -28287,24 +27287,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -29305,24 +28287,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -30341,24 +29305,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -31395,24 +30341,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -32467,24 +31395,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -33557,24 +32467,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -34665,24 +33557,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -35791,24 +34665,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -36935,24 +35791,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -38097,24 +36935,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -39277,24 +38097,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -40475,24 +39277,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -41691,24 +40475,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -42925,24 +41691,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -44177,24 +42925,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -45447,24 +44177,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -46735,24 +45447,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -48041,24 +46735,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -49365,24 +48041,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -50707,24 +49365,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -52067,24 +50707,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -53445,24 +52067,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -54841,24 +53445,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -56255,24 +54841,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -57687,24 +56255,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -59137,24 +57687,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -60605,24 +59137,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -62091,24 +60605,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -63595,24 +62091,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -65117,24 +63595,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -66657,24 +65117,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -68215,24 +66657,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -69791,24 +68215,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -71385,24 +69791,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -72997,24 +71385,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -74627,24 +72997,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -76275,24 +74627,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -77941,24 +76275,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -79625,24 +77941,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -81327,24 +79625,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -83047,24 +81327,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -84785,24 +83047,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -86541,24 +84785,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -88315,24 +86541,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -90107,24 +88315,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -91917,24 +90107,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -93745,24 +91917,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -95591,24 +93745,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -97455,24 +95591,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -99337,24 +97455,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -101237,24 +99337,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -103155,24 +101237,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -105091,24 +103155,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -107045,24 +105091,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -109017,24 +107045,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -111007,24 +109017,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -113015,24 +111007,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -115041,24 +113015,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -117085,24 +115041,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -119147,24 +117085,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -121227,24 +119147,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -123325,24 +121227,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -125441,24 +123325,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -127575,24 +125441,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -129727,24 +127575,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -131897,24 +129727,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -134085,24 +131897,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -136291,24 +134085,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -138515,24 +136291,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -140757,24 +138515,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -143017,24 +140757,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -145295,24 +143017,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -147591,24 +145295,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -149905,24 +147591,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -152237,24 +149905,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -154587,24 +152237,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -156955,24 +154587,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -159341,24 +156955,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -161745,24 +159341,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -164167,24 +161745,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -166607,24 +164167,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -169065,24 +166607,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -171541,24 +169065,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -174035,24 +171541,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -176547,24 +174035,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -179077,24 +176547,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -181625,24 +179077,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -184191,24 +181625,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**
@@ -186775,24 +184191,6 @@ Get the namespaces for a tenant
 
 ```shell
 $ pulsar-admin namespaces list options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-
-## list-cluster
-
-Get the namespaces for a tenant in a cluster
-
-**Command:**
-
-```shell
-$ pulsar-admin namespaces list-cluster options
 ```
 
 **Options:**

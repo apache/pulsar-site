@@ -2829,17 +2829,6 @@ Opt-out of topic-existence check when setting permissions
 
 **Category**: Server
 
-### allowAutoTopicCreationWithLegacyNamingScheme
-If 'allowAutoTopicCreation' is true and the name of the topic contains 'cluster',the topic cannot be automatically created.
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-**Dynamic**: `true`
-
-**Category**: Server
-
 ### allowOverrideEntryFilters
 Whether allow topic level entry filters policies overrides broker configuration.
 
@@ -3703,7 +3692,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `2000`
 
 **Dynamic**: `true`
 
@@ -5327,7 +5316,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `800`
 
 **Dynamic**: `true`
 
