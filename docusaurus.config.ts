@@ -128,13 +128,15 @@ module.exports = async function createConfigAsync() {
     url: "https://pulsar.apache.org",
     baseUrl: baseUrl,
     onBrokenLinks: "warn",
-    onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
     organizationName: "apache",
     projectName: "pulsar",
     trailingSlash: true,
     markdown: {
       mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: "warn",
+      },
       preprocessor: ({ filePath, fileContent }) => {
         return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
           const p1Trimmed = p1.trim();
