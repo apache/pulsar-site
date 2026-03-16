@@ -78,12 +78,6 @@ module.exports = [
     link: 'https://github.com/apache/pulsar/tree/master/pulsar-io/file'
   },
   {
-    name: 'flume',
-    longName: 'Flume source and sink',
-    type: 'Source and sink',
-    link: 'https://flume.apache.org/'
-  },
-  {
     name: 'hbase',
     longName: 'HBase sink',
     type: 'Sink',
