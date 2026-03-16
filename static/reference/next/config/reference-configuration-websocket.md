@@ -222,6 +222,17 @@ Maximum number of inbound http connections. (0 to disable limiting)
 
 **Category**: 
 
+### metadataStoreAllowReadOnlyOperations
+Is metadata store read-only operations.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### metadataStoreCacheExpirySeconds
 Metadata store cache expiry time in seconds.
 

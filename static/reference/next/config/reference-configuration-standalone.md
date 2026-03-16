@@ -129,6 +129,17 @@ TLS trusted certificate file for internal client, used by the internal client to
 
 **Category**: Authentication
 
+### strictAuthMethod
+Strictly enforce authentication method. If specified, Pulsar will only attempt to authenticate with the provided method. If no method is provided, authentication fails.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Authentication
+
 ### anonymousUserRole
 When this parameter is not empty, unauthenticated users perform as anonymousUserRole
 
@@ -332,6 +343,17 @@ Max HTTP requests per seconds allowed. The excess of requests will be rejected w
 **Type**: `double`
 
 **Default**: `100.0`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpServerIdleTimeout
+Idle timeout for HTTP server connections in milliseconds.
+
+**Type**: `int`
+
+**Default**: `30000`
 
 **Dynamic**: `false`
 
@@ -1326,6 +1348,17 @@ If true, aggregate publisher stats of PartitionedTopicStats by producerName
 
 **Category**: Metrics
 
+### allowedTopicPropertyKeysForMetrics
+A comma-separated list of Topic Property keys that are allowed to be exposed as metrics.Only keys explicitly listed here will be exposed.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### authenticateMetricsEndpoint
 Whether the '/metrics' endpoint requires authentication. Defaults to false.'authenticationEnabled' must also be set for this to take effect.
 
@@ -1350,6 +1383,17 @@ Enable expose the broker bundles metrics.
 
 ### exposeConsumerLevelMetricsInPrometheus
 If true, export consumer level metrics otherwise namespace level
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
+### exposeCustomTopicMetricLabelsEnabled
+Enable or disable custom topic metric labels feature. If enabled, custom metric labels can be set on topics and will be exposed in metrics. Default is false.
 
 **Type**: `boolean`
 
@@ -1994,7 +2038,18 @@ On Shared and KeyShared subscriptions, if all available messages in the subscrip
 **Category**: Policies
 
 ### enableBrokerSideSubscriptionPatternEvaluation
-Enables evaluating subscription pattern on broker side.
+Enables evaluating subscription pattern on broker side. Note: This config no longer controls watching topic list. Please use `enableBrokerTopicListWatcher` to control that behavior.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### enableBrokerTopicListWatcher
+Enables watching topic add/remove events on broker side for subscription pattern evaluation.
 
 **Type**: `boolean`
 
@@ -2771,17 +2826,6 @@ Opt-out of topic-existence check when setting permissions
 **Default**: `false`
 
 **Dynamic**: `false`
-
-**Category**: Server
-
-### allowAutoTopicCreationWithLegacyNamingScheme
-If 'allowAutoTopicCreation' is true and the name of the topic contains 'cluster',the topic cannot be automatically created.
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-**Dynamic**: `true`
 
 **Category**: Server
 
@@ -3924,6 +3968,17 @@ Metadata store operation timeout in seconds.
 
 **Category**: Server
 
+### metadataStoreSerDesThreads
+The number of threads used for serializing and deserializing data to and from the metadata store
+
+**Type**: `int`
+
+**Default**: `1`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreSessionTimeoutMillis
 Metadata store session timeout in milliseconds.
 
@@ -4047,6 +4102,17 @@ If true, (and ModularLoadManagerImpl is being used), the load manager will attem
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### pulsarResourcesExtendedClassName
+The class name of the PulsarResourcesExtended implementation. This class must implement org.apache.pulsar.broker.PulsarResourcesExtended.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.DefaultPulsarResourcesExtended`
+
+**Dynamic**: `false`
 
 **Category**: Server
 

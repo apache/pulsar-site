@@ -3,13 +3,38 @@ import "react-base-table/styles.css";
 import { Column } from "react-base-table";
 import { languages } from "@site/data/matrix";
 
-const _key = (language) => language.replace(".", "").replace(" ", "");
+const _key = (language) => {
+  if (typeof language === 'string') {
+    return language.replace(".", "").replace(" ", "");
+  }
+  return language.name.replace(".", "").replace(" ", "");
+};
+
 export const genColumns = () => {
   return ["Feature", "Sub"].concat(languages).map((language, index) => {
+    const displayName = typeof language === 'string' ? language : language.name;
+    const url = typeof language === 'string' ? null : language.url;
+    
     return {
       key: _key(language),
       dataKey: _key(language),
-      title: language === "Sub" ? "" : language,
+      title: url ? (
+        <a 
+          href={url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ 
+            color: '#0066cc',
+            textDecoration: 'none',
+            fontWeight: '500'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {displayName}
+        </a>
+      ) : (
+        <span>{displayName}</span>
+      ),
       width:
         index === 0
           ? 180
@@ -52,10 +77,11 @@ export const genData = (values) => {
           isLast: index === feature.Children.length - 1,
         };
         languages.forEach((language) => {
-          if (language === "Feature") {
-            data["Sub"] = child["Feature"];
+          const key = _key(language);
+          if (typeof language === 'string') {
+            data[key] = child[key];
           } else {
-            data[_key(language)] = child[_key(language)];
+            data[key] = child[key] !== undefined ? child[key] : child[language.name];
           }
         });
         datas.push(data);
@@ -68,7 +94,12 @@ export const genData = (values) => {
         rowSpan: () => 1,
       };
       languages.forEach((language) => {
-        data[_key(language)] = feature[_key(language)];
+        const key = _key(language);
+        if (typeof language === 'string') {
+          data[key] = feature[key];
+        } else {
+          data[key] = feature[key] !== undefined ? feature[key] : feature[language.name];
+        }
       });
       datas.push(data);
     }

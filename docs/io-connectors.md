@@ -77,12 +77,6 @@ Pulsar has various source connectors, which are sorted alphabetically as below.
 
 * [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/file/src/main/java/org/apache/pulsar/io/file/FileSource.java)
 
-### Twitter firehose
-
-* [Configuration](io-twitter-source.md#configuration)
-
-* [Java class](https://github.com/apache/pulsar/blob/master/pulsar-io/twitter/src/main/java/org/apache/pulsar/io/twitter/TwitterFireHose.java)
-
 ### Kafka
 
 * [Configuration](io-kafka-source.md#configuration)

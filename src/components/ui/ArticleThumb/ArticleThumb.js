@@ -54,7 +54,7 @@ const ArticleThumb = () => {
         <a
           target='_blank'
           className={s.Action}
-          href="https://github.com/apache/pulsar/issues/new?assignees=&labels=doc-required&projects=&template=doc.yml&title=%5BDoc%5D+"
+          href="https://github.com/apache/pulsar-site/issues/new"
         >
           💡 Suggest changes
         </a>

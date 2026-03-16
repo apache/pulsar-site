@@ -315,7 +315,7 @@ For Gradle users, there is a [Gradle Nar plugin available on the Gradle Plugin P
 
 :::tip
 
-For more information about **how to use NAR for Pulsar connectors**, see {@inject: github:TwitterFirehose:/pulsar-io/twitter/pom.xml}.
+For more information about **how to use NAR for Pulsar connectors**, see {@inject: github:DataGen:/pulsar-io/datagen/pom.xml}.
 
 :::
 

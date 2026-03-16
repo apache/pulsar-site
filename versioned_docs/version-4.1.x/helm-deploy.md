@@ -398,7 +398,7 @@ pulsar_manager:
 
 ## Troubleshoot
 
-Although we have done our best to make these charts as seamless as possible, troubles do go out of our control occasionally. We have been collecting tips and tricks for troubleshooting common issues. Check it first before raising an [issue](https://github.com/apache/pulsar/issues/new/choose), and feel free to add your solutions by creating a [Pull Request](https://github.com/apache/pulsar/compare).
+Although we have done our best to make these charts as seamless as possible, troubles do go out of our control occasionally. We have been collecting tips and tricks for troubleshooting common issues. Check it first before raising an [issue](https://github.com/apache/pulsar-helm-chart/issues/new/choose), and feel free to add your solutions by creating a [Pull Request](https://github.com/apache/pulsar-helm-chart/compare).
 
 
 ## Uninstall

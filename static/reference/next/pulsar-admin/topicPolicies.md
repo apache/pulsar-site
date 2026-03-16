@@ -301,6 +301,414 @@ $ pulsar-admin topicPolicies remove-message-ttl options
 | `[-v, --version]` | Print version information and exit.|null||
 
 
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# topicPolicies
+
+Operations on persistent topics
+
+
+```shell
+$ pulsar-admin topicPolicies subcommand
+```
+
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-message-ttl
+
+Get the message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-message-ttl
+
+Set message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-message-ttl
+
+Remove message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# topicPolicies
+
+Operations on persistent topics
+
+
+```shell
+$ pulsar-admin topicPolicies subcommand
+```
+
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-message-ttl
+
+Get the message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-message-ttl
+
+Set message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-message-ttl
+
+Remove message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# topicPolicies
+
+Operations on persistent topics
+
+
+```shell
+$ pulsar-admin topicPolicies subcommand
+```
+
+
+
+## delete
+
+Remove the all policies for a topic, it will not remove policies from the remotecluster
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies delete options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-message-ttl
+
+Get the message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-message-ttl
+
+Set message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-message-ttl
+
+Remove message TTL for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
 ## get-max-unacked-messages-per-consumer
 
 Get max unacked messages policy per consumer for a topic
@@ -391,6 +799,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -509,6 +971,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -645,6 +1161,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -799,6 +1369,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -971,6 +1595,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -1161,6 +1839,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -1369,6 +2101,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -1595,6 +2381,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -1839,6 +2679,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -2101,6 +2995,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -2381,6 +3329,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -2679,6 +3681,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -2995,6 +4051,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -3329,6 +4439,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -3681,6 +4845,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -4051,6 +5269,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -4439,6 +5711,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -4845,6 +6171,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -5269,6 +6649,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -5711,6 +7145,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -6171,6 +7659,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -6649,6 +8191,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -7145,6 +8741,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -7659,6 +9309,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -8191,6 +9895,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -8741,6 +10499,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -9309,6 +11121,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -9895,6 +11761,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -10499,6 +12419,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -11121,6 +13095,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -11761,6 +13789,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -12419,6 +14501,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -13095,6 +15231,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -13789,6 +15979,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -14501,6 +16745,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -15231,6 +17529,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -15979,6 +18331,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -16745,6 +19151,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -17529,6 +19989,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -18331,6 +20845,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -19151,6 +21719,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -19989,6 +22611,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -20845,6 +23521,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -21719,6 +24449,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -22611,6 +25395,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -23521,6 +26359,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -24449,6 +27341,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -25395,6 +28341,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -26359,6 +29359,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -27341,6 +30395,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -28341,6 +31449,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -29359,6 +32521,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -30395,6 +33611,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -31449,6 +34719,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -32521,6 +35845,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -33611,6 +36989,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -34719,6 +38151,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -35845,6 +39331,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -36989,6 +40529,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -38151,6 +41745,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -39331,6 +42979,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -40529,6 +44231,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -41745,6 +45501,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -42979,6 +46789,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -44231,6 +48095,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -45501,6 +49419,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -46789,6 +50761,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -48095,6 +52121,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -49419,6 +53499,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -50761,6 +54895,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -52121,6 +56309,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -53499,6 +57741,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -54895,6 +59191,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -56309,6 +60659,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -57741,6 +62145,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -59191,6 +63649,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -60659,6 +65171,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -62145,6 +66711,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -63649,6 +68269,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
@@ -65171,6 +69845,60 @@ Remove message TTL for a topic
 
 ```shell
 $ pulsar-admin topicPolicies remove-message-ttl options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-subscription-expiration-time
+
+Get subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies get-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## set-subscription-expiration-time
+
+Set subscription expiration time in minutes for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies set-subscription-expiration-time options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## remove-subscription-expiration-time
+
+Remove subscription expiration time for a topic
+
+**Command:**
+
+```shell
+$ pulsar-admin topicPolicies remove-subscription-expiration-time options
 ```
 
 **Options:**
