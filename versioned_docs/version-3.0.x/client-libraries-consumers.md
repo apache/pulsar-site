@@ -239,6 +239,12 @@ The `Shared` subscription is different from the `Exclusive` and `Failover` subsc
 
 This is a new subscription type since 2.4.0 release. Create new consumers and subscribe with `Key_Shared` subscription type.
 
+:::note Producer batching requirement
+
+When using Key_Shared subscriptions, producers **must** either **disable batching** or **use key-based batching** (e.g., `BatcherBuilder.KEY_BASED` in Java). Default batching may pack messages with different keys into the same batch, breaking Key_Shared routing semantics. See [below](#key_shared-batching) for code examples.
+
+:::
+
 ````mdx-code-block
 <Tabs groupId="lang-choice"
   defaultValue="Java"
