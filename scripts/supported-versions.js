@@ -35,7 +35,10 @@ function getSupportedVersionBranches(releases) {
     .sort((a, b) => semver.rcompare(b.version, a.version))
     .map(release => `${release.version.major}.${release.version.minor}.x`);
 
-  return supportedVersions;
+  const latestBranch = `${releaseList[0].version.major}.${releaseList[0].version.minor}.x`;
+  return supportedVersions.includes(latestBranch)
+    ? supportedVersions
+    : [...supportedVersions, latestBranch];
 }
 
 const supported = getSupportedVersionBranches(releases);
