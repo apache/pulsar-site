@@ -61,6 +61,49 @@ This example shows how to create a producer.
 </Tabs>
 ````
 
+### Producer naming
+
+Every producer has a name that must be **unique across all Pulsar clusters**. If you do not explicitly set a name, Pulsar generates a globally unique name automatically. If you assign a name, the broker enforces that only one producer with that name can publish on a topic at a time.
+
+You **must** set an explicit producer name when using [message deduplication](cookbooks-deduplication.md). Even when deduplication is not required, setting a meaningful producer name is recommended — it makes debugging significantly easier because the name appears in broker logs, admin stats, and metrics, letting you quickly trace messages back to the producing application.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Python","value":"Python"}]}>
+
+  <TabItem value="Java">
+
+  ```java
+  Producer<String> producer = pulsarClient.newProducer(Schema.STRING)
+                .topic("my-topic")
+                .producerName("my-unique-producer-name")
+                .create();
+  ```
+
+  </TabItem>
+
+  <TabItem value="C++">
+
+  ```cpp
+  ProducerConfiguration producerConfig;
+  producerConfig.setProducerName("my-unique-producer-name");
+  Producer producer;
+  Result result = client.createProducer("my-topic", producerConfig, producer);
+  ```
+
+  </TabItem>
+
+  <TabItem value="Python">
+
+  ```python
+  producer = client.create_producer('my-topic', producer_name='my-unique-producer-name')
+  ```
+
+  </TabItem>
+</Tabs>
+````
+
 ## Publish messages
 
 Pulsar supports both synchronous and asynchronous publishing of messages in most clients. In some language-specific clients, such as Node.js and C#, you can publish messages synchronously based on the asynchronous method using language-specific mechanisms (like `await`).

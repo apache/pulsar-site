@@ -21,6 +21,12 @@ Whenever the TCP connection breaks, the client immediately re-initiates this set
 
 A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](reference-terminology.md#broker). The Pulsar broker processes the messages.
 
+### Producer naming
+
+Every producer has a name that **must be unique across all Pulsar clusters**. If you do not explicitly assign a name when creating a producer, Pulsar automatically generates a globally unique name. If you choose to set a name explicitly, the broker enforces that only one producer with that name can be publishing on a topic at any given time — attempting to create a second producer with the same name on the same topic will fail.
+
+Explicitly naming producers is required when using [message deduplication](cookbooks-deduplication.md), because Pulsar uses the producer name together with the sequence ID to identify and filter duplicate messages. It is also useful for debugging and monitoring, since the producer name appears in metrics and admin stats.
+
 ### Send mode
 
 Producers send messages to brokers synchronously (sync) or asynchronously (async).

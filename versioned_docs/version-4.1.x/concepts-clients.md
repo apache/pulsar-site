@@ -13,12 +13,12 @@ Pulsar client libraries support transparent reconnection and/or connection failo
 
 Before an application creates a producer/consumer, the Pulsar client library needs to initiate a setup phase including two steps:
 
-1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker. 
+1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker.
 
     The request could reach one of the active brokers which, by looking at the (cached) Zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
 
-2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. 
-    
+2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it.
+
     Within this connection, the client and broker exchange binary commands from a custom protocol. At this point, the client sends a command to create producer/consumer to the broker, which will comply after having validated the authorization policy.
 
 Whenever the TCP connection breaks, the client immediately re-initiates this setup phase and keeps trying with exponential backoff to re-establish the producer or consumer until the operation succeeds.
@@ -26,6 +26,12 @@ Whenever the TCP connection breaks, the client immediately re-initiates this set
 ## Producer
 
 A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](concepts-architecture-overview.md#broker). The Pulsar broker processes the messages.
+
+### Producer naming
+
+Every producer has a name that **must be unique across all Pulsar clusters**. If you do not explicitly assign a name when creating a producer, Pulsar automatically generates a globally unique name. If you choose to set a name explicitly, the broker enforces that only one producer with that name can be publishing on a topic at any given time — attempting to create a second producer with the same name on the same topic will fail.
+
+Explicitly naming producers is required when using [message deduplication](cookbooks-deduplication.md), because Pulsar uses the producer name together with the sequence ID to identify and filter duplicate messages. It is also useful for debugging and monitoring, since the producer name appears in metrics and admin stats.
 
 ### Send mode
 
