@@ -28,7 +28,7 @@ Messages are the basic "unit" of Pulsar. They're what producers publish to topic
 | Value / data payload | The data carried by the message. All Pulsar messages contain raw bytes, although message data can also conform to data [schemas](schema-get-started.md).                                                                                                                                                                                                                                                                   |
 | Key                  | The key (string type) of the message. It is a short name of message key or partition key. Messages are optionally tagged with keys, which is useful for features like [topic compaction](concepts-topic-compaction.md).                                                                                                                                                                                                    |
 | Properties           | An optional key/value map of user-defined properties.                                                                                                                                                                                                                                                                                                                                                                      |
-| Producer name        | The name of the producer who produces the message. If you do not specify a producer name, the default name is used.                                                                                                                                                                                                                                                                                                        |
+| Producer name        | The name of the producer who produces the message. If you do not specify a producer name, Pulsar automatically generates a globally unique name. If you explicitly assign a name, it **must be unique across all Pulsar clusters**, otherwise the producer will fail to create. The broker enforces that only one producer with the same name can be publishing on a topic at any given time. See [Producer naming](concepts-clients.md#producer-naming) for details. |
 | Topic name           | The name of the topic that the message is published to.                                                                                                                                                                                                                                                                                                                                                                    |
 | Schema version       | The version number of the schema that the message is produced with.                                                                                                                                                                                                                                                                                                                                                        |
 | Sequence ID          | Each Pulsar message belongs to an ordered sequence on its topic. The sequence ID of a message is initially assigned by its producer, indicating its order in that sequence, and can also be customized.<br />Sequence ID can be used for message deduplication. If `brokerDeduplicationEnabled` is set to `true`, the sequence ID of each message is unique within a producer of a topic (non-partitioned) or a partition. |
@@ -656,6 +656,14 @@ Shared subscriptions do not guarantee message ordering or support cumulative ack
 #### Key_Shared
 
 The Key_Shared subscription type in Pulsar allows multiple consumers to attach to the same subscription. But different with the Shared type, messages in the Key_Shared type are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
+
+:::note Producer requirements for Key_Shared
+
+When using Key_Shared subscriptions, producers **must** either **disable batching** or **use key-based batching** (e.g., `BatcherBuilder.KEY_BASED` in Java). The default batching strategy may pack messages with different keys into the same batch, which breaks Key_Shared routing because the broker uses the first message's key to route the entire batch.
+
+See [Batching for Key_Shared Subscriptions](#batching-for-key_shared-subscriptions) for details and code examples.
+
+:::
 
 ![Key_Shared subscription type in Pulsar](/assets/pulsar-key-shared-subscriptions.svg)
 
