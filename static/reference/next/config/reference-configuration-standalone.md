@@ -2752,6 +2752,17 @@ The schema compatibility strategy in broker level
 
 **Category**: Schema
 
+### schemaJsonAllowLegacyJacksonFormat
+Whether to allow legacy Jackson JsonSchema format for SchemaType.JSON schema definitions. When false (default), only valid Apache Avro schema format is accepted for SchemaType.JSON, consistent with what the consumer side requires. When true, the pre-2.1 backward-compatible behavior is preserved for deployments that still have topics with legacy-format schemas. See PIP-464 for details.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Schema
+
 ### schemaRegistryCompatibilityCheckers
 The list compatibility checkers to be used in schema registry
 
@@ -3692,7 +3703,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `2000`
 
 **Dynamic**: `true`
 
@@ -5316,7 +5327,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `800`
 
 **Dynamic**: `true`
 
