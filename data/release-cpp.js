@@ -1,4 +1,5 @@
 module.exports = [
+{tagName: "v4.1.0",vtag:"4.1.x",releaseNotes:"/release-notes/versioned/client-cpp-4.1.0/",doc:"/docs/client-libraries-cpp",version:"v4.1.x"},
 {tagName: "v4.0.1",vtag:"4.0.x",releaseNotes:"/release-notes/versioned/client-cpp-4.0.1/",doc:"/docs/client-libraries-cpp",version:"v4.0.x"},
 {tagName: "v4.0.0",vtag:"4.0.x",releaseNotes:"/release-notes/versioned/client-cpp-4.0.0/",doc:"/docs/client-libraries-cpp",version:""},
 {tagName: "v3.8.0",vtag:"3.8.x",releaseNotes:"/release-notes/versioned/client-cpp-3.8.0/",doc:"/docs/client-libraries-cpp",version:"v3.8.x"},
