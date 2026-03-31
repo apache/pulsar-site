@@ -1,0 +1,38 @@
+---
+id: concepts-overview
+title: Pulsar Overview
+sidebar_label: "Overview"
+description: Key features of Pulsar.
+---
+
+Pulsar is a multi-tenant, high-performance solution for server-to-server messaging. Originally developed by Yahoo, Pulsar is under the stewardship of the [Apache Software Foundation](https://www.apache.org/).
+
+## Key features
+
+Key features of Pulsar are listed below:
+
+* Native support for multiple clusters in a Pulsar instance, with seamless [geo-replication](administration-geo.md) of messages across clusters.
+* Very low publish and end-to-end latency.
+* Seamless scalability to over a million topics.
+* A simple [client API](concepts-clients.md) with bindings for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md), [C#/.NET](client-libraries-dotnet.md), [Node.js](client-libraries-node.md), and [WebSocket](client-libraries-websocket.md).
+* Multiple [subscription types](concepts-messaging.md#subscription-types) ([exclusive](concepts-messaging.md#exclusive), [shared](concepts-messaging.md#shared), [failover](concepts-messaging.md#failover), and [key_shared](concepts-messaging.md#key_shared)) for topics.
+* Guaranteed message delivery with [persistent message storage](concepts-architecture-overview.md#persistent-storage) provided by [Apache BookKeeper](http://bookkeeper.apache.org/).
+* A serverless lightweight computing framework [Pulsar Functions](functions-overview.md) offers the capability for stream-native data processing.
+* A serverless connector framework [Pulsar IO](io-overview.md), which is built on Pulsar Functions, makes it easier to move data in and out of Apache Pulsar.
+* [Tiered Storage](tiered-storage-overview.md) offloads data from hot/warm storage to cold/long-term storage (such as S3 and GCS) when the data is aging out.
+* Native support for [transactions](concepts-transactions.md) enabling atomic operations across topics and partitions.
+* Flexible [authentication and authorization](concepts-authentication.md) with support for multiple providers including OAuth/OIDC.
+
+## Contents
+
+- [Messaging Concepts](concepts-messaging.md)
+- [Architecture Overview](concepts-architecture-overview.md)
+- [Pulsar Clients](concepts-clients.md)
+- [Geo Replication](concepts-replication.md)
+- [Cluster-level failover](concepts-cluster-level-failover.md)
+- [Multi Tenancy](concepts-multi-tenancy.md)
+- [Authentication and Authorization](concepts-authentication.md)
+- [Topic Compaction](concepts-topic-compaction.md)
+- [Message throttling](concepts-throttling.md)
+- [Proxy support with SNI routing](concepts-proxy-sni-routing.md)
+- [Multiple advertised listeners](concepts-multiple-advertised-listeners.md)
