@@ -18,19 +18,14 @@ const versions = [
     path: "/docs/next"
   },
   {
-    label: '4.1.x',
-    name: '4.1.x',
-    path: `/docs/4.1.x`,
+    label: '4.2.x',
+    name: '4.2.x',
+    path: `/docs/4.2.x`,
   },
   {
     label: '4.0.x LTS',
     name: '4.0.x',
     path: `/docs/4.0.x`,
-  },
-  {
-    label: '3.3.x',
-    name: '3.3.x',
-    path: `/docs/3.3.x`,
   },
   {
     label: '3.0.x LTS',
