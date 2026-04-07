@@ -103,7 +103,7 @@ For a complete list of all available configuration properties, see the [Pulsar C
 Pulsar Docker images include a Python script called `apply-config-from-env.py` that runs before the main process starts. This script reads all environment variables and maps them directly to configuration file properties:
 
 1. If an environment variable name matches a key in the built-in configuration file shipped with the container (e.g., `broker.conf` or `bookkeeper.conf`), the script updates that key's value.
-2. Environment variables prefixed with `PULSAR_PREFIX_` are also supported — the prefix is stripped and the remaining name is used as the configuration key. This is useful when the configuration key conflicts with existing system environment variables.
+2. Environment variables prefixed with `PULSAR_PREFIX_` are also supported — the prefix is stripped and the remaining name is used as the configuration key. This is useful when the configuration key conflicts with existing system environment variables. Using `PULSAR_PREFIX_` is necessary for configuration keys that aren't available in the shipped configuration files, but are supported by the component (for example, keys available in Pulsar's [ServiceConfiguration](https://github.com/apache/pulsar/blob/master/pulsar-broker-common/src/main/java/org/apache/pulsar/broker/ServiceConfiguration.java)).
 
 For example, setting `-e managedLedgerDefaultEnsembleSize=2` will update the `managedLedgerDefaultEnsembleSize` property in the target configuration file.
 
