@@ -36,8 +36,8 @@ _buildVersion() {
 }
 
 COMMIT_MSG=$(git show -s --format="%s %B")
-FORCE_BUILD_ALL_VERSION=$(echo "$COMMIT_MSG" | sed 's/.*BUILD_ALL_VERSION=\([0-1]*\).*/\1/g')
-FORCE_BUILD_VERSIONS=$(echo "$COMMIT_MSG" | sed 's/.*BUILD_VERSIONS=\([0-9\.x,]*\).*/\1/g')
+FORCE_BUILD_ALL_VERSION=$(echo "$COMMIT_MSG" | sed -n 's/.*BUILD_ALL_VERSION=\([0-1]*\).*/\1/p')
+FORCE_BUILD_VERSIONS=$(echo "$COMMIT_MSG" | sed -n 's/.*BUILD_VERSIONS=\([0-9\.x,]*\).*/\1/p')
 if [[ $FORCE_BUILD_VERSIONS =~ ^[0-9\.x,]+$ ]]; then
     SUPPLEMENT_VERSIONS=$FORCE_BUILD_VERSIONS
 else
