@@ -122,6 +122,16 @@ const injectLinkParseForEndpoint = (info) => {
 /** @type {import('@docusaurus/types').Config} */
 module.exports = async function createConfigAsync() {
   return {
+    future: {
+      faster: {
+        swcJsLoader: true,
+        swcJsMinimizer: true,
+        swcHtmlMinimizer: true,
+        lightningCssMinimizer: true,
+        rspackBundler: true,
+        mdxCrossCompilerCache: true,
+      },
+    },
     title: "Apache Pulsar",
     tagline:
       "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",

@@ -9,13 +9,13 @@ if [[ "$1" == "--clean" || "$1" == "-c" ]]; then
     CLEAN=true
 fi
 
-BUILD_VERSIONS="[\"current\""
-for version in $@; do
-    BUILD_VERSIONS=$BUILD_VERSIONS", \""$version"\""
+BUILD_VERSIONS='["current"'
+for version in "$@"; do
+    BUILD_VERSIONS="${BUILD_VERSIONS}, \"${version}\""
 done
-BUILD_VERSIONS=$BUILD_VERSIONS"]"
+BUILD_VERSIONS="${BUILD_VERSIONS}]"
 
-echo $BUILD_VERSIONS >.build-versions.json
+echo "$BUILD_VERSIONS" >.build-versions.json
 
 show_yarn_installation_help() {
     echo "yarn is not available. yarn comes with corepack. corepack is part of the node runtime package in Homebrew."
@@ -31,7 +31,7 @@ if ! command -v yarn &>/dev/null; then
     exit 1
 fi
 
-yarn help 2>&1 >/dev/null || {
+yarn help >/dev/null 2>&1 || {
     show_yarn_installation_help
     exit 1
 }
