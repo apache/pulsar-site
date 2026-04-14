@@ -38,7 +38,7 @@ docker run -it \
 --mount source=pulsardata,target=/pulsar/data \
 --mount source=pulsarconf,target=/pulsar/conf \
 apachepulsar/pulsar:@pulsar:version@ \
-bin/pulsar standalone
+bin/pulsar standalone --advertised-address localhost
 ```
 
 </TabItem>
@@ -52,7 +52,7 @@ docker run -it ^
 --mount source=pulsardata,target=/pulsar/data ^
 --mount source=pulsarconf,target=/pulsar/conf ^
 apachepulsar/pulsar:@pulsar:version@ ^
-bin/pulsar standalone
+bin/pulsar standalone --advertised-address localhost
 ```
 
 </TabItem>
@@ -61,6 +61,10 @@ bin/pulsar standalone
 ````
 
 :::tip
+
+These examples set `--advertised-address localhost` to preserve the previous local Docker behavior. A client can connect to `localhost:6650` on the host machine, and the broker will also advertise `localhost` back to the client as the address to use for subsequent connections.
+
+If you omit this option, Pulsar uses the container's FQDN by default. That works when the advertised hostname is resolvable and reachable from your clients, such as from other containers on the same network or from remote hosts, but it can break host-machine clients if that FQDN is not reachable from outside the container.
 
 By default, Pulsar uses RocksDB as the metadata store, which is recommended for standalone instances. 
 
@@ -95,7 +99,7 @@ docker run -it \
 apachepulsar/pulsar:@pulsar:version@ sh \
 -c "bin/apply-config-from-env.py \
 conf/standalone.conf && \
-bin/pulsar standalone"
+bin/pulsar standalone --advertised-address localhost"
 ```
 
 </TabItem>
@@ -112,7 +116,7 @@ docker run -it ^
 apachepulsar/pulsar:@pulsar:version@ sh ^
 -c "bin/apply-config-from-env.py ^
 conf/standalone.conf && ^
-bin/pulsar standalone"
+bin/pulsar standalone --advertised-address localhost"
 ```
 
 </TabItem>
@@ -297,4 +301,3 @@ The output is something like this:
     "nonContiguousDeletedMessagesRangesSerializedSize": 0
 }
 ```
-
