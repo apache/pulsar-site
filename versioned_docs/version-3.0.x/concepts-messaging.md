@@ -150,6 +150,16 @@ If batching is enabled, all messages in one batch are redelivered to the consume
 
 :::
 
+:::caution Redelivery counter is not persisted
+
+With `negativeAcknowledge`, the redelivery counter is kept **only in memory**. It resets to zero whenever the broker closes the subscription dispatcher — which happens on broker restart, bundle unload/rebalance, topic unload, or consumer disconnect.
+
+As a result, `DeadLetterPolicy.maxRedeliverCount` **may never be reached** and failing messages can be redelivered indefinitely without reaching the [dead letter topic](#dead-letter-topic).
+
+If your application needs a reliable retry limit, use [`reconsumeLater`](#retry-letter-topic) with `enableRetry(true)` instead — the retry count is persisted as a message property and survives all of the above events.
+
+:::
+
 ### Acknowledgment timeout
 
 :::note
@@ -300,7 +310,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 :::note
 
 *  Currently, retry letter topic is enabled in Shared subscription types.
-*  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a large number of retries with a configurable retry interval. Because messages in the retry letter topic are persisted to BookKeeper, while messages that need to be retried due to negative acknowledgment are cached on the client side.
+*  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a reliable retry limit. Messages in the retry letter topic have their retry count persisted as a message property, while the redelivery counter used by `negativeAcknowledge` is kept only in memory and [can be reset unexpectedly](#negative-acknowledgment). This makes `reconsumeLater` with `enableRetry(true)` the only mechanism that guarantees `maxRedeliverCount` is honored and the [dead letter topic](#dead-letter-topic) is eventually reached.
 
 :::
 
@@ -363,6 +373,12 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 ```
 
 Dead letter topic serves message redelivery, which is triggered by [acknowledgment timeout](#acknowledgment-timeout) or [negative acknowledgment](#negative-acknowledgment) or [retry letter topic](#retry-letter-topic).
+
+:::caution maxRedeliverCount may not be honored with negativeAcknowledge
+
+Without `enableRetry(true)`, the redelivery counter that drives `maxRedeliverCount` is not persisted and [can be reset unexpectedly](#negative-acknowledgment). To guarantee that failing messages eventually reach the dead letter topic, use [`reconsumeLater`](#retry-letter-topic) with `enableRetry(true)`.
+
+:::
 
 :::note
 
