@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/pulsar-site)
+
 # Apache Pulsar Website and Documentation
 
 This repository contains the [Apache Pulsar website](https://pulsar.apache.org) source code and Apache Pulsar documentation.
