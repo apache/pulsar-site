@@ -632,6 +632,22 @@ The total amount of data read from the ledger.
   * `pulsar.managed_ledger.name` - The name of the managed ledger.
   * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
 
+#### pulsar.broker.managed_ledger.cursor.persist.unacked_ranges.truncated
+The number of times a cursor exceeded `managedLedgerMaxUnackedRangesToPersist`, causing ack state to be truncated at persistence. Ack state beyond the limit is lost on broker restart.
+* Type: Counter
+* Unit: `{truncation}`
+* Attributes:
+  * `managedLedger` - The name of the managed ledger.
+  * `cursor` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.persist.batch_deleted_indexes.truncated
+The number of times a cursor exceeded `managedLedgerMaxBatchDeletedIndexToPersist`, causing batch deleted index state to be truncated at persistence. State beyond the limit is lost on broker restart.
+* Type: Counter
+* Unit: `{truncation}`
+* Attributes:
+  * `managedLedger` - The name of the managed ledger.
+  * `cursor` - The name of the managed cursor.
+
 ### Managed Ledger Cache metrics
 
 #### pulsar.broker.managed_ledger.count
