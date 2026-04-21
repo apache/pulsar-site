@@ -637,16 +637,18 @@ The number of times a cursor exceeded `managedLedgerMaxUnackedRangesToPersist`, 
 * Type: Counter
 * Unit: `{truncation}`
 * Attributes:
-  * `managedLedger` - The name of the managed ledger.
-  * `cursor` - The name of the managed cursor.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
 
 #### pulsar.broker.managed_ledger.cursor.persist.batch_deleted_indexes.truncated
 The number of times a cursor exceeded `managedLedgerMaxBatchDeletedIndexToPersist`, causing batch deleted index state to be truncated at persistence. State beyond the limit is lost on broker restart.
 * Type: Counter
 * Unit: `{truncation}`
 * Attributes:
-  * `managedLedger` - The name of the managed ledger.
-  * `cursor` - The name of the managed cursor.
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
 
 ### Managed Ledger Cache metrics
 
