@@ -1081,11 +1081,11 @@ When you use Key_Shared subscriptions, be aware that:
 
 #### What is a subscription mode
 
-The subscription mode indicates the cursor belongs to durable type or non-durable type.
+The subscription mode indicates whether the cursor belongs to durable type or non-durable type.
 
 - When a subscription is created, an associated cursor is created to record the last consumed position.
 
-- When a consumer of the subscription restarts, it can continue consuming from the last message it consumes.
+- When a consumer of the subscription restarts, it can continue consuming from the last message it consumed.
 
 | Subscription mode | Description                                                                                                                                                                                                                                                                   | Note                                                                                                                                                                |
 |:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
