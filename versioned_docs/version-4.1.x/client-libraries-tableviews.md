@@ -69,6 +69,15 @@ You can use the available parameters in the `loadConf` configuration or the API 
 </Tabs>
 ````
 
+:::note Tombstone (null-value) messages
+
+`TableView` treats a message with a `null` payload as a **tombstone** - the key is removed from the map.
+
+- `forEach(action)` iterates over the current map snapshot only, so it **does not** surface keys that have been tombstoned.
+- `forEachAndListen(action)` first runs `forEach` over the current non-tombstoned entries, then registers the action as a live listener. Every subsequent update - **including tombstones** - is delivered to the listener as `action.accept(key, null)`. If you need to react to deletions (for example, to clean up downstream state), check for `value == null` in your listener.
+
+:::
+
 ## Register listeners
 
 You can register listeners for both existing messages on a topic and new messages coming into the topic by using `forEachAndListen`, and specify to perform operations for all existing messages by using `forEach`.
