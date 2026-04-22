@@ -28,99 +28,15 @@ try {
 }
 
 const {
-  siteUrl,
-  javadocUrl,
-  restApiUrl,
-  functionsApiUrl,
-  sourceApiUrl,
-  sinkApiUrl,
-  packagesApiUrl,
-  transactionsApiUrl,
-  lookupApiUrl,
-  githubUrl,
   githubSiteUrl,
   baseUrl,
-  restApiBaseUrlMapping
+  restApiBaseUrlMapping,
 } = require("./site-baseurls");
-
-const injectLinkParse = (prefix, name, path) => {
-  if (prefix == "javadoc") {
-    return {
-      link: javadocUrl + path,
-      text: name,
-    };
-  } else if (prefix == "github") {
-    return {
-      link: githubUrl + "/tree/master/" + path,
-      text: name,
-    };
-  } else if (prefix == "rest") {
-    return {
-      link: restApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "functions") {
-    return {
-      link: functionsApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "source") {
-    return {
-      link: sourceApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "sink") {
-    return {
-      link: sinkApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "packages") {
-    return {
-      link: packagesApiUrl + "#" + path,
-      text: name,
-    };
-  }
-
-  return {
-    link: path,
-    text: name,
-  };
-};
-
-const injectLinkParseForEndpoint = (info) => {
-  let [method, path, suffix] = info.split("|");
-
-  if (!suffix) {
-    suffix = "";
-  }
-
-  let restPath = path.split("/");
-  const restApiVersion = restPath[2];
-  const restApiType = restPath[3];
-  const restBaseUrl = restApiBaseUrlMapping[restApiType] || restApiUrl;
-
-  let restUrl;
-  if (suffix.indexOf("?version=") >= 0) {
-    const suffixAndVersion = suffix.split("?version=")
-    restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" + suffixAndVersion[0];
-    if (suffixAndVersion[0].startsWith("operation/")) {
-      path += suffixAndVersion[0].slice("operation".length)
-    }
-  } else {
-    restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
-    if (suffix.startsWith("operation/")) {
-      path += suffix.slice("operation".length)
-    }
-  }
-
-  return {
-    text: method + " " + path,
-    link: restBaseUrl + "?" + restUrl,
-  };
-};
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = async function createConfigAsync() {
+  const injectPreprocessor = (await import("./src/server/markdownPreprocessors/inject")).default;
+  const pulsarVariablesPreprocessor = (await import("./src/server/markdownPreprocessors/pulsarVariables")).default;
   return {
     future: {
       faster: {
@@ -147,21 +63,10 @@ module.exports = async function createConfigAsync() {
       hooks: {
         onBrokenMarkdownLinks: "warn",
       },
-      preprocessor: ({ filePath, fileContent }) => {
-        return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
-          const p1Trimmed = p1.trim();
-          const endpointPrefix = 'endpoint|';
-          let link, text;
-          if (p1Trimmed.startsWith(endpointPrefix)) {
-            // @ts-ignore
-            ({ link, text } = injectLinkParseForEndpoint(p1Trimmed.substring(endpointPrefix.length)));
-          } else {
-            const [prefix, name, path] = p1Trimmed.split(':');
-            ({ link, text } = injectLinkParse(prefix, name, path));
-          }
-          return `[${text}](${link})`; // Format as a markdown link
-        });
-      },
+      preprocessor: (args) => injectPreprocessor({
+        ...args,
+        fileContent: pulsarVariablesPreprocessor(args),
+      }),
     },
     themes: ['@docusaurus/theme-mermaid'],
     themeConfig:
