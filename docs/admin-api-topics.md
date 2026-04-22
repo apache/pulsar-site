@@ -257,6 +257,38 @@ admin.topics().unload(topic);
 </Tabs>
 ````
 
+### Truncate topic
+
+You can truncate a topic in the following ways. The truncate operation moves all cursors to the end of the topic and deletes all inactive ledgers, freeing the storage used by messages that have already been consumed.
+
+````mdx-code-block
+<Tabs groupId="api-choice"
+  defaultValue="pulsar-admin"
+  values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
+<TabItem value="pulsar-admin">
+
+```shell
+pulsar-admin topics truncate persistent://test-tenant/ns1/tp1
+```
+
+</TabItem>
+<TabItem value="REST API">
+
+[](swagger:/admin/v2/PersistentTopics_truncateTopic)
+
+</TabItem>
+<TabItem value="Java">
+
+```java
+String topic = "persistent://my-tenant/my-namespace/my-topic";
+admin.topics().truncate(topic);
+```
+
+</TabItem>
+
+</Tabs>
+````
+
 ### Get stats
 
 For the detailed statistics of a topic, see [Pulsar statistics](administration-stats.md#topic-stats).
