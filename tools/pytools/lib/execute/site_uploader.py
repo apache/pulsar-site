@@ -48,7 +48,7 @@ def _do_push(msg: str, site: Path, branch: str):
     git = find_command('git', msg="git is required")
 
     run(git, 'add', '-A', '.', cwd=site)
-    changed = run(git, 'diff-index', '--quiet', 'HEAD', codes={0, 1}).returncode
+    changed = run(git, 'diff-index', '--quiet', 'HEAD', codes={0, 1}, cwd=site).returncode
     print(f'changed: {changed}')
 
     run(git, 'status', cwd=site)

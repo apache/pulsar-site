@@ -33,6 +33,21 @@ After committing the changes for the `docs` directory, you can use the `docs-too
 ./scripts/docs-tool.sh apply_changes_to_versioned_docs
 ```
 
+## Markdown placeholders
+
+Markdown files under `docs/` and `versioned_docs/version-*/` are run through
+two preprocessors at build time:
+
+- `@pulsar:version@`, `@pulsar:rpm:client@`, `@pulsar:apidoc:python@`, etc. —
+  version-aware tokens. The values come from `versions.json`, `site-baseurls.js`,
+  and `data/release-*.js`. See `src/config/pulsarVariables.ts` for the full list.
+- `{@inject:javadoc:Name:org/...}`, `{@inject:endpoint|GET|/admin/...}` — link
+  expansion for Javadoc, GitHub, REST endpoints. See
+  `src/server/markdownPreprocessors/inject.ts`.
+
+To reference the same values from React components, import from
+`@site/src/config/pulsarVariables` — no placeholder is needed in `.js`/`.tsx`.
+
 ## More information
 
 * [Pulsar Website contribution guide](https://pulsar.apache.org/contribute/site-intro/)
