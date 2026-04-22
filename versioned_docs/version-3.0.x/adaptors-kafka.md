@@ -7,6 +7,12 @@ sidebar_label: "Kafka client wrapper"
 
 Pulsar provides an easy option for applications that are currently written using the [Apache Kafka](http://kafka.apache.org) Java client API.
 
+:::note
+
+The Pulsar Kafka wrapper artifacts (`pulsar-client-kafka` and `pulsar-client-kafka-original`) live in the separate [apache/pulsar-adapters](https://github.com/apache/pulsar-adapters) repository, and the last released version on Maven Central is [`@pulsar:version:adapters@`](https://repo1.maven.org/maven2/org/apache/pulsar/pulsar-client-kafka/). Even when you run a newer Pulsar broker (3.x / 4.x), keep the dependency pinned to `@pulsar:version:adapters@` -- newer matching artifacts are not published.
+
+:::
+
 ## Use the Pulsar Kafka compatibility wrapper
 
 In an existing application, change the regular Kafka client dependency and replace it with the Pulsar Kafka wrapper. Remove the following dependency in `pom.xml`:
@@ -25,7 +31,7 @@ Then include this dependency for the Pulsar Kafka wrapper:
 <dependency>
   <groupId>org.apache.pulsar</groupId>
   <artifactId>pulsar-client-kafka</artifactId>
-  <version>@pulsar:version@</version>
+  <version>@pulsar:version:adapters@</version>
 </dependency>
 ```
 
@@ -43,7 +49,7 @@ unshaded Pulsar Kafka client wrapper.
 <dependency>
   <groupId>org.apache.pulsar</groupId>
   <artifactId>pulsar-client-kafka-original</artifactId>
-  <version>@pulsar:version@</version>
+  <version>@pulsar:version:adapters@</version>
 </dependency>
 ```
 
