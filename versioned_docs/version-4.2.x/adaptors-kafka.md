@@ -10,7 +10,7 @@ Pulsar provides an easy option for applications that are currently written using
 
 :::note
 
-The Pulsar Kafka wrapper artifacts (`pulsar-client-kafka` and `pulsar-client-kafka-original`) live in the separate [apache/pulsar-adapters](https://github.com/apache/pulsar-adapters) repository, and the last released version on Maven Central is [`2.11.0`](https://repo1.maven.org/maven2/org/apache/pulsar/pulsar-client-kafka/) (released Mar 2023). Even when you run a newer Pulsar broker (3.x / 4.x), keep the dependency pinned to `2.11.0` -- newer matching artifacts are not published.
+The Pulsar Kafka wrapper artifacts (`pulsar-client-kafka` and `pulsar-client-kafka-original`) live in the separate [apache/pulsar-adapters](https://github.com/apache/pulsar-adapters) repository, and the last released version on Maven Central is [`@pulsar:version:adapters@`](https://repo1.maven.org/maven2/org/apache/pulsar/pulsar-client-kafka/) (released Mar 2023). Even when you run a newer Pulsar broker (3.x / 4.x), keep the dependency pinned to `@pulsar:version:adapters@` -- newer matching artifacts are not published.
 
 :::
 
@@ -34,7 +34,7 @@ To use the Pulsar Kafka compatibility wrapper, complete the following steps.
 <dependency>
   <groupId>org.apache.pulsar</groupId>
   <artifactId>pulsar-client-kafka</artifactId>
-  <version>2.11.0</version>
+  <version>@pulsar:version:adapters@</version>
 </dependency>
 ```
 
@@ -52,7 +52,7 @@ unshaded Pulsar Kafka client wrapper.
 <dependency>
   <groupId>org.apache.pulsar</groupId>
   <artifactId>pulsar-client-kafka-original</artifactId>
-  <version>2.11.0</version>
+  <version>@pulsar:version:adapters@</version>
 </dependency>
 ```
 
