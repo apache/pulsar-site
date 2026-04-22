@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-FROM node:22-bookworm as build
+FROM node:24-bookworm AS build
 
 WORKDIR /build-site
 
