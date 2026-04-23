@@ -229,12 +229,12 @@ If the message has been successfully published to the topic, you should see a co
 
 ## Using Pulsar clients locally
 
-Pulsar currently offers client libraries for [Java](client-libraries-java.md), [Python](client-libraries-python.md), and [C++](client-libraries-cpp.md). If you're running a local standalone cluster, you can use one of these root URLs for interacting with your cluster:
+Pulsar currently offers client libraries for [Java](pathname:///docs/client-libraries/java), [Python](pathname:///docs/client-libraries/python), and [C++](pathname:///docs/client-libraries/cpp). If you're running a local standalone cluster, you can use one of these root URLs for interacting with your cluster:
 
 * `http://localhost:8080`
 * `pulsar://localhost:6650`
 
-Here's an example producer for a Pulsar topic using the [Java](client-libraries-java.md) client:
+Here's an example producer for a Pulsar topic using the [Java](pathname:///docs/client-libraries/java) client:
 
 ```java
 
@@ -245,7 +245,7 @@ Producer<byte[]> producer = client.newProducer().topic("my-topic").create();
 
 ```
 
-Here's an example [Python](client-libraries-python.md) producer:
+Here's an example [Python](pathname:///docs/client-libraries/python) producer:
 
 ```python
 
@@ -256,7 +256,7 @@ producer = client.create_producer('my-topic')
 
 ```
 
-Finally, here's an example [C++](client-libraries-cpp.md) producer:
+Finally, here's an example [C++](pathname:///docs/client-libraries/cpp) producer:
 
 ```cpp
 

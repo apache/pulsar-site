@@ -5,7 +5,7 @@ sidebar_label: "Clients"
 description: Get a comprehensive understanding of client APIs with language bindings for Java, C++, Go, Python, Node.js and C# in Pulsar.
 ---
 
-Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [C++](client-libraries-cpp.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [Node.js](client-libraries-node.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
+Pulsar exposes a client API with language bindings for [Java](pathname:///docs/client-libraries/java), [C++](pathname:///docs/client-libraries/cpp), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python), [Node.js](pathname:///docs/client-libraries/node) and [C#](pathname:///docs/client-libraries/dotnet). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
 
 Pulsar client libraries support transparent reconnection and/or connection failover to brokers, queuing of messages until acknowledged by the broker, and heuristics such as connection retries with backoff.
 
@@ -82,7 +82,7 @@ Receive mode is a mechanism determining whether messages are received from [brok
 
 ### Listener
 
-Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries provide listener implementation for consumers. For example, the [Java client](pathname:///docs/client-libraries/java) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ## Reader
 
