@@ -2,6 +2,7 @@
 id: java
 title: Pulsar Java client
 sidebar_label: "Java"
+description: Learn how to use the Pulsar Java client to create producers, consumers, and readers, and to perform administrative tasks.
 ---
 
 You can use a Pulsar Java client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Java and perform [administrative tasks](pathname:///docs/admin-api-overview). All the methods in Java clients are thread-safe. The current Java client LTS version is **@pulsar:version:lts@** and the most recent version is **@pulsar:version:latest@**.
