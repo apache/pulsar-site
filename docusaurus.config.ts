@@ -27,6 +27,36 @@ try {
   //do nothing
 }
 
+// Legacy /docs/<version>/client-libraries-<slug> URLs redirect to the new
+// unversioned /docs/client-libraries/<slug> location. In production the
+// .htaccess rule handles this via regex; these static entries cover dev mode
+// and hosts without mod_rewrite.
+function clientLibrariesLegacyRedirects() {
+  const slugs = [
+    "java", "java-setup", "java-initialize", "java-use", "java-tracing",
+    "cpp", "cpp-setup", "cpp-initialize", "cpp-use",
+    "go", "go-setup", "go-initialize", "go-use",
+    "python", "python-setup", "python-initialize", "python-use",
+    "node", "node-setup", "node-initialize", "node-use", "node-configs",
+    "dotnet", "dotnet-setup", "dotnet-initialize", "dotnet-use",
+    "websocket", "rest",
+    "clients", "producers", "consumers", "readers", "tableviews", "schema",
+    "cluster-level-failover",
+  ];
+  const versionSegments = ["next", ...versions];
+  const entries = [];
+  for (const v of versionSegments) {
+    entries.push({ from: `/docs/${v}/client-libraries`, to: "/docs/client-libraries/" });
+    for (const slug of slugs) {
+      entries.push({
+        from: `/docs/${v}/client-libraries-${slug}`,
+        to: `/docs/client-libraries/${slug}`,
+      });
+    }
+  }
+  return entries;
+}
+
 const {
   githubSiteUrl,
   baseUrl,
@@ -131,11 +161,6 @@ module.exports = async function createConfigAsync() {
               docId: "about",
               position: "left",
               label: "Docs",
-            },
-            {
-              to: "/docs/client-libraries/",
-              position: "left",
-              label: "Client Libraries",
             },
             {
               to: "/features/",
@@ -394,6 +419,7 @@ module.exports = async function createConfigAsync() {
               from: '/resources',
               to: '/articles',
             },
+            ...clientLibrariesLegacyRedirects(),
           ],
         },
       ],

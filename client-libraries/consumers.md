@@ -10,11 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-After setting up your clients, you can explore more to start working with [consumers](concepts-clients.md#consumer).
+After setting up your clients, you can explore more to start working with [consumers](pathname:///docs/concepts-clients#consumer).
 
 ## Subscribe to topics
 
-Pulsar has various [subscription types](concepts-messaging.md#subscription-types) to match different scenarios. A topic can have multiple subscriptions with different subscription types. However, a subscription can only have one subscription type at a time.
+Pulsar has various [subscription types](pathname:///docs/concepts-messaging#subscription-types) to match different scenarios. A topic can have multiple subscriptions with different subscription types. However, a subscription can only have one subscription type at a time.
 
 A subscription is identical to the subscription name; a subscription name can specify only one subscription type at a time. To change the subscription type, you should first stop all consumers of this subscription.
 
@@ -364,7 +364,7 @@ If the message key is not specified, messages without keys are dispatched to one
 
 ## Subscribe to multi-topics
 
-In addition to subscribing a consumer to a single Pulsar topic, you can also subscribe to multiple topics simultaneously using [multi-topic subscriptions](concepts-messaging.md#multi-topic-subscriptions). To use multi-topic subscriptions you can supply either a regular expression (regex) or a `List` of topics. If you select topics via regex, all topics must be within the same Pulsar namespace.
+In addition to subscribing a consumer to a single Pulsar topic, you can also subscribe to multiple topics simultaneously using [multi-topic subscriptions](pathname:///docs/concepts-messaging#multi-topic-subscriptions). To use multi-topic subscriptions you can supply either a regular expression (regex) or a `List` of topics. If you select topics via regex, all topics must be within the same Pulsar namespace.
 
 The followings are some examples.
 
@@ -644,7 +644,7 @@ This example shows how a consumer receives messages from a topic.
 
 ## Async receive messages
 
-The `receive` method receives messages synchronously (the consumer process is blocked until a message is available). You can also use [async receive](concepts-clients.md#receive-modes), which returns a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture) object immediately once a new message is available.
+The `receive` method receives messages synchronously (the consumer process is blocked until a message is available). You can also use [async receive](pathname:///docs/concepts-clients#receive-modes), which returns a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture) object immediately once a new message is available.
 
 The following is an example.
 
@@ -746,7 +746,7 @@ BatchReceivePolicy.builder()
 
 ## Acknowledge messages
 
-Messages can be acknowledged individually or cumulatively. For details about message acknowledgment, see [acknowledgment](concepts-messaging.md#acknowledgment).
+Messages can be acknowledged individually or cumulatively. For details about message acknowledgment, see [acknowledgment](pathname:///docs/concepts-messaging#acknowledgment).
 
 ### Acknowledge messages individually
 

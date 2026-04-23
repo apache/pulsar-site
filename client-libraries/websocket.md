@@ -11,7 +11,7 @@ Through WebSocket, you can publish and consume messages and use features availab
 
 ## Run the WebSocket service
 
-The standalone variant of Pulsar that we recommend using for [local development](getting-started-standalone.md) already has the WebSocket service enabled.
+The standalone variant of Pulsar that we recommend using for [local development](pathname:///docs/getting-started-standalone) already has the WebSocket service enabled.
 
 In non-standalone mode, there are two ways to deploy the WebSocket service:
 
@@ -20,7 +20,7 @@ In non-standalone mode, there are two ways to deploy the WebSocket service:
 
 ### Embedded with a Pulsar broker
 
-In this mode, the WebSocket service will run within the same HTTP service that's already running in the broker. To enable this mode, set the [`webSocketServiceEnabled`](reference-configuration.md#broker-webSocketServiceEnabled) parameter in the [`conf/broker.conf`](reference-configuration.md#broker) configuration file in your installation.
+In this mode, the WebSocket service will run within the same HTTP service that's already running in the broker. To enable this mode, set the [`webSocketServiceEnabled`](pathname:///docs/reference-configuration#broker-webSocketServiceEnabled) parameter in the [`conf/broker.conf`](pathname:///docs/reference-configuration#broker) configuration file in your installation.
 
 ```properties
 webSocketServiceEnabled=true
@@ -28,11 +28,11 @@ webSocketServiceEnabled=true
 
 ### As a separate component
 
-In this mode, the WebSocket service will be run from a Pulsar [broker](reference-terminology.md#broker) as a separate service. Configuration for this mode is handled in the [`conf/websocket.conf`](reference-configuration.md#websocket) configuration file. You'll need to set *at least* the following parameters:
+In this mode, the WebSocket service will be run from a Pulsar [broker](pathname:///docs/reference-terminology#broker) as a separate service. Configuration for this mode is handled in the [`conf/websocket.conf`](pathname:///docs/reference-configuration#websocket) configuration file. You'll need to set *at least* the following parameters:
 
-* [`configurationMetadataStoreUrl`](reference-configuration.md#websocket)
-* [`webServicePort`](reference-configuration.md#websocket-webServicePort)
-* [`clusterName`](reference-configuration.md#websocket-clusterName)
+* [`configurationMetadataStoreUrl`](pathname:///docs/reference-configuration#websocket)
+* [`webServicePort`](pathname:///docs/reference-configuration#websocket-webServicePort)
+* [`clusterName`](pathname:///docs/reference-configuration#websocket-clusterName)
 
 Here's an example:
 
@@ -62,7 +62,7 @@ cryptoKeyReaderFactoryClassName=org.apache.pulsar.MyCryptoKeyReaderFactoryClassI
 
 ### Start the broker
 
-When the configuration is set, you can start the service using the [`pulsar-daemon`](reference-cli-tools.md) tool:
+When the configuration is set, you can start the service using the [`pulsar-daemon`](pathname:///docs/reference-cli-tools) tool:
 
 ```shell
 bin/pulsar-daemon start websocket
@@ -130,7 +130,7 @@ Key | Type | Required? | Explanation
 `properties` | key-value pairs | no | Application-defined properties
 `context` | string | no | Application-defined request identifier
 `key` | string | no | For partitioned topics, decides which partition to use
-`replicationClusters` | array | no | Restrict replication to this list of [clusters](reference-terminology.md#cluster), specified by name
+`replicationClusters` | array | no | Restrict replication to this list of [clusters](pathname:///docs/reference-terminology#cluster), specified by name
 
 
 ##### Example success response
@@ -443,7 +443,7 @@ You can also download it from [PyPI](https://pypi.python.org/pypi/websocket-clie
 
 #### Python producer
 
-Here's an example Python producer that sends a simple message to a Pulsar [topic](reference-terminology.md#topic):
+Here's an example Python producer that sends a simple message to a Pulsar [topic](pathname:///docs/reference-terminology#topic):
 
 ```python
 import websocket, base64, json

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-For more information about cluster-level failover, including concepts, benefits, use cases, constraints, usage and working principles, see [Cluster-level failover concepts](concepts-cluster-level-failover.md).
+For more information about cluster-level failover, including concepts, benefits, use cases, constraints, usage and working principles, see [Cluster-level failover concepts](pathname:///docs/concepts-cluster-level-failover).
 
 :::tip
 
@@ -27,7 +27,7 @@ For more information about cluster-level failover, including concepts, benefits,
   * The number of BookKeeper nodes should be equal to or greater than the ensemble quorum.
   * The number of ZooKeeper nodes should be equal to or greater than 3.
 * **Turn on geo-replication** between the primary cluster and any dependent cluster (primary to backup or backup to backup) to prevent data loss.
-* [Enable replicated subscription](administration-geo.md#enable-replicated-subscription).
+* [Enable replicated subscription](pathname:///docs/administration-geo#enable-replicated-subscription).
 
 ## Configure cluster-level failover
 

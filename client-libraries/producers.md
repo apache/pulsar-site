@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-After setting up your clients, you can explore more to start working with [producers](concepts-clients.md#producers).
+After setting up your clients, you can explore more to start working with [producers](pathname:///docs/concepts-clients#producers).
 
 ## Create the producer
 
@@ -65,7 +65,7 @@ This example shows how to create a producer.
 
 Every producer has a name that must be **unique across all Pulsar clusters**. If you do not explicitly set a name, Pulsar generates a globally unique name automatically. If you assign a name, the broker enforces that only one producer with that name can publish on a topic at a time.
 
-You **must** set an explicit producer name when using [message deduplication](cookbooks-deduplication.md). Even when deduplication is not required, setting a meaningful producer name is recommended — it makes debugging significantly easier because the name appears in broker logs, admin stats, and metrics, letting you quickly trace messages back to the producing application.
+You **must** set an explicit producer name when using [message deduplication](pathname:///docs/cookbooks-deduplication). Even when deduplication is not required, setting a meaningful producer name is recommended — it makes debugging significantly easier because the name appears in broker logs, admin stats, and metrics, letting you quickly trace messages back to the producing application.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -536,7 +536,7 @@ if (isBatchingEnabled) { // if batching is enabled, choose partition on `partiti
 
 ## Enable chunking
 
-Message [chunking](concepts-messaging.md#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side.
+Message [chunking](pathname:///docs/concepts-messaging#chunking) enables Pulsar to process large payload messages by splitting the message into chunks at the producer side and aggregating chunked messages on the consumer side.
 
 The message chunking feature is OFF by default. The following is an example of how to enable message chunking when creating a producer.
 
@@ -723,7 +723,7 @@ This example shows how to set the `EnforceUnencrypted` encryption policy.
 
 ## Configure access mode
 
-[Access mode](concepts-clients.md#access-mode) allows applications to require exclusive producer access on a topic to achieve a "single-writer" situation.
+[Access mode](pathname:///docs/concepts-clients#access-mode) allows applications to require exclusive producer access on a topic to achieve a "single-writer" situation.
 
 This example shows how to set producer access mode.
 

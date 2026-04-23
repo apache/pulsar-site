@@ -321,7 +321,7 @@ bin/pulsar broker
 
 ## Service discovery
 
-[Clients](client-libraries.md) connecting to Pulsar brokers need to communicate with an entire Pulsar instance using a single URL.
+[Clients](/docs/client-libraries/) connecting to Pulsar brokers need to communicate with an entire Pulsar instance using a single URL.
 
 You can use your own service discovery system, and you only need to satisfy just one requirement: when a client performs an HTTP request to an [endpoint](reference-configuration.md) for a Pulsar cluster, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to some active brokers in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
 

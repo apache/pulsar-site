@@ -14,7 +14,7 @@ After setting up your client library and creating a client object, you can explo
 
 ## Create a client with multiple advertised listeners
 
-To ensure clients in both internal and external networks can connect to a Pulsar cluster, Pulsar introduces [advertisedListeners](concepts-multiple-advertised-listeners.md).
+To ensure clients in both internal and external networks can connect to a Pulsar cluster, Pulsar introduces [advertisedListeners](pathname:///docs/concepts-multiple-advertised-listeners).
 
 The following example creates a Python client using multiple advertised listeners:
 

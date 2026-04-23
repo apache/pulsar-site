@@ -21,7 +21,7 @@ Pulsar supports the following language-specific client libraries:
 
 :::tip
 
-If you want to create your own client library, read the [binary protocol documentation](developing-binary-protocol.md).
+If you want to create your own client library, read the [binary protocol documentation](pathname:///docs/developing-binary-protocol).
 
 :::
 

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-After setting up your clients, you can explore more to start working with [TableView](concepts-clients.md#tableview).
+After setting up your clients, you can explore more to start working with [TableView](pathname:///docs/concepts-clients#tableview).
 
 ## Configure TableView
 

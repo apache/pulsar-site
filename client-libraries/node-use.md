@@ -105,12 +105,12 @@ Pulsar Node.js consumers have the following methods available:
 | :----- | :---------- | :---------- |
 | `receive()` | Receives a single message from the topic. When the message is available, the Promise object run executor function and get message object. | `Promise<Object>` |
 | `receive(Number)` | Receives a single message from the topic with specific timeout in milliseconds. | `Promise<Object>` |
-| `acknowledge(Object)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) a message to the Pulsar [broker](reference-terminology.md#broker) by message object. | `void` |
-| `acknowledgeId(Object)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) a message to the Pulsar [broker](reference-terminology.md#broker) by message ID object. | `void` |
-| `acknowledgeCumulative(Object)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) *all* the messages in the stream, up to and including the specified message. The `acknowledgeCumulative` method returns void, and send the ack to the broker asynchronously. After that, the messages are *not* redelivered to the consumer. Cumulative acking can not be used with a [shared](concepts-messaging.md#shared) subscription type. | `void` |
-| `acknowledgeCumulativeId(Object)` | [Acknowledges](reference-terminology.md#acknowledgment-ack) *all* the messages in the stream, up to and including the specified message ID. | `void` |
-| `negativeAcknowledge(Message)`| [Negatively acknowledges](reference-terminology.md#negative-acknowledgment-nack)  a message to the Pulsar broker by message object. | `void` |
-| `negativeAcknowledgeId(MessageId)` | [Negatively acknowledges](reference-terminology.md#negative-acknowledgment-nack) a message to the Pulsar broker by message ID object. | `void` |
+| `acknowledge(Object)` | [Acknowledges](pathname:///docs/reference-terminology#acknowledgment-ack) a message to the Pulsar [broker](pathname:///docs/reference-terminology#broker) by message object. | `void` |
+| `acknowledgeId(Object)` | [Acknowledges](pathname:///docs/reference-terminology#acknowledgment-ack) a message to the Pulsar [broker](pathname:///docs/reference-terminology#broker) by message ID object. | `void` |
+| `acknowledgeCumulative(Object)` | [Acknowledges](pathname:///docs/reference-terminology#acknowledgment-ack) *all* the messages in the stream, up to and including the specified message. The `acknowledgeCumulative` method returns void, and send the ack to the broker asynchronously. After that, the messages are *not* redelivered to the consumer. Cumulative acking can not be used with a [shared](pathname:///docs/concepts-messaging#shared) subscription type. | `void` |
+| `acknowledgeCumulativeId(Object)` | [Acknowledges](pathname:///docs/reference-terminology#acknowledgment-ack) *all* the messages in the stream, up to and including the specified message ID. | `void` |
+| `negativeAcknowledge(Message)`| [Negatively acknowledges](pathname:///docs/reference-terminology#negative-acknowledgment-nack)  a message to the Pulsar broker by message object. | `void` |
+| `negativeAcknowledgeId(MessageId)` | [Negatively acknowledges](pathname:///docs/reference-terminology#negative-acknowledgment-nack) a message to the Pulsar broker by message ID object. | `void` |
 | `close()` | Closes the consumer, disabling its ability to receive messages from the broker. | `Promise<null>` |
 | `unsubscribe()` | Unsubscribes the subscription. | `Promise<null>` |
 

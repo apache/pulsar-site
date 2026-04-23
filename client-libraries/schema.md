@@ -8,7 +8,7 @@ description: Learn how to work with Pyhton schema in Pulsar.
 
 ## Get started with schema
 
-For an overview of Pulsar schema and language-specific code examples, see [Schema - Overview](schema-overview.md) and [Schema - Get Started](schema-get-started.md).
+For an overview of Pulsar schema and language-specific code examples, see [Schema - Overview](pathname:///docs/schema-overview) and [Schema - Get Started](pathname:///docs/schema-get-started).
 
 
 ## Work with Python schema

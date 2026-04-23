@@ -49,7 +49,7 @@ To install the Pulsar C# client library using the dotnet CLI, follow these steps
 
 ## Step 2: Connect to Pulsar cluster
 
-To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](developing-binary-protocol.md) URL.
+To connect to Pulsar using client libraries, you need to specify a [Pulsar protocol](pathname:///docs/developing-binary-protocol) URL.
 
 You can assign Pulsar protocol URLs to specific clusters and use the `pulsar` scheme. The following is an example of `localhost` with the default port `6650`:
 
@@ -63,7 +63,7 @@ If you have multiple brokers, separate `IP:port` by commas:
 pulsar://localhost:6550,localhost:6651,localhost:6652
 ```
 
-If you use [mTLS](security-tls-authentication.md) authentication, add `+ssl` in the scheme:
+If you use [mTLS](pathname:///docs/security-tls-authentication) authentication, add `+ssl` in the scheme:
 
 ```http
 pulsar+ssl://pulsar.us-west.example.com:6651

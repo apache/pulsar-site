@@ -4,7 +4,7 @@ title: Pulsar Node.js client
 sidebar_label: "Node.js client"
 ---
 
-You can use a Pulsar Node.js client to create Pulsar [producers](concepts-clients.md#producer), [consumers](concepts-clients.md#consumer), and [readers](concepts-clients.md#reader) in Node.js. All the methods in Pulsar Node.js clients are thread-safe.
+You can use a Pulsar Node.js client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Node.js. All the methods in Pulsar Node.js clients are thread-safe.
 
 ## Get started
 

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-After setting up your clients, you can explore more to start working with [readers](concepts-clients.md#reader-interface).
+After setting up your clients, you can explore more to start working with [readers](pathname:///docs/concepts-clients#reader-interface).
 
 ## Receive and read messages
 
@@ -248,7 +248,7 @@ Reader<byte[]> reader = pulsarClient.newReader()
 
 ## Intercept messages
 
-Pulsar reader interceptor intercepts and possibly mutates messages with user-defined processing before [Pulsar reader](concepts-clients.md#reader-interface) reads them. With reader interceptors, you can apply unified messaging processes before messages can be read, such as modifying messages, adding properties, collecting statistics and etc, without creating similar mechanisms respectively.
+Pulsar reader interceptor intercepts and possibly mutates messages with user-defined processing before [Pulsar reader](pathname:///docs/concepts-clients#reader-interface) reads them. With reader interceptors, you can apply unified messaging processes before messages can be read, such as modifying messages, adding properties, collecting statistics and etc, without creating similar mechanisms respectively.
 
 ![Reader interceptor in Pulsar](/assets/reader-interceptor.svg)
 

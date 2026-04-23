@@ -4,7 +4,7 @@ title: Pulsar Java client
 sidebar_label: "Java"
 ---
 
-You can use a Pulsar Java client to create Pulsar [producers](concepts-clients.md#producer), [consumers](concepts-clients.md#consumer), and [readers](concepts-clients.md#reader) in Java and perform [administrative tasks](admin-api-overview.md). All the methods in Java clients are thread-safe. The current Java client LTS version is **@pulsar:version:lts@** and the most recent version is **@pulsar:version:latest@**.
+You can use a Pulsar Java client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Java and perform [administrative tasks](pathname:///docs/admin-api-overview). All the methods in Java clients are thread-safe. The current Java client LTS version is **@pulsar:version:lts@** and the most recent version is **@pulsar:version:latest@**.
 
 ## Get started
 
@@ -35,8 +35,8 @@ The following table outlines the API packages and reference docs for Pulsar Java
 
 Package | Description | Maven Artifact
 :-------|:------------|:--------------
-[`org.apache.pulsar.client.api`](/api/client) | Java client API. <br/> See [Client API overview](pulsar-api-overview.md#pulsar-client-apis) for more reference. | [org.apache.pulsar:pulsar-client:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version:lts@%7Cjar)
-[`org.apache.pulsar.client.admin`](/api/admin) | Java admin API. <br/> See [Admin API overview](admin-api-overview.md) for more reference. | [org.apache.pulsar:pulsar-client-admin:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C@pulsar:version:lts@%7Cjar)
+[`org.apache.pulsar.client.api`](/api/client) | Java client API. <br/> See [Client API overview](pathname:///docs/pulsar-api-overview#pulsar-client-apis) for more reference. | [org.apache.pulsar:pulsar-client:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version:lts@%7Cjar)
+[`org.apache.pulsar.client.admin`](/api/admin) | Java admin API. <br/> See [Admin API overview](pathname:///docs/admin-api-overview) for more reference. | [org.apache.pulsar:pulsar-client-admin:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C@pulsar:version:lts@%7Cjar)
 `org.apache.pulsar.client.all` | Include both `pulsar-client` and `pulsar-client-admin`.<br /> Both `pulsar-client` and `pulsar-client-admin` are independently shaded packages. Consequently, the applications using both `pulsar-client` and `pulsar-client-admin` have redundant shaded classes. It would be troublesome if you introduce new dependencies but forget to update shading rules. <br /> In this case, you can use `pulsar-client-all`, which shades dependencies only one time and reduces the size of dependencies.  | [org.apache.pulsar:pulsar-client-all:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-all%7C@pulsar:version:lts@%7Cjar)
 
 #### More reference

@@ -190,4 +190,4 @@ The controlled failover cluster performs the following actions with administrato
 
 ### How to use cluster-level failover
 
-See [Configure cluster-level failover](client-libraries-cluster-level-failover.md).
+See [Configure cluster-level failover](/docs/client-libraries/cluster-level-failover).

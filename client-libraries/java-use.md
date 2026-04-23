@@ -7,7 +7,7 @@ description: Learn how to use Java client in Pulsar.
 
 ## Create a producer
 
-Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Producer](/api/client/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](reference-terminology.md#topic).
+Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Producer](/api/client/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](pathname:///docs/reference-terminology#topic).
 
 ```java
 Producer<byte[]> producer = client.newProducer()
@@ -49,9 +49,9 @@ stringProducer.send("My message");
 
 ## Create a consumer
 
-In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](reference-terminology.md#consumer) by first instantiating a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
+In Pulsar, consumers subscribe to topics and handle messages that producers publish to those topics. You can instantiate a new [consumer](pathname:///docs/reference-terminology#consumer) by first instantiating a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object and passing it a URL for a Pulsar broker (as [above](#client-configuration)).
 
-Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](/api/client/org/apache/pulsar/client/api/Consumer) by specifying a [topic](reference-terminology.md#topic) and a [subscription](concepts-messaging.md#subscription-types).
+Once you've instantiated a [PulsarClient](/api/client/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](/api/client/org/apache/pulsar/client/api/Consumer) by specifying a [topic](pathname:///docs/reference-terminology#topic) and a [subscription](pathname:///docs/concepts-messaging#subscription-types).
 
 ```java
 Consumer consumer = client.newConsumer()
@@ -60,7 +60,7 @@ Consumer consumer = client.newConsumer()
         .subscribe();
 ```
 
-The `subscribe` method will auto-subscribe the consumer to the specified topic and subscription. One way to make the consumer listen to the topic is to set up a `while` loop. In this example loop, the consumer listens for messages, prints the contents of any received message, and then [acknowledges](reference-terminology.md#acknowledgment-ack) that the message has been processed. If the processing logic fails, you can use [negative acknowledgment](reference-terminology.md#acknowledgment-ack) to redeliver the message later.
+The `subscribe` method will auto-subscribe the consumer to the specified topic and subscription. One way to make the consumer listen to the topic is to set up a `while` loop. In this example loop, the consumer listens for messages, prints the contents of any received message, and then [acknowledges](pathname:///docs/reference-terminology#acknowledgment-ack) that the message has been processed. If the processing logic fails, you can use [negative acknowledgment](pathname:///docs/reference-terminology#acknowledgment-ack) to redeliver the message later.
 
 ```java
 while (true) {
@@ -101,7 +101,7 @@ Consumer consumer = client.newConsumer()
 
 ## Create a reader
 
-With the [reader interface](concepts-clients.md#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create [Reader](/api/client/org/apache/pulsar/client/api/Reader) objects by specifying a topic and a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId).
+With the [reader interface](pathname:///docs/concepts-clients#reader-interface), Pulsar clients can "manually position" themselves within a topic and read all messages from a specified message onward. The Pulsar API for Java enables you to create [Reader](/api/client/org/apache/pulsar/client/api/Reader) objects by specifying a topic and a [MessageId](/api/client/org/apache/pulsar/client/api/MessageId).
 
 The following is an example.
 
