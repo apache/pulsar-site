@@ -27,10 +27,17 @@ try {
   //do nothing
 }
 
-// Legacy /docs/<version>/client-libraries-<slug> URLs redirect to the new
-// unversioned /docs/client-libraries/<slug> location. In production the
-// .htaccess rule handles this via regex; these static entries cover dev mode
-// and hosts without mod_rewrite.
+// Bare /docs/client-libraries-<slug> URLs (no version segment) redirect to the
+// new /docs/client-libraries/<slug> location. In production these are also
+// covered by .htaccess; these static entries cover dev mode and static hosts.
+//
+// Versioned legacy URLs like /docs/<version>/client-libraries-<slug> are NOT
+// included here on purpose: plugin-client-redirects generates a stub HTML file
+// at every `from` path, which would create build/docs/<version>/client-libraries-*/
+// directories in every yarn build. The CI split-version-build.sh script (which
+// builds each version separately and then mv's build-<v>/<v> into build/docs/)
+// would then fail because build/docs/<v>/ is non-empty from those stubs. Those
+// versioned URLs are handled exclusively by static/.htaccess in production.
 function clientLibrariesLegacyRedirects() {
   const slugs = [
     "java", "java-setup", "java-initialize", "java-use", "java-tracing",
@@ -43,31 +50,10 @@ function clientLibrariesLegacyRedirects() {
     "clients", "producers", "consumers", "readers", "tableviews", "schema",
     "cluster-level-failover",
   ];
-  const versionSegments = ["next", ...versions];
-  const entries = [];
-  for (const v of versionSegments) {
-    entries.push({ from: `/docs/${v}/client-libraries`, to: "/docs/client-libraries/" });
-    for (const slug of slugs) {
-      entries.push({
-        from: `/docs/${v}/client-libraries-${slug}`,
-        to: `/docs/client-libraries/${slug}`,
-      });
-      // Cover the case where the new canonical URL gets accidentally prefixed with a version.
-      entries.push({
-        from: `/docs/${v}/client-libraries/${slug}`,
-        to: `/docs/client-libraries/${slug}`,
-      });
-    }
-  }
-  // Bare /docs/client-libraries-<slug> (no version segment) — from very old external
-  // links, or from /docs/en/client-libraries-<slug> URLs that the .htaccess rewrites to this form.
-  for (const slug of slugs) {
-    entries.push({
-      from: `/docs/client-libraries-${slug}`,
-      to: `/docs/client-libraries/${slug}`,
-    });
-  }
-  return entries;
+  return slugs.map((slug) => ({
+    from: `/docs/client-libraries-${slug}`,
+    to: `/docs/client-libraries/${slug}`,
+  }));
 }
 
 const {
