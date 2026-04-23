@@ -7,7 +7,6 @@ module.exports = {
             link: {type: "doc", id: "overview"},
             collapsed: false,
             items: [
-                "feature-matrix",
                 {
                     type: "category",
                     label: "Get started",
@@ -78,6 +77,7 @@ module.exports = {
                         "rest",
                     ],
                 },
+                "feature-matrix",
                 {
                     type: "category",
                     label: "Advanced use",
