@@ -21,7 +21,7 @@ The Pulsar site pages are of:
 | [Release notes](pathname:///release-notes)                 | docs      | <ul><li>release-notes/</li><li>sidebarsReleaseNotes.js</li></ul>                                  |
 | [Security](pathname:///security)                           | docs      | <ul><li>security/</li></ul>                                                                       |
 | [Blogs](pathname:///blog)                                  | blog      | <ul><li>blog/</li></ul>                                                                           |
-| [Client feature matrix](pathname:///client-feature-matrix) | docs      | <ul><li>client-feature-matrix/</li><li>data/matrix.js</li></ul>                                   |
+| [Client feature matrix](pathname:///docs/client-libraries/feature-matrix) | docs      | <ul><li>client-feature-matrix/</li><li>data/matrix.js</li></ul>                                   |
 | Other pages                                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
 
 Besides, the site serves multiple static pages generated outside the framework, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
@@ -112,6 +112,6 @@ You can update it by clicking on one of the **✍️ Edit &lt;file_name&gt;** li
   * release-notes/
   * src/components/ClientReleaseTable.js
   * src/components/PulsarReleaseTable.js
-* **Client feature matrix** [/client-feature-matrix](pathname:///client-feature-matrix)
+* **Client feature matrix** [/docs/client-libraries/feature-matrix](pathname:///docs/client-libraries/feature-matrix)
   * [✍️ Edit matrix.js](https://github.com/apache/pulsar-site/edit/main/data/matrix.js)
-  * [✍️ Edit client-feature-matrix/index.mdx](https://github.com/apache/pulsar-site/edit/main/client-feature-matrix/index.mdx)
+  * [✍️ Edit client-feature-matrix/index.mdx](https://github.com/apache/pulsar-site/edit/main/docs/client-libraries/feature-matrixindex.mdx)

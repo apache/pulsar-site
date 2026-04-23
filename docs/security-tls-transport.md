@@ -474,7 +474,7 @@ asyncio.run(test())
 
 :::note
 
-In addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md#security-settings).
+In addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](/docs/client-libraries/websocket#security-settings).
 
 :::
 

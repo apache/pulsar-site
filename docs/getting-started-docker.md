@@ -150,7 +150,7 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 ## Step 2: Use Pulsar in Docker
 
-Pulsar offers a variety of [client libraries](client-libraries.md), such as [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md).
+Pulsar offers a variety of [client libraries](/docs/client-libraries/), such as [Java](/docs/client-libraries/java), [Go](/docs/client-libraries/go), [Python](/docs/client-libraries/python), [C++](/docs/client-libraries/cpp).
 
 If you're running a local standalone cluster, you can use one of these root URLs to interact with your cluster:
 * `pulsar://localhost:6650`

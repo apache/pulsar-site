@@ -60,14 +60,14 @@ For more info, see [Topics](concepts-messaging.md#topics).
 
 ## Start publishing and consuming messages
 
-Pulsar currently offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md)
-and [C++](client-libraries-cpp.md). If you're running a local standalone cluster, you can
+Pulsar currently offers client libraries for [Java](pathname:///docs/client-libraries/java), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python)
+and [C++](pathname:///docs/client-libraries/cpp). If you're running a local standalone cluster, you can
 use one of these root URLs for interacting with your cluster:
 
 * `pulsar://localhost:6650`
 * `http://localhost:8080`
 
-Here's an example that lets you quickly get started with Pulsar by using the [Python](client-libraries-python.md)
+Here's an example that lets you quickly get started with Pulsar by using the [Python](pathname:///docs/client-libraries/python)
 client API.
 
 You can install the Pulsar Python client library directly from [PyPI](https://pypi.org/project/pulsar-client/):

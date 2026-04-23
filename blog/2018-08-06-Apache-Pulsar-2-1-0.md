@@ -13,7 +13,7 @@ In Pulsar 2.1 you'll see:
 - [Pulsar IO](/docs/io-overview) connector framework and a list of [builtin connectors](/docs/io-connectors)
 - [PIP-17](https://github.com/apache/incubator-pulsar/wiki/PIP-17:-Tiered-storage-for-Pulsar-topics): [Tiered Storage](/docs/concepts-tiered-storage)
 - Pulsar [Stateful Functions](/docs/functions-state)
-- [Go Client](/docs/client-libraries-go)
+- [Go Client](/docs/client-libraries/go)
 - [Avro](https://github.com/apache/incubator-pulsar/blob/v2.1.0-incubating/pulsar-client-schema/src/main/java/org/apache/pulsar/client/impl/schema/AvroSchema.java)
   and [Protobuf](https://github.com/apache/incubator-pulsar/blob/v2.1.0-incubating/pulsar-client-schema/src/main/java/org/apache/pulsar/client/impl/schema/ProtobufSchema.java) Schemas
 
@@ -81,6 +81,6 @@ support for [Avro](https://avro.apache.org/) and [Protobuf](https://developers.g
 
 ## Clients
 
-We have introduced a new [Go](/docs/client-libraries-go) client in 2.1 release. The Pulsar Go client library is based on the [C++](/docs/client-libraries-cpp/) client library.
+We have introduced a new [Go](/docs/client-libraries/go) client in 2.1 release. The Pulsar Go client library is based on the [C++](/docs/client-libraries/cpp) client library.
 
-Follow [the instructions](/docs/client-libraries-go/#installing-go-package) to try it out in your Go applications!
+Follow [the instructions](/docs/client-libraries/go#installing-go-package) to try it out in your Go applications!

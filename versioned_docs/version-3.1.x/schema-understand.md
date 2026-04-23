@@ -276,7 +276,7 @@ Each `SchemaInfo` stored with a topic has a version. The schema version manages 
 
 Messages produced with `SchemaInfo` are tagged with a schema version. When a message is consumed by a Pulsar client, the client can use the schema version to retrieve the corresponding `SchemaInfo` and use the correct schema to deserialize data. Once a version is assigned to or fetched from a schema, all subsequent messages produced by that producer are tagged with the appropriate version.
 
-Suppose you are using a Pulsar [Java client](client-libraries-java.md) to create a producer and send messages.
+Suppose you are using a Pulsar [Java client](pathname:///docs/client-libraries/java) to create a producer and send messages.
 
 ```java
 PulsarClient client = PulsarClient.builder()

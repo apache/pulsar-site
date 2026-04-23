@@ -1184,7 +1184,7 @@ Consumer<byte[]> someTopicsConsumer = pulsarClient.newConsumer()
                 .subscribe();
 ```
 
-For code examples, see [Java](client-libraries-java.md#multi-topic-subscriptions).
+For code examples, see [Subscribe to multi-topics](/docs/client-libraries/consumers#subscribe-to-multi-topics).
 
 ## Partitioned topics
 
@@ -1216,7 +1216,7 @@ There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/Me
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. |
 | `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.                                                                                                                                                                                                |
-| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
+| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](/docs/client-libraries/java) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
 
 ### Ordering guarantee
 
@@ -1273,7 +1273,7 @@ With persistent topics, all messages are durably persisted on disks, whereas wit
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key_shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java-use.md#create-a-consumer) for a non-persistent topic:
+Here's an example [Java consumer](/docs/client-libraries/java-use#create-a-consumer) for a non-persistent topic:
 
 ```java
 PulsarClient client = PulsarClient.builder()
@@ -1288,7 +1288,7 @@ Consumer<byte[]> consumer = client.newConsumer()
         .subscribe();
 ```
 
-Here's an example [Java producer](client-libraries-java-use/#create-a-producer) for the same non-persistent topic:
+Here's an example [Java producer](/docs/client-libraries/java-use#create-a-producer) for the same non-persistent topic:
 
 ```java
 Producer<byte[]> producer = client.newProducer()

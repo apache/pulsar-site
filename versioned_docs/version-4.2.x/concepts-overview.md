@@ -14,7 +14,7 @@ Key features of Pulsar are listed below:
 * Native support for multiple clusters in a Pulsar instance, with seamless [geo-replication](administration-geo.md) of messages across clusters.
 * Very low publish and end-to-end latency.
 * Seamless scalability to over a million topics.
-* A simple [client API](concepts-clients.md) with bindings for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md), [C#/.NET](client-libraries-dotnet.md), [Node.js](client-libraries-node.md), and [WebSocket](client-libraries-websocket.md).
+* A simple [client API](concepts-clients.md) with bindings for [Java](pathname:///docs/client-libraries/java), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python), [C++](pathname:///docs/client-libraries/cpp), [C#/.NET](pathname:///docs/client-libraries/dotnet), [Node.js](pathname:///docs/client-libraries/node), and [WebSocket](pathname:///docs/client-libraries/websocket).
 * Multiple [subscription types](concepts-messaging.md#subscription-types) ([exclusive](concepts-messaging.md#exclusive), [shared](concepts-messaging.md#shared), [failover](concepts-messaging.md#failover), and [key_shared](concepts-messaging.md#key_shared)) for topics.
 * Guaranteed message delivery with [persistent message storage](concepts-architecture-overview.md#persistent-storage) provided by [Apache BookKeeper](http://bookkeeper.apache.org/).
 * A serverless lightweight computing framework [Pulsar Functions](functions-overview.md) offers the capability for stream-native data processing.

@@ -1,11 +1,12 @@
 import {resolveTokens} from "../../config/pulsarVariables";
 
-// Only docs/**/*.md and versioned_docs/version-*/**/*.md are rewritten.
-// Blog posts, src/pages/*.mdx, and the auxiliary content-docs plugins
-// (contribute/release-notes/security/client-feature-matrix) are skipped so
-// the link-targeting regexes (e.g. `[text](/tools/pulsar...)`) can't rewrite
-// legitimately-authored markdown links.
-const SCOPE_RE = /(?:^|[/\\])(?:docs|versioned_docs[/\\]version-[^/\\]+)[/\\].*\.md$/;
+// Only docs/**/*.md, versioned_docs/version-*/**/*.md, and client-libraries/**/*.md
+// are rewritten. Blog posts, src/pages/*.mdx, and the other auxiliary content-docs
+// plugins (contribute/release-notes/security) are skipped so the link-targeting
+// regexes (e.g. `[text](/tools/pulsar...)`) can't rewrite legitimately-authored
+// markdown links. client-libraries is in scope because its docs use the same
+// @pulsar:version:*@ / @pulsar:apidoc:*@ variables as the main docs set.
+const SCOPE_RE = /(?:^|[/\\])(?:docs|client-libraries|versioned_docs[/\\]version-[^/\\]+)[/\\].*\.md$/;
 const VERSIONED_RE = /(?:^|[/\\])versioned_docs[/\\]version-([^/\\]+)[/\\]/;
 
 type Args = {filePath: string; fileContent: string};

@@ -28,7 +28,7 @@ The Pulsar message broker is a stateless component that's primarily responsible 
 
 Messages are typically dispatched out of a [managed ledger](#managed-ledgers) cache for the sake of performance, *unless* the backlog exceeds the cache size. If the backlog grows too large for the cache, the broker will start reading entries from BookKeeper.
 
-Finally, to support geo-replication on global topics, the broker manages replicators that tail the entries published in the local region and republish them to the remote region using the Pulsar [Java client library](client-libraries-java.md).
+Finally, to support geo-replication on global topics, the broker manages replicators that tail the entries published in the local region and republish them to the remote region using the Pulsar [Java client library](/docs/client-libraries/java).
 
 > For a guide to managing Pulsar brokers, see the [brokers](admin-api-brokers.md) guide.
 
@@ -186,7 +186,7 @@ The diagram below illustrates Pulsar service discovery:
 
 ![Service discovery in Pulsar](/assets/pulsar-service-discovery.png)
 
-In this diagram, the Pulsar cluster is addressable via a single DNS name: `pulsar-cluster.acme.com`. A [Python client](client-libraries-python.md), for example, could access this Pulsar cluster like this:
+In this diagram, the Pulsar cluster is addressable via a single DNS name: `pulsar-cluster.acme.com`. A [Python client](/docs/client-libraries/python), for example, could access this Pulsar cluster like this:
 
 ```python
 from pulsar import Client

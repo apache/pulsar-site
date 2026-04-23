@@ -84,7 +84,7 @@ The instructions for Java, Python, and C++ clients are different.
   values={[{"label":"Java clients","value":"Java clients"},{"label":"Python clients","value":"Python clients"},{"label":"C++ clients","value":"C++ clients"}]}>
 <TabItem value="Java clients">
 
-To enable message deduplication on a [Java producer](client-libraries-java.md#producers), set the producer name using the `producerName` setter, and set the timeout to `0` using the `sendTimeout` setter.
+To enable message deduplication on a [Java producer](pathname:///docs/client-libraries/java#producers), set the producer name using the `producerName` setter, and set the timeout to `0` using the `sendTimeout` setter.
 
 ```java
 
@@ -106,7 +106,7 @@ Producer producer = pulsarClient.newProducer()
 </TabItem>
 <TabItem value="Python clients">
 
-To enable message deduplication on a [Python producer](client-libraries-python.md#producers), set the producer name using `producer_name`, and set the timeout to `0` using `send_timeout_millis`.
+To enable message deduplication on a [Python producer](pathname:///docs/client-libraries/python#producers), set the producer name using `producer_name`, and set the timeout to `0` using `send_timeout_millis`.
 
 ```python
 
@@ -123,7 +123,7 @@ producer = client.create_producer(
 </TabItem>
 <TabItem value="C++ clients">
 
-To enable message deduplication on a [C++ producer](client-libraries-cpp.md#producer), set the producer name using `producer_name`, and set the timeout to `0` using `send_timeout_millis`.
+To enable message deduplication on a [C++ producer](pathname:///docs/client-libraries/cpp#producer), set the producer name using `producer_name`, and set the timeout to `0` using `send_timeout_millis`.
 
 ```cpp
 

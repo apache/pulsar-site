@@ -16,6 +16,6 @@ Before deploying a function, you need to have a Pulsar cluster running first. Yo
 
 :::note
 
-If you want to deploy user-defined functions in Python, you need to install the [python client](client-libraries-python.md) on all the machines running [function workers](functions-concepts.md#function-worker).
+If you want to deploy user-defined functions in Python, you need to install the [python client](pathname:///docs/client-libraries/python) on all the machines running [function workers](functions-concepts.md#function-worker).
 
 :::

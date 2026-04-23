@@ -29,7 +29,7 @@ function DocSidebarDesktop({
       )}
     >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
-      {path.indexOf("/docs/") > -1 ? (
+      {path.startsWith("/docs/") && !path.startsWith("/docs/client-libraries") ? (
         <DocsVersionWrapperMemo docsPluginId={docsPluginId} />
       ) : (
         <></>

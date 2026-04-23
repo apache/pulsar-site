@@ -29,7 +29,7 @@ Clusters can be managed via:
 
 * The `clusters` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool
 * The `/admin/v2/clusters` endpoint of the admin {@inject: rest:REST:/} API
-* The `clusters` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
+* The `clusters` method of the `PulsarAdmin` object in the [Java API](pathname:///docs/client-libraries/java)
 
 ## Clusters resources
 

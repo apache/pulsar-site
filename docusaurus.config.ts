@@ -27,6 +27,35 @@ try {
   //do nothing
 }
 
+// Bare /docs/client-libraries-<slug> URLs (no version segment) redirect to the
+// new /docs/client-libraries/<slug> location. In production these are also
+// covered by .htaccess; these static entries cover dev mode and static hosts.
+//
+// Versioned legacy URLs like /docs/<version>/client-libraries-<slug> are NOT
+// included here on purpose: plugin-client-redirects generates a stub HTML file
+// at every `from` path, which would create build/docs/<version>/client-libraries-*/
+// directories in every yarn build. The CI split-version-build.sh script (which
+// builds each version separately and then mv's build-<v>/<v> into build/docs/)
+// would then fail because build/docs/<v>/ is non-empty from those stubs. Those
+// versioned URLs are handled exclusively by static/.htaccess in production.
+function clientLibrariesLegacyRedirects() {
+  const slugs = [
+    "java", "java-setup", "java-initialize", "java-use", "java-tracing",
+    "cpp", "cpp-setup", "cpp-initialize", "cpp-use",
+    "go", "go-setup", "go-initialize", "go-use",
+    "python", "python-setup", "python-initialize", "python-use",
+    "node", "node-setup", "node-initialize", "node-use", "node-configs",
+    "dotnet", "dotnet-setup", "dotnet-initialize", "dotnet-use",
+    "websocket", "rest",
+    "clients", "producers", "consumers", "readers", "tableviews", "schema",
+    "cluster-level-failover",
+  ];
+  return slugs.map((slug) => ({
+    from: `/docs/client-libraries-${slug}`,
+    to: `/docs/client-libraries/${slug}`,
+  }));
+}
+
 const {
   githubSiteUrl,
   baseUrl,
@@ -389,6 +418,11 @@ module.exports = async function createConfigAsync() {
               from: '/resources',
               to: '/articles',
             },
+            {
+              from: '/client-feature-matrix',
+              to: '/docs/client-libraries/feature-matrix',
+            },
+            ...clientLibrariesLegacyRedirects(),
           ],
         },
       ],
@@ -422,19 +456,20 @@ module.exports = async function createConfigAsync() {
         "content-docs",
         /** @type {import('@docusaurus/plugin-content-docs').Options} */
         ({
-          id: "security",
-          path: "security",
-          routeBasePath: "security",
-          sidebarPath: false,
+          id: "client-libraries",
+          path: "client-libraries",
+          routeBasePath: "docs/client-libraries",
+          editUrl: `${githubSiteUrl}/edit/main`,
+          sidebarPath: require.resolve("./sidebarsClientLibraries.js"),
         }),
       ],
       [
         "content-docs",
         /** @type {import('@docusaurus/plugin-content-docs').Options} */
         ({
-          id: "client-feature-matrix",
-          path: "client-feature-matrix",
-          routeBasePath: "client-feature-matrix",
+          id: "security",
+          path: "security",
+          routeBasePath: "security",
           sidebarPath: false,
         }),
       ],

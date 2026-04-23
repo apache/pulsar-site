@@ -162,7 +162,7 @@ If the consumer fails to receive all chunks of a message within a specified time
 
 A consumer is a process that attaches to a topic via a subscription and then receives messages.
 
-A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](client-libraries-java.md#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
+A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](pathname:///docs/client-libraries/java#configure-consumer) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive modes
 
@@ -175,7 +175,7 @@ Messages are received from [brokers](reference-terminology.md#broker) either syn
 
 ### Listeners
 
-Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries provide listener implementation for consumers. For example, the [Java client](pathname:///docs/client-libraries/java) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ### Acknowledgement
 
@@ -761,7 +761,7 @@ Consumer<byte[]> someTopicsConsumer = pulsarClient.newConsumer()
 
 ```
 
-For code examples, see [Java](client-libraries-java.md#multi-topic-subscriptions).
+For code examples, see [Java](pathname:///docs/client-libraries/java#multi-topic-subscriptions).
 
 ## Partitioned topics
 
@@ -793,7 +793,7 @@ Mode     | Description
 :--------|:------------
 `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.
-`CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.
+`CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](pathname:///docs/client-libraries/java) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.
 
 ### Ordering guarantee
 
@@ -847,7 +847,7 @@ Non-persistent messaging is usually faster than persistent messaging because bro
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All three subscription types---[exclusive](#exclusive), [shared](#shared), and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java.md#consumers) for a non-persistent topic:
+Here's an example [Java consumer](pathname:///docs/client-libraries/java#consumers) for a non-persistent topic:
 
 ```java
 
@@ -864,7 +864,7 @@ Consumer<byte[]> consumer = client.newConsumer()
 
 ```
 
-Here's an example [Java producer](client-libraries-java.md#producer) for the same non-persistent topic:
+Here's an example [Java producer](pathname:///docs/client-libraries/java#producer) for the same non-persistent topic:
 
 ```java
 
