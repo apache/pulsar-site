@@ -347,12 +347,11 @@ sdk u java $SDKMAN_JAVA_VERSION
 git status
 
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
-curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
+curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/branch-4.2/src/settings.xml
 
 # publish artifacts
-command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
-# publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
-command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
+# and publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
+command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml && command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration || echo 'ERROR: Publishing Failed!'
 ```
 
 :::note
