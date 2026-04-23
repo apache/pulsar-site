@@ -9,12 +9,16 @@ To set up Java client in Pulsar, complete the following steps.
 
 ## Step 1: Install Java client library
 
-The latest version of the Pulsar Java client library is available via [Maven Central](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version:lts@%7Cjar). To use the latest version, add the `pulsar-client` library to your build configuration.
+The Pulsar Java client is published to Maven Central in two lines: the LTS version (**@pulsar:version:lts@**) and the latest version (**@pulsar:version:latest@**). Unless you need recently added features, use the LTS version — it receives long-term support and bug fixes.
+
+Add the `pulsar-client` artifact to your build configuration as shown below. You can also browse the published artifacts on Maven Central ([LTS](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client/@pulsar:version:lts@/jar), [latest](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client/@pulsar:version:latest@/jar)).
 
 :::tip
 
-- [`pulsar-client`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client) and [`pulsar-client-admin`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin) shade dependencies via [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-plugin/) to avoid conflicts of the underlying dependency packages (such as Netty). If you do not want to manage dependency conflicts manually, you can use them.
-- [`pulsar-client-original`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-original) and [`pulsar-client-admin-original`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin-original) **does not** shade dependencies. If you want to manage dependencies manually, you can use them.
+Pulsar publishes both shaded and unshaded client artifacts:
+
+- **Shaded** ([`pulsar-client`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client), [`pulsar-client-admin`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin)) — dependencies (such as Netty) are relocated via the [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-plugin/) to avoid conflicts. Recommended if you don't want to manage dependency conflicts manually.
+- **Unshaded** ([`pulsar-client-original`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-original), [`pulsar-client-admin-original`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin-original)) — dependencies are not relocated. Use these if you want to manage dependencies manually; in that case, also import `pulsar-bom` and align Netty versions via `netty-bom`.
 
 :::
 
@@ -24,6 +28,7 @@ If you use Maven, add the following information to the `pom.xml` file.
 
 ```xml
 <!-- in your <properties> block -->
+<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@ -->
 <pulsar.version>@pulsar:version:lts@</pulsar.version>
 
 <!-- in your <dependencies> block -->
@@ -39,6 +44,7 @@ If you use Maven, add the following information to the `pom.xml` file.
 If you use Gradle, add the following information to the `build.gradle` file.
 
 ```groovy
+// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@
 def pulsarVersion = '@pulsar:version:lts@'
 
 dependencies {
@@ -48,7 +54,7 @@ dependencies {
 
 ### Pulsar BOM
 
-While the above dependencies are sufficient to obtain the Pulsar Java client, it is recommended to also use the [Pulsar BOM](https://github.com/apache/pulsar/blob/master/pip/pip-326.md) to ensure that all Pulsar dependencies (both direct and transitive) are at the same expected version.
+While the above dependencies are sufficient to obtain the Pulsar Java client, it is recommended to also use the [Pulsar BOM](https://github.com/apache/pulsar/blob/master/pip/pip-326.md) to ensure that all Pulsar dependencies are at the same expected version.
 In order to use the BOM, the previous directions are modified slightly as follows:
 
 #### Maven {#pulsar-bom-maven}
@@ -63,6 +69,7 @@ If you use Maven, add the following information to the `pom.xml` file.
 
 ```xml
 <!-- in your <properties> block -->
+<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@ -->
 <pulsar.version>@pulsar:version:lts@</pulsar.version>
 
 <!-- in your <dependencyManagement>/<dependencies> block -->
@@ -92,6 +99,7 @@ Please notice that when using Spring Boot and the default Gradle  build with the
 :::
 
 ```groovy
+// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@
 def pulsarVersion = '@pulsar:version:lts@'
 
 dependencies {
@@ -112,6 +120,7 @@ The Spring Boot [Dependency Version properties](https://docs.spring.io/spring-bo
 
 ```xml
 <!-- in your <properties> block -->
+<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@ -->
 <pulsar.version>@pulsar:version:lts@</pulsar.version>
 
 <!-- in your <dependencies> block -->
@@ -131,6 +140,7 @@ To use a specific Pulsar version for the Pulsar Java client in a Spring Boot app
 
 ```groovy
 // Alternatively, you can set the `pulsar.version` property in the `gradle.properties` file.
+// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@
 ext['pulsar.version'] = '@pulsar:version:lts@'
 
 // The Pulsar Java client will be automatically added to dependencies as a transitive dependency of the spring-boot-starter-pulsar dependency
