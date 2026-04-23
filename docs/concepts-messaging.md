@@ -1184,7 +1184,7 @@ Consumer<byte[]> someTopicsConsumer = pulsarClient.newConsumer()
                 .subscribe();
 ```
 
-For code examples, see [Java](/docs/client-libraries/java#multi-topic-subscriptions).
+For code examples, see [Subscribe to multi-topics](/docs/client-libraries/consumers#subscribe-to-multi-topics).
 
 ## Partitioned topics
 

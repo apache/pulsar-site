@@ -16,7 +16,7 @@ Pulsar supports the following language-specific client libraries:
 | C++       | [User doc](cpp.md)    <br/> [API doc](@pulsar:apidoc:cpp@)                                        | [Standalone](pathname:///release-notes/client-cpp)    | [Standalone](https://github.com/apache/pulsar-client-cpp)             |
 | Python    | [User doc](python.md) <br/> [API doc](@pulsar:apidoc:python@)                                     | [Standalone](pathname:///release-notes/client-python) | [Standalone](https://github.com/apache/pulsar-client-python)          |
 | Go client | [User doc](go.md)   <br/> [API doc](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar) | [Standalone](pathname:///release-notes/client-go)     | [Standalone](https://github.com/apache/pulsar-client-go)              |
-| Node.js   | [User doc](node.md)  <br/> [API doc](@pulsar:apidoc:js@)                                          | [Standalone](pathname:///release-notes/client-node)   | [Standalone](https://github.com/apache/pulsar-client-node)            |
+| Node.js   | [User doc](node.md)                                                                                | [Standalone](pathname:///release-notes/client-node)   | [Standalone](https://github.com/apache/pulsar-client-node)            |
 | C#/DotPulsar | [User doc](dotnet.md)                                                                             | [Standalone](pathname:///release-notes/client-cs)     | [Standalone](https://github.com/apache/pulsar-dotpulsar)              |
 
 :::tip

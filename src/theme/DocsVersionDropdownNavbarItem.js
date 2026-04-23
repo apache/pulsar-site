@@ -59,7 +59,8 @@ export default function DocsVersionDropdownNavbarItem({
       // We try to link to the same doc, in another version
       // When not possible, fallback to the "main doc" of the version
       const _version = version.name === "current" ? "/next" : "/" + version.name;
-      const _docId = activeDocContext.activeDoc.id === "about" ? "/" : "/" + activeDocContext.activeDoc.id;
+      const activeDocId = activeDocContext.activeDoc?.id;
+      const _docId = !activeDocId || activeDocId === "about" ? "/" : "/" + activeDocId;
       const versionDoc = {
         path: "/docs" + _version + _docId,
       };
