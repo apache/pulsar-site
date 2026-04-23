@@ -25,6 +25,9 @@ const versions = versionsList as string[];
 
 export const latestMajorRelease: string = versions[0];
 
+// LTS major version. Kept in sync with `_ltsVersion` in src/theme/DocVersionBanner/index.js.
+export const ltsMajorRelease: string = "4.0.x";
+
 export function getRealVersion(version: string): string {
   const versionMap: Record<string, string> = {};
   const vsGroups: Record<string, string[]> = {};
@@ -45,6 +48,8 @@ export function getRealVersion(version: string): string {
 }
 
 export const latestVersion: string = getRealVersion(latestMajorRelease);
+
+export const ltsVersion: string = getRealVersion(ltsMajorRelease);
 
 export function downloadPageUrl(): string {
   return `${urlConfig.baseUrl}download`;
@@ -161,6 +166,8 @@ export function resolveTokens(versionKey: string): Replacement[] {
   const replacements: Replacement[] = [
     [/@pulsar:version_number@/g, versionNumber],
     [/@pulsar:version@/g, resolvedVersion],
+    [/@pulsar:version:latest@/g, latestVersion],
+    [/@pulsar:version:lts@/g, ltsVersion],
     [/@pulsar:version_origin@/g, versionOrigin],
     [/@pulsar:version_reference@/g, versionReference],
     [/pulsar:binary_release_url/g, binaryReleaseUrl(resolvedVersion)],

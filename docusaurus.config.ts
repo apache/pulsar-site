@@ -133,6 +133,11 @@ module.exports = async function createConfigAsync() {
               label: "Docs",
             },
             {
+              to: "/docs/client-libraries/",
+              position: "left",
+              label: "Client Libraries",
+            },
+            {
               to: "/features/",
               position: "left",
               label: "Features",
@@ -416,6 +421,17 @@ module.exports = async function createConfigAsync() {
           numberPrefixParser: false,
           editUrl: `${githubSiteUrl}/edit/main`,
           sidebarPath: require.resolve("./sidebarsReleaseNotes.js"),
+        }),
+      ],
+      [
+        "content-docs",
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: "client-libraries",
+          path: "client-libraries",
+          routeBasePath: "docs/client-libraries",
+          editUrl: `${githubSiteUrl}/edit/main`,
+          sidebarPath: require.resolve("./sidebarsClientLibraries.js"),
         }),
       ],
       [
