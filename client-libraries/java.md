@@ -44,4 +44,4 @@ Package | Description | Maven Artifact
 
 - [Java client configurations](pathname:///reference/#/@pulsar:version_reference@/client/)
 - [Release notes](/release-notes/client-java)
-- [Client feature matrix](/client-feature-matrix/)
+- [Client feature matrix](/docs/client-libraries/feature-matrix)

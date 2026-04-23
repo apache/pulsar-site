@@ -44,7 +44,7 @@ A design goal of Pulsar is to ensure full compatibility between all versions of 
 
 ## Feature matrix
 
-The [Client Feature Matrix](/client-feature-matrix/) page provides an overview of the latest feature supportability on language-specific clients.
+The [Client Feature Matrix](/docs/client-libraries/feature-matrix) page provides an overview of the latest feature supportability on language-specific clients.
 
 ## Third-party clients
 

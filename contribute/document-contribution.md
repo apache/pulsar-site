@@ -92,7 +92,7 @@ Docs for external command-line tools or bare scripts are updated **manually**:
 
 Pulsar feature matrix introduces the features supported by language-specific clients and functions. It includes:
 
-- [Client Feature Matrix](pathname:///client-feature-matrix)
+- [Client Feature Matrix](pathname:///docs/client-libraries/feature-matrix)
 - [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194)
 
 You need to update the feature matrix as soon as your related commits get merged. The workflow is illustrated as follows.
@@ -105,7 +105,7 @@ You need to update the feature matrix as soon as your related commits get merged
 
 :::note
 
-- For how to update the [Client Feature Matrix](pathname:///client-feature-matrix), see [How to update data-driven pages](site-intro.md#how-to-update-data-driven-pages).
+- For how to update the [Client Feature Matrix](pathname:///docs/client-libraries/feature-matrix), see [How to update data-driven pages](site-intro.md#how-to-update-data-driven-pages).
 - If you have problems in editing the spreadsheet of [Function Feature Matrix](https://docs.google.com/spreadsheets/d/1YHYTkIXR8-Ql103u-IMI18TXLlGStK8uJjDsOOA0T20/edit#gid=328808194), you can reach out to `dev@pulsar.apache.org`.
 
 :::

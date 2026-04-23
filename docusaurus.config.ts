@@ -419,6 +419,10 @@ module.exports = async function createConfigAsync() {
               from: '/resources',
               to: '/articles',
             },
+            {
+              from: '/client-feature-matrix',
+              to: '/docs/client-libraries/feature-matrix',
+            },
             ...clientLibrariesLegacyRedirects(),
           ],
         },
@@ -467,16 +471,6 @@ module.exports = async function createConfigAsync() {
           id: "security",
           path: "security",
           routeBasePath: "security",
-          sidebarPath: false,
-        }),
-      ],
-      [
-        "content-docs",
-        /** @type {import('@docusaurus/plugin-content-docs').Options} */
-        ({
-          id: "client-feature-matrix",
-          path: "client-feature-matrix",
-          routeBasePath: "client-feature-matrix",
           sidebarPath: false,
         }),
       ],

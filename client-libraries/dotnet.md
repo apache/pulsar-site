@@ -23,4 +23,4 @@ You can use the Pulsar C# client (DotPulsar) to create Pulsar [producers](pathna
 
 - [Release notes](/release-notes/client-cs)
 - [DotPulsar documentation](https://github.com/apache/pulsar-dotpulsar/wiki)
-- [Client feature matrix](/client-feature-matrix/)
+- [Client feature matrix](/docs/client-libraries/feature-matrix)

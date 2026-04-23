@@ -156,7 +156,8 @@ export default function DocVersionBanner({className}) {
       {() => {
         return versionMetadata.version !== _latestVersion &&
           versionMetadata.version !== _ltsVersion &&
-          location.pathname.startsWith("/docs") ? (
+          location.pathname.startsWith("/docs") &&
+          !location.pathname.startsWith("/docs/client-libraries") ? (
           <DocVersionBannerEnabled
             className={className}
             versionMetadata={versionMetadata}

@@ -27,4 +27,4 @@ You can use a Pulsar Python client to create Pulsar [producers](pathname:///docs
   - [Consumer configurations](@pulsar:apidoc:python@/pulsar.Client.html#subscribe)
   - [Reader configurations](@pulsar:apidoc:python@/pulsar.Client.html#create_reader)
 - [Release notes](/release-notes/client-python)
-- [Client feature matrix](/client-feature-matrix/)
+- [Client feature matrix](/docs/client-libraries/feature-matrix)

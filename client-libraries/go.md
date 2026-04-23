@@ -27,4 +27,4 @@ You can use a Pulsar [Go client](https://github.com/apache/pulsar-client-go) to 
   - [Consumer configurations](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ConsumerOptions)
   - [Reader configurations](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar#ReaderOptions)
 - [Release notes](/release-notes/client-go)
-- [Client feature matrix](/client-feature-matrix/)
+- [Client feature matrix](/docs/client-libraries/feature-matrix)

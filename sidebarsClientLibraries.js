@@ -2,11 +2,7 @@
 module.exports = {
     clientLibraries: [
         'overview',
-        {
-            type: "link",
-            href: "/client-feature-matrix/",
-            label: "Client Feature Matrix",
-        },
+        'feature-matrix',
         {
             type: "category",
             label: "Get started",

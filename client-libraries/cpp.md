@@ -29,7 +29,7 @@ You can use a Pulsar C++ client to create Pulsar [producers](pathname:///docs/co
 - [Release notes](/release-notes/client-cpp)
 - [Code examples](https://github.com/apache/pulsar-client-cpp/tree/main/examples)
 - [Supported schema types](https://github.com/apache/pulsar-client-cpp/blob/main/include/pulsar/Schema.h)
-- [Client feature matrix](/client-feature-matrix/)
+- [Client feature matrix](/docs/client-libraries/feature-matrix)
 
 ## Changes for 4.0.0 and later versions
 
