@@ -25,6 +25,11 @@ RewriteRule "^docs/(.*)$" "/docs/4.2.x/$1" [R=301,DPI,L]
 # The version segment is captured and dropped; the client-libraries- slug prefix is also stripped.
 RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries-(.+?)/?$" "/docs/client-libraries/$2" [R=301,DPI,L]
 RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries/?$" "/docs/client-libraries/" [R=301,DPI,L]
+# New canonical path accidentally prefixed with a version segment — strip the version.
+RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries/(.+?)/?$" "/docs/client-libraries/$2" [R=301,DPI,L]
+# Bare /docs/client-libraries-<slug> (no version) — from very old /docs/en/client-libraries-<slug>
+# URLs that line 6 rewrites to this form, and from any historical unversioned external links.
+RewriteRule "^docs/client-libraries-(.+?)/?$" "/docs/client-libraries/$1" [R=301,DPI,L]
 
 # /client-feature-matrix/ moved into the client-libraries plugin.
 RewriteRule "^client-feature-matrix/?$" "/docs/client-libraries/feature-matrix" [R=301,DPI,L]

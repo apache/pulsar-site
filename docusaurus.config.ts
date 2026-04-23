@@ -52,7 +52,20 @@ function clientLibrariesLegacyRedirects() {
         from: `/docs/${v}/client-libraries-${slug}`,
         to: `/docs/client-libraries/${slug}`,
       });
+      // Cover the case where the new canonical URL gets accidentally prefixed with a version.
+      entries.push({
+        from: `/docs/${v}/client-libraries/${slug}`,
+        to: `/docs/client-libraries/${slug}`,
+      });
     }
+  }
+  // Bare /docs/client-libraries-<slug> (no version segment) — from very old external
+  // links, or from /docs/en/client-libraries-<slug> URLs that the .htaccess rewrites to this form.
+  for (const slug of slugs) {
+    entries.push({
+      from: `/docs/client-libraries-${slug}`,
+      to: `/docs/client-libraries/${slug}`,
+    });
   }
   return entries;
 }
