@@ -142,7 +142,7 @@ This is how to clean the history of `asf-site-next` branch:
 ```shell
 git clone --depth 1 -b asf-site-next https://github.com/apache/pulsar-site pulsar-site-static
 cd pulsar-site-static
-git checkout --orphan asf-site-next-reset
+git checkout --orphan asf-site-next-truncated
 git add -A
 git commit -m "History truncated"
 git push -f origin HEAD:asf-site-next
