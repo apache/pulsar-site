@@ -8,12 +8,14 @@ import {resolveTokens} from "../../config/pulsarVariables";
 // @pulsar:version:*@ / @pulsar:apidoc:*@ variables as the main docs set.
 const SCOPE_RE = /(?:^|[/\\])(?:docs|client-libraries|versioned_docs[/\\]version-[^/\\]+)[/\\].*\.md$/;
 const VERSIONED_RE = /(?:^|[/\\])versioned_docs[/\\]version-([^/\\]+)[/\\]/;
+const CLIENT_LIBRARIES_RE = /(?:^|[/\\])client-libraries[/\\]/;
 const TOKEN_RE = /@pulsar:([^@\s]+)@/g;
 
 type Args = {filePath: string; fileContent: string};
 
 export function replacePulsarTokens(fileContent: string, versionKey: string, filePath?: string): string {
-  const tokens = resolveTokens(versionKey);
+  const referenceLatest = filePath !== undefined && CLIENT_LIBRARIES_RE.test(filePath);
+  const tokens = resolveTokens(versionKey, referenceLatest);
   const warned = new Set<string>();
   return fileContent.replace(TOKEN_RE, (match, key: string) => {
     const value = tokens.get(key);

@@ -148,8 +148,13 @@ export function referenceVersion(version: string): string {
  *
  * Keys are the bare token names (e.g. `"version_number"`, `"javadoc:client"`);
  * the preprocessor wraps them as `@pulsar:<key>@` when matching.
+ *
+ * `referenceLatest`: when true (used for `client-libraries/` docs), `version_reference`
+ * resolves to the latest stable release's reference (e.g. `4.2.x`) instead of `next`,
+ * so links like `/reference/#/@pulsar:version_reference@/client/` target the published
+ * reference rather than the in-development one.
  */
-export function resolveTokens(versionKey: string): Map<string, string> {
+export function resolveTokens(versionKey: string, referenceLatest = false): Map<string, string> {
   const isCurrent = versionKey === "current";
   const originVersion = isCurrent ? latestMajorRelease : versionKey;
   const resolvedVersion = getRealVersion(originVersion);
@@ -159,7 +164,7 @@ export function resolveTokens(versionKey: string): Map<string, string> {
   //   - versioned docs: version_number strips any -incubating suffix
   const versionNumber = isCurrent ? resolvedVersion : resolvedVersion.replace("-incubating", "");
   const versionOrigin = isCurrent ? resolvedVersion : originVersion;
-  const versionReference = isCurrent ? "next" : referenceVersion(resolvedVersion);
+  const versionReference = isCurrent && !referenceLatest ? "next" : referenceVersion(resolvedVersion);
   const pythonArg = isCurrent ? originVersion : resolvedVersion;
 
   return new Map<string, string>([

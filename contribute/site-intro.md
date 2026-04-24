@@ -97,16 +97,16 @@ The `<X>` segment is looked up in `versions.json` / the REST API version map. `.
 
 #### Version numbers
 
-| Token                          | Expands to                                                                                                            |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| `@pulsar:version@`             | Resolved semver version (e.g. `4.2.0`) — the latest patch of the minor line in context.                               |
-| `@pulsar:version_number@`      | Same as `@pulsar:version@` but with any trailing `-incubating` suffix stripped (only matters for very old versions).  |
-| `@pulsar:version_origin@`      | The origin version key (e.g. `4.2.x` for released docs, full resolved version for current docs).                      |
-| `@pulsar:version_reference@`   | The folder name in `static/reference/` — `next` for current docs, `<major>.<minor>.x` otherwise.                      |
-| `@pulsar:version:latest@`      | Latest version across all releases (context-independent).                                                             |
-| `@pulsar:version:lts@`         | Current LTS version. Kept in sync with `ltsMajorRelease` in `pulsarVariables.ts`.                                     |
-| `@pulsar:version:adapters@`    | Latest `pulsar-adapters` release, sourced from `data/release-pulsar-adapters.js`.                                     |
-| `@pulsar:version:python@`      | Version of the Python client that matches the current context.                                                        |
+| Token                        | Expands to                                                                                                                                                |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `@pulsar:version@`           | Resolved semver version (e.g. `4.2.0`) — the latest patch of the minor line in context.                                                                   |
+| `@pulsar:version_number@`    | Same as `@pulsar:version@` but with any trailing `-incubating` suffix stripped (only matters for very old versions).                                      |
+| `@pulsar:version_origin@`    | The origin version key (e.g. `4.2.x` for released docs, full resolved version for current docs).                                                          |
+| `@pulsar:version_reference@` | The folder name in `static/reference/` — `next` for `docs/`, latest release's `<major>.<minor>.x` for `client-libraries/`, `<major>.<minor>.x` otherwise. |
+| `@pulsar:version:latest@`    | Latest version across all releases (context-independent).                                                                                                 |
+| `@pulsar:version:lts@`       | Current LTS version. Kept in sync with `ltsMajorRelease` in `pulsarVariables.ts`.                                                                         |
+| `@pulsar:version:adapters@`  | Latest `pulsar-adapters` release, sourced from `data/release-pulsar-adapters.js`.                                                                         |
+| `@pulsar:version:python@`    | Version of the Python client that matches the current context.                                                                                            |
 
 #### Release download URLs
 
