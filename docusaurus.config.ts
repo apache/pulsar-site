@@ -152,6 +152,10 @@ module.exports = async function createConfigAsync() {
                 {
                   to: "/ecosystem/",
                   label: "Ecosystem",
+                },
+                {
+                  to: "/docs/client-libraries/",
+                  label: "Client Libraries",
                 }
               ],
             },
