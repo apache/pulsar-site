@@ -25,15 +25,15 @@ To get started running Pulsar, download a binary tarball release in one of the f
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>
+  * <a href="@pulsar:binary_release_url@" download>Pulsar @pulsar:version@ binary release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
 
-  $ wget pulsar:binary_release_url
+  $ wget @pulsar:binary_release_url@
 
   ```
 
@@ -50,7 +50,7 @@ $ cd apache-pulsar-@pulsar:version@
 
 Since release `2.3.0`, Pulsar releases all the `builtin` connectors as individual archives.
 If you would like to enable those `builtin` connectors, you can download the connectors "NAR"
-archives and from the Pulsar [downloads page](pulsar:download_page_url).
+archives and from the Pulsar [downloads page](@pulsar:download_page_url@).
 
 After downloading the desired builtin connectors, these archives should be places under
 the `connectors` directory where you have unpacked the Pulsar distribution.

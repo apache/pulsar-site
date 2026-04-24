@@ -23,15 +23,15 @@ To get started running Pulsar, download a binary tarball release in one of the f
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>
+  * <a href="@pulsar:binary_release_url@" download>Pulsar @pulsar:version@ binary release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
 
-  $ wget pulsar:binary_release_url
+  $ wget @pulsar:binary_release_url@
 
   ```
 
@@ -72,15 +72,15 @@ If you would like to enable those `builtin` connectors, you can download the con
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:connector_release_url" download>Pulsar IO Connectors @pulsar:version@ release</a>
+  * <a href="@pulsar:connector_release_url@" download>Pulsar IO Connectors @pulsar:version@ release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
 
-  $ wget pulsar:connector_release_url
+  $ wget @pulsar:connector_release_url@
 
   ```
 
@@ -126,15 +126,15 @@ one of the following ways:
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:offloader_release_url" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
+  * <a href="@pulsar:offloader_release_url@" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
 
-  $ wget pulsar:offloader_release_url
+  $ wget @pulsar:offloader_release_url@
 
   ```
 
