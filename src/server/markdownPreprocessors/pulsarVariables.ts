@@ -8,6 +8,7 @@ import {resolveTokens} from "../../config/pulsarVariables";
 // @pulsar:version:*@ / @pulsar:apidoc:*@ variables as the main docs set.
 const SCOPE_RE = /(?:^|[/\\])(?:docs|client-libraries|versioned_docs[/\\]version-[^/\\]+)[/\\].*\.md$/;
 const VERSIONED_RE = /(?:^|[/\\])versioned_docs[/\\]version-([^/\\]+)[/\\]/;
+const TOKEN_RE = /@pulsar:([^@\s]+)@/g;
 
 type Args = {filePath: string; fileContent: string};
 
@@ -17,9 +18,17 @@ export default function pulsarVariablesPreprocessor({filePath, fileContent}: Arg
   }
   const versionMatch = filePath.match(VERSIONED_RE);
   const versionKey = versionMatch ? versionMatch[1] : "current";
-  let result = fileContent;
-  for (const [regex, replacement] of resolveTokens(versionKey)) {
-    result = result.replace(regex, replacement);
-  }
-  return result;
+  const tokens = resolveTokens(versionKey);
+  const warned = new Set<string>();
+  return fileContent.replace(TOKEN_RE, (match, key: string) => {
+    const value = tokens.get(key);
+    if (value !== undefined) {
+      return value;
+    }
+    if (!warned.has(key)) {
+      warned.add(key);
+      console.warn(`[pulsarVariables] unknown token ${match} in ${filePath}`);
+    }
+    return match;
+  });
 }

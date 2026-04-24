@@ -141,14 +141,15 @@ export function referenceVersion(version: string): string {
   return `${v.major}.${v.minor}.x`;
 }
 
-export type Replacement = [RegExp, string];
-
 /**
- * Ordered [regex, replacement] pairs for a given version key.
+ * Token → replacement value for a given version key.
  * `"current"` → next/current docs; any other string is an origin version
  * from versions.json (e.g. "3.0.x", "2.10.x", "2.6.4").
+ *
+ * Keys are the bare token names (e.g. `"version_number"`, `"javadoc:client"`);
+ * the preprocessor wraps them as `@pulsar:<key>@` when matching.
  */
-export function resolveTokens(versionKey: string): Replacement[] {
+export function resolveTokens(versionKey: string): Map<string, string> {
   const isCurrent = versionKey === "current";
   const originVersion = isCurrent ? latestMajorRelease : versionKey;
   const resolvedVersion = getRealVersion(originVersion);
@@ -161,37 +162,34 @@ export function resolveTokens(versionKey: string): Replacement[] {
   const versionReference = isCurrent ? "next" : referenceVersion(resolvedVersion);
   const pythonArg = isCurrent ? originVersion : resolvedVersion;
 
-  const replacements: Replacement[] = [
-    [/@pulsar:version_number@/g, versionNumber],
-    [/@pulsar:version@/g, resolvedVersion],
-    [/@pulsar:version:latest@/g, latestVersion],
-    [/@pulsar:version:lts@/g, ltsVersion],
-    [/@pulsar:version_origin@/g, versionOrigin],
-    [/@pulsar:version_reference@/g, versionReference],
-    [/@pulsar:binary_release_url@/g, binaryReleaseUrl(resolvedVersion)],
-    [/@pulsar:connector_release_url@/g, connectorReleaseUrl(resolvedVersion)],
-    [/@pulsar:offloader_release_url@/g, offloaderReleaseUrl(resolvedVersion)],
-    [/@pulsar:presto_pulsar_connector_release_url@/g, prestoPulsarReleaseUrl(resolvedVersion)],
-    [/@pulsar:download_page_url@/g, downloadPageUrl()],
-    [/@pulsar:rpm:client@/g, rpmDistUrl(resolvedVersion, "")],
-    [/@pulsar:rpm:client-debuginfo@/g, rpmDistUrl(resolvedVersion, "-debuginfo")],
-    [/@pulsar:rpm:client-devel@/g, rpmDistUrl(resolvedVersion, "-devel")],
-    [/@pulsar:deb:client@/g, debDistUrl(resolvedVersion, "")],
-    [/@pulsar:deb:client-devel@/g, debDistUrl(resolvedVersion, "-dev")],
-    [/@pulsar:dist_rpm:client@/g, rpmDistUrl(resolvedVersion, "")],
-    [/@pulsar:dist_rpm:client-debuginfo@/g, rpmDistUrl(resolvedVersion, "-debuginfo")],
-    [/@pulsar:dist_rpm:client-devel@/g, rpmDistUrl(resolvedVersion, "-devel")],
-    [/@pulsar:dist_deb:client@/g, debDistUrl(resolvedVersion, "")],
-    [/@pulsar:dist_deb:client-devel@/g, debDistUrl(resolvedVersion, "-dev")],
-    [/@pulsar:version:python@/g, clientPythonVersion(pythonArg)],
-    [/@pulsar:apidoc:python@/g, clientPythonVersionUrl(pythonArg)],
-    [/@pulsar:apidoc:cpp@/g, clientCPPVersionUrl(pythonArg)],
-    [/@pulsar:javadoc:pulsar-functions@/g, javadocVersionUrl(originVersion, "pulsar-functions")],
-    [/@pulsar:javadoc:client@/g, javadocVersionUrl(originVersion, "client")],
-    [/@pulsar:javadoc:admin@/g, javadocVersionUrl(originVersion, "admin")],
-    [/@pulsar:version_number@/g, resolvedVersion],
-    [/@pulsar:version:adapters@/g, pulsarAdaptersVersion]
-  ];
-
-  return replacements;
+  return new Map<string, string>([
+    ["version_number", versionNumber],
+    ["version", resolvedVersion],
+    ["version:latest", latestVersion],
+    ["version:lts", ltsVersion],
+    ["version_origin", versionOrigin],
+    ["version_reference", versionReference],
+    ["binary_release_url", binaryReleaseUrl(resolvedVersion)],
+    ["connector_release_url", connectorReleaseUrl(resolvedVersion)],
+    ["offloader_release_url", offloaderReleaseUrl(resolvedVersion)],
+    ["presto_pulsar_connector_release_url", prestoPulsarReleaseUrl(resolvedVersion)],
+    ["download_page_url", downloadPageUrl()],
+    ["rpm:client", rpmDistUrl(resolvedVersion, "")],
+    ["rpm:client-debuginfo", rpmDistUrl(resolvedVersion, "-debuginfo")],
+    ["rpm:client-devel", rpmDistUrl(resolvedVersion, "-devel")],
+    ["deb:client", debDistUrl(resolvedVersion, "")],
+    ["deb:client-devel", debDistUrl(resolvedVersion, "-dev")],
+    ["dist_rpm:client", rpmDistUrl(resolvedVersion, "")],
+    ["dist_rpm:client-debuginfo", rpmDistUrl(resolvedVersion, "-debuginfo")],
+    ["dist_rpm:client-devel", rpmDistUrl(resolvedVersion, "-devel")],
+    ["dist_deb:client", debDistUrl(resolvedVersion, "")],
+    ["dist_deb:client-devel", debDistUrl(resolvedVersion, "-dev")],
+    ["version:python", clientPythonVersion(pythonArg)],
+    ["apidoc:python", clientPythonVersionUrl(pythonArg)],
+    ["apidoc:cpp", clientCPPVersionUrl(pythonArg)],
+    ["javadoc:pulsar-functions", javadocVersionUrl(originVersion, "pulsar-functions")],
+    ["javadoc:client", javadocVersionUrl(originVersion, "client")],
+    ["javadoc:admin", javadocVersionUrl(originVersion, "admin")],
+    ["version:adapters", pulsarAdaptersVersion],
+  ]);
 }
