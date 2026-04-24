@@ -22,9 +22,18 @@ The Pulsar site pages are of:
 | [Security](pathname:///security)                           | docs      | <ul><li>security/</li></ul>                                                                       |
 | [Blogs](pathname:///blog)                                  | blog      | <ul><li>blog/</li></ul>                                                                           |
 | [Client feature matrix](pathname:///docs/client-libraries/feature-matrix) | docs      | <ul><li>client-feature-matrix/</li><li>data/matrix.js</li></ul>                                   |
+| [Config Reference](/reference)                  | Docsify   | <ul><li>static/reference/</li></ul>                                                               |
 | Other pages                                                | JSX pages | <ul><li>src/pages/</li></ul>                                                                      |
 
 Besides, the site serves multiple static pages generated outside the framework, including API docs, reference docs, and swagger files. You can find them under the `static` folder.
+
+### Config Reference (Docsify site)
+
+The `/reference` tree is a separate [Docsify](https://docsify.js.org/) site embedded inside the Docusaurus one. Unlike Docusaurus, Docsify renders markdown in the browser at runtime — `static/reference/index.html` is a small shell that fetches `static/reference/<version>/**/*.md` via `fetch` and renders them client-side. Docusaurus copies `static/reference/` into the build output verbatim and doesn't apply its markdown preprocessor to those files.
+
+Most of the content is generated from the upstream `apache/pulsar` source tree by the [reference-doc-generator](https://github.com/apache/pulsar-site/tree/main/tools/pytools#reference-doc-generator) tool and committed into this repo by the `sync-content` workflow. The generated markdown contains the same `@pulsar:...@` variable tokens as the main docs, plus a few `pathname:///docs/...` links. Since the Docusaurus markdown preprocessor doesn't see these files, a dedicated post-build step in [site_builder.py](https://github.com/apache/pulsar-site/tree/main/tools/pytools/lib/execute/site_builder.py) — `yarn process-reference-markdown` — walks `build/reference/` and applies the same `@pulsar:...@` expansion (sharing the resolver in [src/config/pulsarVariables.ts](https://github.com/apache/pulsar-site/tree/main/src/config/pulsarVariables.ts) with the Docusaurus preprocessor) and rewrites `pathname:///` → `/` so Docsify's client-side router resolves the links correctly.
+
+If you're working on reference pages locally and want to preview them with tokens expanded, run `yarn build && yarn process-reference-markdown` and serve the `build/` directory (e.g. `yarn serve` or `docker-compose up`); `yarn start` serves `static/` directly and will show the raw `@pulsar:...@` tokens.
 
 ## Tools
 
