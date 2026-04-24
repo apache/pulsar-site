@@ -17,7 +17,7 @@ This page only shows **some frequently used operations**. For the latest and com
 
 Category|Method|If you want to manage brokers...
 |---|---|---
-[Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `broker` command
+[Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](/reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `broker` command
 [Pulsar admin APIs](admin-api-overview.md)| {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.|See the `/admin/v2/brokers` endpoint
 [Pulsar admin APIs](admin-api-overview.md)|[Java admin API](@pulsar:javadoc:admin@/), which lists all classes, methods, descriptions, and more.|See the `brokers` method of the `PulsarAdmin` object
 
@@ -107,7 +107,7 @@ admin.brokers().getOwnedNamespaces(cluster,brokerUrl);
 
 You can update broker configurations using one of the following ways:
 
-- Supply [configurations](pathname:///reference/#/@pulsar:version_reference@/config/reference-configuration-broker) when starting up brokers.
+- Supply [configurations](/reference/#/@pulsar:version_reference@/config/reference-configuration-broker) when starting up brokers.
 
 - [Update configurations dynamically](#update-broker-conf-dynamically) **when running brokers**.
 
@@ -165,7 +165,7 @@ admin.brokers().getDynamicConfigurationNames();
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-The [`update-dynamic-config`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
+The [`update-dynamic-config`](/reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config) subcommand will update existing configuration. It takes two arguments: the name of the parameter and the new value using the `config` and `value` flag respectively. Here's an example of the [`brokerShutdownTimeoutMs`](reference-configuration.md#broker-brokerShutdownTimeoutMs) parameter:
 
 ```shell
 pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --value 100

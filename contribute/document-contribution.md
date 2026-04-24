@@ -40,7 +40,7 @@ This <fix / improvment> is available for 4.0.1 and later versions.
 
 ## Update reference docs
 
-If you want to update [Pulsar reference docs](pathname:///reference/), you should update the corresponding source files.
+If you want to update [Pulsar reference docs](/reference/), you should update the corresponding source files.
 
 - Some reference docs are generated from code **automatically**. If you want to update the docs, you need to update the source code files.
 - Some configuration docs are updated **manually** using markdown files.

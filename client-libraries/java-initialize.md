@@ -28,4 +28,4 @@ If you run a cluster in [standalone mode](pathname:///docs/getting-started-stand
 
 :::
 
-For detailed client configurations, see the [reference doc](pathname:///reference/#/@pulsar:version_reference@/client/).
+For detailed client configurations, see the [reference doc](/reference/#/@pulsar:version_reference@/client/).

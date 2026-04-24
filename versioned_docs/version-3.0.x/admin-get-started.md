@@ -17,7 +17,7 @@ This guide walks you through the quickest way to get started with the following 
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-[pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/): it’s a command-line tool and is available in the bin folder of your Pulsar installation.
+[pulsar-admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/): it’s a command-line tool and is available in the bin folder of your Pulsar installation.
 
 </TabItem>
 <TabItem value="REST API">
@@ -520,7 +520,7 @@ This tutorial guides you through every step of using Java admin API to manage to
 
 - To check the detailed usage, see the references below.
 
-  - [pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+  - [pulsar-admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 
   - Pulsar admin APIs
 

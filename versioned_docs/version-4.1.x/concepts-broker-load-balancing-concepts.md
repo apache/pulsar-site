@@ -173,7 +173,7 @@ Based on the broker resource usage (for example, the number of topics or session
 
 Step 3: split bundles at the specific boundaries from step 2.
 
-For how to split bundles manually, please refer to [`split-bundle`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle) admin command.
+For how to split bundles manually, please refer to [`split-bundle`](/reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle) admin command.
 
 Examples:
 
@@ -469,7 +469,7 @@ Based on the broker resource usage (for example, CPU, network, and memory usage)
 
 Unload hot bundles to available brokers. Target bundles' ownerships will be transferred, and topic connections will be closed.
 
-For how to unload bundles manually, please refer to [`unload`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=unload) admin command.
+For how to unload bundles manually, please refer to [`unload`](/reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=unload) admin command.
 
 Examples:
 
