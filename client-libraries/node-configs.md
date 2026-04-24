@@ -18,11 +18,16 @@ The following configurable parameters are available for Pulsar Node.js clients:
 | `ioThreads` | The number of threads to use for handling connections to Pulsar [brokers](pathname:///docs/reference-terminology#broker). | 1 |
 | `messageListenerThreads` | The number of threads used by message listeners ([consumers](#consumers) and [readers](#readers)). | 1 |
 | `concurrentLookupRequest` | The number of concurrent lookup requests that can be sent on each broker connection. Setting a maximum helps to keep from overloading brokers. You should set values over the default of 50000 only if the client needs to produce and/or subscribe to thousands of Pulsar topics. | 50000 |
-| `tlsTrustCertsFilePath` | The file path for the trusted TLS certificate. | |
+| `tlsTrustCertsFilePath` | The file path for the trusted TLS certificate. If unset, the client falls back to a `cert.pem` file bundled with the package that is seeded from the Node.js runtime's root CAs at install time. | Bundled `cert.pem` |
+| `tlsCertificateFilePath` | The file path for the client TLS certificate used for mTLS. | |
+| `tlsPrivateKeyFilePath` | The file path for the client TLS private key used for mTLS. | |
 | `tlsValidateHostname` | The boolean value of setup whether to enable TLS hostname verification. | `false` |
 | `tlsAllowInsecureConnection` | The boolean value of setup whether the Pulsar client accepts untrusted TLS certificate from broker. | `false` |
 | `statsIntervalInSeconds` | Interval between each stat info. Stats is activated with positive statsInterval. The value should be set to 1 second at least | 600 |
-| `log` | A function that is used for logging. | `console.log` |
+| `listenerName` | The listener name the client will use when connecting to the broker. Useful when [advertising multiple endpoints](pathname:///docs/concepts-multi-tenancy). | |
+| `log` | A function that is used for logging. Receives `(level, file, line, message)` arguments. | `console.log` |
+| `logLevel` | The log level for client-emitted logs. Accepts `LogLevel.DEBUG` (0), `LogLevel.INFO` (1), `LogLevel.WARN` (2), or `LogLevel.ERROR` (3). | `LogLevel.INFO` |
+| `connectionTimeoutMs` | Duration (in milliseconds) to wait for a broker connection to establish before failing. | |
 
 
 ## Producer configs
