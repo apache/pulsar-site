@@ -38,6 +38,10 @@ def execute(asf_site: Path):
     bash = find_command('bash', msg="bash is required")
     run(yarn, 'install', cwd=site_path())
     run(bash, 'scripts/split-version-build.sh', *modified_files, cwd=site_path())
+    # Expand @pulsar:...@ tokens and rewrite `pathname:///` in the Docsify
+    # reference site (build/reference/), which Docusaurus copies verbatim
+    # from static/ and so isn't touched by the markdown preprocessor pipeline.
+    run(yarn, 'process-reference-markdown', cwd=site_path())
     latest_content = site_path() / 'build'
 
     # 3. Publish content to asf-site-next branch
