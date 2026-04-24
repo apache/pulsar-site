@@ -143,7 +143,7 @@ topicLevelPoliciesEnabled=true
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example of the [Java API](pathname:///docs/client-libraries/java). Note the use of the `replicationClusters` method when you construct the [Message](/api/client/org/apache/pulsar/client/api/Message) object:
+The following is an example of the [Java API](pathname:///docs/client-libraries/java). Note the use of the `replicationClusters` method when you construct the [Message](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Message) object:
 
 ```java
 List<String> restrictReplicationTo = Arrays.asList(

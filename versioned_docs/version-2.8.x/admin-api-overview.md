@@ -32,7 +32,7 @@ You can interact with the admin interface via:
 
 ## Admin setup
 
-Each of the three admin interfaces (the `pulsar-admin` CLI tool, the {@inject: rest:REST:/} API, and the [Java admin API](/api/admin)) requires some special setup if you have enabled authentication in your Pulsar instance.
+Each of the three admin interfaces (the `pulsar-admin` CLI tool, the {@inject: rest:REST:/} API, and the [Java admin API](@pulsar:javadoc:admin@)) requires some special setup if you have enabled authentication in your Pulsar instance.
 
 ````mdx-code-block
 <Tabs
@@ -60,7 +60,7 @@ You can find details for the REST API exposed by Pulsar brokers in this {@inject
 </TabItem>
 <TabItem value="Java">
 
-To use the Java admin API, instantiate a [PulsarAdmin](/api/admin/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](/api/admin/org/apache/pulsar/client/admin/PulsarAdminBuilder). The following is a minimal example using `localhost`:
+To use the Java admin API, instantiate a [PulsarAdmin](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdminBuilder). The following is a minimal example using `localhost`:
 
 ```java
 

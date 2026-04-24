@@ -65,7 +65,7 @@ The target clusters for replication of a message are determined by a hierarchy o
 
 * **Topic-level policies**: Can override the namespace-level `clusters` setting for a specific topic. Topic policies can be **local** (applying only to the local cluster) or **global** (replicated to all clusters in the geo-replication set, see [PIP-92](https://github.com/apache/pulsar/blob/master/pip/pip-92.md)). Note that `allowed-clusters` has not been implemented at the topic level; [PIP-321](https://github.com/apache/pulsar/blob/master/pip/pip-321.md) mentions that it could be added in the future.
 
-* **Message-level replication control**: Producers can override which clusters a specific message is replicated to using the [`replicationClusters`](/api/client/4.1.x/org/apache/pulsar/client/api/TypedMessageBuilder.html#replicationClusters(java.util.List)) method in the client API, or disable replication entirely for a message using [`disableReplication`](/api/client/4.1.x/org/apache/pulsar/client/api/TypedMessageBuilder.html#disableReplication()) (see [Selective replication](#selective-replication)). Note that these settings cannot override the `allowed-clusters` configuration — messages can only be routed to clusters that are permitted by the resolved `allowed-clusters` settings.
+* **Message-level replication control**: Producers can override which clusters a specific message is replicated to using the [`replicationClusters`](@pulsar:javadoc:client@/4.1.x/org/apache/pulsar/client/api/TypedMessageBuilder.html#replicationClusters(java.util.List)) method in the client API, or disable replication entirely for a message using [`disableReplication`](@pulsar:javadoc:client@/4.1.x/org/apache/pulsar/client/api/TypedMessageBuilder.html#disableReplication()) (see [Selective replication](#selective-replication)). Note that these settings cannot override the `allowed-clusters` configuration — messages can only be routed to clusters that are permitted by the resolved `allowed-clusters` settings.
 
 The `clusters` and `allowed-clusters` settings are resolved hierarchically. When the tenant-level `allowed-clusters` is non-empty, all clusters specified in namespace-level `allowed-clusters` must be a subset of it — this is validated when `allowed-clusters` is modified at the namespace level. Namespace-level `allowed-clusters` can further restrict the tenant-level configuration, and topic-level policies can override the namespace-level `clusters` setting for a specific topic.
 
@@ -210,7 +210,7 @@ topicLevelPoliciesEnabled=true
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example of the [Java API](pathname:///docs/client-libraries/java). Note the use of the `replicationClusters` method when you construct the [Message](/api/client/org/apache/pulsar/client/api/Message) object:
+The following is an example of the [Java API](pathname:///docs/client-libraries/java). Note the use of the `replicationClusters` method when you construct the [Message](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Message) object:
 
 ```java
 List<String> restrictReplicationTo = Arrays.asList(

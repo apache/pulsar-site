@@ -75,7 +75,7 @@ Messages can be acknowledged either one by one or cumulatively. With cumulative 
 
 ### Listeners
 
-Client libraries can provide their own listener implementations for consumers. The [Java client](pathname:///docs/client-libraries/java), for example, provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries can provide their own listener implementations for consumers. The [Java client](pathname:///docs/client-libraries/java), for example, provides a [MesssageListener](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ## Topics
 
@@ -218,7 +218,7 @@ Mode     | Description
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 Ordering guarantee | Description | Routing Mode and Key
 :------------------|:------------|:------------
@@ -227,7 +227,7 @@ Per-producer       | All the messages from the same producer will be in order. |
 
 ### Hashing scheme
 
-[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producer is `JavaStringHash`.

@@ -54,7 +54,7 @@ For more information, see [PIP 68: Exclusive Producer](https://github.com/apache
 
 :::
 
-You can set producer access mode through [Java Client API](/api/client/). For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
+You can set producer access mode through [Java Client API](@pulsar:javadoc:client@/). For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
 
 
 ## Consumer
@@ -76,7 +76,7 @@ Messages are received from [brokers](reference-terminology.md#broker) either syn
 
 ### Listener
 
-Client libraries provide listener implementation for consumers. For example, the [Java client](pathname:///docs/client-libraries/java) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries provide listener implementation for consumers. For example, the [Java client](pathname:///docs/client-libraries/java) provides a [MesssageListener](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ## Reader
 

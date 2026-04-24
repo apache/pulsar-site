@@ -823,7 +823,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v2/namespac
 </TabItem>
 <TabItem value="Java Admin CLI">
 
-Use the [`setSchemaCompatibilityStrategy`](/api/admin/)method.
+Use the [`setSchemaCompatibilityStrategy`](@pulsar:javadoc:admin@/)method.
 
 ```java
 

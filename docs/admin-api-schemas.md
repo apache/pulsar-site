@@ -19,7 +19,7 @@ This page only shows **some frequently used operations**.
 
 - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
-- For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+- For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](@pulsar:javadoc:admin@/).
 
 :::
 
@@ -575,7 +575,7 @@ Send a `PUT` request to this endpoint: [](swagger:/admin/v2/Namespaces_setSchema
 </TabItem>
 <TabItem value="Java">
 
-Use the [`setSchemaCompatibilityStrategy`](/api/admin/) method.
+Use the [`setSchemaCompatibilityStrategy`](@pulsar:javadoc:admin@/) method.
 
 ```java
 admin.namespaces().setSchemaCompatibilityStrategy("test", SchemaCompatibilityStrategy.FULL);
@@ -667,7 +667,7 @@ Send a `GET` request to this endpoint: [](swagger:/admin/v2/Namespaces_getSchema
 </TabItem>
 <TabItem value="Java">
 
-Use the [`getSchemaCompatibilityStrategy`](/api/admin/) method.
+Use the [`getSchemaCompatibilityStrategy`](@pulsar:javadoc:admin@/) method.
 
 ```java
 admin.namespaces().getSchemaCompatibilityStrategy("test", SchemaCompatibilityStrategy.FULL);

@@ -131,10 +131,8 @@ export function clientCPPVersionUrl(version: string): string {
   return `${urlConfig.siteUrl}/api/cpp/${releaseCpp[0].vtag}`;
 }
 
-// The leading `(` is intentional: paired regexes match the `(` head of a
-// markdown link and this replacement preserves it.
 export function javadocVersionUrl(version: string, type: string): string {
-  return `(${urlConfig.siteUrl}/api/${type}/${version}`;
+  return `${urlConfig.siteUrl}/api/${type}/${version}`;
 }
 
 export function referenceVersion(version: string): string {
@@ -188,9 +186,9 @@ export function resolveTokens(versionKey: string): Replacement[] {
     [/@pulsar:version:python@/g, clientPythonVersion(pythonArg)],
     [/@pulsar:apidoc:python@/g, clientPythonVersionUrl(pythonArg)],
     [/@pulsar:apidoc:cpp@/g, clientCPPVersionUrl(pythonArg)],
-    [/\(\/api\/pulsar-functions/g, javadocVersionUrl(originVersion, "pulsar-functions")],
-    [/\(\/api\/client/g, javadocVersionUrl(originVersion, "client")],
-    [/\(\/api\/admin/g, javadocVersionUrl(originVersion, "admin")],
+    [/@pulsar:javadoc:pulsar-functions@/g, javadocVersionUrl(originVersion, "pulsar-functions")],
+    [/@pulsar:javadoc:client@/g, javadocVersionUrl(originVersion, "client")],
+    [/@pulsar:javadoc:admin@/g, javadocVersionUrl(originVersion, "admin")],
     [/@pulsar:version_number@/g, resolvedVersion],
     [/@pulsar:version:adapters@/g, pulsarAdaptersVersion]
   ];

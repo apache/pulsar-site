@@ -481,7 +481,7 @@ To enable message chunking, set the `chunkingEnabled` parameter to `true` when c
 
 :::note
 
-If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](/api/client/).
+If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](@pulsar:javadoc:client@/).
 
 :::
 
@@ -961,19 +961,19 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines which partition---that is, which internal topic---each message should be published to.
 
-There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
+There are three [MessageRoutingMode](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
 | Mode                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. |
 | `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.                                                                                                                                                                                                |
-| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](pathname:///docs/client-libraries/java) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
+| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](pathname:///docs/client-libraries/java) and implementing the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](@pulsar:javadoc:client@/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -982,7 +982,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producers is `JavaStringHash`.

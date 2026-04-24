@@ -28,7 +28,7 @@ This guide walks you through the quickest way to get started with the following 
 </TabItem>
 <TabItem value="Java">
 
-[Java admin API](/api/admin/) is a programmable interface written in Java.
+[Java admin API](@pulsar:javadoc:admin@/) is a programmable interface written in Java.
 
 </TabItem>
 
@@ -527,4 +527,4 @@ To manage topics using Java admin API, complete following steps.
 
     - [REST API](reference-rest-api-overview.md)
 
-    - [Java admin API](/api/admin/)
+    - [Java admin API](@pulsar:javadoc:admin@/)

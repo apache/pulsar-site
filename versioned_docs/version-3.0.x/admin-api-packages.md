@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
  - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 
- - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+ - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](@pulsar:javadoc:admin@/).
 
 :::
 
