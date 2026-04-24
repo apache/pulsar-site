@@ -1,0 +1,1688 @@
+<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-4.0.x docs-doc-page docs-doc-id-reference-metrics-opentelemetry" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.0"><title data-rh=true>Pulsar OpenTelemetry Metrics | Apache Pulsar</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:image content=https://pulsar.apache.org/img/pulsar-social-media-card.png /><meta data-rh=true name=twitter:image content=https://pulsar.apache.org/img/pulsar-social-media-card.png /><meta data-rh=true property=og:url content=https://pulsar.apache.org/docs/4.0.x/reference-metrics-opentelemetry/ /><meta data-rh=true property=og:locale content=en /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=docusaurus_version content=4.0.x /><meta data-rh=true name=docusaurus_tag content=docs-default-4.0.x /><meta data-rh=true name=docsearch:version content=4.0.x /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-4.0.x /><meta data-rh=true property=og:title content="Pulsar OpenTelemetry Metrics | Apache Pulsar"/><meta data-rh=true name=description content="Pulsar exposes the following OpenTelemetry metrics."/><meta data-rh=true property=og:description content="Pulsar exposes the following OpenTelemetry metrics."/><link data-rh=true rel=icon href=/img/favicon.ico /><link data-rh=true rel=canonical href=https://pulsar.apache.org/docs/4.0.x/reference-metrics-opentelemetry/ /><link data-rh=true rel=alternate href=https://pulsar.apache.org/docs/4.0.x/reference-metrics-opentelemetry/ hreflang=en /><link data-rh=true rel=alternate href=https://pulsar.apache.org/docs/4.0.x/reference-metrics-opentelemetry/ hreflang=x-default /><link data-rh=true rel=preconnect href=https://WK2YL0SALL-dsn.algolia.net crossorigin=anonymous /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://pulsar.apache.org/docs/4.0.x/reference-metrics-opentelemetry","name":"OpenTelemetry Metrics","position":1}]}</script><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="Apache Pulsar RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="Apache Pulsar Atom Feed"><link rel=search type=application/opensearchdescription+xml title="Apache Pulsar" href=/opensearch.xml><link rel=stylesheet href=/css/katex-0.13.24.min.css type=text/css media=print onload='this.media="all"'><script src=/js/sine-waves.min.js async></script><script src=/js/matomo-agent.js></script><script src=/js/custom-script.js></script><script async src=https://widget.kapa.ai/kapa-widget.bundle.js data-website-id=7da3a42b-98f7-4af5-85e9-771d51c21796 data-modal-title="Apache Pulsar AI Assistant" data-project-name="Apache Pulsar" data-project-logo=https://pbs.twimg.com/profile_images/875130220474359809/wFcLUbwd_400x400.jpg data-project-color=#FFFFFF data-modal-open-by-default=false data-bot-protection-mechanism=hcaptcha data-modal-override-open-id=ask-ai-input data-modal-override-open-class=search-input data-user-analytics-fingerprint-enabled=true data-button-text-color=#136EC4 data-modal-example-questions-title="Try asking me..." data-modal-example-questions="How to create a topic?,How does message retention work?,What is a Pulsar broker?,How does geo-replication work?" data-modal-disclaimer="This is a custom LLM with access to all Pulsar documentation." data-consent-required data-consent-screen-disclaimer="By clicking &amp;quot;I agree, let's chat&amp;quot;, you consent to the use of the AI assistant in accordance with kapa.ai's Privacy Policy. This service uses reCAPTCHA, which requires your consent to Google Privacy Policy and Terms of Service."></script><link rel=stylesheet href=/assets/css/styles.a4b2adb3.css /><script src=/assets/js/runtime~main.995c6569.js defer></script><script src=/assets/js/main.364df90a.js defer></script></head><body><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t;document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}(),document.documentElement.setAttribute("data-announcement-bar-initially-dismissed",function(){try{return"true"===localStorage.getItem("docusaurus.announcement.dismiss")}catch(t){}return!1}())</script><div id=__docusaurus><div role=region aria-label="Skip to main content"><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>Skip to main content</a></div><div class="theme-announcement-bar announcementBar_mb4j" style=background-color:#282826;color:#fff role=banner><div class="content_knG7 announcementBarContent_xLdY">
+    <a class=announcement-bar href=/download/>
+      <div class=announcement-bar__content>
+        <!-- <svg class="announcement-bar__icon">
+          
+<svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.5 19.6001H16.1L15.3 29.2001L26.5 12.4H17.06L18.1 2.80005L6.5 19.6001Z" stroke="#F7F7F7" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
+
+        </svg> -->
+
+        <span>
+          ✨ Apache Pulsar 4.2 is here! ✨
+        </span>
+
+        <svg class=announcement-bar__icon>
+          
+<svg viewBox="0 0 32 32" fill=none xmlns=http://www.w3.org/2000/svg>
+<rect width=20 height=20 transform="translate(6 6)" fill=white fill-opacity=0.01 />
+<path d="M17.6667 10.1667L23.5 16.0001M23.5 16.0001L17.6667 21.8334M23.5 16.0001L8.5 16.0001" stroke=white stroke-linecap=round stroke-linejoin=round />
+<rect x=0.5 y=0.5 width=31 height=31 rx=15.5 stroke=white />
+</svg>
+
+        </svg>
+      </div>
+    </a>
+  </div></div><nav aria-label=Main class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/logo-black.svg alt="Apache Pulsar logo" class="themedComponent_mlkZ themedComponent--light_NVdE" height=25 width=127 /><img src=/img/logo-black.svg alt="Apache Pulsar logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" height=25 width=127 /></div><b class="navbar__title text--truncate"></b></a><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>Get Started</a><ul class=dropdown__menu><li><a class=dropdown__link href=/docs/4.2.x/concepts-overview/>Concepts</a><li><a class=dropdown__link href=/docs/4.2.x/>Quickstart</a><li><a class=dropdown__link href=/ecosystem/>Ecosystem</a></ul></div><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/docs/4.0.x/>Docs</a><a class="navbar__item navbar__link" href=/features/>Features</a><a class="navbar__item navbar__link" href=/use-cases/>Use Cases</a><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class="navbar__link community-dropdown">Community</a><ul class=dropdown__menu><li><a class="dropdown__link scroll-link scroll-welcome" id=scroll-welcome href=/community/>Welcome</a><li><a class="dropdown__link scroll-link scroll-discussions" id=scroll-discussions href=/community/#section-discussions>Discussions</a><li><a class="dropdown__link scroll-link" id=scroll-governance href=/community/#section-governance>Governance</a><li><a class="dropdown__link scroll-link" id=scroll-community href=/community/#section-community>Meet the Community</a><li><a class="dropdown__link scroll-link" id=scroll-contribute href=/community/#section-contribute>Contribute</a><li><a class=dropdown__link href=/contribute/>Contribution Guide</a><li><a href=https://github.com/apache/pulsar/wiki target=_blank rel="noopener noreferrer" class=dropdown__link>Wiki</a><li><a href=https://github.com/apache/pulsar/issues target=_blank rel="noopener noreferrer" class=dropdown__link>Issue Tracking</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>Learn</a><ul class=dropdown__menu><li><a class=dropdown__link href=/blog/>Blog</a><li><a class=dropdown__link href=/books/>Books</a><li><a class=dropdown__link href=/case-studies/>Case Studies</a><li><a class=dropdown__link href=/articles/>Articles</a><li><a class=dropdown__link href=/presentations/>Presentations</a><li><a class=dropdown__link href=/events/>Events</a></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link navbar_download_button" href=/download/>Download</a><div class=navbarSearchContainer_Bca1><button type=button class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts=Meta+k><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 24 24" aria-hidden=true><circle cx=11 cy=11 r=8 stroke=currentColor fill=none stroke-width=1.4 /><path d="m21 21-4.3-4.3" stroke=currentColor fill=none stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>Search</span></span><span class=DocSearch-Button-Keys></span></button></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class=docsWrapper_hBAB><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class=sidebar_mhZE><div class=sidebarVersionSwitch_EHpo>Version:<div class="navbar__item dropdown dropdown--hoverable"><a aria-current=page class="navbar__link active" aria-haspopup=true aria-expanded=false role=button href=/docs/4.0.x/>4.0.x</a><ul class=dropdown__menu><li><a class=dropdown__link>Next</a><li><a class=dropdown__link>4.2.x</a><li><a class=dropdown__link>4.0.x LTS</a><li><a class=dropdown__link>3.0.x LTS</a><li><a class=dropdown__link>Others</a></ul></div></div><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG menuWithAnnouncementBar_GW3s"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/4.0.x/><span title=About class=linkLabel_WmDU>About</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/4.0.x/getting-started-home/><span title="Get Started" class=categoryLinkLabel_W154>Get Started</span></a><button aria-label="Expand sidebar category 'Get Started'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/concepts-overview/><span title="Concepts and Architecture" class=categoryLinkLabel_W154>Concepts and Architecture</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/schema-overview/><span title="Pulsar Schema" class=categoryLinkLabel_W154>Pulsar Schema</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/functions-overview/><span title="Pulsar Functions" class=categoryLinkLabel_W154>Pulsar Functions</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/io-overview/><span title="Pulsar IO" class=categoryLinkLabel_W154>Pulsar IO</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/tiered-storage-overview/><span title="Tiered Storage" class=categoryLinkLabel_W154>Tiered Storage</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/txn-why/><span title=Transactions class=categoryLinkLabel_W154>Transactions</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/4.0.x/install-deploy-upgrade-landing/><span title=Deployment class=categoryLinkLabel_W154>Deployment</span></a><button aria-label="Expand sidebar category 'Deployment'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/administration-zk-bk/><span title=Administration class=categoryLinkLabel_W154>Administration</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true href=/docs/4.0.x/administration-stats/><span title=Observability class=categoryLinkLabel_W154>Observability</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/4.0.x/administration-stats/><span title=Statistics class=linkLabel_WmDU>Statistics</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/4.0.x/reference-metrics/><span title=Metrics class=linkLabel_WmDU>Metrics</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/4.0.x/deploy-monitoring/><span title=Monitoring class=linkLabel_WmDU>Monitoring</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/docs/4.0.x/reference-metrics-opentelemetry/><span title="OpenTelemetry Metrics" class=linkLabel_WmDU>OpenTelemetry Metrics</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/security-overview/><span title=Security class=categoryLinkLabel_W154>Security</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/performance-pulsar-perf/><span title=Performance class=categoryLinkLabel_W154>Performance</span></a></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/client-libraries/><span title="Client Libraries" class=linkLabel_WmDU>Client Libraries</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/admin-api-overview/><span title="Admin API" class=categoryLinkLabel_W154>Admin API</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/docs/4.0.x/adaptors-kafka/><span title=Adaptors class=categoryLinkLabel_W154>Adaptors</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/4.0.x/how-to-landing/><span title=Tutorials class=categoryLinkLabel_W154>Tutorials</span></a><button aria-label="Expand sidebar category 'Tutorials'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/4.0.x/developers-landing/><span title=Development class=categoryLinkLabel_W154>Development</span></a><button aria-label="Expand sidebar category 'Development'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/4.0.x/reference-landing/><span title=Reference class=categoryLinkLabel_W154>Reference</span></a><button aria-label="Expand sidebar category 'Reference'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div></ul></nav></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=Breadcrumbs><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label="Home page" class=breadcrumbs__link href=/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><span class=breadcrumbs__link>Observability</span><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>OpenTelemetry Metrics</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Pulsar OpenTelemetry Metrics</h1></header><p>Pulsar exposes the following OpenTelemetry metrics.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=broker>Broker<a href=#broker class=hash-link aria-label="Direct link to Broker" title="Direct link to Broker" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=connection-metrics>Connection Metrics<a href=#connection-metrics class=hash-link aria-label="Direct link to Connection Metrics" title="Direct link to Connection Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconnectioncount>pulsar.broker.connection.count<a href=#pulsarbrokerconnectioncount class=hash-link aria-label="Direct link to pulsar.broker.connection.count" title="Direct link to pulsar.broker.connection.count" translate=no>​</a></h4>
+<p>The number of connections.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{connection}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.connection.status</code> - The status of the connection. Can be one of:<!-- -->
+<ul>
+<li class=""><code>active</code></li>
+<li class=""><code>open</code></li>
+<li class=""><code>close</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconnectioncreateoperationcount>pulsar.broker.connection.create.operation.count<a href=#pulsarbrokerconnectioncreateoperationcount class=hash-link aria-label="Direct link to pulsar.broker.connection.create.operation.count" title="Direct link to pulsar.broker.connection.create.operation.count" translate=no>​</a></h4>
+<p>The number of connection create operations.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.connection.create.operation.status</code> - The status of the create operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconnectionrate_limitcount>pulsar.broker.connection.rate_limit.count<a href=#pulsarbrokerconnectionrate_limitcount class=hash-link aria-label="Direct link to pulsar.broker.connection.rate_limit.count" title="Direct link to pulsar.broker.connection.rate_limit.count" translate=no>​</a></h4>
+<p>The number of times a connection has been rate limited.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.connection.rate_limit.operation.name</code> - The name of the rate limiting operation performed. Can be one of:<!-- -->
+<ul>
+<li class=""><code>paused</code></li>
+<li class=""><code>resumed</code></li>
+<li class=""><code>throttled</code></li>
+<li class=""><code>unthrottled</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=topic-messaging-metrics>Topic Messaging metrics<a href=#topic-messaging-metrics class=hash-link aria-label="Direct link to Topic Messaging metrics" title="Direct link to Topic Messaging metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicsubscriptioncount>pulsar.broker.topic.subscription.count<a href=#pulsarbrokertopicsubscriptioncount class=hash-link aria-label="Direct link to pulsar.broker.topic.subscription.count" title="Direct link to pulsar.broker.topic.subscription.count" translate=no>​</a></h4>
+<p>The number of Pulsar subscriptions of the topic served by this broker.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{subscription}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicproducercount>pulsar.broker.topic.producer.count<a href=#pulsarbrokertopicproducercount class=hash-link aria-label="Direct link to pulsar.broker.topic.producer.count" title="Direct link to pulsar.broker.topic.producer.count" translate=no>​</a></h4>
+<p>The number of active producers of the topic connected to this broker.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{producer}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicconsumercount>pulsar.broker.topic.consumer.count<a href=#pulsarbrokertopicconsumercount class=hash-link aria-label="Direct link to pulsar.broker.topic.consumer.count" title="Direct link to pulsar.broker.topic.consumer.count" translate=no>​</a></h4>
+<p>The number of active consumers of the topic connected to this broker.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{consumer}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicmessageincomingcount>pulsar.broker.topic.message.incoming.count<a href=#pulsarbrokertopicmessageincomingcount class=hash-link aria-label="Direct link to pulsar.broker.topic.message.incoming.count" title="Direct link to pulsar.broker.topic.message.incoming.count" translate=no>​</a></h4>
+<p>The total number of messages received for this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicmessageoutgoingcount>pulsar.broker.topic.message.outgoing.count<a href=#pulsarbrokertopicmessageoutgoingcount class=hash-link aria-label="Direct link to pulsar.broker.topic.message.outgoing.count" title="Direct link to pulsar.broker.topic.message.outgoing.count" translate=no>​</a></h4>
+<p>The total number of messages read from this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicmessageincomingsize>pulsar.broker.topic.message.incoming.size<a href=#pulsarbrokertopicmessageincomingsize class=hash-link aria-label="Direct link to pulsar.broker.topic.message.incoming.size" title="Direct link to pulsar.broker.topic.message.incoming.size" translate=no>​</a></h4>
+<p>The total number of messages bytes received for this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicmessageoutgoingsize>pulsar.broker.topic.message.outgoing.size<a href=#pulsarbrokertopicmessageoutgoingsize class=hash-link aria-label="Direct link to pulsar.broker.topic.message.outgoing.size" title="Direct link to pulsar.broker.topic.message.outgoing.size" translate=no>​</a></h4>
+<p>The total number of messages bytes read from this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicpublishratelimitcount>pulsar.broker.topic.publish.rate.limit.count<a href=#pulsarbrokertopicpublishratelimitcount class=hash-link aria-label="Direct link to pulsar.broker.topic.publish.rate.limit.count" title="Direct link to pulsar.broker.topic.publish.rate.limit.count" translate=no>​</a></h4>
+<p>The number of times the publish rate limit is triggered.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{event}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragesize>pulsar.broker.topic.storage.size<a href=#pulsarbrokertopicstoragesize class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.size" title="Direct link to pulsar.broker.topic.storage.size" translate=no>​</a></h4>
+<p>The total storage size of the messages in this topic, including storage used by replicas.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragelogicalsize>pulsar.broker.topic.storage.logical.size<a href=#pulsarbrokertopicstoragelogicalsize class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.logical.size" title="Direct link to pulsar.broker.topic.storage.logical.size" translate=no>​</a></h4>
+<p>The storage size of the messages in this topic, excluding storage used by replicas.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragebacklogsize>pulsar.broker.topic.storage.backlog.size<a href=#pulsarbrokertopicstoragebacklogsize class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.backlog.size" title="Direct link to pulsar.broker.topic.storage.backlog.size" translate=no>​</a></h4>
+<p>The size of the backlog storage for this topic.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstorageoffloadedsize>pulsar.broker.topic.storage.offloaded.size<a href=#pulsarbrokertopicstorageoffloadedsize class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.offloaded.size" title="Direct link to pulsar.broker.topic.storage.offloaded.size" translate=no>​</a></h4>
+<p>The total amount of the data in this topic offloaded to the tiered storage.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragebacklogquotalimitsize>pulsar.broker.topic.storage.backlog.quota.limit.size<a href=#pulsarbrokertopicstoragebacklogquotalimitsize class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.backlog.quota.limit.size" title="Direct link to pulsar.broker.topic.storage.backlog.quota.limit.size" translate=no>​</a></h4>
+<p>The size based backlog quota limit for this topic.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragebacklogquotalimittime>pulsar.broker.topic.storage.backlog.quota.limit.time<a href=#pulsarbrokertopicstoragebacklogquotalimittime class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.backlog.quota.limit.time" title="Direct link to pulsar.broker.topic.storage.backlog.quota.limit.time" translate=no>​</a></h4>
+<p>The time based backlog quota limit for this topic.</p>
+<ul>
+<li class="">Type: Gauge</li>
+<li class="">Unit: <code>s</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragebacklogquotaevictioncount>pulsar.broker.topic.storage.backlog.quota.eviction.count<a href=#pulsarbrokertopicstoragebacklogquotaevictioncount class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.backlog.quota.eviction.count" title="Direct link to pulsar.broker.topic.storage.backlog.quota.eviction.count" translate=no>​</a></h4>
+<p>The number of times a backlog was evicted since it has exceeded its quota.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{eviction}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.backlog.quota.type</code> - The backlog quota type. Can be one of:<!-- -->
+<ul>
+<li class=""><code>size</code></li>
+<li class=""><code>time</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstoragebacklogage>pulsar.broker.topic.storage.backlog.age<a href=#pulsarbrokertopicstoragebacklogage class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.backlog.age" title="Direct link to pulsar.broker.topic.storage.backlog.age" translate=no>​</a></h4>
+<p>The age of the oldest unacknowledged message (backlog).</p>
+<ul>
+<li class="">Type: Gauge</li>
+<li class="">Unit: <code>s</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstorageentryoutgoingcount>pulsar.broker.topic.storage.entry.outgoing.count<a href=#pulsarbrokertopicstorageentryoutgoingcount class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.entry.outgoing.count" title="Direct link to pulsar.broker.topic.storage.entry.outgoing.count" translate=no>​</a></h4>
+<p>The total message batches (entries) written to the storage for this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicstorageentryincomingcount>pulsar.broker.topic.storage.entry.incoming.count<a href=#pulsarbrokertopicstorageentryincomingcount class=hash-link aria-label="Direct link to pulsar.broker.topic.storage.entry.incoming.count" title="Direct link to pulsar.broker.topic.storage.entry.incoming.count" translate=no>​</a></h4>
+<p>The total message batches (entries) read from the storage for this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactionremovedmessagecount>pulsar.broker.topic.compaction.removed.message.count<a href=#pulsarbrokertopiccompactionremovedmessagecount class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.removed.message.count" title="Direct link to pulsar.broker.topic.compaction.removed.message.count" translate=no>​</a></h4>
+<p>The total number of messages removed by compaction.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactionoperationcount>pulsar.broker.topic.compaction.operation.count<a href=#pulsarbrokertopiccompactionoperationcount class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.operation.count" title="Direct link to pulsar.broker.topic.compaction.operation.count" translate=no>​</a></h4>
+<p>The total number of compaction operations.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.compaction.status</code> - The compaction status. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class="">`failure</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactionduration>pulsar.broker.topic.compaction.duration<a href=#pulsarbrokertopiccompactionduration class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.duration" title="Direct link to pulsar.broker.topic.compaction.duration" translate=no>​</a></h4>
+<p>The total time duration of compaction operations on the topic.</p>
+<ul>
+<li class="">Type: DoubleUpDownCounter</li>
+<li class="">Unit: <code>s</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactionincomingsize>pulsar.broker.topic.compaction.incoming.size<a href=#pulsarbrokertopiccompactionincomingsize class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.incoming.size" title="Direct link to pulsar.broker.topic.compaction.incoming.size" translate=no>​</a></h4>
+<p>The total count of bytes read by the compaction process for this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactionoutgoingsize>pulsar.broker.topic.compaction.outgoing.size<a href=#pulsarbrokertopiccompactionoutgoingsize class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.outgoing.size" title="Direct link to pulsar.broker.topic.compaction.outgoing.size" translate=no>​</a></h4>
+<p>The total count of bytes written by the compaction process for this topic.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactioncompactedentrycount>pulsar.broker.topic.compaction.compacted.entry.count<a href=#pulsarbrokertopiccompactioncompactedentrycount class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.compacted.entry.count" title="Direct link to pulsar.broker.topic.compaction.compacted.entry.count" translate=no>​</a></h4>
+<p>The total number of compacted entries.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopiccompactioncompactedentrysize>pulsar.broker.topic.compaction.compacted.entry.size<a href=#pulsarbrokertopiccompactioncompactedentrysize class=hash-link aria-label="Direct link to pulsar.broker.topic.compaction.compacted.entry.size" title="Direct link to pulsar.broker.topic.compaction.compacted.entry.size" translate=no>​</a></h4>
+<p>The total size of the compacted entries.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopictransactioncount>pulsar.broker.topic.transaction.count<a href=#pulsarbrokertopictransactioncount class=hash-link aria-label="Direct link to pulsar.broker.topic.transaction.count" title="Direct link to pulsar.broker.topic.transaction.count" translate=no>​</a></h4>
+<p>The number of transactions on this topic.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{transaction}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.transaction.status</code> - The transaction status. Can be one of:<!-- -->
+<ul>
+<li class=""><code>active</code></li>
+<li class=""><code>committed</code></li>
+<li class=""><code>aborted</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopictransactionbufferclientoperationcount>pulsar.broker.topic.transaction.buffer.client.operation.count<a href=#pulsarbrokertopictransactionbufferclientoperationcount class=hash-link aria-label="Direct link to pulsar.broker.topic.transaction.buffer.client.operation.count" title="Direct link to pulsar.broker.topic.transaction.buffer.client.operation.count" translate=no>​</a></h4>
+<p>The number of operations on the transaction buffer client.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.transaction.status</code> - The status of the Pulsar transaction. Can be one of:<!-- -->
+<ul>
+<li class=""><code>aborted</code></li>
+<li class=""><code>committed</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.transaction.buffer.client.operation.status</code> - The status of the Pulsar transaction buffer client operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>failure</code></li>
+<li class=""><code>success</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicsubscriptiondelayedentrycount>pulsar.broker.topic.subscription.delayed.entry.count<a href=#pulsarbrokertopicsubscriptiondelayedentrycount class=hash-link aria-label="Direct link to pulsar.broker.topic.subscription.delayed.entry.count" title="Direct link to pulsar.broker.topic.subscription.delayed.entry.count" translate=no>​</a></h4>
+<p>The total number of message batches (entries) delayed for dispatching.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=topic-lookup-metrics>Topic Lookup metrics<a href=#topic-lookup-metrics class=hash-link aria-label="Direct link to Topic Lookup metrics" title="Direct link to Topic Lookup metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerlookuprequestduration>pulsar.broker.lookup.request.duration<a href=#pulsarbrokerlookuprequestduration class=hash-link aria-label="Direct link to pulsar.broker.lookup.request.duration" title="Direct link to pulsar.broker.lookup.request.duration" translate=no>​</a></h4>
+<p>The duration of topic lookup requests (either binary or HTTP)</p>
+<ul>
+<li class="">Type: Histogram</li>
+<li class="">Unit: <code>second</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.lookup.response</code> - The response type of the lookup request<!-- -->
+<ul>
+<li class=""><code>failure</code></li>
+<li class=""><code>broker</code></li>
+<li class=""><code>redirect</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerrequesttopiclookupconcurrentusage>pulsar.broker.request.topic.lookup.concurrent.usage<a href=#pulsarbrokerrequesttopiclookupconcurrentusage class=hash-link aria-label="Direct link to pulsar.broker.request.topic.lookup.concurrent.usage" title="Direct link to pulsar.broker.request.topic.lookup.concurrent.usage" translate=no>​</a></h4>
+<p>The number of pending lookup operations in the broker. When it reaches threshold "maxConcurrentLookupRequest" defined in broker.conf, new requests are rejected.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerrequesttopiclookupconcurrentlimit>pulsar.broker.request.topic.lookup.concurrent.limit<a href=#pulsarbrokerrequesttopiclookupconcurrentlimit class=hash-link aria-label="Direct link to pulsar.broker.request.topic.lookup.concurrent.limit" title="Direct link to pulsar.broker.request.topic.lookup.concurrent.limit" translate=no>​</a></h4>
+<p>The maximum number of pending lookup operations in the broker. Equal to "maxConcurrentLookupRequest" defined in broker.conf.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicloadconcurrentusage>pulsar.broker.topic.load.concurrent.usage<a href=#pulsarbrokertopicloadconcurrentusage class=hash-link aria-label="Direct link to pulsar.broker.topic.load.concurrent.usage" title="Direct link to pulsar.broker.topic.load.concurrent.usage" translate=no>​</a></h4>
+<p>The number of pending topic load operations in the broker. When it reaches threshold "maxConcurrentTopicLoadRequest" defined in broker.conf, new requests are rejected.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertopicloadconcurrentlimit>pulsar.broker.topic.load.concurrent.limit<a href=#pulsarbrokertopicloadconcurrentlimit class=hash-link aria-label="Direct link to pulsar.broker.topic.load.concurrent.limit" title="Direct link to pulsar.broker.topic.load.concurrent.limit" translate=no>​</a></h4>
+<p>The maximum number of pending topic load operations in the broker. Equal to "maxConcurrentTopicLoadRequest" defined in broker.conf.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=metadata-store-metrics>Metadata Store metrics<a href=#metadata-store-metrics class=hash-link aria-label="Direct link to Metadata Store metrics" title="Direct link to Metadata Store metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermetadatastoreoutgoingsize>pulsar.broker.metadata.store.outgoing.size<a href=#pulsarbrokermetadatastoreoutgoingsize class=hash-link aria-label="Direct link to pulsar.broker.metadata.store.outgoing.size" title="Direct link to pulsar.broker.metadata.store.outgoing.size" translate=no>​</a></h4>
+<p>The total amount of data written to the metadata store.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.metadata.store.name</code> - The name of the metadata store.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermetadatastoreexecutorqueuesize>pulsar.broker.metadata.store.executor.queue.size<a href=#pulsarbrokermetadatastoreexecutorqueuesize class=hash-link aria-label="Direct link to pulsar.broker.metadata.store.executor.queue.size" title="Direct link to pulsar.broker.metadata.store.executor.queue.size" translate=no>​</a></h4>
+<p>The number of batch operations in the metadata store executor queue.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.metadata.store.name</code> - The name of the metadata store.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=consumer-metrics>Consumer metrics<a href=#consumer-metrics class=hash-link aria-label="Direct link to Consumer metrics" title="Direct link to Consumer metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconsumermessageoutgoingcount>pulsar.broker.consumer.message.outgoing.count<a href=#pulsarbrokerconsumermessageoutgoingcount class=hash-link aria-label="Direct link to pulsar.broker.consumer.message.outgoing.count" title="Direct link to pulsar.broker.consumer.message.outgoing.count" translate=no>​</a></h4>
+<p>The total number of messages dispatched to this consumer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.subscription.name</code> - The topic subscription name.</li>
+<li class=""><code>pulsar.subscription.type</code> - The subscription type.</li>
+<li class=""><code>pulsar.consumer.name</code> - The name of the consumer.</li>
+<li class=""><code>pulsar.consumer.id</code> - The ID of the consumer.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconsumermessageoutgoingsize>pulsar.broker.consumer.message.outgoing.size<a href=#pulsarbrokerconsumermessageoutgoingsize class=hash-link aria-label="Direct link to pulsar.broker.consumer.message.outgoing.size" title="Direct link to pulsar.broker.consumer.message.outgoing.size" translate=no>​</a></h4>
+<p>The total number of messages bytes dispatched to this consumer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.subscription.name</code> - The topic subscription name.</li>
+<li class=""><code>pulsar.subscription.type</code> - The subscription type.</li>
+<li class=""><code>pulsar.consumer.name</code> - The name of the consumer.</li>
+<li class=""><code>pulsar.consumer.id</code> - The ID of the consumer.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconsumermessageackcount>pulsar.broker.consumer.message.ack.count<a href=#pulsarbrokerconsumermessageackcount class=hash-link aria-label="Direct link to pulsar.broker.consumer.message.ack.count" title="Direct link to pulsar.broker.consumer.message.ack.count" translate=no>​</a></h4>
+<p>The total number of message acknowledgments received from this consumer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{ack}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.subscription.name</code> - The topic subscription name.</li>
+<li class=""><code>pulsar.subscription.type</code> - The subscription type.</li>
+<li class=""><code>pulsar.consumer.name</code> - The name of the consumer.</li>
+<li class=""><code>pulsar.consumer.id</code> - The ID of the consumer.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconsumermessageredelivercount>pulsar.broker.consumer.message.redeliver.count<a href=#pulsarbrokerconsumermessageredelivercount class=hash-link aria-label="Direct link to pulsar.broker.consumer.message.redeliver.count" title="Direct link to pulsar.broker.consumer.message.redeliver.count" translate=no>​</a></h4>
+<p>The total number of messages that have been redelivered to this consumer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.subscription.name</code> - The topic subscription name.</li>
+<li class=""><code>pulsar.subscription.type</code> - The subscription type.</li>
+<li class=""><code>pulsar.consumer.name</code> - The name of the consumer.</li>
+<li class=""><code>pulsar.consumer.id</code> - The ID of the consumer.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconsumermessageunackcount>pulsar.broker.consumer.message.unack.count<a href=#pulsarbrokerconsumermessageunackcount class=hash-link aria-label="Direct link to pulsar.broker.consumer.message.unack.count" title="Direct link to pulsar.broker.consumer.message.unack.count" translate=no>​</a></h4>
+<p>The number of messages currently unacknowledged by this consumer.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.subscription.name</code> - The topic subscription name.</li>
+<li class=""><code>pulsar.subscription.type</code> - The subscription type.</li>
+<li class=""><code>pulsar.consumer.name</code> - The name of the consumer.</li>
+<li class=""><code>pulsar.consumer.id</code> - The ID of the consumer.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerconsumerpermitcount>pulsar.broker.consumer.permit.count<a href=#pulsarbrokerconsumerpermitcount class=hash-link aria-label="Direct link to pulsar.broker.consumer.permit.count" title="Direct link to pulsar.broker.consumer.permit.count" translate=no>​</a></h4>
+<p>The number of permits currently available for this consumer.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{permit}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.subscription.name</code> - The topic subscription name.</li>
+<li class=""><code>pulsar.subscription.type</code> - The subscription type.</li>
+<li class=""><code>pulsar.consumer.name</code> - The name of the consumer.</li>
+<li class=""><code>pulsar.consumer.id</code> - The ID of the consumer.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=managed-ledger-cursor-metrics>Managed Ledger Cursor metrics<a href=#managed-ledger-cursor-metrics class=hash-link aria-label="Direct link to Managed Ledger Cursor metrics" title="Direct link to Managed Ledger Cursor metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgerpersistoperationcount>pulsar.broker.managed_ledger.persist.operation.count<a href=#pulsarbrokermanaged_ledgerpersistoperationcount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.persist.operation.count" title="Direct link to pulsar.broker.managed_ledger.persist.operation.count" translate=no>​</a></h4>
+<p>The number of acknowledgment operations on the ledger.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.name</code> - The name of the managed cursor.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.operation.status</code> - The status of the managed cursor operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgerpersistmdsoperationcount>pulsar.broker.managed_ledger.persist.mds.operation.count<a href=#pulsarbrokermanaged_ledgerpersistmdsoperationcount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.persist.mds.operation.count" title="Direct link to pulsar.broker.managed_ledger.persist.mds.operation.count" translate=no>​</a></h4>
+<p>The number of acknowledgment operations in the metadata store.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.name</code> - The name of the managed cursor.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.operation.status</code> - The status of the managed cursor operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessage_rangecount>pulsar.broker.managed_ledger.message_range.count<a href=#pulsarbrokermanaged_ledgermessage_rangecount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message_range.count" title="Direct link to pulsar.broker.managed_ledger.message_range.count" translate=no>​</a></h4>
+<p>The number of non-contiguous deleted messages ranges.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{range}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.name</code> - The name of the managed cursor.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercursoroutgoingsize>pulsar.broker.managed_ledger.cursor.outgoing.size<a href=#pulsarbrokermanaged_ledgercursoroutgoingsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cursor.outgoing.size" title="Direct link to pulsar.broker.managed_ledger.cursor.outgoing.size" translate=no>​</a></h4>
+<p>The total amount of data written to the ledger.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.name</code> - The name of the managed cursor.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercursoroutgoinglogicalsize>pulsar.broker.managed_ledger.cursor.outgoing.logical.size<a href=#pulsarbrokermanaged_ledgercursoroutgoinglogicalsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cursor.outgoing.logical.size" title="Direct link to pulsar.broker.managed_ledger.cursor.outgoing.logical.size" translate=no>​</a></h4>
+<p>The total amount of data written to the ledger, not including replicas.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.name</code> - The name of the managed cursor.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercursorincomingsize>pulsar.broker.managed_ledger.cursor.incoming.size<a href=#pulsarbrokermanaged_ledgercursorincomingsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cursor.incoming.size" title="Direct link to pulsar.broker.managed_ledger.cursor.incoming.size" translate=no>​</a></h4>
+<p>The total amount of data read from the ledger.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.cursor.name</code> - The name of the managed cursor.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=managed-ledger-cache-metrics>Managed Ledger Cache metrics<a href=#managed-ledger-cache-metrics class=hash-link aria-label="Direct link to Managed Ledger Cache metrics" title="Direct link to Managed Ledger Cache metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercount>pulsar.broker.managed_ledger.count<a href=#pulsarbrokermanaged_ledgercount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.count" title="Direct link to pulsar.broker.managed_ledger.count" translate=no>​</a></h4>
+<p>The total number of managed ledgers.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{managed_ledger}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercacheevictioncount>pulsar.broker.managed_ledger.cache.eviction.count<a href=#pulsarbrokermanaged_ledgercacheevictioncount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.eviction.count" title="Direct link to pulsar.broker.managed_ledger.cache.eviction.count" translate=no>​</a></h4>
+<p>The total number of cache eviction operations.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{eviction}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercacheentrycount>pulsar.broker.managed_ledger.cache.entry.count<a href=#pulsarbrokermanaged_ledgercacheentrycount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.entry.count" title="Direct link to pulsar.broker.managed_ledger.cache.entry.count" translate=no>​</a></h4>
+<p>The number of entries in the entry cache.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.managed_ledger.cache.entry.status</code> - The status of the cache entry. Can be one of:<!-- -->
+<ul>
+<li class=""><code>active</code> - Indicates the number of entries currently in the cache. Equal to the <code>evicted - inserted</code>.</li>
+<li class=""><code>inserted</code> - Indicates the total number of entries inserted into the cache.</li>
+<li class=""><code>evicted</code> - Indicates the total number of entries evicted from the cache.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercacheentrysize>pulsar.broker.managed_ledger.cache.entry.size<a href=#pulsarbrokermanaged_ledgercacheentrysize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.entry.size" title="Direct link to pulsar.broker.managed_ledger.cache.entry.size" translate=no>​</a></h4>
+<p>The byte amount of entries stored in the entry cache.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{By}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercacheoperationcount>pulsar.broker.managed_ledger.cache.operation.count<a href=#pulsarbrokermanaged_ledgercacheoperationcount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.operation.count" title="Direct link to pulsar.broker.managed_ledger.cache.operation.count" translate=no>​</a></h4>
+<p>The number of cache operations.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.managed_ledger.cache.operation.status</code> - The cache operation result. Can be one of:<!-- -->
+<ul>
+<li class=""><code>hit</code> - Indicates a successful cache lookup operation.</li>
+<li class=""><code>miss</code> - Indicates a failed cache lookup operation.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercacheoperationsize>pulsar.broker.managed_ledger.cache.operation.size<a href=#pulsarbrokermanaged_ledgercacheoperationsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.operation.size" title="Direct link to pulsar.broker.managed_ledger.cache.operation.size" translate=no>​</a></h4>
+<p>The byte amount of data retrieved from cache operations.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.managed_ledger.cache.operation.status</code> - The cache operation result. Can be one of:<!-- -->
+<ul>
+<li class=""><code>hit</code> - Indicates a successful cache lookup operation.</li>
+<li class=""><code>miss</code> - Indicates a failed cache lookup operation.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercachepoolallocationactivecount>pulsar.broker.managed_ledger.cache.pool.allocation.active.count<a href=#pulsarbrokermanaged_ledgercachepoolallocationactivecount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.pool.allocation.active.count" title="Direct link to pulsar.broker.managed_ledger.cache.pool.allocation.active.count" translate=no>​</a></h4>
+<p>The number of currently active allocations in the direct arena.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{allocation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.managed_ledger.pool.arena.type</code> - The arena type. Can be one of:<!-- -->
+<ul>
+<li class=""><code>small</code></li>
+<li class=""><code>normal</code></li>
+<li class=""><code>huge</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgercachepoolallocationsize>pulsar.broker.managed_ledger.cache.pool.allocation.size<a href=#pulsarbrokermanaged_ledgercachepoolallocationsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.cache.pool.allocation.size" title="Direct link to pulsar.broker.managed_ledger.cache.pool.allocation.size" translate=no>​</a></h4>
+<p>The memory allocated in the direct arena.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.managed_ledger.pool.chunk.allocation.type</code> - The chunk allocation type. Can be one of:<!-- -->
+<ul>
+<li class=""><code>allocated</code></li>
+<li class=""><code>used</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=producer-metrics>Producer metrics<a href=#producer-metrics class=hash-link aria-label="Direct link to Producer metrics" title="Direct link to Producer metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerproducermessageincomingcount>pulsar.broker.producer.message.incoming.count<a href=#pulsarbrokerproducermessageincomingcount class=hash-link aria-label="Direct link to pulsar.broker.producer.message.incoming.count" title="Direct link to pulsar.broker.producer.message.incoming.count" translate=no>​</a></h4>
+<p>The total number of messages received from this producer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.producer.name</code> - The name of the producer.</li>
+<li class=""><code>pulsar.producer.id</code> - The ID of the producer.</li>
+<li class=""><code>pulsar.producer.access_mode</code> - The access mode of the producer. Can be one of:<!-- -->
+<ul>
+<li class=""><code>shared</code></li>
+<li class=""><code>exclusive</code></li>
+<li class=""><code>wait_for_exclusive</code></li>
+<li class=""><code>exclusive_with_fencing</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerproducermessageincomingsize>pulsar.broker.producer.message.incoming.size<a href=#pulsarbrokerproducermessageincomingsize class=hash-link aria-label="Direct link to pulsar.broker.producer.message.incoming.size" title="Direct link to pulsar.broker.producer.message.incoming.size" translate=no>​</a></h4>
+<p>The total number of messages bytes received from this producer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.producer.name</code> - The name of the producer.</li>
+<li class=""><code>pulsar.producer.id</code> - The ID of the producer.</li>
+<li class=""><code>pulsar.producer.access_mode</code> - The access mode of the producer. Can be one of:<!-- -->
+<ul>
+<li class=""><code>shared</code></li>
+<li class=""><code>exclusive</code></li>
+<li class=""><code>wait_for_exclusive</code></li>
+<li class=""><code>exclusive_with_fencing</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerproducermessagedropcount>pulsar.broker.producer.message.drop.count<a href=#pulsarbrokerproducermessagedropcount class=hash-link aria-label="Direct link to pulsar.broker.producer.message.drop.count" title="Direct link to pulsar.broker.producer.message.drop.count" translate=no>​</a></h4>
+<p>The total number of messages dropped from this producer.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.producer.name</code> - The name of the producer.</li>
+<li class=""><code>pulsar.producer.id</code> - The ID of the producer.</li>
+<li class=""><code>pulsar.producer.access_mode</code> - The access mode of the producer. Can be one of:<!-- -->
+<ul>
+<li class=""><code>shared</code></li>
+<li class=""><code>exclusive</code></li>
+<li class=""><code>wait_for_exclusive</code></li>
+<li class=""><code>exclusive_with_fencing</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=managed-ledger-metrics>Managed Ledger metrics<a href=#managed-ledger-metrics class=hash-link aria-label="Direct link to Managed Ledger metrics" title="Direct link to Managed Ledger metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessageoutgoingcount>pulsar.broker.managed_ledger.message.outgoing.count<a href=#pulsarbrokermanaged_ledgermessageoutgoingcount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message.outgoing.count" title="Direct link to pulsar.broker.managed_ledger.message.outgoing.count" translate=no>​</a></h4>
+<p>The number of write operations to this ledger.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.operation.status</code> - The status of the managed ledger operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessageoutgoinglogicalsize>pulsar.broker.managed_ledger.message.outgoing.logical.size<a href=#pulsarbrokermanaged_ledgermessageoutgoinglogicalsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message.outgoing.logical.size" title="Direct link to pulsar.broker.managed_ledger.message.outgoing.logical.size" translate=no>​</a></h4>
+<p>The total number of messages bytes written to this ledger, excluding replicas.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessageoutgoingreplicatedsize>pulsar.broker.managed_ledger.message.outgoing.replicated.size<a href=#pulsarbrokermanaged_ledgermessageoutgoingreplicatedsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message.outgoing.replicated.size" title="Direct link to pulsar.broker.managed_ledger.message.outgoing.replicated.size" translate=no>​</a></h4>
+<p>The total number of messages bytes written to this ledger, including replicas.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgerbacklogcount>pulsar.broker.managed_ledger.backlog.count<a href=#pulsarbrokermanaged_ledgerbacklogcount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.backlog.count" title="Direct link to pulsar.broker.managed_ledger.backlog.count" translate=no>​</a></h4>
+<p>The number of messages in backlog for all consumers from this ledger.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessageincomingcount>pulsar.broker.managed_ledger.message.incoming.count<a href=#pulsarbrokermanaged_ledgermessageincomingcount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message.incoming.count" title="Direct link to pulsar.broker.managed_ledger.message.incoming.count" translate=no>​</a></h4>
+<p>The number of read operations from this ledger.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+<li class=""><code>pulsar.managed_ledger.operation.status</code> - The status of the managed ledger operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessageincomingsize>pulsar.broker.managed_ledger.message.incoming.size<a href=#pulsarbrokermanaged_ledgermessageincomingsize class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message.incoming.size" title="Direct link to pulsar.broker.managed_ledger.message.incoming.size" translate=no>​</a></h4>
+<p>The total number of messages bytes read from this ledger.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermessageincomingcachemisscount>pulsar.broker.managed_ledger.message.incoming.cache.miss.count<a href=#pulsarbrokermanaged_ledgermessageincomingcachemisscount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.message.incoming.cache.miss.count" title="Direct link to pulsar.broker.managed_ledger.message.incoming.cache.miss.count" translate=no>​</a></h4>
+<p>The number of cache misses during read operations from this ledger.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgermark_deletecount>pulsar.broker.managed_ledger.mark_delete.count<a href=#pulsarbrokermanaged_ledgermark_deletecount class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.mark_delete.count" title="Direct link to pulsar.broker.managed_ledger.mark_delete.count" translate=no>​</a></h4>
+<p>The total number of mark delete operations for this ledger.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The managed ledger namespace.</li>
+<li class=""><code>pulsar.managed_ledger.name</code> - The name of the managed ledger.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgerinflightreadlimit>pulsar.broker.managed_ledger.inflight.read.limit<a href=#pulsarbrokermanaged_ledgerinflightreadlimit class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.inflight.read.limit" title="Direct link to pulsar.broker.managed_ledger.inflight.read.limit" translate=no>​</a></h4>
+<p>Maximum number of bytes that can be retained by managed ledger data read from storage or cache.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokermanaged_ledgerinflightreadusage>pulsar.broker.managed_ledger.inflight.read.usage<a href=#pulsarbrokermanaged_ledgerinflightreadusage class=hash-link aria-label="Direct link to pulsar.broker.managed_ledger.inflight.read.usage" title="Direct link to pulsar.broker.managed_ledger.inflight.read.usage" translate=no>​</a></h4>
+<p>Estimated number of bytes retained by managed ledger data read from storage or cache.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>By</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.managed_ledger.inflight.read.usage.state</code> - Indicates managed ledger memory limiter usage state. Can be one of:<!-- -->
+<ul>
+<li class=""><code>used</code></li>
+<li class=""><code>free</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=web-executor-service-metrics>Web Executor Service metrics<a href=#web-executor-service-metrics class=hash-link aria-label="Direct link to Web Executor Service metrics" title="Direct link to Web Executor Service metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarwebexecutorthreadlimit>pulsar.web.executor.thread.limit<a href=#pulsarwebexecutorthreadlimit class=hash-link aria-label="Direct link to pulsar.web.executor.thread.limit" title="Direct link to pulsar.web.executor.thread.limit" translate=no>​</a></h4>
+<p>The thread limits for the pulsar-web executor pool.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{thread}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.web.executor.thread.limit.type</code> - The limit type for the thread pool.<!-- -->
+<ul>
+<li class=""><code>max</code></li>
+<li class=""><code>min</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarwebexecutorthreadusage>pulsar.web.executor.thread.usage<a href=#pulsarwebexecutorthreadusage class=hash-link aria-label="Direct link to pulsar.web.executor.thread.usage" title="Direct link to pulsar.web.executor.thread.usage" translate=no>​</a></h4>
+<p>The current usage of threads in the pulsar-web executor pool.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{thread}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.web.executor.thread.usage.type</code> - The usage type for the thread pool.<!-- -->
+<ul>
+<li class=""><code>active</code> - Indicates the number of threads actively serving requests.</li>
+<li class=""><code>current</code> - Indicates the total number of threads currently associated with the pool.</li>
+<li class=""><code>idle</code> - Indicates the number of threads available to serve requests.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=replicator-metrics>Replicator metrics<a href=#replicator-metrics class=hash-link aria-label="Direct link to Replicator metrics" title="Direct link to Replicator metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessageincomingcount>pulsar.broker.replication.message.incoming.count<a href=#pulsarbrokerreplicationmessageincomingcount class=hash-link aria-label="Direct link to pulsar.broker.replication.message.incoming.count" title="Direct link to pulsar.broker.replication.message.incoming.count" translate=no>​</a></h4>
+<p>The total number of messages received from the remote cluster through this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessageoutgoingcount>pulsar.broker.replication.message.outgoing.count<a href=#pulsarbrokerreplicationmessageoutgoingcount class=hash-link aria-label="Direct link to pulsar.broker.replication.message.outgoing.count" title="Direct link to pulsar.broker.replication.message.outgoing.count" translate=no>​</a></h4>
+<p>The total number of messages sent to the remote cluster through this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessageincomingsize>pulsar.broker.replication.message.incoming.size<a href=#pulsarbrokerreplicationmessageincomingsize class=hash-link aria-label="Direct link to pulsar.broker.replication.message.incoming.size" title="Direct link to pulsar.broker.replication.message.incoming.size" translate=no>​</a></h4>
+<p>The total number of messages bytes received from the remote cluster through this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessageoutgoingsize>pulsar.broker.replication.message.outgoing.size<a href=#pulsarbrokerreplicationmessageoutgoingsize class=hash-link aria-label="Direct link to pulsar.broker.replication.message.outgoing.size" title="Direct link to pulsar.broker.replication.message.outgoing.size" translate=no>​</a></h4>
+<p>The total number of messages bytes sent to the remote cluster through this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{By}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessagebacklogcount>pulsar.broker.replication.message.backlog.count<a href=#pulsarbrokerreplicationmessagebacklogcount class=hash-link aria-label="Direct link to pulsar.broker.replication.message.backlog.count" title="Direct link to pulsar.broker.replication.message.backlog.count" translate=no>​</a></h4>
+<p>The total number of messages in the backlog for this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessagebacklogage>pulsar.broker.replication.message.backlog.age<a href=#pulsarbrokerreplicationmessagebacklogage class=hash-link aria-label="Direct link to pulsar.broker.replication.message.backlog.age" title="Direct link to pulsar.broker.replication.message.backlog.age" translate=no>​</a></h4>
+<p>The age of the oldest message in the replicator backlog.</p>
+<ul>
+<li class="">Type: Gauge</li>
+<li class="">Unit: <code>s</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessageexpiredcount>pulsar.broker.replication.message.expired.count<a href=#pulsarbrokerreplicationmessageexpiredcount class=hash-link aria-label="Direct link to pulsar.broker.replication.message.expired.count" title="Direct link to pulsar.broker.replication.message.expired.count" translate=no>​</a></h4>
+<p>The total number of messages that expired for this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationmessagedroppedcount>pulsar.broker.replication.message.dropped.count<a href=#pulsarbrokerreplicationmessagedroppedcount class=hash-link aria-label="Direct link to pulsar.broker.replication.message.dropped.count" title="Direct link to pulsar.broker.replication.message.dropped.count" translate=no>​</a></h4>
+<p>The total number of messages dropped by this replicator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{message}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.domain</code> - The domain of the topic. Can be one of:<!-- -->
+<ul>
+<li class=""><code>persistent</code></li>
+<li class=""><code>non-persistent</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.replication.remote.cluster.name</code> - The name of the remote cluster.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=schema-registry-metrics>Schema Registry Metrics<a href=#schema-registry-metrics class=hash-link aria-label="Direct link to Schema Registry Metrics" title="Direct link to Schema Registry Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerrequestschema_registryduration>pulsar.broker.request.schema_registry.duration<a href=#pulsarbrokerrequestschema_registryduration class=hash-link aria-label="Direct link to pulsar.broker.request.schema_registry.duration" title="Direct link to pulsar.broker.request.schema_registry.duration" translate=no>​</a></h4>
+<p>The duration of Schema Registry requests</p>
+<ul>
+<li class="">Type: Histogram</li>
+<li class="">Unit: <code>s</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The namespace referred by the Schema Registry request</li>
+<li class=""><code>pulsar.schema_registry.request</code> - The Schema Registry request type<!-- -->
+<ul>
+<li class=""><code>get</code></li>
+<li class=""><code>list</code></li>
+<li class=""><code>put</code></li>
+<li class=""><code>delete</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.schema_registry.response</code> - The Schema Registry response type<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokeroperationschema_registrycompatibility_checkcount>pulsar.broker.operation.schema_registry.compatibility_check.count<a href=#pulsarbrokeroperationschema_registrycompatibility_checkcount class=hash-link aria-label="Direct link to pulsar.broker.operation.schema_registry.compatibility_check.count" title="Direct link to pulsar.broker.operation.schema_registry.compatibility_check.count" translate=no>​</a></h4>
+<p>The number of Schema Registry compatibility check operations performed by the broker.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.namespace</code> - The namespace referred by the compatibility check operation</li>
+<li class=""><code>pulsar.schema_registry.compatibility_check.response</code> - The compatibility check response type<!-- -->
+<ul>
+<li class=""><code>compatible</code></li>
+<li class=""><code>incompatible</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=http-request-filter-metrics>HTTP Request Filter Metrics<a href=#http-request-filter-metrics class=hash-link aria-label="Direct link to HTTP Request Filter Metrics" title="Direct link to HTTP Request Filter Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarwebfilterrate_limitrequestcount>pulsar.web.filter.rate_limit.request.count<a href=#pulsarwebfilterrate_limitrequestcount class=hash-link aria-label="Direct link to pulsar.web.filter.rate_limit.request.count" title="Direct link to pulsar.web.filter.rate_limit.request.count" translate=no>​</a></h4>
+<p>Counter of HTTP requests processed by the rate limiting filter.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{request}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.web.filter.rate_limit.result</code> - The result of the rate limiting operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>accepted</code></li>
+<li class=""><code>rejected</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=transaction-coordinator-metrics>Transaction Coordinator Metrics<a href=#transaction-coordinator-metrics class=hash-link aria-label="Direct link to Transaction Coordinator Metrics" title="Direct link to Transaction Coordinator Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertransactioncoordinatortransactioncount>pulsar.broker.transaction.coordinator.transaction.count<a href=#pulsarbrokertransactioncoordinatortransactioncount class=hash-link aria-label="Direct link to pulsar.broker.transaction.coordinator.transaction.count" title="Direct link to pulsar.broker.transaction.coordinator.transaction.count" translate=no>​</a></h4>
+<p>The number of transactions handled by the coordinator.</p>
+<ul>
+<li class="">Type: UpDownCounter</li>
+<li class="">Unit: <code>{transaction}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.transaction.coordinator.id</code> - The ID of the Pulsar transaction coordinator.</li>
+<li class=""><code>pulsar.transaction.status</code> - The status of the Pulsar transaction. Can be one of:<!-- -->
+<ul>
+<li class=""><code>aborted</code></li>
+<li class=""><code>active</code></li>
+<li class=""><code>created</code></li>
+<li class=""><code>committed</code></li>
+<li class=""><code>timeout</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertransactioncoordinatorappendlogcount>pulsar.broker.transaction.coordinator.append.log.count<a href=#pulsarbrokertransactioncoordinatorappendlogcount class=hash-link aria-label="Direct link to pulsar.broker.transaction.coordinator.append.log.count" title="Direct link to pulsar.broker.transaction.coordinator.append.log.count" translate=no>​</a></h4>
+<p>The number of transaction metadata entries appended by the coordinator.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{entry}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.transaction.coordinator.id</code> - The ID of the Pulsar transaction coordinator.</li>
+<li class=""><code>pulsar.transaction.status</code> - The status of the Pulsar transaction. Can be one of:<!-- -->
+<ul>
+<li class=""><code>aborted</code></li>
+<li class=""><code>active</code></li>
+<li class=""><code>created</code></li>
+<li class=""><code>committed</code></li>
+<li class=""><code>timeout</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=transaction-pending-acknowledgment-store-metrics>Transaction Pending Acknowledgment Store Metrics<a href=#transaction-pending-acknowledgment-store-metrics class=hash-link aria-label="Direct link to Transaction Pending Acknowledgment Store Metrics" title="Direct link to Transaction Pending Acknowledgment Store Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokertransactionpendingackstoretransactioncount>pulsar.broker.transaction.pending.ack.store.transaction.count<a href=#pulsarbrokertransactionpendingackstoretransactioncount class=hash-link aria-label="Direct link to pulsar.broker.transaction.pending.ack.store.transaction.count" title="Direct link to pulsar.broker.transaction.pending.ack.store.transaction.count" translate=no>​</a></h4>
+<p>The number of transactions handled by the persistent ack store.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{transaction}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.tenant</code> - The topic tenant.</li>
+<li class=""><code>pulsar.namespace</code> - The topic namespace.</li>
+<li class=""><code>pulsar.topic</code> - The topic name.</li>
+<li class=""><code>pulsar.partition.index</code> - The partition index of the topic. Present only if the topic is partitioned.</li>
+<li class=""><code>pulsar.subscription.name</code> - The name of the Pulsar subscription.</li>
+<li class=""><code>pulsar.transaction.status</code> - The Pulsar transaction status. Can be one of:<!-- -->
+<ul>
+<li class=""><code>aborted</code></li>
+<li class=""><code>committed</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.transaction.pending.ack.store.operation.status</code> - The status of the pending acknowledgment store operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>failure</code></li>
+<li class=""><code>success</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=authentication-metrics>Authentication Metrics<a href=#authentication-metrics class=hash-link aria-label="Direct link to Authentication Metrics" title="Direct link to Authentication Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarauthenticationoperationcount>pulsar.authentication.operation.count<a href=#pulsarauthenticationoperationcount class=hash-link aria-label="Direct link to pulsar.authentication.operation.count" title="Direct link to pulsar.authentication.operation.count" translate=no>​</a></h4>
+<p>The number of authentication operations.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.authentication.provider</code> - The name of the authentication provider class.</li>
+<li class=""><code>pulsar.authentication.method</code> - The name of the authentication method.</li>
+<li class=""><code>pulsar.authentication.result</code> - The authentication result. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>failure</code></li>
+</ul>
+</li>
+<li class=""><code>pulsar.authentication.error</code> - The authentication error, if the result is <code>failure</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=token-metrics>Token Metrics<a href=#token-metrics class=hash-link aria-label="Direct link to Token Metrics" title="Direct link to Token Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarauthenticationtokenexpiredcount>pulsar.authentication.token.expired.count<a href=#pulsarauthenticationtokenexpiredcount class=hash-link aria-label="Direct link to pulsar.authentication.token.expired.count" title="Direct link to pulsar.authentication.token.expired.count" translate=no>​</a></h4>
+<p>The total number of expired tokens.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{token}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarauthenticationtokenexpiryduration>pulsar.authentication.token.expiry.duration<a href=#pulsarauthenticationtokenexpiryduration class=hash-link aria-label="Direct link to pulsar.authentication.token.expiry.duration" title="Direct link to pulsar.authentication.token.expiry.duration" translate=no>​</a></h4>
+<p>The remaining time of expiring token in seconds.</p>
+<ul>
+<li class="">Type: Histogram</li>
+<li class="">Unit: <code>s</code></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=replication-subscription-metrics>Replication Subscription Metrics<a href=#replication-subscription-metrics class=hash-link aria-label="Direct link to Replication Subscription Metrics" title="Direct link to Replication Subscription Metrics" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationsubscriptionsnapshotoperationcount>pulsar.broker.replication.subscription.snapshot.operation.count<a href=#pulsarbrokerreplicationsubscriptionsnapshotoperationcount class=hash-link aria-label="Direct link to pulsar.broker.replication.subscription.snapshot.operation.count" title="Direct link to pulsar.broker.replication.subscription.snapshot.operation.count" translate=no>​</a></h4>
+<p>The number of snapshot operations attempted.</p>
+<ul>
+<li class="">Type: Counter</li>
+<li class="">Unit: <code>{operation}</code></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=pulsarbrokerreplicationsubscriptionsnapshotoperationduration>pulsar.broker.replication.subscription.snapshot.operation.duration<a href=#pulsarbrokerreplicationsubscriptionsnapshotoperationduration class=hash-link aria-label="Direct link to pulsar.broker.replication.subscription.snapshot.operation.duration" title="Direct link to pulsar.broker.replication.subscription.snapshot.operation.duration" translate=no>​</a></h4>
+<p>Time taken to complete a consistent snapshot operation across clusters.</p>
+<ul>
+<li class="">Type: Histogram</li>
+<li class="">Unit: <code>s</code></li>
+<li class="">Attributes:<!-- -->
+<ul>
+<li class=""><code>pulsar.replication.subscription.snapshot.operation.result</code> - The result of the snapshot operation. Can be one of:<!-- -->
+<ul>
+<li class=""><code>success</code></li>
+<li class=""><code>timeout</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href=https://github.com/apache/pulsar-site/edit/main/versioned_docs/version-4.0.x/reference-metrics-opentelemetry.md target=_blank rel="noopener noreferrer" class=theme-edit-this-page><svg fill=currentColor height=20 width=20 viewBox="0 0 40 40" class=iconEdit_Z9Sw aria-hidden=true><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"/></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href=/docs/4.0.x/deploy-monitoring/><div class=pagination-nav__sublabel>Previous</div><div class=pagination-nav__label>Monitoring</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/docs/4.0.x/security-overview/><div class=pagination-nav__sublabel>Next</div><div class=pagination-nav__label>Overview</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_jeP5 thin-scrollbar theme-doc-toc-desktop"><div class=border><div style=color:var(--ifm-toc-link-color)>Was this helpful?</div><div style=border-width:1px;padding:3px;display:flex><div style=justify-content:center;display:flex;border-radius:99999px;width:2.5rem;height:2.5rem;cursor:pointer><svg xmlns=http://www.w3.org/2000/svg width=12 height=24 fill=none style=width:initial;height:initial viewBox="0 0 24 24"><path fill=currentColor fill-rule=evenodd d="M10.086 1.594A1 1 0 0 1 11 1a4 4 0 0 1 4 4v3h4.655a3 3 0 0 1 2.994 3.45l-1.38 9A3 3 0 0 1 18.275 23H4a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h2.35zM8 11.212l3.608-8.117A2 2 0 0 1 13 5v4a1 1 0 0 0 1 1h5.671a1 1 0 0 1 1 1.15l-1.38 9a1 1 0 0 1-1 .85H8zM6 21v-9H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1z" clip-rule=evenodd /></svg></div><div style=justify-content:center;display:flex;border-radius:99999px;width:2.5rem;height:2.5rem;cursor:pointer><svg xmlns=http://www.w3.org/2000/svg width=12 height=24 fill=none style=width:initial;height:initial viewBox="0 0 24 24"><path fill=currentColor fill-rule=evenodd d="M20.563 3.316A1.3 1.3 0 0 0 19.687 3h-1.688v9h1.688a1.31 1.31 0 0 0 1.312-1.077V4.077a1.3 1.3 0 0 0-.436-.761M16 12.788l-3.608 8.118A2 2 0 0 1 11 19v-4a1 1 0 0 0-1-1H4.328a1.002 1.002 0 0 1-1-1.15l1.38-9a1 1 0 0 1 1-.85h10.291zM19.661 1a3.31 3.31 0 0 1 3.329 2.866Q23 3.933 23 4v7q0 .068-.01.134A3.31 3.31 0 0 1 19.661 14h-2.012l-3.736 8.406a1 1 0 0 1-.914.594 4 4 0 0 1-4-4v-3H4.344a3 3 0 0 1-2.994-3.45l1.38-9A3 3 0 0 1 5.724 1z" clip-rule=evenodd /></svg></div></div><div class=Actions_uugI><a target=_blank class=Action_iBHd href=https://github.com/apache/pulsar-site/issues/new>💡 Suggest changes</a><a target=_blank class=Action_iBHd href="https://github.com/apache/pulsar/discussions/new?category=q-a">🛟 Get support</a></div></div><ul class="table-of-contents table-of-contents__left-border"><li><a href=#broker class="table-of-contents__link toc-highlight">Broker</a><ul><li><a href=#connection-metrics class="table-of-contents__link toc-highlight">Connection Metrics</a><li><a href=#topic-messaging-metrics class="table-of-contents__link toc-highlight">Topic Messaging metrics</a><li><a href=#topic-lookup-metrics class="table-of-contents__link toc-highlight">Topic Lookup metrics</a><li><a href=#metadata-store-metrics class="table-of-contents__link toc-highlight">Metadata Store metrics</a><li><a href=#consumer-metrics class="table-of-contents__link toc-highlight">Consumer metrics</a><li><a href=#managed-ledger-cursor-metrics class="table-of-contents__link toc-highlight">Managed Ledger Cursor metrics</a><li><a href=#managed-ledger-cache-metrics class="table-of-contents__link toc-highlight">Managed Ledger Cache metrics</a><li><a href=#producer-metrics class="table-of-contents__link toc-highlight">Producer metrics</a><li><a href=#managed-ledger-metrics class="table-of-contents__link toc-highlight">Managed Ledger metrics</a><li><a href=#web-executor-service-metrics class="table-of-contents__link toc-highlight">Web Executor Service metrics</a><li><a href=#replicator-metrics class="table-of-contents__link toc-highlight">Replicator metrics</a><li><a href=#schema-registry-metrics class="table-of-contents__link toc-highlight">Schema Registry Metrics</a><li><a href=#http-request-filter-metrics class="table-of-contents__link toc-highlight">HTTP Request Filter Metrics</a><li><a href=#transaction-coordinator-metrics class="table-of-contents__link toc-highlight">Transaction Coordinator Metrics</a><li><a href=#transaction-pending-acknowledgment-store-metrics class="table-of-contents__link toc-highlight">Transaction Pending Acknowledgment Store Metrics</a><li><a href=#authentication-metrics class="table-of-contents__link toc-highlight">Authentication Metrics</a><li><a href=#token-metrics class="table-of-contents__link toc-highlight">Token Metrics</a><li><a href=#replication-subscription-metrics class="table-of-contents__link toc-highlight">Replication Subscription Metrics</a></ul></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class=footer__title></div><ul class="footer__items clean-list"><li class=footer__item><a href=https://www.apache.org/ target=_blank rel="noopener noreferrer" class=footer__link-item>Foundation<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><li class=footer__item><a href=https://www.apache.org/events/current-event.html target=_blank rel="noopener noreferrer" class=footer__link-item>Events<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title></div><ul class="footer__items clean-list"><li class=footer__item><a href=https://www.apache.org/licenses/ target=_blank rel="noopener noreferrer" class=footer__link-item>License<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><li class=footer__item><a href=https://www.apache.org/foundation/thanks target=_blank rel="noopener noreferrer" class=footer__link-item>Thanks<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><li class=footer__item><a href=https://www.apache.org/foundation/sponsorship target=_blank rel="noopener noreferrer" class=footer__link-item>Sponsorship<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title></div><ul class="footer__items clean-list"><li class=footer__item><a class=footer__link-item href=/security/>Security</a><li class=footer__item><a href=https://www.apache.org/foundation/policies/privacy.html target=_blank rel="noopener noreferrer" class=footer__link-item>Privacy<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><li class=footer__item><a class=footer__link-item href=/contact/>Contact</a></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title></div><ul class="footer__items clean-list"><li class=footer__item>
+                <div class=social-icons>
+                  <a target=_blank href=https://communityinviter.com/apps/apache-pulsar/apache-pulsar aria-label="Join the Apache Pulsar Slack workspace">
+                    <img alt="Slack logo" src=/img/slack-white.svg width=26>
+                  </a>
+                  <a target=_blank href=https://github.com/apache/pulsar/ aria-label="View the Apache Pulsar project on GitHub">
+                    <img alt="GitHub logo" src=/img/github-white.svg width=26>
+                  </a>
+                </div>
+              </ul></div></div><div class="footer__bottom text--center"><div class=margin-bottom--sm><a class=footerLogoLink_BH7S href=/><img src=/img/pulsar-white.svg alt="Pulsar Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"/><img src=/img/pulsar-white.svg alt="Pulsar Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"/></a></div><div class=footer__copyright>
+        <div>
+          <img class=footer-apache-logo src=/img/feather-logo-white.svg alt="" width=20>
+          The Apache Software Foundation
+        </div>
+        <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+        <p>Copyright © 2026 The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.</p>
+      </div></div></div></footer></div></body>
