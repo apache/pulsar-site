@@ -1,5 +1,8 @@
 ## Client Configurations
 
+Please check the [client libraries documentation](docs/client-libraries/) for client documentation.
+
+
 If you create a Java client, producer, consumer, or reader, you can use the `loadConf` configurations.
 
 - [Client configurations](/@pulsar:version_reference@/client/client-configuration-client)
