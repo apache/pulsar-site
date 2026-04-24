@@ -658,7 +658,7 @@ The following is an example.
    CompletableFuture<Message> asyncMessage = consumer.receiveAsync();
    ```
 
-   Async receive operations return a [Message](/api/client/org/apache/pulsar/client/api/Message) wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
+   Async receive operations return a [Message](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Message) wrapped inside of a [`CompletableFuture`](http://www.baeldung.com/java-completablefuture).
 
  </TabItem>
  <TabItem value="Python">

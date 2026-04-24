@@ -411,7 +411,7 @@ The following is an example:
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
-To use a custom message router, you need to provide an implementation of the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
+To use a custom message router, you need to provide an implementation of the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
 
 ```java
 public interface MessageRouter extends Serializable {
