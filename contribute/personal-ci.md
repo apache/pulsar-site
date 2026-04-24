@@ -29,7 +29,7 @@ For example:
 
 Before using personal CI workflows, ensure GitHub Actions is enabled for your fork in the GitHub UI. You can check this under your fork's "Settings" > "Actions" > "General" tab.
 Choose the "Allow all actions and reusable workflows" option. 
-Note that some actions may still be disabled by default and must be enabled explicitly.
+Note that some workflows, such as the required "Pulsar CI" and "Pulsar CI Flaky", may still be disabled by default and must be enabled explicitly. After enabling Actions for your forked repository, you can find these workflows in the "Actions" tab. To enable a workflow, select it from the left-hand sidebar and then click the "Enable workflow" button.
 
 Here are the steps to use your personal CI on GitHub:
 
