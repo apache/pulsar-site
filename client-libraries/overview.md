@@ -10,14 +10,14 @@ description: Get a comprehensive understanding of Pulsar client libraries.
 
 Pulsar supports the following language-specific client libraries:
 
-| Language  | Documentation                                                                                                      | Release note                                          | Code repo                                                             |
-|-----------|--------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------|
-| Java      | [User doc](java.md)   <br/> [API doc](/api/client/)                                               | [Standalone](pathname:///release-notes/client-java)   | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-client) |
-| C++       | [User doc](cpp.md)    <br/> [API doc](@pulsar:apidoc:cpp@)                                        | [Standalone](pathname:///release-notes/client-cpp)    | [Standalone](https://github.com/apache/pulsar-client-cpp)             |
-| Python    | [User doc](python.md) <br/> [API doc](@pulsar:apidoc:python@)                                     | [Standalone](pathname:///release-notes/client-python) | [Standalone](https://github.com/apache/pulsar-client-python)          |
-| Go client | [User doc](go.md)   <br/> [API doc](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar) | [Standalone](pathname:///release-notes/client-go)     | [Standalone](https://github.com/apache/pulsar-client-go)              |
-| Node.js   | [User doc](node.md)                                                                                | [Standalone](pathname:///release-notes/client-node)   | [Standalone](https://github.com/apache/pulsar-client-node)            |
-| C#/DotPulsar | [User doc](dotnet.md)                                                                             | [Standalone](pathname:///release-notes/client-cs)     | [Standalone](https://github.com/apache/pulsar-dotpulsar)              |
+| Language     | User doc              | API doc                                                                 | Release notes                                          | Code repo                                                                                                        |
+|--------------|-----------------------|-------------------------------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Java         | [User doc](java.md)   | [API doc](/api/client/)                                                 | [Notes](pathname:///release-notes/client-java)   | [github.com/apache/pulsar/tree/master/pulsar-client](https://github.com/apache/pulsar/tree/master/pulsar-client) |
+| C++          | [User doc](cpp.md)    | [API doc](@pulsar:apidoc:cpp@)                                          | [Notes](pathname:///release-notes/client-cpp)    | [github.com/apache/pulsar-client-cpp](https://github.com/apache/pulsar-client-cpp)                               |
+| Python       | [User doc](python.md) | [API doc](@pulsar:apidoc:python@)                                       | [Notes](pathname:///release-notes/client-python) | [github.com/apache/pulsar-client-python](https://github.com/apache/pulsar-client-python)                         |
+| Go client    | [User doc](go.md)     | [API doc](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsar) | [Notes](pathname:///release-notes/client-go)     | [github.com/apache/pulsar-client-go](https://github.com/apache/pulsar-client-go)                                 |
+| Node.js      | [User doc](node.md)   | —                                                                       | [Notes](pathname:///release-notes/client-node)   | [github.com/apache/pulsar-client-node](https://github.com/apache/pulsar-client-node)                             |
+| C#/DotPulsar | [User doc](dotnet.md) | —                                                                       | [Notes](pathname:///release-notes/client-cs)     | [github.com/apache/pulsar-dotpulsar](https://github.com/apache/pulsar-dotpulsar)                                 |
 
 :::tip
 
@@ -31,8 +31,8 @@ Pulsar supports the following language-agnostic client libraries:
 
 | Interface | Documentation                             | Release note                                      | Code repo                                                                |
 |-----------|-------------------------------------------|---------------------------------------------------|--------------------------------------------------------------------------|
-| REST      | [User doc](rest.md)      | [Bundled](pathname:///release-notes/)             | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-broker)    |
-| WebSocket | [User doc](websocket.md) | [Standalone](pathname:///release-notes/client-ws) | [Bundled](https://github.com/apache/pulsar/tree/master/pulsar-websocket) |
+| REST      | [User doc](rest.md)      | [Notes](pathname:///release-notes/)             | [github.com/apache/pulsar/tree/master/pulsar-broker](https://github.com/apache/pulsar/tree/master/pulsar-broker)    |
+| WebSocket | [User doc](websocket.md) | [Notes](pathname:///release-notes/client-ws) | [github.com/apache/pulsar/tree/master/pulsar-websocket](https://github.com/apache/pulsar/tree/master/pulsar-websocket) |
 
 :::note
 
