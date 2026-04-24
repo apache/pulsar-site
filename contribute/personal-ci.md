@@ -28,7 +28,8 @@ For example:
 ## CI workflows in a fork
 
 Before using personal CI workflows, ensure GitHub Actions is enabled for your fork in the GitHub UI. You can check this under your fork's "Settings" > "Actions" > "General" tab.
-Choose the "Allow all actions and reusable workflows" option.
+Choose the "Allow all actions and reusable workflows" option. 
+Note that some actions may still be disabled by default and must be enabled explicitly.
 
 Here are the steps to use your personal CI on GitHub:
 
