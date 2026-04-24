@@ -1,6 +1,6 @@
 # pulsar-shell
 
-[Pulsar shell](pathname:///docs/@pulsar:version@/administration-pulsar-shell) tool.
+[Pulsar shell](/docs/3.1.3/administration-pulsar-shell) tool.
 
 ### Interactive mode
 
@@ -38,7 +38,7 @@ echo "[COMMAND]" | pulsar-shell -
 
 Commands
 
-* `admin` - See [Admin API](pathname:///docs/@pulsar:version@/admin-api-overview)
+* `admin` - See [Admin API](/docs/3.1.3/admin-api-overview)
 * `client` - See [pulsar-client](../pulsar-client/README.md)
 * `config`
 

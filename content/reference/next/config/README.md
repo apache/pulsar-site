@@ -3,15 +3,15 @@
 You can manage Pulsar configurations through configuration files in
 the [`conf`](https://github.com/apache/pulsar/tree/master/conf) directory of a Pulsar installation.
 
-- [BookKeeper](/@pulsar:version_reference@/config/reference-configuration-bookkeeper)
-- [Broker](/@pulsar:version_reference@/config/reference-configuration-broker)
-- [Client](/@pulsar:version_reference@/config/reference-configuration-client)
-- [Log4j](/@pulsar:version_reference@/config/reference-configuration-log4j)
-- [Log4j shell](/@pulsar:version_reference@/config/reference-configuration-log4j-shell)
-- [Standalone](/@pulsar:version_reference@/config/reference-configuration-standalone)
-- [WebSocket](/@pulsar:version_reference@/config/reference-configuration-websocket)
-- [Pulsar proxy](/@pulsar:version_reference@/config/reference-configuration-pulsar-proxy)
-- [ZooKeeper](/@pulsar:version_reference@/config/reference-configuration-zookeeper)
+- [BookKeeper](/next/config/reference-configuration-bookkeeper)
+- [Broker](/next/config/reference-configuration-broker)
+- [Client](/next/config/reference-configuration-client)
+- [Log4j](/next/config/reference-configuration-log4j)
+- [Log4j shell](/next/config/reference-configuration-log4j-shell)
+- [Standalone](/next/config/reference-configuration-standalone)
+- [WebSocket](/next/config/reference-configuration-websocket)
+- [Pulsar proxy](/next/config/reference-configuration-pulsar-proxy)
+- [ZooKeeper](/next/config/reference-configuration-zookeeper)
 
 ### Override client configurations
 
@@ -41,7 +41,7 @@ You can set specific configurations through Java properties.
 Below is a brief summary of configurations for broker load balancing.
 
 For detailed descriptions of each configuration,
-see [Broker load balancing | Configurations](pathname:///reference/#/@pulsar:version_reference@/config/reference-configuration-broker).
+see [Broker load balancing | Configurations](/reference/#/next/config/reference-configuration-broker).
 
 > Note
 > Configurations with an asterisk (*) are only available in the extensible load balancer.

@@ -8,8 +8,8 @@ Javadoc for the Pulsar client is divided into two domains by package as follows.
 
 | Package                                        | Description                                 | Maven Artifact                              |
 |:-----------------------------------------------|:--------------------------------------------|:--------------------------------------------|
-| [`org.apache.pulsar.client.api`](/api/client)  | The producer and consumer API               | org.apache.pulsar:pulsar-client:2.6.4       |
-| [`org.apache.pulsar.client.admin`](/api/admin) | The Java [admin API](admin-api-overview.md) | org.apache.pulsar:pulsar-client-admin:2.6.4 |
+| [`org.apache.pulsar.client.api`](https://pulsar.apache.org/api/client/2.6.x)  | The producer and consumer API               | org.apache.pulsar:pulsar-client:2.6.4       |
+| [`org.apache.pulsar.client.admin`](https://pulsar.apache.org/api/admin/2.6.xadmin) | The Java [admin API](admin-api-overview.md) | org.apache.pulsar:pulsar-client-admin:2.6.4 |
 
 This document focuses only on the client API for producing and consuming messages on Pulsar topics. For how to use the
 Java admin client, see [Pulsar admin interface](admin-api-overview.md).

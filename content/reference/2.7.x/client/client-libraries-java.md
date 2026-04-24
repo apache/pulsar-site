@@ -8,8 +8,8 @@ Javadoc for the Pulsar client is divided into two domains by package as follows.
 
 | Package                                        | Description                                 | Maven Artifact                                                                                                                                                            |
 |:-----------------------------------------------|:--------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`org.apache.pulsar.client.api`](/api/client)  | The producer and consumer API               | [org.apache.pulsar:pulsar-client:{{pulsar:version}}](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C{{pulsar:version}}%7Cjar)             |
-| [`org.apache.pulsar.client.admin`](/api/admin) | The Java [admin API](admin-api-overview.md) | [org.apache.pulsar:pulsar-client-admin:{{pulsar:version}}](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C{{pulsar:version}}%7Cjar) |
+| [`org.apache.pulsar.client.api`](https://pulsar.apache.org/api/client/2.7.x)  | The producer and consumer API               | [org.apache.pulsar:pulsar-client:{{pulsar:version}}](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C{{pulsar:version}}%7Cjar)             |
+| [`org.apache.pulsar.client.admin`](https://pulsar.apache.org/api/admin/2.7.xadmin) | The Java [admin API](admin-api-overview.md) | [org.apache.pulsar:pulsar-client-admin:{{pulsar:version}}](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C{{pulsar:version}}%7Cjar) |
 
 This document focuses only on the client API for producing and consuming messages on Pulsar topics. For how to use the
 Java admin client, see [Pulsar admin interface](admin-api-overview.md).

@@ -1,11 +1,14 @@
 ## Client Configurations
 
+Please check the [client libraries documentation](docs/client-libraries/) for client documentation.
+
+
 If you create a Java client, producer, consumer, or reader, you can use the `loadConf` configurations.
 
-- [Client configurations](/@pulsar:version_reference@/client/client-configuration-client)
-- [Producer configurations](/@pulsar:version_reference@/client/client-configuration-producer)
-- [Consumer configurations](/@pulsar:version_reference@/client/client-configuration-consumer)
-- [Reader configurations](/@pulsar:version_reference@/client/client-configuration-reader)
+- [Client configurations](/4.0.x/client/client-configuration-client)
+- [Producer configurations](/4.0.x/client/client-configuration-producer)
+- [Consumer configurations](/4.0.x/client/client-configuration-consumer)
+- [Reader configurations](/4.0.x/client/client-configuration-reader)
 
 ### Set client memory allocator configs using Java system properties
 
