@@ -70,6 +70,80 @@ The site repo has a set of Python scripts for generating content and syncing/upd
 
 You can read the [README](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md) file of pytools for details.
 
+## Pulsar variables (`@pulsar:...@` tokens)
+
+The markdown files under `docs/`, `versioned_docs/version-*/`, `client-libraries/`, and `static/reference/` can contain variables of the form `@pulsar:<name>@`. They are expanded to version-aware values at build time:
+
+- For `docs/` and `client-libraries/` (current docs), and for `versioned_docs/version-*/` (released docs), expansion runs inside the Docusaurus markdown preprocessor — see [src/server/markdownPreprocessors/pulsarVariables.ts](https://github.com/apache/pulsar-site/blob/main/src/server/markdownPreprocessors/pulsarVariables.ts). Replacements are visible during both `yarn start` and `yarn build`.
+- For `static/reference/` (Docsify site), the same resolver is applied by the `yarn process-reference-markdown` post-build step (see the section above). Replacements are visible only after `yarn build`.
+- Blog posts, `src/pages/*.mdx`, and the `contribute/` / `release-notes/` / `security/` trees are **not** in scope, so `@pulsar:...@` strings in those places are left as-is.
+
+The resolver lives in [src/config/pulsarVariables.ts](https://github.com/apache/pulsar-site/blob/main/src/config/pulsarVariables.ts) and is the single source of truth. Unknown tokens pass through untouched and emit a `[pulsarVariables] unknown token` warning in the build log.
+
+### Version context
+
+Every expansion happens in the context of a version:
+
+| Where the file lives                   | Version context                                                          |
+|----------------------------------------|--------------------------------------------------------------------------|
+| `docs/`, `client-libraries/`           | `current` — resolves against the latest major release (`versions[0]`)    |
+| `versioned_docs/version-<X>/`          | `<X>` (the directory segment, e.g. `4.1.x`, `2.7.5`)                     |
+| `static/reference/next/`               | `current`                                                                |
+| `static/reference/<X>/` (e.g. `4.1.x`) | `<X>`                                                                    |
+
+The `<X>` segment is looked up in `versions.json` / the REST API version map. `.x` keys (e.g. `4.1.x`) resolve to the latest patch version in that line (e.g. `4.1.1`). Specific patch versions used for older branches (e.g. `2.7.5`) resolve to themselves.
+
+### Tokens
+
+#### Version numbers
+
+| Token                          | Expands to                                                                                                            |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `@pulsar:version@`             | Resolved semver version (e.g. `4.2.0`) — the latest patch of the minor line in context.                               |
+| `@pulsar:version_number@`      | Same as `@pulsar:version@` but with any trailing `-incubating` suffix stripped (only matters for very old versions).  |
+| `@pulsar:version_origin@`      | The origin version key (e.g. `4.2.x` for released docs, full resolved version for current docs).                      |
+| `@pulsar:version_reference@`   | The folder name in `static/reference/` — `next` for current docs, `<major>.<minor>.x` otherwise.                      |
+| `@pulsar:version:latest@`      | Latest version across all releases (context-independent).                                                             |
+| `@pulsar:version:lts@`         | Current LTS version. Kept in sync with `ltsMajorRelease` in `pulsarVariables.ts`.                                     |
+| `@pulsar:version:adapters@`    | Latest `pulsar-adapters` release, sourced from `data/release-pulsar-adapters.js`.                                     |
+| `@pulsar:version:python@`      | Version of the Python client that matches the current context.                                                        |
+
+#### Release download URLs
+
+| Token                                           | Expands to                                                                             |
+|-------------------------------------------------|----------------------------------------------------------------------------------------|
+| `@pulsar:download_page_url@`                    | The `/download/` page on this site.                                                    |
+| `@pulsar:binary_release_url@`                   | `https://archive.apache.org/dist/pulsar/pulsar-<v>/apache-pulsar-<v>-bin.tar.gz`       |
+| `@pulsar:connector_release_url@`                | The connectors directory (or tarball, for very old versions) at archive.apache.org.    |
+| `@pulsar:offloader_release_url@`                | The offloaders tarball at archive.apache.org.                                          |
+| `@pulsar:presto_pulsar_connector_release_url@`  | The Presto/Trino Pulsar connector tarball at archive.apache.org.                       |
+
+#### Linux CPP client packages
+
+Linux CPP client RPM and DEB packages have two aliases each (`rpm:...` and `dist_rpm:...`, likewise for DEB) — both expand to the same URL; `dist_*` is the older name.
+
+| Token                                                                              | Expands to                                                                |
+|------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `@pulsar:rpm:client@` / `@pulsar:dist_rpm:client@`                                 | URL of the main `apache-pulsar-client` RPM.                               |
+| `@pulsar:rpm:client-debuginfo@` / `@pulsar:dist_rpm:client-debuginfo@`             | URL of the `apache-pulsar-client-debuginfo` RPM.                          |
+| `@pulsar:rpm:client-devel@` / `@pulsar:dist_rpm:client-devel@`                     | URL of the `apache-pulsar-client-devel` RPM.                              |
+| `@pulsar:deb:client@` / `@pulsar:dist_deb:client@`                                 | URL of the main `apache-pulsar-client` DEB.                               |
+| `@pulsar:deb:client-devel@` / `@pulsar:dist_deb:client-devel@`                     | URL of the `apache-pulsar-client-dev` DEB.                                |
+
+#### API reference URLs
+
+| Token                                 | Expands to                                                                              |
+|---------------------------------------|-----------------------------------------------------------------------------------------|
+| `@pulsar:javadoc:client@`             | `https://pulsar.apache.org/api/client/<version>/` — Java client Javadoc.                |
+| `@pulsar:javadoc:admin@`              | `https://pulsar.apache.org/api/admin/<version>/` — Java admin Javadoc.                  |
+| `@pulsar:javadoc:pulsar-functions@`   | `https://pulsar.apache.org/api/pulsar-functions/<version>/` — Functions Javadoc.        |
+| `@pulsar:apidoc:python@`              | Python client API docs URL for the version in context.                                  |
+| `@pulsar:apidoc:cpp@`                 | C++ client API docs URL for the version in context.                                     |
+
+#### Adding a new token
+
+To add a new variable, edit [src/config/pulsarVariables.ts](https://github.com/apache/pulsar-site/blob/main/src/config/pulsarVariables.ts): add an entry to the `Map` returned by `resolveTokens()` (key is the bare token name; the preprocessor wraps it as `@pulsar:<key>@` when matching). The same token then works in all four locations listed above.
+
 ## How-tos
 
 This section holds common how-tos about website maintenance and troubleshooting.
@@ -124,3 +198,5 @@ You can update it by clicking on one of the **✍️ Edit &lt;file_name&gt;** li
 * **Client feature matrix** [/docs/client-libraries/feature-matrix](pathname:///docs/client-libraries/feature-matrix)
   * [✍️ Edit matrix.js](https://github.com/apache/pulsar-site/edit/main/data/matrix.js)
   * [✍️ Edit client-feature-matrix/index.mdx](https://github.com/apache/pulsar-site/edit/main/docs/client-libraries/feature-matrixindex.mdx)
+
+
