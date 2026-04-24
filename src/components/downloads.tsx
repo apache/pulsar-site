@@ -11,6 +11,7 @@ import ReleaseTable from "@site/src/components/ReleaseTable";
 import ConnectorTable from "@site/src/components/ConnectorTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import OldReleaseTable from "@site/src/components/OldReleaseTable";
+import ClientReleasesTable from "@site/src/components/ClientReleasesTable";
 
 export function CurrentPulsarVersion(): JSX.Element {
     return <>{pulsarReleases[0]}</>
@@ -182,14 +183,17 @@ export function CppReleasesDownloadTable(): JSX.Element {
             const tarPath = `${url}apache-pulsar-client-cpp-${version}.tar.gz`
             return {
                 release: version,
-                link: url,
-                linkText: `apache-pulsar-cpp-${version}`,
-                asc: `${tarPath}.asc`,
-                sha512: `${tarPath}.sha512`
+                tarPath,
+                tarText: `apache-pulsar-client-cpp-${version}.tar.gz`,
+                tarAsc: `${tarPath}.asc`,
+                tarSha: `${tarPath}.sha512`,
+                directory: url,
+                releaseNote: `https://github.com/apache/pulsar-client-cpp/releases/tag/v${version}`,
+                binariesHint: "Pre-built DEB, RPM and APK packages (where published) live alongside the source tarball in the directory above.",
             }
         })
     return <div className="tailwind">
-        <ReleaseTable data={data}></ReleaseTable>
+        <ClientReleasesTable data={data}></ClientReleasesTable>
     </div>
 }
 
@@ -201,14 +205,16 @@ export function GoReleasesDownloadTable(): JSX.Element {
       const tarPath = `${url}apache-pulsar-client-go-${version}-src.tar.gz`
       return {
         release: version,
-        link: url,
-        linkText: `apache-pulsar-go-${version}`,
-        asc: `${tarPath}.asc`,
-        sha512: `${tarPath}.sha512`
+        tarPath,
+        tarText: `apache-pulsar-client-go-${version}-src.tar.gz`,
+        tarAsc: `${tarPath}.asc`,
+        tarSha: `${tarPath}.sha512`,
+        directory: url,
+        releaseNote: `https://github.com/apache/pulsar-client-go/releases/tag/v${version}`,
       }
     })
   return <div className="tailwind">
-    <ReleaseTable data={data}></ReleaseTable>
+    <ClientReleasesTable data={data}></ClientReleasesTable>
   </div>
 }
 
@@ -222,14 +228,17 @@ export function NodeReleasesDownloadTable(): JSX.Element {
       const tarPath = `${url}apache-pulsar-client-node-${version}.tar.gz`
       return {
         release: version,
-        link: url,
-        linkText: `apache-pulsar-node-${version}`,
-        asc: `${tarPath}.asc`,
-        sha512: `${tarPath}.sha512`
+        tarPath,
+        tarText: `apache-pulsar-client-node-${version}.tar.gz`,
+        tarAsc: `${tarPath}.asc`,
+        tarSha: `${tarPath}.sha512`,
+        directory: url,
+        releaseNote: `https://github.com/apache/pulsar-client-node/releases/tag/v${version}`,
+        binariesHint: "Platform-specific napi prebuilts (darwin/linux/win, arm64/x64, glibc/musl) are published alongside the source tarball in the directory above.",
       }
     })
   return <div className="tailwind">
-    <ReleaseTable data={data}></ReleaseTable>
+    <ClientReleasesTable data={data}></ClientReleasesTable>
   </div>
 }
 
@@ -242,14 +251,16 @@ export function PythonReleasesDownloadTable(): JSX.Element {
       const tarPath = `${url}pulsar-client-python-${version}.tar.gz`
       return {
         release: version,
-        link: url,
-        linkText: `apache-pulsar-python-${version}`,
-        asc: `${tarPath}.asc`,
-        sha512: `${tarPath}.sha512`
+        tarPath,
+        tarText: `pulsar-client-python-${version}.tar.gz`,
+        tarAsc: `${tarPath}.asc`,
+        tarSha: `${tarPath}.sha512`,
+        directory: url,
+        releaseNote: `https://github.com/apache/pulsar-client-python/releases/tag/v${version}`,
       }
     })
   return <div className="tailwind">
-    <ReleaseTable data={data}></ReleaseTable>
+    <ClientReleasesTable data={data}></ClientReleasesTable>
   </div>
 }
 
