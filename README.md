@@ -62,12 +62,12 @@ To reference the same values from React components, import from
 If the https://pulsar.apache.org website doesn't get updated, [check the latest GitHub Actions workflow run for the main branch](https://github.com/apache/pulsar-site/actions/workflows/ci-build-site.yml?query=branch%3Amain). If it succeeded, the problem could be that the [git history for the asf-site-next branch](https://github.com/apache/pulsar-site/commits/asf-site-next/) is too large and needs to be truncated. Here are the commands to perform that task:
 
 ```shell
-git clone -b asf-site-next https://github.com/apache/pulsar-site pulsar-site-static
+git clone --depth 1 -b asf-site-next https://github.com/apache/pulsar-site pulsar-site-static
 cd pulsar-site-static
-git checkout --orphan asf-site-next-reset
+git checkout --orphan asf-site-next-truncated
 git add -A
-git commit -m "History resetted"
-git push -f HEAD:asf-site-next
+git commit -m "History truncated"
+git push -f origin HEAD:asf-site-next
 ```
 
 ## Contact information
