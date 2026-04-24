@@ -56,17 +56,21 @@ Want your repository listed here? Click the "Edit this page" button at the botto
 
 :::
 
-#### .NET (C#/F#/VB)
+#### Alternative .NET (C#/F#/VB) client
+
+This is an alternative for Apache Pulsar project's [dotPulsar client](dotnet.md).
 
 | Project                                                                    | Description                                     | License                                    | Badges                                                                                                                                                                                                                                                   |
 |----------------------------------------------------------------------------|-------------------------------------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [pulsar-client-dotnet](https://github.com/fsprojects/pulsar-client-dotnet) | Apache Pulsar native client for .NET (C#/F#/VB) | [MIT](https://opensource.org/licenses/MIT) | ![GitHub Repo Stars](https://img.shields.io/github/stars/fsprojects/pulsar-client-dotnet?color=FEEA00&style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/fsprojects/pulsar-client-dotnet?color=7FD8BE&style=flat-square) |
+| [pulsar-client-dotnet](https://github.com/fsprojects/pulsar-client-dotnet) | An alternative Apache Pulsar native client for .NET (C#/F#/VB) | [MIT](https://opensource.org/licenses/MIT) | ![GitHub Repo Stars](https://img.shields.io/github/stars/fsprojects/pulsar-client-dotnet?color=FEEA00&style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/fsprojects/pulsar-client-dotnet?color=7FD8BE&style=flat-square) |
 
-#### Go
+#### Alternative Go client
+
+This is an alternative Apache Pulsar project's [Go client](go.md)
 
 | Project                                                         | Description                           | License                                                   | Badges                                                                                                                                                                                                                                   |
 |-----------------------------------------------------------------|---------------------------------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [pulsar-client-go](https://github.com/Comcast/pulsar-client-go) | A Go client library for Apache Pulsar | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) | ![GitHub Repo Stars](https://img.shields.io/github/stars/apache/pulsar-client-go?color=FEEA00&style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/apache/pulsar-client-go?color=7FD8BE&style=flat-square) |
+| [pulsar-client-go](https://github.com/Comcast/pulsar-client-go) | An alternative Go client library for Apache Pulsar | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) | ![GitHub Repo Stars](https://img.shields.io/github/stars/apache/pulsar-client-go?color=FEEA00&style=flat-square) ![GitHub Last Commit](https://img.shields.io/github/last-commit/apache/pulsar-client-go?color=7FD8BE&style=flat-square) |
 
 #### Haskell
 
