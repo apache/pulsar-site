@@ -23,6 +23,14 @@ The upgrade introduces the following breaking changes:
    | `bookkeeper.conf` | `statsProviderClass` | `org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider` | `org.apache.pulsar.metrics.prometheus.bookkeeper.PrometheusMetricsProvider` |
    | `zookeeper.conf` | `metricsProvider.className` | `org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider` | `org.apache.pulsar.metrics.prometheus.zookeeper.PrometheusMetricsProvider` |
 
+Users of the Apache Pulsar Helm chart prior to version 4.6.0 will need to set the `bookie.configData.statsProviderClass` key to `org.apache.pulsar.metrics.prometheus.bookkeeper.PrometheusMetricsProvider`:
+
+```yaml
+bookie:
+  configData:
+    statsProviderClass: "org.apache.pulsar.metrics.prometheus.bookkeeper.PrometheusMetricsProvider"
+```
+
 ### Library updates
 
 - [fix][sec] Upgrade BouncyCastle to 1.84 (CVE-2026-5588, CVE-2026-0636) ([#25569](https://github.com/apache/pulsar/pull/25569))
