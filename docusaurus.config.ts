@@ -34,10 +34,11 @@ try {
 // Versioned legacy URLs like /docs/<version>/client-libraries-<slug> are NOT
 // included here on purpose: plugin-client-redirects generates a stub HTML file
 // at every `from` path, which would create build/docs/<version>/client-libraries-*/
-// directories in every yarn build. The CI split-version-build.sh script (which
-// builds each version separately and then mv's build-<v>/<v> into build/docs/)
-// would then fail because build/docs/<v>/ is non-empty from those stubs. Those
-// versioned URLs are handled exclusively by static/.htaccess in production.
+// directories in every yarn build. The CI per-version build orchestrator
+// (tools/pytools/lib/execute/version_build.py) builds each version separately
+// and then folds build-<v>/<v> back into build/docs/; it would fail because
+// build/docs/<v>/ is non-empty from those stubs. Those versioned URLs are
+// handled exclusively by static/.htaccess in production.
 function clientLibrariesLegacyRedirects() {
   const slugs = [
     "java", "java-setup", "java-initialize", "java-use", "java-tracing",
