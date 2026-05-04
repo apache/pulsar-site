@@ -1,5 +1,5 @@
 ---
-id: administration-autorecovery
+id: administration-bk-autorecovery
 title: BookKeeper AutoRecovery
 sidebar_label: "BookKeeper AutoRecovery"
 description: Learn how BookKeeper AutoRecovery works in Pulsar, and how to configure, enable, disable, and monitor it.
@@ -13,10 +13,10 @@ AutoRecovery runs as two concurrent components within the `autorecovery` process
 
 ### Auditor
 
-The **Auditor** is a singleton node, elected via ZooKeeper leader election from all nodes participating in AutoRecovery. When a bookie fails or is reported unavailable, the Auditor:
+The **Auditor** is a singleton node, elected via metadata store leader election from all nodes participating in AutoRecovery. Pulsar's metadata store abstraction layer supports both ZooKeeper and Oxia as backends. When a bookie fails or is reported unavailable, the Auditor:
 
 1. Scans all ledgers to identify those that stored data on the failed bookie.
-2. Publishes rereplication tasks to the `/underreplicated/` ZooKeeper znode.
+2. Publishes rereplication tasks to the `/underreplicated/` path in the metadata store.
 
 Only one Auditor is active in a cluster at any time. If the current Auditor node fails, a new leader election takes place automatically.
 
@@ -24,8 +24,8 @@ Only one Auditor is active in a cluster at any time. If the current Auditor node
 
 A **Replication Worker** runs on every node participating in AutoRecovery. Each worker:
 
-1. Monitors the `/underreplicated/` ZooKeeper znode for tasks published by the Auditor.
-2. Acquires a ZooKeeper ephemeral lock on an available task (ensuring no two workers replicate the same fragment simultaneously).
+1. Monitors the `/underreplicated/` path in the metadata store for tasks published by the Auditor.
+2. Acquires an ephemeral lock on an available task (ensuring no two workers replicate the same fragment simultaneously).
 3. Copies the under-replicated ledger fragments to its local bookie to restore the configured replication factor.
 
 ## Deploy AutoRecovery
@@ -49,7 +49,6 @@ To start AutoRecovery as a background daemon:
 bin/pulsar-daemon start autorecovery
 ```
 
-Ensure [`zkServers`](reference-configuration.md#bookkeeper-zkServers) in `conf/bookkeeper.conf` points to your ZooKeeper cluster before starting.
 
 ## Configure AutoRecovery
 
@@ -123,7 +122,7 @@ Manual recovery requires the failed bookie to be permanently decommissioned. If 
 To enable Prometheus metrics on a bookie or AutoRecovery node, set the following in `conf/bookkeeper.conf`:
 
 ```properties
-statsProviderClass=org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider
+statsProviderClass=org.apache.pulsar.metrics.prometheus.bookkeeper.PrometheusMetricsProvider
 ```
 
 The following metrics are relevant to AutoRecovery:
