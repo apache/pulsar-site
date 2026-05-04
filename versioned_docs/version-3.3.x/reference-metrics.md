@@ -67,7 +67,7 @@ in the `bookkeeper.conf` configuration file.
 | bookie_entries_count | Gauge | The total number of entries stored in the bookie. |
 | bookie_write_cache_size | Gauge | The bookie write cache size (in bytes). |
 | bookie_read_cache_size | Gauge | The bookie read cache size (in bytes). |
-| bookie_DELETED_LEDGER_COUNT | Counter | The total number of ledgers deleted since the bookie has started. |
+| bookie_DELETED_LEDGER_TOTAL | Counter | The total number of ledgers deleted since the bookie has started. |
 | bookie_ledger_writable_dirs | Gauge | The number of writable directories in the bookie. |
 | bookie_flush | Gauge| The table flush latency of bookie memory. |
 | bookie_throttled_write_requests | Counter | The number of write requests to be throttled. |

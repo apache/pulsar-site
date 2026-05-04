@@ -27,129 +27,78 @@ try {
   //do nothing
 }
 
+// Bare /docs/client-libraries-<slug> URLs (no version segment) redirect to the
+// new /docs/client-libraries/<slug> location. In production these are also
+// covered by .htaccess; these static entries cover dev mode and static hosts.
+//
+// Versioned legacy URLs like /docs/<version>/client-libraries-<slug> are NOT
+// included here on purpose: plugin-client-redirects generates a stub HTML file
+// at every `from` path, which would create build/docs/<version>/client-libraries-*/
+// directories in every yarn build. The CI per-version build orchestrator
+// (tools/pytools/lib/execute/version_build.py) builds each version separately
+// and then folds build-<v>/<v> back into build/docs/; it would fail because
+// build/docs/<v>/ is non-empty from those stubs. Those versioned URLs are
+// handled exclusively by static/.htaccess in production.
+function clientLibrariesLegacyRedirects() {
+  const slugs = [
+    "java", "java-setup", "java-initialize", "java-use", "java-tracing",
+    "cpp", "cpp-setup", "cpp-initialize", "cpp-use",
+    "go", "go-setup", "go-initialize", "go-use",
+    "python", "python-setup", "python-initialize", "python-use",
+    "node", "node-setup", "node-initialize", "node-use", "node-configs",
+    "dotnet", "dotnet-setup", "dotnet-initialize", "dotnet-use",
+    "websocket", "rest",
+    "clients", "producers", "consumers", "readers", "tableviews", "schema",
+    "cluster-level-failover",
+  ];
+  return slugs.map((slug) => ({
+    from: `/docs/client-libraries-${slug}`,
+    to: `/docs/client-libraries/${slug}`,
+  }));
+}
+
 const {
-  siteUrl,
-  javadocUrl,
-  restApiUrl,
-  functionsApiUrl,
-  sourceApiUrl,
-  sinkApiUrl,
-  packagesApiUrl,
-  transactionsApiUrl,
-  lookupApiUrl,
-  githubUrl,
   githubSiteUrl,
   baseUrl,
-  restApiBaseUrlMapping
+  restApiBaseUrlMapping,
 } = require("./site-baseurls");
-
-const injectLinkParse = (prefix, name, path) => {
-  if (prefix == "javadoc") {
-    return {
-      link: javadocUrl + path,
-      text: name,
-    };
-  } else if (prefix == "github") {
-    return {
-      link: githubUrl + "/tree/master/" + path,
-      text: name,
-    };
-  } else if (prefix == "rest") {
-    return {
-      link: restApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "functions") {
-    return {
-      link: functionsApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "source") {
-    return {
-      link: sourceApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "sink") {
-    return {
-      link: sinkApiUrl + "#" + path,
-      text: name,
-    };
-  } else if (prefix == "packages") {
-    return {
-      link: packagesApiUrl + "#" + path,
-      text: name,
-    };
-  }
-
-  return {
-    link: path,
-    text: name,
-  };
-};
-
-const injectLinkParseForEndpoint = (info) => {
-  let [method, path, suffix] = info.split("|");
-
-  if (!suffix) {
-    suffix = "";
-  }
-
-  let restPath = path.split("/");
-  const restApiVersion = restPath[2];
-  const restApiType = restPath[3];
-  const restBaseUrl = restApiBaseUrlMapping[restApiType] || restApiUrl;
-
-  let restUrl;
-  if (suffix.indexOf("?version=") >= 0) {
-    const suffixAndVersion = suffix.split("?version=")
-    restUrl = "version=" + suffixAndVersion[1] + "&apiversion=" + restApiVersion + "#" + suffixAndVersion[0];
-    if (suffixAndVersion[0].startsWith("operation/")) {
-      path += suffixAndVersion[0].slice("operation".length)
-    }
-  } else {
-    restUrl = "version=master&apiversion=" + restApiVersion + "#" + suffix;
-    if (suffix.startsWith("operation/")) {
-      path += suffix.slice("operation".length)
-    }
-  }
-
-  return {
-    text: method + " " + path,
-    link: restBaseUrl + "?" + restUrl,
-  };
-};
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = async function createConfigAsync() {
+  const injectPreprocessor = (await import("./src/server/markdownPreprocessors/inject")).default;
+  const pulsarVariablesPreprocessor = (await import("./src/server/markdownPreprocessors/pulsarVariables")).default;
   return {
+    future: {
+      faster: {
+        swcJsLoader: true,
+        swcJsMinimizer: true,
+        swcHtmlMinimizer: true,
+        lightningCssMinimizer: true,
+        rspackBundler: true,
+        mdxCrossCompilerCache: true,
+      },
+    },
     title: "Apache Pulsar",
     tagline:
       "Apache Pulsar is a distributed, open source pub-sub messaging and streaming platform for real-time workloads, managing hundreds of billions of events per day.",
     url: "https://pulsar.apache.org",
     baseUrl: baseUrl,
     onBrokenLinks: "warn",
-    onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
     organizationName: "apache",
     projectName: "pulsar",
     trailingSlash: true,
     markdown: {
-      preprocessor: ({ filePath, fileContent }) => {
-        return fileContent.replaceAll(/{@inject:([^}]+)}/g, (_, p1) => {
-          const p1Trimmed = p1.trim();
-          const endpointPrefix = 'endpoint|';
-          let link, text;
-          if (p1Trimmed.startsWith(endpointPrefix)) {
-            // @ts-ignore
-            ({ link, text } = injectLinkParseForEndpoint(p1Trimmed.substring(endpointPrefix.length)));
-          } else {
-            const [prefix, name, path] = p1Trimmed.split(':');
-            ({ link, text } = injectLinkParse(prefix, name, path));
-          }
-          return `[${text}](${link})`; // Format as a markdown link
-        });
+      mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: "warn",
       },
+      preprocessor: (args) => injectPreprocessor({
+        ...args,
+        fileContent: pulsarVariablesPreprocessor(args),
+      }),
     },
+    themes: ['@docusaurus/theme-mermaid'],
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
@@ -157,8 +106,8 @@ module.exports = async function createConfigAsync() {
         announcementBar: {
           id: "summit",
           content: renderAnnouncementBar(
-            "✨ Apache Pulsar 4.1 is here! ✨",
-            "/blog/2025/09/09/announcing-apache-pulsar-4-1/"
+            "✨ Apache Pulsar 4.2 is here! ✨",
+            "/download/"
           ),
           backgroundColor: "#282826",
           textColor: "#fff",
@@ -204,6 +153,10 @@ module.exports = async function createConfigAsync() {
                 {
                   to: "/ecosystem/",
                   label: "Ecosystem",
+                },
+                {
+                  to: "/docs/client-libraries/",
+                  label: "Client Libraries",
                 }
               ],
             },
@@ -470,6 +423,11 @@ module.exports = async function createConfigAsync() {
               from: '/resources',
               to: '/articles',
             },
+            {
+              from: '/client-feature-matrix',
+              to: '/docs/client-libraries/feature-matrix',
+            },
+            ...clientLibrariesLegacyRedirects(),
           ],
         },
       ],
@@ -481,8 +439,6 @@ module.exports = async function createConfigAsync() {
           id: "contribute",
           path: "contribute",
           routeBasePath: "contribute",
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
           sidebarPath: require.resolve("./sidebarsDevelopment.js"),
           editUrl: `${githubSiteUrl}/edit/main`,
         }),
@@ -503,19 +459,20 @@ module.exports = async function createConfigAsync() {
         "content-docs",
         /** @type {import('@docusaurus/plugin-content-docs').Options} */
         ({
-          id: "security",
-          path: "security",
-          routeBasePath: "security",
-          sidebarPath: false,
+          id: "client-libraries",
+          path: "client-libraries",
+          routeBasePath: "docs/client-libraries",
+          editUrl: `${githubSiteUrl}/edit/main`,
+          sidebarPath: require.resolve("./sidebarsClientLibraries.js"),
         }),
       ],
       [
         "content-docs",
         /** @type {import('@docusaurus/plugin-content-docs').Options} */
         ({
-          id: "client-feature-matrix",
-          path: "client-feature-matrix",
-          routeBasePath: "client-feature-matrix",
+          id: "security",
+          path: "security",
+          routeBasePath: "security",
           sidebarPath: false,
         }),
       ],
@@ -540,6 +497,28 @@ module.exports = async function createConfigAsync() {
     scripts: [
       { src: "/js/sine-waves.min.js", async: true },
       "/js/matomo-agent.js",
+      '/js/custom-script.js',
+      {
+        async: true,
+        src: 'https://widget.kapa.ai/kapa-widget.bundle.js',
+        'data-website-id': '7da3a42b-98f7-4af5-85e9-771d51c21796',
+        'data-modal-title': 'Apache Pulsar AI Assistant',
+        'data-project-name': 'Apache Pulsar',
+        'data-project-logo': 'https://pbs.twimg.com/profile_images/875130220474359809/wFcLUbwd_400x400.jpg',
+        'data-project-color': '#FFFFFF',
+        'data-modal-open-by-default': 'false',
+        'data-bot-protection-mechanism': 'hcaptcha',
+        'data-modal-override-open-id': 'ask-ai-input',
+        'data-modal-override-open-class': 'search-input',
+        'data-user-analytics-fingerprint-enabled': 'true',
+        'data-button-text-color': '#136EC4',
+        'data-modal-example-questions-title': 'Try asking me...',
+        'data-modal-example-questions': 'How to create a topic?,How does message retention work?,What is a Pulsar broker?,How does geo-replication work?',
+        'data-modal-disclaimer': 'This is a custom LLM with access to all Pulsar documentation.',
+        'data-consent-required': true,
+        'data-consent-screen-disclaimer': "By clicking &quot;I agree, let's chat&quot;, you consent to the use of the AI assistant in accordance with kapa.ai's Privacy Policy. This service uses reCAPTCHA, which requires your consent to Google Privacy Policy and Terms of Service.",
+        'data-user-analytics-cookie-enabled': false,
+      }
     ],
     clientModules: [require.resolve("./matomoClientModule.ts")],
     stylesheets: [

@@ -16,7 +16,7 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
 const _ltsVersion = '4.0.x';
-const _maintainedVersions = ['4.1.x', '4.0.x', '3.3.x', '3.0.x'];
+const _maintainedVersions = ['4.2.x', '4.0.x', '3.0.x'];
 function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate
@@ -156,7 +156,8 @@ export default function DocVersionBanner({className}) {
       {() => {
         return versionMetadata.version !== _latestVersion &&
           versionMetadata.version !== _ltsVersion &&
-          location.pathname.startsWith("/docs") ? (
+          location.pathname.startsWith("/docs") &&
+          !location.pathname.startsWith("/docs/client-libraries") ? (
           <DocVersionBannerEnabled
             className={className}
             versionMetadata={versionMetadata}

@@ -133,6 +133,11 @@ The total number of messages bytes read from this topic.
   * `pulsar.topic` - The topic name.
   * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
 
+#### pulsar.broker.topic.publish.latency
+The latency in seconds for publishing messages.
+* Type: Histogram
+* Unit: `s`
+
 #### pulsar.broker.topic.publish.rate.limit.count
 The number of times the publish rate limit is triggered.
 * Type: Counter
@@ -821,6 +826,34 @@ The total number of mark delete operations for this ledger.
 * Attributes:
   * `pulsar.namespace` - The managed ledger namespace.
   * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.outgoing.latency
+End-to-end write latency, including time spent in the executor queue.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+
+#### pulsar.broker.managed_ledger.message.outgoing.ledger.latency
+End-to end write latency.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+
+#### pulsar.broker.managed_ledger.ledger.switch.latency
+Time taken to switch to a new ledger.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+
+#### pulsar.broker.managed_ledger.entry.size
+Size of entries written to the ledger.
+* Type: Histogram
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
 
 #### pulsar.broker.managed_ledger.inflight.read.limit
 Maximum number of bytes that can be retained by managed ledger data read from storage or cache.

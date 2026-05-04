@@ -1,6 +1,6 @@
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-supported_versions=$(node $SCRIPT_DIR/supported-versions.js)
+supported_versions=$(node "$SCRIPT_DIR/supported-versions.js")
 UPSTREAM="${UPSTREAM:-origin}"
 
 # Add these color definitions at the top of the file after UPSTREAM declaration
@@ -24,7 +24,7 @@ else
 fi
 
 function _cd_git_root() {
-    cd $SCRIPT_DIR/..
+    cd "$SCRIPT_DIR/.." || return
 }
 
 function docs_apply_patch_to_versioned_docs() {
@@ -45,12 +45,12 @@ function docs_apply_patch_to_versioned_docs() {
     local patchfile="${1:?Patch file is required}"
     shift
     _cd_git_root
-    cd versioned_docs
+    cd versioned_docs || return
     for version in $supported_versions; do
       local version_dir="version-${version}"
-      cd "$version_dir"
+      cd "$version_dir" || continue
       echo "Applying patch to $version_dir"
-      patch -f -N -V none -p$patch_strip_count < "$patchfile" || echo "Failed to apply patch to $version_dir"
+      patch -f -N -V none -p"$patch_strip_count" < "$patchfile" || echo "Failed to apply patch to $version_dir"
       cd ..
     done
   )
@@ -66,7 +66,8 @@ function docs_apply_last_commit_to_versioned_docs() {
       return 0
     fi
     _cd_git_root
-    local patchfile=$(mktemp)
+    local patchfile
+    patchfile=$(mktemp)
     git diff -u HEAD~1 -- docs/ > "$patchfile"
     docs_apply_patch_to_versioned_docs "$patchfile" "$@"
   )
@@ -82,8 +83,38 @@ function docs_apply_changes_to_versioned_docs() {
       return 0
     fi
     _cd_git_root
-    local patchfile=$(mktemp)
-    git diff -u $(git merge-base HEAD $UPSTREAM/main) -- docs/ > "$patchfile"
+    local patchfile
+    patchfile=$(mktemp)
+    git diff -u "$(git merge-base HEAD "$UPSTREAM/main")" -- docs/ > "$patchfile"
+    docs_apply_patch_to_versioned_docs "$patchfile" "$@"
+  )
+}
+
+function docs_apply_version_doc_change_to_docs() {
+  (
+    if [[ "$1" == "--desc" || "$1" == "--help" ]]; then
+      echo "Applies committed changes made to a versioned docs directory between current branch and upstream main to docs/ and all maintained versioned docs"
+      if [ "$1" == "--help" ]; then
+        echo "usage: $0 apply_version_doc_change_to_docs <version>"
+        echo "  e.g. $0 apply_version_doc_change_to_docs 3.3.x"
+      fi
+      return 0
+    fi
+    local version="${1:?Version is required (e.g., 3.3.x)}"
+    shift
+    _cd_git_root
+    local source_dir="versioned_docs/version-${version}"
+    if [ ! -d "$source_dir" ]; then
+      echo "Source directory $source_dir does not exist"
+      return 1
+    fi
+    local patchfile
+    patchfile=$(mktemp)
+    git diff -u "$(git merge-base HEAD "$UPSTREAM/main")" -- "$source_dir" \
+      | sed "s|versioned_docs/version-${version}/|docs/|g" \
+      > "$patchfile"
+    echo "Applying patch to docs/"
+    (cd docs && patch -f -N -V none -p2 < "$patchfile") || echo "Failed to apply patch to docs/"
     docs_apply_patch_to_versioned_docs "$patchfile" "$@"
   )
 }
@@ -110,7 +141,7 @@ function docs_supported_versions() {
     fi
     return 0
   fi
-  echo $supported_versions
+  echo "$supported_versions"
 }
 
 # lists all available functions in this tool
@@ -122,8 +153,8 @@ function docs_list_functions() {
     fi
     return 0
   fi
-  for function_name in $(declare -F | awk '{print $NF}' | sort | egrep '^docs_' | sed 's/^docs_//'); do
-    printf "${GREEN}%-20s${NC}\t%s\n" $function_name "$(eval "docs_${function_name}" --desc)"
+  for function_name in $(declare -F | awk '{print $NF}' | sort | grep -E '^docs_' | sed 's/^docs_//'); do
+    printf "${GREEN}%-20s${NC}\t%s\n" "$function_name" "$(eval "docs_${function_name}" --desc)"
   done  
 }
 
@@ -140,7 +171,7 @@ docs_function_name="docs_$1"
 shift
 
 if [[ "$(LC_ALL=C type -t "${docs_function_name}")" == "function" ]]; then
-  eval "$docs_function_name" "$@"
+  "$docs_function_name" "$@"
 else
   echo -e "${RED}Invalid docs tool function${NC}"
   echo -e "${BLUE}Available docs tool functions:${NC}"

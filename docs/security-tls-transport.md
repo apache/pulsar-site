@@ -474,7 +474,7 @@ asyncio.run(test())
 
 :::note
 
-In addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](client-libraries-websocket.md#security-settings).
+In addition to the required configurations in the `conf/client.conf` file, you need to configure more parameters in the `conf/broker.conf` file to enable TLS encryption on WebSocket service. For more details, see [security settings for WebSocket](/docs/client-libraries/websocket#security-settings).
 
 :::
 
@@ -484,7 +484,7 @@ In addition to the required configurations in the `conf/client.conf` file, you n
 
 ### Step 5: Configure CLI tools
 
-[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_reference@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
+[Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](/reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](/reference/#/@pulsar:version_reference@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
 
 To use mTLS encryption with Pulsar CLI tools, you need to add the following parameters to the `conf/client.conf` file.
 
@@ -665,7 +665,7 @@ If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
 
 ### Step 5: Configure CLI tools
 
-For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](pathname:///reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](pathname:///reference/#/@pulsar:version_reference@/pulsar-client/), use the `conf/client.conf` config file in a Pulsar installation.
+For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](/reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](/reference/#/@pulsar:version_reference@/pulsar-client/), use the `conf/client.conf` config file in a Pulsar installation.
 
 ```properties
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationKeyStoreTls

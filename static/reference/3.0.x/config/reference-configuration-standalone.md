@@ -1600,8 +1600,10 @@ If this time interval is exceeded, a snapshot will be taken.It will run simultan
 
 ### brokerDeleteInactivePartitionedTopicMetadataEnabled
 Metadata of inactive partitioned topic will not be automatically cleaned up by default.
-Note: If `allowAutoTopicCreation` and this option are enabled at the same time,
+Note 1: If `allowAutoTopicCreation` and this option are enabled at the same time,
 it may appear that a partitioned topic has just been deleted but is automatically created as a non-partitioned topic.
+Note 2: Activating bidirectional geo-replication under global ZooKeeper configuration may lead to schema remnants and abnormal topic-level policies.
+Note 3: Activating bidirectional geo-replication under global configuration ZooKeeper may lead to a consumption issue.
 
 **Type**: `boolean`
 
@@ -2009,7 +2011,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
@@ -3757,6 +3759,17 @@ Enable or disable strict bookie affinity.
 
 **Category**: Server
 
+### strictlyVerifySubscriptionName
+If 'strictSubscriptionNameVerification' is true, the new subscription name can only contain (a-zA-Z_0-9) and these special chars -=:.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### systemTopicEnabled
 Enable or disable system topic.
 
@@ -4500,7 +4513,9 @@ The threshold to triggering automatic offload to long term storage
 **Category**: Storage (Ledger Offloading)
 
 ### managedLedgerUnackedRangesOpenCacheSetEnabled
-Use Open Range-Set to cache unacked messages (it is memory efficient but it can take more cpu)
+When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
+
+RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
 
 **Type**: `boolean`
 
@@ -4724,6 +4739,17 @@ How frequently to flush the cursor positions that were accumulated due to rate l
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerCursorResetLedgerCloseTimestampMaxClockSkewMillis
+When resetting a subscription by timestamp, the broker will use the ledger closing timestamp metadata to determine the range of ledgers to search for the message where the subscription position is reset to.  Since by default, the search condition is based on the message publish time provided by the  client at the publish time, there will be some clock skew between the ledger closing timestamp  metadata and the publish time. This configuration is used to set the max clock skew between the ledger closing timestamp and the message publish time for finding the range of ledgers to open for searching. The default value is 60000 milliseconds (60 seconds). When set to -1, the broker will not use the ledger closing timestamp metadata to determine the range of ledgers to search for the message.
+
+**Type**: `int`
+
+**Default**: `60000`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerCursorRolloverTimeInSeconds
 Max time before triggering a rollover on a cursor ledger
 
@@ -4815,6 +4841,17 @@ Time to rollover ledger for inactive topic (duration without any publish on that
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerInactiveOffloadedLedgerEvictionTimeSeconds
+Time to evict inactive offloaded ledger for inactive topic. Disable eviction with value 0 (Default value 600)
+
+**Type**: `int`
+
+**Default**: `600`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerInfoCompressionType
 ManagedLedgerInfo compression type, option values (NONE, LZ4, ZLIB, ZSTD, SNAPPY). 
 If value is invalid or NONE, then save the ManagedLedgerInfo bytes data directly.
@@ -4846,6 +4883,19 @@ Maximum backlog entry difference to prevent caching entries that can't be reused
 **Default**: `1000`
 
 **Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxBatchDeletedIndexToPersist
+Maximum number of partially acknowledged batch messages per subscription that will have their batch deleted indexes persisted. Batch deleted index state is handled when acknowledgmentAtBatchIndexLevelEnabled=true.
+
+When this limit is exceeded, remaining batch message containing the batch deleted indexes will only be tracked in memory. In case of broker restarts or load balancing events, the batch deleted indexes will be cleared while redelivering the messages to consumers.
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5048,7 +5098,9 @@ Default is ``.
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerPersistIndividualAckAsLongArray
-Whether persist cursor ack stats as long arrays, which will compress the data and reduce GC rate
+When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
+
+NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
 
 **Type**: `boolean`
 

@@ -129,6 +129,17 @@ TLS trusted certificate file for internal client, used by the internal client to
 
 **Category**: Authentication
 
+### strictAuthMethod
+Strictly enforce authentication method. If specified, Pulsar will only attempt to authenticate with the provided method. If no method is provided, authentication fails.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Authentication
+
 ### anonymousUserRole
 When this parameter is not empty, unauthenticated users perform as anonymousUserRole
 
@@ -332,6 +343,17 @@ Max HTTP requests per seconds allowed. The excess of requests will be rejected w
 **Type**: `double`
 
 **Default**: `100.0`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpServerIdleTimeout
+Idle timeout for HTTP server connections in milliseconds.
+
+**Type**: `int`
+
+**Default**: `30000`
 
 **Dynamic**: `false`
 
@@ -1016,6 +1038,17 @@ Option to override the auto-detected network interfaces max speed
 
 **Category**: Load Balancer
 
+### loadBalancerOverrideBrokerNics
+Option to override the auto-detected network interfaces
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerReportUpdateMaxIntervalMinutes
 Min delay of load report to collect, in minutes
 
@@ -1315,6 +1348,17 @@ If true, aggregate publisher stats of PartitionedTopicStats by producerName
 
 **Category**: Metrics
 
+### allowedTopicPropertyKeysForMetrics
+A comma-separated list of Topic Property keys that are allowed to be exposed as metrics.Only keys explicitly listed here will be exposed.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### authenticateMetricsEndpoint
 Whether the '/metrics' endpoint requires authentication. Defaults to false.'authenticationEnabled' must also be set for this to take effect.
 
@@ -1339,6 +1383,17 @@ Enable expose the broker bundles metrics.
 
 ### exposeConsumerLevelMetricsInPrometheus
 If true, export consumer level metrics otherwise namespace level
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
+### exposeCustomTopicMetricLabelsEnabled
+Enable or disable custom topic metric labels feature. If enabled, custom metric labels can be set on topics and will be exposed in metrics. Default is false.
 
 **Type**: `boolean`
 
@@ -1983,7 +2038,18 @@ On Shared and KeyShared subscriptions, if all available messages in the subscrip
 **Category**: Policies
 
 ### enableBrokerSideSubscriptionPatternEvaluation
-Enables evaluating subscription pattern on broker side.
+Enables evaluating subscription pattern on broker side. Note: This config no longer controls watching topic list. Please use `enableBrokerTopicListWatcher` to control that behavior.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### enableBrokerTopicListWatcher
+Enables watching topic add/remove events on broker side for subscription pattern evaluation.
 
 **Type**: `boolean`
 
@@ -2192,6 +2258,72 @@ Whether to enable precise time based backlog quota check. Enabling precise time 
 
 **Category**: Policies
 
+### pulsarChannelPauseReceivingCooldownMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a time window to avoid overwhelming due to the backlog of requests. This parameter defines how long the rate limiting should last, in millis. Once the bytes that are waiting to be sent out reach the "pulsarChannelWriteBufferHighWaterMark"， the timer will be reset. Setting a negative value will disable the rate limiting.
+
+**Type**: `int`
+
+**Default**: `5000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPeriodMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time defined by pulsarChannelPauseReceivingCooldownMs to avoid overwhelming due to the backlog of requests. This parameter defines the period of the rate limiter in milliseconds. If the rate limit period is set to 1000, then the unit is requests per 1000 milliseconds. When it's 10, the unit is requests per every 10ms.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPermits
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time to avoid overwhelming due to the backlog of requests. This parameter defines how many requests should be allowed in the rate limiting period.
+
+**Type**: `int`
+
+**Default**: `5`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingRequestsIfUnwritable
+If enabled, the broker will pause reading from the channel to deal with new request once the writer buffer is full, until it is changed to writable.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferHighWaterMark
+It relates to configuration "WriteBufferHighWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer exceeds this value, channel writable state will start to return "false".
+
+**Type**: `int`
+
+**Default**: `65536`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferLowWaterMark
+It relates to configuration "WriteBufferLowWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer is smaller than this value, channel writable state will start to return "true".
+
+**Type**: `int`
+
+**Default**: `32768`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### resourceUsageTransportClassName
 Default policy for publishing usage reports to system topic is disabled.This enables publishing of usage reports
 
@@ -2204,7 +2336,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
@@ -2620,6 +2752,17 @@ The schema compatibility strategy in broker level
 
 **Category**: Schema
 
+### schemaJsonAllowLegacyJacksonFormat
+Whether to allow legacy Jackson JsonSchema format for SchemaType.JSON schema definitions. When false (default), only valid Apache Avro schema format is accepted for SchemaType.JSON, consistent with what the consumer side requires. When true, the pre-2.1 backward-compatible behavior is preserved for deployments that still have topics with legacy-format schemas. See PIP-464 for details.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Schema
+
 ### schemaRegistryCompatibilityCheckers
 The list compatibility checkers to be used in schema registry
 
@@ -2697,17 +2840,6 @@ Opt-out of topic-existence check when setting permissions
 
 **Category**: Server
 
-### allowAutoTopicCreationWithLegacyNamingScheme
-If 'allowAutoTopicCreation' is true and the name of the topic contains 'cluster',the topic cannot be automatically created.
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-**Dynamic**: `true`
-
-**Category**: Server
-
 ### allowOverrideEntryFilters
 Whether allow topic level entry filters policies overrides broker configuration.
 
@@ -2716,6 +2848,17 @@ Whether allow topic level entry filters policies overrides broker configuration.
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### authenticationRoleLoggingAnonymizer
+Defines how the broker will anonymize the role and originalAuthRole before logging. Possible values are: NONE (no anonymization), REDACTED (replaces with '[REDACTED]'), hash:SHA256 (hashes using SHA-256), and hash:MD5 (hashes using MD5). Default is NONE.
+
+**Type**: `java.lang.String`
+
+**Default**: `NONE`
+
+**Dynamic**: `false`
 
 **Category**: Server
 
@@ -3676,6 +3819,78 @@ The maximum number of tenants that each pulsar cluster can create.This configura
 
 **Category**: Server
 
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### metadataStoreAllowReadOnlyOperations
 Is metadata store read-only operations.
 
@@ -3759,6 +3974,17 @@ Metadata store operation timeout in seconds.
 **Type**: `int`
 
 **Default**: `30`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### metadataStoreSerDesThreads
+The number of threads used for serializing and deserializing data to and from the metadata store
+
+**Type**: `int`
+
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -3890,6 +4116,17 @@ If true, (and ModularLoadManagerImpl is being used), the load manager will attem
 
 **Category**: Server
 
+### pulsarResourcesExtendedClassName
+The class name of the PulsarResourcesExtended implementation. This class must implement org.apache.pulsar.broker.PulsarResourcesExtended.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.DefaultPulsarResourcesExtended`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### replicatedSubscriptionsSnapshotFrequencyMillis
 Frequency of snapshots for replicated subscriptions tracking.
 
@@ -3906,7 +4143,7 @@ Max number of snapshot to be cached per subscription.
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `30`
 
 **Dynamic**: `false`
 
@@ -5215,6 +5452,17 @@ Write quorum (Qw) size, Replication factor for storing entries (messages) in a l
 **Type**: `int`
 
 **Default**: `2`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerDeleteMaxConcurrentRequests
+Max number of concurrent requests for deleting ledgers at broker level
+
+**Type**: `int`
+
+**Default**: `1000`
 
 **Dynamic**: `false`
 

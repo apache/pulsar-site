@@ -57,7 +57,8 @@ String audience = "https://dev-kt-aa9ne.us.auth0.com/api/v2/";
 PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar://broker.example.com:6650/")
     .authentication(
-        AuthenticationFactoryOAuth2.clientCredentials(issuerUrl, credentialsUrl, audience))
+        AuthenticationFactoryOAuth2.clientCredentialsBuilder.issuerUrl(issuerUrl)
+          .credentialsUrl(credentialsUrl).audience(audience).build())
     .build();
 ```
 
@@ -223,7 +224,7 @@ bin/pulsar-perf produce --service-url pulsar+ssl://streamnative.cloud:6651 \
 * Set the `admin-url` parameter to the Web service URL. A Web service URL is a combination of the protocol, hostname and port ID, such as `pulsar://localhost:6650`.
 * Set the `privateKey`, `issuerUrl`, and `audience` parameters to the values based on the configuration in the key file. For details, see [authentication types](#authentication-types).
 
-#### Authentication types
+## Authentication types
 
 Currently, Pulsar clients only support the `client_credentials` authentication type. The authentication type determines how to obtain an access token through an OAuth 2.0 authorization service.
 
@@ -236,6 +237,10 @@ The following table outlines the parameters of the `client_credentials` authenti
 | `privateKey` | The URL to the JSON credentials file.  | Support the following pattern formats: <br /> <li> `file:///path/to/file` </li><li>`file:/path/to/file` </li><li> `data:application/json;base64,<base64-encoded value>` </li>| Required |
 | `audience`  | The OAuth 2.0 "resource server" identifier for a Pulsar cluster. | `https://broker.example.com` | Optional |
 | `scope` |  The scope of an access request. <br />For more information, see [access token scope](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3). | api://pulsar-cluster-1/.default | Optional |
+| `connectTimeout` | The HTTP connection timeout with [java.time.Duration](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)) format. Default value: `PT10S`. Only implemented in java client. | PT10S | Optional |
+| `readTimeout` | The HTTP read timeout with [java.time.Duration](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)) format. Default value: `PT30S`. Only implemented in java client. | PT30S | Optional |
+| `trustCertsFilePath` | The path to the file containing the trusted certificate(s) of the token issuer. If not set, uses the default trust store of the JVM. Only implemented in java client. | /path/to/file | Optional |
+| `wellKnownMetadataPath` | The path to the authorization server metadata. If not set, uses the well-known URI suffix of OIDC. If you use `/.well-known/openid-configuration`, the preconfigured `AuthenticationOAuth2StandardAuthzServer` class and `clientCredentialsWithStandardAuthzServerBuilder` builder is useful. Only implemented in java client.| /.well-known/path | Optional |
 
 The credentials file `credentials_file.json` contains the service account credentials used with the client authentication type. The following is an example of the credentials file. The authentication type is set to `client_credentials` by default. And the fields "client_id" and "client_secret" are required.
 

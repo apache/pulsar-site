@@ -109,7 +109,7 @@ pulsar-admin namespaces set-offload-threshold --size 10M my-tenant/my-namespace
 
 :::tip
 
-For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about the `pulsar-admin namespaces set-offload-threshold options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -139,7 +139,7 @@ To manually trigger the filesystem offloader via CLI tools, you need to specify 
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+  For more information about the `pulsar-admin topics offload options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 
@@ -184,7 +184,7 @@ To manually trigger the filesystem offloader via CLI tools, you need to specify 
 
   :::tip
 
-  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+  For more information about the `pulsar-admin topics offload-status options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 

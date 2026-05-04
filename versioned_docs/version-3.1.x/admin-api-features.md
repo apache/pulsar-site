@@ -35,6 +35,6 @@ Others| - Proxy <br/><br/> - Resource groups <br/><br/> - Resource quotas | Oper
 
 - To check the detailed usage, see the API references below.
 
-  - [Java admin API](/api/admin/)
+  - [Java admin API](@pulsar:javadoc:admin@/)
 
   - [REST API](reference-rest-api-overview.md)

@@ -5,7 +5,7 @@ sidebar_label: "Clients"
 description: Get a comprehensive understanding of client APIs with language bindings for Java, C++, Go, Python, Node.js and C# in Pulsar.
 ---
 
-Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [C++](client-libraries-cpp.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [Node.js](client-libraries-node.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
+Pulsar exposes a client API with language bindings for [Java](pathname:///docs/client-libraries/java), [C++](pathname:///docs/client-libraries/cpp), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python), [Node.js](pathname:///docs/client-libraries/node) and [C#](pathname:///docs/client-libraries/dotnet). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
 
 Pulsar client libraries support transparent reconnection and/or connection failover to brokers, queuing of messages until acknowledged by the broker, and heuristics such as connection retries with backoff.
 
@@ -13,12 +13,12 @@ Pulsar client libraries support transparent reconnection and/or connection failo
 
 Before an application creates a producer/consumer, the Pulsar client library needs to initiate a setup phase including two steps:
 
-1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker. 
+1. The client attempts to determine the owner of the topic by sending an HTTP lookup request to the broker.
 
     The request could reach one of the active brokers which, by looking at the (cached) Zookeeper metadata knows who is serving the topic or, in case nobody is serving it, tries to assign it to the least loaded broker.
 
-2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it. 
-    
+2. Once the client library has the broker address, it creates a TCP connection (or reuses an existing connection from the pool) and authenticates it.
+
     Within this connection, the client and broker exchange binary commands from a custom protocol. At this point, the client sends a command to create producer/consumer to the broker, which will comply after having validated the authorization policy.
 
 Whenever the TCP connection breaks, the client immediately re-initiates this setup phase and keeps trying with exponential backoff to re-establish the producer or consumer until the operation succeeds.
@@ -26,6 +26,12 @@ Whenever the TCP connection breaks, the client immediately re-initiates this set
 ## Producer
 
 A producer is a process that attaches to a topic and publishes messages to a Pulsar [broker](concepts-architecture-overview.md#broker). The Pulsar broker processes the messages.
+
+### Producer naming
+
+Every producer has a name that **must be unique across all Pulsar clusters**. If you do not explicitly assign a name when creating a producer, Pulsar automatically generates a globally unique name. If you choose to set a name explicitly, the broker enforces that only one producer with that name can be publishing on a topic at any given time — attempting to create a second producer with the same name on the same topic will fail.
+
+Explicitly naming producers is required when using [message deduplication](cookbooks-deduplication.md), because Pulsar uses the producer name together with the sequence ID to identify and filter duplicate messages. It is also useful for debugging and monitoring, since the producer name appears in metrics and admin stats.
 
 ### Send mode
 
@@ -54,7 +60,7 @@ For more information, see [PIP 68: Exclusive Producer](https://github.com/apache
 
 :::
 
-You can set producer access mode through [Java Client API](/api/client/). For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
+You can set producer access mode through [Java Client API](@pulsar:javadoc:client@/). For more information, see `ProducerAccessMode` in [ProducerBuilder.java](https://github.com/apache/pulsar/blob/fc5768ca3bbf92815d142fe30e6bfad70a1b4fc6/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/ProducerBuilder.java) file.
 
 
 ## Consumer
@@ -63,7 +69,7 @@ A consumer is a process that attaches to a topic via a subscription and then rec
 
 ![Message processing workflow of a consumer in Pulsar](/assets/consumer.svg)
 
-A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](pathname:///reference/#/@pulsar:version_reference@/client/client-configuration-consumer?id=receiverqueuesize) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
+A consumer sends a [flow permit request](developing-binary-protocol.md#flow-control) to a broker to get messages. There is a queue at the consumer side to receive messages pushed from the broker. You can configure the queue size with the [`receiverQueueSize`](/reference/#/@pulsar:version_reference@/client/client-configuration-consumer?id=receiverqueuesize) parameter. The default size is `1000`). Each time `consumer.receive()` is called, a message is dequeued from the buffer.
 
 ### Receive mode
 
@@ -76,7 +82,7 @@ Receive mode is a mechanism determining whether messages are received from [brok
 
 ### Listener
 
-Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries provide listener implementation for consumers. For example, the [Java client](pathname:///docs/client-libraries/java) provides a [MesssageListener](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ## Reader
 

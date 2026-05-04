@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
-> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](@pulsar:javadoc:admin@/).
 
 **Pulsar Functions** are lightweight compute processes that
 
@@ -31,9 +31,9 @@ Functions can be managed via the following methods.
 
 Method | Description
 ---|---
-**Admin CLI** | The `functions` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool.
+**Admin CLI** | The `functions` command of the [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/) tool.
 **REST API** |The `/admin/v3/functions` endpoint of the admin {@inject: rest:REST:/} API.
-**Java Admin API**| The `functions` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md).
+**Java Admin API**| The `functions` method of the `PulsarAdmin` object in the [Java API](pathname:///docs/client-libraries/java).
 
 ## Function resources
 

@@ -29,6 +29,9 @@ gh auth login
 # Replace 3.0.6 with the target version tag
 VERSION_WITHOUT_RC=3.0.6
 PREVIOUS_VERSION=3.0.5
+```
+
+```bash
 # Replace apache/pulsar with the component repo
 ./scripts/register_new_version.py $VERSION_WITHOUT_RC $PREVIOUS_VERSION $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
 ```
@@ -82,6 +85,8 @@ Copying from the clipboard to the release notes file
 First, move back to the pulsar-site directory, then:
 
 ```shell
+# don't copy this command to clipboard since it will replace the content there
+# write this to the command line
 pbpaste >> release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
 ```
 
@@ -105,9 +110,17 @@ If you are releasing multiple maintenance versions at once, you can use another 
 
 Copy the "Client" and applicable entries from "Library updates" into the client-java release notes.
 
+## Update release notes in GitHub releases
+
+Copy the file content to clipboard and paste to correct location by editing the release notes at https://github.com/apache/pulsar/releases
+
+```shell
+cat release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md | pbcopy
+```
+
 ## Update the release note page
 
-The following steps are handled by the script `./scripts/generate_release_notes.py`.
+The following steps were handled by the script `./scripts/register_new_version.py`.
 
 1. Copy the related release notes entries and add a [versioned release note file](https://github.com/apache/pulsar-site/tree/main/release-notes/versioned).
 2. Update the [version metadata files](https://github.com/apache/pulsar-site/tree/main/data) (`release-*.js`). For apache/pulsar releases, this means updating `release-java.js` (Java client) and `release-pulsar.js` (Pulsar).

@@ -81,7 +81,7 @@ services:
       - clusterName=cluster-a
       - zkServers=zookeeper:2181
       - metadataServiceUri=metadata-store:zk:zookeeper:2181
-      # otherwise every time we run docker compose uo or down we fail to start due to Cookie
+      # otherwise every time we run docker compose up or down we fail to start due to Cookie
       # See: https://github.com/apache/bookkeeper/blob/405e72acf42bb1104296447ea8840d805094c787/bookkeeper-server/src/main/java/org/apache/bookkeeper/bookie/Cookie.java#L57-68
       - advertisedAddress=bookie
       - BOOKIE_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
@@ -126,13 +126,26 @@ services:
 
 ## Step 2: Create a Pulsar cluster
 
-As preparation, create data directories and change the data directory ownership to uid(10000) which is the default user id used in the Pulsar Docker container.
+As preparation, create the data directories that the `compose.yml` file will bind-mount into the Pulsar containers.
+
+On Linux, the mounted directories need to be owned by uid `10000` -- the default user inside the Pulsar Docker container -- so the containers can write to them:
 
 ```bash
 sudo mkdir -p ./data/zookeeper ./data/bookkeeper
-# this step might not be necessary on other than Linux platforms
 sudo chown -R 10000 data
 ```
+
+:::note macOS and Windows (Docker Desktop)
+
+On macOS and Windows, Docker Desktop runs containers inside a Linux VM and handles uid remapping for bind mounts for you, so the `chown -R 10000` step is not required and running it with `sudo` will typically fail or leave the files in a state that prevents `docker compose up` from starting cleanly (the bookie/zookeeper containers fail with permission errors on `./data/...`).
+
+If you see permission errors on startup, remove the `./data` directory (or reset its ownership to your user) and create it without `chown`:
+
+```bash
+mkdir -p ./data/zookeeper ./data/bookkeeper
+```
+
+:::
 
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 

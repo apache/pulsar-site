@@ -44,6 +44,7 @@ class ReleaseItem:
 class PulsarReleaseReorderer:
     def __init__(self):
         self.sections = [
+            "Approved PIPs",
             "Library updates",
             "Broker", 
             "Client",
@@ -108,6 +109,9 @@ class PulsarReleaseReorderer:
         # Check if line contains "upgrade" (case insensitive) - always goes to Library updates
         if "upgrade" in item.full_line.lower():
             return 'Library updates'
+        
+        if "[pip]" in item.full_line.lower():
+            return 'Approved PIPs'
         
         # Use component-based heuristics
         if item.component:

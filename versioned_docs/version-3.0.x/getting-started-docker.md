@@ -61,14 +61,14 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 :::tip
 
-* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 * When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::
 
 ## Use Pulsar in Docker
 
-Pulsar offers a variety of [client libraries](client-libraries.md), such as [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md).
+Pulsar offers a variety of [client libraries](pathname:///docs/client-libraries/), such as [Java](pathname:///docs/client-libraries/java), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python), [C++](pathname:///docs/client-libraries/cpp).
 
 If you're running a local standalone cluster, you can use one of these root URLs to interact with your cluster:
 * `pulsar://localhost:6650`

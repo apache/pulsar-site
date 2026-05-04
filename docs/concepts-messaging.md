@@ -28,7 +28,7 @@ Messages are the basic "unit" of Pulsar. They're what producers publish to topic
 | Value / data payload | The data carried by the message. All Pulsar messages contain raw bytes, although message data can also conform to data [schemas](schema-get-started.md).                                                                                                                                                                                                                                                                   |
 | Key                  | The key (string type) of the message. It is a short name of message key or partition key. Messages are optionally tagged with keys, which is useful for features like [topic compaction](concepts-topic-compaction.md).                                                                                                                                                                                                    |
 | Properties           | An optional key/value map of user-defined properties.                                                                                                                                                                                                                                                                                                                                                                      |
-| Producer name        | The name of the producer who produces the message. If you do not specify a producer name, the default name is used.                                                                                                                                                                                                                                                                                                        |
+| Producer name        | The name of the producer who produces the message. If you do not specify a producer name, Pulsar automatically generates a globally unique name. If you explicitly assign a name, it **must be unique across all Pulsar clusters**, otherwise the producer will fail to create. The broker enforces that only one producer with the same name can be publishing on a topic at any given time. See [Producer naming](concepts-clients.md#producer-naming) for details. |
 | Topic name           | The name of the topic that the message is published to.                                                                                                                                                                                                                                                                                                                                                                    |
 | Schema version       | The version number of the schema that the message is produced with.                                                                                                                                                                                                                                                                                                                                                        |
 | Sequence ID          | Each Pulsar message belongs to an ordered sequence on its topic. The sequence ID of a message is initially assigned by its producer, indicating its order in that sequence, and can also be customized.<br />Sequence ID can be used for message deduplication. If `brokerDeduplicationEnabled` is set to `true`, the sequence ID of each message is unique within a producer of a topic (non-partitioned) or a partition. |
@@ -153,6 +153,16 @@ The message redelivery behavior should be as follows.
 :::note
 
 If batching is enabled, all messages in one batch are redelivered to the consumer.
+
+:::
+
+:::caution Redelivery counter is not persisted
+
+With `negativeAcknowledge`, the redelivery counter is kept **only in memory**. It resets to zero whenever the broker closes the subscription dispatcher — which happens on broker restart, bundle unload/rebalance, topic unload, or consumer disconnect.
+
+As a result, `DeadLetterPolicy.maxRedeliverCount` **may never be reached** and failing messages can be redelivered indefinitely without reaching the [dead letter topic](#dead-letter-topic).
+
+If your application needs a reliable retry limit, use [`reconsumeLater`](#retry-letter-topic) with `enableRetry(true)` instead — the retry count is persisted as a message property and survives all of the above events.
 
 :::
 
@@ -315,7 +325,7 @@ consumer.reconsumeLater(msg, customProperties, 3, TimeUnit.SECONDS);
 :::note
 
 *  Currently, retry letter topic is enabled in Shared subscription types.
-*  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a large number of retries with a configurable retry interval. Because messages in the retry letter topic are persisted to BookKeeper, while messages that need to be retried due to negative acknowledgment are cached on the client side.
+*  Compared with negative acknowledgment, retry letter topic is more suitable for messages that require a reliable retry limit. Messages in the retry letter topic have their retry count persisted as a message property, while the redelivery counter used by `negativeAcknowledge` is kept only in memory and [can be reset unexpectedly](#negative-acknowledgment). This makes `reconsumeLater` with `enableRetry(true)` the only mechanism that guarantees `maxRedeliverCount` is honored and the [dead letter topic](#dead-letter-topic) is eventually reached.
 
 :::
 
@@ -393,6 +403,12 @@ Consumer<byte[]> consumer = pulsarClient.newConsumer(Schema.BYTES)
 ```
 
 Dead letter topic serves message redelivery, which is triggered by [acknowledgment timeout](#acknowledgment-timeout) or [negative acknowledgment](#negative-acknowledgment) or [retry letter topic](#retry-letter-topic).
+
+:::caution maxRedeliverCount may not be honored with negativeAcknowledge
+
+Without `enableRetry(true)`, the redelivery counter that drives `maxRedeliverCount` is not persisted and [can be reset unexpectedly](#negative-acknowledgment). To guarantee that failing messages eventually reach the dead letter topic, use [`reconsumeLater`](#retry-letter-topic) with `enableRetry(true)`.
+
+:::
 
 :::note
 
@@ -495,7 +511,7 @@ To enable message chunking, set the `chunkingEnabled` parameter to `true` when c
 
 :::note
 
-If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](/api/client/).
+If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](@pulsar:javadoc:client@/).
 
 :::
 
@@ -634,9 +650,9 @@ A consumer is selected by running a module operation `mod (partition index, cons
 
   For example, in the diagram below, there are 4 non-partitioned topics and 2 consumers.
 
-  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to consumer B. Consumer A is their stand-by consumer.
+  - The non-partitioned topic 1 and non-partitioned topic 4 are assigned to Consumer A. Consumer B is their stand-by consumer.
 
-  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to consumer A. Consumer B is their stand-by consumer.
+  - The non-partitioned topic 2 and non-partitioned topic 3 are assigned to Consumer B. Consumer A is their stand-by consumer.
 
   ![Workflow of failover subscription type in Pulsar](/assets/pulsar-failover-subscriptions-3.svg)
 
@@ -657,6 +673,14 @@ Shared subscriptions do not guarantee message ordering or support cumulative ack
 #### Key_Shared
 
 The Key_Shared subscription type in Pulsar allows multiple consumers to attach to the same subscription. But different with the Shared type, messages in the Key_Shared type are delivered in distribution across consumers and messages with the same key or same ordering key are delivered to only one consumer. No matter how many times the message is re-delivered, it is delivered to the same consumer.
+
+:::note Producer requirements for Key_Shared
+
+When using Key_Shared subscriptions, producers **must** either **disable batching** or **use key-based batching** (e.g., `BatcherBuilder.KEY_BASED` in Java). The default batching strategy may pack messages with different keys into the same batch, which breaks Key_Shared routing because the broker uses the first message's key to route the entire batch.
+
+See [Batching for Key_Shared Subscriptions](#batching-for-key_shared-subscriptions) for details and code examples.
+
+:::
 
 ![Key_Shared subscription type in Pulsar](/assets/pulsar-key-shared-subscriptions.svg)
 
@@ -1060,11 +1084,11 @@ When you use Key_Shared subscriptions, be aware that:
 
 #### What is a subscription mode
 
-The subscription mode indicates the cursor belongs to durable type or non-durable type.
+The subscription mode indicates whether the cursor belongs to durable type or non-durable type.
 
 - When a subscription is created, an associated cursor is created to record the last consumed position.
 
-- When a consumer of the subscription restarts, it can continue consuming from the last message it consumes.
+- When a consumer of the subscription restarts, it can continue consuming from the last message it consumed.
 
 | Subscription mode | Description                                                                                                                                                                                                                                                                   | Note                                                                                                                                                                |
 |:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1161,7 +1185,7 @@ Consumer<byte[]> someTopicsConsumer = pulsarClient.newConsumer()
                 .subscribe();
 ```
 
-For code examples, see [Java](client-libraries-java.md#multi-topic-subscriptions).
+For code examples, see [Subscribe to multi-topics](/docs/client-libraries/consumers#subscribe-to-multi-topics).
 
 ## Partitioned topics
 
@@ -1187,19 +1211,19 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines each message should be published to which partition or which internal topic.
 
-There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
+There are three [MessageRoutingMode](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
 | Mode                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. |
 | `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.                                                                                                                                                                                                |
-| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
+| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](/docs/client-libraries/java) and implementing the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](@pulsar:javadoc:client@/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -1208,7 +1232,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-[Hashing Scheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[Hashing Scheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available:
 
@@ -1238,7 +1262,7 @@ In non-persistent topics, brokers immediately deliver messages to all connected 
 
 > With non-persistent topics, message data lives only in memory, without a specific buffer - which means data *is not* buffered in memory. The received messages are immediately transmitted to all *connected consumers*. If a message broker fails or message data can otherwise not be retrieved from memory, your message data may be lost. Use non-persistent topics only if you're *certain* that your use case requires it and can sustain it.
 
-By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 Currently, non-persistent topics which are not partitioned are not persisted to ZooKeeper, which means if the broker owning them crashes, they do not get re-assigned to another broker because they only exist in the owner broker memory. The current workaround is to set the value of `allowAutoTopicCreation` to `true` and `allowAutoTopicCreationType` to `non-partitioned` (they are default values) in broker configuration.
 
@@ -1250,7 +1274,7 @@ With persistent topics, all messages are durably persisted on disks, whereas wit
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key_shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java-use.md#create-a-consumer) for a non-persistent topic:
+Here's an example [Java consumer](/docs/client-libraries/java-use#create-a-consumer) for a non-persistent topic:
 
 ```java
 PulsarClient client = PulsarClient.builder()
@@ -1265,7 +1289,7 @@ Consumer<byte[]> consumer = client.newConsumer()
         .subscribe();
 ```
 
-Here's an example [Java producer](client-libraries-java-use/#create-a-producer) for the same non-persistent topic:
+Here's an example [Java producer](/docs/client-libraries/java-use#create-a-producer) for the same non-persistent topic:
 
 ```java
 Producer<byte[]> producer = client.newProducer()
@@ -1293,7 +1317,7 @@ The following table outlines the available system topics for each specific names
 
 :::note
 
-* You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+* You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 * Since Pulsar version 2.11.0, system topics are enabled by default.
   In earlier versions, you need to change the following configurations in the `conf/broker.conf` or `conf/standalone.conf` file to enable system topics.

@@ -7,6 +7,12 @@ description: Get a comprehensive understanding of concepts, installation, and co
 
 Pulsar Manager is a web-based GUI management and monitoring tool that helps administrators and users manage and monitor tenants, namespaces, topics, subscriptions, brokers, clusters, and so on, and supports dynamic configuration of multiple environments.
 
+:::note
+
+Pulsar Manager has been poorly maintained for a long time. Please take a look at the [Dekaf UI](administration-dekaf-ui.md) as an alternative to Pulsar Manager.
+
+:::
+
 ## Install
 
 To install Pulsar Manager, complete the following steps.

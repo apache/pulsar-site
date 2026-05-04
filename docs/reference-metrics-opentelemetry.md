@@ -133,6 +133,11 @@ The total number of messages bytes read from this topic.
   * `pulsar.topic` - The topic name.
   * `pulsar.partition.index` - The partition index of the topic. Present only if the topic is partitioned.
 
+#### pulsar.broker.topic.publish.latency
+The latency in seconds for publishing messages.
+* Type: Histogram
+* Unit: `s`
+
 #### pulsar.broker.topic.publish.rate.limit.count
 The number of times the publish rate limit is triggered.
 * Type: Counter
@@ -627,6 +632,24 @@ The total amount of data read from the ledger.
   * `pulsar.managed_ledger.name` - The name of the managed ledger.
   * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
 
+#### pulsar.broker.managed_ledger.cursor.persist.unacked_ranges.truncated
+The number of times a cursor exceeded `managedLedgerMaxUnackedRangesToPersist`, causing ack state to be truncated at persistence. Ack state beyond the limit is lost on broker restart.
+* Type: Counter
+* Unit: `{truncation}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
+#### pulsar.broker.managed_ledger.cursor.persist.batch_deleted_indexes.truncated
+The number of times a cursor exceeded `managedLedgerMaxBatchDeletedIndexToPersist`, causing batch deleted index state to be truncated at persistence. State beyond the limit is lost on broker restart.
+* Type: Counter
+* Unit: `{truncation}`
+* Attributes:
+  * `pulsar.namespace` - The topic namespace.
+  * `pulsar.managed_ledger.name` - The name of the managed ledger.
+  * `pulsar.managed_ledger.cursor.name` - The name of the managed cursor.
+
 ### Managed Ledger Cache metrics
 
 #### pulsar.broker.managed_ledger.count
@@ -821,6 +844,34 @@ The total number of mark delete operations for this ledger.
 * Attributes:
   * `pulsar.namespace` - The managed ledger namespace.
   * `pulsar.managed_ledger.name` - The name of the managed ledger.
+
+#### pulsar.broker.managed_ledger.message.outgoing.latency
+End-to-end write latency, including time spent in the executor queue.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+
+#### pulsar.broker.managed_ledger.message.outgoing.ledger.latency
+End-to end write latency.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+
+#### pulsar.broker.managed_ledger.ledger.switch.latency
+Time taken to switch to a new ledger.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
+
+#### pulsar.broker.managed_ledger.entry.size
+Size of entries written to the ledger.
+* Type: Histogram
+* Unit: `By`
+* Attributes:
+  * `pulsar.namespace` - The managed ledger namespace.
 
 #### pulsar.broker.managed_ledger.inflight.read.limit
 Maximum number of bytes that can be retained by managed ledger data read from storage or cache.

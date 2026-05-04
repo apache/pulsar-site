@@ -36,8 +36,8 @@ Before you start the next release steps, make sure you have installed these soft
     * Pulsar docker images are running Java 21 since 3.3.0
   * JDK 17 for Pulsar version >= 2.11
   * JDK 11 for earlier versions
-* Maven 3.9.9 (most recent stable Maven 3.9.x version)
-  * Install using `sdkman i maven 3.9.9`
+* Maven 3.9.12 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.12`
 * Zip
 
 Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
@@ -53,11 +53,18 @@ To verify the release branch is not broken, you should trigger a Pulsar CI build
 ## Set environment variables to be used across the commands {#env-vars}
 
 ```shell
-export VERSION_RC=3.0.4-candidate-1
+export VERSION_RC=4.0.7-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export NEXT_VERSION_WITHOUT_RC=3.0.5
-export VERSION_BRANCH=branch-3.0
+export NEXT_VERSION_WITHOUT_RC=4.0.8
+export VERSION_BRANCH=branch-4.0
 export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=21
+```
+
+for 3.x releases, use Java 17:
+
+```shell
+# for 3.x releases, use Java 17 instead of Java 21
 export SDKMAN_JAVA_VERSION=17
 ```
 
@@ -340,12 +347,11 @@ sdk u java $SDKMAN_JAVA_VERSION
 git status
 
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
-curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
+curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/branch-4.2/src/settings.xml
 
 # publish artifacts
-command mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
-# publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
-command mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
+# and publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
+command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml && command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration || echo 'ERROR: Publishing Failed!'
 ```
 
 :::note
@@ -453,7 +459,7 @@ Set these shell variables
 DOCKER_USER=<your-dockerhub-username>
 STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
 MY_NAME="Firstname Lastname"
-PREVIOUS_VERSION_WITHOUT_RC="3.0.3"
+PREVIOUS_VERSION_WITHOUT_RC="4.0.6"
 ```
 
 ```shell

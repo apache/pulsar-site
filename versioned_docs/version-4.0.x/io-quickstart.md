@@ -11,7 +11,7 @@ It is helpful to review the [concepts](io-overview.md) for Pulsar I/O by running
 
 At the end of this tutorial, you can:
 
-- [Connect Pulsar to Cassandra](#connect-pulsar-to-cassandra)
+- [Connect Pulsar to Cassandra and ScyllaDB](#connect-pulsar-to-cassandra-and-scylladb)
 - [Connect Pulsar to PostgreSQL](#connect-pulsar-to-postgresql)
 
 :::tip
@@ -104,22 +104,25 @@ ls connectors
    If an error occurs when starting the Pulsar service, you may see an exception at the terminal running `pulsar/standalone`,
    or you can navigate to the `logs` directory under the Pulsar directory to view the logs.
 
-## Connect Pulsar to Cassandra
+## Connect Pulsar to Cassandra and ScyllaDB
 
-This section demonstrates how to connect Pulsar to Cassandra.
+This section demonstrates how to connect Pulsar to Cassandra and ScyllaDB.
 
 :::tip
 
 * Make sure you have Docker installed. If you do not have one, see [install Docker](https://docs.docker.com/docker-for-mac/install/). For more information about Docker commands, see [Docker CLI](https://docs.docker.com/engine/reference/commandline/run/).
-* The Cassandra sink connector reads messages from Pulsar topics and writes the messages into Cassandra tables. For more information, see [Cassandra sink connector](io-cassandra-sink.md).
+* The Cassandra sink connector reads messages from Pulsar topics and writes the messages into Cassandra or ScyllaDB tables. For more information, see [Cassandra sink connector](io-cassandra-sink.md).
+* **ScyllaDB compatibility**: [ScyllaDB](https://www.scylladb.com/) is a drop-in replacement for Cassandra that maintains full CQL protocol compatibility. The same `pulsar-io-cassandra` connector works with both databases without any modifications. For more information, see [Streaming Real-Time Chat Messages into ScyllaDB with Apache Pulsar](https://www.scylladb.com/2022/04/25/streaming-real-time-chat-messages-into-scylladb-with-apache-pulsar/).
 
 :::
 
-To connect Pulsar to Cassandra, you can follow the steps below:
+To connect Pulsar to Cassandra or ScyllaDB, you can follow the steps below:
 
-### Step 1: Set up a Cassandra cluster
+### Step 1: Set up a Cassandra or ScyllaDB cluster
 
-This example uses `cassandra` Docker image to start a single-node Cassandra cluster in Docker.
+This example uses `cassandra` Docker image to start a single-node Cassandra cluster in Docker. Alternatively, you can use ScyllaDB as shown below.
+
+#### Option A: Using Cassandra
 
 1. Start a Cassandra cluster.
 
@@ -189,11 +192,66 @@ This example uses `cassandra` Docker image to start a single-node Cassandra clus
    cqlsh:pulsar_test_keyspace> CREATE TABLE pulsar_test_table (key text PRIMARY KEY, col text);
    ```
 
+#### Option B: Using ScyllaDB
+
+1. Start a ScyllaDB cluster.
+
+   ```bash
+   docker run -d --rm --name=scylladb -p 9042:9042 \
+       scylladb/scylla:latest \
+       --smp 1 --memory 750M --overprovisioned 1
+   ```
+
+   :::note
+
+   ScyllaDB requires specific flags when running in containers. The flags above configure it for single-core operation with limited resources.
+
+   :::
+
+2. Make sure the Docker process is running.
+
+   ```bash
+   docker ps
+   ```
+
+3. Check the ScyllaDB logs to make sure the ScyllaDB process is running as expected.
+
+   ```bash
+   docker logs scylladb
+   ```
+
+   Wait for ScyllaDB to be ready (this may take 30-60 seconds). Look for messages indicating the database is ready to accept CQL connections.
+
+4. Check the status of the ScyllaDB cluster.
+
+   ```bash
+   docker exec scylladb nodetool status
+   ```
+
+5. Use `cqlsh` to connect to the ScyllaDB cluster.
+
+   ```bash
+   docker exec -ti scylladb cqlsh
+   ```
+
+6. Create a keyspace `pulsar_test_keyspace`.
+
+   ```bash
+   cqlsh> CREATE KEYSPACE pulsar_test_keyspace WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
+   ```
+
+7. Create a table `pulsar_test_table`.
+
+   ```bash
+   cqlsh> USE pulsar_test_keyspace;
+   cqlsh:pulsar_test_keyspace> CREATE TABLE pulsar_test_table (key text PRIMARY KEY, col text);
+   ```
+
 ### Step 2: Configure a Cassandra sink
 
-Now that we have a Cassandra cluster running locally.
+Now that we have a Cassandra or ScyllaDB cluster running locally.
 
-In this section, you need to configure a Cassandra sink connector.
+In this section, you need to configure a Cassandra sink connector. The same connector works for both Cassandra and ScyllaDB.
 
 To run a Cassandra sink connector, you need to prepare a configuration file including the information that Pulsar connector runtime needs to know.
 
@@ -224,11 +282,17 @@ You can create a configuration file through one of the following methods.
       columnName: "col"
   ```
 
+:::note
+
+For ScyllaDB, the configuration is identical. If you used a different container name or hostname, update the `roots` parameter accordingly (e.g., `"scylladb:9042"` if connecting from within a Docker network).
+
+:::
+
 For more information, see [Cassandra sink connector](io-cassandra-sink.md).
 
 ### Step 3: Create a Cassandra sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to create a sink connector and perform other operations on them.
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/) to create a sink connector and perform other operations on them.
 
 Run the following command to create a Cassandra sink connector with sink type _cassandra_ and the config file _examples/cassandra-sink.yml_ created previously.
 
@@ -254,7 +318,7 @@ This sink connector runs as a Pulsar Function and writes the messages produced i
 
 ### Step 4: Inspect a Cassandra sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to monitor a connector and perform other operations on it.
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/) to monitor a connector and perform other operations on it.
 
 * Get the information of a Cassandra sink.
 
@@ -399,7 +463,7 @@ You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_re
 
 ### Step 6: Delete a Cassandra Sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 to delete a connector and perform other operations on it.
 
 ```bash
@@ -544,7 +608,7 @@ In this section, you need to configure a JDBC sink connector.
 
 ### Step 3: Create a JDBC sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 to create a sink connector and perform other operations on it.
 
 This example creates a sink connector and specifies the desired information.
@@ -574,7 +638,7 @@ This sink connector runs as a Pulsar Function and writes the messages produced i
 
 :::tip
 
-For more information about `pulsar-admin sinks create options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about `pulsar-admin sinks create options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -586,7 +650,7 @@ Created successfully
 
 ### Step 4: Inspect a JDBC sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 to monitor a connector and perform other operations on it.
 
 * List all running JDBC sink(s).
@@ -599,7 +663,7 @@ to monitor a connector and perform other operations on it.
 
   :::tip
 
-  For more information about `pulsar-admin sinks list options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+  For more information about `pulsar-admin sinks list options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 
@@ -622,7 +686,7 @@ to monitor a connector and perform other operations on it.
 
   :::tip
 
-  For more information about `pulsar-admin sinks get options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+  For more information about `pulsar-admin sinks get options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 
@@ -663,7 +727,7 @@ to monitor a connector and perform other operations on it.
 
   :::tip
 
-  For more information about `pulsar-admin sinks status options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+  For more information about `pulsar-admin sinks status options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
   :::
 
@@ -694,7 +758,7 @@ to monitor a connector and perform other operations on it.
 
 ### Step 5: Stop a JDBC sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to stop a connector and perform other operations on it.
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/) to stop a connector and perform other operations on it.
 
 ```bash
 bin/pulsar-admin sinks stop \
@@ -705,7 +769,7 @@ bin/pulsar-admin sinks stop \
 
 :::tip
 
-For more information about `pulsar-admin sinks stop options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about `pulsar-admin sinks stop options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -717,7 +781,7 @@ Stopped successfully
 
 ### Step 6: Restart a JDBC sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to restart a connector and perform other operations on it.
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/) to restart a connector and perform other operations on it.
 
 ```bash
 bin/pulsar-admin sinks restart \
@@ -728,7 +792,7 @@ bin/pulsar-admin sinks restart \
 
 :::tip
 
-For more information about `pulsar-admin sinks restart options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about `pulsar-admin sinks restart options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -742,13 +806,13 @@ Started successfully
 
 * Optionally, you can run a standalone sink connector using `pulsar-admin sinks localrun options`.
 Note that `pulsar-admin sinks localrun options` **runs a sink connector locally**, while `pulsar-admin sinks start options` **starts a sink connector in a cluster**.
-* For more information about `pulsar-admin sinks localrun options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+* For more information about `pulsar-admin sinks localrun options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
 ### Step 7: Update a JDBC sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) to update a connector and perform other operations on it.
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/) to update a connector and perform other operations on it.
 
 This example updates the parallelism of the _pulsar-postgres-jdbc-sink_ sink connector to 2.
 
@@ -760,7 +824,7 @@ bin/pulsar-admin sinks update \
 
 :::tip
 
-For more information about `pulsar-admin sinks update options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about `pulsar-admin sinks update options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -807,7 +871,7 @@ The result shows that the parallelism is 2.
 
 ### Step 8: Delete a JDBC sink
 
-You can use the [Connector Admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 to delete a connector and perform other operations on it.
 
 This example deletes the _pulsar-postgres-jdbc-sink_ sink connector.
@@ -821,7 +885,7 @@ bin/pulsar-admin sinks delete \
 
 :::tip
 
-For more information about `pulsar-admin sinks delete options`, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about `pulsar-admin sinks delete options`, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
