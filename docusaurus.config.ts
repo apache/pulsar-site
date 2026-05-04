@@ -439,8 +439,6 @@ module.exports = async function createConfigAsync() {
           id: "contribute",
           path: "contribute",
           routeBasePath: "contribute",
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
           sidebarPath: require.resolve("./sidebarsDevelopment.js"),
           editUrl: `${githubSiteUrl}/edit/main`,
         }),
