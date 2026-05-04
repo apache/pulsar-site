@@ -294,7 +294,7 @@ The output is something like this:
             "durable": true,
             "replicated": false
         }
-    ],
+    },
     "replication": {},
     "deduplicationStatus": "Disabled",
     "nonContiguousDeletedMessagesRanges": 0,
