@@ -9,7 +9,7 @@ $ pulsar-admin clusters subcommand
 
 
 
-## get
+## <em>get</em>
 
 Get the configuration data for the specified cluster
 
@@ -25,7 +25,7 @@ $ pulsar-admin clusters get options
 |---|---|---|
 
 
-## create
+## <em>create</em>
 
 Provisions a new cluster. This operation requires Pulsar super-user privileges
 
@@ -63,7 +63,7 @@ $ pulsar-admin clusters create options
 | `--url-secure` | service-url for secure connection|null||
 
 
-## update
+## <em>update</em>
 
 Update the configuration for a cluster
 
@@ -101,7 +101,7 @@ $ pulsar-admin clusters update options
 | `--url-secure` | service-url for secure connection|null||
 
 
-## delete
+## <em>delete</em>
 
 Deletes an existing cluster
 
@@ -118,7 +118,7 @@ $ pulsar-admin clusters delete options
 | `-a, --all` | Delete all data (tenants) of the cluster|false||
 
 
-## list
+## <em>list</em>
 
 List the existing clusters
 
@@ -134,7 +134,7 @@ $ pulsar-admin clusters list options
 |---|---|---|
 
 
-## update-peer-clusters
+## <em>update-peer-clusters</em>
 
 Update peer cluster names
 
@@ -151,7 +151,7 @@ $ pulsar-admin clusters update-peer-clusters options
 | `--peer-clusters` | Comma separated peer-cluster names [Pass empty string "" to delete list]|null||
 
 
-## update-cluster-migration
+## <em>update-cluster-migration</em>
 
 Update cluster migration
 
@@ -170,7 +170,7 @@ $ pulsar-admin clusters update-cluster-migration options
 | `--broker-url-secure` | New migrated cluster broker service url secure|null||
 
 
-## get-peer-clusters
+## <em>get-peer-clusters</em>
 
 Get list of peer-clusters
 
@@ -186,7 +186,7 @@ $ pulsar-admin clusters get-peer-clusters options
 |---|---|---|
 
 
-## get-failure-domain
+## <em>get-failure-domain</em>
 
 Get the configuration brokers of a failure-domain
 
@@ -203,7 +203,7 @@ $ pulsar-admin clusters get-failure-domain options
 | `--domain-name` | domain-name|null||
 
 
-## create-failure-domain
+## <em>create-failure-domain</em>
 
 Create a new failure-domain for a cluster. updates it if already created.
 
@@ -221,7 +221,7 @@ $ pulsar-admin clusters create-failure-domain options
 | `--broker-list` | Comma separated broker list|null||
 
 
-## update-failure-domain
+## <em>update-failure-domain</em>
 
 Update failure-domain for a cluster. Creates a new one if not exist.
 
@@ -239,7 +239,7 @@ $ pulsar-admin clusters update-failure-domain options
 | `--broker-list` | Comma separated broker list|null||
 
 
-## delete-failure-domain
+## <em>delete-failure-domain</em>
 
 Deletes an existing failure-domain
 
@@ -256,7 +256,7 @@ $ pulsar-admin clusters delete-failure-domain options
 | `--domain-name` | domain-name|null||
 
 
-## list-failure-domains
+## <em>list-failure-domains</em>
 
 List the existing failure-domains for a cluster
 

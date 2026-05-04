@@ -47,7 +47,7 @@ You can interact with the admin interface via the following methods.
 
 ## Admin setup
 
-Each of Pulsar's three admin interfaces---the [`pulsar-admin`](reference-pulsar-admin.md) CLI tool, the [Java admin API](/api/admin), and the {@inject: rest:REST:/} API ---requires some special setup if you have [authentication](security-overview.md#authentication-providers) enabled in your Pulsar [instance](reference-terminology.md#instance).
+Each of Pulsar's three admin interfaces---the [`pulsar-admin`](reference-pulsar-admin.md) CLI tool, the [Java admin API](@pulsar:javadoc:admin@), and the {@inject: rest:REST:/} API ---requires some special setup if you have [authentication](security-overview.md#authentication-providers) enabled in your Pulsar [instance](reference-terminology.md#instance).
 
 ````mdx-code-block
 <Tabs

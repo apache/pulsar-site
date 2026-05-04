@@ -13,6 +13,10 @@ It is the responsibility of the security vulnerability handling project team (Ap
 Please subscribe to the [users@pulsar.apache.org mailing list](https://lists.apache.org/list.html?users@pulsar.apache.org) to receive Apache Pulsar security advisories when they are published.
 For instructions on how to subscribe, please see https://pulsar.apache.org/contact/.
 
+### 2025
+
+* 2024-04-09 [CVE-2025-30677](CVE-2025-30677.md) Apache Pulsar IO Kafka Connector, Apache Pulsar IO Kafka Connect Adaptor: Sensitive information logged in Pulsar's Apache Kafka Connectors
+
 ### 2024
 
 * 2024-10-04 [Apache Pulsar 3.3.2 released with important security fix for CVE-2024-47561](https://lists.apache.org/thread/o7xg4odt1ms1g46f3mjn39bw5kq3hks0)
@@ -46,4 +50,3 @@ For instructions on how to subscribe, please see https://pulsar.apache.org/conta
 ### 2021
 
 * 2021-05-25 [CVE-2021-22160](CVE-2021-22160.md) Authentication with JWT allows use of "none"-algorithm
-

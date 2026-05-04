@@ -31,28 +31,31 @@ jobs:
     name: Build and publish pulsar website-next
     runs-on: ubuntu-latest
     timeout-minutes: 600
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: 'asf-site-next'
           path: tmp/asf-site-next
-          token: ${{ secrets.PULSARBOT_TOKEN }}
       - name: Install poetry
         run: pipx install poetry
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: 'poetry'
-      - name: Set Node.js 20
-        uses: actions/setup-node@v4
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
       - run: corepack enable
       - name: Update generated docs
         working-directory: tools/pytools
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           poetry install
           poetry run bin/site-publisher.py --site-path=$GITHUB_WORKSPACE/tmp/asf-site-next

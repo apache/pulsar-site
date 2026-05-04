@@ -458,7 +458,7 @@ To enable message chunking, set the `chunkingEnabled` parameter to `true` when c
 
 :::note
 
-If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](/api/client/).
+If the consumer fails to receive all chunks of a message within a specified period, it expires incomplete chunks. The default value is 1 minute. For more information about the `expireTimeOfIncompleteChunkedMessage` parameter, refer to [org.apache.pulsar.client.api](@pulsar:javadoc:client@/).
 
 :::
 
@@ -937,7 +937,7 @@ Consumer<byte[]> someTopicsConsumer = pulsarClient.newConsumer()
                 .subscribe();
 ```
 
-For code examples, see [Java](client-libraries-java.md#multi-topic-subscriptions).
+For code examples, see [Java](pathname:///docs/client-libraries/java#multi-topic-subscriptions).
 
 ## Partitioned topics
 
@@ -963,19 +963,19 @@ Partitioned topics need to be explicitly created via the [admin API](admin-api-o
 
 When publishing to partitioned topics, you must specify a *routing mode*. The routing mode determines which partition---that is, which internal topic---each message should be published to.
 
-There are three [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) available:
+There are three [MessageRoutingMode](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRoutingMode) available:
 
 | Mode                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode. |
 | `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.                                                                                                                                                                                                |
-| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
+| `CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](pathname:///docs/client-libraries/java) and implementing the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface.                                                                                                                                  |
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](/api/client/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) in [ProducerBuilder](@pulsar:javadoc:client@/org/apache/pulsar/client/api/ProducerBuilder), when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 | Ordering guarantee | Description                                                                          | Routing Mode and Key                                                                             |
 |:-------------------|:-------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|
@@ -984,7 +984,7 @@ If there is a key attached to message, the messages will be routed to correspond
 
 ### Hashing scheme
 
-[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) is an enum that represents sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producers is `JavaStringHash`.
@@ -1010,7 +1010,7 @@ In non-persistent topics, brokers immediately deliver messages to all connected 
 
 > With non-persistent topics, message data lives only in memory, without a specific buffer - which means data *is not* buffered in memory. The received messages are immediately transmitted to all *connected consumers*. If a message broker fails or message data can otherwise not be retrieved from memory, your message data may be lost. Use non-persistent topics only if you're *certain* that your use case requires it and can sustain it.
 
-By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+By default, non-persistent topics are enabled on Pulsar brokers. You can disable them in the broker's [configuration](reference-configuration.md#broker-enableNonPersistentTopics). You can manage non-persistent topics using the `pulsar-admin topics` command. For more information, see [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 Currently, non-persistent topics which are not partitioned are not persisted to ZooKeeper, which means if the broker owning them crashes, they do not get re-assigned to another broker because they only exist in the owner broker memory. The current workaround is to set the value of `allowAutoTopicCreation` to `true` and `allowAutoTopicCreationType` to `non-partitioned` (they are default values) in broker configuration.
 
@@ -1022,7 +1022,7 @@ Non-persistent messaging is usually faster than persistent messaging because bro
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All the subscription types---[exclusive](#exclusive), [shared](#shared), [key_shared](#key_shared) and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java-use.md#create-a-consumer) for a non-persistent topic:
+Here's an example [Java consumer](pathname:///docs/client-libraries/java-use#create-a-consumer) for a non-persistent topic:
 
 ```java
 PulsarClient client = PulsarClient.builder()
@@ -1037,7 +1037,7 @@ Consumer<byte[]> consumer = client.newConsumer()
         .subscribe();
 ```
 
-Here's an example [Java producer](client-libraries-java-use/#create-a-producer) for the same non-persistent topic:
+Here's an example [Java producer](pathname:///docs/client-libraries/java-use#create-a-producer) for the same non-persistent topic:
 
 ```java
 Producer<byte[]> producer = client.newProducer()
@@ -1065,7 +1065,7 @@ The following table outlines the available system topics for each specific names
 
 :::note
 
-* You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+* You cannot create any system topics. To list system topics, you can add the option `--include-system-topic` when you get the topic list by using [Pulsar admin API](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 * Since Pulsar version 2.11.0, system topics are enabled by default.
   In earlier versions, you need to change the following configurations in the `conf/broker.conf` or `conf/standalone.conf` file to enable system topics.

@@ -182,14 +182,14 @@ Number of IO threads.
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 ### numListenerThreads
 Number of consumer listener threads.
 
 **Type**: `int`
 
-**Default**: `14`
+**Default**: `1`
 
 ### operationTimeoutMs
 Client operation timeout (in milliseconds).
@@ -197,6 +197,13 @@ Client operation timeout (in milliseconds).
 **Type**: `long`
 
 **Default**: `30000`
+
+### originalPrincipal
+Original principal for proxy authentication scenarios.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
 
 ### proxyProtocol
 Protocol of proxy service. proxyServiceUrl and proxyProtocol must be mutually inclusive.

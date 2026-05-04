@@ -99,13 +99,13 @@ A cluster consists of 3 broker nodes, 3 bookie nodes, and 3 ZooKeeper nodes. The
 To get started deploying a Pulsar cluster on bare metal, you need to download a binary tarball release in one of the following ways:
 
 * By clicking on the link below directly, which automatically triggers a download:
-  * <a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>
-* From the Pulsar [downloads page](pulsar:download_page_url)
+  * <a href="@pulsar:binary_release_url@" download>Pulsar @pulsar:version@ binary release</a>
+* From the Pulsar [downloads page](@pulsar:download_page_url@)
 * From the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest) on GitHub
 * Using [wget](https://www.gnu.org/software/wget):
 
 ```bash
-wget pulsar:binary_release_url
+wget @pulsar:binary_release_url@
 ```
 
 Once you download the tarball, untar it and `cd` into the resulting directory:
@@ -119,7 +119,7 @@ The extracted directory contains the following subdirectories:
 
 Directory | Contains
 :---------|:--------
-`bin` |[command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/
+`bin` |[command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md) and [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/
 `conf` | Configuration files for Pulsar, including for [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more
 `data` | The data storage directory that ZooKeeper and BookKeeper use
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses
@@ -131,14 +131,14 @@ To use `built-in` connectors, you need to download the connectors tarball releas
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:connector_release_url" download>Pulsar IO Connectors @pulsar:version@ release</a>
+  * <a href="@pulsar:connector_release_url@" download>Pulsar IO Connectors @pulsar:version@ release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
+  wget @pulsar:connector_release_url@/{connector}-@pulsar:version@.nar
   ```
 
 Once you download the .nar file, copy the file to directory `connectors` in the pulsar directory.
@@ -159,14 +159,14 @@ To use tiered storage offloaders, you need to download the offloaders tarball re
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:offloader_release_url" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
+  * <a href="@pulsar:offloader_release_url@" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  wget pulsar:offloader_release_url
+  wget @pulsar:offloader_release_url@
   ```
 
 Once you download the tarball, in the Pulsar directory, untar the offloaders package and copy the offloaders as `offloaders` in the Pulsar directory:

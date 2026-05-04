@@ -5,7 +5,7 @@ sidebar_label: "Clients"
 original_id: concepts-clients
 ---
 
-Pulsar exposes a client API with language bindings for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md) and [C#](client-libraries-dotnet.md). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
+Pulsar exposes a client API with language bindings for [Java](pathname:///docs/client-libraries/java), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python), [C++](pathname:///docs/client-libraries/cpp) and [C#](pathname:///docs/client-libraries/dotnet). The client API optimizes and encapsulates Pulsar's client-broker communication protocol and exposes a simple and intuitive API for use by applications.
 
 Under the hood, the current official Pulsar client libraries support transparent reconnection and/or connection failover to brokers, queuing of messages until acknowledged by the broker, and heuristics such as connection retries with backoff.
 

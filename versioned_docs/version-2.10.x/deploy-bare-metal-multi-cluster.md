@@ -40,9 +40,9 @@ To get started running Pulsar, download a binary tarball release in one of the f
 
 * by clicking the link below and downloading the release from an Apache mirror:
 
-  * <a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>
+  * <a href="@pulsar:binary_release_url@" download>Pulsar @pulsar:version@ binary release</a>
 
-* from the Pulsar [downloads page](pulsar:download_page_url)
+* from the Pulsar [downloads page](@pulsar:download_page_url@)
 * from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
@@ -65,7 +65,7 @@ The Pulsar binary package initially contains the following directories:
 
 Directory | Contains
 :---------|:--------
-`bin` | [Command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+`bin` | [Command-line tools](reference-cli-tools.md) of Pulsar, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 `conf` | Configuration files for Pulsar, including for [broker configuration](reference-configuration.md#broker), [ZooKeeper configuration](reference-configuration.md#zookeeper), and more
 `examples` | A Java JAR file containing example [Pulsar Functions](functions-overview.md)
 `lib` | The [JAR](https://en.wikipedia.org/wiki/JAR_(file_format)) files that Pulsar uses
@@ -363,7 +363,7 @@ $ bin/pulsar broker
 
 ## Service discovery
 
-[Clients](client-libraries.md) connecting to Pulsar brokers need to communicate with an entire Pulsar instance using a single URL.
+[Clients](pathname:///docs/client-libraries/) connecting to Pulsar brokers need to communicate with an entire Pulsar instance using a single URL.
 
 You can use your own service discovery system. If you use your own system, you only need to satisfy just one requirement: when a client performs an HTTP request to an [endpoint](reference-configuration.md) for a Pulsar cluster, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to some active brokers in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
 

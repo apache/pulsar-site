@@ -20,6 +20,7 @@
 import json
 import sys
 import re
+from datetime import datetime
 
 def add_version_to_releases_json(new_version):
     file_path = 'releases.json'
@@ -168,14 +169,67 @@ def add_version_to_release_java_js(new_version):
 
     print(f"Added version {new_version} to {file_path}")
 
+def create_pulsar_release_notes(new_version, prev_version):
+    # Create release notes content
+    content = f"""---
+id: pulsar-{new_version}
+title: Apache Pulsar {new_version}
+sidebar_label: Apache Pulsar {new_version}
+---
+
+#### {datetime.now().strftime('%Y-%m-%d')}
+
+### Library updates
+
+### Broker
+
+### Client
+
+### Pulsar IO and Pulsar Functions
+
+### Others
+
+### Tests & CI
+
+
+For the complete list, check the [full changelog](https://github.com/apache/pulsar/compare/v{prev_version}...v{new_version}).
+"""
+
+    # Write file
+    file_path = f'release-notes/versioned/pulsar-{new_version}.md'
+    with open(file_path, 'w') as f:
+        f.write(content)
+
+    print(f"Created release notes file at {file_path}")
+
+def create_client_java_release_notes(new_version):
+    # Create release notes content
+    content = f"""---
+id: client-java-{new_version}
+title: Client Java {new_version}
+sidebar_label: Client Java {new_version}
+---
+
+"""
+
+    # Write file
+    file_path = f'release-notes/versioned/client-java-{new_version}.md'
+    with open(file_path, 'w') as f:
+        f.write(content)
+
+    print(f"Created client Java release notes file at {file_path}")
+
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python register_new_version.py <new-version> <author> <published-at>")
+    if len(sys.argv) != 5:
+        print("Usage: python register_new_version.py <new-version> <previous-version> <author> <published-at>")
         sys.exit(1)
 
     new_version = sys.argv[1]
-    author = sys.argv[2]
-    published_at = sys.argv[3]
+    previous_version = sys.argv[2]
+    author = sys.argv[3]
+    published_at = sys.argv[4]
     add_version_to_releases_json(new_version)
     add_version_to_release_pulsar_js(new_version, author, published_at)
     add_version_to_release_java_js(new_version)
+    create_pulsar_release_notes(new_version, previous_version)
+    create_client_java_release_notes(new_version)

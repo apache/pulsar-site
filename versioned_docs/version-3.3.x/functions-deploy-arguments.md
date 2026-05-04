@@ -5,7 +5,7 @@ sidebar_label: "Default arguments of CLI"
 description: Get a comprehensive understanding of parameters required in Pulsar CLI.
 ---
 
-You can use function-related commands in the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) CLI to deploy functions. Pulsar provides a variety of commands, such as:
+You can use function-related commands in the [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/) CLI to deploy functions. Pulsar provides a variety of commands, such as:
 * `create` command for deploying functions in [cluster mode](functions-deploy-cluster.md)
 * `trigger` command for [triggering](functions-deploy-trigger.md) functions
 

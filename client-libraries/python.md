@@ -1,0 +1,30 @@
+---
+id: python
+title: Pulsar Python client
+sidebar_label: "Python client"
+---
+
+You can use a Pulsar Python client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Python. All the methods in Pulsar Python clients are thread-safe.
+
+## Get started
+
+1. [Set up Python client library](python-setup.md)
+2. [Initialize a Python client](python-initialize.md)
+3. [Use a Python client](python-use.md)
+
+## What's next?
+
+- [Work with clients](clients.md)
+- [Work with producers](producers.md)
+- [Work with consumers](consumers.md)
+- [Work with readers](readers.md)
+
+## Reference doc
+
+- [Python client API docs](@pulsar:apidoc:python@)
+  - [Client configurations](@pulsar:apidoc:python@/pulsar.Client.html#__init__)
+  - [Producer configurations](@pulsar:apidoc:python@/pulsar.Client.html#create_producer)
+  - [Consumer configurations](@pulsar:apidoc:python@/pulsar.Client.html#subscribe)
+  - [Reader configurations](@pulsar:apidoc:python@/pulsar.Client.html#create_reader)
+- [Release notes](/release-notes/client-python)
+- [Client feature matrix](/docs/client-libraries/feature-matrix)

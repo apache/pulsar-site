@@ -74,16 +74,16 @@ sdk install java 17.0.3.6.1-amzn
 
 To get started with Pulsar, download a binary tarball release in one of the following ways:
 
-* download from the Apache mirror (<a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>)
+* download from the Apache mirror (<a href="@pulsar:binary_release_url@" download>Pulsar @pulsar:version@ binary release</a>)
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)
+* download from the Pulsar [downloads page](@pulsar:download_page_url@)
 
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 
 * use [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  wget pulsar:binary_release_url
+  wget @pulsar:binary_release_url@
   ```
 
 After you download the tarball, untar it and use the `cd` command to navigate to the resulting directory:
@@ -99,7 +99,7 @@ The Pulsar binary package initially contains the following directories:
 
 Directory | Contains
 :---------|:--------
-`bin` | Pulsar's command-line tools, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+`bin` | Pulsar's command-line tools, such as [`pulsar`](reference-cli-tools.md#pulsar) and [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 `conf` | Configuration files for Pulsar, including [broker configuration](reference-configuration.md#broker) and more.<br />**Note:** Pulsar standalone uses RocksDB as the local metadata store and its configuration file path [`metadataStoreConfigPath`](reference-configuration.md) is configurable in the `standalone.conf` file. For more information about the configurations of RocksDB, see [here](https://github.com/facebook/rocksdb/blob/main/examples/rocksdb_option_file_example.ini) and related [documentation](https://github.com/facebook/rocksdb/wiki/RocksDB-Tuning-Guide).
 `examples` | A Java JAR file containing [Pulsar Functions](functions-overview.md) example.
 `instances` | Artifacts created for [Pulsar Functions](functions-overview.md).
@@ -127,16 +127,16 @@ Otherwise, skip this step and perform the next step [Start Pulsar standalone](#s
 Since `2.1.0-incubating` release, Pulsar releases a separate binary distribution, containing all the `built-in` connectors.
 To enable those `builtin` connectors, you can download the connectors tarball release in one of the following ways:
 
-* download from the Apache mirror <a href="pulsar:connector_release_url" download>Pulsar IO Connectors @pulsar:version@ release</a>
+* download from the Apache mirror <a href="@pulsar:connector_release_url@" download>Pulsar IO Connectors @pulsar:version@ release</a>
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)
+* download from the Pulsar [downloads page](@pulsar:download_page_url@)
 
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 
 * use [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
+  wget @pulsar:connector_release_url@/{connector}-@pulsar:version@.nar
   ```
 
 After you download the NAR file, copy the file to the `connectors` directory in the pulsar directory.
@@ -169,16 +169,16 @@ pulsar-io-aerospike-@pulsar:version@.nar
 
 To get started with [tiered storage offloaders](concepts-tiered-storage.md), you need to download the offloaders tarball release on every broker node in one of the following ways:
 
-* download from the Apache mirror <a href="pulsar:offloader_release_url" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
+* download from the Apache mirror <a href="@pulsar:offloader_release_url@" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)
+* download from the Pulsar [downloads page](@pulsar:download_page_url@)
 
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 
 * use [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  wget pulsar:offloader_release_url
+  wget @pulsar:offloader_release_url@
   ```
 
 After you download the tarball, untar the offloaders package and copy the offloaders as `offloaders`

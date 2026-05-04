@@ -36,7 +36,7 @@ Pulsar releases a separate binary distribution, containing the tiered storage of
 1. Download the offloaders tarball release.
 
 ```bash
-wget pulsar:offloader_release_url
+wget @pulsar:offloader_release_url@
 ```
 
 2. Untar the offloaders package and copy the offloaders as `offloaders` in the pulsar directory.

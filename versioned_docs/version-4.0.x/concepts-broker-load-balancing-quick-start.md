@@ -37,7 +37,7 @@ networks:
 services:
   # Start ZooKeeper
   zookeeper:
-    image: apachepulsar/pulsar:3.0.1
+    image: apachepulsar/pulsar:latest
     container_name: zookeeper
     restart: on-failure
     networks:
@@ -47,7 +47,7 @@ services:
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
-    command: >
+    command: |
       bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
              bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
              exec bin/pulsar zookeeper"
@@ -61,10 +61,10 @@ services:
   pulsar-init:
     container_name: pulsar-init
     hostname: pulsar-init
-    image: apachepulsar/pulsar:3.0.1
+    image: apachepulsar/pulsar:latest
     networks:
       - pulsar
-    command: >
+    command: |
       bin/pulsar initialize-cluster-metadata \
                --cluster cluster-a \
                --zookeeper zookeeper:2181 \
@@ -77,7 +77,7 @@ services:
 
   # Start bookie
   bookie:
-    image: apachepulsar/pulsar:3.0.1
+    image: apachepulsar/pulsar:latest
     container_name: bookie
     restart: on-failure
     networks:
@@ -99,7 +99,7 @@ services:
 
   # Start broker 1
   broker-1:
-    image: apachepulsar/pulsar:3.0.1
+    image: apachepulsar/pulsar:latest
     container_name: broker-1
     hostname: broker-1
     restart: on-failure
@@ -131,7 +131,7 @@ services:
 
   # Start broker 2
   broker-2:
-    image: apachepulsar/pulsar:3.0.1
+    image: apachepulsar/pulsar:latest
     container_name: broker-2
     hostname: broker-2
     restart: on-failure
@@ -167,7 +167,7 @@ services:
 
 If you use other ways instead of using a yaml file as above, you can choose a broker load balancer type or set an unloading strategy by updating [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C7-L1309C7) or [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324) in the broker.conf file
 
-It is not recommended to use the [pulsar-admin update-dynamic-config]((pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config)) because it will throw an exception if the Pulsar version and the unloading strategy are incompatible.
+It is not recommended to use the [pulsar-admin update-dynamic-config]((/reference/#/@pulsar:version_reference@/pulsar-admin/brokers?id=update-dynamic-config)) because it will throw an exception if the Pulsar version and the unloading strategy are incompatible.
 :::
 
 ### Step 2. Start a Pulsar cluster
@@ -459,7 +459,7 @@ If there is no output, the operation is successful.
 
   - Update [defaultNamespaceBundleSplitAlgorithm](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1321C18-L1321C18) in the broker.conf file
 
-  - Use [pulsar-admin namespaces split-bundle](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle)
+  - Use [pulsar-admin namespaces split-bundle](/reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=split-bundle)
 
 - For bundle splitting thresholds, you can set more configurations in the broker.conf file. Any existing bundle that exceeds any of the thresholds is a candidate to be split.
 

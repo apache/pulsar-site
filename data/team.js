@@ -187,6 +187,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Chris Bono",
+      "apacheId": "onobc",
+      "githubUsername": [
+        "onobc"
+      ]
+    },
+    {
       "name": "Penghui Li",
       "apacheId": "penghui",
       "githubUsername": [
@@ -264,6 +271,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Xiangying Meng",
+      "apacheId": "xiangying",
+      "githubUsername": [
+        "liangyepianzhou"
+      ]
+    },
+    {
       "name": "Yunze Xu",
       "apacheId": "xyz",
       "githubUsername": [
@@ -295,6 +309,13 @@ module.exports = {
       "apacheId": "zike",
       "githubUsername": [
         "RobertIndie"
+      ]
+    },
+    {
+      "name": "Zixuan Liu",
+      "apacheId": "zixuan",
+      "githubUsername": [
+        "nodece"
       ]
     }
   ],
@@ -389,10 +410,22 @@ module.exports = {
       ]
     },
     {
+      "name": "Mingze Han",
+      "apacheId": "hanmz",
+      "githubUsername": []
+    },
+    {
       "name": "Heesung Sohn",
       "apacheId": "heesung",
       "githubUsername": [
         "heesung-sn"
+      ]
+    },
+    {
+      "name": "Zhangjian He",
+      "apacheId": "hezhangjian",
+      "githubUsername": [
+        "hezhangjian"
       ]
     },
     {
@@ -457,13 +490,6 @@ module.exports = {
       ]
     },
     {
-      "name": "Chris Bono",
-      "apacheId": "onobc",
-      "githubUsername": [
-        "onobc"
-      ]
-    },
-    {
       "name": "Rui Fu",
       "apacheId": "rfu",
       "githubUsername": [
@@ -482,13 +508,6 @@ module.exports = {
       "apacheId": "rxl",
       "githubUsername": [
         "wolfstudy"
-      ]
-    },
-    {
-      "name": "ZhangJian He",
-      "apacheId": "shoothzj",
-      "githubUsername": [
-        "shoothzj"
       ]
     },
     {
@@ -523,13 +542,6 @@ module.exports = {
       "name": "Vineeth Polamreddy",
       "apacheId": "vpolamreddy",
       "githubUsername": []
-    },
-    {
-      "name": "Xiangying Meng",
-      "apacheId": "xiangying",
-      "githubUsername": [
-        "liangyepianzhou"
-      ]
     },
     {
       "name": "Marvin Cai",
@@ -571,13 +583,6 @@ module.exports = {
       "apacheId": "zhaocong",
       "githubUsername": [
         "coderzc"
-      ]
-    },
-    {
-      "name": "Zixuan Liu",
-      "apacheId": "zixuan",
-      "githubUsername": [
-        "nodece"
       ]
     }
   ]

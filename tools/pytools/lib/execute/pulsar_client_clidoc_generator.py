@@ -15,6 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
+import os
 from pathlib import Path
 
 from command import run
@@ -27,4 +28,6 @@ def execute(basedir: Path, version: str):
 
     reference.mkdir(exist_ok=True, parents=True)
     with (reference / 'pulsar-client.md').open('w') as f:
-        run(str(client.absolute()), 'generate_documentation', stdout=f)
+        run(str(client.absolute()), 'generate_documentation', stdout=f, env={
+                **os.environ,
+            })

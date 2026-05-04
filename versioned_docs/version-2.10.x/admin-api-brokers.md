@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
-> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](@pulsar:javadoc:admin@/).
 
 Pulsar brokers consist of two components:
 
@@ -28,9 +28,9 @@ Pulsar brokers consist of two components:
 
 [Brokers](reference-terminology.md#broker) can be managed via:
 
-* The `brokers` command of the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool
+* The `brokers` command of the [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/) tool
 * The `/admin/v2/brokers` endpoint of the admin {@inject: rest:REST:/} API
-* The `brokers` method of the `PulsarAdmin` object in the [Java API](client-libraries-java.md)
+* The `brokers` method of the `PulsarAdmin` object in the [Java API](pathname:///docs/client-libraries/java)
 
 In addition to being configurable when you start them up, brokers can also be [dynamically configured](#dynamic-broker-configuration).
 

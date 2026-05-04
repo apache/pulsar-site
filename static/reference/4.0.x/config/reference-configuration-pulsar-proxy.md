@@ -273,7 +273,7 @@ Number of threads to use for HTTP requests processing
 
 **Type**: `int`
 
-**Default**: `28`
+**Default**: `8`
 
 **Dynamic**: `false`
 
@@ -801,6 +801,17 @@ Capacity for thread pool queue in the HTTP server Default is set to 8192.
 
 **Category**: Server
 
+### keepAliveIntervalSeconds
+Specifies the interval (in seconds) for sending ping messages to the client. Set to 0 to disable ping messages. This setting applies to client connections used for topic lookups and partition metadata requests. When a client establishes a broker connection via the proxy, the client and broker will communicate directly without the proxy intercepting the messages. In that case, the broker's keepAliveIntervalSeconds configuration becomes relevant.
+
+**Type**: `int`
+
+**Default**: `30`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### maxConcurrentHttpRequests
 Max concurrent web requests
 
@@ -894,7 +905,7 @@ Number of threads used for Netty IO. Default is set to `2 * Runtime.getRuntime()
 
 **Type**: `int`
 
-**Default**: `28`
+**Default**: `2`
 
 **Dynamic**: `false`
 

@@ -36,7 +36,7 @@ If you already have an existing Presto cluster, you can copy Presto Pulsar conne
 
 ```bash
 
-$ wget pulsar:binary_release_url
+$ wget @pulsar:binary_release_url@
 
 ```
 

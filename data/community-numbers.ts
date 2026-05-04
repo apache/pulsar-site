@@ -10,7 +10,7 @@ export type CommunityNumber = {
   const communityNumbers: CommunityNumber[] = [
     {
       title: "GitHub",
-      number: "14200",
+      number: "14800",
       icon: "img/star.svg",
       isLink: true,
       linkTitle: 'View',
@@ -18,13 +18,13 @@ export type CommunityNumber = {
     },
     {
         title: "Contributors",
-        number: "650",
+        number: "740",
         linkTitle: 'View',
         link: 'https://github.com/apache/pulsar/graphs/contributors'
     },
     {
         title: "Slack members",
-        number: "10450",
+        number: "10750",
         linkTitle: 'Join',
         link: 'https://communityinviter.com/apps/apache-pulsar/apache-pulsar'
     },

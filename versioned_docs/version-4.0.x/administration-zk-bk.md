@@ -281,7 +281,7 @@ You can set persistence policies for BookKeeper at the [namespace](reference-ter
 
 <TabItem value="Pulsar-admin">
 
-Use the [`set-persistence`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=set-persistence) subcommand and specify a namespace as well as any policies that you want to apply. The available flags are:
+Use the [`set-persistence`](/reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=set-persistence) subcommand and specify a namespace as well as any policies that you want to apply. The available flags are:
 
 Flag | Description                                                                                                                | Default
 :----|:---------------------------------------------------------------------------------------------------------------------------|:-------
@@ -353,7 +353,7 @@ You can see which persistence policy currently applies to a namespace.
 
 <TabItem value="Pulsar-admin">
 
-Use the [`get-persistence`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=get-persistence) subcommand and specify the namespace.
+Use the [`get-persistence`](/reference/#/@pulsar:version_reference@/pulsar-admin/namespaces?id=get-persistence) subcommand and specify the namespace.
 
 The following is an example:
 
