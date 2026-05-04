@@ -90,6 +90,35 @@ function docs_apply_changes_to_versioned_docs() {
   )
 }
 
+function docs_apply_version_doc_change_to_docs() {
+  (
+    if [[ "$1" == "--desc" || "$1" == "--help" ]]; then
+      echo "Applies committed changes made to a versioned docs directory between current branch and upstream main to docs/ and all maintained versioned docs"
+      if [ "$1" == "--help" ]; then
+        echo "usage: $0 apply_version_doc_change_to_docs <version>"
+        echo "  e.g. $0 apply_version_doc_change_to_docs 3.3.x"
+      fi
+      return 0
+    fi
+    local version="${1:?Version is required (e.g., 3.3.x)}"
+    shift
+    _cd_git_root
+    local source_dir="versioned_docs/version-${version}"
+    if [ ! -d "$source_dir" ]; then
+      echo "Source directory $source_dir does not exist"
+      return 1
+    fi
+    local patchfile
+    patchfile=$(mktemp)
+    git diff -u "$(git merge-base HEAD "$UPSTREAM/main")" -- "$source_dir" \
+      | sed "s|versioned_docs/version-${version}/|docs/|g" \
+      > "$patchfile"
+    echo "Applying patch to docs/"
+    (cd docs && patch -f -N -V none -p2 < "$patchfile") || echo "Failed to apply patch to docs/"
+    docs_apply_patch_to_versioned_docs "$patchfile" "$@"
+  )
+}
+
 function docs_delete_patch_backups() {
   (
     if [[ "$1" == "--desc" || "$1" == "--help" ]]; then
