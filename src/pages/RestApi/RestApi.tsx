@@ -102,7 +102,7 @@ class RestApi extends React.Component {
     const redocLink = document.createElement("script");
     redocLink.setAttribute(
       "src",
-      "https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js"
+      "/js/redoc.min.js"
     );
     const script = document.querySelector(".container script");
     wrapper.insertBefore(redoc, script);

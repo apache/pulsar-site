@@ -46,13 +46,13 @@ For more information, see [Topics](concepts-messaging.md#topics).
 
 ## Use Pulsar in Docker
 
-Pulsar offers client libraries for [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md) and [C++](client-libraries-cpp.md). If you're running a local standalone cluster, you can
+Pulsar offers client libraries for [Java](pathname:///docs/client-libraries/java), [Go](pathname:///docs/client-libraries/go), [Python](pathname:///docs/client-libraries/python) and [C++](pathname:///docs/client-libraries/cpp). If you're running a local standalone cluster, you can
 use one of these root URLs to interact with your cluster:
 
 * `pulsar://localhost:6650`
 * `http://localhost:8080`
 
-The following example will guide you get started with Pulsar quickly by using the [Python client API](client-libraries-python.md)
+The following example will guide you get started with Pulsar quickly by using the [Python client API](pathname:///docs/client-libraries/python)
 client API.
 
 Install the Pulsar Python client library directly from [PyPI](https://pypi.org/project/pulsar-client/):

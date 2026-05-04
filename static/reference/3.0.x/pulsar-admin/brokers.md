@@ -9,7 +9,7 @@ $ pulsar-admin brokers subcommand
 
 
 
-## list
+## <em>list</em>
 
 List active brokers of the cluster
 
@@ -25,7 +25,7 @@ $ pulsar-admin brokers list options
 |---|---|---|
 
 
-## leader-broker
+## <em>leader-broker</em>
 
 Get the information of the leader broker
 
@@ -41,7 +41,7 @@ $ pulsar-admin brokers leader-broker options
 |---|---|---|
 
 
-## namespaces
+## <em>namespaces</em>
 
 List namespaces owned by the broker
 
@@ -58,7 +58,7 @@ $ pulsar-admin brokers namespaces options
 | `-u, --url` | broker-url|null||
 
 
-## update-dynamic-config
+## <em>update-dynamic-config</em>
 
 Update dynamic-serviceConfiguration of broker
 
@@ -76,7 +76,7 @@ $ pulsar-admin brokers update-dynamic-config options
 | `-v, --value` | service-configuration value|null||
 
 
-## delete-dynamic-config
+## <em>delete-dynamic-config</em>
 
 Delete dynamic-serviceConfiguration of broker
 
@@ -93,7 +93,7 @@ $ pulsar-admin brokers delete-dynamic-config options
 | `-c, --config` | service-configuration name|null||
 
 
-## list-dynamic-config
+## <em>list-dynamic-config</em>
 
 Get list of updatable configuration name
 
@@ -109,7 +109,7 @@ $ pulsar-admin brokers list-dynamic-config options
 |---|---|---|
 
 
-## get-all-dynamic-config
+## <em>get-all-dynamic-config</em>
 
 Get all overridden dynamic-configuration values
 
@@ -125,7 +125,7 @@ $ pulsar-admin brokers get-all-dynamic-config options
 |---|---|---|
 
 
-## get-internal-config
+## <em>get-internal-config</em>
 
 Get internal configuration information
 
@@ -141,7 +141,7 @@ $ pulsar-admin brokers get-internal-config options
 |---|---|---|
 
 
-## get-runtime-config
+## <em>get-runtime-config</em>
 
 Get runtime configuration values
 
@@ -157,7 +157,7 @@ $ pulsar-admin brokers get-runtime-config options
 |---|---|---|
 
 
-## healthcheck
+## <em>healthcheck</em>
 
 Run a health check against the broker
 
@@ -174,7 +174,7 @@ $ pulsar-admin brokers healthcheck options
 | `-tv, --topic-version` | topic version V1 is default|null||
 
 
-## backlog-quota-check
+## <em>backlog-quota-check</em>
 
 Manually trigger backlogQuotaCheck
 
@@ -190,7 +190,7 @@ $ pulsar-admin brokers backlog-quota-check options
 |---|---|---|
 
 
-## version
+## <em>version</em>
 
 Get the version of the currently connected broker
 
@@ -206,7 +206,7 @@ $ pulsar-admin brokers version options
 |---|---|---|
 
 
-## shutdown
+## <em>shutdown</em>
 
 Shutdown broker gracefully.
 

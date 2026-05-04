@@ -63,7 +63,8 @@ const BrowserOnlyDocsVersionWrapper = (props) => {
   return (
     <BrowserOnly>
       {() => {
-        return location.pathname.indexOf("/docs/") > -1 ? (
+        return location.pathname.startsWith("/docs/") &&
+          !location.pathname.startsWith("/docs/client-libraries") ? (
           <DocsVersionWrapperMemo docsPluginId={props.docsPluginId} />
         ) : (
           <></>

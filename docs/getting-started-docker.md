@@ -12,7 +12,11 @@ import TabItem from '@theme/TabItem';
 
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
-If you have not installed Docker, download it following [the instructions](https://docs.docker.com/get-docker/) for your OS.
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (version 20.10+ recommended)
+- At least 4GB of available RAM
+- At least 5GB of free disk space
 
 To run Pulsar in Docker, follow the steps below.
 
@@ -34,7 +38,7 @@ docker run -it \
 --mount source=pulsardata,target=/pulsar/data \
 --mount source=pulsarconf,target=/pulsar/conf \
 apachepulsar/pulsar:@pulsar:version@ \
-bin/pulsar standalone
+bin/pulsar standalone --advertised-address localhost
 ```
 
 </TabItem>
@@ -48,7 +52,7 @@ docker run -it ^
 --mount source=pulsardata,target=/pulsar/data ^
 --mount source=pulsarconf,target=/pulsar/conf ^
 apachepulsar/pulsar:@pulsar:version@ ^
-bin/pulsar standalone
+bin/pulsar standalone --advertised-address localhost
 ```
 
 </TabItem>
@@ -58,9 +62,13 @@ bin/pulsar standalone
 
 :::tip
 
-You may encounter issues with the default RocksDB metadata store.
+These examples set `--advertised-address localhost` to preserve the previous local Docker behavior. A client can connect to `localhost:6650` on the host machine, and the [broker](concepts-architecture-overview.md#brokers) will also advertise `localhost` back to the client as the address to use for subsequent connections.
 
-We recommend you consider using the following environment variable to use ZooKeeper as the metadata store:
+If you omit this option, Pulsar uses the container's FQDN by default. That works when the advertised hostname is resolvable and reachable from your clients, such as from other containers on the same network or from remote hosts, but it can break host-machine clients if that FQDN is not reachable from outside the container.
+
+By default, Pulsar uses RocksDB as the [metadata store](concepts-architecture-overview.md#metadata-store), which is recommended for standalone instances. 
+
+If you encounter issues with RocksDB or need compatibility with existing ZooKeeper-based installations, you can use ZooKeeper as the metadata store by adding:
 
 ```
 ...
@@ -68,7 +76,7 @@ We recommend you consider using the following environment variable to use ZooKee
 ...
 ```
 
-Don't apply this fix for existing Pulsar standalone instances if you don't want to loose your data.
+Note: Switching metadata stores will create a new cluster. Don't apply this to existing instances unless you want to start fresh.
 
 :::
 
@@ -91,7 +99,7 @@ docker run -it \
 apachepulsar/pulsar:@pulsar:version@ sh \
 -c "bin/apply-config-from-env.py \
 conf/standalone.conf && \
-bin/pulsar standalone"
+bin/pulsar standalone --advertised-address localhost"
 ```
 
 </TabItem>
@@ -108,7 +116,7 @@ docker run -it ^
 apachepulsar/pulsar:@pulsar:version@ sh ^
 -c "bin/apply-config-from-env.py ^
 conf/standalone.conf && ^
-bin/pulsar standalone"
+bin/pulsar standalone --advertised-address localhost"
 ```
 
 </TabItem>
@@ -135,14 +143,14 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 
 :::tip
 
-* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
-* When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
+* To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
+* When you start a local standalone cluster, a `public/default` [namespace](concepts-messaging.md#namespaces) is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::
 
 ## Step 2: Use Pulsar in Docker
 
-Pulsar offers a variety of [client libraries](client-libraries.md), such as [Java](client-libraries-java.md), [Go](client-libraries-go.md), [Python](client-libraries-python.md), [C++](client-libraries-cpp.md).
+Pulsar offers a variety of [client libraries](/docs/client-libraries/), such as [Java](/docs/client-libraries/java), [Go](/docs/client-libraries/go), [Python](/docs/client-libraries/python), [C++](/docs/client-libraries/cpp).
 
 If you're running a local standalone cluster, you can use one of these root URLs to interact with your cluster:
 * `pulsar://localhost:6650`
@@ -158,7 +166,7 @@ pip install pulsar-client
 
 ### Consume a message
 
-Create a consumer and subscribe to the topic:
+Create a [consumer](concepts-clients.md#consumer) and [subscribe](concepts-messaging.md#subscriptions) to the [topic](concepts-messaging.md#topics):
 
 ```python
 import pulsar
@@ -176,7 +184,7 @@ client.close()
 
 ### Produce a message
 
-Start a producer to send some test messages:
+Start a [producer](concepts-clients.md#producer) to send some test messages:
 
 ```python
 import pulsar
@@ -293,4 +301,3 @@ The output is something like this:
     "nonContiguousDeletedMessagesRangesSerializedSize": 0
 }
 ```
-

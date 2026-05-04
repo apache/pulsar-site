@@ -1,10 +1,115 @@
 module.exports = [
   {
+    "tagName": "v4.2.1",
+    "vtag": "4.2.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.2.1/",
+    "doc": "/docs/4.2.x/client-libraries-java",
+    "version": "v4.2.x"
+  },
+  {
+    "tagName": "v4.2.0",
+    "vtag": "4.2.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.2.0/",
+    "doc": "/docs/4.2.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.1.3",
+    "vtag": "4.1.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.1.3/",
+    "doc": "/docs/4.1.x/client-libraries-java",
+    "version": "v4.1.x"
+  },
+  {
+    "tagName": "v4.1.2",
+    "vtag": "4.1.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.1.2/",
+    "doc": "/docs/4.1.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.1.1",
+    "vtag": "4.1.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.1.1/",
+    "doc": "/docs/4.1.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.1.0",
+    "vtag": "4.1.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.1.0/",
+    "doc": "/docs/4.1.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.10",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.10/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": "v4.0.x"
+  },
+  {
+    "tagName": "v4.0.9",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.9/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.8",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.8/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.7",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.7/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.6",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.6/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.5",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.5/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.4",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.4/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.3",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.3/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v4.0.2",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-4.0.2/",
+    "doc": "/docs/4.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
     "tagName": "v4.0.1",
     "vtag": "4.0.x",
     "releaseNotes": "/release-notes/versioned/client-java_4.0.1/",
     "doc": "/docs/4.0.x/client-libraries-java",
-    "version": "v4.0.x"
+    "version": ""
   },
   {
     "tagName": "v4.0.0",
@@ -14,11 +119,53 @@ module.exports = [
     "version": ""
   },
   {
+    "tagName": "v3.3.9",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.9/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": "v3.3.x"
+  },
+  {
+    "tagName": "v3.3.8",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.8/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.3.7",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.7/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.3.6",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.6/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.3.5",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.5/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.3.4",
+    "vtag": "3.3.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.3.4/",
+    "doc": "/docs/3.3.x/client-libraries-java",
+    "version": ""
+  },
+  {
     "tagName": "v3.3.3",
     "vtag": "3.3.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.3.3/",
     "doc": "/docs/3.3.x/client-libraries-java",
-    "version": "v3.3.x"
+    "version": ""
   },
   {
     "tagName": "v3.3.2",
@@ -105,11 +252,74 @@ module.exports = [
     "version": ""
   },
   {
+    "tagName": "v3.0.17",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.17/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": "v3.0.x"
+  },
+  {
+    "tagName": "v3.0.16",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.16/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.15",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.15/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.14",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.14/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.13",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.13/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.12",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.12/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.11",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.11/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.10",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.10/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
+    "tagName": "v3.0.9",
+    "vtag": "3.0.x",
+    "releaseNotes": "/release-notes/versioned/client-java-3.0.9/",
+    "doc": "/docs/3.0.x/client-libraries-java",
+    "version": ""
+  },
+  {
     "tagName": "v3.0.8",
     "vtag": "3.0.x",
     "releaseNotes": "/release-notes/versioned/client-java-3.0.8/",
     "doc": "/docs/3.0.x/client-libraries-java",
-    "version": "v3.0.x"
+    "version": ""
   },
   {
     "tagName": "v3.0.7",

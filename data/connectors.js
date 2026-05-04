@@ -78,12 +78,6 @@ module.exports = [
     link: 'https://github.com/apache/pulsar/tree/master/pulsar-io/file'
   },
   {
-    name: 'flume',
-    longName: 'Flume source and sink',
-    type: 'Source and sink',
-    link: 'https://flume.apache.org/'
-  },
-  {
     name: 'hbase',
     longName: 'HBase sink',
     type: 'Sink',
@@ -178,11 +172,5 @@ module.exports = [
     longName: 'Test Data Generator source',
     type: 'Source',
     link: 'https://github.com/apache/pulsar/tree/master/pulsar-io/data-generator'
-  },
-  {
-    name: 'twitter',
-    longName: 'Twitter Firehose source',
-    type: 'Source',
-    link: 'https://developer.twitter.com/en/docs'
   }
 ]

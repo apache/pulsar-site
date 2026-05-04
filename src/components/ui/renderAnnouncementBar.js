@@ -21,7 +21,7 @@ const arrowIcon = `
  */
 function renderAnnouncementBar(html, href) {
   return `
-    <a class="announcement-bar" href="${href}" target="_blank">
+    <a class="announcement-bar" href="${href}">
       <div class="announcement-bar__content">
         <!-- <svg class="announcement-bar__icon">
           ${boltIcon}

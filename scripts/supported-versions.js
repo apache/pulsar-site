@@ -10,7 +10,8 @@ function resolveActiveSupport(ver, released) {
   } else if (ver.minor > 0) {
     return support.add(6, 'months');
   } else {
-    return support.add(24, 'months');
+    // 36 months for security updates
+    return support.add(36, 'months');
   }
 }
 
@@ -34,7 +35,10 @@ function getSupportedVersionBranches(releases) {
     .sort((a, b) => semver.rcompare(b.version, a.version))
     .map(release => `${release.version.major}.${release.version.minor}.x`);
 
-  return supportedVersions;
+  const latestBranch = `${releaseList[0].version.major}.${releaseList[0].version.minor}.x`;
+  return supportedVersions.includes(latestBranch)
+    ? supportedVersions
+    : [...supportedVersions, latestBranch];
 }
 
 const supported = getSupportedVersionBranches(releases);

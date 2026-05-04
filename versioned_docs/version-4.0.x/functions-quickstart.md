@@ -413,7 +413,7 @@ The following example provides instructions to start a stateful function to vali
 
    :::tip
 
-   For more information about the `pulsar-admin functions querystate options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin API](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+   For more information about the `pulsar-admin functions querystate options` command, including flags, descriptions, default values, and shorthands, see [Pulsar admin API](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
    :::
 

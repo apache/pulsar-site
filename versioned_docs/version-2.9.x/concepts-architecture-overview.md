@@ -28,7 +28,7 @@ The Pulsar message broker is a stateless component that's primarily responsible 
 
 Messages are typically dispatched out of a [managed ledger](#managed-ledgers) cache for the sake of performance, *unless* the backlog exceeds the cache size. If the backlog grows too large for the cache, the broker will start reading entries from BookKeeper.
 
-Finally, to support geo-replication on global topics, the broker manages replicators that tail the entries published in the local region and republish them to the remote region using the Pulsar [Java client library](client-libraries-java.md).
+Finally, to support geo-replication on global topics, the broker manages replicators that tail the entries published in the local region and republish them to the remote region using the Pulsar [Java client library](pathname:///docs/client-libraries/java).
 
 > For a guide to managing Pulsar brokers, see the [brokers](admin-api-brokers.md) guide.
 
@@ -146,7 +146,7 @@ Some important things to know about the Pulsar proxy:
 
 ## Service discovery
 
-[Clients](client-libraries.md) connecting to Pulsar brokers need to be able to communicate with an entire Pulsar instance using a single URL.
+[Clients](pathname:///docs/client-libraries/) connecting to Pulsar brokers need to be able to communicate with an entire Pulsar instance using a single URL.
 
 You can use your own service discovery system if you'd like. If you use your own system, there is just one requirement: when a client performs an HTTP request to an endpoint, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to *some* active broker in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
 
@@ -154,7 +154,7 @@ The diagram below illustrates Pulsar service discovery:
 
 ![alt-text](/assets/pulsar-service-discovery.png)
 
-In this diagram, the Pulsar cluster is addressable via a single DNS name: `pulsar-cluster.acme.com`. A [Python client](client-libraries-python.md), for example, could access this Pulsar cluster like this:
+In this diagram, the Pulsar cluster is addressable via a single DNS name: `pulsar-cluster.acme.com`. A [Python client](pathname:///docs/client-libraries/python), for example, could access this Pulsar cluster like this:
 
 ```python
 

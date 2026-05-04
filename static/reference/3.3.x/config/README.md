@@ -41,7 +41,7 @@ You can set specific configurations through Java properties.
 Below is a brief summary of configurations for broker load balancing.
 
 For detailed descriptions of each configuration,
-see [Broker load balancing | Configurations](pathname:///reference/#/@pulsar:version_reference@/config/reference-configuration-broker).
+see [Broker load balancing | Configurations](/reference/#/@pulsar:version_reference@/config/reference-configuration-broker).
 
 > Note
 > Configurations with an asterisk (*) are only available in the extensible load balancer.

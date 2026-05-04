@@ -292,6 +292,19 @@ The amount of data that will be buffered for http requests before it is flushed 
 
 **Category**: HTTP
 
+### httpProxyIdleTimeout
+Http proxy idle timeout.
+
+The idle timeout value for HTTP proxy is in millisecond.
+
+**Type**: `int`
+
+**Default**: `30000`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpProxyTimeout
 Http proxy timeout.
 
@@ -333,6 +346,17 @@ Http directs to redirect to non-pulsar services
 **Type**: `java.util.Set`
 
 **Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpServerIdleTimeout
+Idle timeout for HTTP server connections in milliseconds.
+
+**Type**: `int`
+
+**Default**: `30000`
 
 **Dynamic**: `false`
 
@@ -699,6 +723,78 @@ Max concurrent lookup requests. The proxy will reject requests beyond that
 
 **Category**: RateLimiting
 
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: RateLimiting
+
 ### kinitCommand
 kerberos kinit command.
 
@@ -757,6 +853,17 @@ Hostname or IP address the service advertises to the outside world. If not set, 
 
 **Category**: Server
 
+### authenticationRoleLoggingAnonymizer
+Defines how the broker will anonymize the role and originalAuthRole before logging. Possible values are: NONE (no anonymization), REDACTED (replaces with '[REDACTED]'), hash:SHA256 (hashes using SHA-256), and hash:MD5 (hashes using MD5). Default is NONE.
+
+**Type**: `java.lang.String`
+
+**Default**: `NONE`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### bindAddress
 Hostname or IP address the service binds on
 
@@ -796,6 +903,17 @@ Capacity for thread pool queue in the HTTP server Default is set to 8192.
 **Type**: `int`
 
 **Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### keepAliveIntervalSeconds
+Specifies the interval (in seconds) for sending ping messages to the client. Set to 0 to disable ping messages. This setting applies to client connections used for topic lookups and partition metadata requests. When a client establishes a broker connection via the proxy, the client and broker will communicate directly without the proxy intercepting the messages. In that case, the broker's keepAliveIntervalSeconds configuration becomes relevant.
+
+**Type**: `int`
+
+**Default**: `30`
 
 **Dynamic**: `false`
 
@@ -1285,6 +1403,17 @@ The directory to locate proxy extensions
 **Type**: `java.lang.String`
 
 **Default**: `./proxyextensions`
+
+**Dynamic**: `false`
+
+**Category**: proxy plugin
+
+### proxyHttpResponseHeadersJson
+Default http header map to add into http-proxy for the any security requirements eg: { "header1": "val1", "header2": "val2" }
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
 
 **Dynamic**: `false`
 

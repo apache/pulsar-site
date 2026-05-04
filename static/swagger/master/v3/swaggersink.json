@@ -161,6 +161,9 @@
                 "cryptoConfig": {
                     "$ref": "#/definitions/CryptoConfig"
                 },
+                "messagePayloadProcessorConfig": {
+                    "$ref": "#/definitions/MessagePayloadProcessorConfig"
+                },
                 "poolMessages": {
                     "type": "boolean"
                 },
@@ -229,6 +232,20 @@
                 "timestampMs": {
                     "format": "int64",
                     "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "MessagePayloadProcessorConfig": {
+            "properties": {
+                "className": {
+                    "type": "string"
+                },
+                "config": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
                 }
             },
             "type": "object"

@@ -11,6 +11,8 @@ The Pulsar proxy is not intended to be exposed on the public internet. The secur
 
 If a proxy deployment cannot be protected with network perimeter security, the alternative would be to use [Pulsar's "Proxy SNI routing" feature](concepts-proxy-sni-routing.md) with a properly secured and audited solution. In that case Pulsar proxy component is not used at all.
 
+Besides the Pulsar Proxy, the ["multiple advertised listeners" feature](concepts-multiple-advertised-listeners.md) can be used to expose a Pulsar cluster to external clients. This also requires proper network perimeter security.
+
 ## Configure the proxy
 
 Before using a proxy, you need to configure it with a broker's address in the cluster. You can configure the broker URL in the proxy configuration, or the proxy to connect directly using service discovery.

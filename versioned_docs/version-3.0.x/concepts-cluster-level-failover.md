@@ -165,4 +165,4 @@ In an automatic failover cluster, the primary cluster and backup cluster are awa
 
 ### How to use cluster-level failover
 
-See [Configure cluster-level failover](client-libraries-cluster-level-failover.md).
+See [Configure cluster-level failover](pathname:///docs/client-libraries/cluster-level-failover).

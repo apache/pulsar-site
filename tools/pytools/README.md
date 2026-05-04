@@ -140,18 +140,12 @@ If files don't get updated in the published website although site publishing is 
 This is how to clean the history of `asf-site-next` branch:
 
 ```shell
-git clone --depth 1 --branch asf-site-next  https://github.com/apache/pulsar-site.git
-cd pulsar-site
-# create a new empty branch
-git checkout --orphan asf-site-next-temp
-# copy all files from asf-site-next branch
-git checkout asf-site-next -- .
-# add all files to the new branch
-git add .* *
-# reuse the commit message of asf-site-next branch
-git commit --reuse-message=asf-site-next --no-edit
-# force push the new branch to remote as asf-site-next branch
-git push --force origin asf-site-next-temp:asf-site-next
+git clone --depth 1 -b asf-site-next https://github.com/apache/pulsar-site pulsar-site-static
+cd pulsar-site-static
+git checkout --orphan asf-site-next-truncated
+git add -A
+git commit -m "History truncated"
+git push -f origin HEAD:asf-site-next
 ```
 
 If push fails, you might need to remove branch protection of `asf-site-next` branch. This is handled in the `.asf.yaml` file of the `main` branch.

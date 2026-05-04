@@ -25,7 +25,7 @@ You can interact with the admin interface via:
 
   > **Important**
   >
-  > For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+  > For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more information, see [Pulsar admin doc](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 - HTTP calls, which are made against the admin {@inject: rest:REST:/} API provided by Pulsar brokers. For some RESTful APIs, they might be redirected to the owner brokers for serving with [`307 Temporary Redirect`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307), hence the HTTP callers should handle `307 Temporary Redirect`. If you use `curl` commands, you should specify `-L` to handle redirections.
 
@@ -37,13 +37,13 @@ You can interact with the admin interface via:
 
   > **Important**
   >
-  > For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+  > For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](@pulsar:javadoc:admin@/).
 
 > **The REST API is the admin interface**. Both the `pulsar-admin` CLI tool and the Java client use the REST API. If you implement your own admin interface client, you should use the REST API.
 
 ## Admin setup
 
-Each of the three admin interfaces (the `pulsar-admin` CLI tool, the {@inject: rest:REST:/} API, and the [Java admin API](/api/admin)) requires some special setup if you have enabled authentication in your Pulsar instance.
+Each of the three admin interfaces (the `pulsar-admin` CLI tool, the {@inject: rest:REST:/} API, and the [Java admin API](@pulsar:javadoc:admin@)) requires some special setup if you have enabled authentication in your Pulsar instance.
 
 ````mdx-code-block
 <Tabs
@@ -71,7 +71,7 @@ You can find details for the REST API exposed by Pulsar brokers in this {@inject
 </TabItem>
 <TabItem value="Java">
 
-To use the Java admin API, instantiate a [PulsarAdmin](/api/admin/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](/api/admin/org/apache/pulsar/client/admin/PulsarAdminBuilder) object. The following is a minimal example using `localhost`:
+To use the Java admin API, instantiate a [PulsarAdmin](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdminBuilder) object. The following is a minimal example using `localhost`:
 
 ```java
 

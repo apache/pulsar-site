@@ -25,7 +25,6 @@ Sometimes some PRs cannot be cherry-picked cleanly, you might need to create a s
 
 For PRs that are still open, you can choose to delay them to the next release or ping others to review so that they can be merged.
 
-To verify the release branch is not broken, you should trigger a Pulsar CI builds for the [pulsar-ci.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci.yaml) and [pulsar-ci-flaky.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci-flaky.yaml) workflows. The builds must pass before a release is performed.
 
 If you haven't already done it, [create and publish the GPG key](create-gpg-keys.md). You will use the key to sign the release artifacts.
 
@@ -37,20 +36,35 @@ Before you start the next release steps, make sure you have installed these soft
     * Pulsar docker images are running Java 21 since 3.3.0
   * JDK 17 for Pulsar version >= 2.11
   * JDK 11 for earlier versions
-* Maven 3.9.9 (most recent stable Maven 3.9.x version)
-  * Install using `sdkman i maven 3.9.9`
+* Maven 3.9.12 (most recent stable Maven 3.9.x version)
+  * Install using `sdkman i maven 3.9.12`
 * Zip
 
 Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
 
+## Prepare the release branch
+
+Before starting a release, besides handling the PRs, it's necessary to check that there aren't open critical security vulnerabilities in the dependencies. This can be checked from GitHub Security Alerts and the [OWASP Dependency Check workflow run logs](https://github.com/apache/pulsar/actions/workflows/ci-owasp-dependency-check.yaml).
+
+In addition, it's useful to check whether there's [a new release of Netty available](https://netty.io/news/index.html) with important fixes.
+
+To verify the release branch is not broken, you should trigger a Pulsar CI builds for the [pulsar-ci.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci.yaml) and [pulsar-ci-flaky.yaml](https://github.com/apache/pulsar/actions/workflows/pulsar-ci-flaky.yaml) workflows. The builds must pass before a release is performed.
+
 ## Set environment variables to be used across the commands {#env-vars}
 
 ```shell
-export VERSION_RC=3.0.4-candidate-1
+export VERSION_RC=4.0.7-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export NEXT_VERSION_WITHOUT_RC=3.0.5
-export VERSION_BRANCH=branch-3.0
+export NEXT_VERSION_WITHOUT_RC=4.0.8
+export VERSION_BRANCH=branch-4.0
 export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=21
+```
+
+for 3.x releases, use Java 17:
+
+```shell
+# for 3.x releases, use Java 17 instead of Java 21
 export SDKMAN_JAVA_VERSION=17
 ```
 
@@ -157,7 +171,9 @@ cd $PULSAR_PATH
 
 # Commit
 git commit -m "Release $VERSION_WITHOUT_RC" -a
+```
 
+```shell
 # Create a "candidate" tag
 git tag -u $APACHE_USER@apache.org v$VERSION_RC -m "Release $VERSION_RC"
 
@@ -179,6 +195,14 @@ git tag -d v$VERSION_RC
 git push $UPSTREAM_REMOTE :v$VERSION_RC
 ```
 
+## Specify MAVEN_OPTS
+
+Set `MAVEN_OPTS` to avoid issues in the build process.
+
+```shell
+export MAVEN_OPTS="-Xss1500k -Xmx3072m -XX:+UnlockDiagnosticVMOptions -XX:GCLockerRetryAllocationCount=100"
+```
+
 ## Cleaning up locally compiled BookKeeper artifacts
 
 It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
@@ -187,7 +211,8 @@ Cleaning up the local Maven repository Bookkeeper artifacts for the version used
 
 ```shell
 cd $PULSAR_PATH
-BOOKKEEPER_VERSION=$(mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
+sdk u java $SDKMAN_JAVA_VERSION
+BOOKKEEPER_VERSION=$(command mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
 echo "BookKeeper version is $BOOKKEEPER_VERSION"
 [ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
 ```
@@ -201,7 +226,7 @@ cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 # build the binaries
-mvn clean install -DskipTests
+command mvn clean install -DskipTests
 ```
 
 After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
@@ -289,7 +314,7 @@ Then use instructions in [verifying release candidates](validate-release-candida
 cd /tmp
 tar -xvzf ~/pulsar-svn-release-${VERSION_RC}/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
 cd apache-pulsar-$VERSION_WITHOUT_RC-src
-mvn apache-rat:check
+command mvn apache-rat:check
 ```
 
 ### Commit and upload the staged files in the local SVN directory to ASF SVN server
@@ -302,7 +327,17 @@ svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 
 ### Stage Maven modules
 
-Upload the artifacts to ASF Nexus:
+:::caution
+Make sure to run only one release at a time when working on multiple releases in parallel. Running multiple builds simultaneously will result in all releases being placed into a single staging repository. Close [the staging repository](https://repository.apache.org/#stagingRepositories) before performing another release.
+:::
+
+Set your ASF password in the following line. Add a space as the first character on the command line so that your password doesn't get recorded in shell history.
+
+```shell
+ export APACHE_PASSWORD=""
+```
+
+Upload the artifacts to [ASF Nexus](https://repository.apache.org)
 
 ```shell
 cd $PULSAR_PATH
@@ -311,17 +346,12 @@ sdk u java $SDKMAN_JAVA_VERSION
 # Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
 git status
 
-# add space before the "export APACHE_PASSWORD" so that the password doesn't get added to shell history
-# set your ASF password in the following line
- export APACHE_PASSWORD=""
-
 # src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
-curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/master/src/settings.xml
+curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/branch-4.2/src/settings.xml
 
 # publish artifacts
-mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml
-# publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
-mvn deploy -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration
+# and publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
+command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml && command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration || echo 'ERROR: Publishing Failed!'
 ```
 
 :::note
@@ -392,24 +422,29 @@ For creating and publishing the docker images, run the following commands:
 ```shell
 # set your dockerhub username
 DOCKER_USER=<your-dockerhub-username>
+```
 
+```shell
+# login to dockerhub
+docker login -u $DOCKER_USER
+```
+
+```shell
 # ensure that you have the most recent base image locally
 docker pull ubuntu:22.04 # for 3.0.x
-docker pull alpine:3.20 # for 3.3.x+
+docker pull alpine:3.21 # for 3.3.x+
 
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 
-# login to dockerhub
-docker login -u $DOCKER_USER
-
-mvn install -pl docker/pulsar,docker/pulsar-all \
+command mvn install -pl docker/pulsar,docker/pulsar-all \
     -DskipTests \
     -Pmain,docker,docker-push \
     -Ddocker.platforms=linux/amd64,linux/arm64 \
     -Ddocker.organization=$DOCKER_USER \
-    -Ddocker.noCache=true
+    -Ddocker.noCache=true \
+    -Ddocker.skip.tag=false
 ```
 
 ## Call for the vote to release a version based on the release candidate
@@ -424,7 +459,7 @@ Set these shell variables
 DOCKER_USER=<your-dockerhub-username>
 STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
 MY_NAME="Firstname Lastname"
-PREVIOUS_VERSION_WITHOUT_RC="3.0.3"
+PREVIOUS_VERSION_WITHOUT_RC="4.0.6"
 ```
 
 ```shell
@@ -444,15 +479,14 @@ Set also these
 ```shell
 PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
 PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
-# validate pulling, will take some time, you can skip this if you have a slow internet connection
-docker pull $PULSAR_IMAGE_NAME
-docker pull $PULSAR_ALL_IMAGE_NAME
-# check that images are about right, you can skip this if you have a slow internet connection
-docker run --rm $PULSAR_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
-docker run --rm $PULSAR_ALL_IMAGE_NAME bash -c 'ls /pulsar/lib'  |less
-# check that Pulsar standalone starts too (use CTRL-C to terminate)
-docker run --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
-docker run --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+```
+
+```shell
+# check that Pulsar standalone starts (use CTRL-C to terminate) for both architectures
+docker run --platform linux/arm64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/arm64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
 ```
 
 Now you can render the template to the clipboard
@@ -668,10 +702,12 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 
 `regctl` from [regclient](https://github.com/regclient/regclient) is needed for copying multi-arch images. Install with `brew install regclient` or with [other installation options](https://github.com/regclient/regclient/blob/main/docs/install.md) of regclient. The benefit of `regctl` over using `docker pull/tag/push` is that it will handle copying both `amd64` and the `arm64` image.
 
-```bash
+```shell
 RELEASE_MANAGER_DOCKER_USER=otheruser
-CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
+```
 
+```shell
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
 ```
@@ -784,7 +820,10 @@ This step is for every release.
 First, build swagger files from apache/pulsar repo at the released tag:
 
 ```shell
-mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
+git checkout v$VERSION_WITHOUT_RC
+command mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
 PULSAR_PATH=$(pwd)
 ```
 
@@ -851,8 +890,19 @@ You can generate references of config and command-line tool by running the follo
 # build Pulsar distributions under /path/to/pulsar-3.X.Y
 cd tools/pytools
 poetry install
-poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
+# ensure that defaults using Runtime.getRuntime().availableProcessors() will be based on 1 as the number of CPUs
+_JAVA_OPTIONS=-XX:ActiveProcessorCount=1 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
+
+For new feature releases, you will need to manually edit `src/static/reference/index.html` and add a new entry for the feature release (for example `4.1.x`) in 2 locations:
+
+```patch
++          '<option value="4.1.x">4.1.x</value>' +
+-            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "2.11.x", "3.0.x", "3.1.x", "3.2.x", "3.3.x", "4.0.x", "next"],
++            values: ["2.6.x", "2.7.x", "2.8.x", "2.9.x", "2.10.x", "2.11.x", "3.0.x", "3.1.x", "3.2.x", "3.3.x", "4.0.x", "4.1.x", "next"],
+```
+
+Commit the changes:
 
 ```shell
 cd ../..

@@ -109,7 +109,7 @@ fail.
 Currently, the Python schema support Avro and JSON, in addition to
 regular types like `str` and `bytes`.
 
-The complete documentation is available at [Python schema](/docs/client-libraries-python/#schema).
+The complete documentation is available at [Python schema](/docs/client-libraries/python#schema).
 
 ### Function state API in Python
 

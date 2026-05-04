@@ -9,7 +9,7 @@ $ pulsar-admin resourcegroups subcommand
 
 
 
-## list
+## <em>list</em>
 
 List the existing resourcegroups
 
@@ -25,7 +25,7 @@ $ pulsar-admin resourcegroups list options
 |---|---|---|
 
 
-## get
+## <em>get</em>
 
 Gets the configuration of a resourcegroup
 
@@ -41,7 +41,7 @@ $ pulsar-admin resourcegroups get options
 |---|---|---|
 
 
-## create
+## <em>create</em>
 
 Creates a new resourcegroup
 
@@ -61,7 +61,7 @@ $ pulsar-admin resourcegroups create options
 | `--msg-dispatch-rate, -md` | message-dispatch-rate (default -1 will be overwrite if not passed)|null||
 
 
-## update
+## <em>update</em>
 
 Updates a resourcegroup
 
@@ -81,7 +81,7 @@ $ pulsar-admin resourcegroups update options
 | `--byte-dispatch-rate, -bd` | byte-dispatch-rate |null||
 
 
-## delete
+## <em>delete</em>
 
 Deletes an existing ResourceGroup
 

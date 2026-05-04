@@ -27,8 +27,8 @@ PulsarClient client = PulsarClient.builder()
 ```
 
 You can implement 2 interfaces on the client side:
- * [`Authentication`](/api/client/org/apache/pulsar/client/api/Authentication.html)
- * [`AuthenticationDataProvider`](/api/client/org/apache/pulsar/client/api/AuthenticationDataProvider.html)
+ * [`Authentication`](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Authentication.html)
+ * [`AuthenticationDataProvider`](@pulsar:javadoc:client@/org/apache/pulsar/client/api/AuthenticationDataProvider.html)
 
 This in turn requires you to provide the client credentials in the form of `org.apache.pulsar.client.api.AuthenticationDataProvider` and also leaves the chance to return different kinds of authentication token for different types of connection or by passing a certificate chain to use for TLS.
 

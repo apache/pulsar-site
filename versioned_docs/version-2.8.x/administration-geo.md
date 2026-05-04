@@ -50,7 +50,7 @@ The following example connects three clusters: **us-east**, **us-west**, and **u
 
 ### Connect replication clusters
 
-To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) tool to create a connection.
+To replicate data among clusters, you need to configure each cluster to connect to the other. You can use the [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/) tool to create a connection.
 
 **Example**
 
@@ -71,7 +71,7 @@ Suppose that you have 3 replication clusters: `us-west`, `us-cent`, and `us-east
 
    :::tip
 
-   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=create).
+   - If you want to use a secure connection for a cluster, you can use the flags `--broker-url-secure` and `--url-secure`. For more information, see [pulsar-admin clusters create](/reference/#/@pulsar:version_reference@/pulsar-admin/clusters?id=create).
    - Different clusters may have different authentications. You can use the authentication flag `--auth-plugin` and `--auth-parameters` together to set cluster authentication, which overrides `brokerClientAuthenticationPlugin` and `brokerClientAuthenticationParameters` if `authenticationEnabled` sets to `true` in `broker.conf` and `standalone.conf`. For more information, see [authentication and authorization](concepts-authentication.md).
 
    :::
@@ -136,7 +136,7 @@ Once you create a geo-replication namespace, any topics that producers or consum
 
 By default, messages are replicated to all clusters configured for the namespace. You can restrict replication selectively by specifying a replication list for a message, and then that message is replicated only to the subset in the replication list.
 
-The following is an example for the [Java API](client-libraries-java.md). Note the use of the `replicationClusters` method when you construct the [Message](/api/client/org/apache/pulsar/client/api/Message) object:
+The following is an example for the [Java API](pathname:///docs/client-libraries/java). Note the use of the `replicationClusters` method when you construct the [Message](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Message) object:
 
 ```java
 

@@ -164,7 +164,7 @@ pulsar_manager:
 
    :::tip
 
-   To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+   To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
    :::
 

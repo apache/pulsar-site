@@ -9,7 +9,7 @@ $ pulsar-admin sources subcommand
 
 
 
-## create
+## <em>create</em>
 
 Submit a Pulsar IO source connector to run in a Pulsar cluster
 
@@ -46,7 +46,7 @@ $ pulsar-admin sources create options
 | `--tenant` | The source's tenant|null||
 
 
-## update
+## <em>update</em>
 
 Update a Pulsar IO source connector
 
@@ -84,7 +84,7 @@ $ pulsar-admin sources update options
 | `--tenant` | The source's tenant|null||
 
 
-## delete
+## <em>delete</em>
 
 Stops a Pulsar IO source connector
 
@@ -103,7 +103,7 @@ $ pulsar-admin sources delete options
 | `--tenant` | The source's tenant|null||
 
 
-## get
+## <em>get</em>
 
 Gets the information about a Pulsar IO source connector
 
@@ -122,7 +122,7 @@ $ pulsar-admin sources get options
 | `--tenant` | The source's tenant|null||
 
 
-## status
+## <em>status</em>
 
 Check the current status of a Pulsar Source
 
@@ -142,7 +142,7 @@ $ pulsar-admin sources status options
 | `--tenant` | The source's tenant|null||
 
 
-## list
+## <em>list</em>
 
 List all running Pulsar IO source connectors
 
@@ -160,7 +160,7 @@ $ pulsar-admin sources list options
 | `--tenant` | The source's tenant|null||
 
 
-## stop
+## <em>stop</em>
 
 Stop source instance
 
@@ -180,7 +180,7 @@ $ pulsar-admin sources stop options
 | `--tenant` | The source's tenant|null||
 
 
-## start
+## <em>start</em>
 
 Start source instance
 
@@ -200,7 +200,7 @@ $ pulsar-admin sources start options
 | `--tenant` | The source's tenant|null||
 
 
-## restart
+## <em>restart</em>
 
 Restart source instance
 
@@ -220,7 +220,7 @@ $ pulsar-admin sources restart options
 | `--tenant` | The source's tenant|null||
 
 
-## localrun
+## <em>localrun</em>
 
 Run a Pulsar IO source connector locally (rather than deploying it to the Pulsar cluster)
 
@@ -268,7 +268,7 @@ $ pulsar-admin sources localrun options
 | `--tenant` | The source's tenant|null||
 
 
-## available-sources
+## <em>available-sources</em>
 
 Get the list of Pulsar IO connector sources supported by Pulsar cluster
 
@@ -284,7 +284,7 @@ $ pulsar-admin sources available-sources options
 |---|---|---|
 
 
-## reload
+## <em>reload</em>
 
 Reload the available built-in connectors
 

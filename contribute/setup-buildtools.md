@@ -25,15 +25,15 @@ In Pulsar development, we use [Amazon Corretto OpenJDK](https://docs.aws.amazon.
 # find out most recent Amazon Corretto release
 sdk l java |grep amzn
 # install
-sdk i java 21.0.4-amzn
-sdk i java 17.0.12-amzn
+sdk i java 21.0.9-amzn
+sdk i java 17.0.17-amzn
 # switching between versions
-sdk u java 17.0.12-amzn
-sdk u java 21.0.4-amzn
-# adding aliases
+sdk u java 17.0.17-amzn
+sdk u java 21.0.9-amzn
+# adding / updating aliases
 cd ~/.sdkman/candidates/java
-ln -s 17.0.12-amzn 17
-ln -s 21.0.4-amzn 21
+rm -f 17 && ln -s 17.0.17-amzn 17
+rm -f 21 && ln -s 21.0.9-amzn 21
 # switching between versions using aliases
 sdk u java 17
 sdk u java 21

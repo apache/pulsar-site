@@ -18,14 +18,14 @@ const versions = [
     path: "/docs/next"
   },
   {
+    label: '4.2.x',
+    name: '4.2.x',
+    path: `/docs/4.2.x`,
+  },
+  {
     label: '4.0.x LTS',
     name: '4.0.x',
     path: `/docs/4.0.x`,
-  },
-  {
-    label: '3.3.x',
-    name: '3.3.x',
-    path: `/docs/3.3.x`,
   },
   {
     label: '3.0.x LTS',
@@ -59,7 +59,8 @@ export default function DocsVersionDropdownNavbarItem({
       // We try to link to the same doc, in another version
       // When not possible, fallback to the "main doc" of the version
       const _version = version.name === "current" ? "/next" : "/" + version.name;
-      const _docId = activeDocContext.activeDoc.id === "about" ? "/" : "/" + activeDocContext.activeDoc.id;
+      const activeDocId = activeDocContext.activeDoc?.id;
+      const _docId = !activeDocId || activeDocId === "about" ? "/" : "/" + activeDocId;
       const versionDoc = {
         path: "/docs" + _version + _docId,
       };

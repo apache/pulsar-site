@@ -20,9 +20,9 @@ Currently, Pulsar is available for 64-bit **macOS**, **Linux**, and **Windows**.
 
 To get started with Pulsar, download a binary tarball release in one of the following ways:
 
-* download from the Apache mirror (<a href="pulsar:binary_release_url" download>Pulsar @pulsar:version@ binary release</a>)
+* download from the Apache mirror (<a href="@pulsar:binary_release_url@" download>Pulsar @pulsar:version@ binary release</a>)
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)
+* download from the Pulsar [downloads page](@pulsar:download_page_url@)
 
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 
@@ -30,7 +30,7 @@ To get started with Pulsar, download a binary tarball release in one of the foll
 
   ```shell
 
-  $ wget pulsar:binary_release_url
+  $ wget @pulsar:binary_release_url@
 
   ```
 
@@ -79,9 +79,9 @@ Otherwise, skip this step and perform the next step [Start Pulsar standalone](#s
 Since `2.1.0-incubating` release, Pulsar releases a separate binary distribution, containing all the `builtin` connectors.
 To enable those `builtin` connectors, you can download the connectors tarball release in one of the following ways:
 
-* download from the Apache mirror <a href="pulsar:connector_release_url" download>Pulsar IO Connectors @pulsar:version@ release</a>
+* download from the Apache mirror <a href="@pulsar:connector_release_url@" download>Pulsar IO Connectors @pulsar:version@ release</a>
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)
+* download from the Pulsar [downloads page](@pulsar:download_page_url@)
 
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 
@@ -89,7 +89,7 @@ To enable those `builtin` connectors, you can download the connectors tarball re
 
   ```shell
 
-  $ wget pulsar:connector_release_url/{connector}-@pulsar:version@.nar
+  $ wget @pulsar:connector_release_url@/{connector}-@pulsar:version@.nar
 
   ```
 
@@ -127,9 +127,9 @@ To enable tiered storage feature, follow the instructions below; otherwise skip 
 
 To get started with [tiered storage offloaders](concepts-tiered-storage.md), you need to download the offloaders tarball release on every broker node in one of the following ways:
 
-* download from the Apache mirror <a href="pulsar:offloader_release_url" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
+* download from the Apache mirror <a href="@pulsar:offloader_release_url@" download>Pulsar Tiered Storage Offloaders @pulsar:version@ release</a>
 
-* download from the Pulsar [downloads page](pulsar:download_page_url)
+* download from the Pulsar [downloads page](@pulsar:download_page_url@)
 
 * download from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 
@@ -137,7 +137,7 @@ To get started with [tiered storage offloaders](concepts-tiered-storage.md), you
 
   ```shell
 
-  $ wget pulsar:offloader_release_url
+  $ wget @pulsar:offloader_release_url@
 
   ```
 
