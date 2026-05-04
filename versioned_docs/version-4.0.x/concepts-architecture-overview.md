@@ -5,11 +5,11 @@ sidebar_label: "Architecture"
 description: Get a comprehensive understanding of the architecture of Apache Pulsar
 ---
 
-At the highest level, a Pulsar instance is composed of one or more Pulsar clusters. Clusters within an instance can [replicate](concepts-replication.md) data amongst themselves.
+At the highest level, a Pulsar instance is composed of one or more Pulsar [clusters](#clusters). Clusters within an instance can [replicate](concepts-replication.md) data amongst themselves.
 
 A Pulsar cluster consists of the following components:
 
-* One or more brokers handles and [load balances](administration-load-balance.md) incoming messages from producers, dispatches messages to consumers, communicates with the Pulsar metadata store to handle various coordination tasks, stores messages in BookKeeper instances (aka bookies), and coordinates cluster operations through the metadata store.
+* One or more [brokers](#brokers) handles and [load balances](administration-load-balance.md) incoming messages from [producers](concepts-clients.md#producer), dispatches messages to [consumers](concepts-clients.md#consumer), communicates with the Pulsar [metadata store](#metadata-store) to handle various coordination tasks, stores messages in [BookKeeper](#apache-bookkeeper) instances (aka bookies), and coordinates cluster operations through the metadata store.
 * A BookKeeper cluster consisting of one or more bookies handles [persistent storage](#persistent-storage) of messages.
 * A metadata store cluster (ZooKeeper, etcd, or other supported backend) handles coordination tasks and cluster-specific metadata storage.
 
@@ -38,7 +38,7 @@ A Pulsar instance consists of one or more Pulsar *clusters*. Clusters, in turn, 
 
 * One or more Pulsar [brokers](#brokers)
 * A ZooKeeper quorum used for cluster-level configuration and coordination
-* An ensemble of bookies used for [persistent storage](#persistent-storage) of messages
+* An ensemble of [bookies](#apache-bookkeeper) used for [persistent storage](#persistent-storage) of messages
 
 Clusters can replicate among themselves using [geo-replication](concepts-replication.md).
 
@@ -46,7 +46,7 @@ Clusters can replicate among themselves using [geo-replication](concepts-replica
 
 ## Metadata store
 
-The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such as topic metadata, schema, broker load data, and so on. Pulsar supports multiple metadata store backends to provide flexibility in deployment architectures and operational requirements:
+The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such as [topic](concepts-messaging.md#topics) metadata, [schema](schema-overview.md), broker load data, and so on. Pulsar supports multiple metadata store backends to provide flexibility in deployment architectures and operational requirements:
 
 ### Supported Metadata Store Backends
 
@@ -79,24 +79,24 @@ The Pulsar metadata store can be deployed on a separate cluster or integrated wi
 
 In a Pulsar instance:
 
-* A configuration store quorum stores configuration for tenants, namespaces, and other entities that need to be globally consistent.
-* Each cluster has its own local ZooKeeper ensemble that stores cluster-specific configuration and coordination such as which brokers are responsible for which topics as well as ownership metadata, broker load reports, BookKeeper ledger metadata, and more.
+* A configuration store quorum stores configuration for [tenants](concepts-multi-tenancy.md), [namespaces](concepts-messaging.md#namespaces), and other entities that need to be globally consistent.
+* Each cluster has its own local ZooKeeper ensemble that stores cluster-specific configuration and coordination such as which brokers are responsible for which [topics](concepts-messaging.md#topics) as well as ownership metadata, broker load reports, BookKeeper ledger metadata, and more.
 
 ## Configuration store
 
-The configuration store is a ZooKeeper quorum that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, tenants, namespaces, partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
+The configuration store is a ZooKeeper quorum that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, [tenants](concepts-multi-tenancy.md), [namespaces](concepts-messaging.md#namespaces), partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
 
 ## Persistent storage
 
-Pulsar provides guaranteed message delivery for applications. If a message successfully reaches a Pulsar broker, it will be delivered to its intended target.
+Pulsar provides guaranteed message delivery for applications. If a message successfully reaches a Pulsar [broker](#brokers), it will be delivered to its intended target.
 
-This guarantee requires that non-acknowledged messages are stored durably until they can be delivered to and acknowledged by consumers. This mode of messaging is commonly called *persistent messaging*. In Pulsar, N copies of all messages are stored and synced on disk, for example, 4 copies across two servers with mirrored [RAID](https://en.wikipedia.org/wiki/RAID) volumes on each server.
+This guarantee requires that non-acknowledged messages are stored durably until they can be delivered to and acknowledged by [consumers](concepts-clients.md#consumer). This mode of messaging is commonly called *persistent messaging*. In Pulsar, N copies of all messages are stored and synced on disk, for example, 4 copies across two servers with mirrored [RAID](https://en.wikipedia.org/wiki/RAID) volumes on each server.
 
 ### Apache BookKeeper
 
 Pulsar uses a system called [Apache BookKeeper](http://bookkeeper.apache.org/) for persistent message storage. BookKeeper is a distributed [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) (WAL) system that provides several crucial advantages for Pulsar:
 
-* It enables Pulsar to utilize many independent logs, called [ledgers](#ledgers). Multiple ledgers can be created for topics over time.
+* It enables Pulsar to utilize many independent logs, called [ledgers](#ledgers). Multiple ledgers can be created for [topics](concepts-messaging.md#topics) over time.
 * It offers very efficient storage for sequential data that handles entry replication.
 * It guarantees read consistency of ledgers in the presence of various system failures.
 * It offers even distribution of I/O across bookies.
@@ -180,7 +180,7 @@ Some important things to know about the Pulsar proxy:
 
 Service discovery is a mechanism that enables connecting [clients](concepts-clients.md) to use just a single URL to interact with an entire Pulsar instance.
 
-You can use your own service discovery system if you'd like. If you use your own system, there is just one requirement: when a client performs an HTTP request to an endpoint, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to *some* active broker in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
+You can use your own service discovery system if you'd like. If you use your own system, there is just one requirement: when a client performs an HTTP request to an endpoint, such as `http://pulsar.us-west.example.com:8080`, the client needs to be redirected to *some* active [broker](#brokers) in the desired cluster, whether via DNS, an HTTP or IP redirect, or some other means.
 
 The diagram below illustrates Pulsar service discovery:
 
@@ -196,7 +196,7 @@ client = Client('pulsar://pulsar-cluster.acme.com:6650')
 
 :::note
 
-In Pulsar, each topic is handled by only one broker. Initial requests from a client to read, update or delete a topic are sent to a broker that may not be the topic owner. If the broker cannot handle the request for this topic, it redirects the request to the appropriate broker.
+In Pulsar, each [topic](concepts-messaging.md#topics) is handled by only one [broker](#brokers). Initial requests from a client to read, update or delete a topic are sent to a broker that may not be the topic owner. If the broker cannot handle the request for this topic, it redirects the request to the appropriate broker.
 
 :::
 
