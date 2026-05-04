@@ -79,11 +79,11 @@ Create a new consumer and subscribe with the `Exclusive` subscription type.
 <TabItem value="Java">
 
 ```java
-Consumer consumer = client.newConsumer()
+Consumer<byte[]> consumer = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Exclusive)
-        .subscribe()
+        .subscribe();
 ```
 
   </TabItem>
@@ -117,18 +117,18 @@ Create new consumers and subscribe with the `Failover` subscription type.
 <TabItem value="Java">
 
 ```java
-Consumer consumer1 = client.newConsumer()
+Consumer<byte[]> consumer1 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Failover)
-        .subscribe()
-Consumer consumer2 = client.newConsumer()
+        .subscribe();
+Consumer<byte[]> consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Failover)
-        .subscribe()
-//conumser1 is the active consumer, consumer2 is the standby consumer.
-//consumer1 receives 5 messages and then crashes, consumer2 takes over as an  active consumer.
+        .subscribe();
+//consumer1 is the active consumer, consumer2 is the standby consumer.
+//consumer1 receives 5 messages and then crashes, consumer2 takes over as an active consumer.
 ```
 
   </TabItem>
@@ -184,17 +184,17 @@ Create new consumers and subscribe with `Shared` subscription type.
 <TabItem value="Java">
 
 ```java
-Consumer consumer1 = client.newConsumer()
+Consumer<byte[]> consumer1 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
-        .subscribe()
+        .subscribe();
 
-Consumer consumer2 = client.newConsumer()
+Consumer<byte[]> consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Shared)
-        .subscribe()
+        .subscribe();
 //Both consumer1 and consumer2 are active consumers.
 ```
 
@@ -253,17 +253,17 @@ When using Key_Shared subscriptions, producers **must** either **disable batchin
 <TabItem value="Java">
 
 ```java
-Consumer consumer1 = client.newConsumer()
+Consumer<byte[]> consumer1 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
-        .subscribe()
+        .subscribe();
 
-Consumer consumer2 = client.newConsumer()
+Consumer<byte[]> consumer2 = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscriptionType(SubscriptionType.Key_Shared)
-        .subscribe()
+        .subscribe();
 //Both consumer1 and consumer2 are active consumers.
 ```
 
