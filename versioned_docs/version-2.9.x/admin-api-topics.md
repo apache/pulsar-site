@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 >
 > This page only shows **some frequently used operations**.
 >
-> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+> - For the latest and complete information about `Pulsar admin`, including commands, flags, descriptions, and more, see [Pulsar admin doc](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 >
 > - For the latest and complete information about `REST API`, including parameters, responses, samples, and more, see {@inject: rest:REST:/} API doc.
 >
-> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](/api/admin/).
+> - For the latest and complete information about `Java admin API`, including classes, methods, descriptions, and more, see [Java admin API doc](@pulsar:javadoc:admin@/).
 
 Pulsar has persistent and non-persistent topics. Persistent topic is a logical endpoint for publishing and consuming messages. The topic name structure for persistent topics is:
 
@@ -1023,7 +1023,7 @@ admin.topics().skipAllMessages(topic, subName);
 
 ### Reset cursor
 
-You can reset a subscription cursor position back to the position which is recorded X minutes before. It essentially calculates time and position of cursor at X minutes before and resets it at that position. You can reset the cursor in the following ways.
+You can reset a subscription cursor position back to the position which is recorded X seconds (or with other time units, e.g 100m, 3h, 2d, 5w) before. It essentially calculates the time and position of the cursor at X seconds before and resets it at that position. You can reset the cursor in the following ways.
 
 ````mdx-code-block
 <Tabs
@@ -2316,13 +2316,13 @@ You can publish to partitioned topics using Pulsar client libraries. When publis
 
 You can specify the routing mode in the ProducerConfiguration object that you use to configure your producer. The routing mode determines which partition(internal topic) that each message should be published to.
 
-The following [MessageRoutingMode](/api/client/org/apache/pulsar/client/api/MessageRoutingMode) options are available.
+The following [MessageRoutingMode](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRoutingMode) options are available.
 
 Mode     | Description
 :--------|:------------
 `RoundRobinPartition` | If no key is provided, the producer publishes messages across all partitions in round-robin policy to achieve the maximum throughput. Round-robin is not done per individual message, round-robin is set to the same boundary of batching delay to ensure that batching is effective. If a key is specified on the message, the partitioned producer hashes the key and assigns message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer picks a single partition randomly and publishes all messages into that partition. If a key is specified on the message, the partitioned producer hashes the key and assigns message to a particular partition.
-`CustomPartition`     | Use custom message router implementation that is called to determine the partition for a particular message. You can create a custom routing mode by using the Java client and implementing the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface.
+`CustomPartition`     | Use custom message router implementation that is called to determine the partition for a particular message. You can create a custom routing mode by using the Java client and implementing the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface.
 
 The following is an example:
 
@@ -2342,7 +2342,7 @@ producer.send("Partitioned topic message".getBytes());
 
 ### Custom message router
 
-To use a custom message router, you need to provide an implementation of the [MessageRouter](/api/client/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
+To use a custom message router, you need to provide an implementation of the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
 
 ```java
 

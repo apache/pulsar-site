@@ -19,7 +19,7 @@ In order to run Pulsar Functions, you need to run a Pulsar cluster locally first
 
 ```bash
 
-$ wget pulsar:binary_release_url
+$ wget @pulsar:binary_release_url@
 $ tar xvfz apache-pulsar-@pulsar:version@-bin.tar.gz
 $ cd apache-pulsar-@pulsar:version@
 $ bin/pulsar standalone \

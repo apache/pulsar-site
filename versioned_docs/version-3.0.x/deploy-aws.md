@@ -170,6 +170,16 @@ ansible-playbook \
 setup-disk.yaml
 ```
 
+When using Terraform version >= 0.12, and `terraform-inventory` throws an error: "Error reading tfstate file", add `TF_STATE=./` before the `ansible-playbook` command.
+
+```bash
+TF_STATE=./ \
+ansible-playbook \
+--user='ec2-user' \
+--inventory=`which terraform-inventory` \
+setup-disk.yaml
+```
+
 After that, the disks are mounted under `/mnt/journal` as journal disk, and `/mnt/storage` as ledger disk.
 Remember to enter this command just only once. If you attempt to enter this command again after you have run the Pulsar playbook, your disks might potentially be erased again, causing the bookies to fail to start up.
 

@@ -8,7 +8,7 @@ $ pulsar broker-tool subcommand
 
 
 
-## load-report
+## <em>load-report</em>
 
 ```shell
 $ pulsar broker-tool load-report options

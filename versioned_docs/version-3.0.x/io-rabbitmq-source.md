@@ -101,17 +101,17 @@ This example describes how to use the RabbitMQ source connector to feed data fro
 1. Get a Pulsar package and start Pulsar in standalone mode.
 
    ```bash
-   wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz
+   curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz?action=download"
    tar xvfz apache-pulsar-@pulsar:version@-bin.tar.gz
    cd apache-pulsar-@pulsar:version@
    bin/pulsar standalone
    ```
 
-2. Download the [nar package](https://archive.apache.org/dist/pulsar/) corresponding to Pulsar's version and copy the following file to Pulsar's directory.
+2. Download the [nar package](pathname:///download#connectors) corresponding to Pulsar's version and copy the following file to Pulsar's directory.
 
     ```bash
-    wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar
-    cp pulsar-io-rabbitmq-@pulsar:version@.nar ./connectors
+    cd connectors
+    curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar?action=download"
     ```
 
 3. Set the retention of the namespace, otherwise the messages into the Pulsar's topic which have not the subscription have been immediately deleted.

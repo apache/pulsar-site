@@ -249,7 +249,7 @@ Number of threads to used in HTTP server
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `6`
 
 **Dynamic**: `false`
 
@@ -563,7 +563,7 @@ Number of connections per broker in Pulsar client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -585,7 +585,7 @@ Number of IO threads in Pulsar client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `1`
 
 **Dynamic**: `false`
 

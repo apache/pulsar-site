@@ -5,7 +5,7 @@ sidebar_label: "Run Pulsar locally"
 description: Get started with Apache Pulsar on your local machine.
 ---
 
-For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode runs all components inside a single Java Virtual Machine (JVM) process.
+For local development and testing, you can run Pulsar in standalone mode on your machine. The standalone mode runs all components of a Pulsar [cluster](concepts-architecture-overview.md#clusters) inside a single Java Virtual Machine (JVM) process.
 
 :::tip
 
@@ -19,14 +19,23 @@ To run Pulsar in standalone mode on your machine, follow the steps below.
 
 Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Pulsar In Docker](getting-started-docker.md) if you want to run Pulsar on **Windows**.
 
-Also, you need the proper 64-bit JRE/JDK version installed. Please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
+Also, you need the proper 64-bit JRE/JDK version installed:
+
+- **Java 21** is required for Pulsar 4.0+ and master branch
+- **Java 17** is required for Pulsar 2.11+ and master branch
+- **Java 11** is required for Pulsar 2.8/2.9/2.10 
+- **Java 8** is required for Pulsar 2.7 and earlier
+
+For the latest Java version recommendations, see [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation).
+When using Java versions, it is recommended to use [a recent version of a particular Java release (17 or 21)](https://adoptium.net/en-GB/temurin/releases?version=21&os=linux&arch=any) with the most recent bug fixes and security patches.
+You can find Java installation instructions in [Setting up JDKs and Maven using SDKMAN](/contribute/setup-buildtools) or [download Temurin OpenJDK distribution from Adoptium](https://adoptium.net/en-GB/temurin/releases?version=21&os=any&arch=any).
 
 ## Step 1: Download Pulsar distribution
 
 Download the official Apache Pulsar distribution:
 
 ```bash
-wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz
+curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz?action=download"
 ```
 
 Once downloaded, unpack the tar file:
@@ -59,7 +68,7 @@ The following directories are created:
 
 ## Step 2: Start a Pulsar standalone cluster
 
-Run this command to start a standalone Pulsar cluster:
+Run this command to start a standalone Pulsar [cluster](concepts-architecture-overview.md#clusters):
 
 ```bash
 bin/pulsar standalone
@@ -69,7 +78,7 @@ When the Pulsar cluster starts, the following directories are created:
 
 | Directory | Description                                |
 | --------- | ------------------------------------------ |
-| **data**  | All data created by BookKeeper and RocksDB |
+| **data**  | All data created by [BookKeeper](concepts-architecture-overview.md#apache-bookkeeper) and RocksDB |
 | **logs**  | All server-side logs                       |
 
 :::tip
@@ -81,7 +90,7 @@ When the Pulsar cluster starts, the following directories are created:
 
 ## Step 3: Create a topic
 
-Pulsar stores messages in topics. It's a good practice to explicitly create topics before using them, even if Pulsar can automatically create topics when they are referenced.
+Pulsar stores messages in [topics](concepts-messaging.md#topics). It's a good practice to explicitly create topics before using them, even if Pulsar can automatically create topics when they are referenced.
 
 To create a new topic, run this command:
 
@@ -91,7 +100,7 @@ bin/pulsar-admin topics create persistent://public/default/my-topic
 
 ## Step 4: Write messages to the topic
 
-You can use the `pulsar` command line tool to write messages to a topic. This is useful for experimentation, but in practice you'll use the Producer API in your application code, or Pulsar IO connectors for pulling data in from other systems to Pulsar.
+You can use the `pulsar` command line tool to write messages to a topic. This is useful for experimentation, but in practice you'll use the [Producer](concepts-clients.md#producer) API in your application code, or [Pulsar IO](io-overview.md) connectors for pulling data in from other systems to Pulsar.
 
 Run this command to produce a message:
 
@@ -101,7 +110,7 @@ bin/pulsar-client produce my-topic --messages 'Hello Pulsar!'
 
 ## Step 5: Read messages from the topic
 
-Now that some messages have been written to the topic, run this command to launch the consumer and read those messages back:
+Now that some messages have been written to the topic, run this command to launch the [consumer](concepts-clients.md#consumer) and read those messages back:
 
 ```bash
 bin/pulsar-client consume my-topic -s 'my-subscription' -p Earliest -n 0
@@ -109,7 +118,7 @@ bin/pulsar-client consume my-topic -s 'my-subscription' -p Earliest -n 0
 
 Earliest means consuming from the earliest **unconsumed** message. `-n` configures the number of messages to consume, 0 means to consume forever.
 
-As before, this is useful for experimenting with messages, but in practice you'll use the Consumer API in your application code, or Pulsar IO connectors for reading data from Pulsar to push to other systems.
+As before, this is useful for experimenting with messages, but in practice you'll use the [Consumer](concepts-clients.md#consumer) API in your application code, or [Pulsar IO](io-overview.md) connectors for reading data from Pulsar to push to other systems.
 
 You'll see the messages you produce in the previous step:
 
@@ -137,6 +146,6 @@ Once you've finished you can shut down the Pulsar cluster. Press **Ctrl-C** in t
 ## Related Topics
 
 - [Pulsar Concepts and Architecture](concepts-architecture-overview.md)
-- [Pulsar Client Libraries](client-libraries.md)
+- [Pulsar Client Libraries](/docs/client-libraries/)
 - [Pulsar Connectors](io-overview.md)
 - [Pulsar Functions](functions-overview.md)

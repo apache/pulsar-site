@@ -18,7 +18,7 @@ This guide walks you through the quickest way to get started with the following 
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-[pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) is a command-line tool and is available in the bin folder of your Pulsar installation.
+[pulsar-admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/) is a command-line tool and is available in the bin folder of your Pulsar installation.
 
 </TabItem>
 <TabItem value="REST API">
@@ -28,7 +28,7 @@ This guide walks you through the quickest way to get started with the following 
 </TabItem>
 <TabItem value="Java">
 
-[Java admin API](/api/admin/) is a programmable interface written in Java.
+[Java admin API](@pulsar:javadoc:admin@/) is a programmable interface written in Java.
 
 </TabItem>
 
@@ -521,10 +521,10 @@ To manage topics using Java admin API, complete following steps.
 
 - To check the detailed usage, see the references below.
 
-  - [pulsar-admin CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/)
+  - [pulsar-admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 
   - Pulsar admin APIs
 
     - [REST API](reference-rest-api-overview.md)
 
-    - [Java admin API](/api/admin/)
+    - [Java admin API](@pulsar:javadoc:admin@/)

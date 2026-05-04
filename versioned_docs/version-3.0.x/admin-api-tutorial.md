@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Admin setup
 
-Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](/api/admin/)) requires some special setup if you have enabled authentication in your Pulsar instance.
+Each of the three admin interfaces (the `pulsar-admin` CLI tool, the [REST API](reference-rest-api-overview.md), and the [Java admin API](@pulsar:javadoc:admin@/)) requires some special setup if you have enabled authentication in your Pulsar instance.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -41,7 +41,7 @@ If you want to test REST APIs in postman, you can use the REST API JSON files [h
 </TabItem>
 <TabItem value="Java">
 
-To use the Java admin API, instantiate a [PulsarAdmin](/api/admin/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](/api/admin/org/apache/pulsar/client/admin/PulsarAdminBuilder) object. The following is a minimal example using `localhost`.
+To use the Java admin API, instantiate a [PulsarAdmin](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdmin) object, and specify a URL for a Pulsar broker and a [PulsarAdminBuilder](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdminBuilder) object. The following is a minimal example using `localhost`.
 
 ```java
 String url = "http://localhost:8080";

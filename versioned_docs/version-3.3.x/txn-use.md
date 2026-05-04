@@ -10,11 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-Pulsar transaction is primarily a server-side and protocol-level feature. This tutorial guides you through every step of how to use the [Pulsar transaction API](/api/admin/) to send and receive messages in a Java client.
+Pulsar transaction is primarily a server-side and protocol-level feature. This tutorial guides you through every step of how to use the [Pulsar transaction API](@pulsar:javadoc:admin@/) to send and receive messages in a Java client.
 
 :::note
 
-Currently, [Pulsar transaction API](/api/admin/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java**, **Go** and **.NET** clients.
+Currently, [Pulsar transaction API](@pulsar:javadoc:admin@/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java**, **Go** and **.NET** clients.
 
 :::
 ## Prerequisites

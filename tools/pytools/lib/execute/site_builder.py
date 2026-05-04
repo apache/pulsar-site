@@ -16,41 +16,46 @@
 # under the License.
 
 import shutil
-import tempfile
 from pathlib import Path
+from typing import Optional
 
 from command import find_command, run
 from constant import site_path
+from execute import version_build
+from execute.changed_files import ChangeSet, compute_changed_files, full_build_paths
 
 
-def execute(asf_site: Path):
-    # 1. Get modified files
-    git = find_command('git', msg="git is required")
-    with tempfile.TemporaryFile('w+') as f:
-        run(git, 'diff', '--name-only', 'HEAD~1', 'HEAD', stdout=f, cwd=site_path())
-        f.seek(0)
-        modified_files = f.read().splitlines()
-    for file in modified_files:
-        print(f"{file} was modified")
+def execute(asf_site: Path, head_sha: str, token: Optional[str]):
+    # Compute the change set vs. the last successful publish (.publish-ref in asf-site-next).
+    # The CI workflow checks out main with fetch-depth=2, so a local `git diff` cannot span
+    # more than the most recent commit; the GitHub compare API is the source of truth.
+    change_set = compute_changed_files(asf_site, head_sha, token)
+    if change_set.build_all:
+        change_set = ChangeSet(
+            files=full_build_paths(),
+            build_all=True,
+            force_versions=change_set.force_versions,
+        )
+    for file in change_set.files:
+        print(f'{file} was modified')
+    if change_set.force_versions:
+        print(f'forced versions from commit messages: {sorted(change_set.force_versions)}')
 
-    # # 2. Install and build
-    yarn = find_command('yarn', msg="yarn is required")
-    node = find_command('node', msg="node is required")
-    bash = find_command('bash', msg="bash is required")
+    yarn = find_command('yarn', msg='yarn is required')
     run(yarn, 'install', cwd=site_path())
-    run(node, 'scripts/replace.js', cwd=site_path())
-    run(bash, 'scripts/split-version-build.sh', *modified_files, cwd=site_path())
+    version_build.execute(change_set)
+    # Expand @pulsar:...@ tokens and rewrite `pathname:///` in the Docsify
+    # reference site (build/reference/), which Docusaurus copies verbatim
+    # from static/ and so isn't touched by the markdown preprocessor pipeline.
+    run(yarn, 'process-reference-markdown', cwd=site_path())
     latest_content = site_path() / 'build'
 
-    # 3. Publish content to asf-site-next branch
     published_content = asf_site / 'content'
     if not published_content.exists():
         published_content.mkdir(parents=True, exist_ok=True)
 
-    is_build_all = (site_path() / 'scripts' / '.build').read_text().strip()
-    is_build_all = is_build_all == "1"
-    print(f'is_build_all: {is_build_all}')
-    if is_build_all:
+    print(f'is_build_all: {change_set.build_all}')
+    if change_set.build_all:
         whitelist = ['api', 'charts']
         old_files = [f for f in published_content.glob('*') if f.name not in whitelist]
         print(f'clean all the old content： {list(map(str, old_files))}')

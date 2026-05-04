@@ -46,7 +46,7 @@ To create a domain under a specific cluster and register brokers, run the follow
 pulsar-admin clusters create-failure-domain <cluster-name> --domain-name <domain-name> --broker-list <broker-list-comma-separated>
 ```
 
-You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+You can also view, update, and delete domains under a specific cluster. For more information, refer to [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 ### Create an anti-affinity namespace group
 
@@ -56,4 +56,4 @@ An anti-affinity group is created automatically when the first namespace is assi
 pulsar-admin namespaces set-anti-affinity-group <namespace> --group <group-name>
 ```
 
-For more information about `anti-affinity-group` related commands, refer to [Pulsar admin docs](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/).
+For more information about `anti-affinity-group` related commands, refer to [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).

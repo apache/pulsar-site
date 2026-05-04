@@ -11,7 +11,7 @@ export default function VersionsTable(props) {
     <Table size="small">
       <TableBody>
         <TableRow key="header">
-          {["Release", "Link", "Crypto files"].map((header) => (
+          {["Release", "Link", "Checksum & Signature"].map((header) => (
             <TableCell
               className="border-gray-300 font-bold"
               sx={{ border: 1, color: "inherit" }}

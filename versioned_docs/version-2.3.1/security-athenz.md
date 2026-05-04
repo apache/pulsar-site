@@ -20,7 +20,7 @@ On the [tenant](reference-terminology.md#tenant) side, you need to do the follow
 2. Generate a private/public key pair
 3. Create a service, such as `some_app`, on the domain with the public key
 
-Note that you need to specify the private key generated in step 2 when the Pulsar client connects to the [broker](reference-terminology.md#broker) (see client configuration examples for [Java](client-libraries-java.md#tls-authentication) and [C++](client-libraries-cpp.md#tls-authentication)).
+Note that you need to specify the private key generated in step 2 when the Pulsar client connects to the [broker](reference-terminology.md#broker) (see client configuration examples for [Java](pathname:///docs/client-libraries/java#tls-authentication) and [C++](pathname:///docs/client-libraries/cpp#tls-authentication)).
 
 For more specific steps involving the Athenz UI, refer to [Example Service Access Control Setup](https://github.com/AthenZ/athenz/blob/master/docs/example_service_athenz_setup.md#client-tenant-domain).
 
@@ -71,7 +71,7 @@ brokerClientAuthenticationParameters={"tenantDomain":"shopping","tenantService":
 
 For more information on Pulsar client authentication using Athenz, see the following language-specific docs:
 
-* [Java client](client-libraries-java.md#athenz)
+* [Java client](pathname:///docs/client-libraries/java#athenz)
 
 ## Configure CLI tools for Athenz
 

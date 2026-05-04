@@ -52,4 +52,6 @@ def execute(basedir: Path, version: str):
         p = (reference / f'{command}.md')
         p.parent.mkdir(exist_ok=True, parents=True)
         with p.open('w') as f:
-            run(str(admin.absolute()), 'documents', 'generate', command, stdout=f)
+            run(str(admin.absolute()), 'documents', 'generate', command, stdout=f, env={
+                **os.environ,
+            })

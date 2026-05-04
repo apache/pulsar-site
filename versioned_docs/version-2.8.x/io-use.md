@@ -240,7 +240,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`createSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#createSource-SourceConfig-java.lang.String-).
+  For more information, see [`createSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#createSource-SourceConfig-java.lang.String-).
 
 * Create a source connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
@@ -273,7 +273,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/source
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`createSourceWithUrl`](/api/admin/org/apache/pulsar/client/admin/Source.html#createSourceWithUrl-SourceConfig-java.lang.String-).
+  For more information, see [`createSourceWithUrl`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#createSourceWithUrl-SourceConfig-java.lang.String-).
 
 </TabItem>
 
@@ -331,7 +331,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`createSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#createSink-SinkConfig-java.lang.String-).
+  For more information, see [`createSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#createSink-SinkConfig-java.lang.String-).
 
 * Create a sink connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
@@ -364,7 +364,7 @@ Send a `POST` request to this endpoint: {@inject: endpoint|POST|/admin/v3/sinks/
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`createSinkWithUrl`](/api/admin/org/apache/pulsar/client/admin/Sink.html#createSinkWithUrl-SinkConfig-java.lang.String-).
+  For more information, see [`createSinkWithUrl`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#createSinkWithUrl-SinkConfig-java.lang.String-).
 
 </TabItem>
 
@@ -625,7 +625,7 @@ Exception name | Description
 `PulsarAdminException.NotFoundException` | Cluster doesn't exist
 `PulsarAdminException` | Unexpected error
 
-For more information, see [`getSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`getSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -731,7 +731,7 @@ Name| Description
 `namespace` | Namespace name
 `sink` | Sink name
 
-For more information, see [`getSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#getSink-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`getSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#getSink-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -794,7 +794,7 @@ Exception name | Description
 `PulsarAdminException.NotAuthorizedException` | You don't have the admin permission
 `PulsarAdminException` | Unexpected error
 
-For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#listSources-java.lang.String-java.lang.String-).
+For more information, see [`listSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#listSources-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -853,7 +853,7 @@ Exception name | Description
 `PulsarAdminException.NotAuthorizedException` | You don't have the admin permission
 `PulsarAdminException` | Unexpected error
 
-For more information, see [`listSource`](/api/admin/org/apache/pulsar/client/admin/Sink.html#listSinks-java.lang.String-java.lang.String-).
+For more information, see [`listSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#listSinks-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -924,7 +924,7 @@ For more information, see [here](io-cli.md#status).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSourceStatus`](/api/admin/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`getSourceStatus`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#getSource-java.lang.String-java.lang.String-java.lang.String-).
 
 * Gets the current status of a **specified** source connector.
 
@@ -953,7 +953,7 @@ For more information, see [here](io-cli.md#status).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSourceStatus`](/api/admin/org/apache/pulsar/client/admin/Source.html#getSourceStatus-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`getSourceStatus`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#getSourceStatus-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1020,7 +1020,7 @@ For more information, see [here](io-cli.md#status-1).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSinkStatus`](/api/admin/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`getSinkStatus`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-).
 
 * Gets the current status of a **specified** source connector.
 
@@ -1049,7 +1049,7 @@ For more information, see [here](io-cli.md#status-1).
   |---|---
   `PulsarAdminException` | Unexpected error
 
-  For more information, see [`getSinkStatusWithInstanceID`](/api/admin/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`getSinkStatusWithInstanceID`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#getSinkStatus-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1115,7 +1115,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/
   | `PulsarAdminException.NotFoundException` | Cluster doesn't exist
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`updateSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#updateSource-SourceConfig-java.lang.String-).
+  For more information, see [`updateSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#updateSource-SourceConfig-java.lang.String-).
 
 * Update a source connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
@@ -1150,7 +1150,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sources/
   | `PulsarAdminException.NotFoundException` | Cluster doesn't exist
   | `PulsarAdminException` | Unexpected error
 
-For more information, see [`createSourceWithUrl`](/api/admin/org/apache/pulsar/client/admin/Source.html#updateSourceWithUrl-SourceConfig-java.lang.String-).
+For more information, see [`createSourceWithUrl`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#updateSourceWithUrl-SourceConfig-java.lang.String-).
 
 </TabItem>
 
@@ -1210,7 +1210,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:t
   | `PulsarAdminException.NotFoundException` | Cluster doesn't exist
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`updateSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#updateSink-SinkConfig-java.lang.String-).
+  For more information, see [`updateSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#updateSink-SinkConfig-java.lang.String-).
 
 * Update a sink connector using a **remote file** with a URL from which fun-pkg can be downloaded.
 
@@ -1245,7 +1245,7 @@ Send a `PUT` request to this endpoint: {@inject: endpoint|PUT|/admin/v3/sinks/:t
   |`PulsarAdminException.NotFoundException` | Cluster doesn't exist
   |`PulsarAdminException` | Unexpected error
 
-For more information, see [`updateSinkWithUrl`](/api/admin/org/apache/pulsar/client/admin/Sink.html#updateSinkWithUrl-SinkConfig-java.lang.String-).
+For more information, see [`updateSinkWithUrl`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#updateSinkWithUrl-SinkConfig-java.lang.String-).
 
 </TabItem>
 
@@ -1318,7 +1318,7 @@ For more information, see [here](io-cli.md#stop).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`stopSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-).
 
 * Stop a **specified** source connector.
 
@@ -1347,7 +1347,7 @@ For more information, see [here](io-cli.md#stop).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`stopSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#stopSource-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1414,7 +1414,7 @@ For more information, see [here](io-cli.md#stop-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`stopSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-).
 
 * Stop a **specified** sink connector.
 
@@ -1443,7 +1443,7 @@ For more information, see [here](io-cli.md#stop-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`stopSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`stopSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#stopSink-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1516,7 +1516,7 @@ For more information, see [here](io-cli.md#restart).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`restartSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-).
 
 * Restart a **specified** source connector.
 
@@ -1545,7 +1545,7 @@ For more information, see [here](io-cli.md#restart).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`restartSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#restartSource-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1612,7 +1612,7 @@ For more information, see [here](io-cli.md#restart-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-).
+  For more information, see [`restartSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-).
 
 * Restart a **specified** sink connector.
 
@@ -1641,7 +1641,7 @@ For more information, see [here](io-cli.md#restart-1).
   |---|---
   | `PulsarAdminException` | Unexpected error
 
-  For more information, see [`restartSink`](/api/admin/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-int-).
+  For more information, see [`restartSink`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#restartSink-java.lang.String-java.lang.String-java.lang.String-int-).
 
 </TabItem>
 
@@ -1713,7 +1713,7 @@ void deleteSource(String tenant,
 | `PulsarAdminException.PreconditionFailedException` | Cluster is not empty
 | `PulsarAdminException` | Unexpected error
 
-For more information, see [`deleteSource`](/api/admin/org/apache/pulsar/client/admin/Source.html#deleteSource-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`deleteSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Source.html#deleteSource-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 
@@ -1779,7 +1779,7 @@ void deleteSink(String tenant,
 | `PulsarAdminException.PreconditionFailedException` | Cluster is not empty
 | `PulsarAdminException` | Unexpected error
 
-For more information, see [`deleteSource`](/api/admin/org/apache/pulsar/client/admin/Sink.html#deleteSink-java.lang.String-java.lang.String-java.lang.String-).
+For more information, see [`deleteSource`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/Sink.html#deleteSink-java.lang.String-java.lang.String-java.lang.String-).
 
 </TabItem>
 

@@ -129,6 +129,17 @@ TLS trusted certificate file for internal client, used by the internal client to
 
 **Category**: Authentication
 
+### strictAuthMethod
+Strictly enforce authentication method. If specified, Pulsar will only attempt to authenticate with the provided method. If no method is provided, authentication fails.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Authentication
+
 ### anonymousUserRole
 When this parameter is not empty, unauthenticated users perform as anonymousUserRole
 
@@ -332,6 +343,17 @@ Max HTTP requests per seconds allowed. The excess of requests will be rejected w
 **Type**: `double`
 
 **Default**: `100.0`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpServerIdleTimeout
+Idle timeout for HTTP server connections in milliseconds.
+
+**Type**: `int`
+
+**Default**: `30000`
 
 **Dynamic**: `false`
 
@@ -1016,6 +1038,17 @@ Option to override the auto-detected network interfaces max speed
 
 **Category**: Load Balancer
 
+### loadBalancerOverrideBrokerNics
+Option to override the auto-detected network interfaces
+
+**Type**: `java.util.List`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Load Balancer
+
 ### loadBalancerReportUpdateMaxIntervalMinutes
 Min delay of load report to collect, in minutes
 
@@ -1057,6 +1090,17 @@ Interval to flush dynamic resource quota to ZooKeeper
 **Default**: `15`
 
 **Dynamic**: `false`
+
+**Category**: Load Balancer
+
+### loadBalancerServiceUnitStateMaxConcurrentOverrides
+Specify the maximum number of concurrent orphan bundle ownership overrides. The leader broker triggers these overrides upon detecting orphaned bundles. It identifies orphan bundle ownerships by periodically scanning ownership data and monitoring for broker shutdowns or inactive states.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `true`
 
 **Category**: Load Balancer
 
@@ -1121,6 +1165,17 @@ Enable/disable automatic bundle unloading for load-shedding
 **Type**: `boolean`
 
 **Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
+### loadBalancerSheddingExcludedNamespaces
+The namespaces to be excluded from load shedding
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
 
 **Dynamic**: `true`
 
@@ -1293,6 +1348,17 @@ If true, aggregate publisher stats of PartitionedTopicStats by producerName
 
 **Category**: Metrics
 
+### allowedTopicPropertyKeysForMetrics
+A comma-separated list of Topic Property keys that are allowed to be exposed as metrics.Only keys explicitly listed here will be exposed.
+
+**Type**: `java.util.Set`
+
+**Default**: `[]`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### authenticateMetricsEndpoint
 Whether the '/metrics' endpoint requires authentication. Defaults to false.'authenticationEnabled' must also be set for this to take effect.
 
@@ -1317,6 +1383,17 @@ Enable expose the broker bundles metrics.
 
 ### exposeConsumerLevelMetricsInPrometheus
 If true, export consumer level metrics otherwise namespace level
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
+### exposeCustomTopicMetricLabelsEnabled
+Enable or disable custom topic metric labels feature. If enabled, custom metric labels can be set on topics and will be exposed in metrics. Default is false.
 
 **Type**: `boolean`
 
@@ -1535,6 +1612,17 @@ control the number of replicas for storing the package
 
 **Category**: Packages Management
 
+### activeConsumerFailoverConsistentHashing
+Enable consistent hashing for selecting the active consumer in partitioned topics with Failover subscription type.For non-partitioned topics, consistent hashing is used by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### activeConsumerFailoverDelayTimeMillis
 How long to delay rewinding cursor and dispatching messages when active consumer is changed
 
@@ -1591,7 +1679,7 @@ Default per-topic backlog quota limit by size, less than 0 means no limitation. 
 **Category**: Policies
 
 ### backlogQuotaDefaultLimitGB
-@deprecated - Use backlogQuotaDefaultLimitByte instead.
+@deprecated - Use backlogQuotaDefaultLimitBytes instead.
 
 **Type**: `double`
 
@@ -1699,8 +1787,10 @@ If this time interval is exceeded, a snapshot will be taken.It will run simultan
 
 ### brokerDeleteInactivePartitionedTopicMetadataEnabled
 Metadata of inactive partitioned topic will not be automatically cleaned up by default.
-Note: If `allowAutoTopicCreation` and this option are enabled at the same time,
+Note 1: If `allowAutoTopicCreation` and this option are enabled at the same time,
 it may appear that a partitioned topic has just been deleted but is automatically created as a non-partitioned topic.
+Note 2: Activating bidirectional geo-replication under global ZooKeeper configuration may lead to schema remnants and abnormal topic-level policies.
+Note 3: Activating bidirectional geo-replication under global configuration ZooKeeper may lead to a consumption issue.
 
 **Type**: `boolean`
 
@@ -1948,7 +2038,18 @@ On Shared and KeyShared subscriptions, if all available messages in the subscrip
 **Category**: Policies
 
 ### enableBrokerSideSubscriptionPatternEvaluation
-Enables evaluating subscription pattern on broker side.
+Enables evaluating subscription pattern on broker side. Note: This config no longer controls watching topic list. Please use `enableBrokerTopicListWatcher` to control that behavior.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### enableBrokerTopicListWatcher
+Enables watching topic add/remove events on broker side for subscription pattern evaluation.
 
 **Type**: `boolean`
 
@@ -2157,6 +2258,72 @@ Whether to enable precise time based backlog quota check. Enabling precise time 
 
 **Category**: Policies
 
+### pulsarChannelPauseReceivingCooldownMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a time window to avoid overwhelming due to the backlog of requests. This parameter defines how long the rate limiting should last, in millis. Once the bytes that are waiting to be sent out reach the "pulsarChannelWriteBufferHighWaterMark"， the timer will be reset. Setting a negative value will disable the rate limiting.
+
+**Type**: `int`
+
+**Default**: `5000`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPeriodMs
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time defined by pulsarChannelPauseReceivingCooldownMs to avoid overwhelming due to the backlog of requests. This parameter defines the period of the rate limiter in milliseconds. If the rate limit period is set to 1000, then the unit is requests per 1000 milliseconds. When it's 10, the unit is requests per every 10ms.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingCooldownRateLimitPermits
+After the connection is recovered from a pause receiving state, the channel will be rate-limited for a period of time to avoid overwhelming due to the backlog of requests. This parameter defines how many requests should be allowed in the rate limiting period.
+
+**Type**: `int`
+
+**Default**: `5`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelPauseReceivingRequestsIfUnwritable
+If enabled, the broker will pause reading from the channel to deal with new request once the writer buffer is full, until it is changed to writable.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferHighWaterMark
+It relates to configuration "WriteBufferHighWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer exceeds this value, channel writable state will start to return "false".
+
+**Type**: `int`
+
+**Default**: `65536`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### pulsarChannelWriteBufferLowWaterMark
+It relates to configuration "WriteBufferLowWaterMark" of Netty Channel Config. If the number of bytes queued in the write buffer is smaller than this value, channel writable state will start to return "true".
+
+**Type**: `int`
+
+**Default**: `32768`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### resourceUsageTransportClassName
 Default policy for publishing usage reports to system topic is disabled.This enables publishing of usage reports
 
@@ -2169,7 +2336,7 @@ Default policy for publishing usage reports to system topic is disabled.This ena
 **Category**: Policies
 
 ### resourceUsageTransportPublishIntervalInSecs
-Default interval to publish usage reports if resourceUsagePublishToTopic is enabled.
+Interval (in seconds) for ResourceGroupService periodic tasks while resource groups are actively attached to tenants or namespaces. Periodic tasks start automatically when the first attachment is registered and stop automatically when no attachments remain. If a ResourceUsageTransportManager is configured (see resourceUsageTransportClassName), this interval also controls how frequently, usage reports are published for cross-broker coordination. Dynamic changes take effect at runtime and reschedule any running tasks.
 
 **Type**: `int`
 
@@ -2585,12 +2752,23 @@ The schema compatibility strategy in broker level
 
 **Category**: Schema
 
+### schemaJsonAllowLegacyJacksonFormat
+Whether to allow legacy Jackson JsonSchema format for SchemaType.JSON schema definitions. When false (default), only valid Apache Avro schema format is accepted for SchemaType.JSON, consistent with what the consumer side requires. When true, the pre-2.1 backward-compatible behavior is preserved for deployments that still have topics with legacy-format schemas. See PIP-464 for details.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Schema
+
 ### schemaRegistryCompatibilityCheckers
 The list compatibility checkers to be used in schema registry
 
 **Type**: `java.util.Set`
 
-**Default**: `[org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck]`
+**Default**: `[org.apache.pulsar.broker.service.schema.ExternalSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck, org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck]`
 
 **Dynamic**: `false`
 
@@ -2623,7 +2801,7 @@ Whether to enable the acknowledge of batch local index
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -2651,6 +2829,17 @@ Used to specify multiple advertised listeners for the broker. The value must for
 
 **Category**: Server
 
+### allowAclChangesOnNonExistentTopics
+Opt-out of topic-existence check when setting permissions
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### allowOverrideEntryFilters
 Whether allow topic level entry filters policies overrides broker configuration.
 
@@ -2662,12 +2851,12 @@ Whether allow topic level entry filters policies overrides broker configuration.
 
 **Category**: Server
 
-### autoShrinkForConsumerPendingAcksMap
-Whether to enable the automatic shrink of pendingAcks map, the default is false, which means it is not enabled. When there are a large number of share or key share consumers in the cluster, it can be enabled to reduce the memory consumption caused by pendingAcks.
+### authenticationRoleLoggingAnonymizer
+Defines how the broker will anonymize the role and originalAuthRole before logging. Possible values are: NONE (no anonymization), REDACTED (replaces with '[REDACTED]'), hash:SHA256 (hashes using SHA-256), and hash:MD5 (hashes using MD5). Default is NONE.
 
-**Type**: `boolean`
+**Type**: `java.lang.String`
 
-**Default**: `false`
+**Default**: `NONE`
 
 **Dynamic**: `false`
 
@@ -3034,6 +3223,17 @@ If value is "org.apache.pulsar.broker.delayed.BucketDelayedDeliveryTrackerFactor
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.delayed.InMemoryDelayedDeliveryTrackerFactory`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### dispatchRateLimiterFactoryClassName
+The class name of the factory that creates DispatchRateLimiter implementations. Current options are org.apache.pulsar.broker.service.persistent.DispatchRateLimiterFactoryAsyncTokenBucket (default, PIP-322 implementation) org.apache.pulsar.broker.service.persistent.DispatchRateLimiterFactoryClassic (legacy implementation)
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.service.persistent.DispatchRateLimiterFactoryAsyncTokenBucket`
 
 **Dynamic**: `false`
 
@@ -3503,7 +3703,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1998`
+**Default**: `2000`
 
 **Dynamic**: `true`
 
@@ -3619,12 +3819,73 @@ The maximum number of tenants that each pulsar cluster can create.This configura
 
 **Category**: Server
 
-### messagePublishBufferCheckIntervalInMillis
-Interval between checks to see if message publish buffer size is exceed the max message publish buffer size
+### maxTopicListInFlightDirectMemSizeMB
+Maximum direct memory for inflight topic list responses (MB).
+Default: 100 MB (network buffers for serialized responses)
 
 **Type**: `int`
 
 **Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireQueueSize
+Maximum queue size for direct memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightDirectMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring direct memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizeMB
+Maximum heap memory for inflight topic list operations (MB).
+Default: 100 MB (supports ~1M topic names assuming 100 bytes each)
+
+**Type**: `int`
+
+**Default**: `100`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireQueueSize
+Maximum queue size for heap memory permit requests.
+Default: 10000 (prevent unbounded queueing)
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### maxTopicListInFlightHeapMemSizePermitsAcquireTimeoutMillis
+Timeout for acquiring heap memory permits (milliseconds).
+Default: 25000 (25 seconds)
+
+**Type**: `int`
+
+**Default**: `25000`
 
 **Dynamic**: `false`
 
@@ -3713,6 +3974,17 @@ Metadata store operation timeout in seconds.
 **Type**: `int`
 
 **Default**: `30`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### metadataStoreSerDesThreads
+The number of threads used for serializing and deserializing data to and from the metadata store
+
+**Type**: `int`
+
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -3833,17 +4105,6 @@ Precise dispatcher flow control according to history message number of each entr
 
 **Category**: Server
 
-### preciseTopicPublishRateLimiterEnable
-Enable precise rate limit for topic publish
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
 ### preferLaterVersions
 If true, (and ModularLoadManagerImpl is being used), the load manager will attempt to use only brokers running the latest software version (to minimize impact to bundles)
 
@@ -3852,6 +4113,17 @@ If true, (and ModularLoadManagerImpl is being used), the load manager will attem
 **Default**: `false`
 
 **Dynamic**: `true`
+
+**Category**: Server
+
+### pulsarResourcesExtendedClassName
+The class name of the PulsarResourcesExtended implementation. This class must implement org.apache.pulsar.broker.PulsarResourcesExtended.
+
+**Type**: `java.lang.String`
+
+**Default**: `org.apache.pulsar.broker.DefaultPulsarResourcesExtended`
+
+**Dynamic**: `false`
 
 **Category**: Server
 
@@ -3871,7 +4143,7 @@ Max number of snapshot to be cached per subscription.
 
 **Type**: `int`
 
-**Default**: `10`
+**Default**: `30`
 
 **Dynamic**: `false`
 
@@ -3972,6 +4244,17 @@ Enable or disable strict bookie affinity.
 
 **Category**: Server
 
+### strictlyVerifySubscriptionName
+If 'strictSubscriptionNameVerification' is true, the new subscription name can only contain (a-zA-Z_0-9) and these special chars -=:.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### systemTopicEnabled
 Enable or disable system topic.
 
@@ -4045,6 +4328,21 @@ The class name of the topic policies service. The default config only takes affe
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicsPatternRegexImplementation
+The regular expression implementation to use for topic pattern matching. 
+RE2J_WITH_JDK_FALLBACK is the default. It uses the RE2J implementation and falls back to the JDK implementation for backwards compatibility reasons when the pattern compilation fails with the RE2/j library.
+RE2J is more performant but does not support all regex features (e.g. negative lookaheads). 
+JDK uses the standard Java regex implementation which supports all features but can be slower.
+Bad or malicious regex patterns requiring extensive backtracing could cause high resource usage with RE2J_WITH_JDK_FALLBACK or JDK implementations.
+
+**Type**: `org.apache.pulsar.common.topics.TopicsPattern.RegexImplementation`
+
+**Default**: `RE2J_WITH_JDK_FALLBACK`
 
 **Dynamic**: `false`
 
@@ -4725,6 +5023,17 @@ Maximum prefetch rounds for ledger reading for offloading
 
 **Category**: Storage (Ledger Offloading)
 
+### managedLedgerOffloadReadThreads
+Maximum number of thread pool threads for offloaded ledger reading
+
+**Type**: `int`
+
+**Default**: `2`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
 ### managedLedgerOffloadThresholdInSeconds
 The threshold to triggering automatic offload to long term storage
 
@@ -4737,7 +5046,9 @@ The threshold to triggering automatic offload to long term storage
 **Category**: Storage (Ledger Offloading)
 
 ### managedLedgerUnackedRangesOpenCacheSetEnabled
-Use Open Range-Set to cache unacked messages (it is memory efficient but it can take more cpu)
+When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
+
+RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
 
 **Type**: `boolean`
 
@@ -4826,8 +5137,19 @@ Skip reading non-recoverable/unreadable data-ledger under managed-ledger's list.
 
 **Category**: Storage (Managed Ledger)
 
+### cacheEvictionByExpectedReadCount
+Evicting cache data by expected read count. Expected read count is calculated by the number of active cursors with a read position that is behind the position of the cached entry. This setting will override the cacheEvictionByMarkDeletedPosition setting.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### cacheEvictionByMarkDeletedPosition
-Evicting cache data by the slowest markDeletedPosition or readPosition. The default is to evict through readPosition.
+Evicting cache data by the slowest markDeletedPosition (true) or slowest read position (false).This setting is ignored when cacheEvictionByExpectedReadCount is true.
 
 **Type**: `boolean`
 
@@ -4906,6 +5228,47 @@ Whether we should make a copy of the entry payloads when inserting in cache
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerCacheEvictionExtendTTLOfEntriesWithRemainingExpectedReadsMaxTimes
+Maximum number of times the cache can extend
+the TTL of an entry that has remaining expected reads.
+Only takes effect when cacheEvictionByExpectedReadCount is enabled.
+This helps optimize cache efficiency for scenarios like:
+- Key_Shared subscription replays
+- Catch-up reads for lagging consumers
+- Consumers temporarily falling behind the tail
+Entries with remaining expected reads will have their TTL extended up to this many times
+before being eligible for eviction. The TTL will be extended by
+managedLedgerCacheEvictionTimeThresholdMillis each time.
+Default is 5.
+
+**Type**: `int`
+
+**Default**: `5`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerCacheEvictionExtendTTLOfRecentlyAccessed
+Controls whether recently accessed entries in the managed ledger cache should have their lifetime extended before cache eviction.
+When enabled:
+ - During eviction check, if an entry has been accessed since the last check, its expiration time will be extended by managedLedgerCacheEvictionTimeThresholdMillis
+ - Makes the cache behave like a Least Recently Used (LRU) cache by keeping frequently accessed entries longer
+ - Helps optimize performance for frequently accessed entries while still allowing old unused entries to be evicted
+ - Minimum eviction time is 2x managedLedgerCacheEvictionTimeThresholdMillis
+When disabled:
+ - Cache behaves more like a FIFO queue with time-based and size-based eviction
+ - Minimum eviction time is managedLedgerCacheEvictionTimeThresholdMillis
+Default is true, to behave like a LRU cache.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerCacheEvictionFrequency
 Configure the cache eviction frequency for the managed ledger cache.
 
@@ -4929,7 +5292,14 @@ Configure the cache eviction interval in milliseconds for the managed ledger cac
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerCacheEvictionTimeThresholdMillis
-All entries that have stayed in cache for more than the configured time, will be evicted
+Controls time-to-live (TTL) for entries in the managed ledger (broker) cache.
+The TTL can be extended in two ways:
+1. When cacheEvictionByExpectedReadCount is enabled: TTL is extended for entries with remaining
+expected reads. The maximum number of extensions is controlled by
+managedLedgerCacheEvictionExtendTTLOfEntriesWithRemainingExpectedReadsMaxTimes.
+2. When cacheEvictionExtendTTLOfRecentlyAccessed is enabled: TTL is extended for entries
+accessed since the last expiration check.
+Default value is 1000ms.
 
 **Type**: `long`
 
@@ -4957,14 +5327,27 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `800`
 
 **Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerContinueCachingAddedEntriesAfterLastActiveCursorLeavesMillis
+This setting configures the duration of continuing to cache added entries while there are no active cursors, when the last active cursor has left or immediately after initialization when the persistent topic and the managed ledger gets loaded. This setting is ignored unless cacheEvictionByExpectedReadCount is enabled.The default value is 2 * managedLedgerCacheEvictionTimeThresholdMillis.
+
+**Type**: `java.lang.Long`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerCursorBackloggedThreshold
 Configure the threshold (in number of entries) from where a cursor should be considered 'backlogged' and thus should be set as inactive.
+Set to -1 to disable this behavior.
+This setting has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `long`
 
@@ -4993,6 +5376,17 @@ How frequently to flush the cursor positions that were accumulated due to rate l
 **Default**: `60`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerCursorResetLedgerCloseTimestampMaxClockSkewMillis
+When resetting a subscription by timestamp, the broker will use the ledger closing timestamp metadata to determine the range of ledgers to search for the message where the subscription position is reset to.  Since by default, the search condition is based on the message publish time provided by the  client at the publish time, there will be some clock skew between the ledger closing timestamp  metadata and the publish time. This configuration is used to set the max clock skew between the ledger closing timestamp and the message publish time for finding the range of ledgers to open for searching. The default value is 60000 milliseconds (60 seconds). When set to -1, the broker will not use the ledger closing timestamp metadata to determine the range of ledgers to search for the message.
+
+**Type**: `int`
+
+**Default**: `60000`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5063,6 +5457,17 @@ Write quorum (Qw) size, Replication factor for storing entries (messages) in a l
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerDeleteMaxConcurrentRequests
+Max number of concurrent requests for deleting ledgers at broker level
+
+**Type**: `int`
+
+**Default**: `1000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerDigestType
 Default type of checksum to use when writing to BookKeeper. 
 
@@ -5093,6 +5498,17 @@ Time to rollover ledger for inactive topic (duration without any publish on that
 **Type**: `int`
 
 **Default**: `0`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerInactiveOffloadedLedgerEvictionTimeSeconds
+Time to evict inactive offloaded ledger for inactive topic. Disable eviction with value 0 (Default value 600)
+
+**Type**: `int`
+
+**Default**: `600`
 
 **Dynamic**: `true`
 
@@ -5136,12 +5552,26 @@ Max number of guaranteed copies (acks to wait before write is complete)
 
 ### managedLedgerMaxBacklogBetweenCursorsForCaching
 Maximum backlog entry difference to prevent caching entries that can't be reused
+This has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `int`
 
 **Default**: `1000`
 
 **Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxBatchDeletedIndexToPersist
+Maximum number of partially acknowledged batch messages per subscription that will have their batch deleted indexes persisted. Batch deleted index state is handled when acknowledgmentAtBatchIndexLevelEnabled=true.
+
+When this limit is exceeded, remaining batch message containing the batch deleted indexes will only be tracked in memory. In case of broker restarts or load balancing events, the batch deleted indexes will be cleared while redelivering the messages to consumers.
+
+**Type**: `int`
+
+**Default**: `10000`
+
+**Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5175,6 +5605,28 @@ Maximum time before forcing a ledger rollover for a topic
 **Type**: `int`
 
 **Default**: `240`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxReadsInFlightPermitsAcquireQueueSize
+Maximum number of reads that can be queued for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `int`
+
+**Default**: `50000`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerMaxReadsInFlightPermitsAcquireTimeoutMillis
+Maximum time to wait for acquiring permits for max reads in flight when managedLedgerMaxReadsInFlightSizeInMB is set (\>0) and the limit is reached.
+
+**Type**: `long`
+
+**Default**: `60000`
 
 **Dynamic**: `false`
 
@@ -5263,6 +5715,7 @@ Minimum time between ledger rollover for a topic
 
 ### managedLedgerMinimumBacklogCursorsForCaching
 Minimum cursors that must be in backlog state to cache and reuse the read entries.(Default =0 to disable backlog reach cache)
+This has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `int`
 
@@ -5274,6 +5727,7 @@ Minimum cursors that must be in backlog state to cache and reuse the read entrie
 
 ### managedLedgerMinimumBacklogEntriesForCaching
 Minimum backlog entries for any cursor before start caching reads
+This has no effect when cacheEvictionByExpectedReadCount is enabled.
 
 **Type**: `int`
 
@@ -5316,6 +5770,19 @@ Default is ``.
 **Type**: `java.lang.String`
 
 **Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerPersistIndividualAckAsLongArray
+When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
+
+NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `false`
 

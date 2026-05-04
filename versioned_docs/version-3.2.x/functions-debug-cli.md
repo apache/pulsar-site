@@ -5,7 +5,7 @@ sidebar_label: "Debug with Functions CLI"
 description: Learn to debug functions with CLI in Pulsar.
 ---
 
-With [Pulsar Functions CLI](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/), you can debug Pulsar Functions with the following subcommands:
+With [Pulsar Functions CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/), you can debug Pulsar Functions with the following subcommands:
 
 ## `get`
 

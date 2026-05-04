@@ -27,7 +27,7 @@ A Pulsar tenant is an administrative unit for allocating capacity and enforcing 
 A Pulsar namespaces is a logical grouping of topics. Tenants and namespaces are two key concepts of Pulsar to support multi-tenancy.
 
 * Pulsar is provisioned for specified tenants with appropriate capacity allocated to the tenant.
-* A namespace is the administrative unit nomenclature within a tenant. The configuration policies set on a namespace apply to all the topics created in that namespace. A tenant may create multiple namespaces via self-administration using the REST API and the [`pulsar-admin`](pathname:///reference/#/@pulsar:version_reference@/pulsar-admin/) CLI tool. For instance, a tenant with different applications can create a separate namespace for each application.
+* A namespace is the administrative unit nomenclature within a tenant. The configuration policies set on a namespace apply to all the topics created in that namespace. A tenant may create multiple namespaces via self-administration using the REST API and the [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/) CLI tool. For instance, a tenant with different applications can create a separate namespace for each application.
 
 Names for topics in the same namespace will look like this:
 

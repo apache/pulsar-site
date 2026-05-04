@@ -101,17 +101,17 @@ This example describes how to use the RabbitMQ source connector to feed data fro
 1. Get a Pulsar package and start Pulsar in standalone mode.
 
    ```bash
-   wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz
+   curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/apache-pulsar-@pulsar:version@-bin.tar.gz?action=download"
    tar xvfz apache-pulsar-@pulsar:version@-bin.tar.gz
    cd apache-pulsar-@pulsar:version@
    bin/pulsar standalone
    ```
 
-2. Download the [nar package](https://archive.apache.org/dist/pulsar/) corresponding to Pulsar's version and copy the following file to Pulsar's directory.
+2. Download the [nar package](pathname:///download#connectors) corresponding to Pulsar's version and copy the following file to Pulsar's directory.
 
     ```bash
-    wget https://archive.apache.org/dist/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar
-    cp pulsar-io-rabbitmq-@pulsar:version@.nar ./connectors
+    cd connectors
+    curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar?action=download"
     ```
 
 3. Messages published to a topic lacking at least one durable subscription are automatically marked as ready for deletion by default. We can set a retention policy at the namespace level to prevent this.

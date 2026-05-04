@@ -157,7 +157,7 @@ However, using BookKeeper V3 protocol introduces additional GC overhead to BK as
 If you already have a Trino cluster compatible to version 363, you can copy the Pulsar Trino plugin to your existing cluster. Download the archived plugin package with the following command.
 
 ```bash
-wget pulsar:binary_release_url
+wget @pulsar:binary_release_url@
 ```
 
 ## Deploy a new cluster

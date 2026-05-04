@@ -198,6 +198,13 @@ Client operation timeout (in milliseconds).
 
 **Default**: `30000`
 
+### originalPrincipal
+Original principal for proxy authentication scenarios.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
 ### proxyProtocol
 Protocol of proxy service. proxyServiceUrl and proxyProtocol must be mutually inclusive.
 
@@ -232,6 +239,20 @@ The implementation class of ServiceUrlProvider used to generate ServiceUrl.
 **Type**: `org.apache.pulsar.client.api.ServiceUrlProvider`
 
 **Default**: `null`
+
+### serviceUrlQuarantineInitDurationMs
+The initial duration (in milliseconds) to quarantine endpoints that fail to connect.A value of 0 means don't quarantine any endpoints even if they fail.
+
+**Type**: `long`
+
+**Default**: `60000`
+
+### serviceUrlQuarantineMaxDurationMs
+The max duration (in milliseconds) to quarantine endpoints that fail to connect.A value of 0 means don't quarantine any endpoints even if they fail.
+
+**Type**: `long`
+
+**Default**: `86400000`
 
 ### socks5ProxyAddress
 Address of SOCKS5 proxy.
@@ -372,6 +393,13 @@ TLS TrustStore type configuration. You need to set this configuration when clien
 **Type**: `java.lang.String`
 
 **Default**: `JKS`
+
+### tracingEnabled
+Whether to enable OpenTelemetry distributed tracing. When enabled, tracing interceptors are automatically added to producers and consumers.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 ### useKeyStoreTls
 Set TLS using KeyStore way.

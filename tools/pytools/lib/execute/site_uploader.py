@@ -44,11 +44,18 @@ def _should_push(mode: Mode) -> bool:
     return result
 
 
-def _do_push(msg: str, site: Path, branch: str):
+def _do_push(msg: str, site: Path, branch: str, head_sha: str):
     git = find_command('git', msg="git is required")
 
+    # Persist the source-repo SHA we just published so the next run can compute
+    # the changed-files set against this point. Written before `git add -A` so
+    # it lands in the same commit as the published content. If `git push` later
+    # fails, this local file is discarded along with the unpushed commit — the
+    # next CI run re-clones asf-site-next and reads the previous .publish-ref.
+    (site / '.publish-ref').write_text(head_sha + '\n')
+
     run(git, 'add', '-A', '.', cwd=site)
-    changed = run(git, 'diff-index', '--quiet', 'HEAD', codes={0, 1}).returncode
+    changed = run(git, 'diff-index', '--quiet', 'HEAD', codes={0, 1}, cwd=site).returncode
     print(f'changed: {changed}')
 
     run(git, 'status', cwd=site)
@@ -68,9 +75,9 @@ def _do_push(msg: str, site: Path, branch: str):
         run(git, 'push', 'origin', branch, cwd=site)
 
 
-def execute(mode: Mode, msg: str, site: Path, branch: str):
+def execute(mode: Mode, msg: str, site: Path, branch: str, head_sha: str):
     if _should_push(mode):
-        _do_push(msg, site, branch)
+        _do_push(msg, site, branch, head_sha)
     else:  # show changes
         git = find_command('git', msg="git is required")
         with tempfile.TemporaryFile('w+') as f:

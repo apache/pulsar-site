@@ -840,6 +840,14 @@
                     "format": "int32",
                     "type": "integer"
                 },
+                "firstConsumedFlowTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "firstMessagesSentTimestamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "keyHashRangeArrays": {
                     "items": {
                         "items": {
@@ -1277,6 +1285,7 @@
                         "LOCAL_TIME",
                         "LOCAL_DATE_TIME",
                         "PROTOBUF_NATIVE",
+                        "EXTERNAL",
                         "BYTES",
                         "AUTO",
                         "AUTO_CONSUME",
@@ -1488,6 +1497,12 @@
                 },
                 "offloaded": {
                     "type": "boolean"
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 },
                 "size": {
                     "format": "int64",
@@ -1975,6 +1990,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "metadata": {
                     "$ref": "#/definitions/PartitionedTopicMetadata"
                 },
@@ -2071,6 +2090,10 @@
                     "type": "object"
                 },
                 "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicCreationTimeStamp": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -2256,6 +2279,30 @@
                     "type": "object"
                 },
                 "delayedMessageIndexSizeInBytes": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledBytesEventsByBrokerLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledBytesEventsBySubscriptionLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledBytesEventsByTopicLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledMsgEventsByBrokerLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledMsgEventsBySubscriptionLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledMsgEventsByTopicLimit": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -2456,6 +2503,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "msgChunkPublished": {
                     "type": "boolean"
                 },
@@ -2543,6 +2594,10 @@
                     "type": "object"
                 },
                 "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicCreationTimeStamp": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -2724,6 +2779,10 @@
                     "type": "integer"
                 },
                 "managedLedgerOffloadReadBufferSizeInBytes": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "managedLedgerOffloadReadThreads": {
                     "format": "int32",
                     "type": "integer"
                 },
@@ -2947,6 +3006,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "metadata": {
                     "$ref": "#/definitions/PartitionedTopicMetadata"
                 },
@@ -3036,6 +3099,10 @@
                     "type": "object"
                 },
                 "systemTopicBytesInCounter": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "topicCreationTimeStamp": {
                     "format": "int64",
                     "type": "integer"
                 },
@@ -3256,6 +3323,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "msgChunkPublished": {
                     "type": "boolean"
                 },
@@ -3327,6 +3398,10 @@
                     },
                     "type": "object"
                 },
+                "topicCreationTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "topicEpoch": {
                     "format": "int64",
                     "type": "integer"
@@ -3341,6 +3416,13 @@
         "Policies": {
             "properties": {
                 "allowed_clusters": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "allowed_topic_property_keys_for_metrics": {
                     "items": {
                         "type": "string"
                     },
@@ -4184,6 +4266,30 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "dispatchThrottledBytesEventsByBrokerLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledBytesEventsBySubscriptionLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledBytesEventsByTopicLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledMsgEventsByBrokerLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledMsgEventsBySubscriptionLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dispatchThrottledMsgEventsByTopicLimit": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "drainingHashesClearedTotal": {
                     "format": "int64",
                     "type": "integer"
@@ -4424,6 +4530,10 @@
                     "format": "int64",
                     "type": "integer"
                 },
+                "lastPublishTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "msgChunkPublished": {
                     "type": "boolean"
                 },
@@ -4494,6 +4604,10 @@
                         "$ref": "#/definitions/SubscriptionStats"
                     },
                     "type": "object"
+                },
+                "topicCreationTimeStamp": {
+                    "format": "int64",
+                    "type": "integer"
                 },
                 "topicEpoch": {
                     "format": "int64",
@@ -5626,17 +5740,6 @@
                 "operationId": "BrokersBase_healthCheck",
                 "parameters": [
                     {
-                        "description": "Topic Version",
-                        "enum": [
-                            "V1",
-                            "V2"
-                        ],
-                        "in": "query",
-                        "name": "topicVersion",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "in": "query",
                         "name": "brokerId",
                         "required": false,
@@ -5661,6 +5764,9 @@
                     },
                     "500": {
                         "description": "Internal server error"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
                     }
                 },
                 "summary": "Run a healthCheck against the broker",
@@ -6890,98 +6996,6 @@
                 ]
             }
         },
-        "/namespaces/{property}/{namespace}/persistence/bookieAffinity": {
-            "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_deleteBookieAffinityGroup",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "property",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Operation successful"
-                    },
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace does not exist"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Delete the bookie-affinity-group from namespace-local policy.",
-                "tags": [
-                    "namespaces"
-                ]
-            },
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "Namespaces_getBookieAffinityGroup",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "property",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "namespace",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/BookieAffinityGroupDataImpl"
-                        }
-                    },
-                    "307": {
-                        "description": "Current broker doesn't serve the namespace"
-                    },
-                    "403": {
-                        "description": "Don't have admin permission"
-                    },
-                    "404": {
-                        "description": "Namespace does not exist"
-                    },
-                    "409": {
-                        "description": "Concurrent modification"
-                    }
-                },
-                "summary": "Get the bookie-affinity-group from namespace-local policy.",
-                "tags": [
-                    "namespaces"
-                ]
-            }
-        },
         "/namespaces/{tenant}": {
             "get": {
                 "consumes": [
@@ -7286,6 +7300,150 @@
                     }
                 },
                 "summary": "Set the allowed clusters for a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/{tenant}/{namespace}/allowedTopicPropertyKeysForMetrics": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_removeAllowedTopicPropertyKeysForMetrics",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or Namespace does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Remove allowed topic property keys for metrics on a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_getAllowedTopicPropertyKeysForMetrics",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get allowed topic property keys for metrics for a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_setAllowedTopicPropertyKeysForMetrics",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Set of allowed topic property keys for metrics",
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Set allowed topic property keys for metrics for a namespace",
                 "tags": [
                     "namespaces"
                 ]
@@ -11149,6 +11307,96 @@
             }
         },
         "/namespaces/{tenant}/{namespace}/persistence/bookieAffinity": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_deleteBookieAffinityGroup",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Delete the bookie-affinity-group from namespace-local policy.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "Namespaces_getBookieAffinityGroup",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/BookieAffinityGroupDataImpl"
+                        }
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace does not exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get the bookie-affinity-group from namespace-local policy.",
+                "tags": [
+                    "namespaces"
+                ]
+            },
             "post": {
                 "consumes": [
                     "application/json"
@@ -11616,6 +11864,12 @@
                             },
                             "type": "array"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "compareTopicPartitions",
+                        "required": false,
+                        "type": "boolean"
                     }
                 ],
                 "produces": [
@@ -11638,7 +11892,7 @@
                         "description": "Namespace is not global or invalid cluster ids"
                     }
                 },
-                "summary": "Set the replication clusters for a namespace.",
+                "summary": "Set the replication clusters for a namespace. When removing a cluster: with shared configuration store, data will be deleted from the removed cluster; with separate configuration store, only replication stops but data is preserved.",
                 "tags": [
                     "namespaces"
                 ]
@@ -13711,6 +13965,13 @@
                         "name": "includeSystemTopic",
                         "required": false,
                         "type": "boolean"
+                    },
+                    {
+                        "description": "properties for customized topic listing plugin, format: k1=v1,k2=v2",
+                        "in": "query",
+                        "name": "properties",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "produces": [
@@ -19962,6 +20223,70 @@
                 ]
             }
         },
+        "/non-persistent/{tenant}/{namespace}/{topic}/policies": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_deleteTopicPolicies",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Delete policies for a topic.",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            }
+        },
         "/non-persistent/{tenant}/{namespace}/{topic}/properties": {
             "delete": {
                 "description": "",
@@ -20419,6 +20744,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -20472,6 +20804,13 @@
                         "name": "topic",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
                     },
                     {
                         "default": false,
@@ -20541,6 +20880,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -20583,7 +20929,7 @@
                         "description": "Topic is not global or invalid cluster ids"
                     }
                 },
-                "summary": "Set the replication clusters for a topic.",
+                "summary": "Set the replication clusters for a topic. When removing a cluster: with shared configuration store, topic data will be deleted from the removed cluster; with separate configuration store, only replication stops but topic data is preserved.",
                 "tags": [
                     "non-persistent topic"
                 ]
@@ -23297,6 +23643,213 @@
                 ]
             }
         },
+        "/non-persistent/{tenant}/{namespace}/{topic}/subscriptionExpirationTime": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_removeSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Remove subscription expiration time for a topic",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "PersistentTopics_getSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "applied",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    }
+                },
+                "summary": "Get subscription expiration time in minutes for a topic",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            },
+            "post": {
+                "description": "",
+                "operationId": "PersistentTopics_setSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Subscription expiration time in minutes",
+                        "format": "int32",
+                        "in": "query",
+                        "name": "subscriptionExpirationTime",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Set subscription expiration time in minutes for a topic",
+                "tags": [
+                    "non-persistent topic"
+                ]
+            }
+        },
         "/non-persistent/{tenant}/{namespace}/{topic}/subscriptionTypesEnabled": {
             "delete": {
                 "description": "",
@@ -24198,6 +24751,13 @@
                         "name": "includeSystemTopic",
                         "required": false,
                         "type": "boolean"
+                    },
+                    {
+                        "description": "properties for customized topic listing plugin, format: k1=v1,k2=v2",
+                        "in": "query",
+                        "name": "properties",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "produces": [
@@ -30384,6 +30944,70 @@
                 ]
             }
         },
+        "/persistent/{tenant}/{namespace}/{topic}/policies": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_deleteTopicPolicies",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Delete policies for a topic.",
+                "tags": [
+                    "persistent topic"
+                ]
+            }
+        },
         "/persistent/{tenant}/{namespace}/{topic}/properties": {
             "delete": {
                 "description": "",
@@ -30841,6 +31465,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -30894,6 +31525,13 @@
                         "name": "topic",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
                     },
                     {
                         "default": false,
@@ -30963,6 +31601,13 @@
                     },
                     {
                         "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
                         "description": "Whether leader broker redirected this call to this broker. For internal use.",
                         "in": "query",
                         "name": "authoritative",
@@ -31005,7 +31650,7 @@
                         "description": "Topic is not global or invalid cluster ids"
                     }
                 },
-                "summary": "Set the replication clusters for a topic.",
+                "summary": "Set the replication clusters for a topic. When removing a cluster: with shared configuration store, topic data will be deleted from the removed cluster; with separate configuration store, only replication stops but topic data is preserved.",
                 "tags": [
                     "persistent topic"
                 ]
@@ -33714,6 +34359,213 @@
                     }
                 },
                 "summary": "Set subscription message dispatch rate configuration for specified topic.",
+                "tags": [
+                    "persistent topic"
+                ]
+            }
+        },
+        "/persistent/{tenant}/{namespace}/{topic}/subscriptionExpirationTime": {
+            "delete": {
+                "description": "",
+                "operationId": "PersistentTopics_removeSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Remove subscription expiration time for a topic",
+                "tags": [
+                    "persistent topic"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "PersistentTopics_getSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "applied",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    }
+                },
+                "summary": "Get subscription expiration time in minutes for a topic",
+                "tags": [
+                    "persistent topic"
+                ]
+            },
+            "post": {
+                "description": "",
+                "operationId": "PersistentTopics_setSubscriptionExpirationTime",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Subscription expiration time in minutes",
+                        "format": "int32",
+                        "in": "query",
+                        "name": "subscriptionExpirationTime",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "isGlobal",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "default": false,
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid subscription expiration time value"
+                    }
+                },
+                "summary": "Set subscription expiration time in minutes for a topic",
                 "tags": [
                     "persistent topic"
                 ]

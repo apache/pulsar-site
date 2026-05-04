@@ -5,7 +5,14 @@ sidebar_label: "Run Pulsar locally with Docker Compose"
 description: Get started with Apache Pulsar on your local machine using Docker Compose.
 ---
 
-To run Pulsar loccally with Docker Compose, follow the steps below.
+To run Pulsar locally with Docker Compose, follow the steps below.
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (version 20.10+ recommended)
+- [Docker Compose](https://docs.docker.com/compose/install/) (version 2.0+ recommended)
+- At least 8GB of available RAM for the cluster
+- At least 10GB of free disk space
 
 ## Step 1: Configure the `compose.yml` template
 
@@ -29,10 +36,13 @@ services:
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
-    command: >
-      bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
-             bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
-             exec bin/pulsar zookeeper"
+    command:
+      - bash
+      - -c
+      - |
+        bin/apply-config-from-env.py conf/zookeeper.conf && \
+        bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
+        exec bin/pulsar zookeeper
     healthcheck:
       test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
       interval: 10s
@@ -46,13 +56,16 @@ services:
     image: apachepulsar/pulsar:latest
     networks:
       - pulsar
-    command: >
-      bin/pulsar initialize-cluster-metadata \
-               --cluster cluster-a \
-               --zookeeper zookeeper:2181 \
-               --configuration-store zookeeper:2181 \
-               --web-service-url http://broker:8080 \
-               --broker-service-url pulsar://broker:6650
+    command:
+      - bash
+      - -c
+      - |
+        bin/pulsar initialize-cluster-metadata \
+        --cluster cluster-a \
+        --zookeeper zookeeper:2181 \
+        --configuration-store zookeeper:2181 \
+        --web-service-url http://broker:8080 \
+        --broker-service-url pulsar://broker:6650
     depends_on:
       zookeeper:
         condition: service_healthy
@@ -68,7 +81,7 @@ services:
       - clusterName=cluster-a
       - zkServers=zookeeper:2181
       - metadataServiceUri=metadata-store:zk:zookeeper:2181
-      # otherwise every time we run docker compose uo or down we fail to start due to Cookie
+      # otherwise every time we run docker compose up or down we fail to start due to Cookie
       # See: https://github.com/apache/bookkeeper/blob/405e72acf42bb1104296447ea8840d805094c787/bookkeeper-server/src/main/java/org/apache/bookkeeper/bookie/Cookie.java#L57-68
       - advertisedAddress=bookie
       - BOOKIE_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m

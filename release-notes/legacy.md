@@ -421,7 +421,7 @@ https://github.com/apache/pulsar/releases/tag/v2.4.0
 
 #### General
 
- * Support for schema definitions in the Pulsar [Python client library](https://pulsar.apache.org/docs/client-libraries-python/#schema)
+ * Support for schema definitions in the Pulsar [Python client library](https://pulsar.apache.org/docs/client-libraries/python#schema)
  * PIP-25: [Token based authentication](https://pulsar.apache.org/docs/security-token-client/) [#2888](https://github.com/apache/pulsar/pull/2888),
    [#3067](https://github.com/apache/pulsar/pull/3067) and [#3089](https://github.com/apache/pulsar/pull/3089)
  * Updated to [Apache BookKeeper 4.9.0](https://bookkeeper.apache.org/docs/4.9.0/overview/releaseNotes/)
@@ -639,7 +639,7 @@ It is a feature release, including several new features and major improvements:
 - [Tiered Storage](/docs/en/concepts-tiered-storage/): An extension in Pulsar segment store to offload older segments into long term storage (e.g. HDFS, S3).
   S3 support is supported in 2.1 release.
 - [Stateful function](/docs/en/functions-state/): Pulsar Functions is able to use [State API](/docs/en/functions-state#api) for storing state within Pulsar.
-- Pulsar [Go Client](/docs/en/client-libraries-go/)
+- Pulsar [Go Client](/docs/client-libraries/go)
 - [Avro](https://github.com/apache/incubator-pulsar/blob/v2.1.0-incubating/pulsar-client-schema/src/main/java/org/apache/pulsar/client/impl/schema/AvroSchema.java) and
   [Protobuf](https://github.com/apache/incubator-pulsar/blob/v2.1.0-incubating/pulsar-client-schema/src/main/java/org/apache/pulsar/client/impl/schema/ProtobufSchema.java) Schema support
 

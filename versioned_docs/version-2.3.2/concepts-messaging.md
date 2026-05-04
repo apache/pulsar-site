@@ -67,7 +67,7 @@ Messages can be received from [brokers](reference-terminology.md#broker) either 
 
 ### Listeners
 
-Client libraries provide listener implementation for consumers. For example, the [Java client](client-libraries-java.md) provides a [MesssageListener](/api/client/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
+Client libraries provide listener implementation for consumers. For example, the [Java client](pathname:///docs/client-libraries/java) provides a [MesssageListener](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageListener) interface. In this interface, the `received` method is called whenever a new message is received.
 
 ### Acknowledgement
 
@@ -243,7 +243,7 @@ Consumer someTopicsConsumer = pulsarClient.subscribe(someTopicsInNamespace, "sub
 
 For code examples, see:
 
-* [Java](client-libraries-java.md#multi-topic-subscriptions)
+* [Java](pathname:///docs/client-libraries/java#multi-topic-subscriptions)
 
 ## Partitioned topics
 
@@ -275,13 +275,13 @@ Mode     | Description
 :--------|:------------
 `RoundRobinPartition` | If no key is provided, the producer will publish messages across all partitions in round-robin fashion to achieve maximum throughput. Please note that round-robin is not done per individual message but rather it's set to the same boundary of batching delay, to ensure batching is effective. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition. This is the default mode.
 `SinglePartition`     | If no key is provided, the producer will randomly pick one single partition and publish all the messages into that partition. While if a key is specified on the message, the partitioned producer will hash the key and assign message to a particular partition.
-`CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](client-libraries-java.md) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
+`CustomPartition`     | Use custom message router implementation that will be called to determine the partition for a particular message. User can create a custom routing mode by using the [Java client](pathname:///docs/client-libraries/java) and implementing the {@inject: javadoc:MessageRouter:/client/org/apache/pulsar/client/api/MessageRouter} interface.
 
 ### Ordering guarantee
 
 The ordering of messages is related to MessageRoutingMode and Message Key. Usually, user would want an ordering of Per-key-partition guarantee.
 
-If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
+If there is a key attached to message, the messages will be routed to corresponding partitions based on the hashing scheme specified by [HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) in {@inject: javadoc:ProducerBuilder:/client/org/apache/pulsar/client/api/ProducerBuilder}, when using either `SinglePartition` or `RoundRobinPartition` mode.
 
 Ordering guarantee | Description | Routing Mode and Key
 :------------------|:------------|:------------
@@ -290,7 +290,7 @@ Per-producer       | All the messages from the same producer will be in order. |
 
 ### Hashing scheme
 
-[HashingScheme](/api/client/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
+[HashingScheme](@pulsar:javadoc:client@/org/apache/pulsar/client/api/HashingScheme) is an enum that represent sets of standard hashing functions available when choosing the partition to use for a particular message.
 
 There are 2 types of standard hashing functions available: `JavaStringHash` and `Murmur3_32Hash`.
 The default hashing function for producer is `JavaStringHash`.
@@ -329,7 +329,7 @@ Non-persistent messaging is usually faster than persistent messaging because bro
 
 Producers and consumers can connect to non-persistent topics in the same way as persistent topics, with the crucial difference that the topic name must start with `non-persistent`. All three subscription types---[exclusive](#exclusive), [shared](#shared), and [failover](#failover)---are supported for non-persistent topics.
 
-Here's an example [Java consumer](client-libraries-java.md#consumers) for a non-persistent topic:
+Here's an example [Java consumer](pathname:///docs/client-libraries/java#consumers) for a non-persistent topic:
 
 ```java
 
@@ -341,7 +341,7 @@ Consumer consumer = client.subscribe(npTopic, subscriptionName);
 
 ```
 
-Here's an example [Java producer](client-libraries-java.md#producer) for the same non-persistent topic:
+Here's an example [Java producer](pathname:///docs/client-libraries/java#producer) for the same non-persistent topic:
 
 ```java
 

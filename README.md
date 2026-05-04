@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/pulsar-site)
+
 # Apache Pulsar Website and Documentation
 
 This repository contains the [Apache Pulsar website](https://pulsar.apache.org) source code and Apache Pulsar documentation.
@@ -31,6 +33,21 @@ After committing the changes for the `docs` directory, you can use the `docs-too
 ./scripts/docs-tool.sh apply_changes_to_versioned_docs
 ```
 
+## Markdown placeholders
+
+Markdown files under `docs/` and `versioned_docs/version-*/` are run through
+two preprocessors at build time:
+
+- `@pulsar:version@`, `@pulsar:rpm:client@`, `@pulsar:apidoc:python@`, etc. —
+  version-aware tokens. The values come from `versions.json`, `site-baseurls.js`,
+  and `data/release-*.js`. See `src/config/pulsarVariables.ts` for the full list.
+- `{@inject:javadoc:Name:org/...}`, `{@inject:endpoint|GET|/admin/...}` — link
+  expansion for Javadoc, GitHub, REST endpoints. See
+  `src/server/markdownPreprocessors/inject.ts`.
+
+To reference the same values from React components, import from
+`@site/src/config/pulsarVariables` — no placeholder is needed in `.js`/`.tsx`.
+
 ## More information
 
 * [Pulsar Website contribution guide](https://pulsar.apache.org/contribute/site-intro/)
@@ -39,8 +56,23 @@ After committing the changes for the `docs` directory, you can use the `docs-too
   * [Updating documentation](https://pulsar.apache.org/contribute/document-contribution/)
   * [Previewing content](https://pulsar.apache.org/contribute/document-preview/)
 
+
+## Website not getting updated?
+
+If the https://pulsar.apache.org website doesn't get updated, [check the latest GitHub Actions workflow run for the main branch](https://github.com/apache/pulsar-site/actions/workflows/ci-build-site.yml?query=branch%3Amain). If it succeeded, the problem could be that the [git history for the asf-site-next branch](https://github.com/apache/pulsar-site/commits/asf-site-next/) is too large and needs to be truncated. Here are the commands to perform that task:
+
+```shell
+git clone --depth 1 -b asf-site-next https://github.com/apache/pulsar-site pulsar-site-static
+cd pulsar-site-static
+git checkout --orphan asf-site-next-truncated
+git add -A
+git commit -m "History truncated"
+git push -f origin HEAD:asf-site-next
+```
+
 ## Contact information
 
-* Submit [an issue](https://github.com/apache/pulsar/issues/new) on the [main apache/pulsar repo](http://github.com/apache/pulsar)
+* For documentation improvements, submit [an issue](https://github.com/apache/pulsar-site/issues/new) to the site repository.
+* For Pulsar bug reports or any improvements, submit [an issue](https://github.com/apache/pulsar/issues/new) to the main repository.
 * Subscribe to the [dev@pulsar.apache.org mailing list](https://pulsar.apache.org/contact/#mailing-lists) and start a discussion.
 * Ask on the [#dev channel on Pulsar Slack](https://apache-pulsar.slack.com/channels/dev) ([join](https://pulsar.apache.org/community#section-discussions))

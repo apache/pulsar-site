@@ -29,7 +29,7 @@ services:
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
-    command: >
+    command: |
       bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
              bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
              exec bin/pulsar zookeeper"
@@ -46,7 +46,7 @@ services:
     image: apachepulsar/pulsar:latest
     networks:
       - pulsar
-    command: >
+    command: |
       bin/pulsar initialize-cluster-metadata \
                --cluster cluster-a \
                --zookeeper zookeeper:2181 \
@@ -113,13 +113,26 @@ services:
 
 ## Step 2: Create a Pulsar cluster
 
-As preparation, create data directories and change the data directory ownership to uid(10000) which is the default user id used in the Pulsar Docker container.
+As preparation, create the data directories that the `compose.yml` file will bind-mount into the Pulsar containers.
+
+On Linux, the mounted directories need to be owned by uid `10000` -- the default user inside the Pulsar Docker container -- so the containers can write to them:
 
 ```bash
 sudo mkdir -p ./data/zookeeper ./data/bookkeeper
-# this step might not be necessary on other than Linux platforms
 sudo chown -R 10000 data
 ```
+
+:::note macOS and Windows (Docker Desktop)
+
+On macOS and Windows, Docker Desktop runs containers inside a Linux VM and handles uid remapping for bind mounts for you, so the `chown -R 10000` step is not required and running it with `sudo` will typically fail or leave the files in a state that prevents `docker compose up` from starting cleanly (the bookie/zookeeper containers fail with permission errors on `./data/...`).
+
+If you see permission errors on startup, remove the `./data` directory (or reset its ownership to your user) and create it without `chown`:
+
+```bash
+mkdir -p ./data/zookeeper ./data/bookkeeper
+```
+
+:::
 
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 
