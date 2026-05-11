@@ -54,7 +54,7 @@ In Pulsar, consumers subscribe to topics and handle messages that producers publ
 Once you've instantiated a [PulsarClient](@pulsar:javadoc:client@/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Consumer](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Consumer) by specifying a [topic](pathname:///docs/reference-terminology#topic) and a [subscription](pathname:///docs/concepts-messaging#subscription-types).
 
 ```java
-Consumer consumer = client.newConsumer()
+Consumer<byte[]> consumer = client.newConsumer()
         .topic("my-topic")
         .subscriptionName("my-subscription")
         .subscribe();
@@ -65,7 +65,7 @@ The `subscribe` method will auto-subscribe the consumer to the specified topic a
 ```java
 while (true) {
   // Wait for a message
-  Message msg = consumer.receive();
+  Message<byte[]> msg = consumer.receive();
 
   try {
       // Do something with the message
@@ -83,16 +83,16 @@ while (true) {
 If you don't want to block your main thread but constantly listen for new messages, consider using a `MessageListener`. The `MessageListener` will use a thread pool inside the PulsarClient. You can set the number of threads to use for message listeners in the ClientBuilder.
 
 ```java
-MessageListener myMessageListener = (consumer, msg) -> {
+MessageListener<byte[]> myMessageListener = (consumer, msg) -> {
   try {
       System.out.println("Message received: " + new String(msg.getData()));
       consumer.acknowledge(msg);
   } catch (Exception e) {
       consumer.negativeAcknowledge(msg);
   }
-}
+};
 
-Consumer consumer = client.newConsumer()
+Consumer<byte[]> consumer = client.newConsumer()
      .topic("my-topic")
      .subscriptionName("my-subscription")
      .messageListener(myMessageListener)
@@ -108,13 +108,13 @@ The following is an example.
 ```java
 byte[] msgIdBytes = // Some message ID byte array
 MessageId id = MessageId.fromByteArray(msgIdBytes);
-Reader reader = pulsarClient.newReader()
+Reader<byte[]> reader = pulsarClient.newReader()
         .topic(topic)
         .startMessageId(id)
         .create();
 
 while (true) {
-    Message message = reader.readNext();
+    Message<byte[]> message = reader.readNext();
     // Process message
 }
 ```

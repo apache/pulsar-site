@@ -140,7 +140,7 @@ After starting Pulsar successfully, you can see `INFO`-level log messages like t
 :::tip
 
 * To perform a health check, you can use the `bin/pulsar-admin brokers healthcheck` command. For more information, see [Pulsar admin docs](/reference/#/@pulsar:version_reference@/pulsar-admin/).
-* When you start a local standalone cluster, a `public/default` namespace is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
+* When you start a local standalone cluster, a `public/default` [namespace](concepts-messaging.md#namespaces) is created automatically. The namespace is used for development purposes. All Pulsar topics are managed within namespaces. For more information, see [Topics](concepts-messaging.md#topics).
 
 :::
 
@@ -162,7 +162,7 @@ pip install pulsar-client
 
 ### Consume a message
 
-Create a consumer and subscribe to the topic:
+Create a [consumer](concepts-clients.md#consumer) and [subscribe](concepts-messaging.md#subscriptions) to the [topic](concepts-messaging.md#topics):
 
 ```python
 import pulsar
@@ -180,7 +180,7 @@ client.close()
 
 ### Produce a message
 
-Start a producer to send some test messages:
+Start a [producer](concepts-clients.md#producer) to send some test messages:
 
 ```python
 import pulsar

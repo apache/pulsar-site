@@ -261,6 +261,60 @@ bin/bookkeeper shell listbookies -rw -h
 bin/bookkeeper shell listbookies -ro -h
 ```
 
+### AutoRecovery
+
+BookKeeper AutoRecovery automatically detects unavailable bookies and rereplicated under-replicated ledger fragments to healthy bookies — without manual intervention. For a full explanation of how AutoRecovery works, see the [BookKeeper AutoRecovery documentation](https://bookkeeper.apache.org/docs/next/admin/autorecovery).
+
+#### Deploy AutoRecovery
+
+AutoRecovery can run embedded within each bookie process (default) or on dedicated nodes:
+
+- **Embedded (default)**: `autoRecoveryDaemonEnabled=true` in `conf/bookkeeper.conf` — each bookie runs an AutoRecovery thread alongside normal bookie operations.
+- **Dedicated nodes**: Set `autoRecoveryDaemonEnabled=false` on all bookies and run AutoRecovery as a separate process. Recommended for large clusters to isolate recovery I/O from bookie traffic.
+
+To start AutoRecovery as a standalone process:
+
+```shell
+bin/bookkeeper autorecovery
+```
+
+Or as a background daemon:
+
+```shell
+bin/pulsar-daemon start autorecovery
+```
+
+#### Enable and disable AutoRecovery
+
+You can temporarily disable AutoRecovery cluster-wide during planned maintenance and re-enable it afterward:
+
+```shell
+# Disable AutoRecovery
+bin/bookkeeper shell autorecovery -disable
+
+# Enable AutoRecovery
+bin/bookkeeper shell autorecovery -enable
+
+# Check current status
+bin/bookkeeper shell autorecovery -status
+```
+
+#### Pulsar-specific configuration
+
+Set `lostBookieRecoveryDelay` in `conf/bookkeeper.conf` to a value greater than `0` (for example, `60` seconds) in production clusters that undergo rolling restarts. This prevents AutoRecovery from triggering unnecessary rereplication for bookies that are only temporarily unavailable.
+
+To enable Prometheus metrics on a bookie or AutoRecovery node, set the following in `conf/bookkeeper.conf`:
+
+```properties
+statsProviderClass=org.apache.pulsar.metrics.prometheus.bookkeeper.PrometheusMetricsProvider
+```
+
+:::note
+
+This Pulsar-specific stats provider class is required since Pulsar 4.2.0 / 4.0.10. See the [Pulsar 4.0.10 release notes](https://pulsar.apache.org/release-notes/versioned/pulsar-4.0.10/) for details.
+
+:::
+
 ## BookKeeper persistence policies
 
 In Pulsar, you can set *persistence policies* at the namespace level, which determines how BookKeeper handles persistent storage of messages. Policies determine four things:

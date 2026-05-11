@@ -17,6 +17,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
+import os
 import tempfile
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from pathlib import Path
@@ -42,8 +43,10 @@ if __name__ == '__main__':
         else:
             site = Path(args.site_path)
 
-        commit = run_pipe(git, 'rev-parse', '--short', 'HEAD', cwd=root_path()).read().strip()
-        msg = f'Site updated at revision {commit}'
+        head_sha = run_pipe(git, 'rev-parse', 'HEAD', cwd=root_path()).read().strip()
+        short_sha = head_sha[:12]
+        msg = f'Site updated at revision {short_sha}'
+        token = os.getenv('GITHUB_TOKEN')
 
-        site_builder.execute(site)
-        site_uploader.execute(args.push, msg, site, branch)
+        site_builder.execute(site, head_sha, token)
+        site_uploader.execute(args.push, msg, site, branch, head_sha)

@@ -31,6 +31,8 @@ jobs:
     name: Build and publish pulsar website-next
     runs-on: ubuntu-latest
     timeout-minutes: 600
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -39,7 +41,6 @@ jobs:
         with:
           ref: 'asf-site-next'
           path: tmp/asf-site-next
-          token: ${{ secrets.PULSARBOT_TOKEN }}
       - name: Install poetry
         run: pipx install poetry
       - uses: actions/setup-python@v6
@@ -53,6 +54,8 @@ jobs:
       - run: corepack enable
       - name: Update generated docs
         working-directory: tools/pytools
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           poetry install
           poetry run bin/site-publisher.py --site-path=$GITHUB_WORKSPACE/tmp/asf-site-next

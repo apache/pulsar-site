@@ -45,7 +45,7 @@ Before using the File source connector, you need to create a configuration file 
      "configs": {
         "inputDirectory": "/Users/david",
         "recurse": true,
-        "keepFile": true,
+        "keepFile": false,
         "fileFilter": "[^\\.].*",
         "pathFilter": ".*",
         "minimumFileAge": 0,
@@ -66,7 +66,7 @@ Before using the File source connector, you need to create a configuration file 
   configs:
       inputDirectory: "/Users/david"
       recurse: true
-      keepFile: true
+      keepFile: false
       fileFilter: "[^\\.].*"
       pathFilter: ".*"
       minimumFileAge: 0

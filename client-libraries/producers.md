@@ -411,11 +411,11 @@ The following is an example:
   values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"},{"label":"Go","value":"Go"},{"label":"Python","value":"Python"}]}>
 <TabItem value="Java">
 
-To use a custom message router, you need to provide an implementation of the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface, which has just one `choosePartition` method:
+To use a custom message router, you need to provide an implementation of the [MessageRouter](@pulsar:javadoc:client@/org/apache/pulsar/client/api/MessageRouter) interface. Implement the `choosePartition(Message<?>, TopicMetadata)` method (the single-argument overload is deprecated since 1.22.0):
 
 ```java
 public interface MessageRouter extends Serializable {
-    int choosePartition(Message msg);
+    int choosePartition(Message<?> msg, TopicMetadata metadata);
 }
 ```
 
@@ -423,7 +423,8 @@ The following router routes every message to partition 10:
 
 ```java
 public class AlwaysTenRouter implements MessageRouter {
-    public int choosePartition(Message msg) {
+    @Override
+    public int choosePartition(Message<?> msg, TopicMetadata metadata) {
         return 10;
     }
 }
@@ -627,21 +628,28 @@ To intercept messages, you can add a `ProducerInterceptor` or multiple ones when
    ```java
    Producer<byte[]> producer = client.newProducer()
         .topic(topic)
-        .intercept(new ProducerInterceptor {
-			@Override
-			boolean eligible(Message message) {
-			    return true;  // process all messages
-			}
+        .intercept(new ProducerInterceptor() {
+            @Override
+            public void close() {
+                // release any resources held by the interceptor
+            }
 
-			@Override
-			Message beforeSend(Producer producer, Message message) {
-			    // user-defined processing logic
-			}
+            @Override
+            public boolean eligible(Message<?> message) {
+                return true;  // process all messages
+            }
 
-			@Override
-			void onSendAcknowledgement(Producer producer, Message message, MessageId msgId, Throwable exception) {
-			    // user-defined processing logic
-			}
+            @Override
+            public Message<?> beforeSend(Producer<?> producer, Message<?> message) {
+                // user-defined processing logic; return the (possibly modified) message
+                return message;
+            }
+
+            @Override
+            public void onSendAcknowledgement(Producer<?> producer, Message<?> message,
+                                              MessageId msgId, Throwable exception) {
+                // user-defined processing logic
+            }
         })
         .create();
    ```

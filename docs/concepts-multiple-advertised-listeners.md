@@ -114,17 +114,42 @@ While Pulsar Proxy is generally recommended for Kubernetes deployments, multiple
 The Apache Pulsar Helm chart doesn't currently support this type of deployment. These instructions are provided as general guidance for using the `advertisedListeners` feature in Kubernetes deployments.
 There are multiple ways to handle this in Kubernetes deployments. Advertised listeners are also required in some service mesh configurations.
 
-NodePort deployment suggestions:
+> **Security notice**: Pulsar's design assumes the cluster sits behind network perimeter security; broker client and admin APIs are not safe to publish on the public internet. Use internal load balancers on private networks whenever possible. If external exposure is unavoidable, restrict access to authorized IP ranges with the Service's [`loadBalancerSourceRanges`](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) field (or equivalent firewall rules), and ensure TLS and authentication are fully configured. Pulsar's design assumes that deployments will be protected by network perimeter security measures.
 
-- Create individual NodePort (or LoadBalancer) services for each broker pod in a broker stateful set, mapping to the external listener binding ports.
-- Create a single NodePort (or LoadBalancer) service for the cluster to be used as the serviceUrl for clients, mapping to the external listener binding ports.
+A complete deployment requires two kinds of services:
+
+1. **A cluster-wide service URL.** A LoadBalancer service (for example, `external-brokers.example.com`) that fronts all healthy broker pods. The service's external port can be the standard Pulsar TLS port `6651`, which the LoadBalancer maps to the brokers' external listener bind port (for example, `16651`). Clients use this address as their `serviceUrl` for topic lookups; the lookup response then redirects each client to the specific broker that owns the topic, which is accessed via the per-broker-pod service described below.
+
+2. **A per-broker-pod service.** One service per broker pod that targets only that pod and exposes its external listener bind port. The external FQDN/IP and port of this per-pod service must exactly match the address the broker advertises for its `external` listener in `advertisedListeners`; otherwise the lookup response will return an address that clients cannot reach. Two options are described below — pick one based on your TLS and cost requirements.
+
+### Option 1: NodePort service per broker pod
+
+Create one NodePort service for each broker pod, mapping to the external listener binding ports for that pod. Clients reach brokers via `<node-ip-or-hostname>:<node-port>`.
+
+- Cost: no extra cloud infrastructure is required — traffic enters through ports on existing cluster nodes.
+- Network reachability: this option is suitable when clients reach broker nodes over a private network (for example, a VPC, on-prem network, or VPN). Because public internet exposure is not a supported configuration for Pulsar, firewall rules require special attention with NodePort: the chosen ports are opened on every node, so node-level firewalls, cloud security groups, and network policies must be reviewed to ensure those ports are reachable only from authorized client networks.
+- TLS challenges: the certificate presented by the broker must match the hostname or IP that clients actually connect to. Node IPs are often unstable in self-managed clusters, and hostname verification fails unless you provision stable DNS pointing to the nodes (or include IP SANs in the certificate). Reusing a single wildcard certificate across brokers requires every client-facing entry point to resolve under that wildcard domain, which is awkward when clients connect directly to node IPs.
+
+### Option 2: LoadBalancer service per broker pod
+
+Create one LoadBalancer service for each broker pod, mapping to the external listener binding ports for that pod.
+
+- Cost: each LoadBalancer is a separate cloud resource with a recurring cost. For N brokers you pay for N load balancers.
+- TLS is easier: you control a stable DNS name per LoadBalancer (for example, `pulsar-broker-0.example.com`) and issue certificates against those names. Clients connect by hostname, so standard hostname verification works without special configuration.
+
+### Targeting a specific broker pod (applies to both options)
+
+Regardless of which service type you choose, each per-pod service must select exactly one broker pod by including the `statefulset.kubernetes.io/pod-name` label in its selector (for example, `statefulset.kubernetes.io/pod-name: pulsar-broker-0`). This label is automatically applied by the StatefulSet controller to every pod and ensures traffic for a given broker's external listener port reaches the broker pod whose `advertisedListeners` configuration matches the service's external address and port. On Kubernetes 1.32 or later, the stable `apps.kubernetes.io/pod-index` label (for example, `apps.kubernetes.io/pod-index: "0"`) can be used in the selector instead.
+
+### Example broker configuration for the LoadBalancer per broker pod case
 
 ```properties
-# Advertised listeners for internal and external access
-advertisedListeners=internal:pulsar://192.168.1.11:6650,internal:pulsar+ssl://192.168.1.11:6651,external:pulsar://198.51.100.17:30650,external:pulsar+ssl://198.51.100.17:31650
+# Advertised listeners — "internal" uses the StatefulSet headless service DNS name,
+# "external" uses the stable DNS of this broker's LoadBalancer
+advertisedListeners=internal:pulsar://pulsar-broker-0.pulsar-broker-headless.pulsar.svc.cluster.local:6650,internal:pulsar+ssl://pulsar-broker-0.pulsar-broker-headless.pulsar.svc.cluster.local:6651,external:pulsar://pulsar-broker-0.example.com:6650,external:pulsar+ssl://pulsar-broker-0.example.com:6651
 
-# Bind addresses with different ports for internal and external access
-bindAddresses=internal:pulsar://0.0.0.0:6650,internal:pulsar+ssl://0.0.0.0:6651,external:pulsar+ssl://0.0.0.0:16651
+# Bind addresses — "external" binds use a different local port range than "internal"
+bindAddresses=internal:pulsar://0.0.0.0:6650,internal:pulsar+ssl://0.0.0.0:6651,external:pulsar://0.0.0.0:16650,external:pulsar+ssl://0.0.0.0:16651
 
 # Specify the internal listener name
 internalListenerName=internal
@@ -132,7 +157,6 @@ internalListenerName=internal
 
 In the above example:
 
-- `192.168.1.11` is the pod IP for the particular broker pod. The IP or hostname should be dynamically set in this configuration at broker startup.
-- `198.51.100.17` is the external IP of the k8s node. In some cases this can be dynamically set based on the `status.hostIP` Kubernetes information.
-- `30650` and `31650` are the specific NodePorts allocated for this broker pod. This can be dynamically calculated from a base port number by adding the StatefulSet pod index (`metadata.labels['statefulset.kubernetes.io/pod-index']`) to it.
-
+- `pulsar-broker-0.pulsar-broker-headless.pulsar.svc.cluster.local` is the per-pod FQDN provided by the StatefulSet's headless service (format: `<pod-name>.<headless-service-name>.<namespace>.svc.cluster.local`). It is stable across pod restarts and re-resolves to the current pod IP, so it should be used for the `internal` listener instead of the pod IP. The pod's own FQDN is set dynamically per pod (typically via `metadata.labels['statefulset.kubernetes.io/pod-name']` and a known headless service and namespace).
+- `pulsar-broker-0.example.com` is the stable DNS name assigned to the LoadBalancer service that targets this broker pod (using a `statefulset.kubernetes.io/pod-name: pulsar-broker-0` selector). Each broker pod has its own DNS name, set dynamically per pod.
+- The per-broker LoadBalancer maps external ports `6650` and `6651` to the broker's external listener bind ports `16650` and `16651`. Using the standard Pulsar ports externally lets the same DNS name and certificate work for both the cluster-wide service URL and the per-pod LoadBalancer.
