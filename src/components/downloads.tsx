@@ -219,6 +219,9 @@ export function GoReleasesDownloadTable(): JSX.Element {
 }
 
 export function NodeReleasesDownloadTable(): JSX.Element {
+  // Releases omitted here never shipped under the current ASF path
+  // `dist/pulsar/pulsar-client-node/pulsar-client-node-<version>/` with the matching tarball name.
+  // Extend only after checking https://archive.apache.org/dist/pulsar/pulsar-client-node/ (or HEAD on the tarball URL).
   const excludedVersions = ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.3.1", "1.4.0", "1.3.2", "1.6.2", "1.5.0", "1.4.1"];
   const data = nodeReleases
     .map(item => item.tagName.substring(1))
@@ -234,7 +237,8 @@ export function NodeReleasesDownloadTable(): JSX.Element {
         tarSha: `${tarPath}.sha512`,
         directory: url,
         releaseNote: `https://github.com/apache/pulsar-client-node/releases/tag/v${version}`,
-        binariesHint: "Platform-specific napi prebuilts (darwin/linux/win, arm64/x64, glibc/musl) are published alongside the source tarball in the directory above.",
+        binariesHint:
+          "Platform-specific napi prebuilts (darwin/linux/win, arm64/x64, glibc/musl) are published alongside the source tarball in the directory above. If a direct tarball link fails, use the expanded directory listing for the authoritative file set.",
       }
     })
   return <div className="tailwind">
