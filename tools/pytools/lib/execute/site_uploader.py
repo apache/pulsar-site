@@ -21,6 +21,7 @@ import enum
 import os
 import tempfile
 from pathlib import Path
+from typing import Optional
 
 from command import run, find_command, run_pipe
 
@@ -44,7 +45,7 @@ def _should_push(mode: Mode) -> bool:
     return result
 
 
-def _do_push(msg: str, site: Path, branch: str, head_sha: str):
+def _do_push(msg: str, site: Path, branch: str, head_sha: Optional[str]):
     git = find_command('git', msg="git is required")
 
     # Persist the source-repo SHA we just published so the next run can compute
@@ -52,7 +53,11 @@ def _do_push(msg: str, site: Path, branch: str, head_sha: str):
     # it lands in the same commit as the published content. If `git push` later
     # fails, this local file is discarded along with the unpushed commit — the
     # next CI run re-clones asf-site-next and reads the previous .publish-ref.
-    (site / '.publish-ref').write_text(head_sha + '\n')
+    # Only relevant when publishing to the build output branch (asf-site-next);
+    # callers that push generated content into other branches (e.g. site-updater
+    # syncing into `main`) pass head_sha=None to skip the marker.
+    if head_sha is not None:
+        (site / '.publish-ref').write_text(head_sha + '\n')
 
     run(git, 'add', '-A', '.', cwd=site)
     changed = run(git, 'diff-index', '--quiet', 'HEAD', codes={0, 1}, cwd=site).returncode
@@ -75,7 +80,7 @@ def _do_push(msg: str, site: Path, branch: str, head_sha: str):
         run(git, 'push', 'origin', branch, cwd=site)
 
 
-def execute(mode: Mode, msg: str, site: Path, branch: str, head_sha: str):
+def execute(mode: Mode, msg: str, site: Path, branch: str, head_sha: Optional[str] = None):
     if _should_push(mode):
         _do_push(msg, site, branch, head_sha)
     else:  # show changes
