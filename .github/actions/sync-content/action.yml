@@ -31,27 +31,22 @@ runs:
       with:
         python-version: '3.12'
         cache: 'poetry'
-    - name: Cache local Maven repository
-      uses: actions/cache@v5
-      with:
-        path: |
-          ~/.m2/repository/*/*/*
-          !~/.m2/repository/org/apache/pulsar
-        key: ${{ runner.os }}-m2-dependencies-website-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-m2-dependencies-all-${{ hashFiles('**/pom.xml') }}
-          ${{ runner.os }}-m2-dependencies-core-modules-${{ hashFiles('**/pom.xml') }}
-          ${{ runner.os }}-m2-dependencies-core-modules-
     - name: Set up JDK 21
       uses: actions/setup-java@v5
       with:
         distribution: corretto
         java-version: 21
-    - name: Run install by skip tests
+    - name: Set up Gradle
+      uses: gradle/actions/setup-gradle@39e147cb9de83bb9910b8ef8bd7fff0ee20fcd6f # v5
+    - name: Build pulsar artifacts and export classpath
       working-directory: tmp/pulsar
-      env:
-        MAVEN_OPTS: -Xss1500k -Xmx1500m -Daether.connector.http.reuseConnections=false -Daether.connector.requestTimeout=60000 -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.class=standard -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.http.retryHandler.requestSentEnabled=true -Dmaven.wagon.http.serviceUnavailableRetryStrategy.class=standard -Dmaven.wagon.rto=60000
-      run: mvn -B -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+      run: |
+        ./gradlew \
+          assemble \
+          :distribution:pulsar-server-distribution:exportClasspath \
+          :distribution:pulsar-shell-distribution:exportClasspath \
+          --no-configuration-cache \
+          --no-daemon
       shell: bash
     - name: Update generated docs
       working-directory: tools/pytools

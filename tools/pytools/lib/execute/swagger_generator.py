@@ -17,18 +17,33 @@
 
 import json
 import os
+import sys
 from pathlib import Path
 
 from command import find_command, run
 from constant import site_path
+from execute import pulsar_build
 
 
 def execute(master: Path, version: str):
-    master_swaggers = master / 'pulsar-broker' / 'target' / 'docs'
+    build = pulsar_build.detect(master)
+    master_swaggers = pulsar_build.swagger_output_dir(master, build)
 
-    if not master_swaggers.exists():  # generate master swaggers
-        mvn = find_command('mvn', msg="mvn is required")
-        run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
+    if not master_swaggers.exists():
+        if build == pulsar_build.BuildSystem.maven:
+            mvn = find_command('mvn', msg="mvn is required")
+            run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
+        else:
+            # Gradle build on apache/pulsar master does not yet have a task
+            # that regenerates the Swagger JSONs (the old `mvn -Pswagger`
+            # invocation has no Gradle equivalent). Skip rather than fail so
+            # the rest of the docs sync still produces useful output.
+            print(
+                f'[swagger_generator] Skipping Swagger generation: Gradle build at {master} '
+                f'has no swagger task; expected output dir {master_swaggers} is missing.',
+                file=sys.stderr,
+            )
+            return
 
     os.makedirs(site_path() / 'static' / 'swagger' / version, exist_ok=True)
     for f in master_swaggers.glob('*.json'):

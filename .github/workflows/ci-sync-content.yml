@@ -27,9 +27,9 @@ jobs:
     name: Synchronize Content from Main Repo
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
-        with:
-          token: ${{ secrets.PULSARBOT_TOKEN }}
       - name: Sync content and push
         uses: ./.github/actions/sync-content

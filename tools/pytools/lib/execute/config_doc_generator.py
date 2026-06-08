@@ -22,6 +22,7 @@ from pathlib import Path
 import semver
 from command import find_command, run
 from constant import site_path
+from execute import pulsar_build
 
 
 @dataclass
@@ -35,9 +36,11 @@ class Settings:
 def execute(master: Path, version: str):
     java = find_command('java', msg='java is required')
 
+    build = pulsar_build.detect(master)
+    pulsar_build.ensure_built(master, build)
+
     reference = site_path() / 'static' / 'reference' / version
-    classpath = master / 'distribution' / 'server' / 'target' / 'classpath.txt'
-    classpath = classpath.read_text()
+    classpath = pulsar_build.server_classpath_file(master, build).read_text()
 
     broker_doc_generator = 'org.apache.pulsar.proxy.util.CmdGenerateDocumentation'
     client_doc_generator = 'org.apache.pulsar.proxy.util.CmdGenerateDocumentation'
