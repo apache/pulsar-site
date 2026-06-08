@@ -20,9 +20,13 @@ from pathlib import Path
 
 from command import run
 from constant import site_path
+from execute import pulsar_build
 
 
 def execute(basedir: Path, version: str):
+    build = pulsar_build.detect(basedir)
+    pulsar_build.ensure_built(basedir, build)
+
     perf = basedir / 'bin' / 'pulsar-perf'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-perf'
 
