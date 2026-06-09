@@ -95,8 +95,6 @@ $ pulsar-client consume [options]
 |
 | `[-mp, --print-metadata]` | Message metadata|null|
 |
-| `[-stp, --start-timestamp]` | Start timestamp for consuming messages|null|
-|
 | `[-etp, --end-timestamp]` | End timestamp for consuming messages|null|
 |
 | `[-h, --help]` | Show this help message and exit.|null|
@@ -115,7 +113,7 @@ $ pulsar-client read [options]
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-m, --start-message-id]` | Initial reader position, it can be 'latest', 'earliest' or '<ledgerId>:<entryId>'|null|
+| `[-m, --start-message-id]` | Initial reader position, it can be 'latest' or 'earliest'|null|
 |
 | `[-i, --start-message-id-inclusive]` | Whether to include the position specified by -m option.|null|
 |

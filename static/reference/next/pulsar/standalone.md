@@ -13,7 +13,6 @@ $ pulsar standalone options
 | `--num-bookies` | Number of local Bookies|1|
 | `--metadata-dir` | Directory for storing metadata|data/metadata|
 | `--metadata-url` | Metadata store url||
-| `--bookkeeper-port` | Local bookies base port|3181|
 | `--bookkeeper-dir` | Local bookies base data directory|data/standalone/bookkeeper|
 | `--no-broker` | Only start ZK and BK services, no broker|false|
 | `--only-broker` | Only start Pulsar broker service (no ZK, BK)|false|

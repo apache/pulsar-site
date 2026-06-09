@@ -17,10 +17,10 @@ Consumer should take action when it receives a message that can not be decrypted
 
 The message decompression fails.
 
-If messages contain batch messages, a client is not be able to retrieve individual messages in batch.
+If messages contain batch messages, a client is not able to retrieve individual messages in batch.
 
-Delivered encrypted message contains {@link EncryptionContext} which contains encryption and compression information in it using which application can decrypt consumed message payload.cannot set with {@link ReaderDecryptFailListener}, and if ReaderDecryptFailListener are set,
-application should responsible for handling decryption failure.
+Delivered encrypted message contains {@link EncryptionContext} which contains encryption and compression information in it using which application can decrypt consumed message payload. It cannot be set together with a {@link ReaderDecryptFailListener}, and if a ReaderDecryptFailListener is set,
+the application is responsible for handling decryption failures.
 
 **Type**: `org.apache.pulsar.client.api.ConsumerCryptoFailureAction`
 

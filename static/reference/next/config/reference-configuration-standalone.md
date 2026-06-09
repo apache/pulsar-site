@@ -1238,6 +1238,17 @@ Name of load manager to use
 
 **Category**: Load Balancer
 
+### loadManagerMigrationEnabled
+When load manager migration is enabled, the broker will redirect requests to another broker if the load manager on the current broker is not using the load manager of the latest service lookup data available in the metadata store.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Load Balancer
+
 ### loadManagerServiceUnitStateTableViewClassName
 Name of ServiceUnitStateTableView implementation class to use
 
@@ -1573,6 +1584,28 @@ Enable the packages management service or not
 **Type**: `boolean`
 
 **Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Packages Management
+
+### packagesManagementAllowLegacyJavaSerialization
+Whether to accept reading legacy Java-serialized package metadata written by older brokers. A strict ObjectInputFilter allowlist is applied unconditionally whenever the legacy path runs. Defaults to true for upgrade compatibility; disable once all existing packages have been re-uploaded or rewritten via updateMeta. This default is scheduled to flip to false in a future release.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Packages Management
+
+### packagesManagementJsonSerializationEnabled
+Whether new package metadata writes use JSON (safe) or the legacy Java serialization format. Defaults to true. Set to false only as a temporary rollback path; the legacy format will be removed in a future release.
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -2346,6 +2379,28 @@ Interval (in seconds) for ResourceGroupService periodic tasks while resource gro
 
 **Category**: Policies
 
+### scalableTopicConsumerSessionGracePeriodSeconds
+Grace period (seconds) the controller leader waits for a disconnected scalable-topic consumer to reconnect with the same consumer name before evicting its session and reassigning its segments to remaining consumers.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### scalableTopicsEnabled
+Enables the scalable-topics V5 API on this broker. When disabled, the broker advertises supports_scalable_topics=false in CommandConnected feature flags and rejects scalable-topic commands from clients.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### subscribeRatePeriodPerConsumerInSecond
 Rate period for {subscribeThrottlingRatePerConsumer}. Default is 30s.
 
@@ -2808,7 +2863,7 @@ Whether to enable the acknowledge of batch local index
 **Category**: Server
 
 ### advertisedAddress
-Hostname or IP address the service advertises to the outside world. If not set, the value of `InetAddress.getLocalHost().getCanonicalHostName()` is used.
+Hostname or IP advertised to clients for the internal listener. Combined with the *Port properties it forms the internal listener's advertised URLs (e.g. `pulsar://<advertisedAddress\>:<brokerServicePort\>`). If not set, defaults to `InetAddress.getLocalHost().getCanonicalHostName()`.
 
 **Type**: `java.lang.String`
 
@@ -2819,7 +2874,10 @@ Hostname or IP address the service advertises to the outside world. If not set, 
 **Category**: Server
 
 ### advertisedListeners
-Used to specify multiple advertised listeners for the broker. The value must format as <listener_name\>:pulsar://<host\>:<port\>,multiple listeners should separate with commas.Do not use this configuration with advertisedAddress and brokerServicePort.The Default value is absent means use advertisedAddress and brokerServicePort.
+Declares additional advertised listeners — typically external listeners that complement the internal one.
+ Format: comma-separated `<listener_name\>:<scheme\>://<host\>:<port\>` entries. Supported schemes: `pulsar`, `pulsar+ssl`, `http`, `https`. A listener name may be repeated to declare multiple schemes for the same listener.
+ The internal listener is auto-configured from `advertisedAddress` plus the *Port properties (`brokerServicePort` / `brokerServicePortTls` / `webServicePort` / `webServicePortTls`) so it does not need an entry here. URLs declared here under `internalListenerName` do override that auto-configured listener, but this is not recommended because it can route cluster-internal traffic through an external endpoint (for example, an external load balancer).
+ Legacy fallback: when `internalListenerName` is left blank, the first listener parsed from this property is used as the internal listener (so in that case its entry here is required).
 
 **Type**: `java.lang.String`
 
@@ -2863,7 +2921,7 @@ Defines how the broker will anonymize the role and originalAuthRole before loggi
 **Category**: Server
 
 ### bindAddress
-Hostname or IP address the service binds on
+Local network interface IP for the internal listener's port bindings. Use a specific local IP to bind to a single interface, or `0.0.0.0` to bind on all interfaces. Default is `0.0.0.0`.
 
 **Type**: `java.lang.String`
 
@@ -2874,7 +2932,12 @@ Hostname or IP address the service binds on
 **Category**: Server
 
 ### bindAddresses
-Used to specify additional bind addresses for the broker. The value must format as <listener_name\>:<scheme\>://<host\>:<port\>, multiple bind addresses should be separated with commas. Associates each bind address with an advertised listener and protocol handler. Note that the brokerServicePort, brokerServicePortTls, webServicePort, and webServicePortTls properties define additional bindings.
+Per-listener socket bindings.
+ The internal listener's bindings are derived automatically from `bindAddress` plus the port properties (`brokerServicePort` / `brokerServicePortTls` / `webServicePort` / `webServicePortTls`) and do not need to be repeated here.
+ PIP-95 smart listener selection routes a connection to the listener whose port it arrived on. For the Pulsar binary protocol (`pulsar` / `pulsar+ssl`) this is optional — clients can also pass an explicit `listenerName`. For the HTTP/HTTPS Admin API (`http` / `https`) it is the only routing mechanism, so every HTTP/HTTPS advertised listener reachable from outside the cluster needs a dedicated entry here on a unique port. This lets a layer-4 TCP load balancer serve the Admin API directly per listener, without an HTTP reverse proxy.
+ Format: comma-separated `<listener_name\>:<scheme\>://<ip\>:<port\>` entries. Supported schemes: `pulsar`, `pulsar+ssl`, `http`, `https`. The `<ip\>` part selects which local network interface the port binds to: use a specific local IP, or `0.0.0.0` to bind on all interfaces. A local hostname is also accepted but not recommended.
+ Each `ip:port` may be bound by exactly one (listener, scheme) pair. An entry that exactly matches the auto-derived internal-listener binding is tolerated; assigning the same `ip:port` to a different listener or scheme fails validation.
+ Port `0` (OS-assigned ephemeral port) is supported only for the internal listener.
 
 **Type**: `java.lang.String`
 
@@ -3007,7 +3070,7 @@ Using a value of 0, is disabling compression check.
 **Category**: Server
 
 ### brokerServicePort
-The port for serving binary protobuf requests. If set, defines a server binding for bindAddress:brokerServicePort. The Default value is 6650.
+Port for the Pulsar binary protocol of the internal listener. The same port number is used both for the local socket binding (with `bindAddress`) and for the advertised URL (with `advertisedAddress`), so no entry in `advertisedListeners` or `bindAddresses` is required for the internal listener. Default is 6650.
 
 **Type**: `java.util.Optional`
 
@@ -3018,7 +3081,7 @@ The port for serving binary protobuf requests. If set, defines a server binding 
 **Category**: Server
 
 ### brokerServicePortTls
-The port for serving TLS-secured binary protobuf requests. If set, defines a server binding for bindAddress:brokerServicePortTls.
+Port for the Pulsar binary protocol TLS endpoint of the internal listener. Used both for the local socket binding and the advertised URL. By default TLS is disabled.
 
 **Type**: `java.util.Optional`
 
@@ -3554,11 +3617,13 @@ Capacity for thread pool queue in the HTTP server Default is set to 8192.
 **Category**: Server
 
 ### internalListenerName
-Used to specify the internal listener name for the broker.The listener name must contain in the advertisedListeners.The Default value is absent, the broker uses the first listener as the internal listener.
+Name of the listener used for cluster-internal broker-to-broker communication (lookup redirects, admin forwarding to owner or leader broker). Defaults to `internal`.
+ When set (the default), the internal listener is auto-configured from `advertisedAddress` plus the *Port properties. The internal listener must advertise addresses reachable from other brokers in the same cluster; avoid overriding its URLs in `advertisedListeners` to point at an external load balancer because that would route cluster-internal traffic outside the cluster. For external clients, declare a separate non-internal listener in `advertisedListeners` instead. The default name `internal` also keeps the port-derived internal listener distinct from any user-declared listener names.
+ Setting this to an empty string restores the legacy fallback: the first listener parsed from `advertisedListeners` is used as the internal listener.
 
 **Type**: `java.lang.String`
 
-**Default**: `null`
+**Default**: `internal`
 
 **Dynamic**: `false`
 
@@ -3703,7 +3768,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `2000`
+**Default**: `1999`
 
 **Dynamic**: `true`
 
@@ -4323,7 +4388,15 @@ Number of worker threads to serve topic ordered executor
 **Category**: Server
 
 ### topicPoliciesServiceClassName
-The class name of the topic policies service. The default config only takes affect when the systemTopicEnable config is true
+The class name of the topic policies service. There are 2 built-in implementations:
+1. "org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService" (default)
+  It stores a topic's policies in the `__change_events` topic. If `systemTopicEnabled` is false,
+  the topic policies will just be disabled
+2. "org.apache.pulsar.broker.service.MetadataStoreTopicPoliciesService"
+  It stores a topic's policies in the metadata store. If `systemTopicEnabled` is true and the
+  topic's namespace has a `__change_events` topic, the policies will still be stored in the
+  `__change_events` topic for backward compatibility.
+
 
 **Type**: `java.lang.String`
 
@@ -4460,7 +4533,7 @@ Defaults to true when either webServiceHaProxyProtocolEnabled or webServiceTrust
 **Category**: Server
 
 ### webServicePort
-The port for serving http requests
+Port for the HTTP admin/REST endpoint of the internal listener. Used both for the local socket binding and the advertised URL.
 
 **Type**: `java.util.Optional`
 
@@ -4471,7 +4544,7 @@ The port for serving http requests
 **Category**: Server
 
 ### webServicePortTls
-The port for serving https requests
+Port for the HTTPS admin/REST endpoint of the internal listener. Used both for the local socket binding and the advertised URL. By default TLS is disabled.
 
 **Type**: `java.util.Optional`
 
@@ -5327,7 +5400,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `800`
+**Default**: `799`
 
 **Dynamic**: `true`
 
@@ -6095,11 +6168,11 @@ The transaction buffer client's operation timeout in milliseconds.
 **Category**: Transaction
 
 ### transactionBufferProviderClassName
-Class name for transaction buffer provider
+Class name for transaction buffer provider. The default DispatchingTransactionBufferProvider routes segment:// topics to the metadata-driven MetadataTransactionBuffer (PIP-473) and persistent:// / topic:// topics to the legacy TopicTransactionBuffer. Set this to org.apache.pulsar.broker.transaction.buffer.impl.TopicTransactionBufferProvider to force the legacy buffer for all topics.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.broker.transaction.buffer.impl.TopicTransactionBufferProvider`
+**Default**: `org.apache.pulsar.broker.transaction.buffer.impl.DispatchingTransactionBufferProvider`
 
 **Dynamic**: `false`
 
@@ -6160,6 +6233,61 @@ Enable transaction coordinator in broker
 
 **Category**: Transaction
 
+### transactionCoordinatorScalableTopicsEnabled
+Enable the metadata-driven transaction coordinator used by scalable topics. When true, transaction wire commands flagged as scalable (sent by v5 SDK clients) are served by the metadata-store-backed coordinator, while legacy (v4) clients continue to be served by TransactionMetadataStoreService — the two coexist on the same cluster. Requires transactionCoordinatorEnabled = true. Enabled by default together with the dispatching transaction buffer and pending-ack store providers.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
+### transactionCoordinatorScalableTopicsGcIntervalSeconds
+Interval, in seconds, at which the scalable-topics transaction coordinator sweeps for finalized transactions whose retention has elapsed and garbage-collects their metadata. Only relevant when transactionCoordinatorScalableTopicsEnabled = true.
+
+**Type**: `int`
+
+**Default**: `300`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
+### transactionCoordinatorScalableTopicsGcRetentionSeconds
+How long, in seconds, a finalized (committed/aborted) transaction's metadata is retained before the scalable-topics transaction coordinator's GC sweep is allowed to delete it. Gives participants time to observe the outcome via the durable per-segment visibility state. Only relevant when transactionCoordinatorScalableTopicsEnabled = true.
+
+**Type**: `int`
+
+**Default**: `900`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
+### transactionCoordinatorScalableTopicsParallelism
+Degree of parallelism for the scalable-topics transaction coordinator: how many independent coordinator instances run across the cluster. Each is leader-elected independently in the metadata store and coordinates the transactions whose id maps to it. Fixed at cluster bring-up — changing it later would strand the coordinator id encoded in existing transaction ids (and, because an aborted transaction's records are retained as long as its messages are, the value can only be reduced once all transactions created under the previous value have been fully cleaned up). All brokers must agree on this value; a mismatch is rejected at startup. Only relevant when transactionCoordinatorScalableTopicsEnabled = true.
+
+**Type**: `int`
+
+**Default**: `16`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
+### transactionCoordinatorScalableTopicsTimeoutSweepIntervalSeconds
+Interval, in seconds, at which the scalable-topics transaction coordinator sweeps for timed-out open transactions and aborts them. Only the broker that owns partition 0 of the transaction-coordinator-assign topic runs the sweep. Only relevant when transactionCoordinatorScalableTopicsEnabled = true.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Transaction
+
 ### transactionMetadataStoreProviderClassName
 Class name for transaction metadata store provider
 
@@ -6183,11 +6311,11 @@ MLPendingAckStore maintain a ConcurrentSkipListMap pendingAckLogIndex`,it store 
 **Category**: Transaction
 
 ### transactionPendingAckStoreProviderClassName
-Class name for transaction pending ack store provider
+Class name for transaction pending ack store provider. The default DispatchingTransactionPendingAckStoreProvider routes subscriptions on segment:// topics to the metadata-driven MetadataPendingAckStore (PIP-473) and others to the legacy MLPendingAckStore. Set this to org.apache.pulsar.broker.transaction.pendingack.impl.MLPendingAckStoreProvider to force the legacy store for all subscriptions.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.broker.transaction.pendingack.impl.MLPendingAckStoreProvider`
+**Default**: `org.apache.pulsar.broker.transaction.pendingack.impl.DispatchingTransactionPendingAckStoreProvider`
 
 **Dynamic**: `false`
 

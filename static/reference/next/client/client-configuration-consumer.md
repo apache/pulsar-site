@@ -17,7 +17,7 @@ Timeout of unacked messages
 **Default**: `0`
 
 ### ackTimeoutRedeliveryBackoff
-Interface for custom message is ackTimeout policy. You can specify `RedeliveryBackoff` for a consumer.
+Interface for the custom message ack-timeout policy. You can specify `RedeliveryBackoff` for a consumer.
 
 **Type**: `org.apache.pulsar.client.api.RedeliveryBackoff`
 
@@ -62,12 +62,12 @@ Consumer name
 ### cryptoFailureAction
 Consumer should take action when it receives a message that can not be decrypted.
 * **FAIL**: this is the default option to fail messages until crypto succeeds.
-* **DISCARD**:silently acknowledge and not deliver message to an application.
+* **DISCARD**: silently acknowledge and not deliver message to an application.
 * **CONSUME**: deliver encrypted messages to applications. It is the application's responsibility to decrypt the message.
 
 The decompression of message fails.
 
-If messages contain batch messages, a client is not be able to retrieve individual messages in batch.
+If messages contain batch messages, a client is not able to retrieve individual messages in batch.
 
 Delivered encrypted message contains {@link EncryptionContext} which contains encryption and compression information in it using which application can decrypt consumed message payload.
 
@@ -136,9 +136,9 @@ This setting reduces the receiver queue size for individual partitions if the to
 **Default**: `50000`
 
 ### negativeAckPrecisionBitCnt
-The redelivery time precision bit count. The lower bits of the redelivery time will betrimmed to reduce the memory occupation.
-The default value is 8, which means theredelivery time will be bucketed by 256ms, the redelivery time could be earlier(no later)than the expected time, but no more than 256ms. 
-If set to k, the redelivery time will bebucketed by 2^k ms.
+The redelivery time precision bit count. The lower bits of the redelivery time will be trimmed to reduce the memory occupation.
+The default value is 8, which means the redelivery time will be bucketed by 256ms, the redelivery time could be earlier (no later) than the expected time, but no more than 256ms. 
+If set to k, the redelivery time will be bucketed by 2^k ms.
 If the value is 0, the redelivery time will be accurate to ms.
 
 **Type**: `int`
@@ -146,7 +146,7 @@ If the value is 0, the redelivery time will be accurate to ms.
 **Default**: `8`
 
 ### negativeAckRedeliveryBackoff
-Interface for custom message is negativeAcked policy. You can specify `RedeliveryBackoff` for a consumer.
+Interface for the custom message negative-acknowledgment policy. You can specify `RedeliveryBackoff` for a consumer.
 
 **Type**: `org.apache.pulsar.client.api.RedeliveryBackoff`
 

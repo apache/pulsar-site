@@ -73,7 +73,7 @@ Hashing function determining the partition where you publish a particular messag
 Available options are as follows:
 * `pulsar.JavastringHash`: the equivalent of `string.hashCode()` in Java
 * `pulsar.Murmur3_32Hash`: applies the [Murmur3](https://en.wikipedia.org/wiki/MurmurHash) hashing function
-* `pulsar.BoostHash`: applies the hashing function from C++'s[Boost](https://www.boost.org/doc/libs/1_62_0/doc/html/hash.html) library
+* `pulsar.BoostHash`: applies the hashing function from C++'s [Boost](https://www.boost.org/doc/libs/1_62_0/doc/html/hash.html) library
 
 **Type**: `org.apache.pulsar.client.api.HashingScheme`
 
