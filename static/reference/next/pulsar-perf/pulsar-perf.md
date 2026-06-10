@@ -102,6 +102,7 @@ $ pulsar-perf consume [options]
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
 | `-ss, --subscriptions` | A list of subscriptions to consume (for example, sub1,sub2)|[sub]|
 | `-st, --subscription-type` | Subscription type|Exclusive|
+| `-sct, --scalable-consumer-type` | V5 scalable-topic consumer API to use: Queue (unordered, individual ack) or Stream (ordered, cumulative ack, 1:1 segment assignment). Use Stream with more consumers than segments to drive auto-split (PIP-483).|Queue|
 | `-sp, --subscription-position` | Subscription position|LATEST|
 | `-r, --rate` | Simulate a slow message consumer (rate in msg/s)|0.0|
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
