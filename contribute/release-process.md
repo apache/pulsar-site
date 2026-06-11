@@ -385,7 +385,7 @@ For creating and publishing the docker image, run the following commands:
 
 ```shell
 # set your dockerhub username
-DOCKER_USER=<your-dockerhub-username>
+DOCKER_USER=$APACHE_USER # your dockerhub username
 ```
 
 ```shell
@@ -630,7 +630,7 @@ This step is performed by a Apache Pulsar PMC member. Please request help from a
 `regctl` from [regclient](https://github.com/regclient/regclient) is needed for copying multi-arch images. Install with `brew install regclient` or with [other installation options](https://github.com/regclient/regclient/blob/main/docs/install.md) of regclient. The benefit of `regctl` over using `docker pull/tag/push` is that it will handle copying both `amd64` and the `arm64` image.
 
 ```shell
-RELEASE_MANAGER_DOCKER_USER=otheruser
+RELEASE_MANAGER_DOCKER_USER=$APACHE_USER # the release manager's docker hub username
 ```
 
 ```shell
