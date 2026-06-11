@@ -7,9 +7,9 @@ This page contains instructions for Pulsar committers on how to perform a releas
 
 The term feature/patch releases used throughout this document is defined as follows:
 
-* Feature releases contain 2.10.0, 2.11.0, 3.0.0, and so on.
-* Patch releases refer to bug-fix releases, such as 2.10.1, 2.10.2, and so on.
-* Preview release refer to LTS release preview releases that happen in the releasing of a LTS version. 
+* Feature releases contain 4.1.0, 4.2.0, 5.0.0, and so on.
+* Patch releases refer to bug-fix releases, such as 4.2.1, 4.2.2, and so on.
+* Milestone releases, such as 5.0.0-M1, 5.0.0-M2, and so on, are made before an upcoming LTS release from a temporary release branch (such as `branch-5.0-M1`) that is cut from the master branch.
 
 :::note
 
@@ -29,7 +29,9 @@ Open a discussion on dev@pulsar.apache.org to notify others that you volunteer t
 
 For LTS and feature releases, you should create a new branch named `branch-X.Y` once all PRs with the X.Y.0 milestone are merged. If some PRs with the X.Y.0 milestone are still working in progress and might take much time to complete, you can move them to the next milestone if they are not important. In this case, you'd better notify the author in the PR.
 
-For preview releases of a LTS release, a branch `branch-X.0-preview` is created. This branch will is used to hold the commit to change the version to the preview version. Preview releases will be tagged in this branch.
+For milestone releases of an upcoming LTS release, each milestone release uses its own release branch `branch-X.Y-MN` (for example `branch-5.0-M1`, `branch-5.0-M2`, …) cut from the master branch. The branch holds the commit that changes the version to the milestone version, and the milestone release is tagged in this branch. Using a release branch allows fixing possible release related issues in the branch without a PR going into the master branch directly. There shouldn't be a need to perform cherry-picking unless an important fix lands in the master branch after the milestone release branch has been cut.
+
+The milestone release branches should be considered temporary: since milestone releases aren't maintained, the branch is dropped after the next milestone release or the final LTS release has been published.
 
 For patch releases, if there are no disagreements, you should cherry-pick all merged PRs labeled with `release/X.Y.Z` into `branch-X.Y`. After these PRs are cherry-picked, you should add the `cherry-picked/branch-X.Y` labels.
 
@@ -60,10 +62,12 @@ To verify the release branch is not broken, you should trigger a Pulsar CI build
 ## Set environment variables to be used across the commands {#env-vars}
 
 ```shell
-export VERSION_RC=4.0.7-candidate-1
+export VERSION_RC=5.0.0-M1-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export NEXT_VERSION_WITHOUT_RC=4.0.8
-export VERSION_BRANCH=branch-4.0
+export NEXT_VERSION_WITHOUT_RC=5.0.0-M2
+export VERSION_BRANCH=branch-5.0-M1
+# for milestone releases, set the upcoming LTS release version (used in the release announcement)
+export LTS_RELEASE=5.0
 export UPSTREAM_REMOTE=origin
 export SDKMAN_JAVA_VERSION=21
 # set the pulsar.includeBuildInfo project property for all Gradle invocations in this shell session
@@ -72,16 +76,6 @@ export GRADLE_OPTS="-Dorg.gradle.project.pulsar.includeBuildInfo=true"
 ```
 
 Release builds must include the real git commit / build metadata in the binaries, which is enabled with the `pulsar.includeBuildInfo=true` project property (the default is `false` so that local development and CI builds don't regenerate the metadata on every change). The `GRADLE_OPTS` export above sets the property for every Gradle invocation in the shell session. The property must be set consistently for every Gradle invocation of the release process — if it changes between invocations, the changed metadata invalidates the build outputs and the binaries get recompiled and change.
-
-Example for preview releases:
-
-```shell
-export VERSION_RC=4.0.0-preview.1
-export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export VERSION_BRANCH=branch-4.0-preview
-export UPSTREAM_REMOTE=origin
-export SDKMAN_JAVA_VERSION=21
-```
 
 Set your ASF user id
 
@@ -114,9 +108,9 @@ alias pbcopy="xsel --clipboard --input"
 
 We are going to create a release branch where the tag will be generated and where new fixes will be applied as part of the maintenance for the release.
 
-The branch needs only to be created for feature releases, and not for patch releases like `3.3.2`. For patch releases, go to the next step.
+The branch needs only to be created for feature releases, and not for patch releases like `4.2.2`. For patch releases, go to the next step.
 
-For example, when working on `3.3.0` release, the branch `branch-3.3` will be created; but for `3.3.1`, the existing `branch-3.3` will be used.
+For example, when working on `4.2.0` release, the branch `branch-4.2` will be created; but for `4.2.1`, the existing `branch-4.2` will be used.
 
 It is recommended to create a fresh clone of the repository to avoid any local files interfering in the process:
 
@@ -272,8 +266,8 @@ cd pulsar-$VERSION_RC
 # stage the release artifacts
 $PULSAR_PATH/src/stage-release.sh .
 
-# Please check the size of the files in the `pulsar-3.X.Y-candidate-1`.
-# If you build the artifacts without a clean workspace, the `apache-pulsar-3.X.Y-src.tar.gz` files
+# Please check the size of the files in the `pulsar-X.Y.Z-candidate-1`.
+# If you build the artifacts without a clean workspace, the `apache-pulsar-X.Y.Z-src.tar.gz` files
 # may be too large to be unable to upload.
 ls -ltra
 du -ms *
@@ -341,7 +335,7 @@ Log in to the ASF Nexus repository at https://repository.apache.org
 
 Click on "Staging Repositories" on the left sidebar and then select the current Pulsar staging repo. This should be called something like `orgapachepulsar-XYZ`.
 
-Add a version string such as "Apache Pulsar 3.0.4-candidate-1" to the clipboard with this command:
+Add a version string such as "Apache Pulsar 5.0.0-M1-candidate-1" to the clipboard with this command:
 
 ```shell
 printf "Apache Pulsar $VERSION_RC" |pbcopy
@@ -406,7 +400,33 @@ Set these shell variables
 DOCKER_USER=<your-dockerhub-username>
 STAGING_REPO="<enter staging repo from https://repository.apache.org/#stagingRepositories>"
 MY_NAME="Firstname Lastname"
-PREVIOUS_VERSION_WITHOUT_RC="4.0.6"
+```
+
+Set the `INCLUDED_CHANGES` variable that lists the included changes in the voting email.
+
+For a regular release, link the changes since the previous release:
+
+```shell
+PREVIOUS_VERSION_WITHOUT_RC="4.2.2"
+INCLUDED_CHANGES="Included changes since the previous release:
+https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC"
+```
+
+For a milestone release, there is no previous release that would make sense for the comparison. Instead, link the merged PRs of the release's GitHub milestone:
+
+```shell
+INCLUDED_CHANGES="Included changes, the merged PRs of the $VERSION_WITHOUT_RC milestone:
+https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+milestone%3A$VERSION_WITHOUT_RC"
+```
+
+For the second and later milestone releases (`-M2` onwards), additionally link the changes since the previous milestone release:
+
+```shell
+PREVIOUS_MILESTONE="5.0.0-M1"
+INCLUDED_CHANGES="$INCLUDED_CHANGES
+
+Changes since the previous milestone release:
+https://github.com/apache/pulsar/compare/v$PREVIOUS_MILESTONE...v$VERSION_RC"
 ```
 
 ```shell
@@ -448,8 +468,7 @@ Hello Apache Pulsar Community,
 
 This is a call for the vote to release the Apache Pulsar version $VERSION_WITHOUT_RC based on $VERSION_RC.
 
-Included changes since the previous release:
-https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
+$INCLUDED_CHANGES
 
 *** Please download, test and vote on this release. This vote will stay open
 for at least $VOTE_DURATION hours ***
@@ -499,67 +518,11 @@ The vote should be open for at least 72 hours (3 days). Votes from Pulsar PMC me
 
 If the release is approved here with 3 +1 binding votes, you can then proceed to the next step. Otherwise, you should repeat the previous steps and prepare another release candidate to vote.
 
-## LTS Preview release steps (this only applies to preview releases such as 4.0.0-preview.1)
+## Milestone release steps (this only applies to milestone releases such as 5.0.0-M1)
 
-For preview releases there is no release voting. The preview release is directly announced on Pulsar user and dev mailing lists to get release feedback before the official LTS release.
+Milestone releases (5.0.0-M1, 5.0.0-M2, …) are official Apache releases made before an upcoming LTS release to gather user feedback early. They follow the same release process as other releases, including the release candidates, voting, and promoting the release. Each milestone release is made from its own temporary release branch (`branch-5.0-M1`, `branch-5.0-M2`, …) cut from the master branch, which is dropped after the next milestone release or the final LTS release has been published since milestone releases aren't maintained (see [Preparation](#preparation)).
 
-A preview release is not an official Apache release and it's comparable to a nightly build of a project.
-The preview release artifacts will be made available on Maven central and Docker Hub so that users can practically use the artifacts in their existing build pipelines and provide feedback to the project. Binaries are complementary in Apache projects and don't state an official ASF release.
-
-Before continuing, perform a local [release validation](validate-release-candidate.md) for the artifacts.
-After this, follow the steps "Release Maven modules" and "Release Docker images" to publish the preview release in Maven central and DockerHub. The preview release isn't an official release and therefore the sources should NOT be released on SVN.
-
-Set the environment variables:
-
-```shell
-PULSAR_IMAGE_NAME=apachepulsar/pulsar:$VERSION_WITHOUT_RC
-PULSAR_ALL_IMAGE_NAME=apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
-LTS_RELEASE=4.0
-```
-
-To announce a LTS preview release, you can use this template:
-
-```shell
-tee >(pbcopy) <<EOF
-To: dev@pulsar.apache.org, users@pulsar.apache.org
-Subject: Apache Pulsar $VERSION_WITHOUT_RC available for testing - Feedback requested
-
-Dear Apache Pulsar Community,
-
-We're excited to announce the availability of Apache Pulsar $VERSION_WITHOUT_RC, a preview release aimed at gathering user feedback for the upcoming Pulsar $LTS_RELEASE LTS release. This preview is not an official Apache release but provides an early look at the new features and changes.
-
-Preview artifacts are now available on Maven Central and Docker Hub, enabling users to integrate and test them in their build pipelines and environments. You can find downloadable artifacts at https://dist.apache.org/repos/dist/dev/pulsar/pulsar-$VERSION_RC/.
-
-Repository tag: v$VERSION_RC (commit $(git rev-parse v$VERSION_RC^{commit}))
-https://github.com/apache/pulsar/releases/tag/v$VERSION_RC
-
-Changes since $PREVIOUS_VERSION_WITHOUT_RC:
-https://github.com/apache/pulsar/compare/v$PREVIOUS_VERSION_WITHOUT_RC...v$VERSION_RC
-
-Docker images: $PULSAR_IMAGE_NAME and $PULSAR_ALL_IMAGE_NAME.
-Docker image tag is "$VERSION_WITHOUT_RC".
-
-For Java client testing, we recommend using the Pulsar BOM in Maven or Gradle builds with version "$VERSION_WITHOUT_RC".
-Pulsar BOM usage is explained at https://pulsar.apache.org/docs/next/client-libraries-java-setup/#pulsar-bom.
-
-We urge you to test this preview in your environments and provide feedback. Please report any issues on our GitHub issue tracker at https://github.com/apache/pulsar/issues, checking for existing reports first.
-Known blockers are tracked with the "release/blocker" label at https://github.com/apache/pulsar/labels/release%2Fblocker.
-
-Pulsar $LTS_RELEASE timeline:
-$(date -I): $LTS_RELEASE preview 1
-$(date --date="10 days" -I): Target for $LTS_RELEASE preview 2
-$(date --date="10 days" -I): Code freeze for $LTS_RELEASE by branching branch-$LTS_RELEASE from the master branch
-$(date --date="13 days" -I): Target for $LTS_RELEASE release candidate 1
-$(date --date="18 days" -I): Reserved for $LTS_RELEASE release candidate 2 if needed
-$(date --date="20 days" -I): Planned $LTS_RELEASE.0 announcement (if release candidate 1 passes)
-
-Your participation is crucial in shaping the quality of Pulsar $LTS_RELEASE. We appreciate your support and feedback.
-
-Best regards,
-
-$MY_NAME
-EOF
-```
+Milestone releases are not meant for production use cases, since breaking changes can be introduced between the milestone releases and the final LTS release. The main difference in the process is the [release announcement](#announce-the-release), which includes a disclaimer about this. Make sure the `LTS_RELEASE` environment variable is set as described in the [environment variables step](#env-vars) so that the announcement template renders the disclaimer.
 
 ## Summarize the voting for the release
 
@@ -621,7 +584,7 @@ echo "[""Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr
 2. Find "Previous tag: auto" in the UI above the text box and choose the previous release there.
 3. Click "Generate release notes".
 4. Review the generated release notes.
-5. Since changes are cherry-picked, you will have to include a link such as [Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F2.11.4+label%3Acherry-picked%2Fbranch-2.11+sort%3Acreated-asc). There's a [separate guide for generating automated release notes](release-note-guide.md).
+5. Since changes are cherry-picked, you will have to include a link such as [Cherry-picked changes](https://github.com/apache/pulsar/pulls?q=is%3Apr+is%3Amerged+label%3Arelease%2F4.2.2+label%3Acherry-picked%2Fbranch-4.2+sort%3Acreated-asc). There's a [separate guide for generating automated release notes](release-note-guide.md).
 6. Unselect "Set as the latest release" (that should be only selected for the actual latest release of Pulsar)
 7. Click "Publish release".
 
@@ -840,7 +803,7 @@ This step is for feature releases only, unless you're sure that significant refe
 You can generate references of config and command-line tool by running the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-# build Pulsar distributions under /path/to/pulsar-3.X.Y
+# build Pulsar distributions under /path/to/pulsar-X.Y.Z
 cd tools/pytools
 poetry install
 # ensure that defaults using Runtime.getRuntime().availableProcessors() will be based on 1 as the number of CPUs
@@ -896,12 +859,22 @@ Otherwise, you should update the dropdown version list in this file: `src/theme/
 Once the release artifacts are available in the Apache Mirrors and the website is updated, you need to announce the release. You should email to dev@pulsar.apache.org, users@pulsar.apache.org, and announce@apache.org. Here is a sample content:
 
 ```shell
+# for milestone releases (version contains -M), a disclaimer is included in the announcement
+MILESTONE_NOTICE=""
+if [[ "$VERSION_WITHOUT_RC" == *-M* ]]; then
+  MILESTONE_NOTICE="
+$VERSION_WITHOUT_RC is a milestone release for the upcoming Pulsar $LTS_RELEASE
+LTS release, made to gather user feedback early. It is not meant for production
+use cases, since breaking changes can be introduced between the milestone
+releases and the final Pulsar $LTS_RELEASE LTS release.
+"
+fi
 tee >(pbcopy) <<EOF
 To: dev@pulsar.apache.org, users@pulsar.apache.org, announce@apache.org
 Subject: [ANNOUNCE] Apache Pulsar $VERSION_WITHOUT_RC released
 
 The Apache Pulsar team is proud to announce Apache Pulsar version $VERSION_WITHOUT_RC.
-
+$MILESTONE_NOTICE
 Pulsar is a highly scalable, low latency messaging platform running on
 commodity hardware. It provides simple pub-sub semantics over topics,
 guaranteed at-least-once delivery of messages, automatic cursor management for
@@ -941,7 +914,7 @@ Remove the old releases (if any). You only need the latest release there, and ol
 svn ls https://dist.apache.org/repos/dist/release/pulsar
 
 # Delete each release (except for the last one)
-svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-3.X.X
+svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-X.Y.Z
 ```
 
 ## Move to the next snapshot version
