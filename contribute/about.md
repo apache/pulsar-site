@@ -14,6 +14,18 @@ The content of the contribution guide can be found in the left sidebar menu.
 
 :::
 
+## Developer guides in the apache/pulsar repository
+
+In addition to this contribution guide, the [apache/pulsar](https://github.com/apache/pulsar) repository contains in-repo developer guides for the `master` branch:
+
+| Doc | Use for |
+|-----|---------|
+| [`CONTRIBUTING.md`](https://github.com/apache/pulsar/blob/master/CONTRIBUTING.md) | Local dev workflow: building, running tests and test groups, integration tests, Personal CI, PR conventions, security reporting. |
+| [`ARCHITECTURE.md`](https://github.com/apache/pulsar/blob/master/ARCHITECTURE.md) | Big-picture module map, the Gradle build infrastructure and how to change build files, the concurrency model, and the `pip/` proposals. |
+| [`CODING.md`](https://github.com/apache/pulsar/blob/master/CODING.md) | Coding conventions: style, async/`CompletableFuture`, concurrency, logging, dependencies, backward compatibility, testing, and the review checklist. |
+| [`SECURITY.md`](https://github.com/apache/pulsar/blob/master/SECURITY.md) | Reporting a vulnerability and disclosure hygiene. |
+| [`AGENTS.md`](https://github.com/apache/pulsar/blob/master/AGENTS.md) | Guidance for AI coding assistants (Claude Code, Copilot, Cursor, Gemini, Codex, …), including the ASF [Generative Tooling guidance](https://www.apache.org/legal/generative-tooling.html): a human contributor must always review, verify, and take responsibility for every contribution. |
+
 ## Channels
 
 To engage the Pulsar developers community, you can join the following channels.

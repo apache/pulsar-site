@@ -73,7 +73,7 @@ git remote add forked https://github.com/your_github_id/pulsar
 Add separate working directories that share the local git repository
 
 ```shell
-for branch in branch-3.3 branch-3.2 branch-3.1 branch-3.0; do 
+for branch in branch-4.2 branch-4.0 branch-3.0; do 
    git worktree add ../pulsar-$branch $branch
 done
 ```
@@ -81,9 +81,8 @@ done
 After this you would have these directories in the same level as the original checked out `pulsar` directory:
 
 ```
-pulsar-branch-3.3
-pulsar-branch-3.2
-pulsar-branch-3.1
+pulsar-branch-4.2
+pulsar-branch-4.0
 pulsar-branch-3.0
 ```
 
