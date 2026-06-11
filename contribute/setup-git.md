@@ -93,6 +93,8 @@ There a limitation that each branch can only be checked out in one working direc
 For Apache Pulsar core developers, handling git merge conflict resolution is necessary.
 To efficiently resolve merge conflicts, setting up tools that assist in visualizing these conflicts and resolving them is essential.
 
+An AI coding agent is also a good tool for cherry-picking a commit and resolving the merge conflicts — see [Using an AI coding agent for cherry-picking](maintenance-process.md#using-an-ai-coding-agent-for-cherry-picking).
+
 For developers starting to use automated tools to resolve merge conflicts during cherry-picking, IntelliJ is a recommended option. It offers excellent tooling, but its integration with a command-line workflow is not seamless. It performs well when you initiate the cherry-picking process in IntelliJ and handle the merge conflict resolution within the same environment. However, resolving a merge conflict often involves multiple steps, including reverting and amending changes until a satisfactory resolution is achieved. In many cases, using a combination of tools may be more effective than relying solely on IntelliJ for all required operations.
 
 For more advanced users who use `git` on the command line, setting up the `git mergetool` is recommended.
