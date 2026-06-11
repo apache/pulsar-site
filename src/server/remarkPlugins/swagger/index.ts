@@ -200,7 +200,10 @@ async function processLinkNode(target: Target, context: Context) {
     current.path.length > longest.path.length ? current : longest
   );
 
-  const foundPath = swaggerJson.basePath + longestMatch.path;
+  // Swagger 2.0 documents carry the API prefix in basePath; OpenAPI 3
+  // documents (Pulsar 5.0.0+/master) carry it in servers[0].url.
+  const basePath = swaggerJson.basePath ?? swaggerJson.servers?.[0]?.url ?? '';
+  const foundPath = basePath + longestMatch.path;
   const foundMethod = longestMatch.method.toUpperCase();
 
   const restApiBaseUrl = context.restApiBaseUrlMapping[apiType];

@@ -17,7 +17,6 @@
 
 import json
 import os
-import sys
 from pathlib import Path
 
 from command import find_command, run
@@ -29,21 +28,24 @@ def execute(master: Path, version: str):
     build = pulsar_build.detect(master)
     master_swaggers = pulsar_build.swagger_output_dir(master, build)
 
-    if not master_swaggers.exists():
-        if build == pulsar_build.BuildSystem.maven:
-            mvn = find_command('mvn', msg="mvn is required")
-            run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
-        else:
-            # Gradle build on apache/pulsar master does not yet have a task
-            # that regenerates the Swagger JSONs (the old `mvn -Pswagger`
-            # invocation has no Gradle equivalent). Skip rather than fail so
-            # the rest of the docs sync still produces useful output.
-            print(
-                f'[swagger_generator] Skipping Swagger generation: Gradle build at {master} '
-                f'has no swagger task; expected output dir {master_swaggers} is missing.',
-                file=sys.stderr,
-            )
-            return
+    if build == pulsar_build.BuildSystem.gradle:
+        # The Gradle equivalent of the Maven `swagger` profile: writes the
+        # JSONs flat into pulsar-broker/build/openapi (plus v2/ and v3/
+        # copies, which the non-recursive glob below ignores). Run it
+        # unconditionally: the task is incremental (cheap when up to date)
+        # and its Sync output prunes stale files, so spec files added or
+        # removed in the build are always reflected.
+        gradlew = master / 'gradlew'
+        run(
+            str(gradlew.absolute()),
+            ':pulsar-broker:generateOpenApiSpecs',
+            '--no-configuration-cache',
+            '--no-daemon',
+            cwd=master,
+        )
+    elif not master_swaggers.exists():
+        mvn = find_command('mvn', msg="mvn is required")
+        run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
 
     os.makedirs(site_path() / 'static' / 'swagger' / version, exist_ok=True)
     for f in master_swaggers.glob('*.json'):

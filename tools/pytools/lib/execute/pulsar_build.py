@@ -51,7 +51,7 @@ def server_classpath_file(master: Path, build: BuildSystem) -> Path:
 
 def swagger_output_dir(master: Path, build: BuildSystem) -> Path:
     if build == BuildSystem.gradle:
-        return master / 'pulsar-broker' / 'build' / 'docs'
+        return master / 'pulsar-broker' / 'build' / 'openapi'
     return master / 'pulsar-broker' / 'target' / 'docs'
 
 
