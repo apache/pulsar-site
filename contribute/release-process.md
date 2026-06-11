@@ -83,6 +83,15 @@ Set your ASF user id
 export APACHE_USER=<your ASF userid>
 ```
 
+Set the GPG key id of your release signing key. Using the key id instead of the `$APACHE_USER@apache.org` e-mail address selects the key unambiguously when several GPG keys match the same e-mail address.
+
+```shell
+export APACHE_USER_GPGID=$(gpg --list-secret-keys --with-colons $APACHE_USER@apache.org | awk -F: '/^sec/ && $2 !~ /[eird]/ {print $5}')
+echo "APACHE_USER_GPGID=$APACHE_USER_GPGID"
+```
+
+The command skips expired, revoked, invalid and disabled keys. If there are multiple valid secret keys for the e-mail address, the command above lists all of their key ids and it's necessary to pick the correct one and set `APACHE_USER_GPGID` to that single key id. All secret keys can be checked with `gpg --list-secret-keys --keyid-format=long`.
+
 In addition, you will need to set `PULSAR_PATH` to point to the cleanly checked out working directory for the release branch.
 
 If you run into problems with GPG signing set this
@@ -174,7 +183,7 @@ git commit -m "Release $VERSION_WITHOUT_RC" -a
 
 ```shell
 # Create a "candidate" tag
-git tag -u $APACHE_USER@apache.org v$VERSION_RC -m "Release $VERSION_RC"
+git tag -u $APACHE_USER_GPGID v$VERSION_RC -m "Release $VERSION_RC"
 
 # Verify that you signed your tag before pushing it:
 git tag -v v$VERSION_RC
@@ -232,12 +241,10 @@ default-key <key fingerprint>
 
 ... where `<key fingerprint>` should be replaced with the private key fingerprint for the `<yourname>@apache.org` key. The key fingerprint can be found in `gpg -K` output.
 
-This can be automated with this command:
+This can be automated with this command, using the `APACHE_USER_GPGID` key id set earlier:
 
 ```shell
-# KEY_ID is in short format, subset key id visible in gpg -K
-KEY_ID=$(gpg --list-keys --with-colons $APACHE_USER@apache.org | egrep "^pub" | awk -F: '{print $5}')
-echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
+echo "default-key $APACHE_USER_GPGID" >> ~/.gnupg/gpg.conf
 ```
 
 ### Sign and stage the artifacts to local SVN directory
@@ -306,20 +313,30 @@ svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 Make sure to run only one release at a time when working on multiple releases in parallel. Running multiple builds simultaneously will result in all releases being placed into a single staging repository. Close [the staging repository](https://repository.apache.org/#stagingRepositories) before performing another release.
 :::
 
-Publish the artifacts to the [ASF Nexus](https://repository.apache.org) staging repository:
+Publish the artifacts to the [ASF Nexus](https://repository.apache.org) staging repository. Gradle
+resolves the credentials for the `apacheReleases` repository from the `apacheReleasesUsername` and
+`apacheReleasesPassword` Gradle properties, which are passed as environment variables with the
+`ORG_GRADLE_PROJECT_` prefix on the command line so that the password doesn't have to be stored in
+`~/.gradle/gradle.properties`. Set your ASF password in the publish command below. Add a space as
+the first character on the command line so that your password doesn't get recorded in shell
+history.
 
 ```shell
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
-./gradlew publish --no-parallel -PuseGpgCmd=true -Psigning.gnupg.keyName=$APACHE_USER@apache.org
+ ORG_GRADLE_PROJECT_apacheReleasesUsername=$APACHE_USER ORG_GRADLE_PROJECT_apacheReleasesPassword="<your ASF password>" ./gradlew publishAllPublicationsToApacheReleasesRepository --no-parallel -PuseGpgCmd=true -Psigning.gnupg.keyName=$APACHE_USER_GPGID
 ```
 
 `--no-parallel` disables Gradle's parallel task execution for this invocation so that the per-module publish tasks don't upload to the ASF Nexus repository concurrently (concurrent uploads can end up in multiple implicitly-created staging repositories). It serves the same purpose as `-Daether.connector.basic.parallelPut=false` in the Maven-based process.
 
-:::caution Draft
+:::note
 
-The ASF Nexus staging repository configuration and credentials handling of the Gradle build will be finalized with the first Gradle-based release. The publications can be verified locally beforehand with `./gradlew publishAllPublicationsToLocalDeployRepository`, which publishes to the `build/local-deploy-repo` directories instead of a remote repository.
+The build validates the version against the target repository: only non-`SNAPSHOT` versions can be
+published to the `apacheReleases` repository (`-SNAPSHOT` versions go to the `apacheSnapshots`
+repository with `./gradlew publishAllPublicationsToApacheSnapshotsRepository`). The publications can
+be verified locally beforehand with `./gradlew publishAllPublicationsToLocalDeployRepository`, which
+publishes to the `build/local-deploy-repo` directories instead of a remote repository.
 
 :::
 
@@ -556,7 +573,7 @@ EOF
 
 ## Promote the release
 
-For commands below, you need to set the environment variables `VERSION_RC`, `VERSION_WITHOUT_RC`, `UPSTREAM_REMOTE` and `APACHE_USER`.
+For commands below, you need to set the environment variables `VERSION_RC`, `VERSION_WITHOUT_RC`, `UPSTREAM_REMOTE`, `APACHE_USER` and `APACHE_USER_GPGID`.
 Please check the [environment variables step](#env-vars) for doing that.
 
 ### Publish the final tag
@@ -564,7 +581,7 @@ Please check the [environment variables step](#env-vars) for doing that.
 Create and push the final Git tag:
 
 ```shell
-git tag -u $APACHE_USER@apache.org v$VERSION_WITHOUT_RC $(git rev-parse v$VERSION_RC^{}) -m "Release v$VERSION_WITHOUT_RC"
+git tag -u $APACHE_USER_GPGID v$VERSION_WITHOUT_RC $(git rev-parse v$VERSION_RC^{}) -m "Release v$VERSION_WITHOUT_RC"
 git push $UPSTREAM_REMOTE v$VERSION_WITHOUT_RC
 ```
 
