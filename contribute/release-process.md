@@ -366,7 +366,7 @@ This operation will take few minutes. Once complete click "Refresh" and now a li
 
 ### Stage Docker images
 
-In this step, the `pulsar` docker image is built and pushed to your own DockerHub account. With the Gradle build, the `pulsar-all` image is no longer built: most Pulsar IO connectors were moved to a separate `pulsar-connectors` repository ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)). Skip the `pulsar-all` related parts of the following steps when releasing with the Gradle build.
+In this step, the `pulsar`, `pulsar-with-tiered-storage` and `pulsar-for-functions` docker images are built and pushed to your own DockerHub account. With the Gradle build, the `pulsar-all` image is no longer built: most Pulsar IO connectors were moved to a separate `pulsar-connectors` repository ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)). The `pulsar-with-tiered-storage` and `pulsar-for-functions` images replace it.
 
 Before building docker images, clean up build history so that you don't run out of diskspace in the middle of the build.
 Docker buildx in Docker Desktop limits the build history size to 20GB by default.
@@ -448,29 +448,34 @@ https://github.com/apache/pulsar/compare/v$PREVIOUS_MILESTONE...v$VERSION_RC"
 
 ```shell
 echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar/tags to find the layer URL for the pulsar image"
-echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-all/tags to find the layer URL for the pulsar image"
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-with-tiered-storage/tags to find the layer URL for the pulsar-with-tiered-storage image"
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-for-functions/tags to find the layer URL for the pulsar-for-functions image"
 ```
 
 Set these additional shell variable after looking up the URLs
 
 ```shell
 PULSAR_IMAGE_URL="<looked up in previous step>"
-PULSAR_ALL_IMAGE_URL="<looked up in previous step>"
+PULSAR_WITH_TIERED_STORAGE_IMAGE_URL="<looked up in previous step>"
+PULSAR_FOR_FUNCTIONS_IMAGE_URL="<looked up in previous step>"
 ```
 
 Set also these
 
 ```shell
 PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
-PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+PULSAR_WITH_TIERED_STORAGE_IMAGE_NAME="$DOCKER_USER/pulsar-with-tiered-storage:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+PULSAR_FOR_FUNCTIONS_IMAGE_NAME="$DOCKER_USER/pulsar-for-functions:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
 ```
 
 ```shell
 # check that Pulsar standalone starts (use CTRL-C to terminate) for both architectures
 docker run --platform linux/arm64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
 docker run --platform linux/amd64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
-docker run --platform linux/arm64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
-docker run --platform linux/amd64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/arm64 --rm $PULSAR_WITH_TIERED_STORAGE_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_WITH_TIERED_STORAGE_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/arm64 --rm $PULSAR_FOR_FUNCTIONS_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_FOR_FUNCTIONS_IMAGE_NAME /pulsar/bin/pulsar standalone
 ```
 
 Now you can render the template to the clipboard
@@ -516,8 +521,10 @@ https://downloads.apache.org/pulsar/KEYS
 Docker images:
 docker pull $PULSAR_IMAGE_NAME
 $PULSAR_IMAGE_URL
-docker pull $PULSAR_ALL_IMAGE_NAME
-$PULSAR_ALL_IMAGE_URL
+docker pull $PULSAR_WITH_TIERED_STORAGE_IMAGE_NAME
+$PULSAR_WITH_TIERED_STORAGE_IMAGE_URL
+docker pull $PULSAR_FOR_FUNCTIONS_IMAGE_NAME
+$PULSAR_FOR_FUNCTIONS_IMAGE_URL
 
 Please download the source package, and follow the README to build
 and run the Pulsar standalone service.
@@ -636,13 +643,15 @@ RELEASE_MANAGER_DOCKER_USER=$APACHE_USER # the release manager's docker hub user
 ```shell
 CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
 regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar:${CANDIDATE_TAG} apachepulsar/pulsar:$VERSION_WITHOUT_RC
-regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-with-tiered-storage:${CANDIDATE_TAG} apachepulsar/pulsar-with-tiered-storage:$VERSION_WITHOUT_RC
+regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-for-functions:${CANDIDATE_TAG} apachepulsar/pulsar-for-functions:$VERSION_WITHOUT_RC
 ```
 
 Go to check the result:
 
 * https://hub.docker.com/r/apachepulsar/pulsar/tags
-* https://hub.docker.com/r/apachepulsar/pulsar-all/tags
+* https://hub.docker.com/r/apachepulsar/pulsar-with-tiered-storage/tags
+* https://hub.docker.com/r/apachepulsar/pulsar-for-functions/tags
 
 :::caution
 
@@ -652,7 +661,8 @@ This step is for the latest release only.
 
 ```shell
 regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
-regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
+regctl image copy apachepulsar/pulsar-with-tiered-storage:$VERSION_WITHOUT_RC apachepulsar/pulsar-with-tiered-storage:latest
+regctl image copy apachepulsar/pulsar-for-functions:$VERSION_WITHOUT_RC apachepulsar/pulsar-for-functions:latest
 ```
 
 ### Release Helm Chart
