@@ -644,8 +644,6 @@ Go to check the result:
 * https://hub.docker.com/r/apachepulsar/pulsar/tags
 * https://hub.docker.com/r/apachepulsar/pulsar-all/tags
 
-Ensure that newer than 3.x images support both amd64 and arm64. Older 2.x images should be amd64 only.
-
 :::caution
 
 This step is for the latest release only.
