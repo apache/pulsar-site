@@ -2132,7 +2132,7 @@ Setting this value to 0 will disable the limit calculated per consumer.
 
 **Type**: `int`
 
-**Default**: `2000`
+**Default**: `4000`
 
 **Dynamic**: `true`
 
@@ -2141,13 +2141,14 @@ Setting this value to 0 will disable the limit calculated per consumer.
 ### keySharedLookAheadMsgInReplayThresholdPerSubscription
 For Key_Shared subscriptions, if messages cannot be dispatched to consumers due to a slow consumer or a blocked key hash (because of ordering constraints), the broker will continue reading more messages from the backlog and attempt to dispatch them to consumers until the number of replay messages reaches the calculated threshold.
 Formula: threshold = min(keySharedLookAheadMsgInReplayThresholdPerConsumer * connected consumer count, keySharedLookAheadMsgInReplayThresholdPerSubscription).
-This value should be set to a value less than 2 * managedLedgerMaxUnackedRangesToPersist.
-Setting this value to 0 will disable the limit calculated per subscription.
+Keep this value relatively low to increase the cache hit ratio for Key_Shared replay queue reads; it should also be less than 2 * managedLedgerMaxUnackedRangesToPersist.
+However, with workloads that have low key cardinality (few distinct keys), a low value can leave some consumers idle, since the dispatcher pauses once this threshold is reached and stops reading new messages for the other consumers; increasing the value allows more messages to be in flight in such cases. Since the effective threshold is the minimum of the per-consumer and per-subscription limits, keySharedLookAheadMsgInReplayThresholdPerConsumer should also be increased, or set to 0 (disabled), in that case.
+Setting this value to 0 will disable the limit calculated per subscription. Disabling it might result in the number of unacked ranges to persist exceeding managedLedgerMaxUnackedRangesToPersist, therefore disabling is not recommended.
 
 
 **Type**: `int`
 
-**Default**: `20000`
+**Default**: `40000`
 
 **Dynamic**: `true`
 
@@ -5273,7 +5274,7 @@ If value is NONE, then save the ManagedCursorInfo bytes data directly.
 
 **Type**: `java.lang.String`
 
-**Default**: `NONE`
+**Default**: `LZ4`
 
 **Dynamic**: `false`
 
@@ -5606,7 +5607,7 @@ If value is invalid or NONE, then save the ManagedLedgerInfo bytes data directly
 
 **Type**: `java.lang.String`
 
-**Default**: `NONE`
+**Default**: `LZ4`
 
 **Dynamic**: `false`
 
@@ -5642,7 +5643,7 @@ When this limit is exceeded, remaining batch message containing the batch delete
 
 **Type**: `int`
 
-**Default**: `10000`
+**Default**: `200000`
 
 **Dynamic**: `false`
 
@@ -5734,10 +5735,11 @@ Maximum ledger size before triggering a rollover for a topic (MB)
 Max number of `acknowledgment holes` that are going to be persistently stored.
 
 When acknowledging out of order, a consumer will leave holes that are supposed to be quickly filled by acking all the messages. The information of which messages are acknowledged is persisted by compressing in `ranges` of messages that were acknowledged. After the max number of ranges is reached, the information will only be tracked in memory and messages will be redelivered in case of crashes.
+Note: when managedLedgerPersistIndividualAckAsLongArray is enabled (the default), the persisted size is bounded by the backlog size (the range of entries the cursor spans), not by this max number of unacked ranges. For BookKeeper ledger storage, with the default broker maxMessageSize and BookKeeper nettyMaxFrameSizeBytes, the state fits a backlog of about 30M entries (excluding the managedLedgerMaxBatchDeletedIndexToPersist storage, whose size is instead relative to the number of acknowledgment holes).
 
 **Type**: `int`
 
-**Default**: `10000`
+**Default**: `200000`
 
 **Dynamic**: `false`
 
@@ -5750,7 +5752,7 @@ If number of unack message range is higher than this limit then broker will pers
 
 **Type**: `int`
 
-**Default**: `1000`
+**Default**: `200000`
 
 **Dynamic**: `false`
 
