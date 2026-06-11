@@ -11,6 +11,18 @@ The term feature/patch releases used throughout this document is defined as foll
 * Patch releases refer to bug-fix releases, such as 2.10.1, 2.10.2, and so on.
 * Preview release refer to LTS release preview releases that happen in the releasing of a LTS version. 
 
+:::note
+
+The Pulsar `master` branch has migrated from Maven to Gradle ([PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)). Releases cut from `master` — and from release branches created from it in the future — use the Gradle build steps in this document. Maintenance branches (`branch-4.2` and earlier) continue to use the Maven build: when releasing from those branches, substitute the build related steps with the ones in [Maven build steps for releases](release-process-maven.md). All other steps are shared between the two build systems.
+
+:::
+
+:::caution Draft
+
+The Gradle build steps in this document are a draft. They will be refined and verified when the first release is performed with the Gradle build.
+
+:::
+
 ## Preparation
 
 Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
@@ -31,16 +43,11 @@ If you haven't already done it, [create and publish the GPG key](create-gpg-keys
 Before you start the next release steps, make sure you have installed these software:
 
 * Amazon Corretto OpenJDK
-  * JDK 21 for Pulsar version >= 3.3
-    * code will be compiled for Java 17 with Java 21
-    * Pulsar docker images are running Java 21 since 3.3.0
-  * JDK 17 for Pulsar version >= 2.11
-  * JDK 11 for earlier versions
-* Maven 3.9.12 (most recent stable Maven 3.9.x version)
-  * Install using `sdkman i maven 3.9.12`
+  * JDK 21 or 25 for building releases with the Gradle build (`master` branch and release branches created from it)
+  * for Maven-based maintenance branches, see the [Maven build steps prerequisites](release-process-maven.md#prerequisites)
 * Zip
 
-Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
+There is no separate build tool to install for the Gradle build: the repository includes the Gradle Wrapper (`./gradlew`). Please refer to ["Setting up JDKs using SDKMAN"](setup-buildtools.md) for details on how to install JDKs using SDKMAN.
 
 ## Prepare the release branch
 
@@ -59,14 +66,12 @@ export NEXT_VERSION_WITHOUT_RC=4.0.8
 export VERSION_BRANCH=branch-4.0
 export UPSTREAM_REMOTE=origin
 export SDKMAN_JAVA_VERSION=21
+# set the pulsar.includeBuildInfo project property for all Gradle invocations in this shell session
+# so that release binaries include the real git commit / build metadata
+export GRADLE_OPTS="-Dorg.gradle.project.pulsar.includeBuildInfo=true"
 ```
 
-for 3.x releases, use Java 17:
-
-```shell
-# for 3.x releases, use Java 17 instead of Java 21
-export SDKMAN_JAVA_VERSION=17
-```
+Release builds must include the real git commit / build metadata in the binaries, which is enabled with the `pulsar.includeBuildInfo=true` project property (the default is `false` so that local development and CI builds don't regenerate the metadata on every change). The `GRADLE_OPTS` export above sets the property for every Gradle invocation in the shell session. The property must be set consistently for every Gradle invocation of the release process — if it changes between invocations, the changed metadata invalidates the build outputs and the binaries get recompiled and change.
 
 Example for preview releases:
 
@@ -162,7 +167,7 @@ If there are any PRs that are still labeled with the current release label, you 
 
 During the release process, you are going to initially create "candidate" tags, that after verification and approval will get promoted to the "real" final tag.
 
-In this process, the maven version of the project will always be the final one.
+In this process, the project version will always be the final one.
 
 ```shell
 # Bump to the release version
@@ -195,59 +200,29 @@ git tag -d v$VERSION_RC
 git push $UPSTREAM_REMOTE :v$VERSION_RC
 ```
 
-## Specify MAVEN_OPTS
+## Build the release artifacts and run checks
 
-Set `MAVEN_OPTS` to avoid issues in the build process.
-
-```shell
-export MAVEN_OPTS="-Xss1500k -Xmx3072m -XX:+UnlockDiagnosticVMOptions -XX:GCLockerRetryAllocationCount=100"
-```
-
-## Cleaning up locally compiled BookKeeper artifacts
-
-It is necessary to make sure that BookKeeper artifacts are fetched from the Maven repository instead of using locally compiled BookKeeper artifacts ([reference](https://lists.apache.org/thread/gsbh95b2d9xtcg5fmtxpm9k9q6w68gd2)).
-
-Cleaning up the local Maven repository Bookkeeper artifacts for the version used by Pulsar:
-
-```shell
-cd $PULSAR_PATH
-sdk u java $SDKMAN_JAVA_VERSION
-BOOKKEEPER_VERSION=$(command mvn initialize help:evaluate -Dexpression=bookkeeper.version -pl . -q -DforceStdout)
-echo "BookKeeper version is $BOOKKEEPER_VERSION"
-[ -n "$BOOKKEEPER_VERSION" ] && ls -G -d ~/.m2/repository/org/apache/bookkeeper/**/"${BOOKKEEPER_VERSION}" 2> /dev/null | xargs -r rm -rf
-```
-
-### Build release artifacts
-
-Run the following command to build the artifacts:
+With the Gradle build, building the binary distributions, checking that the `LICENSE` and `NOTICE` files cover all bundled jars, and running the Apache RAT license header check can be performed in one shot:
 
 ```shell
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
-# build the binaries
-command mvn clean install -DskipTests
+./gradlew assemble checkBinaryLicense rat
 ```
 
-After the build, you should find the following tarballs, zip files, and the connectors directory with all the Pulsar IO nar files:
+Make sure the `GRADLE_OPTS` environment variable is set as described in the [environment variables step](#env-vars), so that the release binaries include the real git commit / build metadata.
 
-* `distribution/server/target/apache-pulsar-3.X.Y-bin.tar.gz`
-* `distribution/offloaders/target/apache-pulsar-offloaders-3.X.Y-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.tar.gz`
-* `distribution/shell/target/apache-pulsar-shell-3.X.Y-bin.zip`
-* directory `distribution/io/target/apache-pulsar-io-connectors-3.X.Y-bin`
+Since Gradle builds are incremental and don't rebuild up-to-date artifacts, the later steps — staging the artifacts to SVN, publishing to the ASF Nexus repository, and building the docker images — reuse the artifacts produced by this build, whether they are run as separate Gradle invocations or combined into a single one.
 
-### Check licenses
+After the build, you should find the following tarballs and zip files:
 
-First, check that the `LICENSE` and `NOTICE` files cover all included jars for the bin package. You can use script to cross-validate `LICENSE` file with included jars:
+* `distribution/server/build/distributions/apache-pulsar-X.Y.Z-bin.tar.gz`
+* `distribution/offloaders/build/distributions/apache-pulsar-offloaders-X.Y.Z-bin.tar.gz`
+* `distribution/shell/build/distributions/apache-pulsar-shell-X.Y.Z-bin.tar.gz`
+* `distribution/shell/build/distributions/apache-pulsar-shell-X.Y.Z-bin.zip`
 
-```shell
-cd $PULSAR_PATH
-src/check-binary-license.sh distribution/server/target/apache-pulsar-*-bin.tar.gz
-src/check-binary-license.sh distribution/shell/target/apache-pulsar-*-bin.tar.gz
-```
-
-In some older branches, the script is called `src/check-binary-license` instead of `src/check-binary-license.sh`.
+The Pulsar IO connectors are no longer part of the main Pulsar release: most built-in connectors were moved to a separate `pulsar-connectors` repository ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)) with its own release process.
 
 ### Create and publish the GPG key if you haven't already done this
 
@@ -274,6 +249,12 @@ echo "default-key $KEY_ID" >> ~/.gnupg/gpg.conf
 ### Sign and stage the artifacts to local SVN directory
 
 The src and bin artifacts need to be signed and finally uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
+
+:::caution Draft
+
+With the Gradle build, the binary distributions are produced under `distribution/*/build/distributions` instead of `distribution/*/target`, and there is no Pulsar IO connectors directory. The `src/stage-release.sh` script will be updated for the Gradle build layout; verify the staged files after running it.
+
+:::
 
 ```shell
 # make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
@@ -314,7 +295,7 @@ Then use instructions in [verifying release candidates](validate-release-candida
 cd /tmp
 tar -xvzf ~/pulsar-svn-release-${VERSION_RC}/pulsar-$VERSION_RC/apache-pulsar-*-src.tar.gz
 cd apache-pulsar-$VERSION_WITHOUT_RC-src
-command mvn apache-rat:check
+./gradlew rat
 ```
 
 ### Commit and upload the staged files in the local SVN directory to ASF SVN server
@@ -325,34 +306,28 @@ svn add *
 svn ci -m "Staging artifacts and signature for Pulsar release $VERSION_RC"
 ```
 
-### Stage Maven modules
+### Stage artifacts in the ASF Nexus repository
 
 :::caution
 Make sure to run only one release at a time when working on multiple releases in parallel. Running multiple builds simultaneously will result in all releases being placed into a single staging repository. Close [the staging repository](https://repository.apache.org/#stagingRepositories) before performing another release.
 :::
 
-Set your ASF password in the following line. Add a space as the first character on the command line so that your password doesn't get recorded in shell history.
-
-```shell
- export APACHE_PASSWORD=""
-```
-
-Upload the artifacts to [ASF Nexus](https://repository.apache.org)
+Publish the artifacts to the [ASF Nexus](https://repository.apache.org) staging repository:
 
 ```shell
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
-# Confirm if there are no other new dirs or files in the $PULSAR_PATH because all files in $PULSAR_PATH will be compressed and uploaded to ASF Nexus.
-git status
-
-# src/settings.xml from master branch to /tmp/mvn-apache-settings.xml since it's missing in some branches
-curl -s -o /tmp/mvn-apache-settings.xml https://raw.githubusercontent.com/apache/pulsar/branch-4.2/src/settings.xml
-
-# publish artifacts
-# and publish org.apache.pulsar.tests:integration and it's parent pom org.apache.pulsar.tests:tests-parent
-command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml && command mvn deploy -Daether.connector.basic.parallelPut=false -DskipTests -Papache-release --settings /tmp/mvn-apache-settings.xml -f tests/pom.xml -pl org.apache.pulsar.tests:tests-parent,org.apache.pulsar.tests:integration || echo 'ERROR: Publishing Failed!'
+./gradlew publish --no-parallel -PuseGpgCmd=true -Psigning.gnupg.keyName=$APACHE_USER@apache.org
 ```
+
+`--no-parallel` disables Gradle's parallel task execution for this invocation so that the per-module publish tasks don't upload to the ASF Nexus repository concurrently (concurrent uploads can end up in multiple implicitly-created staging repositories). It serves the same purpose as `-Daether.connector.basic.parallelPut=false` in the Maven-based process.
+
+:::caution Draft
+
+The ASF Nexus staging repository configuration and credentials handling of the Gradle build will be finalized with the first Gradle-based release. The publications can be verified locally beforehand with `./gradlew publishAllPublicationsToLocalDeployRepository`, which publishes to the `build/local-deploy-repo` directories instead of a remote repository.
+
+:::
 
 :::note
 
@@ -380,29 +355,7 @@ This operation will take few minutes. Once complete click "Refresh" and now a li
 
 ### Stage Docker images
 
-After that, the following images will be built and pushed to your own DockerHub account:
-
-* pulsar
-* pulsar-all
-
-#### Release before Pulsar 3.0
-
-This is supported only on Intel platforms. On Mac Apple Silicon, you can run Linux amd64 in a virtual machine or a physical machine outside the Apple laptop and use `export DOCKER_HOST=tcp://x.x.x.x:port` to use use the remote docker engine for building the docker image. Don't forward the TCP/IP connection over an unencrypted channel.
-You can start a socket proxy with `socat TCP-LISTEN:2375,bind=0.0.0.0,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock` inside the Linux Intel machine.
-For running the Linux Intel VM on Mac Apple Silicon, you could use `limactl create --name=linux_amd64 --rosetta --arch x86_64` to create a VM using https://lima-vm.io/.
-However, it is simpler to do the release on a Linux arm64 / x86_64 VM directly.
-
-Run the following commands on a Linux machine (or with Mac where DOCKER_HOST points to a Linux amd64/Intel machine):
-
-```shell
-cd $PULSAR_PATH/docker
-# ensure the correct JDK version is used for building
-sdk u java $SDKMAN_JAVA_VERSION
-./build.sh
-DOCKER_USER=<your-username> DOCKER_PASSWORD=<your-password> DOCKER_ORG=<your-organization> ./publish.sh
-```
-
-### Release Pulsar 3.0 and later
+In this step, the `pulsar` docker image is built and pushed to your own DockerHub account. With the Gradle build, the `pulsar-all` image is no longer built: most Pulsar IO connectors were moved to a separate `pulsar-connectors` repository ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)). Skip the `pulsar-all` related parts of the following steps when releasing with the Gradle build.
 
 Before building docker images, clean up build history so that you don't run out of diskspace in the middle of the build.
 Docker buildx in Docker Desktop limits the build history size to 20GB by default.
@@ -417,7 +370,7 @@ docker buildx du
 docker buildx prune
 ```
 
-For creating and publishing the docker images, run the following commands:
+For creating and publishing the docker image, run the following commands:
 
 ```shell
 # set your dockerhub username
@@ -430,21 +383,15 @@ docker login -u $DOCKER_USER
 ```
 
 ```shell
-# ensure that you have the most recent base image locally
-docker pull ubuntu:22.04 # for 3.0.x
-docker pull alpine:3.21 # for 3.3.x+
-
 cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 
-command mvn install -pl docker/pulsar,docker/pulsar-all \
-    -DskipTests \
-    -Pmain,docker,docker-push \
-    -Ddocker.platforms=linux/amd64,linux/arm64 \
-    -Ddocker.organization=$DOCKER_USER \
-    -Ddocker.noCache=true \
-    -Ddocker.skip.tag=false
+./gradlew docker \
+    -Pdocker.organization=$DOCKER_USER \
+    -Pdocker.platforms=linux/amd64,linux/arm64 \
+    -Pdocker.tag=$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit}) \
+    -Pdocker.push
 ```
 
 ## Call for the vote to release a version based on the release candidate
@@ -823,9 +770,15 @@ First, build swagger files from apache/pulsar repo at the released tag:
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 git checkout v$VERSION_WITHOUT_RC
-command mvn -ntp install -Pcore-modules,swagger,-main -DskipTests -DskipSourceReleaseAssembly=true -Dspotbugs.skip=true -Dlicense.skip=true
+./gradlew :pulsar-broker:generateOpenApiSpecs
 PULSAR_PATH=$(pwd)
 ```
+
+:::caution Draft
+
+The Gradle build generates the OpenAPI specs into a different location (`pulsar-broker/build/`) than the Maven build. The `rest-apidoc-generator.py` tooling below may need updating for the Gradle build layout.
+
+:::
 
 Now, run the following script from the main branch of apache/pulsar-site repo:
 
@@ -991,7 +944,9 @@ svn ls https://dist.apache.org/repos/dist/release/pulsar
 svn rm https://dist.apache.org/repos/dist/release/pulsar/pulsar-3.X.X
 ```
 
-## Move to next version in pom.xml
+## Move to the next snapshot version
+
+The `./src/set-project-version.sh` script updates the project version on both Gradle- and Maven-based branches.
 
 ### Feature releases (master branch)
 
@@ -999,8 +954,8 @@ You need to move the master version to the next iteration `Y` (`X + 1`).
 
 ```shell
 git checkout master
-./src/set-project-version.sh 3.Y.0-SNAPSHOT
-git commit -a -s -m "[cleanup][build] Bumped version to 3.Y.0-SNAPSHOT'
+./src/set-project-version.sh X.Y.0-SNAPSHOT
+git commit -a -s -m "[cleanup][build] Bumped version to X.Y.0-SNAPSHOT'
 ```
 
 Since this needs to be merged into `master`, you need to follow the regular process and create a Pull Request on GitHub.

@@ -58,6 +58,7 @@ const sidebars = {
                     label: 'Release process',
                     link: {type: 'doc', id: 'release-process'},
                     items: [
+                        'release-process-maven',
                         'create-gpg-keys',
                         'release-note-guide',
                     ]
