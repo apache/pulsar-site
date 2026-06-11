@@ -54,5 +54,13 @@ runs:
         poetry install
         poetry run bin/reference-doc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
         poetry run bin/rest-apidoc-generator.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
-        poetry run bin/site-updater.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
+      shell: bash
+    - name: Remove stray log lines from generated reference docs
+      run: |
+        find static/reference -name '*.md' -print0 | xargs -0 sed -i -E \
+          '/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}[+-][0-9]{4} \[[^]]*\] +(INFO|WARN|ERROR|DEBUG|TRACE|FATAL) /d'
+      shell: bash
+    - name: Commit and push updated docs
+      working-directory: tools/pytools
+      run: poetry run bin/site-updater.py --master-path=$GITHUB_WORKSPACE/tmp/pulsar
       shell: bash
