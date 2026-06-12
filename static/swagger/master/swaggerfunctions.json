@@ -1,878 +1,779 @@
 {
-    "basePath": "/admin/v3",
-    "definitions": {
-        "AuthenticationDataSource": {
-            "properties": {
-                "commandData": {
-                    "type": "string"
-                },
-                "httpAuthType": {
-                    "type": "string"
-                },
-                "peerAddress": {
-                    "$ref": "#/definitions/SocketAddress"
-                },
-                "subscription": {
-                    "type": "string"
-                },
-                "tlsCertificates": {
-                    "items": {
-                        "$ref": "#/definitions/Certificate"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "AuthenticationParameters": {
-            "properties": {
-                "clientAuthenticationDataSource": {
-                    "$ref": "#/definitions/AuthenticationDataSource"
-                },
-                "clientRole": {
-                    "type": "string"
-                },
-                "originalPrincipal": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "BatchingConfig": {
-            "properties": {
-                "batchBuilder": {
-                    "type": "string"
-                },
-                "batchingMaxBytes": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "batchingMaxMessages": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "batchingMaxPublishDelayMs": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "roundRobinRouterBatchingPartitionSwitchFrequency": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "Certificate": {
-            "properties": {
-                "encoded": {
-                    "items": {
-                        "format": "byte",
+    "components": {
+        "schemas": {
+            "BatchingConfig": {
+                "properties": {
+                    "batchBuilder": {
                         "type": "string"
                     },
-                    "type": "array"
+                    "batchingMaxBytes": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "batchingMaxMessages": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "batchingMaxPublishDelayMs": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "roundRobinRouterBatchingPartitionSwitchFrequency": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
                 },
-                "publicKey": {
-                    "$ref": "#/definitions/PublicKey"
-                },
-                "type": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "CompletableFuture": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFutureClusterData": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFutureVoid": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "ConnectorDefinition": {
-            "properties": {
-                "description": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "sinkClass": {
-                    "type": "string"
-                },
-                "sinkConfigClass": {
-                    "type": "string"
-                },
-                "sourceClass": {
-                    "type": "string"
-                },
-                "sourceConfigClass": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "ConsumerConfig": {
-            "properties": {
-                "consumerProperties": {
-                    "additionalProperties": {
+            "ConnectorDefinition": {
+                "properties": {
+                    "description": {
                         "type": "string"
                     },
-                    "type": "object"
-                },
-                "cryptoConfig": {
-                    "$ref": "#/definitions/CryptoConfig"
-                },
-                "messagePayloadProcessorConfig": {
-                    "$ref": "#/definitions/MessagePayloadProcessorConfig"
-                },
-                "poolMessages": {
-                    "type": "boolean"
-                },
-                "receiverQueueSize": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "regexPattern": {
-                    "type": "boolean"
-                },
-                "schemaProperties": {
-                    "additionalProperties": {
+                    "name": {
                         "type": "string"
                     },
-                    "type": "object"
+                    "sinkClass": {
+                        "type": "string"
+                    },
+                    "sinkConfigClass": {
+                        "type": "string"
+                    },
+                    "sourceClass": {
+                        "type": "string"
+                    },
+                    "sourceConfigClass": {
+                        "type": "string"
+                    }
                 },
-                "schemaType": {
-                    "type": "string"
-                },
-                "serdeClassName": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "CryptoConfig": {
-            "properties": {
-                "consumerCryptoFailureAction": {
-                    "enum": [
-                        "FAIL",
-                        "DISCARD",
-                        "CONSUME"
-                    ],
-                    "type": "string"
-                },
-                "cryptoKeyReaderClassName": {
-                    "type": "string"
-                },
-                "cryptoKeyReaderConfig": {
-                    "additionalProperties": {
+            "ConsumerConfig": {
+                "properties": {
+                    "consumerProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
-                },
-                "encryptionKeys": {
-                    "items": {
-                        "type": "string"
+                    "cryptoConfig": {
+                        "$ref": "#/components/schemas/CryptoConfig"
                     },
-                    "type": "array"
-                },
-                "producerCryptoFailureAction": {
-                    "enum": [
-                        "FAIL",
-                        "SEND"
-                    ],
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "ExceptionInformation": {
-            "properties": {
-                "exceptionString": {
-                    "type": "string"
-                },
-                "timestampMs": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionConfig": {
-            "properties": {
-                "autoAck": {
-                    "type": "boolean"
-                },
-                "batchBuilder": {
-                    "type": "string"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "cleanupSubscription": {
-                    "type": "boolean"
-                },
-                "customRuntimeOptions": {
-                    "type": "string"
-                },
-                "customSchemaInputs": {
-                    "additionalProperties": {
-                        "type": "string"
+                    "messagePayloadProcessorConfig": {
+                        "$ref": "#/components/schemas/MessagePayloadProcessorConfig"
                     },
-                    "type": "object"
-                },
-                "customSchemaOutputs": {
-                    "additionalProperties": {
-                        "type": "string"
+                    "poolMessages": {
+                        "type": "boolean"
                     },
-                    "type": "object"
-                },
-                "customSerdeInputs": {
-                    "additionalProperties": {
-                        "type": "string"
+                    "receiverQueueSize": {
+                        "format": "int32",
+                        "type": "integer"
                     },
-                    "type": "object"
-                },
-                "deadLetterTopic": {
-                    "type": "string"
-                },
-                "exposePulsarAdminClientEnabled": {
-                    "type": "boolean"
-                },
-                "forwardSourceMessageProperty": {
-                    "type": "boolean"
-                },
-                "fqfn": {
-                    "type": "string"
-                },
-                "functionType": {
-                    "type": "string"
-                },
-                "go": {
-                    "type": "string"
-                },
-                "inputSpecs": {
-                    "additionalProperties": {
-                        "$ref": "#/definitions/ConsumerConfig"
+                    "regexPattern": {
+                        "type": "boolean"
                     },
-                    "type": "object"
-                },
-                "inputTypeClassName": {
-                    "type": "string"
-                },
-                "inputs": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "jar": {
-                    "type": "string"
-                },
-                "logTopic": {
-                    "type": "string"
-                },
-                "maxMessageRetries": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "maxPendingAsyncRequests": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "namespace": {
-                    "type": "string"
-                },
-                "output": {
-                    "type": "string"
-                },
-                "outputSchemaType": {
-                    "type": "string"
-                },
-                "outputSerdeClassName": {
-                    "type": "string"
-                },
-                "outputTypeClassName": {
-                    "type": "string"
-                },
-                "parallelism": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "processingGuarantees": {
-                    "enum": [
-                        "ATLEAST_ONCE",
-                        "ATMOST_ONCE",
-                        "EFFECTIVELY_ONCE",
-                        "MANUAL"
-                    ],
-                    "type": "string"
-                },
-                "producerConfig": {
-                    "$ref": "#/definitions/ProducerConfig"
-                },
-                "py": {
-                    "type": "string"
-                },
-                "resources": {
-                    "$ref": "#/definitions/Resources"
-                },
-                "retainKeyOrdering": {
-                    "type": "boolean"
-                },
-                "retainOrdering": {
-                    "type": "boolean"
-                },
-                "runtime": {
-                    "enum": [
-                        "JAVA",
-                        "PYTHON",
-                        "GO"
-                    ],
-                    "type": "string"
-                },
-                "runtimeFlags": {
-                    "type": "string"
-                },
-                "secrets": {
-                    "additionalProperties": {
+                    "schemaProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
+                    "schemaType": {
+                        "type": "string"
+                    },
+                    "serdeClassName": {
+                        "type": "string"
+                    }
                 },
-                "skipToLatest": {
-                    "type": "boolean"
-                },
-                "subName": {
-                    "type": "string"
-                },
-                "subscriptionPosition": {
-                    "enum": [
-                        "Latest",
-                        "Earliest"
-                    ],
-                    "type": "string"
-                },
-                "tenant": {
-                    "type": "string"
-                },
-                "timeoutMs": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "topicsPattern": {
-                    "type": "string"
-                },
-                "userConfig": {
-                    "additionalProperties": {
+                "type": "object"
+            },
+            "CryptoConfig": {
+                "properties": {
+                    "consumerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "DISCARD",
+                            "CONSUME"
+                        ],
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderClassName": {
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderConfig": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
+                    "encryptionKeys": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "producerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "SEND"
+                        ],
+                        "type": "string"
+                    }
                 },
-                "windowConfig": {
-                    "$ref": "#/definitions/WindowConfig"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "FunctionDefinition": {
-            "properties": {
-                "description": {
-                    "type": "string"
+            "ExceptionInformation": {
+                "properties": {
+                    "exceptionString": {
+                        "type": "string"
+                    },
+                    "timestampMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "functionClass": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "FunctionInstanceStatsData": {
-            "properties": {
-                "avgProcessLatency": {
-                    "format": "double",
-                    "type": "number"
+            "FormDataContentDisposition": {
+                "properties": {
+                    "creationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "modificationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "readDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
                 },
-                "lastInvocation": {
-                    "format": "int64",
-                    "type": "integer"
+                "type": "object"
+            },
+            "FunctionConfig": {
+                "properties": {
+                    "autoAck": {
+                        "type": "boolean"
+                    },
+                    "batchBuilder": {
+                        "type": "string"
+                    },
+                    "className": {
+                        "type": "string"
+                    },
+                    "cleanupSubscription": {
+                        "type": "boolean"
+                    },
+                    "customRuntimeOptions": {
+                        "type": "string"
+                    },
+                    "customSchemaInputs": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "customSchemaOutputs": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "customSerdeInputs": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "deadLetterTopic": {
+                        "type": "string"
+                    },
+                    "exposePulsarAdminClientEnabled": {
+                        "type": "boolean"
+                    },
+                    "forwardSourceMessageProperty": {
+                        "type": "boolean"
+                    },
+                    "fqfn": {
+                        "type": "string"
+                    },
+                    "functionType": {
+                        "type": "string"
+                    },
+                    "go": {
+                        "type": "string"
+                    },
+                    "inputSpecs": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ConsumerConfig"
+                        },
+                        "type": "object"
+                    },
+                    "inputTypeClassName": {
+                        "type": "string"
+                    },
+                    "inputs": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "jar": {
+                        "type": "string"
+                    },
+                    "logTopic": {
+                        "type": "string"
+                    },
+                    "maxMessageRetries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "maxPendingAsyncRequests": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "namespace": {
+                        "type": "string"
+                    },
+                    "output": {
+                        "type": "string"
+                    },
+                    "outputSchemaType": {
+                        "type": "string"
+                    },
+                    "outputSerdeClassName": {
+                        "type": "string"
+                    },
+                    "outputTypeClassName": {
+                        "type": "string"
+                    },
+                    "parallelism": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "processingGuarantees": {
+                        "enum": [
+                            "ATLEAST_ONCE",
+                            "ATMOST_ONCE",
+                            "EFFECTIVELY_ONCE",
+                            "MANUAL"
+                        ],
+                        "type": "string"
+                    },
+                    "producerConfig": {
+                        "$ref": "#/components/schemas/ProducerConfig"
+                    },
+                    "py": {
+                        "type": "string"
+                    },
+                    "resources": {
+                        "$ref": "#/components/schemas/Resources"
+                    },
+                    "retainKeyOrdering": {
+                        "type": "boolean"
+                    },
+                    "retainOrdering": {
+                        "type": "boolean"
+                    },
+                    "runtime": {
+                        "enum": [
+                            "JAVA",
+                            "PYTHON",
+                            "GO"
+                        ],
+                        "type": "string"
+                    },
+                    "runtimeFlags": {
+                        "type": "string"
+                    },
+                    "secrets": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "skipToLatest": {
+                        "type": "boolean"
+                    },
+                    "subName": {
+                        "type": "string"
+                    },
+                    "subscriptionPosition": {
+                        "enum": [
+                            "Latest",
+                            "Earliest"
+                        ],
+                        "type": "string"
+                    },
+                    "tenant": {
+                        "type": "string"
+                    },
+                    "timeoutMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "topicsPattern": {
+                        "type": "string"
+                    },
+                    "userConfig": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "windowConfig": {
+                        "$ref": "#/components/schemas/WindowConfig"
+                    }
                 },
-                "oneMin": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBase"
+                "type": "object"
+            },
+            "FunctionDefinition": {
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "functionClass": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
                 },
-                "processedSuccessfullyTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "receivedTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "systemExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userMetrics": {
-                    "additionalProperties": {
+                "type": "object"
+            },
+            "FunctionInstanceStatsData": {
+                "properties": {
+                    "avgProcessLatency": {
                         "format": "double",
                         "type": "number"
                     },
-                    "type": "object"
-                }
+                    "lastInvocation": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "oneMin": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBase"
+                    },
+                    "processedSuccessfullyTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "receivedTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "systemExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "userExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "userMetrics": {
+                        "additionalProperties": {
+                            "format": "double",
+                            "type": "number"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
             },
-            "type": "object"
-        },
-        "FunctionInstanceStatsDataBase": {
-            "properties": {
-                "avgProcessLatency": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "processedSuccessfullyTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "receivedTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "systemExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionInstanceStatsDataBaseImpl": {
-            "properties": {
-                "avgProcessLatency": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "processedSuccessfullyTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "receivedTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "systemExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionInstanceStatsDataImpl": {
-            "properties": {
-                "1min": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBaseImpl"
-                },
-                "avgProcessLatency": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "lastInvocation": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "processedSuccessfullyTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "receivedTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "systemExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userMetrics": {
-                    "additionalProperties": {
+            "FunctionInstanceStatsDataBase": {
+                "properties": {
+                    "avgProcessLatency": {
                         "format": "double",
                         "type": "number"
                     },
-                    "type": "object"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionInstanceStatsImpl": {
-            "properties": {
-                "instanceId": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "metrics": {
-                    "$ref": "#/definitions/FunctionInstanceStatsData"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionInstanceStatus": {
-            "properties": {
-                "instanceId": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "status": {
-                    "$ref": "#/definitions/FunctionInstanceStatusData"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionInstanceStatusData": {
-            "properties": {
-                "averageLatency": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "error": {
-                    "type": "string"
-                },
-                "lastInvocationTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "latestSystemExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/ExceptionInformation"
+                    "processedSuccessfullyTotal": {
+                        "format": "int64",
+                        "type": "integer"
                     },
-                    "type": "array"
-                },
-                "latestUserExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/ExceptionInformation"
+                    "receivedTotal": {
+                        "format": "int64",
+                        "type": "integer"
                     },
-                    "type": "array"
-                },
-                "numReceived": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numRestarts": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numSuccessfullyProcessed": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numSystemExceptions": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numUserExceptions": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "running": {
-                    "type": "boolean"
-                },
-                "workerId": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionState": {
-            "properties": {
-                "byteValue": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
+                    "systemExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
                     },
-                    "type": "array"
+                    "userExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "key": {
-                    "type": "string"
-                },
-                "numberValue": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "stringValue": {
-                    "type": "string"
-                },
-                "version": {
-                    "format": "int64",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "FunctionStatsImpl": {
-            "properties": {
-                "1min": {
-                    "$ref": "#/definitions/FunctionInstanceStatsDataBaseImpl"
-                },
-                "avgProcessLatency": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "instances": {
-                    "items": {
-                        "$ref": "#/definitions/FunctionInstanceStatsImpl"
+            "FunctionInstanceStatsDataBaseImpl": {
+                "properties": {
+                    "avgProcessLatency": {
+                        "format": "double",
+                        "type": "number"
                     },
-                    "type": "array"
-                },
-                "lastInvocation": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "processedSuccessfullyTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "receivedTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "systemExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "userExceptionsTotal": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "FunctionStatus": {
-            "properties": {
-                "instances": {
-                    "items": {
-                        "$ref": "#/definitions/FunctionInstanceStatus"
+                    "processedSuccessfullyTotal": {
+                        "format": "int64",
+                        "type": "integer"
                     },
-                    "type": "array"
+                    "receivedTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "systemExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "userExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "numInstances": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "numRunning": {
-                    "format": "int32",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "InputStream": {
-            "type": "object"
-        },
-        "MessagePayloadProcessorConfig": {
-            "properties": {
-                "className": {
-                    "type": "string"
-                },
-                "config": {
-                    "additionalProperties": {
+            "FunctionInstanceStatsDataImpl": {
+                "properties": {
+                    "1min": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBaseImpl"
+                    },
+                    "avgProcessLatency": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "lastInvocation": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "processedSuccessfullyTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "receivedTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "systemExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "userExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "userMetrics": {
+                        "additionalProperties": {
+                            "format": "double",
+                            "type": "number"
+                        },
                         "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "FunctionInstanceStatsImpl": {
+                "properties": {
+                    "instanceId": {
+                        "format": "int32",
+                        "type": "integer"
                     },
-                    "type": "object"
-                }
+                    "metrics": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsData"
+                    }
+                },
+                "type": "object"
             },
-            "type": "object"
-        },
-        "ProducerConfig": {
-            "properties": {
-                "batchBuilder": {
-                    "type": "string"
+            "FunctionInstanceStatus": {
+                "properties": {
+                    "instanceId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatusData"
+                    }
                 },
-                "batchingConfig": {
-                    "$ref": "#/definitions/BatchingConfig"
-                },
-                "compressionType": {
-                    "enum": [
-                        "NONE",
-                        "LZ4",
-                        "ZLIB",
-                        "ZSTD",
-                        "SNAPPY"
-                    ],
-                    "type": "string"
-                },
-                "cryptoConfig": {
-                    "$ref": "#/definitions/CryptoConfig"
-                },
-                "maxPendingMessages": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "maxPendingMessagesAcrossPartitions": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "useThreadLocalProducers": {
-                    "type": "boolean"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "PublicKey": {
-            "properties": {
-                "algorithm": {
-                    "type": "string"
+            "FunctionInstanceStatusData": {
+                "properties": {
+                    "averageLatency": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "lastInvocationTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "latestSystemExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "latestUserExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "numReceived": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numRestarts": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSuccessfullyProcessed": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSystemExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numUserExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "running": {
+                        "type": "boolean"
+                    },
+                    "workerId": {
+                        "type": "string"
+                    }
                 },
-                "encoded": {
-                    "items": {
+                "type": "object"
+            },
+            "FunctionState": {
+                "properties": {
+                    "byteValue": {
                         "format": "byte",
                         "type": "string"
                     },
-                    "type": "array"
+                    "key": {
+                        "type": "string"
+                    },
+                    "numberValue": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "stringValue": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "format": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "Resources": {
-            "properties": {
-                "cpu": {
-                    "format": "double",
-                    "type": "number"
+            "FunctionStatsImpl": {
+                "properties": {
+                    "1min": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBaseImpl"
+                    },
+                    "avgProcessLatency": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "instances": {
+                        "items": {
+                            "$ref": "#/components/schemas/FunctionInstanceStatsImpl"
+                        },
+                        "type": "array"
+                    },
+                    "lastInvocation": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "processedSuccessfullyTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "receivedTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "systemExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "userExceptionsTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "disk": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "ram": {
-                    "format": "int64",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "SocketAddress": {
-            "type": "object"
-        },
-        "UpdateOptions": {
-            "description": "Options while updating the sink",
-            "properties": {
-                "update-auth-data": {
-                    "description": "Whether or not to update the auth data",
-                    "type": "boolean"
-                }
+            "FunctionStatus": {
+                "properties": {
+                    "instances": {
+                        "items": {
+                            "$ref": "#/components/schemas/FunctionInstanceStatus"
+                        },
+                        "type": "array"
+                    },
+                    "numInstances": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numRunning": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
             },
-            "type": "object"
-        },
-        "WindowConfig": {
-            "properties": {
-                "actualWindowFunctionClassName": {
-                    "type": "string"
+            "MessagePayloadProcessorConfig": {
+                "properties": {
+                    "className": {
+                        "type": "string"
+                    },
+                    "config": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    }
                 },
-                "lateDataTopic": {
-                    "type": "string"
-                },
-                "maxLagMs": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "processingGuarantees": {
-                    "enum": [
-                        "ATLEAST_ONCE",
-                        "ATMOST_ONCE"
-                    ],
-                    "type": "string"
-                },
-                "slidingIntervalCount": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "slidingIntervalDurationMs": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "timestampExtractorClassName": {
-                    "type": "string"
-                },
-                "watermarkEmitIntervalMs": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "windowLengthCount": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "windowLengthDurationMs": {
-                    "format": "int64",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
+            "ProducerConfig": {
+                "properties": {
+                    "batchBuilder": {
+                        "type": "string"
+                    },
+                    "batchingConfig": {
+                        "$ref": "#/components/schemas/BatchingConfig"
+                    },
+                    "compressionType": {
+                        "enum": [
+                            "NONE",
+                            "LZ4",
+                            "ZLIB",
+                            "ZSTD",
+                            "SNAPPY"
+                        ],
+                        "type": "string"
+                    },
+                    "cryptoConfig": {
+                        "$ref": "#/components/schemas/CryptoConfig"
+                    },
+                    "maxPendingMessages": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "maxPendingMessagesAcrossPartitions": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "useThreadLocalProducers": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "Resources": {
+                "properties": {
+                    "cpu": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "disk": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ram": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateOptions": {
+                "description": "Options while updating the sink",
+                "properties": {
+                    "update-auth-data": {
+                        "description": "Whether or not to update the auth data",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "WindowConfig": {
+                "properties": {
+                    "actualWindowFunctionClassName": {
+                        "type": "string"
+                    },
+                    "lateDataTopic": {
+                        "type": "string"
+                    },
+                    "maxLagMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "processingGuarantees": {
+                        "enum": [
+                            "ATLEAST_ONCE",
+                            "ATMOST_ONCE"
+                        ],
+                        "type": "string"
+                    },
+                    "slidingIntervalCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "slidingIntervalDurationMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "timestampExtractorClassName": {
+                        "type": "string"
+                    },
+                    "watermarkEmitIntervalMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "windowLengthCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "windowLengthDurationMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "info": {
@@ -884,26 +785,24 @@
         "title": "Pulsar Functions REST API",
         "version": "v3"
     },
+    "openapi": "3.0.1",
     "paths": {
         "/functions/builtins": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getBuiltinFunction",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "getBuiltinFunction",
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/FunctionDefinition"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/FunctionDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Fetches the list of built-in Pulsar functions"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -923,14 +822,7 @@
         },
         "/functions/builtins/reload": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_reloadBuiltinFunctions",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "reloadBuiltinFunctions",
                 "responses": {
                     "200": {
                         "description": "Operation successful"
@@ -953,24 +845,21 @@
         },
         "/functions/connectors": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
                 "deprecated": true,
-                "description": "",
-                "operationId": "FunctionsBase_getConnectorsList",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "getConnectorsList",
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ConnectorDefinition"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConnectorDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Fetches a list of supported Pulsar IO connectors currently running in cluster mode"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -990,36 +879,40 @@
         },
         "/functions/{tenant}/{namespace}": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_listFunctions",
+                "operationId": "listFunctions",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
                         "schema": {
                             "type": "string"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Lists all Pulsar Functions currently deployed in a given namespace"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -1036,36 +929,35 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}": {
             "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_deregisterFunction",
+                "operationId": "deregisterFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1090,43 +982,46 @@
                 ]
             },
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getFunctionInfo",
+                "operationId": "getFunctionInfo",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/FunctionConfig"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FunctionConfig"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about a Pulsar Function currently running in cluster mode"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -1147,49 +1042,56 @@
                 ]
             },
             "post": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_registerFunction",
+                "operationId": "registerFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "You can submit a function (in any languages that you are familiar with) \nto a Pulsar cluster. Follow the steps below. \n1. Create a JSON object using some of the following parameters.\nA JSON value presenting configuration payload of a Pulsar Function.\n An example of the expected Pulsar Function can be found here.\n- **autoAck**\n  Whether or not the framework acknowledges messages automatically.\n- **runtime**\n  What is the runtime of the Pulsar Function. Possible Values: [JAVA, PYTHON, GO]\n- **resources**\n  The size of the system resources allowed by the Pulsar Function runtime. The resources include: cpu, ram, disk.\n- **className**\n  The class name of a Pulsar Function.\n- **customSchemaInputs**\n  The map of input topics to Schema class names (specified as a JSON object).\n- **customSerdeInputs**\n  The map of input topics to SerDe class names (specified as a JSON object).\n- **deadLetterTopic**\n  Messages that are not processed successfully are sent to `deadLetterTopic`.\n- **runtimeFlags**\n  Any flags that you want to pass to the runtime. Note that in thread mode, these flags have no impact.\n- **fqfn**\n  The Fully Qualified Function Name (FQFN) for the Pulsar Function.\n- **inputSpecs**\n   The map of input topics to its consumer configuration, each configuration has schema of    {\"schemaType\": \"type-x\", \"serdeClassName\": \"name-x\", \"isRegexPattern\": true, \"receiverQueueSize\": 5}\n- **inputs**\n  The input topic or topics (multiple topics can be specified as a comma-separated list) of a Pulsar Function.\n- **jar**\n  Path to the JAR file for the Pulsar Function (if the Pulsar Function is written in Java).   It also supports URL path [http/https/file (file protocol assumes that file   already exists on worker host)] from which worker can download the package.\n- **py**\n  Path to the main Python file or Python wheel file for the Pulsar Function (if the Pulsar Function is written in Python).\n- **go**\n  Path to the main Go executable binary for the Pulsar Function (if the Pulsar Function is written in Go).\n- **logTopic**\n  The topic to which the logs of a Pulsar Function are produced.\n- **maxMessageRetries**\n  How many times should we try to process a message before giving up.\n- **output**\n  The output topic of a Pulsar Function (If none is specified, no output is written).\n- **outputSerdeClassName**\n  The SerDe class to be used for messages output by the Pulsar Function.\n- **parallelism**\n  The parallelism factor of a Pulsar Function (i.e. the number of a Pulsar Function instances to run).\n- **processingGuarantees**\n  The processing guarantees (that is, delivery semantics) applied to the Pulsar Function.  Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]\n- **retainOrdering**\n  Function consumes and processes messages in order.\n- **outputSchemaType**\n   Represents either a builtin schema type (for example: 'avro', 'json', ect) or the class name for a Schema implementation.- **subName**\n  Pulsar source subscription name. User can specify a subscription-name for the input-topic consumer.\n- **windowConfig**\n  The window configuration of a Pulsar Function.\n- **timeoutMs**\n  The message timeout in milliseconds.\n- **topicsPattern**\n  The topic pattern to consume from a list of topics under a namespace that match the pattern.  [input] and [topic-pattern] are mutually exclusive. Add SerDe class name for a   pattern in customSerdeInputs (supported for java fun only)\n- **userConfig**\n  A map of user-defined configurations (specified as a JSON object).\n- **secrets**\n  This is a map of secretName(that is how the secret is going to be accessed in the Pulsar Function via context) to an object that  encapsulates how the secret is fetched by the underlying secrets provider. The type of an value here can be found by the  SecretProviderConfigurator.getSecretObjectType() method. \n- **cleanupSubscription**\n  Whether the subscriptions of a Pulsar Function created or used should be deleted when the Pulsar Function is deleted.\n2. Encapsulate the JSON object to a multipart object.",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
-                            "$ref": "#/definitions/FunctionConfig"
-                        },
-                        "x-examples": {
-                            "text/plain": "Examples\n1. Create a JSON object\n {\n   \"inputs\": \"persistent://public/default/input-topic\",\n   \"parallelism\": \"4\",\n   \"output\": \"persistent://public/default/output-topic\",\n   \"log-topic\": \"persistent://public/default/log-topic\",\n   \"classname\": \"org.example.test.ExclamationFunction\",\n   \"jar\": \"java-function-1.0-SNAPSHOT.jar\"\n }\n2. Encapsulate the JSON object to a multipart object (in Python)\nfrom requests_toolbelt.multipart.encoder import MultipartEncoders\nmp_encoder = MultipartEncoder([('functionConfig',(None, json.dumps(config), 'application/json'))])"
+                            "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "functionConfig": {
+                                        "$ref": "#/components/schemas/FunctionConfig"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Pulsar Function successfully created"
@@ -1210,58 +1112,59 @@
                 ]
             },
             "put": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_updateFunction",
+                "operationId": "updateFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "A JSON value presenting configuration payload of a Pulsar Function. An example of the expected Pulsar Function can be found here.\n- **autoAck**\n  Whether or not the framework acknowledges messages automatically.\n- **runtime**\n  What is the runtime of the Pulsar Function. Possible Values: [JAVA, PYTHON, GO]\n- **resources**\n  The size of the system resources allowed by the Pulsar Function runtime. The resources include: cpu, ram, disk.\n- **className**\n  The class name of a Pulsar Function.\n- **customSchemaInputs**\n  The map of input topics to Schema class names (specified as a JSON object).\n- **customSerdeInputs**\n  The map of input topics to SerDe class names (specified as a JSON object).\n- **deadLetterTopic**\n  Messages that are not processed successfully are sent to `deadLetterTopic`.\n- **runtimeFlags**\n  Any flags that you want to pass to the runtime. Note that in thread mode, these flags have no impact.\n- **fqfn**\n  The Fully Qualified Function Name (FQFN) for the Pulsar Function.\n- **inputSpecs**\n   The map of input topics to its consumer configuration, each configuration has schema of    {\"schemaType\": \"type-x\", \"serdeClassName\": \"name-x\", \"isRegexPattern\": true, \"receiverQueueSize\": 5}\n- **inputs**\n  The input topic or topics (multiple topics can be specified as a comma-separated list) of a Pulsar Function.\n- **jar**\n  Path to the JAR file for the Pulsar Function (if the Pulsar Function is written in Java).   It also supports URL path [http/https/file (file protocol assumes that file   already exists on worker host)] from which worker can download the package.\n- **py**\n  Path to the main Python file or Python wheel file for the Pulsar Function (if the Pulsar Function is written in Python).\n- **go**\n  Path to the main Go executable binary for the Pulsar Function (if the Pulsar Function is written in Go).\n- **logTopic**\n  The topic to which the logs of a Pulsar Function are produced.\n- **maxMessageRetries**\n  How many times should we try to process a message before giving up.\n- **output**\n  The output topic of a Pulsar Function (If none is specified, no output is written).\n- **outputSerdeClassName**\n  The SerDe class to be used for messages output by the Pulsar Function.\n- **parallelism**\n  The parallelism factor of a Pulsar Function (i.e. the number of a Pulsar Function instances to run).\n- **processingGuarantees**\n  The processing guarantees (that is, delivery semantics) applied to the Pulsar Function.  Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]\n- **retainOrdering**\n  Function consumes and processes messages in order.\n- **outputSchemaType**\n   Represents either a builtin schema type (for example: 'avro', 'json', ect) or the class name for a Schema implementation.- **subName**\n  Pulsar source subscription name. User can specify a subscription-name for the input-topic consumer.\n- **windowConfig**\n  The window configuration of a Pulsar Function.\n- **timeoutMs**\n  The message timeout in milliseconds.\n- **topicsPattern**\n  The topic pattern to consume from a list of topics under a namespace that match the pattern.  [input] and [topic-pattern] are mutually exclusive. Add SerDe class name for a   pattern in customSerdeInputs (supported for java fun only)\n- **userConfig**\n  A map of user-defined configurations (specified as a JSON object).\n- **secrets**\n  This is a map of secretName(that is how the secret is going to be accessed in the Pulsar Function via context) to an object that  encapsulates how the secret is fetched by the underlying secrets provider. The type of an value here can be found by the  SecretProviderConfigurator.getSecretObjectType() method. \n- **cleanupSubscription**\n  Whether the subscriptions of a Pulsar Function created or used should be deleted when the Pulsar Function is deleted.\n",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
-                            "$ref": "#/definitions/FunctionConfig"
-                        },
-                        "x-examples": {
-                            "application/json": "{\n  \"inputs\": \"persistent://public/default/input-topic\",\n  \"parallelism\": 4,\n  \"output\": \"persistent://public/default/output-topic\",\n  \"log-topic\": \"persistent://public/default/log-topic\",\n  \"classname\": \"org.example.test.ExclamationFunction\",\n  \"jar\": \"java-function-1.0-SNAPSHOT.jar\"\n}"
-                        }
-                    },
-                    {
-                        "description": "The update options is for the Pulsar Function that needs to be updated.",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UpdateOptions"
+                            "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "functionConfig": {
+                                        "$ref": "#/components/schemas/FunctionConfig"
+                                    },
+                                    "updateOptions": {
+                                        "$ref": "#/components/schemas/UpdateOptions"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Pulsar Function successfully updated"
@@ -1281,36 +1184,35 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/restart": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_restartFunction",
+                "operationId": "restartFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1334,36 +1236,35 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/start": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_startFunction",
+                "operationId": "startFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1387,50 +1288,55 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/state/{key}": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getFunctionState",
+                "operationId": "getFunctionState",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The stats key",
                         "in": "path",
                         "name": "key",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/FunctionState"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FunctionState"
+                                }
+                            }
+                        },
+                        "description": "Fetch the current state associated with a Pulsar Function"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -1451,40 +1357,55 @@
                 ]
             },
             "post": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_putFunctionState",
+                "operationId": "putFunctionState",
                 "parameters": [
                     {
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "path",
                         "name": "key",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "state": {
+                                        "$ref": "#/components/schemas/FunctionState"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Operation successful"
@@ -1510,43 +1431,46 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/stats": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getFunctionStats",
+                "operationId": "getFunctionStats",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/FunctionStatsImpl"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FunctionStatsImpl"
+                                }
+                            }
+                        },
+                        "description": "Displays the stats of a Pulsar Function"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this function"
@@ -1569,43 +1493,46 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/status": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getFunctionStatus",
+                "operationId": "getFunctionStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/FunctionStatus"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FunctionStatus"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Function"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this function"
@@ -1628,36 +1555,35 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/stop": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_stopFunction",
+                "operationId": "stopFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1681,70 +1607,69 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/trigger": {
             "post": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_triggerFunction",
+                "operationId": "triggerFunction",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "The value with which you want to trigger the Pulsar Function",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "The path to the file that contains the data with which you'd like to trigger the Pulsar Function",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/InputStream"
-                        }
-                    },
-                    {
-                        "description": "The specific topic name that the Pulsar Function consumes from which you want to inject the data to",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
                             "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "description": "The value with which you want to trigger the Pulsar Function",
+                                        "type": "string"
+                                    },
+                                    "dataStream": {
+                                        "description": "The path to the file that contains the data with which you'd like to trigger the Pulsar Function",
+                                        "type": "object"
+                                    },
+                                    "topic": {
+                                        "description": "The specific topic name that the Pulsar Function consumes from which you want to inject the data to",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Triggers a Pulsar Function with a user-specified value or file data"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -1767,43 +1692,44 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/{instanceId}/restart": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_restartFunction",
+                "operationId": "restartFunction_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, all instances are restarted",
+                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, all instances are restarted)",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1830,43 +1756,44 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/{instanceId}/start": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_startFunction",
+                "operationId": "startFunction_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, all instances sre started. ",
+                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, all instances are started.)",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1890,50 +1817,55 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/{instanceId}/stats": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getFunctionInstanceStats",
+                "operationId": "getFunctionInstanceStats",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, the stats of all instances is returned",
+                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, the stats of all instances is returned)",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/FunctionInstanceStatsDataImpl"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FunctionInstanceStatsDataImpl"
+                                }
+                            }
+                        },
+                        "description": "Displays the stats of a Pulsar Function instance"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this function"
@@ -1956,50 +1888,55 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/{instanceId}/status": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_getFunctionInstanceStatus",
+                "operationId": "getFunctionInstanceStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, the stats of all instances is returned",
+                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, the stats of all instances is returned)",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/FunctionInstanceStatusData"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FunctionInstanceStatusData"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Function instance"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this function"
@@ -2022,43 +1959,44 @@
         },
         "/functions/{tenant}/{namespace}/{functionName}/{instanceId}/stop": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "FunctionsBase_stopFunction",
+                "operationId": "stopFunction_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Function",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Function",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Function",
                         "in": "path",
                         "name": "functionName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, all instances are stopped. ",
+                        "description": "The instanceId of a Pulsar Function (if instance-id is not provided, all instances are stopped.)",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -2081,13 +2019,14 @@
             }
         }
     },
-    "schemes": [
-        "http",
-        "https"
+    "servers": [
+        {
+            "url": "/admin/v3"
+        }
     ],
-    "swagger": "2.0",
     "tags": [
         {
+            "description": "Functions admin apis",
             "name": "functions"
         }
     ]

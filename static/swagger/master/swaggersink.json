@@ -1,522 +1,429 @@
 {
-    "basePath": "/admin/v3",
-    "definitions": {
-        "AuthenticationDataSource": {
-            "properties": {
-                "commandData": {
-                    "type": "string"
-                },
-                "httpAuthType": {
-                    "type": "string"
-                },
-                "peerAddress": {
-                    "$ref": "#/definitions/SocketAddress"
-                },
-                "subscription": {
-                    "type": "string"
-                },
-                "tlsCertificates": {
-                    "items": {
-                        "$ref": "#/definitions/Certificate"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "AuthenticationParameters": {
-            "properties": {
-                "clientAuthenticationDataSource": {
-                    "$ref": "#/definitions/AuthenticationDataSource"
-                },
-                "clientRole": {
-                    "type": "string"
-                },
-                "originalPrincipal": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Certificate": {
-            "properties": {
-                "encoded": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "publicKey": {
-                    "$ref": "#/definitions/PublicKey"
-                },
-                "type": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFuture": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFutureClusterData": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFutureVoid": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "ConfigFieldDefinition": {
-            "properties": {
-                "attributes": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "type": "object"
-                },
-                "fieldName": {
-                    "type": "string"
-                },
-                "typeName": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "ConnectorDefinition": {
-            "properties": {
-                "description": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "sinkClass": {
-                    "type": "string"
-                },
-                "sinkConfigClass": {
-                    "type": "string"
-                },
-                "sourceClass": {
-                    "type": "string"
-                },
-                "sourceConfigClass": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "ConsumerConfig": {
-            "properties": {
-                "consumerProperties": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "type": "object"
-                },
-                "cryptoConfig": {
-                    "$ref": "#/definitions/CryptoConfig"
-                },
-                "messagePayloadProcessorConfig": {
-                    "$ref": "#/definitions/MessagePayloadProcessorConfig"
-                },
-                "poolMessages": {
-                    "type": "boolean"
-                },
-                "receiverQueueSize": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "regexPattern": {
-                    "type": "boolean"
-                },
-                "schemaProperties": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "type": "object"
-                },
-                "schemaType": {
-                    "type": "string"
-                },
-                "serdeClassName": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "CryptoConfig": {
-            "properties": {
-                "consumerCryptoFailureAction": {
-                    "enum": [
-                        "FAIL",
-                        "DISCARD",
-                        "CONSUME"
-                    ],
-                    "type": "string"
-                },
-                "cryptoKeyReaderClassName": {
-                    "type": "string"
-                },
-                "cryptoKeyReaderConfig": {
-                    "additionalProperties": {
+    "components": {
+        "schemas": {
+            "ConfigFieldDefinition": {
+                "properties": {
+                    "attributes": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
-                },
-                "encryptionKeys": {
-                    "items": {
+                    "fieldName": {
                         "type": "string"
                     },
-                    "type": "array"
+                    "typeName": {
+                        "type": "string"
+                    }
                 },
-                "producerCryptoFailureAction": {
-                    "enum": [
-                        "FAIL",
-                        "SEND"
-                    ],
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "ExceptionInformation": {
-            "properties": {
-                "exceptionString": {
-                    "type": "string"
+            "ConnectorDefinition": {
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "sinkClass": {
+                        "type": "string"
+                    },
+                    "sinkConfigClass": {
+                        "type": "string"
+                    },
+                    "sourceClass": {
+                        "type": "string"
+                    },
+                    "sourceConfigClass": {
+                        "type": "string"
+                    }
                 },
-                "timestampMs": {
-                    "format": "int64",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "MessagePayloadProcessorConfig": {
-            "properties": {
-                "className": {
-                    "type": "string"
-                },
-                "config": {
-                    "additionalProperties": {
+            "ConsumerConfig": {
+                "properties": {
+                    "consumerProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
-                }
-            },
-            "type": "object"
-        },
-        "PublicKey": {
-            "properties": {
-                "algorithm": {
-                    "type": "string"
-                },
-                "encoded": {
-                    "items": {
-                        "format": "byte",
-                        "type": "string"
+                    "cryptoConfig": {
+                        "$ref": "#/components/schemas/CryptoConfig"
                     },
-                    "type": "array"
-                },
-                "format": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Resources": {
-            "properties": {
-                "cpu": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "disk": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "ram": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "SinkConfig": {
-            "properties": {
-                "archive": {
-                    "type": "string"
-                },
-                "autoAck": {
-                    "type": "boolean"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "cleanupSubscription": {
-                    "type": "boolean"
-                },
-                "configs": {
-                    "additionalProperties": {
+                    "messagePayloadProcessorConfig": {
+                        "$ref": "#/components/schemas/MessagePayloadProcessorConfig"
+                    },
+                    "poolMessages": {
+                        "type": "boolean"
+                    },
+                    "receiverQueueSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "regexPattern": {
+                        "type": "boolean"
+                    },
+                    "schemaProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
-                },
-                "customRuntimeOptions": {
-                    "type": "string"
-                },
-                "deadLetterTopic": {
-                    "type": "string"
-                },
-                "inputSpecs": {
-                    "additionalProperties": {
-                        "$ref": "#/definitions/ConsumerConfig"
-                    },
-                    "type": "object"
-                },
-                "inputs": {
-                    "items": {
+                    "schemaType": {
                         "type": "string"
                     },
-                    "type": "array"
+                    "serdeClassName": {
+                        "type": "string"
+                    }
                 },
-                "logTopic": {
-                    "type": "string"
-                },
-                "maxMessageRetries": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "namespace": {
-                    "type": "string"
-                },
-                "negativeAckRedeliveryDelayMs": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "parallelism": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "processingGuarantees": {
-                    "enum": [
-                        "ATLEAST_ONCE",
-                        "ATMOST_ONCE",
-                        "EFFECTIVELY_ONCE",
-                        "MANUAL"
-                    ],
-                    "type": "string"
-                },
-                "resources": {
-                    "$ref": "#/definitions/Resources"
-                },
-                "retainKeyOrdering": {
-                    "type": "boolean"
-                },
-                "retainOrdering": {
-                    "type": "boolean"
-                },
-                "runtimeFlags": {
-                    "type": "string"
-                },
-                "secrets": {
-                    "additionalProperties": {
+                "type": "object"
+            },
+            "CryptoConfig": {
+                "properties": {
+                    "consumerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "DISCARD",
+                            "CONSUME"
+                        ],
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderClassName": {
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderConfig": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
+                    "encryptionKeys": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "producerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "SEND"
+                        ],
+                        "type": "string"
+                    }
                 },
-                "sinkType": {
-                    "type": "string"
-                },
-                "sourceSubscriptionName": {
-                    "type": "string"
-                },
-                "sourceSubscriptionPosition": {
-                    "enum": [
-                        "Latest",
-                        "Earliest"
-                    ],
-                    "type": "string"
-                },
-                "tenant": {
-                    "type": "string"
-                },
-                "timeoutMs": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "topicToSchemaProperties": {
-                    "additionalProperties": {
+                "type": "object"
+            },
+            "ExceptionInformation": {
+                "properties": {
+                    "exceptionString": {
                         "type": "string"
                     },
-                    "type": "object"
+                    "timestampMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "topicToSchemaType": {
-                    "additionalProperties": {
+                "type": "object"
+            },
+            "FormDataContentDisposition": {
+                "properties": {
+                    "creationDate": {
+                        "format": "date-time",
                         "type": "string"
                     },
-                    "type": "object"
-                },
-                "topicToSerdeClassName": {
-                    "additionalProperties": {
+                    "fileName": {
                         "type": "string"
                     },
-                    "type": "object"
-                },
-                "topicsPattern": {
-                    "type": "string"
-                },
-                "transformFunction": {
-                    "type": "string"
-                },
-                "transformFunctionClassName": {
-                    "type": "string"
-                },
-                "transformFunctionConfig": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "SinkInstanceStatus": {
-            "properties": {
-                "instanceId": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "status": {
-                    "$ref": "#/definitions/SinkInstanceStatusData"
-                }
-            },
-            "type": "object"
-        },
-        "SinkInstanceStatusData": {
-            "properties": {
-                "error": {
-                    "type": "string"
-                },
-                "lastReceivedTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "latestSinkExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/ExceptionInformation"
+                    "modificationDate": {
+                        "format": "date-time",
+                        "type": "string"
                     },
-                    "type": "array"
-                },
-                "latestSystemExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/ExceptionInformation"
+                    "name": {
+                        "type": "string"
                     },
-                    "type": "array"
-                },
-                "numReadFromPulsar": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numRestarts": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numSinkExceptions": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numSystemExceptions": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numWrittenToSink": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "running": {
-                    "type": "boolean"
-                },
-                "workerId": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "SinkStatus": {
-            "properties": {
-                "instances": {
-                    "items": {
-                        "$ref": "#/definitions/SinkInstanceStatus"
+                    "parameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
                     },
-                    "type": "array"
+                    "readDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
                 },
-                "numInstances": {
-                    "format": "int32",
-                    "type": "integer"
+                "type": "object"
+            },
+            "MessagePayloadProcessorConfig": {
+                "properties": {
+                    "className": {
+                        "type": "string"
+                    },
+                    "config": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    }
                 },
-                "numRunning": {
-                    "format": "int32",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "SocketAddress": {
-            "type": "object"
-        },
-        "UpdateOptions": {
-            "description": "Options while updating the sink",
-            "properties": {
-                "update-auth-data": {
-                    "description": "Whether or not to update the auth data",
-                    "type": "boolean"
-                }
+            "Resources": {
+                "properties": {
+                    "cpu": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "disk": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ram": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
             },
-            "type": "object"
+            "SinkConfig": {
+                "properties": {
+                    "archive": {
+                        "type": "string"
+                    },
+                    "autoAck": {
+                        "type": "boolean"
+                    },
+                    "className": {
+                        "type": "string"
+                    },
+                    "cleanupSubscription": {
+                        "type": "boolean"
+                    },
+                    "configs": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "customRuntimeOptions": {
+                        "type": "string"
+                    },
+                    "deadLetterTopic": {
+                        "type": "string"
+                    },
+                    "inputSpecs": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ConsumerConfig"
+                        },
+                        "type": "object"
+                    },
+                    "inputs": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "logTopic": {
+                        "type": "string"
+                    },
+                    "maxMessageRetries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "namespace": {
+                        "type": "string"
+                    },
+                    "negativeAckRedeliveryDelayMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "parallelism": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "processingGuarantees": {
+                        "enum": [
+                            "ATLEAST_ONCE",
+                            "ATMOST_ONCE",
+                            "EFFECTIVELY_ONCE",
+                            "MANUAL"
+                        ],
+                        "type": "string"
+                    },
+                    "resources": {
+                        "$ref": "#/components/schemas/Resources"
+                    },
+                    "retainKeyOrdering": {
+                        "type": "boolean"
+                    },
+                    "retainOrdering": {
+                        "type": "boolean"
+                    },
+                    "runtimeFlags": {
+                        "type": "string"
+                    },
+                    "secrets": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "sinkType": {
+                        "type": "string"
+                    },
+                    "sourceSubscriptionName": {
+                        "type": "string"
+                    },
+                    "sourceSubscriptionPosition": {
+                        "enum": [
+                            "Latest",
+                            "Earliest"
+                        ],
+                        "type": "string"
+                    },
+                    "tenant": {
+                        "type": "string"
+                    },
+                    "timeoutMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "topicToSchemaProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "topicToSchemaType": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "topicToSerdeClassName": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "topicsPattern": {
+                        "type": "string"
+                    },
+                    "transformFunction": {
+                        "type": "string"
+                    },
+                    "transformFunctionClassName": {
+                        "type": "string"
+                    },
+                    "transformFunctionConfig": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkInstanceStatus": {
+                "properties": {
+                    "instanceId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/SinkInstanceStatusData"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkInstanceStatusData": {
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    },
+                    "lastReceivedTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "latestSinkExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "latestSystemExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "numReadFromPulsar": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numRestarts": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSinkExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSystemExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numWrittenToSink": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "running": {
+                        "type": "boolean"
+                    },
+                    "workerId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkStatus": {
+                "properties": {
+                    "instances": {
+                        "items": {
+                            "$ref": "#/components/schemas/SinkInstanceStatus"
+                        },
+                        "type": "array"
+                    },
+                    "numInstances": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numRunning": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateOptions": {
+                "description": "Options while updating the sink",
+                "properties": {
+                    "update-auth-data": {
+                        "description": "Whether or not to update the auth data",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "info": {
@@ -528,26 +435,24 @@
         "title": "Pulsar Sink REST API",
         "version": "v3"
     },
+    "openapi": "3.0.1",
     "paths": {
         "/sinks/builtinsinks": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_getSinkList",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "getSinkList",
                 "responses": {
                     "200": {
-                        "description": "Get builtin sinks successfully.",
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ConnectorDefinition"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConnectorDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Get builtin sinks successfully."
                     }
                 },
                 "summary": "Fetches the list of built-in Pulsar IO sinks",
@@ -558,32 +463,31 @@
         },
         "/sinks/builtinsinks/{name}/configdefinition": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_getSinkConfigDefinition",
+                "operationId": "getSinkConfigDefinition",
                 "parameters": [
                     {
                         "description": "The name of the builtin sink",
                         "in": "path",
                         "name": "name",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ConfigFieldDefinition"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConfigFieldDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about config fields associated with the specified builtin sink"
                     },
                     "403": {
                         "description": "The requester doesn't have admin permissions"
@@ -606,15 +510,14 @@
         },
         "/sinks/reloadBuiltInSinks": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_reloadSinks",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "reloadSinks",
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Reload the built-in connectors, including Sources and Sinks"
+                    },
                     "401": {
                         "description": "This operation requires super-user access"
                     },
@@ -633,36 +536,40 @@
         },
         "/sinks/{tenant}/{namespace}": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_listSinks",
+                "operationId": "listSinks",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
                         "schema": {
                             "type": "string"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Lists all Pulsar Sinks currently deployed in a given namespace"
                     },
                     "400": {
                         "description": "Invalid list request"
@@ -685,36 +592,35 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}": {
             "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_deregisterSink",
+                "operationId": "deregisterSink",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -745,43 +651,46 @@
                 ]
             },
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_getSinkInfo",
+                "operationId": "getSinkInfo",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/SinkConfig"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinkConfig"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about a Pulsar Sink currently running in cluster mode"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -799,49 +708,53 @@
                 ]
             },
             "post": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "SinksBase_registerSink",
+                "operationId": "registerSink",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "You can submit a sink (in any languages that you are familiar with) to a Pulsar cluster. Follow the steps below.\n1. Create a JSON object using some of the following parameters.\nA JSON value presenting config payload of a Pulsar Sink. All available configuration options are:\n- **classname**\n   The class name of a Pulsar Sink if archive is file-url-path (file://)\n- **sourceSubscriptionName**\n   Pulsar source subscription name if user wants a specific\n   subscription-name for input-topic consumer\n- **inputs**\n   The input topic or topics of a Pulsar Sink (specified as a JSON array)\n- **topicsPattern**\n   TopicsPattern to consume from list of topics under a namespace that    match the pattern. [input] and [topicsPattern] are mutually    exclusive. Add SerDe class name for a pattern in customSerdeInputs    (supported for java fun only)- **topicToSerdeClassName**\n   The map of input topics to SerDe class names (specified as a JSON object)\n- **topicToSchemaType**\n   The map of input topics to Schema types or class names (specified as a JSON object)\n- **inputSpecs**\n   The map of input topics to its consumer configuration, each configuration has schema of    {\"schemaType\": \"type-x\", \"serdeClassName\": \"name-x\", \"isRegexPattern\": true, \"receiverQueueSize\": 5}\n- **configs**\n   The map of configs (specified as a JSON object)\n- **secrets**\n   a map of secretName(aka how the secret is going to be \n   accessed in the function via context) to an object that \n   encapsulates how the secret is fetched by the underlying \n   secrets provider. The type of an value here can be found by the \n   SecretProviderConfigurator.getSecretObjectType() method. (specified as a JSON object)\n- **parallelism**\n   The parallelism factor of a Pulsar Sink (i.e. the number of a Pulsar Sink instances to run \n- **processingGuarantees**\n   The processing guarantees (aka delivery semantics) applied to the Pulsar Sink. Possible Values: \"ATLEAST_ONCE\", \"ATMOST_ONCE\", \"EFFECTIVELY_ONCE\"\n- **retainOrdering**\n   Boolean denotes whether the Pulsar Sink consumes and processes messages in order\n- **resources**\n   {\"cpu\": 1, \"ram\": 2, \"disk\": 3} The CPU (in cores), RAM (in bytes) and disk (in bytes) that needs to be allocated per Pulsar Sink instance (applicable only to Docker runtime)\n- **autoAck**\n   Boolean denotes whether or not the framework will automatically acknowledge messages\n- **timeoutMs**\n   Long denotes the message timeout in milliseconds\n- **cleanupSubscription**\n   Boolean denotes whether the subscriptions the functions created/used should be deleted when the functions is deleted\n- **runtimeFlags**\n   Any flags that you want to pass to the runtime as a single string\n2. Encapsulate the JSON object to a multipart object.",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
-                            "$ref": "#/definitions/SinkConfig"
-                        },
-                        "x-examples": {
-                            "text/plain": "Example\n1. Create a JSON object.\n {\n  \"classname\": \"org.example.MySinkTest\",\n  \"inputs\": [\"persistent://public/default/sink-input\"],\n  \"processingGuarantees\": \"EFFECTIVELY_ONCE\",\n  \"parallelism\": \"10\"\n }\n2. Encapsulate the JSON object to a multipart object (in Python).\nfrom requests_toolbelt.multipart.encoder import MultipartEncoder\nmp_encoder = MultipartEncoder( [('sinkConfig',(None, json.dumps(config), 'application/json'))])"
+                            "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Pulsar Sink successfully created"
@@ -865,58 +778,56 @@
                 ]
             },
             "put": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "SinksBase_updateSink",
+                "operationId": "updateSink",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "A JSON value presenting config payload of a Pulsar Sink. All available configuration options are:\n- **classname**\n   The class name of a Pulsar Sink if archive is file-url-path (file://)\n- **sourceSubscriptionName**\n   Pulsar source subscription name if user wants a specific\n   subscription-name for input-topic consumer\n- **inputs**\n   The input topic or topics of a Pulsar Sink (specified as a JSON array)\n- **topicsPattern**\n   TopicsPattern to consume from list of topics under a namespace that    match the pattern. [input] and [topicsPattern] are mutually    exclusive. Add SerDe class name for a pattern in customSerdeInputs    (supported for java fun only)- **topicToSerdeClassName**\n   The map of input topics to SerDe class names (specified as a JSON object)\n- **topicToSchemaType**\n   The map of input topics to Schema types or class names (specified as a JSON object)\n- **inputSpecs**\n   The map of input topics to its consumer configuration, each configuration has schema of    {\"schemaType\": \"type-x\", \"serdeClassName\": \"name-x\", \"isRegexPattern\": true, \"receiverQueueSize\": 5}\n- **configs**\n   The map of configs (specified as a JSON object)\n- **secrets**\n   a map of secretName(aka how the secret is going to be \n   accessed in the function via context) to an object that \n   encapsulates how the secret is fetched by the underlying \n   secrets provider. The type of an value here can be found by the \n   SecretProviderConfigurator.getSecretObjectType() method. (specified as a JSON object)\n- **parallelism**\n   The parallelism factor of a Pulsar Sink (i.e. the number of a Pulsar Sink instances to run \n- **processingGuarantees**\n   The processing guarantees (aka delivery semantics) applied to the Pulsar Sink. Possible Values: \"ATLEAST_ONCE\", \"ATMOST_ONCE\", \"EFFECTIVELY_ONCE\"\n- **retainOrdering**\n   Boolean denotes whether the Pulsar Sink consumes and processes messages in order\n- **resources**\n   {\"cpu\": 1, \"ram\": 2, \"disk\": 3} The CPU (in cores), RAM (in bytes) and disk (in bytes) that needs to be allocated per Pulsar Sink instance (applicable only to Docker runtime)\n- **autoAck**\n   Boolean denotes whether or not the framework will automatically acknowledge messages\n- **timeoutMs**\n   Long denotes the message timeout in milliseconds\n- **cleanupSubscription**\n   Boolean denotes whether the subscriptions the functions created/used should be deleted when the functions is deleted\n- **runtimeFlags**\n   Any flags that you want to pass to the runtime as a single string\n",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
-                            "$ref": "#/definitions/SinkConfig"
-                        },
-                        "x-examples": {
-                            "application/json": "{\n\"classname\": \"org.example.SinkStressTest\",\n\"inputs\": [\"persistent://public/default/sink-input\"],\n\"processingGuarantees\": \"EFFECTIVELY_ONCE\",\n\"parallelism\": 5\n}"
-                        }
-                    },
-                    {
-                        "description": "Update options for the Pulsar Sink",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UpdateOptions"
+                            "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "updateOptions": {
+                                        "$ref": "#/components/schemas/UpdateOptions"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Pulsar Sink successfully updated"
@@ -945,36 +856,35 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/restart": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_restartSink",
+                "operationId": "restartSink",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1004,36 +914,35 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/start": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_startSink",
+                "operationId": "startSink",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1063,43 +972,46 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/status": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_getSinkStatus",
+                "operationId": "getSinkStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/SinkStatus"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinkStatus"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Sink running in cluster mode"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this sink"
@@ -1125,36 +1037,35 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/stop": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_stopSink",
+                "operationId": "stopSink",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1184,43 +1095,44 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/restart": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_restartSink",
+                "operationId": "restartSink_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Sink",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1253,43 +1165,44 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/start": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_startSink",
+                "operationId": "startSink_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Sink",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1319,50 +1232,55 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/status": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_getSinkInstanceStatus",
+                "operationId": "getSinkInstanceStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Sink",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/SinkInstanceStatusData"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinkInstanceStatusData"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Sink instance"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this sink"
@@ -1388,43 +1306,44 @@
         },
         "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/stop": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SinksBase_stopSink",
+                "operationId": "stopSink_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Sink",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Sink",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Sink",
                         "in": "path",
                         "name": "sinkName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Sink",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1453,13 +1372,14 @@
             }
         }
     },
-    "schemes": [
-        "http",
-        "https"
+    "servers": [
+        {
+            "url": "/admin/v3"
+        }
     ],
-    "swagger": "2.0",
     "tags": [
         {
+            "description": "Sinks admin apis",
             "name": "sinks"
         }
     ]

@@ -1,484 +1,391 @@
 {
-    "basePath": "/admin/v3",
-    "definitions": {
-        "AuthenticationDataSource": {
-            "properties": {
-                "commandData": {
-                    "type": "string"
-                },
-                "httpAuthType": {
-                    "type": "string"
-                },
-                "peerAddress": {
-                    "$ref": "#/definitions/SocketAddress"
-                },
-                "subscription": {
-                    "type": "string"
-                },
-                "tlsCertificates": {
-                    "items": {
-                        "$ref": "#/definitions/Certificate"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "AuthenticationParameters": {
-            "properties": {
-                "clientAuthenticationDataSource": {
-                    "$ref": "#/definitions/AuthenticationDataSource"
-                },
-                "clientRole": {
-                    "type": "string"
-                },
-                "originalPrincipal": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "BatchSourceConfig": {
-            "properties": {
-                "discoveryTriggererClassName": {
-                    "type": "string"
-                },
-                "discoveryTriggererConfig": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
-                    "type": "object"
-                }
-            },
-            "type": "object"
-        },
-        "BatchingConfig": {
-            "properties": {
-                "batchBuilder": {
-                    "type": "string"
-                },
-                "batchingMaxBytes": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "batchingMaxMessages": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "batchingMaxPublishDelayMs": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "roundRobinRouterBatchingPartitionSwitchFrequency": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "Certificate": {
-            "properties": {
-                "encoded": {
-                    "items": {
-                        "format": "byte",
+    "components": {
+        "schemas": {
+            "BatchSourceConfig": {
+                "properties": {
+                    "discoveryTriggererClassName": {
                         "type": "string"
                     },
-                    "type": "array"
+                    "discoveryTriggererConfig": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    }
                 },
-                "publicKey": {
-                    "$ref": "#/definitions/PublicKey"
-                },
-                "type": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "CompletableFuture": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFutureClusterData": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "CompletableFutureVoid": {
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "completedExceptionally": {
-                    "type": "boolean"
-                },
-                "done": {
-                    "type": "boolean"
-                },
-                "numberOfDependents": {
-                    "format": "int32",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "ConfigFieldDefinition": {
-            "properties": {
-                "attributes": {
-                    "additionalProperties": {
+            "BatchingConfig": {
+                "properties": {
+                    "batchBuilder": {
                         "type": "string"
                     },
-                    "type": "object"
+                    "batchingMaxBytes": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "batchingMaxMessages": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "batchingMaxPublishDelayMs": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "roundRobinRouterBatchingPartitionSwitchFrequency": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
                 },
-                "fieldName": {
-                    "type": "string"
-                },
-                "typeName": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "ConnectorDefinition": {
-            "properties": {
-                "description": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "sinkClass": {
-                    "type": "string"
-                },
-                "sinkConfigClass": {
-                    "type": "string"
-                },
-                "sourceClass": {
-                    "type": "string"
-                },
-                "sourceConfigClass": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "CryptoConfig": {
-            "properties": {
-                "consumerCryptoFailureAction": {
-                    "enum": [
-                        "FAIL",
-                        "DISCARD",
-                        "CONSUME"
-                    ],
-                    "type": "string"
-                },
-                "cryptoKeyReaderClassName": {
-                    "type": "string"
-                },
-                "cryptoKeyReaderConfig": {
-                    "additionalProperties": {
+            "ConfigFieldDefinition": {
+                "properties": {
+                    "attributes": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
-                },
-                "encryptionKeys": {
-                    "items": {
+                    "fieldName": {
                         "type": "string"
                     },
-                    "type": "array"
+                    "typeName": {
+                        "type": "string"
+                    }
                 },
-                "producerCryptoFailureAction": {
-                    "enum": [
-                        "FAIL",
-                        "SEND"
-                    ],
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "ExceptionInformation": {
-            "properties": {
-                "exceptionString": {
-                    "type": "string"
-                },
-                "timestampMs": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "ProducerConfig": {
-            "properties": {
-                "batchBuilder": {
-                    "type": "string"
-                },
-                "batchingConfig": {
-                    "$ref": "#/definitions/BatchingConfig"
-                },
-                "compressionType": {
-                    "enum": [
-                        "NONE",
-                        "LZ4",
-                        "ZLIB",
-                        "ZSTD",
-                        "SNAPPY"
-                    ],
-                    "type": "string"
-                },
-                "cryptoConfig": {
-                    "$ref": "#/definitions/CryptoConfig"
-                },
-                "maxPendingMessages": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "maxPendingMessagesAcrossPartitions": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "useThreadLocalProducers": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
-        "PublicKey": {
-            "properties": {
-                "algorithm": {
-                    "type": "string"
-                },
-                "encoded": {
-                    "items": {
-                        "format": "byte",
+            "ConnectorDefinition": {
+                "properties": {
+                    "description": {
                         "type": "string"
                     },
-                    "type": "array"
+                    "name": {
+                        "type": "string"
+                    },
+                    "sinkClass": {
+                        "type": "string"
+                    },
+                    "sinkConfigClass": {
+                        "type": "string"
+                    },
+                    "sourceClass": {
+                        "type": "string"
+                    },
+                    "sourceConfigClass": {
+                        "type": "string"
+                    }
                 },
-                "format": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "Resources": {
-            "properties": {
-                "cpu": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "disk": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "ram": {
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "SocketAddress": {
-            "type": "object"
-        },
-        "SourceConfig": {
-            "properties": {
-                "archive": {
-                    "type": "string"
-                },
-                "batchBuilder": {
-                    "type": "string"
-                },
-                "batchSourceConfig": {
-                    "$ref": "#/definitions/BatchSourceConfig"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "configs": {
-                    "additionalProperties": {
+            "CryptoConfig": {
+                "properties": {
+                    "consumerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "DISCARD",
+                            "CONSUME"
+                        ],
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderClassName": {
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderConfig": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
+                    "encryptionKeys": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "producerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "SEND"
+                        ],
+                        "type": "string"
+                    }
                 },
-                "customRuntimeOptions": {
-                    "type": "string"
+                "type": "object"
+            },
+            "ExceptionInformation": {
+                "properties": {
+                    "exceptionString": {
+                        "type": "string"
+                    },
+                    "timestampMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "logTopic": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "namespace": {
-                    "type": "string"
-                },
-                "parallelism": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "processingGuarantees": {
-                    "enum": [
-                        "ATLEAST_ONCE",
-                        "ATMOST_ONCE",
-                        "EFFECTIVELY_ONCE",
-                        "MANUAL"
-                    ],
-                    "type": "string"
-                },
-                "producerConfig": {
-                    "$ref": "#/definitions/ProducerConfig"
-                },
-                "resources": {
-                    "$ref": "#/definitions/Resources"
-                },
-                "runtimeFlags": {
-                    "type": "string"
-                },
-                "schemaType": {
-                    "type": "string"
-                },
-                "secrets": {
-                    "additionalProperties": {
+                "type": "object"
+            },
+            "FormDataContentDisposition": {
+                "properties": {
+                    "creationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "modificationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "type": "object"
                     },
-                    "type": "object"
-                },
-                "serdeClassName": {
-                    "type": "string"
-                },
-                "sourceType": {
-                    "type": "string"
-                },
-                "tenant": {
-                    "type": "string"
-                },
-                "topicName": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "SourceInstanceStatus": {
-            "properties": {
-                "instanceId": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "status": {
-                    "$ref": "#/definitions/SourceInstanceStatusData"
-                }
-            },
-            "type": "object"
-        },
-        "SourceInstanceStatusData": {
-            "properties": {
-                "error": {
-                    "type": "string"
-                },
-                "lastReceivedTime": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "latestSourceExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/ExceptionInformation"
+                    "readDate": {
+                        "format": "date-time",
+                        "type": "string"
                     },
-                    "type": "array"
-                },
-                "latestSystemExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/ExceptionInformation"
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
                     },
-                    "type": "array"
+                    "type": {
+                        "type": "string"
+                    }
                 },
-                "numReceivedFromSource": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numRestarts": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numSourceExceptions": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numSystemExceptions": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "numWritten": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "running": {
-                    "type": "boolean"
-                },
-                "workerId": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "SourceStatus": {
-            "properties": {
-                "instances": {
-                    "items": {
-                        "$ref": "#/definitions/SourceInstanceStatus"
+            "ProducerConfig": {
+                "properties": {
+                    "batchBuilder": {
+                        "type": "string"
                     },
-                    "type": "array"
+                    "batchingConfig": {
+                        "$ref": "#/components/schemas/BatchingConfig"
+                    },
+                    "compressionType": {
+                        "enum": [
+                            "NONE",
+                            "LZ4",
+                            "ZLIB",
+                            "ZSTD",
+                            "SNAPPY"
+                        ],
+                        "type": "string"
+                    },
+                    "cryptoConfig": {
+                        "$ref": "#/components/schemas/CryptoConfig"
+                    },
+                    "maxPendingMessages": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "maxPendingMessagesAcrossPartitions": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "useThreadLocalProducers": {
+                        "type": "boolean"
+                    }
                 },
-                "numInstances": {
-                    "format": "int32",
-                    "type": "integer"
+                "type": "object"
+            },
+            "Resources": {
+                "properties": {
+                    "cpu": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "disk": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ram": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "numRunning": {
-                    "format": "int32",
-                    "type": "integer"
-                }
+                "type": "object"
             },
-            "type": "object"
-        },
-        "UpdateOptions": {
-            "description": "Options while updating the sink",
-            "properties": {
-                "update-auth-data": {
-                    "description": "Whether or not to update the auth data",
-                    "type": "boolean"
-                }
+            "SourceConfig": {
+                "properties": {
+                    "archive": {
+                        "type": "string"
+                    },
+                    "batchBuilder": {
+                        "type": "string"
+                    },
+                    "batchSourceConfig": {
+                        "$ref": "#/components/schemas/BatchSourceConfig"
+                    },
+                    "className": {
+                        "type": "string"
+                    },
+                    "configs": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "customRuntimeOptions": {
+                        "type": "string"
+                    },
+                    "logTopic": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "namespace": {
+                        "type": "string"
+                    },
+                    "parallelism": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "processingGuarantees": {
+                        "enum": [
+                            "ATLEAST_ONCE",
+                            "ATMOST_ONCE",
+                            "EFFECTIVELY_ONCE",
+                            "MANUAL"
+                        ],
+                        "type": "string"
+                    },
+                    "producerConfig": {
+                        "$ref": "#/components/schemas/ProducerConfig"
+                    },
+                    "resources": {
+                        "$ref": "#/components/schemas/Resources"
+                    },
+                    "runtimeFlags": {
+                        "type": "string"
+                    },
+                    "schemaType": {
+                        "type": "string"
+                    },
+                    "secrets": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "serdeClassName": {
+                        "type": "string"
+                    },
+                    "sourceType": {
+                        "type": "string"
+                    },
+                    "tenant": {
+                        "type": "string"
+                    },
+                    "topicName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             },
-            "type": "object"
+            "SourceInstanceStatus": {
+                "properties": {
+                    "instanceId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/SourceInstanceStatusData"
+                    }
+                },
+                "type": "object"
+            },
+            "SourceInstanceStatusData": {
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    },
+                    "lastReceivedTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "latestSourceExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "latestSystemExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "numReceivedFromSource": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numRestarts": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSourceExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSystemExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numWritten": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "running": {
+                        "type": "boolean"
+                    },
+                    "workerId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SourceStatus": {
+                "properties": {
+                    "instances": {
+                        "items": {
+                            "$ref": "#/components/schemas/SourceInstanceStatus"
+                        },
+                        "type": "array"
+                    },
+                    "numInstances": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numRunning": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateOptions": {
+                "description": "Options while updating the sink",
+                "properties": {
+                    "update-auth-data": {
+                        "description": "Whether or not to update the auth data",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "info": {
@@ -490,26 +397,24 @@
         "title": "Pulsar Source REST API",
         "version": "v3"
     },
+    "openapi": "3.0.1",
     "paths": {
         "/sources/builtinsources": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_getSourceList",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "getSourceList",
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ConnectorDefinition"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConnectorDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Fetches the list of built-in Pulsar IO sources"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -532,32 +437,31 @@
         },
         "/sources/builtinsources/{name}/configdefinition": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_getSourceConfigDefinition",
+                "operationId": "getSourceConfigDefinition",
                 "parameters": [
                     {
                         "description": "The name of the builtin source",
                         "in": "path",
                         "name": "name",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ConfigFieldDefinition"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConfigFieldDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about config fields associated with the specified builtin source"
                     },
                     "403": {
                         "description": "The requester doesn't have admin permissions"
@@ -580,15 +484,14 @@
         },
         "/sources/reloadBuiltInSources": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_reloadSources",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "reloadSources",
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Reload the built-in connectors, including Sources and Sinks"
+                    },
                     "401": {
                         "description": "This operation requires super-user access"
                     },
@@ -607,39 +510,40 @@
         },
         "/sources/{tenant}/{namespace}": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_listSources",
+                "operationId": "listSources",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Lists all Pulsar Sources currently deployed in a given namespace"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -662,40 +566,39 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}": {
             "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_deregisterSource",
+                "operationId": "deregisterSource",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "The function was successfully deleted"
+                        "description": "The Pulsar Source was successfully deleted"
                     },
                     "400": {
                         "description": "Invalid request"
@@ -704,7 +607,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "408": {
                         "description": "Request timeout"
@@ -722,49 +625,52 @@
                 ]
             },
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_getSourceInfo",
+                "operationId": "getSourceInfo",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/SourceConfig"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SourceConfig"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about a Pulsar Source currently running in cluster mode"
                     },
                     "400": {
                         "description": "Invalid request"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "503": {
                         "description": "Function worker service is now initializing. Please try again later."
@@ -776,55 +682,62 @@
                 ]
             },
             "post": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_registerSource",
+                "operationId": "registerSource",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "You can submit a source (in any languages that you are familiar with) to a Pulsar cluster. Follow the steps below.\n1. Create a JSON object using some of the following parameters.\nA JSON value presenting configuration payload of a Pulsar Source. An example of the expected functions can be found here.\n- **classname**\n  The class name of a Pulsar Source if archive is file-url-path (file://).\n- **topicName**\n  The Pulsar topic to which data is sent.\n- **serdeClassName**\n  The SerDe classname for the Pulsar Source.\n- **schemaType**\n  The schema type (either a builtin schema like 'avro', 'json', etc.. or    custom Schema class name to be used to encode messages emitted from the Pulsar Source\n- **configs**\n  Source config key/values\n- **secrets**\n  This is a map of secretName(that is how the secret is going to be accessed in the function via context) to an object that  encapsulates how the secret is fetched by the underlying secrets provider. The type of an value here can be found by the  SecretProviderConfigurator.getSecretObjectType() method. \n- **parallelism**\n  The parallelism factor of a Pulsar Source (i.e. the number of a Pulsar Source instances to run).\n- **processingGuarantees**\n  The processing guarantees (aka delivery semantics) applied to the Pulsar Source.    Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]\n- **resources**\n  The size of the system resources allowed by the Pulsar Source runtime. The resources include: cpu, ram, disk.\n- **archive**\n  The path to the NAR archive for the Pulsar Source. It also supports url-path   [http/https/file (file protocol assumes that file already exists on worker host)]   from which worker can download the package.\n- **runtimeFlags**\n  Any flags that you want to pass to the runtime.\n2. Encapsulate the JSON object to a multipart object.",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
-                            "$ref": "#/definitions/SourceConfig"
-                        },
-                        "x-examples": {
-                            "text/plain": "Example\n1. Create a JSON object.\n{\n \"tenant\": \"public\",\n \"namespace\": \"default\",\n \"name\": \"pulsar-io-mysql\",\n \"className\": \"TestSourceMysql\",\n \"topicName\": \"pulsar-io-mysql\",\n \"parallelism\": \"1\",\n \"archive\": \"/connectors/pulsar-io-mysql-0.0.1.nar\",\n \"schemaType\": \"avro\"\n}\n2. Encapsulate the JSON object to a multipart object (in Python).\nfrom requests_toolbelt.multipart.encoder import MultipartEncoder\nmp_encoder = MultipartEncoder([('sourceConfig', (None, json.dumps(config), 'application/json'))])"
+                            "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "sourceConfig": {
+                                        "$ref": "#/components/schemas/SourceConfig"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Pulsar Function successfully created"
+                        "description": "Pulsar Source successfully created"
                     },
                     "400": {
-                        "description": "Invalid request (Function already exists or Tenant, Namespace or Name is not provided, etc.)"
+                        "description": "Invalid request (The Pulsar Source already exists or Tenant, Namespace or Name is not provided, etc.)"
                     },
                     "401": {
                         "description": "Client is not authorized to perform operation"
@@ -842,64 +755,65 @@
                 ]
             },
             "put": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_updateSource",
+                "operationId": "updateSource",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "A JSON value presenting configuration payload of a Pulsar Source. An example of the expected functions can be found here.\n- **classname**\n  The class name of a Pulsar Source if archive is file-url-path (file://).\n- **topicName**\n  The Pulsar topic to which data is sent.\n- **serdeClassName**\n  The SerDe classname for the Pulsar Source.\n- **schemaType**\n  The schema type (either a builtin schema like 'avro', 'json', etc.. or    custom Schema class name to be used to encode messages emitted from the Pulsar Source\n- **configs**\n  Pulsar Source config key/values\n- **secrets**\n  This is a map of secretName(that is how the secret is going to be accessed in the function via context) to an object that  encapsulates how the secret is fetched by the underlying secrets provider. The type of an value here can be found by the  SecretProviderConfigurator.getSecretObjectType() method.\n- **parallelism**\n  The parallelism factor of a Pulsar Source (i.e. the number of a Pulsar Source instances to run).\n- **processingGuarantees**\n  The processing guarantees (aka delivery semantics) applied to the Pulsar Source.    Possible Values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]\n- **resources**\n  The size of the system resources allowed by the Pulsar Source runtime. The resources include: cpu, ram, disk.\n- **archive**\n  The path to the NAR archive for the Pulsar Source. It also supports url-path   [http/https/file (file protocol assumes that file already exists on worker host)]   from which worker can download the package.\n- **runtimeFlags**\n  Any flags that you want to pass to the runtime.\n",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
                         "schema": {
-                            "$ref": "#/definitions/SourceConfig"
-                        },
-                        "x-examples": {
-                            "application/json": "{\n  \"tenant\": \"public\",\n  \"namespace\": \"default\",\n  \"name\": \"pulsar-io-mysql\",\n  \"className\": \"TestSourceMysql\",\n  \"topicName\": \"pulsar-io-mysql\",\n  \"parallelism\": 1,\n  \"archive\": \"/connectors/pulsar-io-mysql-0.0.1.nar\",\n  \"schemaType\": \"avro\"\n}"
-                        }
-                    },
-                    {
-                        "description": "Update options for Pulsar Source",
-                        "in": "body",
-                        "name": "body",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UpdateOptions"
+                            "type": "string"
                         }
                     }
                 ],
-                "produces": [
-                    "application/json"
-                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "sourceConfig": {
+                                        "$ref": "#/components/schemas/SourceConfig"
+                                    },
+                                    "updateOptions": {
+                                        "$ref": "#/components/schemas/UpdateOptions"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Pulsar Function successfully updated"
+                        "description": "Pulsar Source successfully updated"
                     },
                     "400": {
-                        "description": "Invalid request (Function already exists or Tenant, Namespace or Name is not provided, etc.)"
+                        "description": "Invalid request (The Pulsar Source already exists or Tenant, Namespace or Name is not provided, etc.)"
                     },
                     "401": {
                         "description": "Client is not authorized to perform operation"
@@ -908,7 +822,7 @@
                         "description": "The requester doesn't have admin permissions"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -925,36 +839,35 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/restart": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_restartSource",
+                "operationId": "restartSource",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -967,7 +880,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -984,36 +897,35 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/start": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_startSource",
+                "operationId": "startSource",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1026,7 +938,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -1043,43 +955,46 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/status": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_getSourceStatus",
+                "operationId": "getSourceStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/SourceStatus"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SourceStatus"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Source running in cluster mode"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this source"
@@ -1099,36 +1014,35 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/stop": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_stopSource",
+                "operationId": "stopSource",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1141,7 +1055,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -1158,43 +1072,44 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/{instanceId}/restart": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_restartSource",
+                "operationId": "restartSource_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Source (if instance-id is not provided, the stats of all instances is returned).",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1210,7 +1125,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -1227,43 +1142,44 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/{instanceId}/start": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_startSource",
+                "operationId": "startSource_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Source (if instance-id is not provided, the stats of all instances is returned).",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1276,7 +1192,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -1293,50 +1209,55 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/{instanceId}/status": {
             "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_getSourceInstanceStatus",
+                "operationId": "getSourceInstanceStatus",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Source (if instance-id is not provided, the stats of all instances is returned).",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/SourceInstanceStatusData"
-                        }
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SourceInstanceStatusData"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Source instance"
                     },
                     "307": {
                         "description": "Current broker doesn't serve the namespace of this source"
@@ -1356,43 +1277,44 @@
         },
         "/sources/{tenant}/{namespace}/{sourceName}/{instanceId}/stop": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "description": "",
-                "operationId": "SourcesBase_stopSource",
+                "operationId": "stopSource_1",
                 "parameters": [
                     {
                         "description": "The tenant of a Pulsar Source",
                         "in": "path",
                         "name": "tenant",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The namespace of a Pulsar Source",
                         "in": "path",
                         "name": "namespace",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The name of a Pulsar Source",
                         "in": "path",
                         "name": "sourceName",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "The instanceId of a Pulsar Source (if instance-id is not provided, the stats of all instances is returned).",
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -1405,7 +1327,7 @@
                         "description": "Client is not authorized to perform operation"
                     },
                     "404": {
-                        "description": "Not Found(The Pulsar Source doesn't exist)"
+                        "description": "Not Found (The Pulsar Source doesn't exist)"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -1421,13 +1343,14 @@
             }
         }
     },
-    "schemes": [
-        "http",
-        "https"
+    "servers": [
+        {
+            "url": "/admin/v3"
+        }
     ],
-    "swagger": "2.0",
     "tags": [
         {
+            "description": "Sources admin apis",
             "name": "sources"
         }
     ]
