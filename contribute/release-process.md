@@ -200,6 +200,7 @@ git push $UPSTREAM_REMOTE v$VERSION_RC
 ```
 
 If there's a need to restart the release with more commits, you can delete the tag.
+In this case, after deleting the previous tag, run the steps above again.
 
 ```shell
 # only if you restart the release before it has been published for voting. Don't run this after that!
@@ -207,7 +208,12 @@ If there's a need to restart the release with more commits, you can delete the t
 git tag -d v$VERSION_RC
 # delete tag in remote
 git push $UPSTREAM_REMOTE :v$VERSION_RC
+# delete the build info file if it has already been created
+[ -f "$ORG_GRADLE_PROJECT_pulsarBuildInfoFile" ] && rm "$ORG_GRADLE_PROJECT_pulsarBuildInfoFile" || true
 ```
+
+
+
 
 ## Build the release artifacts and run checks
 
@@ -251,6 +257,29 @@ This can be automated with this command, using the `APACHE_USER_GPGID` key id se
 
 ```shell
 echo "default-key $APACHE_USER_GPGID" >> ~/.gnupg/gpg.conf
+```
+
+A few other settings make signing the release artifacts less painful. These are **gpg-agent** options, so add them to `~/.gnupg/gpg-agent.conf` — putting them in `gpg.conf` makes `gpg` fail with an "invalid option" error:
+
+```conf
+# The agent caches your passphrase so you aren't prompted for every signature.
+# default-cache-ttl is an idle timeout: the cache expires this many seconds
+# after the passphrase was last used, and each use resets the timer
+# (default 600 s = 10 min).
+# max-cache-ttl is the absolute lifetime since the passphrase was entered,
+# regardless of use.
+# Below: forget after 1h idle, but never cache longer than 4h total.
+default-cache-ttl 3600
+max-cache-ttl 14400
+
+# Avoids "gpg: signing failed: Cannot allocate memory" errors while signing.
+auto-expand-secmem 100
+```
+
+Reload the agent after editing the file so the new settings take effect:
+
+```shell
+gpgconf --reload gpg-agent
 ```
 
 ### Sign and stage the artifacts to local SVN directory
@@ -327,14 +356,28 @@ resolves the credentials for the `apacheReleases` repository from the `apacheRel
 the first character on the command line so that your password doesn't get recorded in shell
 history.
 
+Trigger gpg key unlocking before building
+
 ```shell
-cd $PULSAR_PATH
-# ensure the correct JDK version is used for building
-sdk u java $SDKMAN_JAVA_VERSION
- ORG_GRADLE_PROJECT_apacheReleasesUsername=$APACHE_USER ORG_GRADLE_PROJECT_apacheReleasesPassword="<your ASF password>" ./gradlew publishAllPublicationsToApacheReleasesRepository --no-parallel -PuseGpgCmd=true -Psigning.gnupg.keyName=$APACHE_USER_GPGID
+echo test | gpg --clearsign -u $APACHE_USER_GPGID > /dev/null
 ```
 
-`--no-parallel` disables Gradle's parallel task execution for this invocation so that the per-module publish tasks don't upload to the ASF Nexus repository concurrently (concurrent uploads can end up in multiple implicitly-created staging repositories). It serves the same purpose as `-Daether.connector.basic.parallelPut=false` in the Maven-based process.
+Publish artifacts
+
+:::note
+The publish command below begins with a leading space so that the line, which contains your ASF password, isn't saved to shell history. This relies on the shell's "ignore commands starting with a space" history setting (`HISTCONTROL=ignorespace` or `ignoreboth` in Bash, `setopt HIST_IGNORE_SPACE` in Zsh), which is enabled by many default shell configurations but isn't guaranteed.
+:::
+
+```shell
+ cd $PULSAR_PATH
+# ensure the correct JDK version is used for building
+sdk u java $SDKMAN_JAVA_VERSION
+# publish the artifacts
+ ORG_GRADLE_PROJECT_apacheReleasesUsername=$APACHE_USER \
+ ORG_GRADLE_PROJECT_apacheReleasesPassword="<your ASF password>" \
+ ./gradlew publishAllPublicationsToApacheReleasesRepository \
+ -PuseGpgCmd=true -Psigning.gnupg.keyName=$APACHE_USER_GPGID
+```
 
 :::note
 
@@ -404,7 +447,7 @@ cd $PULSAR_PATH
 # ensure the correct JDK version is used for building
 sdk u java $SDKMAN_JAVA_VERSION
 
-./gradlew docker \
+./gradlew :docker:pulsar-docker-image:dockerBuild \
     -Pdocker.organization=$DOCKER_USER \
     -Pdocker.platforms=linux/amd64,linux/arm64 \
     -Pdocker.tag=$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit}) \
