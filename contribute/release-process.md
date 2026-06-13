@@ -70,12 +70,18 @@ export VERSION_BRANCH=branch-5.0-M1
 export LTS_RELEASE=5.0
 export UPSTREAM_REMOTE=origin
 export SDKMAN_JAVA_VERSION=21
-# set the pulsar.includeBuildInfo project property for all Gradle invocations in this shell session
+# set the pulsarIncludeBuildInfo project property for all Gradle invocations in this shell session
 # so that release binaries include the real git commit / build metadata
-export GRADLE_OPTS="-Dorg.gradle.project.pulsar.includeBuildInfo=true"
+export ORG_GRADLE_PROJECT_pulsarIncludeBuildInfo=true
+# capture the build info (commit id, build time, …) into a snapshot file on the first Gradle
+# invocation and reuse it from the file in all later invocations, so that the metadata stays
+# identical across the separate build steps of the release
+export ORG_GRADLE_PROJECT_pulsarBuildInfoFile=$HOME/pulsar-build-info-$VERSION_RC.properties
 ```
 
-Release builds must include the real git commit / build metadata in the binaries, which is enabled with the `pulsar.includeBuildInfo=true` project property (the default is `false` so that local development and CI builds don't regenerate the metadata on every change). The `GRADLE_OPTS` export above sets the property for every Gradle invocation in the shell session. The property must be set consistently for every Gradle invocation of the release process — if it changes between invocations, the changed metadata invalidates the build outputs and the binaries get recompiled and change.
+Release builds must include the real git commit / build metadata in the binaries, which is enabled with the `pulsarIncludeBuildInfo=true` project property (the default is `false` so that local development and CI builds don't regenerate the metadata on every change). Gradle picks up project properties from environment variables with the `ORG_GRADLE_PROJECT_` prefix, so the exports above set the properties for every Gradle invocation in the shell session.
+
+The properties must be set consistently for every Gradle invocation of the release process — if the metadata changes between invocations, it invalidates the build outputs and the binaries get recompiled and change. The `pulsarBuildInfoFile` snapshot file guarantees this: if the file doesn't exist, the build captures the metadata and writes it to the file; if it exists, the build uses the metadata from the file. Keep the file outside the release working directory (the `$HOME` location above) so that it doesn't make the git working tree dirty or end up in the source tarball. If you restart the release candidate with new commits, delete the snapshot file so that the new commit id gets captured.
 
 Set your ASF user id
 
@@ -214,7 +220,7 @@ sdk u java $SDKMAN_JAVA_VERSION
 ./gradlew assemble checkBinaryLicense rat
 ```
 
-Make sure the `GRADLE_OPTS` environment variable is set as described in the [environment variables step](#env-vars), so that the release binaries include the real git commit / build metadata.
+Make sure the `ORG_GRADLE_PROJECT_pulsarIncludeBuildInfo` and `ORG_GRADLE_PROJECT_pulsarBuildInfoFile` environment variables are set as described in the [environment variables step](#env-vars), so that the release binaries include the real git commit / build metadata and the metadata stays identical across the release build steps.
 
 Since Gradle builds are incremental and don't rebuild up-to-date artifacts, the later steps — staging the artifacts to SVN, publishing to the ASF Nexus repository, and building the docker images — reuse the artifacts produced by this build, whether they are run as separate Gradle invocations or combined into a single one.
 
