@@ -53,7 +53,7 @@ pulsar-admin clusters create cluster-1 \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/ClustersBase_createCluster)
+[](swagger:/admin/v2/createCluster)
 
 </TabItem>
 <TabItem value="Java">
@@ -103,7 +103,7 @@ Output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/ClustersBase_getCluster)
+[](swagger:/admin/v2/getCluster)
 
 </TabItem>
 <TabItem value="Java">
@@ -140,7 +140,7 @@ pulsar-admin clusters update cluster-1 \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/ClustersBase_updateCluster)
+[](swagger:/admin/v2/updateCluster)
 
 </TabItem>
 <TabItem value="Java">
@@ -179,7 +179,7 @@ pulsar-admin update-peer-clusters cluster-1 --peer-clusters cluster-2
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/ClustersBase_setPeerClusterNames)
+[](swagger:/admin/v2/setPeerClusterNames)
 
 </TabItem>
 <TabItem value="Java">
@@ -218,7 +218,7 @@ cluster-2
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/ClustersBase_getClusters)
+[](swagger:/admin/v2/getClusters)
 
 </TabItem>
 <TabItem value="Java">
@@ -250,7 +250,7 @@ pulsar-admin clusters delete cluster-1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/ClustersBase_deleteCluster)
+[](swagger:/admin/v2/deleteCluster)
 
 </TabItem>
 <TabItem value="Java">

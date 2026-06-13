@@ -174,7 +174,7 @@ In addition, you can also group bookies across racks or regions to serve broker-
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Bookies_updateBookieRackInfo)
+[](swagger:/admin/v2/updateBookieRackInfo)
 
 </TabItem>
 
@@ -257,7 +257,7 @@ For the bookie rack name restrictions, see [pulsar-admin bookies set-bookie-rack
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setBookieAffinityGroup)
+[](swagger:/admin/v2/setBookieAffinityGroup)
 
 </TabItem>
 <TabItem value="Java admin API">

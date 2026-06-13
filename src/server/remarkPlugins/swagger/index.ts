@@ -159,9 +159,10 @@ async function processLinkNode(target: Target, context: Context) {
   const swaggerJson = swaggerResult.json;
 
   // Search through all paths in the swagger JSON
-  let matches: { path: string; method: string; tags: string[]; summary?: string }[] = [];
-  
-  const tagParam = queryParams.get('tag') || 
+  type OperationMatch = { path: string; method: string; operationId: string; tags: string[]; summary?: string };
+  let matches: OperationMatch[] = [];
+
+  const tagParam = queryParams.get('tag') ||
     (operationName.startsWith('PersistentTopics_') ? '^persistent' : undefined);
   const summaryParam = queryParams.get('summary');
 
@@ -182,7 +183,7 @@ async function processLinkNode(target: Target, context: Context) {
       const tagMatches = !tagRegex || (operation.tags &&operation.tags.some(t => tagRegex.test(t)) !== isTagNegated);
       const summaryMatches = !summaryRegex || (operation.summary && summaryRegex.test(operation.summary) !== isSummaryNegated);
       if (operation.operationId === operationName && tagMatches && summaryMatches) {
-        matches.push({ path, method, tags: operation.tags, summary: operation.summary });
+        matches.push({ path, method, operationId: operation.operationId, tags: operation.tags, summary: operation.summary });
       }
     }
   }
@@ -210,7 +211,14 @@ async function processLinkNode(target: Target, context: Context) {
 
   const swaggerVersion = swaggerResult.version;
 
-  node.url = `${restApiBaseUrl}?version=${swaggerVersion}&apiVersion=${apiVersion}#operation/${operationName}`;
+  // OpenAPI 3 documents (Pulsar 5.0.0+/master) are rendered with Redoc 2.x,
+  // whose deep links are `#tag/<slugified-tag>/operation/<operationId>`; the
+  // Redoc 1.x viewer used for the Swagger 2.0 documents only understands
+  // `#operation/<operationId>`.
+  const anchor = swaggerJson.openapi && longestMatch.tags?.length
+    ? `tag/${longestMatch.tags[0].replace(/\s+/g, '-')}/operation/${longestMatch.operationId}`
+    : `operation/${longestMatch.operationId}`;
+  node.url = `${restApiBaseUrl}?version=${swaggerVersion}&apiVersion=${apiVersion}#${anchor}`;
 
   node.children = [{
     type: "text",

@@ -42,7 +42,7 @@ pulsar-admin transactions slow-transactions -c 1 -t 1s
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getSlowTransactions)
+[](swagger:/admin/v3/transactions/getSlowTransactions)
 
 </TabItem>
 <TabItem value="Java">
@@ -162,7 +162,7 @@ pulsar-admin transactions scale-transactionCoordinators -r 17
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_scaleTransactionCoordinators)
+[](swagger:/admin/v3/transactions/scaleTransactionCoordinators)
 
 </TabItem>
 <TabItem value="Java">
@@ -203,7 +203,7 @@ pulsar-admin transactions transaction-metadata -m 1 -l 1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getTransactionMetadata)
+[](swagger:/admin/v3/transactions/getTransactionMetadata)
 
 </TabItem>
 <TabItem value="Java">
@@ -261,7 +261,7 @@ pulsar-admin transactions transaction-in-pending-ack-stats -m 1 -l 1 -t my-topic
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getTransactionInPendingAckStats)
+[](swagger:/admin/v3/transactions/getTransactionInPendingAckStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -304,7 +304,7 @@ pulsar-admin transactions transaction-in-buffer-stats -m 1 -l 1 -t my-topic
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getTransactionInBufferStats)
+[](swagger:/admin/v3/transactions/getTransactionInBufferStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -355,7 +355,7 @@ pulsar-admin transactions coordinator-stats -c 1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getCoordinatorStats)
+[](swagger:/admin/v3/transactions/getCoordinatorStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -405,7 +405,7 @@ pulsar-admin transactions coordinator-internal-stats -c 1 -m
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getCoordinatorInternalStats)
+[](swagger:/admin/v3/transactions/getCoordinatorInternalStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -496,7 +496,7 @@ pulsar-admin.transactions()s pending-ack-stats -t my-topic -s mysubName -l
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getPendingAckStats)
+[](swagger:/admin/v3/transactions/getPendingAckStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -546,7 +546,7 @@ pulsar-admin transactions pending-ack-internal-stats -t my-topic -s mysubName -m
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getPendingAckInternalStats)
+[](swagger:/admin/v3/transactions/getPendingAckInternalStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -640,7 +640,7 @@ pulsar-admin transactions position-stats-in-pending-ack -t my-topic -s mysubName
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getPositionStatsInPendingAck)
+[](swagger:/admin/v3/transactions/getPositionStatsInPendingAck)
 
 </TabItem>
 <TabItem value="Java">
@@ -693,7 +693,7 @@ pulsar-admin transactions transaction-buffer-stats -t my-topic -l
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/transactions/Transactions_getTransactionBufferStats)
+[](swagger:/admin/v3/transactions/getTransactionBufferStats)
 
 </TabItem>
 <TabItem value="Java">

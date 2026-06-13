@@ -52,7 +52,7 @@ pulsar-admin functions create \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_registerFunction)
+[](swagger:/admin/v3/functions/registerFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -104,7 +104,7 @@ pulsar-admin functions update \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_updateFunction)
+[](swagger:/admin/v3/functions/updateFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -153,7 +153,7 @@ pulsar-admin functions start \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_startFunction?summary=an+instance)
+[](swagger:/admin/v3/functions/startFunction_1)
 
 </TabItem>
 <TabItem value="Java">
@@ -191,7 +191,7 @@ pulsar-admin functions start \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_startFunction?summary=all)
+[](swagger:/admin/v3/functions/startFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -234,7 +234,7 @@ pulsar-admin functions stop \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_stopFunction?summary=an+instance)
+[](swagger:/admin/v3/functions/stopFunction_1)
 
 </TabItem>
 <TabItem value="Java">
@@ -272,7 +272,7 @@ pulsar-admin functions stop \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_stopFunction?summary=all)
+[](swagger:/admin/v3/functions/stopFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -315,7 +315,7 @@ pulsar-admin functions restart \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_restartFunction?summary=an+instance)
+[](swagger:/admin/v3/functions/restartFunction_1)
 
 </TabItem>
 <TabItem value="Java">
@@ -353,7 +353,7 @@ pulsar-admin functions restart \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_restartFunction?summary=all)
+[](swagger:/admin/v3/functions/restartFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -390,7 +390,7 @@ pulsar-admin functions list \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_listFunctions)
+[](swagger:/admin/v3/functions/listFunctions)
 
 </TabItem>
 <TabItem value="Java">
@@ -428,7 +428,7 @@ pulsar-admin functions delete \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_deregisterFunction)
+[](swagger:/admin/v3/functions/deregisterFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -466,7 +466,7 @@ pulsar-admin functions get \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_getFunctionInfo)
+[](swagger:/admin/v3/functions/getFunctionInfo)
 
 </TabItem>
 <TabItem value="Java">
@@ -508,7 +508,7 @@ pulsar-admin functions status \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_getFunctionInstanceStatus)
+[](swagger:/admin/v3/functions/getFunctionInstanceStatus)
 
 </TabItem>
 <TabItem value="Java">
@@ -546,7 +546,7 @@ pulsar-admin functions status \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_getFunctionStatus)
+[](swagger:/admin/v3/functions/getFunctionStatus)
 
 </TabItem>
 <TabItem value="Java">
@@ -588,7 +588,7 @@ pulsar-admin functions stats \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_getFunctionInstanceStats)
+[](swagger:/admin/v3/functions/getFunctionInstanceStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -626,7 +626,7 @@ pulsar-admin functions stats \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_getFunctionStats)
+[](swagger:/admin/v3/functions/getFunctionStats)
 
 </TabItem>
 <TabItem value="Java">
@@ -667,7 +667,7 @@ pulsar-admin functions trigger \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_triggerFunction)
+[](swagger:/admin/v3/functions/triggerFunction)
 
 </TabItem>
 <TabItem value="Java">
@@ -708,7 +708,7 @@ pulsar-admin functions putstate \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_putFunctionState)
+[](swagger:/admin/v3/functions/putFunctionState)
 
 </TabItem>
 <TabItem value="Java">
@@ -749,7 +749,7 @@ pulsar-admin functions querystate \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/functions/FunctionsBase_getFunctionState)
+[](swagger:/admin/v3/functions/getFunctionState)
 
 </TabItem>
 <TabItem value="Java">

@@ -194,7 +194,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_registerSource)
+Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/registerSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -279,7 +279,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_registerSink)
+Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/registerSink)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -370,11 +370,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Start **all** source connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_startSource?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/startSource)
 
 * Start a **specified** source connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_startSource?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/startSource_1)
 
 </TabItem>
 
@@ -405,11 +405,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Start **all** sink connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_startSink?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/startSink)
 
 * Start a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_startSink?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/startSink_1)
 
 </TabItem>
 
@@ -511,7 +511,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_getSourceInfo)
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/getSourceInfo)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -616,7 +616,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_getSinkInfo)
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/getSinkInfo)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -718,7 +718,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_listSources)
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/listSources)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -771,7 +771,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_listSinks)
+Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/listSinks)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -830,11 +830,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Get the current status of **all** source connectors.
 
-  Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_getSourceStatus)
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/getSourceStatus)
 
 * Gets the current status of a **specified** source connector.
 
-  Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_getSourceStatus)
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/source/getSourceStatus)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -920,11 +920,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Get the current status of **all** sink connectors.
 
-  Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_getSinkStatus)
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/getSinkStatus)
 
 * Gets the current status of a **specified** sink connector.
 
-  Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_getSinkInstanceStatus)
+  Send a `GET` request to this endpoint: [](swagger:/admin/v3/sink/getSinkInstanceStatus)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1014,7 +1014,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_updateSource)
+Send a `PUT` request to this endpoint: [](swagger:/admin/v3/source/updateSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1103,7 +1103,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_updateSink)
+Send a `PUT` request to this endpoint: [](swagger:/admin/v3/sink/updateSink)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1200,11 +1200,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Stop **all** source connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_stopSource?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/stopSource)
 
 * Stop a **specified** source connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_stopSource?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/stopSource_1)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1290,11 +1290,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Stop **all** sink connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_stopSink?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/stopSink)
 
 * Stop a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_stopSink?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/sink/stopSink_1)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1386,11 +1386,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Restart **all** source connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/restartSource)
 
 * Restart a **specified** source connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/restartSource_1)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1476,11 +1476,11 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 * Restart **all** sink connectors.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/restartSource)
 
 * Restart a **specified** sink connector.
 
-  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_restartSource?summary=!all)
+  Send a `POST` request to this endpoint: [](swagger:/admin/v3/source/restartSource_1)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1572,7 +1572,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 Delete al Pulsar source connector.
 
-Send a `DELETE` request to this endpoint: [](swagger:/admin/v3/source/SourcesBase_deregisterSource)
+Send a `DELETE` request to this endpoint: [](swagger:/admin/v3/source/deregisterSource)
 
 </TabItem>
 <TabItem value="Java Admin API">
@@ -1634,7 +1634,7 @@ For the latest and complete information, see [Pulsar admin docs](/reference/#/@p
 
 Delete a sink connector.
 
-Send a `DELETE` request to this endpoint: [](swagger:/admin/v3/sink/SinksBase_deregisterSink)
+Send a `DELETE` request to this endpoint: [](swagger:/admin/v3/sink/deregisterSink)
 
 </TabItem>
 <TabItem value="Java Admin API">

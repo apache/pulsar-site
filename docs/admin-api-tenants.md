@@ -56,7 +56,7 @@ my-tenant-2
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/TenantsBase_getTenants)
+[](swagger:/admin/v2/getTenants)
 
 </TabItem>
 <TabItem value="Java">
@@ -105,7 +105,7 @@ pulsar-admin tenants create my-tenant \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/TenantsBase_createTenant)
+[](swagger:/admin/v2/createTenant)
 
 </TabItem>
 <TabItem value="Java">
@@ -151,7 +151,7 @@ pulsar-admin tenants get my-tenant
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/TenantsBase_getTenantAdmin)
+[](swagger:/admin/v2/getTenantAdmin)
 
 </TabItem>
 <TabItem value="Java">
@@ -184,7 +184,7 @@ pulsar-admin tenants delete my-tenant
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/TenantsBase_deleteTenant)
+[](swagger:/admin/v2/deleteTenant)
 
 </TabItem>
 <TabItem value="Java">
@@ -219,7 +219,7 @@ pulsar-admin tenants update my-tenant \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/TenantsBase_updateTenant)
+[](swagger:/admin/v2/updateTenant)
 
 </TabItem>
 <TabItem value="Java">

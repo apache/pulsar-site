@@ -194,7 +194,7 @@ pulsar-admin brokers healthcheck
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v2/BrokersBase_healthCheck)
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/healthCheck)
 
 </TabItem>
 

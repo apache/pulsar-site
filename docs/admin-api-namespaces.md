@@ -52,7 +52,7 @@ pulsar-admin namespaces create test-tenant/test-namespace
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_createNamespace)
+[](swagger:/admin/v2/createNamespace)
 
 </TabItem>
 <TabItem value="Java">
@@ -111,7 +111,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getPolicies)
+[](swagger:/admin/v2/getPolicies)
 
 </TabItem>
 <TabItem value="Java">
@@ -151,7 +151,7 @@ test-tenant/namespace2
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getTenantNamespaces)
+[](swagger:/admin/v2/getTenantNamespaces)
 
 </TabItem>
 <TabItem value="Java">
@@ -184,7 +184,7 @@ pulsar-admin namespaces delete test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_deleteNamespace)
+[](swagger:/admin/v2/deleteNamespace)
 
 </TabItem>
 <TabItem value="Java">
@@ -217,7 +217,7 @@ pulsar-admin namespaces set-clusters test-tenant/namespace1 --clusters cl1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setNamespaceReplicationClusters)
+[](swagger:/admin/v2/setNamespaceReplicationClusters)
 
 </TabItem>
 <TabItem value="Java">
@@ -254,7 +254,7 @@ cluster2
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getNamespaceReplicationClusters)
+[](swagger:/admin/v2/getNamespaceReplicationClusters)
 
 </TabItem>
 <TabItem value="Java">
@@ -298,7 +298,7 @@ pulsar-admin namespaces set-backlog-quota --limit 10G \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setBacklogQuota)
+[](swagger:/admin/v2/setBacklogQuota)
 
 </TabItem>
 <TabItem value="Java">
@@ -335,7 +335,7 @@ destination_storage    BacklogQuotaImpl(limit=10737418240, limitSize=10737418240
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getBacklogQuotaMap)
+[](swagger:/admin/v2/getBacklogQuotaMap)
 
 </TabItem>
 <TabItem value="Java">
@@ -366,7 +366,7 @@ pulsar-admin namespaces remove-backlog-quota test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_removeBacklogQuota)
+[](swagger:/admin/v2/removeBacklogQuota)
 
 </TabItem>
 <TabItem value="Java">
@@ -410,7 +410,7 @@ pulsar-admin namespaces set-persistence \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setPersistence)
+[](swagger:/admin/v2/setPersistence)
 
 </TabItem>
 <TabItem value="Java">
@@ -452,7 +452,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getPersistence)
+[](swagger:/admin/v2/getPersistence)
 
 </TabItem>
 <TabItem value="Java">
@@ -487,7 +487,7 @@ pulsar-admin namespaces unload --bundle 0x00000000_0xffffffff --destinationBroke
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_unloadNamespaceBundle)
+[](swagger:/admin/v2/unloadNamespaceBundle)
 
 </TabItem>
 <TabItem value="Java">
@@ -518,7 +518,7 @@ pulsar-admin namespaces split-bundle --bundle 0x00000000_0xffffffff test-tenant/
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_splitNamespaceBundle)
+[](swagger:/admin/v2/splitNamespaceBundle)
 
 </TabItem>
 <TabItem value="Java">
@@ -551,7 +551,7 @@ pulsar-admin namespaces set-message-ttl --messageTTL 100 test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setNamespaceMessageTTL)
+[](swagger:/admin/v2/setNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -587,7 +587,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getNamespaceMessageTTL)
+[](swagger:/admin/v2/getNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -622,7 +622,7 @@ pulsar-admin namespaces remove-message-ttl test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_removeNamespaceMessageTTL)
+[](swagger:/admin/v2/removeNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -656,7 +656,7 @@ pulsar-admin namespaces clear-backlog --sub my-subscription test-tenant/namespac
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_clearNamespaceBacklogForSubscription)
+[](swagger:/admin/v2/clearNamespaceBacklogForSubscription)
 
 </TabItem>
 <TabItem value="Java">
@@ -690,7 +690,7 @@ pulsar-admin namespaces clear-backlog \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_clearNamespaceBundleBacklogForSubscription)
+[](swagger:/admin/v2/clearNamespaceBundleBacklogForSubscription)
 
 </TabItem>
 <TabItem value="Java">
@@ -725,7 +725,7 @@ pulsar-admin namespaces set-retention --size 100M --time 10m test-tenant/namespa
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setRetention)
+[](swagger:/admin/v2/setRetention)
 
 </TabItem>
 <TabItem value="Java">
@@ -763,7 +763,7 @@ pulsar-admin namespaces get-retention test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getRetention)
+[](swagger:/admin/v2/getRetention)
 
 </TabItem>
 <TabItem value="Java">
@@ -808,7 +808,7 @@ pulsar-admin namespaces set-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setDispatchRate)
+[](swagger:/admin/v2/setDispatchRate)
 
 </TabItem>
 <TabItem value="Java">
@@ -850,7 +850,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getDispatchRate)
+[](swagger:/admin/v2/getDispatchRate)
 
 </TabItem>
 <TabItem value="Java">
@@ -887,7 +887,7 @@ pulsar-admin namespaces set-subscription-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setSubscriptionDispatchRate)
+[](swagger:/admin/v2/setSubscriptionDispatchRate)
 
 </TabItem>
 <TabItem value="Java">
@@ -929,7 +929,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getSubscriptionDispatchRate)
+[](swagger:/admin/v2/getSubscriptionDispatchRate)
 
 </TabItem>
 <TabItem value="Java">
@@ -965,7 +965,7 @@ pulsar-admin namespaces set-replicator-dispatch-rate test-tenant/namespace1 \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setDispatchRate)
+[](swagger:/admin/v2/setDispatchRate)
 
 </TabItem>
 <TabItem value="Java">
@@ -1004,7 +1004,7 @@ pulsar-admin namespaces get-replicator-dispatch-rate test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getDispatchRate)
+[](swagger:/admin/v2/getDispatchRate)
 
 </TabItem>
 <TabItem value="Java">
@@ -1037,7 +1037,7 @@ pulsar-admin namespaces get-deduplication-snapshot-interval test-tenant/namespac
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getDeduplicationSnapshotInterval)
+[](swagger:/admin/v2/getDeduplicationSnapshotInterval)
 
 </TabItem>
 <TabItem value="Java">
@@ -1068,7 +1068,7 @@ pulsar-admin namespaces set-deduplication-snapshot-interval test-tenant/namespac
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setDeduplicationSnapshotInterval)
+[](swagger:/admin/v2/setDeduplicationSnapshotInterval)
 
 </TabItem>
 <TabItem value="Java">
@@ -1099,7 +1099,7 @@ pulsar-admin namespaces remove-deduplication-snapshot-interval test-tenant/names
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setDeduplicationSnapshotInterval)
+[](swagger:/admin/v2/setDeduplicationSnapshotInterval)
 
 </TabItem>
 <TabItem value="Java">
@@ -1138,7 +1138,7 @@ pulsar-admin namespaces unload my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_unloadNamespace)
+[](swagger:/admin/v2/unloadNamespace)
 
 </TabItem>
 <TabItem value="Java">
@@ -1174,7 +1174,7 @@ pulsar-admin namespaces set-entry-filters \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setEntryFiltersPerTopic)
+[](swagger:/admin/v2/setEntryFiltersPerTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1205,7 +1205,7 @@ pulsar-admin namespaces get-entry-filters test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getEntryFiltersPerTopic)
+[](swagger:/admin/v2/getEntryFiltersPerTopic)
 
 </TabItem>
 <TabItem value="Java">
@@ -1236,7 +1236,7 @@ pulsar-admin namespaces remove-entry-filters test-tenant/namespace1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_removeNamespaceEntryFilters)
+[](swagger:/admin/v2/removeNamespaceEntryFilters)
 
 </TabItem>
 <TabItem value="Java">

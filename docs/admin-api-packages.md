@@ -103,7 +103,7 @@ bin/pulsar-admin packages upload function://public/default/example@v0.1 --path p
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_upload)
+[](swagger:/admin/v3/packages/upload)
 
 </TabItem>
 <TabItem value="Java">
@@ -142,7 +142,7 @@ bin/pulsar-admin packages download function://public/default/example@v0.1 --path
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_download)
+[](swagger:/admin/v3/packages/download)
 
 </TabItem>
 <TabItem value="Java">
@@ -183,7 +183,7 @@ bin/pulsar-admin packages delete functions://public/default/example@v0.1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_delete)
+[](swagger:/admin/v3/packages/delete)
 
 </TabItem>
 <TabItem value="Java">
@@ -222,7 +222,7 @@ bin/pulsar-admin packages get-metadata function://public/default/test@v1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_getMeta)
+[](swagger:/admin/v3/packages/getMeta)
 
 </TabItem>
 <TabItem value="Java">
@@ -261,7 +261,7 @@ bin/pulsar-admin packages update-metadata function://public/default/example@v0.1
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_updateMeta)
+[](swagger:/admin/v3/packages/updateMeta)
 
 </TabItem>
 <TabItem value="Java">
@@ -300,7 +300,7 @@ bin/pulsar-admin packages list-versions type://tenant/namespace/packageName
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_listPackageVersion)
+[](swagger:/admin/v3/packages/listPackageVersion)
 
 </TabItem>
 <TabItem value="Java">
@@ -340,7 +340,7 @@ bin/pulsar-admin packages list --type function public/default
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v3/packages/Packages_listPackages)
+[](swagger:/admin/v3/packages/listPackages)
 
 </TabItem>
 <TabItem value="Java">

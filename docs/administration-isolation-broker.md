@@ -41,7 +41,7 @@ bin/pulsar-admin ns-isolation-policy set \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_createNamespace)
+[](swagger:/admin/v2/createNamespace)
 
 </TabItem>
 <TabItem value="Java admin API">

@@ -373,7 +373,7 @@ pulsar-admin namespaces set-persistence my-tenant/my-ns -e 3 -w 3 -a 3
 
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setPersistence)
+[](swagger:/admin/v2/setPersistence)
 
 </TabItem>
 
@@ -426,7 +426,7 @@ pulsar-admin namespaces get-persistence my-tenant/my-ns
 
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getPersistence)
+[](swagger:/admin/v2/getPersistence)
 
 </TabItem>
 

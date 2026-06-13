@@ -247,7 +247,7 @@ bin/pulsar-admin topics stats persistent://my-tenant/my-namespace/my-topic
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/PersistentTopics_getStats)
+[](swagger:/admin/v2/getStats)
 
 </TabItem>
 

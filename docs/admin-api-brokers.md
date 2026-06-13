@@ -45,7 +45,7 @@ localhost:8080
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/BrokersBase_getActiveBrokers?summary=in+the+cluster)
+[](swagger:/admin/v2/getActiveBrokers_1)
 
 </TabItem>
 <TabItem value="Java">
@@ -90,7 +90,7 @@ public/default/0x80000000_0xc0000000    [broker_assignment=shared is_controlled=
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/BrokersBase_getOwnedNamespaces)
+[](swagger:/admin/v2/getOwnedNamespaces)
 
 </TabItem>
 <TabItem value="Java">
@@ -144,7 +144,7 @@ resourceUsageTransportPublishIntervalInSecs
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/BrokersBase_getDynamicConfigurationName)
+[](swagger:/admin/v2/getDynamicConfigurationName)
 
 </TabItem>
 <TabItem value="Java">
@@ -175,7 +175,7 @@ pulsar-admin brokers update-dynamic-config --config brokerShutdownTimeoutMs --va
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/BrokersBase_updateDynamicConfiguration)
+[](swagger:/admin/v2/updateDynamicConfiguration)
 
 </TabItem>
 <TabItem value="Java">
@@ -211,7 +211,7 @@ brokerShutdownTimeoutMs    100
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/BrokersBase_getAllDynamicConfigurations)
+[](swagger:/admin/v2/getAllDynamicConfigurations)
 
 </TabItem>
 <TabItem value="Java">
@@ -250,7 +250,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/BrokersBase_getLeaderBroker)
+[](swagger:/admin/v2/getLeaderBroker)
 
 </TabItem>
 <TabItem value="Java">

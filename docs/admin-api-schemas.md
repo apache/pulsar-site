@@ -55,7 +55,7 @@ The `schema-definition-file` is in JSON format.
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to the endpoint documented here: [](swagger:/admin/v2/SchemasResource_postSchema)
+Send a `POST` request to the endpoint documented here: [](swagger:/admin/v2/postSchema)
 
 Below is an example with CURL with a payload stored on the `schema.json` file, Pulsar broker running on `localhost` and the topic `my-tenant/my-ns/my-topic`:
 
@@ -155,7 +155,7 @@ Example output:
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v2/SchemasResource_getSchema?summary=!version)
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/getSchema)
 
 Here is an example of a response, which is returned in JSON format.
 
@@ -208,7 +208,7 @@ pulsar-admin schemas get <topic-name> --version <version>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to a schema endpoint: [](swagger:/admin/v2/SchemasResource_getSchema?summary=version)
+Send a `GET` request to a schema endpoint: [](swagger:/admin/v2/getSchema_1)
 
 Here is an example of a response, which is returned in JSON format.
 
@@ -288,7 +288,7 @@ pulsar-admin schemas delete <topic-name>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `DELETE` request to a schema endpoint: [](swagger:/admin/v2/SchemasResource_deleteSchema)
+Send a `DELETE` request to a schema endpoint: [](swagger:/admin/v2/deleteSchema)
 
 Here is an example of a response returned in JSON format.
 
@@ -339,7 +339,7 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --enable tenant/name
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setIsAllowAutoUpdateSchema)
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/setIsAllowAutoUpdateSchema)
 
 The post payload is in JSON format.
 
@@ -388,7 +388,7 @@ bin/pulsar-admin namespaces set-is-allow-auto-update-schema --disable tenant/nam
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setIsAllowAutoUpdateSchema)
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/setIsAllowAutoUpdateSchema)
 
 The post payload is in JSON format.
 
@@ -435,7 +435,7 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --enable tenant/namesp
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setSchemaValidationEnforced)
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/setSchemaValidationEnforced)
 
 The post payload is in JSON format.
 
@@ -478,7 +478,7 @@ bin/pulsar-admin namespaces set-schema-validation-enforce --disable tenant/names
 </TabItem>
 <TabItem value="REST API">
 
-Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/Namespaces_setSchemaValidationEnforced)
+Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/setSchemaValidationEnforced)
 
 The post payload is in JSON format.
 
@@ -529,7 +529,7 @@ pulsar-admin topicPolicies set-schema-compatibility-strategy <strategy> <topicNa
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: [](swagger:/admin/v2/PersistentTopics_setSchemaCompatibilityStrategy)
+Send a `PUT` request to this endpoint: [](swagger:/admin/v2/setSchemaCompatibilityStrategy_1)
 
 </TabItem>
 <TabItem value="Java">
@@ -570,7 +570,7 @@ pulsar-admin namespaces set-schema-compatibility-strategy options
 </TabItem>
 <TabItem value="REST API">
 
-Send a `PUT` request to this endpoint: [](swagger:/admin/v2/Namespaces_setSchemaCompatibilityStrategy)
+Send a `PUT` request to this endpoint: [](swagger:/admin/v2/setSchemaCompatibilityStrategy)
 
 </TabItem>
 <TabItem value="Java">
@@ -617,7 +617,7 @@ pulsar-admin topicPolicies get-schema-compatibility-strategy <topicName>
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v2/PersistentTopics_getSchemaCompatibilityStrategy)
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/getSchemaCompatibilityStrategy_1)
 
 </TabItem>
 <TabItem value="Java">
@@ -662,7 +662,7 @@ pulsar-admin namespaces get-schema-compatibility-strategy options
 </TabItem>
 <TabItem value="REST API">
 
-Send a `GET` request to this endpoint: [](swagger:/admin/v2/Namespaces_getSchemaCompatibilityStrategy)
+Send a `GET` request to this endpoint: [](swagger:/admin/v2/getSchemaCompatibilityStrategy)
 
 </TabItem>
 <TabItem value="Java">

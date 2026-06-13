@@ -120,7 +120,7 @@ pulsar-admin namespaces set-retention my-tenant/my-ns \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setRetention)
+[](swagger:/admin/v2/setRetention)
 
 :::note
 
@@ -168,7 +168,7 @@ pulsar-admin namespaces get-retention my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getRetention)
+[](swagger:/admin/v2/getRetention)
 
 </TabItem>
 <TabItem value="Java">
@@ -240,7 +240,7 @@ pulsar-admin namespaces set-backlog-quota my-tenant/my-ns/my-topic \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getBacklogQuotaMap)
+[](swagger:/admin/v2/getBacklogQuotaMap)
 
 </TabItem>
 <TabItem value="Java">
@@ -283,7 +283,7 @@ pulsar-admin namespaces get-backlog-quotas my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getBacklogQuotaMap)
+[](swagger:/admin/v2/getBacklogQuotaMap)
 
 </TabItem>
 <TabItem value="Java">
@@ -321,7 +321,7 @@ pulsar-admin namespaces remove-backlog-quota my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_removeBacklogQuota)
+[](swagger:/admin/v2/removeBacklogQuota)
 
 </TabItem>
 <TabItem value="Java">
@@ -378,7 +378,7 @@ pulsar-admin namespaces set-message-ttl my-tenant/my-ns \
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_setNamespaceMessageTTL)
+[](swagger:/admin/v2/setNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -412,7 +412,7 @@ pulsar-admin namespaces get-message-ttl my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_getNamespaceMessageTTL)
+[](swagger:/admin/v2/getNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
@@ -445,7 +445,7 @@ pulsar-admin namespaces remove-message-ttl my-tenant/my-ns
 </TabItem>
 <TabItem value="REST API">
 
-[](swagger:/admin/v2/Namespaces_removeNamespaceMessageTTL)
+[](swagger:/admin/v2/removeNamespaceMessageTTL)
 
 </TabItem>
 <TabItem value="Java">
