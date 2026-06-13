@@ -2380,6 +2380,28 @@ Interval (in seconds) for ResourceGroupService periodic tasks while resource gro
 
 **Category**: Policies
 
+### scalableTopicAutoScaleEnabled
+Cluster-wide default for scalable-topic auto split/merge. When true, the controller leader automatically splits hot segments and merges cold ones, within the caps below. Can be overridden per-namespace and per-topic.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicAutoScaleIntervalSeconds
+Cadence (seconds) of the controller's periodic traffic-driven auto split/merge evaluation. Consumer-count changes are handled event-driven and are not affected by this interval. Read when a controller wins leadership; not dynamic.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
 ### scalableTopicConsumerSessionGracePeriodSeconds
 Grace period (seconds) the controller leader waits for a disconnected scalable-topic consumer to reconnect with the same consumer name before evicting its session and reassigning its segments to remaining consumers.
 
@@ -2388,6 +2410,183 @@ Grace period (seconds) the controller leader waits for a disconnected scalable-t
 **Default**: `60`
 
 **Dynamic**: `false`
+
+**Category**: Policies
+
+### scalableTopicLoadReportIntervalSeconds
+Interval (seconds) at which the segment-owning broker samples its segment topics to report load for auto split/merge. Read at broker start; not dynamic.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Policies
+
+### scalableTopicLoadReportRateChangeThreshold
+Minimum relative change in any segment rate (e.g. 0.25 = 25%) since the last write that triggers a new load record. Keeps metadata write volume bounded; a steady-state segment writes once and goes quiet.
+Note: the band is anchored at the last written value, not at the split/merge thresholds. A rate that settles within the band of the last record is never re-reported, so a segment can sustain up to this factor beyond a split/merge threshold without triggering — the cost of bounded write volume. Lower the threshold for tighter tracking at the price of more metadata writes.
+
+**Type**: `double`
+
+**Default**: `0.25`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMaxDagDepth
+Max number of merges allowed in a segment's lineage. Once a segment reaches this depth it stops being a merge candidate (load-driven splits are still allowed), bounding split/merge flip-flopping.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMaxSegments
+Hard ceiling on the number of active segments a scalable topic can be auto-scaled to. Splits stop firing once this is reached.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMergeBytesRateInThreshold
+Inbound bytes/second below which a segment counts as cold for merging.
+
+**Type**: `long`
+
+**Default**: `5000000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMergeBytesRateOutThreshold
+Outbound bytes/second below which a segment counts as cold for merging.
+
+**Type**: `long`
+
+**Default**: `25000000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMergeCooldownSeconds
+Minimum time (seconds) between automatic merges on a topic.
+
+**Type**: `int`
+
+**Default**: `300`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMergeMsgRateInThreshold
+Inbound messages/second below which a segment counts as cold for merging.
+
+**Type**: `double`
+
+**Default**: `1000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMergeMsgRateOutThreshold
+Outbound messages/second below which a segment counts as cold for merging.
+
+**Type**: `double`
+
+**Default**: `5000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMergeWindowSeconds
+How long (seconds) a segment must continuously stay below every merge threshold before it becomes merge-eligible.
+
+**Type**: `int`
+
+**Default**: `300`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicMinSegments
+Hard floor on the number of active segments. Merges stop firing once this is reached.
+
+**Type**: `int`
+
+**Default**: `1`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitBytesRateInThreshold
+Inbound bytes/second above which a segment is split.
+
+**Type**: `long`
+
+**Default**: `50000000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitBytesRateOutThreshold
+Outbound bytes/second above which a segment is split.
+
+**Type**: `long`
+
+**Default**: `250000000`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitCooldownSeconds
+Minimum time (seconds) between automatic splits on a topic. Deliberately short — it only coalesces a burst of near-simultaneous triggers (e.g. a consumer group connecting at once).
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitMsgRateInThreshold
+Inbound messages/second above which a segment is split.
+
+**Type**: `double`
+
+**Default**: `10000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitMsgRateOutThreshold
+Outbound (dispatched) messages/second above which a segment is split.
+
+**Type**: `double`
+
+**Default**: `50000.0`
+
+**Dynamic**: `true`
 
 **Category**: Policies
 

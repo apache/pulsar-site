@@ -124,6 +124,70 @@
                 },
                 "type": "object"
             },
+            "AutoScalePolicyOverride": {
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "maxDagDepth": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "maxSegments": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "mergeBytesRateInThreshold": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "mergeBytesRateOutThreshold": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "mergeCooldownSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "mergeMsgRateInThreshold": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "mergeMsgRateOutThreshold": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "mergeWindowSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "minSegments": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "splitBytesRateInThreshold": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "splitBytesRateOutThreshold": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "splitCooldownSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "splitMsgRateInThreshold": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "splitMsgRateOutThreshold": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
             "AutoSubscriptionCreationOverride": {
                 "properties": {
                     "allowAutoSubscriptionCreation": {
@@ -3373,6 +3437,9 @@
                     "retention_policies": {
                         "$ref": "#/components/schemas/RetentionPolicies"
                     },
+                    "scalableTopicAutoScalePolicy": {
+                        "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                    },
                     "schema_auto_update_compatibility_strategy": {
                         "enum": [
                             "AutoUpdateDisabled",
@@ -3892,6 +3959,9 @@
             },
             "ScalableTopicMetadata": {
                 "properties": {
+                    "autoScalePolicy": {
+                        "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                    },
                     "epoch": {
                         "format": "int64",
                         "type": "integer"
@@ -11574,6 +11644,140 @@
                     }
                 },
                 "summary": "Set retention configuration on a namespace.",
+                "tags": [
+                    "namespaces"
+                ]
+            }
+        },
+        "/namespaces/{tenant}/{namespace}/scalableTopicAutoScalePolicy": {
+            "delete": {
+                "operationId": "removeScalableTopicAutoScalePolicy",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace doesn't exist"
+                    }
+                },
+                "summary": "Remove the scalable-topic auto split/merge policy override from a namespace",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "get": {
+                "operationId": "getScalableTopicAutoScalePolicy",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                                }
+                            }
+                        },
+                        "description": "The scalable-topic auto split/merge policy override for the namespace"
+                    },
+                    "204": {
+                        "description": "No override is set on this namespace"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or namespace doesn't exist"
+                    }
+                },
+                "summary": "Get the scalable-topic auto split/merge policy override for a namespace",
+                "tags": [
+                    "namespaces"
+                ]
+            },
+            "post": {
+                "operationId": "setScalableTopicAutoScalePolicy",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                            }
+                        }
+                    },
+                    "description": "Auto split/merge policy override",
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace doesn't exist"
+                    },
+                    "412": {
+                        "description": "The resolved auto split/merge policy violates an invariant"
+                    }
+                },
+                "summary": "Override the broker's scalable-topic auto split/merge settings for a namespace",
                 "tags": [
                     "namespaces"
                 ]
@@ -37354,6 +37558,191 @@
                     }
                 },
                 "summary": "Create a new scalable topic.",
+                "tags": [
+                    "scalable topic"
+                ]
+            }
+        },
+        "/scalable/{tenant}/{namespace}/{topic}/autoScalePolicy": {
+            "delete": {
+                "operationId": "removeAutoScalePolicy",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Override removed successfully"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission on the namespace"
+                    },
+                    "404": {
+                        "description": "Scalable topic doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Remove the per-topic auto split/merge policy override.",
+                "tags": [
+                    "scalable topic"
+                ]
+            },
+            "get": {
+                "operationId": "getAutoScalePolicy",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                                }
+                            }
+                        },
+                        "description": "The per-topic auto split/merge policy override."
+                    },
+                    "204": {
+                        "description": "No override is set on this topic"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission on the namespace"
+                    },
+                    "404": {
+                        "description": "Scalable topic doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Get the per-topic auto split/merge policy override.",
+                "tags": [
+                    "scalable topic"
+                ]
+            },
+            "post": {
+                "operationId": "setAutoScalePolicy",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                            }
+                        }
+                    },
+                    "description": "Auto split/merge policy override",
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "Override set successfully"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission on the namespace"
+                    },
+                    "404": {
+                        "description": "Scalable topic doesn't exist"
+                    },
+                    "412": {
+                        "description": "The resolved auto split/merge policy violates an invariant"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Set the per-topic auto split/merge policy override.",
                 "tags": [
                     "scalable topic"
                 ]
