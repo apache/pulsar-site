@@ -15,7 +15,7 @@ sidebar_label: Client CPP 4.2.0
 * [cleanup] remove unused openssl header by @hdu-sdlzx in https://github.com/apache/pulsar-client-cpp/pull/574
 * [fix][cpp] Clear stale consumer connection after reconnect subscribe failure by @shibd in https://github.com/apache/pulsar-client-cpp/pull/577
 * [improve][client] Implement tls_client_auth for AuthOauth2  by @izumo27 in https://github.com/apache/pulsar-client-cpp/pull/575
-* [fix][client-cpp] Fix TypedMessageTest to use receiveAsync<T> template overload with decoder by @geniusjoe in https://github.com/apache/pulsar-client-cpp/pull/580
+* [fix][client-cpp] Fix TypedMessageTest to use receiveAsync template overload with decoder by @geniusjoe in https://github.com/apache/pulsar-client-cpp/pull/580
 * feat: introduce a v2 createProducer API to carry error message when fail by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/579
 * feat: add v2 APIs to create Consumer, Reader or TableView by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/581
 * Fix macOS cross-architecture build on arm64 when target arch is x86_64 by @BewareMyPower in https://github.com/apache/pulsar-client-cpp/pull/582
