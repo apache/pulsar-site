@@ -3968,7 +3968,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `2000`
+**Default**: `1999`
 
 **Dynamic**: `true`
 
@@ -4584,6 +4584,17 @@ Number of worker threads to serve topic ordered executor
 **Default**: `4`
 
 **Dynamic**: `false`
+
+**Category**: Server
+
+### topicPoliciesCacheInitTimeoutSeconds
+Amount of seconds to timeout initializing the topic policies cache of a namespace (reading the namespace's __change_events system topic to the end). Topic loading waits for this initialization, so if the system-topic reader gets stuck (for example after __change_events is unloaded and the reconnected reader stops making progress), this bounds the wait: the broker fails the initialization, closes the stuck reader and clears the cached state so that loading the namespace's topics can be retried with a fresh reader instead of hanging until the broker is restarted. Set to 0 or a negative value to disable the timeout (not recommended).
+
+**Type**: `long`
+
+**Default**: `60`
+
+**Dynamic**: `true`
 
 **Category**: Server
 
@@ -5600,7 +5611,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `800`
+**Default**: `799`
 
 **Dynamic**: `true`
 
