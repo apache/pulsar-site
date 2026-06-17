@@ -19,6 +19,7 @@ If you are using a standalone Pulsar or a single Pulsar cluster, you only need t
 
 Pulsar supports the following metadata store services:
 * [Apache ZooKeeper](https://zookeeper.apache.org/)
+* [Oxia](https://github.com/oxia-db/oxia)
 * [Etcd](https://etcd.io/)
 * [RocksDB](http://rocksdb.org/)
 * Local memory
@@ -39,6 +40,19 @@ To use ZooKeeper as the metadata store, add the following parameters to the `con
 metadataStoreUrl=zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
 configurationMetadataStoreUrl=zk:my-global-zk-1:2181,my-global-zk-2:2181,my-global-zk-3:2181
 ```
+
+## Use Oxia as metadata store
+
+To use [Oxia](https://github.com/oxia-db/oxia) as the metadata store, add the following parameters to the `conf/broker.conf` or `conf/standalone.conf` file.
+
+```conf
+metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+```
+
+The URL format is `oxia://<host>:<port>/<namespace>`. The namespace must exist in the Oxia cluster.
+
+To live-migrate an existing cluster from ZooKeeper to Oxia, see [Migrate metadata store](administration-metadata-store-migration.md).
 
 ## Use etcd as metadata store
 
