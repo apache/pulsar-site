@@ -1,7 +1,7 @@
 ---
 id: concepts-scalable-topics
 title: Scalable topics
-sidebar_label: "Scalable topics"
+sidebar_label: "Overview"
 description: Understand scalable topics (Topics v5), the topic type that grows and shrinks at runtime by splitting and merging key-range segments.
 ---
 

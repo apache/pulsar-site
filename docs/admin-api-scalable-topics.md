@@ -1,7 +1,7 @@
 ---
 id: admin-api-scalable-topics
 title: Manage scalable topics
-sidebar_label: "Scalable topics"
+sidebar_label: "Administration"
 description: Create, inspect, migrate, and manage scalable topics with pulsar-admin, the REST API, or the Java admin client.
 ---
 
