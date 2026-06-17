@@ -187,6 +187,8 @@ Pass `--force` to delete even when the topic has active subscriptions.
 
 ## REST API reference
 
+[OpenAPI documentation](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@#tag/scalable-topic)
+
 All endpoints are under `/admin/v2/scalable` and take `tenant`, `namespace`, and (except for list) `topic` as path parameters.
 
 | Method & path | Operation |
