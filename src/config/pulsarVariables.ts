@@ -141,6 +141,20 @@ export function referenceVersion(version: string): string {
   return `${v.major}.${v.minor}.x`;
 }
 
+// Pulsar 5.0.0+/master publish OpenAPI 3 REST API docs under /openapi/; earlier
+// releases keep their Swagger 2.0 docs under /swagger/. Mirrors usesOpenApi3()
+// in src/pages/RestApi/RestApi.tsx and src/server/remarkPlugins/swagger/index.ts.
+export function usesOpenApi3(version: string): boolean {
+  if (version === "master") return true;
+  const v = semver.coerce(version);
+  return v !== null && v.major >= 5;
+}
+
+export function restApiSpecDir(restApiVersion: string): string {
+  const root = usesOpenApi3(restApiVersion) ? "openapi" : "swagger";
+  return `/${root}/${restApiVersion}/`;
+}
+
 /**
  * Token → replacement value for a given version key.
  * `"current"` → next/current docs; any other string is an origin version
@@ -159,6 +173,11 @@ export function referenceVersion(version: string): string {
  * docs it resolves to `master` (the in-development API), since the REST API viewer keys
  * the in-development spec under `master` rather than a numbered release. Versioned docs
  * resolve it to their concrete release, matching `version_number`.
+ *
+ * `rest_api_spec_dir` is the static directory that holds the raw REST API spec JSON
+ * files for the doc's version (e.g. `pathname://@pulsar:rest_api_spec_dir@`). Pulsar
+ * 5.0.0+/master docs resolve to `/openapi/<version>/` (OpenAPI 3); earlier docs resolve
+ * to `/swagger/<version>/` (Swagger 2.0).
  */
 export function resolveTokens(versionKey: string, referenceLatest = false): Map<string, string> {
   const isCurrent = versionKey === "current";
@@ -192,6 +211,7 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["javadoc:pulsar-functions", javadocVersionUrl(originVersion, "pulsar-functions")],
     ["offloader_release_url", offloaderReleaseUrl(resolvedVersion)],
     ["presto_pulsar_connector_release_url", prestoPulsarReleaseUrl(resolvedVersion)],
+    ["rest_api_spec_dir", restApiSpecDir(restApiVersion)],
     ["rest_api_version", restApiVersion],
     ["rpm:client-debuginfo", rpmDistUrl(resolvedVersion, "-debuginfo")],
     ["rpm:client-devel", rpmDistUrl(resolvedVersion, "-devel")],

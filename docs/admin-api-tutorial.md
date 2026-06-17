@@ -37,7 +37,7 @@ If you have enabled authentication, you need to provide an auth configuration to
 
 You can find details for the REST API exposed by Pulsar brokers in the [REST API doc](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@).
 
-If you want to test REST APIs in postman, you can use the REST API JSON files [here](pathname:///swagger/).
+If you want to test REST APIs in postman, you can use the REST API JSON files [here](pathname://@pulsar:rest_api_spec_dir@).
 
 </TabItem>
 <TabItem value="Java">
