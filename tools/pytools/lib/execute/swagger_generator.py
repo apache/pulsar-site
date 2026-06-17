@@ -47,9 +47,18 @@ def execute(master: Path, version: str):
         mvn = find_command('mvn', msg="mvn is required")
         run(mvn, '-pl', 'pulsar-broker', 'install', '-DskipTests', '-Pswagger', cwd=master)
 
-    os.makedirs(site_path() / 'static' / 'swagger' / version, exist_ok=True)
+    # Gradle checkouts (Pulsar master/5.0.0+) emit OpenAPI 3 documents, which are
+    # published under static/openapi/. Maven checkouts (pre-5.0 releases) keep
+    # their Swagger 2.0 documents under static/swagger/.
+    docs_root = 'openapi' if build == pulsar_build.BuildSystem.gradle else 'swagger'
+    os.makedirs(site_path() / 'static' / docs_root / version, exist_ok=True)
     for f in master_swaggers.glob('*.json'):
         data = json.loads(f.read_text())
-        with (site_path() / 'static' / 'swagger' / version / f'{f.stem}.json').open('w+') as m:
+        # The upstream build always names the files swagger*.json; publish them
+        # as openapi*.json under the OpenAPI 3 tree.
+        stem = f.stem
+        if docs_root == 'openapi' and stem.startswith('swagger'):
+            stem = 'openapi' + stem[len('swagger'):]
+        with (site_path() / 'static' / docs_root / version / f'{stem}.json').open('w+') as m:
             json.dump(data, m, indent=4, sort_keys=True)
             m.write('\n')

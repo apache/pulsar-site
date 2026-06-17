@@ -72,14 +72,33 @@ class RestApi extends React.Component {
 
     const wrapper = document.querySelector(".container");
     const redoc = document.createElement("redoc");
-    redoc.setAttribute(
-      "spec-url",
-      "/swagger/" + version + "/" + apiversion + "/" + swagger + ".json"
-    );
+    const openApi3 = usesOpenApi3(version);
+    // Pulsar 5.0.0+/master publish OpenAPI 3 documents under /openapi/ with
+    // "openapi*.json" file names; pre-5.0 releases keep their Swagger 2.0
+    // documents under /swagger/ with "swagger*.json" file names.
+    const specDir = openApi3 ? "/openapi/" : "/swagger/";
+    const specFile = (openApi3 ? swagger.replace("swagger", "openapi") : swagger) + ".json";
+    // Only insert the REST API version segment (v2/v3) when it is known; the
+    // doc links that omit it resolve to the flat spec file at the version root.
+    const specUrl = apiversion
+      ? specDir + version + "/" + apiversion + "/" + specFile
+      : specDir + version + "/" + specFile;
     const redocLink = document.createElement("script");
-    if (usesOpenApi3(version)) {
+    if (openApi3) {
+      // The redoc2 standalone auto-init only honors the spec-url attribute and
+      // discards every other option, so initialize Redoc explicitly. This lets
+      // us set downloadFileName: the spec saved by Redoc's download button is
+      // named after the Pulsar version rather than the internal "openapi*.json".
       redocLink.setAttribute("src", "/js/redoc2.standalone.min.js");
+      redocLink.onload = () => {
+        (window as any).Redoc.init(
+          specUrl,
+          { downloadFileName: "pulsar_openapi_spec_" + version + ".json" },
+          redoc
+        );
+      };
     } else {
+      redoc.setAttribute("spec-url", specUrl);
       redoc.setAttribute("lazy-rendering", "true");
       redocLink.setAttribute("src", "/js/redoc.min.js");
     }

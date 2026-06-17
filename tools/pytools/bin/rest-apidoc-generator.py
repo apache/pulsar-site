@@ -41,5 +41,5 @@ if __name__ == '__main__':
             master = Path(args.master_path)
 
         swagger_generator.execute(master, args.version)
-        swagger_sorter.execute(site_path() / 'static' / 'swagger')
+        swagger_sorter.execute(site_path() / 'static' / 'swagger', site_path() / 'static' / 'openapi')
 

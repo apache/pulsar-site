@@ -12,6 +12,7 @@ type PluginOptions = {
   baseDir: string;
   restApiBaseUrlMapping: Record<SwaggerApiType, string>;
   swaggerDir?: string;
+  openapiDir?: string;
 };
 
 // Add new return type for getSwaggerJson
@@ -50,20 +51,34 @@ function findLatestVersion(swaggerDir: string, majorMinor: string): string {
   }
 }
 
-function getSwaggerFileName(type: SwaggerApiType = 'default'): string {
+// Pulsar 5.0.0+/master publish OpenAPI 3 documents under static/openapi; earlier
+// releases keep their Swagger 2.0 documents under static/swagger. Mirrors
+// usesOpenApi3() in src/pages/RestApi/RestApi.tsx.
+function usesOpenApi3(majorMinor: string): boolean {
+  if (majorMinor === 'master') {
+    return true;
+  }
+  const major = parseInt(majorMinor.split('.')[0], 10);
+  return !isNaN(major) && major >= 5;
+}
+
+function getSwaggerFileName(type: SwaggerApiType = 'default', openApi3 = false): string {
+  // Pulsar 5.0.0+/master spec files are named openapi*.json; earlier releases
+  // use swagger*.json.
+  const prefix = openApi3 ? 'openapi' : 'swagger';
   const fileNames: Record<SwaggerApiType, string> = {
-    default: 'swagger.json',
-    functions: 'swaggerfunctions.json',
-    lookup: 'swaggerlookup.json',
-    packages: 'swaggerpackages.json',
-    sink: 'swaggersink.json',
-    source: 'swaggersource.json',
-    transactions: 'swaggertransactions.json'
+    default: `${prefix}.json`,
+    functions: `${prefix}functions.json`,
+    lookup: `${prefix}lookup.json`,
+    packages: `${prefix}packages.json`,
+    sink: `${prefix}sink.json`,
+    source: `${prefix}source.json`,
+    transactions: `${prefix}transactions.json`
   };
   return fileNames[type];
 }
 
-function createSwaggerCache(swaggerDir: string): {
+function createSwaggerCache(swaggerDir: string, openapiDir: string): {
   getSwaggerResult: (docPath: string, type?: SwaggerApiType) => SwaggerResult;
 } {
   const versionCache: {
@@ -77,17 +92,19 @@ function createSwaggerCache(swaggerDir: string): {
     getSwaggerResult: (docPath: string, type: SwaggerApiType = 'default') => {
       const versionMatch = docPath.match(/version-(\d+\.\d+\.x)/);
       const majorMinor = versionMatch ? versionMatch[1].replace('.x', '') : 'master';
+      const openApi3 = usesOpenApi3(majorMinor);
+      const baseDir = openApi3 ? openapiDir : swaggerDir;
       const cache = versionCache[majorMinor]?.jsonCache;
-      
+
       const cacheKey = `${type}`;
       if (cache?.has(cacheKey)) {
         return cache.get(cacheKey)!;
       }
 
       try {
-        const fileName = getSwaggerFileName(type);
-        const version = majorMinor === 'master' ? 'master' : versionCache[majorMinor]?.latestVersion || findLatestVersion(swaggerDir, majorMinor);
-        const filePath = path.join(swaggerDir, version, fileName);
+        const fileName = getSwaggerFileName(type, openApi3);
+        const version = majorMinor === 'master' ? 'master' : versionCache[majorMinor]?.latestVersion || findLatestVersion(baseDir, majorMinor);
+        const filePath = path.join(baseDir, version, fileName);
         const jsonContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         
         const result: SwaggerResult = {
@@ -228,7 +245,8 @@ async function processLinkNode(target: Target, context: Context) {
 
 export default function plugin(options: PluginOptions): Transformer {
   const swaggerDir = options.swaggerDir || path.join(options.baseDir, 'static/swagger');
-  const cache = createSwaggerCache(swaggerDir);
+  const openapiDir = options.openapiDir || path.join(options.baseDir, 'static/openapi');
+  const cache = createSwaggerCache(swaggerDir, openapiDir);
 
   return async (root, vfile) => {
     const {visit} = await import('unist-util-visit');

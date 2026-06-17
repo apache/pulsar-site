@@ -20,9 +20,7 @@ import os
 from pathlib import Path
 
 
-def execute(base: Path):
-    rest_api_versions = {}
-
+def _sort_tree(base: Path, rest_api_versions: dict):
     for f in sorted(base.glob('*/*.json')):
         filename = f.stem
         pulsar_version = f.parent.name
@@ -45,6 +43,18 @@ def execute(base: Path):
         with (rest_api_dir / f.name).open('w+') as m:
             json.dump(data, m, indent=4)
             m.write('\n')
+
+
+# Sort both the Swagger 2.0 tree (pre-5.0 releases) and the OpenAPI 3 tree
+# (Pulsar master/5.0.0+) into per-REST-API-version subdirectories, and write a
+# single combined restApiVersions.json index into the Swagger tree, which is
+# where src/utils/index.js and src/config/pulsarVariables.ts import it from.
+def execute(base: Path, openapi_base: Path = None):
+    rest_api_versions = {}
+
+    _sort_tree(base, rest_api_versions)
+    if openapi_base is not None and openapi_base.exists():
+        _sort_tree(openapi_base, rest_api_versions)
 
     with (base / 'restApiVersions.json').open('w+') as m:
         json.dump(rest_api_versions, m, indent=4, sort_keys=True)
