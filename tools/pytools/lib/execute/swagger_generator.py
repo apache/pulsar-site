@@ -24,6 +24,25 @@ from constant import site_path
 from execute import pulsar_build
 
 
+def _fold_server_base_path(data: dict) -> None:
+    """Fold an OpenAPI 3 relative server base path (e.g. /admin/v2) into every
+    path key and drop the servers entry, so Redoc 2.x renders the prefix inline
+    on each operation. Redoc 1.x inlined the Swagger 2.0 `basePath` the same way;
+    Redoc 2.x instead tucks servers[].url behind a collapsed per-operation
+    dropdown, hiding the /admin/vN prefix. No-op for specs without a relative,
+    variable-free server base, which also keeps the transform idempotent."""
+    servers = data.get('servers')
+    if not servers:
+        return
+    base = (servers[0].get('url') or '').rstrip('/')
+    if not base.startswith('/') or '{' in base:
+        return
+    paths = data.get('paths')
+    if isinstance(paths, dict):
+        data['paths'] = {base + key: value for key, value in paths.items()}
+    del data['servers']
+
+
 def execute(master: Path, version: str):
     build = pulsar_build.detect(master)
     master_swaggers = pulsar_build.swagger_output_dir(master, build)
@@ -54,11 +73,15 @@ def execute(master: Path, version: str):
     os.makedirs(site_path() / 'static' / docs_root / version, exist_ok=True)
     for f in master_swaggers.glob('*.json'):
         data = json.loads(f.read_text())
-        # The upstream build always names the files swagger*.json; publish them
-        # as openapi*.json under the OpenAPI 3 tree.
         stem = f.stem
-        if docs_root == 'openapi' and stem.startswith('swagger'):
-            stem = 'openapi' + stem[len('swagger'):]
+        if docs_root == 'openapi':
+            # Fold the /admin/vN prefix from servers[0].url into the path keys so
+            # Redoc 2.x shows it inline (see _fold_server_base_path).
+            _fold_server_base_path(data)
+            # The upstream build always names the files swagger*.json; publish
+            # them as openapi*.json under the OpenAPI 3 tree.
+            if stem.startswith('swagger'):
+                stem = 'openapi' + stem[len('swagger'):]
         with (site_path() / 'static' / docs_root / version / f'{stem}.json').open('w+') as m:
             json.dump(data, m, indent=4, sort_keys=True)
             m.write('\n')
