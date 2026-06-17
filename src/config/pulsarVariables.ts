@@ -153,6 +153,12 @@ export function referenceVersion(version: string): string {
  * resolves to the latest stable release's reference (e.g. `4.2.x`) instead of `next`,
  * so links like `/reference/#/@pulsar:version_reference@/client/` target the published
  * reference rather than the in-development one.
+ *
+ * `rest_api_version` is the value for the `?version=` query parameter on REST API
+ * pages (e.g. `/admin-rest-api/?version=@pulsar:rest_api_version@`). For the next/current
+ * docs it resolves to `master` (the in-development API), since the REST API viewer keys
+ * the in-development spec under `master` rather than a numbered release. Versioned docs
+ * resolve it to their concrete release, matching `version_number`.
  */
 export function resolveTokens(versionKey: string, referenceLatest = false): Map<string, string> {
   const isCurrent = versionKey === "current";
@@ -165,6 +171,7 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
   const versionNumber = isCurrent ? resolvedVersion : resolvedVersion.replace("-incubating", "");
   const versionOrigin = isCurrent ? resolvedVersion : originVersion;
   const versionReference = isCurrent && !referenceLatest ? "next" : referenceVersion(resolvedVersion);
+  const restApiVersion = isCurrent ? "master" : versionNumber;
   const pythonArg = isCurrent ? originVersion : resolvedVersion;
 
   return new Map<string, string>([
@@ -185,6 +192,7 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["javadoc:pulsar-functions", javadocVersionUrl(originVersion, "pulsar-functions")],
     ["offloader_release_url", offloaderReleaseUrl(resolvedVersion)],
     ["presto_pulsar_connector_release_url", prestoPulsarReleaseUrl(resolvedVersion)],
+    ["rest_api_version", restApiVersion],
     ["rpm:client-debuginfo", rpmDistUrl(resolvedVersion, "-debuginfo")],
     ["rpm:client-devel", rpmDistUrl(resolvedVersion, "-devel")],
     ["rpm:client", rpmDistUrl(resolvedVersion, "")],

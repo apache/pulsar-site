@@ -23,7 +23,7 @@ This guide walks you through the quickest way to get started with the following 
 </TabItem>
 <TabItem value="REST API">
 
-[REST API](pathname:///admin-rest-api/?version=@pulsar:version_number@) belongs to HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
+[REST API](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@) belongs to HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
 
 </TabItem>
 <TabItem value="Java">
