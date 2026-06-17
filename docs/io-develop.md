@@ -74,7 +74,7 @@ To develop a source connector, you need to implement the {@inject: github:open:/
      |Variable|Required|Description
      |---|---|---
      `TopicName`|No|Pulsar topic name from which the record is originated from.
-     `Key`|No| Messages can optionally be tagged with keys.<br /><br />For more information, see [Routing modes](concepts-messaging.md#routing-modes).|
+     `Key`|No| Messages can optionally be tagged with keys.<br /><br />For more information, see [Routing modes](concepts-messaging-legacy.md#routing-modes).|
      `Value`|Yes|Actual data of the record.
      `EventTime`|No|Event time of the record from the source.
      `PartitionId`|No| If the record is originated from a partitioned source, it returns its `PartitionId`. <br /><br />`PartitionId` is used as a part of the unique identifier by Pulsar IO runtime to deduplicate messages and achieve exactly-once processing guarantee.

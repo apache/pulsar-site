@@ -23,7 +23,7 @@ Non-persistent topics have names of this form (note the `non-persistent` in the 
 non-persistent://tenant/namespace/topic
 ```
 
-> For more high-level information about non-persistent topics, see the [Concepts and Architecture](concepts-messaging.md#non-persistent-topics) documentation.
+> For more high-level information about non-persistent topics, see the [Concepts and Architecture](concepts-messaging-legacy.md#non-persistent-topics) documentation.
 
 ## Use
 

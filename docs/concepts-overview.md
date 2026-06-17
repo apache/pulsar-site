@@ -15,7 +15,7 @@ Key features of Pulsar are listed below:
 * Very low publish and end-to-end latency.
 * Seamless scalability to over a million topics.
 * A simple [client API](concepts-clients.md) with bindings for [Java](/docs/client-libraries/java), [Go](/docs/client-libraries/go), [Python](/docs/client-libraries/python), [C++](/docs/client-libraries/cpp), [C#/.NET](/docs/client-libraries/dotnet), [Node.js](/docs/client-libraries/node), and [WebSocket](/docs/client-libraries/websocket).
-* Multiple [subscription types](concepts-messaging.md#subscription-types) ([exclusive](concepts-messaging.md#exclusive), [shared](concepts-messaging.md#shared), [failover](concepts-messaging.md#failover), and [key_shared](concepts-messaging.md#key_shared)) for topics.
+* Multiple [subscription types](concepts-messaging-legacy.md#subscription-types) ([exclusive](concepts-messaging-legacy.md#exclusive), [shared](concepts-messaging-legacy.md#shared), [failover](concepts-messaging-legacy.md#failover), and [key_shared](concepts-messaging-legacy.md#key_shared)) for topics.
 * Guaranteed message delivery with [persistent message storage](concepts-architecture-overview.md#persistent-storage) provided by [Apache BookKeeper](http://bookkeeper.apache.org/).
 * A serverless lightweight computing framework [Pulsar Functions](functions-overview.md) offers the capability for stream-native data processing.
 * A serverless connector framework [Pulsar IO](io-overview.md), which is built on Pulsar Functions, makes it easier to move data in and out of Apache Pulsar.
