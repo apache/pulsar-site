@@ -17,6 +17,7 @@ module.exports = {
                         "java-initialize",
                         "java-use",
                         "java-tracing",
+                        "java-v5",
                     ],
                 },
                 {

@@ -7,6 +7,24 @@ description: Learn how to use the Pulsar Java client to create producers, consum
 
 You can use a Pulsar Java client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Java and perform [administrative tasks](pathname:///docs/admin-api-overview). All the methods in Java clients are thread-safe. The current Java client LTS version is **@pulsar:version:lts@** and the latest version is **@pulsar:version:latest@**.
 
+## Java client SDKs
+
+Pulsar provides two Java client SDKs:
+
+| | Current SDK | V5 SDK |
+|---|---|---|
+| Package | `org.apache.pulsar.client.api` | `org.apache.pulsar.client.api.v5` |
+| Maven artifact | `pulsar-client` | `pulsar-client-v5` |
+| Topics | Partitioned and non-partitioned | [Scalable topics](pathname:///docs/concepts-scalable-topics) (and existing topics) |
+| Consumption | Exclusive / Failover / Shared / Key_Shared subscriptions | Stream / Queue / Checkpoint consumers |
+| Minimum Java | 8 | 17 |
+
+The **current SDK** is the stable, full-featured client used by most applications. It is documented in the [Get started](#get-started) and [Advanced use](clients.md) sections below.
+
+The **V5 SDK** is a newer client purpose-built for [scalable topics](pathname:///docs/concepts-scalable-topics); it also works against existing topics. See [Java client (V5)](java-v5.md).
+
+Both SDKs are fully supported and can be used side by side in the same application.
+
 ## Get started
 
 1. [Set up Java client library](java-setup.md)
