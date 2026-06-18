@@ -65,7 +65,7 @@ Before starting the migration:
    ```
    oxia://<host>:<port>/<namespace>
    ```
-   For example: `oxia://oxia-1.example.com:6648/pulsar`
+   For example: `oxia://oxia-1.example.com:6648/broker`
 
 :::tip
 
@@ -93,7 +93,7 @@ Expected output:
 Trigger the migration by specifying the target Oxia URL:
 
 ```shell
-bin/pulsar-admin metadata-migration start --target oxia://oxia-1.example.com:6648/pulsar
+bin/pulsar-admin metadata-migration start --target oxia://oxia-1.example.com:6648/broker
 ```
 
 The command returns immediately after initiating the migration. The actual migration runs asynchronously on the broker that received the request.
@@ -111,7 +111,7 @@ You will see the phase progress through `PREPARATION`, `COPYING`, and finally `C
 ```json
 {
   "phase" : "COMPLETED",
-  "targetUrl" : "oxia://oxia-1.example.com:6648/pulsar"
+  "targetUrl" : "oxia://oxia-1.example.com:6648/broker"
 }
 ```
 
@@ -122,8 +122,8 @@ If the status shows `FAILED`, check the broker logs for error details. The clust
 After migration completes, update the broker configuration to use Oxia directly. In `conf/broker.conf`:
 
 ```conf
-metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
-configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+metadataStoreUrl=oxia://oxia-1.example.com:6648/broker
+configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/broker
 ```
 
 Then perform a rolling restart of all brokers. After restarting, brokers connect to Oxia directly without the migration wrapper.
@@ -133,7 +133,7 @@ Then perform a rolling restart of all brokers. After restarting, brokers connect
 Update the BookKeeper configuration to use Oxia. In `conf/bookkeeper.conf`:
 
 ```conf
-metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/pulsar
+metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
 ```
 
 Then perform a rolling restart of all bookies.
@@ -157,7 +157,7 @@ If the migration fails, the phase is automatically set to `FAILED`. All brokers 
 To retry, simply run the `start` command again:
 
 ```shell
-bin/pulsar-admin metadata-migration start --target oxia://oxia-1.example.com:6648/pulsar
+bin/pulsar-admin metadata-migration start --target oxia://oxia-1.example.com:6648/broker
 ```
 
 ### A broker restarts after migration completes
@@ -172,7 +172,7 @@ The migration is also available through the REST API:
 
 **Start migration:**
 ```shell
-curl -X POST "http://broker:8080/admin/v2/metadata/migration/start?target=oxia://oxia-1.example.com:6648/pulsar"
+curl -X POST "http://broker:8080/admin/v2/metadata/migration/start?target=oxia://oxia-1.example.com:6648/broker"
 ```
 
 **Check status:**

@@ -1,8 +1,8 @@
 ---
 id: administration-zk-bk
-title: ZooKeeper and BookKeeper administration
-sidebar_label: "ZooKeeper and BookKeeper"
-description: Get a comprehensive understanding of ZooKeeper and BookKeeper in Pulsar.
+title: Metadata store and BookKeeper administration
+sidebar_label: "Metadata store & BookKeeper"
+description: Get a comprehensive understanding of the metadata store and BookKeeper in Pulsar.
 ---
 
 ````mdx-code-block
@@ -12,20 +12,30 @@ import TabItem from '@theme/TabItem';
 
 Pulsar relies on two external systems for essential tasks:
 
-* [ZooKeeper](https://zookeeper.apache.org/) is responsible for a wide variety of configuration-related and coordination-related tasks.
+* A **metadata store** is responsible for a wide variety of configuration-related and coordination-related tasks. For new clusters, [Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store; [ZooKeeper](https://zookeeper.apache.org/) is also fully supported and is covered on this page. See [Configure metadata store](administration-metadata-store.md) for all supported backends.
 * [BookKeeper](http://bookkeeper.apache.org/) is responsible for [persistent storage](concepts-architecture-overview.md#persistent-storage) of message data.
 
-ZooKeeper and BookKeeper are both open-source [Apache](https://www.apache.org/) projects.
-This diagram illustrates the role of ZooKeeper and BookKeeper in a Pulsar cluster:
+This diagram illustrates the role of the metadata store and BookKeeper in a Pulsar cluster:
 
-![Role of ZooKeeper and BookKeeper in Pulsar cluster](/assets/pulsar-system-architecture.png)
+![Role of the metadata store and BookKeeper in a Pulsar cluster](/assets/pulsar-system-architecture.svg)
 
 Each Pulsar cluster consists of one or more message brokers. Each broker relies on an ensemble of bookies.
 
 
+## Oxia
+
+[Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store for new Pulsar clusters. It provides the configuration and coordination services that Pulsar needs, with better scalability for large clusters than ZooKeeper.
+
+To use Oxia as the metadata store:
+
+1. Deploy an Oxia cluster and create the target namespace. See the [Oxia documentation](https://oxia-db.github.io/) for deployment instructions.
+2. Configure Pulsar to use it by setting `metadataStoreUrl` and `configurationMetadataStoreUrl`, as described in [Configure metadata store](administration-metadata-store.md#use-oxia-as-metadata-store).
+
+To move an existing ZooKeeper-based cluster to Oxia without downtime, see [Migrate metadata store](administration-metadata-store-migration.md).
+
 ## ZooKeeper
 
-Each Pulsar instance relies on two separate ZooKeeper quorums.
+ZooKeeper is the traditional metadata store option and ships with the Pulsar binary package. When you use ZooKeeper as the metadata store, each Pulsar instance relies on two separate ZooKeeper quorums.
 
 * [Local ZooKeeper](#deploy-local-zookeeper) operates at the cluster level and provides cluster-specific configuration management and coordination. Each Pulsar cluster needs to have a dedicated ZooKeeper cluster.
 * [Configuration Store](#deploy-configuration-store) operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum.

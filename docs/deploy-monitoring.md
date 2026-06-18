@@ -8,7 +8,7 @@ You can use different ways to monitor a Pulsar cluster, exposing both metrics re
 
 ## Collect metrics
 
-You can collect broker stats, ZooKeeper stats, and BookKeeper stats.
+You can collect broker stats, metadata store stats, and BookKeeper stats.
 
 ### Broker stats
 
@@ -34,9 +34,11 @@ The aggregated broker metrics are also exposed in the [Prometheus](https://prome
 http://$BROKER_ADDRESS:8080/metrics/
 ```
 
-### ZooKeeper stats
+### Metadata store stats
 
-The local ZooKeeper, configuration store server and clients that are shipped with Pulsar can expose detailed stats through Prometheus.
+If you use [Oxia](administration-metadata-store.md) as the metadata store (recommended for new clusters), Oxia exposes its own metrics. Refer to the [Oxia documentation](https://oxia-db.github.io/) for the metrics it provides and how to scrape them.
+
+The stats described below apply when ZooKeeper is the metadata store. The local ZooKeeper, configuration store server and clients that are shipped with Pulsar can expose detailed stats through Prometheus.
 
 ```shell
 http://$LOCAL_ZK_SERVER:8000/metrics

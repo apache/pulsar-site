@@ -11,13 +11,13 @@ A Pulsar cluster consists of the following components:
 
 * One or more [brokers](#brokers) handles and [load balances](administration-load-balance.md) incoming messages from [producers](concepts-clients.md#producer), dispatches messages to [consumers](concepts-clients.md#consumer), communicates with the Pulsar [metadata store](#metadata-store) to handle various coordination tasks, stores messages in [BookKeeper](#apache-bookkeeper) instances (aka bookies), and coordinates cluster operations through the metadata store.
 * A BookKeeper cluster consisting of one or more bookies handles [persistent storage](#persistent-storage) of messages.
-* A metadata store cluster (ZooKeeper, etcd, or other supported backend) handles coordination tasks and cluster-specific metadata storage.
+* A metadata store cluster (Oxia, ZooKeeper, etcd, or other supported backend) handles coordination tasks and cluster-specific metadata storage.
 
 The diagram below illustrates a Pulsar cluster:
 
-![Pulsar architecture diagram](/assets/pulsar-system-architecture.png)
+![Pulsar architecture diagram](/assets/pulsar-system-architecture.svg)
 
-At the broader instance level, an instance-wide ZooKeeper cluster called the [configuration store](#configuration-store) handles coordination tasks involving multiple clusters, for example, [geo-replication](concepts-replication.md).
+At the broader instance level, an instance-wide metadata store cluster called the [configuration store](#configuration-store) handles coordination tasks involving multiple clusters, for example, [geo-replication](concepts-replication.md).
 
 ## Brokers
 
@@ -37,7 +37,7 @@ Finally, to support [geo-replication](concepts-replication.md) on global [topics
 A Pulsar instance consists of one or more Pulsar *clusters*. Clusters, in turn, consist of:
 
 * One or more Pulsar [brokers](#brokers)
-* A ZooKeeper quorum used for cluster-level configuration and coordination
+* A metadata store (Oxia or ZooKeeper) used for cluster-level configuration and coordination
 * An ensemble of [bookies](#apache-bookkeeper) used for [persistent storage](#persistent-storage) of messages
 
 Clusters can replicate among themselves using [geo-replication](concepts-replication.md).
@@ -50,16 +50,19 @@ The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such a
 
 ### Supported Metadata Store Backends
 
-- **[Apache ZooKeeper](https://zookeeper.apache.org/)** - Default option, production-ready metadata store with strong consistency guarantees.
+- **[Oxia](https://github.com/oxia-db/oxia/)** - Recommended for new clusters. A robust, scalable metadata store and coordination system designed for large-scale distributed systems, with built-in support for stream index storage to optimize real-time data management.
+- **[Apache ZooKeeper](https://zookeeper.apache.org/)** - Production-ready metadata store with strong consistency guarantees; ships with the Pulsar binary package.
 - **[etcd](https://etcd.io/)** - Cloud-native distributed key-value store, ideal for Kubernetes environments and cloud deployments.
 - **[RocksDB](http://rocksdb.org/)** - Embedded key-value store for standalone Pulsar deployments, eliminating the need for external coordination services.
-- **[Oxia](https://github.com/oxia-db/oxia/)** - A robust, scalable metadata store and coordination system designed for large-scale distributed systems, with built-in support for stream index storage to optimize real-time data management.
 
 ### Configuration
 
 You can configure the metadata store using the `metadataStoreUrl` parameter:
 
 ```bash
+# Oxia (recommended)
+metadataStoreUrl=oxia://oxia-server:6648/broker
+
 # ZooKeeper
 metadataStoreUrl=zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
 
@@ -68,23 +71,20 @@ metadataStoreUrl=etcd:my-etcd-1:2379,my-etcd-2:2379,my-etcd-3:2379
 
 # RocksDB (standalone)
 metadataStoreUrl=rocksdb:///path/to/data
-
-# Oxia
-metadataStoreUrl=oxia:oxia-server:6648
 ```
 
 ### Deployment Considerations
 
-The Pulsar metadata store can be deployed on a separate cluster or integrated with existing infrastructure. You can use one ZooKeeper cluster for both Pulsar metadata store and BookKeeper metadata store. If you want to deploy Pulsar brokers connected to an existing BookKeeper cluster, you need to deploy separate clusters for Pulsar metadata store and BookKeeper metadata store respectively.
+The Pulsar metadata store can be deployed on a separate cluster or integrated with existing infrastructure. You can use one metadata store cluster for both Pulsar metadata and BookKeeper metadata. If you want to deploy Pulsar brokers connected to an existing BookKeeper cluster, you need to deploy separate clusters for Pulsar metadata store and BookKeeper metadata store respectively.
 
 In a Pulsar instance:
 
 * A configuration store quorum stores configuration for [tenants](concepts-multi-tenancy.md), [namespaces](concepts-messaging.md#namespaces), and other entities that need to be globally consistent.
-* Each cluster has its own local ZooKeeper ensemble that stores cluster-specific configuration and coordination such as which brokers are responsible for which [topics](concepts-messaging.md#topics) as well as ownership metadata, broker load reports, BookKeeper ledger metadata, and more.
+* Each cluster has its own local metadata store ensemble that stores cluster-specific configuration and coordination such as which brokers are responsible for which [topics](concepts-messaging.md#topics) as well as ownership metadata, broker load reports, BookKeeper ledger metadata, and more.
 
 ## Configuration store
 
-The configuration store is a ZooKeeper quorum that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, [tenants](concepts-multi-tenancy.md), [namespaces](concepts-messaging.md#namespaces), partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate ZooKeeper cluster or deployed on an existing ZooKeeper cluster.
+The configuration store is a metadata store quorum (Oxia or ZooKeeper) that is used for configuration-specific tasks and it maintains all the configurations of a Pulsar instance, such as clusters, [tenants](concepts-multi-tenancy.md), [namespaces](concepts-messaging.md#namespaces), partitioned topic-related configurations, and so on. A Pulsar instance can have a single local cluster, multiple local clusters, or multiple cross-region clusters. Consequently, the configuration store can share the configurations across multiple clusters under a Pulsar instance. The configuration store can be deployed on a separate cluster or share an existing metadata store cluster.
 
 ## Persistent storage
 
@@ -116,7 +116,7 @@ persistent://my-tenant/my-namespace/my-topic
 
 You can see an illustration of how brokers and bookies interact in the diagram below:
 
-![Brokers and bookies in a Pulsar cluster](/assets/broker-bookie.png)
+![Brokers and bookies in a Pulsar cluster](/assets/broker-bookie.svg)
 
 
 ### Ledgers
@@ -156,6 +156,11 @@ Architecturally, the Pulsar proxy gets all the information it requires from the 
 
 ```bash
 cd /path/to/pulsar/directory
+# Using Oxia (recommended)
+bin/pulsar proxy \
+    --metadata-store oxia://oxia-1.example.com:6648/broker \
+    --configuration-metadata-store oxia://oxia-1.example.com:6648/broker
+
 # Using ZooKeeper
 bin/pulsar proxy \
     --metadata-store zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181 \
@@ -184,7 +189,7 @@ You can use your own service discovery system if you'd like. If you use your own
 
 The diagram below illustrates Pulsar service discovery:
 
-![Service discovery in Pulsar](/assets/pulsar-service-discovery.png)
+![Service discovery in Pulsar](/assets/pulsar-service-discovery.svg)
 
 In this diagram, the Pulsar cluster is addressable via a single DNS name: `pulsar-cluster.acme.com`. A [Python client](/docs/client-libraries/python), for example, could access this Pulsar cluster like this:
 

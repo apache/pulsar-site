@@ -76,7 +76,8 @@ For example, if you use token authentication, you need to configure the followin
 ```yaml
 brokerClientAuthenticationPlugin: org.apache.pulsar.client.impl.auth.AuthenticationToken
 brokerClientAuthenticationParameters: file:///etc/pulsar/token/admin-token.txt
-configurationMetadataStoreUrl: zk:zookeeper-cluster:2181 # auth requires a connection to zookeeper
+configurationMetadataStoreUrl: oxia://oxia-1.example.com:6648/broker # auth requires a connection to the metadata store; Oxia is recommended for new clusters
+# configurationMetadataStoreUrl: zk:zookeeper-cluster:2181 # alternatively, use ZooKeeper as the metadata store
 authenticationProviders:
  - "org.apache.pulsar.broker.authentication.AuthenticationProviderToken"
 authorizationEnabled: true

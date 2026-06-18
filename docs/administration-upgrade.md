@@ -12,13 +12,13 @@ import TabItem from '@theme/TabItem';
 
 ## Upgrade guidelines
 
-Apache Pulsar is comprised of multiple components, ZooKeeper, bookies, and brokers. These components are either stateful or stateless. You do not have to upgrade ZooKeeper nodes unless you have special requirements. While you upgrade, you need to pay attention to bookies (stateful), brokers, and proxies (stateless).
+Apache Pulsar is comprised of multiple components, the metadata store (Oxia or ZooKeeper), bookies, and brokers. These components are either stateful or stateless. You do not have to upgrade the metadata store unless you have special requirements. While you upgrade, you need to pay attention to bookies (stateful), brokers, and proxies (stateless).
 
 Read the following guidelines before upgrading a Pulsar cluster.
 
 - Back up all your configuration files before upgrading.
 - Read the guide entirely, make a plan, and then execute the plan. When you make an upgrade plan, you need to take your specific requirements and environment into consideration.
-- Pay attention to the [upgrade sequence of components](#upgrade-sequence). In general, you do not need to upgrade your ZooKeeper or configuration store cluster (the global ZooKeeper cluster). You need to upgrade bookies first, and then upgrade brokers, proxies, and your clients.
+- Pay attention to the [upgrade sequence of components](#upgrade-sequence). In general, you do not need to upgrade your metadata store or configuration store cluster. You need to upgrade bookies first, and then upgrade brokers, proxies, and your clients.
 - If `autorecovery` is enabled, you need to disable `autorecovery` in the upgrade process, and re-enable it after completing the process.
 - Read the release notes carefully for each release. Release notes contain features and configuration changes that might impact your upgrade.
 - Upgrade a small subset of nodes of each type to canary test the new version before upgrading all nodes of that type in the cluster. When you have upgraded the canary nodes, run for a while to ensure that they work correctly.
@@ -34,9 +34,9 @@ Currently, Apache Pulsar is compatible between versions.
 
 To upgrade an Apache Pulsar cluster, follow the upgrade sequence.
 
-1. Upgrade ZooKeeper (optional).
-   - Canary test: test an upgraded version in one or a small set of ZooKeeper nodes.
-   - Rolling upgrade: roll out the upgraded version to all ZooKeeper servers incrementally, one at a time. Monitor your dashboard during the whole rolling upgrade process.
+1. Upgrade the metadata store (optional). The steps below describe a ZooKeeper-based metadata store; if you use Oxia, follow the equivalent procedure in the [Oxia documentation](https://oxia-db.github.io/).
+   - Canary test: test an upgraded version in one or a small set of metadata store nodes.
+   - Rolling upgrade: roll out the upgraded version to all metadata store nodes incrementally, one at a time. Monitor your dashboard during the whole rolling upgrade process.
 2. Upgrade bookies.
    - Canary test: test an upgraded version in one or a small set of bookies.
    - Rolling upgrade:

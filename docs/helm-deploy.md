@@ -102,6 +102,12 @@ components:
   pulsar_manager: true
 ```
 
+:::tip Use Oxia as the metadata store
+
+For new clusters, [Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store. The Pulsar Helm chart can deploy Oxia instead of ZooKeeper — set `components.oxia: true` and `components.zookeeper: false` in your values file. The chart then points the broker's `metadataStoreUrl` and BookKeeper's `metadataServiceUri` at the Oxia cluster automatically. See the chart's [`values.yaml`](https://github.com/apache/pulsar-helm-chart/blob/master/charts/pulsar/values.yaml) for Oxia options (such as `oxia.initialShardCount` and `oxia.replicationFactor`) and for any feature limitations.
+
+:::
+
 ##### Monitoring Components
 
 The Pulsar Helm Chart installs monitoring components using a dependent Helm chart, [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts). You can customize this Helm chart to specify which monitoring components to install. These components are enabled by default.

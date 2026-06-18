@@ -18,33 +18,28 @@ To run Pulsar locally with Docker Compose, follow the steps below.
 
 To get up and run a Pulsar cluster quickly, you can use the following template to create a `compose.yml` file by modifying or adding the configurations in the **environment** section.
 
+This cluster uses [Oxia](https://github.com/oxia-db/oxia) as its [metadata store](administration-metadata-store.md) — the recommended option for new Pulsar clusters. Oxia standalone serves a single `default` namespace, which both Pulsar and BookKeeper use here; production clusters use separate Oxia namespaces (see [Configure metadata store](administration-metadata-store.md#use-oxia-as-metadata-store)).
+
 ```yaml
 version: '3'
 networks:
   pulsar:
     driver: bridge
 services:
-  # Start zookeeper
-  zookeeper:
-    image: apachepulsar/pulsar:latest
-    container_name: zookeeper
+  # Start Oxia (metadata store)
+  oxia:
+    image: oxia/oxia:latest
+    container_name: oxia
     restart: on-failure
     networks:
       - pulsar
     volumes:
-      - ./data/zookeeper:/pulsar/data/zookeeper
-    environment:
-      - metadataStoreUrl=zk:zookeeper:2181
-      - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
+      - oxia-data:/data
     command:
-      - bash
-      - -c
-      - |
-        bin/apply-config-from-env.py conf/zookeeper.conf && \
-        bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
-        exec bin/pulsar zookeeper
+      - oxia
+      - standalone
     healthcheck:
-      test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
+      test: ["CMD", "oxia", "health", "--port=6648"]
       interval: 10s
       timeout: 5s
       retries: 30
@@ -62,12 +57,12 @@ services:
       - |
         bin/pulsar initialize-cluster-metadata \
         --cluster cluster-a \
-        --zookeeper zookeeper:2181 \
-        --configuration-store zookeeper:2181 \
+        --metadata-store oxia://oxia:6648/default \
+        --configuration-store oxia://oxia:6648/default \
         --web-service-url http://broker:8080 \
         --broker-service-url pulsar://broker:6650
     depends_on:
-      zookeeper:
+      oxia:
         condition: service_healthy
 
   # Start bookie
@@ -79,20 +74,16 @@ services:
       - pulsar
     environment:
       - clusterName=cluster-a
-      - zkServers=zookeeper:2181
-      - metadataServiceUri=metadata-store:zk:zookeeper:2181
-      # otherwise every time we run docker compose up or down we fail to start due to Cookie
-      # See: https://github.com/apache/bookkeeper/blob/405e72acf42bb1104296447ea8840d805094c787/bookkeeper-server/src/main/java/org/apache/bookkeeper/bookie/Cookie.java#L57-68
+      - metadataServiceUri=metadata-store:oxia://oxia:6648/default
       - advertisedAddress=bookie
       - BOOKIE_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
     depends_on:
-      zookeeper:
+      oxia:
         condition: service_healthy
       pulsar-init:
         condition: service_completed_successfully
-    # Map the local directory to the container to avoid bookie startup failure due to insufficient container disks.
     volumes:
-      - ./data/bookkeeper:/pulsar/data/bookkeeper
+      - bookie-data:/pulsar/data/bookkeeper
     command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
 
   # Start broker
@@ -104,8 +95,7 @@ services:
     networks:
       - pulsar
     environment:
-      - metadataStoreUrl=zk:zookeeper:2181
-      - zookeeperServers=zookeeper:2181
+      - metadataStoreUrl=oxia://oxia:6648/default
       - clusterName=cluster-a
       - managedLedgerDefaultEnsembleSize=1
       - managedLedgerDefaultWriteQuorum=1
@@ -114,7 +104,7 @@ services:
       - advertisedListeners=external:pulsar://127.0.0.1:6650
       - PULSAR_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
     depends_on:
-      zookeeper:
+      oxia:
         condition: service_healthy
       bookie:
         condition: service_started
@@ -122,30 +112,13 @@ services:
       - "6650:6650"
       - "8080:8080"
     command: bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
+
+volumes:
+  oxia-data:
+  bookie-data:
 ```
 
 ## Step 2: Create a Pulsar cluster
-
-As preparation, create the data directories that the `compose.yml` file will bind-mount into the Pulsar containers.
-
-On Linux, the mounted directories need to be owned by uid `10000` -- the default user inside the Pulsar Docker container -- so the containers can write to them:
-
-```bash
-sudo mkdir -p ./data/zookeeper ./data/bookkeeper
-sudo chown -R 10000 data
-```
-
-:::note macOS and Windows (Docker Desktop)
-
-On macOS and Windows, Docker Desktop runs containers inside a Linux VM and handles uid remapping for bind mounts for you, so the `chown -R 10000` step is not required and running it with `sudo` will typically fail or leave the files in a state that prevents `docker compose up` from starting cleanly (the bookie/zookeeper containers fail with permission errors on `./data/...`).
-
-If you see permission errors on startup, remove the `./data` directory (or reset its ownership to your user) and create it without `chown`:
-
-```bash
-mkdir -p ./data/zookeeper ./data/bookkeeper
-```
-
-:::
 
 To create a Pulsar cluster by using the `compose.yml` file, run the following command.
 
@@ -153,10 +126,16 @@ To create a Pulsar cluster by using the `compose.yml` file, run the following co
 docker compose up -d
 ```
 
+:::note
+
+This cluster persists its metadata and message data in named Docker volumes (`oxia-data` and `bookie-data`), so it survives `docker compose down` and `docker compose up`. To wipe the data and start completely fresh, run `docker compose down -v`.
+
+:::
+
 ## Step 3: Destroy the Pulsar cluster
 
-If you want to destroy the Pulsar cluster with all the containers, run the following command. It will also delete the network that the containers are connected to.
+If you want to destroy the Pulsar cluster with all the containers, run the following command. The `-v` flag also removes the named volumes (the cluster's data), and the network that the containers are connected to.
 
 ```bash
-docker compose down
+docker compose down -v
 ```
