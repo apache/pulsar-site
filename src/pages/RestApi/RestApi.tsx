@@ -47,6 +47,20 @@ function usesOpenApi3(version) {
   const major = parseInt(version.split(".")[0], 10);
   return !isNaN(major) && major >= 5;
 }
+
+// Each REST API is published as its own Redoc viewer page (one OpenAPI document
+// each). This list drives the toolbar dropdown that lets readers jump between
+// them; labels mirror docs/reference-rest-api-overview.md.
+const REST_APIS = [
+  { label: "Admin", slug: "admin-rest-api" },
+  { label: "Functions", slug: "functions-rest-api" },
+  { label: "Sources", slug: "source-rest-api" },
+  { label: "Sinks", slug: "sink-rest-api" },
+  { label: "Packages", slug: "packages-rest-api" },
+  { label: "Transactions", slug: "transactions-rest-api" },
+  { label: "Lookup", slug: "lookup-rest-api" },
+];
+
 class RestApi extends React.Component {
   componentDidMount() {
     let pathName = window.location.pathname;
@@ -102,7 +116,61 @@ class RestApi extends React.Component {
       redoc.setAttribute("lazy-rendering", "true");
       redocLink.setAttribute("src", "/js/redoc.min.js");
     }
+    // Toolbar with a button that expands the Redoc view to the full page width
+    // by dropping the Docusaurus container max-width (see .fullWidth in the CSS
+    // module). The wide three-pane REST API layout is otherwise cropped by the
+    // centered content column.
+    const toolbar = document.createElement("div");
+    toolbar.className = s.toolbar;
+    const expandButton = document.createElement("button");
+    expandButton.type = "button";
+    expandButton.className = "button button--secondary button--sm";
+    expandButton.title = "Toggle full-width view";
+    const collapsedLabel = "⤢ Full width";
+    const expandedLabel = "⤡ Exit full width";
+    expandButton.textContent = collapsedLabel;
+    expandButton.onclick = () => {
+      const expanded = wrapper.classList.toggle(s.fullWidth);
+      expandButton.textContent = expanded ? expandedLabel : collapsedLabel;
+      // Nudge Redoc to recompute its responsive (menu / samples pane) layout
+      // for the new width.
+      window.dispatchEvent(new Event("resize"));
+    };
+    // Dropdown (left of the Full width button) to jump between the per-API Redoc
+    // viewer pages, preserving the ?version= selection.
+    const apiSelect = document.createElement("select");
+    // Render the native <select> like the adjacent Full width button.
+    apiSelect.className = "button button--secondary button--sm " + s.apiSelect;
+    apiSelect.title = "Jump to another REST API";
+    const currentApi = REST_APIS.find((a) =>
+      window.location.pathname.includes(a.slug)
+    );
+    for (const api of REST_APIS) {
+      const option = document.createElement("option");
+      option.value = api.slug;
+      option.textContent = api.label;
+      option.selected = !!currentApi && api.slug === currentApi.slug;
+      apiSelect.appendChild(option);
+    }
+    apiSelect.onchange = () => {
+      const slug = apiSelect.value;
+      const pathname = currentApi
+        ? window.location.pathname.replace(currentApi.slug, slug)
+        : "/" + slug + "/";
+      // Keep ?version= but drop apiVersion: it is per-API and recomputed by the
+      // target page.
+      const search = new URLSearchParams(window.location.search);
+      search.delete("apiversion");
+      search.delete("apiVersion");
+      const query = search.toString();
+      window.location.assign(pathname + (query ? "?" + query : ""));
+    };
+
+    toolbar.appendChild(apiSelect);
+    toolbar.appendChild(expandButton);
+
     const script = document.querySelector(".container script");
+    wrapper.insertBefore(toolbar, script);
     wrapper.insertBefore(redoc, script);
     wrapper.insertBefore(redocLink, script);
   }
