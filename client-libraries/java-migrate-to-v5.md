@@ -150,6 +150,39 @@ byte[] state = consumer.checkpoint().toByteArray();   // persist; restore via Ch
 
 A `Checkpoint` replaces the `MessageId` you would store with a reader. The two are **not interchangeable** -- a saved `MessageId` cannot be used as a `Checkpoint` -- so plan a clean cutover when migrating readers.
 
+### Multiple topics: pattern subscriptions → namespace consumers
+
+In the current SDK, a single consumer can attach to many topics with a topic list or a regular-expression pattern:
+
+```java
+// Current -- pattern subscription
+Consumer<String> consumer = client.newConsumer(Schema.STRING)
+        .topicsPattern("persistent://tenant/ns/orders-.*")
+        .subscriptionName("workers")
+        .subscriptionType(SubscriptionType.Shared)
+        .subscribe();
+```
+
+In the V5 SDK, a stream or queue consumer attaches to an entire **namespace** instead, optionally narrowed by topic **properties** rather than a name pattern. Set `namespace(...)` in place of `topic(...)`:
+
+```java
+// V5 -- every scalable topic in the namespace
+QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
+        .namespace("tenant/ns")
+        .subscriptionName("workers")
+        .subscribe();
+
+// V5 -- only topics whose properties match every filter (AND semantics)
+QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
+        .namespace("tenant/ns", Map.of("team", "orders", "tier", "gold"))
+        .subscriptionName("workers")
+        .subscribe();
+```
+
+The matching set is **live**: as topics are created or deleted in the namespace -- or as their properties change -- the consumer attaches and detaches automatically, the way a v4 pattern subscription tracks newly created topics. Set either `topic(...)` or `namespace(...)`, not both.
+
+Filtering is by topic **properties**, not by a name regex, so tag topics with properties when you create them (`pulsar-admin scalable-topics create … --property team=orders`) and select them with a matching filter. Namespace consumption is available on stream and queue consumers; checkpoint consumers are single-topic.
+
 ## Schemas, transactions, and configuration
 
 - **Schemas** -- replace the `Schema.STRING` / `Schema.JSON(...)` constants with the lowercase factory methods `Schema.string()` / `Schema.json(...)`. See [Schemas](java-v5.md#schemas).
