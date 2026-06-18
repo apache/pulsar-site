@@ -20,7 +20,7 @@ The modular and extensible broker load balancer implements similar load balance 
 
 - Dynamic [bundle unloading (shedding)](./concepts-broker-load-balancing-concepts.md#bundle-unloading)
 
-However, for bundle ownership and load data stores, the modular load balancer uses ZooKeeper, whereas the extensible load balancer uses [System topics](./concepts-messaging.md#system-topic) and [Table views](./concepts-clients.md#tableview).
+However, for bundle ownership and load data stores, the modular load balancer uses ZooKeeper, whereas the extensible load balancer uses [System topics](./concepts-messaging-legacy.md#system-topic) and [Table views](./concepts-clients.md#tableview).
 
 ## Side-by-side comparisons
 

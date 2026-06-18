@@ -15,7 +15,7 @@ Due to the unpredictable topic volume and physical distance among distributed br
 
 - When brokers experience low traffic, become idle, or are added or removed, the cluster rebalances the load to avoid wasting resources.
 
-- When topics are redistributed to other brokers, the cluster ensures the topics are instantaneously available to clients. The topics continue to guarantee the system performance, such as persistence, [ordering](./concepts-messaging.md#ordering-guarantee), [deduplication](./concepts-messaging.md#message-deduplication), [subscription type](./concepts-messaging.md#subscription-types), etc.
+- When topics are redistributed to other brokers, the cluster ensures the topics are instantaneously available to clients. The topics continue to guarantee the system performance, such as persistence, [ordering](./concepts-messaging-legacy.md#ordering-guarantee), [deduplication](./concepts-messaging.md#message-deduplication), [subscription type](./concepts-messaging-legacy.md#subscription-types), etc.
 
 ## Broker load balancing in Pulsar
 

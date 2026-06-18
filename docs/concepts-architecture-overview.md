@@ -103,7 +103,7 @@ Pulsar uses a system called [Apache BookKeeper](http://bookkeeper.apache.org/) f
 * It's horizontally scalable in both capacity and throughput. Capacity can be immediately increased by adding more bookies to a cluster.
 * Bookies are designed to handle thousands of ledgers with concurrent reads and writes. By using multiple disk devices---one for journal and another for general storage--bookies can isolate the effects of reading operations from the latency of ongoing write operations.
 
-In addition to message data, *cursors* are also persistently stored in BookKeeper. Cursors are [subscription](concepts-messaging.md#subscriptions) positions for [consumers](concepts-clients.md#consumer). BookKeeper enables Pulsar to store consumer position in a scalable fashion.
+In addition to message data, *cursors* are also persistently stored in BookKeeper. Cursors are [subscription](concepts-messaging-legacy.md#subscriptions) positions for [consumers](concepts-clients.md#consumer). BookKeeper enables Pulsar to store consumer position in a scalable fashion.
 
 At the moment, Pulsar supports persistent message storage. This accounts for the `persistent` in all topic names. Here's an example:
 
@@ -111,7 +111,7 @@ At the moment, Pulsar supports persistent message storage. This accounts for the
 persistent://my-tenant/my-namespace/my-topic
 ```
 
-> Pulsar also supports ephemeral [non-persistent](concepts-messaging.md#non-persistent-topics) message storage.
+> Pulsar also supports ephemeral [non-persistent](concepts-messaging-legacy.md#non-persistent-topics) message storage.
 
 
 You can see an illustration of how brokers and bookies interact in the diagram below:

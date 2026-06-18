@@ -166,7 +166,7 @@ pip install pulsar-client
 
 ### Consume a message
 
-Create a [consumer](concepts-clients.md#consumer) and [subscribe](concepts-messaging.md#subscriptions) to the [topic](concepts-messaging.md#topics):
+Create a [consumer](concepts-clients.md#consumer) and [subscribe](concepts-messaging-legacy.md#subscriptions) to the [topic](concepts-messaging.md#topics):
 
 ```python
 import pulsar

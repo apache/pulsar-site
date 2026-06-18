@@ -47,7 +47,7 @@ Pulsar is a multi-tenant event streaming system. Administrators can manage the t
 - Avoid using ZooKeeper and introduce more loads to ZooKeeper.
 - Use Pulsar as an event log for propagating the policy cache. It can scale efficiently.
 
-Each namespace has a [system topic](concepts-messaging.md#system-topic) named `__change_events`. This system topic stores change events for a given namespace. The following figure illustrates how to leverage the system topic to update topic-level policies.
+Each namespace has a [system topic](concepts-messaging-legacy.md#system-topic) named `__change_events`. This system topic stores change events for a given namespace. The following figure illustrates how to leverage the system topic to update topic-level policies.
 
 ![Leverage the system topic to update topic-level policies in Pulsar](/assets/system-topic-for-topic-level-policies.svg)
 
