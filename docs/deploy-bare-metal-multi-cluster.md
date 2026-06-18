@@ -68,9 +68,11 @@ Directory | Contains
 `logs` | Logs that the installation creates
 
 
-## Step 1: Deploy ZooKeeper
+## Step 1: Deploy the metadata store
 
-Each Pulsar instance relies on two separate ZooKeeper quorums.
+For new clusters, [Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store, including for multi-cluster instances. Deploy Oxia following the [Oxia documentation](https://oxia-db.github.io/) and use its `oxia://<host>:<port>/<namespace>` URL for both the local metadata store and the configuration store wherever the steps below reference a connection string. The rest of this step describes the traditional **ZooKeeper** setup.
+
+When you use ZooKeeper, each Pulsar instance relies on two separate ZooKeeper quorums.
 
 * Local ZooKeeper operates at the cluster level and provides cluster-specific configuration management and coordination. Each Pulsar cluster needs a dedicated ZooKeeper cluster.
 * Configuration Store operates at the instance level and provides configuration management for the entire system (and thus across clusters). An independent cluster of machines or the same machines that local ZooKeeper uses can provide the configuration store quorum.
@@ -191,7 +193,7 @@ bin/pulsar-daemon start configuration-store
 
 ## Step 2: Cluster metadata initialization
 
-Once you set up the cluster-specific ZooKeeper and configuration store quorums for your instance, you need to write some metadata to ZooKeeper for each cluster in your instance. **you only need to write these metadata once**.
+Once you set up the cluster-specific metadata store and configuration store quorums for your instance, you need to write some metadata for each cluster in your instance. **you only need to write these metadata once**.
 
 You can initialize this metadata using the [`initialize-cluster-metadata`](reference-cli-tools.md) command of the [`pulsar`](reference-cli-tools.md) CLI tool. The following is an example:
 
@@ -205,6 +207,12 @@ bin/pulsar initialize-cluster-metadata \
     --broker-service-url pulsar://pulsar.us-west.example.com:6650/ \
     --broker-service-url-tls pulsar+ssl://pulsar.us-west.example.com:6651/
 ```
+
+:::tip
+
+If you use Oxia as the metadata store, set both `--metadata-store` and `--configuration-metadata-store` to your Oxia URL, for example `oxia://oxia-1.example.com:6648/pulsar`.
+
+:::
 
 As you can see from the example above, you need to specify the following:
 
@@ -222,11 +230,11 @@ Make sure to run `initialize-cluster-metadata` for each cluster in your instance
 
 BookKeeper provides [persistent message storage](concepts-architecture-overview.md#persistent-storage) for Pulsar.
 
-Each Pulsar broker needs its own cluster of bookies. The BookKeeper cluster shares a local ZooKeeper quorum with the Pulsar cluster.
+Each Pulsar broker needs its own cluster of bookies. The BookKeeper cluster shares the metadata store with the Pulsar cluster.
 
 ### Configure bookies
 
-You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important aspect of configuring each bookie is ensuring that the [`zkServers`](reference-configuration.md#bookkeeper-zkServers) parameter is set to the connection string for the local ZooKeeper of Pulsar cluster.
+You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important aspect of configuring each bookie is ensuring that its `metadataServiceUri` points to the same metadata store as the Pulsar cluster — `metadata-store:oxia://oxia-1.example.com:6648/pulsar` for Oxia (recommended), or the local ZooKeeper connection string.
 
 ### Start bookies
 
@@ -267,17 +275,24 @@ designed to use multiple devices:
 
 ## Step 4: Deploy brokers
 
-Once you set up ZooKeeper, initialize cluster metadata, and spin up BookKeeper bookies, you can deploy brokers.
+Once you set up the metadata store, initialize cluster metadata, and spin up BookKeeper bookies, you can deploy brokers.
 
 ### Broker configuration
 
 You can configure brokers using the [`conf/broker.conf`](reference-configuration.md#broker) configuration file.
 
-The most important element of broker configuration is ensuring that each broker is aware of its local ZooKeeper quorum as well as the configuration store quorum. Make sure that you set the [`metadataStoreUrl`](reference-configuration.md#broker) parameter to reflect the local quorum and the [`configurationMetadataStoreUrl`](reference-configuration.md#broker) parameter to reflect the configuration store quorum (although you need to specify only those ZooKeeper servers located in the same cluster).
+The most important element of broker configuration is ensuring that each broker is aware of its local metadata store as well as the configuration store. Make sure that you set the [`metadataStoreUrl`](reference-configuration.md#broker) parameter to reflect the local metadata store and the [`configurationMetadataStoreUrl`](reference-configuration.md#broker) parameter to reflect the configuration store.
 
 You also need to specify the name of the [cluster](reference-terminology.md#cluster) to which the broker belongs using the [`clusterName`](reference-configuration.md#broker-clusterName) parameter. In addition, you need to match the broker and web service ports provided when you initialize the metadata (especially when you use a different port from default) of the cluster.
 
-The following is an example configuration:
+With Oxia (recommended), point both parameters at your Oxia URL:
+
+```properties
+metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+```
+
+The following is an example configuration with ZooKeeper:
 
 ```properties
 # Local ZooKeeper servers

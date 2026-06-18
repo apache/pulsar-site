@@ -121,6 +121,12 @@ Variable name | Description | Default
 `base_cidr_block` | The root [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) that network assets uses for the cluster | `10.0.0.0/16`
 `instance_types` | The EC2 instance types to be used. This variable is a map with two keys: `zookeeper` for the ZooKeeper instances, `bookie` for the BookKeeper bookies and `broker` and `proxy` for Pulsar brokers and bookies | `t2.small` (ZooKeeper), `i3.xlarge` (BookKeeper) and `c5.2xlarge` (Brokers/Proxies)
 
+:::note
+
+This Terraform/Ansible recipe provisions [ZooKeeper](https://zookeeper.apache.org) as the metadata store. For new clusters, [Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store; deploy it separately following the [Oxia documentation](https://oxia-db.github.io/) and point the brokers and bookies at it as described in [Configure metadata store](administration-metadata-store.md).
+
+:::
+
 ### What is installed
 
 When you run the Ansible playbook, the following AWS resources are used:

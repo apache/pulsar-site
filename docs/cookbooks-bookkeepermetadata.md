@@ -5,7 +5,7 @@ description: Get a comprehensive understanding of BookKeeper Ledger Metadata.
 ---
 
 Pulsar stores data on BookKeeper ledgers, you can understand the contents of a ledger by inspecting the metadata attached to the ledger.
-Such metadata are stored on ZooKeeper and they are readable using BookKeeper APIs.
+Such metadata are stored in the configured [metadata store](administration-metadata-store.md) (Oxia, recommended for new clusters, or ZooKeeper) and they are readable using BookKeeper APIs.
 
 Description of current metadata:
 

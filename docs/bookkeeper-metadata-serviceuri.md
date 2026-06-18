@@ -67,7 +67,12 @@ it ends up internally as:
 
 ### **3\. Metadata Service URI (Preferred)**
 
-From our **OSS Pulsar 4.x tests**, the **correct and working setup** is:
+For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md). Point BookKeeper at Oxia with:
+
+| metadataServiceUri\=metadata-store:oxia://oxia-1.example.com:6648/pulsar |
+| :---- |
+
+Alternatively, with ZooKeeper as the metadata store, the **correct and working setup** (from our **OSS Pulsar 4.x tests**) is:
 
 | metadataServiceUri\=metadata-store:zk:pulsar-mini-zookeeper:2181zkLedgersRootPath\=/ledgerszkServers\= |
 | :---- |
@@ -90,7 +95,12 @@ From our **OSS Pulsar 4.x tests**, the **correct and working setup** is:
 
 ### **Summary :**
 
-Always set **metadataServiceUri** in bookkeeper.conf. Example:
+Always set **metadataServiceUri** in bookkeeper.conf. For new clusters, [Oxia](administration-metadata-store.md) is the recommended metadata store:
+
+| metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/pulsar |
+| :---- |
+
+With ZooKeeper:
 
 | metadataServiceUri=metadata-store:zk:zk1:2181,zk2:2181,zk3:2181/ledgers |
 | :---- |

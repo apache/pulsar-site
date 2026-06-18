@@ -49,7 +49,16 @@ Note that if you do not use functions, you do not need to configure `functionWor
 
 ### Use service discovery
 
-Pulsar uses [ZooKeeper](https://zookeeper.apache.org) for service discovery. To connect the proxy to ZooKeeper, specify the following in `conf/proxy.conf`.
+Pulsar uses its metadata store for service discovery. To connect the proxy to the metadata store, specify it in `conf/proxy.conf`.
+
+For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md):
+
+```properties
+metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+```
+
+Alternatively, to connect the proxy to a [ZooKeeper](https://zookeeper.apache.org) cluster:
 
 ```properties
 metadataStoreUrl=my-zk-0:2181,my-zk-1:2181,my-zk-2:2181
@@ -101,6 +110,17 @@ brokerProxyAllowedIPAddresses=10.10.0.0/16,192.168.1.100-120,172.16.2.*,10.1.2.3
 ## Start the proxy
 
 To start the proxy, run the following commands.
+
+For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md):
+
+```bash
+cd /path/to/pulsar/directory
+bin/pulsar proxy \
+    --metadata-store oxia://oxia-1.example.com:6648/pulsar \
+    --configuration-metadata-store oxia://oxia-1.example.com:6648/pulsar
+```
+
+Alternatively, with ZooKeeper as the metadata store:
 
 ```bash
 cd /path/to/pulsar/directory

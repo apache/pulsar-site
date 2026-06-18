@@ -9,7 +9,7 @@ To deploy a Pulsar cluster on Docker using Docker commands, you need to complete
 
 ## Step 1: Pull a Pulsar image
 
-To run Pulsar on Docker, you need to create a container for each Pulsar component: ZooKeeper, bookie, and the broker. You can pull the images of ZooKeeper and bookie separately on Docker Hub, and pull the Pulsar image for the broker. You can also pull only one Pulsar image and create three containers with this image. This tutorial takes the second option as an example.
+To run Pulsar on Docker, you need to create a container for each Pulsar component: the metadata store, a bookie, and a broker. This tutorial uses [Oxia](https://github.com/oxia-db/oxia) as the [metadata store](administration-metadata-store.md) (the recommended option for new clusters), which runs from its own image; the bookie and broker run from the Pulsar image.
 
 You can pull a Pulsar image from Docker Hub with the following command. If you do not want to use some connectors, you can use `apachepulsar/pulsar:latest` there.
 ```bash
@@ -18,7 +18,7 @@ docker pull apachepulsar/pulsar-all:latest
 
 ## Step 2: Create a network
 
-To deploy a Pulsar cluster on Docker, you need to create a network and connect the containers of ZooKeeper, bookie, and broker to this network.
+To deploy a Pulsar cluster on Docker, you need to create a network and connect the containers of Oxia, bookie, and broker to this network.
 Use the following command to create the network `pulsar`:
 
 ```bash
@@ -27,31 +27,29 @@ docker network create pulsar
 
 ## Step 3: Create and start containers
 
-### Create a ZooKeeper container
+### Create an Oxia container
 
-Create a ZooKeeper container and start the ZooKeeper service.
+Create an Oxia container and start the Oxia metadata store.
 
 ```bash
-docker run -d -p 2181:2181 --net=pulsar \
-    -e metadataStoreUrl=zk:zookeeper:2181 \
-    -e cluster-name=cluster-a \
-    -v $(pwd)/data/zookeeper:/pulsar/data/zookeeper \
-    --name zookeeper --hostname zookeeper \
-    apachepulsar/pulsar-all:latest \
-    bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && bin/generate-zookeeper-config.sh conf/zookeeper.conf && exec bin/pulsar zookeeper"
+docker run -d -p 6648:6648 --net=pulsar \
+    -v $(pwd)/data/oxia:/data \
+    --name oxia --hostname oxia \
+    oxia/oxia:latest \
+    oxia standalone
 ```
 
 ### Initialize the cluster metadata
 
-After creating the ZooKeeper container successfully, you can use the following command to initialize the cluster metadata.
+After creating the Oxia container successfully, you can use the following command to initialize the cluster metadata.
 
 ```bash
 docker run --net=pulsar \
     --name initialize-pulsar-cluster-metadata \
     apachepulsar/pulsar-all:latest bash -c "bin/pulsar initialize-cluster-metadata \
 --cluster cluster-a \
---zookeeper zookeeper:2181 \
---configuration-store zookeeper:2181 \
+--metadata-store oxia://oxia:6648/default \
+--configuration-store oxia://oxia:6648/default \
 --web-service-url http://broker:8080 \
 --broker-service-url pulsar://broker:6650"
 ```
@@ -61,9 +59,8 @@ docker run --net=pulsar \
 Create a bookie container and start the bookie service.
 
 ```bash
-docker run -d -e clusterName=cluster-a \
-    -e zkServers=zookeeper:2181 --net=pulsar \
-    -e metadataServiceUri=metadata-store:zk:zookeeper:2181 \
+docker run -d -e clusterName=cluster-a --net=pulsar \
+    -e metadataServiceUri=metadata-store:oxia://oxia:6648/default \
     -v $(pwd)/data/bookkeeper:/pulsar/data/bookkeeper \
     --name bookie --hostname bookie \
     apachepulsar/pulsar-all:latest \
@@ -76,8 +73,7 @@ Create a broker container and start the broker service.
 
 ```bash
 docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar \
-    -e metadataStoreUrl=zk:zookeeper:2181 \
-    -e zookeeperServers=zookeeper:2181 \
+    -e metadataStoreUrl=oxia://oxia:6648/default \
     -e clusterName=cluster-a \
     --name broker --hostname broker \
     apachepulsar/pulsar-all:latest \
@@ -113,7 +109,7 @@ Pass configuration properties directly as environment variables in the `docker r
 
 ```bash
 docker run -d \
-    -e metadataStoreUrl=zk:zookeeper:2181 \
+    -e metadataStoreUrl=oxia://oxia:6648/default \
     -e clusterName=cluster-a \
     -e managedLedgerDefaultEnsembleSize=2 \
     -e managedLedgerDefaultWriteQuorum=2 \
@@ -135,7 +131,7 @@ docker run -d --env-file ./broker-config.env \
 Example `broker-config.env` file:
 
 ```properties
-metadataStoreUrl=zk:zookeeper:2181
+metadataStoreUrl=oxia://oxia:6648/default
 clusterName=cluster-a
 managedLedgerDefaultEnsembleSize=2
 managedLedgerDefaultWriteQuorum=2
@@ -162,9 +158,8 @@ Below are examples of commonly used configuration properties for BookKeeper and 
 #### BookKeeper
 
 ```bash
-docker run -d -e clusterName=cluster-a \
-    -e zkServers=zookeeper:2181 --net=pulsar \
-    -e metadataServiceUri=metadata-store:zk:zookeeper:2181 \
+docker run -d -e clusterName=cluster-a --net=pulsar \
+    -e metadataServiceUri=metadata-store:oxia://oxia:6648/default \
     # Storage directories: journal for write-ahead logs, ledgers for actual message data
     -e journalDirectory=/pulsar/data/bookkeeper/journal \
     -e ledgerDirectories=/pulsar/data/bookkeeper/ledgers \
@@ -194,8 +189,7 @@ docker run -d -e clusterName=cluster-a \
 
 ```bash
 docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar \
-    -e metadataStoreUrl=zk:zookeeper:2181 \
-    -e zookeeperServers=zookeeper:2181 \
+    -e metadataStoreUrl=oxia://oxia:6648/default \
     -e clusterName=cluster-a \
     # Ensemble settings: control how messages are replicated across bookies (must not exceed the number of deployed bookies)
     -e managedLedgerDefaultEnsembleSize=2 \

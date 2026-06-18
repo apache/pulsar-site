@@ -8,7 +8,7 @@ import illustrationMobile from '!!raw-loader!./img/illustration-mobile.svg';
 
 import BookkeeperIcon from './img/bookkeeper.svg';
 import BrokersIcon from './img/brokers.svg';
-import ZookeeperIcon from './img/zookeeper.svg';
+import MetadataStoreIcon from './img/zookeeper.svg';
 import ProducerAndConsumerIcon from './img/producer-and-consumer.svg';
 import Slider from '@site/src/components/ui/Slider/Slider';
 
@@ -25,12 +25,13 @@ const cards: CardProps[] = [
     )
   },
   {
-    title: 'Apache Zookeeper',
-    image: <ZookeeperIcon />,
+    title: 'Metadata Store',
+    image: <MetadataStoreIcon />,
     children: (
       <p>
-        Pulsar and BookKeeper use Apache ZooKeeper to save metadata coordinated between nodes,
+        Pulsar and BookKeeper use a metadata store to save metadata coordinated between nodes,
         such as a list of ledgers per topic, segments per ledger, and mapping of topic bundles to a broker.
+        New clusters use <a href="https://github.com/oxia-db/oxia">Oxia</a> (recommended); Apache ZooKeeper is also supported.
         It’s a cluster of highly available and replicated servers (usually 3).
       </p>
     )
