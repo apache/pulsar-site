@@ -18,7 +18,7 @@ To run Pulsar locally with Docker Compose, follow the steps below.
 
 To get up and run a Pulsar cluster quickly, you can use the following template to create a `compose.yml` file by modifying or adding the configurations in the **environment** section.
 
-This cluster uses [Oxia](https://github.com/oxia-db/oxia) as its [metadata store](administration-metadata-store.md) — the recommended option for new Pulsar clusters.
+This cluster uses [Oxia](https://github.com/oxia-db/oxia) as its [metadata store](administration-metadata-store.md) — the recommended option for new Pulsar clusters. Oxia standalone serves a single `default` namespace, which both Pulsar and BookKeeper use here; production clusters use separate Oxia namespaces (see [Configure metadata store](administration-metadata-store.md#use-oxia-as-metadata-store)).
 
 ```yaml
 version: '3'

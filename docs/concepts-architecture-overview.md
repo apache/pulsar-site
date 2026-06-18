@@ -61,7 +61,7 @@ You can configure the metadata store using the `metadataStoreUrl` parameter:
 
 ```bash
 # Oxia (recommended)
-metadataStoreUrl=oxia://oxia-server:6648/pulsar
+metadataStoreUrl=oxia://oxia-server:6648/broker
 
 # ZooKeeper
 metadataStoreUrl=zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
@@ -158,8 +158,8 @@ Architecturally, the Pulsar proxy gets all the information it requires from the 
 cd /path/to/pulsar/directory
 # Using Oxia (recommended)
 bin/pulsar proxy \
-    --metadata-store oxia://oxia-1.example.com:6648/pulsar \
-    --configuration-metadata-store oxia://oxia-1.example.com:6648/pulsar
+    --metadata-store oxia://oxia-1.example.com:6648/broker \
+    --configuration-metadata-store oxia://oxia-1.example.com:6648/broker
 
 # Using ZooKeeper
 bin/pulsar proxy \

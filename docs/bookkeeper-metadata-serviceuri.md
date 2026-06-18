@@ -67,10 +67,12 @@ it ends up internally as:
 
 ### **3\. Metadata Service URI (Preferred)**
 
-For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md). Point BookKeeper at Oxia with:
+For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md). Point BookKeeper at its own Oxia namespace, separate from the Pulsar metadata store (the [Pulsar Helm chart](https://github.com/apache/pulsar-helm-chart) uses `bookkeeper`):
 
-| metadataServiceUri\=metadata-store:oxia://oxia-1.example.com:6648/pulsar |
+| metadataServiceUri\=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper |
 | :---- |
+
+The `metadata-store:` prefix is required and the format differs from Pulsar's `metadataStoreUrl`. The broker's `bookkeeperMetadataServiceUri` in `conf/broker.conf` should be set to this same value.
 
 Alternatively, with ZooKeeper as the metadata store, the **correct and working setup** (from our **OSS Pulsar 4.x tests**) is:
 
@@ -97,7 +99,7 @@ Alternatively, with ZooKeeper as the metadata store, the **correct and working s
 
 Always set **metadataServiceUri** in bookkeeper.conf. For new clusters, [Oxia](administration-metadata-store.md) is the recommended metadata store:
 
-| metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/pulsar |
+| metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper |
 | :---- |
 
 With ZooKeeper:

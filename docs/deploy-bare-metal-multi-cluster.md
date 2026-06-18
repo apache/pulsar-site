@@ -210,7 +210,7 @@ bin/pulsar initialize-cluster-metadata \
 
 :::tip
 
-If you use Oxia as the metadata store, set both `--metadata-store` and `--configuration-metadata-store` to your Oxia URL, for example `oxia://oxia-1.example.com:6648/pulsar`.
+If you use Oxia as the metadata store, set `--metadata-store` (and, for a multi-cluster instance, `--configuration-metadata-store`) to your Oxia URL, for example `oxia://oxia-1.example.com:6648/broker`.
 
 :::
 
@@ -234,7 +234,7 @@ Each Pulsar broker needs its own cluster of bookies. The BookKeeper cluster shar
 
 ### Configure bookies
 
-You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important aspect of configuring each bookie is ensuring that its `metadataServiceUri` points to the same metadata store as the Pulsar cluster — `metadata-store:oxia://oxia-1.example.com:6648/pulsar` for Oxia (recommended), or the local ZooKeeper connection string.
+You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important aspect of configuring each bookie is ensuring that its `metadataServiceUri` points to the BookKeeper metadata store — `metadata-store:oxia://oxia-1.example.com:6648/bookkeeper` for Oxia (recommended), or the local ZooKeeper connection string.
 
 ### Start bookies
 
@@ -285,11 +285,12 @@ The most important element of broker configuration is ensuring that each broker 
 
 You also need to specify the name of the [cluster](reference-terminology.md#cluster) to which the broker belongs using the [`clusterName`](reference-configuration.md#broker-clusterName) parameter. In addition, you need to match the broker and web service ports provided when you initialize the metadata (especially when you use a different port from default) of the cluster.
 
-With Oxia (recommended), point both parameters at your Oxia URL:
+With Oxia (recommended) — `metadataStoreUrl` is the cluster-local metadata store, `configurationMetadataStoreUrl` is the instance-wide configuration store, and `bookkeeperMetadataServiceUri` uses its own namespace:
 
 ```properties
-metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
-configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+metadataStoreUrl=oxia://oxia-1.example.com:6648/broker
+configurationMetadataStoreUrl=oxia://oxia-config.example.com:6648/broker
+bookkeeperMetadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
 ```
 
 The following is an example configuration with ZooKeeper:

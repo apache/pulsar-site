@@ -34,16 +34,23 @@ RocksDB and local memory are only applicable to standalone Pulsar or single-node
 
 ## Use Oxia as metadata store
 
-[Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store for new Pulsar clusters. Deploy an Oxia cluster (or use an existing one) and make sure the target namespace exists; see the [Oxia documentation](https://oxia-db.github.io/) for deployment instructions.
+[Oxia](https://github.com/oxia-db/oxia) is the recommended metadata store for new Pulsar clusters. Deploy an Oxia cluster (or use an existing one); see the [Oxia documentation](https://oxia-db.github.io/) for deployment instructions.
 
-To use Oxia as the metadata store, add the following parameters to the `conf/broker.conf` or `conf/standalone.conf` file.
+Oxia organizes data into [namespaces](https://oxia-db.github.io/docs/features/namespaces). The namespaces you reference must already exist — they are defined in the Oxia coordinator configuration, not created on demand. Use **separate namespaces** for the Pulsar metadata store and for BookKeeper. To stay consistent with the [Pulsar Helm chart](https://github.com/apache/pulsar-helm-chart), this guide uses `broker` for Pulsar and `bookkeeper` for BookKeeper.
+
+To use Oxia as the metadata store, add the following to `conf/broker.conf` (or `conf/standalone.conf`). `configurationMetadataStoreUrl` is optional and defaults to `metadataStoreUrl`, so a single cluster only needs:
 
 ```conf
-metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
-configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+metadataStoreUrl=oxia://oxia-1.example.com:6648/broker
 ```
 
-The URL format is `oxia://<host>:<port>/<namespace>`. The namespace must exist in the Oxia cluster.
+The URL format is `oxia://<host>:<port>/<namespace>`.
+
+BookKeeper connects through a different format: the `metadata-store:` prefix is required, and it should use its own namespace. Set `bookkeeperMetadataServiceUri` in `conf/broker.conf` to match the `metadataServiceUri` configured for the bookies in `conf/bookkeeper.conf`:
+
+```conf
+bookkeeperMetadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
+```
 
 To live-migrate an existing cluster from ZooKeeper to Oxia, see [Migrate metadata store](administration-metadata-store-migration.md).
 

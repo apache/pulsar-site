@@ -272,7 +272,7 @@ bin/pulsar initialize-cluster-metadata \
 
 :::tip
 
-If you use Oxia as the metadata store, set the connection strings to your Oxia URL instead, for example `--metadata-store oxia://oxia-1.example.com:6648/pulsar` and `--configuration-metadata-store oxia://oxia-1.example.com:6648/pulsar`.
+If you use Oxia as the metadata store, set the connection string to your Oxia URL instead, for example `--metadata-store oxia://oxia-1.example.com:6648/broker` (the `--configuration-metadata-store` is optional and defaults to it).
 
 :::
 
@@ -329,7 +329,7 @@ BookKeeper configuration is split across two files:
 You can configure BookKeeper bookies using the [`conf/bookkeeper.conf`](reference-configuration.md#bookkeeper) configuration file. The most important step in configuring bookies for our purposes here is ensuring that `metadataServiceUri` is set to the URI for the metadata store. With Oxia (recommended), use the `metadata-store:` driver:
 
 ```properties
-metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/pulsar
+metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
 ```
 
 With ZooKeeper, the following is an example:
@@ -478,11 +478,11 @@ Broker configuration is split across two files:
 
 You can configure brokers using the `conf/broker.conf` configuration file. The most important element of broker configuration is ensuring that each broker is aware of the metadata store that you have deployed. Ensure that the [`metadataStoreUrl`](reference-configuration.md#broker) and [`configurationMetadataStoreUrl`](reference-configuration.md#broker) parameters are correct. In this case, since you only have 1 cluster and no configuration store setup, the `configurationMetadataStoreUrl` point to the same `metadataStoreUrl`.
 
-With Oxia (recommended):
+With Oxia (recommended) — `configurationMetadataStoreUrl` can be omitted for a single cluster, but `bookkeeperMetadataServiceUri` is required and uses its own namespace:
 
 ```properties
-metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
-configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+metadataStoreUrl=oxia://oxia-1.example.com:6648/broker
+bookkeeperMetadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
 ```
 
 With ZooKeeper:

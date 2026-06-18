@@ -54,8 +54,8 @@ Pulsar uses its metadata store for service discovery. To connect the proxy to th
 For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md):
 
 ```properties
-metadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
-configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/pulsar
+metadataStoreUrl=oxia://oxia-1.example.com:6648/broker
+configurationMetadataStoreUrl=oxia://oxia-1.example.com:6648/broker
 ```
 
 Alternatively, to connect the proxy to a [ZooKeeper](https://zookeeper.apache.org) cluster:
@@ -116,8 +116,8 @@ For new clusters, [Oxia is the recommended metadata store](administration-metada
 ```bash
 cd /path/to/pulsar/directory
 bin/pulsar proxy \
-    --metadata-store oxia://oxia-1.example.com:6648/pulsar \
-    --configuration-metadata-store oxia://oxia-1.example.com:6648/pulsar
+    --metadata-store oxia://oxia-1.example.com:6648/broker \
+    --configuration-metadata-store oxia://oxia-1.example.com:6648/broker
 ```
 
 Alternatively, with ZooKeeper as the metadata store:

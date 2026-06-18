@@ -9,7 +9,7 @@ To deploy a Pulsar cluster on Docker using Docker commands, you need to complete
 
 ## Step 1: Pull a Pulsar image
 
-To run Pulsar on Docker, you need to create a container for each Pulsar component: the metadata store, a bookie, and a broker. This tutorial uses [Oxia](https://github.com/oxia-db/oxia) as the [metadata store](administration-metadata-store.md) (the recommended option for new clusters), which runs from its own image; the bookie and broker run from the Pulsar image.
+To run Pulsar on Docker, you need to create a container for each Pulsar component: the metadata store, a bookie, and a broker. This tutorial uses [Oxia](https://github.com/oxia-db/oxia) as the [metadata store](administration-metadata-store.md) (the recommended option for new clusters), which runs from its own image; the bookie and broker run from the Pulsar image. Oxia standalone serves a single `default` namespace, which both Pulsar and BookKeeper use here; production clusters use separate Oxia namespaces (see [Configure metadata store](administration-metadata-store.md#use-oxia-as-metadata-store)).
 
 You can pull a Pulsar image from Docker Hub with the following command. If you do not want to use some connectors, you can use `apachepulsar/pulsar:latest` there.
 ```bash
