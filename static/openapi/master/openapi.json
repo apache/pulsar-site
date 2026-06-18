@@ -39811,7 +39811,10 @@
                         "description": "Worker service is not running"
                     }
                 },
-                "summary": "Get metrics for all functions owned by worker"
+                "summary": "Get metrics for all functions owned by worker",
+                "tags": [
+                    "worker-stats"
+                ]
             }
         },
         "/admin/v2/worker-stats/metrics": {
@@ -39839,7 +39842,10 @@
                         "description": "Worker service is not running"
                     }
                 },
-                "summary": "Gets the metrics for Monitoring"
+                "summary": "Gets the metrics for Monitoring",
+                "tags": [
+                    "worker-stats"
+                ]
             }
         },
         "/admin/v2/worker/assignments": {
@@ -39871,7 +39877,10 @@
                         "description": "Worker service is not running"
                     }
                 },
-                "summary": "Fetches information about which Pulsar Functions are assigned to which Pulsar clusters"
+                "summary": "Fetches information about which Pulsar Functions are assigned to which Pulsar clusters",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/cluster": {
@@ -39898,7 +39907,10 @@
                         "description": "Worker service is not running"
                     }
                 },
-                "summary": "Fetches information about the Pulsar cluster running Pulsar Functions"
+                "summary": "Fetches information about the Pulsar cluster running Pulsar Functions",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/cluster/leader": {
@@ -39922,7 +39934,10 @@
                         "description": "Worker service is not running"
                     }
                 },
-                "summary": "Fetches info about the leader node of the Pulsar cluster running Pulsar Functions"
+                "summary": "Fetches info about the leader node of the Pulsar cluster running Pulsar Functions",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/cluster/leader/ready": {
@@ -39943,7 +39958,10 @@
                         "description": "Worker service is not running"
                     }
                 },
-                "summary": "Checks if this node is the leader and is ready to service requests"
+                "summary": "Checks if this node is the leader and is ready to service requests",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/connectors": {
@@ -39973,7 +39991,10 @@
                         "description": "Request timeout"
                     }
                 },
-                "summary": "Fetches a list of supported Pulsar IO connectors currently running in cluster mode"
+                "summary": "Fetches a list of supported Pulsar IO connectors currently running in cluster mode",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/drain": {
@@ -39997,7 +40018,10 @@
                         "description": "Worker service is not ready"
                     }
                 },
-                "summary": "Get the status of any ongoing drain operation at this worker"
+                "summary": "Get the status of any ongoing drain operation at this worker",
+                "tags": [
+                    "worker"
+                ]
             },
             "put": {
                 "operationId": "drain",
@@ -40021,7 +40045,10 @@
                         "description": "Worker service is not ready"
                     }
                 },
-                "summary": "Drains this worker, i.e., moves its work-assignments to other workers"
+                "summary": "Drains this worker, i.e., moves its work-assignments to other workers",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/leader/drain": {
@@ -40054,7 +40081,10 @@
                         "description": "Worker service is not ready"
                     }
                 },
-                "summary": "Get the status of any ongoing drain operation at the specified worker"
+                "summary": "Get the status of any ongoing drain operation at the specified worker",
+                "tags": [
+                    "worker"
+                ]
             },
             "put": {
                 "operationId": "drainAtLeader",
@@ -40087,7 +40117,10 @@
                         "description": "Worker service is not ready"
                     }
                 },
-                "summary": "Drains the specified worker, i.e., moves its work-assignments to other workers"
+                "summary": "Drains the specified worker, i.e., moves its work-assignments to other workers",
+                "tags": [
+                    "worker"
+                ]
             }
         },
         "/admin/v2/worker/rebalance": {
@@ -40107,10 +40140,18 @@
                         "description": "Request timeout"
                     }
                 },
-                "summary": "Triggers a rebalance of functions to workers"
+                "summary": "Triggers a rebalance of functions to workers",
+                "tags": [
+                    "worker"
+                ]
             }
         }
     },
+    "servers": [
+        {
+            "url": "http://localhost:8080"
+        }
+    ],
     "tags": [
         {
             "description": "Configure bookies rack placement",
@@ -40167,6 +40208,12 @@
         {
             "description": "Tenant admin apis",
             "name": "tenants"
+        },
+        {
+            "name": "worker"
+        },
+        {
+            "name": "worker-stats"
         }
     ]
 }

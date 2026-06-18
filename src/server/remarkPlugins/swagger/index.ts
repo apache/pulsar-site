@@ -218,9 +218,13 @@ async function processLinkNode(target: Target, context: Context) {
     current.path.length > longest.path.length ? current : longest
   );
 
-  // Swagger 2.0 documents carry the API prefix in basePath; OpenAPI 3
-  // documents (Pulsar 5.0.0+/master) carry it in servers[0].url.
-  const basePath = swaggerJson.basePath ?? swaggerJson.servers?.[0]?.url ?? '';
+  // Swagger 2.0 documents carry the API prefix in basePath. OpenAPI 3 documents
+  // (Pulsar 5.0.0+/master) published by this site fold the prefix into the path
+  // keys instead, and set servers[0].url to an absolute broker base URL
+  // (e.g. http://localhost:8080) that must NOT be prepended to the displayed
+  // path. Only a relative servers[0].url is treated as a path prefix.
+  const serverUrl = swaggerJson.servers?.[0]?.url ?? '';
+  const basePath = swaggerJson.basePath ?? (serverUrl.startsWith('/') ? serverUrl : '');
   const foundPath = basePath + longestMatch.path;
   const foundMethod = longestMatch.method.toUpperCase();
 

@@ -24,13 +24,66 @@ from constant import site_path
 from execute import pulsar_build
 
 
+# Base URL shown in the Redoc "servers" dropdown and request samples. Pulsar
+# standalone serves the admin REST API here by default, so it is a far more
+# useful default than the docs site origin Redoc would otherwise fall back to.
+DEFAULT_SERVER_URL = 'http://localhost:8080'
+
+# OpenAPI path-item keys that denote operations (others such as 'parameters' or
+# '$ref' are not operations).
+_HTTP_METHODS = frozenset({'get', 'put', 'post', 'delete', 'patch', 'options', 'head', 'trace'})
+
+
+def _group_untagged_operations(data: dict) -> None:
+    """Give every operation a tag so Redoc can group it.
+
+    Operations the source spec leaves untagged (e.g. the function-worker
+    endpoints /worker and /worker-stats) are otherwise listed, ungrouped, at the
+    very end of the rendered document. Fall back to grouping them under their
+    first path segment (/worker/... -> "worker"), and declare any tag derived
+    this way at the top level so it renders as a proper sidebar section.
+
+    Runs before the server base path is folded into the path keys, so the first
+    segment is the resource name (worker) rather than the base prefix (admin)."""
+    paths = data.get('paths')
+    if not isinstance(paths, dict):
+        return
+    declared = {t.get('name') for t in data.get('tags', []) if isinstance(t, dict)}
+    added = set()
+    for path, methods in paths.items():
+        if not isinstance(methods, dict):
+            continue
+        segments = [s for s in path.split('/') if s]
+        if not segments:
+            continue
+        fallback = segments[0]
+        for method, operation in methods.items():
+            if method.lower() not in _HTTP_METHODS or not isinstance(operation, dict):
+                continue
+            if operation.get('tags'):
+                continue
+            operation['tags'] = [fallback]
+            if fallback not in declared:
+                declared.add(fallback)
+                added.add(fallback)
+    if added:
+        data.setdefault('tags', [])
+        for name in sorted(added):
+            data['tags'].append({'name': name})
+
+
 def _fold_server_base_path(data: dict) -> None:
     """Fold an OpenAPI 3 relative server base path (e.g. /admin/v2) into every
-    path key and drop the servers entry, so Redoc 2.x renders the prefix inline
-    on each operation. Redoc 1.x inlined the Swagger 2.0 `basePath` the same way;
-    Redoc 2.x instead tucks servers[].url behind a collapsed per-operation
-    dropdown, hiding the /admin/vN prefix. No-op for specs without a relative,
-    variable-free server base, which also keeps the transform idempotent."""
+    path key, then point servers[0].url at the default Pulsar broker address.
+
+    Redoc 2.x tucks servers[].url behind a collapsed per-operation dropdown, so
+    the /admin/vN prefix is hidden; folding it into the path keys makes it render
+    inline the way Redoc 1.x inlined the Swagger 2.0 `basePath`. The servers
+    entry is then reset to the broker base URL so the dropdown and request
+    samples read http://localhost:8080/admin/v2/... rather than the docs origin.
+
+    No-op for specs without a relative, variable-free server base, which also
+    keeps the transform idempotent (a reset absolute URL is left untouched)."""
     servers = data.get('servers')
     if not servers:
         return
@@ -40,7 +93,7 @@ def _fold_server_base_path(data: dict) -> None:
     paths = data.get('paths')
     if isinstance(paths, dict):
         data['paths'] = {base + key: value for key, value in paths.items()}
-    del data['servers']
+    data['servers'] = [{'url': DEFAULT_SERVER_URL}]
 
 
 def execute(master: Path, version: str):
@@ -75,6 +128,10 @@ def execute(master: Path, version: str):
         data = json.loads(f.read_text())
         stem = f.stem
         if docs_root == 'openapi':
+            # Group operations the source spec left untagged (e.g. the
+            # function-worker endpoints) by their first path segment, before the
+            # base path is folded in (see _group_untagged_operations).
+            _group_untagged_operations(data)
             # Fold the /admin/vN prefix from servers[0].url into the path keys so
             # Redoc 2.x shows it inline (see _fold_server_base_path).
             _fold_server_base_path(data)
