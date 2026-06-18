@@ -1,0 +1,1386 @@
+{
+    "components": {
+        "schemas": {
+            "ConfigFieldDefinition": {
+                "properties": {
+                    "attributes": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    },
+                    "typeName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ConnectorDefinition": {
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "sinkClass": {
+                        "type": "string"
+                    },
+                    "sinkConfigClass": {
+                        "type": "string"
+                    },
+                    "sourceClass": {
+                        "type": "string"
+                    },
+                    "sourceConfigClass": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ConsumerConfig": {
+                "properties": {
+                    "consumerProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "cryptoConfig": {
+                        "$ref": "#/components/schemas/CryptoConfig"
+                    },
+                    "messagePayloadProcessorConfig": {
+                        "$ref": "#/components/schemas/MessagePayloadProcessorConfig"
+                    },
+                    "poolMessages": {
+                        "type": "boolean"
+                    },
+                    "receiverQueueSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "regexPattern": {
+                        "type": "boolean"
+                    },
+                    "schemaProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "schemaType": {
+                        "type": "string"
+                    },
+                    "serdeClassName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CryptoConfig": {
+                "properties": {
+                    "consumerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "DISCARD",
+                            "CONSUME"
+                        ],
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderClassName": {
+                        "type": "string"
+                    },
+                    "cryptoKeyReaderConfig": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "encryptionKeys": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "producerCryptoFailureAction": {
+                        "enum": [
+                            "FAIL",
+                            "SEND"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ExceptionInformation": {
+                "properties": {
+                    "exceptionString": {
+                        "type": "string"
+                    },
+                    "timestampMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "FormDataContentDisposition": {
+                "properties": {
+                    "creationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "modificationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "readDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MessagePayloadProcessorConfig": {
+                "properties": {
+                    "className": {
+                        "type": "string"
+                    },
+                    "config": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Resources": {
+                "properties": {
+                    "cpu": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "disk": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ram": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkConfig": {
+                "properties": {
+                    "archive": {
+                        "type": "string"
+                    },
+                    "autoAck": {
+                        "type": "boolean"
+                    },
+                    "className": {
+                        "type": "string"
+                    },
+                    "cleanupSubscription": {
+                        "type": "boolean"
+                    },
+                    "configs": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "customRuntimeOptions": {
+                        "type": "string"
+                    },
+                    "deadLetterTopic": {
+                        "type": "string"
+                    },
+                    "inputSpecs": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ConsumerConfig"
+                        },
+                        "type": "object"
+                    },
+                    "inputs": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "logTopic": {
+                        "type": "string"
+                    },
+                    "maxMessageRetries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "namespace": {
+                        "type": "string"
+                    },
+                    "negativeAckRedeliveryDelayMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "parallelism": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "processingGuarantees": {
+                        "enum": [
+                            "ATLEAST_ONCE",
+                            "ATMOST_ONCE",
+                            "EFFECTIVELY_ONCE",
+                            "MANUAL"
+                        ],
+                        "type": "string"
+                    },
+                    "resources": {
+                        "$ref": "#/components/schemas/Resources"
+                    },
+                    "retainKeyOrdering": {
+                        "type": "boolean"
+                    },
+                    "retainOrdering": {
+                        "type": "boolean"
+                    },
+                    "runtimeFlags": {
+                        "type": "string"
+                    },
+                    "secrets": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "sinkType": {
+                        "type": "string"
+                    },
+                    "sourceSubscriptionName": {
+                        "type": "string"
+                    },
+                    "sourceSubscriptionPosition": {
+                        "enum": [
+                            "Latest",
+                            "Earliest"
+                        ],
+                        "type": "string"
+                    },
+                    "tenant": {
+                        "type": "string"
+                    },
+                    "timeoutMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "topicToSchemaProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "topicToSchemaType": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "topicToSerdeClassName": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "topicsPattern": {
+                        "type": "string"
+                    },
+                    "transformFunction": {
+                        "type": "string"
+                    },
+                    "transformFunctionClassName": {
+                        "type": "string"
+                    },
+                    "transformFunctionConfig": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkInstanceStatus": {
+                "properties": {
+                    "instanceId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/SinkInstanceStatusData"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkInstanceStatusData": {
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    },
+                    "lastReceivedTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "latestSinkExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "latestSystemExceptions": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionInformation"
+                        },
+                        "type": "array"
+                    },
+                    "numReadFromPulsar": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numRestarts": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSinkExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numSystemExceptions": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numWrittenToSink": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "running": {
+                        "type": "boolean"
+                    },
+                    "workerId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SinkStatus": {
+                "properties": {
+                    "instances": {
+                        "items": {
+                            "$ref": "#/components/schemas/SinkInstanceStatus"
+                        },
+                        "type": "array"
+                    },
+                    "numInstances": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numRunning": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateOptions": {
+                "description": "Options while updating the sink",
+                "properties": {
+                    "update-auth-data": {
+                        "description": "Whether or not to update the auth data",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "info": {
+        "description": "This provides the REST API for Pulsar Sink operations",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "title": "Pulsar Sink REST API",
+        "version": "v3"
+    },
+    "openapi": "3.0.1",
+    "paths": {
+        "/sinks/builtinsinks": {
+            "get": {
+                "operationId": "getSinkList",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConnectorDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Get builtin sinks successfully."
+                    }
+                },
+                "summary": "Fetches the list of built-in Pulsar IO sinks",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/builtinsinks/{name}/configdefinition": {
+            "get": {
+                "operationId": "getSinkConfigDefinition",
+                "parameters": [
+                    {
+                        "description": "The name of the builtin sink",
+                        "in": "path",
+                        "name": "name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConfigFieldDefinition"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about config fields associated with the specified builtin sink"
+                    },
+                    "403": {
+                        "description": "The requester doesn't have admin permissions"
+                    },
+                    "404": {
+                        "description": "builtin sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Fetches information about config fields associated with the specified builtin sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/reloadBuiltInSinks": {
+            "post": {
+                "operationId": "reloadSinks",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Reload the built-in connectors, including Sources and Sinks"
+                    },
+                    "401": {
+                        "description": "This operation requires super-user access"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Reload the built-in connectors, including Sources and Sinks",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}": {
+            "get": {
+                "operationId": "listSinks",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Lists all Pulsar Sinks currently deployed in a given namespace"
+                    },
+                    "400": {
+                        "description": "Invalid list request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Lists all Pulsar Sinks currently deployed in a given namespace",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}": {
+            "delete": {
+                "operationId": "deregisterSink",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Pulsar Sink was successfully deleted"
+                    },
+                    "400": {
+                        "description": "Invalid deregister request"
+                    },
+                    "401": {
+                        "description": "Client is not authorized to perform operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "408": {
+                        "description": "Got InterruptedException while deregistering the Pulsar Sink"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to authorize, failed to deregister, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Deletes a Pulsar Sink currently running in cluster mode",
+                "tags": [
+                    "sinks"
+                ]
+            },
+            "get": {
+                "operationId": "getSinkInfo",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinkConfig"
+                                }
+                            }
+                        },
+                        "description": "Fetches information about a Pulsar Sink currently running in cluster mode"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Fetches information about a Pulsar Sink currently running in cluster mode",
+                "tags": [
+                    "sinks"
+                ]
+            },
+            "post": {
+                "operationId": "registerSink",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pulsar Sink successfully created"
+                    },
+                    "400": {
+                        "description": "Invalid request (The Pulsar Sink already exists, etc.)"
+                    },
+                    "401": {
+                        "description": "Client is not authorized to perform operation"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to authorize, failed to get tenant data, failed to process package, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Creates a new Pulsar Sink in cluster mode",
+                "tags": [
+                    "sinks"
+                ]
+            },
+            "put": {
+                "operationId": "updateSink",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/FormDataContentDisposition"
+                                    },
+                                    "updateOptions": {
+                                        "$ref": "#/components/schemas/UpdateOptions"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pulsar Sink successfully updated"
+                    },
+                    "400": {
+                        "description": "Invalid request (The Pulsar Sink doesn't exist, update contains no change, etc.)"
+                    },
+                    "401": {
+                        "description": "Client is not authorized to perform operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to authorize, failed to process package, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Updates a Pulsar Sink currently running in cluster mode",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/restart": {
+            "post": {
+                "operationId": "restartSink",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "400": {
+                        "description": "Invalid restart request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to restart the Pulsar Sink, failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Restart all instances of a Pulsar Sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/start": {
+            "post": {
+                "operationId": "startSink",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "400": {
+                        "description": "Invalid start request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to start the Pulsar Sink, failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Start all instances of a Pulsar Sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/status": {
+            "get": {
+                "operationId": "getSinkStatus",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinkStatus"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Sink running in cluster mode"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this sink"
+                    },
+                    "400": {
+                        "description": "Invalid get status request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Displays the status of a Pulsar Sink running in cluster mode",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/stop": {
+            "post": {
+                "operationId": "stopSink",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "400": {
+                        "description": "Invalid stop request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to stop the Pulsar Sink, failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Stop all instances of a Pulsar Sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/restart": {
+            "post": {
+                "operationId": "restartSink_1",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The instanceId of a Pulsar Sink",
+                        "in": "path",
+                        "name": "instanceId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this sink"
+                    },
+                    "400": {
+                        "description": "Invalid restart request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to restart the instance of a Pulsar Sink, failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Restart an instance of a Pulsar Sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/start": {
+            "post": {
+                "operationId": "startSink_1",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The instanceId of a Pulsar Sink",
+                        "in": "path",
+                        "name": "instanceId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "400": {
+                        "description": "Invalid start request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to start the Pulsar Sink, failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Start an instance of a Pulsar Sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/status": {
+            "get": {
+                "operationId": "getSinkInstanceStatus",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The instanceId of a Pulsar Sink",
+                        "in": "path",
+                        "name": "instanceId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinkInstanceStatusData"
+                                }
+                            }
+                        },
+                        "description": "Displays the status of a Pulsar Sink instance"
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the namespace of this sink"
+                    },
+                    "400": {
+                        "description": "The Pulsar Sink instance does not exist"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink does not exist"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (got exception while getting status, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Displays the status of a Pulsar Sink instance",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        },
+        "/sinks/{tenant}/{namespace}/{sinkName}/{instanceId}/stop": {
+            "post": {
+                "operationId": "stopSink_1",
+                "parameters": [
+                    {
+                        "description": "The tenant of a Pulsar Sink",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The namespace of a Pulsar Sink",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The name of a Pulsar Sink",
+                        "in": "path",
+                        "name": "sinkName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The instanceId of a Pulsar Sink",
+                        "in": "path",
+                        "name": "instanceId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful"
+                    },
+                    "400": {
+                        "description": "Invalid stop request"
+                    },
+                    "401": {
+                        "description": "The client is not authorized to perform this operation"
+                    },
+                    "404": {
+                        "description": "The Pulsar Sink instance does not exist"
+                    },
+                    "500": {
+                        "description": "Internal server error (failed to stop the Pulsar Sink, failed to authorize, etc.)"
+                    },
+                    "503": {
+                        "description": "Function worker service is now initializing. Please try again later."
+                    }
+                },
+                "summary": "Stop an instance of a Pulsar Sink",
+                "tags": [
+                    "sinks"
+                ]
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "/admin/v3"
+        }
+    ],
+    "tags": [
+        {
+            "description": "Sinks admin apis",
+            "name": "sinks"
+        }
+    ]
+}
