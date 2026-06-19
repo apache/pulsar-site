@@ -173,8 +173,12 @@ QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
         .subscribe();
 
 // V5 -- only topics whose properties match every filter (AND semantics)
+Map<String, String> filters = Map.ofEntries(
+        Map.entry("team", "orders"),
+        Map.entry("tier", "gold"));
+
 QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
-        .namespace("tenant/ns", Map.of("team", "orders", "tier", "gold"))
+        .namespace("tenant/ns", filters)
         .subscriptionName("workers")
         .subscribe();
 ```
