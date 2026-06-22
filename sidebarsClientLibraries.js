@@ -18,6 +18,7 @@ module.exports = {
                         "java-use",
                         "java-tracing",
                         "java-v5",
+                        "java-migrate-to-v5",
                     ],
                 },
                 {
