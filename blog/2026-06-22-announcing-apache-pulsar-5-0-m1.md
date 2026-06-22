@@ -1,0 +1,73 @@
+---
+title: "Apache Pulsar 5.0.0-M1: A Preview of the Next Major Release"
+author: Matteo Merli
+date: 2026-06-22
+---
+
+The Apache Pulsar community is voting on **Apache Pulsar 5.0.0-M1**, the first milestone of the upcoming Pulsar 5.0. This is a **preview release**: it bundles the major new features of 5.0 so the community can try them, run them against real workloads, and send feedback well before the general-availability release. It is **not intended for production**.
+
+5.0 is a big release. Its headline is **Scalable Topics** — a new kind of topic that grows and shrinks on its own — and the elevation of **Oxia** to the recommended metadata store. This post walks through what's in M1 and how to try it.
+
+<!--truncate-->
+
+## A preview, built for feedback
+
+5.0.0-M1 is a milestone build, not a final release. We're shipping it early, while the community votes on it, for one reason: the changes in 5.0 are significant enough that we want real-world feedback before they're locked in for the GA release, which is targeted for later in 2026.
+
+Please run it on **non-production** clusters, exercise the new APIs, and tell us what works and what doesn't — file issues on [GitHub](https://github.com/apache/pulsar/issues) or discuss on the [dev@pulsar.apache.org](https://pulsar.apache.org/contact/) mailing list. Your testing now directly shapes what 5.0 becomes at GA.
+
+## Scalable Topics: topics that size themselves
+
+For its entire history, Pulsar has scaled a topic's throughput with **partitions** — a count you fix when you create the topic. That model has well-known limits: you have to guess the right number up front, you can never decrease it, and changing it breaks per-key ordering.
+
+**Scalable topics** remove those limits. A scalable topic — addressed with the new `topic://` scheme — is internally a set of **key-range segments** that the broker **splits** when part of the keyspace gets hot and **merges** when it goes cold: at runtime, with no downtime, and without ever breaking the ordering of any individual key. You never choose a partition count; the topic sizes itself to the load.
+
+Scalable topics are delivered by a family of proposals in 5.0:
+
+- **[PIP-460](https://github.com/apache/pulsar/blob/master/pip/pip-460.md): Scalable Topics (Topics v5)** — the overall model: the segment DAG, range-based key routing, and design principles.
+- **[PIP-468](https://github.com/apache/pulsar/blob/master/pip/pip-468.md): Scalable Topic Controller** — the broker-side controller that runs split/merge, assigns consumers, and pushes the live topology to clients.
+- **[PIP-483](https://github.com/apache/pulsar/blob/master/pip/pip-483.md): Auto Split/Merge** — splits hot segments and merges cold ones automatically, tunable per broker, namespace, and topic.
+- **[PIP-466](https://github.com/apache/pulsar/blob/master/pip/pip-466.md): New Java Client API (V5)** — a modern, sync-first Java client built for scalable topics.
+- **[PIP-473](https://github.com/apache/pulsar/blob/master/pip/pip-473.md): Metadata-Driven Transactions** — transactions that survive segment splits and merges.
+- **[PIP-475](https://github.com/apache/pulsar/blob/master/pip/pip-475.md): Regular-to-Scalable Migration** — convert an existing topic to a scalable topic in place, with no data copy.
+
+### A new client API
+
+Scalable topics are served by a new **V5 Java client** (`pulsar-client-v5`) that replaces the four classic subscription types with three purpose-built consumers:
+
+- **Stream consumer** — ordered, cumulative-ack consumption.
+- **Queue consumer** — parallel, individually-acked work-queue consumption with dead-letter support.
+- **Checkpoint consumer** — for stream processors (Flink, Spark) that track their own position.
+
+The V5 client also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating any topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client is available for Java; the other language SDKs will follow before GA.
+
+Start here: [Scalable topics concepts](https://pulsar.apache.org/docs/next/concepts-scalable-topics), the [V5 Java client](https://pulsar.apache.org/docs/client-libraries/java-v5), and the [migration guide](https://pulsar.apache.org/docs/client-libraries/java-migrate-to-v5).
+
+## Oxia is now the recommended metadata store
+
+[Oxia](https://github.com/oxia-db/oxia) is a scalable metadata store and coordination system. In 5.0 it becomes the **recommended metadata store** for new Pulsar clusters, and it is the preferred backend for scalable topics, whose lookups rely on its streaming watch sessions.
+
+ZooKeeper remains fully supported, and 5.0 makes the transition painless:
+
+- **[PIP-454](https://github.com/apache/pulsar/blob/master/pip/pip-454.md): Metadata Store Migration Framework** — a live, **zero-downtime** migration from ZooKeeper to Oxia. The data plane keeps publishing and consuming while metadata is copied. See [Migrate metadata store](https://pulsar.apache.org/docs/next/administration-metadata-store-migration).
+- **[PIP-469](https://github.com/apache/pulsar/blob/master/pip/pip-469.md): Metadata-store topic policies** — topic policies can be stored directly in the metadata store, with legacy-aware routing for clusters still on system-topic policies.
+
+5.0 also **removes the etcd metadata store backend** ([PIP-462](https://github.com/apache/pulsar/blob/master/pip/pip-462.md)). ZooKeeper and Oxia are the supported backends going forward; etcd users should migrate before upgrading.
+
+## Other notable changes
+
+- **IO connectors moved to a dedicated repository** ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)) — the built-in connectors now live and release independently of Pulsar core.
+- **`javax.*` → `jakarta.*`** ([PIP-472](https://github.com/apache/pulsar/blob/master/pip/pip-472.md)) — Pulsar moves to the Jakarta EE namespace; a breaking change for code that touches the affected APIs.
+- **Gradle build** ([PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)) — Pulsar's build moves from Maven to Gradle, speeding up builds for contributors.
+- **Structured logging** ([PIP-467](https://github.com/apache/pulsar/blob/master/pip/pip-467.md)) — Pulsar adopts structured (slog-style) logging for richer, machine-parseable logs.
+- **Flexible networking** — multiple advertised addresses and smarter listener selection ([PIP-61](https://github.com/apache/pulsar/blob/master/pip/pip-61.md), [PIP-95](https://github.com/apache/pulsar/blob/master/pip/pip-95.md)) for multi-network deployments.
+
+## Try it and tell us what you think
+
+Once the vote passes and the artifacts are published, download 5.0.0-M1 and try it on a test cluster. Because this is a preview, we especially want to hear about:
+
+- creating and operating **scalable topics** with the V5 client;
+- migrating a cluster's metadata store from **ZooKeeper to Oxia**;
+- adopting the **V5 Java client** in an existing application.
+
+Share feedback on [GitHub](https://github.com/apache/pulsar/issues) or the [dev mailing list](https://pulsar.apache.org/contact/). Thank you for helping shape Apache Pulsar 5.0.
