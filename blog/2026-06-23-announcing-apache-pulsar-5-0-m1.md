@@ -76,4 +76,6 @@ Once the vote passes and the artifacts are published, download 5.0.0-M1 and try 
 - migrating a cluster's metadata store from **ZooKeeper to Oxia**;
 - adopting the **V5 Java client** in an existing application.
 
-Share feedback on [GitHub](https://github.com/apache/pulsar/issues) or the [dev mailing list](https://pulsar.apache.org/contact/). Thank you for helping shape Apache Pulsar 5.0.
+Share feedback on [GitHub](https://github.com/apache/pulsar/issues) or the [dev mailing list](https://pulsar.apache.org/contact/).
+
+5.0.0-M1 is the first of several milestone releases on the road to **Pulsar 5.0.0**, which we expect to ship this fall. Each milestone builds on the feedback from the one before it — so the more you put these previews through their paces, the stronger the final release will be. Thank you for helping shape Apache Pulsar 5.0.
