@@ -30,15 +30,13 @@ The two SDKs are independent and can run **side by side in the same JVM**, so yo
 
 `pulsar-client-v5` already bundles the **unshaded** v4 client (`pulsar-client-original`). While you migrate incrementally, depend on `pulsar-client-original` for code still on the v4 API -- **not** the shaded `pulsar-client`, which would add a second, conflicting copy of the client classes. Once everything is on the V5 API, `pulsar-client-v5` alone is enough.
 
-Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on one version, and `netty-bom` to align Netty.
+Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on one version.
 
 ### Maven
 
 ```xml
 <!-- in your <properties> block -->
 <pulsar.version>@pulsar:version:latest@</pulsar.version>
-<!-- set to the Netty version shipped with the Pulsar release above -->
-<netty.version>...</netty.version>
 
 <!-- in your <dependencyManagement> block -->
 <dependency>
@@ -48,15 +46,8 @@ Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on o
   <type>pom</type>
   <scope>import</scope>
 </dependency>
-<dependency>
-  <groupId>io.netty</groupId>
-  <artifactId>netty-bom</artifactId>
-  <version>${netty.version}</version>
-  <type>pom</type>
-  <scope>import</scope>
-</dependency>
 
-<!-- in your <dependencies> block; versions come from the BOMs -->
+<!-- in your <dependencies> block; version comes from the BOM -->
 <dependency>
   <groupId>org.apache.pulsar</groupId>
   <artifactId>pulsar-client-v5</artifactId>
@@ -72,11 +63,9 @@ Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on o
 
 ```groovy
 def pulsarVersion = '@pulsar:version:latest@'
-def nettyVersion  = '...'   // the Netty version shipped with the Pulsar release above
 
 dependencies {
     implementation enforcedPlatform("org.apache.pulsar:pulsar-bom:${pulsarVersion}")
-    implementation enforcedPlatform("io.netty:netty-bom:${nettyVersion}")
 
     implementation 'org.apache.pulsar:pulsar-client-v5'
     // only while v4 code remains; remove once fully migrated
