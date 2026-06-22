@@ -18,9 +18,13 @@ Please run it on **non-production** clusters, exercise the new APIs, and tell us
 
 ## Scalable Topics: topics that size themselves
 
-For its entire history, Pulsar has scaled a topic's throughput with **partitions** — a count you fix when you create the topic. That model has well-known limits: you have to guess the right number up front, you can never decrease it, and changing it breaks per-key ordering.
+A topic should be a **logical concept** — a named stream you publish to and consume from. As an application developer, you shouldn't have to reason about the infrastructure that makes that stream fast. Yet for its entire history, Pulsar has asked you to answer an infrastructure question up front that has nothing to do with your application: **how many partitions?**
 
-**Scalable topics** remove those limits. A scalable topic — addressed with the new `topic://` scheme — is internally a set of **key-range segments** that the broker **splits** when part of the keyspace gets hot and **merges** when it goes cold: at runtime, with no downtime, and without ever breaking the ordering of any individual key. You never choose a partition count; the topic sizes itself to the load.
+That single number is a guess that's easy to get wrong and hard to undo. Too few and you cap your throughput; too many and you carry overhead a quiet topic never needed. You can raise the count later but never lower it, and changing it breaks per-key ordering. It forces an infrastructure decision into application design — before you even know how the topic will be used.
+
+**Scalable topics** take that decision away. A scalable topic — addressed with the new `topic://` scheme — is a single logical stream that Pulsar sizes to its actual load. Internally it is a set of **key-range segments** that the broker **splits** when part of the keyspace gets hot and **merges** when it goes cold: at runtime, with no downtime, and without ever breaking the ordering of any individual key.
+
+The aim is for one topic type to be the right choice in every situation, **transparently and out of the box** — from a single firehose carrying tens of gigabytes per second to millions of tiny topics each with a trickle of traffic. You model your application around the topics that fit your domain, and the system continuously adapts to how they are actually used. No capacity planning, no re-sharding, no hard decisions to push onto developers.
 
 Scalable topics are delivered by a family of proposals in 5.0:
 
@@ -33,13 +37,15 @@ Scalable topics are delivered by a family of proposals in 5.0:
 
 ### A new client API
 
-Scalable topics are served by a new **V5 Java client** (`pulsar-client-v5`) that replaces the four classic subscription types with three purpose-built consumers:
+The V5 client is groundbreaking work in its own right. Over more than a decade, Pulsar's client API grew one feature at a time, accumulating options, overloads, and subtle inconsistencies along the way. The **V5 client** is a clean-slate redesign that distills those years of lessons — learned from real users running Pulsar in production — into a focused API: it surfaces the capabilities that matter and sheds the noise and rough edges that accumulated along the road.
+
+Consumption is the clearest example. The classic client offers a single `Consumer` shaped by one of four subscription types — Exclusive, Failover, Shared, Key_Shared — plus a separate `Reader`, with behavior that shifts subtly as you combine options. The V5 client replaces all of it with three **purpose-built** consumers, each exposing exactly the operations that make sense for it:
 
 - **Stream consumer** — ordered, cumulative-ack consumption.
 - **Queue consumer** — parallel, individually-acked work-queue consumption with dead-letter support.
 - **Checkpoint consumer** — for stream processors (Flink, Spark) that track their own position.
 
-The V5 client also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating any topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client is available for Java; the other language SDKs will follow before GA.
+The V5 client (`pulsar-client-v5`) also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating any topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client is available for Java; the other language SDKs will follow before GA.
 
 Start here: [Scalable topics concepts](https://pulsar.apache.org/docs/next/concepts-scalable-topics), the [V5 Java client](https://pulsar.apache.org/docs/client-libraries/java-v5), and the [migration guide](https://pulsar.apache.org/docs/client-libraries/java-migrate-to-v5).
 
