@@ -1,7 +1,7 @@
 ---
 title: "Apache Pulsar 5.0.0-M1: A Preview of the Next Major Release"
-author: Matteo Merli
-date: 2026-06-22
+author: Matteo Merli, Lari Hotari
+date: 2026-06-23
 ---
 
 The Apache Pulsar community is voting on **Apache Pulsar 5.0.0-M1**, the first milestone of the upcoming Pulsar 5.0. This is a **preview release**: it bundles the major new features of 5.0 so the community can try them, run them against real workloads, and send feedback well before the general-availability release. It is **not intended for production**.
