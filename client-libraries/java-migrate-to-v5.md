@@ -17,14 +17,72 @@ You don't have to migrate. The current SDK is fully supported and remains the ri
 
 The two SDKs are independent and can run **side by side in the same JVM**, so you can migrate incrementally -- one producer or consumer at a time -- rather than all at once. A typical path:
 
-1. Add the `pulsar-client-v5` dependency alongside your existing `pulsar-client`.
+1. Add the `pulsar-client-v5` dependency (plus `pulsar-client-original` for the not-yet-migrated v4 code -- see [Dependencies](#dependencies)).
 2. Move producers and consumers to the V5 API. The V5 client works against your **existing** `persistent://` topics, so you can do this without changing any topic.
 3. When you're ready, [migrate the topics themselves to scalable topics](#migrating-the-topics) -- a separate, server-side step that is transparent to V5 applications.
 
 ## Prerequisites
 
 - **Java 17.** The V5 client requires Java 17 (the current SDK supports Java 8+).
-- **Add the dependency.** See [Set up the V5 client](java-v5.md#install). Keep `pulsar-client` for the parts of your application that are not yet migrated.
+- **Dependencies.** Add `pulsar-client-v5`, plus `pulsar-client-original` while v4 code remains -- see [Dependencies](#dependencies) below.
+
+## Dependencies
+
+`pulsar-client-v5` already bundles the **unshaded** v4 client (`pulsar-client-original`). While you migrate incrementally, depend on `pulsar-client-original` for code still on the v4 API -- **not** the shaded `pulsar-client`, which would add a second, conflicting copy of the client classes. Once everything is on the V5 API, `pulsar-client-v5` alone is enough.
+
+Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on one version, and `netty-bom` to align Netty.
+
+### Maven
+
+```xml
+<!-- in your <properties> block -->
+<pulsar.version>@pulsar:version:latest@</pulsar.version>
+<!-- set to the Netty version shipped with the Pulsar release above -->
+<netty.version>...</netty.version>
+
+<!-- in your <dependencyManagement> block -->
+<dependency>
+  <groupId>org.apache.pulsar</groupId>
+  <artifactId>pulsar-bom</artifactId>
+  <version>${pulsar.version}</version>
+  <type>pom</type>
+  <scope>import</scope>
+</dependency>
+<dependency>
+  <groupId>io.netty</groupId>
+  <artifactId>netty-bom</artifactId>
+  <version>${netty.version}</version>
+  <type>pom</type>
+  <scope>import</scope>
+</dependency>
+
+<!-- in your <dependencies> block; versions come from the BOMs -->
+<dependency>
+  <groupId>org.apache.pulsar</groupId>
+  <artifactId>pulsar-client-v5</artifactId>
+</dependency>
+<!-- only while v4 code remains; remove once fully migrated -->
+<dependency>
+  <groupId>org.apache.pulsar</groupId>
+  <artifactId>pulsar-client-original</artifactId>
+</dependency>
+```
+
+### Gradle
+
+```groovy
+def pulsarVersion = '@pulsar:version:latest@'
+def nettyVersion  = '...'   // the Netty version shipped with the Pulsar release above
+
+dependencies {
+    implementation enforcedPlatform("org.apache.pulsar:pulsar-bom:${pulsarVersion}")
+    implementation enforcedPlatform("io.netty:netty-bom:${nettyVersion}")
+
+    implementation 'org.apache.pulsar:pulsar-client-v5'
+    // only while v4 code remains; remove once fully migrated
+    implementation 'org.apache.pulsar:pulsar-client-original'
+}
+```
 
 ## API mapping
 
@@ -100,7 +158,7 @@ StreamConsumer<String> consumer = client.newStreamConsumer(Schema.string())
         .topic("persistent://public/default/orders")
         .subscriptionName("my-sub")
         .subscribe();
-Message<String> msg = consumer.receive(Duration.ofSeconds(5));
+Message<String> msg = consumer.receive();
 consumer.acknowledgeCumulative(msg.id());
 ```
 
@@ -123,7 +181,7 @@ QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
         .topic("persistent://public/default/orders")
         .subscriptionName("workers")
         .subscribe();
-Message<String> msg = consumer.receive(Duration.ofSeconds(5));
+Message<String> msg = consumer.receive();
 consumer.acknowledge(msg.id());       // or consumer.negativeAcknowledge(msg.id());
 ```
 
@@ -144,7 +202,7 @@ CheckpointConsumer<String> consumer = client.newCheckpointConsumer(Schema.string
         .topic("persistent://public/default/orders")
         .startPosition(Checkpoint.earliest())
         .create();
-Message<String> msg = consumer.receive(Duration.ofSeconds(5));
+Message<String> msg = consumer.receive();
 byte[] state = consumer.checkpoint().toByteArray();   // persist; restore via Checkpoint.fromByteArray(...)
 ```
 
@@ -157,7 +215,7 @@ In the current SDK, a single consumer can attach to many topics with a topic lis
 ```java
 // Current -- pattern subscription
 Consumer<String> consumer = client.newConsumer(Schema.STRING)
-        .topicsPattern("persistent://tenant/ns/orders-.*")
+        .topicsPattern(Pattern.compile("persistent://tenant/ns/orders-.*"))
         .subscriptionName("workers")
         .subscriptionType(SubscriptionType.Shared)
         .subscribe();
