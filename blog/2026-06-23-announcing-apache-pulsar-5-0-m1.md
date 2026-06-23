@@ -49,7 +49,7 @@ For now, the classic client API remains fully supported, and existing applicatio
 
 The V5 client (`pulsar-client-v5`) also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating a single topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client ships for Java; the other language SDKs will follow before GA.
 
-Start here: [Scalable topics concepts](/docs/concepts-scalable-topics), the [V5 Java client](/docs/client-libraries/java-v5), and the [migration guide](/docs/client-libraries/java-migrate-to-v5).
+Start here: [Scalable topics concepts](/docs/5.0.x/concepts-scalable-topics), the [V5 Java client](/docs/client-libraries/java-v5), and the [migration guide](/docs/client-libraries/java-migrate-to-v5).
 
 ## Oxia is now the recommended metadata store
 
@@ -57,7 +57,7 @@ Start here: [Scalable topics concepts](/docs/concepts-scalable-topics), the [V5 
 
 ZooKeeper remains fully supported, and 5.0 makes moving to Oxia straightforward:
 
-- **[PIP-454](https://github.com/apache/pulsar/blob/master/pip/pip-454.md): Metadata Store Migration Framework** — a live, **zero-downtime** migration from ZooKeeper to Oxia. The data plane keeps publishing and consuming while metadata is copied. See [Migrate metadata store](/docs/administration-metadata-store-migration).
+- **[PIP-454](https://github.com/apache/pulsar/blob/master/pip/pip-454.md): Metadata Store Migration Framework** — a live, **zero-downtime** migration from ZooKeeper to Oxia. The data plane keeps publishing and consuming while metadata is copied. See [Migrate metadata store](/docs/5.0.x/administration-metadata-store-migration).
 - **[PIP-469](https://github.com/apache/pulsar/blob/master/pip/pip-469.md): Metadata-store topic policies** — topic policies can be stored directly in the metadata store, with legacy-aware routing for clusters still using system-topic policies.
 
 5.0 also **removes the etcd metadata store backend** ([PIP-462](https://github.com/apache/pulsar/blob/master/pip/pip-462.md)). ZooKeeper and Oxia are the supported backends going forward, so etcd users should migrate before upgrading.
@@ -72,7 +72,7 @@ ZooKeeper remains fully supported, and 5.0 makes moving to Oxia straightforward:
 
 ## Try it and tell us what you think
 
-Deploy Pulsar 5.0 to a test cluster, or try it locally with [Docker Compose](/docs/getting-started-docker-compose) — which runs Pulsar on Oxia out of the box — or [Pulsar Standalone](/docs/getting-started-standalone). Because this is a preview, we're especially keen to hear about:
+Deploy Pulsar 5.0 to a test cluster, or try it locally with [Docker Compose](/docs/5.0.x/getting-started-docker-compose) — which runs Pulsar on Oxia out of the box — or [Pulsar Standalone](/docs/5.0.x/getting-started-standalone). Because this is a preview, we're especially keen to hear about:
 
 - creating and operating **scalable topics** with the V5 client;
 - migrating a cluster's metadata store from **ZooKeeper to Oxia**;
