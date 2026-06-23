@@ -4,7 +4,7 @@ author: Matteo Merli, Lari Hotari
 date: 2026-06-23
 ---
 
-The Apache Pulsar community is voting on **Apache Pulsar 5.0.0-M1**, the first milestone on the road to Pulsar 5.0. It is a **preview**: an early build that puts the major new features of 5.0 in your hands so you can try them against real workloads and send feedback well ahead of the general-availability (GA) release. It is **not meant for production**.
+The Apache Pulsar community is pleased to announce **Apache Pulsar 5.0.0-M1**, the first milestone on the road to Pulsar 5.0. It is a **preview**: an early build that puts the major new features of 5.0 in your hands so you can try them against real workloads and send feedback well ahead of the general-availability (GA) release. It is **not meant for production**.
 
 5.0 is a major release, and two changes stand out: **Scalable Topics** — a new kind of topic that grows and shrinks on its own — and the promotion of **Oxia** to Pulsar's recommended metadata store. This post walks through what's in M1 and how to try it.
 
@@ -12,7 +12,7 @@ The Apache Pulsar community is voting on **Apache Pulsar 5.0.0-M1**, the first m
 
 ## A preview, built for feedback
 
-M1 is a milestone build, not a final release. We're publishing it early, during the community vote, for one reason: the changes in 5.0 are far-reaching, and we want real-world feedback before they're finalized for GA.
+M1 is a milestone build, not a final release. We're publishing it early, for one reason: the changes in 5.0 are far-reaching, and we want real-world feedback before they're finalized for GA.
 
 So please run it on **non-production** clusters, exercise the new APIs, and tell us what works and what doesn't — open issues on [GitHub](https://github.com/apache/pulsar/issues) or start a thread on the [dev@pulsar.apache.org](https://pulsar.apache.org/contact/) mailing list. The feedback you give now directly shapes what 5.0 becomes at GA.
 
@@ -45,7 +45,7 @@ Consumption is the clearest example. The classic client offers a single `Consume
 - **Queue consumer** — parallel, individually-acknowledged work-queue consumption with dead-letter support.
 - **Checkpoint consumer** — for stream processors such as Flink and Spark that track their own position.
 
-The V5 client (`pulsar-client-v5`) also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating a single topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client ships for Java; the other language SDKs will follow before GA.
+The classic client API remains fully supported and is the right choice for applications that don't need scalable topics — but scalable topics themselves are available only through the V5 API. The V5 client (`pulsar-client-v5`) also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating a single topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client ships for Java; the other language SDKs will follow before GA.
 
 Start here: [Scalable topics concepts](https://pulsar.apache.org/docs/next/concepts-scalable-topics), the [V5 Java client](https://pulsar.apache.org/docs/client-libraries/java-v5), and the [migration guide](https://pulsar.apache.org/docs/client-libraries/java-migrate-to-v5).
 
@@ -66,11 +66,11 @@ ZooKeeper remains fully supported, and 5.0 makes moving to Oxia straightforward:
 - **`javax.*` → `jakarta.*`** ([PIP-472](https://github.com/apache/pulsar/blob/master/pip/pip-472.md)) — Pulsar adopts the Jakarta EE namespace, a breaking change for code that touches the affected APIs.
 - **Gradle build** ([PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)) — the build moves from Maven to Gradle, speeding up the development cycle for contributors.
 - **Structured logging** ([PIP-467](https://github.com/apache/pulsar/blob/master/pip/pip-467.md)) — Pulsar adopts structured (slog-style) logging for richer, machine-parseable logs.
-- **Flexible networking** — multiple advertised addresses and smarter listener selection ([PIP-61](https://github.com/apache/pulsar/blob/master/pip/pip-61.md), [PIP-95](https://github.com/apache/pulsar/blob/master/pip/pip-95.md)) for multi-network deployments.
+- **Flexible networking** — 5.0 improves multiple advertised addresses ([PIP-61](https://github.com/apache/pulsar/blob/master/pip/pip-61.md), since 2.6) and smart listener selection ([PIP-95](https://github.com/apache/pulsar/blob/master/pip/pip-95.md), since 2.9) for multi-network deployments.
 
 ## Try it and tell us what you think
 
-Once the vote passes and the artifacts are published, download 5.0.0-M1 and put it on a test cluster. Because this is a preview, we're especially keen to hear about:
+Deploy Pulsar 5.0 to a test cluster, or try it locally with [Docker Compose](https://pulsar.apache.org/docs/next/getting-started-docker-compose) — which runs Pulsar on Oxia out of the box — or [Pulsar Standalone](https://pulsar.apache.org/docs/next/getting-started-standalone). Because this is a preview, we're especially keen to hear about:
 
 - creating and operating **scalable topics** with the V5 client;
 - migrating a cluster's metadata store from **ZooKeeper to Oxia**;
