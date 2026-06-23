@@ -45,7 +45,9 @@ Consumption is the clearest example. The classic client offers a single `Consume
 - **Queue consumer** — parallel, individually-acknowledged work-queue consumption with dead-letter support.
 - **Checkpoint consumer** — for stream processors such as Flink and Spark that track their own position.
 
-The classic client API remains fully supported and is the right choice for applications that don't need scalable topics — but scalable topics themselves are available only through the V5 API. The V5 client (`pulsar-client-v5`) also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating a single topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client ships for Java; the other language SDKs will follow before GA.
+For now, the classic client API remains fully supported, and existing applications keep working unchanged; scalable topics, however, are available only through the V5 API. Longer term, scalable topics are designed to cover **all** of Pulsar's use cases, and the V5 API is the direction Pulsar is heading. As that vision is realized, the classic topics and client API will be deprecated and, eventually, removed — so new applications are encouraged to build on scalable topics and the V5 client today.
+
+The V5 client (`pulsar-client-v5`) also works against your existing partitioned and non-partitioned topics, so you can adopt the new API before migrating a single topic — and a consumer can now subscribe to an entire **namespace**, filtered by topic properties. In M1 the V5 client ships for Java; the other language SDKs will follow before GA.
 
 Start here: [Scalable topics concepts](https://pulsar.apache.org/docs/next/concepts-scalable-topics), the [V5 Java client](https://pulsar.apache.org/docs/client-libraries/java-v5), and the [migration guide](https://pulsar.apache.org/docs/client-libraries/java-migrate-to-v5).
 
