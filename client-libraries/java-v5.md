@@ -39,7 +39,7 @@ dependencies {
 
 ## Create a client
 
-A [`PulsarClient`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClient.html) is the entry point to the API: build one, share it across all producers and consumers, and close it on shutdown. `PulsarClient.builder()` returns a [`PulsarClientBuilder`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClientBuilder.html) where you configure the connection.
+A [`PulsarClient`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClient.html) is the entry point to the API: build one, share it across all producers and consumers, and close it on shutdown. [`PulsarClient.builder()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClient.html#builder()) returns a [`PulsarClientBuilder`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClientBuilder.html) where you configure the connection.
 
 ```java
 import org.apache.pulsar.client.api.v5.PulsarClient;
@@ -57,7 +57,7 @@ The service URL uses the `pulsar://` (or `pulsar+ssl://`) scheme. Authentication
 
 ## Produce messages
 
-Create a [`Producer`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/Producer.html) from the client with a [schema](#schemas) and a topic. `client.newProducer(schema)` returns a [`ProducerBuilder`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/ProducerBuilder.html); call `create()` to get the producer. Each `producer.newMessage()` returns a [`MessageBuilder`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/MessageBuilder.html) for setting the key, value, and other per-message properties before sending:
+Create a [`Producer`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/Producer.html) from the client with a [schema](#schemas) and a topic. [`client.newProducer(schema)`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClient.html#newProducer(org.apache.pulsar.client.api.v5.schema.Schema)) returns a [`ProducerBuilder`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/ProducerBuilder.html); call [`create()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/ProducerBuilder.html#create()) to get the producer. Each [`producer.newMessage()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/Producer.html#newMessage()) returns a [`MessageBuilder`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/MessageBuilder.html) for setting the key, value, and other per-message properties before sending:
 
 ```java
 Producer<String> producer = client.newProducer(Schema.string())
@@ -70,7 +70,7 @@ producer.newMessage()
         .send();
 ```
 
-For non-blocking sends, `producer.async()` returns an [`AsyncProducer`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/async/AsyncProducer.html) whose operations return `CompletableFuture`s:
+For non-blocking sends, [`producer.async()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/Producer.html#async()) returns an [`AsyncProducer`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/async/AsyncProducer.html) whose operations return `CompletableFuture`s:
 
 ```java
 var async = producer.async();
@@ -146,11 +146,11 @@ Schema.json(Order.class)   // JSON-encoded POJO
 Schema.avro(Order.class)   // Avro-encoded POJO
 ```
 
-Primitive factories (`Schema.int32()`, `Schema.bool()`, `Schema.bytes()`, …) and `Schema.protobuf(...)` are also available.
+Primitive factories ([`Schema.int32()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/schema/Schema.html#int32()), [`Schema.bool()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/schema/Schema.html#bool()), [`Schema.bytes()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/schema/Schema.html#bytes()), …) and [`Schema.protobuf(...)`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/schema/Schema.html#protobuf(java.lang.Class)) are also available.
 
 ## Transactions
 
-A [`Transaction`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/Transaction.html) lets you produce messages and acknowledge consumed messages atomically. Start one with `client.newTransaction()`, bind a produce with `.transaction(txn)` on the message builder and an acknowledgment with the two-argument `acknowledge`, then commit or abort:
+A [`Transaction`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/Transaction.html) lets you produce messages and acknowledge consumed messages atomically. Start one with [`client.newTransaction()`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/PulsarClient.html#newTransaction()), bind a produce with [`.transaction(txn)`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/MessageMetadata.html#transaction(org.apache.pulsar.client.api.v5.Transaction)) on the message builder and an acknowledgment with the [two-argument `acknowledge`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/QueueConsumer.html#acknowledge(org.apache.pulsar.client.api.v5.MessageId,org.apache.pulsar.client.api.v5.Transaction)), then commit or abort:
 
 ```java
 Transaction txn = client.newTransaction();
