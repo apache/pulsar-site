@@ -2,6 +2,7 @@ import semver from "semver";
 import * as compareVersions from "compare-versions";
 
 import versionsList from "../../versions.json";
+import releasesList from "../../releases.json";
 import restApiVersions from "../../static/swagger/restApiVersions.json";
 
 // CommonJS modules without type declarations — typed inline below.
@@ -27,6 +28,43 @@ export const latestMajorRelease: string = versions[0];
 
 // LTS major version. Kept in sync with `_ltsVersion` in src/theme/DocVersionBanner/index.js.
 export const ltsMajorRelease: string = "4.0.x";
+
+// Every published Pulsar release (newest first), including milestone (-M*) releases.
+const releases = releasesList as string[];
+
+// Milestone releases (e.g. 5.0.0-M1) are published ahead of an LTS release and are
+// not meant for production use.
+function isMilestoneRelease(version: string): boolean {
+  return /-M\d+/i.test(version);
+}
+
+// Highest version in `list` by (prerelease-aware) semver order, or "" if none parse.
+function latestBySemver(list: string[]): string {
+  return list.filter((v) => semver.valid(v)).sort(semver.rcompare)[0] ?? "";
+}
+
+// The latest release that ships the V5 client (Pulsar 5.0.0+, i.e. the
+// `org.apache.pulsar.client.api.v5` API). A stable 5.x+ release always wins over a
+// milestone; a milestone (e.g. 5.0.0-M1) is used only while no stable 5.x+ release
+// exists yet. Empty before any 5.x release is published.
+const v5PlusReleases = releases.filter((v) => (semver.coerce(v)?.major ?? 0) >= 5);
+const v5PlusStableReleases = v5PlusReleases.filter((v) => !isMilestoneRelease(v));
+export const latestV5PlusRelease: string = latestBySemver(
+  v5PlusStableReleases.length > 0 ? v5PlusStableReleases : v5PlusReleases
+);
+
+// The milestone release currently in effect, or "" when the newest release is not a
+// milestone — i.e. a stable release has superseded the last milestone and no newer
+// milestone has been published yet (5.0.0-M1 now; empty after 5.0.0 ships; 5.1.0-M1
+// once the next milestone is out).
+const newestRelease = latestBySemver(releases);
+export const currentMilestoneRelease: string =
+  newestRelease !== "" && isMilestoneRelease(newestRelease) ? newestRelease : "";
+
+// Formatted ", milestone: <version>" annotation for version hints, empty when no
+// milestone is active so surrounding text (e.g. "LTS: x, latest: y") collapses cleanly.
+export const currentMilestoneSuffix: string =
+  currentMilestoneRelease !== "" ? `, milestone: ${currentMilestoneRelease}` : "";
 
 export function getRealVersion(version: string): string {
   const versionMap: Record<string, string> = {};
@@ -237,7 +275,10 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["version_origin", versionOrigin],
     ["version_reference", versionReference],
     ["version:adapters", pulsarAdaptersVersion],
+    ["version:current-milestone", currentMilestoneRelease],
+    ["version:current-milestone-suffix", currentMilestoneSuffix],
     ["version:latest", latestVersion],
+    ["version:latest-v5plus", latestV5PlusRelease],
     ["version:lts", ltsVersion],
     ["version:python", clientPythonVersion(pythonArg)],
     ["version", resolvedVersion],

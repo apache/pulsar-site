@@ -17,7 +17,7 @@ The V5 client requires **Java 17**. Scalable-topic support in the other language
 
 ## Install
 
-The V5 client is published to Maven Central as `pulsar-client-v5` (available from **@pulsar:version:latest@**). Its API lives under the [`org.apache.pulsar.client.api.v5`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/package-summary.html) package.
+The V5 client is published to Maven Central as `pulsar-client-v5` (available from **@pulsar:version:latest-v5plus@**). Its API lives under the [`org.apache.pulsar.client.api.v5`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/package-summary.html) package.
 
 ### Maven
 
@@ -25,7 +25,7 @@ The V5 client is published to Maven Central as `pulsar-client-v5` (available fro
 <dependency>
   <groupId>org.apache.pulsar</groupId>
   <artifactId>pulsar-client-v5</artifactId>
-  <version>@pulsar:version:latest@</version>
+  <version>@pulsar:version:latest-v5plus@</version>
 </dependency>
 ```
 
@@ -33,7 +33,7 @@ The V5 client is published to Maven Central as `pulsar-client-v5` (available fro
 
 ```groovy
 dependencies {
-    implementation "org.apache.pulsar:pulsar-client-v5:@pulsar:version:latest@"
+    implementation "org.apache.pulsar:pulsar-client-v5:@pulsar:version:latest-v5plus@"
 }
 ```
 

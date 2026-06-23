@@ -36,7 +36,7 @@ Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on o
 
 ```xml
 <!-- in your <properties> block -->
-<pulsar.version>@pulsar:version:latest@</pulsar.version>
+<pulsar.version>@pulsar:version:latest-v5plus@</pulsar.version>
 
 <!-- in your <dependencyManagement> block -->
 <dependency>
@@ -62,7 +62,7 @@ Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on o
 ### Gradle
 
 ```groovy
-def pulsarVersion = '@pulsar:version:latest@'
+def pulsarVersion = '@pulsar:version:latest-v5plus@'
 
 dependencies {
     implementation enforcedPlatform("org.apache.pulsar:pulsar-bom:${pulsarVersion}")
