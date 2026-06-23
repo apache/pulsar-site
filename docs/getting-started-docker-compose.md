@@ -48,7 +48,7 @@ services:
   pulsar-init:
     container_name: pulsar-init
     hostname: pulsar-init
-    image: apachepulsar/pulsar:latest
+    image: apachepulsar/pulsar:@pulsar:version@
     networks:
       - pulsar
     command:
@@ -67,7 +67,7 @@ services:
 
   # Start bookie
   bookie:
-    image: apachepulsar/pulsar:latest
+    image: apachepulsar/pulsar:@pulsar:version@
     container_name: bookie
     restart: on-failure
     networks:
@@ -88,7 +88,7 @@ services:
 
   # Start broker
   broker:
-    image: apachepulsar/pulsar:latest
+    image: apachepulsar/pulsar:@pulsar:version@
     container_name: broker
     hostname: broker
     restart: on-failure

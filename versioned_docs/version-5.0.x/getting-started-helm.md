@@ -94,9 +94,18 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
 
 4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
 
+   The `--set` overrides below pin every Pulsar component to the `apachepulsar/pulsar:@pulsar:version@` image (matching this documentation version), use [Oxia](https://github.com/oxia-db/oxia) as the metadata store instead of ZooKeeper — the recommended option for new Pulsar clusters — and scale Oxia down to a single replica to fit the minikube footprint. You can also set these values in a values file instead of on the command line.
+
    ```bash
    helm install \
        --values examples/values-minikube.yaml \
+       --set defaultPulsarImageRepository=apachepulsar/pulsar \
+       --set defaultPulsarImageTag=@pulsar:version@ \
+       --set components.zookeeper=false \
+       --set components.oxia=true \
+       --set oxia.server.replicas=1 \
+       --set oxia.replicationFactor=1 \
+       --set oxia.initialShardCount=1 \
        --namespace pulsar \
        pulsar-mini apache/pulsar
    ```
@@ -126,17 +135,18 @@ pulsar_manager:
    **Output**
 
    ```bash
-   NAME                                         READY   STATUS      RESTARTS   AGE
-   pulsar-mini-bookie-0                         1/1     Running     0          9m27s
-   pulsar-mini-bookie-init-5gphs                0/1     Completed   0          9m27s
-   pulsar-mini-broker-0                         1/1     Running     0          9m27s
-   pulsar-mini-grafana-6b7bcc64c7-4tkxd         1/1     Running     0          9m27s
-   pulsar-mini-prometheus-5fcf5dd84c-w8mgz      1/1     Running     0          9m27s
-   pulsar-mini-proxy-0                          1/1     Running     0          9m27s
-   pulsar-mini-pulsar-init-t7cqt                0/1     Completed   0          9m27s
-   pulsar-mini-pulsar-manager-9bcbb4d9f-htpcs   1/1     Running     0          9m27s
-   pulsar-mini-toolset-0                        1/1     Running     0          9m27s
-   pulsar-mini-zookeeper-0                      1/1     Running     0          9m27s
+   NAME                                            READY   STATUS      RESTARTS   AGE
+   pulsar-mini-bookie-0                            1/1     Running     0          9m27s
+   pulsar-mini-bookie-init-5gphs                   0/1     Completed   0          9m27s
+   pulsar-mini-broker-0                            1/1     Running     0          9m27s
+   pulsar-mini-grafana-6b7bcc64c7-4tkxd            1/1     Running     0          9m27s
+   pulsar-mini-oxia-coordinator-7c9d8f5b6c-q4xtz   1/1     Running     0          9m27s
+   pulsar-mini-oxia-server-0                       1/1     Running     0          9m27s
+   pulsar-mini-prometheus-5fcf5dd84c-w8mgz         1/1     Running     0          9m27s
+   pulsar-mini-proxy-0                             1/1     Running     0          9m27s
+   pulsar-mini-pulsar-init-t7cqt                   0/1     Completed   0          9m27s
+   pulsar-mini-pulsar-manager-9bcbb4d9f-htpcs      1/1     Running     0          9m27s
+   pulsar-mini-toolset-0                           1/1     Running     0          9m27s
    ```
 
 6. Check the status of all services in the namespace `pulsar`.
@@ -148,15 +158,17 @@ pulsar_manager:
    **Output**
 
    ```bash
-   NAME                         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                       AGE
-   pulsar-mini-bookie           ClusterIP      None             <none>        3181/TCP,8000/TCP             11m
-   pulsar-mini-broker           ClusterIP      None             <none>        8080/TCP,6650/TCP             11m
-   pulsar-mini-grafana          LoadBalancer   10.106.141.246   <pending>     3000:31905/TCP                11m
-   pulsar-mini-prometheus       ClusterIP      None             <none>        9090/TCP                      11m
-   pulsar-mini-proxy            LoadBalancer   10.97.240.109    <pending>     80:32305/TCP,6650:31816/TCP   11m
-   pulsar-mini-pulsar-manager   LoadBalancer   10.103.192.175   <pending>     9527:30190/TCP                11m
-   pulsar-mini-toolset          ClusterIP      None             <none>        <none>                        11m
-   pulsar-mini-zookeeper        ClusterIP      None             <none>        2888/TCP,3888/TCP,2181/TCP    11m
+   NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                       AGE
+   pulsar-mini-bookie             ClusterIP      None             <none>        3181/TCP,8000/TCP             11m
+   pulsar-mini-broker             ClusterIP      None             <none>        8080/TCP,6650/TCP             11m
+   pulsar-mini-grafana            LoadBalancer   10.106.141.246   <pending>     3000:31905/TCP                11m
+   pulsar-mini-oxia               ClusterIP      10.103.0.51      <none>        6648/TCP,6649/TCP,8080/TCP    11m
+   pulsar-mini-oxia-coordinator   ClusterIP      10.103.0.77      <none>        6649/TCP,8080/TCP             11m
+   pulsar-mini-oxia-svc           ClusterIP      None             <none>        6648/TCP,6649/TCP,8080/TCP    11m
+   pulsar-mini-prometheus         ClusterIP      None             <none>        9090/TCP                      11m
+   pulsar-mini-proxy              LoadBalancer   10.97.240.109    <pending>     80:32305/TCP,6650:31816/TCP   11m
+   pulsar-mini-pulsar-manager     LoadBalancer   10.103.192.175   <pending>     9527:30190/TCP                11m
+   pulsar-mini-toolset            ClusterIP      None             <none>        <none>                        11m
    ```
 
 ## Step 2: Use pulsar-admin to create Pulsar tenants/namespaces/topics
