@@ -456,4 +456,4 @@ For a full walkthrough, see the announcement: [Apache Pulsar 5.0.0-M1: A Preview
 - [cleanup][test] Remove PortManager and use kernel-assigned ports everywhere ([#25694](https://github.com/apache/pulsar/pull/25694))
 - [feat][ci] Add Gradle dependency submission workflow for Dependabot alerts ([#25748](https://github.com/apache/pulsar/pull/25748))
 
-For the complete list, check the [full changelog] since 4.2.0 release branch was forked (https://github.com/apache/pulsar/compare/19ef1fc...v5.0.0-M1).
+For the complete list, check the [full changelog](https://github.com/apache/pulsar/compare/19ef1fc...v5.0.0-M1) since 4.2.0 release branch was forked.
