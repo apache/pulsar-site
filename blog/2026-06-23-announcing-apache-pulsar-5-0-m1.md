@@ -64,10 +64,10 @@ ZooKeeper remains fully supported, and 5.0 makes moving to Oxia straightforward:
 
 ## Other notable changes
 
+- **Structured logging** ([PIP-467](https://github.com/apache/pulsar/blob/master/pip/pip-467.md)) — Pulsar moves to structured (slog-style) logging. Log attributes are emitted as discrete JSON fields rather than crammed into a line of free text, so exporting logs to JSON and filtering on a specific property — a single topic, a subscription — becomes straightforward. Those attributes also propagate down the stack: BookKeeper operations are tagged with the originating Pulsar topic, letting you follow one topic's activity end to end.
 - **IO connectors moved to a dedicated repository** ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)) — the built-in connectors now live and release independently of Pulsar core.
 - **`javax.*` → `jakarta.*`** ([PIP-472](https://github.com/apache/pulsar/blob/master/pip/pip-472.md)) — Pulsar adopts the Jakarta EE namespace, a breaking change for code that touches the affected APIs.
 - **Gradle build** ([PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)) — the build moves from Maven to Gradle, speeding up the development cycle for contributors.
-- **Structured logging** ([PIP-467](https://github.com/apache/pulsar/blob/master/pip/pip-467.md)) — Pulsar moves to structured (slog-style) logging. Log attributes are emitted as discrete JSON fields rather than crammed into a line of free text, so exporting logs to JSON and filtering on a specific property — a single topic, a subscription — becomes straightforward. Those attributes also propagate down the stack: BookKeeper operations are tagged with the originating Pulsar topic, letting you follow one topic's activity end to end.
 - **Flexible networking** — 5.0 improves multiple advertised addresses ([PIP-61](https://github.com/apache/pulsar/blob/master/pip/pip-61.md), since 2.6) and smart listener selection ([PIP-95](https://github.com/apache/pulsar/blob/master/pip/pip-95.md), since 2.9) for multi-network deployments.
 
 ## Try it and tell us what you think
