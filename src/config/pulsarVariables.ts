@@ -135,6 +135,22 @@ export function javadocVersionUrl(version: string, type: string): string {
   return `${urlConfig.siteUrl}/api/${type}/${version}`;
 }
 
+// The V5 client API (org.apache.pulsar.client.api.v5) ships only in Pulsar
+// 5.0.0+, so its Javadoc has no pre-5.0 directory. Resolve it against the doc's
+// own version when that is already 5.x+; otherwise (e.g. the current docs, whose
+// latestMajorRelease is still a 4.x line) point at the newest published 5.x+
+// release, falling back to 5.0.x — the first release to carry it — until a 5.x
+// line is listed in versions.json.
+const firstClientV5Release = "5.0.x";
+const latestClientV5Release: string =
+  versions.find((v) => (semver.coerce(v)?.major ?? 0) >= 5) ?? firstClientV5Release;
+
+export function javadocClientV5Url(originVersion: string): string {
+  const major = semver.coerce(originVersion)?.major ?? 0;
+  const version = major >= 5 ? originVersion : latestClientV5Release;
+  return javadocVersionUrl(version, "client-v5");
+}
+
 export function referenceVersion(version: string): string {
   const v = semver.coerce(version)!;
   if (v.compareMain("2.7.0") < 0) return "2.6.x";
@@ -208,6 +224,7 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["download_page_url", downloadPageUrl()],
     ["javadoc:admin", javadocVersionUrl(originVersion, "admin")],
     ["javadoc:client", javadocVersionUrl(originVersion, "client")],
+    ["javadoc:client-v5", javadocClientV5Url(originVersion)],
     ["javadoc:pulsar-functions", javadocVersionUrl(originVersion, "pulsar-functions")],
     ["offloader_release_url", offloaderReleaseUrl(resolvedVersion)],
     ["presto_pulsar_connector_release_url", prestoPulsarReleaseUrl(resolvedVersion)],

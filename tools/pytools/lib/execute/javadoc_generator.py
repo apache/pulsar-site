@@ -74,11 +74,14 @@ def _publish(apidocs: Path, name: str, v: str):
 def _generate_gradle(src: Path, v: str):
     # Pulsar master/5.0.0+ build with Gradle: the modules' standard `javadoc`
     # tasks write to <module>/build/docs/javadoc. A single Gradle invocation
-    # builds all three; the task graph compiles the dependent projects as needed.
+    # builds them all; the task graph compiles the dependent projects as needed.
+    # pulsar-client-api-v5 (the V5 scalable-topics client) is new in 5.0.0 and
+    # has no Maven counterpart, so it is published only on the Gradle path.
     gradlew = src / 'gradlew'
     run(
         str(gradlew.absolute()),
         ':pulsar-client-api:javadoc',
+        ':pulsar-client-api-v5:javadoc',
         ':pulsar-client-admin-api:javadoc',
         ':pulsar-functions:pulsar-functions-api:javadoc',
         '--no-configuration-cache',
@@ -86,6 +89,7 @@ def _generate_gradle(src: Path, v: str):
         cwd=src,
     )
     _publish(src / 'pulsar-client-api' / 'build' / 'docs' / 'javadoc', 'client', v)
+    _publish(src / 'pulsar-client-api-v5' / 'build' / 'docs' / 'javadoc', 'client-v5', v)
     _publish(src / 'pulsar-client-admin-api' / 'build' / 'docs' / 'javadoc', 'admin', v)
     _publish(src / 'pulsar-functions' / 'api-java' / 'build' / 'docs' / 'javadoc',
              'pulsar-functions', v)
