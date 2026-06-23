@@ -6,6 +6,38 @@ sidebar_label: Apache Pulsar 5.0.0-M1
 
 #### 2026-06-23
 
+Apache Pulsar 5.0.0-M1 is the first milestone release on the road to Apache Pulsar 5.0.0, with general availability expected later in 2026. It is a **preview**: an early build that puts the major new features of 5.0 in your hands so you can try them against real workloads and send feedback ahead of the GA release. It is **not meant for production**. Two changes stand out — **Scalable Topics**, a new topic type that grows and shrinks on its own, and the promotion of **Oxia** to Pulsar's recommended metadata store — alongside a migration of the build system to Gradle, the split of the IO connectors into a separate repository, and structured logging.
+
+For a full walkthrough, see the announcement: [Apache Pulsar 5.0.0-M1: A Preview of the Next Major Release](https://pulsar.apache.org/blog/2026/06/23/announcing-apache-pulsar-5-0-m1).
+
+### Highlights
+
+**Scalable Topics (Topics v5).** A new topic type that replaces fixed partitions with range-based *segments*, so a topic can scale up and down by transparently splitting and merging segments while preserving per-key ordering. This avoids the ordering breakage and operational drift that come from changing the partition count of a regular partitioned topic. The work spans the broker-side controller ([PIP-468](https://github.com/apache/pulsar/blob/master/pip/pip-468.md)), metadata-driven transactions ([PIP-473](https://github.com/apache/pulsar/blob/master/pip/pip-473.md)), regular-to-scalable topic migration ([PIP-475](https://github.com/apache/pulsar/blob/master/pip/pip-475.md)), and automatic split/merge ([PIP-483](https://github.com/apache/pulsar/blob/master/pip/pip-483.md)). See [PIP-460](https://github.com/apache/pulsar/blob/master/pip/pip-460.md).
+
+**New V5 Java client API.** A clean-slate, purpose-built client API for scalable topics, shipped as a new, additive `pulsar-client-v5` module — the existing `pulsar-client` and `pulsar-client-api` modules are unchanged, so current applications keep working. It replaces the classic `Consumer`/`Reader` and the four subscription types with three purpose-built consumers: `QueueConsumer` (parallel, individually-acknowledged work-queue consumption with dead-letter support), `StreamConsumer` (ordered, cumulative acks), and `CheckpointConsumer` (for stream processors such as Flink and Spark that track their own position). The V5 client also works against existing partitioned and non-partitioned topics, and a consumer can subscribe to an entire namespace. In M1 it ships for Java; other language SDKs will follow before GA. See [PIP-466](https://github.com/apache/pulsar/blob/master/pip/pip-466.md).
+
+**Oxia is now the recommended metadata store.** [Oxia](https://github.com/oxia-db/oxia) becomes the recommended metadata store for new Pulsar clusters in 5.0 and is the backend of choice for scalable topics, whose lookups build on its streaming watch sessions. ZooKeeper remains fully supported, and [PIP-454](https://github.com/apache/pulsar/blob/master/pip/pip-454.md) adds a live, zero-downtime migration framework that moves an existing cluster from ZooKeeper to Oxia while the data plane keeps publishing and consuming.
+
+**Build system migrated from Maven to Gradle.** Builds now use `./gradlew` instead of `mvn`, with task-level caching and parallelism that substantially reduce local and CI build times, and a central version catalog (`gradle/libs.versions.toml`) for dependency management. The migration is transparent to users consuming the published Maven artifacts, Docker images, and shaded client JARs. See [PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md).
+
+**IO connectors split into a separate repository.** The built-in Pulsar IO connectors have been moved out of the core repository so they can follow their own release cadence. See [PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md).
+
+**Structured logging.** Pulsar now emits structured logs through `slog` across the broker, client, managed-ledger, functions, and metadata modules, with flat JSON / OpenTelemetry log output and a `PULSAR_LOG_FORMAT` environment variable to switch formats easily. See [PIP-467](https://github.com/apache/pulsar/blob/master/pip/pip-467.md).
+
+**API and platform modernization.** Pulsar migrated from `javax.*` to `jakarta.*` APIs ([PIP-472](https://github.com/apache/pulsar/blob/master/pip/pip-472.md)), made Protobuf v4 the default, migrated REST API annotations from Swagger to OpenAPI 3, and now supports building and running on Java 25. Topic policies gained a legacy-aware, metadata-store-backed routing backend ([PIP-469](https://github.com/apache/pulsar/blob/master/pip/pip-469.md)).
+
+**Security and dependency updates.** This release bundles a large set of dependency upgrades that address numerous CVEs across Netty, Jetty, log4j, BouncyCastle, Thrift, vert.x, and async-http-client, and upgrades BookKeeper to 4.18.0. See [Library updates](#library-updates) below.
+
+### Important notice
+
+5.0.0-M1 is a major release that removes deprecated functionality and changes some APIs. Review the following before upgrading:
+
+- **`javax.*` → `jakarta.*` migration ([PIP-472](https://github.com/apache/pulsar/blob/master/pip/pip-472.md)).** Custom broker plugins, interceptors, authentication/authorization providers, or other extensions that reference `javax.*` packages (for example `javax.ws.rs` or `javax.servlet`) must be updated to the corresponding `jakarta.*` packages and recompiled.
+- **Etcd metadata store backend removed ([PIP-462](https://github.com/apache/pulsar/blob/master/pip/pip-462.md)).** Deployments using Etcd as the metadata store must migrate to ZooKeeper or Oxia before upgrading.
+- **IO connectors moved to a separate repository ([PIP-465](https://github.com/apache/pulsar/blob/master/pip/pip-465.md)).** Connectors are no longer released from the core Pulsar repository; obtain them from the dedicated connectors project.
+- **Build system is now Gradle ([PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)).** If you build Pulsar from source, use `./gradlew` instead of `mvn`. Published artifacts are unchanged.
+- **`fastutil` dependency removed** ([#25413](https://github.com/apache/pulsar/pull/25413)).
+
 ### Approved PIPs
 
 - [PIP-460: Scalable Topics (Topics v5)](https://github.com/apache/pulsar/blob/master/pip/pip-460.md)
