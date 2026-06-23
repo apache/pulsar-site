@@ -11,19 +11,29 @@ import {styled} from "@mui/system";
 
 type SimpleReleaseData = {
   version: semver.SemVer,
+  displayVersion: string,
+  milestone: boolean,
   released: moment.Moment,
   releaseNoteLink: string,
 };
 
 type SupportedVersionData = {
   version: semver.SemVer,
+  milestone: boolean,
   released: moment.Moment,
-  activeSupport: moment.Moment,
-  securitySupport: moment.Moment,
+  activeSupport: moment.Moment | null,
+  securitySupport: moment.Moment | null,
   latest: semver.SemVer,
+  latestDisplay: string,
   latestReleased: moment.Moment,
   latestReleaseNoteLink: string,
 };
+
+// Milestone releases (e.g. 5.0.0-M1) are published ahead of an LTS release and
+// are not meant for production use, so they carry no active/security support window.
+function isMilestone(tagName: string): boolean {
+  return /-M\d+/i.test(tagName)
+}
 
 function resolveActiveSupport(version: semver.SemVer, released: moment.Moment): moment.Moment {
   const support = moment(released)
@@ -57,8 +67,10 @@ function isSameFeatureRelease(v1: semver.SemVer, v2: semver.SemVer): boolean {
   return v1.major == v2.major && v1.minor == v2.minor
 }
 
-function renderVersionCell(version: semver.SemVer): JSX.Element {
-  if (version.compareMain('3.0.0') < 0) {
+function renderVersionCell(version: semver.SemVer, milestone: boolean): JSX.Element {
+  if (milestone) {
+    return <TableCell>{version.major}.{version.minor} milestone</TableCell>
+  } else if (version.compareMain('3.0.0') < 0) {
     return <TableCell>{version.major}.{version.minor}</TableCell>
   } else if (version.minor != 0) {
     return <TableCell>{version.major}.{version.minor}</TableCell>
@@ -82,7 +94,10 @@ const Dot = styled('div')({
   borderRadius: '50%',
 });
 
-function renderSupportCell(support: moment.Moment): JSX.Element {
+function renderSupportCell(support: moment.Moment | null): JSX.Element {
+  if (!support) {
+    return <TableCell>-</TableCell>
+  }
   const now = moment()
   return <TableCell><>
     <Stack direction="row" spacing={2}>
@@ -101,15 +116,15 @@ function renderSupportCell(support: moment.Moment): JSX.Element {
 
 function renderLatestVersionCell(d: SupportedVersionData): JSX.Element {
   const now = moment()
-  if (d.activeSupport.isBefore(now) && d.securitySupport.isBefore(now)) {
+  if (!d.milestone && d.activeSupport.isBefore(now) && d.securitySupport.isBefore(now)) {
     // no longer supported
     return <TableCell>
-      <del>{d.latest.version}</del>
+      <del>{d.latestDisplay}</del>
     </TableCell>
   }
 
   return <TableCell><>
-    <Link href={useBaseUrl(d.latestReleaseNoteLink)}>{d.latest.version}</Link>
+    <Link href={useBaseUrl(d.latestReleaseNoteLink)}>{d.latestDisplay}</Link>
     <br/>
     ({d.latestReleased.format('DD MMM YYYY')})
   </>
@@ -123,6 +138,8 @@ type SupportedVersionsTableProps = {
 const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
   let releaseList: SimpleReleaseData[] = releases.map(r => ({
     version: semver.coerce(r.tagName),
+    displayVersion: r.tagName.replace(/^v/, ''),
+    milestone: isMilestone(r.tagName),
     released: moment(r.publishedAt),
     releaseNoteLink: r.releaseNotes,
   }))
@@ -136,16 +153,20 @@ const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
     if (last && isSameFeatureRelease(last.version, release.version)) {
       // early patch release - the support period is counted from the first patch release
       last.released = release.released
-      last.activeSupport = resolveActiveSupport(last.version, last.released)
-      last.securitySupport = resolveSecuritySupport(last.version, last.released)
+      if (!last.milestone) {
+        last.activeSupport = resolveActiveSupport(last.version, last.released)
+        last.securitySupport = resolveSecuritySupport(last.version, last.released)
+      }
       continue
     }
     supportedVersionList.push({
       version: version,
+      milestone: release.milestone,
       released: released,
-      activeSupport: resolveActiveSupport(version, released),
-      securitySupport: resolveSecuritySupport(version, released),
+      activeSupport: release.milestone ? null : resolveActiveSupport(version, released),
+      securitySupport: release.milestone ? null : resolveSecuritySupport(version, released),
       latest: version,
+      latestDisplay: release.milestone ? release.displayVersion : version.version,
       latestReleased: released,
       latestReleaseNoteLink: release.releaseNoteLink,
     })
@@ -153,8 +174,9 @@ const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
 
   if (props.isHideUnmaintained) {
     supportedVersionList = supportedVersionList.filter(v =>
-      v.activeSupport.isAfter(new Date()) ||
-      v.securitySupport.isAfter(new Date())
+      v.milestone ||
+      (v.activeSupport && v.activeSupport.isAfter(new Date())) ||
+      (v.securitySupport && v.securitySupport.isAfter(new Date()))
     );
   }
 
@@ -175,7 +197,7 @@ const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
         {
           supportedVersionList.map((r, i) => <>
             <TableRow key={i}>
-              {renderVersionCell(r.version)}
+              {renderVersionCell(r.version, r.milestone)}
               {renderReleasedCell(r.released)}
               {renderSupportCell(r.activeSupport)}
               {renderSupportCell(r.securitySupport)}
