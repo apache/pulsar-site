@@ -42,6 +42,14 @@ In cases where a PR cannot be applied without substantial backporting effort or 
 
 In some cases, a large number of merge conflicts signal that there's a dependent PR that is also needed in the maintenance branch which hasn't been cherry-picked. It is useful to review the dependency and consider cherry-picking it. Only non-breaking bug fixes or minor improvements (excluding PIP-related changes) can be cherry-picked without discussion on the dev mailing list. Backporting is necessary when a fix depends on newer PIP-related changes.
 
+#### Using an AI coding agent for cherry-picking
+
+An AI coding agent (such as Claude Code, Copilot, Cursor, Gemini, Codex, …) is a good tool for cherry-picking a commit from the master branch and resolving the merge conflicts. A simple prompt is enough, for example:
+
+> Cherry-pick commit `<sha>` from the master branch to this maintenance branch and resolve the conflicts. If there's a large difference, analyze whether dependent commits should be cherry-picked first — in that case, stop and list them so I can decide how to proceed. After a successful cherry-pick, run the unit tests for the changed and related code.
+
+As with any contribution, you remain responsible for the result: review the conflict resolution and verify the cherry-picked change before pushing it.
+
 #### Cherry-picking Changes Scheduled for the Release
 
 Before proceeding, ensure that you have [set up a Git mergetool](setup-git.md#mergetool). This tool is essential for resolving merge conflicts that may arise during the cherry-picking process.

@@ -1,12 +1,30 @@
 module.exports = [
   {
     "author": "lhotari",
+    "tagName": "v5.0.0-M1",
+    "publishedAt": "2026-06-23T14:11:26Z",
+    "vtag": "5.0.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-5.0.0-M1/",
+    "doc": "/docs/5.0.x",
+    "version": "v5.0.x"
+  },
+  {
+    "author": "lhotari",
+    "tagName": "v4.2.2",
+    "publishedAt": "2026-06-08T18:16:45Z",
+    "vtag": "4.2.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-4.2.2/",
+    "doc": "/docs/4.2.x",
+    "version": "v4.2.x"
+  },
+  {
+    "author": "lhotari",
     "tagName": "v4.2.1",
     "publishedAt": "2026-04-23T12:31:16+03:00",
     "vtag": "4.2.x",
     "releaseNotes": "/release-notes/versioned/pulsar-4.2.1/",
     "doc": "/docs/4.2.x",
-    "version": "v4.2.x"
+    "version": ""
   },
   {
     "author": "lhotari",
@@ -55,12 +73,21 @@ module.exports = [
   },
   {
     "author": "lhotari",
+    "tagName": "v4.0.11",
+    "publishedAt": "2026-06-08T18:16:01Z",
+    "vtag": "4.0.x",
+    "releaseNotes": "/release-notes/versioned/pulsar-4.0.11/",
+    "doc": "/docs/4.0.x",
+    "version": "v4.0.x"
+  },
+  {
+    "author": "lhotari",
     "tagName": "v4.0.10",
     "publishedAt": "2026-04-23T12:36:07+03:00",
     "vtag": "4.0.x",
     "releaseNotes": "/release-notes/versioned/pulsar-4.0.10/",
     "doc": "/docs/4.0.x",
-    "version": "v4.0.x"
+    "version": ""
   },
   {
     "author": "lhotari",

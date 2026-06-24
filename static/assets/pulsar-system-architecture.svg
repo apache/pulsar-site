@@ -1,0 +1,71 @@
+<svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Apache Pulsar cluster architecture</title>
+  <desc id="dsc">Producer and consumer apps connect to a Pulsar cluster of stateless brokers, which store data in BookKeeper bookies and coordinate through a metadata store; Oxia is the recommended metadata store, with a configuration store for instance-wide state.</desc>
+  <defs>
+    <linearGradient id="appGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c2cdf0"/><stop offset="1" stop-color="#8fa3e1"/>
+    </linearGradient>
+    <linearGradient id="brokerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dde9fa"/><stop offset="1" stop-color="#6f9fda"/>
+    </linearGradient>
+    <linearGradient id="bookieGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9cc0ea"/><stop offset="1" stop-color="#4f86d0"/>
+    </linearGradient>
+    <linearGradient id="oxiaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f7fd0"/><stop offset="1" stop-color="#235aa8"/>
+    </linearGradient>
+    <marker id="aO" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e8884a"/></marker>
+    <marker id="aOs" markerWidth="9" markerHeight="9" refX="0" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#e8884a"/></marker>
+    <marker id="aG" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6f7e95"/></marker>
+    <marker id="aGs" markerWidth="9" markerHeight="9" refX="0" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#6f7e95"/></marker>
+  </defs>
+
+  <!-- Cluster boundary -->
+  <rect x="150" y="32" width="342" height="316" rx="14" fill="#f4f8ff" stroke="#4a78c0" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="321" y="50" text-anchor="middle" font-family="sans-serif" font-size="13" font-style="italic" font-weight="700" fill="#2f5aa6">Pulsar Cluster</text>
+
+  <!-- Producer / Consumer apps -->
+  <rect x="18" y="150" width="104" height="58" rx="8" fill="url(#appGrad)" stroke="#6c7fc0"/>
+  <text x="70" y="184" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1d2c66">Producer App</text>
+  <rect x="518" y="150" width="104" height="58" rx="8" fill="url(#appGrad)" stroke="#6c7fc0"/>
+  <text x="570" y="184" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1d2c66">Consumer App</text>
+
+  <!-- Brokers (stacked) -->
+  <rect x="238" y="90" width="168" height="64" rx="8" fill="#5f8fcf"/>
+  <rect x="235" y="87" width="168" height="64" rx="8" fill="#6896d4"/>
+  <rect x="232" y="84" width="168" height="64" rx="8" fill="url(#brokerGrad)" stroke="#4f7fc4"/>
+  <text x="316" y="113" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#13284e">Brokers</text>
+  <text x="316" y="130" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#2c4a7a">stateless</text>
+
+  <!-- Bookies (stacked) -->
+  <rect x="202" y="236" width="112" height="60" rx="8" fill="#4178bf"/>
+  <rect x="199" y="233" width="112" height="60" rx="8" fill="#487fc6"/>
+  <rect x="196" y="230" width="112" height="60" rx="8" fill="url(#bookieGrad)" stroke="#3a6fb0"/>
+  <text x="252" y="256" text-anchor="middle" font-family="sans-serif" font-size="13.5" font-weight="700" fill="#ffffff">Bookies</text>
+  <text x="252" y="272" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#e7f1fc">BookKeeper</text>
+
+  <!-- Metadata store (Oxia) -->
+  <rect x="330" y="230" width="142" height="60" rx="8" fill="url(#oxiaGrad)" stroke="#1c4e96"/>
+  <text x="401" y="256" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#ffffff">Metadata store</text>
+  <text x="401" y="272" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#dcebff">Oxia (recommended)</text>
+
+  <!-- Configuration store -->
+  <rect x="206" y="306" width="230" height="30" rx="6" fill="#2f68b4" stroke="#1c4e96"/>
+  <text x="321" y="325" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#ffffff">Configuration store — Oxia</text>
+
+  <!-- Arrows: data (orange) -->
+  <path d="M122,176 C170,168 196,140 230,124" fill="none" stroke="#e8884a" stroke-width="2.4" marker-end="url(#aO)"/>
+  <path d="M402,124 C440,140 472,168 518,176" fill="none" stroke="#e8884a" stroke-width="2.4" marker-end="url(#aO)"/>
+  <path d="M300,150 L262,228" fill="none" stroke="#e8884a" stroke-width="2.4" marker-start="url(#aOs)" marker-end="url(#aO)"/>
+
+  <!-- Arrows: metadata / coordination (gray) -->
+  <path d="M352,150 L398,226" fill="none" stroke="#6f7e95" stroke-width="1.8" marker-start="url(#aGs)" marker-end="url(#aG)"/>
+  <path d="M310,262 L328,262" fill="none" stroke="#6f7e95" stroke-width="1.8" marker-start="url(#aGs)" marker-end="url(#aG)"/>
+  <path d="M401,290 L350,306" fill="none" stroke="#6f7e95" stroke-width="1.6"/>
+
+  <!-- Legend -->
+  <line x1="26" y1="250" x2="52" y2="250" stroke="#e8884a" stroke-width="2.4"/>
+  <text x="58" y="254" font-family="sans-serif" font-size="10.5" fill="#3a4a63">message data</text>
+  <line x1="26" y1="268" x2="52" y2="268" stroke="#6f7e95" stroke-width="1.8"/>
+  <text x="58" y="272" font-family="sans-serif" font-size="10.5" fill="#3a4a63">metadata / coordination</text>
+</svg>

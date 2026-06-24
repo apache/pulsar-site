@@ -1,3 +1,29 @@
 .container {
   padding-top: 60px;
 }
+
+.toolbar {
+  /* Stick just below the (sticky) site navbar so the toggle stays reachable
+     while scrolling the long REST API content. */
+  position: sticky;
+  top: var(--ifm-navbar-height, 6rem);
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  margin-bottom: 1rem;
+  background: var(--ifm-background-color);
+}
+
+/* The .button classes (matching the Full width button) center text; keep the
+   dropdown's option text left-aligned. */
+.apiSelect {
+  text-align: left;
+}
+
+/* Drop the Docusaurus container max-width so the Redoc view fills the page. */
+.fullWidth {
+  max-width: none !important;
+}

@@ -65,7 +65,7 @@ Clone and compile Pulsar from source code and run Pulsar in standalone mode with
 ```bash
 git clone https://github.com/apache/pulsar
 cd pulsar
-mvn -Pcore-modules,-main -T 1C install -DskipTests -Dspotbugs.skip=true
+./gradlew assemble
 OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005" ./bin/pulsar standalone -nss -nfw
 ```
 

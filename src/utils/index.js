@@ -49,8 +49,9 @@ export function setVersion(version) {
 
 export function getVersion() {
   try {
-    if (/version=[0-9.x]+/.test(location.href)) {
-      return location.href.match(/version=([0-9.x]+)/)[1];
+    // Also match pre-release versions such as 5.0.0-M1
+    if (/version=[0-9A-Za-z.\-x]+/.test(location.href)) {
+      return location.href.match(/version=([0-9A-Za-z.\-x]+)/)[1];
     }
   } catch (error) {
     console.error(error);

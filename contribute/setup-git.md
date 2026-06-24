@@ -73,7 +73,7 @@ git remote add forked https://github.com/your_github_id/pulsar
 Add separate working directories that share the local git repository
 
 ```shell
-for branch in branch-3.3 branch-3.2 branch-3.1 branch-3.0; do 
+for branch in branch-4.2 branch-4.0 branch-3.0; do 
    git worktree add ../pulsar-$branch $branch
 done
 ```
@@ -81,9 +81,8 @@ done
 After this you would have these directories in the same level as the original checked out `pulsar` directory:
 
 ```
-pulsar-branch-3.3
-pulsar-branch-3.2
-pulsar-branch-3.1
+pulsar-branch-4.2
+pulsar-branch-4.0
 pulsar-branch-3.0
 ```
 
@@ -93,6 +92,8 @@ There a limitation that each branch can only be checked out in one working direc
 
 For Apache Pulsar core developers, handling git merge conflict resolution is necessary.
 To efficiently resolve merge conflicts, setting up tools that assist in visualizing these conflicts and resolving them is essential.
+
+An AI coding agent is also a good tool for cherry-picking a commit and resolving the merge conflicts — see [Using an AI coding agent for cherry-picking](maintenance-process.md#using-an-ai-coding-agent-for-cherry-picking).
 
 For developers starting to use automated tools to resolve merge conflicts during cherry-picking, IntelliJ is a recommended option. It offers excellent tooling, but its integration with a command-line workflow is not seamless. It performs well when you initiate the cherry-picking process in IntelliJ and handle the merge conflict resolution within the same environment. However, resolving a merge conflict often involves multiple steps, including reverting and amending changes until a satisfactory resolution is achieved. In many cases, using a combination of tools may be more effective than relying solely on IntelliJ for all required operations.
 

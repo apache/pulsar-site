@@ -12,6 +12,7 @@ type PluginOptions = {
   baseDir: string;
   restApiBaseUrlMapping: Record<SwaggerApiType, string>;
   swaggerDir?: string;
+  openapiDir?: string;
 };
 
 // Add new return type for getSwaggerJson
@@ -50,20 +51,34 @@ function findLatestVersion(swaggerDir: string, majorMinor: string): string {
   }
 }
 
-function getSwaggerFileName(type: SwaggerApiType = 'default'): string {
+// Pulsar 5.0.0+/master publish OpenAPI 3 documents under static/openapi; earlier
+// releases keep their Swagger 2.0 documents under static/swagger. Mirrors
+// usesOpenApi3() in src/pages/RestApi/RestApi.tsx.
+function usesOpenApi3(majorMinor: string): boolean {
+  if (majorMinor === 'master') {
+    return true;
+  }
+  const major = parseInt(majorMinor.split('.')[0], 10);
+  return !isNaN(major) && major >= 5;
+}
+
+function getSwaggerFileName(type: SwaggerApiType = 'default', openApi3 = false): string {
+  // Pulsar 5.0.0+/master spec files are named openapi*.json; earlier releases
+  // use swagger*.json.
+  const prefix = openApi3 ? 'openapi' : 'swagger';
   const fileNames: Record<SwaggerApiType, string> = {
-    default: 'swagger.json',
-    functions: 'swaggerfunctions.json',
-    lookup: 'swaggerlookup.json',
-    packages: 'swaggerpackages.json',
-    sink: 'swaggersink.json',
-    source: 'swaggersource.json',
-    transactions: 'swaggertransactions.json'
+    default: `${prefix}.json`,
+    functions: `${prefix}functions.json`,
+    lookup: `${prefix}lookup.json`,
+    packages: `${prefix}packages.json`,
+    sink: `${prefix}sink.json`,
+    source: `${prefix}source.json`,
+    transactions: `${prefix}transactions.json`
   };
   return fileNames[type];
 }
 
-function createSwaggerCache(swaggerDir: string): {
+function createSwaggerCache(swaggerDir: string, openapiDir: string): {
   getSwaggerResult: (docPath: string, type?: SwaggerApiType) => SwaggerResult;
 } {
   const versionCache: {
@@ -77,17 +92,19 @@ function createSwaggerCache(swaggerDir: string): {
     getSwaggerResult: (docPath: string, type: SwaggerApiType = 'default') => {
       const versionMatch = docPath.match(/version-(\d+\.\d+\.x)/);
       const majorMinor = versionMatch ? versionMatch[1].replace('.x', '') : 'master';
+      const openApi3 = usesOpenApi3(majorMinor);
+      const baseDir = openApi3 ? openapiDir : swaggerDir;
       const cache = versionCache[majorMinor]?.jsonCache;
-      
+
       const cacheKey = `${type}`;
       if (cache?.has(cacheKey)) {
         return cache.get(cacheKey)!;
       }
 
       try {
-        const fileName = getSwaggerFileName(type);
-        const version = majorMinor === 'master' ? 'master' : versionCache[majorMinor]?.latestVersion || findLatestVersion(swaggerDir, majorMinor);
-        const filePath = path.join(swaggerDir, version, fileName);
+        const fileName = getSwaggerFileName(type, openApi3);
+        const version = majorMinor === 'master' ? 'master' : versionCache[majorMinor]?.latestVersion || findLatestVersion(baseDir, majorMinor);
+        const filePath = path.join(baseDir, version, fileName);
         const jsonContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         
         const result: SwaggerResult = {
@@ -159,9 +176,10 @@ async function processLinkNode(target: Target, context: Context) {
   const swaggerJson = swaggerResult.json;
 
   // Search through all paths in the swagger JSON
-  let matches: { path: string; method: string; tags: string[]; summary?: string }[] = [];
-  
-  const tagParam = queryParams.get('tag') || 
+  type OperationMatch = { path: string; method: string; operationId: string; tags: string[]; summary?: string };
+  let matches: OperationMatch[] = [];
+
+  const tagParam = queryParams.get('tag') ||
     (operationName.startsWith('PersistentTopics_') ? '^persistent' : undefined);
   const summaryParam = queryParams.get('summary');
 
@@ -182,7 +200,7 @@ async function processLinkNode(target: Target, context: Context) {
       const tagMatches = !tagRegex || (operation.tags &&operation.tags.some(t => tagRegex.test(t)) !== isTagNegated);
       const summaryMatches = !summaryRegex || (operation.summary && summaryRegex.test(operation.summary) !== isSummaryNegated);
       if (operation.operationId === operationName && tagMatches && summaryMatches) {
-        matches.push({ path, method, tags: operation.tags, summary: operation.summary });
+        matches.push({ path, method, operationId: operation.operationId, tags: operation.tags, summary: operation.summary });
       }
     }
   }
@@ -200,14 +218,28 @@ async function processLinkNode(target: Target, context: Context) {
     current.path.length > longest.path.length ? current : longest
   );
 
-  const foundPath = swaggerJson.basePath + longestMatch.path;
+  // Swagger 2.0 documents carry the API prefix in basePath. OpenAPI 3 documents
+  // (Pulsar 5.0.0+/master) published by this site fold the prefix into the path
+  // keys instead, and set servers[0].url to an absolute broker base URL
+  // (e.g. http://localhost:8080) that must NOT be prepended to the displayed
+  // path. Only a relative servers[0].url is treated as a path prefix.
+  const serverUrl = swaggerJson.servers?.[0]?.url ?? '';
+  const basePath = swaggerJson.basePath ?? (serverUrl.startsWith('/') ? serverUrl : '');
+  const foundPath = basePath + longestMatch.path;
   const foundMethod = longestMatch.method.toUpperCase();
 
   const restApiBaseUrl = context.restApiBaseUrlMapping[apiType];
 
   const swaggerVersion = swaggerResult.version;
 
-  node.url = `${restApiBaseUrl}?version=${swaggerVersion}&apiVersion=${apiVersion}#operation/${operationName}`;
+  // OpenAPI 3 documents (Pulsar 5.0.0+/master) are rendered with Redoc 2.x,
+  // whose deep links are `#tag/<slugified-tag>/operation/<operationId>`; the
+  // Redoc 1.x viewer used for the Swagger 2.0 documents only understands
+  // `#operation/<operationId>`.
+  const anchor = swaggerJson.openapi && longestMatch.tags?.length
+    ? `tag/${longestMatch.tags[0].replace(/\s+/g, '-')}/operation/${longestMatch.operationId}`
+    : `operation/${longestMatch.operationId}`;
+  node.url = `${restApiBaseUrl}?version=${swaggerVersion}&apiVersion=${apiVersion}#${anchor}`;
 
   node.children = [{
     type: "text",
@@ -217,7 +249,8 @@ async function processLinkNode(target: Target, context: Context) {
 
 export default function plugin(options: PluginOptions): Transformer {
   const swaggerDir = options.swaggerDir || path.join(options.baseDir, 'static/swagger');
-  const cache = createSwaggerCache(swaggerDir);
+  const openapiDir = options.openapiDir || path.join(options.baseDir, 'static/openapi');
+  const cache = createSwaggerCache(swaggerDir, openapiDir);
 
   return async (root, vfile) => {
     const {visit} = await import('unist-util-visit');

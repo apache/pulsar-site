@@ -20,12 +20,20 @@ from pathlib import Path
 
 from command import run
 from constant import site_path
+from execute import pulsar_build
 
 
 def execute(basedir: Path, version: str):
+    build = pulsar_build.detect(basedir)
+    pulsar_build.ensure_built(basedir, build)
+
     admin = basedir / 'bin' / 'pulsar-admin'
     reference = site_path() / 'static' / 'reference' / version / 'pulsar-admin'
 
+    # Every `pulsar-admin` subcommand, mirroring `pulsar-admin --help`. Keep this
+    # in sync when subcommands are added or removed; the only command
+    # intentionally omitted is `documents`, which is the doc-generation command
+    # itself.
     commands = [
         'broker-stats',
         'brokers',
@@ -33,10 +41,12 @@ def execute(basedir: Path, version: str):
         'clusters',
         'functions',
         'functions-worker',
+        'migration',
         'namespaces',
         'ns-isolation-policy',
         'sources',
         'sinks',
+        'scalable-topics',
         'topics',
         'topicPolicies',
         'proxy-stats',

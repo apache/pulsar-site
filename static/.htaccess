@@ -1,3 +1,5 @@
+# Before adding any CSP domains, please read https://infra.apache.org/tools/csp.html
+# Adding new domains requires explicit approval by VP Data Privacy.
 SetEnv CSP_PROJECT_DOMAINS "https://*.algolia.net/ https://*.algolianet.com/ https://*.algolia.io/ https://*.shields.io/"
 
 RewriteEngine On
@@ -19,7 +21,7 @@ RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.\d+/.*|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x/.*|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/client-libraries|"
-RewriteRule "^docs/(.*)$" "/docs/4.2.x/$1" [R=301,DPI,L]
+RewriteRule "^docs/(.*)$" "/docs/5.0.x/$1" [R=301,DPI,L]
 
 # Redirect legacy versioned client-libraries URLs to the unversioned location.
 # The version segment is captured and dropped; the client-libraries- slug prefix is also stripped.
@@ -45,6 +47,4 @@ RewriteRule "^coding-guide/?$" "/contribute/develop-coding-conventions" [R=301,D
 RewriteRule "^contributing/?$" "/contribute" [R=301,DPI,L]
 RewriteRule "^pulsar-manager-release-notes/?$" "/release-notes" [R=301,DPI,L]
 
-<IfModule mod_headers.c>
-    Header set Content-Security-Policy "script-src 'self' https://*.algolia.net https://*.algolianet.com https://*.algolia.io widget.kapa.ai www.google.com https://hcaptcha.com https://*.hcaptcha.com https://www.gstatic.com 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://*.algolia.net https://*.algolianet.com https://*.algolia.io proxy.kapa.ai kapa-widget-proxy-la7dkmplpq-uc.a.run.app metrics.kapa.ai https://hcaptcha.com https://*.hcaptcha.com www.google.com; frame-src 'self' www.google.com https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com;"
-</IfModule>
+# DO NOT ADD any "Header set Content-Security-Policy" here. Read https://infra.apache.org/tools/csp.html and the beginning of this file

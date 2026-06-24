@@ -28,7 +28,7 @@ If you use Maven, add the following information to the `pom.xml` file.
 
 ```xml
 <!-- in your <properties> block -->
-<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@ -->
+<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@ -->
 <pulsar.version>@pulsar:version:lts@</pulsar.version>
 
 <!-- in your <dependencies> block -->
@@ -44,7 +44,7 @@ If you use Maven, add the following information to the `pom.xml` file.
 If you use Gradle, add the following information to the `build.gradle` file.
 
 ```groovy
-// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@
+// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@
 def pulsarVersion = '@pulsar:version:lts@'
 
 dependencies {
@@ -69,7 +69,7 @@ If you use Maven, add the following information to the `pom.xml` file.
 
 ```xml
 <!-- in your <properties> block -->
-<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@ -->
+<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@ -->
 <pulsar.version>@pulsar:version:lts@</pulsar.version>
 
 <!-- in your <dependencyManagement>/<dependencies> block -->
@@ -99,7 +99,7 @@ Please notice that when using Spring Boot and the default Gradle  build with the
 :::
 
 ```groovy
-// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@
+// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@
 def pulsarVersion = '@pulsar:version:lts@'
 
 dependencies {
@@ -120,7 +120,7 @@ The Spring Boot [Dependency Version properties](https://docs.spring.io/spring-bo
 
 ```xml
 <!-- in your <properties> block -->
-<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@ -->
+<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@ -->
 <pulsar.version>@pulsar:version:lts@</pulsar.version>
 
 <!-- in your <dependencies> block -->
@@ -140,7 +140,7 @@ To use a specific Pulsar version for the Pulsar Java client in a Spring Boot app
 
 ```groovy
 // Alternatively, you can set the `pulsar.version` property in the `gradle.properties` file.
-// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@
+// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@
 ext['pulsar.version'] = '@pulsar:version:lts@'
 
 // The Pulsar Java client will be automatically added to dependencies as a transitive dependency of the spring-boot-starter-pulsar dependency

@@ -12,6 +12,32 @@ import ConnectorTable from "@site/src/components/ConnectorTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import OldReleaseTable from "@site/src/components/OldReleaseTable";
 import ClientReleasesTable from "@site/src/components/ClientReleasesTable";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+type VersionProps = { version?: string }
+
+// Milestone releases (e.g. 5.0.0-M1) are published ahead of an LTS release and
+// are not meant for production use.
+function isMilestoneVersion(version: string): boolean {
+    return /-M\d+/i.test(version)
+}
+
+// Connectors moved to a separate repository starting with Pulsar 5.0 (PIP-465),
+// so 5.x+ releases no longer ship connector NARs.
+function versionHasConnectors(version: string): boolean {
+    return Number(version.split('.')[0]) < 5
+}
+
+// The "major.minor" feature line of a version, e.g. "5.0.0-M1" -> "5.0".
+function featureLine(version: string): string {
+    const [major, minor] = version.split('.')
+    return `${major}.${minor}`
+}
+
+// The latest non-milestone (stable) release, falling back to the latest release.
+function latestStablePulsarVersion(): string {
+    return pulsarReleases.find((v) => !isMilestoneVersion(v)) ?? pulsarReleases[0]
+}
 
 export function CurrentPulsarVersion(): JSX.Element {
     return <>{pulsarReleases[0]}</>
@@ -25,8 +51,8 @@ export function CurrentPulsarAdaptersVersion(): JSX.Element {
     return <>{pulsarAdaptersReleases[0]}</>
 }
 
-export function CurrentPulsarDownloadTable(): JSX.Element {
-    const latestVersion = pulsarReleases[0]
+export function CurrentPulsarDownloadTable({ version }: VersionProps = {}): JSX.Element {
+    const latestVersion = version ?? pulsarReleases[0]
     const latestArchiveMirrorUrl = getLatestArchiveMirrorUrl(latestVersion, "bin")
     const latestSrcArchiveMirrorUrl = getLatestArchiveMirrorUrl(latestVersion, "src")
     const latestArchiveUrl = distUrl(latestVersion, "bin")
@@ -52,8 +78,8 @@ export function CurrentPulsarDownloadTable(): JSX.Element {
     </div>
 }
 
-export function CurrentPulsarOffloadersDownloadTable(): JSX.Element {
-    const latestVersion = pulsarReleases[0]
+export function CurrentPulsarOffloadersDownloadTable({ version }: VersionProps = {}): JSX.Element {
+    const latestVersion = version ?? pulsarReleases[0]
     const data = [
         {
             release: "Offloaders",
@@ -68,8 +94,8 @@ export function CurrentPulsarOffloadersDownloadTable(): JSX.Element {
     </div>
 }
 
-export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
-    const latestVersion = pulsarReleases[0]
+export function CurrentPulsarConnectorsDownloadTable({ version }: VersionProps = {}): JSX.Element {
+    const latestVersion = version ?? pulsarReleases[0]
     const data = connectors.map((connector) => ({
         connector: connector.link,
         connectorText: connector.longName,
@@ -89,8 +115,8 @@ export function CurrentPulsarConnectorsDownloadTable(): JSX.Element {
     </div>
 }
 
-export function CurrentPulsarShellDownloadTable(): JSX.Element {
-    const latestVersion = pulsarReleases[0]
+export function CurrentPulsarShellDownloadTable({ version }: VersionProps = {}): JSX.Element {
+    const latestVersion = version ?? pulsarReleases[0]
     const data = [
         {
             release: "Linux / MacOS",
@@ -110,6 +136,66 @@ export function CurrentPulsarShellDownloadTable(): JSX.Element {
     return <div className="tailwind">
         <ReleaseTable data={data}></ReleaseTable>
     </div>
+}
+
+function ArchiveNote({ label }: { label: string }): JSX.Element {
+    return <p>
+        You can download all previous versions of {label} at{' '}
+        <a href="https://archive.apache.org/dist/pulsar/">the archive page</a>.
+    </p>
+}
+
+// Renders the binary/source, shell, offloaders and (for pre-5.x releases) connectors
+// download tables for a single Pulsar version. The `primary` section owns the canonical
+// `#shell`/`#offloaders`/`#connectors` anchors that other pages link to; a secondary
+// (milestone) section uses prefixed ids so the heading anchors stay unique.
+function PulsarReleaseDownloads({ version, primary }: { version: string, primary: boolean }): JSX.Element {
+    const anchor = (name: string) => (primary ? name : `milestone-${name}`)
+    return <>
+        <ArchiveNote label="Pulsar" />
+        <CurrentPulsarDownloadTable version={version} />
+
+        <h3 id={anchor("shell")}>Shell</h3>
+        <ArchiveNote label="Pulsar shell" />
+        <CurrentPulsarShellDownloadTable version={version} />
+
+        <h3 id={anchor("offloaders")}>Offloaders</h3>
+        <ArchiveNote label="offloaders" />
+        <CurrentPulsarOffloadersDownloadTable version={version} />
+
+        {versionHasConnectors(version) && <>
+            <h3 id={anchor("connectors")}>Connectors</h3>
+            <ArchiveNote label="connectors" />
+            <CurrentPulsarConnectorsDownloadTable version={version} />
+        </>}
+    </>
+}
+
+export function CurrentPulsarDownloads(): JSX.Element {
+    const releasePolicyUrl = useBaseUrl('/contribute/release-policy')
+    const current = pulsarReleases[0]
+
+    if (!isMilestoneVersion(current)) {
+        return <>
+            <h2 id="current-version">Current version {current}</h2>
+            <PulsarReleaseDownloads version={current} primary={true} />
+        </>
+    }
+
+    const stable = latestStablePulsarVersion()
+    return <>
+        <h2 id="current-version">Pulsar {featureLine(current)} milestone release {current}</h2>
+        <p>
+            This is a milestone release published ahead of the {featureLine(current)} LTS release.
+            Milestone releases are intended for early testing and feedback and are{' '}
+            <strong>not meant for production use</strong>; see the{' '}
+            <a href={releasePolicyUrl}>release policy</a> for details.
+        </p>
+        <PulsarReleaseDownloads version={current} primary={false} />
+
+        <h2 id="current-stable-version">Current stable version {stable}</h2>
+        <PulsarReleaseDownloads version={stable} primary={true} />
+    </>
 }
 
 const legacyReleaseNoteVersions = [

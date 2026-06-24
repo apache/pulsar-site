@@ -52,14 +52,14 @@ The number of concurrent lookup requests that can be sent on each broker connect
 **Default**: `5000`
 
 ### connectionMaxIdleSeconds
-Release the connection if it is not used for more than [connectionMaxIdleSeconds] seconds. If  [connectionMaxIdleSeconds] < 0, disabled the feature that auto release the idle connections
+Release the connection if it is not used for more than [connectionMaxIdleSeconds] seconds. If [connectionMaxIdleSeconds] < 0, disables the feature that auto-releases the idle connections
 
 **Type**: `int`
 
 **Default**: `60`
 
 ### connectionTimeoutMs
-Duration of waiting for a connection to a broker to be established.If the duration passes without a response from a broker, the connection attempt is dropped.
+Duration of waiting for a connection to a broker to be established. If the duration passes without a response from a broker, the connection attempt is dropped.
 
 **Type**: `int`
 
@@ -129,7 +129,7 @@ Seconds of keeping alive interval for each client broker connection.
 **Default**: `30`
 
 ### listenerName
-Listener name for lookup. Clients can use listenerName to choose one of the listeners as the service URL to create a connection to the broker as long as the network is accessible."advertisedListeners" must enabled in broker side.
+Listener name for lookup. Clients can use listenerName to choose one of the listeners as the service URL to create a connection to the broker as long as the network is accessible. "advertisedListeners" must be enabled on the broker side.
 
 **Type**: `java.lang.String`
 
@@ -241,14 +241,14 @@ The implementation class of ServiceUrlProvider used to generate ServiceUrl.
 **Default**: `null`
 
 ### serviceUrlQuarantineInitDurationMs
-The initial duration (in milliseconds) to quarantine endpoints that fail to connect.A value of 0 means don't quarantine any endpoints even if they fail.
+The initial duration (in milliseconds) to quarantine endpoints that fail to connect. A value of 0 means don't quarantine any endpoints even if they fail.
 
 **Type**: `long`
 
 **Default**: `60000`
 
 ### serviceUrlQuarantineMaxDurationMs
-The max duration (in milliseconds) to quarantine endpoints that fail to connect.A value of 0 means don't quarantine any endpoints even if they fail.
+The max duration (in milliseconds) to quarantine endpoints that fail to connect. A value of 0 means don't quarantine any endpoints even if they fail.
 
 **Type**: `long`
 
@@ -268,6 +268,13 @@ Password of SOCKS5 proxy.
 
 **Default**: `null`
 
+### socks5ProxyScope
+Selector that controls which connections go through the SOCKS5 proxy. BINARY_ONLY (default for PulsarClient) only routes Pulsar binary protocol connections; HTTP_ONLY only routes HTTP/HTTPS traffic (HTTP lookups, failover HTTP clients, admin REST); BOTH routes both. This preserves backward compatibility with the pre-existing behavior where the SOCKS5 proxy on PulsarClient only applied to the binary protocol.
+
+**Type**: `org.apache.pulsar.client.api.Socks5ProxyScope`
+
+**Default**: `BINARY_ONLY`
+
 ### socks5ProxyUsername
 User name of SOCKS5 proxy.
 
@@ -276,7 +283,7 @@ User name of SOCKS5 proxy.
 **Default**: `null`
 
 ### sslFactoryPlugin
-SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultPulsarSslFactory.
+SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default class used is DefaultPulsarSslFactory.
 
 **Type**: `java.lang.String`
 

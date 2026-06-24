@@ -12,13 +12,17 @@ When you create a pull request from your fork, GitHub Actions provides a separat
 3. You can iterate and fix issues faster in your own environment
 
 The workflow is simple:
-1. Test your changes thoroughly in your fork using Personal CI
-2. Once tests pass consistently, notify maintainers for final PR review
+1. Keep your local `master` up-to-date with `apache/pulsar` and rebase your feature branch on it.
+2. Push the feature branch to your fork to trigger CI runs there. CI runs against the PR opened in your own fork (it is normal to have a PR open in the fork *and* a PR for the same branch open in `apache/pulsar` at the same time).
+3. Monitor CI status on the fork and fix failures.
+4. Open the PR to `apache/pulsar` only after the fork's CI is green.
+
+Once the PR to `apache/pulsar` has been opened, stop rebasing as part of this loop: bring in upstream changes by merging `apache/pulsar` `master` into the PR branch instead. Rebasing a PR branch once the PR is open rewrites history and disrupts reviewers. See [`CONTRIBUTING.md` → Pull requests](https://github.com/apache/pulsar/blob/master/CONTRIBUTING.md#pull-requests).
 
 Some important notes about testing:
 - Pulsar has known [flaky tests](https://github.com/apache/pulsar/issues?q=is%3Aissue%20state%3Aopen%20flaky-test) that may require multiple CI runs
-- Use the "Rerun failed jobs" button in GitHub Actions to retry failed workflows
-- For test failures related to your changes, debug locally by running specific tests in your IDE
+- In your own fork, use the "Rerun failed jobs" button in GitHub Actions to retry failed workflows. On a PR in `apache/pulsar`, comment `/pulsarbot rerun` to re-run the failed jobs once the workflow run has completed — don't push empty "trigger CI" commits.
+- For test failures related to your changes, debug locally by running specific tests in your IDE or with a scoped `./gradlew :<module>:test --tests "..."` run (see [Setup and building](setup-building.md))
 
 Critical requirement: Always create pull requests from a unique feature branch, not from your fork's `master` branch. The Personal CI process only works with feature branches.
 For example:

@@ -44,7 +44,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          # Fetch the whole PR commit range (plus the merge commit) so that
+          # BUILD_ALL_VERSION / BUILD_VERSIONS directives in any PR commit are
+          # honored. Change detection diffs HEAD^1..HEAD (the merge ref's base
+          # parent), which only needs depth 2, but the directive scan walks the
+          # full range.
+          fetch-depth: ${{ github.event.pull_request.commits + 2 }}
       - uses: actions/checkout@v6
         with:
           ref: 'asf-site-next'

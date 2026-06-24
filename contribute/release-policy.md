@@ -23,15 +23,13 @@ Concretely, existing releases can expect patches for bugs and security vulnerabi
 
 For example,
 
-* 2.10.0 is a feature release;
-* 2.10.1 is a patch release;
-* 2.11.0 is a feature release;
-* 3.0.0 is the first LTS release;
-* 3.0.1 is a patch release of the LTS release;
-* 3.1.0 is a feature release;
-* 3.2.0 is a feature release;
-* 3.2.1 is a patch release;
-* 4.0.0 is an LTS release.
+* 4.0.0 is an LTS release;
+* 4.0.1 is a patch release of the LTS release;
+* 4.1.0 is a feature release;
+* 4.2.0 is a feature release;
+* 4.2.1 is a patch release;
+* 5.0.0-M1 and 5.0.0-M2 are milestone releases made before the next LTS release;
+* 5.0.0 is the next LTS release.
 
 ## Compatibility between releases
 
@@ -71,20 +69,20 @@ As part of the release discussion thread, a timeline is decided upon for the rel
 
 For feature releases and LTS releases, the last three weeks of the release cycle will be marked as a releasing period to finish the pending changes and decide on what features (PIP implementations) go into the release version.
 
-As part of this period for an LTS or feature release, there could be multiple preview releases and multiple release candidates. A preview release is one that is not intended to be released. The purpose of the preview release is to allow users to start testing the new release functionality by making the release binaries available. The preview release will contain a suffix `-pre.1`, `-pre.2`. Preview releases don't apply to patch releases.
+Before an LTS release, there could be multiple milestone releases, and as part of the releasing period, multiple release candidates. Milestone releases are official ASF releases with a `-M1`, `-M2`, … suffix (for example `5.0.0-M1`), and they go through the normal [release process](release-process.md) including release candidates and voting. Each milestone release is made from its own temporary release branch (for example `branch-5.0-M1`) cut from the master branch; since milestone releases aren't maintained, the branch is dropped after the next milestone release or the final LTS release has been published. The purpose of a milestone release is to allow users to start testing the new release functionality early and provide feedback. Milestone releases are not meant for production use cases, since breaking changes can be introduced between the milestone releases and the final LTS release. Milestone releases don't apply to patch releases.
 
-Here's an example of the 4.0.0 LTS release timeline:
+Here's an example of a 5.0.0 LTS release timeline:
 
-* 2024-09-26 - Target publishing date for 4.0 preview 1 (4.0.0-pre.1)
-* 2024-10-03 - Target publishing date for 4.0 preview 2 (4.0.0-pre.2)
-* 2024-10-07 - Code freeze for 4.0 by branching branch-4.0 from the master branch
-* 2024-10-10 - Target publishing date for 4.0 release candidate 1
-* 2024-10-15 - Reserved for 4.0 release candidate 2 if needed
-* 2024-10-17 - Announcement date for 4.0.0
+* Target publishing date for the 5.0.0-M1 milestone release
+* Target publishing date for the 5.0.0-M2 milestone release
+* Code freeze for 5.0 by branching branch-5.0 from the master branch
+* Target publishing date for 5.0 release candidate 1
+* Reserved for 5.0 release candidate 2 if needed
+* Announcement date for 5.0.0
 
 The LTS or feature release timeline will also note the target date for branching the release branch off the master branch. After that point in time, the release manager will coordinate the changes that will be included in the release branch. The intention is to minimize the risk of delaying the release and only include bug fixes involving a regression of behavior compared to a previous release or critical improvements to the new features (PIP implementations) that are part of the release.
 
-For patch releases, the process is similar, but there is no branching off the master branch since the release branch already exists. The patch release doesn't contain preview releases.
+For patch releases, the process is similar, but there is no branching off the master branch since the release branch already exists. The patch release doesn't contain milestone releases.
 
 The preparation of releases is handled according to the [release process](release-process.md). The release manager is responsible for updating the process documentation when there's a need to adapt the process. There's also a guide for [release validation](validate-release-candidate.md) which is used by Pulsar contributors before voting on releases. Before releases are announced, the release will be voted upon on the [Pulsar dev mailing list](https://lists.apache.org/list.html?dev@pulsar.apache.org). The [ASF voting process](https://www.apache.org/foundation/voting.html) applies. A release candidate will become an official release after it passes the release vote and has been announced. This is why the release version in the binaries of a release candidate doesn't include a `-rc` suffix.
 
