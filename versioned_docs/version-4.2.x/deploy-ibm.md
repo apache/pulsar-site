@@ -168,7 +168,7 @@ Make sure all the pods of Pulsar are running. Get the service URL and broker URL
 1. Add Pulsar chart repo
 
 ```bash
-$ helm repo add apache https://pulsar.apache.org/charts
+$ helm repo add apachepulsar https://pulsar.apache.org/charts
 $ helm repo update
 $ helm repo list
 ```
@@ -201,7 +201,7 @@ Output
 4. Use the Pulsar Helm chart to install a Pulsar cluster to Kubernetes.
 
 ```bash
-helm install --values examples/values-minikube.yaml --set initialize=true asia apache/pulsar
+helm install --values examples/values-minikube.yaml --set initialize=true asia apachepulsar/pulsar
 ```
 
 :::note
