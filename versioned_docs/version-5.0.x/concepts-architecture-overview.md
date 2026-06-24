@@ -11,7 +11,7 @@ A Pulsar cluster consists of the following components:
 
 * One or more [brokers](#brokers) handles and [load balances](administration-load-balance.md) incoming messages from [producers](concepts-clients.md#producer), dispatches messages to [consumers](concepts-clients.md#consumer), communicates with the Pulsar [metadata store](#metadata-store) to handle various coordination tasks, stores messages in [BookKeeper](#apache-bookkeeper) instances (aka bookies), and coordinates cluster operations through the metadata store.
 * A BookKeeper cluster consisting of one or more bookies handles [persistent storage](#persistent-storage) of messages.
-* A metadata store cluster (Oxia, ZooKeeper, etcd, or other supported backend) handles coordination tasks and cluster-specific metadata storage.
+* A metadata store cluster (Oxia, ZooKeeper, or other supported backend) handles coordination tasks and cluster-specific metadata storage.
 
 The diagram below illustrates a Pulsar cluster:
 
@@ -52,7 +52,6 @@ The Pulsar metadata store maintains all the metadata of a Pulsar cluster, such a
 
 - **[Oxia](https://github.com/oxia-db/oxia/)** - Recommended for new clusters. A robust, scalable metadata store and coordination system designed for large-scale distributed systems, with built-in support for stream index storage to optimize real-time data management.
 - **[Apache ZooKeeper](https://zookeeper.apache.org/)** - Production-ready metadata store with strong consistency guarantees; ships with the Pulsar binary package.
-- **[etcd](https://etcd.io/)** - Cloud-native distributed key-value store, ideal for Kubernetes environments and cloud deployments.
 - **[RocksDB](http://rocksdb.org/)** - Embedded key-value store for standalone Pulsar deployments, eliminating the need for external coordination services.
 
 ### Configuration
@@ -65,9 +64,6 @@ metadataStoreUrl=oxia://oxia-server:6648/broker
 
 # ZooKeeper
 metadataStoreUrl=zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
-
-# etcd
-metadataStoreUrl=etcd:my-etcd-1:2379,my-etcd-2:2379,my-etcd-3:2379
 
 # RocksDB (standalone)
 metadataStoreUrl=rocksdb:///path/to/data
@@ -165,11 +161,6 @@ bin/pulsar proxy \
 bin/pulsar proxy \
     --metadata-store zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181 \
     --configuration-metadata-store zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
-
-# Using etcd
-bin/pulsar proxy \
-    --metadata-store etcd:my-etcd-1:2379,my-etcd-2:2379 \
-    --configuration-metadata-store etcd:my-etcd-1:2379,my-etcd-2:2379
 ```
 
 > #### Pulsar proxy docs
