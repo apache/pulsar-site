@@ -20,7 +20,6 @@ If you are using a standalone Pulsar or a single Pulsar cluster, you only need t
 Pulsar supports the following metadata store services:
 * [Oxia](https://github.com/oxia-db/oxia) (recommended)
 * [Apache ZooKeeper](https://zookeeper.apache.org/)
-* [Etcd](https://etcd.io/)
 * [RocksDB](http://rocksdb.org/)
 * Local memory
 
@@ -64,31 +63,6 @@ To use ZooKeeper as the metadata store, add the following parameters to the `con
 metadataStoreUrl=zk:my-zk-1:2181,my-zk-2:2181,my-zk-3:2181
 configurationMetadataStoreUrl=zk:my-global-zk-1:2181,my-global-zk-2:2181,my-global-zk-3:2181
 ```
-
-## Use etcd as metadata store
-
-To use etcd as the metadata store, add the following parameters to the `conf/broker.conf` or `conf/standalone.conf` file.
-
-```conf
-metadataStoreUrl=etcd:http://my-etcd-1:2379,http://my-etcd-2:2379,http://my-etcd-3:2379
-configurationMetadataStoreUrl=etcd:my-global-etcd-1:2379,my-global-etcd-2:2379,my-global-etcd-3:2379
-# metadataStoreConfigPath=/path/to/file
-```
-
-:::tip
-
-The `metadataStoreConfigPath` parameter is required when you want to use the following advanced configurations.
-
-```
-useTls=false
-tlsProvider=JDK
-tlsTrustCertsFilePath=
-tlsKeyFilePath=
-tlsCertificateFilePath=
-authority=
-```
-
-:::
 
 ## Use RocksDB as metadata store
 
