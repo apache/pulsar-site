@@ -22,12 +22,7 @@ In addition to the prerequisites in the [release process](release-process.md), m
 
 Please refer to ["Setting up JDKs using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
 
-In addition to the [environment variables set in the release process](release-process.md#env-vars), for 3.x releases use Java 17:
-
-```shell
-# for 3.x releases, use Java 17 instead of Java 21
-export SDKMAN_JAVA_VERSION=17
-```
+Follow the [environment variables set in the release process](release-process.md#env-vars) for required environment variables and initial steps that are shared for &lt;5.x and &ge;5.x releases.
 
 ## Specify MAVEN_OPTS
 
@@ -83,7 +78,9 @@ src/check-binary-license.sh distribution/shell/target/apache-pulsar-*-bin.tar.gz
 
 In some older branches, the script is called `src/check-binary-license` instead of `src/check-binary-license.sh`.
 
-## Run Apache RAT for the src package
+## Sign, stage, validate and upload files
+
+First [sign and stage the artifacts](release-process.md#sign-and-stage-the-artifacts-to-local-svn-directory).
 
 When [validating the release files](release-process.md#validate-the-release-files), run Apache RAT with Maven to verify the license headers in the src package:
 
@@ -93,6 +90,8 @@ tar -xvzf ~/pulsar-svn-release-${VERSION_RC}/pulsar-$VERSION_RC/apache-pulsar-*-
 cd apache-pulsar-$VERSION_WITHOUT_RC-src
 command mvn apache-rat:check
 ```
+
+After validation, [upload the files to svn server](release-process.md#commit-and-upload-the-staged-files-in-the-local-svn-directory-to-asf-svn-server).
 
 ## Stage Maven modules
 

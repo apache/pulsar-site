@@ -61,6 +61,8 @@ To verify the release branch is not broken, you should trigger a Pulsar CI build
 
 ## Set environment variables to be used across the commands {#env-vars}
 
+*For &ge;5.x releases*
+
 ```shell
 export VERSION_RC=5.0.0-M1-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
@@ -82,6 +84,22 @@ export ORG_GRADLE_PROJECT_pulsarBuildInfoFile=$HOME/pulsar-build-info-$VERSION_R
 Release builds must include the real git commit / build metadata in the binaries, which is enabled with the `pulsarIncludeBuildInfo=true` project property (the default is `false` so that local development and CI builds don't regenerate the metadata on every change). Gradle picks up project properties from environment variables with the `ORG_GRADLE_PROJECT_` prefix, so the exports above set the properties for every Gradle invocation in the shell session.
 
 The properties must be set consistently for every Gradle invocation of the release process — if the metadata changes between invocations, it invalidates the build outputs and the binaries get recompiled and change. The `pulsarBuildInfoFile` snapshot file guarantees this: if the file doesn't exist, the build captures the metadata and writes it to the file; if it exists, the build uses the metadata from the file. Keep the file outside the release working directory (the `$HOME` location above) so that it doesn't make the git working tree dirty or end up in the source tarball. If you restart the release candidate with new commits, delete the snapshot file so that the new commit id gets captured.
+
+*For &lt;5.x releases*
+
+```shell
+export VERSION_RC=4.2.3-candidate-1
+export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
+export NEXT_VERSION_WITHOUT_RC=4.2.4
+export VERSION_BRANCH=branch-4.2
+export UPSTREAM_REMOTE=origin
+export SDKMAN_JAVA_VERSION=21
+```
+
+```shell
+# for 3.x releases, use Java 17 instead of Java 21
+export SDKMAN_JAVA_VERSION=17
+```
 
 Set your ASF user id
 
@@ -212,10 +230,9 @@ git push $UPSTREAM_REMOTE :v$VERSION_RC
 [ -f "$ORG_GRADLE_PROJECT_pulsarBuildInfoFile" ] && rm "$ORG_GRADLE_PROJECT_pulsarBuildInfoFile" || true
 ```
 
-
-
-
 ## Build the release artifacts and run checks
+
+These instructions are for &ge;5.0 releases. For &lt;5.0 releases with, follow [Maven build steps for releases](release-process-maven.md).
 
 With the Gradle build, building the binary distributions, checking that the `LICENSE` and `NOTICE` files cover all bundled jars, and running the Apache RAT license header check can be performed in one shot:
 
@@ -505,17 +522,52 @@ Set these additional shell variable after looking up the URLs
 PULSAR_IMAGE_URL="<looked up in previous step>"
 ```
 
-Set also these
-
 ```shell
 PULSAR_IMAGE_NAME="$DOCKER_USER/pulsar:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
 ```
+
+```shell
+DOCKER_IMAGES_TEXT="docker pull $PULSAR_IMAGE_NAME
+$PULSAR_IMAGE_URL"
+```
+
+For Pulsar &lt;5.0
+
+```shell
+echo "Go to https://hub.docker.com/r/$DOCKER_USER/pulsar-all/tags to find the layer URL for the pulsar-all image"
+```
+
+```shell
+PULSAR_ALL_IMAGE_URL="<looked up in previous step>"
+```
+
+```shell
+PULSAR_ALL_IMAGE_NAME="$DOCKER_USER/pulsar-all:$VERSION_WITHOUT_RC-$(git rev-parse --short=7 v$VERSION_RC^{commit})"
+```
+
+```shell
+DOCKER_IMAGES_TEXT="docker pull $PULSAR_IMAGE_NAME
+$PULSAR_IMAGE_URL
+docker pull $PULSAR_ALL_IMAGE_NAME
+$PULSAR_ALL_IMAGE_URL"
+```
+
+For both:
 
 ```shell
 # check that Pulsar standalone starts (use CTRL-C to terminate) for both architectures
 docker run --platform linux/arm64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
 docker run --platform linux/amd64 --rm $PULSAR_IMAGE_NAME /pulsar/bin/pulsar standalone
 ```
+
+For Pulsar &lt;5.0
+
+```shell
+# check that Pulsar standalone starts (use CTRL-C to terminate) for both architectures
+docker run --platform linux/arm64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+docker run --platform linux/amd64 --rm $PULSAR_ALL_IMAGE_NAME /pulsar/bin/pulsar standalone
+```
+
 
 Now you can render the template to the clipboard
 
@@ -558,8 +610,7 @@ Pulsar's KEYS file containing PGP keys you use to sign the release:
 https://downloads.apache.org/pulsar/KEYS
 
 Docker images:
-docker pull $PULSAR_IMAGE_NAME
-$PULSAR_IMAGE_URL
+$DOCKER_IMAGES_TEXT
 
 Please download the source package, and follow the README to build
 and run the Pulsar standalone service.
