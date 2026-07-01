@@ -2424,6 +2424,17 @@ Grace period (seconds) the controller leader waits for a disconnected scalable-t
 
 **Category**: Policies
 
+### scalableTopicEntryBucketBudget
+Total entry-bucket budget per scalable topic. Entry-buckets are the unit of key-shared consumption parallelism within a segment, so this budget is how many consumers can share a single segment's keys. It is distributed across the topic's segments (each gets floor(budget / segmentCount), at least 1): a single-segment topic starts with the whole budget, and as the topic splits into more segments each segment settles toward 1 bucket (full batching).
+
+**Type**: `int`
+
+**Default**: `4`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicLoadReportIntervalSeconds
 Interval (seconds) at which the segment-owning broker samples its segment topics to report load for auto split/merge. Read at broker start; not dynamic.
 
