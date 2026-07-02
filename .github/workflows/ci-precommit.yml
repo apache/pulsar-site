@@ -42,6 +42,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 600
     steps:
+      - name: Compute PR fetch depth
+        id: pr-fetch-depth
+        env:
+          PR_COMMITS: ${{ github.event.pull_request.commits }}
+        run: echo "depth=$((PR_COMMITS + 2))" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v6
         with:
           # Fetch the whole PR commit range (plus the merge commit) so that
@@ -49,7 +54,7 @@ jobs:
           # honored. Change detection diffs HEAD^1..HEAD (the merge ref's base
           # parent), which only needs depth 2, but the directive scan walks the
           # full range.
-          fetch-depth: ${{ github.event.pull_request.commits + 2 }}
+          fetch-depth: ${{ steps.pr-fetch-depth.outputs.depth }}
       - uses: actions/checkout@v6
         with:
           ref: 'asf-site-next'
