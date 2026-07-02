@@ -22,7 +22,7 @@ Currently, Pulsar is available for 64-bit **macOS** and **Linux**. See [Run Puls
 Also, you need the proper 64-bit JRE/JDK version installed:
 
 - **Java 21** is required for Pulsar 4.0+ and master branch
-- **Java 17** is required for Pulsar 2.11+ and master branch
+- **Java 17** is required for Pulsar 2.11+
 - **Java 11** is required for Pulsar 2.8/2.9/2.10 
 - **Java 8** is required for Pulsar 2.7 and earlier
 
