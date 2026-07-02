@@ -1,4 +1,5 @@
 module.exports = [
+{tagName: "v3.13.0",vtag:"3.13.x",releaseNotes:"/release-notes/versioned/client-python-3.13.0/",doc:"/docs/client-libraries-python",version:"v3.13.x"},
 {tagName: "v3.12.0",vtag:"3.12.x",releaseNotes:"/release-notes/versioned/client-python-3.12.0/",doc:"/docs/client-libraries-python",version:"v3.12.x"},
 {tagName: "v3.11.0",vtag:"3.11.x",releaseNotes:"/release-notes/versioned/client-python-3.11.0/",doc:"/docs/client-libraries-python",version:"v3.11.x"},
 {tagName: "v3.10.0",vtag:"3.10.x",releaseNotes:"/release-notes/versioned/client-python-3.10.0/",doc:"/docs/client-libraries-python",version:"v3.10.x"},
