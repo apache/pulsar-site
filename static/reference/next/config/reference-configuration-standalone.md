@@ -3990,7 +3990,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `2000`
 
 **Dynamic**: `true`
 
@@ -4634,6 +4634,17 @@ The class name of the topic policies service. There are 2 built-in implementatio
 **Type**: `java.lang.String`
 
 **Default**: `org.apache.pulsar.broker.service.SystemTopicBasedTopicPoliciesService`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### topicPolicyListenerReplayEnabled
+When enabled, all registered topic-policy listeners in a namespace are re-notified with the current topic policies after the namespace's topic-policy cache finishes its initial load. Topics load and apply their own policies when they are loaded, so this broadcast is normally redundant; it is only needed for custom plugins that register TopicPolicyListeners and depend on it for backwards compatibility. Disabled by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -5633,7 +5644,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `800`
 
 **Dynamic**: `true`
 
