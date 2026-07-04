@@ -5362,19 +5362,6 @@ The threshold to triggering automatic offload to long term storage
 
 **Category**: Storage (Ledger Offloading)
 
-### managedLedgerUnackedRangesOpenCacheSetEnabled
-When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
-
-RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-**Dynamic**: `false`
-
-**Category**: Storage (Ledger Offloading)
-
 ### narExtractionDirectory
 The directory where nar Extraction of offloaders happens
 
@@ -6098,8 +6085,6 @@ Default is ``.
 
 ### managedLedgerPersistIndividualAckAsLongArray
 When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
-
-NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
 
 **Type**: `boolean`
 
