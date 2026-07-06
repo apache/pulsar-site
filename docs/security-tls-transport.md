@@ -50,13 +50,13 @@ You can use either one of the following certificate formats to configure TLS enc
 
 ### Hostname verification
 
-Hostname verification is a TLS security feature whereby a client can refuse to connect to a server if the Subject Alternative Name (SAN) does not match the hostname that the hostname is connecting to.
+Hostname verification is a TLS security feature whereby a client refuses to connect to a server if the server certificate's Subject Alternative Name (SAN) does not match the hostname the client is connecting to. It defends against man-in-the-middle attacks even when the attacker holds a certificate signed by the trusted CA.
 
-By default, Pulsar clients disable hostname verification, as it requires that each broker has a DNS record and a unique cert.
+Since Pulsar 5.0, hostname verification is **enabled by default** — for the Pulsar client, and for the broker/proxy/geo-replication connections that act as clients to other brokers. This requires every server certificate to carry a SAN that matches the hostname clients use to reach it (each broker/proxy therefore needs a DNS record and a certificate with the matching SAN; a wildcard SAN such as `*.broker.example.com` can cover a group of hosts).
 
-One scenario where you may want to enable hostname verification is where you have multiple proxy nodes behind a VIP, and the VIP has a DNS record, for example, `pulsar.mycompany.com`. In this case, you can generate a TLS cert with `pulsar.mycompany.com` as the SAN, and then enable hostname verification on the client.
+Only the SAN is used for hostname matching. Matching against the certificate's Common Name (CN) is deprecated by [RFC 6125](https://datatracker.ietf.org/doc/html/rfc6125) and has been **removed in Pulsar 5.0** — a certificate that carries the hostname only in its CN (and no matching SAN) is rejected. Regenerate such certificates with a proper SAN (see [Create a server certificate](#create-a-server-certificate)). The CN of a *client* certificate is still used as the client's role token for [mTLS authentication](security-tls-authentication.md); this change affects only server-hostname matching.
 
-To enable hostname verification in Pulsar, ensure that SAN exactly matches the fully qualified domain name (FQDN) of the server. The client compares the SAN with the DNS domain name to ensure that it is connecting to the desired server. See [Configure clients](#configure-clients) for more details.
+To make hostname verification succeed, ensure the SAN exactly matches the fully qualified domain name (FQDN) the client connects to. You can turn it off (not recommended in production) by setting `enableTlsHostnameVerification` to `false`. See [Configure clients](#configure-clients) for more details.
 
 Moreover, as the administrator has full control of the CA, a bad actor is unlikely to be able to pull off a man-in-the-middle attack. `allowInsecureConnection` allows the client to connect to servers whose cert has not been signed by an approved CA. The client disables `allowInsecureConnection` by default, and you should always disable `allowInsecureConnection` in production environments. As long as you disable `allowInsecureConnection`, a man-in-the-middle attack requires that the attacker has access to the CA.
 
@@ -361,7 +361,7 @@ PulsarClient client = PulsarClient.builder()
     .tlsKeyFilePath("/path/to/client.key-pk8.pem")
     .tlsCertificateFilePath("/path/to/client.cert.pem")
     .tlsTrustCertsFilePath("/path/to/ca.cert.pem")
-    .enableTlsHostnameVerification(false) // false by default, in any case
+    .enableTlsHostnameVerification(true) // enabled by default since 5.0
     .allowTlsInsecureConnection(false) // false by default, in any case
     .build();
 ```
@@ -373,7 +373,7 @@ PulsarClient client = PulsarClient.builder()
 from pulsar import Client
 
 client = Client("pulsar+ssl://broker.example.com:6651/",
-                tls_hostname_verification=False,
+                tls_hostname_verification=True,  # enabled by default since 5.0
                 tls_trust_certs_file_path="/path/to/ca.cert.pem",
                 tls_allow_insecure_connection=False) // defaults to false from v2.2.0 onwards
 ```
@@ -389,7 +389,7 @@ config.setUseTls(true);  // shouldn't be needed soon
 config.setTlsTrustCertsFilePath(caPath);
 config.setTlsAllowInsecureConnection(false);
 config.setAuth(pulsar::AuthTls::create(clientPublicKeyPath, clientPrivateKeyPath));
-config.setValidateHostName(false);
+config.setValidateHostName(true); // enabled by default since 5.0
 ```
 
 </TabItem>
@@ -403,7 +403,7 @@ const Pulsar = require('pulsar-client');
     serviceUrl: 'pulsar+ssl://broker.example.com:6651/',
     tlsTrustCertsFilePath: '/path/to/ca.cert.pem',
     useTls: true,
-    tlsValidateHostname: false,
+    tlsValidateHostname: true, // enabled by default since 5.0
     tlsAllowInsecureConnection: false,
   });
 })();
@@ -632,7 +632,7 @@ The following is an example.
         .tlsKeyStoreType("JKS")
         .tlsKeyStorePath("/var/private/tls/client.keystore.jks")
         .tlsKeyStorePassword("clientpw")
-        .enableTlsHostnameVerification(false) // false by default, in any case
+        .enableTlsHostnameVerification(true) // enabled by default since 5.0
         .allowTlsInsecureConnection(false) // false by default, in any case
         .build();
 ```
@@ -654,7 +654,7 @@ If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
         .tlsKeyStoreType("JKS")
         .tlsKeyStorePath("/var/private/tls/client.keystore.jks")
         .tlsKeyStorePassword("clientpw")
-        .enableTlsHostnameVerification(false) // false by default, in any case
+        .enableTlsHostnameVerification(true) // enabled by default since 5.0
         .allowTlsInsecureConnection(false) // false by default, in any case
         .build();
 ```
