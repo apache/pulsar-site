@@ -735,11 +735,28 @@ Go to check the result:
 
 * https://hub.docker.com/r/apachepulsar/pulsar/tags
 
+for Pulsar &tl;5.0
+
+```shell
+CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
+regctl image copy ${RELEASE_MANAGER_DOCKER_USER}/pulsar-all:${CANDIDATE_TAG} apachepulsar/pulsar-all:$VERSION_WITHOUT_RC
+```
+
+Go to check the result:
+
+* https://hub.docker.com/r/apachepulsar/pulsar-all/tags
+
 :::caution
 
 This step is for the latest release only.
 
 :::
+
+```shell
+regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
+```
+
+for Pulsar &tl;5.0
 
 ```shell
 regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
