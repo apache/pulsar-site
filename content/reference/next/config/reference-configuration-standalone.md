@@ -4639,6 +4639,17 @@ The class name of the topic policies service. There are 2 built-in implementatio
 
 **Category**: Server
 
+### topicPolicyListenerReplayEnabled
+When enabled, all registered topic-policy listeners in a namespace are re-notified with the current topic policies after the namespace's topic-policy cache finishes its initial load. Topics load and apply their own policies when they are loaded, so this broadcast is normally redundant; it is only needed for custom plugins that register TopicPolicyListeners and depend on it for backwards compatibility. Disabled by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### topicsPatternRegexImplementation
 The regular expression implementation to use for topic pattern matching. 
 RE2J_WITH_JDK_FALLBACK is the default. It uses the RE2J implementation and falls back to the JDK implementation for backwards compatibility reasons when the pattern compilation fails with the RE2/j library.
@@ -5346,19 +5357,6 @@ The threshold to triggering automatic offload to long term storage
 **Type**: `long`
 
 **Default**: `-1`
-
-**Dynamic**: `false`
-
-**Category**: Storage (Ledger Offloading)
-
-### managedLedgerUnackedRangesOpenCacheSetEnabled
-When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
-
-RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
-
-**Type**: `boolean`
-
-**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -6087,8 +6085,6 @@ Default is ``.
 
 ### managedLedgerPersistIndividualAckAsLongArray
 When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
-
-NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
 
 **Type**: `boolean`
 
