@@ -69,6 +69,8 @@ The following table outlines the primitive types that Pulsar schema supports, an
 
 Pulsar does not store any schema data in `SchemaInfo` for primitive types. Some of the primitive schema implementations can use the `properties` parameter to store implementation-specific tunable settings. For example, a string schema can use `properties` to store the encoding charset to serialize and deserialize strings.
 
+Fixed-width numeric primitive schemas use big-endian byte order in Java clients. `INT8` is a single byte. `INT16`, `INT32`, and `INT64` encode the most significant byte first. `FLOAT` and `DOUBLE` encode the IEEE 754 bit pattern in the same byte order. `BYTES` payloads are passed through unchanged, so their internal byte order is defined by the application.
+
 :::
 
 For more instructions and examples, see [Construct a string schema](schema-get-started.md#string).
