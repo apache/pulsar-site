@@ -1,4 +1,5 @@
 module.exports = [
+{tagName: "v0.21.0",releaseNotes:"/release-notes/versioned/pulsar-client-go-0.21.0/",doc:"/docs/client-libraries-go",version:"v0.21.x"},
 {tagName: "v0.20.0",releaseNotes:"/release-notes/versioned/pulsar-client-go-0.20.0/",doc:"/docs/client-libraries-go",version:"v0.20.x"},
 {tagName: "v0.19.0",releaseNotes:"/release-notes/versioned/pulsar-client-go-0.19.0/",doc:"/docs/client-libraries-go",version:"v0.19.x"},
 {tagName: "v0.18.0",releaseNotes:"/release-notes/versioned/pulsar-client-go-0.18.0/",doc:"/docs/client-libraries-go",version:"v0.18.x"},
