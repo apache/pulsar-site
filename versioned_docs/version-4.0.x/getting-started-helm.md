@@ -280,6 +280,8 @@ webServiceUrl=http://127.0.0.1:61853/
 brokerServiceUrl=pulsar://127.0.0.1:61854/
 ```
 
+Save these URLs because you will need them when configuring `${PULSAR_HOME}/conf/client.conf` in step 4 below.
+
 Then you can proceed with the following steps:
 
 1. Download the Apache Pulsar tarball from the [downloads page](/download/).
@@ -304,7 +306,7 @@ Then you can proceed with the following steps:
 
    In the `${PULSAR_HOME}/conf/client.conf` file, replace `webServiceUrl` and `brokerServiceUrl` with the service URLs you get from the above steps.
 
-5. Create a subscription to consume messages from `apache/pulsar/test-topic`.
+5. In the same terminal where you exported `PULSAR_HOME` in the previous steps, create a subscription to consume messages from `apache/pulsar/test-topic`.
 
    ```bash
    bin/pulsar-client consume -s sub apache/pulsar/test-topic  -n 0
