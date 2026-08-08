@@ -522,7 +522,13 @@ TLS KeyStore type configuration in broker: JKS, PKCS12
 ### tlsProvider
 Specify the TLS provider for the broker service: 
 When using TLS authentication with CACert, the valid value is either OPENSSL or JDK.
-When using TLS authentication with KeyStore, available values can be SunJSSE, Conscrypt and etc.
+When using TLS authentication with KeyStore, available values can be SunJSSE, Conscrypt
+and etc.
+Leave unset (the default) to let Pulsar choose the engine: the native OpenSSL engine when a
+netty-tcnative binary is available for the platform, otherwise the JDK engine.
+This key is overloaded across two axes. An engine literal (JDK, OPENSSL, OPENSSL_REFCNT)
+selects the TLS engine; any other value is read as a JSSE (SSLContext) provider name (e.g.
+Conscrypt) and selects no native engine.
 
 **Type**: `java.lang.String`
 
@@ -3990,7 +3996,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `2000`
+**Default**: `1999`
 
 **Dynamic**: `true`
 
@@ -4800,6 +4806,9 @@ Port for the HTTPS admin/REST endpoint of the internal listener. Used both for t
 
 ### webServiceTlsProvider
 Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
+This names a JSSE (SSLContext) security provider for the Jetty-based web service, which has
+no native TLS engine, so Netty engine values (JDK, OPENSSL, OPENSSL_REFCNT) are not valid
+provider names here.
 
 **Type**: `java.lang.String`
 
@@ -5631,7 +5640,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `800`
+**Default**: `799`
 
 **Dynamic**: `true`
 
