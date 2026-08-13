@@ -12,11 +12,9 @@ $ pulsar-perf produce [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
-| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
-| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -82,11 +80,9 @@ $ pulsar-perf consume [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
-| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
-| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -141,11 +137,9 @@ $ pulsar-perf transaction [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
-| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
-| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -194,11 +188,9 @@ $ pulsar-perf read [options]
 | `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
 | `--auth-plugin` | Authentication plugin class name||
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
-| `--ssl-factory-plugin` | Pulsar SSL Factory plugin class name|null|
-| `--ssl-factory-plugin-params` | Pulsar SSL Factory Plugin parameters in the format: "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|false|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|

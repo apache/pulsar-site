@@ -591,11 +591,15 @@ Specify the TLS provider for the web service, available values can be SunJSSE, C
 This names a JSSE (SSLContext) security provider for a Jetty-based web service, which has
 no native TLS engine, so Netty engine values (JDK, OPENSSL, OPENSSL_REFCNT) are not valid
 provider names here. Note that the proxy's own HTTPS listener reads tlsProvider rather than
-this setting.
+this setting. Leave unset (the default) to use Conscrypt when it is available on this
+platform, else the JVM's default provider; a configured name is pinned and startup fails
+if it cannot be resolved. Conscrypt ships native libraries for x86_64 and, since 2.6.1,
+aarch64 — but not for every platform, which is why the default falls back instead of failing
+where it cannot load; pinning it explicitly there does fail.
 
 **Type**: `java.lang.String`
 
-**Default**: `Conscrypt`
+**Default**: ``
 
 **Dynamic**: `false`
 
@@ -1140,19 +1144,19 @@ Default is false.
 
 **Category**: Server
 
-### brokerClientSslFactoryPlugin
-SSL Factory Plugin class used by internal client to provide SSLEngine and SSLContext objects. The default class used is DefaultSslFactory.
+### brokerClientJsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the proxy's own outbound (proxy-to-broker) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+**Default**: `null`
 
 **Dynamic**: `false`
 
 **Category**: TLS
 
-### brokerClientSslFactoryPluginParams
-SSL Factory plugin configuration parameters used by internal client.
+### brokerClientTlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the proxy's own outbound (proxy-to-broker) client connections (purpose BROKER_CLIENT). An empty value or the literal 'default' selects the built-in default factory composed from the brokerClient tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only outbound-client TLS path; the removed PIP-337 brokerClientSslFactoryPlugin keys are rejected at startup when set to a non-default value.
 
 **Type**: `java.lang.String`
 
@@ -1162,23 +1166,23 @@ SSL Factory plugin configuration parameters used by internal client.
 
 **Category**: TLS
 
-### sslFactoryPlugin
-SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultSslFactory.
+### brokerClientTlsFactoryConfig
+PIP-478 configuration parameters for brokerClientTlsFactoryClassName. Accepts a JSON object or a comma-separated key=value list.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+**Default**: ``
 
 **Dynamic**: `false`
 
 **Category**: TLS
 
-### sslFactoryPluginParams
-SSL Factory plugin configuration parameters.
+### jsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the proxy's server-side (binary front-end / web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
-**Default**: ``
+**Default**: `null`
 
 **Dynamic**: `false`
 
@@ -1198,7 +1202,7 @@ If true, a client with a cert which cannot be verified with the `tlsTrustCertsFi
 **Category**: TLS
 
 ### tlsCertRefreshCheckDurationSec
-Tls cert refresh duration in seconds (set 0 to check on every new connection)
+Tls cert refresh duration in seconds. Set 0 to disable the background rotation check, so the TLS material loaded at startup is kept until restart.
 
 **Type**: `long`
 
@@ -1232,12 +1236,34 @@ Examples:- [TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256]
 
 **Category**: TLS
 
+### tlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the proxy's server-side TLS (binary front-end and web server; purposes PROXY/WEB). An empty value or the literal 'default' selects the built-in default factory composed from these tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only server TLS path; the removed PIP-337 sslFactoryPlugin keys are rejected at startup when set to a non-default value.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### tlsFactoryConfig
+PIP-478 configuration parameters for tlsFactoryClassName. Accepts a JSON object or a comma-separated key=value list.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsHostnameVerificationEnabled
-Whether the hostname is validated when the proxy creates a TLS connection with brokers
+Whether the hostname is validated when the proxy creates a TLS connection with brokers. Enabled by default since Pulsar 5.0 (PIP-478): a broker whose certificate does not match its hostname/SAN is rejected.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 

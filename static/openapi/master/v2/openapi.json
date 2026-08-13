@@ -425,11 +425,11 @@
                         "type": "string"
                     },
                     "brokerClientSslFactoryPlugin": {
-                        "description": "SSL Factory plugin used by internal client to generate the SSL Context and Engine",
+                        "description": "Deprecated (PIP-478): removed in Pulsar 5.0. Retained for metadata compatibility but ignored (with a WARN); use brokerClientTlsFactoryClassName instead.",
                         "type": "string"
                     },
                     "brokerClientSslFactoryPluginParams": {
-                        "description": "Parameters used by the internal client's SSL factory plugin to generate the SSL Context and Engine",
+                        "description": "Deprecated (PIP-478): removed in Pulsar 5.0. Retained for metadata compatibility but ignored.",
                         "type": "string"
                     },
                     "brokerClientTlsEnabled": {
@@ -439,6 +439,14 @@
                     "brokerClientTlsEnabledWithKeyStore": {
                         "description": "Whether the internal client uses KeyStore type to authenticate with other Pulsar brokers",
                         "type": "boolean"
+                    },
+                    "brokerClientTlsFactoryClassName": {
+                        "description": "PulsarTlsFactory class name for outbound connections to this cluster \u2014 the two legs configured from this cluster entry: the binary-protocol replication client and the cross-cluster admin (HTTPS) client. It does not reach the peer-cluster lookup client, which is broker-level throughout (as in 4.x). Blank inherits the broker-level brokerClientTlsFactoryClassName.",
+                        "type": "string"
+                    },
+                    "brokerClientTlsFactoryConfig": {
+                        "description": "Configuration passed to brokerClientTlsFactoryClassName as its init params (JSON object or key=value list). Follows brokerClientTlsFactoryClassName rather than inheriting on its own: used verbatim when this cluster names a factory, ignored otherwise.",
+                        "type": "string"
                     },
                     "brokerClientTlsKeyStore": {
                         "description": "TLS KeyStore path for internal client, used by the internal client to authenticate with Pulsar brokers",
