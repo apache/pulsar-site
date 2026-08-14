@@ -268,6 +268,22 @@ The maximum amount of data that will be buffered for incoming http requests so t
 
 **Category**: HTTP
 
+### httpMaxResponseHeaderSize
+  The maximum size in bytes of the response header.
+  Larger headers will allow for larger response headers such as message properties
+  in the Admin API message inspection endpoints (getMessageById, peekNthMessage,
+  examineMessage). However, larger headers consume more memory and can make a server
+  more vulnerable to denial of service attacks.
+
+
+**Type**: `int`
+
+**Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpNumThreads
 Number of threads to use for HTTP requests processing
 

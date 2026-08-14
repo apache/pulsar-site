@@ -315,6 +315,22 @@ If \>0, it will reject all HTTP requests with bodies larged than the configured 
 
 **Category**: HTTP
 
+### httpMaxResponseHeaderSize
+  The maximum size in bytes of the response header.
+  Larger headers will allow for larger response headers such as message properties
+  in the Admin API message inspection endpoints (getMessageById, peekNthMessage,
+  examineMessage). However, larger headers consume more memory and can make a server
+  more vulnerable to denial of service attacks.
+
+
+**Type**: `int`
+
+**Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpRequestsFailOnUnknownPropertiesEnabled
 Admin API fail on unknown request parameter in request-body. see PIP-179. Default false.
 
