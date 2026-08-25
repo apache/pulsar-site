@@ -91,8 +91,9 @@ The following table outlines the nested fields and related arguments under the `
 | maxPendingMessagesAcrossPartitions | Int                           | N/A                      | The number of `maxPendingMessages` across all partitions. |
 | useThreadLocalProducers            | Boolean                       | N/A                      | N/A                             |
 | cryptoConfig                       | [CryptoConfig](#cryptoconfig) | N/A                      | Refer to [code](https://github.com/apache/pulsar/blob/master/pulsar-client-admin-api/src/main/java/org/apache/pulsar/common/functions/CryptoConfig.java).|
-| batchBuilder                       | String                        | `--batch-builder`        | The type of batch construction method. Available values: `DEFAULT` and `KEY_BASED`. The default value is `DEFAULT`. |
-| compressionType                      | String                        | N/A                      | Message data compression type used by a producer. The default value is [`LZ4`](https://github.com/lz4/lz4). <br />Available options:<li>`NONE` (no compression)</li><li>[`ZLIB`](https://zlib.net/)<br /></li><li>[`ZSTD`](https://facebook.github.io/zstd/)</li><li>[`SNAPPY`](https://google.github.io/snappy/)</li>|
+| batchBuilder                       | String                        | `--batch-builder`        | The type of batch construction method. Available values: `DEFAULT` and `KEY_BASED`. The default value is `DEFAULT`.<br />**Note:** If `batchingConfig.batchBuilder` is also set, that value takes precedence over this one. |
+| compressionType                      | String                        | N/A                      | Message data compression type used by a producer. The default value is [`LZ4`](https://github.com/lz4/lz4). <br />Available options:<li>`NONE` (no compression)</li><li>[`ZLIB`](https://zlib.net/)<br /></li><li>[`ZSTD`](https://facebook.github.io/zstd/)</li><li>[`SNAPPY`](https://google.github.io/snappy/)</li><br />**Note:** The Go client does not implement `SNAPPY`; a Go function configured with it falls back to `LZ4`. |
+| batchingConfig                     | [BatchingConfig](#batchingconfig) | N/A                  | The batching settings applied to the producer. When omitted, batching is enabled with a maximum publish delay of 10 ms. |
 
 ###### Resources
 
@@ -132,6 +133,33 @@ The following table outlines the nested fields and related arguments under the `
 | producerCryptoFailureAction | ProducerCryptoFailureAction | N/A                      | N/A   |
 | consumerCryptoFailureAction | ConsumerCryptoFailureAction | N/A                      | N/A   |
 
+
+###### BatchingConfig
+
+The following table outlines the nested fields under the `batchingConfig` field of `producerConfig`.
+These settings were introduced by [PIP-401](https://github.com/apache/pulsar/blob/master/pip/pip-401.md).
+
+:::note
+
+`batchingConfig` is currently applied by **Java** functions only. The Python and Go runtimes hard-code
+batching to enabled with a 10 ms maximum publish delay and ignore these settings
+([#26390](https://github.com/apache/pulsar/issues/26390),
+[#26391](https://github.com/apache/pulsar/issues/26391)).
+
+:::
+
+| Field Name                | Type    | Related Command Argument | Description   |
+|---------------------------|---------|--------------------------|---------------|
+| enabled                   | Boolean | N/A                      | Whether the producer batches messages. The default value is `true`. |
+| batchingMaxPublishDelayMs | Int     | N/A                      | The maximum time the producer waits before sending a batch, in milliseconds. The default value is `10`. |
+| batchingMaxMessages       | Int     | N/A                      | The maximum number of messages in a batch. When unset, the client default applies. |
+| batchingMaxBytes          | Int     | N/A                      | The maximum size of a batch, in bytes. When unset, the client default applies. |
+| batchBuilder              | String  | N/A                      | The type of batch construction method. Available values: `DEFAULT` and `KEY_BASED`. Takes precedence over `producerConfig.batchBuilder`. |
+| roundRobinRouterBatchingPartitionSwitchFrequency | Int | N/A | How often the round-robin router switches partitions for non-keyed messages, as a multiple of `batchingMaxPublishDelayMs`. The partition switch period is `frequency * batchingMaxPublishDelayMs`. |
+
+A function that sets no `producerConfig`, or a `producerConfig` with no `batchingConfig`, gets batching
+enabled with a maximum publish delay of 10 ms. This is the behaviour functions had before these settings
+became configurable, and it is the same across the Java, Python, and Go runtimes.
 
 ### Example
 
