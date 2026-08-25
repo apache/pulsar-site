@@ -315,6 +315,22 @@ If \>0, it will reject all HTTP requests with bodies larged than the configured 
 
 **Category**: HTTP
 
+### httpMaxResponseHeaderSize
+  The maximum size in bytes of the response header.
+  Larger headers will allow for larger response headers such as message properties
+  in the Admin API message inspection endpoints (getMessageById, peekNthMessage,
+  examineMessage). However, larger headers consume more memory and can make a server
+  more vulnerable to denial of service attacks.
+
+
+**Type**: `int`
+
+**Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
 ### httpRequestsFailOnUnknownPropertiesEnabled
 Admin API fail on unknown request parameter in request-body. see PIP-179. Default false.
 
@@ -520,9 +536,13 @@ TLS KeyStore type configuration in broker: JKS, PKCS12
 **Category**: KeyStoreTLS
 
 ### tlsProvider
-Specify the TLS provider for the broker service: 
-When using TLS authentication with CACert, the valid value is either OPENSSL or JDK.
-When using TLS authentication with KeyStore, available values can be SunJSSE, Conscrypt and etc.
+Select the TLS engine for the broker service: either OPENSSL or JDK.
+Leave unset (the default) to let Pulsar choose the engine: the native OpenSSL engine when a
+netty-tcnative binary is available for the platform, otherwise the JDK engine.
+To pin a JSSE (SSLContext) provider such as BCJSSE or Conscrypt, use jsseProvider instead.
+For compatibility this key stays overloaded across both axes: a value that is not an engine
+literal (JDK, OPENSSL, OPENSSL_REFCNT) is read as a JSSE provider name and routed to
+jsseProvider, which takes precedence when both are set.
 
 **Type**: `java.lang.String`
 
@@ -4800,10 +4820,17 @@ Port for the HTTPS admin/REST endpoint of the internal listener. Used both for t
 
 ### webServiceTlsProvider
 Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
+This names a JSSE (SSLContext) security provider for the Jetty-based web service, which has
+no native TLS engine, so Netty engine values (JDK, OPENSSL, OPENSSL_REFCNT) are not valid
+provider names here. Leave unset (the default) to use Conscrypt when it is available on
+this platform, else the JVM's default provider; a configured name is pinned and startup
+fails if it cannot be resolved. Conscrypt ships native libraries for x86_64 and, since
+2.6.1, aarch64 — but not for every platform, which is why the default falls back instead of
+failing where it cannot load; pinning it explicitly there does fail.
 
 **Type**: `java.lang.String`
 
-**Default**: `Conscrypt`
+**Default**: ``
 
 **Dynamic**: `false`
 
@@ -6171,19 +6198,19 @@ Skip schema ledger failure to forcefully recover topic successfully.
 
 **Category**: Storage (Managed Ledger)
 
-### brokerClientSslFactoryPlugin
-SSL Factory Plugin class used by internal client to provide SSLEngine and SSLContext objects. The default class used is DefaultSslFactory.
+### brokerClientJsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's own outbound (broker-to-broker / replication) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+**Default**: `null`
 
 **Dynamic**: `false`
 
 **Category**: TLS
 
-### brokerClientSslFactoryPluginParams
-SSL Factory plugin configuration parameters used by internal client.
+### brokerClientTlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the broker's own outbound (broker-to-broker) client connections (purpose BROKER_CLIENT). An empty value or the literal 'default' selects the built-in default factory composed from the brokerClient tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only outbound-client TLS path; the removed PIP-337 brokerClientSslFactoryPlugin keys are rejected at startup when set to a non-default value.
 
 **Type**: `java.lang.String`
 
@@ -6193,23 +6220,23 @@ SSL Factory plugin configuration parameters used by internal client.
 
 **Category**: TLS
 
-### sslFactoryPlugin
-SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultSslFactory.
+### brokerClientTlsFactoryConfig
+PIP-478 configuration parameters for brokerClientTlsFactoryClassName. Accepts a JSON object or a comma-separated key=value list.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+**Default**: ``
 
 **Dynamic**: `false`
 
 **Category**: TLS
 
-### sslFactoryPluginParams
-SSL Factory plugin configuration parameters.
+### jsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's server-side (listener/web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
-**Default**: ``
+**Default**: `null`
 
 **Dynamic**: `false`
 
@@ -6227,7 +6254,7 @@ Accept untrusted TLS certificate from client
 **Category**: TLS
 
 ### tlsCertRefreshCheckDurationSec
-Tls cert refresh duration in seconds (set 0 to check on every new connection)
+Tls cert refresh duration in seconds. Set 0 to disable the background rotation check, so the TLS material loaded at startup is kept until restart.
 
 **Type**: `long`
 
@@ -6272,12 +6299,34 @@ Enable TLS
 
 **Category**: TLS
 
+### tlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the broker's server-side TLS (binary listener and web server; purposes BROKER/PROXY/WEB). An empty value or the literal 'default' selects the built-in DefaultBrokerTlsFactory composed from these tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only server TLS path; the removed PIP-337 sslFactoryPlugin keys are rejected at startup when set to a non-default value.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### tlsFactoryConfig
+PIP-478 configuration parameters for tlsFactoryClassName, passed to the factory as its init params. Accepts a JSON object or a comma-separated key=value list.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsHostnameVerificationEnabled
-Whether the hostname is validated when the broker creates a TLS connection with other brokers
+Whether the hostname is validated when the broker creates a TLS connection with other brokers (e.g. geo-replication and broker-to-broker lookup). Enabled by default since Pulsar 5.0 (PIP-478): a peer broker whose certificate does not match its hostname/SAN is rejected.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
