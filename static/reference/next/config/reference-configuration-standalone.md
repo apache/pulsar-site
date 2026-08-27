@@ -1491,6 +1491,18 @@ If true, export publisher stats when returning topics stats from the admin rest 
 
 **Category**: Metrics
 
+### exposeSubscriptionBacklogAgeInPrometheus
+Enable computing the age of the oldest unacknowledged message for each subscription and exposing it through topic stats and Prometheus.
+ When disabled, the broker skips computing per-subscription backlog age and SubscriptionStats.oldestBacklogMessageAgeSeconds remains -1. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### exposeSubscriptionBacklogSizeInPrometheus
 Enable expose the backlog size for each subscription when generating stats.
  Locking is used for fetching the status so default to false.
