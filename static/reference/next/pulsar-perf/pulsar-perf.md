@@ -15,6 +15,8 @@ $ pulsar-perf produce [options]
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
+| `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -83,6 +85,8 @@ $ pulsar-perf consume [options]
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
+| `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -140,6 +144,8 @@ $ pulsar-perf transaction [options]
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
+| `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
@@ -191,6 +197,8 @@ $ pulsar-perf read [options]
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
 | `--tls-allow-insecure` | Allow insecure TLS connection|false|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
+| `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
 | `-i, --stats-interval-seconds` | Statistics Interval Seconds. If 0, statistics will be disabled|0|
 | `-ioThreads, --num-io-threads` | Set the number of threads to be used for handling connections to brokers. The default value is 1.|1|
