@@ -2493,6 +2493,17 @@ Total entry-bucket budget per scalable topic. Entry-buckets are the unit of key-
 
 **Category**: Policies
 
+### scalableTopicEntryBucketMaxPerSegment
+Hard ceiling on a single segment's entry-bucket count (PIP-486). Bounds both the manual rebucket operation and the controller's auto rebucket-up; a segment's bucket count caps how many consumers can share it.
+
+**Type**: `int`
+
+**Default**: `1024`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicLoadReportIntervalSeconds
 Interval (seconds) at which the segment-owning broker samples its segment topics to report load for auto split/merge. Read at broker start; not dynamic.
 
@@ -2615,6 +2626,17 @@ Hard floor on the number of active segments. Merges stop firing once this is rea
 
 **Category**: Policies
 
+### scalableTopicRebucketCooldownSeconds
+Minimum time (seconds) between automatic entry-bucket rollovers (rebuckets) on a topic. Coalesces consumer-join bursts, like the split cooldown.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicSplitBytesRateInThreshold
 Inbound bytes/second above which a segment is split.
 
@@ -2665,6 +2687,17 @@ Outbound (dispatched) messages/second above which a segment is split.
 **Type**: `double`
 
 **Default**: `50000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitVsRebucketMinMsgRateInThreshold
+PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count).
+
+**Type**: `double`
+
+**Default**: `1000.0`
 
 **Dynamic**: `true`
 

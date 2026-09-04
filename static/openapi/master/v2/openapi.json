@@ -165,6 +165,10 @@
                         "format": "int32",
                         "type": "integer"
                     },
+                    "rebucketCooldownSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "splitBytesRateInThreshold": {
                         "format": "int64",
                         "type": "integer"
@@ -182,6 +186,10 @@
                         "type": "number"
                     },
                     "splitMsgRateOutThreshold": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "splitVsRebucketMinMsgRateInThreshold": {
                         "format": "double",
                         "type": "number"
                     }
@@ -37907,6 +37915,78 @@
                     }
                 },
                 "summary": "Migrate an existing regular (partitioned or non-partitioned) topic to a scalable topic.",
+                "tags": [
+                    "scalable topic"
+                ]
+            }
+        },
+        "/admin/v2/scalable/{tenant}/{namespace}/{topic}/rebucket/{segmentId}": {
+            "post": {
+                "operationId": "rebucketSegment",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Segment ID to rebucket",
+                        "in": "path",
+                        "name": "segmentId",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Entry-bucket count for the successor segment",
+                        "in": "query",
+                        "name": "bucketCount",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Segment rebucketed successfully"
+                    },
+                    "404": {
+                        "description": "Scalable topic doesn't exist"
+                    },
+                    "412": {
+                        "description": "Segment is unknown, not active, or the bucket count is invalid or unchanged"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Rebucket a segment: roll it over to a same-range successor with a new entry-bucket count.",
                 "tags": [
                     "scalable topic"
                 ]
