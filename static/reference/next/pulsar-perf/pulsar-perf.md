@@ -9,12 +9,12 @@ $ pulsar-perf produce [options]
 
 |Flag|Description|Default|
 |---|---|---|
-| `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
-| `--auth-plugin` | Authentication plugin class name||
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `-u, --service-url` | Pulsar Service URL|null|
+| `--auth-plugin` | Authentication plugin class name|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
-| `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--tls-allow-insecure` | Allow insecure TLS connection|null|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
 | `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
@@ -24,7 +24,7 @@ $ pulsar-perf produce [options]
 | `--listener-name` | Listener name for the broker.|null|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
-| `--proxy-url` | Proxy-server URL to which to connect.||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
@@ -35,7 +35,7 @@ $ pulsar-perf produce [options]
 | `--separator` | Separator between the topic and topic number|-|
 | `--send-timeout` | Set the sendTimeout value default 0 to keep compatibility with previous version of pulsar-perf|0|
 | `-pn, --producer-name` | Producer Name|null|
-| `-au, --admin-url` | Pulsar Admin URL|http://localhost:8080/|
+| `-au, --admin-url` | Pulsar Admin URL|null|
 | `-ch, --chunking` | Should split the message and publish in chunks if message size is larger than allowed max size|false|
 | `-o, --max-outstanding` | Max number of outstanding messages|0|
 | `-p, --max-outstanding-across-partitions` | Max number of outstanding messages across partitions|0|
@@ -65,8 +65,6 @@ $ pulsar-perf produce [options]
 | `-txn, --txn-enable` | Enable or disable the transaction|false|
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `--histogram-file` | HdrHistogram output file|null|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
 ## consume
 
@@ -79,12 +77,12 @@ $ pulsar-perf consume [options]
 
 |Flag|Description|Default|
 |---|---|---|
-| `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
-| `--auth-plugin` | Authentication plugin class name||
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `-u, --service-url` | Pulsar Service URL|null|
+| `--auth-plugin` | Authentication plugin class name|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
-| `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--tls-allow-insecure` | Allow insecure TLS connection|null|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
 | `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
@@ -94,7 +92,7 @@ $ pulsar-perf consume [options]
 | `--listener-name` | Listener name for the broker.|null|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
-| `--proxy-url` | Proxy-server URL to which to connect.||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
@@ -124,8 +122,6 @@ $ pulsar-perf consume [options]
 | `-ntxn` | The number of opened transactions, 0 means keeping open.(After --txn-enable setting to true, -ntxn takes effect.)|0|
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `--histogram-file` | HdrHistogram output file|null|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
 ## transaction
 
@@ -138,12 +134,12 @@ $ pulsar-perf transaction [options]
 
 |Flag|Description|Default|
 |---|---|---|
-| `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
-| `--auth-plugin` | Authentication plugin class name||
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `-u, --service-url` | Pulsar Service URL|null|
+| `--auth-plugin` | Authentication plugin class name|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
-| `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--tls-allow-insecure` | Allow insecure TLS connection|null|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
 | `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
@@ -153,13 +149,13 @@ $ pulsar-perf transaction [options]
 | `--listener-name` | Listener name for the broker.|null|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
-| `--proxy-url` | Proxy-server URL to which to connect.||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `--topics-c` | All topics that need ack for a transaction|[test-consume]|
 | `--topics-p` | All topics that need produce for a transaction|[test-produce]|
 | `-threads, --num-test-threads` | Number of test threads.This thread is for a new transaction to ack messages from consumer topics and produce message to producer topics, and then commit or abort this transaction. Increasing the number of threads increases the parallelism of the performance test, thereby increasing the intensity of the stress test.|1|
-| `-au, --admin-url` | Pulsar Admin URL|http://localhost:8080/|
+| `-au, --admin-url` | Pulsar Admin URL|null|
 | `-np, --partitions` | Create partitioned topics with a given number of partitions, 0 meansnot trying to create a topic|null|
 | `--scalable` | Create the producer/consumer topics as scalable topics (PIP-473) with --scalable-segments initial segments. Required for transactions against the scalable-topics (v5) coordinator. Mutually exclusive with --partitions.|false|
 | `--scalable-segments` | Number of initial segments for scalable topics created via --scalable.|1|
@@ -177,8 +173,6 @@ $ pulsar-perf transaction [options]
 | `--txn-disable` | Disable transaction|false|
 | `-abort` | Abort the transaction. (After --txn-disEnable setting to false, -abort takes effect)|false|
 | `-txnRate` | Set the rate of opened transaction or task. 0 means no limit|0|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
 ## read
 
@@ -191,12 +185,12 @@ $ pulsar-perf read [options]
 
 |Flag|Description|Default|
 |---|---|---|
-| `-u, --service-url` | Pulsar Service URL|pulsar://localhost:6650/|
-| `--auth-plugin` | Authentication plugin class name||
-| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".||
+| `-u, --service-url` | Pulsar Service URL|null|
+| `--auth-plugin` | Authentication plugin class name|null|
+| `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
-| `--tls-allow-insecure` | Allow insecure TLS connection|false|
-| `--tls-enable-hostname-verification` | Enable TLS hostname verification|true|
+| `--tls-allow-insecure` | Allow insecure TLS connection|null|
+| `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
 | `--jca-provider` | PIP-478: JCA (material) java.security.Provider name for the KeyStore/CertificateFactory/KeyFactory engines that parse the TLS material, e.g. BCFIPS for FIPS alongside --jsse-provider=BCJSSE. Also readable from client.conf.|null|
 | `-c, --max-connections` | Max number of TCP connections to a single broker|1|
@@ -206,7 +200,7 @@ $ pulsar-perf read [options]
 | `--listener-name` | Listener name for the broker.|null|
 | `-lt, --num-listener-threads` | Set the number of threads to be used for message listeners|1|
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
-| `--proxy-url` | Proxy-server URL to which to connect.||
+| `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
 | `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
@@ -216,8 +210,6 @@ $ pulsar-perf read [options]
 | `-n, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
 | `--use-tls` | Use TLS encryption on the connection|false|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep consuming|0|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
 ## monitor-brokers
 
@@ -233,8 +225,6 @@ $ pulsar-perf monitor-brokers [options]
 |---|---|---|
 | `--connect-string` | Zookeeper or broker connect string|null|
 | `--extensions` | true to monitor Load Balance Extensions.|false|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
 ## websocket-producer
 
@@ -260,8 +250,6 @@ $ pulsar-perf websocket-producer [options]
 | `-fp, --format-payload` | Format %i as a message index in the stream from producer and/or %t as the timestamp nanoseconds|false|
 | `-fc, --format-class` | Custom Formatter class name|org.apache.pulsar.testclient.DefaultMessageFormatter|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep publishing|0|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
 ## managed-ledger
 
@@ -287,6 +275,4 @@ $ pulsar-perf managed-ledger [options]
 | `-a, --ack-quorum` | Ledger ack quorum|1|
 | `-dt, --digest-type` | BookKeeper digest type|CRC32C|
 | `-time, --test-duration` | Test duration in secs. If <= 0, it will keep publishing|0|
-| `-h, --help` | Show this help message and exit.|false|
-| `-V, --version` | Print version information and exit.|false|
 
