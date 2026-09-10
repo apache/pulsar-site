@@ -26,7 +26,7 @@ $ pulsar-perf produce [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-threads, --num-test-threads` | Number of test threads|1|
 | `-r, --rate` | Publish rate msg/s across topics|100|
@@ -94,7 +94,7 @@ $ pulsar-perf consume [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-n, --num-consumers` | Number of consumers (per subscription), only one consumer is allowed when subscriptionType is Exclusive|1|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
@@ -151,7 +151,7 @@ $ pulsar-perf transaction [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `--topics-c` | All topics that need ack for a transaction|[test-consume]|
 | `--topics-p` | All topics that need produce for a transaction|[test-produce]|
 | `-threads, --num-test-threads` | Number of test threads.This thread is for a new transaction to ack messages from consumer topics and produce message to producer topics, and then commit or abort this transaction. Increasing the number of threads increases the parallelism of the performance test, thereby increasing the intensity of the stress test.|1|
@@ -202,7 +202,7 @@ $ pulsar-perf read [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
 | `-m, --start-message-id` | Start message id. This can be either 'earliest', 'latest' or a specific message id by using 'lid:eid'|earliest|
@@ -239,7 +239,7 @@ $ pulsar-perf produce-v4 [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-threads, --num-test-threads` | Number of test threads|1|
 | `-r, --rate` | Publish rate msg/s across topics|100|
@@ -307,7 +307,7 @@ $ pulsar-perf consume-v4 [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-n, --num-consumers` | Number of consumers (per subscription), only one consumer is allowed when subscriptionType is Exclusive|1|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
@@ -363,7 +363,7 @@ $ pulsar-perf transaction-v4 [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `--topics-c` | All topics that need ack for a transaction|[test-consume]|
 | `--topics-p` | All topics that need produce for a transaction|[test-produce]|
 | `-threads, --num-test-threads` | Number of test threads.This thread is for a new transaction to ack messages from consumer topics and produce message to producer topics, and then commit or abort this transaction. Increasing the number of threads increases the parallelism of the performance test, thereby increasing the intensity of the stress test.|1|
@@ -412,7 +412,7 @@ $ pulsar-perf read-v4 [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M)|0|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
 | `-m, --start-message-id` | Start message id. This can be either 'earliest', 'latest' or a specific message id by using 'lid:eid'|earliest|
