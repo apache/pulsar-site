@@ -121,8 +121,15 @@ Initial backoff interval (in nanosecond).
 
 **Default**: `100000000`
 
+### jcaProvider
+PIP-478: the name of a JCA (material) provider — a java.security.Provider supplying the KeyStore, CertificateFactory and KeyFactory engines that parse the TLS material (e.g. BCFIPS for FIPS, alongside jsseProvider=BCJSSE). A distinct axis from jsseProvider, which supplies the SSLContext: JSSE service types are never taken from this provider. Unset uses the JVM provider search order, i.e. the behaviour of releases before PIP-478.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
 ### jsseProvider
-PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the client's TLS SSLContext. A distinct axis from sslProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK Netty engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider) and failing loudly when unresolvable.
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the client's TLS SSLContext. A distinct axis from sslProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK Netty engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 

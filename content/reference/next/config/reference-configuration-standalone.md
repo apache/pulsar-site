@@ -1491,6 +1491,18 @@ If true, export publisher stats when returning topics stats from the admin rest 
 
 **Category**: Metrics
 
+### exposeSubscriptionBacklogAgeInPrometheus
+Enable computing the age of the oldest unacknowledged message for each subscription and exposing it through topic stats and Prometheus.
+ When disabled, the broker skips computing per-subscription backlog age and SubscriptionStats.oldestBacklogMessageAgeSeconds remains -1. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### exposeSubscriptionBacklogSizeInPrometheus
 Enable expose the backlog size for each subscription when generating stats.
  Locking is used for fetching the status so default to false.
@@ -1765,6 +1777,32 @@ Default backlog quota retention policy. Default is producer_request_hold
 **Default**: `producer_request_hold`
 
 **Dynamic**: `false`
+
+**Category**: Policies
+
+### brokerCloseInactiveTopicsEnabled
+Enable closing (unloading from broker memory) of inactive topics without deleting their data.
+When a topic is deemed inactive (no producers and no subscriptions), the broker will close the topic
+instance, releasing in-memory resources such as the managed ledger cache, subscription state, and
+per-topic metrics. The topic data in BookKeeper is preserved; clients will transparently reload the
+topic on the next produce/consume.
+This option is mutually exclusive with 'brokerDeleteInactiveTopicsEnabled': only one of the two may
+be enabled at a time. It also requires 'brokerDeleteInactiveTopicsMode' to be
+'delete_when_no_subscriptions'; with 'delete_when_subscriptions_caught_up' a topic is inactive as
+soon as its subscriptions are caught up even while consumers are connected, so closing it would only
+disconnect those consumers and immediately reload the topic. The broker fails to start on either
+unsupported combination.
+While enabled, this broker-level setting takes precedence over any namespace- or topic-level
+'inactive_topic_policies.deleteWhileInactive': inactive topics are closed, never deleted.
+The inactivity detection reuses 'brokerDeleteInactiveTopicsMode',
+'brokerDeleteInactiveTopicsFrequencySeconds', and
+'brokerDeleteInactiveTopicsMaxInactiveDurationSeconds'.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
 
 **Category**: Policies
 
@@ -2455,6 +2493,17 @@ Total entry-bucket budget per scalable topic. Entry-buckets are the unit of key-
 
 **Category**: Policies
 
+### scalableTopicEntryBucketMaxPerSegment
+Hard ceiling on a single segment's entry-bucket count (PIP-486). Bounds both the manual rebucket operation and the controller's auto rebucket-up; a segment's bucket count caps how many consumers can share it.
+
+**Type**: `int`
+
+**Default**: `1024`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicLoadReportIntervalSeconds
 Interval (seconds) at which the segment-owning broker samples its segment topics to report load for auto split/merge. Read at broker start; not dynamic.
 
@@ -2577,6 +2626,17 @@ Hard floor on the number of active segments. Merges stop firing once this is rea
 
 **Category**: Policies
 
+### scalableTopicRebucketCooldownSeconds
+Minimum time (seconds) between automatic entry-bucket rollovers (rebuckets) on a topic. Coalesces consumer-join bursts, like the split cooldown.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicSplitBytesRateInThreshold
 Inbound bytes/second above which a segment is split.
 
@@ -2627,6 +2687,17 @@ Outbound (dispatched) messages/second above which a segment is split.
 **Type**: `double`
 
 **Default**: `50000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitVsRebucketMinMsgRateInThreshold
+PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count).
+
+**Type**: `double`
+
+**Default**: `1000.0`
 
 **Dynamic**: `true`
 
@@ -6198,8 +6269,19 @@ Skip schema ledger failure to forcefully recover topic successfully.
 
 **Category**: Storage (Managed Ledger)
 
+### brokerClientJcaProvider
+PIP-478: the JCA (material) provider for the broker's own outbound (broker-to-broker) client connections — the outbound counterpart of jcaProvider, on the same axis. Unset uses the JVM provider search order.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### brokerClientJsseProvider
-PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's own outbound (broker-to-broker / replication) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's own outbound (broker-to-broker / replication) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
@@ -6231,8 +6313,19 @@ PIP-478 configuration parameters for brokerClientTlsFactoryClassName. Accepts a 
 
 **Category**: TLS
 
+### jcaProvider
+PIP-478: the name of a JCA (material) provider — a java.security.Provider supplying the KeyStore, CertificateFactory and KeyFactory engines that parse the TLS material (e.g. BCFIPS for FIPS, alongside jsseProvider=BCJSSE). A distinct axis from jsseProvider, which supplies the SSLContext: JSSE service types are never taken from this provider. Unset uses the JVM provider search order, i.e. the behaviour of releases before PIP-478. Applies to the broker's listeners.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### jsseProvider
-PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's server-side (listener/web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's server-side (listener/web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 

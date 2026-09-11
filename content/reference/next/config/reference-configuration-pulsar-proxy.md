@@ -606,8 +606,9 @@ TLS TrustStore type configuration for proxy: JKS, PKCS12
 Specify the TLS provider for the web service, available values can be SunJSSE, Conscrypt and etc.
 This names a JSSE (SSLContext) security provider for a Jetty-based web service, which has
 no native TLS engine, so Netty engine values (JDK, OPENSSL, OPENSSL_REFCNT) are not valid
-provider names here. Note that the proxy's own HTTPS listener reads tlsProvider rather than
-this setting. Leave unset (the default) to use Conscrypt when it is available on this
+provider names here. The proxy's own HTTPS listener prefers this setting and falls back to
+tlsProvider when it is unset, matching the broker. Leave unset (the default) to use
+Conscrypt when it is available on this
 platform, else the JVM's default provider; a configured name is pinned and startup fails
 if it cannot be resolved. Conscrypt ships native libraries for x86_64 and, since 2.6.1,
 aarch64 — but not for every platform, which is why the default falls back instead of failing
@@ -1160,8 +1161,19 @@ Default is false.
 
 **Category**: Server
 
+### brokerClientJcaProvider
+PIP-478: the JCA (material) provider for the proxy's own outbound (proxy-to-broker) client connections — the outbound counterpart of jcaProvider, on the same axis. Unset uses the JVM provider search order.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### brokerClientJsseProvider
-PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the proxy's own outbound (proxy-to-broker) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the proxy's own outbound (proxy-to-broker) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
@@ -1193,8 +1205,19 @@ PIP-478 configuration parameters for brokerClientTlsFactoryClassName. Accepts a 
 
 **Category**: TLS
 
+### jcaProvider
+PIP-478: the name of a JCA (material) provider — a java.security.Provider supplying the KeyStore, CertificateFactory and KeyFactory engines that parse the TLS material (e.g. BCFIPS for FIPS, alongside jsseProvider=BCJSSE). A distinct axis from jsseProvider, which supplies the SSLContext: JSSE service types are never taken from this provider. Unset uses the JVM provider search order. Applies to the proxy's listeners.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### jsseProvider
-PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the proxy's server-side (binary front-end / web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved via the ServiceLoader mechanism (with a fallback to an already-registered provider), failing loudly when unresolvable.
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the proxy's server-side (binary front-end / web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
 
 **Type**: `java.lang.String`
 
