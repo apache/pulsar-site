@@ -1419,7 +1419,7 @@ If true, export consumer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1441,7 +1441,7 @@ If true, export managed cursor metrics
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1452,7 +1452,7 @@ If true, export managed ledger metrics (aggregated by namespace)
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1465,7 +1465,7 @@ Enable expose the precise backlog stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1476,7 +1476,7 @@ If true, export producer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1511,7 +1511,7 @@ Enable expose the backlog size for each subscription when generating stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1522,7 +1522,7 @@ If true, export topic level metrics otherwise namespace level
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
