@@ -37,8 +37,18 @@ To package a Python function into **one Python file**, complete the following st
 2. Install a Python client. The implementation of a Python function depends on the Python client.
 
    ```bash
-   pip install pulsar-client==2.10.0
+   pip install 'pulsar-client>=3.3.0'
    ```
+
+   :::note
+
+   The Python runtime requires `pulsar-client` 3.3.0 or later. It passes a `dead_letter_policy` to
+   `Client.subscribe()` for every input topic, and that parameter was added in 3.3.0; every other
+   argument the runtime passes is available in earlier releases. This only matters where you supply
+   the Python environment yourself, such as a self-managed worker using the process runtime — the
+   Pulsar Docker images already install a newer client.
+
+   :::
 
    And install protobuf tools to generate the proto files:
 
