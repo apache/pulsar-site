@@ -3653,7 +3653,7 @@ Dispatch messages and execute broker side filters in a per-subscription thread
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 
