@@ -1,0 +1,549 @@
+{
+    "components": {
+        "schemas": {
+            "PackageMetadata": {
+                "properties": {
+                    "contact": {
+                        "type": "string"
+                    },
+                    "createTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "modificationTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "properties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "info": {
+        "description": "This provides the REST API for Pulsar Packages operations",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "title": "Pulsar Packages REST API",
+        "version": "v3"
+    },
+    "openapi": "3.0.1",
+    "paths": {
+        "/admin/v3/packages/{type}/{tenant}/{namespace}": {
+            "get": {
+                "operationId": "listPackages",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PackageMetadata"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Return all the specified type package names in the specified namespace."
+                    },
+                    "412": {
+                        "description": "The package type is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Get all the specified type packages in a namespace.",
+                "tags": [
+                    "packages"
+                ]
+            }
+        },
+        "/admin/v3/packages/{type}/{tenant}/{namespace}/{packageName}": {
+            "get": {
+                "operationId": "listPackageVersion",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "packageName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Return the package versions of the specified package."
+                    },
+                    "404": {
+                        "description": "The specified package is not existent."
+                    },
+                    "412": {
+                        "description": "The package name is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Get all the versions of a package.",
+                "tags": [
+                    "packages"
+                ]
+            }
+        },
+        "/admin/v3/packages/{type}/{tenant}/{namespace}/{packageName}/{version}": {
+            "delete": {
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "packageName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete the specified package successfully."
+                    },
+                    "404": {
+                        "description": "The specified package is not existent."
+                    },
+                    "412": {
+                        "description": "The package name is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Delete a package with the package name.",
+                "tags": [
+                    "packages"
+                ]
+            },
+            "get": {
+                "operationId": "download",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "packageName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/octet-stream": {
+                                "schema": {
+                                    "format": "binary",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Download the specified package successfully."
+                    },
+                    "404": {
+                        "description": "The specified package is not existent."
+                    },
+                    "412": {
+                        "description": "The package name is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Download a package with the package name.",
+                "tags": [
+                    "packages"
+                ]
+            },
+            "post": {
+                "operationId": "upload",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "packageName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "object"
+                                    },
+                                    "metadata": {
+                                        "$ref": "#/components/schemas/PackageMetadata"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Upload the specified package successfully."
+                    },
+                    "412": {
+                        "description": "The package name is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Upload a package.",
+                "tags": [
+                    "packages"
+                ]
+            }
+        },
+        "/admin/v3/packages/{type}/{tenant}/{namespace}/{packageName}/{version}/metadata": {
+            "get": {
+                "operationId": "getMeta",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "packageName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PackageMetadata"
+                                }
+                            }
+                        },
+                        "description": "Return the metadata of the specified package."
+                    },
+                    "404": {
+                        "description": "The specified package is not existent."
+                    },
+                    "412": {
+                        "description": "The package name is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Get the metadata of a package.",
+                "tags": [
+                    "packages"
+                ]
+            },
+            "put": {
+                "operationId": "updateMeta",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "packageName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PackageMetadata"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Update the metadata of the specified package successfully."
+                    },
+                    "404": {
+                        "description": "The specified package is not existent."
+                    },
+                    "412": {
+                        "description": "The package name is illegal."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    },
+                    "503": {
+                        "description": "Package Management Service is not enabled in the broker."
+                    }
+                },
+                "summary": "Update the metadata of a package.",
+                "tags": [
+                    "packages"
+                ]
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080"
+        }
+    ]
+}
