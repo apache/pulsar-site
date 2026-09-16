@@ -23,15 +23,29 @@ brew install gh
 gh auth login
 ```
 
+Set these variables in the shell
+
+```shell
+VERSION_WITHOUT_RC=4.0.14
+PREVIOUS_VERSION=4.0.13
+```
+
+Go to the directory where you have `apache/pulsar-site` checked out:
+
+```shell
+PULSAR_SITE_PATH=$(pwd)
+```
+
+Pre-set the destination for release notes
+
+```shell
+RELEASE_NOTES_PATH="${PULSAR_SITE_PATH}/release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md"
+```
+
 ## Register the new released version to releases.json, data/release-pulsar.js and data/release-java.js files
 
 ```bash
-# Replace 3.0.6 with the target version tag
-VERSION_WITHOUT_RC=3.0.6
-PREVIOUS_VERSION=3.0.5
-```
-
-```bash
+cd $PULSAR_SITE_PATH
 # Replace apache/pulsar with the component repo
 ./scripts/register_new_version.py $VERSION_WITHOUT_RC $PREVIOUS_VERSION $(gh release view "v$VERSION_WITHOUT_RC" -R apache/pulsar --json author,publishedAt | jq -r '[.author.login, .publishedAt] | join(" ")')
 ```
@@ -39,6 +53,7 @@ PREVIOUS_VERSION=3.0.5
 Alternatively, for a tag instead of a release:
 
 ```bash
+cd $PULSAR_SITE_PATH
 # For a tag instead of a release
 ./scripts/register_new_version.py $VERSION_WITHOUT_RC $PREVIOUS_VERSION $(cd $PULSAR_PATH && git show -s --format="%ae %aI" "v$VERSION_RC" | tail -n 1 | sed 's/@.* / /')
 ```
@@ -52,11 +67,6 @@ Here are 2 approaches:
 Using "git log" (copies output to clipboard using pbcopy)
 
 ```shell
-PREVIOUS_VERSION=3.0.3
-VERSION_WITHOUT_RC=3.0.4
-```
-
-```shell
 cd $PULSAR_PATH
 git log --reverse --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 12 | sed 's/\] \[/][/' | sed 's/^[[:space:]]*//' | awk -F ']' '{
     if ($1 ~ /^\[/) {
@@ -65,29 +75,21 @@ git log --reverse --oneline v$PREVIOUS_VERSION..v$VERSION_WITHOUT_RC | colrm 1 1
         print "[zzz] | " $0
     }
 }' | sort | sed 's/^[^|]* | //' | sed 's/\(#\([0-9]\+\)\)/[#\2](https:\/\/github.com\/apache\/pulsar\/pull\/\2)/g' | sed 's/^/- /' | sed 's/</\&lt;/g' | sed 's/>/\&gt;/g' \
-| pbcopy
+>> $RELEASE_NOTES_PATH
 ```
 
 Alternatively using "gh pr list"
 
 ```bash
-gh pr list -L 1000 --search "is:pr is:merged label:release/2.10.6 label:cherry-picked/branch-2.10" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
+cd $PULSAR_PATH
+gh pr list -L 1000 --search "is:pr is:merged label:release/$VERSION_WITHOUT_RC label:cherry-picked/$VERSION_BRANCH" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort >> $RELEASE_NOTES_PATH
 ```
 
 For feature releases, using the milestone:
 
 ```bash
-gh pr list -L 1000 --search "is:pr is:merged milestone:4.0.0" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort | pbcopy
-```
-
-Copying from the clipboard to the release notes file
-
-First, move back to the pulsar-site directory, then:
-
-```shell
-# don't copy this command to clipboard since it will replace the content there
-# write this to the command line
-pbpaste >> release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
+cd $PULSAR_PATH
+gh pr list -L 1000 --search "is:pr is:merged milestone:$VERSION_WITHOUT_RC" --json title,number,url | jq -r '.[] | "- \(.title) ([#\(.number)](\(.url)))"' | sort >> $RELEASE_NOTES_PATH
 ```
 
 ## Categorizing the release note entries
@@ -95,7 +97,8 @@ pbpaste >> release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
 There is a separate script that can automatically categorize the release note items.
 
 ```shell
-./scripts/release_notes_reorder_script.py release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
+cd $PULSAR_SITE_PATH
+./scripts/release_notes_reorder_script.py $RELEASE_NOTES_PATH
 ```
 
 You need to check the results and sometimes manually reorder the entries.
@@ -103,7 +106,8 @@ You need to check the results and sometimes manually reorder the entries.
 If you are releasing multiple maintenance versions at once, you can use another release as the reference for ordering, so you do not have to repeat the same manual reordering.
 
 ```shell
-./scripts/release_notes_reorder_script.py release-notes/versioned/pulsar-X.Y.Z.md release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md
+cd $PULSAR_SITE_PATH
+./scripts/release_notes_reorder_script.py release-notes/versioned/pulsar-X.Y.Z.md $RELEASE_NOTES_PATH
 ```
 
 ## Creating Java client release notes
@@ -115,7 +119,7 @@ Copy the "Client" and applicable entries from "Library updates" into the client-
 Copy the file content to clipboard and paste to correct location by editing the release notes at https://github.com/apache/pulsar/releases
 
 ```shell
-cat release-notes/versioned/pulsar-${VERSION_WITHOUT_RC}.md | pbcopy
+cat $RELEASE_NOTES_PATH | pbcopy
 ```
 
 ## Update the release note page

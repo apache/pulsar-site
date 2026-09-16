@@ -91,6 +91,7 @@ The properties must be set consistently for every Gradle invocation of the relea
 export VERSION_RC=4.2.3-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
 export NEXT_VERSION_WITHOUT_RC=4.2.4
+export PREVIOUS_VERSION=4.2.2
 export VERSION_BRANCH=branch-4.2
 export UPSTREAM_REMOTE=origin
 export SDKMAN_JAVA_VERSION=21
@@ -777,6 +778,14 @@ This step is for the latest *LTS* release only
 
 ## Update the document
 
+Before any of the command, go to the directory where you have `apache/pulsar-site` checked out:
+
+```shell
+PULSAR_SITE_PATH=$(pwd)
+cd /tools/pytools
+poetry install
+```
+
 ### Release notes
 
 This step is for every release. Read the specific guide for [writing release notes](release-note-guide.md).
@@ -804,8 +813,7 @@ The Gradle build generates the OpenAPI specs into a different location (`pulsar-
 Now, run the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-cd tools/pytools
-poetry install
+cd "${PULSAR_SITE_PATH}/tools/pytools"
 poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
@@ -814,7 +822,7 @@ poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VE
 # move to pulsar-site root
 cd ../..
 git add -u
-git add static/swagger/$VERSION_WITHOUT_RC
+git add static/{openapi,swagger}/$VERSION_WITHOUT_RC
 git commit -m "update rest-apidoc for $VERSION_WITHOUT_RC"
 ```
 
@@ -831,8 +839,7 @@ This step is for feature releases only, unless you're sure that significant Java
 After publish Java libraries, run the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-cd tools/pytools
-poetry install
+cd "${PULSAR_SITE_PATH}/tools/pytools"
 poetry run bin/java-apidoc-generator.py $PULSAR_PATH
 ```
 
@@ -862,8 +869,7 @@ You can generate references of config and command-line tool by running the follo
 
 ```shell
 # build Pulsar distributions under /path/to/pulsar-X.Y.Z
-cd tools/pytools
-poetry install
+cd "${PULSAR_SITE_PATH}/tools/pytools"
 # ensure that defaults using Runtime.getRuntime().availableProcessors() will be based on 1 as the number of CPUs
 _JAVA_OPTIONS=-XX:ActiveProcessorCount=1 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
