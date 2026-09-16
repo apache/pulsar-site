@@ -152,11 +152,11 @@ When this parameter is not empty, unauthenticated users perform as anonymousUser
 **Category**: Authorization
 
 ### authenticateOriginalAuthData
-If this flag is set then the broker authenticates the original Auth data else it just accepts the originalPrincipal and authorizes it (if required)
+If this flag is set then the broker authenticates the original Auth data else it just accepts the originalPrincipal and authorizes it (if required). Set false for TLS client-certificate authentication through a proxy, since the broker receives the proxy certificate rather than the client certificate. Also set false for SASL authentication through a proxy, since the client-proxy handshake cannot be replayed as a separate client-broker handshake.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -310,6 +310,22 @@ If \>0, it will reject all HTTP requests with bodies larged than the configured 
 **Type**: `long`
 
 **Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: HTTP
+
+### httpMaxResponseHeaderSize
+  The maximum size in bytes of the response header.
+  Larger headers will allow for larger response headers such as message properties
+  in the Admin API message inspection endpoints (getMessageById, peekNthMessage,
+  examineMessage). However, larger headers consume more memory and can make a server
+  more vulnerable to denial of service attacks.
+
+
+**Type**: `int`
+
+**Default**: `8192`
 
 **Dynamic**: `false`
 
@@ -520,9 +536,13 @@ TLS KeyStore type configuration in broker: JKS, PKCS12
 **Category**: KeyStoreTLS
 
 ### tlsProvider
-Specify the TLS provider for the broker service: 
-When using TLS authentication with CACert, the valid value is either OPENSSL or JDK.
-When using TLS authentication with KeyStore, available values can be SunJSSE, Conscrypt and etc.
+Select the TLS engine for the broker service: either OPENSSL or JDK.
+Leave unset (the default) to let Pulsar choose the engine: the native OpenSSL engine when a
+netty-tcnative binary is available for the platform, otherwise the JDK engine.
+To pin a JSSE (SSLContext) provider such as BCJSSE or Conscrypt, use jsseProvider instead.
+For compatibility this key stays overloaded across both axes: a value that is not an engine
+literal (JDK, OPENSSL, OPENSSL_REFCNT) is read as a JSSE provider name and routed to
+jsseProvider, which takes precedence when both are set.
 
 **Type**: `java.lang.String`
 
@@ -1399,7 +1419,7 @@ If true, export consumer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1421,7 +1441,7 @@ If true, export managed cursor metrics
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1432,7 +1452,7 @@ If true, export managed ledger metrics (aggregated by namespace)
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1445,7 +1465,7 @@ Enable expose the precise backlog stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1456,7 +1476,7 @@ If true, export producer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1471,6 +1491,18 @@ If true, export publisher stats when returning topics stats from the admin rest 
 
 **Category**: Metrics
 
+### exposeSubscriptionBacklogAgeInPrometheus
+Enable computing the age of the oldest unacknowledged message for each subscription and exposing it through topic stats and Prometheus.
+ When disabled, the broker skips computing per-subscription backlog age and SubscriptionStats.oldestBacklogMessageAgeSeconds remains -1. Default is false.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Metrics
+
 ### exposeSubscriptionBacklogSizeInPrometheus
 Enable expose the backlog size for each subscription when generating stats.
  Locking is used for fetching the status so default to false.
@@ -1479,7 +1511,7 @@ Enable expose the backlog size for each subscription when generating stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1490,7 +1522,7 @@ If true, export topic level metrics otherwise namespace level
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1748,6 +1780,32 @@ Default backlog quota retention policy. Default is producer_request_hold
 
 **Category**: Policies
 
+### brokerCloseInactiveTopicsEnabled
+Enable closing (unloading from broker memory) of inactive topics without deleting their data.
+When a topic is deemed inactive (no producers and no subscriptions), the broker will close the topic
+instance, releasing in-memory resources such as the managed ledger cache, subscription state, and
+per-topic metrics. The topic data in BookKeeper is preserved; clients will transparently reload the
+topic on the next produce/consume.
+This option is mutually exclusive with 'brokerDeleteInactiveTopicsEnabled': only one of the two may
+be enabled at a time. It also requires 'brokerDeleteInactiveTopicsMode' to be
+'delete_when_no_subscriptions'; with 'delete_when_subscriptions_caught_up' a topic is inactive as
+soon as its subscriptions are caught up even while consumers are connected, so closing it would only
+disconnect those consumers and immediately reload the topic. The broker fails to start on either
+unsupported combination.
+While enabled, this broker-level setting takes precedence over any namespace- or topic-level
+'inactive_topic_policies.deleteWhileInactive': inactive topics are closed, never deleted.
+The inactivity detection reuses 'brokerDeleteInactiveTopicsMode',
+'brokerDeleteInactiveTopicsFrequencySeconds', and
+'brokerDeleteInactiveTopicsMaxInactiveDurationSeconds'.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### brokerDeduplicationEnabled
 Set the default behavior for message deduplication in the broker.
 
@@ -1901,6 +1959,17 @@ The maximum number of connections per IP. If it exceeds, new connections are rej
 **Default**: `0`
 
 **Dynamic**: `false`
+
+**Category**: Policies
+
+### brokerReplicationInactiveThresholdSeconds
+Time in seconds that a persistent geo-replication replicator may stay idle before the broker disconnects its replication producer. A replicator is eligible only when it has no backlog and has not read entries for replication processing for longer than this threshold. Disconnecting only releases the idle producer; the replicator and its cursor remain available, and the producer is recreated automatically when new messages need to be replicated. Set this value to 0 or a negative value to disable idle-replicator disconnection. The check runs with the inactive-topic monitor, whose interval is brokerDeleteInactiveTopicsFrequencySeconds, and only when brokerDeleteInactiveTopicsEnabled is true. The default is 86400 seconds (24 hours).
+
+**Type**: `int`
+
+**Default**: `86400`
+
+**Dynamic**: `true`
 
 **Category**: Policies
 
@@ -2413,6 +2482,28 @@ Grace period (seconds) the controller leader waits for a disconnected scalable-t
 
 **Category**: Policies
 
+### scalableTopicEntryBucketBudget
+Total entry-bucket budget per scalable topic. Entry-buckets are the unit of key-shared consumption parallelism within a segment, so this budget is how many consumers can share a single segment's keys. It is distributed across the topic's segments (each gets floor(budget / segmentCount), at least 1): a single-segment topic starts with the whole budget, and as the topic splits into more segments each segment settles toward 1 bucket (full batching).
+
+**Type**: `int`
+
+**Default**: `4`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicEntryBucketMaxPerSegment
+Hard ceiling on a single segment's entry-bucket count (PIP-486). Bounds both the manual rebucket operation and the controller's auto rebucket-up; a segment's bucket count caps how many consumers can share it.
+
+**Type**: `int`
+
+**Default**: `1024`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicLoadReportIntervalSeconds
 Interval (seconds) at which the segment-owning broker samples its segment topics to report load for auto split/merge. Read at broker start; not dynamic.
 
@@ -2535,6 +2626,17 @@ Hard floor on the number of active segments. Merges stop firing once this is rea
 
 **Category**: Policies
 
+### scalableTopicRebucketCooldownSeconds
+Minimum time (seconds) between automatic entry-bucket rollovers (rebuckets) on a topic. Coalesces consumer-join bursts, like the split cooldown.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicSplitBytesRateInThreshold
 Inbound bytes/second above which a segment is split.
 
@@ -2585,6 +2687,17 @@ Outbound (dispatched) messages/second above which a segment is split.
 **Type**: `double`
 
 **Default**: `50000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
+### scalableTopicSplitVsRebucketMinMsgRateInThreshold
+PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count).
+
+**Type**: `double`
+
+**Default**: `1000.0`
 
 **Dynamic**: `true`
 
@@ -4617,6 +4730,17 @@ The class name of the topic policies service. There are 2 built-in implementatio
 
 **Category**: Server
 
+### topicPolicyListenerReplayEnabled
+When enabled, all registered topic-policy listeners in a namespace are re-notified with the current topic policies after the namespace's topic-policy cache finishes its initial load. Topics load and apply their own policies when they are loaded, so this broadcast is normally redundant; it is only needed for custom plugins that register TopicPolicyListeners and depend on it for backwards compatibility. Disabled by default.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### topicsPatternRegexImplementation
 The regular expression implementation to use for topic pattern matching. 
 RE2J_WITH_JDK_FALLBACK is the default. It uses the RE2J implementation and falls back to the JDK implementation for backwards compatibility reasons when the pattern compilation fails with the RE2/j library.
@@ -4767,10 +4891,17 @@ Port for the HTTPS admin/REST endpoint of the internal listener. Used both for t
 
 ### webServiceTlsProvider
 Specify the TLS provider for the web service: SunJSSE, Conscrypt and etc.
+This names a JSSE (SSLContext) security provider for the Jetty-based web service, which has
+no native TLS engine, so Netty engine values (JDK, OPENSSL, OPENSSL_REFCNT) are not valid
+provider names here. Leave unset (the default) to use Conscrypt when it is available on
+this platform, else the JVM's default provider; a configured name is pinned and startup
+fails if it cannot be resolved. Conscrypt ships native libraries for x86_64 and, since
+2.6.1, aarch64 — but not for every platform, which is why the default falls back instead of
+failing where it cannot load; pinning it explicitly there does fail.
 
 **Type**: `java.lang.String`
 
-**Default**: `Conscrypt`
+**Default**: ``
 
 **Dynamic**: `false`
 
@@ -5324,19 +5455,6 @@ The threshold to triggering automatic offload to long term storage
 **Type**: `long`
 
 **Default**: `-1`
-
-**Dynamic**: `false`
-
-**Category**: Storage (Ledger Offloading)
-
-### managedLedgerUnackedRangesOpenCacheSetEnabled
-When set to true, a BitSet will be used to track acknowledged messages that come after the "mark delete position" for each subscription.
-
-RoaringBitmap is used as a memory efficient BitSet implementation for the acknowledged messages tracking. Unacknowledged ranges are the message ranges excluding the acknowledged messages.
-
-**Type**: `boolean`
-
-**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -6066,8 +6184,6 @@ Default is ``.
 ### managedLedgerPersistIndividualAckAsLongArray
 When storing acknowledgement state, choose a more compact serialization format that stores individual acknowledgements as a bitmap which is serialized to an array of long values.
 
-NOTE: This setting requires managedLedgerUnackedRangesOpenCacheSetEnabled=true to be effective.
-
 **Type**: `boolean`
 
 **Default**: `true`
@@ -6153,19 +6269,30 @@ Skip schema ledger failure to forcefully recover topic successfully.
 
 **Category**: Storage (Managed Ledger)
 
-### brokerClientSslFactoryPlugin
-SSL Factory Plugin class used by internal client to provide SSLEngine and SSLContext objects. The default class used is DefaultSslFactory.
+### brokerClientJcaProvider
+PIP-478: the JCA (material) provider for the broker's own outbound (broker-to-broker) client connections — the outbound counterpart of jcaProvider, on the same axis. Unset uses the JVM provider search order.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+**Default**: `null`
 
 **Dynamic**: `false`
 
 **Category**: TLS
 
-### brokerClientSslFactoryPluginParams
-SSL Factory plugin configuration parameters used by internal client.
+### brokerClientJsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's own outbound (broker-to-broker / replication) client TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### brokerClientTlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the broker's own outbound (broker-to-broker) client connections (purpose BROKER_CLIENT). An empty value or the literal 'default' selects the built-in default factory composed from the brokerClient tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only outbound-client TLS path; the removed PIP-337 brokerClientSslFactoryPlugin keys are rejected at startup when set to a non-default value.
 
 **Type**: `java.lang.String`
 
@@ -6175,23 +6302,34 @@ SSL Factory plugin configuration parameters used by internal client.
 
 **Category**: TLS
 
-### sslFactoryPlugin
-SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default  class used is DefaultSslFactory.
+### brokerClientTlsFactoryConfig
+PIP-478 configuration parameters for brokerClientTlsFactoryClassName. Accepts a JSON object or a comma-separated key=value list.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
+**Default**: ``
 
 **Dynamic**: `false`
 
 **Category**: TLS
 
-### sslFactoryPluginParams
-SSL Factory plugin configuration parameters.
+### jcaProvider
+PIP-478: the name of a JCA (material) provider — a java.security.Provider supplying the KeyStore, CertificateFactory and KeyFactory engines that parse the TLS material (e.g. BCFIPS for FIPS, alongside jsseProvider=BCJSSE). A distinct axis from jsseProvider, which supplies the SSLContext: JSSE service types are never taken from this provider. Unset uses the JVM provider search order, i.e. the behaviour of releases before PIP-478. Applies to the broker's listeners.
 
 **Type**: `java.lang.String`
 
-**Default**: ``
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### jsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the broker's server-side (listener/web) TLS SSLContext. A distinct axis from tlsProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
 
 **Dynamic**: `false`
 
@@ -6209,7 +6347,7 @@ Accept untrusted TLS certificate from client
 **Category**: TLS
 
 ### tlsCertRefreshCheckDurationSec
-Tls cert refresh duration in seconds (set 0 to check on every new connection)
+Tls cert refresh duration in seconds. Set 0 to disable the background rotation check, so the TLS material loaded at startup is kept until restart.
 
 **Type**: `long`
 
@@ -6254,12 +6392,34 @@ Enable TLS
 
 **Category**: TLS
 
+### tlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the broker's server-side TLS (binary listener and web server; purposes BROKER/PROXY/WEB). An empty value or the literal 'default' selects the built-in DefaultBrokerTlsFactory composed from these tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only server TLS path; the removed PIP-337 sslFactoryPlugin keys are rejected at startup when set to a non-default value.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
+### tlsFactoryConfig
+PIP-478 configuration parameters for tlsFactoryClassName, passed to the factory as its init params. Accepts a JSON object or a comma-separated key=value list.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsHostnameVerificationEnabled
-Whether the hostname is validated when the broker creates a TLS connection with other brokers
+Whether the hostname is validated when the broker creates a TLS connection with other brokers (e.g. geo-replication and broker-to-broker lookup). Enabled by default since Pulsar 5.0 (PIP-478): a peer broker whose certificate does not match its hostname/SAN is rejected.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 

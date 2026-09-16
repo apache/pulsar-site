@@ -112,12 +112,67 @@ Proxy authentication settings used to connect to brokers
 
 **Category**: 
 
+### brokerClientJcaProvider
+PIP-478: the JCA (material) provider for the WebSocket proxy's own outbound (proxy-to-broker) client connections — the outbound counterpart of jcaProvider.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### brokerClientJsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider used for the WebSocket proxy's own outbound (proxy-to-broker) client connections (e.g. BCJSSE for FIPS). The listener-side jsseProvider governs the proxy's web server only; this is the outbound counterpart, matching the broker's brokerClientJsseProvider. Applied independently of brokerClientTlsFactoryClassName. Leave unset to use the JVM provider search order.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### brokerClientSslProvider
+PIP-478: the Netty SSL engine provider for the WebSocket proxy's own outbound (proxy-to-broker) client connections — JDK, OPENSSL or OPENSSL_REFCNT. The listener-side tlsProvider governs the proxy's web server only; this is the outbound counterpart, matching the broker's brokerClientSslProvider. Leave unset to keep the JVM default.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### brokerClientTlsEnabled
 Enable TLS of broker client
 
 **Type**: `boolean`
 
 **Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### brokerClientTlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the WebSocket proxy's own outbound (websocket-to-broker) client connections (purpose BROKER_CLIENT). An empty value or the literal 'default' selects the built-in default factory composed from the broker-client tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only outbound-client TLS-factory path for the WebSocket proxy.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### brokerClientTlsFactoryConfig
+PIP-478 configuration parameters for brokerClientTlsFactoryClassName. Accepts a JSON object or a comma-separated key=value list.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
 
 **Dynamic**: `false`
 
@@ -195,6 +250,28 @@ Capacity for thread pool queue in the HTTP server Default is set to 8192.
 **Type**: `int`
 
 **Default**: `8192`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### jcaProvider
+PIP-478: the name of a JCA (material) provider — a java.security.Provider supplying the KeyStore, CertificateFactory and KeyFactory engines that parse the TLS material (e.g. BCFIPS for FIPS, alongside jsseProvider=BCJSSE). A distinct axis from jsseProvider, which supplies the SSLContext. Unset uses the JVM provider search order. Applies to the WebSocket proxy's web listener.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### jsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the WebSocket service's web-listener TLS SSLContext. When set, the default factory builds the JDK engine with this provider as the SSLContext provider. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
 
 **Dynamic**: `false`
 
@@ -333,7 +410,7 @@ Accept untrusted TLS certificate from client and broker
 **Category**: 
 
 ### tlsCertRefreshCheckDurationSec
-TLS cert refresh duration (in seconds). 0 means checking every new connection.
+TLS cert refresh duration (in seconds). Set 0 to disable the background rotation check, so the TLS material loaded at startup is kept until restart.
 
 **Type**: `long`
 
@@ -365,12 +442,34 @@ Enable TLS with KeyStore type configuration for WebSocket
 
 **Category**: 
 
+### tlsFactoryClassName
+PIP-478 TLS factory (PulsarTlsFactory) class name for the WebSocket proxy's web server TLS (purpose WEB). When set, the new PIP-478 TLS SPI is used instead of the built-in file-based TLS loading: an empty value or the literal 'default' selects the built-in default factory composed from these tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the WebSocket proxy's first TLS-factory pluggability.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### tlsFactoryConfig
+PIP-478 configuration parameters for tlsFactoryClassName. Accepts a JSON object or a comma-separated key=value list.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### tlsHostnameVerificationEnabled
-Enable TLS hostname verification when connecting to broker
+Enable TLS hostname verification when connecting to broker. Enabled by default since Pulsar 5.0 (PIP-478): a broker whose certificate does not match its hostname/SAN is rejected.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -422,10 +521,15 @@ TLS KeyStore type configuration in WebSocket: JKS, PKCS12
 
 ### tlsProvider
 Specify the TLS provider for the WebSocket service: SunJSSE, Conscrypt and etc.
+Leave unset (the default) to use Conscrypt when it is available on this platform, else
+the JVM's default provider; a configured name is pinned and startup fails if it cannot be
+resolved. Conscrypt ships native libraries for x86_64 and, since 2.6.1, aarch64 — but not
+for every platform, which is why the default falls back instead of failing where it cannot
+load; pinning it explicitly there does fail.
 
 **Type**: `java.lang.String`
 
-**Default**: `Conscrypt`
+**Default**: `null`
 
 **Dynamic**: `false`
 
