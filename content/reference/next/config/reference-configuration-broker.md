@@ -839,11 +839,11 @@ Direct Memory Resource Usage Weight. Direct memory usage cannot accurately refle
 **Category**: Load Balancer
 
 ### loadBalancerDistributeBundlesEvenlyEnabled
-enable/disable distribute bundles evenly
+Enable/disable distributing bundles evenly across brokers when a bundle is assigned. When enabled, the candidate brokers for a new assignment are first narrowed to those owning the fewest bundles of that namespace, before the placement strategy runs. This overrides load-aware placement and can discard the destination the AvgShedder shedding strategy planned for an unloaded bundle, so it is disabled by default since 5.0.0 (it was enabled before). Bundles of the system namespace are always distributed evenly.
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -894,22 +894,22 @@ Time to wait before fixing any stuck in-flight service unit states. The leader m
 **Category**: Load Balancer
 
 ### loadBalancerLoadPlacementStrategy
-load balance placement strategy
+load balance placement strategy. Default is AvgShedder since 5.0.0 (LeastLongTermMessageRate before), which binds placement to the AvgShedder shedding strategy so that unloaded bundles land on the broker the shedder chose for them. It only takes effect together with loadBalancerLoadSheddingStrategy=AvgShedder; with any other shedding strategy the broker falls back to LeastLongTermMessageRate placement and logs a warning.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.broker.loadbalance.impl.LeastLongTermMessageRate`
+**Default**: `org.apache.pulsar.broker.loadbalance.impl.AvgShedder`
 
 **Dynamic**: `false`
 
 **Category**: Load Balancer
 
 ### loadBalancerLoadSheddingStrategy
-load balance load shedding strategy (It requires broker restart if value is changed using dynamic config). Default is ThresholdShedder since 2.10.0
+load balance load shedding strategy (It requires broker restart if value is changed using dynamic config). Default is AvgShedder since 5.0.0 (ThresholdShedder was the default from 2.10.0 to 4.x). AvgShedder implements both the shedding and the placement strategy and must be paired with loadBalancerLoadPlacementStrategy=AvgShedder; when a different shedding strategy is configured, an AvgShedder placement strategy falls back to LeastLongTermMessageRate.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder`
+**Default**: `org.apache.pulsar.broker.loadbalance.impl.AvgShedder`
 
 **Dynamic**: `true`
 
@@ -1303,11 +1303,11 @@ For each uniform balanced unload, the maximum number of bundles that can be unlo
 **Category**: Load Balancer
 
 ### maxUnloadPercentage
-In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio.For AvgShedder, recommend to set to 0.5, so that it will distribute the load evenly between the highest and lowest brokers.
+In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio: the share of the load difference between the highest and the lowest loaded broker that is moved in one shedding cycle. Default is 0.5 since 5.0.0 (0.2 before), which lets AvgShedder equalize the load of the two brokers in a single cycle.
 
 **Type**: `double`
 
-**Default**: `0.2`
+**Default**: `0.5`
 
 **Dynamic**: `true`
 
@@ -1974,13 +1974,26 @@ Time in seconds that a persistent geo-replication replicator may stay idle befor
 **Category**: Policies
 
 ### defaultNumberOfNamespaceBundles
-When a namespace is created without specifying the number of bundle, this value will be used as the default
+When a namespace is created without specifying the number of bundles, this value will be used as the default.
+
+Bundles are the unit of assignment of topics to brokers, so a namespace needs more bundles than there are brokers for its topics to spread across the cluster. Bundles can be split but never merged. Only bundles that have been looked up cost anything (an ownership entry, an entry in the load report and one unload step at broker shutdown); the unused bundles of a small namespace are free. Default is 32 since 5.0.0 (was 4).
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `32`
 
 **Dynamic**: `true`
+
+**Category**: Policies
+
+### defaultNumberOfSystemNamespaceBundles
+Number of bundles for the pulsar/system namespace when the broker creates it (the extensible load manager creates it on start-up if it is missing) or when pulsar standalone creates it. The system namespace holds a small, fixed set of topics (the transaction coordinator partitions, the load balancer's internal topics and the resource usage topic), so it does not follow defaultNumberOfNamespaceBundles. A transaction coordinator is owned by whichever broker owns the bundle of its transaction_coordinator_assign partition, so the bundles decide how far the coordinators can spread: with the default 16 coordinators, 64 is the smallest number of bundles at which every coordinator hashes into its own bundle (16 bundles put them into 8), and bundles that never own a topic cost nothing. The initialize-cluster-metadata and initialize-transaction-coordinator-metadata tools create the namespace with their --system-namespace-bundle-number option, which has the same default.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `false`
 
 **Category**: Policies
 
@@ -5616,6 +5629,17 @@ Add entry timeout when broker tries to publish message to bookkeeper.(0 to disab
 **Default**: `0`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerBatchReadEnabled
+Enable the BookKeeper batch read API when reading entries from bookkeeper: a single RPC fetches multiple entries, reducing network overhead for sequential reads. Batch read requires the v2 wire protocol (bookkeeperUseV2WireProtocol) and BookKeeper's own batch read flag (bookkeeper_batchReadEnabled), checked on the BookKeeper client when a topic is loaded: regular reads are used otherwise, as well as for striped ledgers (where managedLedgerDefaultEnsembleSize differs from managedLedgerDefaultWriteQuorum) and for bookies without batch read support. Each batch read request is bounded by the size limit of the dispatcher read that triggered it (e.g. dispatcherMaxReadSizeBytes) and by the BookKeeper client's max frame size (maxMessageSize plus padding); a read needing more data is split into sequential batch read requests. Entries read this way are copied when inserted in the entry cache.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
