@@ -278,6 +278,7 @@ $ pulsar-perf produce-v4 [options]
 | `--histogram-file` | HdrHistogram output file|null|
 | `-z, --compression` | Compress messages payload|NONE|
 | `-am, --access-mode` | Producer access mode|Shared|
+| `--isolated-clients` | Create one isolated v4 client per producer; cannot be combined with --num-test-threads|0|
 
 ## consume-v4
 
@@ -334,6 +335,7 @@ $ pulsar-perf consume-v4 [options]
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `--histogram-file` | HdrHistogram output file|null|
 | `-sp, --subscription-position` | Subscription position|Latest|
+| `--isolated-clients` | Create consumers on this many isolated v4 clients; cannot be combined with --num-listener-threads|0|
 
 ## transaction-v4
 
