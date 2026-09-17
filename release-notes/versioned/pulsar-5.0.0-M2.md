@@ -16,7 +16,7 @@ sidebar_label: Apache Pulsar 5.0.0-M2
 
 ### Breaking changes
 
-- **JUL (java.util.logging) configuration is no longer effective** ([#26330](https://github.com/apache/pulsar/pull/26330))
+- **JUL (java.util.logging) configuration is no longer effective for server-side components** ([#26330](https://github.com/apache/pulsar/pull/26330))
 
   Previously, logs from third-party libraries that use JUL (e.g., Jersey/Jetty, gRPC, Guava) were not managed by Pulsar's Log4j2 configuration, making them difficult to control and causing inconsistent log output. To solve this, third-party library logging is now bridged from JUL to Log4j2 via `log4j-jul`. This unifies all logging under `conf/log4j2.yaml`, but means the following JUL APIs and configurations **no longer take effect**:
   - `-Djava.util.logging.config.file=logging.properties` — the entire JUL configuration file is ignored
