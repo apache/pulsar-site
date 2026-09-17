@@ -14,6 +14,27 @@ sidebar_label: Apache Pulsar 5.0.0-M2
 - [feat][pip] PIP-478: Asynchronous v5 client auth plugin interfaces and TLS material provider plugin interface ([#25890](https://github.com/apache/pulsar/pull/25890))
 - [feat][pip]PIP-487 Add event count metrics for InflightReadsLimiter acquire and release operations ([#26092](https://github.com/apache/pulsar/pull/26092))
 
+### Breaking changes
+
+- **JUL (java.util.logging) configuration is no longer effective for server-side components** ([#26330](https://github.com/apache/pulsar/pull/26330))
+
+  Previously, logs from third-party libraries that use JUL (e.g., Jersey/Jetty, gRPC, Guava) were not managed by Pulsar's Log4j2 configuration, making them difficult to control and causing inconsistent log output. To solve this, third-party library logging is now bridged from JUL to Log4j2 via `log4j-jul`. This unifies all logging under `conf/log4j2.yaml`, but means the following JUL APIs and configurations **no longer take effect**:
+  - `-Djava.util.logging.config.file=logging.properties` — the entire JUL configuration file is ignored
+  - `java.util.logging.Logger.setLevel()` / `addHandler()` — become no-ops
+  - `java.util.logging.LogManager.reset()` — becomes a no-op
+
+  **Migration**: Move any JUL-based logging configuration to `conf/log4j2.yaml`. For example, to suppress gRPC logs that were previously configured as `io.grpc.level=SEVERE` in `logging.properties`, add the following to `conf/log4j2.yaml`:
+  ```yaml
+  Loggers:
+    Logger:
+      - name: io.grpc
+        level: error
+  ```
+  **Revert**: To restore stock JUL behavior, set:
+  ```
+  PULSAR_EXTRA_OPTS="-Djava.util.logging.manager=java.util.logging.LogManager"
+  ```
+
 ### Library updates
 
 - [improve][build] Switch default JDK to 25 for 5.0.0-M2 ([#26070](https://github.com/apache/pulsar/pull/26070))
