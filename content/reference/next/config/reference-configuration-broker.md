@@ -152,11 +152,11 @@ When this parameter is not empty, unauthenticated users perform as anonymousUser
 **Category**: Authorization
 
 ### authenticateOriginalAuthData
-If this flag is set then the broker authenticates the original Auth data else it just accepts the originalPrincipal and authorizes it (if required)
+If this flag is set then the broker authenticates the original Auth data else it just accepts the originalPrincipal and authorizes it (if required). Set false for TLS client-certificate authentication through a proxy, since the broker receives the proxy certificate rather than the client certificate. Also set false for SASL authentication through a proxy, since the client-proxy handshake cannot be replayed as a separate client-broker handshake.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -1419,7 +1419,7 @@ If true, export consumer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1441,7 +1441,7 @@ If true, export managed cursor metrics
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1452,7 +1452,7 @@ If true, export managed ledger metrics (aggregated by namespace)
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1465,7 +1465,7 @@ Enable expose the precise backlog stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1476,7 +1476,7 @@ If true, export producer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1511,7 +1511,7 @@ Enable expose the backlog size for each subscription when generating stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1522,7 +1522,7 @@ If true, export topic level metrics otherwise namespace level
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -3653,7 +3653,7 @@ Dispatch messages and execute broker side filters in a per-subscription thread
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 

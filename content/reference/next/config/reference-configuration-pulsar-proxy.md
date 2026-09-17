@@ -704,7 +704,7 @@ Whether client authorization credentials are forwarded to the broker for re-auth
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
