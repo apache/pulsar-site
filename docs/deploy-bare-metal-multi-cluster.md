@@ -224,6 +224,8 @@ As you can see from the example above, you need to specify the following:
 
 If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster as well as a TLS broker service URL for the brokers in the cluster.
 
+The command also creates the `public/default` and `pulsar/system` namespaces, with 32 and 64 bundles by default (`--default-namespace-bundle-number` and `--system-namespace-bundle-number`); see [Namespace bundles](administration-namespace-bundles.md) for how to size them.
+
 Make sure to run `initialize-cluster-metadata` for each cluster in your instance.
 
 ## Step 3: Deploy BookKeeper

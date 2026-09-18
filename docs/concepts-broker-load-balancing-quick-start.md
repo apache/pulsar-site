@@ -283,7 +283,7 @@ If there is no output, the operation is successful.
 
 :::tip
 
-This example simplifies the task by only specifying 1 bundle. For details on how to set a reasonable number of bundles, see [defaultNumberOfNamespaceBundles](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L281C7-L281C7).
+This example simplifies the task by only specifying 1 bundle. For details on how to set a reasonable number of bundles, see [Namespace bundles](administration-namespace-bundles.md).
 
 :::
 

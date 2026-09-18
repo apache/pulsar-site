@@ -287,6 +287,8 @@ Flag | Description
 `--web-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster. The default port is 8443 (you had better not use a different port).
 `--broker-service-url`* | A broker service URL enabling interaction with the brokers in the cluster. This URL should not use the same DNS name as the web service URL but should use the `pulsar` scheme instead. The default port is 6650 (you had better not use a different port).
 `--broker-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster as well as a TLS broker service URL for the brokers in the cluster. The default port is 6651 (you had better not use a different port).
+`--default-namespace-bundle-number` | The number of bundles of the `public/default` namespace, 32 by default. Bundles can be split later but not merged; see [Namespace bundles](administration-namespace-bundles.md).
+`--system-namespace-bundle-number` | The number of bundles of the `pulsar/system` namespace, 64 by default. The transaction coordinators are spread across brokers by the bundles of this namespace; raise it if you run more coordinators than the default 16 (`--initial-num-transaction-coordinators`). See [Namespace bundles](administration-namespace-bundles.md).
 
 :::note
 

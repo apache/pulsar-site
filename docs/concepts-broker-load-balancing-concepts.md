@@ -35,7 +35,7 @@ In a Pulsar cluster, [brokers](./reference-terminology.md#broker) are responsibl
 
 [Bundles](./reference-terminology.md#namespace-bundle) represent a range of partitions for a particular namespace in Pulsar, comprising a portion of the overall hash range of the namespace.
 
-Bundle is introduced in Pulsar to represent a middle-layer group. Each bundle is an **assignment unit**, which means topics are assigned to brokers at the **bundle** level rather than the topic level.
+Bundle is introduced in Pulsar to represent a middle-layer group. Each bundle is an **assignment unit**, which means topics are assigned to brokers at the **bundle** level rather than the topic level. For how many bundles a namespace gets and how to choose the number, see [Namespace bundles](administration-namespace-bundles.md).
 
 ## Broker load balancing
 
@@ -63,7 +63,7 @@ Below is the workflow for grouping topics into bundles.
 
 #### Step 1: shard namespaces into bundles
 
-Internally, when a namespace is created, the namespace is sharded into a list of bundles.
+Internally, when a namespace is created, the namespace is sharded into a list of bundles: `defaultNumberOfNamespaceBundles` (32 by default) unless a number is given at creation, and `defaultNumberOfSystemNamespaceBundles` (64 by default) for the `pulsar/system` namespace. See [Namespace bundles](administration-namespace-bundles.md).
 
 #### Step 2: assign topics to bundles
 
@@ -499,10 +499,10 @@ Below is a quick summary of bundle unloading strategies, which are **only applic
 Bundle unloading strategy|Definition| When to use                                                                                                                         |Available version
 |---|---|-------------------------------------------------------------------------------------------------------------------------------------|---
 OverloadShedder|Unload bundles on brokers if a **broker's maximum resource usage** exceeds the configured threshold.| Use when you want to set broker usage below a threshold.                                                                            |Pulsar 1.18 and later versions.<br/><br/> This strategy is **only available** in the **modular** load balancer.
-ThresholdShedder|Unload bundles if a broker's average usage is greater than the** cluster average usage** plus **configured threshold**. | Use when you want to evenly spread loads across all brokers base on cluster average usage.                                          | Pulsar 2.6 and later versions.<br/><br/> This strategy is **only available** in the **modular** load balancer.
+ThresholdShedder|Unload bundles if a broker's average usage is greater than the** cluster average usage** plus **configured threshold**. | Use when you want to evenly spread loads across all brokers base on cluster average usage.                                          | Pulsar 2.6 and later versions. It was the **default** strategy for the **modular** load balancer from Pulsar 2.10 to 4.x.<br/><br/> This strategy is **only available** in the **modular** load balancer.
 UniformLoadShedder|Distribute load uniformly across all brokers, based on **minimal** and **maximum** load.| Use when you want to compare the minimal and maximum loaded brokers.                                                                |Pulsar 2.10.0 and later versions.<br/><br/> This strategy is **only available** in the **modular** load balancer.
 TransferShedder|Unload bundles from the **highest** load brokers to the **lowest** load brokers until the standard deviation of the broker load distribution is below the configured threshold.| This is the **default** strategy for the **extensible** load balancer. <br/><br/>It pre-assigns destination brokers when unloading. |Pulsar 3.0 and later versions.<br/><br/>This strategy is **only available** in the **extensible** load balancer.
-AvgShedder|Unload bundles to keep the range of broker resource usage within the configured threshold.| Use when you want to achieve greate service stability and load switching accuracy.                                                  |Pulsar 3.0.6, 3.2.4, 3.3.1 and later versions. <br/><br/>If you run version greater than 2.9 but below 3.0, you can try to cherry pick into your repository easily: https://github.com/apache/pulsar/pull/22946<br/><br/>This strategy is only available in the modular load balancer.
+AvgShedder|Unload bundles to keep the range of broker resource usage within the configured threshold, and pre-plan the destination of each unloaded bundle.| This is the **default** strategy for the **modular** load balancer since Pulsar 5.0. Use when you want to achieve great service stability and load switching accuracy.                                                  |Pulsar 3.0.6, 3.2.4, 3.3.1 and later versions. <br/><br/>If you run version greater than 2.9 but below 3.0, you can try to cherry pick into your repository easily: https://github.com/apache/pulsar/pull/22946<br/><br/>This strategy is only available in the modular load balancer.
 
 #### OverloadShedder
 
@@ -577,7 +577,7 @@ For implementation details, see [PIP-220: TransferShedder](https://github.com/ap
 
 #### AvgShedder
 
-To use AvgShedder strategy, you need to configure following parameters:
+AvgShedder is the default shedding and placement strategy of the modular load balancer since Pulsar 5.0. In earlier versions, or if you have overridden the defaults, configure the following parameters to use it:
 ```conf
 loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.AvgShedder
 
@@ -585,8 +585,9 @@ loadBalancerLoadPlacementStrategy=org.apache.pulsar.broker.loadbalance.impl.AvgS
 
 maxUnloadPercentage = 0.5
 ```
-- AvgShedder binds shedding and placement strategies together to **avoid incorrect shedding and placement**. We need to ensure the configuration of `loadBalancerLoadSheddingStrategy` and `loadBalancerLoadPlacementStrategy` are the same.
-- Setting `maxUnloadPercentage` to 0.5 means that AvgShedder will first pick out the highest and lowest loaded brokers, and then evenly distribute the traffic between them.
+- AvgShedder binds shedding and placement strategies together to **avoid incorrect shedding and placement**. We need to ensure the configuration of `loadBalancerLoadSheddingStrategy` and `loadBalancerLoadPlacementStrategy` are the same. Since Pulsar 5.0, a configuration that sets only `loadBalancerLoadSheddingStrategy` to one of the other strategies keeps working: the broker then uses the `LeastLongTermMessageRate` placement strategy, which was the default before 5.0, and logs a warning.
+- Setting `maxUnloadPercentage` to 0.5 (the default since Pulsar 5.0, previously 0.2) means that AvgShedder will first pick out the highest and lowest loaded brokers, and then evenly distribute the traffic between them.
+- `loadBalancerDistributeBundlesEvenlyEnabled` is `false` by default since Pulsar 5.0. When it is enabled, the placement first removes the brokers that already own the most bundles of the namespace from the candidates, which can discard the destination that AvgShedder planned for a bundle.
 
 For example, if the broker rating of the current cluster is 20,30,52,70,80, and the message rate of the highest loaded broker(score 80) is 1000, and
 the message rate of the lowest loaded broker(score 20) is 500. We introduce a threshold to determine whether trigger the bundle unload, for example,
