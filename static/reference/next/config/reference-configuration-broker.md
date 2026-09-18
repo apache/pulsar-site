@@ -5685,11 +5685,11 @@ When enabled:
 When disabled:
  - Cache behaves more like a FIFO queue with time-based and size-based eviction
  - Minimum eviction time is managedLedgerCacheEvictionTimeThresholdMillis
-Default is true, to behave like a LRU cache.
+Default is false, to avoid extending cache retention for entries that have already been read.
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 
